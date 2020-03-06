@@ -148,7 +148,7 @@
 /******/
 /******/
 /******/ 	// add entry module to deferred list
-/******/ 	deferredModules.push(["./www/js/source/reactpages/Module/PlayerAdmin/account-info/components/index.jsx","common"]);
+/******/ 	deferredModules.push(["./www/js/source/reactpages/Module/PlayerAdmin/account-info/components/index.jsx","lib/common"]);
 /******/ 	// run deferred modules when ready
 /******/ 	return checkDeferredModules();
 /******/ })
@@ -21578,23 +21578,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var getCustomerBettingStatus = function getCustomerBettingStatus(param) {
-  return function () {
-    var service = new _lib_playerAccountService__WEBPACK_IMPORTED_MODULE_1__["default"]();
-    return service.getCustomerBettingStatus(param);
-  };
+const getCustomerBettingStatus = param => () => {
+  const service = new _lib_playerAccountService__WEBPACK_IMPORTED_MODULE_1__["default"]();
+  return service.getCustomerBettingStatus(param);
 };
 
-var getLink = function getLink(sysType, action) {
-  return function () {
-    var commonService = _lib_factoryCommonService__WEBPACK_IMPORTED_MODULE_0__["default"].createInstance();
-    return commonService.getLink(sysType, action);
-  };
+const getLink = (sysType, action) => () => {
+  const commonService = _lib_factoryCommonService__WEBPACK_IMPORTED_MODULE_0__["default"].createInstance();
+  return commonService.getLink(sysType, action);
 };
 
-var ActionCreators = _objectSpread({}, _subtabAction__WEBPACK_IMPORTED_MODULE_2__, {
-  getCustomerBettingStatus: getCustomerBettingStatus,
-  getLink: getLink
+const ActionCreators = _objectSpread({}, _subtabAction__WEBPACK_IMPORTED_MODULE_2__, {
+  getCustomerBettingStatus,
+  getLink
 });
 
 /***/ }),
@@ -21613,23 +21609,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getActivityRecord", function() { return getActivityRecord; });
 /* harmony import */ var _lib_playerAccountService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../lib/playerAccountService */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/lib/playerAccountService.js");
 
-var getAccountProfile = function getAccountProfile(param) {
-  return function () {
-    var service = new _lib_playerAccountService__WEBPACK_IMPORTED_MODULE_0__["default"]();
-    return service.getAccountProfile(param);
-  };
+const getAccountProfile = param => () => {
+  const service = new _lib_playerAccountService__WEBPACK_IMPORTED_MODULE_0__["default"]();
+  return service.getAccountProfile(param);
 };
-var getBankInfo = function getBankInfo(param) {
-  return function () {
-    var service = new _lib_playerAccountService__WEBPACK_IMPORTED_MODULE_0__["default"]();
-    return service.getBankInfo(param);
-  };
+const getBankInfo = param => () => {
+  const service = new _lib_playerAccountService__WEBPACK_IMPORTED_MODULE_0__["default"]();
+  return service.getBankInfo(param);
 };
-var getActivityRecord = function getActivityRecord(param) {
-  return function () {
-    var service = new _lib_playerAccountService__WEBPACK_IMPORTED_MODULE_0__["default"]();
-    return service.getActivityRecord(param);
-  };
+const getActivityRecord = param => () => {
+  const service = new _lib_playerAccountService__WEBPACK_IMPORTED_MODULE_0__["default"]();
+  return service.getActivityRecord(param);
 };
 
 /***/ }),
@@ -21653,7 +21643,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var AppContainer = function AppContainer(props) {
+const AppContainer = props => {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_1__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "account-info-container"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TabContent__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_WidgetContent__WEBPACK_IMPORTED_MODULE_3__["default"], null)));
@@ -21679,25 +21669,25 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var SubTab = function SubTab(props) {
-  var dataList = props.dataList,
-      selectedTab = props.selectedTab,
-      onChangeTab = props.onChangeTab;
+const SubTab = props => {
+  const {
+    dataList,
+    selectedTab,
+    onChangeTab
+  } = props;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "header-tab"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "content-tab"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     className: "tabs"
-  }, dataList.map(function (item) {
+  }, dataList.map(item => {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
       className: "tab",
       key: item.name
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
       className: item.name === selectedTab ? 'link active' : 'link',
-      onClick: function onClick() {
-        return onChangeTab(item.name);
-      }
+      onClick: () => onChangeTab(item.name)
     }, item.text));
   }))));
 };
@@ -21733,21 +21723,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _subtab_BankInformation__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./subtab/BankInformation */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/components/subtab/BankInformation.jsx");
 /* harmony import */ var _subtab_ActivityRecord__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./subtab/ActivityRecord */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/components/subtab/ActivityRecord.jsx");
 /* harmony import */ var _SubTab__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./SubTab */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/components/SubTab.jsx");
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
@@ -21755,24 +21730,14 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+const TabContent = props => {
+  const initialSubtab = props.subTabKey || _lib_constants__WEBPACK_IMPORTED_MODULE_2__["tabKeys"].playerProfile;
+  const [selectedTab, setSelectedTab] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(initialSubtab);
+  const tabListByLicenseeType = props.licenseeType === _lib_constants__WEBPACK_IMPORTED_MODULE_2__["licenseeType"].api ? _lib_constants__WEBPACK_IMPORTED_MODULE_2__["tabList"].filter(x => x.name !== _lib_constants__WEBPACK_IMPORTED_MODULE_2__["tabKeys"].bankInformation) : [..._lib_constants__WEBPACK_IMPORTED_MODULE_2__["tabList"]];
 
-var TabContent = function TabContent(props) {
-  var initialSubtab = props.subTabKey || _lib_constants__WEBPACK_IMPORTED_MODULE_2__["tabKeys"].playerProfile;
-
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(initialSubtab),
-      _useState2 = _slicedToArray(_useState, 2),
-      selectedTab = _useState2[0],
-      setSelectedTab = _useState2[1];
-
-  var tabListByLicenseeType = props.licenseeType === _lib_constants__WEBPACK_IMPORTED_MODULE_2__["licenseeType"].api ? _lib_constants__WEBPACK_IMPORTED_MODULE_2__["tabList"].filter(function (x) {
-    return x.name !== _lib_constants__WEBPACK_IMPORTED_MODULE_2__["tabKeys"].bankInformation;
-  }) : _toConsumableArray(_lib_constants__WEBPACK_IMPORTED_MODULE_2__["tabList"]);
-
-  var getStyle = function getStyle(tabKey) {
-    return {
-      display: selectedTab === tabKey ? 'block' : 'none'
-    };
-  };
+  const getStyle = tabKey => ({
+    display: selectedTab === tabKey ? 'block' : 'none'
+  });
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "outer-col-1"
@@ -21796,11 +21761,13 @@ var TabContent = function TabContent(props) {
 };
 
 function mapStateToProps(state) {
-  var licenseeType = state.licenseeType,
-      subTabKey = state.subTabKey;
+  const {
+    licenseeType,
+    subTabKey
+  } = state;
   return Object.assign({}, {
-    licenseeType: licenseeType,
-    subTabKey: subTabKey
+    licenseeType,
+    subTabKey
   });
 }
 
@@ -21826,7 +21793,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var WidgetContent = function WidgetContent() {
+const WidgetContent = () => {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "outer-col-2"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -21871,11 +21838,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var defaultState = _objectSpread({}, window.initialState);
+const defaultState = _objectSpread({}, window.initialState);
 
-var store = _lib_store__WEBPACK_IMPORTED_MODULE_6__["default"].createStore(_reducers_index_js__WEBPACK_IMPORTED_MODULE_5__["default"], defaultState);
+const store = _lib_store__WEBPACK_IMPORTED_MODULE_6__["default"].createStore(_reducers_index_js__WEBPACK_IMPORTED_MODULE_5__["default"], defaultState);
 
-var App = function App() {
+const App = () => {
   return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_4__["Provider"], {
     store: store
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_AppContainer_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null));
@@ -21903,13 +21870,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _AthenaProfile__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./AthenaProfile */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/components/subtab/AthenaProfile.jsx");
 /* harmony import */ var _ApiProfile__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ApiProfile */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/components/subtab/ApiProfile.jsx");
 /* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/lib/constants.js");
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
@@ -21917,22 +21877,16 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
-var AccountProfile = function AccountProfile(props) {
-  var licenseeCustId = props.licenseeCustId;
-
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
-      _useState2 = _slicedToArray(_useState, 2),
-      data = _useState2[0],
-      setData = _useState2[1];
-
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    var param = {
-      licenseeCustId: licenseeCustId
+const AccountProfile = props => {
+  const {
+    licenseeCustId
+  } = props;
+  const [data, setData] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    const param = {
+      licenseeCustId
     };
-    props.getAccountProfile(param).then(function (result) {
-      return setData(result);
-    });
+    props.getAccountProfile(param).then(result => setData(result));
   }, [licenseeCustId]);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "left-side-content account-profile-container"
@@ -21946,18 +21900,22 @@ var AccountProfile = function AccountProfile(props) {
 };
 
 function mapDispatchToProps(dispatch) {
-  var getAccountProfile = _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"].getAccountProfile;
+  const {
+    getAccountProfile
+  } = _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"];
   return Object(redux__WEBPACK_IMPORTED_MODULE_3__["bindActionCreators"])({
-    getAccountProfile: getAccountProfile
+    getAccountProfile
   }, dispatch);
 }
 
 function mapStateToProps(state) {
-  var licenseeCustId = state.licenseeCustId,
-      licenseeType = state.licenseeType;
+  const {
+    licenseeCustId,
+    licenseeType
+  } = state;
   return Object.assign({}, {
-    licenseeCustId: licenseeCustId,
-    licenseeType: licenseeType
+    licenseeCustId,
+    licenseeType
   });
 }
 
@@ -21982,47 +21940,32 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/index.js */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/actions/index.js");
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/clientResourceManager */ "./www/js/source/reactpages/lib/clientResourceManager.js");
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
 
 
-
-var ActivityRecord = function ActivityRecord(_ref) {
-  var ibcCustId = _ref.ibcCustId,
-      createdDate = _ref.createdDate,
-      getActivityRecord = _ref.getActivityRecord;
-
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
-      _useState2 = _slicedToArray(_useState, 2),
-      data = _useState2[0],
-      setData = _useState2[1];
-
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+const ActivityRecord = ({
+  ibcCustId,
+  createdDate,
+  getActivityRecord
+}) => {
+  const [data, setData] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     if (data === null) {
-      var param = {
-        ibcCustId: ibcCustId
+      const param = {
+        ibcCustId
       };
-      getActivityRecord(param).then(function (result) {
-        return setData(result);
-      });
+      getActivityRecord(param).then(result => setData(result));
     }
   }, [ibcCustId]);
-
-  var _ref2 = data || {},
-      LastTxn = _ref2.LastTxn,
-      LastUpdateBAString = _ref2.LastUpdateBAString,
-      BAUpdatedBy = _ref2.BAUpdatedBy,
-      LastUpdateSpecialLevelString = _ref2.LastUpdateSpecialLevelString,
-      SpecialLevelUpdateBy = _ref2.SpecialLevelUpdateBy;
-
+  const {
+    LastTxn,
+    LastUpdateBAString,
+    BAUpdatedBy,
+    LastUpdateSpecialLevelString,
+    SpecialLevelUpdateBy
+  } = data || {};
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "left-side-content activity-record-container"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
@@ -22037,18 +21980,22 @@ var ActivityRecord = function ActivityRecord(_ref) {
 };
 
 function mapDispatchToProps(dispatch) {
-  var getActivityRecord = _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"].getActivityRecord;
+  const {
+    getActivityRecord
+  } = _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"];
   return Object(redux__WEBPACK_IMPORTED_MODULE_3__["bindActionCreators"])({
-    getActivityRecord: getActivityRecord
+    getActivityRecord
   }, dispatch);
 }
 
 function mapStateToProps(state) {
-  var ibcCustId = state.ibcCustId,
-      createdDate = state.createdDate;
+  const {
+    ibcCustId,
+    createdDate
+  } = state;
   return Object.assign({}, {
-    ibcCustId: ibcCustId,
-    createdDate: createdDate
+    ibcCustId,
+    createdDate
   });
 }
 
@@ -22072,22 +22019,22 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var ApiProfile = function ApiProfile(_ref) {
-  var data = _ref.data;
-
-  var _ref2 = data || {},
-      MemberId = _ref2.MemberId,
-      FirstName = _ref2.FirstName,
-      LastName = _ref2.LastName,
-      OperatorId = _ref2.OperatorId,
-      SiteCode = _ref2.SiteCode,
-      ProductCode = _ref2.ProductCode,
-      CustomInfo1 = _ref2.CustomInfo1,
-      CustomInfo2 = _ref2.CustomInfo2,
-      CustomInfo3 = _ref2.CustomInfo3,
-      CustomInfo4 = _ref2.CustomInfo4,
-      CustomInfo5 = _ref2.CustomInfo5;
-
+const ApiProfile = ({
+  data
+}) => {
+  const {
+    MemberId,
+    FirstName,
+    LastName,
+    OperatorId,
+    SiteCode,
+    ProductCode,
+    CustomInfo1,
+    CustomInfo2,
+    CustomInfo3,
+    CustomInfo4,
+    CustomInfo5
+  } = data || {};
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "first-cell"
   }, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('MemberId')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, MemberId)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('FirstName')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, FirstName)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('LastName')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, LastName)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('OperatorId')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, OperatorId)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
@@ -22116,33 +22063,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/clientResourceManager */ "./www/js/source/reactpages/lib/clientResourceManager.js");
 
 
-var AthenaProfile = function AthenaProfile(_ref) {
-  var data = _ref.data;
-
-  var _ref2 = data || {},
-      AGUserId = _ref2.AGUserId,
-      GoldDeluxeUserId = _ref2.GoldDeluxeUserId,
-      VoidbridgeUserId = _ref2.VoidbridgeUserId,
-      ExchangeUserId = _ref2.ExchangeUserId,
-      FirstName = _ref2.FirstName,
-      LastName = _ref2.LastName,
-      Gender = _ref2.Gender,
-      Birthday = _ref2.Birthday,
-      Phone = _ref2.Phone,
-      Country = _ref2.Country,
-      Address = _ref2.Address,
-      City = _ref2.City,
-      Town = _ref2.Town,
-      State = _ref2.State,
-      ZipCode = _ref2.ZipCode,
-      SecurityQuestion = _ref2.SecurityQuestion,
-      SecurityCode = _ref2.SecurityCode,
-      HowToKnow = _ref2.HowToKnow,
-      PreferredUserName = _ref2.PreferredUserName,
-      PreferredCurrency = _ref2.PreferredCurrency,
-      PreferredOdds = _ref2.PreferredOdds,
-      PreferredLanguage = _ref2.PreferredLanguage;
-
+const AthenaProfile = ({
+  data
+}) => {
+  const {
+    AGUserId,
+    GoldDeluxeUserId,
+    VoidbridgeUserId,
+    ExchangeUserId,
+    FirstName,
+    LastName,
+    Gender,
+    Birthday,
+    Phone,
+    Country,
+    Address,
+    City,
+    Town,
+    State,
+    ZipCode,
+    SecurityQuestion,
+    SecurityCode,
+    HowToKnow,
+    PreferredUserName,
+    PreferredCurrency,
+    PreferredOdds,
+    PreferredLanguage
+  } = data || {};
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "first-cell"
   }, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('AgUserId')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, AGUserId)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('GoldDeluxeUserId')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, GoldDeluxeUserId)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('MacauGamesUserId')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, VoidbridgeUserId)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('ExchangeUserId')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, ExchangeUserId)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
@@ -22174,55 +22121,36 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/lib/constants.js");
 /* harmony import */ var _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/lib/clientResourceManager */ "./www/js/source/reactpages/lib/clientResourceManager.js");
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
 
 
 
-
-var BankInformation = function BankInformation(props) {
+const BankInformation = props => {
   if (props.licenseeType === _lib_constants__WEBPACK_IMPORTED_MODULE_4__["licenseeType"].api) {
     return null;
   }
 
-  var licenseeCustId = props.licenseeCustId;
-
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
-      _useState2 = _slicedToArray(_useState, 2),
-      data = _useState2[0],
-      setData = _useState2[1];
-
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
-      _useState4 = _slicedToArray(_useState3, 2),
-      isShowPlainText = _useState4[0],
-      setIsShowPlainText = _useState4[1];
-
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    var param = {
-      licenseeCustId: licenseeCustId
+  const {
+    licenseeCustId
+  } = props;
+  const [data, setData] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null);
+  const [isShowPlainText, setIsShowPlainText] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    const param = {
+      licenseeCustId
     };
-    props.getBankInfo(param).then(function (result) {
-      return setData(result);
-    });
+    props.getBankInfo(param).then(result => setData(result));
   }, [licenseeCustId]);
 
-  var displayInfo = function displayInfo(value) {
-    return isShowPlainText ? value : value && '*'.repeat(value.length);
-  };
+  const displayInfo = value => isShowPlainText ? value : value && '*'.repeat(value.length);
 
-  var _ref = data || {},
-      BankName = _ref.BankName,
-      AccountName = _ref.AccountName,
-      AccountNumber = _ref.AccountNumber;
-
+  const {
+    BankName,
+    AccountName,
+    AccountNumber
+  } = data || {};
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "left-side-content bank-infor-container"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
@@ -22231,30 +22159,30 @@ var BankInformation = function BankInformation(props) {
     className: "first-cell"
   }, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_5__["default"].getText('BankInformation'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "btn-default btn-link btn-icon",
-    onClick: function onClick() {
-      return setIsShowPlainText(true);
-    },
-    onMouseLeave: function onMouseLeave() {
-      return setIsShowPlainText(false);
-    }
+    onClick: () => setIsShowPlainText(true),
+    onMouseLeave: () => setIsShowPlainText(false)
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "material-icons"
   }, "remove_red_eye"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_5__["default"].getText('BankName')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, displayInfo(BankName))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_5__["default"].getText('BankAccountName')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, displayInfo(AccountName))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_5__["default"].getText('BankAccountNumber')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, displayInfo(AccountNumber))))));
 };
 
 function mapDispatchToProps(dispatch) {
-  var getBankInfo = _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"].getBankInfo;
+  const {
+    getBankInfo
+  } = _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"];
   return Object(redux__WEBPACK_IMPORTED_MODULE_3__["bindActionCreators"])({
-    getBankInfo: getBankInfo
+    getBankInfo
   }, dispatch);
 }
 
 function mapStateToProps(state) {
-  var licenseeCustId = state.licenseeCustId,
-      licenseeType = state.licenseeType;
+  const {
+    licenseeCustId,
+    licenseeType
+  } = state;
   return Object.assign({}, {
-    licenseeCustId: licenseeCustId,
-    licenseeType: licenseeType
+    licenseeCustId,
+    licenseeType
   });
 }
 
@@ -22287,13 +22215,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
@@ -22301,34 +22222,33 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
-var backgroundColorList = ['#36A2EB', '#F15D21', '#97A9B3', '#E8AE1B'];
-var defaultDataSetItem = {
+const backgroundColorList = ['#36A2EB', '#F15D21', '#97A9B3', '#E8AE1B'];
+const defaultDataSetItem = {
   data: [],
   backgroundColor: backgroundColorList
 };
-var defaultChartData = {
+const defaultChartData = {
   labels: [_jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_6__["default"].getText('Won'), _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_6__["default"].getText('Lose'), _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_6__["default"].getText('Draw'), _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_6__["default"].getText('Cancelled')],
   datasets: [],
   borderWidth: 2,
   hoverBorderWidth: 10
 };
-var legendOpts = {
+const legendOpts = {
   display: true,
   position: 'bottom',
   labels: {
     boxWidth: 15,
     usePointStyle: true
   },
-  onClick: function onClick() {}
+  onClick: () => {}
 };
-var option = {
+const option = {
   animation: {
-    onComplete: function onComplete() {
-      var self = this;
-      var chart = this.chart;
-      var ctx = chart.ctx;
-      var chartSize = Math.min(chart.width, chart.height);
+    onComplete: function () {
+      const self = this;
+      const chart = this.chart;
+      const ctx = chart.ctx;
+      const chartSize = Math.min(chart.width, chart.height);
 
       if (chartSize < 100) {
         return;
@@ -22340,17 +22260,17 @@ var option = {
       ctx.save();
       ctx.shadowColor = "black";
       ctx.shadowBlur = 3;
-      var summary = self.data.datasets[0].data.reduce(function (sum, current) {
+      const summary = self.data.datasets[0].data.reduce((sum, current) => {
         return sum += current;
       }, 0);
-      self.data.datasets.forEach(function (dataset, datasetIndex) {
-        var meta = self.getDatasetMeta(datasetIndex);
-        meta.data.forEach(function (element, index) {
-          var segmentPercent = dataset.data[index] / summary * 100;
-          var position = element.tooltipPosition();
+      self.data.datasets.forEach((dataset, datasetIndex) => {
+        const meta = self.getDatasetMeta(datasetIndex);
+        meta.data.forEach((element, index) => {
+          const segmentPercent = dataset.data[index] / summary * 100;
+          const position = element.tooltipPosition();
 
           if (element._model.circumference > 0) {
-            var label = segmentPercent < 1 ? "<1" : segmentPercent.toFixed(2);
+            const label = segmentPercent < 1 ? "<1" : segmentPercent.toFixed(2);
             ctx.fillText(label + '%', position.x, position.y);
           }
         });
@@ -22359,21 +22279,19 @@ var option = {
     }
   }
 };
-var CustomerBettingStatus = function CustomerBettingStatus(props) {
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
-      _useState2 = _slicedToArray(_useState, 2),
-      data = _useState2[0],
-      setData = _useState2[1];
-
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    var fetchData = function fetchData() {
-      var ibcCustId = props.ibcCustId;
-      var params = {
+const CustomerBettingStatus = props => {
+  const [data, setData] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    const fetchData = () => {
+      const {
+        ibcCustId
+      } = props;
+      const params = {
         custId: ibcCustId
       };
-      props.getCustomerBettingStatus(params).then(function (response) {
+      props.getCustomerBettingStatus(params).then(response => {
         setData(response.data);
-      })["catch"](function (err) {
+      }).catch(err => {
         console.log(err.message);
       });
     };
@@ -22381,26 +22299,30 @@ var CustomerBettingStatus = function CustomerBettingStatus(props) {
     fetchData();
   }, []);
 
-  var renderContent = function renderContent() {
-    var WonTicketCount = data.WonTicketCount,
-        LoseTicketCount = data.LoseTicketCount,
-        DrawTicketCount = data.DrawTicketCount,
-        CancelledTicketCount = data.CancelledTicketCount;
+  const renderContent = () => {
+    const {
+      WonTicketCount,
+      LoseTicketCount,
+      DrawTicketCount,
+      CancelledTicketCount
+    } = data;
 
-    var dataSetItem = _objectSpread({}, defaultDataSetItem, {
+    const dataSetItem = _objectSpread({}, defaultDataSetItem, {
       data: [WonTicketCount, LoseTicketCount, DrawTicketCount, CancelledTicketCount]
     });
 
-    var chartData = _objectSpread({}, defaultChartData, {
+    const chartData = _objectSpread({}, defaultChartData, {
       datasets: [dataSetItem]
     });
 
-    var Margin = data.Margin,
-        AverageBetSize = data.AverageBetSize,
-        Winnings = data.Winnings,
-        Loss = data.Loss,
-        NetWinLoss = data.NetWinLoss;
-    var marginPercent = _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__["default"].round(Margin, 2) * 100;
+    const {
+      Margin,
+      AverageBetSize,
+      Winnings,
+      Loss,
+      NetWinLoss
+    } = data;
+    const marginPercent = _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__["default"].round(Margin, 2) * 100;
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "row"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -22456,16 +22378,20 @@ var CustomerBettingStatus = function CustomerBettingStatus(props) {
 };
 
 function mapDispatchToProps(dispatch) {
-  var getCustomerBettingStatus = _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"].getCustomerBettingStatus;
+  const {
+    getCustomerBettingStatus
+  } = _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"];
   return Object(redux__WEBPACK_IMPORTED_MODULE_3__["bindActionCreators"])({
-    getCustomerBettingStatus: getCustomerBettingStatus
+    getCustomerBettingStatus
   }, dispatch);
 }
 
 function mapStateToProps(state) {
-  var ibcCustId = state.ibcCustId;
+  const {
+    ibcCustId
+  } = state;
   return Object.assign({}, {
-    ibcCustId: ibcCustId
+    ibcCustId
   });
 }
 
@@ -22492,13 +22418,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _constants_configInfo__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../constants/configInfo */ "./www/js/source/reactpages/Module/constants/configInfo.js");
 /* harmony import */ var _jsroot_components_popup__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/components/popup */ "./www/js/source/reactpages/components/popup/index.jsx");
 /* harmony import */ var _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/lib/clientResourceManager */ "./www/js/source/reactpages/lib/clientResourceManager.js");
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
@@ -22506,41 +22425,37 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
-var defaultPopupInfo = {
+const defaultPopupInfo = {
   url: null,
   title: null,
   width: 0,
   height: 0
 };
-var FastCrossLink = function FastCrossLink(props) {
-  var userName = props.userName,
-      currencyName = props.currencyName,
-      getLink = props.getLink;
-  var singleCustomerActionLink = "PlayerBtcSingleCustomer?userName=".concat(userName, "&currencyName=").concat(currencyName);
-  var singleCustomerUrl = getLink(_constants_configInfo__WEBPACK_IMPORTED_MODULE_4__["systemType"].lrf, singleCustomerActionLink);
-  var customerWinLossActionLink = "PlayerWinLoss?userName=".concat(userName, "&currencyName=").concat(currencyName);
-  var customerWinLossUrl = getLink(_constants_configInfo__WEBPACK_IMPORTED_MODULE_4__["systemType"].lrf, customerWinLossActionLink);
+const FastCrossLink = props => {
+  const {
+    userName,
+    currencyName,
+    getLink
+  } = props;
+  const singleCustomerActionLink = `PlayerBtcSingleCustomer?userName=${userName}&currencyName=${currencyName}`;
+  const singleCustomerUrl = getLink(_constants_configInfo__WEBPACK_IMPORTED_MODULE_4__["systemType"].lrf, singleCustomerActionLink);
+  const customerWinLossActionLink = `PlayerWinLoss?userName=${userName}&currencyName=${currencyName}`;
+  const customerWinLossUrl = getLink(_constants_configInfo__WEBPACK_IMPORTED_MODULE_4__["systemType"].lrf, customerWinLossActionLink);
+  const [popupInfo, setPopupInfo] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(defaultPopupInfo);
+  const isShowPopup = !!popupInfo.url;
 
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(defaultPopupInfo),
-      _useState2 = _slicedToArray(_useState, 2),
-      popupInfo = _useState2[0],
-      setPopupInfo = _useState2[1];
-
-  var isShowPopup = !!popupInfo.url;
-
-  var handleClickLink = function handleClickLink(event, popup) {
+  const handleClickLink = (event, popup) => {
     event.preventDefault();
     setPopupInfo(popup);
   };
 
-  var popupSingleCustomer = {
+  const popupSingleCustomer = {
     url: singleCustomerUrl,
     title: _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_6__["default"].getText('BettingTicketCenter') + ' - ' + _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_6__["default"].getText('SingleCustomer'),
     width: window.innerWidth - 10,
     height: window.innerHeight - 10
   };
-  var popupCustomerWinLoss = {
+  const popupCustomerWinLoss = {
     url: customerWinLossUrl,
     title: _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_6__["default"].getText('CustomerWinLoss'),
     width: window.innerWidth - 10,
@@ -22556,39 +22471,37 @@ var FastCrossLink = function FastCrossLink(props) {
     className: "divider"
   }, ">"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     className: "link",
-    onClick: function onClick(e) {
-      return handleClickLink(e, popupSingleCustomer);
-    }
+    onClick: e => handleClickLink(e, popupSingleCustomer)
   }, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_6__["default"].getText('SingleCustomer')))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     className: "link",
-    onClick: function onClick(e) {
-      return handleClickLink(e, popupCustomerWinLoss);
-    }
+    onClick: e => handleClickLink(e, popupCustomerWinLoss)
   }, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_6__["default"].getText('CustomerWinLoss'))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_popup__WEBPACK_IMPORTED_MODULE_5__["default"], {
     isShow: isShowPopup,
     iframeUrl: popupInfo.url,
     title: popupInfo.title,
     width: popupInfo.width,
     height: popupInfo.height,
-    onClose: function onClose() {
-      return setPopupInfo(defaultPopupInfo);
-    }
+    onClose: () => setPopupInfo(defaultPopupInfo)
   }));
 };
 
 function mapDispatchToProps(dispatch) {
-  var getLink = _actions__WEBPACK_IMPORTED_MODULE_3__["ActionCreators"].getLink;
+  const {
+    getLink
+  } = _actions__WEBPACK_IMPORTED_MODULE_3__["ActionCreators"];
   return Object(redux__WEBPACK_IMPORTED_MODULE_2__["bindActionCreators"])({
-    getLink: getLink
+    getLink
   }, dispatch);
 }
 
 function mapStateToProps(state) {
-  var userName = state.userName,
-      currencyName = state.currencyName;
+  const {
+    userName,
+    currencyName
+  } = state;
   return Object.assign({}, {
-    userName: userName,
-    currencyName: currencyName
+    userName,
+    currencyName
   });
 }
 
@@ -22612,19 +22525,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "lrfActivityRecord", function() { return lrfActivityRecord; });
 /* harmony import */ var _constants_configInfo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../constants/configInfo */ "./www/js/source/reactpages/Module/constants/configInfo.js");
 
-var custBettingStatus = {
+const custBettingStatus = {
   action: 'api/PlayerBettingStatistics/GetData',
   type: _constants_configInfo__WEBPACK_IMPORTED_MODULE_0__["systemType"].lrf
 };
-var lapAccountProfile = {
+const lapAccountProfile = {
   action: 'PlayerAccountInfo/GetAccountProfile',
   type: _constants_configInfo__WEBPACK_IMPORTED_MODULE_0__["systemType"].newAdmin
 };
-var lapBankInfo = {
+const lapBankInfo = {
   action: 'PlayerAccountInfo/GetBankInfo',
   type: _constants_configInfo__WEBPACK_IMPORTED_MODULE_0__["systemType"].newAdmin
 };
-var lrfActivityRecord = {
+const lrfActivityRecord = {
   action: 'api/PlayerActivityRecord/Index',
   type: _constants_configInfo__WEBPACK_IMPORTED_MODULE_0__["systemType"].lrf
 };
@@ -22646,16 +22559,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/clientResourceManager */ "./www/js/source/reactpages/lib/clientResourceManager.js");
 
 
-var getText = function getText(resourceKey) {
-  return _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_0__["default"].getText(resourceKey);
-};
+const getText = resourceKey => _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_0__["default"].getText(resourceKey);
 
-var tabKeys = {
+const tabKeys = {
   playerProfile: 'playerProfile',
   bankInformation: 'bankInformation',
   activityRecord: 'activityRecord'
 };
-var tabList = [{
+const tabList = [{
   name: tabKeys.playerProfile,
   text: getText('PlayerProfile')
 }, {
@@ -22665,7 +22576,7 @@ var tabList = [{
   name: tabKeys.activityRecord,
   text: getText('ActivityRecord')
 }];
-var licenseeType = {
+const licenseeType = {
   api: 0,
   nonApi: 1
 };
@@ -22690,63 +22601,44 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
-
-
-var PlayerAccountService =
-/*#__PURE__*/
-function () {
-  function PlayerAccountService() {
-    _classCallCheck(this, PlayerAccountService);
-
+class PlayerAccountService {
+  constructor() {
     this.commonService = _lib_factoryCommonService__WEBPACK_IMPORTED_MODULE_0__["default"].createInstance();
   }
 
-  _createClass(PlayerAccountService, [{
-    key: "getAccountProfile",
-    value: function getAccountProfile(param) {
-      return this._getData(_apiInfo__WEBPACK_IMPORTED_MODULE_1__["lapAccountProfile"].type, _apiInfo__WEBPACK_IMPORTED_MODULE_1__["lapAccountProfile"].action, param);
-    }
-  }, {
-    key: "getBankInfo",
-    value: function getBankInfo(param) {
-      return this._getData(_apiInfo__WEBPACK_IMPORTED_MODULE_1__["lapBankInfo"].type, _apiInfo__WEBPACK_IMPORTED_MODULE_1__["lapBankInfo"].action, param);
-    }
-  }, {
-    key: "getActivityRecord",
-    value: function getActivityRecord(param) {
-      return this._getData(_apiInfo__WEBPACK_IMPORTED_MODULE_1__["lrfActivityRecord"].type, _apiInfo__WEBPACK_IMPORTED_MODULE_1__["lrfActivityRecord"].action, param);
-    }
-  }, {
-    key: "_getData",
-    value: function _getData(licType, action, param) {
-      return this.commonService.fetchData(licType, action, param).then(function (response) {
-        var data = response.data;
-        return data;
-      })["catch"](function (error) {
-        console.log(error.message);
-        return null;
-      });
-    }
-  }, {
-    key: "getCustomerBettingStatus",
-    value: function getCustomerBettingStatus(param) {
-      var params = _objectSpread({}, param);
+  getAccountProfile(param) {
+    return this._getData(_apiInfo__WEBPACK_IMPORTED_MODULE_1__["lapAccountProfile"].type, _apiInfo__WEBPACK_IMPORTED_MODULE_1__["lapAccountProfile"].action, param);
+  }
 
-      return this.commonService.fetchData(_apiInfo__WEBPACK_IMPORTED_MODULE_1__["custBettingStatus"].type, _apiInfo__WEBPACK_IMPORTED_MODULE_1__["custBettingStatus"].action, params);
-    }
-  }]);
+  getBankInfo(param) {
+    return this._getData(_apiInfo__WEBPACK_IMPORTED_MODULE_1__["lapBankInfo"].type, _apiInfo__WEBPACK_IMPORTED_MODULE_1__["lapBankInfo"].action, param);
+  }
 
-  return PlayerAccountService;
-}();
+  getActivityRecord(param) {
+    return this._getData(_apiInfo__WEBPACK_IMPORTED_MODULE_1__["lrfActivityRecord"].type, _apiInfo__WEBPACK_IMPORTED_MODULE_1__["lrfActivityRecord"].action, param);
+  }
 
+  _getData(licType, action, param) {
+    return this.commonService.fetchData(licType, action, param).then(response => {
+      const {
+        data
+      } = response;
+      return data;
+    }).catch(error => {
+      console.log(error.message);
+      return null;
+    });
+  }
 
+  getCustomerBettingStatus(param) {
+    const params = _objectSpread({}, param);
+
+    return this.commonService.fetchData(_apiInfo__WEBPACK_IMPORTED_MODULE_1__["custBettingStatus"].type, _apiInfo__WEBPACK_IMPORTED_MODULE_1__["custBettingStatus"].action, params);
+  }
+
+}
 
 /***/ }),
 
@@ -22768,13 +22660,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createdDate", function() { return createdDate; });
 /* harmony import */ var _lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
 
-var licenseeCustId = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(null, {});
-var ibcCustId = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(null, {});
-var licenseeType = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(null, {});
-var userName = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])('', {});
-var currencyName = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])('', {});
-var subTabKey = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])('', {});
-var createdDate = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])('', {});
+const licenseeCustId = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(null, {});
+const ibcCustId = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(null, {});
+const licenseeType = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(null, {});
+const userName = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])('', {});
+const currencyName = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])('', {});
+const subTabKey = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])('', {});
+const createdDate = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])('', {});
 
 /***/ }),
 
@@ -22831,7 +22723,7 @@ _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_0__["default"].regist
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resource_cs", function() { return resource_cs; });
-var resource_cs = {
+const resource_cs = {
   BankInformation: '银行资讯',
   BankName: '银行名称',
   BankAccountName: '账户名称',
@@ -22908,7 +22800,7 @@ var resource_cs = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resource_en", function() { return resource_en; });
-var resource_en = {
+const resource_en = {
   BankInformation: 'Bank Information',
   BankName: 'Bank Name',
   BankAccountName: 'Bank Account Name',
@@ -22986,9 +22878,9 @@ var resource_en = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tokenUrlTemplate", function() { return tokenUrlTemplate; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "systemType", function() { return systemType; });
-var pageConfig = window._pConfig;
-var tokenUrlTemplate = pageConfig && pageConfig.tokenUrl;
-var systemType = {
+const pageConfig = window._pConfig;
+const tokenUrlTemplate = pageConfig && pageConfig.tokenUrl;
+const systemType = {
   internal: 0,
   lrf: 1,
   affiliate: 2,
@@ -23006,48 +22898,30 @@ var systemType = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var BaseCommonService =
-/*#__PURE__*/
-function () {
-  function BaseCommonService() {
-    _classCallCheck(this, BaseCommonService);
-
+class BaseCommonService {
+  constructor() {
     if (this.constructor == BaseCommonService) {
       throw new Error("Abstract classes can't be instantiated.");
     }
   }
 
-  _createClass(BaseCommonService, [{
-    key: "getTabList",
-    value: function getTabList() {
-      throw new Error("Method 'getTabList()' must be implemented.");
-    }
-  }, {
-    key: "getLink",
-    value: function getLink(sysType, action) {
-      throw new Error("Method 'getLink()' must be implemented.");
-    }
-  }, {
-    key: "fetchData",
-    value: function fetchData(sType, action, params) {
-      var configOption = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
-      throw new Error("Method 'fetchData()' must be implemented.");
-    }
-  }, {
-    key: "fetchMultiple",
-    value: function fetchMultiple(promiseList, callback) {
-      throw new Error("Method 'fetchMultiple()' must be implemented.");
-    }
-  }]);
+  getTabList() {
+    throw new Error("Method 'getTabList()' must be implemented.");
+  }
 
-  return BaseCommonService;
-}();
+  getLink(sysType, action) {
+    throw new Error("Method 'getLink()' must be implemented.");
+  }
+
+  fetchData(sType, action, params, configOption = {}) {
+    throw new Error("Method 'fetchData()' must be implemented.");
+  }
+
+  fetchMultiple(promiseList, callback) {
+    throw new Error("Method 'fetchMultiple()' must be implemented.");
+  }
+
+}
 
 /* harmony default export */ __webpack_exports__["default"] = (BaseCommonService);
 
@@ -23064,67 +22938,51 @@ function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return FactoryCommonService; });
 /* harmony import */ var _lapCommonService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./lapCommonService */ "./www/js/source/reactpages/Module/lib/lapCommonService.js");
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+class FactoryCommonService {
+  static createInstance() {
+    const pageConfig = window._pConfig;
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+    if (!pageConfig) {
+      throw new Error("Missing _pConfig in window");
+    }
 
+    const {
+      applyApiTokenUrl,
+      tabList
+    } = pageConfig;
 
+    if (!applyApiTokenUrl) {
+      throw new Error("Missing applyApiTokenUrl in window._pConfig");
+    }
 
-var FactoryCommonService =
-/*#__PURE__*/
-function () {
-  function FactoryCommonService() {
-    _classCallCheck(this, FactoryCommonService);
+    if (!window.Identity) {
+      throw new Error("Missing Identity object");
+    }
+
+    const {
+      RootUrl,
+      ApplyTokenUrl
+    } = window.Identity;
+
+    if (!RootUrl) {
+      throw new Error("Missing Identity.RootUrl");
+    }
+
+    if (!ApplyTokenUrl) {
+      throw new Error("Missing Identity.ApplyTokenUrl");
+    }
+
+    const initialConfig = {
+      tabList,
+      baseUrl: RootUrl,
+      applyApiTokenUrl,
+      applyLinkTokenUrl: ApplyTokenUrl
+    };
+    return new _lapCommonService__WEBPACK_IMPORTED_MODULE_0__["default"](initialConfig);
   }
 
-  _createClass(FactoryCommonService, null, [{
-    key: "createInstance",
-    value: function createInstance() {
-      var pageConfig = window._pConfig;
-
-      if (!pageConfig) {
-        throw new Error("Missing _pConfig in window");
-      }
-
-      var applyApiTokenUrl = pageConfig.applyApiTokenUrl,
-          tabList = pageConfig.tabList;
-
-      if (!applyApiTokenUrl) {
-        throw new Error("Missing applyApiTokenUrl in window._pConfig");
-      }
-
-      if (!window.Identity) {
-        throw new Error("Missing Identity object");
-      }
-
-      var _window$Identity = window.Identity,
-          RootUrl = _window$Identity.RootUrl,
-          ApplyTokenUrl = _window$Identity.ApplyTokenUrl;
-
-      if (!RootUrl) {
-        throw new Error("Missing Identity.RootUrl");
-      }
-
-      if (!ApplyTokenUrl) {
-        throw new Error("Missing Identity.ApplyTokenUrl");
-      }
-
-      var initialConfig = {
-        tabList: tabList,
-        baseUrl: RootUrl,
-        applyApiTokenUrl: applyApiTokenUrl,
-        applyLinkTokenUrl: ApplyTokenUrl
-      };
-      return new _lapCommonService__WEBPACK_IMPORTED_MODULE_0__["default"](initialConfig);
-    }
-  }]);
-
-  return FactoryCommonService;
-}();
-
-
+}
 
 /***/ }),
 
@@ -23143,43 +23001,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var qs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! qs */ "./node_modules/qs/lib/index.js");
 /* harmony import */ var qs__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(qs__WEBPACK_IMPORTED_MODULE_3__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
 
 
-
-var defaultAjaxConfig = {
+const defaultAjaxConfig = {
   method: 'post',
   headers: {
     'X-Requested-With': 'XMLHttpRequest',
@@ -23190,118 +23022,97 @@ var defaultAjaxConfig = {
   cancelToken: new axios__WEBPACK_IMPORTED_MODULE_2___default.a.CancelToken(function (cancel) {})
 };
 
-var LapCommonService =
-/*#__PURE__*/
-function (_BaseCommonService) {
-  _inherits(LapCommonService, _BaseCommonService);
-
-  function LapCommonService(initialConfig) {
-    var _this;
-
-    _classCallCheck(this, LapCommonService);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(LapCommonService).call(this));
-    var baseUrl = initialConfig.baseUrl,
-        applyLinkTokenUrl = initialConfig.applyLinkTokenUrl,
-        applyApiTokenUrl = initialConfig.applyApiTokenUrl,
-        tabList = initialConfig.tabList;
-    _this._applyLinkTokenUrl = applyLinkTokenUrl;
-    _this._applyApiTokenUrl = applyApiTokenUrl;
-    _this._baseUrl = baseUrl;
-    _this._tabList = tabList || [];
-    return _this;
+class LapCommonService extends _baseCommonService__WEBPACK_IMPORTED_MODULE_0__["default"] {
+  constructor(initialConfig) {
+    super();
+    const {
+      baseUrl,
+      applyLinkTokenUrl,
+      applyApiTokenUrl,
+      tabList
+    } = initialConfig;
+    this._applyLinkTokenUrl = applyLinkTokenUrl;
+    this._applyApiTokenUrl = applyApiTokenUrl;
+    this._baseUrl = baseUrl;
+    this._tabList = tabList || [];
   }
 
-  _createClass(LapCommonService, [{
-    key: "getTabList",
-    value: function getTabList() {
-      return _toConsumableArray(this._tabList);
-    }
-  }, {
-    key: "_buildApplyTokenQueryString",
-    value: function _buildApplyTokenQueryString(sysType, action) {
-      return "ActionLink=".concat(encodeURIComponent(action), "&Type=").concat(sysType);
-    }
-  }, {
-    key: "getLink",
-    value: function getLink(sysType, action) {
-      return sysType === _constants_configInfo__WEBPACK_IMPORTED_MODULE_1__["systemType"].newAdmin ? this._baseUrl + action : "".concat(this._applyLinkTokenUrl, "?").concat(this._buildApplyTokenQueryString(sysType, action));
-    }
-  }, {
-    key: "_buildCommonAjaxConfig",
-    value: function _buildCommonAjaxConfig(configOption, apiActionUrl, params) {
-      var commonConfig = _objectSpread({}, configOption, {
-        url: apiActionUrl
+  getTabList() {
+    return [...this._tabList];
+  }
+
+  _buildApplyTokenQueryString(sysType, action) {
+    return `ActionLink=${encodeURIComponent(action)}&Type=${sysType}`;
+  }
+
+  getLink(sysType, action) {
+    return sysType === _constants_configInfo__WEBPACK_IMPORTED_MODULE_1__["systemType"].newAdmin ? this._baseUrl + action : `${this._applyLinkTokenUrl}?${this._buildApplyTokenQueryString(sysType, action)}`;
+  }
+
+  _buildCommonAjaxConfig(configOption, apiActionUrl, params) {
+    const commonConfig = _objectSpread({}, configOption, {
+      url: apiActionUrl
+    });
+
+    const configWithParam = this._getConfigParam(commonConfig, params);
+
+    return configWithParam;
+  }
+
+  _getConfigParam(config, params) {
+    const isGetMethod = config.method.toLowerCase() === 'get';
+    const paramConfig = isGetMethod ? {
+      params
+    } : {
+      data: qs__WEBPACK_IMPORTED_MODULE_3___default.a.stringify(params)
+    };
+    return _objectSpread({}, config, {}, paramConfig);
+  }
+
+  _fetchDataWithToken(sysType, action, params, configOption) {
+    const apiToken = `${this._applyApiTokenUrl}?${this._buildApplyTokenQueryString(sysType, action)}`;
+    return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(apiToken).then(response => {
+      const {
+        Token,
+        ApiUrl
+      } = response.data;
+      const apiActionUrl = `${ApiUrl}/${action}`;
+
+      const commonAjaxConfig = this._buildCommonAjaxConfig(configOption, apiActionUrl, params);
+
+      const headerConfig = _objectSpread({}, configOption.headers, {
+        'X-Auth-Token': Token
       });
 
-      var configWithParam = this._getConfigParam(commonConfig, params);
-
-      return configWithParam;
-    }
-  }, {
-    key: "_getConfigParam",
-    value: function _getConfigParam(config, params) {
-      var isGetMethod = config.method.toLowerCase() === 'get';
-      var paramConfig = isGetMethod ? {
-        params: params
-      } : {
-        data: qs__WEBPACK_IMPORTED_MODULE_3___default.a.stringify(params)
-      };
-      return _objectSpread({}, config, {}, paramConfig);
-    }
-  }, {
-    key: "_fetchDataWithToken",
-    value: function _fetchDataWithToken(sysType, action, params, configOption) {
-      var _this2 = this;
-
-      var apiToken = "".concat(this._applyApiTokenUrl, "?").concat(this._buildApplyTokenQueryString(sysType, action));
-      return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(apiToken).then(function (response) {
-        var _response$data = response.data,
-            Token = _response$data.Token,
-            ApiUrl = _response$data.ApiUrl;
-        var apiActionUrl = "".concat(ApiUrl, "/").concat(action);
-
-        var commonAjaxConfig = _this2._buildCommonAjaxConfig(configOption, apiActionUrl, params);
-
-        var headerConfig = _objectSpread({}, configOption.headers, {
-          'X-Auth-Token': Token
-        });
-
-        var configWithXToken = _objectSpread({}, commonAjaxConfig, {
-          headers: _objectSpread({}, headerConfig)
-        });
-
-        return axios__WEBPACK_IMPORTED_MODULE_2___default()(configWithXToken);
+      const configWithXToken = _objectSpread({}, commonAjaxConfig, {
+        headers: _objectSpread({}, headerConfig)
       });
+
+      return axios__WEBPACK_IMPORTED_MODULE_2___default()(configWithXToken);
+    });
+  }
+
+  fetchData(sysType, action, params, configOption = defaultAjaxConfig) {
+    const config = _objectSpread({}, defaultAjaxConfig, {}, configOption);
+
+    if (sysType === _constants_configInfo__WEBPACK_IMPORTED_MODULE_1__["systemType"].newAdmin) {
+      const relativeUrl = this._baseUrl + action;
+
+      const ajaxConfig = this._buildCommonAjaxConfig(config, relativeUrl, params);
+
+      return axios__WEBPACK_IMPORTED_MODULE_2___default()(ajaxConfig);
+    } else {
+      return this._fetchDataWithToken(sysType, action, params, config);
     }
-  }, {
-    key: "fetchData",
-    value: function fetchData(sysType, action, params) {
-      var configOption = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultAjaxConfig;
+  }
 
-      var config = _objectSpread({}, defaultAjaxConfig, {}, configOption);
-
-      if (sysType === _constants_configInfo__WEBPACK_IMPORTED_MODULE_1__["systemType"].newAdmin) {
-        var relativeUrl = this._baseUrl + action;
-
-        var ajaxConfig = this._buildCommonAjaxConfig(config, relativeUrl, params);
-
-        return axios__WEBPACK_IMPORTED_MODULE_2___default()(ajaxConfig);
-      } else {
-        return this._fetchDataWithToken(sysType, action, params, config);
-      }
+  fetchMultiple(promiseList, callback) {
+    if (promiseList && promiseList.length) {
+      return axios__WEBPACK_IMPORTED_MODULE_2___default.a.all(promiseList).then(axios__WEBPACK_IMPORTED_MODULE_2___default.a.spread(callback));
     }
-  }, {
-    key: "fetchMultiple",
-    value: function fetchMultiple(promiseList, callback) {
-      if (promiseList && promiseList.length) {
-        return axios__WEBPACK_IMPORTED_MODULE_2___default.a.all(promiseList).then(axios__WEBPACK_IMPORTED_MODULE_2___default.a.spread(callback));
-      }
-    }
-  }]);
+  }
 
-  return LapCommonService;
-}(_baseCommonService__WEBPACK_IMPORTED_MODULE_0__["default"]);
+}
 
 /* harmony default export */ __webpack_exports__["default"] = (LapCommonService);
 
@@ -23325,15 +23136,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var Popup = function Popup(props) {
-  var title = props.title,
-      isShow = props.isShow,
-      width = props.width,
-      height = props.height,
-      isHtml = props.isHtml,
-      children = props.children,
-      iframeUrl = props.iframeUrl;
-  var content;
+const Popup = props => {
+  const {
+    title,
+    isShow,
+    width,
+    height,
+    isHtml,
+    children,
+    iframeUrl
+  } = props;
+  let content;
 
   if (iframeUrl) {
     content = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("iframe", {
@@ -23354,7 +23167,7 @@ var Popup = function Popup(props) {
   }
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "popup-container ".concat(isShow ? 'show' : 'hide')
+    className: `popup-container ${isShow ? 'show' : 'hide'}`
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "popup-block-body"
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -23369,7 +23182,7 @@ var Popup = function Popup(props) {
     className: "txt-title"
   }, title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     className: "popup-close",
-    onClick: function onClick() {
+    onClick: () => {
       props.onClose && props.onClose();
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
@@ -23408,8 +23221,8 @@ Popup.defaultProps = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DEFAULT_WIDTH", function() { return DEFAULT_WIDTH; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DEFAULT_HEIGHT", function() { return DEFAULT_HEIGHT; });
-var DEFAULT_WIDTH = '55%';
-var DEFAULT_HEIGHT = '55%';
+const DEFAULT_WIDTH = '55%';
+const DEFAULT_HEIGHT = '55%';
 
 /***/ }),
 
@@ -23438,7 +23251,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "debuggingConfig", function() { return debuggingConfig; });
-var debuggingConfig = {
+const debuggingConfig = {
   name: "__lrfConfig__",
   env: "local"
 };
@@ -23457,51 +23270,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AppLayout; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-var AppLayout =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(AppLayout, _Component);
-
-  function AppLayout(props) {
-    _classCallCheck(this, AppLayout);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(AppLayout).call(this, props));
+class AppLayout extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+  constructor(props) {
+    super(props);
   }
 
-  _createClass(AppLayout, [{
-    key: "render",
-    value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "container",
-        className: "container-fluid"
-      }, this.props.children);
-    }
-  }]);
+  render() {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      id: "container",
+      className: "container-fluid"
+    }, this.props.children);
+  }
 
-  return AppLayout;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
-
-
+}
 
 /***/ }),
 
@@ -23521,43 +23303,23 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var DEFAULT_RESOURCE_KEY = 'en';
-var resources = {
+const DEFAULT_RESOURCE_KEY = 'en';
+const resources = {
   'en': {},
   'cs': {}
 };
-var currentLangKey = window._langKey || DEFAULT_RESOURCE_KEY;
-
-var ClientResourceManager =
-/*#__PURE__*/
-function () {
-  function ClientResourceManager() {
-    _classCallCheck(this, ClientResourceManager);
+const currentLangKey = window._langKey || DEFAULT_RESOURCE_KEY;
+class ClientResourceManager {
+  static register(langKey, resourceValue) {
+    resources[langKey] = _objectSpread({}, resources[langKey], {}, resourceValue);
   }
 
-  _createClass(ClientResourceManager, null, [{
-    key: "register",
-    value: function register(langKey, resourceValue) {
-      resources[langKey] = _objectSpread({}, resources[langKey], {}, resourceValue);
-    }
-  }, {
-    key: "getText",
-    value: function getText(key) {
-      var currentResource = resources[currentLangKey];
-      return currentResource && (currentResource[key] || resources[DEFAULT_RESOURCE_KEY][key] || key);
-    }
-  }]);
+  static getText(key) {
+    const currentResource = resources[currentLangKey];
+    return currentResource && (currentResource[key] || resources[DEFAULT_RESOURCE_KEY][key] || key);
+  }
 
-  return ClientResourceManager;
-}();
-
-
+}
 
 /***/ }),
 
@@ -23572,10 +23334,7 @@ function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return createReducer; });
 function createReducer(initialState, handlers) {
-  return function reducer() {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-    var action = arguments.length > 1 ? arguments[1] : undefined;
-
+  return function reducer(state = initialState, action) {
     if (handlers.hasOwnProperty(action.type)) {
       return handlers[action.type](state, action);
     } else {
@@ -23599,41 +23358,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux-logger */ "./node_modules/redux-logger/dist/redux-logger.js");
 /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux_logger__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _constants_config__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../constants/config */ "./www/js/source/reactpages/constants/config.js");
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
+const isDev = "development" === "development";
+const configName = _constants_config__WEBPACK_IMPORTED_MODULE_1__["debuggingConfig"].name; // middleware that logs actions
 
-var isDev = "development" === "development";
-var configName = _constants_config__WEBPACK_IMPORTED_MODULE_1__["debuggingConfig"].name; // middleware that logs actions
-
-var loggerMiddleware = Object(redux_logger__WEBPACK_IMPORTED_MODULE_0__["createLogger"])({
-  predicate: function predicate(getState, action) {
-    return isDev || window[configName] && window[configName].env === _constants_config__WEBPACK_IMPORTED_MODULE_1__["debuggingConfig"].env && (!window[configName].actionFilter || window[configName].actionFilter === action.type);
-  }
+const loggerMiddleware = Object(redux_logger__WEBPACK_IMPORTED_MODULE_0__["createLogger"])({
+  predicate: (getState, action) => isDev || window[configName] && window[configName].env === _constants_config__WEBPACK_IMPORTED_MODULE_1__["debuggingConfig"].env && (!window[configName].actionFilter || window[configName].actionFilter === action.type)
 });
-
-var Logger =
-/*#__PURE__*/
-function () {
-  function Logger() {
-    _classCallCheck(this, Logger);
+class Logger {
+  static getLoggerMiddleware() {
+    return loggerMiddleware;
   }
 
-  _createClass(Logger, null, [{
-    key: "getLoggerMiddleware",
-    value: function getLoggerMiddleware() {
-      return loggerMiddleware;
-    }
-  }]);
-
-  return Logger;
-}();
-
-
+}
 
 /***/ }),
 
@@ -23647,55 +23385,32 @@ function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return NumberFormat; });
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var NumberFormat =
-/*#__PURE__*/
-function () {
-  function NumberFormat() {
-    _classCallCheck(this, NumberFormat);
+class NumberFormat {
+  static formatDecimal(value) {
+    return this.format(value, 2);
   }
 
-  _createClass(NumberFormat, null, [{
-    key: "formatDecimal",
-    value: function formatDecimal(value) {
-      return this.format(value, 2);
+  static format(value, digits = 0) {
+    if (typeof value !== "number" || isNaN(value)) {
+      return "";
     }
-  }, {
-    key: "format",
-    value: function format(value) {
-      var digits = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
-      if (typeof value !== "number" || isNaN(value)) {
-        return "";
-      }
+    const roundedValue = this.round(value, digits);
+    return roundedValue.toFixed(digits).replace(/(\d)(?=(\d{3})+(\.|$))/g, "$1,");
+  }
 
-      var roundedValue = this.round(value, digits);
-      return roundedValue.toFixed(digits).replace(/(\d)(?=(\d{3})+(\.|$))/g, "$1,");
-    }
-  }, {
-    key: "round",
-    value: function round(value, digits) {
-      var sign = value < 0 ? -1 : 1;
-      var absoluteValue = Math.abs(value);
-      var rounded = Number(Math.round(absoluteValue + 'e' + digits) + 'e-' + digits);
-      return sign * rounded;
-    }
-  }, {
-    key: "parseToString",
-    value: function parseToString(number) {
-      return number.toString().replace(/(\d)(?=(\d{3})+(\.|$))/g, "$1,");
-    }
-  }]);
+  static round(value, digits) {
+    const sign = value < 0 ? -1 : 1;
+    const absoluteValue = Math.abs(value);
+    const rounded = Number(Math.round(absoluteValue + 'e' + digits) + 'e-' + digits);
+    return sign * rounded;
+  }
 
-  return NumberFormat;
-}();
+  static parseToString(number) {
+    return number.toString().replace(/(\d)(?=(\d{3})+(\.|$))/g, "$1,");
+  }
 
-
+}
 
 /***/ }),
 
@@ -23712,37 +23427,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
 /* harmony import */ var _logger__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./logger */ "./www/js/source/reactpages/lib/logger.js");
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
 
-
-
-var Store =
-/*#__PURE__*/
-function () {
-  function Store() {
-    _classCallCheck(this, Store);
+class Store {
+  static createStore(reducer, initialState) {
+    const loggerMiddleware = _logger__WEBPACK_IMPORTED_MODULE_2__["default"].getLoggerMiddleware();
+    const enhancer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["compose"])(Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"], // lets us dispatch() functions
+    loggerMiddleware));
+    return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(reducer, initialState, enhancer);
   }
 
-  _createClass(Store, null, [{
-    key: "createStore",
-    value: function createStore(reducer, initialState) {
-      var loggerMiddleware = _logger__WEBPACK_IMPORTED_MODULE_2__["default"].getLoggerMiddleware();
-      var enhancer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["compose"])(Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"], // lets us dispatch() functions
-      loggerMiddleware));
-      return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(reducer, initialState, enhancer);
-    }
-  }]);
-
-  return Store;
-}();
-
-
+}
 
 /***/ })
 

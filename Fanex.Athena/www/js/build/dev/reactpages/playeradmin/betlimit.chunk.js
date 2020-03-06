@@ -148,7 +148,7 @@
 /******/
 /******/
 /******/ 	// add entry module to deferred list
-/******/ 	deferredModules.push(["./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/index.jsx","common"]);
+/******/ 	deferredModules.push(["./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/index.jsx","lib/common"]);
 /******/ 	// run deferred modules when ready
 /******/ 	return checkDeferredModules();
 /******/ })
@@ -167,7 +167,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setAlertOption", function() { return setAlertOption; });
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/actions/types.js");
 
-var setAlertOption = function setAlertOption(data) {
+const setAlertOption = data => {
   return {
     type: _types__WEBPACK_IMPORTED_MODULE_0__["SET_ALERT_OPTION"],
     data: data
@@ -192,7 +192,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var ActionCreators = Object.assign({}, _jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_0__, _jsroot_actions_requestParamAction__WEBPACK_IMPORTED_MODULE_1__, _alertAction__WEBPACK_IMPORTED_MODULE_2__);
+const ActionCreators = Object.assign({}, _jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_0__, _jsroot_actions_requestParamAction__WEBPACK_IMPORTED_MODULE_1__, _alertAction__WEBPACK_IMPORTED_MODULE_2__);
 
 /***/ }),
 
@@ -206,7 +206,7 @@ var ActionCreators = Object.assign({}, _jsroot_actions_loaderAction__WEBPACK_IMP
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_ALERT_OPTION", function() { return SET_ALERT_OPTION; });
-var SET_ALERT_OPTION = "SET_ALERT_OPTION";
+const SET_ALERT_OPTION = "SET_ALERT_OPTION";
 
 /***/ }),
 
@@ -237,7 +237,7 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 
 
 
-var AppContainer = function AppContainer(props) {
+const AppContainer = props => {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Loader__WEBPACK_IMPORTED_MODULE_5__["default"], {
     isLoading: props.isLoading
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormFilter__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DataContent__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_sweet_alert__WEBPACK_IMPORTED_MODULE_6__["default"], _extends({
@@ -247,11 +247,13 @@ var AppContainer = function AppContainer(props) {
 };
 
 function mapStateToProps(state) {
-  var isLoading = state.isLoading,
-      alertOption = state.alertOption;
+  const {
+    isLoading,
+    alertOption
+  } = state;
   return Object.assign({}, {
-    isLoading: isLoading,
-    alertOption: alertOption
+    isLoading,
+    alertOption
   });
 }
 
@@ -276,9 +278,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _grid_data_contents_GameDataContent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./grid/data-contents/GameDataContent */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/data-contents/GameDataContent.jsx");
 /* harmony import */ var _grid_data_contents_NGDataContent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./grid/data-contents/NGDataContent */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/data-contents/NGDataContent.jsx");
 /* harmony import */ var _grid_data_contents_AGCDataContent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./grid/data-contents/AGCDataContent */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/data-contents/AGCDataContent.jsx");
-var _Setting;
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
@@ -286,19 +285,30 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+const Setting = {
+  [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].SB]: _grid_data_contents_SportDataContent__WEBPACK_IMPORTED_MODULE_3__["default"],
+  [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].VS]: _grid_data_contents_SportDataContent__WEBPACK_IMPORTED_MODULE_3__["default"],
+  [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].VS2]: _grid_data_contents_SportDataContent__WEBPACK_IMPORTED_MODULE_3__["default"],
+  [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].LT]: _grid_data_contents_GameDataContent__WEBPACK_IMPORTED_MODULE_4__["default"],
+  [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].NG]: _grid_data_contents_NGDataContent__WEBPACK_IMPORTED_MODULE_5__["default"],
+  [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].KN]: _grid_data_contents_GameDataContent__WEBPACK_IMPORTED_MODULE_4__["default"],
+  [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].AGC]: _grid_data_contents_AGCDataContent__WEBPACK_IMPORTED_MODULE_6__["default"]
+};
 
-var Setting = (_Setting = {}, _defineProperty(_Setting, _lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].SB, _grid_data_contents_SportDataContent__WEBPACK_IMPORTED_MODULE_3__["default"]), _defineProperty(_Setting, _lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].VS, _grid_data_contents_SportDataContent__WEBPACK_IMPORTED_MODULE_3__["default"]), _defineProperty(_Setting, _lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].VS2, _grid_data_contents_SportDataContent__WEBPACK_IMPORTED_MODULE_3__["default"]), _defineProperty(_Setting, _lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].LT, _grid_data_contents_GameDataContent__WEBPACK_IMPORTED_MODULE_4__["default"]), _defineProperty(_Setting, _lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].NG, _grid_data_contents_NGDataContent__WEBPACK_IMPORTED_MODULE_5__["default"]), _defineProperty(_Setting, _lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].KN, _grid_data_contents_GameDataContent__WEBPACK_IMPORTED_MODULE_4__["default"]), _defineProperty(_Setting, _lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].AGC, _grid_data_contents_AGCDataContent__WEBPACK_IMPORTED_MODULE_6__["default"]), _Setting);
-
-var DataContent = function DataContent(props) {
-  var ProductId = props.requestParam.ProductId;
-  var Content = Setting[ProductId];
+const DataContent = props => {
+  const {
+    ProductId
+  } = props.requestParam;
+  const Content = Setting[ProductId];
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Content, null);
 };
 
 function mapStateToProps(state) {
-  var requestParam = state.requestParam;
+  const {
+    requestParam
+  } = state;
   return Object.assign({}, {
-    requestParam: requestParam
+    requestParam
   });
 }
 
@@ -324,13 +334,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
 /* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-select */ "./node_modules/react-select/dist/react-select.es.js");
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
@@ -339,20 +342,15 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+const FormFilter = props => {
+  const [productId, setProductId] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(props.requestParam.ProductId);
+  const productList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__["default"].productList;
 
-var FormFilter = function FormFilter(props) {
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(props.requestParam.ProductId),
-      _useState2 = _slicedToArray(_useState, 2),
-      productId = _useState2[0],
-      setProductId = _useState2[1];
-
-  var productList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__["default"].productList;
-
-  var onProductChange = function onProductChange(item) {
+  const onProductChange = item => {
     setProductId(item.value);
 
     if (item.value !== props.requestParam.ProductId) {
-      var param = Object.assign({}, props.requestParam, {
+      const param = Object.assign({}, props.requestParam, {
         ProductId: item.value
       });
       props.setRequestParam(param);
@@ -378,16 +376,20 @@ var FormFilter = function FormFilter(props) {
 };
 
 function mapDispatchToProps(dispatch) {
-  var setRequestParam = _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"].setRequestParam;
+  const {
+    setRequestParam
+  } = _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"];
   return Object(redux__WEBPACK_IMPORTED_MODULE_3__["bindActionCreators"])({
-    setRequestParam: setRequestParam
+    setRequestParam
   }, dispatch);
 }
 
 function mapStateToProps(state) {
-  var requestParam = state.requestParam;
+  const {
+    requestParam
+  } = state;
   return Object.assign({}, {
-    requestParam: requestParam
+    requestParam
   });
 }
 
@@ -416,25 +418,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_utility__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../lib/utility */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/utility.js");
 /* harmony import */ var _jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @jsroot/components/CheckBox */ "./www/js/source/reactpages/components/CheckBox.jsx");
 /* harmony import */ var _jsroot_components_Balloon__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @jsroot/components/Balloon */ "./www/js/source/reactpages/components/Balloon.jsx");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -449,99 +433,85 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var SettingContent = function SettingContent(Grid, DataHandling) {
+const SettingContent = (Grid, DataHandling) => {
   var _temp;
 
-  return _temp =
-  /*#__PURE__*/
-  function (_PureComponent) {
-    _inherits(_temp, _PureComponent);
+  return _temp = class extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
+    constructor(props) {
+      super(props);
 
-    function _temp(props) {
-      var _this;
-
-      _classCallCheck(this, _temp);
-
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(_temp).call(this, props));
-
-      _defineProperty(_assertThisInitialized(_this), "_unRegisterEvents", function () {
-        document.removeEventListener('click', _this._handleClickOutSide);
+      _defineProperty(this, "_unRegisterEvents", () => {
+        document.removeEventListener('click', this._handleClickOutSide);
       });
 
-      _defineProperty(_assertThisInitialized(_this), "_handleClickOutSide", function (event) {
-        if (_this.state.showError) {
-          var isError = _this.errorRef.current && _this.errorRef.current.contains(event.target);
-
-          var isCheckBox = _this.checkBoxRef.current && _this.checkBoxRef.current.contains(event.target);
-
-          var isButton = _this.submitButtonRef.current && _this.submitButtonRef.current.contains(event.target);
-
-          var clickOutside = !isError && !isCheckBox && !isButton;
+      _defineProperty(this, "_handleClickOutSide", event => {
+        if (this.state.showError) {
+          const isError = this.errorRef.current && this.errorRef.current.contains(event.target);
+          const isCheckBox = this.checkBoxRef.current && this.checkBoxRef.current.contains(event.target);
+          const isButton = this.submitButtonRef.current && this.submitButtonRef.current.contains(event.target);
+          const clickOutside = !isError && !isCheckBox && !isButton;
 
           if (clickOutside) {
-            _this._closeError();
+            this._closeError();
           }
         }
       });
 
-      _defineProperty(_assertThisInitialized(_this), "setInputRef", function (type, id, element) {
-        _this.ref[type] = _this.ref[type] || {};
-        _this.ref[type][id] = element;
+      _defineProperty(this, "setInputRef", (type, id, element) => {
+        this.ref[type] = this.ref[type] || {};
+        this.ref[type][id] = element;
       });
 
-      _defineProperty(_assertThisInitialized(_this), "onReset", function () {
-        if (!_this.state.disabledButton) {
-          _this.setState({
+      _defineProperty(this, "onReset", () => {
+        if (!this.state.disabledButton) {
+          this.setState({
             isCopy: false
-          }, function () {
-            return _this._getData(_this.props.requestParam);
-          });
+          }, () => this._getData(this.props.requestParam));
         }
       });
 
-      _defineProperty(_assertThisInitialized(_this), "onChange", function (data) {
-        _this.setState({
+      _defineProperty(this, "onChange", data => {
+        this.setState({
           data: data
         });
       });
 
-      _defineProperty(_assertThisInitialized(_this), "onSubmit", function () {
-        if (!_this.state.showError) {
-          var data = _this.state.data;
-          var submitData = DataHandling.getSubmitData(data);
+      _defineProperty(this, "onSubmit", () => {
+        if (!this.state.showError) {
+          const data = this.state.data;
+          const submitData = DataHandling.getSubmitData(data);
 
           if (!submitData.IsValid) {
-            _this._showError(submitData.Data);
+            this._showError(submitData.Data);
           } else {
-            _this._showConfirmation(function () {
-              return _this._submit(submitData.Data);
-            });
+            this._showConfirmation(() => this._submit(submitData.Data));
           }
         }
       });
 
-      _defineProperty(_assertThisInitialized(_this), "onCheck", function (checked) {
+      _defineProperty(this, "onCheck", checked => {
         if (checked) {
-          var _this$state = _this.state,
-              setting = _this$state.setting,
-              errorBalloon = _this$state.errorBalloon,
-              showError = _this$state.showError;
+          const {
+            setting,
+            errorBalloon,
+            showError
+          } = this.state;
 
           if (showError && errorBalloon.Id === setting.CopyId) {
             return false;
           }
 
-          var data = _this.state.data;
-          var copyRow = data.find(function (e) {
-            return e.Id === setting.CopyId;
-          });
-          var copyValue = DataHandling.getSubmitRowData(copyRow);
-          var invalidData = DataHandling.validate(copyValue, copyRow);
+          const {
+            data
+          } = this.state;
+          const copyRow = data.find(e => e.Id === setting.CopyId);
+          const copyValue = DataHandling.getSubmitRowData(copyRow);
+          const invalidData = DataHandling.validate(copyValue, copyRow);
 
           if (invalidData !== null) {
-            _this._showError(invalidData);
+            this._showError(invalidData);
           } else {
-            var newData = data.map(function (e) {
+            const newData = data.map(e => {
               if (e.Id === copyRow.id) {
                 return e;
               }
@@ -552,34 +522,31 @@ var SettingContent = function SettingContent(Grid, DataHandling) {
                 MaxPerMatch: copyRow.MaxPerMatch
               });
             });
-
-            _this.setState({
+            this.setState({
               isCopy: true,
               data: newData
             });
           }
         } else {
-          _this.setState({
+          this.setState({
             isCopy: false
           });
         }
       });
 
-      _defineProperty(_assertThisInitialized(_this), "onCloseAlert", function () {
-        _this.setState({
+      _defineProperty(this, "onCloseAlert", () => {
+        this.setState({
           disabledButton: false
-        }, function () {
-          return _this.props.setAlertOption({
-            isShow: false
-          });
-        });
+        }, () => this.props.setAlertOption({
+          isShow: false
+        }));
       });
 
-      _defineProperty(_assertThisInitialized(_this), "onRefresh", function () {
-        _this._getData(_this.props.requestParam);
+      _defineProperty(this, "onRefresh", () => {
+        this._getData(this.props.requestParam);
       });
 
-      _this.state = {
+      this.state = {
         data: null,
         setting: {
           Editable: false,
@@ -595,234 +562,212 @@ var SettingContent = function SettingContent(Grid, DataHandling) {
           targetLeft: 0
         }
       };
-      _this.ref = {};
-      _this.checkBoxRef = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
-      _this.errorRef = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
-      _this.submitButtonRef = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
-      _this.getHeaderName = DataHandling.getHeaderName;
-      return _this;
+      this.ref = {};
+      this.checkBoxRef = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
+      this.errorRef = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
+      this.submitButtonRef = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
+      this.getHeaderName = DataHandling.getHeaderName;
     }
 
-    _createClass(_temp, [{
-      key: "componentDidUpdate",
-      value: function componentDidUpdate(prevProps, prevState) {
-        if (prevState.timeStamp !== this.state.timeStamp) {
-          this.props.toggleLoader(false);
-          this.props.setAlertOption({
-            isShow: false
-          });
-        }
+    componentDidUpdate(prevProps, prevState) {
+      if (prevState.timeStamp !== this.state.timeStamp) {
+        this.props.toggleLoader(false);
+        this.props.setAlertOption({
+          isShow: false
+        });
+      }
 
-        if (prevProps.requestParam !== this.props.requestParam) {
-          this._getData(this.props.requestParam);
-        }
-      }
-    }, {
-      key: "componentWillUnmount",
-      value: function componentWillUnmount() {
-        this._unRegisterEvents();
-      }
-    }, {
-      key: "componentDidMount",
-      value: function componentDidMount() {
+      if (prevProps.requestParam !== this.props.requestParam) {
         this._getData(this.props.requestParam);
+      }
+    }
 
-        this._registerEvents();
-      }
-    }, {
-      key: "_registerEvents",
-      value: function _registerEvents() {
-        document.addEventListener('click', this._handleClickOutSide);
-      }
-    }, {
-      key: "_closeError",
-      value: function _closeError() {
+    componentWillUnmount() {
+      this._unRegisterEvents();
+    }
+
+    componentDidMount() {
+      this._getData(this.props.requestParam);
+
+      this._registerEvents();
+    }
+
+    _registerEvents() {
+      document.addEventListener('click', this._handleClickOutSide);
+    }
+
+    _closeError() {
+      this.setState({
+        showError: false
+      });
+    }
+
+    _submit(data) {
+      this.props.toggleLoader(true);
+      const param = Object.assign({}, this.props.requestParam, {
+        Setting: data
+      });
+      _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__["default"].updateData(param, this._showSubmitResult.bind(this));
+    }
+
+    _showConfirmation(onOK) {
+      const buttons = [{
+        text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('OK'),
+        onClick: onOK,
+        className: 'btn btn-apply'
+      }, {
+        text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Cancel'),
+        onClick: this.onCloseAlert,
+        className: 'btn btn-cancel'
+      }];
+      const msg = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "center-align"
+      }, _lib_utility__WEBPACK_IMPORTED_MODULE_7__["default"].getConfirmationMsg(this.props.requestParam.ProductId));
+      this.setState({
+        disabledButton: true
+      }, () => this.props.setAlertOption({
+        isShow: true,
+        title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Confirmation'),
+        children: msg,
+        buttons: buttons,
+        icon: '',
+        onClose: this.onCloseAlert,
+        height: 130
+      }));
+    }
+
+    _showSubmitResult(title, msg, isSuccess) {
+      const content = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "center-align"
+      }, msg);
+      const buttons = [{
+        text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('OK'),
+        onClick: this.onRefresh,
+        className: 'btn btn-apply btn-alone'
+      }];
+      this.setState({
+        disabledButton: true
+      }, () => {
+        this.props.setAlertOption({
+          isShow: true,
+          title: title,
+          children: content,
+          onClose: this.onRefresh,
+          icon: isSuccess ? 'success' : 'error',
+          height: 225,
+          buttons: buttons
+        });
+        this.props.toggleLoader(false);
+      });
+    }
+
+    _showError(invalidData) {
+      const invalidInput = this.ref[invalidData.Type][invalidData.Id];
+
+      if (invalidInput) {
+        const pos = invalidInput.getBoundingClientRect();
         this.setState({
-          showError: false
-        });
+          showError: true,
+          errorBalloon: {
+            Id: invalidData.Id,
+            msg: invalidData.Message,
+            targetTop: pos.top,
+            targetLeft: pos.left + pos.width / 2
+          }
+        }, () => invalidInput.focus());
       }
-    }, {
-      key: "_submit",
-      value: function _submit(data) {
-        this.props.toggleLoader(true);
-        var param = Object.assign({}, this.props.requestParam, {
-          Setting: data
-        });
-        _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__["default"].updateData(param, this._showSubmitResult.bind(this));
-      }
-    }, {
-      key: "_showConfirmation",
-      value: function _showConfirmation(onOK) {
-        var _this2 = this;
+    }
 
-        var buttons = [{
-          text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('OK'),
-          onClick: onOK,
-          className: 'btn btn-apply'
-        }, {
-          text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Cancel'),
-          onClick: this.onCloseAlert,
-          className: 'btn btn-cancel'
-        }];
-        var msg = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-          className: "center-align"
-        }, _lib_utility__WEBPACK_IMPORTED_MODULE_7__["default"].getConfirmationMsg(this.props.requestParam.ProductId));
-        this.setState({
-          disabledButton: true
-        }, function () {
-          return _this2.props.setAlertOption({
-            isShow: true,
-            title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Confirmation'),
-            children: msg,
-            buttons: buttons,
-            icon: '',
-            onClose: _this2.onCloseAlert,
-            height: 130
-          });
-        });
-      }
-    }, {
-      key: "_showSubmitResult",
-      value: function _showSubmitResult(title, msg, isSuccess) {
-        var _this3 = this;
+    _refreshState(data, setting) {
+      this.setState(state => ({
+        data: DataHandling.getViewData(data),
+        setting: Object.assign({}, state.setting, setting),
+        disabledButton: false,
+        isCopy: false,
+        showError: false,
+        timeStamp: new Date().getTime()
+      }));
+    }
 
-        var content = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-          className: "center-align"
-        }, msg);
-        var buttons = [{
-          text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('OK'),
-          onClick: this.onRefresh,
-          className: 'btn btn-apply btn-alone'
-        }];
-        this.setState({
-          disabledButton: true
-        }, function () {
-          _this3.props.setAlertOption({
-            isShow: true,
-            title: title,
-            children: content,
-            onClose: _this3.onRefresh,
-            icon: isSuccess ? 'success' : 'error',
-            height: 225,
-            buttons: buttons
-          });
+    _getData(param) {
+      this.props.toggleLoader(true);
+      _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__["default"].getData(param, this._refreshState.bind(this));
+    }
 
-          _this3.props.toggleLoader(false);
-        });
-      }
-    }, {
-      key: "_showError",
-      value: function _showError(invalidData) {
-        var invalidInput = this.ref[invalidData.Type][invalidData.Id];
+    render() {
+      const data = this.state.data;
 
-        if (invalidInput) {
-          var pos = invalidInput.getBoundingClientRect();
-          this.setState({
-            showError: true,
-            errorBalloon: {
-              Id: invalidData.Id,
-              msg: invalidData.Message,
-              targetTop: pos.top,
-              targetLeft: pos.left + pos.width / 2
-            }
-          }, function () {
-            return invalidInput.focus();
-          });
-        }
+      if (!data || !data.length) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_5__["default"], null);
       }
-    }, {
-      key: "_refreshState",
-      value: function _refreshState(data, setting) {
-        this.setState(function (state) {
-          return {
-            data: DataHandling.getViewData(data),
-            setting: Object.assign({}, state.setting, setting),
-            disabledButton: false,
-            isCopy: false,
-            showError: false,
-            timeStamp: new Date().getTime()
-          };
-        });
-      }
-    }, {
-      key: "_getData",
-      value: function _getData(param) {
-        this.props.toggleLoader(true);
-        _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__["default"].getData(param, this._refreshState.bind(this));
-      }
-    }, {
-      key: "render",
-      value: function render() {
-        var data = this.state.data;
 
-        if (!data || !data.length) {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_5__["default"], null);
-        }
+      const {
+        setting,
+        disabledButton,
+        showError,
+        errorBalloon,
+        isCopy
+      } = this.state;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "pa-betlimit"
+      }, setting.EnableCopy && setting.Editable && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        id: "IsCopy",
+        checked: isCopy,
+        onChange: this.onCheck,
+        ref: this.checkBoxRef,
+        label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource("CopyBetSettingFromSoccer")
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Grid, {
+        data: data,
+        setting: setting,
+        setInputRef: this.setInputRef,
+        onChange: this.onChange,
+        isCopy: isCopy,
+        getHeaderName: this.getHeaderName
+      }), setting.Editable && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "pa-betlimit-button"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "button",
+        className: "btn btn-cancel",
+        disabled: disabledButton,
+        onClick: this.onReset
+      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Reset')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "button",
+        className: "btn btn-apply",
+        disabled: disabledButton,
+        onClick: this.onSubmit,
+        ref: this.submitButtonRef
+      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Submit'))), setting.Editable && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Balloon__WEBPACK_IMPORTED_MODULE_9__["default"], _extends({
+        width: 140,
+        isOpen: showError,
+        ref: this.errorRef
+      }, errorBalloon)));
+    }
 
-        var _this$state2 = this.state,
-            setting = _this$state2.setting,
-            disabledButton = _this$state2.disabledButton,
-            showError = _this$state2.showError,
-            errorBalloon = _this$state2.errorBalloon,
-            isCopy = _this$state2.isCopy;
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "pa-betlimit"
-        }, setting.EnableCopy && setting.Editable && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_8__["default"], {
-          id: "IsCopy",
-          checked: isCopy,
-          onChange: this.onCheck,
-          ref: this.checkBoxRef,
-          label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource("CopyBetSettingFromSoccer")
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Grid, {
-          data: data,
-          setting: setting,
-          setInputRef: this.setInputRef,
-          onChange: this.onChange,
-          isCopy: isCopy,
-          getHeaderName: this.getHeaderName
-        }), setting.Editable && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "pa-betlimit-button"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          type: "button",
-          className: "btn btn-cancel",
-          disabled: disabledButton,
-          onClick: this.onReset
-        }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Reset')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          type: "button",
-          className: "btn btn-apply",
-          disabled: disabledButton,
-          onClick: this.onSubmit,
-          ref: this.submitButtonRef
-        }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Submit'))), setting.Editable && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Balloon__WEBPACK_IMPORTED_MODULE_9__["default"], _extends({
-          width: 140,
-          isOpen: showError,
-          ref: this.errorRef
-        }, errorBalloon)));
-      }
-    }]);
-
-    return _temp;
-  }(react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"]), _temp;
+  }, _temp;
 };
 
 function mapDispatchToProps(dispatch) {
-  var toggleLoader = _actions_index__WEBPACK_IMPORTED_MODULE_3__["ActionCreators"].toggleLoader,
-      setAlertOption = _actions_index__WEBPACK_IMPORTED_MODULE_3__["ActionCreators"].setAlertOption;
+  const {
+    toggleLoader,
+    setAlertOption
+  } = _actions_index__WEBPACK_IMPORTED_MODULE_3__["ActionCreators"];
   return Object(redux__WEBPACK_IMPORTED_MODULE_2__["bindActionCreators"])({
-    toggleLoader: toggleLoader,
-    setAlertOption: setAlertOption
+    toggleLoader,
+    setAlertOption
   }, dispatch);
 }
 
 function mapStateToProps(state) {
-  var requestParam = state.requestParam;
+  const {
+    requestParam
+  } = state;
   return Object.assign({}, {
-    requestParam: requestParam
+    requestParam
   });
 }
 
 ;
-var createSetting = Object(redux__WEBPACK_IMPORTED_MODULE_2__["compose"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps), SettingContent);
+const createSetting = Object(redux__WEBPACK_IMPORTED_MODULE_2__["compose"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps), SettingContent);
 /* harmony default export */ __webpack_exports__["default"] = (createSetting);
 
 /***/ }),
@@ -850,17 +795,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var SettingGrid = function SettingGrid(props) {
-  var setting = props.setting,
-      data = props.data,
-      onChange = props.onChange,
-      getHeaderName = props.getHeaderName;
-  var setInputRef = props.setInputRef;
+const SettingGrid = props => {
+  const {
+    setting,
+    data,
+    onChange,
+    getHeaderName
+  } = props;
+  const setInputRef = props.setInputRef;
 
-  var onInputChange = function onInputChange(type, id, value) {
-    var newData = data.map(function (e) {
+  const onInputChange = (type, id, value) => {
+    const newData = data.map(e => {
       if (e.Id === id) {
-        var newItem = _objectSpread({}, e);
+        const newItem = _objectSpread({}, e);
 
         newItem[type] = value;
         return newItem;
@@ -871,13 +818,13 @@ var SettingGrid = function SettingGrid(props) {
     onChange(newData);
   };
 
-  var onInputBlur = function onInputBlur(type, id, value) {
-    var newValue = _lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(_lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].getValueAsNumber(value));
+  const onInputBlur = (type, id, value) => {
+    const newValue = _lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(_lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].getValueAsNumber(value));
 
     if (newValue !== value) {
-      var newData = data.map(function (e) {
+      const newData = data.map(e => {
         if (e.Id === id) {
-          var newItem = _objectSpread({}, e);
+          const newItem = _objectSpread({}, e);
 
           newItem[type] = newValue;
           return newItem;
@@ -889,42 +836,36 @@ var SettingGrid = function SettingGrid(props) {
     }
   };
 
-  var buildCell = function buildCell(type, value, disabled) {
-    var isChanged = value[type] !== value['Original' + type];
+  const buildCell = (type, value, disabled) => {
+    const isChanged = value[type] !== value['Original' + type];
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       className: isChanged ? _lib_constants__WEBPACK_IMPORTED_MODULE_2__["InputClassName"].OnChangedClassName : _lib_constants__WEBPACK_IMPORTED_MODULE_2__["InputClassName"].ClassName,
       type: "text",
-      ref: function ref(e) {
-        return setInputRef(type, value.Id, e);
-      },
+      ref: e => setInputRef(type, value.Id, e),
       autoComplete: "off",
       maxLength: "14",
       value: value[type],
-      onChange: function onChange(e) {
-        return onInputChange(type, value.Id, e.target.value);
-      },
-      onBlur: function onBlur(e) {
-        return onInputBlur(type, value.Id, e.target.value);
-      },
+      onChange: e => onInputChange(type, value.Id, e.target.value),
+      onBlur: e => onInputBlur(type, value.Id, e.target.value),
       disabled: disabled
     });
   };
 
-  var buildBody = function buildBody(editable, data) {
-    var rows = [];
+  const buildBody = (editable, data) => {
+    let rows = [];
 
-    for (var i = 0; i < data.length; i++) {
-      var item = data[i];
-      var disabled = !editable;
+    for (let i = 0; i < data.length; i++) {
+      const item = data[i];
+      const disabled = !editable;
       rows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
         key: item.Id
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, item.BetSettingType), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
         className: "pa-betlimit-cell"
-      }, buildCell(_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitType"].MinBet, item, disabled), item.BetValueMin > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " >= ".concat(_lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(item.BetValueMin)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+      }, buildCell(_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitType"].MinBet, item, disabled), item.BetValueMin > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, ` >= ${_lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(item.BetValueMin)}`)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
         className: "pa-betlimit-cell"
-      }, buildCell(_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitType"].MaxBet, item, disabled), item.BetValueMax > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " <= ".concat(_lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(item.BetValueMax)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+      }, buildCell(_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitType"].MaxBet, item, disabled), item.BetValueMax > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, ` <= ${_lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(item.BetValueMax)}`)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
         className: "pa-betlimit-cell"
-      }, buildCell(_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitType"].MaxPerMatch, item, disabled), item.MaxPerMatchMax > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " <= ".concat(_lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(item.MaxPerMatchMax))))));
+      }, buildCell(_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitType"].MaxPerMatch, item, disabled), item.MaxPerMatchMax > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, ` <= ${_lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(item.MaxPerMatchMax)}`))));
     }
 
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, rows);
@@ -962,24 +903,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-select */ "./node_modules/react-select/dist/react-select.es.js");
 /* harmony import */ var _sport_settings_AGCSettingGrid__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../sport-settings/AGCSettingGrid */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/sport-settings/AGCSettingGrid.jsx");
 /* harmony import */ var _jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @jsroot/components/NoDataTitle */ "./www/js/source/reactpages/components/NoDataTitle.jsx");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
@@ -992,288 +915,259 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var AGCDataContent =
-/*#__PURE__*/
-function (_PureComponent) {
-  _inherits(AGCDataContent, _PureComponent);
+class AGCDataContent extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
+  constructor(props) {
+    super(props);
 
-  function AGCDataContent(props) {
-    var _this;
+    _defineProperty(this, "onGroupChange", item => {
+      if (this.state.selectedGroup !== item.value) {
+        const {
+          data
+        } = this.state;
 
-    _classCallCheck(this, AGCDataContent);
+        const disabledButton = this._isDisabledButton(data, item.value);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(AGCDataContent).call(this, props));
-
-    _defineProperty(_assertThisInitialized(_this), "onGroupChange", function (item) {
-      if (_this.state.selectedGroup !== item.value) {
-        var data = _this.state.data;
-
-        var disabledButton = _this._isDisabledButton(data, item.value);
-
-        _this.setState({
+        this.setState({
           selectedGroup: item.value,
           disabledButton: disabledButton
         });
       }
     });
 
-    _defineProperty(_assertThisInitialized(_this), "onReset", function () {
-      _this._getData(_this.props.requestParam);
+    _defineProperty(this, "onReset", () => {
+      this._getData(this.props.requestParam);
     });
 
-    _defineProperty(_assertThisInitialized(_this), "onSubmit", function () {
-      var _this$state = _this.state,
-          selectedGroup = _this$state.selectedGroup,
-          data = _this$state.data,
-          setting = _this$state.setting;
+    _defineProperty(this, "onSubmit", () => {
+      const {
+        selectedGroup,
+        data,
+        setting
+      } = this.state;
 
-      var invalid = _this._isDisabledButton(data, selectedGroup);
+      const invalid = this._isDisabledButton(data, selectedGroup);
 
       if (invalid) {
-        _this.setState({
+        this.setState({
           disabledButton: true
         });
       } else {
-        _this._showConfirmation(function () {
-          return _this._submit(selectedGroup, setting.BetSetting.AgGroup);
-        });
+        this._showConfirmation(() => this._submit(selectedGroup, setting.BetSetting.AgGroup));
       }
     });
 
-    _defineProperty(_assertThisInitialized(_this), "onCloseAlert", function () {
-      _this.setState({
+    _defineProperty(this, "onCloseAlert", () => {
+      this.setState({
         disabledButton: false
-      }, function () {
-        return _this.props.setAlertOption({
-          isShow: false
-        });
-      });
+      }, () => this.props.setAlertOption({
+        isShow: false
+      }));
     });
 
-    _defineProperty(_assertThisInitialized(_this), "onRefresh", function () {
-      _this._getData(_this.props.requestParam);
+    _defineProperty(this, "onRefresh", () => {
+      this._getData(this.props.requestParam);
     });
 
-    _this.state = {
+    this.state = {
       data: null,
       setting: {},
       groups: [],
       selectedGroup: '',
       disabledButton: false
     };
-    return _this;
   }
 
-  _createClass(AGCDataContent, [{
-    key: "componentDidUpdate",
-    value: function componentDidUpdate(prevProps, prevState) {
-      if (prevState.data !== this.state.data) {
-        this.props.toggleLoader(false);
-        this.props.setAlertOption({
-          isShow: false
-        });
-      }
-    }
-  }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this._getData(this.props.requestParam);
-    }
-  }, {
-    key: "_isDisabledButton",
-    value: function _isDisabledButton(data, selectedGroup) {
-      if (!selectedGroup) {
-        return true;
-      }
-
-      var gamesHaveGroup = data.filter(function (x) {
-        return x.Groups.find(function (g) {
-          return g.GroupType === selectedGroup;
-        });
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.data !== this.state.data) {
+      this.props.toggleLoader(false);
+      this.props.setAlertOption({
+        isShow: false
       });
-      return !gamesHaveGroup || gamesHaveGroup.length !== data.length;
     }
-  }, {
-    key: "_updateState",
-    value: function _updateState(data, setting) {
-      if (setting.BetSetting) {
-        var groups = setting.BetSetting ? setting.BetSetting.CheckedGroups.map(function (x) {
-          return {
-            value: x,
-            label: x
-          };
-        }) : [];
+  }
 
-        var disabledButton = this._isDisabledButton(data, setting.BetSetting.AgGroup);
+  componentDidMount() {
+    this._getData(this.props.requestParam);
+  }
 
-        this.setState({
-          data: data,
-          setting: setting,
-          groups: groups,
-          selectedGroup: setting.BetSetting.AgGroup,
-          disabledButton: disabledButton
-        });
-      }
+  _isDisabledButton(data, selectedGroup) {
+    if (!selectedGroup) {
+      return true;
     }
-  }, {
-    key: "_getData",
-    value: function _getData(param) {
-      this.props.toggleLoader(true);
-      _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__["default"].getData(param, this._updateState.bind(this));
-    }
-  }, {
-    key: "_submit",
-    value: function _submit(group, oldGroup) {
-      this.props.toggleLoader(true);
-      var param = Object.assign({}, this.props.requestParam, {
-        Setting: {
-          group: group,
-          oldGroup: oldGroup
-        }
-      });
-      _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__["default"].updateData(param, this._showSubmitResult.bind(this));
-    }
-  }, {
-    key: "_showConfirmation",
-    value: function _showConfirmation(onOK) {
-      var _this2 = this;
 
-      var onClose = function onClose() {
-        return _this2.onCloseAlert(false);
-      };
+    const gamesHaveGroup = data.filter(x => x.Groups.find(g => g.GroupType === selectedGroup));
+    return !gamesHaveGroup || gamesHaveGroup.length !== data.length;
+  }
 
-      var buttons = [{
-        text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('OK'),
-        onClick: onOK,
-        className: 'btn btn-apply'
-      }, {
-        text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Cancel'),
-        onClick: onClose,
-        className: 'btn btn-cancel'
-      }];
-      var msg = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        className: "center-align"
-      }, _lib_utility__WEBPACK_IMPORTED_MODULE_5__["default"].getConfirmationMsg(this.props.requestParam.ProductId));
+  _updateState(data, setting) {
+    if (setting.BetSetting) {
+      const groups = setting.BetSetting ? setting.BetSetting.CheckedGroups.map(x => {
+        return {
+          value: x,
+          label: x
+        };
+      }) : [];
+
+      const disabledButton = this._isDisabledButton(data, setting.BetSetting.AgGroup);
+
       this.setState({
-        disabledButton: true
-      }, function () {
-        return _this2.props.setAlertOption({
-          isShow: true,
-          title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Confirmation'),
-          children: msg,
-          buttons: buttons,
-          icon: '',
-          onClose: onClose,
-          height: 130
-        });
-      });
-    }
-  }, {
-    key: "_showSubmitResult",
-    value: function _showSubmitResult(title, msg, isSuccess) {
-      var _this3 = this;
-
-      var content = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        className: "center-align"
-      }, msg);
-      var buttons = [{
-        text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('OK'),
-        onClick: this.onRefresh,
-        className: 'btn btn-apply btn-alone'
-      }];
-      this.setState({
-        disabledButton: true
-      }, function () {
-        _this3.props.setAlertOption({
-          isShow: true,
-          title: title,
-          children: content,
-          onClose: _this3.onRefresh,
-          icon: isSuccess ? 'success' : 'error',
-          height: 225,
-          buttons: buttons
-        });
-
-        _this3.props.toggleLoader(false);
-      });
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this$state2 = this.state,
-          data = _this$state2.data,
-          setting = _this$state2.setting;
-
-      if (setting.BetSetting && !setting.BetSetting.IsLineEnabled) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_9__["default"], {
-          title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('AGCasinoNotOfferCurrency')
-        });
-      }
-
-      if (data === null) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_9__["default"], null);
-      }
-
-      var _this$state3 = this.state,
-          groups = _this$state3.groups,
-          selectedGroup = _this$state3.selectedGroup,
-          disabledButton = _this$state3.disabledButton;
-      var hasData = data.length > 0;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "pa-betlimit"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "pa-betlimit-group row"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-12 col-md-4 col-sm-12 col-lg-3 col-xl-2"
-      }, setting.BetSetting.IsEnabled && hasData ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "label-text"
-      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('BetSettingGroups')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_7__["default"], {
-        instanceId: "ddlGroup",
-        value: selectedGroup,
-        options: groups,
-        onChange: this.onGroupChange
-      })) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "".concat(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('BetSettingGroups'), " :"), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "disabled-text"
-      }, setting.BetSetting.AgGroup)))), hasData ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_sport_settings_AGCSettingGrid__WEBPACK_IMPORTED_MODULE_8__["default"], {
         data: data,
-        isEnabled: setting.BetSetting.IsEnabled,
-        group: selectedGroup
-      }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_9__["default"], {
-        title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('ProblemDisplayBetSetting')
-      }), setting.Editable && hasData && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "pa-betlimit-button"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        type: "button",
-        className: "btn btn-cancel",
-        disabled: disabledButton,
-        onClick: this.onReset
-      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Reset')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        type: "button",
-        className: "btn btn-apply",
-        disabled: disabledButton,
-        onClick: this.onSubmit
-      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Submit'))));
+        setting: setting,
+        groups: groups,
+        selectedGroup: setting.BetSetting.AgGroup,
+        disabledButton: disabledButton
+      });
     }
-  }]);
+  }
 
-  return AGCDataContent;
-}(react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"]);
+  _getData(param) {
+    this.props.toggleLoader(true);
+    _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__["default"].getData(param, this._updateState.bind(this));
+  }
+
+  _submit(group, oldGroup) {
+    this.props.toggleLoader(true);
+    const param = Object.assign({}, this.props.requestParam, {
+      Setting: {
+        group,
+        oldGroup
+      }
+    });
+    _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__["default"].updateData(param, this._showSubmitResult.bind(this));
+  }
+
+  _showConfirmation(onOK) {
+    const onClose = () => this.onCloseAlert(false);
+
+    const buttons = [{
+      text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('OK'),
+      onClick: onOK,
+      className: 'btn btn-apply'
+    }, {
+      text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Cancel'),
+      onClick: onClose,
+      className: 'btn btn-cancel'
+    }];
+    const msg = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "center-align"
+    }, _lib_utility__WEBPACK_IMPORTED_MODULE_5__["default"].getConfirmationMsg(this.props.requestParam.ProductId));
+    this.setState({
+      disabledButton: true
+    }, () => this.props.setAlertOption({
+      isShow: true,
+      title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Confirmation'),
+      children: msg,
+      buttons: buttons,
+      icon: '',
+      onClose: onClose,
+      height: 130
+    }));
+  }
+
+  _showSubmitResult(title, msg, isSuccess) {
+    const content = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "center-align"
+    }, msg);
+    const buttons = [{
+      text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('OK'),
+      onClick: this.onRefresh,
+      className: 'btn btn-apply btn-alone'
+    }];
+    this.setState({
+      disabledButton: true
+    }, () => {
+      this.props.setAlertOption({
+        isShow: true,
+        title: title,
+        children: content,
+        onClose: this.onRefresh,
+        icon: isSuccess ? 'success' : 'error',
+        height: 225,
+        buttons: buttons
+      });
+      this.props.toggleLoader(false);
+    });
+  }
+
+  render() {
+    const {
+      data,
+      setting
+    } = this.state;
+
+    if (setting.BetSetting && !setting.BetSetting.IsLineEnabled) {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('AGCasinoNotOfferCurrency')
+      });
+    }
+
+    if (data === null) {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_9__["default"], null);
+    }
+
+    const {
+      groups,
+      selectedGroup,
+      disabledButton
+    } = this.state;
+    const hasData = data.length > 0;
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "pa-betlimit"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "pa-betlimit-group row"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-12 col-md-4 col-sm-12 col-lg-3 col-xl-2"
+    }, setting.BetSetting.IsEnabled && hasData ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "form-group"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      className: "label-text"
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('BetSettingGroups')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      instanceId: "ddlGroup",
+      value: selectedGroup,
+      options: groups,
+      onChange: this.onGroupChange
+    })) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, `${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('BetSettingGroups')} :`, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      className: "disabled-text"
+    }, setting.BetSetting.AgGroup)))), hasData ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_sport_settings_AGCSettingGrid__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      data: data,
+      isEnabled: setting.BetSetting.IsEnabled,
+      group: selectedGroup
+    }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('ProblemDisplayBetSetting')
+    }), setting.Editable && hasData && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "pa-betlimit-button"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      type: "button",
+      className: "btn btn-cancel",
+      disabled: disabledButton,
+      onClick: this.onReset
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Reset')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      type: "button",
+      className: "btn btn-apply",
+      disabled: disabledButton,
+      onClick: this.onSubmit
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Submit'))));
+  }
+
+}
 
 function mapDispatchToProps(dispatch) {
-  var toggleLoader = _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"].toggleLoader,
-      setAlertOption = _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"].setAlertOption;
+  const {
+    toggleLoader,
+    setAlertOption
+  } = _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"];
   return Object(redux__WEBPACK_IMPORTED_MODULE_3__["bindActionCreators"])({
-    toggleLoader: toggleLoader,
-    setAlertOption: setAlertOption
+    toggleLoader,
+    setAlertOption
   }, dispatch);
 }
 
 function mapStateToProps(state) {
-  var requestParam = state.requestParam;
+  const {
+    requestParam
+  } = state;
   return Object.assign({}, {
-    requestParam: requestParam
+    requestParam
   });
 }
 
@@ -1300,9 +1194,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var Content = Object(_base_SettingContent__WEBPACK_IMPORTED_MODULE_2__["default"])(_base_SettingGrid__WEBPACK_IMPORTED_MODULE_3__["default"], new _lib_gameSettingDataHandling__WEBPACK_IMPORTED_MODULE_1__["default"]());
+const Content = Object(_base_SettingContent__WEBPACK_IMPORTED_MODULE_2__["default"])(_base_SettingGrid__WEBPACK_IMPORTED_MODULE_3__["default"], new _lib_gameSettingDataHandling__WEBPACK_IMPORTED_MODULE_1__["default"]());
 
-var GameDataContent = function GameDataContent() {
+const GameDataContent = () => {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Content, null);
 };
 
@@ -1328,9 +1222,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var Content = Object(_base_SettingContent__WEBPACK_IMPORTED_MODULE_2__["default"])(_sport_settings_NGSettingGrid__WEBPACK_IMPORTED_MODULE_3__["default"], new _lib_ngDataHandling__WEBPACK_IMPORTED_MODULE_1__["default"]());
+const Content = Object(_base_SettingContent__WEBPACK_IMPORTED_MODULE_2__["default"])(_sport_settings_NGSettingGrid__WEBPACK_IMPORTED_MODULE_3__["default"], new _lib_ngDataHandling__WEBPACK_IMPORTED_MODULE_1__["default"]());
 
-var NGDataContent = function NGDataContent() {
+const NGDataContent = () => {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Content, null);
 };
 
@@ -1356,9 +1250,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var Content = Object(_base_SettingContent__WEBPACK_IMPORTED_MODULE_2__["default"])(_base_SettingGrid__WEBPACK_IMPORTED_MODULE_3__["default"], new _lib_dataHandling__WEBPACK_IMPORTED_MODULE_1__["default"]());
+const Content = Object(_base_SettingContent__WEBPACK_IMPORTED_MODULE_2__["default"])(_base_SettingGrid__WEBPACK_IMPORTED_MODULE_3__["default"], new _lib_dataHandling__WEBPACK_IMPORTED_MODULE_1__["default"]());
 
-var SportDataContent = function SportDataContent() {
+const SportDataContent = () => {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Content, null);
 };
 
@@ -1383,19 +1277,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var AGCSettingGrid = function AGCSettingGrid(props) {
-  var data = props.data,
-      isEnabled = props.isEnabled,
-      group = props.group;
+const AGCSettingGrid = props => {
+  const {
+    data,
+    isEnabled,
+    group
+  } = props;
 
-  var buildBody = function buildBody() {
-    var rows = [];
+  const buildBody = () => {
+    let rows = [];
 
-    for (var i = 0; i < data.length; i++) {
-      var game = data[i];
-      var gameGroup = game.Groups.find(function (x) {
-        return x.GroupType === group;
-      });
+    for (let i = 0; i < data.length; i++) {
+      const game = data[i];
+      const gameGroup = game.Groups.find(x => x.GroupType === group);
       rows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
         key: game.GameType
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, game.Name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
@@ -1444,16 +1338,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var NGSettingGrid = function NGSettingGrid(props) {
-  var setting = props.setting,
-      data = props.data,
-      onChange = props.onChange;
-  var setInputRef = props.setInputRef;
+const NGSettingGrid = props => {
+  const {
+    setting,
+    data,
+    onChange
+  } = props;
+  const setInputRef = props.setInputRef;
 
-  var onInputChange = function onInputChange(type, id, value) {
-    var newData = data.map(function (e) {
+  const onInputChange = (type, id, value) => {
+    const newData = data.map(e => {
       if (e.Id === id) {
-        var newItem = _objectSpread({}, e);
+        const newItem = _objectSpread({}, e);
 
         newItem[type] = value;
         return newItem;
@@ -1464,13 +1360,13 @@ var NGSettingGrid = function NGSettingGrid(props) {
     onChange(newData);
   };
 
-  var onInputBlur = function onInputBlur(type, id, value) {
-    var newValue = _lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(_lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].getValueAsNumber(value));
+  const onInputBlur = (type, id, value) => {
+    const newValue = _lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(_lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].getValueAsNumber(value));
 
     if (newValue !== value) {
-      var newData = data.map(function (e) {
+      const newData = data.map(e => {
         if (e.Id === id) {
-          var newItem = _objectSpread({}, e);
+          const newItem = _objectSpread({}, e);
 
           newItem[type] = newValue;
           return newItem;
@@ -1482,44 +1378,38 @@ var NGSettingGrid = function NGSettingGrid(props) {
     }
   };
 
-  var buildCell = function buildCell(type, value, disabled) {
-    var isChanged = value[type] !== value['Original' + type];
+  const buildCell = (type, value, disabled) => {
+    const isChanged = value[type] !== value['Original' + type];
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       className: isChanged ? _lib_constants__WEBPACK_IMPORTED_MODULE_3__["InputClassName"].OnChangedClassName : _lib_constants__WEBPACK_IMPORTED_MODULE_3__["InputClassName"].ClassName,
       type: "text",
-      ref: function ref(e) {
-        return setInputRef(type, value.Id, e);
-      },
+      ref: e => setInputRef(type, value.Id, e),
       autoComplete: "off",
       maxLength: "14",
       value: value[type],
-      onChange: function onChange(e) {
-        return onInputChange(type, value.Id, e.target.value);
-      },
-      onBlur: function onBlur(e) {
-        return onInputBlur(type, value.Id, e.target.value);
-      },
+      onChange: e => onInputChange(type, value.Id, e.target.value),
+      onBlur: e => onInputBlur(type, value.Id, e.target.value),
       disabled: disabled
     });
   };
 
-  var buildBody = function buildBody(editable, data) {
-    var rows = [];
+  const buildBody = (editable, data) => {
+    let rows = [];
 
-    for (var i = 0; i < data.length; i++) {
-      var item = data[i];
-      var disabled = !editable;
+    for (let i = 0; i < data.length; i++) {
+      const item = data[i];
+      const disabled = !editable;
       rows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
         key: item.Id
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, item.BetSettingType), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
         className: "pa-betlimit-cell"
-      }, buildCell(_lib_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitType"].MinBet, item, disabled), item.BetValueMin > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " >= ".concat(_lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(item.BetValueMin)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+      }, buildCell(_lib_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitType"].MinBet, item, disabled), item.BetValueMin > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, ` >= ${_lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(item.BetValueMin)}`)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
         className: "pa-betlimit-cell"
-      }, buildCell(_lib_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitType"].MaxBet, item, disabled), item.BetValueMax > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " <= ".concat(_lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(item.BetValueMax)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+      }, buildCell(_lib_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitType"].MaxBet, item, disabled), item.BetValueMax > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, ` <= ${_lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(item.BetValueMax)}`)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
         className: "pa-betlimit-cell"
-      }, buildCell(_lib_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitType"].MaxPerMatch, item, disabled), item.MaxPerMatchMax > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " <= ".concat(_lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(item.MaxPerMatchMax)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+      }, buildCell(_lib_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitType"].MaxPerMatch, item, disabled), item.MaxPerMatchMax > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, ` <= ${_lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(item.MaxPerMatchMax)}`)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
         className: "pa-betlimit-cell"
-      }, buildCell(_lib_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitType"].MaxPerBall, item, disabled), item.MaxPerBallMax > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " <= ".concat(_lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(item.MaxPerBallMax))))));
+      }, buildCell(_lib_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitType"].MaxPerBall, item, disabled), item.MaxPerBallMax > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, ` <= ${_lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(item.MaxPerBallMax)}`))));
     }
 
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, rows);
@@ -1559,11 +1449,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var defaultState = Object.assign({}, window.initialState, {
+const defaultState = Object.assign({}, window.initialState, {
   isLoading: false
 });
-var store = _jsroot_lib_store__WEBPACK_IMPORTED_MODULE_5__["default"].createStore(_reducers_index_js__WEBPACK_IMPORTED_MODULE_4__["default"], defaultState);
-var App = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function () {
+const store = _jsroot_lib_store__WEBPACK_IMPORTED_MODULE_5__["default"].createStore(_reducers_index_js__WEBPACK_IMPORTED_MODULE_4__["default"], defaultState);
+const App = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(() => {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_3__["Provider"], {
     store: store
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AppContainer_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null));
@@ -1584,7 +1474,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BetLimitProduct", function() { return BetLimitProduct; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BetLimitType", function() { return BetLimitType; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "InputClassName", function() { return InputClassName; });
-var BetLimitProduct = {
+const BetLimitProduct = {
   SB: 0,
   VS: 5,
   VS2: 27,
@@ -1593,13 +1483,13 @@ var BetLimitProduct = {
   KN: 8,
   AGC: 10
 };
-var BetLimitType = {
+const BetLimitType = {
   MinBet: 'MinBet',
   MaxBet: 'MaxBet',
   MaxPerMatch: 'MaxPerMatch',
   MaxPerBall: 'MaxPerBall'
 };
-var InputClassName = {
+const InputClassName = {
   ClassName: 'input-text right-align',
   OnChangedClassName: 'input-text right-align input-changed'
 };
@@ -1619,122 +1509,96 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _validatation__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./validatation */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/validatation.js");
 /* harmony import */ var _utility__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utility */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/utility.js");
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
 
-
-
-var DataHandling =
-/*#__PURE__*/
-function () {
-  function DataHandling() {
-    _classCallCheck(this, DataHandling);
+class DataHandling {
+  getViewData(rawData) {
+    return rawData.map(rawRow => {
+      return this.getViewRowData(rawRow);
+    });
   }
 
-  _createClass(DataHandling, [{
-    key: "getViewData",
-    value: function getViewData(rawData) {
-      var _this = this;
+  getViewRowData(rawData) {
+    let row = {
+      Id: rawData.Id,
+      BetType: rawData.BetType,
+      BetSettingType: rawData.BetSettingType,
+      MinBet: _utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(rawData.MinBet),
+      MaxBet: _utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(rawData.MaxBet),
+      MaxPerMatch: _utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(rawData.MaxPerMatch),
+      BetValueMin: rawData.BetValueMin,
+      BetValueMax: rawData.BetValueMax,
+      MaxPerMatchMin: rawData.MaxPerMatchMin,
+      MaxPerMatchMax: rawData.MaxPerMatchMax,
+      OldMinBet: rawData.MinBet,
+      OldMaxBet: rawData.MaxBet,
+      OldMaxPerMatch: rawData.MaxPerMatch
+    };
+    row.OriginalMinBet = row.MinBet;
+    row.OriginalMaxBet = row.MaxBet;
+    row.OriginalMaxPerMatch = row.MaxPerMatch;
+    return row;
+  }
 
-      return rawData.map(function (rawRow) {
-        return _this.getViewRowData(rawRow);
-      });
-    }
-  }, {
-    key: "getViewRowData",
-    value: function getViewRowData(rawData) {
-      var row = {
-        Id: rawData.Id,
-        BetType: rawData.BetType,
-        BetSettingType: rawData.BetSettingType,
-        MinBet: _utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(rawData.MinBet),
-        MaxBet: _utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(rawData.MaxBet),
-        MaxPerMatch: _utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(rawData.MaxPerMatch),
-        BetValueMin: rawData.BetValueMin,
-        BetValueMax: rawData.BetValueMax,
-        MaxPerMatchMin: rawData.MaxPerMatchMin,
-        MaxPerMatchMax: rawData.MaxPerMatchMax,
-        OldMinBet: rawData.MinBet,
-        OldMaxBet: rawData.MaxBet,
-        OldMaxPerMatch: rawData.MaxPerMatch
-      };
-      row.OriginalMinBet = row.MinBet;
-      row.OriginalMaxBet = row.MaxBet;
-      row.OriginalMaxPerMatch = row.MaxPerMatch;
-      return row;
-    }
-  }, {
-    key: "getSubmitRowData",
-    value: function getSubmitRowData(row) {
-      return {
-        Id: row.Id,
-        BetType: row.BetType,
-        BetSettingType: row.BetSettingType,
-        MinBet: _utility__WEBPACK_IMPORTED_MODULE_1__["default"].getValueAsNumber(row.MinBet),
-        MaxBet: _utility__WEBPACK_IMPORTED_MODULE_1__["default"].getValueAsNumber(row.MaxBet),
-        MaxPerMatch: _utility__WEBPACK_IMPORTED_MODULE_1__["default"].getValueAsNumber(row.MaxPerMatch),
-        OldMinBet: row.OldMinBet,
-        OldMaxBet: row.OldMaxBet,
-        OldMaxPerMatch: row.OldMaxPerMatch,
-        IsUpdated: row.MinBet !== row.OriginalMinBet || row.MaxBet !== row.OriginalMaxBet || row.MaxPerMatch !== row.OriginalMaxPerMatch
-      };
-    }
-  }, {
-    key: "getSubmitData",
-    value: function getSubmitData(rows) {
-      var submitData = [];
+  getSubmitRowData(row) {
+    return {
+      Id: row.Id,
+      BetType: row.BetType,
+      BetSettingType: row.BetSettingType,
+      MinBet: _utility__WEBPACK_IMPORTED_MODULE_1__["default"].getValueAsNumber(row.MinBet),
+      MaxBet: _utility__WEBPACK_IMPORTED_MODULE_1__["default"].getValueAsNumber(row.MaxBet),
+      MaxPerMatch: _utility__WEBPACK_IMPORTED_MODULE_1__["default"].getValueAsNumber(row.MaxPerMatch),
+      OldMinBet: row.OldMinBet,
+      OldMaxBet: row.OldMaxBet,
+      OldMaxPerMatch: row.OldMaxPerMatch,
+      IsUpdated: row.MinBet !== row.OriginalMinBet || row.MaxBet !== row.OriginalMaxBet || row.MaxPerMatch !== row.OriginalMaxPerMatch
+    };
+  }
 
-      for (var i = 0; i < rows.length; i++) {
-        var row = rows[i];
-        var currentValue = this.getSubmitRowData(row);
-        var invalidData = this.validate(currentValue, row);
+  getSubmitData(rows) {
+    const submitData = [];
 
-        if (invalidData !== null) {
-          return {
-            IsValid: false,
-            Data: invalidData
-          };
-        }
+    for (let i = 0; i < rows.length; i++) {
+      const row = rows[i];
+      const currentValue = this.getSubmitRowData(row);
+      const invalidData = this.validate(currentValue, row);
 
-        submitData.push(currentValue);
+      if (invalidData !== null) {
+        return {
+          IsValid: false,
+          Data: invalidData
+        };
       }
 
-      return {
-        IsValid: true,
-        Data: submitData
-      };
+      submitData.push(currentValue);
     }
-  }, {
-    key: "validate",
-    value: function validate(currentValue, row) {
-      if (!currentValue.IsUpdated) {
-        return null;
-      }
 
-      var validateMinMaxBet = _validatation__WEBPACK_IMPORTED_MODULE_0__["default"].validateMinMaxBet(currentValue, row);
+    return {
+      IsValid: true,
+      Data: submitData
+    };
+  }
 
-      if (validateMinMaxBet !== null) {
-        return validateMinMaxBet;
-      }
-
-      return _validatation__WEBPACK_IMPORTED_MODULE_0__["default"].validateMaxPerMatch(currentValue, row);
+  validate(currentValue, row) {
+    if (!currentValue.IsUpdated) {
+      return null;
     }
-  }, {
-    key: "getHeaderName",
-    value: function getHeaderName(header) {
-      return _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource(header);
+
+    const validateMinMaxBet = _validatation__WEBPACK_IMPORTED_MODULE_0__["default"].validateMinMaxBet(currentValue, row);
+
+    if (validateMinMaxBet !== null) {
+      return validateMinMaxBet;
     }
-  }]);
 
-  return DataHandling;
-}();
+    return _validatation__WEBPACK_IMPORTED_MODULE_0__["default"].validateMaxPerMatch(currentValue, row);
+  }
 
+  getHeaderName(header) {
+    return _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource(header);
+  }
 
+}
 
 /***/ }),
 
@@ -1752,68 +1616,54 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/DataService */ "./www/js/source/reactpages/lib/DataService.js");
 /* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./constants */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/constants.js");
-var _Url;
-
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
 
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
 
-
-var Url = (_Url = {}, _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].SB, 'SportsBookBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].VS, 'DcsBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].VS2, 'DcsBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].LT, 'DcsBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].NG, 'NumberGameBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].KN, 'RngKenoBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].AGC, 'AGCasinoBetLimit'), _Url);
-
-var DataTransfer =
-/*#__PURE__*/
-function () {
-  function DataTransfer() {
-    _classCallCheck(this, DataTransfer);
-  }
-
-  _createClass(DataTransfer, null, [{
-    key: "getData",
-    value: function getData(param, callBack) {
-      var url = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].resolveClientUrl(Url[param.ProductId] + '/GetSetting');
-      _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_1__["default"].postData(url, param).then(function (response) {
-        var _response$data = response.data,
-            Data = _response$data.Data,
+const Url = {
+  [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].SB]: 'SportsBookBetLimit',
+  [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].VS]: 'DcsBetLimit',
+  [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].VS2]: 'DcsBetLimit',
+  [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].LT]: 'DcsBetLimit',
+  [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].NG]: 'NumberGameBetLimit',
+  [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].KN]: 'RngKenoBetLimit',
+  [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].AGC]: 'AGCasinoBetLimit'
+};
+class DataTransfer {
+  static getData(param, callBack) {
+    const url = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].resolveClientUrl(Url[param.ProductId] + '/GetSetting');
+    _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_1__["default"].postData(url, param).then(response => {
+      const _response$data = response.data,
+            {
+        Data
+      } = _response$data,
             setting = _objectWithoutProperties(_response$data, ["Data"]);
 
-        callBack && callBack(Data, setting);
-      })["catch"](function (error) {
-        console.log(error.message);
-        callBack && callBack([], {});
-      });
-    }
-  }, {
-    key: "updateData",
-    value: function updateData(param, callBack) {
-      var url = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].resolveClientUrl(Url[param.ProductId] + '/UpdateSetting');
-      _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_1__["default"].postData(url, param).then(function (response) {
-        var result = response.data;
-        var isSuccess = Number(result.Code) === 0;
-        var title = isSuccess ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('MessageSuccess') : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Fail');
-        callBack && callBack(title, result.Message, isSuccess);
-      })["catch"](function (error) {
-        console.log(error.message);
-        callBack(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Error'), _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('ErrorProcessingMsg'), false);
-      });
-    }
-  }]);
+      callBack && callBack(Data, setting);
+    }).catch(error => {
+      console.log(error.message);
+      callBack && callBack([], {});
+    });
+  }
 
-  return DataTransfer;
-}();
+  static updateData(param, callBack) {
+    const url = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].resolveClientUrl(Url[param.ProductId] + '/UpdateSetting');
+    _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_1__["default"].postData(url, param).then(response => {
+      const result = response.data;
+      const isSuccess = Number(result.Code) === 0;
+      const title = isSuccess ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('MessageSuccess') : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Fail');
+      callBack && callBack(title, result.Message, isSuccess);
+    }).catch(error => {
+      console.log(error.message);
+      callBack(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Error'), _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('ErrorProcessingMsg'), false);
+    });
+  }
 
-
+}
 
 /***/ }),
 
@@ -1829,76 +1679,36 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return GameSettingDataHandling; });
 /* harmony import */ var _validatation__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./validatation */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/validatation.js");
 /* harmony import */ var _dataHandling__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dataHandling */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/dataHandling.js");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
-
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
+class GameSettingDataHandling extends _dataHandling__WEBPACK_IMPORTED_MODULE_1__["default"] {
+  validate(currentValue, row) {
+    if (!currentValue.IsUpdated) {
+      return null;
+    }
 
+    const validateMinMaxBet = _validatation__WEBPACK_IMPORTED_MODULE_0__["default"].validateMinMaxBet(currentValue, row);
 
-var GameSettingDataHandling =
-/*#__PURE__*/
-function (_DataHandling) {
-  _inherits(GameSettingDataHandling, _DataHandling);
+    if (validateMinMaxBet !== null) {
+      return validateMinMaxBet;
+    }
 
-  function GameSettingDataHandling() {
-    _classCallCheck(this, GameSettingDataHandling);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(GameSettingDataHandling).apply(this, arguments));
+    return _validatation__WEBPACK_IMPORTED_MODULE_0__["default"].validateMaxBetPerDraw(currentValue, row);
   }
 
-  _createClass(GameSettingDataHandling, [{
-    key: "validate",
-    value: function validate(currentValue, row) {
-      if (!currentValue.IsUpdated) {
-        return null;
-      }
-
-      var validateMinMaxBet = _validatation__WEBPACK_IMPORTED_MODULE_0__["default"].validateMinMaxBet(currentValue, row);
-
-      if (validateMinMaxBet !== null) {
-        return validateMinMaxBet;
-      }
-
-      return _validatation__WEBPACK_IMPORTED_MODULE_0__["default"].validateMaxBetPerDraw(currentValue, row);
+  getHeaderName(header) {
+    if (header === 'Sport') {
+      return super.getHeaderName('GameType');
     }
-  }, {
-    key: "getHeaderName",
-    value: function getHeaderName(header) {
-      if (header === 'Sport') {
-        return _get(_getPrototypeOf(GameSettingDataHandling.prototype), "getHeaderName", this).call(this, 'GameType');
-      }
 
-      if (header === 'MaxPerMatch') {
-        return _get(_getPrototypeOf(GameSettingDataHandling.prototype), "getHeaderName", this).call(this, 'MaxBetPerDraw');
-      }
-
-      return _get(_getPrototypeOf(GameSettingDataHandling.prototype), "getHeaderName", this).call(this, header);
+    if (header === 'MaxPerMatch') {
+      return super.getHeaderName('MaxBetPerDraw');
     }
-  }]);
 
-  return GameSettingDataHandling;
-}(_dataHandling__WEBPACK_IMPORTED_MODULE_1__["default"]);
+    return super.getHeaderName(header);
+  }
 
-
+}
 
 /***/ }),
 
@@ -1915,106 +1725,62 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _validatation__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./validatation */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/validatation.js");
 /* harmony import */ var _utility__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utility */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/utility.js");
 /* harmony import */ var _dataHandling__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dataHandling */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/dataHandling.js");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
-
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
 
-
-
-var NGDataHandling =
-/*#__PURE__*/
-function (_DataHandling) {
-  _inherits(NGDataHandling, _DataHandling);
-
-  function NGDataHandling() {
-    _classCallCheck(this, NGDataHandling);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(NGDataHandling).apply(this, arguments));
+class NGDataHandling extends _dataHandling__WEBPACK_IMPORTED_MODULE_2__["default"] {
+  getViewRowData(rawData) {
+    let row = super.getViewRowData(rawData);
+    row.MaxPerBall = _utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(rawData.MaxPerBall);
+    row.OldMaxPerBall = rawData.MaxPerBall;
+    row.MaxPerBallMax = rawData.MaxPerBallMax;
+    row.OriginalMaxPerBall = row.MaxPerBall;
+    return row;
   }
 
-  _createClass(NGDataHandling, [{
-    key: "getViewRowData",
-    value: function getViewRowData(rawData) {
-      var row = _get(_getPrototypeOf(NGDataHandling.prototype), "getViewRowData", this).call(this, rawData);
+  getSubmitRowData(row) {
+    let data = super.getSubmitRowData(row);
+    data.MaxPerBall = _utility__WEBPACK_IMPORTED_MODULE_1__["default"].getValueAsNumber(row.MaxPerBall);
+    data.OldMaxPerBall = row.OldMaxPerBall;
+    data.IsUpdated = data.IsUpdated || row.MaxPerBall !== row.OriginalMaxPerBall;
+    return data;
+  }
 
-      row.MaxPerBall = _utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(rawData.MaxPerBall);
-      row.OldMaxPerBall = rawData.MaxPerBall;
-      row.MaxPerBallMax = rawData.MaxPerBallMax;
-      row.OriginalMaxPerBall = row.MaxPerBall;
-      return row;
-    }
-  }, {
-    key: "getSubmitRowData",
-    value: function getSubmitRowData(row) {
-      var data = _get(_getPrototypeOf(NGDataHandling.prototype), "getSubmitRowData", this).call(this, row);
+  getSubmitData(rows) {
+    const submitData = [];
 
-      data.MaxPerBall = _utility__WEBPACK_IMPORTED_MODULE_1__["default"].getValueAsNumber(row.MaxPerBall);
-      data.OldMaxPerBall = row.OldMaxPerBall;
-      data.IsUpdated = data.IsUpdated || row.MaxPerBall !== row.OriginalMaxPerBall;
-      return data;
-    }
-  }, {
-    key: "getSubmitData",
-    value: function getSubmitData(rows) {
-      var submitData = [];
+    for (let i = 0; i < rows.length; i++) {
+      const row = rows[i];
+      const currentValue = this.getSubmitRowData(row);
+      const invalidData = this.validate(currentValue, row);
 
-      for (var i = 0; i < rows.length; i++) {
-        var row = rows[i];
-        var currentValue = this.getSubmitRowData(row);
-        var invalidData = this.validate(currentValue, row);
-
-        if (invalidData !== null) {
-          return {
-            IsValid: false,
-            Data: invalidData
-          };
-        }
-
-        submitData.push(currentValue);
+      if (invalidData !== null) {
+        return {
+          IsValid: false,
+          Data: invalidData
+        };
       }
 
-      return {
-        IsValid: true,
-        Data: submitData
-      };
+      submitData.push(currentValue);
     }
-  }, {
-    key: "validate",
-    value: function validate(currentValue, row) {
-      var validatationResult = _get(_getPrototypeOf(NGDataHandling.prototype), "validate", this).call(this, currentValue, row);
 
-      if (validatationResult !== null) {
-        return validatationResult;
-      }
+    return {
+      IsValid: true,
+      Data: submitData
+    };
+  }
 
-      return _validatation__WEBPACK_IMPORTED_MODULE_0__["default"].validateMaxPerBall(currentValue, row);
+  validate(currentValue, row) {
+    const validatationResult = super.validate(currentValue, row);
+
+    if (validatationResult !== null) {
+      return validatationResult;
     }
-  }]);
 
-  return NGDataHandling;
-}(_dataHandling__WEBPACK_IMPORTED_MODULE_2__["default"]);
+    return _validatation__WEBPACK_IMPORTED_MODULE_0__["default"].validateMaxPerBall(currentValue, row);
+  }
 
-
+}
 
 /***/ }),
 
@@ -2031,74 +1797,57 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/numberFormat */ "./www/js/source/reactpages/lib/numberFormat.js");
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./constants */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/constants.js");
-var _ConfirmationMsg;
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
+const ConfirmationMsg = {
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].SB]: {
+    Msg: 'UpdateSportsbookBetSettings'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].VS]: {
+    Msg: 'UpdateProductBetSettings',
+    Product: 'ProductVS'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].VS2]: {
+    Msg: 'UpdateProductBetSettings',
+    Product: 'ProductVS2'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].LT]: {
+    Msg: 'UpdateProductBetSettings',
+    Product: 'ProductLT'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].NG]: {
+    Msg: 'UpdateNumberGameBetSettings'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].KN]: {
+    Msg: 'UpdateProductBetSettings',
+    Product: 'ProductKN'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].AGC]: {
+    Msg: 'UpdateAgCasinoBetSettings'
+  }
+};
+class Utility {
+  static getConfirmationMsg(productId) {
+    const message = _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource(ConfirmationMsg[productId].Msg);
 
-var ConfirmationMsg = (_ConfirmationMsg = {}, _defineProperty(_ConfirmationMsg, _constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].SB, {
-  Msg: 'UpdateSportsbookBetSettings'
-}), _defineProperty(_ConfirmationMsg, _constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].VS, {
-  Msg: 'UpdateProductBetSettings',
-  Product: 'ProductVS'
-}), _defineProperty(_ConfirmationMsg, _constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].VS2, {
-  Msg: 'UpdateProductBetSettings',
-  Product: 'ProductVS2'
-}), _defineProperty(_ConfirmationMsg, _constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].LT, {
-  Msg: 'UpdateProductBetSettings',
-  Product: 'ProductLT'
-}), _defineProperty(_ConfirmationMsg, _constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].NG, {
-  Msg: 'UpdateNumberGameBetSettings'
-}), _defineProperty(_ConfirmationMsg, _constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].KN, {
-  Msg: 'UpdateProductBetSettings',
-  Product: 'ProductKN'
-}), _defineProperty(_ConfirmationMsg, _constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].AGC, {
-  Msg: 'UpdateAgCasinoBetSettings'
-}), _ConfirmationMsg);
+    if (!ConfirmationMsg[productId].Product) {
+      return message;
+    }
 
-var Utility =
-/*#__PURE__*/
-function () {
-  function Utility() {
-    _classCallCheck(this, Utility);
+    return message.replace('{0}', _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource(ConfirmationMsg[productId].Product));
   }
 
-  _createClass(Utility, null, [{
-    key: "getConfirmationMsg",
-    value: function getConfirmationMsg(productId) {
-      var message = _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource(ConfirmationMsg[productId].Msg);
+  static formatValue(number) {
+    return _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_1__["default"].parseToString(number);
+  }
 
-      if (!ConfirmationMsg[productId].Product) {
-        return message;
-      }
+  static getValueAsNumber(text) {
+    const number = parseFloat(text.replace(/,/g, ''));
+    return !isNaN(number) && isFinite(number) ? _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_1__["default"].round(number, 2) : NaN;
+  }
 
-      return message.replace('{0}', _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource(ConfirmationMsg[productId].Product));
-    }
-  }, {
-    key: "formatValue",
-    value: function formatValue(number) {
-      return _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_1__["default"].parseToString(number);
-    }
-  }, {
-    key: "getValueAsNumber",
-    value: function getValueAsNumber(text) {
-      var number = parseFloat(text.replace(/,/g, ''));
-      return !isNaN(number) && isFinite(number) ? _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_1__["default"].round(number, 2) : NaN;
-    }
-  }]);
-
-  return Utility;
-}();
-
-
+}
 
 /***/ }),
 
@@ -2114,184 +1863,170 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Validatation; });
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./constants */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/constants.js");
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
+class Validatation {
+  static validateMinMaxBet(current, limitData) {
+    const {
+      MinBet,
+      MaxBet,
+      MaxPerMatch,
+      Id
+    } = current;
 
+    if (isNaN(MinBet)) {
+      return {
+        Id: Id,
+        Type: _constants__WEBPACK_IMPORTED_MODULE_1__["BetLimitType"].MinBet,
+        Message: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('IncorrectMinBet')
+      };
+    }
 
-var Validatation =
-/*#__PURE__*/
-function () {
-  function Validatation() {
-    _classCallCheck(this, Validatation);
+    if (isNaN(MaxBet)) {
+      return {
+        Id: Id,
+        Type: _constants__WEBPACK_IMPORTED_MODULE_1__["BetLimitType"].MaxBet,
+        Message: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('IncorrectMaxBet')
+      };
+    }
+
+    if (limitData.BetValueMin > 0 && MinBet < limitData.BetValueMin) {
+      return {
+        Id: Id,
+        Type: _constants__WEBPACK_IMPORTED_MODULE_1__["BetLimitType"].MinBet,
+        Message: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('MinBetGreaterThanOrEqual') + ' ' + limitData.BetValueMin
+      };
+    }
+
+    if (limitData.BetValueMax > 0 && MaxBet > limitData.BetValueMax) {
+      return {
+        Id: Id,
+        Type: _constants__WEBPACK_IMPORTED_MODULE_1__["BetLimitType"].MaxBet,
+        Message: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('MaxBetLessThanOrEqual') + ' ' + limitData.BetValueMax
+      };
+    }
+
+    if (MinBet > MaxBet) {
+      return {
+        Id: Id,
+        Type: _constants__WEBPACK_IMPORTED_MODULE_1__["BetLimitType"].MinBet,
+        Message: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('MinBetCanNotGreaterThanMaxBet') + ' ' + MaxBet
+      };
+    }
+
+    return null;
   }
 
-  _createClass(Validatation, null, [{
-    key: "validateMinMaxBet",
-    value: function validateMinMaxBet(current, limitData) {
-      var MinBet = current.MinBet,
-          MaxBet = current.MaxBet,
-          MaxPerMatch = current.MaxPerMatch,
-          Id = current.Id;
+  static validateMaxPerMatch(current, limitData) {
+    const {
+      MaxBet,
+      MaxPerMatch,
+      Id
+    } = current;
 
-      if (isNaN(MinBet)) {
-        return {
-          Id: Id,
-          Type: _constants__WEBPACK_IMPORTED_MODULE_1__["BetLimitType"].MinBet,
-          Message: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('IncorrectMinBet')
-        };
-      }
-
-      if (isNaN(MaxBet)) {
-        return {
-          Id: Id,
-          Type: _constants__WEBPACK_IMPORTED_MODULE_1__["BetLimitType"].MaxBet,
-          Message: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('IncorrectMaxBet')
-        };
-      }
-
-      if (limitData.BetValueMin > 0 && MinBet < limitData.BetValueMin) {
-        return {
-          Id: Id,
-          Type: _constants__WEBPACK_IMPORTED_MODULE_1__["BetLimitType"].MinBet,
-          Message: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('MinBetGreaterThanOrEqual') + ' ' + limitData.BetValueMin
-        };
-      }
-
-      if (limitData.BetValueMax > 0 && MaxBet > limitData.BetValueMax) {
-        return {
-          Id: Id,
-          Type: _constants__WEBPACK_IMPORTED_MODULE_1__["BetLimitType"].MaxBet,
-          Message: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('MaxBetLessThanOrEqual') + ' ' + limitData.BetValueMax
-        };
-      }
-
-      if (MinBet > MaxBet) {
-        return {
-          Id: Id,
-          Type: _constants__WEBPACK_IMPORTED_MODULE_1__["BetLimitType"].MinBet,
-          Message: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('MinBetCanNotGreaterThanMaxBet') + ' ' + MaxBet
-        };
-      }
-
-      return null;
+    if (isNaN(MaxPerMatch)) {
+      return {
+        Id: Id,
+        Type: _constants__WEBPACK_IMPORTED_MODULE_1__["BetLimitType"].MaxPerMatch,
+        Message: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('IncorrectMaxPerMatch')
+      };
     }
-  }, {
-    key: "validateMaxPerMatch",
-    value: function validateMaxPerMatch(current, limitData) {
-      var MaxBet = current.MaxBet,
-          MaxPerMatch = current.MaxPerMatch,
-          Id = current.Id;
 
-      if (isNaN(MaxPerMatch)) {
-        return {
-          Id: Id,
-          Type: _constants__WEBPACK_IMPORTED_MODULE_1__["BetLimitType"].MaxPerMatch,
-          Message: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('IncorrectMaxPerMatch')
-        };
-      }
-
-      if (limitData.MaxPerMatchMax > 0 && MaxPerMatch > limitData.MaxPerMatchMax) {
-        return {
-          Id: Id,
-          Type: _constants__WEBPACK_IMPORTED_MODULE_1__["BetLimitType"].MaxPerMatch,
-          Message: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('MaxBetMatchMoreThanOrEqual') + ' ' + limitData.MaxPerMatchMax
-        };
-      }
-
-      if (limitData.MaxPerMatchMin > 0 && MaxPerMatch < limitData.MaxPerMatchMin) {
-        return {
-          Id: Id,
-          Type: _constants__WEBPACK_IMPORTED_MODULE_1__["BetLimitType"].MaxPerMatch,
-          Message: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('MaxBetMatchLessThanOrEqual') + ' ' + limitData.MaxPerMatchMin
-        };
-      }
-
-      if (MaxBet > MaxPerMatch) {
-        return {
-          Id: Id,
-          Type: _constants__WEBPACK_IMPORTED_MODULE_1__["BetLimitType"].MaxBet,
-          Message: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('MaxBetCanNotGreaterThanMaxPerMatch') + ' ' + MaxPerMatch
-        };
-      }
-
-      return null;
+    if (limitData.MaxPerMatchMax > 0 && MaxPerMatch > limitData.MaxPerMatchMax) {
+      return {
+        Id: Id,
+        Type: _constants__WEBPACK_IMPORTED_MODULE_1__["BetLimitType"].MaxPerMatch,
+        Message: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('MaxBetMatchMoreThanOrEqual') + ' ' + limitData.MaxPerMatchMax
+      };
     }
-  }, {
-    key: "validateMaxBetPerDraw",
-    value: function validateMaxBetPerDraw(current, limitData) {
-      var MaxBet = current.MaxBet,
-          MaxPerMatch = current.MaxPerMatch,
-          Id = current.Id;
 
-      if (isNaN(MaxPerMatch)) {
-        return {
-          Id: Id,
-          Type: _constants__WEBPACK_IMPORTED_MODULE_1__["BetLimitType"].MaxPerMatch,
-          Message: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('IncorrectMaxBetPerDraw')
-        };
-      }
-
-      if (limitData.MaxPerMatchMax > 0 && MaxPerMatch > limitData.MaxPerMatchMax) {
-        return {
-          Id: Id,
-          Type: _constants__WEBPACK_IMPORTED_MODULE_1__["BetLimitType"].MaxPerMatch,
-          Message: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('MaxBetPerDrawMoreThanOrEqual') + ' ' + limitData.MaxPerMatchMax
-        };
-      }
-
-      if (limitData.MaxPerMatchMin > 0 && MaxPerMatch < limitData.MaxPerMatchMin) {
-        return {
-          Id: Id,
-          Type: _constants__WEBPACK_IMPORTED_MODULE_1__["BetLimitType"].MaxPerMatch,
-          Message: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('MaxBetPerDrawLessThanOrEqual') + ' ' + limitData.MaxPerMatchMin
-        };
-      }
-
-      if (MaxBet > MaxPerMatch) {
-        return {
-          Id: Id,
-          Type: _constants__WEBPACK_IMPORTED_MODULE_1__["BetLimitType"].MaxBet,
-          Message: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('MaxBetCanNotGreaterThanMaxBetPerDraw') + ' ' + MaxPerMatch
-        };
-      }
-
-      return null;
+    if (limitData.MaxPerMatchMin > 0 && MaxPerMatch < limitData.MaxPerMatchMin) {
+      return {
+        Id: Id,
+        Type: _constants__WEBPACK_IMPORTED_MODULE_1__["BetLimitType"].MaxPerMatch,
+        Message: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('MaxBetMatchLessThanOrEqual') + ' ' + limitData.MaxPerMatchMin
+      };
     }
-  }, {
-    key: "validateMaxPerBall",
-    value: function validateMaxPerBall(current, limitData) {
-      var MaxPerBall = current.MaxPerBall,
-          Id = current.Id;
 
-      if (isNaN(MaxPerBall)) {
-        return {
-          Id: Id,
-          Type: _constants__WEBPACK_IMPORTED_MODULE_1__["BetLimitType"].MaxPerBall,
-          Message: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('IncorrectMaxPerBall')
-        };
-      }
-
-      if (limitData.MaxPerBallMax > 0 && MaxPerBall > limitData.MaxPerBallMax) {
-        return {
-          Id: Id,
-          Type: _constants__WEBPACK_IMPORTED_MODULE_1__["BetLimitType"].MaxPerBall,
-          Message: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('MaxPerBallLessThanOrEqual') + ' ' + limitData.MaxPerBallMax
-        };
-      }
-
-      return null;
+    if (MaxBet > MaxPerMatch) {
+      return {
+        Id: Id,
+        Type: _constants__WEBPACK_IMPORTED_MODULE_1__["BetLimitType"].MaxBet,
+        Message: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('MaxBetCanNotGreaterThanMaxPerMatch') + ' ' + MaxPerMatch
+      };
     }
-  }]);
 
-  return Validatation;
-}();
+    return null;
+  }
 
+  static validateMaxBetPerDraw(current, limitData) {
+    const {
+      MaxBet,
+      MaxPerMatch,
+      Id
+    } = current;
 
+    if (isNaN(MaxPerMatch)) {
+      return {
+        Id: Id,
+        Type: _constants__WEBPACK_IMPORTED_MODULE_1__["BetLimitType"].MaxPerMatch,
+        Message: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('IncorrectMaxBetPerDraw')
+      };
+    }
+
+    if (limitData.MaxPerMatchMax > 0 && MaxPerMatch > limitData.MaxPerMatchMax) {
+      return {
+        Id: Id,
+        Type: _constants__WEBPACK_IMPORTED_MODULE_1__["BetLimitType"].MaxPerMatch,
+        Message: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('MaxBetPerDrawMoreThanOrEqual') + ' ' + limitData.MaxPerMatchMax
+      };
+    }
+
+    if (limitData.MaxPerMatchMin > 0 && MaxPerMatch < limitData.MaxPerMatchMin) {
+      return {
+        Id: Id,
+        Type: _constants__WEBPACK_IMPORTED_MODULE_1__["BetLimitType"].MaxPerMatch,
+        Message: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('MaxBetPerDrawLessThanOrEqual') + ' ' + limitData.MaxPerMatchMin
+      };
+    }
+
+    if (MaxBet > MaxPerMatch) {
+      return {
+        Id: Id,
+        Type: _constants__WEBPACK_IMPORTED_MODULE_1__["BetLimitType"].MaxBet,
+        Message: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('MaxBetCanNotGreaterThanMaxBetPerDraw') + ' ' + MaxPerMatch
+      };
+    }
+
+    return null;
+  }
+
+  static validateMaxPerBall(current, limitData) {
+    const {
+      MaxPerBall,
+      Id
+    } = current;
+
+    if (isNaN(MaxPerBall)) {
+      return {
+        Id: Id,
+        Type: _constants__WEBPACK_IMPORTED_MODULE_1__["BetLimitType"].MaxPerBall,
+        Message: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('IncorrectMaxPerBall')
+      };
+    }
+
+    if (limitData.MaxPerBallMax > 0 && MaxPerBall > limitData.MaxPerBallMax) {
+      return {
+        Id: Id,
+        Type: _constants__WEBPACK_IMPORTED_MODULE_1__["BetLimitType"].MaxPerBall,
+        Message: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('MaxPerBallLessThanOrEqual') + ' ' + limitData.MaxPerBallMax
+      };
+    }
+
+    return null;
+  }
+
+}
 
 /***/ }),
 
@@ -2307,13 +2042,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "alertOption", function() { return alertOption; });
 /* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/actions/types.js");
 /* harmony import */ var _jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
+const alertOption = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, {
+  [_actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_ALERT_OPTION"]](state, action) {
+    return Object.assign({}, state, action.data);
+  }
 
-var alertOption = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, _defineProperty({}, _actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_ALERT_OPTION"], function (state, action) {
-  return Object.assign({}, state, action.data);
-}));
+});
 
 /***/ }),
 
@@ -2350,7 +2086,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toggleLoader", function() { return toggleLoader; });
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/actions/types.js");
 
-var toggleLoader = function toggleLoader(show) {
+const toggleLoader = show => {
   return {
     type: _types__WEBPACK_IMPORTED_MODULE_0__["TOGGLE_LOADER"],
     data: show
@@ -2371,7 +2107,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setRequestParam", function() { return setRequestParam; });
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/actions/types.js");
 
-var setRequestParam = function setRequestParam(data) {
+const setRequestParam = data => {
   return {
     type: _types__WEBPACK_IMPORTED_MODULE_0__["SET_REQUEST_PARAM"],
     data: data
@@ -2408,49 +2144,49 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_REQUEST_PARAM", function() { return SET_REQUEST_PARAM; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_REPORT_TITLE", function() { return SET_REPORT_TITLE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_PAGING_OPTION", function() { return SET_PAGING_OPTION; });
-var FETCH_DATA = 'FETCH_DATA';
-var SET_GRID_DATA = "SET_GRID_DATA";
+const FETCH_DATA = 'FETCH_DATA';
+const SET_GRID_DATA = "SET_GRID_DATA";
 /* Product */
 
-var SET_SELECTED_PRODUCT = "SET_SELECTED_PRODUCT";
+const SET_SELECTED_PRODUCT = "SET_SELECTED_PRODUCT";
 /* Base Currency */
 
-var SET_SELECTED_BASECURRENCY = "SET_SELECTED_BASECURRENCY";
-var SET_BASECURRENCY_LIST = "SET_BASECURRENCY_LIST";
+const SET_SELECTED_BASECURRENCY = "SET_SELECTED_BASECURRENCY";
+const SET_BASECURRENCY_LIST = "SET_BASECURRENCY_LIST";
 /* Currency */
 
-var SET_SELECTED_CURRENCY = "SET_SELECTED_CURRENCY";
+const SET_SELECTED_CURRENCY = "SET_SELECTED_CURRENCY";
 /* Loader */
 
-var TOGGLE_LOADER = "TOGGLE_LOADER";
+const TOGGLE_LOADER = "TOGGLE_LOADER";
 /* Exclude Test Data */
 
-var CHANGE_IS_EXCLUDE_TEST = "CHANGE_IS_EXCLUDE_TEST";
+const CHANGE_IS_EXCLUDE_TEST = "CHANGE_IS_EXCLUDE_TEST";
 /* User mini guide */
 
-var USER_GUIDE_CONTENT = "USER_GUIDE_CONTENT;";
+const USER_GUIDE_CONTENT = "USER_GUIDE_CONTENT;";
 /* Date range */
 
-var SET_DATE_RANGE = 'SET_DATE_RANGE';
-var GET_DATE_CONSTRAINT = 'GET_DATE_CONSTRAINT';
+const SET_DATE_RANGE = 'SET_DATE_RANGE';
+const GET_DATE_CONSTRAINT = 'GET_DATE_CONSTRAINT';
 /* Convert all figures to base currency */
 
-var CHANGE_IS_CONVERT_ALL = "CHANGE_IS_CONVERT_ALL";
+const CHANGE_IS_CONVERT_ALL = "CHANGE_IS_CONVERT_ALL";
 /* Status */
 
-var SET_SELECTED_STATUS = "SET_SELECTED_STATUS";
+const SET_SELECTED_STATUS = "SET_SELECTED_STATUS";
 /* Platform  */
 
-var SET_SELECTED_PLATFORM = "SET_SELECTED_PLATFORM";
+const SET_SELECTED_PLATFORM = "SET_SELECTED_PLATFORM";
 /* Live Status  */
 
-var SET_SELECTED_LIVESTATUS = "SET_SELECTED_LIVESTATUS";
-var SET_USERNAME = "SET_USERNAME";
-var SET_REQUEST_PARAM = "SET_REQUEST_PARAM";
-var SET_REPORT_TITLE = "SET_REPORT_TITLE";
+const SET_SELECTED_LIVESTATUS = "SET_SELECTED_LIVESTATUS";
+const SET_USERNAME = "SET_USERNAME";
+const SET_REQUEST_PARAM = "SET_REQUEST_PARAM";
+const SET_REPORT_TITLE = "SET_REPORT_TITLE";
 /* Live Status  */
 
-var SET_PAGING_OPTION = 'SET_PAGING_OPTION';
+const SET_PAGING_OPTION = 'SET_PAGING_OPTION';
 
 /***/ }),
 
@@ -2470,105 +2206,76 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
 
 
-var Balloon =
-/*#__PURE__*/
-function (_PureComponent) {
-  _inherits(Balloon, _PureComponent);
-
-  function Balloon(props) {
-    var _this;
-
-    _classCallCheck(this, Balloon);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Balloon).call(this, props));
-    _this.box = props.forwardedRef;
-    _this.state = {
+class Balloon extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
+  constructor(props) {
+    super(props);
+    this.box = props.forwardedRef;
+    this.state = {
       top: 0,
       left: 0
     };
-    return _this;
   }
 
-  _createClass(Balloon, [{
-    key: "componentDidUpdate",
-    value: function componentDidUpdate(prevProps) {
-      var _this$props = this.props,
-          targetTop = _this$props.targetTop,
-          targetLeft = _this$props.targetLeft,
-          width = _this$props.width;
+  componentDidUpdate(prevProps) {
+    const {
+      targetTop,
+      targetLeft,
+      width
+    } = this.props;
 
-      if (!prevProps.isOpen && this.props.isOpen && (prevProps.targetTop !== targetTop || prevProps.targetLeft !== targetLeft || prevProps.msg !== this.props.msg)) {
-        this.setState({
-          left: targetLeft - width / 2,
-          top: targetTop - (this.box.current ? this.box.current.clientHeight : 0) - 20
-        });
+    if (!prevProps.isOpen && this.props.isOpen && (prevProps.targetTop !== targetTop || prevProps.targetLeft !== targetLeft || prevProps.msg !== this.props.msg)) {
+      this.setState({
+        left: targetLeft - width / 2,
+        top: targetTop - (this.box.current ? this.box.current.clientHeight : 0) - 20
+      });
+    }
+  }
+
+  render() {
+    const {
+      msg,
+      targetTop,
+      targetLeft,
+      width,
+      isOpen
+    } = this.props;
+    const {
+      top,
+      left
+    } = this.state;
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "balloon",
+      style: {
+        top: top,
+        left: left,
+        display: isOpen ? 'block' : 'none'
+      },
+      ref: this.box
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "balloon-msg",
+      style: {
+        width: width
       }
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this$props2 = this.props,
-          msg = _this$props2.msg,
-          targetTop = _this$props2.targetTop,
-          targetLeft = _this$props2.targetLeft,
-          width = _this$props2.width,
-          isOpen = _this$props2.isOpen;
-      var _this$state = this.state,
-          top = _this$state.top,
-          left = _this$state.left;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "balloon",
-        style: {
-          top: top,
-          left: left,
-          display: isOpen ? 'block' : 'none'
-        },
-        ref: this.box
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "balloon-msg",
-        style: {
-          width: width
-        }
-      }, msg), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "balloon-arrow-border",
-        style: {
-          left: (width - 10) / 2
-        }
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "balloon-arrow",
-        style: {
-          left: (width - 10) / 2
-        }
-      }));
-    }
-  }]);
+    }, msg), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "balloon-arrow-border",
+      style: {
+        left: (width - 10) / 2
+      }
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "balloon-arrow",
+      style: {
+        left: (width - 10) / 2
+      }
+    }));
+  }
 
-  return Balloon;
-}(react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"]);
+}
 
 _defineProperty(Balloon, "propTypes", {
   isOpen: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool,
@@ -2586,7 +2293,7 @@ _defineProperty(Balloon, "defaultProps", {
   width: 0
 });
 
-var balloonWithRef = react__WEBPACK_IMPORTED_MODULE_0___default.a.forwardRef(function (props, ref) {
+const balloonWithRef = react__WEBPACK_IMPORTED_MODULE_0___default.a.forwardRef((props, ref) => {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Balloon, _extends({}, props, {
     forwardedRef: ref
   }));
@@ -2610,7 +2317,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 
 
-var CheckBox = react__WEBPACK_IMPORTED_MODULE_0___default.a.forwardRef(function (props, ref) {
+const CheckBox = react__WEBPACK_IMPORTED_MODULE_0___default.a.forwardRef((props, ref) => {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "checkbox-group",
     ref: ref
@@ -2620,9 +2327,7 @@ var CheckBox = react__WEBPACK_IMPORTED_MODULE_0___default.a.forwardRef(function 
     id: props.id,
     checked: props.checked,
     disabled: props.disabled,
-    onChange: function onChange() {
-      return props.onChange(!props.checked);
-    }
+    onChange: () => props.onChange(!props.checked)
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
     htmlFor: props.id
   }, props.label));
@@ -2638,7 +2343,7 @@ CheckBox.defaultProps = {
   label: '',
   checked: true,
   disabled: false,
-  onChange: function onChange() {}
+  onChange: function () {}
 };
 /* harmony default export */ __webpack_exports__["default"] = (CheckBox);
 
@@ -2657,12 +2362,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
 
-var Loader = function Loader(_ref) {
-  var isLoading = _ref.isLoading;
+const Loader = ({
+  isLoading
+}) => {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "loading-process default",
     style: {
-      display: "".concat(isLoading ? 'block' : 'none')
+      display: `${isLoading ? 'block' : 'none'}`
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "icon-loading"
@@ -2690,8 +2396,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var NoDataTitle = function NoDataTitle(_ref) {
-  var title = _ref.title;
+const NoDataTitle = ({
+  title
+}) => {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "no-info-row center-align",
     dangerouslySetInnerHTML: {
@@ -2720,138 +2427,109 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
 
-var wrapperClasses = {
+const wrapperClasses = {
   OVERLAY: "overlay",
   OVERLAY_OPEN: "overlay-open"
 };
+class Overlay extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+  constructor(props) {
+    super(props);
 
-var Overlay =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(Overlay, _Component);
-
-  function Overlay(props) {
-    var _this;
-
-    _classCallCheck(this, Overlay);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Overlay).call(this, props));
-
-    _defineProperty(_assertThisInitialized(_this), "_unRegisterEvents", function () {
-      var closeOnOutsideClick = _this.props.closeOnOutsideClick;
+    _defineProperty(this, "_unRegisterEvents", () => {
+      const {
+        closeOnOutsideClick
+      } = this.props;
 
       if (closeOnOutsideClick) {
-        document.removeEventListener('click', _this._handleClickOutSide);
+        document.removeEventListener('click', this._handleClickOutSide);
       }
     });
 
-    _defineProperty(_assertThisInitialized(_this), "_handleClickOutSide", function (event) {
-      var clickOutside = _this.containerElement && !_this.containerElement.contains(event.target);
+    _defineProperty(this, "_handleClickOutSide", event => {
+      const clickOutside = this.containerElement && !this.containerElement.contains(event.target);
 
-      if (clickOutside && _this.state.isOpening) {
-        _this._close();
+      if (clickOutside && this.state.isOpening) {
+        this._close();
       }
     });
 
-    _this.containerElement = null;
-    _this.refHandlers = {
-      container: function container(ref) {
-        _this.containerElement = ref;
+    this.containerElement = null;
+    this.refHandlers = {
+      container: ref => {
+        this.containerElement = ref;
       }
     };
-    _this.state = {
-      isOpening: _this.props.isOpening
+    this.state = {
+      isOpening: this.props.isOpening
     };
-    return _this;
   }
 
-  _createClass(Overlay, [{
-    key: "componentDidUpdate",
-    value: function componentDidUpdate(prevProps, prevState) {
-      var _this2 = this;
-
-      if (this.props.isOpening !== prevProps.isOpening) {
-        var onOpen = this.props.onOpen;
-        this.props.isOpening && onOpen && onOpen();
-        this.setState({
-          isOpening: this.props.isOpening
-        });
-        window.setTimeout(function () {
-          if (_this2.props.isOpening) {
-            _this2._registerEvents();
-          } else {
-            _this2._unRegisterEvents();
-          }
-        }, 0);
-      }
-    }
-  }, {
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      this._unRegisterEvents();
-    }
-  }, {
-    key: "_registerEvents",
-    value: function _registerEvents() {
-      var closeOnOutsideClick = this.props.closeOnOutsideClick;
-
-      if (closeOnOutsideClick) {
-        document.addEventListener('click', this._handleClickOutSide);
-      }
-    }
-  }, {
-    key: "_close",
-    value: function _close() {
-      var onClose = this.props.onClose;
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.isOpening !== prevProps.isOpening) {
+      const {
+        onOpen
+      } = this.props;
+      this.props.isOpening && onOpen && onOpen();
       this.setState({
-        isOpening: false
-      }, function () {
-        return onClose && onClose();
+        isOpening: this.props.isOpening
       });
+      window.setTimeout(() => {
+        if (this.props.isOpening) {
+          this._registerEvents();
+        } else {
+          this._unRegisterEvents();
+        }
+      }, 0);
     }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this$props = this.props,
-          className = _this$props.className,
-          children = _this$props.children;
-      var mergedClassName = classnames__WEBPACK_IMPORTED_MODULE_2___default()(wrapperClasses.OVERLAY, _defineProperty({}, wrapperClasses.OVERLAY_OPEN, this.state.isOpening), className);
-      var style = {
-        display: this.state.isOpening ? "block" : "none"
-      };
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: mergedClassName,
-        style: style,
-        ref: this.refHandlers.container
-      }, children);
-    }
-  }]);
+  }
 
-  return Overlay;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+  componentWillUnmount() {
+    this._unRegisterEvents();
+  }
+
+  _registerEvents() {
+    const {
+      closeOnOutsideClick
+    } = this.props;
+
+    if (closeOnOutsideClick) {
+      document.addEventListener('click', this._handleClickOutSide);
+    }
+  }
+
+  _close() {
+    const {
+      onClose
+    } = this.props;
+    this.setState({
+      isOpening: false
+    }, () => onClose && onClose());
+  }
+
+  render() {
+    const {
+      className,
+      children
+    } = this.props;
+    const mergedClassName = classnames__WEBPACK_IMPORTED_MODULE_2___default()(wrapperClasses.OVERLAY, {
+      [wrapperClasses.OVERLAY_OPEN]: this.state.isOpening
+    }, className);
+    const style = {
+      display: this.state.isOpening ? "block" : "none"
+    };
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: mergedClassName,
+      style: style,
+      ref: this.refHandlers.container
+    }, children);
+  }
+
+}
 
 _defineProperty(Overlay, "propTypes", {
   closeOnOutsideClick: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
@@ -2864,8 +2542,6 @@ _defineProperty(Overlay, "defaultProps", {
   closeOnOutsideClick: true,
   isOpening: false
 });
-
-
 
 /***/ }),
 
@@ -2887,15 +2563,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var Popup = function Popup(props) {
-  var title = props.title,
-      isShow = props.isShow,
-      width = props.width,
-      height = props.height,
-      isHtml = props.isHtml,
-      children = props.children,
-      iframeUrl = props.iframeUrl;
-  var content;
+const Popup = props => {
+  const {
+    title,
+    isShow,
+    width,
+    height,
+    isHtml,
+    children,
+    iframeUrl
+  } = props;
+  let content;
 
   if (iframeUrl) {
     content = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("iframe", {
@@ -2916,7 +2594,7 @@ var Popup = function Popup(props) {
   }
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "popup-container ".concat(isShow ? 'show' : 'hide')
+    className: `popup-container ${isShow ? 'show' : 'hide'}`
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "popup-block-body"
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2931,7 +2609,7 @@ var Popup = function Popup(props) {
     className: "txt-title"
   }, title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     className: "popup-close",
-    onClick: function onClick() {
+    onClick: () => {
       props.onClose && props.onClose();
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
@@ -2970,8 +2648,8 @@ Popup.defaultProps = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DEFAULT_WIDTH", function() { return DEFAULT_WIDTH; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DEFAULT_HEIGHT", function() { return DEFAULT_HEIGHT; });
-var DEFAULT_WIDTH = '55%';
-var DEFAULT_HEIGHT = '55%';
+const DEFAULT_WIDTH = '55%';
+const DEFAULT_HEIGHT = '55%';
 
 /***/ }),
 
@@ -3003,20 +2681,35 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "errorIconMarkup", function() { return errorIconMarkup; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "warningIconMarkup", function() { return warningIconMarkup; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "successIconMarkup", function() { return successIconMarkup; });
-var ICON = 'swal-icon';
-var errorIconMarkup = function errorIconMarkup() {
-  var icon = "".concat(ICON, "--error");
-  var line = "".concat(icon, "__line");
-  var markup = "\n    <div class=\"".concat(icon, "__x-mark\">\n      <span class=\"").concat(line, " ").concat(line, "--left\"></span>\n      <span class=\"").concat(line, " ").concat(line, "--right\"></span>\n    </div>\n  ");
+const ICON = 'swal-icon';
+const errorIconMarkup = () => {
+  const icon = `${ICON}--error`;
+  const line = `${icon}__line`;
+  const markup = `
+    <div class="${icon}__x-mark">
+      <span class="${line} ${line}--left"></span>
+      <span class="${line} ${line}--right"></span>
+    </div>
+  `;
   return markup;
 };
-var warningIconMarkup = function warningIconMarkup() {
-  var icon = "".concat(ICON, "--warning");
-  return "\n    <span class=\"".concat(icon, "__body\">\n      <span class=\"").concat(icon, "__dot\"></span>\n    </span>\n  ");
+const warningIconMarkup = () => {
+  const icon = `${ICON}--warning`;
+  return `
+    <span class="${icon}__body">
+      <span class="${icon}__dot"></span>
+    </span>
+  `;
 };
-var successIconMarkup = function successIconMarkup() {
-  var icon = "".concat(ICON, "--success");
-  return "\n    <span class=\"".concat(icon, "__line ").concat(icon, "__line--long\"></span>\n    <span class=\"").concat(icon, "__line ").concat(icon, "__line--tip\"></span>\n\n    <div class=\"").concat(icon, "__ring\"></div>\n    <div class=\"").concat(icon, "__hide-corners\"></div>\n  ");
+const successIconMarkup = () => {
+  const icon = `${ICON}--success`;
+  return `
+    <span class="${icon}__line ${icon}__line--long"></span>
+    <span class="${icon}__line ${icon}__line--tip"></span>
+
+    <div class="${icon}__ring"></div>
+    <div class="${icon}__hide-corners"></div>
+  `;
 };
 
 /***/ }),
@@ -3037,99 +2730,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _icon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./icon */ "./www/js/source/reactpages/components/sweet-alert/icon.js");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
 
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
 
 
-
-var PREDEFINED_ICONS = ["error", "warning", "success", "info"];
-var ICON_CONTENTS = {
+const PREDEFINED_ICONS = ["error", "warning", "success", "info"];
+const ICON_CONTENTS = {
   error: Object(_icon__WEBPACK_IMPORTED_MODULE_3__["errorIconMarkup"])(),
   warning: Object(_icon__WEBPACK_IMPORTED_MODULE_3__["warningIconMarkup"])(),
   success: Object(_icon__WEBPACK_IMPORTED_MODULE_3__["successIconMarkup"])()
 };
-var SweetAlert =
-/*#__PURE__*/
-function (_React$Component) {
-  _inherits(SweetAlert, _React$Component);
-
-  function SweetAlert(props) {
-    _classCallCheck(this, SweetAlert);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(SweetAlert).call(this, props));
+class SweetAlert extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
+  constructor(props) {
+    super(props);
   }
 
-  _createClass(SweetAlert, [{
-    key: "_buildButtonGroup",
-    value: function _buildButtonGroup(buttons) {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "al-button-container"
-      }, buttons.map(function (btnItem, index) {
-        var text = btnItem.text,
+  _buildButtonGroup(buttons) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "al-button-container"
+    }, buttons.map((btnItem, index) => {
+      const {
+        text
+      } = btnItem,
             attrs = _objectWithoutProperties(btnItem, ["text"]);
 
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", _extends({
-          key: index,
-          type: "button"
-        }, attrs), text);
-      }));
-    }
-  }, {
-    key: "_buildIcon",
-    value: function _buildIcon() {
-      var icon = this.props.icon;
-      var className = "".concat(_icon__WEBPACK_IMPORTED_MODULE_3__["ICON"], " ").concat(_icon__WEBPACK_IMPORTED_MODULE_3__["ICON"], "--").concat(icon);
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", _extends({
+        key: index,
+        type: "button"
+      }, attrs), text);
+    }));
+  }
 
-      if (PREDEFINED_ICONS.includes(icon)) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: className,
-          dangerouslySetInnerHTML: {
-            __html: ICON_CONTENTS[icon]
-          }
-        });
-      }
+  _buildIcon() {
+    const {
+      icon
+    } = this.props;
+    const className = `${_icon__WEBPACK_IMPORTED_MODULE_3__["ICON"]} ${_icon__WEBPACK_IMPORTED_MODULE_3__["ICON"]}--${icon}`;
 
-      return null;
+    if (PREDEFINED_ICONS.includes(icon)) {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: className,
+        dangerouslySetInnerHTML: {
+          __html: ICON_CONTENTS[icon]
+        }
+      });
     }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this$props = this.props,
-          buttons = _this$props.buttons,
-          children = _this$props.children,
+
+    return null;
+  }
+
+  render() {
+    const _this$props = this.props,
+          {
+      buttons,
+      children
+    } = _this$props,
           props = _objectWithoutProperties(_this$props, ["buttons", "children"]);
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "sweet-alert"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_popup__WEBPACK_IMPORTED_MODULE_1__["default"], props, this._buildIcon(), children, this._buildButtonGroup(buttons)));
-    }
-  }]);
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "sweet-alert"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_popup__WEBPACK_IMPORTED_MODULE_1__["default"], props, this._buildIcon(), children, this._buildButtonGroup(buttons)));
+  }
 
-  return SweetAlert;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+}
 SweetAlert.propTypes = {
   width: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string]),
   height: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string]),
@@ -3161,7 +2830,7 @@ SweetAlert.defaultProps = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "debuggingConfig", function() { return debuggingConfig; });
-var debuggingConfig = {
+const debuggingConfig = {
   name: "__lrfConfig__",
   env: "local"
 };
@@ -3180,51 +2849,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AppLayout; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-var AppLayout =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(AppLayout, _Component);
-
-  function AppLayout(props) {
-    _classCallCheck(this, AppLayout);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(AppLayout).call(this, props));
+class AppLayout extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+  constructor(props) {
+    super(props);
   }
 
-  _createClass(AppLayout, [{
-    key: "render",
-    value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "container",
-        className: "container-fluid"
-      }, this.props.children);
-    }
-  }]);
+  render() {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      id: "container",
+      className: "container-fluid"
+    }, this.props.children);
+  }
 
-  return AppLayout;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
-
-
+}
 
 /***/ }),
 
@@ -3254,56 +2892,35 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
-
-
-var DataService =
-/*#__PURE__*/
-function () {
-  function DataService() {
-    _classCallCheck(this, DataService);
+class DataService {
+  static getData(url, params) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(url, {
+      params: params
+    });
   }
 
-  _createClass(DataService, null, [{
-    key: "getData",
-    value: function getData(url, params) {
-      return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(url, {
-        params: params
-      });
-    }
-  }, {
-    key: "postData",
-    value: function postData(url, params) {
-      return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, params, {
-        headers: {
-          'X-Requested-With': 'XMLHttpRequest',
-          '__RequestVerificationToken': _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].getXsrfToken()
-        }
-      });
-    }
-  }, {
-    key: "getFile",
-    value: function getFile(url, params) {
-      return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, params, {
-        responseType: 'blob',
-        headers: {
-          'X-Requested-With': 'XMLHttpRequest',
-          '__RequestVerificationToken': _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].getXsrfToken()
-        }
-      });
-    }
-  }]);
+  static postData(url, params) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, params, {
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+        '__RequestVerificationToken': _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].getXsrfToken()
+      }
+    });
+  }
 
-  return DataService;
-}();
+  static getFile(url, params) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, params, {
+      responseType: 'blob',
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+        '__RequestVerificationToken': _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].getXsrfToken()
+      }
+    });
+  }
 
-
+}
 
 /***/ }),
 
@@ -3318,10 +2935,7 @@ function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return createReducer; });
 function createReducer(initialState, handlers) {
-  return function reducer() {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-    var action = arguments.length > 1 ? arguments[1] : undefined;
-
+  return function reducer(state = initialState, action) {
     if (handlers.hasOwnProperty(action.type)) {
       return handlers[action.type](state, action);
     } else {
@@ -3342,48 +2956,25 @@ function createReducer(initialState, handlers) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return LangHelper; });
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var DEFAULT_RESOURCE_NAME = "_language_en_US";
-var langCode = window.PageLanguage || "en-US";
-var resourceName = "_language_".concat(langCode.replace("-", "_"));
-
-var LangHelper =
-/*#__PURE__*/
-function () {
-  function LangHelper() {
-    _classCallCheck(this, LangHelper);
+const DEFAULT_RESOURCE_NAME = "_language_en_US";
+const langCode = window.PageLanguage || "en-US";
+const resourceName = `_language_${langCode.replace("-", "_")}`;
+class LangHelper {
+  static get currentLanguage() {
+    return langCode;
   }
 
-  _createClass(LangHelper, null, [{
-    key: "getSingleResource",
-    value: function getSingleResource(key) {
-      var langHandler = window[resourceName];
-      return langHandler && langHandler[key] || window[DEFAULT_RESOURCE_NAME] && window[DEFAULT_RESOURCE_NAME][key] || key;
-    }
-  }, {
-    key: "getResources",
-    value: function getResources(keys) {
-      var langHandler = window[resourceName];
-      return keys.map(function (key) {
-        return langHandler && langHandler[key] || window[DEFAULT_RESOURCE_NAME] && window[DEFAULT_RESOURCE_NAME][key] || key;
-      });
-    }
-  }, {
-    key: "currentLanguage",
-    get: function get() {
-      return langCode;
-    }
-  }]);
+  static getSingleResource(key) {
+    var langHandler = window[resourceName];
+    return langHandler && langHandler[key] || window[DEFAULT_RESOURCE_NAME] && window[DEFAULT_RESOURCE_NAME][key] || key;
+  }
 
-  return LangHelper;
-}();
+  static getResources(keys) {
+    var langHandler = window[resourceName];
+    return keys.map(key => langHandler && langHandler[key] || window[DEFAULT_RESOURCE_NAME] && window[DEFAULT_RESOURCE_NAME][key] || key);
+  }
 
-
+}
 
 /***/ }),
 
@@ -3400,41 +2991,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux-logger */ "./node_modules/redux-logger/dist/redux-logger.js");
 /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux_logger__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _constants_config__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../constants/config */ "./www/js/source/reactpages/constants/config.js");
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
+const isDev = "development" === "development";
+const configName = _constants_config__WEBPACK_IMPORTED_MODULE_1__["debuggingConfig"].name; // middleware that logs actions
 
-var isDev = "development" === "development";
-var configName = _constants_config__WEBPACK_IMPORTED_MODULE_1__["debuggingConfig"].name; // middleware that logs actions
-
-var loggerMiddleware = Object(redux_logger__WEBPACK_IMPORTED_MODULE_0__["createLogger"])({
-  predicate: function predicate(getState, action) {
-    return isDev || window[configName] && window[configName].env === _constants_config__WEBPACK_IMPORTED_MODULE_1__["debuggingConfig"].env && (!window[configName].actionFilter || window[configName].actionFilter === action.type);
-  }
+const loggerMiddleware = Object(redux_logger__WEBPACK_IMPORTED_MODULE_0__["createLogger"])({
+  predicate: (getState, action) => isDev || window[configName] && window[configName].env === _constants_config__WEBPACK_IMPORTED_MODULE_1__["debuggingConfig"].env && (!window[configName].actionFilter || window[configName].actionFilter === action.type)
 });
-
-var Logger =
-/*#__PURE__*/
-function () {
-  function Logger() {
-    _classCallCheck(this, Logger);
+class Logger {
+  static getLoggerMiddleware() {
+    return loggerMiddleware;
   }
 
-  _createClass(Logger, null, [{
-    key: "getLoggerMiddleware",
-    value: function getLoggerMiddleware() {
-      return loggerMiddleware;
-    }
-  }]);
-
-  return Logger;
-}();
-
-
+}
 
 /***/ }),
 
@@ -3448,55 +3018,32 @@ function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return NumberFormat; });
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var NumberFormat =
-/*#__PURE__*/
-function () {
-  function NumberFormat() {
-    _classCallCheck(this, NumberFormat);
+class NumberFormat {
+  static formatDecimal(value) {
+    return this.format(value, 2);
   }
 
-  _createClass(NumberFormat, null, [{
-    key: "formatDecimal",
-    value: function formatDecimal(value) {
-      return this.format(value, 2);
+  static format(value, digits = 0) {
+    if (typeof value !== "number" || isNaN(value)) {
+      return "";
     }
-  }, {
-    key: "format",
-    value: function format(value) {
-      var digits = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
-      if (typeof value !== "number" || isNaN(value)) {
-        return "";
-      }
+    const roundedValue = this.round(value, digits);
+    return roundedValue.toFixed(digits).replace(/(\d)(?=(\d{3})+(\.|$))/g, "$1,");
+  }
 
-      var roundedValue = this.round(value, digits);
-      return roundedValue.toFixed(digits).replace(/(\d)(?=(\d{3})+(\.|$))/g, "$1,");
-    }
-  }, {
-    key: "round",
-    value: function round(value, digits) {
-      var sign = value < 0 ? -1 : 1;
-      var absoluteValue = Math.abs(value);
-      var rounded = Number(Math.round(absoluteValue + 'e' + digits) + 'e-' + digits);
-      return sign * rounded;
-    }
-  }, {
-    key: "parseToString",
-    value: function parseToString(number) {
-      return number.toString().replace(/(\d)(?=(\d{3})+(\.|$))/g, "$1,");
-    }
-  }]);
+  static round(value, digits) {
+    const sign = value < 0 ? -1 : 1;
+    const absoluteValue = Math.abs(value);
+    const rounded = Number(Math.round(absoluteValue + 'e' + digits) + 'e-' + digits);
+    return sign * rounded;
+  }
 
-  return NumberFormat;
-}();
+  static parseToString(number) {
+    return number.toString().replace(/(\d)(?=(\d{3})+(\.|$))/g, "$1,");
+  }
 
-
+}
 
 /***/ }),
 
@@ -3510,89 +3057,64 @@ function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Site; });
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+const _rootUrl = window.rootUrl || "/";
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+let _xsrfToken = null;
+class Site {
+  static getXsrfToken() {
+    if (!_xsrfToken) {
+      _xsrfToken = document.querySelector("input[name=__RequestVerificationToken]").value;
+    }
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var _rootUrl = window.rootUrl || "/";
-
-var _xsrfToken = null;
-
-var Site =
-/*#__PURE__*/
-function () {
-  function Site() {
-    _classCallCheck(this, Site);
+    return _xsrfToken;
   }
 
-  _createClass(Site, null, [{
-    key: "getXsrfToken",
-    value: function getXsrfToken() {
-      if (!_xsrfToken) {
-        _xsrfToken = document.querySelector("input[name=__RequestVerificationToken]").value;
+  static resolveClientUrl(relativeUrl) {
+    return _rootUrl + relativeUrl;
+  }
+
+  static convertDateToString(date) {
+    return typeof date === "string" ? date : date.format("MM/DD/YYYY");
+  }
+
+  static asNull(text) {
+    if (text != null) {
+      text = text.trim();
+
+      if (text === '') {
+        return null;
       }
-
-      return _xsrfToken;
     }
-  }, {
-    key: "resolveClientUrl",
-    value: function resolveClientUrl(relativeUrl) {
-      return _rootUrl + relativeUrl;
-    }
-  }, {
-    key: "convertDateToString",
-    value: function convertDateToString(date) {
-      return typeof date === "string" ? date : date.format("MM/DD/YYYY");
-    }
-  }, {
-    key: "asNull",
-    value: function asNull(text) {
-      if (text != null) {
-        text = text.trim();
 
-        if (text === '') {
-          return null;
-        }
-      }
+    return text;
+  }
 
-      return text;
-    }
-  }, {
-    key: "downloadFile",
-    value: function downloadFile(data, fileName) {
-      var url = window.URL.createObjectURL(new Blob([data]));
-      var link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', fileName);
-      document.body.appendChild(link);
-      link.click();
-      link.parentNode.removeChild(link);
-      window.URL.revokeObjectURL(url);
-    }
-  }, {
-    key: "readAsJson",
-    value: function readAsJson(blob, callback) {
-      var reader = new FileReader();
+  static downloadFile(data, fileName) {
+    const url = window.URL.createObjectURL(new Blob([data]));
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', fileName);
+    document.body.appendChild(link);
+    link.click();
+    link.parentNode.removeChild(link);
+    window.URL.revokeObjectURL(url);
+  }
 
-      reader.onload = function () {
-        callback && callback(JSON.parse(reader.result));
-      };
+  static readAsJson(blob, callback) {
+    const reader = new FileReader();
 
-      reader.readAsText(blob);
-    }
-  }, {
-    key: "getRootUrl",
-    value: function getRootUrl() {
-      return _rootUrl;
-    }
-  }]);
+    reader.onload = function () {
+      callback && callback(JSON.parse(reader.result));
+    };
 
-  return Site;
-}();
+    reader.readAsText(blob);
+  }
 
+  static getRootUrl() {
+    return _rootUrl;
+  }
 
+}
 
 /***/ }),
 
@@ -3609,37 +3131,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
 /* harmony import */ var _logger__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./logger */ "./www/js/source/reactpages/lib/logger.js");
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
 
-
-
-var Store =
-/*#__PURE__*/
-function () {
-  function Store() {
-    _classCallCheck(this, Store);
+class Store {
+  static createStore(reducer, initialState) {
+    const loggerMiddleware = _logger__WEBPACK_IMPORTED_MODULE_2__["default"].getLoggerMiddleware();
+    const enhancer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["compose"])(Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"], // lets us dispatch() functions
+    loggerMiddleware));
+    return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(reducer, initialState, enhancer);
   }
 
-  _createClass(Store, null, [{
-    key: "createStore",
-    value: function createStore(reducer, initialState) {
-      var loggerMiddleware = _logger__WEBPACK_IMPORTED_MODULE_2__["default"].getLoggerMiddleware();
-      var enhancer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["compose"])(Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"], // lets us dispatch() functions
-      loggerMiddleware));
-      return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(reducer, initialState, enhancer);
-    }
-  }]);
-
-  return Store;
-}();
-
-
+}
 
 /***/ }),
 
@@ -3655,13 +3158,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isLoading", function() { return isLoading; });
 /* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./www/js/source/reactpages/actions/types.js");
 /* harmony import */ var _lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
+const isLoading = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, {
+  [_actions_types__WEBPACK_IMPORTED_MODULE_0__["TOGGLE_LOADER"]](state, action) {
+    return action.data;
+  }
 
-var isLoading = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, _defineProperty({}, _actions_types__WEBPACK_IMPORTED_MODULE_0__["TOGGLE_LOADER"], function (state, action) {
-  return action.data;
-}));
+});
 
 /***/ }),
 
@@ -3685,9 +3189,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var requestParam = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, _defineProperty({}, _actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_REQUEST_PARAM"], function (state, action) {
-  return _objectSpread({}, action.data);
-}));
+const requestParam = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, {
+  [_actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_REQUEST_PARAM"]](state, action) {
+    return _objectSpread({}, action.data);
+  }
+
+});
 
 /***/ })
 

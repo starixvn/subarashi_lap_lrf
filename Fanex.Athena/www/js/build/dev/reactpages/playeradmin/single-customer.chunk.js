@@ -148,7 +148,7 @@
 /******/
 /******/
 /******/ 	// add entry module to deferred list
-/******/ 	deferredModules.push(["./www/js/source/reactpages/Module/PlayerAdmin/single-customer/components/index.jsx","common"]);
+/******/ 	deferredModules.push(["./www/js/source/reactpages/Module/PlayerAdmin/single-customer/components/index.jsx","lib/common"]);
 /******/ 	// run deferred modules when ready
 /******/ 	return checkDeferredModules();
 /******/ })
@@ -169,7 +169,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_actions_requestParamAction__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/actions/requestParamAction */ "./www/js/source/reactpages/actions/requestParamAction.js");
 
 
-var ActionCreators = Object.assign({}, _jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_0__, _jsroot_actions_requestParamAction__WEBPACK_IMPORTED_MODULE_1__);
+const ActionCreators = Object.assign({}, _jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_0__, _jsroot_actions_requestParamAction__WEBPACK_IMPORTED_MODULE_1__);
 
 /***/ }),
 
@@ -196,7 +196,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var AppContainer = function AppContainer(props) {
+const AppContainer = props => {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Loader__WEBPACK_IMPORTED_MODULE_3__["default"], {
     isLoading: props.isLoading
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Title__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Content__WEBPACK_IMPORTED_MODULE_4__["default"], null));
@@ -242,13 +242,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
@@ -262,38 +255,35 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+const Content = props => {
+  const {
+    requestParam,
+    setRequestParam
+  } = props;
+  const [gridData, setGridData] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null);
+  const {
+    pagingOption,
+    setPagingOption,
+    onChangePaging
+  } = Object(_jsroot_customHooks_pagingHooks__WEBPACK_IMPORTED_MODULE_11__["usePagingOption"])();
 
-var Content = function Content(props) {
-  var requestParam = props.requestParam,
-      setRequestParam = props.setRequestParam;
-
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
-      _useState2 = _slicedToArray(_useState, 2),
-      gridData = _useState2[0],
-      setGridData = _useState2[1];
-
-  var _usePagingOption = Object(_jsroot_customHooks_pagingHooks__WEBPACK_IMPORTED_MODULE_11__["usePagingOption"])(),
-      pagingOption = _usePagingOption.pagingOption,
-      setPagingOption = _usePagingOption.setPagingOption,
-      onChangePaging = _usePagingOption.onChangePaging;
-
-  var handleSort = function handleSort(sortBy, sortOrder) {
+  const handleSort = (sortBy, sortOrder) => {
     setRequestParam(_objectSpread({}, requestParam, {
       sortBy: sortBy === 'WinLoss' ? 'WinLost' : sortBy,
-      sortOrder: sortOrder
+      sortOrder
     }));
   };
 
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    var param = _objectSpread({}, requestParam, {
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    const param = _objectSpread({}, requestParam, {
       pageSize: pagingOption.PageSize,
       pageIndex: pagingOption.PageIndex
     });
 
-    var url = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_4__["default"].resolveClientUrl('PlayerBtcSingleCustomer/Index');
+    const url = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_4__["default"].resolveClientUrl('PlayerBtcSingleCustomer/Index');
     props.toggleLoader(true);
-    _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_5__["default"].postData(url, param).then(function (response) {
-      var result = response.data;
+    _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_5__["default"].postData(url, param).then(response => {
+      const result = response.data;
       setGridData({
         data: result.Data || [],
         total: result.Total
@@ -302,7 +292,7 @@ var Content = function Content(props) {
         TotalItem: result.TotalRows
       }));
       props.toggleLoader(false);
-    })["catch"](function (error) {
+    }).catch(error => {
       console.log(error.message);
       setGridData({});
       setPagingOption({
@@ -314,9 +304,9 @@ var Content = function Content(props) {
     });
   }, [requestParam, pagingOption.PageSize, pagingOption.PageIndex]);
 
-  var getHeaderName = function getHeaderName(column) {
+  const getHeaderName = column => {
     if (column === 'WinLoss') {
-      return _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_8__["default"].isAllowedCustomerComm ? "".concat(_lib_constants__WEBPACK_IMPORTED_MODULE_12__["HeaderText"].WinLoss, "/").concat(_lib_constants__WEBPACK_IMPORTED_MODULE_12__["HeaderText"].Comm) : _lib_constants__WEBPACK_IMPORTED_MODULE_12__["HeaderText"].WinLoss;
+      return _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_8__["default"].isAllowedCustomerComm ? `${_lib_constants__WEBPACK_IMPORTED_MODULE_12__["HeaderText"].WinLoss}/${_lib_constants__WEBPACK_IMPORTED_MODULE_12__["HeaderText"].Comm}` : _lib_constants__WEBPACK_IMPORTED_MODULE_12__["HeaderText"].WinLoss;
     }
 
     return _lib_constants__WEBPACK_IMPORTED_MODULE_12__["HeaderText"][column];
@@ -326,14 +316,14 @@ var Content = function Content(props) {
     return null;
   }
 
-  var dataGridProps = {
+  const dataGridProps = {
     data: gridData.data,
     total: gridData.total,
-    pagingOption: pagingOption,
+    pagingOption,
     onPaging: onChangePaging,
     getResource: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource,
     totalText: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource('Total'),
-    getHeaderName: getHeaderName,
+    getHeaderName,
     onSort: handleSort
   };
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_layouts_betlist_BetListLayout__WEBPACK_IMPORTED_MODULE_10__["default"], {
@@ -342,12 +332,8 @@ var Content = function Content(props) {
     getResourceFunc: dataGridProps.getResource,
     formatDateStringFunc: _jsroot_lib_dateUtils__WEBPACK_IMPORTED_MODULE_7__["formatDateString"],
     baseCurrency: "",
-    beforeShowFunc: function beforeShowFunc() {
-      return props.toggleLoader(true);
-    },
-    afterShowFunc: function afterShowFunc() {
-      return props.toggleLoader(false);
-    }
+    beforeShowFunc: () => props.toggleLoader(true),
+    afterShowFunc: () => props.toggleLoader(false)
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DataGrid__WEBPACK_IMPORTED_MODULE_9__["default"], dataGridProps));
 };
 
@@ -356,9 +342,11 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-  var requestParam = state.requestParam;
+  const {
+    requestParam
+  } = state;
   return Object.assign({}, {
-    requestParam: requestParam
+    requestParam
   });
 }
 
@@ -382,15 +370,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_components_betlist_BetListDataGrid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/components/betlist/BetListDataGrid */ "./www/js/source/reactpages/components/betlist/BetListDataGrid.jsx");
 
 
-var DataGrid = function DataGrid(props) {
-  var data = props.data,
-      total = props.total,
-      pagingOption = props.pagingOption,
-      onPaging = props.onPaging,
-      getResource = props.getResource,
-      totalText = props.totalText,
-      getHeaderName = props.getHeaderName,
-      onSort = props.onSort;
+const DataGrid = props => {
+  const {
+    data,
+    total,
+    pagingOption,
+    onPaging,
+    getResource,
+    totalText,
+    getHeaderName,
+    onSort
+  } = props;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_betlist_BetListDataGrid__WEBPACK_IMPORTED_MODULE_1__["default"], {
     isPaging: true,
     pageOption: pagingOption,
@@ -448,19 +438,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var Title = function Title(props) {
-  var handleExportExcel = function handleExportExcel() {
-    var requestParam = props.requestParam,
-        toggleLoader = props.toggleLoader;
+const Title = props => {
+  const handleExportExcel = () => {
+    const {
+      requestParam,
+      toggleLoader
+    } = props;
 
-    var param = _objectSpread({}, requestParam, {
+    const param = _objectSpread({}, requestParam, {
       isExport: true
     });
 
-    var url = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_5__["default"].resolveClientUrl('PlayerBtcSingleCustomer/Index');
+    const url = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_5__["default"].resolveClientUrl('PlayerBtcSingleCustomer/Index');
     toggleLoader(true);
-    _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_6__["default"].getFile(url, param).then(function (response) {
-      var NoContentStatusCode = 204;
+    _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_6__["default"].getFile(url, param).then(response => {
+      const NoContentStatusCode = 204;
 
       if (response.status === NoContentStatusCode) {
         alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource("NoInfo"));
@@ -469,14 +461,14 @@ var Title = function Title(props) {
       }
 
       toggleLoader(false);
-    })["catch"](function (error) {
+    }).catch(error => {
       console.log(error.message);
       toggleLoader(false);
       alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource("NoInfo"));
     });
   };
 
-  var content = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+  const content = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "caret-block"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "icon-excel-wrapper",
@@ -492,16 +484,20 @@ var Title = function Title(props) {
 };
 
 function mapDispatchToProps(dispatch) {
-  var toggleLoader = _actions__WEBPACK_IMPORTED_MODULE_8__["ActionCreators"].toggleLoader;
+  const {
+    toggleLoader
+  } = _actions__WEBPACK_IMPORTED_MODULE_8__["ActionCreators"];
   return Object(redux__WEBPACK_IMPORTED_MODULE_7__["bindActionCreators"])({
-    toggleLoader: toggleLoader
+    toggleLoader
   }, dispatch);
 }
 
 function mapStateToProps(state) {
-  var requestParam = state.requestParam;
+  const {
+    requestParam
+  } = state;
   return Object.assign({}, {
-    requestParam: requestParam
+    requestParam
   });
 }
 
@@ -540,11 +536,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var defaultState = _objectSpread({}, window.initialState);
+const defaultState = _objectSpread({}, window.initialState);
 
-var store = _lib_store__WEBPACK_IMPORTED_MODULE_3__["default"].createStore(_reducers_index_js__WEBPACK_IMPORTED_MODULE_2__["default"], defaultState);
+const store = _lib_store__WEBPACK_IMPORTED_MODULE_3__["default"].createStore(_reducers_index_js__WEBPACK_IMPORTED_MODULE_2__["default"], defaultState);
 
-var App = function App() {
+const App = () => {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_1__["Provider"], {
     store: store
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AppContainer__WEBPACK_IMPORTED_MODULE_5__["default"], null));
@@ -566,7 +562,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HeaderText", function() { return HeaderText; });
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 
-var HeaderText = {
+const HeaderText = {
   Index: "#",
   Platform: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("Platform"),
   ExternalId: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("ExternalId"),
@@ -580,7 +576,7 @@ var HeaderText = {
   Status: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("Status"),
   Live: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("Live"),
   WinLoss: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("WinLoss"),
-  LicenseeWL: "".concat(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("LicenseeWL"), "/").concat(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("Comm")),
+  LicenseeWL: `${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("LicenseeWL")}/${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("Comm")}`,
   Comm: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("Comm")
 };
 
@@ -617,7 +613,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toggleLoader", function() { return toggleLoader; });
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/actions/types.js");
 
-var toggleLoader = function toggleLoader(show) {
+const toggleLoader = show => {
   return {
     type: _types__WEBPACK_IMPORTED_MODULE_0__["TOGGLE_LOADER"],
     data: show
@@ -638,7 +634,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setRequestParam", function() { return setRequestParam; });
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/actions/types.js");
 
-var setRequestParam = function setRequestParam(data) {
+const setRequestParam = data => {
   return {
     type: _types__WEBPACK_IMPORTED_MODULE_0__["SET_REQUEST_PARAM"],
     data: data
@@ -675,49 +671,49 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_REQUEST_PARAM", function() { return SET_REQUEST_PARAM; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_REPORT_TITLE", function() { return SET_REPORT_TITLE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_PAGING_OPTION", function() { return SET_PAGING_OPTION; });
-var FETCH_DATA = 'FETCH_DATA';
-var SET_GRID_DATA = "SET_GRID_DATA";
+const FETCH_DATA = 'FETCH_DATA';
+const SET_GRID_DATA = "SET_GRID_DATA";
 /* Product */
 
-var SET_SELECTED_PRODUCT = "SET_SELECTED_PRODUCT";
+const SET_SELECTED_PRODUCT = "SET_SELECTED_PRODUCT";
 /* Base Currency */
 
-var SET_SELECTED_BASECURRENCY = "SET_SELECTED_BASECURRENCY";
-var SET_BASECURRENCY_LIST = "SET_BASECURRENCY_LIST";
+const SET_SELECTED_BASECURRENCY = "SET_SELECTED_BASECURRENCY";
+const SET_BASECURRENCY_LIST = "SET_BASECURRENCY_LIST";
 /* Currency */
 
-var SET_SELECTED_CURRENCY = "SET_SELECTED_CURRENCY";
+const SET_SELECTED_CURRENCY = "SET_SELECTED_CURRENCY";
 /* Loader */
 
-var TOGGLE_LOADER = "TOGGLE_LOADER";
+const TOGGLE_LOADER = "TOGGLE_LOADER";
 /* Exclude Test Data */
 
-var CHANGE_IS_EXCLUDE_TEST = "CHANGE_IS_EXCLUDE_TEST";
+const CHANGE_IS_EXCLUDE_TEST = "CHANGE_IS_EXCLUDE_TEST";
 /* User mini guide */
 
-var USER_GUIDE_CONTENT = "USER_GUIDE_CONTENT;";
+const USER_GUIDE_CONTENT = "USER_GUIDE_CONTENT;";
 /* Date range */
 
-var SET_DATE_RANGE = 'SET_DATE_RANGE';
-var GET_DATE_CONSTRAINT = 'GET_DATE_CONSTRAINT';
+const SET_DATE_RANGE = 'SET_DATE_RANGE';
+const GET_DATE_CONSTRAINT = 'GET_DATE_CONSTRAINT';
 /* Convert all figures to base currency */
 
-var CHANGE_IS_CONVERT_ALL = "CHANGE_IS_CONVERT_ALL";
+const CHANGE_IS_CONVERT_ALL = "CHANGE_IS_CONVERT_ALL";
 /* Status */
 
-var SET_SELECTED_STATUS = "SET_SELECTED_STATUS";
+const SET_SELECTED_STATUS = "SET_SELECTED_STATUS";
 /* Platform  */
 
-var SET_SELECTED_PLATFORM = "SET_SELECTED_PLATFORM";
+const SET_SELECTED_PLATFORM = "SET_SELECTED_PLATFORM";
 /* Live Status  */
 
-var SET_SELECTED_LIVESTATUS = "SET_SELECTED_LIVESTATUS";
-var SET_USERNAME = "SET_USERNAME";
-var SET_REQUEST_PARAM = "SET_REQUEST_PARAM";
-var SET_REPORT_TITLE = "SET_REPORT_TITLE";
+const SET_SELECTED_LIVESTATUS = "SET_SELECTED_LIVESTATUS";
+const SET_USERNAME = "SET_USERNAME";
+const SET_REQUEST_PARAM = "SET_REQUEST_PARAM";
+const SET_REPORT_TITLE = "SET_REPORT_TITLE";
 /* Live Status  */
 
-var SET_PAGING_OPTION = 'SET_PAGING_OPTION';
+const SET_PAGING_OPTION = 'SET_PAGING_OPTION';
 
 /***/ }),
 
@@ -734,12 +730,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
 
-var Loader = function Loader(_ref) {
-  var isLoading = _ref.isLoading;
+const Loader = ({
+  isLoading
+}) => {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "loading-process default",
     style: {
-      display: "".concat(isLoading ? 'block' : 'none')
+      display: `${isLoading ? 'block' : 'none'}`
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "icon-loading"
@@ -767,8 +764,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var NoDataTitle = function NoDataTitle(_ref) {
-  var title = _ref.title;
+const NoDataTitle = ({
+  title
+}) => {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "no-info-row center-align",
     dangerouslySetInnerHTML: {
@@ -803,12 +801,14 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 
 
 
-var ReportTitle = function ReportTitle(_ref) {
-  var content = _ref.content,
-      tag = _ref.tag,
+const ReportTitle = (_ref) => {
+  let {
+    content,
+    tag
+  } = _ref,
       attrs = _objectWithoutProperties(_ref, ["content", "tag"]);
 
-  var Tag = tag;
+  const Tag = tag;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "report-title-container"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Tag, _extends({
@@ -816,11 +816,11 @@ var ReportTitle = function ReportTitle(_ref) {
   }, attrs), content));
 };
 
-var propTypes = {
+const propTypes = {
   tag: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
   content: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.any
 };
-var defaultProps = {
+const defaultProps = {
   tag: 'p'
 };
 ReportTitle.propTypes = propTypes;
@@ -846,24 +846,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/components/NoDataTitle */ "./www/js/source/reactpages/components/NoDataTitle.jsx");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
@@ -872,220 +854,203 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var BetListDataGrid =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(BetListDataGrid, _Component);
+class BetListDataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+  constructor(props) {
+    super(props);
 
-  function BetListDataGrid(props) {
-    var _this;
-
-    _classCallCheck(this, BetListDataGrid);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(BetListDataGrid).call(this, props));
-
-    _defineProperty(_assertThisInitialized(_this), "onSort", function (sortBy, sortOrder) {
-      _this.props.onSort && _this.props.onSort(sortBy, sortOrder);
+    _defineProperty(this, "onSort", (sortBy, sortOrder) => {
+      this.props.onSort && this.props.onSort(sortBy, sortOrder);
     });
 
-    _defineProperty(_assertThisInitialized(_this), "onPaging", function (index, size) {
-      _this.props.onPaging && _this.props.onPaging(index, size);
+    _defineProperty(this, "onPaging", (index, size) => {
+      this.props.onPaging && this.props.onPaging(index, size);
     });
-
-    return _this;
   }
 
-  _createClass(BetListDataGrid, [{
-    key: "componentDidUpdate",
-    value: function componentDidUpdate(prevProps) {
-      if (this.props.data !== prevProps.data) {
-        this.props.afterLoad && this.props.afterLoad();
+  componentDidUpdate(prevProps) {
+    if (this.props.data !== prevProps.data) {
+      this.props.afterLoad && this.props.afterLoad();
+    }
+  }
+
+  _getResource(key) {
+    return this.props.getResourceFunc ? this.props.getResourceFunc(key) : key;
+  }
+
+  _getTotalCellClassName(column, value) {
+    if (this.props.getTotalCellClassNameFunc) {
+      return this.props.getTotalCellClassNameFunc(column, value);
+    }
+
+    return column === 'LicenseeWL' && value.substring(0, 1) === '-' ? 'negative' : '';
+  }
+
+  _getHeaderName(column) {
+    return this.props.getHeaderNameFunc ? this.props.getHeaderNameFunc(column) : column;
+  }
+
+  _mapData(data) {
+    return this.props.mappingDataFunc ? this.props.mappingDataFunc(data) : data;
+  }
+
+  _buildHeader() {
+    let rows = [];
+    const {
+      columns,
+      columnWidths,
+      sortableColumns
+    } = this.props;
+
+    for (let i = 0; i < columns.length; i++) {
+      const column = columns[i];
+      const isSortable = sortableColumns.indexOf(column) >= 0;
+
+      const headerName = this._getHeaderName(column);
+
+      rows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
+        key: column,
+        colWidth: columnWidths[i],
+        sortBy: isSortable ? column : null
+      }, headerName));
+    }
+
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderRow"], {
+      style: {
+        height: 32
       }
-    }
-  }, {
-    key: "_getResource",
-    value: function _getResource(key) {
-      return this.props.getResourceFunc ? this.props.getResourceFunc(key) : key;
-    }
-  }, {
-    key: "_getTotalCellClassName",
-    value: function _getTotalCellClassName(column, value) {
-      if (this.props.getTotalCellClassNameFunc) {
-        return this.props.getTotalCellClassNameFunc(column, value);
-      }
+    }, rows);
+  }
 
-      return column === 'LicenseeWL' && value.substring(0, 1) === '-' ? 'negative' : '';
-    }
-  }, {
-    key: "_getHeaderName",
-    value: function _getHeaderName(column) {
-      return this.props.getHeaderNameFunc ? this.props.getHeaderNameFunc(column) : column;
-    }
-  }, {
-    key: "_mapData",
-    value: function _mapData(data) {
-      return this.props.mappingDataFunc ? this.props.mappingDataFunc(data) : data;
-    }
-  }, {
-    key: "_buildHeader",
-    value: function _buildHeader() {
-      var rows = [];
-      var _this$props = this.props,
-          columns = _this$props.columns,
-          columnWidths = _this$props.columnWidths,
-          sortableColumns = _this$props.sortableColumns;
+  _buildBody() {
+    const {
+      columns,
+      columnAlignments,
+      data
+    } = this.props;
+    let rows = [];
 
-      for (var i = 0; i < columns.length; i++) {
-        var column = columns[i];
-        var isSortable = sortableColumns.indexOf(column) >= 0;
+    for (let i = 0; i < data.length; i++) {
+      const item = this._mapData(data[i]);
 
-        var headerName = this._getHeaderName(column);
+      let cells = [];
 
-        rows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
-          key: column,
-          colWidth: columnWidths[i],
-          sortBy: isSortable ? column : null
-        }, headerName));
-      }
-
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderRow"], {
-        style: {
-          height: 32
-        }
-      }, rows);
-    }
-  }, {
-    key: "_buildBody",
-    value: function _buildBody() {
-      var _this$props2 = this.props,
-          columns = _this$props2.columns,
-          columnAlignments = _this$props2.columnAlignments,
-          data = _this$props2.data;
-      var rows = [];
-
-      for (var i = 0; i < data.length; i++) {
-        var item = this._mapData(data[i]);
-
-        var cells = [];
-
-        for (var j = 0; j < columns.length; j++) {
-          var column = columns[j];
-          cells.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
-            key: "".concat(column, "-").concat(i),
-            className: columnAlignments[j],
-            dangerouslySetInnerHTML: {
-              __html: item[column]
-            }
-          }));
-        }
-
-        rows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Row"], {
-          key: i
-        }, cells));
-      }
-
-      return rows;
-    }
-  }, {
-    key: "_buildFooter",
-    value: function _buildFooter() {
-      if (!this.props.totalColumns || !this.props.totalColumns.length) {
-        return false;
-      }
-
-      var _this$props3 = this.props,
-          columns = _this$props3.columns,
-          totalColumns = _this$props3.totalColumns,
-          total = _this$props3.total,
-          totalText = _this$props3.totalText,
-          columnAlignments = _this$props3.columnAlignments;
-      var startTotalIndex = columns.indexOf(totalColumns[0]);
-      var rows = [];
-      var cells = [];
-      cells.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
-        key: "total",
-        className: "right-align",
-        colSpan: startTotalIndex
-      }, totalText));
-
-      var item = this._mapData(total);
-
-      for (var i = 0; i < totalColumns.length; i++) {
-        var column = totalColumns[i];
-        var columnIndex = columns.indexOf(column);
-
-        var className = this._getTotalCellClassName(column, item[column]);
-
+      for (let j = 0; j < columns.length; j++) {
+        const column = columns[j];
         cells.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
-          key: "Sum".concat(column),
-          className: "".concat(columnAlignments[columnIndex], " ").concat(className),
+          key: `${column}-${i}`,
+          className: columnAlignments[j],
           dangerouslySetInnerHTML: {
             __html: item[column]
           }
         }));
       }
 
-      var blankRows = columns.length - totalColumns.length - startTotalIndex;
-
-      if (blankRows) {
-        cells.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
-          key: "blank",
-          colSpan: blankRows
-        }));
-      }
-
       rows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Row"], {
-        className: "fixed-table-grant-total",
-        key: "totalRow"
+        key: i
       }, cells));
-      return rows;
     }
-  }, {
-    key: "_renderNodata",
-    value: function _renderNodata() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "result-content"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        className: "no-info-row center-align"
-      }, this._getResource('NoInfo')));
+
+    return rows;
+  }
+
+  _buildFooter() {
+    if (!this.props.totalColumns || !this.props.totalColumns.length) {
+      return false;
     }
-  }, {
-    key: "render",
-    value: function render() {
-      if (!this.props.data) {
-        return null;
-      }
 
-      var data = this.props.data;
+    const {
+      columns,
+      totalColumns,
+      total,
+      totalText,
+      columnAlignments
+    } = this.props;
+    const startTotalIndex = columns.indexOf(totalColumns[0]);
+    let rows = [];
+    let cells = [];
+    cells.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
+      key: "total",
+      className: "right-align",
+      colSpan: startTotalIndex
+    }, totalText));
 
-      if (!data.length) {
-        return this._renderNodata();
-      }
+    const item = this._mapData(total);
 
-      var _this$props4 = this.props,
-          isPaging = _this$props4.isPaging,
-          pageOption = _this$props4.pageOption,
-          adjustedHeight = _this$props4.adjustedHeight;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "betlist-container result-content"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Table"], {
-        onSort: this.onSort,
-        minWidth: 980,
-        autoWidth: true,
-        bodyHeight: 300,
-        header: this._buildHeader(),
-        body: this._buildBody(),
-        footer: this._buildFooter(),
-        isPaging: isPaging,
-        pageOption: pageOption,
-        onPaging: this.onPaging,
-        adjustedHeight: adjustedHeight
+    for (let i = 0; i < totalColumns.length; i++) {
+      const column = totalColumns[i];
+      const columnIndex = columns.indexOf(column);
+
+      const className = this._getTotalCellClassName(column, item[column]);
+
+      cells.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
+        key: `Sum${column}`,
+        className: `${columnAlignments[columnIndex]} ${className}`,
+        dangerouslySetInnerHTML: {
+          __html: item[column]
+        }
       }));
     }
-  }]);
 
-  return BetListDataGrid;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+    const blankRows = columns.length - totalColumns.length - startTotalIndex;
+
+    if (blankRows) {
+      cells.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
+        key: "blank",
+        colSpan: blankRows
+      }));
+    }
+
+    rows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Row"], {
+      className: "fixed-table-grant-total",
+      key: "totalRow"
+    }, cells));
+    return rows;
+  }
+
+  _renderNodata() {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "result-content"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "no-info-row center-align"
+    }, this._getResource('NoInfo')));
+  }
+
+  render() {
+    if (!this.props.data) {
+      return null;
+    }
+
+    const {
+      data
+    } = this.props;
+
+    if (!data.length) {
+      return this._renderNodata();
+    }
+
+    const {
+      isPaging,
+      pageOption,
+      adjustedHeight
+    } = this.props;
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "betlist-container result-content"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Table"], {
+      onSort: this.onSort,
+      minWidth: 980,
+      autoWidth: true,
+      bodyHeight: 300,
+      header: this._buildHeader(),
+      body: this._buildBody(),
+      footer: this._buildFooter(),
+      isPaging: isPaging,
+      pageOption: pageOption,
+      onPaging: this.onPaging,
+      adjustedHeight: adjustedHeight
+    }));
+  }
+
+}
 
 BetListDataGrid.propTypes = {
   isPaging: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool,
@@ -1152,15 +1117,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var Popup = function Popup(props) {
-  var title = props.title,
-      isShow = props.isShow,
-      width = props.width,
-      height = props.height,
-      isHtml = props.isHtml,
-      children = props.children,
-      iframeUrl = props.iframeUrl;
-  var content;
+const Popup = props => {
+  const {
+    title,
+    isShow,
+    width,
+    height,
+    isHtml,
+    children,
+    iframeUrl
+  } = props;
+  let content;
 
   if (iframeUrl) {
     content = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("iframe", {
@@ -1181,7 +1148,7 @@ var Popup = function Popup(props) {
   }
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "popup-container ".concat(isShow ? 'show' : 'hide')
+    className: `popup-container ${isShow ? 'show' : 'hide'}`
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "popup-block-body"
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1196,7 +1163,7 @@ var Popup = function Popup(props) {
     className: "txt-title"
   }, title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     className: "popup-close",
-    onClick: function onClick() {
+    onClick: () => {
       props.onClose && props.onClose();
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
@@ -1235,8 +1202,8 @@ Popup.defaultProps = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DEFAULT_WIDTH", function() { return DEFAULT_WIDTH; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DEFAULT_HEIGHT", function() { return DEFAULT_HEIGHT; });
-var DEFAULT_WIDTH = '55%';
-var DEFAULT_HEIGHT = '55%';
+const DEFAULT_WIDTH = '55%';
+const DEFAULT_HEIGHT = '55%';
 
 /***/ }),
 
@@ -1265,7 +1232,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "debuggingConfig", function() { return debuggingConfig; });
-var debuggingConfig = {
+const debuggingConfig = {
   name: "__lrfConfig__",
   env: "local"
 };
@@ -1290,30 +1257,17 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-
-var defaultPagingOption = {
+const defaultPagingOption = {
   PageIndex: 1,
   PageSize: 50,
   TotalItem: 0,
   PageList: [50, 100, 200, 300, 400, 500, 1000, 2000]
 };
-var usePagingOption = function usePagingOption() {
-  var initialValue = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPagingOption;
+const usePagingOption = (initialValue = defaultPagingOption) => {
+  const [pagingOption, setPagingOption] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(_objectSpread({}, initialValue));
 
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(_objectSpread({}, initialValue)),
-      _useState2 = _slicedToArray(_useState, 2),
-      pagingOption = _useState2[0],
-      setPagingOption = _useState2[1];
-
-  var handleChangePaging = function handleChangePaging(pageIndex, pageSize) {
+  const handleChangePaging = (pageIndex, pageSize) => {
     setPagingOption(_objectSpread({}, pagingOption, {
       PageSize: pageSize,
       PageIndex: pageIndex
@@ -1321,8 +1275,8 @@ var usePagingOption = function usePagingOption() {
   };
 
   return {
-    pagingOption: pagingOption,
-    setPagingOption: setPagingOption,
+    pagingOption,
+    setPagingOption,
     onChangePaging: handleChangePaging
   };
 };
@@ -1341,51 +1295,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AppLayout; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-var AppLayout =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(AppLayout, _Component);
-
-  function AppLayout(props) {
-    _classCallCheck(this, AppLayout);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(AppLayout).call(this, props));
+class AppLayout extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+  constructor(props) {
+    super(props);
   }
 
-  _createClass(AppLayout, [{
-    key: "render",
-    value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "container",
-        className: "container-fluid"
-      }, this.props.children);
-    }
-  }]);
+  render() {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      id: "container",
+      className: "container-fluid"
+    }, this.props.children);
+  }
 
-  return AppLayout;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
-
-
+}
 
 /***/ }),
 
@@ -1406,27 +1329,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./lib/constants */ "./www/js/source/reactpages/layouts/betlist/lib/constants.js");
-var _BetListLayout$propTy;
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
 
@@ -1434,476 +1336,439 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-
-var BetListLayout =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(BetListLayout, _Component);
-
-  function BetListLayout(props) {
-    var _this;
-
-    _classCallCheck(this, BetListLayout);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(BetListLayout).call(this, props));
-    _this.state = {
+class BetListLayout extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+  constructor(props) {
+    super(props);
+    this.state = {
       isShowPopup: false,
       popupUrl: null,
       popupTitle: null
     };
-    return _this;
   }
 
-  _createClass(BetListLayout, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this2 = this;
+  componentDidMount() {
+    window.onload = () => {
+      window.logOpenBetlistEvent && window.logOpenBetlistEvent(this.props.pageName);
+    };
 
-      window.onload = function () {
-        window.logOpenBetlistEvent && window.logOpenBetlistEvent(_this2.props.pageName);
-      };
+    window.ViewResult = (matchid, raceNo, bettype, sporttype, refno, username, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid, transdecs) => {
+      const title = this._getResource('Result');
 
-      window.ViewResult = function (matchid, raceNo, bettype, sporttype, refno, username, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid, transdecs) {
-        var title = _this2._getResource('Result');
+      const rootUrl = this.props.rootUrl;
 
-        var rootUrl = _this2.props.rootUrl;
+      if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].RNG_GAME || sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].RNG_MINIGAME || sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].RNG_MOBILE) {
+        const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getRngCasinoResultUrl(rootUrl);
 
-        if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].RNG_GAME || sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].RNG_MINIGAME || sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].RNG_MOBILE) {
-          var url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getRngCasinoResultUrl(rootUrl);
+        this._showRngCasinoResult(refno, url, title);
+      } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].VOIDBRIDGE) {
+        const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getVoidbridgeResultUrl(rootUrl, custid, extension2);
 
-          _this2._showRngCasinoResult(refno, url, title);
-        } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].VOIDBRIDGE) {
-          var _url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getVoidbridgeResultUrl(rootUrl, custid, extension2);
+        this._showThirdPartyResult(url, title);
+      } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].PP) {
+        const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getPPResultUrl(rootUrl, custid, extension2);
 
-          _this2._showThirdPartyResult(_url, title);
-        } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].PP) {
-          var _url2 = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getPPResultUrl(rootUrl, custid, extension2);
+        this._showThirdPartyResult(url, title);
+      } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].CARDCLUB) {
+        const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getCardClubResultUrl(rootUrl, custid, bettype, extension2);
 
-          _this2._showThirdPartyResult(_url2, title);
-        } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].CARDCLUB) {
-          var _url3 = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getCardClubResultUrl(rootUrl, custid, bettype, extension2);
+        this._showThirdPartyResult(url, title);
+      } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].SG) {
+        const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getSGResultUrl(rootUrl, custid, extension2);
 
-          _this2._showThirdPartyResult(_url3, title);
-        } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].SG) {
-          var _url4 = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getSGResultUrl(rootUrl, custid, extension2);
+        this._showThirdPartyResult(url, title);
+      } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].ALLBET) {
+        const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getAllBetResultUrl(rootUrl, transdecs, extension2, bettype);
 
-          _this2._showThirdPartyResult(_url4, title);
-        } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].ALLBET) {
-          var _url5 = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getAllBetResultUrl(rootUrl, transdecs, extension2, bettype);
+        this._openPopup(url, title);
+      } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].GLOBALGAMING) {
+        const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getGlobalGamingResultUrl(rootUrl, custid, extension2);
 
-          _this2._openPopup(_url5, title);
-        } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].GLOBALGAMING) {
-          var _url6 = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getGlobalGamingResultUrl(rootUrl, custid, extension2);
-
-          _this2._showThirdPartyResult(_url6, title);
-        } else {
-          var _url7 = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getResultUrl(rootUrl, matchid, raceNo, bettype, sporttype, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid);
-
-          _this2._openPopup(_url7, title);
-        }
-      };
-
-      window.showMP = function (transId) {
-        var divEvent = document.querySelector('#divEvent_' + transId);
-        divEvent.classList.add('mx-parlay'); //to make line-through for void-parlay-ticket
-
-        _this2._showMixParlayDetail(transId, divEvent);
-      };
-
-      window.showCombMP = function (transId, index) {
-        var divEvent = document.querySelector('#divEvent_' + transId + '' + index);
-        divEvent.classList.add('mx-parlay'); //to make line-through for void-parlay-ticket
-
-        _this2._showMixParlayDetail(transId, divEvent);
-      }; // expand choice content
-
-
-      window.showNewCombMP = function () {
-        for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-          args[_key] = arguments[_key];
-        }
-
-        _this2._showNewParlayDetail.apply(_this2, [_this2.props.rootUrl].concat(args));
-      }; // expand choice content
-
-
-      window.showSingleMatchParlayDetail = function () {
-        for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-          args[_key2] = arguments[_key2];
-        }
-
-        _this2._showSingleMatchParlayDetail.apply(_this2, [_this2.props.rootUrl].concat(args));
-      }; // show detail popup (in choice column)
-
-
-      window.showCombMPDetail = function (transId, refNo, betId, custId, betTeam) {
-        var _this2$props = _this2.props,
-            rootUrl = _this2$props.rootUrl,
-            baseCurrency = _this2$props.baseCurrency;
-        var url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getParlayDetailUrl(rootUrl, transId, refNo, betId, custId, betTeam, baseCurrency);
-
-        _this2._openPopup(url, betTeam);
-      };
-
-      window.ViewCashOutHistory = function (transId, refNo, betType, betdaqId) {
-        var _this2$props2 = _this2.props,
-            rootUrl = _this2$props2.rootUrl,
-            baseCurrency = _this2$props2.baseCurrency;
-
-        var _BetList$getCashOutHi = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getCashOutHistoryPopupSetting(rootUrl, baseCurrency, transId, refNo, betType, betdaqId),
-            url = _BetList$getCashOutHi.url,
-            isCashOut = _BetList$getCashOutHi.isCashOut;
-
-        var title = _this2._getResource(isCashOut ? 'CashOutDetails' : 'BoughtDetails');
-
-        _this2._openPopup(url, title);
-      };
-
-      window.ShowBonusDetails = function (refCode, transId) {
-        var _this2$props3 = _this2.props,
-            rootUrl = _this2$props3.rootUrl,
-            baseCurrency = _this2$props3.baseCurrency;
-        var url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getBonusDetailUrl(rootUrl, refCode, transId, baseCurrency);
-
-        var title = _this2._getResource('TransactionDetail');
-
-        _this2._openPopup(url, title);
-      };
-
-      window.showAGCasinoDetails = function (transId, winlostDate, custId, transType) {
-        var _this2$props4 = _this2.props,
-            rootUrl = _this2$props4.rootUrl,
-            baseCurrency = _this2$props4.baseCurrency;
-        var url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getAGCasinoDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
-
-        var title = _this2._getResource('AGCasino') + ' - ' + _this2._getResource('DetailedBetlist') + ' - ' + _this2._formatDateString(winlostDate);
-
-        _this2._openPopup(url, title);
-      };
-
-      window.showRnGCasinoDetails = function (transId, winlostDate, custId, transType) {
-        var _this2$props5 = _this2.props,
-            rootUrl = _this2$props5.rootUrl,
-            baseCurrency = _this2$props5.baseCurrency;
-        var url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getRnGCasinoDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
-
-        var title = _this2._getResource('ProductCS') + ' - ' + _this2._getResource('DetailedBetlist') + ' - ' + _this2._formatDateString(winlostDate);
-
-        _this2._openPopup(url, title);
-      };
-
-      window.showVoidBridgeDetails = function (transId, winlostDate, custId, transType) {
-        var _this2$props6 = _this2.props,
-            rootUrl = _this2$props6.rootUrl,
-            baseCurrency = _this2$props6.baseCurrency;
-        var url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getVoidBridgeDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
-
-        var title = _this2._getResource('ProductVB') + ' - ' + _this2._getResource('DetailedBetlist') + ' - ' + _this2._formatDateString(winlostDate);
-
-        _this2._openPopup(url, title);
-      };
-
-      window.showTodayRunningBetsDetails = function (transId, winlostDate, custId, transType) {
-        var _this2$props7 = _this2.props,
-            rootUrl = _this2$props7.rootUrl,
-            baseCurrency = _this2$props7.baseCurrency;
-        var url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getAllBetDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
-
-        var title = _this2._getResource('ProductAB') + ' - ' + _this2._getResource('DetailedBetlist') + ' - ' + _this2._formatDateString(winlostDate);
-
-        _this2._openPopup(url, title);
-      };
-
-      window.showColossusBetsDetails = function (refNo, winlostDate, transId, custId, betCheck) {
-        var _this2$props8 = _this2.props,
-            rootUrl = _this2$props8.rootUrl,
-            baseCurrency = _this2$props8.baseCurrency;
-        var url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getColossusBetsDetailUrl(rootUrl, baseCurrency, refNo, winlostDate, transId, custId, betCheck);
-
-        var title = _this2._getResource('TicketDetailOf').replace('{0}', refNo);
-
-        _this2._openPopup(url, title);
-      };
-
-      window.showGlobalGaming = function (transId, winlostDate, custId, transType) {
-        var _this2$props9 = _this2.props,
-            rootUrl = _this2$props9.rootUrl,
-            baseCurrency = _this2$props9.baseCurrency;
-        var url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getGlobalGamingDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
-
-        var title = _this2._getResource('ProductFW') + ' - ' + _this2._getResource('DetailedBetlist') + ' - ' + _this2._formatDateString(winlostDate);
-
-        _this2._openPopup(url, title);
-      };
-
-      window.showPPDetails = function (transId, winlostDate, custId, transType) {
-        var _this2$props10 = _this2.props,
-            rootUrl = _this2$props10.rootUrl,
-            baseCurrency = _this2$props10.baseCurrency;
-        var url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getPPDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
-
-        var title = _this2._getResource('ProductPP') + ' - ' + _this2._getResource('DetailedBetlist') + ' - ' + _this2._formatDateString(winlostDate);
-
-        _this2._openPopup(url, title);
-      };
-
-      window.showVideoPokerGameDetails = function (transId, winlostDate, custId, transType) {
-        var _this2$props11 = _this2.props,
-            rootUrl = _this2$props11.rootUrl,
-            baseCurrency = _this2$props11.baseCurrency;
-        var url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getVideoPokerGameDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
-
-        var title = _this2._getResource('ProductCC') + ' - ' + _this2._getResource('DetailedBetlist') + ' - ' + _this2._formatDateString(winlostDate);
-
-        _this2._openPopup(url, title);
-      };
-
-      window.showSGDetails = function (transId, winlostDate, custId, transType) {
-        var _this2$props12 = _this2.props,
-            rootUrl = _this2$props12.rootUrl,
-            baseCurrency = _this2$props12.baseCurrency;
-        var url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getSGDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
-
-        var title = _this2._getResource('ProductSG') + ' - ' + _this2._getResource('DetailedBetlist') + ' - ' + _this2._formatDateString(winlostDate);
-
-        _this2._openPopup(url, title);
-      };
-    }
-  }, {
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      window.showMP = undefined;
-      window.showCombMP = undefined;
-      window.ViewResult = undefined;
-      window.showNewCombMP = undefined;
-      window.showCombMPDetail = undefined;
-      window.ViewCashOutHistory = undefined;
-      window.ShowBonusDetails = undefined;
-      window.showAGCasinoDetails = undefined;
-      window.showRnGCasinoDetails = undefined;
-      window.showVoidBridgeDetails = undefined;
-      window.showTodayRunningBetsDetails = undefined;
-      window.showColossusBetsDetails = undefined;
-      window.showGlobalGaming = undefined;
-      window.showPPDetails = undefined;
-      window.showSingleMatchParlayDetail = undefined;
-      window.showSGDetails = undefined;
-    }
-  }, {
-    key: "_getResource",
-    value: function _getResource(key) {
-      return this.props.getResourceFunc ? this.props.getResourceFunc(key) : key;
-    }
-  }, {
-    key: "_formatDateString",
-    value: function _formatDateString(dateString) {
-      return this.props.formatDateStringFunc ? this.props.formatDateStringFunc(dateString) : dateString;
-    }
-  }, {
-    key: "_beforeShow",
-    value: function _beforeShow() {
-      this.props.beforeShowFunc && this.props.beforeShowFunc();
-    }
-  }, {
-    key: "_afterShow",
-    value: function _afterShow() {
-      this.props.afterShowFunc && this.props.afterShowFunc();
-    }
-  }, {
-    key: "_resolveClientUrl",
-    value: function _resolveClientUrl(relativeUrl) {
-      return this.props.rootUrl + relativeUrl;
-    }
-  }, {
-    key: "_showMixParlayDetail",
-    value: function _showMixParlayDetail(transId, divEvent) {
-      var _this3 = this;
-
-      if (divEvent.style.display === 'none') {
-        var url = this._resolveClientUrl('api/MixParlayBetList/Detail?transId=' + transId);
-
-        this._beforeShow(); // this.props.toggleLoader(true);
-
-
-        _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_1__["default"].getData(url).then(function (result) {
-          var choice = '';
-          var length = result.data.length;
-
-          for (var i = 0; i < length; i++) {
-            choice += result.data[i];
-
-            if (i < length - 1) {
-              choice += '<div class="line"></div>';
-            }
-          }
-
-          divEvent.innerHTML = choice;
-          divEvent.style.display = 'block';
-
-          _this3._afterShow();
-        })["catch"](function (error) {
-          _this3._afterShow();
-
-          console.log(error);
-        });
+        this._showThirdPartyResult(url, title);
       } else {
-        divEvent.style.display = 'none';
-        divEvent.innerHTML = '';
-      }
-    }
-  }, {
-    key: "_showNewParlayDetail",
-    value: function _showNewParlayDetail(rootUrl, transId, transIndex, refNo, handicap1, handicap2, betcheck, betteam, custId) {
-      var _this4 = this;
+        const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getResultUrl(rootUrl, matchid, raceNo, bettype, sporttype, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid);
 
-      var divEvent = document.querySelector('#divEvent_' + transId + '' + transIndex);
-      var nameDiv = document.querySelector('#combinationOfferName_' + transId + transIndex);
+        this._openPopup(url, title);
+      }
+    };
+
+    window.showMP = transId => {
+      let divEvent = document.querySelector('#divEvent_' + transId);
       divEvent.classList.add('mx-parlay'); //to make line-through for void-parlay-ticket
 
-      if (divEvent.style.display == 'none') {
-        var url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getChoiceParlayDetailUrl(rootUrl, transId, refNo, handicap1, handicap2, betcheck, betteam, custId);
+      this._showMixParlayDetail(transId, divEvent);
+    };
 
-        this._beforeShow(); //this.props.toggleLoader(true);
+    window.showCombMP = (transId, index) => {
+      let divEvent = document.querySelector('#divEvent_' + transId + '' + index);
+      divEvent.classList.add('mx-parlay'); //to make line-through for void-parlay-ticket
+
+      this._showMixParlayDetail(transId, divEvent);
+    }; // expand choice content
 
 
-        _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_1__["default"].getData(url).then(function (result) {
-          var choice = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].buildChoiceParlayDetail(result.data);
-          divEvent.innerHTML = choice;
-          divEvent.style.display = 'block';
-          nameDiv.style.display = 'none';
+    window.showNewCombMP = (...args) => {
+      this._showNewParlayDetail.apply(this, [this.props.rootUrl, ...args]);
+    }; // expand choice content
 
-          _this4._afterShow();
-        })["catch"](function (error) {
-          _this4._afterShow();
 
-          console.log(error);
-        });
-      } else {
-        divEvent.style.display = 'none';
-        divEvent.innerHTML = '';
-        nameDiv.style.display = 'block';
-      }
+    window.showSingleMatchParlayDetail = (...args) => {
+      this._showSingleMatchParlayDetail.apply(this, [this.props.rootUrl, ...args]);
+    }; // show detail popup (in choice column)
+
+
+    window.showCombMPDetail = (transId, refNo, betId, custId, betTeam) => {
+      const {
+        rootUrl,
+        baseCurrency
+      } = this.props;
+      const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getParlayDetailUrl(rootUrl, transId, refNo, betId, custId, betTeam, baseCurrency);
+
+      this._openPopup(url, betTeam);
+    };
+
+    window.ViewCashOutHistory = (transId, refNo, betType, betdaqId) => {
+      const {
+        rootUrl,
+        baseCurrency
+      } = this.props;
+      const {
+        url,
+        isCashOut
+      } = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getCashOutHistoryPopupSetting(rootUrl, baseCurrency, transId, refNo, betType, betdaqId);
+
+      const title = this._getResource(isCashOut ? 'CashOutDetails' : 'BoughtDetails');
+
+      this._openPopup(url, title);
+    };
+
+    window.ShowBonusDetails = (refCode, transId) => {
+      const {
+        rootUrl,
+        baseCurrency
+      } = this.props;
+      const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getBonusDetailUrl(rootUrl, refCode, transId, baseCurrency);
+
+      const title = this._getResource('TransactionDetail');
+
+      this._openPopup(url, title);
+    };
+
+    window.showAGCasinoDetails = (transId, winlostDate, custId, transType) => {
+      const {
+        rootUrl,
+        baseCurrency
+      } = this.props;
+      const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getAGCasinoDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
+
+      const title = this._getResource('AGCasino') + ' - ' + this._getResource('DetailedBetlist') + ' - ' + this._formatDateString(winlostDate);
+
+      this._openPopup(url, title);
+    };
+
+    window.showRnGCasinoDetails = (transId, winlostDate, custId, transType) => {
+      const {
+        rootUrl,
+        baseCurrency
+      } = this.props;
+      const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getRnGCasinoDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
+
+      const title = this._getResource('ProductCS') + ' - ' + this._getResource('DetailedBetlist') + ' - ' + this._formatDateString(winlostDate);
+
+      this._openPopup(url, title);
+    };
+
+    window.showVoidBridgeDetails = (transId, winlostDate, custId, transType) => {
+      const {
+        rootUrl,
+        baseCurrency
+      } = this.props;
+      const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getVoidBridgeDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
+
+      const title = this._getResource('ProductVB') + ' - ' + this._getResource('DetailedBetlist') + ' - ' + this._formatDateString(winlostDate);
+
+      this._openPopup(url, title);
+    };
+
+    window.showTodayRunningBetsDetails = (transId, winlostDate, custId, transType) => {
+      const {
+        rootUrl,
+        baseCurrency
+      } = this.props;
+      const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getAllBetDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
+
+      const title = this._getResource('ProductAB') + ' - ' + this._getResource('DetailedBetlist') + ' - ' + this._formatDateString(winlostDate);
+
+      this._openPopup(url, title);
+    };
+
+    window.showColossusBetsDetails = (refNo, winlostDate, transId, custId, betCheck) => {
+      const {
+        rootUrl,
+        baseCurrency
+      } = this.props;
+      const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getColossusBetsDetailUrl(rootUrl, baseCurrency, refNo, winlostDate, transId, custId, betCheck);
+
+      const title = this._getResource('TicketDetailOf').replace('{0}', refNo);
+
+      this._openPopup(url, title);
+    };
+
+    window.showGlobalGaming = (transId, winlostDate, custId, transType) => {
+      const {
+        rootUrl,
+        baseCurrency
+      } = this.props;
+      const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getGlobalGamingDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
+
+      const title = this._getResource('ProductFW') + ' - ' + this._getResource('DetailedBetlist') + ' - ' + this._formatDateString(winlostDate);
+
+      this._openPopup(url, title);
+    };
+
+    window.showPPDetails = (transId, winlostDate, custId, transType) => {
+      const {
+        rootUrl,
+        baseCurrency
+      } = this.props;
+      const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getPPDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
+
+      const title = this._getResource('ProductPP') + ' - ' + this._getResource('DetailedBetlist') + ' - ' + this._formatDateString(winlostDate);
+
+      this._openPopup(url, title);
+    };
+
+    window.showVideoPokerGameDetails = (transId, winlostDate, custId, transType) => {
+      const {
+        rootUrl,
+        baseCurrency
+      } = this.props;
+      const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getVideoPokerGameDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
+
+      const title = this._getResource('ProductCC') + ' - ' + this._getResource('DetailedBetlist') + ' - ' + this._formatDateString(winlostDate);
+
+      this._openPopup(url, title);
+    };
+
+    window.showSGDetails = (transId, winlostDate, custId, transType) => {
+      const {
+        rootUrl,
+        baseCurrency
+      } = this.props;
+      const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getSGDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
+
+      const title = this._getResource('ProductSG') + ' - ' + this._getResource('DetailedBetlist') + ' - ' + this._formatDateString(winlostDate);
+
+      this._openPopup(url, title);
+    };
+  }
+
+  componentWillUnmount() {
+    window.showMP = undefined;
+    window.showCombMP = undefined;
+    window.ViewResult = undefined;
+    window.showNewCombMP = undefined;
+    window.showCombMPDetail = undefined;
+    window.ViewCashOutHistory = undefined;
+    window.ShowBonusDetails = undefined;
+    window.showAGCasinoDetails = undefined;
+    window.showRnGCasinoDetails = undefined;
+    window.showVoidBridgeDetails = undefined;
+    window.showTodayRunningBetsDetails = undefined;
+    window.showColossusBetsDetails = undefined;
+    window.showGlobalGaming = undefined;
+    window.showPPDetails = undefined;
+    window.showSingleMatchParlayDetail = undefined;
+    window.showSGDetails = undefined;
+  }
+
+  _getResource(key) {
+    return this.props.getResourceFunc ? this.props.getResourceFunc(key) : key;
+  }
+
+  _formatDateString(dateString) {
+    return this.props.formatDateStringFunc ? this.props.formatDateStringFunc(dateString) : dateString;
+  }
+
+  _beforeShow() {
+    this.props.beforeShowFunc && this.props.beforeShowFunc();
+  }
+
+  _afterShow() {
+    this.props.afterShowFunc && this.props.afterShowFunc();
+  }
+
+  _resolveClientUrl(relativeUrl) {
+    return this.props.rootUrl + relativeUrl;
+  }
+
+  _showMixParlayDetail(transId, divEvent) {
+    if (divEvent.style.display === 'none') {
+      const url = this._resolveClientUrl('api/MixParlayBetList/Detail?transId=' + transId);
+
+      this._beforeShow(); // this.props.toggleLoader(true);
+
+
+      _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_1__["default"].getData(url).then(result => {
+        let choice = '';
+        const length = result.data.length;
+
+        for (let i = 0; i < length; i++) {
+          choice += result.data[i];
+
+          if (i < length - 1) {
+            choice += '<div class="line"></div>';
+          }
+        }
+
+        divEvent.innerHTML = choice;
+        divEvent.style.display = 'block';
+
+        this._afterShow();
+      }).catch(error => {
+        this._afterShow();
+
+        console.log(error);
+      });
+    } else {
+      divEvent.style.display = 'none';
+      divEvent.innerHTML = '';
     }
-  }, {
-    key: "_showThirdPartyResult",
-    value: function _showThirdPartyResult(url, title) {
-      var _this5 = this;
+  }
+
+  _showNewParlayDetail(rootUrl, transId, transIndex, refNo, handicap1, handicap2, betcheck, betteam, custId) {
+    let divEvent = document.querySelector('#divEvent_' + transId + '' + transIndex);
+    let nameDiv = document.querySelector('#combinationOfferName_' + transId + transIndex);
+    divEvent.classList.add('mx-parlay'); //to make line-through for void-parlay-ticket
+
+    if (divEvent.style.display == 'none') {
+      let url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getChoiceParlayDetailUrl(rootUrl, transId, refNo, handicap1, handicap2, betcheck, betteam, custId);
 
       this._beforeShow(); //this.props.toggleLoader(true);
 
 
-      _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_1__["default"].getData(url).then(function (result) {
-        if (result.data !== '') {
-          _this5._openPopup(result.data, title);
-        }
+      _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_1__["default"].getData(url).then(result => {
+        let choice = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].buildChoiceParlayDetail(result.data);
+        divEvent.innerHTML = choice;
+        divEvent.style.display = 'block';
+        nameDiv.style.display = 'none';
 
-        _this5._afterShow();
-      })["catch"](function (error) {
-        _this5._afterShow();
+        this._afterShow();
+      }).catch(error => {
+        this._afterShow();
 
         console.log(error);
       });
+    } else {
+      divEvent.style.display = 'none';
+      divEvent.innerHTML = '';
+      nameDiv.style.display = 'block';
     }
-  }, {
-    key: "_showRngCasinoResult",
-    value: function _showRngCasinoResult(refno, url, title) {
-      var _this6 = this;
+  }
+
+  _showThirdPartyResult(url, title) {
+    this._beforeShow(); //this.props.toggleLoader(true);
+
+
+    _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_1__["default"].getData(url).then(result => {
+      if (result.data !== '') {
+        this._openPopup(result.data, title);
+      }
+
+      this._afterShow();
+    }).catch(error => {
+      this._afterShow();
+
+      console.log(error);
+    });
+  }
+
+  _showRngCasinoResult(refno, url, title) {
+    this._beforeShow();
+
+    _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_1__["default"].postData(url, {
+      refno
+    }).then(result => {
+      if (result.data.Success) {
+        if (result.data.Result === '') {
+          return;
+        }
+
+        this._openPopup(result.data.Result, title);
+      } else {
+        alert(this._getResource("ErrorProcessingMsg"));
+      }
+
+      this._afterShow();
+    }).catch(error => {
+      this._afterShow();
+
+      console.log(error);
+    });
+  }
+
+  _showSingleMatchParlayDetail(rootUrl, transId, custId, status, transIndex) {
+    const divEvent = document.querySelector('#divEvent_' + transId + '' + transIndex);
+
+    if (divEvent.style.display == 'none') {
+      const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleMatchParlayDetailUrl(rootUrl, transId, custId, status);
 
       this._beforeShow();
 
-      _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_1__["default"].postData(url, {
-        refno: refno
-      }).then(function (result) {
-        if (result.data.Success) {
-          if (result.data.Result === '') {
-            return;
-          }
+      _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_1__["default"].getData(url).then(result => {
+        const selection = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].buildSingleMatchParlayDetail(result.data);
+        divEvent.innerHTML = selection;
+        divEvent.style.display = 'block';
 
-          _this6._openPopup(result.data.Result, title);
-        } else {
-          alert(_this6._getResource("ErrorProcessingMsg"));
-        }
-
-        _this6._afterShow();
-      })["catch"](function (error) {
-        _this6._afterShow();
-
+        this._afterShow();
+      }).catch(function (error) {
         console.log(error);
       });
+    } else {
+      divEvent.style.display = 'none';
+      divEvent.innerHTML = '';
     }
-  }, {
-    key: "_showSingleMatchParlayDetail",
-    value: function _showSingleMatchParlayDetail(rootUrl, transId, custId, status, transIndex) {
-      var _this7 = this;
+  }
 
-      var divEvent = document.querySelector('#divEvent_' + transId + '' + transIndex);
+  _openPopup(url, title) {
+    this.setState({
+      isShowPopup: true,
+      popupUrl: url,
+      popupTitle: title
+    });
+  }
 
-      if (divEvent.style.display == 'none') {
-        var url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleMatchParlayDetailUrl(rootUrl, transId, custId, status);
+  _closePopup() {
+    this.setState({
+      isShowPopup: false
+    });
+  }
 
-        this._beforeShow();
+  render() {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "betlist-layout"
+    }, this.props.children, this.state.isShowPopup && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_popup__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      isShow: true,
+      iframeUrl: this.state.popupUrl,
+      title: this.state.popupTitle,
+      width: 900,
+      height: 600,
+      onClose: () => this._closePopup()
+    }));
+  }
 
-        _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_1__["default"].getData(url).then(function (result) {
-          var selection = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].buildSingleMatchParlayDetail(result.data);
-          divEvent.innerHTML = selection;
-          divEvent.style.display = 'block';
+}
 
-          _this7._afterShow();
-        })["catch"](function (error) {
-          console.log(error);
-        });
-      } else {
-        divEvent.style.display = 'none';
-        divEvent.innerHTML = '';
-      }
-    }
-  }, {
-    key: "_openPopup",
-    value: function _openPopup(url, title) {
-      this.setState({
-        isShowPopup: true,
-        popupUrl: url,
-        popupTitle: title
-      });
-    }
-  }, {
-    key: "_closePopup",
-    value: function _closePopup() {
-      this.setState({
-        isShowPopup: false
-      });
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this8 = this;
-
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "betlist-layout"
-      }, this.props.children, this.state.isShowPopup && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_popup__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        isShow: true,
-        iframeUrl: this.state.popupUrl,
-        title: this.state.popupTitle,
-        width: 900,
-        height: 600,
-        onClose: function onClose() {
-          return _this8._closePopup();
-        }
-      }));
-    }
-  }]);
-
-  return BetListLayout;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
-
-BetListLayout.propTypes = (_BetListLayout$propTy = {
+BetListLayout.propTypes = {
   pageName: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string.isRequired,
   rootUrl: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string.isRequired,
   getResourceFunc: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func,
   baseCurrency: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string,
   beforeShowFunc: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func,
-  afterShowFunc: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func
-}, _defineProperty(_BetListLayout$propTy, "beforeShowFunc", prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func), _defineProperty(_BetListLayout$propTy, "afterShowFunc", prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func), _defineProperty(_BetListLayout$propTy, "formatDateStringFunc", prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func), _BetListLayout$propTy);
+  afterShowFunc: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func,
+  beforeShowFunc: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func,
+  afterShowFunc: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func,
+  formatDateStringFunc: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func
+};
 BetListLayout.defaultProps = {
   rootUrl: '/',
   baseCurrency: ''
@@ -1923,330 +1788,288 @@ BetListLayout.defaultProps = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/QueryString */ "./www/js/source/reactpages/lib/QueryString.js");
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./constants */ "./www/js/source/reactpages/layouts/betlist/lib/constants.js");
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
 
-
-var BetList =
-/*#__PURE__*/
-function () {
-  function BetList() {
-    _classCallCheck(this, BetList);
+class BetList {
+  _isFastMarket(bettype) {
+    return bettype >= _constants__WEBPACK_IMPORTED_MODULE_1__["BetType"].MIN_FASTMARKET && bettype <= _constants__WEBPACK_IMPORTED_MODULE_1__["BetType"].MAX_FASTMARKET;
   }
 
-  _createClass(BetList, [{
-    key: "_isFastMarket",
-    value: function _isFastMarket(bettype) {
-      return bettype >= _constants__WEBPACK_IMPORTED_MODULE_1__["BetType"].MIN_FASTMARKET && bettype <= _constants__WEBPACK_IMPORTED_MODULE_1__["BetType"].MAX_FASTMARKET;
-    }
-  }, {
-    key: "_getMixParlayResultUrl",
-    value: function _getMixParlayResultUrl(rootUrl, refno, winlostdate, bettype) {
-      var url = rootUrl + 'ResultReport/ResultPopup';
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'refno', refno);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'winlossdate', winlostdate);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'bettype', bettype);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'matchid', 1);
-      return url;
-    }
-  }, {
-    key: "_getSportBookResultUrl",
-    value: function _getSportBookResultUrl(rootUrl, matchid, bettype, raceNo, sporttype, league, isOutright, extension1, extension2) {
-      var url = rootUrl + 'ResultReport/ResultPopup';
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'matchid', matchid);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'bettype', bettype);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'raceno', raceNo);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'sporttype', sporttype);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'isoutright', isOutright);
+  _getMixParlayResultUrl(rootUrl, refno, winlostdate, bettype) {
+    let url = rootUrl + 'ResultReport/ResultPopup';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'refno', refno);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'winlossdate', winlostdate);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'bettype', bettype);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'matchid', 1);
+    return url;
+  }
 
-      if (this._isFastMarket(bettype)) {
-        url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'handicap1', extension1);
-        url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'handicap2', extension2);
-      } else {
-        url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'betid', extension1);
+  _getSportBookResultUrl(rootUrl, matchid, bettype, raceNo, sporttype, league, isOutright, extension1, extension2) {
+    let url = rootUrl + 'ResultReport/ResultPopup';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'matchid', matchid);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'bettype', bettype);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'raceno', raceNo);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'sporttype', sporttype);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'isoutright', isOutright);
+
+    if (this._isFastMarket(bettype)) {
+      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'handicap1', extension1);
+      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'handicap2', extension2);
+    } else {
+      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'betid', extension1);
+    }
+
+    return url;
+  }
+
+  getResultUrl(rootUrl, matchid, raceNo, bettype, sporttype, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid) {
+    bettype = Number(bettype);
+    let isParlay = bettype === _constants__WEBPACK_IMPORTED_MODULE_1__["BetType"].MIXPARLAY || bettype === _constants__WEBPACK_IMPORTED_MODULE_1__["BetType"].SYSTEMPARLAY || bettype === _constants__WEBPACK_IMPORTED_MODULE_1__["BetType"].MIXPARLAY_BETRADAR;
+    let url = isParlay ? this._getMixParlayResultUrl(rootUrl, refnoMixParlay, winlostdate, bettype) : this._getSportBookResultUrl(rootUrl, matchid, bettype, raceNo, sporttype, league, isOutright, extension1, extension2, custid);
+    return url;
+  }
+
+  getChoiceParlayDetailUrl(rootUrl, transId, refNo, handicap1, handicap2, betcheck, betteam, custId) {
+    var url = rootUrl + 'api/MixParlayBetList/NewParlayDetail';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'refNo', refNo);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'handicap1', handicap1);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'handicap2', handicap2);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'betcheck', betcheck);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'betteam', betteam);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
+    return url;
+  }
+
+  buildChoiceParlayDetail(response) {
+    let choice = '';
+    let length = response.Data === null ? 0 : response.Data.length;
+
+    if (length > 0) {
+      for (let i = 0; i < response.Texts.length; i++) {
+        choice += response.Texts[i];
       }
 
-      return url;
-    }
-  }, {
-    key: "getResultUrl",
-    value: function getResultUrl(rootUrl, matchid, raceNo, bettype, sporttype, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid) {
-      bettype = Number(bettype);
-      var isParlay = bettype === _constants__WEBPACK_IMPORTED_MODULE_1__["BetType"].MIXPARLAY || bettype === _constants__WEBPACK_IMPORTED_MODULE_1__["BetType"].SYSTEMPARLAY || bettype === _constants__WEBPACK_IMPORTED_MODULE_1__["BetType"].MIXPARLAY_BETRADAR;
-      var url = isParlay ? this._getMixParlayResultUrl(rootUrl, refnoMixParlay, winlostdate, bettype) : this._getSportBookResultUrl(rootUrl, matchid, bettype, raceNo, sporttype, league, isOutright, extension1, extension2, custid);
-      return url;
-    }
-  }, {
-    key: "getChoiceParlayDetailUrl",
-    value: function getChoiceParlayDetailUrl(rootUrl, transId, refNo, handicap1, handicap2, betcheck, betteam, custId) {
-      var url = rootUrl + 'api/MixParlayBetList/NewParlayDetail';
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'refNo', refNo);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'handicap1', handicap1);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'handicap2', handicap2);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'betcheck', betcheck);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'betteam', betteam);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
-      return url;
-    }
-  }, {
-    key: "buildChoiceParlayDetail",
-    value: function buildChoiceParlayDetail(response) {
-      var choice = '';
-      var length = response.Data === null ? 0 : response.Data.length;
+      choice += '<div class="line"></div>';
 
-      if (length > 0) {
-        for (var i = 0; i < response.Texts.length; i++) {
-          choice += response.Texts[i];
-        }
+      for (let i = 0; i < response.Data.length; i++) {
+        let item = response.Data[i];
+        choice += item;
 
-        choice += '<div class="line"></div>';
-
-        for (var _i = 0; _i < response.Data.length; _i++) {
-          var item = response.Data[_i];
-          choice += item;
-
-          if (_i < length - 1) {
-            choice += '<div class="line"></div>';
-          }
+        if (i < length - 1) {
+          choice += '<div class="line"></div>';
         }
       }
-
-      return choice;
     }
-  }, {
-    key: "buildSingleMatchParlayDetail",
-    value: function buildSingleMatchParlayDetail(data) {
-      var selection = '';
-      var length = data === null ? 0 : data.length;
 
-      if (length > 0) {
-        selection = '<div class="single-match-parlay-detail">';
+    return choice;
+  }
 
-        for (var i = 0; i < data.length; i++) {
-          selection += data[i];
-        }
+  buildSingleMatchParlayDetail(data) {
+    let selection = '';
+    let length = data === null ? 0 : data.length;
 
-        selection += '</div>';
+    if (length > 0) {
+      selection = '<div class="single-match-parlay-detail">';
+
+      for (let i = 0; i < data.length; i++) {
+        selection += data[i];
       }
 
-      return selection;
+      selection += '</div>';
     }
-  }, {
-    key: "getParlayDetailUrl",
-    value: function getParlayDetailUrl(rootUrl, transId, refNo, betId, custId, betTeam, baseCurrency) {
-      if (Number(transId) === 0) {
-        return;
-      }
 
-      var url = rootUrl + 'SystemParlayBetList/Detail';
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'refno', refNo);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'betteam', betTeam);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'basecurrency', baseCurrency);
-      return url;
-    }
-  }, {
-    key: "getSingleMatchParlayDetailUrl",
-    value: function getSingleMatchParlayDetailUrl(rootUrl, transId, custId, status) {
-      if (Number(transId) === 0) {
-        return;
-      }
+    return selection;
+  }
 
-      var url = rootUrl + 'api/SingleMatchParlayBetList/Detail';
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, "status", status);
-      return url;
+  getParlayDetailUrl(rootUrl, transId, refNo, betId, custId, betTeam, baseCurrency) {
+    if (Number(transId) === 0) {
+      return;
     }
-  }, {
-    key: "getCashOutHistoryPopupSetting",
-    value: function getCashOutHistoryPopupSetting(rootUrl, baseCurrency, transId, refNo, betType, betdaqId) {
-      var isCashOut = betdaqId < 1 || betType === _constants__WEBPACK_IMPORTED_MODULE_1__["BetType"].CASHOUT;
-      var url = rootUrl + 'CashOutBetList/Detail';
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'refNo', refNo);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'betType', betType);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'betdaqId', betdaqId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'isCashout', isCashOut);
-      return {
-        url: url,
-        isCashOut: isCashOut
-      };
-    }
-  }, {
-    key: "getBonusDetailUrl",
-    value: function getBonusDetailUrl(rootUrl, refCode, transId, baseCurrency) {
-      var url = rootUrl + 'BonusBetList/Detail';
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'RefCode', refCode);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'TransId', transId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
-      return url;
-    }
-  }, {
-    key: "getAGCasinoDetailUrl",
-    value: function getAGCasinoDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
-      var url = rootUrl + 'AGCasinoBetList/Detail';
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transid', transId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'date', winlostDate);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custid', custId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transType', transType);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
-      return url;
-    }
-  }, {
-    key: "getRnGCasinoDetailUrl",
-    value: function getRnGCasinoDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
-      var url = rootUrl + 'RnGCasinoBetList/Detail';
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'date', winlostDate);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transType', transType);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
-      return url;
-    }
-  }, {
-    key: "getVoidBridgeDetailUrl",
-    value: function getVoidBridgeDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
-      var url = rootUrl + 'VoidbridgeBetList/Detail';
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'date', winlostDate);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transType', transType);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
-      return url;
-    }
-  }, {
-    key: "getAllBetDetailUrl",
-    value: function getAllBetDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
-      var url = rootUrl + 'AllBetBetList/Detail';
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transid', transId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custid', custId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transType', transType);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'date', winlostDate);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
-      return url;
-    }
-  }, {
-    key: "getColossusBetsDetailUrl",
-    value: function getColossusBetsDetailUrl(rootUrl, baseCurrency, refNo, winlostDate, transId, custId, betCheck) {
-      var url = rootUrl + 'ColossusBetBetList/Detail';
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'refNo', refNo);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'date', winlostDate);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transid', transId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custid', custId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'betCheck', betCheck);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
-      return url;
-    }
-  }, {
-    key: "getGlobalGamingDetailUrl",
-    value: function getGlobalGamingDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
-      var url = rootUrl + 'GlobalGamingBetList/Detail';
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'date', winlostDate);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transType', transType);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
-      return url;
-    }
-  }, {
-    key: "getPPDetailUrl",
-    value: function getPPDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
-      var url = rootUrl + 'PragmaticPlayBetList/Detail';
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'date', winlostDate);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transType', transType);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
-      return url;
-    }
-  }, {
-    key: "getVideoPokerGameDetailUrl",
-    value: function getVideoPokerGameDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
-      var url = rootUrl + 'CardClubBetList/Detail';
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'date', winlostDate);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transType', transType);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
-      return url;
-    }
-  }, {
-    key: "getSGDetailUrl",
-    value: function getSGDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
-      var url = rootUrl + 'SGBetList/Detail';
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'date', winlostDate);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transType', transType);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
-      return url;
-    }
-  }, {
-    key: "getRngCasinoResultUrl",
-    value: function getRngCasinoResultUrl(rootUrl) {
-      return rootUrl + 'ResultReport/ShowRngCasinoSingleWalletResult';
-    }
-  }, {
-    key: "getVoidbridgeResultUrl",
-    value: function getVoidbridgeResultUrl(rootUrl, custid, gamePlayID) {
-      var url = rootUrl + 'ResultReport/VoidbridgeResult';
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custid', custid);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'gamePlayID', gamePlayID);
-      return url;
-    }
-  }, {
-    key: "getPPResultUrl",
-    value: function getPPResultUrl(rootUrl, custid, gamePlayId) {
-      var url = rootUrl + 'PPResultPopup/Index';
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custid', custid);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'gamePlayId', gamePlayId);
-      return url;
-    }
-  }, {
-    key: "getCardClubResultUrl",
-    value: function getCardClubResultUrl(rootUrl, custid, gameTypeId, transId3rd) {
-      var url = rootUrl + 'CardClubResultPopup/Index';
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custid', custid);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'gameTypeId', gameTypeId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId3rd', transId3rd);
-      return url;
-    }
-  }, {
-    key: "getSGResultUrl",
-    value: function getSGResultUrl(rootUrl, custid, gamePlayId) {
-      var url = rootUrl + 'SGResultPopup/Index';
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custid', custid);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'gamePlayId', gamePlayId);
-      return url;
-    }
-  }, {
-    key: "getAllBetResultUrl",
-    value: function getAllBetResultUrl(rootUrl, transdesc, betcheck, bettype) {
-      var url = rootUrl + 'ResultReport/AllBetResult';
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'betcheck', betcheck);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'bettype', bettype);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transdesc', encodeURIComponent(transdesc));
-      return url;
-    }
-  }, {
-    key: "getGlobalGamingResultUrl",
-    value: function getGlobalGamingResultUrl(rootUrl, custid, gameId) {
-      var url = rootUrl + 'ResultReport/GlobalGamingResult';
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custid', custid);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'gameId', gameId);
-      return url;
-    }
-  }]);
 
-  return BetList;
-}();
+    var url = rootUrl + 'SystemParlayBetList/Detail';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'refno', refNo);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'betteam', betTeam);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'basecurrency', baseCurrency);
+    return url;
+  }
+
+  getSingleMatchParlayDetailUrl(rootUrl, transId, custId, status) {
+    if (Number(transId) === 0) {
+      return;
+    }
+
+    var url = rootUrl + 'api/SingleMatchParlayBetList/Detail';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, "status", status);
+    return url;
+  }
+
+  getCashOutHistoryPopupSetting(rootUrl, baseCurrency, transId, refNo, betType, betdaqId) {
+    var isCashOut = betdaqId < 1 || betType === _constants__WEBPACK_IMPORTED_MODULE_1__["BetType"].CASHOUT;
+    var url = rootUrl + 'CashOutBetList/Detail';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'refNo', refNo);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'betType', betType);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'betdaqId', betdaqId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'isCashout', isCashOut);
+    return {
+      url: url,
+      isCashOut: isCashOut
+    };
+  }
+
+  getBonusDetailUrl(rootUrl, refCode, transId, baseCurrency) {
+    let url = rootUrl + 'BonusBetList/Detail';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'RefCode', refCode);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'TransId', transId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
+    return url;
+  }
+
+  getAGCasinoDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
+    let url = rootUrl + 'AGCasinoBetList/Detail';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transid', transId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'date', winlostDate);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custid', custId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transType', transType);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
+    return url;
+  }
+
+  getRnGCasinoDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
+    let url = rootUrl + 'RnGCasinoBetList/Detail';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'date', winlostDate);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transType', transType);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
+    return url;
+  }
+
+  getVoidBridgeDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
+    let url = rootUrl + 'VoidbridgeBetList/Detail';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'date', winlostDate);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transType', transType);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
+    return url;
+  }
+
+  getAllBetDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
+    let url = rootUrl + 'AllBetBetList/Detail';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transid', transId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custid', custId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transType', transType);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'date', winlostDate);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
+    return url;
+  }
+
+  getColossusBetsDetailUrl(rootUrl, baseCurrency, refNo, winlostDate, transId, custId, betCheck) {
+    let url = rootUrl + 'ColossusBetBetList/Detail';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'refNo', refNo);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'date', winlostDate);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transid', transId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custid', custId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'betCheck', betCheck);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
+    return url;
+  }
+
+  getGlobalGamingDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
+    let url = rootUrl + 'GlobalGamingBetList/Detail';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'date', winlostDate);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transType', transType);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
+    return url;
+  }
+
+  getPPDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
+    let url = rootUrl + 'PragmaticPlayBetList/Detail';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'date', winlostDate);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transType', transType);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
+    return url;
+  }
+
+  getVideoPokerGameDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
+    let url = rootUrl + 'CardClubBetList/Detail';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'date', winlostDate);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transType', transType);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
+    return url;
+  }
+
+  getSGDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
+    let url = rootUrl + 'SGBetList/Detail';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'date', winlostDate);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transType', transType);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
+    return url;
+  }
+
+  getRngCasinoResultUrl(rootUrl) {
+    return rootUrl + 'ResultReport/ShowRngCasinoSingleWalletResult';
+  }
+
+  getVoidbridgeResultUrl(rootUrl, custid, gamePlayID) {
+    let url = rootUrl + 'ResultReport/VoidbridgeResult';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custid', custid);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'gamePlayID', gamePlayID);
+    return url;
+  }
+
+  getPPResultUrl(rootUrl, custid, gamePlayId) {
+    let url = rootUrl + 'PPResultPopup/Index';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custid', custid);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'gamePlayId', gamePlayId);
+    return url;
+  }
+
+  getCardClubResultUrl(rootUrl, custid, gameTypeId, transId3rd) {
+    let url = rootUrl + 'CardClubResultPopup/Index';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custid', custid);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'gameTypeId', gameTypeId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId3rd', transId3rd);
+    return url;
+  }
+
+  getSGResultUrl(rootUrl, custid, gamePlayId) {
+    let url = rootUrl + 'SGResultPopup/Index';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custid', custid);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'gamePlayId', gamePlayId);
+    return url;
+  }
+
+  getAllBetResultUrl(rootUrl, transdesc, betcheck, bettype) {
+    let url = rootUrl + 'ResultReport/AllBetResult';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'betcheck', betcheck);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'bettype', bettype);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transdesc', encodeURIComponent(transdesc));
+    return url;
+  }
+
+  getGlobalGamingResultUrl(rootUrl, custid, gameId) {
+    let url = rootUrl + 'ResultReport/GlobalGamingResult';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custid', custid);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'gameId', gameId);
+    return url;
+  }
+
+}
 
 /* harmony default export */ __webpack_exports__["default"] = (new BetList());
 
@@ -2263,7 +2086,7 @@ function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BetType", function() { return BetType; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SportType", function() { return SportType; });
-var BetType = {
+const BetType = {
   CASHOUT: 911,
   MIXPARLAY: 9,
   SYSTEMPARLAY: 29,
@@ -2271,7 +2094,7 @@ var BetType = {
   MIN_FASTMARKET: 221,
   MAX_FASTMARKET: 227
 };
-var SportType = {
+const SportType = {
   RNG_GAME: 208,
   RNG_MINIGAME: 209,
   RNG_MOBILE: 210,
@@ -2311,56 +2134,35 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
-
-
-var DataService =
-/*#__PURE__*/
-function () {
-  function DataService() {
-    _classCallCheck(this, DataService);
+class DataService {
+  static getData(url, params) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(url, {
+      params: params
+    });
   }
 
-  _createClass(DataService, null, [{
-    key: "getData",
-    value: function getData(url, params) {
-      return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(url, {
-        params: params
-      });
-    }
-  }, {
-    key: "postData",
-    value: function postData(url, params) {
-      return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, params, {
-        headers: {
-          'X-Requested-With': 'XMLHttpRequest',
-          '__RequestVerificationToken': _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].getXsrfToken()
-        }
-      });
-    }
-  }, {
-    key: "getFile",
-    value: function getFile(url, params) {
-      return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, params, {
-        responseType: 'blob',
-        headers: {
-          'X-Requested-With': 'XMLHttpRequest',
-          '__RequestVerificationToken': _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].getXsrfToken()
-        }
-      });
-    }
-  }]);
+  static postData(url, params) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, params, {
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+        '__RequestVerificationToken': _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].getXsrfToken()
+      }
+    });
+  }
 
-  return DataService;
-}();
+  static getFile(url, params) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, params, {
+      responseType: 'blob',
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+        '__RequestVerificationToken': _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].getXsrfToken()
+      }
+    });
+  }
 
-
+}
 
 /***/ }),
 
@@ -2374,125 +2176,102 @@ function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return QueryString; });
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+class QueryString {
+  static _parseQueryString(queryString) {
+    let args = queryString.split('&');
+    let argsList = {};
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+    for (let i = 0; i < args.length; i++) {
+      let arg = unescape(args[i]);
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+      if (arg.length > 0) {
+        if (arg.indexOf('=') === -1) {
+          argsList[arg.toLowerCase().trim()] = null;
+        } else {
+          let keyValuePair = arg.split('=');
+          argsList[keyValuePair[0].toLowerCase().trim()] = keyValuePair[1].trim();
+        }
+      }
+    }
 
-var QueryString =
-/*#__PURE__*/
-function () {
-  function QueryString() {
-    _classCallCheck(this, QueryString);
+    return argsList;
   }
 
-  _createClass(QueryString, null, [{
-    key: "_parseQueryString",
-    value: function _parseQueryString(queryString) {
-      var args = queryString.split('&');
-      var argsList = {};
+  static _getQueryString(url) {
+    var index = url.indexOf("?");
+    return index < 0 ? "" : url.substring(index + 1, url.length);
+  }
 
-      for (var i = 0; i < args.length; i++) {
-        var arg = unescape(args[i]);
+  static _getRawUrl(url) {
+    var index = url.indexOf("?");
+    return index < 0 ? url : url.substring(0, index);
+  }
 
-        if (arg.length > 0) {
-          if (arg.indexOf('=') === -1) {
-            argsList[arg.toLowerCase().trim()] = null;
-          } else {
-            var keyValuePair = arg.split('=');
-            argsList[keyValuePair[0].toLowerCase().trim()] = keyValuePair[1].trim();
-          }
-        }
-      }
+  static setParam(url, name, value) {
+    var rawUrl = QueryString._getRawUrl(url);
 
-      return argsList;
-    }
-  }, {
-    key: "_getQueryString",
-    value: function _getQueryString(url) {
-      var index = url.indexOf("?");
-      return index < 0 ? "" : url.substring(index + 1, url.length);
-    }
-  }, {
-    key: "_getRawUrl",
-    value: function _getRawUrl(url) {
-      var index = url.indexOf("?");
-      return index < 0 ? url : url.substring(0, index);
-    }
-  }, {
-    key: "setParam",
-    value: function setParam(url, name, value) {
-      var rawUrl = QueryString._getRawUrl(url);
+    var queryString = QueryString._getQueryString(url);
 
-      var queryString = QueryString._getQueryString(url);
+    var args = QueryString._parseQueryString(queryString);
 
-      var args = QueryString._parseQueryString(queryString);
-
-      if (!name) {
-        return url;
-      } // Update value
-
-
-      var found = false;
-
-      for (var key in args) {
-        if (key && key.toLowerCase() === name.toLowerCase()) {
-          // Does not update data if value = undefined
-          if (value !== undefined) {
-            args[key] = value;
-          }
-
-          found = true;
-        }
-      }
-
-      if (!found) {
-        args[name.toLowerCase()] = value;
-      }
-
-      var queryArray = []; // Rebuild query string, ignore null value
-
-      for (var key1 in args) {
-        if (args[key1] != null && args[key1] !== undefined) {
-          queryArray.push(key1.toLowerCase() + "=" + args[key1]);
-        }
-      }
-
-      return rawUrl + "?" + queryArray.join("&");
-    }
-  }, {
-    key: "setParams",
-    value: function setParams(url, parameters) {
-      for (var property in parameters) {
-        if (parameters.hasOwnProperty(property)) {
-          url = QueryString.setParam(url, property, parameters[property]);
-        }
-      }
-
+    if (!name) {
       return url;
-    }
-  }, {
-    key: "getParam",
-    value: function getParam(url, name) {
-      var queryString = QueryString._getQueryString(url);
+    } // Update value
 
-      var args = QueryString._parseQueryString(queryString);
 
-      for (var key in args) {
-        if (key != null && key.toLowerCase() === name.toLowerCase()) {
-          return args[key];
+    var found = false;
+
+    for (var key in args) {
+      if (key && key.toLowerCase() === name.toLowerCase()) {
+        // Does not update data if value = undefined
+        if (value !== undefined) {
+          args[key] = value;
         }
+
+        found = true;
       }
-
-      return null;
     }
-  }]);
 
-  return QueryString;
-}();
+    if (!found) {
+      args[name.toLowerCase()] = value;
+    }
 
+    var queryArray = []; // Rebuild query string, ignore null value
 
+    for (var key1 in args) {
+      if (args[key1] != null && args[key1] !== undefined) {
+        queryArray.push(key1.toLowerCase() + "=" + args[key1]);
+      }
+    }
+
+    return rawUrl + "?" + queryArray.join("&");
+  }
+
+  static setParams(url, parameters) {
+    for (var property in parameters) {
+      if (parameters.hasOwnProperty(property)) {
+        url = QueryString.setParam(url, property, parameters[property]);
+      }
+    }
+
+    return url;
+  }
+
+  static getParam(url, name) {
+    var queryString = QueryString._getQueryString(url);
+
+    var args = QueryString._parseQueryString(queryString);
+
+    for (var key in args) {
+      if (key != null && key.toLowerCase() === name.toLowerCase()) {
+        return args[key];
+      }
+    }
+
+    return null;
+  }
+
+}
 
 /***/ }),
 
@@ -2507,10 +2286,7 @@ function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return createReducer; });
 function createReducer(initialState, handlers) {
-  return function reducer() {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-    var action = arguments.length > 1 ? arguments[1] : undefined;
-
+  return function reducer(state = initialState, action) {
     if (handlers.hasOwnProperty(action.type)) {
       return handlers[action.type](state, action);
     } else {
@@ -2531,11 +2307,11 @@ function createReducer(initialState, handlers) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "formatDateString", function() { return formatDateString; });
-var formatDateString = function formatDateString(dateString) {
-  var date = new Date(dateString);
-  var month = date.getMonth() + 1;
-  var day = date.getDate();
-  return "".concat(month < 10 ? '0' + month : month, "/").concat(day < 10 ? '0' + day : day, "/").concat(date.getFullYear());
+const formatDateString = dateString => {
+  const date = new Date(dateString);
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  return `${month < 10 ? '0' + month : month}/${day < 10 ? '0' + day : day}/${date.getFullYear()}`;
 };
 
 /***/ }),
@@ -2550,48 +2326,25 @@ var formatDateString = function formatDateString(dateString) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return LangHelper; });
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var DEFAULT_RESOURCE_NAME = "_language_en_US";
-var langCode = window.PageLanguage || "en-US";
-var resourceName = "_language_".concat(langCode.replace("-", "_"));
-
-var LangHelper =
-/*#__PURE__*/
-function () {
-  function LangHelper() {
-    _classCallCheck(this, LangHelper);
+const DEFAULT_RESOURCE_NAME = "_language_en_US";
+const langCode = window.PageLanguage || "en-US";
+const resourceName = `_language_${langCode.replace("-", "_")}`;
+class LangHelper {
+  static get currentLanguage() {
+    return langCode;
   }
 
-  _createClass(LangHelper, null, [{
-    key: "getSingleResource",
-    value: function getSingleResource(key) {
-      var langHandler = window[resourceName];
-      return langHandler && langHandler[key] || window[DEFAULT_RESOURCE_NAME] && window[DEFAULT_RESOURCE_NAME][key] || key;
-    }
-  }, {
-    key: "getResources",
-    value: function getResources(keys) {
-      var langHandler = window[resourceName];
-      return keys.map(function (key) {
-        return langHandler && langHandler[key] || window[DEFAULT_RESOURCE_NAME] && window[DEFAULT_RESOURCE_NAME][key] || key;
-      });
-    }
-  }, {
-    key: "currentLanguage",
-    get: function get() {
-      return langCode;
-    }
-  }]);
+  static getSingleResource(key) {
+    var langHandler = window[resourceName];
+    return langHandler && langHandler[key] || window[DEFAULT_RESOURCE_NAME] && window[DEFAULT_RESOURCE_NAME][key] || key;
+  }
 
-  return LangHelper;
-}();
+  static getResources(keys) {
+    var langHandler = window[resourceName];
+    return keys.map(key => langHandler && langHandler[key] || window[DEFAULT_RESOURCE_NAME] && window[DEFAULT_RESOURCE_NAME][key] || key);
+  }
 
-
+}
 
 /***/ }),
 
@@ -2608,41 +2361,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux-logger */ "./node_modules/redux-logger/dist/redux-logger.js");
 /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux_logger__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _constants_config__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../constants/config */ "./www/js/source/reactpages/constants/config.js");
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
+const isDev = "development" === "development";
+const configName = _constants_config__WEBPACK_IMPORTED_MODULE_1__["debuggingConfig"].name; // middleware that logs actions
 
-var isDev = "development" === "development";
-var configName = _constants_config__WEBPACK_IMPORTED_MODULE_1__["debuggingConfig"].name; // middleware that logs actions
-
-var loggerMiddleware = Object(redux_logger__WEBPACK_IMPORTED_MODULE_0__["createLogger"])({
-  predicate: function predicate(getState, action) {
-    return isDev || window[configName] && window[configName].env === _constants_config__WEBPACK_IMPORTED_MODULE_1__["debuggingConfig"].env && (!window[configName].actionFilter || window[configName].actionFilter === action.type);
-  }
+const loggerMiddleware = Object(redux_logger__WEBPACK_IMPORTED_MODULE_0__["createLogger"])({
+  predicate: (getState, action) => isDev || window[configName] && window[configName].env === _constants_config__WEBPACK_IMPORTED_MODULE_1__["debuggingConfig"].env && (!window[configName].actionFilter || window[configName].actionFilter === action.type)
 });
-
-var Logger =
-/*#__PURE__*/
-function () {
-  function Logger() {
-    _classCallCheck(this, Logger);
+class Logger {
+  static getLoggerMiddleware() {
+    return loggerMiddleware;
   }
 
-  _createClass(Logger, null, [{
-    key: "getLoggerMiddleware",
-    value: function getLoggerMiddleware() {
-      return loggerMiddleware;
-    }
-  }]);
-
-  return Logger;
-}();
-
-
+}
 
 /***/ }),
 
@@ -2656,89 +2388,64 @@ function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Site; });
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+const _rootUrl = window.rootUrl || "/";
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+let _xsrfToken = null;
+class Site {
+  static getXsrfToken() {
+    if (!_xsrfToken) {
+      _xsrfToken = document.querySelector("input[name=__RequestVerificationToken]").value;
+    }
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var _rootUrl = window.rootUrl || "/";
-
-var _xsrfToken = null;
-
-var Site =
-/*#__PURE__*/
-function () {
-  function Site() {
-    _classCallCheck(this, Site);
+    return _xsrfToken;
   }
 
-  _createClass(Site, null, [{
-    key: "getXsrfToken",
-    value: function getXsrfToken() {
-      if (!_xsrfToken) {
-        _xsrfToken = document.querySelector("input[name=__RequestVerificationToken]").value;
+  static resolveClientUrl(relativeUrl) {
+    return _rootUrl + relativeUrl;
+  }
+
+  static convertDateToString(date) {
+    return typeof date === "string" ? date : date.format("MM/DD/YYYY");
+  }
+
+  static asNull(text) {
+    if (text != null) {
+      text = text.trim();
+
+      if (text === '') {
+        return null;
       }
-
-      return _xsrfToken;
     }
-  }, {
-    key: "resolveClientUrl",
-    value: function resolveClientUrl(relativeUrl) {
-      return _rootUrl + relativeUrl;
-    }
-  }, {
-    key: "convertDateToString",
-    value: function convertDateToString(date) {
-      return typeof date === "string" ? date : date.format("MM/DD/YYYY");
-    }
-  }, {
-    key: "asNull",
-    value: function asNull(text) {
-      if (text != null) {
-        text = text.trim();
 
-        if (text === '') {
-          return null;
-        }
-      }
+    return text;
+  }
 
-      return text;
-    }
-  }, {
-    key: "downloadFile",
-    value: function downloadFile(data, fileName) {
-      var url = window.URL.createObjectURL(new Blob([data]));
-      var link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', fileName);
-      document.body.appendChild(link);
-      link.click();
-      link.parentNode.removeChild(link);
-      window.URL.revokeObjectURL(url);
-    }
-  }, {
-    key: "readAsJson",
-    value: function readAsJson(blob, callback) {
-      var reader = new FileReader();
+  static downloadFile(data, fileName) {
+    const url = window.URL.createObjectURL(new Blob([data]));
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', fileName);
+    document.body.appendChild(link);
+    link.click();
+    link.parentNode.removeChild(link);
+    window.URL.revokeObjectURL(url);
+  }
 
-      reader.onload = function () {
-        callback && callback(JSON.parse(reader.result));
-      };
+  static readAsJson(blob, callback) {
+    const reader = new FileReader();
 
-      reader.readAsText(blob);
-    }
-  }, {
-    key: "getRootUrl",
-    value: function getRootUrl() {
-      return _rootUrl;
-    }
-  }]);
+    reader.onload = function () {
+      callback && callback(JSON.parse(reader.result));
+    };
 
-  return Site;
-}();
+    reader.readAsText(blob);
+  }
 
+  static getRootUrl() {
+    return _rootUrl;
+  }
 
+}
 
 /***/ }),
 
@@ -2755,37 +2462,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
 /* harmony import */ var _logger__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./logger */ "./www/js/source/reactpages/lib/logger.js");
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
 
-
-
-var Store =
-/*#__PURE__*/
-function () {
-  function Store() {
-    _classCallCheck(this, Store);
+class Store {
+  static createStore(reducer, initialState) {
+    const loggerMiddleware = _logger__WEBPACK_IMPORTED_MODULE_2__["default"].getLoggerMiddleware();
+    const enhancer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["compose"])(Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"], // lets us dispatch() functions
+    loggerMiddleware));
+    return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(reducer, initialState, enhancer);
   }
 
-  _createClass(Store, null, [{
-    key: "createStore",
-    value: function createStore(reducer, initialState) {
-      var loggerMiddleware = _logger__WEBPACK_IMPORTED_MODULE_2__["default"].getLoggerMiddleware();
-      var enhancer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["compose"])(Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"], // lets us dispatch() functions
-      loggerMiddleware));
-      return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(reducer, initialState, enhancer);
-    }
-  }]);
-
-  return Store;
-}();
-
-
+}
 
 /***/ }),
 
@@ -2801,13 +2489,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isLoading", function() { return isLoading; });
 /* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./www/js/source/reactpages/actions/types.js");
 /* harmony import */ var _lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
+const isLoading = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, {
+  [_actions_types__WEBPACK_IMPORTED_MODULE_0__["TOGGLE_LOADER"]](state, action) {
+    return action.data;
+  }
 
-var isLoading = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, _defineProperty({}, _actions_types__WEBPACK_IMPORTED_MODULE_0__["TOGGLE_LOADER"], function (state, action) {
-  return action.data;
-}));
+});
 
 /***/ }),
 
@@ -2831,9 +2520,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var requestParam = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, _defineProperty({}, _actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_REQUEST_PARAM"], function (state, action) {
-  return _objectSpread({}, action.data);
-}));
+const requestParam = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, {
+  [_actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_REQUEST_PARAM"]](state, action) {
+    return _objectSpread({}, action.data);
+  }
+
+});
 
 /***/ })
 

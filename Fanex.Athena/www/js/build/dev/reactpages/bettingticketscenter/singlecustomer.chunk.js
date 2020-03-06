@@ -148,7 +148,7 @@
 /******/
 /******/
 /******/ 	// add entry module to deferred list
-/******/ 	deferredModules.push(["./www/js/source/reactpages/pages/bettingticketscenter/singlecustomer/components/index.jsx","common"]);
+/******/ 	deferredModules.push(["./www/js/source/reactpages/pages/bettingticketscenter/singlecustomer/components/index.jsx","lib/common"]);
 /******/ 	// run deferred modules when ready
 /******/ 	return checkDeferredModules();
 /******/ })
@@ -168,13 +168,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setBaseCurrencyList", function() { return setBaseCurrencyList; });
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/actions/types.js");
 
-var setSelectedBaseCurrency = function setSelectedBaseCurrency(baseCurrency) {
+const setSelectedBaseCurrency = baseCurrency => {
   return {
     type: _types__WEBPACK_IMPORTED_MODULE_0__["SET_SELECTED_BASECURRENCY"],
     data: baseCurrency
   };
 };
-var setBaseCurrencyList = function setBaseCurrencyList(baseCurrencyList) {
+const setBaseCurrencyList = baseCurrencyList => {
   return {
     type: _types__WEBPACK_IMPORTED_MODULE_0__["SET_BASECURRENCY_LIST"],
     data: baseCurrencyList
@@ -195,7 +195,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "changeIsConvertAll", function() { return changeIsConvertAll; });
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/actions/types.js");
 
-var changeIsConvertAll = function changeIsConvertAll(checked) {
+const changeIsConvertAll = checked => {
   return {
     type: _types__WEBPACK_IMPORTED_MODULE_0__["CHANGE_IS_CONVERT_ALL"],
     data: checked
@@ -216,8 +216,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setDateRange", function() { return setDateRange; });
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/actions/types.js");
 
-var setDateRange = function setDateRange(dateRange) {
-  var range = {
+const setDateRange = dateRange => {
+  const range = {
     fromDate: dateRange.startDate,
     toDate: dateRange.endDate
   };
@@ -247,11 +247,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function getGridData(url, params) {
-  return function (dispatch) {
-    _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_1__["default"].postData(url, params).then(function (response) {
+  return dispatch => {
+    _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_1__["default"].postData(url, params).then(response => {
       response.data.timestamp = new Date().getTime();
       dispatch(setGridData(response.data));
-    })["catch"](function (error) {
+    }).catch(error => {
       alert("Sorry, an error occurred while processing your request.");
       dispatch(Object(_jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_2__["toggleLoader"])(false));
     });
@@ -278,7 +278,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSelectedLiveStatus", function() { return setSelectedLiveStatus; });
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/actions/types.js");
 
-var setSelectedLiveStatus = function setSelectedLiveStatus(item) {
+const setSelectedLiveStatus = item => {
   return {
     type: _types__WEBPACK_IMPORTED_MODULE_0__["SET_SELECTED_LIVESTATUS"],
     data: item
@@ -299,7 +299,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toggleLoader", function() { return toggleLoader; });
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/actions/types.js");
 
-var toggleLoader = function toggleLoader(show) {
+const toggleLoader = show => {
   return {
     type: _types__WEBPACK_IMPORTED_MODULE_0__["TOGGLE_LOADER"],
     data: show
@@ -320,7 +320,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSelectedPlatform", function() { return setSelectedPlatform; });
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/actions/types.js");
 
-var setSelectedPlatform = function setSelectedPlatform(item) {
+const setSelectedPlatform = item => {
   return {
     type: _types__WEBPACK_IMPORTED_MODULE_0__["SET_SELECTED_PLATFORM"],
     data: item
@@ -341,7 +341,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSelectedProduct", function() { return setSelectedProduct; });
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/actions/types.js");
 
-var setSelectedProduct = function setSelectedProduct(product) {
+const setSelectedProduct = product => {
   return {
     type: _types__WEBPACK_IMPORTED_MODULE_0__["SET_SELECTED_PRODUCT"],
     data: product
@@ -362,7 +362,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setReportTitle", function() { return setReportTitle; });
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/actions/types.js");
 
-var setReportTitle = function setReportTitle(title) {
+const setReportTitle = title => {
   return {
     type: _types__WEBPACK_IMPORTED_MODULE_0__["SET_REPORT_TITLE"],
     data: title
@@ -383,7 +383,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setRequestParam", function() { return setRequestParam; });
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/actions/types.js");
 
-var setRequestParam = function setRequestParam(data) {
+const setRequestParam = data => {
   return {
     type: _types__WEBPACK_IMPORTED_MODULE_0__["SET_REQUEST_PARAM"],
     data: data
@@ -404,7 +404,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSelectedStatus", function() { return setSelectedStatus; });
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/actions/types.js");
 
-var setSelectedStatus = function setSelectedStatus(item) {
+const setSelectedStatus = item => {
   return {
     type: _types__WEBPACK_IMPORTED_MODULE_0__["SET_SELECTED_STATUS"],
     data: item
@@ -441,49 +441,49 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_REQUEST_PARAM", function() { return SET_REQUEST_PARAM; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_REPORT_TITLE", function() { return SET_REPORT_TITLE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_PAGING_OPTION", function() { return SET_PAGING_OPTION; });
-var FETCH_DATA = 'FETCH_DATA';
-var SET_GRID_DATA = "SET_GRID_DATA";
+const FETCH_DATA = 'FETCH_DATA';
+const SET_GRID_DATA = "SET_GRID_DATA";
 /* Product */
 
-var SET_SELECTED_PRODUCT = "SET_SELECTED_PRODUCT";
+const SET_SELECTED_PRODUCT = "SET_SELECTED_PRODUCT";
 /* Base Currency */
 
-var SET_SELECTED_BASECURRENCY = "SET_SELECTED_BASECURRENCY";
-var SET_BASECURRENCY_LIST = "SET_BASECURRENCY_LIST";
+const SET_SELECTED_BASECURRENCY = "SET_SELECTED_BASECURRENCY";
+const SET_BASECURRENCY_LIST = "SET_BASECURRENCY_LIST";
 /* Currency */
 
-var SET_SELECTED_CURRENCY = "SET_SELECTED_CURRENCY";
+const SET_SELECTED_CURRENCY = "SET_SELECTED_CURRENCY";
 /* Loader */
 
-var TOGGLE_LOADER = "TOGGLE_LOADER";
+const TOGGLE_LOADER = "TOGGLE_LOADER";
 /* Exclude Test Data */
 
-var CHANGE_IS_EXCLUDE_TEST = "CHANGE_IS_EXCLUDE_TEST";
+const CHANGE_IS_EXCLUDE_TEST = "CHANGE_IS_EXCLUDE_TEST";
 /* User mini guide */
 
-var USER_GUIDE_CONTENT = "USER_GUIDE_CONTENT;";
+const USER_GUIDE_CONTENT = "USER_GUIDE_CONTENT;";
 /* Date range */
 
-var SET_DATE_RANGE = 'SET_DATE_RANGE';
-var GET_DATE_CONSTRAINT = 'GET_DATE_CONSTRAINT';
+const SET_DATE_RANGE = 'SET_DATE_RANGE';
+const GET_DATE_CONSTRAINT = 'GET_DATE_CONSTRAINT';
 /* Convert all figures to base currency */
 
-var CHANGE_IS_CONVERT_ALL = "CHANGE_IS_CONVERT_ALL";
+const CHANGE_IS_CONVERT_ALL = "CHANGE_IS_CONVERT_ALL";
 /* Status */
 
-var SET_SELECTED_STATUS = "SET_SELECTED_STATUS";
+const SET_SELECTED_STATUS = "SET_SELECTED_STATUS";
 /* Platform  */
 
-var SET_SELECTED_PLATFORM = "SET_SELECTED_PLATFORM";
+const SET_SELECTED_PLATFORM = "SET_SELECTED_PLATFORM";
 /* Live Status  */
 
-var SET_SELECTED_LIVESTATUS = "SET_SELECTED_LIVESTATUS";
-var SET_USERNAME = "SET_USERNAME";
-var SET_REQUEST_PARAM = "SET_REQUEST_PARAM";
-var SET_REPORT_TITLE = "SET_REPORT_TITLE";
+const SET_SELECTED_LIVESTATUS = "SET_SELECTED_LIVESTATUS";
+const SET_USERNAME = "SET_USERNAME";
+const SET_REQUEST_PARAM = "SET_REQUEST_PARAM";
+const SET_REPORT_TITLE = "SET_REPORT_TITLE";
 /* Live Status  */
 
-var SET_PAGING_OPTION = 'SET_PAGING_OPTION';
+const SET_PAGING_OPTION = 'SET_PAGING_OPTION';
 
 /***/ }),
 
@@ -506,8 +506,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var fetchData = function fetchData(resourceName) {
-  var url = _lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].resolveClientUrl('UserGuide/Index?resourcename=' + resourceName) + "&_=" + new Date().getTime();
+const fetchData = resourceName => {
+  const url = _lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].resolveClientUrl('UserGuide/Index?resourcename=' + resourceName) + "&_=" + new Date().getTime();
   return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(url, {
     headers: {
       'X-Requested-With': 'XMLHttpRequest'
@@ -516,13 +516,13 @@ var fetchData = function fetchData(resourceName) {
 };
 
 function getUserGuideContent(params) {
-  return function (dispatch) {
-    fetchData(params).then(function (response) {
+  return dispatch => {
+    fetchData(params).then(response => {
       dispatch(setUserGuideContent(response.data));
     });
   };
 }
-var setUserGuideContent = function setUserGuideContent(data) {
+const setUserGuideContent = data => {
   return {
     type: _types__WEBPACK_IMPORTED_MODULE_0__["USER_GUIDE_CONTENT"],
     data: data
@@ -543,7 +543,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setUsername", function() { return setUsername; });
 /* harmony import */ var _types_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types.js */ "./www/js/source/reactpages/actions/types.js");
 
-var setUsername = function setUsername(value) {
+const setUsername = value => {
   return {
     type: _types_js__WEBPACK_IMPORTED_MODULE_0__["SET_USERNAME"],
     data: value
@@ -567,7 +567,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 
 
-var CheckBox = react__WEBPACK_IMPORTED_MODULE_0___default.a.forwardRef(function (props, ref) {
+const CheckBox = react__WEBPACK_IMPORTED_MODULE_0___default.a.forwardRef((props, ref) => {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "checkbox-group",
     ref: ref
@@ -577,9 +577,7 @@ var CheckBox = react__WEBPACK_IMPORTED_MODULE_0___default.a.forwardRef(function 
     id: props.id,
     checked: props.checked,
     disabled: props.disabled,
-    onChange: function onChange() {
-      return props.onChange(!props.checked);
-    }
+    onChange: () => props.onChange(!props.checked)
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
     htmlFor: props.id
   }, props.label));
@@ -595,7 +593,7 @@ CheckBox.defaultProps = {
   label: '',
   checked: true,
   disabled: false,
-  onChange: function onChange() {}
+  onChange: function () {}
 };
 /* harmony default export */ __webpack_exports__["default"] = (CheckBox);
 
@@ -614,12 +612,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
 
-var Loader = function Loader(_ref) {
-  var isLoading = _ref.isLoading;
+const Loader = ({
+  isLoading
+}) => {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "loading-process default",
     style: {
-      display: "".concat(isLoading ? 'block' : 'none')
+      display: `${isLoading ? 'block' : 'none'}`
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "icon-loading"
@@ -647,8 +646,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var NoDataTitle = function NoDataTitle(_ref) {
-  var title = _ref.title;
+const NoDataTitle = ({
+  title
+}) => {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "no-info-row center-align",
     dangerouslySetInnerHTML: {
@@ -677,138 +677,109 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
 
-var wrapperClasses = {
+const wrapperClasses = {
   OVERLAY: "overlay",
   OVERLAY_OPEN: "overlay-open"
 };
+class Overlay extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+  constructor(props) {
+    super(props);
 
-var Overlay =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(Overlay, _Component);
-
-  function Overlay(props) {
-    var _this;
-
-    _classCallCheck(this, Overlay);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Overlay).call(this, props));
-
-    _defineProperty(_assertThisInitialized(_this), "_unRegisterEvents", function () {
-      var closeOnOutsideClick = _this.props.closeOnOutsideClick;
+    _defineProperty(this, "_unRegisterEvents", () => {
+      const {
+        closeOnOutsideClick
+      } = this.props;
 
       if (closeOnOutsideClick) {
-        document.removeEventListener('click', _this._handleClickOutSide);
+        document.removeEventListener('click', this._handleClickOutSide);
       }
     });
 
-    _defineProperty(_assertThisInitialized(_this), "_handleClickOutSide", function (event) {
-      var clickOutside = _this.containerElement && !_this.containerElement.contains(event.target);
+    _defineProperty(this, "_handleClickOutSide", event => {
+      const clickOutside = this.containerElement && !this.containerElement.contains(event.target);
 
-      if (clickOutside && _this.state.isOpening) {
-        _this._close();
+      if (clickOutside && this.state.isOpening) {
+        this._close();
       }
     });
 
-    _this.containerElement = null;
-    _this.refHandlers = {
-      container: function container(ref) {
-        _this.containerElement = ref;
+    this.containerElement = null;
+    this.refHandlers = {
+      container: ref => {
+        this.containerElement = ref;
       }
     };
-    _this.state = {
-      isOpening: _this.props.isOpening
+    this.state = {
+      isOpening: this.props.isOpening
     };
-    return _this;
   }
 
-  _createClass(Overlay, [{
-    key: "componentDidUpdate",
-    value: function componentDidUpdate(prevProps, prevState) {
-      var _this2 = this;
-
-      if (this.props.isOpening !== prevProps.isOpening) {
-        var onOpen = this.props.onOpen;
-        this.props.isOpening && onOpen && onOpen();
-        this.setState({
-          isOpening: this.props.isOpening
-        });
-        window.setTimeout(function () {
-          if (_this2.props.isOpening) {
-            _this2._registerEvents();
-          } else {
-            _this2._unRegisterEvents();
-          }
-        }, 0);
-      }
-    }
-  }, {
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      this._unRegisterEvents();
-    }
-  }, {
-    key: "_registerEvents",
-    value: function _registerEvents() {
-      var closeOnOutsideClick = this.props.closeOnOutsideClick;
-
-      if (closeOnOutsideClick) {
-        document.addEventListener('click', this._handleClickOutSide);
-      }
-    }
-  }, {
-    key: "_close",
-    value: function _close() {
-      var onClose = this.props.onClose;
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.isOpening !== prevProps.isOpening) {
+      const {
+        onOpen
+      } = this.props;
+      this.props.isOpening && onOpen && onOpen();
       this.setState({
-        isOpening: false
-      }, function () {
-        return onClose && onClose();
+        isOpening: this.props.isOpening
       });
+      window.setTimeout(() => {
+        if (this.props.isOpening) {
+          this._registerEvents();
+        } else {
+          this._unRegisterEvents();
+        }
+      }, 0);
     }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this$props = this.props,
-          className = _this$props.className,
-          children = _this$props.children;
-      var mergedClassName = classnames__WEBPACK_IMPORTED_MODULE_2___default()(wrapperClasses.OVERLAY, _defineProperty({}, wrapperClasses.OVERLAY_OPEN, this.state.isOpening), className);
-      var style = {
-        display: this.state.isOpening ? "block" : "none"
-      };
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: mergedClassName,
-        style: style,
-        ref: this.refHandlers.container
-      }, children);
-    }
-  }]);
+  }
 
-  return Overlay;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+  componentWillUnmount() {
+    this._unRegisterEvents();
+  }
+
+  _registerEvents() {
+    const {
+      closeOnOutsideClick
+    } = this.props;
+
+    if (closeOnOutsideClick) {
+      document.addEventListener('click', this._handleClickOutSide);
+    }
+  }
+
+  _close() {
+    const {
+      onClose
+    } = this.props;
+    this.setState({
+      isOpening: false
+    }, () => onClose && onClose());
+  }
+
+  render() {
+    const {
+      className,
+      children
+    } = this.props;
+    const mergedClassName = classnames__WEBPACK_IMPORTED_MODULE_2___default()(wrapperClasses.OVERLAY, {
+      [wrapperClasses.OVERLAY_OPEN]: this.state.isOpening
+    }, className);
+    const style = {
+      display: this.state.isOpening ? "block" : "none"
+    };
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: mergedClassName,
+      style: style,
+      ref: this.refHandlers.container
+    }, children);
+  }
+
+}
 
 _defineProperty(Overlay, "propTypes", {
   closeOnOutsideClick: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
@@ -821,8 +792,6 @@ _defineProperty(Overlay, "defaultProps", {
   closeOnOutsideClick: true,
   isOpening: false
 });
-
-
 
 /***/ }),
 
@@ -848,12 +817,14 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 
 
 
-var ReportTitle = function ReportTitle(_ref) {
-  var content = _ref.content,
-      tag = _ref.tag,
+const ReportTitle = (_ref) => {
+  let {
+    content,
+    tag
+  } = _ref,
       attrs = _objectWithoutProperties(_ref, ["content", "tag"]);
 
-  var Tag = tag;
+  const Tag = tag;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "report-title-container"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Tag, _extends({
@@ -861,11 +832,11 @@ var ReportTitle = function ReportTitle(_ref) {
   }, attrs), content));
 };
 
-var propTypes = {
+const propTypes = {
   tag: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
   content: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.any
 };
-var defaultProps = {
+const defaultProps = {
   tag: 'p'
 };
 ReportTitle.propTypes = propTypes;
@@ -891,89 +862,57 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _popup_Popup__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./popup/Popup */ "./www/js/source/reactpages/components/popup/Popup.jsx");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
 
 
+class UserGuide extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
+  constructor(props) {
+    super(props);
 
-var UserGuide =
-/*#__PURE__*/
-function (_React$Component) {
-  _inherits(UserGuide, _React$Component);
-
-  function UserGuide(props) {
-    var _this;
-
-    _classCallCheck(this, UserGuide);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(UserGuide).call(this, props));
-
-    _defineProperty(_assertThisInitialized(_this), "onClickHandler", function () {
-      _this.setState({
+    _defineProperty(this, "onClickHandler", () => {
+      this.setState({
         isShow: true
       });
-
-      _this.props.onClick && _this.props.onClick();
+      this.props.onClick && this.props.onClick();
     });
 
-    _defineProperty(_assertThisInitialized(_this), "onCloseHandler", function () {
-      _this.setState({
+    _defineProperty(this, "onCloseHandler", () => {
+      this.setState({
         isShow: false
       });
     });
 
-    _this.state = {
+    this.state = {
       isShow: false
     };
-    return _this;
   }
 
-  _createClass(UserGuide, [{
-    key: "render",
-    value: function render() {
-      var _this$props = this.props,
-          className = _this$props.className,
-          title = _this$props.title,
-          content = _this$props.content,
-          contentTitle = _this$props.contentTitle;
-      var isShow = this.state.isShow && content.length > 0;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: className,
-        onClick: this.onClickHandler,
-        title: title
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_popup_Popup__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        width: 640,
-        height: 480,
-        isShow: isShow,
-        title: contentTitle,
-        onClose: this.onCloseHandler,
-        isHtml: true
-      }, content));
-    }
-  }]);
+  render() {
+    const {
+      className,
+      title,
+      content,
+      contentTitle
+    } = this.props;
+    const isShow = this.state.isShow && content.length > 0;
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      className: className,
+      onClick: this.onClickHandler,
+      title: title
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_popup_Popup__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      width: 640,
+      height: 480,
+      isShow: isShow,
+      title: contentTitle,
+      onClose: this.onCloseHandler,
+      isHtml: true
+    }, content));
+  }
 
-  return UserGuide;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+}
 
 _defineProperty(UserGuide, "propTypes", {
   title: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
@@ -986,7 +925,6 @@ _defineProperty(UserGuide, "defaultProps", {
   className: 'icon-book right',
   content: ''
 });
-
 
 ;
 
@@ -1015,24 +953,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_timer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils/timer */ "./www/js/source/reactpages/components/utils/timer.js");
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
@@ -1042,32 +962,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var DELAY_TIME_MILLISECOND = 300;
+const DELAY_TIME_MILLISECOND = 300;
+class AutoComplete extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+  constructor(props) {
+    super(props);
 
-var AutoComplete =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(AutoComplete, _Component);
-
-  function AutoComplete(props) {
-    var _this;
-
-    _classCallCheck(this, AutoComplete);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(AutoComplete).call(this, props));
-
-    _defineProperty(_assertThisInitialized(_this), "_onKeyDown", function (event) {
-      if (!_this.isShowSuggestionList) {
+    _defineProperty(this, "_onKeyDown", event => {
+      if (!this.isShowSuggestionList) {
         return;
       }
 
-      var selectedIndex = _this.state.selectedIndex;
+      const selectedIndex = this.state.selectedIndex;
 
       switch (event.keyCode) {
         case 38:
           //up
           if (selectedIndex > 0) {
-            _this.setState({
+            this.setState({
               selectedIndex: selectedIndex - 1
             });
           }
@@ -1076,8 +987,8 @@ function (_Component) {
 
         case 40:
           //down
-          if (selectedIndex < _this.state.suggestions.length - 1) {
-            _this.setState({
+          if (selectedIndex < this.state.suggestions.length - 1) {
+            this.setState({
               selectedIndex: selectedIndex + 1
             });
           }
@@ -1087,134 +998,126 @@ function (_Component) {
         case 13:
           //enter
           if (selectedIndex > -1) {
-            var selectedItem = _this.state.suggestions[selectedIndex];
+            const selectedItem = this.state.suggestions[selectedIndex];
 
-            _this._onSelect(selectedItem);
+            this._onSelect(selectedItem);
           }
 
           break;
       }
     });
 
-    _defineProperty(_assertThisInitialized(_this), "_clearState", function () {
-      _this.setState({
+    _defineProperty(this, "_clearState", () => {
+      this.setState({
         suggestions: null,
         selectedIndex: -1
       });
     });
 
-    _defineProperty(_assertThisInitialized(_this), "_onSelect", function (selectedItem) {
-      var onSelect = _this.props.onSelect;
+    _defineProperty(this, "_onSelect", selectedItem => {
+      const {
+        onSelect
+      } = this.props;
       onSelect && onSelect(selectedItem);
-      _this.input.value = _typeof(selectedItem) === "object" ? selectedItem.value : selectedItem;
+      this.input.value = typeof selectedItem === "object" ? selectedItem.value : selectedItem;
 
-      _this._clearState();
+      this._clearState();
     });
 
-    _defineProperty(_assertThisInitialized(_this), "_onChange", function (event) {
-      var value = (_this.input.value || "").trim();
-      var onInput = _this.props.onInput;
+    _defineProperty(this, "_onChange", event => {
+      const value = (this.input.value || "").trim();
+      const {
+        onInput
+      } = this.props;
       onInput && onInput(value);
 
       if (value.length < 3) {
-        _this._clearState();
+        this._clearState();
 
         return;
       }
 
-      var cachedData = _this.cacheData[value];
+      const cachedData = this.cacheData[value];
 
       if (cachedData) {
-        _this.setState({
+        this.setState({
           suggestions: cachedData
         });
-
         return;
       }
 
-      var url = _this.props.url;
+      const {
+        url
+      } = this.props;
 
       if (url) {
-        _this._getDataByUrl(url, value);
+        this._getDataByUrl(url, value);
       }
     });
 
-    _this.state = {
+    this.state = {
       suggestions: null,
       selectedIndex: -1
     };
-    _this.input = null;
-    _this.cacheData = {};
-    _this.onChange = _utils_timer__WEBPACK_IMPORTED_MODULE_6__["default"].debounce(_this._onChange, DELAY_TIME_MILLISECOND).bind(_assertThisInitialized(_this));
-    return _this;
+    this.input = null;
+    this.cacheData = {};
+    this.onChange = _utils_timer__WEBPACK_IMPORTED_MODULE_6__["default"].debounce(this._onChange, DELAY_TIME_MILLISECOND).bind(this);
   }
 
-  _createClass(AutoComplete, [{
-    key: "_setStateWithCaching",
-    value: function _setStateWithCaching(value, suggestionList) {
-      if (this.props.cache) {
-        var cacheKey = value.toLowerCase();
-        this.cacheData[cacheKey] = suggestionList;
+  get isShowSuggestionList() {
+    return this.state.suggestions && this.state.suggestions.length > 0;
+  }
+
+  _setStateWithCaching(value, suggestionList) {
+    if (this.props.cache) {
+      const cacheKey = value.toLowerCase();
+      this.cacheData[cacheKey] = suggestionList;
+    }
+
+    this.setState({
+      suggestions: suggestionList
+    });
+  }
+
+  _getDataByUrl(url, value) {
+    const {
+      responseDataField,
+      queryParamName
+    } = this.props;
+    const apiUrl = `${url}?${queryParamName}=${value}`;
+    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get(apiUrl, {
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest'
       }
+    }).then(response => {
+      const data = responseDataField ? response.data[responseDataField] : response.data;
 
-      this.setState({
-        suggestions: suggestionList
-      });
-    }
-  }, {
-    key: "_getDataByUrl",
-    value: function _getDataByUrl(url, value) {
-      var _this2 = this;
+      this._setStateWithCaching(value, data);
+    });
+  }
 
-      var _this$props = this.props,
-          responseDataField = _this$props.responseDataField,
-          queryParamName = _this$props.queryParamName;
-      var apiUrl = "".concat(url, "?").concat(queryParamName, "=").concat(value);
-      axios__WEBPACK_IMPORTED_MODULE_3___default.a.get(apiUrl, {
-        headers: {
-          'X-Requested-With': 'XMLHttpRequest'
-        }
-      }).then(function (response) {
-        var data = responseDataField ? response.data[responseDataField] : response.data;
+  render() {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "ac-container"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", _extends({
+      type: "text",
+      className: "input-text"
+    }, this.props.htmlAttributes, {
+      onChange: this.onChange,
+      onKeyDown: this._onKeyDown,
+      ref: element => this.input = element
+    })), this.isShowSuggestionList && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Overlay__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      isOpening: true,
+      onClose: this._clearState
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SuggestionList__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      selectedIndex: this.state.selectedIndex,
+      width: this.input.clientWidth,
+      dataList: this.state.suggestions,
+      onSelect: this._onSelect
+    })));
+  }
 
-        _this2._setStateWithCaching(value, data);
-      });
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this3 = this;
-
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "ac-container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", _extends({
-        type: "text",
-        className: "input-text"
-      }, this.props.htmlAttributes, {
-        onChange: this.onChange,
-        onKeyDown: this._onKeyDown,
-        ref: function ref(element) {
-          return _this3.input = element;
-        }
-      })), this.isShowSuggestionList && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Overlay__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        isOpening: true,
-        onClose: this._clearState
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SuggestionList__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        selectedIndex: this.state.selectedIndex,
-        width: this.input.clientWidth,
-        dataList: this.state.suggestions,
-        onSelect: this._onSelect
-      })));
-    }
-  }, {
-    key: "isShowSuggestionList",
-    get: function get() {
-      return this.state.suggestions && this.state.suggestions.length > 0;
-    }
-  }]);
-
-  return AutoComplete;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+}
 
 _defineProperty(AutoComplete, "propTypes", {
   url: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
@@ -1232,8 +1135,6 @@ _defineProperty(AutoComplete, "defaultProps", {
   cache: true,
   queryParamName: "query"
 });
-
-
 
 /***/ }),
 
@@ -1253,76 +1154,45 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
 
-
-var SuggestionList =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(SuggestionList, _Component);
-
-  function SuggestionList(props) {
-    _classCallCheck(this, SuggestionList);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(SuggestionList).call(this, props));
+class SuggestionList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+  constructor(props) {
+    super(props);
   }
 
-  _createClass(SuggestionList, [{
-    key: "onSelect",
-    value: function onSelect(selectedItem) {
-      var onSelect = this.props.onSelect;
-      onSelect && onSelect(selectedItem);
-    }
-  }, {
-    key: "_renderDataList",
-    value: function _renderDataList() {
-      var _this = this;
+  onSelect(selectedItem) {
+    const {
+      onSelect
+    } = this.props;
+    onSelect && onSelect(selectedItem);
+  }
 
-      return this.props.dataList.map(function (item, index) {
-        var className = index === _this.props.selectedIndex ? "ac-item ac-item-active" : "ac-item";
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          key: "ac-item-".concat(index),
-          className: className,
-          onClick: _this.onSelect.bind(_this, item)
-        }, item && _typeof(item) === "object" ? item.value : item);
-      });
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var style = {
-        width: this.props.width
-      };
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "suggestion-list",
-        style: style
-      }, this._renderDataList());
-    }
-  }]);
+  _renderDataList() {
+    return this.props.dataList.map((item, index) => {
+      const className = index === this.props.selectedIndex ? "ac-item ac-item-active" : "ac-item";
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        key: `ac-item-${index}`,
+        className: className,
+        onClick: this.onSelect.bind(this, item)
+      }, item && typeof item === "object" ? item.value : item);
+    });
+  }
 
-  return SuggestionList;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+  render() {
+    const style = {
+      width: this.props.width
+    };
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+      className: "suggestion-list",
+      style: style
+    }, this._renderDataList());
+  }
+
+}
 
 _defineProperty(SuggestionList, "propTypes", {
   dataList: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.array.isRequired,
@@ -1330,8 +1200,6 @@ _defineProperty(SuggestionList, "propTypes", {
   width: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number,
   selectedIndex: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number
 });
-
-
 
 /***/ }),
 
@@ -1367,24 +1235,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/components/NoDataTitle */ "./www/js/source/reactpages/components/NoDataTitle.jsx");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
@@ -1393,220 +1243,203 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var BetListDataGrid =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(BetListDataGrid, _Component);
+class BetListDataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+  constructor(props) {
+    super(props);
 
-  function BetListDataGrid(props) {
-    var _this;
-
-    _classCallCheck(this, BetListDataGrid);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(BetListDataGrid).call(this, props));
-
-    _defineProperty(_assertThisInitialized(_this), "onSort", function (sortBy, sortOrder) {
-      _this.props.onSort && _this.props.onSort(sortBy, sortOrder);
+    _defineProperty(this, "onSort", (sortBy, sortOrder) => {
+      this.props.onSort && this.props.onSort(sortBy, sortOrder);
     });
 
-    _defineProperty(_assertThisInitialized(_this), "onPaging", function (index, size) {
-      _this.props.onPaging && _this.props.onPaging(index, size);
+    _defineProperty(this, "onPaging", (index, size) => {
+      this.props.onPaging && this.props.onPaging(index, size);
     });
-
-    return _this;
   }
 
-  _createClass(BetListDataGrid, [{
-    key: "componentDidUpdate",
-    value: function componentDidUpdate(prevProps) {
-      if (this.props.data !== prevProps.data) {
-        this.props.afterLoad && this.props.afterLoad();
+  componentDidUpdate(prevProps) {
+    if (this.props.data !== prevProps.data) {
+      this.props.afterLoad && this.props.afterLoad();
+    }
+  }
+
+  _getResource(key) {
+    return this.props.getResourceFunc ? this.props.getResourceFunc(key) : key;
+  }
+
+  _getTotalCellClassName(column, value) {
+    if (this.props.getTotalCellClassNameFunc) {
+      return this.props.getTotalCellClassNameFunc(column, value);
+    }
+
+    return column === 'LicenseeWL' && value.substring(0, 1) === '-' ? 'negative' : '';
+  }
+
+  _getHeaderName(column) {
+    return this.props.getHeaderNameFunc ? this.props.getHeaderNameFunc(column) : column;
+  }
+
+  _mapData(data) {
+    return this.props.mappingDataFunc ? this.props.mappingDataFunc(data) : data;
+  }
+
+  _buildHeader() {
+    let rows = [];
+    const {
+      columns,
+      columnWidths,
+      sortableColumns
+    } = this.props;
+
+    for (let i = 0; i < columns.length; i++) {
+      const column = columns[i];
+      const isSortable = sortableColumns.indexOf(column) >= 0;
+
+      const headerName = this._getHeaderName(column);
+
+      rows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
+        key: column,
+        colWidth: columnWidths[i],
+        sortBy: isSortable ? column : null
+      }, headerName));
+    }
+
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderRow"], {
+      style: {
+        height: 32
       }
-    }
-  }, {
-    key: "_getResource",
-    value: function _getResource(key) {
-      return this.props.getResourceFunc ? this.props.getResourceFunc(key) : key;
-    }
-  }, {
-    key: "_getTotalCellClassName",
-    value: function _getTotalCellClassName(column, value) {
-      if (this.props.getTotalCellClassNameFunc) {
-        return this.props.getTotalCellClassNameFunc(column, value);
-      }
+    }, rows);
+  }
 
-      return column === 'LicenseeWL' && value.substring(0, 1) === '-' ? 'negative' : '';
-    }
-  }, {
-    key: "_getHeaderName",
-    value: function _getHeaderName(column) {
-      return this.props.getHeaderNameFunc ? this.props.getHeaderNameFunc(column) : column;
-    }
-  }, {
-    key: "_mapData",
-    value: function _mapData(data) {
-      return this.props.mappingDataFunc ? this.props.mappingDataFunc(data) : data;
-    }
-  }, {
-    key: "_buildHeader",
-    value: function _buildHeader() {
-      var rows = [];
-      var _this$props = this.props,
-          columns = _this$props.columns,
-          columnWidths = _this$props.columnWidths,
-          sortableColumns = _this$props.sortableColumns;
+  _buildBody() {
+    const {
+      columns,
+      columnAlignments,
+      data
+    } = this.props;
+    let rows = [];
 
-      for (var i = 0; i < columns.length; i++) {
-        var column = columns[i];
-        var isSortable = sortableColumns.indexOf(column) >= 0;
+    for (let i = 0; i < data.length; i++) {
+      const item = this._mapData(data[i]);
 
-        var headerName = this._getHeaderName(column);
+      let cells = [];
 
-        rows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
-          key: column,
-          colWidth: columnWidths[i],
-          sortBy: isSortable ? column : null
-        }, headerName));
-      }
-
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderRow"], {
-        style: {
-          height: 32
-        }
-      }, rows);
-    }
-  }, {
-    key: "_buildBody",
-    value: function _buildBody() {
-      var _this$props2 = this.props,
-          columns = _this$props2.columns,
-          columnAlignments = _this$props2.columnAlignments,
-          data = _this$props2.data;
-      var rows = [];
-
-      for (var i = 0; i < data.length; i++) {
-        var item = this._mapData(data[i]);
-
-        var cells = [];
-
-        for (var j = 0; j < columns.length; j++) {
-          var column = columns[j];
-          cells.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
-            key: "".concat(column, "-").concat(i),
-            className: columnAlignments[j],
-            dangerouslySetInnerHTML: {
-              __html: item[column]
-            }
-          }));
-        }
-
-        rows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Row"], {
-          key: i
-        }, cells));
-      }
-
-      return rows;
-    }
-  }, {
-    key: "_buildFooter",
-    value: function _buildFooter() {
-      if (!this.props.totalColumns || !this.props.totalColumns.length) {
-        return false;
-      }
-
-      var _this$props3 = this.props,
-          columns = _this$props3.columns,
-          totalColumns = _this$props3.totalColumns,
-          total = _this$props3.total,
-          totalText = _this$props3.totalText,
-          columnAlignments = _this$props3.columnAlignments;
-      var startTotalIndex = columns.indexOf(totalColumns[0]);
-      var rows = [];
-      var cells = [];
-      cells.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
-        key: "total",
-        className: "right-align",
-        colSpan: startTotalIndex
-      }, totalText));
-
-      var item = this._mapData(total);
-
-      for (var i = 0; i < totalColumns.length; i++) {
-        var column = totalColumns[i];
-        var columnIndex = columns.indexOf(column);
-
-        var className = this._getTotalCellClassName(column, item[column]);
-
+      for (let j = 0; j < columns.length; j++) {
+        const column = columns[j];
         cells.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
-          key: "Sum".concat(column),
-          className: "".concat(columnAlignments[columnIndex], " ").concat(className),
+          key: `${column}-${i}`,
+          className: columnAlignments[j],
           dangerouslySetInnerHTML: {
             __html: item[column]
           }
         }));
       }
 
-      var blankRows = columns.length - totalColumns.length - startTotalIndex;
-
-      if (blankRows) {
-        cells.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
-          key: "blank",
-          colSpan: blankRows
-        }));
-      }
-
       rows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Row"], {
-        className: "fixed-table-grant-total",
-        key: "totalRow"
+        key: i
       }, cells));
-      return rows;
     }
-  }, {
-    key: "_renderNodata",
-    value: function _renderNodata() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "result-content"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        className: "no-info-row center-align"
-      }, this._getResource('NoInfo')));
+
+    return rows;
+  }
+
+  _buildFooter() {
+    if (!this.props.totalColumns || !this.props.totalColumns.length) {
+      return false;
     }
-  }, {
-    key: "render",
-    value: function render() {
-      if (!this.props.data) {
-        return null;
-      }
 
-      var data = this.props.data;
+    const {
+      columns,
+      totalColumns,
+      total,
+      totalText,
+      columnAlignments
+    } = this.props;
+    const startTotalIndex = columns.indexOf(totalColumns[0]);
+    let rows = [];
+    let cells = [];
+    cells.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
+      key: "total",
+      className: "right-align",
+      colSpan: startTotalIndex
+    }, totalText));
 
-      if (!data.length) {
-        return this._renderNodata();
-      }
+    const item = this._mapData(total);
 
-      var _this$props4 = this.props,
-          isPaging = _this$props4.isPaging,
-          pageOption = _this$props4.pageOption,
-          adjustedHeight = _this$props4.adjustedHeight;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "betlist-container result-content"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Table"], {
-        onSort: this.onSort,
-        minWidth: 980,
-        autoWidth: true,
-        bodyHeight: 300,
-        header: this._buildHeader(),
-        body: this._buildBody(),
-        footer: this._buildFooter(),
-        isPaging: isPaging,
-        pageOption: pageOption,
-        onPaging: this.onPaging,
-        adjustedHeight: adjustedHeight
+    for (let i = 0; i < totalColumns.length; i++) {
+      const column = totalColumns[i];
+      const columnIndex = columns.indexOf(column);
+
+      const className = this._getTotalCellClassName(column, item[column]);
+
+      cells.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
+        key: `Sum${column}`,
+        className: `${columnAlignments[columnIndex]} ${className}`,
+        dangerouslySetInnerHTML: {
+          __html: item[column]
+        }
       }));
     }
-  }]);
 
-  return BetListDataGrid;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+    const blankRows = columns.length - totalColumns.length - startTotalIndex;
+
+    if (blankRows) {
+      cells.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
+        key: "blank",
+        colSpan: blankRows
+      }));
+    }
+
+    rows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Row"], {
+      className: "fixed-table-grant-total",
+      key: "totalRow"
+    }, cells));
+    return rows;
+  }
+
+  _renderNodata() {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "result-content"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "no-info-row center-align"
+    }, this._getResource('NoInfo')));
+  }
+
+  render() {
+    if (!this.props.data) {
+      return null;
+    }
+
+    const {
+      data
+    } = this.props;
+
+    if (!data.length) {
+      return this._renderNodata();
+    }
+
+    const {
+      isPaging,
+      pageOption,
+      adjustedHeight
+    } = this.props;
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "betlist-container result-content"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Table"], {
+      onSort: this.onSort,
+      minWidth: 980,
+      autoWidth: true,
+      bodyHeight: 300,
+      header: this._buildHeader(),
+      body: this._buildBody(),
+      footer: this._buildFooter(),
+      isPaging: isPaging,
+      pageOption: pageOption,
+      onPaging: this.onPaging,
+      adjustedHeight: adjustedHeight
+    }));
+  }
+
+}
 
 BetListDataGrid.propTypes = {
   isPaging: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool,
@@ -1668,60 +1501,35 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
 
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
 
-var CollapsiblePanel =
-/*#__PURE__*/
-function (_React$Component) {
-  _inherits(CollapsiblePanel, _React$Component);
+class CollapsiblePanel extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
+  constructor(props) {
+    super(props);
 
-  function CollapsiblePanel(props) {
-    var _this;
-
-    _classCallCheck(this, CollapsiblePanel);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(CollapsiblePanel).call(this, props));
-
-    _defineProperty(_assertThisInitialized(_this), "onClick", function () {
-      var newState = !_this.state.isCollapsed;
-      var _this$props = _this.props,
-          onCollapse = _this$props.onCollapse,
-          onExpand = _this$props.onExpand;
+    _defineProperty(this, "onClick", () => {
+      const newState = !this.state.isCollapsed;
+      const {
+        onCollapse,
+        onExpand
+      } = this.props;
 
       if (newState) {
         onCollapse && onCollapse();
       }
 
-      _this.setState({
+      this.setState({
         isCollapsed: newState
-      }, function () {
+      }, () => {
         window.dispatchEvent(new Event('resize'));
 
         if (!newState) {
@@ -1730,56 +1538,54 @@ function (_React$Component) {
       });
     });
 
-    _this.state = {
+    this.state = {
       isCollapsed: false
     };
-    return _this;
   }
 
-  _createClass(CollapsiblePanel, [{
-    key: "render",
-    value: function render() {
-      var _this$props2 = this.props,
-          stickyFooter = _this$props2.stickyFooter,
-          iconContainerStyle = _this$props2.iconContainerStyle,
-          iconToggle = _this$props2.iconToggle;
+  render() {
+    const {
+      stickyFooter,
+      iconContainerStyle,
+      iconToggle
+    } = this.props;
 
-      var tag = iconToggle.tag,
-          className = iconToggle.className,
-          style = iconToggle.style,
+    const {
+      tag,
+      className,
+      style
+    } = iconToggle,
           attrs = _objectWithoutProperties(iconToggle, ["tag", "className", "style"]);
 
-      var IconTag = tag;
-      var iconStyle = style || {
-        transform: this.state.isCollapsed ? null : 'rotate(180deg)',
-        color: '#fff',
-        textAlign: 'center',
-        background: '#4c6274',
-        height: "15px",
-        width: "20px",
-        "float": 'left'
-      };
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "".concat(this.props.className)
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        style: {
-          display: this.state.isCollapsed ? 'none' : 'block'
-        }
-      }, this.props.children), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "caret-block"
-      }, stickyFooter), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "filter-handle",
-        style: iconContainerStyle,
-        onClick: this.onClick
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(IconTag, _extends({
-        className: className,
-        style: iconStyle
-      }, attrs))));
-    }
-  }]);
+    const IconTag = tag;
+    const iconStyle = style || {
+      transform: this.state.isCollapsed ? null : 'rotate(180deg)',
+      color: '#fff',
+      textAlign: 'center',
+      background: '#4c6274',
+      height: "15px",
+      width: "20px",
+      float: 'left'
+    };
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: `${this.props.className}`
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      style: {
+        display: this.state.isCollapsed ? 'none' : 'block'
+      }
+    }, this.props.children), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "caret-block"
+    }, stickyFooter), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "filter-handle",
+      style: iconContainerStyle,
+      onClick: this.onClick
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(IconTag, _extends({
+      className: className,
+      style: iconStyle
+    }, attrs))));
+  }
 
-  return CollapsiblePanel;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+}
 
 _defineProperty(CollapsiblePanel, "propTypes", {
   stickyFooter: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node,
@@ -1787,13 +1593,13 @@ _defineProperty(CollapsiblePanel, "propTypes", {
   onExpand: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
 });
 
-var propTypes = {
+const propTypes = {
   stickyFooter: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node,
   onCollapse: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
   onExpand: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
   iconToggle: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object
 };
-var defaultProps = {
+const defaultProps = {
   iconContainerStyle: {
     height: '15px',
     width: '20px',
@@ -1850,8 +1656,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DayCell_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DayCell.js */ "./www/js/source/reactpages/components/date-range/DayCell.js");
 /* harmony import */ var _styles_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./styles.js */ "./www/js/source/reactpages/components/date-range/styles.js");
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./constants */ "./www/js/source/reactpages/components/date-range/constants.js");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -1860,21 +1664,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
 
@@ -1882,23 +1671,26 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-
-var START_OF_MONTH = 0;
-var END_OF_MONTH = 11;
-var START_DAY_OF_MONTH = 1;
-var DEFAULT_YEAR_RANGE = 5;
+const START_OF_MONTH = 0;
+const END_OF_MONTH = 11;
+const START_DAY_OF_MONTH = 1;
+const DEFAULT_YEAR_RANGE = 5;
 
 function checkRange(dayMoment, range) {
   return dayMoment.isBetween(range['startDate'], range['endDate']) || dayMoment.isBetween(range['endDate'], range['startDate']);
 }
 
 function checkStartEdge(dayMoment, range) {
-  var startDate = range.startDate;
+  const {
+    startDate
+  } = range;
   return dayMoment.startOf('day').isSame(startDate.startOf('day'));
 }
 
 function checkEndEdge(dayMoment, range) {
-  var endDate = range.endDate;
+  const {
+    endDate
+  } = range;
   return dayMoment.endOf('day').isSame(endDate.endOf('day'));
 }
 
@@ -1906,441 +1698,435 @@ function isOusideMinMax(dayMoment, minDate, maxDate, format) {
   return minDate && dayMoment.isBefore(Object(_utils_parseInput_js__WEBPACK_IMPORTED_MODULE_3__["default"])(minDate, format, 'startOf')) || maxDate && dayMoment.isAfter(Object(_utils_parseInput_js__WEBPACK_IMPORTED_MODULE_3__["default"])(maxDate, format, 'endOf'));
 }
 
-var Calendar =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(Calendar, _Component);
-
-  function Calendar(props, context) {
-    var _this;
-
-    _classCallCheck(this, Calendar);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Calendar).call(this, props, context));
-    var format = props.format,
-        range = props.range,
-        theme = props.theme,
-        offset = props.offset,
-        firstDayOfWeek = props.firstDayOfWeek,
-        shownDate = props.shownDate;
-    var date = Object(_utils_parseInput_js__WEBPACK_IMPORTED_MODULE_3__["default"])(props.date, format, 'startOf');
-    var showDate = (shownDate || range && range['endDate'] || date).clone();
-    var state = {
-      date: date,
+class Calendar extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+  constructor(props, context) {
+    super(props, context);
+    const {
+      format,
+      range,
+      theme,
+      offset,
+      firstDayOfWeek,
+      shownDate
+    } = props;
+    const date = Object(_utils_parseInput_js__WEBPACK_IMPORTED_MODULE_3__["default"])(props.date, format, 'startOf');
+    let showDate = (shownDate || range && range['endDate'] || date).clone();
+    const state = {
+      date,
       shownDate: showDate,
       firstDayOfWeek: firstDayOfWeek || moment__WEBPACK_IMPORTED_MODULE_2___default.a.localeData().firstDayOfWeek()
     };
-    _this.state = state;
-    _this.styles = Object(_styles_js__WEBPACK_IMPORTED_MODULE_5__["default"])(theme);
-    return _this;
+    this.state = state;
+    this.styles = Object(_styles_js__WEBPACK_IMPORTED_MODULE_5__["default"])(theme);
   }
 
-  _createClass(Calendar, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var onInit = this.props.onInit;
-      onInit && onInit(this.state.date);
+  componentDidMount() {
+    const {
+      onInit
+    } = this.props;
+    onInit && onInit(this.state.date);
+  }
+
+  get limitedDate() {
+    const {
+      minDate,
+      maxDate
+    } = this.props;
+    const m = moment__WEBPACK_IMPORTED_MODULE_2___default()();
+    let startDate, endDate;
+
+    if (minDate) {
+      startDate = moment__WEBPACK_IMPORTED_MODULE_2___default.a.isMoment(minDate) ? minDate : moment__WEBPACK_IMPORTED_MODULE_2___default()(minDate, _constants__WEBPACK_IMPORTED_MODULE_6__["MomentFormat"].default);
+    } else {
+      startDate = moment__WEBPACK_IMPORTED_MODULE_2___default()([m.year() - DEFAULT_YEAR_RANGE, START_OF_MONTH]);
     }
-  }, {
-    key: "getShownDate",
-    value: function getShownDate() {
-      var link = this.props.link;
-      var shownDate = link || this.state.shownDate;
-      return shownDate;
+
+    if (maxDate) {
+      endDate = moment__WEBPACK_IMPORTED_MODULE_2___default.a.isMoment(maxDate) ? maxDate : moment__WEBPACK_IMPORTED_MODULE_2___default()(maxDate, _constants__WEBPACK_IMPORTED_MODULE_6__["MomentFormat"].default);
+    } else {
+      endDate = moment__WEBPACK_IMPORTED_MODULE_2___default()([m.year(), END_OF_MONTH]).endOf("month");
     }
-  }, {
-    key: "handleSelect",
-    value: function handleSelect(newDate) {
-      var _this$props = this.props,
-          link = _this$props.link,
-          onChange = _this$props.onChange;
-      onChange && onChange(newDate);
 
-      if (!link) {
-        this.setState({
-          date: newDate
-        });
-      }
+    return {
+      startDate,
+      endDate
+    };
+  }
+
+  get disablePrevButton() {
+    const range = this.limitedDate;
+    const startDate = range.startDate;
+    const currentDate = this.state.shownDate;
+    let prevMonth = this.state.shownDate.month() - 1;
+
+    if (prevMonth < startDate.month() && currentDate.year() <= startDate.year()) {
+      return true;
     }
-  }, {
-    key: "nextButtonClickHandler",
-    value: function nextButtonClickHandler(event) {
-      event.preventDefault();
 
-      if (!this.disableNextButton) {
-        this.changeMonth(this.state.shownDate.month() + 1, event);
-      }
+    return false;
+  }
+
+  get disableNextButton() {
+    const range = this.limitedDate;
+    const endDate = range.endDate;
+    const currentDate = this.state.shownDate;
+    let nextMonth = this.state.shownDate.month() + 1;
+
+    if (nextMonth > endDate.month() && currentDate.year() >= endDate.year()) {
+      return true;
     }
-  }, {
-    key: "prevButtonClickHandler",
-    value: function prevButtonClickHandler(event) {
-      event.preventDefault();
 
-      if (!this.disablePrevButton) {
-        this.changeMonth(this.state.shownDate.month() - 1, event);
-      }
-    }
-  }, {
-    key: "changeMonth",
-    value: function changeMonth(direction, event) {
-      event.preventDefault();
-      var selectedMonth = Number(direction);
-      var year = this.state.shownDate.year();
+    return false;
+  }
 
-      if (selectedMonth < START_OF_MONTH) {
-        selectedMonth = END_OF_MONTH;
-        year -= 1;
-      }
+  getShownDate() {
+    const {
+      link
+    } = this.props;
+    const shownDate = link || this.state.shownDate;
+    return shownDate;
+  }
 
-      if (selectedMonth > END_OF_MONTH) {
-        selectedMonth = START_OF_MONTH;
-        year += 1;
-      }
+  handleSelect(newDate) {
+    const {
+      link,
+      onChange
+    } = this.props;
+    onChange && onChange(newDate);
 
-      var _this$props2 = this.props,
-          link = _this$props2.link,
-          linkCB = _this$props2.linkCB;
-      var newDate = moment__WEBPACK_IMPORTED_MODULE_2___default()([year, selectedMonth, this.state.shownDate.date()]);
-
-      if (!newDate.isValid()) {
-        newDate = moment__WEBPACK_IMPORTED_MODULE_2___default()([year, selectedMonth, START_DAY_OF_MONTH]);
-      }
-
-      if (link && linkCB) {
-        return linkCB(newDate);
-      }
-
+    if (!link) {
       this.setState({
-        shownDate: newDate
+        date: newDate
       });
     }
-  }, {
-    key: "changeYear",
-    value: function changeYear(event) {
-      event.preventDefault();
-      var selectedYear = Number(event.target.value);
-      var newDate = moment__WEBPACK_IMPORTED_MODULE_2___default()([selectedYear, this.state.shownDate.month(), this.state.shownDate.date()]);
+  }
 
-      if (!newDate.isValid()) {
-        newDate = moment__WEBPACK_IMPORTED_MODULE_2___default()([selectedYear, this.state.shownDate.month(), START_DAY_OF_MONTH]);
-      }
+  nextButtonClickHandler(event) {
+    event.preventDefault();
 
-      this.setState({
-        shownDate: newDate
+    if (!this.disableNextButton) {
+      this.changeMonth(this.state.shownDate.month() + 1, event);
+    }
+  }
+
+  prevButtonClickHandler(event) {
+    event.preventDefault();
+
+    if (!this.disablePrevButton) {
+      this.changeMonth(this.state.shownDate.month() - 1, event);
+    }
+  }
+
+  changeMonth(direction, event) {
+    event.preventDefault();
+    let selectedMonth = Number(direction);
+    let year = this.state.shownDate.year();
+
+    if (selectedMonth < START_OF_MONTH) {
+      selectedMonth = END_OF_MONTH;
+      year -= 1;
+    }
+
+    if (selectedMonth > END_OF_MONTH) {
+      selectedMonth = START_OF_MONTH;
+      year += 1;
+    }
+
+    const {
+      link,
+      linkCB
+    } = this.props;
+    let newDate = moment__WEBPACK_IMPORTED_MODULE_2___default()([year, selectedMonth, this.state.shownDate.date()]);
+
+    if (!newDate.isValid()) {
+      newDate = moment__WEBPACK_IMPORTED_MODULE_2___default()([year, selectedMonth, START_DAY_OF_MONTH]);
+    }
+
+    if (link && linkCB) {
+      return linkCB(newDate);
+    }
+
+    this.setState({
+      shownDate: newDate
+    });
+  }
+
+  changeYear(event) {
+    event.preventDefault();
+    const selectedYear = Number(event.target.value);
+    let newDate = moment__WEBPACK_IMPORTED_MODULE_2___default()([selectedYear, this.state.shownDate.month(), this.state.shownDate.date()]);
+
+    if (!newDate.isValid()) {
+      newDate = moment__WEBPACK_IMPORTED_MODULE_2___default()([selectedYear, this.state.shownDate.month(), START_DAY_OF_MONTH]);
+    }
+
+    this.setState({
+      shownDate: newDate
+    });
+  }
+
+  renderMonthList(classes) {
+    const {
+      styles
+    } = this;
+    const {
+      onlyClasses,
+      locale
+    } = this.props;
+    const monthLabels = locale.months;
+    let monthOptions = [];
+
+    for (let i = 0; i < 12; i++) {
+      const isDisabled = this._isDisabledMonth(i);
+
+      monthOptions.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        disabled: isDisabled,
+        key: `month${i}`,
+        value: i
+      }, monthLabels[i]));
+    }
+
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+      style: onlyClasses ? undefined : styles["MonthAndYearSelect"],
+      className: classes.monthAndYearSelect,
+      onChange: e => this.changeMonth(e.target.value, e),
+      value: this.state.shownDate.month()
+    }, monthOptions);
+  }
+
+  _isDisabledMonth(currentMonth) {
+    const range = this.limitedDate;
+    const currentYear = this.state.shownDate.year();
+    return currentMonth < range.startDate.month() && currentYear <= range.startDate.year() || currentMonth > range.endDate.month() && currentYear >= range.endDate.year();
+  }
+
+  renderYearList(classes) {
+    const {
+      styles
+    } = this;
+    const {
+      onlyClasses
+    } = this.props;
+    const range = this.limitedDate;
+    const yearOptions = [];
+
+    for (let i = range.startDate.year(); i <= range.endDate.year(); i++) {
+      yearOptions.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        key: `year${i}`,
+        value: i
+      }, i));
+    }
+
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+      style: onlyClasses ? undefined : styles["MonthAndYearSelect"],
+      className: classes.monthAndYearSelect,
+      onChange: this.changeYear.bind(this),
+      value: this.state.shownDate.year()
+    }, yearOptions);
+  }
+
+  renderMonthAndYear(classes) {
+    const shownDate = this.getShownDate();
+    const year = shownDate.year();
+    const {
+      styles
+    } = this;
+    const {
+      minDate,
+      maxDate,
+      onlyClasses,
+      showMonthArrow
+    } = this.props;
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      style: onlyClasses ? undefined : styles['MonthAndYear'],
+      className: classes.monthAndYearWrapper
+    }, showMonthArrow ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      type: "button",
+      disabled: this.disablePrevButton,
+      style: onlyClasses ? undefined : _objectSpread({}, styles['MonthButton'], {
+        float: 'left'
+      }),
+      className: classes.prevButton,
+      onClick: this.prevButtonClickHandler.bind(this)
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      style: onlyClasses ? undefined : _objectSpread({}, styles['MonthArrow'], {}, styles['MonthArrowPrev'])
+    })) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      className: classes.month
+    }, this.renderMonthList(classes)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      className: classes.monthAndYearDivider
+    }, "\xA0"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      className: classes.year
+    }, this.renderYearList(classes))), showMonthArrow ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      type: "button",
+      disabled: this.disableNextButton,
+      style: onlyClasses ? undefined : _objectSpread({}, styles['MonthButton'], {
+        float: 'right'
+      }),
+      className: classes.nextButton,
+      onClick: this.nextButtonClickHandler.bind(this)
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      style: onlyClasses ? undefined : _objectSpread({}, styles['MonthArrow'], {}, styles['MonthArrowNext'])
+    })) : null);
+  }
+
+  renderWeekdays(classes) {
+    const dow = this.state.firstDayOfWeek;
+    const weekdays = [];
+    const {
+      styles
+    } = this;
+    const {
+      onlyClasses,
+      locale
+    } = this.props;
+    const weekDays = locale.weekdays;
+    const dayLength = 7 + dow;
+
+    for (let i = dow; i < dayLength; i++) {
+      const weekDayIndex = i % 7;
+      const day = weekDays[weekDayIndex];
+      weekdays.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        style: onlyClasses ? undefined : styles['Weekday'],
+        className: classes.weekDay,
+        key: i + day
+      }, day));
+    }
+
+    return weekdays;
+  }
+
+  renderDays(classes) {
+    // TODO: Split this logic into smaller chunks
+    const {
+      styles
+    } = this;
+    const {
+      range,
+      minDate,
+      maxDate,
+      format,
+      onlyClasses,
+      disableDaysBeforeToday,
+      specialDays
+    } = this.props;
+    const shownDate = this.getShownDate();
+    const {
+      date,
+      firstDayOfWeek
+    } = this.state;
+    const dateUnix = date.unix();
+    const monthNumber = shownDate.month();
+    const dayCount = shownDate.daysInMonth();
+    const startOfMonth = shownDate.clone().startOf('month').isoWeekday();
+    const lastMonth = shownDate.clone().month(monthNumber - 1);
+    const lastMonthNumber = lastMonth.month();
+    const lastMonthDayCount = lastMonth.daysInMonth();
+    const nextMonth = shownDate.clone().month(monthNumber + 1);
+    const nextMonthNumber = nextMonth.month();
+    const days = []; // Previous month's days
+
+    const diff = Math.abs(firstDayOfWeek - (startOfMonth + 7)) % 7;
+
+    for (let i = diff - 1; i >= 0; i--) {
+      const dayMoment = lastMonth.clone().date(lastMonthDayCount - i);
+      days.push({
+        dayMoment,
+        isPassive: true
       });
-    }
-  }, {
-    key: "renderMonthList",
-    value: function renderMonthList(classes) {
-      var _this2 = this;
+    } // Current month's days
 
-      var styles = this.styles;
-      var _this$props3 = this.props,
-          onlyClasses = _this$props3.onlyClasses,
-          locale = _this$props3.locale;
-      var monthLabels = locale.months;
-      var monthOptions = [];
 
-      for (var i = 0; i < 12; i++) {
-        var isDisabled = this._isDisabledMonth(i);
+    for (let i = 1; i <= dayCount; i++) {
+      const dayMoment = shownDate.clone().date(i); // set days before today to isPassive
 
-        monthOptions.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-          disabled: isDisabled,
-          key: "month".concat(i),
-          value: i
-        }, monthLabels[i]));
-      }
+      var _today = moment__WEBPACK_IMPORTED_MODULE_2___default()();
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
-        style: onlyClasses ? undefined : styles["MonthAndYearSelect"],
-        className: classes.monthAndYearSelect,
-        onChange: function onChange(e) {
-          return _this2.changeMonth(e.target.value, e);
-        },
-        value: this.state.shownDate.month()
-      }, monthOptions);
-    }
-  }, {
-    key: "_isDisabledMonth",
-    value: function _isDisabledMonth(currentMonth) {
-      var range = this.limitedDate;
-      var currentYear = this.state.shownDate.year();
-      return currentMonth < range.startDate.month() && currentYear <= range.startDate.year() || currentMonth > range.endDate.month() && currentYear >= range.endDate.year();
-    }
-  }, {
-    key: "renderYearList",
-    value: function renderYearList(classes) {
-      var styles = this.styles;
-      var onlyClasses = this.props.onlyClasses;
-      var range = this.limitedDate;
-      var yearOptions = [];
-
-      for (var i = range.startDate.year(); i <= range.endDate.year(); i++) {
-        yearOptions.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-          key: "year".concat(i),
-          value: i
-        }, i));
-      }
-
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
-        style: onlyClasses ? undefined : styles["MonthAndYearSelect"],
-        className: classes.monthAndYearSelect,
-        onChange: this.changeYear.bind(this),
-        value: this.state.shownDate.year()
-      }, yearOptions);
-    }
-  }, {
-    key: "renderMonthAndYear",
-    value: function renderMonthAndYear(classes) {
-      var shownDate = this.getShownDate();
-      var year = shownDate.year();
-      var styles = this.styles;
-      var _this$props4 = this.props,
-          minDate = _this$props4.minDate,
-          maxDate = _this$props4.maxDate,
-          onlyClasses = _this$props4.onlyClasses,
-          showMonthArrow = _this$props4.showMonthArrow;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        style: onlyClasses ? undefined : styles['MonthAndYear'],
-        className: classes.monthAndYearWrapper
-      }, showMonthArrow ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        type: "button",
-        disabled: this.disablePrevButton,
-        style: onlyClasses ? undefined : _objectSpread({}, styles['MonthButton'], {
-          "float": 'left'
-        }),
-        className: classes.prevButton,
-        onClick: this.prevButtonClickHandler.bind(this)
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        style: onlyClasses ? undefined : _objectSpread({}, styles['MonthArrow'], {}, styles['MonthArrowPrev'])
-      })) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: classes.month
-      }, this.renderMonthList(classes)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: classes.monthAndYearDivider
-      }, "\xA0"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: classes.year
-      }, this.renderYearList(classes))), showMonthArrow ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        type: "button",
-        disabled: this.disableNextButton,
-        style: onlyClasses ? undefined : _objectSpread({}, styles['MonthButton'], {
-          "float": 'right'
-        }),
-        className: classes.nextButton,
-        onClick: this.nextButtonClickHandler.bind(this)
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        style: onlyClasses ? undefined : _objectSpread({}, styles['MonthArrow'], {}, styles['MonthArrowNext'])
-      })) : null);
-    }
-  }, {
-    key: "renderWeekdays",
-    value: function renderWeekdays(classes) {
-      var dow = this.state.firstDayOfWeek;
-      var weekdays = [];
-      var styles = this.styles;
-      var _this$props5 = this.props,
-          onlyClasses = _this$props5.onlyClasses,
-          locale = _this$props5.locale;
-      var weekDays = locale.weekdays;
-      var dayLength = 7 + dow;
-
-      for (var i = dow; i < dayLength; i++) {
-        var weekDayIndex = i % 7;
-        var day = weekDays[weekDayIndex];
-        weekdays.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-          style: onlyClasses ? undefined : styles['Weekday'],
-          className: classes.weekDay,
-          key: i + day
-        }, day));
-      }
-
-      return weekdays;
-    }
-  }, {
-    key: "renderDays",
-    value: function renderDays(classes) {
-      var _this3 = this;
-
-      // TODO: Split this logic into smaller chunks
-      var styles = this.styles;
-      var _this$props6 = this.props,
-          range = _this$props6.range,
-          minDate = _this$props6.minDate,
-          maxDate = _this$props6.maxDate,
-          format = _this$props6.format,
-          onlyClasses = _this$props6.onlyClasses,
-          disableDaysBeforeToday = _this$props6.disableDaysBeforeToday,
-          specialDays = _this$props6.specialDays;
-      var shownDate = this.getShownDate();
-      var _this$state = this.state,
-          date = _this$state.date,
-          firstDayOfWeek = _this$state.firstDayOfWeek;
-      var dateUnix = date.unix();
-      var monthNumber = shownDate.month();
-      var dayCount = shownDate.daysInMonth();
-      var startOfMonth = shownDate.clone().startOf('month').isoWeekday();
-      var lastMonth = shownDate.clone().month(monthNumber - 1);
-      var lastMonthNumber = lastMonth.month();
-      var lastMonthDayCount = lastMonth.daysInMonth();
-      var nextMonth = shownDate.clone().month(monthNumber + 1);
-      var nextMonthNumber = nextMonth.month();
-      var days = []; // Previous month's days
-
-      var diff = Math.abs(firstDayOfWeek - (startOfMonth + 7)) % 7;
-
-      for (var i = diff - 1; i >= 0; i--) {
-        var dayMoment = lastMonth.clone().date(lastMonthDayCount - i);
+      if (disableDaysBeforeToday && Number(dayMoment.diff(_today, "days")) <= -1) {
         days.push({
-          dayMoment: dayMoment,
+          dayMoment,
           isPassive: true
         });
-      } // Current month's days
-
-
-      for (var _i = 1; _i <= dayCount; _i++) {
-        var _dayMoment = shownDate.clone().date(_i); // set days before today to isPassive
-
-
-        var _today = moment__WEBPACK_IMPORTED_MODULE_2___default()();
-
-        if (disableDaysBeforeToday && Number(_dayMoment.diff(_today, "days")) <= -1) {
-          days.push({
-            dayMoment: _dayMoment,
-            isPassive: true
-          });
-        } else {
-          days.push({
-            dayMoment: _dayMoment
-          });
-        }
-      } // Next month's days
-
-
-      var remainingCells = 42 - days.length; // 42cells = 7days * 6rows
-
-      for (var _i2 = 1; _i2 <= remainingCells; _i2++) {
-        var _dayMoment2 = nextMonth.clone().date(_i2);
-
+      } else {
         days.push({
-          dayMoment: _dayMoment2,
-          isPassive: true
+          dayMoment
         });
       }
+    } // Next month's days
 
-      var today = moment__WEBPACK_IMPORTED_MODULE_2___default()().startOf('day');
-      return days.map(function (data, index) {
-        var dayMoment = data.dayMoment,
-            isPassive = data.isPassive;
-        var isSelected = !range && dayMoment.unix() === dateUnix;
-        var isInRange = range && checkRange(dayMoment, range);
-        var isStartEdge = range && checkStartEdge(dayMoment, range);
-        var isEndEdge = range && checkEndEdge(dayMoment, range);
-        var isEdge = isStartEdge || isEndEdge;
-        var isToday = today.isSame(dayMoment);
-        var isSunday = dayMoment.day() === 0;
-        var isSpecialDay = specialDays && specialDays.some(function (specialDay) {
-          return dayMoment.endOf('day').isSame(specialDay.date.endOf('day'));
-        });
-        var isOutsideMinMax = isOusideMinMax(dayMoment, minDate, maxDate, format);
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DayCell_js__WEBPACK_IMPORTED_MODULE_4__["default"], _extends({
-          onSelect: _this3.handleSelect.bind(_this3)
-        }, data, {
-          theme: styles,
-          isStartEdge: isStartEdge,
-          isEndEdge: isEndEdge,
-          isSelected: isSelected || isEdge,
-          isInRange: isInRange,
-          isSunday: isSunday,
-          isSpecialDay: isSpecialDay,
-          isToday: isToday,
-          key: index,
-          isPassive: isPassive || isOutsideMinMax,
-          onlyClasses: onlyClasses,
-          classNames: classes
-        }));
+
+    const remainingCells = 42 - days.length; // 42cells = 7days * 6rows
+
+    for (let i = 1; i <= remainingCells; i++) {
+      const dayMoment = nextMonth.clone().date(i);
+      days.push({
+        dayMoment,
+        isPassive: true
       });
     }
-  }, {
-    key: "render",
-    value: function render() {
-      var styles = this.styles;
-      var _this$props7 = this.props,
-          onlyClasses = _this$props7.onlyClasses,
-          classNames = _this$props7.classNames;
 
-      var classes = _objectSpread({}, _styles_js__WEBPACK_IMPORTED_MODULE_5__["defaultClasses"], {}, classNames);
+    const today = moment__WEBPACK_IMPORTED_MODULE_2___default()().startOf('day');
+    return days.map((data, index) => {
+      const {
+        dayMoment,
+        isPassive
+      } = data;
+      const isSelected = !range && dayMoment.unix() === dateUnix;
+      const isInRange = range && checkRange(dayMoment, range);
+      const isStartEdge = range && checkStartEdge(dayMoment, range);
+      const isEndEdge = range && checkEndEdge(dayMoment, range);
+      const isEdge = isStartEdge || isEndEdge;
+      const isToday = today.isSame(dayMoment);
+      const isSunday = dayMoment.day() === 0;
+      const isSpecialDay = specialDays && specialDays.some(specialDay => {
+        return dayMoment.endOf('day').isSame(specialDay.date.endOf('day'));
+      });
+      const isOutsideMinMax = isOusideMinMax(dayMoment, minDate, maxDate, format);
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DayCell_js__WEBPACK_IMPORTED_MODULE_4__["default"], _extends({
+        onSelect: this.handleSelect.bind(this)
+      }, data, {
+        theme: styles,
+        isStartEdge: isStartEdge,
+        isEndEdge: isEndEdge,
+        isSelected: isSelected || isEdge,
+        isInRange: isInRange,
+        isSunday: isSunday,
+        isSpecialDay: isSpecialDay,
+        isToday: isToday,
+        key: index,
+        isPassive: isPassive || isOutsideMinMax,
+        onlyClasses: onlyClasses,
+        classNames: classes
+      }));
+    });
+  }
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        style: onlyClasses ? undefined : _objectSpread({}, styles['Calendar'], {}, this.props.style),
-        className: classes.calendar
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: classes.monthAndYear
-      }, this.renderMonthAndYear(classes)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: classes.weekDays
-      }, this.renderWeekdays(classes)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: classes.days
-      }, this.renderDays(classes)));
-    }
-  }, {
-    key: "limitedDate",
-    get: function get() {
-      var _this$props8 = this.props,
-          minDate = _this$props8.minDate,
-          maxDate = _this$props8.maxDate;
-      var m = moment__WEBPACK_IMPORTED_MODULE_2___default()();
-      var startDate, endDate;
+  render() {
+    const {
+      styles
+    } = this;
+    const {
+      onlyClasses,
+      classNames
+    } = this.props;
 
-      if (minDate) {
-        startDate = moment__WEBPACK_IMPORTED_MODULE_2___default.a.isMoment(minDate) ? minDate : moment__WEBPACK_IMPORTED_MODULE_2___default()(minDate, _constants__WEBPACK_IMPORTED_MODULE_6__["MomentFormat"]["default"]);
-      } else {
-        startDate = moment__WEBPACK_IMPORTED_MODULE_2___default()([m.year() - DEFAULT_YEAR_RANGE, START_OF_MONTH]);
-      }
+    const classes = _objectSpread({}, _styles_js__WEBPACK_IMPORTED_MODULE_5__["defaultClasses"], {}, classNames);
 
-      if (maxDate) {
-        endDate = moment__WEBPACK_IMPORTED_MODULE_2___default.a.isMoment(maxDate) ? maxDate : moment__WEBPACK_IMPORTED_MODULE_2___default()(maxDate, _constants__WEBPACK_IMPORTED_MODULE_6__["MomentFormat"]["default"]);
-      } else {
-        endDate = moment__WEBPACK_IMPORTED_MODULE_2___default()([m.year(), END_OF_MONTH]).endOf("month");
-      }
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      style: onlyClasses ? undefined : _objectSpread({}, styles['Calendar'], {}, this.props.style),
+      className: classes.calendar
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: classes.monthAndYear
+    }, this.renderMonthAndYear(classes)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: classes.weekDays
+    }, this.renderWeekdays(classes)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: classes.days
+    }, this.renderDays(classes)));
+  }
 
-      return {
-        startDate: startDate,
-        endDate: endDate
-      };
-    }
-  }, {
-    key: "disablePrevButton",
-    get: function get() {
-      var range = this.limitedDate;
-      var startDate = range.startDate;
-      var currentDate = this.state.shownDate;
-      var prevMonth = this.state.shownDate.month() - 1;
-
-      if (prevMonth < startDate.month() && currentDate.year() <= startDate.year()) {
-        return true;
-      }
-
-      return false;
-    }
-  }, {
-    key: "disableNextButton",
-    get: function get() {
-      var range = this.limitedDate;
-      var endDate = range.endDate;
-      var currentDate = this.state.shownDate;
-      var nextMonth = this.state.shownDate.month() + 1;
-
-      if (nextMonth > endDate.month() && currentDate.year() >= endDate.year()) {
-        return true;
-      }
-
-      return false;
-    }
-  }]);
-
-  return Calendar;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+}
 
 Calendar.defaultProps = {
-  format: _constants__WEBPACK_IMPORTED_MODULE_6__["MomentFormat"]["default"],
+  format: _constants__WEBPACK_IMPORTED_MODULE_6__["MomentFormat"].default,
   theme: {},
   showMonthArrow: true,
   disableDaysBeforeToday: false,
@@ -2403,27 +2189,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _Overlay__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../Overlay */ "./www/js/source/reactpages/components/Overlay.jsx");
 /* harmony import */ var _Calendar_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Calendar.js */ "./www/js/source/reactpages/components/date-range/Calendar.js");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -2437,103 +2205,96 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+class DatePicker extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+  constructor(props) {
+    super(props);
 
-var DatePicker =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(DatePicker, _Component);
-
-  function DatePicker(props) {
-    var _this;
-
-    _classCallCheck(this, DatePicker);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(DatePicker).call(this, props));
-
-    _defineProperty(_assertThisInitialized(_this), "show", function () {
-      _this.setState({
+    _defineProperty(this, "show", () => {
+      this.setState({
         show: true
       });
     });
 
-    var locale = props.locale,
-        date = props.date,
-        format = props.format;
-    _this.locale = _objectSpread({}, _defaultOptions_js__WEBPACK_IMPORTED_MODULE_4__["default"].locale, {}, locale);
-    var selectedDate = Object(_utils_parseInput_js__WEBPACK_IMPORTED_MODULE_3__["default"])(date, format, 'startOf');
-    _this.state = {
-      selectedDate: selectedDate,
+    const {
+      locale,
+      date,
+      format
+    } = props;
+    this.locale = _objectSpread({}, _defaultOptions_js__WEBPACK_IMPORTED_MODULE_4__["default"].locale, {}, locale);
+    const selectedDate = Object(_utils_parseInput_js__WEBPACK_IMPORTED_MODULE_3__["default"])(date, format, 'startOf');
+    this.state = {
+      selectedDate,
       show: false
     };
-    return _this;
   }
 
-  _createClass(DatePicker, [{
-    key: "handleSelect",
-    value: function handleSelect(date) {
-      var onChange = this.props.onChange;
-      onChange && onChange(date);
-      this.setState({
-        selectedDate: date,
-        show: false
-      });
+  get dateText() {
+    const {
+      selectedDate
+    } = this.state;
+
+    if (selectedDate) {
+      return `${selectedDate.format(this.props.format)}`;
     }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this$props = this.props,
-          format = _this$props.format,
-          firstDayOfWeek = _this$props.firstDayOfWeek,
-          minDate = _this$props.minDate,
-          maxDate = _this$props.maxDate,
-          classNames = _this$props.classNames;
 
-      var classes = _objectSpread({}, _styles_js__WEBPACK_IMPORTED_MODULE_6__["defaultClasses"], {}, classNames);
+    return "";
+  }
 
-      var show = this.state.show;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "daterange-container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "daterange-label",
-        onClick: this.show
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        readOnly: true,
-        className: "input-text datepicker",
-        type: "text",
-        autoComplete: "off",
-        value: this.dateText
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "icon icon-calendar"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Overlay__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        isOpening: show
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: classes.dateRange
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Calendar_js__WEBPACK_IMPORTED_MODULE_9__["default"], {
-        shownDate: this.state.selectedDate,
-        format: format,
-        firstDayOfWeek: firstDayOfWeek,
-        minDate: minDate,
-        maxDate: maxDate,
-        classNames: classNames,
-        onChange: this.handleSelect.bind(this),
-        locale: this.locale
-      }))));
-    }
-  }, {
-    key: "dateText",
-    get: function get() {
-      var selectedDate = this.state.selectedDate;
+  handleSelect(date) {
+    const {
+      onChange
+    } = this.props;
+    onChange && onChange(date);
+    this.setState({
+      selectedDate: date,
+      show: false
+    });
+  }
 
-      if (selectedDate) {
-        return "".concat(selectedDate.format(this.props.format));
-      }
+  render() {
+    const {
+      format,
+      firstDayOfWeek,
+      minDate,
+      maxDate,
+      classNames
+    } = this.props;
 
-      return "";
-    }
-  }]);
+    const classes = _objectSpread({}, _styles_js__WEBPACK_IMPORTED_MODULE_6__["defaultClasses"], {}, classNames);
 
-  return DatePicker;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+    const {
+      show
+    } = this.state;
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "daterange-container"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "daterange-label",
+      onClick: this.show
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      readOnly: true,
+      className: "input-text datepicker",
+      type: "text",
+      autoComplete: "off",
+      value: this.dateText
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      className: "icon icon-calendar"
+    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Overlay__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      isOpening: show
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: classes.dateRange
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Calendar_js__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      shownDate: this.state.selectedDate,
+      format: format,
+      firstDayOfWeek: firstDayOfWeek,
+      minDate: minDate,
+      maxDate: maxDate,
+      classNames: classNames,
+      onChange: this.handleSelect.bind(this),
+      locale: this.locale
+    }))));
+  }
+
+}
 
 _defineProperty(DatePicker, "propTypes", {
   format: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
@@ -2548,10 +2309,8 @@ _defineProperty(DatePicker, "propTypes", {
 });
 
 _defineProperty(DatePicker, "defaultProps", {
-  format: _constants__WEBPACK_IMPORTED_MODULE_5__["MomentFormat"]["default"]
+  format: _constants__WEBPACK_IMPORTED_MODULE_5__["MomentFormat"].default
 });
-
-
 
 /***/ }),
 
@@ -2579,27 +2338,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./constants */ "./www/js/source/reactpages/components/date-range/constants.js");
 /* harmony import */ var _defaultOptions_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./defaultOptions.js */ "./www/js/source/reactpages/components/date-range/defaultOptions.js");
 /* harmony import */ var _Overlay__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../Overlay */ "./www/js/source/reactpages/components/Overlay.jsx");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -2615,284 +2356,274 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var DateRange =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(DateRange, _Component);
+class DateRange extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+  constructor(props, context) {
+    super(props, context);
 
-  function DateRange(props, context) {
-    var _this;
-
-    _classCallCheck(this, DateRange);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(DateRange).call(this, props, context));
-
-    _defineProperty(_assertThisInitialized(_this), "show", function () {
-      _this.calendarSelectionStep = 0;
-
-      _this.setState({
+    _defineProperty(this, "show", () => {
+      this.calendarSelectionStep = 0;
+      this.setState({
         show: true
       });
     });
 
-    _defineProperty(_assertThisInitialized(_this), "handleApply", function () {
-      var _this$props = _this.props,
-          onClickApplyButton = _this$props.onClickApplyButton,
-          onChange = _this$props.onChange;
-      var range = _this.state.range;
-      _this.originalRange = Object.assign({}, range);
-      onClickApplyButton && onClickApplyButton(range, _this.isValid);
-      onChange && onChange(range, _this.isValid);
-
-      _this.close();
+    _defineProperty(this, "handleApply", () => {
+      const {
+        onClickApplyButton,
+        onChange
+      } = this.props;
+      const range = this.state.range;
+      this.originalRange = Object.assign({}, range);
+      onClickApplyButton && onClickApplyButton(range, this.isValid);
+      onChange && onChange(range, this.isValid);
+      this.close();
     });
 
-    _defineProperty(_assertThisInitialized(_this), "handleCancel", function () {
-      _this.setRange(_this.originalRange, false);
+    _defineProperty(this, "handleCancel", () => {
+      this.setRange(this.originalRange, false);
     });
 
-    var format = props.format,
-        linkedCalendars = props.linkedCalendars,
-        theme = props.theme;
-    var startDate = Object(_utils_parseInput_js__WEBPACK_IMPORTED_MODULE_3__["default"])(props.startDate, format, 'startOf');
-    var endDate = Object(_utils_parseInput_js__WEBPACK_IMPORTED_MODULE_3__["default"])(props.endDate, format, 'endOf');
-    _this.styles = Object(_styles_js__WEBPACK_IMPORTED_MODULE_6__["default"])(theme);
-    _this.calendarSelectionStep = 0;
-    _this.locale = _objectSpread({}, _defaultOptions_js__WEBPACK_IMPORTED_MODULE_9__["default"].locale, {}, props.locale);
-    _this.ranges = _objectSpread({}, _defaultOptions_js__WEBPACK_IMPORTED_MODULE_9__["default"].ranges(props.today, props.minDate, props.maxDate, props.limitedMonthRange), {}, props.ranges);
-    _this.isValid = true;
-    _this.originalRange = {
-      startDate: startDate,
-      endDate: endDate
+    const {
+      format,
+      linkedCalendars,
+      theme
+    } = props;
+    const startDate = Object(_utils_parseInput_js__WEBPACK_IMPORTED_MODULE_3__["default"])(props.startDate, format, 'startOf');
+    const endDate = Object(_utils_parseInput_js__WEBPACK_IMPORTED_MODULE_3__["default"])(props.endDate, format, 'endOf');
+    this.styles = Object(_styles_js__WEBPACK_IMPORTED_MODULE_6__["default"])(theme);
+    this.calendarSelectionStep = 0;
+    this.locale = _objectSpread({}, _defaultOptions_js__WEBPACK_IMPORTED_MODULE_9__["default"].locale, {}, props.locale);
+    this.ranges = _objectSpread({}, _defaultOptions_js__WEBPACK_IMPORTED_MODULE_9__["default"].ranges(props.today, props.minDate, props.maxDate, props.limitedMonthRange), {}, props.ranges);
+    this.isValid = true;
+    this.originalRange = {
+      startDate,
+      endDate
     };
-    _this.state = {
+    this.state = {
       range: {
-        startDate: startDate,
-        endDate: endDate
+        startDate,
+        endDate
       },
       link: linkedCalendars && endDate,
       show: false
     };
-    return _this;
   }
 
-  _createClass(DateRange, [{
-    key: "close",
-    value: function close() {
-      this.setState({
-        show: false
-      });
-    }
-  }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var onInit = this.props.onInit;
-      onInit && onInit(this.state.range);
-    }
-  }, {
-    key: "orderRange",
-    value: function orderRange(range) {
-      var startDate = range.startDate,
-          endDate = range.endDate;
-      var swap = startDate.isAfter(endDate);
-      if (!swap) return range;
-      return {
-        startDate: endDate,
-        endDate: startDate
-      };
-    }
-  }, {
-    key: "setRange",
-    value: function setRange(dateRange, show) {
-      var range = this.orderRange(dateRange);
-      this.isValid = this.isValidMonthRange(range);
+  get dateRangeText() {
+    const range = this.state.range;
 
-      if (this.isValid) {
-        var newState = show === undefined ? {
-          range: range
-        } : {
+    if (range.startDate && range.endDate) {
+      const {
+        format
+      } = this.props;
+      return `${range.startDate.format(format)} - ${range.endDate.format(format)}`;
+    }
+
+    return "";
+  }
+
+  close() {
+    this.setState({
+      show: false
+    });
+  }
+
+  componentDidMount() {
+    const {
+      onInit
+    } = this.props;
+    onInit && onInit(this.state.range);
+  }
+
+  orderRange(range) {
+    const {
+      startDate,
+      endDate
+    } = range;
+    const swap = startDate.isAfter(endDate);
+    if (!swap) return range;
+    return {
+      startDate: endDate,
+      endDate: startDate
+    };
+  }
+
+  setRange(dateRange, show) {
+    let range = this.orderRange(dateRange);
+    this.isValid = this.isValidMonthRange(range);
+
+    if (this.isValid) {
+      const newState = show === undefined ? {
+        range
+      } : {
+        range,
+        show
+      };
+      this.setState(newState);
+    } else {
+      const {
+        onChange
+      } = this.props;
+      onChange && onChange(range, false);
+    }
+  }
+
+  handlePredefinedRangesSelect(range) {
+    this.setRange(range, false);
+    this.originalRange = Object.assign({}, range);
+    const {
+      onChange
+    } = this.props;
+    onChange && onChange(range, true);
+  }
+
+  handleCalendarSelect(date) {
+    const {
+      startDate,
+      endDate
+    } = this.state.range;
+    const range = {
+      startDate: startDate,
+      endDate: endDate
+    };
+
+    switch (this.calendarSelectionStep) {
+      case 0:
+        range['startDate'] = date;
+        range['endDate'] = date;
+        this.calendarSelectionStep = 1;
+        break;
+
+      case 1:
+        range['endDate'] = date;
+        this.calendarSelectionStep = 0;
+        break;
+    }
+
+    this.setRange(range);
+  }
+
+  isValidMonthRange(date) {
+    const {
+      limitedMonthRange
+    } = this.props;
+
+    if (limitedMonthRange) {
+      const startDate = date.startDate;
+      const endDate = date.endDate;
+      const diffMonth = 12 * (endDate.year() - startDate.year()) + endDate.month() - startDate.month() + 1;
+      return diffMonth <= limitedMonthRange;
+    }
+
+    return true;
+  }
+
+  handleLinkChange(newDate) {
+    this.setState({
+      link: newDate
+    });
+  }
+
+  render() {
+    const {
+      showRange,
+      format,
+      linkedCalendars,
+      calendars,
+      firstDayOfWeek,
+      minDate,
+      maxDate,
+      classNames,
+      onlyClasses,
+      specialDays,
+      lang,
+      disableDaysBeforeToday,
+      showMonthArrow
+    } = this.props;
+    const {
+      range,
+      link
+    } = this.state;
+    const {
+      styles
+    } = this;
+
+    const classes = _objectSpread({}, _styles_js__WEBPACK_IMPORTED_MODULE_6__["defaultClasses"], {}, classNames);
+
+    const calendarsCount = Number(calendars) - 1;
+    const buttonHandlers = {
+      apply: this.handleApply,
+      cancel: this.handleCancel
+    };
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "daterange-container"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "daterange-label",
+      onClick: this.show
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      readOnly: true,
+      name: "DateRange",
+      id: "DateRange",
+      className: "input-text datepicker",
+      type: "text",
+      autoComplete: "off",
+      value: this.dateRangeText
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      className: "icon icon-calendar"
+    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Overlay__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      isOpening: this.state.show,
+      onClose: this.handleCancel
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: classes.dateRange,
+      ref: element => this.dateRangeContainer = element
+    }, showRange && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PredefinedRanges_js__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      format: format,
+      ranges: this.ranges,
+      range: range,
+      theme: styles,
+      onSelect: range => this.handlePredefinedRangesSelect(range),
+      onlyClasses: onlyClasses,
+      classNames: classes,
+      locale: this.locale,
+      buttonHandlers: buttonHandlers
+    }), (() => {
+      const _calendars = [];
+
+      for (var i = calendarsCount; i >= 0; i--) {
+        const shownDate = i == calendarsCount ? range.startDate : range.endDate;
+
+        _calendars.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Calendar_js__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          showMonthArrow: showMonthArrow,
+          shownDate: shownDate,
+          disableDaysBeforeToday: disableDaysBeforeToday,
+          lang: lang,
+          key: i,
+          link: linkedCalendars && link,
+          linkCB: this.handleLinkChange.bind(this),
           range: range,
-          show: show
-        };
-        this.setState(newState);
-      } else {
-        var onChange = this.props.onChange;
-        onChange && onChange(range, false);
-      }
-    }
-  }, {
-    key: "handlePredefinedRangesSelect",
-    value: function handlePredefinedRangesSelect(range) {
-      this.setRange(range, false);
-      this.originalRange = Object.assign({}, range);
-      var onChange = this.props.onChange;
-      onChange && onChange(range, true);
-    }
-  }, {
-    key: "handleCalendarSelect",
-    value: function handleCalendarSelect(date) {
-      var _this$state$range = this.state.range,
-          startDate = _this$state$range.startDate,
-          endDate = _this$state$range.endDate;
-      var range = {
-        startDate: startDate,
-        endDate: endDate
-      };
-
-      switch (this.calendarSelectionStep) {
-        case 0:
-          range['startDate'] = date;
-          range['endDate'] = date;
-          this.calendarSelectionStep = 1;
-          break;
-
-        case 1:
-          range['endDate'] = date;
-          this.calendarSelectionStep = 0;
-          break;
+          format: format,
+          firstDayOfWeek: firstDayOfWeek,
+          theme: styles,
+          minDate: minDate,
+          maxDate: maxDate,
+          onlyClasses: onlyClasses,
+          specialDays: specialDays,
+          classNames: classes,
+          onChange: this.handleCalendarSelect.bind(this),
+          locale: this.locale
+        }));
       }
 
-      this.setRange(range);
-    }
-  }, {
-    key: "isValidMonthRange",
-    value: function isValidMonthRange(date) {
-      var limitedMonthRange = this.props.limitedMonthRange;
+      return _calendars;
+    })())));
+  }
 
-      if (limitedMonthRange) {
-        var startDate = date.startDate;
-        var endDate = date.endDate;
-        var diffMonth = 12 * (endDate.year() - startDate.year()) + endDate.month() - startDate.month() + 1;
-        return diffMonth <= limitedMonthRange;
-      }
-
-      return true;
-    }
-  }, {
-    key: "handleLinkChange",
-    value: function handleLinkChange(newDate) {
-      this.setState({
-        link: newDate
-      });
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this2 = this;
-
-      var _this$props2 = this.props,
-          showRange = _this$props2.showRange,
-          format = _this$props2.format,
-          linkedCalendars = _this$props2.linkedCalendars,
-          calendars = _this$props2.calendars,
-          firstDayOfWeek = _this$props2.firstDayOfWeek,
-          minDate = _this$props2.minDate,
-          maxDate = _this$props2.maxDate,
-          classNames = _this$props2.classNames,
-          onlyClasses = _this$props2.onlyClasses,
-          specialDays = _this$props2.specialDays,
-          lang = _this$props2.lang,
-          disableDaysBeforeToday = _this$props2.disableDaysBeforeToday,
-          showMonthArrow = _this$props2.showMonthArrow;
-      var _this$state = this.state,
-          range = _this$state.range,
-          link = _this$state.link;
-      var styles = this.styles;
-
-      var classes = _objectSpread({}, _styles_js__WEBPACK_IMPORTED_MODULE_6__["defaultClasses"], {}, classNames);
-
-      var calendarsCount = Number(calendars) - 1;
-      var buttonHandlers = {
-        apply: this.handleApply,
-        cancel: this.handleCancel
-      };
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "daterange-container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "daterange-label",
-        onClick: this.show
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        readOnly: true,
-        name: "DateRange",
-        id: "DateRange",
-        className: "input-text datepicker",
-        type: "text",
-        autoComplete: "off",
-        value: this.dateRangeText
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "icon icon-calendar"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Overlay__WEBPACK_IMPORTED_MODULE_10__["default"], {
-        isOpening: this.state.show,
-        onClose: this.handleCancel
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: classes.dateRange,
-        ref: function ref(element) {
-          return _this2.dateRangeContainer = element;
-        }
-      }, showRange && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PredefinedRanges_js__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        format: format,
-        ranges: this.ranges,
-        range: range,
-        theme: styles,
-        onSelect: function onSelect(range) {
-          return _this2.handlePredefinedRangesSelect(range);
-        },
-        onlyClasses: onlyClasses,
-        classNames: classes,
-        locale: this.locale,
-        buttonHandlers: buttonHandlers
-      }), function () {
-        var _calendars = [];
-
-        for (var i = calendarsCount; i >= 0; i--) {
-          var shownDate = i == calendarsCount ? range.startDate : range.endDate;
-
-          _calendars.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Calendar_js__WEBPACK_IMPORTED_MODULE_4__["default"], {
-            showMonthArrow: showMonthArrow,
-            shownDate: shownDate,
-            disableDaysBeforeToday: disableDaysBeforeToday,
-            lang: lang,
-            key: i,
-            link: linkedCalendars && link,
-            linkCB: _this2.handleLinkChange.bind(_this2),
-            range: range,
-            format: format,
-            firstDayOfWeek: firstDayOfWeek,
-            theme: styles,
-            minDate: minDate,
-            maxDate: maxDate,
-            onlyClasses: onlyClasses,
-            specialDays: specialDays,
-            classNames: classes,
-            onChange: _this2.handleCalendarSelect.bind(_this2),
-            locale: _this2.locale
-          }));
-        }
-
-        return _calendars;
-      }())));
-    }
-  }, {
-    key: "dateRangeText",
-    get: function get() {
-      var range = this.state.range;
-
-      if (range.startDate && range.endDate) {
-        var format = this.props.format;
-        return "".concat(range.startDate.format(format), " - ").concat(range.endDate.format(format));
-      }
-
-      return "";
-    }
-  }]);
-
-  return DateRange;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+}
 
 DateRange.defaultProps = {
   linkedCalendars: false,
   theme: {},
-  format: _constants__WEBPACK_IMPORTED_MODULE_8__["MomentFormat"]["default"],
+  format: _constants__WEBPACK_IMPORTED_MODULE_8__["MomentFormat"].default,
   calendars: 2,
   onlyClasses: true,
   classNames: {},
@@ -2943,162 +2674,143 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _styles_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./styles.js */ "./www/js/source/reactpages/components/date-range/styles.js");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
 
 
 
-
-var DayCell =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(DayCell, _Component);
-
-  function DayCell(props, context) {
-    var _this;
-
-    _classCallCheck(this, DayCell);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(DayCell).call(this, props, context));
-    _this.state = {
+class DayCell extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
       hover: false,
       active: false
     };
-    _this.styles = _this.props.theme;
-    return _this;
+    this.styles = this.props.theme;
   }
 
-  _createClass(DayCell, [{
-    key: "handleMouseEvent",
-    value: function handleMouseEvent(event) {
-      event.preventDefault();
-      if (this.props.isPassive) return null;
-      var newState = {};
+  handleMouseEvent(event) {
+    event.preventDefault();
+    if (this.props.isPassive) return null;
+    const newState = {};
 
-      switch (event.type) {
-        case 'mouseenter':
-          newState['hover'] = true;
-          break;
+    switch (event.type) {
+      case 'mouseenter':
+        newState['hover'] = true;
+        break;
 
-        case 'mouseup':
-        case 'mouseleave':
-          newState['hover'] = false;
-          newState['active'] = false;
-          break;
+      case 'mouseup':
+      case 'mouseleave':
+        newState['hover'] = false;
+        newState['active'] = false;
+        break;
 
-        case 'mousedown':
-          newState['active'] = true;
-          break;
-      }
-
-      this.setState(newState);
+      case 'mousedown':
+        newState['active'] = true;
+        break;
     }
-  }, {
-    key: "handleSelect",
-    value: function handleSelect(event) {
-      event.preventDefault();
-      if (this.props.isPassive) return null;
-      this.props.onSelect(this.props.dayMoment);
-    }
-  }, {
-    key: "getStateStyles",
-    value: function getStateStyles() {
-      var _this$state = this.state,
-          hover = _this$state.hover,
-          active = _this$state.active;
-      var _this$props = this.props,
-          isSelected = _this$props.isSelected,
-          isInRange = _this$props.isInRange,
-          isPassive = _this$props.isPassive,
-          isStartEdge = _this$props.isStartEdge,
-          isEndEdge = _this$props.isEndEdge,
-          dayMoment = _this$props.dayMoment,
-          isToday = _this$props.isToday,
-          isSunday = _this$props.isSunday,
-          isSpecialDay = _this$props.isSpecialDay;
-      var styles = this.styles;
-      var hoverStyle = hover ? styles['DayHover'] : {};
-      var activeStyle = active ? styles['DayActive'] : {};
-      var passiveStyle = isPassive ? styles['DayPassive'] : {};
-      var startEdgeStyle = isStartEdge ? styles['DayStartEdge'] : {};
-      var endEdgeStyle = isEndEdge ? styles['DayEndEdge'] : {};
-      var selectedStyle = isSelected ? styles['DaySelected'] : {};
-      var inRangeStyle = isInRange ? styles['DayInRange'] : {};
-      var todayStyle = isToday ? styles['DayToday'] : {};
-      var sundayStyle = isSunday ? styles['DaySunday'] : {};
-      var specialDayStyle = isSpecialDay ? styles['DaySpecialDay'] : {};
-      return _objectSpread({}, todayStyle, {}, sundayStyle, {}, specialDayStyle, {}, inRangeStyle, {}, hoverStyle, {}, passiveStyle, {}, activeStyle, {}, selectedStyle, {}, startEdgeStyle, {}, endEdgeStyle);
-    }
-  }, {
-    key: "getClassNames",
-    value: function getClassNames(classes) {
-      var _classnames;
 
-      var _this$props2 = this.props,
-          isSelected = _this$props2.isSelected,
-          isInRange = _this$props2.isInRange,
-          isPassive = _this$props2.isPassive,
-          isStartEdge = _this$props2.isStartEdge,
-          isEndEdge = _this$props2.isEndEdge,
-          isToday = _this$props2.isToday,
-          isSunday = _this$props2.isSunday,
-          isSpecialDay = _this$props2.isSpecialDay;
-      return classnames__WEBPACK_IMPORTED_MODULE_2___default()((_classnames = {}, _defineProperty(_classnames, classes.day, true), _defineProperty(_classnames, classes.dayActive, isSelected), _defineProperty(_classnames, classes.dayPassive, isPassive), _defineProperty(_classnames, classes.dayInRange, isInRange), _defineProperty(_classnames, classes.dayStartEdge, isStartEdge), _defineProperty(_classnames, classes.dayEndEdge, isEndEdge), _defineProperty(_classnames, classes.dayToday, isToday), _defineProperty(_classnames, classes.daySunday, isSunday), _defineProperty(_classnames, classes.daySpecialDay, isSpecialDay), _classnames));
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this$props3 = this.props,
-          dayMoment = _this$props3.dayMoment,
-          onlyClasses = _this$props3.onlyClasses,
-          classNames = _this$props3.classNames;
-      var styles = this.styles;
-      var stateStyle = this.getStateStyles();
-      var classes = this.getClassNames(classNames);
-      var dayWrapperStyles = {
-        width: styles['Day'].width,
-        height: styles['Day'].height,
-        display: styles['Day'].display
-      };
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        style: onlyClasses ? undefined : dayWrapperStyles,
-        onClick: this.handleSelect.bind(this)
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        onMouseEnter: this.handleMouseEvent.bind(this),
-        onMouseLeave: this.handleMouseEvent.bind(this),
-        onMouseDown: this.handleMouseEvent.bind(this),
-        onMouseUp: this.handleMouseEvent.bind(this),
-        className: classes,
-        style: onlyClasses ? undefined : _objectSpread({}, styles['Day'], {}, stateStyle)
-      }, dayMoment.date()));
-    }
-  }]);
+    this.setState(newState);
+  }
 
-  return DayCell;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+  handleSelect(event) {
+    event.preventDefault();
+    if (this.props.isPassive) return null;
+    this.props.onSelect(this.props.dayMoment);
+  }
+
+  getStateStyles() {
+    const {
+      hover,
+      active
+    } = this.state;
+    const {
+      isSelected,
+      isInRange,
+      isPassive,
+      isStartEdge,
+      isEndEdge,
+      dayMoment,
+      isToday,
+      isSunday,
+      isSpecialDay
+    } = this.props;
+    const {
+      styles
+    } = this;
+    const hoverStyle = hover ? styles['DayHover'] : {};
+    const activeStyle = active ? styles['DayActive'] : {};
+    const passiveStyle = isPassive ? styles['DayPassive'] : {};
+    const startEdgeStyle = isStartEdge ? styles['DayStartEdge'] : {};
+    const endEdgeStyle = isEndEdge ? styles['DayEndEdge'] : {};
+    const selectedStyle = isSelected ? styles['DaySelected'] : {};
+    const inRangeStyle = isInRange ? styles['DayInRange'] : {};
+    const todayStyle = isToday ? styles['DayToday'] : {};
+    const sundayStyle = isSunday ? styles['DaySunday'] : {};
+    const specialDayStyle = isSpecialDay ? styles['DaySpecialDay'] : {};
+    return _objectSpread({}, todayStyle, {}, sundayStyle, {}, specialDayStyle, {}, inRangeStyle, {}, hoverStyle, {}, passiveStyle, {}, activeStyle, {}, selectedStyle, {}, startEdgeStyle, {}, endEdgeStyle);
+  }
+
+  getClassNames(classes) {
+    const {
+      isSelected,
+      isInRange,
+      isPassive,
+      isStartEdge,
+      isEndEdge,
+      isToday,
+      isSunday,
+      isSpecialDay
+    } = this.props;
+    return classnames__WEBPACK_IMPORTED_MODULE_2___default()({
+      [classes.day]: true,
+      [classes.dayActive]: isSelected,
+      [classes.dayPassive]: isPassive,
+      [classes.dayInRange]: isInRange,
+      [classes.dayStartEdge]: isStartEdge,
+      [classes.dayEndEdge]: isEndEdge,
+      [classes.dayToday]: isToday,
+      [classes.daySunday]: isSunday,
+      [classes.daySpecialDay]: isSpecialDay
+    });
+  }
+
+  render() {
+    const {
+      dayMoment,
+      onlyClasses,
+      classNames
+    } = this.props;
+    const {
+      styles
+    } = this;
+    const stateStyle = this.getStateStyles();
+    const classes = this.getClassNames(classNames);
+    const dayWrapperStyles = {
+      width: styles['Day'].width,
+      height: styles['Day'].height,
+      display: styles['Day'].display
+    };
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      style: onlyClasses ? undefined : dayWrapperStyles,
+      onClick: this.handleSelect.bind(this)
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      onMouseEnter: this.handleMouseEvent.bind(this),
+      onMouseLeave: this.handleMouseEvent.bind(this),
+      onMouseDown: this.handleMouseEvent.bind(this),
+      onMouseUp: this.handleMouseEvent.bind(this),
+      className: classes,
+      style: onlyClasses ? undefined : _objectSpread({}, styles['Day'], {}, stateStyle)
+    }, dayMoment.date()));
+  }
+
+}
 
 DayCell.defaultProps = {
   theme: {
@@ -3143,29 +2855,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_parseInput_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utils/parseInput.js */ "./www/js/source/reactpages/components/date-range/utils/parseInput.js");
 /* harmony import */ var _styles_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./styles.js */ "./www/js/source/reactpages/components/date-range/styles.js");
 /* harmony import */ var _defaultOptions_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./defaultOptions.js */ "./www/js/source/reactpages/components/date-range/defaultOptions.js");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
 
@@ -3174,144 +2869,125 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-
-var PredefinedRanges =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(PredefinedRanges, _Component);
-
-  function PredefinedRanges(props, context) {
-    var _this;
-
-    _classCallCheck(this, PredefinedRanges);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(PredefinedRanges).call(this, props, context));
-    _this.styles = _this.props.theme;
-    _this.selectedItem = _this._getSelectedRange();
-    return _this;
+class PredefinedRanges extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+  constructor(props, context) {
+    super(props, context);
+    this.styles = this.props.theme;
+    this.selectedItem = this._getSelectedRange();
   }
 
-  _createClass(PredefinedRanges, [{
-    key: "componentDidUpdate",
-    value: function componentDidUpdate(prevProps, prevState) {
-      if (this.props.range !== prevProps.range) {
-        this.selectedItem = this._getSelectedRange();
-      }
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.range !== prevProps.range) {
+      this.selectedItem = this._getSelectedRange();
     }
-  }, {
-    key: "_getSelectedRange",
-    value: function _getSelectedRange() {
-      var _this$props = this.props,
-          ranges = _this$props.ranges,
-          range = _this$props.range;
-      return Object.keys(ranges).find(function (name) {
-        var currentRange = ranges[name];
-        return range.startDate.isSame(currentRange.startDate, "day") && range.endDate.isSame(currentRange.endDate, "day");
+  }
+
+  _getSelectedRange() {
+    const {
+      ranges,
+      range
+    } = this.props;
+    return Object.keys(ranges).find(name => {
+      const currentRange = ranges[name];
+      return range.startDate.isSame(currentRange.startDate, "day") && range.endDate.isSame(currentRange.endDate, "day");
+    });
+  }
+
+  handleSelect(name, event) {
+    event.preventDefault();
+    this.selectedItem = name;
+    const range = this.props.ranges[name];
+    this.props.onSelect({
+      startDate: Object(_utils_parseInput_js__WEBPACK_IMPORTED_MODULE_4__["default"])(range['startDate'], null, 'startOf'),
+      endDate: Object(_utils_parseInput_js__WEBPACK_IMPORTED_MODULE_4__["default"])(range['endDate'], null, 'endOf')
+    });
+  }
+
+  clickButton(event, action) {
+    event.preventDefault();
+    this.props.buttonHandlers[action]();
+  }
+
+  renderRangeList(classes) {
+    const {
+      ranges,
+      range,
+      onlyClasses
+    } = this.props;
+    const {
+      styles
+    } = this;
+    let gotActiveRange = false;
+    return Object.keys(ranges).map(name => {
+      const active = this.selectedItem === name;
+      gotActiveRange = !gotActiveRange && active;
+
+      const style = _objectSpread({}, styles['PredefinedRangesItem'], {}, gotActiveRange ? styles['PredefinedRangesItemActive'] : {});
+
+      const predefinedRangeClass = classnames__WEBPACK_IMPORTED_MODULE_3___default()({
+        [classes.predefinedRangesItem]: true,
+        [classes.predefinedRangesItemActive]: gotActiveRange
       });
-    }
-  }, {
-    key: "handleSelect",
-    value: function handleSelect(name, event) {
-      event.preventDefault();
-      this.selectedItem = name;
-      var range = this.props.ranges[name];
-      this.props.onSelect({
-        startDate: Object(_utils_parseInput_js__WEBPACK_IMPORTED_MODULE_4__["default"])(range['startDate'], null, 'startOf'),
-        endDate: Object(_utils_parseInput_js__WEBPACK_IMPORTED_MODULE_4__["default"])(range['endDate'], null, 'endOf')
-      });
-    }
-  }, {
-    key: "clickButton",
-    value: function clickButton(event, action) {
-      event.preventDefault();
-      this.props.buttonHandlers[action]();
-    }
-  }, {
-    key: "renderRangeList",
-    value: function renderRangeList(classes) {
-      var _this2 = this;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#",
+        key: 'range-' + name,
+        className: predefinedRangeClass,
+        style: onlyClasses ? undefined : style,
+        onClick: e => this.handleSelect(name, e)
+      }, name);
+    });
+  }
 
-      var _this$props2 = this.props,
-          ranges = _this$props2.ranges,
-          range = _this$props2.range,
-          onlyClasses = _this$props2.onlyClasses;
-      var styles = this.styles;
-      var gotActiveRange = false;
-      return Object.keys(ranges).map(function (name) {
-        var _classnames;
+  renderRangeButtons(classes) {
+    const {
+      style,
+      onlyClasses,
+      locale
+    } = this.props;
 
-        var active = _this2.selectedItem === name;
-        gotActiveRange = !gotActiveRange && active;
+    const locales = _objectSpread({}, _defaultOptions_js__WEBPACK_IMPORTED_MODULE_6__["default"].locale, {}, locale);
 
-        var style = _objectSpread({}, styles['PredefinedRangesItem'], {}, gotActiveRange ? styles['PredefinedRangesItemActive'] : {});
+    const {
+      styles
+    } = this;
+    const action = {
+      apply: "apply",
+      cancel: "cancel"
+    };
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: _styles_js__WEBPACK_IMPORTED_MODULE_5__["defaultClasses"].rangeButtonGroup
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      className: classes.applyButton,
+      style: onlyClasses ? undefined : _objectSpread({}, styles['RangeApplyButton'], {}, style),
+      type: "button",
+      onClick: e => this.clickButton(e, action.apply)
+    }, locales.applyLabel), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      className: classes.cancelButton,
+      style: onlyClasses ? undefined : _objectSpread({}, styles['RangeCancelButton'], {}, style),
+      onClick: e => this.clickButton(e, action.cancel),
+      type: "button"
+    }, locales.cancelLabel));
+  }
 
-        var predefinedRangeClass = classnames__WEBPACK_IMPORTED_MODULE_3___default()((_classnames = {}, _defineProperty(_classnames, classes.predefinedRangesItem, true), _defineProperty(_classnames, classes.predefinedRangesItemActive, gotActiveRange), _classnames));
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-          href: "#",
-          key: 'range-' + name,
-          className: predefinedRangeClass,
-          style: onlyClasses ? undefined : style,
-          onClick: function onClick(e) {
-            return _this2.handleSelect(name, e);
-          }
-        }, name);
-      });
-    }
-  }, {
-    key: "renderRangeButtons",
-    value: function renderRangeButtons(classes) {
-      var _this3 = this;
+  render() {
+    const {
+      style,
+      onlyClasses,
+      classNames
+    } = this.props;
+    const {
+      styles
+    } = this;
 
-      var _this$props3 = this.props,
-          style = _this$props3.style,
-          onlyClasses = _this$props3.onlyClasses,
-          locale = _this$props3.locale;
+    const classes = _objectSpread({}, _styles_js__WEBPACK_IMPORTED_MODULE_5__["defaultClasses"], {}, classNames);
 
-      var locales = _objectSpread({}, _defaultOptions_js__WEBPACK_IMPORTED_MODULE_6__["default"].locale, {}, locale);
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      style: onlyClasses ? undefined : _objectSpread({}, styles['PredefinedRanges'], {}, style),
+      className: classes.predefinedRanges
+    }, this.renderRangeList(classes), this.renderRangeButtons(classes));
+  }
 
-      var styles = this.styles;
-      var action = {
-        apply: "apply",
-        cancel: "cancel"
-      };
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: _styles_js__WEBPACK_IMPORTED_MODULE_5__["defaultClasses"].rangeButtonGroup
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: classes.applyButton,
-        style: onlyClasses ? undefined : _objectSpread({}, styles['RangeApplyButton'], {}, style),
-        type: "button",
-        onClick: function onClick(e) {
-          return _this3.clickButton(e, action.apply);
-        }
-      }, locales.applyLabel), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: classes.cancelButton,
-        style: onlyClasses ? undefined : _objectSpread({}, styles['RangeCancelButton'], {}, style),
-        onClick: function onClick(e) {
-          return _this3.clickButton(e, action.cancel);
-        },
-        type: "button"
-      }, locales.cancelLabel));
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this$props4 = this.props,
-          style = _this$props4.style,
-          onlyClasses = _this$props4.onlyClasses,
-          classNames = _this$props4.classNames;
-      var styles = this.styles;
-
-      var classes = _objectSpread({}, _styles_js__WEBPACK_IMPORTED_MODULE_5__["defaultClasses"], {}, classNames);
-
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        style: onlyClasses ? undefined : _objectSpread({}, styles['PredefinedRanges'], {}, style),
-        className: classes.predefinedRanges
-      }, this.renderRangeList(classes), this.renderRangeButtons(classes));
-    }
-  }]);
-
-  return PredefinedRanges;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+}
 
 PredefinedRanges.defaultProps = {
   onlyClasses: false,
@@ -3336,8 +3012,8 @@ PredefinedRanges.propTypes = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MomentFormat", function() { return MomentFormat; });
-var MomentFormat = {
-  "default": "MM/DD/YYYY",
+const MomentFormat = {
+  default: "MM/DD/YYYY",
   monthSelect: "MMM"
 };
 
@@ -3368,55 +3044,55 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var addRange = function addRange(rangeObj, name, start, end) {
+const addRange = (rangeObj, name, start, end) => {
   rangeObj[_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource(name)] = {
     startDate: start,
     endDate: end
   };
 };
 
-var addOneDay = function addOneDay(rangeObj, name, day, min, max) {
+const addOneDay = (rangeObj, name, day, min, max) => {
   if (day >= min && day <= max) {
     addRange(rangeObj, name, day, day);
   }
 };
 
-var addDistanceDays = function addDistanceDays(rangeObj, name, start, end, min, max) {
+const addDistanceDays = (rangeObj, name, start, end, min, max) => {
   if (!(max < start || end < min)) {
     addRange(rangeObj, name, start < min ? min : start, end > max ? max : end);
   }
 };
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  ranges: function ranges(todayDate, minDate, maxDate, limitMonths) {
-    var today = !todayDate ? moment__WEBPACK_IMPORTED_MODULE_0___default()() : !moment__WEBPACK_IMPORTED_MODULE_0___default.a.isMoment(todayDate) ? moment__WEBPACK_IMPORTED_MODULE_0___default()(todayDate, _constants__WEBPACK_IMPORTED_MODULE_3__["MomentFormat"]["default"]) : todayDate;
-    var max = !maxDate ? today : !moment__WEBPACK_IMPORTED_MODULE_0___default.a.isMoment(maxDate) ? moment__WEBPACK_IMPORTED_MODULE_0___default()(maxDate, _constants__WEBPACK_IMPORTED_MODULE_3__["MomentFormat"]["default"]) : maxDate;
-    var min = !minDate ? today : !moment__WEBPACK_IMPORTED_MODULE_0___default.a.isMoment(minDate) ? moment__WEBPACK_IMPORTED_MODULE_0___default()(minDate, _constants__WEBPACK_IMPORTED_MODULE_3__["MomentFormat"]["default"]) : minDate;
-    var range = {};
+  ranges: (todayDate, minDate, maxDate, limitMonths) => {
+    var today = !todayDate ? moment__WEBPACK_IMPORTED_MODULE_0___default()() : !moment__WEBPACK_IMPORTED_MODULE_0___default.a.isMoment(todayDate) ? moment__WEBPACK_IMPORTED_MODULE_0___default()(todayDate, _constants__WEBPACK_IMPORTED_MODULE_3__["MomentFormat"].default) : todayDate;
+    var max = !maxDate ? today : !moment__WEBPACK_IMPORTED_MODULE_0___default.a.isMoment(maxDate) ? moment__WEBPACK_IMPORTED_MODULE_0___default()(maxDate, _constants__WEBPACK_IMPORTED_MODULE_3__["MomentFormat"].default) : maxDate;
+    var min = !minDate ? today : !moment__WEBPACK_IMPORTED_MODULE_0___default.a.isMoment(minDate) ? moment__WEBPACK_IMPORTED_MODULE_0___default()(minDate, _constants__WEBPACK_IMPORTED_MODULE_3__["MomentFormat"].default) : minDate;
+    const range = {};
 
     if (today < min) {
       return range;
     }
 
     addOneDay(range, "Today", today, min, max);
-    var yesterday = today.clone().add(-1, 'days');
+    const yesterday = today.clone().add(-1, 'days');
     addOneDay(range, "Yesterday", yesterday, min, max);
-    var startCurrentWeek = today.clone().startOf('week');
-    var endCurrentWeek = today;
+    const startCurrentWeek = today.clone().startOf('week');
+    const endCurrentWeek = today;
     addDistanceDays(range, "Currentweek", startCurrentWeek, endCurrentWeek, min, max);
-    var startLastWeek = today.clone().subtract(1, 'week').startOf('week');
-    var endLastWeek = startLastWeek.clone().add(6, 'days');
+    const startLastWeek = today.clone().subtract(1, 'week').startOf('week');
+    const endLastWeek = startLastWeek.clone().add(6, 'days');
     addDistanceDays(range, "Lastweek", startLastWeek, endLastWeek, min, max);
-    var startCurrentmonth = today.clone().startOf('month');
-    var endCurrentmonth = today;
+    const startCurrentmonth = today.clone().startOf('month');
+    const endCurrentmonth = today;
     addDistanceDays(range, "Currentmonth", startCurrentmonth, endCurrentmonth, min, max);
-    var startLastmonth = today.clone().subtract(1, 'month').startOf('month');
-    var endLastmonth = startLastmonth.clone().endOf('month');
+    const startLastmonth = today.clone().subtract(1, 'month').startOf('month');
+    const endLastmonth = startLastmonth.clone().endOf('month');
     addDistanceDays(range, "Lastmonth", startLastmonth, endLastmonth, min, max);
 
     if (limitMonths && limitMonths > 1) {
-      var startSincelastmonth = today.clone().subtract(1, 'month').startOf('month');
-      var endSincelastmonth = today;
+      const startSincelastmonth = today.clone().subtract(1, 'month').startOf('month');
+      const endSincelastmonth = today;
       addDistanceDays(range, "Sincelastmonth", startSincelastmonth, endSincelastmonth, min, max);
     }
 
@@ -3471,7 +3147,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var defaultClasses = {
+const defaultClasses = {
   show: 'rdr-Show',
   hide: 'rdr-Hide',
   calendar: 'rdr-Calendar',
@@ -3500,7 +3176,7 @@ var defaultClasses = {
   applyButton: 'rdr-Button rdr-ApplyButton',
   cancelButton: 'rdr-Button rdr-CancelButton'
 };
-var defaultTheme = {
+const defaultTheme = {
   DateRange: {
     display: 'none',
     boxSizing: 'border-box',
@@ -3650,11 +3326,10 @@ var defaultTheme = {
     backgroundColor: '#757985'
   }
 };
-/* harmony default export */ __webpack_exports__["default"] = (function () {
-  var customTheme = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var calendarWidth = defaultTheme.Calendar.width;
-  var calendarPadding = defaultTheme.Calendar.padding;
-  var cellMargin = defaultTheme.Day.margin || 0;
+/* harmony default export */ __webpack_exports__["default"] = ((customTheme = {}) => {
+  let calendarWidth = defaultTheme.Calendar.width;
+  let calendarPadding = defaultTheme.Calendar.padding;
+  let cellMargin = defaultTheme.Day.margin || 0;
 
   if (customTheme.Calendar && customTheme.Calendar.hasOwnProperty('width')) {
     calendarWidth = customTheme.Calendar.width;
@@ -3668,7 +3343,7 @@ var defaultTheme = {
     cellMargin = customTheme.Day.margin;
   }
 
-  var cellSize = (parseInt(calendarWidth, 10) - parseInt(calendarPadding, 10) * 2) / 7 - parseInt(cellMargin, 10) * 2;
+  const cellSize = (parseInt(calendarWidth, 10) - parseInt(calendarPadding, 10) * 2) / 7 - parseInt(cellMargin, 10) * 2;
   return {
     DateRange: _objectSpread({}, defaultTheme.DateRange, {}, customTheme.DateRange),
     Calendar: _objectSpread({}, defaultTheme.Calendar, {}, customTheme.Calendar),
@@ -3743,7 +3418,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
 
 function parseInput(input, format, timeOfDay) {
-  var output = null;
+  let output = null;
 
   if (typeof input === 'undefined' || typeof input === 'null' || !input || input === '') {
     output = moment__WEBPACK_IMPORTED_MODULE_0___default()()[timeOfDay]('day');
@@ -3778,15 +3453,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var Popup = function Popup(props) {
-  var title = props.title,
-      isShow = props.isShow,
-      width = props.width,
-      height = props.height,
-      isHtml = props.isHtml,
-      children = props.children,
-      iframeUrl = props.iframeUrl;
-  var content;
+const Popup = props => {
+  const {
+    title,
+    isShow,
+    width,
+    height,
+    isHtml,
+    children,
+    iframeUrl
+  } = props;
+  let content;
 
   if (iframeUrl) {
     content = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("iframe", {
@@ -3807,7 +3484,7 @@ var Popup = function Popup(props) {
   }
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "popup-container ".concat(isShow ? 'show' : 'hide')
+    className: `popup-container ${isShow ? 'show' : 'hide'}`
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "popup-block-body"
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -3822,7 +3499,7 @@ var Popup = function Popup(props) {
     className: "txt-title"
   }, title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     className: "popup-close",
-    onClick: function onClick() {
+    onClick: () => {
       props.onClose && props.onClose();
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
@@ -3861,8 +3538,8 @@ Popup.defaultProps = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DEFAULT_WIDTH", function() { return DEFAULT_WIDTH; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DEFAULT_HEIGHT", function() { return DEFAULT_HEIGHT; });
-var DEFAULT_WIDTH = '55%';
-var DEFAULT_HEIGHT = '55%';
+const DEFAULT_WIDTH = '55%';
+const DEFAULT_HEIGHT = '55%';
 
 /***/ }),
 
@@ -3891,43 +3568,24 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Timer; });
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var DEFAULT_TIME_DELAY_MILLISECOND = 500;
-
-var Timer =
-/*#__PURE__*/
-function () {
-  function Timer() {
-    _classCallCheck(this, Timer);
-  }
-
-  _createClass(Timer, null, [{
-    key: "debounce",
-    value: function debounce(func, wait) {
-      var timeout;
-      return function () {
-        var context = this,
+const DEFAULT_TIME_DELAY_MILLISECOND = 500;
+class Timer {
+  static debounce(func, wait) {
+    let timeout;
+    return function () {
+      const context = this,
             args = arguments;
 
-        var later = function later() {
-          func.apply(context, args);
-        };
-
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait || DEFAULT_TIME_DELAY_MILLISECOND);
+      const later = () => {
+        func.apply(context, args);
       };
-    }
-  }]);
 
-  return Timer;
-}();
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait || DEFAULT_TIME_DELAY_MILLISECOND);
+    };
+  }
 
-
+}
 
 /***/ }),
 
@@ -3941,7 +3599,7 @@ function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "debuggingConfig", function() { return debuggingConfig; });
-var debuggingConfig = {
+const debuggingConfig = {
   name: "__lrfConfig__",
   env: "local"
 };
@@ -3960,51 +3618,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AppLayout; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-var AppLayout =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(AppLayout, _Component);
-
-  function AppLayout(props) {
-    _classCallCheck(this, AppLayout);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(AppLayout).call(this, props));
+class AppLayout extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+  constructor(props) {
+    super(props);
   }
 
-  _createClass(AppLayout, [{
-    key: "render",
-    value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "container",
-        className: "container-fluid"
-      }, this.props.children);
-    }
-  }]);
+  render() {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      id: "container",
+      className: "container-fluid"
+    }, this.props.children);
+  }
 
-  return AppLayout;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
-
-
+}
 
 /***/ }),
 
@@ -4025,27 +3652,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./lib/constants */ "./www/js/source/reactpages/layouts/betlist/lib/constants.js");
-var _BetListLayout$propTy;
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
 
@@ -4053,476 +3659,439 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-
-var BetListLayout =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(BetListLayout, _Component);
-
-  function BetListLayout(props) {
-    var _this;
-
-    _classCallCheck(this, BetListLayout);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(BetListLayout).call(this, props));
-    _this.state = {
+class BetListLayout extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+  constructor(props) {
+    super(props);
+    this.state = {
       isShowPopup: false,
       popupUrl: null,
       popupTitle: null
     };
-    return _this;
   }
 
-  _createClass(BetListLayout, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this2 = this;
+  componentDidMount() {
+    window.onload = () => {
+      window.logOpenBetlistEvent && window.logOpenBetlistEvent(this.props.pageName);
+    };
 
-      window.onload = function () {
-        window.logOpenBetlistEvent && window.logOpenBetlistEvent(_this2.props.pageName);
-      };
+    window.ViewResult = (matchid, raceNo, bettype, sporttype, refno, username, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid, transdecs) => {
+      const title = this._getResource('Result');
 
-      window.ViewResult = function (matchid, raceNo, bettype, sporttype, refno, username, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid, transdecs) {
-        var title = _this2._getResource('Result');
+      const rootUrl = this.props.rootUrl;
 
-        var rootUrl = _this2.props.rootUrl;
+      if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].RNG_GAME || sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].RNG_MINIGAME || sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].RNG_MOBILE) {
+        const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getRngCasinoResultUrl(rootUrl);
 
-        if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].RNG_GAME || sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].RNG_MINIGAME || sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].RNG_MOBILE) {
-          var url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getRngCasinoResultUrl(rootUrl);
+        this._showRngCasinoResult(refno, url, title);
+      } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].VOIDBRIDGE) {
+        const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getVoidbridgeResultUrl(rootUrl, custid, extension2);
 
-          _this2._showRngCasinoResult(refno, url, title);
-        } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].VOIDBRIDGE) {
-          var _url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getVoidbridgeResultUrl(rootUrl, custid, extension2);
+        this._showThirdPartyResult(url, title);
+      } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].PP) {
+        const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getPPResultUrl(rootUrl, custid, extension2);
 
-          _this2._showThirdPartyResult(_url, title);
-        } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].PP) {
-          var _url2 = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getPPResultUrl(rootUrl, custid, extension2);
+        this._showThirdPartyResult(url, title);
+      } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].CARDCLUB) {
+        const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getCardClubResultUrl(rootUrl, custid, bettype, extension2);
 
-          _this2._showThirdPartyResult(_url2, title);
-        } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].CARDCLUB) {
-          var _url3 = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getCardClubResultUrl(rootUrl, custid, bettype, extension2);
+        this._showThirdPartyResult(url, title);
+      } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].SG) {
+        const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getSGResultUrl(rootUrl, custid, extension2);
 
-          _this2._showThirdPartyResult(_url3, title);
-        } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].SG) {
-          var _url4 = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getSGResultUrl(rootUrl, custid, extension2);
+        this._showThirdPartyResult(url, title);
+      } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].ALLBET) {
+        const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getAllBetResultUrl(rootUrl, transdecs, extension2, bettype);
 
-          _this2._showThirdPartyResult(_url4, title);
-        } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].ALLBET) {
-          var _url5 = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getAllBetResultUrl(rootUrl, transdecs, extension2, bettype);
+        this._openPopup(url, title);
+      } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].GLOBALGAMING) {
+        const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getGlobalGamingResultUrl(rootUrl, custid, extension2);
 
-          _this2._openPopup(_url5, title);
-        } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].GLOBALGAMING) {
-          var _url6 = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getGlobalGamingResultUrl(rootUrl, custid, extension2);
-
-          _this2._showThirdPartyResult(_url6, title);
-        } else {
-          var _url7 = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getResultUrl(rootUrl, matchid, raceNo, bettype, sporttype, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid);
-
-          _this2._openPopup(_url7, title);
-        }
-      };
-
-      window.showMP = function (transId) {
-        var divEvent = document.querySelector('#divEvent_' + transId);
-        divEvent.classList.add('mx-parlay'); //to make line-through for void-parlay-ticket
-
-        _this2._showMixParlayDetail(transId, divEvent);
-      };
-
-      window.showCombMP = function (transId, index) {
-        var divEvent = document.querySelector('#divEvent_' + transId + '' + index);
-        divEvent.classList.add('mx-parlay'); //to make line-through for void-parlay-ticket
-
-        _this2._showMixParlayDetail(transId, divEvent);
-      }; // expand choice content
-
-
-      window.showNewCombMP = function () {
-        for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-          args[_key] = arguments[_key];
-        }
-
-        _this2._showNewParlayDetail.apply(_this2, [_this2.props.rootUrl].concat(args));
-      }; // expand choice content
-
-
-      window.showSingleMatchParlayDetail = function () {
-        for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-          args[_key2] = arguments[_key2];
-        }
-
-        _this2._showSingleMatchParlayDetail.apply(_this2, [_this2.props.rootUrl].concat(args));
-      }; // show detail popup (in choice column)
-
-
-      window.showCombMPDetail = function (transId, refNo, betId, custId, betTeam) {
-        var _this2$props = _this2.props,
-            rootUrl = _this2$props.rootUrl,
-            baseCurrency = _this2$props.baseCurrency;
-        var url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getParlayDetailUrl(rootUrl, transId, refNo, betId, custId, betTeam, baseCurrency);
-
-        _this2._openPopup(url, betTeam);
-      };
-
-      window.ViewCashOutHistory = function (transId, refNo, betType, betdaqId) {
-        var _this2$props2 = _this2.props,
-            rootUrl = _this2$props2.rootUrl,
-            baseCurrency = _this2$props2.baseCurrency;
-
-        var _BetList$getCashOutHi = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getCashOutHistoryPopupSetting(rootUrl, baseCurrency, transId, refNo, betType, betdaqId),
-            url = _BetList$getCashOutHi.url,
-            isCashOut = _BetList$getCashOutHi.isCashOut;
-
-        var title = _this2._getResource(isCashOut ? 'CashOutDetails' : 'BoughtDetails');
-
-        _this2._openPopup(url, title);
-      };
-
-      window.ShowBonusDetails = function (refCode, transId) {
-        var _this2$props3 = _this2.props,
-            rootUrl = _this2$props3.rootUrl,
-            baseCurrency = _this2$props3.baseCurrency;
-        var url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getBonusDetailUrl(rootUrl, refCode, transId, baseCurrency);
-
-        var title = _this2._getResource('TransactionDetail');
-
-        _this2._openPopup(url, title);
-      };
-
-      window.showAGCasinoDetails = function (transId, winlostDate, custId, transType) {
-        var _this2$props4 = _this2.props,
-            rootUrl = _this2$props4.rootUrl,
-            baseCurrency = _this2$props4.baseCurrency;
-        var url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getAGCasinoDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
-
-        var title = _this2._getResource('AGCasino') + ' - ' + _this2._getResource('DetailedBetlist') + ' - ' + _this2._formatDateString(winlostDate);
-
-        _this2._openPopup(url, title);
-      };
-
-      window.showRnGCasinoDetails = function (transId, winlostDate, custId, transType) {
-        var _this2$props5 = _this2.props,
-            rootUrl = _this2$props5.rootUrl,
-            baseCurrency = _this2$props5.baseCurrency;
-        var url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getRnGCasinoDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
-
-        var title = _this2._getResource('ProductCS') + ' - ' + _this2._getResource('DetailedBetlist') + ' - ' + _this2._formatDateString(winlostDate);
-
-        _this2._openPopup(url, title);
-      };
-
-      window.showVoidBridgeDetails = function (transId, winlostDate, custId, transType) {
-        var _this2$props6 = _this2.props,
-            rootUrl = _this2$props6.rootUrl,
-            baseCurrency = _this2$props6.baseCurrency;
-        var url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getVoidBridgeDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
-
-        var title = _this2._getResource('ProductVB') + ' - ' + _this2._getResource('DetailedBetlist') + ' - ' + _this2._formatDateString(winlostDate);
-
-        _this2._openPopup(url, title);
-      };
-
-      window.showTodayRunningBetsDetails = function (transId, winlostDate, custId, transType) {
-        var _this2$props7 = _this2.props,
-            rootUrl = _this2$props7.rootUrl,
-            baseCurrency = _this2$props7.baseCurrency;
-        var url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getAllBetDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
-
-        var title = _this2._getResource('ProductAB') + ' - ' + _this2._getResource('DetailedBetlist') + ' - ' + _this2._formatDateString(winlostDate);
-
-        _this2._openPopup(url, title);
-      };
-
-      window.showColossusBetsDetails = function (refNo, winlostDate, transId, custId, betCheck) {
-        var _this2$props8 = _this2.props,
-            rootUrl = _this2$props8.rootUrl,
-            baseCurrency = _this2$props8.baseCurrency;
-        var url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getColossusBetsDetailUrl(rootUrl, baseCurrency, refNo, winlostDate, transId, custId, betCheck);
-
-        var title = _this2._getResource('TicketDetailOf').replace('{0}', refNo);
-
-        _this2._openPopup(url, title);
-      };
-
-      window.showGlobalGaming = function (transId, winlostDate, custId, transType) {
-        var _this2$props9 = _this2.props,
-            rootUrl = _this2$props9.rootUrl,
-            baseCurrency = _this2$props9.baseCurrency;
-        var url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getGlobalGamingDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
-
-        var title = _this2._getResource('ProductFW') + ' - ' + _this2._getResource('DetailedBetlist') + ' - ' + _this2._formatDateString(winlostDate);
-
-        _this2._openPopup(url, title);
-      };
-
-      window.showPPDetails = function (transId, winlostDate, custId, transType) {
-        var _this2$props10 = _this2.props,
-            rootUrl = _this2$props10.rootUrl,
-            baseCurrency = _this2$props10.baseCurrency;
-        var url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getPPDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
-
-        var title = _this2._getResource('ProductPP') + ' - ' + _this2._getResource('DetailedBetlist') + ' - ' + _this2._formatDateString(winlostDate);
-
-        _this2._openPopup(url, title);
-      };
-
-      window.showVideoPokerGameDetails = function (transId, winlostDate, custId, transType) {
-        var _this2$props11 = _this2.props,
-            rootUrl = _this2$props11.rootUrl,
-            baseCurrency = _this2$props11.baseCurrency;
-        var url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getVideoPokerGameDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
-
-        var title = _this2._getResource('ProductCC') + ' - ' + _this2._getResource('DetailedBetlist') + ' - ' + _this2._formatDateString(winlostDate);
-
-        _this2._openPopup(url, title);
-      };
-
-      window.showSGDetails = function (transId, winlostDate, custId, transType) {
-        var _this2$props12 = _this2.props,
-            rootUrl = _this2$props12.rootUrl,
-            baseCurrency = _this2$props12.baseCurrency;
-        var url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getSGDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
-
-        var title = _this2._getResource('ProductSG') + ' - ' + _this2._getResource('DetailedBetlist') + ' - ' + _this2._formatDateString(winlostDate);
-
-        _this2._openPopup(url, title);
-      };
-    }
-  }, {
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      window.showMP = undefined;
-      window.showCombMP = undefined;
-      window.ViewResult = undefined;
-      window.showNewCombMP = undefined;
-      window.showCombMPDetail = undefined;
-      window.ViewCashOutHistory = undefined;
-      window.ShowBonusDetails = undefined;
-      window.showAGCasinoDetails = undefined;
-      window.showRnGCasinoDetails = undefined;
-      window.showVoidBridgeDetails = undefined;
-      window.showTodayRunningBetsDetails = undefined;
-      window.showColossusBetsDetails = undefined;
-      window.showGlobalGaming = undefined;
-      window.showPPDetails = undefined;
-      window.showSingleMatchParlayDetail = undefined;
-      window.showSGDetails = undefined;
-    }
-  }, {
-    key: "_getResource",
-    value: function _getResource(key) {
-      return this.props.getResourceFunc ? this.props.getResourceFunc(key) : key;
-    }
-  }, {
-    key: "_formatDateString",
-    value: function _formatDateString(dateString) {
-      return this.props.formatDateStringFunc ? this.props.formatDateStringFunc(dateString) : dateString;
-    }
-  }, {
-    key: "_beforeShow",
-    value: function _beforeShow() {
-      this.props.beforeShowFunc && this.props.beforeShowFunc();
-    }
-  }, {
-    key: "_afterShow",
-    value: function _afterShow() {
-      this.props.afterShowFunc && this.props.afterShowFunc();
-    }
-  }, {
-    key: "_resolveClientUrl",
-    value: function _resolveClientUrl(relativeUrl) {
-      return this.props.rootUrl + relativeUrl;
-    }
-  }, {
-    key: "_showMixParlayDetail",
-    value: function _showMixParlayDetail(transId, divEvent) {
-      var _this3 = this;
-
-      if (divEvent.style.display === 'none') {
-        var url = this._resolveClientUrl('api/MixParlayBetList/Detail?transId=' + transId);
-
-        this._beforeShow(); // this.props.toggleLoader(true);
-
-
-        _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_1__["default"].getData(url).then(function (result) {
-          var choice = '';
-          var length = result.data.length;
-
-          for (var i = 0; i < length; i++) {
-            choice += result.data[i];
-
-            if (i < length - 1) {
-              choice += '<div class="line"></div>';
-            }
-          }
-
-          divEvent.innerHTML = choice;
-          divEvent.style.display = 'block';
-
-          _this3._afterShow();
-        })["catch"](function (error) {
-          _this3._afterShow();
-
-          console.log(error);
-        });
+        this._showThirdPartyResult(url, title);
       } else {
-        divEvent.style.display = 'none';
-        divEvent.innerHTML = '';
-      }
-    }
-  }, {
-    key: "_showNewParlayDetail",
-    value: function _showNewParlayDetail(rootUrl, transId, transIndex, refNo, handicap1, handicap2, betcheck, betteam, custId) {
-      var _this4 = this;
+        const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getResultUrl(rootUrl, matchid, raceNo, bettype, sporttype, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid);
 
-      var divEvent = document.querySelector('#divEvent_' + transId + '' + transIndex);
-      var nameDiv = document.querySelector('#combinationOfferName_' + transId + transIndex);
+        this._openPopup(url, title);
+      }
+    };
+
+    window.showMP = transId => {
+      let divEvent = document.querySelector('#divEvent_' + transId);
       divEvent.classList.add('mx-parlay'); //to make line-through for void-parlay-ticket
 
-      if (divEvent.style.display == 'none') {
-        var url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getChoiceParlayDetailUrl(rootUrl, transId, refNo, handicap1, handicap2, betcheck, betteam, custId);
+      this._showMixParlayDetail(transId, divEvent);
+    };
 
-        this._beforeShow(); //this.props.toggleLoader(true);
+    window.showCombMP = (transId, index) => {
+      let divEvent = document.querySelector('#divEvent_' + transId + '' + index);
+      divEvent.classList.add('mx-parlay'); //to make line-through for void-parlay-ticket
+
+      this._showMixParlayDetail(transId, divEvent);
+    }; // expand choice content
 
 
-        _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_1__["default"].getData(url).then(function (result) {
-          var choice = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].buildChoiceParlayDetail(result.data);
-          divEvent.innerHTML = choice;
-          divEvent.style.display = 'block';
-          nameDiv.style.display = 'none';
+    window.showNewCombMP = (...args) => {
+      this._showNewParlayDetail.apply(this, [this.props.rootUrl, ...args]);
+    }; // expand choice content
 
-          _this4._afterShow();
-        })["catch"](function (error) {
-          _this4._afterShow();
 
-          console.log(error);
-        });
-      } else {
-        divEvent.style.display = 'none';
-        divEvent.innerHTML = '';
-        nameDiv.style.display = 'block';
-      }
+    window.showSingleMatchParlayDetail = (...args) => {
+      this._showSingleMatchParlayDetail.apply(this, [this.props.rootUrl, ...args]);
+    }; // show detail popup (in choice column)
+
+
+    window.showCombMPDetail = (transId, refNo, betId, custId, betTeam) => {
+      const {
+        rootUrl,
+        baseCurrency
+      } = this.props;
+      const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getParlayDetailUrl(rootUrl, transId, refNo, betId, custId, betTeam, baseCurrency);
+
+      this._openPopup(url, betTeam);
+    };
+
+    window.ViewCashOutHistory = (transId, refNo, betType, betdaqId) => {
+      const {
+        rootUrl,
+        baseCurrency
+      } = this.props;
+      const {
+        url,
+        isCashOut
+      } = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getCashOutHistoryPopupSetting(rootUrl, baseCurrency, transId, refNo, betType, betdaqId);
+
+      const title = this._getResource(isCashOut ? 'CashOutDetails' : 'BoughtDetails');
+
+      this._openPopup(url, title);
+    };
+
+    window.ShowBonusDetails = (refCode, transId) => {
+      const {
+        rootUrl,
+        baseCurrency
+      } = this.props;
+      const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getBonusDetailUrl(rootUrl, refCode, transId, baseCurrency);
+
+      const title = this._getResource('TransactionDetail');
+
+      this._openPopup(url, title);
+    };
+
+    window.showAGCasinoDetails = (transId, winlostDate, custId, transType) => {
+      const {
+        rootUrl,
+        baseCurrency
+      } = this.props;
+      const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getAGCasinoDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
+
+      const title = this._getResource('AGCasino') + ' - ' + this._getResource('DetailedBetlist') + ' - ' + this._formatDateString(winlostDate);
+
+      this._openPopup(url, title);
+    };
+
+    window.showRnGCasinoDetails = (transId, winlostDate, custId, transType) => {
+      const {
+        rootUrl,
+        baseCurrency
+      } = this.props;
+      const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getRnGCasinoDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
+
+      const title = this._getResource('ProductCS') + ' - ' + this._getResource('DetailedBetlist') + ' - ' + this._formatDateString(winlostDate);
+
+      this._openPopup(url, title);
+    };
+
+    window.showVoidBridgeDetails = (transId, winlostDate, custId, transType) => {
+      const {
+        rootUrl,
+        baseCurrency
+      } = this.props;
+      const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getVoidBridgeDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
+
+      const title = this._getResource('ProductVB') + ' - ' + this._getResource('DetailedBetlist') + ' - ' + this._formatDateString(winlostDate);
+
+      this._openPopup(url, title);
+    };
+
+    window.showTodayRunningBetsDetails = (transId, winlostDate, custId, transType) => {
+      const {
+        rootUrl,
+        baseCurrency
+      } = this.props;
+      const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getAllBetDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
+
+      const title = this._getResource('ProductAB') + ' - ' + this._getResource('DetailedBetlist') + ' - ' + this._formatDateString(winlostDate);
+
+      this._openPopup(url, title);
+    };
+
+    window.showColossusBetsDetails = (refNo, winlostDate, transId, custId, betCheck) => {
+      const {
+        rootUrl,
+        baseCurrency
+      } = this.props;
+      const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getColossusBetsDetailUrl(rootUrl, baseCurrency, refNo, winlostDate, transId, custId, betCheck);
+
+      const title = this._getResource('TicketDetailOf').replace('{0}', refNo);
+
+      this._openPopup(url, title);
+    };
+
+    window.showGlobalGaming = (transId, winlostDate, custId, transType) => {
+      const {
+        rootUrl,
+        baseCurrency
+      } = this.props;
+      const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getGlobalGamingDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
+
+      const title = this._getResource('ProductFW') + ' - ' + this._getResource('DetailedBetlist') + ' - ' + this._formatDateString(winlostDate);
+
+      this._openPopup(url, title);
+    };
+
+    window.showPPDetails = (transId, winlostDate, custId, transType) => {
+      const {
+        rootUrl,
+        baseCurrency
+      } = this.props;
+      const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getPPDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
+
+      const title = this._getResource('ProductPP') + ' - ' + this._getResource('DetailedBetlist') + ' - ' + this._formatDateString(winlostDate);
+
+      this._openPopup(url, title);
+    };
+
+    window.showVideoPokerGameDetails = (transId, winlostDate, custId, transType) => {
+      const {
+        rootUrl,
+        baseCurrency
+      } = this.props;
+      const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getVideoPokerGameDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
+
+      const title = this._getResource('ProductCC') + ' - ' + this._getResource('DetailedBetlist') + ' - ' + this._formatDateString(winlostDate);
+
+      this._openPopup(url, title);
+    };
+
+    window.showSGDetails = (transId, winlostDate, custId, transType) => {
+      const {
+        rootUrl,
+        baseCurrency
+      } = this.props;
+      const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getSGDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
+
+      const title = this._getResource('ProductSG') + ' - ' + this._getResource('DetailedBetlist') + ' - ' + this._formatDateString(winlostDate);
+
+      this._openPopup(url, title);
+    };
+  }
+
+  componentWillUnmount() {
+    window.showMP = undefined;
+    window.showCombMP = undefined;
+    window.ViewResult = undefined;
+    window.showNewCombMP = undefined;
+    window.showCombMPDetail = undefined;
+    window.ViewCashOutHistory = undefined;
+    window.ShowBonusDetails = undefined;
+    window.showAGCasinoDetails = undefined;
+    window.showRnGCasinoDetails = undefined;
+    window.showVoidBridgeDetails = undefined;
+    window.showTodayRunningBetsDetails = undefined;
+    window.showColossusBetsDetails = undefined;
+    window.showGlobalGaming = undefined;
+    window.showPPDetails = undefined;
+    window.showSingleMatchParlayDetail = undefined;
+    window.showSGDetails = undefined;
+  }
+
+  _getResource(key) {
+    return this.props.getResourceFunc ? this.props.getResourceFunc(key) : key;
+  }
+
+  _formatDateString(dateString) {
+    return this.props.formatDateStringFunc ? this.props.formatDateStringFunc(dateString) : dateString;
+  }
+
+  _beforeShow() {
+    this.props.beforeShowFunc && this.props.beforeShowFunc();
+  }
+
+  _afterShow() {
+    this.props.afterShowFunc && this.props.afterShowFunc();
+  }
+
+  _resolveClientUrl(relativeUrl) {
+    return this.props.rootUrl + relativeUrl;
+  }
+
+  _showMixParlayDetail(transId, divEvent) {
+    if (divEvent.style.display === 'none') {
+      const url = this._resolveClientUrl('api/MixParlayBetList/Detail?transId=' + transId);
+
+      this._beforeShow(); // this.props.toggleLoader(true);
+
+
+      _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_1__["default"].getData(url).then(result => {
+        let choice = '';
+        const length = result.data.length;
+
+        for (let i = 0; i < length; i++) {
+          choice += result.data[i];
+
+          if (i < length - 1) {
+            choice += '<div class="line"></div>';
+          }
+        }
+
+        divEvent.innerHTML = choice;
+        divEvent.style.display = 'block';
+
+        this._afterShow();
+      }).catch(error => {
+        this._afterShow();
+
+        console.log(error);
+      });
+    } else {
+      divEvent.style.display = 'none';
+      divEvent.innerHTML = '';
     }
-  }, {
-    key: "_showThirdPartyResult",
-    value: function _showThirdPartyResult(url, title) {
-      var _this5 = this;
+  }
+
+  _showNewParlayDetail(rootUrl, transId, transIndex, refNo, handicap1, handicap2, betcheck, betteam, custId) {
+    let divEvent = document.querySelector('#divEvent_' + transId + '' + transIndex);
+    let nameDiv = document.querySelector('#combinationOfferName_' + transId + transIndex);
+    divEvent.classList.add('mx-parlay'); //to make line-through for void-parlay-ticket
+
+    if (divEvent.style.display == 'none') {
+      let url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getChoiceParlayDetailUrl(rootUrl, transId, refNo, handicap1, handicap2, betcheck, betteam, custId);
 
       this._beforeShow(); //this.props.toggleLoader(true);
 
 
-      _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_1__["default"].getData(url).then(function (result) {
-        if (result.data !== '') {
-          _this5._openPopup(result.data, title);
-        }
+      _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_1__["default"].getData(url).then(result => {
+        let choice = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].buildChoiceParlayDetail(result.data);
+        divEvent.innerHTML = choice;
+        divEvent.style.display = 'block';
+        nameDiv.style.display = 'none';
 
-        _this5._afterShow();
-      })["catch"](function (error) {
-        _this5._afterShow();
+        this._afterShow();
+      }).catch(error => {
+        this._afterShow();
 
         console.log(error);
       });
+    } else {
+      divEvent.style.display = 'none';
+      divEvent.innerHTML = '';
+      nameDiv.style.display = 'block';
     }
-  }, {
-    key: "_showRngCasinoResult",
-    value: function _showRngCasinoResult(refno, url, title) {
-      var _this6 = this;
+  }
+
+  _showThirdPartyResult(url, title) {
+    this._beforeShow(); //this.props.toggleLoader(true);
+
+
+    _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_1__["default"].getData(url).then(result => {
+      if (result.data !== '') {
+        this._openPopup(result.data, title);
+      }
+
+      this._afterShow();
+    }).catch(error => {
+      this._afterShow();
+
+      console.log(error);
+    });
+  }
+
+  _showRngCasinoResult(refno, url, title) {
+    this._beforeShow();
+
+    _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_1__["default"].postData(url, {
+      refno
+    }).then(result => {
+      if (result.data.Success) {
+        if (result.data.Result === '') {
+          return;
+        }
+
+        this._openPopup(result.data.Result, title);
+      } else {
+        alert(this._getResource("ErrorProcessingMsg"));
+      }
+
+      this._afterShow();
+    }).catch(error => {
+      this._afterShow();
+
+      console.log(error);
+    });
+  }
+
+  _showSingleMatchParlayDetail(rootUrl, transId, custId, status, transIndex) {
+    const divEvent = document.querySelector('#divEvent_' + transId + '' + transIndex);
+
+    if (divEvent.style.display == 'none') {
+      const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleMatchParlayDetailUrl(rootUrl, transId, custId, status);
 
       this._beforeShow();
 
-      _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_1__["default"].postData(url, {
-        refno: refno
-      }).then(function (result) {
-        if (result.data.Success) {
-          if (result.data.Result === '') {
-            return;
-          }
+      _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_1__["default"].getData(url).then(result => {
+        const selection = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].buildSingleMatchParlayDetail(result.data);
+        divEvent.innerHTML = selection;
+        divEvent.style.display = 'block';
 
-          _this6._openPopup(result.data.Result, title);
-        } else {
-          alert(_this6._getResource("ErrorProcessingMsg"));
-        }
-
-        _this6._afterShow();
-      })["catch"](function (error) {
-        _this6._afterShow();
-
+        this._afterShow();
+      }).catch(function (error) {
         console.log(error);
       });
+    } else {
+      divEvent.style.display = 'none';
+      divEvent.innerHTML = '';
     }
-  }, {
-    key: "_showSingleMatchParlayDetail",
-    value: function _showSingleMatchParlayDetail(rootUrl, transId, custId, status, transIndex) {
-      var _this7 = this;
+  }
 
-      var divEvent = document.querySelector('#divEvent_' + transId + '' + transIndex);
+  _openPopup(url, title) {
+    this.setState({
+      isShowPopup: true,
+      popupUrl: url,
+      popupTitle: title
+    });
+  }
 
-      if (divEvent.style.display == 'none') {
-        var url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleMatchParlayDetailUrl(rootUrl, transId, custId, status);
+  _closePopup() {
+    this.setState({
+      isShowPopup: false
+    });
+  }
 
-        this._beforeShow();
+  render() {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "betlist-layout"
+    }, this.props.children, this.state.isShowPopup && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_popup__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      isShow: true,
+      iframeUrl: this.state.popupUrl,
+      title: this.state.popupTitle,
+      width: 900,
+      height: 600,
+      onClose: () => this._closePopup()
+    }));
+  }
 
-        _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_1__["default"].getData(url).then(function (result) {
-          var selection = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].buildSingleMatchParlayDetail(result.data);
-          divEvent.innerHTML = selection;
-          divEvent.style.display = 'block';
+}
 
-          _this7._afterShow();
-        })["catch"](function (error) {
-          console.log(error);
-        });
-      } else {
-        divEvent.style.display = 'none';
-        divEvent.innerHTML = '';
-      }
-    }
-  }, {
-    key: "_openPopup",
-    value: function _openPopup(url, title) {
-      this.setState({
-        isShowPopup: true,
-        popupUrl: url,
-        popupTitle: title
-      });
-    }
-  }, {
-    key: "_closePopup",
-    value: function _closePopup() {
-      this.setState({
-        isShowPopup: false
-      });
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this8 = this;
-
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "betlist-layout"
-      }, this.props.children, this.state.isShowPopup && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_popup__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        isShow: true,
-        iframeUrl: this.state.popupUrl,
-        title: this.state.popupTitle,
-        width: 900,
-        height: 600,
-        onClose: function onClose() {
-          return _this8._closePopup();
-        }
-      }));
-    }
-  }]);
-
-  return BetListLayout;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
-
-BetListLayout.propTypes = (_BetListLayout$propTy = {
+BetListLayout.propTypes = {
   pageName: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string.isRequired,
   rootUrl: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string.isRequired,
   getResourceFunc: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func,
   baseCurrency: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string,
   beforeShowFunc: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func,
-  afterShowFunc: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func
-}, _defineProperty(_BetListLayout$propTy, "beforeShowFunc", prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func), _defineProperty(_BetListLayout$propTy, "afterShowFunc", prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func), _defineProperty(_BetListLayout$propTy, "formatDateStringFunc", prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func), _BetListLayout$propTy);
+  afterShowFunc: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func,
+  beforeShowFunc: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func,
+  afterShowFunc: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func,
+  formatDateStringFunc: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func
+};
 BetListLayout.defaultProps = {
   rootUrl: '/',
   baseCurrency: ''
@@ -4542,330 +4111,288 @@ BetListLayout.defaultProps = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/QueryString */ "./www/js/source/reactpages/lib/QueryString.js");
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./constants */ "./www/js/source/reactpages/layouts/betlist/lib/constants.js");
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
 
-
-var BetList =
-/*#__PURE__*/
-function () {
-  function BetList() {
-    _classCallCheck(this, BetList);
+class BetList {
+  _isFastMarket(bettype) {
+    return bettype >= _constants__WEBPACK_IMPORTED_MODULE_1__["BetType"].MIN_FASTMARKET && bettype <= _constants__WEBPACK_IMPORTED_MODULE_1__["BetType"].MAX_FASTMARKET;
   }
 
-  _createClass(BetList, [{
-    key: "_isFastMarket",
-    value: function _isFastMarket(bettype) {
-      return bettype >= _constants__WEBPACK_IMPORTED_MODULE_1__["BetType"].MIN_FASTMARKET && bettype <= _constants__WEBPACK_IMPORTED_MODULE_1__["BetType"].MAX_FASTMARKET;
-    }
-  }, {
-    key: "_getMixParlayResultUrl",
-    value: function _getMixParlayResultUrl(rootUrl, refno, winlostdate, bettype) {
-      var url = rootUrl + 'ResultReport/ResultPopup';
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'refno', refno);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'winlossdate', winlostdate);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'bettype', bettype);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'matchid', 1);
-      return url;
-    }
-  }, {
-    key: "_getSportBookResultUrl",
-    value: function _getSportBookResultUrl(rootUrl, matchid, bettype, raceNo, sporttype, league, isOutright, extension1, extension2) {
-      var url = rootUrl + 'ResultReport/ResultPopup';
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'matchid', matchid);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'bettype', bettype);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'raceno', raceNo);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'sporttype', sporttype);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'isoutright', isOutright);
+  _getMixParlayResultUrl(rootUrl, refno, winlostdate, bettype) {
+    let url = rootUrl + 'ResultReport/ResultPopup';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'refno', refno);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'winlossdate', winlostdate);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'bettype', bettype);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'matchid', 1);
+    return url;
+  }
 
-      if (this._isFastMarket(bettype)) {
-        url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'handicap1', extension1);
-        url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'handicap2', extension2);
-      } else {
-        url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'betid', extension1);
+  _getSportBookResultUrl(rootUrl, matchid, bettype, raceNo, sporttype, league, isOutright, extension1, extension2) {
+    let url = rootUrl + 'ResultReport/ResultPopup';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'matchid', matchid);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'bettype', bettype);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'raceno', raceNo);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'sporttype', sporttype);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'isoutright', isOutright);
+
+    if (this._isFastMarket(bettype)) {
+      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'handicap1', extension1);
+      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'handicap2', extension2);
+    } else {
+      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'betid', extension1);
+    }
+
+    return url;
+  }
+
+  getResultUrl(rootUrl, matchid, raceNo, bettype, sporttype, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid) {
+    bettype = Number(bettype);
+    let isParlay = bettype === _constants__WEBPACK_IMPORTED_MODULE_1__["BetType"].MIXPARLAY || bettype === _constants__WEBPACK_IMPORTED_MODULE_1__["BetType"].SYSTEMPARLAY || bettype === _constants__WEBPACK_IMPORTED_MODULE_1__["BetType"].MIXPARLAY_BETRADAR;
+    let url = isParlay ? this._getMixParlayResultUrl(rootUrl, refnoMixParlay, winlostdate, bettype) : this._getSportBookResultUrl(rootUrl, matchid, bettype, raceNo, sporttype, league, isOutright, extension1, extension2, custid);
+    return url;
+  }
+
+  getChoiceParlayDetailUrl(rootUrl, transId, refNo, handicap1, handicap2, betcheck, betteam, custId) {
+    var url = rootUrl + 'api/MixParlayBetList/NewParlayDetail';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'refNo', refNo);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'handicap1', handicap1);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'handicap2', handicap2);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'betcheck', betcheck);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'betteam', betteam);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
+    return url;
+  }
+
+  buildChoiceParlayDetail(response) {
+    let choice = '';
+    let length = response.Data === null ? 0 : response.Data.length;
+
+    if (length > 0) {
+      for (let i = 0; i < response.Texts.length; i++) {
+        choice += response.Texts[i];
       }
 
-      return url;
-    }
-  }, {
-    key: "getResultUrl",
-    value: function getResultUrl(rootUrl, matchid, raceNo, bettype, sporttype, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid) {
-      bettype = Number(bettype);
-      var isParlay = bettype === _constants__WEBPACK_IMPORTED_MODULE_1__["BetType"].MIXPARLAY || bettype === _constants__WEBPACK_IMPORTED_MODULE_1__["BetType"].SYSTEMPARLAY || bettype === _constants__WEBPACK_IMPORTED_MODULE_1__["BetType"].MIXPARLAY_BETRADAR;
-      var url = isParlay ? this._getMixParlayResultUrl(rootUrl, refnoMixParlay, winlostdate, bettype) : this._getSportBookResultUrl(rootUrl, matchid, bettype, raceNo, sporttype, league, isOutright, extension1, extension2, custid);
-      return url;
-    }
-  }, {
-    key: "getChoiceParlayDetailUrl",
-    value: function getChoiceParlayDetailUrl(rootUrl, transId, refNo, handicap1, handicap2, betcheck, betteam, custId) {
-      var url = rootUrl + 'api/MixParlayBetList/NewParlayDetail';
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'refNo', refNo);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'handicap1', handicap1);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'handicap2', handicap2);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'betcheck', betcheck);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'betteam', betteam);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
-      return url;
-    }
-  }, {
-    key: "buildChoiceParlayDetail",
-    value: function buildChoiceParlayDetail(response) {
-      var choice = '';
-      var length = response.Data === null ? 0 : response.Data.length;
+      choice += '<div class="line"></div>';
 
-      if (length > 0) {
-        for (var i = 0; i < response.Texts.length; i++) {
-          choice += response.Texts[i];
-        }
+      for (let i = 0; i < response.Data.length; i++) {
+        let item = response.Data[i];
+        choice += item;
 
-        choice += '<div class="line"></div>';
-
-        for (var _i = 0; _i < response.Data.length; _i++) {
-          var item = response.Data[_i];
-          choice += item;
-
-          if (_i < length - 1) {
-            choice += '<div class="line"></div>';
-          }
+        if (i < length - 1) {
+          choice += '<div class="line"></div>';
         }
       }
-
-      return choice;
     }
-  }, {
-    key: "buildSingleMatchParlayDetail",
-    value: function buildSingleMatchParlayDetail(data) {
-      var selection = '';
-      var length = data === null ? 0 : data.length;
 
-      if (length > 0) {
-        selection = '<div class="single-match-parlay-detail">';
+    return choice;
+  }
 
-        for (var i = 0; i < data.length; i++) {
-          selection += data[i];
-        }
+  buildSingleMatchParlayDetail(data) {
+    let selection = '';
+    let length = data === null ? 0 : data.length;
 
-        selection += '</div>';
+    if (length > 0) {
+      selection = '<div class="single-match-parlay-detail">';
+
+      for (let i = 0; i < data.length; i++) {
+        selection += data[i];
       }
 
-      return selection;
+      selection += '</div>';
     }
-  }, {
-    key: "getParlayDetailUrl",
-    value: function getParlayDetailUrl(rootUrl, transId, refNo, betId, custId, betTeam, baseCurrency) {
-      if (Number(transId) === 0) {
-        return;
-      }
 
-      var url = rootUrl + 'SystemParlayBetList/Detail';
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'refno', refNo);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'betteam', betTeam);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'basecurrency', baseCurrency);
-      return url;
-    }
-  }, {
-    key: "getSingleMatchParlayDetailUrl",
-    value: function getSingleMatchParlayDetailUrl(rootUrl, transId, custId, status) {
-      if (Number(transId) === 0) {
-        return;
-      }
+    return selection;
+  }
 
-      var url = rootUrl + 'api/SingleMatchParlayBetList/Detail';
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, "status", status);
-      return url;
+  getParlayDetailUrl(rootUrl, transId, refNo, betId, custId, betTeam, baseCurrency) {
+    if (Number(transId) === 0) {
+      return;
     }
-  }, {
-    key: "getCashOutHistoryPopupSetting",
-    value: function getCashOutHistoryPopupSetting(rootUrl, baseCurrency, transId, refNo, betType, betdaqId) {
-      var isCashOut = betdaqId < 1 || betType === _constants__WEBPACK_IMPORTED_MODULE_1__["BetType"].CASHOUT;
-      var url = rootUrl + 'CashOutBetList/Detail';
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'refNo', refNo);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'betType', betType);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'betdaqId', betdaqId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'isCashout', isCashOut);
-      return {
-        url: url,
-        isCashOut: isCashOut
-      };
-    }
-  }, {
-    key: "getBonusDetailUrl",
-    value: function getBonusDetailUrl(rootUrl, refCode, transId, baseCurrency) {
-      var url = rootUrl + 'BonusBetList/Detail';
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'RefCode', refCode);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'TransId', transId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
-      return url;
-    }
-  }, {
-    key: "getAGCasinoDetailUrl",
-    value: function getAGCasinoDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
-      var url = rootUrl + 'AGCasinoBetList/Detail';
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transid', transId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'date', winlostDate);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custid', custId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transType', transType);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
-      return url;
-    }
-  }, {
-    key: "getRnGCasinoDetailUrl",
-    value: function getRnGCasinoDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
-      var url = rootUrl + 'RnGCasinoBetList/Detail';
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'date', winlostDate);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transType', transType);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
-      return url;
-    }
-  }, {
-    key: "getVoidBridgeDetailUrl",
-    value: function getVoidBridgeDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
-      var url = rootUrl + 'VoidbridgeBetList/Detail';
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'date', winlostDate);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transType', transType);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
-      return url;
-    }
-  }, {
-    key: "getAllBetDetailUrl",
-    value: function getAllBetDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
-      var url = rootUrl + 'AllBetBetList/Detail';
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transid', transId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custid', custId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transType', transType);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'date', winlostDate);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
-      return url;
-    }
-  }, {
-    key: "getColossusBetsDetailUrl",
-    value: function getColossusBetsDetailUrl(rootUrl, baseCurrency, refNo, winlostDate, transId, custId, betCheck) {
-      var url = rootUrl + 'ColossusBetBetList/Detail';
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'refNo', refNo);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'date', winlostDate);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transid', transId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custid', custId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'betCheck', betCheck);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
-      return url;
-    }
-  }, {
-    key: "getGlobalGamingDetailUrl",
-    value: function getGlobalGamingDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
-      var url = rootUrl + 'GlobalGamingBetList/Detail';
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'date', winlostDate);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transType', transType);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
-      return url;
-    }
-  }, {
-    key: "getPPDetailUrl",
-    value: function getPPDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
-      var url = rootUrl + 'PragmaticPlayBetList/Detail';
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'date', winlostDate);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transType', transType);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
-      return url;
-    }
-  }, {
-    key: "getVideoPokerGameDetailUrl",
-    value: function getVideoPokerGameDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
-      var url = rootUrl + 'CardClubBetList/Detail';
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'date', winlostDate);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transType', transType);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
-      return url;
-    }
-  }, {
-    key: "getSGDetailUrl",
-    value: function getSGDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
-      var url = rootUrl + 'SGBetList/Detail';
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'date', winlostDate);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transType', transType);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
-      return url;
-    }
-  }, {
-    key: "getRngCasinoResultUrl",
-    value: function getRngCasinoResultUrl(rootUrl) {
-      return rootUrl + 'ResultReport/ShowRngCasinoSingleWalletResult';
-    }
-  }, {
-    key: "getVoidbridgeResultUrl",
-    value: function getVoidbridgeResultUrl(rootUrl, custid, gamePlayID) {
-      var url = rootUrl + 'ResultReport/VoidbridgeResult';
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custid', custid);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'gamePlayID', gamePlayID);
-      return url;
-    }
-  }, {
-    key: "getPPResultUrl",
-    value: function getPPResultUrl(rootUrl, custid, gamePlayId) {
-      var url = rootUrl + 'PPResultPopup/Index';
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custid', custid);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'gamePlayId', gamePlayId);
-      return url;
-    }
-  }, {
-    key: "getCardClubResultUrl",
-    value: function getCardClubResultUrl(rootUrl, custid, gameTypeId, transId3rd) {
-      var url = rootUrl + 'CardClubResultPopup/Index';
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custid', custid);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'gameTypeId', gameTypeId);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId3rd', transId3rd);
-      return url;
-    }
-  }, {
-    key: "getSGResultUrl",
-    value: function getSGResultUrl(rootUrl, custid, gamePlayId) {
-      var url = rootUrl + 'SGResultPopup/Index';
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custid', custid);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'gamePlayId', gamePlayId);
-      return url;
-    }
-  }, {
-    key: "getAllBetResultUrl",
-    value: function getAllBetResultUrl(rootUrl, transdesc, betcheck, bettype) {
-      var url = rootUrl + 'ResultReport/AllBetResult';
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'betcheck', betcheck);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'bettype', bettype);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transdesc', encodeURIComponent(transdesc));
-      return url;
-    }
-  }, {
-    key: "getGlobalGamingResultUrl",
-    value: function getGlobalGamingResultUrl(rootUrl, custid, gameId) {
-      var url = rootUrl + 'ResultReport/GlobalGamingResult';
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custid', custid);
-      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'gameId', gameId);
-      return url;
-    }
-  }]);
 
-  return BetList;
-}();
+    var url = rootUrl + 'SystemParlayBetList/Detail';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'refno', refNo);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'betteam', betTeam);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'basecurrency', baseCurrency);
+    return url;
+  }
+
+  getSingleMatchParlayDetailUrl(rootUrl, transId, custId, status) {
+    if (Number(transId) === 0) {
+      return;
+    }
+
+    var url = rootUrl + 'api/SingleMatchParlayBetList/Detail';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, "status", status);
+    return url;
+  }
+
+  getCashOutHistoryPopupSetting(rootUrl, baseCurrency, transId, refNo, betType, betdaqId) {
+    var isCashOut = betdaqId < 1 || betType === _constants__WEBPACK_IMPORTED_MODULE_1__["BetType"].CASHOUT;
+    var url = rootUrl + 'CashOutBetList/Detail';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'refNo', refNo);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'betType', betType);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'betdaqId', betdaqId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'isCashout', isCashOut);
+    return {
+      url: url,
+      isCashOut: isCashOut
+    };
+  }
+
+  getBonusDetailUrl(rootUrl, refCode, transId, baseCurrency) {
+    let url = rootUrl + 'BonusBetList/Detail';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'RefCode', refCode);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'TransId', transId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
+    return url;
+  }
+
+  getAGCasinoDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
+    let url = rootUrl + 'AGCasinoBetList/Detail';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transid', transId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'date', winlostDate);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custid', custId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transType', transType);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
+    return url;
+  }
+
+  getRnGCasinoDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
+    let url = rootUrl + 'RnGCasinoBetList/Detail';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'date', winlostDate);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transType', transType);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
+    return url;
+  }
+
+  getVoidBridgeDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
+    let url = rootUrl + 'VoidbridgeBetList/Detail';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'date', winlostDate);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transType', transType);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
+    return url;
+  }
+
+  getAllBetDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
+    let url = rootUrl + 'AllBetBetList/Detail';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transid', transId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custid', custId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transType', transType);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'date', winlostDate);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
+    return url;
+  }
+
+  getColossusBetsDetailUrl(rootUrl, baseCurrency, refNo, winlostDate, transId, custId, betCheck) {
+    let url = rootUrl + 'ColossusBetBetList/Detail';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'refNo', refNo);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'date', winlostDate);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transid', transId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custid', custId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'betCheck', betCheck);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
+    return url;
+  }
+
+  getGlobalGamingDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
+    let url = rootUrl + 'GlobalGamingBetList/Detail';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'date', winlostDate);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transType', transType);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
+    return url;
+  }
+
+  getPPDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
+    let url = rootUrl + 'PragmaticPlayBetList/Detail';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'date', winlostDate);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transType', transType);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
+    return url;
+  }
+
+  getVideoPokerGameDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
+    let url = rootUrl + 'CardClubBetList/Detail';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'date', winlostDate);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transType', transType);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
+    return url;
+  }
+
+  getSGDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
+    let url = rootUrl + 'SGBetList/Detail';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'date', winlostDate);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transType', transType);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
+    return url;
+  }
+
+  getRngCasinoResultUrl(rootUrl) {
+    return rootUrl + 'ResultReport/ShowRngCasinoSingleWalletResult';
+  }
+
+  getVoidbridgeResultUrl(rootUrl, custid, gamePlayID) {
+    let url = rootUrl + 'ResultReport/VoidbridgeResult';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custid', custid);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'gamePlayID', gamePlayID);
+    return url;
+  }
+
+  getPPResultUrl(rootUrl, custid, gamePlayId) {
+    let url = rootUrl + 'PPResultPopup/Index';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custid', custid);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'gamePlayId', gamePlayId);
+    return url;
+  }
+
+  getCardClubResultUrl(rootUrl, custid, gameTypeId, transId3rd) {
+    let url = rootUrl + 'CardClubResultPopup/Index';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custid', custid);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'gameTypeId', gameTypeId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId3rd', transId3rd);
+    return url;
+  }
+
+  getSGResultUrl(rootUrl, custid, gamePlayId) {
+    let url = rootUrl + 'SGResultPopup/Index';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custid', custid);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'gamePlayId', gamePlayId);
+    return url;
+  }
+
+  getAllBetResultUrl(rootUrl, transdesc, betcheck, bettype) {
+    let url = rootUrl + 'ResultReport/AllBetResult';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'betcheck', betcheck);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'bettype', bettype);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transdesc', encodeURIComponent(transdesc));
+    return url;
+  }
+
+  getGlobalGamingResultUrl(rootUrl, custid, gameId) {
+    let url = rootUrl + 'ResultReport/GlobalGamingResult';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custid', custid);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'gameId', gameId);
+    return url;
+  }
+
+}
 
 /* harmony default export */ __webpack_exports__["default"] = (new BetList());
 
@@ -4882,7 +4409,7 @@ function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BetType", function() { return BetType; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SportType", function() { return SportType; });
-var BetType = {
+const BetType = {
   CASHOUT: 911,
   MIXPARLAY: 9,
   SYSTEMPARLAY: 29,
@@ -4890,7 +4417,7 @@ var BetType = {
   MIN_FASTMARKET: 221,
   MAX_FASTMARKET: 227
 };
-var SportType = {
+const SportType = {
   RNG_GAME: 208,
   RNG_MINIGAME: 209,
   RNG_MOBILE: 210,
@@ -4930,56 +4457,35 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
-
-
-var DataService =
-/*#__PURE__*/
-function () {
-  function DataService() {
-    _classCallCheck(this, DataService);
+class DataService {
+  static getData(url, params) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(url, {
+      params: params
+    });
   }
 
-  _createClass(DataService, null, [{
-    key: "getData",
-    value: function getData(url, params) {
-      return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(url, {
-        params: params
-      });
-    }
-  }, {
-    key: "postData",
-    value: function postData(url, params) {
-      return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, params, {
-        headers: {
-          'X-Requested-With': 'XMLHttpRequest',
-          '__RequestVerificationToken': _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].getXsrfToken()
-        }
-      });
-    }
-  }, {
-    key: "getFile",
-    value: function getFile(url, params) {
-      return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, params, {
-        responseType: 'blob',
-        headers: {
-          'X-Requested-With': 'XMLHttpRequest',
-          '__RequestVerificationToken': _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].getXsrfToken()
-        }
-      });
-    }
-  }]);
+  static postData(url, params) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, params, {
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+        '__RequestVerificationToken': _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].getXsrfToken()
+      }
+    });
+  }
 
-  return DataService;
-}();
+  static getFile(url, params) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, params, {
+      responseType: 'blob',
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+        '__RequestVerificationToken': _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].getXsrfToken()
+      }
+    });
+  }
 
-
+}
 
 /***/ }),
 
@@ -4993,125 +4499,102 @@ function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return QueryString; });
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+class QueryString {
+  static _parseQueryString(queryString) {
+    let args = queryString.split('&');
+    let argsList = {};
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+    for (let i = 0; i < args.length; i++) {
+      let arg = unescape(args[i]);
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+      if (arg.length > 0) {
+        if (arg.indexOf('=') === -1) {
+          argsList[arg.toLowerCase().trim()] = null;
+        } else {
+          let keyValuePair = arg.split('=');
+          argsList[keyValuePair[0].toLowerCase().trim()] = keyValuePair[1].trim();
+        }
+      }
+    }
 
-var QueryString =
-/*#__PURE__*/
-function () {
-  function QueryString() {
-    _classCallCheck(this, QueryString);
+    return argsList;
   }
 
-  _createClass(QueryString, null, [{
-    key: "_parseQueryString",
-    value: function _parseQueryString(queryString) {
-      var args = queryString.split('&');
-      var argsList = {};
+  static _getQueryString(url) {
+    var index = url.indexOf("?");
+    return index < 0 ? "" : url.substring(index + 1, url.length);
+  }
 
-      for (var i = 0; i < args.length; i++) {
-        var arg = unescape(args[i]);
+  static _getRawUrl(url) {
+    var index = url.indexOf("?");
+    return index < 0 ? url : url.substring(0, index);
+  }
 
-        if (arg.length > 0) {
-          if (arg.indexOf('=') === -1) {
-            argsList[arg.toLowerCase().trim()] = null;
-          } else {
-            var keyValuePair = arg.split('=');
-            argsList[keyValuePair[0].toLowerCase().trim()] = keyValuePair[1].trim();
-          }
-        }
-      }
+  static setParam(url, name, value) {
+    var rawUrl = QueryString._getRawUrl(url);
 
-      return argsList;
-    }
-  }, {
-    key: "_getQueryString",
-    value: function _getQueryString(url) {
-      var index = url.indexOf("?");
-      return index < 0 ? "" : url.substring(index + 1, url.length);
-    }
-  }, {
-    key: "_getRawUrl",
-    value: function _getRawUrl(url) {
-      var index = url.indexOf("?");
-      return index < 0 ? url : url.substring(0, index);
-    }
-  }, {
-    key: "setParam",
-    value: function setParam(url, name, value) {
-      var rawUrl = QueryString._getRawUrl(url);
+    var queryString = QueryString._getQueryString(url);
 
-      var queryString = QueryString._getQueryString(url);
+    var args = QueryString._parseQueryString(queryString);
 
-      var args = QueryString._parseQueryString(queryString);
-
-      if (!name) {
-        return url;
-      } // Update value
-
-
-      var found = false;
-
-      for (var key in args) {
-        if (key && key.toLowerCase() === name.toLowerCase()) {
-          // Does not update data if value = undefined
-          if (value !== undefined) {
-            args[key] = value;
-          }
-
-          found = true;
-        }
-      }
-
-      if (!found) {
-        args[name.toLowerCase()] = value;
-      }
-
-      var queryArray = []; // Rebuild query string, ignore null value
-
-      for (var key1 in args) {
-        if (args[key1] != null && args[key1] !== undefined) {
-          queryArray.push(key1.toLowerCase() + "=" + args[key1]);
-        }
-      }
-
-      return rawUrl + "?" + queryArray.join("&");
-    }
-  }, {
-    key: "setParams",
-    value: function setParams(url, parameters) {
-      for (var property in parameters) {
-        if (parameters.hasOwnProperty(property)) {
-          url = QueryString.setParam(url, property, parameters[property]);
-        }
-      }
-
+    if (!name) {
       return url;
-    }
-  }, {
-    key: "getParam",
-    value: function getParam(url, name) {
-      var queryString = QueryString._getQueryString(url);
+    } // Update value
 
-      var args = QueryString._parseQueryString(queryString);
 
-      for (var key in args) {
-        if (key != null && key.toLowerCase() === name.toLowerCase()) {
-          return args[key];
+    var found = false;
+
+    for (var key in args) {
+      if (key && key.toLowerCase() === name.toLowerCase()) {
+        // Does not update data if value = undefined
+        if (value !== undefined) {
+          args[key] = value;
         }
+
+        found = true;
       }
-
-      return null;
     }
-  }]);
 
-  return QueryString;
-}();
+    if (!found) {
+      args[name.toLowerCase()] = value;
+    }
 
+    var queryArray = []; // Rebuild query string, ignore null value
 
+    for (var key1 in args) {
+      if (args[key1] != null && args[key1] !== undefined) {
+        queryArray.push(key1.toLowerCase() + "=" + args[key1]);
+      }
+    }
+
+    return rawUrl + "?" + queryArray.join("&");
+  }
+
+  static setParams(url, parameters) {
+    for (var property in parameters) {
+      if (parameters.hasOwnProperty(property)) {
+        url = QueryString.setParam(url, property, parameters[property]);
+      }
+    }
+
+    return url;
+  }
+
+  static getParam(url, name) {
+    var queryString = QueryString._getQueryString(url);
+
+    var args = QueryString._parseQueryString(queryString);
+
+    for (var key in args) {
+      if (key != null && key.toLowerCase() === name.toLowerCase()) {
+        return args[key];
+      }
+    }
+
+    return null;
+  }
+
+}
 
 /***/ }),
 
@@ -5126,10 +4609,7 @@ function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return createReducer; });
 function createReducer(initialState, handlers) {
-  return function reducer() {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-    var action = arguments.length > 1 ? arguments[1] : undefined;
-
+  return function reducer(state = initialState, action) {
     if (handlers.hasOwnProperty(action.type)) {
       return handlers[action.type](state, action);
     } else {
@@ -5150,48 +4630,25 @@ function createReducer(initialState, handlers) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return LangHelper; });
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var DEFAULT_RESOURCE_NAME = "_language_en_US";
-var langCode = window.PageLanguage || "en-US";
-var resourceName = "_language_".concat(langCode.replace("-", "_"));
-
-var LangHelper =
-/*#__PURE__*/
-function () {
-  function LangHelper() {
-    _classCallCheck(this, LangHelper);
+const DEFAULT_RESOURCE_NAME = "_language_en_US";
+const langCode = window.PageLanguage || "en-US";
+const resourceName = `_language_${langCode.replace("-", "_")}`;
+class LangHelper {
+  static get currentLanguage() {
+    return langCode;
   }
 
-  _createClass(LangHelper, null, [{
-    key: "getSingleResource",
-    value: function getSingleResource(key) {
-      var langHandler = window[resourceName];
-      return langHandler && langHandler[key] || window[DEFAULT_RESOURCE_NAME] && window[DEFAULT_RESOURCE_NAME][key] || key;
-    }
-  }, {
-    key: "getResources",
-    value: function getResources(keys) {
-      var langHandler = window[resourceName];
-      return keys.map(function (key) {
-        return langHandler && langHandler[key] || window[DEFAULT_RESOURCE_NAME] && window[DEFAULT_RESOURCE_NAME][key] || key;
-      });
-    }
-  }, {
-    key: "currentLanguage",
-    get: function get() {
-      return langCode;
-    }
-  }]);
+  static getSingleResource(key) {
+    var langHandler = window[resourceName];
+    return langHandler && langHandler[key] || window[DEFAULT_RESOURCE_NAME] && window[DEFAULT_RESOURCE_NAME][key] || key;
+  }
 
-  return LangHelper;
-}();
+  static getResources(keys) {
+    var langHandler = window[resourceName];
+    return keys.map(key => langHandler && langHandler[key] || window[DEFAULT_RESOURCE_NAME] && window[DEFAULT_RESOURCE_NAME][key] || key);
+  }
 
-
+}
 
 /***/ }),
 
@@ -5208,41 +4665,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux-logger */ "./node_modules/redux-logger/dist/redux-logger.js");
 /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux_logger__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _constants_config__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../constants/config */ "./www/js/source/reactpages/constants/config.js");
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
+const isDev = "development" === "development";
+const configName = _constants_config__WEBPACK_IMPORTED_MODULE_1__["debuggingConfig"].name; // middleware that logs actions
 
-var isDev = "development" === "development";
-var configName = _constants_config__WEBPACK_IMPORTED_MODULE_1__["debuggingConfig"].name; // middleware that logs actions
-
-var loggerMiddleware = Object(redux_logger__WEBPACK_IMPORTED_MODULE_0__["createLogger"])({
-  predicate: function predicate(getState, action) {
-    return isDev || window[configName] && window[configName].env === _constants_config__WEBPACK_IMPORTED_MODULE_1__["debuggingConfig"].env && (!window[configName].actionFilter || window[configName].actionFilter === action.type);
-  }
+const loggerMiddleware = Object(redux_logger__WEBPACK_IMPORTED_MODULE_0__["createLogger"])({
+  predicate: (getState, action) => isDev || window[configName] && window[configName].env === _constants_config__WEBPACK_IMPORTED_MODULE_1__["debuggingConfig"].env && (!window[configName].actionFilter || window[configName].actionFilter === action.type)
 });
-
-var Logger =
-/*#__PURE__*/
-function () {
-  function Logger() {
-    _classCallCheck(this, Logger);
+class Logger {
+  static getLoggerMiddleware() {
+    return loggerMiddleware;
   }
 
-  _createClass(Logger, null, [{
-    key: "getLoggerMiddleware",
-    value: function getLoggerMiddleware() {
-      return loggerMiddleware;
-    }
-  }]);
-
-  return Logger;
-}();
-
-
+}
 
 /***/ }),
 
@@ -5256,89 +4692,64 @@ function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Site; });
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+const _rootUrl = window.rootUrl || "/";
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+let _xsrfToken = null;
+class Site {
+  static getXsrfToken() {
+    if (!_xsrfToken) {
+      _xsrfToken = document.querySelector("input[name=__RequestVerificationToken]").value;
+    }
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var _rootUrl = window.rootUrl || "/";
-
-var _xsrfToken = null;
-
-var Site =
-/*#__PURE__*/
-function () {
-  function Site() {
-    _classCallCheck(this, Site);
+    return _xsrfToken;
   }
 
-  _createClass(Site, null, [{
-    key: "getXsrfToken",
-    value: function getXsrfToken() {
-      if (!_xsrfToken) {
-        _xsrfToken = document.querySelector("input[name=__RequestVerificationToken]").value;
+  static resolveClientUrl(relativeUrl) {
+    return _rootUrl + relativeUrl;
+  }
+
+  static convertDateToString(date) {
+    return typeof date === "string" ? date : date.format("MM/DD/YYYY");
+  }
+
+  static asNull(text) {
+    if (text != null) {
+      text = text.trim();
+
+      if (text === '') {
+        return null;
       }
-
-      return _xsrfToken;
     }
-  }, {
-    key: "resolveClientUrl",
-    value: function resolveClientUrl(relativeUrl) {
-      return _rootUrl + relativeUrl;
-    }
-  }, {
-    key: "convertDateToString",
-    value: function convertDateToString(date) {
-      return typeof date === "string" ? date : date.format("MM/DD/YYYY");
-    }
-  }, {
-    key: "asNull",
-    value: function asNull(text) {
-      if (text != null) {
-        text = text.trim();
 
-        if (text === '') {
-          return null;
-        }
-      }
+    return text;
+  }
 
-      return text;
-    }
-  }, {
-    key: "downloadFile",
-    value: function downloadFile(data, fileName) {
-      var url = window.URL.createObjectURL(new Blob([data]));
-      var link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', fileName);
-      document.body.appendChild(link);
-      link.click();
-      link.parentNode.removeChild(link);
-      window.URL.revokeObjectURL(url);
-    }
-  }, {
-    key: "readAsJson",
-    value: function readAsJson(blob, callback) {
-      var reader = new FileReader();
+  static downloadFile(data, fileName) {
+    const url = window.URL.createObjectURL(new Blob([data]));
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', fileName);
+    document.body.appendChild(link);
+    link.click();
+    link.parentNode.removeChild(link);
+    window.URL.revokeObjectURL(url);
+  }
 
-      reader.onload = function () {
-        callback && callback(JSON.parse(reader.result));
-      };
+  static readAsJson(blob, callback) {
+    const reader = new FileReader();
 
-      reader.readAsText(blob);
-    }
-  }, {
-    key: "getRootUrl",
-    value: function getRootUrl() {
-      return _rootUrl;
-    }
-  }]);
+    reader.onload = function () {
+      callback && callback(JSON.parse(reader.result));
+    };
 
-  return Site;
-}();
+    reader.readAsText(blob);
+  }
 
+  static getRootUrl() {
+    return _rootUrl;
+  }
 
+}
 
 /***/ }),
 
@@ -5355,37 +4766,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
 /* harmony import */ var _logger__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./logger */ "./www/js/source/reactpages/lib/logger.js");
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
 
-
-
-var Store =
-/*#__PURE__*/
-function () {
-  function Store() {
-    _classCallCheck(this, Store);
+class Store {
+  static createStore(reducer, initialState) {
+    const loggerMiddleware = _logger__WEBPACK_IMPORTED_MODULE_2__["default"].getLoggerMiddleware();
+    const enhancer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["compose"])(Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"], // lets us dispatch() functions
+    loggerMiddleware));
+    return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(reducer, initialState, enhancer);
   }
 
-  _createClass(Store, null, [{
-    key: "createStore",
-    value: function createStore(reducer, initialState) {
-      var loggerMiddleware = _logger__WEBPACK_IMPORTED_MODULE_2__["default"].getLoggerMiddleware();
-      var enhancer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["compose"])(Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"], // lets us dispatch() functions
-      loggerMiddleware));
-      return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(reducer, initialState, enhancer);
-    }
-  }]);
-
-  return Store;
-}();
-
-
+}
 
 /***/ }),
 
@@ -5401,12 +4793,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "validateBaseCurrency", function() { return validateBaseCurrency; });
 /* harmony import */ var _AppData__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AppData */ "./www/js/source/reactpages/lib/AppData.js");
 
-var validateBaseCurrency = function validateBaseCurrency() {
-  var baseCurrency = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
-  var allowEmpty = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-  return allowEmpty && !baseCurrency || !!baseCurrency && _AppData__WEBPACK_IMPORTED_MODULE_0__["default"].baseCurrencyList.find(function (x) {
-    return x.value === baseCurrency;
-  });
+const validateBaseCurrency = (baseCurrency = "", allowEmpty = true) => {
+  return allowEmpty && !baseCurrency || !!baseCurrency && _AppData__WEBPACK_IMPORTED_MODULE_0__["default"].baseCurrencyList.find(x => x.value === baseCurrency);
 };
 
 /***/ }),
@@ -5440,70 +4828,72 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var BaseDataGrid = function BaseDataGrid(props) {
-  var gridData = props.gridData,
-      requestParam = props.requestParam,
-      reportTitle = props.reportTitle,
-      toggleLoader = props.toggleLoader,
-      getGridData = props.getGridData,
-      setRequestParam = props.setRequestParam,
-      dataUrl = props.dataUrl,
-      isPaging = props.isPaging,
-      columns = props.columns,
-      columnWidths = props.columnWidths,
-      columnAlignments = props.columnAlignments,
-      totalText = props.totalText,
-      totalColumns = props.totalColumns,
-      sortableColumns = props.sortableColumns;
-  var pageOption = {
+const BaseDataGrid = props => {
+  const {
+    gridData,
+    requestParam,
+    reportTitle,
+    toggleLoader,
+    getGridData,
+    setRequestParam,
+    dataUrl,
+    isPaging,
+    columns,
+    columnWidths,
+    columnAlignments,
+    totalText,
+    totalColumns,
+    sortableColumns
+  } = props;
+  const pageOption = {
     PageIndex: requestParam.PageIndex,
     PageSize: requestParam.PageSize,
     TotalItem: gridData && gridData.TotalRows ? gridData.TotalRows : _lib_constants__WEBPACK_IMPORTED_MODULE_7__["DefaultPageSize"],
     PageList: [_lib_constants__WEBPACK_IMPORTED_MODULE_7__["DefaultPageSize"], 100, 200, 300, 400, 500, 1000, 2000]
   };
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     toggleLoader(false);
   }, [gridData]);
 
-  var getHeaderName = function getHeaderName(column) {
+  const getHeaderName = column => {
     if (column === 'LicenseeWL') {
-      return "".concat(_lib_constants__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].LicenseeWL, "/").concat(_lib_constants__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].Comm);
+      return `${_lib_constants__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].LicenseeWL}/${_lib_constants__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].Comm}`;
     }
 
     if (column === 'WinLoss' && _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_8__["default"].isAllowedCustomerComm) {
-      return "".concat(_lib_constants__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].WinLoss, "/").concat(_lib_constants__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].Comm);
+      return `${_lib_constants__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].WinLoss}/${_lib_constants__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].Comm}`;
     }
 
     return _lib_constants__WEBPACK_IMPORTED_MODULE_7__["HeaderText"][column];
   };
 
-  var onPaging = function onPaging(index, size) {
-    var param = Object.assign({}, requestParam, {
+  const onPaging = (index, size) => {
+    const param = Object.assign({}, requestParam, {
       PageIndex: index,
       PageSize: size
     });
     getData(param);
   };
 
-  var afterLoad = function afterLoad() {
+  const afterLoad = () => {
     toggleLoader(false);
   };
 
-  var getData = function getData(param) {
+  const getData = param => {
     toggleLoader(true);
     getGridData(dataUrl, param);
     setRequestParam(param);
   };
 
-  var onSort = function onSort(sortBy, sortOrder) {
-    var param = Object.assign({}, requestParam, {
+  const onSort = (sortBy, sortOrder) => {
+    const param = Object.assign({}, requestParam, {
       SortBy: sortBy === 'WinLoss' ? 'WinLost' : sortBy,
       SortOrder: sortOrder
     });
     getData(param);
   };
 
-  var getResource = function getResource(key) {
+  const getResource = key => {
     return _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource(key);
   };
 
@@ -5536,24 +4926,28 @@ var BaseDataGrid = function BaseDataGrid(props) {
 };
 
 function mapDispatchToProps(dispatch) {
-  var toggleLoader = _action_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"].toggleLoader,
-      getGridData = _action_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"].getGridData,
-      setRequestParam = _action_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"].setRequestParam;
+  const {
+    toggleLoader,
+    getGridData,
+    setRequestParam
+  } = _action_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"];
   return Object(redux__WEBPACK_IMPORTED_MODULE_3__["bindActionCreators"])({
-    toggleLoader: toggleLoader,
-    getGridData: getGridData,
-    setRequestParam: setRequestParam
+    toggleLoader,
+    getGridData,
+    setRequestParam
   }, dispatch);
 }
 
 function mapStateToProps(state) {
-  var gridData = state.gridData,
-      requestParam = state.requestParam,
-      reportTitle = state.reportTitle;
+  const {
+    gridData,
+    requestParam,
+    reportTitle
+  } = state;
   return Object.assign({}, {
-    gridData: gridData,
-    requestParam: requestParam,
-    reportTitle: reportTitle
+    gridData,
+    requestParam,
+    reportTitle
   });
 }
 
@@ -5596,36 +4990,36 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var PageLayout = function PageLayout(props) {
-  var toggleLoader = props.toggleLoader,
-      isConvertAll = props.isConvertAll,
-      selectedBaseCurrency = props.selectedBaseCurrency,
-      selectedTabIndex = props.selectedTabIndex,
-      children = props.children,
-      hasExchange = props.hasExchange;
+const PageLayout = props => {
+  const {
+    toggleLoader,
+    isConvertAll,
+    selectedBaseCurrency,
+    selectedTabIndex,
+    children,
+    hasExchange
+  } = props;
 
-  var getResource = function getResource(key) {
+  const getResource = key => {
     return _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource(key);
   };
 
-  var formatDateString = function formatDateString(dateString) {
-    var date = new Date(dateString);
-    var month = date.getMonth() + 1;
-    var day = date.getDate();
-    return "".concat(month < 10 ? '0' + month : month, "/").concat(day < 10 ? '0' + day : day, "/").concat(date.getFullYear());
+  const formatDateString = dateString => {
+    const date = new Date(dateString);
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    return `${month < 10 ? '0' + month : month}/${day < 10 ? '0' + day : day}/${date.getFullYear()}`;
   };
 
-  var beforeShow = function beforeShow() {
+  const beforeShow = () => {
     toggleLoader(true);
   };
 
-  var afterShow = function afterShow() {
+  const afterShow = () => {
     toggleLoader(false);
   };
 
-  var activedTabList = _lib_constants__WEBPACK_IMPORTED_MODULE_9__["tabList"].filter(function (x) {
-    return _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].tabList.includes(x.key);
-  });
+  const activedTabList = _lib_constants__WEBPACK_IMPORTED_MODULE_9__["tabList"].filter(x => _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].tabList.includes(x.key));
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_4__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_layouts_betlist_BetListLayout__WEBPACK_IMPORTED_MODULE_5__["default"], {
     pageName: "BTC",
     rootUrl: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_8__["default"].getRootUrl(),
@@ -5634,13 +5028,11 @@ var PageLayout = function PageLayout(props) {
     baseCurrency: isConvertAll ? selectedBaseCurrency : '',
     beforeShowFunc: beforeShow,
     afterShowFunc: afterShow
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_6__["Tabs"], null, activedTabList.map(function (item) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_6__["Tab"], {
-      isActive: selectedTabIndex == item.displayOrder,
-      label: item.label,
-      url: item.url
-    });
-  }), hasExchange && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_6__["Tab"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_6__["Tabs"], null, activedTabList.map(item => react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_6__["Tab"], {
+    isActive: selectedTabIndex == item.displayOrder,
+    label: item.label,
+    url: item.url
+  })), hasExchange && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_6__["Tab"], {
     isActive: selectedTabIndex == 4,
     label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("Exchange"),
     url: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_8__["default"].resolveClientUrl("ExchangeVoided")
@@ -5648,20 +5040,24 @@ var PageLayout = function PageLayout(props) {
 };
 
 function mapDispatchToProps(dispatch) {
-  var toggleLoader = _action_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"].toggleLoader;
+  const {
+    toggleLoader
+  } = _action_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"];
   return Object(redux__WEBPACK_IMPORTED_MODULE_3__["bindActionCreators"])({
-    toggleLoader: toggleLoader
+    toggleLoader
   }, dispatch);
 }
 
 function mapStateToProps(state) {
-  var isConvertAll = state.isConvertAll,
-      selectedBaseCurrency = state.selectedBaseCurrency,
-      hasExchange = state.hasExchange;
+  const {
+    isConvertAll,
+    selectedBaseCurrency,
+    hasExchange
+  } = state;
   return Object.assign({}, {
-    isConvertAll: isConvertAll,
-    selectedBaseCurrency: selectedBaseCurrency,
-    hasExchange: hasExchange
+    isConvertAll,
+    selectedBaseCurrency,
+    hasExchange
   });
 }
 
@@ -5685,7 +5081,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var ActionCreators = Object.assign({}, _jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_0__, _jsroot_actions_gridDataAction__WEBPACK_IMPORTED_MODULE_1__, _jsroot_actions_requestParamAction__WEBPACK_IMPORTED_MODULE_2__);
+const ActionCreators = Object.assign({}, _jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_0__, _jsroot_actions_gridDataAction__WEBPACK_IMPORTED_MODULE_1__, _jsroot_actions_requestParamAction__WEBPACK_IMPORTED_MODULE_2__);
 
 /***/ }),
 
@@ -5701,7 +5097,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hasExchange", function() { return hasExchange; });
 /* harmony import */ var _jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
 
-var hasExchange = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(false, {});
+const hasExchange = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(false, {});
 
 /***/ }),
 
@@ -5717,35 +5113,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Service; });
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
-
-
-var Service =
-/*#__PURE__*/
-function () {
-  function Service() {
-    _classCallCheck(this, Service);
+class Service {
+  static getTitle(fromDate, toDate, baseCurrency) {
+    const dateRangeText = fromDate && toDate ? `, ${_jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].convertDateToString(fromDate)} → ${_jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].convertDateToString(toDate)}` : '';
+    const baseCurrencyText = baseCurrency ? `, ${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("BaseCurrency")}: ${baseCurrency}` : '';
+    return _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("BettingTicketCenter") + dateRangeText + baseCurrencyText;
   }
 
-  _createClass(Service, null, [{
-    key: "getTitle",
-    value: function getTitle(fromDate, toDate, baseCurrency) {
-      var dateRangeText = fromDate && toDate ? ", ".concat(_jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].convertDateToString(fromDate), " \u2192 ").concat(_jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].convertDateToString(toDate)) : '';
-      var baseCurrencyText = baseCurrency ? ", ".concat(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("BaseCurrency"), ": ").concat(baseCurrency) : '';
-      return _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("BettingTicketCenter") + dateRangeText + baseCurrencyText;
-    }
-  }]);
-
-  return Service;
-}();
-
-
+}
 
 /***/ }),
 
@@ -5767,14 +5144,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
 
 
-var ApiUrl = {
+const ApiUrl = {
   CUSTOMER_SEARCH_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl("SearchCustomerAPI/SearchCustomer"),
   RUNNING_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/BettingTicketCenter/GetByRunning'),
   REFNO_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/BettingTicketCenter/GetByRefNo'),
   SINGLECUSTOMER_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/BettingTicketCenter/GetBySingleCustomer'),
   ADVANCEDSEARCH_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/BettingTicketCenterAdvancedSearch/GetData')
 };
-var HeaderText = {
+const HeaderText = {
   Index: "#",
   Platform: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("Platform"),
   ExternalId: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("ExternalId"),
@@ -5791,14 +5168,14 @@ var HeaderText = {
   Status: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("Status"),
   Live: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("Live")
 };
-var DefaultPageSize = 50;
-var tabKeys = {
+const DefaultPageSize = 50;
+const tabKeys = {
   advancedSearch: 'BTC_MultiCustomer',
   singleCustomer: 'BTC_SingleCustomer',
   refNo: 'BTC_RefNo',
   running: 'BTC_Running'
 };
-var tabList = [{
+const tabList = [{
   key: tabKeys.singleCustomer,
   label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("SingleCustomer"),
   url: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl("BettingTicketCenter/SingleCustomer"),
@@ -5858,7 +5235,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var ActionCreators = Object.assign({}, _jsroot_actions_gridDataAction__WEBPACK_IMPORTED_MODULE_0__, _jsroot_actions_productAction__WEBPACK_IMPORTED_MODULE_1__, _jsroot_actions_baseCurrencyAction__WEBPACK_IMPORTED_MODULE_2__, _jsroot_actions_usernameAction__WEBPACK_IMPORTED_MODULE_3__, _jsroot_actions_statusAction__WEBPACK_IMPORTED_MODULE_4__, _jsroot_actions_platformAction__WEBPACK_IMPORTED_MODULE_5__, _jsroot_actions_liveStatusAction__WEBPACK_IMPORTED_MODULE_6__, _jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_7__, _jsroot_actions_dateRangeAction__WEBPACK_IMPORTED_MODULE_8__, _jsroot_actions_convertAllAction__WEBPACK_IMPORTED_MODULE_9__, _jsroot_actions_requestParamAction__WEBPACK_IMPORTED_MODULE_10__, _jsroot_actions_reportTitleAction__WEBPACK_IMPORTED_MODULE_11__, _jsroot_actions_userGuideAction__WEBPACK_IMPORTED_MODULE_12__);
+const ActionCreators = Object.assign({}, _jsroot_actions_gridDataAction__WEBPACK_IMPORTED_MODULE_0__, _jsroot_actions_productAction__WEBPACK_IMPORTED_MODULE_1__, _jsroot_actions_baseCurrencyAction__WEBPACK_IMPORTED_MODULE_2__, _jsroot_actions_usernameAction__WEBPACK_IMPORTED_MODULE_3__, _jsroot_actions_statusAction__WEBPACK_IMPORTED_MODULE_4__, _jsroot_actions_platformAction__WEBPACK_IMPORTED_MODULE_5__, _jsroot_actions_liveStatusAction__WEBPACK_IMPORTED_MODULE_6__, _jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_7__, _jsroot_actions_dateRangeAction__WEBPACK_IMPORTED_MODULE_8__, _jsroot_actions_convertAllAction__WEBPACK_IMPORTED_MODULE_9__, _jsroot_actions_requestParamAction__WEBPACK_IMPORTED_MODULE_10__, _jsroot_actions_reportTitleAction__WEBPACK_IMPORTED_MODULE_11__, _jsroot_actions_userGuideAction__WEBPACK_IMPORTED_MODULE_12__);
 
 /***/ }),
 
@@ -5879,54 +5256,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _FormFilter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./FormFilter */ "./www/js/source/reactpages/pages/bettingticketscenter/singlecustomer/components/FormFilter.jsx");
 /* harmony import */ var _common_components_PageLayout__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../common/components/PageLayout */ "./www/js/source/reactpages/pages/bettingticketscenter/common/components/PageLayout.jsx");
 /* harmony import */ var _jsroot_components_Loader__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/components/Loader */ "./www/js/source/reactpages/components/Loader.jsx");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
 
 
 
 
-
-var AppContainer =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(AppContainer, _Component);
-
-  function AppContainer(props) {
-    _classCallCheck(this, AppContainer);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(AppContainer).call(this, props));
+class AppContainer extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+  constructor(props) {
+    super(props);
   }
 
-  _createClass(AppContainer, [{
-    key: "render",
-    value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_components_PageLayout__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        selectedTabIndex: "0"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Loader__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        isLoading: this.props.isLoading
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormFilter__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DataGrid__WEBPACK_IMPORTED_MODULE_2__["default"], null));
-    }
-  }]);
+  render() {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_components_PageLayout__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      selectedTabIndex: "0"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Loader__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      isLoading: this.props.isLoading
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormFilter__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DataGrid__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+  }
 
-  return AppContainer;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+}
 
 function mapStateToProps(state) {
   return Object.assign({}, {
@@ -5956,12 +5305,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var Columns = ['Index', 'ExternalId', 'SystemId', 'RefNo', 'TransTime', 'Choice', 'Odds', 'OddsType', 'Stake', 'WinLoss', 'LicenseeWL', 'Status', 'Platform', 'Live'];
-var ColumnWidths = [40, 120, 120, 110, 150, 400, 70, 70, 100, 100, 100, 80, 80, 80];
-var ColumnAlignments = ['center-align', '', '', 'center-align', 'center-align', 'right-align', 'right-align', 'right-align', 'right-align', 'right-align', 'right-align', 'center-align', 'center-align', 'center-align'];
-var SortableColumns = ['Stake', 'WinLoss', 'LicenseeWL'];
+const Columns = ['Index', 'ExternalId', 'SystemId', 'RefNo', 'TransTime', 'Choice', 'Odds', 'OddsType', 'Stake', 'WinLoss', 'LicenseeWL', 'Status', 'Platform', 'Live'];
+const ColumnWidths = [40, 120, 120, 110, 150, 400, 70, 70, 100, 100, 100, 80, 80, 80];
+const ColumnAlignments = ['center-align', '', '', 'center-align', 'center-align', 'right-align', 'right-align', 'right-align', 'right-align', 'right-align', 'right-align', 'center-align', 'center-align', 'center-align'];
+const SortableColumns = ['Stake', 'WinLoss', 'LicenseeWL'];
 
-var DataGrid = function DataGrid(props) {
+const DataGrid = props => {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_components_BaseDataGrid__WEBPACK_IMPORTED_MODULE_2__["default"], {
     dataUrl: _common_lib_constants__WEBPACK_IMPORTED_MODULE_1__["ApiUrl"].SINGLECUSTOMER_DATA_URL,
     isPaging: true,
@@ -6008,24 +5357,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _common_lib_constants__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../common/lib/constants */ "./www/js/source/reactpages/pages/bettingticketscenter/common/lib/constants.js");
 /* harmony import */ var _common_lib_Service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../common/lib/Service */ "./www/js/source/reactpages/pages/bettingticketscenter/common/lib/Service.js");
 /* harmony import */ var _jsroot_lib_validationHelper__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @jsroot/lib/validationHelper */ "./www/js/source/reactpages/lib/validationHelper.js");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
@@ -6046,62 +5377,47 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var FormFilter =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(FormFilter, _Component);
+class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+  constructor(props) {
+    super(props);
 
-  function FormFilter(props) {
-    var _this;
-
-    _classCallCheck(this, FormFilter);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(FormFilter).call(this, props));
-
-    _defineProperty(_assertThisInitialized(_this), "submit", function (event) {
+    _defineProperty(this, "submit", event => {
       event.preventDefault();
 
-      var params = _this._getParams();
+      const params = this._getParams();
 
       if (!params) {
         return;
       }
 
-      _this.props.setReportTitle(_common_lib_Service__WEBPACK_IMPORTED_MODULE_16__["default"].getTitle(params.FromDate, params.ToDate, params.BaseCurrency));
-
-      _this.props.setRequestParam(params);
-
-      _this.props.toggleLoader(true);
-
-      _this.props.getGridData(_common_lib_constants__WEBPACK_IMPORTED_MODULE_15__["ApiUrl"].SINGLECUSTOMER_DATA_URL, params);
+      this.props.setReportTitle(_common_lib_Service__WEBPACK_IMPORTED_MODULE_16__["default"].getTitle(params.FromDate, params.ToDate, params.BaseCurrency));
+      this.props.setRequestParam(params);
+      this.props.toggleLoader(true);
+      this.props.getGridData(_common_lib_constants__WEBPACK_IMPORTED_MODULE_15__["ApiUrl"].SINGLECUSTOMER_DATA_URL, params);
     });
 
-    _defineProperty(_assertThisInitialized(_this), "applyDateRangeHandler", function (date) {
-      var isValidMonthRange = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-
+    _defineProperty(this, "applyDateRangeHandler", (date, isValidMonthRange = true) => {
       if (isValidMonthRange) {
-        _this.props.setDateRange(date);
+        this.props.setDateRange(date);
       } else {
-        var message = _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("DateRangeExceedMsg").replace("{0}", _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_13__["default"].dateConstraint.limitedMonthRange);
+        const message = _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("DateRangeExceedMsg").replace("{0}", _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_13__["default"].dateConstraint.limitedMonthRange);
         alert(message);
       }
     });
 
-    _defineProperty(_assertThisInitialized(_this), "exportExcel", function (event) {
+    _defineProperty(this, "exportExcel", event => {
       event.preventDefault();
 
-      var params = _this._getParams();
+      const params = this._getParams();
 
       if (!params) {
         return;
       }
 
       params.IsExport = true;
-
-      _this.props.toggleLoader(true);
-
-      _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_14__["default"].getFile(_common_lib_constants__WEBPACK_IMPORTED_MODULE_15__["ApiUrl"].SINGLECUSTOMER_DATA_URL, params).then(function (response) {
-        var NoContentStatusCode = 204;
+      this.props.toggleLoader(true);
+      _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_14__["default"].getFile(_common_lib_constants__WEBPACK_IMPORTED_MODULE_15__["ApiUrl"].SINGLECUSTOMER_DATA_URL, params).then(response => {
+        const NoContentStatusCode = 204;
 
         if (response.status === NoContentStatusCode) {
           alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("NoInfo"));
@@ -6109,290 +5425,251 @@ function (_Component) {
           _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_12__["default"].downloadFile(response.data, 'BettingTicketsCenter_SingleCustomer.xls');
         }
 
-        _this.props.toggleLoader(false);
+        this.props.toggleLoader(false);
       });
     });
 
-    _defineProperty(_assertThisInitialized(_this), "showUserGuide", function () {
-      var userGuideContent = _this.props.userGuideContent;
+    _defineProperty(this, "showUserGuide", () => {
+      const userGuideContent = this.props.userGuideContent;
 
       if (!userGuideContent || userGuideContent.length === 0) {
-        _this.props.getUserGuideContent('BettingTicketCenterSingle');
+        this.props.getUserGuideContent('BettingTicketCenterSingle');
       }
     });
-
-    return _this;
   }
 
-  _createClass(FormFilter, [{
-    key: "_getParams",
-    value: function _getParams() {
-      if (!this.isValidModel) {
-        return null;
+  get isValidModel() {
+    return !!this.props.username && !!this.props.selectedProduct && !!this.props.selectedStatus && !!this.props.selectedLiveStatus && Object(_jsroot_lib_validationHelper__WEBPACK_IMPORTED_MODULE_17__["validateBaseCurrency"])(this.props.selectedBaseCurrency);
+  }
+
+  _getParams() {
+    if (!this.isValidModel) {
+      return null;
+    }
+
+    const {
+      fromDate,
+      toDate
+    } = this.props.dateRange;
+    const {
+      PageSize,
+      SortBy,
+      SortOrder
+    } = this.props.requestParam;
+    return {
+      PageSize: PageSize,
+      PageIndex: 1,
+      FromDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_12__["default"].convertDateToString(fromDate),
+      ToDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_12__["default"].convertDateToString(toDate),
+      ProductCodeList: this.props.selectedProduct,
+      Username: this.props.username,
+      BaseCurrency: this.props.isConvertAll ? this.props.selectedBaseCurrency : '',
+      Status: this.props.selectedStatus,
+      LiveStatus: this.props.selectedLiveStatus,
+      Platform: this.props.selectedPlatform,
+      SortBy: SortBy,
+      SortOrder: SortOrder
+    };
+  }
+
+  _renderUserGuide() {
+    const userGuideContent = this.props.userGuideContent;
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_UserGuide__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("UserGuide"),
+      contentTitle: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("BettingTicketCenter"),
+      onClick: this.showUserGuide,
+      content: userGuideContent
+    });
+  }
+
+  _renderDateRange() {
+    const dateRange = this.props.dateRange;
+    const dateConstraint = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_13__["default"].dateConstraint;
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_date_range_index__WEBPACK_IMPORTED_MODULE_5__["DateRange"], {
+      startDate: dateRange.fromDate,
+      endDate: dateRange.toDate,
+      minDate: dateConstraint.minDate,
+      maxDate: dateConstraint.maxDate,
+      today: dateRange.toDate,
+      limitedMonthRange: dateConstraint.limitedMonthRange,
+      onChange: this.applyDateRangeHandler
+    });
+  }
+
+  _renderProductSelectList() {
+    const productOptions = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_13__["default"].productOptions;
+    return productOptions && productOptions.length && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_4___default.a, {
+      id: "ProductList",
+      language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].currentLanguage,
+      dataSource: productOptions,
+      keyField: "Code",
+      valueField: "Name",
+      statusField: "Status",
+      onChange: (currentItem, selectedItemsKey) => this.props.setSelectedProduct(selectedItemsKey)
+    });
+  }
+
+  _renderBaseCurrencySelectList() {
+    const baseCurrencyList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_13__["default"].baseCurrencyList;
+    return baseCurrencyList && baseCurrencyList.length && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      instanceId: "ddlBased",
+      value: this.props.selectedBaseCurrency,
+      options: baseCurrencyList,
+      onChange: item => this.props.setSelectedBaseCurrency(item.value)
+    });
+  }
+
+  _renderStatusSelectList() {
+    const statusList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_13__["default"].statusList;
+    return statusList && statusList.length && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_4___default.a, {
+      id: "StatusList",
+      language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].currentLanguage,
+      dataSource: statusList,
+      keyField: "Id",
+      valueField: "Value",
+      statusField: "Status",
+      onChange: (currentItem, selectedItemsKey) => this.props.setSelectedStatus(selectedItemsKey)
+    });
+  }
+
+  _renderPlatformSelectList() {
+    const platformList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_13__["default"].platformList;
+    return platformList && platformList.length && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      instanceId: "PlatformList",
+      value: this.props.selectedPlatform,
+      options: platformList,
+      onChange: item => this.props.setSelectedPlatform(item.value)
+    });
+  }
+
+  _renderLiveStatusSelectList() {
+    const liveStatusList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_13__["default"].liveStatusList;
+    return liveStatusList && liveStatusList.length && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_4___default.a, {
+      id: "LiveStatusList",
+      language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].currentLanguage,
+      dataSource: liveStatusList,
+      keyField: "Id",
+      valueField: "Value",
+      statusField: "Status",
+      onChange: (currentItem, selectedItemsKey) => this.props.setSelectedLiveStatus(selectedItemsKey)
+    });
+  }
+
+  render() {
+    const excelButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      className: "icon-excel right",
+      onClick: this.exportExcel,
+      title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("ExportToExcel")
+    }), this._renderUserGuide());
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      className: "page-filter",
+      stickyFooter: excelButton
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "row"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "form-group"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      className: "label-text"
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("Date")), this._renderDateRange())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "form-group"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      className: "label-text"
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("Product")), this._renderProductSelectList())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "form-group"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      className: "label-text"
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("BaseCurrency")), this._renderBaseCurrencySelectList())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-12 col-md-4 col-sm-3 col-lg-2 col-xl-3"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "form-group"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      id: "IsConvertAll",
+      checked: this.props.isConvertAll,
+      onChange: checked => this.props.changeIsConvertAll(checked),
+      label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("ConvertAllFiguresToBaseCurrency")
+    })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "row"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "form-group"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      className: "label-text"
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("Username"), " *"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_auto_complete__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      url: _common_lib_constants__WEBPACK_IMPORTED_MODULE_15__["ApiUrl"].CUSTOMER_SEARCH_URL,
+      onSelect: value => this.props.setUsername(value),
+      onInput: value => this.props.setUsername(value),
+      htmlAttributes: {
+        placeholder: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("ExternalIdOrSystemId")
       }
+    }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "form-group"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      className: "label-text"
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("Status")), this._renderStatusSelectList())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "form-group"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      className: "label-text"
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("Platform")), this._renderPlatformSelectList())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-12 col-md-2 col-sm-3 col-lg-2 col-xl-2"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "form-group"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      className: "label-text"
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("Live")), this._renderLiveStatusSelectList())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-12 col-md-2 col-sm-2 col-lg-2 col-xl-1"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "form-group"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "button-group"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      type: "button",
+      disabled: !this.isValidModel,
+      className: "btn btn-submit",
+      onClick: this.submit
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("Submit")))))));
+  }
 
-      var _this$props$dateRange = this.props.dateRange,
-          fromDate = _this$props$dateRange.fromDate,
-          toDate = _this$props$dateRange.toDate;
-      var _this$props$requestPa = this.props.requestParam,
-          PageSize = _this$props$requestPa.PageSize,
-          SortBy = _this$props$requestPa.SortBy,
-          SortOrder = _this$props$requestPa.SortOrder;
-      return {
-        PageSize: PageSize,
-        PageIndex: 1,
-        FromDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_12__["default"].convertDateToString(fromDate),
-        ToDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_12__["default"].convertDateToString(toDate),
-        ProductCodeList: this.props.selectedProduct,
-        Username: this.props.username,
-        BaseCurrency: this.props.isConvertAll ? this.props.selectedBaseCurrency : '',
-        Status: this.props.selectedStatus,
-        LiveStatus: this.props.selectedLiveStatus,
-        Platform: this.props.selectedPlatform,
-        SortBy: SortBy,
-        SortOrder: SortOrder
-      };
-    }
-  }, {
-    key: "_renderUserGuide",
-    value: function _renderUserGuide() {
-      var userGuideContent = this.props.userGuideContent;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_UserGuide__WEBPACK_IMPORTED_MODULE_9__["default"], {
-        title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("UserGuide"),
-        contentTitle: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("BettingTicketCenter"),
-        onClick: this.showUserGuide,
-        content: userGuideContent
-      });
-    }
-  }, {
-    key: "_renderDateRange",
-    value: function _renderDateRange() {
-      var dateRange = this.props.dateRange;
-      var dateConstraint = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_13__["default"].dateConstraint;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_date_range_index__WEBPACK_IMPORTED_MODULE_5__["DateRange"], {
-        startDate: dateRange.fromDate,
-        endDate: dateRange.toDate,
-        minDate: dateConstraint.minDate,
-        maxDate: dateConstraint.maxDate,
-        today: dateRange.toDate,
-        limitedMonthRange: dateConstraint.limitedMonthRange,
-        onChange: this.applyDateRangeHandler
-      });
-    }
-  }, {
-    key: "_renderProductSelectList",
-    value: function _renderProductSelectList() {
-      var _this2 = this;
-
-      var productOptions = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_13__["default"].productOptions;
-      return productOptions && productOptions.length && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_4___default.a, {
-        id: "ProductList",
-        language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].currentLanguage,
-        dataSource: productOptions,
-        keyField: "Code",
-        valueField: "Name",
-        statusField: "Status",
-        onChange: function onChange(currentItem, selectedItemsKey) {
-          return _this2.props.setSelectedProduct(selectedItemsKey);
-        }
-      });
-    }
-  }, {
-    key: "_renderBaseCurrencySelectList",
-    value: function _renderBaseCurrencySelectList() {
-      var _this3 = this;
-
-      var baseCurrencyList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_13__["default"].baseCurrencyList;
-      return baseCurrencyList && baseCurrencyList.length && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        instanceId: "ddlBased",
-        value: this.props.selectedBaseCurrency,
-        options: baseCurrencyList,
-        onChange: function onChange(item) {
-          return _this3.props.setSelectedBaseCurrency(item.value);
-        }
-      });
-    }
-  }, {
-    key: "_renderStatusSelectList",
-    value: function _renderStatusSelectList() {
-      var _this4 = this;
-
-      var statusList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_13__["default"].statusList;
-      return statusList && statusList.length && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_4___default.a, {
-        id: "StatusList",
-        language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].currentLanguage,
-        dataSource: statusList,
-        keyField: "Id",
-        valueField: "Value",
-        statusField: "Status",
-        onChange: function onChange(currentItem, selectedItemsKey) {
-          return _this4.props.setSelectedStatus(selectedItemsKey);
-        }
-      });
-    }
-  }, {
-    key: "_renderPlatformSelectList",
-    value: function _renderPlatformSelectList() {
-      var _this5 = this;
-
-      var platformList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_13__["default"].platformList;
-      return platformList && platformList.length && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        instanceId: "PlatformList",
-        value: this.props.selectedPlatform,
-        options: platformList,
-        onChange: function onChange(item) {
-          return _this5.props.setSelectedPlatform(item.value);
-        }
-      });
-    }
-  }, {
-    key: "_renderLiveStatusSelectList",
-    value: function _renderLiveStatusSelectList() {
-      var _this6 = this;
-
-      var liveStatusList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_13__["default"].liveStatusList;
-      return liveStatusList && liveStatusList.length && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_4___default.a, {
-        id: "LiveStatusList",
-        language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].currentLanguage,
-        dataSource: liveStatusList,
-        keyField: "Id",
-        valueField: "Value",
-        statusField: "Status",
-        onChange: function onChange(currentItem, selectedItemsKey) {
-          return _this6.props.setSelectedLiveStatus(selectedItemsKey);
-        }
-      });
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this7 = this;
-
-      var excelButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "icon-excel right",
-        onClick: this.exportExcel,
-        title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("ExportToExcel")
-      }), this._renderUserGuide());
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        className: "page-filter",
-        stickyFooter: excelButton
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "label-text"
-      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("Date")), this._renderDateRange())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "label-text"
-      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("Product")), this._renderProductSelectList())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "label-text"
-      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("BaseCurrency")), this._renderBaseCurrencySelectList())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-12 col-md-4 col-sm-3 col-lg-2 col-xl-3"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_7__["default"], {
-        id: "IsConvertAll",
-        checked: this.props.isConvertAll,
-        onChange: function onChange(checked) {
-          return _this7.props.changeIsConvertAll(checked);
-        },
-        label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("ConvertAllFiguresToBaseCurrency")
-      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "label-text"
-      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("Username"), " *"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_auto_complete__WEBPACK_IMPORTED_MODULE_6__["default"], {
-        url: _common_lib_constants__WEBPACK_IMPORTED_MODULE_15__["ApiUrl"].CUSTOMER_SEARCH_URL,
-        onSelect: function onSelect(value) {
-          return _this7.props.setUsername(value);
-        },
-        onInput: function onInput(value) {
-          return _this7.props.setUsername(value);
-        },
-        htmlAttributes: {
-          placeholder: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("ExternalIdOrSystemId")
-        }
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "label-text"
-      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("Status")), this._renderStatusSelectList())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "label-text"
-      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("Platform")), this._renderPlatformSelectList())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-12 col-md-2 col-sm-3 col-lg-2 col-xl-2"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "label-text"
-      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("Live")), this._renderLiveStatusSelectList())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-12 col-md-2 col-sm-2 col-lg-2 col-xl-1"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "button-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        type: "button",
-        disabled: !this.isValidModel,
-        className: "btn btn-submit",
-        onClick: this.submit
-      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("Submit")))))));
-    }
-  }, {
-    key: "isValidModel",
-    get: function get() {
-      return !!this.props.username && !!this.props.selectedProduct && !!this.props.selectedStatus && !!this.props.selectedLiveStatus && Object(_jsroot_lib_validationHelper__WEBPACK_IMPORTED_MODULE_17__["validateBaseCurrency"])(this.props.selectedBaseCurrency);
-    }
-  }]);
-
-  return FormFilter;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+}
 
 function mapDispatchToProps(dispatch) {
   return Object(redux__WEBPACK_IMPORTED_MODULE_2__["bindActionCreators"])(_actions_index_js__WEBPACK_IMPORTED_MODULE_10__["ActionCreators"], dispatch);
 }
 
 function mapStateToProps(state) {
-  var requestParam = state.requestParam,
-      dateRange = state.dateRange,
-      selectedProduct = state.selectedProduct,
-      selectedBaseCurrency = state.selectedBaseCurrency,
-      username = state.username,
-      selectedStatus = state.selectedStatus,
-      selectedPlatform = state.selectedPlatform,
-      selectedLiveStatus = state.selectedLiveStatus,
-      isConvertAll = state.isConvertAll,
-      userGuideContent = state.userGuideContent;
+  const {
+    requestParam,
+    dateRange,
+    selectedProduct,
+    selectedBaseCurrency,
+    username,
+    selectedStatus,
+    selectedPlatform,
+    selectedLiveStatus,
+    isConvertAll,
+    userGuideContent
+  } = state;
   return Object.assign({}, {
-    requestParam: requestParam,
-    dateRange: dateRange,
-    selectedProduct: selectedProduct,
-    selectedBaseCurrency: selectedBaseCurrency,
-    username: username,
-    selectedStatus: selectedStatus,
-    selectedPlatform: selectedPlatform,
-    selectedLiveStatus: selectedLiveStatus,
-    isConvertAll: isConvertAll,
-    userGuideContent: userGuideContent
+    requestParam,
+    dateRange,
+    selectedProduct,
+    selectedBaseCurrency,
+    username,
+    selectedStatus,
+    selectedPlatform,
+    selectedLiveStatus,
+    isConvertAll,
+    userGuideContent
   });
 }
 
@@ -6420,23 +5697,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _reducers_index_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../reducers/index.js */ "./www/js/source/reactpages/pages/bettingticketscenter/singlecustomer/reducers/index.js");
 /* harmony import */ var _lib_store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../lib/store */ "./www/js/source/reactpages/lib/store.js");
 /* harmony import */ var _common_lib_constants__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../common/lib/constants */ "./www/js/source/reactpages/pages/bettingticketscenter/common/lib/constants.js");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
 
@@ -6444,39 +5704,25 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-
-var defaultState = Object.assign({}, window.initialState, {
+const defaultState = Object.assign({}, window.initialState, {
   userGuideContent: '',
   requestParam: {
     PageSize: _common_lib_constants__WEBPACK_IMPORTED_MODULE_6__["DefaultPageSize"]
   }
 });
-var store = _lib_store__WEBPACK_IMPORTED_MODULE_5__["default"].createStore(_reducers_index_js__WEBPACK_IMPORTED_MODULE_4__["default"], defaultState);
-
-var App =
-/*#__PURE__*/
-function (_React$Component) {
-  _inherits(App, _React$Component);
-
-  function App(props) {
-    _classCallCheck(this, App);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(App).call(this, props));
+const store = _lib_store__WEBPACK_IMPORTED_MODULE_5__["default"].createStore(_reducers_index_js__WEBPACK_IMPORTED_MODULE_4__["default"], defaultState);
+class App extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
+  constructor(props) {
+    super(props);
   }
 
-  _createClass(App, [{
-    key: "render",
-    value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_3__["Provider"], {
-        store: store
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AppContainer_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null));
-    }
-  }]);
+  render() {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_3__["Provider"], {
+      store: store
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AppContainer_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+  }
 
-  return App;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
-
-
+}
 react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), document.getElementById('app-container'));
 
 /***/ }),
@@ -6537,16 +5783,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "baseCurrencyList", function() { return baseCurrencyList; });
 /* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./www/js/source/reactpages/actions/types.js");
 /* harmony import */ var _lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
+const selectedBaseCurrency = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, {
+  [_actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_SELECTED_BASECURRENCY"]](state, action) {
+    return action.data;
+  }
 
-var selectedBaseCurrency = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, _defineProperty({}, _actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_SELECTED_BASECURRENCY"], function (state, action) {
-  return action.data;
-}));
-var baseCurrencyList = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, _defineProperty({}, _actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_BASECURRENCY_LIST"], function (state, action) {
-  return action.data;
-}));
+});
+const baseCurrencyList = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, {
+  [_actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_BASECURRENCY_LIST"]](state, action) {
+    return action.data;
+  }
+
+});
 
 /***/ }),
 
@@ -6562,13 +5812,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isConvertAll", function() { return isConvertAll; });
 /* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./www/js/source/reactpages/actions/types.js");
 /* harmony import */ var _lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
+const isConvertAll = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, {
+  [_actions_types__WEBPACK_IMPORTED_MODULE_0__["CHANGE_IS_CONVERT_ALL"]](state, action) {
+    return action.data;
+  }
 
-var isConvertAll = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, _defineProperty({}, _actions_types__WEBPACK_IMPORTED_MODULE_0__["CHANGE_IS_CONVERT_ALL"], function (state, action) {
-  return action.data;
-}));
+});
 
 /***/ }),
 
@@ -6584,13 +5835,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dateRange", function() { return dateRange; });
 /* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./www/js/source/reactpages/actions/types.js");
 /* harmony import */ var _lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
+const dateRange = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, {
+  [_actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_DATE_RANGE"]](state, action) {
+    return action.data;
+  }
 
-var dateRange = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, _defineProperty({}, _actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_DATE_RANGE"], function (state, action) {
-  return action.data;
-}));
+});
 
 /***/ }),
 
@@ -6606,13 +5858,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "gridData", function() { return gridData; });
 /* harmony import */ var _lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
 /* harmony import */ var _actions_types_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/types.js */ "./www/js/source/reactpages/actions/types.js");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
+const gridData = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])({}, {
+  [_actions_types_js__WEBPACK_IMPORTED_MODULE_1__["SET_GRID_DATA"]](state, action) {
+    return action.data;
+  }
 
-var gridData = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])({}, _defineProperty({}, _actions_types_js__WEBPACK_IMPORTED_MODULE_1__["SET_GRID_DATA"], function (state, action) {
-  return action.data;
-}));
+});
 
 /***/ }),
 
@@ -6628,13 +5881,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectedLiveStatus", function() { return selectedLiveStatus; });
 /* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./www/js/source/reactpages/actions/types.js");
 /* harmony import */ var _lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
+const selectedLiveStatus = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, {
+  [_actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_SELECTED_LIVESTATUS"]](state, action) {
+    return action.data;
+  }
 
-var selectedLiveStatus = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, _defineProperty({}, _actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_SELECTED_LIVESTATUS"], function (state, action) {
-  return action.data;
-}));
+});
 
 /***/ }),
 
@@ -6650,13 +5904,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isLoading", function() { return isLoading; });
 /* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./www/js/source/reactpages/actions/types.js");
 /* harmony import */ var _lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
+const isLoading = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, {
+  [_actions_types__WEBPACK_IMPORTED_MODULE_0__["TOGGLE_LOADER"]](state, action) {
+    return action.data;
+  }
 
-var isLoading = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, _defineProperty({}, _actions_types__WEBPACK_IMPORTED_MODULE_0__["TOGGLE_LOADER"], function (state, action) {
-  return action.data;
-}));
+});
 
 /***/ }),
 
@@ -6672,13 +5927,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectedPlatform", function() { return selectedPlatform; });
 /* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./www/js/source/reactpages/actions/types.js");
 /* harmony import */ var _lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
+const selectedPlatform = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, {
+  [_actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_SELECTED_PLATFORM"]](state, action) {
+    return action.data;
+  }
 
-var selectedPlatform = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, _defineProperty({}, _actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_SELECTED_PLATFORM"], function (state, action) {
-  return action.data;
-}));
+});
 
 /***/ }),
 
@@ -6694,13 +5950,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectedProduct", function() { return selectedProduct; });
 /* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./www/js/source/reactpages/actions/types.js");
 /* harmony import */ var _lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
+const selectedProduct = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, {
+  [_actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_SELECTED_PRODUCT"]](state, action) {
+    return action.data;
+  }
 
-var selectedProduct = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, _defineProperty({}, _actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_SELECTED_PRODUCT"], function (state, action) {
-  return action.data;
-}));
+});
 
 /***/ }),
 
@@ -6716,13 +5973,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reportTitle", function() { return reportTitle; });
 /* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./www/js/source/reactpages/actions/types.js");
 /* harmony import */ var _lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
+const reportTitle = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, {
+  [_actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_REPORT_TITLE"]](state, action) {
+    return action.data;
+  }
 
-var reportTitle = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, _defineProperty({}, _actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_REPORT_TITLE"], function (state, action) {
-  return action.data;
-}));
+});
 
 /***/ }),
 
@@ -6746,9 +6004,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var requestParam = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, _defineProperty({}, _actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_REQUEST_PARAM"], function (state, action) {
-  return _objectSpread({}, action.data);
-}));
+const requestParam = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, {
+  [_actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_REQUEST_PARAM"]](state, action) {
+    return _objectSpread({}, action.data);
+  }
+
+});
 
 /***/ }),
 
@@ -6764,13 +6025,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectedStatus", function() { return selectedStatus; });
 /* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./www/js/source/reactpages/actions/types.js");
 /* harmony import */ var _lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
+const selectedStatus = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, {
+  [_actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_SELECTED_STATUS"]](state, action) {
+    return action.data;
+  }
 
-var selectedStatus = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, _defineProperty({}, _actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_SELECTED_STATUS"], function (state, action) {
-  return action.data;
-}));
+});
 
 /***/ }),
 
@@ -6786,13 +6048,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "userGuideContent", function() { return userGuideContent; });
 /* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./www/js/source/reactpages/actions/types.js");
 /* harmony import */ var _lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
+const userGuideContent = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, {
+  [_actions_types__WEBPACK_IMPORTED_MODULE_0__["USER_GUIDE_CONTENT"]](state, action) {
+    return action.data;
+  }
 
-var userGuideContent = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, _defineProperty({}, _actions_types__WEBPACK_IMPORTED_MODULE_0__["USER_GUIDE_CONTENT"], function (state, action) {
-  return action.data;
-}));
+});
 
 /***/ }),
 
@@ -6808,13 +6071,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "username", function() { return username; });
 /* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./www/js/source/reactpages/actions/types.js");
 /* harmony import */ var _lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
+const username = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, {
+  [_actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_USERNAME"]](state, action) {
+    return action.data;
+  }
 
-var username = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, _defineProperty({}, _actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_USERNAME"], function (state, action) {
-  return action.data;
-}));
+});
 
 /***/ })
 

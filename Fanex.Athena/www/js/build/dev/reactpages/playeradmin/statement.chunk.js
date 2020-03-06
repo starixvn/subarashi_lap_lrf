@@ -148,7 +148,7 @@
 /******/
 /******/
 /******/ 	// add entry module to deferred list
-/******/ 	deferredModules.push(["./www/js/source/reactpages/Module/PlayerAdmin/statement/components/index.jsx","common"]);
+/******/ 	deferredModules.push(["./www/js/source/reactpages/Module/PlayerAdmin/statement/components/index.jsx","lib/common"]);
 /******/ 	// run deferred modules when ready
 /******/ 	return checkDeferredModules();
 /******/ })
@@ -167,7 +167,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ActionCreators", function() { return ActionCreators; });
 /* harmony import */ var _jsroot_actions_requestParamAction__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/actions/requestParamAction */ "./www/js/source/reactpages/actions/requestParamAction.js");
 
-var ActionCreators = Object.assign({}, _jsroot_actions_requestParamAction__WEBPACK_IMPORTED_MODULE_0__);
+const ActionCreators = Object.assign({}, _jsroot_actions_requestParamAction__WEBPACK_IMPORTED_MODULE_0__);
 
 /***/ }),
 
@@ -190,7 +190,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var AppContainer = function AppContainer(props) {
+const AppContainer = props => {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_1__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormFilter__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DataContent__WEBPACK_IMPORTED_MODULE_3__["default"], null));
 };
 /* harmony default export */ __webpack_exports__["default"] = (react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(AppContainer));
@@ -214,123 +214,89 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../lib/service */ "./www/js/source/reactpages/Module/PlayerAdmin/statement/lib/service.js");
 /* harmony import */ var _jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/components/NoDataTitle */ "./www/js/source/reactpages/components/NoDataTitle.jsx");
 /* harmony import */ var _jsroot_components_utils_timer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/components/utils/timer */ "./www/js/source/reactpages/components/utils/timer.js");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
 
 
 
 
-
-var MinimumContentHeight = 200;
-var DataContent =
-/*#__PURE__*/
-function (_PureComponent) {
-  _inherits(DataContent, _PureComponent);
-
-  function DataContent(props) {
-    var _this;
-
-    _classCallCheck(this, DataContent);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(DataContent).call(this, props));
-    _this.contentRef = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
-    _this.state = {
+const MinimumContentHeight = 200;
+class DataContent extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
+  constructor(props) {
+    super(props);
+    this.contentRef = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
+    this.state = {
       src: '',
       height: 0
     };
-    _this.resize = _jsroot_components_utils_timer__WEBPACK_IMPORTED_MODULE_5__["default"].debounce(_this._handleResize, 15).bind(_assertThisInitialized(_this));
-    return _this;
+    this.resize = _jsroot_components_utils_timer__WEBPACK_IMPORTED_MODULE_5__["default"].debounce(this._handleResize, 15).bind(this);
   }
 
-  _createClass(DataContent, [{
-    key: "componentDidUpdate",
-    value: function componentDidUpdate(prevProps, prevState) {
-      if (prevProps.requestParam !== this.props.requestParam) {
-        this._getUrl(this.props.requestParam);
-      }
-    }
-  }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.requestParam !== this.props.requestParam) {
       this._getUrl(this.props.requestParam);
-
-      this._handleResize();
-
-      window.addEventListener('resize', this.resize);
     }
-  }, {
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      window.removeEventListener('resize', this.resize);
-    }
-  }, {
-    key: "_handleResize",
-    value: function _handleResize(event) {
-      event && event.preventDefault();
+  }
 
-      if (this.contentRef.current) {
-        var height = window.innerHeight - this.contentRef.current.getBoundingClientRect().top - 20;
-        this.setState({
-          height: height > MinimumContentHeight ? height : MinimumContentHeight
-        });
-      }
-    }
-  }, {
-    key: "_updateSrc",
-    value: function _updateSrc(src) {
+  componentDidMount() {
+    this._getUrl(this.props.requestParam);
+
+    this._handleResize();
+
+    window.addEventListener('resize', this.resize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.resize);
+  }
+
+  _handleResize(event) {
+    event && event.preventDefault();
+
+    if (this.contentRef.current) {
+      const height = window.innerHeight - this.contentRef.current.getBoundingClientRect().top - 20;
       this.setState({
-        src: src
+        height: height > MinimumContentHeight ? height : MinimumContentHeight
       });
     }
-  }, {
-    key: "_getUrl",
-    value: function _getUrl(param) {
-      _lib_service__WEBPACK_IMPORTED_MODULE_3__["default"].getData(param, this._updateSrc.bind(this));
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this$state = this.state,
-          src = _this$state.src,
-          height = _this$state.height;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        style: {
-          height: height
-        },
-        ref: this.contentRef
-      }, src ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("iframe", {
-        frameBorder: "0",
-        src: src,
-        width: "100%",
-        height: "100%"
-      }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
-    }
-  }]);
+  }
 
-  return DataContent;
-}(react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"]);
+  _updateSrc(src) {
+    this.setState({
+      src: src
+    });
+  }
+
+  _getUrl(param) {
+    _lib_service__WEBPACK_IMPORTED_MODULE_3__["default"].getData(param, this._updateSrc.bind(this));
+  }
+
+  render() {
+    const {
+      src,
+      height
+    } = this.state;
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      style: {
+        height: height
+      },
+      ref: this.contentRef
+    }, src ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("iframe", {
+      frameBorder: "0",
+      src: src,
+      width: "100%",
+      height: "100%"
+    }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
+  }
+
+}
 
 function mapStateToProps(state) {
-  var requestParam = state.requestParam;
+  const {
+    requestParam
+  } = state;
   return Object.assign({}, {
-    requestParam: requestParam
+    requestParam
   });
 }
 
@@ -356,13 +322,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
 /* harmony import */ var _jsroot_components_month_picker_index__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/components/month-picker/index */ "./www/js/source/reactpages/components/month-picker/index.js");
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
@@ -371,29 +330,24 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
-var FormFilter = function FormFilter(props) {
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
+const FormFilter = props => {
+  const [dateRange, setDateRange] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
     fromDate: props.requestParam.fromDate,
     toDate: props.requestParam.toDate
-  }),
-      _useState2 = _slicedToArray(_useState, 2),
-      dateRange = _useState2[0],
-      setDateRange = _useState2[1];
+  });
+  const dateConstraint = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__["default"].dateConstraint;
 
-  var dateConstraint = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__["default"].dateConstraint;
-
-  var onSubmit = function onSubmit() {
-    var param = Object.assign({}, props.requestParam, dateRange);
+  const onSubmit = () => {
+    const param = Object.assign({}, props.requestParam, dateRange);
     props.setRequestParam(param);
   };
 
-  var onChange = function onChange(dateRange) {
+  const onChange = dateRange => {
     setDateRange(dateRange);
   };
 
-  var renderMonthPicker = function renderMonthPicker() {
-    var monthOption = {
+  const renderMonthPicker = () => {
+    const monthOption = {
       label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('ViewDataInMonth')
     };
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_month_picker_index__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -435,16 +389,20 @@ var FormFilter = function FormFilter(props) {
 };
 
 function mapDispatchToProps(dispatch) {
-  var setRequestParam = _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"].setRequestParam;
+  const {
+    setRequestParam
+  } = _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"];
   return Object(redux__WEBPACK_IMPORTED_MODULE_3__["bindActionCreators"])({
-    setRequestParam: setRequestParam
+    setRequestParam
   }, dispatch);
 }
 
 function mapStateToProps(state) {
-  var requestParam = state.requestParam;
+  const {
+    requestParam
+  } = state;
   return Object.assign({}, {
-    requestParam: requestParam
+    requestParam
   });
 }
 
@@ -476,11 +434,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var defaultState = Object.assign({}, window.initialState, {
+const defaultState = Object.assign({}, window.initialState, {
   isLoading: false
 });
-var store = _jsroot_lib_store__WEBPACK_IMPORTED_MODULE_5__["default"].createStore(_reducers_index_js__WEBPACK_IMPORTED_MODULE_4__["default"], defaultState);
-var App = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function () {
+const store = _jsroot_lib_store__WEBPACK_IMPORTED_MODULE_5__["default"].createStore(_reducers_index_js__WEBPACK_IMPORTED_MODULE_4__["default"], defaultState);
+const App = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(() => {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_3__["Provider"], {
     store: store
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AppContainer_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null));
@@ -502,41 +460,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/DataService */ "./www/js/source/reactpages/lib/DataService.js");
 /* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
 
-
-var RelativeUrl = 'PlayerStatement/GetStatementUrl';
-
-var Service =
-/*#__PURE__*/
-function () {
-  function Service() {
-    _classCallCheck(this, Service);
+const RelativeUrl = 'PlayerStatement/GetStatementUrl';
+class Service {
+  static getData(param, callBack) {
+    const url = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl(RelativeUrl);
+    _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_0__["default"].postData(url, param).then(response => {
+      callBack && callBack(response.data);
+    }).catch(error => {
+      console.log(error.message);
+      callBack && callBack(null);
+    });
   }
 
-  _createClass(Service, null, [{
-    key: "getData",
-    value: function getData(param, callBack) {
-      var url = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl(RelativeUrl);
-      _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_0__["default"].postData(url, param).then(function (response) {
-        callBack && callBack(response.data);
-      })["catch"](function (error) {
-        console.log(error.message);
-        callBack && callBack(null);
-      });
-    }
-  }]);
-
-  return Service;
-}();
-
-
+}
 
 /***/ }),
 
@@ -569,7 +508,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setRequestParam", function() { return setRequestParam; });
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/actions/types.js");
 
-var setRequestParam = function setRequestParam(data) {
+const setRequestParam = data => {
   return {
     type: _types__WEBPACK_IMPORTED_MODULE_0__["SET_REQUEST_PARAM"],
     data: data
@@ -606,49 +545,49 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_REQUEST_PARAM", function() { return SET_REQUEST_PARAM; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_REPORT_TITLE", function() { return SET_REPORT_TITLE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_PAGING_OPTION", function() { return SET_PAGING_OPTION; });
-var FETCH_DATA = 'FETCH_DATA';
-var SET_GRID_DATA = "SET_GRID_DATA";
+const FETCH_DATA = 'FETCH_DATA';
+const SET_GRID_DATA = "SET_GRID_DATA";
 /* Product */
 
-var SET_SELECTED_PRODUCT = "SET_SELECTED_PRODUCT";
+const SET_SELECTED_PRODUCT = "SET_SELECTED_PRODUCT";
 /* Base Currency */
 
-var SET_SELECTED_BASECURRENCY = "SET_SELECTED_BASECURRENCY";
-var SET_BASECURRENCY_LIST = "SET_BASECURRENCY_LIST";
+const SET_SELECTED_BASECURRENCY = "SET_SELECTED_BASECURRENCY";
+const SET_BASECURRENCY_LIST = "SET_BASECURRENCY_LIST";
 /* Currency */
 
-var SET_SELECTED_CURRENCY = "SET_SELECTED_CURRENCY";
+const SET_SELECTED_CURRENCY = "SET_SELECTED_CURRENCY";
 /* Loader */
 
-var TOGGLE_LOADER = "TOGGLE_LOADER";
+const TOGGLE_LOADER = "TOGGLE_LOADER";
 /* Exclude Test Data */
 
-var CHANGE_IS_EXCLUDE_TEST = "CHANGE_IS_EXCLUDE_TEST";
+const CHANGE_IS_EXCLUDE_TEST = "CHANGE_IS_EXCLUDE_TEST";
 /* User mini guide */
 
-var USER_GUIDE_CONTENT = "USER_GUIDE_CONTENT;";
+const USER_GUIDE_CONTENT = "USER_GUIDE_CONTENT;";
 /* Date range */
 
-var SET_DATE_RANGE = 'SET_DATE_RANGE';
-var GET_DATE_CONSTRAINT = 'GET_DATE_CONSTRAINT';
+const SET_DATE_RANGE = 'SET_DATE_RANGE';
+const GET_DATE_CONSTRAINT = 'GET_DATE_CONSTRAINT';
 /* Convert all figures to base currency */
 
-var CHANGE_IS_CONVERT_ALL = "CHANGE_IS_CONVERT_ALL";
+const CHANGE_IS_CONVERT_ALL = "CHANGE_IS_CONVERT_ALL";
 /* Status */
 
-var SET_SELECTED_STATUS = "SET_SELECTED_STATUS";
+const SET_SELECTED_STATUS = "SET_SELECTED_STATUS";
 /* Platform  */
 
-var SET_SELECTED_PLATFORM = "SET_SELECTED_PLATFORM";
+const SET_SELECTED_PLATFORM = "SET_SELECTED_PLATFORM";
 /* Live Status  */
 
-var SET_SELECTED_LIVESTATUS = "SET_SELECTED_LIVESTATUS";
-var SET_USERNAME = "SET_USERNAME";
-var SET_REQUEST_PARAM = "SET_REQUEST_PARAM";
-var SET_REPORT_TITLE = "SET_REPORT_TITLE";
+const SET_SELECTED_LIVESTATUS = "SET_SELECTED_LIVESTATUS";
+const SET_USERNAME = "SET_USERNAME";
+const SET_REQUEST_PARAM = "SET_REQUEST_PARAM";
+const SET_REPORT_TITLE = "SET_REPORT_TITLE";
 /* Live Status  */
 
-var SET_PAGING_OPTION = 'SET_PAGING_OPTION';
+const SET_PAGING_OPTION = 'SET_PAGING_OPTION';
 
 /***/ }),
 
@@ -667,8 +606,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var NoDataTitle = function NoDataTitle(_ref) {
-  var title = _ref.title;
+const NoDataTitle = ({
+  title
+}) => {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "no-info-row center-align",
     dangerouslySetInnerHTML: {
@@ -697,138 +637,109 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
 
-var wrapperClasses = {
+const wrapperClasses = {
   OVERLAY: "overlay",
   OVERLAY_OPEN: "overlay-open"
 };
+class Overlay extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+  constructor(props) {
+    super(props);
 
-var Overlay =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(Overlay, _Component);
-
-  function Overlay(props) {
-    var _this;
-
-    _classCallCheck(this, Overlay);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Overlay).call(this, props));
-
-    _defineProperty(_assertThisInitialized(_this), "_unRegisterEvents", function () {
-      var closeOnOutsideClick = _this.props.closeOnOutsideClick;
+    _defineProperty(this, "_unRegisterEvents", () => {
+      const {
+        closeOnOutsideClick
+      } = this.props;
 
       if (closeOnOutsideClick) {
-        document.removeEventListener('click', _this._handleClickOutSide);
+        document.removeEventListener('click', this._handleClickOutSide);
       }
     });
 
-    _defineProperty(_assertThisInitialized(_this), "_handleClickOutSide", function (event) {
-      var clickOutside = _this.containerElement && !_this.containerElement.contains(event.target);
+    _defineProperty(this, "_handleClickOutSide", event => {
+      const clickOutside = this.containerElement && !this.containerElement.contains(event.target);
 
-      if (clickOutside && _this.state.isOpening) {
-        _this._close();
+      if (clickOutside && this.state.isOpening) {
+        this._close();
       }
     });
 
-    _this.containerElement = null;
-    _this.refHandlers = {
-      container: function container(ref) {
-        _this.containerElement = ref;
+    this.containerElement = null;
+    this.refHandlers = {
+      container: ref => {
+        this.containerElement = ref;
       }
     };
-    _this.state = {
-      isOpening: _this.props.isOpening
+    this.state = {
+      isOpening: this.props.isOpening
     };
-    return _this;
   }
 
-  _createClass(Overlay, [{
-    key: "componentDidUpdate",
-    value: function componentDidUpdate(prevProps, prevState) {
-      var _this2 = this;
-
-      if (this.props.isOpening !== prevProps.isOpening) {
-        var onOpen = this.props.onOpen;
-        this.props.isOpening && onOpen && onOpen();
-        this.setState({
-          isOpening: this.props.isOpening
-        });
-        window.setTimeout(function () {
-          if (_this2.props.isOpening) {
-            _this2._registerEvents();
-          } else {
-            _this2._unRegisterEvents();
-          }
-        }, 0);
-      }
-    }
-  }, {
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      this._unRegisterEvents();
-    }
-  }, {
-    key: "_registerEvents",
-    value: function _registerEvents() {
-      var closeOnOutsideClick = this.props.closeOnOutsideClick;
-
-      if (closeOnOutsideClick) {
-        document.addEventListener('click', this._handleClickOutSide);
-      }
-    }
-  }, {
-    key: "_close",
-    value: function _close() {
-      var onClose = this.props.onClose;
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.isOpening !== prevProps.isOpening) {
+      const {
+        onOpen
+      } = this.props;
+      this.props.isOpening && onOpen && onOpen();
       this.setState({
-        isOpening: false
-      }, function () {
-        return onClose && onClose();
+        isOpening: this.props.isOpening
       });
+      window.setTimeout(() => {
+        if (this.props.isOpening) {
+          this._registerEvents();
+        } else {
+          this._unRegisterEvents();
+        }
+      }, 0);
     }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this$props = this.props,
-          className = _this$props.className,
-          children = _this$props.children;
-      var mergedClassName = classnames__WEBPACK_IMPORTED_MODULE_2___default()(wrapperClasses.OVERLAY, _defineProperty({}, wrapperClasses.OVERLAY_OPEN, this.state.isOpening), className);
-      var style = {
-        display: this.state.isOpening ? "block" : "none"
-      };
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: mergedClassName,
-        style: style,
-        ref: this.refHandlers.container
-      }, children);
-    }
-  }]);
+  }
 
-  return Overlay;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+  componentWillUnmount() {
+    this._unRegisterEvents();
+  }
+
+  _registerEvents() {
+    const {
+      closeOnOutsideClick
+    } = this.props;
+
+    if (closeOnOutsideClick) {
+      document.addEventListener('click', this._handleClickOutSide);
+    }
+  }
+
+  _close() {
+    const {
+      onClose
+    } = this.props;
+    this.setState({
+      isOpening: false
+    }, () => onClose && onClose());
+  }
+
+  render() {
+    const {
+      className,
+      children
+    } = this.props;
+    const mergedClassName = classnames__WEBPACK_IMPORTED_MODULE_2___default()(wrapperClasses.OVERLAY, {
+      [wrapperClasses.OVERLAY_OPEN]: this.state.isOpening
+    }, className);
+    const style = {
+      display: this.state.isOpening ? "block" : "none"
+    };
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: mergedClassName,
+      style: style,
+      ref: this.refHandlers.container
+    }, children);
+  }
+
+}
 
 _defineProperty(Overlay, "propTypes", {
   closeOnOutsideClick: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
@@ -841,8 +752,6 @@ _defineProperty(Overlay, "defaultProps", {
   closeOnOutsideClick: true,
   isOpening: false
 });
-
-
 
 /***/ }),
 
@@ -860,121 +769,74 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Overlay__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Overlay */ "./www/js/source/reactpages/components/Overlay.jsx");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
 
 
-var Day =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(Day, _Component);
-
-  function Day(props, context) {
-    var _this;
-
-    _classCallCheck(this, Day);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Day).call(this, props, context));
-    _this.state = {
+class Day extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
       showDateDrop: false
     };
-    return _this;
   }
 
-  _createClass(Day, [{
-    key: "_renderOption",
-    value: function _renderOption(min, max, value) {
-      var _this2 = this;
+  _renderOption(min, max, value) {
+    let options = [];
 
-      var options = [];
-
-      var _loop = function _loop(i) {
-        options.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          key: i,
-          onClick: function onClick() {
-            return _this2._onChange(i);
-          }
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-          href: "javascript:;"
-        }, i)));
-      };
-
-      for (var i = min; i <= max; i++) {
-        _loop(i);
-      }
-
-      return options;
-    }
-  }, {
-    key: "_onChange",
-    value: function _onChange(value) {
-      this.props.onChange(parseInt(value, 10));
-      this.setState({
-        showDateDrop: false
-      });
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this3 = this;
-
-      var value = this.props.value;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "date"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "label-text"
-      }, this.props.label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "date-content"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "date-container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "date-picked",
-        onClick: function onClick() {
-          return _this3.setState({
-            showDateDrop: true
-          });
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "date-label"
-      }, value), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    for (let i = min; i <= max; i++) {
+      options.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        key: i,
+        onClick: () => this._onChange(i)
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         href: "javascript:;"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "arrow-icon down-arrow"
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Overlay__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        isOpening: this.state.showDateDrop,
-        onClose: function onClose() {
-          return _this3.setState({
-            showDateDrop: false
-          });
-        }
-      }, this.state.showDateDrop && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "date-selection-container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this._renderOption(this.props.min, this.props.max, value)))))));
+      }, i)));
     }
-  }]);
 
-  return Day;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+    return options;
+  }
+
+  _onChange(value) {
+    this.props.onChange(parseInt(value, 10));
+    this.setState({
+      showDateDrop: false
+    });
+  }
+
+  render() {
+    const value = this.props.value;
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "date"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      className: "label-text"
+    }, this.props.label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "date-content"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "date-container"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "date-picked",
+      onClick: () => this.setState({
+        showDateDrop: true
+      })
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      className: "date-label"
+    }, value), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      href: "javascript:;"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      className: "arrow-icon down-arrow"
+    }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Overlay__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      isOpening: this.state.showDateDrop,
+      onClose: () => this.setState({
+        showDateDrop: false
+      })
+    }, this.state.showDateDrop && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "date-selection-container"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this._renderOption(this.props.min, this.props.max, value)))))));
+  }
+
+}
 
 _defineProperty(Day, "propTypes", {
   label: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
@@ -985,7 +847,7 @@ _defineProperty(Day, "propTypes", {
 });
 
 _defineProperty(Day, "defaultProps", {
-  onChange: function onChange() {}
+  onChange: function () {}
 });
 
 /* harmony default export */ __webpack_exports__["default"] = (Day);
@@ -1007,24 +869,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_langHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
@@ -1032,221 +876,178 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var Month =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(Month, _Component);
-
-  function Month(props, context) {
-    var _this;
-
-    _classCallCheck(this, Month);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Month).call(this, props, context));
-    var shortMonths = _lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getResources(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']);
-    var fullMonths = _lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getResources(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']);
-    _this.shortMonths = shortMonths;
-    _this.fullMonths = fullMonths;
-    _this.state = {
+class Month extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+  constructor(props, context) {
+    super(props, context);
+    const shortMonths = _lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getResources(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']);
+    const fullMonths = _lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getResources(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']);
+    this.shortMonths = shortMonths;
+    this.fullMonths = fullMonths;
+    this.state = {
       expandYear: props.value.year,
       showMonthDrop: false
     };
-    return _this;
   }
 
-  _createClass(Month, [{
-    key: "_onChange",
-    value: function _onChange(value) {
-      this.props.onChange(value);
+  _onChange(value) {
+    this.props.onChange(value);
+    this.setState({
+      showMonthDrop: false
+    });
+  }
+
+  _formatString(month, year) {
+    return this.shortMonths[month] + ' ' + year;
+  }
+
+  _renderOption(min, max, value) {
+    let options = [];
+
+    for (let i = min.year; i <= max.year; i++) {
+      if (i === this.state.expandYear) {
+        options.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          key: i,
+          className: "year",
+          style: {
+            fontWeight: 'bold'
+          }
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+          href: "javascript:;"
+        }, i)));
+        const minMonth = i === min.year ? min.month : 0;
+        const maxMonth = i === max.year ? max.month : 11;
+
+        for (let j = minMonth; j <= maxMonth; j++) {
+          const isSelected = i === value.year && j === value.month;
+          const valueItem = {
+            year: i,
+            month: j
+          };
+          options.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+            key: `${j}${i}`,
+            className: "month-option",
+            onClick: () => this._onChange(valueItem)
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+            href: "javascript:;",
+            className: `${isSelected ? 'selected' : ''}`
+          }, this.fullMonths[j])));
+        }
+      } else {
+        options.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          key: i,
+          className: "year",
+          onClick: () => this.setState({
+            expandYear: i
+          })
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+          href: "javascript:;"
+        }, i)));
+      }
+    }
+
+    return options;
+  }
+
+  _getNextMonth() {
+    let month = this.props.value.month + 1;
+    let year = this.props.value.year;
+
+    if (month > 11) {
+      month = 0;
+      year += 1;
+    }
+
+    return {
+      year: year,
+      month: month
+    };
+  }
+
+  _getPrevMonth() {
+    let month = this.props.value.month - 1;
+    let year = this.props.value.year;
+
+    if (month < 0) {
+      month = 11;
+      year -= 1;
+    }
+
+    return {
+      year: year,
+      month: month
+    };
+  }
+
+  _checkValidMonth(month, year) {
+    const {
+      min,
+      max
+    } = this.props;
+    return year > min.year && year < max.year || year === min.year && month >= min.month || year === max.year && month <= max.month;
+  }
+
+  _goToMonth(e, value) {
+    e.preventDefault();
+
+    if (value.year !== this.state.expandYear) {
       this.setState({
-        showMonthDrop: false
+        expandYear: value.year
       });
     }
-  }, {
-    key: "_formatString",
-    value: function _formatString(month, year) {
-      return this.shortMonths[month] + ' ' + year;
-    }
-  }, {
-    key: "_renderOption",
-    value: function _renderOption(min, max, value) {
-      var _this2 = this;
 
-      var options = [];
+    this.props.onChange(value);
+  }
 
-      var _loop = function _loop(i) {
-        if (i === _this2.state.expandYear) {
-          options.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-            key: i,
-            className: "year",
-            style: {
-              fontWeight: 'bold'
-            }
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-            href: "javascript:;"
-          }, i)));
-          var minMonth = i === min.year ? min.month : 0;
-          var maxMonth = i === max.year ? max.month : 11;
+  render() {
+    const nexMonth = this._getNextMonth();
 
-          var _loop2 = function _loop2(j) {
-            var isSelected = i === value.year && j === value.month;
-            var valueItem = {
-              year: i,
-              month: j
-            };
-            options.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-              key: "".concat(j).concat(i),
-              className: "month-option",
-              onClick: function onClick() {
-                return _this2._onChange(valueItem);
-              }
-            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-              href: "javascript:;",
-              className: "".concat(isSelected ? 'selected' : '')
-            }, _this2.fullMonths[j])));
-          };
+    const preMonth = this._getPrevMonth();
 
-          for (var j = minMonth; j <= maxMonth; j++) {
-            _loop2(j);
-          }
-        } else {
-          options.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-            key: i,
-            className: "year",
-            onClick: function onClick() {
-              return _this2.setState({
-                expandYear: i
-              });
-            }
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-            href: "javascript:;"
-          }, i)));
-        }
-      };
+    const validNexMonth = this._checkValidMonth(nexMonth.month, nexMonth.year);
 
-      for (var i = min.year; i <= max.year; i++) {
-        _loop(i);
-      }
+    const validPreMonth = this._checkValidMonth(preMonth.month, preMonth.year);
 
-      return options;
-    }
-  }, {
-    key: "_getNextMonth",
-    value: function _getNextMonth() {
-      var month = this.props.value.month + 1;
-      var year = this.props.value.year;
+    const value = this.props.value;
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "month"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      className: "label-text"
+    }, this.props.label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "month-content"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "month-container"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "month-picked"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      href: "javascript:;",
+      className: "prev",
+      onClick: e => validPreMonth && this._goToMonth(e, preMonth)
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      className: `arrow-icon left-arrow ${validPreMonth ? '' : 'disable'}`
+    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      className: "month-label",
+      onClick: () => this.setState({
+        showMonthDrop: true
+      })
+    }, this._formatString(value.month, value.year)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      href: "javascript:;",
+      className: "next",
+      onClick: e => validNexMonth && this._goToMonth(e, nexMonth)
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      className: `arrow-icon right-arrow ${validNexMonth ? '' : 'disable'}`
+    }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Overlay__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      isOpening: this.state.showMonthDrop,
+      onClose: () => this.setState({
+        showMonthDrop: false
+      })
+    }, this.state.showMonthDrop && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "month-selection-container"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+      className: "month-selection"
+    }, this._renderOption(this.props.min, this.props.max, value)))))));
+  }
 
-      if (month > 11) {
-        month = 0;
-        year += 1;
-      }
-
-      return {
-        year: year,
-        month: month
-      };
-    }
-  }, {
-    key: "_getPrevMonth",
-    value: function _getPrevMonth() {
-      var month = this.props.value.month - 1;
-      var year = this.props.value.year;
-
-      if (month < 0) {
-        month = 11;
-        year -= 1;
-      }
-
-      return {
-        year: year,
-        month: month
-      };
-    }
-  }, {
-    key: "_checkValidMonth",
-    value: function _checkValidMonth(month, year) {
-      var _this$props = this.props,
-          min = _this$props.min,
-          max = _this$props.max;
-      return year > min.year && year < max.year || year === min.year && month >= min.month || year === max.year && month <= max.month;
-    }
-  }, {
-    key: "_goToMonth",
-    value: function _goToMonth(e, value) {
-      e.preventDefault();
-
-      if (value.year !== this.state.expandYear) {
-        this.setState({
-          expandYear: value.year
-        });
-      }
-
-      this.props.onChange(value);
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this3 = this;
-
-      var nexMonth = this._getNextMonth();
-
-      var preMonth = this._getPrevMonth();
-
-      var validNexMonth = this._checkValidMonth(nexMonth.month, nexMonth.year);
-
-      var validPreMonth = this._checkValidMonth(preMonth.month, preMonth.year);
-
-      var value = this.props.value;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "month"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "label-text"
-      }, this.props.label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "month-content"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "month-container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "month-picked"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "javascript:;",
-        className: "prev",
-        onClick: function onClick(e) {
-          return validPreMonth && _this3._goToMonth(e, preMonth);
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "arrow-icon left-arrow ".concat(validPreMonth ? '' : 'disable')
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "month-label",
-        onClick: function onClick() {
-          return _this3.setState({
-            showMonthDrop: true
-          });
-        }
-      }, this._formatString(value.month, value.year)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "javascript:;",
-        className: "next",
-        onClick: function onClick(e) {
-          return validNexMonth && _this3._goToMonth(e, nexMonth);
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "arrow-icon right-arrow ".concat(validNexMonth ? '' : 'disable')
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Overlay__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        isOpening: this.state.showMonthDrop,
-        onClose: function onClose() {
-          return _this3.setState({
-            showMonthDrop: false
-          });
-        }
-      }, this.state.showMonthDrop && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "month-selection-container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "month-selection"
-      }, this._renderOption(this.props.min, this.props.max, value)))))));
-    }
-  }]);
-
-  return Month;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+}
 
 _defineProperty(Month, "propTypes", {
   label: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
@@ -1258,7 +1059,7 @@ _defineProperty(Month, "propTypes", {
 
 _defineProperty(Month, "defaultProps", {
   label: 'View data in month',
-  onChange: function onChange() {}
+  onChange: function () {}
 });
 
 /* harmony default export */ __webpack_exports__["default"] = (Month);
@@ -1282,25 +1083,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -1310,137 +1093,120 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var MonthPicker =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(MonthPicker, _Component);
+class MonthPicker extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+  constructor(props) {
+    super(props);
 
-  function MonthPicker(props) {
-    var _this;
-
-    _classCallCheck(this, MonthPicker);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(MonthPicker).call(this, props));
-
-    _defineProperty(_assertThisInitialized(_this), "_onMonthChange", function (value) {
-      var minDate = value.year === _this.min.year && value.month === _this.min.month ? _this.min.date : 1;
-      var maxDate = value.year === _this.max.year && value.month === _this.max.month ? _this.max.date : moment__WEBPACK_IMPORTED_MODULE_3___default()({
+    _defineProperty(this, "_onMonthChange", value => {
+      const minDate = value.year === this.min.year && value.month === this.min.month ? this.min.date : 1;
+      const maxDate = value.year === this.max.year && value.month === this.max.month ? this.max.date : moment__WEBPACK_IMPORTED_MODULE_3___default()({
         year: value.year,
         month: value.month
       }).daysInMonth();
-
-      _this.setState({
+      this.setState({
         month: value,
         minDate: minDate,
         maxDate: maxDate,
         from: minDate,
         to: maxDate
       });
-
-      _this.props.onChange({
-        fromDate: _this._formatDate(minDate, value.month, value.year),
-        toDate: _this._formatDate(maxDate, value.month, value.year)
+      this.props.onChange({
+        fromDate: this._formatDate(minDate, value.month, value.year),
+        toDate: this._formatDate(maxDate, value.month, value.year)
       });
     });
 
-    _defineProperty(_assertThisInitialized(_this), "_onFromDateChange", function (value) {
-      _this.setState({
+    _defineProperty(this, "_onFromDateChange", value => {
+      this.setState({
         from: value
       });
-
-      _this.props.onChange({
-        fromDate: _this._formatDate(value, _this.state.month.month, _this.state.month.year),
-        toDate: _this._formatDate(_this.state.to, _this.state.month.month, _this.state.month.year)
+      this.props.onChange({
+        fromDate: this._formatDate(value, this.state.month.month, this.state.month.year),
+        toDate: this._formatDate(this.state.to, this.state.month.month, this.state.month.year)
       });
     });
 
-    _defineProperty(_assertThisInitialized(_this), "_onToDateChange", function (value) {
-      _this.setState({
+    _defineProperty(this, "_onToDateChange", value => {
+      this.setState({
         to: value
       });
-
-      _this.props.onChange({
-        fromDate: _this._formatDate(_this.state.from, _this.state.month.month, _this.state.month.year),
-        toDate: _this._formatDate(value, _this.state.month.month, _this.state.month.year)
+      this.props.onChange({
+        fromDate: this._formatDate(this.state.from, this.state.month.month, this.state.month.year),
+        toDate: this._formatDate(value, this.state.month.month, this.state.month.year)
       });
     });
 
-    var format = 'MM/DD/YYYY';
+    const format = 'MM/DD/YYYY';
 
-    var _minDate = moment__WEBPACK_IMPORTED_MODULE_3___default()(props.minDate, format);
+    const _minDate = moment__WEBPACK_IMPORTED_MODULE_3___default()(props.minDate, format);
 
-    var _maxDate = moment__WEBPACK_IMPORTED_MODULE_3___default()(props.maxDate, format);
+    const _maxDate = moment__WEBPACK_IMPORTED_MODULE_3___default()(props.maxDate, format);
 
-    var min = {
+    const min = {
       year: _minDate.year(),
       month: _minDate.month(),
       date: _minDate.date()
     };
-    var max = {
+    const max = {
       year: _maxDate.year(),
       month: _maxDate.month(),
       date: _maxDate.date()
     };
-    _this.min = min;
-    _this.max = max;
-    var fromDate = moment__WEBPACK_IMPORTED_MODULE_3___default()(props.fromDate, format);
-    var toDate = moment__WEBPACK_IMPORTED_MODULE_3___default()(props.toDate, format);
-    var currentMonth = {
+    this.min = min;
+    this.max = max;
+    const fromDate = moment__WEBPACK_IMPORTED_MODULE_3___default()(props.fromDate, format);
+    const toDate = moment__WEBPACK_IMPORTED_MODULE_3___default()(props.toDate, format);
+    const currentMonth = {
       year: fromDate.year(),
       month: fromDate.month()
     };
-    _this.state = {
+    this.state = {
       month: currentMonth,
       from: fromDate.date(),
       to: toDate.date()
     };
-    return _this;
   }
 
-  _createClass(MonthPicker, [{
-    key: "_formatDate",
-    value: function _formatDate(date, month, year) {
-      return "".concat(month < 9 ? '0' + (month + 1) : month + 1, "/").concat(date < 10 ? '0' + date : date, "/").concat(year);
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this$state = this.state,
-          month = _this$state.month,
-          from = _this$state.from,
-          to = _this$state.to;
-      var daysInMonth = moment__WEBPACK_IMPORTED_MODULE_3___default()({
-        year: month.year,
-        month: month.month
-      }).daysInMonth();
-      var startDate = month.year === this.min.year && month.month === this.min.month ? this.min.date : 1;
-      var endDate = month.year === this.max.year && month.month === this.max.month ? this.max.date : daysInMonth;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "month-picker ".concat(this.props.showDate ? '' : 'month-only')
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Month__WEBPACK_IMPORTED_MODULE_1__["default"], _extends({
-        min: this.min,
-        max: this.max,
-        value: month
-      }, this.props.monthOption, {
-        onChange: this._onMonthChange
-      })), this.props.showDate && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Day__WEBPACK_IMPORTED_MODULE_2__["default"], _extends({
-        min: startDate,
-        max: endDate > to ? to : endDate,
-        value: from
-      }, this.props.fromDateOption, {
-        onChange: this._onFromDateChange
-      })), this.props.showDate && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Day__WEBPACK_IMPORTED_MODULE_2__["default"], _extends({
-        min: startDate < from ? from : startDate,
-        max: endDate,
-        value: to
-      }, this.props.toDateOption, {
-        onChange: this._onToDateChange
-      })));
-    }
-  }]);
+  _formatDate(date, month, year) {
+    return `${month < 9 ? '0' + (month + 1) : month + 1}/${date < 10 ? '0' + date : date}/${year}`;
+  }
 
-  return MonthPicker;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+  render() {
+    const {
+      month,
+      from,
+      to
+    } = this.state;
+    const daysInMonth = moment__WEBPACK_IMPORTED_MODULE_3___default()({
+      year: month.year,
+      month: month.month
+    }).daysInMonth();
+    const startDate = month.year === this.min.year && month.month === this.min.month ? this.min.date : 1;
+    const endDate = month.year === this.max.year && month.month === this.max.month ? this.max.date : daysInMonth;
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: `month-picker ${this.props.showDate ? '' : 'month-only'}`
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Month__WEBPACK_IMPORTED_MODULE_1__["default"], _extends({
+      min: this.min,
+      max: this.max,
+      value: month
+    }, this.props.monthOption, {
+      onChange: this._onMonthChange
+    })), this.props.showDate && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Day__WEBPACK_IMPORTED_MODULE_2__["default"], _extends({
+      min: startDate,
+      max: endDate > to ? to : endDate,
+      value: from
+    }, this.props.fromDateOption, {
+      onChange: this._onFromDateChange
+    })), this.props.showDate && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Day__WEBPACK_IMPORTED_MODULE_2__["default"], _extends({
+      min: startDate < from ? from : startDate,
+      max: endDate,
+      value: to
+    }, this.props.toDateOption, {
+      onChange: this._onToDateChange
+    })));
+  }
+
+}
 
 _defineProperty(MonthPicker, "propTypes", {
   monthOption: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.object.isRequired,
@@ -1454,7 +1220,7 @@ _defineProperty(MonthPicker, "propTypes", {
 
 _defineProperty(MonthPicker, "defaultProps", {
   label: 'View data in month',
-  onChange: function onChange() {},
+  onChange: function () {},
   fromDateOption: {
     label: 'From'
   },
@@ -1493,43 +1259,24 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Timer; });
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var DEFAULT_TIME_DELAY_MILLISECOND = 500;
-
-var Timer =
-/*#__PURE__*/
-function () {
-  function Timer() {
-    _classCallCheck(this, Timer);
-  }
-
-  _createClass(Timer, null, [{
-    key: "debounce",
-    value: function debounce(func, wait) {
-      var timeout;
-      return function () {
-        var context = this,
+const DEFAULT_TIME_DELAY_MILLISECOND = 500;
+class Timer {
+  static debounce(func, wait) {
+    let timeout;
+    return function () {
+      const context = this,
             args = arguments;
 
-        var later = function later() {
-          func.apply(context, args);
-        };
-
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait || DEFAULT_TIME_DELAY_MILLISECOND);
+      const later = () => {
+        func.apply(context, args);
       };
-    }
-  }]);
 
-  return Timer;
-}();
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait || DEFAULT_TIME_DELAY_MILLISECOND);
+    };
+  }
 
-
+}
 
 /***/ }),
 
@@ -1543,7 +1290,7 @@ function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "debuggingConfig", function() { return debuggingConfig; });
-var debuggingConfig = {
+const debuggingConfig = {
   name: "__lrfConfig__",
   env: "local"
 };
@@ -1562,51 +1309,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AppLayout; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-var AppLayout =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(AppLayout, _Component);
-
-  function AppLayout(props) {
-    _classCallCheck(this, AppLayout);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(AppLayout).call(this, props));
+class AppLayout extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+  constructor(props) {
+    super(props);
   }
 
-  _createClass(AppLayout, [{
-    key: "render",
-    value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "container",
-        className: "container-fluid"
-      }, this.props.children);
-    }
-  }]);
+  render() {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      id: "container",
+      className: "container-fluid"
+    }, this.props.children);
+  }
 
-  return AppLayout;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
-
-
+}
 
 /***/ }),
 
@@ -1636,56 +1352,35 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
-
-
-var DataService =
-/*#__PURE__*/
-function () {
-  function DataService() {
-    _classCallCheck(this, DataService);
+class DataService {
+  static getData(url, params) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(url, {
+      params: params
+    });
   }
 
-  _createClass(DataService, null, [{
-    key: "getData",
-    value: function getData(url, params) {
-      return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(url, {
-        params: params
-      });
-    }
-  }, {
-    key: "postData",
-    value: function postData(url, params) {
-      return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, params, {
-        headers: {
-          'X-Requested-With': 'XMLHttpRequest',
-          '__RequestVerificationToken': _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].getXsrfToken()
-        }
-      });
-    }
-  }, {
-    key: "getFile",
-    value: function getFile(url, params) {
-      return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, params, {
-        responseType: 'blob',
-        headers: {
-          'X-Requested-With': 'XMLHttpRequest',
-          '__RequestVerificationToken': _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].getXsrfToken()
-        }
-      });
-    }
-  }]);
+  static postData(url, params) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, params, {
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+        '__RequestVerificationToken': _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].getXsrfToken()
+      }
+    });
+  }
 
-  return DataService;
-}();
+  static getFile(url, params) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, params, {
+      responseType: 'blob',
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+        '__RequestVerificationToken': _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].getXsrfToken()
+      }
+    });
+  }
 
-
+}
 
 /***/ }),
 
@@ -1700,10 +1395,7 @@ function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return createReducer; });
 function createReducer(initialState, handlers) {
-  return function reducer() {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-    var action = arguments.length > 1 ? arguments[1] : undefined;
-
+  return function reducer(state = initialState, action) {
     if (handlers.hasOwnProperty(action.type)) {
       return handlers[action.type](state, action);
     } else {
@@ -1724,48 +1416,25 @@ function createReducer(initialState, handlers) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return LangHelper; });
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var DEFAULT_RESOURCE_NAME = "_language_en_US";
-var langCode = window.PageLanguage || "en-US";
-var resourceName = "_language_".concat(langCode.replace("-", "_"));
-
-var LangHelper =
-/*#__PURE__*/
-function () {
-  function LangHelper() {
-    _classCallCheck(this, LangHelper);
+const DEFAULT_RESOURCE_NAME = "_language_en_US";
+const langCode = window.PageLanguage || "en-US";
+const resourceName = `_language_${langCode.replace("-", "_")}`;
+class LangHelper {
+  static get currentLanguage() {
+    return langCode;
   }
 
-  _createClass(LangHelper, null, [{
-    key: "getSingleResource",
-    value: function getSingleResource(key) {
-      var langHandler = window[resourceName];
-      return langHandler && langHandler[key] || window[DEFAULT_RESOURCE_NAME] && window[DEFAULT_RESOURCE_NAME][key] || key;
-    }
-  }, {
-    key: "getResources",
-    value: function getResources(keys) {
-      var langHandler = window[resourceName];
-      return keys.map(function (key) {
-        return langHandler && langHandler[key] || window[DEFAULT_RESOURCE_NAME] && window[DEFAULT_RESOURCE_NAME][key] || key;
-      });
-    }
-  }, {
-    key: "currentLanguage",
-    get: function get() {
-      return langCode;
-    }
-  }]);
+  static getSingleResource(key) {
+    var langHandler = window[resourceName];
+    return langHandler && langHandler[key] || window[DEFAULT_RESOURCE_NAME] && window[DEFAULT_RESOURCE_NAME][key] || key;
+  }
 
-  return LangHelper;
-}();
+  static getResources(keys) {
+    var langHandler = window[resourceName];
+    return keys.map(key => langHandler && langHandler[key] || window[DEFAULT_RESOURCE_NAME] && window[DEFAULT_RESOURCE_NAME][key] || key);
+  }
 
-
+}
 
 /***/ }),
 
@@ -1782,41 +1451,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux-logger */ "./node_modules/redux-logger/dist/redux-logger.js");
 /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux_logger__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _constants_config__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../constants/config */ "./www/js/source/reactpages/constants/config.js");
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
+const isDev = "development" === "development";
+const configName = _constants_config__WEBPACK_IMPORTED_MODULE_1__["debuggingConfig"].name; // middleware that logs actions
 
-var isDev = "development" === "development";
-var configName = _constants_config__WEBPACK_IMPORTED_MODULE_1__["debuggingConfig"].name; // middleware that logs actions
-
-var loggerMiddleware = Object(redux_logger__WEBPACK_IMPORTED_MODULE_0__["createLogger"])({
-  predicate: function predicate(getState, action) {
-    return isDev || window[configName] && window[configName].env === _constants_config__WEBPACK_IMPORTED_MODULE_1__["debuggingConfig"].env && (!window[configName].actionFilter || window[configName].actionFilter === action.type);
-  }
+const loggerMiddleware = Object(redux_logger__WEBPACK_IMPORTED_MODULE_0__["createLogger"])({
+  predicate: (getState, action) => isDev || window[configName] && window[configName].env === _constants_config__WEBPACK_IMPORTED_MODULE_1__["debuggingConfig"].env && (!window[configName].actionFilter || window[configName].actionFilter === action.type)
 });
-
-var Logger =
-/*#__PURE__*/
-function () {
-  function Logger() {
-    _classCallCheck(this, Logger);
+class Logger {
+  static getLoggerMiddleware() {
+    return loggerMiddleware;
   }
 
-  _createClass(Logger, null, [{
-    key: "getLoggerMiddleware",
-    value: function getLoggerMiddleware() {
-      return loggerMiddleware;
-    }
-  }]);
-
-  return Logger;
-}();
-
-
+}
 
 /***/ }),
 
@@ -1830,89 +1478,64 @@ function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Site; });
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+const _rootUrl = window.rootUrl || "/";
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+let _xsrfToken = null;
+class Site {
+  static getXsrfToken() {
+    if (!_xsrfToken) {
+      _xsrfToken = document.querySelector("input[name=__RequestVerificationToken]").value;
+    }
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var _rootUrl = window.rootUrl || "/";
-
-var _xsrfToken = null;
-
-var Site =
-/*#__PURE__*/
-function () {
-  function Site() {
-    _classCallCheck(this, Site);
+    return _xsrfToken;
   }
 
-  _createClass(Site, null, [{
-    key: "getXsrfToken",
-    value: function getXsrfToken() {
-      if (!_xsrfToken) {
-        _xsrfToken = document.querySelector("input[name=__RequestVerificationToken]").value;
+  static resolveClientUrl(relativeUrl) {
+    return _rootUrl + relativeUrl;
+  }
+
+  static convertDateToString(date) {
+    return typeof date === "string" ? date : date.format("MM/DD/YYYY");
+  }
+
+  static asNull(text) {
+    if (text != null) {
+      text = text.trim();
+
+      if (text === '') {
+        return null;
       }
-
-      return _xsrfToken;
     }
-  }, {
-    key: "resolveClientUrl",
-    value: function resolveClientUrl(relativeUrl) {
-      return _rootUrl + relativeUrl;
-    }
-  }, {
-    key: "convertDateToString",
-    value: function convertDateToString(date) {
-      return typeof date === "string" ? date : date.format("MM/DD/YYYY");
-    }
-  }, {
-    key: "asNull",
-    value: function asNull(text) {
-      if (text != null) {
-        text = text.trim();
 
-        if (text === '') {
-          return null;
-        }
-      }
+    return text;
+  }
 
-      return text;
-    }
-  }, {
-    key: "downloadFile",
-    value: function downloadFile(data, fileName) {
-      var url = window.URL.createObjectURL(new Blob([data]));
-      var link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', fileName);
-      document.body.appendChild(link);
-      link.click();
-      link.parentNode.removeChild(link);
-      window.URL.revokeObjectURL(url);
-    }
-  }, {
-    key: "readAsJson",
-    value: function readAsJson(blob, callback) {
-      var reader = new FileReader();
+  static downloadFile(data, fileName) {
+    const url = window.URL.createObjectURL(new Blob([data]));
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', fileName);
+    document.body.appendChild(link);
+    link.click();
+    link.parentNode.removeChild(link);
+    window.URL.revokeObjectURL(url);
+  }
 
-      reader.onload = function () {
-        callback && callback(JSON.parse(reader.result));
-      };
+  static readAsJson(blob, callback) {
+    const reader = new FileReader();
 
-      reader.readAsText(blob);
-    }
-  }, {
-    key: "getRootUrl",
-    value: function getRootUrl() {
-      return _rootUrl;
-    }
-  }]);
+    reader.onload = function () {
+      callback && callback(JSON.parse(reader.result));
+    };
 
-  return Site;
-}();
+    reader.readAsText(blob);
+  }
 
+  static getRootUrl() {
+    return _rootUrl;
+  }
 
+}
 
 /***/ }),
 
@@ -1929,37 +1552,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
 /* harmony import */ var _logger__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./logger */ "./www/js/source/reactpages/lib/logger.js");
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
 
-
-
-var Store =
-/*#__PURE__*/
-function () {
-  function Store() {
-    _classCallCheck(this, Store);
+class Store {
+  static createStore(reducer, initialState) {
+    const loggerMiddleware = _logger__WEBPACK_IMPORTED_MODULE_2__["default"].getLoggerMiddleware();
+    const enhancer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["compose"])(Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"], // lets us dispatch() functions
+    loggerMiddleware));
+    return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(reducer, initialState, enhancer);
   }
 
-  _createClass(Store, null, [{
-    key: "createStore",
-    value: function createStore(reducer, initialState) {
-      var loggerMiddleware = _logger__WEBPACK_IMPORTED_MODULE_2__["default"].getLoggerMiddleware();
-      var enhancer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["compose"])(Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"], // lets us dispatch() functions
-      loggerMiddleware));
-      return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(reducer, initialState, enhancer);
-    }
-  }]);
-
-  return Store;
-}();
-
-
+}
 
 /***/ }),
 
@@ -1983,9 +1587,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var requestParam = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, _defineProperty({}, _actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_REQUEST_PARAM"], function (state, action) {
-  return _objectSpread({}, action.data);
-}));
+const requestParam = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, {
+  [_actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_REQUEST_PARAM"]](state, action) {
+    return _objectSpread({}, action.data);
+  }
+
+});
 
 /***/ })
 

@@ -93,14 +93,16 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 2/28/2020 11:51:19 AM
+// Generated at: 3/6/2020 2:13:45 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
+  AbnormalBetDescriptionReport: "(*) Player has abnormal bets belong to at least 2 matches",
   AccessDeniedMsg: "Sorry, You don&apos;t have permission to access this page.",
   Account: "Account",
   AccountManagement: "Account Management",
   Action: "Action",
+  ActivateVip: "Activate VIP",
   Active: "Active",
   ActiveCustomers: "Active Customers",
   ActiveCustomerSummary: "Active Customer Summary",
@@ -130,6 +132,8 @@ window._language_en_US = {
   All: "All",
   AllBetTypes: "All Bet Types",
   AllCurrencies: "All Currencies",
+  AlreadyUpdateNotVipStatus: "Already NOT VIP, no update:  {0}",
+  AlreadyUpdateVipStatus: "Already VIP, no update: {0}",
   Amendment: "Resettlement",
   Amount: "Amount",
   AmountDue: "Amount Due",
@@ -223,6 +227,8 @@ window._language_en_US = {
   ChooseGroupNameMsg: "Please choose another group name.",
   CleanSheet: "Clean Sheet",
   ClearCurrentComm: "Clear customer&apos;s commission",
+  ClickHere: "Click here",
+  ClickOrDropHere: "Click or drop here",
   Close: "close",
   Closed: "Closed",
   ClosingBalance: "Closing Balance",
@@ -236,8 +242,10 @@ window._language_en_US = {
   CommissionShare: "Commission Share",
   CommIsUnChange: "Commission of customers is unchanged.",
   Confirm: "Confirm",
+  ConfirmActivateVIPPlayer: "The bet limit will be reapplied if the selected player(s) is marked VIP. Are your sure you want to activate VIP ?",
   Confirmation: "Confirmation",
   ConfirmCommission: "Confirm Customer&apos;s Commission:",
+  ConfirmDeactivateVIPPlayer: "Are you sure you want to deactivate VIP  for the player(s) ?",
   ConfirmPassword: "Confirm Password",
   Content: "Content",
   ConvertAllFiguresToBaseCurrency: "Convert all figures to Base Currency",
@@ -285,6 +293,7 @@ window._language_en_US = {
   DateRangeLimitNote: "Data is available within 3 months, from {0} to {1}.",
   DateRangeNote: "Data is available from {0:d MMM yyyy}",
   DD: "DD",
+  DeactivateVip: "Deactivate VIP",
   Dec: "Dec",
   December: "December",
   DecimalOdds: "decimal odds",
@@ -295,6 +304,7 @@ window._language_en_US = {
   DeleteCommissionGroup: "Delete Commission group",
   DeleteGroup: "Delete Group",
   Deposit: "Deposit",
+  DescriptionAbnormalBet: "The player was abnormally voided in at least 2 different matches",
   DetailedBetlist: "Detailed Bet list",
   Details: "Details",
   DH: "DH",
@@ -352,7 +362,9 @@ window._language_en_US = {
   Feb: "Feb",
   February: "February",
   FGLG: "FG/LG",
+  FileExtensionIncorrect: "Your file&apos;s extension is incorrect, please select an file",
   FileIsNotReady: "The file is not ready, please try again later.",
+  FileUploadExceedSize: "The uploaded file should be less than",
   FirstGoal: "First Goal",
   FirstName: "First Name",
   Forecast: "Forecast",
@@ -375,6 +387,7 @@ window._language_en_US = {
   GameType: "Game Type",
   GameTypeName: "Game Type Name",
   General: "General",
+  GetAll: "Get All",
   Go: "Go",
   GoldDeluxeNotOfferCurrency: "Gold Deluxe is not offered for this currency.",
   GoldDeluxeWinLoss: "Gold Deluxe Win Loss",
@@ -424,6 +437,7 @@ window._language_en_US = {
   InvalidCurrencyPermission: "Invalid currency permissions.",
   InvalidEmail: "Invalid email address",
   InvalidParams: "Invalid parameters",
+  InvalidPlayerUpdateVipStatus: "Invalid player(s): {0} ({1})",
   InvalidRequestMsg: "Request is not valid",
   InvalidRequestOrNotAuthorizedMsg: "Invalid request or you are not authorized to access the requested resource!",
   InvalidSubsidiaryNameMsg: "Please contact admin to check your subsidiary name.",
@@ -484,6 +498,7 @@ window._language_en_US = {
   Mar: "Mar",
   March: "March",
   Margin: "Margin",
+  MarkDate: "Mark Date",
   Market: "Market",
   Match: "Match",
   MatchCase: "Match case e.g",
@@ -499,6 +514,7 @@ window._language_en_US = {
   MaxBetPerDraw: "Max Bet Per Draw",
   MaxBetPerDrawLessThanOrEqual: "Max Bet Per Draw must be less than or equal to",
   MaxBetPerDrawMoreThanOrEqual: "Max Bet Per Draw must be more than or equal to",
+  MaximumUploadFileSize: "Maximum upload file size",
   MaxPerBall: "Max Per Ball",
   MaxPerBallLessThanOrEqual: "Max Per Ball must be less than or equal to",
   MaxPerMatch: "Max Per Match",
@@ -619,6 +635,7 @@ window._language_en_US = {
   Prev: "Prev",
   PreviousSearchResult: "Previous search result",
   ProblemDisplayBetSetting: "There is problem to display bet setting group&apos;s detail.",
+  ProblemPlayer: "Problem Player",
   Product: "Product",
   ProductAB: "AllBet",
   ProductAGC: "AG Casino",
@@ -665,6 +682,7 @@ window._language_en_US = {
   Result: "Result",
   ResultPending: "Result Pending",
   Results: "Results",
+  RetractedPlayerUpdateVipStatus: "Retracted VIP player(s): {0} ({1})",
   RngCasinoAndBingoExcludedNote: "RNG Casino and Bingo are not included in the report",
   RNGCasinoUpdateSettingUnAvailableMsg: "RNG Casino Database is not currently available. Please try again later.",
   Running: "Running",
@@ -710,6 +728,7 @@ window._language_en_US = {
   SubsidiaryPerformance: "Subsidiary Performance",
   SubsidiarySearch: "Subsidiary Search",
   SubsidiaryWL: "Subsidiary W/L",
+  SuccessUpdateVipStatus: "Successfully update: {0}",
   Summary: "Summary",
   Sunday: "Sunday",
   Suspended: "Suspended",
@@ -734,6 +753,7 @@ window._language_en_US = {
   To: "To",
   Todate: "To date",
   Today: "Today",
+  ToDowloadTemplate: "to download template",
   TokenIsInValid: "Token is invalid",
   TokenWasExpired: "Token was expired",
   Total: "Total",
@@ -797,6 +817,8 @@ window._language_en_US = {
   UpdateToClosedConfirmMsg: "Are you sure you want to change the status of this player to CLOSED?",
   UpdateToLockedConfirmMsg: "Are you sure you want to change the status of this player to LOCKED?",
   UpdateUnSuccess: "Update unsucessfully!",
+  UploadFileError: "Could not load the file, please check file&apos;s template again !",
+  UploadVipList: "Upload Vip List",
   UserGuide: "User Guide",
   UserInformation: "User Information",
   Username: "Username",
@@ -810,6 +832,8 @@ window._language_en_US = {
   ViewDataInMonth: "View data in month",
   Viewin: "View in {0}",
   ViewNotification: "View Notification",
+  Vip: "VIP",
+  VipPlayerManagement: "VIP Player Management",
   VirtualBasketball: "Virtual Basketball",
   VirtualCycling: "Virtual Cycling",
   VirtualGreyhounds: "Virtual Greyhounds",
@@ -862,48 +886,25 @@ window._language_en_US = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return LangHelper; });
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var DEFAULT_RESOURCE_NAME = "_language_en_US";
-var langCode = window.PageLanguage || "en-US";
-var resourceName = "_language_".concat(langCode.replace("-", "_"));
-
-var LangHelper =
-/*#__PURE__*/
-function () {
-  function LangHelper() {
-    _classCallCheck(this, LangHelper);
+const DEFAULT_RESOURCE_NAME = "_language_en_US";
+const langCode = window.PageLanguage || "en-US";
+const resourceName = `_language_${langCode.replace("-", "_")}`;
+class LangHelper {
+  static get currentLanguage() {
+    return langCode;
   }
 
-  _createClass(LangHelper, null, [{
-    key: "getSingleResource",
-    value: function getSingleResource(key) {
-      var langHandler = window[resourceName];
-      return langHandler && langHandler[key] || window[DEFAULT_RESOURCE_NAME] && window[DEFAULT_RESOURCE_NAME][key] || key;
-    }
-  }, {
-    key: "getResources",
-    value: function getResources(keys) {
-      var langHandler = window[resourceName];
-      return keys.map(function (key) {
-        return langHandler && langHandler[key] || window[DEFAULT_RESOURCE_NAME] && window[DEFAULT_RESOURCE_NAME][key] || key;
-      });
-    }
-  }, {
-    key: "currentLanguage",
-    get: function get() {
-      return langCode;
-    }
-  }]);
+  static getSingleResource(key) {
+    var langHandler = window[resourceName];
+    return langHandler && langHandler[key] || window[DEFAULT_RESOURCE_NAME] && window[DEFAULT_RESOURCE_NAME][key] || key;
+  }
 
-  return LangHelper;
-}();
+  static getResources(keys) {
+    var langHandler = window[resourceName];
+    return keys.map(key => langHandler && langHandler[key] || window[DEFAULT_RESOURCE_NAME] && window[DEFAULT_RESOURCE_NAME][key] || key);
+  }
 
-
+}
 
 /***/ }),
 
