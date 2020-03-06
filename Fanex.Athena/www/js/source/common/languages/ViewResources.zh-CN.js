@@ -1,5 +1,4 @@
-﻿// Generated at: 3/2/2020 1:30:51 PMwindow._language_zh_CN = {
-AA:"客客",
+﻿window._language_zh_CN = {AA:"客客",
 AbnormalBet:"非正规注单",
 AbnormalBetDescriptionReport:"(*) Player has problem tickets belong to at least 2 matches",
 AccessDeniedMsg:"对不起, 您没有权限访问此页面。",

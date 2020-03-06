@@ -1,4 +1,4 @@
-﻿// Generated at: 3/2/2020 1:30:51 PM
+﻿// Generated at: 3/5/2020 1:43:05 PM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -403,7 +403,7 @@ ManageAccount:"Manage Account",
 Mar:"Mar",
 March:"March",
 Margin:"Margin",
-MarkDate:"Marke Date",
+MarkDate:"Mark Date",
 Market:"Market",
 Match:"Match",
 MatchCase:"Match case e.g",
