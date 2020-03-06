@@ -13,13 +13,14 @@
         where T : PlayerInfo
     {
         private const int RowContentTemplate = 1;
+        private const int NumberOfRowPerSheet = 20000;
 
         protected IList<Tuple<string, string>> _infoHeaders;
 
         protected IEnumerable<T> _dataSource;
 
         public PlayerExcel(string templatePath, string reportTitle, IEnumerable<T> dataSource)
-           : base(templatePath, dataSource.Count())
+           : base(templatePath, dataSource.Count(), NumberOfRowPerSheet)
         {
             _dataSource = dataSource;
             _infoHeaders = new List<Tuple<string, string>>
@@ -28,6 +29,7 @@
                 new Tuple<string, string>(ViewResources.SystemId, nameof(ViewResources.SystemId)),
                 new Tuple<string, string>($"{ViewResources.AbnormalBet} (*)", "IsMarkVoid")
             };
+            IsMultiSheet = true;
         }
 
         protected override void AssignHeader(ISheet sheet)
@@ -39,16 +41,26 @@
             }
         }
 
-        protected override void AssignSheetData(ISheet sheet)
+        protected override void AssignSheetData(ISheet sheet, int pageIndex)
         {
+            int rowCount = Math.Min(_dataSource.Count(), checked((pageIndex + 1) * PageSize));
+            var rowIndex = 0;
             var type = typeof(T);
-            for (int dataIndex = 0; dataIndex < _dataSource.Count(); dataIndex++)
+
+            for (var dataIndex = pageIndex * PageSize; dataIndex < rowCount; dataIndex++, rowIndex++)
             {
-                var row = sheet.CopyRow(TemplateSheet, RowContentTemplate, dataIndex + RowContentTemplate);
+                var row = sheet.CopyRow(TemplateSheet, RowContentTemplate, rowIndex + RowContentTemplate);
                 var rowData = _dataSource.ElementAt(dataIndex);
                 AssignRowData(row, rowData, type);
             }
+
             AddRowDescription(sheet, sheet.LastRowNum);
+        }
+
+        protected virtual void AddRowDescription(ISheet sheet, int lastRowIndex)
+        {
+            var row = sheet.CreateRow(lastRowIndex + 1);
+            row.CreateCell(0).SetCellValue(ViewResources.AbnormalBetDescriptionReport);
         }
 
         protected virtual void AssignRowData(IRow row, T rowData, Type type)
@@ -66,12 +78,6 @@
         protected override void AssignTitle(ISheet sheet)
         {
             //none title
-        }
-
-        protected virtual void AddRowDescription(ISheet sheet, int lastRowIndex)
-        {
-            var row = sheet.CreateRow(lastRowIndex + 1);
-            row.CreateCell(0).SetCellValue(ViewResources.AbnormalBetDescriptionReport);
         }
 
         protected virtual object ParseValue(object cellValue)
