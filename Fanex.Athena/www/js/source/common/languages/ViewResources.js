@@ -1,8 +1,8 @@
-﻿// Generated at: 3/5/2020 1:43:05 PM
+﻿// Generated at: 3/6/2020 2:13:45 PM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
-AbnormalBetDescriptionReport:"(*) Player has problem tickets belong to at least 2 matches",
+AbnormalBetDescriptionReport:"(*) Player has abnormal bets belong to at least 2 matches",
 AccessDeniedMsg:"Sorry, You don&apos;t have permission to access this page.",
 Account:"Account",
 AccountManagement:"Account Management",
