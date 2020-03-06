@@ -72,6 +72,12 @@
         public const string CustomerInfoCustomerLog = "CustomerLog56";
         public const string CustomerInfoEditBetSetting = "EditBetSetting70";
 
+        /* PlayerSegmentation */
+
+        public const string PlayerSegmentation = "PlayerSegmentation";
+        public const string PlayerProblemManagement = "PlayerSegmentation_ProblemManagement";
+        public const string PlayerVIPManagement = "PlayerSegmentation_VIPManagement";
+
         /* Account. */
 
         public const string AccountManageAccount = "ManageAccount46";

@@ -16,6 +16,7 @@
     public partial class PlayerSegmentationController : BaseApiController
     {
         [HttpPost]
+        //[ApiFunctionAuthorization(PermissionKeys.PlayerProblemManagement)]
         [ValidationApiRequest(IsValidCurrencyList = true)]
         [ApiAutoBindMetaModel(BindAgent = true)]
         public async Task<JsonResult<ApiPagingResult<PlayerInfo>>> GetProblemPlayerList(ProblemPlayerListMetaModel metaModel)
@@ -25,6 +26,7 @@
         }
 
         [HttpPost]
+        //[ApiFunctionAuthorization(PermissionKeys.PlayerProblemManagement)]
         [ValidationApiRequest(IsValidCurrencyList = true)]
         [ApiAutoBindMetaModel(BindAgent = true)]
         public async Task<HttpResponseMessage> ExportProblemPlayerList(ProblemPlayerListMetaModel metaModel)

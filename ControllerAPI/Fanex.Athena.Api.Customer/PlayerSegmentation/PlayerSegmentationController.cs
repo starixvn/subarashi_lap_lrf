@@ -12,6 +12,7 @@
     using System.Web.Http;
     using System.Web.Http.Results;
 
+    //[ApiFunctionAuthorization(PermissionKeys.PlayerSegmentation)]
     public partial class PlayerSegmentationController : BaseApiController
     {
         private readonly IPlayerSegmentationDataAccess _playerDataAccess;
@@ -25,6 +26,7 @@
         [HttpPost]
         [ValidationApiRequest]
         [ApiAutoBindMetaModel(BindAgent = true, BindUserId = true, BindIp = true)]
+        [ApiFunctionAuthorization(PermissionKeys.PlayerVIPManagement)]
         public async Task<JsonResult<IEnumerable<UpdateStatusPlayerResult>>> UpdateVipStatus(UpdateStatusPlayerMetaModel metaModel)
         {
             var result = await _playerDataAccess.UpdateVipStatusAsync(metaModel).ConfigureAwait(false);

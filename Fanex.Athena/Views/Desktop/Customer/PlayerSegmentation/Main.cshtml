@@ -6,11 +6,29 @@
 
 @model Fanex.Athena.Model.Customer.ViewModel.PlayerSegmentationViewModel
 @{
+    var hasVIPManagementPermission = Model.HasVIPManagementPermission;
     var problemPlayerVM = Model.ProblemPlayerVM;
     var vipPlayerManagementVM = Model.VipPlayerVM;
-}
 
-@section pagecss {
+    var vipPlayerManagementInitState = hasVIPManagementPermission ? new
+    {
+        selectedCurrency = string.Join(",", vipPlayerManagementVM.CurrencyList.Select(x => x.Key).ToArray()),
+        selectedVipOption = 0,
+        username = "",
+        isLoading = false,
+        playerList = null as object,
+        selectedParams = null as object,
+        isGetAll = true
+    } : null;
+
+    var vipPlayerManagementData = hasVIPManagementPermission ? new
+    {
+        currencyList = vipPlayerManagementVM.CurrencyList.Select(x => new { key = x.Key, value = x.Value, status = true }),
+        vipOptions = vipPlayerManagementVM.VipOptions.Select(x => new { value = x.Key, label = x.Value }),
+    } : null;
+   }
+
+    @section pagecss {
     <link href="@Url.ContentLinkByEnv("/www/css/build/reactpages/playersegmentation/index.css")" rel="stylesheet" type="text/css" />
 }
 @section pagejs {
@@ -28,28 +46,19 @@
             selectedParams: null,
             isGetAll: true
         },
-        VipPlayerManagement: {
-            selectedCurrency: '@string.Join(",", vipPlayerManagementVM.CurrencyList.Select(x => x.Key).ToArray())',
-            selectedVipOption: 0,
-            username: '',
-            isLoading: false,
-            playerList: null,
-            selectedParams: null,
-            isGetAll: true
-        }
+        VipPlayerManagement: @Html.Raw(vipPlayerManagementInitState.ToJson())
     }
 
     window._AppData = {
+        HasVipManagement: @hasVIPManagementPermission.ToString().ToLower(),
+        TabKeys: @Html.Raw(Model.TabKeys.ToJson()),
         ProblemPlayer: {
             currencyList: @Html.Raw(problemPlayerVM.CurrencyList.Select(x => new { key = x.Key, value = x.Value, status = true }).ToJson()),
             dateConstraint: { minDate: '1/1/2017', maxDate: '@problemPlayerVM.MaxDate.ToString("MM/dd/yyyy")', limitedMonthRange: 1 },
         },
-        VipPlayerManagement: {
-            currencyList: @Html.Raw(vipPlayerManagementVM.CurrencyList.Select(x => new { key = x.Key, value = x.Value, status = true }).ToJson()),
-            vipOptions: @Html.Raw(vipPlayerManagementVM.VipOptions.Select(x => new { value = x.Key, label = x.Value }).ToJson()),
-        }
+        VipPlayerManagement: @Html.Raw(vipPlayerManagementData.ToJson())
     }
 }
 
-    <div id="app-container">
-    </div>
+<div id="app-container">
+</div>
