@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Table } from '@9softstudio/react-grid';
 import { ActionCreators } from '../actions';
-import PlayerRow from './grid/PlayerRow';
 import NoDataTitle from '@jsroot/components/NoDataTitle';
 import GridHelper from '../../../lib/helpers/gridHelper';
-import { dataGridHeaders } from '../lib/constants';
+import PlayerRow from './grid/PlayerRow';
+import { getDataGridHeaders } from '../lib/helpers/gridHelper';
+import AppData from '@jsroot/lib/AppData';
 
 const MAX_WIDTH_PAGE = 1920;
 
@@ -22,7 +23,7 @@ export const DataGrid = (props) => {
     }
 
     const _renderDataSection = dataList => dataList.map((dataItem, index) => {
-        return <PlayerRow {...{ dataItem, index }} />
+        return <PlayerRow {...{ dataItem, index, hasVipManagement: AppData.HasVipManagement }} />
     })
 
     const _handleSort = (orderCol, sortType) => {
@@ -38,6 +39,7 @@ export const DataGrid = (props) => {
         searchPlayer(selectedTabKey, params, GridHelper.callBackToUpdatePaging({ pagingOption, setPagingOption }));
     }
 
+    const _gridHeaders = getDataGridHeaders(AppData.HasVipManagement);
 
     return (
         <React.Fragment>
@@ -45,7 +47,7 @@ export const DataGrid = (props) => {
                 autoWidth={true}
                 maxWidth={MAX_WIDTH}
                 autoHeight={true}
-                header={GridHelper.renderHeader(dataGridHeaders)}
+                header={GridHelper.renderHeader(_gridHeaders)}
                 body={_renderDataSection(playerList)}
                 containerPadding={30}
                 shouldResetScrollPosition={false}

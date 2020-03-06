@@ -1,5 +1,6 @@
 import React from 'react';
 import LangHelper from '@jsroot/lib/langHelper';
+import AppData from '@jsroot/lib/AppData';
 
 export const tabKeys = {
     problemPlayer: 'ProblemPlayer',
@@ -11,10 +12,11 @@ const dynamicImports = {
     [tabKeys.vipPlayerManagement]: () => import(/* webpackChunkName: "playersegmentation/vipPlayerManagement" */ '../tabs/vip-player-management/index')
 }
 
-export const tabMenuList = [
-    { key: tabKeys.problemPlayer, name: LangHelper.getSingleResource(tabKeys.problemPlayer), component: React.lazy(dynamicImports[tabKeys.problemPlayer]), preLoad: dynamicImports[tabKeys.problemPlayer] },
-    { key: tabKeys.vipPlayerManagement, name: LangHelper.getSingleResource(tabKeys.vipPlayerManagement), component: React.lazy(dynamicImports[tabKeys.vipPlayerManagement]), preLoad: dynamicImports[tabKeys.vipPlayerManagement] }
-]
+export const tabMenuList = AppData.TabKeys.map(_ => {
+    return {
+        key: _, name: LangHelper.getSingleResource(_), component: React.lazy(dynamicImports[_]), preLoad: dynamicImports[_]
+    }
+})
 
 export const preLoadComponents = (lazyComponents) => {
     lazyComponents && setTimeout(() => lazyComponents.forEach(_ => _.preLoad && _.preLoad()), 0)

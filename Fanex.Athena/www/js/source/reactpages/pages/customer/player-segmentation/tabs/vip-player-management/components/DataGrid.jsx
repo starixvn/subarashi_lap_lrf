@@ -25,7 +25,7 @@ export const DataGrid = (props) => {
 
     const _dataGridHeaders = [
         {
-            key: 'CheckAll', text: null, colWidth: 100, childComponent: <CheckBox id="IsCheckAll"
+            key: 'CheckAll', text: null, colWidth: 30, childComponent: <CheckBox id="IsCheckAll"
                 checked={isCheckAll}
                 onChange={(checked) => {
                     const newPlayerList = playerList.map(_ => {

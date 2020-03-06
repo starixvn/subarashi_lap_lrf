@@ -8,7 +8,8 @@ import { ActionCreators } from '../actions';
 import DropzoneUpload from '../../../components/DropzoneUpload';
 import { Url, ExcelReaderColumn } from '../lib/constants';
 import ExcelHelper from '../lib/helpers/excelHelper';
-import { UpdateVipStatusAlertOption } from '../../../lib/helpers/sweetAlertHelper'
+import { UpdateVipStatusAlertOption } from '../../../lib/helpers/sweetAlertHelper';
+import StringHelper from '@jsroot/lib/stringHelper';
 
 export const FormAction = props => {
     const { isActiveTaggingAction, playerList, updateVipStatus, setSweetAlertOption } = props;
@@ -66,7 +67,6 @@ export const FormAction = props => {
         const handlerUpdateVipStatusSuccess = resultMessage => {
             setSweetAlertOption(null);
             setResultMsgSubmitVipListFile(resultMessage);
-
         }
         const alertOption = _buildAlertOptionUpdateVipStatus(params, true, true, handlerUpdateVipStatusSuccess);
         setSweetAlertOption(alertOption);
@@ -81,7 +81,13 @@ export const FormAction = props => {
                     alert(LangHelper.getSingleResource("UploadFileError"))
                     return;
                 }
-                const systemIds = listData.map(_ => _[column]).join();
+                const listValueOfColumn = listData.map(_ => _[column]);
+                if(listValueOfColumn.some(_ => StringHelper.isEmptyOrWhiteSpace(_))) {
+                    alert(LangHelper.getSingleResource("UploadFileError"))
+                    return;
+                }
+
+                const systemIds = listValueOfColumn.join();
                 const params = {
                     systemIds,
                     isVip: true

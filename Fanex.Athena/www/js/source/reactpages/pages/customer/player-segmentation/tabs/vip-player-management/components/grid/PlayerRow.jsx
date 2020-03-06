@@ -7,8 +7,8 @@ export const PlayerRow = (props) => {
     const { externalId, systemId, index, isMarkVoid, custId } = props;
     return (<Row key={`player_row_${custId}`}>
         {<SelectionCell rowIndex={index}/>}
-        <Cell className="center-align">{externalId}</Cell>
-        <Cell className="center-align">{systemId}</Cell>
+        <Cell className="left-align">{externalId}</Cell>
+        <Cell className="left-align">{systemId}</Cell>
         {<VipStatusCell {...{ index, isMarkVoid }}/> }
     </Row>)
 }
