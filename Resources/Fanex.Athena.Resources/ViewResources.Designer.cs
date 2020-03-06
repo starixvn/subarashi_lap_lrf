@@ -79,7 +79,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to (*) Player has problem tickets belong to at least 2 matches.
+        ///   Looks up a localized string similar to (*) Player has abnormal bets belong to at least 2 matches.
         /// </summary>
         public static string AbnormalBetDescriptionReport {
             get {
@@ -3688,7 +3688,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Marke Date.
+        ///   Looks up a localized string similar to Mark Date.
         /// </summary>
         public static string MarkDate {
             get {

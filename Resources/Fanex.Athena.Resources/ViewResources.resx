@@ -2591,7 +2591,7 @@
     <comment>125824</comment>
   </data>
   <data name="MarkDate" xml:space="preserve">
-    <value>Marke Date</value>
+    <value>Mark Date</value>
     <comment>#128082</comment>
   </data>
   <data name="Vip" xml:space="preserve">
@@ -2599,7 +2599,7 @@
     <comment>#128082</comment>
   </data>
   <data name="AbnormalBetDescriptionReport" xml:space="preserve">
-    <value>(*) Player has problem tickets belong to at least 2 matches</value>
+    <value>(*) Player has abnormal bets belong to at least 2 matches</value>
     <comment>#128082</comment>
   </data>
   <data name="ActivateVip" xml:space="preserve">

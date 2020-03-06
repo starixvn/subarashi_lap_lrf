@@ -2223,7 +2223,7 @@
     <comment>#128082</comment>
   </data>
   <data name="AbnormalBetDescriptionReport" xml:space="preserve">
-    <value>(*) Player has problem tickets belong to at least 2 matches</value>
+    <value>(*)玩家在至少2场不同比赛中被判定为非正规投注</value>
     <comment>#128082</comment>
   </data>
   <data name="ActivateVip" xml:space="preserve">
