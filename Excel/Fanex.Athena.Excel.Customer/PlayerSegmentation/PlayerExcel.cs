@@ -19,6 +19,8 @@
 
         protected IEnumerable<T> _dataSource;
 
+        public override int RowHeaderTemplate => 0;
+
         public PlayerExcel(string templatePath, string reportTitle, IEnumerable<T> dataSource)
            : base(templatePath, dataSource.Count(), NumberOfRowPerSheet)
         {
