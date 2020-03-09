@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 3/10/2020 1:27:31 PM
+// Generated at: 3/18/2020 10:18:22 AM
 window._language_zh_CN = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -287,7 +287,6 @@ window._language_zh_CN = {
   DeleteGroup: "删除组",
   Deposit: "存款",
   DescriptionAbnormalBet: "玩家在至少2场不同比赛中被判定为非正规投注",
-  Deposited: "已存款",
   DetailedBetlist: "投注明细历史",
   Details: "细节",
   DH: "和主",

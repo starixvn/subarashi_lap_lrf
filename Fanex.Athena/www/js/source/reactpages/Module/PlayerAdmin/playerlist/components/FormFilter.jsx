@@ -34,7 +34,8 @@ export class FormFilter extends PureComponent {
             oddsGroup: this.allOddsGroupString,
             specialLevel: this.allSpecialLevel,
             baFilter: baStatusList.All,
-            searchOption: searchOptions.matchPrecise
+            searchOption: searchOptions.matchPrecise,
+            isMatchPrecise: true
         }
     }
 
@@ -112,6 +113,10 @@ export class FormFilter extends PureComponent {
     handleChange = (event) => {
         const { name, value } = event.target;
 
+        if(name == "searchOption") {
+            this.setState({ isMatchPrecise: value == 4 });
+        }
+
         this.setState({ [name]: value });
     }
 
@@ -140,8 +145,8 @@ export class FormFilter extends PureComponent {
 
     _getUserNameLabel() {
         return this.props.type === licenseeType.nonApi ?
-            `${LangHelper.getSingleResource("Username")}/${LangHelper.getSingleResource("SystemId")}` :
-            `${LangHelper.getSingleResource("Username")}/${LangHelper.getSingleResource("VendorMemberID")}/${LangHelper.getSingleResource("SystemId")}`
+            LangHelper.getSingleResource("Username") :
+            `${LangHelper.getSingleResource("Username")}/${LangHelper.getSingleResource("VendorMemberID")}`
     }
 
     render() {
@@ -164,7 +169,7 @@ export class FormFilter extends PureComponent {
                     <div className="col-12 col-md-4 col-sm-4 col-lg-3 col-xl-3">
                         <div className="form-group">
                             <label className="label-text">
-                                {this._getUserNameLabel()}
+                                {this._getUserNameLabel()}<span className={this.state.isMatchPrecise ? "" : "hide"}>/{LangHelper.getSingleResource("SystemId")}</span>
                                 {(<SearchOption value={searchOption} onChange={this.handleChange} />)}
                             </label>
                             <UserNameInput ref={this.userNameRef} onSelectItem={(value) => this.handleUserNameChange(value)}

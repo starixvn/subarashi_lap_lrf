@@ -3742,7 +3742,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Match case e.g.
+        ///   Looks up a localized string similar to Match Case e.g.
         /// </summary>
         public static string MatchCase {
             get {
@@ -3751,7 +3751,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Match precise.
+        ///   Looks up a localized string similar to Match Precise.
         /// </summary>
         public static string MatchPrecise {
             get {
@@ -3760,7 +3760,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Match prefix e.g.
+        ///   Looks up a localized string similar to Match Prefix e.g.
         /// </summary>
         public static string MatchPrefix {
             get {

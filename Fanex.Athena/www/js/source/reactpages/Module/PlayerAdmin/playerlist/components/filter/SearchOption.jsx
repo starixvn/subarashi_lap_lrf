@@ -29,21 +29,21 @@ const SearchOption = (props) => {
                 <label className="selection-item">
                     <input type="radio" name="searchOption" value={searchOptions.matchPrecise}
                         checked={selectedValue === searchOptions.matchPrecise} onChange={onChange} />
-                    {LangHelper.getSingleResource('MatchPrecise')}
+                    &nbsp;&nbsp;{LangHelper.getSingleResource('MatchPrecise')}
                 </label>
             </DropdownItem>
             <DropdownItem tag="div">
                 <label className="selection-item">
                     <input type="radio" name="searchOption" value={searchOptions.matchPrefix}
                         checked={selectedValue === searchOptions.matchPrefix} onChange={onChange} />
-                    {LangHelper.getSingleResource('MatchPrefix')} "<span className="keyword">test</span>"ABCD
+                    &nbsp;&nbsp;{LangHelper.getSingleResource('MatchPrefix')} "<span className="keyword">test</span>"ABCD
                 </label>
             </DropdownItem>
             <DropdownItem tag="div">
                 <label className="selection-item">
                     <input type="radio" name="searchOption" value={searchOptions.matchCase}
                         checked={selectedValue === searchOptions.matchCase} onChange={onChange} />
-                    {LangHelper.getSingleResource('MatchCase')} AB"<span className="keyword">test</span>"CD
+                    &nbsp;&nbsp;{LangHelper.getSingleResource('MatchCase')} AB"<span className="keyword">test</span>"CD
                 </label>
             </DropdownItem>
         </DropdownButton>

@@ -975,6 +975,9 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
 .material-icons {
   font-size: 12px; }
 
+.hide {
+  display: none !important; }
+
 /*Filter*/
 .page-filter {
   min-height: 30px; }

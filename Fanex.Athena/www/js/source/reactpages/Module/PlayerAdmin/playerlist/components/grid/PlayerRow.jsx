@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../../actions';
@@ -19,19 +19,19 @@ export const PlayerRow = (props) => {
         displayedColumn
     } = props;
 
-    const { 
-        LicenseeCustId, 
-        SystemId, 
-        RealName, 
-        Currency, 
-        CurrentBalance, 
+    const {
+        LicenseeCustId,
+        SystemId,
+        RealName,
+        Currency,
+        CurrentBalance,
         OutstandingBalance,
         LastTransaction,
-        Email, 
-        OddsGroup, 
-        SpecialLevel, 
-        IsDeposit, 
-        IsArchived 
+        Email,
+        OddsGroup,
+        SpecialLevel,
+        IsDeposit,
+        IsArchived
     } = dataItem;
     const canShowMainColumn = IsDeposit && !IsArchived;
 
@@ -39,7 +39,7 @@ export const PlayerRow = (props) => {
         <Row key={LicenseeCustId}>
             {displayedColumn[fields.Status] && <Cell><StatusCell dataItem={dataItem} /></Cell>}
             {displayedColumn[fields.UserName] && <Cell><UserNameCell dataItem={dataItem} /></Cell>}
-            {displayedColumn[fields.SystemId] && <Cell>{SystemId}</Cell>}
+            {displayedColumn[fields.SystemId] && <Cell title={SystemId}>{SystemId}</Cell>}
             {displayedColumn[fields.RealName] && <Cell>{RealName}</Cell>}
             {displayedColumn[fields.Currency] && <Cell className="center-align">{Currency}</Cell>}
             {displayedColumn[fields.CurrentBalance] && <Cell className="right-align">{canShowMainColumn && NumberFormat.formatDecimal(CurrentBalance)}</Cell>}

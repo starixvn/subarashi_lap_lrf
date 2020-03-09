@@ -24,6 +24,10 @@ $borderContainer: #d6d6d6;
     font-size: 12px;
 }
 
+.hide {
+    display: none !important;
+}
+
 /*Filter*/
 .page-filter {
     min-height: 30px;
@@ -233,4 +237,5 @@ iframe {
         }
     }
 }
+
 /*End Grid*/
