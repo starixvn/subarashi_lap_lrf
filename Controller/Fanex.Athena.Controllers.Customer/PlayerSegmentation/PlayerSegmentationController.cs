@@ -4,6 +4,7 @@
     using Fanex.Athena.Model.Customer.ViewModel;
     using Fanex.Athena.Resources;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Web.ActionFilter;
     using ONEbook.UM.Filters;
     using System.Collections.Generic;
     using System.Linq;
@@ -12,7 +13,7 @@
 
     [SessionState(SessionStateBehavior.ReadOnly)]
     [CheckUMFilter]
-    //[FunctionAuthorization(PermissionKeys.PlayerSegmentation)]
+    [FunctionAuthorization(PermissionKeys.PlayerSegmentation)]
     public class PlayerSegmentationController : CultureBaseController
     {
         private static readonly string VIP_LIST_TEMPLATE_PATH = "~/App_Data/Template/Customers/PlayerSegmentation/VipPlayerUploadTemplate.xls";
@@ -23,7 +24,7 @@
             { PermissionKeys.PlayerVIPManagement, "VipPlayerManagement" }
         };
 
-        private IAuthorizationService _authService { get; set; }
+        private readonly IAuthorizationService _authService;
 
         public PlayerSegmentationController(IAuthorizationService authService)
         {
@@ -53,7 +54,7 @@
         }
 
         [HttpGet]
-        //[FunctionAuthorization(PermissionKeys.PlayerVIPManagement)]
+        [FunctionAuthorization(PermissionKeys.PlayerVIPManagement)]
         public FileResult DowloadVipListTemplate()
         {
             var templatePath = Server.MapPath(VIP_LIST_TEMPLATE_PATH);
@@ -62,14 +63,12 @@
 
         private bool HasVIPManagementPermission()
         {
-            return true;
             var result = _authService.HasPermissions(SessionServiceInstance.UserSession, PermissionKeys.PlayerVIPManagement);
             return result;
         }
 
         private IEnumerable<string> GetTabKeys()
         {
-            return _tabKeys.Select(_ => _.Value);
             var tabKeysByPermission = _tabKeys
                 .Where(_ => _authService.HasPermissions(SessionServiceInstance.UserSession, _.Key))
                 .Select(_ => _.Value);

@@ -16,7 +16,7 @@
     public partial class PlayerSegmentationController : BaseApiController
     {
         [HttpPost]
-        //[ApiFunctionAuthorization(PermissionKeys.PlayerProblemManagement)]
+        [ApiFunctionAuthorization(PermissionKeys.PlayerProblemManagement)]
         [ValidationApiRequest(IsValidCurrencyList = true)]
         [ApiAutoBindMetaModel(BindAgent = true)]
         public async Task<JsonResult<ApiPagingResult<PlayerInfo>>> GetProblemPlayerList(ProblemPlayerListMetaModel metaModel)
@@ -26,13 +26,16 @@
         }
 
         [HttpPost]
-        //[ApiFunctionAuthorization(PermissionKeys.PlayerProblemManagement)]
+        [ApiFunctionAuthorization(PermissionKeys.PlayerProblemManagement)]
         [ValidationApiRequest(IsValidCurrencyList = true)]
         [ApiAutoBindMetaModel(BindAgent = true)]
         public async Task<HttpResponseMessage> ExportProblemPlayerList(ProblemPlayerListMetaModel metaModel)
         {
             if (metaModel.IsValid)
             {
+                var userSession = SessionService.UserSession;
+                var haveVIPPermission = _authService.HasPermissions(userSession, PermissionKeys.PlayerVIPManagement);
+
                 metaModel.PageIndex = 1;
                 metaModel.PageSize = int.MaxValue - 1000;
 
@@ -40,7 +43,7 @@
                 if (dataSource.Data.Any())
                 {
                     const string fileName = "ProblemPlayerList.xls";
-                    var excel = new ProblemPlayerExcel(dataSource.Data);
+                    var excel = new ProblemPlayerExcel(dataSource.Data, haveVIPPermission);
                     excel.Export();
 
                     var result = ExcelStream(excel.Workbook, fileName);

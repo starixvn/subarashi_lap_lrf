@@ -15,7 +15,7 @@
     public partial class PlayerSegmentationController
     {
         [HttpPost]
-        //[ApiFunctionAuthorization(PermissionKeys.PlayerVIPManagement)]
+        [ApiFunctionAuthorization(PermissionKeys.PlayerVIPManagement)]
         [ValidationApiRequest(IsValidCurrencyList = true)]
         [ApiAutoBindMetaModel(BindAgent = true)]
         public async Task<JsonResult<ApiPagingResult<PlayerInfo>>> GetVipPlayerList(VipPlayerListMetaModel metaModel)
@@ -25,7 +25,7 @@
         }
 
         [HttpPost]
-        //[ApiFunctionAuthorization(PermissionKeys.PlayerVIPManagement)]
+        [ApiFunctionAuthorization(PermissionKeys.PlayerVIPManagement)]
         [ValidationApiRequest(IsValidCurrencyList = true)]
         [ApiAutoBindMetaModel(BindAgent = true)]
         public async Task<HttpResponseMessage> ExportVipPlayerList(VipPlayerListMetaModel metaModel)
