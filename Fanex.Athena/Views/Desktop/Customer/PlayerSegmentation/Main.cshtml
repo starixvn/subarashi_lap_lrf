@@ -54,7 +54,7 @@
         TabKeys: @Html.Raw(Model.TabKeys.ToJson()),
         ProblemPlayer: {
             currencyList: @Html.Raw(problemPlayerVM.CurrencyList.Select(x => new { key = x.Key, value = x.Value, status = true }).ToJson()),
-            dateConstraint: { minDate: '1/1/2017', maxDate: '@problemPlayerVM.MaxDate.ToString("MM/dd/yyyy")', limitedMonthRange: 1 },
+            dateConstraint: { minDate: '@problemPlayerVM.MinDate.ToString("MM/dd/yyyy")', maxDate: '@problemPlayerVM.MaxDate.ToString("MM/dd/yyyy")', limitedMonthRange: null },
         },
         VipPlayerManagement: @Html.Raw(vipPlayerManagementData.ToJson())
     }

@@ -11,6 +11,7 @@
             FromDate = today;
             ToDate = today;
             MaxDate = today;
+            MinDate = DateTime.MinValue;
             IsGetAll = true;
         }
 
