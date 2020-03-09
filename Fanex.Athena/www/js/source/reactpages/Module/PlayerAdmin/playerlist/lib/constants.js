@@ -143,12 +143,6 @@ export const baStatusList = {
     'Off': 2
 }
 
-export const depositedList = {
-    'All': 0,
-    'Yes': 1,
-    'No': 2
-}
-
 export const headerText = {
     Status: LangHelper.getSingleResource('Status'),
     UserName: LangHelper.getSingleResource('Username'),

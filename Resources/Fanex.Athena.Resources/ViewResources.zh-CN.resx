@@ -2333,7 +2333,4 @@
   <data name="MatchPrecise" xml:space="preserve">
     <value>精准匹配</value>
   </data>
-  <data name="Deposited" xml:space="preserve">
-    <value>已存款</value>
-  </data>
 </root>

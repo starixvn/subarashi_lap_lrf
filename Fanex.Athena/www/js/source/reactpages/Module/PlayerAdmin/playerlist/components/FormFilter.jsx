@@ -10,7 +10,7 @@ import { licenseeType } from '../lib/constants';
 import CollapsiblePanel from '@jsroot/components/collapsible-panel';
 import UserGuide from '@jsroot/components/UserGuide';
 import LangHelper from '@jsroot/lib/langHelper';
-import { searchOptions, baStatusList, specialLevelListWithColor, emailPattern, oddsGroupListWithStyle, depositedList } from '../lib/constants';
+import { searchOptions, baStatusList, specialLevelListWithColor, emailPattern, oddsGroupListWithStyle } from '../lib/constants';
 import UserNameInput from './filter/UserNameInput';
 import QueryString from '@jsroot/lib/QueryString';
 import { encode } from '@jsroot/lib/htmlHelper';
@@ -34,8 +34,7 @@ export class FormFilter extends PureComponent {
             oddsGroup: this.allOddsGroupString,
             specialLevel: this.allSpecialLevel,
             baFilter: baStatusList.All,
-            searchOption: searchOptions.matchPrecise,
-            depositedFilter: depositedList.All
+            searchOption: searchOptions.matchPrecise
         }
     }
 
@@ -62,12 +61,9 @@ export class FormFilter extends PureComponent {
                 currencyIdList: this.allCurrencyString,
                 oddsGroup: this.allOddsGroupString,
                 specialLevel: this.allSpecialLevel,
-                baFilter: baStatusList.All,
-                depositedFilter: depositedList.All
+                baFilter: baStatusList.All
             });
-        } else if (prevProps.isAdvancedSearch !== isAdvancedSearch && isAdvancedSearch) {
-            this.setState({ depositedFilter: depositedList.Yes });
-        }
+        } 
     }
 
     searchPlayer() {

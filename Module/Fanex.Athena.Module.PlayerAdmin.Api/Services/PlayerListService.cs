@@ -63,7 +63,6 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
             objectDb.SetParameterValue("UserName", metaModel.UserName);
             objectDb.SetParameterValue("SearchOption", metaModel.SearchOption);
             objectDb.SetParameterValue("BaFilter", metaModel.BaFilter);
-            objectDb.SetParameterValue("DepositedFilter", metaModel.DepositedFilter);
             objectDb.SetParameterValue("SpecialLevel", metaModel.SpecialLevel);
             objectDb.SetParameterValue("OddsGroups", metaModel.OddsGroup);
             objectDb.SetParameterValue("PageSize", metaModel.PageSize);
