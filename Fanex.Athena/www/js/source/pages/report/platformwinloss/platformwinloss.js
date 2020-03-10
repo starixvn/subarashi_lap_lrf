@@ -17,7 +17,7 @@
     function ($, QueryString, Site, Report, PlatformWinLossOption, jqGridAdditional, MonthPicker, MultiSelect, Popup, ExcelHelper, DataHelper) {
         'use strict';
 
-        const BETLIST_IGNORED_PRODUCTS = ['AB', 'PP', 'CC', 'SG'];
+        const BETLIST_IGNORED_PRODUCTS = ['AB', 'PP', 'CC', 'SG', 'VRG'];
         let _platformNameMap = {};
 
         const _cacheData = {};
