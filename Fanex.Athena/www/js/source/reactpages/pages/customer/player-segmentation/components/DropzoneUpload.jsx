@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import LangHelper from '@jsroot/lib/langHelper';
+import { decode } from '@jsroot/lib/htmlHelper';
 import { useDropzone } from 'react-dropzone';
 
 const MbToByte = 1000 * 1000 * 1000;
@@ -16,9 +17,9 @@ const DropzoneUpload = (props) => {
 
     const onDropRejected = useCallback(rejectedFiles => {
         const rejectedFile = rejectedFiles[0];
-        let errorMsg = LangHelper.getSingleResource('UploadFileError');
+        let errorMsg = decode(LangHelper.getSingleResource('UploadFileError'));
         if (_isInvalidExtension(rejectedFile)) {
-            errorMsg = `${LangHelper.getSingleResource('FileExtensionIncorrect')} (${accept})`;
+            errorMsg = `${decode(LangHelper.getSingleResource('FileExtensionIncorrect'))} (${accept})`;
         } else if (_isInValidSize(rejectedFile)) {
             errorMsg = `${LangHelper.getSingleResource('FileUploadExceedSize')} ${props.maxSize}MB`;
         }

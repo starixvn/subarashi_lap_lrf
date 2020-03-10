@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import LangHelper from '@jsroot/lib/langHelper';
 import Excel from '@jsroot/lib/excel';
+import { decode } from '@jsroot/lib/htmlHelper';
 import { generateDefaultConfirmOption } from '@jsroot/lib/sweetAlert';
 import { ActionCreators } from '../actions';
 import DropzoneUpload from '../../../components/DropzoneUpload';
@@ -78,12 +79,12 @@ export const FormAction = props => {
             Excel.read(file, 0, listData => {
                 const column = ExcelHelper.getColumnName(listData[0], ExcelReaderColumn);
                 if(!column) {
-                    alert(LangHelper.getSingleResource("UploadFileError"))
+                    alert(decode(LangHelper.getSingleResource("UploadFileError")))
                     return;
                 }
                 const listValueOfColumn = listData.map(_ => _[column]);
                 if(listValueOfColumn.some(_ => StringHelper.isEmptyOrWhiteSpace(_))) {
-                    alert(LangHelper.getSingleResource("UploadFileError"))
+                    alert(decode(LangHelper.getSingleResource("UploadFileError")))
                     return;
                 }
 
@@ -100,7 +101,7 @@ export const FormAction = props => {
     const _renderNoteDropzoneUploadFile = () => {
         return (<>
             <div>
-                <a href={Url.dowloadVipPlayerListTemplate}>*{LangHelper.getSingleResource('ClickHere')}</a>
+                <a href={Url.dowloadVipPlayerListTemplate}>*{LangHelper.getSingleResource('ClickHere')}</a>&nbsp;
                 <span>{LangHelper.getSingleResource('ToDowloadTemplate')}</span>
             </div>
             <div>
