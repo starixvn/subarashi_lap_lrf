@@ -403,11 +403,29 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Already NOT VIP, no update.
+        /// </summary>
+        public static string AlreadyUpdateNotVipStatusSingle {
+            get {
+                return ResourceManager.GetString("AlreadyUpdateNotVipStatusSingle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Already VIP, no update: {0}.
         /// </summary>
         public static string AlreadyUpdateVipStatus {
             get {
                 return ResourceManager.GetString("AlreadyUpdateVipStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Already VIP, no update.
+        /// </summary>
+        public static string AlreadyUpdateVipStatusSingle {
+            get {
+                return ResourceManager.GetString("AlreadyUpdateVipStatusSingle", resourceCulture);
             }
         }
         
@@ -3148,6 +3166,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid player: {0}.
+        /// </summary>
+        public static string InvalidPlayerUpdateVipStatusSingle {
+            get {
+                return ResourceManager.GetString("InvalidPlayerUpdateVipStatusSingle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Request is not valid.
         /// </summary>
         public static string InvalidRequestMsg {
@@ -5353,6 +5380,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Retracted VIP player: {0}.
+        /// </summary>
+        public static string RetractedPlayerUpdateVipStatusSingle {
+            get {
+                return ResourceManager.GetString("RetractedPlayerUpdateVipStatusSingle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to RNG Casino and Bingo are not included in the report.
         /// </summary>
         public static string RngCasinoAndBingoExcludedNote {
@@ -5763,6 +5799,15 @@ namespace Fanex.Athena.Resources {
         public static string SuccessUpdateVipStatus {
             get {
                 return ResourceManager.GetString("SuccessUpdateVipStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Successfully update.
+        /// </summary>
+        public static string SuccessUpdateVipStatusSingle {
+            get {
+                return ResourceManager.GetString("SuccessUpdateVipStatusSingle", resourceCulture);
             }
         }
         

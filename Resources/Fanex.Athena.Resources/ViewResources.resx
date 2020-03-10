@@ -2686,4 +2686,24 @@
     <value>VIP Player Management</value>
     <comment>#128082</comment>
   </data>
+  <data name="AlreadyUpdateNotVipStatusSingle" xml:space="preserve">
+    <value>Already NOT VIP, no update</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="AlreadyUpdateVipStatusSingle" xml:space="preserve">
+    <value>Already VIP, no update</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="InvalidPlayerUpdateVipStatusSingle" xml:space="preserve">
+    <value>Invalid player: {0}</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="RetractedPlayerUpdateVipStatusSingle" xml:space="preserve">
+    <value>Retracted VIP player: {0}</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="SuccessUpdateVipStatusSingle" xml:space="preserve">
+    <value>Successfully update</value>
+    <comment>#128082</comment>
+  </data>
 </root>

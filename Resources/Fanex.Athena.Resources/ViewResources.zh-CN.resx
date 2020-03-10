@@ -2310,4 +2310,24 @@
     <value>VIP玩家管理</value>
     <comment>#128082</comment>
   </data>
+  <data name="AlreadyUpdateNotVipStatusSingle" xml:space="preserve">
+    <value>已不是VIP，无任何更新</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="AlreadyUpdateVipStatusSingle" xml:space="preserve">
+    <value>已经是VIP，无任何更新</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="InvalidPlayerUpdateVipStatusSingle" xml:space="preserve">
+    <value>无效的玩家: {0}</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="RetractedPlayerUpdateVipStatusSingle" xml:space="preserve">
+    <value>遭撤回VIP的玩家: {0}</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="SuccessUpdateVipStatusSingle" xml:space="preserve">
+    <value>更新成功</value>
+    <comment>#128082</comment>
+  </data>
 </root>
