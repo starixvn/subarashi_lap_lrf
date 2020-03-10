@@ -2,6 +2,7 @@
 {
     using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
     using Fanex.Athena.Resources;
+    using NPOI.SS.UserModel;
     using System;
     using System.Collections.Generic;
     using System.Web.Hosting;
@@ -13,7 +14,14 @@
         public VipPlayerExcel(IEnumerable<PlayerInfo> _dataSource)
         : base(HostingEnvironment.MapPath(ExcelTemplatePath), string.Empty, _dataSource)
         {
-            _infoHeaders.Insert(2, new Tuple<string, string>(ViewResources.Vip, "IsVip"));
+            _infoHeaders.Add(new Tuple<string, string>(ViewResources.Vip, "IsVip"));
+            _infoHeaders.Add(new Tuple<string, string>($"{ViewResources.AbnormalBet} (*)", "IsMarkVoid"));
+        }
+
+        protected override void AddRowDescription(ISheet sheet, int lastRowIndex)
+        {
+            var row = sheet.CreateRow(lastRowIndex + 1);
+            row.CreateCell(0).SetCellValue(ViewResources.AbnormalBetDescriptionReport);
         }
     }
 }

@@ -9,7 +9,7 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    public class PlayerExcel<T> : ReportBase
+    public abstract class PlayerExcel<T> : ReportBase
         where T : PlayerInfo
     {
         private const int RowContentTemplate = 1;
@@ -21,7 +21,7 @@
 
         public override int RowHeaderTemplate => 0;
 
-        public PlayerExcel(string templatePath, string reportTitle, IEnumerable<T> dataSource)
+        protected PlayerExcel(string templatePath, string reportTitle, IEnumerable<T> dataSource)
            : base(templatePath, dataSource.Count(), NumberOfRowPerSheet)
         {
             _dataSource = dataSource;
@@ -29,7 +29,6 @@
             {
                 new Tuple<string, string>(ViewResources.ExternalId, nameof(ViewResources.ExternalId)),
                 new Tuple<string, string>(ViewResources.SystemId, nameof(ViewResources.SystemId)),
-                new Tuple<string, string>($"{ViewResources.AbnormalBet} (*)", "IsMarkVoid")
             };
             IsMultiSheet = true;
         }
@@ -59,12 +58,6 @@
             AddRowDescription(sheet, sheet.LastRowNum);
         }
 
-        protected virtual void AddRowDescription(ISheet sheet, int lastRowIndex)
-        {
-            var row = sheet.CreateRow(lastRowIndex + 1);
-            row.CreateCell(0).SetCellValue(ViewResources.AbnormalBetDescriptionReport);
-        }
-
         protected virtual void AssignRowData(IRow row, T rowData, Type type)
         {
             for (int cellIndex = 0; cellIndex < _infoHeaders.Count; cellIndex++)
@@ -90,5 +83,7 @@
             }
             return cellValue;
         }
+
+        protected abstract void AddRowDescription(ISheet sheet, int lastRowIndex);
     }
 }
