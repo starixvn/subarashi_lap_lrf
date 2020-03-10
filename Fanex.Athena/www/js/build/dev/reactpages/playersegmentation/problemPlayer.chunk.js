@@ -3135,7 +3135,8 @@ const VipSwitcherCell = props => {
     const handlerAfterUpdateVipStatus = _lib_helpers_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_8__["UpdateVipStatusAlertOption"].createHandlerAfterUpdateVipStatus({
       setSweetAlertOption,
       handlerUpdateVipStatusSuccess,
-      isUpdateVip
+      isUpdateVip,
+      isSingleUpdate: true
     });
     const confirmProps = _lib_helpers_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_8__["UpdateVipStatusAlertOption"].createUpdateVipStatusConfirmProps({
       params,
@@ -3362,13 +3363,22 @@ _defineProperty(MessageHelper, "MsgColors", {
 });
 
 _defineProperty(MessageHelper, "GetMsgUpdateVipStatus", {
-  [0]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('SuccessUpdateVipStatus').replace('{0}', data.numberOfPlayer),
-  [100]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('InvalidPlayerUpdateVipStatus').replace('{0}', data.numberOfPlayer).replace('{1}', data.systemIds),
-  [101]: (data, isUpdateVip) => (isUpdateVip ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('AlreadyUpdateVipStatus') : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('AlreadyUpdateNotVipStatus')).replace('{0}', data.numberOfPlayer),
-  [102]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('RetractedPlayerUpdateVipStatus').replace('{0}', data.numberOfPlayer).replace('{1}', data.systemIds)
+  singleUpdate: {
+    [0]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('SuccessUpdateVipStatusSingle'),
+    [100]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('InvalidPlayerUpdateVipStatusSingle').replace('{0}', data.systemIds),
+    [101]: (data, isUpdateVip) => isUpdateVip ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('AlreadyUpdateVipStatusSingle') : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('AlreadyUpdateNotVipStatusSingle'),
+    [102]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('RetractedPlayerUpdateVipStatusSingle').replace('{0}', data.systemIds)
+  },
+  multipleUpdate: {
+    [0]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('SuccessUpdateVipStatus').replace('{0}', data.numberOfPlayer),
+    [100]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('InvalidPlayerUpdateVipStatus').replace('{0}', data.numberOfPlayer).replace('{1}', data.systemIds),
+    [101]: (data, isUpdateVip) => (isUpdateVip ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('AlreadyUpdateVipStatus') : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('AlreadyUpdateNotVipStatus')).replace('{0}', data.numberOfPlayer),
+    [102]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('RetractedPlayerUpdateVipStatus').replace('{0}', data.numberOfPlayer).replace('{1}', data.systemIds)
+  }
 });
 
-_defineProperty(MessageHelper, "GetListMsgUpdateVipStatus", (results, currentVipStatus) => {
+_defineProperty(MessageHelper, "GetListMsgUpdateVipStatus", (results, currentVipStatus, isSingleUpdate = false) => {
+  const fieldName = isSingleUpdate ? 'singleUpdate' : 'multipleUpdate';
   return results.map(_ => {
     const code = _.code;
     const msgColor = MessageHelper.MsgColors[code];
@@ -3378,7 +3388,7 @@ _defineProperty(MessageHelper, "GetListMsgUpdateVipStatus", (results, currentVip
       className: `icon ${msgColor.icon}`
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       className: msgColor.content
-    }, MessageHelper.GetMsgUpdateVipStatus[code](_, currentVipStatus)));
+    }, MessageHelper.GetMsgUpdateVipStatus[fieldName][code](_, currentVipStatus)));
   });
 });
 
@@ -3421,16 +3431,17 @@ const UpdateVipStatusAlertOption = {
     setSweetAlertOption,
     handlerUpdateVipStatusSuccess,
     isUpdateVip,
-    noAlertResult
+    noAlertResult,
+    isSingleUpdate
   }) => response => {
     let alertOpt;
 
     if (response.isSuccess) {
-      const resultMessage = _messageHelper__WEBPACK_IMPORTED_MODULE_3__["default"].GetListMsgUpdateVipStatus(response.data, isUpdateVip);
+      const resultMessage = _messageHelper__WEBPACK_IMPORTED_MODULE_3__["default"].GetListMsgUpdateVipStatus(response.data, isUpdateVip, isSingleUpdate);
       alertOpt = noAlertResult ? handlerUpdateVipStatusSuccess(resultMessage) : Object(_jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_1__["generateDefaultAlertOption"])(resultMessage, handlerUpdateVipStatusSuccess, null, _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_1__["predefinedIcons"].success);
       !noAlertResult && setSweetAlertOption(alertOpt);
     } else {
-      const message = _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('error');
+      const message = _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('ErrorProcessingMsg');
       alertOpt = Object(_jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_1__["generateDefaultAlertOption"])(message, () => setSweetAlertOption(null), null, _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_1__["predefinedIcons"].error);
       setSweetAlertOption(alertOpt);
     }

@@ -1122,7 +1122,8 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
     align-items: center;
     margin-bottom: 5px; }
   .dropzone .inner-dropzone {
-    padding: 20px; }
+    padding: 20px;
+    cursor: pointer; }
     .dropzone .inner-dropzone p {
       font-size: 14px;
       color: #147ccc;

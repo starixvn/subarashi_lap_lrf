@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 3/6/2020 2:13:45 PM
+// Generated at: 3/10/2020 1:27:31 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -133,7 +133,9 @@ window._language_en_US = {
   AllBetTypes: "All Bet Types",
   AllCurrencies: "All Currencies",
   AlreadyUpdateNotVipStatus: "Already NOT VIP, no update:  {0}",
+  AlreadyUpdateNotVipStatusSingle: "Already NOT VIP, no update",
   AlreadyUpdateVipStatus: "Already VIP, no update: {0}",
+  AlreadyUpdateVipStatusSingle: "Already VIP, no update",
   Amendment: "Resettlement",
   Amount: "Amount",
   AmountDue: "Amount Due",
@@ -438,6 +440,7 @@ window._language_en_US = {
   InvalidEmail: "Invalid email address",
   InvalidParams: "Invalid parameters",
   InvalidPlayerUpdateVipStatus: "Invalid player(s): {0} ({1})",
+  InvalidPlayerUpdateVipStatusSingle: "Invalid player: {0}",
   InvalidRequestMsg: "Request is not valid",
   InvalidRequestOrNotAuthorizedMsg: "Invalid request or you are not authorized to access the requested resource!",
   InvalidSubsidiaryNameMsg: "Please contact admin to check your subsidiary name.",
@@ -683,6 +686,7 @@ window._language_en_US = {
   ResultPending: "Result Pending",
   Results: "Results",
   RetractedPlayerUpdateVipStatus: "Retracted VIP player(s): {0} ({1})",
+  RetractedPlayerUpdateVipStatusSingle: "Retracted VIP player: {0}",
   RngCasinoAndBingoExcludedNote: "RNG Casino and Bingo are not included in the report",
   RNGCasinoUpdateSettingUnAvailableMsg: "RNG Casino Database is not currently available. Please try again later.",
   Running: "Running",
@@ -729,6 +733,7 @@ window._language_en_US = {
   SubsidiarySearch: "Subsidiary Search",
   SubsidiaryWL: "Subsidiary W/L",
   SuccessUpdateVipStatus: "Successfully update: {0}",
+  SuccessUpdateVipStatusSingle: "Successfully update",
   Summary: "Summary",
   Sunday: "Sunday",
   Suspended: "Suspended",

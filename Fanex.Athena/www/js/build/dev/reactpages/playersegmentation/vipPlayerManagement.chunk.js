@@ -2672,6 +2672,30 @@ class Excel {
 
 /***/ }),
 
+/***/ "./www/js/source/reactpages/lib/htmlHelper.js":
+/*!****************************************************!*\
+  !*** ./www/js/source/reactpages/lib/htmlHelper.js ***!
+  \****************************************************/
+/*! exports provided: encode, decode */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "encode", function() { return encode; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "decode", function() { return decode; });
+const encode = text => {
+  const p = document.createElement("p");
+  p.textContent = text;
+  return p.innerHTML;
+};
+const decode = html => {
+  const txt = document.createElement('textarea');
+  txt.innerHTML = html;
+  return txt.value;
+};
+
+/***/ }),
+
 /***/ "./www/js/source/reactpages/lib/stringHelper.js":
 /*!******************************************************!*\
   !*** ./www/js/source/reactpages/lib/stringHelper.js ***!
@@ -2796,7 +2820,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-/* harmony import */ var react_dropzone__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dropzone */ "./node_modules/react-dropzone/dist/es/index.js");
+/* harmony import */ var _jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/htmlHelper */ "./www/js/source/reactpages/lib/htmlHelper.js");
+/* harmony import */ var react_dropzone__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-dropzone */ "./node_modules/react-dropzone/dist/es/index.js");
+
 
 
 
@@ -2818,10 +2844,10 @@ const DropzoneUpload = props => {
   });
   const onDropRejected = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(rejectedFiles => {
     const rejectedFile = rejectedFiles[0];
-    let errorMsg = _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('UploadFileError');
+    let errorMsg = Object(_jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_2__["decode"])(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('UploadFileError'));
 
     if (_isInvalidExtension(rejectedFile)) {
-      errorMsg = `${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('FileExtensionIncorrect')} (${accept})`;
+      errorMsg = `${Object(_jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_2__["decode"])(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('FileExtensionIncorrect'))} (${accept})`;
     } else if (_isInValidSize(rejectedFile)) {
       errorMsg = `${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('FileUploadExceedSize')} ${props.maxSize}MB`;
     }
@@ -2831,7 +2857,7 @@ const DropzoneUpload = props => {
   const {
     getRootProps,
     getInputProps
-  } = Object(react_dropzone__WEBPACK_IMPORTED_MODULE_2__["useDropzone"])({
+  } = Object(react_dropzone__WEBPACK_IMPORTED_MODULE_3__["useDropzone"])({
     onDrop,
     onDropRejected,
     multiple,
@@ -2990,7 +3016,8 @@ const VipSwitcherCell = props => {
     const handlerAfterUpdateVipStatus = _lib_helpers_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_8__["UpdateVipStatusAlertOption"].createHandlerAfterUpdateVipStatus({
       setSweetAlertOption,
       handlerUpdateVipStatusSuccess,
-      isUpdateVip
+      isUpdateVip,
+      isSingleUpdate: true
     });
     const confirmProps = _lib_helpers_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_8__["UpdateVipStatusAlertOption"].createUpdateVipStatusConfirmProps({
       params,
@@ -3217,13 +3244,22 @@ _defineProperty(MessageHelper, "MsgColors", {
 });
 
 _defineProperty(MessageHelper, "GetMsgUpdateVipStatus", {
-  [0]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('SuccessUpdateVipStatus').replace('{0}', data.numberOfPlayer),
-  [100]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('InvalidPlayerUpdateVipStatus').replace('{0}', data.numberOfPlayer).replace('{1}', data.systemIds),
-  [101]: (data, isUpdateVip) => (isUpdateVip ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('AlreadyUpdateVipStatus') : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('AlreadyUpdateNotVipStatus')).replace('{0}', data.numberOfPlayer),
-  [102]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('RetractedPlayerUpdateVipStatus').replace('{0}', data.numberOfPlayer).replace('{1}', data.systemIds)
+  singleUpdate: {
+    [0]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('SuccessUpdateVipStatusSingle'),
+    [100]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('InvalidPlayerUpdateVipStatusSingle').replace('{0}', data.systemIds),
+    [101]: (data, isUpdateVip) => isUpdateVip ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('AlreadyUpdateVipStatusSingle') : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('AlreadyUpdateNotVipStatusSingle'),
+    [102]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('RetractedPlayerUpdateVipStatusSingle').replace('{0}', data.systemIds)
+  },
+  multipleUpdate: {
+    [0]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('SuccessUpdateVipStatus').replace('{0}', data.numberOfPlayer),
+    [100]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('InvalidPlayerUpdateVipStatus').replace('{0}', data.numberOfPlayer).replace('{1}', data.systemIds),
+    [101]: (data, isUpdateVip) => (isUpdateVip ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('AlreadyUpdateVipStatus') : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('AlreadyUpdateNotVipStatus')).replace('{0}', data.numberOfPlayer),
+    [102]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('RetractedPlayerUpdateVipStatus').replace('{0}', data.numberOfPlayer).replace('{1}', data.systemIds)
+  }
 });
 
-_defineProperty(MessageHelper, "GetListMsgUpdateVipStatus", (results, currentVipStatus) => {
+_defineProperty(MessageHelper, "GetListMsgUpdateVipStatus", (results, currentVipStatus, isSingleUpdate = false) => {
+  const fieldName = isSingleUpdate ? 'singleUpdate' : 'multipleUpdate';
   return results.map(_ => {
     const code = _.code;
     const msgColor = MessageHelper.MsgColors[code];
@@ -3233,7 +3269,7 @@ _defineProperty(MessageHelper, "GetListMsgUpdateVipStatus", (results, currentVip
       className: `icon ${msgColor.icon}`
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       className: msgColor.content
-    }, MessageHelper.GetMsgUpdateVipStatus[code](_, currentVipStatus)));
+    }, MessageHelper.GetMsgUpdateVipStatus[fieldName][code](_, currentVipStatus)));
   });
 });
 
@@ -3276,16 +3312,17 @@ const UpdateVipStatusAlertOption = {
     setSweetAlertOption,
     handlerUpdateVipStatusSuccess,
     isUpdateVip,
-    noAlertResult
+    noAlertResult,
+    isSingleUpdate
   }) => response => {
     let alertOpt;
 
     if (response.isSuccess) {
-      const resultMessage = _messageHelper__WEBPACK_IMPORTED_MODULE_3__["default"].GetListMsgUpdateVipStatus(response.data, isUpdateVip);
+      const resultMessage = _messageHelper__WEBPACK_IMPORTED_MODULE_3__["default"].GetListMsgUpdateVipStatus(response.data, isUpdateVip, isSingleUpdate);
       alertOpt = noAlertResult ? handlerUpdateVipStatusSuccess(resultMessage) : Object(_jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_1__["generateDefaultAlertOption"])(resultMessage, handlerUpdateVipStatusSuccess, null, _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_1__["predefinedIcons"].success);
       !noAlertResult && setSweetAlertOption(alertOpt);
     } else {
-      const message = _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('error');
+      const message = _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('ErrorProcessingMsg');
       alertOpt = Object(_jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_1__["generateDefaultAlertOption"])(message, () => setSweetAlertOption(null), null, _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_1__["predefinedIcons"].error);
       setSweetAlertOption(alertOpt);
     }
@@ -3794,13 +3831,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _jsroot_lib_excel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/excel */ "./www/js/source/reactpages/lib/excel.js");
-/* harmony import */ var _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/lib/sweetAlert */ "./www/js/source/reactpages/lib/sweetAlert.js");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../actions */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/vip-player-management/actions/index.js");
-/* harmony import */ var _components_DropzoneUpload__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../components/DropzoneUpload */ "./www/js/source/reactpages/pages/customer/player-segmentation/components/DropzoneUpload.jsx");
-/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/vip-player-management/lib/constants.js");
-/* harmony import */ var _lib_helpers_excelHelper__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../lib/helpers/excelHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/vip-player-management/lib/helpers/excelHelper.js");
-/* harmony import */ var _lib_helpers_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../lib/helpers/sweetAlertHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/helpers/sweetAlertHelper.js");
-/* harmony import */ var _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @jsroot/lib/stringHelper */ "./www/js/source/reactpages/lib/stringHelper.js");
+/* harmony import */ var _jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/lib/htmlHelper */ "./www/js/source/reactpages/lib/htmlHelper.js");
+/* harmony import */ var _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/lib/sweetAlert */ "./www/js/source/reactpages/lib/sweetAlert.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../actions */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/vip-player-management/actions/index.js");
+/* harmony import */ var _components_DropzoneUpload__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../components/DropzoneUpload */ "./www/js/source/reactpages/pages/customer/player-segmentation/components/DropzoneUpload.jsx");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/vip-player-management/lib/constants.js");
+/* harmony import */ var _lib_helpers_excelHelper__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../lib/helpers/excelHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/vip-player-management/lib/helpers/excelHelper.js");
+/* harmony import */ var _lib_helpers_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../lib/helpers/sweetAlertHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/helpers/sweetAlertHelper.js");
+/* harmony import */ var _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @jsroot/lib/stringHelper */ "./www/js/source/reactpages/lib/stringHelper.js");
+
 
 
 
@@ -3843,19 +3882,19 @@ const FormAction = props => {
 
   const _buildAlertOptionUpdateVipStatus = (params, isUpdateVip, noAlertResult, handlerUpdateVipStatusSuccess) => {
     const confirmMessage = isUpdateVip ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("ConfirmActivateVIPPlayer") : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("ConfirmDeactivateVIPPlayer");
-    handlerUpdateVipStatusSuccess = handlerUpdateVipStatusSuccess || _lib_helpers_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_10__["UpdateVipStatusAlertOption"].createHandlerAfterUpdateVipStatusSuccess(props);
-    const handlerAfterUpdateVipStatus = _lib_helpers_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_10__["UpdateVipStatusAlertOption"].createHandlerAfterUpdateVipStatus({
+    handlerUpdateVipStatusSuccess = handlerUpdateVipStatusSuccess || _lib_helpers_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_11__["UpdateVipStatusAlertOption"].createHandlerAfterUpdateVipStatusSuccess(props);
+    const handlerAfterUpdateVipStatus = _lib_helpers_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_11__["UpdateVipStatusAlertOption"].createHandlerAfterUpdateVipStatus({
       setSweetAlertOption,
       handlerUpdateVipStatusSuccess,
       isUpdateVip,
       noAlertResult
     });
-    const confirmProps = _lib_helpers_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_10__["UpdateVipStatusAlertOption"].createUpdateVipStatusConfirmProps({
+    const confirmProps = _lib_helpers_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_11__["UpdateVipStatusAlertOption"].createUpdateVipStatusConfirmProps({
       params,
       updateVipStatus,
       handlerAfterUpdateVipStatus
     });
-    const confirmOptions = Object(_jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_5__["generateDefaultConfirmOption"])(confirmMessage, _handleCloseAlert, confirmProps, _cancelProps);
+    const confirmOptions = Object(_jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_6__["generateDefaultConfirmOption"])(confirmMessage, _handleCloseAlert, confirmProps, _cancelProps);
     return confirmOptions;
   };
 
@@ -3899,17 +3938,17 @@ const FormAction = props => {
     const file = files[0];
     _jsroot_lib_excel__WEBPACK_IMPORTED_MODULE_4__["default"].process(() => {
       _jsroot_lib_excel__WEBPACK_IMPORTED_MODULE_4__["default"].read(file, 0, listData => {
-        const column = _lib_helpers_excelHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getColumnName(listData[0], _lib_constants__WEBPACK_IMPORTED_MODULE_8__["ExcelReaderColumn"]);
+        const column = _lib_helpers_excelHelper__WEBPACK_IMPORTED_MODULE_10__["default"].getColumnName(listData[0], _lib_constants__WEBPACK_IMPORTED_MODULE_9__["ExcelReaderColumn"]);
 
         if (!column) {
-          alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("UploadFileError"));
+          alert(Object(_jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_5__["decode"])(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("UploadFileError")));
           return;
         }
 
         const listValueOfColumn = listData.map(_ => _[column]);
 
-        if (listValueOfColumn.some(_ => _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_11__["default"].isEmptyOrWhiteSpace(_))) {
-          alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("UploadFileError"));
+        if (listValueOfColumn.some(_ => _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_12__["default"].isEmptyOrWhiteSpace(_))) {
+          alert(Object(_jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_5__["decode"])(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("UploadFileError")));
           return;
         }
 
@@ -3926,12 +3965,12 @@ const FormAction = props => {
 
   const _renderNoteDropzoneUploadFile = () => {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-      href: _lib_constants__WEBPACK_IMPORTED_MODULE_8__["Url"].dowloadVipPlayerListTemplate
-    }, "*", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('ClickHere')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('ToDowloadTemplate'))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, `*${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('MaximumUploadFileSize')}: ${1} MB`)));
+      href: _lib_constants__WEBPACK_IMPORTED_MODULE_9__["Url"].dowloadVipPlayerListTemplate
+    }, "*", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('ClickHere')), "\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('ToDowloadTemplate'))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, `*${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('MaximumUploadFileSize')}: ${1} MB`)));
   };
 
   const _renderDropzoneUploadFile = () => {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_DropzoneUpload__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_DropzoneUpload__WEBPACK_IMPORTED_MODULE_8__["default"], {
       multiple: false,
       accept: '.xls,.xlsx',
       maxSize: 1,
@@ -3972,7 +4011,7 @@ function mapDispatchToProps(dispatch) {
     updateVipStatus,
     setSweetAlertOption,
     setPagingOption
-  } = _actions__WEBPACK_IMPORTED_MODULE_6__["ActionCreators"];
+  } = _actions__WEBPACK_IMPORTED_MODULE_7__["ActionCreators"];
   return Object(redux__WEBPACK_IMPORTED_MODULE_2__["bindActionCreators"])({
     searchPlayer,
     updateVipStatus,

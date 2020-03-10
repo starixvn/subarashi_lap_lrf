@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 3/6/2020 2:13:45 PM
+// Generated at: 3/10/2020 1:27:31 PM
 window._language_zh_CN = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -127,7 +127,9 @@ window._language_zh_CN = {
   AllBetTypes: "所有投注类型",
   AllCurrencies: "所有货币",
   AlreadyUpdateNotVipStatus: "已不是VIP，无任何更新: {0}",
+  AlreadyUpdateNotVipStatusSingle: "已不是VIP，无任何更新",
   AlreadyUpdateVipStatus: "已经是VIP，无任何更新: {0}",
+  AlreadyUpdateVipStatusSingle: "已经是VIP，无任何更新",
   Amendment: "重新结算",
   Amount: "金额",
   AmountDue: "应付金额",
@@ -392,6 +394,7 @@ window._language_zh_CN = {
   InvalidEmail: "无效的信箱地址",
   InvalidParams: "无效的参数",
   InvalidPlayerUpdateVipStatus: "无效的玩家: {0} ({1})",
+  InvalidPlayerUpdateVipStatusSingle: "无效的玩家: {0}",
   InvalidRequestMsg: "请求无效",
   InvalidRequestOrNotAuthorizedMsg: "无效的请求或您未被授权访问所请求的资源",
   IsNeutral: "(中)",
@@ -610,6 +613,7 @@ window._language_zh_CN = {
   ResultPending: "赛果待定",
   Results: "赛果",
   RetractedPlayerUpdateVipStatus: "遭撤回VIP的玩家: {0} ({1})",
+  RetractedPlayerUpdateVipStatusSingle: "遭撤回VIP的玩家: {0}",
   RngCasinoAndBingoExcludedNote: "此报告不包含娱乐城及宾果",
   RNGCasinoUpdateSettingUnAvailableMsg: "RNG Casino Database is not currently available. Please try again later.",
   Running: "进行中",
@@ -653,6 +657,7 @@ window._language_zh_CN = {
   SubsidiaryPerformance: "子网站报告",
   SubsidiaryWL: "子网站输赢",
   SuccessUpdateVipStatus: "更新成功: {0}",
+  SuccessUpdateVipStatusSingle: "更新成功",
   Summary: "总结",
   Sunday: "星期六",
   Suspended: "暂停",
