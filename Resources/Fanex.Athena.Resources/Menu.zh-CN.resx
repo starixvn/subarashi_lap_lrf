@@ -340,4 +340,8 @@
     <value>注单中心</value>
     <comment>80941</comment>
   </data>
+  <data name="Menu_87" xml:space="preserve">
+    <value>玩家分类</value>
+    <comment>Player Segmentation</comment>
+  </data>
 </root>

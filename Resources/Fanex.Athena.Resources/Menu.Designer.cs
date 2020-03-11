@@ -619,6 +619,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Player Segmentation.
+        /// </summary>
+        public static string Menu_87 {
+            get {
+                return ResourceManager.GetString("Menu_87", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Odd/Even + 1x2 + DND.
         /// </summary>
         public static string Menu_9 {

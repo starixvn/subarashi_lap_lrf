@@ -319,4 +319,8 @@
     <value>Daily Bets</value>
     <comment>122789</comment>
   </data>
+  <data name="Menu_87" xml:space="preserve">
+    <value>Player Segmentation</value>
+    <comment>#128082</comment>
+  </data>
 </root>
