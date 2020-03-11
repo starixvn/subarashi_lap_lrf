@@ -12,6 +12,7 @@ import Site from '@jsroot/lib/site';
 import AppData from '@jsroot/lib/AppData'
 import DataService from '@jsroot/lib/DataService.js'
 import { ActionCreators } from '../actions'
+import { Url } from '../lib/constants';
 import ParamHelper from '../lib/helpers/paramHelper';
 import DataSourceHelper from '../../../lib/helpers/dataSourceHelper';
 import GridHelper from '../../../lib/helpers/gridHelper';
@@ -38,7 +39,7 @@ export class FormFilter extends PureComponent {
         if (!params) {
             return;
         }
-        DataService.getFile('Api/PlayerSegmentation/ExportProblemPlayerList', params)
+        DataService.getFile(Url.exportProblemPlayerList, params)
             .then((response) => {
                 const NoContentStatusCode = 204;
                 if (response.status === NoContentStatusCode) {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import LangHelper from '@jsroot/lib/langHelper';
@@ -13,9 +13,11 @@ import { UpdateVipStatusAlertOption } from '../../../lib/helpers/sweetAlertHelpe
 import StringHelper from '@jsroot/lib/stringHelper';
 
 export const FormAction = props => {
-    const { isActiveTaggingAction, playerList, updateVipStatus, setSweetAlertOption } = props;
+    const { isActiveTaggingAction, playerList, updateVipStatus, setSweetAlertOption, selectedParams } = props;
     const [displayUploadDropzone, setDisplayUploadDropzone] = useState(false);
     const [resultMsgSubmitVipListFile, setResultMsgSubmitVipListFile] = useState(null);
+
+    useEffect(() => { resultMsgSubmitVipListFile && setDisplayUploadDropzone(false) }, [selectedParams]);
 
     const _handleCloseAlert = () => {
         setSweetAlertOption(null);
@@ -101,7 +103,7 @@ export const FormAction = props => {
     const _renderNoteDropzoneUploadFile = () => {
         return (<>
             <div>
-                <a href={Url.dowloadVipPlayerListTemplate}>*{LangHelper.getSingleResource('ClickHere')}</a>&nbsp;
+                <a href={Url.vipPlayerListTemplate}>*{LangHelper.getSingleResource('ClickHere')}</a>&nbsp;
                 <span>{LangHelper.getSingleResource('ToDowloadTemplate')}</span>
             </div>
             <div>

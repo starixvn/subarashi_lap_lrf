@@ -5,12 +5,13 @@ import Select from 'react-select'
 import MultipleSelect from '@9softstudio/react-multiselect'
 import AutoComplete from '@jsroot/components/auto-complete'
 import CollapsiblePanel from '@jsroot/components/collapsible-panel'
-import { ActionCreators } from '../actions'
 import LangHelper from '@jsroot/lib/langHelper'
 import StringHelper from '@jsroot/lib/stringHelper'
 import Site from '@jsroot/lib/site'
 import AppData from '@jsroot/lib/AppData'
 import DataService from '@jsroot/lib/DataService.js'
+import { ActionCreators } from '../actions'
+import { Url } from '../lib/constants';
 import DataSourceHelper from '../../../lib/helpers/dataSourceHelper';
 import ParamHelper from "../lib/helpers/paramHelper";
 import GridHelper from "../../../lib/helpers/gridHelper";
@@ -36,7 +37,7 @@ export class FormFilter extends PureComponent {
         if (!params) {
             return;
         }
-        DataService.getFile('Api/PlayerSegmentation/ExportVipPlayerList', params).then((response) => {
+        DataService.getFile(Url.exportVipPlayerList, params).then((response) => {
             const NoContentStatusCode = 204;
             if(response.status === NoContentStatusCode){
                 alert(LangHelper.getSingleResource("NoInfo"));

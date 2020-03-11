@@ -6,8 +6,8 @@ export const dataGridHeaders = [
     { key: 'vip', text:LangHelper.getSingleResource('Vip'), colWidth: 100 },
 ]
 export const Url = {
-    dowloadVipPlayerListTemplate: 'PlayerSegmentation/DowloadVipListTemplate',
-    uploadVipList:'Api/PlayerSegmentation/UploadVipList'
+    vipPlayerListTemplate: 'PlayerSegmentation/DowloadVipListTemplate',
+    exportVipPlayerList: 'Api/PlayerSegmentation/ExportVipPlayerList'
 }
 
 export const ExcelReaderColumn = 'systemid';

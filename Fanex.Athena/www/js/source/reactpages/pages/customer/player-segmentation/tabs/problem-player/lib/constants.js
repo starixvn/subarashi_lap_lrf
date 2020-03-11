@@ -6,3 +6,7 @@ export const dataGridFullHeaders = [
     { key: 'markDate', text: LangHelper.getSingleResource('MarkDate'), sortBy: 'markDate', colWidth: 100 },
     { key: 'vip', text:LangHelper.getSingleResource('Vip'), colWidth: 100, show: false },
 ]
+
+export const Url = {
+    exportProblemPlayerList: 'Api/PlayerSegmentation/ExportProblemPlayerList'
+}
