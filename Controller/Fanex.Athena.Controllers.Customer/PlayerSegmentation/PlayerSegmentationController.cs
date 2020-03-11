@@ -31,6 +31,7 @@
             _authService = authService;
         }
 
+        [FunctionAuthorization(PermissionKeys.PlayerProblemManagement, PermissionKeys.PlayerVIPManagement)]
         public ViewResult Index()
         {
             var currencyList = SessionServiceInstance.UserSession.CurrencyList;
