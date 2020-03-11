@@ -30,21 +30,18 @@
         [ApiAutoBindMetaModel(BindAgent = true)]
         public async Task<HttpResponseMessage> ExportVipPlayerList(VipPlayerListMetaModel metaModel)
         {
-            if (metaModel.IsValid)
+            metaModel.PageIndex = 1;
+            metaModel.PageSize = int.MaxValue - 1000;
+
+            var dataSource = await _playerDataAccess.GetVipPlayerListAsync(metaModel).ConfigureAwait(false);
+            if (dataSource.Data.Any())
             {
-                metaModel.PageIndex = 1;
-                metaModel.PageSize = int.MaxValue - 1000;
+                const string fileName = "VipPlayerList.xls";
+                var excel = new VipPlayerExcel(dataSource.Data);
+                excel.Export();
 
-                var dataSource = await _playerDataAccess.GetVipPlayerListAsync(metaModel).ConfigureAwait(false);
-                if (dataSource.Data.Any())
-                {
-                    const string fileName = "VipPlayerList.xls";
-                    var excel = new VipPlayerExcel(dataSource.Data);
-                    excel.Export();
-
-                    var result = ExcelStream(excel.Workbook, fileName);
-                    return result;
-                }
+                var result = ExcelStream(excel.Workbook, fileName);
+                return result;
             }
 
             return new HttpResponseMessage { StatusCode = System.Net.HttpStatusCode.NoContent };

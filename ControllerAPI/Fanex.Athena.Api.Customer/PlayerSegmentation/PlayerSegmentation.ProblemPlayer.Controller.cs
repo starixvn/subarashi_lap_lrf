@@ -31,24 +31,21 @@
         [ApiAutoBindMetaModel(BindAgent = true)]
         public async Task<HttpResponseMessage> ExportProblemPlayerList(ProblemPlayerListMetaModel metaModel)
         {
-            if (metaModel.IsValid)
+            var userSession = SessionService.UserSession;
+            var hasVIPPermission = _authService.HasPermissions(userSession, PermissionKeys.PlayerVIPManagement);
+
+            metaModel.PageIndex = 1;
+            metaModel.PageSize = int.MaxValue - 1000;
+
+            var dataSource = await _playerDataAccess.GetProblemPlayerListAsync(metaModel).ConfigureAwait(false);
+            if (dataSource.Data.Any())
             {
-                var userSession = SessionService.UserSession;
-                var hasVIPPermission = _authService.HasPermissions(userSession, PermissionKeys.PlayerVIPManagement);
+                const string fileName = "ProblemPlayerList.xls";
+                var excel = new ProblemPlayerExcel(dataSource.Data, hasVIPPermission);
+                excel.Export();
 
-                metaModel.PageIndex = 1;
-                metaModel.PageSize = int.MaxValue - 1000;
-
-                var dataSource = await _playerDataAccess.GetProblemPlayerListAsync(metaModel).ConfigureAwait(false);
-                if (dataSource.Data.Any())
-                {
-                    const string fileName = "ProblemPlayerList.xls";
-                    var excel = new ProblemPlayerExcel(dataSource.Data, hasVIPPermission);
-                    excel.Export();
-
-                    var result = ExcelStream(excel.Workbook, fileName);
-                    return result;
-                }
+                var result = ExcelStream(excel.Workbook, fileName);
+                return result;
             }
 
             return new HttpResponseMessage { StatusCode = System.Net.HttpStatusCode.NoContent };
