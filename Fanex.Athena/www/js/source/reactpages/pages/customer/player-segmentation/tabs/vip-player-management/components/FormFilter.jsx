@@ -33,10 +33,16 @@ export class FormFilter extends PureComponent {
 
     exportExcel = (event) => {
         event.preventDefault();
-        const params = this.props.selectedParams;
-        if (!params) {
+        const { selectedParams, pagingOption } = this.props;
+        if (!selectedParams) {
             return;
         }
+        const sortInfo = GridHelper.getSortInfoFromPagingOption(pagingOption);
+        const params = {
+            ...selectedParams,
+            ...sortInfo
+        }
+        
         DataService.getFile(Url.exportVipPlayerList, params).then((response) => {
             const NoContentStatusCode = 204;
             if(response.status === NoContentStatusCode){
