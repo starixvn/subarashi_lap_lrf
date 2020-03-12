@@ -37,12 +37,11 @@ export class FormFilter extends PureComponent {
         if (!selectedParams) {
             return;
         }
-        const sortInfo = GridHelper.getSortInfoFromPagingOption(pagingOption);
         const params = {
             ...selectedParams,
-            ...sortInfo
+            ...pagingOption
         }
-        
+
         DataService.getFile(Url.exportVipPlayerList, params).then((response) => {
             const NoContentStatusCode = 204;
             if(response.status === NoContentStatusCode){

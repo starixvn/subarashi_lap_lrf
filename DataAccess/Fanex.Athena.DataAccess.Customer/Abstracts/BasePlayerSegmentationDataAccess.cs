@@ -15,7 +15,7 @@ namespace Fanex.Athena.DataAccess.Customer
         protected async Task<IEnumerable<PlayerInfo>> ReadPlayerList(IObjectDb db, Action<IDataReader, PlayerInfo> readPlayerExtraData = null)
         {
             var playerList = new List<PlayerInfo>();
-            using (var reader = await db.ExecuteReaderAsync())
+            using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
             {
                 while (reader.Read())
                 {

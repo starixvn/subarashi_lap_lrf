@@ -30,10 +30,8 @@
         [ApiAutoBindMetaModel(BindAgent = true)]
         public async Task<HttpResponseMessage> ExportVipPlayerList(VipPlayerListMetaModel metaModel)
         {
-            metaModel.PageIndex = 1;
-            metaModel.PageSize = int.MaxValue - 1000;
-
             var dataSource = await _playerDataAccess.GetVipPlayerListAsync(metaModel).ConfigureAwait(false);
+
             if (dataSource.Data.Any())
             {
                 const string fileName = "VipPlayerList.xls";

@@ -34,9 +34,6 @@
             var userSession = SessionService.UserSession;
             var hasVIPPermission = _authService.HasPermissions(userSession, PermissionKeys.PlayerVIPManagement);
 
-            metaModel.PageIndex = 1;
-            metaModel.PageSize = int.MaxValue - 1000;
-
             var dataSource = await _playerDataAccess.GetProblemPlayerListAsync(metaModel).ConfigureAwait(false);
             if (dataSource.Data.Any())
             {
