@@ -3989,9 +3989,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
         return;
       }
 
-      const sortInfo = _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_17__["default"].getSortInfoFromPagingOption(pagingOption);
-
-      const params = _objectSpread({}, selectedParams, {}, sortInfo);
+      const params = _objectSpread({}, selectedParams, {}, pagingOption);
 
       _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_12__["default"].getFile(_lib_constants__WEBPACK_IMPORTED_MODULE_14__["Url"].exportProblemPlayerList, params).then(response => {
         const NoContentStatusCode = 204;
