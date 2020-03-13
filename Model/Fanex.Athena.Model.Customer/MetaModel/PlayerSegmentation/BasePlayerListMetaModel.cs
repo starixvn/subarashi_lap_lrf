@@ -8,6 +8,8 @@
         {
             PageIndex = 1;
             PageSize = 500;
+            OrderCol = 1;
+            SortType = 1;
         }
 
         public string UserName { get; set; }
