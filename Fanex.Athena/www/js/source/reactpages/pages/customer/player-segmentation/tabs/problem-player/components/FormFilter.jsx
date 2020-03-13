@@ -39,9 +39,10 @@ export class FormFilter extends PureComponent {
         if (!selectedParams) {
             return;
         }
+        const sortInfo = GridHelper.getSortInfoFromPagingOption(pagingOption);
         const params = {
             ...selectedParams,
-            ...pagingOption
+            ...sortInfo
         }
 
         DataService.getFile(Url.exportProblemPlayerList, params)
