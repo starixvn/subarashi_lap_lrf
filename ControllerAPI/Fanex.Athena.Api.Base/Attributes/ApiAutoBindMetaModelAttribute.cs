@@ -12,6 +12,8 @@ namespace Fanex.Athena.Api.Base.Attributes
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
     public sealed class ApiAutoBindMetaModelAttribute : ActionFilterAttribute
     {
+        public bool BindExportAll { get; set; }
+
         public bool BindAgent { get; set; }
 
         public bool BindUserId { get; set; }
@@ -48,6 +50,11 @@ namespace Fanex.Athena.Api.Base.Attributes
             {
                 var balanceUpDataAccess = new BalanceUpDataAccess(null, null);
                 AutoBindMetaModelService.MapBalanceUpAndMoveBet(actionArgument, balanceUpDataAccess);
+            }
+
+            if (BindExportAll)
+            {
+                AutoBindMetaModelService.MapExportAll(actionArgument);
             }
 
             base.OnActionExecuting(actionContext);

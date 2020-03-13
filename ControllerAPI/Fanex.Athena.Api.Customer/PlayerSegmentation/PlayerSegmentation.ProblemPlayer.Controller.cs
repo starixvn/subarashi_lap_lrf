@@ -28,7 +28,7 @@
         [HttpPost]
         [ApiFunctionAuthorization(PermissionKeys.PlayerProblemManagement)]
         [ValidationApiRequest(IsValidCurrencyList = true)]
-        [ApiAutoBindMetaModel(BindAgent = true)]
+        [ApiAutoBindMetaModel(BindAgent = true, BindExportAll = true)]
         public async Task<HttpResponseMessage> ExportProblemPlayerList(ProblemPlayerListMetaModel metaModel)
         {
             var userSession = SessionService.UserSession;

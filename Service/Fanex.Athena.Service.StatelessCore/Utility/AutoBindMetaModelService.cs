@@ -181,5 +181,15 @@ namespace Fanex.Athena.Service.StatelessCore.Utility
                 actionArguments[item.Key] = value;
             }
         }
+
+        public static void MapExportAll(IDictionary<string, object> actionArguments)
+        {
+            var item = actionArguments.FirstOrDefault(x => x.Value is IMetaModelPaging);
+            if (item.Value is IMetaModelPaging metaModelPaging)
+            {
+                metaModelPaging.PageIndex = 1;
+                metaModelPaging.PageSize = int.MaxValue - 1000;
+            }
+        }
     }
 }

@@ -2,7 +2,7 @@
 {
     using Fanex.Athena.Model.Core.MetaModel;
 
-    public abstract class BasePlayerListMetaModel : IMetaModelValidation, IMetaModelAgent, IMetaModelCurrencyIdList
+    public abstract class BasePlayerListMetaModel : IMetaModelValidation, IMetaModelAgent, IMetaModelCurrencyIdList, IMetaModelPaging
     {
         protected BasePlayerListMetaModel()
         {

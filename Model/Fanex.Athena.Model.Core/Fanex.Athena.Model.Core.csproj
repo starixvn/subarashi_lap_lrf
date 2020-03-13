@@ -153,6 +153,7 @@
     <Compile Include="MetaModel\IMetaModelIP.cs" />
     <Compile Include="MetaModel\IMetaModelLanguage.cs" />
     <Compile Include="MetaModel\IMetaModelFunctionContract.cs" />
+    <Compile Include="MetaModel\IMetaModelPaging.cs" />
     <Compile Include="MetaModel\IMetaModelProduct.cs" />
     <Compile Include="MetaModel\IMetaModelProductCodeList.cs" />
     <Compile Include="MetaModel\IMetalModelValidation.cs" />
