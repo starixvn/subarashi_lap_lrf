@@ -715,6 +715,7 @@
     <Content Include="www\css\build\dev\reactpages\dailybets\index.css.map" />
     <Content Include="Views\Desktop\BetList\SGDetail\Main.cshtml" />
     <Content Include="Views\Desktop\Customer\PlayerSegmentation\Main.cshtml" />
+    <Content Include="Views\Desktop\Module\PlayerAdmin\PlayerDetailTransaction\Index.cshtml" />
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\VipPlayerUploadTemplate.xls" />
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\ProblemPlayerList.xls" />
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\VipPlayerList.xls" />

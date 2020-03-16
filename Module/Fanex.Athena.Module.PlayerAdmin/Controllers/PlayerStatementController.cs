@@ -46,7 +46,7 @@
                 MinDate = new DateTime(today.Year - MaximumYear, 1, 1)
             };
 
-            return View("~/Views/Desktop/Module/PlayerAdmin/PlayerStatement/Statement.cshtml", viewModel);
+            return View("~/Views/Desktop/Module/PlayerAdmin/PlayerDetailTransaction/Index.cshtml", viewModel);
         }
 
         [HttpPost]

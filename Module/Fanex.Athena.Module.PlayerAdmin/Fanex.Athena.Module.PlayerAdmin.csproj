@@ -105,6 +105,7 @@
     <Compile Include="Controllers\BetLimits\RngKenoBetLimitController.cs" />
     <Compile Include="Controllers\BetLimits\SportsBookBetLimitController.cs" />
     <Compile Include="Controllers\PlayerBtcSingleCustomerController.cs" />
+    <Compile Include="Controllers\PlayerDetailTransactionController.cs" />
     <Compile Include="Controllers\PlayerWinLossController.cs" />
     <Compile Include="Controllers\PlayerBetListController.cs" />
     <Compile Include="Controllers\PlayerStatementController.cs" />
