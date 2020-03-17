@@ -23,7 +23,7 @@
                 platfrom,
                 languageCode = language
             };
-            return await _betListApiClient.PostStringAsync("/VirtualGamesResultPopup/Index", model, language).ConfigureAwait(false);
+            return await _betListApiClient.PostStringAsync("/VirtualGamesResultPopup/GetDetailResult", model, language).ConfigureAwait(false);
         }
     }
 }
