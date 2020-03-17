@@ -280,6 +280,7 @@ class BetList {
 
     getVRGResultUrl(rootUrl, gamePlayId, platform) {
         let url = rootUrl + 'VirtualGamesResultPopup/Index';
+        console.log(gamePlayId)
         url = QueryString.setParam(url, 'gamePlayId', gamePlayId);
         url = QueryString.setParam(url, 'platform', platform);
 
