@@ -278,9 +278,9 @@ class BetList {
         return url;
     }
 
-    getVRGResultUrl(rootUrl, gameId, platform) {
+    getVRGResultUrl(rootUrl, gamePlayId, platform) {
         let url = rootUrl + 'VirtualGamesResultPopup/Index';
-        url = QueryString.setParam(url, 'gameId', gameId);
+        url = QueryString.setParam(url, 'gamePlayId', gamePlayId);
         url = QueryString.setParam(url, 'platform', platform);
 
         return url;

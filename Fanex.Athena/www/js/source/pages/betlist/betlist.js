@@ -417,10 +417,10 @@
                 });
             },
 
-            viewVRGResult: function (gameId, platform, title) {
+            viewVRGResult: function (gamePlayId, platform, title) {
                 const url = Site.resolveClientUrl('VirtualGamesResultPopup/Index');
                 Site.blockUI();
-                $.get(url + '?gameId=' + gameId + '&platform=' + platform, function (result) {
+                $.get(url + '?gamePlayId=' + gamePlayId + '&platform=' + platform, function (result) {
                     if (result !== '') {
                         showResultPopUp(result, { width: 800, height: 380, title: title });
                         Site.unBlockUI();
