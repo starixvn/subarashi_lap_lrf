@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Root>
   <Group Name="Default">
-    <Function Name="_Default" Product="SB,BA,NG,VS,CS,KN,AGC,PTCS,GD,VG,BT,VB,AB,CB,FW,CO,VS2,LT,SG,BX,PP,CC"></Function>
+    <Function Name="_Default" Product="SB,BA,NG,VS,CS,KN,AGC,PTCS,GD,VG,BT,VB,AB,CB,FW,CO,VS2,LT,SG,BX,PP,CC,VRG"></Function>
   </Group>
 
   <Group Name="Report">
