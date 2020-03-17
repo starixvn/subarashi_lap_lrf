@@ -3612,13 +3612,15 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! bignumber.js v2.4.0 https://github.com/Mik
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js"),
-    __webpack_require__(/*! lib/jqgrid/jquery.jqgrid.additional */ "./www/js/source/lib/jqgrid/jquery.jqgrid.additional.js"), __webpack_require__(/*! lib/jqgrid/jquery.jqGrid.en */ "./www/js/source/lib/jqgrid/jquery.jqGrid.en.js"), __webpack_require__(/*! lib/jqgrid/jquery.jqGrid.min */ "./www/js/source/lib/jqgrid/jquery.jqGrid.min.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, Site, jqGridAdditional) {
+    __webpack_require__(/*! lib/jqgrid/jquery.jqgrid.additional */ "./www/js/source/lib/jqgrid/jquery.jqgrid.additional.js"), __webpack_require__(/*! common/popup */ "./www/js/source/common/popup.js"),
+    __webpack_require__(/*! lib/jqgrid/jquery.jqGrid.en */ "./www/js/source/lib/jqgrid/jquery.jqGrid.en.js"), __webpack_require__(/*! lib/jqgrid/jquery.jqGrid.min */ "./www/js/source/lib/jqgrid/jquery.jqGrid.min.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, Site, jqGridAdditional, Popup) {
         const GRID_ID = 'ReportGrid';
         let _ajaxRequest = null;
 
         const _me = {
             initialize: function () {
                 Site.initialize();
+                _me.informRemoveFunction();
                 Site.addUserGuide({
                     resourceName: 'CustomerLog',
                     title: Site.getSingleResource('CustomerLog')
@@ -3706,12 +3708,26 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                 if (_ajaxRequest !== null) {
                     _ajaxRequest.abort();
                 }
+            },
+            informRemoveFunction: function () {
+                const buttons = [
+                    {
+                        text: Site.getSingleResource('OK'),
+                        isClosedOnClick: true,
+                        classes: 'btn btn-submit'
+                    }];
+
+                Popup.openPopupWithButton(
+                    '<div><p>' + Site.getSingleResource('Message_RemoveCustomerLog') + '</p></div>',
+                    { width: 700, height: 150 },
+                    buttons);
             }
         };
 
         return _me;
     }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
 
 /***/ }),
 

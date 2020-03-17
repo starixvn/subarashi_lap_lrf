@@ -392,5 +392,11 @@
 .range-button-group {
   margin-top: 5px; }
 
+.right-text {
+  text-align: right !important; }
+
+.center-text {
+  text-align: center !important; }
+
 
 /*# sourceMappingURL=detailtransaction.css.map*/

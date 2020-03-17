@@ -112,5 +112,6 @@
         public const string PlayerAdminLog = "pa_log";
 
         public const string AccountInfo = "pa_acc_Info";
+        public const string PlayerDetailTransaction = "pa_detail_transaction";
     }
 }

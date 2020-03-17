@@ -11,9 +11,6 @@
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
     using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
     using Fanex.Athena.Module.PlayerAdmin.ViewModels;
-    using Fanex.Athena.Resources;
-    using Fanex.Athena.Service.Core.Common.Interfaces;
-    using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
     using ONEbook.UM.Filters;
 
@@ -46,7 +43,7 @@
                 MinDate = new DateTime(today.Year - MaximumYear, 1, 1)
             };
 
-            return View("~/Views/Desktop/Module/PlayerAdmin/PlayerDetailTransaction/Index.cshtml", viewModel);
+            return View("~/Views/Desktop/Module/PlayerAdmin/PlayerStatement/Statement.cshtml", viewModel);
         }
 
         [HttpPost]

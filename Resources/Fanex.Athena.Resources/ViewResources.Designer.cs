@@ -214,6 +214,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to After Balance.
+        /// </summary>
+        public static string AfterBalance {
+            get {
+                return ResourceManager.GetString("AfterBalance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AG Casino.
         /// </summary>
         public static string AGCasino {
@@ -660,6 +669,15 @@ namespace Fanex.Athena.Resources {
         public static string Balance {
             get {
                 return ResourceManager.GetString("Balance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Balance Change.
+        /// </summary>
+        public static string BalanceChange {
+            get {
+                return ResourceManager.GetString("BalanceChange", resourceCulture);
             }
         }
         
@@ -1983,6 +2001,15 @@ namespace Fanex.Athena.Resources {
         public static string Details {
             get {
                 return ResourceManager.GetString("Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Detail Transaction.
+        /// </summary>
+        public static string DetailTransaction {
+            get {
+                return ResourceManager.GetString("DetailTransaction", resourceCulture);
             }
         }
         
@@ -3918,6 +3945,15 @@ namespace Fanex.Athena.Resources {
         public static string Member {
             get {
                 return ResourceManager.GetString("Member", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Customer Log will be removed at 11am on April 21st (GMT+8). Kindly use Player Administration instead. Thanks!.
+        /// </summary>
+        public static string Message_RemoveCustomerLog {
+            get {
+                return ResourceManager.GetString("Message_RemoveCustomerLog", resourceCulture);
             }
         }
         
@@ -6181,11 +6217,47 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Transaction.
+        /// </summary>
+        public static string Transaction {
+            get {
+                return ResourceManager.GetString("Transaction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Transaction Date.
+        /// </summary>
+        public static string TransactionDate {
+            get {
+                return ResourceManager.GetString("TransactionDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Transaction Detail.
         /// </summary>
         public static string TransactionDetail {
             get {
                 return ResourceManager.GetString("TransactionDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Transaction ID.
+        /// </summary>
+        public static string TransactionID {
+            get {
+                return ResourceManager.GetString("TransactionID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Transaction Time.
+        /// </summary>
+        public static string TransactionTime {
+            get {
+                return ResourceManager.GetString("TransactionTime", resourceCulture);
             }
         }
         

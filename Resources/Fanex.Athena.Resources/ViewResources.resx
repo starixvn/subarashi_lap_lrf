@@ -2604,7 +2604,6 @@
   <data name="MatchPrecise" xml:space="preserve">
     <value>Match Precise</value>
   </data>
-
   <data name="AbnormalBetDescriptionReport" xml:space="preserve">
     <value>(*) Player has abnormal bets belong to at least 2 matches</value>
     <comment>#128082</comment>
@@ -2616,6 +2615,24 @@
   <data name="AlreadyUpdateNotVipStatus" xml:space="preserve">
     <value>Already NOT VIP, no update:  {0}</value>
     <comment>#128082</comment>
+  </data>
+  <data name="TransactionDate" xml:space="preserve">
+    <value>Transaction Date</value>
+  </data>
+  <data name="TransactionID" xml:space="preserve">
+    <value>Transaction ID</value>
+  </data>
+  <data name="TransactionTime" xml:space="preserve">
+    <value>Transaction Time</value>
+  </data>
+  <data name="BalanceChange" xml:space="preserve">
+    <value>Balance Change</value>
+  </data>
+  <data name="AfterBalance" xml:space="preserve">
+    <value>After Balance</value>
+  </data>
+  <data name="DetailTransaction" xml:space="preserve">
+    <value>Detail Transaction</value>
   </data>
   <data name="AlreadyUpdateVipStatus" xml:space="preserve">
     <value>Already VIP, no update: {0}</value>
@@ -2712,5 +2729,11 @@
   <data name="SuccessUpdateVipStatusSingle" xml:space="preserve">
     <value>Successfully update</value>
     <comment>#128082</comment>
+  </data>
+  <data name="Transaction" xml:space="preserve">
+    <value>Transaction</value>
+  </data>
+  <data name="Message_RemoveCustomerLog" xml:space="preserve">
+    <value>Customer Log will be removed at 11am on April 21st (GMT+8). Kindly use Player Administration instead. Thanks!</value>
   </data>
 </root>

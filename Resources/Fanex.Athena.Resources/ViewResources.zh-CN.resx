@@ -2216,7 +2216,8 @@
   </data>
   <data name="ProductVRG" xml:space="preserve">
     <value>虚拟娱乐城</value>
-  </data>  <data name="MarkDate" xml:space="preserve">
+  </data>
+  <data name="MarkDate" xml:space="preserve">
     <value>标记日期</value>
     <comment>#128082</comment>
   </data>
@@ -2334,5 +2335,29 @@
   </data>
   <data name="MatchPrecise" xml:space="preserve">
     <value>精准匹配</value>
+  </data>
+  <data name="Message_RemoveCustomerLog" xml:space="preserve">
+    <value>会员日志即将于4月21日上午11点(GMT+8)移除，敬请使用玩家管理取代相关查询。谢谢!</value>
+  </data>
+  <data name="DetailTransaction" xml:space="preserve">
+    <value>交易纪录</value>
+  </data>
+  <data name="TransactionID" xml:space="preserve">
+    <value>交易单号</value>
+  </data>
+  <data name="TransactionTime" xml:space="preserve">
+    <value>交易时间</value>
+  </data>
+  <data name="Transaction" xml:space="preserve">
+    <value>交易</value>
+  </data>
+  <data name="BalanceChange" xml:space="preserve">
+    <value>余额变动</value>
+  </data>
+  <data name="AfterBalance" xml:space="preserve">
+    <value>后期余额</value>
+  </data>
+  <data name="TransactionDate" xml:space="preserve">
+    <value>交易日期</value>
   </data>
 </root>

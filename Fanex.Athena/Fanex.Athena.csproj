@@ -611,6 +611,7 @@
     <Content Include="www\css\build\dev\reactpages\playeradmin\account-info.chunk.js" />
     <Content Include="www\css\build\dev\reactpages\playeradmin\account-info.css" />
     <Content Include="www\css\build\dev\reactpages\playeradmin\betlimit.css" />
+    <Content Include="www\css\build\dev\reactpages\playeradmin\detailtransaction.css" />
     <Content Include="www\css\build\dev\reactpages\playeradmin\index.chunk.js" />
     <Content Include="www\css\build\dev\reactpages\playeradmin\index.css" />
     <Content Include="www\css\build\dev\reactpages\playeradmin\playerwinloss.css" />
@@ -659,6 +660,7 @@
     <Content Include="www\css\build\pro\reactpages\notification\index.css" />
     <Content Include="www\css\build\pro\reactpages\playeradmin\account-info.css" />
     <Content Include="www\css\build\pro\reactpages\playeradmin\betlimit.css" />
+    <Content Include="www\css\build\pro\reactpages\playeradmin\detailtransaction.css" />
     <Content Include="www\css\build\pro\reactpages\playeradmin\index.css" />
     <Content Include="www\css\build\pro\reactpages\playeradmin\playerwinloss.css" />
     <Content Include="www\css\build\pro\reactpages\playeradmin\running-betlist.css" />
@@ -720,6 +722,7 @@
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\ProblemPlayerList.xls" />
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\VipPlayerList.xls" />
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\ProblemPlayerNoneVIPList.xls" />
+    <Content Include="www\css\build\dev\reactpages\playeradmin\detailtransaction.css.map" />
     <None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
     <None Include="www\css\source\pages\betlist\result\result.happy5.scss" />
     <None Include="www\css\source\reactpages\components\alert\icons\error.scss" />
@@ -752,6 +755,7 @@
     <Content Include="www\js\build\dev\reactpages\playeradmin\accountinfo.chunk.js.map" />
     <Content Include="www\js\build\dev\reactpages\playeradmin\betlimit.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\playeradmin\betlimit.chunk.js.map" />
+    <Content Include="www\js\build\dev\reactpages\playeradmin\detailtransaction.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\playeradmin\playerlist.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\playeradmin\playerlist.chunk.js.map" />
     <Content Include="www\js\build\dev\reactpages\playeradmin\playerwinloss.chunk.js" />
@@ -789,6 +793,7 @@
     <Content Include="www\js\build\pro\reactpages\lib\xlsx-style-sparta.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\playeradmin\accountinfo.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\playeradmin\betlimit.chunk.js" />
+    <Content Include="www\js\build\pro\reactpages\playeradmin\detailtransaction.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\playeradmin\playerlist.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\playeradmin\playerwinloss.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\playeradmin\runningbetlist.chunk.js" />
@@ -1035,6 +1040,17 @@
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\lib\utility.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\reducers\index.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\reducers\alertReducer.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\detailtransaction\actions\action-types.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\detailtransaction\actions\filter-actions.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\detailtransaction\actions\index.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\detailtransaction\components\AppContainer.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\detailtransaction\components\DataGrid.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\detailtransaction\components\FormFilter.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\detailtransaction\components\index.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\detailtransaction\reducers\filter-reducer.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\detailtransaction\services\report-excel-service.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\detailtransaction\services\detail-transaction-service.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\detailtransaction\reducers\index.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\actions\commonAction.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\actions\filterHandlerAction.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\actions\gridHandlerAction.js" />
@@ -2726,6 +2742,8 @@
     <Content Include="www\js\source\reactpages\pages\bettingticketscenter\advancedsearch\components\__tests__\__snapshots__\DataGrid.test.js.snap" />
     <Content Include="www\js\source\reactpages\pages\bettingticketscenter\advancedsearch\components\__tests__\__snapshots__\FormFilter.render.test.js.snap" />
     <Content Include="www\js\build\dev\reactpages\bettingticketscenter\advancedsearch.chunk.js.map" />
+    <Content Include="www\css\source\reactpages\pages\playeradmin\detailtransaction.scss" />
+    <Content Include="www\js\build\dev\reactpages\playeradmin\detailtransaction.chunk.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SiteConfig\WebConfigTransforms\SIT.config">

@@ -10,6 +10,7 @@
     using Autofac.Integration.Mvc;
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Module.PlayerAdmin.Extensions;
+    using Fanex.Athena.Module.PlayerAdmin.Repositories;
     using Fanex.Athena.Module.PlayerAdmin.Services;
     using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
     using Fanex.Athena.Service.StatelessCore;
@@ -27,6 +28,10 @@
 
             builder.Register<PlayerStatementService>(x => new PlayerStatementService(x.Resolve<IAppSettings>(), x.ResolveNamed<HttpClient>("EXTServiceTokenClient")))
                 .As<IPlayerStatementService>()
+                .InstancePerDependency();
+
+            builder.Register<PlayerDetailTransactionService>(x => new PlayerDetailTransactionService(new PlayerDetailTransactionRepository(new DbFactory())))
+                .As<IPlayerDetailTransactionService>()
                 .InstancePerDependency();
 
             builder.RegisterType<PlayerAdminBusinessLogBuilderFactory>()

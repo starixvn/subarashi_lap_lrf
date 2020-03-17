@@ -1,11 +1,11 @@
-import React from 'react';
-import { Provider } from 'react-redux'
-import reducer from '../reducers/index.js'
-import Store from '../../../../lib/store'
+﻿import React from 'react';
 import { render } from 'react-dom';
-import AppContainer from './AppContainer';
+import { Provider } from 'react-redux';
+import Store from '@jsroot/lib/store';
+import reducer from '../reducers';
+import AppContainer from './AppContainer.jsx';
 
-const defaultState = Object.assign({}, window.initialState, { isLoading: false });
+const defaultState = Object.assign({}, window.initialState);
 const store = Store.createStore(reducer, defaultState);
 
 const App = () => {
@@ -14,6 +14,6 @@ const App = () => {
             <AppContainer />
         </Provider>
     )
-}
+};
 
 render(<App />, document.getElementById("app-container"));

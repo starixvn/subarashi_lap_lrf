@@ -2029,4 +2029,25 @@
   <data name="MatchPrecise" xml:space="preserve">
     <value>精準匹配</value>
   </data>
+  <data name="Transaction" xml:space="preserve">
+    <value>交易</value>
+  </data>
+  <data name="DetailTransaction" xml:space="preserve">
+    <value>交易紀錄</value>
+  </data>
+  <data name="TransactionID" xml:space="preserve">
+    <value>交易單號</value>
+  </data>
+  <data name="TransactionTime" xml:space="preserve">
+    <value>交易時間</value>
+  </data>
+  <data name="BalanceChange" xml:space="preserve">
+    <value>餘額變動</value>
+  </data>
+  <data name="AfterBalance" xml:space="preserve">
+    <value>後期餘額</value>
+  </data>
+  <data name="TransactionDate" xml:space="preserve">
+    <value>交易日期</value>
+  </data>
 </root>
