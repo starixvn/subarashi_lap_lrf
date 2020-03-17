@@ -4,7 +4,7 @@
     using System.Web.Mvc;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
-    internal class VirtualGamesResultPopupController : CultureBaseController
+    public class VirtualGamesResultPopupController : CultureBaseController
     {
         private readonly IBetListApiClient _betListApiClient;
 
