@@ -1,0 +1,89 @@
+﻿namespace Fanex.Athena.Excel.Customer
+{
+    using Fanex.Athena.Excel.Base;
+    using Fanex.Athena.Excel.Base.Extension;
+    using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
+    using Fanex.Athena.Resources;
+    using NPOI.SS.UserModel;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    public abstract class PlayerExcel<T> : ReportBase
+        where T : PlayerInfo
+    {
+        private const int RowContentTemplate = 1;
+        private const int NumberOfRowPerSheet = 20000;
+
+        protected IList<Tuple<string, string>> _infoHeaders;
+
+        protected IEnumerable<T> _dataSource;
+
+        public override int RowHeaderTemplate => 0;
+
+        protected PlayerExcel(string templatePath, string reportTitle, IEnumerable<T> dataSource)
+           : base(templatePath, dataSource.Count(), NumberOfRowPerSheet)
+        {
+            _dataSource = dataSource;
+            _infoHeaders = new List<Tuple<string, string>>
+            {
+                new Tuple<string, string>(ViewResources.ExternalId, nameof(ViewResources.ExternalId)),
+                new Tuple<string, string>(ViewResources.SystemId, nameof(ViewResources.SystemId)),
+            };
+            IsMultiSheet = true;
+        }
+
+        protected override void AssignHeader(ISheet sheet)
+        {
+            var row = sheet.CopyRow(TemplateSheet, RowHeaderTemplate);
+            for (int i = 0; i < _infoHeaders.Count; i++)
+            {
+                row.Cells[i].SetCellValue(_infoHeaders[i].Item1);
+            }
+        }
+
+        protected override void AssignSheetData(ISheet sheet, int pageIndex)
+        {
+            int rowCount = Math.Min(_dataSource.Count(), checked((pageIndex + 1) * PageSize));
+            var rowIndex = 0;
+            var type = typeof(T);
+
+            for (var dataIndex = pageIndex * PageSize; dataIndex < rowCount; dataIndex++, rowIndex++)
+            {
+                var row = sheet.CopyRow(TemplateSheet, RowContentTemplate, rowIndex + RowContentTemplate);
+                var rowData = _dataSource.ElementAt(dataIndex);
+                AssignRowData(row, rowData, type);
+            }
+
+            AddRowDescription(sheet, sheet.LastRowNum);
+        }
+
+        protected virtual void AssignRowData(IRow row, T rowData, Type type)
+        {
+            for (int cellIndex = 0; cellIndex < _infoHeaders.Count; cellIndex++)
+            {
+                var tuple = _infoHeaders[cellIndex];
+                var propertyName = tuple.Item2;
+                var cellValue = type.GetProperty(propertyName)?.GetValue(rowData);
+                var parseValue = ParseValue(cellValue ?? string.Empty);
+                row.Cells[cellIndex].SetCellValue(parseValue);
+            }
+        }
+
+        protected override void AssignTitle(ISheet sheet)
+        {
+            //none title
+        }
+
+        protected virtual object ParseValue(object cellValue)
+        {
+            if (cellValue is bool @bool)
+            {
+                return @bool ? ViewResources.Yes : ViewResources.No;
+            }
+            return cellValue;
+        }
+
+        protected abstract void AddRowDescription(ISheet sheet, int lastRowIndex);
+    }
+}

@@ -118,6 +118,14 @@
     <Setting Key="Lrf_CustomerSelStatus" SpName="Lrf_CustomerSelStatus" DbName="DBEXT.bodb02.bodbLicenseeNet" />
     <Setting Key="Lrf_CustomerUpdUgroup" SpName="Lrf_CustomerUpdUgroup" DbName="DBCUST.CustDB.bodbLicenseeNet" />
     <Setting Key="Lrf_UserInfoByUserNameSel" SpName="Lrf_UserInfoByUserNameSel" DbName="DBEXT.bodb02.bodbLicenseeNet" />
+    
+    <!-- PlayerSegmentation -->
+    <Function Name="PlayerSegmentation">
+      <Setting Key="Lrf_ProblemAccount_LicenseeProblemPlayerSel" SpName="Lrf_ProblemAccount_LicenseeProblemPlayerSel_xtest" DbName="DBACC.bodb02.bodbLicenseeNet" />
+      <Setting Key="Lrf_ProblemAccount_LicenseeVIPPlayerSel" SpName="Lrf_ProblemAccount_LicenseeVIPPlayerSel_xtest" DbName="DBACC.bodb02.bodbLicenseeNet" />
+      <Setting Key="Lrf_ProblemAccount_LicenseeVipPlayerUpd" SpName="Lrf_ProblemAccount_LicenseeVipPlayerUpd_xtest" DbName="DBCUST.CustDB.bodbLicenseeNet" />
+    </Function>
+    <!-- End - PlayerSegmentation -->
   </Function>
 
   <Function Name="PlayerAdmin">
@@ -208,7 +216,6 @@
     <Setting Key="Lrf_UserLog_LoginSel" SpName="Lrf_UserLog_LoginSel" DbName="DBEXT.bodb02.bodbLicenseeNet" />
     <Setting Key="Lrf_CustomerSettingLog_Sel" SpName="Lrf_CustomerSettingLog_Sel" DbName="DBLOG.bodb_CustomerLog.bodbLicenseeNet" />
     <Setting Key="Lrf_GroupCommLog_Sel" SpName="Lrf_GroupCommLog_Sel" DbName="DBLOG.bodb_CustomerLog.bodbLicenseeNet" />
-
     <Setting Key="WriteLog_UserLog_UserControl" SpName="WriteLog_UserLog_UserControl" DbName="DBLOG.bodb_CustomerLog.bodbLicenseeNet" />
   </Function>
 

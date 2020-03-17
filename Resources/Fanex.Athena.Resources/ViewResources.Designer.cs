@@ -79,6 +79,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to (*) Player has abnormal bets belong to at least 2 matches.
+        /// </summary>
+        public static string AbnormalBetDescriptionReport {
+            get {
+                return ResourceManager.GetString("AbnormalBetDescriptionReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sorry, You don&apos;t have permission to access this page..
         /// </summary>
         public static string AccessDeniedMsg {
@@ -111,6 +120,15 @@ namespace Fanex.Athena.Resources {
         public static string Action {
             get {
                 return ResourceManager.GetString("Action", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Activate VIP.
+        /// </summary>
+        public static string ActivateVip {
+            get {
+                return ResourceManager.GetString("ActivateVip", resourceCulture);
             }
         }
         
@@ -372,6 +390,42 @@ namespace Fanex.Athena.Resources {
         public static string AllCurrencies {
             get {
                 return ResourceManager.GetString("AllCurrencies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Already NOT VIP, no update:  {0}.
+        /// </summary>
+        public static string AlreadyUpdateNotVipStatus {
+            get {
+                return ResourceManager.GetString("AlreadyUpdateNotVipStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Already NOT VIP, no update.
+        /// </summary>
+        public static string AlreadyUpdateNotVipStatusSingle {
+            get {
+                return ResourceManager.GetString("AlreadyUpdateNotVipStatusSingle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Already VIP, no update: {0}.
+        /// </summary>
+        public static string AlreadyUpdateVipStatus {
+            get {
+                return ResourceManager.GetString("AlreadyUpdateVipStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Already VIP, no update.
+        /// </summary>
+        public static string AlreadyUpdateVipStatusSingle {
+            get {
+                return ResourceManager.GetString("AlreadyUpdateVipStatusSingle", resourceCulture);
             }
         }
         
@@ -1213,6 +1267,24 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Click here.
+        /// </summary>
+        public static string ClickHere {
+            get {
+                return ResourceManager.GetString("ClickHere", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click or drop here.
+        /// </summary>
+        public static string ClickOrDropHere {
+            get {
+                return ResourceManager.GetString("ClickOrDropHere", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to close.
         /// </summary>
         public static string Close {
@@ -1330,6 +1402,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The bet limit will be reapplied if the selected player(s) is marked VIP. Are your sure you want to activate VIP ?.
+        /// </summary>
+        public static string ConfirmActivateVIPPlayer {
+            get {
+                return ResourceManager.GetString("ConfirmActivateVIPPlayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirmation.
         /// </summary>
         public static string Confirmation {
@@ -1344,6 +1425,15 @@ namespace Fanex.Athena.Resources {
         public static string ConfirmCommission {
             get {
                 return ResourceManager.GetString("ConfirmCommission", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to deactivate VIP  for the player(s) ?.
+        /// </summary>
+        public static string ConfirmDeactivateVIPPlayer {
+            get {
+                return ResourceManager.GetString("ConfirmDeactivateVIPPlayer", resourceCulture);
             }
         }
         
@@ -1771,6 +1861,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Deactivate VIP.
+        /// </summary>
+        public static string DeactivateVip {
+            get {
+                return ResourceManager.GetString("DeactivateVip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dec.
         /// </summary>
         public static string Dec {
@@ -1857,6 +1956,15 @@ namespace Fanex.Athena.Resources {
         public static string Deposit {
             get {
                 return ResourceManager.GetString("Deposit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The player was abnormally voided in at least 2 different matches.
+        /// </summary>
+        public static string DescriptionAbnormalBet {
+            get {
+                return ResourceManager.GetString("DescriptionAbnormalBet", resourceCulture);
             }
         }
         
@@ -2374,11 +2482,29 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your file&apos;s extension is incorrect, please select an file.
+        /// </summary>
+        public static string FileExtensionIncorrect {
+            get {
+                return ResourceManager.GetString("FileExtensionIncorrect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The file is not ready, please try again later..
         /// </summary>
         public static string FileIsNotReady {
             get {
                 return ResourceManager.GetString("FileIsNotReady", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The uploaded file should be less than.
+        /// </summary>
+        public static string FileUploadExceedSize {
+            get {
+                return ResourceManager.GetString("FileUploadExceedSize", resourceCulture);
             }
         }
         
@@ -2577,6 +2703,15 @@ namespace Fanex.Athena.Resources {
         public static string General {
             get {
                 return ResourceManager.GetString("General", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Get All.
+        /// </summary>
+        public static string GetAll {
+            get {
+                return ResourceManager.GetString("GetAll", resourceCulture);
             }
         }
         
@@ -3018,6 +3153,24 @@ namespace Fanex.Athena.Resources {
         public static string InvalidParams {
             get {
                 return ResourceManager.GetString("InvalidParams", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid player(s): {0} ({1}).
+        /// </summary>
+        public static string InvalidPlayerUpdateVipStatus {
+            get {
+                return ResourceManager.GetString("InvalidPlayerUpdateVipStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid player: {0}.
+        /// </summary>
+        public static string InvalidPlayerUpdateVipStatusSingle {
+            get {
+                return ResourceManager.GetString("InvalidPlayerUpdateVipStatusSingle", resourceCulture);
             }
         }
         
@@ -3562,6 +3715,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mark Date.
+        /// </summary>
+        public static string MarkDate {
+            get {
+                return ResourceManager.GetString("MarkDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Market.
         /// </summary>
         public static string Market {
@@ -3693,6 +3855,15 @@ namespace Fanex.Athena.Resources {
         public static string MaxBetPerDrawMoreThanOrEqual {
             get {
                 return ResourceManager.GetString("MaxBetPerDrawMoreThanOrEqual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum upload file size.
+        /// </summary>
+        public static string MaximumUploadFileSize {
+            get {
+                return ResourceManager.GetString("MaximumUploadFileSize", resourceCulture);
             }
         }
         
@@ -4777,6 +4948,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Problem Player.
+        /// </summary>
+        public static string ProblemPlayer {
+            get {
+                return ResourceManager.GetString("ProblemPlayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Product.
         /// </summary>
         public static string Product {
@@ -5191,6 +5371,24 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Retracted VIP player(s): {0} ({1}).
+        /// </summary>
+        public static string RetractedPlayerUpdateVipStatus {
+            get {
+                return ResourceManager.GetString("RetractedPlayerUpdateVipStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Retracted VIP player: {0}.
+        /// </summary>
+        public static string RetractedPlayerUpdateVipStatusSingle {
+            get {
+                return ResourceManager.GetString("RetractedPlayerUpdateVipStatusSingle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to RNG Casino and Bingo are not included in the report.
         /// </summary>
         public static string RngCasinoAndBingoExcludedNote {
@@ -5596,6 +5794,24 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Successfully update: {0}.
+        /// </summary>
+        public static string SuccessUpdateVipStatus {
+            get {
+                return ResourceManager.GetString("SuccessUpdateVipStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Successfully update.
+        /// </summary>
+        public static string SuccessUpdateVipStatusSingle {
+            get {
+                return ResourceManager.GetString("SuccessUpdateVipStatusSingle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Summary.
         /// </summary>
         public static string Summary {
@@ -5808,6 +6024,15 @@ namespace Fanex.Athena.Resources {
         public static string Today {
             get {
                 return ResourceManager.GetString("Today", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  to download template.
+        /// </summary>
+        public static string ToDowloadTemplate {
+            get {
+                return ResourceManager.GetString("ToDowloadTemplate", resourceCulture);
             }
         }
         
@@ -6379,6 +6604,24 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not load the file, please check file&apos;s template again !.
+        /// </summary>
+        public static string UploadFileError {
+            get {
+                return ResourceManager.GetString("UploadFileError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload Vip List.
+        /// </summary>
+        public static string UploadVipList {
+            get {
+                return ResourceManager.GetString("UploadVipList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User Guide.
         /// </summary>
         public static string UserGuide {
@@ -6492,6 +6735,24 @@ namespace Fanex.Athena.Resources {
         public static string ViewNotification {
             get {
                 return ResourceManager.GetString("ViewNotification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VIP.
+        /// </summary>
+        public static string Vip {
+            get {
+                return ResourceManager.GetString("Vip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VIP Player Management.
+        /// </summary>
+        public static string VipPlayerManagement {
+            get {
+                return ResourceManager.GetString("VipPlayerManagement", resourceCulture);
             }
         }
         

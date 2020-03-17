@@ -13,11 +13,24 @@ export default class Excel {
             _XLSX = window.XLSX;
             callback && callback();
         } else {
-            import ( /* webpackChunkName: "xlsx-style-sparta" */ 'xlsx-style-sparta').then(XLSX => {
+            import ( /* webpackChunkName: "lib/xlsx-style-sparta" */ 'xlsx-style-sparta').then(XLSX => {
                 _XLSX = XLSX;
                 callback && callback();
             });
         }
+    }
+
+    static read(file, sheetIndex, callBack) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const data = e.target.result;
+            const workbook = _XLSX.read(data, { type: 'binary' });
+            const sheetName = workbook.SheetNames[sheetIndex];
+            const worksheet = workbook.Sheets[sheetName];
+            const json = _XLSX.utils.sheet_to_json(worksheet);
+            callBack && callBack(json);
+        };
+        reader.readAsBinaryString(file);
     }
 
     static export (worksheet, fileName) {

@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D51C20F8-9F28-47EB-AEA2-0BCFED2CFF26}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Fanex.Athena.Api.Customer</RootNamespace>
+    <AssemblyName>Fanex.Athena.Api.Customer</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NPOI, Version=2.4.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Http, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="PlayerSegmentation\PlayerSegmentation.VipPlayer.Controller.cs" />
+    <Compile Include="PlayerSegmentation\PlayerSegmentation.ProblemPlayer.Controller.cs" />
+    <Compile Include="PlayerSegmentation\PlayerSegmentationController.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Controller\Fanex.Athena.Controllers.Base\Fanex.Athena.Controllers.Base.csproj">
+      <Project>{255E120A-83BF-4F72-9E31-6050D5704069}</Project>
+      <Name>Fanex.Athena.Controllers.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DataAccess\Fanex.Athena.DataAccess.Customer\Fanex.Athena.DataAccess.Customer.csproj">
+      <Project>{C25DC4BC-2721-401B-8896-D210D70B392B}</Project>
+      <Name>Fanex.Athena.DataAccess.Customer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Excel\Fanex.Athena.Excel.Base\Fanex.Athena.Excel.Base.csproj">
+      <Project>{413861AD-068B-4C02-B913-10B1DE708FB7}</Project>
+      <Name>Fanex.Athena.Excel.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Excel\Fanex.Athena.Excel.Customer\Fanex.Athena.Excel.Customer.csproj">
+      <Project>{C741A329-44B9-4DD1-98C1-4EAAED4A9012}</Project>
+      <Name>Fanex.Athena.Excel.Customer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Model\Fanex.Athena.Model.Auth\Fanex.Athena.Model.Auth.csproj">
+      <Project>{794C0345-2DDD-4FFD-A605-BB96FBB37DE8}</Project>
+      <Name>Fanex.Athena.Model.Auth</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Model\Fanex.Athena.Model.Core\Fanex.Athena.Model.Core.csproj">
+      <Project>{5F410090-94C0-46A5-9FEC-B6C3B745B7A0}</Project>
+      <Name>Fanex.Athena.Model.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Model\Fanex.Athena.Model.Customer\Fanex.Athena.Model.Customer.csproj">
+      <Project>{3B212F2F-4DEB-449B-9AE0-36F6E4F49F5F}</Project>
+      <Name>Fanex.Athena.Model.Customer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Service\Fanex.Athena.Service.Core\Fanex.Athena.Service.Core.csproj">
+      <Project>{FCFD7434-085B-4C93-848F-E1CBCEDCC5A0}</Project>
+      <Name>Fanex.Athena.Service.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Service\Fanex.Athena.Service.StatelessCore\Fanex.Athena.Service.StatelessCore.csproj">
+      <Project>{DA9A50E3-C62D-4F12-96C2-3AC289D423FE}</Project>
+      <Name>Fanex.Athena.Service.StatelessCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.Athena.Api.Base\Fanex.Athena.Api.Base.csproj">
+      <Project>{16D39D7B-00C0-4CC3-82F5-44BBDEE7AE51}</Project>
+      <Name>Fanex.Athena.Api.Base</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

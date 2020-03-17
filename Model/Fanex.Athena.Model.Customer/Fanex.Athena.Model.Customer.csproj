@@ -73,6 +73,8 @@
     <Compile Include="DTO\CustomerLog\CustomerLog.cs" />
     <Compile Include="DTO\CustomerLog\LogInLog.cs" />
     <Compile Include="DTO\LogInfo.cs" />
+    <Compile Include="DTO\PlayerSegmentation\PlayerInfo.cs" />
+    <Compile Include="DTO\PlayerSegmentation\UpdateStatusPlayerResult.cs" />
     <Compile Include="MetaModel\BaseCustomerComMetaModel.cs" />
     <Compile Include="MetaModel\CustomerListMetaModel.cs" />
     <Compile Include="MetaModel\CustomerLog\CustomerLogMetaModel.cs" />
@@ -81,6 +83,10 @@
     <Compile Include="MetaModel\DeleteGroupMetaModel.cs" />
     <Compile Include="MetaModel\GroupCommMetaModel.cs" />
     <Compile Include="MetaModel\MoveToGroupComMetaModel.cs" />
+    <Compile Include="MetaModel\PlayerSegmentation\BasePlayerListMetaModel.cs" />
+    <Compile Include="MetaModel\PlayerSegmentation\UpdateStatusPlayerMetaModel.cs" />
+    <Compile Include="MetaModel\PlayerSegmentation\VipPlayerListMetaModel.cs" />
+    <Compile Include="MetaModel\PlayerSegmentation\ProblemPlayerListMetaModel.cs" />
     <Compile Include="MetaModel\RemoveFromGroupComMetaModel.cs" />
     <Compile Include="MetaModel\RNGCasinoUpdateMemberComMetaModel.cs" />
     <Compile Include="MetaModel\UpdatedCustomerComMetaModel.cs" />
@@ -90,8 +96,15 @@
     <Compile Include="ViewModel\CustomerLog\CustomerLogViewModel.cs" />
     <Compile Include="ViewModel\CustomerLog\LogInLogViewModel.cs" />
     <Compile Include="ViewModel\LogInfoViewModel.cs" />
+    <Compile Include="ViewModel\PlayerSegmentation\VipPlayerViewModel.cs" />
+    <Compile Include="ViewModel\PlayerSegmentation\ProblemPlayerViewModel.cs" />
+    <Compile Include="ViewModel\PlayerSegmentation\PlayerSegmentationViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Fanex.Athena.Extension\Fanex.Athena.Extension.csproj">
+      <Project>{71F95E53-36D0-4091-828D-ED14C9939C35}</Project>
+      <Name>Fanex.Athena.Extension</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Fanex.Athena.Model.Core\Fanex.Athena.Model.Core.csproj">
       <Project>{5f410090-94c0-46a5-9fec-b6c3b745b7a0}</Project>
       <Name>Fanex.Athena.Model.Core</Name>
@@ -106,6 +119,7 @@
     <None Include="Fanex.Athena.Model.Customer.ruleset" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

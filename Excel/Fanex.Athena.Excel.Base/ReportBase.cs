@@ -6,17 +6,17 @@
 
 namespace Fanex.Athena.Excel.Base
 {
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
     using Excel.Base.Entities;
     using Fanex.Athena.Excel.Base.Extension;
     using NPOI.HSSF.UserModel;
     using NPOI.SS.UserModel;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
 
     public abstract class ReportBase
     {
-        public const int RowHeaderTemplate = 1;
+        public virtual int RowHeaderTemplate => 1;
         public const int RowTitleTemplate = 0;
         public const int MaxRowCount = 30000;
 

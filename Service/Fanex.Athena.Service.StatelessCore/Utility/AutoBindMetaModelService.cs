@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
-using Fanex.Athena.Extension.Helper;
+﻿using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
 using Fanex.Athena.Extension.Utility;
 using Fanex.Athena.Model.Auth;
 using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Model.Core.MetaModel;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Fanex.Athena.Service.StatelessCore.Utility
 {
@@ -38,18 +36,22 @@ namespace Fanex.Athena.Service.StatelessCore.Utility
 
         public static void MapAgentXml(IDictionary<string, object> actionArguments, IDictionary<int, int[]> currencyAgentList)
         {
-            var item = actionArguments.Where(x => x.Value is IMetaModelAgent)
-                   .Select(x => x).FirstOrDefault();
-
-            var currencyId = 0;
-            if (item.Value is IMetaModelCurrency itemWithCurrency)
-            {
-                currencyId = itemWithCurrency.CurrencyId;
-            }
+            var item = actionArguments.FirstOrDefault(x => x.Value is IMetaModelAgent);
 
             if (item.Value is IMetaModelAgent itemWithAgent)
             {
-                itemWithAgent.AgentListXml = AuthParameterHelper.GenerateAgentListXml(currencyAgentList, currencyId, itemWithAgent.IsExcludedTestData);
+                IEnumerable<int> currencyIdList = new[] { 0 };
+                if (item.Value is IMetaModelCurrency itemWithSingleCurrency)
+                {
+                    currencyIdList = new[] { itemWithSingleCurrency.CurrencyId < 0 ? 0 : itemWithSingleCurrency.CurrencyId };
+                }
+                else if (item.Value is IMetaModelCurrencyIdList itemWithMultiCurrency
+                    && !string.IsNullOrEmpty(itemWithMultiCurrency.CurrencyIdList))
+                {
+                    currencyIdList = AuthParameterHelper.ParseCurrencyIdList(itemWithMultiCurrency.CurrencyIdList);
+                }
+
+                itemWithAgent.AgentListXml = AuthParameterHelper.GenerateAgentListXml(currencyAgentList, currencyIdList, itemWithAgent.IsExcludedTestData);
                 actionArguments[item.Key] = itemWithAgent;
             }
         }
@@ -121,6 +123,7 @@ namespace Fanex.Athena.Service.StatelessCore.Utility
                 actionArguments[item.Key] = value;
             }
         }
+
         public static void MapSiteName(IDictionary<string, object> actionArguments)
         {
             if (actionArguments.ContainsKey("sitename")
@@ -176,6 +179,16 @@ namespace Fanex.Athena.Service.StatelessCore.Utility
                 value.BalanceUpDay = temp.BalanceUpDay;
                 value.MoveBetsDay = temp.MoveBetsDay;
                 actionArguments[item.Key] = value;
+            }
+        }
+
+        public static void MapExportAll(IDictionary<string, object> actionArguments)
+        {
+            var item = actionArguments.FirstOrDefault(x => x.Value is IMetaModelPaging);
+            if (item.Value is IMetaModelPaging metaModelPaging)
+            {
+                metaModelPaging.PageIndex = 1;
+                metaModelPaging.PageSize = int.MaxValue - 1000;
             }
         }
     }

@@ -617,6 +617,7 @@
     <Content Include="www\css\build\dev\reactpages\playeradmin\running-betlist.chunk.js" />
     <Content Include="www\css\build\dev\reactpages\playeradmin\running-betlist.css" />
     <Content Include="www\css\build\dev\reactpages\playeradmin\statement.css" />
+    <Content Include="www\css\build\dev\reactpages\playersegmentation\index.css" />
     <Content Include="www\css\build\dev\reactpages\speciallicenseewl\index.chunk.js" />
     <Content Include="www\css\build\dev\reactpages\speciallicenseewl\index.css" />
     <Content Include="www\css\build\dev\reactpages\subsidiaryperformance\index.chunk.js" />
@@ -651,7 +652,7 @@
     <Content Include="www\css\build\pro\reactpages\casinoturnover\index.chunk.js" />
     <Content Include="www\css\build\pro\reactpages\casinoturnover\index.css" />
     <Content Include="www\css\build\pro\reactpages\dailybets\index.css" />
-     <Content Include="www\css\build\pro\reactpages\exchangevoided\index.css" />
+    <Content Include="www\css\build\pro\reactpages\exchangevoided\index.css" />
     <Content Include="www\css\build\pro\reactpages\exchangewl\index.css" />
     <Content Include="www\css\build\pro\reactpages\licenseewlbytimezone\index.css" />
     <Content Include="www\css\build\pro\reactpages\notification\index.chunk.js" />
@@ -662,6 +663,7 @@
     <Content Include="www\css\build\pro\reactpages\playeradmin\playerwinloss.css" />
     <Content Include="www\css\build\pro\reactpages\playeradmin\running-betlist.css" />
     <Content Include="www\css\build\pro\reactpages\playeradmin\statement.css" />
+    <Content Include="www\css\build\pro\reactpages\playersegmentation\index.css" />
     <Content Include="www\css\build\pro\reactpages\speciallicenseewl\index.chunk.js" />
     <Content Include="www\css\build\pro\reactpages\speciallicenseewl\index.css" />
     <Content Include="www\css\build\pro\reactpages\subsidiaryperformance\index.css" />
@@ -712,6 +714,11 @@
     <Content Include="SiteConfig\Web.BACKUPMNLStatic.config" />
     <Content Include="www\css\build\dev\reactpages\dailybets\index.css.map" />
     <Content Include="Views\Desktop\BetList\SGDetail\Main.cshtml" />
+    <Content Include="Views\Desktop\Customer\PlayerSegmentation\Main.cshtml" />
+    <Content Include="App_Data\Template\Customers\PlayerSegmentation\VipPlayerUploadTemplate.xls" />
+    <Content Include="App_Data\Template\Customers\PlayerSegmentation\ProblemPlayerList.xls" />
+    <Content Include="App_Data\Template\Customers\PlayerSegmentation\VipPlayerList.xls" />
+    <Content Include="App_Data\Template\Customers\PlayerSegmentation\ProblemPlayerNoneVIPList.xls" />
     <None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
     <None Include="www\css\source\pages\betlist\result\result.happy5.scss" />
     <None Include="www\css\source\reactpages\components\alert\icons\error.scss" />
@@ -751,6 +758,9 @@
     <Content Include="www\js\build\dev\reactpages\playeradmin\runningbetlist.chunk.js.map" />
     <Content Include="www\js\build\dev\reactpages\playeradmin\single-customer.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\playeradmin\statement.chunk.js" />
+    <Content Include="www\js\build\dev\reactpages\playersegmentation\main.chunk.js" />
+    <Content Include="www\js\build\dev\reactpages\playersegmentation\problemPlayer.chunk.js" />
+    <Content Include="www\js\build\dev\reactpages\playersegmentation\vipPlayerManagement.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\report\casinoturnover.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\report\dailybets.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\report\licenseewlbytimezone.chunk.js" />
@@ -783,6 +793,9 @@
     <Content Include="www\js\build\pro\reactpages\playeradmin\runningbetlist.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\playeradmin\single-customer.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\playeradmin\statement.chunk.js" />
+    <Content Include="www\js\build\pro\reactpages\playersegmentation\main.chunk.js" />
+    <Content Include="www\js\build\pro\reactpages\playersegmentation\problemPlayer.chunk.js" />
+    <Content Include="www\js\build\pro\reactpages\playersegmentation\vipPlayerManagement.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\report\casinoturnover.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\report\dailybets.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\report\licenseewlbytimezone.chunk.js" />
@@ -5628,6 +5641,10 @@
     <ProjectReference Include="..\ControllerAPI\Fanex.Athena.Api.CustomerLog\Fanex.Athena.Api.CustomerLog.csproj">
       <Project>{a765275a-f566-4122-8e8e-47defab7b56b}</Project>
       <Name>Fanex.Athena.Api.CustomerLog</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ControllerAPI\Fanex.Athena.Api.Customer\Fanex.Athena.Api.Customer.csproj">
+      <Project>{d51c20f8-9f28-47eb-aea2-0bcfed2cff26}</Project>
+      <Name>Fanex.Athena.Api.Customer</Name>
     </ProjectReference>
     <ProjectReference Include="..\ControllerAPI\Fanex.Athena.Api.Report\Fanex.Athena.Api.Report.csproj">
       <Project>{8efb14a8-0a10-4095-a857-c6496e830458}</Project>

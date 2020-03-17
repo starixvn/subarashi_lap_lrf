@@ -2590,4 +2590,120 @@
     <value>Native App</value>
     <comment>125824</comment>
   </data>
+  <data name="MarkDate" xml:space="preserve">
+    <value>Mark Date</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="Vip" xml:space="preserve">
+    <value>VIP</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="AbnormalBetDescriptionReport" xml:space="preserve">
+    <value>(*) Player has abnormal bets belong to at least 2 matches</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="ActivateVip" xml:space="preserve">
+    <value>Activate VIP</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="AlreadyUpdateNotVipStatus" xml:space="preserve">
+    <value>Already NOT VIP, no update:  {0}</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="AlreadyUpdateVipStatus" xml:space="preserve">
+    <value>Already VIP, no update: {0}</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="ClickHere" xml:space="preserve">
+    <value>Click here</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="ClickOrDropHere" xml:space="preserve">
+    <value>Click or drop here</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="ConfirmActivateVIPPlayer" xml:space="preserve">
+    <value>The bet limit will be reapplied if the selected player(s) is marked VIP. Are your sure you want to activate VIP ?</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="ConfirmDeactivateVIPPlayer" xml:space="preserve">
+    <value>Are you sure you want to deactivate VIP  for the player(s) ?</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="DeactivateVip" xml:space="preserve">
+    <value>Deactivate VIP</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="DescriptionAbnormalBet" xml:space="preserve">
+    <value>The player was abnormally voided in at least 2 different matches</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="FileExtensionIncorrect" xml:space="preserve">
+    <value>Your file's extension is incorrect, please select an file</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="FileUploadExceedSize" xml:space="preserve">
+    <value>The uploaded file should be less than</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="GetAll" xml:space="preserve">
+    <value>Get All</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="InvalidPlayerUpdateVipStatus" xml:space="preserve">
+    <value>Invalid player(s): {0} ({1})</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="MaximumUploadFileSize" xml:space="preserve">
+    <value>Maximum upload file size</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="ProblemPlayer" xml:space="preserve">
+    <value>Problem Player</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="RetractedPlayerUpdateVipStatus" xml:space="preserve">
+    <value>Retracted VIP player(s): {0} ({1})</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="SuccessUpdateVipStatus" xml:space="preserve">
+    <value>Successfully update: {0}</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="ToDowloadTemplate" xml:space="preserve">
+    <value> to download template</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="UploadFileError" xml:space="preserve">
+    <value>Could not load the file, please check file's template again !</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="UploadVipList" xml:space="preserve">
+    <value>Upload Vip List</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="VipPlayerManagement" xml:space="preserve">
+    <value>VIP Player Management</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="AlreadyUpdateNotVipStatusSingle" xml:space="preserve">
+    <value>Already NOT VIP, no update</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="AlreadyUpdateVipStatusSingle" xml:space="preserve">
+    <value>Already VIP, no update</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="InvalidPlayerUpdateVipStatusSingle" xml:space="preserve">
+    <value>Invalid player: {0}</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="RetractedPlayerUpdateVipStatusSingle" xml:space="preserve">
+    <value>Retracted VIP player: {0}</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="SuccessUpdateVipStatusSingle" xml:space="preserve">
+    <value>Successfully update</value>
+    <comment>#128082</comment>
+  </data>
 </root>
