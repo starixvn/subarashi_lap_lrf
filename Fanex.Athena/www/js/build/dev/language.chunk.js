@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 3/18/2020 10:18:22 AM
+﻿// Generated at: 3/18/2020 4:18:18 PM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -662,6 +662,7 @@ ProductSB:"Sportsbook",
 ProductSG:"SG",
 ProductVB:"Macau Games",
 ProductVG:"Macau",
+ProductVRG:"Virtual Games",
 ProductVS:"Virtual Sports",
 ProductVS2:"Virtual Sports 2",
 Promotion:"Promotion",

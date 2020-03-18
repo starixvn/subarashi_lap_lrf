@@ -2540,6 +2540,7 @@ class BetList {
 
   getVRGResultUrl(rootUrl, gamePlayId, platform) {
     let url = rootUrl + 'VirtualGamesResultPopup/Index';
+    console.log(gamePlayId);
     url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'gamePlayId', gamePlayId);
     url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'platform', platform);
     return url;
