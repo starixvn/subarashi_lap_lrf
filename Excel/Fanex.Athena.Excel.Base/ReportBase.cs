@@ -16,7 +16,7 @@ namespace Fanex.Athena.Excel.Base
 
     public abstract class ReportBase
     {
-        public virtual int RowHeaderTemplate => 1;
+        public const int RowHeaderTemplate = 1;
         public const int RowTitleTemplate = 0;
         public const int MaxRowCount = 30000;
 
