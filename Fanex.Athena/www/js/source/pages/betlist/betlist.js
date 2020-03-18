@@ -479,8 +479,6 @@
                     _me.viewGlobalGamingResult(custid, extension2, title);
                 }
                 else if (sporttype === SPORT_VRG) {
-                    console.log(extension2)
-                    console.log(refno)
                     _me.viewVRGResult(refno, defaultPlatform, title);
                 }
                 else {

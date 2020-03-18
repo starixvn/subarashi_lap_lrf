@@ -3984,8 +3984,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                     _me.viewGlobalGamingResult(custid, extension2, title);
                 }
                 else if (sporttype === SPORT_VRG) {
-                    console.log(extension2)
-                    console.log(refno)
                     _me.viewVRGResult(refno, defaultPlatform, title);
                 }
                 else {

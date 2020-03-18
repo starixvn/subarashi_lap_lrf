@@ -215,7 +215,7 @@ define(['jquery', 'common/site', 'components/pluginhelper/daterangepicker', 'com
                     cache: false,
                     url: Site.resolveClientUrl(VIRTUAL_RESULT_API),
                     success: function (response) {
-                        window.open(response.Url, '_blank', 'left=20,top=20,width=950,height=650,toolbar=1,resizable=1,scrollbars,status=1');
+                        window.open(response, '_blank', 'left=20,top=20,width=950,height=650,toolbar=1,resizable=1,scrollbars,status=1');
                         clearTimeout(virtualGameIntervalId);
                         _me.extendLotterySession(vendorProductId, response.UserId);
                     },
