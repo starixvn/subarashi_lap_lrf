@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 3/10/2020 1:27:31 PM
+// Generated at: 3/18/2020 10:18:22 AM
 window._language_zh_TW = {
   AA: "客客",
   AbnormalBet: "非正規註單",
@@ -417,6 +417,7 @@ window._language_zh_TW = {
   Margin: "利潤",
   Market: "市場",
   Match: "賽事",
+  MatchPrecise: "精準匹配",
   MatchWinLoss: "球賽輸贏",
   MatchWinLossTitle: "球賽輸贏, {0} - {1}",
   MaxBet: "最高投注",

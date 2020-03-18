@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+﻿import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { ActionCreators } from '../actions/index.js';
 import { bindActionCreators } from 'redux';
@@ -34,7 +34,8 @@ export class FormFilter extends PureComponent {
             oddsGroup: this.allOddsGroupString,
             specialLevel: this.allSpecialLevel,
             baFilter: baStatusList.All,
-            searchOption: searchOptions.matchPrefix
+            searchOption: searchOptions.matchPrecise,
+            isMatchPrecise: true
         }
     }
 
@@ -63,7 +64,7 @@ export class FormFilter extends PureComponent {
                 specialLevel: this.allSpecialLevel,
                 baFilter: baStatusList.All
             });
-        }
+        } 
     }
 
     searchPlayer() {
@@ -111,6 +112,10 @@ export class FormFilter extends PureComponent {
 
     handleChange = (event) => {
         const { name, value } = event.target;
+
+        if(name == "searchOption") {
+            this.setState({ isMatchPrecise: value == 4 });
+        }
 
         this.setState({ [name]: value });
     }
@@ -161,10 +166,10 @@ export class FormFilter extends PureComponent {
             <CollapsiblePanel className="page-filter" iconToggle={iconToggle} stickyFooter={this.userGuide}
                 onCollapse={() => this.props.setCollapseFilter(true)} onExpand={() => this.props.setCollapseFilter(false)}>
                 <div className="row">
-                    <div className="col-12 col-md-4 col-sm-4 col-lg-3 col-xl-2">
+                    <div className="col-12 col-md-4 col-sm-4 col-lg-3 col-xl-3">
                         <div className="form-group">
                             <label className="label-text">
-                                {this._getUserNameLabel()}
+                                {this._getUserNameLabel()}<span className={this.state.isMatchPrecise ? "" : "hide"}>/{LangHelper.getSingleResource("SystemId")}</span>
                                 {(<SearchOption value={searchOption} onChange={this.handleChange} />)}
                             </label>
                             <UserNameInput ref={this.userNameRef} onSelectItem={(value) => this.handleUserNameChange(value)}

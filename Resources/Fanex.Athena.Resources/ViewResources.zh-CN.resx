@@ -2330,4 +2330,7 @@
     <value>更新成功</value>
     <comment>#128082</comment>
   </data>
+  <data name="MatchPrecise" xml:space="preserve">
+    <value>精准匹配</value>
+  </data>
 </root>

@@ -1,4 +1,4 @@
-﻿// Generated at: 3/10/2020 1:27:31 PM
+﻿// Generated at: 3/18/2020 10:18:22 AM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -409,8 +409,9 @@ Margin:"Margin",
 MarkDate:"Mark Date",
 Market:"Market",
 Match:"Match",
-MatchCase:"Match case e.g",
-MatchPrefix:"Match prefix e.g",
+MatchCase:"Match Case e.g",
+MatchPrecise:"Match Precise",
+MatchPrefix:"Match Prefix e.g",
 MatchWinLoss:"Match Win Loss",
 MatchWinLossTitle:"Match Win Loss, {0} - {1}",
 MaxBet:"Max Bet",

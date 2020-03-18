@@ -1,4 +1,4 @@
-﻿// Generated at: 2/28/2020 11:54:49 AM
+﻿// Generated at: 3/6/2020 9:50:19 AM
 var _language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -342,6 +342,7 @@ Margin:"利润",
 Market:"市场",
 Match:"赛事",
 MatchCase:"模糊查询 范例",
+MatchPrecise:"精准匹配",
 MatchPrefix:"前缀查询 范例",
 MatchWinLoss:"球赛输赢",
 MatchWinLossTitle:"球赛输赢, {0} - {1}",

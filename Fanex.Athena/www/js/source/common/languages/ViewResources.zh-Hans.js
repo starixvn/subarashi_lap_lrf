@@ -1,4 +1,4 @@
-﻿// Generated at: 3/10/2020 1:27:31 PM
+﻿// Generated at: 3/18/2020 10:18:22 AM
 window._language_zh_Hans = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -320,6 +320,7 @@ March:"三月",
 Margin:"利润",
 Market:"市场",
 Match:"赛事",
+MatchPrecise:"精准匹配",
 MatchWinLoss:"球赛输赢",
 MatchWinLossTitle:"球赛输赢, {0} - {1}",
 MaxBet:"最高投注",

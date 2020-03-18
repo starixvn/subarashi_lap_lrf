@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { HeaderRow, HeaderCell } from '@9softstudio/react-grid';
 import { fields, headerText } from '../constants';
 
@@ -13,7 +13,7 @@ export default class GridHelper {
                 {/* <HeaderCell colWidth={30}><input type="checkbox" /></HeaderCell> */}
                 {displayedColumn[Status] && <HeaderCell colWidth={80} sortBy={Status}>{headerText.Status}</HeaderCell>}
                 {displayedColumn[UserName] && <HeaderCell colWidth={160} sortBy={UserName}>{headerText.UserName}</HeaderCell>}
-                {displayedColumn[SystemId] && <HeaderCell colWidth={100}>{headerText.SystemId}</HeaderCell>}
+                {displayedColumn[SystemId] && <HeaderCell colWidth={150}>{headerText.SystemId}</HeaderCell>}
                 {displayedColumn[RealName] && <HeaderCell colWidth={80} sortBy={RealName}>{headerText.RealName}</HeaderCell>}
                 {displayedColumn[Currency] && <HeaderCell colWidth={60} sortBy={Currency}>{headerText.Currency}</HeaderCell>}
                 {displayedColumn[CurrentBalance] && <HeaderCell colWidth={80} sortBy={CurrentBalance}>{headerText.CurrentBalance}</HeaderCell>}

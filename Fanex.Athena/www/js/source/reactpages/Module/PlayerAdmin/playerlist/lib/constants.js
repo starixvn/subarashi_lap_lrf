@@ -1,4 +1,4 @@
-import { systemType } from '../../../constants/configInfo';
+﻿import { systemType } from '../../../constants/configInfo';
 import LangHelper from '@jsroot/lib/langHelper';
 
 export const specialLevelListWithColor = {
@@ -101,7 +101,8 @@ export const heightSlicing = {
 export const searchOptions = {
     matchPrefix: '1',
     matchCase: '2',
-    matchWholeWord: '3'
+    matchWholeWord: '3',
+    matchPrecise: '4'
 }
 
 export const defaultPagingOption = {

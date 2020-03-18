@@ -1,4 +1,4 @@
-﻿// Generated at: 3/10/2020 1:27:31 PM
+﻿// Generated at: 3/18/2020 10:18:22 AM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -360,6 +360,7 @@ MarkDate:"标记日期",
 Market:"市场",
 Match:"赛事",
 MatchCase:"模糊查询 范例",
+MatchPrecise:"精准匹配",
 MatchPrefix:"前缀查询 范例",
 MatchWinLoss:"球赛输赢",
 MatchWinLossTitle:"球赛输赢, {0} - {1}",

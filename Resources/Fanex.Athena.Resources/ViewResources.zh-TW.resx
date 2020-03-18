@@ -2023,4 +2023,7 @@
   <data name="DeepLink" xml:space="preserve">
     <value>深度鏈結</value>
   </data>
+  <data name="MatchPrecise" xml:space="preserve">
+    <value>精準匹配</value>
+  </data>
 </root>

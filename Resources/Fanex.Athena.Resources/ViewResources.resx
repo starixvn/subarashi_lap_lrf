@@ -2531,11 +2531,11 @@
     <comment>112658</comment>
   </data>
   <data name="MatchPrefix" xml:space="preserve">
-    <value>Match prefix e.g</value>
+    <value>Match Prefix e.g</value>
     <comment>112658</comment>
   </data>
   <data name="MatchCase" xml:space="preserve">
-    <value>Match case e.g</value>
+    <value>Match Case e.g</value>
     <comment>112658</comment>
   </data>
   <data name="Currencies" xml:space="preserve">
@@ -2598,6 +2598,10 @@
     <value>VIP</value>
     <comment>#128082</comment>
   </data>
+  <data name="MatchPrecise" xml:space="preserve">
+    <value>Match Precise</value>
+  </data>
+
   <data name="AbnormalBetDescriptionReport" xml:space="preserve">
     <value>(*) Player has abnormal bets belong to at least 2 matches</value>
     <comment>#128082</comment>

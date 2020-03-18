@@ -1113,6 +1113,13 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
         name,
         value
       } = event.target;
+
+      if (name == "searchOption") {
+        this.setState({
+          isMatchPrecise: value == 4
+        });
+      }
+
       this.setState({
         [name]: value
       });
@@ -1144,7 +1151,8 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       oddsGroup: this.allOddsGroupString,
       specialLevel: this.allSpecialLevel,
       baFilter: _lib_constants__WEBPACK_IMPORTED_MODULE_8__["baStatusList"].All,
-      searchOption: _lib_constants__WEBPACK_IMPORTED_MODULE_8__["searchOptions"].matchPrefix
+      searchOption: _lib_constants__WEBPACK_IMPORTED_MODULE_8__["searchOptions"].matchPrecise,
+      isMatchPrecise: true
     };
   }
 
@@ -1290,12 +1298,14 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "row"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 col-md-4 col-sm-4 col-lg-3 col-xl-2"
+      className: "col-12 col-md-4 col-sm-4 col-lg-3 col-xl-3"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       className: "label-text"
-    }, this._getUserNameLabel(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filter_SearchOption__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    }, this._getUserNameLabel(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      className: this.state.isMatchPrecise ? "" : "hide"
+    }, "/", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("SystemId")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filter_SearchOption__WEBPACK_IMPORTED_MODULE_6__["default"], {
       value: searchOption,
       onChange: this.handleChange
     })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filter_UserNameInput__WEBPACK_IMPORTED_MODULE_12__["default"], {
@@ -1874,7 +1884,7 @@ class AdvancedSearch extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Compon
       statusField: "Status",
       onChange: (currentItem, selectedItemsKey) => this.handleChange('oddsGroup', selectedItemsKey)
     }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2"
+      className: "col-12 col-md-3 col-sm-3 col-lg-2 col-xl-1"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -1887,7 +1897,7 @@ class AdvancedSearch extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Compon
       statusField: "Status",
       onChange: (currentItem, selectedItemsKey) => this.handleChange('specialLevel', selectedItemsKey)
     }))), selectedBaStatus !== null && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2"
+      className: "col-12 col-md-3 col-sm-3 col-lg-2 col-xl-1"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -2024,7 +2034,7 @@ const SearchOption = props => {
   const toggleButton = {
     className: 'toggle-outline toggle-outline-light'
   };
-  const selectedValue = value || _lib_constants__WEBPACK_IMPORTED_MODULE_2__["searchOptions"].matchPrefix;
+  const selectedValue = value || _lib_constants__WEBPACK_IMPORTED_MODULE_2__["searchOptions"].matchPrecise;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_1__["DropdownButton"], {
     className: "search-option",
     isOpen: isOpen,
@@ -2041,10 +2051,20 @@ const SearchOption = props => {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "radio",
     name: "searchOption",
+    value: _lib_constants__WEBPACK_IMPORTED_MODULE_2__["searchOptions"].matchPrecise,
+    checked: selectedValue === _lib_constants__WEBPACK_IMPORTED_MODULE_2__["searchOptions"].matchPrecise,
+    onChange: onChange
+  }), "\xA0\xA0", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('MatchPrecise'))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], {
+    tag: "div"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "selection-item"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "radio",
+    name: "searchOption",
     value: _lib_constants__WEBPACK_IMPORTED_MODULE_2__["searchOptions"].matchPrefix,
     checked: selectedValue === _lib_constants__WEBPACK_IMPORTED_MODULE_2__["searchOptions"].matchPrefix,
     onChange: onChange
-  }), _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('MatchPrefix'), " \"", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+  }), "\xA0\xA0", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('MatchPrefix'), " \"", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "keyword"
   }, "test"), "\"ABCD")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], {
     tag: "div"
@@ -2056,7 +2076,7 @@ const SearchOption = props => {
     value: _lib_constants__WEBPACK_IMPORTED_MODULE_2__["searchOptions"].matchCase,
     checked: selectedValue === _lib_constants__WEBPACK_IMPORTED_MODULE_2__["searchOptions"].matchCase,
     onChange: onChange
-  }), _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('MatchCase'), " AB\"", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+  }), "\xA0\xA0", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('MatchCase'), " AB\"", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "keyword"
   }, "test"), "\"CD")));
 };
@@ -2785,7 +2805,9 @@ const PlayerRow = props => {
     dataItem: dataItem
   })), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].UserName] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UserNameCell__WEBPACK_IMPORTED_MODULE_7__["default"], {
     dataItem: dataItem
-  })), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].SystemId] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], null, SystemId), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].RealName] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], null, RealName), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].Currency] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
+  })), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].SystemId] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
+    title: SystemId
+  }, SystemId), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].RealName] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], null, RealName), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].Currency] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
     className: "center-align"
   }, Currency), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].CurrentBalance] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
     className: "right-align"
@@ -3749,7 +3771,8 @@ const heightSlicing = {
 const searchOptions = {
   matchPrefix: '1',
   matchCase: '2',
-  matchWholeWord: '3'
+  matchWholeWord: '3',
+  matchPrecise: '4'
 };
 const defaultPagingOption = {
   PageIndex: 1,
@@ -3995,7 +4018,7 @@ class GridHelper {
       colWidth: 160,
       sortBy: UserName
     }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].UserName), displayedColumn[SystemId] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
-      colWidth: 100
+      colWidth: 150
     }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].SystemId), displayedColumn[RealName] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
       colWidth: 80,
       sortBy: RealName

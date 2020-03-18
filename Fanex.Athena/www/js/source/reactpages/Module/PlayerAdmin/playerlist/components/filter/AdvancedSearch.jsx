@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import MultipleSelect from '@9softstudio/react-multiselect';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
@@ -44,7 +44,7 @@ export class AdvancedSearch extends React.Component {
         const oddsGroupList = this._createSelectData(this.oddsGroupList, oddsGroup);
         const specialLevelList = this._createSelectData(this.specialLevelList, specialLevel);
         const selectedBaStatus = isAllowedBA ? this.baStatusList.find(x => x.value === baFilter) : null;
-
+       
         return (
             <>
                 <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
@@ -71,7 +71,7 @@ export class AdvancedSearch extends React.Component {
                     </div>
                 </div>
 
-                <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
+                <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-1">
                     <div className="form-group">
                         <label className="label-text">{LangHelper.getSingleResource("SpecialLevel")}</label>
                         <MultipleSelect id="specialLevel"
@@ -86,7 +86,7 @@ export class AdvancedSearch extends React.Component {
                 {
                     selectedBaStatus !== null &&
                     (
-                        <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
+                        <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-1">
                             <div className="form-group">
                                 <label className="label-text">{LangHelper.getSingleResource("BA")}</label>
                                 <Select instanceId='ddlBaStatus'
