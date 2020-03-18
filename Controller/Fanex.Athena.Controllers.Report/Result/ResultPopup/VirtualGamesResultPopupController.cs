@@ -14,14 +14,14 @@
         }
 
         [HttpGet]
-        public async Task<string> Index(string gamePlayId, string platfrom = "d")
+        public async Task<string> Index(string gamePlayId, string platform = "d")
         {
             var language = SessionServiceInstance.UserSession.Language;
             var model = new
             {
                 gamePlayId,
-                platfrom,
-                languageCode = language
+                languageCode = language,
+                platform,
             };
             return await _betListApiClient.PostStringAsync("/VirtualGamesResultPopup/GetDetailResult", model, language).ConfigureAwait(false);
         }
