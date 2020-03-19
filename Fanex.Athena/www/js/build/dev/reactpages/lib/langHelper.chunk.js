@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 3/26/2020 9:32:27 AM
+// Generated at: 3/19/2020 4:23:35 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -350,6 +350,7 @@ window._language_en_US = {
   Error: "Error",
   ErrorNotification: "You&apos;re here because of one of those reasons: &lt;br/&gt;遭遇问题了!",
   ErrorProcessingMsg: "Sorry, an error occurred while processing your request.",
+  ESportsApp: "E-Sports App",
   Euro: "Euro",
   Event: "Event",
   EventDate: "Event Date",
@@ -848,8 +849,6 @@ window._language_en_US = {
   VirtualMotoRacing: "Virtual Moto Racing",
   VirtualSoccer: "Virtual Soccer",
   VirtualSoccerAsianCup: "Virtual Soccer Asian Cup",
-  VirtualSoccerChampionsCup: "Virtual Soccer Champions Cup",
-  VirtualSoccerEnglishPremier: "Virtual Soccer English Premier",
   VirtualSoccerLeague: "Virtual Soccer League",
   VirtualSoccerNation: "Virtual Soccer Nation",
   VirtualSoccerWorldCup: "Virtual Soccer World Cup",

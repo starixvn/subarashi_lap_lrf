@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 3/26/2020 9:32:27 AM
+// Generated at: 3/19/2020 4:23:35 PM
 window._language_zh_Hans = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -289,6 +289,9 @@ window._language_zh_Hans = {
   Entered: "成绩已输入场数",
   Error: "误差",
   ErrorProcessingMsg: "对不起, 处理您的请求时有错误发生。",
+  ESportsApp: "电子竞技App",
+  ESportsDesktop: "电子竞技 桌机",
+  ESportsMobile: "电子竞技 手机",
   Euro: "欧洲版",
   Event: "项目",
   EventDate: "赛事日期",
