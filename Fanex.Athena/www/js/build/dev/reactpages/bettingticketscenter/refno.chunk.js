@@ -1770,6 +1770,7 @@ class BetListLayout extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     window.ViewResult = (matchid, raceNo, bettype, sporttype, refno, username, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid, transdecs) => {
       const title = this._getResource('Result');
 
+      const defaultPlatform = 'd';
       const rootUrl = this.props.rootUrl;
 
       if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].RNG_GAME || sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].RNG_MINIGAME || sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].RNG_MOBILE) {
@@ -1790,6 +1791,10 @@ class BetListLayout extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         this._showThirdPartyResult(url, title);
       } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].SG) {
         const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getSGResultUrl(rootUrl, custid, extension2);
+
+        this._showThirdPartyResult(url, title);
+      } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].VRG) {
+        const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getVRGResultUrl(rootUrl, refno, defaultPlatform);
 
         this._showThirdPartyResult(url, title);
       } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].ALLBET) {
@@ -2470,6 +2475,14 @@ class BetList {
     return url;
   }
 
+  getVRGResultUrl(rootUrl, gamePlayId, platform) {
+    let url = rootUrl + 'VirtualGamesResultPopup/Index';
+    console.log(gamePlayId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'gamePlayId', gamePlayId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'platform', platform);
+    return url;
+  }
+
   getAllBetResultUrl(rootUrl, transdesc, betcheck, bettype) {
     let url = rootUrl + 'ResultReport/AllBetResult';
     url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'betcheck', betcheck);
@@ -2519,7 +2532,8 @@ const SportType = {
   PP: 248,
   GLOBALGAMING: 219,
   CARDCLUB: 165,
-  SG: 247
+  SG: 247,
+  VRG: 245
 };
 
 /***/ }),

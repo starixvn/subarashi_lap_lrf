@@ -48,6 +48,25 @@
             JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        [AjaxRequest]
+        public async Task<ActionResult> VirtualGameReuslt()
+        {
+            var obj = new { languageCode = SessionServiceInstance.UserSession.Language, platform = "d" };
+            if (ModelState.IsValid)
+            {
+                var data = await _betListApiClient.PostStringAsync(
+                    "/VirtualGamesResultPopup/GetResultPage",
+                     obj,
+                     SessionServiceInstance.UserSession.Language
+                    ).ConfigureAwait(false);
+
+                return this.Content(data, "text/html");
+            }
+
+            return this.Content(string.Empty, "text/html");
+        }
+
         [HttpPost]
         [AjaxRequest]
         [CustomValidateAntiForgery]

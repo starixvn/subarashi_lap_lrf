@@ -2214,7 +2214,9 @@
     <value>原生App</value>
     <comment>125824</comment>
   </data>
-  <data name="MarkDate" xml:space="preserve">
+  <data name="ProductVRG" xml:space="preserve">
+    <value>虚拟娱乐城</value>
+  </data>  <data name="MarkDate" xml:space="preserve">
     <value>标记日期</value>
     <comment>#128082</comment>
   </data>

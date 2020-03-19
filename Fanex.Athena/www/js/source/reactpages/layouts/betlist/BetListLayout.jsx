@@ -25,6 +25,7 @@ class BetListLayout extends Component {
         window.ViewResult = (matchid, raceNo, bettype, sporttype, refno,
             username, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid, transdecs) => {
             const title = this._getResource('Result');
+            const defaultPlatform = 'd';
             const rootUrl = this.props.rootUrl;
 
             if (sporttype === SportType.RNG_GAME || sporttype === SportType.RNG_MINIGAME || sporttype === SportType.RNG_MOBILE) {
@@ -45,6 +46,10 @@ class BetListLayout extends Component {
             }
             else if (sporttype === SportType.SG) {
                 const url = BetList.getSGResultUrl(rootUrl, custid, extension2);
+                this._showThirdPartyResult(url, title);
+            }
+            else if (sporttype === SportType.VRG) {
+                const url = BetList.getVRGResultUrl(rootUrl, refno, defaultPlatform);
                 this._showThirdPartyResult(url, title);
             }
             else if (sporttype === SportType.ALLBET) {

@@ -43,8 +43,14 @@
                         @ViewResources.ProductLT
                     </a>
                 }
+                @if (ViewBag.IsAllowedVRG)
+                {
+                    <a href="javascript:;" class="center-align label label-primary" id="submitVirtualGame" data-vendorProductId="@ResultVendorProductTypes.VirtualGame">
+                        @ViewResources.ProductVRG
+                    </a>
+                }
             </div>
-        </div>
+        </div> 
 
         <div class="row">
             <div class="col l12 m12 s12">
