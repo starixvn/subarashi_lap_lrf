@@ -1,4 +1,4 @@
-﻿// Generated at: 3/19/2020 4:00:24 PM
+﻿// Generated at: 3/23/2020 1:55:18 PM
 var _language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -256,6 +256,8 @@ Error:"Error",
 ErrorNotification:"You&apos;re here because of one of those reasons: &lt;br/&gt;遭遇问题了!",
 ErrorProcessingMsg:"Sorry, an error occurred while processing your request.",
 ESportsApp:"E-Sports App",
+ESportsDesktop:"E-Sports Desktop",
+ESportsMobile:"E-Sports Mobile",
 Euro:"Euro",
 Event:"Event",
 EventDate:"Event Date",

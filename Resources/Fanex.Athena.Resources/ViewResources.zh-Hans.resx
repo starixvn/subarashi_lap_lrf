@@ -2052,7 +2052,7 @@
     <value>交易日期</value>
   </data>
  <data name="ESportsApp" xml:space="preserve">
-    <value>电子竞技App</value>
+	<value>电子竞技App</value>
   </data>
   <data name="ESportsDesktop" xml:space="preserve">
     <value>电子竞技 桌机</value>
