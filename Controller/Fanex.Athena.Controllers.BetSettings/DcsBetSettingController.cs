@@ -58,7 +58,7 @@ namespace Fanex.Athena.Controllers.BetSettings
             [ProductTypes.VirtualSports] = new[] { "180", "181", "182", "183", "184", "185", "186" },
             [ProductTypes.VirtualSports2] = new[] { "190", "191", "192", "193", "199" },
             [ProductTypes.Lottery] = new[] { "220" },
-            [ProductTypes.I4D] = new[] { "233" }
+            [ProductTypes.I4D] = new[] { "223" }
         };
 
         private readonly IDcsBetSettingService _betSettingService;
