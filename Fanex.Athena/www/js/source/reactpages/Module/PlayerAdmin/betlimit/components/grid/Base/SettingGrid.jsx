@@ -72,10 +72,15 @@ const SettingGrid = (props) => {
                         {buildCell(BetLimitType.MaxBet, item, disabled)}
                         {item.BetValueMax > 0 && <span>{` <= ${Utility.formatValue(item.BetValueMax)}`}</span>}
                     </td>
-                    <td className='pa-betlimit-cell'>
-                        {buildCell(BetLimitType.MaxPerMatch, item, disabled)}
-                        {item.MaxPerMatchMax > 0 && <span>{` <= ${Utility.formatValue(item.MaxPerMatchMax)}`}</span>}
-                    </td>
+                    {
+                        item.Id != 220 &&
+                        (
+                            <td className='pa-betlimit-cell'>
+                                {buildCell(BetLimitType.MaxPerMatch, item, disabled)}
+                                {item.MaxPerMatchMax > 0 && <span>{` <= ${Utility.formatValue(item.MaxPerMatchMax)}`}</span>}
+                            </td>
+                        )
+                    }
                 </tr>
             )
         }

@@ -49,5 +49,7 @@ namespace Fanex.Athena.Model.Core.DataDomain
         public const int PP = 32;
 
         public const int TG = 40;
+
+        public const int I4D = 43;
     }
 }

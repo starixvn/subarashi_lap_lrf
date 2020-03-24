@@ -11,7 +11,7 @@
     using Fanex.Athena.Resources;
     using Fanex.Athena.Web.ActionFilter;
 
-    [ValidateProductPermission(limitedProductIds: new[] { ProductTypes.VirtualSports, ProductTypes.VirtualSports2, ProductTypes.Lottery, ProductTypes.TG })]
+    [ValidateProductPermission(limitedProductIds: new[] { ProductTypes.VirtualSports, ProductTypes.VirtualSports2, ProductTypes.Lottery, ProductTypes.TG, ProductTypes.I4D })]
     public class DcsBetLimitController : PlayerBetLimitBaseControler
     {
         private readonly IDcsBetLimitService _service;
