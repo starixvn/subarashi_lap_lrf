@@ -206,7 +206,7 @@ namespace Fanex.Athena.Api.Report
             licenseeWinLoss.TurnOverSG = turnOverProducts.GetValueOrDefault(Product.SG, 0);
 			licenseeWinLoss.TurnOverVRG = turnOverProducts.GetValueOrDefault(Product.VRG, 0);
             licenseeWinLoss.TurnOverTG = turnOverProducts.GetValueOrDefault(Product.TG, 0);
-            licenseeWinLoss.TurnOverI4D = turnOverProducts.GetValueOrDefault(Product.VRG, 0);
+            licenseeWinLoss.TurnOverI4D = turnOverProducts.GetValueOrDefault(Product.I4D, 0);
         }
 
         private static bool IsProductVisible(IEnumerable<ProductOption> productOptions, ProductAccess productAccess, string productCode)
