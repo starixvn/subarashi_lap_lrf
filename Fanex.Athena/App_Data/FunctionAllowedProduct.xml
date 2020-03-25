@@ -8,7 +8,7 @@
     <Function Name="LicenseeWinLoss" Product="SB,BA,NG,VS,CS,KN,BT,AGC,VB,AB,FW,CO,VS2,LT,SG,PP,CC,VRG,TG,I4D"></Function>
     <Function Name="SpecialLicenseeWinLoss" Product="SB,NG,CS,LC"></Function>
     <Function Name="WinLossByTimeZone" Product="SB,BA"></Function>
-    <Function Name="SubsidiaryPerformance" Product="SB,NG,VS,CS,KN,AGC,VB,AB,FW,VS2,LT,TG"></Function>
+    <Function Name="SubsidiaryPerformance" Product="SB,NG,VS,CS,KN,AGC,VB,AB,FW,VS2,LT,TG,I4D"></Function>
     <Function Name="ActiveCustomerSummary" Product="SB,BA,NG,VS,CS,KN,AGC,PTCS,VB,AB,CB,FW,VS2,LT,PP,CC"></Function>
     <Function Name="CustomerBalance" Product="SB,BA,NG,VS,CS,KN,BT,AGC,VB,AB,CB,FW,CO,VS2,LT,SG,PP,CC,VRG,TG,I4D"></Function>
     <Function Name="CustomerPendingFunds" Product="SB,BA,NG,VS,CS,KN,AGC,VB,AB,CB,FW,VS2,LT,SG,PP,CC,VRG,TG,I4D"></Function>
