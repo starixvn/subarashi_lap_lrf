@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 3/23/2020 11:32:20 AM
+// Generated at: 3/26/2020 9:32:27 AM
 window._language_zh_Hans = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -106,7 +106,6 @@ window._language_zh_Hans = {
   Adjustment: "调整",
   AdvancedSearch: "进阶搜寻",
   AffiliateTransfer: "合作伙伴转账",
-  AfterBalance: "后期余额",
   AGCasino: "AG Casino",
   AGCasinoBalance: "AG Casino Balance",
   AGCasinoNotOfferCurrency: "AG Casino is not offered for this currency.",
@@ -145,7 +144,6 @@ window._language_zh_Hans = {
   BackToCurrentReport: "回到现有报告",
   BACommission: "BA佣金",
   Balance: "余额",
-  BalanceChange: "余额变动",
   BaseCurrency: "基础货币",
   Based: "基于",
   BAStatus: "BA 状态",
@@ -268,7 +266,6 @@ window._language_zh_Hans = {
   DeleteGroup: "删除组",
   Deposit: "存款",
   Details: "细节",
-  DetailTransaction: "交易纪录",
   DH: "和主",
   DisableAgCasino: "Disable AG Casino",
   DisableRNGCasino: "停用娱乐城",
@@ -431,7 +428,6 @@ window._language_zh_Hans = {
   MaxPerBallLessThanOrEqual: "最大單球最大投注必須小於或等於",
   MaxPerMatch: "单场限额",
   May: "五月",
-  Message_RemoveCustomerLog: "会员日志即将于4月21日上午11点(GMT+8)移除，敬请使用玩家管理取代相关查询。谢谢!",
   MessageCommCannotGreaterThan: "佣金不能大于15%",
   MessageCommNoChange: "佣金没有更改",
   MessageGroupCreationFail: "创建组失败",
@@ -633,10 +629,6 @@ window._language_zh_Hans = {
   TotalTurnover: "总交易额",
   ToViewHistoryRptMsg: "请点击查看历史报告",
   ToWinToNil: "零失球的胜方",
-  Transaction: "交易",
-  TransactionDate: "交易日期",
-  TransactionID: "交易单号",
-  TransactionTime: "交易时间",
   TransferIn: "Transfer In",
   TransferOut: "Transfer Out",
   TransTime: "交易时间",

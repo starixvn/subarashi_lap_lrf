@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 3/20/2020 10:52:38 AM
+// Generated at: 3/26/2020 9:32:27 AM
 window._language_zh_TW = {
   AA: "客客",
   AbnormalBet: "非正規註單",
@@ -105,7 +105,6 @@ window._language_zh_TW = {
   AD: "客和",
   Adjustment: "調整",
   AffiliateTransfer: "合作夥伴轉賬",
-  AfterBalance: "後期餘額",
   AGCasino: "AG Casino",
   AGCasinoBalance: "AG Casino Balance",
   AGCasinoNotOfferCurrency: "AG Casino is not offered for this currency.",
@@ -144,7 +143,6 @@ window._language_zh_TW = {
   BackToCurrentReport: "回到現有報告",
   BACommission: "BA佣金",
   Balance: "餘額",
-  BalanceChange: "餘額變動",
   BaseCurrency: "基礎貨幣",
   Based: "基於",
   BAStatus: "BA 狀態",
@@ -270,7 +268,6 @@ window._language_zh_TW = {
   DeleteGroup: "刪除組",
   Deposit: "存款",
   Details: "細節",
-  DetailTransaction: "交易紀錄",
   DH: "和主",
   DisableAgCasino: "Disable AG Casino",
   DisableRNGCasino: "停用娛樂城",
@@ -633,10 +630,6 @@ window._language_zh_TW = {
   TotalTurnover: "總交易額",
   ToViewHistoryRptMsg: "請點擊查看歷史報告",
   ToWinToNil: "零失球的勝方",
-  Transaction: "交易",
-  TransactionDate: "交易日期",
-  TransactionID: "交易單號",
-  TransactionTime: "交易時間",
   TransferIn: "Transfer In",
   TransferOut: "Transfer Out",
   TransTime: "交易時間",

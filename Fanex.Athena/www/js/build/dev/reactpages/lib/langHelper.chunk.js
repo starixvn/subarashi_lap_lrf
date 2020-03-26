@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 3/23/2020 10:32:00 AM
+// Generated at: 3/26/2020 9:32:27 AM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -112,7 +112,6 @@ window._language_en_US = {
   Administrator: "Administrator",
   AdvancedSearch: "Advanced Search",
   AffiliateTransfer: "Affiliate Transfer",
-  AfterBalance: "After Balance",
   AGCasino: "AG Casino",
   AGCasinoBalance: "AG Casino Balance",
   AGCasinoNotOfferCurrency: "AG Casino is not offered for this currency.",
@@ -163,7 +162,6 @@ window._language_en_US = {
   BackToCurrentReport: "Back to current report",
   BACommission: "BA Commission",
   Balance: "Balance",
-  BalanceChange: "Balance Change",
   BankAccountNumber: "Bank Account Number",
   BankInformation: "Bank Information",
   BaseCurrency: "Base Currency",
@@ -311,7 +309,6 @@ window._language_en_US = {
   DescriptionAbnormalBet: "The player was abnormally voided in at least 2 different matches",
   DetailedBetlist: "Detailed Bet list",
   Details: "Details",
-  DetailTransaction: "Detail Transaction",
   DH: "DH",
   DisableAgCasino: "Disable AG Casino",
   DisableAllBet: "Disable AllBet",
@@ -527,7 +524,6 @@ window._language_en_US = {
   MaxPerMatch: "Max Per Match",
   May: "May",
   Member: "Member",
-  Message_RemoveCustomerLog: "Customer Log will be removed at 11am on April 21st (GMT+8). Kindly use Player Administration instead. Thanks!",
   MessageCommCannotGreaterThan: "Commission cannot be greater than 15%",
   MessageCommNoChange: "Commission is not change",
   MessageGroupCreationFail: "Group creation failed",
@@ -779,11 +775,7 @@ window._language_en_US = {
   TotalTurnover: "Total Turnover",
   ToViewHistoryRptMsg: "Please click to view history report",
   ToWinToNil: "To Win To Nil",
-  Transaction: "Transaction",
-  TransactionDate: "Transaction Date",
   TransactionDetail: "Transaction Detail",
-  TransactionID: "Transaction ID",
-  TransactionTime: "Transaction Time",
   TransactionType: "Transaction Type",
   TransferIn: "Transfer In",
   TransferOut: "Transfer Out",
@@ -856,6 +848,8 @@ window._language_en_US = {
   VirtualMotoRacing: "Virtual Moto Racing",
   VirtualSoccer: "Virtual Soccer",
   VirtualSoccerAsianCup: "Virtual Soccer Asian Cup",
+  VirtualSoccerChampionsCup: "Virtual Soccer Champions Cup",
+  VirtualSoccerEnglishPremier: "Virtual Soccer English Premier",
   VirtualSoccerLeague: "Virtual Soccer League",
   VirtualSoccerNation: "Virtual Soccer Nation",
   VirtualSoccerWorldCup: "Virtual Soccer World Cup",
