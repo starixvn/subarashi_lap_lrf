@@ -398,3 +398,6 @@
 .center-text {
   text-align: center !important; }
 
+.table-container .body-content {
+  min-height: 200px; }
+
