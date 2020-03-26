@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 3/23/2020 2:03:02 PM
+// Generated at: 3/26/2020 7:55:08 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -851,6 +851,8 @@ window._language_en_US = {
   VirtualMotoRacing: "Virtual Moto Racing",
   VirtualSoccer: "Virtual Soccer",
   VirtualSoccerAsianCup: "Virtual Soccer Asian Cup",
+  VirtualSoccerChampionsCup: "Virtual Soccer Champions Cup",
+  VirtualSoccerEnglishPremier: "Virtual Soccer English Premier",
   VirtualSoccerLeague: "Virtual Soccer League",
   VirtualSoccerNation: "Virtual Soccer Nation",
   VirtualSoccerWorldCup: "Virtual Soccer World Cup",

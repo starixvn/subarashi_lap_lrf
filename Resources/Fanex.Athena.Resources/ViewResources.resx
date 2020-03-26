@@ -2745,7 +2745,7 @@
   <data name="VirtualSoccerEnglishPremier" xml:space="preserve">
     <value>Virtual Soccer English Premier</value>
   </data>
-</root>  <data name="ESportsDesktop" xml:space="preserve">
+  <data name="ESportsDesktop" xml:space="preserve">
     <value>E-Sports Desktop</value>
   </data>
   <data name="ESportsMobile" xml:space="preserve">
