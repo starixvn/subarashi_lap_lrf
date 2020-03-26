@@ -401,3 +401,6 @@
 .table-container .body-content {
   min-height: 200px; }
 
+body {
+  min-height: 400px; }
+
