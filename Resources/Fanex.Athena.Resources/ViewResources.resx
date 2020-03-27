@@ -2739,7 +2739,7 @@
   <data name="Message_RemoveCustomerLog" xml:space="preserve">
     <value>Customer Log will be removed at 11am on April 21st (GMT+8). Kindly use Player Administration instead. Thanks!</value>
   </data>
-</root>  <data name="VirtualSoccerChampionsCup" xml:space="preserve">
+  <data name="VirtualSoccerChampionsCup" xml:space="preserve">
     <value>Virtual Soccer Champions Cup</value>
   </data>
   <data name="VirtualSoccerEnglishPremier" xml:space="preserve">
