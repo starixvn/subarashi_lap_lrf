@@ -50,6 +50,9 @@
                 '9': Site.getSingleResource('MobileLiteVersion'),
                 '10': Site.getSingleResource('DeepLink'),
                 '11': Site.getSingleResource('NativeApp'),
+                '12': Site.getSingleResource('ESportsDesktop'),
+                '13': Site.getSingleResource('ESportsMobile'),
+                '14': Site.getSingleResource('ESportsApp'),
                 '88': Site.getSingleResource('BetfromOthers')
             };
 

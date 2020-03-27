@@ -2593,6 +2593,9 @@
     <value>Native App</value>
     <comment>125824</comment>
   </data>
+  <data name="ESportsApp" xml:space="preserve">
+    <value>E-Sports App</value>
+  </data>
   <data name="MarkDate" xml:space="preserve">
     <value>Mark Date</value>
     <comment>#128082</comment>
@@ -2735,5 +2738,17 @@
   </data>
   <data name="Message_RemoveCustomerLog" xml:space="preserve">
     <value>Customer Log will be removed at 11am on April 21st (GMT+8). Kindly use Player Administration instead. Thanks!</value>
+  </data>
+  <data name="VirtualSoccerChampionsCup" xml:space="preserve">
+    <value>Virtual Soccer Champions Cup</value>
+  </data>
+  <data name="VirtualSoccerEnglishPremier" xml:space="preserve">
+    <value>Virtual Soccer English Premier</value>
+  </data>
+  <data name="ESportsDesktop" xml:space="preserve">
+    <value>E-Sports Desktop</value>
+  </data>
+  <data name="ESportsMobile" xml:space="preserve">
+    <value>E-Sports Mobile</value>
   </data>
 </root>

@@ -29,6 +29,12 @@
 
         public const int NativeApp = 11;
 
+        public const int ESportsDesktop = 12;
+
+        public const int ESportsMobile = 13;
+
+        public const int ESportsApp = 14;
+
         public const int BetfromOthers = 88;
 
         private static readonly IDictionary<int, string> MapPlatformKeys = new Dictionary<int, string>
@@ -45,7 +51,10 @@
             { MobileLiteVersion, nameof(MobileLiteVersion) },
             { DeepLink, nameof(DeepLink) },
             { BetfromOthers, nameof(BetfromOthers) },
-            { NativeApp, nameof(NativeApp) }
+            { NativeApp, nameof(NativeApp) },
+            { ESportsDesktop, nameof(ESportsDesktop) },
+            { ESportsMobile, nameof(ESportsMobile) },
+            { ESportsApp, nameof(ESportsApp) }
         };
 
         public static string GetPlatformKey(int type)
@@ -82,13 +91,16 @@
                 case "t": return ViewResources.DeepLink;
                 case "v": return ViewResources.BetfromOthers;
                 case "0": return ViewResources.NativeApp;
+                case "1": return ViewResources.ESportsDesktop;
+                case "2": return ViewResources.ESportsMobile;
+                case "3": return ViewResources.ESportsApp;
                 default: return ViewResources.Others;
             }
         }
 
         public static bool IsValidPlatform(int type)
         {
-            return (type >= All && type <= NativeApp) || type == BetfromOthers;
+            return (type >= All && type <= ESportsApp) || type == BetfromOthers;
         }
     }
 }
