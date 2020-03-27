@@ -6,6 +6,7 @@
     {
         public string TransactionId { get; set; }
         public DateTime TransactionTime { get; set; }
+        public int BetType { get; set; }
         public string TransactionType { get; set; }
         public decimal BalanceChange { get; set; }
         public decimal AfterBalance { get; set; }

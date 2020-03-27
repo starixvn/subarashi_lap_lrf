@@ -1,4 +1,4 @@
-﻿// Generated at: 3/27/2020 8:47:00 AM
+﻿// Generated at: 4/3/2020 4:15:22 PM
 var _language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -24,7 +24,7 @@ AlertChooseProductMsg:"请选择至少一个产品",
 AlertInputOldPwdMsg:"请输入旧密码！",
 AlertPasswordEmptyMsg:"对不起, 密码不能空置!!!",
 AlertRemoveSpecialLevelForCustomerMsg:"即将删除此会员的特殊级别。您确定吗?",
-AlertSetOddsGroupForCustomerMsg:"确定将此玩家移至odds group {0}?",
+AlertSetOddsGroupForCustomerMsg:"您确定要将此玩家移至水位组别{0}吗？",
 AlertSetSpecialLevelForCustomerMsg:"您确定要设置此会员的特殊级别为 ?",
 AlertTurnOffBAMsg:"您确定要关闭BA？",
 AlertTurnOnBAMsg:"您确定要打开BA？",
@@ -449,6 +449,7 @@ OddEven:"单双盘",
 OddEvenDND:"单双盘 + 独赢盘 + 平局/不是和局",
 Odds:"赔率",
 OddsAvg:"平均赔率",
+OddsGroup:"水位组别",
 OddsMatched:"匹配赔率",
 OddsReq:"投注赔率",
 OddsType:"赔率类型",

@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 3/27/2020 8:47:26 AM
+﻿// Generated at: 4/3/2020 4:14:00 PM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -125,7 +125,7 @@ AlertChooseProductMsg:"Please choose at least one of products",
 AlertInputOldPwdMsg:"Please Enter Old Password!!!",
 AlertPasswordEmptyMsg:"Sorry, password can not be empty!!!",
 AlertRemoveSpecialLevelForCustomerMsg:"It will remove special level set for this customer. Are you sure?",
-AlertSetOddsGroupForCustomerMsg:"Are you sure you want to move this customer to odds group {0}?",
+AlertSetOddsGroupForCustomerMsg:"Are you sure you want to move this player to odds group {0}?",
 AlertSetSpecialLevelForCustomerMsg:"Are you sure you want to set special level  for this customer?",
 AlertTurnOffBAMsg:"Are you sure you want to turn off BA?",
 AlertTurnOnBAMsg:"Are you sure you want to turn on BA?",

@@ -15,6 +15,7 @@
     using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
     using Fanex.Athena.Service.StatelessCore;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.VendorAdapter;
 
     public static class DependencyInjectionExtension
     {
@@ -30,7 +31,7 @@
                 .As<IPlayerStatementService>()
                 .InstancePerDependency();
 
-            builder.Register<PlayerDetailTransactionService>(x => new PlayerDetailTransactionService(new PlayerDetailTransactionRepository(new DbFactory())))
+            builder.Register<PlayerDetailTransactionService>(x => new PlayerDetailTransactionService(new PlayerDetailTransactionRepository(new DbFactory(), new CacheRefAdapter())))
                 .As<IPlayerDetailTransactionService>()
                 .InstancePerDependency();
 

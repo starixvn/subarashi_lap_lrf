@@ -1,4 +1,5 @@
-import Excel from '@jsroot/lib/excel';
+﻿import Excel from '@jsroot/lib/excel';
+import NumberFormat from '@jsroot/lib/numberFormat';
 import { headerCellStyle, bodyCellStyle } from '@jsroot/constants/excelStyle';
 import { fields, headerText } from './constants';
 import { getSpecialLevelText, getBaStatusText, getPlayerStatus } from './helpers/utils';
@@ -27,7 +28,7 @@ export default class ReportExcel {
         this.columnConfigs = this._getcolumnConfigs();
     }
 
-    export (onFinished) {
+    export(onFinished) {
         Excel.process(() => {
             this._createHeader();
             this._createBodyData();
@@ -83,7 +84,12 @@ export default class ReportExcel {
             };
         }
 
-        const value = item[columnConfig.field];
+        let value = item[columnConfig.field];
+        if (columnConfig.field === fields.CurrentBalance
+            || columnConfig.field === fields.OutstandingBalance) {
+            value = NumberFormat.roundDown(value, 2);
+        }
+
         const displayedTextFunc = displayedTextByField[columnConfig.field];
         const displayedValue = this._shouldSetEmpty(value) ? '' :
             (displayedTextFunc ? displayedTextFunc(value) : value);

@@ -331,7 +331,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to move this customer to odds group {0}?.
+        ///   Looks up a localized string similar to Are you sure you want to move this player to odds group {0}?.
         /// </summary>
         public static string AlertSetOddsGroupForCustomerMsg {
             get {

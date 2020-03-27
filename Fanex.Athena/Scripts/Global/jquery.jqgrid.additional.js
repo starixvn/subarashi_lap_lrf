@@ -20,8 +20,8 @@ var jqGridAdditional = (function () {
 
                 var gridTop = $bdiv.offset().top;
                 var gridHeight = window.innerHeight - gridTop - $(".ui-jqgrid-sdiv:visible").height() -
-                            $(".ui-jqgrid-pager:visible").height() - $(".paging:visible").height() -
-                            $(".pagingContainer:visible").height() - 30;
+                    $(".ui-jqgrid-pager:visible").height() - $(".paging:visible").height() -
+                    $(".pagingContainer:visible").height() - 30;
                 gridHeight = Math.max(120, gridHeight);
 
                 var gridContainer = $("#gview_ReportGrid");
@@ -32,7 +32,7 @@ var jqGridAdditional = (function () {
                 var contentWidth = $bdiv.width();
                 var newHeight = tableWidth > contentWidth ? contentHeight + 18 : contentHeight;
                 $bdiv.height(Math.min(newHeight, gridHeight))
-                                 .css({ "height": "auto", "max-height": gridHeight });
+                    .css({ "height": "auto", "max-height": gridHeight });
             }, 200);
         },
         resetLayout: function (grid, maxWidth) {
@@ -163,14 +163,14 @@ var jqGridAdditional = (function () {
 
         setGroupCustomerWLColumns: function (grid) {
             grid.jqGrid('setGroupHeaders',
-            {
-                useColSpanStyle: true,
-                groupHeaders: [{
-                    startColumnName: 'CustomerWinLoss',
-                    numberOfColumns: 3,
-                    titleText: Site.getSingleResource('CustomerW_L')
-                }]
-            });
+                {
+                    useColSpanStyle: true,
+                    groupHeaders: [{
+                        startColumnName: 'CustomerWinLoss',
+                        numberOfColumns: 3,
+                        titleText: Site.getSingleResource('CustomerW_L')
+                    }]
+                });
             $(".ui-jqgrid-htable>thead>tr.ui-jqgrid-labels > th.ui-th-column div").addClass("header-one-line");
             $(".ui-jqgrid-htable>thead>tr.ui-jqgrid-labels > th.ui-th-column span").css("height", "45px !important");
         },
@@ -355,8 +355,8 @@ var jqGridAdditional = (function () {
             var contentTable = $("table.ui-jqgrid-htable");
             if (contentTable.find(".no-info-row").length === 0) {
                 var temps = '<tr role="row" class="no-info-row ui-widget-content jqgrow ui-row-ltr" style="height:auto;">' +
-                        ' <td style="text-align:center;" role="role="gridcell" colspan="' +
-                        colspan + '">' + info + '</td><td class="hide" colspan="' + numOfHideColumns + '"></td></tr>';
+                    ' <td style="text-align:center;" role="role="gridcell" colspan="' +
+                    colspan + '">' + info + '</td><td class="hide" colspan="' + numOfHideColumns + '"></td></tr>';
                 contentTable.append(temps);
             }
 
@@ -445,8 +445,8 @@ var jqGridAdditional = (function () {
                 if (rowCount > 1) {
                     // Show total text
                     $("td:first-child", footerRowList[0]).attr("colspan", colspan)
-                            .attr("rowspan", rowCount - summaryRowCount).css("display", "")
-                            .css("width", totalCellWidth + "px").html(totalText).attr("title", totalText);
+                        .attr("rowspan", rowCount - summaryRowCount).css("display", "")
+                        .css("width", totalCellWidth + "px").html(totalText).attr("title", totalText);
                 }
                 else {
                     $("td:first-child", footerRowList[0]).css("display", "").attr("colspan", summaryColspan)
@@ -461,12 +461,12 @@ var jqGridAdditional = (function () {
                     var currencyList = currencyListString.split(",");
                     $(currencyList).each(function (i, currency) {
                         $("td.group-" + currency + ":first-child", footerTable)
-                                .attr("colspan", colspan)
-                                .attr("rowspan", summaryRowCount / currencyList.length)
-                                .css("display", "")
-                                .attr("colspan", summaryColspan)
-                                .html(totalInText + " " + currency)
-                                .attr("title", totalInText + " " + currency);
+                            .attr("colspan", colspan)
+                            .attr("rowspan", summaryRowCount / currencyList.length)
+                            .css("display", "")
+                            .attr("colspan", summaryColspan)
+                            .html(totalInText + " " + currency)
+                            .attr("title", totalInText + " " + currency);
                         $("td.group-" + currency + ":gt(0)", footerTable).hide();
                         $("td.group-" + currency + ":first-child", footerTable).parent().addClass("total-eur");
                     });
