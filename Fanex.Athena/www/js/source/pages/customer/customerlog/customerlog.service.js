@@ -1,13 +1,15 @@
 ﻿'use strict';
 define(['jquery', 'common/site',
-    'lib/jqgrid/jquery.jqgrid.additional', 'lib/jqgrid/jquery.jqGrid.en', 'lib/jqgrid/jquery.jqGrid.min'],
-    function ($, Site, jqGridAdditional) {
+    'lib/jqgrid/jquery.jqgrid.additional', 'common/popup',
+    'lib/jqgrid/jquery.jqGrid.en', 'lib/jqgrid/jquery.jqGrid.min'],
+    function ($, Site, jqGridAdditional, Popup) {
         const GRID_ID = 'ReportGrid';
         let _ajaxRequest = null;
 
         const _me = {
             initialize: function () {
                 Site.initialize();
+                _me.informRemoveFunction();
                 Site.addUserGuide({
                     resourceName: 'CustomerLog',
                     title: Site.getSingleResource('CustomerLog')
@@ -95,6 +97,19 @@ define(['jquery', 'common/site',
                 if (_ajaxRequest !== null) {
                     _ajaxRequest.abort();
                 }
+            },
+            informRemoveFunction: function () {
+                const buttons = [
+                    {
+                        text: Site.getSingleResource('OK'),
+                        isClosedOnClick: true,
+                        classes: 'btn btn-submit'
+                    }];
+
+                Popup.openPopupWithButton(
+                    '<div><p>' + Site.getSingleResource('Message_RemoveCustomerLog') + '</p></div>',
+                    { width: 700, height: 150 },
+                    buttons);
             }
         };
 

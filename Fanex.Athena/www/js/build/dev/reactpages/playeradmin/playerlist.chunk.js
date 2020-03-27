@@ -7256,6 +7256,11 @@ const bodyCellStyle = {
       horizontal: "left"
     })
   },
+  right: {
+    alignment: _objectSpread({}, bodyTextStyle.alignment, {
+      horizontal: "right"
+    })
+  },
   number: {
     numFmt: "#,##0"
   },

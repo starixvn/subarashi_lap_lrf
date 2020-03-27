@@ -19,6 +19,7 @@ var cssPaths = {
     playerbetlimit: "./www/css/source/reactpages/pages/playeradmin/betlimit.scss",
     playerwinloss: "./www/css/source/reactpages/pages/playeradmin/playerwinloss.scss",
     statement: "./www/css/source/reactpages/pages/playeradmin/statement.scss",
+    detailtransaction: "./www/css/source/reactpages/pages/playeradmin/detailtransaction.scss",
     dailybets: "./www/css/source/reactpages/pages/dailybets/index.scss",
     exchangevoided: "./www/css/source/reactpages/pages/exchangevoided/index.scss",
     playersegmentation: "./www/css/source/reactpages/pages/customer/player-segmentation/index.scss"
@@ -52,6 +53,7 @@ var scriptPaths = {
     singleCustomer: "./www/js/source/reactpages/Module/PlayerAdmin/single-customer/components/index.jsx",
     playerwinloss: "./www/js/source/reactpages/Module/PlayerAdmin/playerwinloss/components/index.jsx",
     statement: "./www/js/source/reactpages/Module/PlayerAdmin/statement/components/index.jsx",
+    detailtransaction: "./www/js/source/reactpages/Module/PlayerAdmin/detailtransaction/components/index.jsx",
 
     dailybets: "./www/js/source/reactpages/pages/dailybets/components/index.jsx",
     exchangevoided: "./www/js/source/reactpages/pages/exchangevoided/components/index.jsx",

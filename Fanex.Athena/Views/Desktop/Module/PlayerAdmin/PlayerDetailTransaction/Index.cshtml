@@ -1,0 +1,36 @@
+﻿@using Fanex.Athena.Module.PlayerAdmin.ViewModels;
+@{
+    ViewBag.Title = "LAP - Player Administrator Detail Transaction";
+    Layout = "~/Views/Desktop/Shared/_ReactPageLayout.cshtml";
+}
+@model PlayerDetailTransactionReportViewModel
+@section pagecss {
+    <link href="@Url.ContentLinkByEnv("/www/css/build/reactpages/playeradmin/detailtransaction.css")" rel="stylesheet" type="text/css" />
+}
+@section pagejs {
+    <script src="@Url.ContentLinkByEnv("/www/js/build/reactpages/playeradmin/detailtransaction.chunk.js")"></script>
+}
+@section globaljscode{
+    window.initialState = {
+    requestParam: {
+    CustId: @Model.CustId,
+    CurrencyId: @Model.CurrencyId,
+    FromDate: '@Model.FromDate.ToString("MM/dd/yyyy")',
+    ToDate: '@Model.ToDate.ToString("MM/dd/yyyy")',
+    PageSize: @Model.PageSize,
+    PageIndex: @Model.PageIndex
+    },
+    isLoading: false
+    };
+
+    window._AppData = {
+    dateConstraint: {
+    minDate: '@Model.MinDate.ToString("MM/dd/yyyy")',
+    maxDate: '@Model.ToDate.ToString("MM/dd/yyyy")'
+    },
+    defaultPageSize:  @PlayerDetailTransactionReportViewModel.DefaultPageSize,
+    defaultPageIndex: @PlayerDetailTransactionReportViewModel.DefaultPageIndex
+    };
+}
+<div id="app-container">
+</div>
