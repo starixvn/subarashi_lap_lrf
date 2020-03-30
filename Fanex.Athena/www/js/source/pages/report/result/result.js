@@ -278,7 +278,7 @@ define(['jquery', 'common/site', 'components/pluginhelper/daterangepicker', 'com
                     success: function (response) {
                         window.open(response, '_blank', 'left=20,top=20,width=950,height=650,toolbar=1,resizable=1,scrollbars,status=1');
                         clearTimeout(indo4DIntervalId);
-                        _me.extendIndo4DSession(vendorProductId, response.UserId);
+                        _me.extendLotterySession(vendorProductId, response.UserId);
                     },
                     beforeSend: function () {
                         Site.blockUI();
@@ -344,60 +344,6 @@ define(['jquery', 'common/site', 'components/pluginhelper/daterangepicker', 'com
                 }
 
                 lotteryIntervalId = setTimeout(callBack, 6000);
-            },
-
-            extendTableSession: function (vendorProductId, userId) {
-                if (!userId) {
-                    return;
-                }
-
-                const callBack = function () {
-                    const option = {
-                        type: 'POST',
-                        cache: false,
-                        data: {
-                            userId: userId,
-                            vendorProductId: vendorProductId
-                        },
-                        url: Site.resolveClientUrl(KENO_RESULT_SESSION_API),
-                        success: function (response) {
-                            if (response === '') {
-                                tableGameIntervalId = setTimeout(callBack, 6000);
-                            }
-                        }
-                    };
-
-                    tableGameAjaxRequest = $.ajax(option);
-                }
-
-                tableGameIntervalId = setTimeout(callBack, 6000);
-            },
-
-            extendIndo4DSession: function (vendorProductId, userId) {
-                if (!userId) {
-                    return;
-                }
-
-                const callBack = function () {
-                    const option = {
-                        type: 'POST',
-                        cache: false,
-                        data: {
-                            userId: userId,
-                            vendorProductId: vendorProductId
-                        },
-                        url: Site.resolveClientUrl(INDO4D_RESULT_SESSION_API),
-                        success: function (response) {
-                            if (response === '') {
-                                indo4DIntervalId = setTimeout(callBack, 6000);
-                            }
-                        }
-                    };
-
-                    indo4DAjaxRequest = $.ajax(option);
-                }
-
-                indo4DIntervalId = setTimeout(callBack, 6000);
             },
 
             getData: function () {

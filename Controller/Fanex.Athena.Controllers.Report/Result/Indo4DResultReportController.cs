@@ -28,13 +28,13 @@
 
         [HttpGet]
         [AjaxRequest]
-        public async Task<ActionResult> Index(int vendorProductId)
+        public async Task<ActionResult> Index()
         {
-            var obj = new { languageCode = SessionServiceInstance.UserSession.Language, platform = "d" };
+            var obj = new { languageCode = SessionServiceInstance.UserSession.Language };
             if (ModelState.IsValid)
             {
                 var data = await _betListApiClient.PostStringAsync(
-                    "/VirtualGamesResultPopup/GetResultPage",
+                    "/ResultIndo4DReport/GetResultUrl",
                      obj,
                      SessionServiceInstance.UserSession.Language
                     ).ConfigureAwait(false);
@@ -43,40 +43,6 @@
             }
 
             return this.Content(string.Empty, "text/html");
-        }
-
-        [HttpPost]
-        [AjaxRequest]
-        [CustomValidateAntiForgery]
-        public async Task<string> KeepSession(string userId, int vendorProductId)
-        {
-            var userSession = SessionServiceInstance.UserSession;
-            if (string.IsNullOrEmpty(userId) || !userSession.UserId.ToString().Equals(userId))
-            {
-                _logger.Error("Indo 4D Result page just submited invalid userId");
-
-                return Url.Action("AccessDenied", "Utility", null, Request.Url.Scheme);
-            }
-
-            var model = new
-            {
-                VendorProductId = vendorProductId,
-                UserId = userId
-            };
-
-            var result = await _betListApiClient.PostAsync<KenoExtendedToken>("/ResultKenoReport/KeepSession",
-                model, userSession.Language).ConfigureAwait(false);
-
-            if (result.ErrorCode > 0)
-            {
-                _logger.Info($"Keno Session: {result.ErrorMsg}"
-                    + $"\nError Code: {result.ErrorCode}"
-                    + $"\nUser Name: {userSession.UserName}"
-                    + $"\nProduct Id: {vendorProductId}");
-                return Url.Action("AccessDenied", "Utility", null, Request.Url.Scheme);
-            }
-
-            return string.Empty;
         }
     }
 }
