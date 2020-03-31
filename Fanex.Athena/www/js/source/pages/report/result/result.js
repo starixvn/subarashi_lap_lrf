@@ -8,7 +8,6 @@ define(['jquery', 'common/site', 'components/pluginhelper/daterangepicker', 'com
         const VIRTUAL_RESULT_API = 'ResultKenoReport/VirtualGameReuslt';
         const INDO4D_RESULT_API = 'Indo4DResultReport/Index';
         const KENO_RESULT_SESSION_API = 'ResultKenoReport/KeepSession';
-        const INDO4D_RESULT_SESSION_API = 'Indo4DResultReport/KeepSession';
         let ajaxRequest = null;
         let ajaxFilterRequest = null;
         let kenoAjaxRequest = null;
@@ -276,9 +275,9 @@ define(['jquery', 'common/site', 'components/pluginhelper/daterangepicker', 'com
                     cache: false,
                     url: Site.resolveClientUrl(INDO4D_RESULT_API),
                     success: function (response) {
+                        console.log(response);
                         window.open(response, '_blank', 'left=20,top=20,width=950,height=650,toolbar=1,resizable=1,scrollbars,status=1');
                         clearTimeout(indo4DIntervalId);
-                        _me.extendLotterySession(vendorProductId, response.UserId);
                     },
                     beforeSend: function () {
                         Site.blockUI();
