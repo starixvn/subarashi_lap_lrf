@@ -276,10 +276,7 @@ define(['jquery', 'common/site', 'components/pluginhelper/daterangepicker', 'com
                     url: Site.resolveClientUrl(INDO4D_RESULT_API),
                     success: function (response) {
                         console.log(response);
-                        window.open(response, '_blank', 'left=20,top=20,width=950,height=650,toolbar=1,resizable=1,scrollbars,status=1');
-                        clearTimeout(indo4DIntervalId);
-                        _me.extendLotterySession(vendorProductId, response.UserId);
-                    },
+                        window.open(response, '_blank', 'left=20,top=20,width=950,height=650,toolbar=1,resizable=1,scrollbars,status=1');                    },
                     beforeSend: function () {
                         Site.blockUI();
                     },
