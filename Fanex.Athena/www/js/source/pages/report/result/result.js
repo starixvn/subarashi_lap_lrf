@@ -15,11 +15,9 @@ define(['jquery', 'common/site', 'components/pluginhelper/daterangepicker', 'com
         let lotteryAjaxRequest = null;
         let lotteryIntervalId = 0;
         let virtualGameAjaxRequest = null;
-        let virtualGameIntervalId = 0;
+
         let tableGameAjaxRequest = null;
         let tableGameIntervalId = 0;
-        let indo4DAjaxRequest = null;
-        let indo4DIntervalId = 0;
         const param = {
             FromDate: '',
             ToDate: '',
@@ -233,7 +231,6 @@ define(['jquery', 'common/site', 'components/pluginhelper/daterangepicker', 'com
                     url: Site.resolveClientUrl(VIRTUAL_RESULT_API),
                     success: function (response) {
                         window.open(response, '_blank', 'left=20,top=20,width=950,height=650,toolbar=1,resizable=1,scrollbars,status=1');
-                        clearTimeout(virtualGameIntervalId);
                         _me.extendLotterySession(vendorProductId, response.UserId);
                     },
                     beforeSend: function () {
@@ -275,9 +272,7 @@ define(['jquery', 'common/site', 'components/pluginhelper/daterangepicker', 'com
                     cache: false,
                     url: Site.resolveClientUrl(INDO4D_RESULT_API),
                     success: function (response) {
-                        console.log(response);
                         window.open(response, '_blank', 'left=20,top=20,width=950,height=650,toolbar=1,resizable=1,scrollbars,status=1');
-                        clearTimeout(indo4DIntervalId);
                         _me.extendLotterySession(vendorProductId, response.UserId);
                     },
                     beforeSend: function () {
@@ -287,8 +282,6 @@ define(['jquery', 'common/site', 'components/pluginhelper/daterangepicker', 'com
                         Site.unBlockUI();
                     }
                 };
-                _me.stopAjaxRequest(indo4DAjaxRequest);
-                indo4DAjaxRequest = $.ajax(option);
             },
 
             extendKenoSession: function (vendorProductId, userId) {
