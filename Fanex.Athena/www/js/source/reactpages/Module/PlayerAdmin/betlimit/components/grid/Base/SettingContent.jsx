@@ -166,7 +166,6 @@ const SettingContent = (Grid, DataHandling) => {
                     className: 'btn btn-cancel'
                 }];
 
-            console.log(this.props.requestParam)
             const msg = (<p className="center-align">{Utility.getConfirmationMsg(this.props.requestParam.ProductId)}</p>);
 
             this.setState({ disabledButton: true }, () => this.props.setAlertOption({
