@@ -6,10 +6,6 @@
 
         public const int Lottery = 28;
 
-        public const int VirtualGame = 38;
-
         public const int TableGame = 40;
-
-        public const int Indo4D = 43;
     }
 }

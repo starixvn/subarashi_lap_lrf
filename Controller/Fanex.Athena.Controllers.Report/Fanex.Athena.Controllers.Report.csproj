@@ -167,6 +167,7 @@
     <Compile Include="Result\ResultPopup\SGResultPopupController.cs" />
     <Compile Include="Result\ResultPopup\PPResultPopupController.cs" />
     <Compile Include="Result\ResultPopup\VirtualGamesResultPopupController.cs" />
+    <Compile Include="Result\VirtualGamesResultReportController.cs" />
     <Compile Include="SubsidiaryPerformanceReportController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportAPI\ReportAPIController.cs" />
