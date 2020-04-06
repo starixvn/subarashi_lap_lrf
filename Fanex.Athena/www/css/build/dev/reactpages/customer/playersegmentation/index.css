@@ -475,6 +475,8 @@ input[type="checkbox"].checkbox {
       background-color: #ebeaea;
       height: 1px;
       margin: 0 10px; }
+  .popup-container .flat-popup iframe {
+    background-color: #fff; }
 
 .table {
   border-collapse: collapse;

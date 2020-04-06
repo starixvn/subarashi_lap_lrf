@@ -113,5 +113,7 @@
 
         public const string AccountInfo = "pa_acc_Info";
         public const string PlayerDetailTransaction = "pa_detail_transaction";
+        public const string PlayerAdminCommissionGroup = "PlayerAdminCommissionGroup";
+        public const string PlayerAdminCommissionGroup_Write = "PlayerAdminCommissionGroup_Write";
     }
 }

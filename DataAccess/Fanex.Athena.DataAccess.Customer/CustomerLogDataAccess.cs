@@ -7,7 +7,6 @@
 namespace Fanex.Athena.DataAccess.Customer
 {
     using System.Collections.Generic;
-    using System.Data;
     using System.Linq;
     using System.Threading.Tasks;
     using Core;
@@ -43,7 +42,7 @@ namespace Fanex.Athena.DataAccess.Customer
         {
             const string SpName = "Lrf_GroupCommLog_Sel";
 
-            using (var db = this.GetObjectDb(SpName))
+            using (var db = this.GetObjectDb(SpName, 900))
             {
                 db.SetParameterValue("FromDate", metaModel.FromDate);
                 db.SetParameterValue("ToDate", metaModel.ToDate);

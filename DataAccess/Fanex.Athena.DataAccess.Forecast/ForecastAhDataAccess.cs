@@ -36,23 +36,17 @@ namespace Fanex.Athena.DataAccess.Forecast
 
         public async Task<DataTable> GetForecastHandicap(ForecastAHMetaModel metaModel, int userId)
         {
-            const string UspName = "Lrf_Forecast_SelHDP";
-            using (var db = this.GetObjectDb(UspName))
-            {
-                db.SetParameterValue("AgentList", metaModel.AgentListXml);
-                db.SetParameterValue("matchid", metaModel.MatchId);
-                db.SetParameterValue("betType", metaModel.BetType);
-                db.SetParameterValue("BaseCurrency", metaModel.BaseCurrency);
-                var dataset = await db.ExecuteDataSetAsync().ConfigureAwait(false);
-                return dataset != null && dataset.Tables.Count > 0 ? dataset.Tables[0] : null;
-            }
+            return await GetForecastAH(metaModel, "Lrf_Forecast_SelHDP");
         }
 
         public async Task<DataTable> GetForecastOverUnder(ForecastAHMetaModel metaModel, int userId)
         {
-            const string UspName = "Lrf_Forecast_SelOU";
+            return await GetForecastAH(metaModel, "Lrf_Forecast_SelOU");
+        }
 
-            using (var db = this.GetObjectDb(UspName))
+        private async Task<DataTable> GetForecastAH(ForecastAHMetaModel metaModel, string spName)
+        {
+            using (var db = GetObjectDb(spName))
             {
                 db.SetParameterValue("AgentList", metaModel.AgentListXml);
                 db.SetParameterValue("matchid", metaModel.MatchId);

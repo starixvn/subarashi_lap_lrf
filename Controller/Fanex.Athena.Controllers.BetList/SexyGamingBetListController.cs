@@ -1,8 +1,9 @@
-﻿using Fanex.Athena.Model.BetList.MetaModel;
+﻿using System.Threading.Tasks;
+using System.Web.Mvc;
+using Fanex.Athena.Model.BetList.MetaModel;
+using Fanex.Athena.Model.Core.DTO.Common;
 using Fanex.Athena.Resources;
 using Fanex.Athena.Web.ActionFilter;
-using System.Threading.Tasks;
-using System.Web.Mvc;
 
 namespace Fanex.Athena.Controllers.BetList
 {
@@ -22,7 +23,7 @@ namespace Fanex.Athena.Controllers.BetList
         {
             metaModel.Title = GetBetListDetailTitle(ViewResources.ProductSXG, metaModel.Date);
 
-            metaModel.ShowingOption = new BetListShowingOption
+            metaModel.ShowingOption = new ShowingOption
             {
                 CustomerCommVisible = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm
             };

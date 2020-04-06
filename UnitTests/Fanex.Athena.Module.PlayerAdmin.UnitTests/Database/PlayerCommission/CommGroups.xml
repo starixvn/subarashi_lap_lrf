@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CommGroups>
+  <TableGroup>
+    <GroupCommId>1</GroupCommId>
+    <GroupName>GroupName1</GroupName>
+  </TableGroup>
+  <TableGroup>
+    <GroupCommId>2</GroupCommId>
+    <GroupName>GroupName2</GroupName>
+  </TableGroup>
+</CommGroups>

@@ -6,13 +6,11 @@
 
 namespace Fanex.Athena.Controllers.BetList
 {
-    using Fanex.Athena.Model.Auth.DataDomain;
-
-    using Model.BetList.MetaModel;
-
     using System.Threading.Tasks;
     using System.Web.Mvc;
-
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Core.DTO.Common;
+    using Model.BetList.MetaModel;
     using Web.ActionFilter;
 
     [FunctionAuthorization(
@@ -39,7 +37,7 @@ namespace Fanex.Athena.Controllers.BetList
             var curencyId = metaModel.IsConvert ? metaModel.BaseCurrencyId : metaModel.CurrencyId;
             metaModel.Title = GetCustomerBetListTitle(metaModel, GetViewInCurrency(curencyId, metaModel.CurrencyName));
 
-            metaModel.ShowingOption = new BetListShowingOption
+            metaModel.ShowingOption = new ShowingOption
             {
                 CustomerCommVisible = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm,
             };

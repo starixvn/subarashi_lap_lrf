@@ -17,7 +17,7 @@
             (BalanceChange > 0 ? "+" : string.Empty) + CutOffValue(BalanceChange, 2).ToString("#,##0.##");
         public string AfterBalanceStr => CutOffValue(AfterBalance, 2).ToString("N2");
 
-        private decimal CutOffValue(decimal value, int digits)
+        private static decimal CutOffValue(decimal value, int digits)
         {
             var power = (decimal)Math.Pow(10, digits);
             var result = Math.Floor(Math.Abs(value) * power) / 100;

@@ -101,7 +101,7 @@
 
         #endregion
 
-        private string[] GetAllowedProducts(string functionName = null)
+        public string[] GetAllowedProducts(string functionName = null)
         {
             const string FunctionAllowedProductsKey = "FunctionAllowedProducts";
 

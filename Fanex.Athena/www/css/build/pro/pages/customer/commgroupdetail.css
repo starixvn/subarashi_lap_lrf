@@ -725,3 +725,7 @@ input[type=text] + label:after {
 .third-value {
   padding: 0 2rem 0 0 !important; }
 
+@media only screen and (min-width: 993px) {
+  .page-form .button-block {
+    width: 20% !important; } }
+

@@ -1,7 +1,5 @@
 ﻿using System.Data;
-
-using Fanex.Athena.Excel.Base.Entities;
-
+using Fanex.Athena.Model.Customer.ViewModel.CommissionGroupList;
 using NPOI.SS.UserModel;
 
 namespace Fanex.Athena.Excel.Customer.UnitTests.TestableClasses
@@ -9,10 +7,10 @@ namespace Fanex.Athena.Excel.Customer.UnitTests.TestableClasses
     public class CustomerCommGroupExcelTestable : CustomerCommGroupExcel
     {
         public CustomerCommGroupExcelTestable(
-                                 string templatePath,
-                                 DataTable exportData,
-                                 ShowingOption showingOption)
-            : base(templatePath, exportData, showingOption)
+            string templatePath,
+            DataTable exportData,
+            CommissionGroupListViewModel viewModel)
+            : base(templatePath, exportData, viewModel)
         {
         }
 

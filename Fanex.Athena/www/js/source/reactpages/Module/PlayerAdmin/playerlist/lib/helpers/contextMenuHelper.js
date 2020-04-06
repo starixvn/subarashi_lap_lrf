@@ -5,10 +5,11 @@
     contextMenuList,
     playerStatusByName,
     licenseeType,
-    excludedContextMenuWithApiLicensee
+    excludedContextMenuWithApiLicensee,
+    contextMenuKeys
 } from '../constants';
 
-export const isShowContextMenuItem = (item, isDeposit, isArchived, isClosed) => {
+export const isShowContextMenuItem = (item, isDeposit, isArchived, isClosed, hasCommPermissionRead) => {
     if (!isDeposit) {
         return !excludedContextMenuWithNonDeposit.includes(item.key);
     }
@@ -21,10 +22,14 @@ export const isShowContextMenuItem = (item, isDeposit, isArchived, isClosed) => 
         return !excludedContextMenuWithArchived.includes(item.key);
     }
 
+    if (item.key === contextMenuKeys.commissionGroup) {
+        return hasCommPermissionRead;
+    }
+
     return true;
 }
 
-export const getActiveTabList = (player, tabList, licType) => {
+export const getActiveTabList = (player, tabList, licType, hasCommPermissionRead) => {
     const { isDeposit, isArchived, status } = player;
 
     return contextMenuList.filter(item => {
@@ -35,6 +40,6 @@ export const getActiveTabList = (player, tabList, licType) => {
         const isClosedPlayer = status === playerStatusByName.Closed;
 
         return !!tabList.find(t => item.tabName === t.Name) &&
-            isShowContextMenuItem(item, isDeposit, isArchived, isClosedPlayer);
+            isShowContextMenuItem(item, isDeposit, isArchived, isClosedPlayer, hasCommPermissionRead);
     });
 }

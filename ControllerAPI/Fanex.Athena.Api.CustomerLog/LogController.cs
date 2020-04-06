@@ -22,7 +22,7 @@ namespace Fanex.Athena.Api.CustomerLog
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Customer.DTO.CustomerLog;
     using Fanex.Athena.Model.Customer.ViewModel.CustomerLog;
-
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using RazorEngine;
     using RazorEngine.Templating;
 
@@ -36,17 +36,17 @@ namespace Fanex.Athena.Api.CustomerLog
         private static readonly int[] ActionIdListForBA = new[] { 2401, 2403, 2801 };
 
         private static readonly string[] ActionTypes = new[]
-            {
-                "Closed",
-                "Suspended",
-                "SpecialLevel",
-                "GroupCommID",
-                "GroupName",
-                "GroupColor",
-                "SBComm",
-                "NGComm",
-                "RNGComm"
-            };
+        {
+            "Closed",
+            "Suspended",
+            "SpecialLevel",
+            "GroupCommID",
+            "GroupName",
+            "GroupColor",
+            "SBComm",
+            "NGComm",
+            "RNGComm"
+        };
 
         private readonly ICustomerLogDataAccess _customerLogDataAccess;
 
@@ -55,19 +55,22 @@ namespace Fanex.Athena.Api.CustomerLog
         private readonly IAppSettings _appSettings;
 
         private readonly IFileSystem _fileSystem;
+        private readonly IProductService _productService;
 
         public LogController(
             ILanguageService languageService,
             ICustomerLogDataAccess customerLogDataAccess,
             ILogInLogDataAccess logInLogDataAccess,
             IAppSettings appSettings,
-            IFileSystem fileSystem)
-        : base(languageService)
+            IFileSystem fileSystem,
+            IProductService productService)
+            : base(languageService)
         {
             _customerLogDataAccess = customerLogDataAccess;
             _logInLogDataAccess = logInLogDataAccess;
             _appSettings = appSettings;
             _fileSystem = fileSystem;
+            _productService = productService;
         }
 
         #region Remove HTML tag
@@ -114,7 +117,10 @@ namespace Fanex.Athena.Api.CustomerLog
 
         #region Get XML attribute
 
-        private static IDictionary<string, string> GetXmlAttr(string trackingValue, string trackingValueOld)
+        private static IDictionary<string, string> GetXmlAttr(
+            string trackingValue,
+            string trackingValueOld,
+            string[] actionTypes = null)
         {
             var dictonary = new Dictionary<string, string>();
 
@@ -132,7 +138,8 @@ namespace Fanex.Athena.Api.CustomerLog
 
             var root = doc.DocumentElement;
             var rootOld = docOld.DocumentElement;
-            foreach (var attr in ActionTypes)
+            actionTypes = actionTypes ?? ActionTypes;
+            foreach (var attr in actionTypes)
             {
                 dictonary.Add(attr, GetAttributeValue(root, attr));
                 dictonary.Add(attr + "Old", GetAttributeValue(rootOld, attr));
@@ -161,7 +168,7 @@ namespace Fanex.Athena.Api.CustomerLog
 
         #region Get detail data
 
-        private IList<CustomerLog> GetDetails(IList<CustomerLog> dataList)
+        private IList<CustomerLog> GetDetails(IList<CustomerLog> dataList, string[] actionTypes = null)
         {
             var resourcesMap = new Dictionary<string, string>
             {
@@ -188,8 +195,14 @@ namespace Fanex.Athena.Api.CustomerLog
                 }
                 else
                 {
-                    var dictionary = GetXmlAttr(item.TrackingValue, item.TrackingValueOld);
-                    item.Details = GenerateDetailedValue(item.ActionId, new ActionViewModel { Data = dictionary, Resource = resourcesMap });
+                    var dictionary = GetXmlAttr(item.TrackingValue, item.TrackingValueOld, actionTypes);
+                    var action = new ActionViewModel
+                    {
+                        Data = dictionary,
+                        Resource = resourcesMap
+                    };
+
+                    item.Details = GenerateDetailedValue(item.ActionId, action);
                 }
             }
 

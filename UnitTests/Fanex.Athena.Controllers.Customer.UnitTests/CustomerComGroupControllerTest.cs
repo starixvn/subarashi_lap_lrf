@@ -1,23 +1,17 @@
 ﻿namespace Fanex.Athena.Controllers.UnitTests
 {
     using System.Collections.Generic;
-    using System.Data;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Base.UnitTests;
     using Customer;
-    using Excel.Base.Entities;
-    using Excel.Customer;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DTO.Common;
     using Model.Customer.MetaModel;
     using NSubstitute;
     using NUnit.Framework;
     using Resources;
-    using Service.Core.Common.Interfaces;
     using Service.Customer.Interfaces;
-    using UnitTest.Common.Extensions;
-    using Web.ResultExtension;
 
     [TestFixture]
     public partial class CustomerComGroupControllerTest : CultureBaseControllerHelperTest
@@ -39,34 +33,6 @@
         {
             AppSettings.ClearReceivedCalls();
             _groupComService.ClearReceivedCalls();
-        }
-
-        [TestCase(true, false)]
-        [TestCase(false, true)]
-        public async Task Index_WhenCall_AssignViewBagCorrectly(bool isEmptyProductList, bool expectedResult)
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var productList = isEmptyProductList ? new List<Product>() : new List<Product>
-                {
-                    new Product { ProductCode = Product.NG },
-                    new Product { ProductCode = Product.CS }
-                };
-                _productService.GetProductAccess(
-                    SessionService.LicenseeSession.LicenseeId,
-                    SessionService.UserSession.Language).Returns(new ProductAccess(productList));
-
-                // Action
-                var result = await controller.Index() as ViewResult;
-
-                // Assert
-                Assert.Multiple(() =>
-                {
-                    Assert.That(controller.ViewBag.IsAllowNG, Is.EqualTo(expectedResult));
-                    Assert.That(controller.ViewBag.IsAllowCS, Is.EqualTo(expectedResult));
-                });
-            }
         }
 
         [TestCase("", false, "NO")]
@@ -127,60 +93,7 @@
             }
         }
 
-        [TestCase(false, 0)]
-        [TestCase(true, 999)]
-        public async Task GetDefaultGroup_WhenCall_ReturnCorrectResult(bool isDefaultGroup, int expectedGroupId)
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var group = new GroupCommMetaModel
-                {
-                    IsDefaultGroup = isDefaultGroup,
-                    GroupCommId = 999
-                };
-                _groupComService.GetAllAsync(SessionService.LicenseeSession.LicenseeId)
-                    .Returns(new List<GroupCommMetaModel> { group });
 
-                // Action
-                var result = await controller.GetDefaultGroup() as JsonResult;
-
-                // Assert
-                Assert.That(result.Data.GetValue("id"), Is.EqualTo(expectedGroupId));
-            }
-        }
-
-        [Test]
-        public async Task ExportExcel_WhenCall_PassCorrectParamsToCreateExcel()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var licenseeId = SessionService.LicenseeSession.LicenseeId;
-                var productList = new List<Product>
-                {
-                    new Product { ProductCode = Product.SB },
-                    new Product { ProductCode = Product.NG },
-                    new Product { ProductCode = Product.CS }
-                };
-                _productService.GetProductAccess(licenseeId, SessionService.UserSession.Language)
-                    .Returns(new ProductAccess(productList));
-                var dataTable = new DataTable();
-                _groupComService.GetDataForExcelAsync(licenseeId).Returns(dataTable);
-                var excel = Substitute.ForPartsOf<CustomerCommGroupExcel>(string.Empty, dataTable, new ShowingOption());
-                excel.When(x => x.Export()).DoNotCallBase();
-                controller.CreateExcel(string.Empty, dataTable, new ShowingOption()).ReturnsForAnyArgs(excel);
-
-                // Action
-                var result = await controller.ExportExcel() as ExcelResult;
-
-                // Assert
-                controller.Received(1).CreateExcel(
-                    Arg.Any<string>(),
-                    dataTable,
-                    Arg.Is<ShowingOption>(x => x.SBVisible && x.NGVisible && x.CSVisible));
-            }
-        }
 
         private CustomerComGroupController CreateController()
         {

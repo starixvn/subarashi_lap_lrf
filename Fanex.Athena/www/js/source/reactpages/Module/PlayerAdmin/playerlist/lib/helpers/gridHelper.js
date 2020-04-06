@@ -3,14 +3,13 @@ import { HeaderRow, HeaderCell } from '@9softstudio/react-grid';
 import { fields, headerText } from '../constants';
 
 export default class GridHelper {
-    static renderHeader(displayedColumn) {
-        const { Status, UserName, SystemId, RealName, Currency, CurrentBalance, OutstandingBalance,
-            OddsGroup, BaStatus, SpecialLevel, LastTransaction, Email } = fields;
+    static renderHeader(displayedColumn, canSelectPlayers, hasCommPermissionRead) {
+        const { Index, Status, UserName, SystemId, RealName, Currency, CurrentBalance, OutstandingBalance,
+            OddsGroup, BaStatus, SpecialLevel, LastTransaction, Email, CommissionGroup } = fields;
 
         return (
             <HeaderRow style={{ height: 32 }}>
-                {/* For Phase 2 */}
-                {/* <HeaderCell colWidth={30}><input type="checkbox" /></HeaderCell> */}
+                {canSelectPlayers && displayedColumn[Index] && <HeaderCell colWidth={30}><input type="checkbox" id="chk-cust-0" data-username="" /></HeaderCell>}
                 {displayedColumn[Status] && <HeaderCell colWidth={80} sortBy={Status}>{headerText.Status}</HeaderCell>}
                 {displayedColumn[UserName] && <HeaderCell colWidth={160} sortBy={UserName}>{headerText.UserName}</HeaderCell>}
                 {displayedColumn[SystemId] && <HeaderCell colWidth={150}>{headerText.SystemId}</HeaderCell>}
@@ -23,6 +22,7 @@ export default class GridHelper {
                 {displayedColumn[SpecialLevel] && <HeaderCell colWidth={50} sortBy={SpecialLevel}>{headerText.SpecialLevel}</HeaderCell>}
                 {displayedColumn[LastTransaction] && <HeaderCell colWidth={60} sortBy={LastTransaction}>{headerText.LastTransaction}</HeaderCell>}
                 {displayedColumn[Email] && <HeaderCell colWidth={100}>{headerText.Email}</HeaderCell>}
+                {hasCommPermissionRead && displayedColumn[CommissionGroup] && <HeaderCell colWidth={50}>{headerText.CommissionGroup}</HeaderCell>}
             </HeaderRow>
         )
     }

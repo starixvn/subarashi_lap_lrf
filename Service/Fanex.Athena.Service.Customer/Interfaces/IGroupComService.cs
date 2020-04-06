@@ -16,15 +16,15 @@ namespace Fanex.Athena.Service.Customer.Interfaces
 
     public interface IGroupComService
     {
-        Task<IResultInfo> InsertGroupAsync(GroupCommMetaModel item, IRequest request, int userId);
+        Task<IResultInfo> InsertGroupAsync(GroupCommMetaModel item, IRequest request, int userId, IDictionary<string, bool> permissions);
 
-        Task<IResultInfo> UpdateGroupAsync(GroupCommMetaModel newItem, IRequest request, UserAuthInfo user);
+        Task<IResultInfo> UpdateGroupAsync(GroupCommMetaModel newItem, IRequest request, UserAuthInfo user, IDictionary<string, bool> permissions);
 
-        Task<IList<GroupCommMetaModel>> GetAllAsync(int licenseeId);
+        IList<GroupCommMetaModel> GetAllAsync(int licenseeId, IDictionary<string, bool> permissions);
 
         Task<DataTable> GetDataForExcelAsync(int licenseeId);
 
-        GroupCommMetaModel GetById(int groupCommId, int licenseeId);
+        GroupCommMetaModel GetById(int groupCommId, int licenseeId, IDictionary<string, bool> permissions);
 
         bool CheckExistingGroupByName(int licenseeId, string groupName);
 

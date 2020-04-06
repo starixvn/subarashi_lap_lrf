@@ -1113,7 +1113,7 @@
     <value>備註</value>
   </data>
   <data name="RemoveFromGroup" xml:space="preserve">
-    <value>從組中刪除</value>
+    <value>從該組中刪除</value>
   </data>
   <data name="RemoveGroupMsg" xml:space="preserve">
     <value>您確定要從組中移除此（這些）會員?</value>
@@ -2050,6 +2050,33 @@
   <data name="TransactionDate" xml:space="preserve">
     <value>交易日期</value>
   </data>
+  <data name="CustomerCommission" xml:space="preserve">
+    <value>會員傭金</value>
+  </data>
+  <data name="MoveCommissionGroup" xml:space="preserve">
+    <value>移動佣金組別</value>
+  </data>
+  <data name="UpdateCommissionValue" xml:space="preserve">
+    <value>更新佣金值</value>
+  </data>
+  <data name="SelectedCustomers" xml:space="preserve">
+    <value>選定的玩家</value>
+  </data>
+  <data name="MoveToCommissionGroup" xml:space="preserve">
+    <value>移至佣金組別</value>
+  </data>
+  <data name="BatchUpdate" xml:space="preserve">
+    <value>批次更新</value>
+  </data>
+  <data name="CommissionGroup" xml:space="preserve">
+    <value>佣金組別</value>
+  </data>
+  <data name="UpdateCommGroup_Warning" xml:space="preserve">
+    <value>請注意：由於佣金值不同，該玩家將從組中移除。</value>
+  </data>
+  <data name="PleaseSelectOne" xml:space="preserve">
+    <value>請選擇一個</value>
+  </data>
   <data name="ProductTG" xml:space="preserve">
     <value>桌面遊戲</value>
   </data>
@@ -2061,5 +2088,11 @@
   </data>
   <data name="DelayedPayout" xml:space="preserve">
     <value>延遲結算</value>
+  </data>
+  <data name="ProductParlay" xml:space="preserve">
+    <value>體育串關</value>
+  </data>
+  <data name="Log" xml:space="preserve">
+    <value>日誌</value>
   </data>
 </root>

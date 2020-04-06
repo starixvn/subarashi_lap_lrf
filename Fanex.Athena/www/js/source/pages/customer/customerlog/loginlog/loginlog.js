@@ -4,6 +4,8 @@ define(['jquery', 'common/site', 'components/pluginhelper/autocomplete', './logi
         const _me = {
             initialize: function () {
                 CustomerLog.initialize();
+                CustomerLog.informRemoveFunction();
+
                 _me.initEvent();
                 AutoComplete.initialize({
                     url: Site.resolveClientUrl('SearchCustomerAPI/SearchCustomer'),

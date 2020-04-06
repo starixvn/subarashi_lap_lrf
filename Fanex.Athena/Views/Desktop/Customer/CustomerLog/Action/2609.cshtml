@@ -1,88 +1,95 @@
 ﻿<!--Insert new group template-->
-@using Fanex.Common
+@using Fanex.Athena.Model.Customer.ViewModel.CustomerLog
+@using Fanex.Athena.Api.CustomerLog;
+@using Fanex.Athena.Model.Core.Helper;
+@using Fanex.Common;
+@model ActionViewModel
 @{
-    const string FormatComm = "0.####";
-    var sbComm = Converter.ToDecimal(Model.Data["SBComm"]);
-    var sbCommOld = Converter.ToDecimal(Model.Data["SBCommOld"]);
-    var ngComm = Converter.ToDecimal(Model.Data["NGComm"]);
-    var ngCommOld = Converter.ToDecimal(Model.Data["NGCommOld"]);
-    var csComm = Converter.ToDecimal(Model.Data["RNGComm"]);
-    var csCommOld = Converter.ToDecimal(Model.Data["RNGCommOld"]);
-
-    var groupId = Model.Data["GroupCommID"];
-    var groupColor = Model.Data["GroupColor"];
-    var groupColorOld = Model.Data["GroupColorOld"];
-    var groupName = Model.Data["GroupName"];
+    Model.Resource = LogHelper.GetGroupCommissionLogResources(ActionViewModel.ProductPermissions);
     var groupNameOld = Model.Data["GroupNameOld"];
+    const int nameLength = LogHelper.MaxCommissionGroupNameShownLength;
+    var groupNameOldTitle = groupNameOld.Length > nameLength ? "title='" + groupNameOld + "'" : "";
 
-    var isChangeSbComm = sbComm != sbCommOld;
-    var isChangeNgComm = ngComm != ngCommOld;
-    var isChangeCsComm = csComm != csCommOld;
-    var isChangeGroupColor = groupColor != groupColorOld;
-    var isChangeGroupName = groupName != groupNameOld;
-
-    var sbCommTitle = sbCommOld.ToString(FormatComm) + "-->" + sbComm.ToString(FormatComm);
-    var ngCommTitle = ngCommOld.ToString(FormatComm) + "-->" + ngComm.ToString(FormatComm);
-    var csCommTitle = csCommOld.ToString(FormatComm) + "-->" + csComm.ToString(FormatComm);
-
-    var groupNameLength = groupName.Length;
-    var groupNameOldLength = groupNameOld.Length;
-    var groupNameDisplay = groupNameLength > 25 ? groupName.Substring(0, 25) : groupName;
-    var groupNameOldDisplay = groupNameOldLength > 25 ? groupNameOld.Substring(0, 25) : groupNameOld;
+    var columnNames = CommissionGroupHelper.MapHardcodedNameFromDB(ActionViewModel.ProductPermissions, false);
+    var numberOfTable = Math.Ceiling(((decimal)(ActionViewModel.ProductPermissions.Count - 3)) / 7);
+    var productIndex = LogHelper.ProductInFirstRow;
 }
-
-@functions
+@helper RenderCommValue(int index, IDictionary<string, string> columnNames)
 {
-    public static string GetClassName(bool isDataChanged)
-    {
-        return isDataChanged ? "old-value" : "hide";
-    }
+    var p = ActionViewModel.ProductPermissions.ElementAt(index);
+
+    var fieldName = columnNames[p.Key] + "Comm";
+    var fieldNameOld = fieldName + "Old";
+
+    var value = Converter.ToDecimal(Model.Data[fieldName]);
+    var oldValue = Converter.ToDecimal(Model.Data[fieldNameOld]);
+
+    <td title="@Model.TitleOfChange(fieldName, LogHelper.CommFormat)">
+        <p>@value.ToString(LogHelper.CommFormat)</p>
+        <p class="@Model.GetClassName(fieldName)">@oldValue.ToString(LogHelper.CommFormat)</p>
+    </td>
 }
-
-<table class="nested-table">
-    <thead>
-        <tr>
-            <th style="width:70px;">@Model.Resource["GroupId"]</th>
-            <th style="width:150px;">@Model.Resource["GroupName"]</th>
-            <th style="width:70px;">@Model.Resource["GroupColor"]</th>
-            <th style="width:70px;">@Model.Resource["SBComm"]</th>
-            <th style="width:70px;">@Model.Resource["NGComm"]</th>
-            <th style="width:70px;">@Model.Resource["CSComm"]</th>
-        </tr>
-    </thead>
+<table class="nested-table tbl-group-comm">
     <tbody>
+        <tr class="row-title">
+            <td class="col-commission">@Model.Resource["GroupId"]</td>
+            <td class="col-commission">@Model.Resource["GroupName"]</td>
+            <td class="col-commission">@Model.Resource["GroupColor"]</td>
+            <td class="col-commission">@Model.Resource["DefaultGroup"]</td>
+            @for (var i = 0; i < LogHelper.ProductInFirstRow && i < ActionViewModel.ProductPermissions.Count; i++)
+            {
+                var p = ActionViewModel.ProductPermissions.ElementAt(i);
+                <td class="col-commission">@Model.Resource[p.Key + "Comm"]</td>
+            }
+        </tr>
         <tr>
+            <td>@Model.Data["GroupCommID"]</td>
             <td>
-                @groupId
+                <p>@Model.Display("GroupName", nameLength)</p>
+                <p class="@Model.GetClassName("GroupName")" @Raw(groupNameOldTitle)>@Model.Display("GroupNameOld", nameLength)</p>
             </td>
-
             <td>
-                <p>@groupNameDisplay</p>
-                <p class="@GetClassName(isChangeGroupName)" @(groupNameOldLength > 25 ? @Raw("title='" + groupNameOld + "'") : "")>@groupNameOldDisplay</p>
-            </td>
-
-            <td>
-                <p style="background-color:@groupColor;" class="group-color-box"></p>
-
-                <div class="@GetClassName(isChangeGroupColor)">
-                    <p title="@Model.Resource["OldColor"]" style="background-color:@groupColorOld;" class="group-color-box"></p>
+                <p style="background-color:@Model.Data["GroupColor"];" class="group-color-box"></p>
+                <div class="@Model.GetClassName("GroupColor")">
+                    <p title="@Model.Resource["OldColor"]" style="background-color:@Model.Data["GroupColorOld"];" class="group-color-box"></p>
                 </div>
             </td>
-
-            <td title="@sbCommTitle">
-                <p>@sbComm.ToString(FormatComm)</p>
-                <p class="@GetClassName(isChangeSbComm) red-text-text">@sbCommOld.ToString(FormatComm)</p>
+            <td>
+                <p>@Model.DisplayYesNo("IsDefault")</p>
+                <p class="@Model.GetClassName("IsDefault")">@Model.DisplayYesNo("IsDefaultOld")</p>
             </td>
-
-            <td title="@ngCommTitle">
-                <p>@ngComm.ToString(FormatComm)</p>
-                <p class="@GetClassName(isChangeNgComm) red-text">@ngCommOld.ToString(FormatComm)</p>
-            </td>
-
-            <td title="@csCommTitle">
-                <p>@csComm.ToString(FormatComm)</p>
-                <p class="@GetClassName(isChangeCsComm) red-text">@csCommOld.ToString(FormatComm)</p>
-            </td>
+            @for (var i = 0; i < LogHelper.ProductInFirstRow && i < ActionViewModel.ProductPermissions.Count; i++)
+            {
+                @RenderCommValue(i, columnNames)
+            }
         </tr>
+        @for (var t = 0; t < numberOfTable; t++)
+        {
+            var i = 0;
+            <tr class="row-title">
+                @for (i = 0; i < 7 && productIndex + i < ActionViewModel.ProductPermissions.Count; i++)
+                {
+                    var p = ActionViewModel.ProductPermissions.ElementAt(productIndex + i);
+
+                    <td>@Model.Resource[p.Key + "Comm"]</td>
+                }
+                @if (i < 7)
+                {
+                    <td colspan="@(7-i)"></td>
+                }
+            </tr>
+            <tr>
+                @for (i = 0; i < 7 && productIndex + i < ActionViewModel.ProductPermissions.Count; i++)
+                {
+                    @RenderCommValue(productIndex + i, columnNames)
+                }
+                @if (i < 7)
+                {
+                    <td colspan="@(7-i)"></td>
+                }
+            </tr>
+
+            productIndex += 7;
+        }
     </tbody>
 </table>

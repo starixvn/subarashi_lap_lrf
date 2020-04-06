@@ -11,7 +11,7 @@
 
     using Extension.Utility;
     using Extension.Utility.Interfaces;
-
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Customer.DTO.CustomerLog;
     using Model.Customer.MetaModel.CustomerLog;
 
@@ -148,7 +148,8 @@
                 _customerLogDataAccess,
                 _logInLogDataAccess,
                 _appSettings,
-                Substitute.For<IFileSystem>())
+                Substitute.For<IFileSystem>(),
+                Substitute.For<IProductService>())
             {
                 SessionService = SessionService,
                 ProductService = ProductService

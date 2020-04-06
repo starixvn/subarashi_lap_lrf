@@ -6,12 +6,10 @@
 
 namespace Fanex.Athena.Web.ActionFilter
 {
+    using System;
+    using System.Web.Mvc;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using System;
-    using System.Net;
-    using System.Web.Mvc;
-    using System.Web.Routing;
 
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true)]
     public sealed class BetListAuthorizationAttribute : ActionFilterAttribute
@@ -22,33 +20,8 @@ namespace Fanex.Athena.Web.ActionFilter
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            var context = filterContext.HttpContext;
-
-            if (!LicenseeSettingService.IsAuthorizedOnBetList(SessionService.LicenseeSession?.LicenseeName))
-            {
-                if (context.Request.IsAjaxRequest())
-                {
-                    filterContext.HttpContext.Response.StatusCode = (int)HttpStatusCode.Forbidden;
-                    filterContext.HttpContext.Response.ContentType = "application/json";
-                    filterContext.Result = new JsonResult
-                    {
-                        Data = new { ErrCode = (int)HttpStatusCode.Forbidden, ErrMsg = "Access Denied." },
-                        JsonRequestBehavior = JsonRequestBehavior.AllowGet
-                    };
-                }
-                else
-                {
-                    var routeValue = new
-                    {
-                        controller = "Utility",
-                        action = "AccessDenied",
-                        message = "AccessDenied"
-                    };
-
-                    filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(routeValue));
-                }
-            }
-
+            var isAllowed = LicenseeSettingService.IsAuthorizedOnBetList(SessionService.LicenseeSession?.LicenseeName);
+            ActionFilterAttributeHelper.OnActionExecuting(filterContext, isAllowed);
             base.OnActionExecuting(filterContext);
         }
     }

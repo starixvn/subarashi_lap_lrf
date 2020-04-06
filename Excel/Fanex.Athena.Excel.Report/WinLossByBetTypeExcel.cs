@@ -10,6 +10,7 @@ namespace Fanex.Athena.Excel.Report
     using Base;
     using Base.Entities;
     using Fanex.Athena.Excel.Base.Extension;
+    using Fanex.Athena.Model.Core.DTO.Common;
     using Helpers;
     using Model.Report.DTO;
     using Model.Report.ViewModel;

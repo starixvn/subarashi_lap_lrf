@@ -36,7 +36,7 @@
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <Prefer32Bit>false</Prefer32Bit>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>Fanex.Athena.Model.BetList-1.ruleset</CodeAnalysisRuleSet>
     <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -99,7 +99,6 @@
     <Compile Include="MetaModel\BaseExchangeBetListMetaModel.cs" />
     <Compile Include="MetaModel\BetListExcelMetaModel.cs" />
     <Compile Include="MetaModel\BetListMetaModel.cs" />
-    <Compile Include="MetaModel\BetListShowingOption.cs" />
     <Compile Include="MetaModel\CashOutBetListDetailMetaModel.cs" />
     <Compile Include="MetaModel\ColossusBetDetailMetaModel.cs" />
     <Compile Include="MetaModel\ExchangeBetListDetailMetaModel.cs" />
@@ -126,6 +125,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Fanex.Athena.Model.BetList-1.ruleset" />
     <None Include="Fanex.Athena.Model.BetList.ruleset" />
     <None Include="packages.config" />
   </ItemGroup>

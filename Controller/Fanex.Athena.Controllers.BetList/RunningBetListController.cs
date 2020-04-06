@@ -6,18 +6,15 @@
 
 namespace Fanex.Athena.Controllers.BetList
 {
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Service.StatelessCore.Utility;
-
     using Model.BetList.MetaModel;
     using Model.BetList.ViewModel;
     using Model.Core.DataDomain;
-
     using Resources;
-
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-
     using Web.ActionFilter;
 
     /// <summary>
@@ -96,7 +93,7 @@ namespace Fanex.Athena.Controllers.BetList
         {
             metaModel.UspKey = uspKey;
 
-            metaModel.ShowingOption = new BetListShowingOption
+            metaModel.ShowingOption = new ShowingOption
             {
                 CustomerCommVisible = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm,
             };

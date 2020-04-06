@@ -3,60 +3,59 @@
 @using Fanex.Athena.Model.Core.MetaModel.Product;
 @using Fanex.Athena.Model.Core.DataDomain;
 @using Fanex.Athena.Resources;
-
 @helper  PlatformList(string id, string className = null)
 {
     /**/
-<select id="@id" name="@id" class="select @className">
-    <option value="@PlatformType.All">
-        @ViewResources.All
-    </option>
-    <option value="@PlatformType.Asia">
-        @ViewResources.Asia
-    </option>
-    <option value="@PlatformType.China">
-        @ViewResources.China
-    </option>
-    <option value="@PlatformType.Euro">
-        @ViewResources.Euro
-    </option>
-    <option value="@PlatformType.Wap">
-        @ViewResources.Wap
-    </option>
-    <option value="@PlatformType.Mobile">
-        @ViewResources.Mobile
-    </option>
-    <option value="@PlatformType.Tablet">
-        @ViewResources.Tablet
-    </option>
-    <option value="@PlatformType.NewAsia">
-        @ViewResources.NewAsia
-    </option>
-    <option value="@PlatformType.MobileApp">
-        @ViewResources.MobileApp
-    </option>
-    <option value="@PlatformType.MobileLiteVersion">
-        @ViewResources.MobileLiteVersion
-    </option>
-    <option value="@PlatformType.DeepLink">
-        @ViewResources.DeepLink
-    </option>
-    <option value="@PlatformType.NativeApp">
-        @ViewResources.NativeApp
-    </option>
-    <option value="@PlatformType.ESportsDesktop">
-        @ViewResources.ESportsDesktop
-    </option>
-    <option value="@PlatformType.ESportsMobile">
-        @ViewResources.ESportsMobile
-    </option>
-    <option value="@PlatformType.ESportsApp">
-        @ViewResources.ESportsApp
-    </option>
-    <option value="@PlatformType.BetfromOthers">
-        @ViewResources.BetfromOthers
-    </option>
-</select>
+    <select id="@id" name="@id" class="select @className">
+        <option value="@PlatformType.All">
+            @ViewResources.All
+        </option>
+        <option value="@PlatformType.Asia">
+            @ViewResources.Asia
+        </option>
+        <option value="@PlatformType.China">
+            @ViewResources.China
+        </option>
+        <option value="@PlatformType.Euro">
+            @ViewResources.Euro
+        </option>
+        <option value="@PlatformType.Wap">
+            @ViewResources.Wap
+        </option>
+        <option value="@PlatformType.Mobile">
+            @ViewResources.Mobile
+        </option>
+        <option value="@PlatformType.Tablet">
+            @ViewResources.Tablet
+        </option>
+        <option value="@PlatformType.NewAsia">
+            @ViewResources.NewAsia
+        </option>
+        <option value="@PlatformType.MobileApp">
+            @ViewResources.MobileApp
+        </option>
+        <option value="@PlatformType.MobileLiteVersion">
+            @ViewResources.MobileLiteVersion
+        </option>
+        <option value="@PlatformType.DeepLink">
+            @ViewResources.DeepLink
+        </option>
+        <option value="@PlatformType.NativeApp">
+            @ViewResources.NativeApp
+        </option>
+        <option value="@PlatformType.ESportsDesktop">
+            @ViewResources.ESportsDesktop
+        </option>
+        <option value="@PlatformType.ESportsMobile">
+            @ViewResources.ESportsMobile
+        </option>
+        <option value="@PlatformType.ESportsApp">
+            @ViewResources.ESportsApp
+        </option>
+        <option value="@PlatformType.BetfromOthers">
+            @ViewResources.BetfromOthers
+        </option>
+    </select>
 }
 @helper DateRangePicker(DateTime fromDate, DateTime toDate, DateTime minDate, DateTime maxDate)
 {
@@ -69,7 +68,6 @@
     <label for="DateRange" class="active">@ViewResources.Date</label>
     <span class="icon icon-calendar"></span>
 }
-
 @helper SingleDatePicker(DateTime date, DateTime minDate, DateTime maxDate, string id = "FromDate", string className = "")
 {
     /**/
@@ -78,7 +76,6 @@
     <label>@ViewResources.Date</label>
     <span class="icon icon-calendar"></span>
 }
-
 @helper MonthPicker(DateTime fromDate, DateTime toDate)
 {
     /**/
@@ -99,7 +96,6 @@
         </div>
     </div>
 }
-
 @helper CurrencyList(IDictionary<int, string> currencyList,
 string className = "", int selected = 0,
 bool addMoreAllOption = true,
@@ -155,7 +151,6 @@ bool addBasedOption = false)
         }
     </select>
 }
-
 @helper BasedCurrency(string selectedBasedCurrency = "", string CurrencyName = null)
 {
     <select class="based-currency hide" name="BaseCurrency" id="BaseCurrency" data-original="@selectedBasedCurrency">
@@ -170,10 +165,10 @@ bool addBasedOption = false)
 @helper HighlightNegativeFormat(decimal value, bool isHiglight = true)
 {
     /**/
-    <span@(isHiglight && value < 0 ? new HtmlString(" class='negative-number'") : new HtmlString(""))>
-        @value.ToStringExt()</span>
+    <span @(isHiglight && value < 0 ? new HtmlString("class='negative-number'") : new HtmlString(""))>
+        @value.ToStringExt()
+    </span>
 }
-
 @helper TitleDateTime(DateTime fromDate, DateTime? toDate)
 {
     /**/
@@ -183,13 +178,11 @@ bool addBasedOption = false)
         @(" → ")@(toDate.Value.ToString("MM/dd/yyyy"))
     }
 }
-
 @helper ViewCurrencyBasedOnConverter(bool converter, string BaseCurrency, string CurrencyName)
 {
     /**/
     @(string.Format(ViewResources.Viewin, converter ? BaseCurrency.ToUpper() : CurrencyName))
 }
-
 @helper RenderProductFilter(IEnumerable<ProductOption> productOptions, int colLg = 3, int colMd = 4)
 {
     /**/
@@ -201,7 +194,6 @@ bool addBasedOption = false)
         <div class="multiselect-container" id="ProductList">
             <select id="grid-products-multiselect" name="grid-products-multiselect"></select>
             <label>@ViewResources.Product *</label>
-
             <div class="hide" id="product-container">
                 @foreach (var product in productOptions)
                 {
@@ -215,7 +207,6 @@ bool addBasedOption = false)
         </div>
     </div>
 }
-
 <!--Total bets-->
 <!--Timer countdown control-->
 @helper TimerCountDown(string name, int start)
@@ -227,7 +218,6 @@ bool addBasedOption = false)
             <span class="center-align" id="count"></span>
             <i class="icon icon-refresh"></i>
         </a>
-
         <a href="javascript:;" class="dropdown-button button-select" data-activates="countdown-menu"><i class="icon icon-menu-down"></i></a>
     </div>
     <ul id="countdown-menu" class="countdown-menu dropdown-content">
@@ -238,7 +228,6 @@ bool addBasedOption = false)
         }
     </ul>
 }
-
 @helper NegativeFormat(decimal value, bool isDisplayZero = true, bool isFormatZero = true)
 {
     /**/
@@ -252,7 +241,6 @@ bool addBasedOption = false)
         <span>@(isDisplayZero == false ? string.Empty : (isFormatZero ? "0.00" : "0"))</span>
     }
 }
-
 @helper DecFormat(decimal value, bool isDisplayZero = true, bool isFormatZero = true)
 {
     /**/
@@ -279,7 +267,6 @@ bool addBasedOption = false)
         <span>@(isDisplayZero == false ? string.Empty : (isFormatZero ? "0.00" : "0"))</span>
     }
 }
-
 @helper PositiveFormatExt(decimal? value)
 {
     /**/
@@ -289,14 +276,12 @@ bool addBasedOption = false)
         @PositiveFormat(Convert.ToDecimal(value), true, false);
     }
 }
-
 @helper ViewBaseCurrency(string currencyName, string basedCurrencyName)
 {
     /**/
     @(string.IsNullOrEmpty(basedCurrencyName) ? string.Format(ViewResources.Viewin, currencyName) : string.Format(ViewResources.Viewin, basedCurrencyName.ToUpper()))
 
 }
-
 @helper MonthDropDownList(int selectedMonth)
 {
     /**/
@@ -316,7 +301,6 @@ bool addBasedOption = false)
         <option @(selectedMonth == 12 ? "selected = selected" : string.Empty) value="11">@ViewResources.December</option>
     </select>
 }
-
 @helper YearDropDownList(int selectedYear, int itemCount)
 {
     /**/
@@ -329,7 +313,6 @@ bool addBasedOption = false)
         }
     </select>
 }
-
 @helper TruncateWithTip(String value, Int32 maxLength, bool hasSpanReturn = false)
 {
     /**/
@@ -349,7 +332,6 @@ bool addBasedOption = false)
         @value
     }
 }
-
 <!--Example:@RazorHelper.Paging("MainForm", 5000, 1)-->
 @helper Paging(string formId, int NoOfItems, int currentIndex = 1, int pageSize = 1000, string method = "POST")
 {
@@ -371,7 +353,6 @@ bool addBasedOption = false)
             <span class="pagingSeperator"></span>
             <a href="javascript:;" class="icon pagingNext @(currentIndex == noOfPage ? "pagingDisable" : string.Empty)"></a>
             <a href="javascript:;" class="icon pagingLast @(currentIndex == noOfPage ? "pagingDisable" : string.Empty)"></a>
-
             <select class="pageSizeSelected">
                 @for (var i = 1000; i <= 2000; i += 1000)
                 {
@@ -380,7 +361,6 @@ bool addBasedOption = false)
                     </option>
                 }
             </select>
-
             <input type="hidden" name="PageSize" value="@pageSize" />
             <input type="hidden" name="Method" value="@method" />
             <input type="hidden" name="FormName" value="@formId" />
@@ -388,7 +368,6 @@ bool addBasedOption = false)
         </div>
     }
 }
-
 @helper ViewInCurrency(int currencyId, string currencyName)
 {
     /**/
@@ -406,7 +385,6 @@ bool addBasedOption = false)
 
     @(title)
 }
-
 @helper TicketFilter()
 {
     /**/
@@ -424,7 +402,6 @@ bool addBasedOption = false)
     </div>
     <label>@ViewResources.TicketFilter *</label>
 }
-
 @helper DrawFilter(int drawFilterType)
 {
     /**/
@@ -443,7 +420,6 @@ bool addBasedOption = false)
 
     <label class="active">@ViewResources.DrawFilter</label>
 }
-
 @helper ReportBy(int reportByType)
 {
     /**/
@@ -458,7 +434,6 @@ bool addBasedOption = false)
 
     <label class="active">@ViewResources.ReportBy</label>
 }
-
 @helper ExcludeTestData(bool isExcludedTestData)
 {
     /**/
@@ -473,7 +448,6 @@ bool addBasedOption = false)
 
     <label class="active">@ViewResources.ExcludeTestData</label>
 }
-
 @helper ReportTitleLicenseeWLProductCodeList(IEnumerable<ProductOption> productOptions)
 {
     /**/

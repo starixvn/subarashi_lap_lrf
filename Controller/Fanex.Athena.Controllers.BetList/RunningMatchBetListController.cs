@@ -11,7 +11,7 @@ namespace Fanex.Athena.Controllers.BetList
     #region Using
 
     using System.Web.Mvc;
-
+    using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Web.ActionFilter;
 
     using Model.BetList.MetaModel;
@@ -35,13 +35,13 @@ namespace Fanex.Athena.Controllers.BetList
 
         protected override async Task<ActionResult> ExportExcel(BetListExcelMetaModel metaModel)
         {
+            metaModel.HiddenColumns = HiddenColumnIndexes;
             metaModel.Title = $"(LEAGUENAME) - {CacheRefAdapter.GetBettype(metaModel.BetType)} - {GetViewInCurrency(metaModel)}";
-
-            metaModel.ShowingOption = new BetListShowingOption
+            metaModel.ShowingOption = new ShowingOption
             {
                 CustomerCommVisible = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm,
             };
-            metaModel.HiddenColumns = HiddenColumnIndexes;
+
             return await ProcessExportExcel(metaModel, "RunningBetList").ConfigureAwait(false);
         }
     }

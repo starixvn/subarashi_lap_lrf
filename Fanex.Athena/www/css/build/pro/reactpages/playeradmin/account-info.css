@@ -355,6 +355,8 @@
       background-color: #ebeaea;
       height: 1px;
       margin: 0 10px; }
+  .popup-container .flat-popup iframe {
+    background-color: #fff; }
 
 .left-side {
   border: 1px solid #d6d6d6;

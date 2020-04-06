@@ -6,7 +6,7 @@
     using Base.UnitTests;
 
     using Excel.Base.Entities;
-
+    using Fanex.Athena.Model.Core.DTO.Common;
     using Model.Core.DataDomain;
     using Model.Report.MetaModel;
 

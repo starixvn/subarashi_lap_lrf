@@ -8,32 +8,27 @@ namespace Fanex.Athena.Controllers.Customer
 {
     #region Using
 
-    using DataAccess.Core.Users.Interfaces;
-
-    using Fanex.Athena.Extension.Helper;
-    using Fanex.Athena.Extension.Helpers;
-    using Fanex.Athena.Model.Auth.DataDomain;
-    using Fanex.Athena.Model.Core.DTO.Common;
-    using Fanex.Athena.Model.Customer.MetaModel;
-    using Fanex.Athena.Service.Customer.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.Web.ActionFilter;
-    using Fanex.Logging;
-
-    using Model.Core.ViewModel;
-
-    using ONEbook.UM.Filters;
-
-    using Resources;
-
-    using Service.Customer.Helpers;
-
     using System;
     using System.Linq;
     using System.Net;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using System.Web.SessionState;
+    using DataAccess.Core.Users.Interfaces;
+    using Fanex.Athena.Extension.Helper;
+    using Fanex.Athena.Extension.Helpers;
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Model.Core.Helper;
+    using Fanex.Athena.Model.Customer.MetaModel;
+    using Fanex.Athena.Service.Customer.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Web.ActionFilter;
+    using Fanex.Logging;
+    using Model.Core.ViewModel;
+    using ONEbook.UM.Filters;
+    using Resources;
+    using Service.Customer.Helpers;
 
     #endregion Using
 
@@ -392,6 +387,7 @@ namespace Fanex.Athena.Controllers.Customer
                 userSession.Language,
                 CustomerAPIRemoveFromGroupComName);
 
+            var supportedProducts = _productService.GetAllowedProducts("CommissionGroups");
             var metaModel = new MoveToGroupComMetaModel(productAccess)
             {
                 CustomerIds = customerIds,
@@ -400,7 +396,8 @@ namespace Fanex.Athena.Controllers.Customer
                 UserId = userSession.UserId,
                 UserName = userSession.UserName,
                 Ip = Request.UserHostAddress,
-                Language = userSession.Language
+                Language = userSession.Language,
+                ProductPermissions = CommissionGroupHelper.GetProductPermissions(supportedProducts, productAccess)
             };
 
             var temp = await _customerCommService.MoveCustomersToGroupAsync(metaModel);
@@ -414,7 +411,7 @@ namespace Fanex.Athena.Controllers.Customer
 
             if (result.Success)
             {
-                var newGroup = _groupComService.GetById(metaModel.GroupComId, licenseeSession.LicenseeId);
+                var newGroup = _groupComService.GetById(metaModel.GroupComId, licenseeSession.LicenseeId, metaModel.ProductPermissions);
                 if (newGroup != null)
                 {
                     result.ExtendedData = CreateExtendedData(newGroup);
@@ -430,9 +427,9 @@ namespace Fanex.Athena.Controllers.Customer
         {
             return new
             {
-                SBComm = NumberHelper.PercentageFormat(newGroup.SBComm),
-                NGComm = NumberHelper.PercentageFormat(newGroup.NGComm),
-                RNGComm = NumberHelper.PercentageFormat(newGroup.CSComm),
+                SBComm = NumberHelper.PercentageFormat(newGroup.CommValues[Product.SB]),
+                NGComm = NumberHelper.PercentageFormat(newGroup.CommValues[Product.NG]),
+                RNGComm = NumberHelper.PercentageFormat(newGroup.CommValues[Product.CS]),
                 newGroup.GroupName,
                 newGroup.GroupColor,
             };
@@ -450,9 +447,16 @@ namespace Fanex.Athena.Controllers.Customer
 
         private bool IsSameOldComm(UpdatedCustomerComMetaModel metaModel)
         {
-            var oldGroup = this._groupComService.GetById(metaModel.GroupId, metaModel.LicenseeId);
-            return oldGroup.NGComm == metaModel.NGComm && oldGroup.SBComm == metaModel.SBComm &&
-                               oldGroup.CSComm == metaModel.CSComm;
+            var supportedProducts = _productService.GetAllowedProducts("CommissionGroups");
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
+            var productAccess = _productService.GetProductAccess(licenseeSession.LicenseeId, userSession.Language, CustomerAPIRemoveFromGroupComName);
+            metaModel.ProductPermissions = CommissionGroupHelper.GetProductPermissions(supportedProducts, productAccess);
+
+            var oldGroup = this._groupComService.GetById(metaModel.GroupId, metaModel.LicenseeId, metaModel.ProductPermissions);
+            return oldGroup.CommValues[Product.NG] == metaModel.NGComm
+                && oldGroup.CommValues[Product.SB] == metaModel.SBComm
+                && oldGroup.CommValues[Product.CS] == metaModel.CSComm;
         }
 
         private async Task ProcessUpdatingCustomerComAsync(UpdatedCustomerComMetaModel metaModel, ResultViewModel result)

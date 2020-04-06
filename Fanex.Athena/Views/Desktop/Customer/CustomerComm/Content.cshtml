@@ -1,13 +1,13 @@
-﻿@{
+﻿@using Fanex.Athena.Model.Customer.ViewModel.CommissionGroupList;
+@model CommissionGroupListViewModel
+@{
     Layout = null;
-
-    var isAllowNg = ViewBag.IsAllowNG;
-    var isAllowCs = ViewBag.IsAllowCS;
+    var groups = Model.Groups;
 }
 <div class="page-results">
     <div class="result-content">
         <div class="main-content">
-            @if (Model.Count == 0)
+            @if (groups.Count == 0)
             {
                 <p class="no-info-row">@ViewResources.NoInfo</p>
             }
@@ -21,14 +21,12 @@
                             <th class="col-medium large">@ViewResources.GroupName</th>
                             <th class="col-child medium">@ViewResources.DefaultGroup</th>
                             <th class="col-child medium">@ViewResources.NoOfCustmer</th>
-                            <th class="col-child medium">@ViewResources.SBComm (%)</th>
-                            @if (isAllowNg)
+                            @foreach (var p in Model.ProductPermissions)
                             {
-                                <th class="col-child medium">@ViewResources.NGComm (%)</th>
-                            }
-                            @if (isAllowCs)
-                            {
-                                <th class="col-child medium">@ViewResources.CSComm (%)</th>
+                                if (p.Value)
+                                {
+                                    <th class="col-child medium">@ViewResources.ResourceManager.GetString("Product" + p.Key)</th>
+                                }
                             }
                             <th class="col-child medium">@ViewResources.GroupColor</th>
                             <th class="col-child medium">@ViewResources.EditGroup</th>
@@ -37,7 +35,7 @@
                     <tbody>
                         @{
                             int number = 1;
-                            foreach (var groupComm in Model)
+                            foreach (var groupComm in groups)
                             {
                                 <tr>
                                     <td class="center-align">@(number++)</td>
@@ -49,24 +47,20 @@
                                     </td>
                                     <td class="center-align @(groupComm.IsDefaultGroup ? "icon-checkmark" : string.Empty)"></td>
                                     <td class="center-align">
-                                        <a class="no-customer-border customer-list-link" data-id="@groupComm.GroupCommId">
+                                        <a class="no-customer-border" data-id="@groupComm.GroupCommId">
                                             @groupComm.NumberOfCustomer
                                         </a>
                                     </td>
-                                    <td class="center-align">
-                                        @(groupComm.SBComm.ToString("P2"))
-                                    </td>
-                                    @if (isAllowNg)
+                                    @foreach (var p in Model.ProductPermissions)
                                     {
-                                        <td class="center-align">
-                                            @(groupComm.NGComm.ToString("P2"))
-                                        </td>
-                                    }
-                                    @if (isAllowCs)
-                                    {
-                                        <td class="center-align">
-                                            @(groupComm.CSComm.ToString("P2"))
-                                        </td>
+                                        if (p.Value)
+                                        {
+                                            var comms = groupComm.CommValues;
+
+                                            <td class="center-align">
+                                                @(comms[p.Key].ToString("P2"))
+                                            </td>
+                                        }
                                     }
                                     <td class="center-align">
                                         <div class="group-color-box" style="background-color:@groupComm.GroupColor;"></div>
@@ -82,7 +76,7 @@
                         }
                     </tbody>
                 </table>
-                            }
+            }
         </div>
     </div>
 </div>

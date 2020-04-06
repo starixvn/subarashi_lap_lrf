@@ -35,7 +35,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>Fanex.Athena.Extension-1.ruleset</CodeAnalysisRuleSet>
     <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -141,6 +141,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutofacExtension.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Helper\CasinoHelper.cs" />
     <Compile Include="Helper\ClientHelper.cs" />
     <Compile Include="Helper\DataHelper.cs" />
@@ -172,7 +173,9 @@
     <Compile Include="Utility\IAppSettings.cs" />
     <Compile Include="Utility\Interfaces\IFormsAuthenticationService.cs" />
     <Compile Include="Utility\Interfaces\IFileSystem.cs" />
-    <Compile Include="Utility\WebClientService.cs" />
+    <Compile Include="Utility\WebClientService.cs">
+		<SonarQubeExclude>true</SonarQubeExclude>
+	</Compile>	
     <Compile Include="Utility\XDocumentWrapper.cs" />
     <Compile Include="Utility\Interfaces\IXDocumentWrapper.cs" />
     <Compile Include="Utility\PropertyComparer.cs" />
@@ -182,6 +185,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Fanex.Athena.Extension-1.ruleset" />
     <None Include="Fanex.Athena.Extension.ruleset" />
     <None Include="packages.config" />
   </ItemGroup>

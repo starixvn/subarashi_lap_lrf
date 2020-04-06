@@ -55,8 +55,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
-    <CodeAnalysisRuleSet>
-    </CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>Fanex.Athena-1.ruleset</CodeAnalysisRuleSet>
     <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -68,8 +67,7 @@
     <WarningLevel>4</WarningLevel>
     <FilesToIncludeForPublish>OnlyFilesToRunTheApp</FilesToIncludeForPublish>
     <Prefer32Bit>false</Prefer32Bit>
-    <CodeAnalysisRuleSet>
-    </CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>Fanex.Athena-1.ruleset</CodeAnalysisRuleSet>
     <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <ItemGroup>
@@ -706,6 +704,8 @@
     <Content Include="www\css\build\dev\pages\betlist\images\lotto_ball.png" />
     <Content Include="www\css\build\dev\pages\betlist\images\nphPromotion.png" />
     <Content Include="www\css\build\dev\pages\betlist\images\rebateBonus.png" />
+    <Content Include="www\css\build\dev\pages\playercommission\index.chunk.js" />
+    <Content Include="www\css\build\dev\pages\playercommission\index.css" />
     <Content Include="www\css\build\dev\reactpages\betlist\images\bonus.png" />
     <Content Include="www\css\build\dev\reactpages\betlist\images\goal-icon.png" />
     <Content Include="www\css\build\dev\reactpages\betlist\images\lotto_ball.png" />
@@ -760,6 +760,8 @@
     <Content Include="www\css\build\images\ui-icons_2e83ff_256x240.png" />
     <Content Include="www\css\build\pro\pages\betlist\images\nphPromotion.png" />
     <Content Include="www\css\build\pro\pages\betlist\images\rebateBonus.png" />
+    <Content Include="www\css\build\pro\pages\playercommission\index.chunk.js" />
+    <Content Include="www\css\build\pro\pages\playercommission\index.css" />
     <Content Include="www\css\build\pro\reactpages\betlist\images\bonus.png" />
     <Content Include="www\css\build\pro\reactpages\betlist\images\goal-icon.png" />
     <Content Include="www\css\build\pro\reactpages\betlist\images\lotto_ball.png" />
@@ -848,6 +850,18 @@
     <Content Include="www\css\build\dev\reactpages\playeradmin\detailtransaction.css.map" />
     <Content Include="Views\Desktop\BetList\SexyGaming\Main.cshtml" />
     <Content Include="Views\Desktop\BetList\SBCDetail\Main.cshtml" />
+    <Content Include="Views\Desktop\Module\PlayerAdmin\PlayerCommission\MultipleMoveGroup.cshtml" />
+    <Content Include="Views\Desktop\Module\PlayerAdmin\PlayerCommission\MultipleRemoveFromGroup.cshtml" />
+    <Content Include="Views\Desktop\Module\PlayerAdmin\PlayerCommission\MultipleUpdateGroup.cshtml" />
+    <Content Include="www\css\source\pages\playercommission\index.scss" />
+    <Content Include="www\css\build\dev\pages\playercommission\index.chunk.js.map" />
+    <Content Include="www\css\build\dev\pages\playercommission\index.css.map" />
+    <Content Include="Views\Desktop\Module\PlayerAdmin\PlayerCommission\SingleMoveGroup.cshtml" />
+    <Content Include="Views\Desktop\Module\PlayerAdmin\PlayerCommission\SingleRemoveFromGroup.cshtml" />
+    <Content Include="Views\Desktop\Module\PlayerAdmin\PlayerCommission\SingleUpdateGroup.cshtml" />
+    <Content Include="Fanex.Athena-1.ruleset" />
+    <Content Include="Views\Desktop\Customer\CustomerComm\Menu.cshtml" />
+    <Content Include="Views\Desktop\Customer\CustomerLog\GroupCommLog\Menu.cshtml" />
     <None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
     <None Include="www\css\source\pages\betlist\result\result.happy5.scss" />
     <None Include="www\css\source\reactpages\components\alert\icons\error.scss" />
@@ -865,6 +879,12 @@
     <Content Include="www\js\build\dev\pages\customer\exchangebetsetting.chunk.js" />
     <Content Include="www\js\build\dev\pages\lib\common.chunk.js" />
     <Content Include="www\js\build\dev\pages\lib\jqgrid.chunk.js" />
+    <Content Include="www\js\build\dev\pages\playercommission\multiplemovegroup.chunk.js" />
+    <Content Include="www\js\build\dev\pages\playercommission\multipleremovefromgroup.chunk.js" />
+    <Content Include="www\js\build\dev\pages\playercommission\multipleupdategroup.chunk.js" />
+    <Content Include="www\js\build\dev\pages\playercommission\singlemovegroup.chunk.js" />
+    <Content Include="www\js\build\dev\pages\playercommission\singleremovefromgroup.chunk.js" />
+    <Content Include="www\js\build\dev\pages\playercommission\singleupdategroup.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\bettingticketscenter\advancedsearch.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\bettingticketscenter\refno.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\bettingticketscenter\running.chunk.js" />
@@ -904,6 +924,12 @@
     <Content Include="www\js\build\pro\pages\customer\exchangebetsetting.chunk.js" />
     <Content Include="www\js\build\pro\pages\lib\common.chunk.js" />
     <Content Include="www\js\build\pro\pages\lib\jqgrid.chunk.js" />
+    <Content Include="www\js\build\pro\pages\playercommission\multiplemovegroup.chunk.js" />
+    <Content Include="www\js\build\pro\pages\playercommission\multipleremovefromgroup.chunk.js" />
+    <Content Include="www\js\build\pro\pages\playercommission\multipleupdategroup.chunk.js" />
+    <Content Include="www\js\build\pro\pages\playercommission\singlemovegroup.chunk.js" />
+    <Content Include="www\js\build\pro\pages\playercommission\singleremovefromgroup.chunk.js" />
+    <Content Include="www\js\build\pro\pages\playercommission\singleupdategroup.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\bettingticketscenter\advancedsearch.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\bettingticketscenter\refno.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\bettingticketscenter\running.chunk.js" />
@@ -944,6 +970,13 @@
     <Content Include="www\js\source\helpers\downloader.js" />
     <Content Include="www\js\source\pages\customer\customerlist\customerlist.gridoption.dormant.js" />
     <Content Include="www\js\source\pages\customer\customerlist\customerlist.service.dormant.js" />
+    <Content Include="www\js\source\pages\playercommission\playercommissioncommon.js" />
+    <Content Include="www\js\source\pages\playercommission\singleupdategroup.js" />
+    <Content Include="www\js\source\pages\playercommission\singleremovefromgroup.js" />
+    <Content Include="www\js\source\pages\playercommission\multipleremovefromgroup.js" />
+    <Content Include="www\js\source\pages\playercommission\singlemovegroup.js" />
+    <Content Include="www\js\source\pages\playercommission\multipleupdategroup.js" />
+    <Content Include="www\js\source\pages\playercommission\multiplemovegroup.js" />
     <Content Include="www\js\source\reactpages\actions\pagingOptionAction.js" />
     <Content Include="www\js\source\reactpages\actions\reportTitleAction.js" />
     <Content Include="www\js\source\reactpages\actions\requestParamAction.js" />
@@ -1127,6 +1160,13 @@
     <Content Include="www\js\source\reactpages\lib\__tests__\QueryString.test.js" />
     <Content Include="www\js\source\reactpages\lib\__tests__\report.test.js" />
     <Content Include="www\js\source\reactpages\lib\__tests__\site.test.js" />
+    <Content Include="www\js\source\reactpages\Module\constants\configInfo.js" />
+    <Content Include="www\js\source\reactpages\Module\lib\baseCommonService.js" />
+    <Content Include="www\js\source\reactpages\Module\lib\factoryCommonService.js" />
+    <Content Include="www\js\source\reactpages\Module\lib\lapCommonService.js" />
+    <Content Include="www\js\source\reactpages\Module\lib\__tests__\baseCommonService.test.js" />
+    <Content Include="www\js\source\reactpages\Module\lib\__tests__\factoryCommonService.test.js" />
+    <Content Include="www\js\source\reactpages\Module\lib\__tests__\lapCommonService.test.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\account-info\actions\index.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\account-info\actions\types.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\account-info\components\AppContainer.jsx" />
@@ -1187,6 +1227,7 @@
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\actions\index.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\actions\playerDetailHandlerAction.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\actions\siteSettingAction.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\batch-update\batch-update-manager.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\actions\types.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\actions\__tests__\commonAction.test.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\actions\__tests__\filterHandlerAction.test.js" />
@@ -2895,6 +2936,12 @@
     <Content Include="www\js\build\dev\reactpages\bettingticketscenter\advancedsearch.chunk.js.map" />
     <Content Include="www\css\source\reactpages\pages\playeradmin\detailtransaction.scss" />
     <Content Include="www\js\build\dev\reactpages\playeradmin\detailtransaction.chunk.js.map" />
+    <Content Include="www\js\build\dev\pages\playercommission\multiplemovegroup.chunk.js.map" />
+    <Content Include="www\js\build\dev\pages\playercommission\multipleremovefromgroup.chunk.js.map" />
+    <Content Include="www\js\build\dev\pages\playercommission\multipleupdategroup.chunk.js.map" />
+    <Content Include="www\js\build\dev\pages\playercommission\singlemovegroup.chunk.js.map" />
+    <Content Include="www\js\build\dev\pages\playercommission\singleremovefromgroup.chunk.js.map" />
+    <Content Include="www\js\build\dev\pages\playercommission\singleupdategroup.chunk.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SiteConfig\WebConfigTransforms\SIT.config">
@@ -5867,6 +5914,10 @@
     <ProjectReference Include="..\Model\Fanex.Athena.Model.Core\Fanex.Athena.Model.Core.csproj">
       <Project>{5f410090-94c0-46a5-9fec-b6c3b745b7a0}</Project>
       <Name>Fanex.Athena.Model.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Fanex.Athena.Model.Customer\Fanex.Athena.Model.Customer.csproj">
+      <Project>{3b212f2f-4deb-449b-9ae0-36f6e4f49f5f}</Project>
+      <Name>Fanex.Athena.Model.Customer</Name>
     </ProjectReference>
     <ProjectReference Include="..\Model\Fanex.Athena.Model.Report\Fanex.Athena.Model.Report.csproj">
       <Project>{3AA658FF-B635-4990-A49C-AE886841A1CA}</Project>

@@ -1,6 +1,7 @@
 ﻿using System.Data;
 
 using Fanex.Athena.Excel.Base.Entities;
+using Fanex.Athena.Model.Core.DTO.Common;
 using Fanex.Athena.Model.Report.MetaModel;
 using Fanex.Athena.VendorAdapter.Interfaces;
 

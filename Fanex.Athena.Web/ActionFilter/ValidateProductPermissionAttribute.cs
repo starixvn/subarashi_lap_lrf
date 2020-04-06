@@ -2,9 +2,7 @@
 {
     using System;
     using System.Linq;
-    using System.Net;
     using System.Web.Mvc;
-    using System.Web.Routing;
     using Fanex.Athena.Model.Core.MetaModel;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -38,33 +36,8 @@
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            if (!ValidateRequest(filterContext))
-            {
-                var context = filterContext.HttpContext;
-
-                if (context.Request.IsAjaxRequest())
-                {
-                    filterContext.HttpContext.Response.StatusCode = (int)HttpStatusCode.Forbidden;
-                    filterContext.HttpContext.Response.ContentType = "application/json";
-                    filterContext.Result = new JsonResult
-                    {
-                        Data = new { ErrCode = (int)HttpStatusCode.Forbidden, ErrMsg = "Access Denied." },
-                        JsonRequestBehavior = JsonRequestBehavior.AllowGet
-                    };
-                }
-                else
-                {
-                    var routeValue = new
-                    {
-                        controller = "Utility",
-                        action = "AccessDenied",
-                        message = "AccessDenied"
-                    };
-
-                    filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(routeValue));
-                }
-            }
-
+            var authorized = ValidateRequest(filterContext);
+            ActionFilterAttributeHelper.OnActionExecuting(filterContext, authorized);
             base.OnActionExecuting(filterContext);
         }
 

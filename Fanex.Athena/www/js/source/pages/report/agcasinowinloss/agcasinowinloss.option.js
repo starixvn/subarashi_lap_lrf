@@ -161,10 +161,11 @@ define(['jquery', 'common/site', 'lib/jqgrid/jquery.jqgrid.additional'], functio
     //#endregion
 
     const colNameList = ['#', 'Date', 'ExternalId', 'SystemId', 'Currency',
-      'Turnover', 'TotalTransaction', 'CustomerW_L', 'LicenseeW_L', 'CurrencyId', 'CustomerId'];
+        'Turnover', 'TotalTransaction', 'CustomerW_L', 'LicenseeW_L', 'CurrencyId', 'CustomerId'];
 
     const colModelList = [indexColumn, dateColumn, externalIdColumn, systemIdColumn, currencyColumn,
-        turnoverColumn, totalTransColumn, customerWlColumn, licenseeWlColumn, currencyIdColumn, customerIdColumn];
+        turnoverColumn, totalTransColumn, customerWlColumn, licenseeWlColumn,
+        currencyIdColumn, customerIdColumn];
 
     const _me =
     {
@@ -208,9 +209,9 @@ define(['jquery', 'common/site', 'lib/jqgrid/jquery.jqgrid.additional'], functio
 
         dateColumn.hidden = levelNumber > 0;
         dateColumn.formatoptions =
-        {
-            newformat: $('#reportbydaily').is(':checked') ? 'm/d/Y' : 'm/Y'
-        };
+            {
+                newformat: $('#reportbydaily').is(':checked') ? 'm/d/Y' : 'm/Y'
+            };
         externalIdColumn.hidden = levelNumber < 2;
         systemIdColumn.hidden = levelNumber === 0;
 

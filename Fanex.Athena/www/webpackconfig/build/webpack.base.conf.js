@@ -18,7 +18,7 @@ function generateConfig(environment) {
             modules: [
                 path.join(__dirname, "www"),
                 "node_modules"
-           ]
+            ]
         },
         entry: {
             [`${jsPath}/language`]: pathConfig.scriptPaths.language,
@@ -130,7 +130,14 @@ function generateConfig(environment) {
             [`${cssPath}/pages/reports/colossusbetswinloss`]: pathConfig.cssPaths.colossusbetswinloss,
             [`${cssPath}/pages/reports/customerpendingfunds`]: pathConfig.cssPaths.customerpendingfunds,
             [`${cssPath}/pages/reports/customerturnover`]: pathConfig.cssPaths.customerturnover,
-            [`${cssPath}/pages/reports/customerwinloss`]: pathConfig.cssPaths.customerwinloss
+            [`${cssPath}/pages/reports/customerwinloss`]: pathConfig.cssPaths.customerwinloss,
+            [`${cssPath}/pages/playercommission/index`]: pathConfig.cssPaths.playercomission,
+            [`${jsPath}/pages/playercommission/multiplemovegroup`]: [pathConfig.scriptPaths.playercomissionmultiplemovegroup],
+            [`${jsPath}/pages/playercommission/multipleremovefromgroup`]: [pathConfig.scriptPaths.playercomissionmultipleremovefromgroup],
+            [`${jsPath}/pages/playercommission/multipleupdategroup`]: [pathConfig.scriptPaths.playercomissionmultipleupdategroup],
+            [`${jsPath}/pages/playercommission/singlemovegroup`]: [pathConfig.scriptPaths.playercomissionsinglemovegroup],
+            [`${jsPath}/pages/playercommission/singleremovefromgroup`]: [pathConfig.scriptPaths.playercomissionsingleremovefromgroup],
+            [`${jsPath}/pages/playercommission/singleupdategroup`]: [pathConfig.scriptPaths.playercomissionsingleupdategroup]
         },
         output: {
             path: pathConfig.projectRoot,
@@ -152,7 +159,7 @@ function generateConfig(environment) {
         },
         optimization: {
             minimizer: [
-             new UglifyJsPlugin({
+                new UglifyJsPlugin({
                     sourceMap: true
                 })
             ],
@@ -170,10 +177,10 @@ function generateConfig(environment) {
                     default: false,
                     vendors: false,
                     common: {
-                       name: `${jsPath}/pages/lib/common`,
-                       test: /(node_modules|www[\\/]js[\\/]source[\\/]vendors|www[\\/]js[\\/]source[\\/]common)/,
-                       minChunks: 2,
-                       priority: -10
+                        name: `${jsPath}/pages/lib/common`,
+                        test: /(node_modules|www[\\/]js[\\/]source[\\/]vendors|www[\\/]js[\\/]source[\\/]common)/,
+                        minChunks: 2,
+                        priority: -10
                     },
                     jqgrid: {
                         name: `${jsPath}/pages/lib/jqgrid`,

@@ -1,9 +1,12 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
 
 using Fanex.Athena.Excel.Base;
-using Fanex.Athena.Excel.Base.Entities;
 using Fanex.Athena.Excel.Base.Extension;
 using Fanex.Athena.Excel.Customer.UnitTests.TestableClasses;
+using Fanex.Athena.Model.Core.DTO.Common;
+using Fanex.Athena.Model.Customer.MetaModel;
+using Fanex.Athena.Model.Customer.ViewModel.CommissionGroupList;
 using Fanex.Athena.Resources;
 using Fanex.Athena.UnitTest.Common.Helpers;
 
@@ -52,9 +55,6 @@ namespace Fanex.Athena.Excel.Customer.UnitTests
                 row.Cells[ColumnGroupName].Received(1).SetCellValue(ViewResources.GroupName);
                 row.Cells[ColumnDefaultGroup].Received(1).SetCellValue(ViewResources.DefaultGroup);
                 row.Cells[ColumnNoOfCustomer].Received(1).SetCellValue(ViewResources.NoOfCustmer);
-                row.Cells[ColumnSbCommission].Received(1).SetCellValue(ViewResources.SBComm + " (%)");
-                row.Cells[ColumnNgCommission].Received(1).SetCellValue(ViewResources.NGComm + " (%)");
-                row.Cells[ColumnCsCommission].Received(1).SetCellValue(ViewResources.CSComm + " (%)");
             });
         }
 
@@ -74,9 +74,6 @@ namespace Fanex.Athena.Excel.Customer.UnitTests
                 row.Cells[ColumnGroupName].Received(1).SetCellValue("GroupA");
                 row.Cells[ColumnDefaultGroup].Received(1).SetCellValue("X");
                 row.Cells[ColumnNoOfCustomer].Received(1).SetCellValue(100);
-                row.Cells[ColumnSbCommission].Received(1).SetCellValue("100.00");
-                row.Cells[ColumnNgCommission].Received(1).SetCellValue("200.00");
-                row.Cells[ColumnCsCommission].Received(1).SetCellValue("300.00");
             });
         }
 
@@ -117,7 +114,7 @@ namespace Fanex.Athena.Excel.Customer.UnitTests
             // Assert
             Assert.Multiple(() =>
             {
-                _sheet.ReceivedWithAnyArgs(3).HideColumn(0);
+                _sheet.DidNotReceiveWithAnyArgs().HideColumn(0);
             });
         }
 
@@ -148,7 +145,7 @@ namespace Fanex.Athena.Excel.Customer.UnitTests
             var excel = Substitute.ForPartsOf<CustomerCommGroupExcelTestable>(
                 string.Empty,
                 table,
-                showingOption ?? new ShowingOption());
+                new CommissionGroupListViewModel(new List<GroupCommMetaModel>(), new Dictionary<string, bool>()));
             excel.TemplateSheet.Returns(Substitute.For<ISheet>());
             return excel;
         }

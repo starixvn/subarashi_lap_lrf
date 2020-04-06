@@ -28,6 +28,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
+    <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
@@ -35,7 +36,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>Fanex.Athena.Web-1.ruleset</CodeAnalysisRuleSet>
     <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -145,23 +146,52 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionFilter\ActionFilterAttributeHelper.cs">
+		<SonarQubeExclude>true</SonarQubeExclude>
+	</Compile>
     <Compile Include="ActionFilter\AuthorizeRestrictionAttribute.cs" />
-    <Compile Include="ActionFilter\AutoBindMetaModelAttribute.cs" />
-    <Compile Include="ActionFilter\ValidateProductPermissionAttribute.cs" />
-    <Compile Include="ActionFilter\ValidatePermissionOnDataAttribute.cs" />
-    <Compile Include="ActionFilter\CustomValidateAntiForgeryAttribute.cs" />
-    <Compile Include="ActionFilter\BetListAuthorizationAttribute.cs" />
-    <Compile Include="ActionFilter\FunctionAuthorizationAttribute.cs" />
-    <Compile Include="ActionFilter\AjaxRequestAttribute.cs" />
-    <Compile Include="ActionFilter\CustomAuthorizeAttribute.cs" />
-    <Compile Include="ActionFilter\HandleAntiForgeryErrorAttribute.cs" />
-    <Compile Include="ActionFilter\ValidationWebRequestAttribute.cs" />
-    <Compile Include="ActionFilter\XFrameOptionAttribute.cs" />
+    <Compile Include="ActionFilter\AutoBindMetaModelAttribute.cs">
+		<SonarQubeExclude>true</SonarQubeExclude>
+	</Compile>
+    <Compile Include="ActionFilter\ValidateProductPermissionAttribute.cs">
+		<SonarQubeExclude>true</SonarQubeExclude>
+	</Compile>
+    <Compile Include="ActionFilter\ValidatePermissionOnDataAttribute.cs">
+		<SonarQubeExclude>true</SonarQubeExclude>
+	</Compile>
+    <Compile Include="ActionFilter\CustomValidateAntiForgeryAttribute.cs">
+		<SonarQubeExclude>true</SonarQubeExclude>
+	</Compile>
+    <Compile Include="ActionFilter\BetListAuthorizationAttribute.cs">
+		<SonarQubeExclude>true</SonarQubeExclude>
+	</Compile>
+    <Compile Include="ActionFilter\FunctionAuthorizationAttribute.cs">
+		<SonarQubeExclude>true</SonarQubeExclude>
+	</Compile>
+    <Compile Include="ActionFilter\AjaxRequestAttribute.cs">
+		<SonarQubeExclude>true</SonarQubeExclude>
+	</Compile>
+    <Compile Include="ActionFilter\CustomAuthorizeAttribute.cs">
+		<SonarQubeExclude>true</SonarQubeExclude>
+	</Compile>
+    <Compile Include="ActionFilter\HandleAntiForgeryErrorAttribute.cs">
+		<SonarQubeExclude>true</SonarQubeExclude>
+	</Compile>
+    <Compile Include="ActionFilter\ValidationWebRequestAttribute.cs">
+		<SonarQubeExclude>true</SonarQubeExclude>
+	</Compile>
+    <Compile Include="ActionFilter\XFrameOptionAttribute.cs">
+		<SonarQubeExclude>true</SonarQubeExclude>
+	</Compile>
     <Compile Include="HtmlExtension\UrlExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResultExtension\ExcelResult.cs" />
-    <Compile Include="RouterConfig\ReadonlySessionRouteHandler.cs" />
-    <Compile Include="RouterConfig\RouteConfig.cs" />
+    <Compile Include="RouterConfig\ReadonlySessionRouteHandler.cs">
+		<SonarQubeExclude>true</SonarQubeExclude>
+	</Compile>
+    <Compile Include="RouterConfig\RouteConfig.cs">
+		<SonarQubeExclude>true</SonarQubeExclude>
+	</Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.Athena.Extension\Fanex.Athena.Extension.csproj">
@@ -191,6 +221,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Fanex.Athena.Web-1.ruleset" />
     <None Include="Fanex.Athena.Web.ruleset" />
     <None Include="packages.config" />
   </ItemGroup>

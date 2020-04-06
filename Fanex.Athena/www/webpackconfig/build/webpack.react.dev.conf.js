@@ -19,18 +19,18 @@ module.exports = merge(baseConfigs,
         plugins: [
             new CleanWebpackPlugin([`${jsRootPath}/`], {
                 root: process.cwd()
-                
+
             }),
 
 
             new CleanWebpackPlugin([`${cssRootPath}/*.css`, `${cssRootPath}/*.map`, `${cssRootPath}/*.js`], {
                 root: process.cwd()
-                
+
             }),
 
             new CleanWebpackPlugin([`${cssRootPath}/pages/*/*.css`, `${cssRootPath}/pages/*/*.js`, `${cssRootPath}/pages/*/*.map`], {
                 root: process.cwd()
-               
+
             })
         ]
     },

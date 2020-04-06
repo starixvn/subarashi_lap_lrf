@@ -11,7 +11,7 @@ namespace Fanex.Athena.Controllers.BetList
     #region Using
 
     using System.Web.Mvc;
-
+    using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Web.ActionFilter;
     using Fanex.Common;
 
@@ -41,7 +41,7 @@ namespace Fanex.Athena.Controllers.BetList
                 : metaModel.BetType;
 
             metaModel.Title = $"(LEAGUENAME) - {CacheRefAdapter.GetBettype(bettype)} - {GetViewInCurrency(metaModel)}";
-            metaModel.ShowingOption = new BetListShowingOption
+            metaModel.ShowingOption = new ShowingOption
             {
                 CustomerCommVisible = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm,
             };
