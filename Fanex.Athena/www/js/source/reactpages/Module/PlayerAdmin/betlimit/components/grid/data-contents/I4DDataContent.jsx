@@ -5,8 +5,8 @@ import I4DSettingGrid from '../sport-settings/I4DSettingGrid';
 
 const Content = createSetting(I4DSettingGrid, new I4DDataHandling());
 
-const NGDataContent = () => {
+const I4DDataContent = () => {
     return <Content />
 }
 
-export default NGDataContent;
+export default I4DDataContent;
