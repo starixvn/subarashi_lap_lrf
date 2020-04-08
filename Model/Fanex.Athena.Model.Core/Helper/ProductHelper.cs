@@ -41,6 +41,7 @@
                 { "VS2194", nameof(ViewResources.VirtualSoccerAsianCup) },
                 { "VS2195", nameof(ViewResources.VirtualSoccerEnglishPremier) },
                 { "VS2196", nameof(ViewResources.VirtualSoccerChampionsCup) },
+                { "VS2197", nameof(ViewResources.VirtualSoccerEuroCup) },
                 { Product.LT, nameof(ViewResources.ProductLT) },
                 { Product.AB, nameof(ViewResources.ProductAB) },
                 { Product.PP, nameof(ViewResources.ProductPP) },

@@ -6955,6 +6955,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Virtual Soccer Euro Cup.
+        /// </summary>
+        public static string VirtualSoccerEuroCup {
+            get {
+                return ResourceManager.GetString("VirtualSoccerEuroCup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Virtual Soccer League.
         /// </summary>
         public static string VirtualSoccerLeague {

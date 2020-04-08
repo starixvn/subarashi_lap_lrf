@@ -2751,4 +2751,7 @@
   <data name="ESportsMobile" xml:space="preserve">
     <value>E-Sports Mobile</value>
   </data>
+  <data name="VirtualSoccerEuroCup" xml:space="preserve">
+    <value>Virtual Soccer Euro Cup</value>
+  </data>
 </root>
