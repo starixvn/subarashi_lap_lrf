@@ -15,6 +15,8 @@ define(['jquery', 'common/site', 'components/pluginhelper/daterangepicker', 'com
         let lotteryIntervalId = 0;
         let virtualGameAjaxRequest = null;
         let virtualGameIntervalId = 0;
+        let tableGameAjaxRequest = null;
+        let tableGameIntervalId = 0;
         const param = {
             FromDate: '',
             ToDate: '',
@@ -150,6 +152,12 @@ define(['jquery', 'common/site', 'components/pluginhelper/daterangepicker', 'com
                         _me.showVirtualGame($(this).data('vendorproductid'));
                     });
                 }
+
+                if ($('#submitTableGame').length) {
+                    $('#submitTableGame').click(function () {
+                        _me.showTableGame($(this).data('vendorproductid'));
+                    });
+                }
             },
 
             submit: function () {
@@ -230,6 +238,28 @@ define(['jquery', 'common/site', 'components/pluginhelper/daterangepicker', 'com
                 virtualGameAjaxRequest = $.ajax(option);
             },
 
+            showTableGame: function (vendorProductId) {
+                const option = {
+                    type: 'GET',
+                    cache: false,
+                    data: { vendorProductId: vendorProductId },
+                    url: Site.resolveClientUrl(KENO_RESULT_API),
+                    success: function (response) {
+                        window.open(response.Url, '_blank', 'left=20,top=20,width=950,height=650,toolbar=1,resizable=1,scrollbars,status=1');
+                        clearTimeout(tableGameIntervalId);
+                        _me.extendTableSession(vendorProductId, response.UserId);
+                    },
+                    beforeSend: function () {
+                        Site.blockUI();
+                    },
+                    complete: function () {
+                        Site.unBlockUI();
+                    }
+                };
+                _me.stopAjaxRequest(tableGameAjaxRequest);
+                tableGameAjaxRequest = $.ajax(option);
+            },
+
             extendKenoSession: function (vendorProductId, userId) {
                 if (!userId)
                 {
@@ -283,6 +313,33 @@ define(['jquery', 'common/site', 'components/pluginhelper/daterangepicker', 'com
                 }
 
                 lotteryIntervalId = setTimeout(callBack, 6000);
+            },
+
+            extendTableSession: function (vendorProductId, userId) {
+                if (!userId) {
+                    return;
+                }
+
+                const callBack = function () {
+                    const option = {
+                        type: 'POST',
+                        cache: false,
+                        data: {
+                            userId: userId,
+                            vendorProductId: vendorProductId
+                        },
+                        url: Site.resolveClientUrl(KENO_RESULT_SESSION_API),
+                        success: function (response) {
+                            if (response === '') {
+                                tableIntervalId = setTimeout(callBack, 6000);
+                            }
+                        }
+                    };
+
+                    tableAjaxRequest = $.ajax(option);
+                }
+
+                tableIntervalId = setTimeout(callBack, 6000);
             },
 
             getData: function () {

@@ -49,8 +49,14 @@
                         @ViewResources.ProductVRG
                     </a>
                 }
+                @if (ViewBag.IsAllowedTG)
+                {
+                    <a href="javascript:;" class="center-align label label-primary" id="submiTableGame" data-vendorProductId="@ResultVendorProductTypes.TableGame">
+                        @ViewResources.ProductTG
+                    </a>
+                }
             </div>
-        </div> 
+        </div>
 
         <div class="row">
             <div class="col l12 m12 s12">
