@@ -5,7 +5,7 @@ import VipSwitcherCell from '../../../../components/VipSwitcherCell';
 
 const PlayerRow = (props) => {
     const { dataItem, index, hasVipManagement } = props;
-    const { custId, externalId, systemId, markDate, isMarkVoid } = dataItem;
+    const { custId, externalId, systemId, markDate, isMarkVoid, reducedMaxPerEvent, reducedMaxPerBet, reason } = dataItem;
     
     const _renderVipSwitcherCell = () => {
         return isMarkVoid ?
@@ -22,6 +22,9 @@ const PlayerRow = (props) => {
         <Row key={`player_row_${custId}`}>
             <Cell className="left-align">{externalId}</Cell>
             <Cell className="left-align">{systemId}</Cell>
+            <Cell className="right-align">{reducedMaxPerEvent}</Cell>
+            <Cell className="right-align">{reducedMaxPerBet}</Cell>
+            <Cell className="left-align">{reason}</Cell>
             <Cell className="center-align">{markDate}</Cell>
             {hasVipManagement && _renderVipSwitcherCell()}
         </Row>

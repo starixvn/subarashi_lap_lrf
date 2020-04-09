@@ -1,5 +1,5 @@
 export default class ParamHelper {
-    static ConvertToFriendlyParams({ selectedParams, username, selectedCurrency, selectedVipOption } ) {
+    static ToAPIParams({ selectedParams, username, selectedCurrency, selectedVipOption } ) {
         return {
             ...selectedParams,
             ...{

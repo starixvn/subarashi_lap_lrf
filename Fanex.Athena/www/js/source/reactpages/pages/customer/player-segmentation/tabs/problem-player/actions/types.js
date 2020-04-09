@@ -1,1 +1,2 @@
 export const SET_IS_GET_ALL = 'SET_IS_GET_ALL';
+export const SET_SELECTED_REASON = 'SET_SELECTED_REASON';

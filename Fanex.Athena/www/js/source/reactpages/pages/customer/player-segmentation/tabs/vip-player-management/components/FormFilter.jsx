@@ -5,6 +5,7 @@ import Select from 'react-select'
 import MultipleSelect from '@9softstudio/react-multiselect'
 import AutoComplete from '@jsroot/components/auto-complete'
 import CollapsiblePanel from '@jsroot/components/collapsible-panel'
+import UserGuide from '@jsroot/components/UserGuide'
 import LangHelper from '@jsroot/lib/langHelper'
 import StringHelper from '@jsroot/lib/stringHelper'
 import Site from '@jsroot/lib/site'
@@ -23,7 +24,7 @@ export class FormFilter extends PureComponent {
 
     _submit = (event) => {
         event.preventDefault();
-        const params = ParamHelper.ConvertToFriendlyParams(this.props);
+        const params = ParamHelper.ToAPIParams(this.props);
         if (!params) {
             return;
         }
@@ -78,16 +79,33 @@ export class FormFilter extends PureComponent {
                 onChange={(_, selectedItemsKey) => this.props.setSelectedCurrency(selectedItemsKey)} />);
     }
 
-    _renderExcelIcon() {
+    showUserGuide = () => {
+        const userGuideContent = this.props.userGuideContent;
+        if (!userGuideContent || userGuideContent.length === 0) {
+            this.props.getUserGuideContent('PlayerSegmentationVIP');
+        }
+    }
+
+    _renderUserGuide() {
+        const userGuideContent = this.props.userGuideContent;
+        return (<UserGuide
+            title={LangHelper.getSingleResource("UserGuide")}
+            contentTitle={`${LangHelper.getSingleResource("PlayerSegmentation")} / ${LangHelper.getSingleResource('VipPlayerManagement')}`}
+            onClick={this.showUserGuide}
+            content={userGuideContent} />)
+    }
+
+    _renderStickyFooter() {
         return (<div>
             <i className="icon-excel right" onClick={this.exportExcel} title={LangHelper.getSingleResource("ExportToExcel")}></i>
+            {this._renderUserGuide()}
         </div>);
     }
 
     render() {
         const isDisabledSubmit = StringHelper.isEmptyOrWhiteSpace(this.props.selectedCurrency);
         return (
-            <CollapsiblePanel className="page-filter" stickyFooter={this._renderExcelIcon()}>
+            <CollapsiblePanel className="page-filter" stickyFooter={this._renderStickyFooter()}>
                 <div className="row">
                     <div className="col-12 col-md-4 col-sm-3 col-lg-4 col-xl-2">
                         <div className="form-group">
@@ -124,7 +142,7 @@ export class FormFilter extends PureComponent {
 }
 
 function mapDispatchToProps(dispatch) {
-    const { setDateRange, setSelectedVipOption, setUsername, setSelectedCurrency, setSelectedParams, searchPlayer, setPagingOption } = ActionCreators;
+    const { setDateRange, setSelectedVipOption, setUsername, setSelectedCurrency, setSelectedParams, searchPlayer, setPagingOption, getUserGuideContent } = ActionCreators;
     return bindActionCreators(Object.assign({}, {
         setSelectedVipOption,
         setDateRange,
@@ -132,12 +150,13 @@ function mapDispatchToProps(dispatch) {
         setSelectedCurrency,
         setSelectedParams,
         searchPlayer,
-        setPagingOption
+        setPagingOption,
+        getUserGuideContent
     }), dispatch);
 }
 
 function mapStateToProps(state) {
-    const { dateRange, selectedVipOption, selectedCurrency, selectedParams, username, pagingOption, selectedTabKey } = state;
+    const { dateRange, selectedVipOption, selectedCurrency, selectedParams, username, pagingOption, selectedTabKey, userGuideContent } = state;
     return Object.assign({}, {
         selectedVipOption,
         dateRange,
@@ -145,7 +164,8 @@ function mapStateToProps(state) {
         username,
         selectedParams,
         pagingOption,
-        selectedTabKey
+        selectedTabKey,
+        userGuideContent
     });
 };
 
