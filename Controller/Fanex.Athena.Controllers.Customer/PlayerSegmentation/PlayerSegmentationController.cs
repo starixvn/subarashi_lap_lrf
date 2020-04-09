@@ -35,6 +35,7 @@
         public ViewResult Index()
         {
             var currencyList = SessionServiceInstance.UserSession.CurrencyList;
+            var baseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency;
             var hasVIPManangementPermission = HasVIPManagementPermission();
             var model = new PlayerSegmentationViewModel
             {
@@ -43,12 +44,14 @@
                 ProblemPlayerVM = new ProblemPlayerViewModel
                 {
                     CurrencyList = currencyList,
+                    ReasonList = GetReasonList()
                 },
                 VipPlayerVM = hasVIPManangementPermission ? new VipPlayerViewModel
                 {
                     CurrencyList = currencyList,
                     VipOptions = GetVipOptions()
-                } : null
+                } : null,
+                BaseCurrency = baseCurrency
             };
 
             return View("~/Views/Desktop/Customer/PlayerSegmentation/Main.cshtml", model);
@@ -84,6 +87,18 @@
                 { 0, ViewResources.All },
                 { 1, ViewResources.Yes },
                 { 2, ViewResources.No },
+            };
+        }
+
+        private static IDictionary<int, string> GetReasonList()
+        {
+            return new Dictionary<int, string>
+            {
+                { 0, "reason1" },
+                { 1, "reason2" },
+                { 2, "reason3" },
+                { 3, "reason2" },
+                { 4, "reason3" },
             };
         }
     }

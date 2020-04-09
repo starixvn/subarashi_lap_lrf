@@ -35,6 +35,22 @@
 
         public bool IsGetAll { get; set; }
 
+        private string _baseCurrency;
+        public string BaseCurrency
+        {
+            get
+            {
+                return _baseCurrency ?? string.Empty;
+            }
+
+            set
+            {
+                _baseCurrency = value == null
+                    ? string.Empty
+                    : value.ToLowerInvariant();
+            }
+        }
+
         public override bool IsValid => IsGetAll || FromDate <= ToDate;
     }
 }

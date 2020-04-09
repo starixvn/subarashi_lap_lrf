@@ -26,5 +26,7 @@
         public DateTime MinDate { get; set; }
 
         public IDictionary<int, string> CurrencyList { get; set; }
+
+        public IDictionary<int, string> ReasonList { get; set; }
     }
 }

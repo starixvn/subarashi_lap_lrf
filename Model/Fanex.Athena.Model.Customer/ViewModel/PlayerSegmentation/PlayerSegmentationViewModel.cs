@@ -13,5 +13,6 @@ namespace Fanex.Athena.Model.Customer.ViewModel
         public bool HasVIPManagementPermission { get; set; }
         public ProblemPlayerViewModel ProblemPlayerVM { get; set; }
         public VipPlayerViewModel VipPlayerVM { get; set; }
+        public string BaseCurrency { get; set; }
     }
 }

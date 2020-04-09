@@ -24,7 +24,7 @@
                 var playerList = await ReadPlayerList(db, (reader, player) =>
                 {
                     var date = Convert.ToDateTime(reader["CreatedDate"]);
-                    player.MarkDate = date.ToString(FormatKey.DateTimeFormat);
+                    player.MarkDate = date.ToString(FormatKey.DateTimeFormatIn24H);
                 });
                 var total = ReadTotal(db);
 

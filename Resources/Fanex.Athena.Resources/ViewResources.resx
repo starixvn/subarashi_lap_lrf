@@ -2756,8 +2756,23 @@
   </data>
   <data name="ProductTG" xml:space="preserve">
     <value>Table Game</value>
+  </data>  <data name="PlayerSegmentation" xml:space="preserve">
+    <value>Player Segmentation</value>
+    <comment>#128082</comment>
   </data>
   <data name="MaxBetPerMatch" xml:space="preserve">
     <value>Max Bet Per Match</value>
+  </data>
+  <data name="Reason" xml:space="preserve">
+    <value>Reason</value>
+    <comment>#131929</comment>
+  </data>
+  <data name="ReducedMaxPerBet" xml:space="preserve">
+    <value>Reduced Max Per Bet</value>
+    <comment>#131929</comment>
+  </data>
+  <data name="ReducedMaxPerEvent" xml:space="preserve">
+    <value>Reduced Max Per Event</value>
+    <comment>#131929</comment>
   </data>
 </root>

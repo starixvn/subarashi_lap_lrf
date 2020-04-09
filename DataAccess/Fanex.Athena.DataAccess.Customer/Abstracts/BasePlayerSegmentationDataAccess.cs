@@ -14,7 +14,7 @@ namespace Fanex.Athena.DataAccess.Customer
     {
         protected async Task<IEnumerable<PlayerInfo>> ReadPlayerList(IObjectDb db, Action<IDataReader, PlayerInfo> readPlayerExtraData = null)
         {
-            var playerList = new List<PlayerInfo>();
+            var playerList = new LinkedList<PlayerInfo>();
             using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
             {
                 while (reader.Read())
@@ -22,7 +22,7 @@ namespace Fanex.Athena.DataAccess.Customer
                     var player = new PlayerInfo();
                     ReadPlayer(reader, player);
                     readPlayerExtraData?.Invoke(reader, player);
-                    playerList.Add(player);
+                    playerList.AddLast(player);
                 }
             }
             return playerList;

@@ -16,6 +16,8 @@ namespace Fanex.Athena.Model.Core.DataDomain
 
         public const string DateTimeFormat = "MM/dd/yyyy hh:mm:ss tt";
 
+        public const string DateTimeFormatIn24H = "MM/dd/yyyy HH:mm:ss";
+
         public const string DecimalFormat = "#,##0.00";
 
         public const string IntegerFormat = "#,##0";
