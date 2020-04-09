@@ -8,6 +8,7 @@ import { tabKeys } from '../../lib/constants';
 const initialState = {
   ...window.initialState[tabKeys.vipPlayerManagement],
   ...{
+    userGuideContent: '',
     pagingOption: {
       PageIndex: 1,
       PageSize: 500,
