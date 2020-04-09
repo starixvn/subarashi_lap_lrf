@@ -331,7 +331,7 @@ define(['jquery', 'common/site', 'components/pluginhelper/daterangepicker', 'com
                         url: Site.resolveClientUrl(KENO_RESULT_SESSION_API),
                         success: function (response) {
                             if (response === '') {
-                                tableIntervalId = setTimeout(callBack, 6000);
+                                tableGameIntervalId = setTimeout(callBack, 6000);
                             }
                         }
                     };
@@ -339,7 +339,7 @@ define(['jquery', 'common/site', 'components/pluginhelper/daterangepicker', 'com
                     tableAjaxRequest = $.ajax(option);
                 }
 
-                tableIntervalId = setTimeout(callBack, 6000);
+                tableGameIntervalId = setTimeout(callBack, 6000);
             },
 
             getData: function () {
