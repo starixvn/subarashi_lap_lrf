@@ -336,7 +336,7 @@ define(['jquery', 'common/site', 'components/pluginhelper/daterangepicker', 'com
                         }
                     };
 
-                    tableAjaxRequest = $.ajax(option);
+                    tableGameAjaxRequest = $.ajax(option);
                 }
 
                 tableGameIntervalId = setTimeout(callBack, 6000);
