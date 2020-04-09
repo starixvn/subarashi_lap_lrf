@@ -19,6 +19,7 @@ namespace Fanex.Athena.Controllers
     using ONEbook.UM.Filters;
 
     using System.Collections.Generic;
+    using System.Globalization;
     using System.IO;
     using System.Linq;
     using System.Text.RegularExpressions;
@@ -36,6 +37,12 @@ namespace Fanex.Athena.Controllers
         private static readonly int[] CasinoProducts = new[]
         {
             ProductTypes.AllBet, ProductTypes.RngCasino, ProductTypes.Voidbridge
+        };
+
+        private static readonly IReadOnlyDictionary<string, bool> ListResourceNoBindData = new Dictionary<string, bool>
+        {
+            { "PlayerSegmentationProblem".ToLowerInvariant(), true },
+            { "PlayerSegmentationVIP".ToLowerInvariant(), true },
         };
 
         private readonly IProductService _productService;
@@ -58,11 +65,14 @@ namespace Fanex.Athena.Controllers
         public ActionResult Index(string resourceName)
         {
             var content = GetFileContent(resourceName);
-            var products = _productService.GetProductList(SessionServiceInstance.LicenseeSession.LicenseeId, SessionServiceInstance.UserSession.Language);
-
             content = content.Replace("{rooturl}", Url.Content("~"));
-            content = AddSpecialProducts(content, products);
-            content = AddBalanceUpDate(content);
+
+            if (NeedBindData(resourceName))
+            {
+                var products = _productService.GetProductList(SessionServiceInstance.LicenseeSession.LicenseeId, SessionServiceInstance.UserSession.Language);
+                content = AddSpecialProducts(content, products);
+                content = AddBalanceUpDate(content);
+            }
 
             return View("~/Views/UserGuide/Index.cshtml", null, content);
         }
@@ -85,6 +95,11 @@ namespace Fanex.Athena.Controllers
             var fileName = $"Cash Out WL Report guideline_{suffix}.pdf";
             var filePath = Server.MapPath(string.Format(@"~/App_Data/UserGuide/CashOutWL/pdf/{0}", fileName));
             return File(filePath, System.Net.Mime.MediaTypeNames.Application.Pdf, Path.GetFileName(filePath));
+        }
+
+        private static bool NeedBindData(string resourceName)
+        {
+            return !ListResourceNoBindData.ContainsKey(resourceName.ToLowerInvariant());
         }
 
         private static string AddCasinoProducts(string content, IEnumerable<Product> products)

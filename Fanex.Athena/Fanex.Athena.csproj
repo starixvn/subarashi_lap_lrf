@@ -301,6 +301,12 @@
     <Content Include="App_Data\UserGuide\LicenseeWLByTimeZone\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\LicenseeWLByTimeZone\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\LicenseeWLByTimeZone\en-US.htm" />
+    <Content Include="App_Data\UserGuide\PlayerSegmentationProblem\en-US.htm" />
+    <Content Include="App_Data\UserGuide\PlayerSegmentationProblem\zh-CN.htm" />
+    <Content Include="App_Data\UserGuide\PlayerSegmentationProblem\zh-TW.htm" />
+    <Content Include="App_Data\UserGuide\PlayerSegmentationVIP\en-US.htm" />
+    <Content Include="App_Data\UserGuide\PlayerSegmentationVIP\zh-CN.htm" />
+    <Content Include="App_Data\UserGuide\PlayerSegmentationVIP\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\WeeklyLiveMatches\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\WeeklyLiveMatches\zh-TW.htm" />
     <Content Include="Content\Account\AccountManagement.css" />
@@ -1863,7 +1869,6 @@
     <Content Include="www\js\source\common\languages\ViewResources.zh-TW.js">
       <DependentUpon>ViewResources.tt</DependentUpon>
     </Content>
-    <Content Include="www\js\source\common\languages\ViewResources1.txt" />
     <Content Include="www\js\source\common\popup.js" />
     <Content Include="www\js\source\common\querystring.js" />
     <Content Include="www\js\source\reactpages\lib\QueryString.js" />
