@@ -70,7 +70,7 @@ namespace Fanex.Athena.DataAccess.Report
             db.SetParameterValue("BaseCurrency", metaModel.BaseCurrency);
             db.SetParameterValue("AgentList", metaModel.AgentListXml);
             db.SetParameterValue("ShowBA", metaModel.ProductOptions.FirstOrDefault(_=>_.Name == "BA").Status);
-            db.SetParameterValue("ProductList", string.Join(",", metaModel.ProductOptions.Where(_ => _.Status).Select(_ => _.Name)));
+            db.SetParameterValue("ProductList", string.Join(",", metaModel.ProductOptions.Where(_ => _.Status).Select(_ => _.Code)));
         }
 
         private static CustPendingFunds ReadData(IDataReader reader, int index)
