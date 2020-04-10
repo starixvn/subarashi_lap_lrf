@@ -1,4 +1,4 @@
-﻿// Generated at: 4/3/2020 4:15:22 PM
+﻿// Generated at: 4/10/2020 1:29:16 PM
 var _language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -766,6 +766,7 @@ VirtualSoccer:"Virtual Soccer",
 VirtualSoccerAsianCup:"Virtual Soccer Asian Cup",
 VirtualSoccerChampionsCup:"Virtual Soccer Champions Cup",
 VirtualSoccerEnglishPremier:"Virtual Soccer English Premier",
+VirtualSoccerEuroCup:"Virtual Soccer Euro Cup",
 VirtualSoccerLeague:"Virtual Soccer League",
 VirtualSoccerNation:"Virtual Soccer Nation",
 VirtualSoccerWorldCup:"Virtual Soccer World Cup",

@@ -791,7 +791,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             else if (newSportId === 162) {
                 productOptions.push('LC');
             }
-            else if (newSportId === 104 || (newSportId >= 190 && newSportId <= 196)) {
+            else if (newSportId === 104 || (newSportId >= 190 && newSportId <= 197)) {
                 productOptions.push('VS2');
             }
             else {
