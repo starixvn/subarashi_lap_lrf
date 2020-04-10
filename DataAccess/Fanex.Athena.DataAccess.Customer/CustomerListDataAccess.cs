@@ -9,6 +9,7 @@
     using Fanex.Athena.DataAccess.Core;
     using Fanex.Athena.DataAccess.Customer.Interfaces;
     using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Model.Customer.DTO;
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Common;
@@ -198,8 +199,8 @@
                         BAStatus = reader.ToBool("BAStatus"),
                         SpecialLevel = reader.ToInt("SpecialLevel"),
                         IsPowerBAUserTurnoff = reader.ToBool("IsPowerBAUserTurnoff"),
-                        AvailableFunds = reader.ToDecimal("TotalBalance"),
-                        PendingFunds = reader.ToDecimal("OutStanding"),
+                        AvailableFunds = MathHelper.RoundDownDecimal(reader.ToDecimal("TotalBalance"), 2),
+                        PendingFunds = MathHelper.RoundDownDecimal(reader.ToDecimal("OutStanding"), 2),
                         GroupCommId = reader.ToInt("GroupCommId"),
                         GroupColor = reader.ToString("GroupColor"),
                         Group = reader.ToString("GroupName"),
@@ -211,7 +212,7 @@
 
                     var unclosedStatus = customer.IsSuspended ? ViewResources.Suspended : ViewResources.Open;
                     customer.Status = customer.IsClosed ? ViewResources.Closed : unclosedStatus;
- 
+
                     dataList.Add(customer);
                 }
             }

@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Fanex.Athena.DataAccess.Core;
 using Fanex.Athena.DataAccess.Customer.Interfaces;
+using Fanex.Athena.Model.Core.Helper;
 using Fanex.Athena.Model.Core.ResultModel;
 using Fanex.Athena.Model.Customer.DTO;
 using Fanex.Athena.Model.Customer.MetaModel;
@@ -51,7 +52,7 @@ namespace Fanex.Athena.DataAccess.Customer
                         CustId = reader.ToInt("custid"),
                         SystemId = reader.ToString("username"),
                         ExternalId = reader.ToString("nickname"),
-                        Balance = reader.ToDecimal("Balance"),
+                        Balance = MathHelper.RoundDownDecimal(reader.ToDecimal("Balance"), 2),
                         ArchivedDate = reader.ToDateTime("ArchivedDate")
                     });
                 }

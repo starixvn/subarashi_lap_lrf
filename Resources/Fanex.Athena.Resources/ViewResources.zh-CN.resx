@@ -2034,7 +2034,7 @@
     <comment>112658</comment>
   </data>
   <data name="AlertSetOddsGroupForCustomerMsg" xml:space="preserve">
-    <value>确定将此玩家移至odds group {0}?</value>
+    <value>您确定要将此玩家移至水位组别{0}吗？</value>
     <comment>112658</comment>
   </data>
   <data name="BankAccountNumber" xml:space="preserve">
@@ -2368,5 +2368,8 @@
   </data>
   <data name="ESportsMobile" xml:space="preserve">
     <value>电子竞技 手机</value>
+  </data>
+  <data name="OddsGroup" xml:space="preserve">
+    <value>水位组别</value>
   </data>
 </root>

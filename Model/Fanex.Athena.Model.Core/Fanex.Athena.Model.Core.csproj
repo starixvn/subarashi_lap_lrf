@@ -134,6 +134,7 @@
     <Compile Include="DTO\Users\User.cs" />
     <Compile Include="DTO\Users\UserRole.cs" />
     <Compile Include="Helper\BettypeHelper.cs" />
+    <Compile Include="Helper\MathHelper.cs" />
     <Compile Include="Helper\MetaModelValidationHelper.cs" />
     <Compile Include="Helper\ProductHelper.cs" />
     <Compile Include="MetaModel\Common\SPLogMetaModel.cs" />

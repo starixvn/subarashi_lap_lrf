@@ -10,6 +10,7 @@ namespace Fanex.Athena.Excel.Customer
     using System.Linq;
     using Base;
     using Fanex.Athena.Excel.Base.Extension;
+    using Fanex.Athena.Model.Core.Helper;
     using Model.Customer.DTO;
     using NPOI.SS.UserModel;
     using Resources;
@@ -59,10 +60,9 @@ namespace Fanex.Athena.Excel.Customer
             foreach (var item in _dataList)
             {
                 var row = sheet.CopyRow(TemplateSheet, RowContentTemplate, rowIndex++);
-
                 row.Cells[ExternalIDColumn].SetCellValue(item.ExternalId);
                 row.Cells[SystemIDColumn].SetCellValue(item.SystemId);
-                row.Cells[BalanceColumn].SetCellValue(item.Balance.ToString("#,##0.00"));
+                row.Cells[BalanceColumn].SetCellValue(MathHelper.RoundDownDecimal(item.Balance, 2).ToString("#,##0.00"));
                 row.Cells[ArchivedDateColumn].SetCellValue(item.ArchivedDate.ToString("MM/dd/yyyy"));
             }
         }

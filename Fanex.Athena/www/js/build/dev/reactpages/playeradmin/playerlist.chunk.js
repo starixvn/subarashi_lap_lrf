@@ -2811,9 +2811,9 @@ const PlayerRow = props => {
     className: "center-align"
   }, Currency), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].CurrentBalance] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
     className: "right-align"
-  }, canShowMainColumn && _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_6__["default"].formatDecimal(CurrentBalance)), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].OutstandingBalance] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
+  }, canShowMainColumn && _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_6__["default"].roundDownFormatDecimal(CurrentBalance)), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].OutstandingBalance] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
     className: "right-align"
-  }, canShowMainColumn && _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_6__["default"].formatDecimal(OutstandingBalance)), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].OddsGroup] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
+  }, canShowMainColumn && _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_6__["default"].roundDownFormatDecimal(OutstandingBalance)), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].OddsGroup] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
     className: "center-align"
   }, canShowMainColumn && OddsGroup !== undefined && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_OddsGroupCell__WEBPACK_IMPORTED_MODULE_8__["default"], {
     dataItem: dataItem
@@ -4347,9 +4347,11 @@ const isUnauthorizedResponse = errorInfo => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ReportExcel; });
 /* harmony import */ var _jsroot_lib_excel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/excel */ "./www/js/source/reactpages/lib/excel.js");
-/* harmony import */ var _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/constants/excelStyle */ "./www/js/source/reactpages/constants/excelStyle.js");
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
-/* harmony import */ var _helpers_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./helpers/utils */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/utils.js");
+/* harmony import */ var _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/numberFormat */ "./www/js/source/reactpages/lib/numberFormat.js");
+/* harmony import */ var _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/constants/excelStyle */ "./www/js/source/reactpages/constants/excelStyle.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
+/* harmony import */ var _helpers_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./helpers/utils */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/utils.js");
+
 
 
 
@@ -4358,11 +4360,11 @@ const HEADER_ROW_INDEX = 0;
 const DATA_ROW_INDEX = 1;
 const MAIN_SECTION_STYLE = 'mainSectionStyle';
 const displayedTextByField = {
-  [_constants__WEBPACK_IMPORTED_MODULE_2__["fields"].SpecialLevel]: value => Object(_helpers_utils__WEBPACK_IMPORTED_MODULE_3__["getSpecialLevelText"])(value),
-  [_constants__WEBPACK_IMPORTED_MODULE_2__["fields"].BaStatus]: value => Object(_helpers_utils__WEBPACK_IMPORTED_MODULE_3__["getBaStatusText"])(value),
-  [_constants__WEBPACK_IMPORTED_MODULE_2__["fields"].Status]: value => Object(_helpers_utils__WEBPACK_IMPORTED_MODULE_3__["getPlayerStatus"])(value)
+  [_constants__WEBPACK_IMPORTED_MODULE_3__["fields"].SpecialLevel]: value => Object(_helpers_utils__WEBPACK_IMPORTED_MODULE_4__["getSpecialLevelText"])(value),
+  [_constants__WEBPACK_IMPORTED_MODULE_3__["fields"].BaStatus]: value => Object(_helpers_utils__WEBPACK_IMPORTED_MODULE_4__["getBaStatusText"])(value),
+  [_constants__WEBPACK_IMPORTED_MODULE_3__["fields"].Status]: value => Object(_helpers_utils__WEBPACK_IMPORTED_MODULE_4__["getPlayerStatus"])(value)
 };
-const fieldListWithEmptyValueByStatus = [_constants__WEBPACK_IMPORTED_MODULE_2__["fields"].CurrentBalance, _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].OutstandingBalance, _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].OddsGroup, _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].BaStatus, _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].SpecialLevel];
+const fieldListWithEmptyValueByStatus = [_constants__WEBPACK_IMPORTED_MODULE_3__["fields"].CurrentBalance, _constants__WEBPACK_IMPORTED_MODULE_3__["fields"].OutstandingBalance, _constants__WEBPACK_IMPORTED_MODULE_3__["fields"].OddsGroup, _constants__WEBPACK_IMPORTED_MODULE_3__["fields"].BaStatus, _constants__WEBPACK_IMPORTED_MODULE_3__["fields"].SpecialLevel];
 class ReportExcel {
   constructor(data, displayedColumn, title) {
     this.data = data;
@@ -4397,8 +4399,8 @@ class ReportExcel {
       });
       this.worksheet[address] = {
         t: "s",
-        v: _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"][field] || '',
-        s: _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["headerCellStyle"]
+        v: _constants__WEBPACK_IMPORTED_MODULE_3__["headerText"][field] || '',
+        s: _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["headerCellStyle"]
       };
     }
   }
@@ -4433,7 +4435,12 @@ class ReportExcel {
       };
     }
 
-    const value = item[columnConfig.field];
+    let value = item[columnConfig.field];
+
+    if (columnConfig.field === _constants__WEBPACK_IMPORTED_MODULE_3__["fields"].CurrentBalance || columnConfig.field === _constants__WEBPACK_IMPORTED_MODULE_3__["fields"].OutstandingBalance) {
+      value = _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_1__["default"].roundDown(value, 2);
+    }
+
     const displayedTextFunc = displayedTextByField[columnConfig.field];
     const displayedValue = this._shouldSetEmpty(value) ? '' : displayedTextFunc ? displayedTextFunc(value) : value;
     return {
@@ -4464,52 +4471,52 @@ class ReportExcel {
 
   _getcolumnConfigs() {
     return [{
-      field: _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].Status,
-      [MAIN_SECTION_STYLE]: _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["bodyCellStyle"].left,
+      field: _constants__WEBPACK_IMPORTED_MODULE_3__["fields"].Status,
+      [MAIN_SECTION_STYLE]: _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].left,
       width: 60
     }, {
-      field: _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].UserName,
-      [MAIN_SECTION_STYLE]: _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["bodyCellStyle"].left,
+      field: _constants__WEBPACK_IMPORTED_MODULE_3__["fields"].UserName,
+      [MAIN_SECTION_STYLE]: _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].left,
       width: 200
     }, {
-      field: _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].SystemId,
-      [MAIN_SECTION_STYLE]: _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["bodyCellStyle"].left,
+      field: _constants__WEBPACK_IMPORTED_MODULE_3__["fields"].SystemId,
+      [MAIN_SECTION_STYLE]: _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].left,
       width: 200
     }, {
-      field: _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].RealName,
-      [MAIN_SECTION_STYLE]: _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["bodyCellStyle"].left,
+      field: _constants__WEBPACK_IMPORTED_MODULE_3__["fields"].RealName,
+      [MAIN_SECTION_STYLE]: _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].left,
       width: 150
     }, {
-      field: _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].Currency,
-      [MAIN_SECTION_STYLE]: _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["bodyCellStyle"].center,
+      field: _constants__WEBPACK_IMPORTED_MODULE_3__["fields"].Currency,
+      [MAIN_SECTION_STYLE]: _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].center,
       width: 80
     }, {
-      field: _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].CurrentBalance,
-      [MAIN_SECTION_STYLE]: _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["bodyCellStyle"].decimal,
+      field: _constants__WEBPACK_IMPORTED_MODULE_3__["fields"].CurrentBalance,
+      [MAIN_SECTION_STYLE]: _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].decimal,
       width: 130
     }, {
-      field: _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].OutstandingBalance,
-      [MAIN_SECTION_STYLE]: _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["bodyCellStyle"].decimal,
+      field: _constants__WEBPACK_IMPORTED_MODULE_3__["fields"].OutstandingBalance,
+      [MAIN_SECTION_STYLE]: _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].decimal,
       width: 130
     }, {
-      field: _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].OddsGroup,
-      [MAIN_SECTION_STYLE]: _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["bodyCellStyle"].center,
+      field: _constants__WEBPACK_IMPORTED_MODULE_3__["fields"].OddsGroup,
+      [MAIN_SECTION_STYLE]: _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].center,
       width: 70
     }, {
-      field: _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].BaStatus,
-      [MAIN_SECTION_STYLE]: _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["bodyCellStyle"].center,
+      field: _constants__WEBPACK_IMPORTED_MODULE_3__["fields"].BaStatus,
+      [MAIN_SECTION_STYLE]: _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].center,
       width: 70
     }, {
-      field: _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].SpecialLevel,
-      [MAIN_SECTION_STYLE]: _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["bodyCellStyle"].center,
+      field: _constants__WEBPACK_IMPORTED_MODULE_3__["fields"].SpecialLevel,
+      [MAIN_SECTION_STYLE]: _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].center,
       width: 70
     }, {
-      field: _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].LastTransaction,
-      [MAIN_SECTION_STYLE]: _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["bodyCellStyle"].left,
+      field: _constants__WEBPACK_IMPORTED_MODULE_3__["fields"].LastTransaction,
+      [MAIN_SECTION_STYLE]: _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].left,
       width: 150
     }, {
-      field: _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].Email,
-      [MAIN_SECTION_STYLE]: _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["bodyCellStyle"].left,
+      field: _constants__WEBPACK_IMPORTED_MODULE_3__["fields"].Email,
+      [MAIN_SECTION_STYLE]: _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].left,
       width: 200
     }].filter(x => !!this.displayedColumn[x.field]);
   }
@@ -7789,6 +7796,26 @@ class NumberFormat {
 
   static parseToString(number) {
     return number.toString().replace(/(\d)(?=(\d{3})+(\.|$))/g, "$1,");
+  }
+
+  static roundDownFormatDecimal(value) {
+    return this.roundDownFormat(value, 2);
+  }
+
+  static roundDownFormat(value, digits = 0) {
+    if (typeof value !== "number" || isNaN(value)) {
+      return "";
+    }
+
+    const roundedValue = this.roundDown(value, digits);
+    return roundedValue.toFixed(digits).replace(/(\d)(?=(\d{3})+(\.|$))/g, "$1,");
+  }
+
+  static roundDown(value, digits) {
+    const sign = value < 0 ? -1 : 1;
+    const absoluteValue = Math.abs(value);
+    const rounded = Number(Math.floor(absoluteValue + 'e' + digits) + 'e-' + digits);
+    return sign * rounded;
   }
 
 }

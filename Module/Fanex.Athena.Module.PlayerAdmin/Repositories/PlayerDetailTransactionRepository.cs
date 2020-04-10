@@ -6,15 +6,18 @@
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
     using Fanex.Athena.Module.PlayerAdmin.Repositories.Interfaces;
     using Fanex.Athena.Module.PlayerAdmin.ViewModels;
+    using Fanex.Athena.VendorAdapter.Interfaces;
     using Fanex.Common;
 
     public class PlayerDetailTransactionRepository : IPlayerDetailTransactionRepository
     {
         private readonly IDbFactory dbFactory;
+        private readonly ICacheRefAdapter cacheRefAdapter;
 
-        public PlayerDetailTransactionRepository(IDbFactory dbFactory)
+        public PlayerDetailTransactionRepository(IDbFactory dbFactory, ICacheRefAdapter cacheRefAdapter)
         {
             this.dbFactory = dbFactory;
+            this.cacheRefAdapter = cacheRefAdapter;
         }
 
         public async Task<PlayerDetailTransactionReportViewModel> GetDetailTransactions(PlayerDetailTransactionsMetaModel criteria)
@@ -30,15 +33,18 @@
                 {
                     while (reader.Read())
                     {
-                        transactions.Add(new PlayerDetailTransactionViewModel
+                        var trans = new PlayerDetailTransactionViewModel
                         {
                             TransactionId = Converter.ToString2(reader["transid"]),
-                            TransactionType = Converter.ToString2(reader["transtype"]),
+                            BetType = Converter.ToInt(reader["bettype"]),
                             TransactionTime = Converter.ToDateTime(reader["transtime"]),
                             Remark = Converter.ToString2(reader["transremark"]),
                             BalanceChange = Converter.ToDecimal(reader["changedAmt"]),
                             AfterBalance = Converter.ToDecimal(reader["totalAmt"])
-                        });
+                        };
+
+                        trans.TransactionType = cacheRefAdapter.GetBettype(trans.BetType);
+                        transactions.Add(trans);
                     }
                 }
 

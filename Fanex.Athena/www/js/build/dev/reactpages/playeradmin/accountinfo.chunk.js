@@ -21272,6 +21272,10 @@ var ChartComponent = function (_React$Component) {
   };
 
   ChartComponent.prototype.destroyChart = function destroyChart() {
+    if (!this.chartInstance) {
+      return;
+    }
+
     // Put all of the datasets that have existed in the chart back on the chart
     // so that the metadata associated with this chart get destroyed.
     // This allows the datasets to be used in another chart. This can happen,
@@ -23408,6 +23412,26 @@ class NumberFormat {
 
   static parseToString(number) {
     return number.toString().replace(/(\d)(?=(\d{3})+(\.|$))/g, "$1,");
+  }
+
+  static roundDownFormatDecimal(value) {
+    return this.roundDownFormat(value, 2);
+  }
+
+  static roundDownFormat(value, digits = 0) {
+    if (typeof value !== "number" || isNaN(value)) {
+      return "";
+    }
+
+    const roundedValue = this.roundDown(value, digits);
+    return roundedValue.toFixed(digits).replace(/(\d)(?=(\d{3})+(\.|$))/g, "$1,");
+  }
+
+  static roundDown(value, digits) {
+    const sign = value < 0 ? -1 : 1;
+    const absoluteValue = Math.abs(value);
+    const rounded = Number(Math.floor(absoluteValue + 'e' + digits) + 'e-' + digits);
+    return sign * rounded;
   }
 
 }
