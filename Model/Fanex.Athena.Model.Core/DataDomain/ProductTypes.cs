@@ -47,5 +47,7 @@ namespace Fanex.Athena.Model.Core.DataDomain
         public const int Exchange = 31;
 
         public const int PP = 32;
+
+        public const int TG = 40;
     }
 }
