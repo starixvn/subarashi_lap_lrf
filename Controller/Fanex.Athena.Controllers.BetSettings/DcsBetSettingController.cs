@@ -44,19 +44,20 @@ namespace Fanex.Athena.Controllers.BetSettings
         private static readonly IEnumerable<int> ProductsHasStatus = new[]
         {
              ProductTypes.AllBet, ProductTypes.Voidbridge, ProductTypes.FishingWorld,
-             ProductTypes.Lottery, ProductTypes.Exchange, ProductTypes.PP
+             ProductTypes.Lottery, ProductTypes.Exchange, ProductTypes.TG
         };
 
         private static readonly IEnumerable<int> ProductsHasBetLimit = new[]
         {
-             ProductTypes.VirtualSports, ProductTypes.VirtualSports2, ProductTypes.Lottery
+             ProductTypes.VirtualSports, ProductTypes.VirtualSports2, ProductTypes.Lottery, ProductTypes.TG
         };
 
         private static readonly IDictionary<int, string[]> ProductSportList = new Dictionary<int, string[]>
         {
             [ProductTypes.VirtualSports] = new[] { "180", "181", "182", "183", "184", "185", "186" },
             [ProductTypes.VirtualSports2] = new[] { "190", "191", "192", "193", "199" },
-            [ProductTypes.Lottery] = new[] { "220" }
+            [ProductTypes.Lottery] = new[] { "220" },
+            [ProductTypes.TG] = new[] { "222" }
         };
 
         private readonly IDcsBetSettingService _betSettingService;

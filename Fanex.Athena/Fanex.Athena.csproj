@@ -723,6 +723,7 @@
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\VipPlayerList.xls" />
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\ProblemPlayerNoneVIPList.xls" />
     <Content Include="www\css\build\dev\reactpages\playeradmin\detailtransaction.css.map" />
+    <Content Include="Views\Desktop\Customer\BetSetting\TG.cshtml" />
     <None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
     <None Include="www\css\source\pages\betlist\result\result.happy5.scss" />
     <None Include="www\css\source\reactpages\components\alert\icons\error.scss" />
