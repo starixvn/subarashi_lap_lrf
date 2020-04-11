@@ -18,8 +18,7 @@ define([], function () {
         FishingWorld: 24,
         Cashout: 25,
         VirtualSports2: 27,
-        Lottery: 28,
-        TableGames: 40
+        Lottery: 28
     };
 
     const _me = {
