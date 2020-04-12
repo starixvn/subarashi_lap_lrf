@@ -10,6 +10,10 @@ export const BetLimitProduct = {
     I4D: 43
 }
 
+export const BetLimitSport = {
+    I4D: 223
+}
+
 export const BetLimitType = {
     MinBet: 'MinBet',
     MaxBet: 'MaxBet',
