@@ -12,6 +12,9 @@ namespace Fanex.Athena.Extension.Utility
 
     public static class Util
     {
+        public const string EnUSLangName = "en-US";
+        public const string SimplifiedChineseLangName = "zh-CN";
+
         public static IDictionary<string, string> SupportedLanguages
         {
             get

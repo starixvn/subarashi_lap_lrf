@@ -1,5 +1,7 @@
 ﻿namespace Fanex.Athena.Controllers.Customer
 {
+    using Fanex.Athena.DataAccess.Customer.Interfaces;
+    using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Customer.ViewModel;
     using Fanex.Athena.Resources;
@@ -8,6 +10,7 @@
     using ONEbook.UM.Filters;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
     using System.Web.Mvc;
     using System.Web.SessionState;
 
@@ -16,6 +19,8 @@
     [FunctionAuthorization(PermissionKeys.PlayerSegmentation)]
     public class PlayerSegmentationController : CultureBaseController
     {
+        private static object lockObject = new object();
+
         private static readonly string VIP_LIST_TEMPLATE_PATH = "~/App_Data/Template/Customers/PlayerSegmentation/VipPlayerUploadTemplate.xls";
 
         private static readonly IDictionary<string, string> _tabKeys = new Dictionary<string, string>
@@ -24,19 +29,29 @@
             { PermissionKeys.PlayerVIPManagement, "VipPlayerManagement" }
         };
 
-        private readonly IAuthorizationService _authService;
+        private static IDictionary<string, IDictionary<int, string>> ReasonListFromCache { get; set; } = new Dictionary<string, IDictionary<int, string>>
+        {
+            { Util.EnUSLangName, null },
+            { Util.SimplifiedChineseLangName, null }
+        };
 
-        public PlayerSegmentationController(IAuthorizationService authService)
+        private readonly IAuthorizationService _authService;
+        private readonly IPlayerSegmentationDataAccess _playerDataAccess;
+
+        public PlayerSegmentationController(IAuthorizationService authService, IPlayerSegmentationDataAccess playerDataAccess)
         {
             _authService = authService;
+            _playerDataAccess = playerDataAccess;
         }
 
         [FunctionAuthorization(PermissionKeys.PlayerProblemManagement, PermissionKeys.PlayerVIPManagement)]
-        public ViewResult Index()
+        public async Task<ViewResult> Index()
         {
             var currencyList = SessionServiceInstance.UserSession.CurrencyList;
             var baseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency;
             var hasVIPManangementPermission = HasVIPManagementPermission();
+            var reasonList = await GetReasonList().ConfigureAwait(false);
+
             var model = new PlayerSegmentationViewModel
             {
                 TabKeys = GetTabKeys(),
@@ -44,7 +59,7 @@
                 ProblemPlayerVM = new ProblemPlayerViewModel
                 {
                     CurrencyList = currencyList,
-                    ReasonList = GetReasonList()
+                    ReasonList = reasonList
                 },
                 VipPlayerVM = hasVIPManangementPermission ? new VipPlayerViewModel
                 {
@@ -90,16 +105,25 @@
             };
         }
 
-        private static IDictionary<int, string> GetReasonList()
+        private async Task<IDictionary<int, string>> GetReasonList()
         {
-            return new Dictionary<int, string>
+            var langCode = CurrentLanguage;
+            if (!ReasonListFromCache.ContainsKey(langCode))
             {
-                { 0, "reason1" },
-                { 1, "reason2" },
-                { 2, "reason3" },
-                { 3, "reason2" },
-                { 4, "reason3" },
-            };
+                langCode = DefaultLanguage;
+            }
+
+            if (ReasonListFromCache[langCode] != null && ReasonListFromCache[langCode].Any())
+            {
+                return ReasonListFromCache[langCode];
+            }
+
+            var reasonListFromDB = await _playerDataAccess.GetReasonGroupListAsync(langCode).ConfigureAwait(false);
+            lock (lockObject)
+            {
+                ReasonListFromCache[langCode] = reasonListFromDB;
+            }
+            return reasonListFromDB;
         }
     }
 }

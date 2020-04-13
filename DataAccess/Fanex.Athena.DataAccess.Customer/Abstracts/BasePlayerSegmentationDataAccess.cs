@@ -12,7 +12,11 @@ namespace Fanex.Athena.DataAccess.Customer
 {
     public abstract class BasePlayerSegmentationDataAccess : BaseDataAccess
     {
-        protected async Task<IEnumerable<PlayerInfo>> ReadPlayerList(IObjectDb db, Action<IDataReader, PlayerInfo> readPlayerExtraData = null)
+        protected BasePlayerSegmentationDataAccess()
+        {
+        }
+
+        protected static async Task<IEnumerable<PlayerInfo>> ReadPlayerList(IObjectDb db, Action<IDataReader, PlayerInfo> readPlayerExtraData = null)
         {
             var playerList = new LinkedList<PlayerInfo>();
             using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))

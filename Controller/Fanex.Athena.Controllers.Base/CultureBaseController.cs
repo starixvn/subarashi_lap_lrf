@@ -14,7 +14,7 @@ namespace Fanex.Athena.Controllers
     using Fanex.Athena.Web.ActionFilter;
 
     using Service.Core.Users.Interfaces;
-
+    using System.Threading;
     using System.Web.Mvc;
 
     [CustomAuthorize]
@@ -22,6 +22,7 @@ namespace Fanex.Athena.Controllers
     public class CultureBaseController : Controller
     {
         protected const string DefaultLanguage = "en-US";
+        protected string CurrentLanguage => Thread.CurrentThread.CurrentUICulture?.Name;
         public ILanguageService LangService { get; set; }
         public ISessionService SessionServiceInstance { get; set; }
         public IAppSettings AppSettingInstance { get; set; }
