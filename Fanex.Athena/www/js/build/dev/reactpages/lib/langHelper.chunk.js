@@ -673,7 +673,7 @@ window._language_en_US = {
   ProductVRG: "Virtual Games",
   ProductVS: "Virtual Sports",
   ProductVS2: "Virtual Sports 2",
-  ProductTG: "Table Games",
+  ProductTG: "Table Game",
   Promotion: "Promotion",
   PromotionPrize: "Promotion Prize",
   RB: "RB",

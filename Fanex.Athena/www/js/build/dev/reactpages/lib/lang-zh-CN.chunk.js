@@ -600,6 +600,7 @@ window._language_zh_CN = {
   ProductVRG: "虚拟娱乐城",
   ProductVS: "虚拟运动",
   ProductVS2: "虚拟运动2",
+  ProductTG: "桌面游戏",
   Promotion: "促销活动",
   PromotionPrize: "活动奖金",
   RB: "赛马",

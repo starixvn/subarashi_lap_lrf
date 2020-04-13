@@ -5209,7 +5209,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Table Games.
+        ///   Looks up a localized string similar to Table Game.
         /// </summary>
         public static string ProductTG {
             get {
