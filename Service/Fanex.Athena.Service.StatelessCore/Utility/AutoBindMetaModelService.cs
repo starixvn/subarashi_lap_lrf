@@ -156,6 +156,15 @@ namespace Fanex.Athena.Service.StatelessCore.Utility
             }
         }
 
+        public static void MapLanguage(IDictionary<string, object> actionArguments, string lang)
+        {
+            var item = actionArguments.FirstOrDefault(x => x.Value is IMetaModelLanguage);
+            if (item.Value is IMetaModelLanguage model)
+            {
+                model.Language = lang;
+            }
+        }
+
         public static void MapIp(IDictionary<string, object> actionArguments, string ip)
         {
             var item = actionArguments.Where(x => x.Value is IMetaModelIp)
