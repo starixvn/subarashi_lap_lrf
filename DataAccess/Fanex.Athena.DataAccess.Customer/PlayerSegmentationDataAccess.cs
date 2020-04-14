@@ -1,5 +1,6 @@
 ﻿namespace Fanex.Athena.DataAccess.Customer
 {
+    using Fanex.Athena.DataAccess.Core.Extensions;
     using Fanex.Athena.DataAccess.Customer.Interfaces;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
@@ -25,8 +26,8 @@
                 var playerList = await ReadPlayerList(db, (reader, player) =>
                 {
                     player.MarkDate = reader.ToDateTime("CreatedDate").ToString(FormatKey.DateTimeFormatIn24H);
-                    player.ReducedMaxPerEvent = reader.TryGetValue("MaxPerEvent", out decimal? reducedMaxPerEvent) ? reducedMaxPerEvent : null;
-                    player.ReducedMaxPerBet = reader.TryGetValue("MaxBet", out decimal? reducedMaxPerBet) ? reducedMaxPerBet : null;
+                    player.ReducedMaxPerEvent = reader.ToNullableDecimal("MaxPerEvent");
+                    player.ReducedMaxPerBet = reader.ToNullableDecimal("MaxBet");
                     player.Reason = reader.ToString("Reason");
                 });
 
