@@ -17,13 +17,26 @@
         public ProblemPlayerExcel(IEnumerable<PlayerInfo> _dataSource, bool hasVIPPermission = true)
         : base(GetTemplatePath(hasVIPPermission), string.Empty, _dataSource)
         {
-            _infoHeaders.Add(new Tuple<string, string>(ViewResources.MarkDate, nameof(ViewResources.MarkDate)));
+            AddCommonHeaders();
             if (hasVIPPermission)
             {
-                _infoHeaders.Add(new Tuple<string, string>(ViewResources.Vip, "IsVip"));
-                _infoHeaders.Add(new Tuple<string, string>($"{ViewResources.AbnormalBet} (*)", "IsMarkVoid"));
+                AddVIPHeaders();
             }
             _haveVIPPermission = hasVIPPermission;
+        }
+
+        private void AddCommonHeaders()
+        {
+            _infoHeaders.Add(new Tuple<string, string, Func<object, object>>(ViewResources.ReducedMaxPerEvent, nameof(ViewResources.ReducedMaxPerEvent), null));
+            _infoHeaders.Add(new Tuple<string, string, Func<object, object>>(ViewResources.ReducedMaxPerBet, nameof(ViewResources.ReducedMaxPerBet), null));
+            _infoHeaders.Add(new Tuple<string, string, Func<object, object>>(ViewResources.Reason, "ReasonList", DataParsers.ParseToBreaklineText));
+            _infoHeaders.Add(new Tuple<string, string, Func<object, object>>(ViewResources.MarkDate, nameof(ViewResources.MarkDate), null));
+        }
+
+        private void AddVIPHeaders()
+        {
+            _infoHeaders.Add(new Tuple<string, string, Func<object, object>>(ViewResources.Vip, "IsVip", DataParsers.ParseToYesNo));
+            _infoHeaders.Add(new Tuple<string, string, Func<object, object>>($"{ViewResources.AbnormalBet} (*)", "IsMarkVoid", DataParsers.ParseToYesNo));
         }
 
         protected override void AddRowDescription(ISheet sheet, int lastRowIndex)

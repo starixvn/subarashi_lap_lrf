@@ -14,8 +14,8 @@
         public VipPlayerExcel(IEnumerable<PlayerInfo> _dataSource)
         : base(HostingEnvironment.MapPath(ExcelTemplatePath), string.Empty, _dataSource)
         {
-            _infoHeaders.Add(new Tuple<string, string>(ViewResources.Vip, "IsVip"));
-            _infoHeaders.Add(new Tuple<string, string>($"{ViewResources.AbnormalBet} (*)", "IsMarkVoid"));
+            _infoHeaders.Add(new Tuple<string, string, Func<object, object>>(ViewResources.Vip, "IsVip", DataParsers.ParseToYesNo));
+            _infoHeaders.Add(new Tuple<string, string, Func<object, object>>($"{ViewResources.AbnormalBet} (*)", "IsMarkVoid", DataParsers.ParseToYesNo));
         }
 
         protected override void AddRowDescription(ISheet sheet, int lastRowIndex)

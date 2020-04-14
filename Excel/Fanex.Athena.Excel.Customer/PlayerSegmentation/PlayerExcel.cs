@@ -15,7 +15,7 @@
         private const int RowContentTemplate = 1;
         private const int NumberOfRowPerSheet = 20000;
 
-        protected IList<Tuple<string, string>> _infoHeaders;
+        protected IList<Tuple<string, string, Func<object, object>>> _infoHeaders;
 
         protected IEnumerable<T> _dataSource;
 
@@ -25,10 +25,10 @@
            : base(templatePath, dataSource.Count(), NumberOfRowPerSheet)
         {
             _dataSource = dataSource;
-            _infoHeaders = new List<Tuple<string, string>>
+            _infoHeaders = new List<Tuple<string, string, Func<object, object>>>
             {
-                new Tuple<string, string>(ViewResources.ExternalId, nameof(ViewResources.ExternalId)),
-                new Tuple<string, string>(ViewResources.SystemId, nameof(ViewResources.SystemId)),
+                new Tuple<string, string, Func<object, object>>(ViewResources.ExternalId, nameof(ViewResources.ExternalId), null),
+                new Tuple<string, string, Func<object, object>>(ViewResources.SystemId, nameof(ViewResources.SystemId), null),
             };
             IsMultiSheet = true;
         }
@@ -65,7 +65,7 @@
                 var tuple = _infoHeaders[cellIndex];
                 var propertyName = tuple.Item2;
                 var cellValue = type.GetProperty(propertyName)?.GetValue(rowData);
-                var parseValue = ParseValue(cellValue ?? string.Empty);
+                var parseValue = ParseValue(cellValue, tuple.Item3);
                 row.Cells[cellIndex].SetCellValue(parseValue);
             }
         }
@@ -75,13 +75,11 @@
             //none title
         }
 
-        protected virtual object ParseValue(object cellValue)
+        protected virtual object ParseValue(object cellValue, Func<object, object> parser)
         {
-            if (cellValue is bool @bool)
-            {
-                return @bool ? ViewResources.Yes : ViewResources.No;
-            }
-            return cellValue;
+            if (cellValue == null)
+                return string.Empty;
+            return parser?.Invoke(cellValue) ?? cellValue;
         }
 
         protected abstract void AddRowDescription(ISheet sheet, int lastRowIndex);
