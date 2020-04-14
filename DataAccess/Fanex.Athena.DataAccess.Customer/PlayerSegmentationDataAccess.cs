@@ -25,6 +25,9 @@
                 var playerList = await ReadPlayerList(db, (reader, player) =>
                 {
                     player.MarkDate = reader.ToDateTime("CreatedDate").ToString(FormatKey.DateTimeFormatIn24H);
+                    player.ReducedMaxPerEvent = reader.TryGetValue("MaxPerEvent", out decimal? reducedMaxPerEvent) ? reducedMaxPerEvent : null;
+                    player.ReducedMaxPerBet = reader.TryGetValue("MaxBet", out decimal? reducedMaxPerBet) ? reducedMaxPerBet : null;
+                    player.Reason = reader.ToString("Reason");
                 });
 
                 var total = ReadTotal(db);
