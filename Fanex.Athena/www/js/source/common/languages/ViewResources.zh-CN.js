@@ -1,5 +1,6 @@
-﻿// Generated at: 3/27/2020 8:47:26 AM
-window._language_zh_CN = {AA:"客客",
+﻿// Generated at: 2020-04-14 7:32:33 AM
+window._language_zh_CN = {
+AA:"客客",
 AbnormalBet:"非正规注单",
 AbnormalBetDescriptionReport:"(*)玩家在至少2场不同比赛中被判定为非正规投注",
 AccessDeniedMsg:"对不起, 您没有权限访问此页面。",
