@@ -8,7 +8,7 @@ export default class ParamHelper {
                 username,
                 currencyIdList: selectedCurrency,
                 baseCurrency: selectedBaseCurrency,
-                reasonIdList: selectedReason,
+                reasonGroupIdList: selectedReason,
                 isGetAll,
                 fromDate: Site.convertDateToString(dateRange.fromDate),
                 toDate: Site.convertDateToString(dateRange.toDate)
