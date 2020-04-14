@@ -537,6 +537,7 @@ window._language_zh_TW = {
   ProductVRG: "虛擬娛樂城",
   ProductVS: "虛擬運動",
   ProductVS2: "虛擬運動2",
+  ProductTG: "桌面遊戲",
   Promotion: "促銷活動",
   PromotionPrize: "活動獎金",
   RB: "賽馬",
