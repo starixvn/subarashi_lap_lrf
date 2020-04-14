@@ -12,7 +12,7 @@
         private const string ExcelTemplatePath = @"~/App_Data/Template/Customers/PlayerSegmentation/VipPlayerList.xls";
 
         public VipPlayerExcel(IEnumerable<PlayerInfo> _dataSource)
-        : base(HostingEnvironment.MapPath(ExcelTemplatePath), string.Empty, _dataSource)
+        : base(HostingEnvironment.MapPath(ExcelTemplatePath), ViewResources.VipPlayerManagement, _dataSource)
         {
             _infoHeaders.Add(new Tuple<string, string, Func<object, object>>(ViewResources.Vip, "IsVip", DataParsers.ParseToYesNo));
             _infoHeaders.Add(new Tuple<string, string, Func<object, object>>($"{ViewResources.AbnormalBet} (*)", "IsMarkVoid", DataParsers.ParseToYesNo));

@@ -14,8 +14,8 @@
 
         private readonly bool _haveVIPPermission;
 
-        public ProblemPlayerExcel(IEnumerable<PlayerInfo> _dataSource, bool hasVIPPermission = true)
-        : base(GetTemplatePath(hasVIPPermission), string.Empty, _dataSource)
+        public ProblemPlayerExcel(IEnumerable<PlayerInfo> _dataSource, string baseCurrency, bool hasVIPPermission = true)
+        : base(GetTemplatePath(hasVIPPermission), GetReportTitle(baseCurrency), _dataSource)
         {
             AddCommonHeaders();
             if (hasVIPPermission)
@@ -53,5 +53,7 @@
             var templatePath = HostingEnvironment.MapPath(haveVIPPermission ? ExcelTemplatePath : ExcelTemplateNoneVIPPath);
             return templatePath;
         }
+
+        private static string GetReportTitle(string baseCurrency) => $"{ViewResources.ProblemPlayer} - {string.Format(ViewResources.Viewin, baseCurrency.ToUpperInvariant())}";
     }
 }

@@ -12,14 +12,14 @@
     public abstract class PlayerExcel<T> : ReportBase
         where T : PlayerInfo
     {
-        private const int RowContentTemplate = 1;
+        private const int RowContentTemplate = 2;
         private const int NumberOfRowPerSheet = 20000;
 
         protected IList<Tuple<string, string, Func<object, object>>> _infoHeaders;
 
         protected IEnumerable<T> _dataSource;
 
-        public new const int RowHeaderTemplate = 0;
+        private readonly string _reportTitle;
 
         protected PlayerExcel(string templatePath, string reportTitle, IEnumerable<T> dataSource)
            : base(templatePath, dataSource.Count(), NumberOfRowPerSheet)
@@ -31,6 +31,7 @@
                 new Tuple<string, string, Func<object, object>>(ViewResources.SystemId, nameof(ViewResources.SystemId), null),
             };
             IsMultiSheet = true;
+            _reportTitle = reportTitle;
         }
 
         protected override void AssignHeader(ISheet sheet)
@@ -72,7 +73,8 @@
 
         protected override void AssignTitle(ISheet sheet)
         {
-            //none title
+            sheet.SetTextRowValue(TemplateSheet, RowTitleTemplate, 1, _reportTitle);
+            sheet.CreateFreezePane(0, RowContentTemplate);
         }
 
         protected virtual object ParseValue(object cellValue, Func<object, object> parser)

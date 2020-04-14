@@ -38,7 +38,7 @@
             if (dataSource.Data.Any())
             {
                 const string fileName = "ProblemPlayerList.xls";
-                var excel = new ProblemPlayerExcel(dataSource.Data, hasVIPPermission);
+                var excel = new ProblemPlayerExcel(dataSource.Data, metaModel.BaseCurrency, hasVIPPermission);
                 excel.Export();
 
                 var result = ExcelStream(excel.Workbook, fileName);
