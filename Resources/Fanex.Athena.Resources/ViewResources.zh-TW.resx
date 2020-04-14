@@ -2050,4 +2050,7 @@
   <data name="TransactionDate" xml:space="preserve">
     <value>交易日期</value>
   </data>
+  <data name="ProductTG" xml:space="preserve">
+    <value>桌面遊戲</value>
+  </data>
 </root>
