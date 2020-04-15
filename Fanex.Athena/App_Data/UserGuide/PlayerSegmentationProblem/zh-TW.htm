@@ -1,58 +1,155 @@
-﻿<div class="rule">
+﻿
+<style media="screen">
+    .rule .collapsible {
+        min-width: 400px;
+        margin-bottom: .3rem !important;
+        padding-left: 0 !important;
+    }
+
+        .rule .collapsible label {
+            font-weight: bold;
+            padding: 0.2rem;
+            cursor: pointer;
+            display: block;
+            margin-bottom: 0;
+        }
+
+        .rule .collapsible .info {
+            display: none;
+            text-align: justify;
+            padding: .5rem;
+        }
+
+        .rule .collapsible input[type=checkbox] {
+            display: none;
+        }
+
+
+            .rule .collapsible input[type=checkbox]:checked ~ .info {
+                display: block;
+            }
+
+    .rule .only-vip-management {
+        display: none;
+    }
+</style>
+
+<div class="rule">
     <h4>
-        一般資訊</h4>
+        一般信息
+    </h4>
     <ul>
-        <li>本報告僅包含贏/輸/和局的票。 </li>
-        <li>數據可從{balance-up-date}查看。 </li>
-        <li>可按貨幣和產品過濾資料。 </li>
-        <li>系統會顯示選定產品的賽事，並按聯賽類別將其分組。 </li>
-        <li>紅色的負數表示承租公司的損失，而黑色的正數表示贏得的收入。 </li>
-        <li>主報告中不會計入混合過關和優勝冠軍的輸贏資料，但會在報告底部的單獨區塊中被歸納總結。 </li>
+        <li>该报告列出了所有下注异常的问题玩家。</li>
+        <li>在“标记日期”过滤器中输入日期范围，以查看将玩家判定为问题玩家的第一场赛事的日期。</li>
+        <li>在过滤器中点选“全部”以查看所有问题玩家。</li>
+        <li>在“用户名”筛选器中输入系统ID或用户名以查看特定玩家。</li>
+        <li>可依原因筛选问题玩家。</li>
+        <li>选择基础货币可将报表中的“调降后单场最大投注额”和“调降后单注最大投注额”转换为选定的货币。</li>
     </ul>
 </div>
 <div class="line">
 </div>
 <div class="rule">
     <h4>
-        搜索篩檢程式
+        报告指南
     </h4>
     <ul>
-        <li><b>貨幣:</b>以貨幣來選擇所會列出的資料。 </li>
-        <ul>
-            <li><b>全部:</b>列出所有支持的貨幣。 </li>
-        </ul>
-        <li><b>基礎貨幣：</b>將所有資料轉換為基礎貨幣但僅供參考。</li>
-        <li><b>產品:</b>選擇要檢索的產品類型。
-            <br />
-            注意，報告會根據支援產品的數量而變動（某些列會被隱藏/顯示）。
+        <li><b>用户名：</b> 会员注册的用户名。</li>
+        <li>
+            <b>系统ID：</b> 系统为每个账户产生的数字序列ID。
         </li>
+        <li>
+            <b>降低單場最大投注額：</b> 降低后的单场最大投注限额。
+        </li>
+        <li><b>降低單注最大投注額：</b> 降低后的单注最大投注限额。</li>
+        <li><b>原因：</b> 显示所有问题类型，并按每种类型分组。时间为各类型第一场赛事的日期。</li>
+        <li><b>标记日期：</b> 显示将玩家判定为问题玩家的第一个赛事日期。</li>
+        <li class="{onlyVipManagement}"><b>VIP：</b> 显示所选玩家的VIP状态，并允许更改所选玩家的状态。</li>
     </ul>
 </div>
 <div class="line">
 </div>
 <div class="rule">
     <h4>
-        報告指南
+        常见问题
     </h4>
-    <ul>
-        <li><b>賽事：</b>顯示賽事詳細資訊，格式為：主隊（在上）和客隊。點擊不同賽事可顯示每場賽事的詳細資訊。</li>
-        <li><b>交易額：</b>選定的日期範圍內的會員總交易額。 </li>
-        <li><b>總交易數：</b>選定產品的投注票總量。 </li>
-        <li><b>會員輸贏：</b> 
-            <ul>
-                <li><b>輸贏:</b> 會員下票的輸贏金額。</li>
-                <li><b>傭金:</b> 每張票所計算的總傭金金額。</li>
-                <li><b>總和:</b> 總輸贏金額含傭金。
-                    <br />
-                    總和 = 總輸贏金額 + 傭金。</li>
-            </ul>
-        </li>   
-        <li><b>承租公司輸贏：</b> 承租公司已與會員結算的輸贏金額。
-            <br />
-            承租公司輸贏= - (會員輸贏)</li>
-        <li><b>BA傭金：</b> 承租公司在每張BA票的傭金收入（包括贏、輸、和局)。</li>     
-        <li><b>BA金額：</b>承租公司與BA服務之間結算的金額。
-            <br />
-            注意對於與"BA金額"而言，黑色負數金額表示從BA獲得的金額，黑色正數金額表示要支付給BA的金額。</li>
-    </ul>
+    <div class="collapsible">
+        <input type="checkbox" name="group" id="question1" />
+        <label for="question1">Q: 什么是非正规投注？</label>
+        <div class="info">
+            A: 这类都是非正常或是出货集团账号专门买进同一边，有可能它们知道该场
+            赛事有问题，或是有内线消息，而持续的买进，这会照成您的网站有持续输钱
+            的可能。
+            虽然这种账户是防不胜防的，但贵公司可以有一些行动来限制，像是调低该玩
+            家的限额，或是降低赔率，放到BA等，让这些集团知道贵公司是有发现和有
+            动作，久了这些集团就比较不会在该网站平台买货。
+        </div>
+    </div>
+    <div class="collapsible">
+        <input type="checkbox" name="group" id="question2" />
+        <label for="question2">Q: 非正规投注的行为有哪些？</label>
+        <div class="info">
+            A: 群组投注、出货群组、打水套利、内定赛事，机械计算投注、灌水投注。
+        </div>
+    </div>
+    <div class="collapsible">
+        <input type="checkbox" name="group" id="question3" />
+        <label for="question3">Q: 如何判断是非正规投注？</label>
+        <div class="info">
+            A: 我们有专门的风控团队在监控这部分，只有在100%确定后才会进行删票动
+            作，而这也是我们跟其他平台比较有优势的地方。
+        </div>
+    </div>
+    <div class="collapsible">
+        <input type="checkbox" name="group" id="question4" />
+        <label for="question4">Q: 什么是“群组投注”？</label>
+        <div class="info">
+            A: 同时使用多个账号（包含其他平台会员）在下注同一个产品及方向被视为群组投注。这类的会员没有指定投注任何运动，联赛或产品，多数使用在出货，机械计算投注。
+        </div>
+    </div>
+    <div class="collapsible">
+        <input type="checkbox" name="group" id="question5" />
+        <label for="question5">Q: 什么是“出货群组”？</label>
+        <div class="info">
+            A: 这是出货集团试图针对某些赛事出货影响市场赔率，而持续的买进同一边，
+            而且不止在贵公司的网站上，也會在其他網站上買貨。
+        </div>
+    </div>
+    <div class="collapsible">
+        <input type="checkbox" name="group" id="question6" />
+        <label for="question6">Q: 什么是“打水套利”？</label>
+        <div class="info">
+            A: 使用两组不同平台的账号，一组负责下注对家将价位抬高，价位被抬高后另外一组则下注予目标。通常出现在特别产品及一些小联赛以投注比原来更好的价位。
+        </div>
+    </div>
+    <div class="collapsible">
+        <input type="checkbox" name="group" id="question7" />
+        <label for="question7">Q: 什么是“内定赛事”？</label>
+        <div class="info">
+            A: 内定赛事指一些球赛在开赛前已有内定结果，通常发生在一些较为小的足球或其它运动联赛，甚至是一些特别产品如角球。这类型的赛事，通常遇到某个产品被买到很低价位或每个时段开出不正规价位。
+        </div>
+    </div>
+    <div class="collapsible">
+        <input type="checkbox" name="group" id="question8" />
+        <label for="question8">Q: 什么是“灌水投注”？</label>
+        <div class="info">
+            A: 短时间内恶意将价位打的很远的会员将被视为恶意灌水投注。这类会员通常只会投注于一些小联赛或特别产品 。
+        </div>
+    </div>
+    <div class="collapsible">
+        <input type="checkbox" name="group" id="question9" />
+        <label for="question9">Q: 什么是“机械计算投注”？</label>
+        <div class="info">
+            A: 机械计算投注是指使用程序计算并自动下注予被认为胜率较高的价位。这类会员必须通过机械程序下注，而且并没有特定下注的运动，联赛及产品。
+        </div>
+    </div>
+    <div class="collapsible">
+        <input type="checkbox" name="group" id="question10" />
+        <label for="question10">Q: 该如何处理因为非正规投注而被删票的会员？</label>
+        <div class="info">
+            A: 可以调降该会员限额，或是把会员放到我公司独家提供的 BA 服内。
+            (有关 BA 服务请寻问贵公司的主管)。
+        </div>
+    </div>
 </div>
+
