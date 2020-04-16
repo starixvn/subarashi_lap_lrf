@@ -63,13 +63,18 @@ namespace Fanex.Athena.DataAccess.Report
 
         private static void AddParameters(IObjectDb db, CustomerPendingFundsMetaModel metaModel)
         {
+            var productBA = metaModel.ProductOptions.FirstOrDefault(_ => _.Name == "BA");
+
             db.SetParameterValue("pagesize", metaModel.PageSize);
             db.SetParameterValue("pageindex", metaModel.PageIndex);
             db.SetParameterValue("OrderItem", metaModel.OrderItem);
             db.SetParameterValue("IsAscSort", metaModel.IsAscSort);
             db.SetParameterValue("BaseCurrency", metaModel.BaseCurrency);
             db.SetParameterValue("AgentList", metaModel.AgentListXml);
-            db.SetParameterValue("ShowBA", metaModel.ProductOptions.FirstOrDefault(_=>_.Name == "BA").Status);
+            if(productBA != null)
+            {
+                db.SetParameterValue("ShowBA", productBA.Status);
+            }
             db.SetParameterValue("ProductList", string.Join(",", metaModel.ProductOptions.Where(_ => _.Status).Select(_ => _.Code)));
         }
 
