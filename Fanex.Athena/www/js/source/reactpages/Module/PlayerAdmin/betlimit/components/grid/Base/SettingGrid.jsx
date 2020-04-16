@@ -91,7 +91,11 @@ const SettingGrid = (props) => {
                         <th>{getHeaderName('Sport')}</th>
                         <th>{getHeaderName('MinBet')}</th>
                         <th>{getHeaderName('MaxBet')}</th>
-                        <th>{getHeaderName('MaxPerMatch')}</th>
+                        {
+                            data[0].Id == 222
+                                ? <th>{getHeaderName('MaxBetPerMatch')}</th>
+                                : <th>{getHeaderName('MaxPerMatch')}</th>
+                        }
                     </tr>
                 </thead>
                 {buildBody(setting.Editable, data)}

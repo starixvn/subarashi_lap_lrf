@@ -2372,4 +2372,7 @@
   <data name="OddsGroup" xml:space="preserve">
     <value>水位组别</value>
   </data>
+  <data name="ProductTG" xml:space="preserve">
+    <value>桌面游戏</value>
+  </data>
 </root>

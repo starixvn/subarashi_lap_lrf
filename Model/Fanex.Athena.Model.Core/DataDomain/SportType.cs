@@ -313,6 +313,8 @@ namespace Fanex.Athena.Model.Core.DataDomain
 
         PP = 248,
 
-        AgCasino = 250
+        AgCasino = 250,
+
+        TG = 222
     }
 }

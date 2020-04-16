@@ -9,7 +9,8 @@ const ConfirmationMsg = {
     [BetLimitProduct.LT]: { Msg: 'UpdateProductBetSettings', Product: 'ProductLT' },
     [BetLimitProduct.NG]: { Msg: 'UpdateNumberGameBetSettings' },
     [BetLimitProduct.KN]: { Msg: 'UpdateProductBetSettings', Product: 'ProductKN' },
-    [BetLimitProduct.AGC]: { Msg: 'UpdateAgCasinoBetSettings' }
+    [BetLimitProduct.AGC]: { Msg: 'UpdateAgCasinoBetSettings' },
+    [BetLimitProduct.TG]: { Msg: 'UpdateProductBetSettings', Product: 'ProductTG' }
 }
 
 export default class Utility {

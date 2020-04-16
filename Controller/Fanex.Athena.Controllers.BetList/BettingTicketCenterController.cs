@@ -166,7 +166,8 @@
                 Product.CC,
                 Product.PP,
                 Product.SG,
-                Product.VRG
+                Product.VRG,
+                Product.TG
             };
 
             var productAccess = _productService.GetSingleWalletProductAccess(

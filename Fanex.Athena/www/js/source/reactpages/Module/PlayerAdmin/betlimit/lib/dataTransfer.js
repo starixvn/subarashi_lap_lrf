@@ -10,7 +10,8 @@ const Url = {
     [BetLimitProduct.LT]: 'DcsBetLimit',
     [BetLimitProduct.NG]: 'NumberGameBetLimit',
     [BetLimitProduct.KN]: 'RngKenoBetLimit',
-    [BetLimitProduct.AGC]: 'AGCasinoBetLimit'
+    [BetLimitProduct.AGC]: 'AGCasinoBetLimit',
+    [BetLimitProduct.TG]: 'DcsBetLimit',
 };
 
 export default class DataTransfer {

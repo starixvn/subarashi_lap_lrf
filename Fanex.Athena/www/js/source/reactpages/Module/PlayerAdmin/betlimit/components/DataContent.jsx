@@ -13,7 +13,8 @@ const Setting = {
     [BetLimitProduct.LT]: GameDataContent,
     [BetLimitProduct.NG]: NGDataContent,
     [BetLimitProduct.KN]: GameDataContent,
-    [BetLimitProduct.AGC]: ACGDataContent
+    [BetLimitProduct.AGC]: ACGDataContent,
+    [BetLimitProduct.TG]: GameDataContent,
 };
 
 const DataContent = (props) => {

@@ -292,7 +292,8 @@ const Setting = {
   [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].LT]: _grid_data_contents_GameDataContent__WEBPACK_IMPORTED_MODULE_4__["default"],
   [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].NG]: _grid_data_contents_NGDataContent__WEBPACK_IMPORTED_MODULE_5__["default"],
   [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].KN]: _grid_data_contents_GameDataContent__WEBPACK_IMPORTED_MODULE_4__["default"],
-  [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].AGC]: _grid_data_contents_AGCDataContent__WEBPACK_IMPORTED_MODULE_6__["default"]
+  [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].AGC]: _grid_data_contents_AGCDataContent__WEBPACK_IMPORTED_MODULE_6__["default"],
+  [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].TG]: _grid_data_contents_GameDataContent__WEBPACK_IMPORTED_MODULE_4__["default"]
 };
 
 const DataContent = props => {
@@ -875,7 +876,7 @@ const SettingGrid = props => {
     className: "pa-betlimit-grid"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
     className: "table"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, getHeaderName('Sport')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, getHeaderName('MinBet')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, getHeaderName('MaxBet')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, getHeaderName('MaxPerMatch')))), buildBody(setting.Editable, data)));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, getHeaderName('Sport')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, getHeaderName('MinBet')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, getHeaderName('MaxBet')), data[0].Id == 222 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, getHeaderName('MaxBetPerMatch')) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, getHeaderName('MaxPerMatch')))), buildBody(setting.Editable, data)));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(SettingGrid));
@@ -1481,7 +1482,8 @@ const BetLimitProduct = {
   LT: 28,
   NG: 2,
   KN: 8,
-  AGC: 10
+  AGC: 10,
+  TG: 40
 };
 const BetLimitType = {
   MinBet: 'MinBet',
@@ -1631,7 +1633,8 @@ const Url = {
   [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].LT]: 'DcsBetLimit',
   [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].NG]: 'NumberGameBetLimit',
   [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].KN]: 'RngKenoBetLimit',
-  [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].AGC]: 'AGCasinoBetLimit'
+  [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].AGC]: 'AGCasinoBetLimit',
+  [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].TG]: 'DcsBetLimit'
 };
 class DataTransfer {
   static getData(param, callBack) {
@@ -1825,6 +1828,10 @@ const ConfirmationMsg = {
   },
   [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].AGC]: {
     Msg: 'UpdateAgCasinoBetSettings'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].TG]: {
+    Msg: 'UpdateProductBetSettings',
+    Product: 'ProductTG'
   }
 };
 class Utility {

@@ -164,7 +164,7 @@
     <Setting Key="WriteLog_UserLog_RunSP" SpName="WriteLog_UserLog_RunSP" DbName="DBLOG.bodb_CustomerLog.bodbLicenseeNet" />
     <Setting Key="Acc_Dep_CustSetting_StatusSettingSelect" SpName="Acc_Dep_CustSetting_StatusSettingSelect" DbName="DBCUST.CustDB.bodbLicenseeNet" />
     <Setting Key="Acc_Dep_CustSetting_DisableStatUpd" SpName="Acc_Dep_CustSetting_DisableStatUpd" DbName="DBCUST.CustDB.bodbLicenseeNet" />
-    <Setting Key="Acc_Dep_CustSetting_BetLimitSettingSelect" SpName="Acc_Dep_CustSetting_BetLimitSettingSelect" DbName="DBCUST.CustDB.bodbLicenseeNet" />
+    <Setting Key="Acc_Dep_CustSetting_BetLimitSettingSelect" SpName="Acc_Dep_CustSetting_BetLimitSettingSelect_xtest" DbName="DBCUST.CustDB.bodbLicenseeNet" />
     <Setting Key="Acc_Dep_CustSetting_BetLimitUpd" SpName="Acc_Dep_CustSetting_BetLimitUpd" DbName="DBCUST.CustDB.bodbLicenseeNet" />
   </Function>
 
@@ -229,4 +229,3 @@
   </Function>
 </Functions>
 
-		
