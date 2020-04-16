@@ -11,7 +11,8 @@ export const BetLimitProduct = {
 }
 
 export const BetLimitSport = {
-    I4D: 223
+    I4D: 223,
+    TG: 222
 }
 
 export const BetLimitType = {
