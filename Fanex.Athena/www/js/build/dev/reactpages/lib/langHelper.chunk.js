@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 4/10/2020 1:30:37 PM
+// Generated at: 2020-04-16 1:31:16 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -528,7 +528,6 @@ window._language_en_US = {
   MaxPerBall: "Max Per Ball",
   MaxPerBallLessThanOrEqual: "Max Per Ball must be less than or equal to",
   MaxPerMatch: "Max Per Match",
-  MaxBetPerMatch: "Max Bet Per Match",
   May: "May",
   Member: "Member",
   Message_RemoveCustomerLog: "Customer Log will be removed at 11am on April 21st (GMT+8). Kindly use Player Administration instead. Thanks!",
@@ -642,6 +641,7 @@ window._language_en_US = {
   Player: "Player",
   PlayerAdminUpdateFailedMsg: "Please try again!",
   PlayerName: "Player Name",
+  PlayerSegmentation: "Player Segmentation",
   PlayerStatementSupportMonths: "Support data up to 18 months",
   PreGame: "Pre Game",
   Prev: "Prev",
@@ -668,17 +668,20 @@ window._language_en_US = {
   ProductPTCS: "Playtech Casino",
   ProductSB: "Sportsbook",
   ProductSG: "SG",
+  ProductTG: "Table Game",
   ProductVB: "Macau Games",
   ProductVG: "Macau",
   ProductVRG: "Virtual Games",
   ProductVS: "Virtual Sports",
   ProductVS2: "Virtual Sports 2",
-  ProductTG: "Table Game",
   Promotion: "Promotion",
   PromotionPrize: "Promotion Prize",
   RB: "RB",
   RealName: "Real Name",
+  Reason: "Reason",
   RecommendBrowserOnReportPageMsg: "You please consider using Firefox or Chrome for better experience when page size &gt; 1,000",
+  ReducedMaxPerBet: "Reduced Max Per Bet",
+  ReducedMaxPerEvent: "Reduced Max Per Event",
   RefNo: "Ref No",
   Refresh: "Refresh",
   Refund: "Refund",

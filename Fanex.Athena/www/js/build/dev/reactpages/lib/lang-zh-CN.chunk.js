@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 4/10/2020 1:30:37 PM
+// Generated at: 2020-04-16 1:31:16 PM
 window._language_zh_CN = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -584,6 +584,7 @@ window._language_zh_CN = {
   Platform: "平台",
   Player: "玩家",
   PlayerAdminUpdateFailedMsg: "请重试一次!",
+  PlayerSegmentation: "玩家分类",
   PlayerStatementSupportMonths: "数据最多只支持18个月",
   PreGame: "游戏开始前",
   Prev: "上个月",
@@ -597,15 +598,18 @@ window._language_zh_CN = {
   ProductKN: "快乐彩",
   ProductNG: "百练赛",
   ProductSB: "体育博彩",
+  ProductTG: "桌面游戏",
   ProductVRG: "虚拟娱乐城",
   ProductVS: "虚拟运动",
   ProductVS2: "虚拟运动2",
-  ProductTG: "桌面游戏",
   Promotion: "促销活动",
   PromotionPrize: "活动奖金",
   RB: "赛马",
   RealName: "真实姓名",
+  Reason: "原因",
   RecommendBrowserOnReportPageMsg: "若页面大小 &gt; 1,000, 请您考虑使用火狐或Chrome以获得更好的体验",
+  ReducedMaxPerBet: "降低单注最大投注额",
+  ReducedMaxPerEvent: "降低单场最大投注额",
   RefNo: "注单号码",
   Refresh: "刷新",
   Refund: "退款",

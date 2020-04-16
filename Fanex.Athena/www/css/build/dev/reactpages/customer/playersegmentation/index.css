@@ -1205,5 +1205,8 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
   pointer-events: none;
   background: rgba(0, 0, 0, 0.26); }
 
+.caret-block div {
+  display: inherit; }
+
 
 /*# sourceMappingURL=index.css.map*/

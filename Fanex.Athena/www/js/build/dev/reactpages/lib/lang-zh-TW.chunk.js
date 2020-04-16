@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 4/10/2020 1:30:37 PM
+// Generated at: 2020-04-16 1:31:16 PM
 window._language_zh_TW = {
   AA: "客客",
   AbnormalBet: "非正規註單",
@@ -534,10 +534,10 @@ window._language_zh_TW = {
   ProductKN: "快樂彩",
   ProductNG: "百練賽",
   ProductSB: "體育博彩",
+  ProductTG: "桌面遊戲",
   ProductVRG: "虛擬娛樂城",
   ProductVS: "虛擬運動",
   ProductVS2: "虛擬運動2",
-  ProductTG: "桌面遊戲",
   Promotion: "促銷活動",
   PromotionPrize: "活動獎金",
   RB: "賽馬",
