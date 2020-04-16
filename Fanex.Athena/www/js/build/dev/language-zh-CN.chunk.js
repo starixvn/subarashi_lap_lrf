@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 4/10/2020 4:10:59 PM
+﻿// Generated at: 4/16/2020 3:40:20 PM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -474,6 +474,7 @@ MaxBetMatchMoreThanOrEqual:"最大單場最大投注必須大於或等於",
 MaxBetPerDraw:"单场最大限额",
 MaxBetPerDrawLessThanOrEqual:"需小于或等于每局最大下注额",
 MaxBetPerDrawMoreThanOrEqual:"需大于或等于每局最大下注额",
+MaxBetPerMatch:"Max Bet Per Match",
 MaximumUploadFileSize:"上传档案大小限制",
 MaxPerBall:"单粒球最高投注",
 MaxPerBallLessThanOrEqual:"最大單球最大投注必須小於或等於",
@@ -597,10 +598,10 @@ ProductCS:"娱乐城",
 ProductKN:"快乐彩",
 ProductNG:"百练赛",
 ProductSB:"体育博彩",
+ProductTG:"桌面游戏",
 ProductVRG:"虚拟娱乐城",
 ProductVS:"虚拟运动",
-ProductVS2: "虚拟运动2",
-ProductTG: "桌面游戏",
+ProductVS2:"虚拟运动2",
 Promotion:"促销活动",
 PromotionPrize:"活动奖金",
 RB:"赛马",

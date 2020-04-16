@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 4/10/2020 4:10:59 PM
+﻿// Generated at: 4/16/2020 3:40:20 PM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -524,11 +524,11 @@ MaxBetMatchMoreThanOrEqual:"Max Per Match must be more than or equal to",
 MaxBetPerDraw:"Max Bet Per Draw",
 MaxBetPerDrawLessThanOrEqual:"Max Bet Per Draw must be less than or equal to",
 MaxBetPerDrawMoreThanOrEqual:"Max Bet Per Draw must be more than or equal to",
+MaxBetPerMatch:"Max Bet Per Match",
 MaximumUploadFileSize:"Maximum upload file size",
 MaxPerBall:"Max Per Ball",
 MaxPerBallLessThanOrEqual:"Max Per Ball must be less than or equal to",
-MaxPerMatch: "Max Per Match",
-MaxBetPerMatch: "Max Bet Per Match",
+MaxPerMatch:"Max Per Match",
 May:"May",
 Member:"Member",
 Message_RemoveCustomerLog:"Customer Log will be removed at 11am on April 21st (GMT+8). Kindly use Player Administration instead. Thanks!",
@@ -669,12 +669,12 @@ ProductPP:"PP",
 ProductPTCS:"Playtech Casino",
 ProductSB:"Sportsbook",
 ProductSG:"SG",
+ProductTG:"Table Game",
 ProductVB:"Macau Games",
 ProductVG:"Macau",
 ProductVRG:"Virtual Games",
 ProductVS:"Virtual Sports",
-ProductVS2: "Virtual Sports 2",
-ProductTG: "Table Game",
+ProductVS2:"Virtual Sports 2",
 Promotion:"Promotion",
 PromotionPrize:"Promotion Prize",
 RB:"RB",

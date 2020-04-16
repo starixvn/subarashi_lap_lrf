@@ -1,4 +1,4 @@
-﻿// Generated at: 4/10/2020 4:10:05 PM
+﻿// Generated at: 4/16/2020 3:40:33 PM
 var _language_zh_TW = {
 AA:"客客",
 AbnormalBet:"非正規註單",
@@ -334,6 +334,7 @@ MaxBetLessThanOrEqual:"最大投注必須小於或等於",
 MaxBetMatchLessThanOrEqual:"最大單場最大投注必須小於或等於",
 MaxBetMatchMoreThanOrEqual:"最大單場最大投注必須大於或等於",
 MaxBetPerDraw:"單場最大限額",
+MaxBetPerMatch:"Max Bet Per Match",
 MaxPerBall:"单粒球最高投注",
 MaxPerBallLessThanOrEqual:"最大單球最大投注必須小於或等於",
 MaxPerMatch:"單場限額",
@@ -439,6 +440,7 @@ ProductCS:"娛樂城",
 ProductKN:"快樂彩",
 ProductNG:"百練賽",
 ProductSB:"體育博彩",
+ProductTG:"桌面遊戲",
 ProductVRG:"虛擬娛樂城",
 ProductVS:"虛擬運動",
 ProductVS2:"虛擬運動2",
