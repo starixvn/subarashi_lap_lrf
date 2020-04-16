@@ -3922,6 +3922,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Max Bet Per Match.
+        /// </summary>
+        public static string MaxBetPerMatch {
+            get {
+                return ResourceManager.GetString("MaxBetPerMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Maximum upload file size.
         /// </summary>
         public static string MaximumUploadFileSize {
