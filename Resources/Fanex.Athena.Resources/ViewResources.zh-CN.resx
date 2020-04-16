@@ -2375,4 +2375,7 @@
   <data name="ProductTG" xml:space="preserve">
     <value>桌面游戏</value>
   </data>
+  <data name="MaxBetPerMatch" xml:space="preserve">
+    <value>Max Bet Per Match</value>
+  </data>
 </root>
