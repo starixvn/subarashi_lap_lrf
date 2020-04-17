@@ -48,8 +48,7 @@
                 ObjectDb.Received(1).SetParameterValue("pageindex", _metaModel.PageIndex);
                 ObjectDb.Received(1).SetParameterValue("AgentList", _metaModel.AgentListXml);
                 ObjectDb.Received(1).SetParameterValue("BaseCurrency", _metaModel.BaseCurrency);
-                ObjectDb.Received(1).SetParameterValue("showSB", true);
-                ObjectDb.Received(1).SetParameterValue("showNG", false);
+                ObjectDb.Received(1).SetParameterValue("ProductList", "SB");
             });
         }
 
