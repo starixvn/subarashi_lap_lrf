@@ -311,6 +311,33 @@ define(['jquery', 'common/site', 'components/pluginhelper/daterangepicker', 'com
                 kenoIntervalId = setTimeout(callBack, 6000);
             },
 
+            extendTableSession: function (vendorProductId, userId) {
+                if (!userId) {
+                    return;
+                }
+
+                const callBack = function () {
+                    const option = {
+                        type: 'POST',
+                        cache: false,
+                        data: {
+                            userId: userId,
+                            vendorProductId: vendorProductId
+                        },
+                        url: Site.resolveClientUrl(KENO_RESULT_SESSION_API),
+                        success: function (response) {
+                            if (response === '') {
+                                tableGameIntervalId = setTimeout(callBack, 6000);
+                            }
+                        }
+                    };
+
+                    tableGameAjaxRequest = $.ajax(option);
+                }
+
+                tableGameIntervalId = setTimeout(callBack, 6000);
+            },
+
             extendLotterySession: function (vendorProductId, userId) {
                 if (!userId) {
                     return;
