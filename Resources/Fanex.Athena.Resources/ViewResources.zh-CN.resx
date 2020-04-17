@@ -2369,7 +2369,7 @@
   <data name="ESportsMobile" xml:space="preserve">
     <value>电子竞技 手机</value>
   </data>
- <data name="OddsGroup" xml:space="preserve">
+  <data name="OddsGroup" xml:space="preserve">
     <value>水位组别</value>
   </data>
   <data name="ProductTG" xml:space="preserve">
@@ -2393,5 +2393,8 @@
   <data name="ReducedMaxPerEvent" xml:space="preserve">
     <value>降低单场最大投注额</value>
     <comment>#131929</comment>
+  </data>
+  <data name="UserGuide" xml:space="preserve">
+    <value>报告指南</value>
   </data>
 </root>

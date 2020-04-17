@@ -1,4 +1,4 @@
-﻿// Generated at: 2020-04-16 1:31:16 PM
+﻿// Generated at: 2020-04-17 11:21:42 AM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -664,6 +664,7 @@ UpdateToLockedConfirmMsg:"确定要将此玩家更改为锁定吗?",
 UpdateUnSuccess:"Update unsucessfully!",
 UploadFileError:"无法上传档案，请确认档案格式!",
 UploadVipList:"上传VIP清单",
+UserGuide:"报告指南",
 UserInformation:"用户信息",
 Username:"用户名",
 VendorMemberID:"厂商会员标识符",

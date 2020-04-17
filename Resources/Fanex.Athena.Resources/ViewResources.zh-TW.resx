@@ -2056,4 +2056,7 @@
   <data name="MaxBetPerMatch" xml:space="preserve">
     <value>Max Bet Per Match</value>
   </data>
+  <data name="UserGuide" xml:space="preserve">
+    <value>报告指南</value>
+  </data>
 </root>
