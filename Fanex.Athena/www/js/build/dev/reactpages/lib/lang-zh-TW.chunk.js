@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 2020-04-16 1:31:16 PM
+// Generated at: 2020-04-17 11:21:42 AM
 window._language_zh_TW = {
   AA: "客客",
   AbnormalBet: "非正規註單",
@@ -429,6 +429,7 @@ window._language_zh_TW = {
   MaxBetMatchLessThanOrEqual: "最大單場最大投注必須小於或等於",
   MaxBetMatchMoreThanOrEqual: "最大單場最大投注必須大於或等於",
   MaxBetPerDraw: "單場最大限額",
+  MaxBetPerMatch: "Max Bet Per Match",
   MaxPerBall: "单粒球最高投注",
   MaxPerBallLessThanOrEqual: "最大單球最大投注必須小於或等於",
   MaxPerMatch: "單場限額",
@@ -676,6 +677,7 @@ window._language_zh_TW = {
   UpdateSportsbookBetSettingSuccessMsg: "{0}的體育博彩投注設置已成功更新",
   UpdateSuccess: "Update successfully!",
   UpdateUnSuccess: "Update unsucessfully!",
+  UserGuide: "报告指南",
   UserInformation: "用戶信息",
   Username: "用戶名",
   UserNotHaveCurrency: "您沒有任何幣別的權限可以觀看這份報告, 請聯絡貴司的後台管理人員.",

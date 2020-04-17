@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 2020-04-16 1:31:16 PM
+// Generated at: 2020-04-17 11:21:42 AM
 window._language_zh_CN = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -474,6 +474,7 @@ window._language_zh_CN = {
   MaxBetPerDraw: "单场最大限额",
   MaxBetPerDrawLessThanOrEqual: "需小于或等于每局最大下注额",
   MaxBetPerDrawMoreThanOrEqual: "需大于或等于每局最大下注额",
+  MaxBetPerMatch: "Max Bet Per Match",
   MaximumUploadFileSize: "上传档案大小限制",
   MaxPerBall: "单粒球最高投注",
   MaxPerBallLessThanOrEqual: "最大單球最大投注必須小於或等於",
@@ -758,6 +759,7 @@ window._language_zh_CN = {
   UpdateUnSuccess: "Update unsucessfully!",
   UploadFileError: "无法上传档案，请确认档案格式!",
   UploadVipList: "上传VIP清单",
+  UserGuide: "报告指南",
   UserInformation: "用户信息",
   Username: "用户名",
   VendorMemberID: "厂商会员标识符",

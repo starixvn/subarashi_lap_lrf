@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 2020-04-16 1:31:16 PM
+// Generated at: 2020-04-17 11:21:42 AM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -524,6 +524,7 @@ window._language_en_US = {
   MaxBetPerDraw: "Max Bet Per Draw",
   MaxBetPerDrawLessThanOrEqual: "Max Bet Per Draw must be less than or equal to",
   MaxBetPerDrawMoreThanOrEqual: "Max Bet Per Draw must be more than or equal to",
+  MaxBetPerMatch: "Max Bet Per Match",
   MaximumUploadFileSize: "Maximum upload file size",
   MaxPerBall: "Max Per Ball",
   MaxPerBallLessThanOrEqual: "Max Per Ball must be less than or equal to",
