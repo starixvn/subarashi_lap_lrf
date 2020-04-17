@@ -15,13 +15,6 @@
         : base(HostingEnvironment.MapPath(ExcelTemplatePath), ViewResources.VipPlayerManagement, _dataSource)
         {
             _infoHeaders.Add(new Tuple<string, string, Func<object, object>>(ViewResources.Vip, "IsVip", DataParsers.ParseToYesNo));
-            _infoHeaders.Add(new Tuple<string, string, Func<object, object>>($"{ViewResources.AbnormalBet} (*)", "IsMarkVoid", DataParsers.ParseToYesNo));
-        }
-
-        protected override void AddRowDescription(ISheet sheet, int lastRowIndex)
-        {
-            var row = sheet.CreateRow(lastRowIndex + 1);
-            row.CreateCell(0).SetCellValue(ViewResources.AbnormalBetDescriptionReport);
         }
     }
 }

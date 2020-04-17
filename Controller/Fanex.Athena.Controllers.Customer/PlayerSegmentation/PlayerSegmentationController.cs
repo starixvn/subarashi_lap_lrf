@@ -21,7 +21,7 @@
     {
         private static object lockObject = new object();
 
-        private static readonly string VIP_LIST_TEMPLATE_PATH = "~/App_Data/Template/Customers/PlayerSegmentation/VipPlayerUploadTemplate.xls";
+        private const string VIP_LIST_TEMPLATE_PATH = "~/App_Data/Template/Customers/PlayerSegmentation/VipPlayerUploadTemplate.xls";
 
         private static readonly IDictionary<string, string> _tabKeys = new Dictionary<string, string>
         {

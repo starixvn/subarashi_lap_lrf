@@ -122,8 +122,8 @@
     <!-- PlayerSegmentation -->
     <Function Name="PlayerSegmentation">
       <Setting Key="Lrf_ProblemAccount_LicenseeProblemPlayerSel" SpName="Lrf_ProblemAccount_LicenseeProblemPlayerSel_xtest" DbName="DBACC.bodb02.bodbLicenseeNet" />
-      <Setting Key="Lrf_ProblemAccount_LicenseeVIPPlayerSel" SpName="Lrf_ProblemAccount_LicenseeVIPPlayerSel" DbName="DBACC.bodb02.bodbLicenseeNet" />
-      <Setting Key="Lrf_ProblemAccount_LicenseeVipPlayerUpd" SpName="Lrf_ProblemAccount_LicenseeVipPlayerUpd" DbName="DBCUST.CustDB.bodbLicenseeNet" />
+      <Setting Key="Lrf_ProblemAccount_LicenseeVIPPlayerSel" SpName="Lrf_ProblemAccount_LicenseeVIPPlayerSel_xtest" DbName="DBACC.bodb02.bodbLicenseeNet" />
+      <Setting Key="Lrf_ProblemAccount_LicenseeVipPlayerUpd" SpName="Lrf_ProblemAccount_LicenseeVipPlayerUpd_xtest" DbName="DBCUST.CustDB.bodbLicenseeNet" />
       <Setting Key="Lrf_ProblemAccount_ReasonGroupSel" SpName="Lrf_ProblemAccount_ReasonGroupSel_xtest" DbName="DBACC.bodb02.bodbLicenseeNet" />
     </Function>
     <!-- End - PlayerSegmentation -->

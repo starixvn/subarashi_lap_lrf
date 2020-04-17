@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Fanex.Athena.DataAccess.Customer
 {
-    public abstract class BasePlayerSegmentationDataAccess : BaseDataAccess
+    public class BasePlayerSegmentationDataAccess : BaseDataAccess
     {
         protected BasePlayerSegmentationDataAccess()
         {
@@ -53,7 +53,6 @@ namespace Fanex.Athena.DataAccess.Customer
             player.ExternalId = reader["username2"] as string;
             player.SystemId = reader["username"] as string;
             player.IsVip = Convert.ToBoolean(reader["isVIP"]);
-            player.IsMarkVoid = Convert.ToBoolean(reader["isMarkVoid"]);
         }
 
         protected static int ReadTotal(IObjectDb db)

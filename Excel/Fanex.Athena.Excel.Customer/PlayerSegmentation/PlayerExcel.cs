@@ -9,7 +9,7 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    public abstract class PlayerExcel<T> : ReportBase
+    public class PlayerExcel<T> : ReportBase
         where T : PlayerInfo
     {
         private const int RowContentTemplate = 2;
@@ -55,8 +55,6 @@
                 var rowData = _dataSource.ElementAt(dataIndex);
                 AssignRowData(row, rowData, type);
             }
-
-            AddRowDescription(sheet, sheet.LastRowNum);
         }
 
         protected virtual void AssignRowData(IRow row, T rowData, Type type)
@@ -80,10 +78,10 @@
         protected virtual object ParseValue(object cellValue, Func<object, object> parser)
         {
             if (cellValue == null)
+            {
                 return string.Empty;
+            }
             return parser?.Invoke(cellValue) ?? cellValue;
         }
-
-        protected abstract void AddRowDescription(ISheet sheet, int lastRowIndex);
     }
 }

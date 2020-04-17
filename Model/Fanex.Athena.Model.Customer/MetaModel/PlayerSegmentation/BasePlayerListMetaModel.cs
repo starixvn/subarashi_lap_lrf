@@ -2,12 +2,14 @@
 {
     using Fanex.Athena.Model.Core.MetaModel;
 
-    public abstract class BasePlayerListMetaModel : IMetaModelValidation, IMetaModelAgent, IMetaModelCurrencyIdList, IMetaModelPaging
+    public class BasePlayerListMetaModel : IMetaModelValidation, IMetaModelAgent, IMetaModelCurrencyIdList, IMetaModelPaging
     {
+        private const int DefaultPageSize = 500;
+
         protected BasePlayerListMetaModel()
         {
             PageIndex = 1;
-            PageSize = 500;
+            PageSize = DefaultPageSize;
             OrderCol = 1;
             SortType = 1;
         }

@@ -36,16 +36,6 @@
         private void AddVIPHeaders()
         {
             _infoHeaders.Add(new Tuple<string, string, Func<object, object>>(ViewResources.Vip, "IsVip", DataParsers.ParseToYesNo));
-            _infoHeaders.Add(new Tuple<string, string, Func<object, object>>($"{ViewResources.AbnormalBet} (*)", "IsMarkVoid", DataParsers.ParseToYesNo));
-        }
-
-        protected override void AddRowDescription(ISheet sheet, int lastRowIndex)
-        {
-            if (_haveVIPPermission)
-            {
-                var row = sheet.CreateRow(lastRowIndex + 1);
-                row.CreateCell(0).SetCellValue(ViewResources.AbnormalBetDescriptionReport);
-            }
         }
 
         private static string GetTemplatePath(bool haveVIPPermission)
