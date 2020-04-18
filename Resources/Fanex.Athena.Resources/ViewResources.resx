@@ -2607,10 +2607,6 @@
   <data name="MatchPrecise" xml:space="preserve">
     <value>Match Precise</value>
   </data>
-  <data name="AbnormalBetDescriptionReport" xml:space="preserve">
-    <value>(*) Player has abnormal bets belong to at least 2 matches</value>
-    <comment>#128082</comment>
-  </data>
   <data name="ActivateVip" xml:space="preserve">
     <value>Activate VIP</value>
     <comment>#128082</comment>
@@ -2659,10 +2655,6 @@
   </data>
   <data name="DeactivateVip" xml:space="preserve">
     <value>Deactivate VIP</value>
-    <comment>#128082</comment>
-  </data>
-  <data name="DescriptionAbnormalBet" xml:space="preserve">
-    <value>The player was abnormally voided in at least 2 different matches</value>
     <comment>#128082</comment>
   </data>
   <data name="FileExtensionIncorrect" xml:space="preserve">
@@ -2756,7 +2748,8 @@
   </data>
   <data name="ProductTG" xml:space="preserve">
     <value>Table Game</value>
-  </data>  <data name="PlayerSegmentation" xml:space="preserve">
+  </data>
+  <data name="PlayerSegmentation" xml:space="preserve">
     <value>Player Segmentation</value>
     <comment>#128082</comment>
   </data>

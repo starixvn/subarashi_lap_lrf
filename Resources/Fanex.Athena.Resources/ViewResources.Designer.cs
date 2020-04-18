@@ -79,15 +79,6 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to (*) Player has abnormal bets belong to at least 2 matches.
-        /// </summary>
-        public static string AbnormalBetDescriptionReport {
-            get {
-                return ResourceManager.GetString("AbnormalBetDescriptionReport", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Sorry, You don&apos;t have permission to access this page..
         /// </summary>
         public static string AccessDeniedMsg {
@@ -1974,15 +1965,6 @@ namespace Fanex.Athena.Resources {
         public static string Deposit {
             get {
                 return ResourceManager.GetString("Deposit", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The player was abnormally voided in at least 2 different matches.
-        /// </summary>
-        public static string DescriptionAbnormalBet {
-            get {
-                return ResourceManager.GetString("DescriptionAbnormalBet", resourceCulture);
             }
         }
         

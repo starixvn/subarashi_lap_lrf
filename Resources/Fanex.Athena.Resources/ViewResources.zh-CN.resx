@@ -2228,10 +2228,6 @@
     <value>VIP</value>
     <comment>#128082</comment>
   </data>
-  <data name="AbnormalBetDescriptionReport" xml:space="preserve">
-    <value>(*)玩家在至少2场不同比赛中被判定为非正规投注</value>
-    <comment>#128082</comment>
-  </data>
   <data name="ActivateVip" xml:space="preserve">
     <value>激活为VIP</value>
     <comment>#128082</comment>
@@ -2262,10 +2258,6 @@
   </data>
   <data name="DeactivateVip" xml:space="preserve">
     <value>解除VIP</value>
-    <comment>#128082</comment>
-  </data>
-  <data name="DescriptionAbnormalBet" xml:space="preserve">
-    <value>玩家在至少2场不同比赛中被判定为非正规投注</value>
     <comment>#128082</comment>
   </data>
   <data name="FileExtensionIncorrect" xml:space="preserve">
