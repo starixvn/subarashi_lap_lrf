@@ -25,7 +25,6 @@ namespace Fanex.Athena.Controllers.BetSettings
     public class SportsbookBetSettingController : BetSettingBaseController
     {
         private readonly ISportsbookBetSettingService _betSettingService;
-        private const int I4DProductId = 43;
 
         public SportsbookBetSettingController(
             ICoreBetSettingService coreBetSettingService,
@@ -48,7 +47,6 @@ namespace Fanex.Athena.Controllers.BetSettings
 
             await AssignRequiredPropertiesAsync(viewModel, metaModel);
 
-            viewModel.BetSettingProducts = viewModel.BetSettingProducts.Where(x => x.ProductId != I4DProductId);
             return View("~/Views/Desktop/Customer/BetSetting/Main.cshtml", viewModel);
         }
 
