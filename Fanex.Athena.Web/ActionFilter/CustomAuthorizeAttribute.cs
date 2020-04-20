@@ -6,6 +6,7 @@
 namespace Fanex.Athena.Web.ActionFilter
 {
     using System;
+    using System.Web;
     using System.Web.Mvc;
     using System.Web.Routing;
     using Fanex.Athena.Service.Core.Users;
@@ -26,25 +27,22 @@ namespace Fanex.Athena.Web.ActionFilter
             _sessionStorage = sessionStorage;
         }
 
-        public override void OnAuthorization(AuthorizationContext filterContext)
+        protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
-            var skipAuthorization = filterContext.ActionDescriptor.IsDefined(typeof(AllowAnonymousAttribute), true)
-            || filterContext.ActionDescriptor.ControllerDescriptor.IsDefined(typeof(AllowAnonymousAttribute), true);
-            if (!skipAuthorization)
-            {
-                base.OnAuthorization(filterContext);
-                var authorized = _sessionStorage.LicenseeAuthInfo != null && _sessionStorage.UserAuthInfo != null;
-                if (!authorized)
-                {
-                    var routeValue = new
-                    {
-                        controller = "Utility",
-                        action = "LocationRestriction",
-                    };
+            var isAuthenticated = base.AuthorizeCore(httpContext);
+            isAuthenticated = isAuthenticated && _sessionStorage.LicenseeAuthInfo != null && _sessionStorage.UserAuthInfo != null;
+            return isAuthenticated;
+        }
 
-                    filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(routeValue));
-                }
-            }
+        protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
+        {
+            var routeValue = new
+            {
+                controller = "Utility",
+                action = "LocationRestriction",
+            };
+
+            filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(routeValue));
         }
     }
 }

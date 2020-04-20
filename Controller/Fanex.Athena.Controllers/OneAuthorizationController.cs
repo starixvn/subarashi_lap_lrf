@@ -4,8 +4,10 @@
 
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Service.Core.Users.Interfaces;
+    using Fanex.Athena.Web.ActionFilter;
     using Fanex.Logging;
 
     using LAP.ONEBook.Security;
@@ -66,6 +68,16 @@
 
             WriteLog(JsonConvert.SerializeObject(tokenInfo));
             return Redirect(Url.Content(ReturnUrl + OneAuthorizationErrorCode.TokenIsInValid));
+        }
+
+        [HttpGet]
+        [AuthorizeRestriction(AppMode.Parasitic)]
+        [Route("Auth/InvalidateSession")]
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+        public ActionResult InvalidateSession()
+        {
+            _oneAuthenticationService.SignOut(Response, Request);
+            return RedirectToAction("OneTokenRestriction", "Utility", new { Code = OneAuthorizationErrorCode.TokenWasExpired });
         }
 
         private static bool VerifyToken(DefaultAuthInfo<OneAuthPermission, OneAuthCurrency> token)

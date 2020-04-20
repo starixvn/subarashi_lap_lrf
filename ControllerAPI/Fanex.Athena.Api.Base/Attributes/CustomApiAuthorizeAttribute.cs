@@ -18,6 +18,11 @@ namespace Fanex.Athena.Api.Base.Attributes
     {
         protected override bool IsAuthorized(System.Web.Http.Controllers.HttpActionContext actionContext)
         {
+            if(!base.IsAuthorized(actionContext))
+            {
+                return false;
+            }
+
             var scope = actionContext.Request.GetDependencyScope();
             var sessionStorage = scope.Resolve<ISessionStorage>();
             return sessionStorage.LicenseeAuthInfo != null && sessionStorage.UserAuthInfo != null;
