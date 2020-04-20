@@ -45,8 +45,10 @@
         {
             var currencyList = SessionServiceInstance.UserSession.CurrencyList;
             var baseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency;
+            var lang = SessionServiceInstance.UserSession.Language;
+
             var hasVIPManangementPermission = HasVIPManagementPermission();
-            var reasonList = await GetReasonList().ConfigureAwait(false);
+            var reasonList = await GetReasonList(lang).ConfigureAwait(false);
 
             var model = new PlayerSegmentationViewModel
             {
@@ -101,9 +103,9 @@
             };
         }
 
-        private async Task<IDictionary<int, string>> GetReasonList()
+        private async Task<IDictionary<int, string>> GetReasonList(string lang)
         {
-            var lazyTask = ReasonListFromCache.GetOrAdd(CurrentLanguage, langKey => new AsyncLazy<IDictionary<int, string>>(() => _playerDataAccess.GetReasonGroupListAsync(langKey)));
+            var lazyTask = ReasonListFromCache.GetOrAdd(lang, langKey => new AsyncLazy<IDictionary<int, string>>(() => _playerDataAccess.GetReasonGroupListAsync(langKey)));
             return await lazyTask.Value.ConfigureAwait(false);
         }
     }

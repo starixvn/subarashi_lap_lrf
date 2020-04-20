@@ -83,6 +83,7 @@
     <Compile Include="CustomerDataAccessTest.cs" />
     <Compile Include="CustomerCommDataAccessTest.cs" />
     <Compile Include="DormantCustomerListDataAccessTest.cs" />
+    <Compile Include="PlayerSegmentationTest.cs" />
     <Compile Include="SearchCustomerDataAccessTest.cs" />
     <Compile Include="CustomerListDataAccessTest.cs" />
     <Compile Include="CustomerLogDataAccessTest.cs" />

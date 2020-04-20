@@ -22,7 +22,6 @@ namespace Fanex.Athena.Controllers
     public class CultureBaseController : Controller
     {
         protected const string DefaultLanguage = "en-US";
-        protected static string CurrentLanguage => Thread.CurrentThread.CurrentUICulture?.Name;
         public ILanguageService LangService { get; set; }
         public ISessionService SessionServiceInstance { get; set; }
         public IAppSettings AppSettingInstance { get; set; }
