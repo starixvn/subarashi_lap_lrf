@@ -181,7 +181,7 @@ namespace Fanex.Athena.Api.Report
             licenseeWinLoss.LicenseeWLPP = licenseeWLProducts.GetValueOrDefault(Product.PP, 0);
             licenseeWinLoss.LicenseeWLCC = licenseeWLProducts.GetValueOrDefault(Product.CC, 0);
             licenseeWinLoss.LicenseeWLSG = licenseeWLProducts.GetValueOrDefault(Product.SG, 0);
-			licenseeWinLoss.LicenseeWLVRG = licenseeWLProducts.GetValueOrDefault(Product.VRG, 0);
+            licenseeWinLoss.LicenseeWLVRG = licenseeWLProducts.GetValueOrDefault(Product.VRG, 0);
             licenseeWinLoss.LicenseeWLTG = licenseeWLProducts.GetValueOrDefault(Product.TG, 0);
             licenseeWinLoss.LicenseeWLI4D = licenseeWLProducts.GetValueOrDefault(Product.I4D, 0);
             licenseeWinLoss.LicenseeWLSBC = licenseeWLProducts.GetValueOrDefault(Product.SBC, 0);
@@ -205,7 +205,7 @@ namespace Fanex.Athena.Api.Report
             licenseeWinLoss.TurnOverPP = turnOverProducts.GetValueOrDefault(Product.PP, 0);
             licenseeWinLoss.TurnOverCC = turnOverProducts.GetValueOrDefault(Product.CC, 0);
             licenseeWinLoss.TurnOverSG = turnOverProducts.GetValueOrDefault(Product.SG, 0);
-			licenseeWinLoss.TurnOverVRG = turnOverProducts.GetValueOrDefault(Product.VRG, 0);
+            licenseeWinLoss.TurnOverVRG = turnOverProducts.GetValueOrDefault(Product.VRG, 0);
             licenseeWinLoss.TurnOverTG = turnOverProducts.GetValueOrDefault(Product.TG, 0);
             licenseeWinLoss.TurnOverI4D = turnOverProducts.GetValueOrDefault(Product.I4D, 0);
             licenseeWinLoss.TurnOverSBC = turnOverProducts.GetValueOrDefault(Product.SBC, 0);

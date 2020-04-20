@@ -49,7 +49,7 @@
                 { Product.CC, nameof(ViewResources.ProductCC) },
                 { Product.AGC, nameof(ViewResources.ProductAGC) },
                 { Product.SG, nameof(ViewResources.ProductSG) },
-				{ Product.VRG, nameof(ViewResources.ProductVRG) },
+                { Product.VRG, nameof(ViewResources.ProductVRG) },
                 { Product.TG, nameof(ViewResources.ProductTG) },
 				{ Product.I4D, nameof(ViewResources.ProductI4D) },
                 { Product.SBC, nameof(ViewResources.ProductSBC) }
