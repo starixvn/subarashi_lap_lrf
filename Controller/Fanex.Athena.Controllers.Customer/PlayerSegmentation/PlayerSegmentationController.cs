@@ -1,13 +1,15 @@
 ﻿namespace Fanex.Athena.Controllers.Customer
 {
     using Fanex.Athena.DataAccess.Customer.Interfaces;
-    using Fanex.Athena.Extension.Utility;
+    using Fanex.Athena.Extension.Utility.Internal;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Customer.ViewModel;
     using Fanex.Athena.Resources;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
     using ONEbook.UM.Filters;
+    using System;
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -19,21 +21,15 @@
     [FunctionAuthorization(PermissionKeys.PlayerSegmentation)]
     public class PlayerSegmentationController : CultureBaseController
     {
-        private static object lockObject = new object();
-
         private const string VIP_LIST_TEMPLATE_PATH = "~/App_Data/Template/Customers/PlayerSegmentation/VipPlayerUploadTemplate.xls";
 
-        private static readonly IDictionary<string, string> _tabKeys = new Dictionary<string, string>
+        private static readonly IDictionary<string, string> TabKeys = new Dictionary<string, string>
         {
             { PermissionKeys.PlayerProblemManagement, "ProblemPlayer" },
             { PermissionKeys.PlayerVIPManagement, "VipPlayerManagement" }
         };
 
-        private static IDictionary<string, IDictionary<int, string>> ReasonListFromCache { get; set; } = new Dictionary<string, IDictionary<int, string>>
-        {
-            { Util.EnUSLangName, null },
-            { Util.SimplifiedChineseLangName, null }
-        };
+        private static readonly ConcurrentDictionary<string, AsyncLazy<IDictionary<int, string>>> ReasonListFromCache = new ConcurrentDictionary<string, AsyncLazy<IDictionary<int, string>>>(StringComparer.OrdinalIgnoreCase);
 
         private readonly IAuthorizationService _authService;
         private readonly IPlayerSegmentationDataAccess _playerDataAccess;
@@ -88,7 +84,7 @@
 
         private IEnumerable<string> GetTabKeys()
         {
-            var tabKeysByPermission = _tabKeys
+            var tabKeysByPermission = TabKeys
                 .Where(_ => _authService.HasPermissions(SessionServiceInstance.UserSession, _.Key))
                 .Select(_ => _.Value);
 
@@ -107,23 +103,8 @@
 
         private async Task<IDictionary<int, string>> GetReasonList()
         {
-            var langCode = CurrentLanguage;
-            if (!ReasonListFromCache.ContainsKey(langCode))
-            {
-                langCode = DefaultLanguage;
-            }
-
-            if (ReasonListFromCache[langCode] != null && ReasonListFromCache[langCode].Any())
-            {
-                return ReasonListFromCache[langCode];
-            }
-
-            var reasonListFromDB = await _playerDataAccess.GetReasonGroupListAsync(langCode).ConfigureAwait(false);
-            lock (lockObject)
-            {
-                ReasonListFromCache[langCode] = reasonListFromDB;
-            }
-            return reasonListFromDB;
+            var lazyTask = ReasonListFromCache.GetOrAdd(CurrentLanguage, langKey => new AsyncLazy<IDictionary<int, string>>(() => _playerDataAccess.GetReasonGroupListAsync(langKey)));
+            return await lazyTask.Value.ConfigureAwait(false);
         }
     }
 }
