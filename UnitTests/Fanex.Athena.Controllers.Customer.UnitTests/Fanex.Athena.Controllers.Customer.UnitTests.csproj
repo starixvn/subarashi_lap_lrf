@@ -138,6 +138,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Helpers\CustomerComGroupHelperTest.cs" />
+    <Compile Include="PlayerSegmentation\PlayerSegmentationTest.cs" />
     <Compile Include="SearchCustomerApiControllerTest.cs" />
     <Compile Include="CustomerComGroupControllerTest.Update.cs" />
     <Compile Include="CustomerComGroupControllerTest.Create.cs" />
@@ -231,6 +232,7 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

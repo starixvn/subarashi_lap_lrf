@@ -19,7 +19,7 @@ namespace Fanex.Athena.Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class ViewResources {
@@ -75,15 +75,6 @@ namespace Fanex.Athena.Resources {
         public static string AbnormalBet {
             get {
                 return ResourceManager.GetString("AbnormalBet", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to (*) Player has abnormal bets belong to at least 2 matches.
-        /// </summary>
-        public static string AbnormalBetDescriptionReport {
-            get {
-                return ResourceManager.GetString("AbnormalBetDescriptionReport", resourceCulture);
             }
         }
         
@@ -1974,15 +1965,6 @@ namespace Fanex.Athena.Resources {
         public static string Deposit {
             get {
                 return ResourceManager.GetString("Deposit", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The player was abnormally voided in at least 2 different matches.
-        /// </summary>
-        public static string DescriptionAbnormalBet {
-            get {
-                return ResourceManager.GetString("DescriptionAbnormalBet", resourceCulture);
             }
         }
         
@@ -4984,6 +4966,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Player Segmentation.
+        /// </summary>
+        public static string PlayerSegmentation {
+            get {
+                return ResourceManager.GetString("PlayerSegmentation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Support data up to 18 months.
         /// </summary>
         public static string PlayerStatementSupportMonths {
@@ -5308,11 +5299,38 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reason.
+        /// </summary>
+        public static string Reason {
+            get {
+                return ResourceManager.GetString("Reason", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You please consider using Firefox or Chrome for better experience when page size &gt; 1,000.
         /// </summary>
         public static string RecommendBrowserOnReportPageMsg {
             get {
                 return ResourceManager.GetString("RecommendBrowserOnReportPageMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reduced Max Per Bet.
+        /// </summary>
+        public static string ReducedMaxPerBet {
+            get {
+                return ResourceManager.GetString("ReducedMaxPerBet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reduced Max Per Event.
+        /// </summary>
+        public static string ReducedMaxPerEvent {
+            get {
+                return ResourceManager.GetString("ReducedMaxPerEvent", resourceCulture);
             }
         }
         

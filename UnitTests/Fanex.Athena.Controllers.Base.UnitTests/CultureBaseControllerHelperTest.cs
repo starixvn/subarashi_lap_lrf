@@ -19,11 +19,13 @@
     [TestFixture]
     public abstract class CultureBaseControllerHelperTest
     {
+        protected static readonly string DefaultLanguage = "lan";
+
         protected static readonly UserAuthInfo DefaultUserSession = new UserAuthInfo
         {
             CurrencyList = new Dictionary<int, string> { { 1, "UUS" } },
             UserId = 1,
-            Language = "lan",
+            Language = DefaultLanguage,
             UserName = "alex.vn",
             OnUserId = 999,
             FunctionList = new List<Function>(),
@@ -36,6 +38,8 @@
             LicenseeId = 100,
             LicenseeName = "Spondemo"
         };
+
+        protected static void ResetLanguage() => DefaultUserSession.Language = DefaultLanguage;
 
         protected UrlHelper Url { get; set; }
 

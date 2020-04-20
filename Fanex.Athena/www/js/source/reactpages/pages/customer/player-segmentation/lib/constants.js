@@ -8,8 +8,8 @@ export const tabKeys = {
 }
 
 const dynamicImports = {
-    [tabKeys.problemPlayer]: () => import(/* webpackChunkName: "playersegmentation/problemPlayer" */ '../tabs/problem-player/index'),
-    [tabKeys.vipPlayerManagement]: () => import(/* webpackChunkName: "playersegmentation/vipPlayerManagement" */ '../tabs/vip-player-management/index')
+    [tabKeys.problemPlayer]: () => import(/* webpackChunkName: "customer/playersegmentation/problemPlayer" */ '../tabs/problem-player/index'),
+    [tabKeys.vipPlayerManagement]: () => import(/* webpackChunkName: "customer/playersegmentation/vipPlayerManagement" */ '../tabs/vip-player-management/index')
 }
 
 export const tabMenuList = AppData.TabKeys.map(_ => {

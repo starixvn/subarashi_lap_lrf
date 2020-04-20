@@ -16,6 +16,7 @@
 	{        
 		var fileName = Path.GetFileName(filePath.Replace("resx", "js"));
 		manager.StartNewFile(fileName);
+		const string ignoreKey = "ignorejs";
 		using (var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
             {
                var xdoc = System.Xml.Linq.XDocument.Load(stream);
@@ -30,9 +31,17 @@ window.<#=GetJsObjectName(fileName)#> = {
                 {
                     var se = index < lastIndex;
                     var valueItem = item.Descendants("value").FirstOrDefault();
+					var commentItem = item.Descendants("comment").FirstOrDefault();
 					index++;
+					var noGenerate = (commentItem?.Value?.ToString() ?? string.Empty)
+										.ToLower()
+										.Contains(ignoreKey);
+					if(noGenerate) 
+					{
+						continue;
+					}
 			#>
-<#=CreateJjonPropertise(item.Attribute("name").Value, valueItem.Value, se)#>
+<#=CreateJsonProperties(item.Attribute("name").Value, valueItem.Value, se)#>
 <# }} #>
 };
 <# }
@@ -40,7 +49,7 @@ window.<#=GetJsObjectName(fileName)#> = {
 #>
 
 <#+
- string  CreateJjonPropertise(string name, string value, bool isLast)
+ string  CreateJsonProperties(string name, string value, bool isLast)
 {
     var pattern = "{0}:\"{1}\"{2}";
     var se = isLast ?  ",":string.Empty;

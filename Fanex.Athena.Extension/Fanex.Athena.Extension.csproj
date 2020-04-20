@@ -159,6 +159,7 @@
     <Compile Include="Utility\Interfaces\ICustomMemoryCacheService.cs" />
     <Compile Include="Utility\Interfaces\IDbFactory.cs" />
     <Compile Include="Utility\Interfaces\IWebClientService.cs" />
+    <Compile Include="Utility\Internal\AsyncLazy.cs" />
     <Compile Include="Utility\Internal\CustomMemoryCache.cs" />
     <Compile Include="Utility\IAntiForgeryService.cs" />
     <Compile Include="Utility\Internal\ICustomMemoryCache.cs" />

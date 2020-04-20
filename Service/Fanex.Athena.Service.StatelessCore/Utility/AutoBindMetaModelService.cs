@@ -40,7 +40,7 @@ namespace Fanex.Athena.Service.StatelessCore.Utility
 
             if (item.Value is IMetaModelAgent itemWithAgent)
             {
-                IEnumerable<int> currencyIdList = new[] { 0 };
+                IEnumerable<int> currencyIdList;
                 if (item.Value is IMetaModelCurrency itemWithSingleCurrency)
                 {
                     currencyIdList = new[] { itemWithSingleCurrency.CurrencyId < 0 ? 0 : itemWithSingleCurrency.CurrencyId };
@@ -49,6 +49,10 @@ namespace Fanex.Athena.Service.StatelessCore.Utility
                     && !string.IsNullOrEmpty(itemWithMultiCurrency.CurrencyIdList))
                 {
                     currencyIdList = AuthParameterHelper.ParseCurrencyIdList(itemWithMultiCurrency.CurrencyIdList);
+                }
+                else
+                {
+                    currencyIdList = new[] { 0 };
                 }
 
                 itemWithAgent.AgentListXml = AuthParameterHelper.GenerateAgentListXml(currencyAgentList, currencyIdList, itemWithAgent.IsExcludedTestData);
@@ -156,6 +160,15 @@ namespace Fanex.Athena.Service.StatelessCore.Utility
             }
         }
 
+        public static void MapLanguage(IDictionary<string, object> actionArguments, string lang)
+        {
+            var item = actionArguments.FirstOrDefault(x => x.Value is IMetaModelLanguage);
+            if (item.Value is IMetaModelLanguage model)
+            {
+                model.Language = lang;
+            }
+        }
+
         public static void MapIp(IDictionary<string, object> actionArguments, string ip)
         {
             var item = actionArguments.Where(x => x.Value is IMetaModelIp)
@@ -187,8 +200,9 @@ namespace Fanex.Athena.Service.StatelessCore.Utility
             var item = actionArguments.FirstOrDefault(x => x.Value is IMetaModelPaging);
             if (item.Value is IMetaModelPaging metaModelPaging)
             {
+                const int UnlimitPageSize = int.MaxValue - 1000;
                 metaModelPaging.PageIndex = 1;
-                metaModelPaging.PageSize = int.MaxValue - 1000;
+                metaModelPaging.PageSize = UnlimitPageSize;
             }
         }
     }

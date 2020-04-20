@@ -10,11 +10,15 @@ using System.Threading.Tasks;
 
 namespace Fanex.Athena.DataAccess.Customer
 {
-    public abstract class BasePlayerSegmentationDataAccess : BaseDataAccess
+    public class BasePlayerSegmentationDataAccess : BaseDataAccess
     {
-        protected async Task<IEnumerable<PlayerInfo>> ReadPlayerList(IObjectDb db, Action<IDataReader, PlayerInfo> readPlayerExtraData = null)
+        protected BasePlayerSegmentationDataAccess()
         {
-            var playerList = new List<PlayerInfo>();
+        }
+
+        protected static async Task<IEnumerable<PlayerInfo>> ReadPlayerList(IObjectDb db, Action<IDataReader, PlayerInfo> readPlayerExtraData = null)
+        {
+            var playerList = new LinkedList<PlayerInfo>();
             using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
             {
                 while (reader.Read())
@@ -22,7 +26,7 @@ namespace Fanex.Athena.DataAccess.Customer
                     var player = new PlayerInfo();
                     ReadPlayer(reader, player);
                     readPlayerExtraData?.Invoke(reader, player);
-                    playerList.Add(player);
+                    playerList.AddLast(player);
                 }
             }
             return playerList;
@@ -49,7 +53,6 @@ namespace Fanex.Athena.DataAccess.Customer
             player.ExternalId = reader["username2"] as string;
             player.SystemId = reader["username"] as string;
             player.IsVip = Convert.ToBoolean(reader["isVIP"]);
-            player.IsMarkVoid = Convert.ToBoolean(reader["isMarkVoid"]);
         }
 
         protected static int ReadTotal(IObjectDb db)

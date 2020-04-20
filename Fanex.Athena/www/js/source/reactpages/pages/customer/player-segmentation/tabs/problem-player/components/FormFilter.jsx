@@ -1,9 +1,11 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import Select from 'react-select'
 import MultipleSelect from '@9softstudio/react-multiselect'
 import AutoComplete from '@jsroot/components/auto-complete'
 import CollapsiblePanel from '@jsroot/components/collapsible-panel'
+import UserGuide from '@jsroot/components/UserGuide'
 import CheckBox from '@jsroot/components/CheckBox'
 import { DateRange } from '@jsroot/components/date-range'
 import LangHelper from '@jsroot/lib/langHelper'
@@ -14,6 +16,7 @@ import DataService from '@jsroot/lib/DataService.js'
 import { ActionCreators } from '../actions'
 import { Url } from '../lib/constants';
 import ParamHelper from '../lib/helpers/paramHelper';
+import { bindDataUserGuideWithPermission } from '../lib/helpers/userGuideHelper';
 import DataSourceHelper from '../../../lib/helpers/dataSourceHelper';
 import GridHelper from '../../../lib/helpers/gridHelper';
 
@@ -21,11 +24,11 @@ export class FormFilter extends PureComponent {
     constructor(props) {
         super(props);
     }
-    
+
     _submit = (event) => {
         event.preventDefault();
         const { setSelectedParams, searchPlayer, selectedTabKey } = this.props;
-        const params = ParamHelper.ConvertToFriendlyParams(this.props);
+        const params = ParamHelper.ToAPIParams(this.props);
         if (!params) {
             return;
         }
@@ -55,7 +58,7 @@ export class FormFilter extends PureComponent {
                 }
             });
     }
-    
+
     _renderDateRange() {
         const { isGetAll, dateRange, selectedTabKey } = this.props;
         const dateConstraint = AppData[selectedTabKey].dateConstraint;
@@ -86,59 +89,112 @@ export class FormFilter extends PureComponent {
         const currencyList = AppData[selectedTabKey].currencyList;
         const dataSource = DataSourceHelper.CreateDataSourceFrom(currencyList, selectedCurrency);
         return currencyList && currencyList.length && (
-                <MultipleSelect id="ddlCurrency"
+            <MultipleSelect id="ddlCurrency"
                 language={LangHelper.currentLanguage}
                 dataSource={dataSource}
                 keyField={"key"}
                 valueField={"value"}
                 statusField={"status"}
-                onChange={(_, selectedItemsKey) => this.props.setSelectedCurrency(selectedItemsKey)}/>);
+                onChange={(_, selectedItemsKey) => this.props.setSelectedCurrency(selectedItemsKey)} />);
     }
 
-    _renderExcelIcon() {
+    _renderBaseCurrencySelectList() {
+        const baseCurrencyList = AppData.baseCurrencyList;
+        return baseCurrencyList && baseCurrencyList.length && (
+            <Select instanceId="ddlBased"
+                value={this.props.selectedBaseCurrency}
+                options={baseCurrencyList}
+                onChange={(item) => this.props.setSelectedBaseCurrency(item.value)} />
+        );
+    }
+
+    _renderReasonSelectList() {
+        const { selectedReason, selectedTabKey } = this.props;
+        const reasonList = AppData[selectedTabKey].reasonList;
+        const dataSource = DataSourceHelper.CreateDataSourceFrom(reasonList, selectedReason);
+        return reasonList && reasonList.length && (
+            <MultipleSelect id="ddlReason"
+                language={LangHelper.currentLanguage}
+                dataSource={dataSource}
+                keyField={"key"}
+                valueField={"value"}
+                statusField={"status"}
+                onChange={(_, selectedItemsKey) => this.props.setReason(selectedItemsKey)} />);
+    }
+
+    showUserGuide = () => {
+        const userGuideContent = this.props.userGuideContent;
+        if (!userGuideContent || userGuideContent.length === 0) {
+            this.props.getUserGuideContent('PlayerSegmentationProblem');
+        }
+    }
+
+    _renderUserGuide() {
+        const userGuideContent = bindDataUserGuideWithPermission(this.props.userGuideContent, AppData.HasVipManagement);
+        return (<UserGuide
+            title={LangHelper.getSingleResource("UserGuide")}
+            contentTitle={`${LangHelper.getSingleResource("PlayerSegmentation")} / ${LangHelper.getSingleResource('ProblemPlayer')}`}
+            onClick={this.showUserGuide}
+            content={userGuideContent} />)
+    }
+
+    _renderStickyFooter() {
         return (<div>
             <i className="icon-excel right" onClick={this.exportExcel} title={LangHelper.getSingleResource("ExportToExcel")}></i>
+            {this._renderUserGuide()}
         </div>);
     }
 
-     render() {
-         const isDisabledSubmit = StringHelper.isEmptyOrWhiteSpace(this.props.selectedCurrency);
+    render() {
+        const isDisabledSubmit = StringHelper.isEmptyOrWhiteSpace(this.props.selectedCurrency) || StringHelper.isEmptyOrWhiteSpace(this.props.selectedReason);
         return (
-            <CollapsiblePanel className="page-filter" stickyFooter={this._renderExcelIcon()}>
+            <CollapsiblePanel className="page-filter" stickyFooter={this._renderStickyFooter()}>
                 <div className="row">
-                <div className="col-12 col-md-4 col-sm-3 col-lg-4 col-xl-2">
+                    <div className="col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource("Date")}</label>
                             {this._renderDateRange()}
                         </div>
-                </div>
-                <div className="col-12 col-md-2 col-sm-2 col-lg-2 col-xl-1">
+                    </div>
+                    <div className="col-12 col-md-2 col-sm-2 col-lg-2 col-xl-2">
                         <div className="form-group">
-                        <CheckBox id="IsGetAll"
-                            checked={this.props.isGetAll}
-                            onChange={(checked) => this.props.changeIsGetAll(checked)}
-                            label={LangHelper.getSingleResource("GetAll")} />
+                            <CheckBox id="IsGetAll"
+                                checked={this.props.isGetAll}
+                                onChange={(checked) => this.props.changeIsGetAll(checked)}
+                                label={LangHelper.getSingleResource("GetAll")} />
+                        </div>
                     </div>
+                    <div className="col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2">
+                        <div className="form-group">
+                            <label className="label-text">{LangHelper.getSingleResource("Reason")}</label>
+                            {this._renderReasonSelectList()}
+                        </div>
                     </div>
-                    <div className="col-12 col-md-4 col-sm-3 col-lg-3 col-xl-2">
+                    <div className="col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource("Username")}</label>
                             <AutoComplete
                                 onSelect={(value) => this.props.setUsername(value)}
                                 onInput={(value) => this.props.setUsername(value)}
-                                htmlAttributes={{placeholder: LangHelper.getSingleResource("ExternalIdOrSystemId")}} />
+                                htmlAttributes={{ placeholder: LangHelper.getSingleResource("ExternalIdOrSystemId") }} />
                         </div>
                     </div>
-                    <div className="col-12 col-md-4 col-sm-3 col-lg-3 col-xl-2">
+                    <div className="col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource("Currency")}</label>
                             {this._renderCurrencySelectList()}
                         </div>
-                    </div>    
-                    <div className="col-12 col-md-4 col-sm-3 col-lg-2 col-xl-1">
+                    </div>
+                    <div className="col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2">
+                        <div className="form-group">
+                            <label className="label-text">{LangHelper.getSingleResource("BaseCurrency")}</label>
+                        {this._renderBaseCurrencySelectList()}
+                        </div>
+                    </div>
+                    <div className="col-12 col-md-2 col-sm-2 col-lg-2 col-xl-1">
                         <div className="form-group">
                             <div className="button-group">
-                            <button type="button" className="btn btn-submit" disabled={isDisabledSubmit} onClick={this._submit}>{LangHelper.getSingleResource("Submit")}</button>
+                                <button type="button" className="btn btn-submit" disabled={isDisabledSubmit} onClick={this._submit}>{LangHelper.getSingleResource("Submit")}</button>
                             </div>
                         </div>
                     </div>
@@ -149,28 +205,36 @@ export class FormFilter extends PureComponent {
 }
 
 function mapDispatchToProps(dispatch) {
-    const { setDateRange, changeIsGetAll, setUsername, setSelectedCurrency, setSelectedParams, searchPlayer, setPagingOption } = ActionCreators;
+    const { setDateRange, changeIsGetAll, setUsername, setSelectedCurrency, setSelectedParams, searchPlayer, setPagingOption,
+         getUserGuideContent, setSelectedBaseCurrency, setReason } = ActionCreators;
     return bindActionCreators(Object.assign({}, {
         setDateRange,
         changeIsGetAll,
         setUsername,
+        setReason,
         setSelectedCurrency,
+        setSelectedBaseCurrency,
         setSelectedParams,
         searchPlayer,
-        setPagingOption
+        setPagingOption,
+        getUserGuideContent
     }), dispatch);
 }
 
 function mapStateToProps(state) {
-    const { dateRange, isGetAll, selectedCurrency, selectedParams, username, pagingOption, selectedTabKey } = state;
+    const { dateRange, isGetAll, selectedCurrency, selectedParams, username, pagingOption, selectedTabKey,
+         userGuideContent, selectedBaseCurrency, selectedReason } = state;
     return Object.assign({}, {
         dateRange,
         isGetAll,
+        selectedReason,
         selectedCurrency,
+        selectedBaseCurrency,
         username,
         selectedParams,
         pagingOption,
-        selectedTabKey
+        selectedTabKey,
+        userGuideContent
     });
 };
 

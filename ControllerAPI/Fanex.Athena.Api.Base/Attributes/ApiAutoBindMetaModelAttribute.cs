@@ -20,6 +20,8 @@ namespace Fanex.Athena.Api.Base.Attributes
 
         public bool BindIp { get; set; }
 
+        public bool BindLanguage { get; set; }
+
         public bool BindBalanceUpAndMoveBet { get; set; }
 
         private static readonly ISessionStorage _sessionStorage = new SessionStorage();
@@ -44,6 +46,11 @@ namespace Fanex.Athena.Api.Base.Attributes
                 AutoBindMetaModelService.MapIp(actionArgument,
                     ClientHelper.GetClientIp(request: actionContext.Request)
                     );
+            }
+
+            if (BindLanguage)
+            {
+                AutoBindMetaModelService.MapLanguage(actionArgument, userSession.Language);
             }
 
             if (BindBalanceUpAndMoveBet)

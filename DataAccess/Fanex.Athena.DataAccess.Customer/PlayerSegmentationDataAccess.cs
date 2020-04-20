@@ -1,10 +1,12 @@
 ﻿namespace Fanex.Athena.DataAccess.Customer
 {
+    using Fanex.Athena.DataAccess.Core.Extensions;
     using Fanex.Athena.DataAccess.Customer.Interfaces;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
     using Fanex.Athena.Model.Customer.MetaModel;
+    using Fanex.Common.Extensions;
     using Fanex.Data;
     using System;
     using System.Collections.Generic;
@@ -23,9 +25,12 @@
 
                 var playerList = await ReadPlayerList(db, (reader, player) =>
                 {
-                    var date = Convert.ToDateTime(reader["CreatedDate"]);
-                    player.MarkDate = date.ToString(FormatKey.DateTimeFormat);
+                    player.MarkDate = reader.ToDateTime("CreatedDate").ToString(FormatKey.DateTimeFormatIn24H);
+                    player.ReducedMaxPerEvent = reader.ToNullableDecimal("MaxPerEvent");
+                    player.ReducedMaxPerBet = reader.ToNullableDecimal("MaxBet");
+                    player.Reason = reader.ToString("Reason");
                 });
+
                 var total = ReadTotal(db);
 
                 var result = new ApiPagingResult<PlayerInfo>(playerList,
@@ -53,6 +58,26 @@
                                    metaModel.OrderCol, metaModel.SortType,
                                    total);
                 return result;
+            }
+        }
+
+        public async Task<IDictionary<int, string>> GetReasonGroupListAsync(string langKey)
+        {
+            const string spName = "Lrf_ProblemAccount_ReasonGroupSel";
+            using (var db = GetObjectDb(spName))
+            {
+                db.SetParameterValue("Langkey", langKey);
+                using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
+                {
+                    var result = new Dictionary<int, string>();
+                    while (reader.Read())
+                    {
+                        var reasonGroupId = Convert.ToInt16(reader["ReasonGroupID"]);
+                        var reasonGroupName = reader["ReasonGroup"] as string;
+                        result.Add(reasonGroupId, reasonGroupName);
+                    }
+                    return result;
+                }
             }
         }
 
@@ -94,6 +119,9 @@
             objectDb.SetParameterValue("FromDate", metaModel.FromDate);
             objectDb.SetParameterValue("ToDate", metaModel.ToDate);
             objectDb.SetParameterValue("IsCheckAll", metaModel.IsGetAll);
+            objectDb.SetParameterValue("BaseCurrency", metaModel.BaseCurrency);
+            objectDb.SetParameterValue("ReasonGroupID", metaModel.ReasonGroupIdList);
+            objectDb.SetParameterValue("Langkey", metaModel.Language);
         }
 
         private static void AddVipPlayerListParams(IObjectDb objectDb, VipPlayerListMetaModel metaModel)

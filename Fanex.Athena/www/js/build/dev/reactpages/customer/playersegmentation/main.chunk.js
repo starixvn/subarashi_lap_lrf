@@ -57,14 +57,14 @@
 /******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 	// Promise = chunk loading, 0 = chunk loaded
 /******/ 	var installedChunks = {
-/******/ 		"www/js/build/dev/reactpages/playersegmentation/main": 0
+/******/ 		"www/js/build/dev/reactpages/customer/playersegmentation/main": 0
 /******/ 	};
 /******/
 /******/ 	var deferredModules = [];
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "www/js/build/dev/reactpages/" + ({"playersegmentation/problemPlayer":"playersegmentation/problemPlayer","playersegmentation/vipPlayerManagement":"playersegmentation/vipPlayerManagement","lib/xlsx-style-sparta":"lib/xlsx-style-sparta"}[chunkId]||chunkId) + ".chunk.js"
+/******/ 		return __webpack_require__.p + "www/js/build/dev/reactpages/" + ({"customer/playersegmentation/problemPlayer":"customer/playersegmentation/problemPlayer","customer/playersegmentation/vipPlayerManagement":"customer/playersegmentation/vipPlayerManagement","lib/xlsx-style-sparta":"lib/xlsx-style-sparta"}[chunkId]||chunkId) + ".chunk.js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -388,7 +388,7 @@ class AppLayout extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   }
 
   render() {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       id: "container",
       className: "container-fluid"
     }, this.props.children);
@@ -824,15 +824,15 @@ class AppContainer extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Componen
     } = this.props;
     const selectedTab = _lib_constants__WEBPACK_IMPORTED_MODULE_6__["tabMenuList"].find(_ => _.key === selectedTabKey);
     const Component = selectedTab.component;
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_4__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_4__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       id: "player-segmentation"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_tabMenu__WEBPACK_IMPORTED_MODULE_5__["TabMenu"], {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_tabMenu__WEBPACK_IMPORTED_MODULE_5__["TabMenu"], {
       selectedTabMenu: selectedTabKey,
       onClickTabMenu: this._onClickTabMenu,
       tabMenuList: _lib_constants__WEBPACK_IMPORTED_MODULE_6__["tabMenuList"]
-    }), Component && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Suspense"], {
-      fallback: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Loading...")
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Component, {
+    }), Component && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Suspense"], {
+      fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Loading...")
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Component, {
       selectedTabKey: selectedTabKey
     }))));
   }
@@ -880,9 +880,9 @@ const TabMenuItem = props => {
     isActive,
     onClickTabMenu
   } = props;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     key: item.key
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     className: isActive ? 'active' : '',
     onClick: () => onClickTabMenu(item.key)
   }, item.name));
@@ -918,10 +918,10 @@ const TabMenu = props => {
     return selectedTabMenu && selectedTabMenu.key === tabMenuItem.key;
   };
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "tab-menu"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, tabMenuList.map(item => {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TabMenuItem__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, tabMenuList.map(item => {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TabMenuItem__WEBPACK_IMPORTED_MODULE_1__["default"], {
       key: item.key,
       item: item,
       isActive: isActiveTabMenu(selectedTabMenuItem, item),
@@ -964,12 +964,12 @@ const defaultState = {
 const store = _jsroot_lib_store__WEBPACK_IMPORTED_MODULE_4__["default"].createStore(_reducers__WEBPACK_IMPORTED_MODULE_5__["default"], defaultState);
 
 const App = () => {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_3__["Provider"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_3__["Provider"], {
     store: store
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_AppContainer_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_AppContainer_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null));
 };
 
-Object(react_dom__WEBPACK_IMPORTED_MODULE_1__["render"])(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), document.getElementById("app-container"));
+Object(react_dom__WEBPACK_IMPORTED_MODULE_1__["render"])( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), document.getElementById("app-container"));
 
 /***/ }),
 
@@ -1000,8 +1000,8 @@ const tabKeys = {
   vipPlayerManagement: 'VipPlayerManagement'
 };
 const dynamicImports = {
-  [tabKeys.problemPlayer]: () => Promise.all(/*! import() | playersegmentation/problemPlayer */[__webpack_require__.e("lib/common"), __webpack_require__.e("playersegmentation/problemPlayer")]).then(__webpack_require__.bind(null, /*! ../tabs/problem-player/index */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/index.js")),
-  [tabKeys.vipPlayerManagement]: () => Promise.all(/*! import() | playersegmentation/vipPlayerManagement */[__webpack_require__.e("lib/common"), __webpack_require__.e("playersegmentation/vipPlayerManagement")]).then(__webpack_require__.bind(null, /*! ../tabs/vip-player-management/index */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/vip-player-management/index.js"))
+  [tabKeys.problemPlayer]: () => Promise.all(/*! import() | customer/playersegmentation/problemPlayer */[__webpack_require__.e("lib/common"), __webpack_require__.e("customer/playersegmentation/problemPlayer")]).then(__webpack_require__.bind(null, /*! ../tabs/problem-player/index */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/index.js")),
+  [tabKeys.vipPlayerManagement]: () => Promise.all(/*! import() | customer/playersegmentation/vipPlayerManagement */[__webpack_require__.e("lib/common"), __webpack_require__.e("customer/playersegmentation/vipPlayerManagement")]).then(__webpack_require__.bind(null, /*! ../tabs/vip-player-management/index */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/vip-player-management/index.js"))
 };
 const tabMenuList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__["default"].TabKeys.map(_ => {
   return {
