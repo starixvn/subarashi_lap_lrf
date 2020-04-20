@@ -93,11 +93,10 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 2020-04-17 11:21:42 AM
+// Generated at: 2020-04-18 3:25:10 PM
 window._language_zh_CN = {
   AA: "客客",
   AbnormalBet: "非正规注单",
-  AbnormalBetDescriptionReport: "(*)玩家在至少2场不同比赛中被判定为非正规投注",
   AccessDeniedMsg: "对不起, 您没有权限访问此页面。",
   Account: "账号",
   AccountManagement: "帐户管理",
@@ -288,7 +287,6 @@ window._language_zh_CN = {
   DeleteCommissionGroup: "删除佣金群组",
   DeleteGroup: "删除组",
   Deposit: "存款",
-  DescriptionAbnormalBet: "玩家在至少2场不同比赛中被判定为非正规投注",
   DetailedBetlist: "投注明细历史",
   Details: "细节",
   DetailTransaction: "交易纪录",

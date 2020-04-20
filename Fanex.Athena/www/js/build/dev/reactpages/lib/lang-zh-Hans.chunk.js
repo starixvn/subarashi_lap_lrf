@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 2020-04-17 11:21:42 AM
+// Generated at: 2020-04-18 3:25:10 PM
 window._language_zh_Hans = {
   AA: "客客",
   AbnormalBet: "非正规注单",

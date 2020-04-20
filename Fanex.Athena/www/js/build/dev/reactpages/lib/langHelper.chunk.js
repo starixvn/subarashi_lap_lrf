@@ -93,11 +93,10 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 2020-04-17 11:21:42 AM
+// Generated at: 2020-04-18 3:25:10 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
-  AbnormalBetDescriptionReport: "(*) Player has abnormal bets belong to at least 2 matches",
   AccessDeniedMsg: "Sorry, You don&apos;t have permission to access this page.",
   Account: "Account",
   AccountManagement: "Account Management",
@@ -308,7 +307,6 @@ window._language_en_US = {
   DeleteCommissionGroup: "Delete Commission group",
   DeleteGroup: "Delete Group",
   Deposit: "Deposit",
-  DescriptionAbnormalBet: "The player was abnormally voided in at least 2 different matches",
   DetailedBetlist: "Detailed Bet list",
   Details: "Details",
   DetailTransaction: "Detail Transaction",
