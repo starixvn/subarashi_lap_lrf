@@ -2759,6 +2759,10 @@
   <data name="MaxBetPerMatch" xml:space="preserve">
     <value>Max Bet Per Match</value>
   </data>
+  <data name="ProductSBC" xml:space="preserve">
+    <value>Saba Club</value>
+    <comment>132702</comment>
+  </data>
   <data name="Reason" xml:space="preserve">
     <value>Reason</value>
     <comment>#131929</comment>
