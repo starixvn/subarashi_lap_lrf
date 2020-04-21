@@ -242,7 +242,7 @@ class BetList {
     }
 
     getSBCDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
-        let url = rootUrl + 'SBCBetList/Detail';
+        let url = rootUrl + 'SabaClubBetList/Detail';
         url = QueryString.setParam(url, 'transId', transId);
         url = QueryString.setParam(url, 'date', winlostDate);
         url = QueryString.setParam(url, 'custId', custId);

@@ -2456,7 +2456,7 @@ class BetList {
   }
 
   getSBCDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
-    let url = rootUrl + 'SBCBetList/Detail';
+    let url = rootUrl + 'SabaClubBetList/Detail';
     url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
     url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'date', winlostDate);
     url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
