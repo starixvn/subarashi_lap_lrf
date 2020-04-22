@@ -12,8 +12,6 @@
         private const string ExcelTemplatePath = @"~/App_Data/Template/Customers/PlayerSegmentation/ProblemPlayerList.xls";
         private const string ExcelTemplateNoneVIPPath = @"~/App_Data/Template/Customers/PlayerSegmentation/ProblemPlayerNoneVIPList.xls";
 
-        private readonly bool _haveVIPPermission;
-
         public ProblemPlayerExcel(IEnumerable<PlayerInfo> _dataSource, string baseCurrency, bool hasVIPPermission = true)
         : base(GetTemplatePath(hasVIPPermission), GetReportTitle(baseCurrency), _dataSource)
         {
@@ -22,7 +20,6 @@
             {
                 AddVIPHeaders();
             }
-            _haveVIPPermission = hasVIPPermission;
         }
 
         private void AddCommonHeaders()

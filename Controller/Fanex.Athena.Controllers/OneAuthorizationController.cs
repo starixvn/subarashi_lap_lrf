@@ -77,7 +77,7 @@
         public ActionResult InvalidateSession()
         {
             _oneAuthenticationService.SignOut(Response, Request);
-            return RedirectToAction("OneTokenRestriction", "Utility", new { Code = OneAuthorizationErrorCode.TokenWasExpired });
+            return new ContentResult() { Content = "Invalidate Session Success" };
         }
 
         private static bool VerifyToken(DefaultAuthInfo<OneAuthPermission, OneAuthCurrency> token)

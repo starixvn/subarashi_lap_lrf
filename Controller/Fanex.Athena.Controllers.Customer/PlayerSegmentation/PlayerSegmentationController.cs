@@ -29,7 +29,8 @@
             { PermissionKeys.PlayerVIPManagement, "VipPlayerManagement" }
         };
 
-        private static readonly ConcurrentDictionary<string, AsyncLazy<IDictionary<int, string>>> ReasonListFromCache = new ConcurrentDictionary<string, AsyncLazy<IDictionary<int, string>>>(StringComparer.OrdinalIgnoreCase);
+        private static readonly ConcurrentDictionary<string, AsyncLazy<IDictionary<int, string>>> ReasonListFromCache = new ConcurrentDictionary
+            <string, AsyncLazy<IDictionary<int, string>>>(StringComparer.OrdinalIgnoreCase);
 
         private readonly IAuthorizationService _authService;
         private readonly IPlayerSegmentationDataAccess _playerDataAccess;
