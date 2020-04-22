@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 4/16/2020 3:40:20 PM
+﻿// Generated at: 4/22/2020 9:29:04 AM
 window._language_zh_TW = {
 AA:"客客",
 AbnormalBet:"非正規註單",
@@ -677,6 +677,7 @@ UpdateSportsbookBetSettings:"您確定您要更新所有的體育博彩投注設
 UpdateSportsbookBetSettingSuccessMsg:"{0}的體育博彩投注設置已成功更新",
 UpdateSuccess:"Update successfully!",
 UpdateUnSuccess:"Update unsucessfully!",
+UserGuide:"报告指南",
 UserInformation:"用戶信息",
 Username:"用戶名",
 UserNotHaveCurrency:"您沒有任何幣別的權限可以觀看這份報告, 請聯絡貴司的後台管理人員.",
