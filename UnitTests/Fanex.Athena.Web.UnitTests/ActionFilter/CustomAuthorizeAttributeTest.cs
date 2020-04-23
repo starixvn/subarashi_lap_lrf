@@ -1,5 +1,5 @@
 ﻿using System.Web.Mvc;
-
+using Fanex.Athena.Extension.Utility;
 using Fanex.Athena.Model.Auth;
 using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.UnitTest.Common.Helpers;
@@ -13,9 +13,8 @@ namespace Fanex.Athena.Web.UnitTests.ActionFilter
 {
     public class CustomAuthorizeAttributeTest
     {
-        private readonly ControllerContext _controllerContext = MvcHelper.CreateControllerContext();
-
         private ISessionStorage _sessionStorage;
+        private IAppSettings _appSettings;
 
         private CustomAuthorizeAttribute _attribute;
 
@@ -23,7 +22,8 @@ namespace Fanex.Athena.Web.UnitTests.ActionFilter
         public void Setup()
         {
             _sessionStorage = Substitute.For<ISessionStorage>();
-            _attribute = new CustomAuthorizeAttribute(_sessionStorage);
+            _appSettings = Substitute.For<IAppSettings>();
+            _attribute = new CustomAuthorizeAttribute(_sessionStorage, _appSettings);
         }
 
         [Test]
@@ -70,6 +70,24 @@ namespace Fanex.Athena.Web.UnitTests.ActionFilter
             });
         }
 
+        [TestCase("adsad/123asd@Auth/InvalidateSession")]
+        [TestCase("auth/invalidatesession")]
+        [TestCase("Auth/invalidateSESSION")]
+        public void OnAuthorization_NotAuthorized_AssignCorrectStringValues(string noActionViewConfigs)
+        {
+            // Arrange
+            var requestDomain = MvcHelper.TestingRequestDomain + "/Auth/InvalidateSession";
+            var filterContext = CreateFilterContext(false, requestDomain);
+            _appSettings.GetValue("NoViewAction").Returns(noActionViewConfigs);
+
+            // Action
+            _attribute.OnAuthorization(filterContext);
+            var result = filterContext.Result as ContentResult;
+
+            // Assert
+            Assert.That(result.Content, Is.EqualTo("Unauthorized"));
+        }
+
         [Test]
         public void OnAuthorization_NotAuthorized_FilterContextResultNull()
         {
@@ -86,11 +104,11 @@ namespace Fanex.Athena.Web.UnitTests.ActionFilter
             Assert.That(result, Is.Null);
         }
 
-        private AuthorizationContext CreateFilterContext(bool isSkipAuthorization)
+        private AuthorizationContext CreateFilterContext(bool isSkipAuthorization, string requestDomain = null)
         {
             var actionDescriptor = Substitute.ForPartsOf<ActionDescriptor>();
             actionDescriptor.IsDefined(typeof(AllowAnonymousAttribute), true).Returns(isSkipAuthorization);
-            var filterContext = new AuthorizationContext(_controllerContext, actionDescriptor);
+            var filterContext = new AuthorizationContext(MvcHelper.CreateControllerContext(requestDomain: requestDomain), actionDescriptor);
             return filterContext;
         }
     }
