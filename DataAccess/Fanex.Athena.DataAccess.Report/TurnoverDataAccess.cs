@@ -8,6 +8,7 @@ namespace Fanex.Athena.DataAccess.Report
 {
     using System.Collections.Generic;
     using System.Data;
+    using System.Linq;
     using System.Threading.Tasks;
     using Data;
     using Fanex.Athena.DataAccess.Core;
@@ -71,9 +72,13 @@ namespace Fanex.Athena.DataAccess.Report
         {
             foreach (var item in metaModel.ProductOptions)
             {
-                db.SetParameterValue("show" + item.Code, item.Status);
+                if (item.Code == "BT" || item.Code == "CO")
+                {
+                    db.SetParameterValue("show" + item.Code, item.Status);
+                }
             }
 
+            db.SetParameterValue("ProductList", string.Join(",", metaModel.ProductOptions.Where(_ => _.Status).Select(_ => _.Code)));
             db.SetParameterValue("fromdate", metaModel.FromDate);
             db.SetParameterValue("todate", metaModel.ToDate);
             db.SetParameterValue("username", metaModel.Username);
