@@ -42,8 +42,8 @@ export const PlayerRow = (props) => {
             {displayedColumn[fields.SystemId] && <Cell title={SystemId}>{SystemId}</Cell>}
             {displayedColumn[fields.RealName] && <Cell>{RealName}</Cell>}
             {displayedColumn[fields.Currency] && <Cell className="center-align">{Currency}</Cell>}
-            {displayedColumn[fields.CurrentBalance] && <Cell className="right-align">{canShowMainColumn && NumberFormat.roundDownFormatDecimal(CurrentBalance)}</Cell>}
-            {displayedColumn[fields.OutstandingBalance] && <Cell className="right-align">{canShowMainColumn && NumberFormat.roundDownFormatDecimal(OutstandingBalance)}</Cell>}
+            {displayedColumn[fields.CurrentBalance] && <Cell className="right-align" title={canShowMainColumn && NumberFormat.roundDownFormatDecimal(CurrentBalance)}>{canShowMainColumn && NumberFormat.roundDownFormatDecimal(CurrentBalance)}</Cell>}
+            {displayedColumn[fields.OutstandingBalance] && <Cell className="right-align" title={canShowMainColumn && NumberFormat.roundDownFormatDecimal(OutstandingBalance)}>{canShowMainColumn && NumberFormat.roundDownFormatDecimal(OutstandingBalance)}</Cell>}
             {displayedColumn[fields.OddsGroup] && <Cell className="center-align">{canShowMainColumn && OddsGroup !== undefined && <OddsGroupCell dataItem={dataItem} />}</Cell>}
             {displayedColumn[fields.BaStatus] && <BaStatusCell dataItem={dataItem} />}
             {displayedColumn[fields.SpecialLevel] && <Cell className="center-align">{canShowMainColumn && SpecialLevel !== undefined && <SpecialLevelCell dataItem={dataItem} />}</Cell>}

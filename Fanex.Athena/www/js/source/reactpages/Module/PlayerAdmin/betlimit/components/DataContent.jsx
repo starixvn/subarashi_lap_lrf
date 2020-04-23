@@ -5,6 +5,7 @@ import SportDataContent from './grid/data-contents/SportDataContent';
 import GameDataContent from './grid/data-contents/GameDataContent';
 import NGDataContent from './grid/data-contents/NGDataContent';
 import ACGDataContent from './grid/data-contents/AGCDataContent';
+import I4DDataContent from './grid/data-contents/I4DDataContent';
 
 const Setting = {
     [BetLimitProduct.SB]: SportDataContent,
@@ -15,6 +16,7 @@ const Setting = {
     [BetLimitProduct.KN]: GameDataContent,
     [BetLimitProduct.AGC]: ACGDataContent,
     [BetLimitProduct.TG]: GameDataContent,
+    [BetLimitProduct.I4D]: I4DDataContent
 };
 
 const DataContent = (props) => {

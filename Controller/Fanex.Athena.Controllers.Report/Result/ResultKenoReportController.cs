@@ -1,14 +1,11 @@
 ﻿namespace Fanex.Athena.Controllers.Report.Result
 {
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Logging;
-
     using Model.Report.DTO.Result;
-
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-
     using Web.ActionFilter;
 
     [FunctionAuthorization(PermissionKeys.ReportResults)]
@@ -46,25 +43,6 @@
                     userSession.UserId
                 },
             JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpGet]
-        [AjaxRequest]
-        public async Task<ActionResult> VirtualGameReuslt()
-        {
-            var obj = new { languageCode = SessionServiceInstance.UserSession.Language, platform = "d" };
-            if (ModelState.IsValid)
-            {
-                var data = await _betListApiClient.PostStringAsync(
-                    "/VirtualGamesResultPopup/GetResultPage",
-                     obj,
-                     SessionServiceInstance.UserSession.Language
-                    ).ConfigureAwait(false);
-
-                return this.Content(data, "text/html");
-            }
-
-            return this.Content(string.Empty, "text/html");
         }
 
         [HttpPost]

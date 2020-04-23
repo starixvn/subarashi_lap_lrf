@@ -37,8 +37,7 @@ namespace Fanex.Athena.Controllers.BetSettings
             { ProductTypes.VirtualSports2, "VirtualSports2" },
             { ProductTypes.Lottery, "Lottery" },
             { ProductTypes.Exchange, "Exchange" },
-            { ProductTypes.PP, "PP" },
-            { ProductTypes.TG, "TG" }
+            { ProductTypes.PP, "PP" }
         };
 
         private static readonly IEnumerable<int> ProductsHasStatus = new[]

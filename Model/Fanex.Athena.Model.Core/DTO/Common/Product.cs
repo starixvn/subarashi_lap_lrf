@@ -60,6 +60,8 @@ namespace Fanex.Athena.Model.Core.DTO.Common
 
         public const string TG = "TG";
 
+        public const string I4D = "I4D";
+
         #endregion Field
 
         #region Constructor

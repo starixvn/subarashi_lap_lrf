@@ -1,4 +1,4 @@
-﻿// Generated at: 4/10/2020 1:29:16 PM
+﻿// Generated at: 4/22/2020 9:28:30 AM
 var _language_zh_Hans = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -583,6 +583,7 @@ UpdateSportsbookBetSettings:"您确定您要更新所有的体育博彩投注设
 UpdateSportsbookBetSettingSuccessMsg:"{0}的体育博彩投注设定已成功更新",
 UpdateSuccess:"Update successfully!",
 UpdateUnSuccess:"Update unsucessfully!",
+UserGuide:"报告指南",
 UserInformation:"用户信息",
 Username:"用户名",
 View:"检视",

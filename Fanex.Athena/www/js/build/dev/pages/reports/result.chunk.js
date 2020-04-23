@@ -1212,7 +1212,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
         const EXCEL_API = 'ResultReport/ResultExcel?';
         const SPORT_API = 'ResultReport/GetSports';
         const KENO_RESULT_API = 'ResultKenoReport/Index';
-        const VIRTUAL_RESULT_API = 'ResultKenoReport/VirtualGameReuslt';
+        const VIRTUAL_RESULT_API = 'VirtualGamesResultReport/Index';
+        const INDO4D_RESULT_API = 'Indo4DResultReport/Index';
         const KENO_RESULT_SESSION_API = 'ResultKenoReport/KeepSession';
         let ajaxRequest = null;
         let ajaxFilterRequest = null;
@@ -1221,7 +1222,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
         let lotteryAjaxRequest = null;
         let lotteryIntervalId = 0;
         let virtualGameAjaxRequest = null;
-        let virtualGameIntervalId = 0;
+        let indo4DAjaxRequest = null;
         let tableGameAjaxRequest = null;
         let tableGameIntervalId = 0;
         const param = {
@@ -1356,13 +1357,19 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 
                 if ($('#submitVirtualGame').length) {
                     $('#submitVirtualGame').click(function () {
-                        _me.showVirtualGame($(this).data('vendorproductid'));
+                        _me.showVirtualGame();
                     });
                 }
 
                 if ($('#submitTableGame').length) {
                     $('#submitTableGame').click(function () {
                         _me.showTableGame($(this).data('vendorproductid'));
+                    });
+                }
+
+                if ($('#submitIndo4D').length) {
+                    $('#submitIndo4D').click(function () {
+                        _me.showIndo4D();
                     });
                 }
             },
@@ -1424,15 +1431,13 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                 lotteryAjaxRequest = $.ajax(option);
             },
 
-            showVirtualGame: function (vendorProductId) {
+            showVirtualGame: function () {
                 const option = {
                     type: 'GET',
                     cache: false,
                     url: Site.resolveClientUrl(VIRTUAL_RESULT_API),
                     success: function (response) {
                         window.open(response, '_blank', 'left=20,top=20,width=950,height=650,toolbar=1,resizable=1,scrollbars,status=1');
-                        clearTimeout(virtualGameIntervalId);
-                        _me.extendLotterySession(vendorProductId, response.UserId);
                     },
                     beforeSend: function () {
                         Site.blockUI();
@@ -1467,6 +1472,24 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                 tableGameAjaxRequest = $.ajax(option);
             },
 
+            showIndo4D: function () {
+                const option = {
+                    type: 'GET',
+                    cache: false,
+                    url: Site.resolveClientUrl(INDO4D_RESULT_API),
+                    success: function (response) {
+                        window.open(response, '_blank', 'left=20,top=20,width=950,height=650,toolbar=1,resizable=1,scrollbars,status=1');                    },
+                    beforeSend: function () {
+                        Site.blockUI();
+                    },
+                    complete: function () {
+                        Site.unBlockUI();
+                    }
+                };
+                _me.stopAjaxRequest(indo4DAjaxRequest);
+                indo4DAjaxRequest = $.ajax(option);
+            },
+
             extendKenoSession: function (vendorProductId, userId) {
                 if (!userId)
                 {
@@ -1495,33 +1518,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                 kenoIntervalId = setTimeout(callBack, 6000);
             },
 
-            extendLotterySession: function (vendorProductId, userId) {
-                if (!userId) {
-                    return;
-                }
-
-                const callBack = function () {
-                    const option = {
-                        type: 'POST',
-                        cache: false,
-                        data: {
-                            userId: userId,
-                            vendorProductId: vendorProductId
-                        },
-                        url: Site.resolveClientUrl(KENO_RESULT_SESSION_API),
-                        success: function (response) {
-                            if (response === '') {
-                                lotteryIntervalId = setTimeout(callBack, 6000);
-                            }
-                        }
-                    };
-
-                    lotteryAjaxRequest = $.ajax(option);
-                }
-
-                lotteryIntervalId = setTimeout(callBack, 6000);
-            },
-
             extendTableSession: function (vendorProductId, userId) {
                 if (!userId) {
                     return;
@@ -1547,6 +1543,33 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                 }
 
                 tableGameIntervalId = setTimeout(callBack, 6000);
+            },
+
+            extendLotterySession: function (vendorProductId, userId) {
+                if (!userId) {
+                    return;
+                }
+
+                const callBack = function () {
+                    const option = {
+                        type: 'POST',
+                        cache: false,
+                        data: {
+                            userId: userId,
+                            vendorProductId: vendorProductId
+                        },
+                        url: Site.resolveClientUrl(KENO_RESULT_SESSION_API),
+                        success: function (response) {
+                            if (response === '') {
+                                lotteryIntervalId = setTimeout(callBack, 6000);
+                            }
+                        }
+                    };
+
+                    lotteryAjaxRequest = $.ajax(option);
+                }
+
+                lotteryIntervalId = setTimeout(callBack, 6000);
             },
 
             getData: function () {

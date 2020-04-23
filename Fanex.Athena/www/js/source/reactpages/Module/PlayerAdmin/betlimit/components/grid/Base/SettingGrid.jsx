@@ -1,6 +1,6 @@
 import React from 'react';
 import Utility from '../../../lib/utility';
-import { BetLimitType, InputClassName } from '../../../lib/constants';
+import { BetLimitType, InputClassName, BetLimitSport } from '../../../lib/constants';
 
 const SettingGrid = (props) => {
     const { setting, data, onChange, getHeaderName } = props;
@@ -92,7 +92,7 @@ const SettingGrid = (props) => {
                         <th>{getHeaderName('MinBet')}</th>
                         <th>{getHeaderName('MaxBet')}</th>
                         {
-                            data[0].Id == 222
+                            data[0].Id == BetLimitSport.TG
                                 ? <th>{getHeaderName('MaxBetPerMatch')}</th>
                                 : <th>{getHeaderName('MaxPerMatch')}</th>
                         }

@@ -45,7 +45,7 @@
                 }
                 @if (ViewBag.IsAllowedVRG)
                 {
-                    <a href="javascript:;" class="center-align label label-primary" id="submitVirtualGame" data-vendorProductId="@ResultVendorProductTypes.VirtualGame">
+                    <a href="javascript:;" class="center-align label label-primary" id="submitVirtualGame">
                         @ViewResources.ProductVRG
                     </a>
                 }
@@ -53,6 +53,12 @@
                 {
                     <a href="javascript:;" class="center-align label label-primary" id="submitTableGame" data-vendorProductId="@ResultVendorProductTypes.TableGame">
                         @ViewResources.ProductTG
+                    </a>
+                }
+                @if (ViewBag.IsAllowedI4D)
+                {
+                    <a href="javascript:;" class="center-align label label-primary" id="submitIndo4D">
+                        @ViewResources.ProductI4D
                     </a>
                 }
             </div>

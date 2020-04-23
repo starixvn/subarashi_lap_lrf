@@ -1,9 +1,10 @@
 ﻿import LangHelper from '@jsroot/lib/langHelper';
-import { BetLimitType } from './constants';
+import { BetLimitType, BetLimitSport } from './constants';
 
 export default class Validatation {
     static validateMinMaxBet(current, limitData) {
-        const { MinBet, MaxBet, MaxPerMatch, Id } = current;
+        const { MinBet, MaxBet, MaxPerMatch } = current;
+        const Id = current.Id === BetLimitSport.I4D ? current.Id : current.BetType;
 
         if (isNaN(MinBet)) {
             return {

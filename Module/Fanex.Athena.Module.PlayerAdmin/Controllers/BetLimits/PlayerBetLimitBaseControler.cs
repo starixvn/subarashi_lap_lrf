@@ -24,6 +24,8 @@
     {
         private const string MixedSportId = "99MP";
 
+        private const string I4DId = "223";
+
         public IAuthorizationService AuthServiceInstance { get; set; }
 
         public ICacheRefAdapter CacheRefAdapterInstance { get; set; }
@@ -32,7 +34,7 @@
         {
             foreach (var item in data)
             {
-                item.BetSettingType = GetSportName(item.Id);
+                item.BetSettingType = (item.Id == I4DId) ? GetBetTypeName(item.BetType) : GetSportName(item.Id);
             }
 
             return data;
@@ -41,5 +43,7 @@
         protected bool HasEditPermission() => AuthServiceInstance.HasPermissions(SessionServiceInstance.UserSession, PermissionKeys.PlayerAdminBetLimit_Write);
 
         protected string GetSportName(string sportId) => sportId == MixedSportId ? ViewResources.MixSportsParlay : CacheRefAdapterInstance.GetSportName(sportId);
+
+        protected string GetBetTypeName(int bettypeId) => CacheRefAdapterInstance.GetBettype(bettypeId);
     }
 }
