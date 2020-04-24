@@ -27,8 +27,8 @@ namespace Fanex.Athena.Web.ActionFilter
 
         public CustomAuthorizeAttribute(ISessionStorage sessionStorage, IAppSettings appSettings)
         {
-            _sessionStorage = sessionStorage;
-            _appSettings = appSettings;
+            _sessionStorage = sessionStorage ?? new SessionStorage();
+            _appSettings = appSettings ?? new AppSettings();
         }
 
         protected override bool AuthorizeCore(HttpContextBase httpContext)

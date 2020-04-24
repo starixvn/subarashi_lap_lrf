@@ -46,7 +46,7 @@
         {
             var currencyList = SessionServiceInstance.UserSession.CurrencyList;
             var baseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency;
-            var lang = SessionServiceInstance.UserSession.Language;
+            var lang = LangService.GetCurrentLanguage();
 
             var hasVIPManangementPermission = HasVIPManagementPermission();
             var reasonList = await GetReasonList(lang).ConfigureAwait(false);
