@@ -2058,7 +2058,7 @@
     <comment>112658</comment>
   </data>
   <data name="FundtransferLimit" xml:space="preserve">
-    <value>转账额度</value>
+    <value>转帐限额</value>
     <comment>112658</comment>
   </data>
   <data name="GrandPrizeNote" xml:space="preserve">

@@ -1,4 +1,4 @@
-﻿// Generated at: 4/22/2020 9:28:30 AM
+﻿// Generated at: 4/28/2020 9:31:43 AM
 var _language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -252,7 +252,7 @@ Full:"全场",
 FullTime:"全场",
 Function:"功能",
 FunctionDeniedMsg:"抱歉，你没有权限使用这功能",
-FundtransferLimit:"转账额度",
+FundtransferLimit:"转帐限额",
 GameKind:"游戏种类",
 GameType:"游戏类型",
 GameTypeName:"游戏类型名称",
