@@ -2771,4 +2771,7 @@
     <value>Reduced Max Per Event</value>
     <comment>#131929</comment>
   </data>
+  <data name="DelayPayout" xml:space="preserve">
+    <value>Delay Payout</value>
+  </data>
 </root>

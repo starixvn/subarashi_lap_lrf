@@ -4,7 +4,7 @@
     {
         public const int Running = 0;
         public const int Waiting = 1;
-        public const int ResultPending = 2;
+        public const int DelayPayout = 2;
         public const int UnderSettlement = 3;
         public const int AbnormalBet = 99;
 
