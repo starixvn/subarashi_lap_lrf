@@ -71,5 +71,7 @@
         string GetValue(string key);
 
         int BetListApiClientTimeOutMinutes { get; }
+
+        IEnumerable<string> ListActionNoView { get; }
     }
 }

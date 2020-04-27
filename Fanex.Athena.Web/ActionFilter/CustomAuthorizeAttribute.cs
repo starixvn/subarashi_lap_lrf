@@ -9,6 +9,7 @@ namespace Fanex.Athena.Web.ActionFilter
     using Fanex.Athena.Service.Core.Users;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using System;
+    using System.Linq;
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Routing;
@@ -57,10 +58,10 @@ namespace Fanex.Athena.Web.ActionFilter
 
         private bool IsActionView(HttpRequestBase request)
         {
-            var noViewActions = _appSettings.GetValue("NoViewAction");
+            var noViewActions = _appSettings.ListActionNoView;
             var actionLink = request.Url.AbsolutePath.Trim('/');
             return string.IsNullOrEmpty(actionLink) ||
-                !noViewActions.ToLowerInvariant().Contains(actionLink.ToLowerInvariant());
+                !noViewActions.Any(_ => actionLink.EndsWith(_, StringComparison.OrdinalIgnoreCase));
         }
     }
 }

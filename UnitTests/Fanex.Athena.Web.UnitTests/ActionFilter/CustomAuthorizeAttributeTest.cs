@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Linq;
+using System.Web.Mvc;
 using Fanex.Athena.Extension.Utility;
 using Fanex.Athena.Model.Auth;
 using Fanex.Athena.Service.Core.Users.Interfaces;
@@ -70,15 +72,18 @@ namespace Fanex.Athena.Web.UnitTests.ActionFilter
             });
         }
 
-        [TestCase("adsad/123asd@Auth/InvalidateSession")]
-        [TestCase("auth/invalidatesession")]
-        [TestCase("Auth/invalidateSESSION")]
+        [TestCase("adsad/123asd;Auth/InvalidateSession")]
+        [TestCase("abc/xyz;auth/invalidatesession")]
+        [TestCase("Auth/invalidateSESSION;")]
         public void OnAuthorization_NotAuthorized_AssignCorrectStringValues(string noActionViewConfigs)
         {
             // Arrange
             var requestDomain = MvcHelper.TestingRequestDomain + "/Auth/InvalidateSession";
             var filterContext = CreateFilterContext(false, requestDomain);
-            _appSettings.GetValue("NoViewAction").Returns(noActionViewConfigs);
+
+            var fakeListActionNoView = noActionViewConfigs.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries)
+            ?? Enumerable.Empty<string>();
+            _appSettings.ListActionNoView.Returns(fakeListActionNoView);
 
             // Action
             _attribute.OnAuthorization(filterContext);

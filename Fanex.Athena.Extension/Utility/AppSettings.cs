@@ -184,6 +184,10 @@ namespace Fanex.Athena.Extension.Utility
 
         public int BetListApiClientTimeOutMinutes => int.Parse(GetValue("BetListApiClientTimeOutMinutes"));
 
+        public IEnumerable<string> ListActionNoView => GetValue("NoViewAction")?
+            .Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries)
+            ?? Enumerable.Empty<string>();
+
         private IEnumerable<int> GetIntegers(string key)
         {
             var value = GetValue(key);
