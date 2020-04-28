@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../../actions';
@@ -17,6 +17,7 @@ export const UserNameCell = (props) => {
         setContextMenu,
         contextMenu,
         setSelectedTabName,
+        setSelectedSubTabName,
         getTabList,
         type
     } = props;
@@ -26,6 +27,7 @@ export const UserNameCell = (props) => {
         const newSelectedPlayer = buildSelectedPlayer(dataItem);
         setSelectedPlayer(newSelectedPlayer);
         setSelectedTabName(null);
+        setSelectedSubTabName(null);
     }
 
     const handleEnterContextMenu = (event) => {
@@ -77,8 +79,8 @@ export const UserNameCell = (props) => {
 }
 
 function mapDispatchToProps(dispatch) {
-    const { setSelectedPlayer, setCurrentActivePlayer, setContextMenu, setSelectedTabName, getTabList } = ActionCreators;
-    return bindActionCreators({ setSelectedPlayer, setCurrentActivePlayer, setContextMenu, setSelectedTabName, getTabList }, dispatch);
+    const { setSelectedPlayer, setCurrentActivePlayer, setContextMenu, setSelectedTabName, setSelectedSubTabName, getTabList } = ActionCreators;
+    return bindActionCreators({ setSelectedPlayer, setCurrentActivePlayer, setContextMenu, setSelectedTabName, setSelectedSubTabName, getTabList }, dispatch);
 }
 
 function mapStateToProps(state) {

@@ -1,4 +1,4 @@
-import { SET_PARAM, SET_ADVANCED_SEARCH, SET_COLLAPSE_FILTER } from './types';
+﻿import { SET_PARAM, SET_ADVANCED_SEARCH, SET_COLLAPSE_FILTER } from './types';
 import { toggleLoader } from '@jsroot/actions/loaderAction';
 import PlayerQueryService from '../lib/services/playerQueryService';
 import { setSelectedPlayer } from './commonAction';
@@ -6,13 +6,14 @@ import { setPlayerList, setPagingOption, setIsFetchingData } from './gridHandler
 import { defaultPagingOption } from '../lib/constants.js';
 import { buildSelectedPlayer } from '../lib/helpers/playerDataBuilder';
 import PlayerSuggestionService from '../lib/services/playerSuggestionService';
-import { setSelectedTabName } from './playerDetailHandlerAction';
+import { setSelectedTabName, setSelectedSubTabName } from './playerDetailHandlerAction';
 
 const processBeforeGettingData = (dispatch) => {
     dispatch(setSelectedPlayer(null));
     dispatch(setIsFetchingData(true));
     dispatch(toggleLoader(true));
     dispatch(setSelectedTabName(null));
+    dispatch(setSelectedSubTabName(null));
 }
 
 export const searchPlayer = (param) => (dispatch) => {

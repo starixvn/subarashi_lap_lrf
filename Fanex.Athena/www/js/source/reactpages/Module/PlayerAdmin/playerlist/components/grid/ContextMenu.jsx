@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../../actions';
@@ -7,7 +7,7 @@ import { DropdownMenu, DropdownItem } from '@jsroot/components/dropdown';
 import { getActiveTabList } from '../../lib/helpers/contextMenuHelper';
 
 export const ContextMenu = (props) => {
-    const { setSelectedPlayer, currentActivePlayer, setSelectedTabName, getTabList, contextMenu, type } = props;
+    const { setSelectedPlayer, currentActivePlayer, setSelectedTabName, setSelectedSubTabName, getTabList, contextMenu, type } = props;
     const { position, isOpen: isOpenContextMenu } = contextMenu;
     const [isOpen, setIsOpen] = useState(false);
     const handleMouseEnter = () => {
@@ -18,8 +18,9 @@ export const ContextMenu = (props) => {
         setIsOpen(isOpenContextMenu);
     }
 
-    const handleClickMenu = (tabName) => {
+    const handleClickMenu = (tabName, subTabName) => {
         setSelectedTabName(tabName);
+        setSelectedSubTabName(subTabName || '');
         const { ibcCustId, userName, currency, isDeposit, isArchived, licenseeCustId, currencyId, createdDate } = currentActivePlayer;
         const selectedPlayer = { ibcCustId, userName, currency, isDeposit, isArchived, licenseeCustId, currencyId, createdDate };
         setSelectedPlayer(selectedPlayer);
@@ -42,10 +43,10 @@ export const ContextMenu = (props) => {
             <DropdownMenu onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} isOpen={isOpenContextMenu || isOpen}>
                 {
                     activeMenuList.map(item => {
+                        const selectedTabName = item.tabName;
                         const subTabName = item.subTabName;
-                        const selectedTabName = subTabName || item.tabName;
 
-                        return <DropdownItem key={item.key} onClick={() => handleClickMenu(selectedTabName)}>{item.name}</DropdownItem>
+                        return <DropdownItem key={item.key} onClick={() => handleClickMenu(selectedTabName, subTabName)}>{item.name}</DropdownItem>
                     })
                 }
             </DropdownMenu>
@@ -54,8 +55,8 @@ export const ContextMenu = (props) => {
 }
 
 function mapDispatchToProps(dispatch) {
-    const { setSelectedPlayer, setSelectedTabName, getTabList } = ActionCreators;
-    return bindActionCreators({ setSelectedPlayer, setSelectedTabName, getTabList }, dispatch);
+    const { setSelectedPlayer, setSelectedTabName, setSelectedSubTabName, getTabList } = ActionCreators;
+    return bindActionCreators({ setSelectedPlayer, setSelectedTabName, setSelectedSubTabName, getTabList }, dispatch);
 }
 
 function mapStateToProps(state) {

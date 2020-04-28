@@ -323,6 +323,7 @@ const processBeforeGettingData = dispatch => {
   dispatch(Object(_gridHandlerAction__WEBPACK_IMPORTED_MODULE_4__["setIsFetchingData"])(true));
   dispatch(Object(_jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_1__["toggleLoader"])(true));
   dispatch(Object(_playerDetailHandlerAction__WEBPACK_IMPORTED_MODULE_8__["setSelectedTabName"])(null));
+  dispatch(Object(_playerDetailHandlerAction__WEBPACK_IMPORTED_MODULE_8__["setSelectedSubTabName"])(null));
 };
 
 const searchPlayer = param => dispatch => {
@@ -629,7 +630,7 @@ const ActionCreators = Object.assign({}, _jsroot_actions_loaderAction__WEBPACK_I
 /*!*****************************************************************************************************!*\
   !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/playerDetailHandlerAction.js ***!
   \*****************************************************************************************************/
-/*! exports provided: getLink, getTabList, setSelectedPlayerIdList, setSelectedTabName */
+/*! exports provided: getLink, getTabList, setSelectedPlayerIdList, setSelectedTabName, setSelectedSubTabName */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -638,6 +639,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTabList", function() { return getTabList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSelectedPlayerIdList", function() { return setSelectedPlayerIdList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSelectedTabName", function() { return setSelectedTabName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSelectedSubTabName", function() { return setSelectedSubTabName; });
 /* harmony import */ var _lib_services_playerQueryService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../lib/services/playerQueryService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/services/playerQueryService.js");
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/types.js");
 
@@ -659,6 +661,12 @@ const setSelectedPlayerIdList = data => {
 const setSelectedTabName = data => {
   return {
     type: _types__WEBPACK_IMPORTED_MODULE_1__["SET_SELECTED_TAB_NAME"],
+    data
+  };
+};
+const setSelectedSubTabName = data => {
+  return {
+    type: _types__WEBPACK_IMPORTED_MODULE_1__["SET_SELECTED_SUBTAB_NAME"],
     data
   };
 };
@@ -722,7 +730,7 @@ const setSiteSetting = data => {
 /*!*********************************************************************************!*\
   !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/types.js ***!
   \*********************************************************************************/
-/*! exports provided: SET_PARAM, SET_PLAYER_LIST, SET_SELECTED_PLAYER, SET_SELECTED_PLAYERID_LIST, SET_ADVANCED_SEARCH, SET_COLLAPSE_FILTER, SET_DISPLAYED_COLUMN_LIST, SET_CURRENT_ACTIVE_PLAYER, SET_PAGING, SET_SELECTED_TAB_NAME, SET_IS_FETCHING_DATA, SET_ODDSGROUP_POSITION, SET_SPECIAL_LEVEL_POSITION, SET_STATUS_POSITION, SET_CONTEXT_MENU, SET_SWEET_ALERT_OPTION, SET_SITE_SETTING */
+/*! exports provided: SET_PARAM, SET_PLAYER_LIST, SET_SELECTED_PLAYER, SET_SELECTED_PLAYERID_LIST, SET_ADVANCED_SEARCH, SET_COLLAPSE_FILTER, SET_DISPLAYED_COLUMN_LIST, SET_CURRENT_ACTIVE_PLAYER, SET_PAGING, SET_SELECTED_TAB_NAME, SET_SELECTED_SUBTAB_NAME, SET_IS_FETCHING_DATA, SET_ODDSGROUP_POSITION, SET_SPECIAL_LEVEL_POSITION, SET_STATUS_POSITION, SET_CONTEXT_MENU, SET_SWEET_ALERT_OPTION, SET_SITE_SETTING */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -737,6 +745,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_CURRENT_ACTIVE_PLAYER", function() { return SET_CURRENT_ACTIVE_PLAYER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_PAGING", function() { return SET_PAGING; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SELECTED_TAB_NAME", function() { return SET_SELECTED_TAB_NAME; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SELECTED_SUBTAB_NAME", function() { return SET_SELECTED_SUBTAB_NAME; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_IS_FETCHING_DATA", function() { return SET_IS_FETCHING_DATA; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_ODDSGROUP_POSITION", function() { return SET_ODDSGROUP_POSITION; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SPECIAL_LEVEL_POSITION", function() { return SET_SPECIAL_LEVEL_POSITION; });
@@ -754,6 +763,7 @@ const SET_DISPLAYED_COLUMN_LIST = 'PLAYER_ADMIN/SET_DISPLAYED_COLUMN_LIST';
 const SET_CURRENT_ACTIVE_PLAYER = 'PLAYER_ADMIN/SET_CURRENT_ACTIVE_PLAYER';
 const SET_PAGING = 'PLAYER_ADMIN/SET_PAGING';
 const SET_SELECTED_TAB_NAME = 'PLAYER_ADMIN/SET_SELECTED_TAB_NAME';
+const SET_SELECTED_SUBTAB_NAME = 'PLAYER_ADMIN/SET_SELECTED_SUBTAB_NAME';
 const SET_IS_FETCHING_DATA = 'PLAYER_ADMIN/SET_IS_FETCHING_DATA';
 const SET_ODDSGROUP_POSITION = 'PLAYER_ADMIN/SET_ODDSGROUP_POSITION';
 const SET_SPECIAL_LEVEL_POSITION = 'PLAYER_ADMIN/SET_SPECIAL_LEVEL_POSITION';
@@ -1426,6 +1436,7 @@ class PlayerDetail extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
     _defineProperty(this, "handleClickMenu", (event, tabName) => {
       event.preventDefault();
       this.props.setSelectedTabName(tabName);
+      this.props.setSelectedSubTabName(null);
     });
 
     this._tabList = this.props.getTabList();
@@ -1474,8 +1485,7 @@ class PlayerDetail extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
     return renderedTabList.map(item => {
       const actionUrl = this._buildActionUrl(item.SystemType, item.Action, item.Name);
 
-      const tabNameBySelectedMenu = _lib_constants__WEBPACK_IMPORTED_MODULE_4__["tabNameByContextMenu"][selectedTabName];
-      const isActive = tabNameBySelectedMenu === item.Name || selectedTabName === item.Name;
+      const isActive = selectedTabName === item.Name;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "tab",
         key: item.Name
@@ -1506,11 +1516,11 @@ class PlayerDetail extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
 
   _getActionUrl() {
     const {
-      selectedTabName
+      selectedTabName,
+      selectedSubTabName
     } = this.props;
-    const tabNameBySelectedMenu = _lib_constants__WEBPACK_IMPORTED_MODULE_4__["tabNameByContextMenu"][selectedTabName];
-    const tabItem = selectedTabName ? this._tabList.find(t => t.Name === tabNameBySelectedMenu || t.Name === selectedTabName) : this._tabList[0];
-    const action = tabNameBySelectedMenu ? `${tabItem.Action}?subTab=${selectedTabName}` : tabItem.Action;
+    const tabItem = selectedTabName ? this._tabList.find(t => t.Name === selectedTabName) : this._tabList[0];
+    const action = selectedSubTabName ? `${tabItem.Action}?timestamp=${new Date().getTime()}&subTab=${selectedSubTabName}` : `${tabItem.Action}?timestamp=${new Date().getTime()}`;
     return tabItem && this._buildActionUrl(tabItem.SystemType, action, tabItem.Name);
   }
 
@@ -1566,12 +1576,14 @@ function mapDispatchToProps(dispatch) {
   const {
     getLink,
     getTabList,
-    setSelectedTabName
+    setSelectedTabName,
+    setSelectedSubTabName
   } = _actions__WEBPACK_IMPORTED_MODULE_3__["ActionCreators"];
   return Object(redux__WEBPACK_IMPORTED_MODULE_2__["bindActionCreators"])({
     getLink,
     getTabList,
-    setSelectedTabName
+    setSelectedTabName,
+    setSelectedSubTabName
   }, dispatch);
 }
 
@@ -1580,13 +1592,15 @@ function mapStateToProps(state) {
     selectedPlayer,
     isAdvancedSearch,
     isFilterCollapsing,
-    selectedTabName
+    selectedTabName,
+    selectedSubTabName
   } = state;
   return Object.assign({}, {
     selectedPlayer,
     isAdvancedSearch,
     isFilterCollapsing,
-    selectedTabName
+    selectedTabName,
+    selectedSubTabName
   });
 }
 
@@ -2387,6 +2401,7 @@ const ContextMenu = props => {
     setSelectedPlayer,
     currentActivePlayer,
     setSelectedTabName,
+    setSelectedSubTabName,
     getTabList,
     contextMenu,
     type
@@ -2405,8 +2420,9 @@ const ContextMenu = props => {
     setIsOpen(isOpenContextMenu);
   };
 
-  const handleClickMenu = tabName => {
+  const handleClickMenu = (tabName, subTabName) => {
     setSelectedTabName(tabName);
+    setSelectedSubTabName(subTabName || '');
     const {
       ibcCustId,
       userName,
@@ -2449,11 +2465,11 @@ const ContextMenu = props => {
     onMouseLeave: handleMouseLeave,
     isOpen: isOpenContextMenu || isOpen
   }, activeMenuList.map(item => {
+    const selectedTabName = item.tabName;
     const subTabName = item.subTabName;
-    const selectedTabName = subTabName || item.tabName;
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_4__["DropdownItem"], {
       key: item.key,
-      onClick: () => handleClickMenu(selectedTabName)
+      onClick: () => handleClickMenu(selectedTabName, subTabName)
     }, item.name);
   })));
 };
@@ -2462,11 +2478,13 @@ function mapDispatchToProps(dispatch) {
   const {
     setSelectedPlayer,
     setSelectedTabName,
+    setSelectedSubTabName,
     getTabList
   } = _actions__WEBPACK_IMPORTED_MODULE_3__["ActionCreators"];
   return Object(redux__WEBPACK_IMPORTED_MODULE_2__["bindActionCreators"])({
     setSelectedPlayer,
     setSelectedTabName,
+    setSelectedSubTabName,
     getTabList
   }, dispatch);
 }
@@ -3419,6 +3437,7 @@ const UserNameCell = props => {
     setContextMenu,
     contextMenu,
     setSelectedTabName,
+    setSelectedSubTabName,
     getTabList,
     type
   } = props;
@@ -3428,6 +3447,7 @@ const UserNameCell = props => {
     const newSelectedPlayer = Object(_lib_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_5__["buildSelectedPlayer"])(dataItem);
     setSelectedPlayer(newSelectedPlayer);
     setSelectedTabName(null);
+    setSelectedSubTabName(null);
   };
 
   const handleEnterContextMenu = event => {
@@ -3488,6 +3508,7 @@ function mapDispatchToProps(dispatch) {
     setCurrentActivePlayer,
     setContextMenu,
     setSelectedTabName,
+    setSelectedSubTabName,
     getTabList
   } = _actions__WEBPACK_IMPORTED_MODULE_3__["ActionCreators"];
   return Object(redux__WEBPACK_IMPORTED_MODULE_2__["bindActionCreators"])({
@@ -3495,6 +3516,7 @@ function mapDispatchToProps(dispatch) {
     setCurrentActivePlayer,
     setContextMenu,
     setSelectedTabName,
+    setSelectedSubTabName,
     getTabList
   }, dispatch);
 }
@@ -3582,7 +3604,7 @@ Object(react_dom__WEBPACK_IMPORTED_MODULE_1__["render"])(react__WEBPACK_IMPORTED
 /*!*********************************************************************************!*\
   !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js ***!
   \*********************************************************************************/
-/*! exports provided: specialLevelListWithColor, oddsGroupListWithStyle, licenseeType, fields, columnList, contextMenuKeys, tabNames, tabNameByContextMenu, excludedTabNameWithNonDepositAndArchived, contextMenuList, heightSlicing, searchOptions, defaultPagingOption, playerStatus, playerStatusByName, displayedPlayerStatusList, messageUpdateState, baStatusList, headerText, gridItemDropdownHeight, stringTypeFields, apiInfo, apiUpdateInfo, apiSiteSetting, apiSuggestion, excludedContextMenuWithNonDeposit, excludedContextMenuWithClosed, excludedContextMenuWithArchived, excludedContextMenuWithApiLicensee, playerTypes, emailPattern */
+/*! exports provided: specialLevelListWithColor, oddsGroupListWithStyle, licenseeType, fields, columnList, contextMenuKeys, tabNames, excludedTabNameWithNonDepositAndArchived, contextMenuList, heightSlicing, searchOptions, defaultPagingOption, playerStatus, playerStatusByName, displayedPlayerStatusList, messageUpdateState, baStatusList, headerText, gridItemDropdownHeight, stringTypeFields, apiInfo, apiUpdateInfo, apiSiteSetting, apiSuggestion, excludedContextMenuWithNonDeposit, excludedContextMenuWithClosed, excludedContextMenuWithArchived, excludedContextMenuWithApiLicensee, playerTypes, emailPattern */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3594,7 +3616,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "columnList", function() { return columnList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "contextMenuKeys", function() { return contextMenuKeys; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tabNames", function() { return tabNames; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tabNameByContextMenu", function() { return tabNameByContextMenu; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "excludedTabNameWithNonDepositAndArchived", function() { return excludedTabNameWithNonDepositAndArchived; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "contextMenuList", function() { return contextMenuList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "heightSlicing", function() { return heightSlicing; });
@@ -3729,10 +3750,12 @@ const tabNames = {
   playerInfo: 'lblPlayerAdminPlayerInfo',
   statement: 'lblPlayerAdminPlayerStatement',
   betlist: 'lblPlayerAdminBetList',
-  betLimit: 'lblPlayerAdminBetLimit'
-};
-const tabNameByContextMenu = {
-  [contextMenuKeys.bankInformation]: tabNames.playerInfo
+  betLimit: 'lblPlayerAdminBetLimit',
+  setting: 'lblPlayerAdminSetting',
+  fundTransferLimit: 'FundTransferLimit',
+  password: 'Password',
+  bankInfo: 'BankInfo',
+  personalMessage: 'PersonalMessage'
 };
 const excludedTabNameWithNonDepositAndArchived = [tabNames.statement, tabNames.betlist, tabNames.betLimit];
 const contextMenuList = [{
@@ -3742,16 +3765,18 @@ const contextMenuList = [{
 }, {
   key: contextMenuKeys.password,
   name: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Password'),
-  tabName: 'lblPlayerAdminSetting'
+  tabName: tabNames.setting,
+  subTabName: tabNames.password
 }, {
   key: contextMenuKeys.bankInformation,
   name: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('BankInformation'),
-  tabName: 'lblPlayerAdminPlayerInfo',
-  subTabName: contextMenuKeys.bankInformation
+  tabName: tabNames.setting,
+  subTabName: tabNames.bankInfo
 }, {
   key: contextMenuKeys.fundtransferLimit,
   name: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('FundtransferLimit'),
-  tabName: 'lblPlayerAdminFundTransfer'
+  tabName: tabNames.setting,
+  subTabName: tabNames.fundTransferLimit
 }, {
   key: contextMenuKeys.betLimit,
   name: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('BetLimit'),
@@ -3763,7 +3788,8 @@ const contextMenuList = [{
 }, {
   key: contextMenuKeys.personalMessage,
   name: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('PersonalMessage'),
-  tabName: 'lblPlayerAdminMessage'
+  tabName: 'lblPlayerAdminMessage',
+  subTabName: tabNames.personalMessage
 }];
 const heightSlicing = {
   default: 300,
@@ -5481,7 +5507,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!*******************************************************************************************************!*\
   !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/reducers/playerDetailHandlerReducer.js ***!
   \*******************************************************************************************************/
-/*! exports provided: selectedPlayer, selectedPlayerIdList, selectedTabName */
+/*! exports provided: selectedPlayer, selectedPlayerIdList, selectedTabName, selectedSubTabName */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5489,6 +5515,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectedPlayer", function() { return selectedPlayer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectedPlayerIdList", function() { return selectedPlayerIdList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectedTabName", function() { return selectedTabName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectedSubTabName", function() { return selectedSubTabName; });
 /* harmony import */ var _lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
 /* harmony import */ var _actions_types_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/types.js */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/types.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -5513,6 +5540,12 @@ const selectedPlayerIdList = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODU
 });
 const selectedTabName = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])('', {
   [_actions_types_js__WEBPACK_IMPORTED_MODULE_1__["SET_SELECTED_TAB_NAME"]](preState, action) {
+    return action.data;
+  }
+
+});
+const selectedSubTabName = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])('', {
+  [_actions_types_js__WEBPACK_IMPORTED_MODULE_1__["SET_SELECTED_SUBTAB_NAME"]](preState, action) {
     return action.data;
   }
 

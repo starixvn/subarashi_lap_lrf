@@ -2411,7 +2411,7 @@
     <comment>119010</comment>
   </data>
   <data name="FundtransferLimit" xml:space="preserve">
-    <value>Fundtransfer Limit</value>
+    <value>Fund Transfer Limit</value>
     <comment>112658</comment>
   </data>
   <data name="BetLimit" xml:space="preserve">
@@ -2730,7 +2730,8 @@
   </data>
   <data name="Message_RemoveCustomerLog" xml:space="preserve">
     <value>Customer Log will be removed at 11am on April 21st (GMT+8). Kindly use Player Administration instead. Thanks!</value>
-  </data>  <data name="ProductI4D" xml:space="preserve">
+  </data>
+  <data name="ProductI4D" xml:space="preserve">
     <value>Indo 4D</value>
   </data>
   <data name="VirtualSoccerChampionsCup" xml:space="preserve">

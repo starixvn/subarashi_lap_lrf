@@ -1,8 +1,8 @@
-import React, { PureComponent } from 'react';
+﻿import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../actions';
-import { heightSlicing, excludedTabNameWithNonDepositAndArchived, tabNameByContextMenu, tabNames } from '../lib/constants';
+import { heightSlicing, excludedTabNameWithNonDepositAndArchived, tabNames } from '../lib/constants';
 
 export class PlayerDetail extends PureComponent {
     constructor(props) {
@@ -17,6 +17,7 @@ export class PlayerDetail extends PureComponent {
     handleClickMenu = (event, tabName) => {
         event.preventDefault();
         this.props.setSelectedTabName(tabName);
+        this.props.setSelectedSubTabName(null);
     }
 
     _buildActionUrl(systemType, action, tabName) {
@@ -27,7 +28,7 @@ export class PlayerDetail extends PureComponent {
         const queryString = (action.indexOf('?') !== -1 ? '&' : '?') + nameValuePairString;
 
         let urlByPlayer = action + queryString;
-        if(tabName === tabNames.playerInfo){
+        if (tabName === tabNames.playerInfo) {
             urlByPlayer += `&createdDate=${encodeURIComponent(createdDate)}`;
         }
 
@@ -37,15 +38,14 @@ export class PlayerDetail extends PureComponent {
     _renderTabList(tabList) {
         const { selectedPlayer } = this.props;
         const selectedTabName = this.props.selectedTabName || this._getDefaultSelectedTab();
-        const {isDeposit, isArchived} = selectedPlayer;
-        const renderedTabList = !isDeposit || isArchived ? 
+        const { isDeposit, isArchived } = selectedPlayer;
+        const renderedTabList = !isDeposit || isArchived ?
             tabList.filter(item => !excludedTabNameWithNonDepositAndArchived.includes(item.Name)) : tabList;
 
         return (
             renderedTabList.map((item) => {
                 const actionUrl = this._buildActionUrl(item.SystemType, item.Action, item.Name);
-                const tabNameBySelectedMenu = tabNameByContextMenu[selectedTabName];
-                const isActive = tabNameBySelectedMenu === item.Name || selectedTabName === item.Name;
+                const isActive = selectedTabName === item.Name;
 
                 return (
                     <li className="tab" key={item.Name}>
@@ -75,17 +75,13 @@ export class PlayerDetail extends PureComponent {
     }
 
     _getActionUrl() {
-        const { selectedTabName } = this.props;
-        const tabNameBySelectedMenu = tabNameByContextMenu[selectedTabName];
-        const tabItem = selectedTabName ? 
-            this._tabList.find(t => t.Name === tabNameBySelectedMenu || t.Name === selectedTabName) : this._tabList[0];
-
-        const action = tabNameBySelectedMenu ? `${tabItem.Action}?subTab=${selectedTabName}` : tabItem.Action;
-
+        const { selectedTabName, selectedSubTabName } = this.props;
+        const tabItem = selectedTabName ? this._tabList.find(t => t.Name === selectedTabName) : this._tabList[0];
+        const action = selectedSubTabName
+            ? `${tabItem.Action}?timestamp=${new Date().getTime()}&subTab=${selectedSubTabName}`
+            : `${tabItem.Action}?timestamp=${new Date().getTime()}`;
         return tabItem && this._buildActionUrl(tabItem.SystemType, action, tabItem.Name);
     }
-
-    
 
     render() {
         const { selectedPlayer } = this.props;
@@ -127,13 +123,13 @@ export class PlayerDetail extends PureComponent {
 }
 
 function mapDispatchToProps(dispatch) {
-    const { getLink, getTabList, setSelectedTabName } = ActionCreators;
-    return bindActionCreators({ getLink, getTabList, setSelectedTabName }, dispatch);
+    const { getLink, getTabList, setSelectedTabName, setSelectedSubTabName } = ActionCreators;
+    return bindActionCreators({ getLink, getTabList, setSelectedTabName, setSelectedSubTabName }, dispatch);
 }
 
 function mapStateToProps(state) {
-    const { selectedPlayer, isAdvancedSearch, isFilterCollapsing, selectedTabName } = state;
-    return Object.assign({}, { selectedPlayer, isAdvancedSearch, isFilterCollapsing, selectedTabName });
+    const { selectedPlayer, isAdvancedSearch, isFilterCollapsing, selectedTabName, selectedSubTabName } = state;
+    return Object.assign({}, { selectedPlayer, isAdvancedSearch, isFilterCollapsing, selectedTabName, selectedSubTabName });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayerDetail);

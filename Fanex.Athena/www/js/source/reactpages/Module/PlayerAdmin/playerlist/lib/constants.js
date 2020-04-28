@@ -73,23 +73,24 @@ export const tabNames = {
     playerInfo: 'lblPlayerAdminPlayerInfo',
     statement: 'lblPlayerAdminPlayerStatement',
     betlist: 'lblPlayerAdminBetList',
-    betLimit: 'lblPlayerAdminBetLimit'
-}
-
-export const tabNameByContextMenu = {
-    [contextMenuKeys.bankInformation]: tabNames.playerInfo
+    betLimit: 'lblPlayerAdminBetLimit',
+    setting: 'lblPlayerAdminSetting',
+    fundTransferLimit: 'FundTransferLimit',
+    password: 'Password',
+    bankInfo: 'BankInfo',
+    personalMessage: 'PersonalMessage'
 }
 
 export const excludedTabNameWithNonDepositAndArchived = [tabNames.statement, tabNames.betlist, tabNames.betLimit];
 
 export const contextMenuList = [
     { key: contextMenuKeys.note, name: LangHelper.getSingleResource('Note'), tabName: 'lblPlayerAdminNote' },
-    { key: contextMenuKeys.password, name: LangHelper.getSingleResource('Password'), tabName: 'lblPlayerAdminSetting' },
-    { key: contextMenuKeys.bankInformation, name: LangHelper.getSingleResource('BankInformation'), tabName: 'lblPlayerAdminPlayerInfo', subTabName: contextMenuKeys.bankInformation },
-    { key: contextMenuKeys.fundtransferLimit, name: LangHelper.getSingleResource('FundtransferLimit'), tabName: 'lblPlayerAdminFundTransfer' },
+    { key: contextMenuKeys.password, name: LangHelper.getSingleResource('Password'), tabName: tabNames.setting, subTabName: tabNames.password },
+    { key: contextMenuKeys.bankInformation, name: LangHelper.getSingleResource('BankInformation'), tabName: tabNames.setting, subTabName: tabNames.bankInfo },
+    { key: contextMenuKeys.fundtransferLimit, name: LangHelper.getSingleResource('FundtransferLimit'), tabName: tabNames.setting, subTabName: tabNames.fundTransferLimit },
     { key: contextMenuKeys.betLimit, name: LangHelper.getSingleResource('BetLimit'), tabName: tabNames.betLimit },
     { key: contextMenuKeys.statement, name: LangHelper.getSingleResource('Statement'), tabName: tabNames.statement },
-    { key: contextMenuKeys.personalMessage, name: LangHelper.getSingleResource('PersonalMessage'), tabName: 'lblPlayerAdminMessage' }
+    { key: contextMenuKeys.personalMessage, name: LangHelper.getSingleResource('PersonalMessage'), tabName: 'lblPlayerAdminMessage', subTabName: tabNames.personalMessage }
 ]
 
 export const heightSlicing = {

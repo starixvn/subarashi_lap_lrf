@@ -1,4 +1,4 @@
-﻿// Generated at: 4/22/2020 9:28:30 AM
+﻿// Generated at: 4/28/2020 9:31:43 AM
 var _language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -293,7 +293,7 @@ FullTime:"FullTime",
 Function:"Function",
 FunctionDeniedMsg:"Sorry, you don&apos;t have permission to access this function.",
 FunctionNoAvailableMsg:"This function was no longer available!",
-FundtransferLimit:"Fundtransfer Limit",
+FundtransferLimit:"Fund Transfer Limit",
 GameKind:"Game Kind",
 GameType:"Game Type",
 GameTypeName:"Game Type Name",

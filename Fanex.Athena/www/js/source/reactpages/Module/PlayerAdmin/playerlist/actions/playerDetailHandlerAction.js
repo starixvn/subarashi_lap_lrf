@@ -1,5 +1,5 @@
-import PlayerQueryService from '../lib/services/playerQueryService';
-import { SET_SELECTED_PLAYERID_LIST, SET_SELECTED_TAB_NAME } from './types';
+﻿import PlayerQueryService from '../lib/services/playerQueryService';
+import { SET_SELECTED_PLAYERID_LIST, SET_SELECTED_TAB_NAME, SET_SELECTED_SUBTAB_NAME } from './types';
 
 export const getLink = (systemType, action) => () => {
     const service = new PlayerQueryService();
@@ -24,3 +24,10 @@ export const setSelectedTabName = (data) => {
         data
     }
 }
+
+export const setSelectedSubTabName = (data) => {
+    return {
+        type: SET_SELECTED_SUBTAB_NAME,
+        data
+    }
+};
