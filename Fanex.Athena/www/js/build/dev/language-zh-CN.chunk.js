@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 4/28/2020 9:32:25 AM
+﻿// Generated at: 4/28/2020 3:21:54 PM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -283,6 +283,7 @@ DecimalOdds:"欧洲盘赔率",
 DeepLink:"深度链结",
 DefaultGroup:"默认组",
 DefaultGroupMsg:"这是默认组。是否继续?",
+DelayPayout:"延迟付款",
 Delete:"删除",
 DeleteCommissionGroup:"删除佣金群组",
 DeleteGroup:"删除组",
