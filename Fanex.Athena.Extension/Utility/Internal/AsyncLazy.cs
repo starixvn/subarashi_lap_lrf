@@ -20,7 +20,9 @@
             get
             {
                 if (!(_lazyTaskFactory.IsValueCreated && _lazyTaskFactory.Value.IsFaulted))
+                {
                     return _lazyTaskFactory.Value;
+                }
 
                 lock (_lazyInitializationGuard)
                 {

@@ -15,7 +15,7 @@ namespace Fanex.Athena.UnitTest.Common.Helpers
 
         public const string IdentityName = "user";
 
-        public static ControllerContext CreateControllerContext(NameValueCollection header = null)
+        public static ControllerContext CreateControllerContext(NameValueCollection header = null, string requestDomain = null)
         {
             var fakeIdentity = new GenericIdentity(IdentityName);
             var principal = new GenericPrincipal(fakeIdentity, null);
@@ -23,7 +23,7 @@ namespace Fanex.Athena.UnitTest.Common.Helpers
             var httpContextBase = Substitute.For<HttpContextBase>();
             httpContextBase.Request.Headers.Returns(header ?? new NameValueCollection());
             httpContextBase.Request.ApplicationPath.Returns("/");
-            httpContextBase.Request.Url.Returns(new Uri(TestingRequestDomain));
+            httpContextBase.Request.Url.Returns(new Uri(string.IsNullOrEmpty(requestDomain) ? TestingRequestDomain : requestDomain));
             httpContextBase.Request.Cookies.Returns(new HttpCookieCollection());
             httpContextBase.Response.Cookies.Returns(new HttpCookieCollection());
             httpContextBase.Server.MapPath(Arg.Any<string>()).Returns(x => (string)x[0]);

@@ -5755,10 +5755,6 @@
       <Name>Fanex.Athena.Model.Report</Name>
       <Private>True</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Module\Fanex.Athena.Module.Dashboard\Fanex.Athena.Module.Dashboard.csproj">
-      <Project>{b5c8656b-6c30-4c82-bdb9-85b1c71b00c3}</Project>
-      <Name>Fanex.Athena.Module.Dashboard</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Module\Fanex.Athena.Module.Notification.Api\Fanex.Athena.Module.Notification.Api.csproj">
       <Project>{43a8ee11-7aa4-4af2-a77f-fa4ebc32298c}</Project>
       <Name>Fanex.Athena.Module.Notification.Api</Name>

@@ -29,7 +29,8 @@
             { PermissionKeys.PlayerVIPManagement, "VipPlayerManagement" }
         };
 
-        private static readonly ConcurrentDictionary<string, AsyncLazy<IDictionary<int, string>>> ReasonListFromCache = new ConcurrentDictionary<string, AsyncLazy<IDictionary<int, string>>>(StringComparer.OrdinalIgnoreCase);
+        private static readonly ConcurrentDictionary<string, AsyncLazy<IDictionary<int, string>>> ReasonListFromCache = new ConcurrentDictionary
+            <string, AsyncLazy<IDictionary<int, string>>>(StringComparer.OrdinalIgnoreCase);
 
         private readonly IAuthorizationService _authService;
         private readonly IPlayerSegmentationDataAccess _playerDataAccess;
@@ -45,7 +46,7 @@
         {
             var currencyList = SessionServiceInstance.UserSession.CurrencyList;
             var baseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency;
-            var lang = SessionServiceInstance.UserSession.Language;
+            var lang = LangService.GetCurrentLanguage();
 
             var hasVIPManangementPermission = HasVIPManagementPermission();
             var reasonList = await GetReasonList(lang).ConfigureAwait(false);

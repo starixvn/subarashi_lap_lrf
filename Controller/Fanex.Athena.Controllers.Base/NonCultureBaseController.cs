@@ -7,9 +7,6 @@
     using System.Web.Mvc;
     using System.Web.SessionState;
 
-    using Web.ActionFilter;
-
-    [CustomAuthorize]
     [SessionState(SessionStateBehavior.ReadOnly)]
     [CheckUMFilter]
     public class NonCultureBaseController : Controller

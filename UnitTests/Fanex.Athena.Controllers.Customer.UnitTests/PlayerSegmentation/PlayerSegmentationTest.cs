@@ -38,7 +38,6 @@ namespace Fanex.Athena.Controllers.Customer.UnitTests
         {
             _playerDataAccess.ClearReceivedCalls();
             _authService.ClearReceivedCalls();
-            ResetLanguage();
         }
 
         [Test]
@@ -98,8 +97,9 @@ namespace Fanex.Athena.Controllers.Customer.UnitTests
             {
                 // Arrange
                 var fakeReasons = FakeHelper.Create<Dictionary<int, string>>();
-                DefaultUserSession.Language = FakeHelper.Create<string>();
-                _playerDataAccess.GetReasonGroupListAsync(DefaultUserSession.Language).Returns(Task.FromResult<IDictionary<int, string>>(fakeReasons));
+                var fakeLanguage = FakeHelper.Create<string>();
+                LangService.GetCurrentLanguage().Returns(fakeLanguage);
+                _playerDataAccess.GetReasonGroupListAsync(fakeLanguage).Returns(Task.FromResult<IDictionary<int, string>>(fakeReasons));
 
                 // Action
                 var result = await controller.Index();

@@ -17,7 +17,6 @@ namespace Fanex.Athena.Api.Base
 
     using Service.Core.Common.Interfaces;
 
-    [CustomApiAuthorize]
     [CheckUMFilter]
     [XFrameOptionApi]
     public class CommonApiController : ApiController

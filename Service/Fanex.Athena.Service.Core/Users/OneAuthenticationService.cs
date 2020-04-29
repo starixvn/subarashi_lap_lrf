@@ -113,6 +113,34 @@
             return _oneBookSecurityWrapper.Authenticate(token);
         }
 
+        public void SignOut(HttpResponseBase response, HttpRequestBase request)
+        {
+            HttpContext.Current.Session.Clear();
+
+            var cookies = request.Cookies.AllKeys;
+            RemoveCookies(response, cookies);
+
+            _formsAuthenticationService.SignOut();
+        }
+
+        private static void RemoveCookies(HttpResponseBase response, string[] cookies)
+        {
+            var cache = response.Cache;
+            cache.SetNoStore();
+            cache.SetExpires(DateTime.Now.AddMinutes(-1));
+            cache.SetCacheability(HttpCacheability.NoCache);
+
+            foreach (string cookie in cookies)
+            {
+                var item = new HttpCookie(cookie)
+                {
+                    Expires = DateTime.Now.AddDays(-1),
+                    HttpOnly = true
+                };
+                response.Cookies.Add(item);
+            }
+        }
+
         private static bool IsSameSession(UserAuthInfo userSession, LicenseeAuthInfo licenseeSession, DefaultAuthInfo<OneAuthPermission, OneAuthCurrency> tokenInfo, int licenseeId)
         {
             return userSession.UserName == tokenInfo.UserID

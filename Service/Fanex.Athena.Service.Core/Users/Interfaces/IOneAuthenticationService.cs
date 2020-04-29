@@ -9,7 +9,7 @@
     public interface IOneAuthenticationService
     {
         IResultInfo SignIn(HttpContextBase currentContext, DefaultAuthInfo<OneAuthPermission, OneAuthCurrency> tokenInfo);
-
+        void SignOut(HttpResponseBase response, HttpRequestBase request);
         DefaultAuthInfo<OneAuthPermission, OneAuthCurrency> GetTokenInfo(string token);
     }
 }
