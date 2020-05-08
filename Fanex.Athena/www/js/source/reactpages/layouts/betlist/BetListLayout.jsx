@@ -8,7 +8,7 @@ import { SportType } from './lib/constants';
 class BetListLayout extends Component {
     constructor(props) {
         super(props);
-        
+
         this.state = {
             isShowPopup : false,
             popupUrl: null,
@@ -21,7 +21,7 @@ class BetListLayout extends Component {
         window.onload = () => {
             window.logOpenBetlistEvent && window.logOpenBetlistEvent(this.props.pageName);
         };
-        
+
         window.ViewResult = (matchid, raceNo, bettype, sporttype, refno,
             username, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid, transdecs) => {
             const title = this._getResource('Result');
@@ -59,6 +59,10 @@ class BetListLayout extends Component {
             else if (sporttype === SportType.GLOBALGAMING) {
                 const url = BetList.getGlobalGamingResultUrl(rootUrl, custid, extension2);
                 this._showThirdPartyResult(url, title);
+            }
+            else if (sporttype === SportType.SXG) {
+                const url = BetList.getSexyGamingResultUrl(rootUrl, transdecs, extension2, bettype);
+                this._openPopup(url, title);
             }
             else {
                 const url = BetList.getResultUrl(rootUrl, matchid, raceNo, bettype,
@@ -202,6 +206,16 @@ class BetListLayout extends Component {
 
             this._openPopup(url, title);
         }
+
+        window.showSexyGamingBetDetails = (transId, winlostDate, custId, transType) => {
+            const { rootUrl, baseCurrency } = this.props;
+
+            const url = BetList.getSexyGamingDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
+            const title = this._getResource('ProductSXG') + ' - ' +
+                this._getResource('DetailedBetlist') + ' - ' + this._formatDateString(winlostDate);
+
+            this._openPopup(url, title);
+        }
     }
 
     componentWillUnmount() {
@@ -221,6 +235,7 @@ class BetListLayout extends Component {
         window.showPPDetails = undefined;
         window.showSingleMatchParlayDetail = undefined;
         window.showSGDetails = undefined;
+        window.showSexyGamingBetDetails = undefined;
     }
 
     _getResource(key) {
@@ -284,7 +299,7 @@ class BetListLayout extends Component {
             let url = BetList.getChoiceParlayDetailUrl(rootUrl, transId, refNo, handicap1, handicap2, betcheck, betteam, custId);
             this._beforeShow();//this.props.toggleLoader(true);
             DataService.getData(url)
-                .then((result) => {       
+                .then((result) => {
                     let choice = BetList.buildChoiceParlayDetail(result.data);
 
                     divEvent.innerHTML = choice;
@@ -378,7 +393,7 @@ class BetListLayout extends Component {
             <div className="betlist-layout">
                  {this.props.children}
                  {this.state.isShowPopup &&
-                    <Popup isShow={true} 
+                    <Popup isShow={true}
                             iframeUrl={this.state.popupUrl}
                             title={this.state.popupTitle}
                             width={900} height={600}
