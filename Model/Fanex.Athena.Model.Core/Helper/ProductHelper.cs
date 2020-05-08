@@ -51,7 +51,8 @@
                 { Product.SG, nameof(ViewResources.ProductSG) },
 				{ Product.VRG, nameof(ViewResources.ProductVRG) },
                 { Product.TG, nameof(ViewResources.ProductTG) },
-				{ Product.I4D, nameof(ViewResources.ProductI4D) }
+				{ Product.I4D, nameof(ViewResources.ProductI4D) },
+                { Product.SXG, nameof(ViewResources.ProductSXG) }
             };
 
         public static string GetProductCode(int productId)

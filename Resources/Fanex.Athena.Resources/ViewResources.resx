@@ -2771,6 +2771,9 @@
     <value>Reduced Max Per Event</value>
     <comment>#131929</comment>
   </data>
+  <data name="ProductSXG" xml:space="preserve">
+    <value>Sexy Gaming</value>
+  </data>
   <data name="DelayedPayout" xml:space="preserve">
     <value>Delayed Payout</value>
   </data>

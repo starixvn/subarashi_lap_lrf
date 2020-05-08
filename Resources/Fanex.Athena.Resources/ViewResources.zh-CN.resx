@@ -2392,4 +2392,7 @@
   <data name="DelayedPayout" xml:space="preserve">
     <value>延迟结算</value>
   </data>
+  <data name="ProductSXG" xml:space="preserve">
+    <value>性感百家</value>
+  </data>
 </root>
