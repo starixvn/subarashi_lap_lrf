@@ -2063,7 +2063,7 @@
   <data name="UserGuide" xml:space="preserve">
     <value>报告指南</value>
   </data>
-  <data name="DelayPayout" xml:space="preserve">
-    <value>延迟付款</value>
+  <data name="DelayedPayout" xml:space="preserve">
+    <value>延迟结算</value>
   </data>
 </root>

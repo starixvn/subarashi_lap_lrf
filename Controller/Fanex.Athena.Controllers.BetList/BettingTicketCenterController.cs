@@ -187,7 +187,7 @@
             return new List<CheckedItem>
             {
                 new CheckedItem { ID = StatusTypes.Waiting, Name = ViewResources.Running, Checked = true },
-                new CheckedItem { ID = StatusTypes.DelayPayout, Name = ViewResources.DelayPayout, Checked = true },
+                new CheckedItem { ID = StatusTypes.DelayedPayout, Name = ViewResources.DelayedPayout, Checked = true },
                 new CheckedItem { ID = StatusTypes.UnderSettlement, Name = ViewResources.UnderSettlement, Checked = true }
             };
         }
@@ -203,7 +203,7 @@
                 new CheckedItem { ID = StatusTypes.AbnormalBet, Name = ViewResources.AbnormalBet },
                 new CheckedItem { ID = StatusTypes.Reject, Name = ViewResources.Reject },
                 new CheckedItem { ID = StatusTypes.Refund, Name = ViewResources.Refund },
-                new CheckedItem { ID = StatusTypes.DelayPayout, Name = ViewResources.DelayPayout }
+                new CheckedItem { ID = StatusTypes.DelayedPayout, Name = ViewResources.DelayedPayout }
             };
         }
 
