@@ -1365,6 +1365,18 @@ tr.ui-search-toolbar select {
     .sort-icon-desc.light {
       border-top-color: #fff; }
 
+.allbet-bet-id {
+  color: #bbb; }
+
+.allbet-bet-type-name {
+  color: #696969; }
+
+.sexygaming-bet-id {
+  color: #bbb; }
+
+.sexygaming-bet-type-name {
+  color: #696969; }
+
 .betlist-popup {
   padding: 5px 20px; }
 
@@ -1603,6 +1615,12 @@ tr.ui-search-toolbar select {
 
 .betlist-container .combinationLink {
   font-weight: normal; }
+
+.sexygaming-bet-id {
+  color: #bbb; }
+
+.sexygaming-bet-type-name {
+  color: #696969; }
 
 body {
   background: #fff; }

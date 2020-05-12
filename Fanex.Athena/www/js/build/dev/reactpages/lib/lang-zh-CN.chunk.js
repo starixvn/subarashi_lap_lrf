@@ -598,6 +598,7 @@ window._language_zh_CN = {
   ProductKN: "快乐彩",
   ProductNG: "百练赛",
   ProductSB: "体育博彩",
+  ProductSXG: "性感百家",
   ProductTG: "桌面游戏",
   ProductVRG: "虚拟娱乐城",
   ProductVS: "虚拟运动",

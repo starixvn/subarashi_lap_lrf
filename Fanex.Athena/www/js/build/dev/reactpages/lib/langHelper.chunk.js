@@ -669,6 +669,7 @@ window._language_en_US = {
   ProductPTCS: "Playtech Casino",
   ProductSB: "Sportsbook",
   ProductSG: "SG",
+  ProductSXG: "Sexy Gaming",
   ProductTG: "Table Game",
   ProductVB: "Macau Games",
   ProductVG: "Macau",
