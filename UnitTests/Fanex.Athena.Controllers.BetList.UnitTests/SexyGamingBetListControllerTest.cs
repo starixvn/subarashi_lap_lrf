@@ -1,0 +1,107 @@
+﻿namespace Fanex.Athena.Controllers.BetList.UnitTests
+{
+    using System;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
+    using Fanex.Athena.Model.BetList.MetaModel;
+    using Fanex.Athena.Resources;
+    using NSubstitute;
+    using NUnit.Framework;
+
+    public class SexyGamingBetListControllerTest : BetListBaseControllerHelperTest
+    {
+        [OneTimeSetUp]
+        public override void FixtureSetUp()
+        {
+            base.FixtureSetUp();
+
+            SetUpDefaultFakeData();
+        }
+
+        [Test]
+        public async Task Detail_WhenCall_ReturnCorrectView()
+        {
+            using (var controller = CreateController())
+            {
+                // Action
+                var result = await controller.Detail(new BetListExcelMetaModel()) as ViewResult;
+
+                // Assert
+                Assert.That(result.ViewName, Is.EqualTo("~/Views/Desktop/BetList/SexyGaming/Main.cshtml"));
+            }
+        }
+
+        [Test]
+        public async Task Detail_WhenCall_ReturnCorrectViewModel()
+        {
+            using (var controller = CreateController())
+            {
+                // Arrange
+                var metaModel = new BetListExcelMetaModel
+                {
+                    FromDate = new DateTime(2018, 2, 1),
+                    ToDate = new DateTime(2018, 2, 10),
+                    Date = new DateTime(2018, 2, 5)
+                };
+
+                // Action
+                var result = await controller.Detail(metaModel) as ViewResult;
+                var model = (BetListExcelMetaModel)result.Model;
+
+                // Assert
+                AssertDefaultBetListViewModel(model, metaModel);
+            }
+        }
+
+        [Test]
+        public async Task Detail_ExportExcel_PassCorrectParam()
+        {
+            using (var controller = CreateController())
+            {
+                // Arrange
+
+                var metaModel = new BetListExcelMetaModel
+                {
+                    IsExportExcel = true,
+                    CurrencyId = 0,
+                    Date = new DateTime(2018, 2, 5)
+                };
+                var expectedTitle = $"{ViewResources.ProductSXG} - {ViewResources.DetailedBetlist} - {metaModel.Date.ToString("MM/dd/yyyy")}";
+
+                controller.When(async x => await x.ProcessExportExcel(
+                    Arg.Any<BetListExcelMetaModel>(),
+                    Arg.Any<string>(),
+                    Arg.Any<string>())).DoNotCallBase();
+
+                // Action
+                await controller.Detail(metaModel);
+
+                // Assert
+                await controller.Received().ProcessExportExcel(
+                    Arg.Is<BetListExcelMetaModel>(x =>
+                        x.ShowingOption.CustomerCommVisible == DefaultLicenseeSession.IsAllowedCustomerComm
+                        && x.Title == expectedTitle
+                        && string.Join(",", x.HiddenColumns) == "1,2,8,9"
+                        && x.LicenseeId == DefaultLicenseeSession.LicenseeId
+                        && !x.IsShowSumStake),
+                    "SexyGamingDetail",
+                    null);
+            }
+        }
+
+        private SexyGamingBetListController CreateController()
+        {
+            var controller = Substitute.ForPartsOf<SexyGamingBetListController>();
+
+            controller.SessionServiceInstance = SessionService;
+            controller.LangService = LangService;
+            controller.LicenseeSettingServiceInstance = LicenseeSettingService;
+            controller.BalanceUpDataAccessInstance = BalanceUpDataAccess;
+            controller.BetListApiClient = BetListApiClient;
+            controller.ProductService = ProductService;
+            controller.CacheRefAdapter = CacheRefAdapter;
+
+            return controller;
+        }
+    }
+}

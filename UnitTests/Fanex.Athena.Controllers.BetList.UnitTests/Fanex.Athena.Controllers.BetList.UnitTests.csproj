@@ -101,6 +101,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AGCasinoBetListControllerTest.cs" />
+    <Compile Include="SexyGamingBetListControllerTest.cs" />
     <Compile Include="AllBetBetListControllerTest.cs" />
     <Compile Include="BetListBaseControllerHelperTest.cs" />
     <Compile Include="BettingTicketCenterControllerTest.cs" />
