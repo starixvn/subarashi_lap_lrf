@@ -1933,11 +1933,11 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Delay Payout.
+        ///   Looks up a localized string similar to Delayed Payout.
         /// </summary>
-        public static string DelayPayout {
+        public static string DelayedPayout {
             get {
-                return ResourceManager.GetString("DelayPayout", resourceCulture);
+                return ResourceManager.GetString("DelayedPayout", resourceCulture);
             }
         }
         
