@@ -5,20 +5,14 @@
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
-    using Fanex.Logging;
 
     [FunctionAuthorization(PermissionKeys.ReportResults)]
     public class VirtualGamesResultReportController : ReportBaseController
     {
-        private readonly ILogger _logger;
-
         private readonly IBetListApiClient _betListApiClient;
 
-        public VirtualGamesResultReportController(
-            ILogger logger,
-            IBetListApiClient betListApiClient)
+        public VirtualGamesResultReportController(IBetListApiClient betListApiClient)
         {
-            _logger = logger;
             _betListApiClient = betListApiClient;
         }
 
