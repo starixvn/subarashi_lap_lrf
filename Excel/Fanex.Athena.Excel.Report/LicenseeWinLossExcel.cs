@@ -68,7 +68,7 @@ namespace Fanex.Athena.Excel.Report
             Product.SB, Product.AB, Product.AGC, Product.BA, Product.BT,
             Product.FW, Product.KN, Product.VB, Product.NG, Product.CS,
             Product.VS, Product.CO, Product.VS2, Product.LT, Product.PP,
-			Product.CC, Product.SG, Product.VRG, Product.TG, Product.I4D,
+            Product.CC, Product.SG, Product.VRG, Product.TG, Product.I4D,
             Product.SXG
         };
 

@@ -181,7 +181,7 @@ namespace Fanex.Athena.Model.Report.ViewModel
                 return TurnOverBA + TurnOverNG + TurnOverSB + TurnOverVS + TurnOverCS +
                     TurnOverKN + TurnOverBT + TurnOverAGC + TurnOverVB + TurnOverAB +
                     TurnOverFW + TurnOverVS2 + TurnOverLT + TurnOverPP + TurnOverCC +
-					TurnOverSG + TurnOverVRG + TurnOverTG + TurnOverI4D + TurnOverSXG;
+                    TurnOverSG + TurnOverVRG + TurnOverTG + TurnOverI4D + TurnOverSXG;
             }
         }
 

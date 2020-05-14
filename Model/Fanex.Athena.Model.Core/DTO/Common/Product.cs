@@ -56,7 +56,7 @@ namespace Fanex.Athena.Model.Core.DTO.Common
 
         public const string SG = "SG";
 
-		public const string VRG = "VRG";
+        public const string VRG = "VRG";
 
         public const string TG = "TG";
 
