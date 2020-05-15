@@ -78,7 +78,7 @@ namespace Fanex.Athena.DataAccess.Report
                 }
             }
 
-            db.SetParameterValue("ProductList", string.Join(",", metaModel.ProductOptions.Where(_ => _.Status).Select(_ => _.Code)));
+            db.SetParameterValue("ProductList", string.Join(",", metaModel.ProductOptions.Where(_ => _.Status && _.Code != "BT" && _.Code != "CO").Select(_ => _.Code)));
             db.SetParameterValue("fromdate", metaModel.FromDate);
             db.SetParameterValue("todate", metaModel.ToDate);
             db.SetParameterValue("username", metaModel.Username);
