@@ -251,6 +251,17 @@ class BetList {
 
         return url;
     }
+    
+    getSBCDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
+        let url = rootUrl + 'SabaClubBetList/Detail';
+        url = QueryString.setParam(url, 'transId', transId);
+        url = QueryString.setParam(url, 'date', winlostDate);
+        url = QueryString.setParam(url, 'custId', custId);
+        url = QueryString.setParam(url, 'transType', transType);
+        url = QueryString.setParam(url, 'BaseCurrency', baseCurrency);
+
+        return url;
+    }
 
     getRngCasinoResultUrl(rootUrl) {
         return rootUrl + 'ResultReport/ShowRngCasinoSingleWalletResult';

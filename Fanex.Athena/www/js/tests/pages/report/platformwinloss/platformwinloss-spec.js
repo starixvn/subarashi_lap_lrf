@@ -904,7 +904,9 @@
                         "ProductOptions[5].Code": "SG",
                         "ProductOptions[5].Status": true,
                         "ProductOptions[6].Code": "VRG",
-                        "ProductOptions[6].Status": true
+                        "ProductOptions[6].Status": true,
+                        "ProductOptions[7].Code": "SBC",
+                        "ProductOptions[7].Status": true
                     });
                     spyOn(Report, "ValidProducts").and.returnValue(true);
 

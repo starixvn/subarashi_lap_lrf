@@ -169,7 +169,8 @@
                 Product.VRG,
                 Product.TG,
                 Product.I4D,
-                Product.SXG
+                Product.SXG,
+                Product.SBC
             };
 
             var productAccess = _productService.GetSingleWalletProductAccess(

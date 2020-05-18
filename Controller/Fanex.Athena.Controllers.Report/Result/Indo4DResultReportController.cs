@@ -4,21 +4,15 @@
     using System.Web.Mvc;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Logging;
     using Web.ActionFilter;
 
     [FunctionAuthorization(PermissionKeys.ReportResults)]
     public class Indo4DResultReportController : ReportBaseController
     {
-        private readonly ILogger _logger;
-
         private readonly IBetListApiClient _betListApiClient;
 
-        public Indo4DResultReportController(
-            ILogger logger,
-            IBetListApiClient betListApiClient)
+        public Indo4DResultReportController(IBetListApiClient betListApiClient)
         {
-            _logger = logger;
             _betListApiClient = betListApiClient;
         }
 
