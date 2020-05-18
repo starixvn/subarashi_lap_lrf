@@ -1,4 +1,4 @@
-﻿// Generated at: 5/12/2020 4:09:20 PM
+﻿// Generated at: 5/18/2020 11:00:20 AM
 var _language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -111,6 +111,7 @@ CashOutTimes:"即时兑现次数",
 CashOutValue:"会员卖出的实际投注额",
 CashOutWinLoss:"即时兑现输赢",
 CasinoTransfer:"娱乐城的总转账额",
+CasinoTurnover:"电子游戏交易额",
 ChangePassword:"更改密码",
 ChangeStatus:"更改 {0}&apos;s 状态",
 ChangeStatusOfThisCustomerMsg:"您确定您要更换此会员的状态吗?",
@@ -260,6 +261,7 @@ GameTypeName:"游戏类型名称",
 General:"常规",
 GetAll:"全选",
 Go:"开始",
+GoldDeluxeWinLoss:"GD真人娱乐场输赢",
 GoldDeluxeWinLossGuidelineContent:"在GMT-4下午4点之前的任何查询将依据前一天下午4点的数据。您每次查询可以过滤最多3个月内的数据。",
 GotoCustomerList:"转至会员名单",
 GrandPrizeNote:"头奖:会员余额不包含头奖奖金",

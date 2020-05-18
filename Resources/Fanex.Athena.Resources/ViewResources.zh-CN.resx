@@ -2422,4 +2422,10 @@
   <data name="ProductLT" xml:space="preserve">
     <value>彩票</value>
   </data>
+  <data name="CasinoTurnover" xml:space="preserve">
+    <value>电子游戏交易额</value>
+  </data>
+  <data name="GoldDeluxeWinLoss" xml:space="preserve">
+    <value>GD真人娱乐场输赢</value>
+  </data>
 </root>
