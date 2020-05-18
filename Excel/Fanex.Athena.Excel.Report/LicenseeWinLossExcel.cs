@@ -30,7 +30,7 @@ namespace Fanex.Athena.Excel.Report
 
         private const int ColumnActualStake = 28;
 
-        private const int ColumnBuyBackAmountSportsbook = 28;
+        private const int ColumnBuyBackAmountSportsbook = 29;
         private const int ColumnBuyBackAmountBA = 30;
         private const int ColumnBuyBackAmountTotal = 31;
 
