@@ -6,8 +6,9 @@
 
 namespace Fanex.Athena.Service.Customer
 {
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
-
 
     using DataAccess.Customer.Interfaces;
     using Fanex.Athena.Model.Core.DTO.Common;
@@ -101,12 +102,19 @@ namespace Fanex.Athena.Service.Customer
         private async Task<bool> CallApiToUpdateCommAsync(string customerIdList, decimal commission, string ip, int userId, string userName)
         {
             var customerIds = customerIdList.Split(',');
-            if (customerIds.Length > 0)
+            if (customerIds.Length <= 0)
+            {
+                return true;
+            }
+
+            var customerArray = SplitCustomer(customerIds);
+            List<bool> resultList = new List<bool> { };
+            foreach (var customerList in customerArray)
             {
                 var metalModel = new RNGCasinoUpdateMemberComMetaModel
                 {
                     Comm = commission,
-                    CustomerId = customerIds,
+                    CustomerId = customerList,
                     FromIp = ip,
                     ModifyBy = userId,
                     ModifyUserName = userName
@@ -114,10 +122,22 @@ namespace Fanex.Athena.Service.Customer
 
                 const string apiPath = "/RNGCasinoCustomer/UpdateCommission";
                 var result = await _lgClient.PostAsync<APIResult<bool>>(apiPath, metalModel, "en-US").ConfigureAwait(false);
-                return result != null && result.Data;
+
+                resultList.Add(result != null && result.Data);
             }
 
-            return true;
+            return resultList.All(x => x == true);
+        }
+
+        private static List<string[]> SplitCustomer(string[] customers, int maxCustomer = 500)
+        {
+            List<string[]> data = new List<string[]>();
+            for (int i = 0; i < customers.Length; i += maxCustomer)
+            {
+                data.Add(customers.Skip(i).Take(maxCustomer).ToArray());
+            }
+
+            return data;
         }
     }
 }

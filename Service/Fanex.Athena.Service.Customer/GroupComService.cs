@@ -9,6 +9,7 @@ namespace Fanex.Athena.Service.Customer
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Linq;
     using System.Threading.Tasks;
     using Fanex.Athena.DataAccess.Customer.Interfaces;
     using Fanex.Athena.Model.Auth;
@@ -127,8 +128,30 @@ namespace Fanex.Athena.Service.Customer
         private async Task<bool> CallApiToUpdateCommAsync(RNGCasinoUpdateMemberComMetaModel metalModel)
         {
             const string apiPath = "/RNGCasinoCustomer/UpdateCommission";
-            var temp = await _lgClient.PostAsync<APIResult<bool>>(apiPath, metalModel, "en-US").ConfigureAwait(false);
-            return temp != null && temp.Data;
+            var customerArray = SplitCustomer(metalModel.CustomerId);
+            List<bool> resultList = new List<bool> { };
+
+            foreach (var customerList in customerArray)
+            {
+                var tempMetalModel = metalModel;
+                tempMetalModel.CustomerId = customerList;
+
+                var result = await _lgClient.PostAsync<APIResult<bool>>(apiPath, metalModel, "en-US").ConfigureAwait(false);
+                resultList.Add(result != null && result.Data);
+            }
+
+            return resultList.All(x => x == true);
+        }
+
+        private static List<string[]> SplitCustomer(string[] customers, int maxCustomer = 500)
+        {
+            List<string[]> data = new List<string[]>();
+            for (int i = 0; i < customers.Length; i += maxCustomer)
+            {
+                data.Add(customers.Skip(i).Take(maxCustomer).ToArray());
+            }
+
+            return data;
         }
     }
 }
