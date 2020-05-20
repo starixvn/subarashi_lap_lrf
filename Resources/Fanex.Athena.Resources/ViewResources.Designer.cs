@@ -4939,6 +4939,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Platform data is available from 27 Feb 2016..
+        /// </summary>
+        public static string PlatformWinLossNote {
+            get {
+                return ResourceManager.GetString("PlatformWinLossNote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Platform Win Loss - {0} --&gt; {1} - {2} - {3} - {4}.
         /// </summary>
         public static string PlatformWinLossTitle {

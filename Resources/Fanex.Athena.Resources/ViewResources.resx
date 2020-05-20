@@ -2781,4 +2781,7 @@
   <data name="DelayedPayout" xml:space="preserve">
     <value>Delayed Payout</value>
   </data>
+  <data name="PlatformWinLossNote" xml:space="preserve">
+    <value>Platform data is available from 27 Feb 2016.</value>
+  </data>
 </root>
