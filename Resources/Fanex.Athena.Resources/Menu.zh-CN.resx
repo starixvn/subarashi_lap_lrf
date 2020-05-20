@@ -270,7 +270,7 @@
     <comment>CUSTOMER REPORTS</comment>
   </data>
   <data name="Menu_53" xml:space="preserve">
-    <value>Platform Win Loss</value>
+    <value>平台输赢</value>
     <comment>Platform Win Loss</comment>
   </data>
   <data name="Menu_54" xml:space="preserve">
@@ -343,5 +343,8 @@
   <data name="Menu_87" xml:space="preserve">
     <value>玩家分类</value>
     <comment>Player Segmentation</comment>
+  </data>
+  <data name="Menu_65" xml:space="preserve">
+    <value>GD真人娱乐场输赢</value>
   </data>
 </root>

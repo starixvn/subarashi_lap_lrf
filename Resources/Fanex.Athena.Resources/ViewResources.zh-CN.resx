@@ -2018,7 +2018,7 @@
     <comment>117729</comment>
   </data>
   <data name="ProductCC" xml:space="preserve">
-    <value>嘻嘻俱乐部</value>
+    <value>乐卡迪亚</value>
     <comment>115449</comment>
   </data>
   <data name="BettingStatement" xml:space="preserve">
@@ -2391,5 +2391,41 @@
   </data>
   <data name="DelayedPayout" xml:space="preserve">
     <value>延迟结算</value>
+  </data>
+  <data name="PlatformWinLoss" xml:space="preserve">
+    <value>平台输赢</value>
+  </data>
+  <data name="PlatformWinLossNote" xml:space="preserve">
+    <value>平台数据是从 27/2/2016.</value>
+  </data>
+  <data name="PlatformWinLossTitle" xml:space="preserve">
+    <value>平台输赢 - {0} --&gt; {1} - {2} - {3} - {4}</value>
+  </data>
+  <data name="ProductAB" xml:space="preserve">
+    <value>欧博</value>
+  </data>
+  <data name="ProductFW" xml:space="preserve">
+    <value>GG捕鱼</value>
+  </data>
+  <data name="ProductGD" xml:space="preserve">
+    <value>GD真人娱乐场</value>
+  </data>
+  <data name="ProductPP" xml:space="preserve">
+    <value>PP王者电子</value>
+  </data>
+  <data name="ProductSG" xml:space="preserve">
+    <value>新霸电子</value>
+  </data>
+  <data name="ProductVB" xml:space="preserve">
+    <value>澳门电子娱乐城</value>
+  </data>
+  <data name="ProductLT" xml:space="preserve">
+    <value>彩票</value>
+  </data>
+  <data name="CasinoTurnover" xml:space="preserve">
+    <value>电子游戏交易额</value>
+  </data>
+  <data name="GoldDeluxeWinLoss" xml:space="preserve">
+    <value>GD真人娱乐场输赢</value>
   </data>
 </root>

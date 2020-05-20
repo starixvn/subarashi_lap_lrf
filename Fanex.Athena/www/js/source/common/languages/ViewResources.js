@@ -1,4 +1,4 @@
-﻿// Generated at: 5/11/2020 1:01:37 PM
+﻿// Generated at: 5/18/2020 11:03:56 AM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -542,6 +542,7 @@ PlaceholderBankAccount:"Search by Exactly Bank Account Number",
 PlaceholderEmail:"Search by Exactly Email",
 Platform:"Platform",
 PlatformWinLoss:"Platform Win Loss",
+PlatformWinLossNote:"Platform data is available from 27 Feb 2016.",
 PlatformWinLossTitle:"Platform Win Loss - {0} --&gt; {1} - {2} - {3} - {4}",
 Player:"Player",
 PlayerAdminUpdateFailedMsg:"Please try again!",
