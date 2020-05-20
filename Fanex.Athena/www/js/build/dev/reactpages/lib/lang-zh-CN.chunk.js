@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 5/12/2020 3:57:31 PM
+// Generated at: 5/20/2020 5:31:37 PM
 window._language_zh_CN = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -206,6 +206,7 @@ window._language_zh_CN = {
   CashOutValue: "会员卖出的实际投注额",
   CashOutWinLoss: "即时兑现输赢",
   CasinoTransfer: "娱乐城的总转账额",
+  CasinoTurnover: "电子游戏交易额",
   ChangePassword: "更改密码",
   ChangeStatus: "更改 {0}&apos;s 状态",
   ChangeStatusOfThisCustomerMsg: "您确定您要更换此会员的状态吗?",
@@ -355,6 +356,7 @@ window._language_zh_CN = {
   General: "常规",
   GetAll: "全选",
   Go: "开始",
+  GoldDeluxeWinLoss: "GD真人娱乐场输赢",
   GoldDeluxeWinLossGuidelineContent: "在GMT-4下午4点之前的任何查询将依据前一天下午4点的数据。您每次查询可以过滤最多3个月内的数据。",
   GotoCustomerList: "转至会员名单",
   GrandPrizeNote: "头奖:会员余额不包含头奖奖金",
@@ -582,6 +584,9 @@ window._language_zh_CN = {
   PlaceholderBankAccount: "精确查询银行帐户号码",
   PlaceholderEmail: "精确查询电子邮件",
   Platform: "平台",
+  PlatformWinLoss: "平台输赢",
+  PlatformWinLossNote: "平台数据是从 27/2/2016.",
+  PlatformWinLossTitle: "平台输赢 - {0} --&gt; {1} - {2} - {3} - {4}",
   Player: "玩家",
   PlayerAdminUpdateFailedMsg: "请重试一次!",
   PlayerSegmentation: "玩家分类",
@@ -592,14 +597,21 @@ window._language_zh_CN = {
   ProblemDisplayBetSetting: "无法显示投注设定群组的细节",
   ProblemPlayer: "问题玩家",
   Product: "产品",
-  ProductCC: "嘻嘻俱乐部",
+  ProductAB: "欧博",
+  ProductCC: "乐卡迪亚",
   ProductCO: "即时兑现",
   ProductCS: "娱乐城",
+  ProductFW: "GG捕鱼",
+  ProductGD: "GD真人娱乐场",
   ProductKN: "快乐彩",
+  ProductLT: "彩票",
   ProductNG: "百练赛",
+  ProductPP: "PP王者电子",
   ProductSB: "体育博彩",
+  ProductSG: "新霸电子",
   ProductSXG: "性感百家",
   ProductTG: "桌面游戏",
+  ProductVB: "澳门电子娱乐城",
   ProductVRG: "虚拟娱乐城",
   ProductVS: "虚拟运动",
   ProductVS2: "虚拟运动2",
