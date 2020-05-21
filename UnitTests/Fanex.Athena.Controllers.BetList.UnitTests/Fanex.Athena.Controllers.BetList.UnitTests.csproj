@@ -101,6 +101,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AGCasinoBetListControllerTest.cs" />
+    <Compile Include="SexyGamingBetListControllerTest.cs" />
     <Compile Include="AllBetBetListControllerTest.cs" />
     <Compile Include="BetListBaseControllerHelperTest.cs" />
     <Compile Include="BettingTicketCenterControllerTest.cs" />
@@ -118,6 +119,7 @@
     <Compile Include="PendingFundsBetListControllerTest.cs" />
     <Compile Include="PlatformWinLossBetListControllerTest.cs" />
     <Compile Include="CardClubBetListtControllerTest.cs" />
+    <Compile Include="SabaClubBetListControllerTest.cs" />
     <Compile Include="SGBetListControllerTest.cs" />
     <Compile Include="PragmaticPlayBetListControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

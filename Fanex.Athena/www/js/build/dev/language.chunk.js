@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 5/18/2020 11:03:56 AM
+﻿// Generated at: 5/20/2020 5:31:37 PM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -669,7 +669,9 @@ ProductNG:"Number Game",
 ProductPP:"PP",
 ProductPTCS:"Playtech Casino",
 ProductSB:"Sportsbook",
+ProductSBC:"Saba.club",
 ProductSG:"SG",
+ProductSXG:"Sexy Gaming",
 ProductTG:"Table Game",
 ProductVB:"Macau Games",
 ProductVG:"Macau",

@@ -77,7 +77,7 @@
         public ActionResult InvalidateSession()
         {
             _oneAuthenticationService.SignOut(Response, Request);
-            return new ContentResult() { Content = "Invalidate Session Success" };
+            return new ContentResult { Content = "Invalidate Session Success" };
         }
 
         private static bool VerifyToken(DefaultAuthInfo<OneAuthPermission, OneAuthCurrency> token)

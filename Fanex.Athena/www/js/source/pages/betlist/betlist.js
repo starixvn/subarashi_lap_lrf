@@ -17,6 +17,7 @@
         const SPORT_CARDCLUB = 165;
         const SPORT_SG = 247;
         const SPORT_VRG = 245;
+        const SPORT_SXG = 243;
         const BETLIST_META_MODEL = '#BetListMetaModel';
 
         let _sortColumnName, _sortOrder;
@@ -269,7 +270,7 @@
 
             bindData: function (response) {
                 $('#BetListGrid').jqGrid('GridUnload');
-                const $grid = $('#BetListGrid'); // must get the grid instance again 
+                const $grid = $('#BetListGrid'); // must get the grid instance again
 
                 if (response === null || response.Main.length === 0) {
                     jqGridAdditional.setNoInfo();
@@ -420,13 +421,22 @@
             viewVRGResult: function (gamePlayId, platform, title) {
                 const url = Site.resolveClientUrl('VirtualGamesResultPopup/Index');
                 Site.blockUI();
-               
+
                 $.get(url + '?gamePlayId=' + gamePlayId + '&platform=' + platform, function (result) {
                     if (result !== '') {
                         showResultPopUp(result, { width: 800, height: 380, title: title });
                         Site.unBlockUI();
                     }
                 });
+            },
+
+            viewSexyGamingResult: function (trasdesc, matchCode, bettype, title) {
+                const url = Site.resolveClientUrl('ResultReport/SexyGaming?transdesc=' +
+                    encodeURIComponent(trasdesc) + '&matchCode=' + matchCode + '&bettype=' + bettype);
+
+                Site.blockUI();
+                showResultPopUp(url, { width: 800, height: 380, title: title });
+                Site.unBlockUI();
             },
 
             viewAllBetResult: function (trasdesc, betcheck, bettype, title) {
@@ -480,6 +490,9 @@
                 }
                 else if (sporttype === SPORT_VRG) {
                     _me.viewVRGResult(refno, defaultPlatform, title);
+                }
+                else if (sporttype === SPORT_SXG) {
+                    _me.viewSexyGamingResult(transdecs, extension2, bettype, title);
                 }
                 else {
                     const numberBettype = Number(bettype);
@@ -760,6 +773,34 @@
 
                 showDetailPopUp(url, { width: 890, height: popH + 50, title: title });
             },
+            showSexyGamingBetDetails: function (transId, winlostDate, custId, transType) {
+                let url = Site.resolveClientUrl('SexyGamingBetList/Detail');
+                url = QueryString.setParam(url, 'transId', transId);
+                url = QueryString.setParam(url, 'date', winlostDate);
+                url = QueryString.setParam(url, 'custId', custId);
+                url = QueryString.setParam(url, 'transType', transType);
+                url = QueryString.setParam(url, 'BaseCurrency', getBaseCurrency());
+
+                const popH = Math.min($(window).height() - 100, 550);
+                const title = Site.getSingleResource('ProductSXG') + ' - ' +
+                    Site.getSingleResource('DetailedBetlist') + ' - ' + moment(new Date(winlostDate)).format('MM/DD/YYYY');
+
+                showDetailPopUp(url, { width: 890, height: popH + 50, title: title });
+            },
+            showSabaClubDetails : function (transId, winlostDate, custId, transType) {
+                let url = Site.resolveClientUrl('SabaClubBetList/Detail');
+                url = QueryString.setParam(url, 'transId', transId);
+                url = QueryString.setParam(url, 'date', winlostDate);
+                url = QueryString.setParam(url, 'custId', custId);
+                url = QueryString.setParam(url, 'transType', transType);
+                url = QueryString.setParam(url, 'BaseCurrency', getBaseCurrency());
+
+                const popH = Math.min($(window).height() - 100, 550);
+                const title = Site.getSingleResource('ProductSBC') + ' - ' +
+                    Site.getSingleResource('DetailedBetlist') + ' - ' + moment(new Date(winlostDate)).format('MM/DD/YYYY');
+
+                showDetailPopUp(url, { width: 890, height: popH + 50, title: title });
+            },
             ValidProducts: function () {
                 let temp = true;
                 if ($('#ProductList').find('input:checked').length === 0) {
@@ -844,6 +885,8 @@
                 window.showVideoPokerGameDetails = _me.showVideoPokerGameDetails;
                 window.showSingleMatchParlayDetail = _me.showSingleMatchParlayDetail;
                 window.showSGDetails = _me.showSGDetails;
+                window.showSexyGamingBetDetails = _me.showSexyGamingBetDetails;
+                window.showSabaClubDetails = _me.showSabaClubDetails;
 
                 const betList = {
                     ViewCasinoHandHistory: _me.ViewCasinoHandHistory

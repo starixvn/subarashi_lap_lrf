@@ -17,5 +17,6 @@ export const SportType = {
     GLOBALGAMING: 219,
     CARDCLUB: 165,
     SG: 247,
-    VRG: 245
+    VRG: 245,
+    SXG: 243
 }

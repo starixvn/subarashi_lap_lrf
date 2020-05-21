@@ -48,8 +48,7 @@
                 ObjectDb.Received(1).SetParameterValue("fromdate", metaModel.FromDate);
                 ObjectDb.Received(1).SetParameterValue("todate", metaModel.ToDate);
                 ObjectDb.Received(1).SetParameterValue("BaseCurrency", metaModel.BaseCurrency);
-                ObjectDb.Received(1).SetParameterValue("showSB", true);
-                ObjectDb.Received(1).SetParameterValue("showNG", false);
+                ObjectDb.Received(1).SetParameterValue("ProductList", "SB");
             });
         }
 

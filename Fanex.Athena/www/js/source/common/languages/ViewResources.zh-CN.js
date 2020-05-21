@@ -1,4 +1,4 @@
-﻿// Generated at: 5/18/2020 11:03:56 AM
+﻿// Generated at: 5/20/2020 5:31:37 PM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -514,6 +514,7 @@ ProductNG:"百练赛",
 ProductPP:"PP王者电子",
 ProductSB:"体育博彩",
 ProductSG:"新霸电子",
+ProductSXG:"性感百家",
 ProductTG:"桌面游戏",
 ProductVB:"澳门电子娱乐城",
 ProductVRG:"虚拟娱乐城",
