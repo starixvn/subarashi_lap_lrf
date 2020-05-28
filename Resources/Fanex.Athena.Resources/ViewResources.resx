@@ -2784,4 +2784,7 @@
   <data name="PlatformWinLossNote" xml:space="preserve">
     <value>Platform data is available from 27 Feb 2016.</value>
   </data>
+  <data name="LicenseeTxId" xml:space="preserve">
+    <value>TxID</value>
+  </data>
 </root>

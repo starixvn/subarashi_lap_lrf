@@ -3535,6 +3535,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to TxID.
+        /// </summary>
+        public static string LicenseeTxId {
+            get {
+                return ResourceManager.GetString("LicenseeTxId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Licensee W/L.
         /// </summary>
         public static string LicenseeW_L {
