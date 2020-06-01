@@ -3506,7 +3506,6 @@ var ColumnAlignments = ['center-align', '', '', 'center-align', 'center-align', 
 const DataGrid = props => {
   if (_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_3__["default"].isAllowTxIDColumn && !Columns.includes('LicenseeTxId')) {
     Columns.splice(4, 0, 'LicenseeTxId');
-    console.log(Columns);
     ColumnWidths.splice(4, 0, 110);
     ColumnAlignments.splice(4, 0, 'center-align');
   }
