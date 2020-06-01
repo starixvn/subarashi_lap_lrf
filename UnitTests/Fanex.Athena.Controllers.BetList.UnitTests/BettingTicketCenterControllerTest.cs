@@ -8,6 +8,7 @@
     using Base.UnitTests;
 
     using DataAccess.Core.Configuration.Interfaces;
+    using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Auth.Enum;
@@ -35,6 +36,8 @@
 
         private IAuthorizationService _authService;
 
+        private IAppSettings _appSettings;
+
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
@@ -47,6 +50,7 @@
                 BalanceUpDay = BalanceUpDate
             });
             _authService = Substitute.For<IAuthorizationService>();
+            _appSettings = Substitute.For<IAppSettings>();
 
             SetUpDefaultFakeData();
         }
@@ -324,7 +328,7 @@
         {
             _authService.CheckProductBelongsTo(SessionService.LicenseeSession.LicenseeName, ProductTypes.Exchange).Returns(hasExchangePermission);
 
-            return new BettingTicketCenterController(_productService, _balanceUpDataAccess, _authService)
+            return new BettingTicketCenterController(_productService, _balanceUpDataAccess, _authService, _appSettings)
             {
                 LangService = LangService,
                 SessionServiceInstance = SessionService

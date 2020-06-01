@@ -24,9 +24,10 @@
     selectedBaseCurrency: '@ViewBag.SelectedBaseCurrency',
     isLoading: false,
     isConvertAll: true,
-    hasExchange: '@ViewBag.HasExchange.ToString()' === 'True'
+    hasExchange: '@ViewBag.HasExchange.ToString()' === 'True',
     };
     window._AppData = {
+    isAllowTxIDColumn: '@ViewBag.IsAllowTxIDColumn.ToString()' === 'True',
     isAllowedCustomerComm: @Model.ToJson(),
     baseCurrencyList:@Html.Raw(baseCurrencyList.ToJson()),
     productsRequireUseNameNote: '@ViewBag.ProductsRequireUseNameNote',

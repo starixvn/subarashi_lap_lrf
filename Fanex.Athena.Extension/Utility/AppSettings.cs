@@ -76,6 +76,14 @@ namespace Fanex.Athena.Extension.Utility
             }
         }
 
+        public IEnumerable<string> LicenseeOfferTxIDColumn
+        {
+            get
+            {
+                return GetValue("LicenseeOfferTxIDColumn").Split(',');
+            }
+        }
+
         public string ExchangeProductApiHost
         {
             get { return GetValue("ExchangeProductApiHost"); }

@@ -24,6 +24,8 @@
 
         IEnumerable<int> LicenseeOfferStatusFunction { get; }
 
+        IEnumerable<string> LicenseeOfferTxIDColumn { get; }
+
         string ExchangeProductApiHost { get; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Sonar Code Smell", "S3996:UriPropertiesShouldNotBeStrings",
