@@ -37,6 +37,7 @@
     hasExchange: '@Model.HasExchange.ToString()' === 'True'
     };
     window._AppData = {
+    isAllowTxIDColumn: '@ViewBag.IsAllowTxIDColumn.ToString()' === 'True',
     isAllowedCustomerComm: @Model.IsAllowedCustomerComm.ToJson(),
     productOptions: @Html.Raw(productOptions.ToJson()),
     currencyList: @Html.Raw(Model.CurrencyList.Select(x => new { Id = x.Key, Value = x.Value, Status = true }).ToJson()),

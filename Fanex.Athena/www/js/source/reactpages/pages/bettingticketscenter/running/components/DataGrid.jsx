@@ -3,22 +3,29 @@ import { connect } from 'react-redux';
 import { ApiUrl } from '../../common/lib/constants';
 import BaseDataGrid from '../../common/components/BaseDataGrid';
 import LangHelper from '@jsroot/lib/langHelper';
+import AppData from '@jsroot/lib/AppData';
 
-const Columns = [
+var Columns = [
     'Index', 'ExternalId', 'SystemId', 'RefNo', 'TransTime', 'Choice', 'Odds',
     'OddsType', 'Stake', 'Status', 'Platform', 'Live'
 ];
-const ColumnWidths = [
+var ColumnWidths = [
     40, 120, 120, 110, 150, 400, 70,
     70, 100, 80, 80, 80
 ];
-const ColumnAlignments = [
+var ColumnAlignments = [
     'center-align', '', '', 'center-align', 'center-align', 'right-align', 'right-align',
     'right-align', 'right-align', 'center-align', 'center-align', 'center-align'
 ];
 const SortableColumns = ['Stake'];
 
 export const DataGrid = (props) => {
+    if (AppData.isAllowTxIDColumn && !Columns.includes('LicenseeTxId')) {
+        Columns.splice(4, 0, 'LicenseeTxId');
+        ColumnWidths.splice(4, 0, 110);
+        ColumnAlignments.splice(4, 0, 'center-align');
+    }
+
     const { BaseCurrencyName } = props.requestParam;
 
     return (
