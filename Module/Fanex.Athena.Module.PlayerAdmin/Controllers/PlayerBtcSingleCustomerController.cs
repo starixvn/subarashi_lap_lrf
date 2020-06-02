@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.SessionState;
 using Fanex.Athena.Controllers;
+using Fanex.Athena.Extension.Utility;
 using Fanex.Athena.Model.Auth.DataDomain;
 using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Module.PlayerAdmin.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.ViewModels;
-using Fanex.Athena.Service.Core.Common.Interfaces;
-using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
 using Fanex.Athena.Web.ActionFilter;
 using ONEbook.UM.Filters;
@@ -37,17 +35,23 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
 
         private readonly IBetListApiClient _betListApiClient;
 
+        private readonly IAppSettings _appSettings;
+
         public PlayerBtcSingleCustomerController(
             IBetListApiClient betListApiClient,
-            IProductService productService)
+            IProductService productService,
+            IAppSettings appSettings)
         {
             _betListApiClient = betListApiClient;
             _productService = productService;
+            _appSettings = appSettings;
         }
 
         [HttpGet]
         public ActionResult Index(string userName, string currencyName)
         {
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
+
             var viewModel = new PlayerBtcSingleCustomerViewModel
             {
                 UserName = userName?.Trim(),
@@ -55,6 +59,9 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
                 IsAllowedCustomerComm = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm,
                 ProductCodeListString = GetProductCode()
             };
+
+            ViewBag.IsAllowTxIDColumn = _appSettings.LicenseeOfferTxIDColumn.Contains(
+               licenseeSession.LicenseeName, StringComparer.InvariantCultureIgnoreCase);
 
             return View("~/Views/Desktop/Module/PlayerAdmin/SingleCustomer/Index.cshtml", viewModel);
         }
@@ -80,7 +87,6 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
                 if (httpResponse.StatusCode == HttpStatusCode.NoContent)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.NoContent);
-
                 }
                 return File(await httpResponse.Content.ReadAsStreamAsync(), "application/octet-stream");
             }

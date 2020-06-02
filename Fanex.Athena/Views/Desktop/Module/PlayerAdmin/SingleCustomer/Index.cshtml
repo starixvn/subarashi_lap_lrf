@@ -50,7 +50,8 @@
 
     window._AppData = {
     isAllowedCustomerComm: @Model.IsAllowedCustomerComm.ToJson(),
-    reportTitle: '@reportTitle'
+    reportTitle: '@reportTitle',
+    isAllowTxIDColumn: '@ViewBag.IsAllowTxIDColumn.ToString()' === 'True'
     };
 }
 <div id="app-container">

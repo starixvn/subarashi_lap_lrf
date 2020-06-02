@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Fanex.Athena.Controllers.Base.UnitTests;
+using Fanex.Athena.Extension.Utility;
 using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Model.Core.DTO.Common;
 using Fanex.Athena.Module.PlayerAdmin.Controllers;
@@ -24,6 +25,8 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers
 
         private IBetListApiClient _betListApiClient;
 
+        private IAppSettings _appSettings;
+
         [SetUp]
         public void SetUp()
         {
@@ -33,6 +36,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers
 
             _productService = Substitute.For<IProductService>();
             _betListApiClient = Substitute.For<IBetListApiClient>();
+            _appSettings = Substitute.For<IAppSettings>();
         }
 
         [TearDown]
@@ -156,9 +160,10 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers
                 SessionService.UserSession.Language,
                 FunctionNames.BettingTicketCenter).Returns(expectedProductAccess ?? new ProductAccess(new List<Product>()));
 
-            var result = new PlayerBtcSingleCustomerController(_betListApiClient, productService);
+            var result = new PlayerBtcSingleCustomerController(_betListApiClient, productService, _appSettings);
             result.LangService = LangService;
             result.SessionServiceInstance = SessionService;
+            StubLicenseeSessionData(DefaultLicenseeSession);
 
             return result;
         }
