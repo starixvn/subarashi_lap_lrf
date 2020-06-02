@@ -368,6 +368,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _jsroot_components_betlist_BetListDataGrid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/components/betlist/BetListDataGrid */ "./www/js/source/reactpages/components/betlist/BetListDataGrid.jsx");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+
 
 
 const DataGrid = props => {
@@ -381,16 +383,26 @@ const DataGrid = props => {
     getHeaderName,
     onSort
   } = props;
+  let Columns = ['Index', 'RefNo', 'TransTime', 'Choice', 'Odds', 'OddsType', 'Stake', 'WinLoss', 'LicenseeWL', 'Status', 'Platform', 'Live'];
+  let ColumnWidths = [40, 110, 150, 400, 70, 70, 80, 80, 80, 60, 60, 60];
+  let ColumnAlignments = ['center-align', 'center-align', 'center-align', 'right-align', 'right-align', 'right-align', 'right-align', 'right-align', 'right-align', 'center-align', 'center-align', 'center-align'];
+
+  if (_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__["default"].isAllowTxIDColumn && !Columns.includes('LicenseeTxId')) {
+    Columns.splice(2, 0, 'LicenseeTxId');
+    ColumnWidths.splice(2, 0, 110);
+    ColumnAlignments.splice(2, 0, 'center-align');
+  }
+
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_betlist_BetListDataGrid__WEBPACK_IMPORTED_MODULE_1__["default"], {
     isPaging: true,
     pageOption: pagingOption,
     onPaging: onPaging,
     getHeaderNameFunc: getHeaderName,
-    columns: ['Index', 'RefNo', 'TransTime', 'Choice', 'Odds', 'OddsType', 'Stake', 'WinLoss', 'LicenseeWL', 'Status', 'Platform', 'Live'],
-    columnWidths: [40, 110, 150, 400, 70, 70, 80, 80, 80, 60, 60, 60],
+    columns: Columns,
+    columnWidths: ColumnWidths,
     sortableColumns: ['Stake', 'WinLoss', 'LicenseeWL'],
     totalColumns: ['Stake', 'WinLoss', 'LicenseeWL'],
-    columnAlignments: ['center-align', 'center-align', 'center-align', 'right-align', 'right-align', 'right-align', 'right-align', 'right-align', 'right-align', 'center-align', 'center-align', 'center-align'],
+    columnAlignments: ColumnAlignments,
     data: data,
     total: total,
     totalText: totalText,
@@ -568,6 +580,7 @@ const HeaderText = {
   ExternalId: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("ExternalId"),
   SystemId: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("SystemId"),
   RefNo: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("RefNo"),
+  LicenseeTxId: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("LicenseeTxId"),
   TransTime: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("TransTime"),
   Choice: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("Choice"),
   Odds: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("Odds"),
