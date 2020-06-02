@@ -5,7 +5,7 @@
     using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Model.Core.MetaModel;
 
-    public class BaseBettingTicketMetaModel : IMetaModelValidation , IMetaModelCurrencyIdList
+    public class BaseBettingTicketMetaModel : IMetaModelValidation, IMetaModelCurrencyIdList
     {
         private const int DefaultPageSize = 50;
 
@@ -78,5 +78,7 @@
         public bool IsConvertAll { get; set; }
 
         public string BaseCurrencyName { get; set; }
+
+        public bool IsAllowTxIDColumn { get; set; }
     }
 }

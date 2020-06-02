@@ -79,10 +79,14 @@ export class FormFilter extends Component {
 
     exportExcel = (event) => {
         event.preventDefault();
-        
+
         const params = this._getParams();
         if (!params) {
             return;
+        }
+
+        if (AppData.isAllowTxIDColumn) {
+            params.IsAllowTxIDColumn = true;
         }
 
         params.IsExport = true;
@@ -90,7 +94,7 @@ export class FormFilter extends Component {
         DataService.getFile(ApiUrl.SINGLECUSTOMER_DATA_URL, params).then((response) => {
             const NoContentStatusCode = 204;
 
-            if(response.status === NoContentStatusCode){
+            if (response.status === NoContentStatusCode) {
                 alert(LangHelper.getSingleResource("NoInfo"));
             } else {
                 Site.downloadFile(response.data, 'BettingTicketsCenter_SingleCustomer.xls');
@@ -110,11 +114,11 @@ export class FormFilter extends Component {
     _renderUserGuide() {
         const userGuideContent = this.props.userGuideContent;
 
-        return (<UserGuide 
-                title={LangHelper.getSingleResource("UserGuide")} 
-                contentTitle={LangHelper.getSingleResource("BettingTicketCenter")}
-                onClick={this.showUserGuide}
-                content={userGuideContent} />)
+        return (<UserGuide
+            title={LangHelper.getSingleResource("UserGuide")}
+            contentTitle={LangHelper.getSingleResource("BettingTicketCenter")}
+            onClick={this.showUserGuide}
+            content={userGuideContent} />)
     }
 
     _renderDateRange() {
@@ -158,13 +162,13 @@ export class FormFilter extends Component {
         const statusList = AppData.statusList;
 
         return statusList && statusList.length && (
-                <MultipleSelect id="StatusList"
-                    language={LangHelper.currentLanguage}
-                    dataSource={statusList}
-                    keyField={"Id"}
-                    valueField={"Value"}
-                    statusField={"Status"}
-                    onChange={(currentItem, selectedItemsKey) => this.props.setSelectedStatus(selectedItemsKey)} />);
+            <MultipleSelect id="StatusList"
+                language={LangHelper.currentLanguage}
+                dataSource={statusList}
+                keyField={"Id"}
+                valueField={"Value"}
+                statusField={"Status"}
+                onChange={(currentItem, selectedItemsKey) => this.props.setSelectedStatus(selectedItemsKey)} />);
     }
 
     _renderPlatformSelectList() {
@@ -178,30 +182,30 @@ export class FormFilter extends Component {
         );
     }
 
-      _renderLiveStatusSelectList() {
-          const liveStatusList = AppData.liveStatusList;
+    _renderLiveStatusSelectList() {
+        const liveStatusList = AppData.liveStatusList;
 
-          return liveStatusList && liveStatusList.length && (
-                      <MultipleSelect id="LiveStatusList"
-                    language={LangHelper.currentLanguage}
-                    dataSource={liveStatusList}
-                    keyField={"Id"}
-                    valueField={"Value"}
-                    statusField={"Status"}
-                    onChange={(currentItem, selectedItemsKey) => this.props.setSelectedLiveStatus(selectedItemsKey)} />);
-      }
+        return liveStatusList && liveStatusList.length && (
+            <MultipleSelect id="LiveStatusList"
+                language={LangHelper.currentLanguage}
+                dataSource={liveStatusList}
+                keyField={"Id"}
+                valueField={"Value"}
+                statusField={"Status"}
+                onChange={(currentItem, selectedItemsKey) => this.props.setSelectedLiveStatus(selectedItemsKey)} />);
+    }
 
-     render() {
+    render() {
         const excelButton = <div>
-                                <i className="icon-excel right" onClick={this.exportExcel} title={LangHelper.getSingleResource("ExportToExcel")}></i>
-                                {this._renderUserGuide()}
-                            </div>;
+            <i className="icon-excel right" onClick={this.exportExcel} title={LangHelper.getSingleResource("ExportToExcel")}></i>
+            {this._renderUserGuide()}
+        </div>;
 
         return (
             <CollapsiblePanel className="page-filter" stickyFooter={excelButton}>
                 <div className="row">
 
-                     <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
+                    <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource("Date")}</label>
                             {this._renderDateRange()}
@@ -214,59 +218,59 @@ export class FormFilter extends Component {
                             {this._renderProductSelectList()}
                         </div>
                     </div>
-                    
+
                     <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource("BaseCurrency")}</label>
-                        {this._renderBaseCurrencySelectList()}
+                            {this._renderBaseCurrencySelectList()}
                         </div>
                     </div>
 
                     <div className="col-12 col-md-4 col-sm-3 col-lg-2 col-xl-3">
                         <div className="form-group">
                             <CheckBox id="IsConvertAll"
-                        checked={this.props.isConvertAll}
-                        onChange={(checked) => this.props.changeIsConvertAll(checked)}
-                        label={LangHelper.getSingleResource("ConvertAllFiguresToBaseCurrency")} />
-                        </div>    
+                                checked={this.props.isConvertAll}
+                                onChange={(checked) => this.props.changeIsConvertAll(checked)}
+                                label={LangHelper.getSingleResource("ConvertAllFiguresToBaseCurrency")} />
+                        </div>
                     </div>
-                    </div>
-                    <div className="row">
+                </div>
+                <div className="row">
                     <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource("Username")} *</label>
-                            <AutoComplete url={ApiUrl.CUSTOMER_SEARCH_URL} 
+                            <AutoComplete url={ApiUrl.CUSTOMER_SEARCH_URL}
                                 onSelect={(value) => this.props.setUsername(value)}
                                 onInput={(value) => this.props.setUsername(value)}
-                                htmlAttributes={{placeholder:LangHelper.getSingleResource("ExternalIdOrSystemId")}} />
+                                htmlAttributes={{ placeholder: LangHelper.getSingleResource("ExternalIdOrSystemId") }} />
                         </div>
                     </div>
 
-                     <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
+                    <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource("Status")}</label>
-                                {this._renderStatusSelectList()}
+                            {this._renderStatusSelectList()}
                         </div>
                     </div>
 
                     <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource("Platform")}</label>
-                        {this._renderPlatformSelectList()}
+                            {this._renderPlatformSelectList()}
                         </div>
                     </div>
 
                     <div className="col-12 col-md-2 col-sm-3 col-lg-2 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource("Live")}</label>
-                        {this._renderLiveStatusSelectList()}
+                            {this._renderLiveStatusSelectList()}
                         </div>
                     </div>
 
                     <div className="col-12 col-md-2 col-sm-2 col-lg-2 col-xl-1">
                         <div className="form-group">
                             <div className="button-group">
-                            <button type="button" disabled={!this.isValidModel} className="btn btn-submit" onClick={this.submit}>{LangHelper.getSingleResource("Submit")}</button>
+                                <button type="button" disabled={!this.isValidModel} className="btn btn-submit" onClick={this.submit}>{LangHelper.getSingleResource("Submit")}</button>
                             </div>
                         </div>
                     </div>

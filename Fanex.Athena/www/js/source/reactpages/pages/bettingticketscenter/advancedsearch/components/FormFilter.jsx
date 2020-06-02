@@ -50,8 +50,8 @@ export class FormFilter extends Component {
     }
 
     get isValidModel() {
-        return !!this.props.selectedProduct 
-            && !!this.props.selectedStatus 
+        return !!this.props.selectedProduct
+            && !!this.props.selectedStatus
             && !!this.props.selectedLiveStatus
             && !!this.props.selectedCurrency
             && validateBaseCurrency(this.props.selectedBaseCurrency);
@@ -117,6 +117,10 @@ export class FormFilter extends Component {
             return;
         }
 
+        if (AppData.isAllowTxIDColumn) {
+            params.IsAllowTxIDColumn = true;
+        }
+
         params.IsExport = true;
         this.props.toggleLoader(true);
         DataService.getFile(ApiUrl.ADVANCEDSEARCH_DATA_URL, params).then((response) => {
@@ -125,7 +129,6 @@ export class FormFilter extends Component {
             if (contentType && contentType.indexOf('application/json') > -1) {
                 const RowsExceedLimitErrorCode = 1001;
                 Site.readAsJson(response.data, (result) => {
-
                     if (result.ErrorCode === RowsExceedLimitErrorCode) {
                         this._showExportWarning();
                     }
@@ -133,7 +136,6 @@ export class FormFilter extends Component {
                         const msg = result.ErrorMsg || LangHelper.getSingleResource("ErrorProcessingMsg");
                         alert(msg);
                     }
-
                 });
             } else {
                 const NoContentStatusCode = 204;
@@ -298,7 +300,7 @@ export class FormFilter extends Component {
         }
         else {
             const currencyName = AppData.currencyList.find(x => x.Id == currencyIdList).Value;
-            
+
             if (!this.baseCurrencyList.find(x => x.label === currencyName)) {
                 baseCurrency = '';
                 this.baseCurrencyList = AppData.baseCurrencyList.slice(0);

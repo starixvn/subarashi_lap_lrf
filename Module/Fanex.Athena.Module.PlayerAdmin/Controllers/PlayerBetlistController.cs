@@ -77,6 +77,11 @@
 
         public async Task<ActionResult> ExportRunningBetListDataAsync(PlayerRunningBetListMetalModel metaModel)
         {
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
+
+            metaModel.IsAllowTxIDColumn = _appSettings.LicenseeOfferTxIDColumn.Contains(
+                licenseeSession.LicenseeName, StringComparer.InvariantCultureIgnoreCase);
+
             var httpResponse = await _betListApiClient.PostAsync("/PlayerAdminBetList/Export",
                 metaModel,
                 SessionServiceInstance.UserSession.Language).ConfigureAwait(false);

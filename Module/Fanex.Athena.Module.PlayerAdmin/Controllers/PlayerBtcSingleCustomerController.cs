@@ -74,7 +74,10 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
         public async Task<dynamic> Index([Bind(Include = "Username,PageSize,PageIndex,IsExport,SortBy,SortOrder")]PlayerBtcSingleCustomerMetaModel metaModel)
         {
             var userSession = SessionServiceInstance.UserSession;
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
             metaModel.HasPlayerCom = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm;
+            metaModel.IsAllowTxIDColumn = _appSettings.LicenseeOfferTxIDColumn.Contains(
+               licenseeSession.LicenseeName, StringComparer.InvariantCultureIgnoreCase);
 
             AssignMetaModelValue(metaModel);
 
