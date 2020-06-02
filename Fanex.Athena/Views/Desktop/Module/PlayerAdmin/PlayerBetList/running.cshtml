@@ -13,7 +13,10 @@
 
 @section globaljscode{
     window.initialState = {
-        requestParam: { CustId: @Model.CustId, Currency: '@Model.Currency', PageIndex: 1, PageSize: 50 }
+    requestParam: { CustId: @Model.CustId, Currency: '@Model.Currency', PageIndex: 1, PageSize: 50 }
+    };
+    window._AppData = {
+    isAllowTxIDColumn: '@ViewBag.IsAllowTxIDColumn.ToString()' === 'True'
     };
 }
 <div id="app-container">

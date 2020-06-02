@@ -1,19 +1,18 @@
 ﻿namespace Fanex.Athena.Module.PlayerAdmin.Controllers
 {
+    using System;
     using System.Linq;
     using System.Net;
-    using System.Net.Http;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using System.Web.SessionState;
     using System.Web.UI;
     using Fanex.Athena.Controllers;
+    using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
     using Fanex.Athena.Module.PlayerAdmin.ViewModels;
-    using Fanex.Athena.Service.Core.Common.Interfaces;
-    using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
     using ONEbook.UM.Filters;
@@ -26,10 +25,14 @@
     {
         private readonly IBetListApiClient _betListApiClient;
 
+        private readonly IAppSettings _appSettings;
+
         public PlayerBetListController(
-            IBetListApiClient betListApiClient)
+            IBetListApiClient betListApiClient,
+            IAppSettings appSettings)
         {
             _betListApiClient = betListApiClient;
+            _appSettings = appSettings;
         }
 
         [HttpGet]
@@ -37,12 +40,16 @@
         public ViewResult Running(int custId, int currencyId)
         {
             var currencyList = SessionServiceInstance.UserSession.CurrencyList;
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
 
             var viewModel = new PlayerRunningBetListViewModel
             {
                 CustId = custId,
                 Currency = currencyList.FirstOrDefault(x => x.Key == currencyId).Value
             };
+
+            ViewBag.IsAllowTxIDColumn = _appSettings.LicenseeOfferTxIDColumn.Contains(
+                licenseeSession.LicenseeName, StringComparer.InvariantCultureIgnoreCase);
 
             return View("~/Views/Desktop/Module/PlayerAdmin/PlayerBetList/Running.cshtml", viewModel);
         }

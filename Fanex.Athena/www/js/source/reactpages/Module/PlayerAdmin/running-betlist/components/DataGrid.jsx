@@ -75,7 +75,7 @@ export class DataGrid extends Component {
 
     render() {
         const { data, total, totalRows } = this.state;
-        const requestParam = this.props.requestParam
+        const requestParam = this.props.requestParam;
 
         const pageOption = {
             PageIndex: requestParam.PageIndex,
@@ -84,20 +84,30 @@ export class DataGrid extends Component {
             PageList: [50, 100, 200, 300, 400, 500, 1000, 2000]
         };
 
+        let Columns = ['Index', 'RefNo', 'TransTime', 'Choice', 'Odds', 'OddsType', 'Stake', 'Status', 'Platform', 'Live'];
+        let ColumnWidths = [40, 110, 150, 400, 70, 70, 100, 80, 80, 80];
+        let ColumnAlignments = [
+            'center-align', 'center-align', 'center-align',
+            'right-align', 'right-align', 'right-align', 'right-align',
+            'center-align', 'center-align', 'center-align'
+        ]
+
+        if (AppData.isAllowTxIDColumn && !Columns.includes('LicenseeTxId')) {
+            Columns.splice(2, 0, 'LicenseeTxId');
+            ColumnWidths.splice(2, 0, 110);
+            ColumnAlignments.splice(2, 0, 'center-align');
+        }
+
         return <BetListDataGrid
             isPaging={true}
             pageOption={pageOption}
             onPaging={this.onPaging}
             getHeaderNameFunc={this.getHeaderName}
-            columns={['Index', 'RefNo', 'TransTime', 'Choice', 'Odds', 'OddsType', 'Stake', 'Status', 'Platform', 'Live']}
-            columnWidths={[40, 110, 150, 400, 70, 70, 100, 80, 80, 80]}
+            columns={Columns}
+            columnWidths={ColumnWidths}
             sortableColumns={['Stake']}
             totalColumns={['Stake']}
-            columnAlignments={[
-                'center-align', 'center-align', 'center-align',
-                'right-align', 'right-align', 'right-align', 'right-align',
-                'center-align', 'center-align', 'center-align'
-            ]}
+            columnAlignments={ColumnAlignments}
             data={data}
             total={total}
             totalText={this.totalText}
