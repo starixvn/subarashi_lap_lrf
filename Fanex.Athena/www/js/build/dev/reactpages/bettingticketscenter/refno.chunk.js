@@ -3599,6 +3599,10 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         return;
       }
 
+      if (_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].isAllowTxIDColumn) {
+        params.IsAllowTxIDColumn = true;
+      }
+
       params.IsExport = true;
       this.props.toggleLoader(true);
       _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_11__["default"].getFile(_common_lib_constants__WEBPACK_IMPORTED_MODULE_12__["ApiUrl"].REFNO_DATA_URL, params).then(response => {
