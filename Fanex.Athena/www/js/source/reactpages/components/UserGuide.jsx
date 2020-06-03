@@ -15,13 +15,13 @@ export default class UserGuide extends React.Component {
     static propTypes = {
         title: PropTypes.string,
         className: PropTypes.string,
-        content: PropTypes.string,
-        contentTitle: PropTypes.string
+        contentTitle: PropTypes.string,
+        isHtml: PropTypes.bool
     }
 
     static defaultProps = {
         className: 'icon-book right',
-        content: ''
+        isHtml: true
     }
 
     onClickHandler = () => {
@@ -39,12 +39,11 @@ export default class UserGuide extends React.Component {
     }
 
     render() {
-        const { className, title, content, contentTitle } = this.props;
-        const isShow = this.state.isShow && content.length > 0;
-        
+        const { className, title, content, contentTitle, isHtml } = this.props;
+        const isShow = this.state.isShow && content && (React.isValidElement(content) || content.length > 0) ? true : false;
         return (<div>
             <i className={className} onClick={this.onClickHandler} title={title}></i>
-            <Popup width={640} height={480} isShow={isShow} title={contentTitle} onClose={this.onCloseHandler} isHtml={true}>
+            <Popup width={640} height={480} isShow={isShow} title={contentTitle} onClose={this.onCloseHandler} isHtml={isHtml}>
                 {content}
             </Popup>
         </div>);

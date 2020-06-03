@@ -14,6 +14,8 @@ import { searchOptions, baStatusList, specialLevelListWithColor, emailPattern, o
 import UserNameInput from './filter/UserNameInput';
 import QueryString from '@jsroot/lib/QueryString';
 import { encode } from '@jsroot/lib/htmlHelper';
+import LicAthenaUserGuide from '../../userGuide/LicAthenaUserGuide';
+import LicApiUserGuide from '../../userGuide/LicApiUserGuide';
 
 export class FormFilter extends PureComponent {
     constructor(props) {
@@ -129,18 +131,18 @@ export class FormFilter extends PureComponent {
         this.setState({ isValidUserName: !!value });
     }
 
-    showUserGuide() {
-
+    _renderContentUserGuide() {
+        const currentLang = LangHelper.currentLanguage;
+        return this.props.type === licenseeType.nonApi ? <LicAthenaUserGuide lang={currentLang} />
+            : <LicApiUserGuide lang={currentLang} />
     }
 
     _renderUserGuide() {
-        const userGuideContent = 'Player Admin User Guide';
-
         return (<UserGuide
             title={LangHelper.getSingleResource("UserGuide")}
             contentTitle={LangHelper.getSingleResource("PlayerAdmin")}
-            onClick={this.showUserGuide}
-            content={userGuideContent} />)
+            isHtml={false}
+            content={this._renderContentUserGuide()} />)
     }
 
     _getUserNameLabel() {
