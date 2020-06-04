@@ -21,6 +21,7 @@
         private static readonly string[] SportTypes =
         {
             ((int)SportType.Soccer).ToString(),
+            ((int)SportType.Soccer).ToString(),
             ((int)SportType.BasketBall).ToString(),
             ((int)SportType.FootBall).ToString(),
             ((int)SportType.Tennis).ToString(),
@@ -81,7 +82,7 @@
         {
             var sportList = new List<PlayerBetLimit>();
 
-            foreach(var type in SportTypes)
+            foreach (var type in SportTypes)
             {
                 sportList.Add(ReadForSport(reader, type));
             }
@@ -149,6 +150,6 @@
             db.SetParameterValue("updateminmaxbet" + sportSuffix, setting?.IsUpdated);
         }
 
-        private static string GetSportSuffix(string sportId) => sportId != ((int) SportType.Soccer).ToString() ? "v" + sportId : string.Empty;
+        private static string GetSportSuffix(string sportId) => sportId != ((int)SportType.Soccer).ToString() ? "v" + sportId : string.Empty;
     }
 }
