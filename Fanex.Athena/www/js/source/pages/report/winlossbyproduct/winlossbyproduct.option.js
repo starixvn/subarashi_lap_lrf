@@ -178,7 +178,7 @@
     };
 
     const colNameList = ['#', 'Date', 'ExternalId', 'SystemId', 'Currency', 'Product', 'Turnover',
-                'TotalTransaction', '@[Win]/@[Loss]', 'Comm', 'Total', 'LicenseeW_L', 'Comm', 'AmountDue'];
+                'TotalTransaction', 'WinLoss', 'Comm', 'Total', 'LicenseeW_L', 'Comm', 'AmountDue'];
     const colModelList = [indexColumn, dateColumn, externalIdColumn, systemIdColumn, currencyColumn, productColumn, turnoverColumn,
                 totalTransColumn, customerWlColumn, playerCommColumn, customerWlTotalColumn,
                  licenseeWlColumn, LicenseeWlCommColumn, amtDueToColumn];
@@ -226,7 +226,7 @@
 
     _me.getColName = function () {
         // Column Customer Wl
-        colNameList[_me.customerWlIndex] = _me.hasCustomerComm ? '@[Win]/@[Loss]' : 'CustomerW_L';
+        colNameList[_me.customerWlIndex] = _me.hasCustomerComm ? 'WinLoss' : 'CustomerW_L';
         return Site.getResources(colNameList);
     };
 

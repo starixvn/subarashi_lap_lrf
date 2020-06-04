@@ -162,7 +162,7 @@
             'SystemId',
             'Turnover',
             'TotalTransaction',
-            '@[Win]/@[Loss]',
+            'WinLoss',
             'Comm',
             'Total',
             'EffectiveBettingValue',
@@ -242,7 +242,7 @@
             getColName: function () {
                 const colNames = Site.clone(colNameList);
 
-                colNames[_me.customerWlIndex] = _me.hasCustomerComm ? '@[Win]/@[Loss]' : 'CustomerW_L';
+                colNames[_me.customerWlIndex] = _me.hasCustomerComm ? 'WinLoss' : 'CustomerW_L';
 
                 return Site.getResources(colNames);
             },

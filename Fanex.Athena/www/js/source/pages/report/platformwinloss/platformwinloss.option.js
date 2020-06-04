@@ -201,7 +201,7 @@ define(['jquery', 'common/site', 'lib/jqgrid/jquery.jqgrid.additional'],
                 'Id',
                 'Platform',
                 'Turnover',
-                '%Turnover',
+                'TurnoverPercent',
                 'TotalTransaction',
                 'LicenseeW_L',
                 'CurrencyId',
@@ -242,7 +242,7 @@ define(['jquery', 'common/site', 'lib/jqgrid/jquery.jqgrid.additional'],
         };
         const columnConfigCustomerComm = {
             colsCustomerComm: {
-                colNames: ['@[Win]/@[Loss]', 'Comm', 'Total'],
+                colNames: ['WinLoss', 'Comm', 'Total'],
                 colModels: [customerWlColumn, playerCommColumn, customerWlTotalColumn]
             },
             colsWithoutComm: {
