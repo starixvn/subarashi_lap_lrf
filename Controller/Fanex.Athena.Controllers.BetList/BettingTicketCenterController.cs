@@ -1,6 +1,7 @@
 ﻿namespace Fanex.Athena.Controllers.BetList
 {
     using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
+    using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Model.Core.DataDomain;
@@ -9,6 +10,7 @@
     using Model.Core.DTO.Common;
     using Model.Core.MetaModel.Product;
     using Resources;
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
@@ -23,14 +25,18 @@
 
         private readonly IAuthorizationService _authService;
 
+        private readonly IAppSettings _appSettings;
+
         public BettingTicketCenterController(
             IProductService productService,
             IBalanceUpDataAccess balanceUpDataAccess,
-            IAuthorizationService authService)
+            IAuthorizationService authService,
+            IAppSettings appSettings)
         {
             _productService = productService;
             _balanceUpDataAccess = balanceUpDataAccess;
             _authService = authService;
+            _appSettings = appSettings;
         }
 
         [FunctionAuthorization(
@@ -68,6 +74,8 @@
         public ActionResult AdvancedSearch()
         {
             var tabList = GetEnableTabList();
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
+
             var viewModel = new BettingTicketCenterViewModel
             {
                 CurrencyList = GetCurrencyList(),
@@ -80,6 +88,10 @@
                 HasExchange = tabList.Any() && HasExchange(),
                 TabList = tabList
             };
+
+            ViewBag.IsAllowTxIDColumn = _appSettings.LicenseeOfferTxIDColumn.Contains(
+                licenseeSession.LicenseeName, StringComparer.InvariantCultureIgnoreCase);
+
             return View("~/Views/Desktop/BetList/BettingTicketCenter/AdvancedSearch.cshtml", viewModel);
         }
 
@@ -87,6 +99,8 @@
         public ActionResult SingleCustomer()
         {
             var tabList = GetEnableTabList();
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
+
             var viewModel = new BettingTicketCenterViewModel
             {
                 LiveStatusList = GetLiveStatusList(),
@@ -98,6 +112,10 @@
                 HasExchange = tabList.Any() && HasExchange(),
                 TabList = tabList
             };
+
+            ViewBag.IsAllowTxIDColumn = _appSettings.LicenseeOfferTxIDColumn.Contains(
+                licenseeSession.LicenseeName, StringComparer.InvariantCultureIgnoreCase);
+
             return View("~/Views/Desktop/BetList/BettingTicketCenter/SingleCustomer.cshtml", viewModel);
         }
 
@@ -105,6 +123,7 @@
         public ActionResult RefNo()
         {
             var tabList = GetEnableTabList();
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
 
             ViewBag.ProductsRequireUseNameNote = string.Format(
                 ViewResources.BettingTicketCenter_RefnoTabNote2,
@@ -113,6 +132,8 @@
             ViewBag.SelectedBaseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency;
             ViewBag.HasExchange = tabList.Any() && HasExchange();
             ViewBag.TabList = tabList;
+            ViewBag.IsAllowTxIDColumn = _appSettings.LicenseeOfferTxIDColumn.Contains(
+                licenseeSession.LicenseeName, StringComparer.InvariantCultureIgnoreCase);
 
             return View(
                 "~/Views/Desktop/BetList/BettingTicketCenter/RefNo.cshtml",
@@ -123,6 +144,8 @@
         public ActionResult Running()
         {
             var tabList = GetEnableTabList();
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
+
             var viewModel = new BettingTicketCenterViewModel
             {
                 StatusList = GetRunningStatusList(),
@@ -133,6 +156,9 @@
                 HasExchange = tabList.Any() && HasExchange(),
                 TabList = tabList
             };
+
+            ViewBag.IsAllowTxIDColumn = _appSettings.LicenseeOfferTxIDColumn.Contains(
+                licenseeSession.LicenseeName, StringComparer.InvariantCultureIgnoreCase);
 
             return View("~/Views/Desktop/BetList/BettingTicketCenter/Running.cshtml", viewModel);
         }

@@ -9,6 +9,7 @@ const HeaderText = {
     ExternalId: LangHelper.getSingleResource("ExternalId"),
     SystemId: LangHelper.getSingleResource("SystemId"),
     RefNo: LangHelper.getSingleResource("RefNo"),
+    LicenseeTxId: LangHelper.getSingleResource("LicenseeTxId"),
     TransTime: LangHelper.getSingleResource("TransTime"),
     Choice: LangHelper.getSingleResource("Choice"),
     Odds: LangHelper.getSingleResource("Odds"),
@@ -47,13 +48,13 @@ export default class Service {
 
             callback();
         })
-        .catch(error => {
-            console.log(error.message);
-            if (error.response) {
-                alert(LangHelper.getSingleResource("ErrorProcessingMsg"));
-                callback();
-            }
-        });
+            .catch(error => {
+                console.log(error.message);
+                if (error.response) {
+                    alert(LangHelper.getSingleResource("ErrorProcessingMsg"));
+                    callback();
+                }
+            });
     }
 
     static getData(param, callBack) {

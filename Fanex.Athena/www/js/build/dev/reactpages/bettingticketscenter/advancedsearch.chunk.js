@@ -7951,16 +7951,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _common_lib_constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../common/lib/constants */ "./www/js/source/reactpages/pages/bettingticketscenter/common/lib/constants.js");
 /* harmony import */ var _common_components_BaseDataGrid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../common/components/BaseDataGrid */ "./www/js/source/reactpages/pages/bettingticketscenter/common/components/BaseDataGrid.jsx");
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
 
 
 
 
 
-const Columns = ['Index', 'ExternalId', 'SystemId', 'RefNo', 'TransTime', 'Choice', 'Odds', 'OddsType', 'Stake', 'WinLoss', 'LicenseeWL', 'Status', 'Platform', 'Live'];
-const ColumnWidths = [40, 120, 120, 110, 150, 400, 70, 70, 100, 100, 100, 80, 80, 80];
-const ColumnAlignments = ['center-align', '', '', 'center-align', 'center-align', 'right-align', 'right-align', 'right-align', 'right-align', 'right-align', 'right-align', 'center-align', 'center-align', 'center-align'];
+
+var Columns = ['Index', 'ExternalId', 'SystemId', 'RefNo', 'TransTime', 'Choice', 'Odds', 'OddsType', 'Stake', 'WinLoss', 'LicenseeWL', 'Status', 'Platform', 'Live'];
+var ColumnWidths = [40, 120, 120, 110, 150, 400, 70, 70, 100, 100, 100, 80, 80, 80];
+var ColumnAlignments = ['center-align', '', '', 'center-align', 'center-align', 'right-align', 'right-align', 'right-align', 'right-align', 'right-align', 'right-align', 'center-align', 'center-align', 'center-align'];
 const SortableColumns = ['Stake', 'WinLoss', 'LicenseeWL'];
 const DataGrid = props => {
+  if (_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__["default"].isAllowTxIDColumn && !Columns.includes('LicenseeTxId')) {
+    Columns.splice(4, 0, 'LicenseeTxId');
+    ColumnWidths.splice(4, 0, 110);
+    ColumnAlignments.splice(4, 0, 'center-align');
+  }
+
   const {
     BaseCurrencyName
   } = props.requestParam;
@@ -8094,6 +8102,10 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 
       if (!params) {
         return;
+      }
+
+      if (_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_15__["default"].isAllowTxIDColumn) {
+        params.IsAllowTxIDColumn = true;
       }
 
       params.IsExport = true;
@@ -9140,6 +9152,7 @@ const HeaderText = {
   SystemId: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("SystemId"),
   RefNo: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("RefNo"),
   TransTime: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("TransTime"),
+  LicenseeTxId: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("LicenseeTxId"),
   Choice: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("Choice"),
   Odds: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("Odds"),
   OddsType: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("OddsType"),

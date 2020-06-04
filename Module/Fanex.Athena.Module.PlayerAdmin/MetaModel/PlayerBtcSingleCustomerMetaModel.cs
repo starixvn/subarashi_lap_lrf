@@ -74,6 +74,9 @@ namespace Fanex.Athena.Module.PlayerAdmin.MetaModel
         public string SortBy { get; set; }
 
         public string SortOrder { get; set; }
+
         public bool IsValid => !string.IsNullOrEmpty(UserName);
+
+        public bool IsAllowTxIDColumn { get; set; }
     }
 }

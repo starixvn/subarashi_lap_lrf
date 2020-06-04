@@ -41,6 +41,7 @@
     hasExchange: '@Model.HasExchange.ToString()' === 'True'
     };
     window._AppData = {
+    isAllowTxIDColumn: '@ViewBag.IsAllowTxIDColumn.ToString()' === 'True',
     baseCurrencyList: @Html.Raw(baseCurrencyList.ToJson()),
     liveStatusList: @Html.Raw(Model.LiveStatusList.Select(x => new { Id = x.Key, Value = x.Value, Status = true }).ToJson()),
     statusList: @Html.Raw(Model.StatusList.Select(x => new { Id = x.ID, Value = x.Name, Status = x.Checked }).ToJson()),

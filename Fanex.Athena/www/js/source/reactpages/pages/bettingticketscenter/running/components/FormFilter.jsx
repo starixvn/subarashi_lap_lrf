@@ -74,10 +74,14 @@ export class FormFilter extends Component {
 
     exportExcel = (event) => {
         event.preventDefault();
-        
+
         const params = this._getParams();
         if (!params) {
             return;
+        }
+
+        if (AppData.isAllowTxIDColumn) {
+            params.IsAllowTxIDColumn = true;
         }
 
         params.IsExport = true;
@@ -85,15 +89,15 @@ export class FormFilter extends Component {
         DataService.getFile(ApiUrl.RUNNING_DATA_URL, params).then((response) => {
             const NoContentStatusCode = 204;
 
-            if(response.status === NoContentStatusCode){
+            if (response.status === NoContentStatusCode) {
                 alert(LangHelper.getSingleResource("NoInfo"));
-            }else {
+            } else {
                 Site.downloadFile(response.data, 'BettingTicketsCenter_Running.xls');
             }
             this.props.toggleLoader(false);
         });
     }
-    
+
     showUserGuide = () => {
         const userGuideContent = this.props.userGuideContent;
 
@@ -105,13 +109,13 @@ export class FormFilter extends Component {
     _renderUserGuide() {
         const userGuideContent = this.props.userGuideContent;
 
-        return (<UserGuide 
-                title={LangHelper.getSingleResource("UserGuide")} 
-                contentTitle={LangHelper.getSingleResource("BettingTicketCenter")}
-                onClick={this.showUserGuide}
-                content={userGuideContent} />)
+        return (<UserGuide
+            title={LangHelper.getSingleResource("UserGuide")}
+            contentTitle={LangHelper.getSingleResource("BettingTicketCenter")}
+            onClick={this.showUserGuide}
+            content={userGuideContent} />)
     }
-    
+
     _renderProductSelectList() {
         const productOptions = AppData.productOptions;
 
@@ -128,9 +132,9 @@ export class FormFilter extends Component {
 
     _renderCurrencySelectList() {
         const currencyList = AppData.currencyList;
-       
+
         return currencyList && currencyList.length && (
-                <MultipleSelect id="ddlCurrency"
+            <MultipleSelect id="ddlCurrency"
                 language={LangHelper.currentLanguage}
                 dataSource={currencyList}
                 keyField={"Id"}
@@ -139,32 +143,30 @@ export class FormFilter extends Component {
                 onChange={(currentItem, selectedItemsKey) => this._onChangeCurrency(selectedItemsKey)} />);
     }
 
-     _onChangeCurrency = (currencyIdList) => {
-         let baseCurrency = "";
+    _onChangeCurrency = (currencyIdList) => {
+        let baseCurrency = "";
 
-         if(!currencyIdList || currencyIdList.indexOf(',') > 0){ // none or multi currencies
-             this.baseCurrencyList = AppData.baseCurrencyList;
-             baseCurrency = this.baseCurrencyList.find(x => x.label === this.props.selectedBaseCurrency) ?
-                             this.props.selectedBaseCurrency :
-                             this.defaultBaseCurrency;
+        if (!currencyIdList || currencyIdList.indexOf(',') > 0) { // none or multi currencies
+            this.baseCurrencyList = AppData.baseCurrencyList;
+            baseCurrency = this.baseCurrencyList.find(x => x.label === this.props.selectedBaseCurrency) ?
+                this.props.selectedBaseCurrency :
+                this.defaultBaseCurrency;
         }
-        else
-        {
-             const currencyName =  AppData.currencyList.find(x => x.Id == currencyIdList).Value;
-             if(!this.baseCurrencyList.find(x => x.label === currencyName)){
-                 baseCurrency = '';
-                 this.baseCurrencyList = AppData.baseCurrencyList.slice(0);
-                 this.baseCurrencyList.push({value: baseCurrency, label: currencyName});      
-             }
-             else {
-                 baseCurrency = currencyName;
-             }
+        else {
+            const currencyName = AppData.currencyList.find(x => x.Id == currencyIdList).Value;
+            if (!this.baseCurrencyList.find(x => x.label === currencyName)) {
+                baseCurrency = '';
+                this.baseCurrencyList = AppData.baseCurrencyList.slice(0);
+                this.baseCurrencyList.push({ value: baseCurrency, label: currencyName });
+            }
+            else {
+                baseCurrency = currencyName;
+            }
         }
 
         this.props.setSelectedCurrency(currencyIdList)
         this.props.setSelectedBaseCurrency(baseCurrency);
     }
-
 
     _renderBaseCurrencySelectList() {
         const baseCurrencyList = this.baseCurrencyList;
@@ -190,12 +192,12 @@ export class FormFilter extends Component {
                 onChange={(currentItem, selectedItemsKey) => this.props.setSelectedStatus(selectedItemsKey)} />);
     }
 
-     render() {
-         const excelButton = <div>
-                                <i className="icon-excel right" onClick={this.exportExcel} title={LangHelper.getSingleResource("ExportToExcel")}></i>
-                                {this._renderUserGuide()}
-                            </div>;
-         
+    render() {
+        const excelButton = <div>
+            <i className="icon-excel right" onClick={this.exportExcel} title={LangHelper.getSingleResource("ExportToExcel")}></i>
+            {this._renderUserGuide()}
+        </div>;
+
         return (
             <CollapsiblePanel className="page-filter" stickyFooter={excelButton}>
                 <div className="row">
@@ -210,10 +212,10 @@ export class FormFilter extends Component {
                     <div className="col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource("Username")}</label>
-                            <AutoComplete url={ApiUrl.CUSTOMER_SEARCH_URL} 
+                            <AutoComplete url={ApiUrl.CUSTOMER_SEARCH_URL}
                                 onSelect={(value) => this.props.setUsername(value)}
                                 onInput={(value) => this.props.setUsername(value)}
-                                htmlAttributes={{placeholder:LangHelper.getSingleResource("ExternalIdOrSystemId")}} />
+                                htmlAttributes={{ placeholder: LangHelper.getSingleResource("ExternalIdOrSystemId") }} />
                         </div>
                     </div>
 
@@ -233,24 +235,24 @@ export class FormFilter extends Component {
 
                     <div className="col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2">
                         <div className="form-group">
-                        <CheckBox id="IsConvertAll"
-                            checked={this.props.isConvertAll}
-                            onChange={(checked) => this.props.changeIsConvertAll(checked)}
-                            label={LangHelper.getSingleResource("ConvertAllFiguresToBaseCurrency")} />
-                    </div>    
+                            <CheckBox id="IsConvertAll"
+                                checked={this.props.isConvertAll}
+                                onChange={(checked) => this.props.changeIsConvertAll(checked)}
+                                label={LangHelper.getSingleResource("ConvertAllFiguresToBaseCurrency")} />
+                        </div>
                     </div>
 
                     <div className="col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource("Status")}</label>
-                        {this._renderStatusSelectList()}
+                            {this._renderStatusSelectList()}
                         </div>
                     </div>
 
                     <div className="col-12 col-md-2 col-sm-2 col-lg-2 col-xl-1">
                         <div className="form-group">
                             <div className="button-group">
-                            <button disabled={!this.isValidModel} type="button" className="btn btn-submit" onClick={this.submit}>{LangHelper.getSingleResource("Submit")}</button>
+                                <button disabled={!this.isValidModel} type="button" className="btn btn-submit" onClick={this.submit}>{LangHelper.getSingleResource("Submit")}</button>
                             </div>
                         </div>
                     </div>

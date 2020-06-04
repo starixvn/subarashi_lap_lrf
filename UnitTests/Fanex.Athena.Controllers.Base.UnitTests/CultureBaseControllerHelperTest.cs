@@ -73,6 +73,8 @@
             StubUserSessionData(DefaultUserSession);
 
             StubLicenseeSessionData(DefaultLicenseeSession);
+
+            StubGetValueAppSettings("LicenseeOfferTxIDColumn", "awc,awc2");
         }
 
         protected void StubUserSessionData(UserAuthInfo fakeUserSession)

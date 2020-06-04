@@ -40,19 +40,23 @@ export class FormFilter extends Component {
 
     exportExcel = (event) => {
         event.preventDefault();
-        
+
         const params = this._getParams();
         if (!params) {
             return;
         }
 
+        if (AppData.isAllowTxIDColumn) {
+            params.IsAllowTxIDColumn = true;
+        }
+
         params.IsExport = true;
         this.props.toggleLoader(true);
-        
+
         DataService.getFile(ApiUrl.REFNO_DATA_URL, params).then((response) => {
             const NoContentStatusCode = 204;
 
-            if(response.status === NoContentStatusCode){
+            if (response.status === NoContentStatusCode) {
                 alert(LangHelper.getSingleResource("NoInfo"));
             } else {
                 Site.downloadFile(response.data, 'BettingTicketsCenter_RefNo.xls');
@@ -91,11 +95,11 @@ export class FormFilter extends Component {
     _renderUserGuide() {
         const userGuideContent = this.props.userGuideContent;
 
-        return (<UserGuide 
-                title={LangHelper.getSingleResource("UserGuide")} 
-                contentTitle={LangHelper.getSingleResource("BettingTicketCenter")}
-                onClick={this.showUserGuide}
-                content={userGuideContent} />)
+        return (<UserGuide
+            title={LangHelper.getSingleResource("UserGuide")}
+            contentTitle={LangHelper.getSingleResource("BettingTicketCenter")}
+            onClick={this.showUserGuide}
+            content={userGuideContent} />)
     }
 
     _renderBaseCurrencySelectList() {
@@ -107,14 +111,14 @@ export class FormFilter extends Component {
                 value={selectedBaseCurrency}
                 options={baseCurrencyList}
                 onChange={(item) => this.props.setSelectedBaseCurrency(item.value)} />
-            );
+        );
     }
 
     render() {
         const excelButton = <div>
-                                <i className="icon-excel right" onClick={this.exportExcel} title={LangHelper.getSingleResource("ExportToExcel")}></i>
-                                {this._renderUserGuide()}
-                            </div>;
+            <i className="icon-excel right" onClick={this.exportExcel} title={LangHelper.getSingleResource("ExportToExcel")}></i>
+            {this._renderUserGuide()}
+        </div>;
 
         return (
             <CollapsiblePanel className="page-filter" stickyFooter={excelButton}>
@@ -130,47 +134,47 @@ export class FormFilter extends Component {
                     <div className="col-12 col-md-4 col-sm-4 col-lg-3 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource("Username")}</label>
-                            <AutoComplete url={ApiUrl.CUSTOMER_SEARCH_URL} 
+                            <AutoComplete url={ApiUrl.CUSTOMER_SEARCH_URL}
                                 onSelect={(value) => this.props.setUsername(value)}
                                 onInput={(value) => this.props.setUsername(value)}
-                                htmlAttributes={{placeholder:LangHelper.getSingleResource("ExternalIdOrSystemId")}} />
+                                htmlAttributes={{ placeholder: LangHelper.getSingleResource("ExternalIdOrSystemId") }} />
                         </div>
                     </div>
 
                     <div className="col-12 col-md-3 col-sm-4 col-lg-2 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource("BaseCurrency")}</label>
-                        {this._renderBaseCurrencySelectList()}
+                            {this._renderBaseCurrencySelectList()}
                         </div>
                     </div>
 
                     <div className="col-12 col-md-4 col-sm-4 col-lg-2 col-xl-2">
                         <div className="form-group">
                             <CheckBox id="IsConvertAll"
-                            checked={this.props.isConvertAll}
-                            onChange={(checked) => this.props.changeIsConvertAll(checked)}
-                            label={LangHelper.getSingleResource("ConvertAllFiguresToBaseCurrency")} />
-                        </div>    
+                                checked={this.props.isConvertAll}
+                                onChange={(checked) => this.props.changeIsConvertAll(checked)}
+                                label={LangHelper.getSingleResource("ConvertAllFiguresToBaseCurrency")} />
+                        </div>
                     </div>
 
                     <div className="col-12 col-md-3 col-sm-4 col-lg-2 col-xl-2">
-                    <div className="form-group">
-                        <div className="button-group">
-                        <button type="button" disabled={!this.isValidModel} className="btn btn-submit" onClick={this.submit}>{LangHelper.getSingleResource("Submit")}</button>
+                        <div className="form-group">
+                            <div className="button-group">
+                                <button type="button" disabled={!this.isValidModel} className="btn btn-submit" onClick={this.submit}>{LangHelper.getSingleResource("Submit")}</button>
+                            </div>
                         </div>
-                    </div>
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-1" style={{flex: "0 0 4%"}}>
-                    {LangHelper.getSingleResource('Note')}:
+                    <div className="col-1" style={{ flex: "0 0 4%" }}>
+                        {LangHelper.getSingleResource('Note')}:
                         </div>
-                        <div className="col-9">
-                            * {LangHelper.getSingleResource('BettingTicketCenter_RefnoTabNote1')}
-                            <br />
-                            * {AppData.productsRequireUseNameNote}
-                        </div>
-               </div>
+                    <div className="col-9">
+                        * {LangHelper.getSingleResource('BettingTicketCenter_RefnoTabNote1')}
+                        <br />
+                        * {AppData.productsRequireUseNameNote}
+                    </div>
+                </div>
             </CollapsiblePanel>
         )
     }

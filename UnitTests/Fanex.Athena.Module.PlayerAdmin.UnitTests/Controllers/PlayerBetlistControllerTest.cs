@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Fanex.Athena.Controllers.Base.UnitTests;
+    using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Module.PlayerAdmin.Controllers;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
@@ -17,6 +18,7 @@
     public class PlayerBetlistControllerTest : CultureBaseControllerHelperTest
     {
         private IBetListApiClient _betListApiClient;
+        private IAppSettings _appSettings;
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
@@ -24,6 +26,7 @@
             base.FixtureSetUp();
 
             _betListApiClient = Substitute.For<IBetListApiClient>();
+            _appSettings = Substitute.For<IAppSettings>();
         }
 
         [OneTimeTearDown]
@@ -125,9 +128,10 @@
 
         private PlayerBetListController CreateController()
         {
-            var result = new PlayerBetListController(_betListApiClient);
+            var result = new PlayerBetListController(_betListApiClient, _appSettings);
             result.LangService = LangService;
             result.SessionServiceInstance = SessionService;
+            StubLicenseeSessionData(DefaultLicenseeSession);
 
             return result;
         }

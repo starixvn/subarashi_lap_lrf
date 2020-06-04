@@ -395,16 +395,26 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       TotalItem: totalRows,
       PageList: [50, 100, 200, 300, 400, 500, 1000, 2000]
     };
+    let Columns = ['Index', 'RefNo', 'TransTime', 'Choice', 'Odds', 'OddsType', 'Stake', 'Status', 'Platform', 'Live'];
+    let ColumnWidths = [40, 110, 150, 400, 70, 70, 100, 80, 80, 80];
+    let ColumnAlignments = ['center-align', 'center-align', 'center-align', 'right-align', 'right-align', 'right-align', 'right-align', 'center-align', 'center-align', 'center-align'];
+
+    if (_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__["default"].isAllowTxIDColumn && !Columns.includes('LicenseeTxId')) {
+      Columns.splice(2, 0, 'LicenseeTxId');
+      ColumnWidths.splice(2, 0, 110);
+      ColumnAlignments.splice(2, 0, 'center-align');
+    }
+
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_betlist_BetListDataGrid__WEBPACK_IMPORTED_MODULE_4__["default"], {
       isPaging: true,
       pageOption: pageOption,
       onPaging: this.onPaging,
       getHeaderNameFunc: this.getHeaderName,
-      columns: ['Index', 'RefNo', 'TransTime', 'Choice', 'Odds', 'OddsType', 'Stake', 'Status', 'Platform', 'Live'],
-      columnWidths: [40, 110, 150, 400, 70, 70, 100, 80, 80, 80],
+      columns: Columns,
+      columnWidths: ColumnWidths,
       sortableColumns: ['Stake'],
       totalColumns: ['Stake'],
-      columnAlignments: ['center-align', 'center-align', 'center-align', 'right-align', 'right-align', 'right-align', 'right-align', 'center-align', 'center-align', 'center-align'],
+      columnAlignments: ColumnAlignments,
       data: data,
       total: total,
       totalText: this.totalText,
@@ -596,6 +606,7 @@ const HeaderText = {
   ExternalId: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("ExternalId"),
   SystemId: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("SystemId"),
   RefNo: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("RefNo"),
+  LicenseeTxId: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("LicenseeTxId"),
   TransTime: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("TransTime"),
   Choice: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("Choice"),
   Odds: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("Odds"),

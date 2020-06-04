@@ -6,6 +6,7 @@ export const HeaderText = {
     ExternalId: LangHelper.getSingleResource("ExternalId"),
     SystemId: LangHelper.getSingleResource("SystemId"),
     RefNo: LangHelper.getSingleResource("RefNo"),
+    LicenseeTxId: LangHelper.getSingleResource("LicenseeTxId"),
     TransTime: LangHelper.getSingleResource("TransTime"),
     Choice: LangHelper.getSingleResource("Choice"),
     Odds: LangHelper.getSingleResource("Odds"),

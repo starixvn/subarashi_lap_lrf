@@ -57,6 +57,9 @@
         public bool IsExcludedTestData { get; set; }
 
         public int PageIndex { get; set; }
+
         public bool IsExport { get; set; }
+
+        public bool IsAllowTxIDColumn { get; set; }
     }
 }

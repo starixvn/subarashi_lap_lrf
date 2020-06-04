@@ -1,4 +1,4 @@
-﻿// Generated at: 5/20/2020 5:31:28 PM
+﻿// Generated at: 5/28/2020 1:53:07 PM
 var _language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -386,6 +386,7 @@ Licensee:"Licensee",
 LicenseeComm:"Licensee Comm",
 LicenseeIsNotExisted:"Not found licensee",
 LicenseeNetWL:"Licensee Net WL",
+LicenseeTxId:"TxID",
 LicenseeW_L:"Licensee W/L",
 LicenseeWinLoss:"Licensee Win Loss",
 LicenseeWL:"Licensee WL",
