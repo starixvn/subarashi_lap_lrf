@@ -745,6 +745,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bet Counts.
+        /// </summary>
+        public static string BetCounts {
+            get {
+                return ResourceManager.GetString("BetCounts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Others.
         /// </summary>
         public static string BetfromOthers {
@@ -1857,6 +1866,15 @@ namespace Fanex.Athena.Resources {
         public static string DateRangeNote {
             get {
                 return ResourceManager.GetString("DateRangeNote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Day.
+        /// </summary>
+        public static string Day {
+            get {
+                return ResourceManager.GetString("Day", resourceCulture);
             }
         }
         
@@ -4971,6 +4989,15 @@ namespace Fanex.Athena.Resources {
         public static string Player {
             get {
                 return ResourceManager.GetString("Player", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Player Administration.
+        /// </summary>
+        public static string PlayerAdministration {
+            get {
+                return ResourceManager.GetString("PlayerAdministration", resourceCulture);
             }
         }
         

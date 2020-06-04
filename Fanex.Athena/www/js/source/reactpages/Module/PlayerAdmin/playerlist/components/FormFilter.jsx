@@ -140,7 +140,7 @@ export class FormFilter extends PureComponent {
     _renderUserGuide() {
         return (<UserGuide
             title={LangHelper.getSingleResource("UserGuide")}
-            contentTitle={LangHelper.getSingleResource("PlayerAdmin")}
+            contentTitle={LangHelper.getSingleResource("PlayerAdministration")}
             isHtml={false}
             content={this._renderContentUserGuide()} />)
     }

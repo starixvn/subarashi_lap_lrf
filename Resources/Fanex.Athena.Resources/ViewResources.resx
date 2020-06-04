@@ -2787,4 +2787,12 @@
   <data name="LicenseeTxId" xml:space="preserve">
     <value>TxID</value>
   </data>
-</root>
+  <data name="BetCounts" xml:space="preserve">
+    <value>Bet Counts</value>
+  </data>
+  <data name="Day" xml:space="preserve">
+    <value>Day</value>
+  </data>
+  <data name="PlayerAdministration" xml:space="preserve">
+    <value>Player Administration</value>
+  </data></root>
