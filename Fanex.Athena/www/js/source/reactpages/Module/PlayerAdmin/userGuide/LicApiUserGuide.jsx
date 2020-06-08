@@ -48,7 +48,7 @@ const EngContent = _ => {
         <div className="rule">
             <h4>Player Details</h4>
             <ul>
-                <li><b>Player Info:</b> View player’s profile and activity record.
+                <li><b>Player Info:</b> view player’s profile and activity record.
                     <ul>
                         <li>Player Betting Statistics</li>
                         <li>Fast Cross-Link</li>
@@ -80,7 +80,7 @@ const ZnCNContent = _ => {
             <h4>搜索过滤器</h4>
             <ul>
                 <li><b>用户名:</b> 搜寻用户名 (支援模糊搜寻)。</li>
-                <li><b>货币:</b>以会员货币来选择报表呈现内容。
+                <li><b>货币:</b> 以会员货币来选择报表呈现内容。
                     <ul>
                         <li><b>全部:</b> 报表呈现所有支持货币。</li>
                     </ul>
@@ -115,7 +115,7 @@ const ZnCNContent = _ => {
         <div className="rule">
             <h4>玩家详情</h4>
             <ul>
-                <li><b>玩家资讯:</b> 查看玩家的个人资料和活动记录
+                <li><b>玩家资讯:</b> 查看玩家的个人资料和活动记录。
                     <ul>
                         <li>玩家投注统计</li>
                         <li>快速连结</li>

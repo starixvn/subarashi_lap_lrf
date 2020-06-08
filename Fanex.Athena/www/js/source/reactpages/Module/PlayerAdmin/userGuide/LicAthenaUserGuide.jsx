@@ -56,7 +56,7 @@ const EngContent = _ => {
         <div className="rule">
             <h4>Player Details</h4>
             <ul>
-                <li><b>Player Info:</b> View player’s profile and activity record.
+                <li><b>Player Info:</b> view player’s profile and activity record.
                     <ul>
                         <li>Player Betting Statistics</li>
                         <li>Fast Cross-Link</li>
@@ -91,7 +91,7 @@ const ZnCNContent = _ => {
                 <li><b>用户名:</b> 搜寻用户名 (支援模糊搜寻)。</li>
                 <li><b>银行账户:</b> 精确查询银行账户号码。</li>
                 <li><b>信箱:</b> 精确查询电子邮件。</li>
-                <li><b>货币:</b>以会员货币来选择报表呈现内容。
+                <li><b>货币:</b> 以会员货币来选择报表呈现内容。
                     <ul>
                         <li><b>全部:</b> 报表呈现所有支持货币。</li>
                     </ul>
@@ -131,7 +131,7 @@ const ZnCNContent = _ => {
         <div className="rule">
             <h4>玩家详情</h4>
             <ul>
-                <li><b>玩家资讯:</b> 查看玩家的个人资料和活动记录
+                <li><b>玩家资讯:</b> 查看玩家的个人资料，银行信息和活动记录。
                     <ul>
                         <li>玩家投注统计</li>
                         <li>快速连结</li>
@@ -141,10 +141,10 @@ const ZnCNContent = _ => {
                 <li><b>额度记录:</b> 查看玩家余额变化并按时间排序。</li>
                 <li><b>投注历史:</b> 列出玩家的未结算注单。</li>
                 <li><b>转帐:</b> 查看玩家的转帐日志和钱包余额。</li>
-                <li><b>投注限额:</b> 查看体育博彩，数字游戏，虚拟体育，快乐彩，彩票和其他产品的投注设置。</li>
+                <li><b>投注限额:</b> 查看体育博彩，数字游戏，虚拟体育，基诺，彩票和其他产品的投注设置。</li>
                 <li><b>记录:</b> 查看和编辑玩家记录。</li>
-                <li><b>日志:</b> 查看玩家的更新日志。</li>
-                <li><b>设定:</b> 设置转账限额。</li>
+                <li><b>日志:</b> 查看玩家的登入资讯和更新日志。</li>
+                <li><b>设定:</b> 设置密码，转账限额和银行信息。</li>
                 <li><b>信息:</b> 查看一般/特别公告并添加个人信息。</li>
             </ul>
         </div>
