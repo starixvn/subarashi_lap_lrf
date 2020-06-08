@@ -8548,7 +8548,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         };
         //#endregion
         const colNameList = ['#', 'Date', 'ExternalId', 'SystemId', 'Currency', 'Sport', 'BetType', 'EffectiveBettingValue',
-        'TotalTransaction', 'Turnover', 'TotalTurnover', '@[Win]/@[Loss]', 'Comm', 'Total'];
+        'TotalTransaction', 'Turnover', 'TotalTurnover', 'WinLoss', 'Comm', 'Total'];
 
         const colModelList = [indexColumn, dateColumn, externalIdColumn, systemIdColumn, currencyColumn, sportColumn, bettypeColumn,
                         effectiveBettingVlueColumn, totalTransColumn, turnoverColumn, totalturnoverColumn,

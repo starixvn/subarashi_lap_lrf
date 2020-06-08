@@ -3165,6 +3165,8 @@ function createReducer(initialState, handlers) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return LangHelper; });
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 const DEFAULT_RESOURCE_NAME = "_language_en_US";
 const langCode = window.PageLanguage || "en-US";
 const resourceName = `_language_${langCode.replace("-", "_")}`;
@@ -3184,6 +3186,11 @@ class LangHelper {
   }
 
 }
+
+_defineProperty(LangHelper, "languageKeys", {
+  eng: "en-US",
+  zhCN: "zh-CN"
+});
 
 /***/ }),
 

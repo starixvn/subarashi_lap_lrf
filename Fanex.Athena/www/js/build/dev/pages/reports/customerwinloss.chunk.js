@@ -6845,7 +6845,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             'SystemId',
             'Turnover',
             'TotalTransaction',
-            '@[Win]/@[Loss]',
+            'WinLoss',
             'Comm',
             'Total',
             'EffectiveBettingValue',
@@ -6925,7 +6925,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             getColName: function () {
                 const colNames = Site.clone(colNameList);
 
-                colNames[_me.customerWlIndex] = _me.hasCustomerComm ? '@[Win]/@[Loss]' : 'CustomerW_L';
+                colNames[_me.customerWlIndex] = _me.hasCustomerComm ? 'WinLoss' : 'CustomerW_L';
 
                 return Site.getResources(colNames);
             },

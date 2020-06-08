@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 5/28/2020 1:53:16 PM
+﻿// Generated at: 6/8/2020 9:42:15 AM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -171,6 +171,7 @@ BAStatus:"BA Status",
 BAUpdatedBy:"BA Updated By",
 BBAmtComm:"BB Amt + Comm",
 BetCount:"Bet Count",
+BetCounts:"Bet Counts",
 BetfromOthers:"Others",
 BetId:"Bet ID",
 BetLimit:"Bet Limit",
@@ -295,6 +296,7 @@ DateRange:"Date Range",
 DateRangeExceedMsg:"Date range exceeds {0} months. Please try again!",
 DateRangeLimitNote:"Data is available within 3 months, from {0} to {1}.",
 DateRangeNote:"Data is available from {0:d MMM yyyy}",
+Day:"Day",
 DD:"DD",
 DeactivateVip:"Deactivate VIP",
 Dec:"Dec",
@@ -641,6 +643,7 @@ PlatformWinLoss:"Platform Win Loss",
 PlatformWinLossNote:"Platform data is available from 27 Feb 2016.",
 PlatformWinLossTitle:"Platform Win Loss - {0} --&gt; {1} - {2} - {3} - {4}",
 Player:"Player",
+PlayerAdministration:"Player Administration",
 PlayerAdminUpdateFailedMsg:"Please try again!",
 PlayerName:"Player Name",
 PlayerSegmentation:"Player Segmentation",
