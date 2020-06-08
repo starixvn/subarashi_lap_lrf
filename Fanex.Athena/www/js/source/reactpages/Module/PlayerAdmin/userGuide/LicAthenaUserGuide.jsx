@@ -56,7 +56,7 @@ const EngContent = _ => {
         <div className="rule">
             <h4>Player Details</h4>
             <ul>
-                <li><b>Player Info:</b> view player’s profile and activity record.
+                <li><b>Player Info:</b> view player’s profile, bank information and activity record.
                     <ul>
                         <li>Player Betting Statistics</li>
                         <li>Fast Cross-Link</li>
@@ -69,7 +69,7 @@ const EngContent = _ => {
                 <li><b>Bet Limit:</b> view bet setting for Sportsbook, Number Game, Virtual Sports, RNG Keno, Lottery and other products.</li>
                 <li><b>Note:</b> view or edit the note for player.</li>
                 <li><b>Log:</b> view update log of player.</li>
-                <li><b>Setting:</b> set fund transfer limit.</li>
+                <li><b>Setting:</b> set password, fund transfer limit and bank info.</li>
                 <li><b>Message:</b> view normal/ special announcements and add the personal message.</li>
             </ul>
         </div>
