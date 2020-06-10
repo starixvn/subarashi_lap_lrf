@@ -41,7 +41,7 @@
                 "#",
                 ViewResources.ExternalId,
                 ViewResources.SystemId,
-                ViewResources.BetCount,
+                ViewResources.BetCounts,
                 ViewResources.PendingFunds
             };
             SetTextRowHeader(row, headerTextList);

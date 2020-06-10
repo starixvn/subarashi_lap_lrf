@@ -1077,6 +1077,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _filter_UserNameInput__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./filter/UserNameInput */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/components/filter/UserNameInput.jsx");
 /* harmony import */ var _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @jsroot/lib/QueryString */ "./www/js/source/reactpages/lib/QueryString.js");
 /* harmony import */ var _jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @jsroot/lib/htmlHelper */ "./www/js/source/reactpages/lib/htmlHelper.js");
+/* harmony import */ var _userGuide_LicAthenaUserGuide__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../userGuide/LicAthenaUserGuide */ "./www/js/source/reactpages/Module/PlayerAdmin/userGuide/LicAthenaUserGuide.jsx");
+/* harmony import */ var _userGuide_LicApiUserGuide__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../userGuide/LicApiUserGuide */ "./www/js/source/reactpages/Module/PlayerAdmin/userGuide/LicApiUserGuide.jsx");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -1086,6 +1088,8 @@ function _objectWithoutProperties(source, excluded) { if (source == null) return
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -1254,15 +1258,21 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
     searchPlayer(param);
   }
 
-  showUserGuide() {}
+  _renderContentUserGuide() {
+    const currentLang = _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].currentLanguage;
+    return this.props.type === _lib_constants__WEBPACK_IMPORTED_MODULE_8__["licenseeType"].nonApi ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_userGuide_LicAthenaUserGuide__WEBPACK_IMPORTED_MODULE_15__["default"], {
+      lang: currentLang
+    }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_userGuide_LicApiUserGuide__WEBPACK_IMPORTED_MODULE_16__["default"], {
+      lang: currentLang
+    });
+  }
 
   _renderUserGuide() {
-    const userGuideContent = 'Player Admin User Guide';
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_UserGuide__WEBPACK_IMPORTED_MODULE_10__["default"], {
       title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("UserGuide"),
-      contentTitle: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("PlayerAdmin"),
-      onClick: this.showUserGuide,
-      content: userGuideContent
+      contentTitle: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("PlayerAdministration"),
+      isHtml: false,
+      content: this._renderContentUserGuide()
     });
   }
 
@@ -5586,6 +5596,182 @@ const siteSetting = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["d
 
 /***/ }),
 
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/userGuide/LicApiUserGuide.jsx":
+/*!***********************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/userGuide/LicApiUserGuide.jsx ***!
+  \***********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_BaseUserGuide__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/BaseUserGuide */ "./www/js/source/reactpages/Module/components/BaseUserGuide.jsx");
+
+
+
+const EngContent = _ => {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "rule"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "General Info"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "This function shows all players information along with their settings."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "line"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "rule"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Search Filters"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Username:"), " searched by Username (Support prefix search)."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Currency:"), " select the currency of players that you want to manage.", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "All:"), " all supported currencies will be listed out."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Odds Group:"), " view players of an odds group."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Special Level:"), " view players of a specific special level."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "BA:"), " view players of a BA."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "line"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "rule"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Report Guidelines"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Status:"), " view or set status for player."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Username:"), " view player username and number of shortcut options including:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Note"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Fundtransfer Limit"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Bet Limit"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Statement"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Current Balances: "), " indicate available amount to place bets."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Outstanding Balance:"), " indicate total stakes of all running bets."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Odds Group:"), " view or set odds group for player."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "BA Status:"), " switch on/off BA status for player."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Special Level:"), " view or set a special level for player."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "line"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "rule"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Player Details"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Player Info:"), " view player\u2019s profile and activity record.", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Player Betting Statistics"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Fast Cross-Link"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Statement: "), " view daily statements of player. All transactions are summarized and then put into a daily record. Each daily record balance will be summed up to the current date as the latest balance."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Detail Transaction:"), " view player balance changes and sort by time."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Bet List:"), " lists out non-settled tickets of player."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Fund Transfer:"), " view transfer log and wallets balance for player."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Bet Limit:"), " view bet setting for Sportsbook, Number Game, Virtual Sports, RNG Keno, Lottery and other products."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Note:"), " view or edit the note for player."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Log:"), " view update log of player."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Setting:"), " set fund transfer limit."))));
+};
+
+const ZnCNContent = _ => {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "rule"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "\u4E00\u822C\u4FE1\u606F"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u672C\u62A5\u8868\u663E\u793A\u6240\u6709\u4F1A\u5458\u6570\u636E\u5305\u542B\u4F1A\u5458\u8BBE\u5B9A\u3002"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "line"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "rule"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "\u641C\u7D22\u8FC7\u6EE4\u5668"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u7528\u6237\u540D:"), " \u641C\u5BFB\u7528\u6237\u540D (\u652F\u63F4\u6A21\u7CCA\u641C\u5BFB)\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u8D27\u5E01:"), " \u4EE5\u4F1A\u5458\u8D27\u5E01\u6765\u9009\u62E9\u62A5\u8868\u5448\u73B0\u5185\u5BB9\u3002", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u5168\u90E8:"), " \u62A5\u8868\u5448\u73B0\u6240\u6709\u652F\u6301\u8D27\u5E01\u3002"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Odds Group:"), " \u67E5\u770B\u73A9\u5BB6\u7684 odds group\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u7279\u6B8A\u5C42\u7EA7:"), " \u67E5\u9605\u7279\u6B8A\u5C42\u7EA7\u91CC\u7684\u73A9\u5BB6\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "BA\u72B6\u6001:"), " \u67E5\u770B\u73A9\u5BB6\u7684BA\u72B6\u6001\u3002"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "line"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "rule"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "\u62A5\u544A\u6307\u5357"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u72B6\u6001:"), " \u67E5\u770B\u73A9\u5BB6\u7684\u72B6\u6001\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u7528\u6237\u540D:"), " \u67E5\u770B\u73A9\u5BB6\u7684\u7528\u6237\u540D\u548C\u5FEB\u6377\u529F\u80FD\u9009\u9879\uFF0C\u5305\u62EC\uFF1A", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u8BB0\u5F55"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u8F6C\u5E10\u989D\u5EA6"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u6295\u6CE8\u9650\u989D"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u5E10\u76EE"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u76EE\u524D\u4F59\u989D:"), " \u663E\u793A\u53EF\u7528\u4E8E\u6295\u6CE8\u7684\u91D1\u989D\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u672A\u7ED3\u4F59\u989D:"), " \u663E\u793A\u6240\u6709\u6295\u6CE8\u4E2D\u7684\u603B\u6295\u6CE8\u989D\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Odds Group:"), " \u663E\u793A\u6216\u8BBE\u5B9A\u73A9\u5BB6\u7684odds group\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "BA\u72B6\u6001:"), " \u5F00/\u5173\u73A9\u5BB6\u7684BA\u72B6\u6001\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u7279\u6B8A\u5C42\u7EA7:"), " \u663E\u793A\u6216\u8BBE\u5B9A\u73A9\u5BB6\u7684\u7279\u6B8A\u5C42\u7EA7\u3002"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "line"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "rule"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "\u73A9\u5BB6\u8BE6\u60C5"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u73A9\u5BB6\u8D44\u8BAF:"), " \u67E5\u770B\u73A9\u5BB6\u7684\u4E2A\u4EBA\u8D44\u6599\u548C\u6D3B\u52A8\u8BB0\u5F55\u3002", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u73A9\u5BB6\u6295\u6CE8\u7EDF\u8BA1"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u5FEB\u901F\u8FDE\u7ED3"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u5E10\u76EE:"), " \u67E5\u770B\u73A9\u5BB6\u7684\u6BCF\u65E5\u62A5\u8868\u3002\u6C47\u603B\u6240\u6709\u4EA4\u6613\uFF0C\u7136\u540E\u8BB0\u5165\u6BCF\u65E5\u8BB0\u5F55\u3002\u6BCF\u4E2A\u6BCF\u65E5\u8BB0\u5F55\u7684\u4F59\u989D\u5C06\u88AB\u7D2F\u8BA1\u5230\u5F53\u524D\u65E5\u671F\u4F5C\u4E3A\u6700\u540E\u7684\u4F59\u989D\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u989D\u5EA6\u8BB0\u5F55:"), " \u67E5\u770B\u73A9\u5BB6\u4F59\u989D\u53D8\u5316\u5E76\u6309\u65F6\u95F4\u6392\u5E8F\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u6295\u6CE8\u5386\u53F2:"), " \u5217\u51FA\u73A9\u5BB6\u7684\u672A\u7ED3\u7B97\u6CE8\u5355\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u8F6C\u5E10:"), " \u67E5\u770B\u73A9\u5BB6\u7684\u8F6C\u5E10\u65E5\u5FD7\u548C\u94B1\u5305\u4F59\u989D\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u6295\u6CE8\u9650\u989D:"), " \u67E5\u770B\u4F53\u80B2\u535A\u5F69\uFF0C\u6570\u5B57\u6E38\u620F\uFF0C\u865A\u62DF\u4F53\u80B2\uFF0C\u5FEB\u4E50\u5F69\uFF0C\u5F69\u7968\u548C\u5176\u4ED6\u4EA7\u54C1\u7684\u6295\u6CE8\u8BBE\u7F6E\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u8BB0\u5F55:"), " \u67E5\u770B\u548C\u7F16\u8F91\u73A9\u5BB6\u8BB0\u5F55\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u65E5\u5FD7:"), " \u67E5\u770B\u73A9\u5BB6\u7684\u66F4\u65B0\u65E5\u5FD7\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u8BBE\u5B9A:"), " \u8BBE\u7F6E\u8F6C\u8D26\u9650\u989D\u3002"))));
+};
+
+const Contents = {
+  engContent: props => react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(EngContent, props),
+  znCNContent: props => react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ZnCNContent, props)
+};
+
+const LicApiUserGuide = props => {
+  const {
+    lang
+  } = props;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_BaseUserGuide__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    lang: lang,
+    contents: Contents
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (LicApiUserGuide);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/userGuide/LicAthenaUserGuide.jsx":
+/*!**************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/userGuide/LicAthenaUserGuide.jsx ***!
+  \**************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_BaseUserGuide__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/BaseUserGuide */ "./www/js/source/reactpages/Module/components/BaseUserGuide.jsx");
+
+
+
+const EngContent = _ => {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "rule"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "General Info"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "This function shows all players information along with their settings."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "line"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "rule"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Search Filters"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Username:"), " searched by Username (Support prefix search)."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Bank Account Number:"), " searched by exactly bank account number."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Email:"), " searched by exactly Email."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Currency:"), " select the currency of players that you want to manage.", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "All:"), " all supported currencies will be listed out."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Odds Group:"), " view players of an odds group."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Special Level:"), " view players of a specific special level."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "BA:"), " view players of a BA."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "line"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "rule"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Report Guidelines"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Status:"), " view or set status for player."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Username:"), " view player username and number of shortcut options including:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Note"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Password"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Bank Information"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Fundtransfer Limit"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Bet Limit"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Statement"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Personal Message"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Current Balances: "), " indicate available amount to place bets."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Outstanding Balance:"), " indicate total stakes of all running bets."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Odds Group:"), " view or set odds group for player."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "BA Status:"), " switch on/off BA status for player."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Special Level:"), " view or set a special level for player."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Last Transfer:"), " indicate player\u2019s last transfer time."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Email:"), " indicate player\u2019s Email."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "line"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "rule"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Player Details"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Player Info:"), " view player\u2019s profile, bank information and activity record.", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Player Betting Statistics"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Fast Cross-Link"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Statement: "), " view daily statements of player. All transactions are summarized and then put into a daily record. Each daily record balance will be summed up to the current date as the latest balance."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Detail Transaction:"), " view player balance changes and sort by time."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Bet List:"), " lists out non-settled tickets of player."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Fund Transfer:"), " view transfer log and wallets balance for player."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Bet Limit:"), " view bet setting for Sportsbook, Number Game, Virtual Sports, RNG Keno, Lottery and other products."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Note:"), " view or edit the note for player."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Log:"), " view update log of player."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Setting:"), " set password, fund transfer limit and bank info."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Message:"), " view normal/ special announcements and add the personal message."))));
+};
+
+const ZnCNContent = _ => {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "rule"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "\u4E00\u822C\u4FE1\u606F"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u672C\u62A5\u8868\u663E\u793A\u6240\u6709\u4F1A\u5458\u6570\u636E\u5305\u542B\u4F1A\u5458\u8BBE\u5B9A\u3002"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "line"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "rule"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "\u641C\u7D22\u8FC7\u6EE4\u5668"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u7528\u6237\u540D:"), " \u641C\u5BFB\u7528\u6237\u540D (\u652F\u63F4\u6A21\u7CCA\u641C\u5BFB)\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u94F6\u884C\u8D26\u6237:"), " \u7CBE\u786E\u67E5\u8BE2\u94F6\u884C\u8D26\u6237\u53F7\u7801\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u4FE1\u7BB1:"), " \u7CBE\u786E\u67E5\u8BE2\u7535\u5B50\u90AE\u4EF6\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u8D27\u5E01:"), " \u4EE5\u4F1A\u5458\u8D27\u5E01\u6765\u9009\u62E9\u62A5\u8868\u5448\u73B0\u5185\u5BB9\u3002", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u5168\u90E8:"), " \u62A5\u8868\u5448\u73B0\u6240\u6709\u652F\u6301\u8D27\u5E01\u3002"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Odds Group:"), " \u67E5\u770B\u73A9\u5BB6\u7684 odds group\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u7279\u6B8A\u5C42\u7EA7:"), " \u67E5\u9605\u7279\u6B8A\u5C42\u7EA7\u91CC\u7684\u73A9\u5BB6\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "BA\u72B6\u6001:"), " \u67E5\u770B\u73A9\u5BB6\u7684BA\u72B6\u6001\u3002"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "line"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "rule"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "\u62A5\u544A\u6307\u5357"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u72B6\u6001:"), " \u67E5\u770B\u73A9\u5BB6\u7684\u72B6\u6001\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u7528\u6237\u540D:"), " \u67E5\u770B\u73A9\u5BB6\u7684\u7528\u6237\u540D\u548C\u5FEB\u6377\u529F\u80FD\u9009\u9879\uFF0C\u5305\u62EC\uFF1A", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u8BB0\u5F55"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u5BC6\u7801"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u94F6\u884C\u8D44\u8BAF"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u8F6C\u5E10\u989D\u5EA6"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u6295\u6CE8\u9650\u989D"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u5E10\u76EE"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u4E2A\u4EBA\u8BAF\u606F"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u76EE\u524D\u4F59\u989D:"), " \u663E\u793A\u53EF\u7528\u4E8E\u6295\u6CE8\u7684\u91D1\u989D\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u672A\u7ED3\u4F59\u989D:"), " \u663E\u793A\u6240\u6709\u6295\u6CE8\u4E2D\u7684\u603B\u6295\u6CE8\u989D\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Odds Group:"), " \u663E\u793A\u6216\u8BBE\u5B9A\u73A9\u5BB6\u7684odds group\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "BA\u72B6\u6001:"), " \u5F00/\u5173\u73A9\u5BB6\u7684BA\u72B6\u6001\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u7279\u6B8A\u5C42\u7EA7:"), " \u663E\u793A\u6216\u8BBE\u5B9A\u73A9\u5BB6\u7684\u7279\u6B8A\u5C42\u7EA7\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u6700\u540E\u8F6C\u5E10:"), " \u663E\u793A\u73A9\u5BB6\u7684\u6700\u540E\u8F6C\u5E10\u7684\u65F6\u95F4\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u4FE1\u7BB1:"), " \u663E\u793A\u73A9\u5BB6\u7684\u4FE1\u7BB1\u3002"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "line"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "rule"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "\u73A9\u5BB6\u8BE6\u60C5"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u73A9\u5BB6\u8D44\u8BAF:"), " \u67E5\u770B\u73A9\u5BB6\u7684\u4E2A\u4EBA\u8D44\u6599\uFF0C\u94F6\u884C\u4FE1\u606F\u548C\u6D3B\u52A8\u8BB0\u5F55\u3002", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u73A9\u5BB6\u6295\u6CE8\u7EDF\u8BA1"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u5FEB\u901F\u8FDE\u7ED3"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u5E10\u76EE:"), " \u67E5\u770B\u73A9\u5BB6\u7684\u6BCF\u65E5\u62A5\u8868\u3002\u6C47\u603B\u6240\u6709\u4EA4\u6613\uFF0C\u7136\u540E\u8BB0\u5165\u6BCF\u65E5\u8BB0\u5F55\u3002\u6BCF\u4E2A\u6BCF\u65E5\u8BB0\u5F55\u7684\u4F59\u989D\u5C06\u88AB\u7D2F\u8BA1\u5230\u5F53\u524D\u65E5\u671F\u4F5C\u4E3A\u6700\u540E\u7684\u4F59\u989D\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u989D\u5EA6\u8BB0\u5F55:"), " \u67E5\u770B\u73A9\u5BB6\u4F59\u989D\u53D8\u5316\u5E76\u6309\u65F6\u95F4\u6392\u5E8F\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u6295\u6CE8\u5386\u53F2:"), " \u5217\u51FA\u73A9\u5BB6\u7684\u672A\u7ED3\u7B97\u6CE8\u5355\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u8F6C\u5E10:"), " \u67E5\u770B\u73A9\u5BB6\u7684\u8F6C\u5E10\u65E5\u5FD7\u548C\u94B1\u5305\u4F59\u989D\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u6295\u6CE8\u9650\u989D:"), " \u67E5\u770B\u4F53\u80B2\u535A\u5F69\uFF0C\u6570\u5B57\u6E38\u620F\uFF0C\u865A\u62DF\u4F53\u80B2\uFF0C\u57FA\u8BFA\uFF0C\u5F69\u7968\u548C\u5176\u4ED6\u4EA7\u54C1\u7684\u6295\u6CE8\u8BBE\u7F6E\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u8BB0\u5F55:"), " \u67E5\u770B\u548C\u7F16\u8F91\u73A9\u5BB6\u8BB0\u5F55\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u65E5\u5FD7:"), " \u67E5\u770B\u73A9\u5BB6\u7684\u767B\u5165\u8D44\u8BAF\u548C\u66F4\u65B0\u65E5\u5FD7\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u8BBE\u5B9A:"), " \u8BBE\u7F6E\u5BC6\u7801\uFF0C\u8F6C\u8D26\u9650\u989D\u548C\u94F6\u884C\u4FE1\u606F\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u4FE1\u606F:"), " \u67E5\u770B\u4E00\u822C/\u7279\u522B\u516C\u544A\u5E76\u6DFB\u52A0\u4E2A\u4EBA\u4FE1\u606F\u3002"))));
+};
+
+const Contents = {
+  engContent: props => react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(EngContent, props),
+  znCNContent: props => react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ZnCNContent, props)
+};
+
+const LicAthenaUserGuide = props => {
+  const {
+    lang
+  } = props;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_BaseUserGuide__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    lang: lang,
+    contents: Contents
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (LicAthenaUserGuide);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/components/BaseUserGuide.jsx":
+/*!**********************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/components/BaseUserGuide.jsx ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+
+
+
+const BaseUserGuide = props => {
+  const {
+    lang,
+    contents
+  } = props;
+
+  const renderContentByLanguage = () => {
+    if (lang === _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].languageKeys.zhCN) {
+      return contents.znCNContent();
+    }
+
+    return contents.engContent();
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, renderContentByLanguage());
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (BaseUserGuide);
+
+/***/ }),
+
 /***/ "./www/js/source/reactpages/Module/constants/configInfo.js":
 /*!*****************************************************************!*\
   !*** ./www/js/source/reactpages/Module/constants/configInfo.js ***!
@@ -6373,9 +6559,10 @@ class UserGuide extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
       className,
       title,
       content,
-      contentTitle
+      contentTitle,
+      isHtml
     } = this.props;
-    const isShow = this.state.isShow && content.length > 0;
+    const isShow = this.state.isShow && content && (react__WEBPACK_IMPORTED_MODULE_0___default.a.isValidElement(content) || content.length > 0) ? true : false;
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
       className: className,
       onClick: this.onClickHandler,
@@ -6386,7 +6573,7 @@ class UserGuide extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
       isShow: isShow,
       title: contentTitle,
       onClose: this.onCloseHandler,
-      isHtml: true
+      isHtml: isHtml
     }, content));
   }
 
@@ -6395,13 +6582,13 @@ class UserGuide extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
 _defineProperty(UserGuide, "propTypes", {
   title: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
   className: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
-  content: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
-  contentTitle: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string
+  contentTitle: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
+  isHtml: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool
 });
 
 _defineProperty(UserGuide, "defaultProps", {
   className: 'icon-book right',
-  content: ''
+  isHtml: true
 });
 
 ;
@@ -7746,6 +7933,8 @@ const decode = html => {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return LangHelper; });
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 const DEFAULT_RESOURCE_NAME = "_language_en_US";
 const langCode = window.PageLanguage || "en-US";
 const resourceName = `_language_${langCode.replace("-", "_")}`;
@@ -7765,6 +7954,11 @@ class LangHelper {
   }
 
 }
+
+_defineProperty(LangHelper, "languageKeys", {
+  eng: "en-US",
+  zhCN: "zh-CN"
+});
 
 /***/ }),
 

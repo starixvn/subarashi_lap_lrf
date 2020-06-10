@@ -1,10 +1,4 @@
-﻿/// <reference path='/@JSense.js' />
-/*
-* Note:in this report, parameter level have 3 value
-*  '0' for master,'1' for agent and '2' for member
-*/
-
-define(
+﻿define(
     ['jquery', 'common/querystring', 'common/site', 'lib/jqgrid/jquery.jqgrid.additional', 'lib/linq'],
     function ($, QueryString, Site, jqGridAdditional) {
         'use strict';
@@ -359,7 +353,7 @@ define(
             'ActualStake',
             'BuyBackAmount',
              'TotalTransaction',
-             '@[Win]/@[Loss]', 'Comm',
+             'WinLoss', 'Comm',
              'Total', 'LicenseeW_L',
              '@[ProductBT]<br/>@[Commission]',
              '@[ProductCO]<br/>@[Commission]',
@@ -464,7 +458,7 @@ define(
             let turnOverIndex = _me.turnoverIndex;
             let licenseeIndex = _me.licenseeWlIndex;
             let customerWLTotalIndex = _me.customerWlTotalIndex;
-            temp[_me.customerWlIndex] = _me.hasCustomerComm ? '@[Win]/@[Loss]' : 'CustomerW_L';
+            temp[_me.customerWlIndex] = _me.hasCustomerComm ? 'WinLoss' : 'CustomerW_L';
             $.each(productOptions, function (index, item) {
                 //insert turn over column
                 if (item.Status === true) {

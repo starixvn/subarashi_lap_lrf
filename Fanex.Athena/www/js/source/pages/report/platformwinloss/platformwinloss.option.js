@@ -1,10 +1,4 @@
-﻿/// <reference path='/@JSense.js' />
-/*
-* Note:in this report, parameter level have 2 value
-*  '0' for master and '1' for member
-*/
-
-define(['jquery', 'common/site', 'lib/jqgrid/jquery.jqgrid.additional'],
+﻿define(['jquery', 'common/site', 'lib/jqgrid/jquery.jqgrid.additional'],
     function ($, Site, jqGridAdditional) {
         'use strict';
         const BA_PRODUCTCODE = 'BA';
@@ -201,7 +195,7 @@ define(['jquery', 'common/site', 'lib/jqgrid/jquery.jqgrid.additional'],
                 'Id',
                 'Platform',
                 'Turnover',
-                '%Turnover',
+                'TurnoverPercent',
                 'TotalTransaction',
                 'LicenseeW_L',
                 'CurrencyId',
@@ -242,7 +236,7 @@ define(['jquery', 'common/site', 'lib/jqgrid/jquery.jqgrid.additional'],
         };
         const columnConfigCustomerComm = {
             colsCustomerComm: {
-                colNames: ['@[Win]/@[Loss]', 'Comm', 'Total'],
+                colNames: ['WinLoss', 'Comm', 'Total'],
                 colModels: [customerWlColumn, playerCommColumn, customerWlTotalColumn]
             },
             colsWithoutComm: {

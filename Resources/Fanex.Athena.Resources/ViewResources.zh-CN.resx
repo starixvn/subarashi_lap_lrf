@@ -2431,4 +2431,34 @@
   <data name="ProductSXG" xml:space="preserve">
     <value>性感百家</value>
   </data>
+  <data name="ActiveCustomers" xml:space="preserve">
+    <value>活跃玩家</value>
+    <comment>ignoreJS</comment>
+  </data>
+  <data name="ArchivedDate" xml:space="preserve">
+    <value>封存日期</value>
+  </data>
+  <data name="BetCounts" xml:space="preserve">
+    <value>票数</value>
+  </data>
+  <data name="Day" xml:space="preserve">
+    <value>日期</value>
+  </data>
+  <data name="DormantCustomers" xml:space="preserve">
+    <value>閑置玩家</value>
+    <comment>ignoreJS</comment>
+  </data>
+  <data name="Member" xml:space="preserve">
+    <value>玩家</value>
+  </data>
+  <data name="PlayerAdministration" xml:space="preserve">
+    <value>玩家管理</value>
+  </data>
+  <data name="SubsidiarySearch" xml:space="preserve">
+    <value>子网站搜寻</value>
+    <comment>ignoreJS</comment>
+  </data>
+  <data name="TurnoverPercent" xml:space="preserve">
+    <value>%交易额</value>
+  </data>
 </root>

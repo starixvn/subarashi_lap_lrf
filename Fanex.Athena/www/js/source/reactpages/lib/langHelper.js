@@ -3,6 +3,12 @@ const langCode = window.PageLanguage || "en-US";
 const resourceName = `_language_${langCode.replace("-", "_")}`;
 
 export default class LangHelper {
+
+    static languageKeys = {
+        eng: "en-US", 
+        zhCN: "zh-CN"
+    }
+
     static get currentLanguage() {
         return langCode;
     }

@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 5/28/2020 1:53:16 PM
+// Generated at: 6/4/2020 11:24:20 AM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -171,6 +171,7 @@ window._language_en_US = {
   BAUpdatedBy: "BA Updated By",
   BBAmtComm: "BB Amt + Comm",
   BetCount: "Bet Count",
+  BetCounts: "Bet Counts",
   BetfromOthers: "Others",
   BetId: "Bet ID",
   BetLimit: "Bet Limit",
@@ -295,6 +296,7 @@ window._language_en_US = {
   DateRangeExceedMsg: "Date range exceeds {0} months. Please try again!",
   DateRangeLimitNote: "Data is available within 3 months, from {0} to {1}.",
   DateRangeNote: "Data is available from {0:d MMM yyyy}",
+  Day: "Day",
   DD: "DD",
   DeactivateVip: "Deactivate VIP",
   Dec: "Dec",
@@ -641,6 +643,7 @@ window._language_en_US = {
   PlatformWinLossNote: "Platform data is available from 27 Feb 2016.",
   PlatformWinLossTitle: "Platform Win Loss - {0} --&gt; {1} - {2} - {3} - {4}",
   Player: "Player",
+  PlayerAdministration: "Player Administration",
   PlayerAdminUpdateFailedMsg: "Please try again!",
   PlayerName: "Player Name",
   PlayerSegmentation: "Player Segmentation",
@@ -917,6 +920,8 @@ window._language_en_US = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return LangHelper; });
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 const DEFAULT_RESOURCE_NAME = "_language_en_US";
 const langCode = window.PageLanguage || "en-US";
 const resourceName = `_language_${langCode.replace("-", "_")}`;
@@ -936,6 +941,11 @@ class LangHelper {
   }
 
 }
+
+_defineProperty(LangHelper, "languageKeys", {
+  eng: "en-US",
+  zhCN: "zh-CN"
+});
 
 /***/ }),
 

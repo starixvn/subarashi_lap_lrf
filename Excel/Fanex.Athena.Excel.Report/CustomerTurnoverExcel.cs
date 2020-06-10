@@ -95,7 +95,7 @@ namespace Fanex.Athena.Excel.Report
                 ViewResources.TotalTransaction,
                 ViewResources.Turnover,
                 ViewResources.Total + " " + ViewResources.Turnover,
-                ViewResources.CustomerW_L,
+                ViewResources.WinLoss,
             };
             SetTextRowHeader(row, headerTextList);
 

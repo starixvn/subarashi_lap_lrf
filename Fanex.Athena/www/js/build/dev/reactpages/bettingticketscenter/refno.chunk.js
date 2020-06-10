@@ -786,9 +786,10 @@ class UserGuide extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
       className,
       title,
       content,
-      contentTitle
+      contentTitle,
+      isHtml
     } = this.props;
-    const isShow = this.state.isShow && content.length > 0;
+    const isShow = this.state.isShow && content && (react__WEBPACK_IMPORTED_MODULE_0___default.a.isValidElement(content) || content.length > 0) ? true : false;
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
       className: className,
       onClick: this.onClickHandler,
@@ -799,7 +800,7 @@ class UserGuide extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
       isShow: isShow,
       title: contentTitle,
       onClose: this.onCloseHandler,
-      isHtml: true
+      isHtml: isHtml
     }, content));
   }
 
@@ -808,13 +809,13 @@ class UserGuide extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
 _defineProperty(UserGuide, "propTypes", {
   title: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
   className: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
-  content: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
-  contentTitle: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string
+  contentTitle: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
+  isHtml: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool
 });
 
 _defineProperty(UserGuide, "defaultProps", {
   className: 'icon-book right',
-  content: ''
+  isHtml: true
 });
 
 ;
@@ -2796,6 +2797,8 @@ function createReducer(initialState, handlers) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return LangHelper; });
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 const DEFAULT_RESOURCE_NAME = "_language_en_US";
 const langCode = window.PageLanguage || "en-US";
 const resourceName = `_language_${langCode.replace("-", "_")}`;
@@ -2815,6 +2818,11 @@ class LangHelper {
   }
 
 }
+
+_defineProperty(LangHelper, "languageKeys", {
+  eng: "en-US",
+  zhCN: "zh-CN"
+});
 
 /***/ }),
 
