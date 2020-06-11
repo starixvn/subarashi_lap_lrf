@@ -97,7 +97,7 @@
                         var record = new UpdateStatusPlayerResult();
                         record.Code = Convert.ToInt16(reader["ErrCode"]);
                         record.NumberOfPlayer = Convert.ToInt16(reader["cnt"]);
-                        record.SystemIds = reader["ErrMsg"] as string;
+                        record.Ids = reader["ErrMsg"] as string;
                         result.Add(record);
                     }
 
@@ -109,6 +109,7 @@
         private static void AddVipStatusUpdateParams(IObjectDb objectDb, UpdateStatusPlayerMetaModel metaModel)
         {
             objectDb.SetParameterValue("Username", metaModel.SystemIds);
+            objectDb.SetParameterValue("Username2", metaModel.ExternalIds);
             objectDb.SetParameterValue("IsVip", metaModel.IsVip);
             objectDb.SetParameterValue("UserID", metaModel.UserId);
             objectDb.SetParameterValue("Ip", metaModel.Ip);

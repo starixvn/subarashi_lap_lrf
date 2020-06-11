@@ -144,6 +144,7 @@ namespace Fanex.Athena.DataAccess.Customer.UnitTests
             {
                 AssertCommonParams(ObjectDb, metaModel);
                 ObjectDb.Received().SetParameterValue("Username", metaModel.SystemIds);
+                ObjectDb.Received().SetParameterValue("Username2", metaModel.ExternalIds);
                 ObjectDb.Received().SetParameterValue("IsVip", metaModel.IsVip);
                 ObjectDb.Received().SetParameterValue("UserID", metaModel.UserId);
                 ObjectDb.Received().SetParameterValue("Ip", metaModel.Ip);
@@ -175,7 +176,7 @@ namespace Fanex.Athena.DataAccess.Customer.UnitTests
             {
                 Assert.AreEqual(expectedData["cnt"], firstData.NumberOfPlayer);
                 Assert.AreEqual(expectedData["ErrCode"], firstData.Code);
-                Assert.AreEqual(expectedData["ErrMsg"], firstData.SystemIds);
+                Assert.AreEqual(expectedData["ErrMsg"], firstData.Ids);
             });
         }
 
