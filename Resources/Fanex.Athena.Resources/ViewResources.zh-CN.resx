@@ -2273,8 +2273,8 @@
     <comment>#128082</comment>
   </data>
   <data name="InvalidPlayerUpdateVipStatusBySystemId" xml:space="preserve">
-    <value>无效的玩家: {0} ({1})</value>
-    <comment>#128082</comment>
+    <value>无效的系统ID: {0} ({1})</value>
+    <comment>#135410</comment>
   </data>
   <data name="MaximumUploadFileSize" xml:space="preserve">
     <value>上传档案大小限制</value>
@@ -2462,7 +2462,7 @@
     <value>%交易额</value>
   </data>
   <data name="InvalidPlayerUpdateVipStatusByExternalId" xml:space="preserve">
-    <value>Invalid External ID(s): {0} ({1})</value>
+    <value>无效的用户名: {0} ({1})</value>
     <comment>#135410</comment>
   </data>
 </root>
