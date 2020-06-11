@@ -27,8 +27,19 @@ export default class Excel {
             const workbook = _XLSX.read(data, { type: 'binary' });
             const sheetName = workbook.SheetNames[sheetIndex];
             const worksheet = workbook.Sheets[sheetName];
-            const json = _XLSX.utils.sheet_to_json(worksheet);
-            callBack && callBack(json);
+            const content = _XLSX.utils.sheet_to_json(worksheet);
+            const rows = _XLSX.utils.sheet_to_json(worksheet, {
+                header: 1,
+                defval: '',
+                blankrows: true
+           });
+
+            const result = {
+                header: rows && rows.length ? rows[0] : null,
+                content
+            }
+
+            callBack && callBack(result);
         };
         reader.readAsBinaryString(file);
     }

@@ -1,58 +1,68 @@
 import React from 'react';
 import LangHelper from '@jsroot/lib/langHelper';
+import { UpdateVIPStatusCode } from '../constants';
 
 export default class MessageHelper {
     static MsgColors = {
-        [0]: {
+        [UpdateVIPStatusCode.Success]: {
             content: 'msg-success',
             icon: 'icon-tick'
         },
-        [100]: {
+        [UpdateVIPStatusCode.InvalidSystemId]: {
             content: 'msg-error',
             icon: 'icon-warning'
         },
-        [101]: {
+        [UpdateVIPStatusCode.NoChangeBySystemId]: {
             content: 'msg-success',
             icon: 'icon-tick'
         },
-        [102]: {
+        [UpdateVIPStatusCode.Avoid]: {
             content: 'msg-error',
             icon: 'icon-warning'
         },
+        [UpdateVIPStatusCode.InvalidExternalId]: {
+            content: 'msg-error',
+            icon: 'icon-warning'
+        }
     }
 
     static GetMsgUpdateVipStatus = {
         singleUpdate: {
-            [0]: data => LangHelper.getSingleResource('SuccessUpdateVipStatusSingle'),
+            [UpdateVIPStatusCode.Success]: _ => LangHelper.getSingleResource('SuccessUpdateVipStatusSingle'),
 
-            [100]: data => LangHelper.getSingleResource('InvalidPlayerUpdateVipStatusSingle')
-                .replace('{0}', data.systemIds),
+            [UpdateVIPStatusCode.InvalidSystemId]: data => LangHelper.getSingleResource('InvalidPlayerUpdateVipStatusSingle')
+                .replace('{0}', data.ids),
 
-            [101]: (data, isUpdateVip) => (isUpdateVip ? LangHelper.getSingleResource('AlreadyUpdateVipStatusSingle') : LangHelper.getSingleResource('AlreadyUpdateNotVipStatusSingle')),
+            [UpdateVIPStatusCode.NoChangeBySystemId]: (_, isUpdateVip) => (isUpdateVip ? LangHelper.getSingleResource('AlreadyUpdateVipStatusSingle') : LangHelper.getSingleResource('AlreadyUpdateNotVipStatusSingle')),
 
-            [102]: data => LangHelper.getSingleResource('RetractedPlayerUpdateVipStatusSingle')
-                .replace('{0}', data.systemIds)
+            [UpdateVIPStatusCode.Avoid]: data => LangHelper.getSingleResource('RetractedPlayerUpdateVipStatusSingle')
+                .replace('{0}', data.ids)
         },
         multipleUpdate: {
-            [0]: data => LangHelper.getSingleResource('SuccessUpdateVipStatus')
+            [UpdateVIPStatusCode.Success]: data => LangHelper.getSingleResource('SuccessUpdateVipStatus')
                 .replace('{0}', data.numberOfPlayer),
 
-            [100]: data => LangHelper.getSingleResource('InvalidPlayerUpdateVipStatus')
+            [UpdateVIPStatusCode.InvalidSystemId]: data => LangHelper.getSingleResource('InvalidPlayerUpdateVipStatusBySystemId')
                 .replace('{0}', data.numberOfPlayer)
-                .replace('{1}', data.systemIds),
+                .replace('{1}', data.ids),
 
-            [101]: (data, isUpdateVip) => (isUpdateVip ? LangHelper.getSingleResource('AlreadyUpdateVipStatus') : LangHelper.getSingleResource('AlreadyUpdateNotVipStatus'))
+            [UpdateVIPStatusCode.NoChangeBySystemId]: (data, isUpdateVip) => (isUpdateVip ? LangHelper.getSingleResource('AlreadyUpdateVipStatus') : LangHelper.getSingleResource('AlreadyUpdateNotVipStatus'))
                 .replace('{0}', data.numberOfPlayer),
 
-            [102]: data => LangHelper.getSingleResource('RetractedPlayerUpdateVipStatus')
+            [UpdateVIPStatusCode.Avoid]: data => LangHelper.getSingleResource('RetractedPlayerUpdateVipStatus')
                 .replace('{0}', data.numberOfPlayer)
-                .replace('{1}', data.systemIds)
+                .replace('{1}', data.ids),
+
+            [UpdateVIPStatusCode.InvalidExternalId]: data => LangHelper.getSingleResource('InvalidPlayerUpdateVipStatusByExternalId')
+                .replace('{0}', data.numberOfPlayer)
+                .replace('{1}', data.ids),
         }
     }
 
-    static GetListMsgUpdateVipStatus = (results, currentVipStatus, isSingleUpdate = false) => {
+    static GetListMsgUpdateVipStatus = (msgResults, currentVipStatus, isSingleUpdate = false) => {
         const fieldName = isSingleUpdate ? 'singleUpdate' : 'multipleUpdate';
-        return results.map(_ => {
+        const combinedResult = this.combineMsgResult(msgResults);
+        return combinedResult.map(_ => {
             const code = _.code;
             const msgColor = MessageHelper.MsgColors[code];
             return (<p className="msg-result">
@@ -60,6 +70,25 @@ export default class MessageHelper {
                 <span className={msgColor.content}>{MessageHelper.GetMsgUpdateVipStatus[fieldName][code](_, currentVipStatus)}</span>
             </p>)
         })
+    }
+
+    static combineMsgResult = (msgResults) => {
+        const msgResultExternalIdIndex = msgResults.findIndex(_ => _.code === UpdateVIPStatusCode.NoChangeByExternalId); // no change VIP status - by externalId
+        if(msgResultExternalIdIndex >= 0) {
+            msgResults = this.combineMsgResultWithStatusNoChange(msgResults, msgResultExternalIdIndex);
+        }
+        return msgResults;
+    }
+
+    static combineMsgResultWithStatusNoChange = (msgResults, msgResultExternalIdIndex) => {
+        const msgResultSystemId = msgResults.find(_ => _.code === UpdateVIPStatusCode.NoChangeBySystemId); // no change VIP status - by systemId
+        if(msgResultSystemId) {
+            msgResultSystemId.numberOfPlayer += msgResults[msgResultExternalIdIndex].numberOfPlayer;
+            msgResults.splice(msgResultExternalIdIndex, 1);
+        } else {
+            msgResults[msgResultExternalIdIndex].code = UpdateVIPStatusCode.NoChangeBySystemId;
+        }
+        return msgResults;
     }
 }
 

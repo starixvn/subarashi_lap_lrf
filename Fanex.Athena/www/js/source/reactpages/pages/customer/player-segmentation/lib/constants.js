@@ -34,6 +34,15 @@ export const SortMapper = {
     }
 }
 
+export const UpdateVIPStatusCode = {
+    Success: 0,
+    InvalidSystemId: 100,
+    NoChangeBySystemId: 101,
+    Avoid: 102,
+    InvalidExternalId: 103,
+    NoChangeByExternalId: 104
+}
+
 export const errorResponse = {
     data: null,
     isSuccess: false
