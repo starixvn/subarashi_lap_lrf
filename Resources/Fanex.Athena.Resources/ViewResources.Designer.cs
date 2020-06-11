@@ -3220,11 +3220,20 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid player(s): {0} ({1}).
+        ///   Looks up a localized string similar to Invalid External ID(s): {0} ({1}).
         /// </summary>
-        public static string InvalidPlayerUpdateVipStatus {
+        public static string InvalidPlayerUpdateVipStatusByExternalId {
             get {
-                return ResourceManager.GetString("InvalidPlayerUpdateVipStatus", resourceCulture);
+                return ResourceManager.GetString("InvalidPlayerUpdateVipStatusByExternalId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid System ID(s): {0} ({1}).
+        /// </summary>
+        public static string InvalidPlayerUpdateVipStatusBySystemId {
+            get {
+                return ResourceManager.GetString("InvalidPlayerUpdateVipStatusBySystemId", resourceCulture);
             }
         }
         

@@ -2272,7 +2272,7 @@
     <value>全选</value>
     <comment>#128082</comment>
   </data>
-  <data name="InvalidPlayerUpdateVipStatus" xml:space="preserve">
+  <data name="InvalidPlayerUpdateVipStatusBySystemId" xml:space="preserve">
     <value>无效的玩家: {0} ({1})</value>
     <comment>#128082</comment>
   </data>
@@ -2460,5 +2460,9 @@
   </data>
   <data name="TurnoverPercent" xml:space="preserve">
     <value>%交易额</value>
+  </data>
+  <data name="InvalidPlayerUpdateVipStatusByExternalId" xml:space="preserve">
+    <value>Invalid External ID(s): {0} ({1})</value>
+    <comment>#135410</comment>
   </data>
 </root>

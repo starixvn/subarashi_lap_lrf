@@ -1,4 +1,4 @@
-﻿// Generated at: 6/4/2020 11:24:20 AM
+﻿// Generated at: 6/11/2020 11:17:36 AM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -351,7 +351,8 @@ InvalidChargeCommission:"Invalid Charge Commission",
 InvalidCurrencyPermission:"Invalid currency permissions.",
 InvalidEmail:"Invalid email address",
 InvalidParams:"Invalid parameters",
-InvalidPlayerUpdateVipStatus:"Invalid player(s): {0} ({1})",
+InvalidPlayerUpdateVipStatusByExternalId:"Invalid External ID(s): {0} ({1})",
+InvalidPlayerUpdateVipStatusBySystemId:"Invalid System ID(s): {0} ({1})",
 InvalidPlayerUpdateVipStatusSingle:"Invalid player: {0}",
 InvalidRequestMsg:"Request is not valid",
 InvalidRequestOrNotAuthorizedMsg:"Invalid request or you are not authorized to access the requested resource!",

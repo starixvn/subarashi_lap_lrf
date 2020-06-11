@@ -1,4 +1,4 @@
-﻿// Generated at: 6/4/2020 11:24:20 AM
+﻿// Generated at: 6/11/2020 11:17:36 AM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -308,7 +308,8 @@ InternalSystem:"内部系统",
 InvalidCaptchaMsg:"您输入了无效的编码",
 InvalidEmail:"无效的信箱地址",
 InvalidParams:"无效的参数",
-InvalidPlayerUpdateVipStatus:"无效的玩家: {0} ({1})",
+InvalidPlayerUpdateVipStatusByExternalId:"Invalid External ID(s): {0} ({1})",
+InvalidPlayerUpdateVipStatusBySystemId:"无效的玩家: {0} ({1})",
 InvalidPlayerUpdateVipStatusSingle:"无效的玩家: {0}",
 InvalidRequestMsg:"请求无效",
 InvalidRequestOrNotAuthorizedMsg:"无效的请求或您未被授权访问所请求的资源",
