@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+﻿import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../actions';
@@ -72,7 +72,7 @@ export class DataGrid extends PureComponent {
                 <SpecialLevelDropdown />
                 <OddsGroupDropdown />
                 <StatusDropdown />
-                { sweetAlertOption && <SweetAlert {...sweetAlertOption} />}
+                {sweetAlertOption && <SweetAlert {...sweetAlertOption} />}
             </>
         );
     }

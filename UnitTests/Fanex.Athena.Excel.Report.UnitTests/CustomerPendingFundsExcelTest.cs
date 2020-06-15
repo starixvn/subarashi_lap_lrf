@@ -48,7 +48,7 @@ namespace Fanex.Athena.Excel.Report.UnitTests
                 "#",
                 ViewResources.ExternalId,
                 ViewResources.SystemId,
-                ViewResources.BetCount,
+                ViewResources.BetCounts,
                 ViewResources.PendingFunds
             };
 

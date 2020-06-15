@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 6/8/2020 9:42:15 AM
+﻿// Generated at: 6/23/2020 1:26:38 PM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -446,7 +446,8 @@ InvalidChargeCommission:"Invalid Charge Commission",
 InvalidCurrencyPermission:"Invalid currency permissions.",
 InvalidEmail:"Invalid email address",
 InvalidParams:"Invalid parameters",
-InvalidPlayerUpdateVipStatus:"Invalid player(s): {0} ({1})",
+InvalidPlayerUpdateVipStatusByExternalId:"Invalid External ID(s): {0} ({1})",
+InvalidPlayerUpdateVipStatusBySystemId:"Invalid System ID(s): {0} ({1})",
 InvalidPlayerUpdateVipStatusSingle:"Invalid player: {0}",
 InvalidRequestMsg:"Request is not valid",
 InvalidRequestOrNotAuthorizedMsg:"Invalid request or you are not authorized to access the requested resource!",

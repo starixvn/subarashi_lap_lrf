@@ -78,10 +78,11 @@ export const tabNames = {
     fundTransferLimit: 'FundTransferLimit',
     password: 'Password',
     bankInfo: 'BankInfo',
-    personalMessage: 'PersonalMessage'
+    personalMessage: 'PersonalMessage',
+    detailTransaction: 'lblPlayerDetailTransaction'
 }
 
-export const excludedTabNameWithNonDepositAndArchived = [tabNames.statement, tabNames.betlist, tabNames.betLimit];
+export const excludedTabNameWithNonDepositAndArchived = [tabNames.statement, tabNames.betlist, tabNames.betLimit, tabNames.detailTransaction];
 
 export const contextMenuList = [
     { key: contextMenuKeys.note, name: LangHelper.getSingleResource('Note'), tabName: 'lblPlayerAdminNote' },

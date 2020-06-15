@@ -3765,9 +3765,10 @@ const tabNames = {
   fundTransferLimit: 'FundTransferLimit',
   password: 'Password',
   bankInfo: 'BankInfo',
-  personalMessage: 'PersonalMessage'
+  personalMessage: 'PersonalMessage',
+  detailTransaction: 'lblPlayerDetailTransaction'
 };
-const excludedTabNameWithNonDepositAndArchived = [tabNames.statement, tabNames.betlist, tabNames.betLimit];
+const excludedTabNameWithNonDepositAndArchived = [tabNames.statement, tabNames.betlist, tabNames.betLimit, tabNames.detailTransaction];
 const contextMenuList = [{
   key: contextMenuKeys.note,
   name: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Note'),
