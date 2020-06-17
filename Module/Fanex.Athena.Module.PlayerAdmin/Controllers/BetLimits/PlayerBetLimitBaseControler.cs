@@ -24,6 +24,8 @@
     {
         private const string MixedSportId = "99MP";
 
+        private const string SoccerParlay = "1MP";
+
         private const string I4DId = "223";
 
         public IAuthorizationService AuthServiceInstance { get; set; }
@@ -42,7 +44,21 @@
 
         protected bool HasEditPermission() => AuthServiceInstance.HasPermissions(SessionServiceInstance.UserSession, PermissionKeys.PlayerAdminBetLimit_Write);
 
-        protected string GetSportName(string sportId) => sportId == MixedSportId ? ViewResources.MixSportsParlay : CacheRefAdapterInstance.GetSportName(sportId);
+        protected string GetSportName(string sportId)
+        {
+            if (sportId == MixedSportId)
+            {
+                return ViewResources.MixSportsParlay;
+            }
+            else if (sportId == SoccerParlay)
+            {
+                return ViewResources.SoccerParlay;
+            }
+            else
+            {
+                return CacheRefAdapterInstance.GetSportName(sportId);
+            }
+        }
 
         protected string GetBetTypeName(int bettypeId) => CacheRefAdapterInstance.GetBettype(bettypeId);
     }

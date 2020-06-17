@@ -2465,4 +2465,7 @@
     <value>无效的用户名: {0} ({1})</value>
     <comment>#135410</comment>
   </data>
+  <data name="SoccerParlay" xml:space="preserve">
+    <value>足球串关</value>
+  </data>
 </root>

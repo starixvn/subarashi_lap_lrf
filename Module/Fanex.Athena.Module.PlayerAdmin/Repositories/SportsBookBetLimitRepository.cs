@@ -17,11 +17,12 @@
     public class SportsBookBetLimitRepository : ISportsBookBetLimitRepository
     {
         private const string MixedSportId = "99MP";
+        private const string SoccerParlay = "1MP";
 
         private static readonly string[] SportTypes =
         {
             ((int)SportType.Soccer).ToString(),
-            ((int)SportType.Soccer).ToString(),
+            SoccerParlay,
             ((int)SportType.BasketBall).ToString(),
             ((int)SportType.FootBall).ToString(),
             ((int)SportType.Tennis).ToString(),
