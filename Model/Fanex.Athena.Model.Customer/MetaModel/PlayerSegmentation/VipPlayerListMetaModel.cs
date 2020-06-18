@@ -6,6 +6,6 @@
 
         public byte VipOption { get; set; }
 
-        public override bool IsValid => VipOption >= 0 && VipOption <= NumberOfVIPOptions;
+        public override bool IsValid => base.IsValid && (VipOption >= 0 && VipOption <= NumberOfVIPOptions);
     }
 }

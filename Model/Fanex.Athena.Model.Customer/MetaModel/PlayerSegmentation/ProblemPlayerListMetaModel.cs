@@ -57,6 +57,6 @@
 
         public string ReasonGroupIdList { get; set; }
 
-        public override bool IsValid => IsGetAll || FromDate <= ToDate;
+        public override bool IsValid => base.IsValid && (IsGetAll || FromDate <= ToDate);
     }
 }
