@@ -84,7 +84,8 @@
         public async Task<IEnumerable<UpdateStatusPlayerResult>> UpdateVipStatusAsync(UpdateStatusPlayerMetaModel metaModel)
         {
             const string spName = "Lrf_ProblemAccount_LicenseeVipPlayerUpd";
-            using (var db = GetObjectDb(spName))
+            const int commandTimeout = 180;
+            using (var db = GetObjectDb(spName, commandTimeout))
             {
                 AddCommmonParams(db, metaModel);
                 AddVipStatusUpdateParams(db, metaModel);

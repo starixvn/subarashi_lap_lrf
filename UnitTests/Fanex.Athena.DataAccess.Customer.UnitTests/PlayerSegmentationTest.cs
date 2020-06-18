@@ -134,7 +134,7 @@ namespace Fanex.Athena.DataAccess.Customer.UnitTests
         {
             // Arrange
             var metaModel = FakeHelper.Create<UpdateStatusPlayerMetaModel>();
-            DataAccess.GetObjectDb(Arg.Is("Lrf_ProblemAccount_LicenseeVipPlayerUpd")).Returns(ObjectDb);
+            DataAccess.GetObjectDb(Arg.Is("Lrf_ProblemAccount_LicenseeVipPlayerUpd"), 180).Returns(ObjectDb);
 
             // Action
             await DataAccess.UpdateVipStatusAsync(metaModel);
@@ -155,7 +155,7 @@ namespace Fanex.Athena.DataAccess.Customer.UnitTests
         public async Task UpdateVipStatusAsync_WhenCall_ReturnResultCorrectly()
         {
             //Arrange
-            DataAccess.GetObjectDb(Arg.Is("Lrf_ProblemAccount_LicenseeVipPlayerUpd")).Returns(ObjectDb);
+            DataAccess.GetObjectDb(Arg.Is("Lrf_ProblemAccount_LicenseeVipPlayerUpd"), 180).Returns(ObjectDb);
             Reader.Read().Returns(true, false);
 
             var expectedData = new Dictionary<string, object>
