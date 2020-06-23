@@ -10,7 +10,6 @@ import DropzoneUpload from '../../../components/DropzoneUpload';
 import { Url, ExcelReaderColumn } from '../lib/constants';
 import ExcelHelper from '../lib/helpers/excelHelper';
 import { UpdateVipStatusAlertOption } from '../../../lib/helpers/sweetAlertHelper';
-import StringHelper from '@jsroot/lib/stringHelper';
 
 export const FormAction = props => {
     const { isActiveTaggingAction, playerList, updateVipStatus, setSweetAlertOption, selectedParams } = props;
@@ -78,21 +77,25 @@ export const FormAction = props => {
     const _onSubmitVipListFile = (files) => {
         const file = files[0];
         Excel.process(() => {
-            Excel.read(file, 0, listData => {
-                const column = ExcelHelper.getColumnName(listData[0], ExcelReaderColumn);
-                if(!column) {
-                    alert(decode(LangHelper.getSingleResource("UploadFileError")))
-                    return;
-                }
-                const listValueOfColumn = listData.map(_ => _[column]);
-                if(listValueOfColumn.some(_ => StringHelper.isEmptyOrWhiteSpace(_))) {
+            Excel.read(file, 0, result => {
+                const { header, content } = result;
+                if (!ExcelHelper.isValidHeader(header) || !ExcelHelper.isValidHeader(content)) {
                     alert(decode(LangHelper.getSingleResource("UploadFileError")))
                     return;
                 }
 
-                const systemIds = listValueOfColumn.join();
+                const columnSystemId = ExcelHelper.getColumnName(header, ExcelReaderColumn.SystemId);
+                const columnExternalId = ExcelHelper.getColumnName(header, ExcelReaderColumn.ExternalId);
+                if (!columnSystemId && !columnExternalId) {
+                    alert(decode(LangHelper.getSingleResource("UploadFileError")))
+                    return;
+                }
+
+                const systemIds = content.map(_ => _[columnSystemId]).join();
+                const externalIds = content.map(_ => _[columnExternalId]).join();
                 const params = {
                     systemIds,
+                    externalIds,
                     isVip: true
                 }
                 _handleActiveVipStatusFromFile(params);

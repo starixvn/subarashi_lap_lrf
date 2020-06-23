@@ -5,6 +5,7 @@
     public class BasePlayerListMetaModel : IMetaModelValidation, IMetaModelAgent, IMetaModelCurrencyIdList, IMetaModelPaging
     {
         private const int DefaultPageSize = 500;
+        private const int MaxPageSize = 2000;
 
         protected BasePlayerListMetaModel()
         {
@@ -25,6 +26,6 @@
         public byte OrderCol { get; set; }
         public byte SortType { get; set; }
 
-        public virtual bool IsValid => true;
+        public virtual bool IsValid => PageIndex > 0 && PageSize <= MaxPageSize;
     }
 }

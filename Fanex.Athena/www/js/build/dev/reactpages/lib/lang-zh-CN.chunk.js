@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 6/4/2020 11:24:20 AM
+// Generated at: 6/11/2020 2:45:19 PM
 window._language_zh_CN = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -403,7 +403,8 @@ window._language_zh_CN = {
   InvalidCaptchaMsg: "您输入了无效的编码",
   InvalidEmail: "无效的信箱地址",
   InvalidParams: "无效的参数",
-  InvalidPlayerUpdateVipStatus: "无效的玩家: {0} ({1})",
+  InvalidPlayerUpdateVipStatusByExternalId: "无效的用户名: {0} ({1})",
+  InvalidPlayerUpdateVipStatusBySystemId: "无效的系统ID: {0} ({1})",
   InvalidPlayerUpdateVipStatusSingle: "无效的玩家: {0}",
   InvalidRequestMsg: "请求无效",
   InvalidRequestOrNotAuthorizedMsg: "无效的请求或您未被授权访问所请求的资源",

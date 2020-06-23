@@ -1,8 +1,18 @@
 export default class ExcelHelper {
-    static getColumnName(object, readerColumn) {
-        const keys = Object.keys(object);
-        const columnName = keys.find(_ => _.replace(/\s/g, '').toLocaleLowerCase() === readerColumn);
+    static getColumnName(header, readerColumn) {
+        if(!header || !header.length) {
+            return null;
+        }
+        const columnName = header.find(_ => _.replace(/\s/g, '').toLocaleLowerCase() === readerColumn);
         return columnName;
+    }
+
+    static isValidHeader(header) {
+        return header && header.length > 0;
+    }
+
+    static isValidContent(content) {
+        return content && content.length > 0;
     }
 }
 

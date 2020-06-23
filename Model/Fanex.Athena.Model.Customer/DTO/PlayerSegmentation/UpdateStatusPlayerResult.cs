@@ -4,6 +4,6 @@
     {
         public int Code { get; set; }
         public int NumberOfPlayer { get; set; }
-        public string SystemIds { get; set; }
+        public string Ids { get; set; }  //systemId or externalId
     }
 }

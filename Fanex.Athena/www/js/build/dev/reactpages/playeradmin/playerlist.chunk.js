@@ -7830,9 +7830,19 @@ class Excel {
       const sheetName = workbook.SheetNames[sheetIndex];
       const worksheet = workbook.Sheets[sheetName];
 
-      const json = _XLSX.utils.sheet_to_json(worksheet);
+      const content = _XLSX.utils.sheet_to_json(worksheet);
 
-      callBack && callBack(json);
+      const rows = _XLSX.utils.sheet_to_json(worksheet, {
+        header: 1,
+        defval: '',
+        blankrows: true
+      });
+
+      const result = {
+        header: rows && rows.length ? rows[0] : null,
+        content
+      };
+      callBack && callBack(result);
     };
 
     reader.readAsBinaryString(file);

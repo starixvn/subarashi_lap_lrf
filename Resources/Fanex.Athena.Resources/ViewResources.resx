@@ -2669,9 +2669,9 @@
     <value>Get All</value>
     <comment>#128082</comment>
   </data>
-  <data name="InvalidPlayerUpdateVipStatus" xml:space="preserve">
-    <value>Invalid player(s): {0} ({1})</value>
-    <comment>#128082</comment>
+  <data name="InvalidPlayerUpdateVipStatusBySystemId" xml:space="preserve">
+    <value>Invalid System ID(s): {0} ({1})</value>
+    <comment>#135410</comment>
   </data>
   <data name="MaximumUploadFileSize" xml:space="preserve">
     <value>Maximum upload file size</value>
@@ -2795,4 +2795,9 @@
   </data>
   <data name="PlayerAdministration" xml:space="preserve">
     <value>Player Administration</value>
-  </data></root>
+  </data>
+  <data name="InvalidPlayerUpdateVipStatusByExternalId" xml:space="preserve">
+    <value>Invalid External ID(s): {0} ({1})</value>
+    <comment>#135410</comment>
+  </data>
+</root>

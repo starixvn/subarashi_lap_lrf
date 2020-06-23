@@ -134,7 +134,7 @@ namespace Fanex.Athena.DataAccess.Customer.UnitTests
         {
             // Arrange
             var metaModel = FakeHelper.Create<UpdateStatusPlayerMetaModel>();
-            DataAccess.GetObjectDb(Arg.Is("Lrf_ProblemAccount_LicenseeVipPlayerUpd")).Returns(ObjectDb);
+            DataAccess.GetObjectDb(Arg.Is("Lrf_ProblemAccount_LicenseeVipPlayerUpd"), 180).Returns(ObjectDb);
 
             // Action
             await DataAccess.UpdateVipStatusAsync(metaModel);
@@ -144,6 +144,7 @@ namespace Fanex.Athena.DataAccess.Customer.UnitTests
             {
                 AssertCommonParams(ObjectDb, metaModel);
                 ObjectDb.Received().SetParameterValue("Username", metaModel.SystemIds);
+                ObjectDb.Received().SetParameterValue("Username2", metaModel.ExternalIds);
                 ObjectDb.Received().SetParameterValue("IsVip", metaModel.IsVip);
                 ObjectDb.Received().SetParameterValue("UserID", metaModel.UserId);
                 ObjectDb.Received().SetParameterValue("Ip", metaModel.Ip);
@@ -154,7 +155,7 @@ namespace Fanex.Athena.DataAccess.Customer.UnitTests
         public async Task UpdateVipStatusAsync_WhenCall_ReturnResultCorrectly()
         {
             //Arrange
-            DataAccess.GetObjectDb(Arg.Is("Lrf_ProblemAccount_LicenseeVipPlayerUpd")).Returns(ObjectDb);
+            DataAccess.GetObjectDb(Arg.Is("Lrf_ProblemAccount_LicenseeVipPlayerUpd"), 180).Returns(ObjectDb);
             Reader.Read().Returns(true, false);
 
             var expectedData = new Dictionary<string, object>
@@ -175,7 +176,7 @@ namespace Fanex.Athena.DataAccess.Customer.UnitTests
             {
                 Assert.AreEqual(expectedData["cnt"], firstData.NumberOfPlayer);
                 Assert.AreEqual(expectedData["ErrCode"], firstData.Code);
-                Assert.AreEqual(expectedData["ErrMsg"], firstData.SystemIds);
+                Assert.AreEqual(expectedData["ErrMsg"], firstData.Ids);
             });
         }
 

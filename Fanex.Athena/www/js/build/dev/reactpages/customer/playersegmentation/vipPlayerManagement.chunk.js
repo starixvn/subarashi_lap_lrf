@@ -2733,9 +2733,19 @@ class Excel {
       const sheetName = workbook.SheetNames[sheetIndex];
       const worksheet = workbook.Sheets[sheetName];
 
-      const json = _XLSX.utils.sheet_to_json(worksheet);
+      const content = _XLSX.utils.sheet_to_json(worksheet);
 
-      callBack && callBack(json);
+      const rows = _XLSX.utils.sheet_to_json(worksheet, {
+        header: 1,
+        defval: '',
+        blankrows: true
+      });
+
+      const result = {
+        header: rows && rows.length ? rows[0] : null,
+        content
+      };
+      callBack && callBack(result);
     };
 
     reader.readAsBinaryString(file);
@@ -2956,7 +2966,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const MbToByte = 1000 * 1000 * 1000;
+const MbToByte = 1000 * 1000;
 
 const DropzoneUpload = props => {
   const {
@@ -3348,26 +3358,32 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/constants.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
 class MessageHelper {}
 
 _defineProperty(MessageHelper, "MsgColors", {
-  [0]: {
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].Success]: {
     content: 'msg-success',
     icon: 'icon-tick'
   },
-  [100]: {
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].InvalidSystemId]: {
     content: 'msg-error',
     icon: 'icon-warning'
   },
-  [101]: {
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].NoChangeBySystemId]: {
     content: 'msg-success',
     icon: 'icon-tick'
   },
-  [102]: {
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].Avoid]: {
+    content: 'msg-error',
+    icon: 'icon-warning'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].InvalidExternalId]: {
     content: 'msg-error',
     icon: 'icon-warning'
   }
@@ -3375,22 +3391,24 @@ _defineProperty(MessageHelper, "MsgColors", {
 
 _defineProperty(MessageHelper, "GetMsgUpdateVipStatus", {
   singleUpdate: {
-    [0]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('SuccessUpdateVipStatusSingle'),
-    [100]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('InvalidPlayerUpdateVipStatusSingle').replace('{0}', data.systemIds),
-    [101]: (data, isUpdateVip) => isUpdateVip ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('AlreadyUpdateVipStatusSingle') : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('AlreadyUpdateNotVipStatusSingle'),
-    [102]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('RetractedPlayerUpdateVipStatusSingle').replace('{0}', data.systemIds)
+    [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].Success]: _ => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('SuccessUpdateVipStatusSingle'),
+    [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].InvalidSystemId]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('InvalidPlayerUpdateVipStatusSingle').replace('{0}', data.ids),
+    [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].NoChangeBySystemId]: (_, isUpdateVip) => isUpdateVip ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('AlreadyUpdateVipStatusSingle') : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('AlreadyUpdateNotVipStatusSingle'),
+    [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].Avoid]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('RetractedPlayerUpdateVipStatusSingle').replace('{0}', data.ids)
   },
   multipleUpdate: {
-    [0]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('SuccessUpdateVipStatus').replace('{0}', data.numberOfPlayer),
-    [100]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('InvalidPlayerUpdateVipStatus').replace('{0}', data.numberOfPlayer).replace('{1}', data.systemIds),
-    [101]: (data, isUpdateVip) => (isUpdateVip ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('AlreadyUpdateVipStatus') : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('AlreadyUpdateNotVipStatus')).replace('{0}', data.numberOfPlayer),
-    [102]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('RetractedPlayerUpdateVipStatus').replace('{0}', data.numberOfPlayer).replace('{1}', data.systemIds)
+    [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].Success]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('SuccessUpdateVipStatus').replace('{0}', data.numberOfPlayer),
+    [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].InvalidSystemId]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('InvalidPlayerUpdateVipStatusBySystemId').replace('{0}', data.numberOfPlayer).replace('{1}', data.ids),
+    [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].NoChangeBySystemId]: (data, isUpdateVip) => (isUpdateVip ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('AlreadyUpdateVipStatus') : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('AlreadyUpdateNotVipStatus')).replace('{0}', data.numberOfPlayer),
+    [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].Avoid]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('RetractedPlayerUpdateVipStatus').replace('{0}', data.numberOfPlayer).replace('{1}', data.ids),
+    [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].InvalidExternalId]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('InvalidPlayerUpdateVipStatusByExternalId').replace('{0}', data.numberOfPlayer).replace('{1}', data.ids)
   }
 });
 
-_defineProperty(MessageHelper, "GetListMsgUpdateVipStatus", (results, currentVipStatus, isSingleUpdate = false) => {
+_defineProperty(MessageHelper, "GetListMsgUpdateVipStatus", (msgResults, currentVipStatus, isSingleUpdate = false) => {
   const fieldName = isSingleUpdate ? 'singleUpdate' : 'multipleUpdate';
-  return results.map(_ => {
+  const combinedResult = MessageHelper.combineMsgResult(msgResults);
+  return combinedResult.map(_ => {
     const code = _.code;
     const msgColor = MessageHelper.MsgColors[code];
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
@@ -3401,6 +3419,29 @@ _defineProperty(MessageHelper, "GetListMsgUpdateVipStatus", (results, currentVip
       className: msgColor.content
     }, MessageHelper.GetMsgUpdateVipStatus[fieldName][code](_, currentVipStatus)));
   });
+});
+
+_defineProperty(MessageHelper, "combineMsgResult", msgResults => {
+  const msgResultExternalIdIndex = msgResults.findIndex(_ => _.code === _constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].NoChangeByExternalId); // no change VIP status - by externalId
+
+  if (msgResultExternalIdIndex >= 0) {
+    msgResults = MessageHelper.combineMsgResultWithStatusNoChange(msgResults, msgResultExternalIdIndex);
+  }
+
+  return msgResults;
+});
+
+_defineProperty(MessageHelper, "combineMsgResultWithStatusNoChange", (msgResults, msgResultExternalIdIndex) => {
+  const msgResultSystemId = msgResults.find(_ => _.code === _constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].NoChangeBySystemId); // no change VIP status - by systemId
+
+  if (msgResultSystemId) {
+    msgResultSystemId.numberOfPlayer += msgResults[msgResultExternalIdIndex].numberOfPlayer;
+    msgResults.splice(msgResultExternalIdIndex, 1);
+  } else {
+    msgResults[msgResultExternalIdIndex].code = _constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].NoChangeBySystemId;
+  }
+
+  return msgResults;
 });
 
 /***/ }),
@@ -3970,8 +4011,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/vip-player-management/lib/constants.js");
 /* harmony import */ var _lib_helpers_excelHelper__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../lib/helpers/excelHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/vip-player-management/lib/helpers/excelHelper.js");
 /* harmony import */ var _lib_helpers_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../lib/helpers/sweetAlertHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/helpers/sweetAlertHelper.js");
-/* harmony import */ var _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @jsroot/lib/stringHelper */ "./www/js/source/reactpages/lib/stringHelper.js");
-
 
 
 
@@ -4073,24 +4112,30 @@ const FormAction = props => {
   const _onSubmitVipListFile = files => {
     const file = files[0];
     _jsroot_lib_excel__WEBPACK_IMPORTED_MODULE_4__["default"].process(() => {
-      _jsroot_lib_excel__WEBPACK_IMPORTED_MODULE_4__["default"].read(file, 0, listData => {
-        const column = _lib_helpers_excelHelper__WEBPACK_IMPORTED_MODULE_10__["default"].getColumnName(listData[0], _lib_constants__WEBPACK_IMPORTED_MODULE_9__["ExcelReaderColumn"]);
+      _jsroot_lib_excel__WEBPACK_IMPORTED_MODULE_4__["default"].read(file, 0, result => {
+        const {
+          header,
+          content
+        } = result;
 
-        if (!column) {
+        if (!_lib_helpers_excelHelper__WEBPACK_IMPORTED_MODULE_10__["default"].isValidHeader(header) || !_lib_helpers_excelHelper__WEBPACK_IMPORTED_MODULE_10__["default"].isValidHeader(content)) {
           alert(Object(_jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_5__["decode"])(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("UploadFileError")));
           return;
         }
 
-        const listValueOfColumn = listData.map(_ => _[column]);
+        const columnSystemId = _lib_helpers_excelHelper__WEBPACK_IMPORTED_MODULE_10__["default"].getColumnName(header, _lib_constants__WEBPACK_IMPORTED_MODULE_9__["ExcelReaderColumn"].SystemId);
+        const columnExternalId = _lib_helpers_excelHelper__WEBPACK_IMPORTED_MODULE_10__["default"].getColumnName(header, _lib_constants__WEBPACK_IMPORTED_MODULE_9__["ExcelReaderColumn"].ExternalId);
 
-        if (listValueOfColumn.some(_ => _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_12__["default"].isEmptyOrWhiteSpace(_))) {
+        if (!columnSystemId && !columnExternalId) {
           alert(Object(_jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_5__["decode"])(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("UploadFileError")));
           return;
         }
 
-        const systemIds = listValueOfColumn.join();
+        const systemIds = content.map(_ => _[columnSystemId]).join();
+        const externalIds = content.map(_ => _[columnExternalId]).join();
         const params = {
           systemIds,
+          externalIds,
           isVip: true
         };
 
@@ -4640,7 +4685,10 @@ const Url = {
   vipPlayerListTemplate: 'PlayerSegmentation/DowloadVipListTemplate',
   exportVipPlayerList: 'Api/PlayerSegmentation/ExportVipPlayerList'
 };
-const ExcelReaderColumn = 'systemid';
+const ExcelReaderColumn = {
+  SystemId: 'systemid',
+  ExternalId: 'externalid'
+};
 
 /***/ }),
 
@@ -4655,10 +4703,21 @@ const ExcelReaderColumn = 'systemid';
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ExcelHelper; });
 class ExcelHelper {
-  static getColumnName(object, readerColumn) {
-    const keys = Object.keys(object);
-    const columnName = keys.find(_ => _.replace(/\s/g, '').toLocaleLowerCase() === readerColumn);
+  static getColumnName(header, readerColumn) {
+    if (!header || !header.length) {
+      return null;
+    }
+
+    const columnName = header.find(_ => _.replace(/\s/g, '').toLocaleLowerCase() === readerColumn);
     return columnName;
+  }
+
+  static isValidHeader(header) {
+    return header && header.length > 0;
+  }
+
+  static isValidContent(content) {
+    return content && content.length > 0;
   }
 
 }

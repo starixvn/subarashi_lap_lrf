@@ -3,7 +3,7 @@ import LangHelper from '@jsroot/lib/langHelper';
 import { decode } from '@jsroot/lib/htmlHelper';
 import { useDropzone } from 'react-dropzone';
 
-const MbToByte = 1000 * 1000 * 1000;
+const MbToByte = 1000 * 1000;
 
 const DropzoneUpload = (props) => {
     const { onSubmit, onClose, multiple, accept, children, isShowInnerZone } = props;

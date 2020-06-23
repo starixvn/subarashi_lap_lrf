@@ -3554,26 +3554,32 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/constants.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
 class MessageHelper {}
 
 _defineProperty(MessageHelper, "MsgColors", {
-  [0]: {
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].Success]: {
     content: 'msg-success',
     icon: 'icon-tick'
   },
-  [100]: {
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].InvalidSystemId]: {
     content: 'msg-error',
     icon: 'icon-warning'
   },
-  [101]: {
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].NoChangeBySystemId]: {
     content: 'msg-success',
     icon: 'icon-tick'
   },
-  [102]: {
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].Avoid]: {
+    content: 'msg-error',
+    icon: 'icon-warning'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].InvalidExternalId]: {
     content: 'msg-error',
     icon: 'icon-warning'
   }
@@ -3581,22 +3587,24 @@ _defineProperty(MessageHelper, "MsgColors", {
 
 _defineProperty(MessageHelper, "GetMsgUpdateVipStatus", {
   singleUpdate: {
-    [0]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('SuccessUpdateVipStatusSingle'),
-    [100]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('InvalidPlayerUpdateVipStatusSingle').replace('{0}', data.systemIds),
-    [101]: (data, isUpdateVip) => isUpdateVip ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('AlreadyUpdateVipStatusSingle') : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('AlreadyUpdateNotVipStatusSingle'),
-    [102]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('RetractedPlayerUpdateVipStatusSingle').replace('{0}', data.systemIds)
+    [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].Success]: _ => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('SuccessUpdateVipStatusSingle'),
+    [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].InvalidSystemId]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('InvalidPlayerUpdateVipStatusSingle').replace('{0}', data.ids),
+    [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].NoChangeBySystemId]: (_, isUpdateVip) => isUpdateVip ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('AlreadyUpdateVipStatusSingle') : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('AlreadyUpdateNotVipStatusSingle'),
+    [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].Avoid]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('RetractedPlayerUpdateVipStatusSingle').replace('{0}', data.ids)
   },
   multipleUpdate: {
-    [0]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('SuccessUpdateVipStatus').replace('{0}', data.numberOfPlayer),
-    [100]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('InvalidPlayerUpdateVipStatus').replace('{0}', data.numberOfPlayer).replace('{1}', data.systemIds),
-    [101]: (data, isUpdateVip) => (isUpdateVip ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('AlreadyUpdateVipStatus') : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('AlreadyUpdateNotVipStatus')).replace('{0}', data.numberOfPlayer),
-    [102]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('RetractedPlayerUpdateVipStatus').replace('{0}', data.numberOfPlayer).replace('{1}', data.systemIds)
+    [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].Success]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('SuccessUpdateVipStatus').replace('{0}', data.numberOfPlayer),
+    [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].InvalidSystemId]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('InvalidPlayerUpdateVipStatusBySystemId').replace('{0}', data.numberOfPlayer).replace('{1}', data.ids),
+    [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].NoChangeBySystemId]: (data, isUpdateVip) => (isUpdateVip ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('AlreadyUpdateVipStatus') : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('AlreadyUpdateNotVipStatus')).replace('{0}', data.numberOfPlayer),
+    [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].Avoid]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('RetractedPlayerUpdateVipStatus').replace('{0}', data.numberOfPlayer).replace('{1}', data.ids),
+    [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].InvalidExternalId]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('InvalidPlayerUpdateVipStatusByExternalId').replace('{0}', data.numberOfPlayer).replace('{1}', data.ids)
   }
 });
 
-_defineProperty(MessageHelper, "GetListMsgUpdateVipStatus", (results, currentVipStatus, isSingleUpdate = false) => {
+_defineProperty(MessageHelper, "GetListMsgUpdateVipStatus", (msgResults, currentVipStatus, isSingleUpdate = false) => {
   const fieldName = isSingleUpdate ? 'singleUpdate' : 'multipleUpdate';
-  return results.map(_ => {
+  const combinedResult = MessageHelper.combineMsgResult(msgResults);
+  return combinedResult.map(_ => {
     const code = _.code;
     const msgColor = MessageHelper.MsgColors[code];
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
@@ -3607,6 +3615,29 @@ _defineProperty(MessageHelper, "GetListMsgUpdateVipStatus", (results, currentVip
       className: msgColor.content
     }, MessageHelper.GetMsgUpdateVipStatus[fieldName][code](_, currentVipStatus)));
   });
+});
+
+_defineProperty(MessageHelper, "combineMsgResult", msgResults => {
+  const msgResultExternalIdIndex = msgResults.findIndex(_ => _.code === _constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].NoChangeByExternalId); // no change VIP status - by externalId
+
+  if (msgResultExternalIdIndex >= 0) {
+    msgResults = MessageHelper.combineMsgResultWithStatusNoChange(msgResults, msgResultExternalIdIndex);
+  }
+
+  return msgResults;
+});
+
+_defineProperty(MessageHelper, "combineMsgResultWithStatusNoChange", (msgResults, msgResultExternalIdIndex) => {
+  const msgResultSystemId = msgResults.find(_ => _.code === _constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].NoChangeBySystemId); // no change VIP status - by systemId
+
+  if (msgResultSystemId) {
+    msgResultSystemId.numberOfPlayer += msgResults[msgResultExternalIdIndex].numberOfPlayer;
+    msgResults.splice(msgResultExternalIdIndex, 1);
+  } else {
+    msgResults[msgResultExternalIdIndex].code = _constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].NoChangeBySystemId;
+  }
+
+  return msgResults;
 });
 
 /***/ }),

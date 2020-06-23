@@ -10,4 +10,7 @@ export const Url = {
     exportVipPlayerList: 'Api/PlayerSegmentation/ExportVipPlayerList'
 }
 
-export const ExcelReaderColumn = 'systemid';
+export const ExcelReaderColumn = {
+    SystemId: 'systemid',
+    ExternalId: 'externalid'
+}
