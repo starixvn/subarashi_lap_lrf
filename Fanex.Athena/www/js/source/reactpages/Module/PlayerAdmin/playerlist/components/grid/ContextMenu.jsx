@@ -21,8 +21,16 @@ export const ContextMenu = (props) => {
     const handleClickMenu = (tabName, subTabName) => {
         setSelectedTabName(tabName);
         setSelectedSubTabName(subTabName || '');
-        const { ibcCustId, userName, currency, isDeposit, isArchived, licenseeCustId, currencyId, createdDate } = currentActivePlayer;
-        const selectedPlayer = { ibcCustId, userName, currency, isDeposit, isArchived, licenseeCustId, currencyId, createdDate };
+        const {
+            ibcCustId, userName, currency, isDeposit,
+            isArchived, licenseeCustId, currencyId, createdDate
+        } = currentActivePlayer;
+
+        const selectedPlayer = {
+            ibcCustId, userName, currency, isDeposit,
+            isArchived, licenseeCustId, currencyId, createdDate
+        };
+
         setSelectedPlayer(selectedPlayer);
     }
 

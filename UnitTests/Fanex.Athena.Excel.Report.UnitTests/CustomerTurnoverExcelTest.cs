@@ -51,7 +51,7 @@ namespace Fanex.Athena.Excel.Report.UnitTests
                 "#", ViewResources.Date, ViewResources.ExternalId, ViewResources.SystemId,
                 ViewResources.Currency, ViewResources.Sport, ViewResources.BetType,
                 ViewResources.EffectiveBettingValue, ViewResources.TotalTransaction, ViewResources.Turnover,
-                ViewResources.Total + " " + ViewResources.Turnover, ViewResources.CustomerW_L,
+                ViewResources.Total + " " + ViewResources.Turnover, ViewResources.WinLoss,
             };
 
             // Action

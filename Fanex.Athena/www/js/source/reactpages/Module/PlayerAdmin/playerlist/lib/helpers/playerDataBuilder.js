@@ -1,4 +1,4 @@
-export const buildSelectedPlayer = (dataItem) => {
+﻿export const buildSelectedPlayer = (dataItem) => {
     const { IbcCustId, UserName, Currency, IsDeposit, IsArchived, LicenseeCustId, CurrencyId, CreatedDate } = dataItem;
 
     return {
