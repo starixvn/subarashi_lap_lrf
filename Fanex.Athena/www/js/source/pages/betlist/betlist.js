@@ -44,6 +44,15 @@
             return params.BaseCurrency;
         }
 
+        function resize3rdPartyResultFrame() {
+            var $frame = $("#popupFrame");
+
+            if ($frame.length) {
+                var height = $(window).height() - 10;
+                $frame.height(height < 0 ? 0 : height);
+            }
+        }
+
         const _me = {
             getSortParams: function () {
                 if (!_sortColumnName) {
@@ -390,7 +399,8 @@
                 Site.blockUI();
                 $.get(url + '?custid=' + custId + '&gamePlayId=' + gamePlayId, function (result) {
                     if (result !== '') {
-                        showResultPopUp(result, { width: 800, height: 380, title: title });
+                        showResultPopUp(result, { width: 800, height: 450, title: title });
+                        resize3rdPartyResultFrame();
                         Site.unBlockUI();
                     }
                 });
@@ -787,7 +797,7 @@
 
                 showDetailPopUp(url, { width: 890, height: popH + 50, title: title });
             },
-            showSabaClubDetails : function (transId, winlostDate, custId, transType) {
+            showSabaClubDetails: function (transId, winlostDate, custId, transType) {
                 let url = Site.resolveClientUrl('SabaClubBetList/Detail');
                 url = QueryString.setParam(url, 'transId', transId);
                 url = QueryString.setParam(url, 'date', winlostDate);
