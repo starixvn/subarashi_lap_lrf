@@ -4594,12 +4594,14 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             return params.BaseCurrency;
         }
 
-        function resize3rdPartyResultFrame() {
+        function resize3rdPartyResultFrame(minHeight) {
             var $frame = $("#popupFrame");
 
             if ($frame.length) {
                 var height = $(window).height() - 10;
-                $frame.height(height < 0 ? 0 : height);
+                height = Math.max(minHeight, height);
+
+                $frame.height(height);
             }
         }
 
@@ -4949,8 +4951,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 Site.blockUI();
                 $.get(url + '?custid=' + custId + '&gamePlayId=' + gamePlayId, function (result) {
                     if (result !== '') {
-                        showResultPopUp(result, { width: 800, height: 450, title: title });
-                        resize3rdPartyResultFrame();
+                        var height = 450;
+                        showResultPopUp(result, { width: 800, height: height, title: title });
+                        resize3rdPartyResultFrame(height);
                         Site.unBlockUI();
                     }
                 });
