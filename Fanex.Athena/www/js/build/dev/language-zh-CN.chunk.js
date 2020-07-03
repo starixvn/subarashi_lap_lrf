@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 6/23/2020 1:26:38 PM
+﻿// Generated at: 6/29/2020 4:16:29 PM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -677,6 +677,7 @@ ShowAllLeagues:"显示所有联赛",
 ShowOldValue:"显示旧值",
 Sincelastmonth:"自上个月",
 SingleCustomer:"单一会员",
+SoccerParlay:"足球串关",
 SpecialLevel:"特殊层级",
 SpecificDate:"特定日期",
 Sport:"运动",
