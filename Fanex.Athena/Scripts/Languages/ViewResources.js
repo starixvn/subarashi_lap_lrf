@@ -1,4 +1,4 @@
-﻿// Generated at: 6/23/2020 1:26:21 PM
+﻿// Generated at: 6/29/2020 4:16:36 PM
 var _language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -644,6 +644,7 @@ ShowAllLeagues:"Show All Leagues",
 ShowOldValue:"Show old value",
 Sincelastmonth:"Since last month",
 SingleCustomer:"Single Customer",
+SoccerParlay:"Soccer Parlay",
 SolutionForRestriction:"1. Login at Licensee Admin.&lt;br/&gt;2. Access the reports/ functions you want. &lt;br/&gt; 请洽你们的最高管理者替你设置币别权限",
 SpecialLevel:"Special Level",
 SpecificDate:"Specific Date",

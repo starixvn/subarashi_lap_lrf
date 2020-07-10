@@ -5857,6 +5857,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Soccer Parlay.
+        /// </summary>
+        public static string SoccerParlay {
+            get {
+                return ResourceManager.GetString("SoccerParlay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 1. Login at Licensee Admin.&lt;br/&gt;2. Access the reports/ functions you want. &lt;br/&gt; 请洽你们的最高管理者替你设置币别权限.
         /// </summary>
         public static string SolutionForRestriction {

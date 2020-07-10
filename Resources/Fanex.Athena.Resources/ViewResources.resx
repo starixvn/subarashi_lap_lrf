@@ -2800,4 +2800,7 @@
     <value>Invalid External ID(s): {0} ({1})</value>
     <comment>#135410</comment>
   </data>
+  <data name="SoccerParlay" xml:space="preserve">
+    <value>Soccer Parlay</value>
+  </data>
 </root>

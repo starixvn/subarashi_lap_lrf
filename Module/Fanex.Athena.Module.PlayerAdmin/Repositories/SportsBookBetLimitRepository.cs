@@ -17,10 +17,12 @@
     public class SportsBookBetLimitRepository : ISportsBookBetLimitRepository
     {
         private const string MixedSportId = "99MP";
+        private const string SoccerParlay = "1MP";
 
         private static readonly string[] SportTypes =
         {
             ((int)SportType.Soccer).ToString(),
+            SoccerParlay,
             ((int)SportType.BasketBall).ToString(),
             ((int)SportType.FootBall).ToString(),
             ((int)SportType.Tennis).ToString(),
@@ -81,7 +83,7 @@
         {
             var sportList = new List<PlayerBetLimit>();
 
-            foreach(var type in SportTypes)
+            foreach (var type in SportTypes)
             {
                 sportList.Add(ReadForSport(reader, type));
             }
@@ -149,6 +151,6 @@
             db.SetParameterValue("updateminmaxbet" + sportSuffix, setting?.IsUpdated);
         }
 
-        private static string GetSportSuffix(string sportId) => sportId != ((int) SportType.Soccer).ToString() ? "v" + sportId : string.Empty;
+        private static string GetSportSuffix(string sportId) => sportId != ((int)SportType.Soccer).ToString() ? "v" + sportId : string.Empty;
     }
 }
