@@ -1,8 +1,5 @@
 ﻿namespace Fanex.Athena.Service.Core.Users
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using Core.Users.Interfaces;
     using DataAccess.Core.Users.Interfaces;
     using Extension.Utility.Interfaces;
@@ -10,9 +7,13 @@
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.DTO.Users;
     using Fanex.Athena.Resources;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Configuration;
     using Model.Report.DTO;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
     public class SubsidiaryService : ISubsidiaryService
     {
@@ -30,6 +31,14 @@
         {
             _cache = cache;
             _subLicenseeDataAccess = subsidiaryDataAccess;
+        }
+
+        public string GenerateAgentList(UserAuthInfo user, string licenseeName, string subsidiaryList, string currencyIdList = default)
+        {
+            var agentIdListByCurrency = GetCurrencyAgentList(user, licenseeName, subsidiaryList);
+            //var currencyFilterList = AuthParameterHelper.ParseCurrencyIdList(currencyIdList);
+            var agentListXml = AuthParameterHelper.GenerateAgentListXml(user.CurrencyList, agentIdListByCurrency);
+            return agentListXml;
         }
 
         public IDictionary<int, IEnumerable<int>> GetCurrencyAgentList(UserAuthInfo user, string licenseeName,
@@ -65,7 +74,6 @@
             }
 
             return result.GroupBy(x => x.CurrencyId).ToDictionary(x => x.Key, x => x.Select(i => i.AgentId));
-
         }
 
         public IEnumerable<CheckedItem> GetSubsidiaryTree(UserAuthInfo user, string licenseeName)

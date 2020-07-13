@@ -26,6 +26,8 @@
         public byte OrderCol { get; set; }
         public byte SortType { get; set; }
 
+        public string SubsidiaryList { get; set; }
+
         public virtual bool IsValid => PageIndex > 0 && PageSize <= MaxPageSize;
     }
 }

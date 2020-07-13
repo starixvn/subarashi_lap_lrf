@@ -20,6 +20,7 @@
         [ApiAutoBindMetaModel(BindAgent = true)]
         public async Task<JsonResult<ApiPagingResult<PlayerInfo>>> GetVipPlayerList(VipPlayerListMetaModel metaModel)
         {
+            BindAgentListBySubsidiaryBiz(metaModel);
             var result = await _playerDataAccess.GetVipPlayerListAsync(metaModel).ConfigureAwait(false);
             return JsonApi(result);
         }
@@ -30,6 +31,7 @@
         [ApiAutoBindMetaModel(BindAgent = true)]
         public async Task<HttpResponseMessage> ExportVipPlayerList(VipPlayerListMetaModel metaModel)
         {
+            BindAgentListBySubsidiaryBiz(metaModel);
             var dataSource = await _playerDataAccess.GetVipPlayerListAsync(metaModel).ConfigureAwait(false);
 
             if (dataSource.Data.Any())

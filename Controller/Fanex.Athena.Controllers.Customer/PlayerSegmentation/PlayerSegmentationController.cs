@@ -10,8 +10,12 @@
     using Fanex.Athena.DataAccess.Customer.Interfaces;
     using Fanex.Athena.Extension.Utility.Internal;
     using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Model.Customer.Enum;
     using Fanex.Athena.Model.Customer.ViewModel;
     using Fanex.Athena.Resources;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
     using ONEbook.UM.Filters;
@@ -33,41 +37,22 @@
             <string, AsyncLazy<IDictionary<int, string>>>(StringComparer.OrdinalIgnoreCase);
 
         private readonly IAuthorizationService _authService;
+        private readonly ISubsidiaryService _subsidiaryService;
         private readonly IPlayerSegmentationDataAccess _playerDataAccess;
 
-        public PlayerSegmentationController(IAuthorizationService authService, IPlayerSegmentationDataAccess playerDataAccess)
+        public PlayerSegmentationController(IAuthorizationService authService,
+            ISubsidiaryService subsidiaryService,
+            IPlayerSegmentationDataAccess playerDataAccess)
         {
             _authService = authService;
+            _subsidiaryService = subsidiaryService;
             _playerDataAccess = playerDataAccess;
         }
 
         [FunctionAuthorization(PermissionKeys.PlayerProblemManagement, PermissionKeys.PlayerVIPManagement)]
         public async Task<ViewResult> Index()
         {
-            var currencyList = SessionServiceInstance.UserSession.CurrencyList;
-            var baseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency;
-            var lang = LangService.GetCurrentLanguage();
-
-            var hasVIPManangementPermission = HasVIPManagementPermission();
-            var reasonList = await GetReasonList(lang).ConfigureAwait(false);
-
-            var model = new PlayerSegmentationViewModel
-            {
-                TabKeys = GetTabKeys(),
-                HasVIPManagementPermission = hasVIPManangementPermission,
-                ProblemPlayerVM = new ProblemPlayerViewModel
-                {
-                    CurrencyList = currencyList,
-                    ReasonList = reasonList
-                },
-                VipPlayerVM = hasVIPManangementPermission ? new VipPlayerViewModel
-                {
-                    CurrencyList = currencyList,
-                    VipOptions = GetVipOptions()
-                } : null,
-                BaseCurrency = baseCurrency
-            };
-
+            var model = await BuildViewModel();
             return View("~/Views/Desktop/Customer/PlayerSegmentation/Main.cshtml", model);
         }
 
@@ -77,6 +62,66 @@
         {
             var templatePath = Server.MapPath(VIP_LIST_TEMPLATE_PATH);
             return File(templatePath, "application/vnd.ms-excel", "VipPlayerList.xls");
+        }
+
+        private async Task<PlayerSegmentationViewModel> BuildViewModel()
+        {
+            var currencyList = SessionServiceInstance.UserSession.CurrencyList;
+            var baseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency;
+            var lang = LangService.GetCurrentLanguage();
+
+            var hasVIPManangementPermission = HasVIPManagementPermission();
+            var subsidiaryList = _subsidiaryService.GetSubsidiaryTree(SessionServiceInstance.UserSession, SessionServiceInstance.LicenseeSession.LicenseeName);
+            var viewType = (byte)GetViewType(subsidiaryList);
+            var reasonList = await GetReasonList(lang).ConfigureAwait(false);
+
+            var model = new PlayerSegmentationViewModel
+            {
+                TabKeys = GetTabKeys(),
+                HasVIPManagementPermission = hasVIPManangementPermission,
+                ProblemPlayerVM = new ProblemPlayerViewModel
+                {
+                    CurrencyList = currencyList,
+                    ReasonList = reasonList,
+                },
+                VipPlayerVM = hasVIPManangementPermission ? new VipPlayerViewModel
+                {
+                    CurrencyList = currencyList,
+                    VipOptions = GetVipOptions()
+                } : null,
+                BaseCurrency = baseCurrency,
+                ViewType = viewType,
+                SubsidiaryList = subsidiaryList
+            };
+
+            return model;
+        }
+
+        private async Task<IDictionary<int, string>> GetReasonList(string lang)
+        {
+            var lazyTask = ReasonListFromCache.GetOrAdd(lang, langKey => new AsyncLazy<IDictionary<int, string>>(() => _playerDataAccess.GetReasonGroupListAsync(langKey)));
+            return await lazyTask.Value.ConfigureAwait(false);
+        }
+
+        private PlayerSegmentationViewType GetViewType(IEnumerable<CheckedItem> subsidiaryList)
+        {
+            var user = SessionServiceInstance.UserSession;
+            var subsidiaryViewType = user.SubsidiaryViewType;
+
+            if (user.UserLevel == UserLevelType.Subsidiary
+                || subsidiaryViewType == (byte)SubsidiaryViewType.NotManagement
+                || !subsidiaryList.Any())
+            {
+                return PlayerSegmentationViewType.Normal;
+            }
+
+            if (subsidiaryViewType == (byte)SubsidiaryViewType.NormalManagement
+                || user.WhiteLabelID.HasValue)
+            {
+                return PlayerSegmentationViewType.Susidiary;
+            }
+
+            return PlayerSegmentationViewType.WhiteLabel;
         }
 
         private bool HasVIPManagementPermission()
@@ -102,12 +147,6 @@
                 { 1, ViewResources.Yes },
                 { 2, ViewResources.No },
             };
-        }
-
-        private async Task<IDictionary<int, string>> GetReasonList(string lang)
-        {
-            var lazyTask = ReasonListFromCache.GetOrAdd(lang, langKey => new AsyncLazy<IDictionary<int, string>>(() => _playerDataAccess.GetReasonGroupListAsync(langKey)));
-            return await lazyTask.Value.ConfigureAwait(false);
         }
     }
 }
