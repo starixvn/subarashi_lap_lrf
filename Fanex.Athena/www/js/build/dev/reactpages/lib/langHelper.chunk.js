@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 6/29/2020 4:16:29 PM
+// Generated at: 7/14/2020 4:49:44 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -367,6 +367,7 @@ window._language_en_US = {
   ExportToExcel: "Export To Excel",
   ExternalId: "External ID",
   ExternalIdOrSystemId: "External ID or System ID",
+  ExtraPayout: "Extra Payout",
   Fail: "Fail",
   Feb: "Feb",
   February: "February",

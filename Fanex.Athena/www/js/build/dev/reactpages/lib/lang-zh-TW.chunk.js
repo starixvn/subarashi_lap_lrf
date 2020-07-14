@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 6/29/2020 4:16:29 PM
+// Generated at: 7/14/2020 4:49:44 PM
 window._language_zh_TW = {
   AA: "客客",
   AbnormalBet: "非正規註單",
@@ -302,6 +302,7 @@ window._language_zh_TW = {
   ExportToExcel: "導出至Excel",
   ExternalId: "外部ID",
   ExternalIdOrSystemId: "外部識別或系統識別",
+  ExtraPayout: "額外派彩",
   Fail: "失敗",
   Feb: "二月",
   February: "二月",

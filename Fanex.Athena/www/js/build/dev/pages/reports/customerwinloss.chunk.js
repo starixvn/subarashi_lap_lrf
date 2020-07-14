@@ -6239,7 +6239,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         'use strict';
 
         const EXCEL_FILENAME = 'CustomerWinLoss.xlsx';
-        const EXCEL_PP_FILENAME = 'PromotionPrize.xls';
+        const EXCEL_PP_FILENAME = 'ExtraPayout.xls';
         const SORTING_CODE = {
             'externalId': 2,
             'systemId': 1,
@@ -6266,16 +6266,16 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         let _isFirstLoad = false;
 
         let _pagingOption =
-        {
-            pageindex: 1,
-            pagesize: 500,
-            pagelist: [500, 1000, 2000],
-            totalrow: 1,
-            elementcontainer: '.paging',
-            method: 'AJAX',
-            ajaxfunction: 'CustomerWinLoss.ajaxPaging()',
-            alwayshow: true
-        };
+            {
+                pageindex: 1,
+                pagesize: 500,
+                pagelist: [500, 1000, 2000],
+                totalrow: 1,
+                elementcontainer: '.paging',
+                method: 'AJAX',
+                ajaxfunction: 'CustomerWinLoss.ajaxPaging()',
+                alwayshow: true
+            };
 
         const _url = {
             SearchCustomer: 'SearchCustomerAPI/SearchCustomer'
@@ -6423,24 +6423,24 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             buildPostData();
 
             const option =
-            {
-                type: 'POST',
-                data: _submitData,
-                dataType: 'json',
-                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                cache: false,
-                url: Site.resolveClientUrl(CustomerWinLossOption.urlData),
-                success: function (response) {
-                    setReportTitle();
-                    _me.bindData(response);
-                },
-                beforeSend: function () {
-                    Site.blockUI();
-                },
-                complete: function () {
-                    Site.unBlockUI();
-                }
-            };
+                {
+                    type: 'POST',
+                    data: _submitData,
+                    dataType: 'json',
+                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                    cache: false,
+                    url: Site.resolveClientUrl(CustomerWinLossOption.urlData),
+                    success: function (response) {
+                        setReportTitle();
+                        _me.bindData(response);
+                    },
+                    beforeSend: function () {
+                        Site.blockUI();
+                    },
+                    complete: function () {
+                        Site.unBlockUI();
+                    }
+                };
 
             if (_ajaxRequest != null) {
                 _ajaxRequest.abort();
