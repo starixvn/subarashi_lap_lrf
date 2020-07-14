@@ -1,4 +1,4 @@
-﻿// Generated at: 6/29/2020 4:16:36 PM
+﻿// Generated at: 7/14/2020 4:49:35 PM
 var _language_zh_TW = {
 AA:"客客",
 AbnormalBet:"非正規註單",
@@ -207,6 +207,7 @@ ExcludeTestData:"排除測試數據",
 ExportToExcel:"導出至Excel",
 ExternalId:"外部ID",
 ExternalIdOrSystemId:"外部識別或系統識別",
+ExtraPayout:"額外派彩",
 Fail:"失敗",
 Feb:"二月",
 February:"二月",

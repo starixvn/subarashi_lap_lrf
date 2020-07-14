@@ -1,4 +1,4 @@
-﻿// Generated at: 6/29/2020 4:16:36 PM
+﻿// Generated at: 7/14/2020 4:49:35 PM
 var _language_zh_Hans = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -208,6 +208,7 @@ ExcludeTestData:"排除测试数据",
 ExportToExcel:"导出至Excel",
 ExternalId:"用户名",
 ExternalIdOrSystemId:"或系统帐号(支援前坠搜寻)",
+ExtraPayout:"额外派彩",
 Fail:"失败",
 Feb:"二月",
 February:"二月",
