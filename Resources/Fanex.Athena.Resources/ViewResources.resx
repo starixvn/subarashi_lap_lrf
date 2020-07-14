@@ -2803,4 +2803,7 @@
   <data name="SoccerParlay" xml:space="preserve">
     <value>Soccer Parlay</value>
   </data>
+  <data name="ExtraPayout" xml:space="preserve">
+    <value>Extra Payout</value>
+  </data>
 </root>
