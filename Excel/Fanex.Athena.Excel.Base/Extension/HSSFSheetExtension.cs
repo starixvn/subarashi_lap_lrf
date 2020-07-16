@@ -7,6 +7,8 @@ namespace Fanex.Athena.Excel.Base.Extension
 {
     using NPOI.SS.UserModel;
     using NPOI.SS.Util;
+    using System.Collections.Generic;
+    using System.Linq;
 
     public static class HSSFSheetExtension
     {
@@ -16,11 +18,12 @@ namespace Fanex.Athena.Excel.Base.Extension
            int sourceRowIndex,
            int destRowIndex,
            int columnCount,
-           string value)
+           string value,
+           int cellContentIndex = 0)
         {
             var row = sheet.CopyRow(sourceSheet, sourceRowIndex, destRowIndex);
             sheet.MergeCols(0, columnCount - 1, destRowIndex);
-            row.Cells[0].SetCellValue(value);
+            row.Cells[cellContentIndex].SetCellValue(value);
         }
 
         public static void SetTextRowValue(
@@ -195,6 +198,37 @@ namespace Fanex.Athena.Excel.Base.Extension
 
             for (int i = firstRowNum; i <= lastRowNum; i++)
             {
+                foreach (int j in columnIndex)
+                {
+                    var cell = sheet.GetCell(i, j);
+                    if (cell != null)
+                    {
+                        cell.SetCellValue(string.Empty);
+                    }
+                }
+            }
+
+            // Hide column
+            foreach (int i in columnIndex)
+            {
+                sheet.SetColumnWidth(i, 0);
+                sheet.SetColumnHidden(i, true);
+            }
+        }
+
+        public static void HideColumn(this ISheet sheet, IEnumerable<int> excludeRows, params int[] columnIndex)
+        {
+            // Clear content
+            var firstRowNum = sheet.FirstRowNum;
+            var lastRowNum = sheet.LastRowNum;
+
+            for (int i = firstRowNum; i <= lastRowNum; i++)
+            {
+                if (excludeRows.Any(_ => _ == i))
+                {
+                    continue;
+                }
+
                 foreach (int j in columnIndex)
                 {
                     var cell = sheet.GetCell(i, j);

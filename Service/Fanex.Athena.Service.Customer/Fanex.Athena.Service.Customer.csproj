@@ -81,6 +81,8 @@
     <Compile Include="Interfaces\ICustomerService.cs" />
     <Compile Include="Interfaces\ICustomerListService.cs" />
     <Compile Include="Interfaces\IGroupComService.cs" />
+    <Compile Include="Interfaces\IPlayerSegmentationService.cs" />
+    <Compile Include="PlayerSegmentationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

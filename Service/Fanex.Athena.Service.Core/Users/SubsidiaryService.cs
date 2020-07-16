@@ -35,9 +35,9 @@
 
         public string GenerateAgentList(UserAuthInfo user, string licenseeName, string subsidiaryList, string currencyIdList = default)
         {
-            var agentIdListByCurrency = GetCurrencyAgentList(user, licenseeName, subsidiaryList);
-            //var currencyFilterList = AuthParameterHelper.ParseCurrencyIdList(currencyIdList);
-            var agentListXml = AuthParameterHelper.GenerateAgentListXml(user.CurrencyList, agentIdListByCurrency);
+            var agentIdListBySubsidiary = GetCurrencyAgentList(user, licenseeName, subsidiaryList);
+            var agentIdList = FilterAgentIdList(agentIdListBySubsidiary, currencyIdList);
+            var agentListXml = AuthParameterHelper.GenerateAgentListXml(user.CurrencyList, agentIdList);
             return agentListXml;
         }
 
@@ -173,6 +173,22 @@
             var subsidiaryList = _cache.Get(cacheKey, () => _subLicenseeDataAccess.GetSubsidiaryList(licenseeName), CacheTimeoutSeconds);
             var userAgentList = user.CurrencyAgentList.SelectMany(i => i.Value);
             return subsidiaryList.Where(i => userAgentList.Contains(i.AgentId));
+        }
+
+        private IDictionary<int, IEnumerable<int>> FilterAgentIdList(IDictionary<int, IEnumerable<int>> agentList, string currencyIdListString)
+        {
+            if (string.IsNullOrEmpty(currencyIdListString))
+            {
+                return new Dictionary<int, IEnumerable<int>>();
+            }
+
+            var currencyIdList = AuthParameterHelper.ParseCurrencyIdList(currencyIdListString);
+
+            var agentListFiltered = agentList
+               .Where(_ => currencyIdList.Any(__ => __ == _.Key))
+               .ToDictionary(_ => _.Key, _ => _.Value);
+
+            return agentListFiltered;
         }
     }
 }

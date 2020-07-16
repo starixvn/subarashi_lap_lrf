@@ -846,7 +846,6 @@
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\VipPlayerUploadTemplate.xls" />
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\ProblemPlayerList.xls" />
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\VipPlayerList.xls" />
-    <Content Include="App_Data\Template\Customers\PlayerSegmentation\ProblemPlayerNoneVIPList.xls" />
     <Content Include="www\css\build\dev\reactpages\playeradmin\detailtransaction.css.map" />
     <Content Include="Views\Desktop\BetList\SexyGaming\Main.cshtml" />
     <Content Include="Views\Desktop\BetList\SBCDetail\Main.cshtml" />

@@ -20,8 +20,7 @@
         [ApiAutoBindMetaModel(BindAgent = true)]
         public async Task<JsonResult<ApiPagingResult<PlayerInfo>>> GetVipPlayerList(VipPlayerListMetaModel metaModel)
         {
-            BindAgentListBySubsidiaryBiz(metaModel);
-            var result = await _playerDataAccess.GetVipPlayerListAsync(metaModel).ConfigureAwait(false);
+            var result = await _playerService.GetVipPlayerListAsync(metaModel).ConfigureAwait(false);
             return JsonApi(result);
         }
 
@@ -31,13 +30,13 @@
         [ApiAutoBindMetaModel(BindAgent = true)]
         public async Task<HttpResponseMessage> ExportVipPlayerList(VipPlayerListMetaModel metaModel)
         {
-            BindAgentListBySubsidiaryBiz(metaModel);
-            var dataSource = await _playerDataAccess.GetVipPlayerListAsync(metaModel).ConfigureAwait(false);
+            var isNormalView = _playerService.IsNormalView(metaModel);
+            var dataSource = await _playerService.GetVipPlayerListAsync(metaModel).ConfigureAwait(false);
 
             if (dataSource.Data.Any())
             {
                 const string fileName = "VipPlayerList.xls";
-                var excel = new VipPlayerExcel(dataSource.Data);
+                var excel = new VipPlayerExcel(dataSource.Data, isNormalView);
                 excel.Export();
 
                 var result = ExcelStream(excel.Workbook, fileName);

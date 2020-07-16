@@ -1,21 +1,11 @@
 ﻿namespace Fanex.Athena.Controllers.Customer
 {
-    using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-    using System.Web.SessionState;
-    using Fanex.Athena.DataAccess.Customer.Interfaces;
     using Fanex.Athena.Extension.Utility.Internal;
     using Fanex.Athena.Model.Auth.DataDomain;
-    using Fanex.Athena.Model.Core.DataDomain;
-    using Fanex.Athena.Model.Core.DTO.Common;
-    using Fanex.Athena.Model.Customer.Enum;
     using Fanex.Athena.Model.Customer.ViewModel;
     using Fanex.Athena.Resources;
     using Fanex.Athena.Service.Core.Users.Interfaces;
+    using Fanex.Athena.Service.Customer.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
     using ONEbook.UM.Filters;
@@ -38,15 +28,15 @@
 
         private readonly IAuthorizationService _authService;
         private readonly ISubsidiaryService _subsidiaryService;
-        private readonly IPlayerSegmentationDataAccess _playerDataAccess;
+        private readonly IPlayerSegmentationService _playerService;
 
         public PlayerSegmentationController(IAuthorizationService authService,
             ISubsidiaryService subsidiaryService,
-            IPlayerSegmentationDataAccess playerDataAccess)
+            IPlayerSegmentationService playerService)
         {
             _authService = authService;
             _subsidiaryService = subsidiaryService;
-            _playerDataAccess = playerDataAccess;
+            _playerService = playerService;
         }
 
         [FunctionAuthorization(PermissionKeys.PlayerProblemManagement, PermissionKeys.PlayerVIPManagement)]
@@ -72,7 +62,7 @@
 
             var hasVIPManangementPermission = HasVIPManagementPermission();
             var subsidiaryList = _subsidiaryService.GetSubsidiaryTree(SessionServiceInstance.UserSession, SessionServiceInstance.LicenseeSession.LicenseeName);
-            var viewType = (byte)GetViewType(subsidiaryList);
+            var viewType = (byte)_playerService.GetViewType(subsidiaryList.Any());
             var reasonList = await GetReasonList(lang).ConfigureAwait(false);
 
             var model = new PlayerSegmentationViewModel
@@ -99,29 +89,8 @@
 
         private async Task<IDictionary<int, string>> GetReasonList(string lang)
         {
-            var lazyTask = ReasonListFromCache.GetOrAdd(lang, langKey => new AsyncLazy<IDictionary<int, string>>(() => _playerDataAccess.GetReasonGroupListAsync(langKey)));
+            var lazyTask = ReasonListFromCache.GetOrAdd(lang, langKey => new AsyncLazy<IDictionary<int, string>>(() => _playerService.GetReasonGroupListAsync(langKey)));
             return await lazyTask.Value.ConfigureAwait(false);
-        }
-
-        private PlayerSegmentationViewType GetViewType(IEnumerable<CheckedItem> subsidiaryList)
-        {
-            var user = SessionServiceInstance.UserSession;
-            var subsidiaryViewType = user.SubsidiaryViewType;
-
-            if (user.UserLevel == UserLevelType.Subsidiary
-                || subsidiaryViewType == (byte)SubsidiaryViewType.NotManagement
-                || !subsidiaryList.Any())
-            {
-                return PlayerSegmentationViewType.Normal;
-            }
-
-            if (subsidiaryViewType == (byte)SubsidiaryViewType.NormalManagement
-                || user.WhiteLabelID.HasValue)
-            {
-                return PlayerSegmentationViewType.Susidiary;
-            }
-
-            return PlayerSegmentationViewType.WhiteLabel;
         }
 
         private bool HasVIPManagementPermission()

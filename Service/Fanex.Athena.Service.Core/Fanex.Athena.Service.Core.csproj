@@ -97,6 +97,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Users\ContextService.cs" />
+    <Compile Include="Users\Interfaces\IContextService.cs" />
     <Compile Include="Users\Interfaces\ISessionStorage.cs" />
     <Compile Include="Users\Interfaces\ISubsidiaryService.cs" />
     <Compile Include="Users\SessionStorage.cs" />
