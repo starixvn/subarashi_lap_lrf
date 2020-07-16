@@ -1,7 +1,7 @@
 import Site from '@jsroot/lib/site'
 
 export default class ParamHelper {
-    static ToAPIParams({ selectedParams, username, selectedCurrency, selectedBaseCurrency, isGetAll, dateRange, selectedReason, selectedSubsidiary }) {
+    static ToAPIParams({ selectedParams, username, selectedCurrency, selectedBaseCurrency, isGetAll, dateRange, selectedReason, selectedSubsidiary, subsidiarySearch }) {
         return {
             ...selectedParams, 
             ...{
@@ -12,7 +12,8 @@ export default class ParamHelper {
                 isGetAll,
                 fromDate: Site.convertDateToString(dateRange.fromDate),
                 toDate: Site.convertDateToString(dateRange.toDate),
-                subsidiaryList: selectedSubsidiary
+                subsidiaryList: subsidiarySearch ? selectedSubsidiary : '',
+                subsidiarySearch
             }
         }
     }

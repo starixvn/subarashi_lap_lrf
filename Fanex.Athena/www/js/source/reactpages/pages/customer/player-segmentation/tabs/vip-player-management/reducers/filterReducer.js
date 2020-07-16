@@ -16,5 +16,5 @@ export const dateRange = dateRangeReducer.dateRange;
 export const selectedCurrency = currencyReducer.selectedCurrency;
 export const username = usernameReducer.username;
 export const selectedSubsidiary = filterReducer.selectedSubsidiary;
-
+export const subsidiarySearch = filterReducer.subsidiarySearch;
 export const selectedParams = paramHandlerReducer.selectedParams;

@@ -16,4 +16,5 @@ export const setDateRange = dateRangeAction.setDateRange;
 export const setSelectedCurrency = currencyAction.setSelectedCurrency;
 export const setUsername = usernameAction.setUsername;
 export const setSubsidiaryList = filterAction.setSubsidiaryList;
+export const setSubsidiarySearch = filterAction.setSubsidiarySearch;
 export const setSelectedParams = paramHanlderAction.setSelectedParams;

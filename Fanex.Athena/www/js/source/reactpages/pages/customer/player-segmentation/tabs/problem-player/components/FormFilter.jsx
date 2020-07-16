@@ -167,17 +167,27 @@ export class FormFilter extends PureComponent {
 
     render() {
         const isDisabledSubmit = StringHelper.isEmptyOrWhiteSpace(this.props.selectedCurrency) || StringHelper.isEmptyOrWhiteSpace(this.props.selectedReason);
+
         return (
             <CollapsiblePanel className="page-filter" stickyFooter={this._renderStickyFooter()}>
                 <div className="row">
-                    {AppData.viewType !== ViewType.Normal ? (<div className="col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2">
+                    {AppData.viewType !== ViewType.Normal && this.props.subsidiarySearch && (<div className="col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">
                                 {AppData.viewType === ViewType.WhiteLabel ? LangHelper.getSingleResource("WhiteLabel") : LangHelper.getSingleResource("Subsidiary")}
                             </label>
                             {this._renderSubsidiaryTreeView()}
                         </div>
-                    </div>) : null }
+                    </div>)}
+                    {AppData.viewType !== ViewType.Normal && <div className="col-12 col-md-3 col-sm-2 col-lg-2 col-xl-2">
+                        <div className="form-group">
+                            <CheckBox id="SubsidiarySearch"
+                                checked={this.props.subsidiarySearch}
+                                onChange={checked => this.props.setSubsidiarySearch(checked)}
+                                label={LangHelper.getSingleResource("SubsidiarySearch")} />
+                        </div>
+                    </div>
+                    }
                     <div className="col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource("Date")}</label>
@@ -188,7 +198,7 @@ export class FormFilter extends PureComponent {
                         <div className="form-group">
                             <CheckBox id="IsGetAll"
                                 checked={this.props.isGetAll}
-                                onChange={(checked) => this.props.changeIsGetAll(checked)}
+                                onChange={checked => this.props.changeIsGetAll(checked)}
                                 label={LangHelper.getSingleResource("GetAll")} />
                         </div>
                     </div>
@@ -198,7 +208,7 @@ export class FormFilter extends PureComponent {
                             {this._renderReasonSelectList()}
                         </div>
                     </div>
-                    <div className="col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2">
+                    <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource("Username")}</label>
                             <AutoComplete
@@ -207,7 +217,7 @@ export class FormFilter extends PureComponent {
                                 htmlAttributes={{ placeholder: LangHelper.getSingleResource("ExternalIdOrSystemId") }} />
                         </div>
                     </div>
-                    <div className="col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2">
+                    <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource("Currency")}</label>
                             {this._renderCurrencySelectList()}
@@ -234,7 +244,7 @@ export class FormFilter extends PureComponent {
 
 function mapDispatchToProps(dispatch) {
     const { setDateRange, changeIsGetAll, setUsername, setSelectedCurrency, setSelectedParams, searchPlayer, setPagingOption,
-        getUserGuideContent, setSelectedBaseCurrency, setReason, setSubsidiaryList } = ActionCreators;
+        getUserGuideContent, setSelectedBaseCurrency, setReason, setSubsidiaryList, setSubsidiarySearch } = ActionCreators;
     return bindActionCreators(Object.assign({}, {
         setDateRange,
         changeIsGetAll,
@@ -246,13 +256,14 @@ function mapDispatchToProps(dispatch) {
         searchPlayer,
         setPagingOption,
         setSubsidiaryList,
+        setSubsidiarySearch,
         getUserGuideContent
     }), dispatch);
 }
 
 function mapStateToProps(state) {
     const { dateRange, isGetAll, selectedCurrency, selectedParams, username, pagingOption, selectedTabKey,
-        userGuideContent, selectedBaseCurrency, selectedReason, selectedSubsidiary } = state;
+        userGuideContent, selectedBaseCurrency, selectedReason, selectedSubsidiary, subsidiarySearch } = state;
     return Object.assign({}, {
         dateRange,
         isGetAll,
@@ -264,6 +275,7 @@ function mapStateToProps(state) {
         selectedParams,
         pagingOption,
         selectedTabKey,
+        subsidiarySearch,
         userGuideContent
     });
 };

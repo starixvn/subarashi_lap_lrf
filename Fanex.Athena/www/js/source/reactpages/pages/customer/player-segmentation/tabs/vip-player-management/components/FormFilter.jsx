@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import Select from 'react-select'
 import MultipleSelect, { TreeViewSelect } from '@9softstudio/react-multiselect'
 import AutoComplete from '@jsroot/components/auto-complete'
+import CheckBox from '@jsroot/components/CheckBox'
 import CollapsiblePanel from '@jsroot/components/collapsible-panel'
 import UserGuide from '@jsroot/components/UserGuide'
 import LangHelper from '@jsroot/lib/langHelper'
@@ -127,15 +128,23 @@ export class FormFilter extends PureComponent {
         return (
             <CollapsiblePanel className="page-filter" stickyFooter={this._renderStickyFooter()}>
                 <div className="row">
-                    {AppData.viewType !== ViewType.Normal ? (<div className="col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2">
+                    {AppData.viewType !== ViewType.Normal && this.props.subsidiarySearch && (<div className="col-12 col-md-2 col-sm-3 col-lg-3 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">
                                 {AppData.viewType === ViewType.WhiteLabel ? LangHelper.getSingleResource("WhiteLabel") : LangHelper.getSingleResource("Subsidiary")}
                             </label>
                             {this._renderSubsidiaryTreeView()}
                         </div>
-                    </div>) : null}
-                    <div className="col-12 col-md-4 col-sm-3 col-lg-4 col-xl-2">
+                    </div>)}
+                    {AppData.viewType !== ViewType.Normal && <div className="col-12 col-md-2 col-sm-2 col-lg-2 col-xl-2">
+                        <div className="form-group">
+                            <CheckBox id="SubsidiarySearch"
+                                checked={this.props.subsidiarySearch}
+                                onChange={checked => this.props.setSubsidiarySearch(checked)}
+                                label={LangHelper.getSingleResource("SubsidiarySearch")} />
+                        </div>
+                    </div>}
+                    <div className="col-12 col-md-2 col-sm-3 col-lg-4 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource("Vip")}</label>
                             {this._renderVipOptionSelectList()}
@@ -150,13 +159,13 @@ export class FormFilter extends PureComponent {
                                 htmlAttributes={{ placeholder: LangHelper.getSingleResource("ExternalIdOrSystemId") }} />
                         </div>
                     </div>
-                    <div className="col-12 col-md-4 col-sm-3 col-lg-3 col-xl-2">
+                    <div className="col-12 col-md-2 col-sm-3 col-lg-3 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource("Currency")}</label>
                             {this._renderCurrencySelectList()}
                         </div>
                     </div>
-                    <div className="col-12 col-md-4 col-sm-3 col-lg-2 col-xl-1">
+                    <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-1">
                         <div className="form-group">
                             <div className="button-group">
                                 <button type="button" className="btn btn-submit" disabled={isDisabledSubmit} onClick={this._submit}>{LangHelper.getSingleResource("Submit")}</button>
@@ -171,7 +180,7 @@ export class FormFilter extends PureComponent {
 
 function mapDispatchToProps(dispatch) {
     const { setDateRange, setSelectedVipOption, setUsername, setSelectedCurrency, setSelectedParams, searchPlayer,
-        setPagingOption, setSubsidiaryList, getUserGuideContent } = ActionCreators;
+        setPagingOption, setSubsidiaryList, getUserGuideContent, setSubsidiarySearch } = ActionCreators;
     return bindActionCreators(Object.assign({}, {
         setSelectedVipOption,
         setDateRange,
@@ -181,13 +190,14 @@ function mapDispatchToProps(dispatch) {
         searchPlayer,
         setPagingOption,
         setSubsidiaryList,
-        getUserGuideContent
+        getUserGuideContent,
+        setSubsidiarySearch
     }), dispatch);
 }
 
 function mapStateToProps(state) {
     const { dateRange, selectedVipOption, selectedCurrency, selectedParams, username, pagingOption,
-        selectedTabKey, userGuideContent, selectedSubsidiary } = state;
+        selectedTabKey, userGuideContent, selectedSubsidiary, subsidiarySearch } = state;
     return Object.assign({}, {
         selectedVipOption,
         dateRange,
@@ -197,7 +207,8 @@ function mapStateToProps(state) {
         pagingOption,
         selectedTabKey,
         userGuideContent,
-        selectedSubsidiary
+        selectedSubsidiary,
+        subsidiarySearch
     });
 };
 

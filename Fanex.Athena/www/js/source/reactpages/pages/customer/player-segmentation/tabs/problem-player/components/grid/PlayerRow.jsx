@@ -2,15 +2,17 @@ import React from 'react';
 import { Row, Cell } from '@9softstudio/react-grid';
 import NumberFormat from '@jsroot/lib/numberFormat';
 import VipSwitcherCell from '../../../../components/VipSwitcherCell';
+import { ViewType } from '../../../../lib/constants';
 
 const PlayerRow = (props) => {
-    const { dataItem, index, hasVipManagement } = props;
-    const { custId, externalId, systemId, markDate, reducedMaxPerEvent, reducedMaxPerBet, reasonList } = dataItem;
+    const { dataItem, index, hasVipManagement, showSubsidiary } = props;
+    const { custId, subsidiary, externalId, systemId, markDate, reducedMaxPerEvent, reducedMaxPerBet, reasonList } = dataItem;
 
     const _renderReasonList = () => reasonList.map(reason => <div>{reason}</div>);
 
     return (
         <Row key={`player_row_${custId}`}>
+            {showSubsidiary && <Cell className="left-align">{subsidiary}</Cell>}
             <Cell className="left-align">{externalId}</Cell>
             <Cell className="left-align">{systemId}</Cell>
             <Cell className="right-align">{NumberFormat.format(reducedMaxPerEvent, 2)}</Cell>

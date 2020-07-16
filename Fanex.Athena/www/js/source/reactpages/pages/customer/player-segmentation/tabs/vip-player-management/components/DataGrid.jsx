@@ -6,8 +6,9 @@ import { Table } from '@9softstudio/react-grid';
 import CheckBox from '@jsroot/components/CheckBox'
 import PlayerRow from './grid/PlayerRow';
 import NoDataTitle from '@jsroot/components/NoDataTitle';
+import AppData from '@jsroot/lib/AppData';
 import GridHelper from '../../../lib/helpers/gridHelper';
-import { dataGridHeaders } from '../lib/constants';
+import { getDataGridHeaders } from '../lib/helpers/gridHelper';
 
 const MAX_WIDTH_PAGE = 1920;
 
@@ -23,6 +24,8 @@ export const DataGrid = (props) => {
         return <NoDataTitle />;
     }
 
+    const showSubsidiary = GridHelper.isShowSubsidiary(selectedParams.subsidiarySearch);
+
     const _dataGridHeaders = [
         {
             key: 'CheckAll', text: null, colWidth: 30, childComponent: <CheckBox id="IsCheckAll"
@@ -37,12 +40,12 @@ export const DataGrid = (props) => {
                     setPlayerList(newPlayerList);
                 }} />
         },
-        ...dataGridHeaders
+        ...getDataGridHeaders(showSubsidiary)
     ]
 
     const _renderDataSection = dataList => dataList.map((dataItem, index) => {
         const { isSelected, ...rest } = dataItem;
-        return <PlayerRow {...rest} index={index} /> 
+        return <PlayerRow {...rest} index={index} showSubsidiary={showSubsidiary} /> 
     })
 
     const _handleSort = (orderCol, sortType) => {
