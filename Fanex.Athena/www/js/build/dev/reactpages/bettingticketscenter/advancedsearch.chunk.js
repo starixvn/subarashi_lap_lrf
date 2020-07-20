@@ -6955,7 +6955,7 @@ class BetList {
   }
 
   getPPJackpotWonDetailUrl(rootUrl, baseCurrency, transId, custId, betTypeId) {
-    let url = rootUrl + 'JackpotWonDetailsBetList/Details';
+    let url = rootUrl + 'JackpotWonBetList/Detail';
     url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
     url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
     url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'bettype', betTypeId);

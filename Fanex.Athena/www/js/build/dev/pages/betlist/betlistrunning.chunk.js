@@ -4264,7 +4264,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 showDetailPopUp(url, { width: 890, height: popH + 50, title: title });
             },
             showPPJackpotWonDetails: function (transId, custId, betTypeId) {
-                let url = Site.resolveClientUrl('JackpotWonDetailsBetList/Details');
+                let url = Site.resolveClientUrl('JackpotWonBetList/Detail');
                 url = QueryString.setParam(url, 'transId', transId);
                 url = QueryString.setParam(url, 'custId', custId);
                 url = QueryString.setParam(url, 'betType', betTypeId);
