@@ -3292,6 +3292,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Jackpot Won Details.
+        /// </summary>
+        public static string JackpotWonDetails {
+            get {
+                return ResourceManager.GetString("JackpotWonDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Jan.
         /// </summary>
         public static string Jan {

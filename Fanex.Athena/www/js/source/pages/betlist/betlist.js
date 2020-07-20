@@ -758,6 +758,18 @@
 
                 showDetailPopUp(url, { width: 890, height: popH + 50, title: title });
             },
+            showPPJackpotWonDetails: function (transId, custId, betTypeId) {
+                let url = Site.resolveClientUrl('JackpotWonDetailsBetList/Details');
+                url = QueryString.setParam(url, 'transId', transId);
+                url = QueryString.setParam(url, 'custId', custId);
+                url = QueryString.setParam(url, 'betType', betTypeId);
+
+                const popH = Math.min($(window).height() - 100, 550);
+                const title = Site.getSingleResource('ProductPP') + ' - ' +
+                    Site.getSingleResource('JackpotWonDetails');
+
+                showDetailPopUp(url, { width: 890, height: popH + 50, title: title });
+            },
             showVideoPokerGameDetails: function (transId, winlostDate, custId, transType) {
                 let url = Site.resolveClientUrl('CardClubBetList/Detail');
                 url = QueryString.setParam(url, 'transId', transId);
@@ -895,6 +907,7 @@
                 window.ViewCashOutHistory = _me.viewCashOutHistory;
                 window.ShowBonusDetails = _me.showBonusDetails;
                 window.showPPDetails = _me.showPPDetails;
+                window.showPPJackpotWonDetails = _me.showPPJackpotWonDetails;
                 window.showVideoPokerGameDetails = _me.showVideoPokerGameDetails;
                 window.showSingleMatchParlayDetail = _me.showSingleMatchParlayDetail;
                 window.showSGDetails = _me.showSGDetails;

@@ -28,6 +28,7 @@
                 CustomerCommVisible = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm
             };
             metaModel.HiddenColumns = HiddenColumns;
+
             metaModel.Title = GetBetListDetailTitle(ViewResources.ProductPP, metaModel.Date);
 
             return await ProcessExportExcel(metaModel, "PPDetail").ConfigureAwait(false);

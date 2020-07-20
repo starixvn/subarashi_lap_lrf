@@ -2806,4 +2806,7 @@
   <data name="ExtraPayout" xml:space="preserve">
     <value>Extra Payout</value>
   </data>
+  <data name="JackpotWonDetails" xml:space="preserve">
+    <value>Jackpot Won Details</value>
+  </data>
 </root>
