@@ -13,7 +13,7 @@ const MAX_WIDTH_PAGE = 1920;
 
 export const DataGrid = (props) => {
     const MAX_WIDTH = Math.min(document.body.clientWidth, MAX_WIDTH_PAGE);
-    const { playerList, pagingOption, selectedParams, selectedTabKey, subsidiarySearch, setPagingOption, searchPlayer } = props;
+    const { playerList, pagingOption, selectedParams, selectedTabKey, setPagingOption, searchPlayer, setSelectedPlayer } = props;
 
     if (playerList == null) {
         return null;
@@ -23,9 +23,13 @@ export const DataGrid = (props) => {
     }
 
     const showSubsidiary = GridHelper.isShowSubsidiary(selectedParams.subsidiarySearch);
+    
+    const onSelectPlayer = React.useCallback(custId => {
+        setSelectedPlayer(custId)
+    });
 
     const _renderDataSection = dataList => dataList.map((dataItem, index) => {
-        return <PlayerRow {...{ dataItem, index, hasVipManagement: AppData.HasVipManagement, showSubsidiary }} />
+        return <PlayerRow {...{ dataItem, index, hasVipManagement: AppData.HasVipManagement, showSubsidiary, onSelectPlayer }} />
     })
 
     const _handleSort = (orderCol, sortType) => {
@@ -59,8 +63,8 @@ export const DataGrid = (props) => {
 }
 
 function mapDispatchToProps(dispatch) {
-    const { searchPlayer, setPagingOption } = ActionCreators;
-    return bindActionCreators({ setPagingOption, searchPlayer }, dispatch);
+    const { searchPlayer, setPagingOption, setSelectedPlayer } = ActionCreators;
+    return bindActionCreators({ setPagingOption, searchPlayer, setSelectedPlayer }, dispatch);
 }
 
 function mapStateToProps(state) {

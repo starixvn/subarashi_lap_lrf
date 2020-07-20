@@ -28,7 +28,6 @@ export class AppContainer extends React.Component {
             <AppLayout>
                 <div id="player-segmentation">
                     <TabMenu selectedTabMenu={selectedTabKey} onClickTabMenu={this._onClickTabMenu} tabMenuList={tabMenuList} />
-
                     {Component && <Suspense fallback={<div>Loading...</div>}>
                         <Component selectedTabKey={selectedTabKey} />
                     </Suspense>}
