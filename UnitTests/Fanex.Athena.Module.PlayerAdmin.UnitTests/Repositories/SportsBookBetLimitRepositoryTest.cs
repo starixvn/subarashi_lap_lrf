@@ -18,10 +18,12 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Repositories
     public class SportsBookBetLimitRepositoryTest
     {
         private const string MixedSportId = "99MP";
+        private const string SoccerParlay = "1MP";
 
         private readonly string[] SportTypes =
         {
             ((int)SportType.Soccer).ToString(),
+            SoccerParlay,
             ((int)SportType.BasketBall).ToString(),
             ((int)SportType.FootBall).ToString(),
             ((int)SportType.Tennis).ToString(),
