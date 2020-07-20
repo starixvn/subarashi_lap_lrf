@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 7/14/2020 4:49:44 PM
+// Generated at: 7/17/2020 2:12:37 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -454,6 +454,7 @@ window._language_en_US = {
   InvalidRequestOrNotAuthorizedMsg: "Invalid request or you are not authorized to access the requested resource!",
   InvalidSubsidiaryNameMsg: "Please contact admin to check your subsidiary name.",
   IsNeutral: "(N)",
+  JackpotWonDetails: "Jackpot Won Details",
   Jan: "Jan",
   January: "January",
   Jul: "Jul",
