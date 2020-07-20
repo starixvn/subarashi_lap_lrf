@@ -53,5 +53,11 @@
         {
             return datetime.Date.AddDays(1).AddSeconds(-3);
         }
+
+        public static DateTime StartOfWeek(this DateTime datetime, DayOfWeek startOfWeek)
+        {
+            int diff = (7 + (datetime.DayOfWeek - startOfWeek)) % 7;
+            return datetime.AddDays(-1 * diff).Date;
+        }
     }
 }

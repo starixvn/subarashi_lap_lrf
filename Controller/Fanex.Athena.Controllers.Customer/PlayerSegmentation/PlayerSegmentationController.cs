@@ -13,7 +13,7 @@
     [SessionState(SessionStateBehavior.ReadOnly)]
     [CheckUMFilter]
     [FunctionAuthorization(PermissionKeys.PlayerSegmentation)]
-    public class PlayerSegmentationController : CultureBaseController
+    public partial class PlayerSegmentationController : CultureBaseController
     {
         private const string VIP_LIST_TEMPLATE_PATH = "~/App_Data/Template/Customers/PlayerSegmentation/VipPlayerUploadTemplate.xls";
 

@@ -102,6 +102,7 @@
     <Compile Include="ViewModel\CustomerLog\CustomerLogViewModel.cs" />
     <Compile Include="ViewModel\CustomerLog\LogInLogViewModel.cs" />
     <Compile Include="ViewModel\LogInfoViewModel.cs" />
+    <Compile Include="ViewModel\PlayerSegmentation\PlayerSegmentationBetListViewModel.cs" />
     <Compile Include="ViewModel\PlayerSegmentation\VipPlayerViewModel.cs" />
     <Compile Include="ViewModel\PlayerSegmentation\ProblemPlayerViewModel.cs" />
     <Compile Include="ViewModel\PlayerSegmentation\PlayerSegmentationViewModel.cs" />
