@@ -1,4 +1,4 @@
-﻿// Generated at: 7/14/2020 4:49:34 PM
+﻿// Generated at: 7/17/2020 2:12:48 PM
 var _language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -359,6 +359,7 @@ InvalidRequestMsg:"Request is not valid",
 InvalidRequestOrNotAuthorizedMsg:"Invalid request or you are not authorized to access the requested resource!",
 InvalidSubsidiaryNameMsg:"Please contact admin to check your subsidiary name.",
 IsNeutral:"(N)",
+JackpotWonDetails:"Jackpot Won Details",
 Jan:"Jan",
 January:"January",
 Jul:"Jul",
