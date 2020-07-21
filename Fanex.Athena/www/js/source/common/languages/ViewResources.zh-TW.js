@@ -1,4 +1,4 @@
-﻿// Generated at: 7/17/2020 2:12:37 PM
+﻿// Generated at: 7/21/2020 4:32:40 PM
 window._language_zh_TW = {
 AA:"客客",
 AbnormalBet:"非正規註單",
@@ -275,6 +275,7 @@ InvalidParams:"Invalid parameters",
 InvalidRequestMsg:"請求無效",
 InvalidRequestOrNotAuthorizedMsg:"無效的請求或您未被授權訪問所請求的資源",
 IsNeutral:"(中)",
+JackpotWonDetails:"頭獎明細",
 Jan:"一月",
 January:"一月",
 Jul:"七月",
