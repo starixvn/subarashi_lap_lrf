@@ -2069,4 +2069,7 @@
   <data name="ExtraPayout" xml:space="preserve">
     <value>额外派彩</value>
   </data>
+  <data name="JackpotWonDetails" xml:space="preserve">
+    <value>头奖明细</value>
+  </data>
 </root>
