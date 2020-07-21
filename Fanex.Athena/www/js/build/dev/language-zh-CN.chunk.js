@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 7/17/2020 2:12:37 PM
+﻿// Generated at: 7/21/2020 4:32:40 PM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -410,6 +410,7 @@ InvalidPlayerUpdateVipStatusSingle:"无效的玩家: {0}",
 InvalidRequestMsg:"请求无效",
 InvalidRequestOrNotAuthorizedMsg:"无效的请求或您未被授权访问所请求的资源",
 IsNeutral:"(中)",
+JackpotWonDetails:"头奖明细",
 Jan:"一月",
 January:"一月",
 Jul:"七月",
