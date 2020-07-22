@@ -29,7 +29,7 @@
             };
             metaModel.HiddenColumns = HiddenColumns;
 
-            metaModel.Title = $"{ViewResources.ProductPP} - {ViewResources.JackpotWonDetails} - { metaModel.Date.ToString("MM/dd/yyyy")}";
+            metaModel.Title = $"{ViewResources.ProductPP} - {ViewResources.JackpotWonDetails}";
 
             return await ProcessExportExcel(metaModel, "PP_JackpotWonDetails").ConfigureAwait(false);
         }
