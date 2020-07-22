@@ -34,5 +34,5 @@ export const DefaultPagingOption = {
 }
 
 export const Url = {
-    AbnormalBetList: '/Api/PlayerSegmentation/AbnormalBets'
+    AbnormalBetList: 'Api/PlayerSegmentation/AbnormalBets'
 }

@@ -1,4 +1,4 @@
-import LangHelper from '@jsroot/lib/langHelper'
+import LangHelper from '@jsroot/lib/langHelper';
 
 export const dataGridFullHeaders = [
     { key: 'subsidiary', text: LangHelper.getSingleResource('Subsidiary'), colWidth: 100, show: false },

@@ -36,7 +36,7 @@ export const Content = props => {
                 ...selectedPlayer,
                 ...{ baseCurrency: selectedParams.baseCurrency }
             }
-            const betListUrl = BetListHelper.buildAbnormalBetListUrl(window.rootUrl, params);
+            const betListUrl = BetListHelper.buildAbnormalBetListUrl(params);
             return (<Popup isShow={true}
             iframeUrl={betListUrl}
             title={LangHelper.getSingleResource('AbnormalBet')}
