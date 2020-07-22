@@ -7,7 +7,7 @@
     using Base;
     using Base.Entities;
     using Base.Extension;
-
+    using Fanex.Athena.Model.Core.DTO.Common;
     using Model.Report.DTO.LiveReports;
     using Model.Report.MetaModel;
     using Model.Report.ViewModel.LiveReports;

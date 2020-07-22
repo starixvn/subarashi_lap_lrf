@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
-
-using Fanex.Athena.Excel.Base.Entities;
+using Fanex.Athena.Model.Core.DTO.Common;
 using Fanex.Athena.Model.Report.DTO;
 
 using NPOI.SS.UserModel;

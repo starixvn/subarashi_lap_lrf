@@ -102,7 +102,8 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
                         SpecialLevel = Convert.ToInt32(reader["SpecialLevel"]),
                         OddsGroup = reader["OddsGroup"].ToString(),
                         CurrentBalance = Convert.ToDecimal(reader["TotalBalance"]),
-                        OutstandingBalance = Convert.ToDecimal(reader["Outstanding"])
+                        OutstandingBalance = Convert.ToDecimal(reader["Outstanding"]),
+                        CommissionGroup = Convert.ToString(reader["GroupName"])
                     });
                 }
             }

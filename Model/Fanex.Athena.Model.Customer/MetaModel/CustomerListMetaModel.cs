@@ -57,6 +57,8 @@ namespace Fanex.Athena.Model.Customer.MetaModel
 
         public bool IsViewOnSubsidiary { get; set; }
 
+        public IDictionary<string, bool> ProductPermissions { get; set; }
+
         public override bool IsValid => base.IsValid
             && (!IsViewOnSubsidiary || !string.IsNullOrWhiteSpace(SubsidiaryList));
     }

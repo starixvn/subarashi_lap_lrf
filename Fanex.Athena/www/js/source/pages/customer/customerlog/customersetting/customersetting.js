@@ -5,6 +5,8 @@ define(['jquery', 'common/site', 'components/pluginhelper/autocomplete', '../com
         const _me = {
             initialize: function () {
                 CustomerLogService.initialize();
+                CustomerLogService.informRemoveFunction();
+
                 _me.initEvent();
 
                 AutoComplete.initialize({
@@ -37,7 +39,7 @@ define(['jquery', 'common/site', 'components/pluginhelper/autocomplete', '../com
             loadGrid: function () {
                 const gridOption = CommonOption.gridOption;
                 const url = _me.getUrl();
-                
+
                 const colNames = Site.clone(CommonOption.getColNames());
                 gridOption.colNames = Site.getResources(colNames);
 

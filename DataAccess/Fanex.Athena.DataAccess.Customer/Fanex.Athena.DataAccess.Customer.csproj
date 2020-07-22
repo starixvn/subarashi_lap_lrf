@@ -24,7 +24,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>Fanex.Athena.DataAccess.Customer-1.ruleset</CodeAnalysisRuleSet>
     <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -78,7 +78,10 @@
     <Compile Include="CustomerListDataAccess.cs" />
     <Compile Include="CustomerLogDataAccess.cs" />
     <Compile Include="DormantCustomerListDataAccess.cs" />
-    <Compile Include="GroupComDataAccess.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="GroupComDataAccess.cs">	
+      <SonarQubeExclude>true</SonarQubeExclude>
+	</Compile>
     <Compile Include="Interfaces\ICustomerDataAccess.cs" />
     <Compile Include="Interfaces\ICustomerCommDataAccess.cs" />
     <Compile Include="Interfaces\IDormantCustomerListDataAccess.cs" />
@@ -113,6 +116,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Fanex.Athena.DataAccess.Customer-1.ruleset" />
     <None Include="Fanex.Athena.DataAccess.Customer.ruleset" />
     <None Include="packages.config" />
   </ItemGroup>

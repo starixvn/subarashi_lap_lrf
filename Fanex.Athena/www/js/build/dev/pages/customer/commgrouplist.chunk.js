@@ -844,7 +844,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
             $('#comm-group-list').on('click', '.customer-list-link', function (e) {
                 CustomerCommGroup.goToCustomerList($(e.target).data('id'));
-            });          
+            });
         }
 
         function confirmDeleteCommGroup(groupId) {
@@ -876,7 +876,11 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                     if (result.Code > 0) {
                         _me.showResultPopup('Error', result.Message);
                     } else {
-                        Site.redirect(Site.resolveClientUrl('CustomerComGroup/Index'));
+                        _me.showResultPopup('Success', Site.getSingleResource('MessageSuccess'));
+
+                        setTimeout(() => {
+                            Site.redirect(Site.resolveClientUrl('CustomerComGroup/Index'));
+                        }, 3000);
                     }
 
                     Site.unBlockUI();
@@ -985,8 +989,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 width: 380
             };
 
-            if ($('#result-del-comm-group').length > 0)
-            {
+            if ($('#result-del-comm-group').length > 0) {
                 $('#result-msg').html(message);
             }
 
@@ -1015,6 +1018,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         return _me;
     }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
 
 /***/ }),
 

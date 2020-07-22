@@ -3,6 +3,8 @@ import NumberFormat from '@jsroot/lib/numberFormat';
 import { headerCellStyle, bodyCellStyle } from '@jsroot/constants/excelStyle';
 import { fields, headerText } from './constants';
 import { getSpecialLevelText, getBaStatusText, getPlayerStatus } from './helpers/utils';
+import LangHelper from '@jsroot/lib/langHelper';
+import $ from 'jquery';
 
 const HEADER_ROW_INDEX = 0;
 const DATA_ROW_INDEX = 1;
@@ -18,10 +20,11 @@ const displayedTextByField = {
 const fieldListWithEmptyValueByStatus = [fields.CurrentBalance, fields.OutstandingBalance, fields.OddsGroup, fields.BaStatus, fields.SpecialLevel];
 
 export default class ReportExcel {
-    constructor(data, displayedColumn, title) {
+    constructor(data, displayedColumn, hasCommPermissionRead, title) {
         this.data = data;
         this.title = title;
         this.displayedColumn = displayedColumn;
+        this.hasCommPermissionRead = hasCommPermissionRead;
 
         this.worksheet = {};
         this.currentRowIndex = DATA_ROW_INDEX;
@@ -47,6 +50,7 @@ export default class ReportExcel {
                 c: i,
                 r: HEADER_ROW_INDEX
             });
+
             this.worksheet[address] = {
                 t: "s",
                 v: headerText[field] || '',
@@ -90,6 +94,10 @@ export default class ReportExcel {
             value = NumberFormat.roundDown(value, 2);
         }
 
+        if (columnConfig.field === fields.CommissionGroup) {
+            value = $(".td-comm-" + item.IbcCustId).html();
+        }
+
         const displayedTextFunc = displayedTextByField[columnConfig.field];
         const displayedValue = this._shouldSetEmpty(value) ? '' :
             (displayedTextFunc ? displayedTextFunc(value) : value);
@@ -120,7 +128,7 @@ export default class ReportExcel {
     }
 
     _getcolumnConfigs() {
-        return [{
+        var result = [{
             field: fields.Status,
             [MAIN_SECTION_STYLE]: bodyCellStyle.left,
             width: 60
@@ -168,6 +176,16 @@ export default class ReportExcel {
             field: fields.Email,
             [MAIN_SECTION_STYLE]: bodyCellStyle.left,
             width: 200
-        }].filter(x => !!this.displayedColumn[x.field]);
+        }];
+
+        if (this.hasCommPermissionRead) {
+            result.push({
+                field: fields.CommissionGroup,
+                [MAIN_SECTION_STYLE]: bodyCellStyle.center,
+                width: 120
+            });
+        }
+
+        return result.filter(x => !!this.displayedColumn[x.field]);
     }
 }

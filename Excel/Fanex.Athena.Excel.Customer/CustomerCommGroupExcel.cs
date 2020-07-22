@@ -1,63 +1,60 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="CustomerCommGroup.cs" company="">
-// Copyright (c) . All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-
-namespace Fanex.Athena.Excel.Customer
+﻿namespace Fanex.Athena.Excel.Customer
 {
     using System;
+    using System.Collections.Generic;
     using System.Data;
     using Base;
-    using Base.Entities;
     using Common;
     using Fanex.Athena.Excel.Base.Extension;
+    using Fanex.Athena.Model.Core.Helper;
+    using Fanex.Athena.Model.Customer.ViewModel.CommissionGroupList;
     using NPOI.SS.UserModel;
     using Resources;
 
-    /// <summary>
-    /// Customer group commission.
-    /// </summary>
     public class CustomerCommGroupExcel : ReportBase
     {
-        private const int ColumnDefaultGroup = 2;
-        private const int ColumnGroupName = 1;
-        private const int ColumnNoOfCustomer = 3;
-        private const int ColumnSbCommission = 4;
-        private const int ColumnNgCommission = 5;
-        private const int ColumnCsCommission = 6;
-
-        private const int ColumnTemplateCount = 7;
+        private const int ColumnTemplateCount = 11;
         private const int RowContentTemplate = 2;
         private const int RowNoInfoTemplate = 5;
 
-        private readonly string _excelTitle = ViewResources.CommissionGroupList;
-
         private readonly DataTable _exportData;
+        private readonly Dictionary<string, bool> hasColumnInTable;
+        private readonly IDictionary<string, string> hardcodedColumns;
+        private readonly IDictionary<string, bool> productPermissions;
 
         public CustomerCommGroupExcel(
-                                 string templatePath,
-                                 DataTable exportData,
-                                 ShowingOption showingOption)
-            : base(templatePath, exportData.Rows.Count, showingOption)
+            string templatePath,
+            DataTable exportData,
+            CommissionGroupListViewModel viewModel)
+            : base(templatePath, exportData.Rows.Count, null)
         {
             _exportData = exportData;
+            productPermissions = viewModel.ProductPermissions;
+            hardcodedColumns = CommissionGroupHelper.MapHardcodedNameFromDB(viewModel.ProductPermissions, isUpdate: false);
+            hasColumnInTable = new Dictionary<string, bool>();
+            foreach (var p in hardcodedColumns)
+            {
+                hasColumnInTable.Add(p.Key, _exportData.Columns.Contains(p.Value + "Comm"));
+            }
         }
 
         protected override void AssignHeader(ISheet sheet)
         {
-            var headerTextList = new[]
+            var headerTextList = new List<string>
             {
                 "#",
                 ViewResources.GroupName,
                 ViewResources.DefaultGroup,
-                ViewResources.NoOfCustmer,
-                ViewResources.SBComm + " (%)",
-                ViewResources.NGComm + " (%)",
-                ViewResources.CSComm + " (%)"
+                ViewResources.NoOfCustmer
             };
+
+            foreach (var p in hardcodedColumns)
+            {
+                headerTextList.Add(ViewResources.ResourceManager.GetString("Product" + p.Key));
+            }
+
             var row = sheet.CopyRow(TemplateSheet, RowHeaderTemplate);
-            for (int i = 0; i < headerTextList.Length; i++)
+            for (int i = 0; i < headerTextList.Count; i++)
             {
                 row.Cells[i].SetCellValue(headerTextList[i]);
             }
@@ -68,38 +65,34 @@ namespace Fanex.Athena.Excel.Customer
             sheet.SetTextRowValue(TemplateSheet, RowNoInfoTemplate, RowContentTemplate, ColumnTemplateCount, ViewResources.NoInfo);
         }
 
-        /// <summary>
-        /// Assign data to excel sheet.
-        /// </summary>
-        /// <param name="sheet">Excel sheet.</param>
         protected override void AssignSheetData(ISheet sheet)
         {
             var rowCount = _exportData.Rows.Count;
             int index;
+            var currentColumn = 0;
 
             for (index = 0; index < rowCount; index++)
             {
+                currentColumn = 0;
                 var row = sheet.CopyRow(TemplateSheet, RowContentTemplate, index + RowContentTemplate);
                 var exportRow = _exportData.Rows[index];
-
                 var isDefault = Convert.ToBoolean(exportRow["IsDefault"].ToString());
-                var sportsbook = Converter.ToDecimal(exportRow["SBComm"].ToString()) * 100;
-                var numberGameCommValue = Converter.ToDecimal(exportRow["NGComm"].ToString()) * 100;
-                var rngCommValue = Converter.ToDecimal(exportRow["RNGComm"].ToString()) * 100;
 
-                row.Cells[ColumnIndex].SetCellValue(index + 1);
-                row.Cells[ColumnGroupName].SetCellValue(exportRow["GroupName"]);
-                row.Cells[ColumnDefaultGroup].SetCellValue(isDefault ? "X" : string.Empty);
-                row.Cells[ColumnNoOfCustomer].SetCellValue(exportRow["NumberOfCustomer"]);
-                row.Cells[ColumnSbCommission].SetCellValue(sportsbook.ToString("#,##0.00"));
-                row.Cells[ColumnNgCommission].SetCellValue(numberGameCommValue.ToString("#,##0.00"));
-                row.Cells[ColumnCsCommission].SetCellValue(rngCommValue.ToString("#,##0.00"));
+                row.Cells[currentColumn++].SetCellValue(index + 1);
+                row.Cells[currentColumn++].SetCellValue(exportRow["GroupName"]);
+                row.Cells[currentColumn++].SetCellValue(isDefault ? "X" : string.Empty);
+                row.Cells[currentColumn++].SetCellValue(exportRow["NumberOfCustomer"]);
+
+                foreach (var p in hardcodedColumns)
+                {
+                    row.Cells[currentColumn++].SetCellValue(GetCommValue(exportRow, p.Key));
+                }
             }
         }
 
         protected override void AssignTitle(ISheet sheet)
         {
-            sheet.SetTextRowValue(TemplateSheet, RowTitleTemplate, ColumnTemplateCount, _excelTitle);
+            sheet.SetTextRowValue(TemplateSheet, RowTitleTemplate, ColumnTemplateCount, ViewResources.CommissionGroupList);
 
             // Freeze 2 rows title and header
             sheet.CreateFreezePane(0, RowContentTemplate);
@@ -108,26 +101,31 @@ namespace Fanex.Athena.Excel.Customer
             ClearTemplate(sheet, RowContentTemplate);
         }
 
-        /// <summary>
-        /// Process UI, hide redundant row and column.
-        /// </summary>
-        /// <param name="sheet">Excel sheet.</param>
         protected override void ProcessUI(ISheet sheet)
         {
-            if (!ShowingOption.SBVisible)
-            {
-                sheet.HideColumn(ColumnSbCommission);
-            }
+            const int startCommissionColumnIndex = 4;
+            var currentColumn = startCommissionColumnIndex;
 
-            if (!ShowingOption.NGVisible)
+            foreach (var p in productPermissions)
             {
-                sheet.HideColumn(ColumnNgCommission);
-            }
+                if (!p.Value)
+                {
+                    sheet.HideColumn(currentColumn);
+                }
 
-            if (!ShowingOption.CSVisible)
-            {
-                sheet.HideColumn(ColumnCsCommission);
+                currentColumn++;
             }
+        }
+
+        public string GetCommValue(DataRow exportRow, string productCode)
+        {
+            var name = hardcodedColumns[productCode];
+            var value = hasColumnInTable.ContainsKey(productCode) && hasColumnInTable[productCode]
+                ? Converter.ToDecimal(exportRow[name + "Comm"].ToString())
+                : 0;
+
+            const int percent = 100;
+            return (value * percent).ToString("#,##0.00") + "%";
         }
     }
 }

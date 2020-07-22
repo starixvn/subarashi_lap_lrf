@@ -78,7 +78,8 @@
                 LicenseeWL = g.Sum(p => p.LicenseeWL),
                 TipAmount = g.Sum(p => p.TipAmount),
                 TipSharing = g.Sum(p => p.TipSharing),
-                AmountDue = g.Sum(p => p.AmountDue)
+                AmountDue = g.Sum(p => p.AmountDue),
+                CustomerCommission = g.Sum(p => p.CustomerCommission)
             }).ToList();
         }
     }

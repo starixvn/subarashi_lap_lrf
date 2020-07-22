@@ -1,16 +1,18 @@
-﻿@model IList<Fanex.Athena.Model.Customer.MetaModel.GroupCommMetaModel>
+﻿@using Fanex.Athena.Model.Customer.ViewModel.CommissionGroupList;
+@model CommissionGroupListViewModel
 @{
     ViewBag.Title = "LAP - " + ViewResources.GroupManagement;
     Layout = "~/Views/Desktop/Shared/_Layout.cshtml";
 }
 @section css {
     <link href="@Url.ContentLinkByEnv("/www/css/build/pages/customer/commgrouplist.css")" rel="stylesheet" />
+    <link href="@Url.ContentLinkByEnv("/www/css/build/pages/customer/customerlog.css")" rel="stylesheet" />
 }
 @section js {
     <script src="@Url.ContentLinkByEnv("/www/js/build/pages/customer/commgrouplist.chunk.js")"></script>
 }
-
-@{ 
+@{
+    Html.RenderPartial("~/Views/Desktop/Customer/CustomerComm/Menu.cshtml");
     Html.RenderPartial("~/Views/Desktop/Customer/CustomerComm/Header.cshtml");
-    Html.RenderPartial("~/Views/Desktop/Customer/CustomerComm/Content.cshtml"); 
+    Html.RenderPartial("~/Views/Desktop/Customer/CustomerComm/Content.cshtml");
 }

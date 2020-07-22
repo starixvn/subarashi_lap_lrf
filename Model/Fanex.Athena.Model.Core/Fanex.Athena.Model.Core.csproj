@@ -24,7 +24,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>Fanex.Athena.Model.Core-1.ruleset</CodeAnalysisRuleSet>
     <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -118,6 +118,7 @@
     <Compile Include="DTO\Common\Match.cs" />
     <Compile Include="DTO\Common\ApiPagingResult.cs" />
     <Compile Include="DTO\Common\ResultInfoGeneric.cs" />
+    <Compile Include="DTO\Common\ShowingOption.cs" />
     <Compile Include="DTO\Configuration\FakeLicenseeSetting.cs" />
     <Compile Include="DTO\Configuration\ReportSetting.cs" />
     <Compile Include="DTO\Common\Product.cs" />
@@ -135,6 +136,7 @@
     <Compile Include="DTO\Users\UserRole.cs" />
     <Compile Include="Helper\BettypeHelper.cs" />
     <Compile Include="Helper\MathHelper.cs" />
+    <Compile Include="Helper\CommissionGroupHelper.cs" />
     <Compile Include="Helper\MetaModelValidationHelper.cs" />
     <Compile Include="Helper\ProductHelper.cs" />
     <Compile Include="MetaModel\Common\SPLogMetaModel.cs" />
@@ -186,6 +188,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Fanex.Athena.Model.Core-1.ruleset" />
     <None Include="Fanex.Athena.Model.Core.ruleset" />
     <None Include="packages.config" />
   </ItemGroup>

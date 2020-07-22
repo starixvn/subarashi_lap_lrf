@@ -21,5 +21,7 @@
         public bool BaStatus { get; set; }
 
         public int SpecialLevel { get; set; }
+
+        public string CommissionGroup { get; set; }
     }
 }

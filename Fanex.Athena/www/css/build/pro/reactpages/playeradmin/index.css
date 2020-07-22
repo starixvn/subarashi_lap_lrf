@@ -702,6 +702,8 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
       background-color: #ebeaea;
       height: 1px;
       margin: 0 10px; }
+  .popup-container .flat-popup iframe {
+    background-color: #fff; }
 
 :root {
   --swal-red: #F27474; }
@@ -1114,4 +1116,49 @@ iframe {
   background-color: #d5c8c8; }
 
 /*End Grid*/
+/*Batch Update*/
+.text-center {
+  text-align: center; }
+
+#chk-cust-0, .chk-cust {
+  cursor: pointer; }
+
+.ddl-batch-update {
+  width: 200px;
+  margin: 0 10px; }
+  .ddl-batch-update .Select-control, .ddl-batch-update.is-focused:not(.is-open) > .Select-control, .ddl-batch-update.is-open > .Select-control {
+    background-color: transparent;
+    border: none;
+    cursor: pointer; }
+  .ddl-batch-update .Select-control .Select-input {
+    height: 2.2rem;
+    padding: 0;
+    /*caret-color: transparent;*/
+    color: #fff;
+    background-color: transparent;
+    border: none; }
+    .ddl-batch-update .Select-control .Select-input > input {
+      padding: 0; }
+  .ddl-batch-update .Select-placeholder {
+    color: #fff;
+    padding-right: 42px;
+    text-align: right;
+    line-height: 2.2rem;
+    padding-left: 0; }
+  .ddl-batch-update.has-value.is-clearable.Select--single > .Select-control .Select-value {
+    text-align: right; }
+  .ddl-batch-update.has-value.Select--single > .Select-control .Select-value .Select-value-label, .ddl-batch-update.has-value.is-pseudo-focused.Select--single > .Select-control .Select-value .Select-value-label {
+    color: #fff;
+    cursor: pointer; }
+  .ddl-batch-update .Select-arrow {
+    border-top-color: #fff; }
+  .ddl-batch-update.is-open > .Select-control .Select-arrow {
+    border-color: transparent transparent #DEC3BD; }
+  .ddl-batch-update:hover .Select-placeholder,
+  .ddl-batch-update:hover.has-value.Select--single > .Select-control .Select-value .Select-value-label, .ddl-batch-update:hover.has-value.is-pseudo-focused.Select--single > .Select-control .Select-value .Select-value-label {
+    color: #DEC3BD; }
+  .ddl-batch-update:hover .Select-arrow-zone > .Select-arrow {
+    border-top-color: #DEC3BD; }
+
+/*End Batch Update*/
 

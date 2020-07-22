@@ -8,19 +8,17 @@ namespace Fanex.Athena.Controllers.BetList
 {
     #region Using
 
-    using Fanex.Athena.Model.Auth.DataDomain;
-    using Fanex.Athena.Service.StatelessCore.Utility;
-    using Fanex.Athena.Web.ActionFilter;
-
-    using Model.BetList.MetaModel;
-    using Model.BetList.ViewModel;
-    using Model.Core.DataDomain;
-
-    using Resources;
-
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Service.StatelessCore.Utility;
+    using Fanex.Athena.Web.ActionFilter;
+    using Model.BetList.MetaModel;
+    using Model.BetList.ViewModel;
+    using Model.Core.DataDomain;
+    using Resources;
 
     #endregion Using
 
@@ -105,7 +103,7 @@ namespace Fanex.Athena.Controllers.BetList
         {
             metaModel.UspKey = "Lrf_BetList_SelRunningByBettypeList";
 
-            metaModel.ShowingOption = new BetListShowingOption
+            metaModel.ShowingOption = new ShowingOption
             {
                 CustomerCommVisible = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm,
             };

@@ -3620,7 +3620,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
         const _me = {
             initialize: function () {
                 Site.initialize();
-                _me.informRemoveFunction();
                 Site.addUserGuide({
                     resourceName: 'CustomerLog',
                     title: Site.getSingleResource('CustomerLog')
@@ -3744,6 +3743,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
         const _me = {
             initialize: function () {
                 CustomerLog.initialize();
+                CustomerLog.informRemoveFunction();
+
                 _me.initEvent();
                 AutoComplete.initialize({
                     url: Site.resolveClientUrl('SearchCustomerAPI/SearchCustomer'),
@@ -3784,6 +3785,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
         return _me;
     }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
 
 /***/ }),
 

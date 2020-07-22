@@ -87,6 +87,22 @@ $colorRowText: #404040;
                 width: 50%;
             }
         }
+
+        .col-commission {
+            width: 70px;
+        }
+
+        tr.row-title {
+            td {
+                background-color: $bgHeader;
+                color: $colorHeader;
+                font-weight: bold;
+            }
+        }
+
+        &.tbl-group-comm {
+            table-layout: fixed;
+        }
     }
 
     .ui-icon {

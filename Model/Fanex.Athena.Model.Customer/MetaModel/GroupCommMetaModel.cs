@@ -1,19 +1,17 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="GroupCommMetaModel.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Model.Customer.MetaModel
+﻿namespace Fanex.Athena.Model.Customer.MetaModel
 {
+    using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Data;
+    using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Model.Core.Helper;
     using Resources;
 
-    /// <summary>
-    /// GroupCommissionMetaModel class.
-    /// </summary>
     public class GroupCommMetaModel
     {
+        private Dictionary<string, decimal> _commValues;
+
         private const int MaxGroupNameLength = 100;
 
         public GroupCommMetaModel()
@@ -38,42 +36,6 @@ namespace Fanex.Athena.Model.Customer.MetaModel
         public int NumberOfCustomer { get; set; }
 
         [Required]
-        public decimal SBComm { get; set; }
-
-        public int SBComm1 { get; set; }
-
-        public int SBComm2 { get; set; }
-
-        public int SBComm3 { get; set; }
-
-        [Required]
-        public decimal ParlayComm { get; set; }
-
-        public int ParlayComm1 { get; set; }
-
-        public int ParlayComm2 { get; set; }
-
-        public int ParlayComm3 { get; set; }
-
-        [Required]
-        public decimal NGComm { get; set; }
-
-        public int NGComm1 { get; set; }
-
-        public int NGComm2 { get; set; }
-
-        public int NGComm3 { get; set; }
-
-        [Required]
-        public decimal CSComm { get; set; }
-
-        public int CSComm1 { get; set; }
-
-        public int CSComm2 { get; set; }
-
-        public int CSComm3 { get; set; }
-
-        [Required]
         public string GroupColor { get; set; }
 
         public bool IsDefaultGroup { get; set; }
@@ -82,8 +44,69 @@ namespace Fanex.Athena.Model.Customer.MetaModel
 
         public bool IsResetDefault { get; set; }
 
-        public bool IsUpdateNG { get; set; }
+        public IDictionary<string, bool> ProductPermissions { get; set; }
 
-        public bool IsUpdateCS { get; set; }
+        public Dictionary<string, decimal> CommValues
+        {
+            get
+            {
+                if (_commValues == null)
+                {
+                    MapQuery();
+                }
+
+                return _commValues;
+            }
+            set
+            {
+                _commValues = value;
+            }
+        }
+
+        [Required]
+        public decimal SBComm { get; set; }
+
+        [Required]
+        public decimal ParlayComm { get; set; }
+
+        [Required]
+        public decimal NGComm { get; set; }
+
+        [Required]
+        public decimal CSComm { get; set; }
+
+        public decimal ABComm { get; set; }
+
+        public decimal VBComm { get; set; }
+
+        public decimal PPComm { get; set; }
+
+        public decimal FWComm { get; set; }
+
+        public void MapQuery()
+        {
+            CommValues = new Dictionary<string, decimal>();
+            CommValues.Add(Product.SB, SBComm);
+            CommValues.Add(CommissionGroupHelper.ParlayName, ParlayComm);
+            CommValues.Add(Product.NG, NGComm);
+            CommValues.Add(Product.CS, CSComm);
+            CommValues.Add(Product.VB, VBComm);
+            CommValues.Add(Product.PP, PPComm);
+            CommValues.Add(Product.FW, FWComm);
+        }
+
+        public void MapData(IDataReader reader, IDictionary<string, string> columns, IDictionary<string, bool> visibility)
+        {
+            // Support config for new products
+            GroupCommId = Convert.ToInt32(reader["GroupCommId"]);
+            GroupColor = Convert.ToString(reader["GroupColor"]);
+            IsDefaultGroup = Convert.ToBoolean(reader["IsDefault"]);
+            CommValues = new Dictionary<string, decimal>();
+            foreach (var c in columns)
+            {
+                var val = visibility[c.Key] ? reader[c.Value + "Comm"] : null;
+                CommValues[c.Key] = val == DBNull.Value ? 0 : Convert.ToDecimal(val);
+            }
+        }
     }
 }

@@ -1,7 +1,8 @@
 ﻿namespace Fanex.Athena.Controllers
 {
+    using System.Text;
+    using System.Web.Mvc;
     using Extension.Helper;
-
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Auth.Enum;
@@ -9,15 +10,9 @@
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
     using Fanex.Logging;
-
     using LAP.ONEBook.Security;
-
     using Newtonsoft.Json;
-
     using ONEbook.UM.Services;
-
-    using System.Text;
-    using System.Web.Mvc;
 
     public class OneAuthorizationController : Controller
     {

@@ -2,17 +2,6 @@
     function ($, Site, jqGridAdditional) {
         'use strict';
 
-        const indexColumn = {
-            key: true,
-            name: 'Index',
-            index: 'Index',
-            resizable: false,
-            width: 30,
-            align: 'center',
-            valign: 'middle',
-            sortable: false
-        };
-
         const groupColumn =
         {
             name: 'Group',
@@ -28,7 +17,7 @@
                 }
 
                 return '<div id="groupName-' + rowObject.CustId + '" style="background-color:' + rowObject.GroupColor +
-                         '" class="commission-color">' + newCellValue + '</div>';
+                    '" class="commission-color">' + newCellValue + '</div>';
             }
         };
 
@@ -78,7 +67,7 @@
                 }
                 else {
                     return '<a href="javascript:;" class="pendingFunds" ' +
-                    'data-custid="' + rowObject.CustId + '" data-systemid="' + rowObject.SystemId + '" data-externalid="' + rowObject.ExternalId + '">'
+                        'data-custid="' + rowObject.CustId + '" data-systemid="' + rowObject.SystemId + '" data-externalid="' + rowObject.ExternalId + '">'
                         + jqGridAdditional.formatDecimal(cellValue) + '</a>';
                 }
             }
@@ -93,7 +82,7 @@
             sortable: false,
             formatter: function (cellValue, options, rowObject) {
                 const dataAttribute = ' data-custid="' + rowObject.CustId + '" data-externalid="' + rowObject.ExternalId + '"' +
-                                    ' data-issuspended="' + rowObject.IsSuspended + '" data-isclosed="' + rowObject.IsClosed + '"';
+                    ' data-issuspended="' + rowObject.IsSuspended + '" data-isclosed="' + rowObject.IsClosed + '"';
 
                 return '<a href="javascript:;" title="' + Site.getSingleResource('Status') +
                     '" class="custStatusOption" id="edit-cust-status-' + rowObject.CustId + '"' + dataAttribute + '>' + cellValue + '</a>';
@@ -144,11 +133,11 @@
             frozen: true,
             formatter: function (cellValue, options, rowObject) {
                 return '<a href="javascript:;" class="grid-dropdown oddsGroup' + (rowObject.BAStatus ? ' disabled' : '')
-                + '" data-custid="' + rowObject.CustId + '" data-group="' + cellValue + '">'
-                + '<span class="grid-dropdown-item grid-dropdown-label group-' + cellValue + '">'
-                + (Number(cellValue) === 0 ? Site.getSingleResource('None') : cellValue) + '</span>'
-                + '<i class="grid-dropdown-item grid-dropdown-icon icon-arrow text-bold" title="' + Site.getSingleResource('OddsGroup') + '"></i>'
-                + '</a>';
+                    + '" data-custid="' + rowObject.CustId + '" data-group="' + cellValue + '">'
+                    + '<span class="grid-dropdown-item grid-dropdown-label group-' + cellValue + '">'
+                    + (Number(cellValue) === 0 ? Site.getSingleResource('None') : cellValue) + '</span>'
+                    + '<i class="grid-dropdown-item grid-dropdown-icon icon-arrow text-bold" title="' + Site.getSingleResource('OddsGroup') + '"></i>'
+                    + '</a>';
             }
         };
         const customerOptionColumn = {
@@ -180,11 +169,11 @@
             formatteroptions: { decimalSeparator: '.', decimalPlaces: 2, defaultValue: '0.00' }
         };
         //#endregion
-        const colNameList = ['#', 'ExternalId', 'SystemId', 'AvailableFunds', 'PendingFunds',
-         'Status', 'BAStatus', 'SpecialLevel', 'OddsGroup', 'CustomerOption'];
+        const colNameList = ['ExternalId', 'SystemId', 'AvailableFunds', 'PendingFunds',
+            'Status', 'BAStatus', 'SpecialLevel', 'OddsGroup', 'CustomerOption'];
 
-        const colModelList = [indexColumn, externalIdColumn, systemIdColumn, availableFundColumn,
-                        pendingFundColumn, statusColumn, baStatusColumn, specialLevelColumn, oddsGroupColumn, customerOptionColumn];
+        const colModelList = [externalIdColumn, systemIdColumn, availableFundColumn,
+            pendingFundColumn, statusColumn, baStatusColumn, specialLevelColumn, oddsGroupColumn, customerOptionColumn];
 
         const me = {
             urlData: 'Customer/CustomerList',
@@ -231,7 +220,7 @@
             numOfProductColumns = 1;
             const temp = Site.clone(colNameList);
             if (isAllowedCustomerCommission) {
-                temp.insertAfter('Group', 0);
+                temp.insertBefore('Group', 0);
 
                 firstProductCode = null;
                 for (let i = 0; i < PRODUCTS.length; i++) {
@@ -261,7 +250,7 @@
                 };
 
                 let col = Site.clone(groupColumn);
-                temp.insertAfter(col, 0);
+                temp.insertBefore(col, 0);
 
                 $.each(PRODUCTS, function (index, value) {
                     if (productList.indexOf(value.Code) >= 0) {
@@ -279,14 +268,14 @@
 
         me.setGroupHeaderColumns = function (grid) {
             grid.jqGrid('setGroupHeaders',
-            {
-                useColSpanStyle: true,
-                groupHeaders: [{
-                    startColumnName: firstProductCode + 'Comm',
-                    numberOfColumns: numOfProductColumns,
-                    titleText: Site.getSingleResource('Commission') + ' (%)'
-                }]
-            });
+                {
+                    useColSpanStyle: true,
+                    groupHeaders: [{
+                        startColumnName: firstProductCode + 'Comm',
+                        numberOfColumns: numOfProductColumns,
+                        titleText: Site.getSingleResource('Commission') + ' (%)'
+                    }]
+                });
         };
 
         me.getGridOption = function (productList, isAllowedCustomerCommission) {

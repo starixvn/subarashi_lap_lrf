@@ -7,7 +7,9 @@ import { DropdownMenu, DropdownItem } from '@jsroot/components/dropdown';
 import { getActiveTabList } from '../../lib/helpers/contextMenuHelper';
 
 export const ContextMenu = (props) => {
-    const { setSelectedPlayer, currentActivePlayer, setSelectedTabName, setSelectedSubTabName, getTabList, contextMenu, type } = props;
+    const { setSelectedPlayer, currentActivePlayer, setSelectedTabName,
+        setSelectedSubTabName, getTabList, contextMenu, type, hasCommPermissionRead } = props;
+
     const { position, isOpen: isOpenContextMenu } = contextMenu;
     const [isOpen, setIsOpen] = useState(false);
     const handleMouseEnter = () => {
@@ -43,7 +45,7 @@ export const ContextMenu = (props) => {
 
     if (currentActivePlayer) {
         const tabList = getTabList();
-        activeMenuList = getActiveTabList(currentActivePlayer, tabList, type);
+        activeMenuList = getActiveTabList(currentActivePlayer, tabList, type, hasCommPermissionRead);
     }
 
     return (

@@ -36,5 +36,7 @@ namespace Fanex.Athena.Model.Customer.MetaModel
         }
 
         public string UserName { get; set; }
+
+        public IDictionary<string, bool> ProductPermissions { get; set; }
     }
 }

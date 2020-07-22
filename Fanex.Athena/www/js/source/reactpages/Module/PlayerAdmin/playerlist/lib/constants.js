@@ -30,6 +30,7 @@ export const licenseeType = {
 }
 
 export const fields = {
+    Index: 'Index',
     Status: 'Status',
     UserName: 'UserName',
     SystemId: 'SystemId',
@@ -41,10 +42,12 @@ export const fields = {
     BaStatus: 'BaStatus',
     SpecialLevel: 'SpecialLevel',
     LastTransaction: 'LastTransaction',
-    Email: 'Email'
+    Email: 'Email',
+    CommissionGroup: 'CommissionGroup'
 }
 
 export const columnList = [
+    { key: fields.Index, value: '#', show: true },
     { key: fields.Status, value: LangHelper.getSingleResource('Status'), show: true },
     { key: fields.UserName, value: LangHelper.getSingleResource('Username'), show: true },
     { key: fields.SystemId, value: LangHelper.getSingleResource('SystemId'), show: true },
@@ -56,7 +59,8 @@ export const columnList = [
     { key: fields.BaStatus, value: LangHelper.getSingleResource('BAStatus'), show: true },
     { key: fields.SpecialLevel, value: LangHelper.getSingleResource('SpecialLevel'), show: true },
     { key: fields.LastTransaction, value: LangHelper.getSingleResource('LastTransfer'), show: true },
-    { key: fields.Email, value: LangHelper.getSingleResource('Email'), show: true }
+    { key: fields.Email, value: LangHelper.getSingleResource('Email'), show: true },
+    { key: fields.CommissionGroup, value: LangHelper.getSingleResource('CommissionGroup'), show: true }
 ];
 
 export const contextMenuKeys = {
@@ -66,7 +70,8 @@ export const contextMenuKeys = {
     fundtransferLimit: 'fundtransferLimit',
     betLimit: 'betLimit',
     statement: 'statement',
-    personalMessage: 'personalMessage'
+    personalMessage: 'personalMessage',
+    commissionGroup: 'commissionGroup'
 }
 
 export const tabNames = {
@@ -79,10 +84,12 @@ export const tabNames = {
     password: 'Password',
     bankInfo: 'BankInfo',
     personalMessage: 'PersonalMessage',
-    detailTransaction: 'lblPlayerDetailTransaction'
+    detailTransaction: 'lblPlayerDetailTransaction',
+    commissionGroup: 'lblCommissionGroup'
 }
 
-export const excludedTabNameWithNonDepositAndArchived = [tabNames.statement, tabNames.betlist, tabNames.betLimit, tabNames.detailTransaction];
+export const excludedTabNameWithNonDepositAndArchived = [tabNames.statement, tabNames.betlist, tabNames.betLimit, tabNames.detailTransaction, tabNames.commissionGroup];
+export const excludedTabNameWithClosed = [tabNames.commissionGroup];
 
 export const contextMenuList = [
     { key: contextMenuKeys.note, name: LangHelper.getSingleResource('Note'), tabName: 'lblPlayerAdminNote' },
@@ -91,7 +98,8 @@ export const contextMenuList = [
     { key: contextMenuKeys.fundtransferLimit, name: LangHelper.getSingleResource('FundtransferLimit'), tabName: tabNames.setting, subTabName: tabNames.fundTransferLimit },
     { key: contextMenuKeys.betLimit, name: LangHelper.getSingleResource('BetLimit'), tabName: tabNames.betLimit },
     { key: contextMenuKeys.statement, name: LangHelper.getSingleResource('Statement'), tabName: tabNames.statement },
-    { key: contextMenuKeys.personalMessage, name: LangHelper.getSingleResource('PersonalMessage'), tabName: 'lblPlayerAdminMessage', subTabName: tabNames.personalMessage }
+    { key: contextMenuKeys.personalMessage, name: LangHelper.getSingleResource('PersonalMessage'), tabName: 'lblPlayerAdminMessage', subTabName: tabNames.personalMessage },
+    { key: contextMenuKeys.commissionGroup, name: LangHelper.getSingleResource('CommissionGroup'), tabName: 'lblCommissionGroup' }
 ]
 
 export const heightSlicing = {
@@ -146,6 +154,7 @@ export const baStatusList = {
 }
 
 export const headerText = {
+    Index: '',
     Status: LangHelper.getSingleResource('Status'),
     UserName: LangHelper.getSingleResource('Username'),
     SystemId: LangHelper.getSingleResource('SystemId'),
@@ -157,7 +166,8 @@ export const headerText = {
     BaStatus: LangHelper.getSingleResource('BAStatus'),
     SpecialLevel: LangHelper.getSingleResource('SpecialLevel'),
     LastTransaction: LangHelper.getSingleResource('LastTransfer'),
-    Email: LangHelper.getSingleResource('Email')
+    Email: LangHelper.getSingleResource('Email'),
+    CommissionGroup: LangHelper.getSingleResource('CommissionGroup')
 }
 
 export const gridItemDropdownHeight = {
@@ -187,11 +197,11 @@ export const apiSiteSetting = { action: 'api/SiteSetting/GetSetting', type: syst
 
 export const apiSuggestion = { action: 'PlayerAdminContainer/GetSuggestionList', type: systemType.newAdmin };
 
-export const excludedContextMenuWithNonDeposit = [contextMenuKeys.betLimit, contextMenuKeys.statement];
+export const excludedContextMenuWithNonDeposit = [contextMenuKeys.betLimit, contextMenuKeys.statement, contextMenuKeys.commissionGroup];
 
-export const excludedContextMenuWithClosed = [contextMenuKeys.password];
+export const excludedContextMenuWithClosed = [contextMenuKeys.password, contextMenuKeys.commissionGroup];
 
-export const excludedContextMenuWithArchived = [contextMenuKeys.password, contextMenuKeys.betLimit, contextMenuKeys.statement];
+export const excludedContextMenuWithArchived = [contextMenuKeys.password, contextMenuKeys.betLimit, contextMenuKeys.statement, contextMenuKeys.commissionGroup];
 
 export const excludedContextMenuWithApiLicensee = [contextMenuKeys.password, contextMenuKeys.bankInformation, contextMenuKeys.personalMessage];
 

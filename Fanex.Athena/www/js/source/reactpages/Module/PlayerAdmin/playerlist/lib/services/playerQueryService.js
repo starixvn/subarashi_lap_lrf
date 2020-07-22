@@ -1,4 +1,4 @@
-import FactoryCommonService from '../../../../lib/factoryCommonService';
+﻿import FactoryCommonService from '../../../../lib/factoryCommonService';
 import { apiInfo } from '../constants';
 
 import ReportExcel from '../reportExcel';
@@ -27,8 +27,8 @@ export default class PlayerQueryService {
         return this.commonService.getLink(systemType, action);
     }
 
-    exportExcel(playerList, param, displayedColumn, fileName = 'PlayerList') {
-        const reportExcel = new ReportExcel(playerList, displayedColumn, fileName);
+    exportExcel(playerList, param, displayedColumn, hasCommPermissionRead, fileName = 'PlayerList') {
+        const reportExcel = new ReportExcel(playerList, displayedColumn, hasCommPermissionRead, fileName);
         reportExcel.export();
     }
 }

@@ -20,7 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>Fanex.Athena.Service.StatelessCore-1.ruleset</CodeAnalysisRuleSet>
     <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -96,6 +96,7 @@
     <Compile Include="Abstraction\BaseApiClient.cs" />
     <Compile Include="AuthorizationService.cs" />
     <Compile Include="BetTypeService.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Interfaces\IStatelessValidationService.cs" />
     <Compile Include="Utility\AutoBindMetaModelService.cs" />
     <Compile Include="Extensions\OneBookSecurityDependencyExtension.cs" />
@@ -158,6 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Fanex.Athena.Service.StatelessCore-1.ruleset" />
     <None Include="Fanex.Athena.Service.StatelessCore.ruleset" />
     <None Include="packages.config" />
   </ItemGroup>

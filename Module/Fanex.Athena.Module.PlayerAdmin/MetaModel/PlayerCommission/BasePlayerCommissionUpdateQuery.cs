@@ -1,0 +1,29 @@
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace Fanex.Athena.Module.PlayerAdmin.MetaModel.PlayerCommission
+{
+    public class BasePlayerCommissionUpdateQuery
+    {
+        public string CustIds { get; set; }
+
+        public string CustNames { get; set; }
+
+        public int LicenseeId { get; set; }
+
+        public int UserId { get; set; }
+
+        public string IP { get; set; }
+
+        public string Language { get; set; }
+
+        public string Username { get; set; }
+
+        public IDictionary<string, bool> Permissions { get; set; }
+        public string CustIdsStr { get; set; }
+
+        public virtual bool IsValid()
+            => !string.IsNullOrWhiteSpace(CustIds) &&
+            !CustIds.Split(new[] { ',' }).Any(s => !int.TryParse(s, out _));
+    }
+}

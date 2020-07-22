@@ -87,7 +87,6 @@
     <Compile Include="SearchCustomerDataAccessTest.cs" />
     <Compile Include="CustomerListDataAccessTest.cs" />
     <Compile Include="CustomerLogDataAccessTest.cs" />
-    <Compile Include="GroupComDataAccessTest.cs" />
     <Compile Include="LogInLogDataAccessTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

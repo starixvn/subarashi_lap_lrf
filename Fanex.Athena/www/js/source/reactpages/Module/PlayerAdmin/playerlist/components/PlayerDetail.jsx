@@ -2,7 +2,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../actions';
-import { heightSlicing, excludedTabNameWithNonDepositAndArchived, tabNames } from '../lib/constants';
+import { heightSlicing, excludedTabNameWithNonDepositAndArchived, tabNames, excludedTabNameWithClosed } from '../lib/constants';
 
 export class PlayerDetail extends PureComponent {
     constructor(props) {
@@ -39,8 +39,13 @@ export class PlayerDetail extends PureComponent {
         const { selectedPlayer } = this.props;
         const selectedTabName = this.props.selectedTabName || this._getDefaultSelectedTab();
         const { isDeposit, isArchived } = selectedPlayer;
-        const renderedTabList = !isDeposit || isArchived ?
+
+        let renderedTabList = !isDeposit || isArchived ?
             tabList.filter(item => !excludedTabNameWithNonDepositAndArchived.includes(item.Name)) : tabList;
+
+        if (selectedPlayer.isClosed) {
+            renderedTabList = renderedTabList.filter(item => !excludedTabNameWithClosed.includes(item.Name));
+        }
 
         return (
             renderedTabList.map((item) => {

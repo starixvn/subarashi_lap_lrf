@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Fanex.Athena.Model.Customer.MetaModel.GroupCommMetaModel
+@{
     ViewBag.Title = "LAP - " + ViewResources.GroupManagement + " - " + @ViewResources.EditGroup;
     Layout = "~/Views/Desktop/Shared/_Layout.cshtml";
 }
@@ -8,9 +9,6 @@
 @section js {
     <script src="@Url.ContentLinkByEnv("/www/js/build/pages/customer/commgroupedit.chunk.js")"></script>
 }
-
-@model Fanex.Athena.Model.Customer.MetaModel.GroupCommMetaModel
-
 <div class="row page-form">
     <form class="col l9 m10 s12" id="customer-comm-group-edit" action=@Url.Content("~/CustomerComGroup/Update") method="post">
         @Html.AntiForgeryToken()
@@ -35,6 +33,7 @@
                 @Html.HiddenFor(model => model.OriginalGroupName)
             </div>
             <div class="input-field col l5 m4 s12 button-block">
+                <span id="result-mark" class="icon-checkmark hide">&nbsp;</span>
                 <input type="button" class="btn btn-nav" id="Validate" value="@ViewResources.Checkavailability" />
             </div>
         </div>
@@ -71,9 +70,6 @@
                 <button type="button" id="Cancel" class="btn btn-cancel">@ViewResources.Cancel</button>
             </div>
             <div class="col input-field">
-                <button type="button" id="CustList" class="btn btn-back">@ViewResources.GotoCustomerList</button>
-            </div>
-            <div class="col input-field">
                 <button type="button" id="Submit" class="btn btn-submit">@ViewResources.Submit</button>
             </div>
         </div>
@@ -81,7 +77,6 @@
         @Html.ValidationMessageFor(model => model.LicenseeId)
         @Html.HiddenFor(model => model.GroupCommId)
         @Html.ValidationMessageFor(model => model.GroupCommId)
-        @Html.HiddenFor(model => model.IsUpdateNG)
-        @Html.HiddenFor(model => model.IsUpdateCS)
+        <input type="hidden" id="GroupCommProductList" value="@string.Join(",", Model.ProductPermissions.Select(s=>s.Key))" />
     </form>
 </div>

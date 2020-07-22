@@ -7,13 +7,9 @@
 namespace Fanex.Athena.Web.ActionFilter
 {
     using System;
-    using System.Net;
     using System.Web.Mvc;
-    using System.Web.Routing;
-    using Fanex.Athena.Model.Auth.Enum;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
-
     using Fanex.Athena.Service.Core.Users.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true)]
     public sealed class FunctionAuthorizationAttribute : ActionFilterAttribute
@@ -35,8 +31,6 @@ namespace Fanex.Athena.Web.ActionFilter
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            var context = filterContext.HttpContext;
-
             var licenseeSession = SessionStorage.LicenseeAuthInfo;
             var userSession = SessionStorage.UserAuthInfo;
             var authorized = userSession != null && licenseeSession != null;
@@ -45,31 +39,7 @@ namespace Fanex.Athena.Web.ActionFilter
                 authorized = AuthorizationServiceInstance.HasPermissions(userSession, _permissionKeys);
             }
 
-            if (!authorized)
-            {
-                if (context.Request.IsAjaxRequest())
-                {
-                    filterContext.HttpContext.Response.StatusCode = (int)HttpStatusCode.Forbidden;
-                    filterContext.HttpContext.Response.ContentType = "application/json";
-                    filterContext.Result = new JsonResult
-                    {
-                        Data = new { ErrCode = (int)HttpStatusCode.Forbidden, ErrMsg = "Access Denied." },
-                        JsonRequestBehavior = JsonRequestBehavior.AllowGet
-                    };
-                }
-                else
-                {
-                    var routeValue = new
-                    {
-                        controller = "Utility",
-                        action = "AccessDenied",
-                        message = "AccessDenied"
-                    };
-
-                    filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(routeValue));
-                }
-            }
-
+            ActionFilterAttributeHelper.OnActionExecuting(filterContext, authorized);
             base.OnActionExecuting(filterContext);
         }
     }

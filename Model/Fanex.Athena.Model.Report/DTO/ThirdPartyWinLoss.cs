@@ -36,5 +36,7 @@ namespace Fanex.Athena.Model.Report.DTO
         public decimal CustomerWinLoss { get; set; }
 
         public decimal LicenseeWL { get; set; }
+
+        public decimal CustomerCommission { get; set; }
     }
 }

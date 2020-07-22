@@ -12,6 +12,7 @@ const itemContextMenuHeight = 28;
 export const UserNameCell = (props) => {
     const {
         dataItem,
+        hasCommPermissionRead,
         setSelectedPlayer,
         setCurrentActivePlayer,
         setContextMenu,
@@ -36,7 +37,7 @@ export const UserNameCell = (props) => {
         if (!isOpen) {
             const currentActivePlayer = buildCurrentActivePlayer(dataItem);
             const tabList = getTabList();
-            const activeMenuList = getActiveTabList(currentActivePlayer, tabList, type);
+            const activeMenuList = getActiveTabList(currentActivePlayer, tabList, type, hasCommPermissionRead);
 
             const contextMenuHeight = itemContextMenuHeight * activeMenuList.length;
             const rect = event.target.getBoundingClientRect();

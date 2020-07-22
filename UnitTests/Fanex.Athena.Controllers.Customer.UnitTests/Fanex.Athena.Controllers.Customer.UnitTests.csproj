@@ -140,8 +140,6 @@
     <Compile Include="Helpers\CustomerComGroupHelperTest.cs" />
     <Compile Include="PlayerSegmentation\PlayerSegmentationTest.cs" />
     <Compile Include="SearchCustomerApiControllerTest.cs" />
-    <Compile Include="CustomerComGroupControllerTest.Update.cs" />
-    <Compile Include="CustomerComGroupControllerTest.Create.cs" />
     <Compile Include="CustomerComGroupControllerTest.cs" />
     <Compile Include="CustomerApiControllerTest.MoveToGroupCom.cs" />
     <Compile Include="CustomerApiControllerTest.UpdateCustomerCom.cs" />

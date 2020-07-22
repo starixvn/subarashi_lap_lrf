@@ -1,28 +1,22 @@
 ﻿namespace Fanex.Athena.Controllers.Customer.UnitTests
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using DataAccess.Core.Users.Interfaces;
-
     using Excel.Customer;
-
     using Fanex.Athena.Controllers.Base.UnitTests;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-
     using Model.Core.DTO.Common;
     using Model.Core.ResultModel;
     using Model.Customer.DTO;
     using Model.Customer.MetaModel;
     using Model.Customer.ViewModel;
-
     using NSubstitute;
-
     using NUnit.Framework;
     using Service.Customer.Interfaces;
-
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
 
     public partial class CustomerControllerTest : CultureBaseControllerHelperTest
     {
@@ -55,9 +49,6 @@
             AppSettings.GetValue(Arg.Any<string>()).Returns(string.Empty);
             _authorizationService.IsAllowedEditCommission(Arg.Any<UserAuthInfo>()).Returns(false);
             _authorizationService.IsAllowedSpecialBA(Arg.Any<UserAuthInfo>()).Returns(true);
-
-            _groupComService.GetAllAsync(Arg.Any<int>()).Returns(new List<GroupCommMetaModel>());
-            _groupComService.GetById(Arg.Any<int>(), Arg.Any<int>()).Returns(new GroupCommMetaModel());
         }
 
         [OneTimeTearDown]
@@ -200,9 +191,11 @@
                 controller.CreateExcel(
                    path,
                    reportTitle,
-                   new CustomerListViewModel {
+                   new CustomerListViewModel
+                   {
                        DataList = new List<CustomerDTO>(),
-                       Param = new CustomerListMetaModel {
+                       Param = new CustomerListMetaModel
+                       {
                            GridColumns = new List<CheckedItem>()
                        }
                    }).ReturnsForAnyArgs(excel);

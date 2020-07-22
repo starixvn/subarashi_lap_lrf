@@ -18,7 +18,7 @@ namespace Fanex.Athena.Excel.Report
     using Common;
 
     using Fanex.Athena.Excel.Base.Extension;
-
+    using Fanex.Athena.Model.Core.DTO.Common;
     using Helpers;
 
     using Model.Core.DataDomain;
@@ -402,6 +402,6 @@ namespace Fanex.Athena.Excel.Report
             return currentRow + 1;
         }
 
-        private static IList<string> GetTotalColumnNameList() => _commonColumnNameList.Select( x => "sum" + x).ToList();
+        private static IList<string> GetTotalColumnNameList() => _commonColumnNameList.Select(x => "sum" + x).ToList();
     }
 }

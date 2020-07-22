@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="GroupComService.cs" company="Microsoft">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Service.Customer
+﻿namespace Fanex.Athena.Service.Customer
 {
     using System;
     using System.Collections.Generic;
@@ -30,9 +24,9 @@ namespace Fanex.Athena.Service.Customer
             _lgClient = lgClient;
         }
 
-        public async Task<IList<GroupCommMetaModel>> GetAllAsync(int licenseeId)
+        public IList<GroupCommMetaModel> GetAllAsync(int licenseeId, IDictionary<string, bool> permissions)
         {
-            return await _groupDataAccess.GetAllAsync(licenseeId).ConfigureAwait(false);
+            return _groupDataAccess.GetAllAsync(licenseeId, permissions);
         }
 
         public async Task<DataTable> GetDataForExcelAsync(int licenseeId)
@@ -40,28 +34,28 @@ namespace Fanex.Athena.Service.Customer
             return await _groupDataAccess.GetDataForExcelAsync(licenseeId).ConfigureAwait(false);
         }
 
-        public GroupCommMetaModel GetById(int groupCommId, int licenseeId)
+        public GroupCommMetaModel GetById(int groupCommId, int licenseeId, IDictionary<string, bool> permissions)
         {
-            return _groupDataAccess.GetById(groupCommId, licenseeId);
+            return _groupDataAccess.GetById(groupCommId, licenseeId, permissions);
         }
 
-        public async Task<IResultInfo> InsertGroupAsync(GroupCommMetaModel item, IRequest request, int userId)
+        public async Task<IResultInfo> InsertGroupAsync(GroupCommMetaModel item, IRequest request, int userId, IDictionary<string, bool> permissions)
         {
-            return await _groupDataAccess.InsertGroupAsync(item, request, userId).ConfigureAwait(false);
+            return await _groupDataAccess.InsertGroupAsync(item, request, userId, permissions).ConfigureAwait(false);
         }
 
-        public async Task<IResultInfo> UpdateGroupAsync(GroupCommMetaModel newItem, IRequest request, UserAuthInfo user)
+        public async Task<IResultInfo> UpdateGroupAsync(GroupCommMetaModel newItem, IRequest request, UserAuthInfo user, IDictionary<string, bool> permissions)
         {
-            var resultInfo = await _groupDataAccess.UpdateGroupAsync(newItem, request, user.UserId).ConfigureAwait(false);
+            var resultInfo = await _groupDataAccess.UpdateGroupAsync(newItem, request, user.UserId, permissions).ConfigureAwait(false);
             var callApiSuccess = true;
-            if (newItem.IsUpdateCS && !string.IsNullOrEmpty(resultInfo.ExtendedData))
+            if (newItem.ProductPermissions[Product.CS] && !string.IsNullOrEmpty(resultInfo.ExtendedData))
             {
                 var custtomerList = resultInfo.ExtendedData.Split(new[] { ',' });
                 if (custtomerList.Length > 0)
                 {
                     var apiCasinoMetalModel = new RNGCasinoUpdateMemberComMetaModel
                     {
-                        Comm = newItem.CSComm,
+                        Comm = newItem.CommValues[Product.CS],
                         CustomerId = custtomerList,
                         FromIp = request.Ip,
                         ModifyBy = user.UserId,

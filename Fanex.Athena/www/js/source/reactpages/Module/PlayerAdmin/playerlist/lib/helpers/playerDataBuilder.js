@@ -9,7 +9,9 @@
         isDeposit: IsDeposit,
         isArchived: IsArchived,
         currencyId: CurrencyId,
-        createdDate: CreatedDate
+        createdDate: CreatedDate,
+        commissionGroup: dataItem.CommissionGroup,
+        isClosed: dataItem.Status == 2
     };
 }
 
@@ -53,7 +55,8 @@ export const buildLapPlayerList = (playerList) => {
             IsDeposit: IBCCustId > 0,
             IsArchived: !!isArchived,
             CurrencyId: Currency,
-            CreatedDate: CreatedDateString
+            CreatedDate: CreatedDateString,
+            CommissionGroup: item.CommissionGroup
         };
     });
 }
@@ -72,6 +75,8 @@ export const buildCurrentActivePlayer = (dataItem) => {
         isDeposit: IsDeposit,
         isArchived: IsArchived,
         currencyId: CurrencyId,
-        createdDate: CreatedDate
+        createdDate: CreatedDate,
+        commissionGroup: dataItem.CommissionGroup,
+        isClosed: dataItem.Status == 2
     };
 }

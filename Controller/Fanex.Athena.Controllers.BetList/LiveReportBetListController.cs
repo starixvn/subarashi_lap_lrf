@@ -1,14 +1,11 @@
 ﻿namespace Fanex.Athena.Controllers.BetList
 {
-    using Fanex.Athena.Model.Auth.DataDomain;
-
-    using Model.BetList.MetaModel;
-
-    using Resources;
-
     using System.Threading.Tasks;
     using System.Web.Mvc;
-
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Core.DTO.Common;
+    using Model.BetList.MetaModel;
+    using Resources;
     using Web.ActionFilter;
 
     [FunctionAuthorization(PermissionKeys.ReportLiveReport)]
@@ -104,7 +101,7 @@
             // Sum value by page
             metaModel.UspKey = uspKey;
             metaModel.Title = title;
-            metaModel.ShowingOption = new BetListShowingOption
+            metaModel.ShowingOption = new ShowingOption
             {
                 CustomerCommVisible = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm
             };

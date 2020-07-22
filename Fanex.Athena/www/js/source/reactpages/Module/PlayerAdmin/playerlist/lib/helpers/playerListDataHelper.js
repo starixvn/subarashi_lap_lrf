@@ -1,4 +1,4 @@
-export default class PlayerListDataHelper {
+﻿export default class PlayerListDataHelper {
     static mergePlayerList(lrfList, lapList) {
         if (!lrfList || !lapList) {
             return [];
@@ -36,7 +36,8 @@ export default class PlayerListDataHelper {
             IsDeposit: IBCCustId > 0,
             IsArchived: !!isArchived,
             CurrencyId: lapItem.Currency,
-            CreatedDate: CreatedDateString
+            CreatedDate: CreatedDateString,
+            CommissionGroup: lrfItem.CommissionGroup
         };
     }
 
