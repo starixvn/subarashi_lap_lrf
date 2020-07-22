@@ -1,4 +1,4 @@
-﻿// Generated at: 7/22/2020 1:33:03 PM
+﻿// Generated at: 7/22/2020 2:18:18 PM
 var _language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -201,7 +201,7 @@ Delete:"删除",
 DeleteCommissionGroup:"删除佣金群组",
 DeleteGroup:"删除组",
 Deposit:"存款",
-DetailedBetlist:"投注明细历史",
+DetailedBetlist:"投注历史明细",
 Details:"细节",
 DetailTransaction:"交易纪录",
 DH:"和主",
