@@ -24,8 +24,8 @@ export const DataGrid = (props) => {
 
     const showSubsidiary = GridHelper.isShowSubsidiary(selectedParams.subsidiarySearch);
     
-    const onSelectPlayer = React.useCallback(custId => {
-        setSelectedPlayer(custId)
+    const onSelectPlayer = React.useCallback(custInfo => {
+        setSelectedPlayer(custInfo)
     });
 
     const _renderDataSection = dataList => dataList.map((dataItem, index) => {

@@ -34,5 +34,5 @@ export const DefaultPagingOption = {
 }
 
 export const Url = {
-    AbnormalBetList: '/Api/BettingTicketCenter/GetBySingleCustomer'
+    AbnormalBetList: '/Api/PlayerSegmentation/AbnormalBets'
 }

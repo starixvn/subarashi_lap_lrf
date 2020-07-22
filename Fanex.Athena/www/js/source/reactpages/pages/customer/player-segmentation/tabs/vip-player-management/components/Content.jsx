@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Pager } from '@9softstudio/react-grid';
-import Popup from '@jsroot/components/popup';
 import GridCaption from '../../../components/GridCaption';
 import DataGrid from './DataGrid';
 import { ActionCreators } from '../actions';
@@ -28,21 +27,11 @@ export const Content = props => {
         searchPlayer(selectedTabKey, params, GridHelper.callBackToUpdatePaging({ pagingOption, setPagingOption }));
     }
 
-    const _renderBetListPopup = () => {
-        return selectedPlayer && <Popup isShow={true}
-            iframeUrl={'PlayerSegmentation/BetList?custId=123&baseCurrency=EUR'}
-            title={'BetList'}
-            width={1100} height={700}
-            onClose={() => setSelectedPlayer(null)}>
-        </Popup>
-    }
-
     return (
         <div className="result-content">
             <GridCaption playerCount={playerCount} />
             <DataGrid />
             <Pager pageOption={pagingOption} onPaging={_handlePaging} />
-            {_renderBetListPopup()}
         </div>
     )
 }

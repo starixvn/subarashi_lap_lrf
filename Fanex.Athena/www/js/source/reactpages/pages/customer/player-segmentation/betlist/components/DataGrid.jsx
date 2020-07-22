@@ -29,7 +29,7 @@ export const DataGrid = (props) => {
     const onPaging = (pageIndex, pageSize) => {
         const params = {
             ...selectedParams,
-            ...{ PageIndex: pageIndex, PageSize: pageSize }
+            ...{ pageIndex, pageSize }
         };
         setSelectedParams(params);
         QueryHelper.FetchBetList({ params, getGridData, toggleLoader });
@@ -54,6 +54,7 @@ export const DataGrid = (props) => {
                 columns={Columns}
                 columnWidths={ColumnWidths}
                 columnAlignments={ColumnAlignments}
+                sortableColumns={[]}
                 data={gridData.Data}
                 afterLoad={afterLoad}
                 getResourceFunc={getResource}

@@ -3,10 +3,12 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Pager } from '@9softstudio/react-grid';
 import Popup from '@jsroot/components/popup';
+import LangHelper from '@jsroot/lib/langHelper'
 import GridCaption from '../../../components/GridCaption';
 import DataGrid from './DataGrid';
 import { ActionCreators } from '../actions';
 import GridHelper from "../../../lib/helpers/gridHelper";
+import BetListHelper from "../lib/helpers/betlistHelper";
 
 export const Content = props => {
     const { pagingOption, playerCount, searchPlayer, selectedParams, selectedTabKey, selectedPlayer, setPagingOption, setSelectedPlayer } = props;
@@ -29,12 +31,20 @@ export const Content = props => {
     }
 
     const _renderBetListPopup = () => {
-        return selectedPlayer && <Popup isShow={true}
-            iframeUrl={'PlayerSegmentation/BetList?custId=123&baseCurrency=EUR'}
-            title={'BetList'}
+        if(selectedPlayer) {
+            const params = {
+                ...selectedPlayer,
+                ...{ baseCurrency: selectedParams.baseCurrency }
+            }
+            const betListUrl = BetListHelper.buildAbnormalBetListUrl(window.rootUrl, params);
+            return (<Popup isShow={true}
+            iframeUrl={betListUrl}
+            title={LangHelper.getSingleResource('AbnormalBet')}
             width={1100} height={700}
             onClose={() => setSelectedPlayer(null)}>
-        </Popup>
+        </Popup>)
+        }
+        return null;
     }
 
     return (

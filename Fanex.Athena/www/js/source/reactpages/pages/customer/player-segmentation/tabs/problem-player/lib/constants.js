@@ -12,5 +12,6 @@ export const dataGridFullHeaders = [
 ]
 
 export const Url = {
-    exportProblemPlayerList: 'Api/PlayerSegmentation/ExportProblemPlayerList'
+    exportProblemPlayerList: 'Api/PlayerSegmentation/ExportProblemPlayerList',
+    abnormalBetList: 'PlayerSegmentation/BetList'
 }

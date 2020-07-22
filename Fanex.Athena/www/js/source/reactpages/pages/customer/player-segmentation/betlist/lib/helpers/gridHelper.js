@@ -5,8 +5,8 @@ export default class GridHelper {
         return {
             ...DefaultPagingOption,
             ...{
-                PageIndex: selectedParams.PageIndex,
-                PageSize: selectedParams.PageSize,
+                PageIndex: selectedParams.pageIndex,
+                PageSize: selectedParams.pageSize,
                 TotalItem: gridData && gridData.TotalRows ? gridData.TotalRows : selectedParams.PageSize
             }
         };

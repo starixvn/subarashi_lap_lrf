@@ -25,10 +25,7 @@ export const DataGrid = (props) => {
         return <NoDataTitle />;
     }
 
-    const showSubsidiary = GridHelper.isShowSubsidiary(selectedParams.subsidiarySearch);
-    const onSelectPlayer = React.useCallback(custId => {
-        setSelectedPlayer(custId)
-    });
+    const showSubsidiary = GridHelper.isShowSubsidiary(selectedParams.subsidiarySearch)
 
     const _dataGridHeaders = [
         {
@@ -49,7 +46,7 @@ export const DataGrid = (props) => {
 
     const _renderDataSection = dataList => dataList.map((dataItem, index) => {
         const { isSelected, ...rest } = dataItem;
-        return <PlayerRow {...rest} index={index} showSubsidiary={showSubsidiary} onSelectPlayer={onSelectPlayer} />
+        return <PlayerRow {...rest} index={index} showSubsidiary={showSubsidiary} />
     })
 
     const _handleSort = (orderCol, sortType) => {
