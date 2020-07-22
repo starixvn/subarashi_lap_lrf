@@ -763,6 +763,7 @@
                 url = QueryString.setParam(url, 'transId', transId);
                 url = QueryString.setParam(url, 'custId', custId);
                 url = QueryString.setParam(url, 'betType', betTypeId);
+                url = QueryString.setParam(url, 'BaseCurrency', getBaseCurrency());
 
                 const popH = Math.min($(window).height() - 100, 550);
                 const title = Site.getSingleResource('ProductPP') + ' - ' +
