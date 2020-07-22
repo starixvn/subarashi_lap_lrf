@@ -8,12 +8,14 @@
     public partial class PlayerSegmentationController
     {
         [FunctionAuthorization(PermissionKeys.PlayerProblemManagement, PermissionKeys.PlayerVIPManagement)]
-        public ViewResult BetList(int custId, string baseCurrency)
+        public ViewResult BetList(int custId, string externalId, string systemId, string baseCurrency)
         {
             var viewModel = new PlayerSegmentationBetListViewModel
             {
                 CustId = custId,
                 BaseCurrency = baseCurrency,
+                ExternalId = externalId,
+                SystemId = systemId,
                 IsAllowedCustomerComm = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm,
             };
             return View("~/Views/Desktop/Customer/PlayerSegmentation/BetList.cshtml", viewModel);

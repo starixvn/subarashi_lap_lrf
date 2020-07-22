@@ -2,6 +2,7 @@
 {
     using Fanex.Athena.Api.Base;
     using Fanex.Athena.Api.Base.Attributes;
+    using Fanex.Athena.DataAccess.Core.Common.Interfaces;
     using Fanex.Athena.DataAccess.Customer.Interfaces;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
@@ -19,16 +20,22 @@
     {
         private readonly IAuthorizationService _authService;
         private readonly IPlayerSegmentationService _playerService;
+        private readonly IBetListApiClient _betListApiClient;
+        private readonly IProductDataAccess _productDataAccess;
 
         public PlayerSegmentationController(ILanguageService languageService,
             IPlayerSegmentationDataAccess playerDataAccess,
             IAuthorizationService authService,
-            IPlayerSegmentationService playerService
+            IPlayerSegmentationService playerService,
+            IProductDataAccess productDataAccess,
+            IBetListApiClient betListApiClient
             )
             : base(languageService)
         {
             _authService = authService;
             _playerService = playerService;
+            _productDataAccess = productDataAccess;
+            _betListApiClient = betListApiClient;
         }
 
         [HttpPost]

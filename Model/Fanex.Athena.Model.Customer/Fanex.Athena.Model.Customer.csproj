@@ -88,6 +88,7 @@
     <Compile Include="MetaModel\DeleteGroupMetaModel.cs" />
     <Compile Include="MetaModel\GroupCommMetaModel.cs" />
     <Compile Include="MetaModel\MoveToGroupComMetaModel.cs" />
+    <Compile Include="MetaModel\PlayerSegmentation\AbnormalBetListMetaModel.cs" />
     <Compile Include="MetaModel\PlayerSegmentation\BasePlayerListMetaModel.cs" />
     <Compile Include="MetaModel\PlayerSegmentation\UpdateStatusPlayerMetaModel.cs" />
     <Compile Include="MetaModel\PlayerSegmentation\VipPlayerListMetaModel.cs" />

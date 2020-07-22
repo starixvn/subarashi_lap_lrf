@@ -19,6 +19,8 @@ namespace Fanex.Athena.Model.Customer.ViewModel
         public DateTime FromDate { get; set; }
         public DateTime ToDate { get; set; }
         public string BaseCurrency { get; set; }
+        public string ExternalId { get; set; }
+        public string SystemId { get; set; }
         public bool IsAllowedCustomerComm { get; set; }
         public int PageIndex { get; set; }
         public int PageSize { get; set; }

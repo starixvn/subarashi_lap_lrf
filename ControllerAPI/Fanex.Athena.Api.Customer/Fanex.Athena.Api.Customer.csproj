@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PlayerSegmentation\PlayerSegmentation.BetList.Controller.cs" />
     <Compile Include="PlayerSegmentation\PlayerSegmentation.VipPlayer.Controller.cs" />
     <Compile Include="PlayerSegmentation\PlayerSegmentation.ProblemPlayer.Controller.cs" />
     <Compile Include="PlayerSegmentation\PlayerSegmentationController.cs" />
@@ -55,6 +56,10 @@
     <ProjectReference Include="..\..\Controller\Fanex.Athena.Controllers.Base\Fanex.Athena.Controllers.Base.csproj">
       <Project>{255E120A-83BF-4F72-9E31-6050D5704069}</Project>
       <Name>Fanex.Athena.Controllers.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DataAccess\Fanex.Athena.DataAccess.Core\Fanex.Athena.DataAccess.Core.csproj">
+      <Project>{A6BE21E8-6895-4863-BA3A-E6B21D3CE78D}</Project>
+      <Name>Fanex.Athena.DataAccess.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\DataAccess\Fanex.Athena.DataAccess.Customer\Fanex.Athena.DataAccess.Customer.csproj">
       <Project>{C25DC4BC-2721-401B-8896-D210D70B392B}</Project>

@@ -911,6 +911,7 @@
     <Content Include="www\js\build\dev\reactpages\customer\playersegmentation\main.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\customer\playersegmentation\problemPlayer.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\customer\playersegmentation\vipPlayerManagement.chunk.js" />
+    <Content Include="www\js\build\dev\reactpages\customer\playersegmentation\betlist.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\report\casinoturnover.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\report\dailybets.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\report\licenseewlbytimezone.chunk.js" />

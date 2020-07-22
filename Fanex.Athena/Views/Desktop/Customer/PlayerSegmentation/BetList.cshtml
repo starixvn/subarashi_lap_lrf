@@ -14,12 +14,15 @@
 
 @section globaljscode{
     window.initialState = {
+    selectedParams: { pageIndex: 1, pageSize: 50 },
     isLoading: false,
     dateRange: { fromDate: '@Model.FromDate.ToString("MM/dd/yyyy")', toDate: '@Model.ToDate.ToString("MM/dd/yyyy")'},
     };
     window._AppData = {
+    externalId: '@Model.ExternalId',
+    systemId: '@Model.SystemId',
     isAllowedCustomerComm: @Model.IsAllowedCustomerComm.ToString().ToLowerInvariant(),
-    baseCurrency: '@Model.BaseCurrency',
+    baseCurrency: '@Model.BaseCurrency.ToUpperInvariant()',
     custId: @Model.CustId,
     dateConstraint: { minDate: '01/01/2019', maxDate: '@DateTime.Today.ToString("MM/dd/yyyy")', limitedMonthRange: 6 },
     };
