@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 7/22/2020 1:33:19 PM
+// Generated at: 7/22/2020 2:18:11 PM
 window._language_zh_TW = {
   AA: "客客",
   AbnormalBet: "非正規註單",
@@ -273,6 +273,7 @@ window._language_zh_TW = {
   DeleteCommissionGroup: "刪除佣金群組",
   DeleteGroup: "刪除組",
   Deposit: "存款",
+  DetailedBetlist: "投注歷史明細",
   Details: "細節",
   DetailTransaction: "交易紀錄",
   DH: "和主",
@@ -545,6 +546,7 @@ window._language_zh_TW = {
   ProductKN: "快樂彩",
   ProductNG: "百練賽",
   ProductParlay: "體育串關",
+  ProductPP: "PP王者電子",
   ProductSB: "體育博彩",
   ProductTG: "桌面遊戲",
   ProductVRG: "虛擬娛樂城",

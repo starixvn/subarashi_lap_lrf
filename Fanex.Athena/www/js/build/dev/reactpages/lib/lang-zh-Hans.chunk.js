@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 7/22/2020 1:33:19 PM
+// Generated at: 7/22/2020 2:18:11 PM
 window._language_zh_Hans = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -271,6 +271,7 @@ window._language_zh_Hans = {
   DeleteCommissionGroup: "删除佣金群组",
   DeleteGroup: "删除组",
   Deposit: "存款",
+  DetailedBetlist: "投注历史明细",
   Details: "细节",
   DetailTransaction: "交易纪录",
   DH: "和主",
@@ -547,6 +548,7 @@ window._language_zh_Hans = {
   ProductKN: "快乐彩",
   ProductNG: "百练赛",
   ProductParlay: "体育串关",
+  ProductPP: "PP王者电子",
   ProductSB: "体育博彩",
   ProductVRG: "虚拟娱乐城",
   ProductVS: "虚拟运动",
