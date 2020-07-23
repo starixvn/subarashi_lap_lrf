@@ -2121,6 +2121,14 @@ tr.total td {
       color: #404040; }
   .report-container .nested-table.table-2-column td {
     width: 50%; }
+  .report-container .nested-table .col-commission {
+    width: 70px; }
+  .report-container .nested-table tr.row-title td {
+    background-color: #BCC5CC;
+    color: #4C6375;
+    font-weight: bold; }
+  .report-container .nested-table.tbl-group-comm {
+    table-layout: fixed; }
 
 .report-container .ui-icon {
   margin-left: 4px;

@@ -14,6 +14,7 @@ import StatusDropdown from './grid/StatusDropdown';
 import { buildDisplayedColumnObject } from '../lib/helpers/utils';
 import NoDataTitle from '@jsroot/components/NoDataTitle';
 import SweetAlert from '../../../../components/sweet-alert';
+import { batchUpdateManager } from '../batch-update/batch-update-manager';
 
 const MAX_WIDTH_PAGE = 1920;
 
@@ -24,14 +25,25 @@ export class DataGrid extends PureComponent {
         this.maxWidth = Math.min(document.body.clientWidth, MAX_WIDTH_PAGE);
     }
 
-    _renderDataSection(dataList, displayedColumn) {
+    componentDidMount() {
+        batchUpdateManager.bindGridEvents();
+    }
+
+    componentDidUpdate() {
+        batchUpdateManager.bindGridEvents();
+    }
+
+    _renderDataSection(dataList, displayedColumn, canSelectPlayers, hasCommPermissionRead) {
         const dataRows = [];
         for (let i = 0; i < dataList.length; i++) {
             const dataItem = dataList[i];
             const rowProps = {
                 dataItem,
-                displayedColumn
-            }
+                displayedColumn,
+                canSelectPlayers,
+                hasCommPermissionRead
+            };
+
             dataRows.push(<PlayerRow key={dataItem.LicenseeCustId} {...rowProps} />);
         }
 
@@ -45,7 +57,8 @@ export class DataGrid extends PureComponent {
     }
 
     render() {
-        const { playerList, selectedPlayer, isFetchingData, displayedColumnList, sweetAlertOption } = this.props;
+        const { playerList, selectedPlayer, isFetchingData,
+            displayedColumnList, sweetAlertOption, hasCommPermissionEdit, hasCommPermissionRead } = this.props;
         if (!playerList) {
             return null;
         }
@@ -56,6 +69,7 @@ export class DataGrid extends PureComponent {
 
         const dataList = selectedPlayer ? [playerList.find(item => item.LicenseeCustId === selectedPlayer.licenseeCustId)] : playerList;
         const displayedColumn = buildDisplayedColumnObject(displayedColumnList);
+        const canSelectPlayers = hasCommPermissionEdit;
 
         return (
             <>
@@ -63,12 +77,12 @@ export class DataGrid extends PureComponent {
                     autoWidth={true}
                     maxWidth={this.maxWidth}
                     autoHeight={true}
-                    header={GridHelper.renderHeader(displayedColumn)}
-                    body={this._renderDataSection(dataList, displayedColumn)}
+                    header={GridHelper.renderHeader(displayedColumn, canSelectPlayers, hasCommPermissionRead)}
+                    body={this._renderDataSection(dataList, displayedColumn, canSelectPlayers, hasCommPermissionRead)}
                     containerPadding={30}
                     shouldResetScrollPosition={isFetchingData}
                     onSort={this.handleSort} />
-                <ContextMenu />
+                <ContextMenu hasCommPermissionRead={hasCommPermissionRead} />
                 <SpecialLevelDropdown />
                 <OddsGroupDropdown />
                 <StatusDropdown />
@@ -84,8 +98,8 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-    const { playerList, selectedPlayer, displayedColumnList, isFetchingData, sweetAlertOption } = state;
-    return Object.assign({}, { playerList, selectedPlayer, displayedColumnList, isFetchingData, sweetAlertOption });
+    const { playerList, selectedPlayer, displayedColumnList, isFetchingData, sweetAlertOption, hasCommPermissionEdit, hasCommPermissionRead } = state;
+    return Object.assign({}, { playerList, selectedPlayer, displayedColumnList, isFetchingData, sweetAlertOption, hasCommPermissionEdit, hasCommPermissionRead });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DataGrid);

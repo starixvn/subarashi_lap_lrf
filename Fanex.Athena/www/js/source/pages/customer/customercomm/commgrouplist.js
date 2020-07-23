@@ -29,7 +29,7 @@
 
             $('#comm-group-list').on('click', '.customer-list-link', function (e) {
                 CustomerCommGroup.goToCustomerList($(e.target).data('id'));
-            });          
+            });
         }
 
         function confirmDeleteCommGroup(groupId) {
@@ -61,7 +61,11 @@
                     if (result.Code > 0) {
                         _me.showResultPopup('Error', result.Message);
                     } else {
-                        Site.redirect(Site.resolveClientUrl('CustomerComGroup/Index'));
+                        _me.showResultPopup('Success', Site.getSingleResource('MessageSuccess'));
+
+                        setTimeout(() => {
+                            Site.redirect(Site.resolveClientUrl('CustomerComGroup/Index'));
+                        }, 3000);
                     }
 
                     Site.unBlockUI();
@@ -170,8 +174,7 @@
                 width: 380
             };
 
-            if ($('#result-del-comm-group').length > 0)
-            {
+            if ($('#result-del-comm-group').length > 0) {
                 $('#result-msg').html(message);
             }
 

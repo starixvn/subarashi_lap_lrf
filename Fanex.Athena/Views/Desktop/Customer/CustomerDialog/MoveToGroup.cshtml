@@ -1,4 +1,5 @@
-﻿@model Fanex.Athena.Model.Customer.ViewModel.CustomerListViewModel
+﻿@using Fanex.Athena.Model.Core.DTO.Common;
+@model Fanex.Athena.Model.Customer.ViewModel.CustomerListViewModel
 <div class="row">
     <div class="col l8 m8 s8 input-field">
         <select id="GroupListSelect" class="select">
@@ -9,38 +10,38 @@
         </select>
         @foreach (var group in Model.GroupCommDataList)
         {
-            @Html.Hidden("SBComm" + @group.GroupCommId, NumberHelper.DecFormat((group.SBComm * 100)))
-            @Html.Hidden("ParlayComm" + @group.GroupCommId, NumberHelper.DecFormat((group.ParlayComm * 100)))
-            @Html.Hidden("NGComm" + @group.GroupCommId, NumberHelper.DecFormat((group.NGComm * 100)))
-            @Html.Hidden("CSComm" + @group.GroupCommId, NumberHelper.DecFormat((group.CSComm * 100)))
+            @Html.Hidden("SBComm" + @group.GroupCommId, NumberHelper.DecFormat(group.CommValues[Product.SB] * 100))
+            @Html.Hidden("ParlayComm" + @group.GroupCommId, NumberHelper.DecFormat(group.CommValues["Parlay"] * 100))
+            @Html.Hidden("NGComm" + @group.GroupCommId, NumberHelper.DecFormat(group.CommValues[Product.NG]))
+            @Html.Hidden("CSComm" + @group.GroupCommId, NumberHelper.DecFormat(group.CommValues[Product.CS]))
         }
         <label>@ViewResources.SelectGroup</label>
     </div>
 </div>
 <div class="row">
     <div class="col l6 m6 s6 input-field">
-        <span class="input-label" id="NewSbComm">@(Model.GroupCommDataList.Count > 0 ? NumberHelper.DecFormat((Model.GroupCommDataList[0].SBComm * 100), 2) : string.Empty)</span>
+        <span class="input-label" id="NewSbComm">@(Model.GroupCommDataList.Count > 0 ? NumberHelper.DecFormat((Model.GroupCommDataList[0].CommValues[Product.SB] * 100), 2) : string.Empty)</span>
         %
         <label>@ViewResources.SBComm</label>
     </div>
 </div>
 <div class="row">
     <div class="col l6 m6 s6 input-field">
-        <span class="input-label" id="NewParlayComm">@(Model.GroupCommDataList.Count > 0 ? NumberHelper.DecFormat((Model.GroupCommDataList[0].ParlayComm * 100), 2) : string.Empty)</span>
+        <span class="input-label" id="NewParlayComm">@(Model.GroupCommDataList.Count > 0 ? NumberHelper.DecFormat((Model.GroupCommDataList[0].CommValues["Parlay"] * 100), 2) : string.Empty)</span>
         %
         <label>@ViewResources.ParlayComm</label>
     </div>
 </div>
 <div class="row @(!Model.ProductAccess.IsAllowNG ? "hide" : "")">
     <div class="col l6 m6 s6 input-field">
-        <span class="input-label" id="NewNgComm">@(Model.GroupCommDataList.Count > 0 ? NumberHelper.DecFormat((Model.GroupCommDataList[0].NGComm * 100), 2) : string.Empty)</span>
+        <span class="input-label" id="NewNgComm">@(Model.GroupCommDataList.Count > 0 ? NumberHelper.DecFormat((Model.GroupCommDataList[0].CommValues[Product.NG] * 100), 2) : string.Empty)</span>
         %
         <label>@ViewResources.NGComm</label>
     </div>
 </div>
 <div class="row @(!Model.ProductAccess.IsAllowCS ? "hide" : "")">
     <div class="col l6 m6 s6 input-field">
-        <span class="input-label" id="NewCsComm">@(Model.GroupCommDataList.Count > 0 ? NumberHelper.DecFormat((Model.GroupCommDataList[0].CSComm * 100), 2) : string.Empty)</span>
+        <span class="input-label" id="NewCsComm">@(Model.GroupCommDataList.Count > 0 ? NumberHelper.DecFormat((Model.GroupCommDataList[0].CommValues[Product.CS] * 100), 2) : string.Empty)</span>
         %
         <label>@ViewResources.CSComm</label>
     </div>

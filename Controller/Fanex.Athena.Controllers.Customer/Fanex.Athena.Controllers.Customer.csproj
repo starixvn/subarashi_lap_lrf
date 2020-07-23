@@ -24,7 +24,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>Fanex.Athena.Controllers.Customer-1.ruleset</CodeAnalysisRuleSet>
     <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -128,11 +128,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Helpers\CustomerComGroupHelper.cs" />
     <Compile Include="PlayerSegmentation\PlayerSegmentationController.cs" />
     <Compile Include="SearchCustomerAPIController.cs" />
     <Compile Include="CustomerAPIController.cs" />
-    <Compile Include="CustomerComGroupController.cs" />
+    <Compile Include="CustomerComGroupController.cs">
+      <SonarQubeExclude>true</SonarQubeExclude>
+    </Compile>
     <Compile Include="CustomerController.cs" />
     <Compile Include="CustomerLog\CustomerLogController.cs" />
     <Compile Include="CustomerLog\CustomerLogController.CustomerSetting.cs" />
@@ -142,6 +145,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Fanex.Athena.Controllers.Customer-1.ruleset" />
     <None Include="Fanex.Athena.Controllers.Customer.ruleset" />
     <None Include="packages.config" />
   </ItemGroup>
@@ -151,7 +155,7 @@
       <Name>Fanex.Athena.DataAccess.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\DataAccess\Fanex.Athena.DataAccess.Customer\Fanex.Athena.DataAccess.Customer.csproj">
-      <Project>{C25DC4BC-2721-401B-8896-D210D70B392B}</Project>
+      <Project>{c25dc4bc-2721-401b-8896-d210d70b392b}</Project>
       <Name>Fanex.Athena.DataAccess.Customer</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Excel\Fanex.Athena.Excel.Base\Fanex.Athena.Excel.Base.csproj">
@@ -169,10 +173,6 @@
     <ProjectReference Include="..\..\Service\Fanex.Athena.Service.StatelessCore\Fanex.Athena.Service.StatelessCore.csproj">
       <Project>{DA9A50E3-C62D-4F12-96C2-3AC289D423FE}</Project>
       <Name>Fanex.Athena.Service.StatelessCore</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Fanex.Athena.Controllers.Base\Fanex.Athena.Controllers.Base.csproj">
-      <Project>{255e120a-83bf-4f72-9e31-6050d5704069}</Project>
-      <Name>Fanex.Athena.Controllers.Base</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Fanex.Athena.Extension\Fanex.Athena.Extension.csproj">
       <Project>{71f95e53-36d0-4091-828d-ed14c9939c35}</Project>
@@ -201,6 +201,10 @@
     <ProjectReference Include="..\..\Fanex.Athena.Web\Fanex.Athena.Web.csproj">
       <Project>{dd931adb-a994-49c0-95a3-72bcb6e22679}</Project>
       <Name>Fanex.Athena.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.Athena.Controllers.Base\Fanex.Athena.Controllers.Base.csproj">
+      <Project>{255e120a-83bf-4f72-9e31-6050d5704069}</Project>
+      <Name>Fanex.Athena.Controllers.Base</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

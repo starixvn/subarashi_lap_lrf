@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { render } from 'react-dom';
 import AppContainer from './AppContainer.jsx';
 import { Provider } from 'react-redux';
@@ -10,22 +10,27 @@ const { type } = window.initialState;
 const hasBaPermission = window._pConfig.hasBaPermission === 1;
 const hasOddsGroupPermission = window._pConfig.hasOddsGroupPermission === 1;
 const hasSpecialLevelPermission = window._pConfig.hasSpecialLevelPermission === 1;
+const hasCommPermissionRead = window._pConfig.hasCommPermissionRead === 1;
+const hasCommPermissionEdit = window._pConfig.hasCommPermissionEdit === 1;
 
-const displayedColumnList = buildDefaultColumnList(type);
+const displayedColumnList = buildDefaultColumnList(type, hasCommPermissionRead);
 const siteSetting = {
-  isAllowedCustomerComm: false,
-  isAllowedBA: false
+    isAllowedCustomerComm: false,
+    isAllowedBA: false
 }
 
-const defaultState = { ...window.initialState, displayedColumnList, hasBaPermission, siteSetting, hasOddsGroupPermission, hasSpecialLevelPermission };
+const defaultState = {
+    ...window.initialState, displayedColumnList, siteSetting,
+    hasBaPermission, hasOddsGroupPermission, hasSpecialLevelPermission, hasCommPermissionRead, hasCommPermissionEdit
+};
 const store = Store.createStore(reducer, defaultState);
 
 const App = () => {
-  return (
-    <Provider store={store}>
-      <AppContainer />
-    </Provider>
-  );
+    return (
+        <Provider store={store}>
+            <AppContainer />
+        </Provider>
+    );
 }
 
 render(<App />, document.getElementById("app-container"));

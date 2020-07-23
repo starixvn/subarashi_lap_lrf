@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RuleSet Name="SonarQube - Legion / LRF Nexcel CSharp" ToolsVersion="15.0">
+  <Include Path="..\..\.sonarlint\lrfcsharp.ruleset" Action="Default" />
+  <Include Path="fanex.athena.dataaccess.report.ruleset" Action="Default" />
+</RuleSet>

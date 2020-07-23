@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="IGroupComDataAccess.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.DataAccess.Customer.Interfaces
+﻿namespace Fanex.Athena.DataAccess.Customer.Interfaces
 {
     using System.Collections.Generic;
     using System.Data;
@@ -14,15 +8,15 @@ namespace Fanex.Athena.DataAccess.Customer.Interfaces
 
     public interface IGroupComDataAccess
     {
-        Task<IResultInfo> InsertGroupAsync(GroupCommMetaModel item, IRequest request, int userId);
+        Task<IResultInfo> InsertGroupAsync(GroupCommMetaModel item, IRequest request, int userId, IDictionary<string, bool> permissions);
 
-        Task<IResultInfo> UpdateGroupAsync(GroupCommMetaModel newItem, IRequest request, int userId);
+        Task<IResultInfo> UpdateGroupAsync(GroupCommMetaModel newItem, IRequest request, int userId, IDictionary<string, bool> permissions);
 
-        Task<IList<GroupCommMetaModel>> GetAllAsync(int licenseeId);
+        IList<GroupCommMetaModel> GetAllAsync(int licenseeId, IDictionary<string, bool> permissions);
 
         Task<DataTable> GetDataForExcelAsync(int licenseeId);
 
-        GroupCommMetaModel GetById(int groupCommId, int licenseeId);
+        GroupCommMetaModel GetById(int groupCommId, int licenseeId, IDictionary<string, bool> permissions);
 
         bool CheckByName(int licenseeId, string groupName);
 

@@ -138,30 +138,6 @@
             }
         }
 
-        [Test]
-        public async Task GetCustomerList_CreateCustomerViewModel_IsAllowedCustomerComm_AddDataForGroupComm()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                const int GroupCommId = 1;
-                const int LicenseeId = 2;
-
-                _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(false);
-                _productService.GetProductAccess(Arg.Any<int>(), Arg.Any<string>()).Returns(new ProductAccess(new List<Product>()));
-                StubLicenseeSessionData(new LicenseeAuthInfo { IsAllowedCustomerComm = true, LicenseeId = 2 });
-
-                // Action
-                await controller.CustomerList(groupId: GroupCommId);
-
-                // Assert
-                Assert.Multiple(() =>
-                {
-                    _groupComService.Received().GetAllAsync(LicenseeId);
-                    _groupComService.Received().GetById(GroupCommId, LicenseeId);
-                });
-            }
-        }
 
         [Test]
         public async Task GetCustomerList_SetValueForBaStatus_IsAllowedSpecialBA_DonotAddBAMessage()

@@ -9,7 +9,7 @@
         const REPORT_BY_MONTHLY = 2;
         const VALID_MONTH_RANGE = 3;
         const EXCEL_FILENAME = 'LicenseeWinLoss.xls';
-        const EXCEL_PP_FILENAME = 'PromotionPrize.xls';
+        const EXCEL_PP_FILENAME = 'ExtraPayout.xls';
 
         const cacheData = {};
         let ajaxRequest = null;
@@ -203,7 +203,6 @@
                     currencyNameOnTitle);
                 $('.report-title').html(title);
                 $('.panel-heading').removeClass('hide');
-
             },
 
             showPromotionPrizeLink: function (isShow) {
@@ -299,16 +298,16 @@
                     _level = levelNumber;
                 }
                 const param =
-                {
-                    ProductOptions: $.parseJSON(_submitData.ProductOptions),
-                    DrawFilter: _submitData.DrawFilter,
-                    IsExcludedTestData: _submitData.IsExcludedTestData,
-                    CurrencyId: _submitData.CurrencyId,
-                    ReportBy: _submitData.ReportBy,
-                    FromDate: _submitData.FromDate,
-                    ToDate: _submitData.ToDate,
-                    BaseCurrency: $('#BaseCurrency').attr('data-original')
-                };
+                    {
+                        ProductOptions: $.parseJSON(_submitData.ProductOptions),
+                        DrawFilter: _submitData.DrawFilter,
+                        IsExcludedTestData: _submitData.IsExcludedTestData,
+                        CurrencyId: _submitData.CurrencyId,
+                        ReportBy: _submitData.ReportBy,
+                        FromDate: _submitData.FromDate,
+                        ToDate: _submitData.ToDate,
+                        BaseCurrency: $('#BaseCurrency').attr('data-original')
+                    };
                 const drilldownDate = new Date(datetime);
                 const dateRange = Report.GetDrilldownDateRange(param.ReportBy, param.FromDate, param.ToDate, drilldownDate);
                 const drillDownFDate = moment(dateRange.FromDate).format('MM/DD/YYYY');

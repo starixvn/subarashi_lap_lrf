@@ -4394,10 +4394,11 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
     //#endregion
 
     const colNameList = ['#', 'Date', 'ExternalId', 'SystemId', 'Currency',
-      'Turnover', 'TotalTransaction', 'CustomerW_L', 'LicenseeW_L', 'CurrencyId', 'CustomerId'];
+        'Turnover', 'TotalTransaction', 'CustomerW_L', 'LicenseeW_L', 'CurrencyId', 'CustomerId'];
 
     const colModelList = [indexColumn, dateColumn, externalIdColumn, systemIdColumn, currencyColumn,
-        turnoverColumn, totalTransColumn, customerWlColumn, licenseeWlColumn, currencyIdColumn, customerIdColumn];
+        turnoverColumn, totalTransColumn, customerWlColumn, licenseeWlColumn,
+        currencyIdColumn, customerIdColumn];
 
     const _me =
     {
@@ -4441,9 +4442,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 
         dateColumn.hidden = levelNumber > 0;
         dateColumn.formatoptions =
-        {
-            newformat: $('#reportbydaily').is(':checked') ? 'm/d/Y' : 'm/Y'
-        };
+            {
+                newformat: $('#reportbydaily').is(':checked') ? 'm/d/Y' : 'm/Y'
+            };
         externalIdColumn.hidden = levelNumber < 2;
         systemIdColumn.hidden = levelNumber === 0;
 
@@ -4474,6 +4475,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
     return _me;
 }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
 
 /***/ }),
 

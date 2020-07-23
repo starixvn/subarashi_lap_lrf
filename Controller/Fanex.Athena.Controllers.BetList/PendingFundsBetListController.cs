@@ -8,16 +8,13 @@ namespace Fanex.Athena.Controllers.BetList
 {
     #region Using
 
-    using Fanex.Athena.Model.Auth.DataDomain;
-
-    using Model.BetList.MetaModel;
-
-    using Resources;
-
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Core.DTO.Common;
+    using Model.BetList.MetaModel;
+    using Resources;
     using Web.ActionFilter;
 
     #endregion Using
@@ -44,7 +41,7 @@ namespace Fanex.Athena.Controllers.BetList
 
         protected override async Task<ActionResult> ExportExcel(BetListExcelMetaModel metaModel)
         {
-            metaModel.ShowingOption = new BetListShowingOption
+            metaModel.ShowingOption = new ShowingOption
             {
                 CustomerCommVisible = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm,
             };

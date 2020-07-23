@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 
 using Fanex.Athena.Excel.Base;
-using Fanex.Athena.Excel.Base.Entities;
 using Fanex.Athena.Excel.Base.Extension;
 using Fanex.Athena.Excel.Report.UnitTests.TestableClasses;
+using Fanex.Athena.Model.Core.DTO.Common;
 using Fanex.Athena.Model.Report.DTO;
 using Fanex.Athena.Model.Report.MetaModel;
 using Fanex.Athena.Model.Report.ViewModel;
@@ -78,7 +78,7 @@ namespace Fanex.Athena.Excel.Report.UnitTests
                 ViewResources.Withdrawal,
                 ViewResources.Bonus,
                 ViewResources.Adjustment,
-                ViewResources.Promotion,
+                ViewResources.ExtraPayout,
                 ViewResources.Turnover,
                 ViewResources.DrawGame,
                 ViewResources.NetTurnover,

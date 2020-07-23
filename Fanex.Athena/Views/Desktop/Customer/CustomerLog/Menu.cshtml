@@ -6,7 +6,6 @@
     var sessionService = DependencyResolver.Current.GetService<ISessionService>();
     var hasCustComm = sessionService.LicenseeSession != null && sessionService.LicenseeSession.IsAllowedCustomerComm;
 }
-
 <div class="header-tab">
     <ul class="tabs">
         <!--Login log tab-->
@@ -23,12 +22,5 @@
             </a>
         </li>
         <!--/Customer setting log-->
-        <!--Group commission tab-->
-        @if (hasCustComm)
-            {
-            <li class="tab"><a href="@Url.Action("GroupCommission", "CustomerLog")" id="groupcommlogTab">@ViewResources.GroupCommission</a></li>
-        }
-        <!--/Group commission tab-->
     </ul>
-
 </div>

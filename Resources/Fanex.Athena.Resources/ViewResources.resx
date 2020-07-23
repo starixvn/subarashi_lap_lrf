@@ -2455,11 +2455,11 @@
     <comment>112658</comment>
   </data>
   <data name="WarningToLockedMsg" xml:space="preserve">
-    <value>Warning, this player cannot be restored forever!</value>
+    <value>Warning, this player cannot login and transfer!</value>
     <comment>112658</comment>
   </data>
   <data name="WarningToClosedMsg" xml:space="preserve">
-    <value>Warning, this player cannot login!</value>
+    <value>Warning, this player cannot be restored forever!</value>
     <comment>112658</comment>
   </data>
   <data name="WarningToActiveMsg" xml:space="preserve">
@@ -2802,5 +2802,50 @@
   </data>
   <data name="SoccerParlay" xml:space="preserve">
     <value>Soccer Parlay</value>
+  </data>
+  <data name="ProductParlay" xml:space="preserve">
+    <value>Sportsbook Parlay</value>
+  </data>
+  <data name="CustomerCommission" xml:space="preserve">
+    <value>Customer Commission</value>
+  </data>
+  <data name="MoveCommissionGroup" xml:space="preserve">
+    <value>Move Commission Group</value>
+  </data>
+  <data name="UpdateCommissionValue" xml:space="preserve">
+    <value>Update Commission Value</value>
+  </data>
+  <data name="SelectedCustomers" xml:space="preserve">
+    <value>Selected customers</value>
+  </data>
+  <data name="MoveToCommissionGroup" xml:space="preserve">
+    <value>Move to Commission Group</value>
+  </data>
+  <data name="BatchUpdate" xml:space="preserve">
+    <value>Batch Update</value>
+  </data>
+  <data name="CommissionGroup" xml:space="preserve">
+    <value>Commission Group</value>
+  </data>
+  <data name="PleaseSelectOne" xml:space="preserve">
+    <value>Please select one</value>
+  </data>
+  <data name="GroupNotExists" xml:space="preserve">
+    <value>Group does not exists</value>
+  </data>
+  <data name="CasinoAPI_UpdateCommError" xml:space="preserve">
+    <value>Having errors when calling CasinoAPI to update customer commission.</value>
+  </data>
+  <data name="UpdateCommGroup_Warning" xml:space="preserve">
+    <value>Please pay attention: Customer(s) will be removed from group(s) due to different discount values.</value>
+  </data>
+  <data name="Log" xml:space="preserve">
+    <value>Log</value>
+  </data>
+  <data name="ExtraPayout" xml:space="preserve">
+    <value>Extra Payout</value>
+  </data>
+  <data name="JackpotWonDetails" xml:space="preserve">
+    <value>Jackpot Won Details</value>
   </data>
 </root>

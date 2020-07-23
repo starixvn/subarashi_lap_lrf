@@ -129,41 +129,5 @@
                 });
             }
         }
-
-        [Test]
-        public async Task UpdateCustomerCom_SameOldComm_ReturnCorrectErrorMessage()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                _productService.GetProductAccess(0, string.Empty).ReturnsForAnyArgs(new ProductAccess(new List<Product>()));
-                SessionService.LicenseeSession.Returns(new LicenseeAuthInfo
-                {
-                    IsAllowedCustomerComm = true
-                });
-                var metaModel = new UpdatedCustomerComMetaModel
-                {
-                    CustomerIds = "1",
-                    GroupId = 1,
-                    SBComm = 0.05m
-                };
-                _groupComService.GetById(metaModel.GroupId, Arg.Any<int>()).Returns(new GroupCommMetaModel
-                {
-                    SBComm = metaModel.SBComm
-                });
-
-                // Action
-                var result = await controller.UpdateCustomerCom(metaModel) as JsonResult;
-                var resultData = result.Data as ResultViewModel;
-
-                // Assert
-                Assert.Multiple(() =>
-                {
-                    _customerCommService.DidNotReceiveWithAnyArgs().UpdateCustomersCommissionAsync(null, false);
-                    Assert.That(resultData.Success, Is.False);
-                    Assert.That(resultData.ErrorMessage, Is.EqualTo(ViewResources.MessageCommNoChange));
-                });
-            }
-        }
     }
 }

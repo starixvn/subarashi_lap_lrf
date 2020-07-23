@@ -1,31 +1,23 @@
 ﻿namespace Fanex.Athena.Service.Core.UnitTests.Users
 {
-    using Core.Users;
-    using Core.Users.Interfaces;
-
-    using DataAccess.Core.Common.Interfaces;
-    using DataAccess.Core.Users.Interfaces;
-
-    using Extension.Utility;
-
-    using Fanex.Athena.Model.Auth;
-    using Fanex.Athena.Model.Auth.DataDomain;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Utility;
-
-    using Model.Core.DataDomain;
-    using Model.Core.DTO.Common;
-
-    using NSubstitute;
-
-    using NUnit.Framework;
-
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Web;
     using System.Web.SessionState;
-
+    using Core.Users;
+    using Core.Users.Interfaces;
+    using DataAccess.Core.Common.Interfaces;
+    using DataAccess.Core.Users.Interfaces;
+    using Extension.Utility;
+    using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
+    using Model.Core.DataDomain;
+    using Model.Core.DTO.Common;
+    using NSubstitute;
+    using NUnit.Framework;
     using UnitTest.Common.Helpers;
 
     [TestFixture]
@@ -535,6 +527,20 @@
 
             // Assert
             Assert.That(userSession.CurrencyList.Values.ElementAt(0), Is.EqualTo("CNY"));
+        }
+
+        [Test]
+        public void SetCaptchaCode_Always_SetCorrectValue()
+        {
+            // Arrange
+            CreateDefaultNewSession();
+            var code = "CaptchaCode";
+
+            // Action
+            _sessionService.CaptchaCode = code;
+
+            // Assert
+            Assert.AreEqual(code, _sessionService.CaptchaCode);
         }
 
         private static void MockHttpContext()

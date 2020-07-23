@@ -6,14 +6,12 @@
 
 namespace Fanex.Athena.Controllers.BetList
 {
-    using Fanex.Athena.Web.ActionFilter;
-
-    using Model.BetList.MetaModel;
-
-    using Resources;
-
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Web.ActionFilter;
+    using Model.BetList.MetaModel;
+    using Resources;
 
     public class RNGCasinoBetListController : BetListBaseController
     {
@@ -31,7 +29,7 @@ namespace Fanex.Athena.Controllers.BetList
         {
             metaModel.Title = GetBetListDetailTitle(ViewResources.ProductCS, metaModel.Date);
 
-            metaModel.ShowingOption = new BetListShowingOption
+            metaModel.ShowingOption = new ShowingOption
             {
                 CustomerCommVisible = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm
             };

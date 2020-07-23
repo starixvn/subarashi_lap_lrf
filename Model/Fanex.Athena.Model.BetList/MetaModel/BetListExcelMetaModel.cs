@@ -1,10 +1,12 @@
-﻿namespace Fanex.Athena.Model.BetList.MetaModel
+﻿using Fanex.Athena.Model.Core.DTO.Common;
+
+namespace Fanex.Athena.Model.BetList.MetaModel
 {
     public class BetListExcelMetaModel : BetListMetaModel
     {
         public string Title { get; set; }
 
-        public BetListShowingOption ShowingOption { get; set; }
+        public ShowingOption ShowingOption { get; set; }
 
         public int[] HiddenColumns { get; set; }
 

@@ -53,8 +53,8 @@ export class FormFilter extends PureComponent {
             this.setState({ isValidUserName: !!userName });
         }
 
-        const { type, isSubsidiary } = this.props;
-        this.props.getSiteSetting(type, isSubsidiary);
+        const { type, isSubsidiary, hasCommPermissionRead } = this.props;
+        this.props.getSiteSetting(type, isSubsidiary, hasCommPermissionRead);
     }
 
     componentDidUpdate(prevProps, prevState) {

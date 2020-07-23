@@ -58,7 +58,7 @@ namespace Fanex.Athena.Service.Customer
         /// <returns>The result information.</returns>
         public async Task<IResultInfo> MoveCustomersToGroupAsync(MoveToGroupComMetaModel metaModel)
         {
-            var groupInfo = _groupComDataAccess.GetById(metaModel.GroupComId, metaModel.LicenseeId);
+            var groupInfo = _groupComDataAccess.GetById(metaModel.GroupComId, metaModel.LicenseeId, metaModel.ProductPermissions);
             if (groupInfo == null)
             {
                 return new ResultInfo
@@ -73,7 +73,7 @@ namespace Fanex.Athena.Service.Customer
             if (result.IsSuccessful && metaModel.IsAllowedRNG && !string.IsNullOrWhiteSpace(result.ExtendedData))
             {
                 callApiSuccess =
-                    await CallApiToUpdateCommAsync(result.ExtendedData, groupInfo.CSComm, metaModel.Ip, metaModel.UserId, metaModel.UserName);
+                    await CallApiToUpdateCommAsync(result.ExtendedData, groupInfo.CommValues[Product.CS], metaModel.Ip, metaModel.UserId, metaModel.UserName);
             }
 
             return callApiSuccess ? result : new ResultInfo

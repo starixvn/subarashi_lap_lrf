@@ -4,6 +4,7 @@ import BetList from './lib/BetList';
 import Popup from '@jsroot/components/popup';
 import PropTypes from 'prop-types';
 import { SportType } from './lib/constants';
+import { unaryExpression } from '@babel/types';
 
 class BetListLayout extends Component {
     constructor(props) {
@@ -14,7 +15,6 @@ class BetListLayout extends Component {
             popupUrl: null,
             popupTitle: null
         };
-
     }
 
     componentDidMount() {
@@ -39,7 +39,6 @@ class BetListLayout extends Component {
             else if (sporttype === SportType.PP) {
                 const url = BetList.getPPResultUrl(rootUrl, custid, extension2);
                 this._showThirdPartyResult(url, title);
-
             }
             else if (sporttype === SportType.CARDCLUB) {
                 const url = BetList.getCardClubResultUrl(rootUrl, custid, bettype, extension2);
@@ -188,6 +187,16 @@ class BetListLayout extends Component {
             this._openPopup(url, title);
         }
 
+        window.showPPJackpotWonDetails = (transId, custId, betTypeId) => {
+            const { rootUrl, baseCurrency } = this.props;
+
+            const url = BetList.getPPJackpotWonDetailUrl(rootUrl, baseCurrency, transId, custId, betTypeId);
+            const title = this._getResource('ProductPP') + ' - ' +
+                this._getResource('JackpotWonDetails');
+
+            this._openPopup(url, title);
+        }
+
         window.showVideoPokerGameDetails = (transId, winlostDate, custId, transType) => {
             const { rootUrl, baseCurrency } = this.props;
 
@@ -227,8 +236,6 @@ class BetListLayout extends Component {
 
             this._openPopup(url, title);
         }
-
-
     }
 
     componentWillUnmount() {
@@ -246,6 +253,7 @@ class BetListLayout extends Component {
         window.showColossusBetsDetails = undefined;
         window.showGlobalGaming = undefined;
         window.showPPDetails = undefined;
+        window.showPPJackpotWonDetails = undefined;
         window.showSingleMatchParlayDetail = undefined;
         window.showSGDetails = undefined;
         window.showSexyGamingBetDetails = undefined;

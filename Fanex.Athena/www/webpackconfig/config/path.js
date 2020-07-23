@@ -57,15 +57,16 @@ var cssPaths = {
     colossusbetswinloss: ["./www/css/source/pages/report/colossusbetswinloss.scss"],
     customerpendingfunds: ["./www/css/source/pages/report/customerpendingfunds.scss"],
     customerturnover: ["./www/css/source/pages/report/customerturnover.scss"],
-    customerwinloss: ["./www/css/source/pages/report/customerwinloss.scss"]
+    customerwinloss: ["./www/css/source/pages/report/customerwinloss.scss"],
+    playercomission: ["./www/css/source/pages/playercommission/index.scss"]
 };
 
 var scriptPaths = {
     build: "www/js/build",
 
     language: "common/languages/ViewResources.js",
-    languageCN: "common/languages/ViewResources.zh-CN.js", 
-    languageTW: "common/languages/ViewResources.zh-TW.js", 
+    languageCN: "common/languages/ViewResources.zh-CN.js",
+    languageTW: "common/languages/ViewResources.zh-TW.js",
     languageHans: "common/languages/ViewResources.zh-Hans.js",
     home: ["./www/js/source/components/navbar.js", "./www/js/source/components/sidebar.js", "malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js", "./www/js/source/pages/home/main.js"],
     signin: ["./www/js/source/pages/signin/main.js"],
@@ -128,7 +129,13 @@ var scriptPaths = {
     colossusbetswinloss: "./www/js/source/pages/report/thirdpartywinloss/main-colossusbetswinloss.js",
     customerpendingfunds: "./www/js/source/pages/report/customerpendingfunds/main.js",
     customerturnover: "./www/js/source/pages/report/customerturnover/main.js",
-    customerwinloss: "./www/js/source/pages/report/customerwinloss/main.js"
+    customerwinloss: "./www/js/source/pages/report/customerwinloss/main.js",
+    playercomissionmultiplemovegroup: "./www/js/source/pages/playercommission/multiplemovegroup.js",
+    playercomissionmultipleremovefromgroup: "./www/js/source/pages/playercommission/multipleremovefromgroup.js",
+    playercomissionmultipleupdategroup: "./www/js/source/pages/playercommission/multipleupdategroup.js",
+    playercomissionsinglemovegroup: "./www/js/source/pages/playercommission/singlemovegroup.js",
+    playercomissionsingleremovefromgroup: "./www/js/source/pages/playercommission/singleremovefromgroup.js",
+    playercomissionsingleupdategroup: "./www/js/source/pages/playercommission/singleupdategroup.js",
 };
 
 module.exports = {

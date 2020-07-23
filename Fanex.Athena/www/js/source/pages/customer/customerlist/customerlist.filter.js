@@ -19,7 +19,7 @@ define(['jquery', 'common/site', './customerlist.state', './customerlist.service
                 });
                 _me.initEvent();
             },
-            submit: function(){
+            submit: function () {
                 _state.pagingOption.pageindex = 1;
                 _dormantState.pagingOption.pageindex = 1;
                 CustomerListService.submit();
@@ -182,22 +182,22 @@ define(['jquery', 'common/site', './customerlist.state', './customerlist.service
                 const groupData = CustomerListService.getSubsidiaryTree($.parseJSON(data));
 
                 $('#subsidiary-multiselect').multiSelect(
-                {
-                    minWidth: 100,
-                    maxHeight: 400,
-                    shadow: true,
-                    showHeader: true,
-                    isCheckAll: true,
-                    showFooter: false,
-                    checkAllText: Site.getSingleResource('All'),
-                    selectedText: Site.getSingleResource('SelectedItemCount'),
-                    noneSelectedText: Site.getSingleResource('SelectOptions'),
-                    tooltipNoItem: Site.getSingleResource('ThereIsNoSelectedItem'),
-                    listData: groupData,
-                    onCheck: function () {
-                        enableSubmitButton(true);
-                    }
-                });
+                    {
+                        minWidth: 100,
+                        maxHeight: 400,
+                        shadow: true,
+                        showHeader: true,
+                        isCheckAll: true,
+                        showFooter: false,
+                        checkAllText: Site.getSingleResource('All'),
+                        selectedText: Site.getSingleResource('SelectedItemCount'),
+                        noneSelectedText: Site.getSingleResource('SelectOptions'),
+                        tooltipNoItem: Site.getSingleResource('ThereIsNoSelectedItem'),
+                        listData: groupData,
+                        onCheck: function () {
+                            enableSubmitButton(true);
+                        }
+                    });
             }
         };
 

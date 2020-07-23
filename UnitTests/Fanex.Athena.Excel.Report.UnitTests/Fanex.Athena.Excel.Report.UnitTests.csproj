@@ -101,6 +101,7 @@
     <Compile Include="AgCasinoBalanceExcelTest.cs" />
     <Compile Include="ActiveCustomerSummaryExcelTest.cs" />
     <Compile Include="BaseReportExcelTest.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="LicenseeWinLossExcelTest.AssignCommonData.cs" />
     <Compile Include="LicenseeWinLossExcelTest.ProcessUI.cs" />
     <Compile Include="LicenseeWinLossExcelTest.AssignHeader.cs" />

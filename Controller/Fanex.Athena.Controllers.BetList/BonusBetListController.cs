@@ -1,13 +1,11 @@
 ﻿namespace Fanex.Athena.Controllers.BetList
 {
-    using Fanex.Athena.Web.ActionFilter;
-
-    using Model.BetList.MetaModel;
-
-    using Resources;
-
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Web.ActionFilter;
+    using Model.BetList.MetaModel;
+    using Resources;
 
     public class BonusBetListController : BetListBaseController
     {
@@ -21,7 +19,7 @@
 
         protected override async Task<ActionResult> ExportExcel(BetListExcelMetaModel metaModel)
         {
-            metaModel.ShowingOption = new BetListShowingOption { GrandTotalVisible = false, CustomerCommVisible = metaModel.HasPlayerCom };
+            metaModel.ShowingOption = new ShowingOption { GrandTotalVisible = false, CustomerCommVisible = metaModel.HasPlayerCom };
             metaModel.HiddenColumns = new[] { ExternalIdColumn, SystemIdColumn, BetEffectiveColumn };
             metaModel.Title = ViewResources.TransactionDetail;
             return await ProcessExportExcel(metaModel, "BonusTransactionDetail").ConfigureAwait(false);

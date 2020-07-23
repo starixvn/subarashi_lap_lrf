@@ -1,7 +1,6 @@
 ﻿namespace Fanex.Athena.Excel.Base.UnitTests
 {
-    using Entities;
-
+    using Fanex.Athena.Model.Core.DTO.Common;
     using NPOI.SS.UserModel;
 
     using NSubstitute;

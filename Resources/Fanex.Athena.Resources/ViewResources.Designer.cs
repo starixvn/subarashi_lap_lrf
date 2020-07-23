@@ -718,6 +718,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Batch Update.
+        /// </summary>
+        public static string BatchUpdate {
+            get {
+                return ResourceManager.GetString("BatchUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to BA Updated By.
         /// </summary>
         public static string BAUpdatedBy {
@@ -1168,6 +1177,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Having errors when calling CasinoAPI to update customer commission..
+        /// </summary>
+        public static string CasinoAPI_UpdateCommError {
+            get {
+                return ResourceManager.GetString("CasinoAPI_UpdateCommError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Casino Transfer.
         /// </summary>
         public static string CasinoTransfer {
@@ -1380,6 +1398,15 @@ namespace Fanex.Athena.Resources {
         public static string Commission {
             get {
                 return ResourceManager.GetString("Commission", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Commission Group.
+        /// </summary>
+        public static string CommissionGroup {
+            get {
+                return ResourceManager.GetString("CommissionGroup", resourceCulture);
             }
         }
         
@@ -1623,6 +1650,15 @@ namespace Fanex.Athena.Resources {
         public static string CustomerComm {
             get {
                 return ResourceManager.GetString("CustomerComm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Customer Commission.
+        /// </summary>
+        public static string CustomerCommission {
+            get {
+                return ResourceManager.GetString("CustomerCommission", resourceCulture);
             }
         }
         
@@ -2509,6 +2545,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Extra Payout.
+        /// </summary>
+        public static string ExtraPayout {
+            get {
+                return ResourceManager.GetString("ExtraPayout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fail.
         /// </summary>
         public static string Fail {
@@ -2950,6 +2995,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Group does not exists.
+        /// </summary>
+        public static string GroupNotExists {
+            get {
+                return ResourceManager.GetString("GroupNotExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Another group is currently set as default. Wanna set this group as default?.
         /// </summary>
         public static string GroupSetAsDefaultMsg {
@@ -3279,6 +3333,15 @@ namespace Fanex.Athena.Resources {
         public static string IsNeutral {
             get {
                 return ResourceManager.GetString("IsNeutral", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jackpot Won Details.
+        /// </summary>
+        public static string JackpotWonDetails {
+            get {
+                return ResourceManager.GetString("JackpotWonDetails", resourceCulture);
             }
         }
         
@@ -3675,6 +3738,15 @@ namespace Fanex.Athena.Resources {
         public static string Locked {
             get {
                 return ResourceManager.GetString("Locked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Log.
+        /// </summary>
+        public static string Log {
+            get {
+                return ResourceManager.GetString("Log", resourceCulture);
             }
         }
         
@@ -4228,11 +4300,29 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Move Commission Group.
+        /// </summary>
+        public static string MoveCommissionGroup {
+            get {
+                return ResourceManager.GetString("MoveCommissionGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Successfully moved..
         /// </summary>
         public static string MoveSuccessfullyMsg {
             get {
                 return ResourceManager.GetString("MoveSuccessfullyMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move to Commission Group.
+        /// </summary>
+        public static string MoveToCommissionGroup {
+            get {
+                return ResourceManager.GetString("MoveToCommissionGroup", resourceCulture);
             }
         }
         
@@ -5047,6 +5137,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please select one.
+        /// </summary>
+        public static string PleaseSelectOne {
+            get {
+                return ResourceManager.GetString("PleaseSelectOne", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pre Game.
         /// </summary>
         public static string PreGame {
@@ -5241,6 +5340,15 @@ namespace Fanex.Athena.Resources {
         public static string ProductNG {
             get {
                 return ResourceManager.GetString("ProductNG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sportsbook Parlay.
+        /// </summary>
+        public static string ProductParlay {
+            get {
+                return ResourceManager.GetString("ProductParlay", resourceCulture);
             }
         }
         
@@ -5691,6 +5799,15 @@ namespace Fanex.Athena.Resources {
         public static string SelectAtLeastOneCurrencyMsg {
             get {
                 return ResourceManager.GetString("SelectAtLeastOneCurrencyMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selected customers.
+        /// </summary>
+        public static string SelectedCustomers {
+            get {
+                return ResourceManager.GetString("SelectedCustomers", resourceCulture);
             }
         }
         
@@ -6649,11 +6766,29 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please pay attention: Customer(s) will be removed from group(s) due to different discount values..
+        /// </summary>
+        public static string UpdateCommGroup_Warning {
+            get {
+                return ResourceManager.GetString("UpdateCommGroup_Warning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Update Commission.
         /// </summary>
         public static string UpdateCommission {
             get {
                 return ResourceManager.GetString("UpdateCommission", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update Commission Value.
+        /// </summary>
+        public static string UpdateCommissionValue {
+            get {
+                return ResourceManager.GetString("UpdateCommissionValue", resourceCulture);
             }
         }
         
@@ -7180,7 +7315,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Warning, this player cannot login!.
+        ///   Looks up a localized string similar to Warning, this player cannot be restored forever!.
         /// </summary>
         public static string WarningToClosedMsg {
             get {
@@ -7189,7 +7324,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Warning, this player cannot be restored forever!.
+        ///   Looks up a localized string similar to Warning, this player cannot login and transfer!.
         /// </summary>
         public static string WarningToLockedMsg {
             get {

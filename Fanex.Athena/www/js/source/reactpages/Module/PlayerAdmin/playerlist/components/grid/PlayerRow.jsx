@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../../actions';
 
-import { fields } from '../../lib/constants';
+import { fields, playerStatusByName } from '../../lib/constants';
 import { Row, Cell } from '@9softstudio/react-grid';
 import NumberFormat from '@jsroot/lib/numberFormat';
 
@@ -12,11 +12,14 @@ import OddsGroupCell from './OddsGroupCell';
 import SpecialLevelCell from './SpecialLevelCell';
 import StatusCell from './StatusCell';
 import BaStatusCell from './BaStatusCell';
+import LangHelper from '@jsroot/lib/langHelper';
 
 export const PlayerRow = (props) => {
     const {
         dataItem,
-        displayedColumn
+        displayedColumn,
+        canSelectPlayers,
+        hasCommPermissionRead
     } = props;
 
     const {
@@ -31,24 +34,30 @@ export const PlayerRow = (props) => {
         OddsGroup,
         SpecialLevel,
         IsDeposit,
-        IsArchived
+        IsArchived,
+        CommissionGroup
     } = dataItem;
     const canShowMainColumn = IsDeposit && !IsArchived;
+    const commissionGroup = CommissionGroup || LangHelper.getSingleResource('None');
+    const canEditCommissionGpoup = IsDeposit && !IsArchived && dataItem.Status != playerStatusByName.Closed;
 
     return (
         <Row key={LicenseeCustId}>
+            {canSelectPlayers && displayedColumn[fields.Index] && !canEditCommissionGpoup && <Cell className="center-align"></Cell>}
+            {canSelectPlayers && displayedColumn[fields.Index] && canEditCommissionGpoup && <Cell className="center-align"><input type="checkbox" id={"chk-cust-" + LicenseeCustId} data-username={dataItem.UserName} data-custid={dataItem.IbcCustId} className="chk-cust" /></Cell>}
             {displayedColumn[fields.Status] && <Cell><StatusCell dataItem={dataItem} /></Cell>}
-            {displayedColumn[fields.UserName] && <Cell><UserNameCell dataItem={dataItem} /></Cell>}
+            {displayedColumn[fields.UserName] && <Cell><UserNameCell dataItem={dataItem} hasCommPermissionRead={hasCommPermissionRead} /></Cell>}
             {displayedColumn[fields.SystemId] && <Cell title={SystemId}>{SystemId}</Cell>}
             {displayedColumn[fields.RealName] && <Cell>{RealName}</Cell>}
             {displayedColumn[fields.Currency] && <Cell className="center-align">{Currency}</Cell>}
-            {displayedColumn[fields.CurrentBalance] && <Cell className="right-align" title={canShowMainColumn && NumberFormat.roundDownFormatDecimal(CurrentBalance)}>{canShowMainColumn && NumberFormat.roundDownFormatDecimal(CurrentBalance)}</Cell>}
-            {displayedColumn[fields.OutstandingBalance] && <Cell className="right-align" title={canShowMainColumn && NumberFormat.roundDownFormatDecimal(OutstandingBalance)}>{canShowMainColumn && NumberFormat.roundDownFormatDecimal(OutstandingBalance)}</Cell>}
+            {displayedColumn[fields.CurrentBalance] && <Cell className="right-align" title={canShowMainColumn ? NumberFormat.roundDownFormatDecimal(CurrentBalance) : undefined}>{canShowMainColumn && NumberFormat.roundDownFormatDecimal(CurrentBalance)}</Cell>}
+            {displayedColumn[fields.OutstandingBalance] && <Cell className="right-align" title={canShowMainColumn ? NumberFormat.roundDownFormatDecimal(OutstandingBalance) : undefined}>{canShowMainColumn && NumberFormat.roundDownFormatDecimal(OutstandingBalance)}</Cell>}
             {displayedColumn[fields.OddsGroup] && <Cell className="center-align">{canShowMainColumn && OddsGroup !== undefined && <OddsGroupCell dataItem={dataItem} />}</Cell>}
             {displayedColumn[fields.BaStatus] && <BaStatusCell dataItem={dataItem} />}
             {displayedColumn[fields.SpecialLevel] && <Cell className="center-align">{canShowMainColumn && SpecialLevel !== undefined && <SpecialLevelCell dataItem={dataItem} />}</Cell>}
             {displayedColumn[fields.LastTransaction] && <Cell>{LastTransaction}</Cell>}
             {displayedColumn[fields.Email] && <Cell>{Email}</Cell>}
+            {hasCommPermissionRead && displayedColumn[fields.CommissionGroup] && <Cell className={"text-center td-comm-" + dataItem.IbcCustId} title={commissionGroup}>{commissionGroup}</Cell>}
         </Row>
     )
 }

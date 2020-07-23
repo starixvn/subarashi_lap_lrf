@@ -200,9 +200,9 @@
             const levelNumber = Number(level);
             dateColumn.hidden = levelNumber > 0;
             dateColumn.formatoptions =
-            {
-                newformat: parseInt(reportBy, 10) === REPORT_BY_DAILY ? 'm/d/Y' : 'm/Y'
-            };
+                {
+                    newformat: parseInt(reportBy, 10) === REPORT_BY_DAILY ? 'm/d/Y' : 'm/Y'
+                };
 
             currencyColumn.formatter = levelNumber === 0 ? function (cellvalue, options, rowObject) {
                 const drilldownLevel = _me.licenseeId === LICENSEE_12BET ? 1 : 2;

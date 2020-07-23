@@ -18,7 +18,7 @@ namespace Fanex.Athena.Excel.Report
 
     public class ThirdPartyWinLossExcel<T> : ReportBase where T : ThirdPartyWinLoss
     {
-        private const int ColumnTemplateCount = 9;
+        private const int ColumnTemplateCount = 8;
 
         private const int ColumnDate = 1;
         private const int ColumnExternalId = 2;
@@ -27,8 +27,8 @@ namespace Fanex.Athena.Excel.Report
         private const int ColumnTurnover = 5;
         private const int ColumnTotalTransaction = 6;
         private const int ColumnCustomerWl = 7;
-        private const int ColumnLicenseeWl = 8;
 
+        private const int ColumnLicenseeWl = 8;
         private const int RowContentTemplate = 2;
         private const int RowTotalNoSolidBorder = 4;
         private const int RowTotalSolidBorder = 3;

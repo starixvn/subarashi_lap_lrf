@@ -8,9 +8,7 @@ namespace Fanex.Athena.Web.ActionFilter
 {
     using System;
     using System.Linq;
-    using System.Net;
     using System.Web.Mvc;
-    using System.Web.Routing;
     using Fanex.Athena.Model.Core.MetaModel;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -43,7 +41,6 @@ namespace Fanex.Athena.Web.ActionFilter
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            var context = filterContext.HttpContext;
             var userSession = SessionStorage.UserAuthInfo;
             var authorized = userSession != null;
             if (authorized)
@@ -70,31 +67,7 @@ namespace Fanex.Athena.Web.ActionFilter
                 authorized = AuthorizationService.CheckCustomerBelongsTo(userSession.CurrencyAgentList, custId, currencyId);
             }
 
-            if (!authorized)
-            {
-                if (context.Request.IsAjaxRequest())
-                {
-                    filterContext.HttpContext.Response.StatusCode = (int)HttpStatusCode.Forbidden;
-                    filterContext.HttpContext.Response.ContentType = "application/json";
-                    filterContext.Result = new JsonResult
-                    {
-                        Data = new { ErrCode = (int)HttpStatusCode.Forbidden, ErrMsg = "Access Denied." },
-                        JsonRequestBehavior = JsonRequestBehavior.AllowGet
-                    };
-                }
-                else
-                {
-                    var routeValue = new
-                    {
-                        controller = "Utility",
-                        action = "AccessDenied",
-                        message = "AccessDenied"
-                    };
-
-                    filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(routeValue));
-                }
-            }
-
+            ActionFilterAttributeHelper.OnActionExecuting(filterContext, authorized);
             base.OnActionExecuting(filterContext);
         }
     }

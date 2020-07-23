@@ -35,7 +35,6 @@ class BetList {
     }
 
     getResultUrl(rootUrl, matchid, raceNo, bettype, sporttype, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid) {
-
         bettype = Number(bettype);
 
         let isParlay = bettype === BetType.MIXPARLAY || bettype === BetType.SYSTEMPARLAY || bettype === BetType.MIXPARLAY_BETRADAR;
@@ -46,7 +45,7 @@ class BetList {
         return url;
     }
 
-    getChoiceParlayDetailUrl(rootUrl, transId, refNo, handicap1, handicap2, betcheck, betteam, custId){
+    getChoiceParlayDetailUrl(rootUrl, transId, refNo, handicap1, handicap2, betcheck, betteam, custId) {
         var url = rootUrl + 'api/MixParlayBetList/NewParlayDetail';
         url = QueryString.setParam(url, 'transId', transId);
         url = QueryString.setParam(url, 'refNo', refNo);
@@ -59,17 +58,17 @@ class BetList {
         return url;
     }
 
-    buildChoiceParlayDetail(response){
+    buildChoiceParlayDetail(response) {
         let choice = '';
         let length = response.Data === null ? 0 : response.Data.length;
         if (length > 0) {
-            for(let i = 0; i < response.Texts.length; i++){
+            for (let i = 0; i < response.Texts.length; i++) {
                 choice += response.Texts[i];
             }
 
             choice += '<div class="line"></div>';
 
-            for(let i = 0;i < response.Data.length; i++){
+            for (let i = 0; i < response.Data.length; i++) {
                 let item = response.Data[i];
                 choice += item;
                 if (i < length - 1) {
@@ -128,7 +127,7 @@ class BetList {
         url = QueryString.setParam(url, 'isCashout', isCashOut);
         return {
             url: url,
-            isCashOut : isCashOut
+            isCashOut: isCashOut
         };
     }
 
@@ -219,6 +218,16 @@ class BetList {
         return url;
     }
 
+    getPPJackpotWonDetailUrl(rootUrl, baseCurrency, transId, custId, betTypeId) {
+        let url = rootUrl + 'JackpotWonBetList/Detail';
+        url = QueryString.setParam(url, 'transId', transId);
+        url = QueryString.setParam(url, 'custId', custId);
+        url = QueryString.setParam(url, 'bettype', betTypeId);
+        url = QueryString.setParam(url, 'BaseCurrency', baseCurrency);
+
+        return url;
+    }
+
     getVideoPokerGameDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
         let url = rootUrl + 'CardClubBetList/Detail';
         url = QueryString.setParam(url, 'transId', transId);
@@ -251,7 +260,7 @@ class BetList {
 
         return url;
     }
-    
+
     getSBCDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
         let url = rootUrl + 'SabaClubBetList/Detail';
         url = QueryString.setParam(url, 'transId', transId);
@@ -310,13 +319,12 @@ class BetList {
     }
 
     getAllBetResultUrl(rootUrl, transdesc, betcheck, bettype) {
-        let url = rootUrl + 'ResultReport/AllBetResult';       
+        let url = rootUrl + 'ResultReport/AllBetResult';
         url = QueryString.setParam(url, 'betcheck', betcheck);
         url = QueryString.setParam(url, 'bettype', bettype);
         url = QueryString.setParam(url, 'transdesc', encodeURIComponent(transdesc));
 
         return url;
-
     }
 
     getSexyGamingResultUrl(rootUrl, transdesc, matchCode, bettype) {

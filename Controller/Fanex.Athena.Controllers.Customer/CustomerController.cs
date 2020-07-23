@@ -6,15 +6,19 @@
 
 namespace Fanex.Athena.Controllers.Customer
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using DataAccess.Core.Users.Interfaces;
-
     using Excel.Base.Helpers;
-
     using Fanex.Athena.Excel.Customer;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
-    using Fanex.Athena.Model.Core.DTO.Users;
+    using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Athena.Model.Customer.ViewModel;
     using Fanex.Athena.Service.Core.Users.Interfaces;
@@ -23,21 +27,10 @@ namespace Fanex.Athena.Controllers.Customer
     using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
     using Fanex.Athena.Web.ResultExtension;
-
     using Model.Core.DataDomain;
     using Model.Customer.DTO;
-
     using Newtonsoft.Json;
-
     using Resources;
-
-
-    using System;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
 
     [FunctionAuthorization(PermissionKeys.CustomerInfoCustomerList)]
     public class CustomerController : CultureBaseController
@@ -100,6 +93,8 @@ namespace Fanex.Athena.Controllers.Customer
             var productAccess = this._productService.GetProductAccess(licensee.LicenseeId, userSession.Language);
             var allowLicensees = AppSettingInstance.LicenseeOfferStatusFunction;
             var placeholderUsername = IsFakeLicensee(licensee.LicenseeName) ? ViewResources.ExternalId : ViewResources.ExternalIdOrSystemId;
+
+            var supportedProducts = _productService.GetAllowedProducts("CommissionGroups");
             var metaModel = new CustomerListMetaModel
             {
                 Username = userName == placeholderUsername ? string.Empty : userName,
@@ -108,10 +103,11 @@ namespace Fanex.Athena.Controllers.Customer
                 IsShowStatusDropdown = allowLicensees.Contains(licensee.LicenseeId),
                 GridColumns = InitGridColumns(productAccess.IsAllow(Product.BA), allowLicensees),
                 OddsGroups = GetOddsGroups(),
-                BaseCurrency = userSession.DefaultBaseCurrency
+                BaseCurrency = userSession.DefaultBaseCurrency,
+                ProductPermissions = CommissionGroupHelper.GetProductPermissions(supportedProducts, productAccess)
             };
 
-            var model = await CreateCustomerViewModelAsync(metaModel);
+            var model = CreateCustomerViewModelAsync(metaModel);
 
             if (!model.IsSubsidiary)
             {
@@ -312,7 +308,7 @@ namespace Fanex.Athena.Controllers.Customer
                 metaModel);
         }
 
-        private async Task<CustomerListViewModel> CreateCustomerViewModelAsync(CustomerListMetaModel metaModel)
+        private CustomerListViewModel CreateCustomerViewModelAsync(CustomerListMetaModel metaModel)
         {
             var licenseeSession = SessionServiceInstance.LicenseeSession;
             var userSession = SessionServiceInstance.UserSession;
@@ -330,10 +326,11 @@ namespace Fanex.Athena.Controllers.Customer
                 ViewType = (SubsidiaryViewType)userSession.SubsidiaryViewType,
                 IsSubsidiary = isSubsidiary
             };
+
             if (!isSubsidiary && licenseeSession.IsAllowedCustomerComm)
             {
-                model.GroupCommDataList = await _groupComService.GetAllAsync(licenseeSession.LicenseeId);
-                model.CurrentGroupComm = _groupComService.GetById(metaModel.GroupCommId, licenseeSession.LicenseeId);
+                model.GroupCommDataList = _groupComService.GetAllAsync(licenseeSession.LicenseeId, metaModel.ProductPermissions);
+                model.CurrentGroupComm = _groupComService.GetById(metaModel.GroupCommId, licenseeSession.LicenseeId, metaModel.ProductPermissions);
             }
 
             return model;

@@ -1746,6 +1746,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./lib/constants */ "./www/js/source/reactpages/layouts/betlist/lib/constants.js");
+/* harmony import */ var _babel_types__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @babel/types */ "./node_modules/@babel/types/lib/index.js");
+/* harmony import */ var _babel_types__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_babel_types__WEBPACK_IMPORTED_MODULE_6__);
+
 
 
 
@@ -1963,6 +1966,18 @@ class BetListLayout extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       this._openPopup(url, title);
     };
 
+    window.showPPJackpotWonDetails = (transId, custId, betTypeId) => {
+      const {
+        rootUrl,
+        baseCurrency
+      } = this.props;
+      const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getPPJackpotWonDetailUrl(rootUrl, baseCurrency, transId, custId, betTypeId);
+
+      const title = this._getResource('ProductPP') + ' - ' + this._getResource('JackpotWonDetails');
+
+      this._openPopup(url, title);
+    };
+
     window.showVideoPokerGameDetails = (transId, winlostDate, custId, transType) => {
       const {
         rootUrl,
@@ -2027,6 +2042,7 @@ class BetListLayout extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     window.showColossusBetsDetails = undefined;
     window.showGlobalGaming = undefined;
     window.showPPDetails = undefined;
+    window.showPPJackpotWonDetails = undefined;
     window.showSingleMatchParlayDetail = undefined;
     window.showSGDetails = undefined;
     window.showSexyGamingBetDetails = undefined;
@@ -2449,6 +2465,15 @@ class BetList {
     url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'date', winlostDate);
     url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
     url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transType', transType);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
+    return url;
+  }
+
+  getPPJackpotWonDetailUrl(rootUrl, baseCurrency, transId, custId, betTypeId) {
+    let url = rootUrl + 'JackpotWonBetList/Detail';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'bettype', betTypeId);
     url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
     return url;
   }

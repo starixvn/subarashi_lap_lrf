@@ -32,22 +32,6 @@ namespace Fanex.Athena.Controllers.Customer.UnitTests.Helpers
             Assert.That(message, Is.EqualTo(expectedMessage));
         }
 
-        [TestCase(1, 123)]
-        [TestCase(2, 4)]
-        [TestCase(3, 5)]
-        [TestCase(4, 0)]
-        public void SetComm_WhenCall_ReturnCorrectData(int position, int expectedResult)
-        {
-            // Arrange
-            const decimal Comm = 1.2345m;
-
-            // Action
-            var result = CustomerComGroupHelper.SetComm(Comm, position);
-
-            // Assert
-            Assert.That(result, Is.EqualTo(expectedResult));
-        }
-
         [Test]
         public void IsSameGroup_NotSameComm_ReturnFalse()
         {

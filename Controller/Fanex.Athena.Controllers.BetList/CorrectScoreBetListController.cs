@@ -13,6 +13,7 @@ namespace Fanex.Athena.Controllers.BetList
     using System.Web.Mvc;
 
     using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Web.ActionFilter;
 
     using Model.BetList.MetaModel;
@@ -59,7 +60,7 @@ namespace Fanex.Athena.Controllers.BetList
             metaModel.IsShowSumStake = true;
             metaModel.UspKey = UspKey;
 
-            metaModel.ShowingOption = new BetListShowingOption
+            metaModel.ShowingOption = new ShowingOption
             {
                 CustomerCommVisible = licenseeSession.IsAllowedCustomerComm,
             };

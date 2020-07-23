@@ -4631,7 +4631,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
         const _me = {
             initialize: function () {
                 Site.initialize();
-                _me.informRemoveFunction();
                 Site.addUserGuide({
                     resourceName: 'CustomerLog',
                     title: Site.getSingleResource('CustomerLog')

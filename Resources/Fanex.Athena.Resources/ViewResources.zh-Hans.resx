@@ -1118,7 +1118,7 @@
     <value>备注</value>
   </data>
   <data name="RemoveFromGroup" xml:space="preserve">
-    <value>从组中删除</value>
+    <value>从该组中删除</value>
   </data>
   <data name="RemoveGroupMsg" xml:space="preserve">
     <value>您确定要从组中移除此(这些)会员?</value>
@@ -2060,10 +2060,55 @@
   <data name="ESportsMobile" xml:space="preserve">
     <value>电子竞技 手机</value>
   </data>
+  <data name="CustomerCommission" xml:space="preserve">
+    <value>会员佣金</value>
+  </data>
   <data name="UserGuide" xml:space="preserve">
     <value>报告指南</value>
   </data>
+  <data name="MoveCommissionGroup" xml:space="preserve">
+    <value>移动佣金组别</value>
+  </data>
+  <data name="UpdateCommissionValue" xml:space="preserve">
+    <value>更新佣金值</value>
+  </data>
+  <data name="SelectedCustomers" xml:space="preserve">
+    <value>选定的玩家</value>
+  </data>
+  <data name="MoveToCommissionGroup" xml:space="preserve">
+    <value>移至佣金组别</value>
+  </data>
+  <data name="BatchUpdate" xml:space="preserve">
+    <value>批次更新</value>
+  </data>
+  <data name="CommissionGroup" xml:space="preserve">
+    <value>佣金组别</value>
+  </data>
+  <data name="UpdateCommGroup_Warning" xml:space="preserve">
+    <value>请注意：由于佣金值不同，该玩家将从组中移除。</value>
+  </data>
+  <data name="PleaseSelectOne" xml:space="preserve">
+    <value>请选择一个</value>
+  </data>
   <data name="DelayedPayout" xml:space="preserve">
     <value>延迟结算</value>
+  </data>
+  <data name="ProductParlay" xml:space="preserve">
+    <value>体育串关</value>
+  </data>
+  <data name="Log" xml:space="preserve">
+    <value>日志</value>
+  </data>
+  <data name="ExtraPayout" xml:space="preserve">
+    <value>额外派彩</value>
+  </data>
+  <data name="JackpotWonDetails" xml:space="preserve">
+    <value>积宝头奖详情</value>
+  </data>
+  <data name="DetailedBetlist" xml:space="preserve">
+    <value>投注历史明细</value>
+  </data>
+  <data name="ProductPP" xml:space="preserve">
+    <value>PP王者电子</value>
   </data>
 </root>

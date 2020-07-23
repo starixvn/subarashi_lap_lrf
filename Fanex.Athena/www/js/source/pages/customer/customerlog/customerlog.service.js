@@ -9,7 +9,6 @@ define(['jquery', 'common/site',
         const _me = {
             initialize: function () {
                 Site.initialize();
-                _me.informRemoveFunction();
                 Site.addUserGuide({
                     resourceName: 'CustomerLog',
                     title: Site.getSingleResource('CustomerLog')

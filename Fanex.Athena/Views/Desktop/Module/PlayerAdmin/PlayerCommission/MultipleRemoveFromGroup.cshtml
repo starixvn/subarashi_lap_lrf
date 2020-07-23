@@ -1,0 +1,77 @@
+﻿@using Fanex.Athena.Module.PlayerAdmin.ViewModels.PlayerCommission;
+@model MultipleRemoveFromGroupViewModel
+@{
+    ViewBag.Title = "LAP - " + ViewResources.RemoveFromGroup;
+    Layout = "~/Views/Desktop/Shared/_Report.jqGridLayout.cshtml";
+}
+@section pagecss {
+    <link href="@Url.ContentLinkByEnv("/www/css/build/pages/playercommission/index.css")" rel="stylesheet" />
+}
+@section pagejs {
+    <script src="@Url.ContentLinkByEnv("/www/js/build/pages/playercommission/multipleremovefromgroup.chunk.js")"></script>
+}
+@section Filter
+{
+    <div class="row page-form">
+        <form class="customer-comm-group-edit" id="customer-comm-group-edit"
+              action""
+              method="post">
+            <div class="row">
+                <div class="input-field col l4 m8 s12">
+                    <label>@ViewResources.SelectedCustomers</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col l4 m8 s12">
+                    <div class="multiselect-container">
+                        <select id="ddl-customers"></select>
+                    </div>
+                </div>
+            </div>
+            @Html.Hidden("CustNames", Model.CustNamesStr)
+            @Html.Hidden("CustIds", Model.CustIdsStr)
+            @Html.Hidden("Products", string.Join(",", Model.ProductPermissions.Select(p => p.Key)))
+        </form>
+    </div>
+}
+@section Content
+{
+    <div class="div-content">
+        <div class="row">
+            <div class="col l4 m8 s12">
+                <div id="div-result" class="div-result hide">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col l4 m8 s12">
+                <p id="remove-confirm-msg">@ViewResources.RemoveGroupMsg</p>
+                <p>
+                    <b>@ViewResources.ConfirmCommission</b>
+                </p>
+                <ul class="ul-remove-options">
+                    <li>
+                        <input type="radio" class="with-gap" name="rad-comm" id="rad-keep-comm" value="0" />
+                        <label for="rad-keep-comm">
+                            @ViewResources.KeepCurrentComm
+                        </label>
+                    </li>
+                    <li>
+                        <input type="radio" class="with-gap" name="rad-comm" id="rad-clear-comm" checked="checked" value="1" />
+                        <label for="rad-clear-comm">
+                            @ViewResources.ClearCurrentComm
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col l4 m8 s12">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-submit">@ViewResources.OK</button>
+                    <button type="button" class="btn btn-cancel">@ViewResources.Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
