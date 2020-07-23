@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 7/22/2020 2:18:11 PM
+// Generated at: 7/23/2020 10:22:53 AM
 window._language_zh_Hans = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -375,7 +375,7 @@ window._language_zh_Hans = {
   InvalidRequestMsg: "请求无效",
   InvalidRequestOrNotAuthorizedMsg: "无效的请求或您未被授权访问所请求的资源",
   IsNeutral: "(中)",
-  JackpotWonDetails: "头奖明细",
+  JackpotWonDetails: "积宝头奖详情",
   Jan: "一月",
   January: "一月",
   Jul: "七月",
