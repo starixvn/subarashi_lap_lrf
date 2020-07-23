@@ -88,10 +88,19 @@ namespace Fanex.Athena.Module.PlayerAdmin.Services
                 return result;
             }
 
+            decimal rngComm = 0;
+            for (var i = 0; i < query.Products.Length; i++)
+            {
+                if (string.Equals(query.Products[i], Product.CS))
+                {
+                    rngComm = query.Comms[i];
+                }
+            }
+
             var callApiSuccess = await UpdateCommToAPI(new UpdateCommToAPICriteria
             {
                 CustomerIdList = result.ExtendedData,
-                Comm = 0,
+                Comm = rngComm,
                 IP = query.IP,
                 UserId = query.UserId,
                 Username = query.Username
