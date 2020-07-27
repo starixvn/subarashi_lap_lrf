@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { ActionCreators } from '../../actions/index.js';
 import { bindActionCreators } from 'redux';
@@ -28,11 +28,10 @@ export const BankInformation = (props) => {
                 <tbody>
                     <tr>
                         <td className="first-cell">
-                        {ClientResourceManager.getText('BankInformation')}
-                        <button className="btn-default btn-link btn-icon"
-                                onClick={() => setIsShowPlainText(true)} 
-                                onMouseLeave={() => setIsShowPlainText(false)}>
-                            <i className="material-icons">remove_red_eye</i>
+                            {ClientResourceManager.getText('BankInformation')}
+                            <button className="btn-default btn-link btn-icon"
+                                onClick={() => setIsShowPlainText(true)}>
+                                <i className="material-icons">remove_red_eye</i>
                             </button>
                         </td>
                         <td></td>
