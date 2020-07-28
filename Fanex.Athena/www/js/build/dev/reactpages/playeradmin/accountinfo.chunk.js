@@ -18495,6 +18495,10 @@ var ChartComponent = function (_React$Component) {
   };
 
   ChartComponent.prototype.destroyChart = function destroyChart() {
+    if (!this.chartInstance) {
+      return;
+    }
+
     // Put all of the datasets that have existed in the chart back on the chart
     // so that the metadata associated with this chart get destroyed.
     // This allows the datasets to be used in another chart. This can happen,
@@ -19382,8 +19386,7 @@ const BankInformation = props => {
     className: "first-cell"
   }, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_5__["default"].getText('BankInformation'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "btn-default btn-link btn-icon",
-    onClick: () => setIsShowPlainText(true),
-    onMouseLeave: () => setIsShowPlainText(false)
+    onClick: () => setIsShowPlainText(true)
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "material-icons"
   }, "remove_red_eye"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_5__["default"].getText('BankName')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, displayInfo(BankName))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_5__["default"].getText('BankAccountName')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, displayInfo(AccountName))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_5__["default"].getText('BankAccountNumber')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, displayInfo(AccountNumber))))));
