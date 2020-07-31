@@ -1155,6 +1155,18 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
     color: #fff;
     padding: 0 30px; }
 
+.content-title {
+  font-weight: bold;
+  font-size: 15px;
+  padding-top: 10px;
+  min-height: 30px;
+  min-width: 650px;
+  color: #D2592D; }
+
+.base-currency {
+  font-size: 14px;
+  color: #024584; }
+
 #player-segmentation .btn {
   text-transform: uppercase; }
 
