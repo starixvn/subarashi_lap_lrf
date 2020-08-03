@@ -6278,6 +6278,10 @@ class BetListLayout extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getCardClubResultUrl(rootUrl, custid, bettype, extension2);
 
         this._showThirdPartyResult(url, title);
+      } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].SBC) {
+        const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getSabaClubResultUrl(rootUrl, custid, bettype, extension1, extension2);
+
+        this._showThirdPartyResult(url, title);
       } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].SG) {
         const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getSGResultUrl(rootUrl, custid, extension2);
 
@@ -7029,6 +7033,15 @@ class BetList {
     return url;
   }
 
+  getSabaClubResultUrl(rootUrl, custid, gameId, siteId, gameRoundId) {
+    let url = rootUrl + 'SabaClubResultPopup/Index';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custid', custid);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'gameId', gameId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'siteId', siteId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'gameRoundId', gameRoundId);
+    return url;
+  }
+
   getSGResultUrl(rootUrl, custid, gamePlayId) {
     let url = rootUrl + 'SGResultPopup/Index';
     url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custid', custid);
@@ -7103,7 +7116,8 @@ const SportType = {
   CARDCLUB: 165,
   SG: 247,
   VRG: 245,
-  SXG: 243
+  SXG: 243,
+  SBC: 200
 };
 
 /***/ }),

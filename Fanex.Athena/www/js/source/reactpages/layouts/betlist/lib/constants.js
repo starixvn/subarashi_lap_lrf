@@ -18,5 +18,6 @@ export const SportType = {
     CARDCLUB: 165,
     SG: 247,
     VRG: 245,
-    SXG: 243
+    SXG: 243,
+    SBC: 200
 }

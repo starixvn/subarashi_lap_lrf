@@ -301,6 +301,16 @@ class BetList {
         return url;
     }
 
+    getSabaClubResultUrl(rootUrl, custid, gameId, siteId, gameRoundId) {
+        let url = rootUrl + 'SabaClubResultPopup/Index';
+        url = QueryString.setParam(url, 'custid', custid);
+        url = QueryString.setParam(url, 'gameId', gameId);
+        url = QueryString.setParam(url, 'siteId', siteId);
+        url = QueryString.setParam(url, 'gameRoundId', gameRoundId);
+
+        return url;
+    }
+
     getSGResultUrl(rootUrl, custid, gamePlayId) {
         let url = rootUrl + 'SGResultPopup/Index';
         url = QueryString.setParam(url, 'custid', custid);
