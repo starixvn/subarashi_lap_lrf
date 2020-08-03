@@ -79,7 +79,7 @@ export const FormAction = props => {
         Excel.process(() => {
             Excel.read(file, 0, result => {
                 const { header, content } = result;
-                if (!ExcelHelper.isValidHeader(header) || !ExcelHelper.isValidHeader(content)) {
+                if (!ExcelHelper.isValidHeader(header) || !ExcelHelper.isValidContent(content)) {
                     alert(decode(LangHelper.getSingleResource("UploadFileError")))
                     return;
                 }
