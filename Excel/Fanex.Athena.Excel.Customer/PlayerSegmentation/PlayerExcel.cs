@@ -84,7 +84,7 @@
 
         protected override void AssignTitle(ISheet sheet)
         {
-            sheet.SetTextRowValue(TemplateSheet, RowTitleTemplate, RowTitleTemplate, 1, _reportTitle, CellTitleIndex);
+            sheet.SetTextRowValue(TemplateSheet, RowTitleTemplate, destRowIndex: RowTitleTemplate, 1, _reportTitle, CellTitleIndex);
             sheet.CreateFreezePane(0, RowContentTemplate);
         }
 

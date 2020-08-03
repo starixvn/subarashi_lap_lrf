@@ -1,17 +1,18 @@
-﻿using Fanex.Athena.Extension.Helper;
-using System;
-
-namespace Fanex.Athena.Model.Customer.ViewModel
+﻿namespace Fanex.Athena.Model.Customer.ViewModel
 {
+    using Fanex.Athena.Extension.Helper;
+    using System;
+
     public class PlayerSegmentationBetListViewModel
     {
         private const int DefaultPageSize = 50;
+        private const int LimitedMonthRange = 6;
 
         public PlayerSegmentationBetListViewModel()
         {
             PageIndex = 1;
             PageSize = DefaultPageSize;
-            FromDate = DateTimeHelper.StartOfWeek(DateTime.Today, DayOfWeek.Monday);
+            FromDate = DateTimeHelper.GetFirstDateOfMonth(DateTime.Today.AddMonths(-LimitedMonthRange + 1));
             ToDate = DateTime.Today;
         }
 
