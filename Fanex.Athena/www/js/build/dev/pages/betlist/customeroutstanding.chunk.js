@@ -5065,7 +5065,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                     _me.viewCardClubResult(custid, bettype, extension2, title);
                 }
                 else if (sporttype === SPORT_SBC) {
-                    _me.viewSabaClubResult(custid, bettype, extension1, extension2, title);
+                    _me.viewSabaClubResult(custid, bettype, extension2, transdecs, title);
                 }
                 else if (sporttype === SPORT_SG) {
                     _me.viewSGResult(custid, extension2, title);
@@ -5506,6 +5506,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         return _me;
     }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
 
 /***/ }),
 
