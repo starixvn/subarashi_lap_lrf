@@ -3,7 +3,7 @@ export default class ExcelHelper {
         if(!header || !header.length) {
             return null;
         }
-        const columnName = header.find(_ => _.replace(/\s/g, '').toLocaleLowerCase() === readerColumn);
+        const columnName = header.find(_ => _ && _.replace(/\s/g, '').toLocaleLowerCase() === readerColumn);
         return columnName;
     }
 
