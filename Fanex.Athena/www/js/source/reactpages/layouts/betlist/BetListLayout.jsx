@@ -44,6 +44,10 @@ class BetListLayout extends Component {
                 const url = BetList.getCardClubResultUrl(rootUrl, custid, bettype, extension2);
                 this._showThirdPartyResult(url, title);
             }
+            else if (sporttype === SportType.SBC) {
+                const url = BetList.getSabaClubResultUrl(rootUrl, custid, bettype, extension2, transdecs);
+                this._showThirdPartyResult(url, title);
+            }
             else if (sporttype === SportType.SG) {
                 const url = BetList.getSGResultUrl(rootUrl, custid, extension2);
                 this._showThirdPartyResult(url, title);

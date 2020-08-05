@@ -3523,6 +3523,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         const SPORT_SG = 247;
         const SPORT_VRG = 245;
         const SPORT_SXG = 243;
+        const SPORT_SBC = 200;
         const BETLIST_META_MODEL = '#BetListMetaModel';
 
         let _sortColumnName, _sortOrder;
@@ -3925,6 +3926,17 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 });
             },
 
+            viewSabaClubResult: function (custId, gameId, siteId, gameRoundId, title) {
+                const url = Site.resolveClientUrl('SabaClubResultPopup/Index');
+                Site.blockUI();
+                $.get(url + '?custid=' + custId + '&gameId=' + gameId + '&siteId=' + siteId + '&gameRoundId=' + gameRoundId, function (result) {
+                    if (result !== '') {
+                        showResultPopUp(result, { width: 800, height: 380, title: title });
+                        Site.unBlockUI();
+                    }
+                });
+            },
+
             viewSGResult: function (custId, gamePlayId, title) {
                 const url = Site.resolveClientUrl('SGResultPopup/Index');
                 Site.blockUI();
@@ -3996,6 +4008,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 }
                 else if (sporttype === SPORT_CARDCLUB) {
                     _me.viewCardClubResult(custid, bettype, extension2, title);
+                }
+                else if (sporttype === SPORT_SBC) {
+                    _me.viewSabaClubResult(custid, bettype, extension2, transdecs, title);
                 }
                 else if (sporttype === SPORT_SG) {
                     _me.viewSGResult(custid, extension2, title);
@@ -4436,6 +4451,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         return _me;
     }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
 
 /***/ }),
 
