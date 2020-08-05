@@ -16,7 +16,7 @@ export const AppContainer = props => {
             <span>{`${AppData.externalId}(${AppData.systemId})`}</span>
             <span className="base-currency">{` - ${LangHelper.getSingleResource('Viewin').replace('{0}', AppData.baseCurrency)}`}</span>
         </div>);
-    });
+    }, []);
 
     return (
         <AppLayout>
