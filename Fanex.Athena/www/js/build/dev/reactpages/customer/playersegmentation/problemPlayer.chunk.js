@@ -3090,6 +3090,115 @@ class Timer {
 
 /***/ }),
 
+/***/ "./www/js/source/reactpages/lib/QueryString.js":
+/*!*****************************************************!*\
+  !*** ./www/js/source/reactpages/lib/QueryString.js ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return QueryString; });
+class QueryString {
+  static _parseQueryString(queryString) {
+    let args = queryString.split('&');
+    let argsList = {};
+
+    for (let i = 0; i < args.length; i++) {
+      let arg = unescape(args[i]);
+
+      if (arg.length > 0) {
+        if (arg.indexOf('=') === -1) {
+          argsList[arg.toLowerCase().trim()] = null;
+        } else {
+          let keyValuePair = arg.split('=');
+          argsList[keyValuePair[0].toLowerCase().trim()] = keyValuePair[1].trim();
+        }
+      }
+    }
+
+    return argsList;
+  }
+
+  static _getQueryString(url) {
+    var index = url.indexOf("?");
+    return index < 0 ? "" : url.substring(index + 1, url.length);
+  }
+
+  static _getRawUrl(url) {
+    var index = url.indexOf("?");
+    return index < 0 ? url : url.substring(0, index);
+  }
+
+  static setParam(url, name, value) {
+    var rawUrl = QueryString._getRawUrl(url);
+
+    var queryString = QueryString._getQueryString(url);
+
+    var args = QueryString._parseQueryString(queryString);
+
+    if (!name) {
+      return url;
+    } // Update value
+
+
+    var found = false;
+
+    for (var key in args) {
+      if (key && key.toLowerCase() === name.toLowerCase()) {
+        // Does not update data if value = undefined
+        if (value !== undefined) {
+          args[key] = value;
+        }
+
+        found = true;
+      }
+    }
+
+    if (!found) {
+      args[name.toLowerCase()] = value;
+    }
+
+    var queryArray = []; // Rebuild query string, ignore null value
+
+    for (var key1 in args) {
+      if (args[key1] != null && args[key1] !== undefined) {
+        queryArray.push(key1.toLowerCase() + "=" + args[key1]);
+      }
+    }
+
+    return rawUrl + "?" + queryArray.join("&");
+  }
+
+  static setParams(url, parameters) {
+    for (var property in parameters) {
+      if (parameters.hasOwnProperty(property)) {
+        url = QueryString.setParam(url, property, parameters[property]);
+      }
+    }
+
+    return url;
+  }
+
+  static getParam(url, name) {
+    var queryString = QueryString._getQueryString(url);
+
+    var args = QueryString._parseQueryString(queryString);
+
+    for (var key in args) {
+      if (key != null && key.toLowerCase() === name.toLowerCase()) {
+        return args[key];
+      }
+    }
+
+    return null;
+  }
+
+}
+
+/***/ }),
+
 /***/ "./www/js/source/reactpages/lib/numberFormat.js":
 /*!******************************************************!*\
   !*** ./www/js/source/reactpages/lib/numberFormat.js ***!
@@ -3240,6 +3349,34 @@ const generateDefaultAlertOption = (content, onClose, onClick, icon = predefined
 
 /***/ }),
 
+/***/ "./www/js/source/reactpages/pages/customer/player-segmentation/actions/filterAction.js":
+/*!*********************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/customer/player-segmentation/actions/filterAction.js ***!
+  \*********************************************************************************************/
+/*! exports provided: setSubsidiaryList, setSubsidiarySearch */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSubsidiaryList", function() { return setSubsidiaryList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSubsidiarySearch", function() { return setSubsidiarySearch; });
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/pages/customer/player-segmentation/actions/types.js");
+
+const setSubsidiaryList = subsidiaryList => {
+  return {
+    type: _types__WEBPACK_IMPORTED_MODULE_0__["SET_SUBSIDIARY_LIST"],
+    data: subsidiaryList
+  };
+};
+const setSubsidiarySearch = subsidiarySearch => {
+  return {
+    type: _types__WEBPACK_IMPORTED_MODULE_0__["SET_SUBSIDIARY_SEARCH"],
+    data: subsidiarySearch
+  };
+};
+
+/***/ }),
+
 /***/ "./www/js/source/reactpages/pages/customer/player-segmentation/actions/paramHanlderAction.js":
 /*!***************************************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/customer/player-segmentation/actions/paramHanlderAction.js ***!
@@ -3293,6 +3430,41 @@ __webpack_require__.r(__webpack_exports__);
     content: _buildContent()
   });
 });
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/customer/player-segmentation/components/HyperLinkCell.jsx":
+/*!**************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/customer/player-segmentation/components/HyperLinkCell.jsx ***!
+  \**************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @9softstudio/react-grid */ "./node_modules/@9softstudio/react-grid/dist/index.js");
+/* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+const HyperLinkCell = props => {
+  const {
+    name,
+    onClick
+  } = props;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
+    className: "left-align"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "username-cell"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "btn-default btn-link username-link",
+    onClick: onClick
+  }, name)));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(HyperLinkCell));
 
 /***/ }),
 
@@ -3467,12 +3639,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @9softstudio/react-grid */ "./node_modules/@9softstudio/react-grid/dist/index.js");
 /* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/constants.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/constants.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -3497,8 +3672,8 @@ class GridHelper {
 
   static getSortInfo(orderCol, sortType) {
     const sortInfo = {
-      orderCol: _constants__WEBPACK_IMPORTED_MODULE_2__["SortMapper"].sortCol[orderCol],
-      sortType: _constants__WEBPACK_IMPORTED_MODULE_2__["SortMapper"].sortType[sortType]
+      orderCol: _constants__WEBPACK_IMPORTED_MODULE_3__["SortMapper"].sortCol[orderCol],
+      sortType: _constants__WEBPACK_IMPORTED_MODULE_3__["SortMapper"].sortType[sortType]
     };
     return sortInfo;
   }
@@ -3538,6 +3713,8 @@ _defineProperty(GridHelper, "callBackToUpdatePaging", ({
 
   setPagingOption(newPagingOption);
 });
+
+_defineProperty(GridHelper, "isShowSubsidiary", subsidiarySearch => _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__["default"].viewType !== _constants__WEBPACK_IMPORTED_MODULE_3__["ViewType"].Normal && subsidiarySearch);
 
 /***/ }),
 
@@ -3707,6 +3884,36 @@ const UpdateVipStatusAlertOption = {
 
 /***/ }),
 
+/***/ "./www/js/source/reactpages/pages/customer/player-segmentation/reducers/filterReducer.js":
+/*!***********************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/customer/player-segmentation/reducers/filterReducer.js ***!
+  \***********************************************************************************************/
+/*! exports provided: selectedSubsidiary, subsidiarySearch */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectedSubsidiary", function() { return selectedSubsidiary; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "subsidiarySearch", function() { return subsidiarySearch; });
+/* harmony import */ var _jsroot_lib_createReducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/createReducer */ "./www/js/source/reactpages/lib/createReducer.js");
+/* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/types */ "./www/js/source/reactpages/pages/customer/player-segmentation/actions/types.js");
+
+
+const selectedSubsidiary = Object(_jsroot_lib_createReducer__WEBPACK_IMPORTED_MODULE_0__["default"])(null, {
+  [_actions_types__WEBPACK_IMPORTED_MODULE_1__["SET_SUBSIDIARY_LIST"]](prevState, action) {
+    return action.data;
+  }
+
+});
+const subsidiarySearch = Object(_jsroot_lib_createReducer__WEBPACK_IMPORTED_MODULE_0__["default"])(null, {
+  [_actions_types__WEBPACK_IMPORTED_MODULE_1__["SET_SUBSIDIARY_SEARCH"]](prevState, action) {
+    return action.data;
+  }
+
+});
+
+/***/ }),
+
 /***/ "./www/js/source/reactpages/pages/customer/player-segmentation/reducers/gridHandlerReducer.js":
 /*!****************************************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/customer/player-segmentation/reducers/gridHandlerReducer.js ***!
@@ -3799,7 +4006,7 @@ const playerList = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_
 /*!*****************************************************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/actions/filterAction.js ***!
   \*****************************************************************************************************************/
-/*! exports provided: changeIsGetAll, setReason, setDateRange, setSelectedCurrency, setUsername, setSelectedBaseCurrency, setSelectedParams */
+/*! exports provided: changeIsGetAll, setReason, setDateRange, setSelectedCurrency, setUsername, setSelectedBaseCurrency, setSubsidiaryList, setSubsidiarySearch, setSelectedParams */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3810,6 +4017,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSelectedCurrency", function() { return setSelectedCurrency; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setUsername", function() { return setUsername; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSelectedBaseCurrency", function() { return setSelectedBaseCurrency; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSubsidiaryList", function() { return setSubsidiaryList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSubsidiarySearch", function() { return setSubsidiarySearch; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSelectedParams", function() { return setSelectedParams; });
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/actions/types.js");
 /* harmony import */ var _jsroot_actions_dateRangeAction__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/actions/dateRangeAction */ "./www/js/source/reactpages/actions/dateRangeAction.js");
@@ -3817,6 +4026,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_actions_baseCurrencyAction__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/actions/baseCurrencyAction */ "./www/js/source/reactpages/actions/baseCurrencyAction.js");
 /* harmony import */ var _jsroot_actions_usernameAction__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/actions/usernameAction */ "./www/js/source/reactpages/actions/usernameAction.js");
 /* harmony import */ var _actions_paramHanlderAction__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../actions/paramHanlderAction */ "./www/js/source/reactpages/pages/customer/player-segmentation/actions/paramHanlderAction.js");
+/* harmony import */ var _actions_filterAction__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../actions/filterAction */ "./www/js/source/reactpages/pages/customer/player-segmentation/actions/filterAction.js");
+
 
 
 
@@ -3839,6 +4050,8 @@ const setDateRange = _jsroot_actions_dateRangeAction__WEBPACK_IMPORTED_MODULE_1_
 const setSelectedCurrency = _jsroot_actions_currencyAction__WEBPACK_IMPORTED_MODULE_2__["setSelectedCurrency"];
 const setUsername = _jsroot_actions_usernameAction__WEBPACK_IMPORTED_MODULE_4__["setUsername"];
 const setSelectedBaseCurrency = _jsroot_actions_baseCurrencyAction__WEBPACK_IMPORTED_MODULE_3__["setSelectedBaseCurrency"];
+const setSubsidiaryList = _actions_filterAction__WEBPACK_IMPORTED_MODULE_6__["setSubsidiaryList"];
+const setSubsidiarySearch = _actions_filterAction__WEBPACK_IMPORTED_MODULE_6__["setSubsidiarySearch"];
 const setSelectedParams = _actions_paramHanlderAction__WEBPACK_IMPORTED_MODULE_5__["setSelectedParams"];
 
 /***/ }),
@@ -3858,12 +4071,35 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_actions_userGuideAction__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/actions/userGuideAction */ "./www/js/source/reactpages/actions/userGuideAction.js");
 /* harmony import */ var _actions_playerDataAction__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../actions/playerDataAction */ "./www/js/source/reactpages/pages/customer/player-segmentation/actions/playerDataAction.js");
 /* harmony import */ var _actions_gridHandlerAction__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../actions/gridHandlerAction */ "./www/js/source/reactpages/pages/customer/player-segmentation/actions/gridHandlerAction.js");
+/* harmony import */ var _playerAction__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./playerAction */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/actions/playerAction.js");
 
 
 
 
 
-const ActionCreators = Object.assign({}, _jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_0__, _filterAction__WEBPACK_IMPORTED_MODULE_1__, _jsroot_actions_userGuideAction__WEBPACK_IMPORTED_MODULE_2__, _actions_playerDataAction__WEBPACK_IMPORTED_MODULE_3__, _actions_gridHandlerAction__WEBPACK_IMPORTED_MODULE_4__);
+
+const ActionCreators = Object.assign({}, _jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_0__, _filterAction__WEBPACK_IMPORTED_MODULE_1__, _jsroot_actions_userGuideAction__WEBPACK_IMPORTED_MODULE_2__, _actions_playerDataAction__WEBPACK_IMPORTED_MODULE_3__, _actions_gridHandlerAction__WEBPACK_IMPORTED_MODULE_4__, _playerAction__WEBPACK_IMPORTED_MODULE_5__);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/actions/playerAction.js":
+/*!*****************************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/actions/playerAction.js ***!
+  \*****************************************************************************************************************/
+/*! exports provided: setSelectedPlayer */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSelectedPlayer", function() { return setSelectedPlayer; });
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/actions/types.js");
+
+const setSelectedPlayer = data => {
+  return {
+    type: _types__WEBPACK_IMPORTED_MODULE_0__["SET_SELECTED_PLAYER"],
+    data
+  };
+};
 
 /***/ }),
 
@@ -3871,15 +4107,17 @@ const ActionCreators = Object.assign({}, _jsroot_actions_loaderAction__WEBPACK_I
 /*!**********************************************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/actions/types.js ***!
   \**********************************************************************************************************/
-/*! exports provided: SET_IS_GET_ALL, SET_SELECTED_REASON */
+/*! exports provided: SET_IS_GET_ALL, SET_SELECTED_REASON, SET_SELECTED_PLAYER */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_IS_GET_ALL", function() { return SET_IS_GET_ALL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SELECTED_REASON", function() { return SET_SELECTED_REASON; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SELECTED_PLAYER", function() { return SET_SELECTED_PLAYER; });
 const SET_IS_GET_ALL = 'SET_IS_GET_ALL';
 const SET_SELECTED_REASON = 'SET_SELECTED_REASON';
+const SET_SELECTED_PLAYER = 'SET_SELECTED_PLAYER';
 
 /***/ }),
 
@@ -3949,16 +4187,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @9softstudio/react-grid */ "./node_modules/@9softstudio/react-grid/dist/index.js");
 /* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
-/* harmony import */ var _components_GridCaption__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../components/GridCaption */ "./www/js/source/reactpages/pages/customer/player-segmentation/components/GridCaption.jsx");
-/* harmony import */ var _DataGrid__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./DataGrid */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/components/DataGrid.jsx");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../actions */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/actions/index.js");
-/* harmony import */ var _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../lib/helpers/gridHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/helpers/gridHelper.js");
+/* harmony import */ var _jsroot_components_popup__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/components/popup */ "./www/js/source/reactpages/components/popup/index.jsx");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _components_GridCaption__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../components/GridCaption */ "./www/js/source/reactpages/pages/customer/player-segmentation/components/GridCaption.jsx");
+/* harmony import */ var _DataGrid__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./DataGrid */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/components/DataGrid.jsx");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../actions */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/actions/index.js");
+/* harmony import */ var _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../lib/helpers/gridHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/helpers/gridHelper.js");
+/* harmony import */ var _lib_helpers_betlistHelper__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../lib/helpers/betlistHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/lib/helpers/betlistHelper.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -3976,7 +4218,9 @@ const Content = props => {
     searchPlayer,
     selectedParams,
     selectedTabKey,
-    setPagingOption
+    selectedPlayer,
+    setPagingOption,
+    setSelectedPlayer
   } = props;
 
   if (pagingOption.TotalItem == null) {
@@ -3984,37 +4228,59 @@ const Content = props => {
   }
 
   const _handlePaging = (pageIndex, pageSize) => {
-    const sortInfo = _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSortInfoFromPagingOption(pagingOption);
+    const sortInfo = _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSortInfoFromPagingOption(pagingOption);
 
     const params = _objectSpread({}, selectedParams, {}, sortInfo, {}, {
       pageIndex,
       pageSize
     });
 
-    searchPlayer(selectedTabKey, params, _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_8__["default"].callBackToUpdatePaging({
+    searchPlayer(selectedTabKey, params, _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_9__["default"].callBackToUpdatePaging({
       pagingOption,
       setPagingOption
     }));
   };
 
+  const _renderBetListPopup = () => {
+    if (selectedPlayer) {
+      const params = _objectSpread({}, selectedPlayer, {}, {
+        baseCurrency: selectedParams.baseCurrency
+      });
+
+      const betListUrl = _lib_helpers_betlistHelper__WEBPACK_IMPORTED_MODULE_10__["default"].buildAbnormalBetListUrl(params);
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_popup__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        isShow: true,
+        iframeUrl: betListUrl,
+        title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource('AbnormalBet'),
+        width: 1100,
+        height: 700,
+        onClose: () => setSelectedPlayer(null)
+      });
+    }
+
+    return null;
+  };
+
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "result-content"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_GridCaption__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_GridCaption__WEBPACK_IMPORTED_MODULE_6__["default"], {
     playerCount: playerCount
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DataGrid__WEBPACK_IMPORTED_MODULE_6__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Pager"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DataGrid__WEBPACK_IMPORTED_MODULE_7__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Pager"], {
     pageOption: pagingOption,
     onPaging: _handlePaging
-  }));
+  }), _renderBetListPopup());
 };
 
 function mapDispatchToProps(dispatch) {
   const {
     searchPlayer,
-    setPagingOption
-  } = _actions__WEBPACK_IMPORTED_MODULE_7__["ActionCreators"];
+    setPagingOption,
+    setSelectedPlayer
+  } = _actions__WEBPACK_IMPORTED_MODULE_8__["ActionCreators"];
   return Object(redux__WEBPACK_IMPORTED_MODULE_2__["bindActionCreators"])({
     searchPlayer,
-    setPagingOption
+    setPagingOption,
+    setSelectedPlayer
   }, dispatch);
 }
 
@@ -4023,14 +4289,16 @@ function mapStateToProps(state) {
     pagingOption,
     selectedParams,
     playerList,
-    selectedTabKey
+    selectedTabKey,
+    selectedPlayer
   } = state;
   const playerCount = pagingOption.TotalItem || playerList && playerList.length || 0;
   return Object.assign({}, {
     pagingOption,
     selectedParams,
     playerCount,
-    selectedTabKey
+    selectedTabKey,
+    selectedPlayer
   });
 }
 
@@ -4055,12 +4323,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @9softstudio/react-grid */ "./node_modules/@9softstudio/react-grid/dist/index.js");
 /* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../actions */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/actions/index.js");
-/* harmony import */ var _jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/components/NoDataTitle */ "./www/js/source/reactpages/components/NoDataTitle.jsx");
-/* harmony import */ var _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../lib/helpers/gridHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/helpers/gridHelper.js");
-/* harmony import */ var _grid_PlayerRow__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./grid/PlayerRow */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/components/grid/PlayerRow.jsx");
-/* harmony import */ var _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../lib/helpers/gridHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/lib/helpers/gridHelper.js");
-/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../actions */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/actions/index.js");
+/* harmony import */ var _jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/components/NoDataTitle */ "./www/js/source/reactpages/components/NoDataTitle.jsx");
+/* harmony import */ var _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../lib/helpers/gridHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/helpers/gridHelper.js");
+/* harmony import */ var _grid_PlayerRow__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./grid/PlayerRow */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/components/grid/PlayerRow.jsx");
+/* harmony import */ var _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../lib/helpers/gridHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/lib/helpers/gridHelper.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -4086,7 +4354,8 @@ const DataGrid = props => {
     selectedParams,
     selectedTabKey,
     setPagingOption,
-    searchPlayer
+    searchPlayer,
+    setSelectedPlayer
   } = props;
 
   if (playerList == null) {
@@ -4094,38 +4363,45 @@ const DataGrid = props => {
   }
 
   if (!playerList.length) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_5__["default"], null);
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_6__["default"], null);
   }
 
+  const showSubsidiary = _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_7__["default"].isShowSubsidiary(selectedParams.subsidiarySearch);
+  const onSelectPlayer = react__WEBPACK_IMPORTED_MODULE_0___default.a.useCallback(custInfo => {
+    setSelectedPlayer(custInfo);
+  });
+
   const _renderDataSection = dataList => dataList.map((dataItem, index) => {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_grid_PlayerRow__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_grid_PlayerRow__WEBPACK_IMPORTED_MODULE_8__["default"], {
       dataItem,
       index,
-      hasVipManagement: _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_9__["default"].HasVipManagement
+      hasVipManagement: _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_4__["default"].HasVipManagement,
+      showSubsidiary,
+      onSelectPlayer
     });
   });
 
   const _handleSort = (orderCol, sortType) => {
-    const sortInfo = _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSortInfo(orderCol, sortType);
+    const sortInfo = _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSortInfo(orderCol, sortType);
 
     const _pagingOption = _objectSpread({}, pagingOption, {}, sortInfo);
 
     const params = _objectSpread({}, selectedParams, {}, _pagingOption);
 
-    searchPlayer(selectedTabKey, params, _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_6__["default"].callBackToUpdatePaging({
+    searchPlayer(selectedTabKey, params, _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_7__["default"].callBackToUpdatePaging({
       pagingOption,
       setPagingOption
     }));
   };
 
-  const _gridHeaders = Object(_lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_8__["getDataGridHeaders"])(_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_9__["default"].HasVipManagement);
+  const _gridHeaders = Object(_lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_9__["getDataGridHeaders"])(_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_4__["default"].HasVipManagement, showSubsidiary);
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Table"], {
     minWidth: 650,
     autoWidth: true,
     maxWidth: MAX_WIDTH,
     autoHeight: true,
-    header: _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_6__["default"].renderHeader(_gridHeaders),
+    header: _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_7__["default"].renderHeader(_gridHeaders),
     body: _renderDataSection(playerList),
     containerPadding: 30,
     shouldResetScrollPosition: false,
@@ -4136,11 +4412,13 @@ const DataGrid = props => {
 function mapDispatchToProps(dispatch) {
   const {
     searchPlayer,
-    setPagingOption
-  } = _actions__WEBPACK_IMPORTED_MODULE_4__["ActionCreators"];
+    setPagingOption,
+    setSelectedPlayer
+  } = _actions__WEBPACK_IMPORTED_MODULE_5__["ActionCreators"];
   return Object(redux__WEBPACK_IMPORTED_MODULE_2__["bindActionCreators"])({
     setPagingOption,
-    searchPlayer
+    searchPlayer,
+    setSelectedPlayer
   }, dispatch);
 }
 
@@ -4193,15 +4471,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @jsroot/lib/DataService.js */ "./www/js/source/reactpages/lib/DataService.js");
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../actions */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/actions/index.js");
 /* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/lib/constants.js");
-/* harmony import */ var _lib_helpers_paramHelper__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../lib/helpers/paramHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/lib/helpers/paramHelper.js");
-/* harmony import */ var _lib_helpers_userGuideHelper__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../lib/helpers/userGuideHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/lib/helpers/userGuideHelper.js");
-/* harmony import */ var _lib_helpers_dataSourceHelper__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../../lib/helpers/dataSourceHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/helpers/dataSourceHelper.js");
-/* harmony import */ var _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../../lib/helpers/gridHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/helpers/gridHelper.js");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../../lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/constants.js");
+/* harmony import */ var _lib_helpers_paramHelper__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../lib/helpers/paramHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/lib/helpers/paramHelper.js");
+/* harmony import */ var _lib_helpers_userGuideHelper__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../lib/helpers/userGuideHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/lib/helpers/userGuideHelper.js");
+/* harmony import */ var _lib_helpers_dataSourceHelper__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../../lib/helpers/dataSourceHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/helpers/dataSourceHelper.js");
+/* harmony import */ var _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../../../lib/helpers/gridHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/helpers/gridHelper.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -4235,14 +4515,14 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
         searchPlayer,
         selectedTabKey
       } = this.props;
-      const params = _lib_helpers_paramHelper__WEBPACK_IMPORTED_MODULE_17__["default"].ToAPIParams(this.props);
+      const params = _lib_helpers_paramHelper__WEBPACK_IMPORTED_MODULE_18__["default"].ToAPIParams(this.props);
 
       if (!params) {
         return;
       }
 
       setSelectedParams(params);
-      searchPlayer(selectedTabKey, params, _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_20__["default"].callBackToUpdatePaging(this.props));
+      searchPlayer(selectedTabKey, params, _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_21__["default"].callBackToUpdatePaging(this.props));
     });
 
     _defineProperty(this, "exportExcel", event => {
@@ -4256,7 +4536,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
         return;
       }
 
-      const sortInfo = _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_20__["default"].getSortInfoFromPagingOption(pagingOption);
+      const sortInfo = _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_21__["default"].getSortInfoFromPagingOption(pagingOption);
 
       const params = _objectSpread({}, selectedParams, {}, sortInfo);
 
@@ -4287,6 +4567,10 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
         this.props.getUserGuideContent('PlayerSegmentationProblem');
       }
     });
+
+    _defineProperty(this, "_onChangeSubsidiaryList", (currentItem, selectedItemsKey, treeViewList) => {
+      this.props.setSubsidiaryList(selectedItemsKey);
+    });
   }
 
   _renderDateRange() {
@@ -4315,7 +4599,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       selectedTabKey
     } = this.props;
     const currencyList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_13__["default"][selectedTabKey].currencyList;
-    const dataSource = _lib_helpers_dataSourceHelper__WEBPACK_IMPORTED_MODULE_19__["default"].CreateDataSourceFrom(currencyList, selectedCurrency);
+    const dataSource = _lib_helpers_dataSourceHelper__WEBPACK_IMPORTED_MODULE_20__["default"].CreateDataSourceFrom(currencyList, selectedCurrency);
     return currencyList && currencyList.length && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_4___default.a, {
       id: "ddlCurrency",
       language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_10__["default"].currentLanguage,
@@ -4343,7 +4627,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       selectedTabKey
     } = this.props;
     const reasonList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_13__["default"][selectedTabKey].reasonList;
-    const dataSource = _lib_helpers_dataSourceHelper__WEBPACK_IMPORTED_MODULE_19__["default"].CreateDataSourceFrom(reasonList, selectedReason);
+    const dataSource = _lib_helpers_dataSourceHelper__WEBPACK_IMPORTED_MODULE_20__["default"].CreateDataSourceFrom(reasonList, selectedReason);
     return reasonList && reasonList.length && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_4___default.a, {
       id: "ddlReason",
       language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_10__["default"].currentLanguage,
@@ -4356,7 +4640,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
   }
 
   _renderUserGuide() {
-    const userGuideContent = Object(_lib_helpers_userGuideHelper__WEBPACK_IMPORTED_MODULE_18__["bindDataUserGuideWithPermission"])(this.props.userGuideContent, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_13__["default"].HasVipManagement);
+    const userGuideContent = Object(_lib_helpers_userGuideHelper__WEBPACK_IMPORTED_MODULE_19__["bindDataUserGuideWithPermission"])(this.props.userGuideContent, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_13__["default"].HasVipManagement);
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_UserGuide__WEBPACK_IMPORTED_MODULE_7__["default"], {
       title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_10__["default"].getSingleResource("UserGuide"),
       contentTitle: `${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_10__["default"].getSingleResource("PlayerSegmentation")} / ${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_10__["default"].getSingleResource('ProblemPlayer')}`,
@@ -4373,6 +4657,26 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
     }), this._renderUserGuide());
   }
 
+  _renderSubsidiaryTreeView() {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_4__["TreeViewSelect"], {
+      language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_10__["default"].currentLanguage,
+      id: "SubsidiaryTreeView",
+      dataSource: _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_13__["default"].subsidiaryList,
+      keyField: "Value",
+      valueField: "Name",
+      statusField: "Checked",
+      texts: {
+        SelectOptions: "Please select",
+        All: "All",
+        SelectedItemCount: "# selected"
+      },
+      isAllTextShown: false,
+      hasSearchBox: false,
+      treeViewOption: _lib_constants__WEBPACK_IMPORTED_MODULE_17__["TreeViewOption"],
+      onChange: this._onChangeSubsidiaryList
+    });
+  }
+
   render() {
     const isDisabledSubmit = _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_11__["default"].isEmptyOrWhiteSpace(this.props.selectedCurrency) || _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_11__["default"].isEmptyOrWhiteSpace(this.props.selectedReason);
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -4380,7 +4684,22 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       stickyFooter: this._renderStickyFooter()
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "row"
+    }, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_13__["default"].viewType !== _lib_constants__WEBPACK_IMPORTED_MODULE_17__["ViewType"].Normal && this.props.subsidiarySearch && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "form-group"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      className: "label-text"
+    }, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_13__["default"].viewType === _lib_constants__WEBPACK_IMPORTED_MODULE_17__["ViewType"].WhiteLabel ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_10__["default"].getSingleResource("WhiteLabel") : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_10__["default"].getSingleResource("Subsidiary")), this._renderSubsidiaryTreeView())), _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_13__["default"].viewType !== _lib_constants__WEBPACK_IMPORTED_MODULE_17__["ViewType"].Normal && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-12 col-md-3 col-sm-2 col-lg-2 col-xl-2"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "form-group"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      id: "SubsidiarySearch",
+      checked: this.props.subsidiarySearch,
+      onChange: checked => this.props.setSubsidiarySearch(checked),
+      label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_10__["default"].getSingleResource("SubsidiarySearch")
+    }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
@@ -4402,7 +4721,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       className: "label-text"
     }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_10__["default"].getSingleResource("Reason")), this._renderReasonSelectList())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2"
+      className: "col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -4414,7 +4733,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
         placeholder: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_10__["default"].getSingleResource("ExternalIdOrSystemId")
       }
     }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2"
+      className: "col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -4452,7 +4771,9 @@ function mapDispatchToProps(dispatch) {
     setPagingOption,
     getUserGuideContent,
     setSelectedBaseCurrency,
-    setReason
+    setReason,
+    setSubsidiaryList,
+    setSubsidiarySearch
   } = _actions__WEBPACK_IMPORTED_MODULE_15__["ActionCreators"];
   return Object(redux__WEBPACK_IMPORTED_MODULE_2__["bindActionCreators"])(Object.assign({}, {
     setDateRange,
@@ -4464,6 +4785,8 @@ function mapDispatchToProps(dispatch) {
     setSelectedParams,
     searchPlayer,
     setPagingOption,
+    setSubsidiaryList,
+    setSubsidiarySearch,
     getUserGuideContent
   }), dispatch);
 }
@@ -4479,7 +4802,9 @@ function mapStateToProps(state) {
     selectedTabKey,
     userGuideContent,
     selectedBaseCurrency,
-    selectedReason
+    selectedReason,
+    selectedSubsidiary,
+    subsidiarySearch
   } = state;
   return Object.assign({}, {
     dateRange,
@@ -4487,10 +4812,12 @@ function mapStateToProps(state) {
     selectedReason,
     selectedCurrency,
     selectedBaseCurrency,
+    selectedSubsidiary,
     username,
     selectedParams,
     pagingOption,
     selectedTabKey,
+    subsidiarySearch,
     userGuideContent
   });
 }
@@ -4515,6 +4842,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/numberFormat */ "./www/js/source/reactpages/lib/numberFormat.js");
 /* harmony import */ var _components_VipSwitcherCell__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../components/VipSwitcherCell */ "./www/js/source/reactpages/pages/customer/player-segmentation/components/VipSwitcherCell.jsx");
+/* harmony import */ var _components_HyperLinkCell__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../components/HyperLinkCell */ "./www/js/source/reactpages/pages/customer/player-segmentation/components/HyperLinkCell.jsx");
+
 
 
 
@@ -4524,10 +4853,13 @@ const PlayerRow = props => {
   const {
     dataItem,
     index,
-    hasVipManagement
+    hasVipManagement,
+    showSubsidiary,
+    onSelectPlayer
   } = props;
   const {
     custId,
+    subsidiary,
     externalId,
     systemId,
     markDate,
@@ -4538,11 +4870,19 @@ const PlayerRow = props => {
 
   const _renderReasonList = () => reasonList.map(reason => react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, reason));
 
+  const onClickExternalId = react__WEBPACK_IMPORTED_MODULE_0___default.a.useCallback(() => onSelectPlayer({
+    custId,
+    externalId,
+    systemId
+  }), [custId, externalId, systemId]);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Row"], {
     key: `player_row_${custId}`
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
+  }, showSubsidiary && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
     className: "left-align"
-  }, externalId), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
+  }, subsidiary), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_HyperLinkCell__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    name: externalId,
+    onClick: onClickExternalId
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
     className: "left-align"
   }, systemId), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
     className: "right-align"
@@ -4592,6 +4932,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 const initialState = _objectSpread({}, window.initialState[_lib_constants__WEBPACK_IMPORTED_MODULE_5__["tabKeys"].problemPlayer], {}, {
   userGuideContent: '',
+  subsidiarySearch: false,
   pagingOption: {
     PageIndex: 1,
     PageSize: 500,
@@ -4631,6 +4972,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 
 const dataGridFullHeaders = [{
+  key: 'subsidiary',
+  text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Subsidiary'),
+  colWidth: 100,
+  show: false
+}, {
   key: 'externalId',
   text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('ExternalId'),
   sortBy: 'externalId',
@@ -4664,8 +5010,44 @@ const dataGridFullHeaders = [{
   show: false
 }];
 const Url = {
-  exportProblemPlayerList: 'Api/PlayerSegmentation/ExportProblemPlayerList'
+  exportProblemPlayerList: 'Api/PlayerSegmentation/ExportProblemPlayerList',
+  abnormalBetList: 'PlayerSegmentation/BetList'
 };
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/lib/helpers/betlistHelper.js":
+/*!**********************************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/lib/helpers/betlistHelper.js ***!
+  \**********************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return BetListHelper; });
+/* harmony import */ var _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/QueryString */ "./www/js/source/reactpages/lib/QueryString.js");
+/* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/lib/constants.js");
+
+
+
+class BetListHelper {
+  static buildAbnormalBetListUrl({
+    custId,
+    externalId,
+    systemId,
+    baseCurrency
+  }) {
+    let url = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl(_constants__WEBPACK_IMPORTED_MODULE_2__["Url"].abnormalBetList);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'externalId', externalId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'systemId', systemId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'baseCurrency', baseCurrency);
+    return url;
+  }
+
+}
 
 /***/ }),
 
@@ -4681,15 +5063,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDataGridHeaders", function() { return getDataGridHeaders; });
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/lib/constants.js");
 
-const getDataGridHeaders = hasVipManagement => {
+const getDataGridHeaders = (hasVipManagement, showSubsidiary) => {
+  const fullHeaders = [..._constants__WEBPACK_IMPORTED_MODULE_0__["dataGridFullHeaders"]];
+
   if (!hasVipManagement) {
     const headerIndex = _constants__WEBPACK_IMPORTED_MODULE_0__["dataGridFullHeaders"].findIndex(_ => _.key === 'vip');
-    const fullHeaders = [..._constants__WEBPACK_IMPORTED_MODULE_0__["dataGridFullHeaders"]];
     fullHeaders.splice(headerIndex, 1);
-    return fullHeaders;
   }
 
-  return _constants__WEBPACK_IMPORTED_MODULE_0__["dataGridFullHeaders"];
+  if (!showSubsidiary) {
+    const headerIndex = _constants__WEBPACK_IMPORTED_MODULE_0__["dataGridFullHeaders"].findIndex(_ => _.key === 'subsidiary');
+    fullHeaders.splice(headerIndex, 1);
+  }
+
+  return fullHeaders;
 };
 
 /***/ }),
@@ -4720,7 +5107,9 @@ class ParamHelper {
     selectedBaseCurrency,
     isGetAll,
     dateRange,
-    selectedReason
+    selectedReason,
+    selectedSubsidiary,
+    subsidiarySearch
   }) {
     return _objectSpread({}, selectedParams, {}, {
       username,
@@ -4729,7 +5118,9 @@ class ParamHelper {
       reasonGroupIdList: selectedReason,
       isGetAll,
       fromDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_0__["default"].convertDateToString(dateRange.fromDate),
-      toDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_0__["default"].convertDateToString(dateRange.toDate)
+      toDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_0__["default"].convertDateToString(dateRange.toDate),
+      subsidiaryList: subsidiarySearch ? selectedSubsidiary : '',
+      subsidiarySearch
     });
   }
 
@@ -4771,7 +5162,7 @@ const dataVIPPlayerBinder = [{
 /*!*******************************************************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/reducers/filterReducer.js ***!
   \*******************************************************************************************************************/
-/*! exports provided: isGetAll, selectedReason, dateRange, selectedCurrency, username, selectedBaseCurrency, selectedParams */
+/*! exports provided: isGetAll, selectedReason, dateRange, selectedCurrency, username, selectedBaseCurrency, selectedSubsidiary, subsidiarySearch, selectedParams */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4782,6 +5173,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectedCurrency", function() { return selectedCurrency; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "username", function() { return username; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectedBaseCurrency", function() { return selectedBaseCurrency; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectedSubsidiary", function() { return selectedSubsidiary; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "subsidiarySearch", function() { return subsidiarySearch; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectedParams", function() { return selectedParams; });
 /* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/actions/types.js");
 /* harmony import */ var _jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
@@ -4790,6 +5183,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_reducers_baseCurrencyReducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/reducers/baseCurrencyReducer */ "./www/js/source/reactpages/reducers/baseCurrencyReducer.js");
 /* harmony import */ var _jsroot_reducers_usernameReducer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/reducers/usernameReducer */ "./www/js/source/reactpages/reducers/usernameReducer.js");
 /* harmony import */ var _reducers_paramHandlerReducer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../reducers/paramHandlerReducer */ "./www/js/source/reactpages/pages/customer/player-segmentation/reducers/paramHandlerReducer.js");
+/* harmony import */ var _reducers_filterReducer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../reducers/filterReducer */ "./www/js/source/reactpages/pages/customer/player-segmentation/reducers/filterReducer.js");
+
 
 
 
@@ -4813,6 +5208,8 @@ const dateRange = _jsroot_reducers_dateRangeReducer__WEBPACK_IMPORTED_MODULE_2__
 const selectedCurrency = _jsroot_reducers_currencyReducer__WEBPACK_IMPORTED_MODULE_3__["selectedCurrency"];
 const username = _jsroot_reducers_usernameReducer__WEBPACK_IMPORTED_MODULE_5__["username"];
 const selectedBaseCurrency = _jsroot_reducers_baseCurrencyReducer__WEBPACK_IMPORTED_MODULE_4__["selectedBaseCurrency"];
+const selectedSubsidiary = _reducers_filterReducer__WEBPACK_IMPORTED_MODULE_7__["selectedSubsidiary"];
+const subsidiarySearch = _reducers_filterReducer__WEBPACK_IMPORTED_MODULE_7__["subsidiarySearch"];
 const selectedParams = _reducers_paramHandlerReducer__WEBPACK_IMPORTED_MODULE_6__["selectedParams"];
 
 /***/ }),
@@ -4833,6 +5230,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _reducers_playerDataReducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../reducers/playerDataReducer */ "./www/js/source/reactpages/pages/customer/player-segmentation/reducers/playerDataReducer.js");
 /* harmony import */ var _reducers_gridHandlerReducer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../reducers/gridHandlerReducer */ "./www/js/source/reactpages/pages/customer/player-segmentation/reducers/gridHandlerReducer.js");
 /* harmony import */ var _reducers_tabHandlerReducers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../reducers/tabHandlerReducers */ "./www/js/source/reactpages/pages/customer/player-segmentation/reducers/tabHandlerReducers.js");
+/* harmony import */ var _playerReducer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./playerReducer */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/reducers/playerReducer.js");
 
 
 
@@ -4840,7 +5238,31 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(Object.assign(_jsroot_reducers_loaderReducer__WEBPACK_IMPORTED_MODULE_1__, _jsroot_reducers_userGuideReducer__WEBPACK_IMPORTED_MODULE_2__, _filterReducer__WEBPACK_IMPORTED_MODULE_3__, _reducers_playerDataReducer__WEBPACK_IMPORTED_MODULE_4__, _reducers_gridHandlerReducer__WEBPACK_IMPORTED_MODULE_5__, _reducers_tabHandlerReducers__WEBPACK_IMPORTED_MODULE_6__)));
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(Object.assign(_jsroot_reducers_loaderReducer__WEBPACK_IMPORTED_MODULE_1__, _jsroot_reducers_userGuideReducer__WEBPACK_IMPORTED_MODULE_2__, _filterReducer__WEBPACK_IMPORTED_MODULE_3__, _reducers_playerDataReducer__WEBPACK_IMPORTED_MODULE_4__, _reducers_gridHandlerReducer__WEBPACK_IMPORTED_MODULE_5__, _reducers_tabHandlerReducers__WEBPACK_IMPORTED_MODULE_6__, _playerReducer__WEBPACK_IMPORTED_MODULE_7__)));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/reducers/playerReducer.js":
+/*!*******************************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/reducers/playerReducer.js ***!
+  \*******************************************************************************************************************/
+/*! exports provided: selectedPlayer */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectedPlayer", function() { return selectedPlayer; });
+/* harmony import */ var _jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
+/* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/types */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/actions/types.js");
+
+
+const selectedPlayer = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(null, {
+  [_actions_types__WEBPACK_IMPORTED_MODULE_1__["SET_SELECTED_PLAYER"]](prevState, action) {
+    return action.data;
+  }
+
+});
 
 /***/ }),
 
