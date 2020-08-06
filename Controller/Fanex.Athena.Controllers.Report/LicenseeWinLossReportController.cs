@@ -93,7 +93,8 @@ namespace Fanex.Athena.Controllers.Report
                 BaseCurrency = userSession.DefaultBaseCurrency,
                 CurrencyId = SystemConstants.BaseCurrencyList
                 .FirstOrDefault(x => x.Value.Equals(userSession.DefaultBaseCurrency, StringComparison.OrdinalIgnoreCase))
-                .Key
+                .Key,
+                IsVIPPlayerOnly = false
             };
 
             var model = new LicenseeWinLossViewModel

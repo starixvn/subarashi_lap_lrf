@@ -206,6 +206,7 @@
             db.SetParameterValue("BaseCurrency", metaModel.BaseCurrency);
             db.SetParameterValue("DefaultBaseCurrency", metaModel.DefaultBaseCurrency);
             db.SetParameterValue("CheckPromotionPrize", checkPromotionPrize);
+            db.SetParameterValue("VIPPlayerOnly", metaModel.IsVIPPlayerOnly);
 
             foreach (var product in metaModel.ProductOptions)
             {

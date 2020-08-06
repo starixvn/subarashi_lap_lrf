@@ -21,5 +21,7 @@ namespace Fanex.Athena.Model.Report.MetaModel
         public string SortOrder { get; set; }
 
         public string DefaultBaseCurrency { get; set; }
+
+        public bool IsVIPPlayerOnly { get; set; }
     }
 }
