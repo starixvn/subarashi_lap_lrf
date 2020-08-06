@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Fanex.Athena.Model.Core.DTO.Common;
 using Fanex.Athena.Module.PlayerAdmin.Criteria.PlayerCommission;
 using Fanex.Athena.Module.PlayerAdmin.MetaModel.PlayerCommission;
@@ -219,6 +220,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Services
             service = new PlayerCommissionService(repository, lg);
 
             var query = new MultipleUpdateGroupQuery();
+            query.Products = Array.Empty<string>();
             query.CustIds = "1";
             query.Permissions = new Dictionary<string, bool>
             {

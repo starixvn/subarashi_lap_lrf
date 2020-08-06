@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 namespace Fanex.Athena.Controllers.Customer.UnitTests
 {
     [TestFixture]
-    public class PlayerSegmentationTest : CultureBaseControllerHelperTest
+    public partial class PlayerSegmentationControllerTest : CultureBaseControllerHelperTest
     {
         private IAuthorizationService _authService;
         private ISubsidiaryService _subsidiaryService;
@@ -33,6 +33,7 @@ namespace Fanex.Athena.Controllers.Customer.UnitTests
         {
             _subsidiaryService = Substitute.For<ISubsidiaryService>();
             _playerService = Substitute.For<IPlayerSegmentationService>();
+            _authService = Substitute.For<IAuthorizationService>();
         }
 
         [TearDown]
@@ -92,6 +93,7 @@ namespace Fanex.Athena.Controllers.Customer.UnitTests
                 });
             }
         }
+
 
         [Test]
         public async Task Index_WhenCall_ReturnReasonListCorrect()

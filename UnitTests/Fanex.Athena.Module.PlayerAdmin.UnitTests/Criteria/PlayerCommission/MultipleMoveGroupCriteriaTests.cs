@@ -61,7 +61,6 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Criteria.PlayerCommission
 
             // Assert
             db.Received().SetParameterValue("GroupCommId", query.GroupCommId);
-            db.Received().SetParameterValue("IsUpdateAllbet", true);
         }
     }
 }

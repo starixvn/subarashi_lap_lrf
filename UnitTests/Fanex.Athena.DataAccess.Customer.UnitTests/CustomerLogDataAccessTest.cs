@@ -18,16 +18,18 @@
             var metaModel = new CustomerLogMetaModel();
 
             // Action
-            DataAccess.GetCustomerSettingList(metaModel);
+            _ = DataAccess.GetCustomerSettingList(metaModel);
 
             // Assert
             Assert.Multiple(() =>
             {
+                ObjectDb.Received(1).SetParameterValue("AgentList", metaModel.AgentListXml);
                 ObjectDb.Received(1).SetParameterValue("UserName", metaModel.UserName);
                 ObjectDb.Received(1).SetParameterValue("FromDate", metaModel.FromDate);
                 ObjectDb.Received(1).SetParameterValue("ToDate", metaModel.ToDate);
                 ObjectDb.Received(1).SetParameterValue("FilterBy", metaModel.ViewById);
                 ObjectDb.Received(1).SetParameterValue("LicenseeId", metaModel.LicenseeId);
+                ObjectDb.Received(1).SetParameterValue("siteName", metaModel.SiteName);
             });
         }
 
@@ -35,11 +37,11 @@
         public void GetGroupCommList_WhenCall_ParametersPassedCorrectly()
         {
             // Arrange
-            DataAccess.GetObjectDb(Arg.Is("Lrf_GroupCommLog_Sel")).Returns(ObjectDb);
+            DataAccess.GetObjectDb(Arg.Is("Lrf_GroupCommLog_Sel"), 900).Returns(ObjectDb);
             var metaModel = new CustomerLogMetaModel();
 
             // Action
-            DataAccess.GetGroupCommList(metaModel);
+            _ = DataAccess.GetGroupCommList(metaModel);
 
             // Assert
             Assert.Multiple(() =>
@@ -47,6 +49,7 @@
                 ObjectDb.Received(1).SetParameterValue("FromDate", metaModel.FromDate);
                 ObjectDb.Received(1).SetParameterValue("ToDate", metaModel.ToDate);
                 ObjectDb.Received(1).SetParameterValue("LicenseeId", metaModel.LicenseeId);
+                ObjectDb.Received(1).SetParameterValue("siteName", metaModel.SiteName);
             });
         }
     }
