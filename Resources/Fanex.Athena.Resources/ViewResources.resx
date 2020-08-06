@@ -2848,4 +2848,10 @@
   <data name="JackpotWonDetails" xml:space="preserve">
     <value>Jackpot Won Details</value>
   </data>
+  <data name="VIPPlayerOnly" xml:space="preserve">
+    <value>VIP Player only</value>
+  </data>
+  <data name="VIPPlayerTooltipMsg" xml:space="preserve">
+    <value>VIP Players are marked in Player Segmentation</value>
+  </data>
 </root>

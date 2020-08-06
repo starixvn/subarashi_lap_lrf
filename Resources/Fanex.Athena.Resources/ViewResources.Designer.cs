@@ -7144,6 +7144,24 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to VIP Player only.
+        /// </summary>
+        public static string VIPPlayerOnly {
+            get {
+                return ResourceManager.GetString("VIPPlayerOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VIP Players are marked in Player Segmentation.
+        /// </summary>
+        public static string VIPPlayerTooltipMsg {
+            get {
+                return ResourceManager.GetString("VIPPlayerTooltipMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Virtual Basketball.
         /// </summary>
         public static string VirtualBasketball {
