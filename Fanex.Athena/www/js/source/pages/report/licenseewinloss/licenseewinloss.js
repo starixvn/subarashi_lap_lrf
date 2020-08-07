@@ -136,7 +136,8 @@
                         CurrencyId: filterData.CurrencyId,
                         CurrencyName: filterData.CurrencyName,
                         IsExcludedTestData: filterData.IsExcludedTestData,
-                        AgentId: filterData.AgentId
+                        AgentId: filterData.AgentId,
+                        IsVIPPlayerOnly: filterData.IsVIPPlayerOnly
                     };
 
                     _me.exportExcel(LicenseeWinLossOption.urlPromotionPrizeExcelData, data, EXCEL_PP_FILENAME);
