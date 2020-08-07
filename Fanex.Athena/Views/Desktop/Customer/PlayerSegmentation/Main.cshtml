@@ -13,9 +13,19 @@
     var problemPlayerVM = Model.ProblemPlayerVM;
     var vipPlayerManagementVM = Model.VipPlayerVM;
 
-    var selectedSubsidiary = Model.ViewType != (byte)PlayerSegmentationViewType.Normal
-        ? string.Join(",", Model.SubsidiaryList.SelectMany(x => x.Children.Select(y => y.Value)).Distinct())
-        : string.Empty;
+    string selectedSubsidiary;
+    if (Model.ViewType == (byte)PlayerSegmentationViewType.Susidiary)
+    {
+        selectedSubsidiary = string.Join(",", Model.SubsidiaryList.Select(x => x.Value));
+    }
+    else if(Model.ViewType == (byte)PlayerSegmentationViewType.WhiteLabel)
+    {
+        selectedSubsidiary = string.Join(",", Model.SubsidiaryList.SelectMany(x => x.Children.Select(y => y.Value)).Distinct());
+    }
+    else //normal
+    {
+        selectedSubsidiary = string.Empty;
+    }
 
     var vipPlayerManagementInitState = hasVIPManagementPermission ? new
     {
