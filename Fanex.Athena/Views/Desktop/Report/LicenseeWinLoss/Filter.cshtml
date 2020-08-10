@@ -68,11 +68,11 @@
 
             <div class="input-field input col l2 m3 s12">
                 <input type="radio" class="with-gap" value="true" @(Model.Param.IsVIPPlayerOnly == true ? "checked=checked" : "") name="IsVIPPlayerOnly" id="vipplayeronlyyes" />
-                <label for="vipplayeronlyyes">
+                <label for="vipplayeronlyyes" title="@ViewResources.VIPPlayerTooltipMsg">
                     @ViewResources.Yes
                 </label>
                 <input type="radio" class="with-gap" value="false" @(Model.Param.IsVIPPlayerOnly == false ? "checked=checked" : "") name="IsVIPPlayerOnly" id="vipplayeronlyno" />
-                <label for="vipplayeronlyno">
+                <label for="vipplayeronlyno" title="@ViewResources.VIPPlayerTooltipMsg">
                     @ViewResources.No
                 </label>
 
