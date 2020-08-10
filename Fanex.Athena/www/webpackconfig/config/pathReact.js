@@ -58,7 +58,8 @@ var scriptPaths = {
     dailybets: "./www/js/source/reactpages/pages/dailybets/components/index.jsx",
     exchangevoided: "./www/js/source/reactpages/pages/exchangevoided/components/index.jsx",
 
-    playersegmentation: "./www/js/source/reactpages/pages/customer/player-segmentation/index.js",
+    playersegmentation: "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/index.js",
+    playersegmentation_betlist: "./www/js/source/reactpages/pages/customer/player-segmentation/betlist/index.js",
 };
 module.exports = {
     projectRoot: projectRoot,

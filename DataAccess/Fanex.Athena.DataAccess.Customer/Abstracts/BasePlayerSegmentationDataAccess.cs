@@ -52,6 +52,7 @@ namespace Fanex.Athena.DataAccess.Customer
             player.CustId = Convert.ToInt32(reader["CustId"]);
             player.ExternalId = reader["username2"] as string;
             player.SystemId = reader["username"] as string;
+            player.AgentId = Convert.ToInt32(reader["AgentID"]);
             player.IsVip = Convert.ToBoolean(reader["isVIP"]);
         }
 

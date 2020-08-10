@@ -217,7 +217,7 @@
 /******/
 /******/
 /******/ 	// add entry module to deferred list
-/******/ 	deferredModules.push(["./www/js/source/reactpages/pages/customer/player-segmentation/index.js","lib/common"]);
+/******/ 	deferredModules.push(["./www/js/source/reactpages/pages/customer/player-segmentation/tabs/index.js","lib/common"]);
 /******/ 	// run deferred modules when ready
 /******/ 	return checkDeferredModules();
 /******/ })
@@ -764,7 +764,7 @@ const setSelectedTab = selectedTabKey => {
 /*!**************************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/customer/player-segmentation/actions/types.js ***!
   \**************************************************************************************/
-/*! exports provided: SET_SELECTED_TAB, SET_SWEET_ALERT_OPTION, SET_PAGING_OPTION, SET_SELECTED_PARAMS, SET_PLAYER_LIST */
+/*! exports provided: SET_SELECTED_TAB, SET_SWEET_ALERT_OPTION, SET_PAGING_OPTION, SET_SELECTED_PARAMS, SET_PLAYER_LIST, SET_SUBSIDIARY_LIST, SET_SUBSIDIARY_SEARCH */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -774,11 +774,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_PAGING_OPTION", function() { return SET_PAGING_OPTION; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SELECTED_PARAMS", function() { return SET_SELECTED_PARAMS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_PLAYER_LIST", function() { return SET_PLAYER_LIST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SUBSIDIARY_LIST", function() { return SET_SUBSIDIARY_LIST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SUBSIDIARY_SEARCH", function() { return SET_SUBSIDIARY_SEARCH; });
 const SET_SELECTED_TAB = 'SET_SELECTED_TAB';
 const SET_SWEET_ALERT_OPTION = 'SET_SWEET_ALERT_OPTION';
 const SET_PAGING_OPTION = 'SET_PAGING_OPTION';
 const SET_SELECTED_PARAMS = 'SET_SELECTED_PARAMS';
 const SET_PLAYER_LIST = 'SET_PLAYER_LIST';
+const SET_SUBSIDIARY_LIST = 'SET_SUBSIDIARY_LIST';
+const SET_SUBSIDIARY_SEARCH = 'SET_SUBSIDIARY_SEARCH';
 
 /***/ }),
 
@@ -940,51 +944,11 @@ const TabMenu = props => {
 
 /***/ }),
 
-/***/ "./www/js/source/reactpages/pages/customer/player-segmentation/index.js":
-/*!******************************************************************************!*\
-  !*** ./www/js/source/reactpages/pages/customer/player-segmentation/index.js ***!
-  \******************************************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _components_AppContainer_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/AppContainer.jsx */ "./www/js/source/reactpages/pages/customer/player-segmentation/components/AppContainer.jsx");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _jsroot_lib_store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/store */ "./www/js/source/reactpages/lib/store.js");
-/* harmony import */ var _reducers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./reducers */ "./www/js/source/reactpages/pages/customer/player-segmentation/reducers/index.js");
-/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/constants.js");
-
-
-
-
-
-
-
-const defaultState = {
-  selectedTabKey: _lib_constants__WEBPACK_IMPORTED_MODULE_6__["tabMenuList"][0].key
-};
-const store = _jsroot_lib_store__WEBPACK_IMPORTED_MODULE_4__["default"].createStore(_reducers__WEBPACK_IMPORTED_MODULE_5__["default"], defaultState);
-
-const App = () => {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_3__["Provider"], {
-    store: store
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_AppContainer_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null));
-};
-
-Object(react_dom__WEBPACK_IMPORTED_MODULE_1__["render"])(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), document.getElementById("app-container"));
-
-/***/ }),
-
 /***/ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/constants.js":
 /*!**************************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/customer/player-segmentation/lib/constants.js ***!
   \**************************************************************************************/
-/*! exports provided: tabKeys, tabMenuList, preLoadComponents, SortMapper, UpdateVIPStatusCode, errorResponse, successResponse */
+/*! exports provided: tabKeys, tabMenuList, preLoadComponents, SortMapper, ViewType, TreeViewOption, UpdateVIPStatusCode, errorResponse, successResponse */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -993,6 +957,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tabMenuList", function() { return tabMenuList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "preLoadComponents", function() { return preLoadComponents; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SortMapper", function() { return SortMapper; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ViewType", function() { return ViewType; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TreeViewOption", function() { return TreeViewOption; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UpdateVIPStatusCode", function() { return UpdateVIPStatusCode; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "errorResponse", function() { return errorResponse; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "successResponse", function() { return successResponse; });
@@ -1032,6 +998,20 @@ const SortMapper = {
     'asc': 1,
     'desc': 2
   }
+};
+const ViewType = {
+  Normal: 0,
+  Susidiary: 1,
+  WhiteLabel: 2
+};
+const TreeViewOption = {
+  childrenField: 'Children',
+  keyField: 'Value',
+  valueField: 'Name',
+  statusField: 'Checked',
+  indent: 30,
+  includeSelectedParentKey: false,
+  useOriginalDataSource: false
 };
 const UpdateVIPStatusCode = {
   Success: 0,
@@ -1152,6 +1132,46 @@ const selectedTabKey = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MOD
   }
 
 });
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/index.js":
+/*!***********************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/customer/player-segmentation/tabs/index.js ***!
+  \***********************************************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_AppContainer_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/AppContainer.jsx */ "./www/js/source/reactpages/pages/customer/player-segmentation/components/AppContainer.jsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _jsroot_lib_store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/store */ "./www/js/source/reactpages/lib/store.js");
+/* harmony import */ var _reducers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../reducers */ "./www/js/source/reactpages/pages/customer/player-segmentation/reducers/index.js");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/constants.js");
+
+
+
+
+
+
+
+const defaultState = {
+  selectedTabKey: _lib_constants__WEBPACK_IMPORTED_MODULE_6__["tabMenuList"][0].key
+};
+const store = _jsroot_lib_store__WEBPACK_IMPORTED_MODULE_4__["default"].createStore(_reducers__WEBPACK_IMPORTED_MODULE_5__["default"], defaultState);
+
+const App = () => {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_3__["Provider"], {
+    store: store
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_AppContainer_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+};
+
+Object(react_dom__WEBPACK_IMPORTED_MODULE_1__["render"])(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), document.getElementById("app-container"));
 
 /***/ }),
 

@@ -1,10 +1,6 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="PlayerSegmentationViewModel.cs" company="">
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Model.Customer.ViewModel
+﻿namespace Fanex.Athena.Model.Customer.ViewModel
 {
+    using Fanex.Athena.Model.Core.DTO.Common;
     using System.Collections.Generic;
 
     public class PlayerSegmentationViewModel
@@ -14,5 +10,7 @@ namespace Fanex.Athena.Model.Customer.ViewModel
         public ProblemPlayerViewModel ProblemPlayerVM { get; set; }
         public VipPlayerViewModel VipPlayerVM { get; set; }
         public string BaseCurrency { get; set; }
+        public byte ViewType { get; set; }
+        public IEnumerable<CheckedItem> SubsidiaryList { get; set; }
     }
 }

@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "LAP - " + ViewResources.Customer +
+    " - " + ViewResources.PlayerSegmentation + " - " + "Abnormal Bet";
+    Layout = "~/Views/Desktop/Shared/_ReactPageLayout.cshtml";
+}
+@model Fanex.Athena.Model.Customer.ViewModel.PlayerSegmentationBetListViewModel
+@section pagecss {
+    <link href="@Url.ContentLinkByEnv("/www/css/build/reactpages/betlist/index.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.ContentLinkByEnv("/www/css/build/reactpages/customer/playersegmentation/index.css")" rel="stylesheet" type="text/css" />
+}
+@section pagejs {
+    <script src="@Url.ContentLinkByEnv("/www/js/build/reactpages/customer/playersegmentation/betlist.chunk.js")"></script>
+}
+
+@section globaljscode{
+    window.initialState = {
+    selectedParams: { pageIndex: 1, pageSize: 50 },
+    isLoading: false,
+    dateRange: { fromDate: '@Model.FromDate.ToString("MM/dd/yyyy")', toDate: '@Model.ToDate.ToString("MM/dd/yyyy")'},
+    };
+    window._AppData = {
+    externalId: '@Model.ExternalId',
+    systemId: '@Model.SystemId',
+    isAllowedCustomerComm: @Model.IsAllowedCustomerComm.ToString().ToLowerInvariant(),
+    baseCurrency: '@Model.BaseCurrency.ToUpperInvariant()',
+    custId: @Model.CustId,
+    dateConstraint: { minDate: '01/01/2019', maxDate: '@DateTime.Today.ToString("MM/dd/yyyy")', limitedMonthRange: 6 },
+    };
+}
+<div id="app-container">
+</div>

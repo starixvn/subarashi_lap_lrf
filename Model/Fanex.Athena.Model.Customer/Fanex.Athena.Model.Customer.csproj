@@ -79,6 +79,7 @@
     <Compile Include="DTO\PlayerSegmentation\PlayerInfo.cs" />
     <Compile Include="DTO\PlayerSegmentation\UpdateStatusPlayerResult.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Enum\PlayerSegmentation\PlayerSegmentationViewType.cs" />
     <Compile Include="MetaModel\BaseCustomerComMetaModel.cs" />
     <Compile Include="MetaModel\CustomerListMetaModel.cs" />
     <Compile Include="MetaModel\CustomerLog\CustomerLogMetaModel.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="MetaModel\DeleteGroupMetaModel.cs" />
     <Compile Include="MetaModel\GroupCommMetaModel.cs" />
     <Compile Include="MetaModel\MoveToGroupComMetaModel.cs" />
+    <Compile Include="MetaModel\PlayerSegmentation\AbnormalBetListMetaModel.cs" />
     <Compile Include="MetaModel\PlayerSegmentation\BasePlayerListMetaModel.cs" />
     <Compile Include="MetaModel\PlayerSegmentation\UpdateStatusPlayerMetaModel.cs" />
     <Compile Include="MetaModel\PlayerSegmentation\VipPlayerListMetaModel.cs" />
@@ -101,6 +103,7 @@
     <Compile Include="ViewModel\CustomerLog\CustomerLogViewModel.cs" />
     <Compile Include="ViewModel\CustomerLog\LogInLogViewModel.cs" />
     <Compile Include="ViewModel\LogInfoViewModel.cs" />
+    <Compile Include="ViewModel\PlayerSegmentation\PlayerSegmentationBetListViewModel.cs" />
     <Compile Include="ViewModel\PlayerSegmentation\VipPlayerViewModel.cs" />
     <Compile Include="ViewModel\PlayerSegmentation\ProblemPlayerViewModel.cs" />
     <Compile Include="ViewModel\PlayerSegmentation\PlayerSegmentationViewModel.cs" />

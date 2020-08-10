@@ -34,6 +34,22 @@ export const SortMapper = {
     }
 }
 
+export const ViewType = {
+    Normal: 0,
+    Susidiary: 1,
+    WhiteLabel: 2
+}
+
+export const TreeViewOption = {
+    childrenField: 'Children',
+    keyField: 'Value',
+    valueField: 'Name',
+    statusField: 'Checked',
+    indent: 30,
+    includeSelectedParentKey: false,
+    useOriginalDataSource: false
+}
+
 export const UpdateVIPStatusCode = {
     Success: 0,
     InvalidSystemId: 100,

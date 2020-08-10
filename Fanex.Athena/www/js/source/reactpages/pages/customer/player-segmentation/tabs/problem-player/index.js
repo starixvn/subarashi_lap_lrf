@@ -9,6 +9,7 @@ const initialState = {
   ...window.initialState[tabKeys.problemPlayer],
   ...{
     userGuideContent: '',
+    subsidiarySearch: false,
     pagingOption: {
       PageIndex: 1,
       PageSize: 500,

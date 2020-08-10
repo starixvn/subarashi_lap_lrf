@@ -1,5 +1,14 @@
 ﻿namespace Fanex.Athena.Controllers.Customer
 {
+    using Fanex.Athena.Extension.Utility.Internal;
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Customer.ViewModel;
+    using Fanex.Athena.Resources;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
+    using Fanex.Athena.Service.Customer.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Web.ActionFilter;
+    using ONEbook.UM.Filters;
     using System;
     using System.Collections.Concurrent;
     using System.Collections.Generic;
@@ -7,19 +16,11 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using System.Web.SessionState;
-    using Fanex.Athena.DataAccess.Customer.Interfaces;
-    using Fanex.Athena.Extension.Utility.Internal;
-    using Fanex.Athena.Model.Auth.DataDomain;
-    using Fanex.Athena.Model.Customer.ViewModel;
-    using Fanex.Athena.Resources;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.Web.ActionFilter;
-    using ONEbook.UM.Filters;
 
     [SessionState(SessionStateBehavior.ReadOnly)]
     [CheckUMFilter]
     [FunctionAuthorization(PermissionKeys.PlayerSegmentation)]
-    public class PlayerSegmentationController : CultureBaseController
+    public partial class PlayerSegmentationController : CultureBaseController
     {
         private const string VIP_LIST_TEMPLATE_PATH = "~/App_Data/Template/Customers/PlayerSegmentation/VipPlayerUploadTemplate.xls";
 
@@ -33,41 +34,22 @@
             <string, AsyncLazy<IDictionary<int, string>>>(StringComparer.OrdinalIgnoreCase);
 
         private readonly IAuthorizationService _authService;
-        private readonly IPlayerSegmentationDataAccess _playerDataAccess;
+        private readonly ISubsidiaryService _subsidiaryService;
+        private readonly IPlayerSegmentationService _playerService;
 
-        public PlayerSegmentationController(IAuthorizationService authService, IPlayerSegmentationDataAccess playerDataAccess)
+        public PlayerSegmentationController(IAuthorizationService authService,
+            ISubsidiaryService subsidiaryService,
+            IPlayerSegmentationService playerService)
         {
             _authService = authService;
-            _playerDataAccess = playerDataAccess;
+            _subsidiaryService = subsidiaryService;
+            _playerService = playerService;
         }
 
         [FunctionAuthorization(PermissionKeys.PlayerProblemManagement, PermissionKeys.PlayerVIPManagement)]
         public async Task<ViewResult> Index()
         {
-            var currencyList = SessionServiceInstance.UserSession.CurrencyList;
-            var baseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency;
-            var lang = LangService.GetCurrentLanguage();
-
-            var hasVIPManangementPermission = HasVIPManagementPermission();
-            var reasonList = await GetReasonList(lang).ConfigureAwait(false);
-
-            var model = new PlayerSegmentationViewModel
-            {
-                TabKeys = GetTabKeys(),
-                HasVIPManagementPermission = hasVIPManangementPermission,
-                ProblemPlayerVM = new ProblemPlayerViewModel
-                {
-                    CurrencyList = currencyList,
-                    ReasonList = reasonList
-                },
-                VipPlayerVM = hasVIPManangementPermission ? new VipPlayerViewModel
-                {
-                    CurrencyList = currencyList,
-                    VipOptions = GetVipOptions()
-                } : null,
-                BaseCurrency = baseCurrency
-            };
-
+            var model = await BuildViewModel();
             return View("~/Views/Desktop/Customer/PlayerSegmentation/Main.cshtml", model);
         }
 
@@ -77,6 +59,45 @@
         {
             var templatePath = Server.MapPath(VIP_LIST_TEMPLATE_PATH);
             return File(templatePath, "application/vnd.ms-excel", "VipPlayerList.xls");
+        }
+
+        private async Task<PlayerSegmentationViewModel> BuildViewModel()
+        {
+            var currencyList = SessionServiceInstance.UserSession.CurrencyList;
+            var baseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency;
+            var lang = LangService.GetCurrentLanguage();
+
+            var hasVIPManangementPermission = HasVIPManagementPermission();
+            var subsidiaryList = _subsidiaryService.GetSubsidiaryTree(SessionServiceInstance.UserSession, SessionServiceInstance.LicenseeSession.LicenseeName);
+            var viewType = (byte)_playerService.GetViewType(subsidiaryList.Any());
+            var reasonList = await GetReasonList(lang).ConfigureAwait(false);
+
+            var model = new PlayerSegmentationViewModel
+            {
+                TabKeys = GetTabKeys(),
+                HasVIPManagementPermission = hasVIPManangementPermission,
+                ProblemPlayerVM = new ProblemPlayerViewModel
+                {
+                    CurrencyList = currencyList,
+                    ReasonList = reasonList,
+                },
+                VipPlayerVM = hasVIPManangementPermission ? new VipPlayerViewModel
+                {
+                    CurrencyList = currencyList,
+                    VipOptions = GetVipOptions()
+                } : null,
+                BaseCurrency = baseCurrency,
+                ViewType = viewType,
+                SubsidiaryList = subsidiaryList
+            };
+
+            return model;
+        }
+
+        private async Task<IDictionary<int, string>> GetReasonList(string lang)
+        {
+            var lazyTask = ReasonListFromCache.GetOrAdd(lang, langKey => new AsyncLazy<IDictionary<int, string>>(() => _playerService.GetReasonGroupListAsync(langKey)));
+            return await lazyTask.Value.ConfigureAwait(false);
         }
 
         private bool HasVIPManagementPermission()
@@ -102,12 +123,6 @@
                 { 1, ViewResources.Yes },
                 { 2, ViewResources.No },
             };
-        }
-
-        private async Task<IDictionary<int, string>> GetReasonList(string lang)
-        {
-            var lazyTask = ReasonListFromCache.GetOrAdd(lang, langKey => new AsyncLazy<IDictionary<int, string>>(() => _playerDataAccess.GetReasonGroupListAsync(langKey)));
-            return await lazyTask.Value.ConfigureAwait(false);
         }
     }
 }

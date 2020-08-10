@@ -5,6 +5,7 @@ import * as filterReducer from './filterReducer';
 import * as playerDataReducer from '../../../reducers/playerDataReducer';
 import * as gridHandlerReducer from '../../../reducers/gridHandlerReducer';
 import * as tabHandlerReducers from '../../../reducers/tabHandlerReducers';
+import * as playerReducer from './playerReducer';
 
 export default combineReducers(Object.assign(
     loaderReducer,
@@ -12,5 +13,6 @@ export default combineReducers(Object.assign(
     filterReducer,
     playerDataReducer, 
     gridHandlerReducer,
-    tabHandlerReducers
+    tabHandlerReducers,
+    playerReducer
 ));

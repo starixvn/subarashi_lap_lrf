@@ -59,6 +59,7 @@ namespace Fanex.Athena.DataAccess.Customer.UnitTests
                 { "MaxPerEvent", FakeHelper.Create<decimal?>() },
                 { "MaxBet", FakeHelper.Create<decimal?>() },
                 { "Reason", FakeHelper.Create<string>() },
+                { "AgentID", FakeHelper.Create<int>() }
             };
 
             MapReaderData(expectedData);
@@ -112,6 +113,7 @@ namespace Fanex.Athena.DataAccess.Customer.UnitTests
                 { "username2", FakeHelper.Create<string>() },
                 { "username", FakeHelper.Create<string>() },
                 { "isVIP", FakeHelper.Create<bool>() },
+                { "AgentID", FakeHelper.Create<int>() }
             };
 
             MapReaderData(expectedData);
@@ -246,6 +248,7 @@ namespace Fanex.Athena.DataAccess.Customer.UnitTests
             Assert.AreEqual(expectedData["username2"], acutalData.ExternalId);
             Assert.AreEqual(expectedData["username"], acutalData.SystemId);
             Assert.AreEqual(expectedData["isVIP"], acutalData.IsVip);
+            Assert.AreEqual(expectedData["AgentID"], acutalData.AgentId);
         };
     }
 }

@@ -2,16 +2,19 @@ import React from 'react';
 import { Row, Cell } from '@9softstudio/react-grid';
 import NumberFormat from '@jsroot/lib/numberFormat';
 import VipSwitcherCell from '../../../../components/VipSwitcherCell';
+import HyperLinkCell from '../../../../components/HyperLinkCell';
 
 const PlayerRow = (props) => {
-    const { dataItem, index, hasVipManagement } = props;
-    const { custId, externalId, systemId, markDate, reducedMaxPerEvent, reducedMaxPerBet, reasonList } = dataItem;
+    const { dataItem, index, hasVipManagement, showSubsidiary, onSelectPlayer } = props;
+    const { custId, subsidiary, externalId, systemId, markDate, reducedMaxPerEvent, reducedMaxPerBet, reasonList } = dataItem;
 
     const _renderReasonList = () => reasonList.map(reason => <div>{reason}</div>);
+    const onClickExternalId = React.useCallback(() => onSelectPlayer({ custId, externalId, systemId }), [custId, externalId, systemId]);
 
     return (
         <Row key={`player_row_${custId}`}>
-            <Cell className="left-align">{externalId}</Cell>
+            {showSubsidiary && <Cell className="left-align">{subsidiary}</Cell>}
+            <HyperLinkCell name={externalId} onClick={onClickExternalId} />
             <Cell className="left-align">{systemId}</Cell>
             <Cell className="right-align">{NumberFormat.format(reducedMaxPerEvent, 2)}</Cell>
             <Cell className="right-align">{NumberFormat.format(reducedMaxPerBet, 2)}</Cell>

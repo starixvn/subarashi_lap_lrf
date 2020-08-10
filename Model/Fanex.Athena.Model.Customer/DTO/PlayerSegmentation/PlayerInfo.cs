@@ -8,6 +8,12 @@ namespace Fanex.Athena.Model.Customer.DTO.PlayerSegmentation
         public int CustId { get; set; }
         public string ExternalId { get; set; }
         public string SystemId { get; set; }
+
+        [JsonIgnore]
+        public int AgentId { get; set; }
+
+        public string Subsidiary { get; set; }
+
         public decimal? ReducedMaxPerEvent { get; set; }
         public decimal? ReducedMaxPerBet { get; set; }
 

@@ -5,6 +5,7 @@ import * as currencyReducer from '@jsroot/reducers/currencyReducer';
 import * as baseCurrencyReducer from '@jsroot/reducers/baseCurrencyReducer';
 import * as usernameReducer from '@jsroot/reducers/usernameReducer';
 import * as paramHandlerReducer from '../../../reducers/paramHandlerReducer';
+import * as filterReducer from '../../../reducers/filterReducer';
 
 export const isGetAll = createReducer({}, {
     [types.SET_IS_GET_ALL](state, action) {
@@ -22,5 +23,6 @@ export const dateRange = dateRangeReducer.dateRange;
 export const selectedCurrency = currencyReducer.selectedCurrency;
 export const username = usernameReducer.username;
 export const selectedBaseCurrency = baseCurrencyReducer.selectedBaseCurrency;
-
+export const selectedSubsidiary = filterReducer.selectedSubsidiary;
+export const subsidiarySearch = filterReducer.subsidiarySearch;
 export const selectedParams = paramHandlerReducer.selectedParams;

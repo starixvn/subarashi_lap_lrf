@@ -53,5 +53,10 @@
         {
             return datetime.Date.AddDays(1).AddSeconds(-3);
         }
+
+        public static DateTime GetFirstDateOfMonth(DateTime datetime)
+        {
+            return new DateTime(datetime.Year, datetime.Month, 1);
+        }
     }
 }

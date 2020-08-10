@@ -15,23 +15,36 @@
         private const int RowContentTemplate = 2;
         private const int NumberOfRowPerSheet = 20000;
 
+        private readonly string _reportTitle;
+
+        protected const int ColumnSubsidiary = 0;
+        protected readonly bool _isNormalView;
+
         protected IList<Tuple<string, string, Func<object, object>>> _infoHeaders;
 
         protected IEnumerable<T> _dataSource;
 
-        private readonly string _reportTitle;
+        protected virtual int CellTitleIndex => _isNormalView ? 1 : 0;
 
-        protected PlayerExcel(string templatePath, string reportTitle, IEnumerable<T> dataSource)
+        protected PlayerExcel(string templatePath, string reportTitle, IEnumerable<T> dataSource, bool isNormalView)
            : base(templatePath, dataSource.Count(), NumberOfRowPerSheet)
         {
             _dataSource = dataSource;
-            _infoHeaders = new List<Tuple<string, string, Func<object, object>>>
-            {
-                new Tuple<string, string, Func<object, object>>(ViewResources.ExternalId, nameof(ViewResources.ExternalId), null),
-                new Tuple<string, string, Func<object, object>>(ViewResources.SystemId, nameof(ViewResources.SystemId), null),
-            };
+            _isNormalView = isNormalView;
             IsMultiSheet = true;
             _reportTitle = reportTitle;
+
+            InitHeaders();
+        }
+
+        private void InitHeaders()
+        {
+            _infoHeaders = new List<Tuple<string, string, Func<object, object>>>
+            {
+                new Tuple<string, string, Func<object, object>>(ViewResources.Subsidiary, nameof(ViewResources.Subsidiary), null),
+                new Tuple<string, string, Func<object, object>>(ViewResources.ExternalId, nameof(ViewResources.ExternalId), null),
+                new Tuple<string, string, Func<object, object>>(ViewResources.SystemId, nameof(ViewResources.SystemId), null)
+            };
         }
 
         protected override void AssignHeader(ISheet sheet)
@@ -71,8 +84,16 @@
 
         protected override void AssignTitle(ISheet sheet)
         {
-            sheet.SetTextRowValue(TemplateSheet, RowTitleTemplate, 1, _reportTitle);
+            sheet.SetTextRowValue(TemplateSheet, RowTitleTemplate, destRowIndex: RowTitleTemplate, 1, _reportTitle, CellTitleIndex);
             sheet.CreateFreezePane(0, RowContentTemplate);
+        }
+
+        protected override void ProcessUI(ISheet sheet)
+        {
+            if (_isNormalView)
+            {
+                sheet.HideColumn(ColumnSubsidiary);
+            }
         }
 
         protected virtual object ParseValue(object cellValue, Func<object, object> parser)

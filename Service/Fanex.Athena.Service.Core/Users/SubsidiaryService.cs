@@ -1,8 +1,5 @@
 ﻿namespace Fanex.Athena.Service.Core.Users
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using Core.Users.Interfaces;
     using DataAccess.Core.Users.Interfaces;
     using Extension.Utility.Interfaces;
@@ -10,9 +7,13 @@
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.DTO.Users;
     using Fanex.Athena.Resources;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Configuration;
     using Model.Report.DTO;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
     public class SubsidiaryService : ISubsidiaryService
     {
@@ -30,6 +31,14 @@
         {
             _cache = cache;
             _subLicenseeDataAccess = subsidiaryDataAccess;
+        }
+
+        public string GenerateAgentList(UserAuthInfo user, string licenseeName, string subsidiaryList, string currencyIdList = default)
+        {
+            var agentIdListBySubsidiary = GetCurrencyAgentList(user, licenseeName, subsidiaryList);
+            var agentIdList = FilterAgentIdList(agentIdListBySubsidiary, currencyIdList);
+            var agentListXml = AuthParameterHelper.GenerateAgentListXml(user.CurrencyList, agentIdList);
+            return agentListXml;
         }
 
         public IDictionary<int, IEnumerable<int>> GetCurrencyAgentList(UserAuthInfo user, string licenseeName,
@@ -65,7 +74,6 @@
             }
 
             return result.GroupBy(x => x.CurrencyId).ToDictionary(x => x.Key, x => x.Select(i => i.AgentId));
-
         }
 
         public IEnumerable<CheckedItem> GetSubsidiaryTree(UserAuthInfo user, string licenseeName)
@@ -165,6 +173,22 @@
             var subsidiaryList = _cache.Get(cacheKey, () => _subLicenseeDataAccess.GetSubsidiaryList(licenseeName), CacheTimeoutSeconds);
             var userAgentList = user.CurrencyAgentList.SelectMany(i => i.Value);
             return subsidiaryList.Where(i => userAgentList.Contains(i.AgentId));
+        }
+
+        private IDictionary<int, IEnumerable<int>> FilterAgentIdList(IDictionary<int, IEnumerable<int>> agentList, string currencyIdListString)
+        {
+            if (string.IsNullOrEmpty(currencyIdListString))
+            {
+                return new Dictionary<int, IEnumerable<int>>();
+            }
+
+            var currencyIdList = AuthParameterHelper.ParseCurrencyIdList(currencyIdListString);
+
+            var agentListFiltered = agentList
+               .Where(_ => currencyIdList.Any(__ => __ == _.Key))
+               .ToDictionary(_ => _.Key, _ => _.Value);
+
+            return agentListFiltered;
         }
     }
 }

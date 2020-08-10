@@ -21,7 +21,7 @@
         [ApiAutoBindMetaModel(BindAgent = true, BindLanguage = true)]
         public async Task<JsonResult<ApiPagingResult<PlayerInfo>>> GetProblemPlayerList(ProblemPlayerListMetaModel metaModel)
         {
-            var result = await _playerDataAccess.GetProblemPlayerListAsync(metaModel).ConfigureAwait(false);
+            var result = await _playerService.GetProblemPlayerListAsync(metaModel);
             return JsonApi(result);
         }
 
@@ -31,14 +31,13 @@
         [ApiAutoBindMetaModel(BindAgent = true, BindExportAll = true, BindLanguage = true)]
         public async Task<HttpResponseMessage> ExportProblemPlayerList(ProblemPlayerListMetaModel metaModel)
         {
-            var userSession = SessionService.UserSession;
-            var hasVIPPermission = _authService.HasPermissions(userSession, PermissionKeys.PlayerVIPManagement);
-
-            var dataSource = await _playerDataAccess.GetProblemPlayerListAsync(metaModel).ConfigureAwait(false);
+            var hasVIPPermission = _authService.HasPermissions(SessionService.UserSession, PermissionKeys.PlayerVIPManagement);
+            var isNormalView = _playerService.IsNormalView(metaModel);
+            var dataSource = await _playerService.GetProblemPlayerListAsync(metaModel).ConfigureAwait(false);
             if (dataSource.Data.Any())
             {
                 const string fileName = "ProblemPlayerList.xls";
-                var excel = new ProblemPlayerExcel(dataSource.Data, metaModel.BaseCurrency, hasVIPPermission);
+                var excel = new ProblemPlayerExcel(dataSource.Data, metaModel.BaseCurrency, isNormalView, hasVIPPermission);
                 excel.Export();
 
                 var result = ExcelStream(excel.Workbook, fileName);

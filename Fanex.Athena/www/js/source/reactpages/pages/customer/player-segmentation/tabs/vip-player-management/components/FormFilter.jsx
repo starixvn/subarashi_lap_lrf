@@ -2,8 +2,9 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Select from 'react-select'
-import MultipleSelect from '@9softstudio/react-multiselect'
+import MultipleSelect, { TreeViewSelect } from '@9softstudio/react-multiselect'
 import AutoComplete from '@jsroot/components/auto-complete'
+import CheckBox from '@jsroot/components/CheckBox'
 import CollapsiblePanel from '@jsroot/components/collapsible-panel'
 import UserGuide from '@jsroot/components/UserGuide'
 import LangHelper from '@jsroot/lib/langHelper'
@@ -13,6 +14,7 @@ import AppData from '@jsroot/lib/AppData'
 import DataService from '@jsroot/lib/DataService.js'
 import { ActionCreators } from '../actions'
 import { Url } from '../lib/constants';
+import { ViewType, TreeViewOption } from '../../../lib/constants';
 import DataSourceHelper from '../../../lib/helpers/dataSourceHelper';
 import ParamHelper from "../lib/helpers/paramHelper";
 import GridHelper from "../../../lib/helpers/gridHelper";
@@ -45,7 +47,7 @@ export class FormFilter extends PureComponent {
 
         DataService.getFile(Url.exportVipPlayerList, params).then((response) => {
             const NoContentStatusCode = 204;
-            if(response.status === NoContentStatusCode){
+            if (response.status === NoContentStatusCode) {
                 alert(LangHelper.getSingleResource("NoInfo"));
             } else {
                 Site.downloadFile(response.data, 'VipPlayerList.xls');
@@ -102,12 +104,47 @@ export class FormFilter extends PureComponent {
         </div>);
     }
 
+    _onChangeSubsidiaryList = (currentItem, selectedItemsKey, treeViewList) => {
+        this.props.setSubsidiaryList(selectedItemsKey);
+    }
+
+    _renderSubsidiaryTreeView() {
+        return <TreeViewSelect
+            language={LangHelper.currentLanguage}
+            id="SubsidiaryTreeView"
+            dataSource={AppData.subsidiaryList}
+            keyField="Value"
+            valueField="Name"
+            statusField="Checked"
+            texts={{ SelectOptions: "Please select", All: "All", SelectedItemCount: "# selected" }}
+            isAllTextShown={false}
+            hasSearchBox={false}
+            treeViewOption={TreeViewOption}
+            onChange={this._onChangeSubsidiaryList} />;
+    }
+
     render() {
         const isDisabledSubmit = StringHelper.isEmptyOrWhiteSpace(this.props.selectedCurrency);
         return (
             <CollapsiblePanel className="page-filter" stickyFooter={this._renderStickyFooter()}>
                 <div className="row">
-                    <div className="col-12 col-md-4 col-sm-3 col-lg-4 col-xl-2">
+                    {AppData.viewType !== ViewType.Normal && this.props.subsidiarySearch && (<div className="col-12 col-md-2 col-sm-3 col-lg-3 col-xl-2">
+                        <div className="form-group">
+                            <label className="label-text">
+                                {AppData.viewType === ViewType.WhiteLabel ? LangHelper.getSingleResource("WhiteLabel") : LangHelper.getSingleResource("Subsidiary")}
+                            </label>
+                            {this._renderSubsidiaryTreeView()}
+                        </div>
+                    </div>)}
+                    {AppData.viewType !== ViewType.Normal && <div className="col-12 col-md-2 col-sm-2 col-lg-2 col-xl-2">
+                        <div className="form-group">
+                            <CheckBox id="SubsidiarySearch"
+                                checked={this.props.subsidiarySearch}
+                                onChange={checked => this.props.setSubsidiarySearch(checked)}
+                                label={LangHelper.getSingleResource("SubsidiarySearch")} />
+                        </div>
+                    </div>}
+                    <div className="col-12 col-md-2 col-sm-3 col-lg-4 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource("Vip")}</label>
                             {this._renderVipOptionSelectList()}
@@ -122,13 +159,13 @@ export class FormFilter extends PureComponent {
                                 htmlAttributes={{ placeholder: LangHelper.getSingleResource("ExternalIdOrSystemId") }} />
                         </div>
                     </div>
-                    <div className="col-12 col-md-4 col-sm-3 col-lg-3 col-xl-2">
+                    <div className="col-12 col-md-2 col-sm-3 col-lg-3 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource("Currency")}</label>
                             {this._renderCurrencySelectList()}
                         </div>
                     </div>
-                    <div className="col-12 col-md-4 col-sm-3 col-lg-2 col-xl-1">
+                    <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-1">
                         <div className="form-group">
                             <div className="button-group">
                                 <button type="button" className="btn btn-submit" disabled={isDisabledSubmit} onClick={this._submit}>{LangHelper.getSingleResource("Submit")}</button>
@@ -142,7 +179,8 @@ export class FormFilter extends PureComponent {
 }
 
 function mapDispatchToProps(dispatch) {
-    const { setDateRange, setSelectedVipOption, setUsername, setSelectedCurrency, setSelectedParams, searchPlayer, setPagingOption, getUserGuideContent } = ActionCreators;
+    const { setDateRange, setSelectedVipOption, setUsername, setSelectedCurrency, setSelectedParams, searchPlayer,
+        setPagingOption, setSubsidiaryList, getUserGuideContent, setSubsidiarySearch } = ActionCreators;
     return bindActionCreators(Object.assign({}, {
         setSelectedVipOption,
         setDateRange,
@@ -151,12 +189,15 @@ function mapDispatchToProps(dispatch) {
         setSelectedParams,
         searchPlayer,
         setPagingOption,
-        getUserGuideContent
+        setSubsidiaryList,
+        getUserGuideContent,
+        setSubsidiarySearch
     }), dispatch);
 }
 
 function mapStateToProps(state) {
-    const { dateRange, selectedVipOption, selectedCurrency, selectedParams, username, pagingOption, selectedTabKey, userGuideContent } = state;
+    const { dateRange, selectedVipOption, selectedCurrency, selectedParams, username, pagingOption,
+        selectedTabKey, userGuideContent, selectedSubsidiary, subsidiarySearch } = state;
     return Object.assign({}, {
         selectedVipOption,
         dateRange,
@@ -165,7 +206,9 @@ function mapStateToProps(state) {
         selectedParams,
         pagingOption,
         selectedTabKey,
-        userGuideContent
+        userGuideContent,
+        selectedSubsidiary,
+        subsidiarySearch
     });
 };
 

@@ -1,6 +1,7 @@
-import LangHelper from '@jsroot/lib/langHelper'
+import LangHelper from '@jsroot/lib/langHelper';
 
 export const dataGridFullHeaders = [
+    { key: 'subsidiary', text: LangHelper.getSingleResource('Subsidiary'), colWidth: 100, show: false },
     { key: 'externalId', text: LangHelper.getSingleResource('ExternalId'), sortBy: 'externalId', colWidth: 100 },
     { key: 'systemId', text: LangHelper.getSingleResource('SystemId'), sortBy: 'systemId', colWidth: 100 },
     { key: 'reducedMaxPerEvent', text: LangHelper.getSingleResource('ReducedMaxPerEvent'), colWidth: 100 },
@@ -11,5 +12,6 @@ export const dataGridFullHeaders = [
 ]
 
 export const Url = {
-    exportProblemPlayerList: 'Api/PlayerSegmentation/ExportProblemPlayerList'
+    exportProblemPlayerList: 'Api/PlayerSegmentation/ExportProblemPlayerList',
+    abnormalBetList: 'PlayerSegmentation/BetList'
 }

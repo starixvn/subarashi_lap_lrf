@@ -1,6 +1,9 @@
 import React from 'react';
 import { HeaderRow, HeaderCell } from '@9softstudio/react-grid';
+import AppData from '@jsroot/lib/AppData';
+
 import { SortMapper } from '../constants';
+import { ViewType } from '../constants';
 
 export default class GridHelper {
     static renderHeader(dataHeaders) {
@@ -52,4 +55,6 @@ export default class GridHelper {
         }
         setPagingOption(newPagingOption);
     }
+
+    static isShowSubsidiary = subsidiarySearch => AppData.viewType !== ViewType.Normal && subsidiarySearch;
 }

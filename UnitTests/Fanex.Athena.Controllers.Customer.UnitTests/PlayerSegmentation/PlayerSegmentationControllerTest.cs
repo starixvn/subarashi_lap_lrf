@@ -1,8 +1,9 @@
 ﻿using Fanex.Athena.Controllers.Base.UnitTests;
-using Fanex.Athena.DataAccess.Customer.Interfaces;
 using Fanex.Athena.Model.Auth;
 using Fanex.Athena.Model.Auth.DataDomain;
 using Fanex.Athena.Model.Customer.ViewModel;
+using Fanex.Athena.Service.Core.Users.Interfaces;
+using Fanex.Athena.Service.Customer.Interfaces;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
 using Fanex.Athena.UnitTest.Common.Helpers;
 using NSubstitute;
@@ -14,10 +15,11 @@ using System.Threading.Tasks;
 namespace Fanex.Athena.Controllers.Customer.UnitTests
 {
     [TestFixture]
-    public class PlayerSegmentationTest : CultureBaseControllerHelperTest
+    public partial class PlayerSegmentationControllerTest : CultureBaseControllerHelperTest
     {
         private IAuthorizationService _authService;
-        private IPlayerSegmentationDataAccess _playerDataAccess;
+        private ISubsidiaryService _subsidiaryService;
+        private IPlayerSegmentationService _playerService;
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
@@ -29,14 +31,16 @@ namespace Fanex.Athena.Controllers.Customer.UnitTests
         [SetUp]
         public void SetUp()
         {
-            _playerDataAccess = Substitute.For<IPlayerSegmentationDataAccess>();
+            _subsidiaryService = Substitute.For<ISubsidiaryService>();
+            _playerService = Substitute.For<IPlayerSegmentationService>();
             _authService = Substitute.For<IAuthorizationService>();
         }
 
         [TearDown]
         public void TearDown()
         {
-            _playerDataAccess.ClearReceivedCalls();
+            _subsidiaryService.ClearReceivedCalls();
+            _playerService.ClearReceivedCalls();
             _authService.ClearReceivedCalls();
         }
 
@@ -90,6 +94,7 @@ namespace Fanex.Athena.Controllers.Customer.UnitTests
             }
         }
 
+
         [Test]
         public async Task Index_WhenCall_ReturnReasonListCorrect()
         {
@@ -99,7 +104,7 @@ namespace Fanex.Athena.Controllers.Customer.UnitTests
                 var fakeReasons = FakeHelper.Create<Dictionary<int, string>>();
                 var fakeLanguage = FakeHelper.Create<string>();
                 LangService.GetCurrentLanguage().Returns(fakeLanguage);
-                _playerDataAccess.GetReasonGroupListAsync(fakeLanguage).Returns(Task.FromResult<IDictionary<int, string>>(fakeReasons));
+                _playerService.GetReasonGroupListAsync(fakeLanguage).Returns(Task.FromResult<IDictionary<int, string>>(fakeReasons));
 
                 // Action
                 var result = await controller.Index();
@@ -112,7 +117,7 @@ namespace Fanex.Athena.Controllers.Customer.UnitTests
 
         private PlayerSegmentationController CreateController()
         {
-            return new PlayerSegmentationController(_authService, _playerDataAccess)
+            return new PlayerSegmentationController(_authService, _subsidiaryService, _playerService)
             {
                 LangService = LangService,
                 SessionServiceInstance = SessionService,

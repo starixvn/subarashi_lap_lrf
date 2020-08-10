@@ -1,4 +1,4 @@
-import { SET_SWEET_ALERT_OPTION, SET_PAGING_OPTION } from './types';
+import { SET_SWEET_ALERT_OPTION, SET_PAGING_OPTION  } from './types';
 export const setSweetAlertOption = options => {
     return {
         type: SET_SWEET_ALERT_OPTION,

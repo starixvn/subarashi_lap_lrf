@@ -2489,7 +2489,6 @@
   </data>
   <data name="SubsidiarySearch" xml:space="preserve">
     <value>子网站搜寻</value>
-    <comment>ignoreJS</comment>
   </data>
   <data name="TurnoverPercent" xml:space="preserve">
     <value>%交易额</value>

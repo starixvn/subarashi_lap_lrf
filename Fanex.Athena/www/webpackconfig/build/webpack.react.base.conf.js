@@ -41,6 +41,7 @@ function generateConfig(environment) {
             [`${jsPath}/report/dailybets`]: pathConfig.scriptPaths.dailybets,
             [`${jsPath}/exchangevoided/exchangevoided`]: pathConfig.scriptPaths.exchangevoided,
             [`${jsPath}/customer/playersegmentation/main`]: pathConfig.scriptPaths.playersegmentation,
+            [`${jsPath}/customer/playersegmentation/betlist`]: pathConfig.scriptPaths.playersegmentation_betlist,
 
             /*css*/
             [`${cssPath}/vendor`]: pathConfig.cssPaths.layout,

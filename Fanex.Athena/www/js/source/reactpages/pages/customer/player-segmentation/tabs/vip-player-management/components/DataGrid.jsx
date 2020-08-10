@@ -6,14 +6,16 @@ import { Table } from '@9softstudio/react-grid';
 import CheckBox from '@jsroot/components/CheckBox'
 import PlayerRow from './grid/PlayerRow';
 import NoDataTitle from '@jsroot/components/NoDataTitle';
+import AppData from '@jsroot/lib/AppData';
 import GridHelper from '../../../lib/helpers/gridHelper';
-import { dataGridHeaders } from '../lib/constants';
+import { getDataGridHeaders } from '../lib/helpers/gridHelper';
+import { useCallback } from 'react';
 
 const MAX_WIDTH_PAGE = 1920;
 
 export const DataGrid = (props) => {
     const MAX_WIDTH = Math.min(document.body.clientWidth, MAX_WIDTH_PAGE);
-    const { isCheckAll, playerList, pagingOption, selectedParams, selectedTabKey, setPlayerList, setPagingOption, searchPlayer } = props;
+    const { isCheckAll, playerList, pagingOption, selectedParams, selectedTabKey, setPlayerList, setPagingOption, searchPlayer, setSelectedPlayer } = props;
 
     if (playerList == null) {
         return null;
@@ -22,6 +24,8 @@ export const DataGrid = (props) => {
     if (!playerList.length) {
         return <NoDataTitle />;
     }
+
+    const showSubsidiary = GridHelper.isShowSubsidiary(selectedParams.subsidiarySearch)
 
     const _dataGridHeaders = [
         {
@@ -37,12 +41,12 @@ export const DataGrid = (props) => {
                     setPlayerList(newPlayerList);
                 }} />
         },
-        ...dataGridHeaders
+        ...getDataGridHeaders(showSubsidiary)
     ]
 
     const _renderDataSection = dataList => dataList.map((dataItem, index) => {
         const { isSelected, ...rest } = dataItem;
-        return <PlayerRow {...rest} index={index} /> 
+        return <PlayerRow {...rest} index={index} showSubsidiary={showSubsidiary} />
     })
 
     const _handleSort = (orderCol, sortType) => {
@@ -74,8 +78,8 @@ export const DataGrid = (props) => {
 }
 
 function mapDispatchToProps(dispatch) {
-    const { searchPlayer, setPlayerList, setPagingOption } = ActionCreators;
-    return bindActionCreators({ setPlayerList, setPagingOption, searchPlayer }, dispatch);
+    const { searchPlayer, setPlayerList, setPagingOption, setSelectedPlayer } = ActionCreators;
+    return bindActionCreators({ setPlayerList, setPagingOption, searchPlayer, setSelectedPlayer }, dispatch);
 }
 
 function mapStateToProps(state) {

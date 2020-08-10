@@ -13,4 +13,3 @@ export const pagingOption = createReducer(null, {
         return action.data && {...action.data };
     }
 })
-

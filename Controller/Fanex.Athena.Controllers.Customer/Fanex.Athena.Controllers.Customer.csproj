@@ -130,6 +130,7 @@
   <ItemGroup>
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Helpers\CustomerComGroupHelper.cs" />
+    <Compile Include="PlayerSegmentation\PlayerSegmentation.BetList.Controller.cs" />
     <Compile Include="PlayerSegmentation\PlayerSegmentationController.cs" />
     <Compile Include="SearchCustomerAPIController.cs" />
     <Compile Include="CustomerAPIController.cs" />
