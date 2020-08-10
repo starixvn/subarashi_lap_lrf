@@ -1,4 +1,4 @@
-﻿// Generated at: 7/23/2020 10:22:44 AM
+﻿// Generated at: 8/10/2020 5:37:37 PM
 var _language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -787,6 +787,8 @@ Viewin:"View in {0}",
 ViewNotification:"View Notification",
 Vip:"VIP",
 VipPlayerManagement:"VIP Player Management",
+VIPPlayerOnly:"VIP Player only",
+VIPPlayerTooltipMsg:"VIP Players are marked in Player Segmentation",
 VirtualBasketball:"Virtual Basketball",
 VirtualCycling:"Virtual Cycling",
 VirtualGreyhounds:"Virtual Greyhounds",
