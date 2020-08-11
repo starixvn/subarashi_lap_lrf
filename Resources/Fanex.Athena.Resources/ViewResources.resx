@@ -2859,6 +2859,9 @@
   <data name="CustomerClass" xml:space="preserve">
     <value>Customer Class</value>
   </data>
+  <data name="ProductPGS" xml:space="preserve">
+    <value>PG Soft</value>
+  </data>
   <data name="CustomerClassInformation" xml:space="preserve">
     <value>Customer Class Information</value>
   </data>

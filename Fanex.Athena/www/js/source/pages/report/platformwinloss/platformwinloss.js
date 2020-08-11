@@ -17,7 +17,7 @@
     function ($, QueryString, Site, Report, PlatformWinLossOption, jqGridAdditional, MonthPicker, MultiSelect, Popup, ExcelHelper, DataHelper) {
         'use strict';
 
-        const BETLIST_IGNORED_PRODUCTS = ['AB', 'PP', 'CC', 'SG', 'VRG', 'SXG', 'SBC', 'SAG'];
+        const BETLIST_IGNORED_PRODUCTS = ['AB', 'PP', 'CC', 'SG', 'VRG', 'SXG', 'SBC', 'SAG', 'PGS'];
         let _platformNameMap = {};
 
         const _cacheData = {};
@@ -128,7 +128,7 @@
             };
         }
 
-        function getSubmitData(){
+        function getSubmitData() {
             const data = $('#platformwinloss').serializeObject();
             data.Level = 0;
             addDateParam(data);
@@ -291,7 +291,7 @@
                 getProductText(data.ProductOptions);
 
             const title = $.format(titlePattern, data.FromDate, data.ToDate,
-                        currencyText, baseCurrencyText, platformName, ', ' + productText);
+                currencyText, baseCurrencyText, platformName, ', ' + productText);
 
             $('.report-title').html(title);
             $('.panel-heading').removeClass('hide');
@@ -364,7 +364,7 @@
             const productCodeList = [];
             for (let i = 0; i < onLevelData.ProductOptions.length; i++) {
                 const product = onLevelData.ProductOptions[i];
-                if (product.Status && $.inArray(product.Code, BETLIST_IGNORED_PRODUCTS) < 0 ) {
+                if (product.Status && $.inArray(product.Code, BETLIST_IGNORED_PRODUCTS) < 0) {
                     productCodeList.push(product.Code);
                 }
             }
@@ -401,9 +401,9 @@
                 function (x) { return x[sortThenBy]; },
                 'asc');
 
-                for (let i = 0; i < totalData; i++) {
-                    data[i].index = i + 1;
-                }
+            for (let i = 0; i < totalData; i++) {
+                data[i].index = i + 1;
+            }
 
             return data;
         }

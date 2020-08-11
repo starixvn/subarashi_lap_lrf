@@ -165,6 +165,7 @@
     <Compile Include="LicenseeWinLossByTimeZoneReportController.cs" />
     <Compile Include="PromotionPrizeReportController.cs" />
     <Compile Include="Result\Indo4DResultReportController.cs" />
+    <Compile Include="Result\ResultPopup\PGSoftResultPopupController.cs" />
     <Compile Include="Result\ResultPopup\SabaClubResultPopupController.cs" />
     <Compile Include="Result\ResultPopup\CardClubResultPopupController.cs" />
     <Compile Include="Result\ResultPopup\SGResultPopupController.cs" />

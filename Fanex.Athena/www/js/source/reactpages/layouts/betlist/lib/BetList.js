@@ -283,6 +283,28 @@ class BetList {
         return url;
     }
 
+    getPGSDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
+        let url = rootUrl + 'PGSoftBetList/Detail';
+        url = QueryString.setParam(url, 'transId', transId);
+        url = QueryString.setParam(url, 'date', winlostDate);
+        url = QueryString.setParam(url, 'custId', custId);
+        url = QueryString.setParam(url, 'transType', transType);
+        url = QueryString.setParam(url, 'BaseCurrency', baseCurrency);
+
+        return url;
+    }
+
+    getPGSDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
+        let url = rootUrl + 'PGSoftBetList/Detail';
+        url = QueryString.setParam(url, 'transId', transId);
+        url = QueryString.setParam(url, 'date', winlostDate);
+        url = QueryString.setParam(url, 'custId', custId);
+        url = QueryString.setParam(url, 'transType', transType);
+        url = QueryString.setParam(url, 'BaseCurrency', baseCurrency);
+
+        return url;
+    }
+
     getRngCasinoResultUrl(rootUrl) {
         return rootUrl + 'ResultReport/ShowRngCasinoSingleWalletResult';
     }
@@ -371,6 +393,15 @@ class BetList {
         let url = rootUrl + 'ResultReport/GlobalGamingResult';
         url = QueryString.setParam(url, 'custid', custid);
         url = QueryString.setParam(url, 'gameId', gameId);
+
+        return url;
+    }
+
+    getPGSoftResultUrl(rootUrl, custid, gamePlayId, gameId3rd) {
+        let url = rootUrl + 'PGSoftResultPopup/Index';
+        url = QueryString.setParam(url, 'custid', custid);
+        url = QueryString.setParam(url, 'gamePlayId', gamePlayId);
+        url = QueryString.setParam(url, 'gameId3rd', gameId3rd);
 
         return url;
     }

@@ -37,7 +37,8 @@
                 hasColumnInTable.Add(p.Key, _exportData.Columns.Contains(p.Value + "Comm"));
             }
 
-            ColumnTemplateCount = 4 + productPermissions.Count;
+            const int columnTemplateCount = 4;
+            ColumnTemplateCount = columnTemplateCount + productPermissions.Count;
         }
 
         protected override void AssignHeader(ISheet sheet)

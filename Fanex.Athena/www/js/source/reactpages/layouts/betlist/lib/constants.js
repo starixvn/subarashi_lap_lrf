@@ -20,5 +20,6 @@ export const SportType = {
     VRG: 245,
     SXG: 243,
     SBC: 200,
-    SAG: 244
+    SAG: 244,
+    PGS: 232
 }

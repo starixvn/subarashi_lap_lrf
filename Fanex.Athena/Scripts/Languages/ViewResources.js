@@ -1,4 +1,4 @@
-﻿// Generated at: 11/5/2020 5:00:43 PM
+﻿// Generated at: 11/11/2020 3:44:35 PM
 var _language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -598,6 +598,7 @@ ProductLC:"Live Casino",
 ProductLT:"Lottery",
 ProductNG:"Number Game",
 ProductParlay:"Sportsbook Parlay",
+ProductPGS:"PG Soft",
 ProductPP:"PP",
 ProductPTCS:"Playtech Casino",
 ProductSAG:"SA Gaming",

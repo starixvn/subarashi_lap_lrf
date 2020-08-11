@@ -1,22 +1,19 @@
-namespace Fanex.Athena.Controllers.Report.Result
+﻿namespace Fanex.Athena.Controllers.Report.Result
 {
-    using DataAccess.Core.Configuration.Interfaces;
-
-    using Fanex.Athena.Model.Auth.DataDomain;
-    using Fanex.Athena.Model.Core.DTO.Common;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.Web.ActionFilter;
-
-    using Model.Report.MetaModel;
-    using Model.Report.MetaModel.Result;
-    using Model.Report.ViewModel.Result;
-
     using System;
     using System.Linq;
     using System.Net;
     using System.Threading.Tasks;
     using System.Web;
     using System.Web.Mvc;
+    using DataAccess.Core.Configuration.Interfaces;
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Web.ActionFilter;
+    using Model.Report.MetaModel;
+    using Model.Report.MetaModel.Result;
+    using Model.Report.ViewModel.Result;
 
     public class ResultReportController : ReportBaseController
     {

@@ -4580,6 +4580,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         const SPORT_SXG = 243;
         const SPORT_SBC = 200;
         const SPORT_SAG = 244;
+        const SPORT_PGS = 232;
         const BETLIST_META_MODEL = '#BetListMetaModel';
 
         let _sortColumnName, _sortOrder;
@@ -4952,7 +4953,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 Site.blockUI();
                 $.get(url + '?custid=' + custId + '&gamePlayId=' + gamePlayId, function (result) {
                     if (result !== '') {
-                        showResultPopUp(result, { width: 800, height: 1200, title: title });                        
+                        showResultPopUp(result, { width: 800, height: 1200, title: title });
                         Site.unBlockUI();
                     }
                 });
@@ -5024,6 +5025,20 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 showResultPopUp(url, { width: 800, height: 380, title: title });
                 Site.unBlockUI();
             },
+            viewPGSResult: function (custId, gamePlayId, gameId3rd, title) {
+                const param = 'custId=' + custId +
+                    '&gamePlayId=' + gamePlayId +
+                    '&gameId3rd=' + gameId3rd;
+                const url = Site.resolveClientUrl('PGSoftResultPopup/Index?' + param);
+
+                Site.blockUI();
+                $.get(url, function (result) {
+                    if (result !== '') {
+                        showResultPopUp(result, { width: 800, height: 450, title: title });
+                        Site.unBlockUI();
+                    }
+                });
+            },
             
             viewSAGamingResult: function (trasdesc, matchCode, bettype, title) {
                 const url = Site.resolveClientUrl('ResultReport/SAGaming?transdesc=' +
@@ -5094,6 +5109,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 }
                 else if (sporttype === SPORT_SAG) {
                     _me.viewSAGamingResult(transdecs, extension2, bettype, title);
+                }
+                else if (sporttype === SPORT_PGS) {
+                    _me.viewPGSResult(custid, transdecs, extension2, title);
                 }
                 else {
                     const numberBettype = Number(bettype);
@@ -5432,6 +5450,20 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
                 showDetailPopUp(url, { width: 890, height: popH + 50, title: title });
             },
+            showPGSoftDetails: function (transId, winlostDate, custId, transType) {
+                let url = Site.resolveClientUrl('PGSoftBetList/Detail');
+                url = QueryString.setParam(url, 'transId', transId);
+                url = QueryString.setParam(url, 'date', winlostDate);
+                url = QueryString.setParam(url, 'custId', custId);
+                url = QueryString.setParam(url, 'transType', transType);
+                url = QueryString.setParam(url, 'BaseCurrency', getBaseCurrency());
+
+                const popH = Math.min($(window).height() - 100, 550);
+                const title = Site.getSingleResource('ProductPGS') + ' - ' +
+                    Site.getSingleResource('DetailedBetlist') + ' - ' + moment(new Date(winlostDate)).format('MM/DD/YYYY');
+
+                showDetailPopUp(url, { width: 890, height: popH + 50, title: title });
+            },
             ValidProducts: function () {
                 let temp = true;
                 if ($('#ProductList').find('input:checked').length === 0) {
@@ -5520,6 +5552,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 window.showSexyGamingBetDetails = _me.showSexyGamingBetDetails;
                 window.showSabaClubDetails = _me.showSabaClubDetails;
                 window.showSAGamingDetails = _me.showSAGamingDetails;
+                window.showPGSoftDetails = _me.showPGSoftDetails;
 
                 const betList = {
                     ViewCasinoHandHistory: _me.ViewCasinoHandHistory
