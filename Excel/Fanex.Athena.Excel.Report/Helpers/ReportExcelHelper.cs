@@ -85,12 +85,6 @@
                 : GetExactTitleCurrencyName(convertingOption, metaModel.CurrencyId);
         }
 
-        public static string GetTitleVIPPlayerName(BaseDrilldownReportMetaModel metaModel)
-        {
-            var value = metaModel.IsVIPPlayerOnly ? ViewResources.Yes : ViewResources.No;
-            return $"{ViewResources.VIPPlayerOnly}: {value}";
-        }
-
         public static string GenerateReportTitle(string reportName, DateTime fromDate, DateTime toDate, string currencyTitle, string extendedInfo = "")
         {
             var reportTitle = new StringBuilder(reportName);

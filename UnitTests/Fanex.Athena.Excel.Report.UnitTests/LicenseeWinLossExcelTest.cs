@@ -122,14 +122,11 @@ namespace Fanex.Athena.Excel.Report.UnitTests
                 excelModel.ConvertingOption,
                 excelModel.MetaModel);
 
-            var titleVIPPlayer = ReportExcelHelper.GetTitleVIPPlayerName(excelModel.MetaModel);
-
             var reportTitle = ReportExcelHelper.GenerateReportTitle(
                 ViewResources.LicenseeWinLoss,
                 excelModel.MetaModel.FromDate,
                 excelModel.MetaModel.ToDate,
-                title,
-                titleVIPPlayer);
+                title);
 
             // Action
             excel.Public_AssignTitle(FakeSheet);

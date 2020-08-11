@@ -13,7 +13,8 @@
     {
         private readonly IReportAPIClient _reportAPIClient;
 
-        public PromotionPrizeReportController(IReportAPIClient reportAPIClient)
+        public PromotionPrizeReportController(
+            IReportAPIClient reportAPIClient)
         {
             _reportAPIClient = reportAPIClient;
         }

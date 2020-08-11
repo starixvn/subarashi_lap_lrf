@@ -66,18 +66,23 @@
                 <label class="active">@ViewResources.ExcludeTestData</label>
             </div>
 
-            <div class="input-field input col l2 m3 s12">
-                <input type="radio" class="with-gap" value="true" @(Model.Param.IsVIPPlayerOnly == true ? "checked=checked" : "") name="IsVIPPlayerOnly" id="vipplayeronlyyes" />
-                <label for="vipplayeronlyyes" title="@ViewResources.VIPPlayerTooltipMsg">
-                    @ViewResources.Yes
-                </label>
-                <input type="radio" class="with-gap" value="false" @(Model.Param.IsVIPPlayerOnly == false ? "checked=checked" : "") name="IsVIPPlayerOnly" id="vipplayeronlyno" />
-                <label for="vipplayeronlyno" title="@ViewResources.VIPPlayerTooltipMsg">
-                    @ViewResources.No
-                </label>
+            @{
+                if (Model.Param.HasVIPManagementPermission)
+                {
+                    <div class="input-field input col l2 m3 s12">
+                        <input type="radio" class="with-gap" value="true" @(Model.Param.IsVIPPlayerOnly == true ? "checked=checked" : "") name="IsVIPPlayerOnly" id="vipplayeronlyyes" />
+                        <label for="vipplayeronlyyes" title="@ViewResources.VIPPlayerTooltipMsg">
+                            @ViewResources.Yes
+                        </label>
+                        <input type="radio" class="with-gap" value="false" @(Model.Param.IsVIPPlayerOnly == false ? "checked=checked" : "") name="IsVIPPlayerOnly" id="vipplayeronlyno" />
+                        <label for="vipplayeronlyno" title="@ViewResources.VIPPlayerTooltipMsg">
+                            @ViewResources.No
+                        </label>
 
-                <label class="active" title="@ViewResources.VIPPlayerTooltipMsg">@ViewResources.VIPPlayerOnly</label>
-            </div>
+                        <label class="active" title="@ViewResources.VIPPlayerTooltipMsg">@ViewResources.VIPPlayerOnly</label>
+                    </div>
+                }
+            }
 
             <div class="col l2 m2 s12 button-block">
                 <button type="button" id="SubmitButton" class="btn btn-primary">@ViewResources.Submit</button>
@@ -85,6 +90,7 @@
         </div>
 
         @Html.Hidden("IsExportExcel", Model.Param.IsExportExcel)
+        @Html.Hidden("HasVIPManagementPermission", Model.Param.HasVIPManagementPermission)
     </form>
 
     @Html.Hidden("ProductOptionJson", Model.Param.ProductOptions.ToJson())

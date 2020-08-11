@@ -258,7 +258,9 @@ namespace Fanex.Athena.Api.Report
                 BTVisible = IsProductVisible(metaModel.ProductOptions, productAccess, Product.BT),
                 COVisible = IsProductVisible(metaModel.ProductOptions, productAccess, Product.CO),
                 BAVisible = IsProductVisible(metaModel.ProductOptions, productAccess, Product.BA),
-                CustomerCommVisible = licenseeSession.IsAllowedCustomerComm
+                CustomerCommVisible = licenseeSession.IsAllowedCustomerComm,
+                IsVIPPlayerOnly = metaModel.IsVIPPlayerOnly,
+                HasVIPManagementPermission = metaModel.HasVIPManagementPermission
             };
 
             var excel = CreateExcel(templatePath, excelModel);

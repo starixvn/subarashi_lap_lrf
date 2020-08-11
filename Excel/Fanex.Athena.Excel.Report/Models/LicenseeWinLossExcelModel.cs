@@ -25,5 +25,9 @@
         public bool BAVisible { get; set; }
 
         public bool CustomerCommVisible { get; set; }
+
+        public bool IsVIPPlayerOnly { get; set; }
+
+        public bool HasVIPManagementPermission { get; set; }
     }
 }

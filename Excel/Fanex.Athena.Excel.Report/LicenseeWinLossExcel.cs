@@ -211,7 +211,7 @@ namespace Fanex.Athena.Excel.Report
         protected override void AssignTitle(ISheet sheet)
         {
             var title = ReportExcelHelper.GetTitleCurrencyName(_excelModel.ConvertingOption, _excelModel.MetaModel);
-            var vipPlayerTitle = ReportExcelHelper.GetTitleVIPPlayerName(_excelModel.MetaModel);
+            var vipPlayerTitle = _excelModel.HasVIPManagementPermission ? GetTitleVIPPlayerName(_excelModel) : "";
 
             var reportTitle = ReportExcelHelper.GenerateReportTitle(
                 ViewResources.LicenseeWinLoss,
@@ -463,6 +463,12 @@ namespace Fanex.Athena.Excel.Report
                     sheet.HideColumn(ColumnDate);
                     break;
             }
+        }
+
+        private static string GetTitleVIPPlayerName(LicenseeWinLossExcelModel metaModel)
+        {
+            var value = metaModel.IsVIPPlayerOnly ? ViewResources.Yes : ViewResources.No;
+            return $"{ViewResources.VIPPlayerOnly}: {value}";
         }
     }
 }

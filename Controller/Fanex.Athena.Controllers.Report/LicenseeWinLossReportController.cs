@@ -25,12 +25,15 @@ namespace Fanex.Athena.Controllers.Report
     public class LicenseeWinLossReportController : ReportBaseController
     {
         private readonly IReportSettingService _reportSettingService;
+        private readonly IAuthorizationService _authService;
 
         public LicenseeWinLossReportController(
-            IReportSettingService reportSettingService
+            IReportSettingService reportSettingService,
+             IAuthorizationService authService
             )
         {
             _reportSettingService = reportSettingService;
+            _authService = authService;
         }
 
         [HttpGet]
@@ -94,7 +97,8 @@ namespace Fanex.Athena.Controllers.Report
                 CurrencyId = SystemConstants.BaseCurrencyList
                 .FirstOrDefault(x => x.Value.Equals(userSession.DefaultBaseCurrency, StringComparison.OrdinalIgnoreCase))
                 .Key,
-                IsVIPPlayerOnly = false
+                IsVIPPlayerOnly = false,
+                HasVIPManagementPermission = _authService.HasPermissions(SessionServiceInstance.UserSession, PermissionKeys.PlayerVIPManagement)
             };
 
             var model = new LicenseeWinLossViewModel
@@ -103,7 +107,7 @@ namespace Fanex.Athena.Controllers.Report
                 CurrencyList = userSession.CurrencyList,
                 IsAllowedCustomerCommission = licenseeSession.IsAllowedCustomerComm,
                 ProductAccess = productAccess,
-                ReportSetting = reportSetting
+                ReportSetting = reportSetting,
             };
             return View("~/Views/Desktop/Report/LicenseeWinLoss/Main.cshtml", model);
         }

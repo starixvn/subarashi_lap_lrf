@@ -70,7 +70,5 @@ namespace Fanex.Athena.Model.Core.MetaModel
             MetaModelValidationHelper.ValidateBaseCurrency(BaseCurrency);
 
         public bool IsExcludedTestData { get; set; }
-
-        public bool IsVIPPlayerOnly { get; set; }
     }
 }
