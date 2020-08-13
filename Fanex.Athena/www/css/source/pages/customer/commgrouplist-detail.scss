@@ -37,3 +37,18 @@ input[type=text] + label:after {
         }
     }
 }
+
+.input-field label[for="GroupName"] {
+    position: relative;
+    top: 0;
+}
+
+.result-msg {
+    &.error {
+        color: #F44336;
+    }
+
+    &.success {
+        color: #4CAF50
+    }
+}

@@ -83,6 +83,14 @@
 
         public decimal FWComm { get; set; }
 
+        public decimal SXGComm { get; set; }
+        public decimal SGComm { get; set; }
+        public decimal KNComm { get; set; }
+        public decimal LTComm { get; set; }
+        public decimal TGComm { get; set; }
+        public decimal VSComm { get; set; }
+        public decimal VS2Comm { get; set; }
+
         public void MapQuery()
         {
             CommValues = new Dictionary<string, decimal>();
@@ -92,7 +100,14 @@
             CommValues.Add(Product.CS, CSComm);
             CommValues.Add(Product.VB, VBComm);
             CommValues.Add(Product.PP, PPComm);
-            CommValues.Add(Product.FW, FWComm);
+
+            CommValues.Add(Product.SXG, SXGComm);
+            CommValues.Add(Product.SG, SGComm);
+            CommValues.Add(Product.KN, KNComm);
+            CommValues.Add(Product.LT, LTComm);
+            CommValues.Add(Product.TG, TGComm);
+            CommValues.Add(Product.VS, VSComm);
+            CommValues.Add(Product.VS2, VS2Comm);
         }
 
         public void MapData(IDataReader reader, IDictionary<string, string> columns, IDictionary<string, bool> visibility)

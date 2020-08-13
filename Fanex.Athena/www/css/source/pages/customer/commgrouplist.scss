@@ -53,6 +53,38 @@ div {
     }
 }
 
+.col-child.medium.col-comm {
+    width: 8.5%;
+}
+
+.input-field.mult-products-container {
+    float: right;
+    width: 198px;
+    margin: 0;
+    height: 26px;
+
+    input[type="text"] {
+        color: #FFFFFF;
+        background-color: #4e68b6;
+        padding-left: 2px;
+
+        &:hover {
+            background: #7287c5;
+        }
+
+        &:focus {
+            background: #4e68b6;
+        }
+    }
+
+    > a.ui-multiselect .ui-multiselect-icon::before {
+        color: #FFFFFF;
+        top: 5px;
+        padding-right: 2px;
+    }
+}
+
+
 @media only screen and (min-width: 993px) {
     .no-customer-border {
         width: 70%;

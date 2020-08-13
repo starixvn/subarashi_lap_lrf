@@ -729,5 +729,15 @@ input[type=text] + label:after {
   .page-form .button-block {
     width: 20% !important; } }
 
+.input-field label[for="GroupName"] {
+  position: relative;
+  top: 0; }
+
+.result-msg.error {
+  color: #F44336; }
+
+.result-msg.success {
+  color: #4CAF50; }
+
 
 /*# sourceMappingURL=commgroupdetail.css.map*/

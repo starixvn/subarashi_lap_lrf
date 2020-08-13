@@ -1,5 +1,8 @@
 ﻿namespace Fanex.Athena.Service.Core.Users
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using Core.Users.Interfaces;
     using DataAccess.Core.Users.Interfaces;
     using Extension.Utility.Interfaces;
@@ -11,9 +14,6 @@
     using Model.Core.DataDomain;
     using Model.Core.DTO.Configuration;
     using Model.Report.DTO;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
 
     public class SubsidiaryService : ISubsidiaryService
     {
@@ -175,7 +175,7 @@
             return subsidiaryList.Where(i => userAgentList.Contains(i.AgentId));
         }
 
-        private IDictionary<int, IEnumerable<int>> FilterAgentIdList(IDictionary<int, IEnumerable<int>> agentList, string currencyIdListString)
+        private static IDictionary<int, IEnumerable<int>> FilterAgentIdList(IDictionary<int, IEnumerable<int>> agentList, string currencyIdListString)
         {
             if (string.IsNullOrEmpty(currencyIdListString))
             {
