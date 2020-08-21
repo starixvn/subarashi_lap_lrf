@@ -269,7 +269,8 @@
                             CurrencyName: data.CurrencyName,
                             BaseCurrency: data.BaseCurrency,
                             IsExcludedTestData: data.IsExcludedTestData,
-                            IsVIPPlayerOnly: data.IsVIPPlayerOnly
+                            IsVIPPlayerOnly: data.IsVIPPlayerOnly,
+                            HasVIPManagementPermission: data.HasVIPManagementPermission
                         };
 
                         _me.setExcelUrl(0, 0, 0, '', '', '');
@@ -311,6 +312,7 @@
                         ToDate: _submitData.ToDate,
                         BaseCurrency: $('#BaseCurrency').attr('data-original'),
                         IsVIPPlayerOnly: _submitData.IsVIPPlayerOnly,
+                        HasVIPManagementPermission: _submitData.HasVIPManagementPermission
                     };
                 const drilldownDate = new Date(datetime);
                 const dateRange = Report.GetDrilldownDateRange(param.ReportBy, param.FromDate, param.ToDate, drilldownDate);
@@ -363,7 +365,8 @@
                     ToDate: toDate,
                     AgentId: agentId,
                     IsExcludedTestData: _submitData.IsExcludedTestData,
-                    IsVIPPlayerOnly: _submitData.IsVIPPlayerOnly
+                    IsVIPPlayerOnly: _submitData.IsVIPPlayerOnly,
+                    HasVIPManagementPermission: _submitData.HasVIPManagementPermission
                 };
             },
 
