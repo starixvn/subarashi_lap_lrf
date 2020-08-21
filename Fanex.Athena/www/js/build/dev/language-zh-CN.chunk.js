@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 7/23/2020 10:22:53 AM
+﻿// Generated at: 7/22/2020 9:40:25 AM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -701,6 +701,7 @@ Su:"Su",
 Submit:"提交",
 Subsidiary:"子网站",
 SubsidiaryPerformance:"子网站报告",
+SubsidiarySearch:"子网站搜寻",
 SubsidiaryWL:"子网站输赢",
 SuccessUpdateVipStatus:"更新成功: {0}",
 SuccessUpdateVipStatusSingle:"更新成功",
