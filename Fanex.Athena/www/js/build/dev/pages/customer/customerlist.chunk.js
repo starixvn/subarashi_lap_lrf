@@ -4890,7 +4890,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                     },
                     success: function (response) {
                         if (response.IsSuccessful) {
-                            const rowIndex = ($context.closest('tr').attr('id') - 1) % _state.pagingOption.pagesize;
+                            const rowIndex = ($context.closest('tr').index() - 1) % _state.pagingOption.pagesize;
                             _state.cachedData.Data[rowIndex].BAStatus = data.isAllowBA;
                             _state.cachedData.Data[rowIndex].OddsGroup = response.OddsGroup;
                             CustomerListService.bindData(_state.cachedData, true);
@@ -4924,6 +4924,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
     return _me;
 }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
 
 /***/ }),
 
@@ -6950,15 +6951,16 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                     url: option.url,
                     dataType: 'json',
                     success: function (data) {
-                        if (data.Success) {
-                            const rowIndex = (option.$context.closest('tr').attr('id') - 1) % _state.pagingOption.pagesize;
-                            const dataItem = _state.cachedData.Data[rowIndex];
-                            dataItem[option.dataField] = newValue;
-                            _me.bindData(_state.cachedData, true);
-                        }
-                        else {
+                        if (!data.Success) {
                             alert(data.ErrorMessage);
+                            return;
                         }
+
+                        const trId = option.$context.closest('tr').index();
+                        const rowIndex = (trId - 1) % _state.pagingOption.pagesize;
+                        const dataItem = _state.cachedData.Data[rowIndex];
+                        dataItem[option.dataField] = newValue;
+                        _me.bindData(_state.cachedData, true);
                     }
                 });
             },

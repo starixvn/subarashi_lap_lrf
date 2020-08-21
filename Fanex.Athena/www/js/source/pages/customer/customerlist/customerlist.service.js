@@ -267,15 +267,16 @@ define(['jquery',
                     url: option.url,
                     dataType: 'json',
                     success: function (data) {
-                        if (data.Success) {
-                            const rowIndex = (option.$context.closest('tr').attr('id') - 1) % _state.pagingOption.pagesize;
-                            const dataItem = _state.cachedData.Data[rowIndex];
-                            dataItem[option.dataField] = newValue;
-                            _me.bindData(_state.cachedData, true);
-                        }
-                        else {
+                        if (!data.Success) {
                             alert(data.ErrorMessage);
+                            return;
                         }
+
+                        const trId = option.$context.closest('tr').index();
+                        const rowIndex = (trId - 1) % _state.pagingOption.pagesize;
+                        const dataItem = _state.cachedData.Data[rowIndex];
+                        dataItem[option.dataField] = newValue;
+                        _me.bindData(_state.cachedData, true);
                     }
                 });
             },
