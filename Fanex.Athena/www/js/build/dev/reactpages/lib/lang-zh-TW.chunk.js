@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 7/22/2020 9:40:25 AM
+// Generated at: 8/10/2020 5:37:24 PM
 window._language_zh_TW = {
   AA: "客客",
   AbnormalBet: "非正規註單",
@@ -702,6 +702,8 @@ window._language_zh_TW = {
   ViewDataInMonth: "检阅每月數據",
   Viewin: "以 {0} 查看",
   ViewNotification: "查看通知",
+  VIPPlayerOnly: "只顯示VIP玩家",
+  VIPPlayerTooltipMsg: "被標示在玩家管理報告中的VIP玩家",
   VirtualCycling: "Virtual Cycling",
   VirtualHorseRacing: "Virtual Horse Racing",
   VirtualSoccer: "Virtual Soccer",

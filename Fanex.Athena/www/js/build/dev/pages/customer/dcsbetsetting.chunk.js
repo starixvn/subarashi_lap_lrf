@@ -1581,8 +1581,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                 return false;
             }
 
-            if (minBet === 0 && maxBet === 0 && maxPerMatcth === 0) { return true; }
-
             // Check contrains
             // min bet <=maxbet <= max per match
             if (limitMinBet > 0 && minBet < BetSettingHelper.convertToFloat(limitMinBet.toString())) {
