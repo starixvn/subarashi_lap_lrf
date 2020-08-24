@@ -136,7 +136,9 @@
                         CurrencyId: filterData.CurrencyId,
                         CurrencyName: filterData.CurrencyName,
                         IsExcludedTestData: filterData.IsExcludedTestData,
-                        AgentId: filterData.AgentId
+                        AgentId: filterData.AgentId,
+                        IsVIPPlayerOnly: filterData.IsVIPPlayerOnly,
+                        HasVIPManagementPermission: filterData.HasVIPManagementPermission
                     };
 
                     _me.exportExcel(LicenseeWinLossOption.urlPromotionPrizeExcelData, data, EXCEL_PP_FILENAME);
@@ -266,7 +268,9 @@
                             ToDate: data.ToDate,
                             CurrencyName: data.CurrencyName,
                             BaseCurrency: data.BaseCurrency,
-                            IsExcludedTestData: data.IsExcludedTestData
+                            IsExcludedTestData: data.IsExcludedTestData,
+                            IsVIPPlayerOnly: data.IsVIPPlayerOnly,
+                            HasVIPManagementPermission: data.HasVIPManagementPermission
                         };
 
                         _me.setExcelUrl(0, 0, 0, '', '', '');
@@ -306,7 +310,9 @@
                         ReportBy: _submitData.ReportBy,
                         FromDate: _submitData.FromDate,
                         ToDate: _submitData.ToDate,
-                        BaseCurrency: $('#BaseCurrency').attr('data-original')
+                        BaseCurrency: $('#BaseCurrency').attr('data-original'),
+                        IsVIPPlayerOnly: _submitData.IsVIPPlayerOnly,
+                        HasVIPManagementPermission: _submitData.HasVIPManagementPermission
                     };
                 const drilldownDate = new Date(datetime);
                 const dateRange = Report.GetDrilldownDateRange(param.ReportBy, param.FromDate, param.ToDate, drilldownDate);
@@ -358,7 +364,9 @@
                     FromDate: fromDate,
                     ToDate: toDate,
                     AgentId: agentId,
-                    IsExcludedTestData: _submitData.IsExcludedTestData
+                    IsExcludedTestData: _submitData.IsExcludedTestData,
+                    IsVIPPlayerOnly: _submitData.IsVIPPlayerOnly,
+                    HasVIPManagementPermission: _submitData.HasVIPManagementPermission
                 };
             },
 

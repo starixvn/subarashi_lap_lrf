@@ -63,8 +63,6 @@ define(['jquery', 'common/site', './betsetting.helper'], function ($, Site, BetS
                 return false;
             }
 
-            if (minBet === 0 && maxBet === 0 && maxPerMatcth === 0) { return true; }
-
             // Check contrains
             // min bet <=maxbet <= max per match
             if (limitMinBet > 0 && minBet < BetSettingHelper.convertToFloat(limitMinBet.toString())) {

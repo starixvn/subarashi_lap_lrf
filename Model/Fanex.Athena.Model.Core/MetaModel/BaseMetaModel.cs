@@ -55,7 +55,6 @@ namespace Fanex.Athena.Model.Core.MetaModel
                      .Where(x => BaseCurrency.Equals(x.Value, StringComparison.OrdinalIgnoreCase))
                      .DefaultIfEmpty(new KeyValuePair<int, string>(BaseCurrencyType.All, string.Empty))
                      .Select(x => x.Key).FirstOrDefault();
-
             }
         }
 
@@ -66,6 +65,7 @@ namespace Fanex.Athena.Model.Core.MetaModel
                 return !string.IsNullOrEmpty(BaseCurrency);
             }
         }
+
         public virtual bool IsValid =>
             MetaModelValidationHelper.ValidateBaseCurrency(BaseCurrency);
 

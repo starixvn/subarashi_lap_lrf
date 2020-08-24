@@ -1105,9 +1105,6 @@
   <data name="UpdateSpecialLevelMsg" xml:space="preserve">
     <value>Invalid parameter. Invalid custId.</value>
   </data>
-  <data name="RngCasinoAndBingoExcludedNote" xml:space="preserve">
-    <value>RNG Casino and Bingo are not included in the report</value>
-  </data>
   <data name="HistoricalReportDateRangeNote" xml:space="preserve">
     <value>Data is available from {0:MM/dd/ yyyy}. For more historic data</value>
   </data>
@@ -2847,5 +2844,11 @@
   </data>
   <data name="JackpotWonDetails" xml:space="preserve">
     <value>Jackpot Won Details</value>
+  </data>
+  <data name="VIPPlayerOnly" xml:space="preserve">
+    <value>VIP Player only</value>
+  </data>
+  <data name="VIPPlayerTooltipMsg" xml:space="preserve">
+    <value>VIP Players are marked in Player Segmentation</value>
   </data>
 </root>

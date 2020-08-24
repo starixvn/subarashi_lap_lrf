@@ -1153,9 +1153,6 @@
   <data name="Results" xml:space="preserve">
     <value>赛果</value>
   </data>
-  <data name="RngCasinoAndBingoExcludedNote" xml:space="preserve">
-    <value>此报告不包含娱乐城及宾果</value>
-  </data>
   <data name="Running" xml:space="preserve">
     <value>进行中</value>
   </data>
@@ -2110,5 +2107,11 @@
   </data>
   <data name="ProductPP" xml:space="preserve">
     <value>PP王者电子</value>
+  </data>
+  <data name="VIPPlayerOnly" xml:space="preserve">
+    <value>只显示VIP玩家</value>
+  </data>
+  <data name="VIPPlayerTooltipMsg" xml:space="preserve">
+    <value>被標示在玩家管理報告中的VIP玩家</value>
   </data>
 </root>

@@ -85,10 +85,16 @@
                 : GetExactTitleCurrencyName(convertingOption, metaModel.CurrencyId);
         }
 
-        public static string GenerateReportTitle(string reportName, DateTime fromDate, DateTime toDate, string currencyTitle)
+        public static string GenerateReportTitle(string reportName, DateTime fromDate, DateTime toDate, string currencyTitle, string extendedInfo = "")
         {
             var reportTitle = new StringBuilder(reportName);
             reportTitle.Append($", {fromDate.ToString(FormatDate)} --> {toDate.ToString(FormatDate)}, {currencyTitle}");
+
+            if (!string.IsNullOrEmpty(extendedInfo))
+            {
+                reportTitle.Append($", {extendedInfo}");
+            }
+
             return reportTitle.ToString();
         }
     }

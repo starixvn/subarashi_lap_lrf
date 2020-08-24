@@ -19,7 +19,7 @@ namespace Fanex.Athena.Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class ViewResources {
@@ -5704,15 +5704,6 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to RNG Casino and Bingo are not included in the report.
-        /// </summary>
-        public static string RngCasinoAndBingoExcludedNote {
-            get {
-                return ResourceManager.GetString("RngCasinoAndBingoExcludedNote", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to RNG Casino Database is not currently available. Please try again later..
         /// </summary>
         public static string RNGCasinoUpdateSettingUnAvailableMsg {
@@ -7140,6 +7131,24 @@ namespace Fanex.Athena.Resources {
         public static string VipPlayerManagement {
             get {
                 return ResourceManager.GetString("VipPlayerManagement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VIP Player only.
+        /// </summary>
+        public static string VIPPlayerOnly {
+            get {
+                return ResourceManager.GetString("VIPPlayerOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VIP Players are marked in Player Segmentation.
+        /// </summary>
+        public static string VIPPlayerTooltipMsg {
+            get {
+                return ResourceManager.GetString("VIPPlayerTooltipMsg", resourceCulture);
             }
         }
         

@@ -47,11 +47,12 @@
         {
             // Arrange
             var reportSettingService = Substitute.For<IReportSettingService>();
+            var authService = Substitute.For<IAuthorizationService>();
             reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss, Arg.Any<string>()).Returns(new ReportSetting());
 
             _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(false);
 
-            using (var controller = CreateController(reportSettingService))
+            using (var controller = CreateController(reportSettingService, authService))
             {
                 // Action
                 var viewResult = controller.Index() as ViewResult;
@@ -73,12 +74,13 @@
         {
             // Arrange
             var reportSettingService = Substitute.For<IReportSettingService>();
+            var authService = Substitute.For<IAuthorizationService>();
             reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss, Arg.Any<string>())
                 .Returns(new ReportSetting { BaseCurrencies = "USD,KKK", TimeZone = 8 });
 
             _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(true);
 
-            using (var controller = CreateController(reportSettingService))
+            using (var controller = CreateController(reportSettingService, authService))
             {
                 // Action
                 var viewResult = controller.Index() as ViewResult;
@@ -94,7 +96,7 @@
             }
         }
 
-        private LicenseeWinLossReportController CreateController(IReportSettingService reportSettingService)
+        private LicenseeWinLossReportController CreateController(IReportSettingService reportSettingService, IAuthorizationService authService)
         {
             var productService = Substitute.For<IProductService>();
             productService.GetSingleWalletProductAccess(
@@ -102,7 +104,7 @@
                 SessionService.UserSession.Language,
                 Arg.Is<string>(x => x == FunctionNames.LicenseeWinLoss || x == FunctionNames.SpecialLicenseeWinLoss))
                 .Returns(new ProductAccess(new List<Product>()));
-            return new LicenseeWinLossReportController(reportSettingService)
+            return new LicenseeWinLossReportController(reportSettingService, authService)
             {
                 LangService = LangService,
                 SessionServiceInstance = SessionService,
