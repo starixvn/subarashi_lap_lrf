@@ -33,7 +33,6 @@
                 Assert.Multiple(() =>
                 {
                     Assert.That(viewResult.ViewName, Is.EqualTo("~/Views/Desktop/Report/Result/Main.cshtml"));
-                    Assert.That(viewResult.ViewBag.IsAllowedRNG, Is.EqualTo(isAllowRng));
                     Assert.That(viewResult.ViewBag.IsAllowedKeno, Is.EqualTo(isAllowKeno));
                     Assert.That(viewResult.ViewBag.IsAllowedLottery, Is.EqualTo(isAllowLottery));
                     Assert.That(viewModel.Param.BalanceUpDay, Is.EqualTo(BalanceUpDate));

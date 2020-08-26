@@ -1155,9 +1155,6 @@
   <data name="Results" xml:space="preserve">
     <value>赛果</value>
   </data>
-  <data name="RngCasinoAndBingoExcludedNote" xml:space="preserve">
-    <value>此报告不包含娱乐城及宾果</value>
-  </data>
   <data name="Running" xml:space="preserve">
     <value>进行中</value>
   </data>
