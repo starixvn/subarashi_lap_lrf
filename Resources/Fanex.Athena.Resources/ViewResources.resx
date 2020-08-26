@@ -1105,6 +1105,9 @@
   <data name="UpdateSpecialLevelMsg" xml:space="preserve">
     <value>Invalid parameter. Invalid custId.</value>
   </data>
+  <data name="RngCasinoAndBingoExcludedNote" xml:space="preserve">
+    <value>RNG Casino and Bingo are not included in the report</value>
+  </data>
   <data name="HistoricalReportDateRangeNote" xml:space="preserve">
     <value>Data is available from {0:MM/dd/ yyyy}. For more historic data</value>
   </data>
