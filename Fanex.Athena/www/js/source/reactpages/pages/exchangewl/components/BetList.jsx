@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+﻿import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
@@ -42,7 +42,7 @@ export class BetList extends Component {
                 <HeaderCell colWidth={120}>{LangHelper.getSingleResource("Selection")}</HeaderCell>
                 <HeaderCell colWidth={50}>{LangHelper.getSingleResource("Type")}</HeaderCell>
                 <HeaderCell colWidth={100}>{LangHelper.getSingleResource("BetPlaced")}</HeaderCell>
-                <HeaderCell colWidth={60}>{LangHelper.getSingleResource("OddsAvg")}</HeaderCell>
+                <HeaderCell colWidth={100}>{LangHelper.getSingleResource("OddsAvg")}</HeaderCell>
                 <HeaderCell colWidth={80}>{LangHelper.getSingleResource("Stake")}</HeaderCell>
                 <HeaderCell colWidth={80}>{LangHelper.getSingleResource("WinLoss")}</HeaderCell>
                 <HeaderCell colWidth={100}>{LangHelper.getSingleResource("WL")}/{LangHelper.getSingleResource("Comm")}</HeaderCell>
@@ -63,10 +63,18 @@ export class BetList extends Component {
 
             const marketText = (<p>{EventTypeName} > <span className="text-bold">{EventName}</span> > {MarketName}</p>);
             for (let j = 0; j < Details.length; j++) {
-                const { BetId, SelectionName, Type, BetPlacedDateString, OddsAvg, Stake } = Details[j];
-                const OddsAvgString = NumberFormat.formatDecimal(OddsAvg);
+                const detail = Details[j];
+                const { BetId, SelectionName, Type, BetPlacedDateString, OddsAvg, Stake } = detail;
+
+                const isFancyBet = detail.CategoryType == 2;
+                const OddsAvgString = isFancyBet ?
+                    NumberFormat.formatInteger(detail.FancyBetRuns) + '/' + NumberFormat.formatInteger(OddsAvg) :
+                    NumberFormat.formatDecimal(OddsAvg);
+
                 const StakeString = NumberFormat.formatDecimal(Stake);
-                const WinLostDetailString = NumberFormat.formatDecimal(Details[j].WinLost);                
+                const WinLostDetailString = NumberFormat.formatDecimal(Details[j].WinLost);
+                const typeStyle = Type.toLowerCase() === "lay" || Type.toLowerCase() === "no" ?
+                    "negative" : "";
 
                 rows.push(
                     <Row key={`row-${i}-${j}`}>
@@ -76,7 +84,7 @@ export class BetList extends Component {
                             <a href="javascript:;" onClick={() => this._showTicketDetail(BetId, Type)}>{BetId}</a>
                         </Cell>
                         <Cell title={SelectionName} className="center-align">{SelectionName}</Cell>
-                        <Cell title={Type} className={`center-align ${Type.toLowerCase() === "lay" ? "negative" : ""}`}>{Type}</Cell>
+                        <Cell title={Type} className={`center-align ${typeStyle}`}>{Type}</Cell>
                         <Cell title={BetPlacedDateString} className="center-align">{BetPlacedDateString}</Cell>
                         <Cell title={OddsAvgString} className="right-align">{OddsAvgString}</Cell>
                         <Cell title={StakeString} className="right-align">{NumberFormat.formatDecimal(Stake)}</Cell>
@@ -129,8 +137,8 @@ export class BetList extends Component {
                 <Cell colSpan='9' className="right-align">{LangHelper.getSingleResource("GrandTotal")}</Cell>
                 <Cell title={GrandTotalString} className={`right-align ${this.props.data.GrandTotal < 0 ? "negative" : ""}`}>{GrandTotalString}</Cell>
             </Row >
-                ]
-                }
+        ]
+    }
 
     render() {
         const { showDetail, detailData } = this.state;
@@ -139,7 +147,7 @@ export class BetList extends Component {
         return (
             <div>
                 <BetListPopupLayout title={this.props.title}>
-                {
+                    {
                         MainData && MainData.length ?
                             (<Table
                                 autoWidth={false}
@@ -151,7 +159,7 @@ export class BetList extends Component {
                                 footer={this._buildFooter()}
                             />) :
                             <NoDataTitle />
-                }
+                    }
                 </BetListPopupLayout>
                 {
                     showDetail &&
@@ -161,12 +169,12 @@ export class BetList extends Component {
                 }
             </div>
         )
-                }
-                }
+    }
+}
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({ toggleLoader }, dispatch);
-                };
+};
 
 function mapStateToProps(state) {
     return {};
