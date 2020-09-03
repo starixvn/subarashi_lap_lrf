@@ -391,7 +391,7 @@
                 Site.blockUI();
                 $.get(url + '?custid=' + custId + '&gamePlayId=' + gamePlayId, function (result) {
                     if (result !== '') {
-                        showResultPopUp(result, { width: 800, height: 380, title: title });
+                        showResultPopUp(result, { width: 800, height: 1200, title: title });                        
                         Site.unBlockUI();
                     }
                 });
