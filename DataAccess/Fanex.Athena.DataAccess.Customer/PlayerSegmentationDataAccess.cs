@@ -1,19 +1,27 @@
 ﻿namespace Fanex.Athena.DataAccess.Customer
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
     using Fanex.Athena.DataAccess.Core.Extensions;
     using Fanex.Athena.DataAccess.Customer.Interfaces;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
     using Fanex.Athena.Model.Customer.MetaModel;
+    using Fanex.Athena.Model.Customer.MetaModel.PlayerSegmentation;
+    using Fanex.Athena.VendorAdapter.Interfaces;
     using Fanex.Common.Extensions;
     using Fanex.Data;
-    using System;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
 
     public class PlayerSegmentationDataAccess : BasePlayerSegmentationDataAccess, IPlayerSegmentationDataAccess
     {
+        private readonly ICacheRefAdapter _cacheRefAdapter;
+        public PlayerSegmentationDataAccess(ICacheRefAdapter cacheRefAdapter)
+        {
+            _cacheRefAdapter = cacheRefAdapter;
+        }
+
         public async Task<ApiPagingResult<PlayerInfo>> GetProblemPlayerListAsync(ProblemPlayerListMetaModel metaModel)
         {
             const string spName = "Lrf_ProblemAccount_LicenseeProblemPlayerSel";
@@ -26,8 +34,7 @@
                 var playerList = await ReadPlayerList(db, (reader, player) =>
                 {
                     player.MarkDate = reader.ToDateTime("CreatedDate").ToString(FormatKey.DateTimeFormatIn24H);
-                    player.ReducedMaxPerEvent = reader.ToNullableDecimal("MaxPerEvent");
-                    player.ReducedMaxPerBet = reader.ToNullableDecimal("MaxBet");
+                    player.CustomerClass = reader.ToString("CustomerClass");
                     player.Reason = reader.ToString("Reason");
                 });
 
@@ -107,6 +114,38 @@
             }
         }
 
+        public async Task<IEnumerable<CustomerClassModel>> GetCustomerClassInformation(GetCustomerClassInformationMetaModel metaModel)
+        {
+            using (var db = GetObjectDb(metaModel.GetSettingKey(), 180))
+            {
+                db.SetParameterValue("Site", metaModel.SiteName);
+
+                using (var reader = await db.ExecuteReaderAsync())
+                {
+                    var result = new List<CustomerClassModel>();
+                    while (reader.Read())
+                    {
+                        var betDelay = reader.ToNullableDecimal("BetDelay");
+                        var record = new CustomerClassModel
+                        {
+                            CustomerClass = Convert.ToString(reader["CustomerClass"]),
+                            LiveType = Convert.ToInt16(reader["Liveindicator"]),
+                            SportTypeName = _cacheRefAdapter.GetSportName(Convert.ToString(reader["SportType"])),
+                            LeagueGroupId = Convert.ToString(reader["LeagueGroupId"]),
+                            BetDelay = FormatNumber(betDelay.HasValue ? betDelay * 100 : null, "{0:#,##0.##}%"),
+                            BetInterval = FormatNumber(reader.ToNullableDecimal("NextBetInterval"), "{0:#,##0.##}"),
+                            MaxBet = FormatNumber(reader.ToNullableDecimal("MaxBet"), "{0:#,##0.##}"),
+                            MaxPerMatch = FormatNumber(reader.ToNullableDecimal("MaxPerMatch"), "{0:#,##0.##}")
+                        };
+
+                        result.Add(record);
+                    }
+
+                    return result;
+                }
+            }
+        }
+
         private static void AddVipStatusUpdateParams(IObjectDb objectDb, UpdateStatusPlayerMetaModel metaModel)
         {
             objectDb.SetParameterValue("Username", metaModel.SystemIds);
@@ -130,5 +169,8 @@
         {
             objectDb.SetParameterValue("VipOption", metaModel.VipOption);
         }
+
+        public static string FormatNumber(decimal? value, string format)
+            => value == null ? "N/A" : string.Format(format, value);
     }
 }

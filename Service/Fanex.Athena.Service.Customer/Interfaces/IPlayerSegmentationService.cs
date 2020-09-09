@@ -1,11 +1,12 @@
 ﻿namespace Fanex.Athena.Service.Customer.Interfaces
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
     using Fanex.Athena.Model.Customer.Enum;
     using Fanex.Athena.Model.Customer.MetaModel;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
+    using Fanex.Athena.Model.Customer.MetaModel.PlayerSegmentation;
 
     public interface IPlayerSegmentationService
     {
@@ -20,5 +21,7 @@
         bool IsNormalView(BasePlayerListMetaModel metaModel);
 
         PlayerSegmentationViewType GetViewType(bool anySubsidiary);
+
+        Task<IEnumerable<CustomerClassModel>> GetCustomerClassInformation(GetCustomerClassInformationMetaModel metaModel);
     }
 }

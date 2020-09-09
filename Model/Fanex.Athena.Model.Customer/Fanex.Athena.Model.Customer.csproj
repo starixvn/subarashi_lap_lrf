@@ -76,6 +76,7 @@
     <Compile Include="DTO\CustomerLog\CustomerLog.cs" />
     <Compile Include="DTO\CustomerLog\LogInLog.cs" />
     <Compile Include="DTO\LogInfo.cs" />
+    <Compile Include="DTO\PlayerSegmentation\CustomerClassModel.cs" />
     <Compile Include="DTO\PlayerSegmentation\PlayerInfo.cs" />
     <Compile Include="DTO\PlayerSegmentation\UpdateStatusPlayerResult.cs" />
     <Compile Include="GlobalSuppressions.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="MetaModel\MoveToGroupComMetaModel.cs" />
     <Compile Include="MetaModel\PlayerSegmentation\AbnormalBetListMetaModel.cs" />
     <Compile Include="MetaModel\PlayerSegmentation\BasePlayerListMetaModel.cs" />
+    <Compile Include="MetaModel\PlayerSegmentation\GetCustomerClassInformationMetaModel.cs" />
     <Compile Include="MetaModel\PlayerSegmentation\UpdateStatusPlayerMetaModel.cs" />
     <Compile Include="MetaModel\PlayerSegmentation\VipPlayerListMetaModel.cs" />
     <Compile Include="MetaModel\PlayerSegmentation\ProblemPlayerListMetaModel.cs" />

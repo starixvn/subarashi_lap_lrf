@@ -1,5 +1,5 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Fanex.Athena.Model.Customer.DTO.PlayerSegmentation
 {
@@ -13,9 +13,7 @@ namespace Fanex.Athena.Model.Customer.DTO.PlayerSegmentation
         public int AgentId { get; set; }
 
         public string Subsidiary { get; set; }
-
-        public decimal? ReducedMaxPerEvent { get; set; }
-        public decimal? ReducedMaxPerBet { get; set; }
+        public string CustomerClass { get; set; }
 
         [JsonIgnore]
         public string Reason { get; set; }

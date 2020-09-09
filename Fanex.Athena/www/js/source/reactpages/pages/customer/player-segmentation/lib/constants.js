@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import LangHelper from '@jsroot/lib/langHelper';
 import AppData from '@jsroot/lib/AppData';
 
@@ -26,7 +26,8 @@ export const SortMapper = {
     sortCol: {
         'systemId': 1,
         'externalId': 2,
-        'markDate': 3
+        'markDate': 3,
+        'customerClass': 4
     },
     sortType: {
         'asc': 1,

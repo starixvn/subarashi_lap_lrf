@@ -1,14 +1,5 @@
 ﻿namespace Fanex.Athena.Controllers.Customer
 {
-    using Fanex.Athena.Extension.Utility.Internal;
-    using Fanex.Athena.Model.Auth.DataDomain;
-    using Fanex.Athena.Model.Customer.ViewModel;
-    using Fanex.Athena.Resources;
-    using Fanex.Athena.Service.Core.Users.Interfaces;
-    using Fanex.Athena.Service.Customer.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.Web.ActionFilter;
-    using ONEbook.UM.Filters;
     using System;
     using System.Collections.Concurrent;
     using System.Collections.Generic;
@@ -16,6 +7,16 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using System.Web.SessionState;
+    using Fanex.Athena.Extension.Utility.Internal;
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Customer.MetaModel.PlayerSegmentation;
+    using Fanex.Athena.Model.Customer.ViewModel;
+    using Fanex.Athena.Resources;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
+    using Fanex.Athena.Service.Customer.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Web.ActionFilter;
+    using ONEbook.UM.Filters;
 
     [SessionState(SessionStateBehavior.ReadOnly)]
     [CheckUMFilter]
@@ -51,6 +52,17 @@
         {
             var model = await BuildViewModel();
             return View("~/Views/Desktop/Customer/PlayerSegmentation/Main.cshtml", model);
+        }
+
+        [FunctionAuthorization(PermissionKeys.PlayerProblemManagement)]
+        public async Task<ViewResult> CustomerClassInformation()
+        {
+            var model = await _playerService.GetCustomerClassInformation(new GetCustomerClassInformationMetaModel
+            {
+                SiteName = SessionServiceInstance.LicenseeSession.LicenseeName
+            });
+
+            return View("~/Views/Desktop/Customer/PlayerSegmentation/CustomerClassInformation.cshtml", model);
         }
 
         [HttpGet]

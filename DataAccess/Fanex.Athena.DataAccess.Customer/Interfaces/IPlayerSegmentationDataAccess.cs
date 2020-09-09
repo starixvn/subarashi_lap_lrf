@@ -1,8 +1,9 @@
-﻿using Fanex.Athena.Model.Core.DTO.Common;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Fanex.Athena.Model.Core.DTO.Common;
 using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
 using Fanex.Athena.Model.Customer.MetaModel;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using Fanex.Athena.Model.Customer.MetaModel.PlayerSegmentation;
 
 namespace Fanex.Athena.DataAccess.Customer.Interfaces
 {
@@ -15,5 +16,7 @@ namespace Fanex.Athena.DataAccess.Customer.Interfaces
         Task<IEnumerable<UpdateStatusPlayerResult>> UpdateVipStatusAsync(UpdateStatusPlayerMetaModel metaModel);
 
         Task<IDictionary<int, string>> GetReasonGroupListAsync(string langKey);
+
+        Task<IEnumerable<CustomerClassModel>> GetCustomerClassInformation(GetCustomerClassInformationMetaModel metaModel);
     }
 }

@@ -1,5 +1,10 @@
 ﻿namespace Fanex.Athena.Api.Customer
 {
+    using System.Linq;
+    using System.Net.Http;
+    using System.Threading.Tasks;
+    using System.Web.Http;
+    using System.Web.Http.Results;
     using Fanex.Athena.Api.Base;
     using Fanex.Athena.Api.Base.Attributes;
     using Fanex.Athena.Excel.Customer;
@@ -7,11 +12,6 @@
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
     using Fanex.Athena.Model.Customer.MetaModel;
-    using System.Linq;
-    using System.Net.Http;
-    using System.Threading.Tasks;
-    using System.Web.Http;
-    using System.Web.Http.Results;
 
     public partial class PlayerSegmentationController : BaseApiController
     {

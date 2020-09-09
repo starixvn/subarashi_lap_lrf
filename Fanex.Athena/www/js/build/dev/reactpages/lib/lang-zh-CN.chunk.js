@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 8/10/2020 5:37:24 PM
+// Generated at: 9/10/2020 10:47:24 AM
 window._language_zh_CN = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -167,6 +167,7 @@ window._language_zh_CN = {
   BetCounts: "票数",
   BetfromOthers: "其他",
   BetId: "投注单号",
+  BetInterval: "投注间隔(秒)",
   BetLimit: "投注金额",
   BetList: "投注历史",
   BetListRunning: "投注历史 (进行中)",
@@ -256,6 +257,8 @@ window._language_zh_CN = {
   Customer: "会员",
   CustomerBalance: "会员余额",
   CustomerBetList: "会员注单",
+  CustomerClass: "玩家分级",
+  CustomerClassInformation: "玩家分级资讯",
   CustomerComm: "会员佣金",
   CustomerCommission: "会员佣金",
   CustomerHasNeverPlayed: "This customer has never played {0}.",
@@ -440,6 +443,7 @@ window._language_zh_CN = {
   lbl3WayHandicap: "三项让分投注",
   lbl7Over: "7或以上",
   League: "联赛",
+  LeagueGroupId: "联赛群组",
   Liability: "负债",
   Licensee: "承租公司",
   LicenseeComm: "承租公司佣金",
@@ -448,6 +452,7 @@ window._language_zh_CN = {
   LicenseeWinLoss: "承租公司輸贏",
   LicenseeWL: "承租公司輸贏",
   Live: "滚球(不含混合)",
+  Live2: "滚球",
   LiveGame: "滚球游戏",
   LiveReport: "滚球报告",
   LiveReportTitle: "滚球报告 - {0}, {1} --&gt; {2} - {3}",
@@ -489,7 +494,9 @@ window._language_zh_CN = {
   MaximumUploadFileSize: "上传档案大小限制",
   MaxPerBall: "单粒球最高投注",
   MaxPerBallLessThanOrEqual: "最大單球最大投注必須小於或等於",
+  MaxPerBet: "单注限额",
   MaxPerMatch: "单场限额",
+  MaxPerMatch2: "累计单场限额",
   May: "五月",
   Member: "玩家",
   Message_RemoveCustomerLog: "会员日志即将于4月21日上午11点(GMT+8)移除，敬请使用玩家管理取代相关查询。谢谢!",
@@ -607,6 +614,7 @@ window._language_zh_CN = {
   PlayerStatementSupportMonths: "数据最多只支持18个月",
   PleaseSelectOne: "请选择一个",
   PreGame: "游戏开始前",
+  PreMatch: "早盘",
   Prev: "上个月",
   PreviousSearchResult: "前次搜寻结果",
   ProblemDisplayBetSetting: "无法显示投注设定群组的细节",
@@ -693,6 +701,7 @@ window._language_zh_CN = {
   SpecificDate: "特定日期",
   Sport: "运动",
   Sportsbook: "体育博彩",
+  SportType: "运动类型",
   Stake: "投注额",
   StakeFrom: "投注额从",
   Statement: "账目",
