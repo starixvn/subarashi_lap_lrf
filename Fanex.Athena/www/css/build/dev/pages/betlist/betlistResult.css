@@ -266,7 +266,7 @@ body {
     background: #fdfd87; }
   .result-container table.number-game .cl-result {
     width: 150px; }
-  .result-container table.number-game .cl-warrior, .result-container table.number-game .cl-lblOEFT, .result-container table.number-game .cl-lbl1stball, .result-container table.number-game .cl-lastball {
+  .result-container table.number-game .cl-warrior, .result-container table.number-game .cl-lblOEFT, .result-container table.number-game .cl-lbl1stball, .result-container table.number-game .cl-lbl2ndball, .result-container table.number-game .cl-lastball {
     width: 70px; }
   .result-container table.number-game span.ball {
     padding: 5px 5px;

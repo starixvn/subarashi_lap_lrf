@@ -68,10 +68,6 @@
             <div class="col l12 m12 s12">
                 <ul class="list result-note">
                     <li>@string.Format(ViewResources.DateRangeNote, Model.Param.BalanceUpDay.Value.ToString("MM/dd/yyyy"))</li>
-                    @if ((bool)ViewBag.IsAllowedRNG)
-                    {
-                        <li>@ViewResources.RngCasinoAndBingoExcludedNote</li>
-                    }
                 </ul>
             </div>
         </div>
