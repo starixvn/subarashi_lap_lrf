@@ -2509,4 +2509,31 @@
   <data name="VIPPlayerTooltipMsg" xml:space="preserve">
     <value>被標示在玩家管理報告中的VIP玩家</value>
   </data>
+  <data name="CustomerClass" xml:space="preserve">
+    <value>玩家分级</value>
+  </data>
+  <data name="CustomerClassInformation" xml:space="preserve">
+    <value>玩家分级资讯</value>
+  </data>
+  <data name="PreMatch" xml:space="preserve">
+    <value>早盘</value>
+  </data>
+  <data name="SportType" xml:space="preserve">
+    <value>运动类型</value>
+  </data>
+  <data name="LeagueGroupId" xml:space="preserve">
+    <value>联赛群组</value>
+  </data>
+  <data name="BetInterval" xml:space="preserve">
+    <value>投注间隔(秒)</value>
+  </data>
+  <data name="MaxPerBet" xml:space="preserve">
+    <value>单注限额</value>
+  </data>
+  <data name="MaxPerMatch2" xml:space="preserve">
+    <value>累计单场限额</value>
+  </data>
+  <data name="Live2" xml:space="preserve">
+    <value>滚球</value>
+  </data>
 </root>

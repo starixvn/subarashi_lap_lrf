@@ -2851,4 +2851,34 @@
   <data name="VIPPlayerTooltipMsg" xml:space="preserve">
     <value>VIP Players are marked in Player Segmentation</value>
   </data>
+  <data name="CustomerClass" xml:space="preserve">
+    <value>Customer Class</value>
+  </data>
+  <data name="CustomerClassInformation" xml:space="preserve">
+    <value>Customer Class Information</value>
+  </data>
+  <data name="PreMatch" xml:space="preserve">
+    <value>Pre-Match</value>
+  </data>
+  <data name="SportType" xml:space="preserve">
+    <value>Sport Type</value>
+  </data>
+  <data name="LeagueGroupId" xml:space="preserve">
+    <value>League Group Id</value>
+  </data>
+  <data name="BetDelay" xml:space="preserve">
+    <value>Bet Delay</value>
+  </data>
+  <data name="BetInterval" xml:space="preserve">
+    <value>Bet Interval (sec)</value>
+  </data>
+  <data name="MaxPerBet" xml:space="preserve">
+    <value>Max/Bet</value>
+  </data>
+  <data name="MaxPerMatch2" xml:space="preserve">
+    <value>Max/Match</value>
+  </data>
+  <data name="Live2" xml:space="preserve">
+    <value>Live</value>
+  </data>
 </root>

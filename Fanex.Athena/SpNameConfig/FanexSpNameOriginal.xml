@@ -118,6 +118,7 @@
       <Setting Key="Lrf_ProblemAccount_LicenseeVIPPlayerSel" SpName="Lrf_ProblemAccount_LicenseeVIPPlayerSel" DbName="DBACC.bodb02.bodbLicenseeNet" />
       <Setting Key="Lrf_ProblemAccount_LicenseeVipPlayerUpd" SpName="Lrf_ProblemAccount_LicenseeVipPlayerUpd" DbName="DBCUST.CustDB.bodbLicenseeNet" />
       <Setting Key="Lrf_ProblemAccount_ReasonGroupSel" SpName="Lrf_ProblemAccount_ReasonGroupSel" DbName="DBACC.bodb02.bodbLicenseeNet" />
+      <Setting Key="Lrf_ProblemAccount_CustomerClassPolicySel" SpName="Lrf_ProblemAccount_CustomerClassPolicySel" DbName="DBCUST.CustDB.bodbLicenseeNet" />
     </Function>
     <!-- End - PlayerSegmentation -->
   </Function>

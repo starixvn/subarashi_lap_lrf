@@ -1,16 +1,17 @@
 ﻿namespace Fanex.Athena.Service.Customer
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
     using Fanex.Athena.DataAccess.Customer.Interfaces;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
     using Fanex.Athena.Model.Customer.Enum;
     using Fanex.Athena.Model.Customer.MetaModel;
+    using Fanex.Athena.Model.Customer.MetaModel.PlayerSegmentation;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.Customer.Interfaces;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
 
     public class PlayerSegmentationService : IPlayerSegmentationService
     {
@@ -78,6 +79,12 @@
             }
 
             return PlayerSegmentationViewType.WhiteLabel;
+        }
+
+        public async Task<IEnumerable<CustomerClassModel>> GetCustomerClassInformation(GetCustomerClassInformationMetaModel metaModel)
+        {
+            var result = await _playerDataAccess.GetCustomerClassInformation(metaModel);
+            return result;
         }
 
         private void BindAgentListBySubsidiaryBiz(BasePlayerListMetaModel metaModel)

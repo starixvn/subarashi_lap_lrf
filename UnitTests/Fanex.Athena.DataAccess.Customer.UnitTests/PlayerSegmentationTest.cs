@@ -1,4 +1,8 @@
-﻿using Fanex.Athena.DataAccess.Core.UnitTests.TestHelpers;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Fanex.Athena.DataAccess.Core.UnitTests.TestHelpers;
 using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Model.Core.MetaModel;
 using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
@@ -7,10 +11,6 @@ using Fanex.Athena.UnitTest.Common.Helpers;
 using Fanex.Data;
 using NSubstitute;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Fanex.Athena.DataAccess.Customer.UnitTests
 {
@@ -75,8 +75,6 @@ namespace Fanex.Athena.DataAccess.Customer.UnitTests
             {
                 AssertCommonPlayerListResult(expectedData, firstData);
                 Assert.AreEqual((expectedData["CreatedDate"] as DateTime?).Value.ToString(FormatKey.DateTimeFormatIn24H), firstData.MarkDate);
-                Assert.AreEqual(expectedData["MaxPerEvent"], firstData.ReducedMaxPerEvent);
-                Assert.AreEqual(expectedData["MaxBet"], firstData.ReducedMaxPerBet);
                 Assert.AreEqual(expectedData["Reason"], firstData.Reason);
             });
         }

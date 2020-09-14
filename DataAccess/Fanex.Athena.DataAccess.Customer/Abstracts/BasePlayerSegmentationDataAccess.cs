@@ -1,12 +1,12 @@
-﻿using Fanex.Athena.DataAccess.Core;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Threading.Tasks;
+using Fanex.Athena.DataAccess.Core;
 using Fanex.Athena.Model.Core.MetaModel;
 using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
 using Fanex.Athena.Model.Customer.MetaModel;
 using Fanex.Data;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Threading.Tasks;
 
 namespace Fanex.Athena.DataAccess.Customer
 {

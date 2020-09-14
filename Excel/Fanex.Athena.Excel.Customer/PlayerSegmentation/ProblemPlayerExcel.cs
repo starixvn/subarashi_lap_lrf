@@ -1,17 +1,17 @@
 ﻿namespace Fanex.Athena.Excel.Customer
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Web.Hosting;
     using Fanex.Athena.Excel.Base.Extension;
     using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
     using Fanex.Athena.Resources;
     using NPOI.SS.UserModel;
-    using System;
-    using System.Collections.Generic;
-    using System.Web.Hosting;
 
     public class ProblemPlayerExcel : PlayerExcel<PlayerInfo>
     {
         private const string ExcelTemplatePath = @"~/App_Data/Template/Customers/PlayerSegmentation/ProblemPlayerList.xls";
-        private const int ColumnVIP = 7;
+        private const int ColumnVIP = 6;
 
         private readonly bool _hasVIPPermission;
 
@@ -37,8 +37,7 @@
 
         private void AddCommonHeaders()
         {
-            _infoHeaders.Add(new Tuple<string, string, Func<object, object>>(ViewResources.ReducedMaxPerEvent, nameof(ViewResources.ReducedMaxPerEvent), null));
-            _infoHeaders.Add(new Tuple<string, string, Func<object, object>>(ViewResources.ReducedMaxPerBet, nameof(ViewResources.ReducedMaxPerBet), null));
+            _infoHeaders.Add(new Tuple<string, string, Func<object, object>>(ViewResources.CustomerClass, nameof(ViewResources.CustomerClass), null));
             _infoHeaders.Add(new Tuple<string, string, Func<object, object>>(ViewResources.Reason, "ReasonList", DataParsers.ParseToBreaklineText));
             _infoHeaders.Add(new Tuple<string, string, Func<object, object>>(ViewResources.MarkDate, nameof(ViewResources.MarkDate), null));
         }
