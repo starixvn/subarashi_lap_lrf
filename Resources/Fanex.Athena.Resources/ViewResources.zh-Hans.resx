@@ -534,8 +534,8 @@
     <comment>114797</comment>
   </data>
   <data name="ExternalIdOrSystemId" xml:space="preserve">
-    <value>或系统帐号(支援前坠搜寻)</value>
-    <comment>114797</comment>
+    <value>或系统帐号(支援前缀搜寻)</value>
+    <comment>141641</comment>
   </data>
   <data name="Fail" xml:space="preserve">
     <value>失败</value>

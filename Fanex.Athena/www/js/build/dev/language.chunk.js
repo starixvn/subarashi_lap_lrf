@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 9/10/2020 10:47:24 AM
+﻿// Generated at: 9/15/2020 9:29:18 AM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -731,7 +731,6 @@ ResultPending:"Result Pending",
 Results:"Results",
 RetractedPlayerUpdateVipStatus:"Retracted VIP player(s): {0} ({1})",
 RetractedPlayerUpdateVipStatusSingle:"Retracted VIP player: {0}",
-RngCasinoAndBingoExcludedNote:"RNG Casino and Bingo are not included in the report",
 RNGCasinoUpdateSettingUnAvailableMsg:"RNG Casino Database is not currently available. Please try again later.",
 Running:"Running",
 Sa:"Sa",
