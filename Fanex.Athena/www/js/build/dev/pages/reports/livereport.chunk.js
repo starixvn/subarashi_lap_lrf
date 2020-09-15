@@ -1997,8 +1997,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             const data = $(target).attr('data-drill-down');
             const jsonData = $.parseJSON(data);
             const productCode = $('#ProductCode').val();
-            // after users back from match list, 
-            // the report does not show detailed data, 
+            // after users back from match list,
+            // the report does not show detailed data,
             // so remove product code to not show detailed data in EXPORT EXCEL
             $('#ProductCode').val('');
             const productOptions = Helper.getMatchListProductOption(jsonData.SportId, productCode);
