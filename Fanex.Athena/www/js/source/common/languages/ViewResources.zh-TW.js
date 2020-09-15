@@ -1,4 +1,4 @@
-﻿// Generated at: 9/10/2020 10:47:24 AM
+﻿// Generated at: 9/15/2020 9:29:18 AM
 window._language_zh_TW = {
 AA:"客客",
 AbnormalBet:"非正規註單",
@@ -477,7 +477,6 @@ ResetPasswordSuccessMsg:"重置密碼成功!",
 Result:"賽果",
 ResultPending:"賽果待定",
 Results:"賽果",
-RngCasinoAndBingoExcludedNote:"此報告不包含娛樂城及賓果",
 RNGCasinoUpdateSettingUnAvailableMsg:"RNG Casino Database is not currently available. Please try again later.",
 Running:"進行中",
 Sa:"Sa",

@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 9/10/2020 10:47:24 AM
+﻿// Generated at: 9/15/2020 9:29:18 AM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -335,7 +335,7 @@ EventDate:"赛事日期",
 ExcludeTestData:"排除测试数据",
 ExportToExcel:"导出至Excel",
 ExternalId:"用户名",
-ExternalIdOrSystemId:"或系统帐号(支援前坠搜寻)",
+ExternalIdOrSystemId:"或系统帐号(支援前缀搜寻)",
 ExtraPayout:"额外派彩",
 Fail:"失败",
 Feb:"二月",
@@ -666,7 +666,6 @@ ResultPending:"赛果待定",
 Results:"赛果",
 RetractedPlayerUpdateVipStatus:"遭撤回VIP的玩家: {0} ({1})",
 RetractedPlayerUpdateVipStatusSingle:"遭撤回VIP的玩家: {0}",
-RngCasinoAndBingoExcludedNote:"此报告不包含娱乐城及宾果",
 RNGCasinoUpdateSettingUnAvailableMsg:"RNG Casino Database is not currently available. Please try again later.",
 Running:"进行中",
 Sa:"Sa",
