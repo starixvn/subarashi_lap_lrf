@@ -1,4 +1,4 @@
-﻿// Generated at: 9/15/2020 9:29:11 AM
+﻿// Generated at: 9/15/2020 1:04:56 PM
 var _language_zh_Hans = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -455,6 +455,7 @@ ProductNG:"百练赛",
 ProductParlay:"体育串关",
 ProductPP:"PP王者电子",
 ProductSB:"体育博彩",
+ProductSXG:"AE 真人",
 ProductVRG:"虚拟娱乐城",
 ProductVS:"虚拟运动",
 ProductVS2:"虚拟运动2",

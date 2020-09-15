@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 9/15/2020 9:29:18 AM
+// Generated at: 9/15/2020 1:05:01 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -697,7 +697,7 @@ window._language_en_US = {
   ProductSB: "Sportsbook",
   ProductSBC: "Saba.club",
   ProductSG: "SG",
-  ProductSXG: "Sexy Gaming",
+  ProductSXG: "AE Casino",
   ProductTG: "Table Game",
   ProductVB: "Macau Games",
   ProductVG: "Macau",
