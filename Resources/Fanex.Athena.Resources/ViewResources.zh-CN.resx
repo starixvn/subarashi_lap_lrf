@@ -2455,9 +2455,6 @@
   <data name="GoldDeluxeWinLoss" xml:space="preserve">
     <value>GD真人娱乐场输赢</value>
   </data>
-  <data name="ProductSXG" xml:space="preserve">
-    <value>性感百家</value>
-  </data>
   <data name="Log" xml:space="preserve">
     <value>日志</value>
   </data>
@@ -2535,5 +2532,9 @@
   </data>
   <data name="Live2" xml:space="preserve">
     <value>滚球</value>
+  </data>
+  <data name="ProductSXG" xml:space="preserve">
+    <value>AE 真人</value>
+    <comment>#141118</comment>
   </data>
 </root>

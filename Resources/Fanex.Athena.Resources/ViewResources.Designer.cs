@@ -5479,7 +5479,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sexy Gaming.
+        ///   Looks up a localized string similar to AE Casino.
         /// </summary>
         public static string ProductSXG {
             get {

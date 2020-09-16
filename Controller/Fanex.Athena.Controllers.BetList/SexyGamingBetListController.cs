@@ -28,7 +28,7 @@ namespace Fanex.Athena.Controllers.BetList
                 CustomerCommVisible = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm
             };
             metaModel.HiddenColumns = HiddenColumns;
-            return await ProcessExportExcel(metaModel, "SexyGamingDetail").ConfigureAwait(false);
+            return await ProcessExportExcel(metaModel, "AECasinoDetail").ConfigureAwait(false);
         }
     }
 }
