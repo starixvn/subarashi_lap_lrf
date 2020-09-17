@@ -10,8 +10,9 @@ namespace Fanex.Athena.Api.CustomerLog
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Http;
-
+    using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Model.Customer.MetaModel.CustomerLog;
+    using Fanex.Athena.Model.Customer.ViewModel.CustomerLog;
     using Fanex.Athena.Service.StatelessCore.Utility;
 
     public partial class LogController
@@ -19,6 +20,13 @@ namespace Fanex.Athena.Api.CustomerLog
         [HttpGet]
         public async Task<dynamic> CustomerSetting(string username, int viewbyid, int year, int month, int fromday, int today)
         {
+            LogHelper.SetTemplateServiceConfiguration();
+            var supportedProducts = _productService.GetAllowedProducts("CommissionGroups");
+            var productAccess = _productService.GetProductAccess(SessionService.LicenseeSession.LicenseeId, SessionService.UserSession.Language);
+            var permissions = CommissionGroupHelper.GetProductPermissions(supportedProducts, productAccess);
+            ActionViewModel.SetProductPermissions(permissions);
+            var actionTypes = LogHelper.GroupCommissionLogAttributes();
+
             var userSession = SessionService.UserSession;
             var licenseeSession = SessionService.LicenseeSession;
             var metaModel = new CustomerLogMetaModel
@@ -39,7 +47,7 @@ namespace Fanex.Athena.Api.CustomerLog
                 var dataList = (await _customerLogDataAccess.GetCustomerSettingList(metaModel).ConfigureAwait(false))
                     .OrderByDescending(x => x.LogId).ToList();
                 var dataAfterRemoveHTMLTag = RemoveHtmlTag(dataList);
-                var details = GetDetails(dataAfterRemoveHTMLTag);
+                var details = GetDetails(dataAfterRemoveHTMLTag, actionTypes);
                 return new { rows = details };
             }
 
