@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+﻿import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import NoDataTitle from '../../../components/NoDataTitle'
@@ -19,10 +19,10 @@ export default class BetListDetail extends Component {
         return (
             <HeaderRow style={{ height: 32 }}>
                 <HeaderCell colWidth={100}>{LangHelper.getSingleResource("BetTaken")}</HeaderCell>
-                <HeaderCell colWidth={70}>{LangHelper.getSingleResource("OddsReq")}</HeaderCell>
+                <HeaderCell colWidth={100}>{LangHelper.getSingleResource("OddsReq")}</HeaderCell>
                 <HeaderCell colWidth={70}>{LangHelper.getSingleResource("Stake")}</HeaderCell>
                 <HeaderCell colWidth={70}>{LangHelper.getSingleResource("Liability")}</HeaderCell>
-                <HeaderCell colWidth={70}>{LangHelper.getSingleResource("OddsMatched")}</HeaderCell>
+                <HeaderCell colWidth={100}>{LangHelper.getSingleResource("OddsMatched")}</HeaderCell>
             </HeaderRow>
         )
     }
@@ -32,9 +32,16 @@ export default class BetListDetail extends Component {
         const rows = [];
         for (let i = 0; i < data.length; i++) {
             const dataItem = data[i];
-            const OddsReqString = NumberFormat.formatDecimal(dataItem.OddsReq);
+            const isFancyBet = dataItem.CategoryType == 2;
+
+            const OddsReqString = isFancyBet ?
+                NumberFormat.formatInteger(dataItem.FancyBetRuns) + '/' + NumberFormat.formatInteger(dataItem.OddsReq) :
+                NumberFormat.formatDecimal(dataItem.OddsReq);
             const StakeString = NumberFormat.formatDecimal(dataItem.Stake);
-            const OddsMatchedString = NumberFormat.formatDecimal(dataItem.OddsMatched);
+
+            const OddsMatchedString = isFancyBet ?
+                NumberFormat.formatInteger(dataItem.FancyBetRuns) + '/' + NumberFormat.formatInteger(dataItem.OddsMatched) :
+                NumberFormat.formatDecimal(dataItem.OddsMatched);
 
             rows.push(
                 <Row key={`rowDetail-${i}`}>

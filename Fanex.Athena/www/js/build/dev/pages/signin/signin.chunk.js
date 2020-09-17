@@ -397,10 +397,10 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-;(function (root, factory, undef) {
+;(function (root, factory) {
 	if (true) {
 		// CommonJS
-		module.exports = exports = factory(__webpack_require__(/*! ./core */ "./node_modules/crypto-js/core.js"), __webpack_require__(/*! ./evpkdf */ "./node_modules/crypto-js/evpkdf.js"));
+		module.exports = exports = factory(__webpack_require__(/*! ./core */ "./node_modules/crypto-js/core.js"));
 	}
 	else {}
 }(this, function (CryptoJS) {
@@ -858,16 +858,11 @@
 	                var modeCreator = mode.createEncryptor;
 	            } else /* if (this._xformMode == this._DEC_XFORM_MODE) */ {
 	                var modeCreator = mode.createDecryptor;
+
 	                // Keep at least one block in the buffer for unpadding
 	                this._minBufferSize = 1;
 	            }
-
-	            if (this._mode && this._mode.__creator == modeCreator) {
-	                this._mode.init(this, iv && iv.words);
-	            } else {
-	                this._mode = modeCreator.call(mode, this, iv && iv.words);
-	                this._mode.__creator = modeCreator;
-	            }
+	            this._mode = modeCreator.call(mode, this, iv && iv.words);
 	        },
 
 	        _doProcessBlock: function (words, offset) {

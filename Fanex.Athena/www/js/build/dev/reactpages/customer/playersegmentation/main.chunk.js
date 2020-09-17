@@ -388,7 +388,7 @@ class AppLayout extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   }
 
   render() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       id: "container",
       className: "container-fluid"
     }, this.props.children);
@@ -695,7 +695,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-/* harmony default export */ __webpack_exports__["default"] = (_objectSpread(_objectSpread(_objectSpread({}, _tabHandlerAction__WEBPACK_IMPORTED_MODULE_0__), _gridHandlerAction__WEBPACK_IMPORTED_MODULE_1__), _playerDataAction__WEBPACK_IMPORTED_MODULE_2__));
+/* harmony default export */ __webpack_exports__["default"] = (_objectSpread({}, _tabHandlerAction__WEBPACK_IMPORTED_MODULE_0__, {}, _gridHandlerAction__WEBPACK_IMPORTED_MODULE_1__, {}, _playerDataAction__WEBPACK_IMPORTED_MODULE_2__));
 
 /***/ }),
 
@@ -835,15 +835,15 @@ class AppContainer extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Componen
     } = this.props;
     const selectedTab = _lib_constants__WEBPACK_IMPORTED_MODULE_6__["tabMenuList"].find(_ => _.key === selectedTabKey);
     const Component = selectedTab.component;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_4__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_4__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       id: "player-segmentation"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_tabMenu__WEBPACK_IMPORTED_MODULE_5__["TabMenu"], {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_tabMenu__WEBPACK_IMPORTED_MODULE_5__["TabMenu"], {
       selectedTabMenu: selectedTabKey,
       onClickTabMenu: this._onClickTabMenu,
       tabMenuList: _lib_constants__WEBPACK_IMPORTED_MODULE_6__["tabMenuList"]
-    }), Component && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Suspense"], {
-      fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Loading...")
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Component, {
+    }), Component && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Suspense"], {
+      fallback: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Loading...")
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Component, {
       selectedTabKey: selectedTabKey
     }))));
   }
@@ -891,14 +891,14 @@ const TabMenuItem = props => {
     isActive,
     onClickTabMenu
   } = props;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     key: item.key
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     className: isActive ? 'active' : '',
     onClick: () => onClickTabMenu(item.key)
   }, item.name));
 };
-/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(TabMenuItem));
+/* harmony default export */ __webpack_exports__["default"] = (react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(TabMenuItem));
 
 /***/ }),
 
@@ -929,10 +929,10 @@ const TabMenu = props => {
     return selectedTabMenu && selectedTabMenu.key === tabMenuItem.key;
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "tab-menu"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, tabMenuList.map(item => {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TabMenuItem__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, tabMenuList.map(item => {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TabMenuItem__WEBPACK_IMPORTED_MODULE_1__["default"], {
       key: item.key,
       item: item,
       isActive: isActiveTabMenu(selectedTabMenuItem, item),
@@ -940,7 +940,7 @@ const TabMenu = props => {
     });
   })));
 };
-/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(TabMenu));
+/* harmony default export */ __webpack_exports__["default"] = (react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(TabMenu));
 
 /***/ }),
 
@@ -981,7 +981,7 @@ const tabMenuList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__["default"].
   return {
     key: _,
     name: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource(_),
-    component: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(dynamicImports[_]),
+    component: react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(dynamicImports[_]),
     preLoad: dynamicImports[_]
   };
 });
@@ -1063,7 +1063,7 @@ class CommonQueryService {
       const response = await _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_0__["default"].postData('Api/PlayerSegmentation/UpdateVipStatus', params);
 
       if (response.status === 200) {
-        return _objectSpread(_objectSpread({}, _constants__WEBPACK_IMPORTED_MODULE_3__["successResponse"]), {
+        return _objectSpread({}, _constants__WEBPACK_IMPORTED_MODULE_3__["successResponse"], {}, {
           data: response.data
         });
       }
@@ -1167,12 +1167,12 @@ const defaultState = {
 const store = _jsroot_lib_store__WEBPACK_IMPORTED_MODULE_4__["default"].createStore(_reducers__WEBPACK_IMPORTED_MODULE_5__["default"], defaultState);
 
 const App = () => {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_3__["Provider"], {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_3__["Provider"], {
     store: store
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_AppContainer_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_AppContainer_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null));
 };
 
-Object(react_dom__WEBPACK_IMPORTED_MODULE_1__["render"])( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), document.getElementById("app-container"));
+Object(react_dom__WEBPACK_IMPORTED_MODULE_1__["render"])(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), document.getElementById("app-container"));
 
 /***/ }),
 
@@ -1202,7 +1202,7 @@ class ProblemPlayerQueryService {
       const response = await _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_0__["default"].postData('Api/PlayerSegmentation/GetProblemPlayerList', params);
 
       if (response.status === 200) {
-        return _objectSpread(_objectSpread({}, _lib_constants__WEBPACK_IMPORTED_MODULE_1__["successResponse"]), response.data);
+        return _objectSpread({}, _lib_constants__WEBPACK_IMPORTED_MODULE_1__["successResponse"], {}, response.data);
       }
     } catch (e) {
       console.log(e);
@@ -1241,7 +1241,7 @@ class VipPlayerQueryService {
       const response = await _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_0__["default"].postData('Api/PlayerSegmentation/GetVipPlayerList', params);
 
       if (response.status === 200) {
-        return _objectSpread(_objectSpread({}, _lib_constants__WEBPACK_IMPORTED_MODULE_1__["successResponse"]), response.data);
+        return _objectSpread({}, _lib_constants__WEBPACK_IMPORTED_MODULE_1__["successResponse"], {}, response.data);
       }
     } catch (e) {
       console.log(e);
