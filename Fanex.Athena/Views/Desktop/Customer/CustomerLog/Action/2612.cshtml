@@ -10,8 +10,9 @@
     var groupNameOldTitle = groupNameOld.Length > nameLength ? "title='" + groupNameOld + "'" : "";
 
     var columnNames = CommissionGroupHelper.MapHardcodedNameFromDB(ActionViewModel.ProductPermissions, false);
-    var numberOfTable = Math.Ceiling(((decimal)(ActionViewModel.ProductPermissions.Count - 3)) / 7);
-    var productIndex = LogHelper.ProductInFirstRow;
+    var numberOfTable = Math.Ceiling(((decimal)(ActionViewModel.ProductPermissions.Count - 6)) / 7);
+    var productInFirstRow = 6;
+    var productIndex = productInFirstRow;
 }
 @helper RenderCommValue(int index, IDictionary<string, string> columnNames)
 {
@@ -32,32 +33,18 @@
     <tbody>
         <tr class="row-title">
             <td class="col-commission">@Model.Resource["GroupId"]</td>
-            <td class="col-commission">@Model.Resource["GroupName"]</td>
-            <td class="col-commission">@Model.Resource["GroupColor"]</td>
-            <td class="col-commission">@Model.Resource["DefaultGroup"]</td>
-            @for (var i = 0; i < LogHelper.ProductInFirstRow && i < ActionViewModel.ProductPermissions.Count; i++)
+            @for (var i = 0; i < productInFirstRow && i < ActionViewModel.ProductPermissions.Count; i++)
             {
                 var p = ActionViewModel.ProductPermissions.ElementAt(i);
                 <td class="col-commission">@Model.Resource[p.Key + "Comm"]</td>
             }
         </tr>
         <tr>
-            <td>@Model.Data["GroupCommID"]</td>
             <td>
-                <p>@Model.Display("GroupName", nameLength)</p>
-                <p class="@Model.GetClassName("GroupName")" @Raw(groupNameOldTitle)>@Model.Display("GroupNameOld", nameLength)</p>
+                @Model.Data["GroupCommID"]
+                <p class="@Model.GetClassName("GroupCommID")">@Model.Data["GroupCommIDOld"]</p>
             </td>
-            <td>
-                <p style="background-color:@Model.Data["GroupColor"];" class="group-color-box"></p>
-                <div class="@Model.GetClassName("GroupColor")">
-                    <p title="@Model.Resource["OldColor"]" style="background-color:@Model.Data["GroupColorOld"];" class="group-color-box"></p>
-                </div>
-            </td>
-            <td>
-                <p>@Model.DisplayYesNo("IsDefault")</p>
-                <p class="@Model.GetClassName("IsDefault")">@Model.DisplayYesNo("IsDefaultOld")</p>
-            </td>
-            @for (var i = 0; i < LogHelper.ProductInFirstRow && i < ActionViewModel.ProductPermissions.Count; i++)
+            @for (var i = 0; i < productInFirstRow && i < ActionViewModel.ProductPermissions.Count; i++)
             {
                 @RenderCommValue(i, columnNames)
             }
