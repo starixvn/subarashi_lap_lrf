@@ -24,7 +24,7 @@ namespace Fanex.Athena.Api.CustomerLog
             var permissions = CommissionGroupHelper.GetProductPermissions(supportedProducts, productAccess);
             ActionViewModel.SetProductPermissions(permissions);
 
-            var actionTypes = LogHelper.GroupCommissionLogAttributes();
+            var actionTypes = LogHelper.GroupLogAttributes();
 
             var metaModel = new CustomerLogMetaModel
             {

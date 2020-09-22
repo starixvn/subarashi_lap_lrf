@@ -40,7 +40,6 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api
             builder.RegisterType<PlayerSpecialLevelService>().As<IPlayerSpecialLevelService>().WithAttributeFiltering();
 
             builder.RegisterApiControllers(items).PropertiesAutowired();
-
         }
     }
 }

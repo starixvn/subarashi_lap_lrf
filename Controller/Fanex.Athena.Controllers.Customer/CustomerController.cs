@@ -108,11 +108,7 @@ namespace Fanex.Athena.Controllers.Customer
             };
 
             var model = CreateCustomerViewModelAsync(metaModel);
-
-            if (!model.IsSubsidiary)
-            {
-                this.SetValueForBaStatus(model);
-            }
+            SetValueForBaStatus(model);
 
             ViewBag.ProductList = productAccess.ProductList.Select(x => x.ProductCode);
             return View("~/Views/Desktop/Customer/Customers.cshtml", model);
@@ -382,7 +378,7 @@ namespace Fanex.Athena.Controllers.Customer
                 items.Add(new CheckedItem { Name = name, Checked = true });
             }
 
-            if (isAllowBA && !isSubsidiary)
+            if (isAllowBA)
             {
                 items.Add(new CheckedItem { Name = BASTATUS, Checked = true });
             }

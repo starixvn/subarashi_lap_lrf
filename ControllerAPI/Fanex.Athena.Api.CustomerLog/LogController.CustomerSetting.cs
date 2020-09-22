@@ -25,7 +25,7 @@ namespace Fanex.Athena.Api.CustomerLog
             var productAccess = _productService.GetProductAccess(SessionService.LicenseeSession.LicenseeId, SessionService.UserSession.Language);
             var permissions = CommissionGroupHelper.GetProductPermissions(supportedProducts, productAccess);
             ActionViewModel.SetProductPermissions(permissions);
-            var actionTypes = LogHelper.GroupCommissionLogAttributes();
+            var actionTypes = LogHelper.GroupLogAttributes();
 
             var userSession = SessionService.UserSession;
             var licenseeSession = SessionService.LicenseeSession;

@@ -1,6 +1,5 @@
 ﻿namespace Fanex.Athena.Service.Customer.UnitTests
 {
-    using System.Collections.Generic;
     using Model.Core.DTO.Common;
 
     using NSubstitute;
@@ -27,8 +26,10 @@
 
             // Action
             var result = _customerListService.UpdateCustomerBAStatus(licenseeId,
+                "",
                 custId,
                 modifiedBy,
+                null,
                 allowBA,
                 request
                 );

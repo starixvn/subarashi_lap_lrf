@@ -31,6 +31,7 @@
 
         private CustomerListService _customerListService;
         private ILGAPIClient _lgClient;
+        private IBusinessLogService _businessLogService;
 
         [SetUp]
         public void SetUp()
@@ -42,13 +43,15 @@
             _appSettings = Substitute.For<IAppSettings>();
             _appSettings.GetValue(Arg.Any<string>()).Returns("FakePath");
             _lgClient = Substitute.For<ILGAPIClient>();
+            _businessLogService = Substitute.For<IBusinessLogService>();
             _customerListService = new CustomerListService(
                 _customerDataAccess,
                 _customerListDataAccess,
                 _dormantCustomerListDataAccess,
                 _productService,
                 _appSettings,
-                _lgClient);
+                _lgClient,
+                _businessLogService);
         }
 
         [TearDown]

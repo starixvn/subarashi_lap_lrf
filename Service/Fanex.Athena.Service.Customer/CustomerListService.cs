@@ -6,22 +6,20 @@
 
 namespace Fanex.Athena.Service.Customer
 {
-    using System.Collections.Generic;
     using System.Threading.Tasks;
-
+    using Autofac.Features.AttributeFilters;
     using DataAccess.Customer.Interfaces;
 
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.DTO;
     using Fanex.Athena.Model.Customer.MetaModel;
+    using Fanex.Athena.Model.Customer.MetaModel.CustomerLog;
     using Fanex.Athena.Service.Customer.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
 
     using Model.Core.ResultModel;
-
-    using Resources;
 
     public class CustomerListService : ICustomerListService
     {
@@ -35,13 +33,16 @@ namespace Fanex.Athena.Service.Customer
 
         private readonly IAppSettings _appSettings;
         private readonly ILGAPIClient _lgClient;
+        private readonly IBusinessLogService _businessLogService;
 
         public CustomerListService(
             ICustomerDataAccess customerDataAccess,
             ICustomerListDataAccess customerListDataAccess,
             IDormantCustomerListDataAccess dormantCustomerListDataAccess,
             IProductService productService,
-            IAppSettings appSettings, ILGAPIClient lgClient)
+            IAppSettings appSettings,
+            ILGAPIClient lgClient,
+            [KeyFilter("CustomerLogService")] IBusinessLogService businessLogService)
         {
             _customerDataAccess = customerDataAccess;
             _customerListDataAccess = customerListDataAccess;
@@ -49,6 +50,7 @@ namespace Fanex.Athena.Service.Customer
             _productService = productService;
             _appSettings = appSettings;
             _lgClient = lgClient;
+            _businessLogService = businessLogService;
         }
 
         public async Task<ReportResultModel<CustomerDTO>> GetActiveCustomersAsync(CustomerListMetaModel metaModel)
@@ -151,22 +153,49 @@ namespace Fanex.Athena.Service.Customer
 
         public IResultInfo UpdateCustomerBAStatus(
             int licenseeId,
+            string siteName,
             int custId,
             int modifiedBy,
+            string vendorId,
             bool allowBA,
             Request request)
         {
-            return this._customerListDataAccess.UpdateCustomerBAStatus(
-                licenseeId,
-                   custId,
-                   modifiedBy,
-                   allowBA,
-                   request);
+            var result = _customerListDataAccess.UpdateCustomerBAStatus(licenseeId, custId, modifiedBy, allowBA, request);
+
+            if (!string.IsNullOrWhiteSpace(vendorId))
+            {
+                WritePlayerAdminUpdateBALog(siteName, custId, modifiedBy, allowBA, result);
+            }
+
+            return result;
         }
 
         public IResultInfo UpdateSpecialLevel(int userId, int custId, int level, string ip, string language)
         {
             return _customerListDataAccess.UpdateSpecialLevel(userId, custId, level, ip, language);
+        }
+
+        private void WritePlayerAdminUpdateBALog(
+            string siteName,
+            int custId,
+            int modifiedBy,
+            bool allowBA,
+            IResultInfo result)
+        {
+            var logMetaModel = new PlayerUpdatingLogMetaModel
+            {
+                LicenseeCustId = 0,
+                SiteName = siteName,
+                UserId = modifiedBy,
+                CustId = custId,
+                ActionId = 5550,
+                ActionDetailId = 3,
+                Status = result.IsSuccessful ? "Success" : "False",
+                NewValue = allowBA ? "ON" : "OFF",
+                OldValue = !allowBA ? "ON" : "OFF"
+            };
+
+            _businessLogService.Write(0, logMetaModel);
         }
 
         #endregion Update

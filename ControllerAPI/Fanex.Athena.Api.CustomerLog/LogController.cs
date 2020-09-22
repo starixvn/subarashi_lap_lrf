@@ -35,19 +35,6 @@ namespace Fanex.Athena.Api.CustomerLog
     {
         private static readonly int[] ActionIdListForBA = new[] { 2401, 2403, 2801 };
 
-        private static readonly string[] ActionTypes = new[]
-        {
-            "Closed",
-            "Suspended",
-            "SpecialLevel",
-            "GroupCommID",
-            "GroupName",
-            "GroupColor",
-            "SBComm",
-            "NGComm",
-            "RNGComm"
-        };
-
         private readonly ICustomerLogDataAccess _customerLogDataAccess;
 
         private readonly ILogInLogDataAccess _logInLogDataAccess;
@@ -117,10 +104,7 @@ namespace Fanex.Athena.Api.CustomerLog
 
         #region Get XML attribute
 
-        private static IDictionary<string, string> GetXmlAttr(
-            string trackingValue,
-            string trackingValueOld,
-            string[] actionTypes = null)
+        private static IDictionary<string, string> GetXmlAttr(string trackingValue, string trackingValueOld, string[] actionTypes)
         {
             var dictonary = new Dictionary<string, string>();
 
@@ -138,7 +122,6 @@ namespace Fanex.Athena.Api.CustomerLog
 
             var root = doc.DocumentElement;
             var rootOld = docOld.DocumentElement;
-            actionTypes = actionTypes ?? ActionTypes;
             foreach (var attr in actionTypes)
             {
                 dictonary.Add(attr, GetAttributeValue(root, attr));
