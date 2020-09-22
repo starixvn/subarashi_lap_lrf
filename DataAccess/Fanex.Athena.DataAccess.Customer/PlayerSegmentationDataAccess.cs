@@ -126,12 +126,14 @@
                     while (reader.Read())
                     {
                         var betDelay = reader.ToNullableDecimal("BetDelay");
+                        var leadgroupId = Convert.ToString(reader["LeagueGroupId"]);
+
                         var record = new CustomerClassModel
                         {
                             CustomerClass = Convert.ToString(reader["CustomerClass"]),
                             LiveType = Convert.ToInt16(reader["Liveindicator"]),
                             SportTypeName = _cacheRefAdapter.GetSportName(Convert.ToString(reader["SportType"])),
-                            LeagueGroupId = Convert.ToString(reader["LeagueGroupId"]),
+                            LeagueGroupId = string.Equals(leadgroupId, "0") ? "-" : leadgroupId,
                             BetDelay = FormatNumber(betDelay.HasValue ? betDelay * 100 : null, "{0:#,##0.##}%"),
                             BetInterval = FormatNumber(reader.ToNullableDecimal("NextBetInterval"), "{0:#,##0.##}"),
                             MaxBet = FormatNumber(reader.ToNullableDecimal("MaxBet"), "{0:#,##0.##}"),
@@ -171,6 +173,6 @@
         }
 
         public static string FormatNumber(decimal? value, string format)
-            => value == null ? "N/A" : string.Format(format, value);
+            => value == null ? "-" : string.Format(format, value);
     }
 }

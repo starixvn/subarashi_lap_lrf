@@ -17,7 +17,6 @@
                     <table id="customer-class-info" class="table table-bordered">
                         <thead>
                             <tr>
-                                <th class="col-small">#</th>
                                 <th class="col-medium">@ViewResources.CustomerClass</th>
                                 <th class="col-medium">@ViewResources.Live2/<br />@ViewResources.PreMatch</th>
                                 <th class="col-large">@ViewResources.SportType</th>
@@ -28,21 +27,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @{
-                                int number = 1;
-                                foreach (var m in Model)
-                                {
-                                    <tr>
-                                        <td class="center-align">@(number++)</td>
-                                        <td class="center-align">@m.CustomerClass</td>
-                                        <td class="left-align">@(m.LiveType == 1 ? ViewResources.Live2 : ViewResources.PreMatch)</td>
-                                        <td class="left-align">@m.SportTypeName</td>
-                                        <td class="right-align">@m.LeagueGroupId</td>
-                                        <td class="right-align">@m.BetInterval</td>
-                                        <td class="right-align">@m.MaxBet</td>
-                                        <td class="right-align">@m.MaxPerMatch</td>
-                                    </tr>
-                                }
+                            @foreach (var m in Model)
+                            {
+                                <tr>
+                                    <td class="center-align">@m.CustomerClass</td>
+                                    <td class="left-align">@(m.LiveType == 1 ? ViewResources.Live2 : ViewResources.PreMatch)</td>
+                                    <td class="left-align">@m.SportTypeName</td>
+                                    <td class="right-align">@m.LeagueGroupId</td>
+                                    <td class="right-align">@m.BetInterval</td>
+                                    <td class="right-align">@m.MaxBet</td>
+                                    <td class="right-align">@m.MaxPerMatch</td>
+                                </tr>
                             }
                         </tbody>
                     </table>

@@ -2519,7 +2519,7 @@
     <value>运动类型</value>
   </data>
   <data name="LeagueGroupId" xml:space="preserve">
-    <value>联赛群组</value>
+    <value>联赛分类</value>
   </data>
   <data name="BetInterval" xml:space="preserve">
     <value>投注间隔(秒)</value>
