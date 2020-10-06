@@ -6,9 +6,6 @@
     using NSubstitute;
 
     using NUnit.Framework;
-
-    using Resources;
-
     using UnitTest.Common.Helpers;
 
     [TestFixture]
