@@ -20,6 +20,7 @@ export class DataGrid extends PureComponent {
                 <HeaderCell colWidth={120}>{LangHelper.getSingleResource('Transaction')}</HeaderCell>
                 <HeaderCell colWidth={60}>{LangHelper.getSingleResource('BalanceChange')}</HeaderCell>
                 <HeaderCell colWidth={60}>{LangHelper.getSingleResource('AfterBalance')}</HeaderCell>
+                <HeaderCell colWidth={40}>{LangHelper.getSingleResource('Resettled')}</HeaderCell>
                 <HeaderCell colWidth={160}>{LangHelper.getSingleResource('Remark')}</HeaderCell>
             </HeaderRow>
         )
@@ -37,6 +38,9 @@ export class DataGrid extends PureComponent {
                     <Cell>{dataItem.TransactionType}</Cell>
                     <Cell className="right-text">{dataItem.BalanceChangeStr}</Cell>
                     <Cell className="right-text">{dataItem.AfterBalanceStr}</Cell>
+                    <Cell className="center-text">
+                        {dataItem.IsResettled ? <div class="icon-red-check"></div> : ""}
+                    </Cell>
                     <Cell>{dataItem.Remark}</Cell>
                 </Row>
             );
@@ -53,9 +57,11 @@ export class DataGrid extends PureComponent {
             CustId: oldParam.CustId,
             CurrencyId: oldParam.CurrencyId,
             FromDate: oldParam.FromDateStr,
-            ToDate: oldParam.ToDateStr
+            ToDate: oldParam.ToDateStr,
+            TransactionId: oldParam.TransactionId,
+            IsResettled: oldParam.IsResettled
         };
-        
+
         props.getDetailTransactionReport(newRequestParam);
     }
 
@@ -81,7 +87,7 @@ export class DataGrid extends PureComponent {
             TotalItem: detailTransactionReport.TotalRow,
             PageSize: detailTransactionReport.PageSize,
             PageIndex: detailTransactionReport.PageIndex,
-            PageList:  [500, 1000, 1500, 2000]
+            PageList: [500, 1000, 1500, 2000]
         };
 
         return (

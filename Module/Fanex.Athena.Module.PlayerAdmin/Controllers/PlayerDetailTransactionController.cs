@@ -5,18 +5,24 @@
     using System.Web.UI;
     using Fanex.Athena.Controllers;
     using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Module.PlayerAdmin.Excel;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
     using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
     using Fanex.Athena.Module.PlayerAdmin.ViewModels;
     using Fanex.Athena.Web.ActionFilter;
+    using Fanex.Athena.Web.ResultExtension;
 
     public class PlayerDetailTransactionController : CultureBaseController
     {
         private readonly IPlayerDetailTransactionService _playerDetailTransactionService;
+        private readonly IPlayerDetailTransactionExcel _excelService;
 
-        public PlayerDetailTransactionController(IPlayerDetailTransactionService playerDetailTransactionService)
+        public PlayerDetailTransactionController(
+            IPlayerDetailTransactionService playerDetailTransactionService,
+            IPlayerDetailTransactionExcel excelService)
         {
             _playerDetailTransactionService = playerDetailTransactionService;
+            _excelService = excelService;
         }
 
         [HttpGet]
@@ -41,19 +47,20 @@
             return Json(data);
         }
 
-        [HttpPost]
-        [AjaxRequest]
-        [CustomValidateAntiForgery]
+        [HttpGet]
+        [ValidatePermissionOnData]
         [FunctionAuthorization(PermissionKeys.PlayerDetailTransaction)]
-        [ValidatePermissionOnData(isObject: true)]
-        [ValidationWebRequest]
-        [OutputCache(NoStore = true, Duration = 0, Location = OutputCacheLocation.None, VaryByParam = "*")]
-        public async Task<JsonResult> ExportDetailTransactionReport(PlayerDetailTransactionsMetaModel criteria)
+        public async Task<ActionResult> ExportDetailTransactionReport(PlayerDetailTransactionsMetaModel criteria)
         {
             criteria.PageSize = null;
             criteria.PageIndex = null;
             var data = await _playerDetailTransactionService.GetDetailTransactionReport(criteria);
-            return Json(data);
+
+            var templatePath = Server.MapPath(@"~/App_Data/Template/PlayerAdmin/DetailTransaction.xls");
+            _excelService.SetData(templatePath, data);
+            _excelService.Export();
+
+            return new ExcelResult(_excelService.Workbook, "DetailTransaction");
         }
     }
 }

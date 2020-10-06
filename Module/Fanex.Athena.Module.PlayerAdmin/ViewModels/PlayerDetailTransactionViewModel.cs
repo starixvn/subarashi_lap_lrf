@@ -11,6 +11,7 @@
         public decimal BalanceChange { get; set; }
         public decimal AfterBalance { get; set; }
         public string Remark { get; set; }
+        public bool IsResettled { get; set; }
 
         public string TransactionTimeStr => TransactionTime.ToString("MM/dd/yyyy HH:mm:ss");
         public string BalanceChangeStr =>

@@ -1,5 +1,6 @@
 ﻿using Fanex.Athena.Controllers.Base.UnitTests;
 using Fanex.Athena.Module.PlayerAdmin.Controllers;
+using Fanex.Athena.Module.PlayerAdmin.Excel;
 using Fanex.Athena.Module.PlayerAdmin.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
 using Fanex.Athena.Module.PlayerAdmin.ViewModels;
@@ -11,6 +12,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers
     public class PlayerDetailTransactionControllerTests : CultureBaseControllerHelperTest
     {
         private IPlayerDetailTransactionService service;
+        private IPlayerDetailTransactionExcel excelService;
         private PlayerDetailTransactionController controller;
 
         [OneTimeSetUp]
@@ -18,7 +20,8 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers
         {
             base.FixtureSetUp();
             service = Substitute.For<IPlayerDetailTransactionService>();
-            controller = new PlayerDetailTransactionController(service);
+            excelService = Substitute.For<IPlayerDetailTransactionExcel>();
+            controller = new PlayerDetailTransactionController(service, excelService);
         }
 
         [OneTimeTearDown]
@@ -56,21 +59,6 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers
 
             // Action
             var viewResult = controller.GetDetailTransactionReport(criteria).GetAwaiter().GetResult();
-
-            // Assert
-            Assert.AreEqual(model, (PlayerDetailTransactionReportViewModel)viewResult.Data);
-        }
-
-        [Test]
-        public void ExportDetailTransactionReport_Always_ReturnCorrectData()
-        {
-            // Arrange
-            var criteria = new PlayerDetailTransactionsMetaModel();
-            var model = new PlayerDetailTransactionReportViewModel();
-            service.GetDetailTransactionReport(criteria).Returns(model);
-
-            // Action
-            var viewResult = controller.ExportDetailTransactionReport(criteria).GetAwaiter().GetResult();
 
             // Assert
             Assert.AreEqual(model, (PlayerDetailTransactionReportViewModel)viewResult.Data);

@@ -754,6 +754,7 @@
     <Content Include="www\css\build\images\BottomLine.png" />
     <Content Include="www\css\build\images\FirstNodeSpan.png" />
     <Content Include="www\css\build\images\info.png" />
+    <Content Include="www\css\build\images\red-check.jpg" />
     <Content Include="www\css\build\pro\pages\betlist\images\lotto_ball.png" />
     <Content Include="www\css\build\images\MiddleLine.png" />
     <Content Include="www\css\build\images\new_icon.gif" />
@@ -872,6 +873,7 @@
     <Content Include="Views\Desktop\Customer\PlayerSegmentation\BetList.cshtml" />
     <Content Include="Views\Desktop\Customer\PlayerSegmentation\CustomerClassInformation.cshtml" />
     <Content Include="Views\Desktop\Report\SabaVirtualSportsWinLoss\Content.cshtml" />
+    <Content Include="App_Data\Template\PlayerAdmin\DetailTransaction.xls" />
     <Content Include="Views\Desktop\Report\SabaVirtualSportsWinLoss\Filter.cshtml" />
     <Content Include="Views\Desktop\Report\SabaVirtualSportsWinLoss\Main.cshtml" />
     <Content Include="www\css\source\pages\report\sabavirtualsportswinloss.scss" />
@@ -1237,7 +1239,6 @@
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\detailtransaction\components\FormFilter.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\detailtransaction\components\index.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\detailtransaction\reducers\filter-reducer.js" />
-    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\detailtransaction\services\report-excel-service.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\detailtransaction\services\detail-transaction-service.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\detailtransaction\reducers\index.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\actions\commonAction.js" />

@@ -40,7 +40,8 @@
                             TransactionTime = Converter.ToDateTime(reader["transtime"]),
                             Remark = Converter.ToString2(reader["transremark"]),
                             BalanceChange = Converter.ToDecimal(reader["changedAmt"]),
-                            AfterBalance = Converter.ToDecimal(reader["totalAmt"])
+                            AfterBalance = Converter.ToDecimal(reader["totalAmt"]),
+                            IsResettled = Converter.ToBool(reader["IsResettled"])
                         };
 
                         trans.TransactionType = cacheRefAdapter.GetBettype(trans.BetType);

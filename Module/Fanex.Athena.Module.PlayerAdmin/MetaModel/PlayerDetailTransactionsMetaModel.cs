@@ -20,6 +20,10 @@
 
         public int? PageIndex { get; set; }
 
+        public string TransactionId { get; set; }
+
+        public bool IsResettled { get; set; }
+
         public DateTime MinDate => DateTime.Now.AddMonths(-MaximumMonth);
 
         public bool IsValid => ToDate >= FromDate
@@ -35,6 +39,9 @@
             db.SetParameterValue("PageSize", PageSize);
             db.SetParameterValue("PageIndex", PageIndex);
             db.SetParameterValue("TotalRow", 0);
+
+            db.SetParameterValue("TransactionId", TransactionId);
+            db.SetParameterValue("IsResettled", IsResettled);
         }
     }
 }

@@ -324,6 +324,14 @@ template {
   margin-top: 3px;
   display: inline-block; }
 
+.icon-red-check {
+  background-image: url("../../images/red-check.jpg");
+  width: 14px;
+  height: 14px;
+  margin-top: 3px;
+  display: inline-block;
+  background-size: 100% 100%; }
+
 /* z-index */
 /* Table */
 /* Label Text */

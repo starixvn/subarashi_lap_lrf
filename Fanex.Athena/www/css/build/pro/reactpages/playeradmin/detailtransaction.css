@@ -404,3 +404,14 @@
 body {
   min-height: 400px; }
 
+.form-group .chk-group {
+  margin-top: 20px;
+  color: #808080; }
+  .form-group .chk-group .chk-resettled {
+    display: inline-block;
+    width: 20px;
+    cursor: pointer;
+    padding: 2px; }
+  .form-group .chk-group .lbl-resettled {
+    cursor: pointer; }
+

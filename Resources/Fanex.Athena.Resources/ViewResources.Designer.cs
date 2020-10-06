@@ -5758,6 +5758,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Resettled.
+        /// </summary>
+        public static string Resettled {
+            get {
+                return ResourceManager.GetString("Resettled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Result.
         /// </summary>
         public static string Result {
