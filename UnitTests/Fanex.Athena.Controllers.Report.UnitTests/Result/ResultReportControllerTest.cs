@@ -6,6 +6,7 @@
     using System.Web.Mvc;
     using Base.UnitTests;
     using DataAccess.Core.Configuration.Interfaces;
+    using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DTO.Common;
     using Model.Core.DTO.Configuration;
@@ -23,11 +24,14 @@
 
         private IBetListApiClient _betListApiClient;
 
+        protected IAppSettings AppSettings { get; set; }
+
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
             base.FixtureSetUp();
             _balanceUpDataAccess = Substitute.For<IBalanceUpDataAccess>();
+            AppSettings = Substitute.For<IAppSettings>();
 
             _balanceUpDataAccess.GetBalanceUp().Returns(new BalanceUp
             {
@@ -133,13 +137,15 @@
                 SessionService.LicenseeSession.LicenseeId,
                 SessionService.UserSession.Language,
                 Arg.Any<string>()).Returns(new ProductAccess(productList.ToList()));
+            AppSettings.LicenseeOfferLeagueM88.Returns(Enumerable.Empty<int>());
 
             var controller = new ResultReportController(_balanceUpDataAccess, _betListApiClient)
             {
                 ControllerContext = ControllerContext,
                 LangService = LangService,
                 SessionServiceInstance = SessionService,
-                ProductServiceInstance = productService
+                ProductServiceInstance = productService,
+                AppSettingInstance = AppSettings
             };
 
             return controller;
