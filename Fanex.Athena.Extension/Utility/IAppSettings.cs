@@ -24,6 +24,10 @@
 
         IEnumerable<int> LicenseeOfferStatusFunction { get; }
 
+        IEnumerable<int> LicenseeOfferLeagueM88 { get; }
+
+        IEnumerable<int> ExcludeLeagues { get; }
+
         IEnumerable<string> LicenseeOfferTxIDColumn { get; }
 
         string ExchangeProductApiHost { get; }

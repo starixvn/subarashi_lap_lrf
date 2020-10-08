@@ -151,6 +151,7 @@
     <Compile Include="CashOutBetListController.cs" />
     <Compile Include="GlobalGamingBetListController.cs" />
     <Compile Include="LastBetsMonitoringBetListController.cs" />
+    <Compile Include="SabaVirtualSportsWinLossBetListController..cs" />
     <Compile Include="LiveReportBetListController.cs" />
     <Compile Include="MatchWinLossBetListController.cs" />
     <Compile Include="PendingFundsBetListController.cs" />

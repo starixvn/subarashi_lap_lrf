@@ -8,6 +8,7 @@ namespace Fanex.Athena.DataAccess.Core.Common
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using Extension.Utility;
     using Fanex.Athena.DataAccess.Core;
@@ -67,7 +68,7 @@ namespace Fanex.Athena.DataAccess.Core.Common
         /// </summary>
         /// <param name="sportId">Sport ID value.</param>
         /// <returns>The result value.</returns>
-        public async Task<IList<Match>> GetAllRunningMatch(int sportId)
+        public async Task<IList<Match>> GetAllRunningMatch(int sportId, bool isOfferLeagueM88 = false)
         {
             var result = new List<Match>();
 
@@ -80,18 +81,23 @@ namespace Fanex.Athena.DataAccess.Core.Common
                     while (reader.Read())
                     {
                         var awayId = Convert.ToInt32(reader["awayid"]);
-                        var match = new Match
+                        var leagueId = Convert.ToInt32(reader["leagueid"]);
+
+                        if (!_appSettings.ExcludeLeagues.Contains(leagueId) || isOfferLeagueM88)
                         {
-                            MatchId = Convert.ToInt32(reader["matchid"]),
-                            LeagueId = Convert.ToInt32(reader["leagueid"]),
-                            IsOutRight = awayId == 0,
-                            HomeId = Convert.ToInt32(reader["homeid"]),
-                            AwayId = awayId
-                        };
+                            var match = new Match
+                            {
+                                MatchId = Convert.ToInt32(reader["matchid"]),
+                                LeagueId = leagueId,
+                                IsOutRight = awayId == 0,
+                                HomeId = Convert.ToInt32(reader["homeid"]),
+                                AwayId = awayId
+                            };
 
-                        match.MatchName = GetMatchName(match);
+                            match.MatchName = GetMatchName(match);
 
-                        result.Add(match);
+                            result.Add(match);
+                        }
                     }
                 }
             }

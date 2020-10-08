@@ -14,7 +14,7 @@ namespace Fanex.Athena.Service.StatelessCore.Interfaces
 
     public interface IMatchService
     {
-        Task<IList<Match>> GetAllRunningMatchAsync(int sportId, string languageCode);
+        Task<IList<Match>> GetAllRunningMatchAsync(int sportId, string languageCode, bool isOfferLeagueM88 = false);
 
         Task<IList<Match>> GetForecastMatchListByLeagueAsync(int leagueId);
 

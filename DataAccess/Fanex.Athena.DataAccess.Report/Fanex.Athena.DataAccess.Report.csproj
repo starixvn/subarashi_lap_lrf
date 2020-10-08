@@ -111,10 +111,12 @@
     <Compile Include="Interfaces\IExchangeVoidedDataAccess.cs" />
     <Compile Include="Interfaces\IExchangeWinLossDataAccess.cs" />
     <Compile Include="Interfaces\ILicenseeWinLossByTimeZoneDataAccess.cs" />
+    <Compile Include="Interfaces\ISabaVirtualSportsWinLossDataAccess.cs" />
     <Compile Include="Interfaces\ISpecialLicenseeWinLossDataAccess.cs" />
     <Compile Include="Interfaces\ISubsidiaryPerformanceDataAccess.cs" />
     <Compile Include="Interfaces\IGoldDeluxeWinLossDataAccess.cs" />
     <Compile Include="Interfaces\IWeeklyLiveMatchDataAccess.cs" />
+    <Compile Include="SabaVirtualSportsWinLossDataAccess.cs" />
     <Compile Include="SpecialLicenseeWinLossDataAccess.cs" />
     <Compile Include="AgCasinoBalanceDataAccess.cs" />
     <Compile Include="ColossusBetsWinLossDataAccess.cs" />

@@ -148,7 +148,8 @@ namespace Fanex.Athena.Controllers.Forecast
 
         private async Task AssignDataForNonAjaxRequest(NewForecastHandicapOverUnderMetaModel metaModel, NewForecastHdpOuViewModel model)
         {
-            model.LeagueList = await _leagueDataAccess.GetRunningLeagues(metaModel.AgentListXml, metaModel.BetTypeString);
+            var isOfferLeagueM88 = AppSettingInstance.LicenseeOfferLeagueM88.Contains(SessionServiceInstance.LicenseeSession.LicenseeId);
+            model.LeagueList = await _leagueDataAccess.GetRunningLeagues(metaModel.AgentListXml, metaModel.BetTypeString, isOfferLeagueM88);
             if (model.LeagueList.Any())
             {
                 metaModel.LeagueId = GetLeagueId(metaModel.LeagueId, model.LeagueList);

@@ -7,7 +7,8 @@
     using Core.Common;
 
     using Extension.Utility;
-
+    using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
+    using Fanex.Athena.Model.Core.DTO.Configuration;
     using Model.Core.MetaModel.Common;
 
     using NSubstitute;
@@ -24,11 +25,14 @@
 
         private IAppSettings _appSettings;
 
+        private IBalanceUpDataAccess _balanceUpDataAccess;
+
         protected override void SetUpDataAccess()
         {
             _cacheRef = Substitute.For<ICacheRefAdapter>();
             _appSettings = Substitute.For<IAppSettings>();
-            DataAccess = Substitute.ForPartsOf<LeagueDataAccess>(_cacheRef, _appSettings);
+            _balanceUpDataAccess = Substitute.For<IBalanceUpDataAccess>();
+            DataAccess = Substitute.ForPartsOf<LeagueDataAccess>(_cacheRef, _appSettings, _balanceUpDataAccess);
         }
 
         [TestCase(false)]
@@ -45,6 +49,12 @@
                 FromDate = new DateTime(2016, 8, 10),
                 ToDate = new DateTime(2016, 8, 11)
             };
+
+            var balanceUpDate = new DateTime(2018, 2, 3);
+            _balanceUpDataAccess.GetBalanceUp().Returns(new BalanceUp
+            {
+                BalanceUpDay = balanceUpDate
+            });
 
             // Action
             await DataAccess.GetLeaguesBySport(metaModel);
@@ -74,6 +84,12 @@
             });
             _cacheRef.GetLeagueName(LeagueId).Returns(LeagueName);
 
+            var balanceUpDate = new DateTime(2018, 2, 3);
+            _balanceUpDataAccess.GetBalanceUp().Returns(new BalanceUp
+            {
+                BalanceUpDay = balanceUpDate
+            });
+
             // Action
             var result = await DataAccess.GetLeaguesBySport(new LeagueMetaModel());
             var firstItem = result.First();
@@ -95,6 +111,12 @@
             const string BetTypes = "1,2,3,4,5";
             DataAccess.GetObjectDb(Arg.Is("Lrf_LeagueSelRunning")).Returns(ObjectDb);
             _appSettings.IsProduction.Returns(isProduction);
+
+            var balanceUpDate = new DateTime(2018, 2, 3);
+            _balanceUpDataAccess.GetBalanceUp().Returns(new BalanceUp
+            {
+                BalanceUpDay = balanceUpDate
+            });
 
             // Action
             await DataAccess.GetRunningLeagues(AgentList, BetTypes);

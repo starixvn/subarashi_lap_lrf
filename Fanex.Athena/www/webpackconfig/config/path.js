@@ -24,6 +24,7 @@ var cssPaths = {
     login: ["./www/css/source/pages/login/login-ex.scss"],
     livereport: ["./www/css/source/pages/report/livereport.scss"],
     licenseewinloss: ["./www/css/source/pages/report/licenseewinloss.scss"],
+    sabavirtualsportswinloss: ["./www/css/source/pages/report/sabavirtualsportswinloss.scss"],
 
     ahforecast: ["./www/css/source/pages/forecast/forecast.ah.scss"],
     mixparlay: ["./www/css/source/pages/totalbet/mixparlay.scss"],
@@ -74,6 +75,7 @@ var scriptPaths = {
     livereport: "./www/js/source/pages/report/livereport/main-livereport.js",
     livereportmatchlist: "./www/js/source/pages/report/livereport/main-matchlist.js",
     licenseewinloss: "./www/js/source/pages/report/licenseewinloss/main.js",
+    sabavirtualsportswinloss: "./www/js/source/pages/report/sabavirtualsportswinloss/main.js",
     betlist: "./www/js/source/pages/betlist/betlist.js",
     betlistsimple: "./www/js/source/pages/betlist/main-simple.js",
     betlistrunning: "./www/js/source/pages/betlist/main-betlistrunning.js",

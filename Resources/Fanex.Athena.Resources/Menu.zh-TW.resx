@@ -344,4 +344,8 @@
     <value>玩家分類</value>
     <comment>Player Segmentation</comment>
   </data>
+  <data name="Menu_89" xml:space="preserve">
+    <value>沙巴虛擬足球輸贏</value>
+    <comment>141454</comment>
+  </data>
 </root>

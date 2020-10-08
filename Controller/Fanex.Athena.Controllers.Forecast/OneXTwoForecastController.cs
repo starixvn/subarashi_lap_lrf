@@ -15,7 +15,7 @@ namespace Fanex.Athena.Controllers.Forecast
 
     using Model.Forecast.MetaModel;
     using Model.Forecast.ViewModel;
-
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
 
@@ -79,7 +79,8 @@ namespace Fanex.Athena.Controllers.Forecast
             metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,
                 metaModel.CurrencyId);
 
-            var leagueList = await _leagueDataAccess.GetRunningLeagues(metaModel.AgentListXml, metaModel.BetTypeString);
+            var isOfferLeagueM88 = AppSettingInstance.LicenseeOfferLeagueM88.Contains(SessionServiceInstance.LicenseeSession.LicenseeId);
+            var leagueList = await _leagueDataAccess.GetRunningLeagues(metaModel.AgentListXml, metaModel.BetTypeString, isOfferLeagueM88);
             var currentLeagueId = metaModel.LeagueId;
 
             if (metaModel.MatchId != 0)

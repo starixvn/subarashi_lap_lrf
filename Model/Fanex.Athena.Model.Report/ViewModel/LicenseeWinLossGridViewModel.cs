@@ -113,7 +113,7 @@ namespace Fanex.Athena.Model.Report.ViewModel
         public decimal LicenseeWLI4D { get; set; }
 
         public decimal LicenseeWLSXG { get; set; }
-        
+
         public decimal LicenseeWLSBC { get; set; }
 
         public virtual decimal TotalLicenseeWL
@@ -176,7 +176,7 @@ namespace Fanex.Athena.Model.Report.ViewModel
         public decimal TurnOverI4D { get; set; }
 
         public decimal TurnOverSXG { get; set; }
-        
+
         public decimal TurnOverSBC { get; set; }
 
         public virtual decimal TotalTurnOver
