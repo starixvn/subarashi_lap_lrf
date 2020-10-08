@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 9/24/2020 10:00:23 AM
+// Generated at: 10/8/2020 10:44:17 AM
 window._language_zh_Hans = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -550,6 +550,7 @@ window._language_zh_Hans = {
   ProductParlay: "体育串关",
   ProductPP: "PP王者电子",
   ProductSB: "体育博彩",
+  ProductSVS: "沙巴虚拟运动",
   ProductSXG: "AE真人",
   ProductVRG: "虚拟娱乐城",
   ProductVS: "虚拟运动",
@@ -577,6 +578,7 @@ window._language_zh_Hans = {
   RNGCasinoUpdateSettingUnAvailableMsg: "RNG Casino Database is not currently available. Please try again later.",
   Running: "进行中",
   Sa: "Sa",
+  SabaVirtualSportsWinLoss: "沙巴虚拟足球输赢",
   Saturday: "星期日",
   Save: "保存",
   SB: "体育博彩",

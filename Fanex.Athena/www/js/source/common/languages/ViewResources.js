@@ -1,4 +1,4 @@
-﻿// Generated at: 9/24/2020 10:00:22 AM
+﻿// Generated at: 10/8/2020 10:44:17 AM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -602,6 +602,7 @@ ProductPTCS:"Playtech Casino",
 ProductSB:"Sportsbook",
 ProductSBC:"Saba.club",
 ProductSG:"SG",
+ProductSVS:"Saba Virtual Sports",
 ProductSXG:"AE Casino",
 ProductTG:"Table Game",
 ProductVB:"Macau Games",
@@ -639,6 +640,7 @@ RetractedPlayerUpdateVipStatusSingle:"Retracted VIP player: {0}",
 RNGCasinoUpdateSettingUnAvailableMsg:"RNG Casino Database is not currently available. Please try again later.",
 Running:"Running",
 Sa:"Sa",
+SabaVirtualSportsWinLoss:"Saba Virtual Sports Win Loss",
 Saturday:"Saturday",
 Save:"Save",
 SB:"SB",
