@@ -1,4 +1,4 @@
-﻿// Generated at: 10/8/2020 10:44:03 AM
+﻿// Generated at: 10/8/2020 4:40:20 PM
 var _language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -210,6 +210,7 @@ DateRangeExceedMsg:"Date range exceeds {0} months. Please try again!",
 DateRangeLimitNote:"Data is available within 3 months, from {0} to {1}.",
 DateRangeNote:"Data is available from {0:d MMM yyyy}",
 Day:"Day",
+DayRangeExceedMsg:"Date range exceeds {0} days. Please try again!",
 DD:"DD",
 DeactivateVip:"Deactivate VIP",
 Dec:"Dec",

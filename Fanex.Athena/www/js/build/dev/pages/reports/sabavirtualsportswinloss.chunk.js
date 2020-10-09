@@ -1416,12 +1416,50 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
             });
         },
 
+        setConstraintDayRange: function (dayRange, url) {
+            var errorMessage = Site.getSingleResource("DayRangeExceedMsg").replace("{0}", dayRange);
+
+            if (url && typeof url === "string") {
+                $(document).ajaxSend(function (event, jqxhr, settings) {
+                    if (settings.url.search(new RegExp(url, "i")) > -1 && _me.isValidDayRange(dayRange) === false) {
+                        _me.showMessageBox(errorMessage);
+                        jqxhr.abort();
+                    }
+                });
+            }
+
+            $("form").on("submit", function () {
+                if (_me.isValidDayRange(dayRange) === false) {
+                    _me.showMessageBox(errorMessage);
+                    return false;
+                }
+
+                return true;
+            });
+        },
+
+        isValidDayRange: function (dayRange) {
+            var fromDate = new Date($("#FromDate").val());
+            var toDate = new Date($("#ToDate").val());
+
+            return _me.getDifferenceDay(fromDate, toDate) <= dayRange;
+        },
+
         isValidRange: function (monthRange) {
             var fromDate = new Date($("#FromDate").val());
             var toDate = new Date($("#ToDate").val());
 
             return _me.getDifferenceMonth(fromDate, toDate) <= monthRange;
         },
+
+
+        getDifferenceDay: function (fromDate, toDate) {
+            const ONE_DAY = 1000 * 60 * 60 * 24;
+            const differenceMs = Math.abs(toDate - fromDate);
+
+            return Math.round(differenceMs / ONE_DAY);
+        },
+
 
         getDifferenceMonth: function (fromDate, toDate) {
             return toDate.getMonth() - fromDate.getMonth() + (12 * (toDate.getFullYear() - fromDate.getFullYear())) + 1;
@@ -8000,6 +8038,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         'use strict';
         const REPORT_BY_MONTHLY = 2;
         const VALID_MONTH_RANGE = 3;
+        const VALID_DAY_RANGE = 7;
         const EXCEL_FILENAME = 'SabaVirtualSportsWinLoss.xls';
 
         const cacheData = {};
@@ -8042,7 +8081,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                     title: Site.getSingleResource('SabaVirtualSportsWinLoss')
                 });
                 DatePicker.initDateRangePicker();
-                DateHelper.setConstraintMonthRange(VALID_MONTH_RANGE, SabaVirtualSportsWinLossOption.urlExcelData);
+                DateHelper.setConstraintDayRange(VALID_DAY_RANGE, SabaVirtualSportsWinLossOption.urlExcelData);
             },
 
             registerGlobalFunction: function () {
@@ -8239,14 +8278,14 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                         $.each(data, function () {
                             str += _me.renderHtmlOption(this.Key, this.Value);
                         });
-                        
+
                         if (data.length > 0) {
                             $league.append(str);
                             $submitButton.prop('disabled', false);
                             $league.selectList('disabled', false);
                             $league.selectList('update');
                         }
-          
+
                         Site.unBlockUI();
                     }
                 });

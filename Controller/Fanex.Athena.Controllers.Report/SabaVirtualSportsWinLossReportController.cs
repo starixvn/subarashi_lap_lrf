@@ -41,7 +41,7 @@
         {
             var licenseeSession = SessionServiceInstance.LicenseeSession;
             var userSession = SessionServiceInstance.UserSession;
-            var reportSetting = _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss,
+            var reportSetting = _reportSettingService.GetSetting(PermissionKeys.ReportSabaVirtualSportsWinLoss,
                 licenseeSession.LicenseeName);
             var date = DateTime.Today;
             var productAccess = ProductServiceInstance.GetSingleWalletProductAccess(

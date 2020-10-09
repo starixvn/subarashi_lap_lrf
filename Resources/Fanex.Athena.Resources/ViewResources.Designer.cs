@@ -1951,6 +1951,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Date range exceeds {0} days. Please try again!.
+        /// </summary>
+        public static string DayRangeExceedMsg {
+            get {
+                return ResourceManager.GetString("DayRangeExceedMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to DD.
         /// </summary>
         public static string DD {

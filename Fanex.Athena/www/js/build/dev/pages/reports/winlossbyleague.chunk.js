@@ -5993,9 +5993,13 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             initialize: function () {
                 _productCount = $('#ProductList .childCheckbox[type=checkbox]').length;
 
+                var minDate = new Date();
+                minDate.setMonth(minDate.getMonth() - 11);
+
                 MultiSelect.initProductList();
                 MonthPicker.initMonthPicker({
-                    customAfterChangeDay: _me.loadLeagues
+                    customAfterChangeDay: _me.loadLeagues,
+                    minDate: minDate
                 });
                 _me.initEvent();
             },

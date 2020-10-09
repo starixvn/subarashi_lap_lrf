@@ -17,9 +17,13 @@
             initialize: function () {
                 _productCount = $('#ProductList .childCheckbox[type=checkbox]').length;
 
+                var minDate = new Date();
+                minDate.setMonth(minDate.getMonth() - 11);
+
                 MultiSelect.initProductList();
                 MonthPicker.initMonthPicker({
-                    customAfterChangeDay: _me.loadLeagues
+                    customAfterChangeDay: _me.loadLeagues,
+                    minDate: minDate
                 });
                 _me.initEvent();
             },
