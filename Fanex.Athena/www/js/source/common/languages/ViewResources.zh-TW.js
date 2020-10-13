@@ -1,4 +1,4 @@
-﻿// Generated at: 10/8/2020 4:40:34 PM
+﻿// Generated at: 10/13/2020 3:05:29 PM
 window._language_zh_TW = {
 AA:"客客",
 AbnormalBet:"非正規註單",
@@ -453,7 +453,7 @@ ProductNG:"百練賽",
 ProductParlay:"體育串關",
 ProductPP:"PP王者電子",
 ProductSB:"體育博彩",
-ProductSVS:"沙巴虛擬運動",
+ProductSVS:"沙巴虛擬賽事",
 ProductTG:"桌面遊戲",
 ProductVRG:"虛擬娛樂城",
 ProductVS:"虛擬運動",
