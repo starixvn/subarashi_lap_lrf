@@ -38,7 +38,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    _customerListService.DidNotReceiveWithAnyArgs().UpdateCustomerBAStatus(0, 0, 0, false,
+                    _customerListService.DidNotReceiveWithAnyArgs().UpdateCustomerBAStatus(0, "", 0, 0, null, false,
                         null);
                     Assert.That(resultData.GetValue("IsSuccessful"), Is.False);
                     Assert.That(resultData.GetValue("Message"), Is.EqualTo(ViewResources.NotAllowBA));
@@ -77,8 +77,8 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    _customerListService.DidNotReceiveWithAnyArgs().UpdateCustomerBAStatus(0, 
-                        0, 0, false, null);
+                    _customerListService.DidNotReceiveWithAnyArgs().UpdateCustomerBAStatus(0,
+                        "", 0, 0, null, false, null);
                     Assert.That(resultData.GetValue("IsSuccessful"), Is.False);
                     Assert.That(resultData.GetValue("Message"), Is.EqualTo(ResultMessage));
                     Assert.That(resultData.GetValue("IsBA"), Is.EqualTo(isAllowBa));
@@ -104,7 +104,7 @@
                 _productService.GetProductAccess(
                     SessionService.LicenseeSession.LicenseeId,
                     SessionService.UserSession.Language).Returns(productAccess);
-                _customerListService.UpdateCustomerBAStatus(0, 0, 0, false, null)
+                _customerListService.UpdateCustomerBAStatus(0, "", 0, 0, null, false, null)
                     .ReturnsForAnyArgs(new ResultInfo
                     {
                         ExtendedData = OddsGroup
@@ -119,8 +119,10 @@
                 {
                     _customerListService.Received(1).UpdateCustomerBAStatus(
                         SessionService.LicenseeSession.LicenseeId,
+                        SessionService.LicenseeSession.LicenseeName,
                         CustId,
                         SessionService.UserSession.UserId,
+                        null,
                         isAllowBa,
                         Arg.Any<Request>());
                     Assert.That(resultData.GetValue("IsSuccessful"), Is.True);

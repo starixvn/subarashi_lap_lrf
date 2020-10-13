@@ -111,7 +111,6 @@
 
                 var resultInfo = GetResult(db);
                 resultInfo.ExtendedData = Converter.ToString2(db.GetParameterValue("OddsGroup")).ToUpper(CultureInfo.CurrentCulture);
-
                 return resultInfo;
             }
         }

@@ -12,6 +12,7 @@ using Autofac;
 using Autofac.Integration.Mvc;
 using Autofac.Integration.WebApi;
 using Fanex.Athena.Api.StatelessBase.Logger;
+using Fanex.Athena.Controllers.Customer;
 using Fanex.Athena.DataAccess.Report;
 using Fanex.Athena.DataAccess.Report.Interfaces;
 using Fanex.Athena.Extension;
@@ -77,6 +78,7 @@ namespace Fanex.Athena
 
             builder.RegisteModulePlayerAdminApi(moduleAssemblies);
             builder.RegisteModulePlayerAdmin(moduleAssemblies);
+            builder.RegisteModuleCustomer(moduleAssemblies);
         }
 
         private static void RegisterHttpClient(ContainerBuilder builder)

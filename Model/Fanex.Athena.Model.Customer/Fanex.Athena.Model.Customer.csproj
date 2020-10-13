@@ -84,6 +84,7 @@
     <Compile Include="MetaModel\BaseCustomerComMetaModel.cs" />
     <Compile Include="MetaModel\CustomerListMetaModel.cs" />
     <Compile Include="MetaModel\CustomerLog\CustomerLogMetaModel.cs" />
+    <Compile Include="MetaModel\CustomerLog\PlayerUpdatingLogMetaModel.cs" />
     <Compile Include="MetaModel\CustomerOddsGroupMetaModel.cs" />
     <Compile Include="MetaModel\CustomerStatusMetaModel.cs" />
     <Compile Include="MetaModel\DeleteGroupMetaModel.cs" />

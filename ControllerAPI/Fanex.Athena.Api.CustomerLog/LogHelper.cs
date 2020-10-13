@@ -22,14 +22,17 @@ namespace Fanex.Athena.Api.CustomerLog
             Engine.Razor = RazorEngineService.Create(config);
         }
 
-        public static string[] GroupCommissionLogAttributes()
+        public static string[] GroupLogAttributes()
         {
             var result = new List<string>
             {
                 "GroupCommID",
                 "GroupName",
                 "GroupColor",
-                "IsDefault"
+                "IsDefault",
+                "Closed",
+                "Suspended",
+                "SpecialLevel"
             };
 
             var productPermissions = ActionViewModel.ProductPermissions;

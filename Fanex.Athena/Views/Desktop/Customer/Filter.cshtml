@@ -10,7 +10,7 @@
         showGroup = Model.IsAllowedCustomerCommission && !Model.IsFakeLicensee && !Model.IsSubsidiary,
         showUserGuide = !Model.IsFakeLicensee,
         showStatus = Model.Param.IsShowStatusDropdown,
-        showBA = !Model.IsSubsidiary && Model.ProductAccess.IsAllowBA,
+        showBA = Model.ProductAccess.IsAllowBA,
         showSubsidiary = Model.ViewType != SubsidiaryViewType.NotManagement,
         isMasterSubsidiaryView = Model.ViewType == SubsidiaryViewType.MasterManagement
     };
@@ -18,135 +18,135 @@
 <div class="page-form">
     @using (Html.BeginForm("CustomerList", "Customer", FormMethod.Post, new { @id = "CustomerForm" }))
     {
-            @Html.AntiForgeryToken()
-            <div class="row">
-                <div class="col l2 m2 s12 input-field">
-                    @DesktopRazorHelper.CurrencyList(Model.CurrencyList, "select", Model.Param.CurrencyId)
-                    <label>@ViewResources.Currency</label>
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="col l2 m2 s12 input-field">
+                @DesktopRazorHelper.CurrencyList(Model.CurrencyList, "select", Model.Param.CurrencyId)
+                <label>@ViewResources.Currency</label>
+            </div>
+            <div class="col l2 m2 s12 input-field">
+                @DesktopRazorHelper.BasedCurrency(Model.Param.BaseCurrency)
+                <label>@ViewResources.BaseCurrency</label>
+            </div>
+            <div class="col l2 m2 s12 input-field">
+                <div class="multiselect-container">
+                    <select id="grid-columns-multiselect"></select>
+                    <label>@ViewResources.Show/@ViewResources.hide</label>
                 </div>
-                <div class="col l2 m2 s12 input-field">
-                    @DesktopRazorHelper.BasedCurrency(Model.Param.BaseCurrency)
-                    <label>@ViewResources.BaseCurrency</label>
-                </div>
+            </div>
+            @if (showOption.showOddsGroup)
+            {
                 <div class="col l2 m2 s12 input-field">
                     <div class="multiselect-container">
-                        <select id="grid-columns-multiselect"></select>
-                        <label>@ViewResources.Show/@ViewResources.hide</label>
+                        <select id="odds-group-multiselect" name="odds-group-multiselect"></select>
                     </div>
+                    <label>@ViewResources.OddsGroup</label>
                 </div>
-                @if (showOption.showOddsGroup)
-                {
-                    <div class="col l2 m2 s12 input-field">
-                        <div class="multiselect-container">
-                            <select id="odds-group-multiselect" name="odds-group-multiselect"></select>
-                        </div>
-                        <label>@ViewResources.OddsGroup</label>
-                    </div>
-                }
+            }
 
-                @if (showOption.showStatus)
-                {
-                    <div class="col l2 m2 s12 input-field">
-                        @Html.DropDownList("CustStatusOption", new SelectList(new Dictionary<string, string>
-                    {
-                        {"",ViewResources.All},
-                        {"Open", ViewResources.Open},
-                        {"Closed", ViewResources.Closed},
-                        {"Suspended",ViewResources.Suspended},
-                    }, "Key", "Value", Model.Param.CustStatus), new { @style = "position: relative", @class = "select hide" })
-                        <label>
-                            @ViewResources.Status
-                        </label>
-                    </div>
-                }
-                @if (showOption.showSpecialLevel)
-                {
-                    <div class="col l2 m2 s12 input-field">
-                        <select id="special-level-list-search" class="select hide @("level-" + Model.Param.SpecialLevel)">
-                            <option value="-1" class="level-0" @(Model.Param.SpecialLevel == -1 ? "selected=selected" : "")>@ViewResources.All</option>
-                            @for (var i = 0; i <= 10; i++)
-                            {
-                                <option value="@i" class="@("level-" + i)" @(Model.Param.SpecialLevel == i ? "selected=selected" : "")>
-                                    @(i == 0 ? ViewResources.None : i.ToString())
-                                </option>
-                            }
-                        </select>
-                        <label>@ViewResources.SpecialLevel</label>
-                    </div>
-                }
-                @if (showOption.showUserGuide)
-                {
-                    <div class="col right icon-block">
-                        <i class="icon-book right" id="UserGuide" title="@ViewResources.UserGuide"></i>
-                    </div>
-                }
-            </div>
-
-            <div class="row">
-                @if (showOption.showBA)
-                {
-                    <div class="col l2 m2 s12 input-field">
-                        @Html.DropDownList("BAFilterOption", new SelectList(new Dictionary<string, string>
-                       {
-                           {"0", ViewResources.All},
-                           {"1",Fanex.Athena.Model.Core.DTO.Common.Product.BA},
-                           {"2",ViewResources.Normal},
-                       }, "Key", "Value", Model.Param.BAFilter), new { @style = "position: relative", @class = "select hide" })
-                        <label>@ViewResources.ProductBA</label>
-                    </div>
-                }
-                @{
-                    var oldGroup = new GroupCommMetaModel();
-                }
-                @if (showOption.showGroup)
-                {
-                    <div class="col l2 m2 s12 input-field">
-                        <select id="DdlGroupCommId" class="select hide">
-                            @{
-                                var groupList = new List<GroupCommMetaModel>(Model.GroupCommDataList);
-                                groupList.Insert(0, new GroupCommMetaModel { GroupCommId = -1, GroupName = ViewResources.All });
-                                groupList.Insert(1, new GroupCommMetaModel { GroupCommId = 0, GroupName = ViewResources.None });
-                            }
-                            @foreach (GroupCommMetaModel group in groupList)
-                            {
-                                var selected = string.Empty;
-                                if (group.GroupCommId == Model.Param.GroupCommId)
-                                {
-                                    selected = "selected=selected";
-                                    oldGroup = group;
-                                }
-                                <option @selected value="@group.GroupCommId">@group.GroupName</option>
-                            }
-                        </select>
-                        <label>@ViewResources.Group</label>
-                    </div>
-                }
+            @if (showOption.showStatus)
+            {
                 <div class="col l2 m2 s12 input-field">
-                    @Html.TextBox("Username", null, new { placeholder = (Model.IsFakeLicensee ? ViewResources.ExternalId : ViewResources.ExternalIdOrSystemId), autocomplete = "off" })
-                    <label>@ViewResources.Username</label>
-                    <ul id="suggestionDropdown" class="dropdown-content ac-dropdown"></ul>
-                </div>
-                @if (showOption.showSubsidiary)
+                    @Html.DropDownList("CustStatusOption", new SelectList(new Dictionary<string, string>
                 {
-                    <div class="col l2 m2 s12 input-field hide" id="subsidiary-view">
-                        <div class="multiselect-container">
-                            <select id="subsidiary-multiselect" name="subsidiary-multiselect"></select>
-                        </div>
-                        <label>@(showOption.isMasterSubsidiaryView ? ViewResources.WhiteLabel : ViewResources.Subsidiary)</label>
-                    </div>
-                }
-                <div class="col l2 m2 s12 button-block">
-                    <button type="button" id="SubmitButton" class="btn btn-primary">@ViewResources.Submit</button>
+                    {"",ViewResources.All},
+                    {"Open", ViewResources.Open},
+                    {"Closed", ViewResources.Closed},
+                    {"Suspended",ViewResources.Suspended},
+                }, "Key", "Value", Model.Param.CustStatus), new { @style = "position: relative", @class = "select hide" })
+                    <label>
+                        @ViewResources.Status
+                    </label>
                 </div>
+            }
+            @if (showOption.showSpecialLevel)
+            {
+                <div class="col l2 m2 s12 input-field">
+                    <select id="special-level-list-search" class="select hide @("level-" + Model.Param.SpecialLevel)">
+                        <option value="-1" class="level-0" @(Model.Param.SpecialLevel == -1 ? "selected=selected" : "")>@ViewResources.All</option>
+                        @for (var i = 0; i <= 10; i++)
+                        {
+                            <option value="@i" class="@("level-" + i)" @(Model.Param.SpecialLevel == i ? "selected=selected" : "")>
+                                @(i == 0 ? ViewResources.None : i.ToString())
+                            </option>
+                        }
+                    </select>
+                    <label>@ViewResources.SpecialLevel</label>
+                </div>
+            }
+            @if (showOption.showUserGuide)
+            {
+                <div class="col right icon-block">
+                    <i class="icon-book right" id="UserGuide" title="@ViewResources.UserGuide"></i>
+                </div>
+            }
+        </div>
 
-                @if (showOption.showSubsidiary)
-                {
-                    <div class="col l2 m2 s12 input-field">
-                        <input id="IsViewOnSubsidiary" type="checkbox" />
-                        <label for="IsViewOnSubsidiary">@ViewResources.SubsidiarySearch</label>
-                    </div>
-                }
+        <div class="row">
+            @if (showOption.showBA)
+            {
+                <div class="col l2 m2 s12 input-field">
+                    @Html.DropDownList("BAFilterOption", new SelectList(new Dictionary<string, string>
+                   {
+                       {"0", ViewResources.All},
+                       {"1",Fanex.Athena.Model.Core.DTO.Common.Product.BA},
+                       {"2",ViewResources.Normal},
+                   }, "Key", "Value", Model.Param.BAFilter), new { @style = "position: relative", @class = "select hide" })
+                    <label>@ViewResources.ProductBA</label>
+                </div>
+            }
+            @{
+                var oldGroup = new GroupCommMetaModel();
+            }
+            @if (showOption.showGroup)
+            {
+                <div class="col l2 m2 s12 input-field">
+                    <select id="DdlGroupCommId" class="select hide">
+                        @{
+                            var groupList = new List<GroupCommMetaModel>(Model.GroupCommDataList);
+                            groupList.Insert(0, new GroupCommMetaModel { GroupCommId = -1, GroupName = ViewResources.All });
+                            groupList.Insert(1, new GroupCommMetaModel { GroupCommId = 0, GroupName = ViewResources.None });
+                        }
+                        @foreach (GroupCommMetaModel group in groupList)
+                        {
+                            var selected = string.Empty;
+                            if (group.GroupCommId == Model.Param.GroupCommId)
+                            {
+                                selected = "selected=selected";
+                                oldGroup = group;
+                            }
+                            <option @selected value="@group.GroupCommId">@group.GroupName</option>
+                        }
+                    </select>
+                    <label>@ViewResources.Group</label>
+                </div>
+            }
+            <div class="col l2 m2 s12 input-field">
+                @Html.TextBox("Username", null, new { placeholder = (Model.IsFakeLicensee ? ViewResources.ExternalId : ViewResources.ExternalIdOrSystemId), autocomplete = "off" })
+                <label>@ViewResources.Username</label>
+                <ul id="suggestionDropdown" class="dropdown-content ac-dropdown"></ul>
             </div>
+            @if (showOption.showSubsidiary)
+            {
+                <div class="col l2 m2 s12 input-field hide" id="subsidiary-view">
+                    <div class="multiselect-container">
+                        <select id="subsidiary-multiselect" name="subsidiary-multiselect"></select>
+                    </div>
+                    <label>@(showOption.isMasterSubsidiaryView ? ViewResources.WhiteLabel : ViewResources.Subsidiary)</label>
+                </div>
+            }
+            <div class="col l2 m2 s12 button-block">
+                <button type="button" id="SubmitButton" class="btn btn-primary">@ViewResources.Submit</button>
+            </div>
+
+            @if (showOption.showSubsidiary)
+            {
+                <div class="col l2 m2 s12 input-field">
+                    <input id="IsViewOnSubsidiary" type="checkbox" />
+                    <label for="IsViewOnSubsidiary">@ViewResources.SubsidiarySearch</label>
+                </div>
+            }
+        </div>
         <div id="hiddenfield">
             @Html.Hidden("CurrencyId", Model.Param.CurrencyId)
             @Html.Hidden("BaFilter", Model.Param.BAFilter)
