@@ -148,7 +148,7 @@
 /******/
 /******/
 /******/ 	// add entry module to deferred list
-/******/ 	deferredModules.push([55,"www/js/build/dev/pages/lib/common","www/js/build/dev/pages/lib/jqgrid"]);
+/******/ 	deferredModules.push([56,"www/js/build/dev/pages/lib/common","www/js/build/dev/pages/lib/jqgrid"]);
 /******/ 	// run deferred modules when ready
 /******/ 	return checkDeferredModules();
 /******/ })
@@ -1462,12 +1462,50 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
             });
         },
 
+        setConstraintDayRange: function (dayRange, url) {
+            var errorMessage = Site.getSingleResource("DayRangeExceedMsg").replace("{0}", dayRange);
+
+            if (url && typeof url === "string") {
+                $(document).ajaxSend(function (event, jqxhr, settings) {
+                    if (settings.url.search(new RegExp(url, "i")) > -1 && _me.isValidDayRange(dayRange) === false) {
+                        _me.showMessageBox(errorMessage);
+                        jqxhr.abort();
+                    }
+                });
+            }
+
+            $("form").on("submit", function () {
+                if (_me.isValidDayRange(dayRange) === false) {
+                    _me.showMessageBox(errorMessage);
+                    return false;
+                }
+
+                return true;
+            });
+        },
+
+        isValidDayRange: function (dayRange) {
+            var fromDate = new Date($("#FromDate").val());
+            var toDate = new Date($("#ToDate").val());
+
+            return _me.getDifferenceDay(fromDate, toDate) <= dayRange;
+        },
+
         isValidRange: function (monthRange) {
             var fromDate = new Date($("#FromDate").val());
             var toDate = new Date($("#ToDate").val());
 
             return _me.getDifferenceMonth(fromDate, toDate) <= monthRange;
         },
+
+
+        getDifferenceDay: function (fromDate, toDate) {
+            const ONE_DAY = 1000 * 60 * 60 * 24;
+            const differenceMs = Math.abs(toDate - fromDate);
+
+            return Math.round(differenceMs / ONE_DAY);
+        },
+
 
         getDifferenceMonth: function (fromDate, toDate) {
             return toDate.getMonth() - fromDate.getMonth() + (12 * (toDate.getFullYear() - fromDate.getFullYear())) + 1;
@@ -8630,7 +8668,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
 /***/ }),
 
-/***/ 55:
+/***/ 56:
 /*!*******************************************************************!*\
   !*** multi ./www/js/source/pages/report/customerturnover/main.js ***!
   \*******************************************************************/

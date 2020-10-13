@@ -8,7 +8,7 @@
     using Base;
 
     using DataAccess.Core.Common.Interfaces;
-
+    using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
@@ -35,6 +35,8 @@
         private IMatchDataAccess _matchDataAccess = Substitute.For<IMatchDataAccess>();
 
         private readonly IBetTypeService _betTypeService = Substitute.For<IBetTypeService>();
+
+        private IAppSettings _appSettings = Substitute.For<IAppSettings>();
 
         [OneTimeSetUp]
         public void FixtureSetUp()
@@ -172,7 +174,8 @@
                 _sessionService,
                 _leagueDataAccess,
                 _matchDataAccess,
-                _betTypeService);
+                _betTypeService,
+                _appSettings);
         }
     }
 }

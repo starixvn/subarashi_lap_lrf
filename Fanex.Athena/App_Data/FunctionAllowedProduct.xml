@@ -5,6 +5,7 @@
   </Group>
 
   <Group Name="Report">
+    <Function Name="SabaVirtualSportsWinLoss" Product="SB,BA,CO"></Function>
     <Function Name="LicenseeWinLoss" Product="SB,BA,NG,VS,CS,KN,BT,AGC,VB,AB,FW,CO,VS2,LT,SG,PP,CC,VRG,TG,I4D,SXG,SBC"></Function>
     <Function Name="SpecialLicenseeWinLoss" Product="SB,NG,CS,LC"></Function>
     <Function Name="WinLossByTimeZone" Product="SB,BA"></Function>

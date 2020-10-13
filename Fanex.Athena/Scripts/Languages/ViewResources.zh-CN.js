@@ -1,4 +1,4 @@
-﻿// Generated at: 9/24/2020 10:00:09 AM
+﻿// Generated at: 10/8/2020 4:40:20 PM
 var _language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -540,6 +540,7 @@ ProductParlay:"体育串关",
 ProductPP:"PP王者电子",
 ProductSB:"体育博彩",
 ProductSG:"新霸电子",
+ProductSVS:"沙巴虚拟运动",
 ProductSXG:"AE真人",
 ProductTG:"桌面游戏",
 ProductVB:"澳门电子娱乐城",
@@ -576,6 +577,7 @@ RetractedPlayerUpdateVipStatusSingle:"遭撤回VIP的玩家: {0}",
 RNGCasinoUpdateSettingUnAvailableMsg:"RNG Casino Database is not currently available. Please try again later.",
 Running:"进行中",
 Sa:"Sa",
+SabaVirtualSportsWinLoss:"沙巴虚拟足球输赢",
 Saturday:"星期日",
 Save:"保存",
 SB:"体育博彩",

@@ -7,6 +7,7 @@
     using Base.UnitTests;
     using DataAccess.Core.Common.Interfaces;
     using DataAccess.Forecast.Interfaces;
+    using Fanex.Athena.Extension.Utility;
     using Model.Core.DTO.Common;
     using Model.Forecast.DTO.Forecast1X2;
     using Model.Forecast.MetaModel;
@@ -19,6 +20,8 @@
         private ILeagueDataAccess _leagueDataAccess;
 
         private IForecastOneXTwoDataAccess _forecastOneXTwoDataAccess;
+
+        protected IAppSettings AppSettings { get; set; }
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
@@ -34,7 +37,6 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                AppSettings.LicenseeOfferNewForecast.Returns(Enumerable.Empty<int>());
                 const int ExpectdLeagueId = -1;
                 var leagueList = Enumerable.Empty<League>();
                 var mainData = new List<ForecastOneXTwo>();
@@ -68,7 +70,7 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                AppSettings.LicenseeOfferNewForecast.Returns(Enumerable.Empty<int>());
+
                 var leagueList = leagueIDList.Select(x => new League { LeagueId = x }).ToList();
                 var mainData = new List<ForecastOneXTwo>();
 
@@ -103,7 +105,6 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                AppSettings.LicenseeOfferNewForecast.Returns(Enumerable.Empty<int>());
                 var leagueList = leagueIDList.Select(x => new League { LeagueId = x }).ToList();
                 var mainData = new List<ForecastOneXTwo>();
 
@@ -149,12 +150,17 @@
         {
             _forecastOneXTwoDataAccess = Substitute.For<IForecastOneXTwoDataAccess>();
             _leagueDataAccess = Substitute.For<ILeagueDataAccess>();
+            AppSettings = Substitute.For<IAppSettings>();
+
+            AppSettings.LicenseeOfferLeagueM88.Returns(Enumerable.Empty<int>());
+            AppSettings.LicenseeOfferNewForecast.Returns(Enumerable.Empty<int>());
 
             var controller = new OneXTwoForecastController(_leagueDataAccess, _forecastOneXTwoDataAccess)
             {
                 ControllerContext = ControllerContext,
                 LangService = LangService,
-                SessionServiceInstance = SessionService
+                SessionServiceInstance = SessionService,
+                AppSettingInstance = AppSettings
             };
 
             return controller;

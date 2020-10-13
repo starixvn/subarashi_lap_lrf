@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 9/24/2020 10:00:22 AM
+// Generated at: 10/8/2020 4:40:34 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -305,6 +305,7 @@ window._language_en_US = {
   DateRangeLimitNote: "Data is available within 3 months, from {0} to {1}.",
   DateRangeNote: "Data is available from {0:d MMM yyyy}",
   Day: "Day",
+  DayRangeExceedMsg: "Date range exceeds {0} days. Please try again!",
   DD: "DD",
   DeactivateVip: "Deactivate VIP",
   Dec: "Dec",
@@ -697,6 +698,7 @@ window._language_en_US = {
   ProductSB: "Sportsbook",
   ProductSBC: "Saba.club",
   ProductSG: "SG",
+  ProductSVS: "Saba Virtual Sports",
   ProductSXG: "AE Casino",
   ProductTG: "Table Game",
   ProductVB: "Macau Games",
@@ -734,6 +736,7 @@ window._language_en_US = {
   RNGCasinoUpdateSettingUnAvailableMsg: "RNG Casino Database is not currently available. Please try again later.",
   Running: "Running",
   Sa: "Sa",
+  SabaVirtualSportsWinLoss: "Saba Virtual Sports Win Loss",
   Saturday: "Saturday",
   Save: "Save",
   SB: "SB",

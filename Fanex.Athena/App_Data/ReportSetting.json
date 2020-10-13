@@ -5,6 +5,12 @@
     "MaxDateString": ""
   },
   {
+    "ReportKey": "SabaVirtualSportsWinLoss",
+    "MinDateString": "08/01/2018",
+    "MaxDateString": "today",
+    "LimitRecentMonths": 12
+  },
+  {
     "ReportKey": "ExchangeWinloss77",
     "MinDateString": "",
     "MaxDateString": ""

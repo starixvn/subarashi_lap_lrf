@@ -69,6 +69,8 @@ namespace Fanex.Athena.Controllers.Report.Result
         {
             if (ModelState.IsValid)
             {
+                metaModel.IsOfferLeagueM88 = AppSettingInstance.LicenseeOfferLeagueM88.Contains(SessionServiceInstance.LicenseeSession.LicenseeId);
+
                 var data = await _betListApiClient.PostStringAsync(
                     "/ResultReport/Index",
                     metaModel,
@@ -92,6 +94,8 @@ namespace Fanex.Athena.Controllers.Report.Result
 
             const string FileName = "LRF-Result.xls";
             metaModel.LicenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
+            metaModel.IsOfferLeagueM88 = AppSettingInstance.LicenseeOfferLeagueM88.Contains(metaModel.LicenseeId);
+
             var stream = await _betListApiClient.PostStreamAsync(
                 "/ResultReport/ResultExcel",
                 metaModel,
@@ -114,6 +118,7 @@ namespace Fanex.Athena.Controllers.Report.Result
                    language,
                    ResultPageGetNormalSportsName);
                 metaModel.ProductCodeList = string.Join(",", productAccess.ProductList.Select(x => x.ProductCode));
+                metaModel.IsOfferLeagueM88 = AppSettingInstance.LicenseeOfferLeagueM88.Contains(metaModel.LicenseeId);
                 var result = await _betListApiClient.PostStringAsync(
                     "/ResultReport/GetSports",
                     metaModel,

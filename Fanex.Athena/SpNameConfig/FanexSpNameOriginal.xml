@@ -42,6 +42,9 @@
   </Function>
 
   <Function Name="Report">
+    <Setting Key="Lrf_Rpt_SabaVirtualSportsWinLoss" SpName="Lrf_Rpt_SabaVirtualSportsWinLoss" DbName="DBEXT.bodb02.bodbLicenseeNet" />
+    <Setting Key="Lrf_Rpt_SabaVirtualSportsWinLoss_Mem" SpName="Lrf_Rpt_SabaVirtualSportsWinLoss_Mem" DbName="DBEXT.bodb02.bodbLicenseeNet" />
+    <Setting Key="Lrf_Rpt_SabaVirtualSportsWinLoss_Ag" SpName="Lrf_Rpt_SabaVirtualSportsWinLoss_Ag" DbName="DBEXT.bodb02.bodbLicenseeNet" />
     <Setting Key="Lrf_Rpt_PlatformWinloss" SpName="Lrf_Rpt_PlatformWinloss" DbName="DBEXT.bodb02.bodbLicenseeNet" />
     <Setting Key="Lrf_Rpt_PlatformWinlossDetail" SpName="Lrf_Rpt_PlatformWinlossDetail" DbName="DBEXT.bodb02.bodbLicenseeNet" />
     <Setting Key="Lrf_Rpt_MatchWinLossDetail" SpName="Lrf_Rpt_MatchWinLossDetail" DbName="DBEXT.bodb02.bodbLicenseeNet" />

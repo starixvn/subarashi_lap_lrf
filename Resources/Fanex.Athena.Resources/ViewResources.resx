@@ -2882,4 +2882,14 @@
   <data name="Live2" xml:space="preserve">
     <value>Live</value>
   </data>
+  <data name="SabaVirtualSportsWinLoss" xml:space="preserve">
+    <value>Saba Virtual Sports Win Loss</value>
+    <comment>141454</comment>
+  </data>
+  <data name="ProductSVS" xml:space="preserve">
+    <value>Saba Virtual Sports</value>
+  </data>
+  <data name="DayRangeExceedMsg" xml:space="preserve">
+    <value>Date range exceeds {0} days. Please try again!</value>
+  </data>
 </root>

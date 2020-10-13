@@ -2110,4 +2110,12 @@
   <data name="VIPPlayerTooltipMsg" xml:space="preserve">
     <value>被標示在玩家管理報告中的VIP玩家</value>
   </data>
+  <data name="SabaVirtualSportsWinLoss" xml:space="preserve">
+    <value>沙巴虛擬足球輸贏</value>
+    <comment>141454</comment>
+  </data>
+  <data name="ProductSVS" xml:space="preserve">
+    <value>沙巴虛擬運動</value>
+    <comment>141454</comment>
+  </data>
 </root>

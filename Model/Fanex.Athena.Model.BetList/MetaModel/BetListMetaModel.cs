@@ -94,6 +94,8 @@ namespace Fanex.Athena.Model.BetList.MetaModel
 
         public int BetType { get; set; }
 
+        public int SportType { get; set; }
+
         public string MultipleBettype { get; set; }
 
         public string BetTeam { get; set; }

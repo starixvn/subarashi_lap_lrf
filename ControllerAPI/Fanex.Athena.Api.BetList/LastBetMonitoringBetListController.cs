@@ -7,6 +7,7 @@
 
     using Base;
     using Base.Attributes;
+    using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Service.Core.Common.Interfaces;
@@ -26,22 +27,28 @@
 
         private readonly ICacheRefAdapter _cacheRefAdapter;
 
+        private readonly IAppSettings _appSettings;
+
         public LastBetMonitoringBetListController(
             ILanguageService languageService,
             IBetListApiClient betListApiClient,
             IMatchService matchService,
-            ICacheRefAdapter cacheRefAdapter)
+            ICacheRefAdapter cacheRefAdapter,
+            IAppSettings appSettings)
         : base(languageService)
         {
             _betListApiClient = betListApiClient;
             _matchService = matchService;
             _cacheRefAdapter = cacheRefAdapter;
+            _appSettings = appSettings;
         }
 
         [HttpGet]
         public async Task<dynamic> GetRunningMatchList(int sportId)
         {
-            var matchList = await _matchService.GetAllRunningMatchAsync(sportId, SessionService.UserSession.Language).ConfigureAwait(false);
+            var isOfferLeagueM88 = _appSettings.LicenseeOfferLeagueM88.Contains(SessionService.LicenseeSession.LicenseeId);
+
+            var matchList = await _matchService.GetAllRunningMatchAsync(sportId, SessionService.UserSession.Language, isOfferLeagueM88).ConfigureAwait(false);
 
             var leagueListNormal = matchList.Where(i => !i.IsOutRight).Select(m => m.LeagueId).Distinct()
                                       .Select(l => new League

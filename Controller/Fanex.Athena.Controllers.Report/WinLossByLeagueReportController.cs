@@ -53,6 +53,8 @@ namespace Fanex.Athena.Controllers.Report
             var date = DateTime.Now;
             var productAccess = ProductServiceInstance.GetProductAccess(licenseeSession.LicenseeId, userSession.Language);
             var productList = productAccess.ProductList.Where(x => x.ProductCode == Product.SB || x.ProductCode == Product.BA);
+            var isOfferLeagueM88 = AppSettingInstance.LicenseeOfferLeagueM88.Contains(licenseeSession.LicenseeId);
+
             var metaModel = new WinLossByLeagueMetaModel
             {
                 LicenseeId = licenseeSession.LicenseeId,
@@ -73,7 +75,7 @@ namespace Fanex.Athena.Controllers.Report
                                 ToDate = metaModel.ToDate,
                                 AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,
                                 metaModel.CurrencyId)
-                            }).ConfigureAwait(false);
+                            }, isOfferLeagueM88).ConfigureAwait(false);
 
             var firstLeague = leagues.FirstOrDefault();
 
@@ -99,7 +101,9 @@ namespace Fanex.Athena.Controllers.Report
         [AutoBindMetaModel(BindAgent = true, BindUserId = true)]
         public async Task<ActionResult> GetLeaguesBySport(LeagueMetaModel metaModel)
         {
-            var leagues = (await _leagueDataAccess.GetLeaguesBySport(metaModel).ConfigureAwait(false))
+            var isOfferLeagueM88 = AppSettingInstance.LicenseeOfferLeagueM88.Contains(SessionServiceInstance.LicenseeSession.LicenseeId);
+
+            var leagues = (await _leagueDataAccess.GetLeaguesBySport(metaModel, isOfferLeagueM88).ConfigureAwait(false))
                             .Select(x => new { Key = x.LeagueId, Value = x.LeagueName });
             return Json(leagues);
         }

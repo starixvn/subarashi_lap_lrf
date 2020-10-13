@@ -7,6 +7,7 @@
     using System.Web.Http;
 
     using DataAccess.Core.Common.Interfaces;
+    using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
@@ -38,13 +39,16 @@
 
         private readonly IBetTypeService _betTypeService;
 
+        private readonly IAppSettings _appSettings;
+
         public CommonDataApiController(
             ILanguageService langService,
             ISportTypeDataAccess sportTypeDataAccess,
             ISessionService sessionService,
             ILeagueDataAccess leagueDataAccess,
             IMatchDataAccess matchDataAccess,
-            IBetTypeService betTypeService)
+            IBetTypeService betTypeService,
+            IAppSettings appSettings)
         {
             _langService = langService;
             _sportTypeDataAccess = sportTypeDataAccess;
@@ -52,6 +56,7 @@
             _leagueDataAccess = leagueDataAccess;
             _matchDataAccess = matchDataAccess;
             _betTypeService = betTypeService;
+            _appSettings = appSettings;
         }
 
         protected override void Initialize(System.Web.Http.Controllers.HttpControllerContext controllerContext)
@@ -103,7 +108,8 @@
                 AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)
             };
 
-            var leagues = await _leagueDataAccess.GetLeaguesBySport(metaModel).ConfigureAwait(false);
+            var isOfferLeagueM88 = _appSettings.LicenseeOfferLeagueM88.Contains(_sessionService.LicenseeSession.LicenseeId);
+            var leagues = await _leagueDataAccess.GetLeaguesBySport(metaModel, isOfferLeagueM88).ConfigureAwait(false);
 
             return leagues.Select(x => new { value = x.LeagueId, label = x.LeagueName });
         }

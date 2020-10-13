@@ -6,7 +6,7 @@
     using System.Threading.Tasks;
 
     using Base.UnitTests;
-
+    using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     using Model.BetList.MetaModel;
@@ -28,6 +28,8 @@
 
         private IBetListApiClient _betListApiClient;
 
+        private IAppSettings _appSettings;
+
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
@@ -36,6 +38,7 @@
             _betListApiClient = Substitute.For<IBetListApiClient>();
             _cacheRefAdapter = Substitute.For<ICacheRefAdapter>();
             _matchService = Substitute.For<IMatchService>();
+            _appSettings = Substitute.For<IAppSettings>();
 
             MockSessionData();
         }
@@ -131,7 +134,7 @@
 
         private LastBetMonitoringBetListController CreateController()
         {
-            return new LastBetMonitoringBetListController(LangService, _betListApiClient, _matchService, _cacheRefAdapter)
+            return new LastBetMonitoringBetListController(LangService, _betListApiClient, _matchService, _cacheRefAdapter, _appSettings)
             {
                 SessionService = SessionService,
                 ProductService = ProductService

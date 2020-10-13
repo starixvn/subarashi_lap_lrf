@@ -133,7 +133,9 @@
     <Compile Include="ActiveCustomerSummaryExcel.cs" />
     <Compile Include="Helpers\ReportExcelHelper.cs" />
     <Compile Include="AgCasinoBalanceExcel.cs" />
+    <Compile Include="SabaVirtualSportsExcel.cs" />
     <Compile Include="Models\CustomerPendingFundsExcelModel.cs" />
+    <Compile Include="Models\SabaVirtualSportsWinLossExcelModel.cs" />
     <Compile Include="Models\LicenseeWinLossExcelModel.cs" />
     <Compile Include="Models\WinLossByProductExcelModel.cs" />
     <Compile Include="ColossusBetsWinLossExcel.cs" />

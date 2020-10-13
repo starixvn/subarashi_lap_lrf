@@ -148,7 +148,7 @@
 /******/
 /******/
 /******/ 	// add entry module to deferred list
-/******/ 	deferredModules.push([28,"www/js/build/dev/pages/lib/common","www/js/build/dev/pages/lib/jqgrid"]);
+/******/ 	deferredModules.push([29,"www/js/build/dev/pages/lib/common","www/js/build/dev/pages/lib/jqgrid"]);
 /******/ 	// run deferred modules when ready
 /******/ 	return checkDeferredModules();
 /******/ })
@@ -5993,9 +5993,13 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             initialize: function () {
                 _productCount = $('#ProductList .childCheckbox[type=checkbox]').length;
 
+                var minDate = new Date();
+                minDate.setMonth(minDate.getMonth() - 11);
+
                 MultiSelect.initProductList();
                 MonthPicker.initMonthPicker({
-                    customAfterChangeDay: _me.loadLeagues
+                    customAfterChangeDay: _me.loadLeagues,
+                    minDate: minDate
                 });
                 _me.initEvent();
             },
@@ -6692,7 +6696,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
 /***/ }),
 
-/***/ 28:
+/***/ 29:
 /*!******************************************************************!*\
   !*** multi ./www/js/source/pages/report/winlossbyleague/main.js ***!
   \******************************************************************/

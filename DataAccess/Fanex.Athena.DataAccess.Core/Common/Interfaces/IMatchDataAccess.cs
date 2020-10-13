@@ -15,7 +15,7 @@ namespace Fanex.Athena.DataAccess.Core.Common.Interfaces
     {
         Task<IList<Match>> GetForecastMatchListByLeague(int leagueId);
 
-        Task<IList<Match>> GetAllRunningMatch(int sportId);
+        Task<IList<Match>> GetAllRunningMatch(int sportId, bool isOfferLeagueM88 = false);
 
         Task<IList<Match>> GetMatchesByLeague(int leagueId, DateTime fromDate, DateTime toDate, int sportId = 0);
     }

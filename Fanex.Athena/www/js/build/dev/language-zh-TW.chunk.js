@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 9/24/2020 10:00:23 AM
+﻿// Generated at: 10/8/2020 4:40:34 PM
 window._language_zh_TW = {
 AA:"客客",
 AbnormalBet:"非正規註單",
@@ -548,6 +548,7 @@ ProductNG:"百練賽",
 ProductParlay:"體育串關",
 ProductPP:"PP王者電子",
 ProductSB:"體育博彩",
+ProductSVS:"沙巴虛擬運動",
 ProductTG:"桌面遊戲",
 ProductVRG:"虛擬娛樂城",
 ProductVS:"虛擬運動",
@@ -575,6 +576,7 @@ Results:"賽果",
 RNGCasinoUpdateSettingUnAvailableMsg:"RNG Casino Database is not currently available. Please try again later.",
 Running:"進行中",
 Sa:"Sa",
+SabaVirtualSportsWinLoss:"沙巴虛擬足球輸贏",
 Saturday:"星期日",
 Save:"保存",
 SB:"體育博彩",
