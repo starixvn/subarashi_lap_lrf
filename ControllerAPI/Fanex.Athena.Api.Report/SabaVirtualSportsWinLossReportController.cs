@@ -32,7 +32,7 @@
 
     using Service.Core.Common.Interfaces;
 
-    [ApiFunctionAuthorization(PermissionKeys.ReportLicenseeWinLoss)]
+    [ApiFunctionAuthorization(PermissionKeys.ReportSabaVirtualSportsWinLoss)]
     public class SabaVirtualSportsWinLossReportController : ApiReportBaseController
     {
         private readonly IReportSettingService _reportSettingService;
