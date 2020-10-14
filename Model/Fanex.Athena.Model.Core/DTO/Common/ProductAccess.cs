@@ -96,6 +96,14 @@ namespace Fanex.Athena.Model.Core.DTO.Common
             }
         }
 
+        public bool IsAllowSAG
+        {
+            get
+            {
+                return ProductList.Any(p => p.ProductCode == Product.SAG);
+            }
+        }
+
         public bool IsAllowI4D
         {
             get

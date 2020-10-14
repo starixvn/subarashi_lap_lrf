@@ -196,7 +196,8 @@
                 Product.TG,
                 Product.I4D,
                 Product.SXG,
-                Product.SBC
+                Product.SBC,
+                Product.SAG
             };
 
             var productAccess = _productService.GetSingleWalletProductAccess(

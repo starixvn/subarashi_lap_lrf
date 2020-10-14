@@ -2593,6 +2593,13 @@
   <data name="ESportsApp" xml:space="preserve">
     <value>E-Sports App</value>
   </data>
+ <data name="ProductSAG" xml:space="preserve">
+    <value>SA Gaming</value>
+    <comment>128493</comment>
+  </data>
+  <data name="ExtraPayout" xml:space="preserve">
+    <value>Extra Payout</value>
+  </data>
   <data name="MarkDate" xml:space="preserve">
     <value>Mark Date</value>
     <comment>#128082</comment>

@@ -261,6 +261,17 @@ class BetList {
         return url;
     }
 
+    getSAGamingDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
+        let url = rootUrl + 'SAGamingBetList/Detail';
+        url = QueryString.setParam(url, 'transId', transId);
+        url = QueryString.setParam(url, 'date', winlostDate);
+        url = QueryString.setParam(url, 'custId', custId);
+        url = QueryString.setParam(url, 'transType', transType);
+        url = QueryString.setParam(url, 'BaseCurrency', baseCurrency);
+
+        return url;
+    }
+
     getSBCDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
         let url = rootUrl + 'SabaClubBetList/Detail';
         url = QueryString.setParam(url, 'transId', transId);
@@ -331,6 +342,16 @@ class BetList {
     getAllBetResultUrl(rootUrl, transdesc, betcheck, bettype) {
         let url = rootUrl + 'ResultReport/AllBetResult';
         url = QueryString.setParam(url, 'betcheck', betcheck);
+        url = QueryString.setParam(url, 'bettype', bettype);
+        url = QueryString.setParam(url, 'transdesc', encodeURIComponent(transdesc));
+
+        return url;
+
+    }
+
+    getSAGamingResultUrl(rootUrl, transdesc, matchCode, bettype) {
+        let url = rootUrl + 'ResultReport/SAGaming';
+        url = QueryString.setParam(url, 'matchCode', matchCode);
         url = QueryString.setParam(url, 'bettype', bettype);
         url = QueryString.setParam(url, 'transdesc', encodeURIComponent(transdesc));
 

@@ -60,6 +60,10 @@ class BetListLayout extends Component {
                 const url = BetList.getAllBetResultUrl(rootUrl, transdecs, extension2, bettype);
                 this._openPopup(url, title);
             }
+            else if (sporttype === SportType.SAG) {
+                const url = BetList.getSAGamingResultUrl(rootUrl, transdecs, extension2, bettype);
+                this._openPopup(url, title);
+            }
             else if (sporttype === SportType.GLOBALGAMING) {
                 const url = BetList.getGlobalGamingResultUrl(rootUrl, custid, extension2);
                 this._showThirdPartyResult(url, title);
@@ -231,6 +235,16 @@ class BetListLayout extends Component {
             this._openPopup(url, title);
         }
 
+        window.showSAGamingDetails = (transId, winlostDate, custId, transType) => {
+            const { rootUrl, baseCurrency } = this.props;
+
+            const url = BetList.getSAGamingDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
+            const title = this._getResource('ProductSAG') + ' - ' +
+                this._getResource('DetailedBetlist') + ' - ' + this._formatDateString(winlostDate);
+
+            this._openPopup(url, title);
+        }
+
         window.showSabaClubDetails = (transId, winlostDate, custId, transType) => {
             const { rootUrl, baseCurrency } = this.props;
 
@@ -261,6 +275,7 @@ class BetListLayout extends Component {
         window.showSingleMatchParlayDetail = undefined;
         window.showSGDetails = undefined;
         window.showSexyGamingBetDetails = undefined;
+        window.showSAGamingDetails = undefined;
         window.showSabaClubDetails = undefined;
     }
 

@@ -66,6 +66,8 @@ namespace Fanex.Athena.Model.Core.DTO.Common
         
         public const string SBC = "SBC";
 
+        public const string SAG = "SAG";
+
         #endregion Field
 
         #region Constructor
