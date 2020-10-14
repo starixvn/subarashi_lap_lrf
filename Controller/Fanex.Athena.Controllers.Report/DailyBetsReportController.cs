@@ -50,7 +50,7 @@ namespace Fanex.Athena.Controllers.Report
                     Status = true
                 }).ToList(),
                 TodayByGmt8 = today,
-                MinDate = today.AddMonths(-limitedMonthRange)
+                MinDate = today.AddMonths(-limitedMonthRange + 1)
             };
 
             return View("~/Views/Desktop/Report/DailyBets/Index.cshtml", viewModel);
