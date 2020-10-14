@@ -1,4 +1,4 @@
-﻿// Generated at: 10/13/2020 3:05:29 PM
+﻿// Generated at: 10/14/2020 11:02:16 AM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -633,6 +633,7 @@ ReportBy:"Report By",
 Reset:"Reset",
 ResetPassword:"Reset Password",
 ResetPasswordSuccessMsg:"Reset password successfully!",
+Resettled:"Resettled",
 Result:"Result",
 ResultPending:"Result Pending",
 Results:"Results",

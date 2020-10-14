@@ -1,4 +1,4 @@
-﻿// Generated at: 10/13/2020 3:05:25 PM
+﻿// Generated at: 10/14/2020 11:02:02 AM
 var _language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -569,6 +569,7 @@ ReportBy:"报告由",
 Reset:"重设",
 ResetPassword:"重设密码",
 ResetPasswordSuccessMsg:"重置密码成功!",
+Resettled:"重新结算",
 Result:"赛果",
 ResultPending:"赛果待定",
 Results:"赛果",

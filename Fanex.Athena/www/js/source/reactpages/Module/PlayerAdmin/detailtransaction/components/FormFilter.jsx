@@ -6,6 +6,8 @@ import LangHelper from '@jsroot/lib/langHelper';
 import { DateRange } from '@jsroot/components/date-range/index';
 import AppData from '@jsroot/lib/AppData';
 import { ActionCreators } from '../actions/index.js';
+import Site from '@jsroot/lib/site';
+import $ from 'jquery';
 
 const RANGE_MONTH_CONSTRAINT = 3;
 const dateConstraint = AppData.dateConstraint;
@@ -42,16 +44,40 @@ export class FormFilter extends PureComponent {
             requestParam: Object.assign(this.props.requestParam, newRequestParam)
         });
     };
-
+    changeResettled = (checked) => {
+        this.setState({
+            requestParam: Object.assign(this.props.requestParam, { IsResettled: checked })
+        });
+    };
+    changeTransactionId = (value) => {
+        this.setState({
+            requestParam: Object.assign(this.props.requestParam, { TransactionId: value })
+        });
+    };
     onSubmit = () => {
         const param = Object.assign({}, this.props.requestParam, { PageSize: DEFAULT_PAGE_SIZE, PageIndex: DEFAULT_PAGE_INDEX });
-         this.props.getDetailTransactionReport(param);
+        this.props.getDetailTransactionReport(param);
     };
 
     exportExcel = (event) => {
         event.preventDefault();
         const param = Object.assign({}, this.props.requestParam);
-        this.props.exportDetailTransactionReport(param);
+
+        const relativeUrl = 'PlayerDetailTransaction/ExportDetailTransactionReport';
+        const url = Site.resolveClientUrl(relativeUrl);
+        const excelForm = $("#form-excel-detail-transaction");
+
+        excelForm.find("#CustId").val(param.CustId);
+        excelForm.find("#CurrencyId").val(param.CurrencyId);
+        excelForm.find("#FromDate").val(param.FromDate);
+        excelForm.find("#ToDate").val(param.ToDate);
+        excelForm.find("#PageSize").val(param.PageSize);
+        excelForm.find("#PageIndex").val(param.PageIndex);
+        excelForm.find("#TransactionId").val(param.TransactionId);
+        excelForm.find("#IsResettled").val(param.IsResettled);
+
+        excelForm.attr("action", url);
+        excelForm.submit();
     };
 
     render() {
@@ -64,6 +90,24 @@ export class FormFilter extends PureComponent {
                             {this._renderDateRange()}
                         </div>
                     </div>
+                    <div className='col-8 col-sm-5 col-md-3 col-xl-2'>
+                        <div className='form-group'>
+                            <label className='label-text'>{LangHelper.getSingleResource("TransactionID")}</label>
+                            <input className="input-text" id="txt-transction-id" name="TransactionId" type="text"
+                                autoComplete="off"
+                                onChange={event => this.changeTransactionId(event.target.value)} />
+                        </div>
+                    </div>
+                    <div className='col-12 col-md-2 col-sm-2 col-lg-2 col-xl-1'>
+                        <div className='form-group'>
+                            <div class="chk-group">
+                                <input id="chk-resettled" name="IsResettled" type="checkbox"
+                                    class="chk-resettled" autoComplete="off"
+                                    onChange={event => this.changeResettled(event.target.checked)} />
+                                <label for="chk-resettled" class="lbl-resettled">{LangHelper.getSingleResource("Resettled")}</label>
+                            </div>
+                        </div>
+                    </div>
                     <div className="col-12 col-md-2 col-sm-2 col-lg-2 col-xl-1">
                         <div className="form-group">
                             <div className="button-group">
@@ -73,6 +117,16 @@ export class FormFilter extends PureComponent {
                     </div>
                     <div className="caret-block">
                         <i className="icon-excel right" onClick={this.exportExcel} title={LangHelper.getSingleResource("ExportToExcel")}></i>
+                        <form id="form-excel-detail-transaction">
+                            <input type="hidden" id="CustId" name="CustId" value="" />
+                            <input type="hidden" id="FromDate" name="FromDate" value="" />
+                            <input type="hidden" id="ToDate" name="ToDate" value="" />
+                            <input type="hidden" id="CurrencyId" name="CurrencyId" value="" />
+                            <input type="hidden" id="PageSize" name="PageSize" value="" />
+                            <input type="hidden" id="PageIndex" name="PageIndex" value="" />
+                            <input type="hidden" id="TransactionId" name="TransactionId" value="" />
+                            <input type="hidden" id="IsResettled" name="IsResettled" value="" />
+                        </form>
                     </div>
                 </div>
             </div>
@@ -81,8 +135,8 @@ export class FormFilter extends PureComponent {
 };
 
 function mapDispatchToProps(dispatch) {
-    const { setRequestParam, getDetailTransactionReport, exportDetailTransactionReport } = ActionCreators;
-    return bindActionCreators({ setRequestParam, getDetailTransactionReport, exportDetailTransactionReport }, dispatch);
+    const { setRequestParam, getDetailTransactionReport } = ActionCreators;
+    return bindActionCreators({ setRequestParam, getDetailTransactionReport }, dispatch);
 }
 
 function mapStateToProps(state) {

@@ -223,6 +223,6 @@
     <Setting Key="Portal_Sub_GetSubsidiaryList" SpName="Portal_Sub_GetSubsidiaryList" DbName="DBCUST.SiteConfig.Dot_Admin_Portal" />
   </Function>
   <Function Name="Player Admin - Detail Transaction">
-    <Setting Key="LAP_Rpt_DetailTransaction_Mem" SpName="LAP_Rpt_DetailTransaction_Mem" DbName="DBBAH.bodb02.bodbLicenseeNet" />
+    <Setting Key="LAP_Rpt_DetailTransaction_Mem" SpName="LAP_Rpt_DetailTransaction_Mem_xtest" DbName="DBBAH.bodb02.bodbLicenseeNet" />
   </Function>
 </Functions>

@@ -22,12 +22,3 @@ export const getDetailTransactionReport = (param) => (dispatch) => {
         processAfterGettingData(dispatch);
     });
 };
-
-export const exportDetailTransactionReport = (param) => (dispatch) => {
-    processBeforeGettingData(dispatch);
-
-    const service = new DetailTransactionReportService();
-    service.exportData(param, result => {
-        processAfterGettingData(dispatch);
-    });
-};

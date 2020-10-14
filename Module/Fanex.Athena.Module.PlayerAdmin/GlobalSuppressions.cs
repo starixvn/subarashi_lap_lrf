@@ -15,4 +15,4 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Minor Code Smell", "S2325:Methods and properties that don't access instance data should be static", Justification = "<Pending>", Scope = "member", Target = "~P:Fanex.Athena.Module.PlayerAdmin.MetaModel.PlayerDetailTransactionsMetaModel.MinDate")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S109:Magic numbers should not be used", Justification = "<Pending>", Scope = "member", Target = "~P:Fanex.Athena.Module.PlayerAdmin.ViewModels.PlayerDetailTransactionViewModel.BalanceChangeStr")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S109:Magic numbers should not be used", Justification = "<Pending>", Scope = "member", Target = "~P:Fanex.Athena.Module.PlayerAdmin.ViewModels.PlayerDetailTransactionViewModel.AfterBalanceStr")]
-
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S4142:Duplicate values should not be passed as arguments", Justification = "<Pending>", Scope = "member", Target = "~M:Fanex.Athena.Module.PlayerAdmin.Excel.PlayerDetailTransactionExcel.AssignNoInfoRow(NPOI.SS.UserModel.ISheet)")]
