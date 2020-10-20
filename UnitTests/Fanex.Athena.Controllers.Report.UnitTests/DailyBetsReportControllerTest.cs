@@ -80,10 +80,10 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                var licenseeSetting = new FakeLicenseeSetting { TimeZone = 1 };
+                var licenseeSetting = new FakeLicenseeSetting { TimeZone = 1, LimitRecentMonths = 1 };
                 _licenseeSettingService.GetFakeLicenseeSetting(DefaultLicenseeSession.LicenseeName).Returns(licenseeSetting);
                 var expectedTodatGtm8 = DateTime.UtcNow.AddHours(licenseeSetting.TimeZone.Value);
-                var expectedMinDate = expectedTodatGtm8.AddMonths(-licenseeSetting.LimitRecentMonths);
+                var expectedMinDate = expectedTodatGtm8.AddMonths(-licenseeSetting.LimitRecentMonths + 1);
 
                 // Action
                 var result = (controller.Index() as ViewResult).Model as DailyBetsViewModel;
@@ -106,7 +106,7 @@
                 FakeLicenseeSetting licenseeSetting = null;
                 _licenseeSettingService.GetFakeLicenseeSetting(DefaultLicenseeSession.LicenseeName).Returns(licenseeSetting);
                 var expectedTodatGtm8 = DateTime.Now;
-                var expectedMinDate = expectedTodatGtm8.AddMonths(-DefaultLimitedMonthRange);
+                var expectedMinDate = expectedTodatGtm8.AddMonths(-DefaultLimitedMonthRange + 1);
 
                 // Action
                 var result = (controller.Index() as ViewResult).Model as DailyBetsViewModel;
@@ -126,10 +126,10 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                var licenseeSetting = new FakeLicenseeSetting();
+                var licenseeSetting = new FakeLicenseeSetting() { LimitRecentMonths = 1 };
                 _licenseeSettingService.GetFakeLicenseeSetting(DefaultLicenseeSession.LicenseeName).Returns(licenseeSetting);
                 var expectedTodatGtm8 = DateTime.Now;
-                var expectedMinDate = expectedTodatGtm8.AddMonths(-licenseeSetting.LimitRecentMonths);
+                var expectedMinDate = expectedTodatGtm8.AddMonths(-licenseeSetting.LimitRecentMonths + 1);
 
                 // Action
                 var result = (controller.Index() as ViewResult).Model as DailyBetsViewModel;

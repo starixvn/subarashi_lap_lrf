@@ -40,6 +40,8 @@ namespace Fanex.Athena.Controllers.Report
                 FunctionNames.DailyBets);
 
             var limitedMonthRange = licenseeSetting != null ? licenseeSetting.LimitRecentMonths : DefaultLimitedMonthRange;
+            var minDate = limitedMonthRange == 0 && licenseeSetting != null ? Convert.ToDateTime(licenseeSetting.MinDate) : today.AddMonths(-limitedMonthRange + 1);
+
             var viewModel = new DailyBetsViewModel
             {
                 CurrencyList = userSession.CurrencyList,
@@ -50,7 +52,7 @@ namespace Fanex.Athena.Controllers.Report
                     Status = true
                 }).ToList(),
                 TodayByGmt8 = today,
-                MinDate = today.AddMonths(-limitedMonthRange + 1)
+                MinDate = minDate
             };
 
             return View("~/Views/Desktop/Report/DailyBets/Index.cshtml", viewModel);
