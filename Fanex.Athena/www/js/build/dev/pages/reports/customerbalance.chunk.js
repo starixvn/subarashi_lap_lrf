@@ -5420,7 +5420,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             {
                 name: 'adjustment',
                 index: 'Adjustment',
-                width: 80,
+            	width: 100,
                 align: 'right',
                 sortable: false,
                 resizable: false,

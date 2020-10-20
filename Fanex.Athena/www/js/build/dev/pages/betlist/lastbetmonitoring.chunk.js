@@ -4569,6 +4569,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         const SPORT_VRG = 245;
         const SPORT_SXG = 243;
         const SPORT_SBC = 200;
+        const SPORT_SAG = 244;
         const BETLIST_META_MODEL = '#BetListMetaModel';
 
         let _sortColumnName, _sortOrder;
@@ -5004,9 +5005,18 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                     }
                 });
             },
-
+           
             viewSexyGamingResult: function (trasdesc, matchCode, bettype, title) {
                 const url = Site.resolveClientUrl('ResultReport/SexyGaming?transdesc=' +
+                    encodeURIComponent(trasdesc) + '&matchCode=' + matchCode + '&bettype=' + bettype);
+
+                Site.blockUI();
+                showResultPopUp(url, { width: 800, height: 380, title: title });
+                Site.unBlockUI();
+            },
+            
+            viewSAGamingResult: function (trasdesc, matchCode, bettype, title) {
+                const url = Site.resolveClientUrl('ResultReport/SAGaming?transdesc=' +
                     encodeURIComponent(trasdesc) + '&matchCode=' + matchCode + '&bettype=' + bettype);
 
                 Site.blockUI();
@@ -5071,6 +5081,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 }
                 else if (sporttype === SPORT_SXG) {
                     _me.viewSexyGamingResult(transdecs, extension2, bettype, title);
+                }
+                else if (sporttype === SPORT_SAG) {
+                    _me.viewSAGamingResult(transdecs, extension2, bettype, title);
                 }
                 else {
                     const numberBettype = Number(bettype);
@@ -5364,6 +5377,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
                 showDetailPopUp(url, { width: 890, height: popH + 50, title: title });
             },
+            
             showSexyGamingBetDetails: function (transId, winlostDate, custId, transType) {
                 let url = Site.resolveClientUrl('SexyGamingBetList/Detail');
                 url = QueryString.setParam(url, 'transId', transId);
@@ -5378,7 +5392,23 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
                 showDetailPopUp(url, { width: 890, height: popH + 50, title: title });
             },
-            showSabaClubDetails: function (transId, winlostDate, custId, transType) {
+
+            showSAGamingDetails: function (transId, winlostDate, custId, transType) {
+                let url = Site.resolveClientUrl('SAGamingBetList/Detail');
+                url = QueryString.setParam(url, 'transId', transId);
+                url = QueryString.setParam(url, 'date', winlostDate);
+                url = QueryString.setParam(url, 'custId', custId);
+                url = QueryString.setParam(url, 'transType', transType);
+                url = QueryString.setParam(url, 'BaseCurrency', getBaseCurrency());
+
+                const popH = Math.min($(window).height() - 100, 550);
+                const title = Site.getSingleResource('ProductSAG') + ' - ' +
+                    Site.getSingleResource('DetailedBetlist') + ' - ' + moment(new Date(winlostDate)).format('MM/DD/YYYY');
+
+                showDetailPopUp(url, { width: 890, height: popH + 50, title: title });
+            },
+
+            showSabaClubDetails : function (transId, winlostDate, custId, transType) {
                 let url = Site.resolveClientUrl('SabaClubBetList/Detail');
                 url = QueryString.setParam(url, 'transId', transId);
                 url = QueryString.setParam(url, 'date', winlostDate);
@@ -5479,6 +5509,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 window.showSGDetails = _me.showSGDetails;
                 window.showSexyGamingBetDetails = _me.showSexyGamingBetDetails;
                 window.showSabaClubDetails = _me.showSabaClubDetails;
+                window.showSAGamingDetails = _me.showSAGamingDetails;
 
                 const betList = {
                     ViewCasinoHandHistory: _me.ViewCasinoHandHistory
