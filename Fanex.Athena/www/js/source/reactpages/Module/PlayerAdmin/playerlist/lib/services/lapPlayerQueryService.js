@@ -43,7 +43,7 @@ export default class LapPlayerQueryService {
         return commonService.fetchData(lrfDataById.type, lrfDataById.action, lrfParam)
             .then(lrfResponse => {
                 const { DataList: lrfPlayerList } = lrfResponse.data;
-                const filteredLapPlayerList = lapPlayerList.filter(x => x.IBCCustId === 0 ||
+                const filteredLapPlayerList = lapPlayerList.filter(x => isNonDepositOrArchived(x) ||
                     lrfPlayerList.findIndex(p => p.IbcCustId === x.IBCCustId) !== -1);
                 const filteredItemCount = lapPlayerList.length - filteredLapPlayerList.length;
                 const totalItem = lapTotalItem - filteredItemCount;

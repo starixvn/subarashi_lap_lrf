@@ -5,9 +5,9 @@ export default class PlayerListDataHelper {
         if (!lrfList || !lapList) {
             return [];
         }
-
+        const lrfDic = this.toLrfPlayerDic(lrfList);
         return lapList.reduce((result, lapItem) => {
-            const lrfItem = lrfList.find(x => x.IbcCustId === lapItem.IBCCustId) || {};
+            const lrfItem = lrfDic[lapItem.IBCCustId] || {};
             const playerItem = this.mergePlayerItem(lrfItem, lapItem);
             result.push(playerItem);
 
@@ -42,6 +42,15 @@ export default class PlayerListDataHelper {
             CommissionGroup: lrfItem.CommissionGroup,
             CustomerClass: lrfItem.CustomerClass
         };
+    }
+
+    
+    static toLrfPlayerDic(lrfList) {
+        const lrfPlayerDic = lrfList.reduce((result, currentItem) => {
+            result[currentItem.IbcCustId] = currentItem; 
+            return result;
+        }, {});
+        return lrfPlayerDic;
     }
 
     static getDataObject(targetList, listToMatch) {

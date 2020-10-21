@@ -12,7 +12,7 @@ export default class QueryServiceFactory {
         } else if (this._isChangeAdvancedSearch(param)) {
             return LrfPlayerQueryService;
         } else {
-            return PlayerMultipleQueryService;
+            return LapPlayerQueryService;
         }
     }
 
