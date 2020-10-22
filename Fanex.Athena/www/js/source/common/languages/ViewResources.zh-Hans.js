@@ -1,4 +1,4 @@
-﻿// Generated at: 10/14/2020 11:02:16 AM
+﻿// Generated at: 10/20/2020 1:39:11 PM
 window._language_zh_Hans = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -212,6 +212,7 @@ ExcludeTestData:"排除测试数据",
 ExportToExcel:"导出至Excel",
 ExternalId:"用户名",
 ExternalIdOrSystemId:"或系统帐号(支援前缀搜寻)",
+ExtraPayout:"额外派彩",
 ExtraPayout:"额外派彩",
 Fail:"失败",
 Feb:"二月",
@@ -447,7 +448,7 @@ PleaseSelectOne:"请选择一个",
 PreGame:"游戏开始前",
 Prev:"上个月",
 Product:"产品",
-ProductCC:"嘻嘻俱乐部",
+ProductCC:"乐卡迪亚",
 ProductCO:"即时兑现",
 ProductCS:"娱乐城",
 ProductKN:"快乐彩",

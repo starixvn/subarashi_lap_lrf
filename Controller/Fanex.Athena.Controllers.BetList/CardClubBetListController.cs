@@ -28,7 +28,7 @@
             metaModel.HiddenColumns = HiddenColumns;
             metaModel.Title = GetBetListDetailTitle(ViewResources.ProductCC, metaModel.Date);
 
-            return await ProcessExportExcel(metaModel, "CardClubDetail").ConfigureAwait(false);
+            return await ProcessExportExcel(metaModel, "ArcadiaGamingDetail").ConfigureAwait(false);
         }
     }
 }

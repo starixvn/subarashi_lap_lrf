@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 10/14/2020 11:02:16 AM
+﻿// Generated at: 10/20/2020 1:39:11 PM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -336,6 +336,7 @@ ExcludeTestData:"排除测试数据",
 ExportToExcel:"导出至Excel",
 ExternalId:"用户名",
 ExternalIdOrSystemId:"或系统帐号(支援前缀搜寻)",
+ExtraPayout:"额外派彩",
 ExtraPayout:"额外派彩",
 Fail:"失败",
 Feb:"二月",
@@ -631,6 +632,7 @@ ProductLT:"彩票",
 ProductNG:"百练赛",
 ProductParlay:"体育串关",
 ProductPP:"PP王者电子",
+ProductSAG:"SA真人娱乐场",
 ProductSB:"体育博彩",
 ProductSG:"新霸电子",
 ProductSVS:"沙巴虚拟赛事",

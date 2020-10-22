@@ -90,7 +90,7 @@
             {
                 name: 'adjustment',
                 index: 'Adjustment',
-                width: 80,
+            	width: 100,
                 align: 'right',
                 sortable: false,
                 resizable: false,

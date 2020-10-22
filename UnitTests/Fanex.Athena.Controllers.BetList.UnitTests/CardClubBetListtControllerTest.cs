@@ -84,7 +84,7 @@
                         && x.LicenseeId == DefaultLicenseeSession.LicenseeId
                         && !x.IsShowSumStake
                         && !string.IsNullOrEmpty(x.AgentListXml)),
-                    "CardClubDetail",
+                    "ArcadiaGamingDetail",
                     null);
             }
         }

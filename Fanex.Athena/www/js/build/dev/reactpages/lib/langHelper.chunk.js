@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 10/14/2020 11:02:16 AM
+// Generated at: 10/20/2020 1:39:11 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -376,6 +376,7 @@ window._language_en_US = {
   ExportToExcel: "Export To Excel",
   ExternalId: "External ID",
   ExternalIdOrSystemId: "External ID or System ID",
+  ExtraPayout: "Extra Payout",
   ExtraPayout: "Extra Payout",
   Fail: "Fail",
   Feb: "Feb",
@@ -682,7 +683,7 @@ window._language_en_US = {
   ProductBT: "Bet Trade",
   ProductBX: "Exchange",
   ProductCB: "Colossus Bets",
-  ProductCC: "Card Club",
+  ProductCC: "Arcadia Gaming",
   ProductCO: "Cash Out",
   ProductCS: "RNG Casino",
   ProductFW: "Fishing World",
@@ -695,6 +696,7 @@ window._language_en_US = {
   ProductParlay: "Sportsbook Parlay",
   ProductPP: "PP",
   ProductPTCS: "Playtech Casino",
+  ProductSAG: "SA Gaming",
   ProductSB: "Sportsbook",
   ProductSBC: "Saba.club",
   ProductSG: "SG",

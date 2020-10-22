@@ -1993,7 +1993,7 @@
     <comment>117729</comment>
   </data>
   <data name="ProductCC" xml:space="preserve">
-    <value>嘻嘻俱乐部</value>
+    <value>乐卡迪亚</value>
     <comment>115449</comment>
   </data>
   <data name="BettingStatement" xml:space="preserve">
@@ -2128,5 +2128,8 @@
   <data name="ProductSVS" xml:space="preserve">
     <value>沙巴虚拟赛事</value>
     <comment>141454</comment>
+  </data>
+  <data name="ExtraPayout" xml:space="preserve">
+    <value>额外派彩</value>
   </data>
 </root>

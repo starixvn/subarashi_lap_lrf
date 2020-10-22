@@ -1128,6 +1128,10 @@ ul.ui-multiselect-checkboxes {
 .sexygaming-bet-type-name {
   color: #696969; }
 
+.bet-id {
+  color: #bbb;
+  font-weight: 600; }
+
 .betlist-popup {
   padding: 5px 20px; }
 

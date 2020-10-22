@@ -214,6 +214,22 @@ namespace Fanex.Athena.Controllers.Report.Result
         }
 
         [HttpGet]
+        public async Task<ActionResult> SAGaming(string transDesc, string matchCode, string betType)
+        {
+            var language = SessionServiceInstance.UserSession.Language;
+            var model = new
+            {
+                transDesc,
+                matchCode,
+                betType,
+                languageCode = language
+            };
+            var data = await _betListApiClient.PostStringAsync("/SAGamingResultPopup/Index", model, language).ConfigureAwait(false);
+            ViewBag.Data = data.Replace("{rootUrl}", HttpRuntime.AppDomainAppVirtualPath.TrimEnd('/'));
+            return View("~/Views/Desktop/Report/Result/Popup/SAGaming.cshtml");
+        }
+
+        [HttpGet]
         public async Task<string> GlobalGamingResult(string custId, string gameId)
         {
             var model = new
