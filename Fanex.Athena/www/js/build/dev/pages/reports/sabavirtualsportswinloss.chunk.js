@@ -8038,7 +8038,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         'use strict';
         const REPORT_BY_MONTHLY = 2;
         const VALID_MONTH_RANGE = 3;
-        const VALID_DAY_RANGE = 7;
         const EXCEL_FILENAME = 'SabaVirtualSportsWinLoss.xls';
 
         const cacheData = {};
@@ -8081,7 +8080,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                     title: Site.getSingleResource('SabaVirtualSportsWinLoss')
                 });
                 DatePicker.initDateRangePicker();
-                DateHelper.setConstraintDayRange(VALID_DAY_RANGE, SabaVirtualSportsWinLossOption.urlExcelData);
+                DateHelper.setConstraintMonthRange(VALID_MONTH_RANGE, SabaVirtualSportsWinLossOption.urlExcelData);
             },
 
             registerGlobalFunction: function () {
