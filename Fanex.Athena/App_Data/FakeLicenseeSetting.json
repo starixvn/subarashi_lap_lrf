@@ -2,10 +2,10 @@
   {
     "SiteName": "IvoryBet",
     "DisableBetList": true,
-    "MinDate": "03/01/2018",
+    "MinDate": "01/01/2019",
     "MaxDate": "today",
     "BaseCurrencies": "USD",
-    "LimitRecentMonths": 9,
+    "LimitRecentMonths": 0,
     "TimeZone": 8
   },
   {
