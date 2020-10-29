@@ -17,6 +17,11 @@ const DEFAULT_PAGE_INDEX = AppData.defaultPageIndex;
 export class FormFilter extends PureComponent {
     constructor(props) {
         super(props);
+        this.state = {
+            requestParam: this.props.requestParam
+        };
+
+        this.exportForm = React.createRef();
     }
 
     _renderDateRange = () => {
@@ -56,31 +61,41 @@ export class FormFilter extends PureComponent {
     };
     onSubmit = () => {
         const param = Object.assign({}, this.props.requestParam, { PageSize: DEFAULT_PAGE_SIZE, PageIndex: DEFAULT_PAGE_INDEX });
+
+        if (!this.isValidTransactionId(param.TransactionId)) {
+            return;
+        }
+
         this.props.getDetailTransactionReport(param);
+    };
+
+    isValidTransactionId = (value) => {
+        var transactionId = parseInt(value, 10);
+
+        return !value || (!isNaN(transactionId) && transactionId == value);
     };
 
     exportExcel = (event) => {
         event.preventDefault();
+
         const param = Object.assign({}, this.props.requestParam);
+        if (!this.isValidTransactionId(param.TransactionId)) {
+            return;
+        }
 
-        const relativeUrl = 'PlayerDetailTransaction/ExportDetailTransactionReport';
-        const url = Site.resolveClientUrl(relativeUrl);
         const excelForm = $("#form-excel-detail-transaction");
-
-        excelForm.find("#CustId").val(param.CustId);
-        excelForm.find("#CurrencyId").val(param.CurrencyId);
         excelForm.find("#FromDate").val(param.FromDate);
         excelForm.find("#ToDate").val(param.ToDate);
-        excelForm.find("#PageSize").val(param.PageSize);
-        excelForm.find("#PageIndex").val(param.PageIndex);
         excelForm.find("#TransactionId").val(param.TransactionId);
         excelForm.find("#IsResettled").val(param.IsResettled);
 
-        excelForm.attr("action", url);
-        excelForm.submit();
+        this.exportForm.current.submit();
     };
 
     render() {
+        const relativeUrl = 'PlayerDetailTransaction/ExportDetailTransactionReport';
+        const url = Site.resolveClientUrl(relativeUrl);
+
         return (
             <div className='page-filter'>
                 <div className='row'>
@@ -117,15 +132,15 @@ export class FormFilter extends PureComponent {
                     </div>
                     <div className="caret-block">
                         <i className="icon-excel right" onClick={this.exportExcel} title={LangHelper.getSingleResource("ExportToExcel")}></i>
-                        <form id="form-excel-detail-transaction">
-                            <input type="hidden" id="CustId" name="CustId" value="" />
-                            <input type="hidden" id="FromDate" name="FromDate" value="" />
-                            <input type="hidden" id="ToDate" name="ToDate" value="" />
-                            <input type="hidden" id="CurrencyId" name="CurrencyId" value="" />
-                            <input type="hidden" id="PageSize" name="PageSize" value="" />
-                            <input type="hidden" id="PageIndex" name="PageIndex" value="" />
-                            <input type="hidden" id="TransactionId" name="TransactionId" value="" />
-                            <input type="hidden" id="IsResettled" name="IsResettled" value="" />
+                        <form ref={this.exportForm} id="form-excel-detail-transaction" action={url}>
+                            <input type="hidden" id="CustId" name="CustId" value={this.state.requestParam.CustId} />
+                            <input type="hidden" id="FromDate" name="FromDate" value={this.state.requestParam.FromDate} />
+                            <input type="hidden" id="ToDate" name="ToDate" value={this.state.requestParam.ToDate} />
+                            <input type="hidden" id="CurrencyId" name="CurrencyId" value={this.state.requestParam.CurrencyId} />
+                            <input type="hidden" id="PageSize" name="PageSize" value={this.state.requestParam.PageSize} />
+                            <input type="hidden" id="PageIndex" name="PageIndex" value={this.state.requestParam.PageIndex} />
+                            <input type="hidden" id="TransactionId" name="TransactionId" value={this.props.requestParam.TransactionId} />
+                            <input type="hidden" id="IsResettled" name="IsResettled" value={this.state.requestParam.IsResettled} />
                         </form>
                     </div>
                 </div>
