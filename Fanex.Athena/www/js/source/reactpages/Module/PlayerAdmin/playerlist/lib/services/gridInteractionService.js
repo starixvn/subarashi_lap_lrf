@@ -1,4 +1,4 @@
-import GridHelper from '../helpers/gridHelper';
+﻿import GridHelper from '../helpers/gridHelper';
 import { gridItemDropdownHeight, stringTypeFields, fields } from '../constants';
 import { updateObjectInArray } from '@jsroot/lib/dataReducer';
 
@@ -21,7 +21,7 @@ export default class GridInteractionService {
         }
 
         if (itemIndex !== -1) {
-            const newPlayerItem = {...playerList[itemIndex], [fieldName]: value };
+            const newPlayerItem = { ...playerList[itemIndex], [fieldName]: value };
             return updateObjectInArray(playerList, itemIndex, newPlayerItem);
         }
 
@@ -30,7 +30,7 @@ export default class GridInteractionService {
 
     static updatePlayerWithBaStatus(playerList, ibcCustId, isBa, oddsGroup) {
         const itemIndex = playerList.findIndex(x => x.IbcCustId === ibcCustId);
-        const newPlayerItem = {...playerList[itemIndex], BaStatus: isBa, OddsGroup: oddsGroup };
+        const newPlayerItem = { ...playerList[itemIndex], BaStatus: isBa, OddsGroup: oddsGroup };
         return updateObjectInArray(playerList, itemIndex, newPlayerItem);
     }
 
@@ -56,7 +56,12 @@ export default class GridInteractionService {
                 return isSortAscending ? comparingResult : -comparingResult;
             }
 
-            return isSortAscending ? currentValue - nextValue : -(currentValue - nextValue);
+            var diff = currentValue - nextValue;
+            if (isNaN(diff)) {
+                return this.sortStringValue(currentValue || '', nextValue || '', isSortAscending);
+            }
+
+            return isSortAscending ? diff : -diff;
         });
 
         return newDataList;

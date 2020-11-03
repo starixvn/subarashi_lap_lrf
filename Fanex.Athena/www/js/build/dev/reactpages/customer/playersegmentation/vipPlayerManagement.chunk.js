@@ -2432,7 +2432,8 @@ const Popup = props => {
   }
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: `popup-container ${isShow ? 'show' : 'hide'}`
+    className: `popup-container ${isShow ? 'show' : 'hide'}`,
+    onClick: props.onClick
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "popup-block-body"
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2462,7 +2463,8 @@ Popup.propTypes = {
   isShow: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool,
   onClose: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
   isHtml: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool,
-  iframeUrl: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string
+  iframeUrl: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
+  onClick: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func
 };
 Popup.defaultProps = {
   width: _constants__WEBPACK_IMPORTED_MODULE_1__["DEFAULT_WIDTH"],
@@ -3699,10 +3701,12 @@ class CustomerClassCell extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Com
   constructor(props) {
     super(props);
 
-    _defineProperty(this, "showCustomerClassInformation", () => {
+    _defineProperty(this, "showCustomerClassInformation", e => {
       this.setState({
         isShowCustomerClassInformation: true
       });
+      e.stopPropagation();
+      return false;
     });
 
     _defineProperty(this, "closeCustomerClassInfomation", () => {
@@ -3711,13 +3715,18 @@ class CustomerClassCell extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Com
       });
     });
 
+    _defineProperty(this, "clickOnPopup", e => {
+      e.stopPropagation();
+      return false;
+    });
+
     this.state = {
       isShowCustomerClassInformation: false
     };
   }
 
   render() {
-    var url = "PlayerSegmentation/CustomerClassInformation?time=" + new Date().getTime();
+    var url = "CustomerClass/CustomerClassInformation?time=" + new Date().getTime();
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, this.props.cell.text, "\xA0\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       class: "icon-info",
       onClick: this.showCustomerClassInformation
@@ -3727,6 +3736,7 @@ class CustomerClassCell extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Com
       isShow: this.state.isShowCustomerClassInformation,
       title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('CustomerClassInformation'),
       onClose: this.closeCustomerClassInfomation,
+      onClick: this.clickOnPopup,
       isHtml: "false",
       iframeUrl: url
     }));

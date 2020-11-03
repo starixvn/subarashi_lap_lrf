@@ -35,5 +35,14 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Controllers
 
             return _playerListService.GetPlayerListById(metaModel);
         }
+
+        [HttpPost]
+        public LRFFiltersViewModel LRFFilters()
+        {
+            return new LRFFiltersViewModel
+            {
+                CustomerClass = _playerListService.CustomerClass(SiteName)
+            };
+        }
     }
 }

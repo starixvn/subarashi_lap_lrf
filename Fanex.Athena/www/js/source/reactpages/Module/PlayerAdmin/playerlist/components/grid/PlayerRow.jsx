@@ -40,6 +40,7 @@ export const PlayerRow = (props) => {
     const canShowMainColumn = IsDeposit && !IsArchived;
     const commissionGroup = CommissionGroup || LangHelper.getSingleResource('None');
     const canEditCommissionGpoup = IsDeposit && !IsArchived && dataItem.Status != playerStatusByName.Closed;
+    const customerClass = dataItem.CustomerClass || LangHelper.getSingleResource('None');
 
     return (
         <Row key={LicenseeCustId}>
@@ -58,6 +59,7 @@ export const PlayerRow = (props) => {
             {displayedColumn[fields.LastTransaction] && <Cell>{LastTransaction}</Cell>}
             {displayedColumn[fields.Email] && <Cell>{Email}</Cell>}
             {hasCommPermissionRead && displayedColumn[fields.CommissionGroup] && <Cell className={"text-center td-comm-" + dataItem.IbcCustId} title={commissionGroup}>{commissionGroup}</Cell>}
+            {displayedColumn[fields.CustomerClass] && <Cell className="text-center">{customerClass}</Cell>}
         </Row>
     )
 }

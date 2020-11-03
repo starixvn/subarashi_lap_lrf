@@ -1,6 +1,7 @@
 ﻿import React from 'react';
 import { HeaderRow, HeaderCell } from '@9softstudio/react-grid';
 import { fields, headerText } from '../constants';
+import HeaderCustomerClassCell from '../../components/grid/HeaderCustomerClassCell';
 
 export default class GridHelper {
     static renderHeader(displayedColumn, canSelectPlayers, hasCommPermissionRead) {
@@ -23,6 +24,7 @@ export default class GridHelper {
                 {displayedColumn[LastTransaction] && <HeaderCell colWidth={60} sortBy={LastTransaction}>{headerText.LastTransaction}</HeaderCell>}
                 {displayedColumn[Email] && <HeaderCell colWidth={100}>{headerText.Email}</HeaderCell>}
                 {hasCommPermissionRead && displayedColumn[CommissionGroup] && <HeaderCell colWidth={50}>{headerText.CommissionGroup}</HeaderCell>}
+                {displayedColumn[fields.CustomerClass] && <HeaderCell colWidth={100} sortBy={fields.CustomerClass}><HeaderCustomerClassCell text={headerText.CustomerClass} /></HeaderCell>}
             </HeaderRow>
         )
     }

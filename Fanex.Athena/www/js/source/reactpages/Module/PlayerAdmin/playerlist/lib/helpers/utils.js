@@ -1,4 +1,4 @@
-import { playerStatus } from '../constants';
+﻿import { playerStatus } from '../constants';
 import LangHelper from '@jsroot/lib/langHelper';
 import { decode } from '@jsroot/lib/htmlHelper';
 
@@ -55,3 +55,7 @@ const isUnauthorizedResponse = (errorInfo) => {
 
     return status === 403 || status === 401;
 }
+
+export const getCustomerClassText = (value) => {
+    return value === "0" || value == "" || value == undefined ? LangHelper.getSingleResource('None') : value;
+};

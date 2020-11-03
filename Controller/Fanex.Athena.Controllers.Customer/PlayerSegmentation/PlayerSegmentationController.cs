@@ -9,7 +9,6 @@
     using System.Web.SessionState;
     using Fanex.Athena.Extension.Utility.Internal;
     using Fanex.Athena.Model.Auth.DataDomain;
-    using Fanex.Athena.Model.Customer.MetaModel.PlayerSegmentation;
     using Fanex.Athena.Model.Customer.ViewModel;
     using Fanex.Athena.Resources;
     using Fanex.Athena.Service.Core.Users.Interfaces;
@@ -52,17 +51,6 @@
         {
             var model = await BuildViewModel();
             return View("~/Views/Desktop/Customer/PlayerSegmentation/Main.cshtml", model);
-        }
-
-        [FunctionAuthorization(PermissionKeys.PlayerProblemManagement)]
-        public async Task<ViewResult> CustomerClassInformation()
-        {
-            var model = await _playerService.GetCustomerClassInformation(new GetCustomerClassInformationMetaModel
-            {
-                SiteName = SessionServiceInstance.LicenseeSession.LicenseeName
-            });
-
-            return View("~/Views/Desktop/Customer/PlayerSegmentation/CustomerClassInformation.cshtml", model);
         }
 
         [HttpGet]

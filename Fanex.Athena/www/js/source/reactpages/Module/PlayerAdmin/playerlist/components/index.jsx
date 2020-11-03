@@ -17,11 +17,16 @@ const displayedColumnList = buildDefaultColumnList(type, hasCommPermissionRead);
 const siteSetting = {
     isAllowedCustomerComm: false,
     isAllowedBA: false
-}
+};
+
+const lrfFilters = {
+    CustomerClass: []
+};
 
 const defaultState = {
     ...window.initialState, displayedColumnList, siteSetting,
-    hasBaPermission, hasOddsGroupPermission, hasSpecialLevelPermission, hasCommPermissionRead, hasCommPermissionEdit
+    hasBaPermission, hasOddsGroupPermission, hasSpecialLevelPermission,
+    hasCommPermissionRead, hasCommPermissionEdit, lrfFilters
 };
 const store = Store.createStore(reducer, defaultState);
 

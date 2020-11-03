@@ -2,9 +2,9 @@
 import MultipleSelect from '@9softstudio/react-multiselect';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
-import { baStatusList, specialLevelListWithColor, oddsGroupListWithStyle } from '../../lib/constants';
+import { baStatusList, specialLevelListWithColor, oddsGroupListWithStyle, customerClassList } from '../../lib/constants';
 import LangHelper from '@jsroot/lib/langHelper';
-import { getSpecialLevelText } from '../../lib/helpers/utils';
+import { getSpecialLevelText, getCustomerClassText } from '../../lib/helpers/utils';
 
 export class AdvancedSearch extends React.Component {
     constructor(props) {
@@ -13,6 +13,7 @@ export class AdvancedSearch extends React.Component {
         this.oddsGroupList = Object.keys(oddsGroupListWithStyle).map(item => ({ Id: item, Value: item, Status: true }));
         this.specialLevelList = Object.keys(specialLevelListWithColor).map(item => ({ Id: item, Value: getSpecialLevelText(item), Status: true }));
         this.baStatusList = Object.keys(baStatusList).map(item => ({ value: baStatusList[item], label: LangHelper.getSingleResource(item) }));
+        this.customerClassList = props.lrfFilters.CustomerClass.map(item => ({ Id: item, Value: getCustomerClassText(item), Status: true }));
     }
 
     _createSelectData(originalList, selectedItemString) {
@@ -44,7 +45,9 @@ export class AdvancedSearch extends React.Component {
         const oddsGroupList = this._createSelectData(this.oddsGroupList, oddsGroup);
         const specialLevelList = this._createSelectData(this.specialLevelList, specialLevel);
         const selectedBaStatus = isAllowedBA ? this.baStatusList.find(x => x.value === baFilter) : null;
-       
+
+        const ddlCustomerClass = this._createSelectData(this.customerClassList, param.customerClass);
+
         return (
             <>
                 <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
@@ -98,6 +101,18 @@ export class AdvancedSearch extends React.Component {
                         </div>
                     )
                 }
+
+                <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-1">
+                    <div className="form-group">
+                        <label className="label-text">{LangHelper.getSingleResource("CustomerClass")}</label>
+                        <MultipleSelect id="ddl-customer-class"
+                            dataSource={ddlCustomerClass}
+                            keyField={"Id"}
+                            valueField={"Value"}
+                            statusField={"Status"}
+                            onChange={(currentItem, selectedItemsKey) => this.handleChange('customerClass', selectedItemsKey)} />
+                    </div>
+                </div>
             </>
         );
     }
@@ -108,7 +123,8 @@ const propTypes = {
         currencyIdList: PropTypes.string.isRequired,
         oddsGroup: PropTypes.string.isRequired,
         specialLevel: PropTypes.string.isRequired,
-        baFilter: PropTypes.number.isRequired
+        baFilter: PropTypes.number.isRequired,
+        customerClass: PropTypes.string.isRequired
     }).isRequired,
     onChange: PropTypes.func.isRequired
 };

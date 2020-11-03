@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstracts\BasePlayerSegmentationDataAccess.cs" />
+    <Compile Include="CustomerClassDataAccess.cs" />
     <Compile Include="CustomerDataAccess.cs" />
     <Compile Include="CustomerCommDataAccess.cs" />
     <Compile Include="CustomerListDataAccess.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="GroupComDataAccess.cs">
       <SonarQubeExclude>true</SonarQubeExclude>
     </Compile>
+    <Compile Include="ICustomerClassDataAccess.cs" />
     <Compile Include="Interfaces\ICustomerDataAccess.cs" />
     <Compile Include="Interfaces\ICustomerCommDataAccess.cs" />
     <Compile Include="Interfaces\IDormantCustomerListDataAccess.cs" />

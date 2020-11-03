@@ -11,5 +11,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.MetaModel
         public string AgentListXml { get; set; }
 
         public bool IsExcludedTestData { get; set; }
+
+        public string CustomerClass { get; set; }
     }
 }

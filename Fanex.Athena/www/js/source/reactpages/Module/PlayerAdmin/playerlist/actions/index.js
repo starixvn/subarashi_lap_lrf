@@ -1,4 +1,4 @@
-import * as loaderAction from '@jsroot/actions/loaderAction';
+﻿import * as loaderAction from '@jsroot/actions/loaderAction';
 import * as filterHandlerAction from './filterHandlerAction';
 import * as playerDetailHandlerAction from './playerDetailHandlerAction';
 import * as commonAction from './commonAction';
@@ -9,6 +9,7 @@ import * as gridSpecialLevelAction from './gridSpecialLevelAction';
 import * as gridPlayerStatusAction from './gridPlayerStatusAction';
 import * as gridUserNameAction from './gridUserNameAction';
 import * as siteSettingAction from './siteSettingAction';
+import * as lrfFiltersAction from './lrfFiltersAction';
 
 export const ActionCreators = Object.assign({},
     loaderAction,
@@ -21,5 +22,6 @@ export const ActionCreators = Object.assign({},
     gridSpecialLevelAction,
     gridPlayerStatusAction,
     gridUserNameAction,
-    siteSettingAction
+    siteSettingAction,
+    lrfFiltersAction
 );

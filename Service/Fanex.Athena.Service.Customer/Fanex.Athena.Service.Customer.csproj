@@ -79,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomerBusinessLogBuilderFactory.cs" />
+    <Compile Include="CustomerClassService.cs" />
     <Compile Include="CustomerCommService.cs" />
     <Compile Include="CustomerListService.cs" />
     <Compile Include="CustomerLogBuilder.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="Interfaces\ICustomerService.cs" />
     <Compile Include="Interfaces\ICustomerListService.cs" />
     <Compile Include="Interfaces\IGroupComService.cs" />
+    <Compile Include="Interfaces\ICustomerClassService.cs" />
     <Compile Include="Interfaces\IPlayerSegmentationService.cs" />
     <Compile Include="PlayerSegmentationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

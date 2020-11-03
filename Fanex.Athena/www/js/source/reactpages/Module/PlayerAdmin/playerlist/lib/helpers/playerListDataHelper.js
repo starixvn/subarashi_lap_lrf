@@ -1,4 +1,6 @@
-﻿export default class PlayerListDataHelper {
+﻿import LangHelper from '@jsroot/lib/langHelper';
+
+export default class PlayerListDataHelper {
     static mergePlayerList(lrfList, lapList) {
         if (!lrfList || !lapList) {
             return [];
@@ -37,7 +39,8 @@
             IsArchived: !!isArchived,
             CurrencyId: lapItem.Currency,
             CreatedDate: CreatedDateString,
-            CommissionGroup: lrfItem.CommissionGroup
+            CommissionGroup: lrfItem.CommissionGroup,
+            CustomerClass: lrfItem.CustomerClass || LangHelper.getSingleResource("None")
         };
     }
 
