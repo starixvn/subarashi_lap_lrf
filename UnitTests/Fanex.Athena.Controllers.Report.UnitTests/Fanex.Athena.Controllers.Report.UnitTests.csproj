@@ -97,6 +97,7 @@
     <Compile Include="ExchangeVoidedControllerTest.cs" />
     <Compile Include="CasinoTurnoverControllerTest.cs" />
     <Compile Include="DailyBetsReportControllerTest.cs" />
+    <Compile Include="SabaVirtualSportsWinLossReportControllerTest.cs" />
     <Compile Include="MatchWinLossReportControllerTest_AssignLeagueName.cs" />
     <Compile Include="MatchWinLossReportControllerTest_AssignMatchName.cs" />
     <Compile Include="PromotionPrizeReportControllerTest.cs" />

@@ -135,6 +135,8 @@ namespace Fanex.Athena.Controllers.Report
             ShowingOption showingOption,
             bool isShowCasinoTransfer)
         {
+            viewModel.Param.BaseCurrency = string.IsNullOrEmpty(viewModel.Param.BaseCurrency) ?
+                viewModel.Param.CurrencyName : viewModel.Param.BaseCurrency;
             return new TurnoverExcel(templatePath, showingOption, viewModel) { IsShowCasinoTransfer = isShowCasinoTransfer };
         }
 

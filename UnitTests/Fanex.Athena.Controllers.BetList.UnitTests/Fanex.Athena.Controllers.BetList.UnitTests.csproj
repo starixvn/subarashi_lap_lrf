@@ -87,6 +87,8 @@
   <ItemGroup>
     <Compile Include="AGCasinoBetListControllerTest.cs" />
     <Compile Include="JackpotWonBetListControllerTest .cs" />
+    <Compile Include="SabaVirtualSportsWinLossBetListControllerTest.cs" />
+    <Compile Include="SAGamingBetListControllerTest.cs" />
     <Compile Include="SexyGamingBetListControllerTest.cs" />
     <Compile Include="AllBetBetListControllerTest.cs" />
     <Compile Include="BetListBaseControllerHelperTest.cs" />

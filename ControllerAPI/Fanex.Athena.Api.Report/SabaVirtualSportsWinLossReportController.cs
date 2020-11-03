@@ -293,8 +293,7 @@
                     Data = result.DataList.Select(MapToGridView).ToList(),
                     Total = result.TotalDataList.Select(MapToGridView).ToList(),
                     SummaryTotal = summaryTotalView,
-                    ProductOptions = metaModel.ProductOptions.ToJson(),
-                    PromotionPrize = result.AdditionalInfo
+                    ProductOptions = metaModel.ProductOptions.ToJson()
                 };
             }
 
@@ -303,7 +302,7 @@
 
         protected internal virtual bool IsValidParams(SabaVirtualSportsWinLossMetaModel metaModel)
         {
-            var setting = _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss,
+            var setting = _reportSettingService.GetSetting(PermissionKeys.ReportSabaVirtualSportsWinLoss,
                 SessionService.LicenseeSession.LicenseeName);
             if (setting == null)
             {

@@ -103,6 +103,7 @@
     <Compile Include="AgCasinoWinLossReportControllerTest.cs" />
     <Compile Include="CasinoTurnoverReportControllerTest.cs" />
     <Compile Include="ExchangeWinLossReportControllerTest.cs" />
+    <Compile Include="SabaVirtualSportsWinLossReportControllerTest.cs" />
     <Compile Include="LicenseeWinLossReportControllerTest_IsValidParams.cs" />
     <Compile Include="LicenseeWinLossReportControllerTest.cs" />
     <Compile Include="ActiveCustomerSummaryReportControllerTest.cs" />
