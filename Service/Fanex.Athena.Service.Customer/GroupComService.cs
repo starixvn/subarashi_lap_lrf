@@ -134,7 +134,7 @@
                 resultList.Add(result != null && result.Data);
             }
 
-            return resultList.All(x => x == true);
+            return resultList.All(x => x);
         }
 
         private static List<string[]> SplitCustomer(string[] customers, int maxCustomer = 500)

@@ -20,8 +20,8 @@
                 if ($groupName.val() === _originalGroupName) {
                     $groupName.removeClass('invalid');
                     $groupName.addClass('valid');
-                    $('label[for=GroupName]').attr('data-success', '');
                     $('#Submit').prop('disabled', false);
+                    $('.result-msg').addClass('hide');
                     return;
                 }
 

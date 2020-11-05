@@ -1250,8 +1250,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                     if (result === 'OK') {
                         $('#GroupName').removeClass('invalid').addClass('valid');
                         $('#result-mark').removeClass('hide');
-                        $('label[for=GroupName]').attr('data-success', '');
                         $('#Submit').prop('disabled', false);
+                        $('.result-msg').addClass('hide');
                     }
                     else {
                         displayGroupNameError(Site.getSingleResource('GroupNameExistedMsg'));
@@ -1263,10 +1263,13 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         }
 
         function displayGroupNameError(errorMsg) {
-            $('label[for="GroupName"]').attr('data-error', errorMsg);
             $('#GroupName').addClass('invalid').focus();
             $('#result-mark').addClass('hide');
             $('#Submit').prop('disabled', true);
+
+            var resultMsg = $('.result-msg');
+            resultMsg.addClass('error').removeClass('hide success');
+            resultMsg.html(errorMsg);
         }
 
         function commissionOnChange(value, idName) {
@@ -1407,8 +1410,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 if ($groupName.val() === _originalGroupName) {
                     $groupName.removeClass('invalid');
                     $groupName.addClass('valid');
-                    $('label[for=GroupName]').attr('data-success', '');
                     $('#Submit').prop('disabled', false);
+                    $('.result-msg').addClass('hide');
                     return;
                 }
 

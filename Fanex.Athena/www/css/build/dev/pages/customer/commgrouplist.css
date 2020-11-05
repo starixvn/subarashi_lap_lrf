@@ -627,6 +627,27 @@ div.icon-edit, div.icon-delete {
   padding-left: 0 !important;
   display: inline-block; }
 
+.col-child.medium.col-comm {
+  width: 8.5%; }
+
+.input-field.mult-products-container {
+  float: right;
+  width: 198px;
+  margin: 0;
+  height: 26px; }
+  .input-field.mult-products-container input[type="text"] {
+    color: #FFFFFF;
+    background-color: #4e68b6;
+    padding-left: 2px; }
+    .input-field.mult-products-container input[type="text"]:hover {
+      background: #7287c5; }
+    .input-field.mult-products-container input[type="text"]:focus {
+      background: #4e68b6; }
+  .input-field.mult-products-container > a.ui-multiselect .ui-multiselect-icon::before {
+    color: #FFFFFF;
+    top: 5px;
+    padding-right: 2px; }
+
 @media only screen and (min-width: 993px) {
   .no-customer-border {
     width: 70%; } }

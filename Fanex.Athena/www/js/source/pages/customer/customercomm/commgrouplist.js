@@ -1,4 +1,4 @@
-﻿define(['jquery', 'common/site', 'common/popup', './commgroup'],
+﻿define(['jquery', 'common/site', 'common/popup', './commgroup', 'lib/jquery.multiselect.nlevel'],
     function ($, Site, Popup, CustomerCommGroup) {
         'use strict';
 
@@ -30,6 +30,8 @@
             $('#comm-group-list').on('click', '.customer-list-link', function (e) {
                 CustomerCommGroup.goToCustomerList($(e.target).data('id'));
             });
+
+            initShowHideProducts();
         }
 
         function confirmDeleteCommGroup(groupId) {
@@ -187,6 +189,53 @@
                 }];
 
             Popup.openPopupWithButton('<div><p id="result-msg">' + message + '</p></div>', options, buttons);
+        }
+
+        function initShowHideProducts() {
+            let products = $('#ProductList').val().split(",");
+            var dataUI = [];
+            for (let i = 0; i < products.length; i++) {
+                var product = products[i];
+                dataUI.push({
+                    Id: product,
+                    Value: product,
+                    Text: Site.getSingleResource("Product" + product),
+                    Checked: true,
+                    Enable: true,
+                    Css: '',
+                    CssClass: ''
+                });
+            }
+
+            $("#mult-products").multiSelect({
+                minWidth: 200,
+                maxHeight: 400,
+                shadow: true,
+                showHeader: true,
+                isCheckAll: true,
+                showFooter: false,
+                checkAllText: Site.getSingleResource('All'),
+                noneSelectedText: Site.getSingleResource('SelectOptions'),
+                tooltipNoItem: Site.getSingleResource('ThereIsNoSelectedItem'),
+                selectedText: Site.getSingleResource('SelectedItemCount'),
+                listData: dataUI,
+                onCheck: function () {
+                    var $this = $(this);
+                    var isSelected = $this.is(":checked");
+                    var selectedProducts = $this.attr("id") == "mult-productsHeaderCheckBox"
+                        ? isSelected ? $("#mult-products").multiSelect("getCheckedItems") : products
+                        : [$this.val()];
+
+                    for (var i = 0; i < selectedProducts.length; i++) {
+                        var elm = $(".col-" + selectedProducts[i]);
+                        if (isSelected) {
+                            elm.removeClass("hide");
+                        } else {
+                            elm.addClass("hide");
+                        }
+                    }
+                }
+            });
         }
 
         const _me = {

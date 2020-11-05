@@ -13,7 +13,7 @@
 
     public class CustomerCommGroupExcel : ReportBase
     {
-        private const int ColumnTemplateCount = 11;
+        private readonly int ColumnTemplateCount = 4;
         private const int RowContentTemplate = 2;
         private const int RowNoInfoTemplate = 5;
 
@@ -36,6 +36,8 @@
             {
                 hasColumnInTable.Add(p.Key, _exportData.Columns.Contains(p.Value + "Comm"));
             }
+
+            ColumnTemplateCount = 4 + productPermissions.Count;
         }
 
         protected override void AssignHeader(ISheet sheet)

@@ -1,7 +1,8 @@
-﻿@{
+﻿@using Fanex.Athena.Model.Customer.ViewModel.CommissionGroupList;
+@model CommissionGroupListViewModel
+@{
     Layout = null;
 }
-
 <div class="page-form">
     @using (Html.BeginForm("ExportExcel", "CustomerComGroup", FormMethod.Post, new { @id = "CommissionGroupForm" }))
     {
@@ -24,6 +25,12 @@
 </div>
 <div class="page-action">
     <a id="NewGroupButton" class="btn btn-add" href="@Url.Action("Create", "CustomerComGroup")" title="@ViewResources.CreateNewGroup">@ViewResources.NewGroup</a>
+    @if (Model.Groups.Any())
+    {
+        <div class="input-field multiselect-container mult-products-container">
+            <select id="mult-products" name="mult-products" class="mult-products"></select>
+        </div>
+    }
 </div>
 <div id="confirm-delete-comm-group">
     <div>

@@ -63,7 +63,7 @@ namespace Fanex.Athena.Model.Core.DTO.Common
         public const string I4D = "I4D";
 
         public const string SXG = "SXG";
-        
+
         public const string SBC = "SBC";
 
         public const string SAG = "SAG";
