@@ -1,7 +1,6 @@
 ﻿import { specialLevelListWithColor } from '../constants';
 
 import LapPlayerQueryService from './lapPlayerQueryService';
-import PlayerMultipleQueryService from './playerMultipleQueryService';
 import LrfPlayerQueryService from './lrfPlayerQueryService';
 
 export default class QueryServiceFactory {

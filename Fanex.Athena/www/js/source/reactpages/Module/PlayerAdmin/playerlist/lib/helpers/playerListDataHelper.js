@@ -53,24 +53,6 @@ export default class PlayerListDataHelper {
         return lrfPlayerDic;
     }
 
-    static getDataObject(targetList, listToMatch) {
-        return targetList.reduce((accumulator, currentItem) => {
-            const isExist = listToMatch.findIndex(p => this._isMatchIbcCustId(currentItem, p)) !== -1;
-            if (isExist) {
-                accumulator.commonList.push(currentItem);
-            } else {
-                accumulator.differenceList.push(currentItem);
-            }
-
-            return accumulator;
-        }, { commonList: [], differenceList: [] })
-    }
-
-    static _isMatchIbcCustId(source, destination) {
-        return ((!!destination.IbcCustId || !!source.IBCCustId) && destination.IbcCustId === source.IBCCustId) ||
-            ((!!destination.IBCCustId || !!source.IbcCustId) && destination.IBCCustId === source.IbcCustId);
-    }
-
     static createEmptyResult() {
         return {
             playerList: [],

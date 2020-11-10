@@ -119,8 +119,8 @@ export const searchOptions = {
 
 export const defaultPagingOption = {
     PageIndex: 1,
-    PageSize: 50,
-    PageList: [50, 100, 200, 500],
+    PageSize: 500,
+    PageList: [500],
     TotalItem: null
 }
 
@@ -214,3 +214,5 @@ export const playerTypes = {
 };
 
 export const emailPattern = '^([a-zA-Z0-9_\\.\\-])+\\@(([a-zA-Z0-9\\-])+\\.)+([a-zA-Z0-9]{2,4})+$';
+
+export const maxLapPageSize = 250;

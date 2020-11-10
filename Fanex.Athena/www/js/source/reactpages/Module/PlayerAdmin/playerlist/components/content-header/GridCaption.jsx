@@ -86,12 +86,18 @@ export class GridCaption extends React.Component {
     }
 
     _buildLeftPart() {
-        const { selectedPlayer } = this.props;
+        const { selectedPlayer, toggleLoader } = this.props;
         if (selectedPlayer) {
             const { userName, currency } = selectedPlayer;
             return (
                 <>
-                    <span className="link" onClick={() => this.props.setSelectedPlayer(null)}>{LangHelper.getSingleResource('PreviousSearchResult')}</span>
+                    <span className="link" onClick={() => { 
+                        toggleLoader(true)
+                        setTimeout(() => {
+                            this.props.setSelectedPlayer(null);
+                            toggleLoader(false)
+                        }, 10)
+                        }}>{LangHelper.getSingleResource('PreviousSearchResult')}</span>
                     <span><i className="chevron right icon-separator"></i> {LangHelper.getSingleResource('Player')}: {userName} {currency && `(${currency})`}</span>
                 </>
             )
@@ -147,8 +153,8 @@ export class GridCaption extends React.Component {
 }
 
 function mapDispatchToProps(dispatch) {
-    const { setSelectedPlayer, setDisplayedColumnList, exportExcel } = ActionCreators;
-    return bindActionCreators({ setSelectedPlayer, setDisplayedColumnList, exportExcel }, dispatch);
+    const { setSelectedPlayer, setDisplayedColumnList, toggleLoader, exportExcel } = ActionCreators;
+    return bindActionCreators({ setSelectedPlayer, setDisplayedColumnList, toggleLoader, exportExcel }, dispatch);
 }
 
 function mapStateToProps(state) {
