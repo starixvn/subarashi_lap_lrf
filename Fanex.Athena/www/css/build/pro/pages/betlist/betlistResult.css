@@ -285,7 +285,7 @@ body {
     width: 334px; }
   .result-container table.racing .cl-race {
     width: 180px; }
-  .result-container table.racing .cl-result {
+  .result-container table.racing td.cl-result {
     font-weight: bold;
     text-align: left; }
   .result-container table.racing .cl-win, .result-container table.racing .cl-place {
