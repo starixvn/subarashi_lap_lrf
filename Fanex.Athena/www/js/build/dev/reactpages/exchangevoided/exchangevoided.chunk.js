@@ -1999,7 +1999,7 @@ const Note = () => {
     }
   }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Note'), ":"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-9"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "* Support searching void tickets only"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "* Input username to return results faster"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "* Support data up to 2 months")));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "* Support searching void tickets only"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "* Input username to return results faster"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "* Support data up to 1 months")));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Note);

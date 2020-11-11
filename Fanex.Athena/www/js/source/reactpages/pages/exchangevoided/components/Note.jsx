@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import LangHelper from '@jsroot/lib/langHelper';
 
 const Note = () => {
@@ -10,7 +10,7 @@ const Note = () => {
             <div className="col-9">
                 <p>* Support searching void tickets only</p>
                 <p>* Input username to return results faster</p>
-                <p>* Support data up to 2 months</p>
+                <p>* Support data up to 1 months</p>
             </div>
         </div>
     )

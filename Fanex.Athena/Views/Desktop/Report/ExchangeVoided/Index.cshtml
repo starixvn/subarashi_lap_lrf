@@ -13,7 +13,7 @@
 @if (hasPermission)
 {
     var today = DateTime.Now.Date;
-    var minDate = today.AddMonths(-2);
+    var minDate = today.AddMonths(-1);
 
     @section pagecss {
         <link href="@Url.ContentLinkByEnv("/www/css/build/reactpages/exchangevoided/index.css")" rel="stylesheet" type="text/css" />
