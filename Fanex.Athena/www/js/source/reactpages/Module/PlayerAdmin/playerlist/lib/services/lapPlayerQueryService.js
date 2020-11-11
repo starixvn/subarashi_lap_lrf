@@ -1,4 +1,4 @@
-import PlayerListDataHelper from '../helpers/playerListDataHelper';
+﻿import PlayerListDataHelper from '../helpers/playerListDataHelper';
 import { getCustIdListFromLapData, isNonDepositOrArchived } from '../helpers/utils';
 import { buildLapPlayerList } from '../helpers/playerDataBuilder';
 
@@ -6,7 +6,7 @@ export default class LapPlayerQueryService {
     static fetchData(param, commonService, apiInfo) {
         const { lrfDataById, lapSearch } = apiInfo;
 
-        return commonService.fetchData(lapSearch.type, lapSearch.action, {...param })
+        return commonService.fetchData(lapSearch.type, lapSearch.action, { ...param })
             .then(lapResponse => {
                 const { PlayerList: lapPlayerList = [], TotalItem: lapTotalItem = 0 } = lapResponse.data;
                 if (!lapPlayerList || !lapPlayerList.length) {
@@ -35,6 +35,7 @@ export default class LapPlayerQueryService {
             specialLevel: param.specialLevel,
             oddsGroup: param.oddsGroup,
             baFilter: param.baFilter,
+            customerClass: param.customerClass,
             pageSize: param.pageSize,
             pageIndex: 1
         }

@@ -1,4 +1,4 @@
-import * as playerDetailHandlerAction from '../playerDetailHandlerAction';
+﻿import * as playerDetailHandlerAction from '../playerDetailHandlerAction';
 import { SET_SELECTED_PLAYERID_LIST, SET_SELECTED_TAB_NAME } from '../types';
 
 const mockGetLink = jest.fn();

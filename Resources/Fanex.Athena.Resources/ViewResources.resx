@@ -2593,7 +2593,7 @@
   <data name="ESportsApp" xml:space="preserve">
     <value>E-Sports App</value>
   </data>
- <data name="ProductSAG" xml:space="preserve">
+  <data name="ProductSAG" xml:space="preserve">
     <value>SA Gaming</value>
     <comment>128493</comment>
   </data>
@@ -2847,9 +2847,6 @@
   <data name="Log" xml:space="preserve">
     <value>Log</value>
   </data>
-  <data name="ExtraPayout" xml:space="preserve">
-    <value>Extra Payout</value>
-  </data>
   <data name="JackpotWonDetails" xml:space="preserve">
     <value>Jackpot Won Details</value>
   </data>
@@ -2901,5 +2898,8 @@
   </data>
   <data name="DayRangeExceedMsg" xml:space="preserve">
     <value>Date range exceeds {0} days. Please try again!</value>
+  </data>
+  <data name="RepeatedBets" xml:space="preserve">
+    <value>Repeated Bets</value>
   </data>
 </root>

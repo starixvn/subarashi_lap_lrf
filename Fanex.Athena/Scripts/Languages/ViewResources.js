@@ -1,4 +1,4 @@
-﻿// Generated at: 10/28/2020 9:45:52 AM
+﻿// Generated at: 11/5/2020 5:00:43 PM
 var _language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -281,7 +281,6 @@ ExcludeTestData:"Exclude Test Data",
 ExportToExcel:"Export To Excel",
 ExternalId:"External ID",
 ExternalIdOrSystemId:"External ID or System ID",
-ExtraPayout:"Extra Payout",
 ExtraPayout:"Extra Payout",
 Fail:"Fail",
 Feb:"Feb",
@@ -630,6 +629,7 @@ RemoveFromGroup:"Remove from Group",
 RemoveGroupMsg:"Are you sure you want to remove this(these) customer(s) from group?",
 RemoveTheseCustomersFromGroupMsg:"Are you sure you want to remove these customers from group?",
 RemoveThisCustomerFromGroupMsg:"Are you sure you want to remove this customer from group?",
+RepeatedBets:"Repeated Bets",
 Report:"Report",
 ReportBy:"Report By",
 Reset:"Reset",

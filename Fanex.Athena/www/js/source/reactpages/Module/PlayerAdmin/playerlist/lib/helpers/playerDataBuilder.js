@@ -1,4 +1,6 @@
-﻿export const buildSelectedPlayer = (dataItem) => {
+﻿import LangHelper from '@jsroot/lib/langHelper';
+
+export const buildSelectedPlayer = (dataItem) => {
     const { IbcCustId, UserName, Currency, IsDeposit, IsArchived, LicenseeCustId, CurrencyId, CreatedDate } = dataItem;
 
     return {
@@ -11,6 +13,7 @@
         currencyId: CurrencyId,
         createdDate: CreatedDate,
         commissionGroup: dataItem.CommissionGroup,
+        customerClass: dataItem.CustomerClass,
         isClosed: dataItem.Status == 2
     };
 }
@@ -56,7 +59,8 @@ export const buildLapPlayerList = (playerList) => {
             IsArchived: !!isArchived,
             CurrencyId: Currency,
             CreatedDate: CreatedDateString,
-            CommissionGroup: item.CommissionGroup
+            CommissionGroup: item.CommissionGroup,
+            CustomerClass: item.CustomerClass || LangHelper.getSingleResource("None")
         };
     });
 }
@@ -77,6 +81,7 @@ export const buildCurrentActivePlayer = (dataItem) => {
         currencyId: CurrencyId,
         createdDate: CreatedDate,
         commissionGroup: dataItem.CommissionGroup,
+        customerClass: dataItem.CustomerClass,
         isClosed: dataItem.Status == 2
     };
 }

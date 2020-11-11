@@ -1578,7 +1578,8 @@ const Popup = props => {
   }
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: `popup-container ${isShow ? 'show' : 'hide'}`
+    className: `popup-container ${isShow ? 'show' : 'hide'}`,
+    onClick: props.onClick
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "popup-block-body"
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1608,7 +1609,8 @@ Popup.propTypes = {
   isShow: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool,
   onClose: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
   isHtml: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool,
-  iframeUrl: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string
+  iframeUrl: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
+  onClick: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func
 };
 Popup.defaultProps = {
   width: _constants__WEBPACK_IMPORTED_MODULE_1__["DEFAULT_WIDTH"],

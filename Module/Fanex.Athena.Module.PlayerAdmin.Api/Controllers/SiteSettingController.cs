@@ -12,7 +12,6 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Controllers
     public class SiteSettingController : ExternalApiBaseController
     {
         private readonly ILicenseeSettingService _licenseeSettingService;
-
         private readonly IAuthorizationService _authService;
 
         public SiteSettingController(ILicenseeSettingService licenseeSettingService, IAuthorizationService authService)

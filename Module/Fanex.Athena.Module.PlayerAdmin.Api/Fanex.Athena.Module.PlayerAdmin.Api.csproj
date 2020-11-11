@@ -140,6 +140,7 @@
     <Compile Include="DataDomains\LogActionDetailId.cs" />
     <Compile Include="DataDomains\LogText.cs" />
     <Compile Include="Utilities\ResourceKeyConstants.cs" />
+    <Compile Include="ViewModels\LRFFiltersViewModel.cs" />
     <Compile Include="ViewModels\PlayerListResultViewModel.cs" />
     <Compile Include="ViewModels\SiteSettingViewModel.cs" />
   </ItemGroup>

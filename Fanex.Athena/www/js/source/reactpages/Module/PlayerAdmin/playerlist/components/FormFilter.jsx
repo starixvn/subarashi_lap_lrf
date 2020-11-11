@@ -10,7 +10,11 @@ import { licenseeType } from '../lib/constants';
 import CollapsiblePanel from '@jsroot/components/collapsible-panel';
 import UserGuide from '@jsroot/components/UserGuide';
 import LangHelper from '@jsroot/lib/langHelper';
-import { searchOptions, baStatusList, specialLevelListWithColor, emailPattern, oddsGroupListWithStyle } from '../lib/constants';
+import {
+    searchOptions, baStatusList, specialLevelListWithColor,
+    emailPattern, oddsGroupListWithStyle, customerClassList
+} from '../lib/constants';
+
 import UserNameInput from './filter/UserNameInput';
 import QueryString from '@jsroot/lib/QueryString';
 import { encode } from '@jsroot/lib/htmlHelper';
@@ -37,7 +41,8 @@ export class FormFilter extends PureComponent {
             specialLevel: this.allSpecialLevel,
             baFilter: baStatusList.All,
             searchOption: searchOptions.matchPrecise,
-            isMatchPrecise: true
+            isMatchPrecise: true,
+            customerClass: ""
         }
     }
 
@@ -55,6 +60,7 @@ export class FormFilter extends PureComponent {
 
         const { type, isSubsidiary, hasCommPermissionRead } = this.props;
         this.props.getSiteSetting(type, isSubsidiary, hasCommPermissionRead);
+        this.props.getLRFFilters();
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -64,9 +70,10 @@ export class FormFilter extends PureComponent {
                 currencyIdList: this.allCurrencyString,
                 oddsGroup: this.allOddsGroupString,
                 specialLevel: this.allSpecialLevel,
-                baFilter: baStatusList.All
+                baFilter: baStatusList.All,
+                customerClass: ""
             });
-        } 
+        }
     }
 
     searchPlayer() {
@@ -115,7 +122,7 @@ export class FormFilter extends PureComponent {
     handleChange = (event) => {
         const { name, value } = event.target;
 
-        if(name == "searchOption") {
+        if (name == "searchOption") {
             this.setState({ isMatchPrecise: value == 4 });
         }
 
@@ -188,7 +195,8 @@ export class FormFilter extends PureComponent {
                         currencyList={currencyList}
                         param={advancedSearchParam}
                         isAllowedBA={siteSetting.isAllowedBA}
-                        onChange={this.handleSpecificInputChange} />
+                        onChange={this.handleSpecificInputChange}
+                        lrfFilters={this.props.lrfFilters} />
                     }
 
                     <div className="col-12 col-md-2 col-sm-2 col-lg-2 col-xl-1">
@@ -214,12 +222,12 @@ export class FormFilter extends PureComponent {
     }
 }
 function mapDispatchToProps(dispatch) {
-    const { searchPlayer, setAdvancedSearch, setCollapseFilter, getSuggestionList, getSinglePlayer, getSiteSetting } = ActionCreators;
-    return bindActionCreators({ searchPlayer, setAdvancedSearch, setCollapseFilter, getSuggestionList, getSinglePlayer, getSiteSetting }, dispatch);
+    const { searchPlayer, setAdvancedSearch, setCollapseFilter, getSuggestionList, getSinglePlayer, getSiteSetting, getLRFFilters } = ActionCreators;
+    return bindActionCreators({ searchPlayer, setAdvancedSearch, setCollapseFilter, getSuggestionList, getSinglePlayer, getSiteSetting, getLRFFilters }, dispatch);
 }
 function mapStateToProps(state) {
-    const { type, isAdvancedSearch, isFilterCollapsing, pagingOption, currencyList, siteSetting, isSubsidiary } = state;
-    return Object.assign({}, { type, isAdvancedSearch, isFilterCollapsing, pagingOption, currencyList, siteSetting, isSubsidiary });
+    const { type, isAdvancedSearch, isFilterCollapsing, pagingOption, currencyList, siteSetting, isSubsidiary, lrfFilters } = state;
+    return Object.assign({}, { type, isAdvancedSearch, isFilterCollapsing, pagingOption, currencyList, siteSetting, isSubsidiary, lrfFilters });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormFilter);

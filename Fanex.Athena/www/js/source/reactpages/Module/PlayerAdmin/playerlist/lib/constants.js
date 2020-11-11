@@ -43,7 +43,8 @@ export const fields = {
     SpecialLevel: 'SpecialLevel',
     LastTransaction: 'LastTransaction',
     Email: 'Email',
-    CommissionGroup: 'CommissionGroup'
+    CommissionGroup: 'CommissionGroup',
+    CustomerClass: 'CustomerClass'
 }
 
 export const columnList = [
@@ -60,7 +61,8 @@ export const columnList = [
     { key: fields.SpecialLevel, value: LangHelper.getSingleResource('SpecialLevel'), show: true },
     { key: fields.LastTransaction, value: LangHelper.getSingleResource('LastTransfer'), show: true },
     { key: fields.Email, value: LangHelper.getSingleResource('Email'), show: true },
-    { key: fields.CommissionGroup, value: LangHelper.getSingleResource('CommissionGroup'), show: true }
+    { key: fields.CommissionGroup, value: LangHelper.getSingleResource('CommissionGroup'), show: true },
+    { key: fields.CustomerClass, value: LangHelper.getSingleResource('CustomerClass'), show: true }
 ];
 
 export const contextMenuKeys = {
@@ -151,7 +153,7 @@ export const baStatusList = {
     'All': 0,
     'On': 1,
     'Off': 2
-}
+};
 
 export const headerText = {
     Index: '',
@@ -167,7 +169,8 @@ export const headerText = {
     SpecialLevel: LangHelper.getSingleResource('SpecialLevel'),
     LastTransaction: LangHelper.getSingleResource('LastTransfer'),
     Email: LangHelper.getSingleResource('Email'),
-    CommissionGroup: LangHelper.getSingleResource('CommissionGroup')
+    CommissionGroup: LangHelper.getSingleResource('CommissionGroup'),
+    CustomerClass: LangHelper.getSingleResource('CustomerClass')
 }
 
 export const gridItemDropdownHeight = {
@@ -193,7 +196,7 @@ export const apiUpdateInfo = {
     updatePlayerStatus: { action: 'PlayerAdminContainer/UpdatePlayerStatus', type: systemType.newAdmin }
 }
 
-export const apiSiteSetting = { action: 'api/SiteSetting/GetSetting', type: systemType.lrf };
+export const apiSiteSetting = { type: systemType.lrf, action: 'api/SiteSetting/GetSetting' };
 
 export const apiSuggestion = { action: 'PlayerAdminContainer/GetSuggestionList', type: systemType.newAdmin };
 
@@ -208,6 +211,6 @@ export const excludedContextMenuWithApiLicensee = [contextMenuKeys.password, con
 export const playerTypes = {
     nonDeposit: 1,
     deposit: 2
-}
+};
 
 export const emailPattern = '^([a-zA-Z0-9_\\.\\-])+\\@(([a-zA-Z0-9\\-])+\\.)+([a-zA-Z0-9]{2,4})+$';

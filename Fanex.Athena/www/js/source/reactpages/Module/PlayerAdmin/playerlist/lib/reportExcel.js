@@ -2,8 +2,7 @@
 import NumberFormat from '@jsroot/lib/numberFormat';
 import { headerCellStyle, bodyCellStyle } from '@jsroot/constants/excelStyle';
 import { fields, headerText } from './constants';
-import { getSpecialLevelText, getBaStatusText, getPlayerStatus } from './helpers/utils';
-import LangHelper from '@jsroot/lib/langHelper';
+import { getSpecialLevelText, getBaStatusText, getPlayerStatus, getCustomerClassText } from './helpers/utils';
 import $ from 'jquery';
 
 const HEADER_ROW_INDEX = 0;
@@ -98,6 +97,10 @@ export default class ReportExcel {
             value = $(".td-comm-" + item.IbcCustId).html();
         }
 
+        if (columnConfig.field === fields.CustomerClass) {
+            value = getCustomerClassText(value);
+        }
+
         const displayedTextFunc = displayedTextByField[columnConfig.field];
         const displayedValue = this._shouldSetEmpty(value) ? '' :
             (displayedTextFunc ? displayedTextFunc(value) : value);
@@ -185,6 +188,12 @@ export default class ReportExcel {
                 width: 120
             });
         }
+
+        result.push({
+            field: fields.CustomerClass,
+            [MAIN_SECTION_STYLE]: bodyCellStyle.center,
+            width: 120
+        });
 
         return result.filter(x => !!this.displayedColumn[x.field]);
     }

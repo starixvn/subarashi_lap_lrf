@@ -121,7 +121,6 @@
       <Setting Key="Lrf_ProblemAccount_LicenseeVIPPlayerSel" SpName="Lrf_ProblemAccount_LicenseeVIPPlayerSel" DbName="DBACC.bodb02.bodbLicenseeNet" />
       <Setting Key="Lrf_ProblemAccount_LicenseeVipPlayerUpd" SpName="Lrf_ProblemAccount_LicenseeVipPlayerUpd" DbName="DBCUST.CustDB.bodbLicenseeNet" />
       <Setting Key="Lrf_ProblemAccount_ReasonGroupSel" SpName="Lrf_ProblemAccount_ReasonGroupSel" DbName="DBACC.bodb02.bodbLicenseeNet" />
-      <Setting Key="Lrf_ProblemAccount_CustomerClassPolicySel" SpName="Lrf_ProblemAccount_CustomerClassPolicySel" DbName="DBCUST.CustDB.bodbLicenseeNet" />
     </Function>
     <!-- End - PlayerSegmentation -->
   </Function>
@@ -224,6 +223,11 @@
   </Function>
   <Function Name="Player Admin - Detail Transaction">
     <Setting Key="LAP_Rpt_DetailTransaction_Mem" SpName="LAP_Rpt_DetailTransaction_Mem" DbName="DBBAH.bodb02.bodbLicenseeNet" />
+  </Function>
+  <Function Name="Customer Class">
+    <Setting Key="Lrf_CustomerClassSel" SpName="Lrf_CustomerClassSel" DbName="DBCUST.CustDB.bodbLicenseeNet" />
+    <Setting Key="Lrf_CustomerClassPolicySel" SpName="Lrf_CustomerClassPolicySel" DbName="DBCUST.CustDB.bodbLicenseeNet" />
+    <Setting Key="Lrf_CustomerClassSitePolicySel" SpName="Lrf_CustomerClassSitePolicySel" DbName="DBCUST.CustDB.bodbLicenseeNet" />
   </Function>
 </Functions>
 

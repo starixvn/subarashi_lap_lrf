@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 10/28/2020 9:46:06 AM
+// Generated at: 11/5/2020 5:00:54 PM
 window._language_zh_CN = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -336,7 +336,6 @@ window._language_zh_CN = {
   ExportToExcel: "导出至Excel",
   ExternalId: "用户名",
   ExternalIdOrSystemId: "或系统帐号(支援前缀搜寻)",
-  ExtraPayout: "额外派彩",
   ExtraPayout: "额外派彩",
   Fail: "失败",
   Feb: "二月",
@@ -659,6 +658,7 @@ window._language_zh_CN = {
   RemoveGroupMsg: "您确定要从组中移除此(这些)会员?",
   RemoveTheseCustomersFromGroupMsg: "您确定要从组中移除这些会员?",
   RemoveThisCustomerFromGroupMsg: "您确定要从组中移除该会员?",
+  RepeatedBets: "重复投注限制",
   Report: "报告",
   ReportBy: "报告由",
   Reset: "重设",

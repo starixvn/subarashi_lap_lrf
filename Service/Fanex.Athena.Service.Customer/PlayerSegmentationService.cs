@@ -9,7 +9,6 @@
     using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
     using Fanex.Athena.Model.Customer.Enum;
     using Fanex.Athena.Model.Customer.MetaModel;
-    using Fanex.Athena.Model.Customer.MetaModel.PlayerSegmentation;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.Customer.Interfaces;
 
@@ -81,11 +80,6 @@
             return PlayerSegmentationViewType.WhiteLabel;
         }
 
-        public async Task<IEnumerable<CustomerClassModel>> GetCustomerClassInformation(GetCustomerClassInformationMetaModel metaModel)
-        {
-            var result = await _playerDataAccess.GetCustomerClassInformation(metaModel);
-            return result;
-        }
 
         private void BindAgentListBySubsidiaryBiz(BasePlayerListMetaModel metaModel)
         {

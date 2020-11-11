@@ -23,5 +23,7 @@
         public int SpecialLevel { get; set; }
 
         public string CommissionGroup { get; set; }
+
+        public string CustomerClass { get; set; }
     }
 }

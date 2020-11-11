@@ -1,4 +1,4 @@
-import { specialLevelListWithColor } from '../constants';
+﻿import { specialLevelListWithColor, customerClassList } from '../constants';
 
 import LapPlayerQueryService from './lapPlayerQueryService';
 import PlayerMultipleQueryService from './playerMultipleQueryService';
@@ -22,6 +22,7 @@ export default class QueryServiceFactory {
         return Number(baFilter) !== 0 ||
             currencyIdList !== '' ||
             oddsGroup !== '' ||
-            Object.keys(specialLevelListWithColor).length !== specialLevel.split(',').length;
+            Object.keys(specialLevelListWithColor).length !== specialLevel.split(',').length ||
+            param.customerClass != "";
     }
 }

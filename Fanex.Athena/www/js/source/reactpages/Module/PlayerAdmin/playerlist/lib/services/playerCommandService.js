@@ -1,4 +1,4 @@
-import FactoryCommonService from '../../../../lib/factoryCommonService';
+﻿import FactoryCommonService from '../../../../lib/factoryCommonService';
 import { apiUpdateInfo } from '../constants';
 
 export default class PlayerCommandService {
@@ -9,24 +9,24 @@ export default class PlayerCommandService {
     updateBaStatus(param) {
         const { updateBaStatus } = apiUpdateInfo;
 
-        return this.commonService.fetchData(updateBaStatus.type, updateBaStatus.action, {...param });
+        return this.commonService.fetchData(updateBaStatus.type, updateBaStatus.action, { ...param });
     }
 
     updateOddsGroup(param) {
         const { updateOddsGroup } = apiUpdateInfo;
 
-        return this.commonService.fetchData(updateOddsGroup.type, updateOddsGroup.action, {...param });
+        return this.commonService.fetchData(updateOddsGroup.type, updateOddsGroup.action, { ...param });
     }
 
     updateSpecialLevel(param) {
         const { updateSpecialLevel } = apiUpdateInfo;
 
-        return this.commonService.fetchData(updateSpecialLevel.type, updateSpecialLevel.action, {...param });
+        return this.commonService.fetchData(updateSpecialLevel.type, updateSpecialLevel.action, { ...param });
     }
 
     updatePlayerStatus(param) {
         const { updatePlayerStatus } = apiUpdateInfo;
 
-        return this.commonService.fetchData(updatePlayerStatus.type, updatePlayerStatus.action, {...param });
+        return this.commonService.fetchData(updatePlayerStatus.type, updatePlayerStatus.action, { ...param });
     }
 }

@@ -1,4 +1,5 @@
-﻿using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
+﻿using System.Collections.Generic;
+using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.ViewModels;
 
 namespace Fanex.Athena.Module.PlayerAdmin.Api.Services.Interfaces
@@ -8,5 +9,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services.Interfaces
         PlayerListResultViewModel Search(PlayerSearchingMetaModel metaModel);
 
         PlayerListResultViewModel GetPlayerListById(PlayerListByIdMetaModel metaModel);
+
+        List<string> CustomerClass(string licenseeName);
     }
 }

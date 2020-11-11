@@ -52,10 +52,29 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
             return result;
         }
 
+        public List<string> CustomerClass(string licenseeName)
+        {
+            var result = new List<string> { "0" };
+
+            using (var objectDb = _dbFactory.GetObjectDb("Lrf_CustomerClassSel"))
+            {
+                using (var reader = objectDb.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        result.Add(reader["CustomerClass"].ToString());
+                    }
+                }
+            }
+
+            return result;
+        }
+
         private static void AssignCommonParam(IObjectDb objectDb, PlayerListBaseMetaModel metaModel)
         {
             objectDb.SetParameterValue("LicenseeName", metaModel.SiteName);
             objectDb.SetParameterValue("AgentList", metaModel.AgentListXml);
+            objectDb.SetParameterValue("CustomerClass", metaModel.CustomerClass);
         }
 
         private static void AssignParamByUserName(IObjectDb objectDb, PlayerSearchingMetaModel metaModel)
@@ -100,10 +119,11 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
                         UserName = reader["NickName"].ToString(),
                         BaStatus = Convert.ToBoolean(reader["BAStatus"]),
                         SpecialLevel = Convert.ToInt32(reader["SpecialLevel"]),
-                        OddsGroup = reader["OddsGroup"].ToString(),
+                        OddsGroup = reader["OddsGroup"].ToString().ToUpperInvariant(),
                         CurrentBalance = Convert.ToDecimal(reader["TotalBalance"]),
                         OutstandingBalance = Convert.ToDecimal(reader["Outstanding"]),
-                        CommissionGroup = Convert.ToString(reader["GroupName"])
+                        CommissionGroup = Convert.ToString(reader["GroupName"]),
+                        CustomerClass = Convert.ToString(reader["CustomerClass"])
                     });
                 }
             }

@@ -9,21 +9,29 @@ export default class CustomerClassCell extends React.Component {
         this.state = { isShowCustomerClassInformation: false }
     };
 
-    showCustomerClassInformation = () => {
+    showCustomerClassInformation = (e) => {
         this.setState({ isShowCustomerClassInformation: true });
+        e.stopPropagation();
+        return false;
     };
 
     closeCustomerClassInfomation = () => {
         this.setState({ isShowCustomerClassInformation: false });
     };
 
+    clickOnPopup = (e) => {
+        e.stopPropagation();
+        return false;
+    };
+
     render() {
-        var url = "PlayerSegmentation/CustomerClassInformation?time=" + (new Date().getTime());
+        var url = "CustomerClass/CustomerClassInformation?time=" + (new Date().getTime());
         return (<>
             {this.props.cell.text}&nbsp;&nbsp;<div class="icon-info" onClick={this.showCustomerClassInformation}></div>
             <Popup width={800} height={600} isShow={this.state.isShowCustomerClassInformation}
                 title={LangHelper.getSingleResource('CustomerClassInformation')}
-                onClose={this.closeCustomerClassInfomation} isHtml="false"
+                onClose={this.closeCustomerClassInfomation}
+                onClick={this.clickOnPopup} isHtml="false"
                 iframeUrl={url}></Popup>
         </>);
     }

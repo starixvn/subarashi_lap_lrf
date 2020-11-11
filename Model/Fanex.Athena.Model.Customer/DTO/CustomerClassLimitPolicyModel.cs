@@ -1,8 +1,8 @@
-﻿namespace Fanex.Athena.Model.Customer.DTO.PlayerSegmentation
+﻿namespace Fanex.Athena.Model.Customer.DTO
 {
-    public class CustomerClassModel
+    public class CustomerClassLimitPolicyModel
     {
-        public string CustomerClass { get; set; }
+        public string Id { get; set; }
         public int LiveType { get; set; }
 
         public string SportType { get; set; }
@@ -13,5 +13,7 @@
         public string BetInterval { get; set; }
         public string MaxBet { get; set; }
         public string MaxPerMatch { get; set; }
+
+        public string RepeatedBets { get; set; }
     }
 }

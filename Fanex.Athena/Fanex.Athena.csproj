@@ -990,7 +990,7 @@
     <Content Include="Views\Desktop\Customer\CustomerComm\Menu.cshtml" />
     <Content Include="Views\Desktop\Customer\CustomerLog\GroupCommLog\Menu.cshtml" />
     <Content Include="Views\Desktop\Customer\PlayerSegmentation\BetList.cshtml" />
-    <Content Include="Views\Desktop\Customer\PlayerSegmentation\CustomerClassInformation.cshtml" />
+    <Content Include="Views\Desktop\Customer\CustomerClass\CustomerClassInformation.cshtml" />
     <Content Include="Views\Desktop\Report\SabaVirtualSportsWinLoss\Content.cshtml" />
     <Content Include="App_Data\Template\PlayerAdmin\DetailTransaction.xls" />
     <Content Include="Views\Desktop\Report\SabaVirtualSportsWinLoss\Filter.cshtml" />
@@ -1370,6 +1370,7 @@
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\actions\gridUserNameAction.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\actions\index.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\actions\playerDetailHandlerAction.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\actions\lrfFiltersAction.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\actions\siteSettingAction.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\batch-update\batch-update-manager.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\actions\types.js" />
@@ -1393,6 +1394,7 @@
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\grid\SpecialLevelDropdown.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\grid\StatusCell.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\grid\StatusDropdown.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\grid\HeaderCustomerClassCell.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\grid\UserNameCell.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\index.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\PlayerDetail.jsx" />
@@ -1423,6 +1425,7 @@
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\lib\services\playerQueryService.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\lib\services\playerSuggestionService.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\lib\services\queryServiceFactory.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\lib\services\lrfFiltersService.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\lib\services\siteSettingService.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\reducers\filterHandlerReducer.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\reducers\gridHandlerReducer.js" />
@@ -1432,6 +1435,7 @@
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\reducers\gridUserNameReducer.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\reducers\index.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\reducers\playerDetailHandlerReducer.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\reducers\lrfFiltersReducer.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\reducers\siteSettingReducer.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\reducers\__tests__\filterHandlerReducer.test.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\reducers\__tests__\playerDetailHandlerReducer.test.js" />
