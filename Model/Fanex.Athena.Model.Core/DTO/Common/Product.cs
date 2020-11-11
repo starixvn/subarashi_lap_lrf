@@ -71,6 +71,7 @@ namespace Fanex.Athena.Model.Core.DTO.Common
         public const string SAG = "SAG";
 
         public const string JK = "JK";
+        public const string PGS = "PGS";
 
         #endregion Field
 

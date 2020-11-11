@@ -22,16 +22,8 @@
             $('#ExportToExcel').click(function () {
                 $('#CommissionGroupForm').submit();
             });
-
-            $('#comm-group-list').on('click', '.delete-comm-group', function (e) {
-                _me.confirmDeleteCommGroup($(e.target).data('id'));
-            });
-
-            $('#comm-group-list').on('click', '.customer-list-link', function (e) {
-                CustomerCommGroup.goToCustomerList($(e.target).data('id'));
-            });
-
             initShowHideProducts();
+            initTableComm();
         }
 
         function confirmDeleteCommGroup(groupId) {
@@ -234,8 +226,30 @@
                             elm.addClass("hide");
                         }
                     }
+
+                    assignTableCommWidth();
                 }
             });
+        }
+
+        function initTableComm() {
+            let tableComm = $('#comm-group-list');
+            tableComm.on('click', '.delete-comm-group', function (e) {
+                _me.confirmDeleteCommGroup($(e.target).data('id'));
+            });
+
+            tableComm.on('click', '.customer-list-link', function (e) {
+                CustomerCommGroup.goToCustomerList($(e.target).data('id'));
+            });
+
+            assignTableCommWidth();
+        }
+
+        function assignTableCommWidth() {
+            let tableComm = $('#comm-group-list');
+
+            let tableWidth = 830 + 115 * $("#mult-products").multiSelect("getCheckedItems").length;
+            tableComm.css("width", tableWidth + "px");
         }
 
         const _me = {
