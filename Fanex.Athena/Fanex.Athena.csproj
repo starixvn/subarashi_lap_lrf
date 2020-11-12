@@ -826,6 +826,8 @@
     <Content Include="www\css\build\dev\pages\betlist\images\rebateBonus.png" />
     <Content Include="www\css\build\dev\pages\customer\customer-class.chunk.js" />
     <Content Include="www\css\build\dev\pages\customer\customer-class.css" />
+    <Content Include="www\css\build\dev\pages\components\fixedColumnsTable.chunk.js" />
+    <Content Include="www\css\build\dev\pages\components\fixedColumnsTable.css" />
     <Content Include="www\css\build\dev\pages\playercommission\index.chunk.js" />
     <Content Include="www\css\build\dev\pages\playercommission\index.css" />
     <Content Include="www\css\build\dev\pages\reports\sabavirtualsportswinloss.chunk.js" />
@@ -888,6 +890,8 @@
     <Content Include="www\css\build\pro\pages\betlist\images\rebateBonus.png" />
     <Content Include="www\css\build\pro\pages\customer\customer-class.chunk.js" />
     <Content Include="www\css\build\pro\pages\customer\customer-class.css" />
+    <Content Include="www\css\build\pro\pages\components\fixedColumnsTable.chunk.js" />
+    <Content Include="www\css\build\pro\pages\components\fixedColumnsTable.css" />
     <Content Include="www\css\build\pro\pages\customer\customerlist.chunk.js" />
     <Content Include="www\css\build\pro\pages\playercommission\index.chunk.js" />
     <Content Include="www\css\build\pro\pages\playercommission\index.css" />
@@ -1010,6 +1014,12 @@
     <Content Include="www\css\source\pages\customer\customer-class.scss" />
     <Content Include="www\css\build\dev\pages\customer\customer-class.chunk.js.map" />
     <Content Include="www\css\build\dev\pages\customer\customer-class.css.map" />
+    <Content Include="www\css\source\components\bootstrap-table\bootstrap-table-fixed-columns.scss" />
+    <Content Include="www\css\source\components\bootstrap-table\bootstrap-table.scss" />
+    <Content Include="www\css\build\dev\pages\components\fixedColumnsTable.chunk.js.map" />
+    <Content Include="www\css\build\dev\pages\components\fixedColumnsTable.css.map" />
+    <Content Include="www\css\source\components\bootstrap-table\themes\bootstrap\_variables.scss" />
+    <Content Include="www\css\source\components\bootstrap-table\themes\_theme.scss" />
     <None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
     <None Include="www\css\source\pages\betlist\result\result.happy5.scss" />
     <None Include="www\css\source\reactpages\components\alert\icons\error.scss" />
@@ -1120,6 +1130,11 @@
     <Content Include="www\js\source\extensions\ajaxBinaryTransporting.js" />
     <Content Include="www\js\source\helpers\datahelper.js" />
     <Content Include="www\js\source\helpers\downloader.js" />
+    <Content Include="www\js\source\lib\bootstrap-table\bootstrap-table-fixed-columns.js" />
+    <Content Include="www\js\source\lib\bootstrap-table\bootstrap-table.js" />
+    <Content Include="www\js\source\lib\bootstrap-table\constants\index.js" />
+    <Content Include="www\js\source\lib\bootstrap-table\utils\index.js" />
+    <Content Include="www\js\source\lib\bootstrap-table\virtual-scroll\index.js" />
     <Content Include="www\js\source\pages\customer\customerlist\customerlist.gridoption.dormant.js" />
     <Content Include="www\js\source\pages\customer\customerlist\customerlist.service.dormant.js" />
     <Content Include="www\js\source\pages\playercommission\playercommissioncommon.js" />

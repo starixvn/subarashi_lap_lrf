@@ -1,5 +1,6 @@
-﻿define(['jquery', 'common/site', 'common/popup', './commgroup', 'lib/jquery.multiselect.nlevel'],
-    function ($, Site, Popup, CustomerCommGroup) {
+﻿define(['jquery', 'common/site', 'common/popup', './commgroup', 'lib/numberformat',
+    'lib/jquery.multiselect.nlevel', 'lib/bootstrap-table/bootstrap-table', 'lib/bootstrap-table/bootstrap-table-fixed-columns'],
+    function ($, Site, Popup, CustomerCommGroup, NumberFormatter) {
         'use strict';
 
         const deleteGroupData = {
@@ -212,44 +213,145 @@
                 selectedText: Site.getSingleResource('SelectedItemCount'),
                 listData: dataUI,
                 onCheck: function () {
-                    var $this = $(this);
-                    var isSelected = $this.is(":checked");
-                    var selectedProducts = $this.attr("id") == "mult-productsHeaderCheckBox"
-                        ? isSelected ? $("#mult-products").multiSelect("getCheckedItems") : products
-                        : [$this.val()];
-
-                    for (var i = 0; i < selectedProducts.length; i++) {
-                        var elm = $(".col-" + selectedProducts[i]);
-                        if (isSelected) {
-                            elm.removeClass("hide");
-                        } else {
-                            elm.addClass("hide");
-                        }
+                    var l = $(".fixed-table-container > .fixed-table-body").scrollLeft();
+                    freezeTableCommColumns();
+                    if (l > 0) {
+                        $(".fixed-table-container > .fixed-table-body").scrollLeft(l);
                     }
 
-                    assignTableCommWidth();
+                    $('#comm-group-list .delete-comm-group').on('click', function (e) {
+                        _me.confirmDeleteCommGroup($(e.target).data('id'));
+                    });
                 }
             });
         }
 
         function initTableComm() {
-            let tableComm = $('#comm-group-list');
-            tableComm.on('click', '.delete-comm-group', function (e) {
+            freezeTableCommColumns();
+
+            $('#comm-group-list .delete-comm-group').on('click', function (e) {
                 _me.confirmDeleteCommGroup($(e.target).data('id'));
             });
-
-            tableComm.on('click', '.customer-list-link', function (e) {
-                CustomerCommGroup.goToCustomerList($(e.target).data('id'));
-            });
-
-            assignTableCommWidth();
         }
 
-        function assignTableCommWidth() {
-            let tableComm = $('#comm-group-list');
+        function freezeTableCommColumns() {
+            let $tableComm = $('#comm-group-list');
 
-            let tableWidth = 830 + 115 * $("#mult-products").multiSelect("getCheckedItems").length;
-            tableComm.css("width", tableWidth + "px");
+            const formatter = new NumberFormatter();
+
+            let columns = [
+                { field: 'RowNum', valign: 'middle', align: 'center', title: '#', width: 80, class: 'col-frozen' },
+                { field: 'GroupCommId', valign: 'middle', align: 'center', title: Site.getSingleResource('GroupId'), width: 100, class: 'col-frozen' },
+                {
+                    field: 'GroupName',
+                    valign: 'middle',
+                    halign: 'center',
+                    align: 'left',
+                    title: Site.getSingleResource('GroupName'),
+                    width: 200,
+                    class: 'col-frozen',
+                    formatter: function (val, row) {
+                        var url = Site.resolveClientUrl('CustomerComGroup/Update?groupId=' + row.GroupCommId);
+                        return `<a href="${url}" title="${Site.getSingleResource('EditGroup')}" class="truncate">${val}</a>`;
+                    }
+                },
+                {
+                    field: 'IsDefaultGroup',
+                    valign: 'middle',
+                    align: 'center',
+                    title: Site.getSingleResource('DefaultGroup'),
+                    width: 100,
+                    class: 'col-frozen',
+                    formatter: function (val) {
+                        var s = val ? "icon-checkmark" : "";
+                        return `<div class="${s}"></div>`;
+                    }
+                },
+                {
+                    field: 'NumberOfCustomer',
+                    valign: 'middle',
+                    align: 'center',
+                    title: Site.getSingleResource('NoOfCustmer'),
+                    width: 120,
+                    class: 'col-frozen',
+                    formatter: function (val) {
+                        var n = formatter.formatNumber(val, { format: '#,##0' });
+                        return `<a>${n}</a>`;
+                    }
+                }];
+
+            let products = $('#ProductList').val().split(",");
+            let selectedProducts = $("#mult-products").multiSelect("getCheckedItems");
+            for (var i = 0; i < products.length; i++) {
+                var key = products[i];
+                columns.push({
+                    field: 'Col-' + key,
+                    valign: 'middle',
+                    align: 'center',
+                    title: Site.getSingleResource('Product' + key),
+                    class: `col-${key} ${selectedProducts.indexOf(key) != -1 ? "" : "hide"}`,
+                    width: 115,
+                    formatter: function (val) {
+                        var n = formatter.formatNumber(val * 100, { format: '#,##0.00' });
+                        return `${n}%`;
+                    }
+                });
+            }
+
+            columns.push({
+                field: 'GroupColor',
+                valign: 'middle',
+                align: 'center',
+                title: Site.getSingleResource('GroupColor'),
+                width: 100,
+                class: 'col-frozen',
+                formatter: function (val) {
+                    return `<div class="group-color-box" style="background-color:${val || '#ffffff'};"></div>`;
+                }
+            });
+
+            columns.push({
+                field: 'EditGroup',
+                valign: 'middle',
+                align: 'center',
+                title: Site.getSingleResource('EditGroup'),
+                width: 100,
+                class: 'col-frozen',
+                formatter: function (_, row) {
+                    let editUrl = Site.resolveClientUrl('CustomerComGroup/Update?groupId=' + row.GroupCommId);
+                    return `<a class="icon-pencil" title="${Site.getSingleResource('EditGroup')}" href="${editUrl}"></a>\
+                            <a class="icon-bin delete-comm-group" title="${Site.getSingleResource('DeleteGroup')}" data-id="${row.GroupCommId}"></a>`;
+                }
+            });
+
+            let rows = [];
+            let data = $.parseJSON($("#CommGroupsData").val());
+            for (var i = 0; i < data.length; i++) {
+                let item = data[i];
+                let row = {
+                    RowNum: i + 1,
+                    ...item
+                };
+
+                let commValues = item.CommValues;
+                for (var j = 0; j < products.length; j++) {
+                    var key = products[j];
+                    row['Col-' + key] = commValues[key];
+                }
+
+                rows.push(row);
+            }
+
+            let gridOptions = {
+                columns: columns,
+                data: rows,
+                fixedColumns: true,
+                fixedNumber: 5,
+                fixedRightNumber: 2,
+                showColumns: false
+            };
+
+            $tableComm.bootstrapTable('destroy').bootstrapTable(gridOptions);
         }
 
         const _me = {

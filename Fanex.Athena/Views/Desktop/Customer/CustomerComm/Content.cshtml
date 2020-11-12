@@ -1,83 +1,21 @@
-﻿@using Fanex.Athena.Model.Customer.ViewModel.CommissionGroupList;
+﻿@using Newtonsoft.Json;
+@using Fanex.Athena.Model.Customer.ViewModel.CommissionGroupList;
 @model CommissionGroupListViewModel
 @{
     Layout = null;
-    var groups = Model.Groups;
 }
 <div class="page-results">
     <div class="result-content">
         <div class="main-content">
-            @if (groups.Count == 0)
+            @if (Model.Groups.Count == 0)
             {
                 <p class="no-info-row">@ViewResources.NoInfo</p>
             }
             else
             {
-                <table class="table table-bordered" id="comm-group-list">
-                    <thead>
-                        <tr>
-                            <th class="col-small">#</th>
-                            <th class="col-child medium">@ViewResources.GroupId</th>
-                            <th class="col-medium large">@ViewResources.GroupName</th>
-                            <th class="col-child medium">@ViewResources.DefaultGroup</th>
-                            <th class="col-child medium">@ViewResources.NoOfCustmer</th>
-                            @foreach (var p in Model.ProductPermissions)
-                            {
-                                if (p.Value)
-                                {
-                                    <th class="col-child medium col-comm col-@p.Key">@ViewResources.ResourceManager.GetString("Product" + p.Key)</th>
-                                }
-                            }
-                            <th class="col-child medium">@ViewResources.GroupColor</th>
-                            <th class="col-child medium">@ViewResources.EditGroup</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @{
-                            int number = 1;
-                            foreach (var groupComm in groups)
-                            {
-                                <tr>
-                                    <td class="center-align">@(number++)</td>
-                                    <td class="center-align">@groupComm.GroupCommId</td>
-                                    <td class="left-align">
-                                        <a href="@Url.Action("Update", "CustomerComGroup", new { groupId = @groupComm.GroupCommId })" title="@ViewResources.EditGroup" class="truncate">
-                                            @groupComm.GroupName
-                                        </a>
-                                    </td>
-                                    <td class="center-align @(groupComm.IsDefaultGroup ? "icon-checkmark" : string.Empty)"></td>
-                                    <td class="center-align">
-                                        <a data-id="@groupComm.GroupCommId">
-                                            @groupComm.NumberOfCustomer
-                                        </a>
-                                    </td>
-                                    @foreach (var p in Model.ProductPermissions)
-                                    {
-                                        if (p.Value)
-                                        {
-                                            var comms = groupComm.CommValues;
-
-                                            <td class="center-align col-@p.Key">
-                                                @(comms[p.Key].ToString("P2"))
-                                            </td>
-                                        }
-                                    }
-                                    <td class="center-align">
-                                        <div class="group-color-box" style="background-color:@groupComm.GroupColor;"></div>
-                                    </td>
-                                    <td class="center-align">
-                                        <a class="icon-pencil" href="@Url.Action("Update", "CustomerComGroup", new { groupId = @groupComm.GroupCommId })" title="@ViewResources.EditGroup">
-                                        </a>
-                                        <a class="icon-bin delete-comm-group" data-id="@groupComm.GroupCommId" title="@ViewResources.DeleteGroup">
-                                        </a>
-                                    </td>
-                                </tr>
-                            }
-                        }
-                    </tbody>
-                </table>
-
+                <table id="comm-group-list" class="table table-bordered comm-group-list"></table>
                 <input type="hidden" id="ProductList" value="@(string.Join(",", Model.ProductPermissions.Where(p=>p.Value).Select(p=>p.Key)))" />
+                <input type="hidden" id="CommGroupsData" value="@JsonConvert.SerializeObject(Model.Groups)" />
             }
         </div>
     </div>

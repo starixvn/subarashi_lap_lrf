@@ -60,7 +60,8 @@ var cssPaths = {
     customerturnover: ["./www/css/source/pages/report/customerturnover.scss"],
     customerwinloss: ["./www/css/source/pages/report/customerwinloss.scss"],
     playercomission: ["./www/css/source/pages/playercommission/index.scss"],
-    customerClass: ["./www/css/source/pages/customer/customer-class.scss"]
+    customerClass: ["./www/css/source/pages/customer/customer-class.scss"],
+    fixedColumnsTable: ["./www/css/source/components/bootstrap-table/bootstrap-table.scss", "./www/css/source/components/bootstrap-table/bootstrap-table-fixed-columns.scss"]
 };
 
 var scriptPaths = {
@@ -138,7 +139,7 @@ var scriptPaths = {
     playercomissionmultipleupdategroup: "./www/js/source/pages/playercommission/multipleupdategroup.js",
     playercomissionsinglemovegroup: "./www/js/source/pages/playercommission/singlemovegroup.js",
     playercomissionsingleremovefromgroup: "./www/js/source/pages/playercommission/singleremovefromgroup.js",
-    playercomissionsingleupdategroup: "./www/js/source/pages/playercommission/singleupdategroup.js",
+    playercomissionsingleupdategroup: "./www/js/source/pages/playercommission/singleupdategroup.js"
 };
 
 module.exports = {

@@ -913,6 +913,10 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                             isSuccess: true,
                             custIds: param.CustIds
                         });
+
+                        setTimeout(() => {
+                            location.reload(true);
+                        }, 3000);
                     }
                 });
             },

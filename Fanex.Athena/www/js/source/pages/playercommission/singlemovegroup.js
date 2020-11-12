@@ -94,6 +94,10 @@ define(
                             isSuccess: true,
                             custIds: param.CustIds
                         });
+
+                        setTimeout(() => {
+                            location.reload(true);
+                        }, 3000);
                     }
                 });
             },
