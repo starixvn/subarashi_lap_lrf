@@ -993,6 +993,7 @@
     <Content Include="Views\Desktop\Customer\CustomerClass\CustomerClassInformation.cshtml" />
     <Content Include="Views\Desktop\Report\SabaVirtualSportsWinLoss\Content.cshtml" />
     <Content Include="App_Data\Template\PlayerAdmin\DetailTransaction.xls" />
+    <Content Include="Views\Desktop\BetList\PGSDetail\Main.cshtml" />
     <Content Include="Views\Desktop\Report\SabaVirtualSportsWinLoss\Filter.cshtml" />
     <Content Include="Views\Desktop\Report\SabaVirtualSportsWinLoss\Main.cshtml" />
     <Content Include="www\css\source\pages\report\sabavirtualsportswinloss.scss" />
@@ -2827,7 +2828,9 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="SiteConfig\Web.ConnectionStrings.DEV.config" />
-    <Content Include="SiteConfig\Web.ConnectionStrings.LOCAL.config" />
+    <Content Include="SiteConfig\Web.ConnectionStrings.LOCAL.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="SiteConfig\Web.ConnectionStrings.PRO.config">
       <SubType>Designer</SubType>
     </Content>

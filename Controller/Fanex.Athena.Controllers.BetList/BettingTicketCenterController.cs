@@ -1,5 +1,9 @@
 ﻿namespace Fanex.Athena.Controllers.BetList
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web.Mvc;
     using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth.DataDomain;
@@ -10,10 +14,6 @@
     using Model.Core.DTO.Common;
     using Model.Core.MetaModel.Product;
     using Resources;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Web.Mvc;
     using Web.ActionFilter;
 
     [FunctionAuthorization(PermissionKeys.BettingTicketCenter)]
@@ -197,7 +197,8 @@
                 Product.I4D,
                 Product.SXG,
                 Product.SBC,
-                Product.SAG
+                Product.SAG,
+                Product.PGS
             };
 
             var productAccess = _productService.GetSingleWalletProductAccess(

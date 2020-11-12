@@ -264,5 +264,8 @@
 .betlist-container .combinationLink {
   font-weight: normal; }
 
+.betlist-container label {
+  margin-bottom: 0; }
+
 
 /*# sourceMappingURL=index.css.map*/

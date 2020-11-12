@@ -158,6 +158,7 @@
     <Compile Include="PlatformWinLossBetListController.cs" />
     <Compile Include="CardClubBetListController.cs" />
     <Compile Include="JackpotWonBetListController.cs" />
+    <Compile Include="PGSoftBetListController.cs" />
     <Compile Include="SexyGamingBetListController.cs" />
     <Compile Include="SAGamingBetListController.cs" />
     <Compile Include="SabaClubBetListController.cs" />

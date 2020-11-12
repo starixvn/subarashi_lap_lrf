@@ -26,30 +26,30 @@ namespace Fanex.Athena.Excel.Report
         private const int ColumnCurrency = 4;
 
         private const int ColumnTurnoverSportBook = 5;
-        private const int ColumnTurnoverTotal = 28;
+        private const int ColumnTurnoverTotal = 29;
 
-        private const int ColumnActualStake = 29;
+        private const int ColumnActualStake = 30;
 
-        private const int ColumnBuyBackAmountSportsbook = 30;
-        private const int ColumnBuyBackAmountBA = 31;
-        private const int ColumnBuyBackAmountTotal = 32;
+        private const int ColumnBuyBackAmountSportsbook = 31;
+        private const int ColumnBuyBackAmountBA = 32;
+        private const int ColumnBuyBackAmountTotal = 33;
 
-        private const int ColumnTotalTransaction = 33;
+        private const int ColumnTotalTransaction = 34;
 
-        private const int ColumnCustomerWl = 34;
-        private const int ColumnCustomerComm = 35;
-        private const int ColumnCustomerTotal = 36;
+        private const int ColumnCustomerWl = 35;
+        private const int ColumnCustomerComm = 36;
+        private const int ColumnCustomerTotal = 37;
 
-        private const int ColumnLicenseeWlSportsBook = 37;
-        private const int ColumnLicenseeWlTotal = 60;
+        private const int ColumnLicenseeWlSportsBook = 38;
+        private const int ColumnLicenseeWlTotal = 62;
 
-        private const int ColumnBetTradeCommission = 61;
-        private const int ColumnCashOutCommission = 62;
-        private const int ColumnBaCommission = 63;
-        private const int ColumnAmtDueToBetTrade = 64;
-        private const int ColumnAmtDueToBa = 65;
+        private const int ColumnBetTradeCommission = 63;
+        private const int ColumnCashOutCommission = 64;
+        private const int ColumnBaCommission = 65;
+        private const int ColumnAmtDueToBetTrade = 66;
+        private const int ColumnAmtDueToBa = 67;
 
-        private const int ColumnTemplateCount = 66;
+        private const int ColumnTemplateCount = 68;
 
         private const int RowContentTemplate = 3;
         private const int RowGrantTotal = 6;
@@ -57,8 +57,8 @@ namespace Fanex.Athena.Excel.Report
         private const int RowTotalNoSolidBorder = 5;
         private const int RowTotalSolidBorder = 4;
 
-        private const int TotalLicenseeWlProductColumn = 24;
-        private const int TotalTurnoverProductColumn = 24;
+        private const int TotalLicenseeWlProductColumn = 25;
+        private const int TotalTurnoverProductColumn = 25;
 
         private static readonly string[] IgnoredLicenseeWLProducts = new[] { Product.BA };
         private static readonly string[] IgnoredTurnoverProducts = new[] { Product.BT, Product.CO };
@@ -69,7 +69,7 @@ namespace Fanex.Athena.Excel.Report
             Product.FW, Product.KN, Product.VB, Product.NG, Product.CS,
             Product.VS, Product.CO, Product.VS2, Product.LT, Product.PP,
             Product.CC, Product.SG, Product.VRG, Product.TG, Product.I4D,
-            Product.SXG, Product.SBC, Product.SAG
+            Product.SXG, Product.SBC, Product.SAG, Product.PGS
         };
 
         private readonly LicenseeWinLossExcelModel _excelModel;
