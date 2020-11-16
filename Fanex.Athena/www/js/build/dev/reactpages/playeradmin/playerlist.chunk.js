@@ -1350,7 +1350,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
         value
       } = event.target;
 
-      if (name == "searchOption") {
+      if (name === "searchOption") {
         this.setState({
           isMatchPrecise: value == 4
         });
@@ -1362,6 +1362,12 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
     });
 
     _defineProperty(this, "handleSpecificInputChange", (name, value) => {
+      if (name === "customerClass") {
+        this.setState({
+          changeOnCustomerClass: true
+        });
+      }
+
       this.setState({
         [name]: value
       });
@@ -1389,7 +1395,8 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       baFilter: _lib_constants__WEBPACK_IMPORTED_MODULE_8__["baStatusList"].All,
       searchOption: _lib_constants__WEBPACK_IMPORTED_MODULE_8__["searchOptions"].matchPrecise,
       isMatchPrecise: true,
-      customerClass: ""
+      customerClass: "",
+      changeOnCustomerClass: false
     };
   }
 
@@ -1430,7 +1437,8 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
         oddsGroup: this.allOddsGroupString,
         specialLevel: this.allSpecialLevel,
         baFilter: _lib_constants__WEBPACK_IMPORTED_MODULE_8__["baStatusList"].All,
-        customerClass: ""
+        customerClass: this.props.lrfFilters.CustomerClass.join(','),
+        changeOnCustomerClass: false
       });
     }
   }
@@ -1468,15 +1476,17 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
     } = _this$state,
           restParam = _objectWithoutProperties(_this$state, ["specialLevel", "currencyIdList", "oddsGroup", "isValidUserName"]);
 
-    const actualSpecialLevel = specialLevel.trim();
-    const isSelectAllCurrency = currencyIdList.trim().split(',').length === currencyList.length;
-    const isSelectAllOddsGroup = oddsGroup.trim().split(',').length === Object.keys(_lib_constants__WEBPACK_IMPORTED_MODULE_8__["oddsGroupListWithStyle"]).length;
+    const actualSpecialLevel = specialLevel.trim() === '' ? this.allSpecialLevel : specialLevel;
+    const actualCurrencyIdList = currencyIdList.trim().split(',').length === currencyList.length ? '' : currencyIdList;
+    const actualOddsGroup = oddsGroup.trim().split(',').length === Object.keys(_lib_constants__WEBPACK_IMPORTED_MODULE_8__["oddsGroupListWithStyle"]).length ? '' : oddsGroup;
+    const actualCustomerClass = restParam.customerClass.trim().split(',').length === this.props.lrfFilters.CustomerClass.length ? '' : restParam.customerClass;
 
     const param = _objectSpread({}, restParam, {
       userName: Object(_jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_14__["encode"])(userName),
-      currencyIdList: isSelectAllCurrency ? '' : currencyIdList,
-      oddsGroup: isSelectAllOddsGroup ? '' : oddsGroup,
-      specialLevel: actualSpecialLevel === '' ? this.allSpecialLevel : actualSpecialLevel,
+      currencyIdList: actualCurrencyIdList,
+      oddsGroup: actualOddsGroup,
+      specialLevel: actualSpecialLevel,
+      customerClass: actualCustomerClass,
       pageSize: pagingOption.PageSize,
       pageIndex: 1
     });
@@ -1529,7 +1539,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       oddsGroup,
       specialLevel
     } = advancedSearchParam;
-    const isValidParam = (isValidUserName || !!bankAccountNumber || !!email) && !!currencyIdList && !!oddsGroup && !!specialLevel;
+    const isValidParam = (isValidUserName || !!bankAccountNumber || !!email) && !!currencyIdList && !!oddsGroup && !!specialLevel && !(this.state.changeOnCustomerClass && !this.state.customerClass);
     const iconToggle = {
       tag: 'div',
       className: isFilterCollapsing ? 'chevron down' : 'chevron up',
@@ -2173,7 +2183,7 @@ class AdvancedSearch extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Compon
       return {
         Id,
         Value,
-        Status: selectedItemString === '' || selectedItemList.indexOf(Id) !== -1
+        Status: selectedItemList.indexOf(Id) !== -1
       };
     });
   }
@@ -2198,8 +2208,9 @@ class AdvancedSearch extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Compon
     const specialLevelList = this._createSelectData(this.specialLevelList, specialLevel);
 
     const selectedBaStatus = isAllowedBA ? this.baStatusList.find(x => x.value === baFilter) : null;
+    const selectedCustomerClass = param.changeOnCustomerClass ? param.customerClass : this.props.lrfFilters.CustomerClass.join(",");
 
-    const ddlCustomerClass = this._createSelectData(this.customerClassList, param.customerClass);
+    const ddlCustomerClass = this._createSelectData(this.customerClassList, selectedCustomerClass);
 
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2"
@@ -3241,7 +3252,7 @@ const PlayerRow = props => {
   const canShowMainColumn = IsDeposit && !IsArchived;
   const commissionGroup = CommissionGroup || _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource('None');
   const canEditCommissionGpoup = IsDeposit && !IsArchived && dataItem.Status != _lib_constants__WEBPACK_IMPORTED_MODULE_4__["playerStatusByName"].Closed;
-  const customerClass = dataItem.CustomerClass || _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource('None');
+  const customerClass = dataItem.CustomerClass == "0" || !dataItem.CustomerClass ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource('None') : dataItem.CustomerClass;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Row"], {
     key: LicenseeCustId
   }, canSelectPlayers && displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].Index] && !canEditCommissionGpoup && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
@@ -4667,7 +4678,7 @@ const buildLapPlayerList = playerList => {
       CurrencyId: Currency,
       CreatedDate: CreatedDateString,
       CommissionGroup: item.CommissionGroup,
-      CustomerClass: item.CustomerClass || _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("None")
+      CustomerClass: item.CustomerClass
     };
   });
 };
@@ -4771,7 +4782,7 @@ class PlayerListDataHelper {
       CurrencyId: lapItem.Currency,
       CreatedDate: CreatedDateString,
       CommissionGroup: lrfItem.CommissionGroup,
-      CustomerClass: lrfItem.CustomerClass || _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("None")
+      CustomerClass: lrfItem.CustomerClass
     };
   }
 
@@ -5180,17 +5191,28 @@ class GridInteractionService {
 
       if (isTringType) {
         return this.sortStringValue(currentValue || '', nextValue || '', isSortAscending);
-      } else if (isDateTimeField) {
+      }
+
+      if (isDateTimeField) {
         const currentItemDate = currentValue ? new Date(currentValue) : 0;
         const nextItemDate = nextValue ? new Date(nextValue) : 0;
         const comparingResult = (this.isValidDate(currentItemDate) ? currentItemDate : 0) - (this.isValidDate(nextItemDate) ? nextItemDate : 0);
         return isSortAscending ? comparingResult : -comparingResult;
       }
 
+      var cEmpty = currentValue === undefined || currentValue === null || currentValue === '';
+      var nEmpty = nextValue === undefined || nextValue === null || nextValue === '';
+
+      if (cEmpty || nEmpty) {
+        var c = cEmpty ? 0 : 1;
+        var n = nEmpty ? 0 : 1;
+        return isSortAscending ? c - n : n - c;
+      }
+
       var diff = currentValue - nextValue;
 
       if (isNaN(diff)) {
-        return this.sortStringValue(currentValue || '', nextValue || '', isSortAscending);
+        return this.sortStringValue(currentValue.toString(), nextValue.toString(), isSortAscending);
       }
 
       return isSortAscending ? diff : -diff;

@@ -2,7 +2,7 @@
 import MultipleSelect from '@9softstudio/react-multiselect';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
-import { baStatusList, specialLevelListWithColor, oddsGroupListWithStyle, customerClassList } from '../../lib/constants';
+import { baStatusList, specialLevelListWithColor, oddsGroupListWithStyle } from '../../lib/constants';
 import LangHelper from '@jsroot/lib/langHelper';
 import { getSpecialLevelText, getCustomerClassText } from '../../lib/helpers/utils';
 
@@ -22,11 +22,7 @@ export class AdvancedSearch extends React.Component {
         return originalList.map(item => {
             const { Id, Value } = item;
 
-            return {
-                Id,
-                Value,
-                Status: selectedItemString === '' || selectedItemList.indexOf(Id) !== -1
-            }
+            return { Id, Value, Status: selectedItemList.indexOf(Id) !== -1 };
         })
     }
 
@@ -46,7 +42,8 @@ export class AdvancedSearch extends React.Component {
         const specialLevelList = this._createSelectData(this.specialLevelList, specialLevel);
         const selectedBaStatus = isAllowedBA ? this.baStatusList.find(x => x.value === baFilter) : null;
 
-        const ddlCustomerClass = this._createSelectData(this.customerClassList, param.customerClass);
+        const selectedCustomerClass = param.changeOnCustomerClass ? param.customerClass : this.props.lrfFilters.CustomerClass.join(",");
+        const ddlCustomerClass = this._createSelectData(this.customerClassList, selectedCustomerClass);
 
         return (
             <>

@@ -40,7 +40,8 @@ export const PlayerRow = (props) => {
     const canShowMainColumn = IsDeposit && !IsArchived;
     const commissionGroup = CommissionGroup || LangHelper.getSingleResource('None');
     const canEditCommissionGpoup = IsDeposit && !IsArchived && dataItem.Status != playerStatusByName.Closed;
-    const customerClass = dataItem.CustomerClass || LangHelper.getSingleResource('None');
+    const customerClass = dataItem.CustomerClass == "0" || !dataItem.CustomerClass
+        ? LangHelper.getSingleResource('None') : dataItem.CustomerClass;
 
     return (
         <Row key={LicenseeCustId}>
