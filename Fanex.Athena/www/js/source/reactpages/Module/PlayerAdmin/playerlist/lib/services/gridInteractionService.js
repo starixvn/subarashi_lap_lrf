@@ -48,17 +48,27 @@ export default class GridInteractionService {
             const nextValue = nextItem[sortBy];
             if (isTringType) {
                 return this.sortStringValue(currentValue || '', nextValue || '', isSortAscending);
-            } else if (isDateTimeField) {
+            }
+
+            if (isDateTimeField) {
                 const currentItemDate = currentValue ? new Date(currentValue) : 0;
-                const nextItemDate = nextValue ? new Date(nextValue) : 0
+                const nextItemDate = nextValue ? new Date(nextValue) : 0;
                 const comparingResult = (this.isValidDate(currentItemDate) ? currentItemDate : 0) - (this.isValidDate(nextItemDate) ? nextItemDate : 0);
 
                 return isSortAscending ? comparingResult : -comparingResult;
             }
 
+            var cEmpty = currentValue === undefined || currentValue === null || currentValue === '';
+            var nEmpty = nextValue === undefined || nextValue === null || nextValue === '';
+            if (cEmpty || nEmpty) {
+                var c = cEmpty ? 0 : 1;
+                var n = nEmpty ? 0 : 1;
+                return isSortAscending ? c - n : n - c;
+            }
+
             var diff = currentValue - nextValue;
             if (isNaN(diff)) {
-                return this.sortStringValue(currentValue || '', nextValue || '', isSortAscending);
+                return this.sortStringValue(currentValue.toString(), nextValue.toString(), isSortAscending);
             }
 
             return isSortAscending ? diff : -diff;

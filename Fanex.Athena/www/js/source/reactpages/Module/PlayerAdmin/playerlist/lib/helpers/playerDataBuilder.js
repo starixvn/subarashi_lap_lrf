@@ -60,7 +60,7 @@ export const buildLapPlayerList = (playerList) => {
             CurrencyId: Currency,
             CreatedDate: CreatedDateString,
             CommissionGroup: item.CommissionGroup,
-            CustomerClass: item.CustomerClass || LangHelper.getSingleResource("None")
+            CustomerClass: item.CustomerClass
         };
     });
 }

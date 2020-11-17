@@ -10,10 +10,7 @@ import { licenseeType } from '../lib/constants';
 import CollapsiblePanel from '@jsroot/components/collapsible-panel';
 import UserGuide from '@jsroot/components/UserGuide';
 import LangHelper from '@jsroot/lib/langHelper';
-import {
-    searchOptions, baStatusList, specialLevelListWithColor,
-    emailPattern, oddsGroupListWithStyle, customerClassList
-} from '../lib/constants';
+import { searchOptions, baStatusList, specialLevelListWithColor, emailPattern, oddsGroupListWithStyle } from '../lib/constants';
 
 import UserNameInput from './filter/UserNameInput';
 import QueryString from '@jsroot/lib/QueryString';
@@ -42,7 +39,8 @@ export class FormFilter extends PureComponent {
             baFilter: baStatusList.All,
             searchOption: searchOptions.matchPrecise,
             isMatchPrecise: true,
-            customerClass: ""
+            customerClass: "",
+            changeOnCustomerClass: false
         }
     }
 
@@ -71,7 +69,8 @@ export class FormFilter extends PureComponent {
                 oddsGroup: this.allOddsGroupString,
                 specialLevel: this.allSpecialLevel,
                 baFilter: baStatusList.All,
-                customerClass: ""
+                customerClass: this.props.lrfFilters.CustomerClass.join(','),
+                changeOnCustomerClass: false
             });
         }
     }
@@ -91,16 +90,20 @@ export class FormFilter extends PureComponent {
 
         const { pagingOption, searchPlayer, currencyList } = this.props;
         const { specialLevel, currencyIdList, oddsGroup, isValidUserName, ...restParam } = this.state;
-        const actualSpecialLevel = specialLevel.trim();
-        const isSelectAllCurrency = currencyIdList.trim().split(',').length === currencyList.length;
-        const isSelectAllOddsGroup = oddsGroup.trim().split(',').length === Object.keys(oddsGroupListWithStyle).length;
+
+        const actualSpecialLevel = specialLevel.trim() === '' ? this.allSpecialLevel : specialLevel;
+        const actualCurrencyIdList = currencyIdList.trim().split(',').length === currencyList.length ? '' : currencyIdList;
+        const actualOddsGroup = oddsGroup.trim().split(',').length === Object.keys(oddsGroupListWithStyle).length ? '' : oddsGroup;
+        const actualCustomerClass = restParam.customerClass.trim().split(',').length === this.props.lrfFilters.CustomerClass.length
+            ? '' : restParam.customerClass;
 
         const param = {
             ...restParam,
             userName: encode(userName),
-            currencyIdList: isSelectAllCurrency ? '' : currencyIdList,
-            oddsGroup: isSelectAllOddsGroup ? '' : oddsGroup,
-            specialLevel: actualSpecialLevel === '' ? this.allSpecialLevel : actualSpecialLevel,
+            currencyIdList: actualCurrencyIdList,
+            oddsGroup: actualOddsGroup,
+            specialLevel: actualSpecialLevel,
+            customerClass: actualCustomerClass,
             pageSize: pagingOption.PageSize,
             pageIndex: 1
         };
@@ -122,7 +125,7 @@ export class FormFilter extends PureComponent {
     handleChange = (event) => {
         const { name, value } = event.target;
 
-        if (name == "searchOption") {
+        if (name === "searchOption") {
             this.setState({ isMatchPrecise: value == 4 });
         }
 
@@ -130,6 +133,10 @@ export class FormFilter extends PureComponent {
     }
 
     handleSpecificInputChange = (name, value) => {
+        if (name === "customerClass") {
+            this.setState({ changeOnCustomerClass: true });
+        }
+
         this.setState({ [name]: value });
     }
 
@@ -164,12 +171,13 @@ export class FormFilter extends PureComponent {
         const { currencyIdList, oddsGroup, specialLevel } = advancedSearchParam;
 
         const isValidParam = (isValidUserName || !!bankAccountNumber || !!email) &&
-            !!currencyIdList && !!oddsGroup && !!specialLevel;
+            !!currencyIdList && !!oddsGroup && !!specialLevel &&
+            !(this.state.changeOnCustomerClass && !this.state.customerClass);
         const iconToggle = {
             tag: 'div',
             className: isFilterCollapsing ? 'chevron down' : 'chevron up',
             style: {}
-        }
+        };
 
         return (
             <CollapsiblePanel className="page-filter" iconToggle={iconToggle} stickyFooter={this.userGuide}

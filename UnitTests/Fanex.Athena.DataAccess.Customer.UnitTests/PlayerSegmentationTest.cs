@@ -8,7 +8,6 @@ using Fanex.Athena.Model.Core.MetaModel;
 using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
 using Fanex.Athena.Model.Customer.MetaModel;
 using Fanex.Athena.UnitTest.Common.Helpers;
-using Fanex.Athena.VendorAdapter.Interfaces;
 using Fanex.Data;
 using NSubstitute;
 using NUnit.Framework;
@@ -18,27 +17,21 @@ namespace Fanex.Athena.DataAccess.Customer.UnitTests
     [TestFixture]
     public class PlayerSegmentationTest : BaseDataAccessHelperTest<PlayerSegmentationDataAccess>
     {
-        private ICacheRefAdapter _cacheRefAdapter;
-
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
             base.FixtureSetUp();
-
-            _cacheRefAdapter = Substitute.For<ICacheRefAdapter>();
         }
 
         [OneTimeTearDown]
         public override void FixtureTearDown()
         {
             base.FixtureTearDown();
-
-            _cacheRefAdapter = null;
         }
 
         protected override void SetUpDataAccess()
         {
-            DataAccess = Substitute.ForPartsOf<PlayerSegmentationDataAccess>(_cacheRefAdapter);
+            DataAccess = Substitute.ForPartsOf<PlayerSegmentationDataAccess>();
         }
 
         [Test]

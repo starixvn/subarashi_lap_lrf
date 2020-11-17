@@ -40,7 +40,7 @@ export default class PlayerListDataHelper {
             CurrencyId: lapItem.Currency,
             CreatedDate: CreatedDateString,
             CommissionGroup: lrfItem.CommissionGroup,
-            CustomerClass: lrfItem.CustomerClass || LangHelper.getSingleResource("None")
+            CustomerClass: lrfItem.CustomerClass
         };
     }
 
