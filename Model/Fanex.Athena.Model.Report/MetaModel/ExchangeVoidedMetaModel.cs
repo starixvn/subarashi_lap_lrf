@@ -5,7 +5,7 @@ namespace Fanex.Athena.Model.Report.MetaModel
 {
     public class ExchangeVoidedMetaModel : IMetaModelValidation, IMetaModelAgent, IMetaModelSiteName
     {
-        private const int MaximumSelectedMonths = 2;
+        private const int MaximumSelectedMonths = 1;
 
         public DateTime SelectedDate { get; set; }
 
