@@ -10,7 +10,7 @@
         let ajaxRequest = null;
         let _memberId, _systemId; // store data when submit level 0
         let _submitData = {}; // cache submit data of level 0.
-        
+
         function getPostData() {
             const data = $('#SearchForm').serializeObject();
             if (data.Username === '') {
@@ -124,7 +124,7 @@
 
                 Site.updateOriginalLicenseeOption();
                 const data = getPostData();
-                
+
                 const option = {
                     type: 'POST',
                     data: data,
@@ -170,8 +170,8 @@
                 let temp = 'api/WinLossByProductReport/Index';
                 if (level > 0) {
                     temp += '?level=' + level + '&currencyId=' + currencyId + '&custId=' + custId + '&fdate=' +
-                    moment(fdate).format('MM/DD/YYYY') + '&tdate=' + moment(tdate).format('MM/DD/YYYY') +
-                    '&memberid=' + _memberId + '&systemid=' + _systemId + '&currencyname=' + currencyName;
+                        moment(fdate).format('MM/DD/YYYY') + '&tdate=' + moment(tdate).format('MM/DD/YYYY') +
+                        '&memberid=' + _memberId + '&systemid=' + _systemId + '&currencyname=' + currencyName;
                 }
                 WinLossByProductOption.urlExcelData = temp;
             },
@@ -179,7 +179,7 @@
             setReportTitle: function (currencyId, fromdate, todate, currencyName) {
                 const titlePattern = Site.getSingleResource('WinLossByProduct') + ', {0} → {1} - {2}{3}';
                 const currencyNameOnTitle = currencyName ? Site.getSingleResource('Viewin').replace('{0}', currencyName)
-                                                        : Report.getCurrencyNameForReportTitle(currencyId);
+                    : Report.getCurrencyNameForReportTitle(currencyId);
                 let licenseeWLNote = getLicenseeWLNote(_submitData.ProductOptions, _systemId);
                 licenseeWLNote = licenseeWLNote === '' ? '' : ', ' + licenseeWLNote;
 
@@ -290,7 +290,7 @@
                         break;
                     case 2:
                         $grid.tableRowSpan([0, WinLossByProductOption.externalIdIndex, WinLossByProductOption.systemIdIndex],
-                                                     WinLossByProductOption.currencyIndex);
+                            WinLossByProductOption.currencyIndex);
                         break;
                 }
             },
@@ -358,7 +358,8 @@
                     drawfilter: dataDrillDown.DrawFilter,
                     custid: dataDrillDown.CustomerId,
                     systemId: dataDrillDown.SystemId,
-                    externalId: dataDrillDown.ExternalId
+                    externalId: dataDrillDown.ExternalId,
+                    excelFileName: 'WinLossByProductsBetList'
                 });
 
                 const popH = Math.min($(window).height() - 100, 500), popW = 920;
@@ -389,7 +390,7 @@
                 const dateRange = Report.GetDrilldownDateRange(param.ReportBy, param.FromDate, param.ToDate, drilldownDate);
 
                 const url = Site.resolveClientUrl(WinLossByProductOption.urlData) + '?level=' + level + '&currencyId=' + currencyId + '&custId=' + customerId +
-                         '&fdate=' + moment(dateRange.FromDate).format('MM/DD/YYYY') + '&tdate=' + moment(dateRange.ToDate).format('MM/DD/YYYY');
+                    '&fdate=' + moment(dateRange.FromDate).format('MM/DD/YYYY') + '&tdate=' + moment(dateRange.ToDate).format('MM/DD/YYYY');
                 const option = {
                     type: 'POST',
                     data: JSON.stringify(param),
