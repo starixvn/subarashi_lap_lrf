@@ -11,7 +11,7 @@ var Columns = [
 ];
 var ColumnWidths = [
     40, 120, 120, 110, 150, 400, 70,
-    70, 100, 100, 100, 80, 80, 80
+    70, 120, 100, 100, 80, 80, 80
 ];
 var ColumnAlignments = [
     'center-align', '', '', 'center-align', 'center-align', 'right-align', 'right-align',

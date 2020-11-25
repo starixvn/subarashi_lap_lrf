@@ -1,7 +1,7 @@
 ﻿define(['jquery', 'common/site'], function ($, Site) {
     'use strict';
     const columnNames = ['#', 'ExternalId', 'SystemId', 'TransTime', 'Choice', 'Odds', 'Stake',
-                    'WinLoss', 'EffectiveBettingValue', '@[LicenseeWL]/@[Comm]', 'Status'];
+        'WinLoss', 'EffectiveBettingValue', '@[LicenseeWL]/@[Comm]', 'Status'];
     const indexColumn =
     {
         name: 'Index',
@@ -61,7 +61,7 @@
     {
         name: 'Stake',
         index: 'Stake',
-        width: 85,
+        width: 120,
         align: 'right',
         sortable: true,
         resizable: false
