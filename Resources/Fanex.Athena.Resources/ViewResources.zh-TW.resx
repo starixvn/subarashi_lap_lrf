@@ -2118,4 +2118,7 @@
     <value>沙巴虛擬賽事</value>
     <comment>141454</comment>
   </data>
+  <data name="Platform_2" xml:space="preserve">
+    <value>手機版</value>
+  </data>
 </root>

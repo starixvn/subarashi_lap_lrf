@@ -2129,4 +2129,10 @@
     <value>沙巴虚拟赛事</value>
     <comment>141454</comment>
   </data>
+  <data name="Platform_1" xml:space="preserve">
+    <value>桌机</value>
+  </data>
+  <data name="Platform_2" xml:space="preserve">
+    <value>手机版</value>
+  </data>
 </root>

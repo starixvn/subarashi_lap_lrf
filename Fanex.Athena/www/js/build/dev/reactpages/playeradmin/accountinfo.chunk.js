@@ -163,9 +163,9 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
- * Chart.js v2.9.4
+ * Chart.js v2.9.3
  * https://www.chartjs.org
- * (c) 2020 Chart.js Contributors
+ * (c) 2019 Chart.js Contributors
  * Released under the MIT License
  */
 (function (global, factory) {
@@ -2266,10 +2266,6 @@ if (typeof window !== 'undefined') {
 
 var chartjsColor = Color;
 
-function isValidKey(key) {
-	return ['__proto__', 'prototype', 'constructor'].indexOf(key) === -1;
-}
-
 /**
  * @namespace Chart.helpers
  */
@@ -2445,7 +2441,7 @@ var helpers = {
 		}
 
 		if (helpers.isObject(source)) {
-			var target = Object.create(source);
+			var target = {};
 			var keys = Object.keys(source);
 			var klen = keys.length;
 			var k = 0;
@@ -2466,12 +2462,6 @@ var helpers = {
 	 * @private
 	 */
 	_merger: function(key, target, source, options) {
-		if (!isValidKey(key)) {
-			// We want to ensure we do not copy prototypes over
-			// as this can pollute global namespaces
-			return;
-		}
-
 		var tval = target[key];
 		var sval = source[key];
 
@@ -2487,12 +2477,6 @@ var helpers = {
 	 * @private
 	 */
 	_mergerIf: function(key, target, source) {
-		if (!isValidKey(key)) {
-			// We want to ensure we do not copy prototypes over
-			// as this can pollute global namespaces
-			return;
-		}
-
 		var tval = target[key];
 		var sval = source[key];
 
@@ -3991,7 +3975,7 @@ helpers$1.extend(DatasetController.prototype, {
 	 */
 	_configure: function() {
 		var me = this;
-		me._config = helpers$1.merge(Object.create(null), [
+		me._config = helpers$1.merge({}, [
 			me.chart.options.datasets[me._type],
 			me.getDataset(),
 		], {
@@ -7261,8 +7245,7 @@ function updateDims(chartArea, params, layout) {
 		chartArea.h = newHeight;
 
 		// return true if chart area changed in layout's direction
-		var sizes = layout.horizontal ? [newWidth, chartArea.w] : [newHeight, chartArea.h];
-		return sizes[0] !== sizes[1] && (!isNaN(sizes[0]) || !isNaN(sizes[1]));
+		return layout.horizontal ? newWidth !== chartArea.w : newHeight !== chartArea.h;
 	}
 }
 
@@ -7566,7 +7549,7 @@ var platform_basic = {
 	}
 };
 
-var platform_dom = "/*\r\n * DOM element rendering detection\r\n * https://davidwalsh.name/detect-node-insertion\r\n */\r\n@keyframes chartjs-render-animation {\r\n\tfrom { opacity: 0.99; }\r\n\tto { opacity: 1; }\r\n}\r\n\r\n.chartjs-render-monitor {\r\n\tanimation: chartjs-render-animation 0.001s;\r\n}\r\n\r\n/*\r\n * DOM element resizing detection\r\n * https://github.com/marcj/css-element-queries\r\n */\r\n.chartjs-size-monitor,\r\n.chartjs-size-monitor-expand,\r\n.chartjs-size-monitor-shrink {\r\n\tposition: absolute;\r\n\tdirection: ltr;\r\n\tleft: 0;\r\n\ttop: 0;\r\n\tright: 0;\r\n\tbottom: 0;\r\n\toverflow: hidden;\r\n\tpointer-events: none;\r\n\tvisibility: hidden;\r\n\tz-index: -1;\r\n}\r\n\r\n.chartjs-size-monitor-expand > div {\r\n\tposition: absolute;\r\n\twidth: 1000000px;\r\n\theight: 1000000px;\r\n\tleft: 0;\r\n\ttop: 0;\r\n}\r\n\r\n.chartjs-size-monitor-shrink > div {\r\n\tposition: absolute;\r\n\twidth: 200%;\r\n\theight: 200%;\r\n\tleft: 0;\r\n\ttop: 0;\r\n}\r\n";
+var platform_dom = "/*\n * DOM element rendering detection\n * https://davidwalsh.name/detect-node-insertion\n */\n@keyframes chartjs-render-animation {\n\tfrom { opacity: 0.99; }\n\tto { opacity: 1; }\n}\n\n.chartjs-render-monitor {\n\tanimation: chartjs-render-animation 0.001s;\n}\n\n/*\n * DOM element resizing detection\n * https://github.com/marcj/css-element-queries\n */\n.chartjs-size-monitor,\n.chartjs-size-monitor-expand,\n.chartjs-size-monitor-shrink {\n\tposition: absolute;\n\tdirection: ltr;\n\tleft: 0;\n\ttop: 0;\n\tright: 0;\n\tbottom: 0;\n\toverflow: hidden;\n\tpointer-events: none;\n\tvisibility: hidden;\n\tz-index: -1;\n}\n\n.chartjs-size-monitor-expand > div {\n\tposition: absolute;\n\twidth: 1000000px;\n\theight: 1000000px;\n\tleft: 0;\n\ttop: 0;\n}\n\n.chartjs-size-monitor-shrink > div {\n\tposition: absolute;\n\twidth: 200%;\n\theight: 200%;\n\tleft: 0;\n\ttop: 0;\n}\n";
 
 var platform_dom$1 = /*#__PURE__*/Object.freeze({
 __proto__: null,
@@ -8274,7 +8257,7 @@ var core_scaleService = {
 	},
 	getScaleDefaults: function(type) {
 		// Return the scale defaults merged with the global settings so that we always use the latest ones
-		return this.defaults.hasOwnProperty(type) ? helpers$1.merge(Object.create(null), [core_defaults.scale, this.defaults[type]]) : {};
+		return this.defaults.hasOwnProperty(type) ? helpers$1.merge({}, [core_defaults.scale, this.defaults[type]]) : {};
 	},
 	updateScaleDefaults: function(type, additions) {
 		var me = this;
@@ -9349,7 +9332,7 @@ core_defaults._set('global', {
  * returns a deep copy of the result, thus doesn't alter inputs.
  */
 function mergeScaleConfig(/* config objects ... */) {
-	return helpers$1.merge(Object.create(null), [].slice.call(arguments), {
+	return helpers$1.merge({}, [].slice.call(arguments), {
 		merger: function(key, target, source, options) {
 			if (key === 'xAxes' || key === 'yAxes') {
 				var slen = source[key].length;
@@ -9389,9 +9372,9 @@ function mergeScaleConfig(/* config objects ... */) {
  * a deep copy of the result, thus doesn't alter inputs.
  */
 function mergeConfig(/* config objects ... */) {
-	return helpers$1.merge(Object.create(null), [].slice.call(arguments), {
+	return helpers$1.merge({}, [].slice.call(arguments), {
 		merger: function(key, target, source, options) {
-			var tval = target[key] || Object.create(null);
+			var tval = target[key] || {};
 			var sval = source[key];
 
 			if (key === 'scales') {
@@ -9408,7 +9391,7 @@ function mergeConfig(/* config objects ... */) {
 }
 
 function initConfig(config) {
-	config = config || Object.create(null);
+	config = config || {};
 
 	// Do NOT use mergeConfig for the data object because this method merges arrays
 	// and so would change references to labels and datasets, preventing data updates.
@@ -11389,8 +11372,6 @@ function computeLabelSizes(ctx, tickFonts, ticks, caches) {
 	var widths = [];
 	var heights = [];
 	var offsets = [];
-	var widestLabelSize = 0;
-	var highestLabelSize = 0;
 	var i, j, jlen, label, tickFont, fontString, cache, lineHeight, width, height, nestedLabel, widest, highest;
 
 	for (i = 0; i < length; ++i) {
@@ -11418,13 +11399,11 @@ function computeLabelSizes(ctx, tickFonts, ticks, caches) {
 		widths.push(width);
 		heights.push(height);
 		offsets.push(lineHeight / 2);
-		widestLabelSize = Math.max(width, widestLabelSize);
-		highestLabelSize = Math.max(height, highestLabelSize);
 	}
 	garbageCollect(caches, length);
 
-	widest = widths.indexOf(widestLabelSize);
-	highest = heights.indexOf(highestLabelSize);
+	widest = widths.indexOf(Math.max.apply(null, widths));
+	highest = heights.indexOf(Math.max.apply(null, heights));
 
 	function valueAt(idx) {
 		return {
@@ -16337,44 +16316,6 @@ return src;
 
 /***/ }),
 
-/***/ "./node_modules/lodash/_SetCache.js":
-/*!******************************************!*\
-  !*** ./node_modules/lodash/_SetCache.js ***!
-  \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var MapCache = __webpack_require__(/*! ./_MapCache */ "./node_modules/lodash/_MapCache.js"),
-    setCacheAdd = __webpack_require__(/*! ./_setCacheAdd */ "./node_modules/lodash/_setCacheAdd.js"),
-    setCacheHas = __webpack_require__(/*! ./_setCacheHas */ "./node_modules/lodash/_setCacheHas.js");
-
-/**
- *
- * Creates an array cache object to store unique values.
- *
- * @private
- * @constructor
- * @param {Array} [values] The values to cache.
- */
-function SetCache(values) {
-  var index = -1,
-      length = values == null ? 0 : values.length;
-
-  this.__data__ = new MapCache;
-  while (++index < length) {
-    this.add(values[index]);
-  }
-}
-
-// Add methods to `SetCache`.
-SetCache.prototype.add = SetCache.prototype.push = setCacheAdd;
-SetCache.prototype.has = setCacheHas;
-
-module.exports = SetCache;
-
-
-/***/ }),
-
 /***/ "./node_modules/lodash/_arrayAggregator.js":
 /*!*************************************************!*\
   !*** ./node_modules/lodash/_arrayAggregator.js ***!
@@ -17069,30 +17010,6 @@ module.exports = baseToString;
 
 /***/ }),
 
-/***/ "./node_modules/lodash/_cacheHas.js":
-/*!******************************************!*\
-  !*** ./node_modules/lodash/_cacheHas.js ***!
-  \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-/**
- * Checks if a `cache` value for `key` exists.
- *
- * @private
- * @param {Object} cache The cache to query.
- * @param {string} key The key of the entry to check.
- * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
- */
-function cacheHas(cache, key) {
-  return cache.has(key);
-}
-
-module.exports = cacheHas;
-
-
-/***/ }),
-
 /***/ "./node_modules/lodash/_castPath.js":
 /*!******************************************!*\
   !*** ./node_modules/lodash/_castPath.js ***!
@@ -17274,11 +17191,10 @@ function equalArrays(array, other, bitmask, customizer, equalFunc, stack) {
   if (arrLength != othLength && !(isPartial && othLength > arrLength)) {
     return false;
   }
-  // Check that cyclic values are equal.
-  var arrStacked = stack.get(array);
-  var othStacked = stack.get(other);
-  if (arrStacked && othStacked) {
-    return arrStacked == other && othStacked == array;
+  // Assume cyclic values are equal.
+  var stacked = stack.get(array);
+  if (stacked && stack.get(other)) {
+    return stacked == other;
   }
   var index = -1,
       result = true,
@@ -17504,11 +17420,10 @@ function equalObjects(object, other, bitmask, customizer, equalFunc, stack) {
       return false;
     }
   }
-  // Check that cyclic values are equal.
-  var objStacked = stack.get(object);
-  var othStacked = stack.get(other);
-  if (objStacked && othStacked) {
-    return objStacked == other && othStacked == object;
+  // Assume cyclic values are equal.
+  var stacked = stack.get(object);
+  if (stacked && stack.get(other)) {
+    return stacked == other;
   }
   var result = true;
   stack.set(object, other);
@@ -17801,90 +17716,6 @@ function memoizeCapped(func) {
 }
 
 module.exports = memoizeCapped;
-
-
-/***/ }),
-
-/***/ "./node_modules/lodash/_setCacheAdd.js":
-/*!*********************************************!*\
-  !*** ./node_modules/lodash/_setCacheAdd.js ***!
-  \*********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-/** Used to stand-in for `undefined` hash values. */
-var HASH_UNDEFINED = '__lodash_hash_undefined__';
-
-/**
- * Adds `value` to the array cache.
- *
- * @private
- * @name add
- * @memberOf SetCache
- * @alias push
- * @param {*} value The value to cache.
- * @returns {Object} Returns the cache instance.
- */
-function setCacheAdd(value) {
-  this.__data__.set(value, HASH_UNDEFINED);
-  return this;
-}
-
-module.exports = setCacheAdd;
-
-
-/***/ }),
-
-/***/ "./node_modules/lodash/_setCacheHas.js":
-/*!*********************************************!*\
-  !*** ./node_modules/lodash/_setCacheHas.js ***!
-  \*********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-/**
- * Checks if `value` is in the array cache.
- *
- * @private
- * @name has
- * @memberOf SetCache
- * @param {*} value The value to search for.
- * @returns {number} Returns `true` if `value` is found, else `false`.
- */
-function setCacheHas(value) {
-  return this.__data__.has(value);
-}
-
-module.exports = setCacheHas;
-
-
-/***/ }),
-
-/***/ "./node_modules/lodash/_setToArray.js":
-/*!********************************************!*\
-  !*** ./node_modules/lodash/_setToArray.js ***!
-  \********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-/**
- * Converts `set` to an array of its values.
- *
- * @private
- * @param {Object} set The set to convert.
- * @returns {Array} Returns the values.
- */
-function setToArray(set) {
-  var index = -1,
-      result = Array(set.size);
-
-  set.forEach(function(value) {
-    result[++index] = value;
-  });
-  return result;
-}
-
-module.exports = setToArray;
 
 
 /***/ }),
@@ -18383,368 +18214,346 @@ module.exports = toString;
 /*!**************************************************!*\
   !*** ./node_modules/react-chartjs-2/es/index.js ***!
   \**************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! exports provided: default, Doughnut, Pie, Line, Bar, HorizontalBar, Radar, Polar, Bubble, Scatter, defaults, Chart */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(process) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Doughnut", function() { return Doughnut; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Pie", function() { return Pie; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Line", function() { return Line; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Bar", function() { return Bar; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HorizontalBar", function() { return HorizontalBar; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Radar", function() { return Radar; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Polar", function() { return Polar; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Bubble", function() { return Bubble; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Scatter", function() { return Scatter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "defaults", function() { return defaults; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! chart.js */ "./node_modules/chart.js/dist/Chart.js");
+/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(chart_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony reexport (default from non-harmony) */ __webpack_require__.d(__webpack_exports__, "Chart", function() { return chart_js__WEBPACK_IMPORTED_MODULE_2___default.a; });
+/* harmony import */ var lodash_isEqual__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lodash/isEqual */ "./node_modules/lodash/isEqual.js");
+/* harmony import */ var lodash_isEqual__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash_isEqual__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var lodash_keyBy__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! lodash/keyBy */ "./node_modules/lodash/keyBy.js");
+/* harmony import */ var lodash_keyBy__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(lodash_keyBy__WEBPACK_IMPORTED_MODULE_4__);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-Object.defineProperty(exports, "Chart", {
-  enumerable: true,
-  get: function get() {
-    return _chart["default"];
-  }
-});
-exports.defaults = exports.Scatter = exports.Bubble = exports.Polar = exports.Radar = exports.HorizontalBar = exports.Bar = exports.Line = exports.Pie = exports.Doughnut = exports["default"] = void 0;
-
-var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js"));
-
-var _chart = _interopRequireDefault(__webpack_require__(/*! chart.js */ "./node_modules/chart.js/dist/Chart.js"));
-
-var _isEqual = _interopRequireDefault(__webpack_require__(/*! lodash/isEqual */ "./node_modules/lodash/isEqual.js"));
-
-var _keyBy = _interopRequireDefault(__webpack_require__(/*! lodash/keyBy */ "./node_modules/lodash/keyBy.js"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
-
-function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var NODE_ENV = typeof process !== 'undefined' && process.env && "development";
 
-var ChartComponent = /*#__PURE__*/function (_React$Component) {
+var ChartComponent = function (_React$Component) {
   _inherits(ChartComponent, _React$Component);
 
-  var _super = _createSuper(ChartComponent);
-
   function ChartComponent() {
-    var _this;
-
     _classCallCheck(this, ChartComponent);
 
-    _this = _super.call(this);
+    var _this = _possibleConstructorReturn(this, _React$Component.call(this));
 
-    _defineProperty(_assertThisInitialized(_this), "handleOnClick", function (event) {
+    _this.handleOnClick = function (event) {
       var instance = _this.chartInstance;
+
       var _this$props = _this.props,
           getDatasetAtEvent = _this$props.getDatasetAtEvent,
           getElementAtEvent = _this$props.getElementAtEvent,
           getElementsAtEvent = _this$props.getElementsAtEvent,
           onElementsClick = _this$props.onElementsClick;
+
+
       getDatasetAtEvent && getDatasetAtEvent(instance.getDatasetAtEvent(event), event);
       getElementAtEvent && getElementAtEvent(instance.getElementAtEvent(event), event);
       getElementsAtEvent && getElementsAtEvent(instance.getElementsAtEvent(event), event);
       onElementsClick && onElementsClick(instance.getElementsAtEvent(event), event); // Backward compatibility
-    });
+    };
 
-    _defineProperty(_assertThisInitialized(_this), "ref", function (element) {
+    _this.ref = function (element) {
       _this.element = element;
-    });
+    };
 
     _this.chartInstance = undefined;
     return _this;
   }
 
-  _createClass(ChartComponent, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.renderChart();
-    }
-  }, {
-    key: "componentDidUpdate",
-    value: function componentDidUpdate() {
-      if (this.props.redraw) {
-        this.destroyChart();
-        this.renderChart();
-        return;
-      }
+  ChartComponent.prototype.componentDidMount = function componentDidMount() {
+    this.renderChart();
+  };
 
-      this.updateChart();
-    }
-  }, {
-    key: "shouldComponentUpdate",
-    value: function shouldComponentUpdate(nextProps) {
-      var _this$props2 = this.props,
-          redraw = _this$props2.redraw,
-          type = _this$props2.type,
-          options = _this$props2.options,
-          plugins = _this$props2.plugins,
-          legend = _this$props2.legend,
-          height = _this$props2.height,
-          width = _this$props2.width;
-
-      if (nextProps.redraw === true) {
-        return true;
-      }
-
-      if (height !== nextProps.height || width !== nextProps.width) {
-        return true;
-      }
-
-      if (type !== nextProps.type) {
-        return true;
-      }
-
-      if (!(0, _isEqual["default"])(legend, nextProps.legend)) {
-        return true;
-      }
-
-      if (!(0, _isEqual["default"])(options, nextProps.options)) {
-        return true;
-      }
-
-      var nextData = this.transformDataProp(nextProps);
-
-      if (!(0, _isEqual["default"])(this.shadowDataProp, nextData)) {
-        return true;
-      }
-
-      return !(0, _isEqual["default"])(plugins, nextProps.plugins);
-    }
-  }, {
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
+  ChartComponent.prototype.componentDidUpdate = function componentDidUpdate() {
+    if (this.props.redraw) {
       this.destroyChart();
+      this.renderChart();
+      return;
     }
-  }, {
-    key: "transformDataProp",
-    value: function transformDataProp(props) {
-      var data = props.data;
 
-      if (typeof data == 'function') {
-        var node = this.element;
-        return data(node);
-      } else {
-        return data;
-      }
-    } // Chart.js directly mutates the data.dataset objects by adding _meta proprerty
-    // this makes impossible to compare the current and next data changes
-    // therefore we memoize the data prop while sending a fake to Chart.js for mutation.
-    // see https://github.com/chartjs/Chart.js/blob/master/src/core/core.controller.js#L615-L617
+    this.updateChart();
+  };
 
-  }, {
-    key: "memoizeDataProps",
-    value: function memoizeDataProps() {
-      if (!this.props.data) {
-        return;
-      }
+  ChartComponent.prototype.shouldComponentUpdate = function shouldComponentUpdate(nextProps) {
+    var _props = this.props,
+        redraw = _props.redraw,
+        type = _props.type,
+        options = _props.options,
+        plugins = _props.plugins,
+        legend = _props.legend,
+        height = _props.height,
+        width = _props.width;
 
-      var data = this.transformDataProp(this.props);
-      this.shadowDataProp = _objectSpread(_objectSpread({}, data), {}, {
-        datasets: data.datasets && data.datasets.map(function (set) {
-          return _objectSpread({}, set);
-        })
-      });
-      this.saveCurrentDatasets(); // to remove the dataset metadata from this chart when the chart is destroyed
 
+    if (nextProps.redraw === true) {
+      return true;
+    }
+
+    if (height !== nextProps.height || width !== nextProps.width) {
+      return true;
+    }
+
+    if (type !== nextProps.type) {
+      return true;
+    }
+
+    if (!lodash_isEqual__WEBPACK_IMPORTED_MODULE_3___default()(legend, nextProps.legend)) {
+      return true;
+    }
+
+    if (!lodash_isEqual__WEBPACK_IMPORTED_MODULE_3___default()(options, nextProps.options)) {
+      return true;
+    }
+
+    var nextData = this.transformDataProp(nextProps);
+
+    if (!lodash_isEqual__WEBPACK_IMPORTED_MODULE_3___default()(this.shadowDataProp, nextData)) {
+      return true;
+    }
+
+    return !lodash_isEqual__WEBPACK_IMPORTED_MODULE_3___default()(plugins, nextProps.plugins);
+  };
+
+  ChartComponent.prototype.componentWillUnmount = function componentWillUnmount() {
+    this.destroyChart();
+  };
+
+  ChartComponent.prototype.transformDataProp = function transformDataProp(props) {
+    var data = props.data;
+
+    if (typeof data == 'function') {
+      var node = this.element;
+      return data(node);
+    } else {
       return data;
     }
-  }, {
-    key: "checkDatasets",
-    value: function checkDatasets(datasets) {
-      var isDev = NODE_ENV !== 'production' && NODE_ENV !== 'prod';
-      var usingCustomKeyProvider = this.props.datasetKeyProvider !== ChartComponent.getLabelAsKey;
-      var multipleDatasets = datasets.length > 1;
+  };
 
-      if (isDev && multipleDatasets && !usingCustomKeyProvider) {
-        var shouldWarn = false;
-        datasets.forEach(function (dataset) {
-          if (!dataset.label) {
-            shouldWarn = true;
-          }
+  // Chart.js directly mutates the data.dataset objects by adding _meta proprerty
+  // this makes impossible to compare the current and next data changes
+  // therefore we memoize the data prop while sending a fake to Chart.js for mutation.
+  // see https://github.com/chartjs/Chart.js/blob/master/src/core/core.controller.js#L615-L617
+
+
+  ChartComponent.prototype.memoizeDataProps = function memoizeDataProps() {
+    if (!this.props.data) {
+      return;
+    }
+
+    var data = this.transformDataProp(this.props);
+
+    this.shadowDataProp = _extends({}, data, {
+      datasets: data.datasets && data.datasets.map(function (set) {
+        return _extends({}, set);
+      })
+    });
+
+    this.saveCurrentDatasets(); // to remove the dataset metadata from this chart when the chart is destroyed
+
+    return data;
+  };
+
+  ChartComponent.prototype.checkDatasets = function checkDatasets(datasets) {
+    var isDev = NODE_ENV !== 'production' && NODE_ENV !== 'prod';
+    var usingCustomKeyProvider = this.props.datasetKeyProvider !== ChartComponent.getLabelAsKey;
+    var multipleDatasets = datasets.length > 1;
+
+    if (isDev && multipleDatasets && !usingCustomKeyProvider) {
+      var shouldWarn = false;
+      datasets.forEach(function (dataset) {
+        if (!dataset.label) {
+          shouldWarn = true;
+        }
+      });
+
+      if (shouldWarn) {
+        console.error('[react-chartjs-2] Warning: Each dataset needs a unique key. By default, the "label" property on each dataset is used. Alternatively, you may provide a "datasetKeyProvider" as a prop that returns a unique key.');
+      }
+    }
+  };
+
+  ChartComponent.prototype.getCurrentDatasets = function getCurrentDatasets() {
+    return this.chartInstance && this.chartInstance.config.data && this.chartInstance.config.data.datasets || [];
+  };
+
+  ChartComponent.prototype.saveCurrentDatasets = function saveCurrentDatasets() {
+    var _this2 = this;
+
+    this.datasets = this.datasets || {};
+    var currentDatasets = this.getCurrentDatasets();
+    currentDatasets.forEach(function (d) {
+      _this2.datasets[_this2.props.datasetKeyProvider(d)] = d;
+    });
+  };
+
+  ChartComponent.prototype.updateChart = function updateChart() {
+    var _this3 = this;
+
+    var options = this.props.options;
+
+
+    var data = this.memoizeDataProps(this.props);
+
+    if (!this.chartInstance) return;
+
+    if (options) {
+      this.chartInstance.options = chart_js__WEBPACK_IMPORTED_MODULE_2___default.a.helpers.configMerge(this.chartInstance.options, options);
+    }
+
+    // Pipe datasets to chart instance datasets enabling
+    // seamless transitions
+    var currentDatasets = this.getCurrentDatasets();
+    var nextDatasets = data.datasets || [];
+    this.checkDatasets(currentDatasets);
+
+    var currentDatasetsIndexed = lodash_keyBy__WEBPACK_IMPORTED_MODULE_4___default()(currentDatasets, this.props.datasetKeyProvider);
+
+    // We can safely replace the dataset array, as long as we retain the _meta property
+    // on each dataset.
+    this.chartInstance.config.data.datasets = nextDatasets.map(function (next) {
+      var current = currentDatasetsIndexed[_this3.props.datasetKeyProvider(next)];
+
+      if (current && current.type === next.type && next.data) {
+        // Be robust to no data. Relevant for other update mechanisms as in chartjs-plugin-streaming.
+        // The data array must be edited in place. As chart.js adds listeners to it.
+        current.data.splice(next.data.length);
+        next.data.forEach(function (point, pid) {
+          current.data[pid] = next.data[pid];
         });
 
-        if (shouldWarn) {
-          console.error('[react-chartjs-2] Warning: Each dataset needs a unique key. By default, the "label" property on each dataset is used. Alternatively, you may provide a "datasetKeyProvider" as a prop that returns a unique key.');
-        }
+        var _data = next.data,
+            otherProps = _objectWithoutProperties(next, ['data']);
+        // Merge properties. Notice a weakness here. If a property is removed
+        // from next, it will be retained by current and never disappears.
+        // Workaround is to set value to null or undefined in next.
+
+
+        return _extends({}, current, otherProps);
+      } else {
+        return next;
       }
+    });
+
+    var datasets = data.datasets,
+        rest = _objectWithoutProperties(data, ['datasets']);
+
+    this.chartInstance.config.data = _extends({}, this.chartInstance.config.data, rest);
+
+    this.chartInstance.update();
+  };
+
+  ChartComponent.prototype.renderChart = function renderChart() {
+    var _props2 = this.props,
+        options = _props2.options,
+        legend = _props2.legend,
+        type = _props2.type,
+        plugins = _props2.plugins;
+
+    var node = this.element;
+    var data = this.memoizeDataProps();
+
+    if (typeof legend !== 'undefined' && !lodash_isEqual__WEBPACK_IMPORTED_MODULE_3___default()(ChartComponent.defaultProps.legend, legend)) {
+      options.legend = legend;
     }
-  }, {
-    key: "getCurrentDatasets",
-    value: function getCurrentDatasets() {
-      return this.chartInstance && this.chartInstance.config.data && this.chartInstance.config.data.datasets || [];
+
+    this.chartInstance = new chart_js__WEBPACK_IMPORTED_MODULE_2___default.a(node, {
+      type: type,
+      data: data,
+      options: options,
+      plugins: plugins
+    });
+  };
+
+  ChartComponent.prototype.destroyChart = function destroyChart() {
+    if (!this.chartInstance) {
+      return;
     }
-  }, {
-    key: "saveCurrentDatasets",
-    value: function saveCurrentDatasets() {
-      var _this2 = this;
 
-      this.datasets = this.datasets || {};
-      var currentDatasets = this.getCurrentDatasets();
-      currentDatasets.forEach(function (d) {
-        _this2.datasets[_this2.props.datasetKeyProvider(d)] = d;
-      });
-    }
-  }, {
-    key: "updateChart",
-    value: function updateChart() {
-      var _this3 = this;
+    // Put all of the datasets that have existed in the chart back on the chart
+    // so that the metadata associated with this chart get destroyed.
+    // This allows the datasets to be used in another chart. This can happen,
+    // for example, in a tabbed UI where the chart gets created each time the
+    // tab gets switched to the chart and uses the same data).
+    this.saveCurrentDatasets();
+    var datasets = Object.values(this.datasets);
+    this.chartInstance.config.data.datasets = datasets;
 
-      var options = this.props.options;
-      var data = this.memoizeDataProps(this.props);
-      if (!this.chartInstance) return;
+    this.chartInstance.destroy();
+  };
 
-      if (options) {
-        this.chartInstance.options = _chart["default"].helpers.configMerge(this.chartInstance.options, options);
-      } // Pipe datasets to chart instance datasets enabling
-      // seamless transitions
+  ChartComponent.prototype.render = function render() {
+    var _props3 = this.props,
+        height = _props3.height,
+        width = _props3.width,
+        id = _props3.id;
 
 
-      var currentDatasets = this.getCurrentDatasets();
-      var nextDatasets = data.datasets || [];
-      this.checkDatasets(currentDatasets);
-      var currentDatasetsIndexed = (0, _keyBy["default"])(currentDatasets, this.props.datasetKeyProvider); // We can safely replace the dataset array, as long as we retain the _meta property
-      // on each dataset.
-
-      this.chartInstance.config.data.datasets = nextDatasets.map(function (next) {
-        var current = currentDatasetsIndexed[_this3.props.datasetKeyProvider(next)];
-
-        if (current && current.type === next.type && next.data) {
-          // Be robust to no data. Relevant for other update mechanisms as in chartjs-plugin-streaming.
-          // The data array must be edited in place. As chart.js adds listeners to it.
-          current.data.splice(next.data.length);
-          next.data.forEach(function (point, pid) {
-            current.data[pid] = next.data[pid];
-          });
-
-          var _data = next.data,
-              otherProps = _objectWithoutProperties(next, ["data"]); // Merge properties. Notice a weakness here. If a property is removed
-          // from next, it will be retained by current and never disappears.
-          // Workaround is to set value to null or undefined in next.
-
-
-          return _objectSpread(_objectSpread({}, current), otherProps);
-        } else {
-          return next;
-        }
-      });
-
-      var datasets = data.datasets,
-          rest = _objectWithoutProperties(data, ["datasets"]);
-
-      this.chartInstance.config.data = _objectSpread(_objectSpread({}, this.chartInstance.config.data), rest);
-      this.chartInstance.update();
-    }
-  }, {
-    key: "renderChart",
-    value: function renderChart() {
-      var _this$props3 = this.props,
-          options = _this$props3.options,
-          legend = _this$props3.legend,
-          type = _this$props3.type,
-          plugins = _this$props3.plugins;
-      var node = this.element;
-      var data = this.memoizeDataProps();
-
-      if (typeof legend !== 'undefined' && !(0, _isEqual["default"])(ChartComponent.defaultProps.legend, legend)) {
-        options.legend = legend;
-      }
-
-      this.chartInstance = new _chart["default"](node, {
-        type: type,
-        data: data,
-        options: options,
-        plugins: plugins
-      });
-    }
-  }, {
-    key: "destroyChart",
-    value: function destroyChart() {
-      if (!this.chartInstance) {
-        return;
-      } // Put all of the datasets that have existed in the chart back on the chart
-      // so that the metadata associated with this chart get destroyed.
-      // This allows the datasets to be used in another chart. This can happen,
-      // for example, in a tabbed UI where the chart gets created each time the
-      // tab gets switched to the chart and uses the same data).
-
-
-      this.saveCurrentDatasets();
-      var datasets = Object.values(this.datasets);
-      this.chartInstance.config.data.datasets = datasets;
-      this.chartInstance.destroy();
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this$props4 = this.props,
-          height = _this$props4.height,
-          width = _this$props4.width,
-          id = _this$props4.id;
-      return /*#__PURE__*/_react["default"].createElement("canvas", {
-        ref: this.ref,
-        height: height,
-        width: width,
-        id: id,
-        onClick: this.handleOnClick
-      });
-    }
-  }]);
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('canvas', {
+      ref: this.ref,
+      height: height,
+      width: width,
+      id: id,
+      onClick: this.handleOnClick
+    });
+  };
 
   return ChartComponent;
-}(_react["default"].Component);
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-_defineProperty(ChartComponent, "getLabelAsKey", function (d) {
+ChartComponent.getLabelAsKey = function (d) {
   return d.label;
-});
+};
 
-_defineProperty(ChartComponent, "propTypes", {
-  data: _propTypes["default"].oneOfType([_propTypes["default"].object, _propTypes["default"].func]).isRequired,
-  getDatasetAtEvent: _propTypes["default"].func,
-  getElementAtEvent: _propTypes["default"].func,
-  getElementsAtEvent: _propTypes["default"].func,
-  height: _propTypes["default"].number,
-  legend: _propTypes["default"].object,
-  onElementsClick: _propTypes["default"].func,
-  options: _propTypes["default"].object,
-  plugins: _propTypes["default"].arrayOf(_propTypes["default"].object),
-  redraw: _propTypes["default"].bool,
+ChartComponent.propTypes = {
+  data: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object, prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func]).isRequired,
+  getDatasetAtEvent: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  getElementAtEvent: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  getElementsAtEvent: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  height: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
+  legend: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object,
+  onElementsClick: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  options: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object,
+  plugins: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object),
+  redraw: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
   type: function type(props, propName, componentName) {
-    if (!_chart["default"].controllers[props[propName]]) {
+    if (!chart_js__WEBPACK_IMPORTED_MODULE_2___default.a.controllers[props[propName]]) {
       return new Error('Invalid chart type `' + props[propName] + '` supplied to' + ' `' + componentName + '`.');
     }
   },
-  width: _propTypes["default"].number,
-  datasetKeyProvider: _propTypes["default"].func
-});
-
-_defineProperty(ChartComponent, "defaultProps", {
+  width: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
+  datasetKeyProvider: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
+};
+ChartComponent.defaultProps = {
   legend: {
     display: true,
     position: 'bottom'
@@ -18755,282 +18564,220 @@ _defineProperty(ChartComponent, "defaultProps", {
   redraw: false,
   options: {},
   datasetKeyProvider: ChartComponent.getLabelAsKey
-});
+};
 
-var _default = ChartComponent;
-exports["default"] = _default;
 
-var Doughnut = /*#__PURE__*/function (_React$Component2) {
+/* harmony default export */ __webpack_exports__["default"] = (ChartComponent);
+
+var Doughnut = function (_React$Component2) {
   _inherits(Doughnut, _React$Component2);
-
-  var _super2 = _createSuper(Doughnut);
 
   function Doughnut() {
     _classCallCheck(this, Doughnut);
 
-    return _super2.apply(this, arguments);
+    return _possibleConstructorReturn(this, _React$Component2.apply(this, arguments));
   }
 
-  _createClass(Doughnut, [{
-    key: "render",
-    value: function render() {
-      var _this4 = this;
+  Doughnut.prototype.render = function render() {
+    var _this5 = this;
 
-      return /*#__PURE__*/_react["default"].createElement(ChartComponent, _extends({}, this.props, {
-        ref: function ref(_ref) {
-          return _this4.chartInstance = _ref && _ref.chartInstance;
-        },
-        type: "doughnut"
-      }));
-    }
-  }]);
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ChartComponent, _extends({}, this.props, {
+      ref: function ref(_ref) {
+        return _this5.chartInstance = _ref && _ref.chartInstance;
+      },
+      type: 'doughnut'
+    }));
+  };
 
   return Doughnut;
-}(_react["default"].Component);
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-exports.Doughnut = Doughnut;
-
-var Pie = /*#__PURE__*/function (_React$Component3) {
+var Pie = function (_React$Component3) {
   _inherits(Pie, _React$Component3);
-
-  var _super3 = _createSuper(Pie);
 
   function Pie() {
     _classCallCheck(this, Pie);
 
-    return _super3.apply(this, arguments);
+    return _possibleConstructorReturn(this, _React$Component3.apply(this, arguments));
   }
 
-  _createClass(Pie, [{
-    key: "render",
-    value: function render() {
-      var _this5 = this;
+  Pie.prototype.render = function render() {
+    var _this7 = this;
 
-      return /*#__PURE__*/_react["default"].createElement(ChartComponent, _extends({}, this.props, {
-        ref: function ref(_ref2) {
-          return _this5.chartInstance = _ref2 && _ref2.chartInstance;
-        },
-        type: "pie"
-      }));
-    }
-  }]);
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ChartComponent, _extends({}, this.props, {
+      ref: function ref(_ref2) {
+        return _this7.chartInstance = _ref2 && _ref2.chartInstance;
+      },
+      type: 'pie'
+    }));
+  };
 
   return Pie;
-}(_react["default"].Component);
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-exports.Pie = Pie;
-
-var Line = /*#__PURE__*/function (_React$Component4) {
+var Line = function (_React$Component4) {
   _inherits(Line, _React$Component4);
-
-  var _super4 = _createSuper(Line);
 
   function Line() {
     _classCallCheck(this, Line);
 
-    return _super4.apply(this, arguments);
+    return _possibleConstructorReturn(this, _React$Component4.apply(this, arguments));
   }
 
-  _createClass(Line, [{
-    key: "render",
-    value: function render() {
-      var _this6 = this;
+  Line.prototype.render = function render() {
+    var _this9 = this;
 
-      return /*#__PURE__*/_react["default"].createElement(ChartComponent, _extends({}, this.props, {
-        ref: function ref(_ref3) {
-          return _this6.chartInstance = _ref3 && _ref3.chartInstance;
-        },
-        type: "line"
-      }));
-    }
-  }]);
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ChartComponent, _extends({}, this.props, {
+      ref: function ref(_ref3) {
+        return _this9.chartInstance = _ref3 && _ref3.chartInstance;
+      },
+      type: 'line'
+    }));
+  };
 
   return Line;
-}(_react["default"].Component);
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-exports.Line = Line;
-
-var Bar = /*#__PURE__*/function (_React$Component5) {
+var Bar = function (_React$Component5) {
   _inherits(Bar, _React$Component5);
-
-  var _super5 = _createSuper(Bar);
 
   function Bar() {
     _classCallCheck(this, Bar);
 
-    return _super5.apply(this, arguments);
+    return _possibleConstructorReturn(this, _React$Component5.apply(this, arguments));
   }
 
-  _createClass(Bar, [{
-    key: "render",
-    value: function render() {
-      var _this7 = this;
+  Bar.prototype.render = function render() {
+    var _this11 = this;
 
-      return /*#__PURE__*/_react["default"].createElement(ChartComponent, _extends({}, this.props, {
-        ref: function ref(_ref4) {
-          return _this7.chartInstance = _ref4 && _ref4.chartInstance;
-        },
-        type: "bar"
-      }));
-    }
-  }]);
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ChartComponent, _extends({}, this.props, {
+      ref: function ref(_ref4) {
+        return _this11.chartInstance = _ref4 && _ref4.chartInstance;
+      },
+      type: 'bar'
+    }));
+  };
 
   return Bar;
-}(_react["default"].Component);
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-exports.Bar = Bar;
-
-var HorizontalBar = /*#__PURE__*/function (_React$Component6) {
+var HorizontalBar = function (_React$Component6) {
   _inherits(HorizontalBar, _React$Component6);
-
-  var _super6 = _createSuper(HorizontalBar);
 
   function HorizontalBar() {
     _classCallCheck(this, HorizontalBar);
 
-    return _super6.apply(this, arguments);
+    return _possibleConstructorReturn(this, _React$Component6.apply(this, arguments));
   }
 
-  _createClass(HorizontalBar, [{
-    key: "render",
-    value: function render() {
-      var _this8 = this;
+  HorizontalBar.prototype.render = function render() {
+    var _this13 = this;
 
-      return /*#__PURE__*/_react["default"].createElement(ChartComponent, _extends({}, this.props, {
-        ref: function ref(_ref5) {
-          return _this8.chartInstance = _ref5 && _ref5.chartInstance;
-        },
-        type: "horizontalBar"
-      }));
-    }
-  }]);
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ChartComponent, _extends({}, this.props, {
+      ref: function ref(_ref5) {
+        return _this13.chartInstance = _ref5 && _ref5.chartInstance;
+      },
+      type: 'horizontalBar'
+    }));
+  };
 
   return HorizontalBar;
-}(_react["default"].Component);
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-exports.HorizontalBar = HorizontalBar;
-
-var Radar = /*#__PURE__*/function (_React$Component7) {
+var Radar = function (_React$Component7) {
   _inherits(Radar, _React$Component7);
-
-  var _super7 = _createSuper(Radar);
 
   function Radar() {
     _classCallCheck(this, Radar);
 
-    return _super7.apply(this, arguments);
+    return _possibleConstructorReturn(this, _React$Component7.apply(this, arguments));
   }
 
-  _createClass(Radar, [{
-    key: "render",
-    value: function render() {
-      var _this9 = this;
+  Radar.prototype.render = function render() {
+    var _this15 = this;
 
-      return /*#__PURE__*/_react["default"].createElement(ChartComponent, _extends({}, this.props, {
-        ref: function ref(_ref6) {
-          return _this9.chartInstance = _ref6 && _ref6.chartInstance;
-        },
-        type: "radar"
-      }));
-    }
-  }]);
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ChartComponent, _extends({}, this.props, {
+      ref: function ref(_ref6) {
+        return _this15.chartInstance = _ref6 && _ref6.chartInstance;
+      },
+      type: 'radar'
+    }));
+  };
 
   return Radar;
-}(_react["default"].Component);
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-exports.Radar = Radar;
-
-var Polar = /*#__PURE__*/function (_React$Component8) {
+var Polar = function (_React$Component8) {
   _inherits(Polar, _React$Component8);
-
-  var _super8 = _createSuper(Polar);
 
   function Polar() {
     _classCallCheck(this, Polar);
 
-    return _super8.apply(this, arguments);
+    return _possibleConstructorReturn(this, _React$Component8.apply(this, arguments));
   }
 
-  _createClass(Polar, [{
-    key: "render",
-    value: function render() {
-      var _this10 = this;
+  Polar.prototype.render = function render() {
+    var _this17 = this;
 
-      return /*#__PURE__*/_react["default"].createElement(ChartComponent, _extends({}, this.props, {
-        ref: function ref(_ref7) {
-          return _this10.chartInstance = _ref7 && _ref7.chartInstance;
-        },
-        type: "polarArea"
-      }));
-    }
-  }]);
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ChartComponent, _extends({}, this.props, {
+      ref: function ref(_ref7) {
+        return _this17.chartInstance = _ref7 && _ref7.chartInstance;
+      },
+      type: 'polarArea'
+    }));
+  };
 
   return Polar;
-}(_react["default"].Component);
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-exports.Polar = Polar;
-
-var Bubble = /*#__PURE__*/function (_React$Component9) {
+var Bubble = function (_React$Component9) {
   _inherits(Bubble, _React$Component9);
-
-  var _super9 = _createSuper(Bubble);
 
   function Bubble() {
     _classCallCheck(this, Bubble);
 
-    return _super9.apply(this, arguments);
+    return _possibleConstructorReturn(this, _React$Component9.apply(this, arguments));
   }
 
-  _createClass(Bubble, [{
-    key: "render",
-    value: function render() {
-      var _this11 = this;
+  Bubble.prototype.render = function render() {
+    var _this19 = this;
 
-      return /*#__PURE__*/_react["default"].createElement(ChartComponent, _extends({}, this.props, {
-        ref: function ref(_ref8) {
-          return _this11.chartInstance = _ref8 && _ref8.chartInstance;
-        },
-        type: "bubble"
-      }));
-    }
-  }]);
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ChartComponent, _extends({}, this.props, {
+      ref: function ref(_ref8) {
+        return _this19.chartInstance = _ref8 && _ref8.chartInstance;
+      },
+      type: 'bubble'
+    }));
+  };
 
   return Bubble;
-}(_react["default"].Component);
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-exports.Bubble = Bubble;
-
-var Scatter = /*#__PURE__*/function (_React$Component10) {
+var Scatter = function (_React$Component10) {
   _inherits(Scatter, _React$Component10);
-
-  var _super10 = _createSuper(Scatter);
 
   function Scatter() {
     _classCallCheck(this, Scatter);
 
-    return _super10.apply(this, arguments);
+    return _possibleConstructorReturn(this, _React$Component10.apply(this, arguments));
   }
 
-  _createClass(Scatter, [{
-    key: "render",
-    value: function render() {
-      var _this12 = this;
+  Scatter.prototype.render = function render() {
+    var _this21 = this;
 
-      return /*#__PURE__*/_react["default"].createElement(ChartComponent, _extends({}, this.props, {
-        ref: function ref(_ref9) {
-          return _this12.chartInstance = _ref9 && _ref9.chartInstance;
-        },
-        type: "scatter"
-      }));
-    }
-  }]);
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ChartComponent, _extends({}, this.props, {
+      ref: function ref(_ref9) {
+        return _this21.chartInstance = _ref9 && _ref9.chartInstance;
+      },
+      type: 'scatter'
+    }));
+  };
 
   return Scatter;
-}(_react["default"].Component);
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-exports.Scatter = Scatter;
-var defaults = _chart["default"].defaults;
-exports.defaults = defaults;
+var defaults = chart_js__WEBPACK_IMPORTED_MODULE_2___default.a.defaults;
+
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../process/browser.js */ "./node_modules/process/browser.js")))
 
 /***/ }),
@@ -19068,7 +18815,7 @@ const getLink = (sysType, action) => () => {
   return commonService.getLink(sysType, action);
 };
 
-const ActionCreators = _objectSpread(_objectSpread({}, _subtabAction__WEBPACK_IMPORTED_MODULE_2__), {}, {
+const ActionCreators = _objectSpread({}, _subtabAction__WEBPACK_IMPORTED_MODULE_2__, {
   getCustomerBettingStatus,
   getLink
 });
@@ -19124,9 +18871,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const AppContainer = props => {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_1__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_1__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "account-info-container"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TabContent__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_WidgetContent__WEBPACK_IMPORTED_MODULE_3__["default"], null)));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TabContent__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_WidgetContent__WEBPACK_IMPORTED_MODULE_3__["default"], null)));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (AppContainer);
@@ -19155,17 +18902,17 @@ const SubTab = props => {
     selectedTab,
     onChangeTab
   } = props;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "header-tab"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "content-tab"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     className: "tabs"
   }, dataList.map(item => {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
       className: "tab",
       key: item.name
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
       className: item.name === selectedTab ? 'link active' : 'link',
       onClick: () => onChangeTab(item.name)
     }, item.text));
@@ -19219,25 +18966,25 @@ const TabContent = props => {
     display: selectedTab === tabKey ? 'block' : 'none'
   });
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "outer-col-1"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "left-side"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "subtab"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SubTab__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SubTab__WEBPACK_IMPORTED_MODULE_6__["default"], {
     dataList: tabListByLicenseeType,
     selectedTab: selectedTab,
     onChangeTab: setSelectedTab
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "tab-panel"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: getStyle(_lib_constants__WEBPACK_IMPORTED_MODULE_2__["tabKeys"].playerProfile)
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_subtab_AccountProfile__WEBPACK_IMPORTED_MODULE_3__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_subtab_AccountProfile__WEBPACK_IMPORTED_MODULE_3__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: getStyle(_lib_constants__WEBPACK_IMPORTED_MODULE_2__["tabKeys"].bankInformation)
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_subtab_BankInformation__WEBPACK_IMPORTED_MODULE_4__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_subtab_BankInformation__WEBPACK_IMPORTED_MODULE_4__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: getStyle(_lib_constants__WEBPACK_IMPORTED_MODULE_2__["tabKeys"].activityRecord)
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_subtab_ActivityRecord__WEBPACK_IMPORTED_MODULE_5__["default"], null)))));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_subtab_ActivityRecord__WEBPACK_IMPORTED_MODULE_5__["default"], null)))));
 };
 
 function mapStateToProps(state) {
@@ -19274,13 +19021,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const WidgetContent = () => {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "outer-col-2"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "cust-betting-container"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_widgets_CustomerBettingStatus__WEBPACK_IMPORTED_MODULE_1__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_widgets_CustomerBettingStatus__WEBPACK_IMPORTED_MODULE_1__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "fast-cross-link-container"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_widgets_FastCrossLink__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_widgets_FastCrossLink__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
 };
 /* harmony default export */ __webpack_exports__["default"] = (WidgetContent);
 
@@ -19323,12 +19070,12 @@ const defaultState = _objectSpread({}, window.initialState);
 const store = _lib_store__WEBPACK_IMPORTED_MODULE_6__["default"].createStore(_reducers_index_js__WEBPACK_IMPORTED_MODULE_5__["default"], defaultState);
 
 const App = () => {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_4__["Provider"], {
+  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_4__["Provider"], {
     store: store
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_AppContainer_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null));
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_AppContainer_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null));
 };
 
-react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(App, null), document.getElementById("app-container"));
+react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(App, null), document.getElementById("app-container"));
 
 /***/ }),
 
@@ -19368,13 +19115,13 @@ const AccountProfile = props => {
     };
     props.getAccountProfile(param).then(result => setData(result));
   }, [licenseeCustId]);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "left-side-content account-profile-container"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
     className: "table"
-  }, props.licenseeType === _lib_constants__WEBPACK_IMPORTED_MODULE_6__["licenseeType"].api ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ApiProfile__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, props.licenseeType === _lib_constants__WEBPACK_IMPORTED_MODULE_6__["licenseeType"].api ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ApiProfile__WEBPACK_IMPORTED_MODULE_5__["default"], {
     data: data
-  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AthenaProfile__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AthenaProfile__WEBPACK_IMPORTED_MODULE_4__["default"], {
     data: data
   })));
 };
@@ -19446,17 +19193,17 @@ const ActivityRecord = ({
     LastUpdateSpecialLevelString,
     SpecialLevelUpdateBy
   } = data || {};
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "left-side-content activity-record-container"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
     className: "table"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "first-cell"
-  }, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_4__["default"].getText('CreatedDate')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, createdDate)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_4__["default"].getText('LastTransaction')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, LastTxn)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+  }, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_4__["default"].getText('CreatedDate')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, createdDate)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_4__["default"].getText('LastTransaction')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, LastTxn)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     colSpan: "2"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_4__["default"].getText('BAUpdatedBy')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, BAUpdatedBy)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_4__["default"].getText('LastUpdatedBA')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, LastUpdateBAString)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_4__["default"].getText('BAUpdatedBy')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, BAUpdatedBy)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_4__["default"].getText('LastUpdatedBA')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, LastUpdateBAString)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     colSpan: "2"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_4__["default"].getText('SpecialLevel')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, SpecialLevelUpdateBy)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_4__["default"].getText('LastUpdatedSpecialLevel')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, LastUpdateSpecialLevelString)))));
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_4__["default"].getText('SpecialLevel')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, SpecialLevelUpdateBy)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_4__["default"].getText('LastUpdatedSpecialLevel')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, LastUpdateSpecialLevelString)))));
 };
 
 function mapDispatchToProps(dispatch) {
@@ -19515,13 +19262,13 @@ const ApiProfile = ({
     CustomInfo4,
     CustomInfo5
   } = data || {};
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "first-cell"
-  }, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('MemberId')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, MemberId)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('FirstName')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, FirstName)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('LastName')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, LastName)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('OperatorId')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, OperatorId)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+  }, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('MemberId')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, MemberId)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('FirstName')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, FirstName)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('LastName')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, LastName)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('OperatorId')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, OperatorId)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     colSpan: "2"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('SiteCode')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, SiteCode)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('ProductCode')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, ProductCode)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('SiteCode')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, SiteCode)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('ProductCode')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, ProductCode)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     colSpan: "2"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('CustomInfo1')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, CustomInfo1)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('CustomInfo2')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, CustomInfo2)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('CustomInfo3')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, CustomInfo3)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('CustomInfo4')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, CustomInfo4)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('CustomInfo5')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, CustomInfo5)));
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('CustomInfo1')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, CustomInfo1)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('CustomInfo2')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, CustomInfo2)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('CustomInfo3')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, CustomInfo3)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('CustomInfo4')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, CustomInfo4)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('CustomInfo5')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, CustomInfo5)));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (ApiProfile);
@@ -19570,15 +19317,15 @@ const AthenaProfile = ({
     PreferredOdds,
     PreferredLanguage
   } = data || {};
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "first-cell"
-  }, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('AgUserId')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, AGUserId)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('GoldDeluxeUserId')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, GoldDeluxeUserId)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('MacauGamesUserId')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, VoidbridgeUserId)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('ExchangeUserId')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, ExchangeUserId)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+  }, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('AgUserId')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, AGUserId)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('GoldDeluxeUserId')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, GoldDeluxeUserId)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('MacauGamesUserId')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, VoidbridgeUserId)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('ExchangeUserId')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, ExchangeUserId)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     colSpan: "2"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('FirstName')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, FirstName)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('LastName')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, LastName)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('Gender')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, Gender)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('DateOfBirth')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, Birthday)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('Mobile')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, Phone)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('Country')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, Country)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('Address')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, Address)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('City'), "/ ", _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('Town')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, City, City && Town && '/', Town)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('State')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, State)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('ZipCode')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, ZipCode)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('FirstName')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, FirstName)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('LastName')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, LastName)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('Gender')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, Gender)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('DateOfBirth')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, Birthday)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('Mobile')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, Phone)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('Country')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, Country)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('Address')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, Address)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('City'), "/ ", _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('Town')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, City, City && Town && '/', Town)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('State')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, State)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('ZipCode')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, ZipCode)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     colSpan: "2"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('SecurityQuestion')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, SecurityQuestion)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('SecurityCode')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, SecurityCode)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('WhereHear')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, HowToKnow)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('SecurityQuestion')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, SecurityQuestion)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('SecurityCode')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, SecurityCode)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('WhereHear')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, HowToKnow)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     colSpan: "2"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('PreferredUserName')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, PreferredUserName)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('PreferredCurrency')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, PreferredCurrency)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('PreferredOdds')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, PreferredOdds)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('PreferredLanguage')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, PreferredLanguage)));
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('PreferredUserName')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, PreferredUserName)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('PreferredCurrency')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, PreferredCurrency)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('PreferredOdds')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, PreferredOdds)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('PreferredLanguage')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, PreferredLanguage)));
 };
 /* harmony default export */ __webpack_exports__["default"] = (AthenaProfile);
 
@@ -19631,18 +19378,18 @@ const BankInformation = props => {
     AccountName,
     AccountNumber
   } = data || {};
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "left-side-content bank-infor-container"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
     className: "table"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "first-cell"
-  }, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_5__["default"].getText('BankInformation'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  }, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_5__["default"].getText('BankInformation'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "btn-default btn-link btn-icon",
     onClick: () => setIsShowPlainText(true)
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "material-icons"
-  }, "remove_red_eye"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_5__["default"].getText('BankName')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, displayInfo(BankName))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_5__["default"].getText('BankAccountName')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, displayInfo(AccountName))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_5__["default"].getText('BankAccountNumber')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, displayInfo(AccountNumber))))));
+  }, "remove_red_eye"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_5__["default"].getText('BankName')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, displayInfo(BankName))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_5__["default"].getText('BankAccountName')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, displayInfo(AccountName))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_5__["default"].getText('BankAccountNumber')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, displayInfo(AccountNumber))))));
 };
 
 function mapDispatchToProps(dispatch) {
@@ -19687,7 +19434,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/numberFormat */ "./www/js/source/reactpages/lib/numberFormat.js");
 /* harmony import */ var react_chartjs_2__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-chartjs-2 */ "./node_modules/react-chartjs-2/es/index.js");
-/* harmony import */ var react_chartjs_2__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_chartjs_2__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/lib/clientResourceManager */ "./www/js/source/reactpages/lib/clientResourceManager.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -19787,11 +19533,11 @@ const CustomerBettingStatus = props => {
       CancelledTicketCount
     } = data;
 
-    const dataSetItem = _objectSpread(_objectSpread({}, defaultDataSetItem), {}, {
+    const dataSetItem = _objectSpread({}, defaultDataSetItem, {
       data: [WonTicketCount, LoseTicketCount, DrawTicketCount, CancelledTicketCount]
     });
 
-    const chartData = _objectSpread(_objectSpread({}, defaultChartData), {}, {
+    const chartData = _objectSpread({}, defaultChartData, {
       datasets: [dataSetItem]
     });
 
@@ -19803,56 +19549,56 @@ const CustomerBettingStatus = props => {
       NetWinLoss
     } = data;
     const marginPercent = _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__["default"].round(Margin, 2) * 100;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "row"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-12 col-md-7 col-sm-7 col-lg-7 col-xl-7 chart-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_chartjs_2__WEBPACK_IMPORTED_MODULE_5__["Doughnut"], {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_chartjs_2__WEBPACK_IMPORTED_MODULE_5__["Doughnut"], {
       data: chartData,
       legend: legendOpts,
       options: option
-    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-12 col-md-5 col-sm-5 col-lg-5 col-xl-5 statistics-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_6__["default"].getText('BasedOnSportsbook')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_6__["default"].getText('BasedOnSportsbook')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "row"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5"
-    }, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_6__["default"].getText('Margin'), ":"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_6__["default"].getText('Margin'), ":"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4"
-    }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__["default"].formatDecimal(marginPercent), "%")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__["default"].formatDecimal(marginPercent), "%")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "row"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5"
-    }, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_6__["default"].getText('AverageBetSize'), ":"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_6__["default"].getText('AverageBetSize'), ":"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4"
-    }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__["default"].formatDecimal(AverageBetSize))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__["default"].formatDecimal(AverageBetSize))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "row"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5"
-    }, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_6__["default"].getText('Winnings'), ":"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_6__["default"].getText('Winnings'), ":"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4"
-    }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__["default"].formatDecimal(Winnings))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__["default"].formatDecimal(Winnings))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "row"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5"
-    }, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_6__["default"].getText('Loss'), ":"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_6__["default"].getText('Loss'), ":"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4"
-    }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__["default"].formatDecimal(Loss))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__["default"].formatDecimal(Loss))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "row"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5"
-    }, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_6__["default"].getText('NetWinLoss'), ":"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_6__["default"].getText('NetWinLoss'), ":"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4"
     }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__["default"].formatDecimal(NetWinLoss)))));
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "panel"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "panel-header"
-  }, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_6__["default"].getText('PlayerBettingStatisticsTitle')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_6__["default"].getText('PlayerBettingStatisticsTitle')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "panel-body"
-  }, data && data.HasData ? renderContent() : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+  }, data && data.HasData ? renderContent() : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "center-align"
   }, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_6__["default"].getText('NoSportsbookData'))));
 };
@@ -19941,21 +19687,21 @@ const FastCrossLink = props => {
     width: window.innerWidth - 10,
     height: 300
   };
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "panel"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "panel-header"
-  }, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_6__["default"].getText('FastCrossLink')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_6__["default"].getText('FastCrossLink')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "panel-body"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_6__["default"].getText('BettingTicketCenter')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_6__["default"].getText('BettingTicketCenter')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", {
     className: "divider"
-  }, ">"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }, ">"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     className: "link",
     onClick: e => handleClickLink(e, popupSingleCustomer)
-  }, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_6__["default"].getText('SingleCustomer')))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_6__["default"].getText('SingleCustomer')))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     className: "link",
     onClick: e => handleClickLink(e, popupCustomerWinLoss)
-  }, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_6__["default"].getText('CustomerWinLoss'))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_popup__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_6__["default"].getText('CustomerWinLoss'))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_popup__WEBPACK_IMPORTED_MODULE_5__["default"], {
     isShow: isShowPopup,
     iframeUrl: popupInfo.url,
     title: popupInfo.title,
@@ -20530,7 +20276,7 @@ class LapCommonService extends _baseCommonService__WEBPACK_IMPORTED_MODULE_0__["
   }
 
   _buildCommonAjaxConfig(configOption, apiActionUrl, params) {
-    const commonConfig = _objectSpread(_objectSpread({}, configOption), {}, {
+    const commonConfig = _objectSpread({}, configOption, {
       url: apiActionUrl
     });
 
@@ -20546,7 +20292,7 @@ class LapCommonService extends _baseCommonService__WEBPACK_IMPORTED_MODULE_0__["
     } : {
       data: qs__WEBPACK_IMPORTED_MODULE_3___default.a.stringify(params)
     };
-    return _objectSpread(_objectSpread({}, config), paramConfig);
+    return _objectSpread({}, config, {}, paramConfig);
   }
 
   _fetchDataWithToken(sysType, action, params, configOption) {
@@ -20560,11 +20306,11 @@ class LapCommonService extends _baseCommonService__WEBPACK_IMPORTED_MODULE_0__["
 
       const commonAjaxConfig = this._buildCommonAjaxConfig(configOption, apiActionUrl, params);
 
-      const headerConfig = _objectSpread(_objectSpread({}, configOption.headers), {}, {
+      const headerConfig = _objectSpread({}, configOption.headers, {
         'X-Auth-Token': Token
       });
 
-      const configWithXToken = _objectSpread(_objectSpread({}, commonAjaxConfig), {}, {
+      const configWithXToken = _objectSpread({}, commonAjaxConfig, {
         headers: _objectSpread({}, headerConfig)
       });
 
@@ -20573,7 +20319,7 @@ class LapCommonService extends _baseCommonService__WEBPACK_IMPORTED_MODULE_0__["
   }
 
   fetchData(sysType, action, params, configOption = defaultAjaxConfig) {
-    const config = _objectSpread(_objectSpread({}, defaultAjaxConfig), configOption);
+    const config = _objectSpread({}, defaultAjaxConfig, {}, configOption);
 
     if (sysType === _constants_configInfo__WEBPACK_IMPORTED_MODULE_1__["systemType"].newAdmin) {
       const relativeUrl = this._baseUrl + action;
@@ -20629,44 +20375,44 @@ const Popup = props => {
   let content;
 
   if (iframeUrl) {
-    content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("iframe", {
+    content = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("iframe", {
       frameBorder: "0",
       src: iframeUrl,
       width: "100%",
       height: "100%"
     });
   } else {
-    content = isHtml ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    content = isHtml ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "popup-content",
       dangerouslySetInnerHTML: {
         __html: children
       }
-    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "popup-content"
     }, children);
   }
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: `popup-container ${isShow ? 'show' : 'hide'}`,
     onClick: props.onClick
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "popup-block-body"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "flat-popup",
     style: {
       height: height,
       width: width
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "popup-title"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "txt-title"
-  }, title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }, title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     className: "popup-close",
     onClick: () => {
       props.onClose && props.onClose();
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "icon-close"
   }))), content));
 };
@@ -20759,7 +20505,7 @@ class AppLayout extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   }
 
   render() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       id: "container",
       className: "container-fluid"
     }, this.props.children);
@@ -20793,7 +20539,7 @@ const resources = {
 const currentLangKey = window._langKey || DEFAULT_RESOURCE_KEY;
 class ClientResourceManager {
   static register(langKey, resourceValue) {
-    resources[langKey] = _objectSpread(_objectSpread({}, resources[langKey]), resourceValue);
+    resources[langKey] = _objectSpread({}, resources[langKey], {}, resourceValue);
   }
 
   static getText(key) {

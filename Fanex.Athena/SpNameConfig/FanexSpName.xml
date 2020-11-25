@@ -225,8 +225,8 @@
     <Setting Key="LAP_Rpt_DetailTransaction_Mem" SpName="LAP_Rpt_DetailTransaction_Mem" DbName="DBBAH.bodb02.bodbLicenseeNet" />
   </Function>
   <Function Name="Customer Class">
-    <Setting Key="Lrf_CustomerClassSel" SpName="Lrf_CustomerClassSel_xtest" DbName="DBCUST.CustDB.bodbLicenseeNet" />
+    <Setting Key="Lrf_CustomerClassSel" SpName="Lrf_CustomerClassSel" DbName="DBCUST.CustDB.bodbLicenseeNet" />
     <Setting Key="Lrf_CustomerClassPolicySel" SpName="Lrf_CustomerClassPolicySel_xtest" DbName="DBCUST.CustDB.bodbLicenseeNet" />
-    <Setting Key="Lrf_CustomerClassSitePolicySel" SpName="Lrf_CustomerClassSitePolicySel_xtest" DbName="DBCUST.CustDB.bodbLicenseeNet" />
+    <Setting Key="Lrf_CustomerClassSitePolicySel" SpName="Lrf_CustomerClassSitePolicySel" DbName="DBCUST.CustDB.bodbLicenseeNet" />
   </Function>
 </Functions>

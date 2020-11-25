@@ -7,6 +7,7 @@
     using Fanex.Athena.DataAccess.Core.Extensions;
     using Fanex.Athena.Model.Customer.DTO;
     using Fanex.Athena.Model.Customer.MetaModel;
+    using Fanex.Athena.Resources;
     using Fanex.Athena.VendorAdapter.Interfaces;
 
     public class CustomerClassDataAccess : BaseDataAccess, ICustomerClassDataAccess
@@ -35,6 +36,8 @@
                         var id = Convert.ToString(reader["CustomerClass"]);
                         var betDelay = reader.ToNullableDecimal("BetDelay");
                         var leadgroupId = Convert.ToString(reader["LeagueGroupId"]);
+                        var platform = reader.ToNullableInt("Platform");
+
                         var policy = new CustomerClassLimitPolicyModel
                         {
                             Id = id,
@@ -46,6 +49,8 @@
                             MaxBet = FormatNumber(reader.ToNullableDecimal("MaxBet"), NumberStyle),
                             MaxPerMatch = FormatNumber(reader.ToNullableDecimal("MaxPerMatch"), NumberStyle),
                             RepeatedBets = FormatNumber(reader.ToNullableInt("RepeatedBets"), NumberStyle),
+                            MinBet = FormatNumber(reader.ToNullableDecimal("MinBet"), "{0:#,##0}"),
+                            Platform = platform == null ? "-" : ViewResources.ResourceManager.GetString($"Platform_{platform}")
                         };
 
                         result.Add(policy);
