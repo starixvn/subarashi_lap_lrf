@@ -1,13 +1,10 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="UrlExtension.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-namespace Fanex.Athena.Web.HtmlExtension
+﻿namespace Fanex.Athena.Web.HtmlExtension
 {
     using System.Configuration;
+    using System.IO;
     using System.Text.RegularExpressions;
     using System.Web;
+    using System.Web.Hosting;
     using System.Web.Mvc;
 
     public static class UrlExtension
@@ -16,11 +13,10 @@ namespace Fanex.Athena.Web.HtmlExtension
         public static string ContentLink(this UrlHelper helper, string contentPath)
         {
             var cdnDomain = ConfigurationManager.AppSettings["StaticDomain"];
-            var appPath = string.IsNullOrEmpty(cdnDomain) ?
-                 HttpContext.Current.Request.ApplicationPath : cdnDomain;
+            var appPath = string.IsNullOrEmpty(cdnDomain) ? HttpContext.Current.Request.ApplicationPath : cdnDomain;
             var baseUrl = appPath != null && appPath.Length > 1 ? appPath : string.Empty;
-
-            return baseUrl + contentPath + "?" + ConfigurationManager.AppSettings["JsVersion"];
+            var version = GenerateContentVersion(contentPath);
+            return $"{baseUrl}{contentPath}?v={version}";
         }
 
         public static string ContentLinkByEnv(this UrlHelper helper, string contentPath)
@@ -35,6 +31,14 @@ namespace Fanex.Athena.Web.HtmlExtension
             }
 
             return ContentLink(helper, path);
+        }
+
+        private static string GenerateContentVersion(string contentPath)
+        {
+            const string format = "MMddyyyy_HHmm";
+            var fullPathFile = HostingEnvironment.MapPath("~/" + contentPath);
+            var version = File.GetLastWriteTime(fullPathFile).ToString(format);
+            return version;
         }
     }
 }

@@ -51,9 +51,13 @@ export class DataGrid extends PureComponent {
     }
 
     handleSort = (sortBy, sortOrder) => {
-        const { playerList, setPlayerList } = this.props;
-        const sortedPlayerList = GridInteractionService.sortPlayerList(playerList, sortBy, sortOrder);
-        setPlayerList(sortedPlayerList);
+        const { playerList, setPlayerList, toggleLoader } = this.props;
+        toggleLoader(true);
+        setTimeout(() => {
+            const sortedPlayerList = GridInteractionService.sortPlayerList(playerList, sortBy, sortOrder);
+            setPlayerList(sortedPlayerList);
+            toggleLoader(false);
+        }, 0);
     }
 
     render() {
@@ -93,8 +97,8 @@ export class DataGrid extends PureComponent {
 }
 
 function mapDispatchToProps(dispatch) {
-    const { setPlayerList } = ActionCreators;
-    return bindActionCreators({ setPlayerList }, dispatch);
+    const { setPlayerList, toggleLoader } = ActionCreators;
+    return bindActionCreators({ setPlayerList, toggleLoader }, dispatch);
 }
 
 function mapStateToProps(state) {

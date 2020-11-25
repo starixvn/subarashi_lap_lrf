@@ -1,7 +1,6 @@
 ﻿import { specialLevelListWithColor } from '../constants';
 
 import LapPlayerQueryService from './lapPlayerQueryService';
-import PlayerMultipleQueryService from './playerMultipleQueryService';
 import LrfPlayerQueryService from './lrfPlayerQueryService';
 
 export default class QueryServiceFactory {
@@ -12,7 +11,7 @@ export default class QueryServiceFactory {
         } else if (this._isChangeAdvancedSearch(param)) {
             return LrfPlayerQueryService;
         } else {
-            return PlayerMultipleQueryService;
+            return LapPlayerQueryService;
         }
     }
 

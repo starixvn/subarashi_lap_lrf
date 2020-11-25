@@ -1422,7 +1422,6 @@
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\lib\services\lrfPlayerQueryService.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\lib\services\playerCommandService.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\lib\services\playerItemQueryService.js" />
-    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\lib\services\playerMultipleQueryService.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\lib\services\playerQueryService.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\lib\services\playerSuggestionService.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\lib\services\queryServiceFactory.js" />

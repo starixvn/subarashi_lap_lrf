@@ -25,6 +25,10 @@ export const buildDisplayedColumnObject = (displayedColumnList) => {
 
 export const isNonDepositOrArchived = (lapItem) => lapItem.IBCCustId === 0 || lapItem.isArchived;
 
+export const getNoneDepositOrArchivedList = (lapPlayerList) => {
+    return !!lapPlayerList && !!lapPlayerList.length ? lapPlayerList.filter(player => isNonDepositOrArchived(player)) : [];
+}
+
 export const getCustIdListFromLapData = (lapPlayerList) => {
     return lapPlayerList.reduce((result, item) => {
         if (!isNonDepositOrArchived(item)) {

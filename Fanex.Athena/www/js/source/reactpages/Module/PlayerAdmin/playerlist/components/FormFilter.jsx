@@ -30,7 +30,6 @@ export class FormFilter extends PureComponent {
         this.userNameRef = React.createRef();
 
         this.state = {
-            isValidUserName: false,
             bankAccountNumber: '',
             email: '',
             currencyIdList: this.allCurrencyString,
@@ -53,7 +52,6 @@ export class FormFilter extends PureComponent {
 
             const userName = QueryString.getParam(window.location.href, 'userName');
             this.userNameRef.current.value = userName;
-            this.setState({ isValidUserName: !!userName });
         }
 
         const { type, isSubsidiary, hasCommPermissionRead } = this.props;
@@ -76,20 +74,14 @@ export class FormFilter extends PureComponent {
     }
 
     searchPlayer() {
-        const userName = this.userNameRef.current.value;
-        const { bankAccountNumber, email } = this.state;
-        if (!userName && !bankAccountNumber && !email) {
-            return;
-        }
-
-        const emailRegex = new RegExp(emailPattern);
-        if (email && !emailRegex.test(email)) {
+        const { email } = this.state
+        if (email && !(new RegExp(emailPattern).test(email))) {
             window.alert(LangHelper.getSingleResource('InvalidEmail'));
             return;
         }
-
+        const userName = this.userNameRef.current.value;
         const { pagingOption, searchPlayer, currencyList } = this.props;
-        const { specialLevel, currencyIdList, oddsGroup, isValidUserName, ...restParam } = this.state;
+        const { specialLevel, currencyIdList, oddsGroup, ...restParam } = this.state;
 
         const actualSpecialLevel = specialLevel.trim() === '' ? this.allSpecialLevel : specialLevel;
         const actualCurrencyIdList = currencyIdList.trim().split(',').length === currencyList.length ? '' : currencyIdList;
@@ -142,7 +134,6 @@ export class FormFilter extends PureComponent {
 
     handleUserNameChange = (value) => {
         this.userNameRef.current.value = value;
-        this.setState({ isValidUserName: !!value });
     }
 
     _renderContentUserGuide() {
@@ -166,13 +157,12 @@ export class FormFilter extends PureComponent {
     }
 
     render() {
-        const { bankAccountNumber, email, searchOption, isValidUserName, ...advancedSearchParam } = this.state;
+        const { bankAccountNumber, email, searchOption, ...advancedSearchParam } = this.state;
         const { type, isAdvancedSearch, isFilterCollapsing, currencyList, getSuggestionList, siteSetting } = this.props;
         const { currencyIdList, oddsGroup, specialLevel } = advancedSearchParam;
 
-        const isValidParam = (isValidUserName || !!bankAccountNumber || !!email) &&
-            !!currencyIdList && !!oddsGroup && !!specialLevel &&
-            !(this.state.changeOnCustomerClass && !this.state.customerClass);
+        const isValidParam = !!currencyIdList && !!oddsGroup && !!specialLevel &&
+			!(this.state.changeOnCustomerClass && !this.state.customerClass); 
         const iconToggle = {
             tag: 'div',
             className: isFilterCollapsing ? 'chevron down' : 'chevron up',
