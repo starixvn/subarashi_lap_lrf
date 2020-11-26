@@ -3,7 +3,7 @@ import ClientResourceManager from '@jsroot/lib/clientResourceManager';
 
 const ApiProfile = ({ data }) => {
     const { MemberId, FirstName, LastName, OperatorId, SiteCode, ProductCode,
-        CustomInfo1, CustomInfo2, CustomInfo3, CustomInfo4, CustomInfo5 } = data || {};
+        CustomInfo1, CustomInfo2, CustomInfo3, CustomInfo4, CustomInfo5, ExchangeUserId  } = data || {};
 
     return (
         <tbody>
@@ -56,6 +56,10 @@ const ApiProfile = ({ data }) => {
             <tr>
                 <td>{ClientResourceManager.getText('CustomInfo5')}</td>
                 <td>{CustomInfo5}</td>
+            </tr>
+            <tr>
+                <td>{ClientResourceManager.getText('ExchangeUserId')}</td>
+                <td>{ExchangeUserId}</td>
             </tr>
         </tbody>
     );

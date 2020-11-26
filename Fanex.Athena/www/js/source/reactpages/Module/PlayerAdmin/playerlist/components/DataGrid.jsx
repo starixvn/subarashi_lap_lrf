@@ -80,6 +80,7 @@ export class DataGrid extends PureComponent {
                 <Table minWidth={650}
                     autoWidth={true}
                     maxWidth={this.maxWidth}
+                    minWidth={1300}
                     autoHeight={true}
                     header={GridHelper.renderHeader(displayedColumn, canSelectPlayers, hasCommPermissionRead)}
                     body={this._renderDataSection(dataList, displayedColumn, canSelectPlayers, hasCommPermissionRead)}

@@ -39,6 +39,7 @@ export const buildLapPlayerList = (playerList) => {
             CurrencyCode,
             OutBalance,
             IBCUserName,
+            Vender_Member_ID,
             CreatedDateString
         } = item;
 
@@ -47,6 +48,7 @@ export const buildLapPlayerList = (playerList) => {
             LicenseeCustId: CustId,
             UserName,
             SystemId: IBCUserName,
+            VendorMemberId: Vender_Member_ID,
             Currency: CurrencyCode,
             CurrentBalance,
             OutstandingBalance: OutBalance,
