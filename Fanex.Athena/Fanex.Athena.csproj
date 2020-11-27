@@ -991,6 +991,7 @@
     <Content Include="Views\Desktop\Customer\CustomerLog\GroupCommLog\Menu.cshtml" />
     <Content Include="Views\Desktop\Customer\PlayerSegmentation\BetList.cshtml" />
     <Content Include="Views\Desktop\Customer\CustomerClass\CustomerClassInformation.cshtml" />
+    <Content Include="Views\Desktop\BetList\Joker\Main.cshtml" />
     <Content Include="Views\Desktop\Report\SabaVirtualSportsWinLoss\Content.cshtml" />
     <Content Include="App_Data\Template\PlayerAdmin\DetailTransaction.xls" />
     <Content Include="Views\Desktop\BetList\PGSDetail\Main.cshtml" />

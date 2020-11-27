@@ -18,9 +18,9 @@ export const SportType = {
     CARDCLUB: 165,
     SG: 247,
     VRG: 245,
+    JK: 234,
     SXG: 243,
     SBC: 200,
-    SBC_FreeBets: 150,
     SAG: 244,
     PGS: 232
 }

@@ -70,6 +70,8 @@ namespace Fanex.Athena.Model.Core.DTO.Common
 
         public const string SAG = "SAG";
 
+        public const string JK = "JK";
+
         #endregion Field
 
         #region Constructor

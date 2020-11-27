@@ -16,7 +16,7 @@ namespace Fanex.Athena.Controllers.Report.Result.ResultPopup
         }
 
         [HttpGet]
-        public async Task<string> Index(string custId, string siteId, string gameRoundId, string gameId, int sportType)
+        public async Task<string> Index(string custId, string siteId, string gameRoundId, string gameId)
         {
             var language = SessionServiceInstance.UserSession.Language;
             var model = new
@@ -25,7 +25,6 @@ namespace Fanex.Athena.Controllers.Report.Result.ResultPopup
                 siteId,
                 gameRoundId,
                 gameId,
-                sportType,
                 languageCode = language
             };
             return await _betListApiClient.PostStringAsync("/SabaClubResultPopup/Index", model, language).ConfigureAwait(false);

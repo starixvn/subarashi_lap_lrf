@@ -198,7 +198,8 @@
                 Product.SXG,
                 Product.SBC,
                 Product.SAG,
-                Product.PGS
+                Product.PGS,
+                Product.JK
             };
 
             var productAccess = _productService.GetSingleWalletProductAccess(

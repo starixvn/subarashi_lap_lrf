@@ -195,6 +195,22 @@
         }
 
         [HttpGet]
+        public async Task<string> Joker(string custId, string gamePlayId, string gameCode)
+        {
+            var language = SessionServiceInstance.UserSession.Language;
+            var model = new
+            {
+                custId,
+                gamePlayId,
+                gameCode,
+                languageCode = language
+            };
+
+            return await _betListApiClient.PostStringAsync("/JokerResultPopup/Index",
+               model, language).ConfigureAwait(false);
+        }
+
+        [HttpGet]
         public async Task<ActionResult> SexyGaming(string transDesc, string matchCode, string betType)
         {
             var language = SessionServiceInstance.UserSession.Language;

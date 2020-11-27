@@ -250,6 +250,17 @@ class BetList {
         return url;
     }
 
+    getJokerDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
+        let url = rootUrl + 'JokerBetList/Detail';
+        url = QueryString.setParam(url, 'transId', transId);
+        url = QueryString.setParam(url, 'date', winlostDate);
+        url = QueryString.setParam(url, 'custId', custId);
+        url = QueryString.setParam(url, 'transType', transType);
+        url = QueryString.setParam(url, 'BaseCurrency', baseCurrency);
+
+        return url;
+    }
+
     getSexyGamingDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
         let url = rootUrl + 'SexyGamingBetList/Detail';
         url = QueryString.setParam(url, 'transId', transId);
@@ -334,13 +345,12 @@ class BetList {
         return url;
     }
 
-    getSabaClubResultUrl(rootUrl, custid, gameId, siteId, gameRoundId, sportType) {
+    getSabaClubResultUrl(rootUrl, custid, gameId, siteId, gameRoundId) {
         let url = rootUrl + 'SabaClubResultPopup/Index';
         url = QueryString.setParam(url, 'custid', custid);
         url = QueryString.setParam(url, 'gameId', gameId);
         url = QueryString.setParam(url, 'siteId', siteId);
         url = QueryString.setParam(url, 'gameRoundId', gameRoundId);
-        url = QueryString.setParam(url, 'sportType', sporttype);
 
         return url;
     }
@@ -377,6 +387,15 @@ class BetList {
         url = QueryString.setParam(url, 'matchCode', matchCode);
         url = QueryString.setParam(url, 'bettype', bettype);
         url = QueryString.setParam(url, 'transdesc', encodeURIComponent(transdesc));
+
+        return url;
+    }
+
+    getJokerResultUrl(rootUrl, custId, gamePlayId, gameCode) {
+        let url = rootUrl + 'ResultReport/Joker';
+        url = QueryString.setParam(url, 'custId', custId);
+        url = QueryString.setParam(url, 'gamePlayId', gamePlayId);
+        url = QueryString.setParam(url, 'gameCode', gameCode);
 
         return url;
     }
