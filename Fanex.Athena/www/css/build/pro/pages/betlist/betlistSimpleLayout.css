@@ -1273,9 +1273,6 @@ tr.ui-search-toolbar select {
   padding: 0;
   border: none; }
 
-.theme_jqGrid .ui-jqgrid .ui-jqgrid-btable tr > td {
-  border-top: none; }
-
 .theme_jqGrid .ui-jqgrid .ui-jqgrid-sdiv {
   border-top: 3px solid #a7a1a1; }
   .theme_jqGrid .ui-jqgrid .ui-jqgrid-sdiv .ui-jqgrid-ftable .footer-firstrow > td {
