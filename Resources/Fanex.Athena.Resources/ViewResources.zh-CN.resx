@@ -2554,4 +2554,10 @@
   <data name="RepeatedBets" xml:space="preserve">
     <value>重复投注限制</value>
   </data>
+  <data name="Platform_1" xml:space="preserve">
+    <value>桌机</value>
+  </data>
+  <data name="Platform_2" xml:space="preserve">
+    <value>手机版</value>
+  </data>
 </root>

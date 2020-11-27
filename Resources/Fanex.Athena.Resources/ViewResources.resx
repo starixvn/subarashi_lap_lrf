@@ -2905,4 +2905,10 @@
   <data name="RepeatedBets" xml:space="preserve">
     <value>Repeated Bets</value>
   </data>
+  <data name="Platform_1" xml:space="preserve">
+    <value>Desktop</value>
+  </data>
+  <data name="Platform_2" xml:space="preserve">
+    <value>Mobile</value>
+  </data>
 </root>

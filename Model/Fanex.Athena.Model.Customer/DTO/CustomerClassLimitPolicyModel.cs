@@ -15,5 +15,8 @@
         public string MaxPerMatch { get; set; }
 
         public string RepeatedBets { get; set; }
+
+        public string MinBet { get; set; }
+        public string Platform { get; set; }
     }
 }

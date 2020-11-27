@@ -5137,6 +5137,24 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Desktop.
+        /// </summary>
+        public static string Platform_1 {
+            get {
+                return ResourceManager.GetString("Platform_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mobile.
+        /// </summary>
+        public static string Platform_2 {
+            get {
+                return ResourceManager.GetString("Platform_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Platform Win Loss.
         /// </summary>
         public static string PlatformWinLoss {
