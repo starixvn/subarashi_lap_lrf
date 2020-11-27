@@ -1,4 +1,4 @@
-﻿// Generated at: 11/11/2020 3:44:35 PM
+﻿// Generated at: 11/27/2020 1:22:58 PM
 var _language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -564,6 +564,8 @@ PersonalMessage:"Personal Message",
 PlaceholderBankAccount:"Search by Exactly Bank Account Number",
 PlaceholderEmail:"Search by Exactly Email",
 Platform:"Platform",
+Platform_1:"Desktop",
+Platform_2:"Mobile",
 PlatformWinLoss:"Platform Win Loss",
 PlatformWinLossNote:"Platform data is available from 27 Feb 2016.",
 PlatformWinLossTitle:"Platform Win Loss - {0} --&gt; {1} - {2} - {3} - {4}",
@@ -593,6 +595,7 @@ ProductCS:"RNG Casino",
 ProductFW:"Fishing World",
 ProductGD:"Gold Deluxe",
 ProductI4D:"Indo 4D",
+ProductJK:"Joker",
 ProductKN:"RNG Keno",
 ProductLC:"Live Casino",
 ProductLT:"Lottery",

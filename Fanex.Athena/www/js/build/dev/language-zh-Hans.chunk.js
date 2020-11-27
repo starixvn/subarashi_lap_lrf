@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 11/11/2020 3:44:48 PM
+﻿// Generated at: 11/27/2020 1:23:04 PM
 window._language_zh_Hans = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -538,6 +538,8 @@ PendingFunds:"待定资金",
 Permission:"权限",
 PermissionForUser:"用户权限",
 Platform:"平台",
+Platform_1:"桌机",
+Platform_2:"手机版",
 PleaseSelectOne:"请选择一个",
 PreGame:"游戏开始前",
 Prev:"上个月",
