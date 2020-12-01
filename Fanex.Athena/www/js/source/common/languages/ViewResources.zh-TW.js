@@ -1,4 +1,4 @@
-﻿// Generated at: 11/11/2020 3:44:48 PM
+﻿// Generated at: 11/27/2020 1:23:04 PM
 window._language_zh_TW = {
 AA:"客客",
 AbnormalBet:"非正規註單",
@@ -441,6 +441,7 @@ PendingFunds:"待定資金",
 Permission:"權限",
 PermissionForUser:"用戶權限",
 Platform:"平台",
+Platform_2:"手機版",
 PleaseSelectOne:"請選擇一個",
 PreGame:"遊戲開始前",
 Prev:"上個",

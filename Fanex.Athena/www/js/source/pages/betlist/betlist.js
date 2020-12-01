@@ -21,6 +21,7 @@
         const SPORT_SBC = 200;
         const SPORT_SAG = 244;
         const SPORT_PGS = 232;
+        const SPORT_JK = 234;
         const BETLIST_META_MODEL = '#BetListMetaModel';
 
         let _sortColumnName, _sortOrder;
@@ -489,6 +490,18 @@
                 Site.unBlockUI();
             },
 
+            viewJokerResult: function (custId, gamePlayId, gameCode, title) {
+                const url = Site.resolveClientUrl('ResultReport/Joker');
+                Site.blockUI();
+
+                $.get(url + '?custId=' + custId + '&gamePlayId=' + gamePlayId + '&gameCode=' + gameCode, function (result) {
+                    if (result !== '') {
+                        showResultPopUp(result, { width: 800, height: 380, title: title });
+                        Site.unBlockUI();
+                    }
+                });
+            },
+
             viewAllBetResult: function (trasdesc, betcheck, bettype, title) {
                 const url = Site.resolveClientUrl('ResultReport/AllBetResult?transdesc=' +
                     encodeURIComponent(trasdesc) + '&betcheck=' + betcheck + '&bettype=' + bettype);
@@ -543,6 +556,9 @@
                 }
                 else if (sporttype === SPORT_VRG) {
                     _me.viewVRGResult(refno, defaultPlatform, title);
+                }
+                else if (sporttype === SPORT_JK) {
+                    _me.viewJokerResult(custid, transdecs, extension2, title);
                 }
                 else if (sporttype === SPORT_SXG) {
                     _me.viewSexyGamingResult(transdecs, extension2, bettype, title);
@@ -845,7 +861,20 @@
 
                 showDetailPopUp(url, { width: 890, height: popH + 50, title: title });
             },
-            
+            showJokerBetDetails: function (transId, winlostDate, custId, transType) {
+                let url = Site.resolveClientUrl('JokerBetList/Detail');
+                url = QueryString.setParam(url, 'transId', transId);
+                url = QueryString.setParam(url, 'date', winlostDate);
+                url = QueryString.setParam(url, 'custId', custId);
+                url = QueryString.setParam(url, 'transType', transType);
+                url = QueryString.setParam(url, 'BaseCurrency', getBaseCurrency());
+
+                const popH = Math.min($(window).height() - 100, 550);
+                const title = Site.getSingleResource('ProductJK') + ' - ' +
+                    Site.getSingleResource('DetailedBetlist') + ' - ' + moment(new Date(winlostDate)).format('MM/DD/YYYY');
+
+                showDetailPopUp(url, { width: 890, height: popH + 50, title: title });
+            },
             showSexyGamingBetDetails: function (transId, winlostDate, custId, transType) {
                 let url = Site.resolveClientUrl('SexyGamingBetList/Detail');
                 url = QueryString.setParam(url, 'transId', transId);
@@ -989,6 +1018,7 @@
                 window.showVideoPokerGameDetails = _me.showVideoPokerGameDetails;
                 window.showSingleMatchParlayDetail = _me.showSingleMatchParlayDetail;
                 window.showSGDetails = _me.showSGDetails;
+                window.showJokerBetDetails = _me.showJokerBetDetails;
                 window.showSexyGamingBetDetails = _me.showSexyGamingBetDetails;
                 window.showSabaClubDetails = _me.showSabaClubDetails;
                 window.showSAGamingDetails = _me.showSAGamingDetails;

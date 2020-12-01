@@ -68,6 +68,10 @@ class BetListLayout extends Component {
                 const url = BetList.getGlobalGamingResultUrl(rootUrl, custid, extension2);
                 this._showThirdPartyResult(url, title);
             }
+            else if (sporttype === SportType.JK) {
+                const url = BetList.getJokerResultUrl(rootUrl, custid, transdecs, extension2);
+                this._showThirdPartyResult(url, title);
+            }
             else if (sporttype === SportType.SXG) {
                 const url = BetList.getSexyGamingResultUrl(rootUrl, transdecs, extension2, bettype);
                 this._openPopup(url, title);
@@ -229,6 +233,16 @@ class BetListLayout extends Component {
             this._openPopup(url, title);
         }
 
+        window.showJokerBetDetails = (transId, winlostDate, custId, transType) => {
+            const { rootUrl, baseCurrency } = this.props;
+
+            const url = BetList.getJokerDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
+            const title = this._getResource('ProductJK') + ' - ' +
+                this._getResource('DetailedBetlist') + ' - ' + this._formatDateString(winlostDate);
+
+            this._openPopup(url, title);
+        }
+
         window.showSexyGamingBetDetails = (transId, winlostDate, custId, transType) => {
             const { rootUrl, baseCurrency } = this.props;
 
@@ -288,6 +302,7 @@ class BetListLayout extends Component {
         window.showPPJackpotWonDetails = undefined;
         window.showSingleMatchParlayDetail = undefined;
         window.showSGDetails = undefined;
+        window.showJokerBetDetails = undefined;
         window.showSexyGamingBetDetails = undefined;
         window.showSAGamingDetails = undefined;
         window.showSabaClubDetails = undefined;

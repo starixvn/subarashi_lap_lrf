@@ -1,4 +1,4 @@
-﻿// Generated at: 11/11/2020 3:44:48 PM
+﻿// Generated at: 11/27/2020 1:23:04 PM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -509,6 +509,8 @@ PersonalMessage:"个人讯息",
 PlaceholderBankAccount:"精确查询银行帐户号码",
 PlaceholderEmail:"精确查询电子邮件",
 Platform:"平台",
+Platform_1:"桌机",
+Platform_2:"手机版",
 PlatformWinLoss:"平台输赢",
 PlatformWinLossNote:"平台数据是从 27/2/2016.",
 PlatformWinLossTitle:"平台输赢 - {0} --&gt; {1} - {2} - {3} - {4}",
