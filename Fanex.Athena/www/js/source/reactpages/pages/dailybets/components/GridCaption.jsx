@@ -46,7 +46,7 @@ export const GridCaption = (props) => {
         const currencyText = buildCurrencytext(currencyIdList);
         const totalTicketText = `${LangHelper.getSingleResource('TotalTickets')}: ${NumberFormat.format(pagingOption.TotalItem)}`;
 
-        const content = `${LangHelper.getSingleResource('DailyBets')}, ${dateString} - ${currencyText} - ${totalTicketText}`;
+        const content = `${LangHelper.getSingleResource('DailyBets')}, GMT+8, ${dateString} - ${currencyText} - ${totalTicketText}`;
         setContent(content);
     }, [props.requestParam, props.pagingOption]);
 

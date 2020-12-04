@@ -1315,7 +1315,7 @@ const GridCaption = props => {
     const dateString = Object(_lib_utils__WEBPACK_IMPORTED_MODULE_3__["getFormattedDate"])(date);
     const currencyText = buildCurrencytext(currencyIdList);
     const totalTicketText = `${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource('TotalTickets')}: ${_jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_6__["default"].format(pagingOption.TotalItem)}`;
-    const content = `${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource('DailyBets')}, ${dateString} - ${currencyText} - ${totalTicketText}`;
+    const content = `${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource('DailyBets')}, GMT+8, ${dateString} - ${currencyText} - ${totalTicketText}`;
     setContent(content);
   }, [props.requestParam, props.pagingOption]);
 
