@@ -57,7 +57,8 @@ export const UpdateVIPStatusCode = {
     NoChangeBySystemId: 101,
     Avoid: 102,
     InvalidExternalId: 103,
-    NoChangeByExternalId: 104
+    NoChangeByExternalId: 104, 
+    NoChangeByBAStatus: 105
 }
 
 export const errorResponse = {

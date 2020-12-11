@@ -5,12 +5,12 @@ import ActionCreators from '../actions';
 import { Cell } from '@9softstudio/react-grid';
 import Switcher from '@jsroot/components/Switcher';
 import LangHelper from '@jsroot/lib/langHelper';
-import { generateDefaultConfirmOption } from '@jsroot/lib/sweetAlert';
+import { generateDefaultConfirmOption, predefinedIcons } from '@jsroot/lib/sweetAlert';
 import { UpdateVipStatusAlertOption } from '../lib/helpers/sweetAlertHelper'
 
 const VipSwitcherCell = (props) => {
     const { index, updateVipStatus, setSweetAlertOption, playerList } = props;
-    const { systemId, isVip } = playerList[index];
+    const { systemId, isVip, isBA } = playerList[index];
 
     const _handleCloseAlert = () => {
         setSweetAlertOption(null);
@@ -25,7 +25,7 @@ const VipSwitcherCell = (props) => {
         const handlerUpdateVipStatusSuccess = UpdateVipStatusAlertOption.createHandlerAfterUpdateVipStatusSuccess(props);
         const handlerAfterUpdateVipStatus = UpdateVipStatusAlertOption.createHandlerAfterUpdateVipStatus({ setSweetAlertOption, handlerUpdateVipStatusSuccess, isUpdateVip, isSingleUpdate: true });
         const confirmProps = UpdateVipStatusAlertOption.createUpdateVipStatusConfirmProps({ params, updateVipStatus, handlerAfterUpdateVipStatus });
-        const confirmOptions = generateDefaultConfirmOption(confirmMessage, _handleCloseAlert, confirmProps, _cancelProps);
+        const confirmOptions = generateDefaultConfirmOption(confirmMessage, _handleCloseAlert, confirmProps, _cancelProps, predefinedIcons.warning, { height: 210 });
         return confirmOptions;
     }
 
@@ -40,9 +40,13 @@ const VipSwitcherCell = (props) => {
         setSweetAlertOption(alertOption);
     }
 
+    const _getTextDisplay = isVip => {
+        return isVip ? 'YES' : 'NO';
+    }
+
     return (
         <Cell className={"center-align"}>
-            <Switcher checked={isVip} onChange={_handleChangeVipStatus} />
+            {isBA ? _getTextDisplay(isVip) : <Switcher checked={isVip} onChange={_handleChangeVipStatus} />}
         </Cell>
     )
 }

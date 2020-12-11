@@ -22,5 +22,6 @@ namespace Fanex.Athena.Model.Customer.DTO.PlayerSegmentation
 
         public string MarkDate { get; set; }
         public bool IsVip { get; set; }
+        public bool IsBA { get; set; }
     }
 }
