@@ -1681,6 +1681,9 @@
     <value>体育博彩</value>
     <comment>#49196</comment>
   </data>
+  <data name="ProductBGG" xml:space="preserve">
+    <value>大遊真人</value>
+  </data>
   <data name="GoldDeluxeWinLossGuidelineContent" xml:space="preserve">
     <value>在GMT-4下午4点之前的任何查询将依据前一天下午4点的数据。您每次查询可以过滤最多3个月内的数据。</value>
     <comment>#71725</comment>

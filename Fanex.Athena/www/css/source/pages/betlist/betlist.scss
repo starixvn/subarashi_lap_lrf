@@ -365,4 +365,9 @@
             }
         }
     }
+
+    .underdog > .bet-id, .favorite > .bet-id {
+        color: #bbb;
+        display: block;
+    }
 }

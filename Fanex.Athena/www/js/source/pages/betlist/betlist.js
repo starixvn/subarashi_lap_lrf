@@ -28,6 +28,7 @@
         const SPORT_SLT = 169;
         const SPORT_HB = 238;
         const SPORT_WM = 233;
+        const SPORT_BGG = 239;
         const BETLIST_META_MODEL = '#BetListMetaModel';
 
         let _sortColumnName, _sortOrder;
@@ -486,6 +487,21 @@
                     }
                 });
             },
+            viewBGGResult: function (custId, transId3rd, currencyId, siteId, title) {
+                const param = 'custId=' + custId +
+                    '&transId3rd=' + transId3rd +
+                    '&currencyId=' + currencyId +
+                    '&siteId=' + siteId;
+                const url = Site.resolveClientUrl('BGGResultPopup/Index?' + param);
+
+                Site.blockUI();
+                $.get(url, function (result) {
+                    if (result !== '') {
+                        showResultPopUp(result, { width: 800, height: 450, title: title });
+                        Site.unBlockUI();
+                    }
+                });
+            },
 
             viewSAGamingResult: function (trasdesc, matchCode, bettype, title) {
                 const url = Site.resolveClientUrl('ResultReport/SAGaming?transdesc=' +
@@ -643,6 +659,9 @@
                 }
                 else if (sporttype === SPORT_WM) {
                     _me.viewWMResult(transdecs, extension2, bettype, title);
+                }
+                else if (sporttype === SPORT_BGG) {
+                    _me.viewBGGResult(custid, transdecs, league, extension2, title);
                 }
                 else {
                     const numberBettype = Number(bettype);
@@ -1063,6 +1082,21 @@
 
                 showDetailPopUp(url, { width: 890, height: popH + 50, title: title });
             },
+            showBGGDetails: function (transId, winlostDate, custId, transType) {
+                let url = Site.resolveClientUrl('BGGBetList/Detail');
+                url = QueryString.setParam(url, 'transId', transId);
+                url = QueryString.setParam(url, 'date', winlostDate);
+                url = QueryString.setParam(url, 'custId', custId);
+                url = QueryString.setParam(url, 'transType', transType);
+                url = QueryString.setParam(url, 'BaseCurrency', getBaseCurrency());
+
+                const popH = Math.min($(window).height() - 100, 550);
+                const title = Site.getSingleResource('ProductBGG') + ' - ' +
+                    Site.getSingleResource('DetailedBetlist') + ' - ' + moment(new Date(winlostDate)).format('MM/DD/YYYY');
+
+                showDetailPopUp(url, { width: 890, height: popH + 50, title: title });
+            },
+
             ValidProducts: function () {
                 let temp = true;
                 if ($('#ProductList').find('input:checked').length === 0) {
@@ -1157,6 +1191,7 @@
                 window.showGDGBetDetails = _me.showGDGBetDetails;
                 window.showHabaneroBetDetails = _me.showHabaneroBetDetails;
                 window.showWMBetDetails = _me.showWMBetDetails;
+                window.showBGBetDetails = _me.showBGGDetails;
 
                 const betList = {
                     ViewCasinoHandHistory: _me.ViewCasinoHandHistory

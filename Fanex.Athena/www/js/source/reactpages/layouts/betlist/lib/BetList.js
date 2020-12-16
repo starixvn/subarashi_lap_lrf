@@ -304,8 +304,8 @@ class BetList {
         return url;
     }
 
-    getPGSDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
-        let url = rootUrl + 'PGSoftBetList/Detail';
+    getBGGDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
+        let url = rootUrl + 'BGGBetList/Detail';
         url = QueryString.setParam(url, 'transId', transId);
         url = QueryString.setParam(url, 'date', winlostDate);
         url = QueryString.setParam(url, 'custId', custId);
@@ -465,6 +465,16 @@ class BetList {
         url = QueryString.setParam(url, 'custid', custid);
         url = QueryString.setParam(url, 'gamePlayId', gamePlayId);
         url = QueryString.setParam(url, 'gameId3rd', gameId3rd);
+
+        return url;
+    }
+
+    getBGGResultUrl(rootUrl, custid, transId3rd, currencyId, siteId) {
+        let url = rootUrl + 'BGGResultPopup/Index';
+        url = QueryString.setParam(url, 'custid', custid);
+        url = QueryString.setParam(url, 'transId3rd', transId3rd);
+        url = QueryString.setParam(url, 'currencyId', currencyId);
+        url = QueryString.setParam(url, 'siteId', siteId);
 
         return url;
     }

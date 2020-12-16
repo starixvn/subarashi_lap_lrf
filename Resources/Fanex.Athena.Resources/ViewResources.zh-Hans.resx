@@ -1727,6 +1727,9 @@
     <value>虚拟运动2</value>
     <comment>83759</comment>
   </data>
+  <data name="ProductBGG" xml:space="preserve">
+    <value>大遊真人</value>
+  </data>
   <data name="NewAsia" xml:space="preserve">
     <value>新亚洲版</value>
   </data>

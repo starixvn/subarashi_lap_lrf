@@ -163,6 +163,7 @@
     <Compile Include="AGCasinoBetListController.cs" />
     <Compile Include="BettingTicketCenterAdvancedSearchController.cs" />
     <Compile Include="BettingTicketCenterController.cs" />
+    <Compile Include="LiveCasinoController.cs" />
     <Compile Include="BonusBetListController.cs" />
     <Compile Include="DailyStatementBetListController.cs" />
     <Compile Include="ExchangeWinLossBetListController.cs" />
