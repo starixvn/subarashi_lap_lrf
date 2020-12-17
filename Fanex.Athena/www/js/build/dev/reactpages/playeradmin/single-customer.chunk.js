@@ -197,9 +197,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const AppContainer = props => {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Loader__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_2__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Loader__WEBPACK_IMPORTED_MODULE_3__["default"], {
     isLoading: props.isLoading
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Title__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Content__WEBPACK_IMPORTED_MODULE_4__["default"], null));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Title__WEBPACK_IMPORTED_MODULE_5__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Content__WEBPACK_IMPORTED_MODULE_4__["default"], null));
 };
 
 function mapStateToProps(state) {
@@ -268,14 +268,14 @@ const Content = props => {
   } = Object(_jsroot_customHooks_pagingHooks__WEBPACK_IMPORTED_MODULE_11__["usePagingOption"])();
 
   const handleSort = (sortBy, sortOrder) => {
-    setRequestParam(_objectSpread({}, requestParam, {
+    setRequestParam(_objectSpread(_objectSpread({}, requestParam), {}, {
       sortBy: sortBy === 'WinLoss' ? 'WinLost' : sortBy,
       sortOrder
     }));
   };
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    const param = _objectSpread({}, requestParam, {
+    const param = _objectSpread(_objectSpread({}, requestParam), {}, {
       pageSize: pagingOption.PageSize,
       pageIndex: pagingOption.PageIndex
     });
@@ -288,7 +288,7 @@ const Content = props => {
         data: result.Data || [],
         total: result.Total
       });
-      setPagingOption(_objectSpread({}, pagingOption, {
+      setPagingOption(_objectSpread(_objectSpread({}, pagingOption), {}, {
         TotalItem: result.TotalRows
       }));
       props.toggleLoader(false);
@@ -326,7 +326,7 @@ const Content = props => {
     getHeaderName,
     onSort: handleSort
   };
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_layouts_betlist_BetListLayout__WEBPACK_IMPORTED_MODULE_10__["default"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_layouts_betlist_BetListLayout__WEBPACK_IMPORTED_MODULE_10__["default"], {
     pageName: "PlayerAdmin",
     rootUrl: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_4__["default"].getRootUrl(),
     getResourceFunc: dataGridProps.getResource,
@@ -334,7 +334,7 @@ const Content = props => {
     baseCurrency: "",
     beforeShowFunc: () => props.toggleLoader(true),
     afterShowFunc: () => props.toggleLoader(false)
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DataGrid__WEBPACK_IMPORTED_MODULE_9__["default"], dataGridProps));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DataGrid__WEBPACK_IMPORTED_MODULE_9__["default"], dataGridProps));
 };
 
 function mapDispatchToProps(dispatch) {
@@ -393,7 +393,7 @@ const DataGrid = props => {
     ColumnAlignments.splice(2, 0, 'center-align');
   }
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_betlist_BetListDataGrid__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_betlist_BetListDataGrid__WEBPACK_IMPORTED_MODULE_1__["default"], {
     isPaging: true,
     pageOption: pagingOption,
     onPaging: onPaging,
@@ -457,7 +457,7 @@ const Title = props => {
       toggleLoader
     } = props;
 
-    const param = _objectSpread({}, requestParam, {
+    const param = _objectSpread(_objectSpread({}, requestParam), {}, {
       isExport: true
     });
 
@@ -480,16 +480,16 @@ const Title = props => {
     });
   };
 
-  const content = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+  const content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "caret-block"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "icon-excel-wrapper",
     onClick: handleExportExcel
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "icon-excel",
     title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('ExportToExcel')
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_3__["default"].reportTitle));
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_ReportTitle__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_3__["default"].reportTitle));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_ReportTitle__WEBPACK_IMPORTED_MODULE_2__["default"], {
     tag: "div",
     content: content
   });
@@ -553,12 +553,12 @@ const defaultState = _objectSpread({}, window.initialState);
 const store = _lib_store__WEBPACK_IMPORTED_MODULE_3__["default"].createStore(_reducers_index_js__WEBPACK_IMPORTED_MODULE_2__["default"], defaultState);
 
 const App = () => {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_1__["Provider"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_1__["Provider"], {
     store: store
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AppContainer__WEBPACK_IMPORTED_MODULE_5__["default"], null));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AppContainer__WEBPACK_IMPORTED_MODULE_5__["default"], null));
 };
 
-Object(react_dom__WEBPACK_IMPORTED_MODULE_4__["render"])(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), document.getElementById("app-container"));
+Object(react_dom__WEBPACK_IMPORTED_MODULE_4__["render"])( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), document.getElementById("app-container"));
 
 /***/ }),
 
@@ -746,16 +746,16 @@ __webpack_require__.r(__webpack_exports__);
 const Loader = ({
   isLoading
 }) => {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "loading-process default",
     style: {
       display: `${isLoading ? 'block' : 'none'}`
     }
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "icon-loading"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "loader-inner ball-beat"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null))));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Loader);
@@ -780,7 +780,7 @@ __webpack_require__.r(__webpack_exports__);
 const NoDataTitle = ({
   title
 }) => {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "no-info-row center-align",
     dangerouslySetInnerHTML: {
       __html: title ? title : _lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("NoInfo")
@@ -822,9 +822,9 @@ const ReportTitle = (_ref) => {
       attrs = _objectWithoutProperties(_ref, ["content", "tag"]);
 
   const Tag = tag;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "report-title-container"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Tag, _extends({
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Tag, _extends({
     className: "report-title"
   }, attrs), content));
 };
@@ -920,14 +920,14 @@ class BetListDataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 
       const headerName = this._getHeaderName(column);
 
-      rows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
+      rows.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
         key: column,
         colWidth: columnWidths[i],
         sortBy: isSortable ? column : null
       }, headerName));
     }
 
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderRow"], {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderRow"], {
       style: {
         height: 32
       }
@@ -949,7 +949,7 @@ class BetListDataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 
       for (let j = 0; j < columns.length; j++) {
         const column = columns[j];
-        cells.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
+        cells.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
           key: `${column}-${i}`,
           className: columnAlignments[j],
           dangerouslySetInnerHTML: {
@@ -958,7 +958,7 @@ class BetListDataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         }));
       }
 
-      rows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Row"], {
+      rows.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Row"], {
         key: i
       }, cells));
     }
@@ -981,7 +981,7 @@ class BetListDataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     const startTotalIndex = columns.indexOf(totalColumns[0]);
     let rows = [];
     let cells = [];
-    cells.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
+    cells.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
       key: "total",
       className: "right-align",
       colSpan: startTotalIndex
@@ -995,7 +995,7 @@ class BetListDataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 
       const className = this._getTotalCellClassName(column, item[column]);
 
-      cells.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
+      cells.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
         key: `Sum${column}`,
         className: `${columnAlignments[columnIndex]} ${className}`,
         dangerouslySetInnerHTML: {
@@ -1007,13 +1007,13 @@ class BetListDataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     const blankRows = columns.length - totalColumns.length - startTotalIndex;
 
     if (blankRows) {
-      cells.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
+      cells.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
         key: "blank",
         colSpan: blankRows
       }));
     }
 
-    rows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Row"], {
+    rows.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Row"], {
       className: "fixed-table-grant-total",
       key: "totalRow"
     }, cells));
@@ -1021,9 +1021,9 @@ class BetListDataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   }
 
   _renderNodata() {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "result-content"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       className: "no-info-row center-align"
     }, this._getResource('NoInfo')));
   }
@@ -1046,9 +1046,9 @@ class BetListDataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       pageOption,
       adjustedHeight
     } = this.props;
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "betlist-container result-content"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Table"], {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Table"], {
       onSort: this.onSort,
       minWidth: 980,
       autoWidth: true,
@@ -1143,44 +1143,44 @@ const Popup = props => {
   let content;
 
   if (iframeUrl) {
-    content = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("iframe", {
+    content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("iframe", {
       frameBorder: "0",
       src: iframeUrl,
       width: "100%",
       height: "100%"
     });
   } else {
-    content = isHtml ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    content = isHtml ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "popup-content",
       dangerouslySetInnerHTML: {
         __html: children
       }
-    }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "popup-content"
     }, children);
   }
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: `popup-container ${isShow ? 'show' : 'hide'}`,
     onClick: props.onClick
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "popup-block-body"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "flat-popup",
     style: {
       height: height,
       width: width
     }
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "popup-title"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "txt-title"
-  }, title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }, title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     className: "popup-close",
     onClick: () => {
       props.onClose && props.onClose();
     }
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "icon-close"
   }))), content));
 };
@@ -1283,7 +1283,7 @@ const usePagingOption = (initialValue = defaultPagingOption) => {
   const [pagingOption, setPagingOption] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(_objectSpread({}, initialValue));
 
   const handleChangePaging = (pageIndex, pageSize) => {
-    setPagingOption(_objectSpread({}, pagingOption, {
+    setPagingOption(_objectSpread(_objectSpread({}, pagingOption), {}, {
       PageSize: pageSize,
       PageIndex: pageIndex
     }));
@@ -1317,7 +1317,7 @@ class AppLayout extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   }
 
   render() {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       id: "container",
       className: "container-fluid"
     }, this.props.children);
@@ -1865,9 +1865,9 @@ class BetListLayout extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   }
 
   render() {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "betlist-layout"
-    }, this.props.children, this.state.isShowPopup && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_popup__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    }, this.props.children, this.state.isShowPopup && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_popup__WEBPACK_IMPORTED_MODULE_3__["default"], {
       isShow: true,
       iframeUrl: this.state.popupUrl,
       title: this.state.popupTitle,
