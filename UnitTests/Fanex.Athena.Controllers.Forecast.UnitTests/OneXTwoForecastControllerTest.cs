@@ -21,7 +21,7 @@
 
         private IForecastOneXTwoDataAccess _forecastOneXTwoDataAccess;
 
-        protected IAppSettings AppSettings { get; set; }
+        protected new IAppSettings AppSettings { get; set; }
 
         [OneTimeSetUp]
         public override void FixtureSetUp()

@@ -4,7 +4,7 @@ namespace Fanex.Athena.Model.BetList.MetaModel
 {
     public class LiveReportBetListMetaModel : BetListExcelMetaModel
     {
-        public int SportType { get; set; }
+        public new int SportType { get; set; }
 
         public decimal SumWinlost { get; set; }
 

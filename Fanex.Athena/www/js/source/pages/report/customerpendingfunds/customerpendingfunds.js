@@ -182,6 +182,7 @@
             url = QueryString.setParam(url, 'custid', custid);
             url = QueryString.setParam(url, 'systemid', systemId);
             url = QueryString.setParam(url, 'externalid', externalId);
+            url = QueryString.setParam(url, 'excludefreebet', true);
 
             const title = Site.getSingleResource('BetListRunning');
             const popH = Math.min($(window).height() - 100, 650), popW = 920;

@@ -59,10 +59,7 @@ namespace Fanex.Athena.Excel.Base.Extension
 
             // Get the source / new row
             var newRow = sheet.GetRow(destRowIndex);
-            if (newRow == null)
-            {
-                newRow = sheet.CreateRow(destRowIndex);
-            }
+            newRow = newRow ?? sheet.CreateRow(destRowIndex);
 
             var sourceRow = sourceSheet.GetRow(sourceRowIndex);
             if (sourceRow != null)

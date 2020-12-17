@@ -21,6 +21,7 @@ export const SportType = {
     JK: 234,
     SXG: 243,
     SBC: 200,
+    SBC_FreeBets: 150,
     SAG: 244,
     PGS: 232
 }

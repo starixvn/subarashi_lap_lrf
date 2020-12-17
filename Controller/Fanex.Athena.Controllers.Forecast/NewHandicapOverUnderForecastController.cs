@@ -170,10 +170,7 @@ namespace Fanex.Athena.Controllers.Forecast
             {
                 /*get current match or first match*/
                 var match = model.MatchList.SingleOrDefault(l => l.MatchId == metaModel.MatchId);
-                if (match == null)
-                {
-                    match = model.MatchList.FirstOrDefault();
-                }
+                match = match ?? model.MatchList.FirstOrDefault();
 
                 if (match != null)
                 {
