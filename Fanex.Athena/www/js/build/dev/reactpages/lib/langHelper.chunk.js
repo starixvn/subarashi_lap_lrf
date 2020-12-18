@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 11/27/2020 1:23:04 PM
+// Generated at: 12/11/2020 11:08:23 AM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -165,6 +165,8 @@ window._language_en_US = {
   BalanceChange: "Balance Change",
   BankAccountNumber: "Bank Account Number",
   BankInformation: "Bank Information",
+  BAPlayerNoUpdateVIP: "BA player, no update: {0} ({1})",
+  BAPlayerNoUpdateVIPSingle: "BA player, no update",
   BaseCurrency: "Base Currency",
   Based: "Based",
   BAStatus: "BA Status",
@@ -251,7 +253,7 @@ window._language_en_US = {
   CommissionShare: "Commission Share",
   CommIsUnChange: "Commission of customers is unchanged.",
   Confirm: "Confirm",
-  ConfirmActivateVIPPlayer: "The bet limit will be reapplied if the selected player(s) is marked VIP. Are your sure you want to activate VIP ?",
+  ConfirmActivateVIPPlayer: "The bet limit will be reapplied if the selected player(s) is marked VIP. Are you sure you want to activate VIP ?",
   Confirmation: "Confirmation",
   ConfirmCommission: "Confirm Customer&apos;s Commission:",
   ConfirmDeactivateVIPPlayer: "Are you sure you want to deactivate VIP  for the player(s) ?",
@@ -605,6 +607,7 @@ window._language_en_US = {
   NoProductFound: "No product found",
   Normal: "Normal",
   NotAllowBA: "This licensee is not allowed BA",
+  NotAllowedBAPlayerTurnonVip: "For BA player, don&apos;t allow turning on VIP",
   Note: "Note",
   Notification: "Notification",
   NotificationDateRangeLimitNote: "Data is available within 6 months",

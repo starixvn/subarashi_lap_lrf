@@ -691,6 +691,24 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to BA player, no update: {0} ({1}).
+        /// </summary>
+        public static string BAPlayerNoUpdateVIP {
+            get {
+                return ResourceManager.GetString("BAPlayerNoUpdateVIP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BA player, no update.
+        /// </summary>
+        public static string BAPlayerNoUpdateVIPSingle {
+            get {
+                return ResourceManager.GetString("BAPlayerNoUpdateVIPSingle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Base Currency.
         /// </summary>
         public static string BaseCurrency {
@@ -1465,7 +1483,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The bet limit will be reapplied if the selected player(s) is marked VIP. Are your sure you want to activate VIP ?.
+        ///   Looks up a localized string similar to The bet limit will be reapplied if the selected player(s) is marked VIP. Are you sure you want to activate VIP ?.
         /// </summary>
         public static string ConfirmActivateVIPPlayer {
             get {
@@ -4647,6 +4665,15 @@ namespace Fanex.Athena.Resources {
         public static string NotAllowBA {
             get {
                 return ResourceManager.GetString("NotAllowBA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For BA player, don&apos;t allow turning on VIP.
+        /// </summary>
+        public static string NotAllowedBAPlayerTurnonVip {
+            get {
+                return ResourceManager.GetString("NotAllowedBAPlayerTurnonVip", resourceCulture);
             }
         }
         

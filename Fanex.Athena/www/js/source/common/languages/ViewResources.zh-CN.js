@@ -1,4 +1,4 @@
-﻿// Generated at: 11/27/2020 1:23:04 PM
+﻿// Generated at: 12/11/2020 11:08:23 AM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -62,6 +62,8 @@ Balance:"余额",
 BalanceChange:"余额变动",
 BankAccountNumber:"银行账号",
 BankInformation:"银行资讯",
+BAPlayerNoUpdateVIP:"BA玩家，無任何更新: {0} ({1})",
+BAPlayerNoUpdateVIPSingle:"BA玩家，無任何更新",
 BaseCurrency:"基础货币",
 Based:"基于",
 BAStatus:"BA 状态",
@@ -456,6 +458,7 @@ NoOfCustmer:"会员数",
 NoProductFound:"No product found",
 Normal:"正常",
 NotAllowBA:"此Licensee不允许投注总计",
+NotAllowedBAPlayerTurnonVip:"无法将BA玩家设为VIP",
 Note:"记录",
 Notification:"通知",
 NotificationDateRangeLimitNote:"最多可以检索六个月前的资料",

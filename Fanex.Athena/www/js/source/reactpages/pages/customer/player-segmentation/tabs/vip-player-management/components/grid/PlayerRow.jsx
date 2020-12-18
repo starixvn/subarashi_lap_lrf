@@ -4,10 +4,10 @@ import SelectionCell from './SelectionCell';
 import VipSwitcherCell from '../../../../components/VipSwitcherCell';
 
 export const PlayerRow = (props) => {
-    const { subsidiary, externalId, systemId, index, custId, showSubsidiary } = props;
+    const { subsidiary, externalId, systemId, isBA, index, custId, showSubsidiary } = props;
     
     return (<Row key={`player_row_${custId}`}>
-        <SelectionCell rowIndex={index}/>
+        {isBA ? <Cell/> : <SelectionCell rowIndex={index}/>}
         {showSubsidiary && <Cell className="left-align">{subsidiary}</Cell>}
         <Cell className="left-align">{externalId}</Cell>
         <Cell className="left-align">{systemId}</Cell>

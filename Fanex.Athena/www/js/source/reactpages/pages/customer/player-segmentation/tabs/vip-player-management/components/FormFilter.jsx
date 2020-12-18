@@ -9,6 +9,7 @@ import CollapsiblePanel from '@jsroot/components/collapsible-panel'
 import UserGuide from '@jsroot/components/UserGuide'
 import LangHelper from '@jsroot/lib/langHelper'
 import StringHelper from '@jsroot/lib/stringHelper'
+import { decode } from '@jsroot/lib/htmlHelper'
 import Site from '@jsroot/lib/site'
 import AppData from '@jsroot/lib/AppData'
 import DataService from '@jsroot/lib/DataService.js'
@@ -171,6 +172,11 @@ export class FormFilter extends PureComponent {
                                 <button type="button" className="btn btn-submit" disabled={isDisabledSubmit} onClick={this._submit}>{LangHelper.getSingleResource("Submit")}</button>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-12 text-bold">
+                        {`*${decode(LangHelper.getSingleResource("NotAllowedBAPlayerTurnonVip"))}`}
                     </div>
                 </div>
             </CollapsiblePanel>

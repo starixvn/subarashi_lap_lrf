@@ -10,6 +10,7 @@ import CheckBox from '@jsroot/components/CheckBox'
 import { DateRange } from '@jsroot/components/date-range'
 import LangHelper from '@jsroot/lib/langHelper'
 import StringHelper from '@jsroot/lib/stringHelper'
+import { decode } from '@jsroot/lib/htmlHelper'
 import Site from '@jsroot/lib/site';
 import AppData from '@jsroot/lib/AppData'
 import DataService from '@jsroot/lib/DataService.js'
@@ -237,6 +238,11 @@ export class FormFilter extends PureComponent {
                         </div>
                     </div>
                 </div>
+                {AppData.HasVipManagement && <div className="row">
+                    <div className="col-12 text-bold">
+                        {`*${decode(LangHelper.getSingleResource("NotAllowedBAPlayerTurnonVip"))}`}
+                    </div>
+                </div>}
             </CollapsiblePanel>
         )
     }
