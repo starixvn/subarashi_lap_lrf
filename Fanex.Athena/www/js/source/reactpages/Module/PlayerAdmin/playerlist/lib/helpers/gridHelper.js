@@ -5,15 +5,16 @@ import HeaderCustomerClassCell from '../../components/grid/HeaderCustomerClassCe
 
 export default class GridHelper {
     static renderHeader(displayedColumn, canSelectPlayers, hasCommPermissionRead) {
-        const { Index, Status, UserName, SystemId, RealName, Currency, CurrentBalance, OutstandingBalance,
-            OddsGroup, BaStatus, SpecialLevel, LastTransaction, Email, CommissionGroup } = fields;
+        const { Index, Status, UserName, SystemId, VendorMemberId, RealName, Currency, CurrentBalance, OutstandingBalance,
+            OddsGroup, BaStatus, SpecialLevel, LastTransaction, Email, CommissionGroup, CustomerClass } = fields;
 
         return (
             <HeaderRow style={{ height: 32 }}>
                 {canSelectPlayers && displayedColumn[Index] && <HeaderCell colWidth={30}><input type="checkbox" id="chk-cust-0" data-username="" /></HeaderCell>}
                 {displayedColumn[Status] && <HeaderCell colWidth={80} sortBy={Status}>{headerText.Status}</HeaderCell>}
-                {displayedColumn[UserName] && <HeaderCell colWidth={160} sortBy={UserName}>{headerText.UserName}</HeaderCell>}
-                {displayedColumn[SystemId] && <HeaderCell colWidth={150}>{headerText.SystemId}</HeaderCell>}
+                {displayedColumn[UserName] && <HeaderCell colWidth={120} sortBy={UserName}>{headerText.UserName}</HeaderCell>}
+                {displayedColumn[SystemId] && <HeaderCell colWidth={100}>{headerText.SystemId}</HeaderCell>}
+                {displayedColumn[VendorMemberId] && <HeaderCell colWidth={70}>{headerText.VendorMemberId}</HeaderCell>}
                 {displayedColumn[RealName] && <HeaderCell colWidth={80} sortBy={RealName}>{headerText.RealName}</HeaderCell>}
                 {displayedColumn[Currency] && <HeaderCell colWidth={60} sortBy={Currency}>{headerText.Currency}</HeaderCell>}
                 {displayedColumn[CurrentBalance] && <HeaderCell colWidth={80} sortBy={CurrentBalance}>{headerText.CurrentBalance}</HeaderCell>}
@@ -24,7 +25,7 @@ export default class GridHelper {
                 {displayedColumn[LastTransaction] && <HeaderCell colWidth={60} sortBy={LastTransaction}>{headerText.LastTransaction}</HeaderCell>}
                 {displayedColumn[Email] && <HeaderCell colWidth={100}>{headerText.Email}</HeaderCell>}
                 {hasCommPermissionRead && displayedColumn[CommissionGroup] && <HeaderCell colWidth={50}>{headerText.CommissionGroup}</HeaderCell>}
-                {displayedColumn[fields.CustomerClass] && <HeaderCell colWidth={100} sortBy={fields.CustomerClass}><HeaderCustomerClassCell text={headerText.CustomerClass} /></HeaderCell>}
+                {displayedColumn[CustomerClass] && <HeaderCell colWidth={80} sortBy={CustomerClass}><HeaderCustomerClassCell text={headerText.CustomerClass} /></HeaderCell>}
             </HeaderRow>
         )
     }

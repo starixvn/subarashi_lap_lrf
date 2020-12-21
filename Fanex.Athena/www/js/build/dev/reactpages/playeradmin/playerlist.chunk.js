@@ -1230,6 +1230,7 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       minWidth: 650,
       autoWidth: true,
       maxWidth: this.maxWidth,
+      minWidth: 1300,
       autoHeight: true,
       header: _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_7__["default"].renderHeader(displayedColumn, canSelectPlayers, hasCommPermissionRead),
       body: this._renderDataSection(dataList, displayedColumn, canSelectPlayers, hasCommPermissionRead),
@@ -3247,7 +3248,8 @@ const PlayerRow = props => {
     SpecialLevel,
     IsDeposit,
     IsArchived,
-    CommissionGroup
+    CommissionGroup,
+    VendorMemberId
   } = dataItem;
   const canShowMainColumn = IsDeposit && !IsArchived;
   const commissionGroup = CommissionGroup || _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource('None');
@@ -3272,7 +3274,7 @@ const PlayerRow = props => {
     hasCommPermissionRead: hasCommPermissionRead
   })), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].SystemId] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
     title: SystemId
-  }, SystemId), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].RealName] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], null, RealName), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].Currency] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
+  }, SystemId), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].VendorMemberId] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], null, VendorMemberId), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].RealName] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], null, RealName), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].Currency] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
     className: "center-align"
   }, Currency), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].CurrentBalance] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
     className: "right-align",
@@ -4142,6 +4144,7 @@ const fields = {
   Status: 'Status',
   UserName: 'UserName',
   SystemId: 'SystemId',
+  VendorMemberId: 'VendorMemberId',
   RealName: 'RealName',
   Currency: 'Currency',
   CurrentBalance: 'CurrentBalance',
@@ -4169,6 +4172,10 @@ const columnList = [{
 }, {
   key: fields.SystemId,
   value: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('SystemId'),
+  show: true
+}, {
+  key: fields.VendorMemberId,
+  value: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('VendorMemberID'),
   show: true
 }, {
   key: fields.RealName,
@@ -4325,6 +4332,7 @@ const headerText = {
   Status: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Status'),
   UserName: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Username'),
   SystemId: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('SystemId'),
+  VendorMemberId: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('VendorMemberID'),
   RealName: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('RealName'),
   Currency: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Currency'),
   CurrentBalance: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('CurrentBalance'),
@@ -4474,11 +4482,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 const excludedKeyForApiType = [_constants__WEBPACK_IMPORTED_MODULE_0__["fields"].RealName, _constants__WEBPACK_IMPORTED_MODULE_0__["fields"].Email, _constants__WEBPACK_IMPORTED_MODULE_0__["fields"].LastTransaction];
+const excludedKeyForAthenaType = [_constants__WEBPACK_IMPORTED_MODULE_0__["fields"].VendorMemberId];
 const buildDefaultColumnList = (licType, hasCommPermissionRead) => {
   const isApiType = licType === _constants__WEBPACK_IMPORTED_MODULE_0__["licenseeType"].api;
   return _constants__WEBPACK_IMPORTED_MODULE_0__["columnList"].filter(item => {
     const show = item.key === _constants__WEBPACK_IMPORTED_MODULE_0__["fields"].CommissionGroup ? hasCommPermissionRead : item.key !== _constants__WEBPACK_IMPORTED_MODULE_0__["fields"].BaStatus;
-    return show && (!isApiType || !excludedKeyForApiType.includes(item.key));
+    const showByLicenseeType = isApiType ? !excludedKeyForApiType.includes(item.key) : !excludedKeyForAthenaType.includes(item.key);
+    return show && showByLicenseeType;
   }).map(item => _objectSpread({}, item));
 };
 const buildColumnList = (licType, isAllowedBA, hasCommPermissionRead) => {
@@ -4488,10 +4498,8 @@ const buildColumnList = (licType, isAllowedBA, hasCommPermissionRead) => {
       return isAllowedBA;
     } else if (item.key === _constants__WEBPACK_IMPORTED_MODULE_0__["fields"].CommissionGroup) {
       return hasCommPermissionRead;
-    } else if (isApiType) {
-      return !excludedKeyForApiType.includes(item.key);
     } else {
-      return true;
+      return isApiType ? !excludedKeyForApiType.includes(item.key) : !excludedKeyForAthenaType.includes(item.key);
     }
   }).map(item => _objectSpread({}, item));
 };
@@ -4525,6 +4533,7 @@ class GridHelper {
       Status,
       UserName,
       SystemId,
+      VendorMemberId,
       RealName,
       Currency,
       CurrentBalance,
@@ -4534,7 +4543,8 @@ class GridHelper {
       SpecialLevel,
       LastTransaction,
       Email,
-      CommissionGroup
+      CommissionGroup,
+      CustomerClass
     } = _constants__WEBPACK_IMPORTED_MODULE_2__["fields"];
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderRow"], {
       style: {
@@ -4550,11 +4560,13 @@ class GridHelper {
       colWidth: 80,
       sortBy: Status
     }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].Status), displayedColumn[UserName] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
-      colWidth: 160,
+      colWidth: 120,
       sortBy: UserName
     }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].UserName), displayedColumn[SystemId] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
-      colWidth: 150
-    }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].SystemId), displayedColumn[RealName] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
+      colWidth: 100
+    }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].SystemId), displayedColumn[VendorMemberId] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
+      colWidth: 70
+    }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].VendorMemberId), displayedColumn[RealName] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
       colWidth: 80,
       sortBy: RealName
     }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].RealName), displayedColumn[Currency] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
@@ -4582,9 +4594,9 @@ class GridHelper {
       colWidth: 100
     }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].Email), hasCommPermissionRead && displayedColumn[CommissionGroup] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
       colWidth: 50
-    }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].CommissionGroup), displayedColumn[_constants__WEBPACK_IMPORTED_MODULE_2__["fields"].CustomerClass] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
-      colWidth: 100,
-      sortBy: _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].CustomerClass
+    }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].CommissionGroup), displayedColumn[CustomerClass] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
+      colWidth: 80,
+      sortBy: CustomerClass
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_grid_HeaderCustomerClassCell__WEBPACK_IMPORTED_MODULE_3__["default"], {
       text: _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].CustomerClass
     })));
@@ -4660,6 +4672,7 @@ const buildLapPlayerList = playerList => {
       CurrencyCode,
       OutBalance,
       IBCUserName,
+      Vender_Member_ID,
       CreatedDateString
     } = item;
     return {
@@ -4667,6 +4680,7 @@ const buildLapPlayerList = playerList => {
       LicenseeCustId: CustId,
       UserName,
       SystemId: IBCUserName,
+      VendorMemberId: Vender_Member_ID,
       Currency: CurrencyCode,
       CurrentBalance,
       OutstandingBalance: OutBalance,
@@ -4762,6 +4776,7 @@ class PlayerListDataHelper {
       CurrencyCode,
       OutBalance,
       IBCUserName,
+      Vender_Member_ID,
       CreatedDateString
     } = lapItem;
     return {
@@ -4769,6 +4784,7 @@ class PlayerListDataHelper {
       LicenseeCustId: lapItem.CustId,
       UserName: lapItem.UserName,
       SystemId: IBCUserName,
+      VendorMemberId: Vender_Member_ID,
       Currency: CurrencyCode,
       CurrentBalance: lapItem.CurrentBalance,
       OutstandingBalance: OutBalance,
@@ -5047,6 +5063,10 @@ class ReportExcel {
       field: _constants__WEBPACK_IMPORTED_MODULE_3__["fields"].SystemId,
       [MAIN_SECTION_STYLE]: _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].left,
       width: 200
+    }, {
+      field: _constants__WEBPACK_IMPORTED_MODULE_3__["fields"].VendorMemberId,
+      [MAIN_SECTION_STYLE]: _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].left,
+      width: 150
     }, {
       field: _constants__WEBPACK_IMPORTED_MODULE_3__["fields"].RealName,
       [MAIN_SECTION_STYLE]: _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].left,

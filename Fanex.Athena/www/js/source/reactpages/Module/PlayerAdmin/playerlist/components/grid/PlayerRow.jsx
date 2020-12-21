@@ -35,7 +35,8 @@ export const PlayerRow = (props) => {
         SpecialLevel,
         IsDeposit,
         IsArchived,
-        CommissionGroup
+        CommissionGroup,
+        VendorMemberId,
     } = dataItem;
     const canShowMainColumn = IsDeposit && !IsArchived;
     const commissionGroup = CommissionGroup || LangHelper.getSingleResource('None');
@@ -50,6 +51,7 @@ export const PlayerRow = (props) => {
             {displayedColumn[fields.Status] && <Cell><StatusCell dataItem={dataItem} /></Cell>}
             {displayedColumn[fields.UserName] && <Cell><UserNameCell dataItem={dataItem} hasCommPermissionRead={hasCommPermissionRead} /></Cell>}
             {displayedColumn[fields.SystemId] && <Cell title={SystemId}>{SystemId}</Cell>}
+            {displayedColumn[fields.VendorMemberId] && <Cell>{VendorMemberId}</Cell>}
             {displayedColumn[fields.RealName] && <Cell>{RealName}</Cell>}
             {displayedColumn[fields.Currency] && <Cell className="center-align">{Currency}</Cell>}
             {displayedColumn[fields.CurrentBalance] && <Cell className="right-align" title={canShowMainColumn ? NumberFormat.roundDownFormatDecimal(CurrentBalance) : undefined}>{canShowMainColumn && NumberFormat.roundDownFormatDecimal(CurrentBalance)}</Cell>}

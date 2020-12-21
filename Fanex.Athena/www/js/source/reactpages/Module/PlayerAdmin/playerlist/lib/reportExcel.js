@@ -144,6 +144,10 @@ export default class ReportExcel {
             [MAIN_SECTION_STYLE]: bodyCellStyle.left,
             width: 200
         }, {
+            field: fields.VendorMemberId,
+            [MAIN_SECTION_STYLE]: bodyCellStyle.left,
+            width: 150
+        }, {
             field: fields.RealName,
             [MAIN_SECTION_STYLE]: bodyCellStyle.left,
             width: 150
