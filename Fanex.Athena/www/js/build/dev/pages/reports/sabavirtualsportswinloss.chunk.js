@@ -8463,7 +8463,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
                 const newProductOptions = productOptions.reverse(); //make orders of product columns like excel file
 
-                newProductOptions.forEach(function (product, i) { if (product.Code === 'SB') newProductOptions[i].Name = Site.getSingleResource('ProductSVS'); });
+                newProductOptions.forEach(function (product, i) { if (product.Code === 'SB') newProductOptions[i].Name = Site.getSingleResource('ProductSBVS'); });
 
                 const numOfTotalRow = response.Total.length;
                 let onPaging = false;
@@ -8594,6 +8594,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         return _me;
     }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
 
 /***/ }),
 

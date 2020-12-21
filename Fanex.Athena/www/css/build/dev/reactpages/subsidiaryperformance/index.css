@@ -657,5 +657,8 @@ input[type="checkbox"].checkbox {
 .multiple-select-options-container, .rdr-DateRange, .Select-menu-outer {
   z-index: 2; }
 
+.btn-submit-container {
+  margin-top: 15px; }
+
 
 /*# sourceMappingURL=index.css.map*/

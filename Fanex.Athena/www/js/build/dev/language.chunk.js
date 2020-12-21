@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 1/5/2021 2:21:24 PM
+﻿// Generated at: 1/7/2021 3:56:08 PM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -707,8 +707,8 @@ ProductPTCS:"Playtech Casino",
 ProductSAG:"SA Gaming",
 ProductSB:"Sportsbook",
 ProductSBC:"Saba.club",
+ProductSBVS:"Saba Virtual Sports",
 ProductSG:"SG",
-ProductSVS:"Saba Virtual Sports",
 ProductSXG:"AE Casino",
 ProductTG:"Table Game",
 ProductVB:"Macau Games",
@@ -764,6 +764,7 @@ SelectLicenseeMsg:"Please select a Licensee",
 SelectOptions:"Select options",
 SelectTop:"Select Top",
 Sep:"Sep",
+SeparateSabaWinLoss:"Separate Saba Virtual Sports from Sportsbook",
 September:"September",
 ServerBusyMessage:"Your request can&apos;t be processed now due to busy server. Please try again later",
 SessionLoggedMsg:"You have logged in from another session or your login session has expired",

@@ -2544,10 +2544,6 @@
   <data name="Resettled" xml:space="preserve">
     <value>重新结算</value>
   </data>
-  <data name="ProductSVS" xml:space="preserve">
-    <value>沙巴虚拟赛事</value>
-    <comment>141454</comment>
-  </data>
   <data name="ProductSAG" xml:space="preserve">
     <value>SA真人娱乐场</value>
   </data>
@@ -2571,6 +2567,9 @@
   <data name="NotAllowedBAPlayerTurnonVip" xml:space="preserve">
     <value>无法将BA玩家设为VIP</value>
     <comment>#146508</comment>
+  </data>
+  <data name="ProductSBVS" xml:space="preserve">
+    <value>沙巴虚拟赛事</value>
   </data>
   <data name="Category" xml:space="preserve">
     <value>类别</value>

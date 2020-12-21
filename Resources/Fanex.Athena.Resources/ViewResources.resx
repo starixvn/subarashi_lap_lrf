@@ -2900,9 +2900,6 @@
     <value>Joker</value>
     <comment>141408</comment>
   </data>
-  <data name="ProductSVS" xml:space="preserve">
-    <value>Saba Virtual Sports</value>
-  </data>
   <data name="DayRangeExceedMsg" xml:space="preserve">
     <value>Date range exceeds {0} days. Please try again!</value>
   </data>
@@ -2926,6 +2923,12 @@
   <data name="NotAllowedBAPlayerTurnonVip" xml:space="preserve">
     <value>For BA player, don't allow turning on VIP</value>
     <comment>#146508</comment>
+  </data>
+  <data name="SeparateSabaWinLoss" xml:space="preserve">
+    <value>Separate Saba Virtual Sports from Sportsbook</value>
+  </data>
+  <data name="ProductSBVS" xml:space="preserve">
+    <value>Saba Virtual Sports</value>
   </data>
   <data name="AgentBetInterval" xml:space="preserve">
     <value>Agent Bet Interval (sec)</value>

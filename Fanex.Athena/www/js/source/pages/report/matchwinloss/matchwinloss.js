@@ -49,9 +49,9 @@ define(['jquery', 'common/site', 'common/querystring', 'components/pluginhelper/
                 $('.body-content').on('click', Selector.viewDetail, function () {
                     _me.viewMatchWinlossDetail(this);
                 })
-                .on('click', '.bet-list-link', function () {
-                    _me.viewMatchWinlossBetList(this);
-                });
+                    .on('click', '.bet-list-link', function () {
+                        _me.viewMatchWinlossBetList(this);
+                    });
 
                 $('.footer-content').on('click', '.outright-link', function () {
                     const bettype = $(this).data('bettype');
@@ -160,8 +160,9 @@ define(['jquery', 'common/site', 'common/querystring', 'components/pluginhelper/
             viewOutrightMixParlay: function (betType) {
                 const date = $(Selector.date).attr('data-original');
                 let url = betType === 10
-                            ? Site.resolveClientUrl('MatchWinlossBetList/Outright')
-                            : Site.resolveClientUrl('MatchWinlossBetList/MixParlay');
+                    ? Site.resolveClientUrl('MatchWinlossBetList/Outright')
+                    : Site.resolveClientUrl('MatchWinlossBetList/MixParlay');
+
                 url = Site.setLicenseeOptionOriginalParam(url);
                 url = QueryString.setParam(url, 'fromdate', date);
                 url = QueryString.setParam(url, 'todate', date);

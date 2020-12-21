@@ -1,10 +1,10 @@
 ﻿namespace Fanex.Athena.Model.Report.MetaModel
 {
+    using System;
     using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Model.Core.MetaModel;
-    using System;
 
-    public class SubsidiaryPerformanceMetaModel: IMetaModelValidation, IMetaModelProductCodeList
+    public class SubsidiaryPerformanceMetaModel : IMetaModelValidation, IMetaModelProductCodeList
     {
         public string AgentListXml { get; set; }
 
@@ -29,6 +29,8 @@
         public bool IncludeRaw { get; set; }
 
         public bool IsExcludeTest { get; set; }
+
+        public bool IsSeparateSabaWinLoss { get; set; }
 
         public bool IsValid => FromDate <= ToDate &&
                                 !string.IsNullOrEmpty(ProductCodeList) &&
