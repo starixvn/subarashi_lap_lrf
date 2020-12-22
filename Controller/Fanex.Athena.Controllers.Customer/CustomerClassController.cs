@@ -18,7 +18,9 @@
         {
             var model = await _service.GetCustomerClassInformation(new GetCustomerClassInformationMetaModel
             {
-                SiteName = SessionServiceInstance.LicenseeSession.LicenseeName
+                SiteName = SessionServiceInstance.LicenseeSession.LicenseeName,
+                CurrencyList = SessionServiceInstance.UserSession.CurrencyList,
+                Language = SessionServiceInstance.UserSession.Language
             });
 
             return View("~/Views/Desktop/Customer/CustomerClass/CustomerClassInformation.cshtml", model);

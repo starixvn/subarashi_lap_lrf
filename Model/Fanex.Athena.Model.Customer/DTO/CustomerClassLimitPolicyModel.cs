@@ -18,5 +18,9 @@
 
         public string MinBet { get; set; }
         public string Platform { get; set; }
+
+        public string AgentBetInterval { get; set; }
+        public int CurrencyId { get; set; }
+        public string Currency { get; set; }
     }
 }

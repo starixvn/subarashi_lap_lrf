@@ -2572,4 +2572,10 @@
     <value>无法将BA玩家设为VIP</value>
     <comment>#146508</comment>
   </data>
+  <data name="Category" xml:space="preserve">
+    <value>类别</value>
+  </data>
+  <data name="AgentBetInterval" xml:space="preserve">
+    <value>代理投注间隔(秒)</value>
+  </data>
 </root>

@@ -59,7 +59,8 @@ var cssPaths = {
     customerpendingfunds: ["./www/css/source/pages/report/customerpendingfunds.scss"],
     customerturnover: ["./www/css/source/pages/report/customerturnover.scss"],
     customerwinloss: ["./www/css/source/pages/report/customerwinloss.scss"],
-    playercomission: ["./www/css/source/pages/playercommission/index.scss"]
+    playercomission: ["./www/css/source/pages/playercommission/index.scss"],
+    customerClass: ["./www/css/source/pages/customer/customer-class.scss"]
 };
 
 var scriptPaths = {

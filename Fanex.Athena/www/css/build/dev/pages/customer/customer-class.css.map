@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///./www/css/source/pages/customer/customer-class.scss"],"names":[],"mappings":"AAAA;AACA,oBAAoB","file":"www/css/build/dev/pages/customer/customer-class.css","sourcesContent":[".customer-class-info {\n  min-width: 1400px; }\n"],"sourceRoot":""}

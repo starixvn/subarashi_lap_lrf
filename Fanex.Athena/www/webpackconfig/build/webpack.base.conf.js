@@ -139,7 +139,8 @@ function generateConfig(environment) {
             [`${jsPath}/pages/playercommission/multipleupdategroup`]: [pathConfig.scriptPaths.playercomissionmultipleupdategroup],
             [`${jsPath}/pages/playercommission/singlemovegroup`]: [pathConfig.scriptPaths.playercomissionsinglemovegroup],
             [`${jsPath}/pages/playercommission/singleremovefromgroup`]: [pathConfig.scriptPaths.playercomissionsingleremovefromgroup],
-            [`${jsPath}/pages/playercommission/singleupdategroup`]: [pathConfig.scriptPaths.playercomissionsingleupdategroup]
+            [`${jsPath}/pages/playercommission/singleupdategroup`]: [pathConfig.scriptPaths.playercomissionsingleupdategroup],
+            [`${cssPath}/pages/customer/customer-class`]: pathConfig.cssPaths.customerClass,
         },
         output: {
             path: pathConfig.projectRoot,

@@ -5,3 +5,5 @@
 // a specific target and scoped to a namespace, type, member, etc.
 
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Minor Code Smell", "S1125:Boolean literals should not be redundant", Justification = "<Pending>", Scope = "member", Target = "~M:Fanex.Athena.Service.Customer.CustomerCommService.CallApiToUpdateCommAsync(System.String,System.Decimal,System.String,System.Int32,System.String)~System.Threading.Tasks.Task{System.Boolean}")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Major Bug", "S3168:\"async\" methods should not return \"void\"", Justification = "<Pending>", Scope = "member", Target = "~M:Fanex.Athena.Service.Customer.CustomerClassService.MapCustomerClassCategories(Fanex.Athena.Model.Customer.MetaModel.GetCustomerClassInformationMetaModel,System.Collections.Generic.List{Fanex.Athena.Model.Customer.DTO.CustomerClassModel})")]
+

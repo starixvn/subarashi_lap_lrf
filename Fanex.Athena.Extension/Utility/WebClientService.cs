@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Net;
+    using System.Text;
     using System.Threading.Tasks;
 
     using Interfaces;
@@ -61,6 +62,15 @@
             {
                 webClient.Headers[HttpRequestHeader.ContentType] = "application/x-www-form-urlencoded";
                 return await webClient.UploadStringTaskAsync(address, parameters);
+            }
+        }
+
+        public async Task<string> DownloadStringAsync(Uri address)
+        {
+            using (WebClient webClient = new WebClient())
+            {
+                webClient.Encoding = Encoding.UTF8;
+                return await webClient.DownloadStringTaskAsync(address);
             }
         }
     }
