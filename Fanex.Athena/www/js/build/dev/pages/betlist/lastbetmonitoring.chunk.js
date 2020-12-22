@@ -4569,6 +4569,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         const SPORT_VRG = 245;
         const SPORT_SXG = 243;
         const SPORT_SBC = 200;
+        const SBC_FreeBets = 150;
         const SPORT_SAG = 244;
         const SPORT_PGS = 232;
         const SPORT_JK = 234;
@@ -4974,10 +4975,10 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 });
             },
 
-            viewSabaClubResult: function (custId, gameId, siteId, gameRoundId, title) {
+            viewSabaClubResult: function (custId, gameId, siteId, gameRoundId, title, sporttype) {
                 const url = Site.resolveClientUrl('SabaClubResultPopup/Index');
                 Site.blockUI();
-                $.get(url + '?custid=' + custId + '&gameId=' + gameId + '&siteId=' + siteId + '&gameRoundId=' + gameRoundId, function (result) {
+                $.get(url + '?custid=' + custId + '&gameId=' + gameId + '&siteId=' + siteId + '&gameRoundId=' + gameRoundId + '&sportType=' + sporttype, function (result) {
                     if (result !== '') {
                         showResultPopUp(result, { width: 800, height: 380, title: title });
                         Site.unBlockUI();
@@ -5092,8 +5093,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 else if (sporttype === SPORT_CARDCLUB) {
                     _me.viewCardClubResult(custid, bettype, extension2, title);
                 }
-                else if (sporttype === SPORT_SBC) {
-                    _me.viewSabaClubResult(custid, bettype, extension2, transdecs, title);
+                else if (sporttype === SPORT_SBC || sporttype === SBC_FreeBets) {
+                    _me.viewSabaClubResult(custid, bettype, extension2, transdecs, title, sporttype);
                 }
                 else if (sporttype === SPORT_SG) {
                     _me.viewSGResult(custid, extension2, title);

@@ -239,7 +239,7 @@ class AppContainer extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   }
 
   render() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_11__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_layouts_betlist_BetListLayout__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_11__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_layouts_betlist_BetListLayout__WEBPACK_IMPORTED_MODULE_4__["default"], {
       pageName: "PlayerAdmin",
       rootUrl: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_8__["default"].getRootUrl(),
       getResourceFunc: this.getResource,
@@ -247,13 +247,13 @@ class AppContainer extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       baseCurrency: "",
       beforeShowFunc: this.beforeShow,
       afterShowFunc: this.afterShow
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Loader__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Loader__WEBPACK_IMPORTED_MODULE_10__["default"], {
       isLoading: this.props.isLoading
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormFilter__WEBPACK_IMPORTED_MODULE_5__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormFilter__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "betlist-container result-content"
-    }, this.title && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_ReportTitle__WEBPACK_IMPORTED_MODULE_12__["default"], {
+    }, this.title && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_ReportTitle__WEBPACK_IMPORTED_MODULE_12__["default"], {
       content: this.title
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DataGrid__WEBPACK_IMPORTED_MODULE_6__["default"], null))));
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DataGrid__WEBPACK_IMPORTED_MODULE_6__["default"], null))));
   }
 
 }
@@ -405,7 +405,7 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       ColumnAlignments.splice(2, 0, 'center-align');
     }
 
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_betlist_BetListDataGrid__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_betlist_BetListDataGrid__WEBPACK_IMPORTED_MODULE_4__["default"], {
       isPaging: true,
       pageOption: pageOption,
       onPaging: this.onPaging,
@@ -503,15 +503,15 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   }
 
   render() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "pa-running-betlist-filter"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       type: "button",
       className: "btn btn-submit",
       onClick: this.submit
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Refresh')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Refresh')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "pa-running-betlist-export"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
       className: "icon-excel",
       onClick: this.exportExcel,
       title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('ExportToExcel')
@@ -572,12 +572,12 @@ const defaultState = Object.assign({}, window.initialState, {
   isLoading: false
 });
 const store = _jsroot_lib_store__WEBPACK_IMPORTED_MODULE_5__["default"].createStore(_reducers_index_js__WEBPACK_IMPORTED_MODULE_4__["default"], defaultState);
-const App = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(() => {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_3__["Provider"], {
+const App = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(() => {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_3__["Provider"], {
     store: store
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AppContainer_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AppContainer_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null));
 });
-react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), document.getElementById("app-container"));
+react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), document.getElementById("app-container"));
 
 /***/ }),
 
@@ -826,16 +826,16 @@ __webpack_require__.r(__webpack_exports__);
 const Loader = ({
   isLoading
 }) => {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "loading-process default",
     style: {
       display: `${isLoading ? 'block' : 'none'}`
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "icon-loading"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "loader-inner ball-beat"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null))));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Loader);
@@ -860,7 +860,7 @@ __webpack_require__.r(__webpack_exports__);
 const NoDataTitle = ({
   title
 }) => {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "no-info-row center-align",
     dangerouslySetInnerHTML: {
       __html: title ? title : _lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("NoInfo")
@@ -902,9 +902,9 @@ const ReportTitle = (_ref) => {
       attrs = _objectWithoutProperties(_ref, ["content", "tag"]);
 
   const Tag = tag;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "report-title-container"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Tag, _extends({
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Tag, _extends({
     className: "report-title"
   }, attrs), content));
 };
@@ -1000,14 +1000,14 @@ class BetListDataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 
       const headerName = this._getHeaderName(column);
 
-      rows.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
+      rows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
         key: column,
         colWidth: columnWidths[i],
         sortBy: isSortable ? column : null
       }, headerName));
     }
 
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderRow"], {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderRow"], {
       style: {
         height: 32
       }
@@ -1029,7 +1029,7 @@ class BetListDataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 
       for (let j = 0; j < columns.length; j++) {
         const column = columns[j];
-        cells.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
+        cells.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
           key: `${column}-${i}`,
           className: columnAlignments[j],
           dangerouslySetInnerHTML: {
@@ -1038,7 +1038,7 @@ class BetListDataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         }));
       }
 
-      rows.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Row"], {
+      rows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Row"], {
         key: i
       }, cells));
     }
@@ -1061,7 +1061,7 @@ class BetListDataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     const startTotalIndex = columns.indexOf(totalColumns[0]);
     let rows = [];
     let cells = [];
-    cells.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
+    cells.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
       key: "total",
       className: "right-align",
       colSpan: startTotalIndex
@@ -1075,7 +1075,7 @@ class BetListDataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 
       const className = this._getTotalCellClassName(column, item[column]);
 
-      cells.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
+      cells.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
         key: `Sum${column}`,
         className: `${columnAlignments[columnIndex]} ${className}`,
         dangerouslySetInnerHTML: {
@@ -1087,13 +1087,13 @@ class BetListDataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     const blankRows = columns.length - totalColumns.length - startTotalIndex;
 
     if (blankRows) {
-      cells.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
+      cells.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
         key: "blank",
         colSpan: blankRows
       }));
     }
 
-    rows.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Row"], {
+    rows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Row"], {
       className: "fixed-table-grant-total",
       key: "totalRow"
     }, cells));
@@ -1101,9 +1101,9 @@ class BetListDataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   }
 
   _renderNodata() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "result-content"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       className: "no-info-row center-align"
     }, this._getResource('NoInfo')));
   }
@@ -1126,9 +1126,9 @@ class BetListDataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       pageOption,
       adjustedHeight
     } = this.props;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "betlist-container result-content"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Table"], {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Table"], {
       onSort: this.onSort,
       minWidth: 980,
       autoWidth: true,
@@ -1223,44 +1223,44 @@ const Popup = props => {
   let content;
 
   if (iframeUrl) {
-    content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("iframe", {
+    content = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("iframe", {
       frameBorder: "0",
       src: iframeUrl,
       width: "100%",
       height: "100%"
     });
   } else {
-    content = isHtml ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    content = isHtml ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "popup-content",
       dangerouslySetInnerHTML: {
         __html: children
       }
-    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "popup-content"
     }, children);
   }
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: `popup-container ${isShow ? 'show' : 'hide'}`,
     onClick: props.onClick
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "popup-block-body"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "flat-popup",
     style: {
       height: height,
       width: width
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "popup-title"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "txt-title"
-  }, title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }, title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     className: "popup-close",
     onClick: () => {
       props.onClose && props.onClose();
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "icon-close"
   }))), content));
 };
@@ -1353,7 +1353,7 @@ class AppLayout extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   }
 
   render() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       id: "container",
       className: "container-fluid"
     }, this.props.children);
@@ -1427,8 +1427,8 @@ class BetListLayout extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getCardClubResultUrl(rootUrl, custid, bettype, extension2);
 
         this._showThirdPartyResult(url, title);
-      } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].SBC) {
-        const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getSabaClubResultUrl(rootUrl, custid, bettype, extension2, transdecs);
+      } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].SBC || sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].SBC_FreeBets) {
+        const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getSabaClubResultUrl(rootUrl, custid, bettype, extension2, transdecs, sporttype);
 
         this._showThirdPartyResult(url, title);
       } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].SG) {
@@ -1901,9 +1901,9 @@ class BetListLayout extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   }
 
   render() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "betlist-layout"
-    }, this.props.children, this.state.isShowPopup && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_popup__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    }, this.props.children, this.state.isShowPopup && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_popup__WEBPACK_IMPORTED_MODULE_3__["default"], {
       isShow: true,
       iframeUrl: this.state.popupUrl,
       title: this.state.popupTitle,
@@ -2273,12 +2273,13 @@ class BetList {
     return url;
   }
 
-  getSabaClubResultUrl(rootUrl, custid, gameId, siteId, gameRoundId) {
+  getSabaClubResultUrl(rootUrl, custid, gameId, siteId, gameRoundId, sportType) {
     let url = rootUrl + 'SabaClubResultPopup/Index';
     url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custid', custid);
     url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'gameId', gameId);
     url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'siteId', siteId);
     url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'gameRoundId', gameRoundId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'sportType', sportType);
     return url;
   }
 
@@ -2383,6 +2384,7 @@ const SportType = {
   JK: 234,
   SXG: 243,
   SBC: 200,
+  SBC_FreeBets: 150,
   SAG: 244,
   PGS: 232
 };

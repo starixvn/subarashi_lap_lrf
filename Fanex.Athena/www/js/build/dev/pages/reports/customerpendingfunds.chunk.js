@@ -4993,6 +4993,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             url = QueryString.setParam(url, 'custid', custid);
             url = QueryString.setParam(url, 'systemid', systemId);
             url = QueryString.setParam(url, 'externalid', externalId);
+            url = QueryString.setParam(url, 'excludefreebet', true);
 
             const title = Site.getSingleResource('BetListRunning');
             const popH = Math.min($(window).height() - 100, 650), popW = 920;

@@ -127,5 +127,7 @@ namespace Fanex.Athena.Model.BetList.MetaModel
         }
 
         public bool IsFakeLicensee { get; set; }
+
+        public bool ExcludeFreeBet { get; set; }
     }
 }

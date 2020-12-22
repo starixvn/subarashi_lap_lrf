@@ -73,10 +73,7 @@
         {
             lock (LockFunctionList)
             {
-                if (_functionList == null)
-                {
-                    _functionList = functionList;
-                }
+                _functionList = _functionList ?? functionList;
             }
         }
 
@@ -84,12 +81,9 @@
         {
             lock (LockMasterFunction)
             {
-                if (_masterFunctions == null)
-                {
-                    _masterFunctions = functionList.Where(f => f.ParentId == 0)
+                _masterFunctions = _masterFunctions ?? functionList.Where(f => f.ParentId == 0)
                                                  .OrderBy(f => f.DisplayOrder)
                                                  .ToList();
-                }
             }
         }
 

@@ -345,12 +345,13 @@ class BetList {
         return url;
     }
 
-    getSabaClubResultUrl(rootUrl, custid, gameId, siteId, gameRoundId) {
+    getSabaClubResultUrl(rootUrl, custid, gameId, siteId, gameRoundId, sportType) {
         let url = rootUrl + 'SabaClubResultPopup/Index';
         url = QueryString.setParam(url, 'custid', custid);
         url = QueryString.setParam(url, 'gameId', gameId);
         url = QueryString.setParam(url, 'siteId', siteId);
         url = QueryString.setParam(url, 'gameRoundId', gameRoundId);
+        url = QueryString.setParam(url, 'sportType', sportType);
 
         return url;
     }
