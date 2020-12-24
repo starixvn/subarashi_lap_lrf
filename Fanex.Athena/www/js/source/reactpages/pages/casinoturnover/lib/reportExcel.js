@@ -162,7 +162,7 @@ export default class ReportExcel {
 
     _createExcelConfig() {        
         const columnModels = [{ wpx: 50 }, { wpx: 100 }, 
-            { wpx: 120 }, { wpx: 120 }, { wpx: 180 }, { wpx: 120 }, { wpx: 150 }, 
+            { wpx: 140 }, { wpx: 140 }, { wpx: 180 }, { wpx: 120 }, { wpx: 150 }, 
             { wpx: 150 }, { wpx: 150 }];
         
         const cellStart = Excel.getCellAddress({ r: 0, c: 0 });
