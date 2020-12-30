@@ -104,6 +104,7 @@
                 Key103: 'LiveReportBetList/Outright',
                 Key161: 'LiveReportBetList/NumberGame?Sporttype=161',
                 Key164: 'LiveReportBetList/NumberGame?Sporttype=164',
+                Key168: 'LiveReportBetList/NumberGame?Sporttype=168',
                 Key181: 'LiveReportBetList/VirtualSports?SportType=181',
                 Key182: 'LiveReportBetList/VirtualSports?SportType=182',
                 Key183: 'LiveReportBetList/VirtualSports?SportType=183',

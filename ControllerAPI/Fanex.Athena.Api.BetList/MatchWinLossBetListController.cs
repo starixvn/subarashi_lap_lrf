@@ -43,6 +43,18 @@ namespace Fanex.Athena.Api.BetList
 
         [HttpGet]
         [ValidationApiRequest(ObjectName = "metaModel", IsValidCurrency = true)]
+        public async Task<dynamic> BetTypeWinLoss(
+            int page,
+            int rows,
+            [FromUri]BetListMetaModel metaModel)
+        {
+            const string UspKey = "Lrf_BetList_SelWinLossByBetType";
+
+            return await GetPagingBetListResult(metaModel, UspKey, page, rows).ConfigureAwait(false);
+        }
+
+        [HttpGet]
+        [ValidationApiRequest(ObjectName = "metaModel", IsValidCurrency = true)]
         public async Task<dynamic> MatchBetType(
             int page,
             int rows,
