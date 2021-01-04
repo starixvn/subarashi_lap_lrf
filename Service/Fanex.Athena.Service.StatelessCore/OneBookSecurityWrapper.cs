@@ -5,6 +5,7 @@
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using LAP.ONEBook.Security;
 
+    [CLSCompliant(false)]
     public class OneBookSecurityWrapper : IOneBookSecurityWrapper
     {
         private readonly IStorageProvider _storageProvider;

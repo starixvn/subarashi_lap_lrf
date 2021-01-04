@@ -15,7 +15,7 @@
     public partial class CustomerControllerTest
     {
         [Test]
-        public async Task GetCustomerList_UserNameIsNotEqualPlaceholderUsername_ReturnUserName()
+        public void GetCustomerList_UserNameIsNotEqualPlaceholderUsername_ReturnUserName()
         {
             using (var controller = CreateController())
             {
@@ -26,7 +26,7 @@
                 _productService.GetProductAccess(Arg.Any<int>(), Arg.Any<string>()).Returns(new ProductAccess(new List<Product>()));
 
                 // Action
-                var result = (CustomerListViewModel)(await controller.CustomerList(UserName) as ViewResult).Model;
+                var result = (CustomerListViewModel)(controller.CustomerList(UserName) as ViewResult).Model;
 
                 // Assert
                 Assert.That(result.Param.Username, Is.EqualTo(UserName));
@@ -34,7 +34,7 @@
         }
 
         [Test]
-        public async Task GetCustomerList_IsFakeLicensee_PlaceholderUsernameIsExternalId()
+        public void GetCustomerList_IsFakeLicensee_PlaceholderUsernameIsExternalId()
         {
             using (var controller = CreateController())
             {
@@ -46,7 +46,7 @@
                 _productService.GetProductAccess(Arg.Any<int>(), Arg.Any<string>()).Returns(new ProductAccess(new List<Product>()));
 
                 // Action
-                var result = (CustomerListViewModel)(await controller.CustomerList(username) as ViewResult).Model;
+                var result = (CustomerListViewModel)(controller.CustomerList(username) as ViewResult).Model;
 
                 // Assert
                 Assert.That(result.Param.Username, Is.Empty);
@@ -54,7 +54,7 @@
         }
 
         [Test]
-        public async Task GetCustomerList_IsNotFakeLicensee_PlaceholderUsernameIsExternalIdOrSystemId()
+        public void GetCustomerList_IsNotFakeLicensee_PlaceholderUsernameIsExternalIdOrSystemId()
         {
             using (var controller = CreateController())
             {
@@ -65,7 +65,7 @@
                 _productService.GetProductAccess(Arg.Any<int>(), Arg.Any<string>()).Returns(new ProductAccess(new List<Product>()));
 
                 // Action
-                var result = (CustomerListViewModel)(await controller.CustomerList(username) as ViewResult).Model;
+                var result = (CustomerListViewModel)(controller.CustomerList(username) as ViewResult).Model;
 
                 // Assert
                 Assert.That(result.Param.Username, Is.Empty);
@@ -73,7 +73,7 @@
         }
 
         [Test]
-        public async Task GetCustomerList_InitGridColumns_IsAllowBA_AddBAStatusColumn()
+        public void GetCustomerList_InitGridColumns_IsAllowBA_AddBAStatusColumn()
         {
             using (var controller = CreateController())
             {
@@ -85,7 +85,7 @@
                 _productService.GetProductAccess(Arg.Any<int>(), Arg.Any<string>()).Returns(new ProductAccess(new List<Product> { new Product { ProductCode = Product.BA } }));
 
                 // Action
-                var result = (CustomerListViewModel)(await controller.CustomerList() as ViewResult).Model;
+                var result = (CustomerListViewModel)(controller.CustomerList() as ViewResult).Model;
 
                 // Assert
                 Assert.That(result.Param.GridColumns.Any(x => x.Name == BaStatus && x.Checked));
@@ -93,7 +93,7 @@
         }
 
         [Test]
-        public async Task GetCustomerList_InitGridColumns_AllowLicensees_AddStatusColumn()
+        public void GetCustomerList_InitGridColumns_AllowLicensees_AddStatusColumn()
         {
             using (var controller = CreateController())
             {
@@ -106,7 +106,7 @@
                 AppSettings.LicenseeOfferStatusFunction.Returns(new[] { DefaultLicenseeSession.LicenseeId });
 
                 // Action
-                var result = (CustomerListViewModel)(await controller.CustomerList() as ViewResult).Model;
+                var result = (CustomerListViewModel)(controller.CustomerList() as ViewResult).Model;
 
                 // Assert
                 Assert.That(result.Param.GridColumns.Any(x => x.Name == Status && x.Checked));
@@ -114,7 +114,7 @@
         }
 
         [Test]
-        public async Task GetCustomerList_InitGridColumns_AllowCustomerCommAndRealLicensee_AddCommissionColumn()
+        public void GetCustomerList_InitGridColumns_AllowCustomerCommAndRealLicensee_AddCommissionColumn()
         {
             using (var controller = CreateController())
             {
@@ -127,7 +127,7 @@
                 StubLicenseeSessionData(new LicenseeAuthInfo { IsAllowedCustomerComm = true });
 
                 // Action
-                var result = (CustomerListViewModel)(await controller.CustomerList() as ViewResult).Model;
+                var result = (CustomerListViewModel)(controller.CustomerList() as ViewResult).Model;
 
                 // Assert
                 Assert.Multiple(() =>
@@ -140,7 +140,7 @@
 
 
         [Test]
-        public async Task GetCustomerList_SetValueForBaStatus_IsAllowedSpecialBA_DonotAddBAMessage()
+        public void GetCustomerList_SetValueForBaStatus_IsAllowedSpecialBA_DonotAddBAMessage()
         {
             using (var controller = CreateController())
             {
@@ -151,7 +151,7 @@
                 _authorizationService.IsAllowedSpecialBA(DefaultUserSession).Returns(true);
 
                 // Action
-                var result = (CustomerListViewModel)(await controller.CustomerList() as ViewResult).Model;
+                var result = (CustomerListViewModel)(controller.CustomerList() as ViewResult).Model;
 
                 // Assert
                 Assert.That(result.CanUpdateBAMessage, Is.Empty);
@@ -160,7 +160,7 @@
         }
 
         [Test]
-        public async Task GetCustomerList_SetValueForBaStatus_IsNotAllowedSpecialBA_AddBAMessage()
+        public void GetCustomerList_SetValueForBaStatus_IsNotAllowedSpecialBA_AddBAMessage()
         {
             using (var controller = CreateController())
             {
@@ -175,7 +175,7 @@
                 });
 
                 // Action
-                var result = (CustomerListViewModel)(await controller.CustomerList() as ViewResult).Model;
+                var result = (CustomerListViewModel)(controller.CustomerList() as ViewResult).Model;
 
                 // Assert
                 Assert.That(result.CanUpdateBAMessage, Is.EqualTo(BaMessage));
@@ -183,7 +183,7 @@
         }
 
         [Test]
-        public async Task GetCustomerList_SetValueForBaStatus_IsAllowedBAAndNotSpecialBA_AddBATimeCheck()
+        public void GetCustomerList_SetValueForBaStatus_IsAllowedBAAndNotSpecialBA_AddBATimeCheck()
         {
             using (var controller = CreateController())
             {
@@ -199,7 +199,7 @@
                 });
 
                 // Action
-                var result = (CustomerListViewModel)(await controller.CustomerList() as ViewResult).Model;
+                var result = (CustomerListViewModel)(controller.CustomerList() as ViewResult).Model;
 
                 // Assert
                 Assert.That(result.BATimeCheck, Is.EqualTo(BaMessage));
@@ -207,7 +207,7 @@
         }
 
         [Test]
-        public async Task GetCustomerList_IsNotSubsidiaryManagement_GroupSubsidiariesIsEmpty()
+        public void GetCustomerList_IsNotSubsidiaryManagement_GroupSubsidiariesIsEmpty()
         {
             using (var controller = CreateController())
             {
@@ -216,7 +216,7 @@
                 _productService.GetProductAccess(Arg.Any<int>(), Arg.Any<string>()).Returns(new ProductAccess(new List<Product>()));
 
                 // Action
-                var result = (CustomerListViewModel)(await controller.CustomerList() as ViewResult).Model;
+                var result = (CustomerListViewModel)(controller.CustomerList() as ViewResult).Model;
 
                 // Assert
                 Assert.That(result.GroupSubsidiaryList, Is.Empty);
@@ -224,7 +224,7 @@
         }
 
         [Test]
-        public async Task GetCustomerList_IsSubsidiaryManagement_GroupSubsidiariesIsReturnedFromService()
+        public void GetCustomerList_IsSubsidiaryManagement_GroupSubsidiariesIsReturnedFromService()
         {
             using (var controller = CreateController())
             {
@@ -238,7 +238,7 @@
                 _productService.GetProductAccess(Arg.Any<int>(), Arg.Any<string>()).Returns(new ProductAccess(new List<Product>()));
 
                 // Action
-                var result = (CustomerListViewModel)(await controller.CustomerList() as ViewResult).Model;
+                var result = (CustomerListViewModel)(controller.CustomerList() as ViewResult).Model;
 
                 // Assert
                 Assert.That(result.GroupSubsidiaryList, Is.EqualTo(expected));
