@@ -2927,4 +2927,10 @@
     <value>For BA player, don't allow turning on VIP</value>
     <comment>#146508</comment>
   </data>
+  <data name="AgentBetInterval" xml:space="preserve">
+    <value>Agent Bet Interval (sec)</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Category</value>
+  </data>
 </root>

@@ -4,6 +4,9 @@
     Layout = "~/Views/Desktop/Shared/_Report.jqGridLayout.cshtml";
     var currency = "MYR";
 }
+@section pagecss {
+    <link href="@Url.ContentLinkByEnv("/www/css/build/pages/customer/customer-class.css")" rel="stylesheet" />
+}
 @section Content{
     <div class="page-results">
         <div class="result-content">
@@ -14,20 +17,23 @@
                 }
                 else
                 {
-                    <table id="customer-class-info" class="table table-bordered">
+                    <table id="customer-class-info" class="table table-bordered customer-class-info">
                         <thead>
                             <tr>
                                 <th class="col-medium">@ViewResources.CustomerClass</th>
+                                <th class="col-large">@ViewResources.Category</th>
                                 <th class="col-medium">@ViewResources.OddsGroup</th>
                                 <th class="col-large">@ViewResources.SportType</th>
                                 <th class="col-medium">@ViewResources.Live2/<br />@ViewResources.PreMatch</th>
+                                <th class="col-medium">@ViewResources.Currency</th>
+                                <th class="col-medium">@ViewResources.Platform</th>
                                 <th class="col-medium">@ViewResources.LeagueGroupId</th>
                                 <th class="col-medium">@ViewResources.BetInterval</th>
+                                <th class="col-medium">@ViewResources.AgentBetInterval</th>
                                 <th class="col-medium">@ViewResources.MinBet (@currency)</th>
                                 <th class="col-medium">@ViewResources.MaxPerBet (@currency)</th>
                                 <th class="col-medium">@ViewResources.MaxPerMatch2 (@currency)</th>
                                 <th class="col-medium">@ViewResources.RepeatedBets</th>
-                                <th class="col-medium">@ViewResources.Platform</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -37,16 +43,21 @@
                                 {
                                     <tr>
                                         <td class="center-align">@m.Id</td>
+                                        <td class="center-align">@m.Category</td>
                                         <td class="center-align">@m.OddsGroup</td>
                                         <td class="left-align">-</td>
                                         <td class="left-align">-</td>
-                                        <td class="right-align">-</td>
-                                        <td class="right-align">-</td>
-                                        <td class="right-align">-</td>
-                                        <td class="right-align">-</td>
-                                        <td class="right-align">-</td>
-                                        <td class="right-align">-</td>
+                                        <td class="center-align">-</td>
                                         <td class="left-align">-</td>
+                                        <td class="left-align">-</td>
+                                        <td class="right-align">-</td>
+                                        <td class="right-align">-</td>
+                                        <td class="right-align">-</td>
+                                        <td class="right-align">-</td>
+                                        <td class="right-align">-</td>
+                                        <td class="right-align">-</td>
+                                        <td class="right-align">-</td>
+                                        <td class="right-align">-</td>
                                     </tr>
 
                                     continue;
@@ -60,17 +71,20 @@
                                         @if (isFirstRow)
                                         {
                                             <td class="center-align" rowspan="@m.LimitPolicies.Count">@m.Id</td>
+                                            <td class="center-align" rowspan="@m.LimitPolicies.Count">@m.Category</td>
                                             <td class="center-align" rowspan="@m.LimitPolicies.Count">@m.OddsGroup</td>
                                         }
                                         <td class="left-align">@p.SportTypeName</td>
                                         <td class="left-align">@(p.LiveType == 1 ? ViewResources.Live2 : ViewResources.PreMatch)</td>
+                                        <td class="center-align">@p.Currency</td>
+                                        <td class="left-align">@p.Platform</td>
                                         <td class="right-align">@p.LeagueGroupId</td>
                                         <td class="right-align">@p.BetInterval</td>
+                                        <td class="right-align">@p.AgentBetInterval</td>
                                         <td class="right-align">@p.MinBet</td>
                                         <td class="right-align">@p.MaxBet</td>
                                         <td class="right-align">@p.MaxPerMatch</td>
                                         <td class="right-align">@p.RepeatedBets</td>
-                                        <td class="left-align">@p.Platform</td>
                                     </tr>
 
                                     isFirstRow = false;

@@ -50,7 +50,10 @@
                             MaxPerMatch = FormatNumber(reader.ToNullableDecimal("MaxPerMatch"), NumberStyle),
                             RepeatedBets = FormatNumber(reader.ToNullableInt("RepeatedBets"), NumberStyle),
                             MinBet = FormatNumber(reader.ToNullableDecimal("MinBet"), "{0:#,##0}"),
-                            Platform = platform == null ? "-" : ViewResources.ResourceManager.GetString($"Platform_{platform}")
+                            Platform = platform == null ? "-" : ViewResources.ResourceManager.GetString($"Platform_{platform}"),
+
+                            AgentBetInterval = FormatNumber(reader.ToNullableDecimal("AgentBetInterval"), NumberStyle),
+                            CurrencyId = reader.ToNullableInt("CurrencyId") ?? 0
                         };
 
                         result.Add(policy);

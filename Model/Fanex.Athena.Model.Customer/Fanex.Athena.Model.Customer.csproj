@@ -70,6 +70,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\CustomerClassCategoryModel.cs" />
     <Compile Include="DTO\CustomerClassModel.cs" />
     <Compile Include="DTO\DormantCustomer.cs" />
     <Compile Include="DTO\CustomerDTO.cs" />

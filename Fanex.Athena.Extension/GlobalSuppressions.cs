@@ -5,3 +5,4 @@
 // a specific target and scoped to a namespace, type, member, etc.
 
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S109:Magic numbers should not be used", Justification = "<Pending>", Scope = "member", Target = "~M:Fanex.Athena.Extension.Helper.DateTimeHelper.ToEndOfTheDay(System.DateTime)~System.DateTime")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Minor Code Smell", "S2325:Methods and properties that don't access instance data should be static", Justification = "<Pending>", Scope = "member", Target = "~M:Fanex.Athena.Extension.Utility.WebClientService.GetStringAsync(System.Uri,System.String)~System.Threading.Tasks.Task{System.String}")]

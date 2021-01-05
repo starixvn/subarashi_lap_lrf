@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 12/18/2020 1:48:49 PM
+// Generated at: 12/24/2020 3:53:33 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -117,6 +117,7 @@ window._language_en_US = {
   AGCasinoNotOfferCurrency: "AG Casino is not offered for this currency.",
   AGCasinoWinLoss: "AG Casino Win Loss",
   AGClosingBalance: "AG Closing Balance",
+  AgentBetInterval: "Agent Bet Interval (sec)",
   AGOpeningBalance: "AG Opening Balance",
   AH: "AH",
   Alert: "Alert",
@@ -226,6 +227,7 @@ window._language_en_US = {
   CasinoAPI_UpdateCommError: "Having errors when calling CasinoAPI to update customer commission.",
   CasinoTransfer: "Casino Transfer",
   CasinoTurnover: "Casino Turnover",
+  Category: "Category",
   ChangePassword: "Change Password",
   ChangeStatus: "Change {0}&apos;s status",
   ChangeStatusOfThisCustomerMsg: "Are you sure you want to change status of this customer?",

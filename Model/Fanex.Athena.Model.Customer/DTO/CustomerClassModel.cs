@@ -13,6 +13,8 @@ namespace Fanex.Athena.Model.Customer.DTO
 
         public string Id { get; set; }
 
+        public string Category { get; set; }
+
         public string OddsGroup { get; set; }
 
         public List<CustomerClassLimitPolicyModel> LimitPolicies { get; set; }
