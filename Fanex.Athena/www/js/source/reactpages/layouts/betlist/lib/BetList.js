@@ -426,6 +426,15 @@ class BetList {
 
         return url;
     }
+
+    getHappy5LinkedGamesResultUrl(rootUrl, custId, transId3rd, platform) {
+        let url = rootUrl + 'Happy5LinkedGamesResultPopup/Index';
+        url = QueryString.setParam(url, 'custId', custId);
+        url = QueryString.setParam(url, 'transId3rd', transId3rd);
+        url = QueryString.setParam(url, 'platform', platform);
+
+        return url;
+    }
 }
 
 export default new BetList();

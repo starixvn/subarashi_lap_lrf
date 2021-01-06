@@ -23,6 +23,7 @@
         const SPORT_SAG = 244;
         const SPORT_PGS = 232;
         const SPORT_JK = 234;
+        const SPORT_HAPPY5LINKEDGAMES = 168;
         const BETLIST_META_MODEL = '#BetListMetaModel';
 
         let _sortColumnName, _sortOrder;
@@ -458,7 +459,7 @@
                     }
                 });
             },
-           
+
             viewSexyGamingResult: function (trasdesc, matchCode, bettype, title) {
                 const url = Site.resolveClientUrl('ResultReport/SexyGaming?transdesc=' +
                     encodeURIComponent(trasdesc) + '&matchCode=' + matchCode + '&bettype=' + bettype);
@@ -481,7 +482,7 @@
                     }
                 });
             },
-            
+
             viewSAGamingResult: function (trasdesc, matchCode, bettype, title) {
                 const url = Site.resolveClientUrl('ResultReport/SAGaming?transdesc=' +
                     encodeURIComponent(trasdesc) + '&matchCode=' + matchCode + '&bettype=' + bettype);
@@ -520,6 +521,17 @@
                 const url = Site.resolveClientUrl('ResultReport/GlobalGamingResult');
                 Site.blockUI();
                 $.get(url + '?custid=' + custId + '&gameId=' + gameId, function (result) {
+                    if (result !== '') {
+                        showResultPopUp(result, { width: 800, height: 380, title: title });
+                        Site.unBlockUI();
+                    }
+                });
+            },
+            viewHappy5LinkedGamesResult: function (custId, transId3rd, platform, title) {
+                const url = Site.resolveClientUrl('Happy5LinkedGamesResultPopup/Index');
+                Site.blockUI();
+
+                $.get(url + '?custId=' + custId + '&transId3rd=' + transId3rd + '&platform=' + platform, function (result) {
                     if (result !== '') {
                         showResultPopUp(result, { width: 800, height: 380, title: title });
                         Site.unBlockUI();
@@ -569,6 +581,9 @@
                 }
                 else if (sporttype === SPORT_PGS) {
                     _me.viewPGSResult(custid, transdecs, extension2, title);
+                }
+                else if (sporttype === SPORT_HAPPY5LINKEDGAMES) {
+                    _me.viewHappy5LinkedGamesResult(extension1, refno, defaultPlatform, title);
                 }
                 else {
                     const numberBettype = Number(bettype);
@@ -906,7 +921,7 @@
                 showDetailPopUp(url, { width: 890, height: popH + 50, title: title });
             },
 
-            showSabaClubDetails : function (transId, winlostDate, custId, transType) {
+            showSabaClubDetails: function (transId, winlostDate, custId, transType) {
                 let url = Site.resolveClientUrl('SabaClubBetList/Detail');
                 url = QueryString.setParam(url, 'transId', transId);
                 url = QueryString.setParam(url, 'date', winlostDate);

@@ -9,7 +9,6 @@ namespace Fanex.Athena.DataAccess.Report
     using System;
     using System.Collections.Generic;
     using System.Data;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Threading.Tasks;
     using Core.Configuration.Interfaces;
@@ -110,12 +109,14 @@ namespace Fanex.Athena.DataAccess.Report
                 var showSb = metaModel.ProductOptions.Any(i => i.Status && i.Code == Product.SB);
                 var showBa = metaModel.ProductOptions.Any(i => i.Status && i.Code == Product.BA);
                 var showVS2 = metaModel.ProductOptions.Any(i => i.Status && i.Code == Product.VS2);
+                var showNG = metaModel.ProductOptions.Any(i => i.Status && i.Code == Product.NG);
 
                 SetCommonParam(db, metaModel);
                 db.SetParameterValue("Date", metaModel.Date);
                 db.SetParameterValue("showsb", showSb);
                 db.SetParameterValue("showba", showBa);
                 db.SetParameterValue("showVS2", showVS2);
+                db.SetParameterValue("showNG", showNG);
 
                 using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
                 {

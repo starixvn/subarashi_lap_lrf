@@ -53,7 +53,10 @@ namespace Fanex.Athena.Excel.Report
 
         private static readonly IEnumerable<int> SpecialBettypes = new[]
         {
-            (int)BetType.MixParlay, (int)BetType.Outright, (int)BetType.CombinationMixParlay, (int)BetType.VirtualSports2MixParlay
+            (int)BetType.MixParlay,
+            (int)BetType.Outright,
+            (int)BetType.CombinationMixParlay,
+            (int)BetType.VirtualSports2MixParlay
         };
 
         private static readonly IList<string> _commonColumnNameList = new List<string>
@@ -152,7 +155,7 @@ namespace Fanex.Athena.Excel.Report
             {
                 var exportRow = _exportData.Rows[index];
                 var betType = Converter.ToInt(exportRow["bettype"]);
-                if (SpecialBettypes.Contains(betType))
+                if (SpecialBettypes.Contains(betType) || IsHappy5LinkedGames(betType))
                 {
                     specialBetType.Add(exportRow);
                     continue;
@@ -187,7 +190,7 @@ namespace Fanex.Athena.Excel.Report
 
             currentRowIndex = AssignMatchData(sheet, matchInfoList, formatMatchName, currentRowIndex, currentIndex);
 
-            _exportData.DefaultView.RowFilter = "bettype <> '9' and bettype <> '10' and bettype <> '29' and bettype <> '2799'";
+            _exportData.DefaultView.RowFilter = "bettype <> '9' and bettype <> '10' and bettype <> '29' and bettype <> '2799' and (bettype < '3601' or '3610' < bettype)";
             var sumTable = _exportData.DefaultView.ToTable();
 
             if (_exportData.Rows.Count > sumTable.Rows.Count)
@@ -359,6 +362,7 @@ namespace Fanex.Athena.Excel.Report
         private int AssignSpecialBetType(ISheet sheet, IList<DataRow> exportData, int currentRowIndex)
         {
             var rowCount = exportData.Count;
+            exportData = exportData.OrderBy(d => Converter.ToInt(d["bettype"])).ToList();
 
             // Assign bettype
             for (int i = 0; i < rowCount; i++)
@@ -403,5 +407,7 @@ namespace Fanex.Athena.Excel.Report
         }
 
         private static IList<string> GetTotalColumnNameList() => _commonColumnNameList.Select(x => "sum" + x).ToList();
+        private static bool IsHappy5LinkedGames(int betType)
+            => (int)BetType.BeginHappy5LinkedGames <= betType && betType <= (int)BetType.EndHappy5LinkedGames;
     }
 }
