@@ -90,6 +90,11 @@
         public decimal TGComm { get; set; }
         public decimal VSComm { get; set; }
         public decimal VS2Comm { get; set; }
+        public decimal VRGComm { get; set; }
+        public decimal CCComm { get; set; }
+        public decimal SBCComm { get; set; }
+        public decimal SAGComm { get; set; }
+        public decimal PGSComm { get; set; }
 
         public void MapQuery()
         {
@@ -108,6 +113,13 @@
             CommValues.Add(Product.TG, TGComm);
             CommValues.Add(Product.VS, VSComm);
             CommValues.Add(Product.VS2, VS2Comm);
+
+            CommValues.Add(Product.VRG, VRGComm);
+            CommValues.Add(Product.CC, CCComm);
+            CommValues.Add(Product.SBC, SBCComm);
+            CommValues.Add(Product.SAG, SAGComm);
+            CommValues.Add(Product.PGS, PGSComm);
+            CommValues.Add(Product.AB, ABComm);
         }
 
         public void MapData(IDataReader reader, IDictionary<string, string> columns, IDictionary<string, bool> visibility)

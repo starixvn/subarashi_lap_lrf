@@ -25,7 +25,6 @@
     </Setting>
     <Setting Key="Lrf_SyncInternalUser" SpName="Lrf_SyncInternalUser" DbName="DBCUST.bodb_Licensee.bodbLicenseeNet" />
   </Function>
-
   <Function Name="Authorization">
     <Setting Key="Licensee_UserSaltSel" SpName="Licensee_UserSaltSel" DbName="DBLIC.bodb_Licensee.bodbLicenseeNet" />
     <Setting Key="Lrf_UserLogin" SpName="Lrf_UserLogin" DbName="DBCUST.bodb_Licensee.bodbLicenseeNet" />
@@ -40,21 +39,20 @@
     <Setting Key="Lrf_CurrencyCustIns" SpName="Lrf_CurrencyCustIns" DbName="DBCUST.bodb_Licensee.bodbLicenseeNet" />
     <Setting Key="Lrf_UserInfoSelByUserName" SpName="Lrf_UserInfoSelByUserName" DbName="DBLIC.bodb_Licensee.bodbLicenseeNet" />
   </Function>
-
   <Function Name="Report">
     <Setting Key="Lrf_Rpt_SabaVirtualSportsWinLoss" SpName="Lrf_Rpt_SabaVirtualSportsWinLoss" DbName="DBEXT.bodb02.bodbLicenseeNet" />
     <Setting Key="Lrf_Rpt_SabaVirtualSportsWinLoss_Mem" SpName="Lrf_Rpt_SabaVirtualSportsWinLoss_Mem" DbName="DBEXT.bodb02.bodbLicenseeNet" />
     <Setting Key="Lrf_Rpt_SabaVirtualSportsWinLoss_Ag" SpName="Lrf_Rpt_SabaVirtualSportsWinLoss_Ag" DbName="DBEXT.bodb02.bodbLicenseeNet" />
-    <Setting Key="Lrf_Rpt_PlatformWinloss" SpName="Lrf_Rpt_PlatformWinloss_uat4" DbName="DBEXT.bodb02.bodbLicenseeNet" />
-    <Setting Key="Lrf_Rpt_PlatformWinlossDetail" SpName="Lrf_Rpt_PlatformWinlossDetail_uat4" DbName="DBEXT.bodb02.bodbLicenseeNet" />
+    <Setting Key="Lrf_Rpt_PlatformWinloss" SpName="Lrf_Rpt_PlatformWinloss" DbName="DBEXT.bodb02.bodbLicenseeNet" />
+    <Setting Key="Lrf_Rpt_PlatformWinlossDetail" SpName="Lrf_Rpt_PlatformWinlossDetail" DbName="DBEXT.bodb02.bodbLicenseeNet" />
     <Setting Key="Lrf_Rpt_MatchWinLossDetail" SpName="Lrf_Rpt_MatchWinLossDetail" DbName="DBEXT.bodb02.bodbLicenseeNet" />
     <Setting Key="Lrf_Rpt_MatchWinLoss" SpName="Lrf_Rpt_MatchWinLoss" DbName="DBEXT.bodb02.bodbLicenseeNet" />
     <Setting Key="Lrf_Rpt_MatchWinLossByBettype" SpName="Lrf_Rpt_MatchWinLossByBettype" DbName="DBEXT.bodb02.bodbLicenseeNet" />
     <Setting Key="Lrf_Rpt_MatchWinLossByOutrightParlay" SpName="Lrf_Rpt_MatchWinLossByOutrightParlay" DbName="DBEXT.bodb02.bodbLicenseeNet" />
-    <Setting Key="Lrf_Rpt_LicWinloss" SpName="Lrf_Rpt_LicWinloss_uat4" DbName="DBEXT.bodb02.bodbLicenseeNet" />
+    <Setting Key="Lrf_Rpt_LicWinloss" SpName="Lrf_Rpt_LicWinloss" DbName="DBEXT.bodb02.bodbLicenseeNet" />
     <Setting Key="Lrf_Rpt_LicWinloss_FromAPI" SpName="Lrf_Rpt_LicWinloss_FromAPI" DbName="DBPLO.bodb02.bodbLicenseeNet" />
-    <Setting Key="Lrf_Rpt_LicWinlossDetail" SpName="Lrf_Rpt_LicWinlossDetail_uat4" DbName="DBEXT.bodb02.bodbLicenseeNet" />
-    <Setting Key="Lrf_Rpt_LicWinlossDetail_Ag" SpName="Lrf_Rpt_LicWinlossDetail_Ag_uat4" DbName="DBEXT.bodb02.bodbLicenseeNet" />
+    <Setting Key="Lrf_Rpt_LicWinlossDetail" SpName="Lrf_Rpt_LicWinlossDetail" DbName="DBEXT.bodb02.bodbLicenseeNet" />
+    <Setting Key="Lrf_Rpt_LicWinlossDetail_Ag" SpName="Lrf_Rpt_LicWinlossDetail_Ag" DbName="DBEXT.bodb02.bodbLicenseeNet" />
     <Setting Key="Lrf_Rpt_LiveReportWinlossByMatch" SpName="Lrf_Rpt_LiveReportWinlossByMatch" DbName="DBEXT.bodb02.bodbLicenseeNet"></Setting>
     <Setting Key="Lrf_Rpt_LiveReportSummary" SpName="Lrf_Rpt_LiveReportSummary" DbName="DBEXT.bodb02.bodbLicenseeNet"></Setting>
     <Setting Key="Lrf_Rpt_LiveReportSummaryDetail" SpName="Lrf_Rpt_LiveReportSummaryDetail" DbName="DBEXT.bodb02.bodbLicenseeNet"></Setting>
@@ -64,14 +62,14 @@
     <Setting Key="Lrf_Rpt_CustomerTurnOver" SpName="Lrf_Rpt_CustomerTurnOver" DbName="DBEXT.bodb02.bodbLicenseeNet"></Setting>
     <Setting Key="Lrf_SportsGetAll" SpName="Lrf_SportsGetAll" DbName="DBEXT.bodb02.bodbLicenseeNet"></Setting>
     <Setting Key="Lrf_Rpt_CustomerBalance" SpName="Lrf_Rpt_CustomerBalance" DbName="DBACC.bodb02.bodbLicenseeNet"></Setting>
-    <Setting Key="Lrf_Rpt_WinLoss" SpName="Lrf_Rpt_WinLoss_uat4" DbName="DBEXT.bodb02.bodbLicenseeNet"></Setting>
+    <Setting Key="Lrf_Rpt_WinLoss" SpName="Lrf_Rpt_WinLoss" DbName="DBEXT.bodb02.bodbLicenseeNet"></Setting>
     <Setting Key="Lrf_Rpt_MatchSelResultEntered" SpName="Lrf_Rpt_MatchSelResultEntered" DbName="DBEXT.bodb02.bodbLicenseeNet"></Setting>
     <Setting Key="Lrf_Rpt_Outstanding" SpName="Lrf_Rpt_Outstanding" DbName="DBBOF.bodb02.bodbLicenseeNet" />
-    <Setting Key="Lrf_Rpt_WinlossByProduct" SpName="Lrf_Rpt_WinlossByProduct"  DbName="DBEXT.bodb02.bodbLicenseeNet" />
+    <Setting Key="Lrf_Rpt_WinlossByProduct" SpName="Lrf_Rpt_WinlossByProduct" DbName="DBEXT.bodb02.bodbLicenseeNet" />
     <Setting Key="Lrf_Rpt_WinlossByProductDetail" SpName="Lrf_Rpt_WinlossByProductDetail" DbName="DBEXT.bodb02.bodbLicenseeNet" />
     <Setting Key="Lrf_Rpt_WinlossByProductDetail_Ag" SpName="Lrf_Rpt_WinlossByProductDetail_Ag" DbName="DBEXT.bodb02.bodbLicenseeNet" />
-    <Setting Key="Lrf_Rpt_WinlostByLeague" SpName="Lrf_Rpt_WinlostByLeague"  DbName="DBEXT.bodb02.bodbLicenseeNet" />
-    <Setting Key="Lrf_Rpt_WinlossByLeagueDetail" SpName="Lrf_Rpt_WinlossByLeagueDetail"  DbName="DBEXT.bodb02.bodbLicenseeNet" />
+    <Setting Key="Lrf_Rpt_WinlostByLeague" SpName="Lrf_Rpt_WinlostByLeague" DbName="DBEXT.bodb02.bodbLicenseeNet" />
+    <Setting Key="Lrf_Rpt_WinlossByLeagueDetail" SpName="Lrf_Rpt_WinlossByLeagueDetail" DbName="DBEXT.bodb02.bodbLicenseeNet" />
     <Setting Key="Lrf_Rpt_AGCasinoWinloss" SpName="Lrf_Rpt_AGCasinoWinloss" DbName="DBACC.bodb02.bodbLicenseeNet" />
     <Setting Key="LRF_Rpt_AGCasinoWinloss_Ag" SpName="LRF_Rpt_AGCasinoWinloss_Ag" DbName="DBACC.bodb02.bodbLicenseeNet" />
     <Setting Key="LRF_Rpt_AGCasinoWinloss_Mem" SpName="LRF_Rpt_AGCasinoWinloss_Mem" DbName="DBACC.bodb02.bodbLicenseeNet" />
@@ -95,7 +93,6 @@
     <Setting Key="Lrf_Rpt_ExchangeWinloss_Mem" SpName="Lrf_Rpt_ExchangeWinloss_Mem" DbName="DBEXT.bodb02.bodbLicenseeNet" />
     <Setting Key="Lrf_Rpt_CasinoTurnover" SpName="Lrf_Rpt_CasinoTurnover" DbName="DBEXT.bodb02.bodbLicenseeNet" />
   </Function>
-
   <Function Name="CustomerInformation">
     <Setting Key="Lrf_BATimeCheck" SpName="Lrf_BATimeCheck" DbName="DBCUST.CustDB.bodbLicenseeNet" />
     <Setting Key="Lrf_CustomerUpdMemberBAStatus" SpName="Lrf_CustomerUpdMemberBAStatus_xtest" DbName="DBCUST.CustDB.bodbLicenseeNet" />
@@ -104,17 +101,15 @@
     <Setting Key="Lrf_CustomerUpdClosed" SpName="Lrf_CustomerUpdClosed" DbName="DBCUST.CustDB.bodbLicenseeNet" />
     <Setting Key="Lrf_CustomerUpdSuspended" SpName="Lrf_CustomerUpdSuspended" DbName="DBCUST.CustDB.bodbLicenseeNet" />
     <Setting Key="Lrf_CustomerUpdSpecialLevel" SpName="Lrf_CustomerUpdSpecialLevel" DbName="DBCUST.CustDB.bodbLicenseeNet" />
-
-    <Setting Key="Lrf_LicenseeCustCommSel" SpName="Lrf_LicenseeCustCommSel" DbName="DBLIC.bodb_Licensee.bodbLicenseeNet" TimeOut="240" />
-    <Setting Key="Lrf_LicenseeCustCommUpd" SpName="Lrf_LicenseeCustCommUpd" DbName="DBCUST.bodb_Licensee.bodbLicenseeNet" TimeOut="240" />
-    <Setting Key="Lrf_CustomerRemoveGroupComm" SpName="Lrf_CustomerRemoveGroupComm" DbName="DBCUST.bodb_Licensee.bodbLicenseeNet" TimeOut="240" />
-    <Setting Key="Lrf_CustomerMoveGroupComm" SpName="Lrf_CustomerMoveGroupComm" DbName="DBCUST.bodb_Licensee.bodbLicenseeNet" TimeOut="240" />
+    <Setting Key="Lrf_LicenseeCustCommSel" SpName="Lrf_LicenseeCustCommSel_UAT1" DbName="DBLIC.bodb_Licensee.bodbLicenseeNet" TimeOut="240" />
+    <Setting Key="Lrf_LicenseeCustCommUpd" SpName="Lrf_LicenseeCustCommUpd_UAT1" DbName="DBCUST.bodb_Licensee.bodbLicenseeNet" TimeOut="240" />
+    <Setting Key="Lrf_CustomerRemoveGroupComm" SpName="Lrf_CustomerRemoveGroupComm_UAT1" DbName="DBCUST.bodb_Licensee.bodbLicenseeNet" TimeOut="240" />
+    <Setting Key="Lrf_CustomerMoveGroupComm" SpName="Lrf_CustomerMoveGroupComm_UAT1" DbName="DBCUST.bodb_Licensee.bodbLicenseeNet" TimeOut="240" />
     <Setting Key="Lrf_CustomerSelUserSearch" SpName="Lrf_CustomerSelUserSearch" DbName="DBLIC.bodb_Licensee.bodbLicenseeNet" />
     <Setting Key="Lrf_CustomerLoginInfo" SpName="Lrf_CustomerLoginInfo" DbName="DBEXT.bodb02.bodbLicenseeNet" />
     <Setting Key="Lrf_CustomerSelStatus" SpName="Lrf_CustomerSelStatus" DbName="DBEXT.bodb02.bodbLicenseeNet" />
     <Setting Key="Lrf_CustomerUpdUgroup" SpName="Lrf_CustomerUpdUgroup" DbName="DBCUST.CustDB.bodbLicenseeNet" />
     <Setting Key="Lrf_UserInfoByUserNameSel" SpName="Lrf_UserInfoByUserNameSel" DbName="DBEXT.bodb02.bodbLicenseeNet" />
-
     <!-- PlayerSegmentation -->
     <Function Name="PlayerSegmentation">
       <Setting Key="Lrf_ProblemAccount_LicenseeProblemPlayerSel" SpName="Lrf_ProblemAccount_LicenseeProblemPlayerSel_xtest" DbName="DBACC.bodb02.bodbLicenseeNet" />
@@ -124,32 +119,29 @@
     </Function>
     <!-- End - PlayerSegmentation -->
   </Function>
-
   <Function Name="PlayerAdmin">
-    <Setting Key="Lrf_CustomerSelByUsername" SpName="Lrf_CustomerSelByUsername_xtest" DbName="DBEXT.bodb02.bodbLicenseeNet" />
-    <Setting Key="Lrf_CustomerSelByCustid" SpName="Lrf_CustomerSelByCustid_xtest" DbName="DBEXT.bodb02.bodbLicenseeNet" />
+    <Setting Key="Lrf_CustomerSelByUsername" SpName="Lrf_CustomerSelByUsername" DbName="DBEXT.bodb02.bodbLicenseeNet" />
+    <Setting Key="Lrf_CustomerSelByCustid" SpName="Lrf_CustomerSelByCustid" DbName="DBEXT.bodb02.bodbLicenseeNet" />
     <Setting Key="Lrf_LicenseeProductByBetLimitSel" SpName="Lrf_LicenseeProductByBetLimitSel" DbName="DBLIC.bodb_Licensee.bodbLicenseeNet" />
     <Setting Key="Lrf_PlayerBettingStatistics" SpName="Lrf_PlayerBettingStatistics" DbName="DBACC.bodb02.bodbLicenseeNet" />
     <Setting Key="Lrf_CheckBelonging_ValidateProduct" SpName="Lrf_CheckBelonging_ValidateProduct" DbName="DBLIC.bodb_Licensee.bodbLicenseeNet" />
   </Function>
-
   <Function Name="GroupComm">
-    <Setting Key="Lrf_LicenseeGroupCommSel" SpName="Lrf_LicenseeGroupCommSel" DbName="DBCUST.bodb_Licensee.bodbLicenseeNet">
+    <Setting Key="Lrf_LicenseeGroupCommSel" SpName="Lrf_LicenseeGroupCommSel_UAT1" DbName="DBCUST.bodb_Licensee.bodbLicenseeNet">
       <Mapping DataField="Parlaycomm" ObjectProperty="ParlayComm" />
       <Mapping DataField="RNGComm" ObjectProperty="CSComm" />
       <Mapping DataField="IsDefault" ObjectProperty="IsDefaultGroup" />
     </Setting>
-    <Setting Key="Lrf_LicenseeGroupCommIns" SpName="Lrf_LicenseeGroupCommIns_xpre" DbName="DBCUST.bodb_Licensee.bodbLicenseeNet" />
-    <Setting Key="Lrf_LicenseeGroupCommDel" SpName="Lrf_LicenseeGroupCommDel_xpre" DbName="DBCUST.bodb_Licensee.bodbLicenseeNet" TimeOut="300" />
-    <Setting Key="Lrf_LicenseeGroupCommUpd" SpName="Lrf_LicenseeGroupCommUpd_xpre" DbName="DBCUST.bodb_Licensee.bodbLicenseeNet" TimeOut="300" />
-    <Setting Key="Lrf_GroupCommGetById" SpName="Lrf_GroupCommGetById" DbName="DBLIC.bodb_Licensee.bodbLicenseeNet">
+    <Setting Key="Lrf_LicenseeGroupCommIns" SpName="Lrf_LicenseeGroupCommIns_UAT1" DbName="DBCUST.bodb_Licensee.bodbLicenseeNet" />
+    <Setting Key="Lrf_LicenseeGroupCommDel" SpName="Lrf_LicenseeGroupCommDel_UAT1" DbName="DBCUST.bodb_Licensee.bodbLicenseeNet" TimeOut="300" />
+    <Setting Key="Lrf_LicenseeGroupCommUpd" SpName="Lrf_LicenseeGroupCommUpd_UAT1" DbName="DBCUST.bodb_Licensee.bodbLicenseeNet" TimeOut="300" />
+    <Setting Key="Lrf_GroupCommGetById" SpName="Lrf_GroupCommGetById_UAT1" DbName="DBLIC.bodb_Licensee.bodbLicenseeNet">
       <Mapping DataField="Parlaycomm" ObjectProperty="ParlayComm" />
       <Mapping DataField="RNGComm" ObjectProperty="CSComm" />
       <Mapping DataField="IsDefault" ObjectProperty="IsDefaultGroup" />
     </Setting>
     <Setting Key="Lrf_GroupCommCheckByName" SpName="Lrf_GroupCommCheckByName" DbName="DBLIC.bodb_Licensee.bodbLicenseeNet" />
   </Function>
-
   <Function Name="CustomerSettings">
     <Setting Key="Lrf_CustomerUpdCasinoStatus" SpName="Lrf_CustomerUpdCasinoStatus" DbName="DBCUST.CustDB.bodbLicenseeNet" />
     <Setting Key="Lrf_CustomerSelEditCustomer" SpName="Lrf_CustomerSelEditCustomer" DbName="DBCUST.CustDB.bodbLicenseeNet" />
@@ -164,18 +156,15 @@
     <Setting Key="Acc_Dep_CustSetting_BetLimitSettingSelect" SpName="Acc_Dep_CustSetting_BetLimitSettingSelect" DbName="DBCUST.CustDB.bodbLicenseeNet" />
     <Setting Key="Acc_Dep_CustSetting_BetLimitUpd" SpName="Acc_Dep_CustSetting_BetLimitUpd" DbName="DBCUST.CustDB.bodbLicenseeNet" />
   </Function>
-
   <Function Name="CustomerSettingsThridParty">
     <Setting Key="Lrf_3rdProductSelCustStatus" SpName="Lrf_3rdProductSelCustStatus" DbName="DBLIC.bodb_Licensee.bodbLicenseeNet" />
     <Setting Key="Lrf_3rdProductUpdCustStatus" SpName="Lrf_3rdProductUpdCustStatus" DbName="DBCUST.CustDB.bodbLicenseeNet" />
   </Function>
-
   <Function Name="AG Casino">
     <Setting Key="Lrf_AGC_SelCustSetting" SpName="Lrf_AGC_SelCustSetting" DbName="DBCUST.CustDB.bodbLicenseeNet" />
     <Setting Key="Lrf_AGC_UpdCustSetting" SpName="Lrf_AGC_UpdCustSetting" DbName="DBCUST.CustDB.bodbLicenseeNet" />
     <Setting Key="Lrf_AGC_UpdCustStatus" SpName="Lrf_AGC_UpdCustStatus" DbName="DBCUST.CustDB.bodbLicenseeNet" />
   </Function>
-
   <Function Name="TotalBets">
     <Setting Key="Lrf_TotalBets_Sel1378" SpName="Lrf_TotalBets_Sel1378" DbName="DBBOF.bodb02.bodbLicenseeNet"></Setting>
     <Setting Key="Lrf_TotalBets_Sel2021" SpName="Lrf_TotalBets_Sel2021" DbName="DBBOF.bodb02.bodbLicenseeNet"></Setting>
@@ -186,7 +175,6 @@
     <Setting Key="Lrf_TotalBets_Sel14" SpName="Lrf_TotalBets_Sel14" DbName="DBBOF.bodb02.bodbLicenseeNet"></Setting>
     <Setting Key="Lrf_TotalBets_Sel121" SpName="Lrf_TotalBets_Sel121" DbName="DBBOF.bodb02.bodbLicenseeNet"></Setting>
   </Function>
-
   <Function Name="Forecast">
     <Setting Key="Lrf_Forecast_OddsSelTopByMatch" SpName="Lrf_Forecast_OddsSelTopByMatch" DbName="DBBOF.bodb02.bodbLicenseeNet"></Setting>
     <Setting Key="Lrf_Forecast_SelHDP" SpName="Lrf_Forecast_SelHDP" DbName="DBBOF.bodb02.bodbLicenseeNet"></Setting>
@@ -198,7 +186,6 @@
     <Setting Key="Lrf_Forecast_SelByLeague" SpName="Lrf_Forecast_SelByLeague" DbName="DBBOF.bodb02.bodbLicenseeNet"></Setting>
     <Setting Key="Lrf_Forecast_MatchTotalForecast" SpName="Lrf_Forecast_MatchTotalForecast" DbName="DBBOF.bodb02.bodbLicenseeNet"></Setting>
   </Function>
-
   <Function Name="Common">
     <Setting Key="Lrf_LeagueMatchSelRunning" SpName="Lrf_LeagueMatchSelRunning" DbName="DBBOF.bodb02.bodbLicenseeNet" />
     <Setting Key="Lrf_SelBetTypeBySport" SpName="Lrf_SelBetTypeBySport" DbName="DBLIC.bodb_Licensee.bodbLicenseeNet" />
@@ -208,14 +195,12 @@
     <Setting Key="Acc_ShowNotificationWhenProcessingData" SpName="Acc_ShowNotificationWhenProcessingData" DbName="DBTXN.bodb02.bodbLicenseeNet" />
     <Setting Key="Lrf_SelBetTypesByProduct" SpName="Lrf_SelBetTypesByProduct" DbName="DBLIC.bodb_Licensee.bodbLicenseeNet" />
   </Function>
-
   <Function Name="CustomerLog">
     <Setting Key="Lrf_UserLog_LoginSel" SpName="Lrf_UserLog_LoginSel" DbName="DBEXT.bodb02.bodbLicenseeNet" />
     <Setting Key="Lrf_CustomerSettingLog_Sel" SpName="Lrf_CustomerSettingLog_Sel" DbName="DBLOG.bodb_CustomerLog.bodbLicenseeNet" />
     <Setting Key="Lrf_GroupCommLog_Sel" SpName="Lrf_GroupCommLog_Sel" DbName="DBLOG.bodb_CustomerLog.bodbLicenseeNet" />
     <Setting Key="WriteLog_UserLog_UserControl" SpName="WriteLog_UserLog_UserControl" DbName="DBLOG.bodb_CustomerLog.bodbLicenseeNet" />
   </Function>
-
   <Function Name="SiteConfig">
     <Setting Key="Lrf_SubsidiarySel" SpName="Lrf_SubsidiarySel" DbName="DBCUST.SiteConfig.bodbLicenseeNet" />
     <Setting Key="Lrf_GetUserLevelInfo" SpName="Lrf_GetUserLevelInfo" DbName="DBCUST.SiteConfig.bodbLicenseeNet" />
@@ -226,7 +211,7 @@
   </Function>
   <Function Name="Customer Class">
     <Setting Key="Lrf_CustomerClassSel" SpName="Lrf_CustomerClassSel" DbName="DBCUST.CustDB.bodbLicenseeNet" />
-    <Setting Key="Lrf_CustomerClassPolicySel" SpName="Lrf_CustomerClassPolicySel_xtest" DbName="DBCUST.CustDB.bodbLicenseeNet" />
+    <Setting Key="Lrf_CustomerClassPolicySel" SpName="Lrf_CustomerClassPolicySel" DbName="DBCUST.CustDB.bodbLicenseeNet" />
     <Setting Key="Lrf_CustomerClassSitePolicySel" SpName="Lrf_CustomerClassSitePolicySel" DbName="DBCUST.CustDB.bodbLicenseeNet" />
   </Function>
 </Functions>

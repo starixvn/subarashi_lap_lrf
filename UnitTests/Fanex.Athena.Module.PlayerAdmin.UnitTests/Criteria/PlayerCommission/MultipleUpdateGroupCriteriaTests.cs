@@ -64,7 +64,6 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Criteria.PlayerCommission
             criteria.SetParameterValues(db);
 
             // Assert
-            db.Received().SetParameterValue("IsUpdateAB", true);
             db.SetParameterValue("SBComm", criteria.Comms[0]);
         }
     }

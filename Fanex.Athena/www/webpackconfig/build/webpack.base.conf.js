@@ -141,6 +141,7 @@ function generateConfig(environment) {
             [`${jsPath}/pages/playercommission/singleremovefromgroup`]: [pathConfig.scriptPaths.playercomissionsingleremovefromgroup],
             [`${jsPath}/pages/playercommission/singleupdategroup`]: [pathConfig.scriptPaths.playercomissionsingleupdategroup],
             [`${cssPath}/pages/customer/customer-class`]: pathConfig.cssPaths.customerClass,
+            [`${cssPath}/pages/components/fixedColumnsTable`]: pathConfig.cssPaths.fixedColumnsTable
         },
         output: {
             path: pathConfig.projectRoot,

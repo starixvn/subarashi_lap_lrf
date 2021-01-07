@@ -100,3 +100,12 @@ div {
         width: 50%;
     }
 }
+
+.table > tbody tr td.col-frozen {
+    background-color: #dfe1df;
+    border-color: #ffffff;
+}
+
+.fixed-table-container {
+    min-width: 1100px;
+}

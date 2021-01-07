@@ -1,4 +1,4 @@
-﻿// Generated at: 12/24/2020 3:53:33 PM
+﻿// Generated at: 1/5/2021 2:21:24 PM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -17,6 +17,7 @@ AfterBalance:"后期余额",
 AGCasino:"AG Casino",
 AGCasinoBalance:"AG Casino Balance",
 AGCasinoNotOfferCurrency:"AG Casino is not offered for this currency.",
+AgentBetInterval:"代理投注间隔(秒)",
 AH:"客主",
 Alert:"Alert",
 AlertChooseProductMsg:"请选择至少一个产品",
