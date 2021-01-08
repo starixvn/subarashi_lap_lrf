@@ -86,7 +86,7 @@ namespace Fanex.Athena.Controllers.Customer
         #region Action
 
         [HttpGet]
-        public async Task<ActionResult> CustomerList(string userName = "", int groupId = -1)
+        public ActionResult CustomerList(string userName = "", int groupId = -1)
         {
             var licensee = SessionServiceInstance.LicenseeSession;
             var userSession = SessionServiceInstance.UserSession;

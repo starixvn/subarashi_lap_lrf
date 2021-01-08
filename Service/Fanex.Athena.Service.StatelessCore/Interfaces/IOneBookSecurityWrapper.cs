@@ -2,7 +2,9 @@
 {
     using Fanex.Athena.Model.Auth;
     using LAP.ONEBook.Security;
+    using System;
 
+    [CLSCompliant(false)]
     public interface IOneBookSecurityWrapper
     {
         DefaultAuthInfo<OneAuthPermission, OneAuthCurrency> Authenticate(string token);
