@@ -1,4 +1,4 @@
-﻿// Generated at: 1/5/2021 2:21:04 PM
+﻿// Generated at: 1/7/2021 3:55:52 PM
 var _language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -547,8 +547,8 @@ ProductParlay:"体育串关",
 ProductPP:"PP王者电子",
 ProductSAG:"SA真人娱乐场",
 ProductSB:"体育博彩",
+ProductSBVS:"沙巴虚拟赛事",
 ProductSG:"新霸电子",
-ProductSVS:"沙巴虚拟赛事",
 ProductSXG:"AE真人",
 ProductTG:"桌面游戏",
 ProductVB:"澳门电子娱乐城",

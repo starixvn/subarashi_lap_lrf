@@ -3927,6 +3927,10 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         alert(message);
       }
     });
+
+    this.state = {
+      isSeparateSabaWinLoss: 0
+    };
   }
 
   get isValidModel() {
@@ -3956,6 +3960,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       ToDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_9__["default"].convertDateToString(toDate),
       IncludeRaw: this.props.includeDrawData,
       IsExcludeTest: this.props.isExcludeTest,
+      IsSeparateSabaWinLoss: this.state.isSeparateSabaWinLoss,
       Timestamp: new Date().getTime(),
       Level: _constants_report__WEBPACK_IMPORTED_MODULE_12__["ReportLevel"].MAIN
     };
@@ -4031,6 +4036,12 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     });
   }
 
+  _changeIsSeparateSabaWinLoss(newValue) {
+    this.setState({
+      isSeparateSabaWinLoss: newValue
+    });
+  }
+
   render() {
     let subsidiaryDropdown = false;
 
@@ -4044,24 +4055,41 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       }, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].viewType === _constants_report__WEBPACK_IMPORTED_MODULE_12__["SubsidiaryViewType"].MASTER_MANAGEMENT ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("WhiteLabel") : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("Subsidiary")), this._renderSubsidiarySelectList()));
     }
 
+    let disableSeparateSabaWinLoss = `,${this.props.selectedProduct},`.toLowerCase().indexOf(',sb,') == -1;
+    let separateSabaWinLoss = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-md-2 col-sm-6 col-lg-3 col-xl-3"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "form-group"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "checkbox-group"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      disabled: disableSeparateSabaWinLoss,
+      type: "checkbox",
+      className: "checkbox",
+      checked: this.props.isSeparateSabaWinLoss,
+      id: "SeparateSabaWinLoss",
+      onChange: () => this._changeIsSeparateSabaWinLoss(!this.state.isSeparateSabaWinLoss)
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      htmlFor: "SeparateSabaWinLoss"
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("SeparateSabaWinLoss")))));
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "page-filter"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "row"
     }, subsidiaryDropdown, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: `col-12 col-md-4 ${subsidiaryDropdown ? 'col-sm-6' : 'col-sm-5'} col-lg-3 col-xl-3`
+      className: `col-12 col-md-4 ${subsidiaryDropdown ? 'col-sm-6' : 'col-sm-5'} col-lg-3 col-xl-2`
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       className: "label-text"
     }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("Date")), this._renderDateRange())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: `col-12 col-md-3 ${subsidiaryDropdown ? 'col-sm-5' : 'col-sm-4'} col-lg-3 col-xl-3`
+      className: `col-12 col-md-3 ${subsidiaryDropdown ? 'col-sm-5' : 'col-sm-4'} col-lg-3 col-xl-2`
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       className: "label-text"
     }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("Product")), this._renderProductSelectList())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: `col-12 ${subsidiaryDropdown ? 'col-sm-4 col-md-2' : 'col-sm-3 col-md-3'} col-lg-2 col-xl-2`
+      className: `col-12 ${subsidiaryDropdown ? 'col-sm-4 col-md-2' : 'col-sm-3 col-md-3'} col-lg-3 col-xl-3`
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -4069,7 +4097,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("BaseCurrency")), this._renderBaseCurrencySelectList()))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "row"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: `col-12 ${subsidiaryDropdown ? 'col-md-3' : 'col-md-4'} col-sm-5 col-lg-3 col-xl-3`
+      className: `col-12 ${subsidiaryDropdown ? 'col-md-3 col-xl-3' : 'col-md-4 col-xl-2'} col-sm-5 col-lg-3`
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -4083,7 +4111,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       htmlFor: "IsConvertAll"
     }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("ConvertAllFiguresToBaseCurrency"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: `col-12 ${subsidiaryDropdown ? 'col-md-4 col-sm-6' : 'col-md-3 col-sm-4'} col-lg-3 col-xl-3`
+      className: `col-12 ${subsidiaryDropdown ? 'col-md-4 col-sm-6' : 'col-md-3 col-sm-4'} col-lg-3 col-xl-2`
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -4097,7 +4125,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       htmlFor: "IncludeDrawData"
     }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("IncludeDrawData"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: `col-12 ${subsidiaryDropdown ? 'col-sm-5 col-lg-3 col-xl-3' : 'col-sm-3 col-lg-2 col-xl-2'} col-md-3`
+      className: `col-12 ${subsidiaryDropdown ? 'col-sm-5 col-lg-3 col-xl-2' : 'col-sm-3 col-lg-2 col-xl-3'} col-md-3`
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -4110,10 +4138,10 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       onChange: () => this.props.changeIsExcludeTest(!this.props.isExcludeTest)
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       htmlFor: "ExcludeTest"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("ExcludeTestData"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("ExcludeTestData"))))), separateSabaWinLoss, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-12 col-md-2 col-sm-4 col-lg-2 col-xl-2"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "button-group"
+      className: "button-group btn-submit-container"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       disabled: !this.isValidModel,
       type: "button",

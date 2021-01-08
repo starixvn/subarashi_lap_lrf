@@ -31,6 +31,7 @@
             using (var objectDb = GetObjectDb(SpName))
             {
                 AssignParameter(objectDb, metaModel);
+                objectDb.SetParameterValue("SeparateSabaVS", metaModel.IsSeparateSabaWinLoss);
 
                 using (var reader = await objectDb.ExecuteReaderAsync().ConfigureAwait(false))
                 {

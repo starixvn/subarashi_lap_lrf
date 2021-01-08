@@ -2153,9 +2153,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                 $('.body-content').on('click', Selector.viewDetail, function () {
                     _me.viewMatchWinlossDetail(this);
                 })
-                .on('click', '.bet-list-link', function () {
-                    _me.viewMatchWinlossBetList(this);
-                });
+                    .on('click', '.bet-list-link', function () {
+                        _me.viewMatchWinlossBetList(this);
+                    });
 
                 $('.footer-content').on('click', '.outright-link', function () {
                     const bettype = $(this).data('bettype');
@@ -2264,8 +2264,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
             viewOutrightMixParlay: function (betType) {
                 const date = $(Selector.date).attr('data-original');
                 let url = betType === 10
-                            ? Site.resolveClientUrl('MatchWinlossBetList/Outright')
-                            : Site.resolveClientUrl('MatchWinlossBetList/MixParlay');
+                    ? Site.resolveClientUrl('MatchWinlossBetList/Outright')
+                    : Site.resolveClientUrl('MatchWinlossBetList/MixParlay');
+
                 url = Site.setLicenseeOptionOriginalParam(url);
                 url = QueryString.setParam(url, 'fromdate', date);
                 url = QueryString.setParam(url, 'todate', date);
@@ -2310,6 +2311,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
         return _me;
     }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
 
 /***/ }),
 

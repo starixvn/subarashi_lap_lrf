@@ -5569,20 +5569,20 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Saba Virtual Sports.
+        /// </summary>
+        public static string ProductSBVS {
+            get {
+                return ResourceManager.GetString("ProductSBVS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SG.
         /// </summary>
         public static string ProductSG {
             get {
                 return ResourceManager.GetString("ProductSG", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Saba Virtual Sports.
-        /// </summary>
-        public static string ProductSVS {
-            get {
-                return ResourceManager.GetString("ProductSVS", resourceCulture);
             }
         }
         
@@ -6078,6 +6078,15 @@ namespace Fanex.Athena.Resources {
         public static string Sep {
             get {
                 return ResourceManager.GetString("Sep", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Separate Saba Virtual Sports from Sportsbook.
+        /// </summary>
+        public static string SeparateSabaWinLoss {
+            get {
+                return ResourceManager.GetString("SeparateSabaWinLoss", resourceCulture);
             }
         }
         

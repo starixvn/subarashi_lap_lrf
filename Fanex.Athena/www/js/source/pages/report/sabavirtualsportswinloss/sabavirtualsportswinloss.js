@@ -433,7 +433,7 @@
 
                 const newProductOptions = productOptions.reverse(); //make orders of product columns like excel file
 
-                newProductOptions.forEach(function (product, i) { if (product.Code === 'SB') newProductOptions[i].Name = Site.getSingleResource('ProductSVS'); });
+                newProductOptions.forEach(function (product, i) { if (product.Code === 'SB') newProductOptions[i].Name = Site.getSingleResource('ProductSBVS'); });
 
                 const numOfTotalRow = response.Total.length;
                 let onPaging = false;

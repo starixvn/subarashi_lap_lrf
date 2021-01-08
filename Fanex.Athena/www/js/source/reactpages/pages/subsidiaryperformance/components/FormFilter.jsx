@@ -19,6 +19,7 @@ const RANGE_MONTH_CONSTRAINT = 3;
 export class FormFilter extends Component {
     constructor(props) {
         super(props);
+        this.state = { isSeparateSabaWinLoss: 0 };
     }
 
     get isValidModel() {
@@ -86,6 +87,7 @@ export class FormFilter extends Component {
             ToDate: Site.convertDateToString(toDate),
             IncludeRaw: this.props.includeDrawData,
             IsExcludeTest: this.props.isExcludeTest,
+            IsSeparateSabaWinLoss: this.state.isSeparateSabaWinLoss,
             Timestamp: new Date().getTime(),
             Level: ReportLevel.MAIN
         }
@@ -134,17 +136,17 @@ export class FormFilter extends Component {
         }
 
         return <TreeViewSelect
-                language={LangHelper.currentLanguage}
-                id="SubsidiaryTreeView"
-                dataSource={subsidiaryList}
-                keyField="Value"
-                valueField="Name"
-                statusField="Checked"
-                texts={{ SelectOptions: "Please select", All: "All", SelectedItemCount: "# selected" }}
-                isAllTextShown={false}
-                hasSearchBox={false}
-                treeViewOption={treeViewOption}
-                onChange={this.subsidiaryChangeHandler} />;
+            language={LangHelper.currentLanguage}
+            id="SubsidiaryTreeView"
+            dataSource={subsidiaryList}
+            keyField="Value"
+            valueField="Name"
+            statusField="Checked"
+            texts={{ SelectOptions: "Please select", All: "All", SelectedItemCount: "# selected" }}
+            isAllTextShown={false}
+            hasSearchBox={false}
+            treeViewOption={treeViewOption}
+            onChange={this.subsidiaryChangeHandler} />;
     }
 
     _renderProductSelectList() {
@@ -184,19 +186,35 @@ export class FormFilter extends Component {
         )
     }
 
+    _changeIsSeparateSabaWinLoss(newValue) {
+        this.setState({ isSeparateSabaWinLoss: newValue });
+    }
+
     render() {
         let subsidiaryDropdown = false;
         if (AppData.viewType !== SubsidiaryViewType.NOT_MANAGEMENT) {
             subsidiaryDropdown =
                 (<div className="col-12 col-md-3 col-sm-5 col-lg-3 col-xl-3">
-                <div className="form-group">
-                    <label className="label-text">
-                        {AppData.viewType === SubsidiaryViewType.MASTER_MANAGEMENT ? LangHelper.getSingleResource("WhiteLabel") : LangHelper.getSingleResource("Subsidiary")}
-                    </label>
+                    <div className="form-group">
+                        <label className="label-text">
+                            {AppData.viewType === SubsidiaryViewType.MASTER_MANAGEMENT ? LangHelper.getSingleResource("WhiteLabel") : LangHelper.getSingleResource("Subsidiary")}
+                        </label>
                         {this._renderSubsidiarySelectList()}
                     </div>
-                </div>)
+                </div>);
         }
+
+        let disableSeparateSabaWinLoss = `,${this.props.selectedProduct},`.toLowerCase().indexOf(',sb,') == -1;
+        let separateSabaWinLoss =
+            (<div className='col-md-2 col-sm-6 col-lg-3 col-xl-3'>
+                <div className="form-group">
+                    <div className="checkbox-group">
+                        <input disabled={disableSeparateSabaWinLoss} type="checkbox" className="checkbox" checked={this.props.isSeparateSabaWinLoss} id="SeparateSabaWinLoss"
+                            onChange={() => this._changeIsSeparateSabaWinLoss(!this.state.isSeparateSabaWinLoss)} />
+                        <label htmlFor="SeparateSabaWinLoss">{LangHelper.getSingleResource("SeparateSabaWinLoss")}</label>
+                    </div>
+                </div>
+            </div>);
 
         return (
             <div className="page-filter">
@@ -204,21 +222,21 @@ export class FormFilter extends Component {
 
                     {subsidiaryDropdown}
 
-                    <div className={`col-12 col-md-4 ${subsidiaryDropdown ? 'col-sm-6' : 'col-sm-5'} col-lg-3 col-xl-3`}>
+                    <div className={`col-12 col-md-4 ${subsidiaryDropdown ? 'col-sm-6' : 'col-sm-5'} col-lg-3 col-xl-2`}>
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource("Date")}</label>
                             {this._renderDateRange()}
                         </div>
                     </div>
 
-                    <div className={`col-12 col-md-3 ${subsidiaryDropdown ? 'col-sm-5' : 'col-sm-4'} col-lg-3 col-xl-3`}>
+                    <div className={`col-12 col-md-3 ${subsidiaryDropdown ? 'col-sm-5' : 'col-sm-4'} col-lg-3 col-xl-2`}>
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource("Product")}</label>
                             {this._renderProductSelectList()}
                         </div>
                     </div>
 
-                    <div className={`col-12 ${subsidiaryDropdown ? 'col-sm-4 col-md-2' : 'col-sm-3 col-md-3'} col-lg-2 col-xl-2`}>
+                    <div className={`col-12 ${subsidiaryDropdown ? 'col-sm-4 col-md-2' : 'col-sm-3 col-md-3'} col-lg-3 col-xl-3`}>
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource("BaseCurrency")}</label>
                             {this._renderBaseCurrencySelectList()}
@@ -227,7 +245,7 @@ export class FormFilter extends Component {
                 </div>
 
                 <div className="row">
-                    <div className={`col-12 ${subsidiaryDropdown ? 'col-md-3' : 'col-md-4'} col-sm-5 col-lg-3 col-xl-3`}>
+                    <div className={`col-12 ${subsidiaryDropdown ? 'col-md-3 col-xl-3' : 'col-md-4 col-xl-2'} col-sm-5 col-lg-3`}>
                         <div className="form-group">
                             <div className="checkbox-group">
                                 <input type="checkbox" className="checkbox" checked={this.props.convertAll} id="IsConvertAll"
@@ -237,7 +255,7 @@ export class FormFilter extends Component {
                         </div>
                     </div>
 
-                    <div className={`col-12 ${subsidiaryDropdown ? 'col-md-4 col-sm-6' : 'col-md-3 col-sm-4'} col-lg-3 col-xl-3`}>
+                    <div className={`col-12 ${subsidiaryDropdown ? 'col-md-4 col-sm-6' : 'col-md-3 col-sm-4'} col-lg-3 col-xl-2`}>
                         <div className="form-group">
                             <div className="checkbox-group">
                                 <input type="checkbox" className="checkbox" checked={this.props.includeDrawData} id="IncludeDrawData"
@@ -247,7 +265,7 @@ export class FormFilter extends Component {
                         </div>
                     </div>
 
-                    <div className={`col-12 ${subsidiaryDropdown ? 'col-sm-5 col-lg-3 col-xl-3' : 'col-sm-3 col-lg-2 col-xl-2'} col-md-3`}>
+                    <div className={`col-12 ${subsidiaryDropdown ? 'col-sm-5 col-lg-3 col-xl-2' : 'col-sm-3 col-lg-2 col-xl-3'} col-md-3`}>
                         <div className="form-group">
                             <div className="checkbox-group">
                                 <input type="checkbox" className="checkbox" checked={this.props.isExcludeTest} id="ExcludeTest"
@@ -257,8 +275,10 @@ export class FormFilter extends Component {
                         </div>
                     </div>
 
+                    {separateSabaWinLoss}
+
                     <div className="col-12 col-md-2 col-sm-4 col-lg-2 col-xl-2">
-                        <div className="button-group">
+                        <div className="button-group btn-submit-container">
                             <button disabled={!this.isValidModel} type="button" className="btn btn-submit" onClick={this.submit}>{LangHelper.getSingleResource("Submit")}</button>
                         </div>
                     </div>

@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 1/5/2021 2:21:24 PM
+﻿// Generated at: 1/7/2021 3:56:08 PM
 window._language_zh_Hans = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -552,7 +552,7 @@ ProductNG:"百练赛",
 ProductParlay:"体育串关",
 ProductPP:"PP王者电子",
 ProductSB:"体育博彩",
-ProductSVS:"沙巴虚拟赛事",
+ProductSBVS:"沙巴虚拟赛事",
 ProductSXG:"AE真人",
 ProductVRG:"虚拟娱乐城",
 ProductVS:"虚拟运动",
