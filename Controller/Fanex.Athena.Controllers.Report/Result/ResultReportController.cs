@@ -243,6 +243,23 @@
         }
 
         [HttpGet]
+        public async Task<ActionResult> GDG(string custId, string transId3rd, string gameId3rd, string siteId)
+        {
+            var language = SessionServiceInstance.UserSession.Language;
+            var model = new
+            {
+                custId,
+                transId3rd,
+                gameId3rd,
+                siteId,
+                languageCode = language
+            };
+            var data = await _betListApiClient.PostStringAsync("/GDGResultPopup/Index", model, language).ConfigureAwait(false);
+            ViewBag.Data = data.Replace("{rootUrl}", HttpRuntime.AppDomainAppVirtualPath.TrimEnd('/'));
+            return View("~/Views/Desktop/Report/Result/Popup/GDG.cshtml");
+        }
+
+        [HttpGet]
         public async Task<string> GlobalGamingResult(string custId, string gameId)
         {
             var model = new

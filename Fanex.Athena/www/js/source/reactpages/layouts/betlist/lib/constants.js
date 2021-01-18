@@ -24,5 +24,6 @@ export const SportType = {
     SBC_FreeBets: 150,
     SAG: 244,
     PGS: 232,
-    Happy5LinkedGames: 168
+    Happy5LinkedGames: 168,
+    GDG: 236
 }

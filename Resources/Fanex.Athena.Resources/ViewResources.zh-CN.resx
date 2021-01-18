@@ -2571,6 +2571,9 @@
   <data name="ProductSBVS" xml:space="preserve">
     <value>沙巴虚拟赛事</value>
   </data>
+  <data name="ProductGDG" xml:space="preserve">
+    <value>金大门</value>
+  </data>
   <data name="Category" xml:space="preserve">
     <value>类别</value>
   </data>

@@ -160,6 +160,7 @@
     <Compile Include="JackpotWonBetListController.cs" />
     <Compile Include="PGSoftBetListController.cs" />
     <Compile Include="JokerBetListController.cs" />
+    <Compile Include="GDGBetListController.cs" />
     <Compile Include="SexyGamingBetListController.cs" />
     <Compile Include="SAGamingBetListController.cs" />
     <Compile Include="SabaClubBetListController.cs" />

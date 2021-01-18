@@ -72,6 +72,8 @@ namespace Fanex.Athena.Model.Core.DTO.Common
 
         public const string JK = "JK";
 
+        public const string GDG = "GDG";
+
         #endregion Field
 
         #region Constructor
