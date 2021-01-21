@@ -144,6 +144,17 @@ namespace Fanex.Athena.Service.StatelessCore.Utility
             }
         }
 
+        public static void MapLicenseeInfo(IDictionary<string, object> actionArguments)
+        {
+            var item = actionArguments.FirstOrDefault(x => x.Value is ILicenseeInfoMetaModel);
+            if (item.Value is ILicenseeInfoMetaModel model)
+            {
+                model.SiteName = actionArguments["sitename"] as string;
+                model.LicenseeId = (int)actionArguments["licenseeid"];
+                actionArguments[item.Key] = model;
+            }
+        }
+
         public static void MapLanguage(IDictionary<string, object> actionArguments)
         {
             if (actionArguments.ContainsKey("language")

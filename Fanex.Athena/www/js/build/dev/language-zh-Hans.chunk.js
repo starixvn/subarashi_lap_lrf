@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 3/15/2021 4:20:32 PM
+﻿// Generated at: 4/9/2021 4:33:27 PM
 window._language_zh_Hans = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -339,6 +339,7 @@ Group:"组",
 GroupBy:"分组方式",
 GroupColor:"组别颜色",
 GroupCommission:"佣金组别",
+GroupCommission_2:"佣金组别",
 GroupCommNote:"若默认组已被选择, 所有新注册之会员将被自动分配至此佣金组。这将不会对现有的会员进行任何更改。",
 GroupId:"组别ID",
 GroupName:"组别名称",

@@ -11,9 +11,7 @@ export const getBaStatusText = (value) => {
 }
 
 export const getPlayerStatus = (value) => {
-    const displayedValue = playerStatus[value];
-
-    return displayedValue || '';
+    return playerStatus[value] || '';
 }
 
 export const buildDisplayedColumnObject = (displayedColumnList) => {

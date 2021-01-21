@@ -1,5 +1,5 @@
 ﻿import FactoryCommonService from '../../../../lib/factoryCommonService';
-import { apiInfo } from '../constants';
+import { apiInfo, isDepositedList } from '../constants';
 
 import ReportExcel from '../reportExcel';
 import QueryServiceFactory from './queryServiceFactory';
@@ -16,6 +16,10 @@ export default class PlayerQueryService {
 
     getPlayerList(param) {
         const playerListService = QueryServiceFactory.getPlayerListService(param, this.commonService);
+
+        param.ip = param.ipLogin;
+        param.deposited = this.getDepositedName(param.isDeposited);
+
         return playerListService.fetchData(param, this.commonService, apiInfo);
     }
 
@@ -25,6 +29,17 @@ export default class PlayerQueryService {
 
     getLink(systemType, action) {
         return this.commonService.getLink(systemType, action);
+    }
+
+    getDepositedName(isDeposited) {
+        switch (isDeposited) {
+            case isDepositedList.All:
+                return "All";
+            case isDepositedList.No:
+                return "No";
+            default:
+                return "Yes";
+        }
     }
 
     exportExcel(playerList, param, displayedColumn, hasCommPermissionRead, fileName = 'PlayerList') {

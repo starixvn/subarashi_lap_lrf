@@ -32,11 +32,13 @@ export default class CustomerClassCell extends React.Component {
 
         return (<>
             {this.props.text}&nbsp;&nbsp;<div class="icon-info" onClick={this.showCustomerClassInformation}></div>
-            <Popup width={1000} height={600} isShow={this.state.isShowCustomerClassInformation}
-                title={LangHelper.getSingleResource('CustomerClassInformation')}
-                onClose={this.closeCustomerClassInfomation}
-                onClick={this.clickOnPopup} isHtml="false"
-                iframeUrl={commonService.getLink(lrfSystemId, url)}></Popup>
+            {this.state.isShowCustomerClassInformation
+                ? (<Popup width={1000} height={600} isShow="true"
+                    title={LangHelper.getSingleResource('CustomerClassInformation')}
+                    onClose={this.closeCustomerClassInfomation}
+                    onClick={this.clickOnPopup} isHtml="false"
+                    iframeUrl={commonService.getLink(lrfSystemId, url)}></Popup>)
+                : ""}
         </>);
     }
 }

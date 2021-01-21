@@ -6,17 +6,21 @@ import CheckBox from '@jsroot/components/CheckBox';
 import AdvancedSearch from './filter/AdvancedSearch';
 import SearchOption from './filter/SearchOption';
 import AthenaSearch from './filter/AthenaSearch';
-import { licenseeType } from '../lib/constants';
 import CollapsiblePanel from '@jsroot/components/collapsible-panel';
 import UserGuide from '@jsroot/components/UserGuide';
 import LangHelper from '@jsroot/lib/langHelper';
-import { searchOptions, baStatusList, specialLevelListWithColor, emailPattern, oddsGroupListWithStyle } from '../lib/constants';
+import {
+    licenseeType, searchOptions, baStatusList,
+    specialLevelListWithColor, emailPattern, oddsGroupListWithStyle,
+    isDepositedList
+} from '../lib/constants';
 
 import UserNameInput from './filter/UserNameInput';
 import QueryString from '@jsroot/lib/QueryString';
 import { encode } from '@jsroot/lib/htmlHelper';
 import LicAthenaUserGuide from '../../userGuide/LicAthenaUserGuide';
 import LicApiUserGuide from '../../userGuide/LicApiUserGuide';
+import Select from 'react-select';
 
 export class FormFilter extends PureComponent {
     constructor(props) {
@@ -25,13 +29,16 @@ export class FormFilter extends PureComponent {
         this.allOddsGroupString = Object.keys(oddsGroupListWithStyle).join(',');
         this.allCurrencyString = props.currencyList.map(c => c.Id).join(',');
         this.allSpecialLevel = Object.keys(specialLevelListWithColor).map(item => item).join(',');
+        this.isDepositedList = Object.keys(isDepositedList).map(item => ({ value: isDepositedList[item], label: LangHelper.getSingleResource(item) }));
 
         this.userGuide = this._renderUserGuide();
         this.userNameRef = React.createRef();
 
         this.state = {
-            bankAccountNumber: '',
-            email: '',
+            bankAccountNumber: "",
+            email: "",
+            ipLogin: "",
+            isDeposited: isDepositedList["All"],
             currencyIdList: this.allCurrencyString,
             oddsGroup: this.allOddsGroupString,
             specialLevel: this.allSpecialLevel,
@@ -39,8 +46,11 @@ export class FormFilter extends PureComponent {
             searchOption: searchOptions.matchPrecise,
             isMatchPrecise: true,
             customerClass: "",
-            changeOnCustomerClass: false
-        }
+            changeOnCustomerClass: false,
+
+            commGroups: "",
+            changeOnCommGroups: false
+        };
     }
 
     componentDidMount() {
@@ -56,7 +66,7 @@ export class FormFilter extends PureComponent {
 
         const { type, isSubsidiary, hasCommPermissionRead } = this.props;
         this.props.getSiteSetting(type, isSubsidiary, hasCommPermissionRead);
-        this.props.getLRFFilters();
+        this.props.getLRFFilters({ hasCommPermissionRead });
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -67,18 +77,22 @@ export class FormFilter extends PureComponent {
                 oddsGroup: this.allOddsGroupString,
                 specialLevel: this.allSpecialLevel,
                 baFilter: baStatusList.All,
+
                 customerClass: this.props.lrfFilters.CustomerClass.join(','),
-                changeOnCustomerClass: false
+                changeOnCustomerClass: false,
+                commGroups: this.props.lrfFilters.CommGroups.map(c => c.Id).join(','),
+                changeOnCommGroups: false
             });
         }
     }
 
     searchPlayer() {
-        const { email } = this.state
+        const { email } = this.state;
         if (email && !(new RegExp(emailPattern).test(email))) {
             window.alert(LangHelper.getSingleResource('InvalidEmail'));
             return;
         }
+
         const userName = this.userNameRef.current.value;
         const { pagingOption, searchPlayer, currencyList } = this.props;
         const { specialLevel, currencyIdList, oddsGroup, ...restParam } = this.state;
@@ -89,6 +103,9 @@ export class FormFilter extends PureComponent {
         const actualCustomerClass = restParam.customerClass.trim().split(',').length === this.props.lrfFilters.CustomerClass.length
             ? '' : restParam.customerClass;
 
+        const actualCommGroups = this.state.changeOnCommGroups
+            ? restParam.commGroups : this.props.lrfFilters.CommGroups.map(c => c.Id).join(",");
+
         const param = {
             ...restParam,
             userName: encode(userName),
@@ -96,6 +113,8 @@ export class FormFilter extends PureComponent {
             oddsGroup: actualOddsGroup,
             specialLevel: actualSpecialLevel,
             customerClass: actualCustomerClass,
+            changeOnCommGroups: actualCommGroups.split(',').length != this.props.lrfFilters.CommGroups.length,
+            commGroups: actualCommGroups,
             pageSize: pagingOption.PageSize,
             pageIndex: 1
         };
@@ -106,13 +125,13 @@ export class FormFilter extends PureComponent {
     handleSubmit = (event) => {
         event.preventDefault();
         this.searchPlayer();
-    }
+    };
 
     handlePressEnter = (event) => {
         if (event.charCode === 13) {
             this.searchPlayer();
         }
-    }
+    };
 
     handleChange = (event) => {
         const { name, value } = event.target;
@@ -122,19 +141,24 @@ export class FormFilter extends PureComponent {
         }
 
         this.setState({ [name]: value });
-    }
+    };
 
     handleSpecificInputChange = (name, value) => {
-        if (name === "customerClass") {
-            this.setState({ changeOnCustomerClass: true });
+        switch (name) {
+            case "customerClass":
+                this.setState({ changeOnCustomerClass: true });
+                break;
+            case "commGroups":
+                this.setState({ changeOnCommGroups: true });
+                break;
         }
 
         this.setState({ [name]: value });
-    }
+    };
 
     handleUserNameChange = (value) => {
         this.userNameRef.current.value = value;
-    }
+    };
 
     _renderContentUserGuide() {
         const currentLang = LangHelper.currentLanguage;
@@ -157,12 +181,14 @@ export class FormFilter extends PureComponent {
     }
 
     render() {
-        const { bankAccountNumber, email, searchOption, ...advancedSearchParam } = this.state;
+        const { bankAccountNumber, email, searchOption, ipLogin, isDeposited, ...advancedSearchParam } = this.state;
         const { type, isAdvancedSearch, isFilterCollapsing, currencyList, getSuggestionList, siteSetting } = this.props;
         const { currencyIdList, oddsGroup, specialLevel } = advancedSearchParam;
 
         const isValidParam = !!currencyIdList && !!oddsGroup && !!specialLevel &&
-			!(this.state.changeOnCustomerClass && !this.state.customerClass); 
+            !(this.state.changeOnCustomerClass && !this.state.customerClass) &&
+            !(this.state.changeOnCommGroups && !this.state.commGroups);
+
         const iconToggle = {
             tag: 'div',
             className: isFilterCollapsing ? 'chevron down' : 'chevron up',
@@ -188,7 +214,20 @@ export class FormFilter extends PureComponent {
                     {type === licenseeType.nonApi && <AthenaSearch onChange={this.handleChange}
                         bankAccountNumber={bankAccountNumber}
                         email={email}
+                        ipLogin={ipLogin}
                         onKeyPress={this.handlePressEnter} />}
+
+                    <div className="hide col-12 col-md-3 col-sm-3 col-lg-2 col-xl-1">
+                        <div className="form-group">
+                            <label className="label-text">{LangHelper.getSingleResource("Deposited")}</label>
+                            <Select instanceId='ddlDeposited'
+                                name='form-field-name'
+                                value={isDeposited}
+                                options={this.isDepositedList}
+                                onChange={(item) => this.handleSpecificInputChange('isDeposited', item.value)} />
+                        </div>
+                    </div>
+
                     {isAdvancedSearch && <AdvancedSearch
                         currencyList={currencyList}
                         param={advancedSearchParam}

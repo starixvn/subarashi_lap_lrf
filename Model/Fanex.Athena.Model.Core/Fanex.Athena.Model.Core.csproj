@@ -141,6 +141,7 @@
     <Compile Include="Helper\ProductHelper.cs" />
     <Compile Include="MetaModel\Common\SPLogMetaModel.cs" />
     <Compile Include="MetaModel\CurrencyValidationOption.cs" />
+    <Compile Include="MetaModel\ILicenseeInfoMetaModel.cs" />
     <Compile Include="MetaModel\IMetalModelCustomerIdentity.cs" />
     <Compile Include="MetaModel\IMetaModelAgent.cs" />
     <Compile Include="MetaModel\IMetaModelBalanceUpAndMoveBet.cs" />

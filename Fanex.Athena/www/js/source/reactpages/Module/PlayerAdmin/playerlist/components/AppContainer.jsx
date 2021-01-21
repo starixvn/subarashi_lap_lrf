@@ -5,7 +5,6 @@ import FormFilter from './FormFilter';
 import Loader from '@jsroot/components/Loader';
 import AppLayout from '@jsroot/layouts/AppLayout';
 import PlayerDetail from './PlayerDetail';
-import hasCommPermissionRead from '../reducers/filterHandlerReducer';
 
 export const AppContainer = (props) => {
     return (

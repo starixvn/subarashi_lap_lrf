@@ -71,7 +71,8 @@ export class DataGrid extends PureComponent {
             return <NoDataTitle />;
         }
 
-        const dataList = selectedPlayer ? [playerList.find(item => item.LicenseeCustId === selectedPlayer.licenseeCustId)] : playerList;
+        const dataList = selectedPlayer
+            ? [playerList.find(item => item.LicenseeCustId === selectedPlayer.licenseeCustId)] : playerList;
         const displayedColumn = buildDisplayedColumnObject(displayedColumnList);
         const canSelectPlayers = hasCommPermissionEdit;
 

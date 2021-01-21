@@ -47,6 +47,9 @@
     <Reference Include="Autofac.Integration.WebApi, Version=4.3.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Autofac.WebApi2.4.3.1\lib\net45\Autofac.Integration.WebApi.dll</HintPath>
     </Reference>
+    <Reference Include="Fanex.Common, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Fanex.Common.1.1.0.1\lib\net40\Fanex.Common.dll</HintPath>
+    </Reference>
     <Reference Include="Fanex.Data, Version=4.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Fanex.Data.4.2.0\lib\net461\Fanex.Data.dll</HintPath>
     </Reference>
@@ -107,6 +110,7 @@
     <Compile Include="DTO\PlayerBettingStatistics.cs" />
     <Compile Include="Extensions\CommonCustomerSettingLogFactory.cs" />
     <Compile Include="Extensions\CommonCustomerSettingLogBuilder.cs" />
+    <Compile Include="MetaModel\LRFFiltersMetaModel.cs" />
     <Compile Include="MetaModel\PlayerActivityRecordMetaModel.cs" />
     <Compile Include="MetaModel\PlayerBettingStatisticsMetaModel.cs" />
     <Compile Include="MetaModel\PlayerListBaseMetaModel.cs" />
@@ -140,6 +144,7 @@
     <Compile Include="DataDomains\LogActionDetailId.cs" />
     <Compile Include="DataDomains\LogText.cs" />
     <Compile Include="Utilities\ResourceKeyConstants.cs" />
+    <Compile Include="ViewModels\CommGroupViewModel.cs" />
     <Compile Include="ViewModels\LRFFiltersViewModel.cs" />
     <Compile Include="ViewModels\PlayerListResultViewModel.cs" />
     <Compile Include="ViewModels\SiteSettingViewModel.cs" />
@@ -164,6 +169,10 @@
     <ProjectReference Include="..\..\Model\Fanex.Athena.Model.Core\Fanex.Athena.Model.Core.csproj">
       <Project>{5F410090-94C0-46A5-9FEC-B6C3B745B7A0}</Project>
       <Name>Fanex.Athena.Model.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Resources\Fanex.Athena.Resources\Fanex.Athena.Resources.csproj">
+      <Project>{17B0022C-4902-4C61-908A-5DB81568DC3A}</Project>
+      <Name>Fanex.Athena.Resources</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Service\Fanex.Athena.Service.StatelessCore\Fanex.Athena.Service.StatelessCore.csproj">
       <Project>{da9a50e3-c62d-4f12-96c2-3ac289d423fe}</Project>

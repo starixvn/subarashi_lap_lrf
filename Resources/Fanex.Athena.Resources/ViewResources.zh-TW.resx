@@ -2132,4 +2132,7 @@
   <data name="ProductSLT" xml:space="preserve">
     <value>體育時時彩</value>
   </data>
+    <data name="GroupCommission_2" xml:space="preserve">
+    <value>佣金組別</value>
+  </data>
 </root>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Fanex.Athena.Extension.Utility.Interfaces;
 using Fanex.Athena.Module.PlayerAdmin.Api.DTO;
@@ -21,7 +22,11 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
         public PlayerListResultViewModel Search(PlayerSearchingMetaModel metaModel)
         {
             const string SpKey = "Lrf_CustomerSelByUsername";
-            var result = new PlayerListResultViewModel();
+            var result = new PlayerListResultViewModel { DataList = new List<Player>() };
+            if (metaModel.IsDeposited == 0)
+            {
+                return result;
+            }
 
             using (var objectDb = _dbFactory.GetObjectDb(SpKey))
             {
@@ -70,11 +75,36 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
             return result;
         }
 
+        public List<CommGroupViewModel> GetAllCommGroups(int licenseeId)
+        {
+            var result = new List<CommGroupViewModel>();
+
+            using (var objectDb = _dbFactory.GetObjectDb("Lrf_LicenseeGroupCommSel"))
+            {
+                objectDb.AssignParamValues(new Hashtable { ["LicenseeID"] = licenseeId });
+
+                using (var reader = objectDb.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        result.Add(new CommGroupViewModel
+                        {
+                            Id = Common.Converter.ToString2(reader["GroupCommId"]),
+                            Name = Common.Converter.ToString2(reader["GroupName"])
+                        });
+                    }
+                }
+            }
+
+            return result;
+        }
+
         private static void AssignCommonParam(IObjectDb objectDb, PlayerListBaseMetaModel metaModel)
         {
             objectDb.SetParameterValue("LicenseeName", metaModel.SiteName);
             objectDb.SetParameterValue("AgentList", metaModel.AgentListXml);
             objectDb.SetParameterValue("CustomerClass", metaModel.CustomerClass);
+            objectDb.SetParameterValue("CommGroups", metaModel.CommGroups);
         }
 
         private static void AssignParamByUserName(IObjectDb objectDb, PlayerSearchingMetaModel metaModel)
@@ -84,9 +114,8 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
             objectDb.SetParameterValue("BaFilter", metaModel.BaFilter);
             objectDb.SetParameterValue("SpecialLevel", metaModel.SpecialLevel);
             objectDb.SetParameterValue("OddsGroups", metaModel.OddsGroup);
-            objectDb.SetParameterValue("PageSize", metaModel.PageSize);
-            objectDb.SetParameterValue("PageIndex", metaModel.PageIndex);
-
+            objectDb.SetParameterValue("PageSize", int.MaxValue - 1);
+            objectDb.SetParameterValue("PageIndex", 1);
             objectDb.SetParameterValue("TotalRows", 0);
         }
 

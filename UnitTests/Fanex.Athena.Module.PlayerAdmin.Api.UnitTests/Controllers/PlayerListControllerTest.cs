@@ -13,18 +13,18 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Controllers
     [TestFixture]
     public class PlayerListControllerTest
     {
-        private IPlayerListService _playerListService;
+        private IPlayerListService playerListService;
 
         [SetUp]
         public void Setup()
         {
-            _playerListService = Substitute.For<IPlayerListService>();
+            playerListService = Substitute.For<IPlayerListService>();
         }
 
         [TearDown]
         public void TearDown()
         {
-            _playerListService = null;
+            playerListService = null;
         }
 
         [Test]
@@ -41,7 +41,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Controllers
                 DataList = new List<Player> { new Player() },
                 TotalItem = 1
             };
-            _playerListService.Search(searchParam).Returns(expectedReturnedData);
+            playerListService.Search(searchParam).Returns(expectedReturnedData);
 
             using (var controller = CreateController())
             {
@@ -66,7 +66,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Controllers
                 DataList = new List<Player> { new Player() },
                 TotalItem = 1
             };
-            _playerListService.GetPlayerListById(param).Returns(expectedReturnedData);
+            playerListService.GetPlayerListById(param).Returns(expectedReturnedData);
 
             using (var controller = CreateController())
             {
@@ -82,7 +82,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Controllers
         {
             var actionContext = ExternalApiHelper.CreateMockActionContext();
 
-            return new PlayerListController(_playerListService)
+            return new PlayerListController(playerListService)
             {
                 ActionContext = actionContext
             };

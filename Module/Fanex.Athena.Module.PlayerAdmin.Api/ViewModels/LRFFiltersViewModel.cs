@@ -5,5 +5,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.ViewModels
     public class LRFFiltersViewModel
     {
         public List<string> CustomerClass { get; set; }
+
+        public List<CommGroupViewModel> CommGroups { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-import BaseCommonService from './baseCommonService';
+﻿import BaseCommonService from './baseCommonService';
 import { systemType } from '../constants/configInfo';
 import axios from 'axios'
 import qs from 'qs';
@@ -11,7 +11,7 @@ const defaultAjaxConfig = {
     },
     withCredentials: false,
     responseType: 'json',
-    cancelToken: new axios.CancelToken(function(cancel) {})
+    cancelToken: new axios.CancelToken(function (cancel) { })
 }
 
 class LapCommonService extends BaseCommonService {
@@ -73,14 +73,14 @@ class LapCommonService extends BaseCommonService {
                     'X-Auth-Token': Token
                 }
 
-                const configWithXToken = {...commonAjaxConfig, headers: {...headerConfig } };
+                const configWithXToken = { ...commonAjaxConfig, headers: { ...headerConfig } };
 
                 return axios(configWithXToken);
             });
     }
 
     fetchData(sysType, action, params, configOption = defaultAjaxConfig) {
-        const config = {...defaultAjaxConfig, ...configOption };
+        const config = { ...defaultAjaxConfig, ...configOption };
         if (sysType === systemType.newAdmin) {
             const relativeUrl = this._baseUrl + action;
             const ajaxConfig = this._buildCommonAjaxConfig(config, relativeUrl, params);

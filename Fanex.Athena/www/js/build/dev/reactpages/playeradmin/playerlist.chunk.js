@@ -642,13 +642,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_services_lrfFiltersService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/services/lrfFiltersService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/services/lrfFiltersService.js");
 
 
-const getLRFFilters = () => dispatch => {
+const getLRFFilters = param => dispatch => {
   const service = new _lib_services_lrfFiltersService__WEBPACK_IMPORTED_MODULE_1__["default"]();
-  service.fetchData().then(response => {
+  service.fetchData(param).then(response => {
     dispatch(setLRFFilters(response.data));
   }).catch(() => {
     dispatch(setLRFFilters({
-      CustomerClass: []
+      CustomerClass: [],
+      CommGroups: []
     }));
   });
 };
@@ -987,8 +988,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_components_Loader__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/components/Loader */ "./www/js/source/reactpages/components/Loader.jsx");
 /* harmony import */ var _jsroot_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/layouts/AppLayout */ "./www/js/source/reactpages/layouts/AppLayout.jsx");
 /* harmony import */ var _PlayerDetail__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./PlayerDetail */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/components/PlayerDetail.jsx");
-/* harmony import */ var _reducers_filterHandlerReducer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../reducers/filterHandlerReducer */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/reducers/filterHandlerReducer.js");
-
 
 
 
@@ -1300,15 +1299,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _filter_AdvancedSearch__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./filter/AdvancedSearch */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/components/filter/AdvancedSearch.jsx");
 /* harmony import */ var _filter_SearchOption__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./filter/SearchOption */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/components/filter/SearchOption.jsx");
 /* harmony import */ var _filter_AthenaSearch__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./filter/AthenaSearch */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/components/filter/AthenaSearch.jsx");
-/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
-/* harmony import */ var _jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @jsroot/components/collapsible-panel */ "./www/js/source/reactpages/components/collapsible-panel/index.jsx");
-/* harmony import */ var _jsroot_components_UserGuide__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @jsroot/components/UserGuide */ "./www/js/source/reactpages/components/UserGuide.jsx");
-/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @jsroot/components/collapsible-panel */ "./www/js/source/reactpages/components/collapsible-panel/index.jsx");
+/* harmony import */ var _jsroot_components_UserGuide__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @jsroot/components/UserGuide */ "./www/js/source/reactpages/components/UserGuide.jsx");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
 /* harmony import */ var _filter_UserNameInput__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./filter/UserNameInput */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/components/filter/UserNameInput.jsx");
 /* harmony import */ var _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @jsroot/lib/QueryString */ "./www/js/source/reactpages/lib/QueryString.js");
 /* harmony import */ var _jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @jsroot/lib/htmlHelper */ "./www/js/source/reactpages/lib/htmlHelper.js");
 /* harmony import */ var _userGuide_LicAthenaUserGuide__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../userGuide/LicAthenaUserGuide */ "./www/js/source/reactpages/Module/PlayerAdmin/userGuide/LicAthenaUserGuide.jsx");
 /* harmony import */ var _userGuide_LicApiUserGuide__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../userGuide/LicApiUserGuide */ "./www/js/source/reactpages/Module/PlayerAdmin/userGuide/LicApiUserGuide.jsx");
+/* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! react-select */ "./node_modules/react-select/dist/react-select.es.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -1370,10 +1370,18 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
     });
 
     _defineProperty(this, "handleSpecificInputChange", (name, value) => {
-      if (name === "customerClass") {
-        this.setState({
-          changeOnCustomerClass: true
-        });
+      switch (name) {
+        case "customerClass":
+          this.setState({
+            changeOnCustomerClass: true
+          });
+          break;
+
+        case "commGroups":
+          this.setState({
+            changeOnCommGroups: true
+          });
+          break;
       }
 
       this.setState({
@@ -1385,22 +1393,30 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       this.userNameRef.current.value = value;
     });
 
-    this.allOddsGroupString = Object.keys(_lib_constants__WEBPACK_IMPORTED_MODULE_8__["oddsGroupListWithStyle"]).join(',');
+    this.allOddsGroupString = Object.keys(_lib_constants__WEBPACK_IMPORTED_MODULE_11__["oddsGroupListWithStyle"]).join(',');
     this.allCurrencyString = props.currencyList.map(c => c.Id).join(',');
-    this.allSpecialLevel = Object.keys(_lib_constants__WEBPACK_IMPORTED_MODULE_8__["specialLevelListWithColor"]).map(item => item).join(',');
+    this.allSpecialLevel = Object.keys(_lib_constants__WEBPACK_IMPORTED_MODULE_11__["specialLevelListWithColor"]).map(item => item).join(',');
+    this.isDepositedList = Object.keys(_lib_constants__WEBPACK_IMPORTED_MODULE_11__["isDepositedList"]).map(item => ({
+      value: _lib_constants__WEBPACK_IMPORTED_MODULE_11__["isDepositedList"][item],
+      label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_10__["default"].getSingleResource(item)
+    }));
     this.userGuide = this._renderUserGuide();
     this.userNameRef = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
     this.state = {
-      bankAccountNumber: '',
-      email: '',
+      bankAccountNumber: "",
+      email: "",
+      ipLogin: "",
+      isDeposited: _lib_constants__WEBPACK_IMPORTED_MODULE_11__["isDepositedList"]["All"],
       currencyIdList: this.allCurrencyString,
       oddsGroup: this.allOddsGroupString,
       specialLevel: this.allSpecialLevel,
-      baFilter: _lib_constants__WEBPACK_IMPORTED_MODULE_8__["baStatusList"].All,
-      searchOption: _lib_constants__WEBPACK_IMPORTED_MODULE_8__["searchOptions"].matchPrecise,
+      baFilter: _lib_constants__WEBPACK_IMPORTED_MODULE_11__["baStatusList"].All,
+      searchOption: _lib_constants__WEBPACK_IMPORTED_MODULE_11__["searchOptions"].matchPrecise,
       isMatchPrecise: true,
       customerClass: "",
-      changeOnCustomerClass: false
+      changeOnCustomerClass: false,
+      commGroups: "",
+      changeOnCommGroups: false
     };
   }
 
@@ -1424,7 +1440,9 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       hasCommPermissionRead
     } = this.props;
     this.props.getSiteSetting(type, isSubsidiary, hasCommPermissionRead);
-    this.props.getLRFFilters();
+    this.props.getLRFFilters({
+      hasCommPermissionRead
+    });
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -1437,9 +1455,11 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
         currencyIdList: this.allCurrencyString,
         oddsGroup: this.allOddsGroupString,
         specialLevel: this.allSpecialLevel,
-        baFilter: _lib_constants__WEBPACK_IMPORTED_MODULE_8__["baStatusList"].All,
+        baFilter: _lib_constants__WEBPACK_IMPORTED_MODULE_11__["baStatusList"].All,
         customerClass: this.props.lrfFilters.CustomerClass.join(','),
-        changeOnCustomerClass: false
+        changeOnCustomerClass: false,
+        commGroups: this.props.lrfFilters.CommGroups.map(c => c.Id).join(','),
+        changeOnCommGroups: false
       });
     }
   }
@@ -1449,8 +1469,8 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       email
     } = this.state;
 
-    if (email && !new RegExp(_lib_constants__WEBPACK_IMPORTED_MODULE_8__["emailPattern"]).test(email)) {
-      window.alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource('InvalidEmail'));
+    if (email && !new RegExp(_lib_constants__WEBPACK_IMPORTED_MODULE_11__["emailPattern"]).test(email)) {
+      window.alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_10__["default"].getSingleResource('InvalidEmail'));
       return;
     }
 
@@ -1471,8 +1491,9 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
 
     const actualSpecialLevel = specialLevel.trim() === '' ? this.allSpecialLevel : specialLevel;
     const actualCurrencyIdList = currencyIdList.trim().split(',').length === currencyList.length ? '' : currencyIdList;
-    const actualOddsGroup = oddsGroup.trim().split(',').length === Object.keys(_lib_constants__WEBPACK_IMPORTED_MODULE_8__["oddsGroupListWithStyle"]).length ? '' : oddsGroup;
+    const actualOddsGroup = oddsGroup.trim().split(',').length === Object.keys(_lib_constants__WEBPACK_IMPORTED_MODULE_11__["oddsGroupListWithStyle"]).length ? '' : oddsGroup;
     const actualCustomerClass = restParam.customerClass.trim().split(',').length === this.props.lrfFilters.CustomerClass.length ? '' : restParam.customerClass;
+    const actualCommGroups = this.state.changeOnCommGroups ? restParam.commGroups : this.props.lrfFilters.CommGroups.map(c => c.Id).join(",");
 
     const param = _objectSpread(_objectSpread({}, restParam), {}, {
       userName: Object(_jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_14__["encode"])(userName),
@@ -1480,6 +1501,8 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       oddsGroup: actualOddsGroup,
       specialLevel: actualSpecialLevel,
       customerClass: actualCustomerClass,
+      changeOnCommGroups: actualCommGroups.split(',').length != this.props.lrfFilters.CommGroups.length,
+      commGroups: actualCommGroups,
       pageSize: pagingOption.PageSize,
       pageIndex: 1
     });
@@ -1488,8 +1511,8 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
   }
 
   _renderContentUserGuide() {
-    const currentLang = _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].currentLanguage;
-    return this.props.type === _lib_constants__WEBPACK_IMPORTED_MODULE_8__["licenseeType"].nonApi ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_userGuide_LicAthenaUserGuide__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    const currentLang = _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_10__["default"].currentLanguage;
+    return this.props.type === _lib_constants__WEBPACK_IMPORTED_MODULE_11__["licenseeType"].nonApi ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_userGuide_LicAthenaUserGuide__WEBPACK_IMPORTED_MODULE_15__["default"], {
       lang: currentLang
     }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_userGuide_LicApiUserGuide__WEBPACK_IMPORTED_MODULE_16__["default"], {
       lang: currentLang
@@ -1497,16 +1520,16 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
   }
 
   _renderUserGuide() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_UserGuide__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("UserGuide"),
-      contentTitle: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("PlayerAdministration"),
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_UserGuide__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_10__["default"].getSingleResource("UserGuide"),
+      contentTitle: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_10__["default"].getSingleResource("PlayerAdministration"),
       isHtml: false,
       content: this._renderContentUserGuide()
     });
   }
 
   _getUserNameLabel() {
-    return this.props.type === _lib_constants__WEBPACK_IMPORTED_MODULE_8__["licenseeType"].nonApi ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("Username") : `${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("Username")}/${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("VendorMemberID")}`;
+    return this.props.type === _lib_constants__WEBPACK_IMPORTED_MODULE_11__["licenseeType"].nonApi ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_10__["default"].getSingleResource("Username") : `${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_10__["default"].getSingleResource("Username")}/${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_10__["default"].getSingleResource("VendorMemberID")}`;
   }
 
   render() {
@@ -1514,9 +1537,11 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
           {
       bankAccountNumber,
       email,
-      searchOption
+      searchOption,
+      ipLogin,
+      isDeposited
     } = _this$state2,
-          advancedSearchParam = _objectWithoutProperties(_this$state2, ["bankAccountNumber", "email", "searchOption"]);
+          advancedSearchParam = _objectWithoutProperties(_this$state2, ["bankAccountNumber", "email", "searchOption", "ipLogin", "isDeposited"]);
 
     const {
       type,
@@ -1531,13 +1556,13 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       oddsGroup,
       specialLevel
     } = advancedSearchParam;
-    const isValidParam = !!currencyIdList && !!oddsGroup && !!specialLevel && !(this.state.changeOnCustomerClass && !this.state.customerClass);
+    const isValidParam = !!currencyIdList && !!oddsGroup && !!specialLevel && !(this.state.changeOnCustomerClass && !this.state.customerClass) && !(this.state.changeOnCommGroups && !this.state.commGroups);
     const iconToggle = {
       tag: 'div',
       className: isFilterCollapsing ? 'chevron down' : 'chevron up',
       style: {}
     };
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_8__["default"], {
       className: "page-filter",
       iconToggle: iconToggle,
       stickyFooter: this.userGuide,
@@ -1553,7 +1578,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       className: "label-text"
     }, this._getUserNameLabel(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       className: this.state.isMatchPrecise ? "" : "hide"
-    }, "/", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("SystemId")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filter_SearchOption__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    }, "/", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_10__["default"].getSingleResource("SystemId")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filter_SearchOption__WEBPACK_IMPORTED_MODULE_6__["default"], {
       value: searchOption,
       onChange: this.handleChange
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filter_UserNameInput__WEBPACK_IMPORTED_MODULE_12__["default"], {
@@ -1564,12 +1589,25 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       searchOption: searchOption,
       onKeyPress: this.handlePressEnter,
       onChange: value => this.handleUserNameChange(value)
-    }))), type === _lib_constants__WEBPACK_IMPORTED_MODULE_8__["licenseeType"].nonApi && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filter_AthenaSearch__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    }))), type === _lib_constants__WEBPACK_IMPORTED_MODULE_11__["licenseeType"].nonApi && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filter_AthenaSearch__WEBPACK_IMPORTED_MODULE_7__["default"], {
       onChange: this.handleChange,
       bankAccountNumber: bankAccountNumber,
       email: email,
+      ipLogin: ipLogin,
       onKeyPress: this.handlePressEnter
-    }), isAdvancedSearch && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filter_AdvancedSearch__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "hide col-12 col-md-3 col-sm-3 col-lg-2 col-xl-1"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "form-group"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      className: "label-text"
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_10__["default"].getSingleResource("Deposited")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_17__["default"], {
+      instanceId: "ddlDeposited",
+      name: "form-field-name",
+      value: isDeposited,
+      options: this.isDepositedList,
+      onChange: item => this.handleSpecificInputChange('isDeposited', item.value)
+    }))), isAdvancedSearch && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filter_AdvancedSearch__WEBPACK_IMPORTED_MODULE_5__["default"], {
       currencyList: currencyList,
       param: advancedSearchParam,
       isAllowedBA: siteSetting.isAllowedBA,
@@ -1586,7 +1624,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       className: "btn btn-submit",
       disabled: !isValidParam,
       onClick: this.handleSubmit
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("Submit"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_10__["default"].getSingleResource("Submit"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
@@ -1594,7 +1632,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       id: "isAdvancedSearch",
       checked: isAdvancedSearch,
       onChange: checked => this.props.setAdvancedSearch(checked),
-      label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("AdvancedSearch")
+      label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_10__["default"].getSingleResource("AdvancedSearch")
     })))));
   }
 
@@ -1777,11 +1815,7 @@ class PlayerDetail extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       selectedPlayer
     } = this.props;
 
-    if (!selectedPlayer) {
-      return null;
-    }
-
-    if (this._tabList.length === 0) {
+    if (!selectedPlayer || this._tabList.length === 0) {
       return null;
     }
 
@@ -2172,6 +2206,11 @@ class AdvancedSearch extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Compon
       Value: Object(_lib_helpers_utils__WEBPACK_IMPORTED_MODULE_6__["getCustomerClassText"])(item),
       Status: true
     }));
+    this.commGroupList = props.lrfFilters.CommGroups.map(item => ({
+      Id: item.Id,
+      Value: item.Name,
+      Status: true
+    }));
   }
 
   _createSelectData(originalList, selectedItemString) {
@@ -2212,6 +2251,10 @@ class AdvancedSearch extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Compon
     const selectedCustomerClass = param.changeOnCustomerClass ? param.customerClass : this.props.lrfFilters.CustomerClass.join(",");
 
     const ddlCustomerClass = this._createSelectData(this.customerClassList, selectedCustomerClass);
+
+    const selectedCommGroups = param.changeOnCommGroups ? param.commGroups : this.props.lrfFilters.CommGroups.map(c => c.Id).join(",");
+
+    const ddlCommGroups = this._createSelectData(this.commGroupList, selectedCommGroups);
 
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2"
@@ -2277,6 +2320,19 @@ class AdvancedSearch extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Compon
       valueField: "Value",
       statusField: "Status",
       onChange: (currentItem, selectedItemsKey) => this.handleChange('customerClass', selectedItemsKey)
+    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-12 col-md-4 col-sm-4 col-lg-3 col-xl-2"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "form-group"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      className: "label-text"
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource("GroupCommission")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_1___default.a, {
+      id: "ddl-comm-group",
+      dataSource: ddlCommGroups,
+      keyField: "Id",
+      valueField: "Value",
+      statusField: "Status",
+      onChange: (currentItem, selectedItemsKey) => this.handleChange('commGroups', selectedItemsKey)
     }))));
   }
 
@@ -2287,7 +2343,8 @@ const propTypes = {
     oddsGroup: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string.isRequired,
     specialLevel: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string.isRequired,
     baFilter: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number.isRequired,
-    customerClass: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string.isRequired
+    customerClass: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string.isRequired,
+    commGroups: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string.isRequired
   }).isRequired,
   onChange: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func.isRequired
 };
@@ -2318,6 +2375,7 @@ const AthenaSearch = props => {
   const {
     bankAccountNumber,
     email,
+    ipLogin,
     onChange,
     onKeyPress
   } = props;
@@ -2353,12 +2411,29 @@ const AthenaSearch = props => {
     onChange: onChange,
     onKeyPress: onKeyPress,
     placeholder: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('PlaceholderEmail')
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-4 col-sm-4 col-lg-3 col-xl-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "label-text"
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("IPLogin")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    className: "input-text",
+    id: "ipLogin",
+    name: "ipLogin",
+    type: "text",
+    value: ipLogin,
+    autoComplete: "off",
+    onChange: onChange,
+    onKeyPress: onKeyPress,
+    placeholder: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('PlaceholderIPLogin')
   }))));
 };
 
 const propTypes = {
   bankAccountNumber: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired,
   email: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired,
+  ipLogin: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired,
   onChange: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
   onKeyPress: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
 };
@@ -2920,16 +2995,16 @@ class CustomerClassCell extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Com
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, this.props.text, "\xA0\xA0", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       class: "icon-info",
       onClick: this.showCustomerClassInformation
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_popup_Popup__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    }), this.state.isShowCustomerClassInformation ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_popup_Popup__WEBPACK_IMPORTED_MODULE_2__["default"], {
       width: 1000,
       height: 600,
-      isShow: this.state.isShowCustomerClassInformation,
+      isShow: "true",
       title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('CustomerClassInformation'),
       onClose: this.closeCustomerClassInfomation,
       onClick: this.clickOnPopup,
       isHtml: "false",
       iframeUrl: commonService.getLink(lrfSystemId, url)
-    }));
+    }) : "");
   }
 
 }
@@ -4037,7 +4112,8 @@ const siteSetting = {
   isAllowedBA: false
 };
 const lrfFilters = {
-  CustomerClass: []
+  CustomerClass: [],
+  CommGroups: []
 };
 
 const defaultState = _objectSpread(_objectSpread({}, window.initialState), {}, {
@@ -4067,7 +4143,7 @@ Object(react_dom__WEBPACK_IMPORTED_MODULE_1__["render"])( /*#__PURE__*/react__WE
 /*!*********************************************************************************!*\
   !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js ***!
   \*********************************************************************************/
-/*! exports provided: specialLevelListWithColor, oddsGroupListWithStyle, licenseeType, fields, columnList, contextMenuKeys, tabNames, excludedTabNameWithNonDepositAndArchived, excludedTabNameWithClosed, contextMenuList, heightSlicing, searchOptions, defaultPagingOption, playerStatus, playerStatusByName, displayedPlayerStatusList, messageUpdateState, baStatusList, headerText, gridItemDropdownHeight, stringTypeFields, apiInfo, apiUpdateInfo, apiSiteSetting, apiSuggestion, excludedContextMenuWithNonDeposit, excludedContextMenuWithClosed, excludedContextMenuWithArchived, excludedContextMenuWithApiLicensee, playerTypes, emailPattern, maxLapPageSize */
+/*! exports provided: specialLevelListWithColor, oddsGroupListWithStyle, licenseeType, fields, columnList, contextMenuKeys, tabNames, excludedTabNameWithNonDepositAndArchived, excludedTabNameWithClosed, contextMenuList, heightSlicing, searchOptions, defaultPagingOption, playerStatus, playerStatusByName, displayedPlayerStatusList, messageUpdateState, baStatusList, headerText, gridItemDropdownHeight, stringTypeFields, apiInfo, apiUpdateInfo, apiSiteSetting, apiSuggestion, excludedContextMenuWithNonDeposit, excludedContextMenuWithClosed, excludedContextMenuWithArchived, excludedContextMenuWithApiLicensee, isDepositedList, emailPattern, maxLapPageSize */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4101,7 +4177,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "excludedContextMenuWithClosed", function() { return excludedContextMenuWithClosed; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "excludedContextMenuWithArchived", function() { return excludedContextMenuWithArchived; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "excludedContextMenuWithApiLicensee", function() { return excludedContextMenuWithApiLicensee; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "playerTypes", function() { return playerTypes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isDepositedList", function() { return isDepositedList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "emailPattern", function() { return emailPattern; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "maxLapPageSize", function() { return maxLapPageSize; });
 /* harmony import */ var _constants_configInfo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../constants/configInfo */ "./www/js/source/reactpages/Module/constants/configInfo.js");
@@ -4403,9 +4479,10 @@ const excludedContextMenuWithNonDeposit = [contextMenuKeys.betLimit, contextMenu
 const excludedContextMenuWithClosed = [contextMenuKeys.password, contextMenuKeys.commissionGroup];
 const excludedContextMenuWithArchived = [contextMenuKeys.password, contextMenuKeys.betLimit, contextMenuKeys.statement, contextMenuKeys.commissionGroup];
 const excludedContextMenuWithApiLicensee = [contextMenuKeys.password, contextMenuKeys.bankInformation, contextMenuKeys.personalMessage];
-const playerTypes = {
-  nonDeposit: 1,
-  deposit: 2
+const isDepositedList = {
+  'All': 2,
+  'Yes': 1,
+  'No': 0
 };
 const emailPattern = '^([a-zA-Z0-9_\\.\\-])+\\@(([a-zA-Z0-9\\-])+\\.)+([a-zA-Z0-9]{2,4})+$';
 const maxLapPageSize = 250;
@@ -4624,8 +4701,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "buildSelectedPlayer", function() { return buildSelectedPlayer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "buildLapPlayerList", function() { return buildLapPlayerList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "buildCurrentActivePlayer", function() { return buildCurrentActivePlayer; });
-/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-
 const buildSelectedPlayer = dataItem => {
   const {
     IbcCustId,
@@ -4742,8 +4817,6 @@ const buildCurrentActivePlayer = dataItem => {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return PlayerListDataHelper; });
-/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-
 class PlayerListDataHelper {
   static mergePlayerList(lrfList, lapList) {
     if (!lrfList || !lapList) {
@@ -4855,8 +4928,7 @@ const getBaStatusText = value => {
   return value ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('On') : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Off');
 };
 const getPlayerStatus = value => {
-  const displayedValue = _constants__WEBPACK_IMPORTED_MODULE_0__["playerStatus"][value];
-  return displayedValue || '';
+  return _constants__WEBPACK_IMPORTED_MODULE_0__["playerStatus"][value] || '';
 };
 const buildDisplayedColumnObject = displayedColumnList => {
   return displayedColumnList.reduce((accumulator, currentItem) => {
@@ -5385,6 +5457,7 @@ class LapPlayerQueryService {
       oddsGroup: param.oddsGroup,
       baFilter: param.baFilter,
       customerClass: param.customerClass,
+      commGroups: param.commGroups,
       pageSize: param.pageSize,
       pageIndex: 1
     };
@@ -5438,8 +5511,11 @@ class LrfFiltersService {
     this.commonService = _lib_factoryCommonService__WEBPACK_IMPORTED_MODULE_0__["default"].createInstance();
   }
 
-  fetchData() {
-    return this.commonService.fetchData(_constants_configInfo__WEBPACK_IMPORTED_MODULE_1__["systemType"].lrf, 'api/PlayerList/LRFFilters', {});
+  fetchData(param) {
+    var action = 'api/PlayerList/LRFFilters';
+    return this.commonService.fetchData(_constants_configInfo__WEBPACK_IMPORTED_MODULE_1__["systemType"].lrf, action, {
+      hasCommPermissionRead: param.hasCommPermissionRead
+    });
   }
 
 }
@@ -5475,18 +5551,16 @@ class LrfPlayerQueryService {
         DataList: lrfPlayerList,
         TotalItem
       } = lrfResponse.data;
-
-      if (!lrfPlayerList || !lrfPlayerList.length) {
-        return _helpers_playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].createEmptyResult();
-      }
-
-      return this._fetchFromLap(lrfPlayerList, lapDataById, commonService, TotalItem);
+      return !lrfPlayerList || !lrfPlayerList.length ? _helpers_playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].createEmptyResult() : this._fetchFromLap(param, lrfPlayerList, lapDataById, commonService, TotalItem);
     }).catch(() => _helpers_playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].createEmptyResult());
   }
 
-  static _fetchFromLap(lrfPlayerList, lapDataById, commonService, lrfTotalItem) {
+  static _fetchFromLap(param, lrfPlayerList, lapDataById, commonService, lrfTotalItem) {
     const lapParam = {
-      idList: lrfPlayerList.map(x => x.IbcCustId)
+      idList: lrfPlayerList.map(x => x.IbcCustId),
+      bankAccountNumber: param.bankAccountNumber,
+      email: param.email,
+      ip: param.ipLogin
     };
     return commonService.fetchData(lapDataById.type, lapDataById.action, lapParam).then(lapResponse => {
       const {
@@ -5498,9 +5572,12 @@ class LrfPlayerQueryService {
       }
 
       const playerList = _helpers_playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].mergePlayerList(lrfPlayerList, lapPlayerList);
+      const startIndex = param.pageSize * (param.pageIndex - 1);
+      const endIndex = startIndex + param.pageSize;
+      const dataList = playerList.slice(startIndex, endIndex);
       return {
-        playerList,
-        totalItem: lrfTotalItem
+        playerList: dataList,
+        totalItem: playerList.length
       };
     }).catch(() => _helpers_playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].createEmptyResult());
   }
@@ -5656,6 +5733,8 @@ class PlayerQueryService {
 
   getPlayerList(param) {
     const playerListService = _queryServiceFactory__WEBPACK_IMPORTED_MODULE_3__["default"].getPlayerListService(param, this.commonService);
+    param.ip = param.ipLogin;
+    param.deposited = this.getDepositedName(param.isDeposited);
     return playerListService.fetchData(param, this.commonService, _constants__WEBPACK_IMPORTED_MODULE_1__["apiInfo"]);
   }
 
@@ -5665,6 +5744,19 @@ class PlayerQueryService {
 
   getLink(systemType, action) {
     return this.commonService.getLink(systemType, action);
+  }
+
+  getDepositedName(isDeposited) {
+    switch (isDeposited) {
+      case _constants__WEBPACK_IMPORTED_MODULE_1__["isDepositedList"].All:
+        return "All";
+
+      case _constants__WEBPACK_IMPORTED_MODULE_1__["isDepositedList"].No:
+        return "No";
+
+      default:
+        return "Yes";
+    }
   }
 
   exportExcel(playerList, param, displayedColumn, hasCommPermissionRead, fileName = 'PlayerList') {
@@ -5730,28 +5822,11 @@ __webpack_require__.r(__webpack_exports__);
 
 class QueryServiceFactory {
   static getPlayerListService(param) {
-    const {
-      bankAccountNumber,
-      email
-    } = param;
-
-    if (bankAccountNumber || email) {
-      return _lapPlayerQueryService__WEBPACK_IMPORTED_MODULE_1__["default"];
-    } else if (this._isChangeAdvancedSearch(param)) {
-      return _lrfPlayerQueryService__WEBPACK_IMPORTED_MODULE_2__["default"];
-    } else {
-      return _lapPlayerQueryService__WEBPACK_IMPORTED_MODULE_1__["default"];
-    }
+    return this._isChangeAdvancedSearch(param) ? _lrfPlayerQueryService__WEBPACK_IMPORTED_MODULE_2__["default"] : _lapPlayerQueryService__WEBPACK_IMPORTED_MODULE_1__["default"];
   }
 
   static _isChangeAdvancedSearch(param) {
-    const {
-      baFilter,
-      currencyIdList,
-      oddsGroup,
-      specialLevel
-    } = param;
-    return Number(baFilter) !== 0 || currencyIdList !== '' || oddsGroup !== '' || Object.keys(_constants__WEBPACK_IMPORTED_MODULE_0__["specialLevelListWithColor"]).length !== specialLevel.split(',').length || param.customerClass != "";
+    return Number(param.baFilter) !== 0 || param.currencyIdList !== "" || param.oddsGroup !== "" || Object.keys(_constants__WEBPACK_IMPORTED_MODULE_0__["specialLevelListWithColor"]).length !== param.specialLevel.split(",").length || param.customerClass != "" || param.changeOnCommGroups;
   }
 
 }
@@ -6082,7 +6157,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 const defaultLRFFilters = {
-  CustomerClass: []
+  CustomerClass: [],
+  CommGroups: []
 };
 const lrfFilters = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(defaultLRFFilters, {
   [_actions_types_js__WEBPACK_IMPORTED_MODULE_1__["SET_LRF_FILTERS"]](preState, action) {

@@ -1,4 +1,8 @@
-﻿import { SET_DISPLAYED_COLUMN_LIST, SET_PLAYER_LIST, SET_CURRENT_ACTIVE_PLAYER, SET_PAGING, SET_IS_FETCHING_DATA, SET_SWEET_ALERT_OPTION } from './types';
+﻿import {
+    SET_DISPLAYED_COLUMN_LIST, SET_PLAYER_LIST, SET_CURRENT_ACTIVE_PLAYER, SET_PAGING,
+    SET_IS_FETCHING_DATA, SET_SWEET_ALERT_OPTION
+} from './types';
+
 import PlayerQueryService from '../lib/services/playerQueryService';
 
 export const setDisplayedColumnList = (data) => {
