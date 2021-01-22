@@ -2287,10 +2287,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                 if (isProductOriginalChecked('VS2')) {
                     productCodeList.push('VS2');
                 }
-                if (isProductOriginalChecked('NG')) {
-                    productCodeList.push('NG');
-                }
-
                 url = Site.setProductCodeListParam(url, productCodeList);
 
                 Site.blockUI();
