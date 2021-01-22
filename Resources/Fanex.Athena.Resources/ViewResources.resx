@@ -2936,4 +2936,7 @@
   <data name="Category" xml:space="preserve">
     <value>Category</value>
   </data>
+  <data name="Happy5LinkedGames" xml:space="preserve">
+    <value>Happy 5 Linked Games</value>
+  </data>
 </root>

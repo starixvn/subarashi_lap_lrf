@@ -3148,6 +3148,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Happy 5 Linked Games.
+        /// </summary>
+        public static string Happy5LinkedGames {
+            get {
+                return ResourceManager.GetString("Happy5LinkedGames", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to HD.
         /// </summary>
         public static string HD {

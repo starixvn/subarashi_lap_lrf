@@ -1,9 +1,14 @@
 ﻿namespace Fanex.Athena.Controllers.Report
 {
+    using System.Collections.Generic;
+    using System.Data;
+    using System.Globalization;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Hosting;
+    using System.Web.Mvc;
     using DataAccess.Core.Configuration.Interfaces;
-
     using Excel.Base.Helpers;
-
     using Fanex.Athena.Excel.Base.Entities;
     using Fanex.Athena.Excel.Report;
     using Fanex.Athena.Model.Auth.DataDomain;
@@ -17,19 +22,8 @@
     using Fanex.Athena.Web.ActionFilter;
     using Fanex.Athena.Web.ResultExtension;
     using Fanex.Common;
-
     using Resources;
-
     using Service.Report.Interfaces;
-
-    using System.Collections.Generic;
-    using System.Data;
-    using System.Globalization;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Hosting;
-    using System.Web.Mvc;
-
     using VendorAdapter.Interfaces;
 
     [FunctionAuthorization(PermissionKeys.ReportMatchWinLoss)]
@@ -112,7 +106,8 @@
             var reportData = await _matchWinLossService.GetDataList(metaModel).ConfigureAwait(false);
             IList<MatchWinLoss> reportDataOutrightParlay = new List<MatchWinLoss>();
 
-            if (metaModel.ProductOptions.Any(i => i.Status && (i.Code == Product.BA || i.Code == Product.SB || i.Code == Product.VS2)))
+            var outrightParlayProducts = new List<string> { Product.BA, Product.SB, Product.VS2, Product.NG };
+            if (metaModel.ProductOptions.Any(i => i.Status && outrightParlayProducts.Any(s => i.Code == s)))
             {
                 reportDataOutrightParlay = await _matchWinLossService.GetOutrightParlayList(metaModel).ConfigureAwait(false);
             }

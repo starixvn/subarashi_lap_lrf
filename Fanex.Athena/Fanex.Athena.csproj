@@ -1014,6 +1014,7 @@
     <Content Include="www\css\source\pages\customer\customer-class.scss" />
     <Content Include="www\css\build\dev\pages\customer\customer-class.chunk.js.map" />
     <Content Include="www\css\build\dev\pages\customer\customer-class.css.map" />
+    <Content Include="Views\Desktop\BetList\MatchWl\BetTypeWinLoss.cshtml" />
     <Content Include="www\css\source\components\bootstrap-table\bootstrap-table-fixed-columns.scss" />
     <Content Include="www\css\source\components\bootstrap-table\bootstrap-table.scss" />
     <Content Include="www\css\build\dev\pages\components\fixedColumnsTable.chunk.js.map" />

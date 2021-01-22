@@ -208,7 +208,12 @@
 
             var licProductsRequireUseName = productAccess.ProductList
                 .Where(product => productsRequireUseName.Contains(product.ProductCode))
-                .Select(x => x.ProductName);
+                .Select(x => x.ProductName).ToList();
+
+            if (productAccess.ProductList.Any(p => string.Equals(p.ProductCode, "NG")))
+            {
+                licProductsRequireUseName.Add(ViewResources.Happy5LinkedGames);
+            }
 
             return string.Join(", ", licProductsRequireUseName);
         }

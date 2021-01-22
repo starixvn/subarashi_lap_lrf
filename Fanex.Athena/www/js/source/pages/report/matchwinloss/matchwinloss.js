@@ -159,9 +159,14 @@ define(['jquery', 'common/site', 'common/querystring', 'components/pluginhelper/
 
             viewOutrightMixParlay: function (betType) {
                 const date = $(Selector.date).attr('data-original');
-                let url = betType === 10
-                    ? Site.resolveClientUrl('MatchWinlossBetList/Outright')
-                    : Site.resolveClientUrl('MatchWinlossBetList/MixParlay');
+                let url = '';
+                if (3601 <= betType && betType <= 3610) {
+                    url = Site.resolveClientUrl('MatchWinlossBetList/BetTypeWinLoss');
+                } else {
+                    url = betType === 10
+                        ? Site.resolveClientUrl('MatchWinlossBetList/Outright')
+                        : Site.resolveClientUrl('MatchWinlossBetList/MixParlay');
+                }
 
                 url = Site.setLicenseeOptionOriginalParam(url);
                 url = QueryString.setParam(url, 'fromdate', date);
@@ -178,6 +183,10 @@ define(['jquery', 'common/site', 'common/querystring', 'components/pluginhelper/
                 if (isProductOriginalChecked('VS2')) {
                     productCodeList.push('VS2');
                 }
+                if (isProductOriginalChecked('NG')) {
+                    productCodeList.push('NG');
+                }
+
                 url = Site.setProductCodeListParam(url, productCodeList);
 
                 Site.blockUI();

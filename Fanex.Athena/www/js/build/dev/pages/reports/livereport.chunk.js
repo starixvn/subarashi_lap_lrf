@@ -2008,6 +2008,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 Key103: 'LiveReportBetList/Outright',
                 Key161: 'LiveReportBetList/NumberGame?Sporttype=161',
                 Key164: 'LiveReportBetList/NumberGame?Sporttype=164',
+                Key168: 'LiveReportBetList/NumberGame?Sporttype=168',
                 Key181: 'LiveReportBetList/VirtualSports?SportType=181',
                 Key182: 'LiveReportBetList/VirtualSports?SportType=182',
                 Key183: 'LiveReportBetList/VirtualSports?SportType=183',
@@ -2041,6 +2042,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         };
     }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
 
 /***/ }),
 

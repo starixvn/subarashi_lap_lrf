@@ -80,6 +80,10 @@ class BetListLayout extends Component {
                 const url = BetList.getPGSoftResultUrl(rootUrl, custid, transdecs, extension2);
                 this._showThirdPartyResult(url, title);
             }
+            else if (sporttype === SportType.Happy5LinkedGames) {
+                const url = BetList.getHappy5LinkedGamesResultUrl(rootUrl, extension1, refno, defaultPlatform);
+                this._showThirdPartyResult(url, title);
+            }
             else {
                 const url = BetList.getResultUrl(rootUrl, matchid, raceNo, bettype,
                     sporttype, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid);

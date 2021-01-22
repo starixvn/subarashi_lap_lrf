@@ -29,6 +29,13 @@ namespace Fanex.Athena.Controllers.BetList
 
         [HttpGet]
         [ValidationWebRequest(IsValidCurrency = true)]
+        public Task<ActionResult> BetTypeWinLoss(BetListExcelMetaModel metaModel)
+        {
+            return ProcessRequest(metaModel, "Lrf_BetList_SelWinLossByBetType", "~/Views/Desktop/BetList/MatchWl/BetTypeWinLoss.cshtml");
+        }
+
+        [HttpGet]
+        [ValidationWebRequest(IsValidCurrency = true)]
         public Task<ActionResult> MatchBetType(BetListExcelMetaModel metaModel)
         {
             return ProcessRequest(metaModel, null, "~/Views/Desktop/BetList/MatchWl/MatchBetType.cshtml");
