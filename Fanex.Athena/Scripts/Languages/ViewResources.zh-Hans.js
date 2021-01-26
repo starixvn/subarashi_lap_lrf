@@ -1,4 +1,4 @@
-﻿// Generated at: 1/11/2021 9:57:40 AM
+﻿// Generated at: 1/26/2021 1:01:51 PM
 var _language_zh_Hans = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -452,6 +452,7 @@ Product:"产品",
 ProductCC:"乐卡迪亚",
 ProductCO:"即时兑现",
 ProductCS:"娱乐城",
+ProductGDG:"金大门",
 ProductKN:"快乐彩",
 ProductNG:"百练赛",
 ProductParlay:"体育串关",

@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 1/11/2021 9:57:36 AM
+﻿// Generated at: 1/26/2021 1:01:56 PM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -695,6 +695,7 @@ ProductCO:"Cash Out",
 ProductCS:"RNG Casino",
 ProductFW:"Fishing World",
 ProductGD:"Gold Deluxe",
+ProductGDG:"GDG",
 ProductI4D:"Indo 4D",
 ProductJK:"Joker",
 ProductKN:"RNG Keno",
