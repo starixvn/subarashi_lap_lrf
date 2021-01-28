@@ -20,5 +20,7 @@
         bool IsNormalView(BasePlayerListMetaModel metaModel);
 
         PlayerSegmentationViewType GetViewType(bool anySubsidiary);
+
+        Task<List<string>> CustomerClass(string licenseeName);
     }
 }

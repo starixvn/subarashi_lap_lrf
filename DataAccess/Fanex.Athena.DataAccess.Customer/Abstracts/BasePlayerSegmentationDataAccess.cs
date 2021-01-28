@@ -6,6 +6,7 @@ using Fanex.Athena.DataAccess.Core;
 using Fanex.Athena.Model.Core.MetaModel;
 using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
 using Fanex.Athena.Model.Customer.MetaModel;
+using Fanex.Athena.Resources;
 using Fanex.Data;
 
 namespace Fanex.Athena.DataAccess.Customer
@@ -45,6 +46,7 @@ namespace Fanex.Athena.DataAccess.Customer
             objectDb.SetParameterValue("OrderCol", metaModel.OrderCol);
             objectDb.SetParameterValue("SortType", metaModel.SortType);
             objectDb.SetParameterValue("TotalItems", 0);
+            objectDb.SetParameterValue("CustomerClass", metaModel.CustomerClass);
         }
 
         protected static void ReadPlayer(IDataReader reader, PlayerInfo player)
@@ -55,6 +57,9 @@ namespace Fanex.Athena.DataAccess.Customer
             player.AgentId = Convert.ToInt32(reader["AgentID"]);
             player.IsVip = Convert.ToBoolean(reader["isVIP"]);
             player.IsBA = Convert.ToBoolean(reader["IsBA"]);
+
+            var customerClass = reader["CustomerClass"]?.ToString();
+            player.CustomerClass = string.IsNullOrWhiteSpace(customerClass) || customerClass == "0" ? ViewResources.None : customerClass;
         }
 
         protected static int ReadTotal(IObjectDb db)

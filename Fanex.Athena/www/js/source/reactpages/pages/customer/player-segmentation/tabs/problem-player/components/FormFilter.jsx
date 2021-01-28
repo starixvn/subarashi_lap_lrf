@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+﻿import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Select from 'react-select'
@@ -153,21 +153,37 @@ export class FormFilter extends PureComponent {
 
     _renderSubsidiaryTreeView() {
         return <TreeViewSelect
+            language={LangHelper.currentLanguage}
+            id="SubsidiaryTreeView"
+            dataSource={AppData.subsidiaryList}
+            keyField="Value"
+            valueField="Name"
+            statusField="Checked"
+            texts={{ SelectOptions: "Please select", All: "All", SelectedItemCount: "# selected" }}
+            isAllTextShown={false}
+            hasSearchBox={false}
+            treeViewOption={TreeViewOption}
+            onChange={this._onChangeSubsidiaryList} />;
+    }
+
+    _renderCustomerClassSelectList() {
+        const customerClassList = AppData.customerClassList;
+        const dataSource = DataSourceHelper.CreateDataSourceFrom(customerClassList, this.props.selectedCustomerClass);
+
+        return customerClassList && customerClassList.length && (
+            <MultipleSelect id="ddlCustomerClass"
                 language={LangHelper.currentLanguage}
-                id="SubsidiaryTreeView"
-                dataSource={AppData.subsidiaryList}
-                keyField="Value"
-                valueField="Name"
-                statusField="Checked"
-                texts={{ SelectOptions: "Please select", All: "All", SelectedItemCount: "# selected" }}
-                isAllTextShown={false}
-                hasSearchBox={false}
-                treeViewOption={TreeViewOption}
-                onChange={this._onChangeSubsidiaryList} />;
+                dataSource={dataSource}
+                keyField={"key"}
+                valueField={"value"}
+                statusField={"status"}
+                onChange={(_, selectedItemsKey) => this.props.setSelectedCustomerClass(selectedItemsKey)} />);
     }
 
     render() {
-        const isDisabledSubmit = StringHelper.isEmptyOrWhiteSpace(this.props.selectedCurrency) || StringHelper.isEmptyOrWhiteSpace(this.props.selectedReason);
+        const isDisabledSubmit = StringHelper.isEmptyOrWhiteSpace(this.props.selectedCurrency) ||
+            StringHelper.isEmptyOrWhiteSpace(this.props.selectedReason)||
+            StringHelper.isEmptyOrWhiteSpace(this.props.selectedCustomerClass);
 
         return (
             <CollapsiblePanel className="page-filter" stickyFooter={this._renderStickyFooter()}>
@@ -187,8 +203,7 @@ export class FormFilter extends PureComponent {
                                 onChange={checked => this.props.setSubsidiarySearch(checked)}
                                 label={LangHelper.getSingleResource("SubsidiarySearch")} />
                         </div>
-                    </div>
-                    }
+                    </div>}
                     <div className="col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource("Date")}</label>
@@ -207,6 +222,12 @@ export class FormFilter extends PureComponent {
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource("Reason")}</label>
                             {this._renderReasonSelectList()}
+                        </div>
+                    </div>
+                    <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
+                        <div className="form-group">
+                            <label className="label-text">{LangHelper.getSingleResource("CustomerClass")}</label>
+                            {this._renderCustomerClassSelectList()}
                         </div>
                     </div>
                     <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
@@ -240,7 +261,7 @@ export class FormFilter extends PureComponent {
                 </div>
                 {AppData.HasVipManagement && <div className="row">
                     <div className="col-12 text-bold">
-                        {`*${decode(LangHelper.getSingleResource("NotAllowedBAPlayerTurnonVip"))}`}
+                        {`${decode(LangHelper.getSingleResource("NotAllowedBAPlayerTurnonVip"))}`}
                     </div>
                 </div>}
             </CollapsiblePanel>
@@ -249,8 +270,12 @@ export class FormFilter extends PureComponent {
 }
 
 function mapDispatchToProps(dispatch) {
-    const { setDateRange, changeIsGetAll, setUsername, setSelectedCurrency, setSelectedParams, searchPlayer, setPagingOption,
-        getUserGuideContent, setSelectedBaseCurrency, setReason, setSubsidiaryList, setSubsidiarySearch } = ActionCreators;
+    const {
+        setDateRange, changeIsGetAll, setUsername, setSelectedCurrency,
+        setSelectedParams, searchPlayer, setPagingOption, getUserGuideContent,
+        setSelectedBaseCurrency, setReason, setSubsidiaryList, setSubsidiarySearch,
+        setSelectedCustomerClass } = ActionCreators;
+
     return bindActionCreators(Object.assign({}, {
         setDateRange,
         changeIsGetAll,
@@ -263,13 +288,19 @@ function mapDispatchToProps(dispatch) {
         setPagingOption,
         setSubsidiaryList,
         setSubsidiarySearch,
-        getUserGuideContent
+        getUserGuideContent,
+        setSelectedCustomerClass
     }), dispatch);
 }
 
 function mapStateToProps(state) {
-    const { dateRange, isGetAll, selectedCurrency, selectedParams, username, pagingOption, selectedTabKey,
-        userGuideContent, selectedBaseCurrency, selectedReason, selectedSubsidiary, subsidiarySearch } = state;
+    const {
+        dateRange, isGetAll, selectedCurrency, selectedParams,
+        username, pagingOption, selectedTabKey, userGuideContent,
+        selectedBaseCurrency, selectedReason, selectedSubsidiary, subsidiarySearch,
+        selectedCustomerClass
+    } = state;
+
     return Object.assign({}, {
         dateRange,
         isGetAll,
@@ -282,7 +313,8 @@ function mapStateToProps(state) {
         pagingOption,
         selectedTabKey,
         subsidiarySearch,
-        userGuideContent
+        userGuideContent,
+        selectedCustomerClass
     });
 };
 

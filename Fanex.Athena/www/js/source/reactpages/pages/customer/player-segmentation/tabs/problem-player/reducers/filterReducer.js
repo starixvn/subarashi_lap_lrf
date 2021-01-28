@@ -1,4 +1,4 @@
-import * as types from '../actions/types';
+﻿import * as types from '../actions/types';
 import createReducer from '@jsroot/lib/createReducer.js';
 import * as dateRangeReducer from '@jsroot/reducers/dateRangeReducer';
 import * as currencyReducer from '@jsroot/reducers/currencyReducer';
@@ -15,6 +15,12 @@ export const isGetAll = createReducer({}, {
 
 export const selectedReason = createReducer({}, {
     [types.SET_SELECTED_REASON](state, action) {
+        return action.data
+    }
+});
+
+export const selectedCustomerClass = createReducer({}, {
+    [types.SET_SELECTED_CUSTOMERCLASS](state, action) {
         return action.data
     }
 });

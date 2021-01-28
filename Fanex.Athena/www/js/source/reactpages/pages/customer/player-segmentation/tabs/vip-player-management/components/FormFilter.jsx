@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+﻿import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Select from 'react-select'
@@ -124,8 +124,24 @@ export class FormFilter extends PureComponent {
             onChange={this._onChangeSubsidiaryList} />;
     }
 
+    _renderCustomerClassSelectList() {
+        const customerClassList = AppData.customerClassList;
+        const dataSource = DataSourceHelper.CreateDataSourceFrom(customerClassList, this.props.selectedCustomerClass);
+
+        return customerClassList && customerClassList.length && (
+            <MultipleSelect id="ddlCustomerClass"
+                language={LangHelper.currentLanguage}
+                dataSource={dataSource}
+                keyField={"key"}
+                valueField={"value"}
+                statusField={"status"}
+                onChange={(_, selectedItemsKey) => this.props.setSelectedCustomerClass(selectedItemsKey)} />);
+    }
+
     render() {
-        const isDisabledSubmit = StringHelper.isEmptyOrWhiteSpace(this.props.selectedCurrency);
+        const isDisabledSubmit = StringHelper.isEmptyOrWhiteSpace(this.props.selectedCurrency) ||
+            StringHelper.isEmptyOrWhiteSpace(this.props.selectedCustomerClass);
+
         return (
             <CollapsiblePanel className="page-filter" stickyFooter={this._renderStickyFooter()}>
                 <div className="row">
@@ -166,6 +182,12 @@ export class FormFilter extends PureComponent {
                             {this._renderCurrencySelectList()}
                         </div>
                     </div>
+                    <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
+                        <div className="form-group">
+                            <label className="label-text">{LangHelper.getSingleResource("CustomerClass")}</label>
+                            {this._renderCustomerClassSelectList()}
+                        </div>
+                    </div>
                     <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-1">
                         <div className="form-group">
                             <div className="button-group">
@@ -176,7 +198,7 @@ export class FormFilter extends PureComponent {
                 </div>
                 <div className="row">
                     <div className="col-12 text-bold">
-                        {`*${decode(LangHelper.getSingleResource("NotAllowedBAPlayerTurnonVip"))}`}
+                        {`${decode(LangHelper.getSingleResource("NotAllowedBAPlayerTurnonVip"))}`}
                     </div>
                 </div>
             </CollapsiblePanel>
@@ -185,25 +207,24 @@ export class FormFilter extends PureComponent {
 }
 
 function mapDispatchToProps(dispatch) {
-    const { setDateRange, setSelectedVipOption, setUsername, setSelectedCurrency, setSelectedParams, searchPlayer,
-        setPagingOption, setSubsidiaryList, getUserGuideContent, setSubsidiarySearch } = ActionCreators;
+    const {
+        setDateRange, setSelectedVipOption, setUsername, setSelectedCurrency,
+        setSelectedParams, searchPlayer, setPagingOption, setSubsidiaryList,
+        getUserGuideContent, setSubsidiarySearch, setSelectedCustomerClass } = ActionCreators;
+
     return bindActionCreators(Object.assign({}, {
-        setSelectedVipOption,
-        setDateRange,
-        setUsername,
-        setSelectedCurrency,
-        setSelectedParams,
-        searchPlayer,
-        setPagingOption,
-        setSubsidiaryList,
-        getUserGuideContent,
-        setSubsidiarySearch
+        setSelectedVipOption, setDateRange, setUsername, setSelectedCurrency,
+        setSelectedParams, searchPlayer, setPagingOption, setSubsidiaryList,
+        getUserGuideContent, setSubsidiarySearch, setSelectedCustomerClass
     }), dispatch);
 }
 
 function mapStateToProps(state) {
-    const { dateRange, selectedVipOption, selectedCurrency, selectedParams, username, pagingOption,
-        selectedTabKey, userGuideContent, selectedSubsidiary, subsidiarySearch } = state;
+    const {
+        dateRange, selectedVipOption, selectedCurrency, selectedParams,
+        username, pagingOption, selectedTabKey, userGuideContent,
+        selectedSubsidiary, subsidiarySearch, selectedCustomerClass } = state;
+
     return Object.assign({}, {
         selectedVipOption,
         dateRange,
@@ -214,7 +235,8 @@ function mapStateToProps(state) {
         selectedTabKey,
         userGuideContent,
         selectedSubsidiary,
-        subsidiarySearch
+        subsidiarySearch,
+        selectedCustomerClass
     });
 };
 

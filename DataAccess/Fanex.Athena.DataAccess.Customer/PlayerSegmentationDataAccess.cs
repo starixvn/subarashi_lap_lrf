@@ -8,7 +8,6 @@
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
     using Fanex.Athena.Model.Customer.MetaModel;
-    using Fanex.Athena.Resources;
     using Fanex.Common.Extensions;
     using Fanex.Data;
 
@@ -25,9 +24,7 @@
 
                 var playerList = await ReadPlayerList(db, (reader, player) =>
                 {
-                    var customerClass = reader.ToString("CustomerClass");
                     player.MarkDate = reader.ToDateTime("CreatedDate").ToString(FormatKey.DateTimeFormatIn24H);
-                    player.CustomerClass = string.IsNullOrWhiteSpace(customerClass) ? ViewResources.None : customerClass;
                     player.Reason = reader.ToString("Reason");
                 });
 
@@ -105,6 +102,24 @@
                     return result;
                 }
             }
+        }
+
+        public async Task<List<string>> CustomerClass(string licenseeName)
+        {
+            var result = new List<string> { "0" };
+
+            using (var objectDb = GetObjectDb("Lrf_CustomerClassSel", 180))
+            {
+                using (var reader = await objectDb.ExecuteReaderAsync().ConfigureAwait(false))
+                {
+                    while (reader.Read())
+                    {
+                        result.Add(reader["CustomerClass"].ToString());
+                    }
+                }
+            }
+
+            return result;
         }
 
         private static void AddVipStatusUpdateParams(IObjectDb objectDb, UpdateStatusPlayerMetaModel metaModel)

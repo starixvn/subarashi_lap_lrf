@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../actions';
@@ -33,9 +33,10 @@ export const DataGrid = (props) => {
                     const newPlayerList = playerList.map(_ => {
                         return {
                             ..._,
-                            ...{ isSelected: !_.isBA && checked }
+                            ...{ isSelected: checked && !(_.isBA || _.customerClass == '10' || _.customerClass == '13') }
                         }
                     });
+
                     setPlayerList(newPlayerList);
                 }} />
         },
@@ -82,7 +83,7 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
     const { playerList, selectedParams, selectedTabKey, pagingOption } = state;
-    const isCheckAll = playerList && !playerList.some(_ => !_.isSelected && !_.isBA);
+    const isCheckAll = playerList && !playerList.some(_ => !(_.isSelected || _.isBA || _.customerClass == '10' || _.customerClass == '13'));
     return Object.assign({}, { playerList, isCheckAll, pagingOption, selectedParams, selectedTabKey });
 };
 

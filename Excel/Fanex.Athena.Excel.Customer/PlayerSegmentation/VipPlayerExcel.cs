@@ -1,10 +1,10 @@
 ﻿namespace Fanex.Athena.Excel.Customer
 {
-    using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
-    using Fanex.Athena.Resources;
     using System;
     using System.Collections.Generic;
     using System.Web.Hosting;
+    using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
+    using Fanex.Athena.Resources;
 
     public class VipPlayerExcel : PlayerExcel<PlayerInfo>
     {
