@@ -2120,4 +2120,7 @@
   <data name="ProductSBVS" xml:space="preserve">
     <value>沙巴虛擬賽事</value>
   </data>
+  <data name="ProductGDG" xml:space="preserve">
+    <value>GDG</value>
+  </data>
 </root>

@@ -243,6 +243,23 @@
         }
 
         [HttpGet]
+        public async Task<string> GDG(string custId, string transId3rd, string gameId3rd, string siteId)
+        {
+            var language = SessionServiceInstance.UserSession.Language;
+            var model = new
+            {
+                custId,
+                transId3rd,
+                gameId3rd,
+                siteId,
+                languageCode = language
+            };
+
+            return await _betListApiClient.PostStringAsync("/GDGResultPopup/Index",
+               model, language).ConfigureAwait(false);
+        }
+
+        [HttpGet]
         public async Task<string> GlobalGamingResult(string custId, string gameId)
         {
             var model = new

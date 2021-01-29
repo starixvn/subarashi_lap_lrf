@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 1/11/2021 9:57:36 AM
+// Generated at: 1/26/2021 1:01:56 PM
 window._language_zh_CN = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -633,6 +633,7 @@ window._language_zh_CN = {
   ProductCS: "娱乐城",
   ProductFW: "GG捕鱼",
   ProductGD: "GD真人娱乐场",
+  ProductGDG: "金大门",
   ProductKN: "快乐彩",
   ProductLT: "彩票",
   ProductNG: "百练赛",

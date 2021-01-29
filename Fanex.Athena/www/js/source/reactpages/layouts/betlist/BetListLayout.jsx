@@ -84,6 +84,10 @@ class BetListLayout extends Component {
                 const url = BetList.getHappy5LinkedGamesResultUrl(rootUrl, extension1, refno, defaultPlatform);
                 this._showThirdPartyResult(url, title);
             }
+            else if (sporttype === SportType.GDG) {
+                const url = BetList.getGDGResultUrl(rootUrl, custid, transdecs, extension2, league);
+                this._showThirdPartyResult(url, title);
+            }
             else {
                 const url = BetList.getResultUrl(rootUrl, matchid, raceNo, bettype,
                     sporttype, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid);
@@ -286,6 +290,16 @@ class BetListLayout extends Component {
 
             this._openPopup(url, title);
         }
+
+        window.showGDGBetDetails = (transId, winlostDate, custId, transType) => {
+            const { rootUrl, baseCurrency } = this.props;
+
+            const url = BetList.getGDGDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
+            const title = this._getResource('ProductGDG') + ' - ' +
+                this._getResource('DetailedBetlist') + ' - ' + this._formatDateString(winlostDate);
+
+            this._openPopup(url, title);
+        }
     }
 
     componentWillUnmount() {
@@ -311,6 +325,7 @@ class BetListLayout extends Component {
         window.showSAGamingDetails = undefined;
         window.showSabaClubDetails = undefined;
         window.showPGSoftDetails = undefined;
+        window.showGDGBetDetails = undefined;
     }
 
     _getResource(key) {

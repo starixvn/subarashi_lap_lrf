@@ -316,6 +316,17 @@ class BetList {
         return url;
     }
 
+    getGDGDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
+        let url = rootUrl + 'GDGBetList/Detail';
+        url = QueryString.setParam(url, 'transId', transId);
+        url = QueryString.setParam(url, 'date', winlostDate);
+        url = QueryString.setParam(url, 'custId', custId);
+        url = QueryString.setParam(url, 'transType', transType);
+        url = QueryString.setParam(url, 'BaseCurrency', baseCurrency);
+
+        return url;
+    }
+
     getRngCasinoResultUrl(rootUrl) {
         return rootUrl + 'ResultReport/ShowRngCasinoSingleWalletResult';
     }
@@ -380,7 +391,6 @@ class BetList {
         url = QueryString.setParam(url, 'transdesc', encodeURIComponent(transdesc));
 
         return url;
-
     }
 
     getSAGamingResultUrl(rootUrl, transdesc, matchCode, bettype) {
@@ -426,12 +436,22 @@ class BetList {
 
         return url;
     }
-
+    
     getHappy5LinkedGamesResultUrl(rootUrl, custId, transId3rd, platform) {
         let url = rootUrl + 'Happy5LinkedGamesResultPopup/Index';
         url = QueryString.setParam(url, 'custId', custId);
         url = QueryString.setParam(url, 'transId3rd', transId3rd);
         url = QueryString.setParam(url, 'platform', platform);
+
+        return url;
+    }
+
+    getGDGResultUrl(rootUrl, custId, transId3rd, gameId3rd, siteId) {
+        let url = rootUrl + 'ResultReport/GDG';
+        url = QueryString.setParam(url, 'custId', custId);
+        url = QueryString.setParam(url, 'transId3rd', transId3rd);
+        url = QueryString.setParam(url, 'gameId3rd', gameId3rd);
+        url = QueryString.setParam(url, 'siteId', siteId);
 
         return url;
     }

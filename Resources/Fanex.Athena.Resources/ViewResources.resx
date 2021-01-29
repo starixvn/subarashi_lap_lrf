@@ -2930,6 +2930,9 @@
   <data name="ProductSBVS" xml:space="preserve">
     <value>Saba Virtual Sports</value>
   </data>
+  <data name="ProductGDG" xml:space="preserve">
+    <value>GDG</value>
+  </data>
   <data name="AgentBetInterval" xml:space="preserve">
     <value>Agent Bet Interval (sec)</value>
   </data>

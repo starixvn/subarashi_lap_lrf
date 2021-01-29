@@ -91,6 +91,7 @@
     <Compile Include="JokerBetListControllerTest.cs" />
     <Compile Include="SAGamingBetListControllerTest.cs" />
     <Compile Include="SexyGamingBetListControllerTest.cs" />
+    <Compile Include="GDGBetListControllerTest.cs" />
     <Compile Include="AllBetBetListControllerTest.cs" />
     <Compile Include="BetListBaseControllerHelperTest.cs" />
     <Compile Include="BettingTicketCenterControllerTest.cs" />
