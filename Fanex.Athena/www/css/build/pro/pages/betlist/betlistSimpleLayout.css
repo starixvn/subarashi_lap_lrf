@@ -1620,6 +1620,9 @@ tr.ui-search-toolbar select {
 .betlist-container label {
   margin-bottom: 0; }
 
+.betlist-container .discount {
+  white-space: normal; }
+
 .sexygaming-bet-id {
   color: #bbb; }
 
