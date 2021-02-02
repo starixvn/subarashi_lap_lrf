@@ -1,13 +1,13 @@
 ﻿namespace Fanex.Athena.Excel.Customer
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using Fanex.Athena.Excel.Base;
     using Fanex.Athena.Excel.Base.Extension;
     using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
     using Fanex.Athena.Resources;
     using NPOI.SS.UserModel;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
 
     public class PlayerExcel<T> : ReportBase
         where T : PlayerInfo
@@ -43,7 +43,8 @@
             {
                 new Tuple<string, string, Func<object, object>>(ViewResources.Subsidiary, nameof(ViewResources.Subsidiary), null),
                 new Tuple<string, string, Func<object, object>>(ViewResources.ExternalId, nameof(ViewResources.ExternalId), null),
-                new Tuple<string, string, Func<object, object>>(ViewResources.SystemId, nameof(ViewResources.SystemId), null)
+                new Tuple<string, string, Func<object, object>>(ViewResources.SystemId, nameof(ViewResources.SystemId), null),
+                new Tuple<string, string, Func<object, object>>(ViewResources.CustomerClass, nameof(ViewResources.CustomerClass), null)
             };
         }
 

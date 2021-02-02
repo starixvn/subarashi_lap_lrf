@@ -2921,7 +2921,7 @@
     <comment>#146508</comment>
   </data>
   <data name="NotAllowedBAPlayerTurnonVip" xml:space="preserve">
-    <value>For BA player, don't allow turning on VIP</value>
+    <value>*For BA player and the player with Customer Class 10 or 13, don't allow turning on VIP</value>
     <comment>#146508</comment>
   </data>
   <data name="SeparateSabaWinLoss" xml:space="preserve">
@@ -2941,5 +2941,8 @@
   </data>
   <data name="Happy5LinkedGames" xml:space="preserve">
     <value>Happy 5 Linked Games</value>
+  </data>
+  <data name="UpdateVipStatus_ExcludeCC10And13" xml:space="preserve">
+    <value>Player with Customer Class 10 or 13, no update: {0} ({1})</value>
   </data>
 </root>

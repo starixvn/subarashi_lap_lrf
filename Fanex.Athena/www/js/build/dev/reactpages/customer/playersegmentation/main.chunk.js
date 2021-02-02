@@ -1021,7 +1021,8 @@ const UpdateVIPStatusCode = {
   Avoid: 102,
   InvalidExternalId: 103,
   NoChangeByExternalId: 104,
-  NoChangeByBAStatus: 105
+  NoChangeByBAStatus: 105,
+  ExcludeCC10And13: 106
 };
 const errorResponse = {
   data: null,

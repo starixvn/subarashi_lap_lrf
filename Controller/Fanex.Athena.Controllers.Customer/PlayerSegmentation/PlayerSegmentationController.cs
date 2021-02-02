@@ -65,6 +65,7 @@
         {
             var currencyList = SessionServiceInstance.UserSession.CurrencyList;
             var baseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency;
+            var licenseeName = SessionServiceInstance.LicenseeSession.LicenseeName;
             var lang = LangService.GetCurrentLanguage();
 
             var hasVIPManangementPermission = HasVIPManagementPermission();
@@ -88,7 +89,8 @@
                 } : null,
                 BaseCurrency = baseCurrency,
                 ViewType = viewType,
-                SubsidiaryList = subsidiaryList
+                SubsidiaryList = subsidiaryList,
+                CustomerClass = await _playerService.CustomerClass(licenseeName)
             };
 
             return model;

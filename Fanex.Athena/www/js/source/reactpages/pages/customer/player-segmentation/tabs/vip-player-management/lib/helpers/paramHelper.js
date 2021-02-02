@@ -1,5 +1,5 @@
-export default class ParamHelper {
-    static ToAPIParams({ selectedParams, username, selectedCurrency, selectedVipOption, selectedSubsidiary, subsidiarySearch } ) {
+﻿export default class ParamHelper {
+    static ToAPIParams({ selectedParams, username, selectedCurrency, selectedVipOption, selectedSubsidiary, subsidiarySearch, selectedCustomerClass } ) {
         return {
             ...selectedParams,
             ...{
@@ -7,7 +7,8 @@ export default class ParamHelper {
                 currencyIdList: selectedCurrency,
                 vipOption: selectedVipOption,
                 subsidiaryList: subsidiarySearch ? selectedSubsidiary : '',
-                subsidiarySearch
+                subsidiarySearch,
+                customerClass: selectedCustomerClass
             }
         }
     }

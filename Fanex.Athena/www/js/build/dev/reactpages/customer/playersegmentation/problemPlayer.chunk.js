@@ -3475,8 +3475,10 @@ const VipSwitcherCell = props => {
   const {
     systemId,
     isVip,
-    isBA
+    isBA,
+    customerClass
   } = playerList[index];
+  const canEditVip = !(isBA || customerClass === "10" || customerClass === "13");
 
   const _handleCloseAlert = () => {
     setSweetAlertOption(null);
@@ -3525,10 +3527,10 @@ const VipSwitcherCell = props => {
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
     className: "center-align"
-  }, isBA ? _getTextDisplay(isVip) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Switcher__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, canEditVip ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Switcher__WEBPACK_IMPORTED_MODULE_5__["default"], {
     checked: isVip,
     onChange: _handleChangeVipStatus
-  }));
+  }) : _getTextDisplay(isVip));
 };
 
 function mapDispatchToProps(dispatch) {
@@ -3748,9 +3750,9 @@ _defineProperty(MessageHelper, "MsgColors", {
     content: 'msg-error',
     icon: 'icon-warning'
   },
-  [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].InvalidExternalId]: {
-    content: 'msg-error',
-    icon: 'icon-warning'
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].ExcludeCC10And13]: {
+    content: 'msg-success',
+    icon: 'icon-tick'
   }
 });
 
@@ -3760,7 +3762,8 @@ _defineProperty(MessageHelper, "GetMsgUpdateVipStatus", {
     [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].InvalidSystemId]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('InvalidPlayerUpdateVipStatusSingle').replace('{0}', data.ids),
     [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].NoChangeBySystemId]: (_, isUpdateVip) => isUpdateVip ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('AlreadyUpdateVipStatusSingle') : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('AlreadyUpdateNotVipStatusSingle'),
     [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].NoChangeByBAStatus]: () => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('BAPlayerNoUpdateVIPSingle'),
-    [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].Avoid]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('RetractedPlayerUpdateVipStatusSingle').replace('{0}', data.ids)
+    [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].Avoid]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('RetractedPlayerUpdateVipStatusSingle').replace('{0}', data.ids),
+    [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].ExcludeCC10And13]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('UpdateVipStatus_ExcludeCC10And13').replace('{0}', data.numberOfPlayer).replace('{1}', data.ids)
   },
   multipleUpdate: {
     [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].Success]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('SuccessUpdateVipStatus').replace('{0}', data.numberOfPlayer),
@@ -3768,7 +3771,8 @@ _defineProperty(MessageHelper, "GetMsgUpdateVipStatus", {
     [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].NoChangeBySystemId]: (data, isUpdateVip) => (isUpdateVip ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('AlreadyUpdateVipStatus') : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('AlreadyUpdateNotVipStatus')).replace('{0}', data.numberOfPlayer),
     [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].NoChangeByBAStatus]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('BAPlayerNoUpdateVIP').replace('{0}', data.numberOfPlayer).replace('{1}', data.ids),
     [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].Avoid]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('RetractedPlayerUpdateVipStatus').replace('{0}', data.numberOfPlayer).replace('{1}', data.ids),
-    [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].InvalidExternalId]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('InvalidPlayerUpdateVipStatusByExternalId').replace('{0}', data.numberOfPlayer).replace('{1}', data.ids)
+    [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].InvalidExternalId]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('InvalidPlayerUpdateVipStatusByExternalId').replace('{0}', data.numberOfPlayer).replace('{1}', data.ids),
+    [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].ExcludeCC10And13]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('UpdateVipStatus_ExcludeCC10And13').replace('{0}', data.numberOfPlayer).replace('{1}', data.ids)
   }
 });
 
@@ -4000,13 +4004,14 @@ const playerList = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_
 /*!*****************************************************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/actions/filterAction.js ***!
   \*****************************************************************************************************************/
-/*! exports provided: changeIsGetAll, setReason, setDateRange, setSelectedCurrency, setUsername, setSelectedBaseCurrency, setSubsidiaryList, setSubsidiarySearch, setSelectedParams */
+/*! exports provided: changeIsGetAll, setReason, setSelectedCustomerClass, setDateRange, setSelectedCurrency, setUsername, setSelectedBaseCurrency, setSubsidiaryList, setSubsidiarySearch, setSelectedParams */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "changeIsGetAll", function() { return changeIsGetAll; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setReason", function() { return setReason; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSelectedCustomerClass", function() { return setSelectedCustomerClass; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setDateRange", function() { return setDateRange; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSelectedCurrency", function() { return setSelectedCurrency; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setUsername", function() { return setUsername; });
@@ -4038,6 +4043,12 @@ const setReason = selectedReasons => {
   return {
     type: _types__WEBPACK_IMPORTED_MODULE_0__["SET_SELECTED_REASON"],
     data: selectedReasons
+  };
+};
+const setSelectedCustomerClass = selectedCustomerClass => {
+  return {
+    type: _types__WEBPACK_IMPORTED_MODULE_0__["SET_SELECTED_CUSTOMERCLASS"],
+    data: selectedCustomerClass
   };
 };
 const setDateRange = _jsroot_actions_dateRangeAction__WEBPACK_IMPORTED_MODULE_1__["setDateRange"];
@@ -4101,7 +4112,7 @@ const setSelectedPlayer = data => {
 /*!**********************************************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/actions/types.js ***!
   \**********************************************************************************************************/
-/*! exports provided: SET_IS_GET_ALL, SET_SELECTED_REASON, SET_SELECTED_PLAYER */
+/*! exports provided: SET_IS_GET_ALL, SET_SELECTED_REASON, SET_SELECTED_PLAYER, SET_SELECTED_CUSTOMERCLASS */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4109,9 +4120,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_IS_GET_ALL", function() { return SET_IS_GET_ALL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SELECTED_REASON", function() { return SET_SELECTED_REASON; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SELECTED_PLAYER", function() { return SET_SELECTED_PLAYER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SELECTED_CUSTOMERCLASS", function() { return SET_SELECTED_CUSTOMERCLASS; });
 const SET_IS_GET_ALL = 'SET_IS_GET_ALL';
 const SET_SELECTED_REASON = 'SET_SELECTED_REASON';
 const SET_SELECTED_PLAYER = 'SET_SELECTED_PLAYER';
+const SET_SELECTED_CUSTOMERCLASS = "SET_SELECTED_CUSTOMERCLASS";
 
 /***/ }),
 
@@ -4673,8 +4686,22 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
     });
   }
 
+  _renderCustomerClassSelectList() {
+    const customerClassList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_14__["default"].customerClassList;
+    const dataSource = _lib_helpers_dataSourceHelper__WEBPACK_IMPORTED_MODULE_21__["default"].CreateDataSourceFrom(customerClassList, this.props.selectedCustomerClass);
+    return customerClassList && customerClassList.length && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_4___default.a, {
+      id: "ddlCustomerClass",
+      language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_10__["default"].currentLanguage,
+      dataSource: dataSource,
+      keyField: "key",
+      valueField: "value",
+      statusField: "status",
+      onChange: (_, selectedItemsKey) => this.props.setSelectedCustomerClass(selectedItemsKey)
+    });
+  }
+
   render() {
-    const isDisabledSubmit = _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_11__["default"].isEmptyOrWhiteSpace(this.props.selectedCurrency) || _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_11__["default"].isEmptyOrWhiteSpace(this.props.selectedReason);
+    const isDisabledSubmit = _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_11__["default"].isEmptyOrWhiteSpace(this.props.selectedCurrency) || _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_11__["default"].isEmptyOrWhiteSpace(this.props.selectedReason) || _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_11__["default"].isEmptyOrWhiteSpace(this.props.selectedCustomerClass);
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_6__["default"], {
       className: "page-filter",
       stickyFooter: this._renderStickyFooter()
@@ -4722,6 +4749,12 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       className: "form-group"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       className: "label-text"
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_10__["default"].getSingleResource("CustomerClass")), this._renderCustomerClassSelectList())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "form-group"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      className: "label-text"
     }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_10__["default"].getSingleResource("Username")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_auto_complete__WEBPACK_IMPORTED_MODULE_5__["default"], {
       onSelect: value => this.props.setUsername(value),
       onInput: value => this.props.setUsername(value),
@@ -4755,7 +4788,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       className: "row"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-12 text-bold"
-    }, `*${Object(_jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_12__["decode"])(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_10__["default"].getSingleResource("NotAllowedBAPlayerTurnonVip"))}`)));
+    }, `${Object(_jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_12__["decode"])(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_10__["default"].getSingleResource("NotAllowedBAPlayerTurnonVip"))}`)));
   }
 
 }
@@ -4773,7 +4806,8 @@ function mapDispatchToProps(dispatch) {
     setSelectedBaseCurrency,
     setReason,
     setSubsidiaryList,
-    setSubsidiarySearch
+    setSubsidiarySearch,
+    setSelectedCustomerClass
   } = _actions__WEBPACK_IMPORTED_MODULE_16__["ActionCreators"];
   return Object(redux__WEBPACK_IMPORTED_MODULE_2__["bindActionCreators"])(Object.assign({}, {
     setDateRange,
@@ -4787,7 +4821,8 @@ function mapDispatchToProps(dispatch) {
     setPagingOption,
     setSubsidiaryList,
     setSubsidiarySearch,
-    getUserGuideContent
+    getUserGuideContent,
+    setSelectedCustomerClass
   }), dispatch);
 }
 
@@ -4804,7 +4839,8 @@ function mapStateToProps(state) {
     selectedBaseCurrency,
     selectedReason,
     selectedSubsidiary,
-    subsidiarySearch
+    subsidiarySearch,
+    selectedCustomerClass
   } = state;
   return Object.assign({}, {
     dateRange,
@@ -4818,7 +4854,8 @@ function mapStateToProps(state) {
     pagingOption,
     selectedTabKey,
     subsidiarySearch,
-    userGuideContent
+    userGuideContent,
+    selectedCustomerClass
   });
 }
 
@@ -5169,7 +5206,8 @@ class ParamHelper {
     dateRange,
     selectedReason,
     selectedSubsidiary,
-    subsidiarySearch
+    subsidiarySearch,
+    selectedCustomerClass
   }) {
     return _objectSpread({}, selectedParams, {}, {
       username,
@@ -5180,7 +5218,8 @@ class ParamHelper {
       fromDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_0__["default"].convertDateToString(dateRange.fromDate),
       toDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_0__["default"].convertDateToString(dateRange.toDate),
       subsidiaryList: subsidiarySearch ? selectedSubsidiary : '',
-      subsidiarySearch
+      subsidiarySearch,
+      customerClass: selectedCustomerClass
     });
   }
 
@@ -5222,13 +5261,14 @@ const dataVIPPlayerBinder = [{
 /*!*******************************************************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/reducers/filterReducer.js ***!
   \*******************************************************************************************************************/
-/*! exports provided: isGetAll, selectedReason, dateRange, selectedCurrency, username, selectedBaseCurrency, selectedSubsidiary, subsidiarySearch, selectedParams */
+/*! exports provided: isGetAll, selectedReason, selectedCustomerClass, dateRange, selectedCurrency, username, selectedBaseCurrency, selectedSubsidiary, subsidiarySearch, selectedParams */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isGetAll", function() { return isGetAll; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectedReason", function() { return selectedReason; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectedCustomerClass", function() { return selectedCustomerClass; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dateRange", function() { return dateRange; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectedCurrency", function() { return selectedCurrency; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "username", function() { return username; });
@@ -5260,6 +5300,12 @@ const isGetAll = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1_
 });
 const selectedReason = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, {
   [_actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_SELECTED_REASON"]](state, action) {
+    return action.data;
+  }
+
+});
+const selectedCustomerClass = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, {
+  [_actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_SELECTED_CUSTOMERCLASS"]](state, action) {
     return action.data;
   }
 

@@ -1,4 +1,4 @@
-﻿// Generated at: 1/26/2021 1:01:51 PM
+﻿// Generated at: 2/1/2021 3:58:08 PM
 var _language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -462,7 +462,7 @@ NoOfCustmer:"会员数",
 NoProductFound:"No product found",
 Normal:"正常",
 NotAllowBA:"此Licensee不允许投注总计",
-NotAllowedBAPlayerTurnonVip:"无法将BA玩家设为VIP",
+NotAllowedBAPlayerTurnonVip:"* 无法将BA玩家或玩家分级为10或13的玩家设为VIP",
 Note:"记录",
 Notification:"通知",
 NotificationDateRangeLimitNote:"最多可以检索六个月前的资料",
@@ -719,6 +719,7 @@ UpdateToActiveConfirmMsg:"确定要将此玩家更改为活跃吗?",
 UpdateToClosedConfirmMsg:"确定要将此玩家更改为关闭吗?",
 UpdateToLockedConfirmMsg:"确定要将此玩家更改为锁定吗?",
 UpdateUnSuccess:"Update unsucessfully!",
+UpdateVipStatus_ExcludeCC10And13:"玩家在级别10或13无法被设为VIP: {0} ({1})",
 UploadFileError:"无法上传档案，请确认档案格式!",
 UploadVipList:"上传VIP清单",
 UserGuide:"报告指南",

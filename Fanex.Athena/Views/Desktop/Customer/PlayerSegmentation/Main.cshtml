@@ -1,12 +1,9 @@
 ﻿@{
-    ViewBag.Title = "LAP - " + ViewResources.Customer +
-    " - " + ViewResources.PlayerSegmentation;
+    ViewBag.Title = "LAP - " + ViewResources.Customer + " - " + ViewResources.PlayerSegmentation;
     Layout = "~/Views/Desktop/Shared/_ReactPageLayout.cshtml";
 }
-
 @using Fanex.Athena.Model.Core.DataDomain
 @using Fanex.Athena.Model.Customer.Enum
-
 @model Fanex.Athena.Model.Customer.ViewModel.PlayerSegmentationViewModel
 @{
     var hasVIPManagementPermission = Model.HasVIPManagementPermission;
@@ -18,7 +15,7 @@
     {
         selectedSubsidiary = string.Join(",", Model.SubsidiaryList.Select(x => x.Value));
     }
-    else if(Model.ViewType == (byte)PlayerSegmentationViewType.WhiteLabel)
+    else if (Model.ViewType == (byte)PlayerSegmentationViewType.WhiteLabel)
     {
         selectedSubsidiary = string.Join(",", Model.SubsidiaryList.SelectMany(x => x.Children.Select(y => y.Value)).Distinct());
     }
@@ -27,6 +24,7 @@
         selectedSubsidiary = string.Empty;
     }
 
+    var selectedCustomerClass = string.Join(",", Model.CustomerClass);
     var vipPlayerManagementInitState = hasVIPManagementPermission ? new
     {
         selectedCurrency = string.Join(",", vipPlayerManagementVM.CurrencyList.Select(x => x.Key).ToArray()),
@@ -36,6 +34,7 @@
         isLoading = false,
         playerList = null as object,
         selectedParams = null as object,
+        selectedCustomerClass = selectedCustomerClass
     } : null;
 
     var vipPlayerManagementData = hasVIPManagementPermission ? new
@@ -50,46 +49,51 @@
         label = c.Value
     }).ToList();
 
-}
+    var customerClassList = Model.CustomerClass.Select(c => new
+    {
+        key = c,
+        value = c == "0" ? ViewResources.None : c
+    });
 
+}
 @section pagecss {
     <link href="@Url.ContentLinkByEnv("/www/css/build/reactpages/customer/playersegmentation/index.css")" rel="stylesheet" type="text/css" />
 }
 @section pagejs {
     <script src="@Url.ContentLinkByEnv("/www/js/build/reactpages/customer/playersegmentation/main.chunk.js")"></script>
 }
-
 @section globaljscode{
     window.initialState = {
-        ProblemPlayer: {
-            dateRange: { fromDate: '@problemPlayerVM.FromDate.ToString("MM/dd/yyyy")', toDate: '@problemPlayerVM.ToDate.ToString("MM/dd/yyyy")'},
-            selectedBaseCurrency: '@(Model.BaseCurrency)',
-            selectedCurrency: '@string.Join(",", problemPlayerVM.CurrencyList.Select(x => x.Key).ToArray())',
-            selectedReason: '@string.Join(",", problemPlayerVM.ReasonList.Select(x => x.Key).ToArray())',
-            username: '',
-            isLoading: false,
-            playerList: null,
-            selectedParams: null,
-            isGetAll: true,
-            selectedSubsidiary: '@(selectedSubsidiary)'
-        },
-        VipPlayerManagement: @Html.Raw(vipPlayerManagementInitState.ToJson())
+    ProblemPlayer: {
+    dateRange: { fromDate: '@problemPlayerVM.FromDate.ToString("MM/dd/yyyy")', toDate: '@problemPlayerVM.ToDate.ToString("MM/dd/yyyy")'},
+    selectedBaseCurrency: '@(Model.BaseCurrency)',
+    selectedCurrency: '@string.Join(",", problemPlayerVM.CurrencyList.Select(x => x.Key).ToArray())',
+    selectedReason: '@string.Join(",", problemPlayerVM.ReasonList.Select(x => x.Key).ToArray())',
+    selectedCustomerClass: '@selectedCustomerClass',
+    username: '',
+    isLoading: false,
+    playerList: null,
+    selectedParams: null,
+    isGetAll: true,
+    selectedSubsidiary: '@(selectedSubsidiary)'
+    },
+    VipPlayerManagement: @Html.Raw(vipPlayerManagementInitState.ToJson())
     }
 
     window._AppData = {
-        HasVipManagement: @hasVIPManagementPermission.ToString().ToLower(),
-        TabKeys: @Html.Raw(Model.TabKeys.ToJson()),
-        baseCurrencyList: @Html.Raw(baseCurrencyList.ToJson()),
-        subsidiaryList: @Html.Raw(Model.SubsidiaryList.ToJson()),
-        viewType: @Model.ViewType,
-        ProblemPlayer: {
-            currencyList: @Html.Raw(problemPlayerVM.CurrencyList.Select(x => new { key = x.Key, value = x.Value, status = true }).ToJson()),
-            reasonList: @Html.Raw(problemPlayerVM.ReasonList.Select(x => new { key = x.Key, value = x.Value, status = true }).ToJson()),
-            dateConstraint: { minDate: '@problemPlayerVM.MinDate.ToString("MM/dd/yyyy")', maxDate: '@problemPlayerVM.MaxDate.ToString("MM/dd/yyyy")', limitedMonthRange: null },
-        },
-        VipPlayerManagement: @Html.Raw(vipPlayerManagementData.ToJson())
+    HasVipManagement: @hasVIPManagementPermission.ToString().ToLower(),
+    TabKeys: @Html.Raw(Model.TabKeys.ToJson()),
+    baseCurrencyList: @Html.Raw(baseCurrencyList.ToJson()),
+    subsidiaryList: @Html.Raw(Model.SubsidiaryList.ToJson()),
+    customerClassList: @Html.Raw(customerClassList.ToJson()),
+    viewType: @Model.ViewType,
+    ProblemPlayer: {
+    currencyList: @Html.Raw(problemPlayerVM.CurrencyList.Select(x => new { key = x.Key, value = x.Value, status = true }).ToJson()),
+    reasonList: @Html.Raw(problemPlayerVM.ReasonList.Select(x => new { key = x.Key, value = x.Value, status = true }).ToJson()),
+    dateConstraint: { minDate: '@problemPlayerVM.MinDate.ToString("MM/dd/yyyy")', maxDate: '@problemPlayerVM.MaxDate.ToString("MM/dd/yyyy")', limitedMonthRange: null },
+    },
+    VipPlayerManagement: @Html.Raw(vipPlayerManagementData.ToJson())
     }
 }
-
 <div id="app-container">
 </div>

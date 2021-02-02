@@ -80,6 +80,7 @@
             return PlayerSegmentationViewType.WhiteLabel;
         }
 
+        public async Task<List<string>> CustomerClass(string licenseeName) => await _playerDataAccess.CustomerClass(licenseeName);
 
         private void BindAgentListBySubsidiaryBiz(BasePlayerListMetaModel metaModel)
         {

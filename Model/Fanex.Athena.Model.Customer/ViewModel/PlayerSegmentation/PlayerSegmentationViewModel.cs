@@ -1,7 +1,7 @@
 ﻿namespace Fanex.Athena.Model.Customer.ViewModel
 {
-    using Fanex.Athena.Model.Core.DTO.Common;
     using System.Collections.Generic;
+    using Fanex.Athena.Model.Core.DTO.Common;
 
     public class PlayerSegmentationViewModel
     {
@@ -12,5 +12,6 @@
         public string BaseCurrency { get; set; }
         public byte ViewType { get; set; }
         public IEnumerable<CheckedItem> SubsidiaryList { get; set; }
+        public List<string> CustomerClass { get; set; }
     }
 }

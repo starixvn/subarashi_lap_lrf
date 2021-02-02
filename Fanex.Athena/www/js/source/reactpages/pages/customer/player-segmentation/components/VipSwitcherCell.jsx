@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import ActionCreators from '../actions';
@@ -10,7 +10,8 @@ import { UpdateVipStatusAlertOption } from '../lib/helpers/sweetAlertHelper'
 
 const VipSwitcherCell = (props) => {
     const { index, updateVipStatus, setSweetAlertOption, playerList } = props;
-    const { systemId, isVip, isBA } = playerList[index];
+    const { systemId, isVip, isBA, customerClass } = playerList[index];
+    const canEditVip = !(isBA || customerClass ==="10" || customerClass==="13");
 
     const _handleCloseAlert = () => {
         setSweetAlertOption(null);
@@ -46,7 +47,7 @@ const VipSwitcherCell = (props) => {
 
     return (
         <Cell className={"center-align"}>
-            {isBA ? _getTextDisplay(isVip) : <Switcher checked={isVip} onChange={_handleChangeVipStatus} />}
+            {canEditVip ?  <Switcher checked={isVip} onChange={_handleChangeVipStatus} /> : _getTextDisplay(isVip) }
         </Cell>
     )
 }

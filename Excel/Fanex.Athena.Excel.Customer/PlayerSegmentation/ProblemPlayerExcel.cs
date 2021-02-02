@@ -37,7 +37,6 @@
 
         private void AddCommonHeaders()
         {
-            _infoHeaders.Add(new Tuple<string, string, Func<object, object>>(ViewResources.CustomerClass, nameof(ViewResources.CustomerClass), null));
             _infoHeaders.Add(new Tuple<string, string, Func<object, object>>(ViewResources.Reason, "ReasonList", DataParsers.ParseToBreaklineText));
             _infoHeaders.Add(new Tuple<string, string, Func<object, object>>(ViewResources.MarkDate, nameof(ViewResources.MarkDate), null));
         }

@@ -1,4 +1,4 @@
-import * as types from './types';
+﻿import * as types from './types';
 import * as dateRangeAction from '@jsroot/actions/dateRangeAction';
 import * as currencyAction from '@jsroot/actions/currencyAction';
 import * as baseCurrencyAction from '@jsroot/actions/baseCurrencyAction'
@@ -17,6 +17,13 @@ export const setReason = selectedReasons => {
     return {
         type: types.SET_SELECTED_REASON,
         data: selectedReasons
+    }
+}
+
+export const setSelectedCustomerClass = selectedCustomerClass => {
+    return {
+        type: types.SET_SELECTED_CUSTOMERCLASS,
+        data: selectedCustomerClass
     }
 }
 
