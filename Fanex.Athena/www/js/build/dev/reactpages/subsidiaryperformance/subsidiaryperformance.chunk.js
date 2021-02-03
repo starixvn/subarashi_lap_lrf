@@ -438,16 +438,16 @@ __webpack_require__.r(__webpack_exports__);
 const Loader = ({
   isLoading
 }) => {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "loading-process default",
     style: {
       display: `${isLoading ? 'block' : 'none'}`
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "icon-loading"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "loader-inner ball-beat"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null))));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Loader);
@@ -472,7 +472,7 @@ __webpack_require__.r(__webpack_exports__);
 const NoDataTitle = ({
   title
 }) => {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "no-info-row center-align",
     dangerouslySetInnerHTML: {
       __html: title ? title : _lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("NoInfo")
@@ -595,7 +595,7 @@ class Overlay extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     const style = {
       display: this.state.isOpening ? "block" : "none"
     };
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: mergedClassName,
       style: style,
       ref: this.refHandlers.container
@@ -648,9 +648,9 @@ const ReportTitle = (_ref) => {
       attrs = _objectWithoutProperties(_ref, ["content", "tag"]);
 
   const Tag = tag;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "report-title-container"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Tag, _extends({
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Tag, _extends({
     className: "report-title"
   }, attrs), content));
 };
@@ -910,14 +910,14 @@ class Calendar extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     for (let i = 0; i < 12; i++) {
       const isDisabled = this._isDisabledMonth(i);
 
-      monthOptions.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+      monthOptions.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         disabled: isDisabled,
         key: `month${i}`,
         value: i
       }, monthLabels[i]));
     }
 
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
       style: onlyClasses ? undefined : styles["MonthAndYearSelect"],
       className: classes.monthAndYearSelect,
       onChange: e => this.changeMonth(e.target.value, e),
@@ -942,13 +942,13 @@ class Calendar extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     const yearOptions = [];
 
     for (let i = range.startDate.year(); i <= range.endDate.year(); i++) {
-      yearOptions.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+      yearOptions.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         key: `year${i}`,
         value: i
       }, i));
     }
 
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
       style: onlyClasses ? undefined : styles["MonthAndYearSelect"],
       className: classes.monthAndYearSelect,
       onChange: this.changeYear.bind(this),
@@ -968,35 +968,35 @@ class Calendar extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       onlyClasses,
       showMonthArrow
     } = this.props;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       style: onlyClasses ? undefined : styles['MonthAndYear'],
       className: classes.monthAndYearWrapper
-    }, showMonthArrow ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    }, showMonthArrow ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       type: "button",
       disabled: this.disablePrevButton,
-      style: onlyClasses ? undefined : _objectSpread(_objectSpread({}, styles['MonthButton']), {}, {
+      style: onlyClasses ? undefined : _objectSpread({}, styles['MonthButton'], {
         float: 'left'
       }),
       className: classes.prevButton,
       onClick: this.prevButtonClickHandler.bind(this)
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-      style: onlyClasses ? undefined : _objectSpread(_objectSpread({}, styles['MonthArrow']), styles['MonthArrowPrev'])
-    })) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      style: onlyClasses ? undefined : _objectSpread({}, styles['MonthArrow'], {}, styles['MonthArrowPrev'])
+    })) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       className: classes.month
-    }, this.renderMonthList(classes)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    }, this.renderMonthList(classes)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       className: classes.monthAndYearDivider
-    }, "\xA0"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    }, "\xA0"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       className: classes.year
-    }, this.renderYearList(classes))), showMonthArrow ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    }, this.renderYearList(classes))), showMonthArrow ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       type: "button",
       disabled: this.disableNextButton,
-      style: onlyClasses ? undefined : _objectSpread(_objectSpread({}, styles['MonthButton']), {}, {
+      style: onlyClasses ? undefined : _objectSpread({}, styles['MonthButton'], {
         float: 'right'
       }),
       className: classes.nextButton,
       onClick: this.nextButtonClickHandler.bind(this)
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-      style: onlyClasses ? undefined : _objectSpread(_objectSpread({}, styles['MonthArrow']), styles['MonthArrowNext'])
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      style: onlyClasses ? undefined : _objectSpread({}, styles['MonthArrow'], {}, styles['MonthArrowNext'])
     })) : null);
   }
 
@@ -1016,7 +1016,7 @@ class Calendar extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     for (let i = dow; i < dayLength; i++) {
       const weekDayIndex = i % 7;
       const day = weekDays[weekDayIndex];
-      weekdays.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      weekdays.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         style: onlyClasses ? undefined : styles['Weekday'],
         className: classes.weekDay,
         key: i + day
@@ -1112,7 +1112,7 @@ class Calendar extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         return dayMoment.endOf('day').isSame(specialDay.date.endOf('day'));
       });
       const isOutsideMinMax = isOusideMinMax(dayMoment, minDate, maxDate, format);
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DayCell_js__WEBPACK_IMPORTED_MODULE_4__["default"], _extends({
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DayCell_js__WEBPACK_IMPORTED_MODULE_4__["default"], _extends({
         onSelect: this.handleSelect.bind(this)
       }, data, {
         theme: styles,
@@ -1140,16 +1140,16 @@ class Calendar extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       classNames
     } = this.props;
 
-    const classes = _objectSpread(_objectSpread({}, _styles_js__WEBPACK_IMPORTED_MODULE_5__["defaultClasses"]), classNames);
+    const classes = _objectSpread({}, _styles_js__WEBPACK_IMPORTED_MODULE_5__["defaultClasses"], {}, classNames);
 
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      style: onlyClasses ? undefined : _objectSpread(_objectSpread({}, styles['Calendar']), this.props.style),
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      style: onlyClasses ? undefined : _objectSpread({}, styles['Calendar'], {}, this.props.style),
       className: classes.calendar
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: classes.monthAndYear
-    }, this.renderMonthAndYear(classes)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, this.renderMonthAndYear(classes)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: classes.weekDays
-    }, this.renderWeekdays(classes)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, this.renderWeekdays(classes)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: classes.days
     }, this.renderDays(classes)));
   }
@@ -1251,7 +1251,7 @@ class DatePicker extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       date,
       format
     } = props;
-    this.locale = _objectSpread(_objectSpread({}, _defaultOptions_js__WEBPACK_IMPORTED_MODULE_4__["default"].locale), locale);
+    this.locale = _objectSpread({}, _defaultOptions_js__WEBPACK_IMPORTED_MODULE_4__["default"].locale, {}, locale);
     const selectedDate = Object(_utils_parseInput_js__WEBPACK_IMPORTED_MODULE_3__["default"])(date, format, 'startOf');
     this.state = {
       selectedDate,
@@ -1291,29 +1291,29 @@ class DatePicker extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       classNames
     } = this.props;
 
-    const classes = _objectSpread(_objectSpread({}, _styles_js__WEBPACK_IMPORTED_MODULE_6__["defaultClasses"]), classNames);
+    const classes = _objectSpread({}, _styles_js__WEBPACK_IMPORTED_MODULE_6__["defaultClasses"], {}, classNames);
 
     const {
       show
     } = this.state;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "daterange-container"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "daterange-label",
       onClick: this.show
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       readOnly: true,
       className: "input-text datepicker",
       type: "text",
       autoComplete: "off",
       value: this.dateText
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
       className: "icon icon-calendar"
-    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Overlay__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Overlay__WEBPACK_IMPORTED_MODULE_8__["default"], {
       isOpening: show
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: classes.dateRange
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Calendar_js__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Calendar_js__WEBPACK_IMPORTED_MODULE_9__["default"], {
       shownDate: this.state.selectedDate,
       format: format,
       firstDayOfWeek: firstDayOfWeek,
@@ -1423,8 +1423,8 @@ class DateRange extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     const endDate = Object(_utils_parseInput_js__WEBPACK_IMPORTED_MODULE_3__["default"])(props.endDate, format, 'endOf');
     this.styles = Object(_styles_js__WEBPACK_IMPORTED_MODULE_6__["default"])(theme);
     this.calendarSelectionStep = 0;
-    this.locale = _objectSpread(_objectSpread({}, _defaultOptions_js__WEBPACK_IMPORTED_MODULE_9__["default"].locale), props.locale);
-    this.ranges = _objectSpread(_objectSpread({}, _defaultOptions_js__WEBPACK_IMPORTED_MODULE_9__["default"].ranges(props.today, props.minDate, props.maxDate, props.limitedMonthRange)), props.ranges);
+    this.locale = _objectSpread({}, _defaultOptions_js__WEBPACK_IMPORTED_MODULE_9__["default"].locale, {}, props.locale);
+    this.ranges = _objectSpread({}, _defaultOptions_js__WEBPACK_IMPORTED_MODULE_9__["default"].ranges(props.today, props.minDate, props.maxDate, props.limitedMonthRange), {}, props.ranges);
     this.isValid = true;
     this.originalRange = {
       startDate,
@@ -1579,19 +1579,19 @@ class DateRange extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       styles
     } = this;
 
-    const classes = _objectSpread(_objectSpread({}, _styles_js__WEBPACK_IMPORTED_MODULE_6__["defaultClasses"]), classNames);
+    const classes = _objectSpread({}, _styles_js__WEBPACK_IMPORTED_MODULE_6__["defaultClasses"], {}, classNames);
 
     const calendarsCount = Number(calendars) - 1;
     const buttonHandlers = {
       apply: this.handleApply,
       cancel: this.handleCancel
     };
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "daterange-container"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "daterange-label",
       onClick: this.show
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       readOnly: true,
       name: "DateRange",
       id: "DateRange",
@@ -1599,15 +1599,15 @@ class DateRange extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       type: "text",
       autoComplete: "off",
       value: this.dateRangeText
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
       className: "icon icon-calendar"
-    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Overlay__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Overlay__WEBPACK_IMPORTED_MODULE_10__["default"], {
       isOpening: this.state.show,
       onClose: this.handleCancel
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: classes.dateRange,
       ref: element => this.dateRangeContainer = element
-    }, showRange && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PredefinedRanges_js__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    }, showRange && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PredefinedRanges_js__WEBPACK_IMPORTED_MODULE_5__["default"], {
       format: format,
       ranges: this.ranges,
       range: range,
@@ -1623,7 +1623,7 @@ class DateRange extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       for (var i = calendarsCount; i >= 0; i--) {
         const shownDate = i == calendarsCount ? range.startDate : range.endDate;
 
-        _calendars.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Calendar_js__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        _calendars.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Calendar_js__WEBPACK_IMPORTED_MODULE_4__["default"], {
           showMonthArrow: showMonthArrow,
           shownDate: shownDate,
           disableDaysBeforeToday: disableDaysBeforeToday,
@@ -1785,7 +1785,7 @@ class DayCell extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     const todayStyle = isToday ? styles['DayToday'] : {};
     const sundayStyle = isSunday ? styles['DaySunday'] : {};
     const specialDayStyle = isSpecialDay ? styles['DaySpecialDay'] : {};
-    return _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, todayStyle), sundayStyle), specialDayStyle), inRangeStyle), hoverStyle), passiveStyle), activeStyle), selectedStyle), startEdgeStyle), endEdgeStyle);
+    return _objectSpread({}, todayStyle, {}, sundayStyle, {}, specialDayStyle, {}, inRangeStyle, {}, hoverStyle, {}, passiveStyle, {}, activeStyle, {}, selectedStyle, {}, startEdgeStyle, {}, endEdgeStyle);
   }
 
   getClassNames(classes) {
@@ -1828,16 +1828,16 @@ class DayCell extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       height: styles['Day'].height,
       display: styles['Day'].display
     };
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       style: onlyClasses ? undefined : dayWrapperStyles,
       onClick: this.handleSelect.bind(this)
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       onMouseEnter: this.handleMouseEvent.bind(this),
       onMouseLeave: this.handleMouseEvent.bind(this),
       onMouseDown: this.handleMouseEvent.bind(this),
       onMouseUp: this.handleMouseEvent.bind(this),
       className: classes,
-      style: onlyClasses ? undefined : _objectSpread(_objectSpread({}, styles['Day']), stateStyle)
+      style: onlyClasses ? undefined : _objectSpread({}, styles['Day'], {}, stateStyle)
     }, dayMoment.date()));
   }
 
@@ -1953,13 +1953,13 @@ class PredefinedRanges extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       const active = this.selectedItem === name;
       gotActiveRange = !gotActiveRange && active;
 
-      const style = _objectSpread(_objectSpread({}, styles['PredefinedRangesItem']), gotActiveRange ? styles['PredefinedRangesItemActive'] : {});
+      const style = _objectSpread({}, styles['PredefinedRangesItem'], {}, gotActiveRange ? styles['PredefinedRangesItemActive'] : {});
 
       const predefinedRangeClass = classnames__WEBPACK_IMPORTED_MODULE_3___default()({
         [classes.predefinedRangesItem]: true,
         [classes.predefinedRangesItemActive]: gotActiveRange
       });
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         href: "#",
         key: 'range-' + name,
         className: predefinedRangeClass,
@@ -1976,7 +1976,7 @@ class PredefinedRanges extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       locale
     } = this.props;
 
-    const locales = _objectSpread(_objectSpread({}, _defaultOptions_js__WEBPACK_IMPORTED_MODULE_6__["default"].locale), locale);
+    const locales = _objectSpread({}, _defaultOptions_js__WEBPACK_IMPORTED_MODULE_6__["default"].locale, {}, locale);
 
     const {
       styles
@@ -1985,16 +1985,16 @@ class PredefinedRanges extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       apply: "apply",
       cancel: "cancel"
     };
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: _styles_js__WEBPACK_IMPORTED_MODULE_5__["defaultClasses"].rangeButtonGroup
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       className: classes.applyButton,
-      style: onlyClasses ? undefined : _objectSpread(_objectSpread({}, styles['RangeApplyButton']), style),
+      style: onlyClasses ? undefined : _objectSpread({}, styles['RangeApplyButton'], {}, style),
       type: "button",
       onClick: e => this.clickButton(e, action.apply)
-    }, locales.applyLabel), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    }, locales.applyLabel), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       className: classes.cancelButton,
-      style: onlyClasses ? undefined : _objectSpread(_objectSpread({}, styles['RangeCancelButton']), style),
+      style: onlyClasses ? undefined : _objectSpread({}, styles['RangeCancelButton'], {}, style),
       onClick: e => this.clickButton(e, action.cancel),
       type: "button"
     }, locales.cancelLabel));
@@ -2010,10 +2010,10 @@ class PredefinedRanges extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       styles
     } = this;
 
-    const classes = _objectSpread(_objectSpread({}, _styles_js__WEBPACK_IMPORTED_MODULE_5__["defaultClasses"]), classNames);
+    const classes = _objectSpread({}, _styles_js__WEBPACK_IMPORTED_MODULE_5__["defaultClasses"], {}, classNames);
 
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      style: onlyClasses ? undefined : _objectSpread(_objectSpread({}, styles['PredefinedRanges']), style),
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      style: onlyClasses ? undefined : _objectSpread({}, styles['PredefinedRanges'], {}, style),
       className: classes.predefinedRanges
     }, this.renderRangeList(classes), this.renderRangeButtons(classes));
   }
@@ -2376,39 +2376,39 @@ const defaultTheme = {
 
   const cellSize = (parseInt(calendarWidth, 10) - parseInt(calendarPadding, 10) * 2) / 7 - parseInt(cellMargin, 10) * 2;
   return {
-    DateRange: _objectSpread(_objectSpread({}, defaultTheme.DateRange), customTheme.DateRange),
-    Calendar: _objectSpread(_objectSpread({}, defaultTheme.Calendar), customTheme.Calendar),
-    Day: _objectSpread(_objectSpread({
+    DateRange: _objectSpread({}, defaultTheme.DateRange, {}, customTheme.DateRange),
+    Calendar: _objectSpread({}, defaultTheme.Calendar, {}, customTheme.Calendar),
+    Day: _objectSpread({
       width: cellSize,
       height: cellSize,
       lineHeight: cellSize + 'px'
-    }, defaultTheme.Day), customTheme.Day),
-    DayPassive: _objectSpread(_objectSpread({}, defaultTheme.DayPassive), customTheme.DayPassive),
-    DayHover: _objectSpread(_objectSpread({}, defaultTheme.DayHover), customTheme.DayHover),
-    DayToday: _objectSpread(_objectSpread({}, defaultTheme.DayToday), customTheme.DayToday),
-    DaySunday: _objectSpread(_objectSpread({}, defaultTheme.DaySunday), customTheme.DaySunday),
-    DaySpecialDay: _objectSpread(_objectSpread({}, defaultTheme.DaySpecialDay), customTheme.DaySpecialDay),
-    DayActive: _objectSpread(_objectSpread({}, defaultTheme.DayActive), customTheme.DayActive),
-    DaySelected: _objectSpread(_objectSpread({}, defaultTheme.DaySelected), customTheme.DaySelected),
-    DayStartEdge: _objectSpread(_objectSpread({}, defaultTheme.DayStartEdge), customTheme.DayStartEdge),
-    DayEndEdge: _objectSpread(_objectSpread({}, defaultTheme.DayEndEdge), customTheme.DayEndEdge),
-    DayInRange: _objectSpread(_objectSpread({}, defaultTheme.DayInRange), customTheme.DayInRange),
-    Weekday: _objectSpread(_objectSpread({
+    }, defaultTheme.Day, {}, customTheme.Day),
+    DayPassive: _objectSpread({}, defaultTheme.DayPassive, {}, customTheme.DayPassive),
+    DayHover: _objectSpread({}, defaultTheme.DayHover, {}, customTheme.DayHover),
+    DayToday: _objectSpread({}, defaultTheme.DayToday, {}, customTheme.DayToday),
+    DaySunday: _objectSpread({}, defaultTheme.DaySunday, {}, customTheme.DaySunday),
+    DaySpecialDay: _objectSpread({}, defaultTheme.DaySpecialDay, {}, customTheme.DaySpecialDay),
+    DayActive: _objectSpread({}, defaultTheme.DayActive, {}, customTheme.DayActive),
+    DaySelected: _objectSpread({}, defaultTheme.DaySelected, {}, customTheme.DaySelected),
+    DayStartEdge: _objectSpread({}, defaultTheme.DayStartEdge, {}, customTheme.DayStartEdge),
+    DayEndEdge: _objectSpread({}, defaultTheme.DayEndEdge, {}, customTheme.DayEndEdge),
+    DayInRange: _objectSpread({}, defaultTheme.DayInRange, {}, customTheme.DayInRange),
+    Weekday: _objectSpread({
       width: cellSize,
       height: cellSize / 2,
       lineHeight: cellSize / 2 + 'px'
-    }, defaultTheme.Weekday), customTheme.Weekday),
-    MonthAndYear: _objectSpread(_objectSpread({}, defaultTheme.MonthAndYear), customTheme.MonthAndYear),
-    MonthAndYearSelect: _objectSpread(_objectSpread({}, defaultTheme.MonthAndYearSelect), customTheme.MonthAndYearSelect),
-    MonthButton: _objectSpread(_objectSpread({}, defaultTheme.MonthButton), customTheme.MonthButton),
-    MonthArrow: _objectSpread(_objectSpread({}, defaultTheme.MonthArrow), customTheme.MonthArrow),
-    MonthArrowPrev: _objectSpread(_objectSpread({}, defaultTheme.MonthArrowPrev), customTheme.MonthArrowPrev),
-    MonthArrowNext: _objectSpread(_objectSpread({}, defaultTheme.MonthArrowNext), customTheme.MonthArrowNext),
-    PredefinedRanges: _objectSpread(_objectSpread({}, defaultTheme.PredefinedRanges), customTheme.PredefinedRanges),
-    PredefinedRangesItem: _objectSpread(_objectSpread({}, defaultTheme.PredefinedRangesItem), customTheme.PredefinedRangesItem),
-    PredefinedRangesItemActive: _objectSpread(_objectSpread({}, defaultTheme.PredefinedRangesItemActive), customTheme.PredefinedRangesItemActive),
-    RangeApplyButton: _objectSpread(_objectSpread(_objectSpread({}, defaultTheme.RangeButton), defaultTheme.RangeApplyButton), customTheme.RangeApplyButton),
-    RangeCancelButton: _objectSpread(_objectSpread(_objectSpread({}, defaultTheme.RangeButton), defaultTheme.RangeCancelButton), customTheme.RangeCancelButton)
+    }, defaultTheme.Weekday, {}, customTheme.Weekday),
+    MonthAndYear: _objectSpread({}, defaultTheme.MonthAndYear, {}, customTheme.MonthAndYear),
+    MonthAndYearSelect: _objectSpread({}, defaultTheme.MonthAndYearSelect, {}, customTheme.MonthAndYearSelect),
+    MonthButton: _objectSpread({}, defaultTheme.MonthButton, {}, customTheme.MonthButton),
+    MonthArrow: _objectSpread({}, defaultTheme.MonthArrow, {}, customTheme.MonthArrow),
+    MonthArrowPrev: _objectSpread({}, defaultTheme.MonthArrowPrev, {}, customTheme.MonthArrowPrev),
+    MonthArrowNext: _objectSpread({}, defaultTheme.MonthArrowNext, {}, customTheme.MonthArrowNext),
+    PredefinedRanges: _objectSpread({}, defaultTheme.PredefinedRanges, {}, customTheme.PredefinedRanges),
+    PredefinedRangesItem: _objectSpread({}, defaultTheme.PredefinedRangesItem, {}, customTheme.PredefinedRangesItem),
+    PredefinedRangesItemActive: _objectSpread({}, defaultTheme.PredefinedRangesItemActive, {}, customTheme.PredefinedRangesItemActive),
+    RangeApplyButton: _objectSpread({}, defaultTheme.RangeButton, {}, defaultTheme.RangeApplyButton, {}, customTheme.RangeApplyButton),
+    RangeCancelButton: _objectSpread({}, defaultTheme.RangeButton, {}, defaultTheme.RangeCancelButton, {}, customTheme.RangeCancelButton)
   };
 });
 
@@ -2560,17 +2560,17 @@ const bodyDecimalStyle = {
 const bodyCellStyle = {
   rowspan: bodyTextStyle,
   center: {
-    alignment: _objectSpread(_objectSpread({}, bodyTextStyle.alignment), {}, {
+    alignment: _objectSpread({}, bodyTextStyle.alignment, {
       horizontal: "center"
     })
   },
   left: {
-    alignment: _objectSpread(_objectSpread({}, bodyTextStyle.alignment), {}, {
+    alignment: _objectSpread({}, bodyTextStyle.alignment, {
       horizontal: "left"
     })
   },
   right: {
-    alignment: _objectSpread(_objectSpread({}, bodyTextStyle.alignment), {}, {
+    alignment: _objectSpread({}, bodyTextStyle.alignment, {
       horizontal: "right"
     })
   },
@@ -2578,7 +2578,7 @@ const bodyCellStyle = {
     numFmt: "#,##0"
   },
   decimal: bodyDecimalStyle,
-  negativeDecimal: _objectSpread(_objectSpread({}, bodyDecimalStyle), {}, {
+  negativeDecimal: _objectSpread({}, bodyDecimalStyle, {
     font: {
       color: {
         rgb: "FF0000"
@@ -2595,29 +2595,29 @@ const totalTextStyle = {
   }
 };
 
-const totalDecimalStyle = _objectSpread(_objectSpread({}, totalTextStyle), {}, {
+const totalDecimalStyle = _objectSpread({}, totalTextStyle, {
   numFmt: "#,##0.00"
 });
 
 const totalCellStyle = {
   default: totalTextStyle,
-  rowspan: _objectSpread(_objectSpread({}, totalTextStyle), {}, {
+  rowspan: _objectSpread({}, totalTextStyle, {
     alignment: {
       horizontal: "center",
       vertical: "center"
     }
   }),
-  center: _objectSpread(_objectSpread({}, totalTextStyle), {}, {
+  center: _objectSpread({}, totalTextStyle, {
     alignment: {
       vertical: "center",
       horizontal: "center"
     }
   }),
-  number: _objectSpread(_objectSpread({}, totalTextStyle), {}, {
+  number: _objectSpread({}, totalTextStyle, {
     numFmt: "#,##0"
   }),
   decimal: totalDecimalStyle,
-  negativeDecimal: _objectSpread(_objectSpread({}, totalDecimalStyle), {}, {
+  negativeDecimal: _objectSpread({}, totalDecimalStyle, {
     font: {
       bold: true,
       color: {
@@ -2646,28 +2646,28 @@ const grandTotalTextStyle = {
   }
 };
 
-const decimalGrandTotalStyle = _objectSpread(_objectSpread({}, grandTotalTextStyle), {}, {
+const decimalGrandTotalStyle = _objectSpread({}, grandTotalTextStyle, {
   numFmt: "#,##0.00"
 });
 
 const grandTotalCellStyle = {
   default: grandTotalTextStyle,
-  rowspan: _objectSpread(_objectSpread({}, grandTotalTextStyle), {}, {
+  rowspan: _objectSpread({}, grandTotalTextStyle, {
     alignment: {
       horizontal: "center",
       vertical: "center"
     }
   }),
-  center: _objectSpread(_objectSpread({}, grandTotalTextStyle), {}, {
+  center: _objectSpread({}, grandTotalTextStyle, {
     alignment: {
       horizontal: "center"
     }
   }),
-  number: _objectSpread(_objectSpread({}, grandTotalTextStyle), {}, {
+  number: _objectSpread({}, grandTotalTextStyle, {
     numFmt: "#,##0"
   }),
   decimal: decimalGrandTotalStyle,
-  negativeDecimal: _objectSpread(_objectSpread({}, decimalGrandTotalStyle), {}, {
+  negativeDecimal: _objectSpread({}, decimalGrandTotalStyle, {
     font: {
       bold: true,
       color: {
@@ -2675,7 +2675,7 @@ const grandTotalCellStyle = {
       }
     }
   }),
-  percent: _objectSpread(_objectSpread({}, grandTotalTextStyle), {}, {
+  percent: _objectSpread({}, grandTotalTextStyle, {
     numFmt: "#,##0.00%"
   })
 };
@@ -2730,7 +2730,7 @@ class AppLayout extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   }
 
   render() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       id: "container",
       className: "container-fluid"
     }, this.props.children);
@@ -3403,17 +3403,17 @@ class AppContainer extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   }
 
   render() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_7__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Loader__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_7__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Loader__WEBPACK_IMPORTED_MODULE_6__["default"], {
       isLoading: this.props.isLoading
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormFilter__WEBPACK_IMPORTED_MODULE_5__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormFilter__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "result-content"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_breadcrumb__WEBPACK_IMPORTED_MODULE_10__["Breadcrumb"], {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_breadcrumb__WEBPACK_IMPORTED_MODULE_10__["Breadcrumb"], {
       items: this.breadcrumbItems,
       value: this.props.params.Level,
       onChange: this._backToMain
-    }), this.reportTitle && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_ReportTitle__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    }), this.reportTitle && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_ReportTitle__WEBPACK_IMPORTED_MODULE_8__["default"], {
       content: this.reportTitle
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DataGrid__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DataGrid__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
   }
 
 }
@@ -3529,29 +3529,29 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 
   _buildHeader() {
     const customerLevel = this.level === _constants_report__WEBPACK_IMPORTED_MODULE_10__["ReportLevel"].CUSTOMER;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderRow"], {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderRow"], {
       style: {
         height: 32
       }
-    }, !customerLevel && _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].viewType === _constants_report__WEBPACK_IMPORTED_MODULE_10__["SubsidiaryViewType"].MASTER_MANAGEMENT && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
+    }, !customerLevel && _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].viewType === _constants_report__WEBPACK_IMPORTED_MODULE_10__["SubsidiaryViewType"].MASTER_MANAGEMENT && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
       colWidth: 150
-    }, _lib_service__WEBPACK_IMPORTED_MODULE_8__["HeaderText"].WhiteLabel), customerLevel && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
+    }, _lib_service__WEBPACK_IMPORTED_MODULE_8__["HeaderText"].WhiteLabel), customerLevel && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
       colWidth: 30
-    }, _lib_service__WEBPACK_IMPORTED_MODULE_8__["HeaderText"].Index), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
+    }, _lib_service__WEBPACK_IMPORTED_MODULE_8__["HeaderText"].Index), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
       colWidth: 150
-    }, customerLevel ? _lib_service__WEBPACK_IMPORTED_MODULE_8__["HeaderText"].ExternalId : _lib_service__WEBPACK_IMPORTED_MODULE_8__["HeaderText"].Subsidiary), customerLevel && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
+    }, customerLevel ? _lib_service__WEBPACK_IMPORTED_MODULE_8__["HeaderText"].ExternalId : _lib_service__WEBPACK_IMPORTED_MODULE_8__["HeaderText"].Subsidiary), customerLevel && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
       colWidth: 150
-    }, _lib_service__WEBPACK_IMPORTED_MODULE_8__["HeaderText"].SystemId), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
+    }, _lib_service__WEBPACK_IMPORTED_MODULE_8__["HeaderText"].SystemId), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
       colWidth: 150
-    }, _lib_service__WEBPACK_IMPORTED_MODULE_8__["HeaderText"].CurrencyName), !customerLevel && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
+    }, _lib_service__WEBPACK_IMPORTED_MODULE_8__["HeaderText"].CurrencyName), !customerLevel && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
       colWidth: 200
-    }, _lib_service__WEBPACK_IMPORTED_MODULE_8__["HeaderText"].Product), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
+    }, _lib_service__WEBPACK_IMPORTED_MODULE_8__["HeaderText"].Product), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
       colWidth: 150
-    }, _lib_service__WEBPACK_IMPORTED_MODULE_8__["HeaderText"].BetCount), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
+    }, _lib_service__WEBPACK_IMPORTED_MODULE_8__["HeaderText"].BetCount), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
       colWidth: 200
-    }, _lib_service__WEBPACK_IMPORTED_MODULE_8__["HeaderText"].Turnover), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
+    }, _lib_service__WEBPACK_IMPORTED_MODULE_8__["HeaderText"].Turnover), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
       colWidth: 200
-    }, _lib_service__WEBPACK_IMPORTED_MODULE_8__["HeaderText"].CustomerWinLoss), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
+    }, _lib_service__WEBPACK_IMPORTED_MODULE_8__["HeaderText"].CustomerWinLoss), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
       colWidth: 200
     }, _lib_service__WEBPACK_IMPORTED_MODULE_8__["HeaderText"].SubsidiaryWinLoss));
   }
@@ -3576,22 +3576,22 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 
           for (let pro = 0; pro < rowSpan; pro++) {
             const product = products[pro];
-            rows.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Row"], {
+            rows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Row"], {
               key: key
-            }, isMasterView && cur === 0 && pro === 0 && sub === 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+            }, isMasterView && cur === 0 && pro === 0 && sub === 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
               title: subData.WhiteLabel,
               rowSpan: subData.TotalItem
-            }, subData.WhiteLabel), cur === 0 && pro === 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+            }, subData.WhiteLabel), cur === 0 && pro === 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
               title: item.Subsidiary,
               rowSpan: item.TotalItem
-            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
               href: "javascript:;",
               onClick: () => this._drillDown(item.Subsidiary)
-            }, item.Subsidiary)), pro === 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+            }, item.Subsidiary)), pro === 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
               title: currency,
               rowSpan: rowSpan,
               className: "center-align"
-            }, currency), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+            }, currency), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
               title: product.Product
             }, product.Product), this._buildCommonCells(product, key)));
             key++;
@@ -3606,16 +3606,16 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   _buildDetailBody() {
     const data = this.state.gridData.Data;
     const rows = data.map((item, index) => {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Row"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Row"], {
         key: index
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
         title: index + 1,
         className: "center-align"
-      }, index + 1), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+      }, index + 1), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
         title: item.ExternalId
-      }, item.ExternalId), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+      }, item.ExternalId), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
         title: item.SystemId
-      }, item.SystemId), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+      }, item.SystemId), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
         title: item.CurrencyName,
         className: "center-align"
       }, item.CurrencyName), this._buildCommonCells(item, index));
@@ -3640,13 +3640,13 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     for (let i = 0; i < subs.length; i++) {
       const totalName = subs[i];
       const item = totalData[totalName];
-      footer.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Row"], {
+      footer.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Row"], {
         className: "fixed-table-total",
         key: `total${i}`
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
         colSpan: colSpan,
         title: `${_lib_service__WEBPACK_IMPORTED_MODULE_8__["TotalText"].Total} ${totalName}`
-      }, `${_lib_service__WEBPACK_IMPORTED_MODULE_8__["TotalText"].Total} ${totalName}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+      }, `${_lib_service__WEBPACK_IMPORTED_MODULE_8__["TotalText"].Total} ${totalName}`), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
         title: `${_lib_service__WEBPACK_IMPORTED_MODULE_8__["TotalText"].Based} ${item.CurrencyName}`,
         className: "center-align",
         colSpan: "2"
@@ -3665,13 +3665,13 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     }
 
     const colSpan = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].viewType === _constants_report__WEBPACK_IMPORTED_MODULE_10__["SubsidiaryViewType"].MASTER_MANAGEMENT ? 2 : 1;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Row"], {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Row"], {
       key: "grandTotal",
       className: "fixed-table-grant-total"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
       colSpan: colSpan,
       title: _lib_service__WEBPACK_IMPORTED_MODULE_8__["TotalText"].Total
-    }, _lib_service__WEBPACK_IMPORTED_MODULE_8__["TotalText"].Total), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+    }, _lib_service__WEBPACK_IMPORTED_MODULE_8__["TotalText"].Total), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
       title: `${_lib_service__WEBPACK_IMPORTED_MODULE_8__["TotalText"].Based} ${grandTotal.CurrencyName}`,
       className: "center-align",
       colSpan: "2"
@@ -3687,15 +3687,15 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     for (let i = 0; i < rowSpan; i++) {
       const totalName = subs[i];
       const item = totalData[totalName];
-      footer.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Row"], {
+      footer.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Row"], {
         className: "fixed-table-total",
         key: `total${i}`
-      }, i === 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+      }, i === 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
         title: `${_lib_service__WEBPACK_IMPORTED_MODULE_8__["TotalText"].TotalIn} ${this.baseCurrency}`,
         colSpan: "3",
         rowSpan: rowSpan,
         className: "center-align"
-      }, `${_lib_service__WEBPACK_IMPORTED_MODULE_8__["TotalText"].TotalIn} ${this.baseCurrency}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+      }, `${_lib_service__WEBPACK_IMPORTED_MODULE_8__["TotalText"].TotalIn} ${this.baseCurrency}`), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
         title: item.CurrencyName,
         className: "center-align",
         colSpan: "1"
@@ -3713,10 +3713,10 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       return null;
     }
 
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Row"], {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Row"], {
       key: "grandTotal",
       className: "fixed-table-grant-total"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
       title: `${_lib_service__WEBPACK_IMPORTED_MODULE_8__["TotalText"].TotalIn} ${grandTotal.CurrencyName}`,
       className: "center-align",
       colSpan: "4"
@@ -3728,19 +3728,19 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
           turnover = _lib_numberFormat__WEBPACK_IMPORTED_MODULE_6__["default"].formatDecimal(data.Turnover),
           customerWinLoss = _lib_numberFormat__WEBPACK_IMPORTED_MODULE_6__["default"].formatDecimal(data.CustomerWinLoss),
           subsidiaryWinLoss = _lib_numberFormat__WEBPACK_IMPORTED_MODULE_6__["default"].formatDecimal(data.SubsidiaryWinLoss);
-    const cells = [/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+    const cells = [react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
       key: `${index}-bc`,
       title: betcount,
       className: "right-align"
-    }, betcount), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+    }, betcount), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
       key: `${index}-tn`,
       title: turnover,
       className: "right-align"
-    }, turnover), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+    }, turnover), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
       key: `${index}-cw`,
       title: customerWinLoss,
       className: "right-align"
-    }, customerWinLoss), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+    }, customerWinLoss), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
       key: `${index}-sw`,
       title: subsidiaryWinLoss,
       className: `right-align ${data.SubsidiaryWinLoss < 0 ? "negative" : ""}`
@@ -3758,10 +3758,10 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     }
 
     if (!Data.length) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_7__["default"], null);
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_7__["default"], null);
     }
 
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Table"], {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Table"], {
       minWidth: 600,
       autoWidth: true,
       bodyHeight: 300,
@@ -3977,7 +3977,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       includeSelectedParentKey: false,
       useOriginalDataSource: false
     };
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_5__["TreeViewSelect"], {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_5__["TreeViewSelect"], {
       language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].currentLanguage,
       id: "SubsidiaryTreeView",
       dataSource: subsidiaryList,
@@ -3998,7 +3998,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 
   _renderProductSelectList() {
     const productOptions = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].productOptions;
-    return productOptions && productOptions.length && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_5___default.a, {
+    return productOptions && productOptions.length && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_5___default.a, {
       language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].currentLanguage,
       dataSource: productOptions,
       keyField: "Code",
@@ -4013,7 +4013,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       selectedBaseCurrency
     } = this.props;
     const baseCurrencyList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].baseCurrencyList;
-    return baseCurrencyList && baseCurrencyList.length && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    return baseCurrencyList && baseCurrencyList.length && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_4__["default"], {
       id: "ddlBased",
       name: "BaseCurrency",
       value: selectedBaseCurrency,
@@ -4025,7 +4025,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   _renderDateRange() {
     const dateRange = this.props.dateRange;
     const dateConstraint = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].dateConstraint;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_date_range_index__WEBPACK_IMPORTED_MODULE_6__["DateRange"], {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_date_range_index__WEBPACK_IMPORTED_MODULE_6__["DateRange"], {
       startDate: dateRange.fromDate,
       endDate: dateRange.toDate,
       minDate: dateConstraint.minDate,
@@ -4046,110 +4046,110 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     let subsidiaryDropdown = false;
 
     if (_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].viewType !== _constants_report__WEBPACK_IMPORTED_MODULE_12__["SubsidiaryViewType"].NOT_MANAGEMENT) {
-      subsidiaryDropdown = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      subsidiaryDropdown = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-12 col-md-3 col-sm-5 col-lg-3 col-xl-3"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "label-text"
       }, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].viewType === _constants_report__WEBPACK_IMPORTED_MODULE_12__["SubsidiaryViewType"].MASTER_MANAGEMENT ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("WhiteLabel") : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("Subsidiary")), this._renderSubsidiarySelectList()));
     }
 
     let disableSeparateSabaWinLoss = `,${this.props.selectedProduct},`.toLowerCase().indexOf(',sb,') == -1;
-    let separateSabaWinLoss = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    let separateSabaWinLoss = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-md-2 col-sm-6 col-lg-3 col-xl-3"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "checkbox-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       disabled: disableSeparateSabaWinLoss,
       type: "checkbox",
       className: "checkbox",
       checked: this.props.isSeparateSabaWinLoss,
       id: "SeparateSabaWinLoss",
       onChange: () => this._changeIsSeparateSabaWinLoss(!this.state.isSeparateSabaWinLoss)
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       htmlFor: "SeparateSabaWinLoss"
     }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("SeparateSabaWinLoss")))));
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "page-filter"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "row"
-    }, subsidiaryDropdown, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, subsidiaryDropdown, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: `col-12 col-md-4 ${subsidiaryDropdown ? 'col-sm-6' : 'col-sm-5'} col-lg-3 col-xl-2`
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       className: "label-text"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("Date")), this._renderDateRange())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("Date")), this._renderDateRange())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: `col-12 col-md-3 ${subsidiaryDropdown ? 'col-sm-5' : 'col-sm-4'} col-lg-3 col-xl-2`
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       className: "label-text"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("Product")), this._renderProductSelectList())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("Product")), this._renderProductSelectList())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: `col-12 ${subsidiaryDropdown ? 'col-sm-4 col-md-2' : 'col-sm-3 col-md-3'} col-lg-3 col-xl-3`
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       className: "label-text"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("BaseCurrency")), this._renderBaseCurrencySelectList()))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("BaseCurrency")), this._renderBaseCurrencySelectList()))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "row"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: `col-12 ${subsidiaryDropdown ? 'col-md-3 col-xl-3' : 'col-md-4 col-xl-2'} col-sm-5 col-lg-3`
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "checkbox-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "checkbox",
       className: "checkbox",
       checked: this.props.convertAll,
       id: "IsConvertAll",
       onChange: () => this.props.changeConvertAll(!this.props.convertAll)
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       htmlFor: "IsConvertAll"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("ConvertAllFiguresToBaseCurrency"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("ConvertAllFiguresToBaseCurrency"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: `col-12 ${subsidiaryDropdown ? 'col-md-4 col-sm-6' : 'col-md-3 col-sm-4'} col-lg-3 col-xl-2`
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "checkbox-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "checkbox",
       className: "checkbox",
       checked: this.props.includeDrawData,
       id: "IncludeDrawData",
       onChange: () => this.props.changeIncludeDrawData(!this.props.includeDrawData)
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       htmlFor: "IncludeDrawData"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("IncludeDrawData"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("IncludeDrawData"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: `col-12 ${subsidiaryDropdown ? 'col-sm-5 col-lg-3 col-xl-2' : 'col-sm-3 col-lg-2 col-xl-3'} col-md-3`
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "checkbox-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "checkbox",
       className: "checkbox",
       checked: this.props.isExcludeTest,
       id: "ExcludeTest",
       onChange: () => this.props.changeIsExcludeTest(!this.props.isExcludeTest)
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       htmlFor: "ExcludeTest"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("ExcludeTestData"))))), separateSabaWinLoss, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("ExcludeTestData"))))), separateSabaWinLoss, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-12 col-md-2 col-sm-4 col-lg-2 col-xl-2"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "button-group btn-submit-container"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       disabled: !this.isValidModel,
       type: "button",
       className: "btn btn-submit",
       onClick: this.submit
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("Submit"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("Submit"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "caret-block"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
       className: "icon-excel right",
       onClick: this.exportExcel,
       title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("ExportToExcel")
@@ -4214,13 +4214,13 @@ class App extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
   }
 
   render() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_3__["Provider"], {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_3__["Provider"], {
       store: store
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AppContainer_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AppContainer_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null));
   }
 
 }
-react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), document.getElementById("app-container"));
+react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), document.getElementById("app-container"));
 
 /***/ }),
 

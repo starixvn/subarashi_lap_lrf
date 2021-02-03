@@ -2137,4 +2137,7 @@
   <data name="ProductGDG" xml:space="preserve">
     <value>金大门</value>
   </data>
+  <data name="Happy5LinkedGames" xml:space="preserve">
+    <value>快乐5系列游戏</value>
+  </data>
 </root>

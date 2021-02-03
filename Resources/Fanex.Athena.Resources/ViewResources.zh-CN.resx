@@ -2580,4 +2580,7 @@
   <data name="AgentBetInterval" xml:space="preserve">
     <value>代理投注间隔(秒)</value>
   </data>
+  <data name="Happy5LinkedGames" xml:space="preserve">
+    <value>快乐5系列游戏</value>
+  </data>
 </root>

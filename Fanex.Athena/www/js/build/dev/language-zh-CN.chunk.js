@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 2/4/2021 5:48:50 PM
+﻿// Generated at: 2/5/2021 10:56:08 AM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -393,6 +393,7 @@ HalfTime:"半场",
 Handicap:"让球",
 HandicapOverUnderLive:"让球/大小/滚球",
 Happy5:"快乐5",
+Happy5LinkedGames:"快乐5系列游戏",
 HD:"主和",
 HH:"主主",
 hide:"隐藏",
