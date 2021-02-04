@@ -4696,7 +4696,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to *For BA player and the player with Customer Class 10 or 13, don&apos;t allow turning on VIP.
+        ///   Looks up a localized string similar to For BA player, don&apos;t allow turning on VIP.
         /// </summary>
         public static string NotAllowedBAPlayerTurnonVip {
             get {
@@ -7230,15 +7230,6 @@ namespace Fanex.Athena.Resources {
         public static string UpdateUnSuccess {
             get {
                 return ResourceManager.GetString("UpdateUnSuccess", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Player with Customer Class 10 or 13, no update: {0} ({1}).
-        /// </summary>
-        public static string UpdateVipStatus_ExcludeCC10And13 {
-            get {
-                return ResourceManager.GetString("UpdateVipStatus_ExcludeCC10And13", resourceCulture);
             }
         }
         

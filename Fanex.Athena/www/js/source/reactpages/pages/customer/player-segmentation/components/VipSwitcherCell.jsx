@@ -11,7 +11,7 @@ import { UpdateVipStatusAlertOption } from '../lib/helpers/sweetAlertHelper'
 const VipSwitcherCell = (props) => {
     const { index, updateVipStatus, setSweetAlertOption, playerList } = props;
     const { systemId, isVip, isBA, customerClass } = playerList[index];
-    const canEditVip = !(isBA || customerClass ==="10" || customerClass==="13");
+    const canEditVip = !(isBA);
 
     const _handleCloseAlert = () => {
         setSweetAlertOption(null);
@@ -47,7 +47,7 @@ const VipSwitcherCell = (props) => {
 
     return (
         <Cell className={"center-align"}>
-            {canEditVip ?  <Switcher checked={isVip} onChange={_handleChangeVipStatus} /> : _getTextDisplay(isVip) }
+            {canEditVip ? <Switcher checked={isVip} onChange={_handleChangeVipStatus} /> : _getTextDisplay(isVip)}
         </Cell>
     )
 }

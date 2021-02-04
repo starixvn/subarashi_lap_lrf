@@ -33,7 +33,7 @@ export const DataGrid = (props) => {
                     const newPlayerList = playerList.map(_ => {
                         return {
                             ..._,
-                            ...{ isSelected: checked && !(_.isBA || _.customerClass == '10' || _.customerClass == '13') }
+                            ...{ isSelected: checked && !(_.isBA) }
                         }
                     });
 
@@ -83,7 +83,7 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
     const { playerList, selectedParams, selectedTabKey, pagingOption } = state;
-    const isCheckAll = playerList && !playerList.some(_ => !(_.isSelected || _.isBA || _.customerClass == '10' || _.customerClass == '13'));
+    const isCheckAll = playerList && !playerList.some(_ => !(_.isSelected || _.isBA));
     return Object.assign({}, { playerList, isCheckAll, pagingOption, selectedParams, selectedTabKey });
 };
 
