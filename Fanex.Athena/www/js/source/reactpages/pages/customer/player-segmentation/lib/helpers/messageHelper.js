@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import LangHelper from '@jsroot/lib/langHelper';
 import { UpdateVIPStatusCode } from '../constants';
 
@@ -24,9 +24,9 @@ export default class MessageHelper {
             content: 'msg-error',
             icon: 'icon-warning'
         },
-        [UpdateVIPStatusCode.ExcludeCC10And13]: {
-            content: 'msg-success',
-            icon: 'icon-tick'
+        [UpdateVIPStatusCode.InvalidExternalId]: {
+            content: 'msg-error',
+            icon: 'icon-warning'
         }
     }
 
@@ -42,11 +42,7 @@ export default class MessageHelper {
             [UpdateVIPStatusCode.NoChangeByBAStatus]: () => LangHelper.getSingleResource('BAPlayerNoUpdateVIPSingle'),
 
             [UpdateVIPStatusCode.Avoid]: data => LangHelper.getSingleResource('RetractedPlayerUpdateVipStatusSingle')
-                .replace('{0}', data.ids),
-
-            [UpdateVIPStatusCode.ExcludeCC10And13]: data => LangHelper.getSingleResource('UpdateVipStatus_ExcludeCC10And13')
-                .replace('{0}', data.numberOfPlayer)
-                .replace('{1}', data.ids)
+                .replace('{0}', data.ids)
         },
         multipleUpdate: {
             [UpdateVIPStatusCode.Success]: data => LangHelper.getSingleResource('SuccessUpdateVipStatus')
@@ -69,10 +65,6 @@ export default class MessageHelper {
 
             [UpdateVIPStatusCode.InvalidExternalId]: data => LangHelper.getSingleResource('InvalidPlayerUpdateVipStatusByExternalId')
                 .replace('{0}', data.numberOfPlayer)
-                .replace('{1}', data.ids),
-
-            [UpdateVIPStatusCode.ExcludeCC10And13]: data => LangHelper.getSingleResource('UpdateVipStatus_ExcludeCC10And13')
-                .replace('{0}', data.numberOfPlayer)
                 .replace('{1}', data.ids)
         }
     }
@@ -92,7 +84,7 @@ export default class MessageHelper {
 
     static combineMsgResult = (msgResults) => {
         const msgResultExternalIdIndex = msgResults.findIndex(_ => _.code === UpdateVIPStatusCode.NoChangeByExternalId); // no change VIP status - by externalId
-        if (msgResultExternalIdIndex >= 0) {
+        if(msgResultExternalIdIndex >= 0) {
             msgResults = this.combineMsgResultWithStatusNoChange(msgResults, msgResultExternalIdIndex);
         }
         return msgResults;
@@ -100,7 +92,7 @@ export default class MessageHelper {
 
     static combineMsgResultWithStatusNoChange = (msgResults, msgResultExternalIdIndex) => {
         const msgResultSystemId = msgResults.find(_ => _.code === UpdateVIPStatusCode.NoChangeBySystemId); // no change VIP status - by systemId
-        if (msgResultSystemId) {
+        if(msgResultSystemId) {
             msgResultSystemId.numberOfPlayer += msgResults[msgResultExternalIdIndex].numberOfPlayer;
             msgResults.splice(msgResultExternalIdIndex, 1);
         } else {
@@ -109,3 +101,4 @@ export default class MessageHelper {
         return msgResults;
     }
 }
+

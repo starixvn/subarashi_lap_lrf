@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 2/1/2021 9:21:43 AM
+﻿// Generated at: 2/4/2021 5:48:50 PM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -610,7 +610,7 @@ NoOfCustmer:"No. of Customer",
 NoProductFound:"No product found",
 Normal:"Normal",
 NotAllowBA:"This licensee is not allowed BA",
-NotAllowedBAPlayerTurnonVip:"*For BA player and the player with Customer Class 10 or 13, don&apos;t allow turning on VIP",
+NotAllowedBAPlayerTurnonVip:"For BA player, don&apos;t allow turning on VIP",
 Note:"Note",
 Notification:"Notification",
 NotificationDateRangeLimitNote:"Data is available within 6 months",

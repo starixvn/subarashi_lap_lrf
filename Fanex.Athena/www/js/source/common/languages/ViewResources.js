@@ -1,4 +1,4 @@
-﻿// Generated at: 2/1/2021 3:58:43 PM
+﻿// Generated at: 2/4/2021 5:48:50 PM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -515,7 +515,7 @@ NoOfCustmer:"No. of Customer",
 NoProductFound:"No product found",
 Normal:"Normal",
 NotAllowBA:"This licensee is not allowed BA",
-NotAllowedBAPlayerTurnonVip:"*For BA player and the player with Customer Class 10 or 13, don&apos;t allow turning on VIP",
+NotAllowedBAPlayerTurnonVip:"For BA player, don&apos;t allow turning on VIP",
 Note:"Note",
 Notification:"Notification",
 NotificationDateRangeLimitNote:"Data is available within 6 months",
@@ -797,7 +797,6 @@ UpdateToActiveConfirmMsg:"Are you sure you want to change the status of this pla
 UpdateToClosedConfirmMsg:"Are you sure you want to change the status of this player to CLOSED?",
 UpdateToLockedConfirmMsg:"Are you sure you want to change the status of this player to LOCKED?",
 UpdateUnSuccess:"Update unsucessfully!",
-UpdateVipStatus_ExcludeCC10And13:"Player with Customer Class 10 or 13, no update: {0} ({1})",
 UploadFileError:"Could not load the file, please check file&apos;s template again !",
 UploadVipList:"Upload Vip List",
 UserGuide:"User Guide",

@@ -2565,7 +2565,7 @@
     <comment>#146508</comment>
   </data>
   <data name="NotAllowedBAPlayerTurnonVip" xml:space="preserve">
-    <value>* 无法将BA玩家或玩家分级为10或13的玩家设为VIP</value>
+    <value>无法将BA玩家设为VIP</value>
     <comment>#146508</comment>
   </data>
   <data name="ProductSBVS" xml:space="preserve">
@@ -2579,8 +2579,5 @@
   </data>
   <data name="AgentBetInterval" xml:space="preserve">
     <value>代理投注间隔(秒)</value>
-  </data>
-  <data name="UpdateVipStatus_ExcludeCC10And13" xml:space="preserve">
-    <value>玩家在级别10或13无法被设为VIP: {0} ({1})</value>
   </data>
 </root>
