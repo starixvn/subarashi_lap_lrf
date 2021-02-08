@@ -338,7 +338,7 @@ const searchPlayer = param => dispatch => {
     dispatch(Object(_gridHandlerAction__WEBPACK_IMPORTED_MODULE_4__["setPlayerList"])(playerList));
     dispatch(Object(_gridHandlerAction__WEBPACK_IMPORTED_MODULE_4__["setIsFetchingData"])(false));
 
-    const pagingOption = _objectSpread({}, _lib_constants_js__WEBPACK_IMPORTED_MODULE_5__["defaultPagingOption"], {
+    const pagingOption = _objectSpread(_objectSpread({}, _lib_constants_js__WEBPACK_IMPORTED_MODULE_5__["defaultPagingOption"]), {}, {
       PageIndex: param.pageIndex,
       PageSize: param.pageSize,
       TotalItem: totalItem
@@ -364,7 +364,7 @@ const getSinglePlayer = param => dispatch => {
       dispatch(Object(_gridHandlerAction__WEBPACK_IMPORTED_MODULE_4__["setPlayerList"])([result]));
       dispatch(Object(_gridHandlerAction__WEBPACK_IMPORTED_MODULE_4__["setIsFetchingData"])(false));
 
-      const pagingOption = _objectSpread({}, _lib_constants_js__WEBPACK_IMPORTED_MODULE_5__["defaultPagingOption"], {
+      const pagingOption = _objectSpread(_objectSpread({}, _lib_constants_js__WEBPACK_IMPORTED_MODULE_5__["defaultPagingOption"]), {}, {
         TotalItem: 1
       });
 
@@ -997,11 +997,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const AppContainer = props => {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_5__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Loader__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_5__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Loader__WEBPACK_IMPORTED_MODULE_4__["default"], {
     isLoading: props.isLoading
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormFilter__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormFilter__WEBPACK_IMPORTED_MODULE_3__["default"], {
     hasCommPermissionRead: props.hasCommPermissionRead
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Content__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PlayerDetail__WEBPACK_IMPORTED_MODULE_6__["default"], null));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Content__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PlayerDetail__WEBPACK_IMPORTED_MODULE_6__["default"], null));
 };
 
 function mapStateToProps(state) {
@@ -1015,7 +1015,7 @@ function mapStateToProps(state) {
   });
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(AppContainer)));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(AppContainer)));
 
 /***/ }),
 
@@ -1066,7 +1066,7 @@ const Content = props => {
       searchPlayer
     } = props;
 
-    const newParam = _objectSpread({}, param, {
+    const newParam = _objectSpread(_objectSpread({}, param), {}, {
       pageIndex,
       pageSize
     });
@@ -1074,12 +1074,12 @@ const Content = props => {
     searchPlayer(newParam);
   };
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "result-content"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Pager"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Pager"], {
     pageOption: pagingOption,
     onPaging: handlePaging
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_content_header_GridCaption__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DataGrid__WEBPACK_IMPORTED_MODULE_5__["default"], null));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_content_header_GridCaption__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DataGrid__WEBPACK_IMPORTED_MODULE_5__["default"], null));
 };
 
 function mapDispatchToProps(dispatch) {
@@ -1196,7 +1196,7 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
         canSelectPlayers,
         hasCommPermissionRead
       };
-      dataRows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_grid_PlayerRow__WEBPACK_IMPORTED_MODULE_10__["default"], _extends({
+      dataRows.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_grid_PlayerRow__WEBPACK_IMPORTED_MODULE_10__["default"], _extends({
         key: dataItem.LicenseeCustId
       }, rowProps)));
     }
@@ -1220,13 +1220,13 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
     }
 
     if (!playerList.length) {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_13__["default"], null);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_13__["default"], null);
     }
 
     const dataList = selectedPlayer ? [playerList.find(item => item.LicenseeCustId === selectedPlayer.licenseeCustId)] : playerList;
     const displayedColumn = Object(_lib_helpers_utils__WEBPACK_IMPORTED_MODULE_12__["buildDisplayedColumnObject"])(displayedColumnList);
     const canSelectPlayers = hasCommPermissionEdit;
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Table"], {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Table"], {
       minWidth: 650,
       autoWidth: true,
       maxWidth: this.maxWidth,
@@ -1237,9 +1237,9 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       containerPadding: 30,
       shouldResetScrollPosition: isFetchingData,
       onSort: this.handleSort
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_grid_ContextMenu__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_grid_ContextMenu__WEBPACK_IMPORTED_MODULE_5__["default"], {
       hasCommPermissionRead: hasCommPermissionRead
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_grid_SpecialLevelDropdown__WEBPACK_IMPORTED_MODULE_6__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_grid_OddsGroupDropdown__WEBPACK_IMPORTED_MODULE_9__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_grid_StatusDropdown__WEBPACK_IMPORTED_MODULE_11__["default"], null), sweetAlertOption && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_sweet_alert__WEBPACK_IMPORTED_MODULE_14__["default"], sweetAlertOption));
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_grid_SpecialLevelDropdown__WEBPACK_IMPORTED_MODULE_6__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_grid_OddsGroupDropdown__WEBPACK_IMPORTED_MODULE_9__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_grid_StatusDropdown__WEBPACK_IMPORTED_MODULE_11__["default"], null), sweetAlertOption && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_sweet_alert__WEBPACK_IMPORTED_MODULE_14__["default"], sweetAlertOption));
   }
 
 }
@@ -1389,7 +1389,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
     this.allCurrencyString = props.currencyList.map(c => c.Id).join(',');
     this.allSpecialLevel = Object.keys(_lib_constants__WEBPACK_IMPORTED_MODULE_8__["specialLevelListWithColor"]).map(item => item).join(',');
     this.userGuide = this._renderUserGuide();
-    this.userNameRef = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
+    this.userNameRef = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
     this.state = {
       bankAccountNumber: '',
       email: '',
@@ -1474,7 +1474,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
     const actualOddsGroup = oddsGroup.trim().split(',').length === Object.keys(_lib_constants__WEBPACK_IMPORTED_MODULE_8__["oddsGroupListWithStyle"]).length ? '' : oddsGroup;
     const actualCustomerClass = restParam.customerClass.trim().split(',').length === this.props.lrfFilters.CustomerClass.length ? '' : restParam.customerClass;
 
-    const param = _objectSpread({}, restParam, {
+    const param = _objectSpread(_objectSpread({}, restParam), {}, {
       userName: Object(_jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_14__["encode"])(userName),
       currencyIdList: actualCurrencyIdList,
       oddsGroup: actualOddsGroup,
@@ -1489,15 +1489,15 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
 
   _renderContentUserGuide() {
     const currentLang = _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].currentLanguage;
-    return this.props.type === _lib_constants__WEBPACK_IMPORTED_MODULE_8__["licenseeType"].nonApi ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_userGuide_LicAthenaUserGuide__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    return this.props.type === _lib_constants__WEBPACK_IMPORTED_MODULE_8__["licenseeType"].nonApi ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_userGuide_LicAthenaUserGuide__WEBPACK_IMPORTED_MODULE_15__["default"], {
       lang: currentLang
-    }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_userGuide_LicApiUserGuide__WEBPACK_IMPORTED_MODULE_16__["default"], {
+    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_userGuide_LicApiUserGuide__WEBPACK_IMPORTED_MODULE_16__["default"], {
       lang: currentLang
     });
   }
 
   _renderUserGuide() {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_UserGuide__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_UserGuide__WEBPACK_IMPORTED_MODULE_10__["default"], {
       title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("UserGuide"),
       contentTitle: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("PlayerAdministration"),
       isHtml: false,
@@ -1537,26 +1537,26 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       className: isFilterCollapsing ? 'chevron down' : 'chevron up',
       style: {}
     };
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_9__["default"], {
       className: "page-filter",
       iconToggle: iconToggle,
       stickyFooter: this.userGuide,
       onCollapse: () => this.props.setCollapseFilter(true),
       onExpand: () => this.props.setCollapseFilter(false)
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "row"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-12 col-md-4 col-sm-4 col-lg-3 col-xl-3"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       className: "label-text"
-    }, this._getUserNameLabel(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    }, this._getUserNameLabel(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       className: this.state.isMatchPrecise ? "" : "hide"
-    }, "/", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("SystemId")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filter_SearchOption__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    }, "/", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("SystemId")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filter_SearchOption__WEBPACK_IMPORTED_MODULE_6__["default"], {
       value: searchOption,
       onChange: this.handleChange
-    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filter_UserNameInput__WEBPACK_IMPORTED_MODULE_12__["default"], {
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filter_UserNameInput__WEBPACK_IMPORTED_MODULE_12__["default"], {
       ref: this.userNameRef,
       onSelectItem: value => this.handleUserNameChange(value),
       minChar: 3,
@@ -1564,33 +1564,33 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       searchOption: searchOption,
       onKeyPress: this.handlePressEnter,
       onChange: value => this.handleUserNameChange(value)
-    }))), type === _lib_constants__WEBPACK_IMPORTED_MODULE_8__["licenseeType"].nonApi && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filter_AthenaSearch__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    }))), type === _lib_constants__WEBPACK_IMPORTED_MODULE_8__["licenseeType"].nonApi && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filter_AthenaSearch__WEBPACK_IMPORTED_MODULE_7__["default"], {
       onChange: this.handleChange,
       bankAccountNumber: bankAccountNumber,
       email: email,
       onKeyPress: this.handlePressEnter
-    }), isAdvancedSearch && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filter_AdvancedSearch__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    }), isAdvancedSearch && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filter_AdvancedSearch__WEBPACK_IMPORTED_MODULE_5__["default"], {
       currencyList: currencyList,
       param: advancedSearchParam,
       isAllowedBA: siteSetting.isAllowedBA,
       onChange: this.handleSpecificInputChange,
       lrfFilters: this.props.lrfFilters
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-12 col-md-2 col-sm-2 col-lg-2 col-xl-1"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "button-group"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       type: "button",
       className: "btn btn-submit",
       disabled: !isValidParam,
       onClick: this.handleSubmit
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("Submit"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("Submit"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_4__["default"], {
       id: "isAdvancedSearch",
       checked: isAdvancedSearch,
       onChange: checked => this.props.setAdvancedSearch(checked),
@@ -1734,10 +1734,10 @@ class PlayerDetail extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       const actionUrl = this._buildActionUrl(item.SystemType, item.Action, item.Name);
 
       const isActive = selectedTabName === item.Name;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "tab",
         key: item.Name
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         className: isActive ? "active" : "",
         href: actionUrl,
         onClick: event => this.handleClickMenu(event, item.Name)
@@ -1793,21 +1793,21 @@ class PlayerDetail extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
 
     const frameHeight = this._getFrameHeight();
 
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "pa-detail-container"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "page-filter-tab"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "header-tab"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "content-tab"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
       className: "tabs"
-    }, this._renderTabList(this._tabList)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, this._renderTabList(this._tabList)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "tab-panel"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "pa-frame-container"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("iframe", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("iframe", {
       id: "paDetailFrame",
       style: {
         height: frameHeight
@@ -1909,7 +1909,7 @@ class GridCaption extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component
       const selectedKeyList = selectedItemsKey.split(',');
       const newColumnList = displayedColumnList.map(item => {
         const isShow = selectedKeyList.indexOf(item.key) !== -1;
-        return item.show === isShow ? item : _objectSpread({}, item, {
+        return item.show === isShow ? item : _objectSpread(_objectSpread({}, item), {}, {
           show: isShow
         });
       });
@@ -1947,7 +1947,7 @@ class GridCaption extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component
   }
 
   initBatchUpdate() {
-    this.batchUpdateMenuRef = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
+    this.batchUpdateMenuRef = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
     var s = {
       batchUpdateSelectedOption: 0
     };
@@ -1968,7 +1968,7 @@ class GridCaption extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component
   }
 
   _buildDisplayedColumnList() {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_6___default.a, {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_6___default.a, {
       id: "columnList",
       className: "selection-column",
       language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].currentLanguage,
@@ -1984,10 +1984,10 @@ class GridCaption extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component
     const hasCommPermissionEdit = this.props.hasCommPermissionEdit == 1;
 
     if (!hasCommPermissionEdit) {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null);
     }
 
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_1__["default"], {
       instanceId: "ddl-batch-update",
       ref: this.batchUpdateMenuRef,
       className: "ddl-batch-update",
@@ -2009,7 +2009,7 @@ class GridCaption extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component
         userName,
         currency
       } = selectedPlayer;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "link",
         onClick: () => {
           toggleLoader(true);
@@ -2018,43 +2018,43 @@ class GridCaption extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component
             toggleLoader(false);
           }, 10);
         }
-      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource('PreviousSearchResult')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource('PreviousSearchResult')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "chevron right icon-separator"
       }), " ", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource('Player'), ": ", userName, " ", currency && `(${currency})`));
     } else {
       const {
         playerCount
       } = this.props;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         key: "searchResult"
       }, `${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource('SearchResult')}: ${playerCount} ${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource('Player')}(s)`);
     }
   }
 
   _buildRightPart() {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       className: "caret-block"
-    }, this._buildBatchUpdateMenu(), this._buildDisplayedColumnList(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    }, this._buildBatchUpdateMenu(), this._buildDisplayedColumnList(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       className: "icon-excel-wrapper",
       onClick: this.handleExportExcel
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
       className: "icon-excel",
       title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource('ExportToExcel')
     })));
   }
 
   render() {
-    const Content = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, this._buildLeftPart(), this._buildRightPart());
+    const Content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, this._buildLeftPart(), this._buildRightPart());
 
     if (this.state.batchUpdateSelectedOption == 0) {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_ReportTitle__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_ReportTitle__WEBPACK_IMPORTED_MODULE_5__["default"], {
         tag: "div",
         content: Content
       });
     }
 
     const opt = _batch_update_batch_update_manager__WEBPACK_IMPORTED_MODULE_9__["batchUpdateManager"].getPopupOption(this.state.batchUpdateSelectedOption);
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_popup__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_popup__WEBPACK_IMPORTED_MODULE_10__["default"], {
       id: "popup-comm-group",
       isShow: this.state.popupBatchUpdateShow,
       iframeUrl: opt.url,
@@ -2062,7 +2062,7 @@ class GridCaption extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component
       width: opt.width,
       height: opt.height,
       onClose: () => _batch_update_batch_update_manager__WEBPACK_IMPORTED_MODULE_9__["batchUpdateManager"].closePopup(this, this.state.batchUpdateSelectedOption)
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_ReportTitle__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_ReportTitle__WEBPACK_IMPORTED_MODULE_5__["default"], {
       tag: "div",
       content: Content
     }));
@@ -2213,64 +2213,64 @@ class AdvancedSearch extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Compon
 
     const ddlCustomerClass = this._createSelectData(this.customerClassList, selectedCustomerClass);
 
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       className: "label-text"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource("Currency")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_1___default.a, {
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource("Currency")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_1___default.a, {
       id: "currency",
       dataSource: convertedCurrencyList,
       keyField: "Id",
       valueField: "Value",
       statusField: "Status",
       onChange: (currentItem, selectedItemsKey) => this.handleChange('currencyIdList', selectedItemsKey)
-    }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       className: "label-text"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource("OddsGroup")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_1___default.a, {
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource("OddsGroup")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_1___default.a, {
       id: "oddsGroup",
       dataSource: oddsGroupList,
       keyField: "Id",
       valueField: "Value",
       statusField: "Status",
       onChange: (currentItem, selectedItemsKey) => this.handleChange('oddsGroup', selectedItemsKey)
-    }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-12 col-md-3 col-sm-3 col-lg-2 col-xl-1"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       className: "label-text"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource("SpecialLevel")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_1___default.a, {
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource("SpecialLevel")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_1___default.a, {
       id: "specialLevel",
       dataSource: specialLevelList,
       keyField: "Id",
       valueField: "Value",
       statusField: "Status",
       onChange: (currentItem, selectedItemsKey) => this.handleChange('specialLevel', selectedItemsKey)
-    }))), selectedBaStatus !== null && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }))), selectedBaStatus !== null && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-12 col-md-3 col-sm-3 col-lg-2 col-xl-1"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       className: "label-text"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource("BA")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource("BA")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_3__["default"], {
       instanceId: "ddlBaStatus",
       name: "form-field-name",
       value: selectedBaStatus,
       options: this.baStatusList,
       onChange: item => this.handleChangeSingleDropdown('baFilter', item)
-    }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-12 col-md-3 col-sm-3 col-lg-2 col-xl-1"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       className: "label-text"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource("CustomerClass")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_1___default.a, {
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource("CustomerClass")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_1___default.a, {
       id: "ddl-customer-class",
       dataSource: ddlCustomerClass,
       keyField: "Id",
@@ -2321,13 +2321,13 @@ const AthenaSearch = props => {
     onChange,
     onKeyPress
   } = props;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 col-md-4 col-sm-4 col-lg-3 col-xl-2"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "form-group"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
     className: "label-text"
-  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("BankAccountNumber")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("BankAccountNumber")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     className: "input-text",
     id: "bankAccountNumber",
     name: "bankAccountNumber",
@@ -2337,13 +2337,13 @@ const AthenaSearch = props => {
     onChange: onChange,
     onKeyPress: onKeyPress,
     placeholder: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('PlaceholderBankAccount')
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 col-md-4 col-sm-4 col-lg-3 col-xl-2"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "form-group"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
     className: "label-text"
-  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("Email")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("Email")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     className: "input-text",
     id: "email",
     name: "email",
@@ -2363,7 +2363,7 @@ const propTypes = {
   onKeyPress: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
 };
 AthenaSearch.propTypes = propTypes;
-/* harmony default export */ __webpack_exports__["default"] = (react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(AthenaSearch));
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(AthenaSearch));
 
 /***/ }),
 
@@ -2405,48 +2405,48 @@ const SearchOption = props => {
     className: 'toggle-outline toggle-outline-light'
   };
   const selectedValue = value || _lib_constants__WEBPACK_IMPORTED_MODULE_2__["searchOptions"].matchPrecise;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_1__["DropdownButton"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_1__["DropdownButton"], {
     className: "search-option",
     isOpen: isOpen,
     toggleButton: toggleButton,
     onToggle: handleToggleDropdown,
-    buttonLabel: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    buttonLabel: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
       className: "material-icons"
     }, "settings"),
     onClose: handleClose
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], {
     tag: "div"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
     className: "selection-item"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "radio",
     name: "searchOption",
     value: _lib_constants__WEBPACK_IMPORTED_MODULE_2__["searchOptions"].matchPrecise,
     checked: selectedValue === _lib_constants__WEBPACK_IMPORTED_MODULE_2__["searchOptions"].matchPrecise,
     onChange: onChange
-  }), "\xA0\xA0", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('MatchPrecise'))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], {
+  }), "\xA0\xA0", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('MatchPrecise'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], {
     tag: "div"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
     className: "selection-item"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "radio",
     name: "searchOption",
     value: _lib_constants__WEBPACK_IMPORTED_MODULE_2__["searchOptions"].matchPrefix,
     checked: selectedValue === _lib_constants__WEBPACK_IMPORTED_MODULE_2__["searchOptions"].matchPrefix,
     onChange: onChange
-  }), "\xA0\xA0", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('MatchPrefix'), " \"", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+  }), "\xA0\xA0", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('MatchPrefix'), " \"", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "keyword"
-  }, "test"), "\"ABCD")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], {
+  }, "test"), "\"ABCD")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], {
     tag: "div"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
     className: "selection-item"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "radio",
     name: "searchOption",
     value: _lib_constants__WEBPACK_IMPORTED_MODULE_2__["searchOptions"].matchCase,
     checked: selectedValue === _lib_constants__WEBPACK_IMPORTED_MODULE_2__["searchOptions"].matchCase,
     onChange: onChange
-  }), "\xA0\xA0", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('MatchCase'), " AB\"", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+  }), "\xA0\xA0", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('MatchCase'), " AB\"", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "keyword"
   }, "test"), "\"CD")));
 };
@@ -2478,7 +2478,7 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 
 
 
-const UserNameInput = react__WEBPACK_IMPORTED_MODULE_0___default.a.forwardRef((props, userNameRef) => {
+const UserNameInput = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.forwardRef((props, userNameRef) => {
   const {
     onSelectItem,
     minChar,
@@ -2556,9 +2556,9 @@ const UserNameInput = react__WEBPACK_IMPORTED_MODULE_0___default.a.forwardRef((p
     setIsOpenSuggestion(false);
   };
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "pa-username"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", _extends({
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", _extends({
     className: "input-text",
     id: "userName",
     name: "userName",
@@ -2566,13 +2566,13 @@ const UserNameInput = react__WEBPACK_IMPORTED_MODULE_0___default.a.forwardRef((p
     ref: userNameRef,
     autoComplete: "off",
     onChange: debounceChange
-  }, inputAttributes)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, inputAttributes)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "dropdown"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_1__["DropdownMenu"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_1__["DropdownMenu"], {
     isOpen: isOpenSuggestion,
     style: dropdownStyle
   }, suggestionList.map(item => {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], {
       key: item,
       onClick: () => handleSelectSuggestionItem(item)
     }, item);
@@ -2689,9 +2689,9 @@ const BaStatusCell = props => {
     setSweetAlertOption(confirmOption);
   };
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
     className: "center-align" + `${!hasBaPermission ? ' ba-disabled' : ''}`
-  }, !IsArchived && BaStatus !== undefined && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Switcher__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, !IsArchived && BaStatus !== undefined && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Switcher__WEBPACK_IMPORTED_MODULE_5__["default"], {
     disabled: !hasBaPermission,
     checked: BaStatus,
     onChange: handleChangeBaStatus
@@ -2814,17 +2814,17 @@ const ContextMenu = props => {
     activeMenuList = Object(_lib_helpers_contextMenuHelper__WEBPACK_IMPORTED_MODULE_5__["getActiveTabList"])(currentActivePlayer, tabList, type, hasCommPermissionRead);
   }
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "dropdown context-menu",
     style: style
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_4__["DropdownMenu"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_4__["DropdownMenu"], {
     onMouseEnter: handleMouseEnter,
     onMouseLeave: handleMouseLeave,
     isOpen: isOpenContextMenu || isOpen
   }, activeMenuList.map(item => {
     const selectedTabName = item.tabName;
     const subTabName = item.subTabName;
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_4__["DropdownItem"], {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_4__["DropdownItem"], {
       key: item.key,
       onClick: () => handleClickMenu(selectedTabName, subTabName)
     }, item.name);
@@ -2917,10 +2917,10 @@ class CustomerClassCell extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Com
     const commonService = _jsroot_Module_lib_factoryCommonService__WEBPACK_IMPORTED_MODULE_3__["default"].createInstance();
     const lrfSystemId = 1;
     var url = "CustomerClass/CustomerClassInformation?time=" + new Date().getTime();
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, this.props.text, "\xA0\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, this.props.text, "\xA0\xA0", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       class: "icon-info",
       onClick: this.showCustomerClassInformation
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_popup_Popup__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_popup_Popup__WEBPACK_IMPORTED_MODULE_2__["default"], {
       width: 1000,
       height: 600,
       isShow: this.state.isShowCustomerClassInformation,
@@ -2987,7 +2987,7 @@ const OddsGroupCell = props => {
     setOddsGroupDropdownPosition(newPosition);
   };
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_DropdownLabel__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_DropdownLabel__WEBPACK_IMPORTED_MODULE_4__["default"], {
     className: canUpdate ? '' : 'disabled',
     text: value,
     labelStyle: style,
@@ -3138,15 +3138,15 @@ const OddsGroupDropdown = props => {
     setSweetAlertOption(confirmOption);
   };
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "dropdown oddsgroup-menu",
     style: style
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_3__["DropdownMenu"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_3__["DropdownMenu"], {
     isOpen: isOpen,
     onClose: handleClose
   }, Object.keys(_lib_constants__WEBPACK_IMPORTED_MODULE_4__["oddsGroupListWithStyle"]).map(item => {
     const style = _lib_constants__WEBPACK_IMPORTED_MODULE_4__["oddsGroupListWithStyle"][item];
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_3__["DropdownItem"], {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_3__["DropdownItem"], {
       key: item,
       className: "oddsgroup-item",
       style: style,
@@ -3255,47 +3255,47 @@ const PlayerRow = props => {
   const commissionGroup = CommissionGroup || _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource('None');
   const canEditCommissionGpoup = IsDeposit && !IsArchived && dataItem.Status != _lib_constants__WEBPACK_IMPORTED_MODULE_4__["playerStatusByName"].Closed;
   const customerClass = dataItem.CustomerClass == "0" || !dataItem.CustomerClass ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource('None') : dataItem.CustomerClass;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Row"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Row"], {
     key: LicenseeCustId
-  }, canSelectPlayers && displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].Index] && !canEditCommissionGpoup && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
+  }, canSelectPlayers && displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].Index] && !canEditCommissionGpoup && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
     className: "center-align"
-  }), canSelectPlayers && displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].Index] && canEditCommissionGpoup && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
+  }), canSelectPlayers && displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].Index] && canEditCommissionGpoup && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
     className: "center-align"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "checkbox",
     id: "chk-cust-" + LicenseeCustId,
     "data-username": dataItem.UserName,
     "data-custid": dataItem.IbcCustId,
     className: "chk-cust"
-  })), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].Status] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_StatusCell__WEBPACK_IMPORTED_MODULE_10__["default"], {
+  })), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].Status] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_StatusCell__WEBPACK_IMPORTED_MODULE_10__["default"], {
     dataItem: dataItem
-  })), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].UserName] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UserNameCell__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  })), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].UserName] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UserNameCell__WEBPACK_IMPORTED_MODULE_7__["default"], {
     dataItem: dataItem,
     hasCommPermissionRead: hasCommPermissionRead
-  })), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].SystemId] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
+  })), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].SystemId] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
     title: SystemId
-  }, SystemId), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].VendorMemberId] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], null, VendorMemberId), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].RealName] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], null, RealName), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].Currency] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
+  }, SystemId), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].VendorMemberId] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], null, VendorMemberId), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].RealName] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], null, RealName), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].Currency] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
     className: "center-align"
-  }, Currency), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].CurrentBalance] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
+  }, Currency), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].CurrentBalance] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
     className: "right-align",
     title: canShowMainColumn ? _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_6__["default"].roundDownFormatDecimal(CurrentBalance) : undefined
-  }, canShowMainColumn && _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_6__["default"].roundDownFormatDecimal(CurrentBalance)), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].OutstandingBalance] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
+  }, canShowMainColumn && _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_6__["default"].roundDownFormatDecimal(CurrentBalance)), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].OutstandingBalance] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
     className: "right-align",
     title: canShowMainColumn ? _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_6__["default"].roundDownFormatDecimal(OutstandingBalance) : undefined
-  }, canShowMainColumn && _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_6__["default"].roundDownFormatDecimal(OutstandingBalance)), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].OddsGroup] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
+  }, canShowMainColumn && _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_6__["default"].roundDownFormatDecimal(OutstandingBalance)), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].OddsGroup] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
     className: "center-align"
-  }, canShowMainColumn && OddsGroup !== undefined && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_OddsGroupCell__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }, canShowMainColumn && OddsGroup !== undefined && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_OddsGroupCell__WEBPACK_IMPORTED_MODULE_8__["default"], {
     dataItem: dataItem
-  })), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].BaStatus] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_BaStatusCell__WEBPACK_IMPORTED_MODULE_11__["default"], {
+  })), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].BaStatus] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_BaStatusCell__WEBPACK_IMPORTED_MODULE_11__["default"], {
     dataItem: dataItem
-  }), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].SpecialLevel] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
+  }), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].SpecialLevel] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
     className: "center-align"
-  }, canShowMainColumn && SpecialLevel !== undefined && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SpecialLevelCell__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  }, canShowMainColumn && SpecialLevel !== undefined && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SpecialLevelCell__WEBPACK_IMPORTED_MODULE_9__["default"], {
     dataItem: dataItem
-  })), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].LastTransaction] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], null, LastTransaction), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].Email] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], null, Email), hasCommPermissionRead && displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].CommissionGroup] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
+  })), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].LastTransaction] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], null, LastTransaction), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].Email] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], null, Email), hasCommPermissionRead && displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].CommissionGroup] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
     className: "text-center td-comm-" + dataItem.IbcCustId,
     title: commissionGroup
-  }, commissionGroup), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].CustomerClass] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
+  }, commissionGroup), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].CustomerClass] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
     className: "text-center"
   }, customerClass));
 };
@@ -3367,7 +3367,7 @@ const SpecialLevelCell = props => {
     setSpecialLevelDropdownPosition(newPosition);
   };
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_DropdownLabel__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_DropdownLabel__WEBPACK_IMPORTED_MODULE_4__["default"], {
     className: hasSpecialLevelPermission ? '' : 'disabled',
     text: Object(_lib_helpers_utils__WEBPACK_IMPORTED_MODULE_7__["getSpecialLevelText"])(value),
     labelStyle: style,
@@ -3519,15 +3519,15 @@ const SpecialLevelDropdown = props => {
     setSweetAlertOption(confirmOption);
   };
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "dropdown special-level-menu",
     style: style
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_3__["DropdownMenu"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_3__["DropdownMenu"], {
     isOpen: isOpen,
     onClose: handleClose
   }, Object.keys(_lib_constants__WEBPACK_IMPORTED_MODULE_4__["specialLevelListWithColor"]).map(item => {
     const color = _lib_constants__WEBPACK_IMPORTED_MODULE_4__["specialLevelListWithColor"][item];
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_3__["DropdownItem"], {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_3__["DropdownItem"], {
       key: item,
       className: "special-level-item",
       style: {
@@ -3629,17 +3629,17 @@ const StatusCell = props => {
   const shouldShowOnlineStatus = IsDeposit && Status === _lib_constants__WEBPACK_IMPORTED_MODULE_3__["playerStatusByName"].Active;
   const onlineText = _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource('Online');
   const offlineText = _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource('Offline');
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "status-cell"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: classname
-  }, statusName || _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource('Unknown')), shouldShowOnlineStatus && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+  }, statusName || _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource('Unknown')), shouldShowOnlineStatus && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "status-text"
-  }, IsOnline ? `(${onlineText})` : `(${offlineText})`), statusName && canUpdate && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  }, IsOnline ? `(${onlineText})` : `(${offlineText})`), statusName && canUpdate && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     type: "button",
     className: "btn-outline btn-status-menu",
     onClick: handleToggleStatus
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "site-caret"
   })));
 };
@@ -3737,7 +3737,7 @@ const StatusDropdown = props => {
   const handleChangeOddsGroup = (event, value) => {
     event.preventDefault();
     const messageList = _lib_constants__WEBPACK_IMPORTED_MODULE_4__["messageUpdateState"][value] || [];
-    const confirmMessage = messageList.length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, messageList[0], react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    const confirmMessage = messageList.length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, messageList[0], /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       className: "warning"
     }, messageList[1])) : null;
     const confirmProps = {
@@ -3797,16 +3797,16 @@ const StatusDropdown = props => {
     return null;
   }
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "dropdown status-menu",
     style: style
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_3__["DropdownMenu"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_3__["DropdownMenu"], {
     isOpen: isOpen,
     onClose: handleClose
   }, displayedStatusList.map(item => {
     const statusName = _lib_constants__WEBPACK_IMPORTED_MODULE_4__["playerStatus"][item];
     const classname = 'status-item ' + statusName;
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_3__["DropdownItem"], {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_3__["DropdownItem"], {
       key: item,
       className: classname,
       onClick: e => handleChangeOddsGroup(e, item)
@@ -3933,7 +3933,7 @@ const UserNameCell = props => {
     event.preventDefault();
 
     if (contextMenu.isOpen) {
-      setContextMenu(_objectSpread({}, contextMenu, {
+      setContextMenu(_objectSpread(_objectSpread({}, contextMenu), {}, {
         isOpen: false
       }));
     }
@@ -3943,16 +3943,16 @@ const UserNameCell = props => {
     Status
   } = dataItem;
   const isClosedOrArchived = Status === _lib_constants__WEBPACK_IMPORTED_MODULE_7__["playerStatusByName"].Closed || Status === _lib_constants__WEBPACK_IMPORTED_MODULE_7__["playerStatusByName"].Archived;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "username-cell"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "btn-default btn-link username-link",
     onClick: handleSelectPlayer
-  }, dataItem.UserName), !isClosedOrArchived && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  }, dataItem.UserName), !isClosedOrArchived && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "btn-default btn-link btn-icon cell-menu",
     onMouseEnter: handleEnterContextMenu,
     onMouseLeave: handleLeaveContextMenu
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "material-icons"
   }, "edit")));
 };
@@ -4040,7 +4040,7 @@ const lrfFilters = {
   CustomerClass: []
 };
 
-const defaultState = _objectSpread({}, window.initialState, {
+const defaultState = _objectSpread(_objectSpread({}, window.initialState), {}, {
   displayedColumnList,
   siteSetting,
   hasBaPermission,
@@ -4054,12 +4054,12 @@ const defaultState = _objectSpread({}, window.initialState, {
 const store = _jsroot_lib_store__WEBPACK_IMPORTED_MODULE_5__["default"].createStore(_reducers__WEBPACK_IMPORTED_MODULE_4__["default"], defaultState);
 
 const App = () => {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_3__["Provider"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_3__["Provider"], {
     store: store
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AppContainer_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AppContainer_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null));
 };
 
-Object(react_dom__WEBPACK_IMPORTED_MODULE_1__["render"])(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), document.getElementById("app-container"));
+Object(react_dom__WEBPACK_IMPORTED_MODULE_1__["render"])( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), document.getElementById("app-container"));
 
 /***/ }),
 
@@ -4546,58 +4546,58 @@ class GridHelper {
       CommissionGroup,
       CustomerClass
     } = _constants__WEBPACK_IMPORTED_MODULE_2__["fields"];
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderRow"], {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderRow"], {
       style: {
         height: 32
       }
-    }, canSelectPlayers && displayedColumn[Index] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
+    }, canSelectPlayers && displayedColumn[Index] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
       colWidth: 30
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "checkbox",
       id: "chk-cust-0",
       "data-username": ""
-    })), displayedColumn[Status] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
+    })), displayedColumn[Status] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
       colWidth: 80,
       sortBy: Status
-    }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].Status), displayedColumn[UserName] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
+    }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].Status), displayedColumn[UserName] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
       colWidth: 120,
       sortBy: UserName
-    }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].UserName), displayedColumn[SystemId] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
+    }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].UserName), displayedColumn[SystemId] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
       colWidth: 100
-    }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].SystemId), displayedColumn[VendorMemberId] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
+    }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].SystemId), displayedColumn[VendorMemberId] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
       colWidth: 70
-    }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].VendorMemberId), displayedColumn[RealName] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
+    }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].VendorMemberId), displayedColumn[RealName] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
       colWidth: 80,
       sortBy: RealName
-    }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].RealName), displayedColumn[Currency] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
+    }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].RealName), displayedColumn[Currency] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
       colWidth: 60,
       sortBy: Currency
-    }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].Currency), displayedColumn[CurrentBalance] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
+    }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].Currency), displayedColumn[CurrentBalance] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
       colWidth: 80,
       sortBy: CurrentBalance
-    }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].CurrentBalance), displayedColumn[OutstandingBalance] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
+    }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].CurrentBalance), displayedColumn[OutstandingBalance] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
       colWidth: 80,
       sortBy: OutstandingBalance
-    }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].OutstandingBalance), displayedColumn[OddsGroup] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
+    }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].OutstandingBalance), displayedColumn[OddsGroup] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
       colWidth: 50,
       sortBy: OddsGroup
-    }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].OddsGroup), displayedColumn[BaStatus] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
+    }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].OddsGroup), displayedColumn[BaStatus] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
       colWidth: 50,
       sortBy: BaStatus
-    }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].BaStatus), displayedColumn[SpecialLevel] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
+    }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].BaStatus), displayedColumn[SpecialLevel] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
       colWidth: 50,
       sortBy: SpecialLevel
-    }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].SpecialLevel), displayedColumn[LastTransaction] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
+    }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].SpecialLevel), displayedColumn[LastTransaction] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
       colWidth: 60,
       sortBy: LastTransaction
-    }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].LastTransaction), displayedColumn[Email] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
+    }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].LastTransaction), displayedColumn[Email] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
       colWidth: 100
-    }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].Email), hasCommPermissionRead && displayedColumn[CommissionGroup] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
+    }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].Email), hasCommPermissionRead && displayedColumn[CommissionGroup] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
       colWidth: 50
-    }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].CommissionGroup), displayedColumn[CustomerClass] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
+    }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].CommissionGroup), displayedColumn[CustomerClass] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
       colWidth: 80,
       sortBy: CustomerClass
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_grid_HeaderCustomerClassCell__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_grid_HeaderCustomerClassCell__WEBPACK_IMPORTED_MODULE_3__["default"], {
       text: _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].CustomerClass
     })));
   }
@@ -5169,7 +5169,7 @@ class GridInteractionService {
     }
 
     if (itemIndex !== -1) {
-      const newPlayerItem = _objectSpread({}, playerList[itemIndex], {
+      const newPlayerItem = _objectSpread(_objectSpread({}, playerList[itemIndex]), {}, {
         [fieldName]: value
       });
 
@@ -5182,7 +5182,7 @@ class GridInteractionService {
   static updatePlayerWithBaStatus(playerList, ibcCustId, isBa, oddsGroup) {
     const itemIndex = playerList.findIndex(x => x.IbcCustId === ibcCustId);
 
-    const newPlayerItem = _objectSpread({}, playerList[itemIndex], {
+    const newPlayerItem = _objectSpread(_objectSpread({}, playerList[itemIndex]), {}, {
       BaStatus: isBa,
       OddsGroup: oddsGroup
     });
@@ -5347,7 +5347,7 @@ class LapPlayerQueryService {
     const promises = [];
 
     for (let batchIndex = 1; batchIndex <= batchSize; batchIndex++) {
-      const batchParam = _objectSpread({}, param, {
+      const batchParam = _objectSpread(_objectSpread({}, param), {}, {
         pageIndex: pageIndexStart + batchIndex,
         pageSize: maxLapPageSize
       });
@@ -6192,51 +6192,51 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const EngContent = _ => {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "rule"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "General Info"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "This function shows all players information along with their settings."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "General Info"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "This function shows all players information along with their settings."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "line"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "rule"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Search Filters"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Username:"), " searched by Username (Support prefix search)."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Currency:"), " select the currency of players that you want to manage.", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "All:"), " all supported currencies will be listed out."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Odds Group:"), " view players of an odds group."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Special Level:"), " view players of a specific special level."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "BA:"), " view players of a BA."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Search Filters"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Username:"), " searched by Username (Support prefix search)."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Currency:"), " select the currency of players that you want to manage.", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "All:"), " all supported currencies will be listed out."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Odds Group:"), " view players of an odds group."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Special Level:"), " view players of a specific special level."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "BA:"), " view players of a BA."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "line"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "rule"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Report Guidelines"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Status:"), " view or set status for player."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Username:"), " view player username and number of shortcut options including:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Note"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Fundtransfer Limit"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Bet Limit"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Statement"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Current Balances: "), " indicate available amount to place bets."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Outstanding Balance:"), " indicate total stakes of all running bets."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Odds Group:"), " view or set odds group for player."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "BA Status:"), " switch on/off BA status for player."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Special Level:"), " view or set a special level for player."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Report Guidelines"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Status:"), " view or set status for player."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Username:"), " view player username and number of shortcut options including:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Note"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Fundtransfer Limit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Bet Limit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Statement"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Current Balances: "), " indicate available amount to place bets."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Outstanding Balance:"), " indicate total stakes of all running bets."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Odds Group:"), " view or set odds group for player."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "BA Status:"), " switch on/off BA status for player."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Special Level:"), " view or set a special level for player."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "line"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "rule"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Player Details"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Player Info:"), " view player\u2019s profile and activity record.", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Player Betting Statistics"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Fast Cross-Link"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Statement: "), " view daily statements of player. All transactions are summarized and then put into a daily record. Each daily record balance will be summed up to the current date as the latest balance."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Detail Transaction:"), " view player balance changes and sort by time."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Bet List:"), " lists out non-settled tickets of player."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Fund Transfer:"), " view transfer log and wallets balance for player."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Bet Limit:"), " view bet setting for Sportsbook, Number Game, Virtual Sports, RNG Keno, Lottery and other products."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Note:"), " view or edit the note for player."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Log:"), " view update log of player."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Setting:"), " set fund transfer limit."))));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Player Details"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Player Info:"), " view player\u2019s profile and activity record.", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Player Betting Statistics"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Fast Cross-Link"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Statement: "), " view daily statements of player. All transactions are summarized and then put into a daily record. Each daily record balance will be summed up to the current date as the latest balance."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Detail Transaction:"), " view player balance changes and sort by time."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Bet List:"), " lists out non-settled tickets of player."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Fund Transfer:"), " view transfer log and wallets balance for player."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Bet Limit:"), " view bet setting for Sportsbook, Number Game, Virtual Sports, RNG Keno, Lottery and other products."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Note:"), " view or edit the note for player."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Log:"), " view update log of player."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Setting:"), " set fund transfer limit."))));
 };
 
 const ZnCNContent = _ => {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "rule"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "\u4E00\u822C\u4FE1\u606F"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u672C\u62A5\u8868\u663E\u793A\u6240\u6709\u4F1A\u5458\u6570\u636E\u5305\u542B\u4F1A\u5458\u8BBE\u5B9A\u3002"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "\u4E00\u822C\u4FE1\u606F"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u672C\u62A5\u8868\u663E\u793A\u6240\u6709\u4F1A\u5458\u6570\u636E\u5305\u542B\u4F1A\u5458\u8BBE\u5B9A\u3002"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "line"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "rule"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "\u641C\u7D22\u8FC7\u6EE4\u5668"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u7528\u6237\u540D:"), " \u641C\u5BFB\u7528\u6237\u540D (\u652F\u63F4\u6A21\u7CCA\u641C\u5BFB)\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u8D27\u5E01:"), " \u4EE5\u4F1A\u5458\u8D27\u5E01\u6765\u9009\u62E9\u62A5\u8868\u5448\u73B0\u5185\u5BB9\u3002", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u5168\u90E8:"), " \u62A5\u8868\u5448\u73B0\u6240\u6709\u652F\u6301\u8D27\u5E01\u3002"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Odds Group:"), " \u67E5\u770B\u73A9\u5BB6\u7684 odds group\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u7279\u6B8A\u5C42\u7EA7:"), " \u67E5\u9605\u7279\u6B8A\u5C42\u7EA7\u91CC\u7684\u73A9\u5BB6\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "BA\u72B6\u6001:"), " \u67E5\u770B\u73A9\u5BB6\u7684BA\u72B6\u6001\u3002"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "\u641C\u7D22\u8FC7\u6EE4\u5668"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u7528\u6237\u540D:"), " \u641C\u5BFB\u7528\u6237\u540D (\u652F\u63F4\u6A21\u7CCA\u641C\u5BFB)\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u8D27\u5E01:"), " \u4EE5\u4F1A\u5458\u8D27\u5E01\u6765\u9009\u62E9\u62A5\u8868\u5448\u73B0\u5185\u5BB9\u3002", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u5168\u90E8:"), " \u62A5\u8868\u5448\u73B0\u6240\u6709\u652F\u6301\u8D27\u5E01\u3002"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Odds Group:"), " \u67E5\u770B\u73A9\u5BB6\u7684 odds group\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u7279\u6B8A\u5C42\u7EA7:"), " \u67E5\u9605\u7279\u6B8A\u5C42\u7EA7\u91CC\u7684\u73A9\u5BB6\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "BA\u72B6\u6001:"), " \u67E5\u770B\u73A9\u5BB6\u7684BA\u72B6\u6001\u3002"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "line"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "rule"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "\u62A5\u544A\u6307\u5357"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u72B6\u6001:"), " \u67E5\u770B\u73A9\u5BB6\u7684\u72B6\u6001\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u7528\u6237\u540D:"), " \u67E5\u770B\u73A9\u5BB6\u7684\u7528\u6237\u540D\u548C\u5FEB\u6377\u529F\u80FD\u9009\u9879\uFF0C\u5305\u62EC\uFF1A", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u8BB0\u5F55"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u8F6C\u5E10\u989D\u5EA6"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u6295\u6CE8\u9650\u989D"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u5E10\u76EE"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u76EE\u524D\u4F59\u989D:"), " \u663E\u793A\u53EF\u7528\u4E8E\u6295\u6CE8\u7684\u91D1\u989D\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u672A\u7ED3\u4F59\u989D:"), " \u663E\u793A\u6240\u6709\u6295\u6CE8\u4E2D\u7684\u603B\u6295\u6CE8\u989D\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Odds Group:"), " \u663E\u793A\u6216\u8BBE\u5B9A\u73A9\u5BB6\u7684odds group\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "BA\u72B6\u6001:"), " \u5F00/\u5173\u73A9\u5BB6\u7684BA\u72B6\u6001\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u7279\u6B8A\u5C42\u7EA7:"), " \u663E\u793A\u6216\u8BBE\u5B9A\u73A9\u5BB6\u7684\u7279\u6B8A\u5C42\u7EA7\u3002"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "\u62A5\u544A\u6307\u5357"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u72B6\u6001:"), " \u67E5\u770B\u73A9\u5BB6\u7684\u72B6\u6001\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u7528\u6237\u540D:"), " \u67E5\u770B\u73A9\u5BB6\u7684\u7528\u6237\u540D\u548C\u5FEB\u6377\u529F\u80FD\u9009\u9879\uFF0C\u5305\u62EC\uFF1A", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u8BB0\u5F55"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u8F6C\u5E10\u989D\u5EA6"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u6295\u6CE8\u9650\u989D"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u5E10\u76EE"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u76EE\u524D\u4F59\u989D:"), " \u663E\u793A\u53EF\u7528\u4E8E\u6295\u6CE8\u7684\u91D1\u989D\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u672A\u7ED3\u4F59\u989D:"), " \u663E\u793A\u6240\u6709\u6295\u6CE8\u4E2D\u7684\u603B\u6295\u6CE8\u989D\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Odds Group:"), " \u663E\u793A\u6216\u8BBE\u5B9A\u73A9\u5BB6\u7684odds group\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "BA\u72B6\u6001:"), " \u5F00/\u5173\u73A9\u5BB6\u7684BA\u72B6\u6001\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u7279\u6B8A\u5C42\u7EA7:"), " \u663E\u793A\u6216\u8BBE\u5B9A\u73A9\u5BB6\u7684\u7279\u6B8A\u5C42\u7EA7\u3002"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "line"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "rule"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "\u73A9\u5BB6\u8BE6\u60C5"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u73A9\u5BB6\u8D44\u8BAF:"), " \u67E5\u770B\u73A9\u5BB6\u7684\u4E2A\u4EBA\u8D44\u6599\u548C\u6D3B\u52A8\u8BB0\u5F55\u3002", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u73A9\u5BB6\u6295\u6CE8\u7EDF\u8BA1"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u5FEB\u901F\u8FDE\u7ED3"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u5E10\u76EE:"), " \u67E5\u770B\u73A9\u5BB6\u7684\u6BCF\u65E5\u62A5\u8868\u3002\u6C47\u603B\u6240\u6709\u4EA4\u6613\uFF0C\u7136\u540E\u8BB0\u5165\u6BCF\u65E5\u8BB0\u5F55\u3002\u6BCF\u4E2A\u6BCF\u65E5\u8BB0\u5F55\u7684\u4F59\u989D\u5C06\u88AB\u7D2F\u8BA1\u5230\u5F53\u524D\u65E5\u671F\u4F5C\u4E3A\u6700\u540E\u7684\u4F59\u989D\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u989D\u5EA6\u8BB0\u5F55:"), " \u67E5\u770B\u73A9\u5BB6\u4F59\u989D\u53D8\u5316\u5E76\u6309\u65F6\u95F4\u6392\u5E8F\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u6295\u6CE8\u5386\u53F2:"), " \u5217\u51FA\u73A9\u5BB6\u7684\u672A\u7ED3\u7B97\u6CE8\u5355\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u8F6C\u5E10:"), " \u67E5\u770B\u73A9\u5BB6\u7684\u8F6C\u5E10\u65E5\u5FD7\u548C\u94B1\u5305\u4F59\u989D\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u6295\u6CE8\u9650\u989D:"), " \u67E5\u770B\u4F53\u80B2\u535A\u5F69\uFF0C\u6570\u5B57\u6E38\u620F\uFF0C\u865A\u62DF\u4F53\u80B2\uFF0C\u5FEB\u4E50\u5F69\uFF0C\u5F69\u7968\u548C\u5176\u4ED6\u4EA7\u54C1\u7684\u6295\u6CE8\u8BBE\u7F6E\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u8BB0\u5F55:"), " \u67E5\u770B\u548C\u7F16\u8F91\u73A9\u5BB6\u8BB0\u5F55\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u65E5\u5FD7:"), " \u67E5\u770B\u73A9\u5BB6\u7684\u66F4\u65B0\u65E5\u5FD7\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u8BBE\u5B9A:"), " \u8BBE\u7F6E\u8F6C\u8D26\u9650\u989D\u3002"))));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "\u73A9\u5BB6\u8BE6\u60C5"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u73A9\u5BB6\u8D44\u8BAF:"), " \u67E5\u770B\u73A9\u5BB6\u7684\u4E2A\u4EBA\u8D44\u6599\u548C\u6D3B\u52A8\u8BB0\u5F55\u3002", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u73A9\u5BB6\u6295\u6CE8\u7EDF\u8BA1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u5FEB\u901F\u8FDE\u7ED3"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u5E10\u76EE:"), " \u67E5\u770B\u73A9\u5BB6\u7684\u6BCF\u65E5\u62A5\u8868\u3002\u6C47\u603B\u6240\u6709\u4EA4\u6613\uFF0C\u7136\u540E\u8BB0\u5165\u6BCF\u65E5\u8BB0\u5F55\u3002\u6BCF\u4E2A\u6BCF\u65E5\u8BB0\u5F55\u7684\u4F59\u989D\u5C06\u88AB\u7D2F\u8BA1\u5230\u5F53\u524D\u65E5\u671F\u4F5C\u4E3A\u6700\u540E\u7684\u4F59\u989D\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u989D\u5EA6\u8BB0\u5F55:"), " \u67E5\u770B\u73A9\u5BB6\u4F59\u989D\u53D8\u5316\u5E76\u6309\u65F6\u95F4\u6392\u5E8F\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u6295\u6CE8\u5386\u53F2:"), " \u5217\u51FA\u73A9\u5BB6\u7684\u672A\u7ED3\u7B97\u6CE8\u5355\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u8F6C\u5E10:"), " \u67E5\u770B\u73A9\u5BB6\u7684\u8F6C\u5E10\u65E5\u5FD7\u548C\u94B1\u5305\u4F59\u989D\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u6295\u6CE8\u9650\u989D:"), " \u67E5\u770B\u4F53\u80B2\u535A\u5F69\uFF0C\u6570\u5B57\u6E38\u620F\uFF0C\u865A\u62DF\u4F53\u80B2\uFF0C\u5FEB\u4E50\u5F69\uFF0C\u5F69\u7968\u548C\u5176\u4ED6\u4EA7\u54C1\u7684\u6295\u6CE8\u8BBE\u7F6E\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u8BB0\u5F55:"), " \u67E5\u770B\u548C\u7F16\u8F91\u73A9\u5BB6\u8BB0\u5F55\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u65E5\u5FD7:"), " \u67E5\u770B\u73A9\u5BB6\u7684\u66F4\u65B0\u65E5\u5FD7\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u8BBE\u5B9A:"), " \u8BBE\u7F6E\u8F6C\u8D26\u9650\u989D\u3002"))));
 };
 
 const Contents = {
-  engContent: props => react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(EngContent, props),
-  znCNContent: props => react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ZnCNContent, props)
+  engContent: props => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(EngContent, props),
+  znCNContent: props => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ZnCNContent, props)
 };
 
 const LicApiUserGuide = props => {
   const {
     lang
   } = props;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_BaseUserGuide__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_BaseUserGuide__WEBPACK_IMPORTED_MODULE_1__["default"], {
     lang: lang,
     contents: Contents
   }));
@@ -6262,51 +6262,51 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const EngContent = _ => {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "rule"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "General Info"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "This function shows all players information along with their settings."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "General Info"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "This function shows all players information along with their settings."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "line"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "rule"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Search Filters"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Username:"), " searched by Username (Support prefix search)."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Bank Account Number:"), " searched by exactly bank account number."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Email:"), " searched by exactly Email."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Currency:"), " select the currency of players that you want to manage.", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "All:"), " all supported currencies will be listed out."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Odds Group:"), " view players of an odds group."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Special Level:"), " view players of a specific special level."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "BA:"), " view players of a BA."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Search Filters"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Username:"), " searched by Username (Support prefix search)."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Bank Account Number:"), " searched by exactly bank account number."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Email:"), " searched by exactly Email."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Currency:"), " select the currency of players that you want to manage.", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "All:"), " all supported currencies will be listed out."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Odds Group:"), " view players of an odds group."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Special Level:"), " view players of a specific special level."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "BA:"), " view players of a BA."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "line"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "rule"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Report Guidelines"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Status:"), " view or set status for player."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Username:"), " view player username and number of shortcut options including:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Note"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Password"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Bank Information"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Fundtransfer Limit"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Bet Limit"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Statement"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Personal Message"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Current Balances: "), " indicate available amount to place bets."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Outstanding Balance:"), " indicate total stakes of all running bets."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Odds Group:"), " view or set odds group for player."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "BA Status:"), " switch on/off BA status for player."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Special Level:"), " view or set a special level for player."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Last Transfer:"), " indicate player\u2019s last transfer time."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Email:"), " indicate player\u2019s Email."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Report Guidelines"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Status:"), " view or set status for player."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Username:"), " view player username and number of shortcut options including:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Note"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Password"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Bank Information"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Fundtransfer Limit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Bet Limit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Statement"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Personal Message"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Current Balances: "), " indicate available amount to place bets."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Outstanding Balance:"), " indicate total stakes of all running bets."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Odds Group:"), " view or set odds group for player."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "BA Status:"), " switch on/off BA status for player."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Special Level:"), " view or set a special level for player."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Last Transfer:"), " indicate player\u2019s last transfer time."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Email:"), " indicate player\u2019s Email."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "line"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "rule"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Player Details"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Player Info:"), " view player\u2019s profile, bank information and activity record.", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Player Betting Statistics"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Fast Cross-Link"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Statement: "), " view daily statements of player. All transactions are summarized and then put into a daily record. Each daily record balance will be summed up to the current date as the latest balance."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Detail Transaction:"), " view player balance changes and sort by time."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Bet List:"), " lists out non-settled tickets of player."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Fund Transfer:"), " view transfer log and wallets balance for player."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Bet Limit:"), " view bet setting for Sportsbook, Number Game, Virtual Sports, RNG Keno, Lottery and other products."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Note:"), " view or edit the note for player."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Log:"), " view update log of player."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Setting:"), " set password, fund transfer limit and bank info."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Message:"), " view normal/ special announcements and add the personal message."))));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Player Details"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Player Info:"), " view player\u2019s profile, bank information and activity record.", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Player Betting Statistics"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Fast Cross-Link"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Statement: "), " view daily statements of player. All transactions are summarized and then put into a daily record. Each daily record balance will be summed up to the current date as the latest balance."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Detail Transaction:"), " view player balance changes and sort by time."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Bet List:"), " lists out non-settled tickets of player."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Fund Transfer:"), " view transfer log and wallets balance for player."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Bet Limit:"), " view bet setting for Sportsbook, Number Game, Virtual Sports, RNG Keno, Lottery and other products."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Note:"), " view or edit the note for player."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Log:"), " view update log of player."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Setting:"), " set password, fund transfer limit and bank info."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Message:"), " view normal/ special announcements and add the personal message."))));
 };
 
 const ZnCNContent = _ => {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "rule"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "\u4E00\u822C\u4FE1\u606F"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u672C\u62A5\u8868\u663E\u793A\u6240\u6709\u4F1A\u5458\u6570\u636E\u5305\u542B\u4F1A\u5458\u8BBE\u5B9A\u3002"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "\u4E00\u822C\u4FE1\u606F"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u672C\u62A5\u8868\u663E\u793A\u6240\u6709\u4F1A\u5458\u6570\u636E\u5305\u542B\u4F1A\u5458\u8BBE\u5B9A\u3002"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "line"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "rule"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "\u641C\u7D22\u8FC7\u6EE4\u5668"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u7528\u6237\u540D:"), " \u641C\u5BFB\u7528\u6237\u540D (\u652F\u63F4\u6A21\u7CCA\u641C\u5BFB)\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u94F6\u884C\u8D26\u6237:"), " \u7CBE\u786E\u67E5\u8BE2\u94F6\u884C\u8D26\u6237\u53F7\u7801\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u4FE1\u7BB1:"), " \u7CBE\u786E\u67E5\u8BE2\u7535\u5B50\u90AE\u4EF6\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u8D27\u5E01:"), " \u4EE5\u4F1A\u5458\u8D27\u5E01\u6765\u9009\u62E9\u62A5\u8868\u5448\u73B0\u5185\u5BB9\u3002", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u5168\u90E8:"), " \u62A5\u8868\u5448\u73B0\u6240\u6709\u652F\u6301\u8D27\u5E01\u3002"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Odds Group:"), " \u67E5\u770B\u73A9\u5BB6\u7684 odds group\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u7279\u6B8A\u5C42\u7EA7:"), " \u67E5\u9605\u7279\u6B8A\u5C42\u7EA7\u91CC\u7684\u73A9\u5BB6\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "BA\u72B6\u6001:"), " \u67E5\u770B\u73A9\u5BB6\u7684BA\u72B6\u6001\u3002"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "\u641C\u7D22\u8FC7\u6EE4\u5668"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u7528\u6237\u540D:"), " \u641C\u5BFB\u7528\u6237\u540D (\u652F\u63F4\u6A21\u7CCA\u641C\u5BFB)\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u94F6\u884C\u8D26\u6237:"), " \u7CBE\u786E\u67E5\u8BE2\u94F6\u884C\u8D26\u6237\u53F7\u7801\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u4FE1\u7BB1:"), " \u7CBE\u786E\u67E5\u8BE2\u7535\u5B50\u90AE\u4EF6\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u8D27\u5E01:"), " \u4EE5\u4F1A\u5458\u8D27\u5E01\u6765\u9009\u62E9\u62A5\u8868\u5448\u73B0\u5185\u5BB9\u3002", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u5168\u90E8:"), " \u62A5\u8868\u5448\u73B0\u6240\u6709\u652F\u6301\u8D27\u5E01\u3002"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Odds Group:"), " \u67E5\u770B\u73A9\u5BB6\u7684 odds group\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u7279\u6B8A\u5C42\u7EA7:"), " \u67E5\u9605\u7279\u6B8A\u5C42\u7EA7\u91CC\u7684\u73A9\u5BB6\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "BA\u72B6\u6001:"), " \u67E5\u770B\u73A9\u5BB6\u7684BA\u72B6\u6001\u3002"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "line"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "rule"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "\u62A5\u544A\u6307\u5357"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u72B6\u6001:"), " \u67E5\u770B\u73A9\u5BB6\u7684\u72B6\u6001\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u7528\u6237\u540D:"), " \u67E5\u770B\u73A9\u5BB6\u7684\u7528\u6237\u540D\u548C\u5FEB\u6377\u529F\u80FD\u9009\u9879\uFF0C\u5305\u62EC\uFF1A", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u8BB0\u5F55"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u5BC6\u7801"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u94F6\u884C\u8D44\u8BAF"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u8F6C\u5E10\u989D\u5EA6"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u6295\u6CE8\u9650\u989D"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u5E10\u76EE"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u4E2A\u4EBA\u8BAF\u606F"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u76EE\u524D\u4F59\u989D:"), " \u663E\u793A\u53EF\u7528\u4E8E\u6295\u6CE8\u7684\u91D1\u989D\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u672A\u7ED3\u4F59\u989D:"), " \u663E\u793A\u6240\u6709\u6295\u6CE8\u4E2D\u7684\u603B\u6295\u6CE8\u989D\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Odds Group:"), " \u663E\u793A\u6216\u8BBE\u5B9A\u73A9\u5BB6\u7684odds group\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "BA\u72B6\u6001:"), " \u5F00/\u5173\u73A9\u5BB6\u7684BA\u72B6\u6001\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u7279\u6B8A\u5C42\u7EA7:"), " \u663E\u793A\u6216\u8BBE\u5B9A\u73A9\u5BB6\u7684\u7279\u6B8A\u5C42\u7EA7\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u6700\u540E\u8F6C\u5E10:"), " \u663E\u793A\u73A9\u5BB6\u7684\u6700\u540E\u8F6C\u5E10\u7684\u65F6\u95F4\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u4FE1\u7BB1:"), " \u663E\u793A\u73A9\u5BB6\u7684\u4FE1\u7BB1\u3002"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "\u62A5\u544A\u6307\u5357"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u72B6\u6001:"), " \u67E5\u770B\u73A9\u5BB6\u7684\u72B6\u6001\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u7528\u6237\u540D:"), " \u67E5\u770B\u73A9\u5BB6\u7684\u7528\u6237\u540D\u548C\u5FEB\u6377\u529F\u80FD\u9009\u9879\uFF0C\u5305\u62EC\uFF1A", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u8BB0\u5F55"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u5BC6\u7801"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u94F6\u884C\u8D44\u8BAF"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u8F6C\u5E10\u989D\u5EA6"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u6295\u6CE8\u9650\u989D"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u5E10\u76EE"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u4E2A\u4EBA\u8BAF\u606F"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u76EE\u524D\u4F59\u989D:"), " \u663E\u793A\u53EF\u7528\u4E8E\u6295\u6CE8\u7684\u91D1\u989D\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u672A\u7ED3\u4F59\u989D:"), " \u663E\u793A\u6240\u6709\u6295\u6CE8\u4E2D\u7684\u603B\u6295\u6CE8\u989D\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Odds Group:"), " \u663E\u793A\u6216\u8BBE\u5B9A\u73A9\u5BB6\u7684odds group\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "BA\u72B6\u6001:"), " \u5F00/\u5173\u73A9\u5BB6\u7684BA\u72B6\u6001\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u7279\u6B8A\u5C42\u7EA7:"), " \u663E\u793A\u6216\u8BBE\u5B9A\u73A9\u5BB6\u7684\u7279\u6B8A\u5C42\u7EA7\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u6700\u540E\u8F6C\u5E10:"), " \u663E\u793A\u73A9\u5BB6\u7684\u6700\u540E\u8F6C\u5E10\u7684\u65F6\u95F4\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u4FE1\u7BB1:"), " \u663E\u793A\u73A9\u5BB6\u7684\u4FE1\u7BB1\u3002"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "line"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "rule"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "\u73A9\u5BB6\u8BE6\u60C5"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u73A9\u5BB6\u8D44\u8BAF:"), " \u67E5\u770B\u73A9\u5BB6\u7684\u4E2A\u4EBA\u8D44\u6599\uFF0C\u94F6\u884C\u4FE1\u606F\u548C\u6D3B\u52A8\u8BB0\u5F55\u3002", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u73A9\u5BB6\u6295\u6CE8\u7EDF\u8BA1"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u5FEB\u901F\u8FDE\u7ED3"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u5E10\u76EE:"), " \u67E5\u770B\u73A9\u5BB6\u7684\u6BCF\u65E5\u62A5\u8868\u3002\u6C47\u603B\u6240\u6709\u4EA4\u6613\uFF0C\u7136\u540E\u8BB0\u5165\u6BCF\u65E5\u8BB0\u5F55\u3002\u6BCF\u4E2A\u6BCF\u65E5\u8BB0\u5F55\u7684\u4F59\u989D\u5C06\u88AB\u7D2F\u8BA1\u5230\u5F53\u524D\u65E5\u671F\u4F5C\u4E3A\u6700\u540E\u7684\u4F59\u989D\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u989D\u5EA6\u8BB0\u5F55:"), " \u67E5\u770B\u73A9\u5BB6\u4F59\u989D\u53D8\u5316\u5E76\u6309\u65F6\u95F4\u6392\u5E8F\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u6295\u6CE8\u5386\u53F2:"), " \u5217\u51FA\u73A9\u5BB6\u7684\u672A\u7ED3\u7B97\u6CE8\u5355\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u8F6C\u5E10:"), " \u67E5\u770B\u73A9\u5BB6\u7684\u8F6C\u5E10\u65E5\u5FD7\u548C\u94B1\u5305\u4F59\u989D\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u6295\u6CE8\u9650\u989D:"), " \u67E5\u770B\u4F53\u80B2\u535A\u5F69\uFF0C\u6570\u5B57\u6E38\u620F\uFF0C\u865A\u62DF\u4F53\u80B2\uFF0C\u57FA\u8BFA\uFF0C\u5F69\u7968\u548C\u5176\u4ED6\u4EA7\u54C1\u7684\u6295\u6CE8\u8BBE\u7F6E\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u8BB0\u5F55:"), " \u67E5\u770B\u548C\u7F16\u8F91\u73A9\u5BB6\u8BB0\u5F55\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u65E5\u5FD7:"), " \u67E5\u770B\u73A9\u5BB6\u7684\u767B\u5165\u8D44\u8BAF\u548C\u66F4\u65B0\u65E5\u5FD7\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u8BBE\u5B9A:"), " \u8BBE\u7F6E\u5BC6\u7801\uFF0C\u8F6C\u8D26\u9650\u989D\u548C\u94F6\u884C\u4FE1\u606F\u3002"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u4FE1\u606F:"), " \u67E5\u770B\u4E00\u822C/\u7279\u522B\u516C\u544A\u5E76\u6DFB\u52A0\u4E2A\u4EBA\u4FE1\u606F\u3002"))));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "\u73A9\u5BB6\u8BE6\u60C5"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u73A9\u5BB6\u8D44\u8BAF:"), " \u67E5\u770B\u73A9\u5BB6\u7684\u4E2A\u4EBA\u8D44\u6599\uFF0C\u94F6\u884C\u4FE1\u606F\u548C\u6D3B\u52A8\u8BB0\u5F55\u3002", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u73A9\u5BB6\u6295\u6CE8\u7EDF\u8BA1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "\u5FEB\u901F\u8FDE\u7ED3"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u5E10\u76EE:"), " \u67E5\u770B\u73A9\u5BB6\u7684\u6BCF\u65E5\u62A5\u8868\u3002\u6C47\u603B\u6240\u6709\u4EA4\u6613\uFF0C\u7136\u540E\u8BB0\u5165\u6BCF\u65E5\u8BB0\u5F55\u3002\u6BCF\u4E2A\u6BCF\u65E5\u8BB0\u5F55\u7684\u4F59\u989D\u5C06\u88AB\u7D2F\u8BA1\u5230\u5F53\u524D\u65E5\u671F\u4F5C\u4E3A\u6700\u540E\u7684\u4F59\u989D\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u989D\u5EA6\u8BB0\u5F55:"), " \u67E5\u770B\u73A9\u5BB6\u4F59\u989D\u53D8\u5316\u5E76\u6309\u65F6\u95F4\u6392\u5E8F\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u6295\u6CE8\u5386\u53F2:"), " \u5217\u51FA\u73A9\u5BB6\u7684\u672A\u7ED3\u7B97\u6CE8\u5355\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u8F6C\u5E10:"), " \u67E5\u770B\u73A9\u5BB6\u7684\u8F6C\u5E10\u65E5\u5FD7\u548C\u94B1\u5305\u4F59\u989D\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u6295\u6CE8\u9650\u989D:"), " \u67E5\u770B\u4F53\u80B2\u535A\u5F69\uFF0C\u6570\u5B57\u6E38\u620F\uFF0C\u865A\u62DF\u4F53\u80B2\uFF0C\u57FA\u8BFA\uFF0C\u5F69\u7968\u548C\u5176\u4ED6\u4EA7\u54C1\u7684\u6295\u6CE8\u8BBE\u7F6E\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u8BB0\u5F55:"), " \u67E5\u770B\u548C\u7F16\u8F91\u73A9\u5BB6\u8BB0\u5F55\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u65E5\u5FD7:"), " \u67E5\u770B\u73A9\u5BB6\u7684\u767B\u5165\u8D44\u8BAF\u548C\u66F4\u65B0\u65E5\u5FD7\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u8BBE\u5B9A:"), " \u8BBE\u7F6E\u5BC6\u7801\uFF0C\u8F6C\u8D26\u9650\u989D\u548C\u94F6\u884C\u4FE1\u606F\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "\u4FE1\u606F:"), " \u67E5\u770B\u4E00\u822C/\u7279\u522B\u516C\u544A\u5E76\u6DFB\u52A0\u4E2A\u4EBA\u4FE1\u606F\u3002"))));
 };
 
 const Contents = {
-  engContent: props => react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(EngContent, props),
-  znCNContent: props => react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ZnCNContent, props)
+  engContent: props => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(EngContent, props),
+  znCNContent: props => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ZnCNContent, props)
 };
 
 const LicAthenaUserGuide = props => {
   const {
     lang
   } = props;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_BaseUserGuide__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_BaseUserGuide__WEBPACK_IMPORTED_MODULE_1__["default"], {
     lang: lang,
     contents: Contents
   }));
@@ -6345,7 +6345,7 @@ const BaseUserGuide = props => {
     return contents.engContent();
   };
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, renderContentByLanguage());
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, renderContentByLanguage());
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (BaseUserGuide);
@@ -6535,7 +6535,7 @@ class LapCommonService extends _baseCommonService__WEBPACK_IMPORTED_MODULE_0__["
   }
 
   _buildCommonAjaxConfig(configOption, apiActionUrl, params) {
-    const commonConfig = _objectSpread({}, configOption, {
+    const commonConfig = _objectSpread(_objectSpread({}, configOption), {}, {
       url: apiActionUrl
     });
 
@@ -6551,7 +6551,7 @@ class LapCommonService extends _baseCommonService__WEBPACK_IMPORTED_MODULE_0__["
     } : {
       data: qs__WEBPACK_IMPORTED_MODULE_3___default.a.stringify(params)
     };
-    return _objectSpread({}, config, {}, paramConfig);
+    return _objectSpread(_objectSpread({}, config), paramConfig);
   }
 
   _fetchDataWithToken(sysType, action, params, configOption) {
@@ -6565,11 +6565,11 @@ class LapCommonService extends _baseCommonService__WEBPACK_IMPORTED_MODULE_0__["
 
       const commonAjaxConfig = this._buildCommonAjaxConfig(configOption, apiActionUrl, params);
 
-      const headerConfig = _objectSpread({}, configOption.headers, {
+      const headerConfig = _objectSpread(_objectSpread({}, configOption.headers), {}, {
         'X-Auth-Token': Token
       });
 
-      const configWithXToken = _objectSpread({}, commonAjaxConfig, {
+      const configWithXToken = _objectSpread(_objectSpread({}, commonAjaxConfig), {}, {
         headers: _objectSpread({}, headerConfig)
       });
 
@@ -6578,7 +6578,7 @@ class LapCommonService extends _baseCommonService__WEBPACK_IMPORTED_MODULE_0__["
   }
 
   fetchData(sysType, action, params, configOption = defaultAjaxConfig) {
-    const config = _objectSpread({}, defaultAjaxConfig, {}, configOption);
+    const config = _objectSpread(_objectSpread({}, defaultAjaxConfig), configOption);
 
     if (sysType === _constants_configInfo__WEBPACK_IMPORTED_MODULE_1__["systemType"].newAdmin) {
       const relativeUrl = this._baseUrl + action;
@@ -6713,18 +6713,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 
 
-const CheckBox = react__WEBPACK_IMPORTED_MODULE_0___default.a.forwardRef((props, ref) => {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+const CheckBox = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.forwardRef((props, ref) => {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "checkbox-group",
     ref: ref
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "checkbox",
     className: "checkbox",
     id: props.id,
     checked: props.checked,
     disabled: props.disabled,
     onChange: () => props.onChange(!props.checked)
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
     htmlFor: props.id
   }, props.label));
 });
@@ -6782,9 +6782,9 @@ const DropdownLabel = props => {
   const classes = classnames__WEBPACK_IMPORTED_MODULE_2___default()('dropdown-label-container', className, {
     disabled: props.disabled
   });
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", _extends({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", _extends({
     className: classes
-  }, attrs), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+  }, attrs), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "dropdown-label",
     style: labelStyle
   }, text), iconElement);
@@ -6801,13 +6801,13 @@ const propTypes = {
 };
 const defaultProps = {
   disabled: false,
-  iconElement: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+  iconElement: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "dropdown-label-icon chevron down"
   })
 };
 DropdownLabel.propTypes = propTypes;
 DropdownLabel.defaultProps = defaultProps;
-/* harmony default export */ __webpack_exports__["default"] = (react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(DropdownLabel));
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(DropdownLabel));
 ;
 
 /***/ }),
@@ -6828,16 +6828,16 @@ __webpack_require__.r(__webpack_exports__);
 const Loader = ({
   isLoading
 }) => {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "loading-process default",
     style: {
       display: `${isLoading ? 'block' : 'none'}`
     }
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "icon-loading"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "loader-inner ball-beat"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null))));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Loader);
@@ -6862,7 +6862,7 @@ __webpack_require__.r(__webpack_exports__);
 const NoDataTitle = ({
   title
 }) => {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "no-info-row center-align",
     dangerouslySetInnerHTML: {
       __html: title ? title : _lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("NoInfo")
@@ -6985,7 +6985,7 @@ class Overlay extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     const style = {
       display: this.state.isOpening ? "block" : "none"
     };
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: mergedClassName,
       style: style,
       ref: this.refHandlers.container
@@ -7038,9 +7038,9 @@ const ReportTitle = (_ref) => {
       attrs = _objectWithoutProperties(_ref, ["content", "tag"]);
 
   const Tag = tag;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "report-title-container"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Tag, _extends({
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Tag, _extends({
     className: "report-title"
   }, attrs), content));
 };
@@ -7076,11 +7076,11 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 const Switcher = props => {
   const attributes = _extends({}, props);
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "switch"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", _extends({}, attributes, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", _extends({}, attributes, {
     type: "checkbox"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "lever"
   })));
 };
@@ -7142,12 +7142,12 @@ class UserGuide extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
       contentTitle,
       isHtml
     } = this.props;
-    const isShow = this.state.isShow && content && (react__WEBPACK_IMPORTED_MODULE_0___default.a.isValidElement(content) || content.length > 0) ? true : false;
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    const isShow = this.state.isShow && content && ( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.isValidElement(content) || content.length > 0) ? true : false;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
       className: className,
       onClick: this.onClickHandler,
       title: title
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_popup_Popup__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_popup_Popup__WEBPACK_IMPORTED_MODULE_2__["default"], {
       width: 640,
       height: 480,
       isShow: isShow,
@@ -7254,19 +7254,19 @@ class CollapsiblePanel extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Comp
       width: "20px",
       float: 'left'
     };
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: `${this.props.className}`
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       style: {
         display: this.state.isCollapsed ? 'none' : 'block'
       }
-    }, this.props.children), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, this.props.children), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "caret-block"
-    }, stickyFooter), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, stickyFooter), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "filter-handle",
       style: iconContainerStyle,
       onClick: this.onClick
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(IconTag, _extends({
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(IconTag, _extends({
       className: className,
       style: iconStyle
     }, attrs))));
@@ -7368,11 +7368,11 @@ const DropdownButton = props => {
         attrs = _objectWithoutProperties(props, ["className", "children", "toggleButton", "dropdownMenu", "isOpen", "onOpen", "onClose", "onToggle", "buttonLabel"]);
 
   const classes = classnames__WEBPACK_IMPORTED_MODULE_2___default()('dropdown', className);
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", _extends({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", _extends({
     className: classes
-  }, attrs), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DropdownToggle__WEBPACK_IMPORTED_MODULE_3__["default"], _extends({}, toggleButton, {
+  }, attrs), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DropdownToggle__WEBPACK_IMPORTED_MODULE_3__["default"], _extends({}, toggleButton, {
     onClick: onToggle
-  }), buttonLabel), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DropdownMenu__WEBPACK_IMPORTED_MODULE_4__["default"], _extends({}, dropdownMenu, {
+  }), buttonLabel), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DropdownMenu__WEBPACK_IMPORTED_MODULE_4__["default"], _extends({}, dropdownMenu, {
     isOpen: isOpen,
     onOpen: onOpen,
     onClose: onClose
@@ -7468,7 +7468,7 @@ class DropdownItem extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       disabled: props.disabled,
       active
     });
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Tag, _extends({
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Tag, _extends({
       className: classes,
       type: type
     }, props));
@@ -7539,11 +7539,11 @@ class DropdownMenu extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 
     const Tag = tag;
     const classes = classnames__WEBPACK_IMPORTED_MODULE_2___default()('dropdown-menu', className);
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Overlay__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Overlay__WEBPACK_IMPORTED_MODULE_3__["default"], {
       isOpening: isOpen,
       onOpen: onOpen,
       onClose: onClose
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Tag, _extends({
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Tag, _extends({
       className: classes
     }, attrs)));
   }
@@ -7604,7 +7604,7 @@ const DropdownToggle = props => {
     'site-caret': caret
   });
   const Tag = tag;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Tag, _extends({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Tag, _extends({
     className: classes
   }, attrs));
 };
@@ -7687,44 +7687,44 @@ const Popup = props => {
   let content;
 
   if (iframeUrl) {
-    content = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("iframe", {
+    content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("iframe", {
       frameBorder: "0",
       src: iframeUrl,
       width: "100%",
       height: "100%"
     });
   } else {
-    content = isHtml ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    content = isHtml ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "popup-content",
       dangerouslySetInnerHTML: {
         __html: children
       }
-    }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "popup-content"
     }, children);
   }
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: `popup-container ${isShow ? 'show' : 'hide'}`,
     onClick: props.onClick
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "popup-block-body"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "flat-popup",
     style: {
       height: height,
       width: width
     }
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "popup-title"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "txt-title"
-  }, title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }, title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     className: "popup-close",
     onClick: () => {
       props.onClose && props.onClose();
     }
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "icon-close"
   }))), content));
 };
@@ -7865,7 +7865,7 @@ class SweetAlert extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component 
   }
 
   _buildButtonGroup(buttons) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "al-button-container"
     }, buttons.map((btnItem, index) => {
       const {
@@ -7873,7 +7873,7 @@ class SweetAlert extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component 
       } = btnItem,
             attrs = _objectWithoutProperties(btnItem, ["text"]);
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", _extends({
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", _extends({
         key: index,
         type: "button"
       }, attrs), text);
@@ -7887,7 +7887,7 @@ class SweetAlert extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component 
     const className = `${_icon__WEBPACK_IMPORTED_MODULE_3__["ICON"]} ${_icon__WEBPACK_IMPORTED_MODULE_3__["ICON"]}--${icon}`;
 
     if (PREDEFINED_ICONS.includes(icon)) {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: className,
         dangerouslySetInnerHTML: {
           __html: ICON_CONTENTS[icon]
@@ -7906,9 +7906,9 @@ class SweetAlert extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component 
     } = _this$props,
           props = _objectWithoutProperties(_this$props, ["buttons", "children"]);
 
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "sweet-alert"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_popup__WEBPACK_IMPORTED_MODULE_1__["default"], props, this._buildIcon(), children, this._buildButtonGroup(buttons)));
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_popup__WEBPACK_IMPORTED_MODULE_1__["default"], props, this._buildIcon(), children, this._buildButtonGroup(buttons)));
   }
 
 }
@@ -8058,17 +8058,17 @@ const bodyDecimalStyle = {
 const bodyCellStyle = {
   rowspan: bodyTextStyle,
   center: {
-    alignment: _objectSpread({}, bodyTextStyle.alignment, {
+    alignment: _objectSpread(_objectSpread({}, bodyTextStyle.alignment), {}, {
       horizontal: "center"
     })
   },
   left: {
-    alignment: _objectSpread({}, bodyTextStyle.alignment, {
+    alignment: _objectSpread(_objectSpread({}, bodyTextStyle.alignment), {}, {
       horizontal: "left"
     })
   },
   right: {
-    alignment: _objectSpread({}, bodyTextStyle.alignment, {
+    alignment: _objectSpread(_objectSpread({}, bodyTextStyle.alignment), {}, {
       horizontal: "right"
     })
   },
@@ -8076,7 +8076,7 @@ const bodyCellStyle = {
     numFmt: "#,##0"
   },
   decimal: bodyDecimalStyle,
-  negativeDecimal: _objectSpread({}, bodyDecimalStyle, {
+  negativeDecimal: _objectSpread(_objectSpread({}, bodyDecimalStyle), {}, {
     font: {
       color: {
         rgb: "FF0000"
@@ -8093,29 +8093,29 @@ const totalTextStyle = {
   }
 };
 
-const totalDecimalStyle = _objectSpread({}, totalTextStyle, {
+const totalDecimalStyle = _objectSpread(_objectSpread({}, totalTextStyle), {}, {
   numFmt: "#,##0.00"
 });
 
 const totalCellStyle = {
   default: totalTextStyle,
-  rowspan: _objectSpread({}, totalTextStyle, {
+  rowspan: _objectSpread(_objectSpread({}, totalTextStyle), {}, {
     alignment: {
       horizontal: "center",
       vertical: "center"
     }
   }),
-  center: _objectSpread({}, totalTextStyle, {
+  center: _objectSpread(_objectSpread({}, totalTextStyle), {}, {
     alignment: {
       vertical: "center",
       horizontal: "center"
     }
   }),
-  number: _objectSpread({}, totalTextStyle, {
+  number: _objectSpread(_objectSpread({}, totalTextStyle), {}, {
     numFmt: "#,##0"
   }),
   decimal: totalDecimalStyle,
-  negativeDecimal: _objectSpread({}, totalDecimalStyle, {
+  negativeDecimal: _objectSpread(_objectSpread({}, totalDecimalStyle), {}, {
     font: {
       bold: true,
       color: {
@@ -8144,28 +8144,28 @@ const grandTotalTextStyle = {
   }
 };
 
-const decimalGrandTotalStyle = _objectSpread({}, grandTotalTextStyle, {
+const decimalGrandTotalStyle = _objectSpread(_objectSpread({}, grandTotalTextStyle), {}, {
   numFmt: "#,##0.00"
 });
 
 const grandTotalCellStyle = {
   default: grandTotalTextStyle,
-  rowspan: _objectSpread({}, grandTotalTextStyle, {
+  rowspan: _objectSpread(_objectSpread({}, grandTotalTextStyle), {}, {
     alignment: {
       horizontal: "center",
       vertical: "center"
     }
   }),
-  center: _objectSpread({}, grandTotalTextStyle, {
+  center: _objectSpread(_objectSpread({}, grandTotalTextStyle), {}, {
     alignment: {
       horizontal: "center"
     }
   }),
-  number: _objectSpread({}, grandTotalTextStyle, {
+  number: _objectSpread(_objectSpread({}, grandTotalTextStyle), {}, {
     numFmt: "#,##0"
   }),
   decimal: decimalGrandTotalStyle,
-  negativeDecimal: _objectSpread({}, decimalGrandTotalStyle, {
+  negativeDecimal: _objectSpread(_objectSpread({}, decimalGrandTotalStyle), {}, {
     font: {
       bold: true,
       color: {
@@ -8173,7 +8173,7 @@ const grandTotalCellStyle = {
       }
     }
   }),
-  percent: _objectSpread({}, grandTotalTextStyle, {
+  percent: _objectSpread(_objectSpread({}, grandTotalTextStyle), {}, {
     numFmt: "#,##0.00%"
   })
 };
@@ -8199,7 +8199,7 @@ class AppLayout extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   }
 
   render() {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       id: "container",
       className: "container-fluid"
     }, this.props.children);
@@ -8362,7 +8362,7 @@ const updateObjectInArray = (array, indexItem, updatedItem) => {
       return item;
     }
 
-    return _objectSpread({}, item, {}, updatedItem);
+    return _objectSpread(_objectSpread({}, item), updatedItem);
   });
 };
 
@@ -8724,10 +8724,10 @@ const defaultOkButton = {
 };
 const generateDefaultConfirmOption = (content, onClose, submitProps, cancelProps, icon = predefinedIcons.warning, customOption = {}) => {
   return _objectSpread({
-    buttons: [_objectSpread({}, defaultSubmitButton, {}, submitProps), _objectSpread({}, defaultCancelButton, {}, cancelProps)],
+    buttons: [_objectSpread(_objectSpread({}, defaultSubmitButton), submitProps), _objectSpread(_objectSpread({}, defaultCancelButton), cancelProps)],
     icon,
     isShow: true,
-    children: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    children: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       className: "center-align"
     }, content),
     onClose
@@ -8742,7 +8742,7 @@ const generateDefaultAlertOption = (content, onClose, onClick, icon = predefined
     }],
     icon,
     isShow: true,
-    children: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    children: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       className: "center-align"
     }, content),
     onClose
