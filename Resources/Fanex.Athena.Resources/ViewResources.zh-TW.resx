@@ -2123,4 +2123,7 @@
   <data name="ProductGDG" xml:space="preserve">
     <value>GDG</value>
   </data>
+  <data name="Happy5LinkedGames" xml:space="preserve">
+    <value>快樂5系列遊戲</value>
+  </data>
 </root>
