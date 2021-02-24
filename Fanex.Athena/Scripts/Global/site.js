@@ -6,7 +6,7 @@
 
 var Site = (function ($) {
     var UNBLOCKUI_TIMEOUT = 30000;
-    var BASE_CURRENCY = { 'eur': '-1', 'usd': '-2', 'gbp': '-3', 'myr': '-4', 'cny': '-5', 'thb': '-6', 'idr': '-7', 'inh': '-8' };
+    var BASE_CURRENCY = { 'eur': '-1', 'usd': '-2', 'gbp': '-3', 'myr': '-4', 'cny': '-5', 'thb': '-6', 'idr': '-7', 'inh': '-8', 'bdt': '-9', 'inr': '-10' };
     var REQUEST_VERIFICATION_TOKEN;
     var _historyDate = null;
     var _licenseeId = null;

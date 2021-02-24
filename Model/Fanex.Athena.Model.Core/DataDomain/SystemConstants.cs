@@ -18,7 +18,7 @@ namespace Fanex.Athena.Model.Core.DataDomain
 
         public const int MaxDataTotalRow = int.MaxValue - 1000;
 
-        public static readonly int MinBaseCurrencyType = BaseCurrencyType.INH;
+        public static readonly int MinBaseCurrencyType = BaseCurrencyType.INR;
 
         public static readonly ReadOnlyCollection<string> BaseCurrencyListOfSummaryTotalRow = new ReadOnlyCollection<string>(
          new List<string> { "EUR", "USD", "GBP" });
@@ -33,6 +33,8 @@ namespace Fanex.Athena.Model.Core.DataDomain
             { BaseCurrencyType.THB,"THB" },
             { BaseCurrencyType.IDR,"IDR" },
             { BaseCurrencyType.INH,"INH" },
+            { BaseCurrencyType.BDT,"BDT" },
+            { BaseCurrencyType.INR,"INR" },
 
         };
 
