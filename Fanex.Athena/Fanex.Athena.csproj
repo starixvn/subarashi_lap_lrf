@@ -1023,6 +1023,7 @@
     <Content Include="www\css\build\dev\pages\components\fixedColumnsTable.css.map" />
     <Content Include="www\css\source\components\bootstrap-table\themes\bootstrap\_variables.scss" />
     <Content Include="www\css\source\components\bootstrap-table\themes\_theme.scss" />
+    <Content Include="Views\Desktop\BetList\SabaClubJackpotWonDetail\Main.cshtml" />
     <None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
     <None Include="www\css\source\pages\betlist\result\result.happy5.scss" />
     <None Include="www\css\source\reactpages\components\alert\icons\error.scss" />

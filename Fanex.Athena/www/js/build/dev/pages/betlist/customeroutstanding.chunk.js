@@ -5425,6 +5425,19 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
                 showDetailPopUp(url, { width: 890, height: popH + 50, title: title });
             },
+            showSabaClubJackpotWonDetails: function (transId, custId, betTypeId) {
+                let url = Site.resolveClientUrl('SabaClubJackpotWonBetList/Detail');
+                url = QueryString.setParam(url, 'transId', transId);
+                url = QueryString.setParam(url, 'custId', custId);
+                url = QueryString.setParam(url, 'betType', betTypeId);
+                url = QueryString.setParam(url, 'BaseCurrency', getBaseCurrency());
+
+                const popH = Math.min($(window).height() - 100, 550);
+                const title = Site.getSingleResource('ProductSBC') + ' - ' +
+                    Site.getSingleResource('JackpotWonDetails');
+
+                showDetailPopUp(url, { width: 890, height: popH + 50, title: title });
+            },
             showVideoPokerGameDetails: function (transId, winlostDate, custId, transType) {
                 let url = Site.resolveClientUrl('CardClubBetList/Detail');
                 url = QueryString.setParam(url, 'transId', transId);
@@ -5621,6 +5634,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 window.ShowBonusDetails = _me.showBonusDetails;
                 window.showPPDetails = _me.showPPDetails;
                 window.showPPJackpotWonDetails = _me.showPPJackpotWonDetails;
+                window.showSabaClubJackpotWonDetails = _me.showSabaClubJackpotWonDetails;
                 window.showVideoPokerGameDetails = _me.showVideoPokerGameDetails;
                 window.showSingleMatchParlayDetail = _me.showSingleMatchParlayDetail;
                 window.showSGDetails = _me.showSGDetails;

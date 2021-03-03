@@ -36,13 +36,5 @@ namespace Fanex.Athena.Api.BetList
             const string UspKey = "Lrf_BetList_RNG_Detail";
             return GetBetListResult(metaModel, UspKey);
         }
-
-        [HttpPost]
-        [ValidationApiRequest]
-        public Task<dynamic> JackpotWonDetails(BetListMetaModel metaModel)
-        {
-            const string UspKey = "Lrf_BetList_Jackpot_Detail";
-            return GetBetListResult(metaModel, UspKey);
-        }
     }
 }
