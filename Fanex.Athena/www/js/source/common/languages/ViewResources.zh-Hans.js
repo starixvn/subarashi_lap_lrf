@@ -1,4 +1,4 @@
-﻿// Generated at: 2/8/2021 10:19:22 AM
+﻿// Generated at: 3/15/2021 8:54:47 AM
 window._language_zh_Hans = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -364,6 +364,7 @@ MixLiveAndNoneLive:"混合过关",
 MixSportsParlay:"混合过关",
 Mo:"Mo",
 Mobile:"手机版",
+MobileEuro:"手机欧洲版",
 Monday:"星期一",
 MoneyLine:"胜负盘",
 MoneyPlay:"普通投注",
