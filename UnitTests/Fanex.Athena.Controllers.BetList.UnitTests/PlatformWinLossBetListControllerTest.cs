@@ -66,6 +66,7 @@
         [TestCase(0, "", null, "EUR", true, PlatformType.ESportsDesktop, nameof(PlatformType.ESportsDesktop))]
         [TestCase(0, "", null, "EUR", true, PlatformType.ESportsMobile, nameof(PlatformType.ESportsMobile))]
         [TestCase(0, "", null, "EUR", true, PlatformType.ESportsApp, nameof(PlatformType.ESportsApp))]
+        [TestCase(0, "", null, "EUR", true, PlatformType.MobileEuro, nameof(PlatformType.MobileEuro))]
         [TestCase(0, "", null, "EUR", true, PlatformType.BetfromOthers, nameof(PlatformType.BetfromOthers))]
         [TestCase(0, "", null, "EUR", true, PlatformType.All, nameof(PlatformType.All))]
         public async Task Index_ExportExcel_PassCorrectParam(
