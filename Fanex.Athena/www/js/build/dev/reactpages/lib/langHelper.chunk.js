@@ -696,7 +696,7 @@ window._language_en_US = {
   ProductFW: "Fishing World",
   ProductGD: "Gold Deluxe",
   ProductGDG: "GDG",
-  ProductI4D: "Indo 4D",
+  ProductI4D: "Togel 4D",
   ProductJK: "Joker",
   ProductKN: "RNG Keno",
   ProductLC: "Live Casino",

@@ -5470,7 +5470,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Indo 4D.
+        ///   Looks up a localized string similar to Togel 4D.
         /// </summary>
         public static string ProductI4D {
             get {
