@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 2/8/2021 10:19:21 AM
+// Generated at: 3/15/2021 8:54:47 AM
 window._language_zh_CN = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -521,6 +521,7 @@ window._language_zh_CN = {
   Mo: "Mo",
   Mobile: "手机版",
   MobileApp: "手机 APP",
+  MobileEuro: "手机欧洲版",
   MobileLiteVersion: "手机轻量版",
   Monday: "星期一",
   MoneyLine: "胜负盘",
