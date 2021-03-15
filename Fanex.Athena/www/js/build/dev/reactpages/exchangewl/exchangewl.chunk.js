@@ -2639,6 +2639,12 @@ const BaseCurrency = [{
 }, {
   value: -8,
   text: 'INH'
+}, {
+  value: -9,
+  text: 'BDT'
+}, {
+  value: -10,
+  text: 'INR'
 }];
 
 /***/ }),
