@@ -8428,6 +8428,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 '12': Site.getSingleResource('ESportsDesktop'),
                 '13': Site.getSingleResource('ESportsMobile'),
                 '14': Site.getSingleResource('ESportsApp'),
+                '15': Site.getSingleResource('MobileEuro'),
                 '88': Site.getSingleResource('BetfromOthers')
             };
 

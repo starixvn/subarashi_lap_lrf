@@ -35,6 +35,8 @@
 
         public const int ESportsApp = 14;
 
+        public const int MobileEuro = 15;
+
         public const int BetfromOthers = 88;
 
         private static readonly IDictionary<int, string> MapPlatformKeys = new Dictionary<int, string>
@@ -54,7 +56,8 @@
             { NativeApp, nameof(NativeApp) },
             { ESportsDesktop, nameof(ESportsDesktop) },
             { ESportsMobile, nameof(ESportsMobile) },
-            { ESportsApp, nameof(ESportsApp) }
+            { ESportsApp, nameof(ESportsApp) },
+            { MobileEuro, nameof(MobileEuro) }
         };
 
         public static string GetPlatformKey(int type)
@@ -67,40 +70,9 @@
             return MapPlatformKeys.ContainsKey(type) ? ViewResources.ResourceManager.GetString(MapPlatformKeys[type]) : ViewResources.All;
         }
 
-#pragma warning disable S1541 // Methods and properties should not be too complex
-
-        public static string GetPlatformName(string code)
-#pragma warning restore S1541 // Methods and properties should not be too complex
-        {
-            switch (code)
-            {
-                case "a":
-                case "z": return ViewResources.China;
-                case "d":
-                case "g": return ViewResources.Asia;
-                case "e":
-                case "u":
-                case "y": return ViewResources.Euro;
-                case "m": return ViewResources.Wap;
-                case "s":
-                case "l": return ViewResources.Mobile;
-                case "r": return ViewResources.Tablet;
-                case "x": return ViewResources.NewAsia;
-                case "o": return ViewResources.MobileApp;
-                case "c": return ViewResources.MobileLiteVersion;
-                case "t": return ViewResources.DeepLink;
-                case "v": return ViewResources.BetfromOthers;
-                case "0": return ViewResources.NativeApp;
-                case "1": return ViewResources.ESportsDesktop;
-                case "2": return ViewResources.ESportsMobile;
-                case "3": return ViewResources.ESportsApp;
-                default: return ViewResources.Others;
-            }
-        }
-
         public static bool IsValidPlatform(int type)
         {
-            return (type >= All && type <= ESportsApp) || type == BetfromOthers;
+            return (type >= All && type <= MobileEuro) || type == BetfromOthers;
         }
     }
 }

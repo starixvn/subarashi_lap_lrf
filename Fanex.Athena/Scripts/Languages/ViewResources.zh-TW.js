@@ -1,4 +1,4 @@
-﻿// Generated at: 2/8/2021 10:19:10 AM
+﻿// Generated at: 3/5/2021 10:42:06 AM
 var _language_zh_TW = {
 AA:"客客",
 AbnormalBet:"非正規註單",
@@ -363,6 +363,7 @@ MixLiveAndNoneLive:"混合滾球&amp;非滾球",
 MixSportsParlay:"混合過關",
 Mo:"Mo",
 Mobile:"手機版",
+MobileEuro:"手機歐洲版",
 Monday:"星期一",
 MoneyLine:"勝負盤",
 MoneyPlay:"普通投注",

@@ -53,6 +53,7 @@
                 '12': Site.getSingleResource('ESportsDesktop'),
                 '13': Site.getSingleResource('ESportsMobile'),
                 '14': Site.getSingleResource('ESportsApp'),
+                '15': Site.getSingleResource('MobileEuro'),
                 '88': Site.getSingleResource('BetfromOthers')
             };
 

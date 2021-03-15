@@ -2217,6 +2217,9 @@
   <data name="ESportsApp" xml:space="preserve">
     <value>电子竞技App</value>
   </data>
+  <data name="MobileEuro" xml:space="preserve">
+    <value>手机欧洲版</value>
+  </data>
   <data name="MarkDate" xml:space="preserve">
     <value>标记日期</value>
     <comment>#128082</comment>

@@ -2593,6 +2593,9 @@
   <data name="ESportsApp" xml:space="preserve">
     <value>E-Sports App</value>
   </data>
+  <data name="MobileEuro" xml:space="preserve">
+    <value>Mobile Euro</value>
+  </data>
   <data name="ProductSAG" xml:space="preserve">
     <value>SA Gaming</value>
     <comment>128493</comment>
