@@ -89,8 +89,6 @@ namespace Fanex.Athena
             var lgApiheaedr = new Dictionary<string, string>
             { { "LGAPI_TOKEN_KEY", ConfigurationManager.AppSettings["LGAPITokenValue"] } };
             builder.WithHttpClient("LGAPICLIENT", ConfigurationManager.AppSettings["LGAPIHostUrl"], lgApiheaedr);
-
-            builder.WithHttpClient("EXTServiceTokenClient", ConfigurationManager.AppSettings["ExtAPITokenHostUrl"]);
         }
 
         private static void RegisterThirdpartyServices(ContainerBuilder builder)
