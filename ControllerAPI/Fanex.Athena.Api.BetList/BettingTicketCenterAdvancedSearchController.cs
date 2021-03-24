@@ -60,6 +60,8 @@
 
             metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, currencyList);
             metaModel.HasPlayerCom = SessionService.LicenseeSession.IsAllowedCustomerComm;
+            metaModel.IsShowIpvn = userSession.IsShowIpvn;
+
             var timeOutInSecond = int.Parse(_appSettings.GetValue("BetListApiOutInSecond"));
             return await _betListApiClient.PostAsync("/BettingTicketCenterAdvancedSearch/GetData",
                 metaModel, userSession.Language, timeOutInSecond).ConfigureAwait(false);

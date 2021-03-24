@@ -81,6 +81,8 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
 
             AssignMetaModelValue(metaModel);
 
+            metaModel.IsShowIpvn = userSession.IsShowIpvn;
+
             if (metaModel.IsExport)
             {
                 var httpResponse = await _betListApiClient.PostAsync("/BettingTicketCenter/GetBySingleCustomer",

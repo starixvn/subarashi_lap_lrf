@@ -116,5 +116,8 @@
         public const string PlayerDetailTransaction = "pa_detail_transaction";
         public const string PlayerAdminCommissionGroup = "PlayerAdminCommissionGroup";
         public const string PlayerAdminCommissionGroup_Write = "PlayerAdminCommissionGroup_Write";
+
+        /*BetList*/
+        public const string BetlistViewIpvn = "bl_view_ipvn";
     }
 }

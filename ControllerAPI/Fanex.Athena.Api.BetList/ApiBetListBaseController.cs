@@ -75,6 +75,7 @@ namespace Fanex.Athena.Api.BetList
             metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId);
             metaModel.HasPlayerCom = licenseeSession.IsAllowedCustomerComm;
             metaModel.UspKey = uspKey;
+            metaModel.IsShowIpvn = userSession.IsShowIpvn;
 
             return await BridgeClientService.PostAsync(apiPath ?? "/BetList/GetBetList", metaModel, userSession.Language).ConfigureAwait(false);
         }
@@ -101,6 +102,8 @@ namespace Fanex.Athena.Api.BetList
             metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId);
             metaModel.HasPlayerCom = licenseeSession.IsAllowedCustomerComm;
             metaModel.UspKey = uspKey;
+            metaModel.IsShowIpvn = userSession.IsShowIpvn;
+
             return await BridgeClientService.PostAsync(apiPath ?? "/BetList/GetBetListPaging",
                 metaModel,
                 userSession.Language

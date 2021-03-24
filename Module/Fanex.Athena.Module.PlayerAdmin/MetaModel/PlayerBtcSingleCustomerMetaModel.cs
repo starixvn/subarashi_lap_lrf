@@ -5,7 +5,7 @@ using Fanex.Athena.Model.Core.MetaModel;
 
 namespace Fanex.Athena.Module.PlayerAdmin.MetaModel
 {
-    public class PlayerBtcSingleCustomerMetaModel : IMetaModelAgent, IMetaModelValidation
+    public class PlayerBtcSingleCustomerMetaModel : IMetaModelAgent, IMetaModelValidation, IMetaModelShowIPVN
     {
         private const int DefaultPageSize = 50;
 
@@ -78,5 +78,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.MetaModel
         public bool IsValid => !string.IsNullOrEmpty(UserName);
 
         public bool IsAllowTxIDColumn { get; set; }
+
+        public bool IsShowIpvn { get; set; }
     }
 }
