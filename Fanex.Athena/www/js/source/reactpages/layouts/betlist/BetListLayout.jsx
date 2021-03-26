@@ -88,6 +88,10 @@ class BetListLayout extends Component {
                 const url = BetList.getGDGResultUrl(rootUrl, custid, transdecs, extension2, league);
                 this._showThirdPartyResult(url, title);
             }
+            else if (sporttype === SportType.SLT) {
+                const url = BetList.getSportsLotteryResultUrl(rootUrl, custid, transdecs, defaultPlatform);
+                this._showThirdPartyResult(url, title);
+            }
             else {
                 const url = BetList.getResultUrl(rootUrl, matchid, raceNo, bettype,
                     sporttype, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid);

@@ -74,6 +74,8 @@ namespace Fanex.Athena.Model.Core.DTO.Common
 
         public const string GDG = "GDG";
 
+        public const string SLT = "SLT";
+
         #endregion Field
 
         #region Constructor

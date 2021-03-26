@@ -136,6 +136,14 @@ namespace Fanex.Athena.Model.Core.DTO.Common
             }
         }
 
+        public bool IsAllowSLT
+        {
+            get
+            {
+                return ProductList.Any(p => p.ProductCode == Product.SLT);
+            }
+        }
+
         public bool IsAllowAB
         {
             get

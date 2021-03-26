@@ -1,12 +1,13 @@
 ﻿/* AllBet, VoidBridge, FishingWorld */
 'use strict';
-define(['jquery', 'common/site', '../common/constant','../common/betsettingbase', '../common/betsetting.status'],
+define(['jquery', 'common/site', '../common/constant', '../common/betsettingbase', '../common/betsetting.status'],
     function ($, Site, Constant, BetSettingBase, BetSettingStatus) {
         const Product = Constant.Product;
         const ProductCodeMap = {};
         ProductCodeMap[Product.VirtualSports] = 'VS';
         ProductCodeMap[Product.VirtualSports2] = 'VS2';
         ProductCodeMap[Product.Lottery] = 'LT';
+        ProductCodeMap[Product.SportsLottery] = 'SLT';
 
         function getConfirmMessage(productId) {
             const productNameResource = 'Product' + ProductCodeMap[productId];
@@ -58,7 +59,7 @@ define(['jquery', 'common/site', '../common/constant','../common/betsettingbase'
 
             updateBetSetting: function (custId, userName, nickName) {
                 const productId = parseInt($('#ProductId').val(), 10);
-                
+
                 const params = BetSettingBase.getBetSettingParamsForSports();
                 params.custid = custId;
                 params.userName = userName;

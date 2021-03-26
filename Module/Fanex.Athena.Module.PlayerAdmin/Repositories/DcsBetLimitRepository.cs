@@ -34,7 +34,8 @@
             [ProductTypes.Lottery] = new[] { "220" },
             [ProductTypes.Sportsbooks2] = new[] { "43" },
             [ProductTypes.TG] = new[] { "222" },
-            [ProductTypes.I4D] = new[] { "223" }
+            [ProductTypes.I4D] = new[] { "223" },
+            [ProductTypes.SLT] = new[] { "169" }
         };
 
         public DcsBetLimitRepository(IDbFactory dbFactory, ILogger logger)

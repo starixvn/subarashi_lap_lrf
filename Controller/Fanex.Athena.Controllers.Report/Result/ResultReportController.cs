@@ -55,6 +55,7 @@
             ViewBag.IsAllowedKeno = productAccess.IsAllowKN;
             ViewBag.IsAllowedLottery = productAccess.IsAllow(Product.LT);
             ViewBag.IsAllowedTG = productAccess.IsAllow(Product.TG);
+            ViewBag.IsAllowedSLT = productAccess.IsAllowSLT;
             return View("~/Views/Desktop/Report/Result/Main.cshtml", model);
         }
 

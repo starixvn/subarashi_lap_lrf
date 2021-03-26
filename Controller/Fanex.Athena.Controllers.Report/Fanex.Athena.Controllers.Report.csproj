@@ -158,6 +158,8 @@
     <Compile Include="ExchangeVoidedController.cs" />
     <Compile Include="ExchangeWinLossReportController.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Result\SportsLotteryResultReportController.cs" />
+    <Compile Include="Result\ResultPopup\SportsLotteryResultPopupController.cs" />
     <Compile Include="Result\ResultPopup\Happy5LinkedGamesResultPopupController.cs" />
     <Compile Include="SabaVirtualSportsWinLossReportController.cs" />
     <Compile Include="LicenseeWinLossReportController.cs" />

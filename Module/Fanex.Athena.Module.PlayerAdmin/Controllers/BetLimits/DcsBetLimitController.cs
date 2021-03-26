@@ -11,7 +11,7 @@
     using Fanex.Athena.Resources;
     using Fanex.Athena.Web.ActionFilter;
 
-    [ValidateProductPermission(limitedProductIds: new[] { ProductTypes.VirtualSports, ProductTypes.VirtualSports2, ProductTypes.Lottery, ProductTypes.TG, ProductTypes.I4D })]
+    [ValidateProductPermission(limitedProductIds: new[] { ProductTypes.VirtualSports, ProductTypes.VirtualSports2, ProductTypes.Lottery, ProductTypes.TG, ProductTypes.I4D, ProductTypes.SLT })]
     public class DcsBetLimitController : PlayerBetLimitBaseControler
     {
         private readonly IDcsBetLimitService _service;
@@ -24,7 +24,7 @@
 
         [HttpPost]
         [AjaxRequest]
-        [ValidatePermissionOnData(isObject:true)]
+        [ValidatePermissionOnData(isObject: true)]
         public async Task<JsonResult> GetSetting(PlayerBetLimitSelectMetaModel metaModel)
         {
             var isEditable = HasEditPermission();
