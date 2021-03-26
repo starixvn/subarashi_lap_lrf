@@ -1214,6 +1214,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
         const KENO_RESULT_API = 'ResultKenoReport/Index';
         const VIRTUAL_RESULT_API = 'VirtualGamesResultReport/Index';
         const INDO4D_RESULT_API = 'Indo4DResultReport/Index';
+        const SPORTSLOTTERY_RESULT_API = 'SportsLotteryResultReport/Index';
         const KENO_RESULT_SESSION_API = 'ResultKenoReport/KeepSession';
         let ajaxRequest = null;
         let ajaxFilterRequest = null;
@@ -1223,6 +1224,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
         let lotteryIntervalId = 0;
         let virtualGameAjaxRequest = null;
         let indo4DAjaxRequest = null;
+        let SportsLotteryAjaxRequest = null;
         let tableGameAjaxRequest = null;
         let tableGameIntervalId = 0;
         const param = {
@@ -1249,7 +1251,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 
                 $('#resultContent').on('click', '.detail-link', function () {
                     const url = Site.resolveClientUrl('ResultReport/ResultDetail')
-                     + '?matchid=' + $(this).attr('data-match-id') + '&SportType=' + param.SportId;
+                        + '?matchid=' + $(this).attr('data-match-id') + '&SportType=' + param.SportId;
 
                     const popupOption = { id: 'result-popup', width: 775, height: 520, title: Site.getSingleResource('Result') };
                     Popup.openPopupWithIframe(url, popupOption);
@@ -1372,6 +1374,12 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                         _me.showIndo4D();
                     });
                 }
+
+                if ($('#submitSLT').length) {
+                    $('#submitSLT').click(function () {
+                        _me.showSLT();
+                    });
+                }
             },
 
             submit: function () {
@@ -1478,7 +1486,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                     cache: false,
                     url: Site.resolveClientUrl(INDO4D_RESULT_API),
                     success: function (response) {
-                        window.open(response, '_blank', 'left=20,top=20,width=950,height=650,toolbar=1,resizable=1,scrollbars,status=1');                    },
+                        window.open(response, '_blank', 'left=20,top=20,width=950,height=650,toolbar=1,resizable=1,scrollbars,status=1');
+                    },
                     beforeSend: function () {
                         Site.blockUI();
                     },
@@ -1490,9 +1499,27 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                 indo4DAjaxRequest = $.ajax(option);
             },
 
+            showSLT: function () {
+                const option = {
+                    type: 'GET',
+                    cache: false,
+                    url: Site.resolveClientUrl(SPORTSLOTTERY_RESULT_API),
+                    success: function (response) {
+                        window.open(response, '_blank', 'left=20,top=20,width=950,height=650,toolbar=1,resizable=1,scrollbars,status=1');
+                    },
+                    beforeSend: function () {
+                        Site.blockUI();
+                    },
+                    complete: function () {
+                        Site.unBlockUI();
+                    }
+                };
+                _me.stopAjaxRequest(SportsLotteryAjaxRequest);
+                SportsLotteryAjaxRequest = $.ajax(option);
+            },
+
             extendKenoSession: function (vendorProductId, userId) {
-                if (!userId)
-                {
+                if (!userId) {
                     return;
                 }
 

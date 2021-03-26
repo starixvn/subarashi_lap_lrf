@@ -296,7 +296,8 @@ const Setting = {
   [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].KN]: _grid_data_contents_GameDataContent__WEBPACK_IMPORTED_MODULE_4__["default"],
   [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].AGC]: _grid_data_contents_AGCDataContent__WEBPACK_IMPORTED_MODULE_6__["default"],
   [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].TG]: _grid_data_contents_GameDataContent__WEBPACK_IMPORTED_MODULE_4__["default"],
-  [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].I4D]: _grid_data_contents_I4DDataContent__WEBPACK_IMPORTED_MODULE_7__["default"]
+  [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].I4D]: _grid_data_contents_I4DDataContent__WEBPACK_IMPORTED_MODULE_7__["default"],
+  [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].SLT]: _grid_data_contents_GameDataContent__WEBPACK_IMPORTED_MODULE_4__["default"]
 };
 
 const DataContent = props => {
@@ -1624,11 +1625,13 @@ const BetLimitProduct = {
   KN: 8,
   AGC: 10,
   TG: 40,
-  I4D: 43
+  I4D: 43,
+  SLT: 63
 };
 const BetLimitSport = {
   I4D: 223,
-  TG: 222
+  TG: 222,
+  SLT: 469
 };
 const BetLimitType = {
   MinBet: 'MinBet',
@@ -1780,7 +1783,8 @@ const Url = {
   [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].KN]: 'RngKenoBetLimit',
   [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].AGC]: 'AGCasinoBetLimit',
   [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].TG]: 'DcsBetLimit',
-  [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].I4D]: 'DcsBetLimit'
+  [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].I4D]: 'DcsBetLimit',
+  [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].SLT]: 'DcsBetLimit'
 };
 class DataTransfer {
   static getData(param, callBack) {
@@ -2034,6 +2038,10 @@ const ConfirmationMsg = {
   [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].I4D]: {
     Msg: 'UpdateProductBetSettings',
     Product: 'ProductI4D'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].SLT]: {
+    Msg: 'UpdateProductBetSettings',
+    Product: 'ProductSLT'
   }
 };
 class Utility {

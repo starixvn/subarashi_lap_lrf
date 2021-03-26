@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 3/15/2021 8:54:47 AM
+﻿// Generated at: 3/15/2021 4:20:32 PM
 window._language_zh_TW = {
 AA:"客客",
 AbnormalBet:"非正規註單",
@@ -553,6 +553,7 @@ ProductParlay:"體育串關",
 ProductPP:"PP王者電子",
 ProductSB:"體育博彩",
 ProductSBVS:"沙巴虛擬賽事",
+ProductSLT:"體育時時彩",
 ProductTG:"桌面遊戲",
 ProductVRG:"虛擬娛樂城",
 ProductVS:"虛擬運動",

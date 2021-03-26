@@ -626,7 +626,6 @@ exports.assertPrivateName = assertPrivateName;
 exports.assertRecordExpression = assertRecordExpression;
 exports.assertTupleExpression = assertTupleExpression;
 exports.assertDecimalLiteral = assertDecimalLiteral;
-exports.assertStaticBlock = assertStaticBlock;
 exports.assertTSParameterProperty = assertTSParameterProperty;
 exports.assertTSDeclareFunction = assertTSDeclareFunction;
 exports.assertTSDeclareMethod = assertTSDeclareMethod;
@@ -639,7 +638,6 @@ exports.assertTSIndexSignature = assertTSIndexSignature;
 exports.assertTSAnyKeyword = assertTSAnyKeyword;
 exports.assertTSBooleanKeyword = assertTSBooleanKeyword;
 exports.assertTSBigIntKeyword = assertTSBigIntKeyword;
-exports.assertTSIntrinsicKeyword = assertTSIntrinsicKeyword;
 exports.assertTSNeverKeyword = assertTSNeverKeyword;
 exports.assertTSNullKeyword = assertTSNullKeyword;
 exports.assertTSNumberKeyword = assertTSNumberKeyword;
@@ -1462,10 +1460,6 @@ function assertDecimalLiteral(node, opts = {}) {
   assert("DecimalLiteral", node, opts);
 }
 
-function assertStaticBlock(node, opts = {}) {
-  assert("StaticBlock", node, opts);
-}
-
 function assertTSParameterProperty(node, opts = {}) {
   assert("TSParameterProperty", node, opts);
 }
@@ -1512,10 +1506,6 @@ function assertTSBooleanKeyword(node, opts = {}) {
 
 function assertTSBigIntKeyword(node, opts = {}) {
   assert("TSBigIntKeyword", node, opts);
-}
-
-function assertTSIntrinsicKeyword(node, opts = {}) {
-  assert("TSIntrinsicKeyword", node, opts);
 }
 
 function assertTSNeverKeyword(node, opts = {}) {
@@ -2236,7 +2226,6 @@ exports.PrivateName = exports.privateName = privateName;
 exports.RecordExpression = exports.recordExpression = recordExpression;
 exports.TupleExpression = exports.tupleExpression = tupleExpression;
 exports.DecimalLiteral = exports.decimalLiteral = decimalLiteral;
-exports.StaticBlock = exports.staticBlock = staticBlock;
 exports.tSParameterProperty = exports.TSParameterProperty = exports.tsParameterProperty = tsParameterProperty;
 exports.tSDeclareFunction = exports.TSDeclareFunction = exports.tsDeclareFunction = tsDeclareFunction;
 exports.tSDeclareMethod = exports.TSDeclareMethod = exports.tsDeclareMethod = tsDeclareMethod;
@@ -2249,7 +2238,6 @@ exports.tSIndexSignature = exports.TSIndexSignature = exports.tsIndexSignature =
 exports.tSAnyKeyword = exports.TSAnyKeyword = exports.tsAnyKeyword = tsAnyKeyword;
 exports.tSBooleanKeyword = exports.TSBooleanKeyword = exports.tsBooleanKeyword = tsBooleanKeyword;
 exports.tSBigIntKeyword = exports.TSBigIntKeyword = exports.tsBigIntKeyword = tsBigIntKeyword;
-exports.tSIntrinsicKeyword = exports.TSIntrinsicKeyword = exports.tsIntrinsicKeyword = tsIntrinsicKeyword;
 exports.tSNeverKeyword = exports.TSNeverKeyword = exports.tsNeverKeyword = tsNeverKeyword;
 exports.tSNullKeyword = exports.TSNullKeyword = exports.tsNullKeyword = tsNullKeyword;
 exports.tSNumberKeyword = exports.TSNumberKeyword = exports.tsNumberKeyword = tsNumberKeyword;
@@ -3021,10 +3009,6 @@ function decimalLiteral(...args) {
   return (0, _builder.default)("DecimalLiteral", ...args);
 }
 
-function staticBlock(...args) {
-  return (0, _builder.default)("StaticBlock", ...args);
-}
-
 function tsParameterProperty(...args) {
   return (0, _builder.default)("TSParameterProperty", ...args);
 }
@@ -3071,10 +3055,6 @@ function tsBooleanKeyword(...args) {
 
 function tsBigIntKeyword(...args) {
   return (0, _builder.default)("TSBigIntKeyword", ...args);
-}
-
-function tsIntrinsicKeyword(...args) {
-  return (0, _builder.default)("TSIntrinsicKeyword", ...args);
 }
 
 function tsNeverKeyword(...args) {
@@ -5549,10 +5529,6 @@ exports.patternLikeCommon = patternLikeCommon;
   fields: {
     source: {
       validate: (0, _utils.assertNodeType)("StringLiteral")
-    },
-    assertions: {
-      optional: true,
-      validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertNodeType)("ImportAttribute"))
     }
   }
 });
@@ -5587,10 +5563,6 @@ exports.patternLikeCommon = patternLikeCommon;
         }
       })
     },
-    assertions: {
-      optional: true,
-      validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertNodeType)("ImportAttribute"))
-    },
     specifiers: {
       default: [],
       validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)(function () {
@@ -5618,7 +5590,7 @@ exports.patternLikeCommon = patternLikeCommon;
       validate: (0, _utils.assertNodeType)("Identifier")
     },
     exported: {
-      validate: (0, _utils.assertNodeType)("Identifier", "StringLiteral")
+      validate: (0, _utils.assertNodeType)("Identifier")
     }
   }
 });
@@ -5659,10 +5631,6 @@ exports.patternLikeCommon = patternLikeCommon;
   visitor: ["specifiers", "source"],
   aliases: ["Statement", "Declaration", "ModuleDeclaration"],
   fields: {
-    assertions: {
-      optional: true,
-      validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertNodeType)("ImportAttribute"))
-    },
     specifiers: {
       validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("ImportSpecifier", "ImportDefaultSpecifier", "ImportNamespaceSpecifier")))
     },
@@ -5701,7 +5669,7 @@ exports.patternLikeCommon = patternLikeCommon;
       validate: (0, _utils.assertNodeType)("Identifier")
     },
     imported: {
-      validate: (0, _utils.assertNodeType)("Identifier", "StringLiteral")
+      validate: (0, _utils.assertNodeType)("Identifier")
     },
     importKind: {
       validate: (0, _utils.assertOneOf)("type", "typeof"),
@@ -5868,7 +5836,7 @@ exports.classMethodOrDeclareMethodCommon = classMethodOrDeclareMethodCommon;
       validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("TemplateElement")))
     },
     expressions: {
-      validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("Expression", "TSType")), function (node, key, val) {
+      validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("Expression")), function (node, key, val) {
         if (node.quasis.length !== val.length + 1) {
           throw new TypeError(`Number of ${node.type} quasis should be exactly one more than the number of expressions.\nExpected ${val.length + 1} quasis but got ${node.quasis.length}`);
         }
@@ -6084,7 +6052,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 });
 (0, _utils.default)("ClassPrivateProperty", {
   visitor: ["key", "value", "decorators"],
-  builder: ["key", "value", "decorators", "static"],
+  builder: ["key", "value", "decorators"],
   aliases: ["Property", "Private"],
   fields: {
     key: {
@@ -6117,7 +6085,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
   visitor: ["key", "value"],
   fields: {
     key: {
-      validate: (0, _utils.assertNodeType)("Identifier", "StringLiteral")
+      validate: (0, _utils.assertNodeType)("Identifier")
     },
     value: {
       validate: (0, _utils.assertNodeType)("StringLiteral")
@@ -6186,15 +6154,6 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
     }
   },
   aliases: ["Expression", "Pureish", "Literal", "Immutable"]
-});
-(0, _utils.default)("StaticBlock", {
-  visitor: ["body"],
-  fields: {
-    body: {
-      validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("Statement")))
-    }
-  },
-  aliases: ["Scopable", "BlockParent"]
 });
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../process/browser.js */ "./node_modules/process/browser.js")))
 
@@ -7147,7 +7106,7 @@ const namedTypeElementCommon = {
     typeAnnotation: (0, _utils.validateOptionalType)("TSTypeAnnotation")
   }
 });
-const tsKeywordTypes = ["TSAnyKeyword", "TSBooleanKeyword", "TSBigIntKeyword", "TSIntrinsicKeyword", "TSNeverKeyword", "TSNullKeyword", "TSNumberKeyword", "TSObjectKeyword", "TSStringKeyword", "TSSymbolKeyword", "TSUndefinedKeyword", "TSUnknownKeyword", "TSVoidKeyword"];
+const tsKeywordTypes = ["TSAnyKeyword", "TSBooleanKeyword", "TSBigIntKeyword", "TSNeverKeyword", "TSNullKeyword", "TSNumberKeyword", "TSObjectKeyword", "TSStringKeyword", "TSSymbolKeyword", "TSUndefinedKeyword", "TSUnknownKeyword", "TSVoidKeyword"];
 
 for (const type of tsKeywordTypes) {
   (0, _utils.default)(type, {
@@ -7292,13 +7251,12 @@ const unionOrIntersection = {
 });
 (0, _utils.default)("TSMappedType", {
   aliases: ["TSType"],
-  visitor: ["typeParameter", "typeAnnotation", "nameType"],
+  visitor: ["typeParameter", "typeAnnotation"],
   fields: {
     readonly: (0, _utils.validateOptional)(bool),
     typeParameter: (0, _utils.validateType)("TSTypeParameter"),
     optional: (0, _utils.validateOptional)(bool),
-    typeAnnotation: (0, _utils.validateOptionalType)("TSType"),
-    nameType: (0, _utils.validateOptionalType)("TSType")
+    typeAnnotation: (0, _utils.validateOptionalType)("TSType")
   }
 });
 (0, _utils.default)("TSLiteralType", {
@@ -8233,7 +8191,6 @@ var _generated = __webpack_require__(/*! ./asserts/generated */ "./node_modules/
 Object.keys(_generated).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  if (key in exports && exports[key] === _generated[key]) return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function () {
@@ -8253,7 +8210,6 @@ var _generated2 = __webpack_require__(/*! ./builders/generated */ "./node_module
 Object.keys(_generated2).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  if (key in exports && exports[key] === _generated2[key]) return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function () {
@@ -8291,7 +8247,6 @@ var _generated3 = __webpack_require__(/*! ./constants/generated */ "./node_modul
 Object.keys(_generated3).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  if (key in exports && exports[key] === _generated3[key]) return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function () {
@@ -8305,7 +8260,6 @@ var _constants = __webpack_require__(/*! ./constants */ "./node_modules/@babel/t
 Object.keys(_constants).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  if (key in exports && exports[key] === _constants[key]) return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function () {
@@ -8339,7 +8293,6 @@ var _definitions = __webpack_require__(/*! ./definitions */ "./node_modules/@bab
 Object.keys(_definitions).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  if (key in exports && exports[key] === _definitions[key]) return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function () {
@@ -8411,7 +8364,6 @@ var _generated4 = __webpack_require__(/*! ./validators/generated */ "./node_modu
 Object.keys(_generated4).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  if (key in exports && exports[key] === _generated4[key]) return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function () {
@@ -9315,7 +9267,6 @@ exports.isPrivateName = isPrivateName;
 exports.isRecordExpression = isRecordExpression;
 exports.isTupleExpression = isTupleExpression;
 exports.isDecimalLiteral = isDecimalLiteral;
-exports.isStaticBlock = isStaticBlock;
 exports.isTSParameterProperty = isTSParameterProperty;
 exports.isTSDeclareFunction = isTSDeclareFunction;
 exports.isTSDeclareMethod = isTSDeclareMethod;
@@ -9328,7 +9279,6 @@ exports.isTSIndexSignature = isTSIndexSignature;
 exports.isTSAnyKeyword = isTSAnyKeyword;
 exports.isTSBooleanKeyword = isTSBooleanKeyword;
 exports.isTSBigIntKeyword = isTSBigIntKeyword;
-exports.isTSIntrinsicKeyword = isTSIntrinsicKeyword;
 exports.isTSNeverKeyword = isTSNeverKeyword;
 exports.isTSNullKeyword = isTSNullKeyword;
 exports.isTSNumberKeyword = isTSNumberKeyword;
@@ -12103,21 +12053,6 @@ function isDecimalLiteral(node, opts) {
   return false;
 }
 
-function isStaticBlock(node, opts) {
-  if (!node) return false;
-  const nodeType = node.type;
-
-  if (nodeType === "StaticBlock") {
-    if (typeof opts === "undefined") {
-      return true;
-    } else {
-      return (0, _shallowEqual.default)(node, opts);
-    }
-  }
-
-  return false;
-}
-
 function isTSParameterProperty(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
@@ -12288,21 +12223,6 @@ function isTSBigIntKeyword(node, opts) {
   const nodeType = node.type;
 
   if (nodeType === "TSBigIntKeyword") {
-    if (typeof opts === "undefined") {
-      return true;
-    } else {
-      return (0, _shallowEqual.default)(node, opts);
-    }
-  }
-
-  return false;
-}
-
-function isTSIntrinsicKeyword(node, opts) {
-  if (!node) return false;
-  const nodeType = node.type;
-
-  if (nodeType === "TSIntrinsicKeyword") {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -13097,7 +13017,7 @@ function isScopable(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if (nodeType === "Scopable" || "BlockStatement" === nodeType || "CatchClause" === nodeType || "DoWhileStatement" === nodeType || "ForInStatement" === nodeType || "ForStatement" === nodeType || "FunctionDeclaration" === nodeType || "FunctionExpression" === nodeType || "Program" === nodeType || "ObjectMethod" === nodeType || "SwitchStatement" === nodeType || "WhileStatement" === nodeType || "ArrowFunctionExpression" === nodeType || "ClassExpression" === nodeType || "ClassDeclaration" === nodeType || "ForOfStatement" === nodeType || "ClassMethod" === nodeType || "ClassPrivateMethod" === nodeType || "StaticBlock" === nodeType || "TSModuleBlock" === nodeType || nodeType === "Placeholder" && "BlockStatement" === node.expectedNode) {
+  if (nodeType === "Scopable" || "BlockStatement" === nodeType || "CatchClause" === nodeType || "DoWhileStatement" === nodeType || "ForInStatement" === nodeType || "ForStatement" === nodeType || "FunctionDeclaration" === nodeType || "FunctionExpression" === nodeType || "Program" === nodeType || "ObjectMethod" === nodeType || "SwitchStatement" === nodeType || "WhileStatement" === nodeType || "ArrowFunctionExpression" === nodeType || "ClassExpression" === nodeType || "ClassDeclaration" === nodeType || "ForOfStatement" === nodeType || "ClassMethod" === nodeType || "ClassPrivateMethod" === nodeType || "TSModuleBlock" === nodeType || nodeType === "Placeholder" && "BlockStatement" === node.expectedNode) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -13112,7 +13032,7 @@ function isBlockParent(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if (nodeType === "BlockParent" || "BlockStatement" === nodeType || "CatchClause" === nodeType || "DoWhileStatement" === nodeType || "ForInStatement" === nodeType || "ForStatement" === nodeType || "FunctionDeclaration" === nodeType || "FunctionExpression" === nodeType || "Program" === nodeType || "ObjectMethod" === nodeType || "SwitchStatement" === nodeType || "WhileStatement" === nodeType || "ArrowFunctionExpression" === nodeType || "ForOfStatement" === nodeType || "ClassMethod" === nodeType || "ClassPrivateMethod" === nodeType || "StaticBlock" === nodeType || "TSModuleBlock" === nodeType || nodeType === "Placeholder" && "BlockStatement" === node.expectedNode) {
+  if (nodeType === "BlockParent" || "BlockStatement" === nodeType || "CatchClause" === nodeType || "DoWhileStatement" === nodeType || "ForInStatement" === nodeType || "ForStatement" === nodeType || "FunctionDeclaration" === nodeType || "FunctionExpression" === nodeType || "Program" === nodeType || "ObjectMethod" === nodeType || "SwitchStatement" === nodeType || "WhileStatement" === nodeType || "ArrowFunctionExpression" === nodeType || "ForOfStatement" === nodeType || "ClassMethod" === nodeType || "ClassPrivateMethod" === nodeType || "TSModuleBlock" === nodeType || nodeType === "Placeholder" && "BlockStatement" === node.expectedNode) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -13712,7 +13632,7 @@ function isTSType(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if (nodeType === "TSType" || "TSAnyKeyword" === nodeType || "TSBooleanKeyword" === nodeType || "TSBigIntKeyword" === nodeType || "TSIntrinsicKeyword" === nodeType || "TSNeverKeyword" === nodeType || "TSNullKeyword" === nodeType || "TSNumberKeyword" === nodeType || "TSObjectKeyword" === nodeType || "TSStringKeyword" === nodeType || "TSSymbolKeyword" === nodeType || "TSUndefinedKeyword" === nodeType || "TSUnknownKeyword" === nodeType || "TSVoidKeyword" === nodeType || "TSThisType" === nodeType || "TSFunctionType" === nodeType || "TSConstructorType" === nodeType || "TSTypeReference" === nodeType || "TSTypePredicate" === nodeType || "TSTypeQuery" === nodeType || "TSTypeLiteral" === nodeType || "TSArrayType" === nodeType || "TSTupleType" === nodeType || "TSOptionalType" === nodeType || "TSRestType" === nodeType || "TSUnionType" === nodeType || "TSIntersectionType" === nodeType || "TSConditionalType" === nodeType || "TSInferType" === nodeType || "TSParenthesizedType" === nodeType || "TSTypeOperator" === nodeType || "TSIndexedAccessType" === nodeType || "TSMappedType" === nodeType || "TSLiteralType" === nodeType || "TSExpressionWithTypeArguments" === nodeType || "TSImportType" === nodeType) {
+  if (nodeType === "TSType" || "TSAnyKeyword" === nodeType || "TSBooleanKeyword" === nodeType || "TSBigIntKeyword" === nodeType || "TSNeverKeyword" === nodeType || "TSNullKeyword" === nodeType || "TSNumberKeyword" === nodeType || "TSObjectKeyword" === nodeType || "TSStringKeyword" === nodeType || "TSSymbolKeyword" === nodeType || "TSUndefinedKeyword" === nodeType || "TSUnknownKeyword" === nodeType || "TSVoidKeyword" === nodeType || "TSThisType" === nodeType || "TSFunctionType" === nodeType || "TSConstructorType" === nodeType || "TSTypeReference" === nodeType || "TSTypePredicate" === nodeType || "TSTypeQuery" === nodeType || "TSTypeLiteral" === nodeType || "TSArrayType" === nodeType || "TSTupleType" === nodeType || "TSOptionalType" === nodeType || "TSRestType" === nodeType || "TSUnionType" === nodeType || "TSIntersectionType" === nodeType || "TSConditionalType" === nodeType || "TSInferType" === nodeType || "TSParenthesizedType" === nodeType || "TSTypeOperator" === nodeType || "TSIndexedAccessType" === nodeType || "TSMappedType" === nodeType || "TSLiteralType" === nodeType || "TSExpressionWithTypeArguments" === nodeType || "TSImportType" === nodeType) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -13727,7 +13647,7 @@ function isTSBaseType(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if (nodeType === "TSBaseType" || "TSAnyKeyword" === nodeType || "TSBooleanKeyword" === nodeType || "TSBigIntKeyword" === nodeType || "TSIntrinsicKeyword" === nodeType || "TSNeverKeyword" === nodeType || "TSNullKeyword" === nodeType || "TSNumberKeyword" === nodeType || "TSObjectKeyword" === nodeType || "TSStringKeyword" === nodeType || "TSSymbolKeyword" === nodeType || "TSUndefinedKeyword" === nodeType || "TSUnknownKeyword" === nodeType || "TSVoidKeyword" === nodeType || "TSThisType" === nodeType || "TSLiteralType" === nodeType) {
+  if (nodeType === "TSBaseType" || "TSAnyKeyword" === nodeType || "TSBooleanKeyword" === nodeType || "TSBigIntKeyword" === nodeType || "TSNeverKeyword" === nodeType || "TSNullKeyword" === nodeType || "TSNumberKeyword" === nodeType || "TSObjectKeyword" === nodeType || "TSStringKeyword" === nodeType || "TSSymbolKeyword" === nodeType || "TSUndefinedKeyword" === nodeType || "TSUnknownKeyword" === nodeType || "TSVoidKeyword" === nodeType || "TSThisType" === nodeType || "TSLiteralType" === nodeType) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -14261,11 +14181,19 @@ exports.default = isScope;
 var _generated = __webpack_require__(/*! ./generated */ "./node_modules/@babel/types/lib/validators/generated/index.js");
 
 function isScope(node, parent) {
-  if ((0, _generated.isBlockStatement)(node) && ((0, _generated.isFunction)(parent) || (0, _generated.isCatchClause)(parent))) {
+  if ((0, _generated.isBlockStatement)(node) && (0, _generated.isFunction)(parent, {
+    body: node
+  })) {
     return false;
   }
 
-  if ((0, _generated.isPattern)(node) && ((0, _generated.isFunction)(parent) || (0, _generated.isCatchClause)(parent))) {
+  if ((0, _generated.isBlockStatement)(node) && (0, _generated.isCatchClause)(parent, {
+    body: node
+  })) {
+    return false;
+  }
+
+  if ((0, _generated.isPattern)(node) && (0, _generated.isFunction)(parent)) {
     return true;
   }
 
@@ -31476,7 +31404,7 @@ module.exports = stubFalse;
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module) {var require;//! moment.js
-//! version : 2.29.1
+//! version : 2.27.0
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
 //! license : MIT
 //! momentjs.com
@@ -34016,7 +33944,8 @@ module.exports = stubFalse;
     hooks.createFromInputFallback = deprecate(
         'value provided is not in a recognized RFC2822 or ISO format. moment construction falls back to js Date(), ' +
             'which is not reliable across all browsers and versions. Non RFC2822/ISO date formats are ' +
-            'discouraged. Please refer to http://momentjs.com/guides/#/warnings/js-date/ for more info.',
+            'discouraged and will be removed in an upcoming major release. Please refer to ' +
+            'http://momentjs.com/guides/#/warnings/js-date/ for more info.',
         function (config) {
             config._d = new Date(config._i + (config._useUTC ? ' UTC' : ''));
         }
@@ -35201,10 +35130,7 @@ module.exports = stubFalse;
     function calendar$1(time, formats) {
         // Support for single parameter, formats only overload to the calendar function
         if (arguments.length === 1) {
-            if (!arguments[0]) {
-                time = undefined;
-                formats = undefined;
-            } else if (isMomentInput(arguments[0])) {
+            if (isMomentInput(arguments[0])) {
                 time = arguments[0];
                 formats = undefined;
             } else if (isCalendarSpec(arguments[0])) {
@@ -35882,7 +35808,7 @@ module.exports = stubFalse;
             eras = this.localeData().eras();
         for (i = 0, l = eras.length; i < l; ++i) {
             // truncate time
-            val = this.clone().startOf('day').valueOf();
+            val = this.startOf('day').valueOf();
 
             if (eras[i].since <= val && val <= eras[i].until) {
                 return eras[i].name;
@@ -35902,7 +35828,7 @@ module.exports = stubFalse;
             eras = this.localeData().eras();
         for (i = 0, l = eras.length; i < l; ++i) {
             // truncate time
-            val = this.clone().startOf('day').valueOf();
+            val = this.startOf('day').valueOf();
 
             if (eras[i].since <= val && val <= eras[i].until) {
                 return eras[i].narrow;
@@ -35922,7 +35848,7 @@ module.exports = stubFalse;
             eras = this.localeData().eras();
         for (i = 0, l = eras.length; i < l; ++i) {
             // truncate time
-            val = this.clone().startOf('day').valueOf();
+            val = this.startOf('day').valueOf();
 
             if (eras[i].since <= val && val <= eras[i].until) {
                 return eras[i].abbr;
@@ -35945,7 +35871,7 @@ module.exports = stubFalse;
             dir = eras[i].since <= eras[i].until ? +1 : -1;
 
             // truncate time
-            val = this.clone().startOf('day').valueOf();
+            val = this.startOf('day').valueOf();
 
             if (
                 (eras[i].since <= val && val <= eras[i].until) ||
@@ -37096,7 +37022,7 @@ module.exports = stubFalse;
 
     //! moment.js
 
-    hooks.version = '2.29.1';
+    hooks.version = '2.27.0';
 
     setHookCallback(createLocal);
 
@@ -38907,7 +38833,7 @@ module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/** @license React v16.14.0
+/** @license React v16.13.1
  * react-dom.development.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -63477,7 +63403,7 @@ function injectIntoDevTools(devToolsConfig) {
     // Enables DevTools to append owner stacks to error messages in DEV mode.
     getCurrentFiber:  function () {
       return current;
-    }
+    } 
   }));
 }
 var IsSomeRendererActing$1 = ReactSharedInternals.IsSomeRendererActing;
@@ -63829,7 +63755,7 @@ implementation) {
   };
 }
 
-var ReactVersion = '16.14.0';
+var ReactVersion = '16.13.1';
 
 setAttemptUserBlockingHydration(attemptUserBlockingHydration$1);
 setAttemptContinuousHydration(attemptContinuousHydration$1);
@@ -68128,7 +68054,7 @@ Select$1.Option = Option;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/** @license React v16.14.0
+/** @license React v16.13.1
  * react.development.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -68148,7 +68074,7 @@ if (true) {
 var _assign = __webpack_require__(/*! object-assign */ "./node_modules/object-assign/index.js");
 var checkPropTypes = __webpack_require__(/*! prop-types/checkPropTypes */ "./node_modules/prop-types/checkPropTypes.js");
 
-var ReactVersion = '16.14.0';
+var ReactVersion = '16.13.1';
 
 // The Symbol used to tag the ReactElement-like types. If there is no native Symbol
 // nor polyfill, then a plain number is used for performance.
