@@ -18,7 +18,8 @@ define([], function () {
         FishingWorld: 24,
         Cashout: 25,
         VirtualSports2: 27,
-        Lottery: 28
+        Lottery: 28,
+        SportsLottery: 63
     };
 
     const _me = {

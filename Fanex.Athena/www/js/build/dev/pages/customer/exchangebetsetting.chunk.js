@@ -1832,7 +1832,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
         FishingWorld: 24,
         Cashout: 25,
         VirtualSports2: 27,
-        Lottery: 28
+        Lottery: 28,
+        SportsLottery: 63
     };
 
     const _me = {
@@ -1872,12 +1873,13 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/* AllBet, VoidBridge, FishingWorld */
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js"), __webpack_require__(/*! ../common/constant */ "./www/js/source/pages/customer/betsetting/common/constant.js"),__webpack_require__(/*! ../common/betsettingbase */ "./www/js/source/pages/customer/betsetting/common/betsettingbase.js"), __webpack_require__(/*! ../common/betsetting.status */ "./www/js/source/pages/customer/betsetting/common/betsetting.status.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, Site, Constant, BetSettingBase, BetSettingStatus) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js"), __webpack_require__(/*! ../common/constant */ "./www/js/source/pages/customer/betsetting/common/constant.js"), __webpack_require__(/*! ../common/betsettingbase */ "./www/js/source/pages/customer/betsetting/common/betsettingbase.js"), __webpack_require__(/*! ../common/betsetting.status */ "./www/js/source/pages/customer/betsetting/common/betsetting.status.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, Site, Constant, BetSettingBase, BetSettingStatus) {
         const Product = Constant.Product;
         const ProductCodeMap = {};
         ProductCodeMap[Product.VirtualSports] = 'VS';
         ProductCodeMap[Product.VirtualSports2] = 'VS2';
         ProductCodeMap[Product.Lottery] = 'LT';
+        ProductCodeMap[Product.SportsLottery] = 'SLT';
 
         function getConfirmMessage(productId) {
             const productNameResource = 'Product' + ProductCodeMap[productId];
@@ -1929,7 +1931,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/* AllBet, Vo
 
             updateBetSetting: function (custId, userName, nickName) {
                 const productId = parseInt($('#ProductId').val(), 10);
-                
+
                 const params = BetSettingBase.getBetSettingParamsForSports();
                 params.custid = custId;
                 params.userName = userName;

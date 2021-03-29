@@ -57,7 +57,8 @@
                 { Product.SAG, nameof(ViewResources.ProductSAG) },
                 { Product.PGS, nameof(ViewResources.ProductPGS) },
                 { Product.JK, nameof(ViewResources.ProductJK) },
-                { Product.GDG, nameof(ViewResources.ProductGDG) }
+                { Product.GDG, nameof(ViewResources.ProductGDG) },
+                { Product.SLT, nameof(ViewResources.ProductSLT) }
             };
 
         public static string GetProductCode(int productId)

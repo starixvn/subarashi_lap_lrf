@@ -37,25 +37,27 @@ namespace Fanex.Athena.Controllers.BetSettings
             { ProductTypes.VirtualSports2, "VirtualSports2" },
             { ProductTypes.Lottery, "Lottery" },
             { ProductTypes.Exchange, "Exchange" },
-            { ProductTypes.PP, "PP" }
+            { ProductTypes.PP, "PP" },
+            { ProductTypes.SLT, "SLT" }
         };
 
         private static readonly IEnumerable<int> ProductsHasStatus = new[]
         {
              ProductTypes.AllBet, ProductTypes.Voidbridge, ProductTypes.FishingWorld,
-             ProductTypes.Lottery, ProductTypes.Exchange, ProductTypes.PP
+             ProductTypes.Lottery, ProductTypes.Exchange, ProductTypes.PP, ProductTypes.SLT
         };
 
         private static readonly IEnumerable<int> ProductsHasBetLimit = new[]
         {
-             ProductTypes.VirtualSports, ProductTypes.VirtualSports2, ProductTypes.Lottery
+             ProductTypes.VirtualSports, ProductTypes.VirtualSports2, ProductTypes.Lottery, ProductTypes.SLT
         };
 
         private static readonly IDictionary<int, string[]> ProductSportList = new Dictionary<int, string[]>
         {
             [ProductTypes.VirtualSports] = new[] { "180", "181", "182", "183", "184", "185", "186" },
             [ProductTypes.VirtualSports2] = new[] { "190", "191", "192", "193", "199" },
-            [ProductTypes.Lottery] = new[] { "220" }
+            [ProductTypes.Lottery] = new[] { "220" },
+            [ProductTypes.SLT] = new[] { "169" }
         };
 
         private readonly IDcsBetSettingService _betSettingService;

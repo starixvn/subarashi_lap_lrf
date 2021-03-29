@@ -3746,6 +3746,10 @@ class BetListLayout extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getGDGResultUrl(rootUrl, custid, transdecs, extension2, league);
 
         this._showThirdPartyResult(url, title);
+      } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].SLT) {
+        const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getSportsLotteryResultUrl(rootUrl, custid, transdecs, defaultPlatform);
+
+        this._showThirdPartyResult(url, title);
       } else {
         const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getResultUrl(rootUrl, matchid, raceNo, bettype, sporttype, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid);
 
@@ -4690,6 +4694,14 @@ class BetList {
     return url;
   }
 
+  getSportsLotteryResultUrl(rootUrl, custId, transId3rd, platform) {
+    let url = rootUrl + 'SportsLotteryResultPopup/Index';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId3rd', transId3rd);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'platform', platform);
+    return url;
+  }
+
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (new BetList());
@@ -4733,7 +4745,8 @@ const SportType = {
   SAG: 244,
   PGS: 232,
   Happy5LinkedGames: 168,
-  GDG: 236
+  GDG: 236,
+  SLT: 169
 };
 
 /***/ }),
