@@ -100,7 +100,7 @@
     {
         name: 'Status',
         index: 'Status',
-        width: 60,
+        width: 110,
         align: 'center',
         sortable: false,
         resizable: false,

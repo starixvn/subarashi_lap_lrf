@@ -19,7 +19,7 @@ export const Columns = [
 ]
 
 export const ColumnWidths = [
-    40, 100, 150, 250, 70, 80, 100, 100, 70
+    40, 100, 150, 250, 70, 80, 100, 100, 100
 ]
 
 export const ColumnAlignments = [
