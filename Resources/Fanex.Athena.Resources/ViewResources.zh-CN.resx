@@ -2589,4 +2589,12 @@
   <data name="ProductSLT" xml:space="preserve">
     <value>体育时时彩</value>
   </data>
+  <data name="CustomerClassSettingPolicy" xml:space="preserve">
+    <value>玩家分级投注资讯</value>
+    <comment>152372</comment>
+  </data>
+  <data name="CustomerClassSpreadSettingPolicy" xml:space="preserve">
+    <value>玩家分级水位资讯</value>
+    <comment>152372</comment>
+  </data>
 </root>

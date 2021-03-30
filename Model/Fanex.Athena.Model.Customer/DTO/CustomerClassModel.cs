@@ -7,16 +7,13 @@ namespace Fanex.Athena.Model.Customer.DTO
         public CustomerClassModel(string id)
         {
             Id = id;
-            LimitPolicies = new List<CustomerClassLimitPolicyModel>();
-            OddsGroup = "-";
+            Policies = new List<CustomerClassLimitPolicyModel>();
         }
 
         public string Id { get; set; }
 
         public string Category { get; set; }
 
-        public string OddsGroup { get; set; }
-
-        public List<CustomerClassLimitPolicyModel> LimitPolicies { get; set; }
+        public List<CustomerClassLimitPolicyModel> Policies { get; set; }
     }
 }
