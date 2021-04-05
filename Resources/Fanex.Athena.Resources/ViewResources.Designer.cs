@@ -1717,6 +1717,24 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Customer Class Setting Policy.
+        /// </summary>
+        public static string CustomerClassSettingPolicy {
+            get {
+                return ResourceManager.GetString("CustomerClassSettingPolicy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Customer Class Spread Setting Policy.
+        /// </summary>
+        public static string CustomerClassSpreadSettingPolicy {
+            get {
+                return ResourceManager.GetString("CustomerClassSpreadSettingPolicy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Customer Comm.
         /// </summary>
         public static string CustomerComm {

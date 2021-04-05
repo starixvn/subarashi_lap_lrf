@@ -2,6 +2,7 @@
 {
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Fanex.Athena.Model.Customer.Enum;
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Athena.Service.Customer.Interfaces;
 
@@ -14,16 +15,21 @@
             _service = service;
         }
 
-        public async Task<ViewResult> CustomerClassInformation()
+        public async Task<ViewResult> CustomerClassInformation(byte tabKey = 1)
         {
-            var model = await _service.GetCustomerClassInformation(new GetCustomerClassInformationMetaModel
+            ViewBag.TabKey = tabKey;
+
+            var metaModel = new GetCustomerClassInformationMetaModel
             {
                 SiteName = SessionServiceInstance.LicenseeSession.LicenseeName,
                 CurrencyList = SessionServiceInstance.UserSession.CurrencyList,
                 Language = SessionServiceInstance.UserSession.Language
-            });
+            };
 
-            return View("~/Views/Desktop/Customer/CustomerClass/CustomerClassInformation.cshtml", model);
+            var viewModel = await (tabKey == (byte)CustomerClassTabType.SettingPolicy ? _service.GetSettingPolicy(metaModel) : _service.GetSpreadSettingPolicy(metaModel));
+
+
+            return View("~/Views/Desktop/Customer/CustomerClass/CustomerClassInformation.cshtml", viewModel);
         }
     }
 }

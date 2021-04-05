@@ -2948,4 +2948,12 @@
   <data name="ProductSLT" xml:space="preserve">
     <value>Sports Lottery</value>
   </data>
+  <data name="CustomerClassSettingPolicy" xml:space="preserve">
+    <value>Customer Class Setting Policy</value>
+    <comment>152372</comment>
+  </data>
+  <data name="CustomerClassSpreadSettingPolicy" xml:space="preserve">
+    <value>Customer Class Spread Setting Policy</value>
+    <comment>152372</comment>
+  </data>
 </root>

@@ -1,0 +1,86 @@
+﻿
+@using Fanex.Athena.Model.Customer.DTO
+@model IEnumerable<CustomerClassModel>
+@{
+    var currency = "MYR";
+}
+
+@if (Model.Count() == 0)
+{
+    <p class="no-info-row">@ViewResources.NoInfo</p>
+}
+else
+{
+    <table id="customer-class-info-setting" class="table table-bordered customer-class-policy-setting">
+        <thead>
+            <tr>
+                <th class="col-medium">@ViewResources.CustomerClass</th>
+                <th class="col-large">@ViewResources.Category</th>
+                <th class="col-large">@ViewResources.SportType</th>
+                <th class="col-medium">@ViewResources.Live2/<br />@ViewResources.PreMatch</th>
+                <th class="col-medium">@ViewResources.Currency</th>
+                <th class="col-medium">@ViewResources.Platform</th>
+                <th class="col-medium">@ViewResources.LeagueGroupId</th>
+                <th class="col-medium">@ViewResources.BetInterval</th>
+                <th class="col-medium">@ViewResources.AgentBetInterval</th>
+                <th class="col-medium">@ViewResources.MinBet (@currency)</th>
+                <th class="col-medium">@ViewResources.MaxPerBet (@currency)</th>
+                <th class="col-medium">@ViewResources.MaxPerMatch2 (@currency)</th>
+                <th class="col-medium">@ViewResources.RepeatedBets</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var m in Model)
+            {
+                if (m.Policies.Count == 0)
+                {
+                    <tr>
+                        <td class="center-align">@m.Id</td>
+                        <td class="center-align">@m.Category</td>
+                        <td class="left-align">-</td>
+                        <td class="left-align">-</td>
+                        <td class="center-align">-</td>
+                        <td class="left-align">-</td>
+                        <td class="left-align">-</td>
+                        <td class="right-align">-</td>
+                        <td class="right-align">-</td>
+                        <td class="right-align">-</td>
+                        <td class="right-align">-</td>
+                        <td class="right-align">-</td>
+                        <td class="right-align">-</td>
+                        <td class="right-align">-</td>
+                        <td class="right-align">-</td>
+                    </tr>
+
+                    continue;
+                }
+
+                var isFirstRow = true;
+
+                foreach (var p in m.Policies)
+                {
+                    <tr>
+                        @if (isFirstRow)
+                        {
+                            <td class="center-align" rowspan="@m.Policies.Count">@m.Id</td>
+                            <td class="center-align" rowspan="@m.Policies.Count">@m.Category</td>
+                        }
+                        <td class="left-align">@p.SportTypeName</td>
+                        <td class="left-align">@(p.LiveType == 1 ? ViewResources.Live2 : ViewResources.PreMatch)</td>
+                        <td class="center-align">@p.Currency</td>
+                        <td class="left-align">@p.Platform</td>
+                        <td class="right-align">@p.LeagueGroupId</td>
+                        <td class="right-align">@p.BetInterval</td>
+                        <td class="right-align">@p.AgentBetInterval</td>
+                        <td class="right-align">@p.MinBet</td>
+                        <td class="right-align">@p.MaxBet</td>
+                        <td class="right-align">@p.MaxPerMatch</td>
+                        <td class="right-align">@p.RepeatedBets</td>
+                    </tr>
+
+                    isFirstRow = false;
+                }
+            }
+        </tbody>
+    </table>
+}

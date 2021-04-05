@@ -13,6 +13,7 @@
     public class CustomerClassDataAccess : BaseDataAccess, ICustomerClassDataAccess
     {
         private const string NumberStyle = "{0:#,##0.##}";
+        private const string DefaultTextValue = "-";
 
         private readonly ICacheRefAdapter _cacheRefAdapter;
 
@@ -21,7 +22,7 @@
             _cacheRefAdapter = cacheRefAdapter;
         }
 
-        public async Task<IEnumerable<CustomerClassLimitPolicyModel>> GetLimitPolicies(GetCustomerClassInformationMetaModel metaModel)
+        public async Task<IEnumerable<CustomerClassLimitPolicyModel>> GetSettingPolicies(GetCustomerClassInformationMetaModel metaModel)
         {
             var result = new List<CustomerClassLimitPolicyModel>();
 
@@ -29,7 +30,7 @@
             {
                 db.SetParameterValue("Site", metaModel.SiteName);
 
-                using (var reader = await db.ExecuteReaderAsync())
+                using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
                 {
                     while (reader.Read())
                     {
@@ -43,15 +44,14 @@
                             Id = id,
                             LiveType = Convert.ToInt16(reader["Liveindicator"]),
                             SportTypeName = _cacheRefAdapter.GetSportName(Convert.ToString(reader["SportType"])),
-                            LeagueGroupId = string.Equals(leadgroupId, "0") ? "-" : leadgroupId,
+                            LeagueGroupId = string.Equals(leadgroupId, "0") ? DefaultTextValue : leadgroupId,
                             BetDelay = FormatNumber(betDelay.HasValue ? betDelay * 100 : null, "{0:#,##0.##}%"),
                             BetInterval = FormatNumber(reader.ToNullableDecimal("NextBetInterval"), NumberStyle),
                             MaxBet = FormatNumber(reader.ToNullableDecimal("MaxBet"), NumberStyle),
                             MaxPerMatch = FormatNumber(reader.ToNullableDecimal("MaxPerMatch"), NumberStyle),
                             RepeatedBets = FormatNumber(reader.ToNullableInt("RepeatedBets"), NumberStyle),
                             MinBet = FormatNumber(reader.ToNullableDecimal("MinBet"), "{0:#,##0}"),
-                            Platform = platform == null ? "-" : ViewResources.ResourceManager.GetString($"Platform_{platform}"),
-
+                            Platform = platform == null ? DefaultTextValue : ViewResources.ResourceManager.GetString($"Platform_{platform}"),
                             AgentBetInterval = FormatNumber(reader.ToNullableDecimal("AgentBetInterval"), NumberStyle),
                             CurrencyId = reader.ToNullableInt("CurrencyId") ?? 0
                         };
@@ -64,22 +64,27 @@
             return result;
         }
 
-        public async Task<IEnumerable<CustomerClassModel>> GetGroupPolicies(GetCustomerClassInformationMetaModel metaModel)
+        public async Task<IEnumerable<CustomerClassLimitPolicyModel>> GetSpreadSettingPolicies(GetCustomerClassInformationMetaModel metaModel)
         {
-            var result = new List<CustomerClassModel>();
+            var result = new List<CustomerClassLimitPolicyModel>();
 
             using (var db = GetObjectDb("Lrf_CustomerClassSitePolicySel", 180))
             {
                 db.SetParameterValue("Site", metaModel.SiteName);
 
-                using (var reader = await db.ExecuteReaderAsync())
+                using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
                 {
                     while (reader.Read())
                     {
-                        var id = Convert.ToString(reader["CustomerClass"]);
-                        var c = new CustomerClassModel(id);
-                        c.OddsGroup = Convert.ToString(reader["SpreadGroup"]).ToUpperInvariant();
-                        result.Add(c);
+                        var platform = reader.ToNullableInt("Platform");
+                        var policy = new CustomerClassLimitPolicyModel
+                        {
+                            Id = Convert.ToString(reader["CustomerClass"]),
+                            OddsGroup = Convert.ToString(reader["SpreadGroup"]).ToUpperInvariant(),
+                            CurrencyId = reader.ToNullableInt("CurrencyId") ?? 0,
+                            Platform = platform == 0 ? ViewResources.All : ViewResources.ResourceManager.GetString($"Platform_{platform}"),
+                        };
+                        result.Add(policy);
                     }
                 }
             }
@@ -88,6 +93,6 @@
         }
 
         public static string FormatNumber(decimal? value, string format)
-            => value == null ? "-" : string.Format(format, value);
+            => value == null ? DefaultTextValue : string.Format(format, value);
     }
 }

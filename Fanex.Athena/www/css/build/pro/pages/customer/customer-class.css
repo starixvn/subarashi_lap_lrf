@@ -1,3 +1,30 @@
-.customer-class-info {
+.customer-class-policy-setting .tab {
   min-width: 1400px; }
+  .customer-class-policy-setting .tab a.policy-setting {
+    border-bottom: 2px solid #E15F00; }
+
+.customer-class-policy-setting table {
+  min-width: 1400px; }
+
+.customer-class-spread-setting .tab a.spread-setting {
+  border-bottom: 2px solid #E15F00; }
+
+.tab {
+  box-sizing: border-box;
+  font-size: 1.4rem; }
+  .tab ul {
+    list-style-type: none;
+    margin: 0;
+    overflow: hidden;
+    border-bottom: 1px solid #C4C4C4;
+    background-color: #fff; }
+    .tab ul li {
+      display: inline-block;
+      font-weight: bold;
+      cursor: pointer; }
+      .tab ul li a {
+        display: block;
+        color: #4C6375;
+        padding: 5px 10px;
+        text-decoration: none; }
 

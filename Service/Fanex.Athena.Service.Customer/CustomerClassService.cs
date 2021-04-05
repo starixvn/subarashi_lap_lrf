@@ -16,11 +16,12 @@
 
     public class CustomerClassService : ICustomerClassService
     {
+        private const string DefaultTextValue = "-";
+
         private readonly ICustomerClassDataAccess _dataAccess;
         private readonly IWebClientService _webClientService;
         private readonly IAppSettings _appSettings;
         private readonly ILogger _logger;
-        private const string DefaultTextValue = "-";
 
         public CustomerClassService(
             ICustomerClassDataAccess dataAccess,
@@ -34,68 +35,53 @@
             _logger = logger;
         }
 
-        public async Task<IEnumerable<CustomerClassModel>> GetCustomerClassInformation(GetCustomerClassInformationMetaModel metaModel)
+        public async Task<IEnumerable<CustomerClassModel>> GetSettingPolicy(GetCustomerClassInformationMetaModel metaModel)
         {
-            var custClasses = new Dictionary<string, CustomerClassModel>();
-            var result = await GroupLimitPolicies(metaModel, custClasses);
-            var groups = await _dataAccess.GetGroupPolicies(metaModel);
-
-            foreach (var g in groups)
-            {
-                var id = g.Id;
-                if (!custClasses.ContainsKey(id))
-                {
-                    var c = new CustomerClassModel(id);
-                    custClasses[id] = c;
-                    result.Add(c);
-                }
-
-                custClasses[id].OddsGroup = string.IsNullOrWhiteSpace(g.OddsGroup) ? DefaultTextValue : g.OddsGroup;
-            }
-
+            var policies = await _dataAccess.GetSettingPolicies(metaModel);
+            var result = GroupPolicies(metaModel, policies);
             await MapCustomerClassCategories(metaModel, result);
             return result.OrderBy(r => int.Parse(r.Id));
         }
 
-        private async Task<List<CustomerClassModel>> GroupLimitPolicies(
-            GetCustomerClassInformationMetaModel metaModel,
-            Dictionary<string, CustomerClassModel> custClasses)
+        public async Task<IEnumerable<CustomerClassModel>> GetSpreadSettingPolicy(GetCustomerClassInformationMetaModel metaModel)
         {
-            var result = new List<CustomerClassModel>();
-            var limits = await _dataAccess.GetLimitPolicies(metaModel);
-            foreach (var l in limits)
-            {
-                l.Currency = metaModel.CurrencyList.ContainsKey(l.CurrencyId) ? metaModel.CurrencyList[l.CurrencyId] : DefaultTextValue;
-
-                var id = l.Id;
-                if (!custClasses.ContainsKey(id))
-                {
-                    var c = new CustomerClassModel(id);
-                    custClasses[id] = c;
-                    result.Add(c);
-                }
-
-                custClasses[id].LimitPolicies.Add(l);
-            }
-
+            var limitPolicies = await _dataAccess.GetSpreadSettingPolicies(metaModel);
+            var result = GroupPolicies(metaModel, limitPolicies);
+            await MapCustomerClassCategories(metaModel, result);
             return result;
         }
 
-        private async Task<List<CustomerClassCategoryModel>> GetCustomerClassCategories()
+        private List<CustomerClassModel> GroupPolicies(GetCustomerClassInformationMetaModel metaModel, IEnumerable<CustomerClassLimitPolicyModel> policies)
         {
-            var result = new List<CustomerClassCategoryModel>();
+            var result = policies.GroupBy(
+                    source => source.Id,
+                    source =>
+                    {
+                        source.Currency = metaModel.CurrencyList.ContainsKey(source.CurrencyId) ? metaModel.CurrencyList[source.CurrencyId] : DefaultTextValue;
+                        return source;
+                    },
+                    (key, source) => new CustomerClassModel(key)
+                    {
+                        Policies = source.ToList()
+                    }).ToList();
+            return result;
+        }
+
+        private async Task<IEnumerable<CustomerClassCategoryModel>> GetCustomerClassCategories()
+        {
             try
             {
                 var uri = new Uri(_appSettings.GetValue("CustomerClassCategoryApi"));
                 var apiResult = await _webClientService.DownloadStringAsync(uri);
-                result = JsonConvert.DeserializeObject<List<CustomerClassCategoryModel>>(apiResult);
+                var result = JsonConvert.DeserializeObject<List<CustomerClassCategoryModel>>(apiResult);
+                return result;
             }
             catch (Exception exception)
             {
                 _logger.Error(LogMessageHelper.GenerateMessage(exception));
             }
 
-            return result;
+            return Enumerable.Empty<CustomerClassCategoryModel>();
         }
 
         private async Task MapCustomerClassCategories(
