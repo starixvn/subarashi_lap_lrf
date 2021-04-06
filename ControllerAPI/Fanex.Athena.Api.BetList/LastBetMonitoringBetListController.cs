@@ -57,8 +57,10 @@
                                           LeagueId = l,
                                           LeagueName = _cacheRefAdapter.GetLeagueName(l)
                                       }).ToList();
-            var leagueListOutRight = matchList.Where(i => i.IsOutRight).Select(m => m.LeagueId).Distinct()
 
+            var normalLeagueIdList = leagueListNormal.Select(m => m.LeagueId);
+
+            var leagueListOutRight = matchList.Where(i => i.IsOutRight && !normalLeagueIdList.Contains(i.LeagueId)).Select(m => m.LeagueId).Distinct()
                                       .Select(l => new League
                                       {
                                           IsOutRight = true,
