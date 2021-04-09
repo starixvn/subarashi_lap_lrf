@@ -4,7 +4,7 @@
 
     using Fanex.Athena.Model.Core.MetaModel;
 
-    public class PlayerRunningBetListMetalModel : IMetalModelCustomerIdentity, IMetaModelAgent, IMetaModelShowIPVN
+    public class PlayerRunningBetListMetalModel : IMetalModelCustomerIdentity, IMetaModelAgent, IMetaModelShowIP
     {
         private const int PageSizeMaximum = 2000;
 
@@ -63,5 +63,7 @@
         public bool IsAllowTxIDColumn { get; set; }
 
         public bool IsShowIpvn { get; set; }
+
+        public bool IsShowIp { get; set; }
     }
 }

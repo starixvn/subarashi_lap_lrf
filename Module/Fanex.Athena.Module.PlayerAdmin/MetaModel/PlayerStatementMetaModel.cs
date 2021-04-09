@@ -3,7 +3,7 @@
     using System;
     using Fanex.Athena.Model.Core.MetaModel;
 
-    public class PlayerStatementMetaModel : IMetalModelCustomerIdentity, IMetaModelValidation, IMetaModelShowIPVN
+    public class PlayerStatementMetaModel : IMetalModelCustomerIdentity, IMetaModelValidation, IMetaModelShowIP
     {
         private const int MaximumYear = 2;
 
@@ -20,6 +20,8 @@
         public int CurrencyId { get; set; }
 
         public bool IsShowIpvn { get; set; }
+
+        public bool IsShowIp { get; set; }
 
         public bool IsValid => ToDate >= FromDate
                 && FromDate.Month == ToDate.Month

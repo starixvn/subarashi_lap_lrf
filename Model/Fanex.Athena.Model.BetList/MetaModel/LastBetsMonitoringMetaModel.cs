@@ -4,7 +4,7 @@ using Fanex.Athena.Model.Core.MetaModel;
 
 namespace Fanex.Athena.Model.BetList.MetaModel
 {
-    public class LastBetsMonitoringMetaModel : IMetaModelValidation, IMetaModelShowIPVN
+    public class LastBetsMonitoringMetaModel : IMetaModelValidation, IMetaModelShowIP
     {
         private const int DefaultPageSize = 10;
 
@@ -46,6 +46,8 @@ namespace Fanex.Athena.Model.BetList.MetaModel
         public string AgentListXml { get; set; }
 
         public bool IsShowIpvn { get; set; }
+
+        public bool IsShowIp { get; set; }
 
         public bool IsValid => MetaModelValidationHelper.ValidateBaseCurrency(BasedCurrency);
     }

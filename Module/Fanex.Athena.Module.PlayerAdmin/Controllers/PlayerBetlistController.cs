@@ -62,7 +62,8 @@
         [OutputCache(NoStore = true, Duration = 0, Location = OutputCacheLocation.None, VaryByParam = "*")]
         public async Task<dynamic> GetRunningBetList(PlayerRunningBetListMetalModel metaModel)
         {
-            metaModel.IsShowIpvn = SessionServiceInstance.UserSession.IsShowIpvn;
+            metaModel.IsShowIpvn = SessionServiceInstance.UserSession.IsShowIpvn && SessionServiceInstance.UserSession.IsShowIp;
+            metaModel.IsShowIp = SessionServiceInstance.UserSession.IsShowIp;
             return metaModel.IsExport
                 ? await ExportRunningBetListDataAsync(metaModel).ConfigureAwait(false)
                 : await GetRunningBetListDataAsync(metaModel).ConfigureAwait(false);

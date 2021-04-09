@@ -81,7 +81,8 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
 
             AssignMetaModelValue(metaModel);
 
-            metaModel.IsShowIpvn = userSession.IsShowIpvn;
+            metaModel.IsShowIpvn = userSession.IsShowIpvn && userSession.IsShowIp;
+            metaModel.IsShowIp = userSession.IsShowIp;
 
             if (metaModel.IsExport)
             {

@@ -59,5 +59,7 @@ namespace Fanex.Athena.Model.Auth
         public string DefaultBaseCurrency { get; set; } = string.Empty;
 
         public bool IsShowIpvn { get; set; }
+
+        public bool IsShowIp { get; set; }
     }
 }
