@@ -4879,7 +4879,7 @@ const HeaderText = {
   Status: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("Status")
 };
 const Columns = ['Index', 'RefNo', 'TransTime', 'Choice', 'Odds', 'Stake', 'WinLoss', 'LicenseeWL', 'Status'];
-const ColumnWidths = [40, 100, 150, 250, 70, 80, 100, 100, 70];
+const ColumnWidths = [40, 100, 150, 250, 70, 80, 100, 100, 100];
 const ColumnAlignments = ['center-align', 'center-align', 'center-align', 'right-align', 'right-align', 'right-align', 'right-align', 'right-align', 'center-align'];
 const DefaultPagingOption = {
   PageIndex: 1,
