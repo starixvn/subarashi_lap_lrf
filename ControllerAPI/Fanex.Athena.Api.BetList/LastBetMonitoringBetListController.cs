@@ -91,6 +91,8 @@
                 var currencyIdList = metaModel.Currency.Split(',').Select(int.Parse);
                 metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, currencyIdList);
             }
+            metaModel.IsShowIpvn = userSession.IsShowIpvn && userSession.IsShowIp;
+            metaModel.IsShowIp = userSession.IsShowIp;
 
             return await _betListApiClient.PostAsync("/LastBetMonitoringBetList/GetData",
                 metaModel, userSession.Language).ConfigureAwait(false);

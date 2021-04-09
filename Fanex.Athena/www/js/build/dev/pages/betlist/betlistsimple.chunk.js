@@ -4733,7 +4733,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
     {
         name: 'Status',
         index: 'Status',
-        width: 60,
+        width: 110,
         align: 'center',
         sortable: false,
         resizable: false,

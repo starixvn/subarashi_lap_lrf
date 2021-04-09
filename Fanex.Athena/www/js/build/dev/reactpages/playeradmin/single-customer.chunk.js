@@ -384,7 +384,7 @@ const DataGrid = props => {
     onSort
   } = props;
   let Columns = ['Index', 'RefNo', 'TransTime', 'Choice', 'Odds', 'OddsType', 'Stake', 'WinLoss', 'LicenseeWL', 'Status', 'Platform', 'Live'];
-  let ColumnWidths = [40, 110, 150, 400, 70, 70, 80, 80, 80, 60, 60, 60];
+  let ColumnWidths = [40, 110, 150, 400, 70, 70, 80, 80, 80, 90, 60, 60];
   let ColumnAlignments = ['center-align', 'center-align', 'center-align', 'right-align', 'right-align', 'right-align', 'right-align', 'right-align', 'right-align', 'center-align', 'center-align', 'center-align'];
 
   if (_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__["default"].isAllowTxIDColumn && !Columns.includes('LicenseeTxId')) {

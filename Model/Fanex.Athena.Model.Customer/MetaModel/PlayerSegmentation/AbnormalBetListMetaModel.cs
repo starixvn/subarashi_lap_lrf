@@ -4,7 +4,7 @@
     using System;
     using System.Collections.Generic;
 
-    public class AbnormalBetListMetaModel : IMetaModelValidation, IMetaModelAgent
+    public class AbnormalBetListMetaModel : IMetaModelValidation, IMetaModelAgent, IMetaModelShowIP
     {
         private const int MaxPageSize = 2000;
 
@@ -39,6 +39,10 @@
         }
 
         public bool IsExcludedTestData { get; set; }
+
+        public bool IsShowIpvn { get; set; }
+
+        public bool IsShowIp { get; set; }
 
         public bool IsValid => FromDate <= ToDate &&
             PageIndex > 0 && PageSize <= MaxPageSize;

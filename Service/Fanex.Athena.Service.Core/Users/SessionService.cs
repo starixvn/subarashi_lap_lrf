@@ -10,6 +10,7 @@
 
 namespace Fanex.Athena.Service.Core.Users
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Web;
@@ -112,6 +113,7 @@ namespace Fanex.Athena.Service.Core.Users
             AssignCurrenciesToUserSession(userSession, licenseeId);
             var selectedLicensee = licenseeList.SingleOrDefault(i => i.Id == licenseeId);
             var licenseeSession = licenseeId > 0 && selectedLicensee != null ? GenerateLicenseeInfo(selectedLicensee) : null;
+            userSession.IsShowIp = selectedLicensee != null && _appSettings.LicenseeOfferShowIp.Contains(selectedLicensee.Name, StringComparer.InvariantCultureIgnoreCase);
 
             AssignSessions(userSession, licenseeSession);
         }
@@ -128,6 +130,7 @@ namespace Fanex.Athena.Service.Core.Users
 
                 userSession.FunctionList = functionList;
                 userSession.DefaultReportUrl = GetDefaultReportUrl(functionList);
+                userSession.IsShowIp = selectedLicensee != null && _appSettings.LicenseeOfferShowIp.Contains(selectedLicensee.Name, StringComparer.InvariantCultureIgnoreCase);
 
                 AssignCurrenciesToUserSession(userSession, licenseeId);
 

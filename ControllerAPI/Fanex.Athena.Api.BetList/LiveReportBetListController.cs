@@ -89,7 +89,10 @@ namespace Fanex.Athena.Api.BetList
             var userSession = SessionService.UserSession;
             metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId);
             metaModel.HasPlayerCom = licenseeSession.IsAllowedCustomerComm;
+            metaModel.IsShowIpvn = userSession.IsShowIpvn && userSession.IsShowIp;
+            metaModel.IsShowIp = userSession.IsShowIp;
             metaModel.UspKey = uspKey;
+
             return await BridgeClientService.PostAsync("/LiveReportBetList/GetData",
                 metaModel, userSession.Language).ConfigureAwait(false);
         }
@@ -105,7 +108,10 @@ namespace Fanex.Athena.Api.BetList
             metaModel.PageSize = pageSize < 1 ? DefautlPageSize : pageSize;
             metaModel.LicenseeId = licenseeSession.LicenseeId;
             metaModel.HasPlayerCom = licenseeSession.IsAllowedCustomerComm;
+            metaModel.IsShowIpvn = userSession.IsShowIpvn && userSession.IsShowIp;
+            metaModel.IsShowIp = userSession.IsShowIp;
             metaModel.UspKey = uspKey;
+
             return await BridgeClientService.PostAsync("/LiveReportBetList/GetPagingData",
                 metaModel, userSession.Language).ConfigureAwait(false);
         }

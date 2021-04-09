@@ -1505,7 +1505,7 @@ tr.ui-search-toolbar select {
     background-color: transparent !important; }
   .betlist-container .iplink, .betlist-container .betsliplink {
     cursor: pointer;
-    color: #1E1EEB;
+    color: #000000;
     font-size: 11px; }
   .betlist-container .time {
     color: #434343;
@@ -1522,7 +1522,7 @@ tr.ui-search-toolbar select {
     color: #1BA4ED;
     cursor: pointer; }
   .betlist-container .ip {
-    display: none; }
+    pointer-events: none; }
   .betlist-container .selected {
     color: Gray !important; }
   .betlist-container .base-currency {

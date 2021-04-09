@@ -153,6 +153,7 @@
     <Compile Include="MetaModel\Common\LeagueMetaModel.cs" />
     <Compile Include="MetaModel\IMetaModelCurrencyIdList.cs" />
     <Compile Include="MetaModel\IMetaModelCurrencyList.cs" />
+    <Compile Include="MetaModel\IMetaModelShowIPVN.cs" />
     <Compile Include="MetaModel\IMetaModelIP.cs" />
     <Compile Include="MetaModel\IMetaModelLanguage.cs" />
     <Compile Include="MetaModel\IMetaModelFunctionContract.cs" />

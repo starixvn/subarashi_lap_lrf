@@ -8,7 +8,7 @@ using Fanex.Athena.Model.Core.MetaModel;
 
 namespace Fanex.Athena.Model.BetList.MetaModel
 {
-    public class BetListMetaModel : BaseMetaModel, IMetaModelValidation, IMetaModelProductCodeList
+    public class BetListMetaModel : BaseMetaModel, IMetaModelValidation, IMetaModelProductCodeList, IMetaModelShowIP
     {
         public BetListMetaModel()
         {
@@ -129,5 +129,9 @@ namespace Fanex.Athena.Model.BetList.MetaModel
         public bool IsFakeLicensee { get; set; }
 
         public bool ExcludeFreeBet { get; set; }
+
+        public bool IsShowIpvn { get; set; }
+
+        public bool IsShowIp { get; set; }
     }
 }

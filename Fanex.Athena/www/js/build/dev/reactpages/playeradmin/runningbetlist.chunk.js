@@ -396,7 +396,7 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       PageList: [50, 100, 200, 300, 400, 500, 1000, 2000]
     };
     let Columns = ['Index', 'RefNo', 'TransTime', 'Choice', 'Odds', 'OddsType', 'Stake', 'Status', 'Platform', 'Live'];
-    let ColumnWidths = [40, 110, 150, 400, 70, 70, 100, 80, 80, 80];
+    let ColumnWidths = [40, 110, 150, 400, 70, 70, 100, 110, 80, 80];
     let ColumnAlignments = ['center-align', 'center-align', 'center-align', 'right-align', 'right-align', 'right-align', 'right-align', 'center-align', 'center-align', 'center-align'];
 
     if (_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__["default"].isAllowTxIDColumn && !Columns.includes('LicenseeTxId')) {

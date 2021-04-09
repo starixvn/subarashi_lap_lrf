@@ -21,6 +21,7 @@
     using Fanex.Logging;
     using LAP.ONEBook.Security;
     using Model.Core.DataDomain;
+    using Fanex.Athena.Model.Auth.DataDomain;
 
     using Resources;
 
@@ -225,6 +226,9 @@
             userSession.PortalFunctionList = tokenInfo.Permissions.ToArray();
             userSession.DefaultBaseCurrency = string.IsNullOrEmpty(userInfo.BaseCurrency) ? _appSettings.DefaultBaseCurrency
                 : userInfo.BaseCurrency;
+            userSession.IsShowIpvn = tokenInfo.IsAdminstrator || tokenInfo.Permissions.Any(i => i.FunctionKey.Equals(PermissionKeys.BetlistViewIpvn, StringComparison.CurrentCultureIgnoreCase));
+            userSession.IsShowIp = _appSettings.LicenseeOfferShowIp.Contains(
+                _sessionService.LicenseeSession.LicenseeName, StringComparer.InvariantCultureIgnoreCase);
         }
 
         private OneAuthUserInfo GetUserInfo(DefaultAuthInfo<OneAuthPermission, OneAuthCurrency> tokenInfo)
@@ -276,8 +280,11 @@
                 VendorIdentityID = tokenInfo.UserID,
                 IsSuperAdmin = tokenInfo.IsAdminstrator,
                 DefaultBaseCurrency = string.IsNullOrEmpty(userInfo.BaseCurrency) ? _appSettings.DefaultBaseCurrency
-                : userInfo.BaseCurrency
-            };
+                : userInfo.BaseCurrency,
+                IsShowIpvn = tokenInfo.IsAdminstrator || tokenInfo.Permissions.Any(i => i.FunctionKey.Equals(PermissionKeys.BetlistViewIpvn, StringComparison.CurrentCultureIgnoreCase)),
+                IsShowIp = _appSettings.LicenseeOfferShowIp.Contains(
+                licSession.LicenseeName, StringComparer.InvariantCultureIgnoreCase)
+        };
 
             _sessionService.AssignCurrenciesToUserSession(userSession, licenseeInfo.Id, userInfo.CurrencyUserList);
 

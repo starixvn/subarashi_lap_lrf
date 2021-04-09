@@ -20,6 +20,9 @@
 
             BindAbnormalBetsMetaModel(metaModel);
 
+            metaModel.IsShowIpvn = SessionService.UserSession.IsShowIpvn && SessionService.UserSession.IsShowIp;
+            metaModel.IsShowIp = SessionService.UserSession.IsShowIp;
+
             var result = await _betListApiClient.PostAsync(
                     betlistApi,
                     metaModel,
