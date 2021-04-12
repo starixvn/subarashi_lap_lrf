@@ -1,27 +1,31 @@
-import PlayerListDataHelper from '../helpers/playerListDataHelper';
+﻿import PlayerListDataHelper from '../helpers/playerListDataHelper';
 
 export default class LrfPlayerQueryService {
     static fetchData(param, commonService, apiInfo) {
         const { lrfSearch, lapDataById } = apiInfo;
 
-        return commonService.fetchData(lrfSearch.type, lrfSearch.action, {...param })
+        return commonService
+            .fetchData(lrfSearch.type, lrfSearch.action, { ...param })
             .then(lrfResponse => {
                 const { DataList: lrfPlayerList, TotalItem } = lrfResponse.data;
-                if (!lrfPlayerList || !lrfPlayerList.length) {
-                    return PlayerListDataHelper.createEmptyResult();
-                }
 
-                return this._fetchFromLap(lrfPlayerList, lapDataById, commonService, TotalItem);
+                return !lrfPlayerList || !lrfPlayerList.length
+                    ? PlayerListDataHelper.createEmptyResult()
+                    : this._fetchFromLap(param, lrfPlayerList, lapDataById, commonService, TotalItem);
             })
             .catch(() => PlayerListDataHelper.createEmptyResult());
     }
 
-    static _fetchFromLap(lrfPlayerList, lapDataById, commonService, lrfTotalItem) {
+    static _fetchFromLap(param, lrfPlayerList, lapDataById, commonService, lrfTotalItem) {
         const lapParam = {
-            idList: lrfPlayerList.map(x => x.IbcCustId)
-        }
+            idList: lrfPlayerList.map(x => x.IbcCustId),
+            bankAccountNumber: param.bankAccountNumber,
+            email: param.email,
+            ip: param.ipLogin
+        };
 
-        return commonService.fetchData(lapDataById.type, lapDataById.action, lapParam)
+        return commonService
+            .fetchData(lapDataById.type, lapDataById.action, lapParam)
             .then(lapResponse => {
                 const { PlayerList: lapPlayerList } = lapResponse.data;
                 if (!lapPlayerList || !lapPlayerList.length) {
@@ -30,9 +34,13 @@ export default class LrfPlayerQueryService {
 
                 const playerList = PlayerListDataHelper.mergePlayerList(lrfPlayerList, lapPlayerList);
 
+                const startIndex = param.pageSize * (param.pageIndex - 1);
+                const endIndex = startIndex + param.pageSize;
+                const dataList = playerList.slice(startIndex, endIndex);
+
                 return {
-                    playerList,
-                    totalItem: lrfTotalItem
+                    playerList: dataList,
+                    totalItem: playerList.length
                 };
             })
             .catch(() => PlayerListDataHelper.createEmptyResult());

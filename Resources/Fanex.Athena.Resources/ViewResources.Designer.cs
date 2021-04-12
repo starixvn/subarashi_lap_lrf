@@ -2131,6 +2131,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Deposited.
+        /// </summary>
+        public static string Deposited {
+            get {
+                return ResourceManager.GetString("Deposited", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Detailed Bet list.
         /// </summary>
         public static string DetailedBetlist {
@@ -3022,6 +3031,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Group Commission.
+        /// </summary>
+        public static string GroupCommission_2 {
+            get {
+                return ResourceManager.GetString("GroupCommission_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to If default group is selected, all newly registered customers will be automatically assigned to this commission group. There will be no change to existing customers..
         /// </summary>
         public static string GroupCommNote {
@@ -3432,6 +3450,15 @@ namespace Fanex.Athena.Resources {
         public static string InvalidSubsidiaryNameMsg {
             get {
                 return ResourceManager.GetString("InvalidSubsidiaryNameMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IP Login.
+        /// </summary>
+        public static string IPLogin {
+            get {
+                return ResourceManager.GetString("IPLogin", resourceCulture);
             }
         }
         
@@ -5205,6 +5232,15 @@ namespace Fanex.Athena.Resources {
         public static string PlaceholderEmail {
             get {
                 return ResourceManager.GetString("PlaceholderEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search by Exactly IP Login.
+        /// </summary>
+        public static string PlaceholderIPLogin {
+            get {
+                return ResourceManager.GetString("PlaceholderIPLogin", resourceCulture);
             }
         }
         

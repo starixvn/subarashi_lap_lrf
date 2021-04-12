@@ -7,6 +7,7 @@ export default class GridInteractionService {
         if (!element || currentPosition) {
             return null;
         }
+
         const dropdownHeight = gridItemDropdownHeight[dropdownItemName];
         const rect = element.getBoundingClientRect();
         return {

@@ -14,6 +14,7 @@ export class AdvancedSearch extends React.Component {
         this.specialLevelList = Object.keys(specialLevelListWithColor).map(item => ({ Id: item, Value: getSpecialLevelText(item), Status: true }));
         this.baStatusList = Object.keys(baStatusList).map(item => ({ value: baStatusList[item], label: LangHelper.getSingleResource(item) }));
         this.customerClassList = props.lrfFilters.CustomerClass.map(item => ({ Id: item, Value: getCustomerClassText(item), Status: true }));
+        this.commGroupList = props.lrfFilters.CommGroups.map(item => ({ Id: item.Id, Value: item.Name, Status: true }));
     }
 
     _createSelectData(originalList, selectedItemString) {
@@ -23,16 +24,16 @@ export class AdvancedSearch extends React.Component {
             const { Id, Value } = item;
 
             return { Id, Value, Status: selectedItemList.indexOf(Id) !== -1 };
-        })
+        });
     }
 
     handleChange = (name, value) => {
         this.props.onChange(name, value);
-    }
+    };
 
     handleChangeSingleDropdown = (name, item) => {
         this.props.onChange(name, item.value);
-    }
+    };
 
     render() {
         const { currencyList, param, isAllowedBA } = this.props;
@@ -44,6 +45,9 @@ export class AdvancedSearch extends React.Component {
 
         const selectedCustomerClass = param.changeOnCustomerClass ? param.customerClass : this.props.lrfFilters.CustomerClass.join(",");
         const ddlCustomerClass = this._createSelectData(this.customerClassList, selectedCustomerClass);
+
+        const selectedCommGroups = param.changeOnCommGroups ? param.commGroups : this.props.lrfFilters.CommGroups.map(c => c.Id).join(",");
+        const ddlCommGroups = this._createSelectData(this.commGroupList, selectedCommGroups);
 
         return (
             <>
@@ -110,6 +114,18 @@ export class AdvancedSearch extends React.Component {
                             onChange={(currentItem, selectedItemsKey) => this.handleChange('customerClass', selectedItemsKey)} />
                     </div>
                 </div>
+
+                <div className="col-12 col-md-4 col-sm-4 col-lg-3 col-xl-2">
+                    <div className="form-group">
+                        <label className="label-text">{LangHelper.getSingleResource("GroupCommission")}</label>
+                        <MultipleSelect id="ddl-comm-group"
+                            dataSource={ddlCommGroups}
+                            keyField={"Id"}
+                            valueField={"Value"}
+                            statusField={"Status"}
+                            onChange={(currentItem, selectedItemsKey) => this.handleChange('commGroups', selectedItemsKey)} />
+                    </div>
+                </div>
             </>
         );
     }
@@ -121,7 +137,8 @@ const propTypes = {
         oddsGroup: PropTypes.string.isRequired,
         specialLevel: PropTypes.string.isRequired,
         baFilter: PropTypes.number.isRequired,
-        customerClass: PropTypes.string.isRequired
+        customerClass: PropTypes.string.isRequired,
+        commGroups: PropTypes.string.isRequired
     }).isRequired,
     onChange: PropTypes.func.isRequired
 };

@@ -2146,4 +2146,7 @@
   <data name="ProductSLT" xml:space="preserve">
     <value>体育时时彩</value>
   </data>
+    <data name="GroupCommission_2" xml:space="preserve">
+    <value>佣金组别</value>
+  </data>
 </root>

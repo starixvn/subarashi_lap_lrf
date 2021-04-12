@@ -1,6 +1,4 @@
-﻿import LangHelper from '@jsroot/lib/langHelper';
-
-export default class PlayerListDataHelper {
+﻿export default class PlayerListDataHelper {
     static mergePlayerList(lrfList, lapList) {
         if (!lrfList || !lapList) {
             return [];
@@ -17,7 +15,10 @@ export default class PlayerListDataHelper {
 
     static mergePlayerItem(lrfItem, lapItem) {
         const { OddsGroup, BaStatus, SpecialLevel } = lrfItem;
-        const { Status, RealName, email, isOnline, IBCCustId, isArchived, LastTransaction, CurrencyCode, OutBalance, IBCUserName, Vender_Member_ID, CreatedDateString } = lapItem;
+        const {
+            Status, RealName, email, isOnline, IBCCustId, isArchived, LastTransaction,
+            CurrencyCode, OutBalance, IBCUserName, Vender_Member_ID, CreatedDateString
+        } = lapItem;
 
         return {
             IbcCustId: IBCCustId,
@@ -45,10 +46,10 @@ export default class PlayerListDataHelper {
         };
     }
 
-    
+
     static toLrfPlayerDic(lrfList) {
         const lrfPlayerDic = lrfList.reduce((result, currentItem) => {
-            result[currentItem.IbcCustId] = currentItem; 
+            result[currentItem.IbcCustId] = currentItem;
             return result;
         }, {});
         return lrfPlayerDic;

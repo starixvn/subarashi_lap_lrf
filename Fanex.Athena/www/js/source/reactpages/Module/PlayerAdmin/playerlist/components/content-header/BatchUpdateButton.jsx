@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+﻿import React, { useState } from 'react';
 import { DropdownButton, DropdownItem } from '@jsroot/components/dropdown';
 
 const BatchUpdateButton = (props) => {
@@ -19,7 +19,7 @@ const BatchUpdateButton = (props) => {
             <DropdownItem>Item1</DropdownItem>
             <DropdownItem>Item2</DropdownItem>
         </DropdownButton>
-    )
+    );
 }
 
 export default BatchUpdateButton;

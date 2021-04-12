@@ -16,7 +16,8 @@ const displayedTextByField = {
     [fields.Status]: (value) => getPlayerStatus(value)
 }
 
-const fieldListWithEmptyValueByStatus = [fields.CurrentBalance, fields.OutstandingBalance, fields.OddsGroup, fields.BaStatus, fields.SpecialLevel];
+const fieldListWithEmptyValueByStatus =
+    [fields.CurrentBalance, fields.OutstandingBalance, fields.OddsGroup, fields.BaStatus, fields.SpecialLevel];
 
 export default class ReportExcel {
     constructor(data, displayedColumn, hasCommPermissionRead, title) {

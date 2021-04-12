@@ -2956,4 +2956,16 @@
     <value>Customer Class Spread Setting Policy</value>
     <comment>152372</comment>
   </data>
+  <data name="IPLogin" xml:space="preserve">
+    <value>IP Login</value>
+  </data>
+  <data name="PlaceholderIPLogin" xml:space="preserve">
+    <value>Search by Exactly IP Login</value>
+  </data>
+  <data name="GroupCommission_2" xml:space="preserve">
+    <value>Group Commission</value>
+  </data>
+  <data name="Deposited" xml:space="preserve">
+    <value>Deposited</value>
+  </data>
 </root>

@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System.Collections.Generic;
+using System.Web.Http;
 using Fanex.Athena.Api.StatelessBase;
 using Fanex.Athena.Api.StatelessBase.Attributes;
 using Fanex.Athena.Model.Auth.DataDomain;
@@ -11,11 +12,11 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Controllers
     [ApiOneAuthorization(AllowFunctionKeys = PermissionKeys.PlayerAdmin)]
     public class PlayerListController : ExternalApiBaseController
     {
-        private readonly IPlayerListService _playerListService;
+        private readonly IPlayerListService playerListService;
 
         public PlayerListController(IPlayerListService playerListService)
         {
-            _playerListService = playerListService;
+            this.playerListService = playerListService;
         }
 
         [HttpPost]
@@ -23,7 +24,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Controllers
         [StatelessApiAutoBindMetaModel(BindSiteName = true, BindAgent = true)]
         public PlayerListResultViewModel Search(PlayerSearchingMetaModel searchParam)
         {
-            return _playerListService.Search(searchParam);
+            return playerListService.Search(searchParam);
         }
 
         [HttpPost]
@@ -33,15 +34,20 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Controllers
         {
             metaModel.PageIndex = 1;
 
-            return _playerListService.GetPlayerListById(metaModel);
+            return playerListService.GetPlayerListById(metaModel);
         }
 
         [HttpPost]
-        public LRFFiltersViewModel LRFFilters()
+        [StatelessApiAutoBindMetaModel(BindLicenseeinfo = true)]
+        public LRFFiltersViewModel LRFFilters(LRFFiltersMetaModel metaModel)
         {
+            List<CommGroupViewModel> commGroups = playerListService.GetAllCommGroups(metaModel.LicenseeId);
+            commGroups.Insert(0, new CommGroupViewModel());
+
             return new LRFFiltersViewModel
             {
-                CustomerClass = _playerListService.CustomerClass(SiteName)
+                CustomerClass = playerListService.CustomerClass(SiteName),
+                CommGroups = commGroups
             };
         }
     }

@@ -20,7 +20,8 @@ const siteSetting = {
 };
 
 const lrfFilters = {
-    CustomerClass: []
+    CustomerClass: [],
+    CommGroups: []
 };
 
 const defaultState = {
@@ -28,6 +29,7 @@ const defaultState = {
     hasBaPermission, hasOddsGroupPermission, hasSpecialLevelPermission,
     hasCommPermissionRead, hasCommPermissionEdit, lrfFilters
 };
+
 const store = Store.createStore(reducer, defaultState);
 
 const App = () => {

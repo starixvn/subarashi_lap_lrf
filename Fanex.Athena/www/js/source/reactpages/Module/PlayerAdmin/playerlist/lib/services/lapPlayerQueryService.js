@@ -19,7 +19,7 @@ export default class LapPlayerQueryService {
             }
             return this._fetchFromLrf(param, lrfDataById, lapPlayerList, commonService, lapTotalItem)
         })
-        .catch(() => PlayerListDataHelper.createEmptyResult());;
+            .catch(() => PlayerListDataHelper.createEmptyResult());;
     }
 
     static _shouldBatchRequest(param) {
@@ -34,7 +34,7 @@ export default class LapPlayerQueryService {
             const offset = (param.pageIndex - 1) * param.pageSize
             const lapPlayerList = responses.reduce((result, current) => {
                 const currentPlayerList = current.data.PlayerList;
-                if(offset + result.length + currentPlayerList.length > lapTotalItem) {
+                if (offset + result.length + currentPlayerList.length > lapTotalItem) {
                     return result;
                 }
                 return [...result, ...currentPlayerList]
@@ -91,6 +91,7 @@ export default class LapPlayerQueryService {
             oddsGroup: param.oddsGroup,
             baFilter: param.baFilter,
             customerClass: param.customerClass,
+            commGroups: param.commGroups,
             pageSize: param.pageSize,
             pageIndex: 1
         }

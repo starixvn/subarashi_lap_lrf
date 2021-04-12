@@ -13,5 +13,9 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.MetaModel
         public bool IsExcludedTestData { get; set; }
 
         public string CustomerClass { get; set; }
+
+        public string CommGroups { get; set; }
+
+        public int IsDeposited { get; set; }
     }
 }

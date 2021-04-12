@@ -2597,4 +2597,16 @@
     <value>玩家分级水位资讯</value>
     <comment>152372</comment>
   </data>
+  <data name="GroupCommission_2" xml:space="preserve">
+    <value>佣金组别</value>
+  </data>
+  <data name="Deposited" xml:space="preserve">
+    <value>已存钱账号</value>
+  </data>
+  <data name="PlaceholderIPLogin" xml:space="preserve">
+    <value>精确查询登入IP</value>
+  </data>
+  <data name="IPLogin" xml:space="preserve">
+    <value>登入IP</value>
+  </data>
 </root>

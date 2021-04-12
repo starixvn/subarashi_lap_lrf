@@ -1,6 +1,4 @@
-﻿import LangHelper from '@jsroot/lib/langHelper';
-
-export const buildSelectedPlayer = (dataItem) => {
+﻿export const buildSelectedPlayer = (dataItem) => {
     const { IbcCustId, UserName, Currency, IsDeposit, IsArchived, LicenseeCustId, CurrencyId, CreatedDate } = dataItem;
 
     return {
@@ -68,7 +66,10 @@ export const buildLapPlayerList = (playerList) => {
 }
 
 export const buildCurrentActivePlayer = (dataItem) => {
-    const { IbcCustId, UserName, Currency, Status, OddsGroup, SpecialLevel, IsDeposit, IsArchived, LicenseeCustId, CurrencyId, CreatedDate } = dataItem;
+    const {
+        IbcCustId, UserName, Currency, Status, OddsGroup, SpecialLevel,
+        IsDeposit, IsArchived, LicenseeCustId, CurrencyId, CreatedDate
+    } = dataItem;
 
     return {
         ibcCustId: IbcCustId,

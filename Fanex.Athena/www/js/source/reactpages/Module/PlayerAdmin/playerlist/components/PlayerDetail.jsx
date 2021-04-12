@@ -59,9 +59,9 @@ export class PlayerDetail extends PureComponent {
                             {item.Text}
                         </a>
                     </li>
-                )
+                );
             })
-        )
+        );
     }
 
     _getFrameHeight() {
@@ -91,11 +91,7 @@ export class PlayerDetail extends PureComponent {
     render() {
         const { selectedPlayer } = this.props;
 
-        if (!selectedPlayer) {
-            return null;
-        }
-
-        if (this._tabList.length === 0) {
+        if (!selectedPlayer || this._tabList.length === 0) {
             return null;
         }
 

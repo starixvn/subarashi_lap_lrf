@@ -648,6 +648,11 @@
     <Content Include="Content\Fanex.Result\SAGaming\template\public\game_result\Sicbo\dice-5.png" />
     <Content Include="Content\Fanex.Result\SAGaming\template\public\game_result\Sicbo\dice-6.png" />
     <Content Include="karma-new-bypage.conf.js" />
+    <Content Include="Scripts\Languages\ViewResources.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewResources.tt</DependentUpon>
+    </Content>
     <Content Include="SpNameConfig\FanexSpName.BACKUPMNL.xml">
       <DependentUpon>FanexSpName.xml.tt</DependentUpon>
     </Content>
@@ -2721,11 +2726,6 @@
     <Content Include="package.json" />
     <Content Include="karma.conf.js" />
     <Content Include="Scripts\Languages\ViewResources.js">
-      <DependentUpon>ViewResources.tt</DependentUpon>
-    </Content>
-    <Content Include="Scripts\Languages\ViewResources.txt">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>ViewResources.tt</DependentUpon>
     </Content>
     <Content Include="Scripts\Languages\ViewResources.zh-CN.js">

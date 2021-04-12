@@ -4914,16 +4914,16 @@ class CustomerClassCell extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Com
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, this.props.cell.text, "\xA0\xA0", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       class: "icon-info",
       onClick: this.showCustomerClassInformation
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_popup_Popup__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    }), this.state.isShowCustomerClassInformation ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_popup_Popup__WEBPACK_IMPORTED_MODULE_2__["default"], {
       width: 1000,
       height: 600,
-      isShow: this.state.isShowCustomerClassInformation,
+      isShow: "true",
       title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('CustomerClassInformation'),
       onClose: this.closeCustomerClassInfomation,
       onClick: this.clickOnPopup,
       isHtml: "false",
       iframeUrl: url
-    }));
+    }) : "");
   }
 
 }

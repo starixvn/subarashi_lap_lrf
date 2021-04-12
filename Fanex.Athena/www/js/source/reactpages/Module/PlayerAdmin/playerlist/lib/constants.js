@@ -92,7 +92,9 @@ export const tabNames = {
     commissionGroup: 'lblCommissionGroup'
 }
 
-export const excludedTabNameWithNonDepositAndArchived = [tabNames.statement, tabNames.betlist, tabNames.betLimit, tabNames.detailTransaction, tabNames.commissionGroup];
+export const excludedTabNameWithNonDepositAndArchived =
+    [tabNames.statement, tabNames.betlist, tabNames.betLimit, tabNames.detailTransaction, tabNames.commissionGroup];
+
 export const excludedTabNameWithClosed = [tabNames.commissionGroup];
 
 export const contextMenuList = [
@@ -203,17 +205,18 @@ export const apiSiteSetting = { type: systemType.lrf, action: 'api/SiteSetting/G
 
 export const apiSuggestion = { action: 'PlayerAdminContainer/GetSuggestionList', type: systemType.newAdmin };
 
-export const excludedContextMenuWithNonDeposit = [contextMenuKeys.betLimit, contextMenuKeys.statement, contextMenuKeys.commissionGroup];
-
+export const excludedContextMenuWithNonDeposit =
+    [contextMenuKeys.betLimit, contextMenuKeys.statement, contextMenuKeys.commissionGroup];
 export const excludedContextMenuWithClosed = [contextMenuKeys.password, contextMenuKeys.commissionGroup];
+export const excludedContextMenuWithArchived =
+    [contextMenuKeys.password, contextMenuKeys.betLimit, contextMenuKeys.statement, contextMenuKeys.commissionGroup];
+export const excludedContextMenuWithApiLicensee =
+    [contextMenuKeys.password, contextMenuKeys.bankInformation, contextMenuKeys.personalMessage];
 
-export const excludedContextMenuWithArchived = [contextMenuKeys.password, contextMenuKeys.betLimit, contextMenuKeys.statement, contextMenuKeys.commissionGroup];
-
-export const excludedContextMenuWithApiLicensee = [contextMenuKeys.password, contextMenuKeys.bankInformation, contextMenuKeys.personalMessage];
-
-export const playerTypes = {
-    nonDeposit: 1,
-    deposit: 2
+export const isDepositedList = {
+    'All': 2,
+    'Yes': 1,
+    'No': 0
 };
 
 export const emailPattern = '^([a-zA-Z0-9_\\.\\-])+\\@(([a-zA-Z0-9\\-])+\\.)+([a-zA-Z0-9]{2,4})+$';

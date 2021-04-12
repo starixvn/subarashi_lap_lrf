@@ -11,5 +11,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services.Interfaces
         PlayerListResultViewModel GetPlayerListById(PlayerListByIdMetaModel metaModel);
 
         List<string> CustomerClass(string licenseeName);
+
+        List<CommGroupViewModel> GetAllCommGroups(int licenseeId);
     }
 }

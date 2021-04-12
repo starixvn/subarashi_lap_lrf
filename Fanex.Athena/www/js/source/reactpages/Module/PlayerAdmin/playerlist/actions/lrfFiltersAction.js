@@ -1,14 +1,15 @@
 ﻿import { SET_LRF_FILTERS } from './types';
 import LrfFiltersService from '../lib/services/lrfFiltersService';
 
-export const getLRFFilters = () => (dispatch) => {
+export const getLRFFilters = (param) => (dispatch) => {
     const service = new LrfFiltersService();
 
-    service.fetchData().then((response) => {
+    service.fetchData(param).then((response) => {
         dispatch(setLRFFilters(response.data));
     }).catch(() => {
         dispatch(setLRFFilters({
-            CustomerClass: []
+            CustomerClass: [],
+            CommGroups: []
         }));
     });
 };

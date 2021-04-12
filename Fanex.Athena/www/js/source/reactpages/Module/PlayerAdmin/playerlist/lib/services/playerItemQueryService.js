@@ -1,4 +1,4 @@
-import { specialLevelListWithColor, defaultPagingOption } from '../constants';
+﻿import { specialLevelListWithColor, defaultPagingOption } from '../constants';
 import PlayerListDataHelper from '../helpers/playerListDataHelper';
 
 export default class PlayerItemQueryService {
@@ -11,11 +11,9 @@ export default class PlayerItemQueryService {
             specialLevel: Object.keys(specialLevelListWithColor).map(item => item).join(','),
             pageSize: defaultPagingOption.PageSize,
             pageIndex: 1
-        }
+        };
 
-        const lapParam = {
-            custId: licenseeCustId
-        }
+        const lapParam = { custId: licenseeCustId };
 
         const lrfPromise = ibcCustId > 0 ? commonService.fetchData(lrfDataById.type, lrfDataById.action, lrfParam) : null;
         const lapPromise = commonService.fetchData(lapGetPlayerByLicenseeId.type, lapGetPlayerByLicenseeId.action, lapParam);
@@ -25,17 +23,16 @@ export default class PlayerItemQueryService {
 
     static _getResult(lrfPromise, lapPromise, commonService) {
         return commonService.fetchMultiple([lrfPromise, lapPromise], (lrfResponse, lapResponse) => {
-                const { DataList: lrfPlayerList = [] } = (lrfResponse && lrfResponse.data) || {};
-                const { Player } = lapResponse.data;
+            const { DataList: lrfPlayerList = [] } = (lrfResponse && lrfResponse.data) || {};
+            const { Player } = lapResponse.data;
 
-                const lapPlayerList = Player ? [Player] : [];
-                const playerList = PlayerListDataHelper.mergePlayerList(lrfPlayerList, lapPlayerList);
+            const lapPlayerList = Player ? [Player] : [];
+            const playerList = PlayerListDataHelper.mergePlayerList(lrfPlayerList, lapPlayerList);
 
-                return playerList.length ? playerList[0] : null;
-            })
-            .catch((error) => {
-                console.log(error.message);
-                return null;
-            })
+            return playerList.length ? playerList[0] : null;
+        }).catch((error) => {
+            console.log(error.message);
+            return null;
+        });
     }
 }

@@ -6,7 +6,9 @@ export default class LrfFiltersService {
         this.commonService = FactoryCommonService.createInstance();
     }
 
-    fetchData() {
-        return this.commonService.fetchData(systemType.lrf, 'api/PlayerList/LRFFilters', {});
+    fetchData(param) {
+        var action = 'api/PlayerList/LRFFilters';
+
+        return this.commonService.fetchData(systemType.lrf, action, { hasCommPermissionRead: param.hasCommPermissionRead });
     }
 }

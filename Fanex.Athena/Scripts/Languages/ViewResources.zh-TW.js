@@ -1,4 +1,4 @@
-﻿// Generated at: 3/15/2021 4:20:22 PM
+﻿// Generated at: 4/9/2021 4:33:15 PM
 var _language_zh_TW = {
 AA:"客客",
 AbnormalBet:"非正規註單",
@@ -244,6 +244,7 @@ Group:"組",
 GroupBy:"分組方式",
 GroupColor:"組別顏色",
 GroupCommission:"佣金組別",
+GroupCommission_2:"佣金組別",
 GroupCommNote:"若默認組已被選擇，所有新註冊之會員將被自動分配至此傭金組。這將不會對現有的會員進行任何更改。",
 GroupId:"組別ID",
 GroupName:"組別名稱",

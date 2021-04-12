@@ -2,7 +2,8 @@
 import { SET_LRF_FILTERS } from '../actions/types.js';
 
 const defaultLRFFilters = {
-    CustomerClass: []
+    CustomerClass: [],
+    CommGroups: []
 };
 
 export const lrfFilters = createReducer(defaultLRFFilters, {
