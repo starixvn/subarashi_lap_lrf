@@ -10,6 +10,7 @@
     var selectedProductCode = string.Join(",", productOptions.Where(x => x.Status).Select(x => x.Code).ToArray());
     var selectedStatus = string.Join(",", Model.StatusList.Where(x => x.Checked).Select(x => x.ID).ToArray());
     var selectedLiveStatus = string.Join(",", Model.LiveStatusList.Select(x => x.Key).ToArray());
+    var selectedPlatform = string.Join(",", Model.PlatformList.Select(x => x.Key).ToArray());
     var baseCurrencyList = SystemConstants.BaseCurrencyList.Select(c => new
     {
         value = c.Value,
@@ -33,14 +34,14 @@
     isLoading: false,
     selectedStatus: '@(selectedStatus)',
     selectedLiveStatus: '@(selectedLiveStatus)',
-    selectedPlatform: 0,
+    selectedPlatform: '@(selectedPlatform)',
     isConvertAll: true,
     hasExchange: '@Model.HasExchange.ToString()' === 'True'
     };
     window._AppData = {
     isAllowTxIDColumn: '@ViewBag.IsAllowTxIDColumn.ToString()' === 'True',
     liveStatusList: @Html.Raw(Model.LiveStatusList.Select(x => new { Id = x.Key, Value = x.Value, Status = true }).ToJson()),
-    platformList: @Html.Raw(Model.PlatformList.Select(x => new { value = x.Key, label = x.Value }).ToJson()),
+    platformList: @Html.Raw(Model.PlatformList.Select(x => new { value = x.Key, label = x.Value, Status = true }).ToJson()),
     statusList: @Html.Raw(Model.StatusList.Select(x => new { Id = x.ID, Value = x.Name, Status = x.Checked }).ToJson()),
     isAllowedCustomerComm: @Model.IsAllowedCustomerComm.ToJson(),
     productOptions: @Html.Raw(productOptions.ToJson()),

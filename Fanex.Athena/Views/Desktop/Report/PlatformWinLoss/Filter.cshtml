@@ -19,7 +19,9 @@
                 <label>@ViewResources.BaseCurrency</label>
             </div>
             <div class="input-field col l2 m2 s12">
-                @DesktopRazorHelper.PlatformList("PlatformType", "hide")
+                <div class="multiselect-container" id="PlatformTypeList">
+                    @DesktopRazorHelper.PlatformList("PlatformType")
+                </div>
                 <label>@ViewResources.Platform</label>
             </div>
         </div>

@@ -23,7 +23,7 @@ define(
             StakeFrom: '0',
             StakeTo: '1000000000',
             TransId: _lastTransId,
-            BetFrom: 0
+            BetFrom: 'All'
         };
         let _postedParam;
         let _intervalId;
@@ -78,6 +78,7 @@ define(
         _me.isValidParam = function () {
             return _postedParam.StakeFrom <= _postedParam.StakeTo
                 && $('#currency').multiSelect('getCheckedItems').length > 0
+                && $('#PlatformType').multiSelect('getCheckedItems').length > 0
                 && $('#special-level').multiSelect('getCheckedItems').length > 0;
         };
         _me.tryUpdateStake = function () {

@@ -25,7 +25,7 @@ export class FormFilter extends Component {
     }
 
     get isValidModel() {
-        return !!this.props.username && !!this.props.selectedProduct
+        return !!this.props.username && !!this.props.selectedProduct && !!this.props.selectedPlatform
             && !!this.props.selectedStatus && !!this.props.selectedLiveStatus
             && validateBaseCurrency(this.props.selectedBaseCurrency);
     }
@@ -175,10 +175,14 @@ export class FormFilter extends Component {
         const platformList = AppData.platformList;
 
         return platformList && platformList.length && (
-            <Select instanceId="PlatformList"
+            <MultipleSelect id="PlatformList"
+                language={LangHelper.currentLanguage}
                 value={this.props.selectedPlatform}
-                options={platformList}
-                onChange={(item) => this.props.setSelectedPlatform(item.value)} />
+                dataSource={platformList}
+                valueField={"label"}
+                keyField={"value"}
+                statusField={"Status"}
+                onChange={(currentItem, selectedItemsKey) => this.props.setSelectedPlatform(selectedItemsKey)} />
         );
     }
 

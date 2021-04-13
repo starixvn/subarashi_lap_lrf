@@ -121,7 +121,7 @@
             return new PlatformWinLossMetaModel
             {
                 Level = level,
-                PlatformType = PlatformType.DesktopNewAsia,
+                PlatformType = "1",
                 Year = 2017,
                 Month = 1,
                 FromDay = 1,

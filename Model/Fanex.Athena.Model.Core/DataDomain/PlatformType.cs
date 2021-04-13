@@ -71,9 +71,14 @@
             return MapPlatformKeys.ContainsKey(type) ? ViewResources.ResourceManager.GetString(MapPlatformKeys[type]) : ViewResources.All;
         }
 
-        public static bool IsValidPlatform(int type)
+        public static bool IsValidPlatform(string type)
         {
-            return (type >= All && type <= WAP) || type == BetfromOthers;
+            if (!string.IsNullOrEmpty(type))
+            {
+                return type == "All" || type.Split(',').Where(x => (int.Parse(x) >= All && int.Parse(x) <= WAP) || int.Parse(x) == BetfromOthers).Select(x => x).Any();
+            }
+
+            return false;
         }
     }
 }

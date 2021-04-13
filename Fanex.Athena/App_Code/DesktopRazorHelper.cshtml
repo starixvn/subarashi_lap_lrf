@@ -3,13 +3,10 @@
 @using Fanex.Athena.Model.Core.MetaModel.Product;
 @using Fanex.Athena.Model.Core.DataDomain;
 @using Fanex.Athena.Resources;
-@helper  PlatformList(string id, string className = null)
+@helper  PlatformList(string id)
 {
     /**/
-    <select id="@id" name="@id" class="select @className">
-        <option value="@PlatformType.All">
-            @ViewResources.All
-        </option>
+    <select id="@id" name="@id">
         <option value="@PlatformType.DesktopNewAsia">
             @ViewResources.DesktopNewAsia
         </option>
