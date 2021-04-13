@@ -1,5 +1,6 @@
 ﻿'use strict';
-define(['jquery', 'common/site', '../common/constant', '../common/betsettingbase', '../common/betsetting.status', 'lib/numberformat'],
+define(['jquery', 'common/site', '../common/constant', '../common/betsettingbase',
+    '../common/betsetting.status', 'lib/numberformat'],
     function ($, Site, Constant, BetSettingBase, BetSettingStatus, NumberFormatter) {
         const Product = Constant.Product;
 
@@ -63,7 +64,7 @@ define(['jquery', 'common/site', '../common/constant', '../common/betsettingbase
                     }
 
                     const messageResource = _productId === Product.AgCasino ? 'UpdateAgCasinoBetSettings' :
-                                        _productId === Product.GoldDeluxe ? 'UpdateGoldDeluxeBetSettings' : '';
+                        _productId === Product.GoldDeluxe ? 'UpdateGoldDeluxeBetSettings' : '';
                     BetSettingBase.showComfirm($(this), messageResource, _me.updateBetSetting);
                 });
 
@@ -85,7 +86,7 @@ define(['jquery', 'common/site', '../common/constant', '../common/betsettingbase
 
             updateBetSetting: function (custId, userName, nickName) {
                 const url = _productId === Product.AgCasino ? 'AgCasinoBetSetting/UpdateBetSetting' :
-                                        _productId === Product.GoldDeluxe ? 'GoldDeluxeBetSetting/UpdateBetSetting' : null;
+                    _productId === Product.GoldDeluxe ? 'GoldDeluxeBetSetting/UpdateBetSetting' : null;
 
                 if (url === null) {
                     return;
@@ -95,7 +96,8 @@ define(['jquery', 'common/site', '../common/constant', '../common/betsettingbase
                     custid: custId,
                     userName: userName,
                     nickName: nickName,
-                    group: $('#betSettingGroup').val()
+                    group: $('#betSettingGroup').val(),
+                    custIds: $('#CustIds').val()
                 };
 
                 BetSettingBase.updateBetSetting(Site.resolveClientUrl(url), params);
@@ -103,7 +105,7 @@ define(['jquery', 'common/site', '../common/constant', '../common/betsettingbase
 
             updateStatus: function ($context) {
                 const url = _productId === Product.AgCasino ? 'AgCasinoBetSetting/UpdateStatus' :
-                                        _productId === Product.GoldDeluxe ? 'GoldDeluxeBetSetting/UpdateStatus' : null;
+                    _productId === Product.GoldDeluxe ? 'GoldDeluxeBetSetting/UpdateStatus' : null;
 
                 if (url === null) {
                     return;

@@ -6,13 +6,11 @@
     using System.Linq;
     using System.Web;
     using System.Web.Hosting;
-
     using DataAccess.Core.Users.Interfaces;
-
     using Extension.Utility;
     using Extension.Utility.Interfaces;
-
     using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Service.Core.Users.Interfaces;
@@ -21,8 +19,6 @@
     using Fanex.Logging;
     using LAP.ONEBook.Security;
     using Model.Core.DataDomain;
-    using Fanex.Athena.Model.Auth.DataDomain;
-
     using Resources;
 
     [CLSCompliant(false)]
@@ -96,7 +92,7 @@
             var language = Util.MapLanguages.Where(i => i.Value.Equals(tokenInfo.Language))
                        .Select(i => i.Key).DefaultIfEmpty<string>("en-Us").FirstOrDefault();
             if (IsAuthenticated(currentContext, userSession, licenseeSession) &&
-                IsSameSession(userSession, licenseeSession, tokenInfo, licensee.Id))
+               IsSameSession(userSession, licenseeSession, tokenInfo, licensee.Id))
             {
                 UpdateUserSession(userSession, tokenInfo, licensee.Id, userInfo, language);
                 return new ResultInfo
@@ -122,6 +118,21 @@
             RemoveCookies(response, cookies);
 
             _formsAuthenticationService.SignOut();
+        }
+
+        public OneAuthUserInfo GetUserInfo(DefaultAuthInfo<OneAuthPermission, OneAuthCurrency> tokenInfo)
+        {
+            var userInfo = _oneAuthDataAccess.GetUserInfo(tokenInfo.UserSEQ, tokenInfo.VendorID);
+
+            userInfo.CurrencyUserList = tokenInfo.Currency?.Select(x => new CurrencyUser
+            {
+                IsActive = true,
+                CurrencyId = x.CurrencyId,
+                CurrencyName = x.Currency,
+                AgentIdList = x.AgentId
+            }).ToList();
+
+            return userInfo;
         }
 
         private static void RemoveCookies(HttpResponseBase response, string[] cookies)
@@ -208,7 +219,7 @@
             return new ResultInfo { Code = 0 };
         }
 
-        private void UpdateUserSession(UserAuthInfo userSession, 
+        private void UpdateUserSession(UserAuthInfo userSession,
             DefaultAuthInfo<OneAuthPermission, OneAuthCurrency> tokenInfo,
             int licenseeId, OneAuthUserInfo userInfo, string language)
         {
@@ -229,21 +240,6 @@
             userSession.IsShowIpvn = tokenInfo.IsAdminstrator || tokenInfo.Permissions.Any(i => i.FunctionKey.Equals(PermissionKeys.BetlistViewIpvn, StringComparison.CurrentCultureIgnoreCase));
             userSession.IsShowIp = _appSettings.LicenseeOfferShowIp.Contains(
                 _sessionService.LicenseeSession.LicenseeName, StringComparer.InvariantCultureIgnoreCase);
-        }
-
-        private OneAuthUserInfo GetUserInfo(DefaultAuthInfo<OneAuthPermission, OneAuthCurrency> tokenInfo)
-        {
-            var userInfo = _oneAuthDataAccess.GetUserInfo(tokenInfo.UserSEQ, tokenInfo.VendorID);
-
-            userInfo.CurrencyUserList = tokenInfo.Currency?.Select(x => new CurrencyUser
-            {
-                IsActive = true,
-                CurrencyId = x.CurrencyId,
-                CurrencyName = x.Currency,
-                AgentIdList = x.AgentId
-            }).ToList();
-
-            return userInfo;
         }
 
         private void CreateSession(
@@ -284,7 +280,7 @@
                 IsShowIpvn = tokenInfo.IsAdminstrator || tokenInfo.Permissions.Any(i => i.FunctionKey.Equals(PermissionKeys.BetlistViewIpvn, StringComparison.CurrentCultureIgnoreCase)),
                 IsShowIp = _appSettings.LicenseeOfferShowIp.Contains(
                 licSession.LicenseeName, StringComparer.InvariantCultureIgnoreCase)
-        };
+            };
 
             _sessionService.AssignCurrenciesToUserSession(userSession, licenseeInfo.Id, userInfo.CurrencyUserList);
 

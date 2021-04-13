@@ -5,13 +5,13 @@ export const param = createReducer({}, {
     [SET_PARAM](preState, action) {
         return { ...action.data };
     }
-})
+});
 
 export const playerList = createReducer(null, {
     [SET_PLAYER_LIST](preState, action) {
         return action.data && [...action.data];
     }
-})
+});
 
 export const type = createReducer(null, {});
 
@@ -29,10 +29,10 @@ export const isAdvancedSearch = createReducer(false, {
     [SET_ADVANCED_SEARCH](preState, action) {
         return action.data;
     }
-})
+});
 
 export const isFilterCollapsing = createReducer(false, {
     [SET_COLLAPSE_FILTER](preState, action) {
         return action.data;
     }
-})
+});

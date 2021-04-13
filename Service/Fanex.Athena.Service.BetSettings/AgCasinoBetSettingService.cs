@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="AgCasinoBetSettingService.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Service.BetSettings
+﻿namespace Fanex.Athena.Service.BetSettings
 {
     using System;
     using System.Collections.Generic;
@@ -20,6 +14,7 @@ namespace Fanex.Athena.Service.BetSettings
     using Extension.Utility.Interfaces;
 
     using Fanex.Athena.Extension.Helpers;
+    using Fanex.Athena.Model.BetSettings.MetaModel;
     using Fanex.Athena.Resources;
     using Fanex.Logging;
 
@@ -90,9 +85,9 @@ namespace Fanex.Athena.Service.BetSettings
         }
 
         public async Task<IResultInfo> UpdateStatusAsync(
-            int userId, int custId, string language, string ip, bool isEnabled)
+            int userId, string language, string ip, UpdateStatusMetaModel metaModel)
         {
-            return await _betSettingDataAccess.UpdateStatusAsync(userId, custId, language, ip, isEnabled);
+            return await _betSettingDataAccess.UpdateStatusAsync(userId, language, ip, metaModel);
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes",

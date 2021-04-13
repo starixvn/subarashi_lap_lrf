@@ -1,17 +1,20 @@
 ﻿import React from 'react';
 import PropTypes from 'prop-types';
 import LangHelper from '@jsroot/lib/langHelper';
+import { searchOptions } from '../../lib/constants';
 
 const AthenaSearch = (props) => {
-    const { bankAccountNumber, email, ipLogin, onChange, onKeyPress } = props;
+    const { bankAccountNumber, email, ipLogin, onChange, onKeyPress, searchOption } = props;
 
     return (
         <>
             <div className="col-12 col-md-4 col-sm-4 col-lg-3 col-xl-2">
                 <div className="form-group">
                     <label className="label-text">{LangHelper.getSingleResource("BankAccountNumber")}</label>
-                    <input className="input-text" id="bankAccountNumber" name="bankAccountNumber" type="text" value={bankAccountNumber}
+                    <input className="input-text" id="bankAccountNumber"
+                        name="bankAccountNumber" type="text" value={bankAccountNumber}
                         autoComplete="off" onChange={onChange} onKeyPress={onKeyPress}
+                        disabled={searchOption == searchOptions.allPlayers}
                         placeholder={LangHelper.getSingleResource('PlaceholderBankAccount')} />
                 </div>
             </div>
@@ -21,6 +24,7 @@ const AthenaSearch = (props) => {
                     <label className="label-text">{LangHelper.getSingleResource("Email")}</label>
                     <input className="input-text" id="email" name="email" type="text" value={email}
                         autoComplete="off" onChange={onChange} onKeyPress={onKeyPress}
+                        disabled={searchOption == searchOptions.allPlayers}
                         placeholder={LangHelper.getSingleResource('PlaceholderEmail')} />
                 </div>
             </div>
@@ -42,7 +46,8 @@ const propTypes = {
     email: PropTypes.string.isRequired,
     ipLogin: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
-    onKeyPress: PropTypes.func.isRequired
+    onKeyPress: PropTypes.func.isRequired,
+    searchOption: PropTypes.string.isRequired
 };
 
 AthenaSearch.propTypes = propTypes;

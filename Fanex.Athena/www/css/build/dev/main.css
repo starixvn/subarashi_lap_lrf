@@ -4156,5 +4156,13 @@ input[type=text]::-ms-clear {
   cursor: pointer;
   margin-top: 3px; }
 
+.icon-info {
+  background-image: url("../images/info.png");
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+  display: inline-block;
+  margin-top: -2px; }
+
 
 /*# sourceMappingURL=main.css.map*/

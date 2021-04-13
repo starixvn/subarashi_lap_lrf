@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
     using System.Xml.Linq;
     using Core;
+    using Fanex.Athena.Model.BetSettings.MetaModel;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Common.Extensions;
     using Fanex.Logging;
@@ -79,15 +80,15 @@
             return null;
         }
 
-        public async Task<IResultInfo> UpdateStatusAsync(int userId, int custId, string ip, bool status, int productId)
+        public async Task<IResultInfo> UpdateStatusAsync(int userId, string ip, UpdateStatusMetaModel metaModel)
         {
             const string UspName = "Acc_Dep_CustSetting_DisableStatUpd";
 
             using (var db = this.GetObjectDb(UspName))
             {
-                db.SetParameterValue("custid", custId);
+                db.SetParameterValue("custid", metaModel.CustId);
                 db.SetParameterValue("userid", userId);
-                db.SetParameterValue("IsDisabled", BuildProductStatusXml(productId, status));
+                db.SetParameterValue("IsDisabled", BuildProductStatusXml(metaModel.ProductId, metaModel.Status == 1));
                 db.SetParameterValue("ip", ip);
 
                 db.SetParameterValue("ErrCode", null);
@@ -138,15 +139,15 @@
             return dataList;
         }
 
-        public async Task<IResultInfo> UpdateBetSettingAsync(int custId, int userId, string ip, string xmlData)
+        public async Task<IResultInfo> UpdateBetSettingAsync(CommonBetSetting metaModel, string xmlData)
         {
             const string UspName = "Acc_Dep_CustSetting_BetLimitUpd";
 
             using (var db = this.GetObjectDb(UspName))
             {
-                db.SetParameterValue("custid", custId);
-                db.SetParameterValue("userid", userId);
-                db.SetParameterValue("ip", ip);
+                db.SetParameterValue("custid", metaModel.CustId);
+                db.SetParameterValue("userid", metaModel.UserId);
+                db.SetParameterValue("ip", metaModel.Ip);
                 db.SetParameterValue("betlimit", xmlData);
                 db.SetParameterValue("errcode", null);
                 db.SetParameterValue("errmsg", null);

@@ -1,23 +1,13 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="AgCasinoBetSettingController.cs" company="">
-// Copyright (c) . All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-
-namespace Fanex.Athena.Controllers.BetSettings
+﻿namespace Fanex.Athena.Controllers.BetSettings
 {
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.Web.ActionFilter;
-
-    using Model.BetSettings.MetaModel;
-    using Model.Core.DataDomain;
-
-    using Resources;
-
-    using Service.BetSettings.Interfaces;
-
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Web.ActionFilter;
+    using Model.BetSettings.MetaModel;
+    using Model.Core.DataDomain;
+    using Resources;
+    using Service.BetSettings.Interfaces;
 
     public class AgCasinoBetSettingController : BetSettingBaseController
     {
@@ -26,9 +16,8 @@ namespace Fanex.Athena.Controllers.BetSettings
         public AgCasinoBetSettingController(
             ICoreBetSettingService coreBetSettingService,
             IProductService productService,
-            IAgCasinoBetSettingService betSettingService
-            )
-        : base(coreBetSettingService, productService)
+            IAgCasinoBetSettingService betSettingService)
+            : base(coreBetSettingService, productService)
         {
             _betSettingService = betSettingService;
         }
@@ -47,7 +36,7 @@ namespace Fanex.Athena.Controllers.BetSettings
         [HttpPost]
         [CustomValidateAntiForgery]
         [ValidatePermissionOnData]
-        public async Task<JsonResult> UpdateStatus(int custId, string nickName, int status)
+        public async Task<JsonResult> UpdateStatus(UpdateStatusMetaModel metaModel)
         {
             var userSession = SessionServiceInstance.UserSession;
 
@@ -58,14 +47,13 @@ namespace Fanex.Athena.Controllers.BetSettings
 
             var result = await _betSettingService.UpdateStatusAsync(
                 userSession.UserId,
-                custId,
                 userSession.Language,
                 Request.UserHostAddress,
-                status == 1).ConfigureAwait(false);
+                metaModel).ConfigureAwait(false);
 
             if (result.Code == 0)
             {
-                result.Message = string.Format(ViewResources.UpdateSuccess, nickName);
+                result.Message = string.Format(ViewResources.UpdateSuccess, metaModel.Nickname);
             }
 
             return Json(result, JsonRequestBehavior.AllowGet);

@@ -22,8 +22,6 @@ namespace Fanex.Athena.Api.StatelessBase.Attributes
 
         public bool BindBalanceUpAndMoveBetDay { get; set; }
 
-        public bool BindLicenseeinfo { get; set; }
-
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
             var actionArgument = actionContext.ActionArguments;
@@ -53,11 +51,6 @@ namespace Fanex.Athena.Api.StatelessBase.Attributes
             {
                 var balanceUpDataAccess = new BalanceUpDataAccess(null, null);
                 AutoBindMetaModelService.MapBalanceUpAndMoveBet(actionArgument, balanceUpDataAccess);
-            }
-
-            if (BindLicenseeinfo)
-            {
-                AutoBindMetaModelService.MapLicenseeInfo(actionArgument);
             }
 
             base.OnActionExecuting(actionContext);

@@ -1,14 +1,7 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="IAgCasinoBetSettingService.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Service.BetSettings.Interfaces
+﻿namespace Fanex.Athena.Service.BetSettings.Interfaces
 {
-    using System.Collections.Generic;
     using System.Threading.Tasks;
-
+    using Fanex.Athena.Model.BetSettings.MetaModel;
     using Fanex.Athena.Model.BetSettings.ViewModel;
     using Fanex.Athena.Model.Core.DTO.Common;
 
@@ -20,6 +13,6 @@ namespace Fanex.Athena.Service.BetSettings.Interfaces
 
         Task<IResultInfo> UpdateAgCasinoBetSettingAsync(CommonBetSetting setting, string group);
 
-        Task<IResultInfo> UpdateStatusAsync(int userId, int custId, string language, string ip, bool isEnabled);
+        Task<IResultInfo> UpdateStatusAsync(int userId, string language, string ip, UpdateStatusMetaModel metaModel);
     }
 }

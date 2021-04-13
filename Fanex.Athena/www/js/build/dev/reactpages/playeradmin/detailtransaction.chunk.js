@@ -516,9 +516,10 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
         return;
       }
 
+      const dateFormatStr = "MM/DD/YYYY";
       var newRequestParam = {
-        FromDate: moment__WEBPACK_IMPORTED_MODULE_3___default()(date.startDate).format("MM/DD/YYYY"),
-        ToDate: moment__WEBPACK_IMPORTED_MODULE_3___default()(date.endDate).format("MM/DD/YYYY")
+        FromDate: moment__WEBPACK_IMPORTED_MODULE_3___default()(date.startDate).format(dateFormatStr),
+        ToDate: moment__WEBPACK_IMPORTED_MODULE_3___default()(date.endDate).format(dateFormatStr)
       };
       this.setState({
         requestParam: Object.assign(this.props.requestParam, newRequestParam)

@@ -1115,6 +1115,10 @@ iframe {
 .result-content .dropdown-label-container.disabled {
   background-color: #d5c8c8; }
 
+input[disabled]#userName, input[disabled]#bankAccountNumber, input[disabled]#email {
+  background-color: #D9D9D9;
+  cursor: default; }
+
 /*End Grid*/
 /*Batch Update*/
 .text-center {

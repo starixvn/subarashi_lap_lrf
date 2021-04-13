@@ -13,5 +13,6 @@
         IResultInfo SignIn(HttpContextBase currentContext, DefaultAuthInfo<OneAuthPermission, OneAuthCurrency> tokenInfo);
         void SignOut(HttpResponseBase response, HttpRequestBase request);
         DefaultAuthInfo<OneAuthPermission, OneAuthCurrency> GetTokenInfo(string token);
+        OneAuthUserInfo GetUserInfo(DefaultAuthInfo<OneAuthPermission, OneAuthCurrency> tokenInfo);
     }
 }

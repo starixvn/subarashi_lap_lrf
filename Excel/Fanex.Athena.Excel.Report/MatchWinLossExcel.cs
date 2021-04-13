@@ -1,40 +1,25 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="MatchWinLossExcel.cs" company="">
-// Copyright (c) . All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-
-namespace Fanex.Athena.Excel.Report
+﻿namespace Fanex.Athena.Excel.Report
 {
     using System.Collections.Generic;
     using System.Data;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
-
     using Base;
     using Base.Entities;
     using Base.Helpers;
-
     using Common;
-
     using Fanex.Athena.Excel.Base.Extension;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Helpers;
-
     using Model.Core.DataDomain;
     using Model.Report.MetaModel;
-
     using NPOI.SS.UserModel;
-
     using Resources;
-
     using VendorAdapter;
     using VendorAdapter.Interfaces;
 
     public class MatchWinLossExcel : ReportBase
     {
-        private const string STR_BETTYPE = "bettype";
-
         private const int ColumnMatch = 1;
         private const int ColumnCustomerWl = 4;
         private const int ColumnCustomerComm = 5;
@@ -52,6 +37,7 @@ namespace Fanex.Athena.Excel.Report
         private const int RowSpecialBetTypeTemplate = 7;
         private const int RowGrandTotalTemplate = 8;
         private const int RowNoInfoTemplate = 9;
+        private const string BetTypeColumn = "bettype";
 
         private static readonly IEnumerable<int> SpecialBettypes = new[]
         {
@@ -161,7 +147,7 @@ namespace Fanex.Athena.Excel.Report
             for (int index = 0; index < rowCount; index++)
             {
                 var exportRow = _exportData.Rows[index];
-                var betType = Converter.ToInt(exportRow[STR_BETTYPE]);
+                var betType = Converter.ToInt(exportRow[BetTypeColumn]);
                 if (SpecialBettypes.Contains(betType) || IsHappy5LinkedGames(betType))
                 {
                     specialBetType.Add(exportRow);
@@ -343,7 +329,7 @@ namespace Fanex.Athena.Excel.Report
             {
                 var matchWinloss = matchInfoList[i];
                 var betTypeRow = sheet.CopyRow(TemplateSheet, RowBetTypeContentTemplate, currentRow);
-                var betType = Converter.ToInt(matchWinloss[STR_BETTYPE]);
+                var betType = Converter.ToInt(matchWinloss[BetTypeColumn]);
                 var liveIndicator = Converter.To<bool>(matchWinloss["liveindicator"]);
                 var betTypeName = "         " + _cacheRefAdapter.GetBettype(betType, liveIndicator);
 
@@ -369,14 +355,14 @@ namespace Fanex.Athena.Excel.Report
         private int AssignSpecialBetType(ISheet sheet, IList<DataRow> exportData, int currentRowIndex)
         {
             var rowCount = exportData.Count;
-            exportData = exportData.OrderBy(d => Converter.ToInt(d[STR_BETTYPE])).ToList();
+            exportData = exportData.OrderBy(d => Converter.ToInt(d[BetTypeColumn])).ToList();
 
             // Assign bettype
             for (int i = 0; i < rowCount; i++)
             {
                 var dataRow = exportData[i];
                 var betTypeRow = sheet.CopyRow(TemplateSheet, RowSpecialBetTypeTemplate, currentRowIndex);
-                var betType = Converter.ToInt(dataRow[STR_BETTYPE]);
+                var betType = Converter.ToInt(dataRow[BetTypeColumn]);
                 var betTypeName = betType == (int)BetType.VirtualSports2MixParlay ?
                     _cacheRefAdapter.GetBettypeWithProductName(betType) :
                     _cacheRefAdapter.GetBettype(betType, false);

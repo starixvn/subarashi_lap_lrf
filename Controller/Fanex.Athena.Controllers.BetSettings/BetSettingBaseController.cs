@@ -1,31 +1,19 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="BetSettingBaseController.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Controllers.BetSettings
+﻿namespace Fanex.Athena.Controllers.BetSettings
 {
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
+    using System.Web.SessionState;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.BetSettings.DTO;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-
     using Model.BetSettings.MetaModel;
     using Model.BetSettings.ViewModel;
     using Model.Core.DTO.Common;
     using Model.Customer.DTO;
-
     using ONEbook.UM.Filters;
-
     using Resources;
-
     using Service.BetSettings.Interfaces;
-
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-    using System.Web.SessionState;
-
     using Web.ActionFilter;
 
     [SessionState(SessionStateBehavior.ReadOnly)]
@@ -82,7 +70,8 @@ namespace Fanex.Athena.Controllers.BetSettings
                 Ip = Request.UserHostAddress,
                 Language = language,
                 UserId = userId,
-                CustId = int.Parse(Request["custid"])
+                CustId = int.Parse(Request["custid"]),
+                CustIds = Request["custids"] ?? string.Empty
             };
 
             return commonItem;
@@ -100,9 +89,7 @@ namespace Fanex.Athena.Controllers.BetSettings
                 return defaultValue;
             }
 
-            return !decimal.TryParse(HttpContext.Request[name], out decimal value)
-                       ? defaultValue
-                       : value;
+            return decimal.TryParse(HttpContext.Request[name], out decimal value) ? value : defaultValue;
         }
 
         protected int GetIntRequest(string name, int defaultValue)

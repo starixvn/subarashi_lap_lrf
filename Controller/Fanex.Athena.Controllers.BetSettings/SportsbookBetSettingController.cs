@@ -1,26 +1,15 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="SportsbookBetSettingController.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Controllers.BetSettings
+﻿namespace Fanex.Athena.Controllers.BetSettings
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using Fanex.Athena.Model.BetSettings.MetaModel;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
-
     using Model.BetSettings.DTO;
     using Model.Core.DataDomain;
-
     using Resources;
-
     using Service.BetSettings.Interfaces;
-
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
 
     public class SportsbookBetSettingController : BetSettingBaseController
     {
@@ -29,10 +18,8 @@ namespace Fanex.Athena.Controllers.BetSettings
         public SportsbookBetSettingController(
             ICoreBetSettingService coreBetSettingService,
             IProductService productService,
-            ISportsbookBetSettingService betSettingService
-
-            )
-        : base(coreBetSettingService, productService)
+            ISportsbookBetSettingService betSettingService)
+            : base(coreBetSettingService, productService)
         {
             _betSettingService = betSettingService;
         }
@@ -42,8 +29,7 @@ namespace Fanex.Athena.Controllers.BetSettings
         [ValidatePermissionOnData(isObject: true)]
         public async Task<ActionResult> Index(BetSettingMetaModel metaModel)
         {
-            var viewModel = await _betSettingService.GetViewModelAsync(
-                metaModel.CustId);
+            var viewModel = await _betSettingService.GetViewModelAsync(metaModel.CustId);
 
             await AssignRequiredPropertiesAsync(viewModel, metaModel);
 
@@ -52,7 +38,6 @@ namespace Fanex.Athena.Controllers.BetSettings
 
         [HttpPost]
         [CustomValidateAntiForgery]
-        [ValidatePermissionOnData]
         public async Task<JsonResult> UpdateBetSetting(string nickName)
         {
             var userSession = SessionServiceInstance.UserSession;
@@ -66,8 +51,7 @@ namespace Fanex.Athena.Controllers.BetSettings
             var commonParam = GetBetSettingCommonParam(userSession.UserId, licenseeId, userSession.Language);
             var param = GetSportsBookParam();
             var esportSetting = GetESportSetting();
-            var result = await _betSettingService.UpdateBetSettingAsync(commonParam, param,
-                esportSetting);
+            var result = await _betSettingService.UpdateBetSettingAsync(commonParam, param, esportSetting);
 
             if (result.Code == 0)
             {

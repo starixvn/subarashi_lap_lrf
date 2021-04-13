@@ -1,11 +1,11 @@
-﻿using Fanex.Athena.DataAccess.Core.Configuration;
+﻿using System;
+using System.Web.Http.Controllers;
+using System.Web.Http.Filters;
+using Fanex.Athena.DataAccess.Core.Configuration;
 using Fanex.Athena.Extension.Helper;
 using Fanex.Athena.Service.Core.Users;
 using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.Service.StatelessCore.Utility;
-using System;
-using System.Web.Http.Controllers;
-using System.Web.Http.Filters;
 
 namespace Fanex.Athena.Api.Base.Attributes
 {
@@ -43,9 +43,7 @@ namespace Fanex.Athena.Api.Base.Attributes
 
             if (BindIp)
             {
-                AutoBindMetaModelService.MapIp(actionArgument,
-                    ClientHelper.GetClientIp(request: actionContext.Request)
-                    );
+                AutoBindMetaModelService.MapIp(actionArgument, ClientHelper.GetClientIp(request: actionContext.Request));
             }
 
             if (BindLanguage)

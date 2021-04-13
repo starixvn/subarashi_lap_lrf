@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="IAuthorizationService.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Service.StatelessCore.Interfaces
+﻿namespace Fanex.Athena.Service.StatelessCore.Interfaces
 {
     using System.Collections.Generic;
 
@@ -25,5 +19,7 @@ namespace Fanex.Athena.Service.StatelessCore.Interfaces
         bool CheckCustomerBelongsTo(IDictionary<int, int[]> currencyAgents, int custId, int currencyId = 0);
 
         bool CheckProductBelongsTo(string licenseeName, int productId, int[] limitedProductIds = null);
+
+        List<int> GetBelongingCustIds(IDictionary<int, int[]> currencyAgents, string custIds);
     }
 }

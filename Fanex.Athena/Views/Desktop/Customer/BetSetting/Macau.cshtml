@@ -1,18 +1,15 @@
-﻿@{
+﻿@model Fanex.Athena.Model.BetSettings.ViewModel.ThirdPartyBetSettingViewModel
+@{
     Layout = "~/Views/Desktop/Shared/_BetSettingLayout.cshtml";
 }
-@model Fanex.Athena.Model.BetSettings.ViewModel.ThirdPartyBetSettingViewModel
-
 @section pagejs {
     <script src="@Url.ContentLinkByEnv("/www/js/build/pages/customer/thirdpartybetsetting.chunk.js")"></script>
 }
-
 @section Menu{
     @{Html.RenderPartial("~/Views/Desktop/Customer/BetSetting/_Menu.cshtml", Model);}
 }
-
 @section ContentTitle{
-    @Model.Param.BetSettingName @ViewResources.BetSettings - @Model.Param.NickName @(Model.Param.IsFakeLicensee ? string.Empty : "(" + Model.Param.UserName + ")")
+    @Model.Title
 }
 <!--Content-->
 @if (Model.IsLineEnabled)

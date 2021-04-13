@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="AuthorizationService.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Service.StatelessCore
+﻿namespace Fanex.Athena.Service.StatelessCore
 {
     using System;
     using System.Collections.Generic;
@@ -15,6 +9,7 @@ namespace Fanex.Athena.Service.StatelessCore
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Auth.Enum;
+    using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     public class AuthorizationService : IAuthorizationService
@@ -47,6 +42,7 @@ namespace Fanex.Athena.Service.StatelessCore
 
             return userAuthInfo.FunctionList.Any(x => permissionKeys.Contains(x.FunctionKey, StringComparer.InvariantCultureIgnoreCase));
         }
+
         public bool IsAllowedEditCommission(UserAuthInfo userAuthInfo)
         {
             if (userAuthInfo.ApplicationMode == AppMode.Parasitic)
@@ -65,18 +61,19 @@ namespace Fanex.Athena.Service.StatelessCore
 
         public bool IsAllowedSpecialBA(UserAuthInfo userAuthInfo)
         {
+            const string fKey = PermissionKeys.CustomerInfoSpecialBA;
             if (userAuthInfo.ApplicationMode == AppMode.Parasitic)
             {
                 if (userAuthInfo.IsSuperAdmin)
                 {
                     return true;
                 }
-                return userAuthInfo.PortalFunctionList != null && (userAuthInfo.PortalFunctionList.Any(i => i.FunctionKey
-                     == PermissionKeys.CustomerInfoSpecialBA
-                     || (i.SubFunctionKeys != null && i.SubFunctionKeys.Contains(PermissionKeys.CustomerInfoSpecialBA))));
 
+                return userAuthInfo.PortalFunctionList != null && userAuthInfo.PortalFunctionList.Any(i =>
+                    i.FunctionKey == fKey || (i.SubFunctionKeys != null && i.SubFunctionKeys.Contains(fKey)));
             }
-            return userAuthInfo.FunctionList != null && userAuthInfo.FunctionList.Any(x => x.FunctionKey == PermissionKeys.CustomerInfoSpecialBA);
+
+            return userAuthInfo.FunctionList != null && userAuthInfo.FunctionList.Any(x => x.FunctionKey == fKey);
         }
 
         public bool HasPermissionOnData(IDictionary<int, int[]> currencyAgents, int custId, long transId)
@@ -89,6 +86,25 @@ namespace Fanex.Athena.Service.StatelessCore
             var item = _authorizationDataAccess.IsCustomerBelonging(custId, transId);
 
             return currencyAgents.Any(i => i.Key == item.Item1 && i.Value.Contains(item.Item2));
+        }
+
+        public List<int> GetBelongingCustIds(IDictionary<int, int[]> currencyAgents, string custIds)
+        {
+            var validCustIds = custIds.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                .Where(c => int.TryParse(c, out _));
+            if (validCustIds.Any())
+            {
+                var item = _authorizationDataAccess.GetCustInfo(string.Join(",", validCustIds));
+
+                return item.Where(i => IsBelonging(currencyAgents, i.Value)).Select(i => i.Key).ToList();
+            }
+
+            return new List<int>();
+        }
+
+        public bool IsBelonging(IDictionary<int, int[]> currencyAgents, CustDTO cust)
+        {
+            return currencyAgents.Any(i => i.Key == cust.CurrencyId && i.Value.Contains(cust.Id));
         }
 
         public bool CheckCustomerBelongsTo(IDictionary<int, int[]> currencyAgents, int custId, int currencyId = 0)

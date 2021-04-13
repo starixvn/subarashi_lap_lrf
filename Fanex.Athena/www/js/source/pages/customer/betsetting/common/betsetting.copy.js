@@ -1,6 +1,5 @@
 ﻿'use strict';
 define(['jquery', './betsetting.validation'], function ($, BetSettingValidation) {
-    
     const _me = {
         checkCopyAllValues: function ($checkbox) {
             const enabled = $checkbox.prop('checked');

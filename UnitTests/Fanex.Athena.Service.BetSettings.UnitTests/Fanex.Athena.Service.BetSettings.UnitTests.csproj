@@ -76,6 +76,7 @@
     <Compile Include="ExchangeCommApiServiceTest.cs" />
     <Compile Include="DcsBetSettingServiceTest.cs" />
     <Compile Include="DcsBetSettingServiceTest_BetLimit.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="RngCasinoBetSettingServiceTest.cs" />
     <Compile Include="ThirdPartyBetSettingServiceTest.cs" />
     <Compile Include="SportsbookBetSettingServiceTest.cs" />

@@ -46,6 +46,13 @@ const SearchOption = (props) => {
                     &nbsp;&nbsp;{LangHelper.getSingleResource('MatchCase')} AB"<span className="keyword">test</span>"CD
                 </label>
             </DropdownItem>
+            <DropdownItem tag="div" className="hide">
+                <label className="selection-item">
+                    <input type="radio" name="searchOption" value={searchOptions.allPlayers}
+                        checked={selectedValue === searchOptions.allPlayers} onChange={onChange} />
+                    &nbsp;&nbsp;{LangHelper.getSingleResource('SearchAllPlayers')}
+                </label>
+            </DropdownItem>
         </DropdownButton>
     )
 }

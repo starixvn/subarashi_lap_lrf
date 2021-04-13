@@ -80,9 +80,15 @@
             var userId = 2;
             var ip = "IP";
             var xmlData = "XMLDataTest";
+            var metaModel = new CommonBetSetting
+            {
+                CustId = custId,
+                UserId = userId,
+                Ip = ip
+            };
 
             // Action
-            await DataAccess.UpdateBetSettingAsync(custId, userId, ip, xmlData);
+            await DataAccess.UpdateBetSettingAsync(metaModel, xmlData);
 
             // Assert
             ObjectDb.Received(1).SetParameterValue("custid", custId);
@@ -110,9 +116,15 @@
             };
             ObjectDb.GetParameterValue("ErrCode").Returns(expected.Code);
             ObjectDb.GetParameterValue("ErrMsg").Returns(expected.Message);
+            var metaModel = new CommonBetSetting
+            {
+                CustId = custId,
+                UserId = userId,
+                Ip = ip
+            };
 
             // Action
-            var result = await DataAccess.UpdateBetSettingAsync(custId, userId, ip, xmlData);
+            var result = await DataAccess.UpdateBetSettingAsync(metaModel, xmlData);
 
             // Assert
             Assert.That(result.Code, Is.EqualTo(expected.Code));

@@ -21,7 +21,9 @@ const siteSetting = {
 
 const lrfFilters = {
     CustomerClass: [],
-    CommGroups: []
+    CommGroups: [],
+    Subsidiaries: [],
+    SubsidiaryViewType: 0
 };
 
 const defaultState = {

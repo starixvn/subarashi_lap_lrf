@@ -29,7 +29,8 @@ define(['jquery', 'common/site', './betsetting.helper'], function ($, Site, BetS
                 productId: productId,
                 nickname: nickName,
                 status: status,
-                custid: custId
+                custid: custId,
+                custIds: $('#CustIds').val()
             };
         }
     };

@@ -8,8 +8,8 @@
 
     using Extension.Utility;
     using Fanex.Athena.Model.BetSettings.DTO.Exchange;
+    using Fanex.Athena.Model.BetSettings.MetaModel;
     using Fanex.Athena.Model.Core.DTO.Common;
-    using Logging;
 
     using Model.Core.DataDomain;
     using Model.Core.MetaModel.Common;
@@ -88,9 +88,10 @@
             // Arrange
             _betSettingDataAccess.GetStatusAsync(0, 0).ReturnsForAnyArgs(Task.FromResult(isEnable));
             const string Language = "en-US";
+            var metaModel = new UpdateCommMetaModel { CustId = _custId };
 
             // Action
-            var result = await _service.UpdateCommissionAsync(_userId, _custId, 0, 0, Language);
+            var result = await _service.UpdateCommissionAsync(_userId, metaModel, Language);
 
             // Assert
             Assert.Multiple(() =>
@@ -117,8 +118,14 @@
                     Data = new ExchangeCommission { Status = returnStatus, Commission = expectedComm }
                 }));
 
+            var metaModel = new UpdateCommMetaModel
+            {
+                CustId = _custId,
+                NewCommission = expectedComm
+            };
+
             // Action
-            var result = await _service.UpdateCommissionAsync(_userId, _custId, 0, expectedComm, Language);
+            var result = await _service.UpdateCommissionAsync(_userId, metaModel, Language);
 
             // Assert
             Assert.Multiple(() =>
@@ -144,8 +151,15 @@
                     Data = new ExchangeCommission { Status = 1, Commission = 5.5d }
                 }));
 
+            var metaModel = new UpdateCommMetaModel
+            {
+                CustId = _custId,
+                OldCommission = oldComm,
+                NewCommission = newComm
+            };
+
             // Action
-            var result = await _service.UpdateCommissionAsync(_userId, _custId, oldComm, newComm, Language);
+            var result = await _service.UpdateCommissionAsync(_userId, metaModel, Language);
 
             // Assert
             Assert.Multiple(() =>

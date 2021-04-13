@@ -35,6 +35,7 @@ define(['jquery', 'common/site', '../common/betsettingbase', '../common/betsetti
             params.custid = custId;
             params.userName = userName;
             params.nickName = nickName;
+            params.custIds = $("#CustIds").val();
 
             BetSettingBase.updateBetSetting(url, params);
         }

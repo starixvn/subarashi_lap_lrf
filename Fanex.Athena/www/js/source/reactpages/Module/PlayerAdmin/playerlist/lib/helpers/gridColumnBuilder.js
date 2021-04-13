@@ -10,7 +10,7 @@ export const buildDefaultColumnList = (licType, hasCommPermissionRead) => {
         const show = item.key === fields.CommissionGroup ? hasCommPermissionRead : item.key !== fields.BaStatus;
         const showByLicenseeType = isApiType ? !excludedKeyForApiType.includes(item.key) : !excludedKeyForAthenaType.includes(item.key);
         return show && showByLicenseeType;
-    }).map(item => ({ ...item }))
+    }).map(item => ({ ...item }));
 }
 
 export const buildColumnList = (licType, isAllowedBA, hasCommPermissionRead) => {
@@ -24,5 +24,5 @@ export const buildColumnList = (licType, isAllowedBA, hasCommPermissionRead) => 
         } else {
             return isApiType ? !excludedKeyForApiType.includes(item.key) : !excludedKeyForAthenaType.includes(item.key);
         }
-    }).map(item => ({ ...item }))
+    }).map(item => ({ ...item }));
 };

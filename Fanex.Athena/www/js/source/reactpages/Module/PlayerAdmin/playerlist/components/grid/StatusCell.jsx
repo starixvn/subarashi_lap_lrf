@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -14,7 +14,7 @@ export const StatusCell = (props) => {
 
     const statusName = playerStatus[Status];
     const classname = 'status-text status-' + Status;
-    const canUpdate = type === licenseeType.nonApi &&  !IsArchived && Status !== playerStatusByName.Closed;
+    const canUpdate = type === licenseeType.nonApi && !IsArchived && Status !== playerStatusByName.Closed;
 
     const handleToggleStatus = (event) => {
         const currentActivePlayer = buildCurrentActivePlayer(dataItem);

@@ -1,14 +1,7 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="BetSettingViewModel.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Model.BetSettings.ViewModel
+﻿namespace Fanex.Athena.Model.BetSettings.ViewModel
 {
     using System.Collections.Generic;
     using Fanex.Athena.Model.BetSettings.DTO;
-    using Fanex.Athena.Model.Core.DataDomain;
 
     public class BetSettingViewModel : BetSettingBaseViewModel
     {

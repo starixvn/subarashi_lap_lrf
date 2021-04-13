@@ -1,15 +1,88 @@
 ﻿'use strict';
-define(['jquery', 'common/site', 'common/popup', './constant', 'lib/numberformat', './betsetting.helper', './betsetting.validation'],
+define(['jquery', 'common/site', 'common/popup', './constant',
+    'lib/numberformat', './betsetting.helper', './betsetting.validation', 'lib/jquery.multiselect.nlevel'],
+
     function ($, Site, Popup, Constant, NumberFormatter, BetSettingHelper, BetSettingValidation) {
         const Product = Constant.Product;
 
         const _me = {
+            elements: {
+                custIds: null,
+                custNames: null,
+                ddlCustomer: null,
+                btnSubmit: null,
+                btnUpdateStatus: null
+            },
             initialize: function () {
+                _me.elements.custIds = $("#CustIds");
+                _me.elements.custNames = $("#CustNames");
+                _me.elements.ddlCustomer = $("#ddl-customers");
+                _me.elements.btnSubmit = $("#btnSubmitBetSetting");
+                _me.elements.btnUpdateStatus = $("#btnUpdateStatus");
+
+                _me.initSelectedCustomers();
+
                 $('#product-dropdown').on('change', function () {
                     const url = $(this).find('option:selected').data('href');
                     Site.blockUI();
                     Site.redirect(url);
                 });
+            },
+            initSelectedCustomers: function () {
+                const ids = _me.elements.custIds.val().split(",");
+                if (ids.length === 0) {
+                    return;
+                }
+
+                const names = _me.elements.custNames.val().split(",");
+                const multiSelectData = [];
+
+                for (var i = 0; i < ids.length; i++) {
+                    multiSelectData.push({
+                        Id: ids[i],
+                        Value: ids[i],
+                        Text: names[i],
+                        Checked: true,
+                        Enable: true,
+                        Css: '',
+                        CssClass: ''
+                    });
+                }
+
+                _me.elements.ddlCustomer.multiSelect({
+                    minWidth: 160,
+                    maxHeight: 400,
+                    shadow: true,
+                    showHeader: true,
+                    isCheckAll: true,
+                    showFooter: false,
+                    checkAllText: Site.getSingleResource('All'),
+                    noneSelectedText: Site.getSingleResource('SelectOptions'),
+                    tooltipNoItem: Site.getSingleResource('ThereIsNoSelectedItem'),
+                    selectedText: Site.getSingleResource('SelectedItemCount'),
+                    listData: multiSelectData,
+                    onCheck: function () {
+                        const checkedItems = _me.elements.ddlCustomer.multiSelect('getCheckedItems');
+                        const checkedItemsByText = _me.elements.ddlCustomer.multiSelect('getCheckedItemsByText');
+
+                        _me.elements.custIds.val(checkedItems.join(","));
+                        _me.elements.custNames.val(checkedItemsByText.join(","));
+                        _me.enableSubmit(_me.elements.custIds.val() !== "");
+                    }
+                });
+
+                _me.elements.ddlCustomer = $("#ddl-customers");
+
+                $(window).bind("click, contextmenu ", () => {
+                    _me.closeDropdown();
+                });
+            },
+            closeDropdown: function () {
+                $("#ddl-customers").multiSelect("hideMe");
+            },
+            enableSubmit: function (isEnable) {
+                _me.elements.btnSubmit.attr("disabled", isEnable ? null : "disabled");
+                _me.elements.btnUpdateStatus.attr("disabled", isEnable ? null : "disabled");
             },
 
             getSportIds: function () {
@@ -52,8 +125,8 @@ define(['jquery', 'common/site', 'common/popup', './constant', 'lib/numberformat
             showComfirm: function ($target, resourceMessage, callback) {
                 const productId = parseInt($('#ProductId').val(), 10);
                 const isValid = productId === Product.LiveCasino ? true :
-                             productId === Product.NumberGame ? BetSettingValidation.checkValidationNumberGame() :
-                                                                BetSettingValidation.checkLimitMinMaxBets(_me.getSportIds());
+                    productId === Product.NumberGame ? BetSettingValidation.checkValidationNumberGame() :
+                        BetSettingValidation.checkLimitMinMaxBets(_me.getSportIds());
                 if (!isValid) {
                     return;
                 }

@@ -1,7 +1,6 @@
 ﻿namespace Fanex.Athena.Service.BetSettings.UnitTests
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -12,7 +11,7 @@
 
     using Extension.Utility;
     using Extension.Utility.Interfaces;
-
+    using Fanex.Athena.Model.BetSettings.MetaModel;
     using Fanex.Logging;
 
     using Model.BetSettings.DTO;
@@ -24,8 +23,6 @@
     using NUnit.Framework;
 
     using Resources;
-
-    using StatelessCore.Interfaces;
 
     using UnitTest.Common.Helpers;
 
@@ -212,11 +209,16 @@
             var custId = FakeHelper.Create<int>();
             var language = FakeHelper.Create<string>();
             var ip = FakeHelper.Create<string>();
+            var metaModel = new UpdateStatusMetaModel
+            {
+                CustId = custId,
+                Status = 1
+            };
 
-            _dataAccess.UpdateStatusAsync(userId, custId, language, ip, true).Returns(Task.FromResult<IResultInfo>(expectedResult));
+            _dataAccess.UpdateStatusAsync(userId, language, ip, metaModel).Returns(Task.FromResult<IResultInfo>(expectedResult));
 
             // Action
-            var result = await _service.UpdateStatusAsync(userId, custId, language, ip, true);
+            var result = await _service.UpdateStatusAsync(userId, language, ip, metaModel);
 
             // Assert
             Assert.That(result.Code, Is.EqualTo(expectedResult.Code));

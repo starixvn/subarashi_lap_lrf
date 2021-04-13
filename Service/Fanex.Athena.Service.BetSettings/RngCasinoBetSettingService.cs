@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="RngCasinoBetSettingService.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Service.BetSettings
+﻿namespace Fanex.Athena.Service.BetSettings
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -36,8 +30,7 @@ namespace Fanex.Athena.Service.BetSettings
         public RngCasinoBetSettingService(
             IAppSettings appSettings,
             IRngCasinoBetSettingDataAccess betSettingDataAccess,
-            ILGAPIClient lgClient
-            )
+            ILGAPIClient lgClient)
         {
             _betSettingDataAccess = betSettingDataAccess;
             _appSettings = appSettings;
@@ -69,11 +62,11 @@ namespace Fanex.Athena.Service.BetSettings
             if (metaModel.IsSyncCasino && !_appSettings.IsDisableRngCasino)
             {
                 const string apiPath = "/RngCasino/Status";
-                var updatingCasino = await _lgClient.PostAsync<APIResult<bool>>(apiPath,
-                    metaModel, "en-US").ConfigureAwait(false);
+                var updatingCasino = await _lgClient.PostAsync<APIResult<bool>>(apiPath, metaModel, "en-US").ConfigureAwait(false);
 
-                return updatingCasino != null && !updatingCasino.Data ? ErrorResult(ViewResources.UpdateUnSuccess) :
-                    await _betSettingDataAccess.UpdateStatusAsync(metaModel);
+                return updatingCasino != null && !updatingCasino.Data
+                    ? ErrorResult(ViewResources.UpdateUnSuccess)
+                    : await _betSettingDataAccess.UpdateStatusAsync(metaModel);
             }
 
             return new ResultInfo { Code = 1, Message = ViewResources.RNGCasinoUpdateSettingUnAvailableMsg };

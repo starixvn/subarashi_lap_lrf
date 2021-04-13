@@ -1,15 +1,10 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="AgCasinoBetSettingDataAccess.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.DataAccess.BetSettings
+﻿namespace Fanex.Athena.DataAccess.BetSettings
 {
     using System.Threading.Tasks;
     using Common;
     using Fanex.Athena.DataAccess.Core;
     using Fanex.Athena.Model.BetSettings.DTO.AgCasino;
+    using Fanex.Athena.Model.BetSettings.MetaModel;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Interfaces;
     using Model.BetSettings.DTO;
@@ -63,17 +58,17 @@ namespace Fanex.Athena.DataAccess.BetSettings
             }
         }
 
-        public async Task<IResultInfo> UpdateStatusAsync(int userId, int custId, string language, string ip, bool isEnabled)
+        public async Task<IResultInfo> UpdateStatusAsync(int userId, string language, string ip, UpdateStatusMetaModel metaModel)
         {
             const string UspName = "Lrf_AGC_UpdCustStatus";
 
             using (var db = this.GetObjectDb(UspName))
             {
-                db.SetParameterValue("isenabled", isEnabled);
+                db.SetParameterValue("isenabled", metaModel.Status == 1);
                 db.SetParameterValue("ip", ip);
                 db.SetParameterValue("language", language);
                 db.SetParameterValue("userid", userId);
-                db.SetParameterValue("custid", custId);
+                db.SetParameterValue("custid", metaModel.CustId);
 
                 db.SetParameterValue("ErrCode", null);
                 db.SetParameterValue("ErrMsg", null);

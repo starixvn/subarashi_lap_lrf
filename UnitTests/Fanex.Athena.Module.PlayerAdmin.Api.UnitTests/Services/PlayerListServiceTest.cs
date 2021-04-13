@@ -44,7 +44,8 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
                 SpecialLevel = "1,2",
                 OddsGroup = "A",
                 PageSize = 50,
-                PageIndex = 1
+                PageIndex = 1,
+                IsDeposited = 1
             };
             var reader = Substitute.For<IDataReader>();
             objectDb.ExecuteReader().Returns(reader);
@@ -78,7 +79,11 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
             var objectDb = Substitute.For<IObjectDb>();
             _dbFactory.GetObjectDb(Arg.Is("Lrf_CustomerSelByUsername")).Returns(objectDb);
 
-            var metaModel = new PlayerSearchingMetaModel();
+            var metaModel = new PlayerSearchingMetaModel
+            {
+                IsDeposited = 1
+            };
+
             var reader = Substitute.For<IDataReader>();
             objectDb.ExecuteReader().Returns(reader);
             reader.Read().Returns(true, false);

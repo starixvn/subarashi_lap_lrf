@@ -58,7 +58,8 @@
         function getParams(custId) {
             const gameTypeChangedList = [];
             const params = {
-                custId: custId
+                custId: custId,
+                custIds: $("#CustIds").val()
             };
 
             $('.casino-row').each(function () {
@@ -106,25 +107,25 @@
                 width: 380
             };
             const buttons = [
-            {
-                text: Site.getSingleResource('OK'),
-                click: function () {
-                    if (params.gameTypeChangedList.length > 0) {
-                        _me.updateStakeLevel(params, userName);
-                    }
-                    else {
-                        const message = Site.getSingleResource('UpdateRNGCasinoBetSettingSuccessMsg').replace('{0}', userName);
-                        showDialogMesage('Success', message, false);
-                    }
+                {
+                    text: Site.getSingleResource('OK'),
+                    click: function () {
+                        if (params.gameTypeChangedList.length > 0) {
+                            _me.updateStakeLevel(params, userName);
+                        }
+                        else {
+                            const message = Site.getSingleResource('UpdateRNGCasinoBetSettingSuccessMsg').replace('{0}', userName);
+                            showDialogMesage('Success', message, false);
+                        }
+                    },
+                    classes: 'btn btn-submit',
+                    isClosedOnClick: true
                 },
-                classes: 'btn btn-submit',
-                isClosedOnClick: true
-            },
-            {
-                text: Site.getSingleResource('Cancel'),
-                classes: 'btn btn-cancel',
-                isClosedOnClick: true
-            }];
+                {
+                    text: Site.getSingleResource('Cancel'),
+                    classes: 'btn btn-cancel',
+                    isClosedOnClick: true
+                }];
 
             Popup.openPopupWithButton('<div><p>' + message + '</p></div>', options, buttons);
         }
@@ -176,11 +177,11 @@
                 width: 480
             };
             const buttons = [
-            {
-                text: Site.getSingleResource('OK'),
-                classes: 'btn btn-submit',
-                isClosedOnClick: true
-            }];
+                {
+                    text: Site.getSingleResource('OK'),
+                    classes: 'btn btn-submit',
+                    isClosedOnClick: true
+                }];
 
             Popup.openPopupWithButton('<div><p>' + message + '</p></div>', options, buttons);
         }

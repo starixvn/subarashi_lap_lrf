@@ -2,7 +2,7 @@
 
 namespace Fanex.Athena.Module.PlayerAdmin.Api.MetaModel
 {
-    public class PlayerListBaseMetaModel : IMetaModelCurrencyIdList, IMetaModelAgent, IMetaModelSiteName
+    public class PlayerListBaseMetaModel : LRFFiltersMetaModel, IMetaModelCurrencyIdList, IMetaModelAgent, IMetaModelSiteName
     {
         public string SiteName { get; set; }
 
@@ -17,5 +17,11 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.MetaModel
         public string CommGroups { get; set; }
 
         public int IsDeposited { get; set; }
+
+        public string WhiteLabels { get; set; }
+
+        public string Subsidiaries { get; set; }
+
+        public bool SearchBySubsidiary { get; set; }
     }
 }
