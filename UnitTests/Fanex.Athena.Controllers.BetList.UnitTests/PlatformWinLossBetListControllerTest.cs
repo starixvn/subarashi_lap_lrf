@@ -54,13 +54,13 @@
             }
         }
 
-        [TestCase(1, "USD", "eur", "EUR", false, PlatformType.Asia, nameof(PlatformType.Asia))]
-        [TestCase(1, "USD", "usd", "USD", true, PlatformType.China, nameof(PlatformType.China))]
-        [TestCase(1, "USD", "gbp", "GBP", true, PlatformType.Euro, nameof(PlatformType.Euro))]
-        [TestCase(1, "USD", null, "USD", true, PlatformType.Wap, nameof(PlatformType.Wap))]
-        [TestCase(1, "USD", null, "USD", true, PlatformType.Mobile, nameof(PlatformType.Mobile))]
+        [TestCase(1, "USD", "eur", "EUR", false, PlatformType.MobileStandard, nameof(PlatformType.MobileStandard))]
+        [TestCase(1, "USD", "usd", "USD", true, PlatformType.DesktopChina, nameof(PlatformType.DesktopChina))]
+        [TestCase(1, "USD", "gbp", "GBP", true, PlatformType.DesktopOthers, nameof(PlatformType.DesktopOthers))]
+        [TestCase(1, "USD", null, "USD", true, PlatformType.WAP, nameof(PlatformType.WAP))]
+        [TestCase(1, "USD", null, "USD", true, PlatformType.MobileOthers, nameof(PlatformType.MobileOthers))]
         [TestCase(1, "USD", null, "USD", true, PlatformType.Tablet, nameof(PlatformType.Tablet))]
-        [TestCase(0, "", null, "EUR", true, PlatformType.NewAsia, nameof(PlatformType.NewAsia))]
+        [TestCase(0, "", null, "EUR", true, PlatformType.DesktopNewAsia, nameof(PlatformType.DesktopNewAsia))]
         [TestCase(0, "", null, "EUR", true, PlatformType.DeepLink, nameof(PlatformType.DeepLink))]
         [TestCase(0, "", null, "EUR", true, PlatformType.NativeApp, nameof(PlatformType.NativeApp))]
         [TestCase(0, "", null, "EUR", true, PlatformType.ESportsDesktop, nameof(PlatformType.ESportsDesktop))]
