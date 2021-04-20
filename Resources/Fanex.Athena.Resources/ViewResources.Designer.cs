@@ -5362,6 +5362,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Player Betting Statistics (month to date).
+        /// </summary>
+        public static string PlayerBettingStatisticsTitle {
+            get {
+                return ResourceManager.GetString("PlayerBettingStatisticsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Player Name.
         /// </summary>
         public static string PlayerName {

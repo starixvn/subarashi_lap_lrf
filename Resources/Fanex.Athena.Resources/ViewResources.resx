@@ -2984,4 +2984,7 @@
   <data name="ProductHB" xml:space="preserve">
     <value>Habanero</value>
   </data>
+  <data name="PlayerBettingStatisticsTitle" xml:space="preserve">
+    <value>Player Betting Statistics (month to date)</value>
+  </data>
 </root>
