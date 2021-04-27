@@ -337,6 +337,16 @@ class BetList {
         return url;
     }
 
+    getHabaneroDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
+        let url = rootUrl + 'HabaneroBetList/Detail';
+        url = QueryString.setParam(url, 'transId', transId);
+        url = QueryString.setParam(url, 'date', winlostDate);
+        url = QueryString.setParam(url, 'custId', custId);
+        url = QueryString.setParam(url, 'transType', transType);
+        url = QueryString.setParam(url, 'BaseCurrency', baseCurrency);
+
+        return url;
+    }
 
     getRngCasinoResultUrl(rootUrl) {
         return rootUrl + 'ResultReport/ShowRngCasinoSingleWalletResult';
@@ -472,6 +482,16 @@ class BetList {
         url = QueryString.setParam(url, 'custId', custId);
         url = QueryString.setParam(url, 'transId3rd', transId3rd);
         url = QueryString.setParam(url, 'platform', platform);
+
+        return url;
+    }
+
+    getHabaneroResultUrl(rootUrl, custId, transId3rd, gameId3rd, siteId) {
+        let url = rootUrl + 'ResultReport/Habanero';
+        url = QueryString.setParam(url, 'custId', custId);
+        url = QueryString.setParam(url, 'transId3rd', transId3rd);
+        url = QueryString.setParam(url, 'gameId3rd', gameId3rd);
+        url = QueryString.setParam(url, 'siteId', siteId);
 
         return url;
     }

@@ -2149,4 +2149,7 @@
   <data name="GroupCommission_2" xml:space="preserve">
     <value>佣金组别</value>
   </data>
+  <data name="ProductHB" xml:space="preserve">
+    <value>HB电子</value>
+  </data>
 </root>

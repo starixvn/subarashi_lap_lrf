@@ -2609,4 +2609,7 @@
   <data name="IPLogin" xml:space="preserve">
     <value>登入IP</value>
   </data>
+  <data name="ProductHB" xml:space="preserve">
+    <value>HB电子</value>
+  </data>
 </root>

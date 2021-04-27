@@ -91,6 +91,7 @@
     <Compile Include="DailyStatementBetListControllerTest.cs" />
     <Compile Include="ExchangeWinLossBetListControllerTest.cs" />
     <Compile Include="FakeApiBetListBaseController.cs" />
+    <Compile Include="HabaneroBetListControllerTest.cs" />
     <Compile Include="GlobalGamingBetListControllerTest.cs" />
     <Compile Include="GDGBetListControllerTest.cs" />
     <Compile Include="JackpotWonBetListControllerTest.cs" />

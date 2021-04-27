@@ -166,6 +166,7 @@
     <Compile Include="BonusBetListController.cs" />
     <Compile Include="DailyStatementBetListController.cs" />
     <Compile Include="ExchangeWinLossBetListController.cs" />
+    <Compile Include="HabaneroBetListController.cs" />
     <Compile Include="GlobalGamingBetListController.cs" />
     <Compile Include="JackpotWonBetListController.cs" />
     <Compile Include="SabaVirtualSportsWinLossBetListController.cs" />
