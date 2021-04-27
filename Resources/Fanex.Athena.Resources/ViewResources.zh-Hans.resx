@@ -2118,7 +2118,7 @@
     <value>被標示在玩家管理報告中的VIP玩家</value>
   </data>
   <data name="ProductSXG" xml:space="preserve">
-    <value>AE真人</value>
+    <value>AE性感真人</value>
     <comment>#141118</comment>
   </data>
   <data name="SabaVirtualSportsWinLoss" xml:space="preserve">
@@ -2146,7 +2146,7 @@
   <data name="ProductSLT" xml:space="preserve">
     <value>体育时时彩</value>
   </data>
-    <data name="GroupCommission_2" xml:space="preserve">
+  <data name="GroupCommission_2" xml:space="preserve">
     <value>佣金组别</value>
   </data>
 </root>

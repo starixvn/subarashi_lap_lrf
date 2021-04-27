@@ -5677,7 +5677,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AE Casino.
+        ///   Looks up a localized string similar to AE Sexy.
         /// </summary>
         public static string ProductSXG {
             get {

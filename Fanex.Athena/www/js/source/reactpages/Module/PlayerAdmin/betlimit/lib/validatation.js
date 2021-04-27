@@ -3,8 +3,7 @@ import { BetLimitType, BetLimitSport } from './constants';
 
 export default class Validatation {
     static validateMinMaxBet(current, limitData) {
-        const { MinBet, MaxBet, MaxPerMatch } = current;
-        const Id = current.Id === BetLimitSport.I4D ? current.Id : current.BetType;
+        const { MinBet, MaxBet, MaxPerMatch, Id } = current;
 
         if (isNaN(MinBet)) {
             return {

@@ -2087,9 +2087,9 @@ class Validatation {
     const {
       MinBet,
       MaxBet,
-      MaxPerMatch
+      MaxPerMatch,
+      Id
     } = current;
-    const Id = current.Id === _constants__WEBPACK_IMPORTED_MODULE_1__["BetLimitSport"].I4D ? current.Id : current.BetType;
 
     if (isNaN(MinBet)) {
       return {

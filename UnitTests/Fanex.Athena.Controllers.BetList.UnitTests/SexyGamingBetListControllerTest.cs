@@ -84,7 +84,7 @@
                         && string.Join(",", x.HiddenColumns) == "1,2,8,9"
                         && x.LicenseeId == DefaultLicenseeSession.LicenseeId
                         && !x.IsShowSumStake),
-                    "AECasinoDetail",
+                    "AESexyDetail",
                     null);
             }
         }
