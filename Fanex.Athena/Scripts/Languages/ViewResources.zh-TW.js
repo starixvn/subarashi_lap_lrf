@@ -1,4 +1,4 @@
-﻿// Generated at: 4/20/2021 11:36:55 AM
+﻿// Generated at: 4/27/2021 3:59:39 PM
 var _language_zh_TW = {
 AA:"客客",
 AbnormalBet:"非正規註單",
@@ -453,6 +453,7 @@ ProductCC:"樂卡迪亞",
 ProductCO:"即時兌現",
 ProductCS:"娛樂城",
 ProductGDG:"GDG",
+ProductHB:"HB電子",
 ProductKN:"快樂彩",
 ProductNG:"百練賽",
 ProductParlay:"體育串關",

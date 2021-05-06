@@ -1,4 +1,4 @@
-﻿// Generated at: 4/20/2021 11:37:05 AM
+﻿// Generated at: 4/27/2021 3:59:46 PM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -608,6 +608,7 @@ ProductCS:"RNG Casino",
 ProductFW:"Fishing World",
 ProductGD:"Gold Deluxe",
 ProductGDG:"GDG",
+ProductHB:"Habanero",
 ProductI4D:"Togel 4D",
 ProductJK:"Joker",
 ProductKN:"RNG Keno",
