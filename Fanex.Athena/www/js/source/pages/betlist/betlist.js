@@ -630,7 +630,7 @@
                     _me.viewSportsLotteryResult(custid, transdecs, defaultPlatform, title);
                 }
                 else if (sporttype === SPORT_HB) {
-                    _me.viewHabaneroResult(custid, transdecs, extension2, league, title);
+                    _me.viewHabaneroResult(custid, transdecs, extension2, extension1, title);
                 }
                 else {
                     const numberBettype = Number(bettype);

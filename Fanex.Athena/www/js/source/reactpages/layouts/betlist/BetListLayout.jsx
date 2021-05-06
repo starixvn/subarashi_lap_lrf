@@ -93,7 +93,7 @@ class BetListLayout extends Component {
                 this._showThirdPartyResult(url, title);
             }
             else if (sporttype === SportType.HB) {
-                const url = BetList.getHabaneroResultUrl(rootUrl, custid, transdecs, extension2, league);
+                const url = BetList.getHabaneroResultUrl(rootUrl, custid, transdecs, extension2, extension1);
                 this._showThirdPartyResult(url, title);
             }
             else {
