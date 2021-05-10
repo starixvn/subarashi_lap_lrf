@@ -22,7 +22,7 @@ namespace Fanex.Athena.Controllers.BetList
     [FunctionAuthorization(PermissionKeys.ReportCustomerPendingFunds)]
     public class PendingFundsBetListController : BetListBaseController
     {
-        private const int ExpandedYears = 10;
+        private const int ExpandedYears = 1;
 
         private static readonly int[] HiddenColList =
             new[] { ExternalIdColumn, SystemIdColumn, WinLostColumn, BetEffectiveColumn, LicenseeWLColumn };
