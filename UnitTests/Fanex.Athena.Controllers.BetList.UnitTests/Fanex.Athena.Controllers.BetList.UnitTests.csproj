@@ -89,6 +89,7 @@
     <Compile Include="HabaneroBetListControllerTest.cs" />
     <Compile Include="SabaClubJackpotWonBetListControllerTest.cs" />
     <Compile Include="JackpotWonBetListControllerTest .cs" />
+    <Compile Include="GodOfFortuneWinLossBetListControllerTest.cs" />
     <Compile Include="SabaVirtualSportsWinLossBetListControllerTest.cs" />
     <Compile Include="JokerBetListControllerTest.cs" />
     <Compile Include="SAGamingBetListControllerTest.cs" />

@@ -644,5 +644,14 @@ namespace Fanex.Athena.Resources {
                 return ResourceManager.GetString("Menu_9", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to God of Fortune Win Loss.
+        /// </summary>
+        public static string Menu_90 {
+            get {
+                return ResourceManager.GetString("Menu_90", resourceCulture);
+            }
+        }
     }
 }

@@ -96,6 +96,7 @@
     <Compile Include="GDGBetListControllerTest.cs" />
     <Compile Include="JackpotWonBetListControllerTest.cs" />
     <Compile Include="LastBetMonitoringBetListControllerTest.cs" />
+    <Compile Include="GodOfFortuneWinLossBetListControllerTest.cs" />
     <Compile Include="LicenseeWinLossBetListControllerTest.cs" />
     <Compile Include="LiveReportBetListControllerTest.cs" />
     <Compile Include="MatchWinLossBetListControllerTest.cs" />

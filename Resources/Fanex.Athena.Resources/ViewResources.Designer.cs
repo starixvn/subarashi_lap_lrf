@@ -2257,6 +2257,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Discount Value.
+        /// </summary>
+        public static string DiscountValue {
+            get {
+                return ResourceManager.GetString("DiscountValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Don&apos;t show again.
         /// </summary>
         public static string Dontshowagain {
@@ -2937,6 +2946,15 @@ namespace Fanex.Athena.Resources {
         public static string Go {
             get {
                 return ResourceManager.GetString("Go", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to God of Fortune Win Loss.
+        /// </summary>
+        public static string GodOfFortuneWinLoss {
+            get {
+                return ResourceManager.GetString("GodOfFortuneWinLoss", resourceCulture);
             }
         }
         
