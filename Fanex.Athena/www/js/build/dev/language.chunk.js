@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 4/27/2021 3:59:46 PM
+﻿// Generated at: 5/11/2021 2:46:55 PM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -339,6 +339,7 @@ DisableMacau:"Disable Macau",
 DisableMacauGames:"Disable Macau Games",
 DisableProduct:"Disable {0}",
 DisableRNGCasino:"Disable RNG Casino",
+DiscountValue:"Discount Value",
 Dontshowagain:"Don&apos;t show again",
 DormantCustomers:"Dormant Customers",
 DoubleChance:"Double Chance",
@@ -415,6 +416,7 @@ GameTypeName:"Game Type Name",
 General:"General",
 GetAll:"Get All",
 Go:"Go",
+GodOfFortuneWinLoss:"God of Fortune Win Loss",
 GoldDeluxeNotOfferCurrency:"Gold Deluxe is not offered for this currency.",
 GoldDeluxeWinLoss:"Gold Deluxe Win Loss",
 GoldDeluxeWinLossGuidelineContent:"Any query before 4PM GMT-4 will return the data up to 4PM of the day before. You can filter data up to 3 months per query.",

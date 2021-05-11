@@ -1,4 +1,4 @@
-﻿// Generated at: 4/27/2021 3:59:46 PM
+﻿// Generated at: 5/11/2021 2:46:55 PM
 window._language_zh_TW = {
 AA:"客客",
 AbnormalBet:"非正規註單",
@@ -184,6 +184,7 @@ DetailTransaction:"交易紀錄",
 DH:"和主",
 DisableAgCasino:"Disable AG Casino",
 DisableRNGCasino:"停用娛樂城",
+DiscountValue:"折扣金額",
 Dontshowagain:"不再顯示",
 DoubleChance:"雙重機會",
 Draw:"和局",
@@ -237,6 +238,7 @@ GameType:"遊戲類型",
 GameTypeName:"遊戲類型名稱",
 General:"常規",
 Go:"開始",
+GodOfFortuneWinLoss:"財神爺輸贏",
 GoldDeluxeWinLossGuidelineContent:"在GMT-4下午4點之前的任何查詢將依據前一天下午4點的數據。您每次查詢可以過濾最多3個月內的數據。",
 GotoCustomerList:"轉至會員名單",
 GrandTotal:"累計",
