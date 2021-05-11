@@ -2968,4 +2968,7 @@
   <data name="Deposited" xml:space="preserve">
     <value>Deposited</value>
   </data>
+  <data name="ProductHB" xml:space="preserve">
+    <value>Habanero</value>
+  </data>
 </root>

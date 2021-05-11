@@ -92,6 +92,10 @@ class BetListLayout extends Component {
                 const url = BetList.getSportsLotteryResultUrl(rootUrl, custid, transdecs, defaultPlatform);
                 this._showThirdPartyResult(url, title);
             }
+            else if (sporttype === SportType.HB) {
+                const url = BetList.getHabaneroResultUrl(rootUrl, custid, transdecs, extension2, extension1);
+                this._showThirdPartyResult(url, title);
+            }
             else {
                 const url = BetList.getResultUrl(rootUrl, matchid, raceNo, bettype,
                     sporttype, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid);
@@ -314,6 +318,16 @@ class BetListLayout extends Component {
 
             this._openPopup(url, title);
         }
+
+        window.showHabaneroBetDetails = (transId, winlostDate, custId, transType) => {
+            const { rootUrl, baseCurrency } = this.props;
+
+            const url = BetList.getHabaneroDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
+            const title = this._getResource('ProductHB') + ' - ' +
+                this._getResource('DetailedBetlist') + ' - ' + this._formatDateString(winlostDate);
+
+            this._openPopup(url, title);
+        }
     }
 
     componentWillUnmount() {
@@ -341,6 +355,7 @@ class BetListLayout extends Component {
         window.showSabaClubDetails = undefined;
         window.showPGSoftDetails = undefined;
         window.showGDGBetDetails = undefined;
+        window.showHabaneroBetDetails = undefined;
     }
 
     _getResource(key) {

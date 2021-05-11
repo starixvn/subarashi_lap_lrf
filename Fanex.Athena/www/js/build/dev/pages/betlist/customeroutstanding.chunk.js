@@ -4586,6 +4586,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         const SPORT_HAPPY5LINKEDGAMES = 168;
         const SPORT_GDG = 236;
         const SPORT_SLT = 169;
+        const SPORT_HB = 238;
         const BETLIST_META_MODEL = '#BetListMetaModel';
 
         let _sortColumnName, _sortOrder;
@@ -5078,6 +5079,18 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 });
             },
 
+            viewHabaneroResult: function (custId, transId3rd, gameId3rd, siteId, title) {
+                const url = Site.resolveClientUrl('ResultReport/Habanero');
+                Site.blockUI();
+
+                $.get(url + '?custId=' + custId + '&transId3rd=' + transId3rd + '&gameId3rd=' + gameId3rd + '&siteId=' + siteId, function (result) {
+                    if (result !== '') {
+                        showResultPopUp(result, { width: 800, height: 380, title: title });
+                        Site.unBlockUI();
+                    }
+                });
+            },
+
             viewAllBetResult: function (trasdesc, betcheck, bettype, title) {
                 const url = Site.resolveClientUrl('ResultReport/AllBetResult?transdesc=' +
                     encodeURIComponent(trasdesc) + '&betcheck=' + betcheck + '&bettype=' + bettype);
@@ -5175,6 +5188,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 }
                 else if (sporttype === SPORT_SLT) {
                     _me.viewSportsLotteryResult(custid, transdecs, defaultPlatform, title);
+                }
+                else if (sporttype === SPORT_HB) {
+                    _me.viewHabaneroResult(custid, transdecs, extension2, extension1, title);
                 }
                 else {
                     const numberBettype = Number(bettype);
@@ -5567,6 +5583,20 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
                 showDetailPopUp(url, { width: 890, height: popH + 50, title: title });
             },
+            showHabaneroBetDetails: function (transId, winlostDate, custId, transType) {
+                let url = Site.resolveClientUrl('HabaneroBetList/Detail');
+                url = QueryString.setParam(url, 'transId', transId);
+                url = QueryString.setParam(url, 'date', winlostDate);
+                url = QueryString.setParam(url, 'custId', custId);
+                url = QueryString.setParam(url, 'transType', transType);
+                url = QueryString.setParam(url, 'BaseCurrency', getBaseCurrency());
+
+                const popH = Math.min($(window).height() - 100, 550);
+                const title = Site.getSingleResource('ProductHB') + ' - ' +
+                    Site.getSingleResource('DetailedBetlist') + ' - ' + moment(new Date(winlostDate)).format('MM/DD/YYYY');
+
+                showDetailPopUp(url, { width: 890, height: popH + 50, title: title });
+            },
             ValidProducts: function () {
                 let temp = true;
                 if ($('#ProductList').find('input:checked').length === 0) {
@@ -5659,6 +5689,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 window.showSAGamingDetails = _me.showSAGamingDetails;
                 window.showPGSoftDetails = _me.showPGSoftDetails;
                 window.showGDGBetDetails = _me.showGDGBetDetails;
+                window.showHabaneroBetDetails = _me.showHabaneroBetDetails;
 
                 const betList = {
                     ViewCasinoHandHistory: _me.ViewCasinoHandHistory
