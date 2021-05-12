@@ -161,6 +161,7 @@
     <Compile Include="Result\SportsLotteryResultReportController.cs" />
     <Compile Include="Result\ResultPopup\SportsLotteryResultPopupController.cs" />
     <Compile Include="Result\ResultPopup\Happy5LinkedGamesResultPopupController.cs" />
+    <Compile Include="GodOfFortuneWinLossReportController.cs" />
     <Compile Include="SabaVirtualSportsWinLossReportController.cs" />
     <Compile Include="LicenseeWinLossReportController.cs" />
     <Compile Include="LiveReportController.cs" />

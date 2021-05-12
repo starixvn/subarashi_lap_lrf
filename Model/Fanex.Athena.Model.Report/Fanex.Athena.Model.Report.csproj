@@ -136,6 +136,7 @@
     <Compile Include="DTO\ActiveCustomer.cs" />
     <Compile Include="DTO\AgCasinoBalance.cs" />
     <Compile Include="DTO\ColossusBetWinLoss.cs" />
+    <Compile Include="DTO\GodOfFortuneWinLoss.cs" />
     <Compile Include="DTO\SabaVirtualSportsWinLoss.cs" />
     <Compile Include="DTO\LicenseeWinLossByTimeZone.cs" />
     <Compile Include="DTO\Result\KenoExtendedToken.cs" />
@@ -172,6 +173,7 @@
     <Compile Include="MetaModel\BaseReportMetaModel.cs" />
     <Compile Include="MetaModel\ActiveCustomerMetaModel.cs" />
     <Compile Include="MetaModel\LicenseeWinLossByTimeZoneMetaModel.cs" />
+    <Compile Include="MetaModel\GodOfFortuneWinLossMetaModel.cs" />
     <Compile Include="MetaModel\SabaVirtualSportsWinLossMetaModel.cs" />
     <Compile Include="MetaModel\PromotionPrizeMetaModel.cs" />
     <Compile Include="MetaModel\Result\GetSportResultMetaModel.cs" />
@@ -207,6 +209,7 @@
     <Compile Include="ViewModel\ExchangeVoidedViewModel.cs" />
     <Compile Include="ViewModel\ExchangeWinLossViewModel.cs" />
     <Compile Include="ViewModel\SabaVirtualSportsWinLossGridViewModel .cs" />
+    <Compile Include="ViewModel\GodOfFortuneWinLossViewModel.cs" />
     <Compile Include="ViewModel\SabaVirtualSportsWinLossViewModel.cs" />
     <Compile Include="ViewModel\Result\ResultReportViewModel.cs" />
     <Compile Include="ViewModel\SpecialLicenseeWinLossGridViewModel.cs" />

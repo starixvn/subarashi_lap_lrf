@@ -2956,6 +2956,12 @@
     <value>Customer Class Spread Setting Policy</value>
     <comment>152372</comment>
   </data>
+  <data name="DiscountValue" xml:space="preserve">
+    <value>Discount Value</value>
+  </data>
+  <data name="GodOfFortuneWinLoss" xml:space="preserve">
+    <value>God of Fortune Win Loss</value>
+  </data>
   <data name="IPLogin" xml:space="preserve">
     <value>IP Login</value>
   </data>

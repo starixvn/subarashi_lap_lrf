@@ -2,6 +2,8 @@
 {
     public static class FunctionNames
     {
+        public const string GodOfFortuneWinLoss = "GodOfFortuneWinLoss";
+
         public const string SabaVirtualSportsWinLoss = "SabaVirtualSportsWinLoss";
 
         public const string CustomerBalance = "CustomerBalance";

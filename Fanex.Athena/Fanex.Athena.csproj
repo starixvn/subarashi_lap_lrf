@@ -295,6 +295,9 @@
     <Content Include="App_Data\UserGuide\ColossusBetsWL\en-US.htm" />
     <Content Include="App_Data\UserGuide\ColossusBetsWL\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\ColossusBetsWL\zh-TW.htm" />
+    <Content Include="App_Data\UserGuide\GodOfFortuneWL\en-US.htm" />
+    <Content Include="App_Data\UserGuide\GodOfFortuneWL\zh-CN.htm" />
+    <Content Include="App_Data\UserGuide\GodOfFortuneWL\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\SabaVirtualSportsWL\en-US.htm" />
     <Content Include="App_Data\UserGuide\SabaVirtualSportsWL\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\SabaVirtualSportsWL\zh-TW.htm" />
@@ -835,6 +838,8 @@
     <Content Include="www\css\build\dev\pages\components\fixedColumnsTable.css" />
     <Content Include="www\css\build\dev\pages\playercommission\index.chunk.js" />
     <Content Include="www\css\build\dev\pages\playercommission\index.css" />
+    <Content Include="www\css\build\dev\pages\reports\godoffortunewinLoss.chunk.js" />
+    <Content Include="www\css\build\dev\pages\reports\godoffortunewinLoss.css" />
     <Content Include="www\css\build\dev\pages\reports\sabavirtualsportswinloss.chunk.js" />
     <Content Include="www\css\build\dev\pages\reports\sabavirtualsportswinloss.css" />
     <Content Include="www\css\build\dev\reactpages\betlist\images\bonus.png" />
@@ -900,6 +905,7 @@
     <Content Include="www\css\build\pro\pages\customer\customerlist.chunk.js" />
     <Content Include="www\css\build\pro\pages\playercommission\index.chunk.js" />
     <Content Include="www\css\build\pro\pages\playercommission\index.css" />
+    <Content Include="www\css\build\pro\pages\reports\godoffortunewinLoss.css" />
     <Content Include="www\css\build\pro\pages\reports\sabavirtualsportswinloss.css" />
     <Content Include="www\css\build\pro\reactpages\betlist\images\bonus.png" />
     <Content Include="www\css\build\pro\reactpages\betlist\images\goal-icon.png" />
@@ -1032,7 +1038,13 @@
     <Content Include="Views\Desktop\Customer\BetSetting\SLT.cshtml" />
     <Content Include="Views\Desktop\Customer\CustomerClass\SettingPolicyTab.cshtml" />
     <Content Include="Views\Desktop\Customer\CustomerClass\SpreadSettingPolicyTab.cshtml" />
-    <Content Include="Views\Desktop\BetList\Habanero\Main.cshtml" />
+    <Content Include="Views\Desktop\Report\GodOfFortuneWinLoss\Content.cshtml" />
+    <Content Include="Views\Desktop\Report\GodOfFortuneWinLoss\Filter.cshtml" />
+    <Content Include="Views\Desktop\Report\GodOfFortuneWinLoss\Main.cshtml" />
+    <Content Include="www\css\source\pages\report\godoffortunewinLoss.scss" />
+    <Content Include="Views\Desktop\BetList\GodOfFortuneWl\Main.cshtml" />
+    <Content Include="www\css\build\dev\pages\reports\godoffortunewinLoss.chunk.js.map" />
+    <Content Include="www\css\build\dev\pages\reports\godoffortunewinLoss.css.map" />
     <None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
     <None Include="www\css\source\pages\betlist\result\result.happy5.scss" />
     <None Include="www\css\source\reactpages\components\alert\icons\error.scss" />
@@ -1056,6 +1068,7 @@
     <Content Include="www\js\build\dev\pages\playercommission\singlemovegroup.chunk.js" />
     <Content Include="www\js\build\dev\pages\playercommission\singleremovefromgroup.chunk.js" />
     <Content Include="www\js\build\dev\pages\playercommission\singleupdategroup.chunk.js" />
+    <Content Include="www\js\build\dev\pages\reports\godoffortunewinLoss.chunk.js" />
     <Content Include="www\js\build\dev\pages\reports\sabavirtualsportswinloss.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\bettingticketscenter\advancedsearch.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\bettingticketscenter\refno.chunk.js" />
@@ -1103,6 +1116,7 @@
     <Content Include="www\js\build\pro\pages\playercommission\singlemovegroup.chunk.js" />
     <Content Include="www\js\build\pro\pages\playercommission\singleremovefromgroup.chunk.js" />
     <Content Include="www\js\build\pro\pages\playercommission\singleupdategroup.chunk.js" />
+    <Content Include="www\js\build\pro\pages\reports\godoffortunewinLoss.chunk.js" />
     <Content Include="www\js\build\pro\pages\reports\sabavirtualsportswinloss.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\bettingticketscenter\advancedsearch.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\bettingticketscenter\refno.chunk.js" />
@@ -1157,6 +1171,9 @@
     <Content Include="www\js\source\pages\playercommission\singlemovegroup.js" />
     <Content Include="www\js\source\pages\playercommission\multipleupdategroup.js" />
     <Content Include="www\js\source\pages\playercommission\multiplemovegroup.js" />
+    <Content Include="www\js\source\pages\report\godoffortunewinloss\main.js" />
+    <Content Include="www\js\source\pages\report\godoffortunewinloss\godoffortunewinloss.js" />
+    <Content Include="www\js\source\pages\report\godoffortunewinloss\godoffortunewinloss.option.js" />
     <Content Include="www\js\source\pages\report\sabavirtualsportswinloss\sabavirtualsportswinloss.js" />
     <Content Include="www\js\source\pages\report\sabavirtualsportswinloss\sabavirtualsportswinloss.option.js" />
     <Content Include="www\js\source\pages\report\sabavirtualsportswinloss\main.js" />
@@ -3214,6 +3231,7 @@
     <Content Include="www\js\build\dev\pages\playercommission\singleremovefromgroup.chunk.js.map" />
     <Content Include="www\js\build\dev\pages\playercommission\singleupdategroup.chunk.js.map" />
     <Content Include="www\js\build\dev\pages\reports\sabavirtualsportswinloss.chunk.js.map" />
+    <Content Include="www\js\build\dev\pages\reports\godoffortunewinLoss.chunk.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SiteConfig\WebConfigTransforms\SIT.config">

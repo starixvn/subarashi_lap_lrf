@@ -2138,4 +2138,10 @@
   <data name="ProductHB" xml:space="preserve">
     <value>HB電子</value>
   </data>
+  <data name="DiscountValue" xml:space="preserve">
+    <value>折扣金額</value>
+  </data>
+  <data name="GodOfFortuneWinLoss" xml:space="preserve">
+    <value>財神爺輸贏</value>
+  </data>
 </root>

@@ -148,7 +148,7 @@
 /******/
 /******/
 /******/ 	// add entry module to deferred list
-/******/ 	deferredModules.push([38,"www/js/build/dev/pages/lib/common","www/js/build/dev/pages/lib/jqgrid"]);
+/******/ 	deferredModules.push([39,"www/js/build/dev/pages/lib/common","www/js/build/dev/pages/lib/jqgrid"]);
 /******/ 	// run deferred modules when ready
 /******/ 	return checkDeferredModules();
 /******/ })
@@ -164,7 +164,7 @@
 
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js?fe57")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($) {
     let $blockBody;
     
     const _methods = {
@@ -292,7 +292,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js"), __webpack_require__(/*! common/querystring */ "./www/js/source/common/querystring.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, Site, QueryString) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js?fe57"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js"), __webpack_require__(/*! common/querystring */ "./www/js/source/common/querystring.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, Site, QueryString) {
     const me = {};
     const _settings = {}; // store multi setting instances by 'elementcontainer' as key
 
@@ -483,7 +483,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿// require option properties: suggestionDropdown, url, target
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js"), __webpack_require__(/*! vendor-materialize */ "./www/js/source/vendors/materialize/materialize.js"), __webpack_require__(/*! materialize-autocomplete */ "./node_modules/materialize-autocomplete/jquery.materialize-autocomplete.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, Site) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js?fe57"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js"), __webpack_require__(/*! vendor-materialize */ "./www/js/source/vendors/materialize/materialize.js"), __webpack_require__(/*! materialize-autocomplete */ "./node_modules/materialize-autocomplete/jquery.materialize-autocomplete.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, Site) {
     'use strict';
 
     const mainOption = {
@@ -586,7 +586,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿// require op
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($) {
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js?fe57")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($) {
     'use strict';
 
     const CONTAINER_SELECTOR = '.select-list-container';
@@ -1151,7 +1151,7 @@ jQuery.extend({
         return formatted;
     }
 });
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed")))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js?fe57")))
 
 /***/ }),
 
@@ -4843,7 +4843,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! bignumber.js v2.4.0 https://github.com/Mik
 
 })(jQuery);
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed")))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js?fe57")))
 
 /***/ }),
 
@@ -4856,7 +4856,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! bignumber.js v2.4.0 https://github.com/Mik
 
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js"), __webpack_require__(/*! ./customerlist.state */ "./www/js/source/pages/customer/customerlist/customerlist.state.js"), __webpack_require__(/*! ./customerlist.service */ "./www/js/source/pages/customer/customerlist/customerlist.service.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, Site, CustomerListState, CustomerListService) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js?fe57"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js"), __webpack_require__(/*! ./customerlist.state */ "./www/js/source/pages/customer/customerlist/customerlist.state.js"), __webpack_require__(/*! ./customerlist.service */ "./www/js/source/pages/customer/customerlist/customerlist.service.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, Site, CustomerListState, CustomerListService) {
     let _state;
 
     const _me = {
@@ -4935,7 +4935,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js"), __webpack_require__(/*! lib/jqgrid/jquery.jqgrid.additional */ "./www/js/source/lib/jqgrid/jquery.jqgrid.additional.js"), __webpack_require__(/*! common/popup */ "./www/js/source/common/popup.js"), __webpack_require__(/*! ./customerlist.state */ "./www/js/source/pages/customer/customerlist/customerlist.state.js"), __webpack_require__(/*! ./customerlist.grid */ "./www/js/source/pages/customer/customerlist/customerlist.grid.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, Site, jqGridAdditional, Popup, CustomerListState, CustomerListGrid) {
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js?fe57"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js"), __webpack_require__(/*! lib/jqgrid/jquery.jqgrid.additional */ "./www/js/source/lib/jqgrid/jquery.jqgrid.additional.js"), __webpack_require__(/*! common/popup */ "./www/js/source/common/popup.js"), __webpack_require__(/*! ./customerlist.state */ "./www/js/source/pages/customer/customerlist/customerlist.state.js"), __webpack_require__(/*! ./customerlist.grid */ "./www/js/source/pages/customer/customerlist/customerlist.grid.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, Site, jqGridAdditional, Popup, CustomerListState, CustomerListGrid) {
         'use strict';
 
         let _state;
@@ -5373,7 +5373,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js"), __webpack_require__(/*! common/querystring */ "./www/js/source/common/querystring.js"), __webpack_require__(/*! common/popup */ "./www/js/source/common/popup.js"), __webpack_require__(/*! ./customerlist.service */ "./www/js/source/pages/customer/customerlist/customerlist.service.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, Site, QueryString, Popup, CustomerListService) {
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js?fe57"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js"), __webpack_require__(/*! common/querystring */ "./www/js/source/common/querystring.js"), __webpack_require__(/*! common/popup */ "./www/js/source/common/popup.js"), __webpack_require__(/*! ./customerlist.service */ "./www/js/source/pages/customer/customerlist/customerlist.service.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, Site, QueryString, Popup, CustomerListService) {
         'use strict';
 
         const OPTIONLIST_SELECTOR = '#ViewOptionList';
@@ -5496,7 +5496,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/* This column only view in licensee HAIFA */
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, Site) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js?fe57"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, Site) {
     const _me = {
         initialize: function () {
             _me.initEvent();
@@ -5649,7 +5649,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/* This colum
 
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js"), __webpack_require__(/*! ./customerlist.state */ "./www/js/source/pages/customer/customerlist/customerlist.state.js"), __webpack_require__(/*! ./customerlist.service */ "./www/js/source/pages/customer/customerlist/customerlist.service.js"), __webpack_require__(/*! ./customerlist.service.dormant */ "./www/js/source/pages/customer/customerlist/customerlist.service.dormant.js"),
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js?fe57"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js"), __webpack_require__(/*! ./customerlist.state */ "./www/js/source/pages/customer/customerlist/customerlist.state.js"), __webpack_require__(/*! ./customerlist.service */ "./www/js/source/pages/customer/customerlist/customerlist.service.js"), __webpack_require__(/*! ./customerlist.service.dormant */ "./www/js/source/pages/customer/customerlist/customerlist.service.dormant.js"),
     __webpack_require__(/*! components/pluginhelper/autocomplete */ "./www/js/source/components/pluginhelper/autocomplete.js"), __webpack_require__(/*! lib/jquery.multiselect.nlevel */ "./www/js/source/lib/jquery.multiselect.nlevel.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, Site, CustomerListState, CustomerListService, CustomerListServiceDormant, AutoComplete) {
         let _state;
         let _dormantState;
@@ -5867,7 +5867,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-    __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed"),
+    __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js?fe57"),
     __webpack_require__(/*! common/site */ "./www/js/source/common/site.js"),
     __webpack_require__(/*! common/querystring */ "./www/js/source/common/querystring.js"),
     __webpack_require__(/*! ./customerlist.state */ "./www/js/source/pages/customer/customerlist/customerlist.state.js"),
@@ -6065,7 +6065,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, Site) {
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js?fe57"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, Site) {
         'use strict';
 
         const externalIdColumn =
@@ -6175,7 +6175,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js"), __webpack_require__(/*! lib/jqgrid/jquery.jqgrid.additional */ "./www/js/source/lib/jqgrid/jquery.jqgrid.additional.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, Site, jqGridAdditional) {
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js?fe57"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js"), __webpack_require__(/*! lib/jqgrid/jquery.jqgrid.additional */ "./www/js/source/lib/jqgrid/jquery.jqgrid.additional.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, Site, jqGridAdditional) {
         'use strict';
 
         const groupColumn =
@@ -6476,7 +6476,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js"), __webpack_require__(/*! ./customerlist.service */ "./www/js/source/pages/customer/customerlist/customerlist.service.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, Site, CustomerListService) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js?fe57"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js"), __webpack_require__(/*! ./customerlist.service */ "./www/js/source/pages/customer/customerlist/customerlist.service.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, Site, CustomerListService) {
     let _$oddsGroupCell;
 
     const _me = {
@@ -6544,7 +6544,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js"), __webpack_require__(/*! ./customerlist.gridoption.dormant */ "./www/js/source/pages/customer/customerlist/customerlist.gridoption.dormant.js"), __webpack_require__(/*! lib/jqgrid/jquery.jqgrid.additional */ "./www/js/source/lib/jqgrid/jquery.jqgrid.additional.js"),
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js?fe57"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js"), __webpack_require__(/*! ./customerlist.gridoption.dormant */ "./www/js/source/pages/customer/customerlist/customerlist.gridoption.dormant.js"), __webpack_require__(/*! lib/jqgrid/jquery.jqgrid.additional */ "./www/js/source/lib/jqgrid/jquery.jqgrid.additional.js"),
     __webpack_require__(/*! components/paging */ "./www/js/source/components/paging.js"), __webpack_require__(/*! ./customerlist.state */ "./www/js/source/pages/customer/customerlist/customerlist.state.js"), __webpack_require__(/*! lib/jqgrid/jquery.jqGrid.en */ "./www/js/source/lib/jqgrid/jquery.jqGrid.en.js"), __webpack_require__(/*! lib/jqgrid/jquery.jqGrid.min */ "./www/js/source/lib/jqgrid/jquery.jqGrid.min.js"), __webpack_require__(/*! extensions/jquery.extension */ "./www/js/source/extensions/jquery.extension.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, Site, CustomerListOptionDormant, jqGridAdditional, PagingHelper, CustomerListState) {
     let _ajaxRequest = null;
 
@@ -6684,7 +6684,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed"),
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js?fe57"),
     __webpack_require__(/*! common/site */ "./www/js/source/common/site.js"),
     __webpack_require__(/*! ./customerlist.gridoption */ "./www/js/source/pages/customer/customerlist/customerlist.gridoption.js"),
     __webpack_require__(/*! lib/jqgrid/jquery.jqgrid.additional */ "./www/js/source/lib/jqgrid/jquery.jqgrid.additional.js"),
@@ -7031,7 +7031,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js"), __webpack_require__(/*! ./customerlist.state */ "./www/js/source/pages/customer/customerlist/customerlist.state.js"), __webpack_require__(/*! ./customerlist.service */ "./www/js/source/pages/customer/customerlist/customerlist.service.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, Site, CustomerListState, CustomerListService) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js?fe57"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js"), __webpack_require__(/*! ./customerlist.state */ "./www/js/source/pages/customer/customerlist/customerlist.state.js"), __webpack_require__(/*! ./customerlist.service */ "./www/js/source/pages/customer/customerlist/customerlist.service.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, Site, CustomerListState, CustomerListService) {
     let _$specialLevelCell = null;
     
     const _me = {
@@ -7149,7 +7149,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js"), __webpack_require__(/*! common/querystring */ "./www/js/source/common/querystring.js"), __webpack_require__(/*! lib/jqgrid/jquery.jqgrid.additional */ "./www/js/source/lib/jqgrid/jquery.jqgrid.additional.js"), __webpack_require__(/*! ./customerlist.filter */ "./www/js/source/pages/customer/customerlist/customerlist.filter.js"), __webpack_require__(/*! ./customerlist.grid */ "./www/js/source/pages/customer/customerlist/customerlist.grid.js"),
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js?fe57"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js"), __webpack_require__(/*! common/querystring */ "./www/js/source/common/querystring.js"), __webpack_require__(/*! lib/jqgrid/jquery.jqgrid.additional */ "./www/js/source/lib/jqgrid/jquery.jqgrid.additional.js"), __webpack_require__(/*! ./customerlist.filter */ "./www/js/source/pages/customer/customerlist/customerlist.filter.js"), __webpack_require__(/*! ./customerlist.grid */ "./www/js/source/pages/customer/customerlist/customerlist.grid.js"),
     __webpack_require__(/*! ./customerlist.service */ "./www/js/source/pages/customer/customerlist/customerlist.service.js"), __webpack_require__(/*! ./customerlist.service.dormant */ "./www/js/source/pages/customer/customerlist/customerlist.service.dormant.js"), __webpack_require__(/*! ./customerlist.commision */ "./www/js/source/pages/customer/customerlist/customerlist.commision.js"), __webpack_require__(/*! ./customerlist.custoption */ "./www/js/source/pages/customer/customerlist/customerlist.custoption.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, Site, QueryString, jqGridAdditional, CustomerListFilter, CustomerListGrid,
         CustomerListService, CustomerListServiceDormant, CustomerComm, CustomerListViewOption) {
 
@@ -7196,7 +7196,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 
 /***/ }),
 
-/***/ 38:
+/***/ 39:
 /*!*****************************************************************!*\
   !*** multi ./www/js/source/pages/customer/customerlist/main.js ***!
   \*****************************************************************/

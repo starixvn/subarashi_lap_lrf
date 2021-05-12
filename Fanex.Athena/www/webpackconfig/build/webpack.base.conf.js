@@ -31,6 +31,7 @@ function generateConfig(environment) {
             [`${jsPath}/pages/reports/livereportmatchlist`]: [pathConfig.scriptPaths.livereportmatchlist],
             [`${jsPath}/pages/reports/licenseewinloss`]: [pathConfig.scriptPaths.licenseewinloss],
             [`${jsPath}/pages/reports/sabavirtualsportswinloss`]: [pathConfig.scriptPaths.sabavirtualsportswinloss],
+            [`${jsPath}/pages/reports/godoffortunewinloss`]: [pathConfig.scriptPaths.godoffortunewinloss],
             [`${jsPath}/pages/betlist/betlist`]: [pathConfig.scriptPaths.betlist],
             [`${jsPath}/pages/betlist/betlistsimple`]: [pathConfig.scriptPaths.betlistsimple],
             [`${jsPath}/pages/betlist/betlistrunning`]: [pathConfig.scriptPaths.betlistrunning],
@@ -94,6 +95,7 @@ function generateConfig(environment) {
             [`${cssPath}/pages/login/login`]: pathConfig.cssPaths.login,
             [`${cssPath}/pages/reports/licenseewinloss`]: pathConfig.cssPaths.licenseewinloss,
             [`${cssPath}/pages/reports/sabavirtualsportswinloss`]: pathConfig.cssPaths.sabavirtualsportswinloss,
+            [`${cssPath}/pages/reports/godoffortunewinloss`]: pathConfig.cssPaths.godoffortunewinloss,
 
             [`${cssPath}/pages/betlist/betlistLayout`]: pathConfig.cssPaths.betlistLayout,
             [`${cssPath}/pages/betlist/betlistSimpleLayout`]: pathConfig.cssPaths.betlistSimpleLayout,

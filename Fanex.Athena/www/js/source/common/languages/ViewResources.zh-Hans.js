@@ -1,4 +1,4 @@
-﻿// Generated at: 4/27/2021 3:59:46 PM
+﻿// Generated at: 5/11/2021 2:46:55 PM
 window._language_zh_Hans = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -182,6 +182,7 @@ DetailTransaction:"交易纪录",
 DH:"和主",
 DisableAgCasino:"Disable AG Casino",
 DisableRNGCasino:"停用娱乐城",
+DiscountValue:"折扣金额",
 Dontshowagain:"不再显示",
 DoubleChance:"双重机会",
 Draw:"和局",
@@ -238,6 +239,7 @@ GameType:"游戏类型",
 GameTypeName:"游戏类型名称",
 General:"常规",
 Go:"开始",
+GodOfFortuneWinLoss:"财神爷输赢",
 GotoCustomerList:"转至会员名单",
 GrandTotal:"累计",
 Group:"组",

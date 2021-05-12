@@ -1,4 +1,4 @@
-﻿// Generated at: 4/27/2021 3:59:39 PM
+﻿// Generated at: 5/11/2021 2:46:49 PM
 var _language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -217,6 +217,7 @@ DetailTransaction:"交易纪录",
 DH:"和主",
 DisableAgCasino:"Disable AG Casino",
 DisableRNGCasino:"停用娱乐城",
+DiscountValue:"折扣金额",
 Dontshowagain:"不再显示",
 DormantCustomers:"閑置玩家",
 DoubleChance:"双重机会",
@@ -280,6 +281,7 @@ GameTypeName:"游戏类型名称",
 General:"常规",
 GetAll:"全选",
 Go:"开始",
+GodOfFortuneWinLoss:"财神爷输赢",
 GoldDeluxeWinLoss:"GD真人娱乐场输赢",
 GoldDeluxeWinLossGuidelineContent:"在GMT-4下午4点之前的任何查询将依据前一天下午4点的数据。您每次查询可以过滤最多3个月内的数据。",
 GotoCustomerList:"转至会员名单",

@@ -11,6 +11,11 @@
     "LimitRecentMonths": 12
   },
   {
+    "ReportKey": "GodOfFortuneWinLoss",
+    "MinDateString": "01/25/2021",
+    "MaxDateString": "today"
+  },
+  {
     "ReportKey": "ExchangeWinloss77",
     "MinDateString": "",
     "MaxDateString": ""
