@@ -347,6 +347,17 @@ class BetList {
 
         return url;
     }
+    
+    getWMDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
+        let url = rootUrl + 'WMBetList/Detail';
+        url = QueryString.setParam(url, 'transId', transId);
+        url = QueryString.setParam(url, 'date', winlostDate);
+        url = QueryString.setParam(url, 'custId', custId);
+        url = QueryString.setParam(url, 'transType', transType);
+        url = QueryString.setParam(url, 'BaseCurrency', baseCurrency);
+
+        return url;
+    }
 
     getRngCasinoResultUrl(rootUrl) {
         return rootUrl + 'ResultReport/ShowRngCasinoSingleWalletResult';
@@ -492,6 +503,14 @@ class BetList {
         url = QueryString.setParam(url, 'transId3rd', transId3rd);
         url = QueryString.setParam(url, 'gameId3rd', gameId3rd);
         url = QueryString.setParam(url, 'siteId', siteId);
+
+        return url;
+    }
+    getWMResultUrl(rootUrl, transDesc, gameId3rd, bettype) {
+        let url = rootUrl + 'ResultReport/WM';
+        url = QueryString.setParam(url, 'gameId3rd', gameId3rd);
+        url = QueryString.setParam(url, 'bettype', bettype);
+        url = QueryString.setParam(url, 'transdesc', encodeURIComponent(transDesc));
 
         return url;
     }

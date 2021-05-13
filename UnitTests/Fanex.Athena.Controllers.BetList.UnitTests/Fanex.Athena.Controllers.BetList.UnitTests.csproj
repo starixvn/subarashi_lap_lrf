@@ -93,6 +93,7 @@
     <Compile Include="SabaVirtualSportsWinLossBetListControllerTest.cs" />
     <Compile Include="JokerBetListControllerTest.cs" />
     <Compile Include="SAGamingBetListControllerTest.cs" />
+    <Compile Include="WMBetListControllerTest.cs" />
     <Compile Include="SexyGamingBetListControllerTest.cs" />
     <Compile Include="GDGBetListControllerTest.cs" />
     <Compile Include="AllBetBetListControllerTest.cs" />

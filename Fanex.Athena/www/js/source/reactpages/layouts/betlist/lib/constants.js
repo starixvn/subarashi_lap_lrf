@@ -27,5 +27,5 @@ export const SportType = {
     Happy5LinkedGames: 168,
     GDG: 236,
     SLT: 169,
-    HB: 238
+    WM: 233
 }

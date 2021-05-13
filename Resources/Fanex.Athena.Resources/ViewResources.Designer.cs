@@ -5794,6 +5794,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to WM.
+        /// </summary>
+        public static string ProductWM {
+            get {
+                return ResourceManager.GetString("ProductWM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Promotion.
         /// </summary>
         public static string Promotion {

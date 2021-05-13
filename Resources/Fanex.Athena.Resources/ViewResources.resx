@@ -2987,4 +2987,7 @@
   <data name="PlayerBettingStatisticsTitle" xml:space="preserve">
     <value>Player Betting Statistics (month to date)</value>
   </data>
+  <data name="ProductWM" xml:space="preserve">
+    <value>WM</value>
+  </data>
 </root>

@@ -164,6 +164,7 @@
     <Compile Include="PGSoftBetListController.cs" />
     <Compile Include="JokerBetListController.cs" />
     <Compile Include="GDGBetListController.cs" />
+    <Compile Include="WMBetListController.cs" />
     <Compile Include="SexyGamingBetListController.cs" />
     <Compile Include="SAGamingBetListController.cs" />
     <Compile Include="SabaClubBetListController.cs" />

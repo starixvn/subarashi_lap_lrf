@@ -276,6 +276,23 @@
             return await _betListApiClient.PostStringAsync("/HabaneroResultPopup/Index",
                model, language).ConfigureAwait(false);
         }
+        
+        [HttpGet]
+        public async Task<ActionResult> WM(string transDesc, string gameId3rd, int betType)
+        {
+            var language = SessionServiceInstance.UserSession.Language;
+            var model = new
+            {
+                transDesc,
+                gameId3rd,
+                betType,
+                languageCode = language
+            };
+
+            var data = await _betListApiClient.PostStringAsync("/WMResultPopup/Index", model, language).ConfigureAwait(false);
+            ViewBag.Data = data.Replace("{rootUrl}", HttpRuntime.AppDomainAppVirtualPath.TrimEnd('/'));
+            return View("~/Views/Desktop/Report/Result/Popup/WM.cshtml");
+        }
 
         [HttpGet]
         public async Task<string> GlobalGamingResult(string custId, string gameId)
