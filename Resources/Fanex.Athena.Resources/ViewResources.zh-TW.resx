@@ -231,7 +231,7 @@
     <value>BA 狀態</value>
   </data>
   <data name="BAUpdatedBy" xml:space="preserve">
-    <value>投注總計跟新由</value>
+    <value>BA更新帐号</value>
   </data>
   <data name="BetCount" xml:space="preserve">
     <value>投注數</value>
@@ -745,7 +745,7 @@
     <value>最後交易</value>
   </data>
   <data name="LastUpdatedBA" xml:space="preserve">
-    <value>投注總計最後更新</value>
+    <value>最近一次更新BA</value>
   </data>
   <data name="LastUpdatedMsg" xml:space="preserve">
     <value>最近更新的特殊級別</value>
@@ -838,7 +838,7 @@
     <value>三月</value>
   </data>
   <data name="Margin" xml:space="preserve">
-    <value>利潤</value>
+    <value>杀数</value>
   </data>
   <data name="Match" xml:space="preserve">
     <value>賽事</value>
@@ -2137,6 +2137,9 @@
   </data>
   <data name="ProductHB" xml:space="preserve">
     <value>HB電子</value>
+  </data>
+  <data name="PlayerBettingStatisticsTitle" xml:space="preserve">
+    <value>玩家投注统计(本月至今)</value>
   </data>
   <data name="DiscountValue" xml:space="preserve">
     <value>折扣金額</value>

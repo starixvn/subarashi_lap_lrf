@@ -251,21 +251,21 @@
             return new Dictionary<int, string>
             {
                 { 0, ViewResources.All },
-                { PlatformType.Asia, ViewResources.Asia },
-                { PlatformType.China, ViewResources.China },
-                { PlatformType.Euro, ViewResources.Euro },
-                { PlatformType.Wap, ViewResources.Wap },
-                { PlatformType.Mobile, ViewResources.Mobile },
-                { PlatformType.Tablet, ViewResources.Tablet },
-                { PlatformType.NewAsia, ViewResources.NewAsia },
-                { PlatformType.MobileApp, ViewResources.MobileApp },
-                { PlatformType.MobileLiteVersion, ViewResources.MobileLiteVersion },
-                { PlatformType.DeepLink, ViewResources.DeepLink },
-                { PlatformType.NativeApp, ViewResources.NativeApp },
+                { PlatformType.DesktopNewAsia, ViewResources.DesktopNewAsia },
+                { PlatformType.DesktopChina, ViewResources.DesktopChina },
+                { PlatformType.DesktopOthers, ViewResources.DesktopOthers },
+                { PlatformType.MobileStandard, ViewResources.MobileStandard },
+                { PlatformType.MobileEuro, ViewResources.MobileEuro },
+                { PlatformType.MobileCompact, ViewResources.MobileCompact },
+                { PlatformType.MobileOthers, ViewResources.MobileOthers },
                 { PlatformType.ESportsDesktop, ViewResources.ESportsDesktop },
                 { PlatformType.ESportsMobile, ViewResources.ESportsMobile },
                 { PlatformType.ESportsApp, ViewResources.ESportsApp },
-                { PlatformType.MobileEuro, ViewResources.MobileEuro },
+                { PlatformType.MobileApp, ViewResources.MobileApp },
+                { PlatformType.NativeApp, ViewResources.NativeApp },
+                { PlatformType.Tablet, ViewResources.Tablet },
+                { PlatformType.DeepLink, ViewResources.DeepLink },
+                { PlatformType.WAP, ViewResources.Wap },
                 { PlatformType.BetfromOthers, ViewResources.BetfromOthers }
             };
         }
