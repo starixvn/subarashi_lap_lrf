@@ -2147,4 +2147,7 @@
   <data name="GodOfFortuneWinLoss" xml:space="preserve">
     <value>財神爺輸贏</value>
   </data>
+  <data name="ProductWM" xml:space="preserve">
+    <value>完美真人</value>
+  </data>
 </root>

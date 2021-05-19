@@ -27,6 +27,7 @@
         const SPORT_GDG = 236;
         const SPORT_SLT = 169;
         const SPORT_HB = 238;
+        const SPORT_WM = 233;
         const BETLIST_META_MODEL = '#BetListMetaModel';
 
         let _sortColumnName, _sortOrder;
@@ -576,6 +577,14 @@
                     }
                 });
             },
+            viewWMResult: function (transdesc, gameId3rd, bettype, title) {
+                const url = Site.resolveClientUrl('ResultReport/WM?transdesc=' +
+                    encodeURIComponent(transdesc) + '&gameId3rd=' + gameId3rd + '&bettype=' + bettype);
+
+                Site.blockUI();
+                showResultPopUp(url, { width: 800, height: 380, title: title });
+                Site.unBlockUI();
+            },
             viewResult: function (matchid, raceNo, bettype, sporttype, refno,
                 username, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid, transdecs) {
                 const title = Site.getSingleResource('Result');
@@ -631,6 +640,9 @@
                 }
                 else if (sporttype === SPORT_HB) {
                     _me.viewHabaneroResult(custid, transdecs, extension2, extension1, title);
+                }
+                else if (sporttype === SPORT_WM) {
+                    _me.viewWMResult(transdecs, extension2, bettype, title);
                 }
                 else {
                     const numberBettype = Number(bettype);
@@ -1037,6 +1049,20 @@
 
                 showDetailPopUp(url, { width: 890, height: popH + 50, title: title });
             },
+            showWMBetDetails: function (transId, winlostDate, custId, transType) {
+                let url = Site.resolveClientUrl('WMBetList/Detail');
+                url = QueryString.setParam(url, 'transId', transId);
+                url = QueryString.setParam(url, 'date', winlostDate);
+                url = QueryString.setParam(url, 'custId', custId);
+                url = QueryString.setParam(url, 'transType', transType);
+                url = QueryString.setParam(url, 'BaseCurrency', getBaseCurrency());
+
+                const popH = Math.min($(window).height() - 100, 550);
+                const title = Site.getSingleResource('ProductWM') + ' - ' +
+                    Site.getSingleResource('DetailedBetlist') + ' - ' + moment(new Date(winlostDate)).format('MM/DD/YYYY');
+
+                showDetailPopUp(url, { width: 890, height: popH + 50, title: title });
+            },
             ValidProducts: function () {
                 let temp = true;
                 if ($('#ProductList').find('input:checked').length === 0) {
@@ -1130,6 +1156,7 @@
                 window.showPGSoftDetails = _me.showPGSoftDetails;
                 window.showGDGBetDetails = _me.showGDGBetDetails;
                 window.showHabaneroBetDetails = _me.showHabaneroBetDetails;
+                window.showWMBetDetails = _me.showWMBetDetails;
 
                 const betList = {
                     ViewCasinoHandHistory: _me.ViewCasinoHandHistory

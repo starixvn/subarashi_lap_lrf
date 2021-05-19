@@ -1,4 +1,4 @@
-﻿// Generated at: 5/11/2021 2:46:55 PM
+﻿// Generated at: 5/13/2021 9:37:40 AM
 window._language_zh_Hans = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -471,6 +471,7 @@ ProductSXG:"AE性感真人",
 ProductVRG:"虚拟娱乐城",
 ProductVS:"虚拟运动",
 ProductVS2:"虚拟运动2",
+ProductWM:"完美真人",
 Promotion:"促销活动",
 PromotionPrize:"活动奖金",
 RB:"赛马",

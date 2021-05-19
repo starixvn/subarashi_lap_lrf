@@ -1,4 +1,4 @@
-﻿// Generated at: 5/11/2021 2:46:49 PM
+﻿// Generated at: 5/13/2021 9:37:33 AM
 var _language_zh_TW = {
 AA:"客客",
 AbnormalBet:"非正規註單",
@@ -468,6 +468,7 @@ ProductTG:"桌面遊戲",
 ProductVRG:"虛擬娛樂城",
 ProductVS:"虛擬運動",
 ProductVS2:"虛擬運動2",
+ProductWM:"完美真人",
 Promotion:"促銷活動",
 PromotionPrize:"活動獎金",
 RB:"賽馬",

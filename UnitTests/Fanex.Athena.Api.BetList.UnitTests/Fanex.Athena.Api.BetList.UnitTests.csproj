@@ -115,6 +115,7 @@
     <Compile Include="RunningMatchChoiceBetListControllerTest.cs" />
     <Compile Include="SAGamingBetListControllerTest.cs" />
     <Compile Include="JokerBetListControllerTest.cs" />
+    <Compile Include="WMBetListControllerTest.cs" />
     <Compile Include="SingleMatchParlayBetListControllerTest.cs" />
     <Compile Include="SexyGamingBetListControllerTest.cs" />
     <Compile Include="VoidbridgeBetListControllerTest.cs" />

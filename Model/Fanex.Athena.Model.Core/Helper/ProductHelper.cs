@@ -59,7 +59,8 @@
                 { Product.JK, nameof(ViewResources.ProductJK) },
                 { Product.GDG, nameof(ViewResources.ProductGDG) },
                 { Product.SLT, nameof(ViewResources.ProductSLT) },
-                { Product.HB, nameof(ViewResources.ProductHB) }
+                { Product.HB, nameof(ViewResources.ProductHB) },
+                { Product.WM, nameof(ViewResources.ProductWM) }
             };
 
         public static string GetProductCode(int productId)

@@ -77,6 +77,8 @@ namespace Fanex.Athena.Model.Core.DTO.Common
         public const string SLT = "SLT";
 
         public const string HB = "HB";
+        
+        public const string WM = "WM";
 
         #endregion Field
 

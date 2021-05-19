@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 5/11/2021 2:46:55 PM
+// Generated at: 5/13/2021 9:37:40 AM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -732,6 +732,7 @@ window._language_en_US = {
   ProductVRG: "Virtual Games",
   ProductVS: "Virtual Sports",
   ProductVS2: "Virtual Sports 2",
+  ProductWM: "WM",
   Promotion: "Promotion",
   PromotionPrize: "Promotion Prize",
   RB: "RB",
