@@ -861,9 +861,10 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                             $('#product-container #' + checkedItems[i]).prop('checked', true);
                         }
                     }
+                    const canNotSubmit = $('#PlatformTypeList').hasClass('invalid') || !hasItemsChecked;
 
                     $('#ProductList').toggleClass('invalid', !hasItemsChecked);
-                    $('#SubmitButton').prop('disabled', !hasItemsChecked);
+                    $('#SubmitButton').prop('disabled', canNotSubmit);
                 }
             });
         },
@@ -950,16 +951,53 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                             $('#BaseCurrency option[value=' + oldBaseCurrency + ']').attr('selected', 'selected').change();
                         }
 
-                        for (let i = 0; i < checkedItems.length; i++) {                            
+                        for (let i = 0; i < checkedItems.length; i++) {
                             $('#currency-container #' + checkedItems[i]).prop('checked', true);
                         }
                     }
                     else {
                         $('#BaseCurrency option[value=' + oldBaseCurrency + ']').attr('selected', 'selected').change();
                     }
-                    
+
                     $('#CurrencyList').toggleClass('invalid', !hasItemsChecked);
                     $('#SubmitButton').prop('disabled', !hasItemsChecked);
+                }
+            });
+        },
+
+        initPlatformTypeList: function () {
+            const platformList = [];
+            $('#PlatformType option').each(function (i, e) {
+                platformList.push({
+                    Id: 'platform-type-' + i,
+                    Value: $(e).val(),
+                    Text: $(e).text(),
+                    Checked: true,
+                    Enable: true,
+                    Css: '',
+                    CssClass: ''
+                });
+            });
+
+            $('#PlatformType').multiSelect({
+                minWidth: 130,
+                maxHeight: 400,
+                shadow: true,
+                showHeader: true,
+                isCheckAll: true,
+                showFooter: false,
+                checkAllText: Site.getSingleResource('All'),
+                noneSelectedText: Site.getSingleResource('SelectOptions'), // Text show on Multiselect when it has no selected item
+                selectedText: Site.getSingleResource('SelectedItemCount'), // Text show when item was selected
+                listData: platformList,
+                onCheck: function () {
+                    let checkedItems = $('#PlatformType').multiSelect('getCheckedItems');
+                    checkedItems = checkedItems.join(',');
+                    const hasItemsChecked = checkedItems.length > 0;
+                    const canNotSubmit = $('#ProductList').hasClass('invalid') || !hasItemsChecked;
+
+                    $('#PlatformTypeList').toggleClass('invalid', !hasItemsChecked);
+                    $('#SubmitButton').prop('disabled', canNotSubmit);
                 }
             });
         }
