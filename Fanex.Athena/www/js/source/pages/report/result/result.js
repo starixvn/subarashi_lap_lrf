@@ -8,18 +8,14 @@ define(['jquery', 'common/site', 'components/pluginhelper/daterangepicker', 'com
         const VIRTUAL_RESULT_API = 'VirtualGamesResultReport/Index';
         const INDO4D_RESULT_API = 'Indo4DResultReport/Index';
         const SPORTSLOTTERY_RESULT_API = 'SportsLotteryResultReport/Index';
-        const KENO_RESULT_SESSION_API = 'ResultKenoReport/KeepSession';
         let ajaxRequest = null;
         let ajaxFilterRequest = null;
         let kenoAjaxRequest = null;
-        let kenoIntervalId = 0;
         let lotteryAjaxRequest = null;
-        let lotteryIntervalId = 0;
         let virtualGameAjaxRequest = null;
         let indo4DAjaxRequest = null;
         let SportsLotteryAjaxRequest = null;
         let tableGameAjaxRequest = null;
-        let tableGameIntervalId = 0;
         const param = {
             FromDate: '',
             ToDate: '',
@@ -195,9 +191,7 @@ define(['jquery', 'common/site', 'components/pluginhelper/daterangepicker', 'com
                     data: { vendorProductId: vendorProductId },
                     url: Site.resolveClientUrl(KENO_RESULT_API),
                     success: function (response) {
-                        window.open(response.Url, '_blank', 'left=20,top=20,width=950,height=650,toolbar=1,resizable=1,scrollbars,status=1');
-                        clearTimeout(kenoIntervalId);
-                        _me.extendKenoSession(vendorProductId, response.UserId);
+                        window.open(response, '_blank', 'left=20,top=20,width=950,height=650,toolbar=1,resizable=1,scrollbars,status=1');
                     },
                     beforeSend: function () {
                         Site.blockUI();
@@ -217,9 +211,7 @@ define(['jquery', 'common/site', 'components/pluginhelper/daterangepicker', 'com
                     data: { vendorProductId: vendorProductId },
                     url: Site.resolveClientUrl(KENO_RESULT_API),
                     success: function (response) {
-                        window.open(response.Url, '_blank', 'left=20,top=20,width=950,height=650,toolbar=1,resizable=1,scrollbars,status=1');
-                        clearTimeout(lotteryIntervalId);
-                        _me.extendLotterySession(vendorProductId, response.UserId);
+                        window.open(response, '_blank', 'left=20,top=20,width=950,height=650,toolbar=1,resizable=1,scrollbars,status=1');
                     },
                     beforeSend: function () {
                         Site.blockUI();
@@ -258,9 +250,7 @@ define(['jquery', 'common/site', 'components/pluginhelper/daterangepicker', 'com
                     data: { vendorProductId: vendorProductId },
                     url: Site.resolveClientUrl(KENO_RESULT_API),
                     success: function (response) {
-                        window.open(response.Url, '_blank', 'left=20,top=20,width=950,height=650,toolbar=1,resizable=1,scrollbars,status=1');
-                        clearTimeout(tableGameIntervalId);
-                        _me.extendTableSession(vendorProductId, response.UserId);
+                        window.open(response, '_blank', 'left=20,top=20,width=950,height=650,toolbar=1,resizable=1,scrollbars,status=1');
                     },
                     beforeSend: function () {
                         Site.blockUI();
@@ -309,87 +299,6 @@ define(['jquery', 'common/site', 'components/pluginhelper/daterangepicker', 'com
                 };
                 _me.stopAjaxRequest(SportsLotteryAjaxRequest);
                 SportsLotteryAjaxRequest = $.ajax(option);
-            },
-
-            extendKenoSession: function (vendorProductId, userId) {
-                if (!userId) {
-                    return;
-                }
-
-                const callBack = function () {
-                    const option = {
-                        type: 'POST',
-                        cache: false,
-                        data: {
-                            userId: userId,
-                            vendorProductId: vendorProductId
-                        },
-                        url: Site.resolveClientUrl(KENO_RESULT_SESSION_API),
-                        success: function (response) {
-                            if (response === '') {
-                                kenoIntervalId = setTimeout(callBack, 6000);
-                            }
-                        }
-                    };
-
-                    kenoAjaxRequest = $.ajax(option);
-                }
-
-                kenoIntervalId = setTimeout(callBack, 6000);
-            },
-
-            extendTableSession: function (vendorProductId, userId) {
-                if (!userId) {
-                    return;
-                }
-
-                const callBack = function () {
-                    const option = {
-                        type: 'POST',
-                        cache: false,
-                        data: {
-                            userId: userId,
-                            vendorProductId: vendorProductId
-                        },
-                        url: Site.resolveClientUrl(KENO_RESULT_SESSION_API),
-                        success: function (response) {
-                            if (response === '') {
-                                tableGameIntervalId = setTimeout(callBack, 6000);
-                            }
-                        }
-                    };
-
-                    tableGameAjaxRequest = $.ajax(option);
-                }
-
-                tableGameIntervalId = setTimeout(callBack, 6000);
-            },
-
-            extendLotterySession: function (vendorProductId, userId) {
-                if (!userId) {
-                    return;
-                }
-
-                const callBack = function () {
-                    const option = {
-                        type: 'POST',
-                        cache: false,
-                        data: {
-                            userId: userId,
-                            vendorProductId: vendorProductId
-                        },
-                        url: Site.resolveClientUrl(KENO_RESULT_SESSION_API),
-                        success: function (response) {
-                            if (response === '') {
-                                lotteryIntervalId = setTimeout(callBack, 6000);
-                            }
-                        }
-                    };
-
-                    lotteryAjaxRequest = $.ajax(option);
-                }
-
-                lotteryIntervalId = setTimeout(callBack, 6000);
             },
 
             getData: function () {

@@ -1,25 +1,18 @@
 ﻿namespace Fanex.Athena.Controllers.Report.Result
 {
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Logging;
-    using Model.Report.DTO.Result;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using Web.ActionFilter;
 
     [FunctionAuthorization(PermissionKeys.ReportResults)]
     public class ResultKenoReportController : ReportBaseController
     {
-        private readonly ILogger _logger;
-
         private readonly IBetListApiClient _betListApiClient;
 
-        public ResultKenoReportController(
-            ILogger logger,
-            IBetListApiClient betListApiClient)
+        public ResultKenoReportController(IBetListApiClient betListApiClient)
         {
-            _logger = logger;
             _betListApiClient = betListApiClient;
         }
 
@@ -28,55 +21,20 @@
         public async Task<ActionResult> Index(int vendorProductId)
         {
             var userSession = SessionServiceInstance.UserSession;
-            var model = new
+
+            var obj = new { vendorProductId, custId = userSession.UserId.ToString(), languageCode = SessionServiceInstance.UserSession.Language, isDesktop = true };
+            if (ModelState.IsValid)
             {
-                vendorProductId,
-                UserId = userSession.UserId.ToString()
-            };
-            var kenoUrl = await _betListApiClient.PostStringAsync("/ResultKenoReport/GetKenoResultUrl",
-                model, userSession.Language).ConfigureAwait(false);
+                var data = await _betListApiClient.PostStringAsync(
+                    "/ResultKenoReport/GetResultPage",
+                     obj,
+                     SessionServiceInstance.UserSession.Language
+                    ).ConfigureAwait(false);
 
-            return Json(
-                new
-                {
-                    Url = kenoUrl,
-                    userSession.UserId
-                },
-            JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpPost]
-        [AjaxRequest]
-        [CustomValidateAntiForgery]
-        public async Task<string> KeepSession(string userId, int vendorProductId)
-        {
-            var userSession = SessionServiceInstance.UserSession;
-            if (string.IsNullOrEmpty(userId) || !userSession.UserId.ToString().Equals(userId))
-            {
-                _logger.Error("Keno Result page just submited invalid userId");
-
-                return Url.Action("AccessDenied", "Utility", null, Request.Url.Scheme);
+                return this.Content(data, "text/html");
             }
 
-            var model = new
-            {
-                VendorProductId = vendorProductId,
-                UserId = userId
-            };
-
-            var result = await _betListApiClient.PostAsync<KenoExtendedToken>("/ResultKenoReport/KeepSession",
-                model, userSession.Language).ConfigureAwait(false);
-
-            if (result.ErrorCode > 0)
-            {
-                _logger.Info($"Keno Session: {result.ErrorMsg}"
-                    + $"\nError Code: {result.ErrorCode}"
-                    + $"\nUser Name: {userSession.UserName}"
-                    + $"\nProduct Id: {vendorProductId}");
-                return Url.Action("AccessDenied", "Utility", null, Request.Url.Scheme);
-            }
-
-            return string.Empty;
+            return this.Content(string.Empty, "text/html");
         }
     }
 }
