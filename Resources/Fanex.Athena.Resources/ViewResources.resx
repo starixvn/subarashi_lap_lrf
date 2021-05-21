@@ -2993,4 +2993,7 @@
   <data name="ProductBGG" xml:space="preserve">
     <value>BG</value>
   </data>
+  <data name="SoccerPinGoal" xml:space="preserve">
+    <value>Soccer PinGoal</value>
+  </data>
 </root>

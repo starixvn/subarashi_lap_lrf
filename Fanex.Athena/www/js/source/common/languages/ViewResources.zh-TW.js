@@ -1,4 +1,4 @@
-﻿// Generated at: 5/13/2021 9:37:40 AM
+﻿// Generated at: 5/21/2021 1:34:40 PM
 window._language_zh_TW = {
 AA:"客客",
 AbnormalBet:"非正規註單",
@@ -520,6 +520,7 @@ ShowAllLeagues:"顯示所有聯賽",
 ShowOldValue:"顯示舊值",
 Sincelastmonth:"從上個月",
 SingleCustomer:"單一會員",
+SoccerPinGoal:"足球檯",
 SpecialLevel:"特殊層級",
 SpecificDate:"特定日期",
 Sport:"運動",

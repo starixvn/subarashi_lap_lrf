@@ -139,9 +139,14 @@ namespace Fanex.Athena.Model.Core.DataDomain
         Rugby = 26,
 
         /// <summary>
-        /// Cricket sport, value = 27.
+        /// Duplicated Cricket sport, value = 27.
         /// </summary>
-        Cricket = 27,
+        DuplicatedCricket = 27,
+
+        /// <summary>
+        /// Cricket sport, value = 50.
+        /// </summary>
+        Cricket = 50,
 
         /// <summary>
         /// NetBall sport, value = 32.

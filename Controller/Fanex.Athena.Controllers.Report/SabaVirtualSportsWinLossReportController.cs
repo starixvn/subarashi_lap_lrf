@@ -23,7 +23,7 @@
         private readonly ILeagueDataAccess _leagueDataAccess;
         private readonly IReportSettingService _reportSettingService;
 
-        private readonly List<int> _sportList = new List<int> { 1, 2, 50 };
+        private readonly List<int> _sportList = new List<int> { (int)SportType.Soccer, (int)SportType.BasketBall, (int)SportType.Cricket };
 
         public SabaVirtualSportsWinLossReportController(
             ISportTypeDataAccess sportTypeDataAccess,

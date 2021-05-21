@@ -2167,4 +2167,7 @@
   <data name="ProductWM" xml:space="preserve">
     <value>完美真人</value>
   </data>
+  <data name="SoccerPinGoal" xml:space="preserve">
+    <value>足球台</value>
+  </data>
 </root>

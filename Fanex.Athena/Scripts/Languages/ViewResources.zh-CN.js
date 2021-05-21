@@ -1,4 +1,4 @@
-﻿// Generated at: 5/13/2021 9:37:33 AM
+﻿// Generated at: 5/21/2021 1:34:49 PM
 var _language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -633,6 +633,7 @@ ShowOldValue:"显示旧值",
 Sincelastmonth:"自上个月",
 SingleCustomer:"单一会员",
 SoccerParlay:"足球串关",
+SoccerPinGoal:"足球台",
 SpecialLevel:"特殊层级",
 SpecificDate:"特定日期",
 Sport:"运动",
