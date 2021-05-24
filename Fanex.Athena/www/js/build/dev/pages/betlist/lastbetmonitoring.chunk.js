@@ -6241,8 +6241,38 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
             });
         };
         _me.initPlatForm = function () {
-            $('#bet-from').change(function () {
-                _me.changeFilterParam(DataType.NUMBER, 'BetFrom', $(this).val());
+            const platformList = [];
+            $('#PlatformType option').each(function (i, e) {
+                platformList.push({
+                    Id: 'platform-type-' + i,
+                    Value: $(e).val(),
+                    Text: $(e).text(),
+                    Checked: true,
+                    Enable: true,
+                    Css: '',
+                    CssClass: ''
+                });
+            });
+
+            const platformCount = platformList.length;
+            $('#PlatformType').html('');
+            $('#PlatformType').multiSelect({
+                minWidth: 130,
+                maxHeight: 400,
+                shadow: true,
+                showHeader: true,
+                isCheckAll: true,
+                showFooter: false,
+                checkAllText: Site.getSingleResource('All'),
+                noneSelectedText: Site.getSingleResource('SelectOptions'), // Text show on Multiselect when it has no selected item
+                selectedText: Site.getSingleResource('SelectedItemCount'), // Text show when item was selected
+                listData: platformList,
+                onCheck: function () {
+                    let checkedItems = $('#PlatformType').multiSelect('getCheckedItems');
+                    checkedItems = platformCount === checkedItems.length ? 'All' : checkedItems.join(',');
+
+                    _me.changeFilterParam(DataType.STRING, 'BetFrom', checkedItems);
+                }
             });
         };
 
@@ -6317,7 +6347,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
             StakeFrom: '0',
             StakeTo: '1000000000',
             TransId: _lastTransId,
-            BetFrom: 0
+            BetFrom: 'All'
         };
         let _postedParam;
         let _intervalId;
@@ -6372,6 +6402,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
         _me.isValidParam = function () {
             return _postedParam.StakeFrom <= _postedParam.StakeTo
                 && $('#currency').multiSelect('getCheckedItems').length > 0
+                && $('#PlatformType').multiSelect('getCheckedItems').length > 0
                 && $('#special-level').multiSelect('getCheckedItems').length > 0;
         };
         _me.tryUpdateStake = function () {

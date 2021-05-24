@@ -59,8 +59,8 @@
 
             _me.initEvent();
             _me.initSetting();
-
             MultiSelect.initProductList();
+            MultiSelect.initPlatformTypeList();
             MonthPicker.initMonthPicker({
                 minDate: Site.getHistoryDate(),
                 maxDate: $('#MaxDate').val()
@@ -133,6 +133,7 @@
             const data = $('#platformwinloss').serializeObject();
             data.Level = 0;
             addDateParam(data);
+            data.PlatformType = getPlaformTypes();
             return data;
         }
 
@@ -145,7 +146,6 @@
             gridControl.level = 0;
             const data = getSubmitData();
             const productOption = getProductOptions(data);
-
             getData(data, Site.resolveClientUrl(PlatformWinLossOption.urlData), function (response) {
                 const submitData = {
                     FromDay: data.FromDay,
@@ -174,7 +174,6 @@
 
         function exportToExcel(level, sortBy, sortOrder) {
             const data = _filterData[level] ? Site.clone(_filterData[level]) : getSubmitData();
-
             data.IsExportExcel = true;
             data.Level = level;
             if (level === 1 && sortBy) {
@@ -284,7 +283,7 @@
             const baseCurrencyKey = $('#BaseCurrency').val();
             const baseCurrencyText = viewinKey.replace('{0}', baseCurrencyKey ? baseCurrencyKey.toUpperCase() : selectedCurrency);
 
-            const platformName = _platformNameMap[data.PlatformType];
+            const platformName = data.PlatformType === 'All' ? _platformNameMap[0] : getPlatformText(data.PlatformType);
 
             let productText = Site.getSingleResource('Product') + ': ';
             productText = data.ProductOptions && data.ProductOptions.length === 1 ?
@@ -422,6 +421,16 @@
             return Site.getSingleResource('Product') + ': ' + productName;
         }
 
+        function getPlatformText(platformTypeList) {
+            const platformSeleted = Enumerable.From(platformTypeList.toString().split(','))
+                .Select(function (x) { return _platformNameMap[x]; })
+                .ToArray();
+
+            const platformName = platformSeleted.join(', ');
+
+            return platformName;
+        }
+
         function getProductOptions(serializeParam) {
             const codeKey = /ProductOptions\[\d+\].Code/;
             let products = [];
@@ -449,6 +458,14 @@
             }
 
             return products;
+        }
+
+        function getPlaformTypes() {
+            const platformCount = Object.values(_platformNameMap).length - 1;
+
+            let checkedItems = $('#PlatformType').multiSelect('getCheckedItems');
+            checkedItems = checkedItems.length === platformCount ? 'All' : checkedItems.join(',');
+            return checkedItems;
         }
 
         function resizeGrid() {

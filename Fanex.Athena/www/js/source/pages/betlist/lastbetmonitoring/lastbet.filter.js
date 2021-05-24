@@ -348,8 +348,38 @@ define(
             });
         };
         _me.initPlatForm = function () {
-            $('#bet-from').change(function () {
-                _me.changeFilterParam(DataType.NUMBER, 'BetFrom', $(this).val());
+            const platformList = [];
+            $('#PlatformType option').each(function (i, e) {
+                platformList.push({
+                    Id: 'platform-type-' + i,
+                    Value: $(e).val(),
+                    Text: $(e).text(),
+                    Checked: true,
+                    Enable: true,
+                    Css: '',
+                    CssClass: ''
+                });
+            });
+
+            const platformCount = platformList.length;
+            $('#PlatformType').html('');
+            $('#PlatformType').multiSelect({
+                minWidth: 130,
+                maxHeight: 400,
+                shadow: true,
+                showHeader: true,
+                isCheckAll: true,
+                showFooter: false,
+                checkAllText: Site.getSingleResource('All'),
+                noneSelectedText: Site.getSingleResource('SelectOptions'), // Text show on Multiselect when it has no selected item
+                selectedText: Site.getSingleResource('SelectedItemCount'), // Text show when item was selected
+                listData: platformList,
+                onCheck: function () {
+                    let checkedItems = $('#PlatformType').multiSelect('getCheckedItems');
+                    checkedItems = platformCount === checkedItems.length ? 'All' : checkedItems.join(',');
+
+                    _me.changeFilterParam(DataType.STRING, 'BetFrom', checkedItems);
+                }
             });
         };
 

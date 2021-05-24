@@ -5852,7 +5852,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   }
 
   get isValidModel() {
-    return !!this.props.username && !!this.props.selectedProduct && !!this.props.selectedStatus && !!this.props.selectedLiveStatus && Object(_jsroot_lib_validationHelper__WEBPACK_IMPORTED_MODULE_17__["validateBaseCurrency"])(this.props.selectedBaseCurrency);
+    return !!this.props.username && !!this.props.selectedProduct && !!this.props.selectedPlatform && !!this.props.selectedStatus && !!this.props.selectedLiveStatus && Object(_jsroot_lib_validationHelper__WEBPACK_IMPORTED_MODULE_17__["validateBaseCurrency"])(this.props.selectedBaseCurrency);
   }
 
   _getParams() {
@@ -5947,11 +5947,15 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 
   _renderPlatformSelectList() {
     const platformList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_13__["default"].platformList;
-    return platformList && platformList.length && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      instanceId: "PlatformList",
+    return platformList && platformList.length && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_4___default.a, {
+      id: "PlatformList",
+      language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].currentLanguage,
       value: this.props.selectedPlatform,
-      options: platformList,
-      onChange: item => this.props.setSelectedPlatform(item.value)
+      dataSource: platformList,
+      valueField: "label",
+      keyField: "value",
+      statusField: "Status",
+      onChange: (currentItem, selectedItemsKey) => this.props.setSelectedPlatform(selectedItemsKey)
     });
   }
 

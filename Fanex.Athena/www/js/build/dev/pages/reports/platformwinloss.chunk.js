@@ -407,9 +407,10 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                             $('#product-container #' + checkedItems[i]).prop('checked', true);
                         }
                     }
+                    const canNotSubmit = $('#PlatformTypeList').hasClass('invalid') || !hasItemsChecked;
 
                     $('#ProductList').toggleClass('invalid', !hasItemsChecked);
-                    $('#SubmitButton').prop('disabled', !hasItemsChecked);
+                    $('#SubmitButton').prop('disabled', canNotSubmit);
                 }
             });
         },
@@ -496,16 +497,53 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                             $('#BaseCurrency option[value=' + oldBaseCurrency + ']').attr('selected', 'selected').change();
                         }
 
-                        for (let i = 0; i < checkedItems.length; i++) {                            
+                        for (let i = 0; i < checkedItems.length; i++) {
                             $('#currency-container #' + checkedItems[i]).prop('checked', true);
                         }
                     }
                     else {
                         $('#BaseCurrency option[value=' + oldBaseCurrency + ']').attr('selected', 'selected').change();
                     }
-                    
+
                     $('#CurrencyList').toggleClass('invalid', !hasItemsChecked);
                     $('#SubmitButton').prop('disabled', !hasItemsChecked);
+                }
+            });
+        },
+
+        initPlatformTypeList: function () {
+            const platformList = [];
+            $('#PlatformType option').each(function (i, e) {
+                platformList.push({
+                    Id: 'platform-type-' + i,
+                    Value: $(e).val(),
+                    Text: $(e).text(),
+                    Checked: true,
+                    Enable: true,
+                    Css: '',
+                    CssClass: ''
+                });
+            });
+
+            $('#PlatformType').multiSelect({
+                minWidth: 130,
+                maxHeight: 400,
+                shadow: true,
+                showHeader: true,
+                isCheckAll: true,
+                showFooter: false,
+                checkAllText: Site.getSingleResource('All'),
+                noneSelectedText: Site.getSingleResource('SelectOptions'), // Text show on Multiselect when it has no selected item
+                selectedText: Site.getSingleResource('SelectedItemCount'), // Text show when item was selected
+                listData: platformList,
+                onCheck: function () {
+                    let checkedItems = $('#PlatformType').multiSelect('getCheckedItems');
+                    checkedItems = checkedItems.join(',');
+                    const hasItemsChecked = checkedItems.length > 0;
+                    const canNotSubmit = $('#ProductList').hasClass('invalid') || !hasItemsChecked;
+
+                    $('#PlatformTypeList').toggleClass('invalid', !hasItemsChecked);
+                    $('#SubmitButton').prop('disabled', canNotSubmit);
                 }
             });
         }
@@ -8530,8 +8568,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
             _me.initEvent();
             _me.initSetting();
-
             MultiSelect.initProductList();
+            MultiSelect.initPlatformTypeList();
             MonthPicker.initMonthPicker({
                 minDate: Site.getHistoryDate(),
                 maxDate: $('#MaxDate').val()
@@ -8604,6 +8642,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             const data = $('#platformwinloss').serializeObject();
             data.Level = 0;
             addDateParam(data);
+            data.PlatformType = getPlaformTypes();
             return data;
         }
 
@@ -8616,7 +8655,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             gridControl.level = 0;
             const data = getSubmitData();
             const productOption = getProductOptions(data);
-
             getData(data, Site.resolveClientUrl(PlatformWinLossOption.urlData), function (response) {
                 const submitData = {
                     FromDay: data.FromDay,
@@ -8645,7 +8683,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
         function exportToExcel(level, sortBy, sortOrder) {
             const data = _filterData[level] ? Site.clone(_filterData[level]) : getSubmitData();
-
             data.IsExportExcel = true;
             data.Level = level;
             if (level === 1 && sortBy) {
@@ -8755,7 +8792,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             const baseCurrencyKey = $('#BaseCurrency').val();
             const baseCurrencyText = viewinKey.replace('{0}', baseCurrencyKey ? baseCurrencyKey.toUpperCase() : selectedCurrency);
 
-            const platformName = _platformNameMap[data.PlatformType];
+            const platformName = data.PlatformType === 'All' ? _platformNameMap[0] : getPlatformText(data.PlatformType);
 
             let productText = Site.getSingleResource('Product') + ': ';
             productText = data.ProductOptions && data.ProductOptions.length === 1 ?
@@ -8893,6 +8930,16 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             return Site.getSingleResource('Product') + ': ' + productName;
         }
 
+        function getPlatformText(platformTypeList) {
+            const platformSeleted = Enumerable.From(platformTypeList.toString().split(','))
+                .Select(function (x) { return _platformNameMap[x]; })
+                .ToArray();
+
+            const platformName = platformSeleted.join(', ');
+
+            return platformName;
+        }
+
         function getProductOptions(serializeParam) {
             const codeKey = /ProductOptions\[\d+\].Code/;
             let products = [];
@@ -8920,6 +8967,14 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             }
 
             return products;
+        }
+
+        function getPlaformTypes() {
+            const platformCount = Object.values(_platformNameMap).length - 1;
+
+            let checkedItems = $('#PlatformType').multiSelect('getCheckedItems');
+            checkedItems = checkedItems.length === platformCount ? 'All' : checkedItems.join(',');
+            return checkedItems;
         }
 
         function resizeGrid() {

@@ -8,6 +8,7 @@ namespace Fanex.Athena.Model.Report.MetaModel
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.MetaModel;
     using DataDomain = Core.DataDomain;
@@ -24,7 +25,7 @@ namespace Fanex.Athena.Model.Report.MetaModel
             ToDay = today.Day;
             CurrencyId = 0;
             DrawFilter = DataDomain.DrawFilterType.Normal;
-            PlatformType = DataDomain.PlatformType.All;
+            PlatformType = string.Empty;
             IsExcludedTestData = true;
         }
 
@@ -50,7 +51,7 @@ namespace Fanex.Athena.Model.Report.MetaModel
 
         public int DrawFilter { get; set; }
 
-        public int PlatformType { get; set; }
+        public string PlatformType { get; set; }
 
         public string SortBy { get; set; }
 

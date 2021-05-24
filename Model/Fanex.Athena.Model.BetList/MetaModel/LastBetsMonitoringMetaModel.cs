@@ -41,7 +41,7 @@ namespace Fanex.Athena.Model.BetList.MetaModel
 
         public long TransId { get; set; }
 
-        public int BetFrom { get; set; }
+        public string BetFrom { get; set; }
 
         public string AgentListXml { get; set; }
 

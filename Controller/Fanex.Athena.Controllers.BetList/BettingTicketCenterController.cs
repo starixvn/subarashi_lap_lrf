@@ -251,7 +251,6 @@
         {
             return new Dictionary<int, string>
             {
-                { 0, ViewResources.All },
                 { PlatformType.DesktopNewAsia, ViewResources.DesktopNewAsia },
                 { PlatformType.DesktopChina, ViewResources.DesktopChina },
                 { PlatformType.DesktopOthers, ViewResources.DesktopOthers },
