@@ -717,6 +717,9 @@ table tbody tr.row-group-level1 td {
       color: #000000; }
     .betlist-container .single-match-parlay-detail .single-match-parlay-selection .status {
       color: #003399; }
+  .betlist-container .underdog > .bet-id, .betlist-container .favorite > .bet-id {
+    color: #bbb;
+    display: block; }
 
 .table > thead > tr > th {
   background: #4C6375;

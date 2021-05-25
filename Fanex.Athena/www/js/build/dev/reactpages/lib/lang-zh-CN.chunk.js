@@ -641,6 +641,7 @@ window._language_zh_CN = {
   ProblemPlayer: "问题玩家",
   Product: "产品",
   ProductAB: "欧博",
+  ProductBGG: "大遊真人",
   ProductCC: "乐卡迪亚",
   ProductCO: "即时兑现",
   ProductCS: "娱乐城",

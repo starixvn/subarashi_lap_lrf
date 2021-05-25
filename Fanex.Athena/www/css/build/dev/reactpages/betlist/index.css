@@ -257,6 +257,9 @@
       color: #000000; }
     .betlist-container .single-match-parlay-detail .single-match-parlay-selection .status {
       color: #003399; }
+  .betlist-container .underdog > .bet-id, .betlist-container .favorite > .bet-id {
+    color: #bbb;
+    display: block; }
 
 .betlist-container .status, .betlist-container .bettype {
   white-space: normal; }
