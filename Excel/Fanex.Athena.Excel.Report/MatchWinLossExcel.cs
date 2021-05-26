@@ -33,6 +33,8 @@ namespace Fanex.Athena.Excel.Report
 
     public class MatchWinLossExcel : ReportBase
     {
+        private const string STR_BETTYPE = "bettype";
+
         private const int ColumnMatch = 1;
         private const int ColumnCustomerWl = 4;
         private const int ColumnCustomerComm = 5;
@@ -134,6 +136,11 @@ namespace Fanex.Athena.Excel.Report
             sheet.SetTextRowValue(TemplateSheet, RowNoInfoTemplate, RowMatchTemplate, ColumnTemplateCount, ViewResources.NoInfo);
         }
 
+        private static int CheckGreaterZero(int value)
+        {
+            return value > 0 ? 1 : 0;
+        }
+
         [SuppressMessage(
                "StyleCop.CSharp.StylecopPlus.Rules",
                "SP2101:MethodMustNotContainMoreLinesThan",
@@ -154,7 +161,7 @@ namespace Fanex.Athena.Excel.Report
             for (int index = 0; index < rowCount; index++)
             {
                 var exportRow = _exportData.Rows[index];
-                var betType = Converter.ToInt(exportRow["bettype"]);
+                var betType = Converter.ToInt(exportRow[STR_BETTYPE]);
                 if (SpecialBettypes.Contains(betType) || IsHappy5LinkedGames(betType))
                 {
                     specialBetType.Add(exportRow);
@@ -165,7 +172,7 @@ namespace Fanex.Athena.Excel.Report
                 if (leagueName != currentLeagueName)
                 {
                     currentRowIndex = AssignMatchData(sheet, matchInfoList, formatMatchName, currentRowIndex, currentIndex);
-                    currentIndex += matchInfoList.Count > 0 ? 1 : 0;
+                    currentIndex += CheckGreaterZero(matchInfoList.Count);
                     matchInfoList = new List<DataRow>();
                     leagueName = currentLeagueName;
                     sheet.SetTextRowValue(TemplateSheet, RowMatchTemplate, currentRowIndex, ColumnTemplateCount, leagueName);
@@ -178,7 +185,7 @@ namespace Fanex.Athena.Excel.Report
                 if (matchId != currentMatchId || matchName != currentMatchName)
                 {
                     currentRowIndex = AssignMatchData(sheet, matchInfoList, formatMatchName, currentRowIndex, currentIndex);
-                    currentIndex += matchInfoList.Count > 0 ? 1 : 0;
+                    currentIndex += CheckGreaterZero(matchInfoList.Count);
                     matchId = currentMatchId;
                     matchName = currentMatchName;
                     formatMatchName = GetFormatMatchName(exportRow, matchName);
@@ -336,7 +343,7 @@ namespace Fanex.Athena.Excel.Report
             {
                 var matchWinloss = matchInfoList[i];
                 var betTypeRow = sheet.CopyRow(TemplateSheet, RowBetTypeContentTemplate, currentRow);
-                var betType = Converter.ToInt(matchWinloss["bettype"]);
+                var betType = Converter.ToInt(matchWinloss[STR_BETTYPE]);
                 var liveIndicator = Converter.To<bool>(matchWinloss["liveindicator"]);
                 var betTypeName = "         " + _cacheRefAdapter.GetBettype(betType, liveIndicator);
 
@@ -362,14 +369,14 @@ namespace Fanex.Athena.Excel.Report
         private int AssignSpecialBetType(ISheet sheet, IList<DataRow> exportData, int currentRowIndex)
         {
             var rowCount = exportData.Count;
-            exportData = exportData.OrderBy(d => Converter.ToInt(d["bettype"])).ToList();
+            exportData = exportData.OrderBy(d => Converter.ToInt(d[STR_BETTYPE])).ToList();
 
             // Assign bettype
             for (int i = 0; i < rowCount; i++)
             {
                 var dataRow = exportData[i];
                 var betTypeRow = sheet.CopyRow(TemplateSheet, RowSpecialBetTypeTemplate, currentRowIndex);
-                var betType = Converter.ToInt(dataRow["bettype"]);
+                var betType = Converter.ToInt(dataRow[STR_BETTYPE]);
                 var betTypeName = betType == (int)BetType.VirtualSports2MixParlay ?
                     _cacheRefAdapter.GetBettypeWithProductName(betType) :
                     _cacheRefAdapter.GetBettype(betType, false);

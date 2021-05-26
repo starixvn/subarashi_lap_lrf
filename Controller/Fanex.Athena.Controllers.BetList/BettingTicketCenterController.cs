@@ -203,7 +203,8 @@
                 Product.GDG,
                 Product.SLT,
                 Product.HB,
-                Product.WM
+                Product.WM,
+                Product.BGG
             };
 
             var productAccess = _productService.GetSingleWalletProductAccess(

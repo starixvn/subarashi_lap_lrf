@@ -699,6 +699,7 @@ window._language_en_US = {
   ProductAB: "AllBet",
   ProductAGC: "AG Casino",
   ProductBA: "BA",
+  ProductBGG: "BG",
   ProductBT: "Bet Trade",
   ProductBX: "Exchange",
   ProductCB: "Colossus Bets",

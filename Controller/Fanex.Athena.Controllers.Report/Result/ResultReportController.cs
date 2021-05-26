@@ -19,6 +19,8 @@
     {
         private const string ResultPageGetNormalSportsName = "ResultPage_GetNormalSports";
 
+        private const string ROOT_URL = "{rootUrl}";
+
         private readonly IBalanceUpDataAccess _balanceUpDataAccess;
 
         private readonly IBetListApiClient _betListApiClient;
@@ -191,7 +193,7 @@
                 languageCode = language
             };
             var data = await _betListApiClient.PostStringAsync("/AllBetResultPopup/Index", model, language).ConfigureAwait(false);
-            ViewBag.Data = data.Replace("{rootUrl}", HttpRuntime.AppDomainAppVirtualPath.TrimEnd('/'));
+            ViewBag.Data = data.Replace(ROOT_URL, HttpRuntime.AppDomainAppVirtualPath.TrimEnd('/'));
             return View("~/Views/Desktop/Report/Result/Popup/AllBet.cshtml");
         }
 
@@ -223,7 +225,7 @@
                 languageCode = language
             };
             var data = await _betListApiClient.PostStringAsync("/SexyGamingResultPopup/Index", model, language).ConfigureAwait(false);
-            ViewBag.Data = data.Replace("{rootUrl}", HttpRuntime.AppDomainAppVirtualPath.TrimEnd('/'));
+            ViewBag.Data = data.Replace(ROOT_URL, HttpRuntime.AppDomainAppVirtualPath.TrimEnd('/'));
             return View("~/Views/Desktop/Report/Result/Popup/AllBet.cshtml");
         }
 
@@ -239,7 +241,7 @@
                 languageCode = language
             };
             var data = await _betListApiClient.PostStringAsync("/SAGamingResultPopup/Index", model, language).ConfigureAwait(false);
-            ViewBag.Data = data.Replace("{rootUrl}", HttpRuntime.AppDomainAppVirtualPath.TrimEnd('/'));
+            ViewBag.Data = data.Replace(ROOT_URL, HttpRuntime.AppDomainAppVirtualPath.TrimEnd('/'));
             return View("~/Views/Desktop/Report/Result/Popup/SAGaming.cshtml");
         }
 
@@ -290,7 +292,7 @@
             };
 
             var data = await _betListApiClient.PostStringAsync("/WMResultPopup/Index", model, language).ConfigureAwait(false);
-            ViewBag.Data = data.Replace("{rootUrl}", HttpRuntime.AppDomainAppVirtualPath.TrimEnd('/'));
+            ViewBag.Data = data.Replace(ROOT_URL, HttpRuntime.AppDomainAppVirtualPath.TrimEnd('/'));
             return View("~/Views/Desktop/Report/Result/Popup/WM.cshtml");
         }
 

@@ -140,6 +140,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BettingTicketCenterController.cs" />
+    <Compile Include="BGGBetListController.cs" />
     <Compile Include="BonusBetListController.cs" />
     <Compile Include="ColossusBetBetListController.cs" />
     <Compile Include="AllBetBetListController.cs" />

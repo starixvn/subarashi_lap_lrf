@@ -550,6 +550,7 @@ window._language_zh_Hans = {
   PreGame: "游戏开始前",
   Prev: "上个月",
   Product: "产品",
+  ProductBGG: "大遊真人",
   ProductCC: "乐卡迪亚",
   ProductCO: "即时兑现",
   ProductCS: "娱乐城",

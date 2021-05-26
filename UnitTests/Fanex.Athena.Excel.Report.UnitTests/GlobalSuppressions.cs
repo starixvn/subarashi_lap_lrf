@@ -5,3 +5,5 @@
 // a specific target and scoped to a namespace, type, member, etc.
 
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Blocker Code Smell", "S2699:Tests should include assertions", Justification = "<Pending>", Scope = "member", Target = "~M:Fanex.Athena.Excel.Report.UnitTests.ThirdPartyWinLossExcelTest.AssignNoInfoRow_WhenCall_CallRelevantMethods")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Blocker Code Smell", "S2699:Tests should include assertions", Justification = "<Pending>", Scope = "member", Target = "~M:Fanex.Athena.Excel.Report.UnitTests.LicenseeWinLossExcelTest.AssignNoInfoRow_WhenCall_CallRelevantMethods")]
+

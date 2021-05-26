@@ -5497,6 +5497,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to BG.
+        /// </summary>
+        public static string ProductBGG {
+            get {
+                return ResourceManager.GetString("ProductBGG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bet Trade.
         /// </summary>
         public static string ProductBT {

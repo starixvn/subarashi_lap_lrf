@@ -1138,6 +1138,7 @@
     <Content Include="App_Data\Template\Reports\SabaVirtualSportsWinLoss.xls" />
     <Content Include="Views\Desktop\BetList\SabaVirtualSportsWl\Main.cshtml" />
     <Content Include="www\css\source\pages\customer\customer-class.scss" />
+    <Content Include="Views\Desktop\BetList\BGGDetail\Main.cshtml" />
     <Content Include="www\css\build\dev\pages\customer\customer-class.chunk.js.map" />
     <Content Include="Views\Desktop\BetList\GDG\Main.cshtml" />
     <Content Include="Views\Desktop\Report\Result\Popup\GDG.cshtml" />

@@ -28,5 +28,6 @@ export const SportType = {
     GDG: 236,
     SLT: 169,
     HB: 238,
-    WM: 233
+    WM: 233,
+    BGG: 239
 }
