@@ -103,6 +103,10 @@ class BetListLayout extends Component {
                 const url = BetList.getWMResultUrl(rootUrl, transdecs, extension2, bettype);
                 this._openPopup(url, title);
             }
+            else if (sporttype === SportType.VGA || sporttype === SportType.VGA_FreeBets) {
+                const url = BetList.getVGamingResultUrl(rootUrl, custid, bettype, extension2, transdecs, sporttype);
+                this._showThirdPartyResult(url, title);
+            }
             else {
                 const url = BetList.getResultUrl(rootUrl, matchid, raceNo, bettype,
                     sporttype, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid);
@@ -246,6 +250,16 @@ class BetListLayout extends Component {
             this._openPopup(url, title);
         }
 
+        window.showVGamingJackpotWonDetails = (transId, custId, betTypeId) => {
+            const { rootUrl, baseCurrency } = this.props;
+
+            const url = BetList.getVGamingJackpotWonDetailUrl(rootUrl, baseCurrency, transId, custId, betTypeId);
+            const title = this._getResource('ProductVGA') + ' - ' +
+                this._getResource('JackpotWonDetails');
+
+            this._openPopup(url, title);
+        }
+
         window.showVideoPokerGameDetails = (transId, winlostDate, custId, transType) => {
             const { rootUrl, baseCurrency } = this.props;
 
@@ -335,6 +349,7 @@ class BetListLayout extends Component {
 
             this._openPopup(url, title);
         }
+
         window.showWMBetDetails = (transId, winlostDate, custId, transType) => {
             const { rootUrl, baseCurrency } = this.props;
 
@@ -350,6 +365,16 @@ class BetListLayout extends Component {
 
             const url = BetList.getBGGDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
             const title = this._getResource('ProductBGG') + ' - ' +
+                this._getResource('DetailedBetlist') + ' - ' + this._formatDateString(winlostDate);
+
+            this._openPopup(url, title);
+        }
+        
+        window.showVGamingDetails = (transId, winlostDate, custId, transType) => {
+            const { rootUrl, baseCurrency } = this.props;
+
+            const url = BetList.getVGamingDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
+            const title = this._getResource('ProductVGA') + ' - ' +
                 this._getResource('DetailedBetlist') + ' - ' + this._formatDateString(winlostDate);
 
             this._openPopup(url, title);
@@ -384,6 +409,8 @@ class BetListLayout extends Component {
         window.showHabaneroBetDetails = undefined;
         window.showWMBetDetails = undefined;
         window.showBGBetDetails = undefined;
+        window.showVGamingDetails = undefined;
+        window.showVGamingJackpotWonDetails = undefined;
     }
 
     _getResource(key) {

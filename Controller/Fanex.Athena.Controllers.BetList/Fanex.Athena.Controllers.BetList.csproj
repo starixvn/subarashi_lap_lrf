@@ -153,6 +153,8 @@
     <Compile Include="HabaneroBetListController.cs" />
     <Compile Include="GlobalGamingBetListController.cs" />
     <Compile Include="GodOfFortuneWinLossBetListController.cs" />
+    <Compile Include="VGamingBetListController.cs" />
+    <Compile Include="VGamingJackpotWonBetListController.cs" />
     <Compile Include="SabaClubJackpotWonBetListController.cs" />
     <Compile Include="LastBetsMonitoringBetListController.cs" />
     <Compile Include="SabaVirtualSportsWinLossBetListController..cs" />

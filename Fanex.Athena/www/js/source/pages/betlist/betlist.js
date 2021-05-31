@@ -29,6 +29,8 @@
         const SPORT_HB = 238;
         const SPORT_WM = 233;
         const SPORT_BGG = 239;
+        const SPORT_VGA = 171;
+        const SPORT_VGA_FreeBets = 173;
         const BETLIST_META_MODEL = '#BetListMetaModel';
 
         let _sortColumnName, _sortOrder;
@@ -601,6 +603,16 @@
                 showResultPopUp(url, { width: 800, height: 380, title: title });
                 Site.unBlockUI();
             },
+            viewVGamingResult: function (custId, gameId, siteId, gameRoundId, title, sporttype) {
+                const url = Site.resolveClientUrl('ResultReport/VGaming');
+                Site.blockUI();
+                $.get(url + '?custid=' + custId + '&gameId=' + gameId + '&siteId=' + siteId + '&gameRoundId=' + gameRoundId + '&sportType=' + sporttype, function (result) {
+                    if (result !== '') {
+                        showResultPopUp(result, { width: 800, height: 380, title: title });
+                        Site.unBlockUI();
+                    }
+                });
+            },
             viewResult: function (matchid, raceNo, bettype, sporttype, refno,
                 username, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid, transdecs) {
                 const title = Site.getSingleResource('Result');
@@ -662,6 +674,9 @@
                 }
                 else if (sporttype === SPORT_BGG) {
                     _me.viewBGGResult(custid, transdecs, league, extension2, title);
+                }
+                else if (sporttype === SPORT_VGA || sporttype === SPORT_VGA_FreeBets) {
+                    _me.viewVGamingResult(custid, bettype, extension2, transdecs, title, sporttype);
                 }
                 else {
                     const numberBettype = Number(bettype);
@@ -940,6 +955,19 @@
 
                 showDetailPopUp(url, { width: 890, height: popH + 50, title: title });
             },
+            showVGamingJackpotWonDetails: function (transId, custId, betTypeId) {
+                let url = Site.resolveClientUrl('VGamingJackpotWonBetList/Detail');
+                url = QueryString.setParam(url, 'transId', transId);
+                url = QueryString.setParam(url, 'custId', custId);
+                url = QueryString.setParam(url, 'betType', betTypeId);
+                url = QueryString.setParam(url, 'BaseCurrency', getBaseCurrency());
+
+                const popH = Math.min($(window).height() - 100, 550);
+                const title = Site.getSingleResource('ProductVGA') + ' - ' +
+                    Site.getSingleResource('JackpotWonDetails');
+
+                showDetailPopUp(url, { width: 890, height: popH + 50, title: title });
+            },
             showVideoPokerGameDetails: function (transId, winlostDate, custId, transType) {
                 let url = Site.resolveClientUrl('CardClubBetList/Detail');
                 url = QueryString.setParam(url, 'transId', transId);
@@ -1096,6 +1124,20 @@
 
                 showDetailPopUp(url, { width: 890, height: popH + 50, title: title });
             },
+            showVGamingDetails: function (transId, winlostDate, custId, transType) {
+                let url = Site.resolveClientUrl('VGamingBetList/Detail');
+                url = QueryString.setParam(url, 'transId', transId);
+                url = QueryString.setParam(url, 'date', winlostDate);
+                url = QueryString.setParam(url, 'custId', custId);
+                url = QueryString.setParam(url, 'transType', transType);
+                url = QueryString.setParam(url, 'BaseCurrency', getBaseCurrency());
+
+                const popH = Math.min($(window).height() - 100, 550);
+                const title = Site.getSingleResource('ProductVGA') + ' - ' +
+                    Site.getSingleResource('DetailedBetlist') + ' - ' + moment(new Date(winlostDate)).format('MM/DD/YYYY');
+
+                showDetailPopUp(url, { width: 890, height: popH + 50, title: title });
+            },
 
             ValidProducts: function () {
                 let temp = true;
@@ -1192,6 +1234,8 @@
                 window.showHabaneroBetDetails = _me.showHabaneroBetDetails;
                 window.showWMBetDetails = _me.showWMBetDetails;
                 window.showBGBetDetails = _me.showBGGDetails;
+                window.showVGamingDetails = _me.showVGamingDetails;
+                window.showVGamingJackpotWonDetails = _me.showVGamingJackpotWonDetails;
 
                 const betList = {
                     ViewCasinoHandHistory: _me.ViewCasinoHandHistory

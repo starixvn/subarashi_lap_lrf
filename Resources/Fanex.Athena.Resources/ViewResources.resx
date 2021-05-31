@@ -2996,4 +2996,7 @@
   <data name="SoccerPinGoal" xml:space="preserve">
     <value>Soccer PinGoal</value>
   </data>
+  <data name="ProductVGA" xml:space="preserve">
+    <value>Vgaming</value>
+  </data>
 </root>

@@ -278,7 +278,7 @@
             return await _betListApiClient.PostStringAsync("/HabaneroResultPopup/Index",
                model, language).ConfigureAwait(false);
         }
-        
+
         [HttpGet]
         public async Task<ActionResult> WM(string transDesc, string gameId3rd, int betType)
         {
@@ -294,6 +294,22 @@
             var data = await _betListApiClient.PostStringAsync("/WMResultPopup/Index", model, language).ConfigureAwait(false);
             ViewBag.Data = data.Replace(ROOT_URL, HttpRuntime.AppDomainAppVirtualPath.TrimEnd('/'));
             return View("~/Views/Desktop/Report/Result/Popup/WM.cshtml");
+        }
+
+        [HttpGet]
+        public async Task<string> VGaming(string custId, string siteId, string gameRoundId, string gameId, int sportType)
+        {
+            var language = SessionServiceInstance.UserSession.Language;
+            var model = new
+            {
+                custId,
+                siteId,
+                gameRoundId,
+                gameId,
+                sportType,
+                languageCode = language
+            };
+            return await _betListApiClient.PostStringAsync("/VGamingResultPopup/Index", model, language).ConfigureAwait(false);
         }
 
         [HttpGet]
