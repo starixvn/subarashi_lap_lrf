@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 5/21/2021 1:34:40 PM
+// Generated at: 5/31/2021 10:59:19 AM
 window._language_zh_CN = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -662,6 +662,7 @@ window._language_zh_CN = {
   ProductSXG: "AE性感真人",
   ProductTG: "桌面游戏",
   ProductVB: "澳门电子娱乐城",
+  ProductVGA: "Vgaming",
   ProductVRG: "虚拟娱乐城",
   ProductVS: "虚拟运动",
   ProductVS2: "虚拟运动2",

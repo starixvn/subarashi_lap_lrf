@@ -2170,4 +2170,7 @@
   <data name="SoccerPinGoal" xml:space="preserve">
     <value>足球台</value>
   </data>
+  <data name="ProductVGA" xml:space="preserve">
+    <value>Vgaming</value>
+  </data>
 </root>

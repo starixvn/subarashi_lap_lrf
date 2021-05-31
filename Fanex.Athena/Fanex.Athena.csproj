@@ -1164,6 +1164,8 @@
     <Content Include="Views\Desktop\BetList\WM\Main.cshtml" />
     <Content Include="Views\Desktop\Report\Result\Popup\WM.cshtml" />
     <Content Include="Views\Desktop\BetList\Habanero\Main.cshtml" />
+    <Content Include="Views\Desktop\BetList\VGamingJackpotWonDetail\Main.cshtml" />
+    <Content Include="Views\Desktop\BetList\RNGDetail\Main.cshtml" />
     <None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
     <None Include="www\css\source\pages\betlist\result\result.happy5.scss" />
     <None Include="www\css\source\reactpages\components\alert\icons\error.scss" />
