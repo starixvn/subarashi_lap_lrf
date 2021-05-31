@@ -2633,4 +2633,7 @@
   <data name="GodOfFortuneWinLoss" xml:space="preserve">
     <value>财神爷输赢</value>
   </data>
+  <data name="SoccerPinGoal" xml:space="preserve">
+    <value>足球台</value>
+  </data>
 </root>

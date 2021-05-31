@@ -48,7 +48,7 @@
         }
 
         [TestCase((int)SportType.UnknowThaiSport)]
-        [TestCase((int)SportType.Cricket)]
+        [TestCase((int)SportType.DuplicatedCricket)]
         public async Task GetSportsAndProducts_HiddenSport_NotAddToResult(int sporttype)
         {
             // Arrange

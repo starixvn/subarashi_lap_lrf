@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 5/13/2021 9:37:40 AM
+﻿// Generated at: 5/21/2021 1:34:40 PM
 window._language_zh_Hans = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -619,6 +619,7 @@ ShowAllLeagues:"显示所有联赛",
 ShowOldValue:"显示旧值",
 Sincelastmonth:"自上个月",
 SingleCustomer:"单一会员",
+SoccerPinGoal:"足球台",
 SpecialLevel:"特殊层级",
 SpecificDate:"特定日期",
 Sport:"运动",

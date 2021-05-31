@@ -22,7 +22,7 @@ namespace Fanex.Athena.DataAccess.Core.Common
         private static readonly int[] HiddenSports = new[]
         {
             (int)SportType.UnknowThaiSport,
-            (int)SportType.Cricket // Duplicated with sport 50
+            (int)SportType.DuplicatedCricket // Duplicated with sport 50
         };
 
         private readonly ICacheRefAdapter _cacheRefAdapter;

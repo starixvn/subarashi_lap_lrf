@@ -6,6 +6,7 @@
            .Select(item => new SelectListItem { Value = item.Key.ToString(), Text = item.Value })
            .ToList();
     sportList.Insert(0, new SelectListItem { Value = "0", Text = ViewResources.All, Selected = true });
+    sportList.Insert(2, new SelectListItem { Value = "-1", Text = ViewResources.SoccerPinGoal, Selected = false });
 
     var i = 0;
 }

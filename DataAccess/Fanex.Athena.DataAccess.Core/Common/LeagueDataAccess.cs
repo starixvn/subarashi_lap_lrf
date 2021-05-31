@@ -12,6 +12,7 @@ namespace Fanex.Athena.DataAccess.Core.Common
     using Data;
     using Extension.Utility;
     using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
+    using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Resources;
     using Fanex.Common.Extensions;
@@ -29,9 +30,9 @@ namespace Fanex.Athena.DataAccess.Core.Common
 
         private readonly IDictionary<int, List<int>> _sportList = new Dictionary<int, List<int>>
         {
-            { 1, new List<int>{42, 74, 108 } },
-            { 2, new List<int>{42 } },
-            { 50, new List<int>{42 } }
+            { (int)SportType.Soccer, new List<int>{42, 74, 108, 113 } },
+            { (int)SportType.BasketBall, new List<int>{42 } },
+            { (int)SportType.Cricket, new List<int>{42 } }
         };
 
         public LeagueDataAccess(ICacheRefAdapter cacheRefAdapter, IAppSettings appSettings, IBalanceUpDataAccess balanceUpDataAccess)
