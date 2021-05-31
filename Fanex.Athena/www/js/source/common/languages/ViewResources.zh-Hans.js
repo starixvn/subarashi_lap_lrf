@@ -1,4 +1,4 @@
-﻿// Generated at: 5/21/2021 1:34:40 PM
+﻿// Generated at: 5/31/2021 10:59:19 AM
 window._language_zh_Hans = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -469,6 +469,7 @@ ProductSB:"体育博彩",
 ProductSBVS:"沙巴虚拟赛事",
 ProductSLT:"体育时时彩",
 ProductSXG:"AE性感真人",
+ProductVGA:"Vgaming",
 ProductVRG:"虚拟娱乐城",
 ProductVS:"虚拟运动",
 ProductVS2:"虚拟运动2",
