@@ -84,17 +84,40 @@
         public decimal FWComm { get; set; }
 
         public decimal SXGComm { get; set; }
+
         public decimal SGComm { get; set; }
+
         public decimal KNComm { get; set; }
+
         public decimal LTComm { get; set; }
+
         public decimal TGComm { get; set; }
+
         public decimal VSComm { get; set; }
+
         public decimal VS2Comm { get; set; }
+
         public decimal VRGComm { get; set; }
+
         public decimal CCComm { get; set; }
+
         public decimal SBCComm { get; set; }
+
         public decimal SAGComm { get; set; }
+
         public decimal PGSComm { get; set; }
+
+        public decimal WMComm { get; set; }
+
+        public decimal BGGComm { get; set; }
+
+        public decimal JKComm { get; set; }
+
+        public decimal GDGComm { get; set; }
+
+        public decimal SLTComm { get; set; }
+
+        public decimal HBComm { get; set; }
 
         public void MapQuery()
         {
@@ -120,6 +143,13 @@
             CommValues.Add(Product.SAG, SAGComm);
             CommValues.Add(Product.PGS, PGSComm);
             CommValues.Add(Product.AB, ABComm);
+
+            CommValues.Add(Product.WM, WMComm);
+            CommValues.Add(Product.BGG, BGGComm);
+            CommValues.Add(Product.JK, JKComm);
+            CommValues.Add(Product.GDG, GDGComm);
+            CommValues.Add(Product.SLT, SLTComm);
+            CommValues.Add(Product.HB, HBComm);
         }
 
         public void MapData(IDataReader reader, IDictionary<string, string> columns, IDictionary<string, bool> visibility)
