@@ -1,18 +1,9 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="BetSettingMetaModel.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Model.BetSettings.MetaModel
+﻿namespace Fanex.Athena.Model.BetSettings.MetaModel
 {
     using Fanex.Athena.Model.Core.MetaModel;
     using Model.Core.DataDomain;
     using Resources;
 
-    /// <summary>
-    /// BetSettingMetaModel class.
-    /// </summary>
     public class BetSettingMetaModel : IMetalModelCustomerIdentity
     {
         public BetSettingMetaModel()
@@ -34,5 +25,9 @@ namespace Fanex.Athena.Model.BetSettings.MetaModel
         public string BetSettingName { get; set; }
 
         public bool IsFakeLicensee { get; set; }
+
+        public string CustIds { get; set; } = string.Empty;
+
+        public string CustNames { get; set; } = string.Empty;
     }
 }

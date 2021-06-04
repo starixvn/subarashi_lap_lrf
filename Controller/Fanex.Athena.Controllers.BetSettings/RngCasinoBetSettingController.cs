@@ -1,25 +1,15 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="RngCasinoBetSettingController.cs" company="">
-// Copyright (c) . All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-
-namespace Fanex.Athena.Controllers.BetSettings
+﻿namespace Fanex.Athena.Controllers.BetSettings
 {
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.Web.ActionFilter;
-
-    using Model.BetSettings.MetaModel;
-    using Model.Core.DataDomain;
-    using Model.Core.DTO.Common;
-
-    using Resources;
-
-    using Service.BetSettings.Interfaces;
-
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Web.ActionFilter;
+    using Model.BetSettings.MetaModel;
+    using Model.Core.DataDomain;
+    using Model.Core.DTO.Common;
+    using Resources;
+    using Service.BetSettings.Interfaces;
 
     public class RngCasinoBetSettingController : BetSettingBaseController
     {
@@ -28,9 +18,8 @@ namespace Fanex.Athena.Controllers.BetSettings
         public RngCasinoBetSettingController(
             ICoreBetSettingService coreBetSettingService,
             IProductService productService,
-            IRngCasinoBetSettingService betSettingService
-            )
-        : base(coreBetSettingService, productService)
+            IRngCasinoBetSettingService betSettingService)
+            : base(coreBetSettingService, productService)
         {
             _betSettingService = betSettingService;
         }
@@ -78,6 +67,7 @@ namespace Fanex.Athena.Controllers.BetSettings
                     ModifyById = userSession.UserId,
                     ModifyByUsername = userSession.UserName,
                     Ip = Request.UserHostAddress,
+                    CustIds = Request["CustIds"] ?? string.Empty,
                     StackLevelParam = GetStackLevelParam(gameTypeChangedList)
                 };
 
@@ -94,7 +84,7 @@ namespace Fanex.Athena.Controllers.BetSettings
         [HttpPost]
         [CustomValidateAntiForgery]
         [ValidatePermissionOnData]
-        public async Task<JsonResult> UpdateStatus(int custId, string nickName, int status)
+        public async Task<JsonResult> UpdateStatus(UpdateStatusMetaModel metaModel)
         {
             var userSession = SessionServiceInstance.UserSession;
             if (!CheckPermission(userSession, ProductTypes.RngCasino))
@@ -102,28 +92,28 @@ namespace Fanex.Athena.Controllers.BetSettings
                 return AccessDenied();
             }
 
-            var customer = GetCustomerInfo(custId);
+            var customer = GetCustomerInfo(metaModel.CustId);
             if (customer == null || !customer.SyncCasino)
             {
                 return AccessDenied();
             }
 
-            var metaModel = new BetSettingCasinoStatusMetaModel
+            var param = new BetSettingCasinoStatusMetaModel
             {
                 currencyAgents = userSession.CurrencyAgentList,
                 UserId = userSession.UserId,
-                CustId = custId,
-                Status = status,
+                CustId = metaModel.CustId,
+                Status = metaModel.Status,
                 Language = userSession.Language,
                 Ip = Request.UserHostAddress,
                 UserName = userSession.UserName,
                 IsSyncCasino = customer.SyncCasino
             };
-            var result = await _betSettingService.UpdateStatusAsync(metaModel).ConfigureAwait(false);
 
+            var result = await _betSettingService.UpdateStatusAsync(param).ConfigureAwait(false);
             if (result.Code == 0)
             {
-                result.Message = string.Format(ViewResources.UpdateSuccess, nickName);
+                result.Message = string.Format(ViewResources.UpdateSuccess, metaModel.Nickname);
             }
 
             return Json(result, JsonRequestBehavior.AllowGet);

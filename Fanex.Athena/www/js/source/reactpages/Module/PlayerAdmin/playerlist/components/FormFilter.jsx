@@ -8,6 +8,8 @@ import SearchOption from './filter/SearchOption';
 import AthenaSearch from './filter/AthenaSearch';
 import CollapsiblePanel from '@jsroot/components/collapsible-panel';
 import UserGuide from '@jsroot/components/UserGuide';
+import { SubsidiaryViewType } from '../../../../constants/report'
+import { TreeViewSelect } from '@9softstudio/react-multiselect'
 import LangHelper from '@jsroot/lib/langHelper';
 import {
     licenseeType, searchOptions, baStatusList,
@@ -49,7 +51,11 @@ export class FormFilter extends PureComponent {
             changeOnCustomerClass: false,
 
             commGroups: "",
-            changeOnCommGroups: false
+            changeOnCommGroups: false,
+            subsidiaries: "",
+            whiteLabels: "",
+            loadedSubsidiares: false,
+            searchBySubsidiary: false
         };
     }
 
@@ -66,11 +72,23 @@ export class FormFilter extends PureComponent {
 
         const { type, isSubsidiary, hasCommPermissionRead } = this.props;
         this.props.getSiteSetting(type, isSubsidiary, hasCommPermissionRead);
-        this.props.getLRFFilters({ hasCommPermissionRead });
+        this.props.getLRFFilters({
+            param: { hasCommPermissionRead, CurrencyAgentList: null },
+            callback: null
+        });
     }
 
     componentDidUpdate(prevProps, prevState) {
         const { isAdvancedSearch } = this.props;
+        if (!this.state.loadedSubsidiares) {
+            var subs = this.props.lrfFilters.Subsidiaries || [];
+            this.setState({
+                subsidiaries: subs.map(s => s.Children.map(c => c.Id).join(",")).join(","),
+                whiteLabels: subs.map(s => s.Id).join(","),
+                loadedSubsidiares: subs.length !== 0
+            });
+        }
+
         if (prevProps.isAdvancedSearch !== isAdvancedSearch && !isAdvancedSearch) {
             this.setState({
                 currencyIdList: this.allCurrencyString,
@@ -88,7 +106,8 @@ export class FormFilter extends PureComponent {
 
     searchPlayer() {
         const { email } = this.state;
-        if (email && !(new RegExp(emailPattern).test(email))) {
+        if (this.state.searchOption !== searchOptions.allPlayers &&
+            email && !(new RegExp(emailPattern).test(email))) {
             window.alert(LangHelper.getSingleResource('InvalidEmail'));
             return;
         }
@@ -106,6 +125,10 @@ export class FormFilter extends PureComponent {
         const actualCommGroups = this.state.changeOnCommGroups
             ? restParam.commGroups : this.props.lrfFilters.CommGroups.map(c => c.Id).join(",");
 
+        const subs = this.props.lrfFilters.Subsidiaries || [];
+        const actualSubsidiaries = subs.length && restParam.subsidiaries.trim().split(',').length === subs.reduce((t, r) => t + r.Children.length) ? '' : restParam.subsidiaries;
+        const actualWhiteLabels = restParam.whiteLabels.trim().split(',').length === subs.length ? '' : restParam.whiteLabels;
+
         const param = {
             ...restParam,
             userName: encode(userName),
@@ -115,6 +138,8 @@ export class FormFilter extends PureComponent {
             customerClass: actualCustomerClass,
             changeOnCommGroups: actualCommGroups.split(',').length != this.props.lrfFilters.CommGroups.length,
             commGroups: actualCommGroups,
+            subsidiaries: actualSubsidiaries,
+            whiteLabels: actualWhiteLabels,
             pageSize: pagingOption.PageSize,
             pageIndex: 1
         };
@@ -180,14 +205,98 @@ export class FormFilter extends PureComponent {
             `${LangHelper.getSingleResource("Username")}/${LangHelper.getSingleResource("VendorMemberID")}`
     }
 
+    _getSubsidiaryDropdown(lrfFilters) {
+        let viewType = lrfFilters.SubsidiaryViewType;
+        if (viewType === SubsidiaryViewType.NOT_MANAGEMENT) {
+            return "";
+        }
+
+        const subsidiaries = (this.state.loadedSubsidiares ? lrfFilters.Subsidiaries : []).map(s => ({
+            Value: s.Id,
+            Name: s.Name,
+            Checked: `,${this.state.whiteLabels}`.indexOf(s.Id) !== -1,
+            Children: s.Children.map(c => ({
+                Value: c.Id,
+                Name: c.Name,
+                Checked: `,${this.state.subsidiaries}`.indexOf(c.Id) !== -1
+            }))
+        }));
+
+        const textOptions = { SelectOptions: "Please select", All: "All", SelectedItemCount: "# selected" };
+        const treeViewOption = {
+            childrenField: 'Children',
+            keyField: 'Value',
+            valueField: 'Name',
+            statusField: 'Checked',
+            indent: 30,
+            includeSelectedParentKey: false,
+            useOriginalDataSource: false
+        };
+
+        let dropdownLabel = viewType === SubsidiaryViewType.MASTER_MANAGEMENT ? "WhiteLabel" : "Subsidiary";
+        let subsidiaryDropdown =
+            (<>
+                <div className="col-12 col-md-3 col-sm-2 col-lg-2 col-xl-2 hide">
+                    <div className="form-group">
+                        <CheckBox id="SubsidiarySearch"
+                            checked={this.state.searchBySubsidiary}
+                            onChange={checked => this._setSearchBySubsidiary(checked)}
+                            label={LangHelper.getSingleResource("SubsidiarySearch")} />
+                    </div>
+                </div>
+                <div className={"col-12 col-md-3 col-sm-5 col-lg-3 col-xl-3 hide" + (this.state.searchBySubsidiary ? "" : " hide")}>
+                    <div className="form-group">
+                        <label className="label-text">
+                            {LangHelper.getSingleResource(dropdownLabel)}
+                        </label>
+                        <TreeViewSelect
+                            language={LangHelper.currentLanguage}
+                            id="SubsidiaryTreeView"
+                            dataSource={subsidiaries}
+                            keyField="Value"
+                            valueField="Name"
+                            statusField="Checked"
+                            texts={textOptions}
+                            isAllTextShown={false}
+                            hasSearchBox={false}
+                            treeViewOption={treeViewOption}
+                            onChange={this._changeOnSubsidiary} />
+                    </div>
+                </div>
+            </>);
+
+        return subsidiaryDropdown;
+    }
+
+    _changeOnSubsidiary = (currentItem, selectedItemsKey, treeViewList) => {
+        if (this.props.lrfFilters.SubsidiaryViewType === SubsidiaryViewType.MASTER_MANAGEMENT) {
+            let selectedParentItems = [];
+            for (let i = 0; i < treeViewList.length; i++) {
+                const item = treeViewList[i];
+                if (item.checked && item.level === 1 && selectedParentItems.indexOf(item.parentKey) < 0) {
+                    selectedParentItems.push(item.parentKey);
+                }
+            }
+
+            this.setState({ whiteLabels: selectedParentItems.join(',') });
+        }
+
+        this.setState({ subsidiaries: selectedItemsKey });
+    }
+
+    _setSearchBySubsidiary = (isSearchBySubsidiary) => {
+        this.setState({ searchBySubsidiary: isSearchBySubsidiary });
+    };
+
     render() {
         const { bankAccountNumber, email, searchOption, ipLogin, isDeposited, ...advancedSearchParam } = this.state;
         const { type, isAdvancedSearch, isFilterCollapsing, currencyList, getSuggestionList, siteSetting } = this.props;
         const { currencyIdList, oddsGroup, specialLevel } = advancedSearchParam;
 
-        const isValidParam = !!currencyIdList && !!oddsGroup && !!specialLevel &&
-            !(this.state.changeOnCustomerClass && !this.state.customerClass) &&
-            !(this.state.changeOnCommGroups && !this.state.commGroups);
+        const isValidParam = !!currencyIdList && !!oddsGroup && !!specialLevel
+            && !(this.state.changeOnCustomerClass && !this.state.customerClass)
+            && !(this.state.changeOnCommGroups && !this.state.commGroups);
+        //  && !!this.state.subsidiaries;
 
         const iconToggle = {
             tag: 'div',
@@ -199,15 +308,21 @@ export class FormFilter extends PureComponent {
             <CollapsiblePanel className="page-filter" iconToggle={iconToggle} stickyFooter={this.userGuide}
                 onCollapse={() => this.props.setCollapseFilter(true)} onExpand={() => this.props.setCollapseFilter(false)}>
                 <div className="row">
+                    {this._getSubsidiaryDropdown(this.props.lrfFilters)}
+
                     <div className="col-12 col-md-4 col-sm-4 col-lg-3 col-xl-3">
                         <div className="form-group">
                             <label className="label-text">
                                 {this._getUserNameLabel()}<span className={this.state.isMatchPrecise ? "" : "hide"}>/{LangHelper.getSingleResource("SystemId")}</span>
                                 {(<SearchOption value={searchOption} onChange={this.handleChange} />)}
                             </label>
-                            <UserNameInput ref={this.userNameRef} onSelectItem={(value) => this.handleUserNameChange(value)}
-                                minChar={3} getSuggestionList={getSuggestionList} searchOption={searchOption}
-                                onKeyPress={this.handlePressEnter} onChange={(value) => this.handleUserNameChange(value)} />
+                            <UserNameInput ref={this.userNameRef}
+                                onSelectItem={(value) => this.handleUserNameChange(value)}
+                                minChar={3}
+                                getSuggestionList={getSuggestionList}
+                                searchOption={searchOption}
+                                onKeyPress={this.handlePressEnter}
+                                onChange={(value) => this.handleUserNameChange(value)} />
                         </div>
                     </div>
 
@@ -215,9 +330,10 @@ export class FormFilter extends PureComponent {
                         bankAccountNumber={bankAccountNumber}
                         email={email}
                         ipLogin={ipLogin}
+                        searchOption={searchOption}
                         onKeyPress={this.handlePressEnter} />}
 
-                    <div className="hide col-12 col-md-3 col-sm-3 col-lg-2 col-xl-1">
+                    <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-1">
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource("Deposited")}</label>
                             <Select instanceId='ddlDeposited'

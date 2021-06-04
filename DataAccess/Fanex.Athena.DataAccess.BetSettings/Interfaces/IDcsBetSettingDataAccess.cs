@@ -1,13 +1,8 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="IDcsBetSettingDataAccess.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.DataAccess.BetSettings.Interfaces
+﻿namespace Fanex.Athena.DataAccess.BetSettings.Interfaces
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using Fanex.Athena.Model.BetSettings.MetaModel;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Model.BetSettings.DTO;
 
@@ -15,10 +10,10 @@ namespace Fanex.Athena.DataAccess.BetSettings.Interfaces
     {
         Task<bool?> GetStatusAsync(int custId, int productId);
 
-        Task<IResultInfo> UpdateStatusAsync(int userId, int custId, string ip, bool status, int productId);
+        Task<IResultInfo> UpdateStatusAsync(int userId, string ip, UpdateStatusMetaModel metaModel);
 
         Task<IList<BetSetting>> GetBetSettingAsync(int custId, int productId);
 
-        Task<IResultInfo> UpdateBetSettingAsync(int custId, int userId, string ip, string xmlData);
+        Task<IResultInfo> UpdateBetSettingAsync(CommonBetSetting metaModel, string xmlData);
     }
 }

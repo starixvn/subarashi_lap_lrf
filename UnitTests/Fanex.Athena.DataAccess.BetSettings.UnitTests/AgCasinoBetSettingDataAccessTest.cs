@@ -3,7 +3,7 @@
     using System.Threading.Tasks;
 
     using Core.UnitTests.TestHelpers;
-
+    using Fanex.Athena.Model.BetSettings.MetaModel;
     using Model.BetSettings.DTO;
 
     using NSubstitute;
@@ -69,9 +69,14 @@
             var language = "LanguageTest";
             var ip = "IP";
             var isEnabled = true;
+            var metaModel = new UpdateStatusMetaModel
+            {
+                CustId = custId,
+                Status = 1
+            };
 
             // Action
-            await DataAccess.UpdateStatusAsync(userId, custId, language, ip, isEnabled);
+            await DataAccess.UpdateStatusAsync(userId, language, ip, metaModel);
 
             // Assert
             ObjectDb.Received(1).SetParameterValue("isenabled", isEnabled);

@@ -3,7 +3,7 @@ import NumberFormat from '@jsroot/lib/numberFormat';
 import { headerCellStyle, bodyCellStyle } from '@jsroot/constants/excelStyle';
 import { fields, headerText } from './constants';
 import { getSpecialLevelText, getBaStatusText, getPlayerStatus, getCustomerClassText } from './helpers/utils';
-import $ from 'jquery';
+import LangHelper from '@jsroot/lib/langHelper';
 
 const HEADER_ROW_INDEX = 0;
 const DATA_ROW_INDEX = 1;
@@ -95,7 +95,7 @@ export default class ReportExcel {
         }
 
         if (columnConfig.field === fields.CommissionGroup) {
-            value = $(".td-comm-" + item.IbcCustId).html();
+            value = value == "0" || !value ? LangHelper.getSingleResource('None') : value;
         }
 
         if (columnConfig.field === fields.CustomerClass) {
@@ -110,7 +110,7 @@ export default class ReportExcel {
             t: Excel.getCellType(displayedValue),
             v: displayedValue,
             s: columnConfig[MAIN_SECTION_STYLE]
-        }
+        };
     }
 
     _shouldSetEmpty(value) {

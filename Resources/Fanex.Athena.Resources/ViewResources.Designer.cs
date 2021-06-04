@@ -1510,6 +1510,51 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to change the status of these players?.
+        /// </summary>
+        public static string ConfirmBatchUpdateAccountStatus {
+            get {
+                return ResourceManager.GetString("ConfirmBatchUpdateAccountStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to turn off BA?.
+        /// </summary>
+        public static string ConfirmBatchUpdateBAStatus_Off {
+            get {
+                return ResourceManager.GetString("ConfirmBatchUpdateBAStatus_Off", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to turn on BA?.
+        /// </summary>
+        public static string ConfirmBatchUpdateBAStatus_On {
+            get {
+                return ResourceManager.GetString("ConfirmBatchUpdateBAStatus_On", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to move these players to selected odds group?.
+        /// </summary>
+        public static string ConfirmBatchUpdateOddsGroup {
+            get {
+                return ResourceManager.GetString("ConfirmBatchUpdateOddsGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to set special level for these players?.
+        /// </summary>
+        public static string ConfirmBatchUpdateSpecialLevel {
+            get {
+                return ResourceManager.GetString("ConfirmBatchUpdateSpecialLevel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirm Customer&apos;s Commission:.
         /// </summary>
         public static string ConfirmCommission {
@@ -4300,6 +4345,24 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CLOSED: player cannot be restored forever!.
+        /// </summary>
+        public static string MessageBatchUpdateAccountStatus_Close {
+            get {
+                return ResourceManager.GetString("MessageBatchUpdateAccountStatus_Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LOCKED: player cannot login!.
+        /// </summary>
+        public static string MessageBatchUpdateAccountStatus_Lock {
+            get {
+                return ResourceManager.GetString("MessageBatchUpdateAccountStatus_Lock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Commission cannot be greater than 15%.
         /// </summary>
         public static string MessageCommCannotGreaterThan {
@@ -4354,11 +4417,38 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to BA status can only be changed on Monday from 1PM to 5PM (GMT+8)..
+        /// </summary>
+        public static string MessageLimitTimeUpdateBA {
+            get {
+                return ResourceManager.GetString("MessageLimitTimeUpdateBA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Successful.
         /// </summary>
         public static string MessageSuccess {
             get {
                 return ResourceManager.GetString("MessageSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VIP players are not allowed to turn on BA..
+        /// </summary>
+        public static string MessageTurnOffVIPError {
+            get {
+                return ResourceManager.GetString("MessageTurnOffVIPError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BA players are not allowed to changed odds group..
+        /// </summary>
+        public static string MessageUpdateOddsGroupForBAPlayers {
+            get {
+                return ResourceManager.GetString("MessageUpdateOddsGroupForBAPlayers", resourceCulture);
             }
         }
         
@@ -6163,6 +6253,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Search All Players.
+        /// </summary>
+        public static string SearchAllPlayers {
+            get {
+                return ResourceManager.GetString("SearchAllPlayers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search Result.
         /// </summary>
         public static string SearchResult {
@@ -7144,6 +7243,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Update Account Status.
+        /// </summary>
+        public static string UpdateAccountStatus {
+            get {
+                return ResourceManager.GetString("UpdateAccountStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Update account successfully!.
         /// </summary>
         public static string UpdateAccountSuccessMsg {
@@ -7167,6 +7275,24 @@ namespace Fanex.Athena.Resources {
         public static string UpdateAgCasinoBetSettingSuccessMsg {
             get {
                 return ResourceManager.GetString("UpdateAgCasinoBetSettingSuccessMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update BA Status.
+        /// </summary>
+        public static string UpdateBAStatus {
+            get {
+                return ResourceManager.GetString("UpdateBAStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update Bet Limit.
+        /// </summary>
+        public static string UpdateBetLimit {
+            get {
+                return ResourceManager.GetString("UpdateBetLimit", resourceCulture);
             }
         }
         
@@ -7279,6 +7405,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Update Odds Group.
+        /// </summary>
+        public static string UpdateOddsGroup {
+            get {
+                return ResourceManager.GetString("UpdateOddsGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to update all {0} bet settings?.
         /// </summary>
         public static string UpdateProductBetSettings {
@@ -7324,6 +7459,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Update Special Level.
+        /// </summary>
+        public static string UpdateSpecialLevel {
+            get {
+                return ResourceManager.GetString("UpdateSpecialLevel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid parameter. Invalid custId..
         /// </summary>
         public static string UpdateSpecialLevelMsg {
@@ -7356,6 +7500,15 @@ namespace Fanex.Athena.Resources {
         public static string UpdateSuccess {
             get {
                 return ResourceManager.GetString("UpdateSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update to Account Status.
+        /// </summary>
+        public static string UpdateToAccountStatus {
+            get {
+                return ResourceManager.GetString("UpdateToAccountStatus", resourceCulture);
             }
         }
         

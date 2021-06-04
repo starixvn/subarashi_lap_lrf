@@ -131,6 +131,7 @@
   <ItemGroup>
     <Compile Include="CashOutWinLossExcel.cs" />
     <Compile Include="ActiveCustomerSummaryExcel.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Helpers\ReportExcelHelper.cs" />
     <Compile Include="AgCasinoBalanceExcel.cs" />
     <Compile Include="SabaVirtualSportsExcel.cs" />

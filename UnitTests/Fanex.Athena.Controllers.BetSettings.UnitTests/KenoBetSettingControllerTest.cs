@@ -3,10 +3,10 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Model.Core.DataDomain;
     using Model.BetSettings.DTO;
     using Model.BetSettings.MetaModel;
     using Model.BetSettings.ViewModel;
+    using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using NSubstitute;
     using NUnit.Framework;
@@ -67,7 +67,7 @@
                     .Returns(new ProductAccess(new List<Product>()));
 
                 // Action
-                var result = await controller.UpdateBetSetting(string.Empty) as JsonResult;
+                var result = await controller.UpdateBetSetting(string.Empty);
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -96,7 +96,7 @@
                 controller.HttpContext.Request["custid"].Returns(custid);
 
                 // Action
-                var result = await controller.UpdateBetSetting(string.Empty) as JsonResult;
+                var result = await controller.UpdateBetSetting(string.Empty);
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -121,15 +121,11 @@
 
                 controller.HttpContext.Request[Arg.Any<string>()].Returns("1");
 
-                _betSettingService.UpdateBetSettingAsync(
-                   Arg.Any<int>(),
-                   Arg.Any<int>(),
-                   Arg.Any<string>(),
-                   Arg.Any<string>(),
-                   Arg.Any<KenoBetSetting>()).Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 0 }));
+                _betSettingService.UpdateBetSettingAsync(Arg.Any<CommonBetSetting>(), Arg.Any<KenoBetSetting>())
+                   .Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 0 }));
 
                 // Action
-                var result = await controller.UpdateBetSetting(string.Empty) as JsonResult;
+                var result = await controller.UpdateBetSetting(string.Empty);
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -165,12 +161,8 @@
                 controller.HttpContext.Request["maxpermatch1"].Returns(MaxPerMatch.ToString());
 
                 KenoBetSetting param = null;
-                _betSettingService.UpdateBetSettingAsync(
-                   Arg.Any<int>(),
-                   Arg.Any<int>(),
-                   Arg.Any<string>(),
-                   Arg.Any<string>(),
-                   Arg.Do<KenoBetSetting>(x => param = x)).Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 0 }));
+                _betSettingService.UpdateBetSettingAsync(Arg.Any<CommonBetSetting>(), Arg.Do<KenoBetSetting>(x => param = x))
+                   .Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 0 }));
 
                 // Action
                 await controller.UpdateBetSetting(string.Empty);
@@ -199,15 +191,11 @@
 
                 controller.HttpContext.Request[Arg.Any<string>()].Returns("1");
 
-                _betSettingService.UpdateBetSettingAsync(
-                   Arg.Any<int>(),
-                   Arg.Any<int>(),
-                   Arg.Any<string>(),
-                   Arg.Any<string>(),
-                   Arg.Any<KenoBetSetting>()).Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 1, Message = "Error" }));
+                _betSettingService.UpdateBetSettingAsync(Arg.Any<CommonBetSetting>(), Arg.Any<KenoBetSetting>())
+                   .Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 1, Message = "Error" }));
 
                 // Action
-                var result = await controller.UpdateBetSetting(string.Empty) as JsonResult;
+                var result = await controller.UpdateBetSetting(string.Empty);
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert

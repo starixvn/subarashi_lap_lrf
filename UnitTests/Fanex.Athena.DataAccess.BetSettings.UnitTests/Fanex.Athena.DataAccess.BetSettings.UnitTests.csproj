@@ -74,6 +74,7 @@
     <Compile Include="AgCasinoBetSettingDataAccessTest.cs" />
     <Compile Include="CoreCasinoBetSettingDataAccessTest.cs" />
     <Compile Include="CoreBetSettingDataAccessTest.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="KenoBetSettingDataAccessTest.cs" />
     <Compile Include="RngCasinoBetSettingDataAccessTest.cs" />
     <Compile Include="NumberGameBetSettingDataAccessTest.cs" />

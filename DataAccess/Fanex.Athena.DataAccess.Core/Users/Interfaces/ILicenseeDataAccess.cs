@@ -1,19 +1,12 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ILicenseeDataAccess.cs" company="">
-// a
-// </copyright>
-// <summary>
-//   The i licensee data access.
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
-
-namespace Fanex.Athena.DataAccess.Core.Users.Interfaces
+﻿namespace Fanex.Athena.DataAccess.Core.Users.Interfaces
 {
     using System.Collections.Generic;
     using Fanex.Athena.Model.Core.DTO.Common;
 
     public interface ILicenseeDataAccess
     {
+        IResultInfo<bool> IsAllowUpdateMemberBAStatus(string language, int licenseeId);
+
         IResultInfo<bool> IsAllowUpdateMemberBAStatus(Request request, int licenseeId);
 
         bool IsLicenseeBelongToUser(int licenseeId, int userId);

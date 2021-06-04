@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Fanex.Athena.Model.BetSettings.MetaModel
+﻿namespace Fanex.Athena.Model.BetSettings.MetaModel
 {
     public class CoreCasinoStatusMetaModel
     {
@@ -17,5 +11,7 @@ namespace Fanex.Athena.Model.BetSettings.MetaModel
         public string Language { get; set; }
 
         public string Ip { get; set; }
+
+        public string CustIds { get; set; }
     }
 }

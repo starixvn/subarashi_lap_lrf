@@ -1,26 +1,16 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="KenoBetSettingController.cs" company="">
-// Copyright (c) . All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-
-namespace Fanex.Athena.Controllers.BetSettings
+﻿namespace Fanex.Athena.Controllers.BetSettings
 {
+    using System;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
-
     using Model.BetSettings.DTO;
     using Model.BetSettings.MetaModel;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
-
     using Resources;
-
     using Service.BetSettings.Interfaces;
-
-    using System;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
 
     public class KenoBetSettingController : BetSettingBaseController
     {
@@ -29,9 +19,8 @@ namespace Fanex.Athena.Controllers.BetSettings
         public KenoBetSettingController(
             ICoreBetSettingService coreBetSettingService,
             IProductService productService,
-            IKenoBetSettingService betSettingService
-            )
-        : base(coreBetSettingService, productService)
+            IKenoBetSettingService betSettingService)
+            : base(coreBetSettingService, productService)
         {
             _betSettingService = betSettingService;
         }
@@ -70,13 +59,7 @@ namespace Fanex.Athena.Controllers.BetSettings
 
             var betSetting = GetBetSetting(id);
 
-            var result = await _betSettingService.UpdateBetSettingAsync(
-                commonParam.CustId,
-                commonParam.UserId,
-                commonParam.Language,
-                commonParam.Ip,
-                betSetting);
-
+            var result = await _betSettingService.UpdateBetSettingAsync(commonParam, betSetting);
             if (result.Code == 0)
             {
                 result.Message = string.Format(ViewResources.UpdateKenoBetSettingSuccessMsg, nickName);

@@ -65,6 +65,7 @@ define(['jquery', 'common/site', '../common/constant', '../common/betsettingbase
                 params.userName = userName;
                 params.nickName = nickName;
                 params.productId = productId;
+                params.custIds = $("#CustIds").val();
 
                 BetSettingBase.updateBetSetting(Site.resolveClientUrl('DcsBetSetting/UpdateBetSetting'), params);
             }

@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="KenoBetSettingDataAccess.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.DataAccess.BetSettings
+﻿namespace Fanex.Athena.DataAccess.BetSettings
 {
     using System.Collections.Generic;
     using System.Data;
@@ -31,16 +25,16 @@ namespace Fanex.Athena.DataAccess.BetSettings
             }
         }
 
-        public async Task<IResultInfo> UpdateBetSettingAsync(int custId, int userId, string language, string ip, string xmlData)
+        public async Task<IResultInfo> UpdateBetSettingAsync(CommonBetSetting metaModel, string xmlData)
         {
             const string UspName = "Lrf_CustomerUpdMember_MinMaxBetKN";
 
             using (var db = this.GetObjectDb(UspName))
             {
-                db.SetParameterValue("custid", custId);
-                db.SetParameterValue("userid", userId);
-                db.SetParameterValue("language", language);
-                db.SetParameterValue("ip", ip);
+                db.SetParameterValue("custid", metaModel.CustId);
+                db.SetParameterValue("userid", metaModel.UserId);
+                db.SetParameterValue("language", metaModel.Language);
+                db.SetParameterValue("ip", metaModel.Ip);
                 db.SetParameterValue("dataxml", xmlData);
                 db.SetParameterValue("errcode", null);
                 db.SetParameterValue("errmsg", null);

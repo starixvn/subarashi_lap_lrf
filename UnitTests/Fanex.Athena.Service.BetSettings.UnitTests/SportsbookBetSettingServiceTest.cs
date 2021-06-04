@@ -16,10 +16,6 @@
 
     using NUnit.Framework;
 
-    using Resources;
-
-    using StatelessCore.Interfaces;
-
     using UnitTest.Common.Helpers;
 
     [TestFixture]
@@ -38,7 +34,7 @@
             _service = new SportsbookBetSettingService(_dataAccess, _dcsBetSettingService);
         }
 
-        
+
         [Test]
         public async Task GetViewModelAsync_WhenCall_ReturnDataFromDataAcccess()
         {
@@ -95,18 +91,13 @@
             var commonBetSetting = FakeHelper.Create<CommonBetSetting>();
 
             // Action
-            var result = await _service.UpdateBetSettingAsync(commonBetSetting,
-                new Dictionary<string, object>(), new DcsBetSetting());
+            await _service.UpdateBetSettingAsync(commonBetSetting, new Dictionary<string, object>(), new DcsBetSetting());
 
             // Assert
             Assert.Multiple(() =>
             {
                 _dataAccess.Received(1).UpdateBetSettingAsync(commonBetSetting, Arg.Any<Dictionary<string, object>>());
-                _dcsBetSettingService.Received(1).UpdateBetSettingAsync(
-                    commonBetSetting.CustId,
-                    commonBetSetting.UserId,
-                    commonBetSetting.Ip,
-                    Arg.Any<IEnumerable<DcsBetSetting>>());
+                _dcsBetSettingService.Received(1).UpdateBetSettingAsync(commonBetSetting, Arg.Any<IEnumerable<DcsBetSetting>>());
             });
         }
 
@@ -122,18 +113,13 @@
                 }));
 
             // Action
-            await _service.UpdateBetSettingAsync(new CommonBetSetting(),
-                new Dictionary<string, object>(), new DcsBetSetting());
+            await _service.UpdateBetSettingAsync(new CommonBetSetting(), new Dictionary<string, object>(), new DcsBetSetting());
 
             // Assert
             Assert.Multiple(() =>
             {
                 _dataAccess.Received(1).UpdateBetSettingAsync(Arg.Any<CommonBetSetting>(), Arg.Any<Dictionary<string, object>>());
-                _dcsBetSettingService.DidNotReceive().UpdateBetSettingAsync(
-                    Arg.Any<int>(),
-                    Arg.Any<int>(),
-                    Arg.Any<string>(),
-                    Arg.Any<IEnumerable<DcsBetSetting>>());
+                _dcsBetSettingService.DidNotReceive().UpdateBetSettingAsync(Arg.Any<CommonBetSetting>(), Arg.Any<IEnumerable<DcsBetSetting>>());
             });
         }
 

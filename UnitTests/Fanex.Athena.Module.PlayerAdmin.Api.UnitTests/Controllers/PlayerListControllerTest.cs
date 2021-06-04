@@ -4,6 +4,7 @@ using Fanex.Athena.Module.PlayerAdmin.Api.DTO;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services.Interfaces;
 using Fanex.Athena.Module.PlayerAdmin.Api.ViewModels;
+using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.UnitTest.Common.Helpers;
 using NSubstitute;
 using NUnit.Framework;
@@ -14,17 +15,23 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Controllers
     public class PlayerListControllerTest
     {
         private IPlayerListService playerListService;
+        private IPlayerSubsidiaryService playerSubsidiaryService;
+        private IOneAuthenticationService oneAuthenticationService;
 
         [SetUp]
         public void Setup()
         {
             playerListService = Substitute.For<IPlayerListService>();
+            playerSubsidiaryService = Substitute.For<IPlayerSubsidiaryService>();
+            oneAuthenticationService = Substitute.For<IOneAuthenticationService>();
         }
 
         [TearDown]
         public void TearDown()
         {
             playerListService = null;
+            playerSubsidiaryService = null;
+            oneAuthenticationService = null;
         }
 
         [Test]
@@ -82,7 +89,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Controllers
         {
             var actionContext = ExternalApiHelper.CreateMockActionContext();
 
-            return new PlayerListController(playerListService)
+            return new PlayerListController(playerListService, playerSubsidiaryService, oneAuthenticationService)
             {
                 ActionContext = actionContext
             };

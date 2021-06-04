@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="LicenseeDataAccess.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.DataAccess.Core.Users
+﻿namespace Fanex.Athena.DataAccess.Core.Users
 {
     using System;
     using System.Collections.Generic;
@@ -17,12 +11,17 @@ namespace Fanex.Athena.DataAccess.Core.Users
     {
         public IResultInfo<bool> IsAllowUpdateMemberBAStatus(Request request, int licenseeId)
         {
+            return IsAllowUpdateMemberBAStatus(request.Language, licenseeId);
+        }
+
+        public IResultInfo<bool> IsAllowUpdateMemberBAStatus(string language, int licenseeId)
+        {
             const string UspName = "Lrf_BATimeCheck";
 
             var isAllow = false;
             using (var db = this.GetObjectDb(UspName))
             {
-                db.SetParameterValue("langkey", request.Language);
+                db.SetParameterValue("langkey", language);
                 db.SetParameterValue("LicenseeID", licenseeId);
                 db.SetParameterValue("isallow", null);
 

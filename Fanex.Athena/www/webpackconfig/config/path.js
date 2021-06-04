@@ -62,7 +62,9 @@ var cssPaths = {
     customerwinloss: ["./www/css/source/pages/report/customerwinloss.scss"],
     playercomission: ["./www/css/source/pages/playercommission/index.scss"],
     customerClass: ["./www/css/source/pages/customer/customer-class.scss"],
-    fixedColumnsTable: ["./www/css/source/components/bootstrap-table/bootstrap-table.scss", "./www/css/source/components/bootstrap-table/bootstrap-table-fixed-columns.scss"]
+    fixedColumnsTable: ["./www/css/source/components/bootstrap-table/bootstrap-table.scss", "./www/css/source/components/bootstrap-table/bootstrap-table-fixed-columns.scss"], 
+
+    playerBatchUpdate: ["./www/css/source/pages/playerBatchUpdate/index.scss"]
 };
 
 var scriptPaths = {
@@ -141,7 +143,12 @@ var scriptPaths = {
     playercomissionmultipleupdategroup: "./www/js/source/pages/playercommission/multipleupdategroup.js",
     playercomissionsinglemovegroup: "./www/js/source/pages/playercommission/singlemovegroup.js",
     playercomissionsingleremovefromgroup: "./www/js/source/pages/playercommission/singleremovefromgroup.js",
-    playercomissionsingleupdategroup: "./www/js/source/pages/playercommission/singleupdategroup.js"
+    playercomissionsingleupdategroup: "./www/js/source/pages/playercommission/singleupdategroup.js",
+
+    playerBatchUpdateAccountStatus: "./www/js/source/pages/playerBatchUpdate/account-status.js",
+    playerBatchUpdateSpecialLevel: "./www/js/source/pages/playerBatchUpdate/special-level.js",
+    playerBatchUpdateOddsGroup: "./www/js/source/pages/playerBatchUpdate/odds-group.js",
+    playerBatchUpdateBAStatus: "./www/js/source/pages/playerBatchUpdate/ba-status.js"
 };
 
 module.exports = {

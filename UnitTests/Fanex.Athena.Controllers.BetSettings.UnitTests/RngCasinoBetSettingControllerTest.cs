@@ -3,9 +3,9 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Model.Core.DataDomain;
     using Model.BetSettings.MetaModel;
     using Model.BetSettings.ViewModel;
+    using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Customer.DTO;
     using NSubstitute;
@@ -128,7 +128,7 @@
                    Arg.Any<bool>()).Returns(expectedResultInfo);
 
                 // Action
-                var result  = await controller.UpdateBetSetting(0, "1").ConfigureAwait(false);
+                var result = await controller.UpdateBetSetting(0, "1").ConfigureAwait(false);
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -202,7 +202,7 @@
                    Arg.Any<bool>()).Returns(new ResultInfo { Code = 1, Message = "Error" });
 
                 // Action
-                 await controller.UpdateBetSetting(CustId, string.Join(",", gameTypes)).ConfigureAwait(false);
+                await controller.UpdateBetSetting(CustId, string.Join(",", gameTypes)).ConfigureAwait(false);
 
                 // Assert
                 Assert.Multiple(() =>
@@ -223,9 +223,10 @@
                 // Arrange
                 ProductService.GetProductAccess(DefaultLicenseeSession.LicenseeId, DefaultUserSession.Language)
                     .Returns(new ProductAccess(new List<Product>()));
+                var metaModel = new UpdateStatusMetaModel { Nickname = string.Empty };
 
                 // Action
-                var result = await controller.UpdateStatus(0, string.Empty, 0) as JsonResult;
+                var result = await controller.UpdateStatus(metaModel);
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -247,9 +248,10 @@
                     .Returns(new ProductAccess(new List<Product> { new Product { ProductCode = Product.CS, ProductID = ProductTypes.RngCasino } }));
 
                 CoreBetSettingService.GetCustomerInfo(0).Returns(new CustomerInfo { SyncCasino = false });
+                var metaModel = new UpdateStatusMetaModel { Nickname = string.Empty };
 
                 // Action
-                var result = await controller.UpdateStatus(0, string.Empty, 0) as JsonResult;
+                var result = await controller.UpdateStatus(metaModel);
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -276,9 +278,10 @@
 
                 _betSettingService.UpdateStatusAsync(Arg.Any<BetSettingCasinoStatusMetaModel>())
                     .Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 0 }));
+                var metaModel = new UpdateStatusMetaModel { Nickname = string.Empty };
 
                 // Action
-                var result = await controller.UpdateStatus(0, string.Empty, 0) as JsonResult;
+                var result = await controller.UpdateStatus(metaModel);
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -305,9 +308,10 @@
 
                 _betSettingService.UpdateStatusAsync(Arg.Any<BetSettingCasinoStatusMetaModel>())
                     .Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 1, Message = "Error" }));
+                var metaModel = new UpdateStatusMetaModel { Nickname = string.Empty };
 
                 // Action
-                var result = await controller.UpdateStatus(0, string.Empty, 0) as JsonResult;
+                var result = await controller.UpdateStatus(metaModel);
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert

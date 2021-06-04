@@ -1,6 +1,7 @@
-import React, { useState, useRef } from 'react';
+﻿import React, { useState, useRef } from 'react';
 import { DropdownMenu, DropdownItem } from '@jsroot/components/dropdown';
 import Timer from '@jsroot/components/utils/timer';
+import { searchOptions } from '../../lib/constants';
 
 export const UserNameInput = React.forwardRef((props, userNameRef) => {
     const { onSelectItem, minChar, getSuggestionList, searchOption, onChange, ...inputAttributes } = props;
@@ -73,8 +74,13 @@ export const UserNameInput = React.forwardRef((props, userNameRef) => {
 
     return (
         <div className="pa-username">
-            <input className="input-text" id="userName" name="userName" type="text" ref={userNameRef}
-                autoComplete="off" onChange={debounceChange} {...inputAttributes} />
+            <input className="input-text"
+                id="userName"
+                name="userName"
+                type="text" ref={userNameRef}
+                autoComplete="off"
+                disabled={searchOption == searchOptions.allPlayers}
+                onChange={debounceChange} {...inputAttributes} />
             <div className="dropdown">
                 <DropdownMenu isOpen={isOpenSuggestion} style={dropdownStyle}>
                     {

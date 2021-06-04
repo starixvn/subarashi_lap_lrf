@@ -2999,4 +2999,55 @@
   <data name="ProductVGA" xml:space="preserve">
     <value>Vgaming</value>
   </data>
+  <data name="UpdateAccountStatus" xml:space="preserve">
+    <value>Update Account Status</value>
+  </data>
+  <data name="UpdateBetLimit" xml:space="preserve">
+    <value>Update Bet Limit</value>
+  </data>
+  <data name="UpdateSpecialLevel" xml:space="preserve">
+    <value>Update Special Level</value>
+  </data>
+  <data name="UpdateOddsGroup" xml:space="preserve">
+    <value>Update Odds Group</value>
+  </data>
+  <data name="UpdateBAStatus" xml:space="preserve">
+    <value>Update BA Status</value>
+  </data>
+  <data name="UpdateToAccountStatus" xml:space="preserve">
+    <value>Update to Account Status</value>
+  </data>
+  <data name="ConfirmBatchUpdateAccountStatus" xml:space="preserve">
+    <value>Are you sure you want to change the status of these players?</value>
+  </data>
+  <data name="MessageBatchUpdateAccountStatus_Lock" xml:space="preserve">
+    <value>LOCKED: player cannot login!</value>
+  </data>
+  <data name="MessageBatchUpdateAccountStatus_Close" xml:space="preserve">
+    <value>CLOSED: player cannot be restored forever!</value>
+  </data>
+  <data name="ConfirmBatchUpdateSpecialLevel" xml:space="preserve">
+    <value>Are you sure you want to set special level for these players?</value>
+  </data>
+  <data name="ConfirmBatchUpdateOddsGroup" xml:space="preserve">
+    <value>Are you sure you want to move these players to selected odds group?</value>
+  </data>
+  <data name="ConfirmBatchUpdateBAStatus_On" xml:space="preserve">
+    <value>Are you sure you want to turn on BA?</value>
+  </data>
+  <data name="ConfirmBatchUpdateBAStatus_Off" xml:space="preserve">
+    <value>Are you sure you want to turn off BA?</value>
+  </data>
+  <data name="SearchAllPlayers" xml:space="preserve">
+    <value>Search All Players</value>
+  </data>
+  <data name="MessageLimitTimeUpdateBA" xml:space="preserve">
+    <value>BA status can only be changed on Monday from 1PM to 5PM (GMT+8).</value>
+  </data>
+  <data name="MessageUpdateOddsGroupForBAPlayers" xml:space="preserve">
+    <value>BA players are not allowed to changed odds group.</value>
+  </data>
+  <data name="MessageTurnOffVIPError" xml:space="preserve">
+    <value>VIP players are not allowed to turn on BA.</value>
+  </data>
 </root>

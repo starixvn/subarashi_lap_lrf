@@ -827,7 +827,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                 products: null,
                 btnCancel: null,
                 btnSave: null,
-                divResult: null
+                divResult: null,
+                oldCustIds: null
             },
             initialize: function () {
                 Site.initialize();
@@ -838,6 +839,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
             },
             storeElements: function () {
                 _me.elements.custIds = $("#CustIds");
+                _me.elements.oldCustIds = _me.elements.custIds.val();
+
                 _me.elements.products = $("#Products").val().split(",");
                 _me.elements.btnCancel = $(".btn-cancel");
                 _me.elements.btnSave = $(".btn-submit");
@@ -932,10 +935,14 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                         _me.elements.btnSave.addClass("completed");
                         _me.showMsg(Site.getSingleResource('MessageSuccess'), result.IsSuccessful);
                         var newValue = {
-                            newGroup: Site.getSingleResource('None'),
                             isSuccess: true,
+                            oldCustIds: _me.elements.oldCustIds,
                             custIds: param.CustIds,
-                            popupId: "popup-update-comm"
+                            popupId: "popup-update-comm",
+                            reloadGrid: true,
+                            newValue: {
+                                CommissionGroup: Site.getSingleResource('None')
+                            }
                         };
 
                         PlayerCommissionComm.setTopWindowValue("playerComissionResult", newValue);

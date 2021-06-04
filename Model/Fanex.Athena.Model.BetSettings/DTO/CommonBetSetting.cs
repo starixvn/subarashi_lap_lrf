@@ -26,5 +26,7 @@ namespace Fanex.Athena.Model.BetSettings.DTO
         public decimal MaxPerMatch { get; set; }
 
         public int CustId { get; set; }
+
+        public string CustIds { get; set; }
     }
 }

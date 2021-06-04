@@ -9,6 +9,6 @@ export default class LrfFiltersService {
     fetchData(param) {
         var action = 'api/PlayerList/LRFFilters';
 
-        return this.commonService.fetchData(systemType.lrf, action, { hasCommPermissionRead: param.hasCommPermissionRead });
+        return this.commonService.fetchData(systemType.lrf, action, param);
     }
 }

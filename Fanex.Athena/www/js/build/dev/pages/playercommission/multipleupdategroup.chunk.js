@@ -1614,7 +1614,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                 products: null,
                 btnCancel: null,
                 btnSave: null,
-                divResult: null
+                divResult: null,
+                oldCustIds: null
             },
             initialize: function () {
                 Site.initialize();
@@ -1628,6 +1629,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
             },
             storeElements: function () {
                 _me.elements.custIds = $("#CustIds");
+                _me.elements.oldCustIds = _me.elements.custIds.val();
+
                 _me.elements.custNames = $("#CustNames");
                 _me.elements.ddlCustomer = $("#ddl-customers");
                 _me.elements.products = $("#Products").val().split(",");
@@ -1754,14 +1757,17 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 
                         _me.elements.btnSave.addClass("completed");
                         _me.showMsg(Site.getSingleResource('MessageSuccess'), result.IsSuccessful);
-                        PlayerCommissionComm.setTopWindowValue("playerComissionResult", {
-                            newGroup: "None",
-                            isSuccess: true,
-                            custIds: param.CustIds
-                        });
 
                         setTimeout(() => {
-                            PlayerCommissionComm.setTopWindowValue("playerComissionResult", { isCancel: true });
+                            PlayerCommissionComm.setTopWindowValue("playerComissionResult", {
+                                isCancel: true,
+                                oldCustIds: _me.elements.oldCustIds,
+                                custIds: param.CustIds,
+                                reloadGrid: true,
+                                newValue: {
+                                    CommissionGroup: Site.getSingleResource('None')
+                                }
+                            });
                         }, 3000);
                     }
                 });

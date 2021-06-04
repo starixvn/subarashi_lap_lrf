@@ -62,9 +62,10 @@
                 // Arrange
                 ProductService.GetProductAccess(DefaultLicenseeSession.LicenseeId, DefaultUserSession.Language)
                     .Returns(new ProductAccess(new List<Product>()));
+                var metaModel = new UpdateStatusMetaModel { Nickname = string.Empty };
 
-                // Action
-                var result = await controller.UpdateStatus(0, string.Empty, 0) as JsonResult;
+                // Action 
+                var result = await controller.UpdateStatus(metaModel);
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -86,16 +87,16 @@
                     .Returns(new ProductAccess(new List<Product> { new Product { ProductID = ProductTypes.AgCasino } }));
 
                 CoreBetSettingService.IsBetSettingEditable(DefaultUserSession).Returns(true);
+                var metaModel = new UpdateStatusMetaModel { Nickname = string.Empty };
 
                 _betSettingService.UpdateStatusAsync(
                    DefaultUserSession.UserId,
-                   Arg.Any<int>(),
                    DefaultUserSession.Language,
-                   Arg.Any<string>(),
-                   Arg.Any<bool>()).Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 0 }));
+                   string.Empty,
+                   Arg.Any<UpdateStatusMetaModel>()).Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 0 }));
 
                 // Action
-                var result = await controller.UpdateStatus(0, string.Empty, 0) as JsonResult;
+                var result = await controller.UpdateStatus(metaModel);
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -117,16 +118,16 @@
                     .Returns(new ProductAccess(new List<Product> { new Product { ProductID = ProductTypes.AgCasino } }));
 
                 CoreBetSettingService.IsBetSettingEditable(DefaultUserSession).Returns(true);
+                var metaModel = new UpdateStatusMetaModel { Nickname = string.Empty };
 
                 _betSettingService.UpdateStatusAsync(
                    DefaultUserSession.UserId,
-                   Arg.Any<int>(),
                    DefaultUserSession.Language,
                    Arg.Any<string>(),
-                   Arg.Any<bool>()).Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 1, Message = "Error" }));
+                   Arg.Any<UpdateStatusMetaModel>()).Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 1, Message = "Error" }));
 
                 // Action
-                var result = await controller.UpdateStatus(0, string.Empty, 0) as JsonResult;
+                var result = await controller.UpdateStatus(metaModel);
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -144,7 +145,7 @@
                     .Returns(new ProductAccess(new List<Product>()));
 
                 // Action
-                var result = await controller.UpdateBetSetting(string.Empty, string.Empty) as JsonResult;
+                var result = await controller.UpdateBetSetting(string.Empty, string.Empty);
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -201,7 +202,7 @@
                    .Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 1, Message = "Error" }));
 
                 // Action
-                var result = await controller.UpdateBetSetting(string.Empty, string.Empty) as JsonResult;
+                var result = await controller.UpdateBetSetting(string.Empty, string.Empty);
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert

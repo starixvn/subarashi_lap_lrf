@@ -1,20 +1,16 @@
-﻿@{
+﻿@model Fanex.Athena.Model.BetSettings.ViewModel.ExchangeBetSettingViewModel
+@{
     Layout = "~/Views/Desktop/Shared/_BetSettingLayout.cshtml";
 }
-@model Fanex.Athena.Model.BetSettings.ViewModel.ExchangeBetSettingViewModel
-
 @section pagejs {
     <script src="@Url.ContentLinkByEnv("/www/js/build/pages/customer/exchangebetsetting.chunk.js")"></script>
 }
-
 @section Menu{
     @{Html.RenderPartial("~/Views/Desktop/Customer/BetSetting/_Menu.cshtml", Model);}
 }
-
 @section ContentTitle{
-    @Model.Param.BetSettingName @ViewResources.BetSettings - @Model.Param.NickName @(Model.Param.IsFakeLicensee ? string.Empty : "(" + Model.Param.UserName + ")")
+    @Model.Title
 }
-
 <!--Content-->
 @if (Model.IsNoInfo)
 {
@@ -22,25 +18,24 @@
 }
 else
 {
-<div style="padding: 20px 0; width: 300px">
-    <label>@ViewResources.ChargeCommission</label>
-
-    <div>
-        @if (Model.IsEnabled == true)
-        {
-        <select data-original-value="@Model.Commission" id="ddlCommission" class="select">
-            @foreach(var value in Model.CommissionList)
+    <div style="padding: 20px 0; width: 300px">
+        <label>@ViewResources.ChargeCommission</label>
+        <div>
+            @if (Model.IsEnabled == true)
             {
-                <option value="@value" @(value == Model.Commission ? "selected" : null) >@(value)%</option>
+                <select data-original-value="@Model.Commission" id="ddlCommission" class="select">
+                    @foreach (var value in Model.CommissionList)
+                    {
+                        <option value="@value" @(value == Model.Commission ? "selected" : null)>@(value)%</option>
+                    }
+                </select>
             }
-        </select>
-        }
-        else
-        {
-           <div style="width: 300px;border-bottom: 1px solid #ddd;color: #aaa">@(Model.Commission)%</div>
-        }
+            else
+            {
+                <div style="width: 300px;border-bottom: 1px solid #ddd;color: #aaa">@(Model.Commission)%</div>
+            }
+        </div>
     </div>
-</div>
 }
 <!--/Content-->
 <!--SubmitButton-->
@@ -50,12 +45,12 @@ else
     <div class="right button-block">
         @if (!Model.IsNoInfo)
         {
-        <button @disabledText type="button" class="btn btn-submit" data-cust-id="@Model.Param.CustId" id="btnSubmit">
-            @ViewResources.Submit
-        </button>
-        <button @disabledText type="button" class="btn btn-cancel" id="btnReset">
-            @ViewResources.Reset
-        </button>
+            <button @disabledText type="button" class="btn btn-submit" data-cust-id="@Model.Param.CustId" id="btnSubmit">
+                @ViewResources.Submit
+            </button>
+            <button @disabledText type="button" class="btn btn-cancel" id="btnReset">
+                @ViewResources.Reset
+            </button>
         }
         <button type="button" class="btn btn-submit"
                 data-status="@(Model.IsEnabled.Value ? 0 : 1)"

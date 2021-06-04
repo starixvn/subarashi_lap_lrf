@@ -1,9 +1,9 @@
 ﻿@{
     Layout = "~/Views/Desktop/Shared/_Layout.cshtml";
 }
-
 @section css
 {
+    <link href="~/Content/Plugin/MultiSelect/jquery.multiselect.css" rel="stylesheet" />
     <link href="@Url.ContentLinkByEnv("/www/css/build/pages/customer/betsetting.css")" rel="stylesheet" />
     @RenderSection("pagecss", required: false)
 }
@@ -11,21 +11,14 @@
 {
     @RenderSection("pagejs", required: false)
 }
-
 <div class="page-results">
     <div id="formContent" class="betsetting-container">
-        <div class="row menu-container">
-            <div class="col l3 m4 s12">
-                @RenderSection("Menu", required: false)
-            </div>
-        </div>
-
+        @RenderSection("Menu", required: false)
         <div class="row">
             <p class="content-title">
                 @RenderSection("ContentTitle", required: false)
             </p>
         </div>
-
         <div class="row setting-content">
             @RenderBody()
         </div>

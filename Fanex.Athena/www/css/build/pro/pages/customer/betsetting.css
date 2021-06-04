@@ -733,3 +733,17 @@ td input[type="radio"] + label {
 tr:hover .no-hover {
   background: initial !important; }
 
+.row .col {
+  padding: 0 1rem; }
+
+.ddl-customers-container input[type="text"] {
+  height: 2.5rem;
+  line-height: 2.5rem;
+  border-color: #ccc;
+  font-size: 1.3rem;
+  color: #2c2c2c; }
+
+.multiselect-container > a.ui-multiselect .ui-multiselect-icon::before {
+  top: 8px;
+  right: -2px; }
+

@@ -640,17 +640,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getLRFFilters", function() { return getLRFFilters; });
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/types.js");
 /* harmony import */ var _lib_services_lrfFiltersService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/services/lrfFiltersService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/services/lrfFiltersService.js");
+/* harmony import */ var _lib_default_value__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../lib/default-value */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/default-value.js");
 
 
-const getLRFFilters = param => dispatch => {
+
+const getLRFFilters = options => dispatch => {
   const service = new _lib_services_lrfFiltersService__WEBPACK_IMPORTED_MODULE_1__["default"]();
-  service.fetchData(param).then(response => {
-    dispatch(setLRFFilters(response.data));
+  service.fetchData(options.param).then(response => {
+    const result = response.data;
+    dispatch(setLRFFilters(result));
+
+    if (options.callback) {
+      options.callback(result);
+    }
   }).catch(() => {
-    dispatch(setLRFFilters({
-      CustomerClass: [],
-      CommGroups: []
-    }));
+    dispatch(setLRFFilters(_lib_default_value__WEBPACK_IMPORTED_MODULE_2__["defaultLRFFilters"]));
   });
 };
 
@@ -817,11 +821,13 @@ const SET_LRF_FILTERS = 'PLAYER_ADMIN/SET_LRF_FILTERS';
 /*!*****************************************************************************************************!*\
   !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/batch-update/batch-update-manager.js ***!
   \*****************************************************************************************************/
-/*! exports provided: batchUpdateManager */
+/*! exports provided: batchUpdatePermission, batchUpdatePopups, batchUpdateManager */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "batchUpdatePermission", function() { return batchUpdatePermission; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "batchUpdatePopups", function() { return batchUpdatePopups; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "batchUpdateManager", function() { return batchUpdateManager; });
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
@@ -833,40 +839,108 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const batchUpdateManager = {
-  editCommMenu: [{
-    value: 1,
-    label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('MoveCommissionGroup')
-  }, {
-    value: 2,
-    label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('UpdateCommissionValue')
-  }, {
-    value: 3,
-    label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('RemoveFromGroup')
-  }],
-  popupBatchUpdateOption_1: {
+const batchUpdatePermission = {
+  playerCommGroup: "PlayerCommGroup",
+  accountStatus: "accountStatus",
+  betLimit: "betLimit",
+  specialLevel: "specialLevel",
+  oddsGroup: "oddsGroup",
+  baStatus: "baStatus"
+};
+const batchUpdatePopups = {
+  popupOption_1: {
     url: 'PlayerCommission/MultipleMoveGroup',
     title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('BatchUpdate') + " - " + _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('MoveCommissionGroup'),
     width: 800,
     height: 600
   },
-  popupBatchUpdateOption_2: {
+  popupOption_2: {
     url: 'PlayerCommission/MultipleUpdateGroup',
     title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('BatchUpdate') + " - " + _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('UpdateCommissionValue'),
     width: 800,
     height: 600
   },
-  popupBatchUpdateOption_3: {
+  popupOption_3: {
     url: 'PlayerCommission/MultipleRemoveFromGroup',
     title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('BatchUpdate') + " - " + _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('RemoveFromGroup'),
     width: 600,
     height: 400
   },
+  popupOption_4: {
+    url: 'PlayerBatchUpdate/UpdateAccountStatus',
+    title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('BatchUpdate') + " - " + _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('UpdateAccountStatus'),
+    width: 600,
+    height: 400
+  },
+  popupOption_5: {
+    url: 'SportsbookBetSetting/Index',
+    title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('BatchUpdate') + " - " + _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('UpdateBetLimit'),
+    width: 800,
+    height: 600
+  },
+  popupOption_6: {
+    url: 'PlayerBatchUpdate/UpdateSpecialLevel',
+    title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('BatchUpdate') + " - " + _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('UpdateSpecialLevel'),
+    width: 600,
+    height: 400
+  },
+  popupOption_7: {
+    url: 'PlayerBatchUpdate/UpdateOddsGroup',
+    title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('BatchUpdate') + " - " + _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('UpdateOddsGroup'),
+    width: 600,
+    height: 400
+  },
+  popupOption_8: {
+    url: 'PlayerBatchUpdate/UpdateBAStatus',
+    title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('BatchUpdate') + " - " + _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('UpdateBAStatus'),
+    width: 600,
+    height: 400
+  }
+};
+const batchUpdateManager = {
+  updateMenu: [{
+    value: 1,
+    label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('MoveCommissionGroup'),
+    permission: batchUpdatePermission.playerCommGroup
+  }, {
+    value: 2,
+    label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('UpdateCommissionValue'),
+    permission: batchUpdatePermission.playerCommGroup
+  }, {
+    value: 3,
+    label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('RemoveFromGroup'),
+    permission: batchUpdatePermission.playerCommGroup
+  }, {
+    value: 4,
+    label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('UpdateAccountStatus'),
+    permission: batchUpdatePermission.accountStatus
+  }, {
+    value: 5,
+    label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('UpdateBetLimit'),
+    permission: batchUpdatePermission.betLimit
+  }, {
+    value: 6,
+    label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('UpdateSpecialLevel'),
+    permission: batchUpdatePermission.specialLevel
+  }, {
+    value: 7,
+    label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('UpdateOddsGroup'),
+    permission: batchUpdatePermission.oddsGroup
+  }, {
+    value: 8,
+    label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('UpdateBAStatus'),
+    permission: batchUpdatePermission.baStatus
+  }],
   updateTableInterval: null,
+  isReloadingGrid: null,
   getLink: function (action) {
     const lrfSystemId = 1;
     const commonService = _jsroot_Module_lib_factoryCommonService__WEBPACK_IMPORTED_MODULE_2__["default"].createInstance();
     return commonService.getLink(lrfSystemId, action);
+  },
+  getMenu: function (option) {
+    var result = batchUpdateManager.updateMenu.filter(p => !p.permission || option.permission[p.permission]);
+    return result;
   },
   bindMenuEvent: function (handler) {
     var searchInput = jquery__WEBPACK_IMPORTED_MODULE_1___default()(".ddl-batch-update .Select-input");
@@ -880,39 +954,39 @@ const batchUpdateManager = {
     }
 
     batchUpdateManager.updateTableInterval = setInterval(() => {
-      var result = window.top["playerComissionResult"];
-
-      if (result && result.isSuccess) {
-        var newGroup = result.newGroup;
-        result.custIds.split(",").forEach(e => {
-          var col = jquery__WEBPACK_IMPORTED_MODULE_1___default()(".td-comm-" + e);
-          col.html(newGroup);
-          col.attr("title", newGroup);
-        });
-      }
-
-      if (result && result.isCancel) {
-        handler.setState({
-          batchUpdateSelectedOption: 0,
-          popupBatchUpdateShow: false
-        });
-      }
-
-      window.top["playerComissionResult"] = null;
+      batchUpdateManager.updateTable(handler);
     }, 200);
+  },
+  updateTable: function (handler) {
+    var result = window.top["playerComissionResult"];
+
+    if (result && result.isCancel) {
+      handler.setState({
+        batchUpdateSelectedOption: 0,
+        popupBatchUpdateShow: false
+      });
+    }
+
+    if (result && result.reloadGrid) {
+      batchUpdateManager.isReloadingGrid = true;
+      var oldPlayerList = handler.props.playerList;
+      var newPlayerList = batchUpdateManager.updatePlayerList(oldPlayerList, result);
+      handler.props.setPlayerList(newPlayerList);
+      batchUpdateManager.isReloadingGrid = false;
+    }
+
+    window.top["playerComissionResult"] = null;
   },
   bindGridEvents: function () {
     var checkAll = jquery__WEBPACK_IMPORTED_MODULE_1___default()("#chk-cust-0");
     var checkCusts = jquery__WEBPACK_IMPORTED_MODULE_1___default()(".chk-cust");
-    checkAll.prop("checked", false);
-    checkCusts.prop("checked", false);
     checkAll.off("click").on("click", function () {
       var isChecked = jquery__WEBPACK_IMPORTED_MODULE_1___default()(this).is(":checked");
       checkCusts.prop("checked", isChecked);
       var selectedLength = jquery__WEBPACK_IMPORTED_MODULE_1___default()(".chk-cust:checked").length;
       batchUpdateManager.showHideBatchUpdateMenu(selectedLength > 1);
     });
-    checkCusts.each((i, e) => {
+    checkCusts.each((_, e) => {
       jquery__WEBPACK_IMPORTED_MODULE_1___default()(e).off("click").on("click", () => {
         var selectedLength = jquery__WEBPACK_IMPORTED_MODULE_1___default()(".chk-cust:checked").length;
         var isChecked = checkCusts.length == jquery__WEBPACK_IMPORTED_MODULE_1___default()(".chk-cust:checked").length;
@@ -920,7 +994,12 @@ const batchUpdateManager = {
         batchUpdateManager.showHideBatchUpdateMenu(selectedLength > 1);
       });
     });
-    batchUpdateManager.showHideBatchUpdateMenu(false);
+
+    if (!batchUpdateManager.isReloadingGrid) {
+      checkAll.prop("checked", false);
+      checkCusts.prop("checked", false);
+      batchUpdateManager.showHideBatchUpdateMenu(false);
+    }
   },
   showHideBatchUpdateMenu: function (isShow) {
     isShow ? jquery__WEBPACK_IMPORTED_MODULE_1___default()(".ddl-batch-update").removeClass("hide") : jquery__WEBPACK_IMPORTED_MODULE_1___default()(".ddl-batch-update").addClass("hide");
@@ -929,7 +1008,7 @@ const batchUpdateManager = {
     var checkCusts = jquery__WEBPACK_IMPORTED_MODULE_1___default()(".chk-cust:checked");
     var custIds = [];
     var custNames = [];
-    checkCusts.each((i, e) => {
+    checkCusts.each((_, e) => {
       var $this = jquery__WEBPACK_IMPORTED_MODULE_1___default()(e);
       custIds.push($this.attr("data-custid"));
       custNames.push($this.attr("data-username"));
@@ -962,9 +1041,25 @@ const batchUpdateManager = {
       custIds: custIds.join(","),
       custNames: custNames.join(",")
     });
-    var opt = jquery__WEBPACK_IMPORTED_MODULE_1___default.a.extend({}, batchUpdateManager["popupBatchUpdateOption_" + selectedOption]);
+    var opt = Object.assign({}, batchUpdatePopups["popupOption_" + selectedOption]);
     opt.url = batchUpdateManager.getLink(opt.url + query);
     return opt;
+  },
+  updatePlayerList: function (oldPlayerList, result) {
+    var custIds = result.custIds.split(",");
+    var oldCustIds = result.oldCustIds.split(",");
+    var newList = [];
+    oldPlayerList.forEach(e => {
+      var newItem = Object.assign({}, e);
+      newItem.Selected = oldCustIds.indexOf(e.IbcCustId.toString()) !== -1;
+
+      if (custIds.indexOf(e.IbcCustId.toString()) !== -1) {
+        newItem = Object.assign(newItem, result.newValue);
+      }
+
+      newList.push(newItem);
+    });
+    return newList;
   }
 };
 
@@ -1211,7 +1306,8 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       displayedColumnList,
       sweetAlertOption,
       hasCommPermissionEdit,
-      hasCommPermissionRead
+      hasCommPermissionRead,
+      siteSetting
     } = this.props;
 
     if (!playerList) {
@@ -1224,7 +1320,9 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
 
     const dataList = selectedPlayer ? [playerList.find(item => item.LicenseeCustId === selectedPlayer.licenseeCustId)] : playerList;
     const displayedColumn = Object(_lib_helpers_utils__WEBPACK_IMPORTED_MODULE_12__["buildDisplayedColumnObject"])(displayedColumnList);
-    const canSelectPlayers = hasCommPermissionEdit;
+    const hasSpecialLevelWrite = this.props.lrfFilters.HasSpecialLevelWrite;
+    const hasOddsGroupWrite = this.props.lrfFilters.HasOddsGroupWrite;
+    const canSelectPlayers = hasCommPermissionEdit || hasSpecialLevelWrite || hasOddsGroupWrite || siteSetting.isAllowedBA;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Table"], {
       minWidth: 650,
       autoWidth: true,
@@ -1262,7 +1360,9 @@ function mapStateToProps(state) {
     isFetchingData,
     sweetAlertOption,
     hasCommPermissionEdit,
-    hasCommPermissionRead
+    hasCommPermissionRead,
+    lrfFilters,
+    siteSetting
   } = state;
   return Object.assign({}, {
     playerList,
@@ -1271,7 +1371,9 @@ function mapStateToProps(state) {
     isFetchingData,
     sweetAlertOption,
     hasCommPermissionEdit,
-    hasCommPermissionRead
+    hasCommPermissionRead,
+    lrfFilters,
+    siteSetting
   });
 }
 
@@ -1301,14 +1403,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _filter_AthenaSearch__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./filter/AthenaSearch */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/components/filter/AthenaSearch.jsx");
 /* harmony import */ var _jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @jsroot/components/collapsible-panel */ "./www/js/source/reactpages/components/collapsible-panel/index.jsx");
 /* harmony import */ var _jsroot_components_UserGuide__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @jsroot/components/UserGuide */ "./www/js/source/reactpages/components/UserGuide.jsx");
-/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
-/* harmony import */ var _filter_UserNameInput__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./filter/UserNameInput */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/components/filter/UserNameInput.jsx");
-/* harmony import */ var _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @jsroot/lib/QueryString */ "./www/js/source/reactpages/lib/QueryString.js");
-/* harmony import */ var _jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @jsroot/lib/htmlHelper */ "./www/js/source/reactpages/lib/htmlHelper.js");
-/* harmony import */ var _userGuide_LicAthenaUserGuide__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../userGuide/LicAthenaUserGuide */ "./www/js/source/reactpages/Module/PlayerAdmin/userGuide/LicAthenaUserGuide.jsx");
-/* harmony import */ var _userGuide_LicApiUserGuide__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../userGuide/LicApiUserGuide */ "./www/js/source/reactpages/Module/PlayerAdmin/userGuide/LicApiUserGuide.jsx");
-/* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! react-select */ "./node_modules/react-select/dist/react-select.es.js");
+/* harmony import */ var _constants_report__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../../constants/report */ "./www/js/source/reactpages/constants/report.js");
+/* harmony import */ var _9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @9softstudio/react-multiselect */ "./node_modules/@9softstudio/react-multiselect/dist/index.js");
+/* harmony import */ var _9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
+/* harmony import */ var _filter_UserNameInput__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./filter/UserNameInput */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/components/filter/UserNameInput.jsx");
+/* harmony import */ var _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @jsroot/lib/QueryString */ "./www/js/source/reactpages/lib/QueryString.js");
+/* harmony import */ var _jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @jsroot/lib/htmlHelper */ "./www/js/source/reactpages/lib/htmlHelper.js");
+/* harmony import */ var _userGuide_LicAthenaUserGuide__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../userGuide/LicAthenaUserGuide */ "./www/js/source/reactpages/Module/PlayerAdmin/userGuide/LicAthenaUserGuide.jsx");
+/* harmony import */ var _userGuide_LicApiUserGuide__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../userGuide/LicApiUserGuide */ "./www/js/source/reactpages/Module/PlayerAdmin/userGuide/LicApiUserGuide.jsx");
+/* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! react-select */ "./node_modules/react-select/dist/react-select.es.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -1318,6 +1423,8 @@ function _objectWithoutProperties(source, excluded) { if (source == null) return
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -1393,12 +1500,40 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       this.userNameRef.current.value = value;
     });
 
-    this.allOddsGroupString = Object.keys(_lib_constants__WEBPACK_IMPORTED_MODULE_11__["oddsGroupListWithStyle"]).join(',');
+    _defineProperty(this, "_changeOnSubsidiary", (currentItem, selectedItemsKey, treeViewList) => {
+      if (this.props.lrfFilters.SubsidiaryViewType === _constants_report__WEBPACK_IMPORTED_MODULE_10__["SubsidiaryViewType"].MASTER_MANAGEMENT) {
+        let selectedParentItems = [];
+
+        for (let i = 0; i < treeViewList.length; i++) {
+          const item = treeViewList[i];
+
+          if (item.checked && item.level === 1 && selectedParentItems.indexOf(item.parentKey) < 0) {
+            selectedParentItems.push(item.parentKey);
+          }
+        }
+
+        this.setState({
+          whiteLabels: selectedParentItems.join(',')
+        });
+      }
+
+      this.setState({
+        subsidiaries: selectedItemsKey
+      });
+    });
+
+    _defineProperty(this, "_setSearchBySubsidiary", isSearchBySubsidiary => {
+      this.setState({
+        searchBySubsidiary: isSearchBySubsidiary
+      });
+    });
+
+    this.allOddsGroupString = Object.keys(_lib_constants__WEBPACK_IMPORTED_MODULE_13__["oddsGroupListWithStyle"]).join(',');
     this.allCurrencyString = props.currencyList.map(c => c.Id).join(',');
-    this.allSpecialLevel = Object.keys(_lib_constants__WEBPACK_IMPORTED_MODULE_11__["specialLevelListWithColor"]).map(item => item).join(',');
-    this.isDepositedList = Object.keys(_lib_constants__WEBPACK_IMPORTED_MODULE_11__["isDepositedList"]).map(item => ({
-      value: _lib_constants__WEBPACK_IMPORTED_MODULE_11__["isDepositedList"][item],
-      label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_10__["default"].getSingleResource(item)
+    this.allSpecialLevel = Object.keys(_lib_constants__WEBPACK_IMPORTED_MODULE_13__["specialLevelListWithColor"]).map(item => item).join(',');
+    this.isDepositedList = Object.keys(_lib_constants__WEBPACK_IMPORTED_MODULE_13__["isDepositedList"]).map(item => ({
+      value: _lib_constants__WEBPACK_IMPORTED_MODULE_13__["isDepositedList"][item],
+      label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource(item)
     }));
     this.userGuide = this._renderUserGuide();
     this.userNameRef = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
@@ -1406,23 +1541,27 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       bankAccountNumber: "",
       email: "",
       ipLogin: "",
-      isDeposited: _lib_constants__WEBPACK_IMPORTED_MODULE_11__["isDepositedList"]["All"],
+      isDeposited: _lib_constants__WEBPACK_IMPORTED_MODULE_13__["isDepositedList"]["All"],
       currencyIdList: this.allCurrencyString,
       oddsGroup: this.allOddsGroupString,
       specialLevel: this.allSpecialLevel,
-      baFilter: _lib_constants__WEBPACK_IMPORTED_MODULE_11__["baStatusList"].All,
-      searchOption: _lib_constants__WEBPACK_IMPORTED_MODULE_11__["searchOptions"].matchPrecise,
+      baFilter: _lib_constants__WEBPACK_IMPORTED_MODULE_13__["baStatusList"].All,
+      searchOption: _lib_constants__WEBPACK_IMPORTED_MODULE_13__["searchOptions"].matchPrecise,
       isMatchPrecise: true,
       customerClass: "",
       changeOnCustomerClass: false,
       commGroups: "",
-      changeOnCommGroups: false
+      changeOnCommGroups: false,
+      subsidiaries: "",
+      whiteLabels: "",
+      loadedSubsidiares: false,
+      searchBySubsidiary: false
     };
   }
 
   componentDidMount() {
-    const ibcCustId = Number(_jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_13__["default"].getParam(window.location.href, 'custId'));
-    const licenseeCustId = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_13__["default"].getParam(window.location.href, 'licenseeCustId');
+    const ibcCustId = Number(_jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_15__["default"].getParam(window.location.href, 'custId'));
+    const licenseeCustId = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_15__["default"].getParam(window.location.href, 'licenseeCustId');
 
     if (ibcCustId || licenseeCustId) {
       const param = {
@@ -1430,7 +1569,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
         licenseeCustId
       };
       this.props.getSinglePlayer(param);
-      const userName = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_13__["default"].getParam(window.location.href, 'userName');
+      const userName = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_15__["default"].getParam(window.location.href, 'userName');
       this.userNameRef.current.value = userName;
     }
 
@@ -1441,7 +1580,11 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
     } = this.props;
     this.props.getSiteSetting(type, isSubsidiary, hasCommPermissionRead);
     this.props.getLRFFilters({
-      hasCommPermissionRead
+      param: {
+        hasCommPermissionRead,
+        CurrencyAgentList: null
+      },
+      callback: null
     });
   }
 
@@ -1450,12 +1593,21 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       isAdvancedSearch
     } = this.props;
 
+    if (!this.state.loadedSubsidiares) {
+      var subs = this.props.lrfFilters.Subsidiaries || [];
+      this.setState({
+        subsidiaries: subs.map(s => s.Children.map(c => c.Id).join(",")).join(","),
+        whiteLabels: subs.map(s => s.Id).join(","),
+        loadedSubsidiares: subs.length !== 0
+      });
+    }
+
     if (prevProps.isAdvancedSearch !== isAdvancedSearch && !isAdvancedSearch) {
       this.setState({
         currencyIdList: this.allCurrencyString,
         oddsGroup: this.allOddsGroupString,
         specialLevel: this.allSpecialLevel,
-        baFilter: _lib_constants__WEBPACK_IMPORTED_MODULE_11__["baStatusList"].All,
+        baFilter: _lib_constants__WEBPACK_IMPORTED_MODULE_13__["baStatusList"].All,
         customerClass: this.props.lrfFilters.CustomerClass.join(','),
         changeOnCustomerClass: false,
         commGroups: this.props.lrfFilters.CommGroups.map(c => c.Id).join(','),
@@ -1469,8 +1621,8 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       email
     } = this.state;
 
-    if (email && !new RegExp(_lib_constants__WEBPACK_IMPORTED_MODULE_11__["emailPattern"]).test(email)) {
-      window.alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_10__["default"].getSingleResource('InvalidEmail'));
+    if (this.state.searchOption !== _lib_constants__WEBPACK_IMPORTED_MODULE_13__["searchOptions"].allPlayers && email && !new RegExp(_lib_constants__WEBPACK_IMPORTED_MODULE_13__["emailPattern"]).test(email)) {
+      window.alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource('InvalidEmail'));
       return;
     }
 
@@ -1491,18 +1643,23 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
 
     const actualSpecialLevel = specialLevel.trim() === '' ? this.allSpecialLevel : specialLevel;
     const actualCurrencyIdList = currencyIdList.trim().split(',').length === currencyList.length ? '' : currencyIdList;
-    const actualOddsGroup = oddsGroup.trim().split(',').length === Object.keys(_lib_constants__WEBPACK_IMPORTED_MODULE_11__["oddsGroupListWithStyle"]).length ? '' : oddsGroup;
+    const actualOddsGroup = oddsGroup.trim().split(',').length === Object.keys(_lib_constants__WEBPACK_IMPORTED_MODULE_13__["oddsGroupListWithStyle"]).length ? '' : oddsGroup;
     const actualCustomerClass = restParam.customerClass.trim().split(',').length === this.props.lrfFilters.CustomerClass.length ? '' : restParam.customerClass;
     const actualCommGroups = this.state.changeOnCommGroups ? restParam.commGroups : this.props.lrfFilters.CommGroups.map(c => c.Id).join(",");
+    const subs = this.props.lrfFilters.Subsidiaries || [];
+    const actualSubsidiaries = subs.length && restParam.subsidiaries.trim().split(',').length === subs.reduce((t, r) => t + r.Children.length) ? '' : restParam.subsidiaries;
+    const actualWhiteLabels = restParam.whiteLabels.trim().split(',').length === subs.length ? '' : restParam.whiteLabels;
 
     const param = _objectSpread(_objectSpread({}, restParam), {}, {
-      userName: Object(_jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_14__["encode"])(userName),
+      userName: Object(_jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_16__["encode"])(userName),
       currencyIdList: actualCurrencyIdList,
       oddsGroup: actualOddsGroup,
       specialLevel: actualSpecialLevel,
       customerClass: actualCustomerClass,
       changeOnCommGroups: actualCommGroups.split(',').length != this.props.lrfFilters.CommGroups.length,
       commGroups: actualCommGroups,
+      subsidiaries: actualSubsidiaries,
+      whiteLabels: actualWhiteLabels,
       pageSize: pagingOption.PageSize,
       pageIndex: 1
     });
@@ -1511,25 +1668,88 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
   }
 
   _renderContentUserGuide() {
-    const currentLang = _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_10__["default"].currentLanguage;
-    return this.props.type === _lib_constants__WEBPACK_IMPORTED_MODULE_11__["licenseeType"].nonApi ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_userGuide_LicAthenaUserGuide__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    const currentLang = _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].currentLanguage;
+    return this.props.type === _lib_constants__WEBPACK_IMPORTED_MODULE_13__["licenseeType"].nonApi ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_userGuide_LicAthenaUserGuide__WEBPACK_IMPORTED_MODULE_17__["default"], {
       lang: currentLang
-    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_userGuide_LicApiUserGuide__WEBPACK_IMPORTED_MODULE_16__["default"], {
+    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_userGuide_LicApiUserGuide__WEBPACK_IMPORTED_MODULE_18__["default"], {
       lang: currentLang
     });
   }
 
   _renderUserGuide() {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_UserGuide__WEBPACK_IMPORTED_MODULE_9__["default"], {
-      title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_10__["default"].getSingleResource("UserGuide"),
-      contentTitle: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_10__["default"].getSingleResource("PlayerAdministration"),
+      title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource("UserGuide"),
+      contentTitle: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource("PlayerAdministration"),
       isHtml: false,
       content: this._renderContentUserGuide()
     });
   }
 
   _getUserNameLabel() {
-    return this.props.type === _lib_constants__WEBPACK_IMPORTED_MODULE_11__["licenseeType"].nonApi ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_10__["default"].getSingleResource("Username") : `${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_10__["default"].getSingleResource("Username")}/${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_10__["default"].getSingleResource("VendorMemberID")}`;
+    return this.props.type === _lib_constants__WEBPACK_IMPORTED_MODULE_13__["licenseeType"].nonApi ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource("Username") : `${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource("Username")}/${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource("VendorMemberID")}`;
+  }
+
+  _getSubsidiaryDropdown(lrfFilters) {
+    let viewType = lrfFilters.SubsidiaryViewType;
+
+    if (viewType === _constants_report__WEBPACK_IMPORTED_MODULE_10__["SubsidiaryViewType"].NOT_MANAGEMENT) {
+      return "";
+    }
+
+    const subsidiaries = (this.state.loadedSubsidiares ? lrfFilters.Subsidiaries : []).map(s => ({
+      Value: s.Id,
+      Name: s.Name,
+      Checked: `,${this.state.whiteLabels}`.indexOf(s.Id) !== -1,
+      Children: s.Children.map(c => ({
+        Value: c.Id,
+        Name: c.Name,
+        Checked: `,${this.state.subsidiaries}`.indexOf(c.Id) !== -1
+      }))
+    }));
+    const textOptions = {
+      SelectOptions: "Please select",
+      All: "All",
+      SelectedItemCount: "# selected"
+    };
+    const treeViewOption = {
+      childrenField: 'Children',
+      keyField: 'Value',
+      valueField: 'Name',
+      statusField: 'Checked',
+      indent: 30,
+      includeSelectedParentKey: false,
+      useOriginalDataSource: false
+    };
+    let dropdownLabel = viewType === _constants_report__WEBPACK_IMPORTED_MODULE_10__["SubsidiaryViewType"].MASTER_MANAGEMENT ? "WhiteLabel" : "Subsidiary";
+    let subsidiaryDropdown = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-12 col-md-3 col-sm-2 col-lg-2 col-xl-2 hide"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "form-group"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      id: "SubsidiarySearch",
+      checked: this.state.searchBySubsidiary,
+      onChange: checked => this._setSearchBySubsidiary(checked),
+      label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource("SubsidiarySearch")
+    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-12 col-md-3 col-sm-5 col-lg-3 col-xl-3 hide" + (this.state.searchBySubsidiary ? "" : " hide")
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "form-group"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      className: "label-text"
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource(dropdownLabel)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_11__["TreeViewSelect"], {
+      language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].currentLanguage,
+      id: "SubsidiaryTreeView",
+      dataSource: subsidiaries,
+      keyField: "Value",
+      valueField: "Name",
+      statusField: "Checked",
+      texts: textOptions,
+      isAllTextShown: false,
+      hasSearchBox: false,
+      treeViewOption: treeViewOption,
+      onChange: this._changeOnSubsidiary
+    }))));
+    return subsidiaryDropdown;
   }
 
   render() {
@@ -1556,7 +1776,8 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       oddsGroup,
       specialLevel
     } = advancedSearchParam;
-    const isValidParam = !!currencyIdList && !!oddsGroup && !!specialLevel && !(this.state.changeOnCustomerClass && !this.state.customerClass) && !(this.state.changeOnCommGroups && !this.state.commGroups);
+    const isValidParam = !!currencyIdList && !!oddsGroup && !!specialLevel && !(this.state.changeOnCustomerClass && !this.state.customerClass) && !(this.state.changeOnCommGroups && !this.state.commGroups); //  && !!this.state.subsidiaries;
+
     const iconToggle = {
       tag: 'div',
       className: isFilterCollapsing ? 'chevron down' : 'chevron up',
@@ -1570,7 +1791,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       onExpand: () => this.props.setCollapseFilter(false)
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "row"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, this._getSubsidiaryDropdown(this.props.lrfFilters), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-12 col-md-4 col-sm-4 col-lg-3 col-xl-3"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
@@ -1578,10 +1799,10 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       className: "label-text"
     }, this._getUserNameLabel(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       className: this.state.isMatchPrecise ? "" : "hide"
-    }, "/", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_10__["default"].getSingleResource("SystemId")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filter_SearchOption__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    }, "/", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource("SystemId")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filter_SearchOption__WEBPACK_IMPORTED_MODULE_6__["default"], {
       value: searchOption,
       onChange: this.handleChange
-    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filter_UserNameInput__WEBPACK_IMPORTED_MODULE_12__["default"], {
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filter_UserNameInput__WEBPACK_IMPORTED_MODULE_14__["default"], {
       ref: this.userNameRef,
       onSelectItem: value => this.handleUserNameChange(value),
       minChar: 3,
@@ -1589,19 +1810,20 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       searchOption: searchOption,
       onKeyPress: this.handlePressEnter,
       onChange: value => this.handleUserNameChange(value)
-    }))), type === _lib_constants__WEBPACK_IMPORTED_MODULE_11__["licenseeType"].nonApi && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filter_AthenaSearch__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    }))), type === _lib_constants__WEBPACK_IMPORTED_MODULE_13__["licenseeType"].nonApi && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filter_AthenaSearch__WEBPACK_IMPORTED_MODULE_7__["default"], {
       onChange: this.handleChange,
       bankAccountNumber: bankAccountNumber,
       email: email,
       ipLogin: ipLogin,
+      searchOption: searchOption,
       onKeyPress: this.handlePressEnter
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "hide col-12 col-md-3 col-sm-3 col-lg-2 col-xl-1"
+      className: "col-12 col-md-3 col-sm-3 col-lg-2 col-xl-1"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       className: "label-text"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_10__["default"].getSingleResource("Deposited")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_17__["default"], {
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource("Deposited")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_19__["default"], {
       instanceId: "ddlDeposited",
       name: "form-field-name",
       value: isDeposited,
@@ -1624,7 +1846,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       className: "btn btn-submit",
       disabled: !isValidParam,
       onClick: this.handleSubmit
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_10__["default"].getSingleResource("Submit"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource("Submit"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
@@ -1632,7 +1854,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       id: "isAdvancedSearch",
       checked: isAdvancedSearch,
       onChange: checked => this.props.setAdvancedSearch(checked),
-      label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_10__["default"].getSingleResource("AdvancedSearch")
+      label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource("AdvancedSearch")
     })))));
   }
 
@@ -1982,19 +2204,21 @@ class GridCaption extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component
 
   initBatchUpdate() {
     this.batchUpdateMenuRef = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
-    var s = {
-      batchUpdateSelectedOption: 0
+    var batchUpdateOptions = {
+      permission: {
+        [_batch_update_batch_update_manager__WEBPACK_IMPORTED_MODULE_9__["batchUpdatePermission"].playerCommGroup]: this.props.hasCommPermissionEdit == 1,
+        [_batch_update_batch_update_manager__WEBPACK_IMPORTED_MODULE_9__["batchUpdatePermission"].accountStatus]: false,
+        [_batch_update_batch_update_manager__WEBPACK_IMPORTED_MODULE_9__["batchUpdatePermission"].betLimit]: false,
+        [_batch_update_batch_update_manager__WEBPACK_IMPORTED_MODULE_9__["batchUpdatePermission"].specialLevel]: this.props.lrfFilters.HasSpecialLevelWrite == 1,
+        [_batch_update_batch_update_manager__WEBPACK_IMPORTED_MODULE_9__["batchUpdatePermission"].oddsGroup]: this.props.lrfFilters.HasOddsGroupWrite == 1,
+        [_batch_update_batch_update_manager__WEBPACK_IMPORTED_MODULE_9__["batchUpdatePermission"].baStatus]: this.props.siteSetting.isAllowedBA
+      }
     };
-    var menu = [];
-
-    for (var i = 0; i < _batch_update_batch_update_manager__WEBPACK_IMPORTED_MODULE_9__["batchUpdateManager"].editCommMenu.length; i++) {
-      var m = _batch_update_batch_update_manager__WEBPACK_IMPORTED_MODULE_9__["batchUpdateManager"].editCommMenu[i];
-      s.popupBatchUpdateShow = false;
-      menu.push(m);
-    }
-
-    s.batchUpdateMenu = menu;
-    this.state = s;
+    this.state = {
+      batchUpdateSelectedOption: 0,
+      popupBatchUpdateShow: false,
+      batchUpdateMenu: _batch_update_batch_update_manager__WEBPACK_IMPORTED_MODULE_9__["batchUpdateManager"].getMenu(batchUpdateOptions)
+    };
   }
 
   componentDidMount() {
@@ -2015,9 +2239,7 @@ class GridCaption extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component
   }
 
   _buildBatchUpdateMenu() {
-    const hasCommPermissionEdit = this.props.hasCommPermissionEdit == 1;
-
-    if (!hasCommPermissionEdit) {
+    if (this.state.batchUpdateMenu.length === 0) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null);
     }
 
@@ -2109,13 +2331,15 @@ function mapDispatchToProps(dispatch) {
     setSelectedPlayer,
     setDisplayedColumnList,
     toggleLoader,
-    exportExcel
+    exportExcel,
+    setPlayerList
   } = _actions__WEBPACK_IMPORTED_MODULE_4__["ActionCreators"];
   return Object(redux__WEBPACK_IMPORTED_MODULE_3__["bindActionCreators"])({
     setSelectedPlayer,
     setDisplayedColumnList,
     toggleLoader,
-    exportExcel
+    exportExcel,
+    setPlayerList
   }, dispatch);
 }
 
@@ -2127,7 +2351,10 @@ function mapStateToProps(state) {
     param,
     playerList,
     hasCommPermissionEdit,
-    hasCommPermissionRead
+    hasCommPermissionRead,
+    setPlayerList,
+    siteSetting,
+    lrfFilters
   } = state;
   const playerCount = pagingOption.TotalItem || playerList && playerList.length || 0;
   return Object.assign({}, {
@@ -2137,7 +2364,10 @@ function mapStateToProps(state) {
     displayedColumnList,
     param,
     hasCommPermissionEdit,
-    hasCommPermissionRead
+    hasCommPermissionRead,
+    setPlayerList,
+    siteSetting,
+    lrfFilters
   });
 }
 
@@ -2367,6 +2597,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
+
 
 
 
@@ -2377,7 +2609,8 @@ const AthenaSearch = props => {
     email,
     ipLogin,
     onChange,
-    onKeyPress
+    onKeyPress,
+    searchOption
   } = props;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 col-md-4 col-sm-4 col-lg-3 col-xl-2"
@@ -2394,6 +2627,7 @@ const AthenaSearch = props => {
     autoComplete: "off",
     onChange: onChange,
     onKeyPress: onKeyPress,
+    disabled: searchOption == _lib_constants__WEBPACK_IMPORTED_MODULE_3__["searchOptions"].allPlayers,
     placeholder: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('PlaceholderBankAccount')
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 col-md-4 col-sm-4 col-lg-3 col-xl-2"
@@ -2410,6 +2644,7 @@ const AthenaSearch = props => {
     autoComplete: "off",
     onChange: onChange,
     onKeyPress: onKeyPress,
+    disabled: searchOption == _lib_constants__WEBPACK_IMPORTED_MODULE_3__["searchOptions"].allPlayers,
     placeholder: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('PlaceholderEmail')
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 col-md-4 col-sm-4 col-lg-3 col-xl-2"
@@ -2435,7 +2670,8 @@ const propTypes = {
   email: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired,
   ipLogin: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired,
   onChange: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
-  onKeyPress: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
+  onKeyPress: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
+  searchOption: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired
 };
 AthenaSearch.propTypes = propTypes;
 /* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(AthenaSearch));
@@ -2523,7 +2759,18 @@ const SearchOption = props => {
     onChange: onChange
   }), "\xA0\xA0", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('MatchCase'), " AB\"", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "keyword"
-  }, "test"), "\"CD")));
+  }, "test"), "\"CD")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], {
+    tag: "div",
+    className: "hide"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "selection-item"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "radio",
+    name: "searchOption",
+    value: _lib_constants__WEBPACK_IMPORTED_MODULE_2__["searchOptions"].allPlayers,
+    checked: selectedValue === _lib_constants__WEBPACK_IMPORTED_MODULE_2__["searchOptions"].allPlayers,
+    onChange: onChange
+  }), "\xA0\xA0", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('SearchAllPlayers'))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (SearchOption);
@@ -2544,11 +2791,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/components/dropdown */ "./www/js/source/reactpages/components/dropdown/index.js");
 /* harmony import */ var _jsroot_components_utils_timer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/components/utils/timer */ "./www/js/source/reactpages/components/utils/timer.js");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
 
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
 
 
 
@@ -2640,6 +2889,7 @@ const UserNameInput = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.
     type: "text",
     ref: userNameRef,
     autoComplete: "off",
+    disabled: searchOption == _lib_constants__WEBPACK_IMPORTED_MODULE_3__["searchOptions"].allPlayers,
     onChange: debounceChange
   }, inputAttributes)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "dropdown"
@@ -3328,20 +3578,21 @@ const PlayerRow = props => {
   } = dataItem;
   const canShowMainColumn = IsDeposit && !IsArchived;
   const commissionGroup = CommissionGroup || _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource('None');
-  const canEditCommissionGpoup = IsDeposit && !IsArchived && dataItem.Status != _lib_constants__WEBPACK_IMPORTED_MODULE_4__["playerStatusByName"].Closed;
+  const playerIsEditable = IsDeposit && !IsArchived && dataItem.Status != _lib_constants__WEBPACK_IMPORTED_MODULE_4__["playerStatusByName"].Closed;
   const customerClass = dataItem.CustomerClass == "0" || !dataItem.CustomerClass ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource('None') : dataItem.CustomerClass;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Row"], {
     key: LicenseeCustId
-  }, canSelectPlayers && displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].Index] && !canEditCommissionGpoup && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
+  }, canSelectPlayers && displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].Index] && !playerIsEditable && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
     className: "center-align"
-  }), canSelectPlayers && displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].Index] && canEditCommissionGpoup && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
+  }), canSelectPlayers && displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].Index] && playerIsEditable && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
     className: "center-align"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "checkbox",
     id: "chk-cust-" + LicenseeCustId,
     "data-username": dataItem.UserName,
     "data-custid": dataItem.IbcCustId,
-    className: "chk-cust"
+    className: "chk-cust",
+    defaultChecked: dataItem.Selected
   })), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].Status] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_StatusCell__WEBPACK_IMPORTED_MODULE_10__["default"], {
     dataItem: dataItem
   })), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].UserName] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UserNameCell__WEBPACK_IMPORTED_MODULE_7__["default"], {
@@ -4113,7 +4364,9 @@ const siteSetting = {
 };
 const lrfFilters = {
   CustomerClass: [],
-  CommGroups: []
+  CommGroups: [],
+  Subsidiaries: [],
+  SubsidiaryViewType: 0
 };
 
 const defaultState = _objectSpread(_objectSpread({}, window.initialState), {}, {
@@ -4143,7 +4396,7 @@ Object(react_dom__WEBPACK_IMPORTED_MODULE_1__["render"])( /*#__PURE__*/react__WE
 /*!*********************************************************************************!*\
   !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js ***!
   \*********************************************************************************/
-/*! exports provided: specialLevelListWithColor, oddsGroupListWithStyle, licenseeType, fields, columnList, contextMenuKeys, tabNames, excludedTabNameWithNonDepositAndArchived, excludedTabNameWithClosed, contextMenuList, heightSlicing, searchOptions, defaultPagingOption, playerStatus, playerStatusByName, displayedPlayerStatusList, messageUpdateState, baStatusList, headerText, gridItemDropdownHeight, stringTypeFields, apiInfo, apiUpdateInfo, apiSiteSetting, apiSuggestion, excludedContextMenuWithNonDeposit, excludedContextMenuWithClosed, excludedContextMenuWithArchived, excludedContextMenuWithApiLicensee, isDepositedList, emailPattern, maxLapPageSize */
+/*! exports provided: specialLevelListWithColor, oddsGroupListWithStyle, licenseeType, fields, columnList, contextMenuKeys, tabNames, excludedTabNameWithNonDepositAndArchived, excludedTabNameWithClosed, contextMenuList, heightSlicing, searchOptions, defaultPagingOption, playerStatus, playerStatusByName, displayedPlayerStatusList, messageUpdateState, baStatusList, headerText, gridItemDropdownHeight, stringTypeFields, apiInfo, apiUpdateInfo, apiSiteSetting, apiSuggestion, excludedContextMenuWithNonDeposit, excludedContextMenuWithClosed, excludedContextMenuWithArchived, excludedContextMenuWithApiLicensee, isDepositedList, emailPattern, maxLapPageSize, maxLapSearchItems */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4180,6 +4433,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isDepositedList", function() { return isDepositedList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "emailPattern", function() { return emailPattern; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "maxLapPageSize", function() { return maxLapPageSize; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "maxLapSearchItems", function() { return maxLapSearchItems; });
 /* harmony import */ var _constants_configInfo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../constants/configInfo */ "./www/js/source/reactpages/Module/constants/configInfo.js");
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 
@@ -4369,7 +4623,8 @@ const searchOptions = {
   matchPrefix: '1',
   matchCase: '2',
   matchWholeWord: '3',
-  matchPrecise: '4'
+  matchPrecise: '4',
+  allPlayers: '5'
 };
 const defaultPagingOption = {
   PageIndex: 1,
@@ -4486,6 +4741,26 @@ const isDepositedList = {
 };
 const emailPattern = '^([a-zA-Z0-9_\\.\\-])+\\@(([a-zA-Z0-9\\-])+\\.)+([a-zA-Z0-9]{2,4})+$';
 const maxLapPageSize = 250;
+const maxLapSearchItems = 10000;
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/default-value.js":
+/*!*************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/default-value.js ***!
+  \*************************************************************************************/
+/*! exports provided: defaultLRFFilters */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "defaultLRFFilters", function() { return defaultLRFFilters; });
+const defaultLRFFilters = {
+  CustomerClass: [],
+  CommGroups: [],
+  Subsidiaries: [],
+  SubsidiaryViewType: 0
+};
 
 /***/ }),
 
@@ -4992,8 +5267,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/constants/excelStyle */ "./www/js/source/reactpages/constants/excelStyle.js");
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
 /* harmony import */ var _helpers_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./helpers/utils */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/utils.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 
 
 
@@ -5087,7 +5361,7 @@ class ReportExcel {
     }
 
     if (columnConfig.field === _constants__WEBPACK_IMPORTED_MODULE_3__["fields"].CommissionGroup) {
-      value = jquery__WEBPACK_IMPORTED_MODULE_5___default()(".td-comm-" + item.IbcCustId).html();
+      value = value == "0" || !value ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource('None') : value;
     }
 
     if (columnConfig.field === _constants__WEBPACK_IMPORTED_MODULE_3__["fields"].CustomerClass) {
@@ -5335,11 +5609,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helpers_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../helpers/utils */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/utils.js");
 /* harmony import */ var _helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../helpers/playerDataBuilder */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/playerDataBuilder.js");
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
+/* harmony import */ var _queryServiceFactory__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./queryServiceFactory */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/services/queryServiceFactory.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -5353,12 +5629,14 @@ class LapPlayerQueryService {
     } = apiInfo;
     let request = null;
 
-    if (this._shouldBatchRequest(param)) {
-      request = this._batchRequest(param, _constants__WEBPACK_IMPORTED_MODULE_3__["maxLapPageSize"], commonService, lapSearch);
-    } else {
-      request = commonService.fetchData(lapSearch.type, lapSearch.action, _objectSpread({}, param));
-    }
+    const isSearchAllSides = _queryServiceFactory__WEBPACK_IMPORTED_MODULE_4__["default"]._isSearchAllSides(param);
 
+    const lapParam = _objectSpread(_objectSpread({}, param), {}, {
+      pageSize: isSearchAllSides ? _constants__WEBPACK_IMPORTED_MODULE_3__["maxLapSearchItems"] : param.pageSize,
+      pageIndex: isSearchAllSides ? 1 : param.pageIndex
+    });
+
+    request = this._shouldBatchRequest(lapParam) ? this._batchRequest(lapParam, _constants__WEBPACK_IMPORTED_MODULE_3__["maxLapPageSize"], commonService, lapSearch) : commonService.fetchData(lapSearch.type, lapSearch.action, _objectSpread({}, param));
     return request.then(lapResponse => {
       const {
         PlayerList: lapPlayerList = [],
@@ -5371,7 +5649,6 @@ class LapPlayerQueryService {
 
       return this._fetchFromLrf(param, lrfDataById, lapPlayerList, commonService, lapTotalItem);
     }).catch(() => _helpers_playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].createEmptyResult());
-    ;
   }
 
   static _shouldBatchRequest(param) {
@@ -5443,11 +5720,15 @@ class LapPlayerQueryService {
     const noneDepositOrArchivedList = Object(_helpers_utils__WEBPACK_IMPORTED_MODULE_1__["getNoneDepositOrArchivedList"])(lapPlayerList);
     const depositIdList = Object(_helpers_utils__WEBPACK_IMPORTED_MODULE_1__["getCustIdListFromLapData"])(lapPlayerList);
 
+    const isChangeAdvanceSearch = _queryServiceFactory__WEBPACK_IMPORTED_MODULE_4__["default"]._isChangeAdvancedSearch(param);
+
+    if (isChangeAdvanceSearch && param.deposited == "No") {
+      return _helpers_playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].createEmptyResult();
+    }
+
     if (depositIdList.length === 0) {
-      return {
-        playerList: Object(_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLapPlayerList"])(noneDepositOrArchivedList),
-        totalItem: lapTotalItem
-      };
+      const resultList = Object(_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLapPlayerList"])(noneDepositOrArchivedList);
+      return this._pagingResult(param, resultList, lapTotalItem);
     }
 
     const lrfParam = {
@@ -5458,8 +5739,11 @@ class LapPlayerQueryService {
       baFilter: param.baFilter,
       customerClass: param.customerClass,
       commGroups: param.commGroups,
-      pageSize: param.pageSize,
-      pageIndex: 1
+      subsidiaries: param.subsidiaries,
+      whiteLabels: param.whiteLabels,
+      pageSize: depositIdList.length,
+      pageIndex: 1,
+      searchBySubsidiary: param.searchBySubsidiary
     };
     return commonService.fetchData(lrfDataById.type, lrfDataById.action, lrfParam).then(lrfResponse => {
       const {
@@ -5467,25 +5751,37 @@ class LapPlayerQueryService {
       } = lrfResponse.data;
 
       if (!lrfPlayerList || !lrfPlayerList.length) {
-        return {
-          playerList: Object(_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLapPlayerList"])(noneDepositOrArchivedList),
-          totalItem: lapTotalItem - lapPlayerList.length + noneDepositOrArchivedList.length
-        };
+        const resultList = Object(_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLapPlayerList"])(noneDepositOrArchivedList);
+        return this._pagingResult(param, resultList, lapTotalItem - depositIdList.length);
       }
 
       const lrfPlayerDic = _helpers_playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].toLrfPlayerDic(lrfPlayerList);
       const filteredLapPlayerList = lapPlayerList.filter(player => Object(_helpers_utils__WEBPACK_IMPORTED_MODULE_1__["isNonDepositOrArchived"])(player) || !!lrfPlayerDic[player.IBCCustId]);
       const playerList = _helpers_playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].mergePlayerList(lrfPlayerList, filteredLapPlayerList);
-      return {
-        playerList,
-        totalItem: lapTotalItem - lapPlayerList.length + filteredLapPlayerList.length
-      };
+      return this._pagingResult(param, playerList, lapTotalItem - lapPlayerList.length + filteredLapPlayerList.length);
     }).catch(() => {
-      return {
-        playerList: Object(_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLapPlayerList"])(nonDepositOrArchivedList),
-        totalItem: nonDepositOrArchivedList.length
-      };
+      const resultList = Object(_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLapPlayerList"])(noneDepositOrArchivedList);
+      return this._pagingResult(param, resultList, lapTotalItem);
     });
+  }
+
+  static _pagingResult(param, playerList, totalItem) {
+    const isSearchAllSides = _queryServiceFactory__WEBPACK_IMPORTED_MODULE_4__["default"]._isSearchAllSides(param);
+
+    if (isSearchAllSides) {
+      const startIndex = param.pageSize * (param.pageIndex - 1);
+      const endIndex = startIndex + param.pageSize;
+      const dataList = playerList.slice(startIndex, endIndex);
+      return {
+        playerList: dataList,
+        totalItem: playerList.length
+      };
+    }
+
+    return {
+      playerList,
+      totalItem
+    };
   }
 
 }
@@ -5513,9 +5809,7 @@ class LrfFiltersService {
 
   fetchData(param) {
     var action = 'api/PlayerList/LRFFilters';
-    return this.commonService.fetchData(_constants_configInfo__WEBPACK_IMPORTED_MODULE_1__["systemType"].lrf, action, {
-      hasCommPermissionRead: param.hasCommPermissionRead
-    });
+    return this.commonService.fetchData(_constants_configInfo__WEBPACK_IMPORTED_MODULE_1__["systemType"].lrf, action, param);
   }
 
 }
@@ -5551,16 +5845,13 @@ class LrfPlayerQueryService {
         DataList: lrfPlayerList,
         TotalItem
       } = lrfResponse.data;
-      return !lrfPlayerList || !lrfPlayerList.length ? _helpers_playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].createEmptyResult() : this._fetchFromLap(param, lrfPlayerList, lapDataById, commonService, TotalItem);
+      return !lrfPlayerList || !lrfPlayerList.length ? _helpers_playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].createEmptyResult() : this._fetchFromLap(lrfPlayerList, lapDataById, commonService, TotalItem);
     }).catch(() => _helpers_playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].createEmptyResult());
   }
 
-  static _fetchFromLap(param, lrfPlayerList, lapDataById, commonService, lrfTotalItem) {
+  static _fetchFromLap(lrfPlayerList, lapDataById, commonService, lrfTotalItem) {
     const lapParam = {
-      idList: lrfPlayerList.map(x => x.IbcCustId),
-      bankAccountNumber: param.bankAccountNumber,
-      email: param.email,
-      ip: param.ipLogin
+      idList: lrfPlayerList.map(x => x.IbcCustId)
     };
     return commonService.fetchData(lapDataById.type, lapDataById.action, lapParam).then(lapResponse => {
       const {
@@ -5572,12 +5863,9 @@ class LrfPlayerQueryService {
       }
 
       const playerList = _helpers_playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].mergePlayerList(lrfPlayerList, lapPlayerList);
-      const startIndex = param.pageSize * (param.pageIndex - 1);
-      const endIndex = startIndex + param.pageSize;
-      const dataList = playerList.slice(startIndex, endIndex);
       return {
-        playerList: dataList,
-        totalItem: playerList.length
+        playerList,
+        totalItem: lrfTotalItem
       };
     }).catch(() => _helpers_playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].createEmptyResult());
   }
@@ -5822,7 +6110,20 @@ __webpack_require__.r(__webpack_exports__);
 
 class QueryServiceFactory {
   static getPlayerListService(param) {
-    return this._isChangeAdvancedSearch(param) ? _lrfPlayerQueryService__WEBPACK_IMPORTED_MODULE_2__["default"] : _lapPlayerQueryService__WEBPACK_IMPORTED_MODULE_1__["default"];
+    return !this._isChangeLAPSearch(param) && this._isChangeAdvancedSearch(param) ? _lrfPlayerQueryService__WEBPACK_IMPORTED_MODULE_2__["default"] : _lapPlayerQueryService__WEBPACK_IMPORTED_MODULE_1__["default"];
+  }
+
+  static _isSearchAllSides(param) {
+    return this._isChangeLAPSearch(param) && this._isChangeAdvancedSearch(param);
+  }
+
+  static _isChangeLAPSearch(param) {
+    const {
+      bankAccountNumber,
+      email,
+      ipLogin
+    } = param;
+    return bankAccountNumber || email || ipLogin;
   }
 
   static _isChangeAdvancedSearch(param) {
@@ -6148,6 +6449,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "lrfFilters", function() { return lrfFilters; });
 /* harmony import */ var _jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
 /* harmony import */ var _actions_types_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/types.js */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/types.js");
+/* harmony import */ var _lib_default_value__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../lib/default-value */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/default-value.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -6156,11 +6458,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-const defaultLRFFilters = {
-  CustomerClass: [],
-  CommGroups: []
-};
-const lrfFilters = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(defaultLRFFilters, {
+
+const lrfFilters = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(_lib_default_value__WEBPACK_IMPORTED_MODULE_2__["defaultLRFFilters"], {
   [_actions_types_js__WEBPACK_IMPORTED_MODULE_1__["SET_LRF_FILTERS"]](preState, action) {
     return _objectSpread({}, action.data);
   }
@@ -8252,6 +8551,35 @@ const grandTotalCellStyle = {
   percent: _objectSpread(_objectSpread({}, grandTotalTextStyle), {}, {
     numFmt: "#,##0.00%"
   })
+};
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/constants/report.js":
+/*!******************************************************!*\
+  !*** ./www/js/source/reactpages/constants/report.js ***!
+  \******************************************************/
+/*! exports provided: ReportLevel, ReportBy, SubsidiaryViewType */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReportLevel", function() { return ReportLevel; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReportBy", function() { return ReportBy; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SubsidiaryViewType", function() { return SubsidiaryViewType; });
+const ReportLevel = {
+  MAIN: 0,
+  LICENSEE: 1,
+  CUSTOMER: 2
+};
+const ReportBy = {
+  DAILY: 1,
+  MONTHLY: 2
+};
+const SubsidiaryViewType = {
+  NOT_MANAGEMENT: 0,
+  NORMAL_MANAGEMENT: 1,
+  MASTER_MANAGEMENT: 2
 };
 
 /***/ }),

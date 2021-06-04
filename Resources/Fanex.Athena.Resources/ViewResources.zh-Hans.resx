@@ -162,10 +162,10 @@
     <comment>#27974</comment>
   </data>
   <data name="AlertTurnOffBAMsg" xml:space="preserve">
-    <value>您确定要关闭BA？</value>
+    <value>确定要关闭BA状态吗?</value>
   </data>
   <data name="AlertTurnOnBAMsg" xml:space="preserve">
-    <value>您确定要打开BA？</value>
+    <value>确定要开启BA状态吗?</value>
   </data>
   <data name="AlertUserNameMsg" xml:space="preserve">
     <value>请输入用户名！</value>
@@ -2166,6 +2166,33 @@
   </data>
   <data name="ProductWM" xml:space="preserve">
     <value>完美真人</value>
+  </data>
+  <data name="MessageLimitTimeUpdateBA" xml:space="preserve">
+    <value>投注总计状态只能在周一下午1点至下午5点 (GMT +8) 进行更改.</value>
+  </data>
+  <data name="UpdateSpecialLevel" xml:space="preserve">
+    <value>更新特殊层级</value>
+  </data>
+  <data name="UpdateOddsGroup" xml:space="preserve">
+    <value>更新水位组别</value>
+  </data>
+  <data name="UpdateBAStatus" xml:space="preserve">
+    <value>更新BA状态</value>
+  </data>
+  <data name="ConfirmBatchUpdateSpecialLevel" xml:space="preserve">
+    <value>确定要替该玩家设定特殊层级吗?</value>
+  </data>
+  <data name="ConfirmBatchUpdateOddsGroup" xml:space="preserve">
+    <value>确定要移动该玩家到水位组别吗?</value>
+  </data>
+  <data name="ConfirmBatchUpdateBAStatus_On" xml:space="preserve">
+    <value>确定要开启BA状态吗?</value>
+  </data>
+  <data name="MessageUpdateOddsGroupForBAPlayers" xml:space="preserve">
+    <value>BA玩家禁止移动水位组别</value>
+  </data>
+  <data name="MessageTurnOffVIPError" xml:space="preserve">
+    <value>VIP玩家禁止移动水位组别</value>
   </data>
   <data name="SoccerPinGoal" xml:space="preserve">
     <value>足球台</value>

@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="ExchangeComm.cs" company="Microsoft">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Controllers.BetSettings
+﻿namespace Fanex.Athena.Controllers.BetSettings
 {
     using System.Linq;
     using System.Threading.Tasks;
@@ -29,9 +23,8 @@ namespace Fanex.Athena.Controllers.BetSettings
             ICoreBetSettingService coreBetSettingService,
             IProductService productService,
             IDcsBetSettingService betSettingService,
-            IExchangeCommApiService exchangeCommApiService
-            )
-        : base(coreBetSettingService, productService)
+            IExchangeCommApiService exchangeCommApiService)
+            : base(coreBetSettingService, productService)
         {
             _betSettingService = betSettingService;
             _exchangeCommApiService = exchangeCommApiService;
@@ -68,20 +61,15 @@ namespace Fanex.Athena.Controllers.BetSettings
         [HttpPost]
         [AjaxRequest]
         [CustomValidateAntiForgery]
-        public async Task<ActionResult> UpdateComm(int custId, double oldCommission, double newCommission)
+        public async Task<ActionResult> UpdateComm(UpdateCommMetaModel metaModel)
         {
-            if (!ValidComms.Contains(newCommission))
+            if (!ValidComms.Contains(metaModel.NewCommission))
             {
                 const int InvalidChargeCommissionError = 100;
                 return Json(new ResultInfo { Code = InvalidChargeCommissionError, Message = ViewResources.InvalidChargeCommission });
             }
             var userSession = SessionServiceInstance.UserSession;
-            var result = await _exchangeCommApiService.UpdateCommissionAsync(
-                userSession.UserId,
-                custId,
-                oldCommission,
-                newCommission,
-                userSession.Language);
+            var result = await _exchangeCommApiService.UpdateCommissionAsync(userSession.UserId, metaModel, userSession.Language);
 
             return Json(result);
         }

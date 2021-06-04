@@ -62,7 +62,7 @@ export class DataGrid extends PureComponent {
 
     render() {
         const { playerList, selectedPlayer, isFetchingData,
-            displayedColumnList, sweetAlertOption, hasCommPermissionEdit, hasCommPermissionRead } = this.props;
+            displayedColumnList, sweetAlertOption, hasCommPermissionEdit, hasCommPermissionRead, siteSetting } = this.props;
         if (!playerList) {
             return null;
         }
@@ -74,7 +74,10 @@ export class DataGrid extends PureComponent {
         const dataList = selectedPlayer
             ? [playerList.find(item => item.LicenseeCustId === selectedPlayer.licenseeCustId)] : playerList;
         const displayedColumn = buildDisplayedColumnObject(displayedColumnList);
-        const canSelectPlayers = hasCommPermissionEdit;
+
+        const hasSpecialLevelWrite = this.props.lrfFilters.HasSpecialLevelWrite;
+        const hasOddsGroupWrite = this.props.lrfFilters.HasOddsGroupWrite;
+        const canSelectPlayers = hasCommPermissionEdit || hasSpecialLevelWrite || hasOddsGroupWrite || siteSetting.isAllowedBA;
 
         return (
             <>
@@ -104,8 +107,8 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-    const { playerList, selectedPlayer, displayedColumnList, isFetchingData, sweetAlertOption, hasCommPermissionEdit, hasCommPermissionRead } = state;
-    return Object.assign({}, { playerList, selectedPlayer, displayedColumnList, isFetchingData, sweetAlertOption, hasCommPermissionEdit, hasCommPermissionRead });
+    const { playerList, selectedPlayer, displayedColumnList, isFetchingData, sweetAlertOption, hasCommPermissionEdit, hasCommPermissionRead, lrfFilters, siteSetting } = state;
+    return Object.assign({}, { playerList, selectedPlayer, displayedColumnList, isFetchingData, sweetAlertOption, hasCommPermissionEdit, hasCommPermissionRead, lrfFilters, siteSetting });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DataGrid);

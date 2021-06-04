@@ -15,10 +15,6 @@
 
     using NUnit.Framework;
 
-    using Resources;
-
-    using StatelessCore.Interfaces;
-
     [TestFixture]
     public class KenoBetSettingServiceTest
     {
@@ -73,14 +69,21 @@
                 MaxPerMatch = 4
             };
             var xmlParam = "<settings><setting GameTypeID=\"1\" minbet=\"2\" maxbet=\"3\" maxpermatch=\"4\" ></setting></settings>";
+            var metaModel = new CommonBetSetting
+            {
+                CustId = custId,
+                UserId = userId,
+                Language = language,
+                Ip = ip
+            };
 
             // Action
-            await _service.UpdateBetSettingAsync(custId, userId, language, ip, setting);
+            await _service.UpdateBetSettingAsync(metaModel, setting);
 
             // Assert
-            await _dataAccess.Received(1).UpdateBetSettingAsync(custId, userId, language, ip, xmlParam);
+            await _dataAccess.Received(1).UpdateBetSettingAsync(metaModel, xmlParam);
         }
 
-        
+
     }
 }

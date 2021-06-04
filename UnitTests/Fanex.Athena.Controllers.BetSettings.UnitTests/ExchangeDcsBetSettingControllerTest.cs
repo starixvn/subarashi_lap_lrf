@@ -101,9 +101,10 @@
             using (var controller = CreateController())
             {
                 // Arrange
+                var metaModel = new UpdateCommMetaModel { NewCommission = newComm };
 
                 // Action
-                var result = await controller.UpdateComm(0, 0, newComm) as JsonResult;
+                var result = await controller.UpdateComm(metaModel) as JsonResult;
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -123,14 +124,15 @@
             using (var controller = CreateController())
             {
                 // Arrange
+                var metaModel = new UpdateCommMetaModel { NewCommission = newComm };
                 var expectedResultInfo = new ResultInfo<double> { Code = 1, Message = "Test" };
 
                 _exchangeCommApiService.UpdateCommissionAsync(
-                    DefaultUserSession.UserId, 0, 0, newComm, SessionService.UserSession.Language)
+                    DefaultUserSession.UserId, metaModel, SessionService.UserSession.Language)
                     .Returns(Task.FromResult<IResultInfo<double>>(expectedResultInfo));
 
                 // Action
-                var result = await controller.UpdateComm(0, 0, newComm) as JsonResult;
+                var result = await controller.UpdateComm(metaModel) as JsonResult;
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert

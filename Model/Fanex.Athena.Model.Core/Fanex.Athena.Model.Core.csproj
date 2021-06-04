@@ -109,6 +109,7 @@
     <Compile Include="DataDomain\UserLevelType.cs" />
     <Compile Include="DTO\Common\BusinessLogItem.cs" />
     <Compile Include="DTO\Common\CheckedItem.cs" />
+    <Compile Include="DTO\Common\CustDTO.cs" />
     <Compile Include="DTO\Common\ExChangeRate.cs" />
     <Compile Include="DTO\Common\IRequest.cs" />
     <Compile Include="DTO\Common\IResultInfoGeneric.cs" />

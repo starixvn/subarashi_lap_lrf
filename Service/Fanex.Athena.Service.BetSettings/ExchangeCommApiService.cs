@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="LiveCasinoBetSettingService.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Service.BetSettings
+﻿namespace Fanex.Athena.Service.BetSettings
 {
     using System.Threading.Tasks;
 
@@ -14,6 +8,7 @@ namespace Fanex.Athena.Service.BetSettings
 
     using Extension.Utility;
     using Fanex.Athena.Model.BetSettings.DTO.Exchange;
+    using Fanex.Athena.Model.BetSettings.MetaModel;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     using Interfaces;
@@ -61,9 +56,9 @@ namespace Fanex.Athena.Service.BetSettings
         }
 
         public async Task<IResultInfo<double>> UpdateCommissionAsync(
-            int userId, int custId, double oldCommission, double newCommission, string language)
+            int userId, UpdateCommMetaModel metaModel, string language)
         {
-            var isEnable = await _betSettingDataAccess.GetStatusAsync(custId, ProductTypes.Exchange).ConfigureAwait(false);
+            var isEnable = await _betSettingDataAccess.GetStatusAsync(metaModel.CustId, ProductTypes.Exchange).ConfigureAwait(false);
 
             if (isEnable != true)
             {
@@ -71,15 +66,15 @@ namespace Fanex.Athena.Service.BetSettings
             }
 
             const string apiPath = "/Exchange/UpdateCommission";
-            var requestParam = new { custId, commission = newCommission, environment = _appSetting.Environment };
+            var requestParam = new { custId = metaModel.CustId, commission = metaModel.NewCommission, environment = _appSetting.Environment };
             var result = await _lgClient.PostAsync<APIResult<ExchangeCommission>>(apiPath, requestParam, language).ConfigureAwait(false);
 
             await _userLogDataAccess.WriteLog(new SPLogMetaModel
             {
                 ActionID = UserLogAction.ExchangeCommission,
                 UserId = userId,
-                CustID = custId,
-                Doing = $"<ChargeCommission OldValue='{oldCommission}' NewValue='{newCommission}' />"
+                CustID = metaModel.CustId,
+                Doing = $"<ChargeCommission OldValue='{metaModel.OldCommission}' NewValue='{metaModel.NewCommission}' />"
             }).ConfigureAwait(false);
 
             return result.Data == null ? CreateApiErrorResult() : CreateApiResult(result.Data.Status, result.Data.Commission);

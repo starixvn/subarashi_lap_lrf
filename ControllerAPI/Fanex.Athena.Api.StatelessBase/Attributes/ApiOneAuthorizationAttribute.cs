@@ -115,6 +115,7 @@ namespace Fanex.Athena.Api.StatelessBase.Attributes
             actionContext.ActionArguments["sitename"] = token.SiteName;
             actionContext.ActionArguments["language"] = token.Language;
             actionContext.ActionArguments["currencyAgentList"] = token.Currency;
+            actionContext.ActionArguments["tokenInfo"] = token;
         }
 
         private static string GetAuthToken(HttpRequestMessage request)

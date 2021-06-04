@@ -54,7 +54,7 @@
                 return result;
             }
 
-            return await _dcsBetSettingService.UpdateBetSettingAsync(setting.CustId, setting.UserId, setting.Ip, new[] { esportSetting });
+            return await _dcsBetSettingService.UpdateBetSettingAsync(setting, new[] { esportSetting });
         }
 
         private async Task<BetSetting> GetESportsSettingAsync(int custId)

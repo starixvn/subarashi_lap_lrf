@@ -10,8 +10,6 @@
 
     using NUnit.Framework;
 
-    using Resources;
-
     using UnitTest.Common.Helpers;
 
     [TestFixture]
@@ -38,6 +36,12 @@
             // Arrange
             var setting = FakeHelper.Create<DcsBetSetting>();
             var betSettings = new List<DcsBetSetting> { setting };
+            var metaModel = new CommonBetSetting
+            {
+                CustId = _custId,
+                UserId = _userId,
+                Ip = "ip"
+            };
 
             var expectedXmlParam = string.Format(
                 "<ROOT><BetLimit SportType=\"{0}\" BetType=\"{1}\" MinBet=\"{2}\" MaxBet=\"{3}\" MaxPerMatch=\"{4}\" ></BetLimit></ROOT>",
@@ -48,10 +52,10 @@
                 setting.MaxPerMatch);
 
             // Action
-            await _dcsBettingService.UpdateBetSettingAsync(_custId, _userId, "ip", betSettings);
+            await _dcsBettingService.UpdateBetSettingAsync(metaModel, betSettings);
 
             // Assert
-            await _betSettingDataAccess.Received(1).UpdateBetSettingAsync(_custId, _userId, "ip", expectedXmlParam);
+            await _betSettingDataAccess.Received(1).UpdateBetSettingAsync(metaModel, expectedXmlParam);
         }
 
     }

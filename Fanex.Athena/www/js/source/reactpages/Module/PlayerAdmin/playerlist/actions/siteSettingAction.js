@@ -31,5 +31,5 @@ const setSiteSetting = (data) => {
     return {
         type: SET_SITE_SETTING,
         data
-    }
-}
+    };
+};

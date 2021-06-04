@@ -3,7 +3,8 @@
     using System.Threading.Tasks;
 
     using Core.UnitTests.TestHelpers;
-
+    using Fanex.Athena.Model.BetSettings.DTO;
+    using Fanex.Athena.Model.BetSettings.MetaModel;
     using Fanex.Logging;
 
     using Model.Core.DataDomain;
@@ -74,12 +75,18 @@
             var custId = 1;
             var userId = 2;
             var productId = ProductTypes.AllBet;
-            var status = true;
+            var status = 1;
             var ip = "local";
             ObjectDb.GetParameterValue("ErrCode").Returns(1);
+            var metaModel = new UpdateStatusMetaModel
+            {
+                CustId = custId,
+                Status = status,
+                ProductId = productId
+            };
 
             // Action
-            await DataAccess.UpdateStatusAsync(userId, custId, ip, status, productId);
+            await DataAccess.UpdateStatusAsync(userId, ip, metaModel);
 
             // Assert
             Assert.Multiple(() =>
@@ -100,9 +107,14 @@
             DataAccess.GetObjectDb(Arg.Is("Acc_Dep_CustSetting_DisableStatUpd")).Returns(ObjectDb);
             ObjectDb.GetParameterValue("ErrCode").Returns(1);
             ObjectDb.GetParameterValue("ErrMsg").Returns("abc");
+            var metaModel = new UpdateStatusMetaModel
+            {
+                Nickname = string.Empty,
+                ProductId = ProductTypes.AllBet
+            };
 
             // Action
-            var result = await DataAccess.UpdateStatusAsync(0, 0, string.Empty, false, ProductTypes.AllBet);
+            var result = await DataAccess.UpdateStatusAsync(0, string.Empty, metaModel);
 
             // Assert
             Assert.Multiple(() =>
@@ -124,9 +136,15 @@
             DataAccess.GetObjectDb(Arg.Is("Acc_Dep_CustSetting_BetLimitUpd")).Returns(ObjectDb);
             ObjectDb.GetParameterValue("ErrCode").Returns(1);
             ObjectDb.GetParameterValue("ErrMsg").Returns(string.Empty);
+            var metaModel = new CommonBetSetting
+            {
+                CustId = CustId,
+                UserId = UserId,
+                Ip = Ip
+            };
 
             // Action
-            await DataAccess.UpdateBetSettingAsync(CustId, UserId, Ip, XmlData);
+            await DataAccess.UpdateBetSettingAsync(metaModel, XmlData);
 
             // Assert
             Assert.Multiple(() =>
@@ -152,9 +170,15 @@
             DataAccess.GetObjectDb(Arg.Is("Acc_Dep_CustSetting_BetLimitUpd")).Returns(ObjectDb);
             ObjectDb.GetParameterValue("ErrCode").Returns(1);
             ObjectDb.GetParameterValue("ErrMsg").Returns("<Root Msg='Error'></Root>");
+            var metaModel = new CommonBetSetting
+            {
+                CustId = CustId,
+                UserId = UserId,
+                Ip = Ip
+            };
 
             // Action
-            var result = await DataAccess.UpdateBetSettingAsync(CustId, UserId, Ip, XmlData);
+            var result = await DataAccess.UpdateBetSettingAsync(metaModel, XmlData);
 
             // Assert
             Assert.Multiple(() =>

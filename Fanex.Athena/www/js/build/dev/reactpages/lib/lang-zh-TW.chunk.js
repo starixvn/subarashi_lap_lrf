@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 5/31/2021 10:59:19 AM
+// Generated at: 5/31/2021 5:30:41 PM
 window._language_zh_TW = {
   AA: "客客",
   AbnormalBet: "非正規註單",
@@ -116,8 +116,8 @@ window._language_zh_TW = {
   AlertPasswordEmptyMsg: "對不起，密碼不能空置!!!",
   AlertRemoveSpecialLevelForCustomerMsg: "即將刪除此會員的特殊級別。您，確定嗎?",
   AlertSetSpecialLevelForCustomerMsg: "您確定要設置此會員的特殊級別為 ?",
-  AlertTurnOffBAMsg: "您確定要關閉BA？",
-  AlertTurnOnBAMsg: "您確定要打開BA？",
+  AlertTurnOffBAMsg: "確定要關閉BA狀態嗎?",
+  AlertTurnOnBAMsg: "確定要開啟BA狀態嗎?",
   AlertUserNameMsg: "請輸入用戶名！",
   All: "全部",
   AllBetTypes: "所有投注類型",
@@ -219,6 +219,10 @@ window._language_zh_TW = {
   CommIsUnChange: "會員的佣金是不變的",
   Confirm: "確認",
   Confirmation: "確認",
+  ConfirmBatchUpdateBAStatus_Off: "確定要關閉BA狀態嗎?",
+  ConfirmBatchUpdateBAStatus_On: "確定要開啟BA狀態嗎?",
+  ConfirmBatchUpdateOddsGroup: "確定要移動該玩家到水位組別嗎?",
+  ConfirmBatchUpdateSpecialLevel: "確定要替該玩家設定特殊層級嗎?",
   ConfirmCommission: "確認會員的佣金:",
   ConfirmPassword: "確認密碼",
   Content: "内容",
@@ -452,7 +456,10 @@ window._language_zh_TW = {
   MessageGroupDoesNotExistMsg: "This Group does not exist!",
   MessageGroupHasAlreadyChoosen: "此組名稱已經被選擇，請嘗試另一個名稱!",
   MessageInvalidCommValue: "佣金值無效!",
+  MessageLimitTimeUpdateBA: "投注總計狀態只能在週一下午1點至下午5點 (GMT +8) 進行更改.",
   MessageSuccess: "成功",
+  MessageTurnOffVIPError: "VIP玩家禁止移動水位組別",
+  MessageUpdateOddsGroupForBAPlayers: "BA玩家禁止移動水位組別",
   MinBet: "最低投注",
   MinBetCanNotGreaterThanMaxBet: "最小投注不能超過最大投注",
   MinBetGreaterThanOrEqual: "最小投注必須大於或等於",
@@ -689,6 +696,7 @@ window._language_zh_TW = {
   UpdateAccountSuccessMsg: "更新賬號成功!",
   UpdateAgCasinoBetSettings: "Are you sure you want to update all AG Casino bet settings?",
   UpdateAgCasinoBetSettingSuccessMsg: "The Ag Casino bet setting of {0} was updated successfully",
+  UpdateBAStatus: "更新BA狀態",
   UpdateCommGroup_Warning: "請注意：由於佣金值不同，該玩家將從組中移除。",
   UpdateCommission: "更新佣金",
   UpdateCommissionValue: "更新佣金值",
@@ -700,9 +708,11 @@ window._language_zh_TW = {
   UpdateKenoBetSettingSuccessMsg: "The RNG Keno bet setting of {0} was updated successfully",
   UpdateNumberGameBetSettings: "您確定您要更新的所有百練賽投注設置嗎？",
   UpdateNumberGameBetSettingSuccessMsg: "{0}的百練賽投注設置已成功更新",
+  UpdateOddsGroup: "更新水位組別",
   UpdateRNGCasinoBetSettingFailMsg: "The RNG Casino bet setting of {0} updated is failed",
   UpdateRNGCasinoBetSettings: "Are you sure you want to update RNG Casino bet settings?",
   UpdateRNGCasinoBetSettingSuccessMsg: "The RNG Casino bet setting of {0} was updated successfully",
+  UpdateSpecialLevel: "更新特殊層級",
   UpdateSpecialLevelMsg: "無效的參數。無效的會員識別",
   UpdateSportsbookBetSettings: "您確定您要更新所有的體育博彩投注設置嗎？",
   UpdateSportsbookBetSettingSuccessMsg: "{0}的體育博彩投注設置已成功更新",

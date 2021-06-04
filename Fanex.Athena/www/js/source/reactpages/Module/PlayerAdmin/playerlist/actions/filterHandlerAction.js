@@ -32,7 +32,8 @@ export const searchPlayer = (param) => (dispatch) => {
             PageIndex: param.pageIndex,
             PageSize: param.pageSize,
             TotalItem: totalItem
-        }
+        };
+
         dispatch(setPagingOption(pagingOption));
 
         if (playerList.length === 1) {
@@ -43,7 +44,7 @@ export const searchPlayer = (param) => (dispatch) => {
         dispatch(toggleLoader(false));
     }).catch(() => {
         dispatch(toggleLoader(false));
-    })
+    });
 }
 
 export const getSinglePlayer = (param) => (dispatch) => {
@@ -68,32 +69,32 @@ export const getSinglePlayer = (param) => (dispatch) => {
         dispatch(toggleLoader(false));
     }).catch(() => {
         dispatch(toggleLoader(false));
-    })
-}
+    });
+};
 
 export const setParam = (data) => {
     return {
         type: SET_PARAM,
         data
-    }
-}
+    };
+};
 
 export const setAdvancedSearch = (data) => {
     return {
         type: SET_ADVANCED_SEARCH,
         data
-    }
-}
+    };
+};
 
 export const setCollapseFilter = (data) => {
     return {
         type: SET_COLLAPSE_FILTER,
         data
-    }
-}
+    };
+};
 
 export const getSuggestionList = (param) => () => {
     const suggestionService = new PlayerSuggestionService();
 
     return suggestionService.getSuggestionList(param);
-}
+};

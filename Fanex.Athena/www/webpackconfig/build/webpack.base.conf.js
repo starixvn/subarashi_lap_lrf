@@ -143,7 +143,13 @@ function generateConfig(environment) {
             [`${jsPath}/pages/playercommission/singleremovefromgroup`]: [pathConfig.scriptPaths.playercomissionsingleremovefromgroup],
             [`${jsPath}/pages/playercommission/singleupdategroup`]: [pathConfig.scriptPaths.playercomissionsingleupdategroup],
             [`${cssPath}/pages/customer/customer-class`]: pathConfig.cssPaths.customerClass,
-            [`${cssPath}/pages/components/fixedColumnsTable`]: pathConfig.cssPaths.fixedColumnsTable
+            [`${cssPath}/pages/components/fixedColumnsTable`]: pathConfig.cssPaths.fixedColumnsTable,
+
+            [`${cssPath}/pages/playerBatchUpdate/index`]: pathConfig.cssPaths.playerBatchUpdate,
+            [`${jsPath}/pages/playerBatchUpdate/accountStatus`]: [pathConfig.scriptPaths.playerBatchUpdateAccountStatus],
+            [`${jsPath}/pages/playerBatchUpdate/specialLevel`]: [pathConfig.scriptPaths.playerBatchUpdateSpecialLevel],
+            [`${jsPath}/pages/playerBatchUpdate/oddsGroup`]: [pathConfig.scriptPaths.playerBatchUpdateOddsGroup],
+            [`${jsPath}/pages/playerBatchUpdate/baStatus`]: [pathConfig.scriptPaths.playerBatchUpdateBAStatus]
         },
         output: {
             path: pathConfig.projectRoot,

@@ -1,0 +1,74 @@
+﻿@using Fanex.Athena.Module.PlayerAdmin.ViewModels.PlayerBatchUpdate;
+@model UpdateOddsGroupViewModel
+@{
+  ViewBag.Title = "LAP - " + ViewResources.UpdateOddsGroup;
+  Layout = "~/Views/Desktop/Shared/_Report.jqGridLayout.cshtml";
+}
+@section pagecss {
+  <link href="@Url.ContentLinkByEnv("/www/css/build/pages/playerBatchUpdate/index.css")" rel="stylesheet" />
+}
+@section pagejs {
+  <script src="@Url.ContentLinkByEnv("/www/js/build/pages/playerBatchUpdate/oddsGroup.chunk.js")"></script>
+}
+@section Filter
+{
+  <div class="row page-form">
+    <form class="player-odds-group-edit" id="player-odds-group-edit"
+          action""
+          method="post">
+      <div class="row">
+        <div class="input-field col l3 m6 s6">
+          <label>@ViewResources.SelectedCustomers</label>
+        </div>
+        <div class="input-field col l3 m5 s5">
+          <label>@ViewResources.OddsGroup</label>
+        </div>
+        <div class="input-field col l3 m1 s1 ">
+          <i class="icon-info right" title="@ViewResources.MessageUpdateOddsGroupForBAPlayers"></i>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col l3 m6 s6">
+          <div class="multiselect-container">
+            <select id="ddl-customers"></select>
+          </div>
+        </div>
+        <div class="input-field col l3 m6 s6">
+          <select id="ddl-odds-group" class="select">
+            <option value="-1" disabled="disabled" selected>@ViewResources.PleaseSelectOne</option>
+            @for (var i = 0; i < Model.OddsGroupList.Length; i++)
+            {
+              var o = Model.OddsGroupList[i];
+              <option value="@o" class="opt-odds-group opt-odds-group-@o">@o</option>
+            }
+          </select>
+        </div>
+      </div>
+      @Html.Hidden("CustNames", Model.CustNamesStr)
+      @Html.Hidden("CustIds", Model.CustIdsStr)
+    </form>
+  </div>
+}
+@section Content
+{ <div class="div-content">
+    <div class="row msg-confirm hide">
+      <div class="input-field col l6 m12 s12">
+        @ViewResources.ConfirmBatchUpdateOddsGroup
+      </div>
+    </div>
+    <div class="row">
+      <div class="col l6 m12 s12">
+        <div id="div-result" class="div-result hide">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col l6 m12 s12">
+        <div class="btn-group">
+          <button type="button" disabled="disabled" class="btn btn-submit">@ViewResources.Save</button>
+          <button type="button" class="btn btn-cancel">@ViewResources.Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+}

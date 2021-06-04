@@ -16,6 +16,7 @@
     <Setting Key="Lrf_LicenseeUserFunctionsDel" SpName="Lrf_LicenseeUserFunctionsDel" DbName="DBCUST.bodb_Licensee.bodbLicenseeNet" />
     <Setting Key="Lrf_LicenseeUserFunctionsIns" SpName="Lrf_LicenseeUserFunctionsIns" DbName="DBCUST.bodb_Licensee.bodbLicenseeNet" />
     <Setting Key="Lrf_CheckBelonging_GetAgentInfo" SpName="Lrf_CheckBelonging_GetAgentInfo" DbName="DBEXT.bodb02.bodbLicenseeNet" />
+    <Setting Key="Lrf_CheckBelongingMultiple_GetAgentInfo" SpName="Lrf_CheckBelongingMultiple_GetAgentInfo" DbName="DBEXT.bodb02.bodbLicenseeNet" />
     <Setting Key="Lrf_LicenseeProductSel" SpName="Lrf_LicenseeProductSel" DbName="DBLIC.bodb_Licensee.bodbLicenseeNet" />
     <Setting Key="Lrf_LicenseeSelBySiteName" SpName="Lrf_LicenseeSelBySiteName" DbName="DBLIC.bodb_Licensee.bodbLicenseeNet">
       <Mapping DataField="LicenseeID" ObjectProperty="Id" />
@@ -223,6 +224,11 @@
   </Function>
   <Function Name="Player Admin - Detail Transaction">
     <Setting Key="LAP_Rpt_DetailTransaction_Mem" SpName="LAP_Rpt_DetailTransaction_Mem" DbName="DBBAH.bodb02.bodbLicenseeNet" />
+  </Function>
+  <Function Name="Player Admin - Batch Update">
+    <Setting Key="Lrf_CustomerSpecialLevelSel" SpName="Lrf_CustomerSpecialLevelSel" DbName="DBCUST.CustDB.bodbLicenseeNet" />
+    <Setting Key="Lrf_CustomerUgroupSel" SpName="Lrf_CustomerUgroupSel" DbName="DBCUST.CustDB.bodbLicenseeNet" />
+    <Setting Key="Lrf_CustomerBAStatusSel" SpName="Lrf_CustomerBAStatusSel" DbName="DBCUST.CustDB.bodbLicenseeNet" />
   </Function>
   <Function Name="Customer Class">
     <Setting Key="Lrf_CustomerClassSel" SpName="Lrf_CustomerClassSel" DbName="DBCUST.CustDB.bodbLicenseeNet" />

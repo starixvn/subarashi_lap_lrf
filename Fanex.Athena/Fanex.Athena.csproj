@@ -951,6 +951,8 @@
     <Content Include="www\css\build\dev\pages\customer\customer-class.css" />
     <Content Include="www\css\build\dev\pages\components\fixedColumnsTable.chunk.js" />
     <Content Include="www\css\build\dev\pages\components\fixedColumnsTable.css" />
+    <Content Include="www\css\build\dev\pages\playerBatchUpdate\index.chunk.js" />
+    <Content Include="www\css\build\dev\pages\playerBatchUpdate\index.css" />
     <Content Include="www\css\build\dev\pages\playercommission\index.chunk.js" />
     <Content Include="www\css\build\dev\pages\playercommission\index.css" />
     <Content Include="www\css\build\dev\pages\reports\godoffortunewinLoss.chunk.js" />
@@ -1018,6 +1020,8 @@
     <Content Include="www\css\build\pro\pages\components\fixedColumnsTable.chunk.js" />
     <Content Include="www\css\build\pro\pages\components\fixedColumnsTable.css" />
     <Content Include="www\css\build\pro\pages\customer\customerlist.chunk.js" />
+    <Content Include="www\css\build\pro\pages\playerBatchUpdate\index.chunk.js" />
+    <Content Include="www\css\build\pro\pages\playerBatchUpdate\index.css" />
     <Content Include="www\css\build\pro\pages\playercommission\index.chunk.js" />
     <Content Include="www\css\build\pro\pages\playercommission\index.css" />
     <Content Include="www\css\build\pro\pages\reports\godoffortunewinLoss.css" />
@@ -1081,6 +1085,12 @@
     <Content Include="www\css\build\dev\reactpages\playeradmin\running-betlist.chunk.js.map" />
     <Content Include="www\css\build\dev\reactpages\playeradmin\running-betlist.css.map" />
     <Content Include="www\css\source\pages\betlist\SexyGaming.css" />
+    <Content Include="www\css\source\pages\playerBatchUpdate\index.css">
+      <DependentUpon>index.scss</DependentUpon>
+    </Content>
+    <Content Include="www\css\source\pages\playerBatchUpdate\index.min.css">
+      <DependentUpon>index.scss</DependentUpon>
+    </Content>
     <Content Include="www\css\source\reactpages\components\alert\index.scss" />
     <Content Include="www\css\source\reactpages\components\alert\icons.scss" />
     <Content Include="Views\Desktop\Module\PlayerAdmin\PlayerBetLimit\Index.cshtml" />
@@ -1155,6 +1165,7 @@
     <Content Include="Views\Desktop\Customer\CustomerClass\SettingPolicyTab.cshtml" />
     <Content Include="Views\Desktop\Customer\CustomerClass\SpreadSettingPolicyTab.cshtml" />
     <Content Include="Views\Desktop\Report\GodOfFortuneWinLoss\Content.cshtml" />
+    <Content Include="Views\Desktop\Module\PlayerAdmin\PlayerBatchUpdate\UpdateAccountStatus.cshtml" />
     <Content Include="Views\Desktop\Report\GodOfFortuneWinLoss\Filter.cshtml" />
     <Content Include="Views\Desktop\Report\GodOfFortuneWinLoss\Main.cshtml" />
     <Content Include="www\css\source\pages\report\godoffortunewinLoss.scss" />
@@ -1166,6 +1177,13 @@
     <Content Include="Views\Desktop\BetList\Habanero\Main.cshtml" />
     <Content Include="Views\Desktop\BetList\VGamingJackpotWonDetail\Main.cshtml" />
     <Content Include="Views\Desktop\BetList\RNGDetail\Main.cshtml" />
+    <Content Include="Views\Desktop\Module\PlayerAdmin\PlayerBatchUpdate\UpdateBAStatus.cshtml" />
+    <Content Include="Views\Desktop\Module\PlayerAdmin\PlayerBatchUpdate\UpdateBetLimit.cshtml" />
+    <Content Include="Views\Desktop\Module\PlayerAdmin\PlayerBatchUpdate\UpdateOddsGroup.cshtml" />
+    <Content Include="Views\Desktop\Module\PlayerAdmin\PlayerBatchUpdate\UpdateSpecialLevel.cshtml" />
+    <Content Include="www\css\source\pages\playerBatchUpdate\index.scss" />
+    <Content Include="www\css\build\dev\pages\playerBatchUpdate\index.chunk.js.map" />
+    <Content Include="www\css\build\dev\pages\playerBatchUpdate\index.css.map" />
     <None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
     <None Include="www\css\source\pages\betlist\result\result.happy5.scss" />
     <None Include="www\css\source\reactpages\components\alert\icons\error.scss" />
@@ -1183,6 +1201,10 @@
     <Content Include="www\js\build\dev\pages\customer\exchangebetsetting.chunk.js" />
     <Content Include="www\js\build\dev\pages\lib\common.chunk.js" />
     <Content Include="www\js\build\dev\pages\lib\jqgrid.chunk.js" />
+    <Content Include="www\js\build\dev\pages\playerBatchUpdate\accountStatus.chunk.js" />
+    <Content Include="www\js\build\dev\pages\playerBatchUpdate\baStatus.chunk.js" />
+    <Content Include="www\js\build\dev\pages\playerBatchUpdate\oddsGroup.chunk.js" />
+    <Content Include="www\js\build\dev\pages\playerBatchUpdate\specialLevel.chunk.js" />
     <Content Include="www\js\build\dev\pages\playercommission\multiplemovegroup.chunk.js" />
     <Content Include="www\js\build\dev\pages\playercommission\multipleremovefromgroup.chunk.js" />
     <Content Include="www\js\build\dev\pages\playercommission\multipleupdategroup.chunk.js" />
@@ -1231,6 +1253,10 @@
     <Content Include="www\js\build\pro\pages\customer\exchangebetsetting.chunk.js" />
     <Content Include="www\js\build\pro\pages\lib\common.chunk.js" />
     <Content Include="www\js\build\pro\pages\lib\jqgrid.chunk.js" />
+    <Content Include="www\js\build\pro\pages\playerBatchUpdate\accountStatus.chunk.js" />
+    <Content Include="www\js\build\pro\pages\playerBatchUpdate\baStatus.chunk.js" />
+    <Content Include="www\js\build\pro\pages\playerBatchUpdate\oddsGroup.chunk.js" />
+    <Content Include="www\js\build\pro\pages\playerBatchUpdate\specialLevel.chunk.js" />
     <Content Include="www\js\build\pro\pages\playercommission\multiplemovegroup.chunk.js" />
     <Content Include="www\js\build\pro\pages\playercommission\multipleremovefromgroup.chunk.js" />
     <Content Include="www\js\build\pro\pages\playercommission\multipleupdategroup.chunk.js" />
@@ -1285,6 +1311,11 @@
     <Content Include="www\js\source\lib\bootstrap-table\virtual-scroll\index.js" />
     <Content Include="www\js\source\pages\customer\customerlist\customerlist.gridoption.dormant.js" />
     <Content Include="www\js\source\pages\customer\customerlist\customerlist.service.dormant.js" />
+    <Content Include="www\js\source\pages\playerBatchUpdate\account-status.js" />
+    <Content Include="www\js\source\pages\playerBatchUpdate\ba-status.js" />
+    <Content Include="www\js\source\pages\playerBatchUpdate\batch-update-common.js" />
+    <Content Include="www\js\source\pages\playerBatchUpdate\odds-group.js" />
+    <Content Include="www\js\source\pages\playerBatchUpdate\special-level.js" />
     <Content Include="www\js\source\pages\playercommission\playercommissioncommon.js" />
     <Content Include="www\js\source\pages\playercommission\singleupdategroup.js" />
     <Content Include="www\js\source\pages\playercommission\singleremovefromgroup.js" />
@@ -1554,13 +1585,13 @@
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\actions\__tests__\filterHandlerAction.test.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\actions\__tests__\playerDetailHandlerAction.test.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\AppContainer.jsx" />
-    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\content-header\BatchUpdateButton.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\content-header\GridCaption.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\Content.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\DataGrid.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\filter\AdvancedSearch.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\filter\AthenaSearch.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\filter\SearchOption.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\filter\UserNameInput.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\FormFilter.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\grid\ContextMenu.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\grid\OddsGroupCell.jsx" />
@@ -1575,7 +1606,6 @@
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\index.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\PlayerDetail.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\__tests__\AppContainer.test.js" />
-    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\__tests__\content-header\BatchUpdateButton.test.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\__tests__\content-header\GridCaption.test.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\__tests__\Content.test.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\__tests__\DataGrid.test.js" />
@@ -1585,6 +1615,7 @@
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\__tests__\grid\ContextMenu.test.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\__tests__\PlayerDetail.test.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\lib\constants.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\lib\default-value.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\lib\helpers\contextMenuHelper.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\lib\helpers\gridColumnBuilder.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\lib\helpers\gridHelper.js" />
@@ -3353,6 +3384,10 @@
     <Content Include="www\js\build\dev\pages\playercommission\singleupdategroup.chunk.js.map" />
     <Content Include="www\js\build\dev\pages\reports\sabavirtualsportswinloss.chunk.js.map" />
     <Content Include="www\js\build\dev\pages\reports\godoffortunewinLoss.chunk.js.map" />
+    <Content Include="www\js\build\dev\pages\playerBatchUpdate\accountStatus.chunk.js.map" />
+    <Content Include="www\js\build\dev\pages\playerBatchUpdate\baStatus.chunk.js.map" />
+    <Content Include="www\js\build\dev\pages\playerBatchUpdate\oddsGroup.chunk.js.map" />
+    <Content Include="www\js\build\dev\pages\playerBatchUpdate\specialLevel.chunk.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SiteConfig\WebConfigTransforms\SIT.config">

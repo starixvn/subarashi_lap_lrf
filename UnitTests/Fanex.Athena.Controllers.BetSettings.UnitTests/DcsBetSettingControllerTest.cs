@@ -5,10 +5,10 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Model.Core.DataDomain;
     using Model.BetSettings.DTO;
     using Model.BetSettings.MetaModel;
     using Model.BetSettings.ViewModel;
+    using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using NSubstitute;
     using NUnit.Framework;
@@ -73,14 +73,14 @@
                 if (hasStatus)
                 {
                     expectedStatus = true;
-                    _betSettingService.GetStatusAsync( metaModel.CustId, metaModel.ProductId)
+                    _betSettingService.GetStatusAsync(metaModel.CustId, metaModel.ProductId)
                         .Returns(Task.FromResult(expectedStatus));
                 }
 
                 if (hasBetLimit)
                 {
                     expectedNumberOfMainData = 1;
-                    _betSettingService.GetBetSettingsAsync( metaModel.CustId, metaModel.ProductId)
+                    _betSettingService.GetBetSettingsAsync(metaModel.CustId, metaModel.ProductId)
                         .Returns(Task.FromResult<IList<BetSetting>>(new List<BetSetting> { new BetSetting() }));
                 }
 
@@ -114,9 +114,14 @@
                 // Arrange
                 ProductService.GetProductAccess(DefaultLicenseeSession.LicenseeId, DefaultUserSession.Language)
                     .Returns(new ProductAccess(new List<Product>()));
+                var metaModel = new UpdateStatusMetaModel
+                {
+                    ProductId = productId,
+                    Nickname = string.Empty
+                };
 
                 // Action
-                var result = await controller.UpdateStatus(0, string.Empty, 0, productId) as JsonResult;
+                var result = await controller.UpdateStatus(metaModel);
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -146,15 +151,16 @@
 
                 CoreBetSettingService.IsBetSettingEditable(DefaultUserSession).Returns(true);
 
-                _betSettingService.UpdateStatusAsync(
-                   DefaultUserSession.UserId,
-                   Arg.Any<int>(),
-                   Arg.Any<string>(),
-                   Arg.Any<bool>(),
-                   productId).Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 0 }));
+                _betSettingService.UpdateStatusAsync(DefaultUserSession.UserId, string.Empty, Arg.Is<UpdateStatusMetaModel>(p => p.ProductId == productId))
+                   .Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 0 }));
+                var metaModel = new UpdateStatusMetaModel
+                {
+                    Nickname = string.Empty,
+                    ProductId = productId
+                };
 
                 // Action
-                var result = await controller.UpdateStatus(0, string.Empty, 0, productId) as JsonResult;
+                var result = await controller.UpdateStatus(metaModel);
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -183,16 +189,20 @@
                     .Returns(new ProductAccess(new List<Product> { new Product { ProductID = productId } }));
 
                 CoreBetSettingService.IsBetSettingEditable(DefaultUserSession).Returns(true);
+                var metaModel = new UpdateStatusMetaModel
+                {
+                    ProductId = productId,
+                    Nickname = string.Empty
+                };
 
                 _betSettingService.UpdateStatusAsync(
-                   DefaultUserSession.UserId,
-                   Arg.Any<int>(),
-                   Arg.Any<string>(),
-                   Arg.Any<bool>(),
-                   productId).Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 1, Message = "Error" }));
+                    DefaultUserSession.UserId,
+                    Arg.Any<string>(),
+                    Arg.Is<UpdateStatusMetaModel>(p => productId == p.ProductId))
+                    .Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 1, Message = "Error" }));
 
                 // Action
-                var result = await controller.UpdateStatus(0, string.Empty, 0, productId) as JsonResult;
+                var result = await controller.UpdateStatus(metaModel);
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -217,7 +227,7 @@
                     .Returns(new ProductAccess(new List<Product>()));
 
                 // Action
-                var result = await controller.UpdateBetSetting(productId, string.Empty) as JsonResult;
+                var result = await controller.UpdateBetSetting(productId, string.Empty);
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -243,11 +253,8 @@
                 CoreBetSettingService.IsBetSettingEditable(DefaultUserSession).Returns(true);
 
                 IEnumerable<DcsBetSetting> param = null;
-                _betSettingService.UpdateBetSettingAsync(
-                   Arg.Any<int>(),
-                   Arg.Any<int>(),
-                   Arg.Any<string>(),
-                   Arg.Do<IEnumerable<DcsBetSetting>>(x => param = x)).Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 0 }));
+                _betSettingService.UpdateBetSettingAsync(Arg.Any<CommonBetSetting>(), Arg.Do<IEnumerable<DcsBetSetting>>(x => param = x))
+                    .Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 0 }));
 
                 controller.HttpContext.Request[Arg.Any<string>()].Returns("1");
 
@@ -274,7 +281,7 @@
                 CoreBetSettingService.IsBetSettingEditable(DefaultUserSession).Returns(true);
 
                 // Action
-                var result = await controller.UpdateBetSetting(productId, string.Empty) as JsonResult;
+                var result = await controller.UpdateBetSetting(productId, string.Empty);
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -300,7 +307,7 @@
                 controller.HttpContext.Request[Arg.Any<string>()].Returns("0");
 
                 // Action
-                var result = await controller.UpdateBetSetting(ProductTypes.VirtualSports, string.Empty) as JsonResult;
+                var result = await controller.UpdateBetSetting(ProductTypes.VirtualSports, string.Empty);
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -325,14 +332,11 @@
 
                 controller.HttpContext.Request[Arg.Any<string>()].Returns("1");
 
-                _betSettingService.UpdateBetSettingAsync(
-                   Arg.Any<int>(),
-                   Arg.Any<int>(),
-                   Arg.Any<string>(),
-                   Arg.Any<IEnumerable<DcsBetSetting>>()).Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 0 }));
+                _betSettingService.UpdateBetSettingAsync(Arg.Any<CommonBetSetting>(), Arg.Any<IEnumerable<DcsBetSetting>>())
+                   .Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 0 }));
 
                 // Action
-                var result = await controller.UpdateBetSetting(ProductTypes.Lottery, string.Empty) as JsonResult;
+                var result = await controller.UpdateBetSetting(ProductTypes.Lottery, string.Empty);
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -357,14 +361,11 @@
 
                 controller.HttpContext.Request[Arg.Any<string>()].Returns("1");
 
-                _betSettingService.UpdateBetSettingAsync(
-                   Arg.Any<int>(),
-                   Arg.Any<int>(),
-                   Arg.Any<string>(),
-                   Arg.Any<IEnumerable<DcsBetSetting>>()).Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 1, Message = "Error" }));
+                _betSettingService.UpdateBetSettingAsync(Arg.Any<CommonBetSetting>(), Arg.Any<IEnumerable<DcsBetSetting>>())
+                    .Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 1, Message = "Error" }));
 
                 // Action
-                var result = await controller.UpdateBetSetting(ProductTypes.Lottery, string.Empty) as JsonResult;
+                var result = await controller.UpdateBetSetting(ProductTypes.Lottery, string.Empty);
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
