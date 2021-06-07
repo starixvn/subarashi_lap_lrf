@@ -20,8 +20,6 @@ namespace Fanex.Athena.Model.Report.DTO
 
         public int MatchId { get; set; }
 
-        public string ShowTime { get; set; }
-
         public string MatchName { get; set; }
 
         public string MatchCode { get; set; }
@@ -31,8 +29,6 @@ namespace Fanex.Athena.Model.Report.DTO
         public string AwayName { get; set; }
 
         public string ProductName { get; set; }
-
-        public string RaceNo { get; set; }
 
         public bool IsLive { get; set; }
 

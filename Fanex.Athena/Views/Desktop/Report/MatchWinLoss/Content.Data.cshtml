@@ -78,9 +78,8 @@
         var drilldownParams = new
         {
             LeagueId = matchWinLoss.LeagueId,
-            MatchId = matchWinLoss.MatchId == 0 ? Converter.ToInt(matchWinLoss.RaceNo) : matchWinLoss.MatchId,
+            MatchId = matchWinLoss.MatchId,
             ProductCode = productName,
-            RaceNo = matchWinLoss.RaceNo,
             HomeId = matchWinLoss.HomeId,
             AwayId = matchWinLoss.AwayId
         };

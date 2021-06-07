@@ -29,6 +29,10 @@ namespace Fanex.Athena.DataAccess.Report
 
         private readonly ICacheRefAdapter _cacheRefAdapter;
 
+        private const string STR_SHOWBA = "ShowBA";
+
+        private const string STR_PRODUCTLIST = "ProductList";
+
         public MatchWinLossDataAccess(
             IBalanceUpDataAccess balanceUpDataAccess,
             ICacheRefAdapter cacheRefAdapter)
@@ -44,11 +48,14 @@ namespace Fanex.Athena.DataAccess.Report
             using (var db = this.GetObjectDb(UspName))
             {
                 SetCommonParam(db, metaModel);
+                db.SetParameterValue("BalanceUpDay", _balanceUpDataAccess.GetBalanceUp().BalanceUpDay);
                 db.SetParameterValue("Date", metaModel.Date);
-                foreach (var item in metaModel.ProductOptions)
+                var productBA = metaModel.ProductOptions.FirstOrDefault(_ => _.Code == "BA");
+                if (productBA != null)
                 {
-                    db.SetParameterValue("show" + item.Code, item.Status);
+                    db.SetParameterValue(STR_SHOWBA, productBA.Status);
                 }
+                db.SetParameterValue(STR_PRODUCTLIST, string.Join(",", metaModel.ProductOptions.Where(_ => _.Status && _.Code != "BA").Select(_ => _.Code)));
 
                 using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
                 {
@@ -64,14 +71,15 @@ namespace Fanex.Athena.DataAccess.Report
             using (var db = this.GetObjectDb(UspName))
             {
                 SetCommonParam(db, metaModel);
-                db.SetParameterValue("FromDate", metaModel.Date);
-                db.SetParameterValue("ToDate", metaModel.Date);
+                db.SetParameterValue("BalanceUpDay", _balanceUpDataAccess.GetBalanceUp().BalanceUpDay);
+                db.SetParameterValue("Date", metaModel.Date);
                 db.SetParameterValue("PageSize", metaModel.PageSize);
-
-                foreach (var item in metaModel.ProductOptions)
+                var productBA = metaModel.ProductOptions.FirstOrDefault(_ => _.Code == "BA");
+                if (productBA != null)
                 {
-                    db.SetParameterValue("show" + item.Code, item.Status);
+                    db.SetParameterValue(STR_SHOWBA, productBA.Status);
                 }
+                db.SetParameterValue(STR_PRODUCTLIST, string.Join(",", metaModel.ProductOptions.Where(_ => _.Status && _.Code != "BA").Select(_ => _.Code)));
 
                 return await db.ExecuteDataSetAsync().ConfigureAwait(false);
             }
@@ -84,14 +92,18 @@ namespace Fanex.Athena.DataAccess.Report
             using (var db = this.GetObjectDb(UspName))
             {
                 SetCommonParam(db, metaModel);
+                db.SetParameterValue("BalanceUpDay", _balanceUpDataAccess.GetBalanceUp().BalanceUpDay);
                 db.SetParameterValue("MatchId", metaModel.MatchId);
                 db.SetParameterValue("Date", metaModel.Date);
-                db.SetParameterValue("LeagueId", metaModel.LeagueId);
 
-                foreach (var item in metaModel.ProductCodeList.Split(','))
+                var productList = metaModel.ProductCodeList.Split(',').ToList();
+                int indexBA = productList.IndexOf("BA");
+                if (indexBA > -1)
                 {
-                    db.SetParameterValue("show" + item, true);
+                    db.SetParameterValue("ShowBA", true);
+                    productList.RemoveAt(indexBA);
                 }
+                db.SetParameterValue(STR_PRODUCTLIST, string.Join(",", productList));
 
                 using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
                 {
@@ -106,35 +118,50 @@ namespace Fanex.Athena.DataAccess.Report
 
             using (var db = this.GetObjectDb(UspName))
             {
-                var showSb = metaModel.ProductOptions.Any(i => i.Status && i.Code == Product.SB);
-                var showBa = metaModel.ProductOptions.Any(i => i.Status && i.Code == Product.BA);
-                var showVS2 = metaModel.ProductOptions.Any(i => i.Status && i.Code == Product.VS2);
-                var showNG = metaModel.ProductOptions.Any(i => i.Status && i.Code == Product.NG);
-
                 SetCommonParam(db, metaModel);
                 db.SetParameterValue("Date", metaModel.Date);
-                db.SetParameterValue("showsb", showSb);
-                db.SetParameterValue("showba", showBa);
-                db.SetParameterValue("showVS2", showVS2);
-                db.SetParameterValue("showNG", showNG);
+                var productBA = metaModel.ProductOptions.FirstOrDefault(_ => _.Code == "BA");
+                if (productBA != null)
+                {
+                    db.SetParameterValue(STR_SHOWBA, productBA.Status);
+                }
+                db.SetParameterValue(STR_PRODUCTLIST, string.Join(",", metaModel.ProductOptions.Where(_ => _.Status && _.Code !="BA").Select(_ => _.Code)));
 
                 using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
                 {
-                    return SetToList(reader);
+                    return SetToListOutrightParlay(reader);
                 }
             }
         }
 
+        private IList<MatchWinLoss> SetToListOutrightParlay(IDataReader reader)
+        {
+            var dataList = new List<MatchWinLoss>();
+            while (reader.Read())
+            {
+                dataList.Add(new MatchWinLoss
+                {
+                    BetType = reader.ToInt("bettype"),
+                    Turnover = reader.ToDecimal("Turnover"),
+                    TotalTransaction = reader.ToInt("betcount"),
+                    CustomerWL = reader.ToDecimal("WinLost"),
+                    CustomerComm = reader.ToDecimal("PlayerComm"),
+                    LicenseeWL = reader.ToDecimal("LicenseeWL"),
+                    BACommission = reader.ToDecimal("CommBA"),
+                    AmtDueToBA = reader.ToDecimal("AmtDueToBA")
+                });
+            }
+
+            return dataList;
+        }
+
         private IList<MatchWinLoss> SetToList(IDataReader reader)
         {
-            var hasCustComm = reader.HasColumn("PlayerComm");
             var hasBetType = reader.HasColumn("bettype");
             var hasProductName = reader.HasColumn("productname");
             var hasLiveIndicator = reader.HasColumn("liveindicator");
             var hasIsNeutral = reader.HasColumn("isneutral");
             var hasKickOffTime = reader.HasColumn("KickoffTime");
-            var hasShowTime = reader.HasColumn("showtime");
-            var hasSportType = reader.HasColumn("sporttype");
             var dataList = new List<MatchWinLoss>();
             while (reader.Read())
             {
@@ -149,19 +176,17 @@ namespace Fanex.Athena.DataAccess.Report
                     AwayId = reader.ToInt("awayid"),
                     Turnover = reader.ToDecimal("Turnover"),
                     TotalTransaction = reader.ToInt("betcount"),
-                    CustomerWL = reader.ToDecimal("MemberWinLost"),
-                    CustomerComm = hasCustComm ? reader.ToDecimal("PlayerComm") : 0,
+                    CustomerWL = reader.ToDecimal("WinLost"),
+                    CustomerComm = reader.ToDecimal("PlayerComm"),
                     LicenseeWL = reader.ToDecimal("LicenseeWL"),
                     BACommission = reader.ToDecimal("CommBA"),
                     AmtDueToBA = reader.ToDecimal("AmtDueToBA"),
-                    RaceNo = reader.ToString("race"),
                     BetType = betType,
                     BettypeName = _cacheRefAdapter.GetBettype(betType, isLive),
                     ProductName = hasProductName ? reader.ToString("productname") : string.Empty,
                     IsLive = isLive,
                     IsNeutral = hasIsNeutral && Converter.ToBool(reader["isNeutral"]),
-                    ShowTime = hasShowTime ? reader.ToString("showtime") : string.Empty,
-                    SportType = hasSportType ? reader.ToShort("sporttype") : (short)0,
+                    SportType = reader.ToShort("sporttype"),
                     KickOffTime = hasKickOffTime ? reader.ToDateTime("KickoffTime") : DateTime.MinValue
                 });
             }

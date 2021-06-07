@@ -50,7 +50,7 @@ namespace Fanex.Athena.Excel.Report.UnitTests
             _contentData.Columns.Add("liveindicator", typeof(int));
             _contentData.Columns.Add("turnover", typeof(decimal));
             _contentData.Columns.Add("betcount", typeof(int));
-            _contentData.Columns.Add("memberwinlost", typeof(decimal));
+            _contentData.Columns.Add("winlost", typeof(decimal));
             _contentData.Columns.Add("licenseewl", typeof(decimal));
             _contentData.Columns.Add("commba", typeof(decimal));
             _contentData.Columns.Add("amtduetoba", typeof(decimal));
@@ -61,7 +61,7 @@ namespace Fanex.Athena.Excel.Report.UnitTests
 
             _totalData.Columns.Add("sumturnover", typeof(decimal));
             _totalData.Columns.Add("sumbetcount", typeof(int));
-            _totalData.Columns.Add("summemberwinlost", typeof(decimal));
+            _totalData.Columns.Add("sumwinlost", typeof(decimal));
             _totalData.Columns.Add("sumlicenseewl", typeof(decimal));
             _totalData.Columns.Add("sumcommba", typeof(decimal));
             _totalData.Columns.Add("sumamtduetoba", typeof(decimal));
@@ -186,7 +186,7 @@ namespace Fanex.Athena.Excel.Report.UnitTests
             var excel = CreateExcel();
             var columns = new[]
             {
-               "sumturnover", "sumbetcount", "summemberwinlost", "sumplayercomm", "sumtotalwl", "sumlicenseewl",
+               "sumturnover", "sumbetcount", "sumwinlost", "sumplayercomm", "sumtotalwl", "sumlicenseewl",
                "sumcommba", "sumamtduetoba"
             };
             var cellIndex = 2;

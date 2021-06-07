@@ -38,7 +38,8 @@
             ProductOptions = new List<ProductOption>
                 {
                     new ProductOption { Code = "SB", Status = true },
-                    new ProductOption { Code = "NG", Status = false }
+                    new ProductOption { Code = "NG", Status = false },
+                    new ProductOption { Code = "BA", Status = true },
                 },
             AgentListXml = "<xml>",
             Date = new DateTime(2017, 1, 1),
@@ -71,8 +72,7 @@
                 ObjectDb.Received(1).SetParameterValue("AgentList", _metaModel.AgentListXml);
                 ObjectDb.Received(1).SetParameterValue("Date", _metaModel.Date);
                 ObjectDb.Received(1).SetParameterValue("MoveBetsDay", _balance.MoveBetsDay);
-                ObjectDb.Received(1).SetParameterValue("showSB", true);
-                ObjectDb.Received(1).SetParameterValue("showNG", false);
+                ObjectDb.Received(1).SetParameterValue("ProductList", "SB");
                 ObjectDb.Received(1).SetParameterValue("BaseCurrency", _metaModel.BaseCurrency);
             });
         }
@@ -90,7 +90,7 @@
                 leagueid = 1,
                 matchid = 2,
                 Turnover = 100,
-                MemberWinLost = 200
+                WinLost = 200
             };
 
             MapReaderData(expected);
@@ -105,7 +105,7 @@
                 Assert.That(result[0].LeagueId, Is.EqualTo(expected.leagueid));
                 Assert.That(result[0].MatchId, Is.EqualTo(expected.matchid));
                 Assert.That(result[0].Turnover, Is.EqualTo(expected.Turnover));
-                Assert.That(result[0].CustomerWL, Is.EqualTo(expected.MemberWinLost));
+                Assert.That(result[0].CustomerWL, Is.EqualTo(expected.WinLost));
             });
         }
 
@@ -202,29 +202,6 @@
         }
 
         [Test]
-        public async Task SetToList_HasShowTimeColumn_ReturnCorrectData()
-        {
-            // Arrange
-            DataAccess.GetObjectDb(Arg.Is(GetDataListSp)).Returns(ObjectDb);
-
-            Reader.Read().Returns(true, false);
-            Reader.FieldCount.Returns(1);
-            Reader.GetName(0).Returns("showtime");
-
-            var expected = new
-            {
-                showtime = "20170101"
-            };
-            MapReaderData(expected);
-
-            // Action
-            var result = await DataAccess.GetDataList(_metaModel);
-
-            // Assert
-            Assert.That(result[0].ShowTime, Is.EqualTo(expected.showtime));
-        }
-
-        [Test]
         public async Task SetToList_HasSportTypeColumn_ReturnCorrectData()
         {
             // Arrange
@@ -283,11 +260,10 @@
             Assert.Multiple(() =>
             {
                 ObjectDb.Received(1).SetParameterValue("AgentList", _metaModel.AgentListXml);
-                ObjectDb.Received(1).SetParameterValue("FromDate", _metaModel.Date);
+                ObjectDb.Received(1).SetParameterValue("Date", _metaModel.Date);
                 ObjectDb.Received(1).SetParameterValue("MoveBetsDay", _balance.MoveBetsDay);
                 ObjectDb.Received(1).SetParameterValue("PageSize", _metaModel.PageSize);
-                ObjectDb.Received(1).SetParameterValue("showSB", true);
-                ObjectDb.Received(1).SetParameterValue("showNG", false);
+                ObjectDb.Received(1).SetParameterValue("ProductList", "SB");
                 ObjectDb.Received(1).SetParameterValue("BaseCurrency", _metaModel.BaseCurrency);
             });
         }
@@ -308,8 +284,8 @@
                 ObjectDb.Received(1).SetParameterValue("MatchId", _metaModel.MatchId);
                 ObjectDb.Received(1).SetParameterValue("Date", _metaModel.Date);
                 ObjectDb.Received(1).SetParameterValue("MoveBetsDay", _balance.MoveBetsDay);
-                ObjectDb.Received(1).SetParameterValue("LeagueId", _metaModel.LeagueId);
-                ObjectDb.Received(1).SetParameterValue("showSB", true);
+                ObjectDb.Received(1).SetParameterValue("BalanceUpDay", _balance.BalanceUpDay);
+                ObjectDb.Received(1).SetParameterValue("ProductList", "SB");
                 ObjectDb.Received(1).SetParameterValue("BaseCurrency", _metaModel.BaseCurrency);
             });
         }
@@ -329,8 +305,8 @@
                 ObjectDb.Received(1).SetParameterValue("AgentList", _metaModel.AgentListXml);
                 ObjectDb.Received(1).SetParameterValue("Date", _metaModel.Date);
                 ObjectDb.Received(1).SetParameterValue("MoveBetsDay", _balance.MoveBetsDay);
-                ObjectDb.Received(1).SetParameterValue("showsb", true);
-                ObjectDb.Received(1).SetParameterValue("showba", false);
+                ObjectDb.Received(1).SetParameterValue("ShowBA", true);
+                ObjectDb.Received(1).SetParameterValue("ProductList", "SB");
                 ObjectDb.Received(1).SetParameterValue("BaseCurrency", _metaModel.BaseCurrency);
             });
         }

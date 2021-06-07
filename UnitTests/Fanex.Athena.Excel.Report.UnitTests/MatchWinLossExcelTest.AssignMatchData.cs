@@ -65,7 +65,7 @@ namespace Fanex.Athena.Excel.Report.UnitTests
             var currentRow = 20;
             var columns = new[]
             {
-                "turnover", "betcount", "memberwinlost", "playercomm", "totalwl", "licenseewl",
+                "turnover", "betcount", "winlost", "playercomm", "totalwl", "licenseewl",
                 "commba", "amtduetoba"
             };
             var row = ExcelTestHelper.MockGetRow(FakeSheet, ColumnTemplateCount, currentRow);
@@ -99,7 +99,7 @@ namespace Fanex.Athena.Excel.Report.UnitTests
             var currentRow = 20;
             var columns = new[]
             {
-                "turnover", "betcount", "memberwinlost", "playercomm", "totalwl", "licenseewl",
+                "turnover", "betcount", "winlost", "playercomm", "totalwl", "licenseewl",
                 "commba", "amtduetoba"
             };
             ExcelTestHelper.MockGetRow(FakeSheet, ColumnTemplateCount, currentRow);
