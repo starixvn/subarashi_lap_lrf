@@ -89,7 +89,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers
         {
             // Arrange
             PlayerBtcSingleCustomerMetaModel passedMetaModel = null;
-            const byte AllPlatform = 0;
+            const string AllPlatform = "All";
             var statusList = new[]
             {
                 StatusTypes.Won, StatusTypes.Lose, StatusTypes.Draw, StatusTypes.Void,
