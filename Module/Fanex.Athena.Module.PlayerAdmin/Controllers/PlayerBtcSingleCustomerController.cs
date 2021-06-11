@@ -26,7 +26,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
         private static readonly int[] _statusList = new[]
         {
             StatusTypes.Won, StatusTypes.Lose, StatusTypes.Draw, StatusTypes.Void,
-            StatusTypes.AbnormalBet, StatusTypes.Reject, StatusTypes.Refund
+            StatusTypes.AbnormalBet, StatusTypes.Reject, StatusTypes.Refund, StatusTypes.DelayedPayout
         };
 
         private static readonly int[] _liveStatusList = new[] { LiveStatusTypes.NonLive, LiveStatusTypes.Live, LiveStatusTypes.Mix };
