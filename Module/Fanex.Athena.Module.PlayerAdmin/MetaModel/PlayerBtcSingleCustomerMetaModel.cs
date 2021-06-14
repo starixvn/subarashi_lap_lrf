@@ -46,7 +46,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.MetaModel
 
         public string LiveStatus { get; set; }
 
-        public int Platform { get; set; }
+        public string Platform { get; set; }
 
         public bool IsExport { get; set; }
 
