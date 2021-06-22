@@ -60,7 +60,8 @@ namespace Fanex.Athena.Api.BetList
             int rows,
             [FromUri]BetListMetaModel metaModel)
         {
-            const string UspKey = "Lrf_BetList_MatchWL_Bettype";
+            var balanceUp = GetBalanceUp();
+            string UspKey = metaModel.FromDate < balanceUp.BalanceUpDay ? "Lrf_BetList_MatchWL_Old" : "Lrf_BetList_MatchWL_Bettype";
 
             return await GetPagingBetListResult(metaModel, UspKey, page, rows).ConfigureAwait(false);
         }
@@ -76,7 +77,8 @@ namespace Fanex.Athena.Api.BetList
         {
             metaModel.IsServerPaging = true;
 
-            const string UspKey = "Lrf_BetList_MatchWL_Outright";
+            var balanceUp = GetBalanceUp();
+            string UspKey = metaModel.FromDate < balanceUp.BalanceUpDay ? "Lrf_BetList_MatchWL_Old" : "Lrf_BetList_MatchWL_Outright";
             return await GetBetListResult(metaModel, UspKey).ConfigureAwait(false);
         }
 
@@ -98,7 +100,8 @@ namespace Fanex.Athena.Api.BetList
             if (_currencyValidation.IsValidBaseCurrency(baseCurrency)
                 && _currencyValidation.IsValidCurrency(currencyId))
             {
-                const string UspKey = "Lrf_BetList_MatchWL_Parlay";
+                var balanceUp = GetBalanceUp();
+                string UspKey = fromDate.Date < balanceUp.BalanceUpDay ? "Lrf_BetList_MatchWL_Old" : "Lrf_BetList_MatchWL_Parlay";
                 var metaModel = new BetListMetaModel
                 {
                     LicenseeId = SessionService.LicenseeSession.LicenseeId,
