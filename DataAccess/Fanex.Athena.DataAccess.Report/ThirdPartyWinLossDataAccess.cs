@@ -96,6 +96,10 @@
             {
                 db.SetParameterValue("productid", metaModel.ProductId);
             }
+            if (metaModel.MoveBetsDay != null)
+            {
+                db.SetParameterValue("MoveBetsDay", metaModel.MoveBetsDay);
+            }
         }
 
         protected virtual void ReadSummaryTotal(IDataReader reader, IDictionary<string, T> summaryTotal, string defaultBaseCurrency)

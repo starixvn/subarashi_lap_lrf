@@ -13,6 +13,7 @@ namespace Fanex.Athena.DataAccess.Core.Common
     using Extension.Utility;
     using Fanex.Athena.DataAccess.Core;
     using Fanex.Athena.DataAccess.Core.Common.Interfaces;
+    using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Common.Extensions;
     using VendorAdapter.Interfaces;
@@ -23,10 +24,13 @@ namespace Fanex.Athena.DataAccess.Core.Common
 
         private readonly IAppSettings _appSettings;
 
-        public MatchDataAccess(ICacheRefAdapter cacheRefAdapter, IAppSettings appSettings)
+        private readonly IBalanceUpDataAccess _balanceUpDataAccess;
+
+        public MatchDataAccess(ICacheRefAdapter cacheRefAdapter, IAppSettings appSettings, IBalanceUpDataAccess balanceUpDataAccess)
         {
             _cacheRefAdapter = cacheRefAdapter;
             _appSettings = appSettings;
+            _balanceUpDataAccess = balanceUpDataAccess;
         }
 
         public async Task<IList<Match>> GetForecastMatchListByLeague(int leagueId)
@@ -119,7 +123,9 @@ namespace Fanex.Athena.DataAccess.Core.Common
                     SportId = sportId,
                     LeagueID = leagueId,
                     FromDate = fromDate,
-                    ToDate = toDate
+                    ToDate = toDate,
+                    MoveBetsDay = _balanceUpDataAccess.GetBalanceUp().MoveBetsDay,
+                    BalanceUpDay = _balanceUpDataAccess.GetBalanceUp().BalanceUpDay
                 };
                 using (var reader = await db.ExecuteReaderAsync(uspParam).ConfigureAwait(false))
                 {
