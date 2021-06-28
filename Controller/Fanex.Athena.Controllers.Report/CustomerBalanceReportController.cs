@@ -53,6 +53,7 @@ namespace Fanex.Athena.Controllers.Report
                 CurrencyList = userSession.CurrencyList,
                 Param = metaModel,
                 IsAllowedCustomerCommission = licenseeSession.IsAllowedCustomerComm,
+                IsEnableSingleWallet = licenseeSession.IsEnableSingleWallet,
                 ProductAccess = productAccess
             };
 
@@ -85,6 +86,7 @@ namespace Fanex.Athena.Controllers.Report
 
             metaModel.IsAllowedBA = productAccess.IsAllowBA;
             metaModel.HasComm = licenseeSession.IsAllowedCustomerComm;
+            metaModel.IsEnableSingleWallet = licenseeSession.IsEnableSingleWallet;
             metaModel.PageIndex = 1;
             metaModel.PageSize = ExcelPageSize;
 

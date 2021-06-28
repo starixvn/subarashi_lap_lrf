@@ -62,6 +62,7 @@ namespace Fanex.Athena.Controllers.Report
                 Param = metaModel,
                 ProductAccess = productAccess,
                 IsAllowedCustomerCommission = licenseeSession.IsAllowedCustomerComm,
+                IsEnableSingleWallet = licenseeSession.IsEnableSingleWallet,
                 CurrencyList = GetCurrenciesForTurnoverReport(licenseeSession.LicenseeId),
                 IsAllowedCasinoTransfer = AppSettingInstance.LicenseeAllowCasinoTransfer.Contains(licenseeSession.LicenseeId),
                 IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeName)
@@ -95,6 +96,7 @@ namespace Fanex.Athena.Controllers.Report
                     userSession.Language,
                     FunctionNames.Turnover),
                 IsAllowedCustomerCommission = licenseeSession.IsAllowedCustomerComm,
+                IsEnableSingleWallet = licenseeSession.IsEnableSingleWallet,
                 CurrencyList = GetCurrenciesForTurnoverReport(licenseeSession.LicenseeId),
                 IsAllowedCasinoTransfer = licenseeSession.LicenseeId == 1
             };
@@ -117,7 +119,7 @@ namespace Fanex.Athena.Controllers.Report
 
             var showingOption = new ShowingOption
             {
-                CustomerCommVisible = this.SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm,
+                CustomerCommVisible = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm,
                 BAVisible = productAccess.IsAllowBA
             };
 

@@ -49,6 +49,8 @@ namespace Fanex.Athena.Controllers.BetList
             };
 
             ViewBag.ViewTitle = GetViewTite(metaModel.BetListName);
+            ViewBag.IsEnableSingleWallet = SessionServiceInstance.LicenseeSession.IsEnableSingleWallet;
+
             return View("~/Views/Desktop/BetList/CustomerOutstanding/Main.cshtml", viewModel);
         }
 

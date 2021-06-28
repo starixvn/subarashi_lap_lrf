@@ -81,5 +81,7 @@
         int BetListApiClientTimeOutMinutes { get; }
 
         IEnumerable<string> ListActionNoView { get; }
+
+        bool IsUATTW { get; }
     }
 }

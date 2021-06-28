@@ -168,14 +168,15 @@ namespace Fanex.Athena.Service.Core.Users
             return DefaultReportPath;
         }
 
-        private static LicenseeAuthInfo GenerateLicenseeInfo(Licensee selectedLicensee)
+        private LicenseeAuthInfo GenerateLicenseeInfo(Licensee selectedLicensee)
         {
             return new LicenseeAuthInfo
             {
                 LicenseeId = selectedLicensee.Id,
                 LicenseeName = selectedLicensee.Name,
                 IsAllowedCustomerComm = selectedLicensee.IsAllowedCustomerComm,
-                IsEnableBA = selectedLicensee.IsEnableBA
+                IsEnableBA = selectedLicensee.IsEnableBA,
+                IsEnableSingleWallet = _licenseeDataAccess.IsEnableSingleWallet(selectedLicensee.Name, _appSettings.IsUATTW)
             };
         }
 

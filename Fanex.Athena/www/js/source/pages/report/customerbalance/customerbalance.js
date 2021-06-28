@@ -99,6 +99,7 @@
         function initSetting() {
             CustomerBalanceOption.hasCustomerComm = Site.asBool($('#IsAllowedCustomerCommission').val());
             CustomerBalanceOption.isAllowBA = Site.asBool($('#IsAllowedBACommission').val());
+            CustomerBalanceOption.isEnableSingleWallet = Site.asBool($('#IsEnableSingleWallet').val());
         }
 
         function submit() {

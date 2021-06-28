@@ -14,6 +14,7 @@ namespace Fanex.Athena.Service.StatelessCore
 
     using Extension.Utility.Interfaces;
     using Fanex.Athena.DataAccess.Core.Users.Interfaces;
+    using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.DTO.Configuration;
 
@@ -30,10 +31,13 @@ namespace Fanex.Athena.Service.StatelessCore
 
         private readonly ILicenseeDataAccess _licenseeDataAccess;
 
-        public LicenseeSettingService(ICustomMemoryCacheService cache, ILicenseeDataAccess licenseeDataAccess)
+        private readonly IAppSettings _appSettings;
+
+        public LicenseeSettingService(ICustomMemoryCacheService cache, ILicenseeDataAccess licenseeDataAccess, IAppSettings appSettings)
         {
             _cache = cache;
             _licenseeDataAccess = licenseeDataAccess;
+            _appSettings = appSettings;
         }
 
         public bool IsFakeLicensee(string licenseeName)
@@ -75,6 +79,19 @@ namespace Fanex.Athena.Service.StatelessCore
             }
 
             return licenseeInfo;
+        }
+
+        public bool IsEnableSingleWallet(string licenseeName)
+        {
+            var cacheKey = "Lrf_LicenseeIsEnableSingleWallet_" + licenseeName;
+            var result = _cache.Get<bool?>(cacheKey);
+            if (!result.HasValue)
+            {
+                result = _licenseeDataAccess.IsEnableSingleWallet(licenseeName, _appSettings.IsUATTW);
+                _cache.Set(cacheKey, result, OneDayInSecond);
+            }
+
+            return result.Value;
         }
 
         private IEnumerable<FakeLicenseeSetting> GetAndCacheFakeLicenseeSettingList()

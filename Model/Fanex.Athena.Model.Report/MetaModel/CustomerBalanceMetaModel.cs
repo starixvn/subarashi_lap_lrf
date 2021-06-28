@@ -25,6 +25,8 @@ namespace Fanex.Athena.Model.Report.MetaModel
 
         public bool IsAllowedBA { get; set; }
 
+        public bool IsEnableSingleWallet { get; set; }
+
         public bool HasComm { get; set; }
     }
 }

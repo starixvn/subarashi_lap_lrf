@@ -82,5 +82,32 @@
                 return db.QueryEntity<Licensee>(uspParams);
             }
         }
+
+        public bool IsEnableSingleWallet(string licenseeName, bool isUATTW)
+        {
+            const string KeyName = "EnableSingleWallet";
+            const string ExpectedKeyValue = "true";
+            var environment = isUATTW ? "UAT" : "Production";
+            var value = GetConfigDetailByKeyName(licenseeName, environment, KeyName);
+            return !string.IsNullOrEmpty(value) && string.Equals(value, ExpectedKeyValue, StringComparison.OrdinalIgnoreCase);
+        }
+
+        private string GetConfigDetailByKeyName(string licenseeName, string environment, string keyName)
+        {
+            const string UspName = "Lrf_GetConfigDetailByKeyName";
+            using (var db = this.GetObjectDb(UspName))
+            {
+                db.SetParameterValue("SiteName", licenseeName);
+                db.SetParameterValue("Environment", environment);
+                db.SetParameterValue("KeyName", keyName);
+                db.SetParameterValue("KeyValue", null);
+
+                db.ExecuteNonQuery();
+
+                var keyValue = Convert.ToString(db.GetParameterValue("KeyValue"));
+   
+                return keyValue;
+            }
+        }
     }
 }

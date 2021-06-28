@@ -39,6 +39,7 @@ namespace Fanex.Athena.Controllers.Customer
         private const string BASTATUS = "BAStatus";
         private const string CUSTOMERCOMM = "Commission";
         private const string STATUS = "Status";
+        private const string AVAILABLEFUNDS = "AvailableFunds";
 
         private static readonly IEnumerable<string> GridColumns = new[]
         {
@@ -392,6 +393,15 @@ namespace Fanex.Athena.Controllers.Customer
             if (allowLicensees.Contains(licenseeSession.LicenseeId))
             {
                 items.Add(new CheckedItem { Name = STATUS, Checked = true });
+            }
+
+            if(licenseeSession.IsEnableSingleWallet)
+            {
+                var availableFundItem = items.FirstOrDefault(_ => _.Name.Equals(AVAILABLEFUNDS, StringComparison.OrdinalIgnoreCase));
+                if(availableFundItem != null)
+                {
+                    items.Remove(availableFundItem);
+                }
             }
 
             return items;

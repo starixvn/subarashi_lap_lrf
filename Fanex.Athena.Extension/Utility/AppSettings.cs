@@ -187,6 +187,11 @@ namespace Fanex.Athena.Extension.Utility
             get { return GetValue("LiveReportNoDetailLinkSports").Split(',').Select(n => Convert.ToInt32(n)); }
         }
 
+        public bool IsUATTW
+        {
+            get { return GetValue("IsUATTW") == "1"; }
+        }
+
         #endregion Configurations
 
         #region Casino

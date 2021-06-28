@@ -23,13 +23,6 @@ define(['jquery', 'common/site', 'common/querystring', './customer.dailystatemen
                 });
             },
 
-            getGridOption: function () {
-                const gridOption = DailyStatementOption.gridOption;
-                gridOption.colNames = DailyStatementOption.getColNames();
-
-                return gridOption;
-            },
-
             bindData: function (response) {
                 jqGridAdditional.clearGrid('BetListGrid');
                 const data = response.Main;
@@ -38,7 +31,7 @@ define(['jquery', 'common/site', 'common/querystring', './customer.dailystatemen
                     return;
                 }
 
-                const gridOption = _me.getGridOption();
+                const gridOption = DailyStatementOption.getGridOption();
                 gridOption.data = data;
                 gridOption.gridComplete = function () {
                     jqGridAdditional.gridComplete();

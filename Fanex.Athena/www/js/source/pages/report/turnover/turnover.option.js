@@ -262,6 +262,13 @@
             commBAColumn.hidden = !_me.isAllowBa;
             amountDueToBAColumn.hidden = !_me.isAllowBa;
 
+            //Column hidden by single wallet lic
+            const isHiddenBySingleWalletLic = !!_me.isEnableSingleWallet;
+            openingBalanceColumn.hidden = isHiddenBySingleWalletLic;
+            depositColumn.hidden = isHiddenBySingleWalletLic;
+            withdrawalColumn.hidden = isHiddenBySingleWalletLic;
+            closingBalanceColumn.hidden = isHiddenBySingleWalletLic;
+
             return colModelList;
         };
 

@@ -21,6 +21,7 @@
             TurnoverOption.hasCustomerComm = Site.asBool($('#IsAllowedCustomerCommission').val());
             TurnoverOption.hasCasinoTransfer = Site.asBool($('#IsAllowedCasinoTransfer').val());
             TurnoverOption.isAllowBa = Site.asBool($('#IsAllowBa').val());
+            TurnoverOption.isEnableSingleWallet = Site.asBool($('#IsEnableSingleWallet').val());
             MultiSelect.initProductList();
             Site.addUserGuide({
                 resourceName: 'Turnover',

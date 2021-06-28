@@ -204,6 +204,14 @@ namespace Fanex.Athena.Excel.Report
             {
                 sheet.HideColumn(ColumnCasinoTransfer);
             }
+
+            if (_viewModel.IsEnableSingleWallet)
+            {
+                sheet.HideColumn(ColumnOpeningBalance);
+                sheet.HideColumn(ColumnDeposit);
+                sheet.HideColumn(ColumnWithdrawal);
+                sheet.HideColumn(ColumnClosingBalance);
+            }
         }
 
         private static void AssignCommonData(IRow row, TurnoverDTO turnover)
