@@ -10,6 +10,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Excel
         private PlayerDetailTransactionReportViewModel _data;
         private const int ColumnTemplateCount = 7;
         private const int RowContentTemplate = 2;
+        private const int ColumnAfterBalanceIndex = 4;
 
         public void SetData(string templatePath, PlayerDetailTransactionReportViewModel data)
         {
@@ -59,6 +60,13 @@ namespace Fanex.Athena.Module.PlayerAdmin.Excel
                 row.Cells[columnIndex++].SetCellValue(item.AfterBalanceStr);
                 row.Cells[columnIndex++].SetCellValue(item.IsResettled ? "v" : string.Empty);
                 row.Cells[columnIndex].SetCellValue(item.Remark);
+            }
+        }
+        protected internal override void ProcessUI(ISheet sheet)
+        {
+            if(_data.IsEnableSingleWallet)
+            {
+                sheet.HideColumn(ColumnAfterBalanceIndex);
             }
         }
     }
