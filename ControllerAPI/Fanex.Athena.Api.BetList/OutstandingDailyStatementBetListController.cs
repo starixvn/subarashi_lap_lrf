@@ -49,6 +49,7 @@ namespace Fanex.Athena.Api.BetList
             metaModel.HasPlayerCom = licenseeSession.IsAllowedCustomerComm;
             metaModel.IsShowIpvn = userSession.IsShowIpvn && userSession.IsShowIp;
             metaModel.IsShowIp = userSession.IsShowIp;
+            metaModel.IsEnableSingleWallet = licenseeSession.IsEnableSingleWallet;
             if (_authorizationService.HasPermissionOnData(userSession.CurrencyAgentList, metaModel.CustId, metaModel.TransId))
             {
                 return await _betListApiClient.PostAsync("/OutstandingDailyStatementBetList/GetData",

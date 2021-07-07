@@ -133,5 +133,7 @@ namespace Fanex.Athena.Model.BetList.MetaModel
         public bool IsShowIpvn { get; set; }
 
         public bool IsShowIp { get; set; }
+
+        public bool IsEnableSingleWallet { get; set; }
     }
 }
