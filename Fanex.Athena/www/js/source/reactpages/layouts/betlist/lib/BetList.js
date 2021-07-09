@@ -380,6 +380,17 @@ class BetList {
         return url;
     }
 
+    getCGDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
+        let url = rootUrl + 'CreativeGamingBetList/Detail';
+        url = QueryString.setParam(url, 'transId', transId);
+        url = QueryString.setParam(url, 'date', winlostDate);
+        url = QueryString.setParam(url, 'custId', custId);
+        url = QueryString.setParam(url, 'transType', transType);
+        url = QueryString.setParam(url, 'BaseCurrency', baseCurrency);
+
+        return url;
+    }
+
     getRngCasinoResultUrl(rootUrl) {
         return rootUrl + 'ResultReport/ShowRngCasinoSingleWalletResult';
     }
@@ -554,6 +565,16 @@ class BetList {
         url = QueryString.setParam(url, 'siteId', siteId);
         url = QueryString.setParam(url, 'gameRoundId', gameRoundId);
         url = QueryString.setParam(url, 'sportType', sportType);
+
+        return url;
+    }
+
+    getCGResultUrl(rootUrl, custId, transId3rd, gameId3rd, siteId) {
+        let url = rootUrl + 'ResultReport/CG';
+        url = QueryString.setParam(url, 'custId', custId);
+        url = QueryString.setParam(url, 'transId3rd', transId3rd);
+        url = QueryString.setParam(url, 'gameId3rd', gameId3rd);
+        url = QueryString.setParam(url, 'siteId', siteId);
 
         return url;
     }

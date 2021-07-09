@@ -16,7 +16,7 @@
 
     public class DcsBetLimitService : IDcsBetLimitService
     {
-        private static readonly int[] ProductsHasStatus = { ProductTypes.Lottery};
+        private static readonly int[] ProductsHasStatus = { ProductTypes.Lottery, ProductTypes.CG };
 
         private readonly IDcsBetLinitRepository _repository;
 
@@ -54,11 +54,17 @@
                 x => x.Id,
                 result.Code == 0,
                 metaModel.ProductId == ProductTypes.Lottery
-                    ? new [] { LogActionDetailId.UpdatingMinBet, LogActionDetailId.UpdatingMaxBet, LogActionDetailId.UpdatingMaxBetPerDraw }
-                    : new [] { LogActionDetailId.UpdatingMinBet, LogActionDetailId.UpdatingMaxBet, LogActionDetailId.UpdatingMaxPerMatch });
+                    ? new[] { LogActionDetailId.UpdatingMinBet, LogActionDetailId.UpdatingMaxBet, LogActionDetailId.UpdatingMaxBetPerDraw }
+                    : new[] { LogActionDetailId.UpdatingMinBet, LogActionDetailId.UpdatingMaxBet, LogActionDetailId.UpdatingMaxPerMatch });
 
             _businessLogService.Write(BusinessLogType.CustomerBetSetting, logInfo);
 
+            return result;
+        }
+
+        public async Task<IResultInfo> UpdateStatusAsync(PlayerBetLimitProductStatusUpdateMetaModel metaModel)
+        {
+            var result = await _repository.UpdateStatusAsync(metaModel).ConfigureAwait(false);
             return result;
         }
     }

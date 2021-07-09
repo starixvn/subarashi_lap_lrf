@@ -5,6 +5,10 @@
 
     public class PlayerBetLimitViewModel
     {
+        public bool IsStatusEnable { get; set; }
+
+        public bool StatusEnable { get; set; }
+
         public bool Editable { get; set; }
 
         public bool EnableCopy { get; set; }

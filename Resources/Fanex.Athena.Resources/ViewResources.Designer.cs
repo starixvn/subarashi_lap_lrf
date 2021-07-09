@@ -5632,6 +5632,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CG.
+        /// </summary>
+        public static string ProductCG {
+            get {
+                return ResourceManager.GetString("ProductCG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cash Out.
         /// </summary>
         public static string ProductCO {
@@ -7428,6 +7437,15 @@ namespace Fanex.Athena.Resources {
         public static string UpdateProductBetSettingSuccessMsg {
             get {
                 return ResourceManager.GetString("UpdateProductBetSettingSuccessMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to update {0} status?.
+        /// </summary>
+        public static string UpdateProductStatus {
+            get {
+                return ResourceManager.GetString("UpdateProductStatus", resourceCulture);
             }
         }
         

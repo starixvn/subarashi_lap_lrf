@@ -53,5 +53,7 @@ namespace Fanex.Athena.Model.Core.DataDomain
         public const int I4D = 43;
 
         public const int SLT = 63;
+
+        public const int CG = 62;
     }
 }

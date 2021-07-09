@@ -280,6 +280,23 @@
         }
 
         [HttpGet]
+        public async Task<string> CG(string custId, string transId3rd, string gameId3rd, string siteId)
+        {
+            var language = SessionServiceInstance.UserSession.Language;
+            var model = new
+            {
+                custId,
+                transId3rd,
+                gameId3rd,
+                siteId,
+                languageCode = language
+            };
+
+            return await _betListApiClient.PostStringAsync("/CGResultPopup/Index",
+               model, language).ConfigureAwait(false);
+        }
+
+        [HttpGet]
         public async Task<ActionResult> WM(string transDesc, string gameId3rd, int betType)
         {
             var language = SessionServiceInstance.UserSession.Language;

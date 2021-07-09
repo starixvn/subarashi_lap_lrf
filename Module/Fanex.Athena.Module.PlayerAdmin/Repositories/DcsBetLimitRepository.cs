@@ -38,6 +38,18 @@
             [ProductTypes.SLT] = new[] { "169" }
         };
 
+        private const string UpdateStatusXmlFormat = "<ROOT><ProductStatus SportType=\"{0}\" BetType=\"{1}\" IsDisabled=\"{2}\" IsDisabledDownline=\"0\" /></ROOT>";
+
+        private static readonly IDictionary<int, int> ProductSporttypeMap = new Dictionary<int, int>
+        {
+            { ProductTypes.CG, 167 }
+        };
+
+        private static readonly IDictionary<int, int> ProductBettypeMap = new Dictionary<int, int>
+        {
+            { ProductTypes.CG, 7301 }
+        };
+
         public DcsBetLimitRepository(IDbFactory dbFactory, ILogger logger)
         {
             _db = dbFactory;
@@ -121,6 +133,32 @@
             return false;
         }
 
+        public async Task<IResultInfo> UpdateStatusAsync(PlayerBetLimitProductStatusUpdateMetaModel metaModel)
+        {
+            const string UspName = "Acc_Dep_CustSetting_DisableStatUpd";
+
+            using (var db = _db.GetObjectDb(UspName))
+            {
+                db.SetParameterValue("custid", metaModel.CustId);
+                db.SetParameterValue("userid", metaModel.UserId);
+                db.SetParameterValue("IsDisabled", BuildProductStatusXml(metaModel.ProductId, metaModel.Status));
+                db.SetParameterValue("ip", metaModel.Ip);
+                db.SetParameterValue("ErrCode", null);
+                db.SetParameterValue("ErrMsg", null);
+
+                await db.ExecuteNonQueryAsync().ConfigureAwait(false);
+
+                var errorCode = db.GetParameterValue("ErrCode");
+                var errorMessage = db.GetParameterValue("ErrMsg");
+
+                return new ResultInfo
+                {
+                    Code = Converter.ToInt(errorCode),
+                    Message = GetErrorMessage(Converter.ToString2(errorMessage))
+                };
+            }
+        }
+
         private static void AddUpdateParameter(IObjectDb db, PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>> metaModel)
         {
             db.SetParameterValue("custid", metaModel.CustId);
@@ -148,6 +186,11 @@
             }
 
             return string.Format(XMLPattern, xmlElementBuilder);
+        }
+
+        private static string BuildProductStatusXml(int productId, bool status)
+        {
+            return string.Format(UpdateStatusXmlFormat, ProductSporttypeMap[productId], ProductBettypeMap[productId], status ? 0 : 1);
         }
 
         private string GetErrorMessage(string xmlErrorMessage)

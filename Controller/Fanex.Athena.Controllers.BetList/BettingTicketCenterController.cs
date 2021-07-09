@@ -205,7 +205,8 @@
                 Product.HB,
                 Product.WM,
                 Product.BGG,
-                Product.VGA
+                Product.VGA,
+                Product.CG
             };
 
             var productAccess = _productService.GetSingleWalletProductAccess(
