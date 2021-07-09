@@ -1,4 +1,4 @@
-﻿// Generated at: 5/31/2021 5:30:28 PM
+﻿// Generated at: 7/1/2021 2:46:03 PM
 var _language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -619,6 +619,7 @@ ProductBT:"Bet Trade",
 ProductBX:"Exchange",
 ProductCB:"Colossus Bets",
 ProductCC:"Arcadia Gaming",
+ProductCG:"CG",
 ProductCO:"Cash Out",
 ProductCS:"RNG Casino",
 ProductFW:"Fishing World",

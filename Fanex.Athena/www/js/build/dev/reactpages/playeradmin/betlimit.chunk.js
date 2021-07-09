@@ -189,10 +189,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/actions/loaderAction */ "./www/js/source/reactpages/actions/loaderAction.js");
 /* harmony import */ var _jsroot_actions_requestParamAction__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/actions/requestParamAction */ "./www/js/source/reactpages/actions/requestParamAction.js");
 /* harmony import */ var _alertAction__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./alertAction */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/actions/alertAction.js");
+/* harmony import */ var _productAction__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./productAction */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/actions/productAction.js");
 
 
 
-const ActionCreators = Object.assign({}, _jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_0__, _jsroot_actions_requestParamAction__WEBPACK_IMPORTED_MODULE_1__, _alertAction__WEBPACK_IMPORTED_MODULE_2__);
+
+const ActionCreators = Object.assign({}, _jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_0__, _jsroot_actions_requestParamAction__WEBPACK_IMPORTED_MODULE_1__, _alertAction__WEBPACK_IMPORTED_MODULE_2__, _productAction__WEBPACK_IMPORTED_MODULE_3__);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/actions/productAction.js":
+/*!***************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/actions/productAction.js ***!
+  \***************************************************************************************/
+/*! exports provided: setProductLabel */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setProductLabel", function() { return setProductLabel; });
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/actions/types.js");
+
+const setProductLabel = data => {
+  return {
+    type: _types__WEBPACK_IMPORTED_MODULE_0__["SET_PRODUCT_LABEL"],
+    data: data
+  };
+};
 
 /***/ }),
 
@@ -200,13 +223,15 @@ const ActionCreators = Object.assign({}, _jsroot_actions_loaderAction__WEBPACK_I
 /*!*******************************************************************************!*\
   !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/actions/types.js ***!
   \*******************************************************************************/
-/*! exports provided: SET_ALERT_OPTION */
+/*! exports provided: SET_ALERT_OPTION, SET_PRODUCT_LABEL */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_ALERT_OPTION", function() { return SET_ALERT_OPTION; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_PRODUCT_LABEL", function() { return SET_PRODUCT_LABEL; });
 const SET_ALERT_OPTION = "SET_ALERT_OPTION";
+const SET_PRODUCT_LABEL = "SET_PRODUCT_LABEL";
 
 /***/ }),
 
@@ -297,7 +322,8 @@ const Setting = {
   [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].AGC]: _grid_data_contents_AGCDataContent__WEBPACK_IMPORTED_MODULE_6__["default"],
   [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].TG]: _grid_data_contents_GameDataContent__WEBPACK_IMPORTED_MODULE_4__["default"],
   [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].I4D]: _grid_data_contents_I4DDataContent__WEBPACK_IMPORTED_MODULE_7__["default"],
-  [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].SLT]: _grid_data_contents_GameDataContent__WEBPACK_IMPORTED_MODULE_4__["default"]
+  [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].SLT]: _grid_data_contents_GameDataContent__WEBPACK_IMPORTED_MODULE_4__["default"],
+  [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].CG]: _grid_data_contents_GameDataContent__WEBPACK_IMPORTED_MODULE_4__["default"]
 };
 
 const DataContent = props => {
@@ -359,6 +385,7 @@ const FormFilter = props => {
         ProductId: item.value
       });
       props.setRequestParam(param);
+      props.setProductLabel(item.label);
     }
   };
 
@@ -382,10 +409,12 @@ const FormFilter = props => {
 
 function mapDispatchToProps(dispatch) {
   const {
-    setRequestParam
+    setRequestParam,
+    setProductLabel
   } = _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"];
   return Object(redux__WEBPACK_IMPORTED_MODULE_3__["bindActionCreators"])({
-    setRequestParam
+    setRequestParam,
+    setProductLabel
   }, dispatch);
 }
 
@@ -424,6 +453,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @jsroot/components/CheckBox */ "./www/js/source/reactpages/components/CheckBox.jsx");
 /* harmony import */ var _jsroot_components_Balloon__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @jsroot/components/Balloon */ "./www/js/source/reactpages/components/Balloon.jsx");
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -491,6 +524,14 @@ const SettingContent = (Grid, DataHandling) => {
           } else {
             this._showConfirmation(() => this._submit(submitData.Data));
           }
+        }
+      });
+
+      _defineProperty(this, "onUpdateStatus", () => {
+        if (!this.state.showError) {
+          const newStatus = !this.state.setting.StatusEnable;
+
+          this._showUpdateStatusConfirmation(() => this._updateStatus(newStatus));
         }
       });
 
@@ -615,6 +656,16 @@ const SettingContent = (Grid, DataHandling) => {
       _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__["default"].updateData(param, this._showSubmitResult.bind(this));
     }
 
+    _updateStatus(Status) {
+      this.props.toggleLoader(true);
+
+      const param = _objectSpread(_objectSpread({}, this.props.requestParam), {}, {
+        Status
+      });
+
+      _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__["default"].updateStatus(param, this._showSubmitResult.bind(this));
+    }
+
     _showConfirmation(onOK) {
       const buttons = [{
         text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('OK'),
@@ -630,6 +681,32 @@ const SettingContent = (Grid, DataHandling) => {
       }, _lib_utility__WEBPACK_IMPORTED_MODULE_7__["default"].getConfirmationMsg(this.props.requestParam.ProductId));
       this.setState({
         disabledButton: true
+      }, () => this.props.setAlertOption({
+        isShow: true,
+        title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Confirmation'),
+        children: msg,
+        buttons: buttons,
+        icon: '',
+        onClose: this.onCloseAlert,
+        height: 130
+      }));
+    }
+
+    _showUpdateStatusConfirmation(onOK) {
+      const buttons = [{
+        text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('OK'),
+        onClick: onOK,
+        className: 'btn btn-apply'
+      }, {
+        text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Cancel'),
+        onClick: this.onCloseAlert,
+        className: 'btn btn-cancel'
+      }];
+      const msg = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "center-align"
+      }, _lib_utility__WEBPACK_IMPORTED_MODULE_7__["default"].getConfirmationUpdateStatusMsg(this.props.requestParam.ProductId));
+      this.setState({
+        disabledButton: !this.state.setting.StatusEnable
       }, () => this.props.setAlertOption({
         isShow: true,
         title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Confirmation'),
@@ -701,11 +778,6 @@ const SettingContent = (Grid, DataHandling) => {
 
     render() {
       const data = this.state.data;
-
-      if (!data || !data.length) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_5__["default"], null);
-      }
-
       const {
         setting,
         disabledButton,
@@ -713,24 +785,34 @@ const SettingContent = (Grid, DataHandling) => {
         errorBalloon,
         isCopy
       } = this.state;
+      const noSetting = !data || !data.length;
+
+      if (!setting.IsStatusEnable) {
+        if (noSetting) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_5__["default"], null);
+        }
+      }
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "pa-betlimit"
-      }, setting.EnableCopy && setting.Editable && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      }, setting.EnableCopy && setting.Editable && !noSetting && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_8__["default"], {
         id: "IsCopy",
         checked: isCopy,
         onChange: this.onCheck,
         ref: this.checkBoxRef,
         label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource("CopyBetSettingFromSoccer")
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Grid, {
+      }), !noSetting ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Grid, {
         data: data,
         setting: setting,
         setInputRef: this.setInputRef,
         onChange: this.onChange,
         isCopy: isCopy,
         getHeaderName: this.getHeaderName
-      }), setting.Editable && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('CannotUpdateBetLimitForProduct').replace("{0}", this.props.productLabel)
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "pa-betlimit-button"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, setting.Editable && !noSetting && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "button",
         className: "btn btn-cancel",
         disabled: disabledButton,
@@ -741,7 +823,11 @@ const SettingContent = (Grid, DataHandling) => {
         disabled: disabledButton,
         onClick: this.onSubmit,
         ref: this.submitButtonRef
-      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Submit'))), setting.Editable && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Balloon__WEBPACK_IMPORTED_MODULE_9__["default"], _extends({
+      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Submit')), " "), setting.IsStatusEnable && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "button",
+        className: "btn btn-apply",
+        onClick: this.onUpdateStatus
+      }, setting.StatusEnable ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Disable') + ' ' + this.props.productLabel : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Enable') + ' ' + this.props.productLabel)), setting.Editable && !noSetting && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Balloon__WEBPACK_IMPORTED_MODULE_9__["default"], _extends({
         width: 140,
         isOpen: showError,
         ref: this.errorRef
@@ -764,10 +850,12 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   const {
-    requestParam
+    requestParam,
+    productLabel
   } = state;
   return Object.assign({}, {
-    requestParam
+    requestParam,
+    productLabel
   });
 }
 
@@ -1626,7 +1714,8 @@ const BetLimitProduct = {
   AGC: 10,
   TG: 40,
   I4D: 43,
-  SLT: 63
+  SLT: 63,
+  CG: 62
 };
 const BetLimitSport = {
   I4D: 223,
@@ -1784,7 +1873,8 @@ const Url = {
   [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].AGC]: 'AGCasinoBetLimit',
   [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].TG]: 'DcsBetLimit',
   [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].I4D]: 'DcsBetLimit',
-  [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].SLT]: 'DcsBetLimit'
+  [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].SLT]: 'DcsBetLimit',
+  [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].CG]: 'DcsBetLimit'
 };
 class DataTransfer {
   static getData(param, callBack) {
@@ -1805,6 +1895,19 @@ class DataTransfer {
 
   static updateData(param, callBack) {
     const url = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].resolveClientUrl(Url[param.ProductId] + '/UpdateSetting');
+    _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_1__["default"].postData(url, param).then(response => {
+      const result = response.data;
+      const isSuccess = Number(result.Code) === 0;
+      const title = isSuccess ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('MessageSuccess') : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Fail');
+      callBack && callBack(title, result.Message, isSuccess);
+    }).catch(error => {
+      console.log(error.message);
+      callBack(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Error'), _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('ErrorProcessingMsg'), false);
+    });
+  }
+
+  static updateStatus(param, callBack) {
+    const url = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].resolveClientUrl(Url[param.ProductId] + '/UpdateStatus');
     _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_1__["default"].postData(url, param).then(response => {
       const result = response.data;
       const isSuccess = Number(result.Code) === 0;
@@ -2042,6 +2145,16 @@ const ConfirmationMsg = {
   [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].SLT]: {
     Msg: 'UpdateProductBetSettings',
     Product: 'ProductSLT'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].CG]: {
+    Msg: 'UpdateProductBetSettings',
+    Product: 'ProductCG'
+  }
+};
+const ConfirmationUpdateProductStatusMsg = {
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].CG]: {
+    Msg: 'UpdateProductStatus',
+    Product: 'ProductCG'
   }
 };
 class Utility {
@@ -2053,6 +2166,16 @@ class Utility {
     }
 
     return message.replace('{0}', _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource(ConfirmationMsg[productId].Product));
+  }
+
+  static getConfirmationUpdateStatusMsg(productId) {
+    const message = _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource(ConfirmationUpdateProductStatusMsg[productId].Msg);
+
+    if (!ConfirmationUpdateProductStatusMsg[productId].Product) {
+      return message;
+    }
+
+    return message.replace('{0}', _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource(ConfirmationUpdateProductStatusMsg[productId].Product));
   }
 
   static formatValue(number) {
@@ -2283,11 +2406,36 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_reducers_requestParamReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/reducers/requestParamReducer */ "./www/js/source/reactpages/reducers/requestParamReducer.js");
 /* harmony import */ var _jsroot_reducers_loaderReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/reducers/loaderReducer */ "./www/js/source/reactpages/reducers/loaderReducer.js");
 /* harmony import */ var _alertReducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./alertReducer */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/reducers/alertReducer.js");
+/* harmony import */ var _productReducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./productReducer */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/reducers/productReducer.js");
 
 
 
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(Object.assign({}, _jsroot_reducers_loaderReducer__WEBPACK_IMPORTED_MODULE_2__, _jsroot_reducers_requestParamReducer__WEBPACK_IMPORTED_MODULE_1__, _alertReducer__WEBPACK_IMPORTED_MODULE_3__)));
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(Object.assign({}, _jsroot_reducers_loaderReducer__WEBPACK_IMPORTED_MODULE_2__, _jsroot_reducers_requestParamReducer__WEBPACK_IMPORTED_MODULE_1__, _alertReducer__WEBPACK_IMPORTED_MODULE_3__, _productReducer__WEBPACK_IMPORTED_MODULE_4__)));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/reducers/productReducer.js":
+/*!*****************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/reducers/productReducer.js ***!
+  \*****************************************************************************************/
+/*! exports provided: productLabel */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "productLabel", function() { return productLabel; });
+/* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/actions/types.js");
+/* harmony import */ var _jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
+
+
+const productLabel = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, {
+  [_actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_PRODUCT_LABEL"]](prevState, action) {
+    return action.data;
+  }
+
+});
 
 /***/ }),
 

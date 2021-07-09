@@ -4725,6 +4725,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         const SPORT_BGG = 239;
         const SPORT_VGA = 171;
         const SPORT_VGA_FreeBets = 173;
+        const SPORT_CG = 167;
         const BETLIST_META_MODEL = '#BetListMetaModel';
 
         let _sortColumnName, _sortOrder;
@@ -5253,6 +5254,18 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 Site.unBlockUI();
             },
 
+            viewCGResult: function (custId, transId3rd, gameId3rd, siteId, title) {
+                const url = Site.resolveClientUrl('ResultReport/CG');
+                Site.blockUI();
+
+                $.get(url + '?custId=' + custId + '&transId3rd=' + transId3rd + '&gameId3rd=' + gameId3rd + '&siteId=' + siteId, function (result) {
+                    if (result !== '') {
+                        showResultPopUp(result, { width: 800, height: 380, title: title });
+                        Site.unBlockUI();
+                    }
+                });
+            },
+
             setLeagueTitle: function (leagueName) {
                 const leagueNameText = leagueName === '' || leagueName === undefined ? Site.getSingleResource('BetList') : leagueName;
                 $('.league-name-title').html(leagueNameText + ' - ');
@@ -5371,6 +5384,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 }
                 else if (sporttype === SPORT_VGA || sporttype === SPORT_VGA_FreeBets) {
                     _me.viewVGamingResult(custid, bettype, extension2, transdecs, title, sporttype);
+                }
+                else if (sporttype === SPORT_CG) {
+                    _me.viewCGResult(custid, transdecs, league, extension2, title);
                 }
                 else {
                     const numberBettype = Number(bettype);
@@ -5832,6 +5848,20 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
                 showDetailPopUp(url, { width: 890, height: popH + 50, title: title });
             },
+            showCGBetDetails: function (transId, winlostDate, custId, transType) {
+                let url = Site.resolveClientUrl('CreativeGamingBetList/Detail');
+                url = QueryString.setParam(url, 'transId', transId);
+                url = QueryString.setParam(url, 'date', winlostDate);
+                url = QueryString.setParam(url, 'custId', custId);
+                url = QueryString.setParam(url, 'transType', transType);
+                url = QueryString.setParam(url, 'BaseCurrency', getBaseCurrency());
+
+                const popH = Math.min($(window).height() - 100, 550);
+                const title = Site.getSingleResource('ProductCG') + ' - ' +
+                    Site.getSingleResource('DetailedBetlist') + ' - ' + moment(new Date(winlostDate)).format('MM/DD/YYYY');
+
+                showDetailPopUp(url, { width: 890, height: popH + 50, title: title });
+            },
 
             ValidProducts: function () {
                 let temp = true;
@@ -5930,6 +5960,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 window.showBGBetDetails = _me.showBGGDetails;
                 window.showVGamingDetails = _me.showVGamingDetails;
                 window.showVGamingJackpotWonDetails = _me.showVGamingJackpotWonDetails;
+                window.showCGBetDetails = _me.showCGBetDetails;
 
                 const betList = {
                     ViewCasinoHandHistory: _me.ViewCasinoHandHistory

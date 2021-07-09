@@ -1491,6 +1491,10 @@ class BetListLayout extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getVGamingResultUrl(rootUrl, custid, bettype, extension2, transdecs, sporttype);
 
         this._showThirdPartyResult(url, title);
+      } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].CG) {
+        const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getCGResultUrl(rootUrl, transdecs, extension2, bettype);
+
+        this._openPopup(url, title);
       } else {
         const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getResultUrl(rootUrl, matchid, raceNo, bettype, sporttype, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid);
 
@@ -1823,6 +1827,18 @@ class BetListLayout extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 
       this._openPopup(url, title);
     };
+
+    window.showCGBetDetails = (transId, winlostDate, custId, transType) => {
+      const {
+        rootUrl,
+        baseCurrency
+      } = this.props;
+      const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getCGDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
+
+      const title = this._getResource('ProductCG') + ' - ' + this._getResource('DetailedBetlist') + ' - ' + this._formatDateString(winlostDate);
+
+      this._openPopup(url, title);
+    };
   }
 
   componentWillUnmount() {
@@ -1855,6 +1871,7 @@ class BetListLayout extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     window.showBGBetDetails = undefined;
     window.showVGamingDetails = undefined;
     window.showVGamingJackpotWonDetails = undefined;
+    window.showCGBetDetails = undefined;
   }
 
   _getResource(key) {
@@ -2424,6 +2441,16 @@ class BetList {
     return url;
   }
 
+  getCGDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
+    let url = rootUrl + 'CreativeGamingBetList/Detail';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'date', winlostDate);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transType', transType);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
+    return url;
+  }
+
   getRngCasinoResultUrl(rootUrl) {
     return rootUrl + 'ResultReport/ShowRngCasinoSingleWalletResult';
   }
@@ -2583,6 +2610,15 @@ class BetList {
     return url;
   }
 
+  getCGResultUrl(rootUrl, custId, transId3rd, gameId3rd, siteId) {
+    let url = rootUrl + 'ResultReport/CG';
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId3rd', transId3rd);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'gameId3rd', gameId3rd);
+    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'siteId', siteId);
+    return url;
+  }
+
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (new BetList());
@@ -2632,7 +2668,8 @@ const SportType = {
   WM: 233,
   BGG: 239,
   VGA: 171,
-  VGA_FreeBets: 173
+  VGA_FreeBets: 173,
+  CG: 167
 };
 
 /***/ }),
