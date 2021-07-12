@@ -108,8 +108,8 @@ class BetListLayout extends Component {
                 this._showThirdPartyResult(url, title);
             }
             else if (sporttype === SportType.CG) {
-                const url = BetList.getCGResultUrl(rootUrl, transdecs, extension2, bettype);
-                this._openPopup(url, title);
+                const url = BetList.getCGResultUrl(rootUrl, custid, transdecs, extension2, extension1);
+                this._showThirdPartyResult(url, title);
             }
             else {
                 const url = BetList.getResultUrl(rootUrl, matchid, raceNo, bettype,
