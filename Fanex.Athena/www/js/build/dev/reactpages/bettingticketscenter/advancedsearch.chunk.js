@@ -6345,9 +6345,9 @@ class BetListLayout extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 
         this._showThirdPartyResult(url, title);
       } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].CG) {
-        const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getCGResultUrl(rootUrl, transdecs, extension2, bettype);
+        const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getCGResultUrl(rootUrl, custid, transdecs, extension2, extension1);
 
-        this._openPopup(url, title);
+        this._showThirdPartyResult(url, title);
       } else {
         const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getResultUrl(rootUrl, matchid, raceNo, bettype, sporttype, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid);
 
