@@ -54,5 +54,8 @@ namespace Fanex.Athena.Model.Report.MetaModel
 
         public string DefaultBaseCurrency { get; set; }
 
+        public DateTime ? MoveBetsDay { get; set; }
+
+        public DateTime ? BalanceUpDay { get; set; }
     }
 }

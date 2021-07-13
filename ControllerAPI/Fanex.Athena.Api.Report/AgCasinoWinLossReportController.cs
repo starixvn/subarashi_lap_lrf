@@ -9,6 +9,7 @@
     using System.Web.Http;
     using Base.Attributes;
     using DataAccess.Report.Interfaces;
+    using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
     using Fanex.Athena.Excel.Report;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Report.DTO;
@@ -25,16 +26,19 @@
     {
         private readonly IThirdPartyWinLossDataAccess<ThirdPartyWinLoss> _thirdPartyWinLossDataAccess;
         private readonly ICurrencyValidation _currencyValidation;
+        private readonly IBalanceUpDataAccess _balanceUpDataAccess;
 
         public AgCasinoWinLossReportController(
             IThirdPartyWinLossDataAccess<ThirdPartyWinLoss> thirdPartyWinLossDataAccess,
             ILanguageService langService,
-            ICurrencyValidation currencyValidation
+            ICurrencyValidation currencyValidation,
+            IBalanceUpDataAccess balanceUpDataAccess
             )
             : base(langService)
         {
             _thirdPartyWinLossDataAccess = thirdPartyWinLossDataAccess;
             _currencyValidation = currencyValidation;
+            _balanceUpDataAccess = balanceUpDataAccess;
         }
 
         [HttpPost]
@@ -146,6 +150,7 @@
         private async Task<ReportResultModel<ThirdPartyWinLoss>> GetData(ThirdPartyWinLossMetaModel metaModel)
         {
             var userCurrencyList = SessionService.UserSession.CurrencyList;
+            metaModel.MoveBetsDay = _balanceUpDataAccess.GetBalanceUp().MoveBetsDay;
 
             switch ((ReportLevel)metaModel.DrillDownLevel)
             {

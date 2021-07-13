@@ -6,7 +6,8 @@
     using Core.Common;
 
     using Extension.Utility;
-
+    using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
+    using Fanex.Athena.Model.Core.DTO.Configuration;
     using Model.Core.DTO.Common;
 
     using NSubstitute;
@@ -20,11 +21,20 @@
     public class MatchDataAccessTest : BaseDataAccessHelperTest<MatchDataAccess>
     {
         private IAppSettings _appSettings;
+        private IBalanceUpDataAccess _balanceUpDataAccess;
+
+        private readonly BalanceUp _balance = new BalanceUp
+        {
+            MoveBetsDay = new DateTime(2016, 8, 10),
+            BalanceUpDay = new DateTime(2016, 8, 31)
+        };
 
         protected override void SetUpDataAccess()
         {
             _appSettings = Substitute.For<IAppSettings>();
-            DataAccess = Substitute.ForPartsOf<MatchDataAccess>(Substitute.For<ICacheRefAdapter>(), _appSettings);
+            _balanceUpDataAccess = Substitute.For<IBalanceUpDataAccess>();
+            _balanceUpDataAccess.GetBalanceUp().Returns(_balance);
+            DataAccess = Substitute.ForPartsOf<MatchDataAccess>(Substitute.For<ICacheRefAdapter>(), _appSettings, _balanceUpDataAccess);
         }
 
         [TestCase(1)]

@@ -7,9 +7,10 @@
     using Base.UnitTests;
 
     using DataAccess.Report.Interfaces;
-
+    using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
     using Fanex.Athena.Excel.Report;
     using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Core.DTO.Configuration;
     using Fanex.Athena.Service.Core.Utility.Interfaces;
 
     using Model.Core.ResultModel;
@@ -27,6 +28,13 @@
         private IThirdPartyWinLossDataAccess<ThirdPartyWinLoss> _dataAccess;
         private AgCasinoWinLossReportController _controller;
         private ICurrencyValidation _currencyValidation;
+        private IBalanceUpDataAccess _balanceUpDataAccess;
+
+        private readonly BalanceUp _balance = new BalanceUp
+        {
+            MoveBetsDay = new DateTime(2016, 8, 10),
+            BalanceUpDay = new DateTime(2016, 8, 31)
+        };
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
@@ -42,6 +50,9 @@
             _currencyValidation = Substitute.For<ICurrencyValidation>();
             _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
 
+            _balanceUpDataAccess = Substitute.For<IBalanceUpDataAccess>();
+            _balanceUpDataAccess.GetBalanceUp().Returns(_balance);
+
             _dataAccess = Substitute.For<IThirdPartyWinLossDataAccess<ThirdPartyWinLoss>>();
             CreateController();
             StubUserSessionData(new UserAuthInfo
@@ -55,7 +66,7 @@
         private void CreateController()
         {
             _controller = Substitute.ForPartsOf<AgCasinoWinLossReportController>(_dataAccess,
-                LangService, _currencyValidation);
+                LangService, _currencyValidation, _balanceUpDataAccess);
             _controller.SessionService = SessionService;
             _controller.ProductService = ProductService;
             _controller.When(x => x.ExcelStream(Arg.Any<IWorkbook>(), Arg.Any<string>())).DoNotCallBase();
@@ -71,6 +82,7 @@
         public void TearDown()
         {
             _currencyValidation = null;
+            _balanceUpDataAccess = null;
             SessionService.ClearReceivedCalls();
             _dataAccess.ClearReceivedCalls();
             _dataAccess = null;
