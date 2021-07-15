@@ -1,4 +1,4 @@
-﻿// Generated at: 5/31/2021 5:30:28 PM
+﻿// Generated at: 7/1/2021 2:46:03 PM
 var _language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -557,6 +557,7 @@ Product:"产品",
 ProductAB:"欧博",
 ProductBGG:"大遊真人",
 ProductCC:"乐卡迪亚",
+ProductCG:"CG电子",
 ProductCO:"即时兑现",
 ProductCS:"娱乐城",
 ProductFW:"GG捕鱼",

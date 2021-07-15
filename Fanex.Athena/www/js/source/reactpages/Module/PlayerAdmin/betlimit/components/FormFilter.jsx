@@ -17,6 +17,7 @@ const FormFilter = (props) => {
             const param = Object.assign({}, props.requestParam, { ProductId: item.value });
 
             props.setRequestParam(param);
+            props.setProductLabel(item.label);
         }       
     }
 
@@ -38,8 +39,8 @@ const FormFilter = (props) => {
 }
 
 function mapDispatchToProps(dispatch) {
-    const { setRequestParam } = ActionCreators;
-    return bindActionCreators({ setRequestParam }, dispatch);
+    const { setRequestParam, setProductLabel } = ActionCreators;
+    return bindActionCreators({ setRequestParam, setProductLabel }, dispatch);
 }
 function mapStateToProps(state) {
     const { requestParam } = state;

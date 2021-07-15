@@ -1,6 +1,7 @@
 ﻿namespace Fanex.Athena.Module.PlayerAdmin.Controllers
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Fanex.Athena.Model.Auth.DataDomain;
@@ -11,10 +12,16 @@
     using Fanex.Athena.Resources;
     using Fanex.Athena.Web.ActionFilter;
 
-    [ValidateProductPermission(limitedProductIds: new[] { ProductTypes.VirtualSports, ProductTypes.VirtualSports2, ProductTypes.Lottery, ProductTypes.TG, ProductTypes.I4D, ProductTypes.SLT })]
+    [ValidateProductPermission(limitedProductIds: new[] { ProductTypes.VirtualSports, ProductTypes.VirtualSports2, ProductTypes.Lottery, ProductTypes.TG, ProductTypes.I4D, ProductTypes.SLT,
+            ProductTypes.CG })]
     public class DcsBetLimitController : PlayerBetLimitBaseControler
     {
         private readonly IDcsBetLimitService _service;
+
+        private static readonly IEnumerable<int> ProductsHasStatus = new[]
+        {
+            ProductTypes.CG
+        };
 
         public DcsBetLimitController(
             IDcsBetLimitService dcsBetLimitService)
@@ -36,7 +43,9 @@
             var viewModel = new PlayerBetLimitViewModel
             {
                 Data = AddSettingTypeName(await data),
-                Editable = isEditable && await status
+                Editable = isEditable && await status,
+                IsStatusEnable = ProductsHasStatus.Contains(metaModel.ProductId),
+                StatusEnable = await status
             };
 
             return Json(viewModel);
@@ -51,6 +60,21 @@
         public async Task<JsonResult> UpdateSetting(PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>> metaModel)
         {
             var result = await _service.UpdateSettingAsync(metaModel).ConfigureAwait(false);
+
+            result.Message = result.Code == 0 ? ViewResources.UpdateSuccess : result.Message;
+
+            return Json(result);
+        }
+
+        [HttpPost]
+        [AjaxRequest]
+        [ValidationWebRequest(HandlingAjaxRequestWithJsonResult = true)]
+        [AutoBindMetaModel(BindIp = true, BindLanguage = true, BindSiteName = true, BindUserId = true)]
+        [ValidatePermissionOnData(isObject: true)]
+        [FunctionAuthorization(PermissionKeys.PlayerAdminBetLimit_Write)]
+        public async Task<JsonResult> UpdateStatus(PlayerBetLimitProductStatusUpdateMetaModel metaModel)
+        {
+            var result = await _service.UpdateStatusAsync(metaModel);
 
             result.Message = result.Code == 0 ? ViewResources.UpdateSuccess : result.Message;
 

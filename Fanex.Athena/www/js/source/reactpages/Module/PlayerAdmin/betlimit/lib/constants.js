@@ -8,7 +8,8 @@ export const BetLimitProduct = {
     AGC: 10,
     TG: 40,
     I4D: 43,
-    SLT: 63
+    SLT: 63,
+    CG: 62
 }
 
 export const BetLimitSport = {

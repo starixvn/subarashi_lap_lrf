@@ -168,6 +168,14 @@ namespace Fanex.Athena.Model.Core.DTO.Common
             }
         }
 
+        public bool IsAllowCG
+        {
+            get
+            {
+                return ProductList.Any(p => p.ProductCode == Product.CG);
+            }
+        }
+
         public bool IsAllowAB
         {
             get

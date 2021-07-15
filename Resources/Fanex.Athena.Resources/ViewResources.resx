@@ -3050,4 +3050,10 @@
   <data name="MessageTurnOffVIPError" xml:space="preserve">
     <value>VIP players are not allowed to turn on BA.</value>
   </data>
+  <data name="ProductCG" xml:space="preserve">
+    <value>CG</value>
+  </data>
+  <data name="UpdateProductStatus" xml:space="preserve">
+    <value>Are you sure you want to update {0} status?</value>
+  </data>
 </root>

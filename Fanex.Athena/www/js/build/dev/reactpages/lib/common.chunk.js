@@ -370,12 +370,10 @@ function _extends() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _inheritsLoose; });
-/* harmony import */ var _setPrototypeOf_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./setPrototypeOf.js */ "./node_modules/@babel/runtime/helpers/esm/setPrototypeOf.js");
-
 function _inheritsLoose(subClass, superClass) {
   subClass.prototype = Object.create(superClass.prototype);
   subClass.prototype.constructor = subClass;
-  Object(_setPrototypeOf_js__WEBPACK_IMPORTED_MODULE_0__["default"])(subClass, superClass);
+  subClass.__proto__ = superClass;
 }
 
 /***/ }),
@@ -403,27 +401,6 @@ function _objectWithoutPropertiesLoose(source, excluded) {
   }
 
   return target;
-}
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/helpers/esm/setPrototypeOf.js":
-/*!*******************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/esm/setPrototypeOf.js ***!
-  \*******************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _setPrototypeOf; });
-function _setPrototypeOf(o, p) {
-  _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
-    o.__proto__ = p;
-    return o;
-  };
-
-  return _setPrototypeOf(o, p);
 }
 
 /***/ }),
@@ -649,8 +626,6 @@ exports.assertPrivateName = assertPrivateName;
 exports.assertRecordExpression = assertRecordExpression;
 exports.assertTupleExpression = assertTupleExpression;
 exports.assertDecimalLiteral = assertDecimalLiteral;
-exports.assertStaticBlock = assertStaticBlock;
-exports.assertModuleExpression = assertModuleExpression;
 exports.assertTSParameterProperty = assertTSParameterProperty;
 exports.assertTSDeclareFunction = assertTSDeclareFunction;
 exports.assertTSDeclareMethod = assertTSDeclareMethod;
@@ -663,7 +638,6 @@ exports.assertTSIndexSignature = assertTSIndexSignature;
 exports.assertTSAnyKeyword = assertTSAnyKeyword;
 exports.assertTSBooleanKeyword = assertTSBooleanKeyword;
 exports.assertTSBigIntKeyword = assertTSBigIntKeyword;
-exports.assertTSIntrinsicKeyword = assertTSIntrinsicKeyword;
 exports.assertTSNeverKeyword = assertTSNeverKeyword;
 exports.assertTSNullKeyword = assertTSNullKeyword;
 exports.assertTSNumberKeyword = assertTSNumberKeyword;
@@ -774,1155 +748,1143 @@ function assert(type, node, opts) {
   }
 }
 
-function assertArrayExpression(node, opts) {
+function assertArrayExpression(node, opts = {}) {
   assert("ArrayExpression", node, opts);
 }
 
-function assertAssignmentExpression(node, opts) {
+function assertAssignmentExpression(node, opts = {}) {
   assert("AssignmentExpression", node, opts);
 }
 
-function assertBinaryExpression(node, opts) {
+function assertBinaryExpression(node, opts = {}) {
   assert("BinaryExpression", node, opts);
 }
 
-function assertInterpreterDirective(node, opts) {
+function assertInterpreterDirective(node, opts = {}) {
   assert("InterpreterDirective", node, opts);
 }
 
-function assertDirective(node, opts) {
+function assertDirective(node, opts = {}) {
   assert("Directive", node, opts);
 }
 
-function assertDirectiveLiteral(node, opts) {
+function assertDirectiveLiteral(node, opts = {}) {
   assert("DirectiveLiteral", node, opts);
 }
 
-function assertBlockStatement(node, opts) {
+function assertBlockStatement(node, opts = {}) {
   assert("BlockStatement", node, opts);
 }
 
-function assertBreakStatement(node, opts) {
+function assertBreakStatement(node, opts = {}) {
   assert("BreakStatement", node, opts);
 }
 
-function assertCallExpression(node, opts) {
+function assertCallExpression(node, opts = {}) {
   assert("CallExpression", node, opts);
 }
 
-function assertCatchClause(node, opts) {
+function assertCatchClause(node, opts = {}) {
   assert("CatchClause", node, opts);
 }
 
-function assertConditionalExpression(node, opts) {
+function assertConditionalExpression(node, opts = {}) {
   assert("ConditionalExpression", node, opts);
 }
 
-function assertContinueStatement(node, opts) {
+function assertContinueStatement(node, opts = {}) {
   assert("ContinueStatement", node, opts);
 }
 
-function assertDebuggerStatement(node, opts) {
+function assertDebuggerStatement(node, opts = {}) {
   assert("DebuggerStatement", node, opts);
 }
 
-function assertDoWhileStatement(node, opts) {
+function assertDoWhileStatement(node, opts = {}) {
   assert("DoWhileStatement", node, opts);
 }
 
-function assertEmptyStatement(node, opts) {
+function assertEmptyStatement(node, opts = {}) {
   assert("EmptyStatement", node, opts);
 }
 
-function assertExpressionStatement(node, opts) {
+function assertExpressionStatement(node, opts = {}) {
   assert("ExpressionStatement", node, opts);
 }
 
-function assertFile(node, opts) {
+function assertFile(node, opts = {}) {
   assert("File", node, opts);
 }
 
-function assertForInStatement(node, opts) {
+function assertForInStatement(node, opts = {}) {
   assert("ForInStatement", node, opts);
 }
 
-function assertForStatement(node, opts) {
+function assertForStatement(node, opts = {}) {
   assert("ForStatement", node, opts);
 }
 
-function assertFunctionDeclaration(node, opts) {
+function assertFunctionDeclaration(node, opts = {}) {
   assert("FunctionDeclaration", node, opts);
 }
 
-function assertFunctionExpression(node, opts) {
+function assertFunctionExpression(node, opts = {}) {
   assert("FunctionExpression", node, opts);
 }
 
-function assertIdentifier(node, opts) {
+function assertIdentifier(node, opts = {}) {
   assert("Identifier", node, opts);
 }
 
-function assertIfStatement(node, opts) {
+function assertIfStatement(node, opts = {}) {
   assert("IfStatement", node, opts);
 }
 
-function assertLabeledStatement(node, opts) {
+function assertLabeledStatement(node, opts = {}) {
   assert("LabeledStatement", node, opts);
 }
 
-function assertStringLiteral(node, opts) {
+function assertStringLiteral(node, opts = {}) {
   assert("StringLiteral", node, opts);
 }
 
-function assertNumericLiteral(node, opts) {
+function assertNumericLiteral(node, opts = {}) {
   assert("NumericLiteral", node, opts);
 }
 
-function assertNullLiteral(node, opts) {
+function assertNullLiteral(node, opts = {}) {
   assert("NullLiteral", node, opts);
 }
 
-function assertBooleanLiteral(node, opts) {
+function assertBooleanLiteral(node, opts = {}) {
   assert("BooleanLiteral", node, opts);
 }
 
-function assertRegExpLiteral(node, opts) {
+function assertRegExpLiteral(node, opts = {}) {
   assert("RegExpLiteral", node, opts);
 }
 
-function assertLogicalExpression(node, opts) {
+function assertLogicalExpression(node, opts = {}) {
   assert("LogicalExpression", node, opts);
 }
 
-function assertMemberExpression(node, opts) {
+function assertMemberExpression(node, opts = {}) {
   assert("MemberExpression", node, opts);
 }
 
-function assertNewExpression(node, opts) {
+function assertNewExpression(node, opts = {}) {
   assert("NewExpression", node, opts);
 }
 
-function assertProgram(node, opts) {
+function assertProgram(node, opts = {}) {
   assert("Program", node, opts);
 }
 
-function assertObjectExpression(node, opts) {
+function assertObjectExpression(node, opts = {}) {
   assert("ObjectExpression", node, opts);
 }
 
-function assertObjectMethod(node, opts) {
+function assertObjectMethod(node, opts = {}) {
   assert("ObjectMethod", node, opts);
 }
 
-function assertObjectProperty(node, opts) {
+function assertObjectProperty(node, opts = {}) {
   assert("ObjectProperty", node, opts);
 }
 
-function assertRestElement(node, opts) {
+function assertRestElement(node, opts = {}) {
   assert("RestElement", node, opts);
 }
 
-function assertReturnStatement(node, opts) {
+function assertReturnStatement(node, opts = {}) {
   assert("ReturnStatement", node, opts);
 }
 
-function assertSequenceExpression(node, opts) {
+function assertSequenceExpression(node, opts = {}) {
   assert("SequenceExpression", node, opts);
 }
 
-function assertParenthesizedExpression(node, opts) {
+function assertParenthesizedExpression(node, opts = {}) {
   assert("ParenthesizedExpression", node, opts);
 }
 
-function assertSwitchCase(node, opts) {
+function assertSwitchCase(node, opts = {}) {
   assert("SwitchCase", node, opts);
 }
 
-function assertSwitchStatement(node, opts) {
+function assertSwitchStatement(node, opts = {}) {
   assert("SwitchStatement", node, opts);
 }
 
-function assertThisExpression(node, opts) {
+function assertThisExpression(node, opts = {}) {
   assert("ThisExpression", node, opts);
 }
 
-function assertThrowStatement(node, opts) {
+function assertThrowStatement(node, opts = {}) {
   assert("ThrowStatement", node, opts);
 }
 
-function assertTryStatement(node, opts) {
+function assertTryStatement(node, opts = {}) {
   assert("TryStatement", node, opts);
 }
 
-function assertUnaryExpression(node, opts) {
+function assertUnaryExpression(node, opts = {}) {
   assert("UnaryExpression", node, opts);
 }
 
-function assertUpdateExpression(node, opts) {
+function assertUpdateExpression(node, opts = {}) {
   assert("UpdateExpression", node, opts);
 }
 
-function assertVariableDeclaration(node, opts) {
+function assertVariableDeclaration(node, opts = {}) {
   assert("VariableDeclaration", node, opts);
 }
 
-function assertVariableDeclarator(node, opts) {
+function assertVariableDeclarator(node, opts = {}) {
   assert("VariableDeclarator", node, opts);
 }
 
-function assertWhileStatement(node, opts) {
+function assertWhileStatement(node, opts = {}) {
   assert("WhileStatement", node, opts);
 }
 
-function assertWithStatement(node, opts) {
+function assertWithStatement(node, opts = {}) {
   assert("WithStatement", node, opts);
 }
 
-function assertAssignmentPattern(node, opts) {
+function assertAssignmentPattern(node, opts = {}) {
   assert("AssignmentPattern", node, opts);
 }
 
-function assertArrayPattern(node, opts) {
+function assertArrayPattern(node, opts = {}) {
   assert("ArrayPattern", node, opts);
 }
 
-function assertArrowFunctionExpression(node, opts) {
+function assertArrowFunctionExpression(node, opts = {}) {
   assert("ArrowFunctionExpression", node, opts);
 }
 
-function assertClassBody(node, opts) {
+function assertClassBody(node, opts = {}) {
   assert("ClassBody", node, opts);
 }
 
-function assertClassExpression(node, opts) {
+function assertClassExpression(node, opts = {}) {
   assert("ClassExpression", node, opts);
 }
 
-function assertClassDeclaration(node, opts) {
+function assertClassDeclaration(node, opts = {}) {
   assert("ClassDeclaration", node, opts);
 }
 
-function assertExportAllDeclaration(node, opts) {
+function assertExportAllDeclaration(node, opts = {}) {
   assert("ExportAllDeclaration", node, opts);
 }
 
-function assertExportDefaultDeclaration(node, opts) {
+function assertExportDefaultDeclaration(node, opts = {}) {
   assert("ExportDefaultDeclaration", node, opts);
 }
 
-function assertExportNamedDeclaration(node, opts) {
+function assertExportNamedDeclaration(node, opts = {}) {
   assert("ExportNamedDeclaration", node, opts);
 }
 
-function assertExportSpecifier(node, opts) {
+function assertExportSpecifier(node, opts = {}) {
   assert("ExportSpecifier", node, opts);
 }
 
-function assertForOfStatement(node, opts) {
+function assertForOfStatement(node, opts = {}) {
   assert("ForOfStatement", node, opts);
 }
 
-function assertImportDeclaration(node, opts) {
+function assertImportDeclaration(node, opts = {}) {
   assert("ImportDeclaration", node, opts);
 }
 
-function assertImportDefaultSpecifier(node, opts) {
+function assertImportDefaultSpecifier(node, opts = {}) {
   assert("ImportDefaultSpecifier", node, opts);
 }
 
-function assertImportNamespaceSpecifier(node, opts) {
+function assertImportNamespaceSpecifier(node, opts = {}) {
   assert("ImportNamespaceSpecifier", node, opts);
 }
 
-function assertImportSpecifier(node, opts) {
+function assertImportSpecifier(node, opts = {}) {
   assert("ImportSpecifier", node, opts);
 }
 
-function assertMetaProperty(node, opts) {
+function assertMetaProperty(node, opts = {}) {
   assert("MetaProperty", node, opts);
 }
 
-function assertClassMethod(node, opts) {
+function assertClassMethod(node, opts = {}) {
   assert("ClassMethod", node, opts);
 }
 
-function assertObjectPattern(node, opts) {
+function assertObjectPattern(node, opts = {}) {
   assert("ObjectPattern", node, opts);
 }
 
-function assertSpreadElement(node, opts) {
+function assertSpreadElement(node, opts = {}) {
   assert("SpreadElement", node, opts);
 }
 
-function assertSuper(node, opts) {
+function assertSuper(node, opts = {}) {
   assert("Super", node, opts);
 }
 
-function assertTaggedTemplateExpression(node, opts) {
+function assertTaggedTemplateExpression(node, opts = {}) {
   assert("TaggedTemplateExpression", node, opts);
 }
 
-function assertTemplateElement(node, opts) {
+function assertTemplateElement(node, opts = {}) {
   assert("TemplateElement", node, opts);
 }
 
-function assertTemplateLiteral(node, opts) {
+function assertTemplateLiteral(node, opts = {}) {
   assert("TemplateLiteral", node, opts);
 }
 
-function assertYieldExpression(node, opts) {
+function assertYieldExpression(node, opts = {}) {
   assert("YieldExpression", node, opts);
 }
 
-function assertAwaitExpression(node, opts) {
+function assertAwaitExpression(node, opts = {}) {
   assert("AwaitExpression", node, opts);
 }
 
-function assertImport(node, opts) {
+function assertImport(node, opts = {}) {
   assert("Import", node, opts);
 }
 
-function assertBigIntLiteral(node, opts) {
+function assertBigIntLiteral(node, opts = {}) {
   assert("BigIntLiteral", node, opts);
 }
 
-function assertExportNamespaceSpecifier(node, opts) {
+function assertExportNamespaceSpecifier(node, opts = {}) {
   assert("ExportNamespaceSpecifier", node, opts);
 }
 
-function assertOptionalMemberExpression(node, opts) {
+function assertOptionalMemberExpression(node, opts = {}) {
   assert("OptionalMemberExpression", node, opts);
 }
 
-function assertOptionalCallExpression(node, opts) {
+function assertOptionalCallExpression(node, opts = {}) {
   assert("OptionalCallExpression", node, opts);
 }
 
-function assertAnyTypeAnnotation(node, opts) {
+function assertAnyTypeAnnotation(node, opts = {}) {
   assert("AnyTypeAnnotation", node, opts);
 }
 
-function assertArrayTypeAnnotation(node, opts) {
+function assertArrayTypeAnnotation(node, opts = {}) {
   assert("ArrayTypeAnnotation", node, opts);
 }
 
-function assertBooleanTypeAnnotation(node, opts) {
+function assertBooleanTypeAnnotation(node, opts = {}) {
   assert("BooleanTypeAnnotation", node, opts);
 }
 
-function assertBooleanLiteralTypeAnnotation(node, opts) {
+function assertBooleanLiteralTypeAnnotation(node, opts = {}) {
   assert("BooleanLiteralTypeAnnotation", node, opts);
 }
 
-function assertNullLiteralTypeAnnotation(node, opts) {
+function assertNullLiteralTypeAnnotation(node, opts = {}) {
   assert("NullLiteralTypeAnnotation", node, opts);
 }
 
-function assertClassImplements(node, opts) {
+function assertClassImplements(node, opts = {}) {
   assert("ClassImplements", node, opts);
 }
 
-function assertDeclareClass(node, opts) {
+function assertDeclareClass(node, opts = {}) {
   assert("DeclareClass", node, opts);
 }
 
-function assertDeclareFunction(node, opts) {
+function assertDeclareFunction(node, opts = {}) {
   assert("DeclareFunction", node, opts);
 }
 
-function assertDeclareInterface(node, opts) {
+function assertDeclareInterface(node, opts = {}) {
   assert("DeclareInterface", node, opts);
 }
 
-function assertDeclareModule(node, opts) {
+function assertDeclareModule(node, opts = {}) {
   assert("DeclareModule", node, opts);
 }
 
-function assertDeclareModuleExports(node, opts) {
+function assertDeclareModuleExports(node, opts = {}) {
   assert("DeclareModuleExports", node, opts);
 }
 
-function assertDeclareTypeAlias(node, opts) {
+function assertDeclareTypeAlias(node, opts = {}) {
   assert("DeclareTypeAlias", node, opts);
 }
 
-function assertDeclareOpaqueType(node, opts) {
+function assertDeclareOpaqueType(node, opts = {}) {
   assert("DeclareOpaqueType", node, opts);
 }
 
-function assertDeclareVariable(node, opts) {
+function assertDeclareVariable(node, opts = {}) {
   assert("DeclareVariable", node, opts);
 }
 
-function assertDeclareExportDeclaration(node, opts) {
+function assertDeclareExportDeclaration(node, opts = {}) {
   assert("DeclareExportDeclaration", node, opts);
 }
 
-function assertDeclareExportAllDeclaration(node, opts) {
+function assertDeclareExportAllDeclaration(node, opts = {}) {
   assert("DeclareExportAllDeclaration", node, opts);
 }
 
-function assertDeclaredPredicate(node, opts) {
+function assertDeclaredPredicate(node, opts = {}) {
   assert("DeclaredPredicate", node, opts);
 }
 
-function assertExistsTypeAnnotation(node, opts) {
+function assertExistsTypeAnnotation(node, opts = {}) {
   assert("ExistsTypeAnnotation", node, opts);
 }
 
-function assertFunctionTypeAnnotation(node, opts) {
+function assertFunctionTypeAnnotation(node, opts = {}) {
   assert("FunctionTypeAnnotation", node, opts);
 }
 
-function assertFunctionTypeParam(node, opts) {
+function assertFunctionTypeParam(node, opts = {}) {
   assert("FunctionTypeParam", node, opts);
 }
 
-function assertGenericTypeAnnotation(node, opts) {
+function assertGenericTypeAnnotation(node, opts = {}) {
   assert("GenericTypeAnnotation", node, opts);
 }
 
-function assertInferredPredicate(node, opts) {
+function assertInferredPredicate(node, opts = {}) {
   assert("InferredPredicate", node, opts);
 }
 
-function assertInterfaceExtends(node, opts) {
+function assertInterfaceExtends(node, opts = {}) {
   assert("InterfaceExtends", node, opts);
 }
 
-function assertInterfaceDeclaration(node, opts) {
+function assertInterfaceDeclaration(node, opts = {}) {
   assert("InterfaceDeclaration", node, opts);
 }
 
-function assertInterfaceTypeAnnotation(node, opts) {
+function assertInterfaceTypeAnnotation(node, opts = {}) {
   assert("InterfaceTypeAnnotation", node, opts);
 }
 
-function assertIntersectionTypeAnnotation(node, opts) {
+function assertIntersectionTypeAnnotation(node, opts = {}) {
   assert("IntersectionTypeAnnotation", node, opts);
 }
 
-function assertMixedTypeAnnotation(node, opts) {
+function assertMixedTypeAnnotation(node, opts = {}) {
   assert("MixedTypeAnnotation", node, opts);
 }
 
-function assertEmptyTypeAnnotation(node, opts) {
+function assertEmptyTypeAnnotation(node, opts = {}) {
   assert("EmptyTypeAnnotation", node, opts);
 }
 
-function assertNullableTypeAnnotation(node, opts) {
+function assertNullableTypeAnnotation(node, opts = {}) {
   assert("NullableTypeAnnotation", node, opts);
 }
 
-function assertNumberLiteralTypeAnnotation(node, opts) {
+function assertNumberLiteralTypeAnnotation(node, opts = {}) {
   assert("NumberLiteralTypeAnnotation", node, opts);
 }
 
-function assertNumberTypeAnnotation(node, opts) {
+function assertNumberTypeAnnotation(node, opts = {}) {
   assert("NumberTypeAnnotation", node, opts);
 }
 
-function assertObjectTypeAnnotation(node, opts) {
+function assertObjectTypeAnnotation(node, opts = {}) {
   assert("ObjectTypeAnnotation", node, opts);
 }
 
-function assertObjectTypeInternalSlot(node, opts) {
+function assertObjectTypeInternalSlot(node, opts = {}) {
   assert("ObjectTypeInternalSlot", node, opts);
 }
 
-function assertObjectTypeCallProperty(node, opts) {
+function assertObjectTypeCallProperty(node, opts = {}) {
   assert("ObjectTypeCallProperty", node, opts);
 }
 
-function assertObjectTypeIndexer(node, opts) {
+function assertObjectTypeIndexer(node, opts = {}) {
   assert("ObjectTypeIndexer", node, opts);
 }
 
-function assertObjectTypeProperty(node, opts) {
+function assertObjectTypeProperty(node, opts = {}) {
   assert("ObjectTypeProperty", node, opts);
 }
 
-function assertObjectTypeSpreadProperty(node, opts) {
+function assertObjectTypeSpreadProperty(node, opts = {}) {
   assert("ObjectTypeSpreadProperty", node, opts);
 }
 
-function assertOpaqueType(node, opts) {
+function assertOpaqueType(node, opts = {}) {
   assert("OpaqueType", node, opts);
 }
 
-function assertQualifiedTypeIdentifier(node, opts) {
+function assertQualifiedTypeIdentifier(node, opts = {}) {
   assert("QualifiedTypeIdentifier", node, opts);
 }
 
-function assertStringLiteralTypeAnnotation(node, opts) {
+function assertStringLiteralTypeAnnotation(node, opts = {}) {
   assert("StringLiteralTypeAnnotation", node, opts);
 }
 
-function assertStringTypeAnnotation(node, opts) {
+function assertStringTypeAnnotation(node, opts = {}) {
   assert("StringTypeAnnotation", node, opts);
 }
 
-function assertSymbolTypeAnnotation(node, opts) {
+function assertSymbolTypeAnnotation(node, opts = {}) {
   assert("SymbolTypeAnnotation", node, opts);
 }
 
-function assertThisTypeAnnotation(node, opts) {
+function assertThisTypeAnnotation(node, opts = {}) {
   assert("ThisTypeAnnotation", node, opts);
 }
 
-function assertTupleTypeAnnotation(node, opts) {
+function assertTupleTypeAnnotation(node, opts = {}) {
   assert("TupleTypeAnnotation", node, opts);
 }
 
-function assertTypeofTypeAnnotation(node, opts) {
+function assertTypeofTypeAnnotation(node, opts = {}) {
   assert("TypeofTypeAnnotation", node, opts);
 }
 
-function assertTypeAlias(node, opts) {
+function assertTypeAlias(node, opts = {}) {
   assert("TypeAlias", node, opts);
 }
 
-function assertTypeAnnotation(node, opts) {
+function assertTypeAnnotation(node, opts = {}) {
   assert("TypeAnnotation", node, opts);
 }
 
-function assertTypeCastExpression(node, opts) {
+function assertTypeCastExpression(node, opts = {}) {
   assert("TypeCastExpression", node, opts);
 }
 
-function assertTypeParameter(node, opts) {
+function assertTypeParameter(node, opts = {}) {
   assert("TypeParameter", node, opts);
 }
 
-function assertTypeParameterDeclaration(node, opts) {
+function assertTypeParameterDeclaration(node, opts = {}) {
   assert("TypeParameterDeclaration", node, opts);
 }
 
-function assertTypeParameterInstantiation(node, opts) {
+function assertTypeParameterInstantiation(node, opts = {}) {
   assert("TypeParameterInstantiation", node, opts);
 }
 
-function assertUnionTypeAnnotation(node, opts) {
+function assertUnionTypeAnnotation(node, opts = {}) {
   assert("UnionTypeAnnotation", node, opts);
 }
 
-function assertVariance(node, opts) {
+function assertVariance(node, opts = {}) {
   assert("Variance", node, opts);
 }
 
-function assertVoidTypeAnnotation(node, opts) {
+function assertVoidTypeAnnotation(node, opts = {}) {
   assert("VoidTypeAnnotation", node, opts);
 }
 
-function assertEnumDeclaration(node, opts) {
+function assertEnumDeclaration(node, opts = {}) {
   assert("EnumDeclaration", node, opts);
 }
 
-function assertEnumBooleanBody(node, opts) {
+function assertEnumBooleanBody(node, opts = {}) {
   assert("EnumBooleanBody", node, opts);
 }
 
-function assertEnumNumberBody(node, opts) {
+function assertEnumNumberBody(node, opts = {}) {
   assert("EnumNumberBody", node, opts);
 }
 
-function assertEnumStringBody(node, opts) {
+function assertEnumStringBody(node, opts = {}) {
   assert("EnumStringBody", node, opts);
 }
 
-function assertEnumSymbolBody(node, opts) {
+function assertEnumSymbolBody(node, opts = {}) {
   assert("EnumSymbolBody", node, opts);
 }
 
-function assertEnumBooleanMember(node, opts) {
+function assertEnumBooleanMember(node, opts = {}) {
   assert("EnumBooleanMember", node, opts);
 }
 
-function assertEnumNumberMember(node, opts) {
+function assertEnumNumberMember(node, opts = {}) {
   assert("EnumNumberMember", node, opts);
 }
 
-function assertEnumStringMember(node, opts) {
+function assertEnumStringMember(node, opts = {}) {
   assert("EnumStringMember", node, opts);
 }
 
-function assertEnumDefaultedMember(node, opts) {
+function assertEnumDefaultedMember(node, opts = {}) {
   assert("EnumDefaultedMember", node, opts);
 }
 
-function assertJSXAttribute(node, opts) {
+function assertJSXAttribute(node, opts = {}) {
   assert("JSXAttribute", node, opts);
 }
 
-function assertJSXClosingElement(node, opts) {
+function assertJSXClosingElement(node, opts = {}) {
   assert("JSXClosingElement", node, opts);
 }
 
-function assertJSXElement(node, opts) {
+function assertJSXElement(node, opts = {}) {
   assert("JSXElement", node, opts);
 }
 
-function assertJSXEmptyExpression(node, opts) {
+function assertJSXEmptyExpression(node, opts = {}) {
   assert("JSXEmptyExpression", node, opts);
 }
 
-function assertJSXExpressionContainer(node, opts) {
+function assertJSXExpressionContainer(node, opts = {}) {
   assert("JSXExpressionContainer", node, opts);
 }
 
-function assertJSXSpreadChild(node, opts) {
+function assertJSXSpreadChild(node, opts = {}) {
   assert("JSXSpreadChild", node, opts);
 }
 
-function assertJSXIdentifier(node, opts) {
+function assertJSXIdentifier(node, opts = {}) {
   assert("JSXIdentifier", node, opts);
 }
 
-function assertJSXMemberExpression(node, opts) {
+function assertJSXMemberExpression(node, opts = {}) {
   assert("JSXMemberExpression", node, opts);
 }
 
-function assertJSXNamespacedName(node, opts) {
+function assertJSXNamespacedName(node, opts = {}) {
   assert("JSXNamespacedName", node, opts);
 }
 
-function assertJSXOpeningElement(node, opts) {
+function assertJSXOpeningElement(node, opts = {}) {
   assert("JSXOpeningElement", node, opts);
 }
 
-function assertJSXSpreadAttribute(node, opts) {
+function assertJSXSpreadAttribute(node, opts = {}) {
   assert("JSXSpreadAttribute", node, opts);
 }
 
-function assertJSXText(node, opts) {
+function assertJSXText(node, opts = {}) {
   assert("JSXText", node, opts);
 }
 
-function assertJSXFragment(node, opts) {
+function assertJSXFragment(node, opts = {}) {
   assert("JSXFragment", node, opts);
 }
 
-function assertJSXOpeningFragment(node, opts) {
+function assertJSXOpeningFragment(node, opts = {}) {
   assert("JSXOpeningFragment", node, opts);
 }
 
-function assertJSXClosingFragment(node, opts) {
+function assertJSXClosingFragment(node, opts = {}) {
   assert("JSXClosingFragment", node, opts);
 }
 
-function assertNoop(node, opts) {
+function assertNoop(node, opts = {}) {
   assert("Noop", node, opts);
 }
 
-function assertPlaceholder(node, opts) {
+function assertPlaceholder(node, opts = {}) {
   assert("Placeholder", node, opts);
 }
 
-function assertV8IntrinsicIdentifier(node, opts) {
+function assertV8IntrinsicIdentifier(node, opts = {}) {
   assert("V8IntrinsicIdentifier", node, opts);
 }
 
-function assertArgumentPlaceholder(node, opts) {
+function assertArgumentPlaceholder(node, opts = {}) {
   assert("ArgumentPlaceholder", node, opts);
 }
 
-function assertBindExpression(node, opts) {
+function assertBindExpression(node, opts = {}) {
   assert("BindExpression", node, opts);
 }
 
-function assertClassProperty(node, opts) {
+function assertClassProperty(node, opts = {}) {
   assert("ClassProperty", node, opts);
 }
 
-function assertPipelineTopicExpression(node, opts) {
+function assertPipelineTopicExpression(node, opts = {}) {
   assert("PipelineTopicExpression", node, opts);
 }
 
-function assertPipelineBareFunction(node, opts) {
+function assertPipelineBareFunction(node, opts = {}) {
   assert("PipelineBareFunction", node, opts);
 }
 
-function assertPipelinePrimaryTopicReference(node, opts) {
+function assertPipelinePrimaryTopicReference(node, opts = {}) {
   assert("PipelinePrimaryTopicReference", node, opts);
 }
 
-function assertClassPrivateProperty(node, opts) {
+function assertClassPrivateProperty(node, opts = {}) {
   assert("ClassPrivateProperty", node, opts);
 }
 
-function assertClassPrivateMethod(node, opts) {
+function assertClassPrivateMethod(node, opts = {}) {
   assert("ClassPrivateMethod", node, opts);
 }
 
-function assertImportAttribute(node, opts) {
+function assertImportAttribute(node, opts = {}) {
   assert("ImportAttribute", node, opts);
 }
 
-function assertDecorator(node, opts) {
+function assertDecorator(node, opts = {}) {
   assert("Decorator", node, opts);
 }
 
-function assertDoExpression(node, opts) {
+function assertDoExpression(node, opts = {}) {
   assert("DoExpression", node, opts);
 }
 
-function assertExportDefaultSpecifier(node, opts) {
+function assertExportDefaultSpecifier(node, opts = {}) {
   assert("ExportDefaultSpecifier", node, opts);
 }
 
-function assertPrivateName(node, opts) {
+function assertPrivateName(node, opts = {}) {
   assert("PrivateName", node, opts);
 }
 
-function assertRecordExpression(node, opts) {
+function assertRecordExpression(node, opts = {}) {
   assert("RecordExpression", node, opts);
 }
 
-function assertTupleExpression(node, opts) {
+function assertTupleExpression(node, opts = {}) {
   assert("TupleExpression", node, opts);
 }
 
-function assertDecimalLiteral(node, opts) {
+function assertDecimalLiteral(node, opts = {}) {
   assert("DecimalLiteral", node, opts);
 }
 
-function assertStaticBlock(node, opts) {
-  assert("StaticBlock", node, opts);
-}
-
-function assertModuleExpression(node, opts) {
-  assert("ModuleExpression", node, opts);
-}
-
-function assertTSParameterProperty(node, opts) {
+function assertTSParameterProperty(node, opts = {}) {
   assert("TSParameterProperty", node, opts);
 }
 
-function assertTSDeclareFunction(node, opts) {
+function assertTSDeclareFunction(node, opts = {}) {
   assert("TSDeclareFunction", node, opts);
 }
 
-function assertTSDeclareMethod(node, opts) {
+function assertTSDeclareMethod(node, opts = {}) {
   assert("TSDeclareMethod", node, opts);
 }
 
-function assertTSQualifiedName(node, opts) {
+function assertTSQualifiedName(node, opts = {}) {
   assert("TSQualifiedName", node, opts);
 }
 
-function assertTSCallSignatureDeclaration(node, opts) {
+function assertTSCallSignatureDeclaration(node, opts = {}) {
   assert("TSCallSignatureDeclaration", node, opts);
 }
 
-function assertTSConstructSignatureDeclaration(node, opts) {
+function assertTSConstructSignatureDeclaration(node, opts = {}) {
   assert("TSConstructSignatureDeclaration", node, opts);
 }
 
-function assertTSPropertySignature(node, opts) {
+function assertTSPropertySignature(node, opts = {}) {
   assert("TSPropertySignature", node, opts);
 }
 
-function assertTSMethodSignature(node, opts) {
+function assertTSMethodSignature(node, opts = {}) {
   assert("TSMethodSignature", node, opts);
 }
 
-function assertTSIndexSignature(node, opts) {
+function assertTSIndexSignature(node, opts = {}) {
   assert("TSIndexSignature", node, opts);
 }
 
-function assertTSAnyKeyword(node, opts) {
+function assertTSAnyKeyword(node, opts = {}) {
   assert("TSAnyKeyword", node, opts);
 }
 
-function assertTSBooleanKeyword(node, opts) {
+function assertTSBooleanKeyword(node, opts = {}) {
   assert("TSBooleanKeyword", node, opts);
 }
 
-function assertTSBigIntKeyword(node, opts) {
+function assertTSBigIntKeyword(node, opts = {}) {
   assert("TSBigIntKeyword", node, opts);
 }
 
-function assertTSIntrinsicKeyword(node, opts) {
-  assert("TSIntrinsicKeyword", node, opts);
-}
-
-function assertTSNeverKeyword(node, opts) {
+function assertTSNeverKeyword(node, opts = {}) {
   assert("TSNeverKeyword", node, opts);
 }
 
-function assertTSNullKeyword(node, opts) {
+function assertTSNullKeyword(node, opts = {}) {
   assert("TSNullKeyword", node, opts);
 }
 
-function assertTSNumberKeyword(node, opts) {
+function assertTSNumberKeyword(node, opts = {}) {
   assert("TSNumberKeyword", node, opts);
 }
 
-function assertTSObjectKeyword(node, opts) {
+function assertTSObjectKeyword(node, opts = {}) {
   assert("TSObjectKeyword", node, opts);
 }
 
-function assertTSStringKeyword(node, opts) {
+function assertTSStringKeyword(node, opts = {}) {
   assert("TSStringKeyword", node, opts);
 }
 
-function assertTSSymbolKeyword(node, opts) {
+function assertTSSymbolKeyword(node, opts = {}) {
   assert("TSSymbolKeyword", node, opts);
 }
 
-function assertTSUndefinedKeyword(node, opts) {
+function assertTSUndefinedKeyword(node, opts = {}) {
   assert("TSUndefinedKeyword", node, opts);
 }
 
-function assertTSUnknownKeyword(node, opts) {
+function assertTSUnknownKeyword(node, opts = {}) {
   assert("TSUnknownKeyword", node, opts);
 }
 
-function assertTSVoidKeyword(node, opts) {
+function assertTSVoidKeyword(node, opts = {}) {
   assert("TSVoidKeyword", node, opts);
 }
 
-function assertTSThisType(node, opts) {
+function assertTSThisType(node, opts = {}) {
   assert("TSThisType", node, opts);
 }
 
-function assertTSFunctionType(node, opts) {
+function assertTSFunctionType(node, opts = {}) {
   assert("TSFunctionType", node, opts);
 }
 
-function assertTSConstructorType(node, opts) {
+function assertTSConstructorType(node, opts = {}) {
   assert("TSConstructorType", node, opts);
 }
 
-function assertTSTypeReference(node, opts) {
+function assertTSTypeReference(node, opts = {}) {
   assert("TSTypeReference", node, opts);
 }
 
-function assertTSTypePredicate(node, opts) {
+function assertTSTypePredicate(node, opts = {}) {
   assert("TSTypePredicate", node, opts);
 }
 
-function assertTSTypeQuery(node, opts) {
+function assertTSTypeQuery(node, opts = {}) {
   assert("TSTypeQuery", node, opts);
 }
 
-function assertTSTypeLiteral(node, opts) {
+function assertTSTypeLiteral(node, opts = {}) {
   assert("TSTypeLiteral", node, opts);
 }
 
-function assertTSArrayType(node, opts) {
+function assertTSArrayType(node, opts = {}) {
   assert("TSArrayType", node, opts);
 }
 
-function assertTSTupleType(node, opts) {
+function assertTSTupleType(node, opts = {}) {
   assert("TSTupleType", node, opts);
 }
 
-function assertTSOptionalType(node, opts) {
+function assertTSOptionalType(node, opts = {}) {
   assert("TSOptionalType", node, opts);
 }
 
-function assertTSRestType(node, opts) {
+function assertTSRestType(node, opts = {}) {
   assert("TSRestType", node, opts);
 }
 
-function assertTSNamedTupleMember(node, opts) {
+function assertTSNamedTupleMember(node, opts = {}) {
   assert("TSNamedTupleMember", node, opts);
 }
 
-function assertTSUnionType(node, opts) {
+function assertTSUnionType(node, opts = {}) {
   assert("TSUnionType", node, opts);
 }
 
-function assertTSIntersectionType(node, opts) {
+function assertTSIntersectionType(node, opts = {}) {
   assert("TSIntersectionType", node, opts);
 }
 
-function assertTSConditionalType(node, opts) {
+function assertTSConditionalType(node, opts = {}) {
   assert("TSConditionalType", node, opts);
 }
 
-function assertTSInferType(node, opts) {
+function assertTSInferType(node, opts = {}) {
   assert("TSInferType", node, opts);
 }
 
-function assertTSParenthesizedType(node, opts) {
+function assertTSParenthesizedType(node, opts = {}) {
   assert("TSParenthesizedType", node, opts);
 }
 
-function assertTSTypeOperator(node, opts) {
+function assertTSTypeOperator(node, opts = {}) {
   assert("TSTypeOperator", node, opts);
 }
 
-function assertTSIndexedAccessType(node, opts) {
+function assertTSIndexedAccessType(node, opts = {}) {
   assert("TSIndexedAccessType", node, opts);
 }
 
-function assertTSMappedType(node, opts) {
+function assertTSMappedType(node, opts = {}) {
   assert("TSMappedType", node, opts);
 }
 
-function assertTSLiteralType(node, opts) {
+function assertTSLiteralType(node, opts = {}) {
   assert("TSLiteralType", node, opts);
 }
 
-function assertTSExpressionWithTypeArguments(node, opts) {
+function assertTSExpressionWithTypeArguments(node, opts = {}) {
   assert("TSExpressionWithTypeArguments", node, opts);
 }
 
-function assertTSInterfaceDeclaration(node, opts) {
+function assertTSInterfaceDeclaration(node, opts = {}) {
   assert("TSInterfaceDeclaration", node, opts);
 }
 
-function assertTSInterfaceBody(node, opts) {
+function assertTSInterfaceBody(node, opts = {}) {
   assert("TSInterfaceBody", node, opts);
 }
 
-function assertTSTypeAliasDeclaration(node, opts) {
+function assertTSTypeAliasDeclaration(node, opts = {}) {
   assert("TSTypeAliasDeclaration", node, opts);
 }
 
-function assertTSAsExpression(node, opts) {
+function assertTSAsExpression(node, opts = {}) {
   assert("TSAsExpression", node, opts);
 }
 
-function assertTSTypeAssertion(node, opts) {
+function assertTSTypeAssertion(node, opts = {}) {
   assert("TSTypeAssertion", node, opts);
 }
 
-function assertTSEnumDeclaration(node, opts) {
+function assertTSEnumDeclaration(node, opts = {}) {
   assert("TSEnumDeclaration", node, opts);
 }
 
-function assertTSEnumMember(node, opts) {
+function assertTSEnumMember(node, opts = {}) {
   assert("TSEnumMember", node, opts);
 }
 
-function assertTSModuleDeclaration(node, opts) {
+function assertTSModuleDeclaration(node, opts = {}) {
   assert("TSModuleDeclaration", node, opts);
 }
 
-function assertTSModuleBlock(node, opts) {
+function assertTSModuleBlock(node, opts = {}) {
   assert("TSModuleBlock", node, opts);
 }
 
-function assertTSImportType(node, opts) {
+function assertTSImportType(node, opts = {}) {
   assert("TSImportType", node, opts);
 }
 
-function assertTSImportEqualsDeclaration(node, opts) {
+function assertTSImportEqualsDeclaration(node, opts = {}) {
   assert("TSImportEqualsDeclaration", node, opts);
 }
 
-function assertTSExternalModuleReference(node, opts) {
+function assertTSExternalModuleReference(node, opts = {}) {
   assert("TSExternalModuleReference", node, opts);
 }
 
-function assertTSNonNullExpression(node, opts) {
+function assertTSNonNullExpression(node, opts = {}) {
   assert("TSNonNullExpression", node, opts);
 }
 
-function assertTSExportAssignment(node, opts) {
+function assertTSExportAssignment(node, opts = {}) {
   assert("TSExportAssignment", node, opts);
 }
 
-function assertTSNamespaceExportDeclaration(node, opts) {
+function assertTSNamespaceExportDeclaration(node, opts = {}) {
   assert("TSNamespaceExportDeclaration", node, opts);
 }
 
-function assertTSTypeAnnotation(node, opts) {
+function assertTSTypeAnnotation(node, opts = {}) {
   assert("TSTypeAnnotation", node, opts);
 }
 
-function assertTSTypeParameterInstantiation(node, opts) {
+function assertTSTypeParameterInstantiation(node, opts = {}) {
   assert("TSTypeParameterInstantiation", node, opts);
 }
 
-function assertTSTypeParameterDeclaration(node, opts) {
+function assertTSTypeParameterDeclaration(node, opts = {}) {
   assert("TSTypeParameterDeclaration", node, opts);
 }
 
-function assertTSTypeParameter(node, opts) {
+function assertTSTypeParameter(node, opts = {}) {
   assert("TSTypeParameter", node, opts);
 }
 
-function assertExpression(node, opts) {
+function assertExpression(node, opts = {}) {
   assert("Expression", node, opts);
 }
 
-function assertBinary(node, opts) {
+function assertBinary(node, opts = {}) {
   assert("Binary", node, opts);
 }
 
-function assertScopable(node, opts) {
+function assertScopable(node, opts = {}) {
   assert("Scopable", node, opts);
 }
 
-function assertBlockParent(node, opts) {
+function assertBlockParent(node, opts = {}) {
   assert("BlockParent", node, opts);
 }
 
-function assertBlock(node, opts) {
+function assertBlock(node, opts = {}) {
   assert("Block", node, opts);
 }
 
-function assertStatement(node, opts) {
+function assertStatement(node, opts = {}) {
   assert("Statement", node, opts);
 }
 
-function assertTerminatorless(node, opts) {
+function assertTerminatorless(node, opts = {}) {
   assert("Terminatorless", node, opts);
 }
 
-function assertCompletionStatement(node, opts) {
+function assertCompletionStatement(node, opts = {}) {
   assert("CompletionStatement", node, opts);
 }
 
-function assertConditional(node, opts) {
+function assertConditional(node, opts = {}) {
   assert("Conditional", node, opts);
 }
 
-function assertLoop(node, opts) {
+function assertLoop(node, opts = {}) {
   assert("Loop", node, opts);
 }
 
-function assertWhile(node, opts) {
+function assertWhile(node, opts = {}) {
   assert("While", node, opts);
 }
 
-function assertExpressionWrapper(node, opts) {
+function assertExpressionWrapper(node, opts = {}) {
   assert("ExpressionWrapper", node, opts);
 }
 
-function assertFor(node, opts) {
+function assertFor(node, opts = {}) {
   assert("For", node, opts);
 }
 
-function assertForXStatement(node, opts) {
+function assertForXStatement(node, opts = {}) {
   assert("ForXStatement", node, opts);
 }
 
-function assertFunction(node, opts) {
+function assertFunction(node, opts = {}) {
   assert("Function", node, opts);
 }
 
-function assertFunctionParent(node, opts) {
+function assertFunctionParent(node, opts = {}) {
   assert("FunctionParent", node, opts);
 }
 
-function assertPureish(node, opts) {
+function assertPureish(node, opts = {}) {
   assert("Pureish", node, opts);
 }
 
-function assertDeclaration(node, opts) {
+function assertDeclaration(node, opts = {}) {
   assert("Declaration", node, opts);
 }
 
-function assertPatternLike(node, opts) {
+function assertPatternLike(node, opts = {}) {
   assert("PatternLike", node, opts);
 }
 
-function assertLVal(node, opts) {
+function assertLVal(node, opts = {}) {
   assert("LVal", node, opts);
 }
 
-function assertTSEntityName(node, opts) {
+function assertTSEntityName(node, opts = {}) {
   assert("TSEntityName", node, opts);
 }
 
-function assertLiteral(node, opts) {
+function assertLiteral(node, opts = {}) {
   assert("Literal", node, opts);
 }
 
-function assertImmutable(node, opts) {
+function assertImmutable(node, opts = {}) {
   assert("Immutable", node, opts);
 }
 
-function assertUserWhitespacable(node, opts) {
+function assertUserWhitespacable(node, opts = {}) {
   assert("UserWhitespacable", node, opts);
 }
 
-function assertMethod(node, opts) {
+function assertMethod(node, opts = {}) {
   assert("Method", node, opts);
 }
 
-function assertObjectMember(node, opts) {
+function assertObjectMember(node, opts = {}) {
   assert("ObjectMember", node, opts);
 }
 
-function assertProperty(node, opts) {
+function assertProperty(node, opts = {}) {
   assert("Property", node, opts);
 }
 
-function assertUnaryLike(node, opts) {
+function assertUnaryLike(node, opts = {}) {
   assert("UnaryLike", node, opts);
 }
 
-function assertPattern(node, opts) {
+function assertPattern(node, opts = {}) {
   assert("Pattern", node, opts);
 }
 
-function assertClass(node, opts) {
+function assertClass(node, opts = {}) {
   assert("Class", node, opts);
 }
 
-function assertModuleDeclaration(node, opts) {
+function assertModuleDeclaration(node, opts = {}) {
   assert("ModuleDeclaration", node, opts);
 }
 
-function assertExportDeclaration(node, opts) {
+function assertExportDeclaration(node, opts = {}) {
   assert("ExportDeclaration", node, opts);
 }
 
-function assertModuleSpecifier(node, opts) {
+function assertModuleSpecifier(node, opts = {}) {
   assert("ModuleSpecifier", node, opts);
 }
 
-function assertFlow(node, opts) {
+function assertFlow(node, opts = {}) {
   assert("Flow", node, opts);
 }
 
-function assertFlowType(node, opts) {
+function assertFlowType(node, opts = {}) {
   assert("FlowType", node, opts);
 }
 
-function assertFlowBaseAnnotation(node, opts) {
+function assertFlowBaseAnnotation(node, opts = {}) {
   assert("FlowBaseAnnotation", node, opts);
 }
 
-function assertFlowDeclaration(node, opts) {
+function assertFlowDeclaration(node, opts = {}) {
   assert("FlowDeclaration", node, opts);
 }
 
-function assertFlowPredicate(node, opts) {
+function assertFlowPredicate(node, opts = {}) {
   assert("FlowPredicate", node, opts);
 }
 
-function assertEnumBody(node, opts) {
+function assertEnumBody(node, opts = {}) {
   assert("EnumBody", node, opts);
 }
 
-function assertEnumMember(node, opts) {
+function assertEnumMember(node, opts = {}) {
   assert("EnumMember", node, opts);
 }
 
-function assertJSX(node, opts) {
+function assertJSX(node, opts = {}) {
   assert("JSX", node, opts);
 }
 
-function assertPrivate(node, opts) {
+function assertPrivate(node, opts = {}) {
   assert("Private", node, opts);
 }
 
-function assertTSTypeElement(node, opts) {
+function assertTSTypeElement(node, opts = {}) {
   assert("TSTypeElement", node, opts);
 }
 
-function assertTSType(node, opts) {
+function assertTSType(node, opts = {}) {
   assert("TSType", node, opts);
 }
 
-function assertTSBaseType(node, opts) {
+function assertTSBaseType(node, opts = {}) {
   assert("TSBaseType", node, opts);
 }
 
@@ -1945,17 +1907,6 @@ function assertSpreadProperty(node, opts) {
   console.trace("The node type SpreadProperty has been renamed to SpreadElement");
   assert("SpreadProperty", node, opts);
 }
-
-/***/ }),
-
-/***/ "./node_modules/@babel/types/lib/ast-types/generated/index.js":
-/*!********************************************************************!*\
-  !*** ./node_modules/@babel/types/lib/ast-types/generated/index.js ***!
-  \********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-
 
 /***/ }),
 
@@ -2097,1228 +2048,1213 @@ function createTypeAnnotationBasedOnTypeof(type) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.arrayExpression = arrayExpression;
-exports.assignmentExpression = assignmentExpression;
-exports.binaryExpression = binaryExpression;
-exports.interpreterDirective = interpreterDirective;
-exports.directive = directive;
-exports.directiveLiteral = directiveLiteral;
-exports.blockStatement = blockStatement;
-exports.breakStatement = breakStatement;
-exports.callExpression = callExpression;
-exports.catchClause = catchClause;
-exports.conditionalExpression = conditionalExpression;
-exports.continueStatement = continueStatement;
-exports.debuggerStatement = debuggerStatement;
-exports.doWhileStatement = doWhileStatement;
-exports.emptyStatement = emptyStatement;
-exports.expressionStatement = expressionStatement;
-exports.file = file;
-exports.forInStatement = forInStatement;
-exports.forStatement = forStatement;
-exports.functionDeclaration = functionDeclaration;
-exports.functionExpression = functionExpression;
-exports.identifier = identifier;
-exports.ifStatement = ifStatement;
-exports.labeledStatement = labeledStatement;
-exports.stringLiteral = stringLiteral;
-exports.numericLiteral = numericLiteral;
-exports.nullLiteral = nullLiteral;
-exports.booleanLiteral = booleanLiteral;
-exports.regExpLiteral = regExpLiteral;
-exports.logicalExpression = logicalExpression;
-exports.memberExpression = memberExpression;
-exports.newExpression = newExpression;
-exports.program = program;
-exports.objectExpression = objectExpression;
-exports.objectMethod = objectMethod;
-exports.objectProperty = objectProperty;
-exports.restElement = restElement;
-exports.returnStatement = returnStatement;
-exports.sequenceExpression = sequenceExpression;
-exports.parenthesizedExpression = parenthesizedExpression;
-exports.switchCase = switchCase;
-exports.switchStatement = switchStatement;
-exports.thisExpression = thisExpression;
-exports.throwStatement = throwStatement;
-exports.tryStatement = tryStatement;
-exports.unaryExpression = unaryExpression;
-exports.updateExpression = updateExpression;
-exports.variableDeclaration = variableDeclaration;
-exports.variableDeclarator = variableDeclarator;
-exports.whileStatement = whileStatement;
-exports.withStatement = withStatement;
-exports.assignmentPattern = assignmentPattern;
-exports.arrayPattern = arrayPattern;
-exports.arrowFunctionExpression = arrowFunctionExpression;
-exports.classBody = classBody;
-exports.classExpression = classExpression;
-exports.classDeclaration = classDeclaration;
-exports.exportAllDeclaration = exportAllDeclaration;
-exports.exportDefaultDeclaration = exportDefaultDeclaration;
-exports.exportNamedDeclaration = exportNamedDeclaration;
-exports.exportSpecifier = exportSpecifier;
-exports.forOfStatement = forOfStatement;
-exports.importDeclaration = importDeclaration;
-exports.importDefaultSpecifier = importDefaultSpecifier;
-exports.importNamespaceSpecifier = importNamespaceSpecifier;
-exports.importSpecifier = importSpecifier;
-exports.metaProperty = metaProperty;
-exports.classMethod = classMethod;
-exports.objectPattern = objectPattern;
-exports.spreadElement = spreadElement;
-exports.super = _super;
-exports.taggedTemplateExpression = taggedTemplateExpression;
-exports.templateElement = templateElement;
-exports.templateLiteral = templateLiteral;
-exports.yieldExpression = yieldExpression;
-exports.awaitExpression = awaitExpression;
-exports.import = _import;
-exports.bigIntLiteral = bigIntLiteral;
-exports.exportNamespaceSpecifier = exportNamespaceSpecifier;
-exports.optionalMemberExpression = optionalMemberExpression;
-exports.optionalCallExpression = optionalCallExpression;
-exports.anyTypeAnnotation = anyTypeAnnotation;
-exports.arrayTypeAnnotation = arrayTypeAnnotation;
-exports.booleanTypeAnnotation = booleanTypeAnnotation;
-exports.booleanLiteralTypeAnnotation = booleanLiteralTypeAnnotation;
-exports.nullLiteralTypeAnnotation = nullLiteralTypeAnnotation;
-exports.classImplements = classImplements;
-exports.declareClass = declareClass;
-exports.declareFunction = declareFunction;
-exports.declareInterface = declareInterface;
-exports.declareModule = declareModule;
-exports.declareModuleExports = declareModuleExports;
-exports.declareTypeAlias = declareTypeAlias;
-exports.declareOpaqueType = declareOpaqueType;
-exports.declareVariable = declareVariable;
-exports.declareExportDeclaration = declareExportDeclaration;
-exports.declareExportAllDeclaration = declareExportAllDeclaration;
-exports.declaredPredicate = declaredPredicate;
-exports.existsTypeAnnotation = existsTypeAnnotation;
-exports.functionTypeAnnotation = functionTypeAnnotation;
-exports.functionTypeParam = functionTypeParam;
-exports.genericTypeAnnotation = genericTypeAnnotation;
-exports.inferredPredicate = inferredPredicate;
-exports.interfaceExtends = interfaceExtends;
-exports.interfaceDeclaration = interfaceDeclaration;
-exports.interfaceTypeAnnotation = interfaceTypeAnnotation;
-exports.intersectionTypeAnnotation = intersectionTypeAnnotation;
-exports.mixedTypeAnnotation = mixedTypeAnnotation;
-exports.emptyTypeAnnotation = emptyTypeAnnotation;
-exports.nullableTypeAnnotation = nullableTypeAnnotation;
-exports.numberLiteralTypeAnnotation = numberLiteralTypeAnnotation;
-exports.numberTypeAnnotation = numberTypeAnnotation;
-exports.objectTypeAnnotation = objectTypeAnnotation;
-exports.objectTypeInternalSlot = objectTypeInternalSlot;
-exports.objectTypeCallProperty = objectTypeCallProperty;
-exports.objectTypeIndexer = objectTypeIndexer;
-exports.objectTypeProperty = objectTypeProperty;
-exports.objectTypeSpreadProperty = objectTypeSpreadProperty;
-exports.opaqueType = opaqueType;
-exports.qualifiedTypeIdentifier = qualifiedTypeIdentifier;
-exports.stringLiteralTypeAnnotation = stringLiteralTypeAnnotation;
-exports.stringTypeAnnotation = stringTypeAnnotation;
-exports.symbolTypeAnnotation = symbolTypeAnnotation;
-exports.thisTypeAnnotation = thisTypeAnnotation;
-exports.tupleTypeAnnotation = tupleTypeAnnotation;
-exports.typeofTypeAnnotation = typeofTypeAnnotation;
-exports.typeAlias = typeAlias;
-exports.typeAnnotation = typeAnnotation;
-exports.typeCastExpression = typeCastExpression;
-exports.typeParameter = typeParameter;
-exports.typeParameterDeclaration = typeParameterDeclaration;
-exports.typeParameterInstantiation = typeParameterInstantiation;
-exports.unionTypeAnnotation = unionTypeAnnotation;
-exports.variance = variance;
-exports.voidTypeAnnotation = voidTypeAnnotation;
-exports.enumDeclaration = enumDeclaration;
-exports.enumBooleanBody = enumBooleanBody;
-exports.enumNumberBody = enumNumberBody;
-exports.enumStringBody = enumStringBody;
-exports.enumSymbolBody = enumSymbolBody;
-exports.enumBooleanMember = enumBooleanMember;
-exports.enumNumberMember = enumNumberMember;
-exports.enumStringMember = enumStringMember;
-exports.enumDefaultedMember = enumDefaultedMember;
-exports.jSXAttribute = exports.jsxAttribute = jsxAttribute;
-exports.jSXClosingElement = exports.jsxClosingElement = jsxClosingElement;
-exports.jSXElement = exports.jsxElement = jsxElement;
-exports.jSXEmptyExpression = exports.jsxEmptyExpression = jsxEmptyExpression;
-exports.jSXExpressionContainer = exports.jsxExpressionContainer = jsxExpressionContainer;
-exports.jSXSpreadChild = exports.jsxSpreadChild = jsxSpreadChild;
-exports.jSXIdentifier = exports.jsxIdentifier = jsxIdentifier;
-exports.jSXMemberExpression = exports.jsxMemberExpression = jsxMemberExpression;
-exports.jSXNamespacedName = exports.jsxNamespacedName = jsxNamespacedName;
-exports.jSXOpeningElement = exports.jsxOpeningElement = jsxOpeningElement;
-exports.jSXSpreadAttribute = exports.jsxSpreadAttribute = jsxSpreadAttribute;
-exports.jSXText = exports.jsxText = jsxText;
-exports.jSXFragment = exports.jsxFragment = jsxFragment;
-exports.jSXOpeningFragment = exports.jsxOpeningFragment = jsxOpeningFragment;
-exports.jSXClosingFragment = exports.jsxClosingFragment = jsxClosingFragment;
-exports.noop = noop;
-exports.placeholder = placeholder;
-exports.v8IntrinsicIdentifier = v8IntrinsicIdentifier;
-exports.argumentPlaceholder = argumentPlaceholder;
-exports.bindExpression = bindExpression;
-exports.classProperty = classProperty;
-exports.pipelineTopicExpression = pipelineTopicExpression;
-exports.pipelineBareFunction = pipelineBareFunction;
-exports.pipelinePrimaryTopicReference = pipelinePrimaryTopicReference;
-exports.classPrivateProperty = classPrivateProperty;
-exports.classPrivateMethod = classPrivateMethod;
-exports.importAttribute = importAttribute;
-exports.decorator = decorator;
-exports.doExpression = doExpression;
-exports.exportDefaultSpecifier = exportDefaultSpecifier;
-exports.privateName = privateName;
-exports.recordExpression = recordExpression;
-exports.tupleExpression = tupleExpression;
-exports.decimalLiteral = decimalLiteral;
-exports.staticBlock = staticBlock;
-exports.moduleExpression = moduleExpression;
-exports.tSParameterProperty = exports.tsParameterProperty = tsParameterProperty;
-exports.tSDeclareFunction = exports.tsDeclareFunction = tsDeclareFunction;
-exports.tSDeclareMethod = exports.tsDeclareMethod = tsDeclareMethod;
-exports.tSQualifiedName = exports.tsQualifiedName = tsQualifiedName;
-exports.tSCallSignatureDeclaration = exports.tsCallSignatureDeclaration = tsCallSignatureDeclaration;
-exports.tSConstructSignatureDeclaration = exports.tsConstructSignatureDeclaration = tsConstructSignatureDeclaration;
-exports.tSPropertySignature = exports.tsPropertySignature = tsPropertySignature;
-exports.tSMethodSignature = exports.tsMethodSignature = tsMethodSignature;
-exports.tSIndexSignature = exports.tsIndexSignature = tsIndexSignature;
-exports.tSAnyKeyword = exports.tsAnyKeyword = tsAnyKeyword;
-exports.tSBooleanKeyword = exports.tsBooleanKeyword = tsBooleanKeyword;
-exports.tSBigIntKeyword = exports.tsBigIntKeyword = tsBigIntKeyword;
-exports.tSIntrinsicKeyword = exports.tsIntrinsicKeyword = tsIntrinsicKeyword;
-exports.tSNeverKeyword = exports.tsNeverKeyword = tsNeverKeyword;
-exports.tSNullKeyword = exports.tsNullKeyword = tsNullKeyword;
-exports.tSNumberKeyword = exports.tsNumberKeyword = tsNumberKeyword;
-exports.tSObjectKeyword = exports.tsObjectKeyword = tsObjectKeyword;
-exports.tSStringKeyword = exports.tsStringKeyword = tsStringKeyword;
-exports.tSSymbolKeyword = exports.tsSymbolKeyword = tsSymbolKeyword;
-exports.tSUndefinedKeyword = exports.tsUndefinedKeyword = tsUndefinedKeyword;
-exports.tSUnknownKeyword = exports.tsUnknownKeyword = tsUnknownKeyword;
-exports.tSVoidKeyword = exports.tsVoidKeyword = tsVoidKeyword;
-exports.tSThisType = exports.tsThisType = tsThisType;
-exports.tSFunctionType = exports.tsFunctionType = tsFunctionType;
-exports.tSConstructorType = exports.tsConstructorType = tsConstructorType;
-exports.tSTypeReference = exports.tsTypeReference = tsTypeReference;
-exports.tSTypePredicate = exports.tsTypePredicate = tsTypePredicate;
-exports.tSTypeQuery = exports.tsTypeQuery = tsTypeQuery;
-exports.tSTypeLiteral = exports.tsTypeLiteral = tsTypeLiteral;
-exports.tSArrayType = exports.tsArrayType = tsArrayType;
-exports.tSTupleType = exports.tsTupleType = tsTupleType;
-exports.tSOptionalType = exports.tsOptionalType = tsOptionalType;
-exports.tSRestType = exports.tsRestType = tsRestType;
-exports.tSNamedTupleMember = exports.tsNamedTupleMember = tsNamedTupleMember;
-exports.tSUnionType = exports.tsUnionType = tsUnionType;
-exports.tSIntersectionType = exports.tsIntersectionType = tsIntersectionType;
-exports.tSConditionalType = exports.tsConditionalType = tsConditionalType;
-exports.tSInferType = exports.tsInferType = tsInferType;
-exports.tSParenthesizedType = exports.tsParenthesizedType = tsParenthesizedType;
-exports.tSTypeOperator = exports.tsTypeOperator = tsTypeOperator;
-exports.tSIndexedAccessType = exports.tsIndexedAccessType = tsIndexedAccessType;
-exports.tSMappedType = exports.tsMappedType = tsMappedType;
-exports.tSLiteralType = exports.tsLiteralType = tsLiteralType;
-exports.tSExpressionWithTypeArguments = exports.tsExpressionWithTypeArguments = tsExpressionWithTypeArguments;
-exports.tSInterfaceDeclaration = exports.tsInterfaceDeclaration = tsInterfaceDeclaration;
-exports.tSInterfaceBody = exports.tsInterfaceBody = tsInterfaceBody;
-exports.tSTypeAliasDeclaration = exports.tsTypeAliasDeclaration = tsTypeAliasDeclaration;
-exports.tSAsExpression = exports.tsAsExpression = tsAsExpression;
-exports.tSTypeAssertion = exports.tsTypeAssertion = tsTypeAssertion;
-exports.tSEnumDeclaration = exports.tsEnumDeclaration = tsEnumDeclaration;
-exports.tSEnumMember = exports.tsEnumMember = tsEnumMember;
-exports.tSModuleDeclaration = exports.tsModuleDeclaration = tsModuleDeclaration;
-exports.tSModuleBlock = exports.tsModuleBlock = tsModuleBlock;
-exports.tSImportType = exports.tsImportType = tsImportType;
-exports.tSImportEqualsDeclaration = exports.tsImportEqualsDeclaration = tsImportEqualsDeclaration;
-exports.tSExternalModuleReference = exports.tsExternalModuleReference = tsExternalModuleReference;
-exports.tSNonNullExpression = exports.tsNonNullExpression = tsNonNullExpression;
-exports.tSExportAssignment = exports.tsExportAssignment = tsExportAssignment;
-exports.tSNamespaceExportDeclaration = exports.tsNamespaceExportDeclaration = tsNamespaceExportDeclaration;
-exports.tSTypeAnnotation = exports.tsTypeAnnotation = tsTypeAnnotation;
-exports.tSTypeParameterInstantiation = exports.tsTypeParameterInstantiation = tsTypeParameterInstantiation;
-exports.tSTypeParameterDeclaration = exports.tsTypeParameterDeclaration = tsTypeParameterDeclaration;
-exports.tSTypeParameter = exports.tsTypeParameter = tsTypeParameter;
-exports.numberLiteral = NumberLiteral;
-exports.regexLiteral = RegexLiteral;
-exports.restProperty = RestProperty;
-exports.spreadProperty = SpreadProperty;
+exports.ArrayExpression = exports.arrayExpression = arrayExpression;
+exports.AssignmentExpression = exports.assignmentExpression = assignmentExpression;
+exports.BinaryExpression = exports.binaryExpression = binaryExpression;
+exports.InterpreterDirective = exports.interpreterDirective = interpreterDirective;
+exports.Directive = exports.directive = directive;
+exports.DirectiveLiteral = exports.directiveLiteral = directiveLiteral;
+exports.BlockStatement = exports.blockStatement = blockStatement;
+exports.BreakStatement = exports.breakStatement = breakStatement;
+exports.CallExpression = exports.callExpression = callExpression;
+exports.CatchClause = exports.catchClause = catchClause;
+exports.ConditionalExpression = exports.conditionalExpression = conditionalExpression;
+exports.ContinueStatement = exports.continueStatement = continueStatement;
+exports.DebuggerStatement = exports.debuggerStatement = debuggerStatement;
+exports.DoWhileStatement = exports.doWhileStatement = doWhileStatement;
+exports.EmptyStatement = exports.emptyStatement = emptyStatement;
+exports.ExpressionStatement = exports.expressionStatement = expressionStatement;
+exports.File = exports.file = file;
+exports.ForInStatement = exports.forInStatement = forInStatement;
+exports.ForStatement = exports.forStatement = forStatement;
+exports.FunctionDeclaration = exports.functionDeclaration = functionDeclaration;
+exports.FunctionExpression = exports.functionExpression = functionExpression;
+exports.Identifier = exports.identifier = identifier;
+exports.IfStatement = exports.ifStatement = ifStatement;
+exports.LabeledStatement = exports.labeledStatement = labeledStatement;
+exports.StringLiteral = exports.stringLiteral = stringLiteral;
+exports.NumericLiteral = exports.numericLiteral = numericLiteral;
+exports.NullLiteral = exports.nullLiteral = nullLiteral;
+exports.BooleanLiteral = exports.booleanLiteral = booleanLiteral;
+exports.RegExpLiteral = exports.regExpLiteral = regExpLiteral;
+exports.LogicalExpression = exports.logicalExpression = logicalExpression;
+exports.MemberExpression = exports.memberExpression = memberExpression;
+exports.NewExpression = exports.newExpression = newExpression;
+exports.Program = exports.program = program;
+exports.ObjectExpression = exports.objectExpression = objectExpression;
+exports.ObjectMethod = exports.objectMethod = objectMethod;
+exports.ObjectProperty = exports.objectProperty = objectProperty;
+exports.RestElement = exports.restElement = restElement;
+exports.ReturnStatement = exports.returnStatement = returnStatement;
+exports.SequenceExpression = exports.sequenceExpression = sequenceExpression;
+exports.ParenthesizedExpression = exports.parenthesizedExpression = parenthesizedExpression;
+exports.SwitchCase = exports.switchCase = switchCase;
+exports.SwitchStatement = exports.switchStatement = switchStatement;
+exports.ThisExpression = exports.thisExpression = thisExpression;
+exports.ThrowStatement = exports.throwStatement = throwStatement;
+exports.TryStatement = exports.tryStatement = tryStatement;
+exports.UnaryExpression = exports.unaryExpression = unaryExpression;
+exports.UpdateExpression = exports.updateExpression = updateExpression;
+exports.VariableDeclaration = exports.variableDeclaration = variableDeclaration;
+exports.VariableDeclarator = exports.variableDeclarator = variableDeclarator;
+exports.WhileStatement = exports.whileStatement = whileStatement;
+exports.WithStatement = exports.withStatement = withStatement;
+exports.AssignmentPattern = exports.assignmentPattern = assignmentPattern;
+exports.ArrayPattern = exports.arrayPattern = arrayPattern;
+exports.ArrowFunctionExpression = exports.arrowFunctionExpression = arrowFunctionExpression;
+exports.ClassBody = exports.classBody = classBody;
+exports.ClassExpression = exports.classExpression = classExpression;
+exports.ClassDeclaration = exports.classDeclaration = classDeclaration;
+exports.ExportAllDeclaration = exports.exportAllDeclaration = exportAllDeclaration;
+exports.ExportDefaultDeclaration = exports.exportDefaultDeclaration = exportDefaultDeclaration;
+exports.ExportNamedDeclaration = exports.exportNamedDeclaration = exportNamedDeclaration;
+exports.ExportSpecifier = exports.exportSpecifier = exportSpecifier;
+exports.ForOfStatement = exports.forOfStatement = forOfStatement;
+exports.ImportDeclaration = exports.importDeclaration = importDeclaration;
+exports.ImportDefaultSpecifier = exports.importDefaultSpecifier = importDefaultSpecifier;
+exports.ImportNamespaceSpecifier = exports.importNamespaceSpecifier = importNamespaceSpecifier;
+exports.ImportSpecifier = exports.importSpecifier = importSpecifier;
+exports.MetaProperty = exports.metaProperty = metaProperty;
+exports.ClassMethod = exports.classMethod = classMethod;
+exports.ObjectPattern = exports.objectPattern = objectPattern;
+exports.SpreadElement = exports.spreadElement = spreadElement;
+exports.super = exports.Super = _super;
+exports.TaggedTemplateExpression = exports.taggedTemplateExpression = taggedTemplateExpression;
+exports.TemplateElement = exports.templateElement = templateElement;
+exports.TemplateLiteral = exports.templateLiteral = templateLiteral;
+exports.YieldExpression = exports.yieldExpression = yieldExpression;
+exports.AwaitExpression = exports.awaitExpression = awaitExpression;
+exports.import = exports.Import = _import;
+exports.BigIntLiteral = exports.bigIntLiteral = bigIntLiteral;
+exports.ExportNamespaceSpecifier = exports.exportNamespaceSpecifier = exportNamespaceSpecifier;
+exports.OptionalMemberExpression = exports.optionalMemberExpression = optionalMemberExpression;
+exports.OptionalCallExpression = exports.optionalCallExpression = optionalCallExpression;
+exports.AnyTypeAnnotation = exports.anyTypeAnnotation = anyTypeAnnotation;
+exports.ArrayTypeAnnotation = exports.arrayTypeAnnotation = arrayTypeAnnotation;
+exports.BooleanTypeAnnotation = exports.booleanTypeAnnotation = booleanTypeAnnotation;
+exports.BooleanLiteralTypeAnnotation = exports.booleanLiteralTypeAnnotation = booleanLiteralTypeAnnotation;
+exports.NullLiteralTypeAnnotation = exports.nullLiteralTypeAnnotation = nullLiteralTypeAnnotation;
+exports.ClassImplements = exports.classImplements = classImplements;
+exports.DeclareClass = exports.declareClass = declareClass;
+exports.DeclareFunction = exports.declareFunction = declareFunction;
+exports.DeclareInterface = exports.declareInterface = declareInterface;
+exports.DeclareModule = exports.declareModule = declareModule;
+exports.DeclareModuleExports = exports.declareModuleExports = declareModuleExports;
+exports.DeclareTypeAlias = exports.declareTypeAlias = declareTypeAlias;
+exports.DeclareOpaqueType = exports.declareOpaqueType = declareOpaqueType;
+exports.DeclareVariable = exports.declareVariable = declareVariable;
+exports.DeclareExportDeclaration = exports.declareExportDeclaration = declareExportDeclaration;
+exports.DeclareExportAllDeclaration = exports.declareExportAllDeclaration = declareExportAllDeclaration;
+exports.DeclaredPredicate = exports.declaredPredicate = declaredPredicate;
+exports.ExistsTypeAnnotation = exports.existsTypeAnnotation = existsTypeAnnotation;
+exports.FunctionTypeAnnotation = exports.functionTypeAnnotation = functionTypeAnnotation;
+exports.FunctionTypeParam = exports.functionTypeParam = functionTypeParam;
+exports.GenericTypeAnnotation = exports.genericTypeAnnotation = genericTypeAnnotation;
+exports.InferredPredicate = exports.inferredPredicate = inferredPredicate;
+exports.InterfaceExtends = exports.interfaceExtends = interfaceExtends;
+exports.InterfaceDeclaration = exports.interfaceDeclaration = interfaceDeclaration;
+exports.InterfaceTypeAnnotation = exports.interfaceTypeAnnotation = interfaceTypeAnnotation;
+exports.IntersectionTypeAnnotation = exports.intersectionTypeAnnotation = intersectionTypeAnnotation;
+exports.MixedTypeAnnotation = exports.mixedTypeAnnotation = mixedTypeAnnotation;
+exports.EmptyTypeAnnotation = exports.emptyTypeAnnotation = emptyTypeAnnotation;
+exports.NullableTypeAnnotation = exports.nullableTypeAnnotation = nullableTypeAnnotation;
+exports.NumberLiteralTypeAnnotation = exports.numberLiteralTypeAnnotation = numberLiteralTypeAnnotation;
+exports.NumberTypeAnnotation = exports.numberTypeAnnotation = numberTypeAnnotation;
+exports.ObjectTypeAnnotation = exports.objectTypeAnnotation = objectTypeAnnotation;
+exports.ObjectTypeInternalSlot = exports.objectTypeInternalSlot = objectTypeInternalSlot;
+exports.ObjectTypeCallProperty = exports.objectTypeCallProperty = objectTypeCallProperty;
+exports.ObjectTypeIndexer = exports.objectTypeIndexer = objectTypeIndexer;
+exports.ObjectTypeProperty = exports.objectTypeProperty = objectTypeProperty;
+exports.ObjectTypeSpreadProperty = exports.objectTypeSpreadProperty = objectTypeSpreadProperty;
+exports.OpaqueType = exports.opaqueType = opaqueType;
+exports.QualifiedTypeIdentifier = exports.qualifiedTypeIdentifier = qualifiedTypeIdentifier;
+exports.StringLiteralTypeAnnotation = exports.stringLiteralTypeAnnotation = stringLiteralTypeAnnotation;
+exports.StringTypeAnnotation = exports.stringTypeAnnotation = stringTypeAnnotation;
+exports.SymbolTypeAnnotation = exports.symbolTypeAnnotation = symbolTypeAnnotation;
+exports.ThisTypeAnnotation = exports.thisTypeAnnotation = thisTypeAnnotation;
+exports.TupleTypeAnnotation = exports.tupleTypeAnnotation = tupleTypeAnnotation;
+exports.TypeofTypeAnnotation = exports.typeofTypeAnnotation = typeofTypeAnnotation;
+exports.TypeAlias = exports.typeAlias = typeAlias;
+exports.TypeAnnotation = exports.typeAnnotation = typeAnnotation;
+exports.TypeCastExpression = exports.typeCastExpression = typeCastExpression;
+exports.TypeParameter = exports.typeParameter = typeParameter;
+exports.TypeParameterDeclaration = exports.typeParameterDeclaration = typeParameterDeclaration;
+exports.TypeParameterInstantiation = exports.typeParameterInstantiation = typeParameterInstantiation;
+exports.UnionTypeAnnotation = exports.unionTypeAnnotation = unionTypeAnnotation;
+exports.Variance = exports.variance = variance;
+exports.VoidTypeAnnotation = exports.voidTypeAnnotation = voidTypeAnnotation;
+exports.EnumDeclaration = exports.enumDeclaration = enumDeclaration;
+exports.EnumBooleanBody = exports.enumBooleanBody = enumBooleanBody;
+exports.EnumNumberBody = exports.enumNumberBody = enumNumberBody;
+exports.EnumStringBody = exports.enumStringBody = enumStringBody;
+exports.EnumSymbolBody = exports.enumSymbolBody = enumSymbolBody;
+exports.EnumBooleanMember = exports.enumBooleanMember = enumBooleanMember;
+exports.EnumNumberMember = exports.enumNumberMember = enumNumberMember;
+exports.EnumStringMember = exports.enumStringMember = enumStringMember;
+exports.EnumDefaultedMember = exports.enumDefaultedMember = enumDefaultedMember;
+exports.jSXAttribute = exports.JSXAttribute = exports.jsxAttribute = jsxAttribute;
+exports.jSXClosingElement = exports.JSXClosingElement = exports.jsxClosingElement = jsxClosingElement;
+exports.jSXElement = exports.JSXElement = exports.jsxElement = jsxElement;
+exports.jSXEmptyExpression = exports.JSXEmptyExpression = exports.jsxEmptyExpression = jsxEmptyExpression;
+exports.jSXExpressionContainer = exports.JSXExpressionContainer = exports.jsxExpressionContainer = jsxExpressionContainer;
+exports.jSXSpreadChild = exports.JSXSpreadChild = exports.jsxSpreadChild = jsxSpreadChild;
+exports.jSXIdentifier = exports.JSXIdentifier = exports.jsxIdentifier = jsxIdentifier;
+exports.jSXMemberExpression = exports.JSXMemberExpression = exports.jsxMemberExpression = jsxMemberExpression;
+exports.jSXNamespacedName = exports.JSXNamespacedName = exports.jsxNamespacedName = jsxNamespacedName;
+exports.jSXOpeningElement = exports.JSXOpeningElement = exports.jsxOpeningElement = jsxOpeningElement;
+exports.jSXSpreadAttribute = exports.JSXSpreadAttribute = exports.jsxSpreadAttribute = jsxSpreadAttribute;
+exports.jSXText = exports.JSXText = exports.jsxText = jsxText;
+exports.jSXFragment = exports.JSXFragment = exports.jsxFragment = jsxFragment;
+exports.jSXOpeningFragment = exports.JSXOpeningFragment = exports.jsxOpeningFragment = jsxOpeningFragment;
+exports.jSXClosingFragment = exports.JSXClosingFragment = exports.jsxClosingFragment = jsxClosingFragment;
+exports.Noop = exports.noop = noop;
+exports.Placeholder = exports.placeholder = placeholder;
+exports.V8IntrinsicIdentifier = exports.v8IntrinsicIdentifier = v8IntrinsicIdentifier;
+exports.ArgumentPlaceholder = exports.argumentPlaceholder = argumentPlaceholder;
+exports.BindExpression = exports.bindExpression = bindExpression;
+exports.ClassProperty = exports.classProperty = classProperty;
+exports.PipelineTopicExpression = exports.pipelineTopicExpression = pipelineTopicExpression;
+exports.PipelineBareFunction = exports.pipelineBareFunction = pipelineBareFunction;
+exports.PipelinePrimaryTopicReference = exports.pipelinePrimaryTopicReference = pipelinePrimaryTopicReference;
+exports.ClassPrivateProperty = exports.classPrivateProperty = classPrivateProperty;
+exports.ClassPrivateMethod = exports.classPrivateMethod = classPrivateMethod;
+exports.ImportAttribute = exports.importAttribute = importAttribute;
+exports.Decorator = exports.decorator = decorator;
+exports.DoExpression = exports.doExpression = doExpression;
+exports.ExportDefaultSpecifier = exports.exportDefaultSpecifier = exportDefaultSpecifier;
+exports.PrivateName = exports.privateName = privateName;
+exports.RecordExpression = exports.recordExpression = recordExpression;
+exports.TupleExpression = exports.tupleExpression = tupleExpression;
+exports.DecimalLiteral = exports.decimalLiteral = decimalLiteral;
+exports.tSParameterProperty = exports.TSParameterProperty = exports.tsParameterProperty = tsParameterProperty;
+exports.tSDeclareFunction = exports.TSDeclareFunction = exports.tsDeclareFunction = tsDeclareFunction;
+exports.tSDeclareMethod = exports.TSDeclareMethod = exports.tsDeclareMethod = tsDeclareMethod;
+exports.tSQualifiedName = exports.TSQualifiedName = exports.tsQualifiedName = tsQualifiedName;
+exports.tSCallSignatureDeclaration = exports.TSCallSignatureDeclaration = exports.tsCallSignatureDeclaration = tsCallSignatureDeclaration;
+exports.tSConstructSignatureDeclaration = exports.TSConstructSignatureDeclaration = exports.tsConstructSignatureDeclaration = tsConstructSignatureDeclaration;
+exports.tSPropertySignature = exports.TSPropertySignature = exports.tsPropertySignature = tsPropertySignature;
+exports.tSMethodSignature = exports.TSMethodSignature = exports.tsMethodSignature = tsMethodSignature;
+exports.tSIndexSignature = exports.TSIndexSignature = exports.tsIndexSignature = tsIndexSignature;
+exports.tSAnyKeyword = exports.TSAnyKeyword = exports.tsAnyKeyword = tsAnyKeyword;
+exports.tSBooleanKeyword = exports.TSBooleanKeyword = exports.tsBooleanKeyword = tsBooleanKeyword;
+exports.tSBigIntKeyword = exports.TSBigIntKeyword = exports.tsBigIntKeyword = tsBigIntKeyword;
+exports.tSNeverKeyword = exports.TSNeverKeyword = exports.tsNeverKeyword = tsNeverKeyword;
+exports.tSNullKeyword = exports.TSNullKeyword = exports.tsNullKeyword = tsNullKeyword;
+exports.tSNumberKeyword = exports.TSNumberKeyword = exports.tsNumberKeyword = tsNumberKeyword;
+exports.tSObjectKeyword = exports.TSObjectKeyword = exports.tsObjectKeyword = tsObjectKeyword;
+exports.tSStringKeyword = exports.TSStringKeyword = exports.tsStringKeyword = tsStringKeyword;
+exports.tSSymbolKeyword = exports.TSSymbolKeyword = exports.tsSymbolKeyword = tsSymbolKeyword;
+exports.tSUndefinedKeyword = exports.TSUndefinedKeyword = exports.tsUndefinedKeyword = tsUndefinedKeyword;
+exports.tSUnknownKeyword = exports.TSUnknownKeyword = exports.tsUnknownKeyword = tsUnknownKeyword;
+exports.tSVoidKeyword = exports.TSVoidKeyword = exports.tsVoidKeyword = tsVoidKeyword;
+exports.tSThisType = exports.TSThisType = exports.tsThisType = tsThisType;
+exports.tSFunctionType = exports.TSFunctionType = exports.tsFunctionType = tsFunctionType;
+exports.tSConstructorType = exports.TSConstructorType = exports.tsConstructorType = tsConstructorType;
+exports.tSTypeReference = exports.TSTypeReference = exports.tsTypeReference = tsTypeReference;
+exports.tSTypePredicate = exports.TSTypePredicate = exports.tsTypePredicate = tsTypePredicate;
+exports.tSTypeQuery = exports.TSTypeQuery = exports.tsTypeQuery = tsTypeQuery;
+exports.tSTypeLiteral = exports.TSTypeLiteral = exports.tsTypeLiteral = tsTypeLiteral;
+exports.tSArrayType = exports.TSArrayType = exports.tsArrayType = tsArrayType;
+exports.tSTupleType = exports.TSTupleType = exports.tsTupleType = tsTupleType;
+exports.tSOptionalType = exports.TSOptionalType = exports.tsOptionalType = tsOptionalType;
+exports.tSRestType = exports.TSRestType = exports.tsRestType = tsRestType;
+exports.tSNamedTupleMember = exports.TSNamedTupleMember = exports.tsNamedTupleMember = tsNamedTupleMember;
+exports.tSUnionType = exports.TSUnionType = exports.tsUnionType = tsUnionType;
+exports.tSIntersectionType = exports.TSIntersectionType = exports.tsIntersectionType = tsIntersectionType;
+exports.tSConditionalType = exports.TSConditionalType = exports.tsConditionalType = tsConditionalType;
+exports.tSInferType = exports.TSInferType = exports.tsInferType = tsInferType;
+exports.tSParenthesizedType = exports.TSParenthesizedType = exports.tsParenthesizedType = tsParenthesizedType;
+exports.tSTypeOperator = exports.TSTypeOperator = exports.tsTypeOperator = tsTypeOperator;
+exports.tSIndexedAccessType = exports.TSIndexedAccessType = exports.tsIndexedAccessType = tsIndexedAccessType;
+exports.tSMappedType = exports.TSMappedType = exports.tsMappedType = tsMappedType;
+exports.tSLiteralType = exports.TSLiteralType = exports.tsLiteralType = tsLiteralType;
+exports.tSExpressionWithTypeArguments = exports.TSExpressionWithTypeArguments = exports.tsExpressionWithTypeArguments = tsExpressionWithTypeArguments;
+exports.tSInterfaceDeclaration = exports.TSInterfaceDeclaration = exports.tsInterfaceDeclaration = tsInterfaceDeclaration;
+exports.tSInterfaceBody = exports.TSInterfaceBody = exports.tsInterfaceBody = tsInterfaceBody;
+exports.tSTypeAliasDeclaration = exports.TSTypeAliasDeclaration = exports.tsTypeAliasDeclaration = tsTypeAliasDeclaration;
+exports.tSAsExpression = exports.TSAsExpression = exports.tsAsExpression = tsAsExpression;
+exports.tSTypeAssertion = exports.TSTypeAssertion = exports.tsTypeAssertion = tsTypeAssertion;
+exports.tSEnumDeclaration = exports.TSEnumDeclaration = exports.tsEnumDeclaration = tsEnumDeclaration;
+exports.tSEnumMember = exports.TSEnumMember = exports.tsEnumMember = tsEnumMember;
+exports.tSModuleDeclaration = exports.TSModuleDeclaration = exports.tsModuleDeclaration = tsModuleDeclaration;
+exports.tSModuleBlock = exports.TSModuleBlock = exports.tsModuleBlock = tsModuleBlock;
+exports.tSImportType = exports.TSImportType = exports.tsImportType = tsImportType;
+exports.tSImportEqualsDeclaration = exports.TSImportEqualsDeclaration = exports.tsImportEqualsDeclaration = tsImportEqualsDeclaration;
+exports.tSExternalModuleReference = exports.TSExternalModuleReference = exports.tsExternalModuleReference = tsExternalModuleReference;
+exports.tSNonNullExpression = exports.TSNonNullExpression = exports.tsNonNullExpression = tsNonNullExpression;
+exports.tSExportAssignment = exports.TSExportAssignment = exports.tsExportAssignment = tsExportAssignment;
+exports.tSNamespaceExportDeclaration = exports.TSNamespaceExportDeclaration = exports.tsNamespaceExportDeclaration = tsNamespaceExportDeclaration;
+exports.tSTypeAnnotation = exports.TSTypeAnnotation = exports.tsTypeAnnotation = tsTypeAnnotation;
+exports.tSTypeParameterInstantiation = exports.TSTypeParameterInstantiation = exports.tsTypeParameterInstantiation = tsTypeParameterInstantiation;
+exports.tSTypeParameterDeclaration = exports.TSTypeParameterDeclaration = exports.tsTypeParameterDeclaration = tsTypeParameterDeclaration;
+exports.tSTypeParameter = exports.TSTypeParameter = exports.tsTypeParameter = tsTypeParameter;
+exports.numberLiteral = exports.NumberLiteral = NumberLiteral;
+exports.regexLiteral = exports.RegexLiteral = RegexLiteral;
+exports.restProperty = exports.RestProperty = RestProperty;
+exports.spreadProperty = exports.SpreadProperty = SpreadProperty;
 
 var _builder = _interopRequireDefault(__webpack_require__(/*! ../builder */ "./node_modules/@babel/types/lib/builders/builder.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function arrayExpression(elements) {
-  return (0, _builder.default)("ArrayExpression", ...arguments);
+function arrayExpression(...args) {
+  return (0, _builder.default)("ArrayExpression", ...args);
 }
 
-function assignmentExpression(operator, left, right) {
-  return (0, _builder.default)("AssignmentExpression", ...arguments);
+function assignmentExpression(...args) {
+  return (0, _builder.default)("AssignmentExpression", ...args);
 }
 
-function binaryExpression(operator, left, right) {
-  return (0, _builder.default)("BinaryExpression", ...arguments);
+function binaryExpression(...args) {
+  return (0, _builder.default)("BinaryExpression", ...args);
 }
 
-function interpreterDirective(value) {
-  return (0, _builder.default)("InterpreterDirective", ...arguments);
+function interpreterDirective(...args) {
+  return (0, _builder.default)("InterpreterDirective", ...args);
 }
 
-function directive(value) {
-  return (0, _builder.default)("Directive", ...arguments);
+function directive(...args) {
+  return (0, _builder.default)("Directive", ...args);
 }
 
-function directiveLiteral(value) {
-  return (0, _builder.default)("DirectiveLiteral", ...arguments);
+function directiveLiteral(...args) {
+  return (0, _builder.default)("DirectiveLiteral", ...args);
 }
 
-function blockStatement(body, directives) {
-  return (0, _builder.default)("BlockStatement", ...arguments);
+function blockStatement(...args) {
+  return (0, _builder.default)("BlockStatement", ...args);
 }
 
-function breakStatement(label) {
-  return (0, _builder.default)("BreakStatement", ...arguments);
+function breakStatement(...args) {
+  return (0, _builder.default)("BreakStatement", ...args);
 }
 
-function callExpression(callee, _arguments) {
-  return (0, _builder.default)("CallExpression", ...arguments);
+function callExpression(...args) {
+  return (0, _builder.default)("CallExpression", ...args);
 }
 
-function catchClause(param, body) {
-  return (0, _builder.default)("CatchClause", ...arguments);
+function catchClause(...args) {
+  return (0, _builder.default)("CatchClause", ...args);
 }
 
-function conditionalExpression(test, consequent, alternate) {
-  return (0, _builder.default)("ConditionalExpression", ...arguments);
+function conditionalExpression(...args) {
+  return (0, _builder.default)("ConditionalExpression", ...args);
 }
 
-function continueStatement(label) {
-  return (0, _builder.default)("ContinueStatement", ...arguments);
+function continueStatement(...args) {
+  return (0, _builder.default)("ContinueStatement", ...args);
 }
 
-function debuggerStatement() {
-  return (0, _builder.default)("DebuggerStatement", ...arguments);
+function debuggerStatement(...args) {
+  return (0, _builder.default)("DebuggerStatement", ...args);
 }
 
-function doWhileStatement(test, body) {
-  return (0, _builder.default)("DoWhileStatement", ...arguments);
+function doWhileStatement(...args) {
+  return (0, _builder.default)("DoWhileStatement", ...args);
 }
 
-function emptyStatement() {
-  return (0, _builder.default)("EmptyStatement", ...arguments);
+function emptyStatement(...args) {
+  return (0, _builder.default)("EmptyStatement", ...args);
 }
 
-function expressionStatement(expression) {
-  return (0, _builder.default)("ExpressionStatement", ...arguments);
+function expressionStatement(...args) {
+  return (0, _builder.default)("ExpressionStatement", ...args);
 }
 
-function file(program, comments, tokens) {
-  return (0, _builder.default)("File", ...arguments);
+function file(...args) {
+  return (0, _builder.default)("File", ...args);
 }
 
-function forInStatement(left, right, body) {
-  return (0, _builder.default)("ForInStatement", ...arguments);
+function forInStatement(...args) {
+  return (0, _builder.default)("ForInStatement", ...args);
 }
 
-function forStatement(init, test, update, body) {
-  return (0, _builder.default)("ForStatement", ...arguments);
+function forStatement(...args) {
+  return (0, _builder.default)("ForStatement", ...args);
 }
 
-function functionDeclaration(id, params, body, generator, async) {
-  return (0, _builder.default)("FunctionDeclaration", ...arguments);
+function functionDeclaration(...args) {
+  return (0, _builder.default)("FunctionDeclaration", ...args);
 }
 
-function functionExpression(id, params, body, generator, async) {
-  return (0, _builder.default)("FunctionExpression", ...arguments);
+function functionExpression(...args) {
+  return (0, _builder.default)("FunctionExpression", ...args);
 }
 
-function identifier(name) {
-  return (0, _builder.default)("Identifier", ...arguments);
+function identifier(...args) {
+  return (0, _builder.default)("Identifier", ...args);
 }
 
-function ifStatement(test, consequent, alternate) {
-  return (0, _builder.default)("IfStatement", ...arguments);
+function ifStatement(...args) {
+  return (0, _builder.default)("IfStatement", ...args);
 }
 
-function labeledStatement(label, body) {
-  return (0, _builder.default)("LabeledStatement", ...arguments);
+function labeledStatement(...args) {
+  return (0, _builder.default)("LabeledStatement", ...args);
 }
 
-function stringLiteral(value) {
-  return (0, _builder.default)("StringLiteral", ...arguments);
+function stringLiteral(...args) {
+  return (0, _builder.default)("StringLiteral", ...args);
 }
 
-function numericLiteral(value) {
-  return (0, _builder.default)("NumericLiteral", ...arguments);
+function numericLiteral(...args) {
+  return (0, _builder.default)("NumericLiteral", ...args);
 }
 
-function nullLiteral() {
-  return (0, _builder.default)("NullLiteral", ...arguments);
+function nullLiteral(...args) {
+  return (0, _builder.default)("NullLiteral", ...args);
 }
 
-function booleanLiteral(value) {
-  return (0, _builder.default)("BooleanLiteral", ...arguments);
+function booleanLiteral(...args) {
+  return (0, _builder.default)("BooleanLiteral", ...args);
 }
 
-function regExpLiteral(pattern, flags) {
-  return (0, _builder.default)("RegExpLiteral", ...arguments);
+function regExpLiteral(...args) {
+  return (0, _builder.default)("RegExpLiteral", ...args);
 }
 
-function logicalExpression(operator, left, right) {
-  return (0, _builder.default)("LogicalExpression", ...arguments);
+function logicalExpression(...args) {
+  return (0, _builder.default)("LogicalExpression", ...args);
 }
 
-function memberExpression(object, property, computed, optional) {
-  return (0, _builder.default)("MemberExpression", ...arguments);
+function memberExpression(...args) {
+  return (0, _builder.default)("MemberExpression", ...args);
 }
 
-function newExpression(callee, _arguments) {
-  return (0, _builder.default)("NewExpression", ...arguments);
+function newExpression(...args) {
+  return (0, _builder.default)("NewExpression", ...args);
 }
 
-function program(body, directives, sourceType, interpreter) {
-  return (0, _builder.default)("Program", ...arguments);
+function program(...args) {
+  return (0, _builder.default)("Program", ...args);
 }
 
-function objectExpression(properties) {
-  return (0, _builder.default)("ObjectExpression", ...arguments);
+function objectExpression(...args) {
+  return (0, _builder.default)("ObjectExpression", ...args);
 }
 
-function objectMethod(kind, key, params, body, computed, generator, async) {
-  return (0, _builder.default)("ObjectMethod", ...arguments);
+function objectMethod(...args) {
+  return (0, _builder.default)("ObjectMethod", ...args);
 }
 
-function objectProperty(key, value, computed, shorthand, decorators) {
-  return (0, _builder.default)("ObjectProperty", ...arguments);
+function objectProperty(...args) {
+  return (0, _builder.default)("ObjectProperty", ...args);
 }
 
-function restElement(argument) {
-  return (0, _builder.default)("RestElement", ...arguments);
+function restElement(...args) {
+  return (0, _builder.default)("RestElement", ...args);
 }
 
-function returnStatement(argument) {
-  return (0, _builder.default)("ReturnStatement", ...arguments);
+function returnStatement(...args) {
+  return (0, _builder.default)("ReturnStatement", ...args);
 }
 
-function sequenceExpression(expressions) {
-  return (0, _builder.default)("SequenceExpression", ...arguments);
+function sequenceExpression(...args) {
+  return (0, _builder.default)("SequenceExpression", ...args);
 }
 
-function parenthesizedExpression(expression) {
-  return (0, _builder.default)("ParenthesizedExpression", ...arguments);
+function parenthesizedExpression(...args) {
+  return (0, _builder.default)("ParenthesizedExpression", ...args);
 }
 
-function switchCase(test, consequent) {
-  return (0, _builder.default)("SwitchCase", ...arguments);
+function switchCase(...args) {
+  return (0, _builder.default)("SwitchCase", ...args);
 }
 
-function switchStatement(discriminant, cases) {
-  return (0, _builder.default)("SwitchStatement", ...arguments);
+function switchStatement(...args) {
+  return (0, _builder.default)("SwitchStatement", ...args);
 }
 
-function thisExpression() {
-  return (0, _builder.default)("ThisExpression", ...arguments);
+function thisExpression(...args) {
+  return (0, _builder.default)("ThisExpression", ...args);
 }
 
-function throwStatement(argument) {
-  return (0, _builder.default)("ThrowStatement", ...arguments);
+function throwStatement(...args) {
+  return (0, _builder.default)("ThrowStatement", ...args);
 }
 
-function tryStatement(block, handler, finalizer) {
-  return (0, _builder.default)("TryStatement", ...arguments);
+function tryStatement(...args) {
+  return (0, _builder.default)("TryStatement", ...args);
 }
 
-function unaryExpression(operator, argument, prefix) {
-  return (0, _builder.default)("UnaryExpression", ...arguments);
+function unaryExpression(...args) {
+  return (0, _builder.default)("UnaryExpression", ...args);
 }
 
-function updateExpression(operator, argument, prefix) {
-  return (0, _builder.default)("UpdateExpression", ...arguments);
+function updateExpression(...args) {
+  return (0, _builder.default)("UpdateExpression", ...args);
 }
 
-function variableDeclaration(kind, declarations) {
-  return (0, _builder.default)("VariableDeclaration", ...arguments);
+function variableDeclaration(...args) {
+  return (0, _builder.default)("VariableDeclaration", ...args);
 }
 
-function variableDeclarator(id, init) {
-  return (0, _builder.default)("VariableDeclarator", ...arguments);
+function variableDeclarator(...args) {
+  return (0, _builder.default)("VariableDeclarator", ...args);
 }
 
-function whileStatement(test, body) {
-  return (0, _builder.default)("WhileStatement", ...arguments);
+function whileStatement(...args) {
+  return (0, _builder.default)("WhileStatement", ...args);
 }
 
-function withStatement(object, body) {
-  return (0, _builder.default)("WithStatement", ...arguments);
+function withStatement(...args) {
+  return (0, _builder.default)("WithStatement", ...args);
 }
 
-function assignmentPattern(left, right) {
-  return (0, _builder.default)("AssignmentPattern", ...arguments);
+function assignmentPattern(...args) {
+  return (0, _builder.default)("AssignmentPattern", ...args);
 }
 
-function arrayPattern(elements) {
-  return (0, _builder.default)("ArrayPattern", ...arguments);
+function arrayPattern(...args) {
+  return (0, _builder.default)("ArrayPattern", ...args);
 }
 
-function arrowFunctionExpression(params, body, async) {
-  return (0, _builder.default)("ArrowFunctionExpression", ...arguments);
+function arrowFunctionExpression(...args) {
+  return (0, _builder.default)("ArrowFunctionExpression", ...args);
 }
 
-function classBody(body) {
-  return (0, _builder.default)("ClassBody", ...arguments);
+function classBody(...args) {
+  return (0, _builder.default)("ClassBody", ...args);
 }
 
-function classExpression(id, superClass, body, decorators) {
-  return (0, _builder.default)("ClassExpression", ...arguments);
+function classExpression(...args) {
+  return (0, _builder.default)("ClassExpression", ...args);
 }
 
-function classDeclaration(id, superClass, body, decorators) {
-  return (0, _builder.default)("ClassDeclaration", ...arguments);
+function classDeclaration(...args) {
+  return (0, _builder.default)("ClassDeclaration", ...args);
 }
 
-function exportAllDeclaration(source) {
-  return (0, _builder.default)("ExportAllDeclaration", ...arguments);
+function exportAllDeclaration(...args) {
+  return (0, _builder.default)("ExportAllDeclaration", ...args);
 }
 
-function exportDefaultDeclaration(declaration) {
-  return (0, _builder.default)("ExportDefaultDeclaration", ...arguments);
+function exportDefaultDeclaration(...args) {
+  return (0, _builder.default)("ExportDefaultDeclaration", ...args);
 }
 
-function exportNamedDeclaration(declaration, specifiers, source) {
-  return (0, _builder.default)("ExportNamedDeclaration", ...arguments);
+function exportNamedDeclaration(...args) {
+  return (0, _builder.default)("ExportNamedDeclaration", ...args);
 }
 
-function exportSpecifier(local, exported) {
-  return (0, _builder.default)("ExportSpecifier", ...arguments);
+function exportSpecifier(...args) {
+  return (0, _builder.default)("ExportSpecifier", ...args);
 }
 
-function forOfStatement(left, right, body, _await) {
-  return (0, _builder.default)("ForOfStatement", ...arguments);
+function forOfStatement(...args) {
+  return (0, _builder.default)("ForOfStatement", ...args);
 }
 
-function importDeclaration(specifiers, source) {
-  return (0, _builder.default)("ImportDeclaration", ...arguments);
+function importDeclaration(...args) {
+  return (0, _builder.default)("ImportDeclaration", ...args);
 }
 
-function importDefaultSpecifier(local) {
-  return (0, _builder.default)("ImportDefaultSpecifier", ...arguments);
+function importDefaultSpecifier(...args) {
+  return (0, _builder.default)("ImportDefaultSpecifier", ...args);
 }
 
-function importNamespaceSpecifier(local) {
-  return (0, _builder.default)("ImportNamespaceSpecifier", ...arguments);
+function importNamespaceSpecifier(...args) {
+  return (0, _builder.default)("ImportNamespaceSpecifier", ...args);
 }
 
-function importSpecifier(local, imported) {
-  return (0, _builder.default)("ImportSpecifier", ...arguments);
+function importSpecifier(...args) {
+  return (0, _builder.default)("ImportSpecifier", ...args);
 }
 
-function metaProperty(meta, property) {
-  return (0, _builder.default)("MetaProperty", ...arguments);
+function metaProperty(...args) {
+  return (0, _builder.default)("MetaProperty", ...args);
 }
 
-function classMethod(kind, key, params, body, computed, _static, generator, async) {
-  return (0, _builder.default)("ClassMethod", ...arguments);
+function classMethod(...args) {
+  return (0, _builder.default)("ClassMethod", ...args);
 }
 
-function objectPattern(properties) {
-  return (0, _builder.default)("ObjectPattern", ...arguments);
+function objectPattern(...args) {
+  return (0, _builder.default)("ObjectPattern", ...args);
 }
 
-function spreadElement(argument) {
-  return (0, _builder.default)("SpreadElement", ...arguments);
+function spreadElement(...args) {
+  return (0, _builder.default)("SpreadElement", ...args);
 }
 
-function _super() {
-  return (0, _builder.default)("Super", ...arguments);
+function _super(...args) {
+  return (0, _builder.default)("Super", ...args);
 }
 
-function taggedTemplateExpression(tag, quasi) {
-  return (0, _builder.default)("TaggedTemplateExpression", ...arguments);
+function taggedTemplateExpression(...args) {
+  return (0, _builder.default)("TaggedTemplateExpression", ...args);
 }
 
-function templateElement(value, tail) {
-  return (0, _builder.default)("TemplateElement", ...arguments);
+function templateElement(...args) {
+  return (0, _builder.default)("TemplateElement", ...args);
 }
 
-function templateLiteral(quasis, expressions) {
-  return (0, _builder.default)("TemplateLiteral", ...arguments);
+function templateLiteral(...args) {
+  return (0, _builder.default)("TemplateLiteral", ...args);
 }
 
-function yieldExpression(argument, delegate) {
-  return (0, _builder.default)("YieldExpression", ...arguments);
+function yieldExpression(...args) {
+  return (0, _builder.default)("YieldExpression", ...args);
 }
 
-function awaitExpression(argument) {
-  return (0, _builder.default)("AwaitExpression", ...arguments);
+function awaitExpression(...args) {
+  return (0, _builder.default)("AwaitExpression", ...args);
 }
 
-function _import() {
-  return (0, _builder.default)("Import", ...arguments);
+function _import(...args) {
+  return (0, _builder.default)("Import", ...args);
 }
 
-function bigIntLiteral(value) {
-  return (0, _builder.default)("BigIntLiteral", ...arguments);
+function bigIntLiteral(...args) {
+  return (0, _builder.default)("BigIntLiteral", ...args);
 }
 
-function exportNamespaceSpecifier(exported) {
-  return (0, _builder.default)("ExportNamespaceSpecifier", ...arguments);
+function exportNamespaceSpecifier(...args) {
+  return (0, _builder.default)("ExportNamespaceSpecifier", ...args);
 }
 
-function optionalMemberExpression(object, property, computed, optional) {
-  return (0, _builder.default)("OptionalMemberExpression", ...arguments);
+function optionalMemberExpression(...args) {
+  return (0, _builder.default)("OptionalMemberExpression", ...args);
 }
 
-function optionalCallExpression(callee, _arguments, optional) {
-  return (0, _builder.default)("OptionalCallExpression", ...arguments);
+function optionalCallExpression(...args) {
+  return (0, _builder.default)("OptionalCallExpression", ...args);
 }
 
-function anyTypeAnnotation() {
-  return (0, _builder.default)("AnyTypeAnnotation", ...arguments);
+function anyTypeAnnotation(...args) {
+  return (0, _builder.default)("AnyTypeAnnotation", ...args);
 }
 
-function arrayTypeAnnotation(elementType) {
-  return (0, _builder.default)("ArrayTypeAnnotation", ...arguments);
+function arrayTypeAnnotation(...args) {
+  return (0, _builder.default)("ArrayTypeAnnotation", ...args);
 }
 
-function booleanTypeAnnotation() {
-  return (0, _builder.default)("BooleanTypeAnnotation", ...arguments);
+function booleanTypeAnnotation(...args) {
+  return (0, _builder.default)("BooleanTypeAnnotation", ...args);
 }
 
-function booleanLiteralTypeAnnotation(value) {
-  return (0, _builder.default)("BooleanLiteralTypeAnnotation", ...arguments);
+function booleanLiteralTypeAnnotation(...args) {
+  return (0, _builder.default)("BooleanLiteralTypeAnnotation", ...args);
 }
 
-function nullLiteralTypeAnnotation() {
-  return (0, _builder.default)("NullLiteralTypeAnnotation", ...arguments);
+function nullLiteralTypeAnnotation(...args) {
+  return (0, _builder.default)("NullLiteralTypeAnnotation", ...args);
 }
 
-function classImplements(id, typeParameters) {
-  return (0, _builder.default)("ClassImplements", ...arguments);
+function classImplements(...args) {
+  return (0, _builder.default)("ClassImplements", ...args);
 }
 
-function declareClass(id, typeParameters, _extends, body) {
-  return (0, _builder.default)("DeclareClass", ...arguments);
+function declareClass(...args) {
+  return (0, _builder.default)("DeclareClass", ...args);
 }
 
-function declareFunction(id) {
-  return (0, _builder.default)("DeclareFunction", ...arguments);
+function declareFunction(...args) {
+  return (0, _builder.default)("DeclareFunction", ...args);
 }
 
-function declareInterface(id, typeParameters, _extends, body) {
-  return (0, _builder.default)("DeclareInterface", ...arguments);
+function declareInterface(...args) {
+  return (0, _builder.default)("DeclareInterface", ...args);
 }
 
-function declareModule(id, body, kind) {
-  return (0, _builder.default)("DeclareModule", ...arguments);
+function declareModule(...args) {
+  return (0, _builder.default)("DeclareModule", ...args);
 }
 
-function declareModuleExports(typeAnnotation) {
-  return (0, _builder.default)("DeclareModuleExports", ...arguments);
+function declareModuleExports(...args) {
+  return (0, _builder.default)("DeclareModuleExports", ...args);
 }
 
-function declareTypeAlias(id, typeParameters, right) {
-  return (0, _builder.default)("DeclareTypeAlias", ...arguments);
+function declareTypeAlias(...args) {
+  return (0, _builder.default)("DeclareTypeAlias", ...args);
 }
 
-function declareOpaqueType(id, typeParameters, supertype) {
-  return (0, _builder.default)("DeclareOpaqueType", ...arguments);
+function declareOpaqueType(...args) {
+  return (0, _builder.default)("DeclareOpaqueType", ...args);
 }
 
-function declareVariable(id) {
-  return (0, _builder.default)("DeclareVariable", ...arguments);
+function declareVariable(...args) {
+  return (0, _builder.default)("DeclareVariable", ...args);
 }
 
-function declareExportDeclaration(declaration, specifiers, source) {
-  return (0, _builder.default)("DeclareExportDeclaration", ...arguments);
+function declareExportDeclaration(...args) {
+  return (0, _builder.default)("DeclareExportDeclaration", ...args);
 }
 
-function declareExportAllDeclaration(source) {
-  return (0, _builder.default)("DeclareExportAllDeclaration", ...arguments);
+function declareExportAllDeclaration(...args) {
+  return (0, _builder.default)("DeclareExportAllDeclaration", ...args);
 }
 
-function declaredPredicate(value) {
-  return (0, _builder.default)("DeclaredPredicate", ...arguments);
+function declaredPredicate(...args) {
+  return (0, _builder.default)("DeclaredPredicate", ...args);
 }
 
-function existsTypeAnnotation() {
-  return (0, _builder.default)("ExistsTypeAnnotation", ...arguments);
+function existsTypeAnnotation(...args) {
+  return (0, _builder.default)("ExistsTypeAnnotation", ...args);
 }
 
-function functionTypeAnnotation(typeParameters, params, rest, returnType) {
-  return (0, _builder.default)("FunctionTypeAnnotation", ...arguments);
+function functionTypeAnnotation(...args) {
+  return (0, _builder.default)("FunctionTypeAnnotation", ...args);
 }
 
-function functionTypeParam(name, typeAnnotation) {
-  return (0, _builder.default)("FunctionTypeParam", ...arguments);
+function functionTypeParam(...args) {
+  return (0, _builder.default)("FunctionTypeParam", ...args);
 }
 
-function genericTypeAnnotation(id, typeParameters) {
-  return (0, _builder.default)("GenericTypeAnnotation", ...arguments);
+function genericTypeAnnotation(...args) {
+  return (0, _builder.default)("GenericTypeAnnotation", ...args);
 }
 
-function inferredPredicate() {
-  return (0, _builder.default)("InferredPredicate", ...arguments);
+function inferredPredicate(...args) {
+  return (0, _builder.default)("InferredPredicate", ...args);
 }
 
-function interfaceExtends(id, typeParameters) {
-  return (0, _builder.default)("InterfaceExtends", ...arguments);
+function interfaceExtends(...args) {
+  return (0, _builder.default)("InterfaceExtends", ...args);
 }
 
-function interfaceDeclaration(id, typeParameters, _extends, body) {
-  return (0, _builder.default)("InterfaceDeclaration", ...arguments);
+function interfaceDeclaration(...args) {
+  return (0, _builder.default)("InterfaceDeclaration", ...args);
 }
 
-function interfaceTypeAnnotation(_extends, body) {
-  return (0, _builder.default)("InterfaceTypeAnnotation", ...arguments);
+function interfaceTypeAnnotation(...args) {
+  return (0, _builder.default)("InterfaceTypeAnnotation", ...args);
 }
 
-function intersectionTypeAnnotation(types) {
-  return (0, _builder.default)("IntersectionTypeAnnotation", ...arguments);
+function intersectionTypeAnnotation(...args) {
+  return (0, _builder.default)("IntersectionTypeAnnotation", ...args);
 }
 
-function mixedTypeAnnotation() {
-  return (0, _builder.default)("MixedTypeAnnotation", ...arguments);
+function mixedTypeAnnotation(...args) {
+  return (0, _builder.default)("MixedTypeAnnotation", ...args);
 }
 
-function emptyTypeAnnotation() {
-  return (0, _builder.default)("EmptyTypeAnnotation", ...arguments);
+function emptyTypeAnnotation(...args) {
+  return (0, _builder.default)("EmptyTypeAnnotation", ...args);
 }
 
-function nullableTypeAnnotation(typeAnnotation) {
-  return (0, _builder.default)("NullableTypeAnnotation", ...arguments);
+function nullableTypeAnnotation(...args) {
+  return (0, _builder.default)("NullableTypeAnnotation", ...args);
 }
 
-function numberLiteralTypeAnnotation(value) {
-  return (0, _builder.default)("NumberLiteralTypeAnnotation", ...arguments);
+function numberLiteralTypeAnnotation(...args) {
+  return (0, _builder.default)("NumberLiteralTypeAnnotation", ...args);
 }
 
-function numberTypeAnnotation() {
-  return (0, _builder.default)("NumberTypeAnnotation", ...arguments);
+function numberTypeAnnotation(...args) {
+  return (0, _builder.default)("NumberTypeAnnotation", ...args);
 }
 
-function objectTypeAnnotation(properties, indexers, callProperties, internalSlots, exact) {
-  return (0, _builder.default)("ObjectTypeAnnotation", ...arguments);
+function objectTypeAnnotation(...args) {
+  return (0, _builder.default)("ObjectTypeAnnotation", ...args);
 }
 
-function objectTypeInternalSlot(id, value, optional, _static, method) {
-  return (0, _builder.default)("ObjectTypeInternalSlot", ...arguments);
+function objectTypeInternalSlot(...args) {
+  return (0, _builder.default)("ObjectTypeInternalSlot", ...args);
 }
 
-function objectTypeCallProperty(value) {
-  return (0, _builder.default)("ObjectTypeCallProperty", ...arguments);
+function objectTypeCallProperty(...args) {
+  return (0, _builder.default)("ObjectTypeCallProperty", ...args);
 }
 
-function objectTypeIndexer(id, key, value, variance) {
-  return (0, _builder.default)("ObjectTypeIndexer", ...arguments);
+function objectTypeIndexer(...args) {
+  return (0, _builder.default)("ObjectTypeIndexer", ...args);
 }
 
-function objectTypeProperty(key, value, variance) {
-  return (0, _builder.default)("ObjectTypeProperty", ...arguments);
+function objectTypeProperty(...args) {
+  return (0, _builder.default)("ObjectTypeProperty", ...args);
 }
 
-function objectTypeSpreadProperty(argument) {
-  return (0, _builder.default)("ObjectTypeSpreadProperty", ...arguments);
+function objectTypeSpreadProperty(...args) {
+  return (0, _builder.default)("ObjectTypeSpreadProperty", ...args);
 }
 
-function opaqueType(id, typeParameters, supertype, impltype) {
-  return (0, _builder.default)("OpaqueType", ...arguments);
+function opaqueType(...args) {
+  return (0, _builder.default)("OpaqueType", ...args);
 }
 
-function qualifiedTypeIdentifier(id, qualification) {
-  return (0, _builder.default)("QualifiedTypeIdentifier", ...arguments);
+function qualifiedTypeIdentifier(...args) {
+  return (0, _builder.default)("QualifiedTypeIdentifier", ...args);
 }
 
-function stringLiteralTypeAnnotation(value) {
-  return (0, _builder.default)("StringLiteralTypeAnnotation", ...arguments);
+function stringLiteralTypeAnnotation(...args) {
+  return (0, _builder.default)("StringLiteralTypeAnnotation", ...args);
 }
 
-function stringTypeAnnotation() {
-  return (0, _builder.default)("StringTypeAnnotation", ...arguments);
+function stringTypeAnnotation(...args) {
+  return (0, _builder.default)("StringTypeAnnotation", ...args);
 }
 
-function symbolTypeAnnotation() {
-  return (0, _builder.default)("SymbolTypeAnnotation", ...arguments);
+function symbolTypeAnnotation(...args) {
+  return (0, _builder.default)("SymbolTypeAnnotation", ...args);
 }
 
-function thisTypeAnnotation() {
-  return (0, _builder.default)("ThisTypeAnnotation", ...arguments);
+function thisTypeAnnotation(...args) {
+  return (0, _builder.default)("ThisTypeAnnotation", ...args);
 }
 
-function tupleTypeAnnotation(types) {
-  return (0, _builder.default)("TupleTypeAnnotation", ...arguments);
+function tupleTypeAnnotation(...args) {
+  return (0, _builder.default)("TupleTypeAnnotation", ...args);
 }
 
-function typeofTypeAnnotation(argument) {
-  return (0, _builder.default)("TypeofTypeAnnotation", ...arguments);
+function typeofTypeAnnotation(...args) {
+  return (0, _builder.default)("TypeofTypeAnnotation", ...args);
 }
 
-function typeAlias(id, typeParameters, right) {
-  return (0, _builder.default)("TypeAlias", ...arguments);
+function typeAlias(...args) {
+  return (0, _builder.default)("TypeAlias", ...args);
 }
 
-function typeAnnotation(typeAnnotation) {
-  return (0, _builder.default)("TypeAnnotation", ...arguments);
+function typeAnnotation(...args) {
+  return (0, _builder.default)("TypeAnnotation", ...args);
 }
 
-function typeCastExpression(expression, typeAnnotation) {
-  return (0, _builder.default)("TypeCastExpression", ...arguments);
+function typeCastExpression(...args) {
+  return (0, _builder.default)("TypeCastExpression", ...args);
 }
 
-function typeParameter(bound, _default, variance) {
-  return (0, _builder.default)("TypeParameter", ...arguments);
+function typeParameter(...args) {
+  return (0, _builder.default)("TypeParameter", ...args);
 }
 
-function typeParameterDeclaration(params) {
-  return (0, _builder.default)("TypeParameterDeclaration", ...arguments);
+function typeParameterDeclaration(...args) {
+  return (0, _builder.default)("TypeParameterDeclaration", ...args);
 }
 
-function typeParameterInstantiation(params) {
-  return (0, _builder.default)("TypeParameterInstantiation", ...arguments);
+function typeParameterInstantiation(...args) {
+  return (0, _builder.default)("TypeParameterInstantiation", ...args);
 }
 
-function unionTypeAnnotation(types) {
-  return (0, _builder.default)("UnionTypeAnnotation", ...arguments);
+function unionTypeAnnotation(...args) {
+  return (0, _builder.default)("UnionTypeAnnotation", ...args);
 }
 
-function variance(kind) {
-  return (0, _builder.default)("Variance", ...arguments);
+function variance(...args) {
+  return (0, _builder.default)("Variance", ...args);
 }
 
-function voidTypeAnnotation() {
-  return (0, _builder.default)("VoidTypeAnnotation", ...arguments);
+function voidTypeAnnotation(...args) {
+  return (0, _builder.default)("VoidTypeAnnotation", ...args);
 }
 
-function enumDeclaration(id, body) {
-  return (0, _builder.default)("EnumDeclaration", ...arguments);
+function enumDeclaration(...args) {
+  return (0, _builder.default)("EnumDeclaration", ...args);
 }
 
-function enumBooleanBody(members) {
-  return (0, _builder.default)("EnumBooleanBody", ...arguments);
+function enumBooleanBody(...args) {
+  return (0, _builder.default)("EnumBooleanBody", ...args);
 }
 
-function enumNumberBody(members) {
-  return (0, _builder.default)("EnumNumberBody", ...arguments);
+function enumNumberBody(...args) {
+  return (0, _builder.default)("EnumNumberBody", ...args);
 }
 
-function enumStringBody(members) {
-  return (0, _builder.default)("EnumStringBody", ...arguments);
+function enumStringBody(...args) {
+  return (0, _builder.default)("EnumStringBody", ...args);
 }
 
-function enumSymbolBody(members) {
-  return (0, _builder.default)("EnumSymbolBody", ...arguments);
+function enumSymbolBody(...args) {
+  return (0, _builder.default)("EnumSymbolBody", ...args);
 }
 
-function enumBooleanMember(id) {
-  return (0, _builder.default)("EnumBooleanMember", ...arguments);
+function enumBooleanMember(...args) {
+  return (0, _builder.default)("EnumBooleanMember", ...args);
 }
 
-function enumNumberMember(id, init) {
-  return (0, _builder.default)("EnumNumberMember", ...arguments);
+function enumNumberMember(...args) {
+  return (0, _builder.default)("EnumNumberMember", ...args);
 }
 
-function enumStringMember(id, init) {
-  return (0, _builder.default)("EnumStringMember", ...arguments);
+function enumStringMember(...args) {
+  return (0, _builder.default)("EnumStringMember", ...args);
 }
 
-function enumDefaultedMember(id) {
-  return (0, _builder.default)("EnumDefaultedMember", ...arguments);
+function enumDefaultedMember(...args) {
+  return (0, _builder.default)("EnumDefaultedMember", ...args);
 }
 
-function jsxAttribute(name, value) {
-  return (0, _builder.default)("JSXAttribute", ...arguments);
+function jsxAttribute(...args) {
+  return (0, _builder.default)("JSXAttribute", ...args);
 }
 
-function jsxClosingElement(name) {
-  return (0, _builder.default)("JSXClosingElement", ...arguments);
+function jsxClosingElement(...args) {
+  return (0, _builder.default)("JSXClosingElement", ...args);
 }
 
-function jsxElement(openingElement, closingElement, children, selfClosing) {
-  return (0, _builder.default)("JSXElement", ...arguments);
+function jsxElement(...args) {
+  return (0, _builder.default)("JSXElement", ...args);
 }
 
-function jsxEmptyExpression() {
-  return (0, _builder.default)("JSXEmptyExpression", ...arguments);
+function jsxEmptyExpression(...args) {
+  return (0, _builder.default)("JSXEmptyExpression", ...args);
 }
 
-function jsxExpressionContainer(expression) {
-  return (0, _builder.default)("JSXExpressionContainer", ...arguments);
+function jsxExpressionContainer(...args) {
+  return (0, _builder.default)("JSXExpressionContainer", ...args);
 }
 
-function jsxSpreadChild(expression) {
-  return (0, _builder.default)("JSXSpreadChild", ...arguments);
+function jsxSpreadChild(...args) {
+  return (0, _builder.default)("JSXSpreadChild", ...args);
 }
 
-function jsxIdentifier(name) {
-  return (0, _builder.default)("JSXIdentifier", ...arguments);
+function jsxIdentifier(...args) {
+  return (0, _builder.default)("JSXIdentifier", ...args);
 }
 
-function jsxMemberExpression(object, property) {
-  return (0, _builder.default)("JSXMemberExpression", ...arguments);
+function jsxMemberExpression(...args) {
+  return (0, _builder.default)("JSXMemberExpression", ...args);
 }
 
-function jsxNamespacedName(namespace, name) {
-  return (0, _builder.default)("JSXNamespacedName", ...arguments);
+function jsxNamespacedName(...args) {
+  return (0, _builder.default)("JSXNamespacedName", ...args);
 }
 
-function jsxOpeningElement(name, attributes, selfClosing) {
-  return (0, _builder.default)("JSXOpeningElement", ...arguments);
+function jsxOpeningElement(...args) {
+  return (0, _builder.default)("JSXOpeningElement", ...args);
 }
 
-function jsxSpreadAttribute(argument) {
-  return (0, _builder.default)("JSXSpreadAttribute", ...arguments);
+function jsxSpreadAttribute(...args) {
+  return (0, _builder.default)("JSXSpreadAttribute", ...args);
 }
 
-function jsxText(value) {
-  return (0, _builder.default)("JSXText", ...arguments);
+function jsxText(...args) {
+  return (0, _builder.default)("JSXText", ...args);
 }
 
-function jsxFragment(openingFragment, closingFragment, children) {
-  return (0, _builder.default)("JSXFragment", ...arguments);
+function jsxFragment(...args) {
+  return (0, _builder.default)("JSXFragment", ...args);
 }
 
-function jsxOpeningFragment() {
-  return (0, _builder.default)("JSXOpeningFragment", ...arguments);
+function jsxOpeningFragment(...args) {
+  return (0, _builder.default)("JSXOpeningFragment", ...args);
 }
 
-function jsxClosingFragment() {
-  return (0, _builder.default)("JSXClosingFragment", ...arguments);
+function jsxClosingFragment(...args) {
+  return (0, _builder.default)("JSXClosingFragment", ...args);
 }
 
-function noop() {
-  return (0, _builder.default)("Noop", ...arguments);
+function noop(...args) {
+  return (0, _builder.default)("Noop", ...args);
 }
 
-function placeholder(expectedNode, name) {
-  return (0, _builder.default)("Placeholder", ...arguments);
+function placeholder(...args) {
+  return (0, _builder.default)("Placeholder", ...args);
 }
 
-function v8IntrinsicIdentifier(name) {
-  return (0, _builder.default)("V8IntrinsicIdentifier", ...arguments);
+function v8IntrinsicIdentifier(...args) {
+  return (0, _builder.default)("V8IntrinsicIdentifier", ...args);
 }
 
-function argumentPlaceholder() {
-  return (0, _builder.default)("ArgumentPlaceholder", ...arguments);
+function argumentPlaceholder(...args) {
+  return (0, _builder.default)("ArgumentPlaceholder", ...args);
 }
 
-function bindExpression(object, callee) {
-  return (0, _builder.default)("BindExpression", ...arguments);
+function bindExpression(...args) {
+  return (0, _builder.default)("BindExpression", ...args);
 }
 
-function classProperty(key, value, typeAnnotation, decorators, computed, _static) {
-  return (0, _builder.default)("ClassProperty", ...arguments);
+function classProperty(...args) {
+  return (0, _builder.default)("ClassProperty", ...args);
 }
 
-function pipelineTopicExpression(expression) {
-  return (0, _builder.default)("PipelineTopicExpression", ...arguments);
+function pipelineTopicExpression(...args) {
+  return (0, _builder.default)("PipelineTopicExpression", ...args);
 }
 
-function pipelineBareFunction(callee) {
-  return (0, _builder.default)("PipelineBareFunction", ...arguments);
+function pipelineBareFunction(...args) {
+  return (0, _builder.default)("PipelineBareFunction", ...args);
 }
 
-function pipelinePrimaryTopicReference() {
-  return (0, _builder.default)("PipelinePrimaryTopicReference", ...arguments);
+function pipelinePrimaryTopicReference(...args) {
+  return (0, _builder.default)("PipelinePrimaryTopicReference", ...args);
 }
 
-function classPrivateProperty(key, value, decorators, _static) {
-  return (0, _builder.default)("ClassPrivateProperty", ...arguments);
+function classPrivateProperty(...args) {
+  return (0, _builder.default)("ClassPrivateProperty", ...args);
 }
 
-function classPrivateMethod(kind, key, params, body, _static) {
-  return (0, _builder.default)("ClassPrivateMethod", ...arguments);
+function classPrivateMethod(...args) {
+  return (0, _builder.default)("ClassPrivateMethod", ...args);
 }
 
-function importAttribute(key, value) {
-  return (0, _builder.default)("ImportAttribute", ...arguments);
+function importAttribute(...args) {
+  return (0, _builder.default)("ImportAttribute", ...args);
 }
 
-function decorator(expression) {
-  return (0, _builder.default)("Decorator", ...arguments);
+function decorator(...args) {
+  return (0, _builder.default)("Decorator", ...args);
 }
 
-function doExpression(body) {
-  return (0, _builder.default)("DoExpression", ...arguments);
+function doExpression(...args) {
+  return (0, _builder.default)("DoExpression", ...args);
 }
 
-function exportDefaultSpecifier(exported) {
-  return (0, _builder.default)("ExportDefaultSpecifier", ...arguments);
+function exportDefaultSpecifier(...args) {
+  return (0, _builder.default)("ExportDefaultSpecifier", ...args);
 }
 
-function privateName(id) {
-  return (0, _builder.default)("PrivateName", ...arguments);
+function privateName(...args) {
+  return (0, _builder.default)("PrivateName", ...args);
 }
 
-function recordExpression(properties) {
-  return (0, _builder.default)("RecordExpression", ...arguments);
+function recordExpression(...args) {
+  return (0, _builder.default)("RecordExpression", ...args);
 }
 
-function tupleExpression(elements) {
-  return (0, _builder.default)("TupleExpression", ...arguments);
+function tupleExpression(...args) {
+  return (0, _builder.default)("TupleExpression", ...args);
 }
 
-function decimalLiteral(value) {
-  return (0, _builder.default)("DecimalLiteral", ...arguments);
+function decimalLiteral(...args) {
+  return (0, _builder.default)("DecimalLiteral", ...args);
 }
 
-function staticBlock(body) {
-  return (0, _builder.default)("StaticBlock", ...arguments);
+function tsParameterProperty(...args) {
+  return (0, _builder.default)("TSParameterProperty", ...args);
 }
 
-function moduleExpression(body) {
-  return (0, _builder.default)("ModuleExpression", ...arguments);
+function tsDeclareFunction(...args) {
+  return (0, _builder.default)("TSDeclareFunction", ...args);
 }
 
-function tsParameterProperty(parameter) {
-  return (0, _builder.default)("TSParameterProperty", ...arguments);
+function tsDeclareMethod(...args) {
+  return (0, _builder.default)("TSDeclareMethod", ...args);
 }
 
-function tsDeclareFunction(id, typeParameters, params, returnType) {
-  return (0, _builder.default)("TSDeclareFunction", ...arguments);
+function tsQualifiedName(...args) {
+  return (0, _builder.default)("TSQualifiedName", ...args);
 }
 
-function tsDeclareMethod(decorators, key, typeParameters, params, returnType) {
-  return (0, _builder.default)("TSDeclareMethod", ...arguments);
+function tsCallSignatureDeclaration(...args) {
+  return (0, _builder.default)("TSCallSignatureDeclaration", ...args);
 }
 
-function tsQualifiedName(left, right) {
-  return (0, _builder.default)("TSQualifiedName", ...arguments);
+function tsConstructSignatureDeclaration(...args) {
+  return (0, _builder.default)("TSConstructSignatureDeclaration", ...args);
 }
 
-function tsCallSignatureDeclaration(typeParameters, parameters, typeAnnotation) {
-  return (0, _builder.default)("TSCallSignatureDeclaration", ...arguments);
+function tsPropertySignature(...args) {
+  return (0, _builder.default)("TSPropertySignature", ...args);
 }
 
-function tsConstructSignatureDeclaration(typeParameters, parameters, typeAnnotation) {
-  return (0, _builder.default)("TSConstructSignatureDeclaration", ...arguments);
+function tsMethodSignature(...args) {
+  return (0, _builder.default)("TSMethodSignature", ...args);
 }
 
-function tsPropertySignature(key, typeAnnotation, initializer) {
-  return (0, _builder.default)("TSPropertySignature", ...arguments);
+function tsIndexSignature(...args) {
+  return (0, _builder.default)("TSIndexSignature", ...args);
 }
 
-function tsMethodSignature(key, typeParameters, parameters, typeAnnotation) {
-  return (0, _builder.default)("TSMethodSignature", ...arguments);
+function tsAnyKeyword(...args) {
+  return (0, _builder.default)("TSAnyKeyword", ...args);
 }
 
-function tsIndexSignature(parameters, typeAnnotation) {
-  return (0, _builder.default)("TSIndexSignature", ...arguments);
+function tsBooleanKeyword(...args) {
+  return (0, _builder.default)("TSBooleanKeyword", ...args);
 }
 
-function tsAnyKeyword() {
-  return (0, _builder.default)("TSAnyKeyword", ...arguments);
+function tsBigIntKeyword(...args) {
+  return (0, _builder.default)("TSBigIntKeyword", ...args);
 }
 
-function tsBooleanKeyword() {
-  return (0, _builder.default)("TSBooleanKeyword", ...arguments);
+function tsNeverKeyword(...args) {
+  return (0, _builder.default)("TSNeverKeyword", ...args);
 }
 
-function tsBigIntKeyword() {
-  return (0, _builder.default)("TSBigIntKeyword", ...arguments);
+function tsNullKeyword(...args) {
+  return (0, _builder.default)("TSNullKeyword", ...args);
 }
 
-function tsIntrinsicKeyword() {
-  return (0, _builder.default)("TSIntrinsicKeyword", ...arguments);
+function tsNumberKeyword(...args) {
+  return (0, _builder.default)("TSNumberKeyword", ...args);
 }
 
-function tsNeverKeyword() {
-  return (0, _builder.default)("TSNeverKeyword", ...arguments);
+function tsObjectKeyword(...args) {
+  return (0, _builder.default)("TSObjectKeyword", ...args);
 }
 
-function tsNullKeyword() {
-  return (0, _builder.default)("TSNullKeyword", ...arguments);
+function tsStringKeyword(...args) {
+  return (0, _builder.default)("TSStringKeyword", ...args);
 }
 
-function tsNumberKeyword() {
-  return (0, _builder.default)("TSNumberKeyword", ...arguments);
+function tsSymbolKeyword(...args) {
+  return (0, _builder.default)("TSSymbolKeyword", ...args);
 }
 
-function tsObjectKeyword() {
-  return (0, _builder.default)("TSObjectKeyword", ...arguments);
+function tsUndefinedKeyword(...args) {
+  return (0, _builder.default)("TSUndefinedKeyword", ...args);
 }
 
-function tsStringKeyword() {
-  return (0, _builder.default)("TSStringKeyword", ...arguments);
+function tsUnknownKeyword(...args) {
+  return (0, _builder.default)("TSUnknownKeyword", ...args);
 }
 
-function tsSymbolKeyword() {
-  return (0, _builder.default)("TSSymbolKeyword", ...arguments);
+function tsVoidKeyword(...args) {
+  return (0, _builder.default)("TSVoidKeyword", ...args);
 }
 
-function tsUndefinedKeyword() {
-  return (0, _builder.default)("TSUndefinedKeyword", ...arguments);
+function tsThisType(...args) {
+  return (0, _builder.default)("TSThisType", ...args);
 }
 
-function tsUnknownKeyword() {
-  return (0, _builder.default)("TSUnknownKeyword", ...arguments);
+function tsFunctionType(...args) {
+  return (0, _builder.default)("TSFunctionType", ...args);
 }
 
-function tsVoidKeyword() {
-  return (0, _builder.default)("TSVoidKeyword", ...arguments);
+function tsConstructorType(...args) {
+  return (0, _builder.default)("TSConstructorType", ...args);
 }
 
-function tsThisType() {
-  return (0, _builder.default)("TSThisType", ...arguments);
+function tsTypeReference(...args) {
+  return (0, _builder.default)("TSTypeReference", ...args);
 }
 
-function tsFunctionType(typeParameters, parameters, typeAnnotation) {
-  return (0, _builder.default)("TSFunctionType", ...arguments);
+function tsTypePredicate(...args) {
+  return (0, _builder.default)("TSTypePredicate", ...args);
 }
 
-function tsConstructorType(typeParameters, parameters, typeAnnotation) {
-  return (0, _builder.default)("TSConstructorType", ...arguments);
+function tsTypeQuery(...args) {
+  return (0, _builder.default)("TSTypeQuery", ...args);
 }
 
-function tsTypeReference(typeName, typeParameters) {
-  return (0, _builder.default)("TSTypeReference", ...arguments);
+function tsTypeLiteral(...args) {
+  return (0, _builder.default)("TSTypeLiteral", ...args);
 }
 
-function tsTypePredicate(parameterName, typeAnnotation, asserts) {
-  return (0, _builder.default)("TSTypePredicate", ...arguments);
+function tsArrayType(...args) {
+  return (0, _builder.default)("TSArrayType", ...args);
 }
 
-function tsTypeQuery(exprName) {
-  return (0, _builder.default)("TSTypeQuery", ...arguments);
+function tsTupleType(...args) {
+  return (0, _builder.default)("TSTupleType", ...args);
 }
 
-function tsTypeLiteral(members) {
-  return (0, _builder.default)("TSTypeLiteral", ...arguments);
+function tsOptionalType(...args) {
+  return (0, _builder.default)("TSOptionalType", ...args);
 }
 
-function tsArrayType(elementType) {
-  return (0, _builder.default)("TSArrayType", ...arguments);
+function tsRestType(...args) {
+  return (0, _builder.default)("TSRestType", ...args);
 }
 
-function tsTupleType(elementTypes) {
-  return (0, _builder.default)("TSTupleType", ...arguments);
+function tsNamedTupleMember(...args) {
+  return (0, _builder.default)("TSNamedTupleMember", ...args);
 }
 
-function tsOptionalType(typeAnnotation) {
-  return (0, _builder.default)("TSOptionalType", ...arguments);
+function tsUnionType(...args) {
+  return (0, _builder.default)("TSUnionType", ...args);
 }
 
-function tsRestType(typeAnnotation) {
-  return (0, _builder.default)("TSRestType", ...arguments);
+function tsIntersectionType(...args) {
+  return (0, _builder.default)("TSIntersectionType", ...args);
 }
 
-function tsNamedTupleMember(label, elementType, optional) {
-  return (0, _builder.default)("TSNamedTupleMember", ...arguments);
+function tsConditionalType(...args) {
+  return (0, _builder.default)("TSConditionalType", ...args);
 }
 
-function tsUnionType(types) {
-  return (0, _builder.default)("TSUnionType", ...arguments);
+function tsInferType(...args) {
+  return (0, _builder.default)("TSInferType", ...args);
 }
 
-function tsIntersectionType(types) {
-  return (0, _builder.default)("TSIntersectionType", ...arguments);
+function tsParenthesizedType(...args) {
+  return (0, _builder.default)("TSParenthesizedType", ...args);
 }
 
-function tsConditionalType(checkType, extendsType, trueType, falseType) {
-  return (0, _builder.default)("TSConditionalType", ...arguments);
+function tsTypeOperator(...args) {
+  return (0, _builder.default)("TSTypeOperator", ...args);
 }
 
-function tsInferType(typeParameter) {
-  return (0, _builder.default)("TSInferType", ...arguments);
+function tsIndexedAccessType(...args) {
+  return (0, _builder.default)("TSIndexedAccessType", ...args);
 }
 
-function tsParenthesizedType(typeAnnotation) {
-  return (0, _builder.default)("TSParenthesizedType", ...arguments);
+function tsMappedType(...args) {
+  return (0, _builder.default)("TSMappedType", ...args);
 }
 
-function tsTypeOperator(typeAnnotation) {
-  return (0, _builder.default)("TSTypeOperator", ...arguments);
+function tsLiteralType(...args) {
+  return (0, _builder.default)("TSLiteralType", ...args);
 }
 
-function tsIndexedAccessType(objectType, indexType) {
-  return (0, _builder.default)("TSIndexedAccessType", ...arguments);
+function tsExpressionWithTypeArguments(...args) {
+  return (0, _builder.default)("TSExpressionWithTypeArguments", ...args);
 }
 
-function tsMappedType(typeParameter, typeAnnotation, nameType) {
-  return (0, _builder.default)("TSMappedType", ...arguments);
+function tsInterfaceDeclaration(...args) {
+  return (0, _builder.default)("TSInterfaceDeclaration", ...args);
 }
 
-function tsLiteralType(literal) {
-  return (0, _builder.default)("TSLiteralType", ...arguments);
+function tsInterfaceBody(...args) {
+  return (0, _builder.default)("TSInterfaceBody", ...args);
 }
 
-function tsExpressionWithTypeArguments(expression, typeParameters) {
-  return (0, _builder.default)("TSExpressionWithTypeArguments", ...arguments);
+function tsTypeAliasDeclaration(...args) {
+  return (0, _builder.default)("TSTypeAliasDeclaration", ...args);
 }
 
-function tsInterfaceDeclaration(id, typeParameters, _extends, body) {
-  return (0, _builder.default)("TSInterfaceDeclaration", ...arguments);
+function tsAsExpression(...args) {
+  return (0, _builder.default)("TSAsExpression", ...args);
 }
 
-function tsInterfaceBody(body) {
-  return (0, _builder.default)("TSInterfaceBody", ...arguments);
+function tsTypeAssertion(...args) {
+  return (0, _builder.default)("TSTypeAssertion", ...args);
 }
 
-function tsTypeAliasDeclaration(id, typeParameters, typeAnnotation) {
-  return (0, _builder.default)("TSTypeAliasDeclaration", ...arguments);
+function tsEnumDeclaration(...args) {
+  return (0, _builder.default)("TSEnumDeclaration", ...args);
 }
 
-function tsAsExpression(expression, typeAnnotation) {
-  return (0, _builder.default)("TSAsExpression", ...arguments);
+function tsEnumMember(...args) {
+  return (0, _builder.default)("TSEnumMember", ...args);
 }
 
-function tsTypeAssertion(typeAnnotation, expression) {
-  return (0, _builder.default)("TSTypeAssertion", ...arguments);
+function tsModuleDeclaration(...args) {
+  return (0, _builder.default)("TSModuleDeclaration", ...args);
 }
 
-function tsEnumDeclaration(id, members) {
-  return (0, _builder.default)("TSEnumDeclaration", ...arguments);
+function tsModuleBlock(...args) {
+  return (0, _builder.default)("TSModuleBlock", ...args);
 }
 
-function tsEnumMember(id, initializer) {
-  return (0, _builder.default)("TSEnumMember", ...arguments);
+function tsImportType(...args) {
+  return (0, _builder.default)("TSImportType", ...args);
 }
 
-function tsModuleDeclaration(id, body) {
-  return (0, _builder.default)("TSModuleDeclaration", ...arguments);
+function tsImportEqualsDeclaration(...args) {
+  return (0, _builder.default)("TSImportEqualsDeclaration", ...args);
 }
 
-function tsModuleBlock(body) {
-  return (0, _builder.default)("TSModuleBlock", ...arguments);
+function tsExternalModuleReference(...args) {
+  return (0, _builder.default)("TSExternalModuleReference", ...args);
 }
 
-function tsImportType(argument, qualifier, typeParameters) {
-  return (0, _builder.default)("TSImportType", ...arguments);
+function tsNonNullExpression(...args) {
+  return (0, _builder.default)("TSNonNullExpression", ...args);
 }
 
-function tsImportEqualsDeclaration(id, moduleReference) {
-  return (0, _builder.default)("TSImportEqualsDeclaration", ...arguments);
+function tsExportAssignment(...args) {
+  return (0, _builder.default)("TSExportAssignment", ...args);
 }
 
-function tsExternalModuleReference(expression) {
-  return (0, _builder.default)("TSExternalModuleReference", ...arguments);
+function tsNamespaceExportDeclaration(...args) {
+  return (0, _builder.default)("TSNamespaceExportDeclaration", ...args);
 }
 
-function tsNonNullExpression(expression) {
-  return (0, _builder.default)("TSNonNullExpression", ...arguments);
+function tsTypeAnnotation(...args) {
+  return (0, _builder.default)("TSTypeAnnotation", ...args);
 }
 
-function tsExportAssignment(expression) {
-  return (0, _builder.default)("TSExportAssignment", ...arguments);
+function tsTypeParameterInstantiation(...args) {
+  return (0, _builder.default)("TSTypeParameterInstantiation", ...args);
 }
 
-function tsNamespaceExportDeclaration(id) {
-  return (0, _builder.default)("TSNamespaceExportDeclaration", ...arguments);
+function tsTypeParameterDeclaration(...args) {
+  return (0, _builder.default)("TSTypeParameterDeclaration", ...args);
 }
 
-function tsTypeAnnotation(typeAnnotation) {
-  return (0, _builder.default)("TSTypeAnnotation", ...arguments);
-}
-
-function tsTypeParameterInstantiation(params) {
-  return (0, _builder.default)("TSTypeParameterInstantiation", ...arguments);
-}
-
-function tsTypeParameterDeclaration(params) {
-  return (0, _builder.default)("TSTypeParameterDeclaration", ...arguments);
-}
-
-function tsTypeParameter(constraint, _default, name) {
-  return (0, _builder.default)("TSTypeParameter", ...arguments);
+function tsTypeParameter(...args) {
+  return (0, _builder.default)("TSTypeParameter", ...args);
 }
 
 function NumberLiteral(...args) {
@@ -3340,1506 +3276,6 @@ function SpreadProperty(...args) {
   console.trace("The node type SpreadProperty has been renamed to SpreadElement");
   return (0, _builder.default)("SpreadProperty", ...args);
 }
-
-/***/ }),
-
-/***/ "./node_modules/@babel/types/lib/builders/generated/uppercase.js":
-/*!***********************************************************************!*\
-  !*** ./node_modules/@babel/types/lib/builders/generated/uppercase.js ***!
-  \***********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-Object.defineProperty(exports, "ArrayExpression", {
-  enumerable: true,
-  get: function () {
-    return _index.arrayExpression;
-  }
-});
-Object.defineProperty(exports, "AssignmentExpression", {
-  enumerable: true,
-  get: function () {
-    return _index.assignmentExpression;
-  }
-});
-Object.defineProperty(exports, "BinaryExpression", {
-  enumerable: true,
-  get: function () {
-    return _index.binaryExpression;
-  }
-});
-Object.defineProperty(exports, "InterpreterDirective", {
-  enumerable: true,
-  get: function () {
-    return _index.interpreterDirective;
-  }
-});
-Object.defineProperty(exports, "Directive", {
-  enumerable: true,
-  get: function () {
-    return _index.directive;
-  }
-});
-Object.defineProperty(exports, "DirectiveLiteral", {
-  enumerable: true,
-  get: function () {
-    return _index.directiveLiteral;
-  }
-});
-Object.defineProperty(exports, "BlockStatement", {
-  enumerable: true,
-  get: function () {
-    return _index.blockStatement;
-  }
-});
-Object.defineProperty(exports, "BreakStatement", {
-  enumerable: true,
-  get: function () {
-    return _index.breakStatement;
-  }
-});
-Object.defineProperty(exports, "CallExpression", {
-  enumerable: true,
-  get: function () {
-    return _index.callExpression;
-  }
-});
-Object.defineProperty(exports, "CatchClause", {
-  enumerable: true,
-  get: function () {
-    return _index.catchClause;
-  }
-});
-Object.defineProperty(exports, "ConditionalExpression", {
-  enumerable: true,
-  get: function () {
-    return _index.conditionalExpression;
-  }
-});
-Object.defineProperty(exports, "ContinueStatement", {
-  enumerable: true,
-  get: function () {
-    return _index.continueStatement;
-  }
-});
-Object.defineProperty(exports, "DebuggerStatement", {
-  enumerable: true,
-  get: function () {
-    return _index.debuggerStatement;
-  }
-});
-Object.defineProperty(exports, "DoWhileStatement", {
-  enumerable: true,
-  get: function () {
-    return _index.doWhileStatement;
-  }
-});
-Object.defineProperty(exports, "EmptyStatement", {
-  enumerable: true,
-  get: function () {
-    return _index.emptyStatement;
-  }
-});
-Object.defineProperty(exports, "ExpressionStatement", {
-  enumerable: true,
-  get: function () {
-    return _index.expressionStatement;
-  }
-});
-Object.defineProperty(exports, "File", {
-  enumerable: true,
-  get: function () {
-    return _index.file;
-  }
-});
-Object.defineProperty(exports, "ForInStatement", {
-  enumerable: true,
-  get: function () {
-    return _index.forInStatement;
-  }
-});
-Object.defineProperty(exports, "ForStatement", {
-  enumerable: true,
-  get: function () {
-    return _index.forStatement;
-  }
-});
-Object.defineProperty(exports, "FunctionDeclaration", {
-  enumerable: true,
-  get: function () {
-    return _index.functionDeclaration;
-  }
-});
-Object.defineProperty(exports, "FunctionExpression", {
-  enumerable: true,
-  get: function () {
-    return _index.functionExpression;
-  }
-});
-Object.defineProperty(exports, "Identifier", {
-  enumerable: true,
-  get: function () {
-    return _index.identifier;
-  }
-});
-Object.defineProperty(exports, "IfStatement", {
-  enumerable: true,
-  get: function () {
-    return _index.ifStatement;
-  }
-});
-Object.defineProperty(exports, "LabeledStatement", {
-  enumerable: true,
-  get: function () {
-    return _index.labeledStatement;
-  }
-});
-Object.defineProperty(exports, "StringLiteral", {
-  enumerable: true,
-  get: function () {
-    return _index.stringLiteral;
-  }
-});
-Object.defineProperty(exports, "NumericLiteral", {
-  enumerable: true,
-  get: function () {
-    return _index.numericLiteral;
-  }
-});
-Object.defineProperty(exports, "NullLiteral", {
-  enumerable: true,
-  get: function () {
-    return _index.nullLiteral;
-  }
-});
-Object.defineProperty(exports, "BooleanLiteral", {
-  enumerable: true,
-  get: function () {
-    return _index.booleanLiteral;
-  }
-});
-Object.defineProperty(exports, "RegExpLiteral", {
-  enumerable: true,
-  get: function () {
-    return _index.regExpLiteral;
-  }
-});
-Object.defineProperty(exports, "LogicalExpression", {
-  enumerable: true,
-  get: function () {
-    return _index.logicalExpression;
-  }
-});
-Object.defineProperty(exports, "MemberExpression", {
-  enumerable: true,
-  get: function () {
-    return _index.memberExpression;
-  }
-});
-Object.defineProperty(exports, "NewExpression", {
-  enumerable: true,
-  get: function () {
-    return _index.newExpression;
-  }
-});
-Object.defineProperty(exports, "Program", {
-  enumerable: true,
-  get: function () {
-    return _index.program;
-  }
-});
-Object.defineProperty(exports, "ObjectExpression", {
-  enumerable: true,
-  get: function () {
-    return _index.objectExpression;
-  }
-});
-Object.defineProperty(exports, "ObjectMethod", {
-  enumerable: true,
-  get: function () {
-    return _index.objectMethod;
-  }
-});
-Object.defineProperty(exports, "ObjectProperty", {
-  enumerable: true,
-  get: function () {
-    return _index.objectProperty;
-  }
-});
-Object.defineProperty(exports, "RestElement", {
-  enumerable: true,
-  get: function () {
-    return _index.restElement;
-  }
-});
-Object.defineProperty(exports, "ReturnStatement", {
-  enumerable: true,
-  get: function () {
-    return _index.returnStatement;
-  }
-});
-Object.defineProperty(exports, "SequenceExpression", {
-  enumerable: true,
-  get: function () {
-    return _index.sequenceExpression;
-  }
-});
-Object.defineProperty(exports, "ParenthesizedExpression", {
-  enumerable: true,
-  get: function () {
-    return _index.parenthesizedExpression;
-  }
-});
-Object.defineProperty(exports, "SwitchCase", {
-  enumerable: true,
-  get: function () {
-    return _index.switchCase;
-  }
-});
-Object.defineProperty(exports, "SwitchStatement", {
-  enumerable: true,
-  get: function () {
-    return _index.switchStatement;
-  }
-});
-Object.defineProperty(exports, "ThisExpression", {
-  enumerable: true,
-  get: function () {
-    return _index.thisExpression;
-  }
-});
-Object.defineProperty(exports, "ThrowStatement", {
-  enumerable: true,
-  get: function () {
-    return _index.throwStatement;
-  }
-});
-Object.defineProperty(exports, "TryStatement", {
-  enumerable: true,
-  get: function () {
-    return _index.tryStatement;
-  }
-});
-Object.defineProperty(exports, "UnaryExpression", {
-  enumerable: true,
-  get: function () {
-    return _index.unaryExpression;
-  }
-});
-Object.defineProperty(exports, "UpdateExpression", {
-  enumerable: true,
-  get: function () {
-    return _index.updateExpression;
-  }
-});
-Object.defineProperty(exports, "VariableDeclaration", {
-  enumerable: true,
-  get: function () {
-    return _index.variableDeclaration;
-  }
-});
-Object.defineProperty(exports, "VariableDeclarator", {
-  enumerable: true,
-  get: function () {
-    return _index.variableDeclarator;
-  }
-});
-Object.defineProperty(exports, "WhileStatement", {
-  enumerable: true,
-  get: function () {
-    return _index.whileStatement;
-  }
-});
-Object.defineProperty(exports, "WithStatement", {
-  enumerable: true,
-  get: function () {
-    return _index.withStatement;
-  }
-});
-Object.defineProperty(exports, "AssignmentPattern", {
-  enumerable: true,
-  get: function () {
-    return _index.assignmentPattern;
-  }
-});
-Object.defineProperty(exports, "ArrayPattern", {
-  enumerable: true,
-  get: function () {
-    return _index.arrayPattern;
-  }
-});
-Object.defineProperty(exports, "ArrowFunctionExpression", {
-  enumerable: true,
-  get: function () {
-    return _index.arrowFunctionExpression;
-  }
-});
-Object.defineProperty(exports, "ClassBody", {
-  enumerable: true,
-  get: function () {
-    return _index.classBody;
-  }
-});
-Object.defineProperty(exports, "ClassExpression", {
-  enumerable: true,
-  get: function () {
-    return _index.classExpression;
-  }
-});
-Object.defineProperty(exports, "ClassDeclaration", {
-  enumerable: true,
-  get: function () {
-    return _index.classDeclaration;
-  }
-});
-Object.defineProperty(exports, "ExportAllDeclaration", {
-  enumerable: true,
-  get: function () {
-    return _index.exportAllDeclaration;
-  }
-});
-Object.defineProperty(exports, "ExportDefaultDeclaration", {
-  enumerable: true,
-  get: function () {
-    return _index.exportDefaultDeclaration;
-  }
-});
-Object.defineProperty(exports, "ExportNamedDeclaration", {
-  enumerable: true,
-  get: function () {
-    return _index.exportNamedDeclaration;
-  }
-});
-Object.defineProperty(exports, "ExportSpecifier", {
-  enumerable: true,
-  get: function () {
-    return _index.exportSpecifier;
-  }
-});
-Object.defineProperty(exports, "ForOfStatement", {
-  enumerable: true,
-  get: function () {
-    return _index.forOfStatement;
-  }
-});
-Object.defineProperty(exports, "ImportDeclaration", {
-  enumerable: true,
-  get: function () {
-    return _index.importDeclaration;
-  }
-});
-Object.defineProperty(exports, "ImportDefaultSpecifier", {
-  enumerable: true,
-  get: function () {
-    return _index.importDefaultSpecifier;
-  }
-});
-Object.defineProperty(exports, "ImportNamespaceSpecifier", {
-  enumerable: true,
-  get: function () {
-    return _index.importNamespaceSpecifier;
-  }
-});
-Object.defineProperty(exports, "ImportSpecifier", {
-  enumerable: true,
-  get: function () {
-    return _index.importSpecifier;
-  }
-});
-Object.defineProperty(exports, "MetaProperty", {
-  enumerable: true,
-  get: function () {
-    return _index.metaProperty;
-  }
-});
-Object.defineProperty(exports, "ClassMethod", {
-  enumerable: true,
-  get: function () {
-    return _index.classMethod;
-  }
-});
-Object.defineProperty(exports, "ObjectPattern", {
-  enumerable: true,
-  get: function () {
-    return _index.objectPattern;
-  }
-});
-Object.defineProperty(exports, "SpreadElement", {
-  enumerable: true,
-  get: function () {
-    return _index.spreadElement;
-  }
-});
-Object.defineProperty(exports, "Super", {
-  enumerable: true,
-  get: function () {
-    return _index.super;
-  }
-});
-Object.defineProperty(exports, "TaggedTemplateExpression", {
-  enumerable: true,
-  get: function () {
-    return _index.taggedTemplateExpression;
-  }
-});
-Object.defineProperty(exports, "TemplateElement", {
-  enumerable: true,
-  get: function () {
-    return _index.templateElement;
-  }
-});
-Object.defineProperty(exports, "TemplateLiteral", {
-  enumerable: true,
-  get: function () {
-    return _index.templateLiteral;
-  }
-});
-Object.defineProperty(exports, "YieldExpression", {
-  enumerable: true,
-  get: function () {
-    return _index.yieldExpression;
-  }
-});
-Object.defineProperty(exports, "AwaitExpression", {
-  enumerable: true,
-  get: function () {
-    return _index.awaitExpression;
-  }
-});
-Object.defineProperty(exports, "Import", {
-  enumerable: true,
-  get: function () {
-    return _index.import;
-  }
-});
-Object.defineProperty(exports, "BigIntLiteral", {
-  enumerable: true,
-  get: function () {
-    return _index.bigIntLiteral;
-  }
-});
-Object.defineProperty(exports, "ExportNamespaceSpecifier", {
-  enumerable: true,
-  get: function () {
-    return _index.exportNamespaceSpecifier;
-  }
-});
-Object.defineProperty(exports, "OptionalMemberExpression", {
-  enumerable: true,
-  get: function () {
-    return _index.optionalMemberExpression;
-  }
-});
-Object.defineProperty(exports, "OptionalCallExpression", {
-  enumerable: true,
-  get: function () {
-    return _index.optionalCallExpression;
-  }
-});
-Object.defineProperty(exports, "AnyTypeAnnotation", {
-  enumerable: true,
-  get: function () {
-    return _index.anyTypeAnnotation;
-  }
-});
-Object.defineProperty(exports, "ArrayTypeAnnotation", {
-  enumerable: true,
-  get: function () {
-    return _index.arrayTypeAnnotation;
-  }
-});
-Object.defineProperty(exports, "BooleanTypeAnnotation", {
-  enumerable: true,
-  get: function () {
-    return _index.booleanTypeAnnotation;
-  }
-});
-Object.defineProperty(exports, "BooleanLiteralTypeAnnotation", {
-  enumerable: true,
-  get: function () {
-    return _index.booleanLiteralTypeAnnotation;
-  }
-});
-Object.defineProperty(exports, "NullLiteralTypeAnnotation", {
-  enumerable: true,
-  get: function () {
-    return _index.nullLiteralTypeAnnotation;
-  }
-});
-Object.defineProperty(exports, "ClassImplements", {
-  enumerable: true,
-  get: function () {
-    return _index.classImplements;
-  }
-});
-Object.defineProperty(exports, "DeclareClass", {
-  enumerable: true,
-  get: function () {
-    return _index.declareClass;
-  }
-});
-Object.defineProperty(exports, "DeclareFunction", {
-  enumerable: true,
-  get: function () {
-    return _index.declareFunction;
-  }
-});
-Object.defineProperty(exports, "DeclareInterface", {
-  enumerable: true,
-  get: function () {
-    return _index.declareInterface;
-  }
-});
-Object.defineProperty(exports, "DeclareModule", {
-  enumerable: true,
-  get: function () {
-    return _index.declareModule;
-  }
-});
-Object.defineProperty(exports, "DeclareModuleExports", {
-  enumerable: true,
-  get: function () {
-    return _index.declareModuleExports;
-  }
-});
-Object.defineProperty(exports, "DeclareTypeAlias", {
-  enumerable: true,
-  get: function () {
-    return _index.declareTypeAlias;
-  }
-});
-Object.defineProperty(exports, "DeclareOpaqueType", {
-  enumerable: true,
-  get: function () {
-    return _index.declareOpaqueType;
-  }
-});
-Object.defineProperty(exports, "DeclareVariable", {
-  enumerable: true,
-  get: function () {
-    return _index.declareVariable;
-  }
-});
-Object.defineProperty(exports, "DeclareExportDeclaration", {
-  enumerable: true,
-  get: function () {
-    return _index.declareExportDeclaration;
-  }
-});
-Object.defineProperty(exports, "DeclareExportAllDeclaration", {
-  enumerable: true,
-  get: function () {
-    return _index.declareExportAllDeclaration;
-  }
-});
-Object.defineProperty(exports, "DeclaredPredicate", {
-  enumerable: true,
-  get: function () {
-    return _index.declaredPredicate;
-  }
-});
-Object.defineProperty(exports, "ExistsTypeAnnotation", {
-  enumerable: true,
-  get: function () {
-    return _index.existsTypeAnnotation;
-  }
-});
-Object.defineProperty(exports, "FunctionTypeAnnotation", {
-  enumerable: true,
-  get: function () {
-    return _index.functionTypeAnnotation;
-  }
-});
-Object.defineProperty(exports, "FunctionTypeParam", {
-  enumerable: true,
-  get: function () {
-    return _index.functionTypeParam;
-  }
-});
-Object.defineProperty(exports, "GenericTypeAnnotation", {
-  enumerable: true,
-  get: function () {
-    return _index.genericTypeAnnotation;
-  }
-});
-Object.defineProperty(exports, "InferredPredicate", {
-  enumerable: true,
-  get: function () {
-    return _index.inferredPredicate;
-  }
-});
-Object.defineProperty(exports, "InterfaceExtends", {
-  enumerable: true,
-  get: function () {
-    return _index.interfaceExtends;
-  }
-});
-Object.defineProperty(exports, "InterfaceDeclaration", {
-  enumerable: true,
-  get: function () {
-    return _index.interfaceDeclaration;
-  }
-});
-Object.defineProperty(exports, "InterfaceTypeAnnotation", {
-  enumerable: true,
-  get: function () {
-    return _index.interfaceTypeAnnotation;
-  }
-});
-Object.defineProperty(exports, "IntersectionTypeAnnotation", {
-  enumerable: true,
-  get: function () {
-    return _index.intersectionTypeAnnotation;
-  }
-});
-Object.defineProperty(exports, "MixedTypeAnnotation", {
-  enumerable: true,
-  get: function () {
-    return _index.mixedTypeAnnotation;
-  }
-});
-Object.defineProperty(exports, "EmptyTypeAnnotation", {
-  enumerable: true,
-  get: function () {
-    return _index.emptyTypeAnnotation;
-  }
-});
-Object.defineProperty(exports, "NullableTypeAnnotation", {
-  enumerable: true,
-  get: function () {
-    return _index.nullableTypeAnnotation;
-  }
-});
-Object.defineProperty(exports, "NumberLiteralTypeAnnotation", {
-  enumerable: true,
-  get: function () {
-    return _index.numberLiteralTypeAnnotation;
-  }
-});
-Object.defineProperty(exports, "NumberTypeAnnotation", {
-  enumerable: true,
-  get: function () {
-    return _index.numberTypeAnnotation;
-  }
-});
-Object.defineProperty(exports, "ObjectTypeAnnotation", {
-  enumerable: true,
-  get: function () {
-    return _index.objectTypeAnnotation;
-  }
-});
-Object.defineProperty(exports, "ObjectTypeInternalSlot", {
-  enumerable: true,
-  get: function () {
-    return _index.objectTypeInternalSlot;
-  }
-});
-Object.defineProperty(exports, "ObjectTypeCallProperty", {
-  enumerable: true,
-  get: function () {
-    return _index.objectTypeCallProperty;
-  }
-});
-Object.defineProperty(exports, "ObjectTypeIndexer", {
-  enumerable: true,
-  get: function () {
-    return _index.objectTypeIndexer;
-  }
-});
-Object.defineProperty(exports, "ObjectTypeProperty", {
-  enumerable: true,
-  get: function () {
-    return _index.objectTypeProperty;
-  }
-});
-Object.defineProperty(exports, "ObjectTypeSpreadProperty", {
-  enumerable: true,
-  get: function () {
-    return _index.objectTypeSpreadProperty;
-  }
-});
-Object.defineProperty(exports, "OpaqueType", {
-  enumerable: true,
-  get: function () {
-    return _index.opaqueType;
-  }
-});
-Object.defineProperty(exports, "QualifiedTypeIdentifier", {
-  enumerable: true,
-  get: function () {
-    return _index.qualifiedTypeIdentifier;
-  }
-});
-Object.defineProperty(exports, "StringLiteralTypeAnnotation", {
-  enumerable: true,
-  get: function () {
-    return _index.stringLiteralTypeAnnotation;
-  }
-});
-Object.defineProperty(exports, "StringTypeAnnotation", {
-  enumerable: true,
-  get: function () {
-    return _index.stringTypeAnnotation;
-  }
-});
-Object.defineProperty(exports, "SymbolTypeAnnotation", {
-  enumerable: true,
-  get: function () {
-    return _index.symbolTypeAnnotation;
-  }
-});
-Object.defineProperty(exports, "ThisTypeAnnotation", {
-  enumerable: true,
-  get: function () {
-    return _index.thisTypeAnnotation;
-  }
-});
-Object.defineProperty(exports, "TupleTypeAnnotation", {
-  enumerable: true,
-  get: function () {
-    return _index.tupleTypeAnnotation;
-  }
-});
-Object.defineProperty(exports, "TypeofTypeAnnotation", {
-  enumerable: true,
-  get: function () {
-    return _index.typeofTypeAnnotation;
-  }
-});
-Object.defineProperty(exports, "TypeAlias", {
-  enumerable: true,
-  get: function () {
-    return _index.typeAlias;
-  }
-});
-Object.defineProperty(exports, "TypeAnnotation", {
-  enumerable: true,
-  get: function () {
-    return _index.typeAnnotation;
-  }
-});
-Object.defineProperty(exports, "TypeCastExpression", {
-  enumerable: true,
-  get: function () {
-    return _index.typeCastExpression;
-  }
-});
-Object.defineProperty(exports, "TypeParameter", {
-  enumerable: true,
-  get: function () {
-    return _index.typeParameter;
-  }
-});
-Object.defineProperty(exports, "TypeParameterDeclaration", {
-  enumerable: true,
-  get: function () {
-    return _index.typeParameterDeclaration;
-  }
-});
-Object.defineProperty(exports, "TypeParameterInstantiation", {
-  enumerable: true,
-  get: function () {
-    return _index.typeParameterInstantiation;
-  }
-});
-Object.defineProperty(exports, "UnionTypeAnnotation", {
-  enumerable: true,
-  get: function () {
-    return _index.unionTypeAnnotation;
-  }
-});
-Object.defineProperty(exports, "Variance", {
-  enumerable: true,
-  get: function () {
-    return _index.variance;
-  }
-});
-Object.defineProperty(exports, "VoidTypeAnnotation", {
-  enumerable: true,
-  get: function () {
-    return _index.voidTypeAnnotation;
-  }
-});
-Object.defineProperty(exports, "EnumDeclaration", {
-  enumerable: true,
-  get: function () {
-    return _index.enumDeclaration;
-  }
-});
-Object.defineProperty(exports, "EnumBooleanBody", {
-  enumerable: true,
-  get: function () {
-    return _index.enumBooleanBody;
-  }
-});
-Object.defineProperty(exports, "EnumNumberBody", {
-  enumerable: true,
-  get: function () {
-    return _index.enumNumberBody;
-  }
-});
-Object.defineProperty(exports, "EnumStringBody", {
-  enumerable: true,
-  get: function () {
-    return _index.enumStringBody;
-  }
-});
-Object.defineProperty(exports, "EnumSymbolBody", {
-  enumerable: true,
-  get: function () {
-    return _index.enumSymbolBody;
-  }
-});
-Object.defineProperty(exports, "EnumBooleanMember", {
-  enumerable: true,
-  get: function () {
-    return _index.enumBooleanMember;
-  }
-});
-Object.defineProperty(exports, "EnumNumberMember", {
-  enumerable: true,
-  get: function () {
-    return _index.enumNumberMember;
-  }
-});
-Object.defineProperty(exports, "EnumStringMember", {
-  enumerable: true,
-  get: function () {
-    return _index.enumStringMember;
-  }
-});
-Object.defineProperty(exports, "EnumDefaultedMember", {
-  enumerable: true,
-  get: function () {
-    return _index.enumDefaultedMember;
-  }
-});
-Object.defineProperty(exports, "JSXAttribute", {
-  enumerable: true,
-  get: function () {
-    return _index.jsxAttribute;
-  }
-});
-Object.defineProperty(exports, "JSXClosingElement", {
-  enumerable: true,
-  get: function () {
-    return _index.jsxClosingElement;
-  }
-});
-Object.defineProperty(exports, "JSXElement", {
-  enumerable: true,
-  get: function () {
-    return _index.jsxElement;
-  }
-});
-Object.defineProperty(exports, "JSXEmptyExpression", {
-  enumerable: true,
-  get: function () {
-    return _index.jsxEmptyExpression;
-  }
-});
-Object.defineProperty(exports, "JSXExpressionContainer", {
-  enumerable: true,
-  get: function () {
-    return _index.jsxExpressionContainer;
-  }
-});
-Object.defineProperty(exports, "JSXSpreadChild", {
-  enumerable: true,
-  get: function () {
-    return _index.jsxSpreadChild;
-  }
-});
-Object.defineProperty(exports, "JSXIdentifier", {
-  enumerable: true,
-  get: function () {
-    return _index.jsxIdentifier;
-  }
-});
-Object.defineProperty(exports, "JSXMemberExpression", {
-  enumerable: true,
-  get: function () {
-    return _index.jsxMemberExpression;
-  }
-});
-Object.defineProperty(exports, "JSXNamespacedName", {
-  enumerable: true,
-  get: function () {
-    return _index.jsxNamespacedName;
-  }
-});
-Object.defineProperty(exports, "JSXOpeningElement", {
-  enumerable: true,
-  get: function () {
-    return _index.jsxOpeningElement;
-  }
-});
-Object.defineProperty(exports, "JSXSpreadAttribute", {
-  enumerable: true,
-  get: function () {
-    return _index.jsxSpreadAttribute;
-  }
-});
-Object.defineProperty(exports, "JSXText", {
-  enumerable: true,
-  get: function () {
-    return _index.jsxText;
-  }
-});
-Object.defineProperty(exports, "JSXFragment", {
-  enumerable: true,
-  get: function () {
-    return _index.jsxFragment;
-  }
-});
-Object.defineProperty(exports, "JSXOpeningFragment", {
-  enumerable: true,
-  get: function () {
-    return _index.jsxOpeningFragment;
-  }
-});
-Object.defineProperty(exports, "JSXClosingFragment", {
-  enumerable: true,
-  get: function () {
-    return _index.jsxClosingFragment;
-  }
-});
-Object.defineProperty(exports, "Noop", {
-  enumerable: true,
-  get: function () {
-    return _index.noop;
-  }
-});
-Object.defineProperty(exports, "Placeholder", {
-  enumerable: true,
-  get: function () {
-    return _index.placeholder;
-  }
-});
-Object.defineProperty(exports, "V8IntrinsicIdentifier", {
-  enumerable: true,
-  get: function () {
-    return _index.v8IntrinsicIdentifier;
-  }
-});
-Object.defineProperty(exports, "ArgumentPlaceholder", {
-  enumerable: true,
-  get: function () {
-    return _index.argumentPlaceholder;
-  }
-});
-Object.defineProperty(exports, "BindExpression", {
-  enumerable: true,
-  get: function () {
-    return _index.bindExpression;
-  }
-});
-Object.defineProperty(exports, "ClassProperty", {
-  enumerable: true,
-  get: function () {
-    return _index.classProperty;
-  }
-});
-Object.defineProperty(exports, "PipelineTopicExpression", {
-  enumerable: true,
-  get: function () {
-    return _index.pipelineTopicExpression;
-  }
-});
-Object.defineProperty(exports, "PipelineBareFunction", {
-  enumerable: true,
-  get: function () {
-    return _index.pipelineBareFunction;
-  }
-});
-Object.defineProperty(exports, "PipelinePrimaryTopicReference", {
-  enumerable: true,
-  get: function () {
-    return _index.pipelinePrimaryTopicReference;
-  }
-});
-Object.defineProperty(exports, "ClassPrivateProperty", {
-  enumerable: true,
-  get: function () {
-    return _index.classPrivateProperty;
-  }
-});
-Object.defineProperty(exports, "ClassPrivateMethod", {
-  enumerable: true,
-  get: function () {
-    return _index.classPrivateMethod;
-  }
-});
-Object.defineProperty(exports, "ImportAttribute", {
-  enumerable: true,
-  get: function () {
-    return _index.importAttribute;
-  }
-});
-Object.defineProperty(exports, "Decorator", {
-  enumerable: true,
-  get: function () {
-    return _index.decorator;
-  }
-});
-Object.defineProperty(exports, "DoExpression", {
-  enumerable: true,
-  get: function () {
-    return _index.doExpression;
-  }
-});
-Object.defineProperty(exports, "ExportDefaultSpecifier", {
-  enumerable: true,
-  get: function () {
-    return _index.exportDefaultSpecifier;
-  }
-});
-Object.defineProperty(exports, "PrivateName", {
-  enumerable: true,
-  get: function () {
-    return _index.privateName;
-  }
-});
-Object.defineProperty(exports, "RecordExpression", {
-  enumerable: true,
-  get: function () {
-    return _index.recordExpression;
-  }
-});
-Object.defineProperty(exports, "TupleExpression", {
-  enumerable: true,
-  get: function () {
-    return _index.tupleExpression;
-  }
-});
-Object.defineProperty(exports, "DecimalLiteral", {
-  enumerable: true,
-  get: function () {
-    return _index.decimalLiteral;
-  }
-});
-Object.defineProperty(exports, "StaticBlock", {
-  enumerable: true,
-  get: function () {
-    return _index.staticBlock;
-  }
-});
-Object.defineProperty(exports, "ModuleExpression", {
-  enumerable: true,
-  get: function () {
-    return _index.moduleExpression;
-  }
-});
-Object.defineProperty(exports, "TSParameterProperty", {
-  enumerable: true,
-  get: function () {
-    return _index.tsParameterProperty;
-  }
-});
-Object.defineProperty(exports, "TSDeclareFunction", {
-  enumerable: true,
-  get: function () {
-    return _index.tsDeclareFunction;
-  }
-});
-Object.defineProperty(exports, "TSDeclareMethod", {
-  enumerable: true,
-  get: function () {
-    return _index.tsDeclareMethod;
-  }
-});
-Object.defineProperty(exports, "TSQualifiedName", {
-  enumerable: true,
-  get: function () {
-    return _index.tsQualifiedName;
-  }
-});
-Object.defineProperty(exports, "TSCallSignatureDeclaration", {
-  enumerable: true,
-  get: function () {
-    return _index.tsCallSignatureDeclaration;
-  }
-});
-Object.defineProperty(exports, "TSConstructSignatureDeclaration", {
-  enumerable: true,
-  get: function () {
-    return _index.tsConstructSignatureDeclaration;
-  }
-});
-Object.defineProperty(exports, "TSPropertySignature", {
-  enumerable: true,
-  get: function () {
-    return _index.tsPropertySignature;
-  }
-});
-Object.defineProperty(exports, "TSMethodSignature", {
-  enumerable: true,
-  get: function () {
-    return _index.tsMethodSignature;
-  }
-});
-Object.defineProperty(exports, "TSIndexSignature", {
-  enumerable: true,
-  get: function () {
-    return _index.tsIndexSignature;
-  }
-});
-Object.defineProperty(exports, "TSAnyKeyword", {
-  enumerable: true,
-  get: function () {
-    return _index.tsAnyKeyword;
-  }
-});
-Object.defineProperty(exports, "TSBooleanKeyword", {
-  enumerable: true,
-  get: function () {
-    return _index.tsBooleanKeyword;
-  }
-});
-Object.defineProperty(exports, "TSBigIntKeyword", {
-  enumerable: true,
-  get: function () {
-    return _index.tsBigIntKeyword;
-  }
-});
-Object.defineProperty(exports, "TSIntrinsicKeyword", {
-  enumerable: true,
-  get: function () {
-    return _index.tsIntrinsicKeyword;
-  }
-});
-Object.defineProperty(exports, "TSNeverKeyword", {
-  enumerable: true,
-  get: function () {
-    return _index.tsNeverKeyword;
-  }
-});
-Object.defineProperty(exports, "TSNullKeyword", {
-  enumerable: true,
-  get: function () {
-    return _index.tsNullKeyword;
-  }
-});
-Object.defineProperty(exports, "TSNumberKeyword", {
-  enumerable: true,
-  get: function () {
-    return _index.tsNumberKeyword;
-  }
-});
-Object.defineProperty(exports, "TSObjectKeyword", {
-  enumerable: true,
-  get: function () {
-    return _index.tsObjectKeyword;
-  }
-});
-Object.defineProperty(exports, "TSStringKeyword", {
-  enumerable: true,
-  get: function () {
-    return _index.tsStringKeyword;
-  }
-});
-Object.defineProperty(exports, "TSSymbolKeyword", {
-  enumerable: true,
-  get: function () {
-    return _index.tsSymbolKeyword;
-  }
-});
-Object.defineProperty(exports, "TSUndefinedKeyword", {
-  enumerable: true,
-  get: function () {
-    return _index.tsUndefinedKeyword;
-  }
-});
-Object.defineProperty(exports, "TSUnknownKeyword", {
-  enumerable: true,
-  get: function () {
-    return _index.tsUnknownKeyword;
-  }
-});
-Object.defineProperty(exports, "TSVoidKeyword", {
-  enumerable: true,
-  get: function () {
-    return _index.tsVoidKeyword;
-  }
-});
-Object.defineProperty(exports, "TSThisType", {
-  enumerable: true,
-  get: function () {
-    return _index.tsThisType;
-  }
-});
-Object.defineProperty(exports, "TSFunctionType", {
-  enumerable: true,
-  get: function () {
-    return _index.tsFunctionType;
-  }
-});
-Object.defineProperty(exports, "TSConstructorType", {
-  enumerable: true,
-  get: function () {
-    return _index.tsConstructorType;
-  }
-});
-Object.defineProperty(exports, "TSTypeReference", {
-  enumerable: true,
-  get: function () {
-    return _index.tsTypeReference;
-  }
-});
-Object.defineProperty(exports, "TSTypePredicate", {
-  enumerable: true,
-  get: function () {
-    return _index.tsTypePredicate;
-  }
-});
-Object.defineProperty(exports, "TSTypeQuery", {
-  enumerable: true,
-  get: function () {
-    return _index.tsTypeQuery;
-  }
-});
-Object.defineProperty(exports, "TSTypeLiteral", {
-  enumerable: true,
-  get: function () {
-    return _index.tsTypeLiteral;
-  }
-});
-Object.defineProperty(exports, "TSArrayType", {
-  enumerable: true,
-  get: function () {
-    return _index.tsArrayType;
-  }
-});
-Object.defineProperty(exports, "TSTupleType", {
-  enumerable: true,
-  get: function () {
-    return _index.tsTupleType;
-  }
-});
-Object.defineProperty(exports, "TSOptionalType", {
-  enumerable: true,
-  get: function () {
-    return _index.tsOptionalType;
-  }
-});
-Object.defineProperty(exports, "TSRestType", {
-  enumerable: true,
-  get: function () {
-    return _index.tsRestType;
-  }
-});
-Object.defineProperty(exports, "TSNamedTupleMember", {
-  enumerable: true,
-  get: function () {
-    return _index.tsNamedTupleMember;
-  }
-});
-Object.defineProperty(exports, "TSUnionType", {
-  enumerable: true,
-  get: function () {
-    return _index.tsUnionType;
-  }
-});
-Object.defineProperty(exports, "TSIntersectionType", {
-  enumerable: true,
-  get: function () {
-    return _index.tsIntersectionType;
-  }
-});
-Object.defineProperty(exports, "TSConditionalType", {
-  enumerable: true,
-  get: function () {
-    return _index.tsConditionalType;
-  }
-});
-Object.defineProperty(exports, "TSInferType", {
-  enumerable: true,
-  get: function () {
-    return _index.tsInferType;
-  }
-});
-Object.defineProperty(exports, "TSParenthesizedType", {
-  enumerable: true,
-  get: function () {
-    return _index.tsParenthesizedType;
-  }
-});
-Object.defineProperty(exports, "TSTypeOperator", {
-  enumerable: true,
-  get: function () {
-    return _index.tsTypeOperator;
-  }
-});
-Object.defineProperty(exports, "TSIndexedAccessType", {
-  enumerable: true,
-  get: function () {
-    return _index.tsIndexedAccessType;
-  }
-});
-Object.defineProperty(exports, "TSMappedType", {
-  enumerable: true,
-  get: function () {
-    return _index.tsMappedType;
-  }
-});
-Object.defineProperty(exports, "TSLiteralType", {
-  enumerable: true,
-  get: function () {
-    return _index.tsLiteralType;
-  }
-});
-Object.defineProperty(exports, "TSExpressionWithTypeArguments", {
-  enumerable: true,
-  get: function () {
-    return _index.tsExpressionWithTypeArguments;
-  }
-});
-Object.defineProperty(exports, "TSInterfaceDeclaration", {
-  enumerable: true,
-  get: function () {
-    return _index.tsInterfaceDeclaration;
-  }
-});
-Object.defineProperty(exports, "TSInterfaceBody", {
-  enumerable: true,
-  get: function () {
-    return _index.tsInterfaceBody;
-  }
-});
-Object.defineProperty(exports, "TSTypeAliasDeclaration", {
-  enumerable: true,
-  get: function () {
-    return _index.tsTypeAliasDeclaration;
-  }
-});
-Object.defineProperty(exports, "TSAsExpression", {
-  enumerable: true,
-  get: function () {
-    return _index.tsAsExpression;
-  }
-});
-Object.defineProperty(exports, "TSTypeAssertion", {
-  enumerable: true,
-  get: function () {
-    return _index.tsTypeAssertion;
-  }
-});
-Object.defineProperty(exports, "TSEnumDeclaration", {
-  enumerable: true,
-  get: function () {
-    return _index.tsEnumDeclaration;
-  }
-});
-Object.defineProperty(exports, "TSEnumMember", {
-  enumerable: true,
-  get: function () {
-    return _index.tsEnumMember;
-  }
-});
-Object.defineProperty(exports, "TSModuleDeclaration", {
-  enumerable: true,
-  get: function () {
-    return _index.tsModuleDeclaration;
-  }
-});
-Object.defineProperty(exports, "TSModuleBlock", {
-  enumerable: true,
-  get: function () {
-    return _index.tsModuleBlock;
-  }
-});
-Object.defineProperty(exports, "TSImportType", {
-  enumerable: true,
-  get: function () {
-    return _index.tsImportType;
-  }
-});
-Object.defineProperty(exports, "TSImportEqualsDeclaration", {
-  enumerable: true,
-  get: function () {
-    return _index.tsImportEqualsDeclaration;
-  }
-});
-Object.defineProperty(exports, "TSExternalModuleReference", {
-  enumerable: true,
-  get: function () {
-    return _index.tsExternalModuleReference;
-  }
-});
-Object.defineProperty(exports, "TSNonNullExpression", {
-  enumerable: true,
-  get: function () {
-    return _index.tsNonNullExpression;
-  }
-});
-Object.defineProperty(exports, "TSExportAssignment", {
-  enumerable: true,
-  get: function () {
-    return _index.tsExportAssignment;
-  }
-});
-Object.defineProperty(exports, "TSNamespaceExportDeclaration", {
-  enumerable: true,
-  get: function () {
-    return _index.tsNamespaceExportDeclaration;
-  }
-});
-Object.defineProperty(exports, "TSTypeAnnotation", {
-  enumerable: true,
-  get: function () {
-    return _index.tsTypeAnnotation;
-  }
-});
-Object.defineProperty(exports, "TSTypeParameterInstantiation", {
-  enumerable: true,
-  get: function () {
-    return _index.tsTypeParameterInstantiation;
-  }
-});
-Object.defineProperty(exports, "TSTypeParameterDeclaration", {
-  enumerable: true,
-  get: function () {
-    return _index.tsTypeParameterDeclaration;
-  }
-});
-Object.defineProperty(exports, "TSTypeParameter", {
-  enumerable: true,
-  get: function () {
-    return _index.tsTypeParameter;
-  }
-});
-Object.defineProperty(exports, "NumberLiteral", {
-  enumerable: true,
-  get: function () {
-    return _index.numberLiteral;
-  }
-});
-Object.defineProperty(exports, "RegexLiteral", {
-  enumerable: true,
-  get: function () {
-    return _index.regexLiteral;
-  }
-});
-Object.defineProperty(exports, "RestProperty", {
-  enumerable: true,
-  get: function () {
-    return _index.restProperty;
-  }
-});
-Object.defineProperty(exports, "SpreadProperty", {
-  enumerable: true,
-  get: function () {
-    return _index.spreadProperty;
-  }
-});
-
-var _index = __webpack_require__(/*! ./index */ "./node_modules/@babel/types/lib/builders/generated/index.js");
 
 /***/ }),
 
@@ -4907,7 +3343,7 @@ var _removeTypeDuplicates = _interopRequireDefault(__webpack_require__(/*! ../..
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function createTSUnionType(typeAnnotations) {
-  const types = typeAnnotations.map(type => type.typeAnnotation);
+  const types = typeAnnotations.map(type => type.typeAnnotations);
   const flattened = (0, _removeTypeDuplicates.default)(types);
 
   if (flattened.length === 1) {
@@ -5011,8 +3447,6 @@ exports.default = cloneNode;
 
 var _definitions = __webpack_require__(/*! ../definitions */ "./node_modules/@babel/types/lib/definitions/index.js");
 
-var _generated = __webpack_require__(/*! ../validators/generated */ "./node_modules/@babel/types/lib/validators/generated/index.js");
-
 const has = Function.call.bind(Object.prototype.hasOwnProperty);
 
 function cloneIfNode(obj, deep, withoutLoc) {
@@ -5037,10 +3471,10 @@ function cloneNode(node, deep = true, withoutLoc = false) {
     type
   } = node;
   const newNode = {
-    type: node.type
+    type
   };
 
-  if ((0, _generated.isIdentifier)(node)) {
+  if (type === "Identifier") {
     newNode.name = node.name;
 
     if (has(node, "optional") && typeof node.optional === "boolean") {
@@ -5056,7 +3490,7 @@ function cloneNode(node, deep = true, withoutLoc = false) {
     for (const field of Object.keys(_definitions.NODE_FIELDS[type])) {
       if (has(node, field)) {
         if (deep) {
-          newNode[field] = (0, _generated.isFile)(node) && field === "comments" ? maybeCloneComments(node.comments, deep, withoutLoc) : cloneIfNodeOrArray(node[field], true, withoutLoc);
+          newNode[field] = type === "File" && field === "comments" ? maybeCloneComments(node.comments, deep, withoutLoc) : cloneIfNodeOrArray(node[field], true, withoutLoc);
         } else {
           newNode[field] = node[field];
         }
@@ -5103,7 +3537,7 @@ function cloneCommentsWithoutLoc(comments) {
 }
 
 function maybeCloneComments(comments, deep, withoutLoc) {
-  return deep && withoutLoc && comments ? cloneCommentsWithoutLoc(comments) : comments;
+  return deep && withoutLoc ? cloneCommentsWithoutLoc(comments) : comments;
 }
 
 /***/ }),
@@ -5723,12 +4157,9 @@ function toComputedKey(node, key = node.key || node.property) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports.default = toExpression;
 
 var _generated = __webpack_require__(/*! ../validators/generated */ "./node_modules/@babel/types/lib/validators/generated/index.js");
-
-var _default = toExpression;
-exports.default = _default;
 
 function toExpression(node) {
   if ((0, _generated.isExpressionStatement)(node)) {
@@ -5771,18 +4202,11 @@ exports.default = toIdentifier;
 
 var _isValidIdentifier = _interopRequireDefault(__webpack_require__(/*! ../validators/isValidIdentifier */ "./node_modules/@babel/types/lib/validators/isValidIdentifier.js"));
 
-var _helperValidatorIdentifier = __webpack_require__(/*! @babel/helper-validator-identifier */ "./node_modules/@babel/helper-validator-identifier/lib/index.js");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function toIdentifier(input) {
-  input = input + "";
-  let name = "";
-
-  for (const c of input) {
-    name += (0, _helperValidatorIdentifier.isIdentifierChar)(c.codePointAt(0)) ? c : "-";
-  }
-
+function toIdentifier(name) {
+  name = name + "";
+  name = name.replace(/[^a-zA-Z0-9$_]/g, "-");
   name = name.replace(/^[-0-9]+/, "");
   name = name.replace(/[-\s]+(.)?/g, function (match, c) {
     return c ? c.toUpperCase() : "";
@@ -5903,14 +4327,11 @@ function toSequenceExpression(nodes, scope) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports.default = toStatement;
 
 var _generated = __webpack_require__(/*! ../validators/generated */ "./node_modules/@babel/types/lib/validators/generated/index.js");
 
 var _generated2 = __webpack_require__(/*! ../builders/generated */ "./node_modules/@babel/types/lib/builders/generated/index.js");
-
-var _default = toStatement;
-exports.default = _default;
 
 function toStatement(node, ignore) {
   if ((0, _generated.isStatement)(node)) {
@@ -5961,7 +4382,7 @@ function toStatement(node, ignore) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports.default = valueToNode;
 
 var _isPlainObject = _interopRequireDefault(__webpack_require__(/*! lodash/isPlainObject */ "./node_modules/lodash/isPlainObject.js"));
 
@@ -5972,9 +4393,6 @@ var _isValidIdentifier = _interopRequireDefault(__webpack_require__(/*! ../valid
 var _generated = __webpack_require__(/*! ../builders/generated */ "./node_modules/@babel/types/lib/builders/generated/index.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var _default = valueToNode;
-exports.default = _default;
 
 function valueToNode(value) {
   if (value === undefined) {
@@ -6469,7 +4887,7 @@ exports.patternLikeCommon = patternLikeCommon;
       })) return;
     }
 
-    if (((0, _helperValidatorIdentifier.isKeyword)(node.name) || (0, _helperValidatorIdentifier.isReservedWord)(node.name, false)) && node.name !== "this") {
+    if (((0, _helperValidatorIdentifier.isKeyword)(node.name) || (0, _helperValidatorIdentifier.isReservedWord)(node.name)) && node.name !== "this") {
       throw new TypeError(`"${node.name}" is not a valid identifier`);
     }
   }
@@ -7111,11 +5529,6 @@ exports.patternLikeCommon = patternLikeCommon;
   fields: {
     source: {
       validate: (0, _utils.assertNodeType)("StringLiteral")
-    },
-    exportKind: (0, _utils.validateOptional)((0, _utils.assertOneOf)("type", "value")),
-    assertions: {
-      optional: true,
-      validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("ImportAttribute")))
     }
   }
 });
@@ -7150,10 +5563,6 @@ exports.patternLikeCommon = patternLikeCommon;
         }
       })
     },
-    assertions: {
-      optional: true,
-      validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("ImportAttribute")))
-    },
     specifiers: {
       default: [],
       validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)(function () {
@@ -7181,7 +5590,7 @@ exports.patternLikeCommon = patternLikeCommon;
       validate: (0, _utils.assertNodeType)("Identifier")
     },
     exported: {
-      validate: (0, _utils.assertNodeType)("Identifier", "StringLiteral")
+      validate: (0, _utils.assertNodeType)("Identifier")
     }
   }
 });
@@ -7222,10 +5631,6 @@ exports.patternLikeCommon = patternLikeCommon;
   visitor: ["specifiers", "source"],
   aliases: ["Statement", "Declaration", "ModuleDeclaration"],
   fields: {
-    assertions: {
-      optional: true,
-      validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("ImportAttribute")))
-    },
     specifiers: {
       validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("ImportSpecifier", "ImportDefaultSpecifier", "ImportNamespaceSpecifier")))
     },
@@ -7264,7 +5669,7 @@ exports.patternLikeCommon = patternLikeCommon;
       validate: (0, _utils.assertNodeType)("Identifier")
     },
     imported: {
-      validate: (0, _utils.assertNodeType)("Identifier", "StringLiteral")
+      validate: (0, _utils.assertNodeType)("Identifier")
     },
     importKind: {
       validate: (0, _utils.assertOneOf)("type", "typeof"),
@@ -7431,7 +5836,7 @@ exports.classMethodOrDeclareMethodCommon = classMethodOrDeclareMethodCommon;
       validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("TemplateElement")))
     },
     expressions: {
-      validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("Expression", "TSType")), function (node, key, val) {
+      validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("Expression")), function (node, key, val) {
         if (node.quasis.length !== val.length + 1) {
           throw new TypeError(`Number of ${node.type} quasis should be exactly one more than the number of expressions.\nExpected ${val.length + 1} quasis but got ${node.quasis.length}`);
         }
@@ -7532,7 +5937,7 @@ exports.classMethodOrDeclareMethodCommon = classMethodOrDeclareMethodCommon;
       validate: (0, _utils.assertNodeType)("Expression")
     },
     arguments: {
-      validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("Expression", "SpreadElement", "JSXNamespacedName", "ArgumentPlaceholder")))
+      validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("Expression", "SpreadElement", "JSXNamespacedName")))
     },
     optional: {
       validate: !process.env.BABEL_TYPES_8_BREAKING ? (0, _utils.assertValueType)("boolean") : (0, _utils.chain)((0, _utils.assertValueType)("boolean"), (0, _utils.assertOptionalChainStart)())
@@ -7647,7 +6052,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 });
 (0, _utils.default)("ClassPrivateProperty", {
   visitor: ["key", "value", "decorators"],
-  builder: ["key", "value", "decorators", "static"],
+  builder: ["key", "value", "decorators"],
   aliases: ["Property", "Private"],
   fields: {
     key: {
@@ -7655,10 +6060,6 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
     },
     value: {
       validate: (0, _utils.assertNodeType)("Expression"),
-      optional: true
-    },
-    typeAnnotation: {
-      validate: (0, _utils.assertNodeType)("TypeAnnotation", "TSTypeAnnotation", "Noop"),
       optional: true
     },
     decorators: {
@@ -7684,7 +6085,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
   visitor: ["key", "value"],
   fields: {
     key: {
-      validate: (0, _utils.assertNodeType)("Identifier", "StringLiteral")
+      validate: (0, _utils.assertNodeType)("Identifier")
     },
     value: {
       validate: (0, _utils.assertNodeType)("StringLiteral")
@@ -7753,24 +6154,6 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
     }
   },
   aliases: ["Expression", "Pureish", "Literal", "Immutable"]
-});
-(0, _utils.default)("StaticBlock", {
-  visitor: ["body"],
-  fields: {
-    body: {
-      validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("Statement")))
-    }
-  },
-  aliases: ["Scopable", "BlockParent"]
-});
-(0, _utils.default)("ModuleExpression", {
-  visitor: ["body"],
-  fields: {
-    body: {
-      validate: (0, _utils.assertNodeType)("Program")
-    }
-  },
-  aliases: ["Expression"]
 });
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../process/browser.js */ "./node_modules/process/browser.js")))
 
@@ -7926,7 +6309,6 @@ defineInterfaceishType("DeclareInterface");
     typeParameters: (0, _utils.validateOptionalType)("TypeParameterDeclaration"),
     params: (0, _utils.validate)((0, _utils.arrayOfType)("FunctionTypeParam")),
     rest: (0, _utils.validateOptionalType)("FunctionTypeParam"),
-    this: (0, _utils.validateOptionalType)("FunctionTypeParam"),
     returnType: (0, _utils.validateType)("FlowType")
   }
 });
@@ -8053,8 +6435,7 @@ defineInterfaceishType("InterfaceDeclaration");
     static: (0, _utils.validate)((0, _utils.assertValueType)("boolean")),
     proto: (0, _utils.validate)((0, _utils.assertValueType)("boolean")),
     optional: (0, _utils.validate)((0, _utils.assertValueType)("boolean")),
-    variance: (0, _utils.validateOptionalType)("Variance"),
-    method: (0, _utils.validate)((0, _utils.assertValueType)("boolean"))
+    variance: (0, _utils.validateOptionalType)("Variance")
   }
 });
 (0, _utils.default)("ObjectTypeSpreadProperty", {
@@ -8189,35 +6570,31 @@ defineInterfaceishType("InterfaceDeclaration");
   aliases: ["EnumBody"],
   visitor: ["members"],
   fields: {
-    explicitType: (0, _utils.validate)((0, _utils.assertValueType)("boolean")),
-    members: (0, _utils.validateArrayOfType)("EnumBooleanMember"),
-    hasUnknownMembers: (0, _utils.validate)((0, _utils.assertValueType)("boolean"))
+    explicit: (0, _utils.validate)((0, _utils.assertValueType)("boolean")),
+    members: (0, _utils.validateArrayOfType)("EnumBooleanMember")
   }
 });
 (0, _utils.default)("EnumNumberBody", {
   aliases: ["EnumBody"],
   visitor: ["members"],
   fields: {
-    explicitType: (0, _utils.validate)((0, _utils.assertValueType)("boolean")),
-    members: (0, _utils.validateArrayOfType)("EnumNumberMember"),
-    hasUnknownMembers: (0, _utils.validate)((0, _utils.assertValueType)("boolean"))
+    explicit: (0, _utils.validate)((0, _utils.assertValueType)("boolean")),
+    members: (0, _utils.validateArrayOfType)("EnumNumberMember")
   }
 });
 (0, _utils.default)("EnumStringBody", {
   aliases: ["EnumBody"],
   visitor: ["members"],
   fields: {
-    explicitType: (0, _utils.validate)((0, _utils.assertValueType)("boolean")),
-    members: (0, _utils.validateArrayOfType)(["EnumStringMember", "EnumDefaultedMember"]),
-    hasUnknownMembers: (0, _utils.validate)((0, _utils.assertValueType)("boolean"))
+    explicit: (0, _utils.validate)((0, _utils.assertValueType)("boolean")),
+    members: (0, _utils.validateArrayOfType)(["EnumStringMember", "EnumDefaultedMember"])
   }
 });
 (0, _utils.default)("EnumSymbolBody", {
   aliases: ["EnumBody"],
   visitor: ["members"],
   fields: {
-    members: (0, _utils.validateArrayOfType)("EnumDefaultedMember"),
-    hasUnknownMembers: (0, _utils.validate)((0, _utils.assertValueType)("boolean"))
+    members: (0, _utils.validateArrayOfType)("EnumDefaultedMember")
   }
 });
 (0, _utils.default)("EnumBooleanMember", {
@@ -8556,11 +6933,9 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-{
-  (0, _utils.default)("Noop", {
-    visitor: []
-  });
-}
+(0, _utils.default)("Noop", {
+  visitor: []
+});
 (0, _utils.default)("Placeholder", {
   visitor: [],
   builder: ["expectedNode", "name"],
@@ -8731,7 +7106,7 @@ const namedTypeElementCommon = {
     typeAnnotation: (0, _utils.validateOptionalType)("TSTypeAnnotation")
   }
 });
-const tsKeywordTypes = ["TSAnyKeyword", "TSBooleanKeyword", "TSBigIntKeyword", "TSIntrinsicKeyword", "TSNeverKeyword", "TSNullKeyword", "TSNumberKeyword", "TSObjectKeyword", "TSStringKeyword", "TSSymbolKeyword", "TSUndefinedKeyword", "TSUnknownKeyword", "TSVoidKeyword"];
+const tsKeywordTypes = ["TSAnyKeyword", "TSBooleanKeyword", "TSBigIntKeyword", "TSNeverKeyword", "TSNullKeyword", "TSNumberKeyword", "TSObjectKeyword", "TSStringKeyword", "TSSymbolKeyword", "TSUndefinedKeyword", "TSUnknownKeyword", "TSVoidKeyword"];
 
 for (const type of tsKeywordTypes) {
   (0, _utils.default)(type, {
@@ -8746,18 +7121,13 @@ for (const type of tsKeywordTypes) {
   visitor: [],
   fields: {}
 });
-const fnOrCtrBase = {
+const fnOrCtr = {
   aliases: ["TSType"],
-  visitor: ["typeParameters", "parameters", "typeAnnotation"]
-};
-(0, _utils.default)("TSFunctionType", Object.assign({}, fnOrCtrBase, {
+  visitor: ["typeParameters", "parameters", "typeAnnotation"],
   fields: signatureDeclarationCommon
-}));
-(0, _utils.default)("TSConstructorType", Object.assign({}, fnOrCtrBase, {
-  fields: Object.assign({}, signatureDeclarationCommon, {
-    abstract: (0, _utils.validateOptional)(bool)
-  })
-}));
+};
+(0, _utils.default)("TSFunctionType", fnOrCtr);
+(0, _utils.default)("TSConstructorType", fnOrCtr);
 (0, _utils.default)("TSTypeReference", {
   aliases: ["TSType"],
   visitor: ["typeName", "typeParameters"],
@@ -8881,13 +7251,12 @@ const unionOrIntersection = {
 });
 (0, _utils.default)("TSMappedType", {
   aliases: ["TSType"],
-  visitor: ["typeParameter", "typeAnnotation", "nameType"],
+  visitor: ["typeParameter", "typeAnnotation"],
   fields: {
     readonly: (0, _utils.validateOptional)(bool),
     typeParameter: (0, _utils.validateType)("TSTypeParameter"),
     optional: (0, _utils.validateOptional)(bool),
-    typeAnnotation: (0, _utils.validateOptionalType)("TSType"),
-    nameType: (0, _utils.validateOptionalType)("TSType")
+    typeAnnotation: (0, _utils.validateOptionalType)("TSType")
   }
 });
 (0, _utils.default)("TSLiteralType", {
@@ -9313,11 +7682,6 @@ function chain(...fns) {
   }
 
   validate.chainOf = fns;
-
-  if (fns.length >= 2 && "type" in fns[0] && fns[0].type === "array" && !("each" in fns[1])) {
-    throw new Error(`An assertValueType("array") validator can only be followed by an assertEach(...) validator.`);
-  }
-
   return validate;
 }
 
@@ -9827,7 +8191,6 @@ var _generated = __webpack_require__(/*! ./asserts/generated */ "./node_modules/
 Object.keys(_generated).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  if (key in exports && exports[key] === _generated[key]) return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function () {
@@ -9847,25 +8210,10 @@ var _generated2 = __webpack_require__(/*! ./builders/generated */ "./node_module
 Object.keys(_generated2).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  if (key in exports && exports[key] === _generated2[key]) return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function () {
       return _generated2[key];
-    }
-  });
-});
-
-var _uppercase = __webpack_require__(/*! ./builders/generated/uppercase */ "./node_modules/@babel/types/lib/builders/generated/uppercase.js");
-
-Object.keys(_uppercase).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  if (key in exports && exports[key] === _uppercase[key]) return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function () {
-      return _uppercase[key];
     }
   });
 });
@@ -9899,7 +8247,6 @@ var _generated3 = __webpack_require__(/*! ./constants/generated */ "./node_modul
 Object.keys(_generated3).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  if (key in exports && exports[key] === _generated3[key]) return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function () {
@@ -9913,7 +8260,6 @@ var _constants = __webpack_require__(/*! ./constants */ "./node_modules/@babel/t
 Object.keys(_constants).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  if (key in exports && exports[key] === _constants[key]) return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function () {
@@ -9947,7 +8293,6 @@ var _definitions = __webpack_require__(/*! ./definitions */ "./node_modules/@bab
 Object.keys(_definitions).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  if (key in exports && exports[key] === _definitions[key]) return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function () {
@@ -9972,19 +8317,7 @@ var _getBindingIdentifiers = _interopRequireDefault(__webpack_require__(/*! ./re
 
 var _getOuterBindingIdentifiers = _interopRequireDefault(__webpack_require__(/*! ./retrievers/getOuterBindingIdentifiers */ "./node_modules/@babel/types/lib/retrievers/getOuterBindingIdentifiers.js"));
 
-var _traverse = _interopRequireWildcard(__webpack_require__(/*! ./traverse/traverse */ "./node_modules/@babel/types/lib/traverse/traverse.js"));
-
-Object.keys(_traverse).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  if (key in exports && exports[key] === _traverse[key]) return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function () {
-      return _traverse[key];
-    }
-  });
-});
+var _traverse = _interopRequireDefault(__webpack_require__(/*! ./traverse/traverse */ "./node_modules/@babel/types/lib/traverse/traverse.js"));
 
 var _traverseFast = _interopRequireDefault(__webpack_require__(/*! ./traverse/traverseFast */ "./node_modules/@babel/types/lib/traverse/traverseFast.js"));
 
@@ -10031,7 +8364,6 @@ var _generated4 = __webpack_require__(/*! ./validators/generated */ "./node_modu
 Object.keys(_generated4).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  if (key in exports && exports[key] === _generated4[key]) return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function () {
@@ -10039,24 +8371,6 @@ Object.keys(_generated4).forEach(function (key) {
     }
   });
 });
-
-var _generated5 = __webpack_require__(/*! ./ast-types/generated */ "./node_modules/@babel/types/lib/ast-types/generated/index.js");
-
-Object.keys(_generated5).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  if (key in exports && exports[key] === _generated5[key]) return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function () {
-      return _generated5[key];
-    }
-  });
-});
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -10112,10 +8426,6 @@ exports.default = removeTypeDuplicates;
 
 var _generated = __webpack_require__(/*! ../../validators/generated */ "./node_modules/@babel/types/lib/validators/generated/index.js");
 
-function getQualifiedName(node) {
-  return (0, _generated.isIdentifier)(node) ? node.name : `${node.id.name}.${getQualifiedName(node.qualification)}`;
-}
-
 function removeTypeDuplicates(nodes) {
   const generics = {};
   const bases = {};
@@ -10149,7 +8459,7 @@ function removeTypeDuplicates(nodes) {
     }
 
     if ((0, _generated.isGenericTypeAnnotation)(node)) {
-      const name = getQualifiedName(node.id);
+      const name = node.id.name;
 
       if (generics[name]) {
         let existing = generics[name];
@@ -10352,7 +8662,7 @@ function removeTypeDuplicates(nodes) {
       continue;
     }
 
-    if ((0, _generated.isTSAnyKeyword)(node)) {
+    if ((0, _generated.isTSAnyKeyword)(node.type)) {
       return [node];
     }
 
@@ -10424,7 +8734,7 @@ function getBindingIdentifiers(node, duplicates, outerOnly) {
       continue;
     }
 
-    if ((0, _generated.isExportDeclaration)(id) && !(0, _generated.isExportAllDeclaration)(id)) {
+    if ((0, _generated.isExportDeclaration)(id)) {
       if ((0, _generated.isDeclaration)(id.declaration)) {
         search.push(id.declaration);
       }
@@ -10513,14 +8823,11 @@ getBindingIdentifiers.keys = {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports.default = getOuterBindingIdentifiers;
 
 var _getBindingIdentifiers = _interopRequireDefault(__webpack_require__(/*! ./getBindingIdentifiers */ "./node_modules/@babel/types/lib/retrievers/getBindingIdentifiers.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var _default = getOuterBindingIdentifiers;
-exports.default = _default;
 
 function getOuterBindingIdentifiers(node, duplicates) {
   return (0, _getBindingIdentifiers.default)(node, duplicates, true);
@@ -10960,8 +9267,6 @@ exports.isPrivateName = isPrivateName;
 exports.isRecordExpression = isRecordExpression;
 exports.isTupleExpression = isTupleExpression;
 exports.isDecimalLiteral = isDecimalLiteral;
-exports.isStaticBlock = isStaticBlock;
-exports.isModuleExpression = isModuleExpression;
 exports.isTSParameterProperty = isTSParameterProperty;
 exports.isTSDeclareFunction = isTSDeclareFunction;
 exports.isTSDeclareMethod = isTSDeclareMethod;
@@ -10974,7 +9279,6 @@ exports.isTSIndexSignature = isTSIndexSignature;
 exports.isTSAnyKeyword = isTSAnyKeyword;
 exports.isTSBooleanKeyword = isTSBooleanKeyword;
 exports.isTSBigIntKeyword = isTSBigIntKeyword;
-exports.isTSIntrinsicKeyword = isTSIntrinsicKeyword;
 exports.isTSNeverKeyword = isTSNeverKeyword;
 exports.isTSNullKeyword = isTSNullKeyword;
 exports.isTSNumberKeyword = isTSNumberKeyword;
@@ -13749,36 +12053,6 @@ function isDecimalLiteral(node, opts) {
   return false;
 }
 
-function isStaticBlock(node, opts) {
-  if (!node) return false;
-  const nodeType = node.type;
-
-  if (nodeType === "StaticBlock") {
-    if (typeof opts === "undefined") {
-      return true;
-    } else {
-      return (0, _shallowEqual.default)(node, opts);
-    }
-  }
-
-  return false;
-}
-
-function isModuleExpression(node, opts) {
-  if (!node) return false;
-  const nodeType = node.type;
-
-  if (nodeType === "ModuleExpression") {
-    if (typeof opts === "undefined") {
-      return true;
-    } else {
-      return (0, _shallowEqual.default)(node, opts);
-    }
-  }
-
-  return false;
-}
-
 function isTSParameterProperty(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
@@ -13949,21 +12223,6 @@ function isTSBigIntKeyword(node, opts) {
   const nodeType = node.type;
 
   if (nodeType === "TSBigIntKeyword") {
-    if (typeof opts === "undefined") {
-      return true;
-    } else {
-      return (0, _shallowEqual.default)(node, opts);
-    }
-  }
-
-  return false;
-}
-
-function isTSIntrinsicKeyword(node, opts) {
-  if (!node) return false;
-  const nodeType = node.type;
-
-  if (nodeType === "TSIntrinsicKeyword") {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -14728,7 +12987,7 @@ function isExpression(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("ArrayExpression" === nodeType || "AssignmentExpression" === nodeType || "BinaryExpression" === nodeType || "CallExpression" === nodeType || "ConditionalExpression" === nodeType || "FunctionExpression" === nodeType || "Identifier" === nodeType || "StringLiteral" === nodeType || "NumericLiteral" === nodeType || "NullLiteral" === nodeType || "BooleanLiteral" === nodeType || "RegExpLiteral" === nodeType || "LogicalExpression" === nodeType || "MemberExpression" === nodeType || "NewExpression" === nodeType || "ObjectExpression" === nodeType || "SequenceExpression" === nodeType || "ParenthesizedExpression" === nodeType || "ThisExpression" === nodeType || "UnaryExpression" === nodeType || "UpdateExpression" === nodeType || "ArrowFunctionExpression" === nodeType || "ClassExpression" === nodeType || "MetaProperty" === nodeType || "Super" === nodeType || "TaggedTemplateExpression" === nodeType || "TemplateLiteral" === nodeType || "YieldExpression" === nodeType || "AwaitExpression" === nodeType || "Import" === nodeType || "BigIntLiteral" === nodeType || "OptionalMemberExpression" === nodeType || "OptionalCallExpression" === nodeType || "TypeCastExpression" === nodeType || "JSXElement" === nodeType || "JSXFragment" === nodeType || "BindExpression" === nodeType || "PipelinePrimaryTopicReference" === nodeType || "DoExpression" === nodeType || "RecordExpression" === nodeType || "TupleExpression" === nodeType || "DecimalLiteral" === nodeType || "ModuleExpression" === nodeType || "TSAsExpression" === nodeType || "TSTypeAssertion" === nodeType || "TSNonNullExpression" === nodeType || nodeType === "Placeholder" && ("Expression" === node.expectedNode || "Identifier" === node.expectedNode || "StringLiteral" === node.expectedNode)) {
+  if (nodeType === "Expression" || "ArrayExpression" === nodeType || "AssignmentExpression" === nodeType || "BinaryExpression" === nodeType || "CallExpression" === nodeType || "ConditionalExpression" === nodeType || "FunctionExpression" === nodeType || "Identifier" === nodeType || "StringLiteral" === nodeType || "NumericLiteral" === nodeType || "NullLiteral" === nodeType || "BooleanLiteral" === nodeType || "RegExpLiteral" === nodeType || "LogicalExpression" === nodeType || "MemberExpression" === nodeType || "NewExpression" === nodeType || "ObjectExpression" === nodeType || "SequenceExpression" === nodeType || "ParenthesizedExpression" === nodeType || "ThisExpression" === nodeType || "UnaryExpression" === nodeType || "UpdateExpression" === nodeType || "ArrowFunctionExpression" === nodeType || "ClassExpression" === nodeType || "MetaProperty" === nodeType || "Super" === nodeType || "TaggedTemplateExpression" === nodeType || "TemplateLiteral" === nodeType || "YieldExpression" === nodeType || "AwaitExpression" === nodeType || "Import" === nodeType || "BigIntLiteral" === nodeType || "OptionalMemberExpression" === nodeType || "OptionalCallExpression" === nodeType || "TypeCastExpression" === nodeType || "JSXElement" === nodeType || "JSXFragment" === nodeType || "BindExpression" === nodeType || "PipelinePrimaryTopicReference" === nodeType || "DoExpression" === nodeType || "RecordExpression" === nodeType || "TupleExpression" === nodeType || "DecimalLiteral" === nodeType || "TSAsExpression" === nodeType || "TSTypeAssertion" === nodeType || "TSNonNullExpression" === nodeType || nodeType === "Placeholder" && ("Expression" === node.expectedNode || "Identifier" === node.expectedNode || "StringLiteral" === node.expectedNode)) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -14743,7 +13002,7 @@ function isBinary(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("BinaryExpression" === nodeType || "LogicalExpression" === nodeType) {
+  if (nodeType === "Binary" || "BinaryExpression" === nodeType || "LogicalExpression" === nodeType) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -14758,7 +13017,7 @@ function isScopable(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("BlockStatement" === nodeType || "CatchClause" === nodeType || "DoWhileStatement" === nodeType || "ForInStatement" === nodeType || "ForStatement" === nodeType || "FunctionDeclaration" === nodeType || "FunctionExpression" === nodeType || "Program" === nodeType || "ObjectMethod" === nodeType || "SwitchStatement" === nodeType || "WhileStatement" === nodeType || "ArrowFunctionExpression" === nodeType || "ClassExpression" === nodeType || "ClassDeclaration" === nodeType || "ForOfStatement" === nodeType || "ClassMethod" === nodeType || "ClassPrivateMethod" === nodeType || "StaticBlock" === nodeType || "TSModuleBlock" === nodeType || nodeType === "Placeholder" && "BlockStatement" === node.expectedNode) {
+  if (nodeType === "Scopable" || "BlockStatement" === nodeType || "CatchClause" === nodeType || "DoWhileStatement" === nodeType || "ForInStatement" === nodeType || "ForStatement" === nodeType || "FunctionDeclaration" === nodeType || "FunctionExpression" === nodeType || "Program" === nodeType || "ObjectMethod" === nodeType || "SwitchStatement" === nodeType || "WhileStatement" === nodeType || "ArrowFunctionExpression" === nodeType || "ClassExpression" === nodeType || "ClassDeclaration" === nodeType || "ForOfStatement" === nodeType || "ClassMethod" === nodeType || "ClassPrivateMethod" === nodeType || "TSModuleBlock" === nodeType || nodeType === "Placeholder" && "BlockStatement" === node.expectedNode) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -14773,7 +13032,7 @@ function isBlockParent(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("BlockStatement" === nodeType || "CatchClause" === nodeType || "DoWhileStatement" === nodeType || "ForInStatement" === nodeType || "ForStatement" === nodeType || "FunctionDeclaration" === nodeType || "FunctionExpression" === nodeType || "Program" === nodeType || "ObjectMethod" === nodeType || "SwitchStatement" === nodeType || "WhileStatement" === nodeType || "ArrowFunctionExpression" === nodeType || "ForOfStatement" === nodeType || "ClassMethod" === nodeType || "ClassPrivateMethod" === nodeType || "StaticBlock" === nodeType || "TSModuleBlock" === nodeType || nodeType === "Placeholder" && "BlockStatement" === node.expectedNode) {
+  if (nodeType === "BlockParent" || "BlockStatement" === nodeType || "CatchClause" === nodeType || "DoWhileStatement" === nodeType || "ForInStatement" === nodeType || "ForStatement" === nodeType || "FunctionDeclaration" === nodeType || "FunctionExpression" === nodeType || "Program" === nodeType || "ObjectMethod" === nodeType || "SwitchStatement" === nodeType || "WhileStatement" === nodeType || "ArrowFunctionExpression" === nodeType || "ForOfStatement" === nodeType || "ClassMethod" === nodeType || "ClassPrivateMethod" === nodeType || "TSModuleBlock" === nodeType || nodeType === "Placeholder" && "BlockStatement" === node.expectedNode) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -14788,7 +13047,7 @@ function isBlock(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("BlockStatement" === nodeType || "Program" === nodeType || "TSModuleBlock" === nodeType || nodeType === "Placeholder" && "BlockStatement" === node.expectedNode) {
+  if (nodeType === "Block" || "BlockStatement" === nodeType || "Program" === nodeType || "TSModuleBlock" === nodeType || nodeType === "Placeholder" && "BlockStatement" === node.expectedNode) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -14803,7 +13062,7 @@ function isStatement(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("BlockStatement" === nodeType || "BreakStatement" === nodeType || "ContinueStatement" === nodeType || "DebuggerStatement" === nodeType || "DoWhileStatement" === nodeType || "EmptyStatement" === nodeType || "ExpressionStatement" === nodeType || "ForInStatement" === nodeType || "ForStatement" === nodeType || "FunctionDeclaration" === nodeType || "IfStatement" === nodeType || "LabeledStatement" === nodeType || "ReturnStatement" === nodeType || "SwitchStatement" === nodeType || "ThrowStatement" === nodeType || "TryStatement" === nodeType || "VariableDeclaration" === nodeType || "WhileStatement" === nodeType || "WithStatement" === nodeType || "ClassDeclaration" === nodeType || "ExportAllDeclaration" === nodeType || "ExportDefaultDeclaration" === nodeType || "ExportNamedDeclaration" === nodeType || "ForOfStatement" === nodeType || "ImportDeclaration" === nodeType || "DeclareClass" === nodeType || "DeclareFunction" === nodeType || "DeclareInterface" === nodeType || "DeclareModule" === nodeType || "DeclareModuleExports" === nodeType || "DeclareTypeAlias" === nodeType || "DeclareOpaqueType" === nodeType || "DeclareVariable" === nodeType || "DeclareExportDeclaration" === nodeType || "DeclareExportAllDeclaration" === nodeType || "InterfaceDeclaration" === nodeType || "OpaqueType" === nodeType || "TypeAlias" === nodeType || "EnumDeclaration" === nodeType || "TSDeclareFunction" === nodeType || "TSInterfaceDeclaration" === nodeType || "TSTypeAliasDeclaration" === nodeType || "TSEnumDeclaration" === nodeType || "TSModuleDeclaration" === nodeType || "TSImportEqualsDeclaration" === nodeType || "TSExportAssignment" === nodeType || "TSNamespaceExportDeclaration" === nodeType || nodeType === "Placeholder" && ("Statement" === node.expectedNode || "Declaration" === node.expectedNode || "BlockStatement" === node.expectedNode)) {
+  if (nodeType === "Statement" || "BlockStatement" === nodeType || "BreakStatement" === nodeType || "ContinueStatement" === nodeType || "DebuggerStatement" === nodeType || "DoWhileStatement" === nodeType || "EmptyStatement" === nodeType || "ExpressionStatement" === nodeType || "ForInStatement" === nodeType || "ForStatement" === nodeType || "FunctionDeclaration" === nodeType || "IfStatement" === nodeType || "LabeledStatement" === nodeType || "ReturnStatement" === nodeType || "SwitchStatement" === nodeType || "ThrowStatement" === nodeType || "TryStatement" === nodeType || "VariableDeclaration" === nodeType || "WhileStatement" === nodeType || "WithStatement" === nodeType || "ClassDeclaration" === nodeType || "ExportAllDeclaration" === nodeType || "ExportDefaultDeclaration" === nodeType || "ExportNamedDeclaration" === nodeType || "ForOfStatement" === nodeType || "ImportDeclaration" === nodeType || "DeclareClass" === nodeType || "DeclareFunction" === nodeType || "DeclareInterface" === nodeType || "DeclareModule" === nodeType || "DeclareModuleExports" === nodeType || "DeclareTypeAlias" === nodeType || "DeclareOpaqueType" === nodeType || "DeclareVariable" === nodeType || "DeclareExportDeclaration" === nodeType || "DeclareExportAllDeclaration" === nodeType || "InterfaceDeclaration" === nodeType || "OpaqueType" === nodeType || "TypeAlias" === nodeType || "EnumDeclaration" === nodeType || "TSDeclareFunction" === nodeType || "TSInterfaceDeclaration" === nodeType || "TSTypeAliasDeclaration" === nodeType || "TSEnumDeclaration" === nodeType || "TSModuleDeclaration" === nodeType || "TSImportEqualsDeclaration" === nodeType || "TSExportAssignment" === nodeType || "TSNamespaceExportDeclaration" === nodeType || nodeType === "Placeholder" && ("Statement" === node.expectedNode || "Declaration" === node.expectedNode || "BlockStatement" === node.expectedNode)) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -14818,7 +13077,7 @@ function isTerminatorless(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("BreakStatement" === nodeType || "ContinueStatement" === nodeType || "ReturnStatement" === nodeType || "ThrowStatement" === nodeType || "YieldExpression" === nodeType || "AwaitExpression" === nodeType) {
+  if (nodeType === "Terminatorless" || "BreakStatement" === nodeType || "ContinueStatement" === nodeType || "ReturnStatement" === nodeType || "ThrowStatement" === nodeType || "YieldExpression" === nodeType || "AwaitExpression" === nodeType) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -14833,7 +13092,7 @@ function isCompletionStatement(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("BreakStatement" === nodeType || "ContinueStatement" === nodeType || "ReturnStatement" === nodeType || "ThrowStatement" === nodeType) {
+  if (nodeType === "CompletionStatement" || "BreakStatement" === nodeType || "ContinueStatement" === nodeType || "ReturnStatement" === nodeType || "ThrowStatement" === nodeType) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -14848,7 +13107,7 @@ function isConditional(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("ConditionalExpression" === nodeType || "IfStatement" === nodeType) {
+  if (nodeType === "Conditional" || "ConditionalExpression" === nodeType || "IfStatement" === nodeType) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -14863,7 +13122,7 @@ function isLoop(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("DoWhileStatement" === nodeType || "ForInStatement" === nodeType || "ForStatement" === nodeType || "WhileStatement" === nodeType || "ForOfStatement" === nodeType) {
+  if (nodeType === "Loop" || "DoWhileStatement" === nodeType || "ForInStatement" === nodeType || "ForStatement" === nodeType || "WhileStatement" === nodeType || "ForOfStatement" === nodeType) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -14878,7 +13137,7 @@ function isWhile(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("DoWhileStatement" === nodeType || "WhileStatement" === nodeType) {
+  if (nodeType === "While" || "DoWhileStatement" === nodeType || "WhileStatement" === nodeType) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -14893,7 +13152,7 @@ function isExpressionWrapper(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("ExpressionStatement" === nodeType || "ParenthesizedExpression" === nodeType || "TypeCastExpression" === nodeType) {
+  if (nodeType === "ExpressionWrapper" || "ExpressionStatement" === nodeType || "ParenthesizedExpression" === nodeType || "TypeCastExpression" === nodeType) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -14908,7 +13167,7 @@ function isFor(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("ForInStatement" === nodeType || "ForStatement" === nodeType || "ForOfStatement" === nodeType) {
+  if (nodeType === "For" || "ForInStatement" === nodeType || "ForStatement" === nodeType || "ForOfStatement" === nodeType) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -14923,7 +13182,7 @@ function isForXStatement(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("ForInStatement" === nodeType || "ForOfStatement" === nodeType) {
+  if (nodeType === "ForXStatement" || "ForInStatement" === nodeType || "ForOfStatement" === nodeType) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -14938,7 +13197,7 @@ function isFunction(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("FunctionDeclaration" === nodeType || "FunctionExpression" === nodeType || "ObjectMethod" === nodeType || "ArrowFunctionExpression" === nodeType || "ClassMethod" === nodeType || "ClassPrivateMethod" === nodeType) {
+  if (nodeType === "Function" || "FunctionDeclaration" === nodeType || "FunctionExpression" === nodeType || "ObjectMethod" === nodeType || "ArrowFunctionExpression" === nodeType || "ClassMethod" === nodeType || "ClassPrivateMethod" === nodeType) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -14953,7 +13212,7 @@ function isFunctionParent(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("FunctionDeclaration" === nodeType || "FunctionExpression" === nodeType || "ObjectMethod" === nodeType || "ArrowFunctionExpression" === nodeType || "ClassMethod" === nodeType || "ClassPrivateMethod" === nodeType) {
+  if (nodeType === "FunctionParent" || "FunctionDeclaration" === nodeType || "FunctionExpression" === nodeType || "ObjectMethod" === nodeType || "ArrowFunctionExpression" === nodeType || "ClassMethod" === nodeType || "ClassPrivateMethod" === nodeType) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -14968,7 +13227,7 @@ function isPureish(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("FunctionDeclaration" === nodeType || "FunctionExpression" === nodeType || "StringLiteral" === nodeType || "NumericLiteral" === nodeType || "NullLiteral" === nodeType || "BooleanLiteral" === nodeType || "RegExpLiteral" === nodeType || "ArrowFunctionExpression" === nodeType || "BigIntLiteral" === nodeType || "DecimalLiteral" === nodeType || nodeType === "Placeholder" && "StringLiteral" === node.expectedNode) {
+  if (nodeType === "Pureish" || "FunctionDeclaration" === nodeType || "FunctionExpression" === nodeType || "StringLiteral" === nodeType || "NumericLiteral" === nodeType || "NullLiteral" === nodeType || "BooleanLiteral" === nodeType || "RegExpLiteral" === nodeType || "ArrowFunctionExpression" === nodeType || "BigIntLiteral" === nodeType || "DecimalLiteral" === nodeType || nodeType === "Placeholder" && "StringLiteral" === node.expectedNode) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -14983,7 +13242,7 @@ function isDeclaration(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("FunctionDeclaration" === nodeType || "VariableDeclaration" === nodeType || "ClassDeclaration" === nodeType || "ExportAllDeclaration" === nodeType || "ExportDefaultDeclaration" === nodeType || "ExportNamedDeclaration" === nodeType || "ImportDeclaration" === nodeType || "DeclareClass" === nodeType || "DeclareFunction" === nodeType || "DeclareInterface" === nodeType || "DeclareModule" === nodeType || "DeclareModuleExports" === nodeType || "DeclareTypeAlias" === nodeType || "DeclareOpaqueType" === nodeType || "DeclareVariable" === nodeType || "DeclareExportDeclaration" === nodeType || "DeclareExportAllDeclaration" === nodeType || "InterfaceDeclaration" === nodeType || "OpaqueType" === nodeType || "TypeAlias" === nodeType || "EnumDeclaration" === nodeType || "TSDeclareFunction" === nodeType || "TSInterfaceDeclaration" === nodeType || "TSTypeAliasDeclaration" === nodeType || "TSEnumDeclaration" === nodeType || "TSModuleDeclaration" === nodeType || nodeType === "Placeholder" && "Declaration" === node.expectedNode) {
+  if (nodeType === "Declaration" || "FunctionDeclaration" === nodeType || "VariableDeclaration" === nodeType || "ClassDeclaration" === nodeType || "ExportAllDeclaration" === nodeType || "ExportDefaultDeclaration" === nodeType || "ExportNamedDeclaration" === nodeType || "ImportDeclaration" === nodeType || "DeclareClass" === nodeType || "DeclareFunction" === nodeType || "DeclareInterface" === nodeType || "DeclareModule" === nodeType || "DeclareModuleExports" === nodeType || "DeclareTypeAlias" === nodeType || "DeclareOpaqueType" === nodeType || "DeclareVariable" === nodeType || "DeclareExportDeclaration" === nodeType || "DeclareExportAllDeclaration" === nodeType || "InterfaceDeclaration" === nodeType || "OpaqueType" === nodeType || "TypeAlias" === nodeType || "EnumDeclaration" === nodeType || "TSDeclareFunction" === nodeType || "TSInterfaceDeclaration" === nodeType || "TSTypeAliasDeclaration" === nodeType || "TSEnumDeclaration" === nodeType || "TSModuleDeclaration" === nodeType || nodeType === "Placeholder" && "Declaration" === node.expectedNode) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -14998,7 +13257,7 @@ function isPatternLike(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("Identifier" === nodeType || "RestElement" === nodeType || "AssignmentPattern" === nodeType || "ArrayPattern" === nodeType || "ObjectPattern" === nodeType || nodeType === "Placeholder" && ("Pattern" === node.expectedNode || "Identifier" === node.expectedNode)) {
+  if (nodeType === "PatternLike" || "Identifier" === nodeType || "RestElement" === nodeType || "AssignmentPattern" === nodeType || "ArrayPattern" === nodeType || "ObjectPattern" === nodeType || nodeType === "Placeholder" && ("Pattern" === node.expectedNode || "Identifier" === node.expectedNode)) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -15013,7 +13272,7 @@ function isLVal(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("Identifier" === nodeType || "MemberExpression" === nodeType || "RestElement" === nodeType || "AssignmentPattern" === nodeType || "ArrayPattern" === nodeType || "ObjectPattern" === nodeType || "TSParameterProperty" === nodeType || nodeType === "Placeholder" && ("Pattern" === node.expectedNode || "Identifier" === node.expectedNode)) {
+  if (nodeType === "LVal" || "Identifier" === nodeType || "MemberExpression" === nodeType || "RestElement" === nodeType || "AssignmentPattern" === nodeType || "ArrayPattern" === nodeType || "ObjectPattern" === nodeType || "TSParameterProperty" === nodeType || nodeType === "Placeholder" && ("Pattern" === node.expectedNode || "Identifier" === node.expectedNode)) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -15028,7 +13287,7 @@ function isTSEntityName(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("Identifier" === nodeType || "TSQualifiedName" === nodeType || nodeType === "Placeholder" && "Identifier" === node.expectedNode) {
+  if (nodeType === "TSEntityName" || "Identifier" === nodeType || "TSQualifiedName" === nodeType || nodeType === "Placeholder" && "Identifier" === node.expectedNode) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -15043,7 +13302,7 @@ function isLiteral(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("StringLiteral" === nodeType || "NumericLiteral" === nodeType || "NullLiteral" === nodeType || "BooleanLiteral" === nodeType || "RegExpLiteral" === nodeType || "TemplateLiteral" === nodeType || "BigIntLiteral" === nodeType || "DecimalLiteral" === nodeType || nodeType === "Placeholder" && "StringLiteral" === node.expectedNode) {
+  if (nodeType === "Literal" || "StringLiteral" === nodeType || "NumericLiteral" === nodeType || "NullLiteral" === nodeType || "BooleanLiteral" === nodeType || "RegExpLiteral" === nodeType || "TemplateLiteral" === nodeType || "BigIntLiteral" === nodeType || "DecimalLiteral" === nodeType || nodeType === "Placeholder" && "StringLiteral" === node.expectedNode) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -15058,7 +13317,7 @@ function isImmutable(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("StringLiteral" === nodeType || "NumericLiteral" === nodeType || "NullLiteral" === nodeType || "BooleanLiteral" === nodeType || "BigIntLiteral" === nodeType || "JSXAttribute" === nodeType || "JSXClosingElement" === nodeType || "JSXElement" === nodeType || "JSXExpressionContainer" === nodeType || "JSXSpreadChild" === nodeType || "JSXOpeningElement" === nodeType || "JSXText" === nodeType || "JSXFragment" === nodeType || "JSXOpeningFragment" === nodeType || "JSXClosingFragment" === nodeType || "DecimalLiteral" === nodeType || nodeType === "Placeholder" && "StringLiteral" === node.expectedNode) {
+  if (nodeType === "Immutable" || "StringLiteral" === nodeType || "NumericLiteral" === nodeType || "NullLiteral" === nodeType || "BooleanLiteral" === nodeType || "BigIntLiteral" === nodeType || "JSXAttribute" === nodeType || "JSXClosingElement" === nodeType || "JSXElement" === nodeType || "JSXExpressionContainer" === nodeType || "JSXSpreadChild" === nodeType || "JSXOpeningElement" === nodeType || "JSXText" === nodeType || "JSXFragment" === nodeType || "JSXOpeningFragment" === nodeType || "JSXClosingFragment" === nodeType || "DecimalLiteral" === nodeType || nodeType === "Placeholder" && "StringLiteral" === node.expectedNode) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -15073,7 +13332,7 @@ function isUserWhitespacable(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("ObjectMethod" === nodeType || "ObjectProperty" === nodeType || "ObjectTypeInternalSlot" === nodeType || "ObjectTypeCallProperty" === nodeType || "ObjectTypeIndexer" === nodeType || "ObjectTypeProperty" === nodeType || "ObjectTypeSpreadProperty" === nodeType) {
+  if (nodeType === "UserWhitespacable" || "ObjectMethod" === nodeType || "ObjectProperty" === nodeType || "ObjectTypeInternalSlot" === nodeType || "ObjectTypeCallProperty" === nodeType || "ObjectTypeIndexer" === nodeType || "ObjectTypeProperty" === nodeType || "ObjectTypeSpreadProperty" === nodeType) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -15088,7 +13347,7 @@ function isMethod(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("ObjectMethod" === nodeType || "ClassMethod" === nodeType || "ClassPrivateMethod" === nodeType) {
+  if (nodeType === "Method" || "ObjectMethod" === nodeType || "ClassMethod" === nodeType || "ClassPrivateMethod" === nodeType) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -15103,7 +13362,7 @@ function isObjectMember(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("ObjectMethod" === nodeType || "ObjectProperty" === nodeType) {
+  if (nodeType === "ObjectMember" || "ObjectMethod" === nodeType || "ObjectProperty" === nodeType) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -15118,7 +13377,7 @@ function isProperty(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("ObjectProperty" === nodeType || "ClassProperty" === nodeType || "ClassPrivateProperty" === nodeType) {
+  if (nodeType === "Property" || "ObjectProperty" === nodeType || "ClassProperty" === nodeType || "ClassPrivateProperty" === nodeType) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -15133,7 +13392,7 @@ function isUnaryLike(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("UnaryExpression" === nodeType || "SpreadElement" === nodeType) {
+  if (nodeType === "UnaryLike" || "UnaryExpression" === nodeType || "SpreadElement" === nodeType) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -15148,7 +13407,7 @@ function isPattern(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("AssignmentPattern" === nodeType || "ArrayPattern" === nodeType || "ObjectPattern" === nodeType || nodeType === "Placeholder" && "Pattern" === node.expectedNode) {
+  if (nodeType === "Pattern" || "AssignmentPattern" === nodeType || "ArrayPattern" === nodeType || "ObjectPattern" === nodeType || nodeType === "Placeholder" && "Pattern" === node.expectedNode) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -15163,7 +13422,7 @@ function isClass(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("ClassExpression" === nodeType || "ClassDeclaration" === nodeType) {
+  if (nodeType === "Class" || "ClassExpression" === nodeType || "ClassDeclaration" === nodeType) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -15178,7 +13437,7 @@ function isModuleDeclaration(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("ExportAllDeclaration" === nodeType || "ExportDefaultDeclaration" === nodeType || "ExportNamedDeclaration" === nodeType || "ImportDeclaration" === nodeType) {
+  if (nodeType === "ModuleDeclaration" || "ExportAllDeclaration" === nodeType || "ExportDefaultDeclaration" === nodeType || "ExportNamedDeclaration" === nodeType || "ImportDeclaration" === nodeType) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -15193,7 +13452,7 @@ function isExportDeclaration(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("ExportAllDeclaration" === nodeType || "ExportDefaultDeclaration" === nodeType || "ExportNamedDeclaration" === nodeType) {
+  if (nodeType === "ExportDeclaration" || "ExportAllDeclaration" === nodeType || "ExportDefaultDeclaration" === nodeType || "ExportNamedDeclaration" === nodeType) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -15208,7 +13467,7 @@ function isModuleSpecifier(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("ExportSpecifier" === nodeType || "ImportDefaultSpecifier" === nodeType || "ImportNamespaceSpecifier" === nodeType || "ImportSpecifier" === nodeType || "ExportNamespaceSpecifier" === nodeType || "ExportDefaultSpecifier" === nodeType) {
+  if (nodeType === "ModuleSpecifier" || "ExportSpecifier" === nodeType || "ImportDefaultSpecifier" === nodeType || "ImportNamespaceSpecifier" === nodeType || "ImportSpecifier" === nodeType || "ExportNamespaceSpecifier" === nodeType || "ExportDefaultSpecifier" === nodeType) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -15223,7 +13482,7 @@ function isFlow(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("AnyTypeAnnotation" === nodeType || "ArrayTypeAnnotation" === nodeType || "BooleanTypeAnnotation" === nodeType || "BooleanLiteralTypeAnnotation" === nodeType || "NullLiteralTypeAnnotation" === nodeType || "ClassImplements" === nodeType || "DeclareClass" === nodeType || "DeclareFunction" === nodeType || "DeclareInterface" === nodeType || "DeclareModule" === nodeType || "DeclareModuleExports" === nodeType || "DeclareTypeAlias" === nodeType || "DeclareOpaqueType" === nodeType || "DeclareVariable" === nodeType || "DeclareExportDeclaration" === nodeType || "DeclareExportAllDeclaration" === nodeType || "DeclaredPredicate" === nodeType || "ExistsTypeAnnotation" === nodeType || "FunctionTypeAnnotation" === nodeType || "FunctionTypeParam" === nodeType || "GenericTypeAnnotation" === nodeType || "InferredPredicate" === nodeType || "InterfaceExtends" === nodeType || "InterfaceDeclaration" === nodeType || "InterfaceTypeAnnotation" === nodeType || "IntersectionTypeAnnotation" === nodeType || "MixedTypeAnnotation" === nodeType || "EmptyTypeAnnotation" === nodeType || "NullableTypeAnnotation" === nodeType || "NumberLiteralTypeAnnotation" === nodeType || "NumberTypeAnnotation" === nodeType || "ObjectTypeAnnotation" === nodeType || "ObjectTypeInternalSlot" === nodeType || "ObjectTypeCallProperty" === nodeType || "ObjectTypeIndexer" === nodeType || "ObjectTypeProperty" === nodeType || "ObjectTypeSpreadProperty" === nodeType || "OpaqueType" === nodeType || "QualifiedTypeIdentifier" === nodeType || "StringLiteralTypeAnnotation" === nodeType || "StringTypeAnnotation" === nodeType || "SymbolTypeAnnotation" === nodeType || "ThisTypeAnnotation" === nodeType || "TupleTypeAnnotation" === nodeType || "TypeofTypeAnnotation" === nodeType || "TypeAlias" === nodeType || "TypeAnnotation" === nodeType || "TypeCastExpression" === nodeType || "TypeParameter" === nodeType || "TypeParameterDeclaration" === nodeType || "TypeParameterInstantiation" === nodeType || "UnionTypeAnnotation" === nodeType || "Variance" === nodeType || "VoidTypeAnnotation" === nodeType) {
+  if (nodeType === "Flow" || "AnyTypeAnnotation" === nodeType || "ArrayTypeAnnotation" === nodeType || "BooleanTypeAnnotation" === nodeType || "BooleanLiteralTypeAnnotation" === nodeType || "NullLiteralTypeAnnotation" === nodeType || "ClassImplements" === nodeType || "DeclareClass" === nodeType || "DeclareFunction" === nodeType || "DeclareInterface" === nodeType || "DeclareModule" === nodeType || "DeclareModuleExports" === nodeType || "DeclareTypeAlias" === nodeType || "DeclareOpaqueType" === nodeType || "DeclareVariable" === nodeType || "DeclareExportDeclaration" === nodeType || "DeclareExportAllDeclaration" === nodeType || "DeclaredPredicate" === nodeType || "ExistsTypeAnnotation" === nodeType || "FunctionTypeAnnotation" === nodeType || "FunctionTypeParam" === nodeType || "GenericTypeAnnotation" === nodeType || "InferredPredicate" === nodeType || "InterfaceExtends" === nodeType || "InterfaceDeclaration" === nodeType || "InterfaceTypeAnnotation" === nodeType || "IntersectionTypeAnnotation" === nodeType || "MixedTypeAnnotation" === nodeType || "EmptyTypeAnnotation" === nodeType || "NullableTypeAnnotation" === nodeType || "NumberLiteralTypeAnnotation" === nodeType || "NumberTypeAnnotation" === nodeType || "ObjectTypeAnnotation" === nodeType || "ObjectTypeInternalSlot" === nodeType || "ObjectTypeCallProperty" === nodeType || "ObjectTypeIndexer" === nodeType || "ObjectTypeProperty" === nodeType || "ObjectTypeSpreadProperty" === nodeType || "OpaqueType" === nodeType || "QualifiedTypeIdentifier" === nodeType || "StringLiteralTypeAnnotation" === nodeType || "StringTypeAnnotation" === nodeType || "SymbolTypeAnnotation" === nodeType || "ThisTypeAnnotation" === nodeType || "TupleTypeAnnotation" === nodeType || "TypeofTypeAnnotation" === nodeType || "TypeAlias" === nodeType || "TypeAnnotation" === nodeType || "TypeCastExpression" === nodeType || "TypeParameter" === nodeType || "TypeParameterDeclaration" === nodeType || "TypeParameterInstantiation" === nodeType || "UnionTypeAnnotation" === nodeType || "Variance" === nodeType || "VoidTypeAnnotation" === nodeType) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -15238,7 +13497,7 @@ function isFlowType(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("AnyTypeAnnotation" === nodeType || "ArrayTypeAnnotation" === nodeType || "BooleanTypeAnnotation" === nodeType || "BooleanLiteralTypeAnnotation" === nodeType || "NullLiteralTypeAnnotation" === nodeType || "ExistsTypeAnnotation" === nodeType || "FunctionTypeAnnotation" === nodeType || "GenericTypeAnnotation" === nodeType || "InterfaceTypeAnnotation" === nodeType || "IntersectionTypeAnnotation" === nodeType || "MixedTypeAnnotation" === nodeType || "EmptyTypeAnnotation" === nodeType || "NullableTypeAnnotation" === nodeType || "NumberLiteralTypeAnnotation" === nodeType || "NumberTypeAnnotation" === nodeType || "ObjectTypeAnnotation" === nodeType || "StringLiteralTypeAnnotation" === nodeType || "StringTypeAnnotation" === nodeType || "SymbolTypeAnnotation" === nodeType || "ThisTypeAnnotation" === nodeType || "TupleTypeAnnotation" === nodeType || "TypeofTypeAnnotation" === nodeType || "UnionTypeAnnotation" === nodeType || "VoidTypeAnnotation" === nodeType) {
+  if (nodeType === "FlowType" || "AnyTypeAnnotation" === nodeType || "ArrayTypeAnnotation" === nodeType || "BooleanTypeAnnotation" === nodeType || "BooleanLiteralTypeAnnotation" === nodeType || "NullLiteralTypeAnnotation" === nodeType || "ExistsTypeAnnotation" === nodeType || "FunctionTypeAnnotation" === nodeType || "GenericTypeAnnotation" === nodeType || "InterfaceTypeAnnotation" === nodeType || "IntersectionTypeAnnotation" === nodeType || "MixedTypeAnnotation" === nodeType || "EmptyTypeAnnotation" === nodeType || "NullableTypeAnnotation" === nodeType || "NumberLiteralTypeAnnotation" === nodeType || "NumberTypeAnnotation" === nodeType || "ObjectTypeAnnotation" === nodeType || "StringLiteralTypeAnnotation" === nodeType || "StringTypeAnnotation" === nodeType || "SymbolTypeAnnotation" === nodeType || "ThisTypeAnnotation" === nodeType || "TupleTypeAnnotation" === nodeType || "TypeofTypeAnnotation" === nodeType || "UnionTypeAnnotation" === nodeType || "VoidTypeAnnotation" === nodeType) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -15253,7 +13512,7 @@ function isFlowBaseAnnotation(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("AnyTypeAnnotation" === nodeType || "BooleanTypeAnnotation" === nodeType || "NullLiteralTypeAnnotation" === nodeType || "MixedTypeAnnotation" === nodeType || "EmptyTypeAnnotation" === nodeType || "NumberTypeAnnotation" === nodeType || "StringTypeAnnotation" === nodeType || "SymbolTypeAnnotation" === nodeType || "ThisTypeAnnotation" === nodeType || "VoidTypeAnnotation" === nodeType) {
+  if (nodeType === "FlowBaseAnnotation" || "AnyTypeAnnotation" === nodeType || "BooleanTypeAnnotation" === nodeType || "NullLiteralTypeAnnotation" === nodeType || "MixedTypeAnnotation" === nodeType || "EmptyTypeAnnotation" === nodeType || "NumberTypeAnnotation" === nodeType || "StringTypeAnnotation" === nodeType || "SymbolTypeAnnotation" === nodeType || "ThisTypeAnnotation" === nodeType || "VoidTypeAnnotation" === nodeType) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -15268,7 +13527,7 @@ function isFlowDeclaration(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("DeclareClass" === nodeType || "DeclareFunction" === nodeType || "DeclareInterface" === nodeType || "DeclareModule" === nodeType || "DeclareModuleExports" === nodeType || "DeclareTypeAlias" === nodeType || "DeclareOpaqueType" === nodeType || "DeclareVariable" === nodeType || "DeclareExportDeclaration" === nodeType || "DeclareExportAllDeclaration" === nodeType || "InterfaceDeclaration" === nodeType || "OpaqueType" === nodeType || "TypeAlias" === nodeType) {
+  if (nodeType === "FlowDeclaration" || "DeclareClass" === nodeType || "DeclareFunction" === nodeType || "DeclareInterface" === nodeType || "DeclareModule" === nodeType || "DeclareModuleExports" === nodeType || "DeclareTypeAlias" === nodeType || "DeclareOpaqueType" === nodeType || "DeclareVariable" === nodeType || "DeclareExportDeclaration" === nodeType || "DeclareExportAllDeclaration" === nodeType || "InterfaceDeclaration" === nodeType || "OpaqueType" === nodeType || "TypeAlias" === nodeType) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -15283,7 +13542,7 @@ function isFlowPredicate(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("DeclaredPredicate" === nodeType || "InferredPredicate" === nodeType) {
+  if (nodeType === "FlowPredicate" || "DeclaredPredicate" === nodeType || "InferredPredicate" === nodeType) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -15298,7 +13557,7 @@ function isEnumBody(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("EnumBooleanBody" === nodeType || "EnumNumberBody" === nodeType || "EnumStringBody" === nodeType || "EnumSymbolBody" === nodeType) {
+  if (nodeType === "EnumBody" || "EnumBooleanBody" === nodeType || "EnumNumberBody" === nodeType || "EnumStringBody" === nodeType || "EnumSymbolBody" === nodeType) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -15313,7 +13572,7 @@ function isEnumMember(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("EnumBooleanMember" === nodeType || "EnumNumberMember" === nodeType || "EnumStringMember" === nodeType || "EnumDefaultedMember" === nodeType) {
+  if (nodeType === "EnumMember" || "EnumBooleanMember" === nodeType || "EnumNumberMember" === nodeType || "EnumStringMember" === nodeType || "EnumDefaultedMember" === nodeType) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -15328,7 +13587,7 @@ function isJSX(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("JSXAttribute" === nodeType || "JSXClosingElement" === nodeType || "JSXElement" === nodeType || "JSXEmptyExpression" === nodeType || "JSXExpressionContainer" === nodeType || "JSXSpreadChild" === nodeType || "JSXIdentifier" === nodeType || "JSXMemberExpression" === nodeType || "JSXNamespacedName" === nodeType || "JSXOpeningElement" === nodeType || "JSXSpreadAttribute" === nodeType || "JSXText" === nodeType || "JSXFragment" === nodeType || "JSXOpeningFragment" === nodeType || "JSXClosingFragment" === nodeType) {
+  if (nodeType === "JSX" || "JSXAttribute" === nodeType || "JSXClosingElement" === nodeType || "JSXElement" === nodeType || "JSXEmptyExpression" === nodeType || "JSXExpressionContainer" === nodeType || "JSXSpreadChild" === nodeType || "JSXIdentifier" === nodeType || "JSXMemberExpression" === nodeType || "JSXNamespacedName" === nodeType || "JSXOpeningElement" === nodeType || "JSXSpreadAttribute" === nodeType || "JSXText" === nodeType || "JSXFragment" === nodeType || "JSXOpeningFragment" === nodeType || "JSXClosingFragment" === nodeType) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -15343,7 +13602,7 @@ function isPrivate(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("ClassPrivateProperty" === nodeType || "ClassPrivateMethod" === nodeType || "PrivateName" === nodeType) {
+  if (nodeType === "Private" || "ClassPrivateProperty" === nodeType || "ClassPrivateMethod" === nodeType || "PrivateName" === nodeType) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -15358,7 +13617,7 @@ function isTSTypeElement(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("TSCallSignatureDeclaration" === nodeType || "TSConstructSignatureDeclaration" === nodeType || "TSPropertySignature" === nodeType || "TSMethodSignature" === nodeType || "TSIndexSignature" === nodeType) {
+  if (nodeType === "TSTypeElement" || "TSCallSignatureDeclaration" === nodeType || "TSConstructSignatureDeclaration" === nodeType || "TSPropertySignature" === nodeType || "TSMethodSignature" === nodeType || "TSIndexSignature" === nodeType) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -15373,7 +13632,7 @@ function isTSType(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("TSAnyKeyword" === nodeType || "TSBooleanKeyword" === nodeType || "TSBigIntKeyword" === nodeType || "TSIntrinsicKeyword" === nodeType || "TSNeverKeyword" === nodeType || "TSNullKeyword" === nodeType || "TSNumberKeyword" === nodeType || "TSObjectKeyword" === nodeType || "TSStringKeyword" === nodeType || "TSSymbolKeyword" === nodeType || "TSUndefinedKeyword" === nodeType || "TSUnknownKeyword" === nodeType || "TSVoidKeyword" === nodeType || "TSThisType" === nodeType || "TSFunctionType" === nodeType || "TSConstructorType" === nodeType || "TSTypeReference" === nodeType || "TSTypePredicate" === nodeType || "TSTypeQuery" === nodeType || "TSTypeLiteral" === nodeType || "TSArrayType" === nodeType || "TSTupleType" === nodeType || "TSOptionalType" === nodeType || "TSRestType" === nodeType || "TSUnionType" === nodeType || "TSIntersectionType" === nodeType || "TSConditionalType" === nodeType || "TSInferType" === nodeType || "TSParenthesizedType" === nodeType || "TSTypeOperator" === nodeType || "TSIndexedAccessType" === nodeType || "TSMappedType" === nodeType || "TSLiteralType" === nodeType || "TSExpressionWithTypeArguments" === nodeType || "TSImportType" === nodeType) {
+  if (nodeType === "TSType" || "TSAnyKeyword" === nodeType || "TSBooleanKeyword" === nodeType || "TSBigIntKeyword" === nodeType || "TSNeverKeyword" === nodeType || "TSNullKeyword" === nodeType || "TSNumberKeyword" === nodeType || "TSObjectKeyword" === nodeType || "TSStringKeyword" === nodeType || "TSSymbolKeyword" === nodeType || "TSUndefinedKeyword" === nodeType || "TSUnknownKeyword" === nodeType || "TSVoidKeyword" === nodeType || "TSThisType" === nodeType || "TSFunctionType" === nodeType || "TSConstructorType" === nodeType || "TSTypeReference" === nodeType || "TSTypePredicate" === nodeType || "TSTypeQuery" === nodeType || "TSTypeLiteral" === nodeType || "TSArrayType" === nodeType || "TSTupleType" === nodeType || "TSOptionalType" === nodeType || "TSRestType" === nodeType || "TSUnionType" === nodeType || "TSIntersectionType" === nodeType || "TSConditionalType" === nodeType || "TSInferType" === nodeType || "TSParenthesizedType" === nodeType || "TSTypeOperator" === nodeType || "TSIndexedAccessType" === nodeType || "TSMappedType" === nodeType || "TSLiteralType" === nodeType || "TSExpressionWithTypeArguments" === nodeType || "TSImportType" === nodeType) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -15388,7 +13647,7 @@ function isTSBaseType(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("TSAnyKeyword" === nodeType || "TSBooleanKeyword" === nodeType || "TSBigIntKeyword" === nodeType || "TSIntrinsicKeyword" === nodeType || "TSNeverKeyword" === nodeType || "TSNullKeyword" === nodeType || "TSNumberKeyword" === nodeType || "TSObjectKeyword" === nodeType || "TSStringKeyword" === nodeType || "TSSymbolKeyword" === nodeType || "TSUndefinedKeyword" === nodeType || "TSUnknownKeyword" === nodeType || "TSVoidKeyword" === nodeType || "TSThisType" === nodeType || "TSLiteralType" === nodeType) {
+  if (nodeType === "TSBaseType" || "TSAnyKeyword" === nodeType || "TSBooleanKeyword" === nodeType || "TSBigIntKeyword" === nodeType || "TSNeverKeyword" === nodeType || "TSNullKeyword" === nodeType || "TSNumberKeyword" === nodeType || "TSObjectKeyword" === nodeType || "TSStringKeyword" === nodeType || "TSSymbolKeyword" === nodeType || "TSUndefinedKeyword" === nodeType || "TSUnknownKeyword" === nodeType || "TSVoidKeyword" === nodeType || "TSThisType" === nodeType || "TSLiteralType" === nodeType) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -15809,6 +14068,13 @@ function isReferenced(node, parent, grandparent) {
     case "ArrowFunctionExpression":
       return parent.body === node;
 
+    case "ExportSpecifier":
+      if (parent.source) {
+        return false;
+      }
+
+      return parent.local === node;
+
     case "PrivateName":
       return false;
 
@@ -15863,13 +14129,6 @@ function isReferenced(node, parent, grandparent) {
     case "ExportDefaultSpecifier":
       return false;
 
-    case "ExportSpecifier":
-      if (grandparent == null ? void 0 : grandparent.source) {
-        return false;
-      }
-
-      return parent.local === node;
-
     case "ImportDefaultSpecifier":
     case "ImportNamespaceSpecifier":
     case "ImportSpecifier":
@@ -15922,11 +14181,19 @@ exports.default = isScope;
 var _generated = __webpack_require__(/*! ./generated */ "./node_modules/@babel/types/lib/validators/generated/index.js");
 
 function isScope(node, parent) {
-  if ((0, _generated.isBlockStatement)(node) && ((0, _generated.isFunction)(parent) || (0, _generated.isCatchClause)(parent))) {
+  if ((0, _generated.isBlockStatement)(node) && (0, _generated.isFunction)(parent, {
+    body: node
+  })) {
     return false;
   }
 
-  if ((0, _generated.isPattern)(node) && ((0, _generated.isFunction)(parent) || (0, _generated.isCatchClause)(parent))) {
+  if ((0, _generated.isBlockStatement)(node) && (0, _generated.isCatchClause)(parent, {
+    body: node
+  })) {
+    return false;
+  }
+
+  if ((0, _generated.isPattern)(node) && (0, _generated.isFunction)(parent)) {
     return true;
   }
 
@@ -16043,7 +14310,9 @@ function isValidIdentifier(name, reserved = true) {
   if (typeof name !== "string") return false;
 
   if (reserved) {
-    if ((0, _helperValidatorIdentifier.isKeyword)(name) || (0, _helperValidatorIdentifier.isStrictReservedWord)(name, true)) {
+    if ((0, _helperValidatorIdentifier.isKeyword)(name) || (0, _helperValidatorIdentifier.isStrictReservedWord)(name)) {
+      return false;
+    } else if (name === "await") {
       return false;
     }
   }
@@ -18279,17 +16548,17 @@ module.exports = invariant;
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
- * jQuery JavaScript Library v3.6.0
+ * jQuery JavaScript Library v3.5.1
  * https://jquery.com/
  *
  * Includes Sizzle.js
  * https://sizzlejs.com/
  *
- * Copyright OpenJS Foundation and other contributors
+ * Copyright JS Foundation and other contributors
  * Released under the MIT license
  * https://jquery.org/license
  *
- * Date: 2021-03-02T17:08Z
+ * Date: 2020-05-04T22:49Z
  */
 ( function( global, factory ) {
 
@@ -18356,16 +16625,12 @@ var support = {};
 
 var isFunction = function isFunction( obj ) {
 
-		// Support: Chrome <=57, Firefox <=52
-		// In some browsers, typeof returns "function" for HTML <object> elements
-		// (i.e., `typeof document.createElement( "object" ) === "function"`).
-		// We don't want to classify *any* DOM node as a function.
-		// Support: QtWeb <=3.8.5, WebKit <=534.34, wkhtmltopdf tool <=0.12.5
-		// Plus for old WebKit, typeof returns "function" for HTML collections
-		// (e.g., `typeof document.getElementsByTagName("div") === "function"`). (gh-4756)
-		return typeof obj === "function" && typeof obj.nodeType !== "number" &&
-			typeof obj.item !== "function";
-	};
+      // Support: Chrome <=57, Firefox <=52
+      // In some browsers, typeof returns "function" for HTML <object> elements
+      // (i.e., `typeof document.createElement( "object" ) === "function"`).
+      // We don't want to classify *any* DOM node as a function.
+      return typeof obj === "function" && typeof obj.nodeType !== "number";
+  };
 
 
 var isWindow = function isWindow( obj ) {
@@ -18431,7 +16696,7 @@ function toType( obj ) {
 
 
 var
-	version = "3.6.0",
+	version = "3.5.1",
 
 	// Define a local copy of jQuery
 	jQuery = function( selector, context ) {
@@ -18685,7 +16950,7 @@ jQuery.extend( {
 			if ( isArrayLike( Object( arr ) ) ) {
 				jQuery.merge( ret,
 					typeof arr === "string" ?
-						[ arr ] : arr
+					[ arr ] : arr
 				);
 			} else {
 				push.call( ret, arr );
@@ -18780,9 +17045,9 @@ if ( typeof Symbol === "function" ) {
 
 // Populate the class2type map
 jQuery.each( "Boolean Number String Function Array Date RegExp Object Error Symbol".split( " " ),
-	function( _i, name ) {
-		class2type[ "[object " + name + "]" ] = name.toLowerCase();
-	} );
+function( _i, name ) {
+	class2type[ "[object " + name + "]" ] = name.toLowerCase();
+} );
 
 function isArrayLike( obj ) {
 
@@ -18802,14 +17067,14 @@ function isArrayLike( obj ) {
 }
 var Sizzle =
 /*!
- * Sizzle CSS Selector Engine v2.3.6
+ * Sizzle CSS Selector Engine v2.3.5
  * https://sizzlejs.com/
  *
  * Copyright JS Foundation and other contributors
  * Released under the MIT license
  * https://js.foundation/
  *
- * Date: 2021-02-16
+ * Date: 2020-03-14
  */
 ( function( window ) {
 var i,
@@ -19392,8 +17657,8 @@ support = Sizzle.support = {};
  * @returns {Boolean} True iff elem is a non-HTML XML node
  */
 isXML = Sizzle.isXML = function( elem ) {
-	var namespace = elem && elem.namespaceURI,
-		docElem = elem && ( elem.ownerDocument || elem ).documentElement;
+	var namespace = elem.namespaceURI,
+		docElem = ( elem.ownerDocument || elem ).documentElement;
 
 	// Support: IE <=8
 	// Assume HTML when documentElement doesn't yet exist, such as inside loading iframes
@@ -21308,9 +19573,9 @@ var rneedsContext = jQuery.expr.match.needsContext;
 
 function nodeName( elem, name ) {
 
-	return elem.nodeName && elem.nodeName.toLowerCase() === name.toLowerCase();
+  return elem.nodeName && elem.nodeName.toLowerCase() === name.toLowerCase();
 
-}
+};
 var rsingleTag = ( /^<([a-z][^\/\0>:\x20\t\r\n\f]*)[\x20\t\r\n\f]*\/?>(?:<\/\1>|)$/i );
 
 
@@ -22281,8 +20546,8 @@ jQuery.extend( {
 			resolveContexts = Array( i ),
 			resolveValues = slice.call( arguments ),
 
-			// the primary Deferred
-			primary = jQuery.Deferred(),
+			// the master Deferred
+			master = jQuery.Deferred(),
 
 			// subordinate callback factory
 			updateFunc = function( i ) {
@@ -22290,30 +20555,30 @@ jQuery.extend( {
 					resolveContexts[ i ] = this;
 					resolveValues[ i ] = arguments.length > 1 ? slice.call( arguments ) : value;
 					if ( !( --remaining ) ) {
-						primary.resolveWith( resolveContexts, resolveValues );
+						master.resolveWith( resolveContexts, resolveValues );
 					}
 				};
 			};
 
 		// Single- and empty arguments are adopted like Promise.resolve
 		if ( remaining <= 1 ) {
-			adoptValue( singleValue, primary.done( updateFunc( i ) ).resolve, primary.reject,
+			adoptValue( singleValue, master.done( updateFunc( i ) ).resolve, master.reject,
 				!remaining );
 
 			// Use .then() to unwrap secondary thenables (cf. gh-3000)
-			if ( primary.state() === "pending" ||
+			if ( master.state() === "pending" ||
 				isFunction( resolveValues[ i ] && resolveValues[ i ].then ) ) {
 
-				return primary.then();
+				return master.then();
 			}
 		}
 
 		// Multiple arguments are aggregated like Promise.all array elements
 		while ( i-- ) {
-			adoptValue( resolveValues[ i ], updateFunc( i ), primary.reject );
+			adoptValue( resolveValues[ i ], updateFunc( i ), master.reject );
 		}
 
-		return primary.promise();
+		return master.promise();
 	}
 } );
 
@@ -22464,8 +20729,8 @@ var access = function( elems, fn, key, value, chainable, emptyGet, raw ) {
 			for ( ; i < len; i++ ) {
 				fn(
 					elems[ i ], key, raw ?
-						value :
-						value.call( elems[ i ], i, fn( elems[ i ], key ) )
+					value :
+					value.call( elems[ i ], i, fn( elems[ i ], key ) )
 				);
 			}
 		}
@@ -23373,7 +21638,10 @@ function buildFragment( elems, context, scripts, selection, ignored ) {
 }
 
 
-var rtypenamespace = /^([^.]*)(?:\.(.+)|)/;
+var
+	rkeyEvent = /^key/,
+	rmouseEvent = /^(?:mouse|pointer|contextmenu|drag|drop)|click/,
+	rtypenamespace = /^([^.]*)(?:\.(.+)|)/;
 
 function returnTrue() {
 	return true;
@@ -23668,8 +21936,8 @@ jQuery.event = {
 			event = jQuery.event.fix( nativeEvent ),
 
 			handlers = (
-				dataPriv.get( this, "events" ) || Object.create( null )
-			)[ event.type ] || [],
+					dataPriv.get( this, "events" ) || Object.create( null )
+				)[ event.type ] || [],
 			special = jQuery.event.special[ event.type ] || {};
 
 		// Use the fix-ed jQuery.Event rather than the (read-only) native event
@@ -23793,12 +22061,12 @@ jQuery.event = {
 			get: isFunction( hook ) ?
 				function() {
 					if ( this.originalEvent ) {
-						return hook( this.originalEvent );
+							return hook( this.originalEvent );
 					}
 				} :
 				function() {
 					if ( this.originalEvent ) {
-						return this.originalEvent[ name ];
+							return this.originalEvent[ name ];
 					}
 				},
 
@@ -23937,13 +22205,7 @@ function leverageNative( el, type, expectSync ) {
 						// Cancel the outer synthetic event
 						event.stopImmediatePropagation();
 						event.preventDefault();
-
-						// Support: Chrome 86+
-						// In Chrome, if an element having a focusout handler is blurred by
-						// clicking outside of it, it invokes the handler synchronously. If
-						// that handler calls `.remove()` on the element, the data is cleared,
-						// leaving `result` undefined. We need to guard against this.
-						return result && result.value;
+						return result.value;
 					}
 
 				// If this is an inner synthetic event for an event with a bubbling surrogate
@@ -24108,7 +22370,34 @@ jQuery.each( {
 	targetTouches: true,
 	toElement: true,
 	touches: true,
-	which: true
+
+	which: function( event ) {
+		var button = event.button;
+
+		// Add which for key events
+		if ( event.which == null && rkeyEvent.test( event.type ) ) {
+			return event.charCode != null ? event.charCode : event.keyCode;
+		}
+
+		// Add which for click: 1 === left; 2 === middle; 3 === right
+		if ( !event.which && button !== undefined && rmouseEvent.test( event.type ) ) {
+			if ( button & 1 ) {
+				return 1;
+			}
+
+			if ( button & 2 ) {
+				return 3;
+			}
+
+			if ( button & 4 ) {
+				return 2;
+			}
+
+			return 0;
+		}
+
+		return event.which;
+	}
 }, jQuery.event.addProp );
 
 jQuery.each( { focus: "focusin", blur: "focusout" }, function( type, delegateType ) {
@@ -24131,12 +22420,6 @@ jQuery.each( { focus: "focusin", blur: "focusout" }, function( type, delegateTyp
 			leverageNative( this, type );
 
 			// Return non-false to allow normal event-path propagation
-			return true;
-		},
-
-		// Suppress native focus or blur as it's already being fired
-		// in leverageNative.
-		_default: function() {
 			return true;
 		},
 
@@ -24807,10 +23090,6 @@ var rboxStyle = new RegExp( cssExpand.join( "|" ), "i" );
 		// set in CSS while `offset*` properties report correct values.
 		// Behavior in IE 9 is more subtle than in newer versions & it passes
 		// some versions of this test; make sure not to make it pass there!
-		//
-		// Support: Firefox 70+
-		// Only Firefox includes border widths
-		// in computed dimensions. (gh-4529)
 		reliableTrDimensions: function() {
 			var table, tr, trChild, trStyle;
 			if ( reliableTrDimensionsVal == null ) {
@@ -24818,22 +23097,9 @@ var rboxStyle = new RegExp( cssExpand.join( "|" ), "i" );
 				tr = document.createElement( "tr" );
 				trChild = document.createElement( "div" );
 
-				table.style.cssText = "position:absolute;left:-11111px;border-collapse:separate";
-				tr.style.cssText = "border:1px solid";
-
-				// Support: Chrome 86+
-				// Height set through cssText does not get applied.
-				// Computed height then comes back as 0.
+				table.style.cssText = "position:absolute;left:-11111px";
 				tr.style.height = "1px";
 				trChild.style.height = "9px";
-
-				// Support: Android 8 Chrome 86+
-				// In our bodyBackground.html iframe,
-				// display for all div elements is set to "inline",
-				// which causes a problem only in Android 8 Chrome 86.
-				// Ensuring the div is display: block
-				// gets around this issue.
-				trChild.style.display = "block";
 
 				documentElement
 					.appendChild( table )
@@ -24841,9 +23107,7 @@ var rboxStyle = new RegExp( cssExpand.join( "|" ), "i" );
 					.appendChild( trChild );
 
 				trStyle = window.getComputedStyle( tr );
-				reliableTrDimensionsVal = ( parseInt( trStyle.height, 10 ) +
-					parseInt( trStyle.borderTopWidth, 10 ) +
-					parseInt( trStyle.borderBottomWidth, 10 ) ) === tr.offsetHeight;
+				reliableTrDimensionsVal = parseInt( trStyle.height ) > 3;
 
 				documentElement.removeChild( table );
 			}
@@ -25307,10 +23571,10 @@ jQuery.each( [ "height", "width" ], function( _i, dimension ) {
 					// Running getBoundingClientRect on a disconnected node
 					// in IE throws an error.
 					( !elem.getClientRects().length || !elem.getBoundingClientRect().width ) ?
-					swap( elem, cssShow, function() {
-						return getWidthOrHeight( elem, dimension, extra );
-					} ) :
-					getWidthOrHeight( elem, dimension, extra );
+						swap( elem, cssShow, function() {
+							return getWidthOrHeight( elem, dimension, extra );
+						} ) :
+						getWidthOrHeight( elem, dimension, extra );
 			}
 		},
 
@@ -25369,7 +23633,7 @@ jQuery.cssHooks.marginLeft = addGetHookIf( support.reliableMarginLeft,
 					swap( elem, { marginLeft: 0 }, function() {
 						return elem.getBoundingClientRect().left;
 					} )
-			) + "px";
+				) + "px";
 		}
 	}
 );
@@ -25508,7 +23772,7 @@ Tween.propHooks = {
 			if ( jQuery.fx.step[ tween.prop ] ) {
 				jQuery.fx.step[ tween.prop ]( tween );
 			} else if ( tween.elem.nodeType === 1 && (
-				jQuery.cssHooks[ tween.prop ] ||
+					jQuery.cssHooks[ tween.prop ] ||
 					tween.elem.style[ finalPropName( tween.prop ) ] != null ) ) {
 				jQuery.style( tween.elem, tween.prop, tween.now + tween.unit );
 			} else {
@@ -25753,7 +24017,7 @@ function defaultPrefilter( elem, props, opts ) {
 
 			anim.done( function() {
 
-				/* eslint-enable no-loop-func */
+			/* eslint-enable no-loop-func */
 
 				// The final step of a "hide" animation is actually hiding the element
 				if ( !hidden ) {
@@ -25873,7 +24137,7 @@ function Animation( elem, properties, options ) {
 			tweens: [],
 			createTween: function( prop, end ) {
 				var tween = jQuery.Tween( elem, animation.opts, prop, end,
-					animation.opts.specialEasing[ prop ] || animation.opts.easing );
+						animation.opts.specialEasing[ prop ] || animation.opts.easing );
 				animation.tweens.push( tween );
 				return tween;
 			},
@@ -26046,8 +24310,7 @@ jQuery.fn.extend( {
 					anim.stop( true );
 				}
 			};
-
-		doAnimation.finish = doAnimation;
+			doAnimation.finish = doAnimation;
 
 		return empty || optall.queue === false ?
 			this.each( doAnimation ) :
@@ -26687,8 +24950,8 @@ jQuery.fn.extend( {
 				if ( this.setAttribute ) {
 					this.setAttribute( "class",
 						className || value === false ?
-							"" :
-							dataPriv.get( this, "__className__" ) || ""
+						"" :
+						dataPriv.get( this, "__className__" ) || ""
 					);
 				}
 			}
@@ -26703,7 +24966,7 @@ jQuery.fn.extend( {
 		while ( ( elem = this[ i++ ] ) ) {
 			if ( elem.nodeType === 1 &&
 				( " " + stripAndCollapse( getClass( elem ) ) + " " ).indexOf( className ) > -1 ) {
-				return true;
+					return true;
 			}
 		}
 
@@ -26993,7 +25256,9 @@ jQuery.extend( jQuery.event, {
 				special.bindType || type;
 
 			// jQuery handler
-			handle = ( dataPriv.get( cur, "events" ) || Object.create( null ) )[ event.type ] &&
+			handle = (
+					dataPriv.get( cur, "events" ) || Object.create( null )
+				)[ event.type ] &&
 				dataPriv.get( cur, "handle" );
 			if ( handle ) {
 				handle.apply( cur, data );
@@ -27140,7 +25405,7 @@ var rquery = ( /\?/ );
 
 // Cross-browser xml parsing
 jQuery.parseXML = function( data ) {
-	var xml, parserErrorElem;
+	var xml;
 	if ( !data || typeof data !== "string" ) {
 		return null;
 	}
@@ -27149,17 +25414,12 @@ jQuery.parseXML = function( data ) {
 	// IE throws on parseFromString with invalid input.
 	try {
 		xml = ( new window.DOMParser() ).parseFromString( data, "text/xml" );
-	} catch ( e ) {}
+	} catch ( e ) {
+		xml = undefined;
+	}
 
-	parserErrorElem = xml && xml.getElementsByTagName( "parsererror" )[ 0 ];
-	if ( !xml || parserErrorElem ) {
-		jQuery.error( "Invalid XML: " + (
-			parserErrorElem ?
-				jQuery.map( parserErrorElem.childNodes, function( el ) {
-					return el.textContent;
-				} ).join( "\n" ) :
-				data
-		) );
+	if ( !xml || xml.getElementsByTagName( "parsererror" ).length ) {
+		jQuery.error( "Invalid XML: " + data );
 	}
 	return xml;
 };
@@ -27260,14 +25520,16 @@ jQuery.fn.extend( {
 			// Can add propHook for "elements" to filter or add form elements
 			var elements = jQuery.prop( this, "elements" );
 			return elements ? jQuery.makeArray( elements ) : this;
-		} ).filter( function() {
+		} )
+		.filter( function() {
 			var type = this.type;
 
 			// Use .is( ":disabled" ) so that fieldset[disabled] works
 			return this.name && !jQuery( this ).is( ":disabled" ) &&
 				rsubmittable.test( this.nodeName ) && !rsubmitterTypes.test( type ) &&
 				( this.checked || !rcheckableType.test( type ) );
-		} ).map( function( _i, elem ) {
+		} )
+		.map( function( _i, elem ) {
 			var val = jQuery( this ).val();
 
 			if ( val == null ) {
@@ -27320,8 +25582,7 @@ var
 
 	// Anchor tag for parsing the document origin
 	originAnchor = document.createElement( "a" );
-
-originAnchor.href = location.href;
+	originAnchor.href = location.href;
 
 // Base "constructor" for jQuery.ajaxPrefilter and jQuery.ajaxTransport
 function addToPrefiltersOrTransports( structure ) {
@@ -27702,8 +25963,8 @@ jQuery.extend( {
 			// Context for global events is callbackContext if it is a DOM node or jQuery collection
 			globalEventContext = s.context &&
 				( callbackContext.nodeType || callbackContext.jquery ) ?
-				jQuery( callbackContext ) :
-				jQuery.event,
+					jQuery( callbackContext ) :
+					jQuery.event,
 
 			// Deferreds
 			deferred = jQuery.Deferred(),
@@ -28015,10 +26276,8 @@ jQuery.extend( {
 				response = ajaxHandleResponses( s, jqXHR, responses );
 			}
 
-			// Use a noop converter for missing script but not if jsonp
-			if ( !isSuccess &&
-				jQuery.inArray( "script", s.dataTypes ) > -1 &&
-				jQuery.inArray( "json", s.dataTypes ) < 0 ) {
+			// Use a noop converter for missing script
+			if ( !isSuccess && jQuery.inArray( "script", s.dataTypes ) > -1 ) {
 				s.converters[ "text script" ] = function() {};
 			}
 
@@ -28756,6 +27015,12 @@ jQuery.offset = {
 			options.using.call( elem, props );
 
 		} else {
+			if ( typeof props.top === "number" ) {
+				props.top += "px";
+			}
+			if ( typeof props.left === "number" ) {
+				props.left += "px";
+			}
 			curElem.css( props );
 		}
 	}
@@ -28924,11 +27189,8 @@ jQuery.each( [ "top", "left" ], function( _i, prop ) {
 
 // Create innerHeight, innerWidth, height, width, outerHeight and outerWidth methods
 jQuery.each( { Height: "height", Width: "width" }, function( name, type ) {
-	jQuery.each( {
-		padding: "inner" + name,
-		content: type,
-		"": "outer" + name
-	}, function( defaultExtra, funcName ) {
+	jQuery.each( { padding: "inner" + name, content: type, "": "outer" + name },
+		function( defaultExtra, funcName ) {
 
 		// Margin is only for outerHeight, outerWidth
 		jQuery.fn[ funcName ] = function( margin, value ) {
@@ -29013,8 +27275,7 @@ jQuery.fn.extend( {
 	}
 } );
 
-jQuery.each(
-	( "blur focus focusin focusout resize scroll click dblclick " +
+jQuery.each( ( "blur focus focusin focusout resize scroll click dblclick " +
 	"mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave " +
 	"change select submit keydown keypress keyup contextmenu" ).split( " " ),
 	function( _i, name ) {
@@ -29025,8 +27286,7 @@ jQuery.each(
 				this.on( name, null, data, fn ) :
 				this.trigger( name );
 		};
-	}
-);
+	} );
 
 
 
@@ -33144,7 +31404,7 @@ module.exports = stubFalse;
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module) {var require;//! moment.js
-//! version : 2.29.1
+//! version : 2.27.0
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
 //! license : MIT
 //! momentjs.com
@@ -35684,7 +33944,8 @@ module.exports = stubFalse;
     hooks.createFromInputFallback = deprecate(
         'value provided is not in a recognized RFC2822 or ISO format. moment construction falls back to js Date(), ' +
             'which is not reliable across all browsers and versions. Non RFC2822/ISO date formats are ' +
-            'discouraged. Please refer to http://momentjs.com/guides/#/warnings/js-date/ for more info.',
+            'discouraged and will be removed in an upcoming major release. Please refer to ' +
+            'http://momentjs.com/guides/#/warnings/js-date/ for more info.',
         function (config) {
             config._d = new Date(config._i + (config._useUTC ? ' UTC' : ''));
         }
@@ -36869,10 +35130,7 @@ module.exports = stubFalse;
     function calendar$1(time, formats) {
         // Support for single parameter, formats only overload to the calendar function
         if (arguments.length === 1) {
-            if (!arguments[0]) {
-                time = undefined;
-                formats = undefined;
-            } else if (isMomentInput(arguments[0])) {
+            if (isMomentInput(arguments[0])) {
                 time = arguments[0];
                 formats = undefined;
             } else if (isCalendarSpec(arguments[0])) {
@@ -37550,7 +35808,7 @@ module.exports = stubFalse;
             eras = this.localeData().eras();
         for (i = 0, l = eras.length; i < l; ++i) {
             // truncate time
-            val = this.clone().startOf('day').valueOf();
+            val = this.startOf('day').valueOf();
 
             if (eras[i].since <= val && val <= eras[i].until) {
                 return eras[i].name;
@@ -37570,7 +35828,7 @@ module.exports = stubFalse;
             eras = this.localeData().eras();
         for (i = 0, l = eras.length; i < l; ++i) {
             // truncate time
-            val = this.clone().startOf('day').valueOf();
+            val = this.startOf('day').valueOf();
 
             if (eras[i].since <= val && val <= eras[i].until) {
                 return eras[i].narrow;
@@ -37590,7 +35848,7 @@ module.exports = stubFalse;
             eras = this.localeData().eras();
         for (i = 0, l = eras.length; i < l; ++i) {
             // truncate time
-            val = this.clone().startOf('day').valueOf();
+            val = this.startOf('day').valueOf();
 
             if (eras[i].since <= val && val <= eras[i].until) {
                 return eras[i].abbr;
@@ -37613,7 +35871,7 @@ module.exports = stubFalse;
             dir = eras[i].since <= eras[i].until ? +1 : -1;
 
             // truncate time
-            val = this.clone().startOf('day').valueOf();
+            val = this.startOf('day').valueOf();
 
             if (
                 (eras[i].since <= val && val <= eras[i].until) ||
@@ -38764,7 +37022,7 @@ module.exports = stubFalse;
 
     //! moment.js
 
-    hooks.version = '2.29.1';
+    hooks.version = '2.27.0';
 
     setHookCallback(createLocal);
 
@@ -40575,7 +38833,7 @@ module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/** @license React v16.14.0
+/** @license React v16.13.1
  * react-dom.development.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -65145,7 +63403,7 @@ function injectIntoDevTools(devToolsConfig) {
     // Enables DevTools to append owner stacks to error messages in DEV mode.
     getCurrentFiber:  function () {
       return current;
-    }
+    } 
   }));
 }
 var IsSomeRendererActing$1 = ReactSharedInternals.IsSomeRendererActing;
@@ -65497,7 +63755,7 @@ implementation) {
   };
 }
 
-var ReactVersion = '16.14.0';
+var ReactVersion = '16.13.1';
 
 setAttemptUserBlockingHydration(attemptUserBlockingHydration$1);
 setAttemptContinuousHydration(attemptContinuousHydration$1);
@@ -69796,7 +68054,7 @@ Select$1.Option = Option;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/** @license React v16.14.0
+/** @license React v16.13.1
  * react.development.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -69816,7 +68074,7 @@ if (true) {
 var _assign = __webpack_require__(/*! object-assign */ "./node_modules/object-assign/index.js");
 var checkPropTypes = __webpack_require__(/*! prop-types/checkPropTypes */ "./node_modules/prop-types/checkPropTypes.js");
 
-var ReactVersion = '16.14.0';
+var ReactVersion = '16.13.1';
 
 // The Symbol used to tag the ReactElement-like types. If there is no native Symbol
 // nor polyfill, then a plain number is used for performance.

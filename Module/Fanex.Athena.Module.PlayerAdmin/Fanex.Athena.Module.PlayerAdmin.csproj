@@ -172,6 +172,7 @@
     <Compile Include="MetaModel\PlayerBetLimitDetailedLogMetaModel.cs" />
     <Compile Include="MetaModel\PlayerBetLimitLogMetaModel.cs" />
     <Compile Include="MetaModel\PlayerBetLimitSelectMetaModel.cs" />
+    <Compile Include="MetaModel\PlayerBetLimitProductStatusUpdateMetaModel.cs" />
     <Compile Include="MetaModel\PlayerBetLimitUpdateMetaModel.cs" />
     <Compile Include="MetaModel\PlayerBetLimitMetaModel.cs" />
     <Compile Include="MetaModel\PlayerBtcSingleCustomerMetaModel.cs" />

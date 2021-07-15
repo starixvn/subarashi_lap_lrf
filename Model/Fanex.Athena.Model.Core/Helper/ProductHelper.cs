@@ -62,7 +62,8 @@
                 { Product.HB, nameof(ViewResources.ProductHB) },
                 { Product.WM, nameof(ViewResources.ProductWM) },
                 { Product.BGG, nameof(ViewResources.ProductBGG) },
-                { Product.VGA, nameof(ViewResources.ProductVGA) }
+                { Product.VGA, nameof(ViewResources.ProductVGA) },
+                { Product.CG, nameof(ViewResources.ProductCG) }
             };
 
         public static string GetProductCode(int productId)

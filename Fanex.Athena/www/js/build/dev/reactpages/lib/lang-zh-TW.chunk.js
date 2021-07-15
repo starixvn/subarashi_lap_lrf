@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 5/31/2021 5:30:41 PM
+// Generated at: 7/1/2021 2:46:11 PM
 window._language_zh_TW = {
   AA: "客客",
   AbnormalBet: "非正規註單",
@@ -556,6 +556,7 @@ window._language_zh_TW = {
   Product: "產品",
   ProductBGG: "大遊真人",
   ProductCC: "樂卡迪亞",
+  ProductCG: "CG電子",
   ProductCO: "即時兌現",
   ProductCS: "娛樂城",
   ProductGDG: "GDG",
