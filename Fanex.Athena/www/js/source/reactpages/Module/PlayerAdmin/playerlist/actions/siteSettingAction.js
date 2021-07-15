@@ -10,7 +10,7 @@ export const getSiteSetting = (licType, isSubsidiary, hasCommPermissionRead, isE
         const { IsAllowedCustomerComm, IsAllowedBA } = response.data;
 
         const isAllowedBA = !isSubsidiary && IsAllowedBA;
-        if (isAllowedBA) {
+        if (isAllowedBA || isEnableSingleWallet) {
             const columnList = buildColumnList(licType, isAllowedBA, hasCommPermissionRead, isEnableSingleWallet);
             dispatch(setDisplayedColumnList(columnList));
         }
