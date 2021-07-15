@@ -602,7 +602,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 const generateHeaderText = hasCustomerComm => {
   const winLossColumn = hasCustomerComm ? _constants__WEBPACK_IMPORTED_MODULE_0__["winLossText"] : _constants__WEBPACK_IMPORTED_MODULE_0__["headerText"].CustomerWinLoss;
-  return _objectSpread(_objectSpread({}, _constants__WEBPACK_IMPORTED_MODULE_0__["headerText"]), {}, {
+  return _objectSpread({}, _constants__WEBPACK_IMPORTED_MODULE_0__["headerText"], {
     WinLoss: winLossColumn
   });
 };

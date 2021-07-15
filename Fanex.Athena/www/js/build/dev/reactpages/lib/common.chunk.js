@@ -188,7 +188,7 @@ function isIdentifierName(name) {
     }
   }
 
-  return !isFirst;
+  return true;
 }
 
 /***/ }),
@@ -426,9 +426,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function assertNode(node) {
   if (!(0, _isNode.default)(node)) {
-    var _node$type;
-
-    const type = (_node$type = node == null ? void 0 : node.type) != null ? _node$type : JSON.stringify(node);
+    const type = node && node.type || JSON.stringify(node);
     throw new TypeError(`Not a valid node of type "${type}"`);
   }
 }
@@ -523,12 +521,6 @@ exports.assertTaggedTemplateExpression = assertTaggedTemplateExpression;
 exports.assertTemplateElement = assertTemplateElement;
 exports.assertTemplateLiteral = assertTemplateLiteral;
 exports.assertYieldExpression = assertYieldExpression;
-exports.assertAwaitExpression = assertAwaitExpression;
-exports.assertImport = assertImport;
-exports.assertBigIntLiteral = assertBigIntLiteral;
-exports.assertExportNamespaceSpecifier = assertExportNamespaceSpecifier;
-exports.assertOptionalMemberExpression = assertOptionalMemberExpression;
-exports.assertOptionalCallExpression = assertOptionalCallExpression;
 exports.assertAnyTypeAnnotation = assertAnyTypeAnnotation;
 exports.assertArrayTypeAnnotation = assertArrayTypeAnnotation;
 exports.assertBooleanTypeAnnotation = assertBooleanTypeAnnotation;
@@ -611,21 +603,25 @@ exports.assertNoop = assertNoop;
 exports.assertPlaceholder = assertPlaceholder;
 exports.assertV8IntrinsicIdentifier = assertV8IntrinsicIdentifier;
 exports.assertArgumentPlaceholder = assertArgumentPlaceholder;
+exports.assertAwaitExpression = assertAwaitExpression;
 exports.assertBindExpression = assertBindExpression;
 exports.assertClassProperty = assertClassProperty;
+exports.assertOptionalMemberExpression = assertOptionalMemberExpression;
 exports.assertPipelineTopicExpression = assertPipelineTopicExpression;
 exports.assertPipelineBareFunction = assertPipelineBareFunction;
 exports.assertPipelinePrimaryTopicReference = assertPipelinePrimaryTopicReference;
+exports.assertOptionalCallExpression = assertOptionalCallExpression;
 exports.assertClassPrivateProperty = assertClassPrivateProperty;
 exports.assertClassPrivateMethod = assertClassPrivateMethod;
-exports.assertImportAttribute = assertImportAttribute;
+exports.assertImport = assertImport;
 exports.assertDecorator = assertDecorator;
 exports.assertDoExpression = assertDoExpression;
 exports.assertExportDefaultSpecifier = assertExportDefaultSpecifier;
+exports.assertExportNamespaceSpecifier = assertExportNamespaceSpecifier;
 exports.assertPrivateName = assertPrivateName;
+exports.assertBigIntLiteral = assertBigIntLiteral;
 exports.assertRecordExpression = assertRecordExpression;
 exports.assertTupleExpression = assertTupleExpression;
-exports.assertDecimalLiteral = assertDecimalLiteral;
 exports.assertTSParameterProperty = assertTSParameterProperty;
 exports.assertTSDeclareFunction = assertTSDeclareFunction;
 exports.assertTSDeclareMethod = assertTSDeclareMethod;
@@ -658,7 +654,6 @@ exports.assertTSArrayType = assertTSArrayType;
 exports.assertTSTupleType = assertTSTupleType;
 exports.assertTSOptionalType = assertTSOptionalType;
 exports.assertTSRestType = assertTSRestType;
-exports.assertTSNamedTupleMember = assertTSNamedTupleMember;
 exports.assertTSUnionType = assertTSUnionType;
 exports.assertTSIntersectionType = assertTSIntersectionType;
 exports.assertTSConditionalType = assertTSConditionalType;
@@ -732,7 +727,6 @@ exports.assertJSX = assertJSX;
 exports.assertPrivate = assertPrivate;
 exports.assertTSTypeElement = assertTSTypeElement;
 exports.assertTSType = assertTSType;
-exports.assertTSBaseType = assertTSBaseType;
 exports.assertNumberLiteral = assertNumberLiteral;
 exports.assertRegexLiteral = assertRegexLiteral;
 exports.assertRestProperty = assertRestProperty;
@@ -1046,30 +1040,6 @@ function assertTemplateLiteral(node, opts = {}) {
 
 function assertYieldExpression(node, opts = {}) {
   assert("YieldExpression", node, opts);
-}
-
-function assertAwaitExpression(node, opts = {}) {
-  assert("AwaitExpression", node, opts);
-}
-
-function assertImport(node, opts = {}) {
-  assert("Import", node, opts);
-}
-
-function assertBigIntLiteral(node, opts = {}) {
-  assert("BigIntLiteral", node, opts);
-}
-
-function assertExportNamespaceSpecifier(node, opts = {}) {
-  assert("ExportNamespaceSpecifier", node, opts);
-}
-
-function assertOptionalMemberExpression(node, opts = {}) {
-  assert("OptionalMemberExpression", node, opts);
-}
-
-function assertOptionalCallExpression(node, opts = {}) {
-  assert("OptionalCallExpression", node, opts);
 }
 
 function assertAnyTypeAnnotation(node, opts = {}) {
@@ -1400,12 +1370,20 @@ function assertArgumentPlaceholder(node, opts = {}) {
   assert("ArgumentPlaceholder", node, opts);
 }
 
+function assertAwaitExpression(node, opts = {}) {
+  assert("AwaitExpression", node, opts);
+}
+
 function assertBindExpression(node, opts = {}) {
   assert("BindExpression", node, opts);
 }
 
 function assertClassProperty(node, opts = {}) {
   assert("ClassProperty", node, opts);
+}
+
+function assertOptionalMemberExpression(node, opts = {}) {
+  assert("OptionalMemberExpression", node, opts);
 }
 
 function assertPipelineTopicExpression(node, opts = {}) {
@@ -1420,6 +1398,10 @@ function assertPipelinePrimaryTopicReference(node, opts = {}) {
   assert("PipelinePrimaryTopicReference", node, opts);
 }
 
+function assertOptionalCallExpression(node, opts = {}) {
+  assert("OptionalCallExpression", node, opts);
+}
+
 function assertClassPrivateProperty(node, opts = {}) {
   assert("ClassPrivateProperty", node, opts);
 }
@@ -1428,8 +1410,8 @@ function assertClassPrivateMethod(node, opts = {}) {
   assert("ClassPrivateMethod", node, opts);
 }
 
-function assertImportAttribute(node, opts = {}) {
-  assert("ImportAttribute", node, opts);
+function assertImport(node, opts = {}) {
+  assert("Import", node, opts);
 }
 
 function assertDecorator(node, opts = {}) {
@@ -1444,8 +1426,16 @@ function assertExportDefaultSpecifier(node, opts = {}) {
   assert("ExportDefaultSpecifier", node, opts);
 }
 
+function assertExportNamespaceSpecifier(node, opts = {}) {
+  assert("ExportNamespaceSpecifier", node, opts);
+}
+
 function assertPrivateName(node, opts = {}) {
   assert("PrivateName", node, opts);
+}
+
+function assertBigIntLiteral(node, opts = {}) {
+  assert("BigIntLiteral", node, opts);
 }
 
 function assertRecordExpression(node, opts = {}) {
@@ -1454,10 +1444,6 @@ function assertRecordExpression(node, opts = {}) {
 
 function assertTupleExpression(node, opts = {}) {
   assert("TupleExpression", node, opts);
-}
-
-function assertDecimalLiteral(node, opts = {}) {
-  assert("DecimalLiteral", node, opts);
 }
 
 function assertTSParameterProperty(node, opts = {}) {
@@ -1586,10 +1572,6 @@ function assertTSOptionalType(node, opts = {}) {
 
 function assertTSRestType(node, opts = {}) {
   assert("TSRestType", node, opts);
-}
-
-function assertTSNamedTupleMember(node, opts = {}) {
-  assert("TSNamedTupleMember", node, opts);
 }
 
 function assertTSUnionType(node, opts = {}) {
@@ -1884,10 +1866,6 @@ function assertTSType(node, opts = {}) {
   assert("TSType", node, opts);
 }
 
-function assertTSBaseType(node, opts = {}) {
-  assert("TSBaseType", node, opts);
-}
-
 function assertNumberLiteral(node, opts) {
   console.trace("The node type NumberLiteral has been renamed to NumericLiteral");
   assert("NumberLiteral", node, opts);
@@ -1963,39 +1941,6 @@ function builder(type, ...args) {
 
 /***/ }),
 
-/***/ "./node_modules/@babel/types/lib/builders/flow/createFlowUnionType.js":
-/*!****************************************************************************!*\
-  !*** ./node_modules/@babel/types/lib/builders/flow/createFlowUnionType.js ***!
-  \****************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = createFlowUnionType;
-
-var _generated = __webpack_require__(/*! ../generated */ "./node_modules/@babel/types/lib/builders/generated/index.js");
-
-var _removeTypeDuplicates = _interopRequireDefault(__webpack_require__(/*! ../../modifications/flow/removeTypeDuplicates */ "./node_modules/@babel/types/lib/modifications/flow/removeTypeDuplicates.js"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function createFlowUnionType(types) {
-  const flattened = (0, _removeTypeDuplicates.default)(types);
-
-  if (flattened.length === 1) {
-    return flattened[0];
-  } else {
-    return (0, _generated.unionTypeAnnotation)(flattened);
-  }
-}
-
-/***/ }),
-
 /***/ "./node_modules/@babel/types/lib/builders/flow/createTypeAnnotationBasedOnTypeof.js":
 /*!******************************************************************************************!*\
   !*** ./node_modules/@babel/types/lib/builders/flow/createTypeAnnotationBasedOnTypeof.js ***!
@@ -2035,6 +1980,39 @@ function createTypeAnnotationBasedOnTypeof(type) {
 
 /***/ }),
 
+/***/ "./node_modules/@babel/types/lib/builders/flow/createUnionTypeAnnotation.js":
+/*!**********************************************************************************!*\
+  !*** ./node_modules/@babel/types/lib/builders/flow/createUnionTypeAnnotation.js ***!
+  \**********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = createUnionTypeAnnotation;
+
+var _generated = __webpack_require__(/*! ../generated */ "./node_modules/@babel/types/lib/builders/generated/index.js");
+
+var _removeTypeDuplicates = _interopRequireDefault(__webpack_require__(/*! ../../modifications/flow/removeTypeDuplicates */ "./node_modules/@babel/types/lib/modifications/flow/removeTypeDuplicates.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function createUnionTypeAnnotation(types) {
+  const flattened = (0, _removeTypeDuplicates.default)(types);
+
+  if (flattened.length === 1) {
+    return flattened[0];
+  } else {
+    return (0, _generated.unionTypeAnnotation)(flattened);
+  }
+}
+
+/***/ }),
+
 /***/ "./node_modules/@babel/types/lib/builders/generated/index.js":
 /*!*******************************************************************!*\
   !*** ./node_modules/@babel/types/lib/builders/generated/index.js ***!
@@ -2048,246 +2026,243 @@ function createTypeAnnotationBasedOnTypeof(type) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ArrayExpression = exports.arrayExpression = arrayExpression;
-exports.AssignmentExpression = exports.assignmentExpression = assignmentExpression;
-exports.BinaryExpression = exports.binaryExpression = binaryExpression;
-exports.InterpreterDirective = exports.interpreterDirective = interpreterDirective;
-exports.Directive = exports.directive = directive;
-exports.DirectiveLiteral = exports.directiveLiteral = directiveLiteral;
-exports.BlockStatement = exports.blockStatement = blockStatement;
-exports.BreakStatement = exports.breakStatement = breakStatement;
-exports.CallExpression = exports.callExpression = callExpression;
-exports.CatchClause = exports.catchClause = catchClause;
-exports.ConditionalExpression = exports.conditionalExpression = conditionalExpression;
-exports.ContinueStatement = exports.continueStatement = continueStatement;
-exports.DebuggerStatement = exports.debuggerStatement = debuggerStatement;
-exports.DoWhileStatement = exports.doWhileStatement = doWhileStatement;
-exports.EmptyStatement = exports.emptyStatement = emptyStatement;
-exports.ExpressionStatement = exports.expressionStatement = expressionStatement;
-exports.File = exports.file = file;
-exports.ForInStatement = exports.forInStatement = forInStatement;
-exports.ForStatement = exports.forStatement = forStatement;
-exports.FunctionDeclaration = exports.functionDeclaration = functionDeclaration;
-exports.FunctionExpression = exports.functionExpression = functionExpression;
-exports.Identifier = exports.identifier = identifier;
-exports.IfStatement = exports.ifStatement = ifStatement;
-exports.LabeledStatement = exports.labeledStatement = labeledStatement;
-exports.StringLiteral = exports.stringLiteral = stringLiteral;
-exports.NumericLiteral = exports.numericLiteral = numericLiteral;
-exports.NullLiteral = exports.nullLiteral = nullLiteral;
-exports.BooleanLiteral = exports.booleanLiteral = booleanLiteral;
-exports.RegExpLiteral = exports.regExpLiteral = regExpLiteral;
-exports.LogicalExpression = exports.logicalExpression = logicalExpression;
-exports.MemberExpression = exports.memberExpression = memberExpression;
-exports.NewExpression = exports.newExpression = newExpression;
-exports.Program = exports.program = program;
-exports.ObjectExpression = exports.objectExpression = objectExpression;
-exports.ObjectMethod = exports.objectMethod = objectMethod;
-exports.ObjectProperty = exports.objectProperty = objectProperty;
-exports.RestElement = exports.restElement = restElement;
-exports.ReturnStatement = exports.returnStatement = returnStatement;
-exports.SequenceExpression = exports.sequenceExpression = sequenceExpression;
-exports.ParenthesizedExpression = exports.parenthesizedExpression = parenthesizedExpression;
-exports.SwitchCase = exports.switchCase = switchCase;
-exports.SwitchStatement = exports.switchStatement = switchStatement;
-exports.ThisExpression = exports.thisExpression = thisExpression;
-exports.ThrowStatement = exports.throwStatement = throwStatement;
-exports.TryStatement = exports.tryStatement = tryStatement;
-exports.UnaryExpression = exports.unaryExpression = unaryExpression;
-exports.UpdateExpression = exports.updateExpression = updateExpression;
-exports.VariableDeclaration = exports.variableDeclaration = variableDeclaration;
-exports.VariableDeclarator = exports.variableDeclarator = variableDeclarator;
-exports.WhileStatement = exports.whileStatement = whileStatement;
-exports.WithStatement = exports.withStatement = withStatement;
-exports.AssignmentPattern = exports.assignmentPattern = assignmentPattern;
-exports.ArrayPattern = exports.arrayPattern = arrayPattern;
-exports.ArrowFunctionExpression = exports.arrowFunctionExpression = arrowFunctionExpression;
-exports.ClassBody = exports.classBody = classBody;
-exports.ClassExpression = exports.classExpression = classExpression;
-exports.ClassDeclaration = exports.classDeclaration = classDeclaration;
-exports.ExportAllDeclaration = exports.exportAllDeclaration = exportAllDeclaration;
-exports.ExportDefaultDeclaration = exports.exportDefaultDeclaration = exportDefaultDeclaration;
-exports.ExportNamedDeclaration = exports.exportNamedDeclaration = exportNamedDeclaration;
-exports.ExportSpecifier = exports.exportSpecifier = exportSpecifier;
-exports.ForOfStatement = exports.forOfStatement = forOfStatement;
-exports.ImportDeclaration = exports.importDeclaration = importDeclaration;
-exports.ImportDefaultSpecifier = exports.importDefaultSpecifier = importDefaultSpecifier;
-exports.ImportNamespaceSpecifier = exports.importNamespaceSpecifier = importNamespaceSpecifier;
-exports.ImportSpecifier = exports.importSpecifier = importSpecifier;
-exports.MetaProperty = exports.metaProperty = metaProperty;
-exports.ClassMethod = exports.classMethod = classMethod;
-exports.ObjectPattern = exports.objectPattern = objectPattern;
-exports.SpreadElement = exports.spreadElement = spreadElement;
-exports.super = exports.Super = _super;
-exports.TaggedTemplateExpression = exports.taggedTemplateExpression = taggedTemplateExpression;
-exports.TemplateElement = exports.templateElement = templateElement;
-exports.TemplateLiteral = exports.templateLiteral = templateLiteral;
-exports.YieldExpression = exports.yieldExpression = yieldExpression;
-exports.AwaitExpression = exports.awaitExpression = awaitExpression;
-exports.import = exports.Import = _import;
-exports.BigIntLiteral = exports.bigIntLiteral = bigIntLiteral;
-exports.ExportNamespaceSpecifier = exports.exportNamespaceSpecifier = exportNamespaceSpecifier;
-exports.OptionalMemberExpression = exports.optionalMemberExpression = optionalMemberExpression;
-exports.OptionalCallExpression = exports.optionalCallExpression = optionalCallExpression;
-exports.AnyTypeAnnotation = exports.anyTypeAnnotation = anyTypeAnnotation;
-exports.ArrayTypeAnnotation = exports.arrayTypeAnnotation = arrayTypeAnnotation;
-exports.BooleanTypeAnnotation = exports.booleanTypeAnnotation = booleanTypeAnnotation;
-exports.BooleanLiteralTypeAnnotation = exports.booleanLiteralTypeAnnotation = booleanLiteralTypeAnnotation;
-exports.NullLiteralTypeAnnotation = exports.nullLiteralTypeAnnotation = nullLiteralTypeAnnotation;
-exports.ClassImplements = exports.classImplements = classImplements;
-exports.DeclareClass = exports.declareClass = declareClass;
-exports.DeclareFunction = exports.declareFunction = declareFunction;
-exports.DeclareInterface = exports.declareInterface = declareInterface;
-exports.DeclareModule = exports.declareModule = declareModule;
-exports.DeclareModuleExports = exports.declareModuleExports = declareModuleExports;
-exports.DeclareTypeAlias = exports.declareTypeAlias = declareTypeAlias;
-exports.DeclareOpaqueType = exports.declareOpaqueType = declareOpaqueType;
-exports.DeclareVariable = exports.declareVariable = declareVariable;
-exports.DeclareExportDeclaration = exports.declareExportDeclaration = declareExportDeclaration;
-exports.DeclareExportAllDeclaration = exports.declareExportAllDeclaration = declareExportAllDeclaration;
-exports.DeclaredPredicate = exports.declaredPredicate = declaredPredicate;
-exports.ExistsTypeAnnotation = exports.existsTypeAnnotation = existsTypeAnnotation;
-exports.FunctionTypeAnnotation = exports.functionTypeAnnotation = functionTypeAnnotation;
-exports.FunctionTypeParam = exports.functionTypeParam = functionTypeParam;
-exports.GenericTypeAnnotation = exports.genericTypeAnnotation = genericTypeAnnotation;
-exports.InferredPredicate = exports.inferredPredicate = inferredPredicate;
-exports.InterfaceExtends = exports.interfaceExtends = interfaceExtends;
-exports.InterfaceDeclaration = exports.interfaceDeclaration = interfaceDeclaration;
-exports.InterfaceTypeAnnotation = exports.interfaceTypeAnnotation = interfaceTypeAnnotation;
-exports.IntersectionTypeAnnotation = exports.intersectionTypeAnnotation = intersectionTypeAnnotation;
-exports.MixedTypeAnnotation = exports.mixedTypeAnnotation = mixedTypeAnnotation;
-exports.EmptyTypeAnnotation = exports.emptyTypeAnnotation = emptyTypeAnnotation;
-exports.NullableTypeAnnotation = exports.nullableTypeAnnotation = nullableTypeAnnotation;
-exports.NumberLiteralTypeAnnotation = exports.numberLiteralTypeAnnotation = numberLiteralTypeAnnotation;
-exports.NumberTypeAnnotation = exports.numberTypeAnnotation = numberTypeAnnotation;
-exports.ObjectTypeAnnotation = exports.objectTypeAnnotation = objectTypeAnnotation;
-exports.ObjectTypeInternalSlot = exports.objectTypeInternalSlot = objectTypeInternalSlot;
-exports.ObjectTypeCallProperty = exports.objectTypeCallProperty = objectTypeCallProperty;
-exports.ObjectTypeIndexer = exports.objectTypeIndexer = objectTypeIndexer;
-exports.ObjectTypeProperty = exports.objectTypeProperty = objectTypeProperty;
-exports.ObjectTypeSpreadProperty = exports.objectTypeSpreadProperty = objectTypeSpreadProperty;
-exports.OpaqueType = exports.opaqueType = opaqueType;
-exports.QualifiedTypeIdentifier = exports.qualifiedTypeIdentifier = qualifiedTypeIdentifier;
-exports.StringLiteralTypeAnnotation = exports.stringLiteralTypeAnnotation = stringLiteralTypeAnnotation;
-exports.StringTypeAnnotation = exports.stringTypeAnnotation = stringTypeAnnotation;
-exports.SymbolTypeAnnotation = exports.symbolTypeAnnotation = symbolTypeAnnotation;
-exports.ThisTypeAnnotation = exports.thisTypeAnnotation = thisTypeAnnotation;
-exports.TupleTypeAnnotation = exports.tupleTypeAnnotation = tupleTypeAnnotation;
-exports.TypeofTypeAnnotation = exports.typeofTypeAnnotation = typeofTypeAnnotation;
-exports.TypeAlias = exports.typeAlias = typeAlias;
-exports.TypeAnnotation = exports.typeAnnotation = typeAnnotation;
-exports.TypeCastExpression = exports.typeCastExpression = typeCastExpression;
-exports.TypeParameter = exports.typeParameter = typeParameter;
-exports.TypeParameterDeclaration = exports.typeParameterDeclaration = typeParameterDeclaration;
-exports.TypeParameterInstantiation = exports.typeParameterInstantiation = typeParameterInstantiation;
-exports.UnionTypeAnnotation = exports.unionTypeAnnotation = unionTypeAnnotation;
-exports.Variance = exports.variance = variance;
-exports.VoidTypeAnnotation = exports.voidTypeAnnotation = voidTypeAnnotation;
-exports.EnumDeclaration = exports.enumDeclaration = enumDeclaration;
-exports.EnumBooleanBody = exports.enumBooleanBody = enumBooleanBody;
-exports.EnumNumberBody = exports.enumNumberBody = enumNumberBody;
-exports.EnumStringBody = exports.enumStringBody = enumStringBody;
-exports.EnumSymbolBody = exports.enumSymbolBody = enumSymbolBody;
-exports.EnumBooleanMember = exports.enumBooleanMember = enumBooleanMember;
-exports.EnumNumberMember = exports.enumNumberMember = enumNumberMember;
-exports.EnumStringMember = exports.enumStringMember = enumStringMember;
-exports.EnumDefaultedMember = exports.enumDefaultedMember = enumDefaultedMember;
-exports.jSXAttribute = exports.JSXAttribute = exports.jsxAttribute = jsxAttribute;
-exports.jSXClosingElement = exports.JSXClosingElement = exports.jsxClosingElement = jsxClosingElement;
-exports.jSXElement = exports.JSXElement = exports.jsxElement = jsxElement;
-exports.jSXEmptyExpression = exports.JSXEmptyExpression = exports.jsxEmptyExpression = jsxEmptyExpression;
-exports.jSXExpressionContainer = exports.JSXExpressionContainer = exports.jsxExpressionContainer = jsxExpressionContainer;
-exports.jSXSpreadChild = exports.JSXSpreadChild = exports.jsxSpreadChild = jsxSpreadChild;
-exports.jSXIdentifier = exports.JSXIdentifier = exports.jsxIdentifier = jsxIdentifier;
-exports.jSXMemberExpression = exports.JSXMemberExpression = exports.jsxMemberExpression = jsxMemberExpression;
-exports.jSXNamespacedName = exports.JSXNamespacedName = exports.jsxNamespacedName = jsxNamespacedName;
-exports.jSXOpeningElement = exports.JSXOpeningElement = exports.jsxOpeningElement = jsxOpeningElement;
-exports.jSXSpreadAttribute = exports.JSXSpreadAttribute = exports.jsxSpreadAttribute = jsxSpreadAttribute;
-exports.jSXText = exports.JSXText = exports.jsxText = jsxText;
-exports.jSXFragment = exports.JSXFragment = exports.jsxFragment = jsxFragment;
-exports.jSXOpeningFragment = exports.JSXOpeningFragment = exports.jsxOpeningFragment = jsxOpeningFragment;
-exports.jSXClosingFragment = exports.JSXClosingFragment = exports.jsxClosingFragment = jsxClosingFragment;
-exports.Noop = exports.noop = noop;
-exports.Placeholder = exports.placeholder = placeholder;
-exports.V8IntrinsicIdentifier = exports.v8IntrinsicIdentifier = v8IntrinsicIdentifier;
-exports.ArgumentPlaceholder = exports.argumentPlaceholder = argumentPlaceholder;
-exports.BindExpression = exports.bindExpression = bindExpression;
-exports.ClassProperty = exports.classProperty = classProperty;
-exports.PipelineTopicExpression = exports.pipelineTopicExpression = pipelineTopicExpression;
-exports.PipelineBareFunction = exports.pipelineBareFunction = pipelineBareFunction;
-exports.PipelinePrimaryTopicReference = exports.pipelinePrimaryTopicReference = pipelinePrimaryTopicReference;
-exports.ClassPrivateProperty = exports.classPrivateProperty = classPrivateProperty;
-exports.ClassPrivateMethod = exports.classPrivateMethod = classPrivateMethod;
-exports.ImportAttribute = exports.importAttribute = importAttribute;
-exports.Decorator = exports.decorator = decorator;
-exports.DoExpression = exports.doExpression = doExpression;
-exports.ExportDefaultSpecifier = exports.exportDefaultSpecifier = exportDefaultSpecifier;
-exports.PrivateName = exports.privateName = privateName;
-exports.RecordExpression = exports.recordExpression = recordExpression;
-exports.TupleExpression = exports.tupleExpression = tupleExpression;
-exports.DecimalLiteral = exports.decimalLiteral = decimalLiteral;
-exports.tSParameterProperty = exports.TSParameterProperty = exports.tsParameterProperty = tsParameterProperty;
-exports.tSDeclareFunction = exports.TSDeclareFunction = exports.tsDeclareFunction = tsDeclareFunction;
-exports.tSDeclareMethod = exports.TSDeclareMethod = exports.tsDeclareMethod = tsDeclareMethod;
-exports.tSQualifiedName = exports.TSQualifiedName = exports.tsQualifiedName = tsQualifiedName;
-exports.tSCallSignatureDeclaration = exports.TSCallSignatureDeclaration = exports.tsCallSignatureDeclaration = tsCallSignatureDeclaration;
-exports.tSConstructSignatureDeclaration = exports.TSConstructSignatureDeclaration = exports.tsConstructSignatureDeclaration = tsConstructSignatureDeclaration;
-exports.tSPropertySignature = exports.TSPropertySignature = exports.tsPropertySignature = tsPropertySignature;
-exports.tSMethodSignature = exports.TSMethodSignature = exports.tsMethodSignature = tsMethodSignature;
-exports.tSIndexSignature = exports.TSIndexSignature = exports.tsIndexSignature = tsIndexSignature;
-exports.tSAnyKeyword = exports.TSAnyKeyword = exports.tsAnyKeyword = tsAnyKeyword;
-exports.tSBooleanKeyword = exports.TSBooleanKeyword = exports.tsBooleanKeyword = tsBooleanKeyword;
-exports.tSBigIntKeyword = exports.TSBigIntKeyword = exports.tsBigIntKeyword = tsBigIntKeyword;
-exports.tSNeverKeyword = exports.TSNeverKeyword = exports.tsNeverKeyword = tsNeverKeyword;
-exports.tSNullKeyword = exports.TSNullKeyword = exports.tsNullKeyword = tsNullKeyword;
-exports.tSNumberKeyword = exports.TSNumberKeyword = exports.tsNumberKeyword = tsNumberKeyword;
-exports.tSObjectKeyword = exports.TSObjectKeyword = exports.tsObjectKeyword = tsObjectKeyword;
-exports.tSStringKeyword = exports.TSStringKeyword = exports.tsStringKeyword = tsStringKeyword;
-exports.tSSymbolKeyword = exports.TSSymbolKeyword = exports.tsSymbolKeyword = tsSymbolKeyword;
-exports.tSUndefinedKeyword = exports.TSUndefinedKeyword = exports.tsUndefinedKeyword = tsUndefinedKeyword;
-exports.tSUnknownKeyword = exports.TSUnknownKeyword = exports.tsUnknownKeyword = tsUnknownKeyword;
-exports.tSVoidKeyword = exports.TSVoidKeyword = exports.tsVoidKeyword = tsVoidKeyword;
-exports.tSThisType = exports.TSThisType = exports.tsThisType = tsThisType;
-exports.tSFunctionType = exports.TSFunctionType = exports.tsFunctionType = tsFunctionType;
-exports.tSConstructorType = exports.TSConstructorType = exports.tsConstructorType = tsConstructorType;
-exports.tSTypeReference = exports.TSTypeReference = exports.tsTypeReference = tsTypeReference;
-exports.tSTypePredicate = exports.TSTypePredicate = exports.tsTypePredicate = tsTypePredicate;
-exports.tSTypeQuery = exports.TSTypeQuery = exports.tsTypeQuery = tsTypeQuery;
-exports.tSTypeLiteral = exports.TSTypeLiteral = exports.tsTypeLiteral = tsTypeLiteral;
-exports.tSArrayType = exports.TSArrayType = exports.tsArrayType = tsArrayType;
-exports.tSTupleType = exports.TSTupleType = exports.tsTupleType = tsTupleType;
-exports.tSOptionalType = exports.TSOptionalType = exports.tsOptionalType = tsOptionalType;
-exports.tSRestType = exports.TSRestType = exports.tsRestType = tsRestType;
-exports.tSNamedTupleMember = exports.TSNamedTupleMember = exports.tsNamedTupleMember = tsNamedTupleMember;
-exports.tSUnionType = exports.TSUnionType = exports.tsUnionType = tsUnionType;
-exports.tSIntersectionType = exports.TSIntersectionType = exports.tsIntersectionType = tsIntersectionType;
-exports.tSConditionalType = exports.TSConditionalType = exports.tsConditionalType = tsConditionalType;
-exports.tSInferType = exports.TSInferType = exports.tsInferType = tsInferType;
-exports.tSParenthesizedType = exports.TSParenthesizedType = exports.tsParenthesizedType = tsParenthesizedType;
-exports.tSTypeOperator = exports.TSTypeOperator = exports.tsTypeOperator = tsTypeOperator;
-exports.tSIndexedAccessType = exports.TSIndexedAccessType = exports.tsIndexedAccessType = tsIndexedAccessType;
-exports.tSMappedType = exports.TSMappedType = exports.tsMappedType = tsMappedType;
-exports.tSLiteralType = exports.TSLiteralType = exports.tsLiteralType = tsLiteralType;
-exports.tSExpressionWithTypeArguments = exports.TSExpressionWithTypeArguments = exports.tsExpressionWithTypeArguments = tsExpressionWithTypeArguments;
-exports.tSInterfaceDeclaration = exports.TSInterfaceDeclaration = exports.tsInterfaceDeclaration = tsInterfaceDeclaration;
-exports.tSInterfaceBody = exports.TSInterfaceBody = exports.tsInterfaceBody = tsInterfaceBody;
-exports.tSTypeAliasDeclaration = exports.TSTypeAliasDeclaration = exports.tsTypeAliasDeclaration = tsTypeAliasDeclaration;
-exports.tSAsExpression = exports.TSAsExpression = exports.tsAsExpression = tsAsExpression;
-exports.tSTypeAssertion = exports.TSTypeAssertion = exports.tsTypeAssertion = tsTypeAssertion;
-exports.tSEnumDeclaration = exports.TSEnumDeclaration = exports.tsEnumDeclaration = tsEnumDeclaration;
-exports.tSEnumMember = exports.TSEnumMember = exports.tsEnumMember = tsEnumMember;
-exports.tSModuleDeclaration = exports.TSModuleDeclaration = exports.tsModuleDeclaration = tsModuleDeclaration;
-exports.tSModuleBlock = exports.TSModuleBlock = exports.tsModuleBlock = tsModuleBlock;
-exports.tSImportType = exports.TSImportType = exports.tsImportType = tsImportType;
-exports.tSImportEqualsDeclaration = exports.TSImportEqualsDeclaration = exports.tsImportEqualsDeclaration = tsImportEqualsDeclaration;
-exports.tSExternalModuleReference = exports.TSExternalModuleReference = exports.tsExternalModuleReference = tsExternalModuleReference;
-exports.tSNonNullExpression = exports.TSNonNullExpression = exports.tsNonNullExpression = tsNonNullExpression;
-exports.tSExportAssignment = exports.TSExportAssignment = exports.tsExportAssignment = tsExportAssignment;
-exports.tSNamespaceExportDeclaration = exports.TSNamespaceExportDeclaration = exports.tsNamespaceExportDeclaration = tsNamespaceExportDeclaration;
-exports.tSTypeAnnotation = exports.TSTypeAnnotation = exports.tsTypeAnnotation = tsTypeAnnotation;
-exports.tSTypeParameterInstantiation = exports.TSTypeParameterInstantiation = exports.tsTypeParameterInstantiation = tsTypeParameterInstantiation;
-exports.tSTypeParameterDeclaration = exports.TSTypeParameterDeclaration = exports.tsTypeParameterDeclaration = tsTypeParameterDeclaration;
-exports.tSTypeParameter = exports.TSTypeParameter = exports.tsTypeParameter = tsTypeParameter;
+exports.arrayExpression = exports.ArrayExpression = ArrayExpression;
+exports.assignmentExpression = exports.AssignmentExpression = AssignmentExpression;
+exports.binaryExpression = exports.BinaryExpression = BinaryExpression;
+exports.interpreterDirective = exports.InterpreterDirective = InterpreterDirective;
+exports.directive = exports.Directive = Directive;
+exports.directiveLiteral = exports.DirectiveLiteral = DirectiveLiteral;
+exports.blockStatement = exports.BlockStatement = BlockStatement;
+exports.breakStatement = exports.BreakStatement = BreakStatement;
+exports.callExpression = exports.CallExpression = CallExpression;
+exports.catchClause = exports.CatchClause = CatchClause;
+exports.conditionalExpression = exports.ConditionalExpression = ConditionalExpression;
+exports.continueStatement = exports.ContinueStatement = ContinueStatement;
+exports.debuggerStatement = exports.DebuggerStatement = DebuggerStatement;
+exports.doWhileStatement = exports.DoWhileStatement = DoWhileStatement;
+exports.emptyStatement = exports.EmptyStatement = EmptyStatement;
+exports.expressionStatement = exports.ExpressionStatement = ExpressionStatement;
+exports.file = exports.File = File;
+exports.forInStatement = exports.ForInStatement = ForInStatement;
+exports.forStatement = exports.ForStatement = ForStatement;
+exports.functionDeclaration = exports.FunctionDeclaration = FunctionDeclaration;
+exports.functionExpression = exports.FunctionExpression = FunctionExpression;
+exports.identifier = exports.Identifier = Identifier;
+exports.ifStatement = exports.IfStatement = IfStatement;
+exports.labeledStatement = exports.LabeledStatement = LabeledStatement;
+exports.stringLiteral = exports.StringLiteral = StringLiteral;
+exports.numericLiteral = exports.NumericLiteral = NumericLiteral;
+exports.nullLiteral = exports.NullLiteral = NullLiteral;
+exports.booleanLiteral = exports.BooleanLiteral = BooleanLiteral;
+exports.regExpLiteral = exports.RegExpLiteral = RegExpLiteral;
+exports.logicalExpression = exports.LogicalExpression = LogicalExpression;
+exports.memberExpression = exports.MemberExpression = MemberExpression;
+exports.newExpression = exports.NewExpression = NewExpression;
+exports.program = exports.Program = Program;
+exports.objectExpression = exports.ObjectExpression = ObjectExpression;
+exports.objectMethod = exports.ObjectMethod = ObjectMethod;
+exports.objectProperty = exports.ObjectProperty = ObjectProperty;
+exports.restElement = exports.RestElement = RestElement;
+exports.returnStatement = exports.ReturnStatement = ReturnStatement;
+exports.sequenceExpression = exports.SequenceExpression = SequenceExpression;
+exports.parenthesizedExpression = exports.ParenthesizedExpression = ParenthesizedExpression;
+exports.switchCase = exports.SwitchCase = SwitchCase;
+exports.switchStatement = exports.SwitchStatement = SwitchStatement;
+exports.thisExpression = exports.ThisExpression = ThisExpression;
+exports.throwStatement = exports.ThrowStatement = ThrowStatement;
+exports.tryStatement = exports.TryStatement = TryStatement;
+exports.unaryExpression = exports.UnaryExpression = UnaryExpression;
+exports.updateExpression = exports.UpdateExpression = UpdateExpression;
+exports.variableDeclaration = exports.VariableDeclaration = VariableDeclaration;
+exports.variableDeclarator = exports.VariableDeclarator = VariableDeclarator;
+exports.whileStatement = exports.WhileStatement = WhileStatement;
+exports.withStatement = exports.WithStatement = WithStatement;
+exports.assignmentPattern = exports.AssignmentPattern = AssignmentPattern;
+exports.arrayPattern = exports.ArrayPattern = ArrayPattern;
+exports.arrowFunctionExpression = exports.ArrowFunctionExpression = ArrowFunctionExpression;
+exports.classBody = exports.ClassBody = ClassBody;
+exports.classExpression = exports.ClassExpression = ClassExpression;
+exports.classDeclaration = exports.ClassDeclaration = ClassDeclaration;
+exports.exportAllDeclaration = exports.ExportAllDeclaration = ExportAllDeclaration;
+exports.exportDefaultDeclaration = exports.ExportDefaultDeclaration = ExportDefaultDeclaration;
+exports.exportNamedDeclaration = exports.ExportNamedDeclaration = ExportNamedDeclaration;
+exports.exportSpecifier = exports.ExportSpecifier = ExportSpecifier;
+exports.forOfStatement = exports.ForOfStatement = ForOfStatement;
+exports.importDeclaration = exports.ImportDeclaration = ImportDeclaration;
+exports.importDefaultSpecifier = exports.ImportDefaultSpecifier = ImportDefaultSpecifier;
+exports.importNamespaceSpecifier = exports.ImportNamespaceSpecifier = ImportNamespaceSpecifier;
+exports.importSpecifier = exports.ImportSpecifier = ImportSpecifier;
+exports.metaProperty = exports.MetaProperty = MetaProperty;
+exports.classMethod = exports.ClassMethod = ClassMethod;
+exports.objectPattern = exports.ObjectPattern = ObjectPattern;
+exports.spreadElement = exports.SpreadElement = SpreadElement;
+exports.super = exports.Super = Super;
+exports.taggedTemplateExpression = exports.TaggedTemplateExpression = TaggedTemplateExpression;
+exports.templateElement = exports.TemplateElement = TemplateElement;
+exports.templateLiteral = exports.TemplateLiteral = TemplateLiteral;
+exports.yieldExpression = exports.YieldExpression = YieldExpression;
+exports.anyTypeAnnotation = exports.AnyTypeAnnotation = AnyTypeAnnotation;
+exports.arrayTypeAnnotation = exports.ArrayTypeAnnotation = ArrayTypeAnnotation;
+exports.booleanTypeAnnotation = exports.BooleanTypeAnnotation = BooleanTypeAnnotation;
+exports.booleanLiteralTypeAnnotation = exports.BooleanLiteralTypeAnnotation = BooleanLiteralTypeAnnotation;
+exports.nullLiteralTypeAnnotation = exports.NullLiteralTypeAnnotation = NullLiteralTypeAnnotation;
+exports.classImplements = exports.ClassImplements = ClassImplements;
+exports.declareClass = exports.DeclareClass = DeclareClass;
+exports.declareFunction = exports.DeclareFunction = DeclareFunction;
+exports.declareInterface = exports.DeclareInterface = DeclareInterface;
+exports.declareModule = exports.DeclareModule = DeclareModule;
+exports.declareModuleExports = exports.DeclareModuleExports = DeclareModuleExports;
+exports.declareTypeAlias = exports.DeclareTypeAlias = DeclareTypeAlias;
+exports.declareOpaqueType = exports.DeclareOpaqueType = DeclareOpaqueType;
+exports.declareVariable = exports.DeclareVariable = DeclareVariable;
+exports.declareExportDeclaration = exports.DeclareExportDeclaration = DeclareExportDeclaration;
+exports.declareExportAllDeclaration = exports.DeclareExportAllDeclaration = DeclareExportAllDeclaration;
+exports.declaredPredicate = exports.DeclaredPredicate = DeclaredPredicate;
+exports.existsTypeAnnotation = exports.ExistsTypeAnnotation = ExistsTypeAnnotation;
+exports.functionTypeAnnotation = exports.FunctionTypeAnnotation = FunctionTypeAnnotation;
+exports.functionTypeParam = exports.FunctionTypeParam = FunctionTypeParam;
+exports.genericTypeAnnotation = exports.GenericTypeAnnotation = GenericTypeAnnotation;
+exports.inferredPredicate = exports.InferredPredicate = InferredPredicate;
+exports.interfaceExtends = exports.InterfaceExtends = InterfaceExtends;
+exports.interfaceDeclaration = exports.InterfaceDeclaration = InterfaceDeclaration;
+exports.interfaceTypeAnnotation = exports.InterfaceTypeAnnotation = InterfaceTypeAnnotation;
+exports.intersectionTypeAnnotation = exports.IntersectionTypeAnnotation = IntersectionTypeAnnotation;
+exports.mixedTypeAnnotation = exports.MixedTypeAnnotation = MixedTypeAnnotation;
+exports.emptyTypeAnnotation = exports.EmptyTypeAnnotation = EmptyTypeAnnotation;
+exports.nullableTypeAnnotation = exports.NullableTypeAnnotation = NullableTypeAnnotation;
+exports.numberLiteralTypeAnnotation = exports.NumberLiteralTypeAnnotation = NumberLiteralTypeAnnotation;
+exports.numberTypeAnnotation = exports.NumberTypeAnnotation = NumberTypeAnnotation;
+exports.objectTypeAnnotation = exports.ObjectTypeAnnotation = ObjectTypeAnnotation;
+exports.objectTypeInternalSlot = exports.ObjectTypeInternalSlot = ObjectTypeInternalSlot;
+exports.objectTypeCallProperty = exports.ObjectTypeCallProperty = ObjectTypeCallProperty;
+exports.objectTypeIndexer = exports.ObjectTypeIndexer = ObjectTypeIndexer;
+exports.objectTypeProperty = exports.ObjectTypeProperty = ObjectTypeProperty;
+exports.objectTypeSpreadProperty = exports.ObjectTypeSpreadProperty = ObjectTypeSpreadProperty;
+exports.opaqueType = exports.OpaqueType = OpaqueType;
+exports.qualifiedTypeIdentifier = exports.QualifiedTypeIdentifier = QualifiedTypeIdentifier;
+exports.stringLiteralTypeAnnotation = exports.StringLiteralTypeAnnotation = StringLiteralTypeAnnotation;
+exports.stringTypeAnnotation = exports.StringTypeAnnotation = StringTypeAnnotation;
+exports.symbolTypeAnnotation = exports.SymbolTypeAnnotation = SymbolTypeAnnotation;
+exports.thisTypeAnnotation = exports.ThisTypeAnnotation = ThisTypeAnnotation;
+exports.tupleTypeAnnotation = exports.TupleTypeAnnotation = TupleTypeAnnotation;
+exports.typeofTypeAnnotation = exports.TypeofTypeAnnotation = TypeofTypeAnnotation;
+exports.typeAlias = exports.TypeAlias = TypeAlias;
+exports.typeAnnotation = exports.TypeAnnotation = TypeAnnotation;
+exports.typeCastExpression = exports.TypeCastExpression = TypeCastExpression;
+exports.typeParameter = exports.TypeParameter = TypeParameter;
+exports.typeParameterDeclaration = exports.TypeParameterDeclaration = TypeParameterDeclaration;
+exports.typeParameterInstantiation = exports.TypeParameterInstantiation = TypeParameterInstantiation;
+exports.unionTypeAnnotation = exports.UnionTypeAnnotation = UnionTypeAnnotation;
+exports.variance = exports.Variance = Variance;
+exports.voidTypeAnnotation = exports.VoidTypeAnnotation = VoidTypeAnnotation;
+exports.enumDeclaration = exports.EnumDeclaration = EnumDeclaration;
+exports.enumBooleanBody = exports.EnumBooleanBody = EnumBooleanBody;
+exports.enumNumberBody = exports.EnumNumberBody = EnumNumberBody;
+exports.enumStringBody = exports.EnumStringBody = EnumStringBody;
+exports.enumSymbolBody = exports.EnumSymbolBody = EnumSymbolBody;
+exports.enumBooleanMember = exports.EnumBooleanMember = EnumBooleanMember;
+exports.enumNumberMember = exports.EnumNumberMember = EnumNumberMember;
+exports.enumStringMember = exports.EnumStringMember = EnumStringMember;
+exports.enumDefaultedMember = exports.EnumDefaultedMember = EnumDefaultedMember;
+exports.jSXAttribute = exports.jsxAttribute = exports.JSXAttribute = JSXAttribute;
+exports.jSXClosingElement = exports.jsxClosingElement = exports.JSXClosingElement = JSXClosingElement;
+exports.jSXElement = exports.jsxElement = exports.JSXElement = JSXElement;
+exports.jSXEmptyExpression = exports.jsxEmptyExpression = exports.JSXEmptyExpression = JSXEmptyExpression;
+exports.jSXExpressionContainer = exports.jsxExpressionContainer = exports.JSXExpressionContainer = JSXExpressionContainer;
+exports.jSXSpreadChild = exports.jsxSpreadChild = exports.JSXSpreadChild = JSXSpreadChild;
+exports.jSXIdentifier = exports.jsxIdentifier = exports.JSXIdentifier = JSXIdentifier;
+exports.jSXMemberExpression = exports.jsxMemberExpression = exports.JSXMemberExpression = JSXMemberExpression;
+exports.jSXNamespacedName = exports.jsxNamespacedName = exports.JSXNamespacedName = JSXNamespacedName;
+exports.jSXOpeningElement = exports.jsxOpeningElement = exports.JSXOpeningElement = JSXOpeningElement;
+exports.jSXSpreadAttribute = exports.jsxSpreadAttribute = exports.JSXSpreadAttribute = JSXSpreadAttribute;
+exports.jSXText = exports.jsxText = exports.JSXText = JSXText;
+exports.jSXFragment = exports.jsxFragment = exports.JSXFragment = JSXFragment;
+exports.jSXOpeningFragment = exports.jsxOpeningFragment = exports.JSXOpeningFragment = JSXOpeningFragment;
+exports.jSXClosingFragment = exports.jsxClosingFragment = exports.JSXClosingFragment = JSXClosingFragment;
+exports.noop = exports.Noop = Noop;
+exports.placeholder = exports.Placeholder = Placeholder;
+exports.v8IntrinsicIdentifier = exports.V8IntrinsicIdentifier = V8IntrinsicIdentifier;
+exports.argumentPlaceholder = exports.ArgumentPlaceholder = ArgumentPlaceholder;
+exports.awaitExpression = exports.AwaitExpression = AwaitExpression;
+exports.bindExpression = exports.BindExpression = BindExpression;
+exports.classProperty = exports.ClassProperty = ClassProperty;
+exports.optionalMemberExpression = exports.OptionalMemberExpression = OptionalMemberExpression;
+exports.pipelineTopicExpression = exports.PipelineTopicExpression = PipelineTopicExpression;
+exports.pipelineBareFunction = exports.PipelineBareFunction = PipelineBareFunction;
+exports.pipelinePrimaryTopicReference = exports.PipelinePrimaryTopicReference = PipelinePrimaryTopicReference;
+exports.optionalCallExpression = exports.OptionalCallExpression = OptionalCallExpression;
+exports.classPrivateProperty = exports.ClassPrivateProperty = ClassPrivateProperty;
+exports.classPrivateMethod = exports.ClassPrivateMethod = ClassPrivateMethod;
+exports.import = exports.Import = Import;
+exports.decorator = exports.Decorator = Decorator;
+exports.doExpression = exports.DoExpression = DoExpression;
+exports.exportDefaultSpecifier = exports.ExportDefaultSpecifier = ExportDefaultSpecifier;
+exports.exportNamespaceSpecifier = exports.ExportNamespaceSpecifier = ExportNamespaceSpecifier;
+exports.privateName = exports.PrivateName = PrivateName;
+exports.bigIntLiteral = exports.BigIntLiteral = BigIntLiteral;
+exports.recordExpression = exports.RecordExpression = RecordExpression;
+exports.tupleExpression = exports.TupleExpression = TupleExpression;
+exports.tSParameterProperty = exports.tsParameterProperty = exports.TSParameterProperty = TSParameterProperty;
+exports.tSDeclareFunction = exports.tsDeclareFunction = exports.TSDeclareFunction = TSDeclareFunction;
+exports.tSDeclareMethod = exports.tsDeclareMethod = exports.TSDeclareMethod = TSDeclareMethod;
+exports.tSQualifiedName = exports.tsQualifiedName = exports.TSQualifiedName = TSQualifiedName;
+exports.tSCallSignatureDeclaration = exports.tsCallSignatureDeclaration = exports.TSCallSignatureDeclaration = TSCallSignatureDeclaration;
+exports.tSConstructSignatureDeclaration = exports.tsConstructSignatureDeclaration = exports.TSConstructSignatureDeclaration = TSConstructSignatureDeclaration;
+exports.tSPropertySignature = exports.tsPropertySignature = exports.TSPropertySignature = TSPropertySignature;
+exports.tSMethodSignature = exports.tsMethodSignature = exports.TSMethodSignature = TSMethodSignature;
+exports.tSIndexSignature = exports.tsIndexSignature = exports.TSIndexSignature = TSIndexSignature;
+exports.tSAnyKeyword = exports.tsAnyKeyword = exports.TSAnyKeyword = TSAnyKeyword;
+exports.tSBooleanKeyword = exports.tsBooleanKeyword = exports.TSBooleanKeyword = TSBooleanKeyword;
+exports.tSBigIntKeyword = exports.tsBigIntKeyword = exports.TSBigIntKeyword = TSBigIntKeyword;
+exports.tSNeverKeyword = exports.tsNeverKeyword = exports.TSNeverKeyword = TSNeverKeyword;
+exports.tSNullKeyword = exports.tsNullKeyword = exports.TSNullKeyword = TSNullKeyword;
+exports.tSNumberKeyword = exports.tsNumberKeyword = exports.TSNumberKeyword = TSNumberKeyword;
+exports.tSObjectKeyword = exports.tsObjectKeyword = exports.TSObjectKeyword = TSObjectKeyword;
+exports.tSStringKeyword = exports.tsStringKeyword = exports.TSStringKeyword = TSStringKeyword;
+exports.tSSymbolKeyword = exports.tsSymbolKeyword = exports.TSSymbolKeyword = TSSymbolKeyword;
+exports.tSUndefinedKeyword = exports.tsUndefinedKeyword = exports.TSUndefinedKeyword = TSUndefinedKeyword;
+exports.tSUnknownKeyword = exports.tsUnknownKeyword = exports.TSUnknownKeyword = TSUnknownKeyword;
+exports.tSVoidKeyword = exports.tsVoidKeyword = exports.TSVoidKeyword = TSVoidKeyword;
+exports.tSThisType = exports.tsThisType = exports.TSThisType = TSThisType;
+exports.tSFunctionType = exports.tsFunctionType = exports.TSFunctionType = TSFunctionType;
+exports.tSConstructorType = exports.tsConstructorType = exports.TSConstructorType = TSConstructorType;
+exports.tSTypeReference = exports.tsTypeReference = exports.TSTypeReference = TSTypeReference;
+exports.tSTypePredicate = exports.tsTypePredicate = exports.TSTypePredicate = TSTypePredicate;
+exports.tSTypeQuery = exports.tsTypeQuery = exports.TSTypeQuery = TSTypeQuery;
+exports.tSTypeLiteral = exports.tsTypeLiteral = exports.TSTypeLiteral = TSTypeLiteral;
+exports.tSArrayType = exports.tsArrayType = exports.TSArrayType = TSArrayType;
+exports.tSTupleType = exports.tsTupleType = exports.TSTupleType = TSTupleType;
+exports.tSOptionalType = exports.tsOptionalType = exports.TSOptionalType = TSOptionalType;
+exports.tSRestType = exports.tsRestType = exports.TSRestType = TSRestType;
+exports.tSUnionType = exports.tsUnionType = exports.TSUnionType = TSUnionType;
+exports.tSIntersectionType = exports.tsIntersectionType = exports.TSIntersectionType = TSIntersectionType;
+exports.tSConditionalType = exports.tsConditionalType = exports.TSConditionalType = TSConditionalType;
+exports.tSInferType = exports.tsInferType = exports.TSInferType = TSInferType;
+exports.tSParenthesizedType = exports.tsParenthesizedType = exports.TSParenthesizedType = TSParenthesizedType;
+exports.tSTypeOperator = exports.tsTypeOperator = exports.TSTypeOperator = TSTypeOperator;
+exports.tSIndexedAccessType = exports.tsIndexedAccessType = exports.TSIndexedAccessType = TSIndexedAccessType;
+exports.tSMappedType = exports.tsMappedType = exports.TSMappedType = TSMappedType;
+exports.tSLiteralType = exports.tsLiteralType = exports.TSLiteralType = TSLiteralType;
+exports.tSExpressionWithTypeArguments = exports.tsExpressionWithTypeArguments = exports.TSExpressionWithTypeArguments = TSExpressionWithTypeArguments;
+exports.tSInterfaceDeclaration = exports.tsInterfaceDeclaration = exports.TSInterfaceDeclaration = TSInterfaceDeclaration;
+exports.tSInterfaceBody = exports.tsInterfaceBody = exports.TSInterfaceBody = TSInterfaceBody;
+exports.tSTypeAliasDeclaration = exports.tsTypeAliasDeclaration = exports.TSTypeAliasDeclaration = TSTypeAliasDeclaration;
+exports.tSAsExpression = exports.tsAsExpression = exports.TSAsExpression = TSAsExpression;
+exports.tSTypeAssertion = exports.tsTypeAssertion = exports.TSTypeAssertion = TSTypeAssertion;
+exports.tSEnumDeclaration = exports.tsEnumDeclaration = exports.TSEnumDeclaration = TSEnumDeclaration;
+exports.tSEnumMember = exports.tsEnumMember = exports.TSEnumMember = TSEnumMember;
+exports.tSModuleDeclaration = exports.tsModuleDeclaration = exports.TSModuleDeclaration = TSModuleDeclaration;
+exports.tSModuleBlock = exports.tsModuleBlock = exports.TSModuleBlock = TSModuleBlock;
+exports.tSImportType = exports.tsImportType = exports.TSImportType = TSImportType;
+exports.tSImportEqualsDeclaration = exports.tsImportEqualsDeclaration = exports.TSImportEqualsDeclaration = TSImportEqualsDeclaration;
+exports.tSExternalModuleReference = exports.tsExternalModuleReference = exports.TSExternalModuleReference = TSExternalModuleReference;
+exports.tSNonNullExpression = exports.tsNonNullExpression = exports.TSNonNullExpression = TSNonNullExpression;
+exports.tSExportAssignment = exports.tsExportAssignment = exports.TSExportAssignment = TSExportAssignment;
+exports.tSNamespaceExportDeclaration = exports.tsNamespaceExportDeclaration = exports.TSNamespaceExportDeclaration = TSNamespaceExportDeclaration;
+exports.tSTypeAnnotation = exports.tsTypeAnnotation = exports.TSTypeAnnotation = TSTypeAnnotation;
+exports.tSTypeParameterInstantiation = exports.tsTypeParameterInstantiation = exports.TSTypeParameterInstantiation = TSTypeParameterInstantiation;
+exports.tSTypeParameterDeclaration = exports.tsTypeParameterDeclaration = exports.TSTypeParameterDeclaration = TSTypeParameterDeclaration;
+exports.tSTypeParameter = exports.tsTypeParameter = exports.TSTypeParameter = TSTypeParameter;
 exports.numberLiteral = exports.NumberLiteral = NumberLiteral;
 exports.regexLiteral = exports.RegexLiteral = RegexLiteral;
 exports.restProperty = exports.RestProperty = RestProperty;
@@ -2297,984 +2272,972 @@ var _builder = _interopRequireDefault(__webpack_require__(/*! ../builder */ "./n
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function arrayExpression(...args) {
+function ArrayExpression(...args) {
   return (0, _builder.default)("ArrayExpression", ...args);
 }
 
-function assignmentExpression(...args) {
+function AssignmentExpression(...args) {
   return (0, _builder.default)("AssignmentExpression", ...args);
 }
 
-function binaryExpression(...args) {
+function BinaryExpression(...args) {
   return (0, _builder.default)("BinaryExpression", ...args);
 }
 
-function interpreterDirective(...args) {
+function InterpreterDirective(...args) {
   return (0, _builder.default)("InterpreterDirective", ...args);
 }
 
-function directive(...args) {
+function Directive(...args) {
   return (0, _builder.default)("Directive", ...args);
 }
 
-function directiveLiteral(...args) {
+function DirectiveLiteral(...args) {
   return (0, _builder.default)("DirectiveLiteral", ...args);
 }
 
-function blockStatement(...args) {
+function BlockStatement(...args) {
   return (0, _builder.default)("BlockStatement", ...args);
 }
 
-function breakStatement(...args) {
+function BreakStatement(...args) {
   return (0, _builder.default)("BreakStatement", ...args);
 }
 
-function callExpression(...args) {
+function CallExpression(...args) {
   return (0, _builder.default)("CallExpression", ...args);
 }
 
-function catchClause(...args) {
+function CatchClause(...args) {
   return (0, _builder.default)("CatchClause", ...args);
 }
 
-function conditionalExpression(...args) {
+function ConditionalExpression(...args) {
   return (0, _builder.default)("ConditionalExpression", ...args);
 }
 
-function continueStatement(...args) {
+function ContinueStatement(...args) {
   return (0, _builder.default)("ContinueStatement", ...args);
 }
 
-function debuggerStatement(...args) {
+function DebuggerStatement(...args) {
   return (0, _builder.default)("DebuggerStatement", ...args);
 }
 
-function doWhileStatement(...args) {
+function DoWhileStatement(...args) {
   return (0, _builder.default)("DoWhileStatement", ...args);
 }
 
-function emptyStatement(...args) {
+function EmptyStatement(...args) {
   return (0, _builder.default)("EmptyStatement", ...args);
 }
 
-function expressionStatement(...args) {
+function ExpressionStatement(...args) {
   return (0, _builder.default)("ExpressionStatement", ...args);
 }
 
-function file(...args) {
+function File(...args) {
   return (0, _builder.default)("File", ...args);
 }
 
-function forInStatement(...args) {
+function ForInStatement(...args) {
   return (0, _builder.default)("ForInStatement", ...args);
 }
 
-function forStatement(...args) {
+function ForStatement(...args) {
   return (0, _builder.default)("ForStatement", ...args);
 }
 
-function functionDeclaration(...args) {
+function FunctionDeclaration(...args) {
   return (0, _builder.default)("FunctionDeclaration", ...args);
 }
 
-function functionExpression(...args) {
+function FunctionExpression(...args) {
   return (0, _builder.default)("FunctionExpression", ...args);
 }
 
-function identifier(...args) {
+function Identifier(...args) {
   return (0, _builder.default)("Identifier", ...args);
 }
 
-function ifStatement(...args) {
+function IfStatement(...args) {
   return (0, _builder.default)("IfStatement", ...args);
 }
 
-function labeledStatement(...args) {
+function LabeledStatement(...args) {
   return (0, _builder.default)("LabeledStatement", ...args);
 }
 
-function stringLiteral(...args) {
+function StringLiteral(...args) {
   return (0, _builder.default)("StringLiteral", ...args);
 }
 
-function numericLiteral(...args) {
+function NumericLiteral(...args) {
   return (0, _builder.default)("NumericLiteral", ...args);
 }
 
-function nullLiteral(...args) {
+function NullLiteral(...args) {
   return (0, _builder.default)("NullLiteral", ...args);
 }
 
-function booleanLiteral(...args) {
+function BooleanLiteral(...args) {
   return (0, _builder.default)("BooleanLiteral", ...args);
 }
 
-function regExpLiteral(...args) {
+function RegExpLiteral(...args) {
   return (0, _builder.default)("RegExpLiteral", ...args);
 }
 
-function logicalExpression(...args) {
+function LogicalExpression(...args) {
   return (0, _builder.default)("LogicalExpression", ...args);
 }
 
-function memberExpression(...args) {
+function MemberExpression(...args) {
   return (0, _builder.default)("MemberExpression", ...args);
 }
 
-function newExpression(...args) {
+function NewExpression(...args) {
   return (0, _builder.default)("NewExpression", ...args);
 }
 
-function program(...args) {
+function Program(...args) {
   return (0, _builder.default)("Program", ...args);
 }
 
-function objectExpression(...args) {
+function ObjectExpression(...args) {
   return (0, _builder.default)("ObjectExpression", ...args);
 }
 
-function objectMethod(...args) {
+function ObjectMethod(...args) {
   return (0, _builder.default)("ObjectMethod", ...args);
 }
 
-function objectProperty(...args) {
+function ObjectProperty(...args) {
   return (0, _builder.default)("ObjectProperty", ...args);
 }
 
-function restElement(...args) {
+function RestElement(...args) {
   return (0, _builder.default)("RestElement", ...args);
 }
 
-function returnStatement(...args) {
+function ReturnStatement(...args) {
   return (0, _builder.default)("ReturnStatement", ...args);
 }
 
-function sequenceExpression(...args) {
+function SequenceExpression(...args) {
   return (0, _builder.default)("SequenceExpression", ...args);
 }
 
-function parenthesizedExpression(...args) {
+function ParenthesizedExpression(...args) {
   return (0, _builder.default)("ParenthesizedExpression", ...args);
 }
 
-function switchCase(...args) {
+function SwitchCase(...args) {
   return (0, _builder.default)("SwitchCase", ...args);
 }
 
-function switchStatement(...args) {
+function SwitchStatement(...args) {
   return (0, _builder.default)("SwitchStatement", ...args);
 }
 
-function thisExpression(...args) {
+function ThisExpression(...args) {
   return (0, _builder.default)("ThisExpression", ...args);
 }
 
-function throwStatement(...args) {
+function ThrowStatement(...args) {
   return (0, _builder.default)("ThrowStatement", ...args);
 }
 
-function tryStatement(...args) {
+function TryStatement(...args) {
   return (0, _builder.default)("TryStatement", ...args);
 }
 
-function unaryExpression(...args) {
+function UnaryExpression(...args) {
   return (0, _builder.default)("UnaryExpression", ...args);
 }
 
-function updateExpression(...args) {
+function UpdateExpression(...args) {
   return (0, _builder.default)("UpdateExpression", ...args);
 }
 
-function variableDeclaration(...args) {
+function VariableDeclaration(...args) {
   return (0, _builder.default)("VariableDeclaration", ...args);
 }
 
-function variableDeclarator(...args) {
+function VariableDeclarator(...args) {
   return (0, _builder.default)("VariableDeclarator", ...args);
 }
 
-function whileStatement(...args) {
+function WhileStatement(...args) {
   return (0, _builder.default)("WhileStatement", ...args);
 }
 
-function withStatement(...args) {
+function WithStatement(...args) {
   return (0, _builder.default)("WithStatement", ...args);
 }
 
-function assignmentPattern(...args) {
+function AssignmentPattern(...args) {
   return (0, _builder.default)("AssignmentPattern", ...args);
 }
 
-function arrayPattern(...args) {
+function ArrayPattern(...args) {
   return (0, _builder.default)("ArrayPattern", ...args);
 }
 
-function arrowFunctionExpression(...args) {
+function ArrowFunctionExpression(...args) {
   return (0, _builder.default)("ArrowFunctionExpression", ...args);
 }
 
-function classBody(...args) {
+function ClassBody(...args) {
   return (0, _builder.default)("ClassBody", ...args);
 }
 
-function classExpression(...args) {
+function ClassExpression(...args) {
   return (0, _builder.default)("ClassExpression", ...args);
 }
 
-function classDeclaration(...args) {
+function ClassDeclaration(...args) {
   return (0, _builder.default)("ClassDeclaration", ...args);
 }
 
-function exportAllDeclaration(...args) {
+function ExportAllDeclaration(...args) {
   return (0, _builder.default)("ExportAllDeclaration", ...args);
 }
 
-function exportDefaultDeclaration(...args) {
+function ExportDefaultDeclaration(...args) {
   return (0, _builder.default)("ExportDefaultDeclaration", ...args);
 }
 
-function exportNamedDeclaration(...args) {
+function ExportNamedDeclaration(...args) {
   return (0, _builder.default)("ExportNamedDeclaration", ...args);
 }
 
-function exportSpecifier(...args) {
+function ExportSpecifier(...args) {
   return (0, _builder.default)("ExportSpecifier", ...args);
 }
 
-function forOfStatement(...args) {
+function ForOfStatement(...args) {
   return (0, _builder.default)("ForOfStatement", ...args);
 }
 
-function importDeclaration(...args) {
+function ImportDeclaration(...args) {
   return (0, _builder.default)("ImportDeclaration", ...args);
 }
 
-function importDefaultSpecifier(...args) {
+function ImportDefaultSpecifier(...args) {
   return (0, _builder.default)("ImportDefaultSpecifier", ...args);
 }
 
-function importNamespaceSpecifier(...args) {
+function ImportNamespaceSpecifier(...args) {
   return (0, _builder.default)("ImportNamespaceSpecifier", ...args);
 }
 
-function importSpecifier(...args) {
+function ImportSpecifier(...args) {
   return (0, _builder.default)("ImportSpecifier", ...args);
 }
 
-function metaProperty(...args) {
+function MetaProperty(...args) {
   return (0, _builder.default)("MetaProperty", ...args);
 }
 
-function classMethod(...args) {
+function ClassMethod(...args) {
   return (0, _builder.default)("ClassMethod", ...args);
 }
 
-function objectPattern(...args) {
+function ObjectPattern(...args) {
   return (0, _builder.default)("ObjectPattern", ...args);
 }
 
-function spreadElement(...args) {
+function SpreadElement(...args) {
   return (0, _builder.default)("SpreadElement", ...args);
 }
 
-function _super(...args) {
+function Super(...args) {
   return (0, _builder.default)("Super", ...args);
 }
 
-function taggedTemplateExpression(...args) {
+function TaggedTemplateExpression(...args) {
   return (0, _builder.default)("TaggedTemplateExpression", ...args);
 }
 
-function templateElement(...args) {
+function TemplateElement(...args) {
   return (0, _builder.default)("TemplateElement", ...args);
 }
 
-function templateLiteral(...args) {
+function TemplateLiteral(...args) {
   return (0, _builder.default)("TemplateLiteral", ...args);
 }
 
-function yieldExpression(...args) {
+function YieldExpression(...args) {
   return (0, _builder.default)("YieldExpression", ...args);
 }
 
-function awaitExpression(...args) {
-  return (0, _builder.default)("AwaitExpression", ...args);
-}
-
-function _import(...args) {
-  return (0, _builder.default)("Import", ...args);
-}
-
-function bigIntLiteral(...args) {
-  return (0, _builder.default)("BigIntLiteral", ...args);
-}
-
-function exportNamespaceSpecifier(...args) {
-  return (0, _builder.default)("ExportNamespaceSpecifier", ...args);
-}
-
-function optionalMemberExpression(...args) {
-  return (0, _builder.default)("OptionalMemberExpression", ...args);
-}
-
-function optionalCallExpression(...args) {
-  return (0, _builder.default)("OptionalCallExpression", ...args);
-}
-
-function anyTypeAnnotation(...args) {
+function AnyTypeAnnotation(...args) {
   return (0, _builder.default)("AnyTypeAnnotation", ...args);
 }
 
-function arrayTypeAnnotation(...args) {
+function ArrayTypeAnnotation(...args) {
   return (0, _builder.default)("ArrayTypeAnnotation", ...args);
 }
 
-function booleanTypeAnnotation(...args) {
+function BooleanTypeAnnotation(...args) {
   return (0, _builder.default)("BooleanTypeAnnotation", ...args);
 }
 
-function booleanLiteralTypeAnnotation(...args) {
+function BooleanLiteralTypeAnnotation(...args) {
   return (0, _builder.default)("BooleanLiteralTypeAnnotation", ...args);
 }
 
-function nullLiteralTypeAnnotation(...args) {
+function NullLiteralTypeAnnotation(...args) {
   return (0, _builder.default)("NullLiteralTypeAnnotation", ...args);
 }
 
-function classImplements(...args) {
+function ClassImplements(...args) {
   return (0, _builder.default)("ClassImplements", ...args);
 }
 
-function declareClass(...args) {
+function DeclareClass(...args) {
   return (0, _builder.default)("DeclareClass", ...args);
 }
 
-function declareFunction(...args) {
+function DeclareFunction(...args) {
   return (0, _builder.default)("DeclareFunction", ...args);
 }
 
-function declareInterface(...args) {
+function DeclareInterface(...args) {
   return (0, _builder.default)("DeclareInterface", ...args);
 }
 
-function declareModule(...args) {
+function DeclareModule(...args) {
   return (0, _builder.default)("DeclareModule", ...args);
 }
 
-function declareModuleExports(...args) {
+function DeclareModuleExports(...args) {
   return (0, _builder.default)("DeclareModuleExports", ...args);
 }
 
-function declareTypeAlias(...args) {
+function DeclareTypeAlias(...args) {
   return (0, _builder.default)("DeclareTypeAlias", ...args);
 }
 
-function declareOpaqueType(...args) {
+function DeclareOpaqueType(...args) {
   return (0, _builder.default)("DeclareOpaqueType", ...args);
 }
 
-function declareVariable(...args) {
+function DeclareVariable(...args) {
   return (0, _builder.default)("DeclareVariable", ...args);
 }
 
-function declareExportDeclaration(...args) {
+function DeclareExportDeclaration(...args) {
   return (0, _builder.default)("DeclareExportDeclaration", ...args);
 }
 
-function declareExportAllDeclaration(...args) {
+function DeclareExportAllDeclaration(...args) {
   return (0, _builder.default)("DeclareExportAllDeclaration", ...args);
 }
 
-function declaredPredicate(...args) {
+function DeclaredPredicate(...args) {
   return (0, _builder.default)("DeclaredPredicate", ...args);
 }
 
-function existsTypeAnnotation(...args) {
+function ExistsTypeAnnotation(...args) {
   return (0, _builder.default)("ExistsTypeAnnotation", ...args);
 }
 
-function functionTypeAnnotation(...args) {
+function FunctionTypeAnnotation(...args) {
   return (0, _builder.default)("FunctionTypeAnnotation", ...args);
 }
 
-function functionTypeParam(...args) {
+function FunctionTypeParam(...args) {
   return (0, _builder.default)("FunctionTypeParam", ...args);
 }
 
-function genericTypeAnnotation(...args) {
+function GenericTypeAnnotation(...args) {
   return (0, _builder.default)("GenericTypeAnnotation", ...args);
 }
 
-function inferredPredicate(...args) {
+function InferredPredicate(...args) {
   return (0, _builder.default)("InferredPredicate", ...args);
 }
 
-function interfaceExtends(...args) {
+function InterfaceExtends(...args) {
   return (0, _builder.default)("InterfaceExtends", ...args);
 }
 
-function interfaceDeclaration(...args) {
+function InterfaceDeclaration(...args) {
   return (0, _builder.default)("InterfaceDeclaration", ...args);
 }
 
-function interfaceTypeAnnotation(...args) {
+function InterfaceTypeAnnotation(...args) {
   return (0, _builder.default)("InterfaceTypeAnnotation", ...args);
 }
 
-function intersectionTypeAnnotation(...args) {
+function IntersectionTypeAnnotation(...args) {
   return (0, _builder.default)("IntersectionTypeAnnotation", ...args);
 }
 
-function mixedTypeAnnotation(...args) {
+function MixedTypeAnnotation(...args) {
   return (0, _builder.default)("MixedTypeAnnotation", ...args);
 }
 
-function emptyTypeAnnotation(...args) {
+function EmptyTypeAnnotation(...args) {
   return (0, _builder.default)("EmptyTypeAnnotation", ...args);
 }
 
-function nullableTypeAnnotation(...args) {
+function NullableTypeAnnotation(...args) {
   return (0, _builder.default)("NullableTypeAnnotation", ...args);
 }
 
-function numberLiteralTypeAnnotation(...args) {
+function NumberLiteralTypeAnnotation(...args) {
   return (0, _builder.default)("NumberLiteralTypeAnnotation", ...args);
 }
 
-function numberTypeAnnotation(...args) {
+function NumberTypeAnnotation(...args) {
   return (0, _builder.default)("NumberTypeAnnotation", ...args);
 }
 
-function objectTypeAnnotation(...args) {
+function ObjectTypeAnnotation(...args) {
   return (0, _builder.default)("ObjectTypeAnnotation", ...args);
 }
 
-function objectTypeInternalSlot(...args) {
+function ObjectTypeInternalSlot(...args) {
   return (0, _builder.default)("ObjectTypeInternalSlot", ...args);
 }
 
-function objectTypeCallProperty(...args) {
+function ObjectTypeCallProperty(...args) {
   return (0, _builder.default)("ObjectTypeCallProperty", ...args);
 }
 
-function objectTypeIndexer(...args) {
+function ObjectTypeIndexer(...args) {
   return (0, _builder.default)("ObjectTypeIndexer", ...args);
 }
 
-function objectTypeProperty(...args) {
+function ObjectTypeProperty(...args) {
   return (0, _builder.default)("ObjectTypeProperty", ...args);
 }
 
-function objectTypeSpreadProperty(...args) {
+function ObjectTypeSpreadProperty(...args) {
   return (0, _builder.default)("ObjectTypeSpreadProperty", ...args);
 }
 
-function opaqueType(...args) {
+function OpaqueType(...args) {
   return (0, _builder.default)("OpaqueType", ...args);
 }
 
-function qualifiedTypeIdentifier(...args) {
+function QualifiedTypeIdentifier(...args) {
   return (0, _builder.default)("QualifiedTypeIdentifier", ...args);
 }
 
-function stringLiteralTypeAnnotation(...args) {
+function StringLiteralTypeAnnotation(...args) {
   return (0, _builder.default)("StringLiteralTypeAnnotation", ...args);
 }
 
-function stringTypeAnnotation(...args) {
+function StringTypeAnnotation(...args) {
   return (0, _builder.default)("StringTypeAnnotation", ...args);
 }
 
-function symbolTypeAnnotation(...args) {
+function SymbolTypeAnnotation(...args) {
   return (0, _builder.default)("SymbolTypeAnnotation", ...args);
 }
 
-function thisTypeAnnotation(...args) {
+function ThisTypeAnnotation(...args) {
   return (0, _builder.default)("ThisTypeAnnotation", ...args);
 }
 
-function tupleTypeAnnotation(...args) {
+function TupleTypeAnnotation(...args) {
   return (0, _builder.default)("TupleTypeAnnotation", ...args);
 }
 
-function typeofTypeAnnotation(...args) {
+function TypeofTypeAnnotation(...args) {
   return (0, _builder.default)("TypeofTypeAnnotation", ...args);
 }
 
-function typeAlias(...args) {
+function TypeAlias(...args) {
   return (0, _builder.default)("TypeAlias", ...args);
 }
 
-function typeAnnotation(...args) {
+function TypeAnnotation(...args) {
   return (0, _builder.default)("TypeAnnotation", ...args);
 }
 
-function typeCastExpression(...args) {
+function TypeCastExpression(...args) {
   return (0, _builder.default)("TypeCastExpression", ...args);
 }
 
-function typeParameter(...args) {
+function TypeParameter(...args) {
   return (0, _builder.default)("TypeParameter", ...args);
 }
 
-function typeParameterDeclaration(...args) {
+function TypeParameterDeclaration(...args) {
   return (0, _builder.default)("TypeParameterDeclaration", ...args);
 }
 
-function typeParameterInstantiation(...args) {
+function TypeParameterInstantiation(...args) {
   return (0, _builder.default)("TypeParameterInstantiation", ...args);
 }
 
-function unionTypeAnnotation(...args) {
+function UnionTypeAnnotation(...args) {
   return (0, _builder.default)("UnionTypeAnnotation", ...args);
 }
 
-function variance(...args) {
+function Variance(...args) {
   return (0, _builder.default)("Variance", ...args);
 }
 
-function voidTypeAnnotation(...args) {
+function VoidTypeAnnotation(...args) {
   return (0, _builder.default)("VoidTypeAnnotation", ...args);
 }
 
-function enumDeclaration(...args) {
+function EnumDeclaration(...args) {
   return (0, _builder.default)("EnumDeclaration", ...args);
 }
 
-function enumBooleanBody(...args) {
+function EnumBooleanBody(...args) {
   return (0, _builder.default)("EnumBooleanBody", ...args);
 }
 
-function enumNumberBody(...args) {
+function EnumNumberBody(...args) {
   return (0, _builder.default)("EnumNumberBody", ...args);
 }
 
-function enumStringBody(...args) {
+function EnumStringBody(...args) {
   return (0, _builder.default)("EnumStringBody", ...args);
 }
 
-function enumSymbolBody(...args) {
+function EnumSymbolBody(...args) {
   return (0, _builder.default)("EnumSymbolBody", ...args);
 }
 
-function enumBooleanMember(...args) {
+function EnumBooleanMember(...args) {
   return (0, _builder.default)("EnumBooleanMember", ...args);
 }
 
-function enumNumberMember(...args) {
+function EnumNumberMember(...args) {
   return (0, _builder.default)("EnumNumberMember", ...args);
 }
 
-function enumStringMember(...args) {
+function EnumStringMember(...args) {
   return (0, _builder.default)("EnumStringMember", ...args);
 }
 
-function enumDefaultedMember(...args) {
+function EnumDefaultedMember(...args) {
   return (0, _builder.default)("EnumDefaultedMember", ...args);
 }
 
-function jsxAttribute(...args) {
+function JSXAttribute(...args) {
   return (0, _builder.default)("JSXAttribute", ...args);
 }
 
-function jsxClosingElement(...args) {
+function JSXClosingElement(...args) {
   return (0, _builder.default)("JSXClosingElement", ...args);
 }
 
-function jsxElement(...args) {
+function JSXElement(...args) {
   return (0, _builder.default)("JSXElement", ...args);
 }
 
-function jsxEmptyExpression(...args) {
+function JSXEmptyExpression(...args) {
   return (0, _builder.default)("JSXEmptyExpression", ...args);
 }
 
-function jsxExpressionContainer(...args) {
+function JSXExpressionContainer(...args) {
   return (0, _builder.default)("JSXExpressionContainer", ...args);
 }
 
-function jsxSpreadChild(...args) {
+function JSXSpreadChild(...args) {
   return (0, _builder.default)("JSXSpreadChild", ...args);
 }
 
-function jsxIdentifier(...args) {
+function JSXIdentifier(...args) {
   return (0, _builder.default)("JSXIdentifier", ...args);
 }
 
-function jsxMemberExpression(...args) {
+function JSXMemberExpression(...args) {
   return (0, _builder.default)("JSXMemberExpression", ...args);
 }
 
-function jsxNamespacedName(...args) {
+function JSXNamespacedName(...args) {
   return (0, _builder.default)("JSXNamespacedName", ...args);
 }
 
-function jsxOpeningElement(...args) {
+function JSXOpeningElement(...args) {
   return (0, _builder.default)("JSXOpeningElement", ...args);
 }
 
-function jsxSpreadAttribute(...args) {
+function JSXSpreadAttribute(...args) {
   return (0, _builder.default)("JSXSpreadAttribute", ...args);
 }
 
-function jsxText(...args) {
+function JSXText(...args) {
   return (0, _builder.default)("JSXText", ...args);
 }
 
-function jsxFragment(...args) {
+function JSXFragment(...args) {
   return (0, _builder.default)("JSXFragment", ...args);
 }
 
-function jsxOpeningFragment(...args) {
+function JSXOpeningFragment(...args) {
   return (0, _builder.default)("JSXOpeningFragment", ...args);
 }
 
-function jsxClosingFragment(...args) {
+function JSXClosingFragment(...args) {
   return (0, _builder.default)("JSXClosingFragment", ...args);
 }
 
-function noop(...args) {
+function Noop(...args) {
   return (0, _builder.default)("Noop", ...args);
 }
 
-function placeholder(...args) {
+function Placeholder(...args) {
   return (0, _builder.default)("Placeholder", ...args);
 }
 
-function v8IntrinsicIdentifier(...args) {
+function V8IntrinsicIdentifier(...args) {
   return (0, _builder.default)("V8IntrinsicIdentifier", ...args);
 }
 
-function argumentPlaceholder(...args) {
+function ArgumentPlaceholder(...args) {
   return (0, _builder.default)("ArgumentPlaceholder", ...args);
 }
 
-function bindExpression(...args) {
+function AwaitExpression(...args) {
+  return (0, _builder.default)("AwaitExpression", ...args);
+}
+
+function BindExpression(...args) {
   return (0, _builder.default)("BindExpression", ...args);
 }
 
-function classProperty(...args) {
+function ClassProperty(...args) {
   return (0, _builder.default)("ClassProperty", ...args);
 }
 
-function pipelineTopicExpression(...args) {
+function OptionalMemberExpression(...args) {
+  return (0, _builder.default)("OptionalMemberExpression", ...args);
+}
+
+function PipelineTopicExpression(...args) {
   return (0, _builder.default)("PipelineTopicExpression", ...args);
 }
 
-function pipelineBareFunction(...args) {
+function PipelineBareFunction(...args) {
   return (0, _builder.default)("PipelineBareFunction", ...args);
 }
 
-function pipelinePrimaryTopicReference(...args) {
+function PipelinePrimaryTopicReference(...args) {
   return (0, _builder.default)("PipelinePrimaryTopicReference", ...args);
 }
 
-function classPrivateProperty(...args) {
+function OptionalCallExpression(...args) {
+  return (0, _builder.default)("OptionalCallExpression", ...args);
+}
+
+function ClassPrivateProperty(...args) {
   return (0, _builder.default)("ClassPrivateProperty", ...args);
 }
 
-function classPrivateMethod(...args) {
+function ClassPrivateMethod(...args) {
   return (0, _builder.default)("ClassPrivateMethod", ...args);
 }
 
-function importAttribute(...args) {
-  return (0, _builder.default)("ImportAttribute", ...args);
+function Import(...args) {
+  return (0, _builder.default)("Import", ...args);
 }
 
-function decorator(...args) {
+function Decorator(...args) {
   return (0, _builder.default)("Decorator", ...args);
 }
 
-function doExpression(...args) {
+function DoExpression(...args) {
   return (0, _builder.default)("DoExpression", ...args);
 }
 
-function exportDefaultSpecifier(...args) {
+function ExportDefaultSpecifier(...args) {
   return (0, _builder.default)("ExportDefaultSpecifier", ...args);
 }
 
-function privateName(...args) {
+function ExportNamespaceSpecifier(...args) {
+  return (0, _builder.default)("ExportNamespaceSpecifier", ...args);
+}
+
+function PrivateName(...args) {
   return (0, _builder.default)("PrivateName", ...args);
 }
 
-function recordExpression(...args) {
+function BigIntLiteral(...args) {
+  return (0, _builder.default)("BigIntLiteral", ...args);
+}
+
+function RecordExpression(...args) {
   return (0, _builder.default)("RecordExpression", ...args);
 }
 
-function tupleExpression(...args) {
+function TupleExpression(...args) {
   return (0, _builder.default)("TupleExpression", ...args);
 }
 
-function decimalLiteral(...args) {
-  return (0, _builder.default)("DecimalLiteral", ...args);
-}
-
-function tsParameterProperty(...args) {
+function TSParameterProperty(...args) {
   return (0, _builder.default)("TSParameterProperty", ...args);
 }
 
-function tsDeclareFunction(...args) {
+function TSDeclareFunction(...args) {
   return (0, _builder.default)("TSDeclareFunction", ...args);
 }
 
-function tsDeclareMethod(...args) {
+function TSDeclareMethod(...args) {
   return (0, _builder.default)("TSDeclareMethod", ...args);
 }
 
-function tsQualifiedName(...args) {
+function TSQualifiedName(...args) {
   return (0, _builder.default)("TSQualifiedName", ...args);
 }
 
-function tsCallSignatureDeclaration(...args) {
+function TSCallSignatureDeclaration(...args) {
   return (0, _builder.default)("TSCallSignatureDeclaration", ...args);
 }
 
-function tsConstructSignatureDeclaration(...args) {
+function TSConstructSignatureDeclaration(...args) {
   return (0, _builder.default)("TSConstructSignatureDeclaration", ...args);
 }
 
-function tsPropertySignature(...args) {
+function TSPropertySignature(...args) {
   return (0, _builder.default)("TSPropertySignature", ...args);
 }
 
-function tsMethodSignature(...args) {
+function TSMethodSignature(...args) {
   return (0, _builder.default)("TSMethodSignature", ...args);
 }
 
-function tsIndexSignature(...args) {
+function TSIndexSignature(...args) {
   return (0, _builder.default)("TSIndexSignature", ...args);
 }
 
-function tsAnyKeyword(...args) {
+function TSAnyKeyword(...args) {
   return (0, _builder.default)("TSAnyKeyword", ...args);
 }
 
-function tsBooleanKeyword(...args) {
+function TSBooleanKeyword(...args) {
   return (0, _builder.default)("TSBooleanKeyword", ...args);
 }
 
-function tsBigIntKeyword(...args) {
+function TSBigIntKeyword(...args) {
   return (0, _builder.default)("TSBigIntKeyword", ...args);
 }
 
-function tsNeverKeyword(...args) {
+function TSNeverKeyword(...args) {
   return (0, _builder.default)("TSNeverKeyword", ...args);
 }
 
-function tsNullKeyword(...args) {
+function TSNullKeyword(...args) {
   return (0, _builder.default)("TSNullKeyword", ...args);
 }
 
-function tsNumberKeyword(...args) {
+function TSNumberKeyword(...args) {
   return (0, _builder.default)("TSNumberKeyword", ...args);
 }
 
-function tsObjectKeyword(...args) {
+function TSObjectKeyword(...args) {
   return (0, _builder.default)("TSObjectKeyword", ...args);
 }
 
-function tsStringKeyword(...args) {
+function TSStringKeyword(...args) {
   return (0, _builder.default)("TSStringKeyword", ...args);
 }
 
-function tsSymbolKeyword(...args) {
+function TSSymbolKeyword(...args) {
   return (0, _builder.default)("TSSymbolKeyword", ...args);
 }
 
-function tsUndefinedKeyword(...args) {
+function TSUndefinedKeyword(...args) {
   return (0, _builder.default)("TSUndefinedKeyword", ...args);
 }
 
-function tsUnknownKeyword(...args) {
+function TSUnknownKeyword(...args) {
   return (0, _builder.default)("TSUnknownKeyword", ...args);
 }
 
-function tsVoidKeyword(...args) {
+function TSVoidKeyword(...args) {
   return (0, _builder.default)("TSVoidKeyword", ...args);
 }
 
-function tsThisType(...args) {
+function TSThisType(...args) {
   return (0, _builder.default)("TSThisType", ...args);
 }
 
-function tsFunctionType(...args) {
+function TSFunctionType(...args) {
   return (0, _builder.default)("TSFunctionType", ...args);
 }
 
-function tsConstructorType(...args) {
+function TSConstructorType(...args) {
   return (0, _builder.default)("TSConstructorType", ...args);
 }
 
-function tsTypeReference(...args) {
+function TSTypeReference(...args) {
   return (0, _builder.default)("TSTypeReference", ...args);
 }
 
-function tsTypePredicate(...args) {
+function TSTypePredicate(...args) {
   return (0, _builder.default)("TSTypePredicate", ...args);
 }
 
-function tsTypeQuery(...args) {
+function TSTypeQuery(...args) {
   return (0, _builder.default)("TSTypeQuery", ...args);
 }
 
-function tsTypeLiteral(...args) {
+function TSTypeLiteral(...args) {
   return (0, _builder.default)("TSTypeLiteral", ...args);
 }
 
-function tsArrayType(...args) {
+function TSArrayType(...args) {
   return (0, _builder.default)("TSArrayType", ...args);
 }
 
-function tsTupleType(...args) {
+function TSTupleType(...args) {
   return (0, _builder.default)("TSTupleType", ...args);
 }
 
-function tsOptionalType(...args) {
+function TSOptionalType(...args) {
   return (0, _builder.default)("TSOptionalType", ...args);
 }
 
-function tsRestType(...args) {
+function TSRestType(...args) {
   return (0, _builder.default)("TSRestType", ...args);
 }
 
-function tsNamedTupleMember(...args) {
-  return (0, _builder.default)("TSNamedTupleMember", ...args);
-}
-
-function tsUnionType(...args) {
+function TSUnionType(...args) {
   return (0, _builder.default)("TSUnionType", ...args);
 }
 
-function tsIntersectionType(...args) {
+function TSIntersectionType(...args) {
   return (0, _builder.default)("TSIntersectionType", ...args);
 }
 
-function tsConditionalType(...args) {
+function TSConditionalType(...args) {
   return (0, _builder.default)("TSConditionalType", ...args);
 }
 
-function tsInferType(...args) {
+function TSInferType(...args) {
   return (0, _builder.default)("TSInferType", ...args);
 }
 
-function tsParenthesizedType(...args) {
+function TSParenthesizedType(...args) {
   return (0, _builder.default)("TSParenthesizedType", ...args);
 }
 
-function tsTypeOperator(...args) {
+function TSTypeOperator(...args) {
   return (0, _builder.default)("TSTypeOperator", ...args);
 }
 
-function tsIndexedAccessType(...args) {
+function TSIndexedAccessType(...args) {
   return (0, _builder.default)("TSIndexedAccessType", ...args);
 }
 
-function tsMappedType(...args) {
+function TSMappedType(...args) {
   return (0, _builder.default)("TSMappedType", ...args);
 }
 
-function tsLiteralType(...args) {
+function TSLiteralType(...args) {
   return (0, _builder.default)("TSLiteralType", ...args);
 }
 
-function tsExpressionWithTypeArguments(...args) {
+function TSExpressionWithTypeArguments(...args) {
   return (0, _builder.default)("TSExpressionWithTypeArguments", ...args);
 }
 
-function tsInterfaceDeclaration(...args) {
+function TSInterfaceDeclaration(...args) {
   return (0, _builder.default)("TSInterfaceDeclaration", ...args);
 }
 
-function tsInterfaceBody(...args) {
+function TSInterfaceBody(...args) {
   return (0, _builder.default)("TSInterfaceBody", ...args);
 }
 
-function tsTypeAliasDeclaration(...args) {
+function TSTypeAliasDeclaration(...args) {
   return (0, _builder.default)("TSTypeAliasDeclaration", ...args);
 }
 
-function tsAsExpression(...args) {
+function TSAsExpression(...args) {
   return (0, _builder.default)("TSAsExpression", ...args);
 }
 
-function tsTypeAssertion(...args) {
+function TSTypeAssertion(...args) {
   return (0, _builder.default)("TSTypeAssertion", ...args);
 }
 
-function tsEnumDeclaration(...args) {
+function TSEnumDeclaration(...args) {
   return (0, _builder.default)("TSEnumDeclaration", ...args);
 }
 
-function tsEnumMember(...args) {
+function TSEnumMember(...args) {
   return (0, _builder.default)("TSEnumMember", ...args);
 }
 
-function tsModuleDeclaration(...args) {
+function TSModuleDeclaration(...args) {
   return (0, _builder.default)("TSModuleDeclaration", ...args);
 }
 
-function tsModuleBlock(...args) {
+function TSModuleBlock(...args) {
   return (0, _builder.default)("TSModuleBlock", ...args);
 }
 
-function tsImportType(...args) {
+function TSImportType(...args) {
   return (0, _builder.default)("TSImportType", ...args);
 }
 
-function tsImportEqualsDeclaration(...args) {
+function TSImportEqualsDeclaration(...args) {
   return (0, _builder.default)("TSImportEqualsDeclaration", ...args);
 }
 
-function tsExternalModuleReference(...args) {
+function TSExternalModuleReference(...args) {
   return (0, _builder.default)("TSExternalModuleReference", ...args);
 }
 
-function tsNonNullExpression(...args) {
+function TSNonNullExpression(...args) {
   return (0, _builder.default)("TSNonNullExpression", ...args);
 }
 
-function tsExportAssignment(...args) {
+function TSExportAssignment(...args) {
   return (0, _builder.default)("TSExportAssignment", ...args);
 }
 
-function tsNamespaceExportDeclaration(...args) {
+function TSNamespaceExportDeclaration(...args) {
   return (0, _builder.default)("TSNamespaceExportDeclaration", ...args);
 }
 
-function tsTypeAnnotation(...args) {
+function TSTypeAnnotation(...args) {
   return (0, _builder.default)("TSTypeAnnotation", ...args);
 }
 
-function tsTypeParameterInstantiation(...args) {
+function TSTypeParameterInstantiation(...args) {
   return (0, _builder.default)("TSTypeParameterInstantiation", ...args);
 }
 
-function tsTypeParameterDeclaration(...args) {
+function TSTypeParameterDeclaration(...args) {
   return (0, _builder.default)("TSTypeParameterDeclaration", ...args);
 }
 
-function tsTypeParameter(...args) {
+function TSTypeParameter(...args) {
   return (0, _builder.default)("TSTypeParameter", ...args);
 }
 
 function NumberLiteral(...args) {
   console.trace("The node type NumberLiteral has been renamed to NumericLiteral");
-  return (0, _builder.default)("NumberLiteral", ...args);
+  return NumberLiteral("NumberLiteral", ...args);
 }
 
 function RegexLiteral(...args) {
   console.trace("The node type RegexLiteral has been renamed to RegExpLiteral");
-  return (0, _builder.default)("RegexLiteral", ...args);
+  return RegexLiteral("RegexLiteral", ...args);
 }
 
 function RestProperty(...args) {
   console.trace("The node type RestProperty has been renamed to RestElement");
-  return (0, _builder.default)("RestProperty", ...args);
+  return RestProperty("RestProperty", ...args);
 }
 
 function SpreadProperty(...args) {
   console.trace("The node type SpreadProperty has been renamed to SpreadElement");
-  return (0, _builder.default)("SpreadProperty", ...args);
+  return SpreadProperty("SpreadProperty", ...args);
 }
 
 /***/ }),
@@ -3317,40 +3280,6 @@ function buildChildren(node) {
   }
 
   return elements;
-}
-
-/***/ }),
-
-/***/ "./node_modules/@babel/types/lib/builders/typescript/createTSUnionType.js":
-/*!********************************************************************************!*\
-  !*** ./node_modules/@babel/types/lib/builders/typescript/createTSUnionType.js ***!
-  \********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = createTSUnionType;
-
-var _generated = __webpack_require__(/*! ../generated */ "./node_modules/@babel/types/lib/builders/generated/index.js");
-
-var _removeTypeDuplicates = _interopRequireDefault(__webpack_require__(/*! ../../modifications/typescript/removeTypeDuplicates */ "./node_modules/@babel/types/lib/modifications/typescript/removeTypeDuplicates.js"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function createTSUnionType(typeAnnotations) {
-  const types = typeAnnotations.map(type => type.typeAnnotations);
-  const flattened = (0, _removeTypeDuplicates.default)(types);
-
-  if (flattened.length === 1) {
-    return flattened[0];
-  } else {
-    return (0, _generated.tsUnionType)(flattened);
-  }
 }
 
 /***/ }),
@@ -3776,7 +3705,7 @@ function removeComments(node) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.TSBASETYPE_TYPES = exports.TSTYPE_TYPES = exports.TSTYPEELEMENT_TYPES = exports.PRIVATE_TYPES = exports.JSX_TYPES = exports.ENUMMEMBER_TYPES = exports.ENUMBODY_TYPES = exports.FLOWPREDICATE_TYPES = exports.FLOWDECLARATION_TYPES = exports.FLOWBASEANNOTATION_TYPES = exports.FLOWTYPE_TYPES = exports.FLOW_TYPES = exports.MODULESPECIFIER_TYPES = exports.EXPORTDECLARATION_TYPES = exports.MODULEDECLARATION_TYPES = exports.CLASS_TYPES = exports.PATTERN_TYPES = exports.UNARYLIKE_TYPES = exports.PROPERTY_TYPES = exports.OBJECTMEMBER_TYPES = exports.METHOD_TYPES = exports.USERWHITESPACABLE_TYPES = exports.IMMUTABLE_TYPES = exports.LITERAL_TYPES = exports.TSENTITYNAME_TYPES = exports.LVAL_TYPES = exports.PATTERNLIKE_TYPES = exports.DECLARATION_TYPES = exports.PUREISH_TYPES = exports.FUNCTIONPARENT_TYPES = exports.FUNCTION_TYPES = exports.FORXSTATEMENT_TYPES = exports.FOR_TYPES = exports.EXPRESSIONWRAPPER_TYPES = exports.WHILE_TYPES = exports.LOOP_TYPES = exports.CONDITIONAL_TYPES = exports.COMPLETIONSTATEMENT_TYPES = exports.TERMINATORLESS_TYPES = exports.STATEMENT_TYPES = exports.BLOCK_TYPES = exports.BLOCKPARENT_TYPES = exports.SCOPABLE_TYPES = exports.BINARY_TYPES = exports.EXPRESSION_TYPES = void 0;
+exports.TSTYPE_TYPES = exports.TSTYPEELEMENT_TYPES = exports.PRIVATE_TYPES = exports.JSX_TYPES = exports.ENUMMEMBER_TYPES = exports.ENUMBODY_TYPES = exports.FLOWPREDICATE_TYPES = exports.FLOWDECLARATION_TYPES = exports.FLOWBASEANNOTATION_TYPES = exports.FLOWTYPE_TYPES = exports.FLOW_TYPES = exports.MODULESPECIFIER_TYPES = exports.EXPORTDECLARATION_TYPES = exports.MODULEDECLARATION_TYPES = exports.CLASS_TYPES = exports.PATTERN_TYPES = exports.UNARYLIKE_TYPES = exports.PROPERTY_TYPES = exports.OBJECTMEMBER_TYPES = exports.METHOD_TYPES = exports.USERWHITESPACABLE_TYPES = exports.IMMUTABLE_TYPES = exports.LITERAL_TYPES = exports.TSENTITYNAME_TYPES = exports.LVAL_TYPES = exports.PATTERNLIKE_TYPES = exports.DECLARATION_TYPES = exports.PUREISH_TYPES = exports.FUNCTIONPARENT_TYPES = exports.FUNCTION_TYPES = exports.FORXSTATEMENT_TYPES = exports.FOR_TYPES = exports.EXPRESSIONWRAPPER_TYPES = exports.WHILE_TYPES = exports.LOOP_TYPES = exports.CONDITIONAL_TYPES = exports.COMPLETIONSTATEMENT_TYPES = exports.TERMINATORLESS_TYPES = exports.STATEMENT_TYPES = exports.BLOCK_TYPES = exports.BLOCKPARENT_TYPES = exports.SCOPABLE_TYPES = exports.BINARY_TYPES = exports.EXPRESSION_TYPES = void 0;
 
 var _definitions = __webpack_require__(/*! ../../definitions */ "./node_modules/@babel/types/lib/definitions/index.js");
 
@@ -3868,8 +3797,6 @@ const TSTYPEELEMENT_TYPES = _definitions.FLIPPED_ALIAS_KEYS["TSTypeElement"];
 exports.TSTYPEELEMENT_TYPES = TSTYPEELEMENT_TYPES;
 const TSTYPE_TYPES = _definitions.FLIPPED_ALIAS_KEYS["TSType"];
 exports.TSTYPE_TYPES = TSTYPE_TYPES;
-const TSBASETYPE_TYPES = _definitions.FLIPPED_ALIAS_KEYS["TSBaseType"];
-exports.TSBASETYPE_TYPES = TSBASETYPE_TYPES;
 
 /***/ }),
 
@@ -3911,7 +3838,7 @@ const NUMBER_BINARY_OPERATORS = ["-", "/", "%", "*", "**", "&", "|", ">>", ">>>"
 exports.NUMBER_BINARY_OPERATORS = NUMBER_BINARY_OPERATORS;
 const BINARY_OPERATORS = ["+", ...NUMBER_BINARY_OPERATORS, ...BOOLEAN_BINARY_OPERATORS];
 exports.BINARY_OPERATORS = BINARY_OPERATORS;
-const ASSIGNMENT_OPERATORS = ["=", "+=", ...NUMBER_BINARY_OPERATORS.map(op => op + "="), ...LOGICAL_OPERATORS.map(op => op + "=")];
+const ASSIGNMENT_OPERATORS = ["=", "+=", ...NUMBER_BINARY_OPERATORS.map(op => op + "=")];
 exports.ASSIGNMENT_OPERATORS = ASSIGNMENT_OPERATORS;
 const BOOLEAN_UNARY_OPERATORS = ["delete", "!"];
 exports.BOOLEAN_UNARY_OPERATORS = BOOLEAN_UNARY_OPERATORS;
@@ -3988,9 +3915,7 @@ function gatherSequenceExpressions(nodes, scope, declars) {
   let ensureLastUndefined = true;
 
   for (const node of nodes) {
-    if (!(0, _generated.isEmptyStatement)(node)) {
-      ensureLastUndefined = false;
-    }
+    ensureLastUndefined = false;
 
     if ((0, _generated.isExpression)(node)) {
       exprs.push(node);
@@ -4025,9 +3950,7 @@ function gatherSequenceExpressions(nodes, scope, declars) {
       if (!body) return;
       exprs.push(body);
     } else if ((0, _generated.isEmptyStatement)(node)) {
-      if (nodes.indexOf(node) === 0) {
-        ensureLastUndefined = true;
-      }
+      ensureLastUndefined = true;
     } else {
       return;
     }
@@ -4300,7 +4223,7 @@ var _gatherSequenceExpressions = _interopRequireDefault(__webpack_require__(/*! 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function toSequenceExpression(nodes, scope) {
-  if (!(nodes == null ? void 0 : nodes.length)) return;
+  if (!nodes || !nodes.length) return;
   const declars = [];
   const result = (0, _gatherSequenceExpressions.default)(nodes, scope, declars);
   if (!result) return;
@@ -4481,7 +4404,7 @@ function valueToNode(value) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.classMethodOrDeclareMethodCommon = exports.classMethodOrPropertyCommon = exports.patternLikeCommon = exports.functionDeclarationCommon = exports.functionTypeAnnotationCommon = exports.functionCommon = void 0;
+exports.patternLikeCommon = exports.functionDeclarationCommon = exports.functionTypeAnnotationCommon = exports.functionCommon = void 0;
 
 var _is = _interopRequireDefault(__webpack_require__(/*! ../validators/is */ "./node_modules/@babel/types/lib/validators/is.js"));
 
@@ -4543,18 +4466,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
       validate: (0, _utils.assertOneOf)(..._constants.BINARY_OPERATORS)
     },
     left: {
-      validate: function () {
-        const expression = (0, _utils.assertNodeType)("Expression");
-        const inOp = (0, _utils.assertNodeType)("Expression", "PrivateName");
-
-        const validator = function (node, key, val) {
-          const validator = node.operator === "in" ? inOp : expression;
-          validator(node, key, val);
-        };
-
-        validator.oneOfNodeTypes = ["Expression", "PrivateName"];
-        return validator;
-      }()
+      validate: (0, _utils.assertNodeType)("Expression")
     },
     right: {
       validate: (0, _utils.assertNodeType)("Expression")
@@ -4709,20 +4621,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
   fields: {
     program: {
       validate: (0, _utils.assertNodeType)("Program")
-    },
-    comments: {
-      validate: !process.env.BABEL_TYPES_8_BREAKING ? Object.assign(() => {}, {
-        each: {
-          oneOfNodeTypes: ["CommentBlock", "CommentLine"]
-        }
-      }) : (0, _utils.assertEach)((0, _utils.assertNodeType)("CommentBlock", "CommentLine")),
-      optional: true
-    },
-    tokens: {
-      validate: (0, _utils.assertEach)(Object.assign(() => {}, {
-        type: "any"
-      })),
-      optional: true
     }
   }
 });
@@ -4799,7 +4697,7 @@ exports.functionDeclarationCommon = functionDeclarationCommon;
 (0, _utils.default)("FunctionDeclaration", {
   builder: ["id", "params", "body", "generator", "async"],
   visitor: ["id", "params", "body", "returnType", "typeParameters"],
-  fields: Object.assign({}, functionDeclarationCommon, functionTypeAnnotationCommon, {
+  fields: Object.assign({}, functionDeclarationCommon, {}, functionTypeAnnotationCommon, {
     body: {
       validate: (0, _utils.assertNodeType)("BlockStatement")
     }
@@ -4818,7 +4716,7 @@ exports.functionDeclarationCommon = functionDeclarationCommon;
 (0, _utils.default)("FunctionExpression", {
   inherits: "FunctionDeclaration",
   aliases: ["Scopable", "Function", "BlockParent", "FunctionParent", "Expression", "Pureish"],
-  fields: Object.assign({}, functionCommon, functionTypeAnnotationCommon, {
+  fields: Object.assign({}, functionCommon, {}, functionTypeAnnotationCommon, {
     id: {
       validate: (0, _utils.assertNodeType)("Identifier"),
       optional: true
@@ -4844,15 +4742,13 @@ exports.patternLikeCommon = patternLikeCommon;
   aliases: ["Expression", "PatternLike", "LVal", "TSEntityName"],
   fields: Object.assign({}, patternLikeCommon, {
     name: {
-      validate: (0, _utils.chain)((0, _utils.assertValueType)("string"), Object.assign(function (node, key, val) {
+      validate: (0, _utils.chain)((0, _utils.assertValueType)("string"), function (node, key, val) {
         if (!process.env.BABEL_TYPES_8_BREAKING) return;
 
         if (!(0, _isValidIdentifier.default)(val, false)) {
           throw new TypeError(`"${val}" is not a valid identifier name`);
         }
-      }, {
-        type: "string"
-      }))
+      })
     },
     optional: {
       validate: (0, _utils.assertValueType)("boolean"),
@@ -4961,16 +4857,14 @@ exports.patternLikeCommon = patternLikeCommon;
       validate: (0, _utils.assertValueType)("string")
     },
     flags: {
-      validate: (0, _utils.chain)((0, _utils.assertValueType)("string"), Object.assign(function (node, key, val) {
+      validate: (0, _utils.chain)((0, _utils.assertValueType)("string"), function (node, key, val) {
         if (!process.env.BABEL_TYPES_8_BREAKING) return;
         const invalid = /[^gimsuy]/.exec(val);
 
         if (invalid) {
           throw new TypeError(`"${invalid[0]}" is not a valid RegExp flag`);
         }
-      }, {
-        type: "string"
-      })),
+      }),
       default: ""
     }
   }
@@ -5003,14 +4897,10 @@ exports.patternLikeCommon = patternLikeCommon;
       validate: function () {
         const normal = (0, _utils.assertNodeType)("Identifier", "PrivateName");
         const computed = (0, _utils.assertNodeType)("Expression");
-
-        const validator = function (node, key, val) {
+        return function (node, key, val) {
           const validator = node.computed ? computed : normal;
           validator(node, key, val);
         };
-
-        validator.oneOfNodeTypes = ["Expression", "Identifier", "PrivateName"];
-        return validator;
       }()
     },
     computed: {
@@ -5063,7 +4953,7 @@ exports.patternLikeCommon = patternLikeCommon;
 });
 (0, _utils.default)("ObjectMethod", {
   builder: ["kind", "key", "params", "body", "computed", "generator", "async"],
-  fields: Object.assign({}, functionCommon, functionTypeAnnotationCommon, {
+  fields: Object.assign({}, functionCommon, {}, functionTypeAnnotationCommon, {
     kind: Object.assign({
       validate: (0, _utils.assertOneOf)("method", "get", "set")
     }, !process.env.BABEL_TYPES_8_BREAKING ? {
@@ -5076,14 +4966,10 @@ exports.patternLikeCommon = patternLikeCommon;
       validate: function () {
         const normal = (0, _utils.assertNodeType)("Identifier", "StringLiteral", "NumericLiteral");
         const computed = (0, _utils.assertNodeType)("Expression");
-
-        const validator = function (node, key, val) {
+        return function (node, key, val) {
           const validator = node.computed ? computed : normal;
           validator(node, key, val);
         };
-
-        validator.oneOfNodeTypes = ["Expression", "Identifier", "StringLiteral", "NumericLiteral"];
-        return validator;
       }()
     },
     decorators: {
@@ -5107,29 +4993,23 @@ exports.patternLikeCommon = patternLikeCommon;
       validate: function () {
         const normal = (0, _utils.assertNodeType)("Identifier", "StringLiteral", "NumericLiteral");
         const computed = (0, _utils.assertNodeType)("Expression");
-
-        const validator = function (node, key, val) {
+        return function (node, key, val) {
           const validator = node.computed ? computed : normal;
           validator(node, key, val);
         };
-
-        validator.oneOfNodeTypes = ["Expression", "Identifier", "StringLiteral", "NumericLiteral"];
-        return validator;
       }()
     },
     value: {
       validate: (0, _utils.assertNodeType)("Expression", "PatternLike")
     },
     shorthand: {
-      validate: (0, _utils.chain)((0, _utils.assertValueType)("boolean"), Object.assign(function (node, key, val) {
+      validate: (0, _utils.chain)((0, _utils.assertValueType)("boolean"), function (node, key, val) {
         if (!process.env.BABEL_TYPES_8_BREAKING) return;
 
         if (val && node.computed) {
           throw new TypeError("Property shorthand of ObjectProperty cannot be true if computed is true");
         }
-      }, {
-        type: "boolean"
-      }), function (node, key, val) {
+      }, function (node, key, val) {
         if (!process.env.BABEL_TYPES_8_BREAKING) return;
 
         if (val && !(0, _is.default)("Identifier", node.key)) {
@@ -5247,15 +5127,13 @@ exports.patternLikeCommon = patternLikeCommon;
   aliases: ["Statement"],
   fields: {
     block: {
-      validate: (0, _utils.chain)((0, _utils.assertNodeType)("BlockStatement"), Object.assign(function (node) {
+      validate: (0, _utils.chain)((0, _utils.assertNodeType)("BlockStatement"), function (node) {
         if (!process.env.BABEL_TYPES_8_BREAKING) return;
 
         if (!node.handler && !node.finalizer) {
           throw new TypeError("TryStatement expects either a handler or finalizer, or both");
         }
-      }, {
-        oneOfNodeTypes: ["BlockStatement"]
-      }))
+      })
     },
     handler: {
       optional: true,
@@ -5379,11 +5257,42 @@ exports.patternLikeCommon = patternLikeCommon;
     }
   }
 });
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../process/browser.js */ "./node_modules/process/browser.js")))
+
+/***/ }),
+
+/***/ "./node_modules/@babel/types/lib/definitions/es2015.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/@babel/types/lib/definitions/es2015.js ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.classMethodOrDeclareMethodCommon = exports.classMethodOrPropertyCommon = void 0;
+
+var _utils = _interopRequireWildcard(__webpack_require__(/*! ./utils */ "./node_modules/@babel/types/lib/definitions/utils.js"));
+
+var _core = __webpack_require__(/*! ./core */ "./node_modules/@babel/types/lib/definitions/core.js");
+
+var _is = _interopRequireDefault(__webpack_require__(/*! ../validators/is */ "./node_modules/@babel/types/lib/validators/is.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
 (0, _utils.default)("AssignmentPattern", {
   visitor: ["left", "right", "decorators"],
   builder: ["left", "right"],
   aliases: ["Pattern", "PatternLike", "LVal"],
-  fields: Object.assign({}, patternLikeCommon, {
+  fields: Object.assign({}, _core.patternLikeCommon, {
     left: {
       validate: (0, _utils.assertNodeType)("Identifier", "ObjectPattern", "ArrayPattern", "MemberExpression")
     },
@@ -5400,7 +5309,7 @@ exports.patternLikeCommon = patternLikeCommon;
   visitor: ["elements", "typeAnnotation"],
   builder: ["elements"],
   aliases: ["Pattern", "PatternLike", "LVal"],
-  fields: Object.assign({}, patternLikeCommon, {
+  fields: Object.assign({}, _core.patternLikeCommon, {
     elements: {
       validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeOrValueType)("null", "PatternLike")))
     },
@@ -5414,7 +5323,7 @@ exports.patternLikeCommon = patternLikeCommon;
   builder: ["params", "body", "async"],
   visitor: ["params", "body", "returnType", "typeParameters"],
   aliases: ["Scopable", "Function", "BlockParent", "FunctionParent", "Expression", "Pureish"],
-  fields: Object.assign({}, functionCommon, functionTypeAnnotationCommon, {
+  fields: Object.assign({}, _core.functionCommon, {}, _core.functionTypeAnnotationCommon, {
     expression: {
       validate: (0, _utils.assertValueType)("boolean")
     },
@@ -5462,10 +5371,6 @@ exports.patternLikeCommon = patternLikeCommon;
     decorators: {
       validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("Decorator"))),
       optional: true
-    },
-    mixins: {
-      validate: (0, _utils.assertNodeType)("InterfaceExtends"),
-      optional: true
     }
   }
 });
@@ -5473,36 +5378,6 @@ exports.patternLikeCommon = patternLikeCommon;
   inherits: "ClassExpression",
   aliases: ["Scopable", "Class", "Statement", "Declaration"],
   fields: {
-    id: {
-      validate: (0, _utils.assertNodeType)("Identifier")
-    },
-    typeParameters: {
-      validate: (0, _utils.assertNodeType)("TypeParameterDeclaration", "TSTypeParameterDeclaration", "Noop"),
-      optional: true
-    },
-    body: {
-      validate: (0, _utils.assertNodeType)("ClassBody")
-    },
-    superClass: {
-      optional: true,
-      validate: (0, _utils.assertNodeType)("Expression")
-    },
-    superTypeParameters: {
-      validate: (0, _utils.assertNodeType)("TypeParameterInstantiation", "TSTypeParameterInstantiation"),
-      optional: true
-    },
-    implements: {
-      validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("TSExpressionWithTypeArguments", "ClassImplements"))),
-      optional: true
-    },
-    decorators: {
-      validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("Decorator"))),
-      optional: true
-    },
-    mixins: {
-      validate: (0, _utils.assertNodeType)("InterfaceExtends"),
-      optional: true
-    },
     declare: {
       validate: (0, _utils.assertValueType)("boolean"),
       optional: true
@@ -5547,15 +5422,13 @@ exports.patternLikeCommon = patternLikeCommon;
   fields: {
     declaration: {
       optional: true,
-      validate: (0, _utils.chain)((0, _utils.assertNodeType)("Declaration"), Object.assign(function (node, key, val) {
+      validate: (0, _utils.chain)((0, _utils.assertNodeType)("Declaration"), function (node, key, val) {
         if (!process.env.BABEL_TYPES_8_BREAKING) return;
 
         if (val && node.specifiers.length) {
           throw new TypeError("Only declaration or specifiers is allowed on ExportNamedDeclaration");
         }
-      }, {
-        oneOfNodeTypes: ["Declaration"]
-      }), function (node, key, val) {
+      }, function (node, key, val) {
         if (!process.env.BABEL_TYPES_8_BREAKING) return;
 
         if (val && node.source) {
@@ -5682,7 +5555,7 @@ exports.patternLikeCommon = patternLikeCommon;
   aliases: ["Expression"],
   fields: {
     meta: {
-      validate: (0, _utils.chain)((0, _utils.assertNodeType)("Identifier"), Object.assign(function (node, key, val) {
+      validate: (0, _utils.chain)((0, _utils.assertNodeType)("Identifier"), function (node, key, val) {
         if (!process.env.BABEL_TYPES_8_BREAKING) return;
         let property;
 
@@ -5705,9 +5578,7 @@ exports.patternLikeCommon = patternLikeCommon;
         })) {
           throw new TypeError("Unrecognised MetaProperty");
         }
-      }, {
-        oneOfNodeTypes: ["Identifier"]
-      }))
+      })
     },
     property: {
       validate: (0, _utils.assertNodeType)("Identifier")
@@ -5745,7 +5616,7 @@ const classMethodOrPropertyCommon = {
   }
 };
 exports.classMethodOrPropertyCommon = classMethodOrPropertyCommon;
-const classMethodOrDeclareMethodCommon = Object.assign({}, functionCommon, classMethodOrPropertyCommon, {
+const classMethodOrDeclareMethodCommon = Object.assign({}, _core.functionCommon, {}, classMethodOrPropertyCommon, {
   kind: {
     validate: (0, _utils.assertOneOf)("get", "set", "method", "constructor"),
     default: "method"
@@ -5764,7 +5635,7 @@ exports.classMethodOrDeclareMethodCommon = classMethodOrDeclareMethodCommon;
   aliases: ["Function", "Scopable", "BlockParent", "FunctionParent", "Method"],
   builder: ["kind", "key", "params", "body", "computed", "static", "generator", "async"],
   visitor: ["key", "params", "body", "decorators", "returnType", "typeParameters"],
-  fields: Object.assign({}, classMethodOrDeclareMethodCommon, functionTypeAnnotationCommon, {
+  fields: Object.assign({}, classMethodOrDeclareMethodCommon, {}, _core.functionTypeAnnotationCommon, {
     body: {
       validate: (0, _utils.assertNodeType)("BlockStatement")
     }
@@ -5774,7 +5645,7 @@ exports.classMethodOrDeclareMethodCommon = classMethodOrDeclareMethodCommon;
   visitor: ["properties", "typeAnnotation", "decorators"],
   builder: ["properties"],
   aliases: ["Pattern", "PatternLike", "LVal"],
-  fields: Object.assign({}, patternLikeCommon, {
+  fields: Object.assign({}, _core.patternLikeCommon, {
     properties: {
       validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("RestElement", "ObjectProperty")))
     }
@@ -5850,105 +5721,18 @@ exports.classMethodOrDeclareMethodCommon = classMethodOrDeclareMethodCommon;
   aliases: ["Expression", "Terminatorless"],
   fields: {
     delegate: {
-      validate: (0, _utils.chain)((0, _utils.assertValueType)("boolean"), Object.assign(function (node, key, val) {
+      validate: (0, _utils.chain)((0, _utils.assertValueType)("boolean"), function (node, key, val) {
         if (!process.env.BABEL_TYPES_8_BREAKING) return;
 
         if (val && !node.argument) {
           throw new TypeError("Property delegate of YieldExpression cannot be true if there is no argument");
         }
-      }, {
-        type: "boolean"
-      })),
+      }),
       default: false
     },
     argument: {
       optional: true,
       validate: (0, _utils.assertNodeType)("Expression")
-    }
-  }
-});
-(0, _utils.default)("AwaitExpression", {
-  builder: ["argument"],
-  visitor: ["argument"],
-  aliases: ["Expression", "Terminatorless"],
-  fields: {
-    argument: {
-      validate: (0, _utils.assertNodeType)("Expression")
-    }
-  }
-});
-(0, _utils.default)("Import", {
-  aliases: ["Expression"]
-});
-(0, _utils.default)("BigIntLiteral", {
-  builder: ["value"],
-  fields: {
-    value: {
-      validate: (0, _utils.assertValueType)("string")
-    }
-  },
-  aliases: ["Expression", "Pureish", "Literal", "Immutable"]
-});
-(0, _utils.default)("ExportNamespaceSpecifier", {
-  visitor: ["exported"],
-  aliases: ["ModuleSpecifier"],
-  fields: {
-    exported: {
-      validate: (0, _utils.assertNodeType)("Identifier")
-    }
-  }
-});
-(0, _utils.default)("OptionalMemberExpression", {
-  builder: ["object", "property", "computed", "optional"],
-  visitor: ["object", "property"],
-  aliases: ["Expression"],
-  fields: {
-    object: {
-      validate: (0, _utils.assertNodeType)("Expression")
-    },
-    property: {
-      validate: function () {
-        const normal = (0, _utils.assertNodeType)("Identifier");
-        const computed = (0, _utils.assertNodeType)("Expression");
-
-        const validator = function (node, key, val) {
-          const validator = node.computed ? computed : normal;
-          validator(node, key, val);
-        };
-
-        validator.oneOfNodeTypes = ["Expression", "Identifier"];
-        return validator;
-      }()
-    },
-    computed: {
-      default: false
-    },
-    optional: {
-      validate: !process.env.BABEL_TYPES_8_BREAKING ? (0, _utils.assertValueType)("boolean") : (0, _utils.chain)((0, _utils.assertValueType)("boolean"), (0, _utils.assertOptionalChainStart)())
-    }
-  }
-});
-(0, _utils.default)("OptionalCallExpression", {
-  visitor: ["callee", "arguments", "typeParameters", "typeArguments"],
-  builder: ["callee", "arguments", "optional"],
-  aliases: ["Expression"],
-  fields: {
-    callee: {
-      validate: (0, _utils.assertNodeType)("Expression")
-    },
-    arguments: {
-      validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("Expression", "SpreadElement", "JSXNamespacedName")))
-    },
-    optional: {
-      validate: !process.env.BABEL_TYPES_8_BREAKING ? (0, _utils.assertValueType)("boolean") : (0, _utils.chain)((0, _utils.assertValueType)("boolean"), (0, _utils.assertOptionalChainStart)())
-    },
-    typeArguments: {
-      validate: (0, _utils.assertNodeType)("TypeParameterInstantiation"),
-      optional: true
-    },
-    typeParameters: {
-      validate: (0, _utils.assertNodeType)("TSTypeParameterInstantiation"),
-      optional: true
     }
   }
 });
@@ -5968,28 +5752,27 @@ exports.classMethodOrDeclareMethodCommon = classMethodOrDeclareMethodCommon;
 
 var _utils = _interopRequireWildcard(__webpack_require__(/*! ./utils */ "./node_modules/@babel/types/lib/definitions/utils.js"));
 
-var _core = __webpack_require__(/*! ./core */ "./node_modules/@babel/types/lib/definitions/core.js");
+var _es = __webpack_require__(/*! ./es2015 */ "./node_modules/@babel/types/lib/definitions/es2015.js");
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 (0, _utils.default)("ArgumentPlaceholder", {});
+(0, _utils.default)("AwaitExpression", {
+  builder: ["argument"],
+  visitor: ["argument"],
+  aliases: ["Expression", "Terminatorless"],
+  fields: {
+    argument: {
+      validate: (0, _utils.assertNodeType)("Expression")
+    }
+  }
+});
 (0, _utils.default)("BindExpression", {
   visitor: ["object", "callee"],
   aliases: ["Expression"],
-  fields: !process.env.BABEL_TYPES_8_BREAKING ? {
-    object: {
-      validate: Object.assign(() => {}, {
-        oneOfNodeTypes: ["Expression"]
-      })
-    },
-    callee: {
-      validate: Object.assign(() => {}, {
-        oneOfNodeTypes: ["Expression"]
-      })
-    }
-  } : {
+  fields: !process.env.BABEL_TYPES_8_BREAKING ? {} : {
     object: {
       validate: (0, _utils.assertNodeType)("Expression")
     },
@@ -6002,7 +5785,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
   visitor: ["key", "value", "typeAnnotation", "decorators"],
   builder: ["key", "value", "typeAnnotation", "decorators", "computed", "static"],
   aliases: ["Property"],
-  fields: Object.assign({}, _core.classMethodOrPropertyCommon, {
+  fields: Object.assign({}, _es.classMethodOrPropertyCommon, {
     value: {
       validate: (0, _utils.assertNodeType)("Expression"),
       optional: true
@@ -6029,6 +5812,32 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
     }
   })
 });
+(0, _utils.default)("OptionalMemberExpression", {
+  builder: ["object", "property", "computed", "optional"],
+  visitor: ["object", "property"],
+  aliases: ["Expression"],
+  fields: {
+    object: {
+      validate: (0, _utils.assertNodeType)("Expression")
+    },
+    property: {
+      validate: function () {
+        const normal = (0, _utils.assertNodeType)("Identifier");
+        const computed = (0, _utils.assertNodeType)("Expression");
+        return function (node, key, val) {
+          const validator = node.computed ? computed : normal;
+          validator(node, key, val);
+        };
+      }()
+    },
+    computed: {
+      default: false
+    },
+    optional: {
+      validate: !process.env.BABEL_TYPES_8_BREAKING ? (0, _utils.assertValueType)("boolean") : (0, _utils.chain)((0, _utils.assertValueType)("boolean"), (0, _utils.assertOptionalChainStart)())
+    }
+  }
+});
 (0, _utils.default)("PipelineTopicExpression", {
   builder: ["expression"],
   visitor: ["expression"],
@@ -6049,6 +5858,30 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 });
 (0, _utils.default)("PipelinePrimaryTopicReference", {
   aliases: ["Expression"]
+});
+(0, _utils.default)("OptionalCallExpression", {
+  visitor: ["callee", "arguments", "typeParameters", "typeArguments"],
+  builder: ["callee", "arguments", "optional"],
+  aliases: ["Expression"],
+  fields: {
+    callee: {
+      validate: (0, _utils.assertNodeType)("Expression")
+    },
+    arguments: {
+      validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("Expression", "SpreadElement", "JSXNamespacedName")))
+    },
+    optional: {
+      validate: !process.env.BABEL_TYPES_8_BREAKING ? (0, _utils.assertValueType)("boolean") : (0, _utils.chain)((0, _utils.assertValueType)("boolean"), (0, _utils.assertOptionalChainStart)())
+    },
+    typeArguments: {
+      validate: (0, _utils.assertNodeType)("TypeParameterInstantiation"),
+      optional: true
+    },
+    typeParameters: {
+      validate: (0, _utils.assertNodeType)("TSTypeParameterInstantiation"),
+      optional: true
+    }
+  }
 });
 (0, _utils.default)("ClassPrivateProperty", {
   visitor: ["key", "value", "decorators"],
@@ -6072,7 +5905,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
   builder: ["kind", "key", "params", "body", "static"],
   visitor: ["key", "params", "body", "decorators", "returnType", "typeParameters"],
   aliases: ["Function", "Scopable", "BlockParent", "FunctionParent", "Method", "Private"],
-  fields: Object.assign({}, _core.classMethodOrDeclareMethodCommon, _core.functionTypeAnnotationCommon, {
+  fields: Object.assign({}, _es.classMethodOrDeclareMethodCommon, {
     key: {
       validate: (0, _utils.assertNodeType)("PrivateName")
     },
@@ -6081,16 +5914,8 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
     }
   })
 });
-(0, _utils.default)("ImportAttribute", {
-  visitor: ["key", "value"],
-  fields: {
-    key: {
-      validate: (0, _utils.assertNodeType)("Identifier")
-    },
-    value: {
-      validate: (0, _utils.assertNodeType)("StringLiteral")
-    }
-  }
+(0, _utils.default)("Import", {
+  aliases: ["Expression"]
 });
 (0, _utils.default)("Decorator", {
   visitor: ["expression"],
@@ -6118,6 +5943,15 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
     }
   }
 });
+(0, _utils.default)("ExportNamespaceSpecifier", {
+  visitor: ["exported"],
+  aliases: ["ModuleSpecifier"],
+  fields: {
+    exported: {
+      validate: (0, _utils.assertNodeType)("Identifier")
+    }
+  }
+});
 (0, _utils.default)("PrivateName", {
   visitor: ["id"],
   aliases: ["Private"],
@@ -6127,26 +5961,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
     }
   }
 });
-(0, _utils.default)("RecordExpression", {
-  visitor: ["properties"],
-  aliases: ["Expression"],
-  fields: {
-    properties: {
-      validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("ObjectProperty", "SpreadElement")))
-    }
-  }
-});
-(0, _utils.default)("TupleExpression", {
-  fields: {
-    elements: {
-      validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("Expression", "SpreadElement"))),
-      default: []
-    }
-  },
-  visitor: ["elements"],
-  aliases: ["Expression"]
-});
-(0, _utils.default)("DecimalLiteral", {
+(0, _utils.default)("BigIntLiteral", {
   builder: ["value"],
   fields: {
     value: {
@@ -6154,6 +5969,25 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
     }
   },
   aliases: ["Expression", "Pureish", "Literal", "Immutable"]
+});
+(0, _utils.default)("RecordExpression", {
+  visitor: ["properties"],
+  aliases: ["Expression"],
+  fields: {
+    properties: {
+      validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("ObjectProperty", "ObjectMethod", "SpreadElement")))
+    }
+  }
+});
+(0, _utils.default)("TupleExpression", {
+  fields: {
+    elements: {
+      validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeOrValueType)("null", "Expression", "SpreadElement"))),
+      default: []
+    }
+  },
+  visitor: ["elements"],
+  aliases: ["Expression"]
 });
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../process/browser.js */ "./node_modules/process/browser.js")))
 
@@ -6710,6 +6544,8 @@ var _toFastProperties = _interopRequireDefault(__webpack_require__(/*! to-fast-p
 
 __webpack_require__(/*! ./core */ "./node_modules/@babel/types/lib/definitions/core.js");
 
+__webpack_require__(/*! ./es2015 */ "./node_modules/@babel/types/lib/definitions/es2015.js");
+
 __webpack_require__(/*! ./flow */ "./node_modules/@babel/types/lib/definitions/flow.js");
 
 __webpack_require__(/*! ./jsx */ "./node_modules/@babel/types/lib/definitions/jsx.js");
@@ -6791,10 +6627,6 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
     },
     children: {
       validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("JSXText", "JSXExpressionContainer", "JSXSpreadChild", "JSXElement", "JSXFragment")))
-    },
-    selfClosing: {
-      validate: (0, _utils.assertValueType)("boolean"),
-      optional: true
     }
   }
 });
@@ -6986,7 +6818,7 @@ exports.PLACEHOLDERS_ALIAS = PLACEHOLDERS_ALIAS;
 
 for (const type of PLACEHOLDERS) {
   const alias = _utils.ALIAS_KEYS[type];
-  if (alias == null ? void 0 : alias.length) PLACEHOLDERS_ALIAS[type] = alias;
+  if (alias && alias.length) PLACEHOLDERS_ALIAS[type] = alias;
 }
 
 const PLACEHOLDERS_FLIPPED_ALIAS = {};
@@ -7016,6 +6848,8 @@ Object.keys(PLACEHOLDERS_ALIAS).forEach(type => {
 var _utils = _interopRequireWildcard(__webpack_require__(/*! ./utils */ "./node_modules/@babel/types/lib/definitions/utils.js"));
 
 var _core = __webpack_require__(/*! ./core */ "./node_modules/@babel/types/lib/definitions/core.js");
+
+var _es = __webpack_require__(/*! ./es2015 */ "./node_modules/@babel/types/lib/definitions/es2015.js");
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
@@ -7052,11 +6886,11 @@ const tSFunctionTypeAnnotationCommon = {
 (0, _utils.default)("TSDeclareFunction", {
   aliases: ["Statement", "Declaration"],
   visitor: ["id", "typeParameters", "params", "returnType"],
-  fields: Object.assign({}, _core.functionDeclarationCommon, tSFunctionTypeAnnotationCommon)
+  fields: Object.assign({}, _core.functionDeclarationCommon, {}, tSFunctionTypeAnnotationCommon)
 });
 (0, _utils.default)("TSDeclareMethod", {
   visitor: ["decorators", "key", "typeParameters", "params", "returnType"],
-  fields: Object.assign({}, _core.classMethodOrDeclareMethodCommon, tSFunctionTypeAnnotationCommon)
+  fields: Object.assign({}, _es.classMethodOrDeclareMethodCommon, {}, tSFunctionTypeAnnotationCommon)
 });
 (0, _utils.default)("TSQualifiedName", {
   aliases: ["TSEntityName"],
@@ -7095,7 +6929,7 @@ const namedTypeElementCommon = {
 (0, _utils.default)("TSMethodSignature", {
   aliases: ["TSTypeElement"],
   visitor: ["key", "typeParameters", "parameters", "typeAnnotation"],
-  fields: Object.assign({}, signatureDeclarationCommon, namedTypeElementCommon)
+  fields: Object.assign({}, signatureDeclarationCommon, {}, namedTypeElementCommon)
 });
 (0, _utils.default)("TSIndexSignature", {
   aliases: ["TSTypeElement"],
@@ -7110,14 +6944,14 @@ const tsKeywordTypes = ["TSAnyKeyword", "TSBooleanKeyword", "TSBigIntKeyword", "
 
 for (const type of tsKeywordTypes) {
   (0, _utils.default)(type, {
-    aliases: ["TSType", "TSBaseType"],
+    aliases: ["TSType"],
     visitor: [],
     fields: {}
   });
 }
 
 (0, _utils.default)("TSThisType", {
-  aliases: ["TSType", "TSBaseType"],
+  aliases: ["TSType"],
   visitor: [],
   fields: {}
 });
@@ -7171,7 +7005,7 @@ const fnOrCtr = {
   aliases: ["TSType"],
   visitor: ["elementTypes"],
   fields: {
-    elementTypes: (0, _utils.validateArrayOfType)(["TSType", "TSNamedTupleMember"])
+    elementTypes: (0, _utils.validateArrayOfType)("TSType")
   }
 });
 (0, _utils.default)("TSOptionalType", {
@@ -7186,18 +7020,6 @@ const fnOrCtr = {
   visitor: ["typeAnnotation"],
   fields: {
     typeAnnotation: (0, _utils.validateType)("TSType")
-  }
-});
-(0, _utils.default)("TSNamedTupleMember", {
-  visitor: ["label", "elementType"],
-  builder: ["label", "elementType", "optional"],
-  fields: {
-    label: (0, _utils.validateType)("Identifier"),
-    optional: {
-      validate: bool,
-      default: false
-    },
-    elementType: (0, _utils.validateType)("TSType")
   }
 });
 const unionOrIntersection = {
@@ -7260,10 +7082,10 @@ const unionOrIntersection = {
   }
 });
 (0, _utils.default)("TSLiteralType", {
-  aliases: ["TSType", "TSBaseType"],
+  aliases: ["TSType"],
   visitor: ["literal"],
   fields: {
-    literal: (0, _utils.validateType)(["NumericLiteral", "StringLiteral", "BooleanLiteral", "BigIntLiteral"])
+    literal: (0, _utils.validateType)(["NumericLiteral", "StringLiteral", "BooleanLiteral"])
   }
 });
 (0, _utils.default)("TSExpressionWithTypeArguments", {
@@ -7580,7 +7402,7 @@ function assertNodeType(...types) {
       }
     }
 
-    throw new TypeError(`Property ${key} of ${node.type} expected node to be of a type ${JSON.stringify(types)} but instead got ${JSON.stringify(val == null ? void 0 : val.type)}`);
+    throw new TypeError(`Property ${key} of ${node.type} expected node to be of a type ${JSON.stringify(types)} but instead got ${JSON.stringify(val && val.type)}`);
   }
 
   validate.oneOfNodeTypes = types;
@@ -7596,7 +7418,7 @@ function assertNodeOrValueType(...types) {
       }
     }
 
-    throw new TypeError(`Property ${key} of ${node.type} expected node to be of a type ${JSON.stringify(types)} but instead got ${JSON.stringify(val == null ? void 0 : val.type)}`);
+    throw new TypeError(`Property ${key} of ${node.type} expected node to be of a type ${JSON.stringify(types)} but instead got ${JSON.stringify(val && val.type)}`);
   }
 
   validate.oneOfNodeOrValueTypes = types;
@@ -7786,8 +7608,6 @@ var _exportNames = {
   assertNode: true,
   createTypeAnnotationBasedOnTypeof: true,
   createUnionTypeAnnotation: true,
-  createFlowUnionType: true,
-  createTSUnionType: true,
   cloneNode: true,
   clone: true,
   cloneDeep: true,
@@ -7855,19 +7675,7 @@ Object.defineProperty(exports, "createTypeAnnotationBasedOnTypeof", {
 Object.defineProperty(exports, "createUnionTypeAnnotation", {
   enumerable: true,
   get: function () {
-    return _createFlowUnionType.default;
-  }
-});
-Object.defineProperty(exports, "createFlowUnionType", {
-  enumerable: true,
-  get: function () {
-    return _createFlowUnionType.default;
-  }
-});
-Object.defineProperty(exports, "createTSUnionType", {
-  enumerable: true,
-  get: function () {
-    return _createTSUnionType.default;
+    return _createUnionTypeAnnotation.default;
   }
 });
 Object.defineProperty(exports, "cloneNode", {
@@ -8201,9 +8009,7 @@ Object.keys(_generated).forEach(function (key) {
 
 var _createTypeAnnotationBasedOnTypeof = _interopRequireDefault(__webpack_require__(/*! ./builders/flow/createTypeAnnotationBasedOnTypeof */ "./node_modules/@babel/types/lib/builders/flow/createTypeAnnotationBasedOnTypeof.js"));
 
-var _createFlowUnionType = _interopRequireDefault(__webpack_require__(/*! ./builders/flow/createFlowUnionType */ "./node_modules/@babel/types/lib/builders/flow/createFlowUnionType.js"));
-
-var _createTSUnionType = _interopRequireDefault(__webpack_require__(/*! ./builders/typescript/createTSUnionType */ "./node_modules/@babel/types/lib/builders/typescript/createTSUnionType.js"));
+var _createUnionTypeAnnotation = _interopRequireDefault(__webpack_require__(/*! ./builders/flow/createUnionTypeAnnotation */ "./node_modules/@babel/types/lib/builders/flow/createUnionTypeAnnotation.js"));
 
 var _generated2 = __webpack_require__(/*! ./builders/generated */ "./node_modules/@babel/types/lib/builders/generated/index.js");
 
@@ -8631,71 +8437,6 @@ function removePropertiesDeep(tree, opts) {
 
 /***/ }),
 
-/***/ "./node_modules/@babel/types/lib/modifications/typescript/removeTypeDuplicates.js":
-/*!****************************************************************************************!*\
-  !*** ./node_modules/@babel/types/lib/modifications/typescript/removeTypeDuplicates.js ***!
-  \****************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = removeTypeDuplicates;
-
-var _generated = __webpack_require__(/*! ../../validators/generated */ "./node_modules/@babel/types/lib/validators/generated/index.js");
-
-function removeTypeDuplicates(nodes) {
-  const generics = {};
-  const bases = {};
-  const typeGroups = [];
-  const types = [];
-
-  for (let i = 0; i < nodes.length; i++) {
-    const node = nodes[i];
-    if (!node) continue;
-
-    if (types.indexOf(node) >= 0) {
-      continue;
-    }
-
-    if ((0, _generated.isTSAnyKeyword)(node.type)) {
-      return [node];
-    }
-
-    if ((0, _generated.isTSBaseType)(node)) {
-      bases[node.type] = node;
-      continue;
-    }
-
-    if ((0, _generated.isTSUnionType)(node)) {
-      if (typeGroups.indexOf(node.types) < 0) {
-        nodes = nodes.concat(node.types);
-        typeGroups.push(node.types);
-      }
-
-      continue;
-    }
-
-    types.push(node);
-  }
-
-  for (const type of Object.keys(bases)) {
-    types.push(bases[type]);
-  }
-
-  for (const name of Object.keys(generics)) {
-    types.push(generics[name]);
-  }
-
-  return types;
-}
-
-/***/ }),
-
 /***/ "./node_modules/@babel/types/lib/retrievers/getBindingIdentifiers.js":
 /*!***************************************************************************!*\
   !*** ./node_modules/@babel/types/lib/retrievers/getBindingIdentifiers.js ***!
@@ -8955,9 +8696,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = inherit;
 
+var _uniq = _interopRequireDefault(__webpack_require__(/*! lodash/uniq */ "./node_modules/lodash/uniq.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function inherit(key, child, parent) {
   if (child && parent) {
-    child[key] = Array.from(new Set([].concat(child[key], parent[key]).filter(Boolean)));
+    child[key] = (0, _uniq.default)([].concat(child[key], parent[key]).filter(Boolean));
   }
 }
 
@@ -9164,12 +8909,6 @@ exports.isTaggedTemplateExpression = isTaggedTemplateExpression;
 exports.isTemplateElement = isTemplateElement;
 exports.isTemplateLiteral = isTemplateLiteral;
 exports.isYieldExpression = isYieldExpression;
-exports.isAwaitExpression = isAwaitExpression;
-exports.isImport = isImport;
-exports.isBigIntLiteral = isBigIntLiteral;
-exports.isExportNamespaceSpecifier = isExportNamespaceSpecifier;
-exports.isOptionalMemberExpression = isOptionalMemberExpression;
-exports.isOptionalCallExpression = isOptionalCallExpression;
 exports.isAnyTypeAnnotation = isAnyTypeAnnotation;
 exports.isArrayTypeAnnotation = isArrayTypeAnnotation;
 exports.isBooleanTypeAnnotation = isBooleanTypeAnnotation;
@@ -9252,21 +8991,25 @@ exports.isNoop = isNoop;
 exports.isPlaceholder = isPlaceholder;
 exports.isV8IntrinsicIdentifier = isV8IntrinsicIdentifier;
 exports.isArgumentPlaceholder = isArgumentPlaceholder;
+exports.isAwaitExpression = isAwaitExpression;
 exports.isBindExpression = isBindExpression;
 exports.isClassProperty = isClassProperty;
+exports.isOptionalMemberExpression = isOptionalMemberExpression;
 exports.isPipelineTopicExpression = isPipelineTopicExpression;
 exports.isPipelineBareFunction = isPipelineBareFunction;
 exports.isPipelinePrimaryTopicReference = isPipelinePrimaryTopicReference;
+exports.isOptionalCallExpression = isOptionalCallExpression;
 exports.isClassPrivateProperty = isClassPrivateProperty;
 exports.isClassPrivateMethod = isClassPrivateMethod;
-exports.isImportAttribute = isImportAttribute;
+exports.isImport = isImport;
 exports.isDecorator = isDecorator;
 exports.isDoExpression = isDoExpression;
 exports.isExportDefaultSpecifier = isExportDefaultSpecifier;
+exports.isExportNamespaceSpecifier = isExportNamespaceSpecifier;
 exports.isPrivateName = isPrivateName;
+exports.isBigIntLiteral = isBigIntLiteral;
 exports.isRecordExpression = isRecordExpression;
 exports.isTupleExpression = isTupleExpression;
-exports.isDecimalLiteral = isDecimalLiteral;
 exports.isTSParameterProperty = isTSParameterProperty;
 exports.isTSDeclareFunction = isTSDeclareFunction;
 exports.isTSDeclareMethod = isTSDeclareMethod;
@@ -9299,7 +9042,6 @@ exports.isTSArrayType = isTSArrayType;
 exports.isTSTupleType = isTSTupleType;
 exports.isTSOptionalType = isTSOptionalType;
 exports.isTSRestType = isTSRestType;
-exports.isTSNamedTupleMember = isTSNamedTupleMember;
 exports.isTSUnionType = isTSUnionType;
 exports.isTSIntersectionType = isTSIntersectionType;
 exports.isTSConditionalType = isTSConditionalType;
@@ -9373,7 +9115,6 @@ exports.isJSX = isJSX;
 exports.isPrivate = isPrivate;
 exports.isTSTypeElement = isTSTypeElement;
 exports.isTSType = isTSType;
-exports.isTSBaseType = isTSBaseType;
 exports.isNumberLiteral = isNumberLiteral;
 exports.isRegexLiteral = isRegexLiteral;
 exports.isRestProperty = isRestProperty;
@@ -10498,96 +10239,6 @@ function isYieldExpression(node, opts) {
   const nodeType = node.type;
 
   if (nodeType === "YieldExpression") {
-    if (typeof opts === "undefined") {
-      return true;
-    } else {
-      return (0, _shallowEqual.default)(node, opts);
-    }
-  }
-
-  return false;
-}
-
-function isAwaitExpression(node, opts) {
-  if (!node) return false;
-  const nodeType = node.type;
-
-  if (nodeType === "AwaitExpression") {
-    if (typeof opts === "undefined") {
-      return true;
-    } else {
-      return (0, _shallowEqual.default)(node, opts);
-    }
-  }
-
-  return false;
-}
-
-function isImport(node, opts) {
-  if (!node) return false;
-  const nodeType = node.type;
-
-  if (nodeType === "Import") {
-    if (typeof opts === "undefined") {
-      return true;
-    } else {
-      return (0, _shallowEqual.default)(node, opts);
-    }
-  }
-
-  return false;
-}
-
-function isBigIntLiteral(node, opts) {
-  if (!node) return false;
-  const nodeType = node.type;
-
-  if (nodeType === "BigIntLiteral") {
-    if (typeof opts === "undefined") {
-      return true;
-    } else {
-      return (0, _shallowEqual.default)(node, opts);
-    }
-  }
-
-  return false;
-}
-
-function isExportNamespaceSpecifier(node, opts) {
-  if (!node) return false;
-  const nodeType = node.type;
-
-  if (nodeType === "ExportNamespaceSpecifier") {
-    if (typeof opts === "undefined") {
-      return true;
-    } else {
-      return (0, _shallowEqual.default)(node, opts);
-    }
-  }
-
-  return false;
-}
-
-function isOptionalMemberExpression(node, opts) {
-  if (!node) return false;
-  const nodeType = node.type;
-
-  if (nodeType === "OptionalMemberExpression") {
-    if (typeof opts === "undefined") {
-      return true;
-    } else {
-      return (0, _shallowEqual.default)(node, opts);
-    }
-  }
-
-  return false;
-}
-
-function isOptionalCallExpression(node, opts) {
-  if (!node) return false;
-  const nodeType = node.type;
-
-  if (nodeType === "OptionalCallExpression") {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -11828,6 +11479,21 @@ function isArgumentPlaceholder(node, opts) {
   return false;
 }
 
+function isAwaitExpression(node, opts) {
+  if (!node) return false;
+  const nodeType = node.type;
+
+  if (nodeType === "AwaitExpression") {
+    if (typeof opts === "undefined") {
+      return true;
+    } else {
+      return (0, _shallowEqual.default)(node, opts);
+    }
+  }
+
+  return false;
+}
+
 function isBindExpression(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
@@ -11848,6 +11514,21 @@ function isClassProperty(node, opts) {
   const nodeType = node.type;
 
   if (nodeType === "ClassProperty") {
+    if (typeof opts === "undefined") {
+      return true;
+    } else {
+      return (0, _shallowEqual.default)(node, opts);
+    }
+  }
+
+  return false;
+}
+
+function isOptionalMemberExpression(node, opts) {
+  if (!node) return false;
+  const nodeType = node.type;
+
+  if (nodeType === "OptionalMemberExpression") {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -11903,6 +11584,21 @@ function isPipelinePrimaryTopicReference(node, opts) {
   return false;
 }
 
+function isOptionalCallExpression(node, opts) {
+  if (!node) return false;
+  const nodeType = node.type;
+
+  if (nodeType === "OptionalCallExpression") {
+    if (typeof opts === "undefined") {
+      return true;
+    } else {
+      return (0, _shallowEqual.default)(node, opts);
+    }
+  }
+
+  return false;
+}
+
 function isClassPrivateProperty(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
@@ -11933,11 +11629,11 @@ function isClassPrivateMethod(node, opts) {
   return false;
 }
 
-function isImportAttribute(node, opts) {
+function isImport(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if (nodeType === "ImportAttribute") {
+  if (nodeType === "Import") {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -11993,11 +11689,41 @@ function isExportDefaultSpecifier(node, opts) {
   return false;
 }
 
+function isExportNamespaceSpecifier(node, opts) {
+  if (!node) return false;
+  const nodeType = node.type;
+
+  if (nodeType === "ExportNamespaceSpecifier") {
+    if (typeof opts === "undefined") {
+      return true;
+    } else {
+      return (0, _shallowEqual.default)(node, opts);
+    }
+  }
+
+  return false;
+}
+
 function isPrivateName(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
   if (nodeType === "PrivateName") {
+    if (typeof opts === "undefined") {
+      return true;
+    } else {
+      return (0, _shallowEqual.default)(node, opts);
+    }
+  }
+
+  return false;
+}
+
+function isBigIntLiteral(node, opts) {
+  if (!node) return false;
+  const nodeType = node.type;
+
+  if (nodeType === "BigIntLiteral") {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -12028,21 +11754,6 @@ function isTupleExpression(node, opts) {
   const nodeType = node.type;
 
   if (nodeType === "TupleExpression") {
-    if (typeof opts === "undefined") {
-      return true;
-    } else {
-      return (0, _shallowEqual.default)(node, opts);
-    }
-  }
-
-  return false;
-}
-
-function isDecimalLiteral(node, opts) {
-  if (!node) return false;
-  const nodeType = node.type;
-
-  if (nodeType === "DecimalLiteral") {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -12533,21 +12244,6 @@ function isTSRestType(node, opts) {
   return false;
 }
 
-function isTSNamedTupleMember(node, opts) {
-  if (!node) return false;
-  const nodeType = node.type;
-
-  if (nodeType === "TSNamedTupleMember") {
-    if (typeof opts === "undefined") {
-      return true;
-    } else {
-      return (0, _shallowEqual.default)(node, opts);
-    }
-  }
-
-  return false;
-}
-
 function isTSUnionType(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
@@ -12987,7 +12683,7 @@ function isExpression(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if (nodeType === "Expression" || "ArrayExpression" === nodeType || "AssignmentExpression" === nodeType || "BinaryExpression" === nodeType || "CallExpression" === nodeType || "ConditionalExpression" === nodeType || "FunctionExpression" === nodeType || "Identifier" === nodeType || "StringLiteral" === nodeType || "NumericLiteral" === nodeType || "NullLiteral" === nodeType || "BooleanLiteral" === nodeType || "RegExpLiteral" === nodeType || "LogicalExpression" === nodeType || "MemberExpression" === nodeType || "NewExpression" === nodeType || "ObjectExpression" === nodeType || "SequenceExpression" === nodeType || "ParenthesizedExpression" === nodeType || "ThisExpression" === nodeType || "UnaryExpression" === nodeType || "UpdateExpression" === nodeType || "ArrowFunctionExpression" === nodeType || "ClassExpression" === nodeType || "MetaProperty" === nodeType || "Super" === nodeType || "TaggedTemplateExpression" === nodeType || "TemplateLiteral" === nodeType || "YieldExpression" === nodeType || "AwaitExpression" === nodeType || "Import" === nodeType || "BigIntLiteral" === nodeType || "OptionalMemberExpression" === nodeType || "OptionalCallExpression" === nodeType || "TypeCastExpression" === nodeType || "JSXElement" === nodeType || "JSXFragment" === nodeType || "BindExpression" === nodeType || "PipelinePrimaryTopicReference" === nodeType || "DoExpression" === nodeType || "RecordExpression" === nodeType || "TupleExpression" === nodeType || "DecimalLiteral" === nodeType || "TSAsExpression" === nodeType || "TSTypeAssertion" === nodeType || "TSNonNullExpression" === nodeType || nodeType === "Placeholder" && ("Expression" === node.expectedNode || "Identifier" === node.expectedNode || "StringLiteral" === node.expectedNode)) {
+  if (nodeType === "Expression" || "ArrayExpression" === nodeType || "AssignmentExpression" === nodeType || "BinaryExpression" === nodeType || "CallExpression" === nodeType || "ConditionalExpression" === nodeType || "FunctionExpression" === nodeType || "Identifier" === nodeType || "StringLiteral" === nodeType || "NumericLiteral" === nodeType || "NullLiteral" === nodeType || "BooleanLiteral" === nodeType || "RegExpLiteral" === nodeType || "LogicalExpression" === nodeType || "MemberExpression" === nodeType || "NewExpression" === nodeType || "ObjectExpression" === nodeType || "SequenceExpression" === nodeType || "ParenthesizedExpression" === nodeType || "ThisExpression" === nodeType || "UnaryExpression" === nodeType || "UpdateExpression" === nodeType || "ArrowFunctionExpression" === nodeType || "ClassExpression" === nodeType || "MetaProperty" === nodeType || "Super" === nodeType || "TaggedTemplateExpression" === nodeType || "TemplateLiteral" === nodeType || "YieldExpression" === nodeType || "TypeCastExpression" === nodeType || "JSXElement" === nodeType || "JSXFragment" === nodeType || "AwaitExpression" === nodeType || "BindExpression" === nodeType || "OptionalMemberExpression" === nodeType || "PipelinePrimaryTopicReference" === nodeType || "OptionalCallExpression" === nodeType || "Import" === nodeType || "DoExpression" === nodeType || "BigIntLiteral" === nodeType || "RecordExpression" === nodeType || "TupleExpression" === nodeType || "TSAsExpression" === nodeType || "TSTypeAssertion" === nodeType || "TSNonNullExpression" === nodeType || nodeType === "Placeholder" && ("Expression" === node.expectedNode || "Identifier" === node.expectedNode || "StringLiteral" === node.expectedNode)) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -13227,7 +12923,7 @@ function isPureish(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if (nodeType === "Pureish" || "FunctionDeclaration" === nodeType || "FunctionExpression" === nodeType || "StringLiteral" === nodeType || "NumericLiteral" === nodeType || "NullLiteral" === nodeType || "BooleanLiteral" === nodeType || "RegExpLiteral" === nodeType || "ArrowFunctionExpression" === nodeType || "BigIntLiteral" === nodeType || "DecimalLiteral" === nodeType || nodeType === "Placeholder" && "StringLiteral" === node.expectedNode) {
+  if (nodeType === "Pureish" || "FunctionDeclaration" === nodeType || "FunctionExpression" === nodeType || "StringLiteral" === nodeType || "NumericLiteral" === nodeType || "NullLiteral" === nodeType || "BooleanLiteral" === nodeType || "RegExpLiteral" === nodeType || "ArrowFunctionExpression" === nodeType || "BigIntLiteral" === nodeType || nodeType === "Placeholder" && "StringLiteral" === node.expectedNode) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -13302,7 +12998,7 @@ function isLiteral(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if (nodeType === "Literal" || "StringLiteral" === nodeType || "NumericLiteral" === nodeType || "NullLiteral" === nodeType || "BooleanLiteral" === nodeType || "RegExpLiteral" === nodeType || "TemplateLiteral" === nodeType || "BigIntLiteral" === nodeType || "DecimalLiteral" === nodeType || nodeType === "Placeholder" && "StringLiteral" === node.expectedNode) {
+  if (nodeType === "Literal" || "StringLiteral" === nodeType || "NumericLiteral" === nodeType || "NullLiteral" === nodeType || "BooleanLiteral" === nodeType || "RegExpLiteral" === nodeType || "TemplateLiteral" === nodeType || "BigIntLiteral" === nodeType || nodeType === "Placeholder" && "StringLiteral" === node.expectedNode) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -13317,7 +13013,7 @@ function isImmutable(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if (nodeType === "Immutable" || "StringLiteral" === nodeType || "NumericLiteral" === nodeType || "NullLiteral" === nodeType || "BooleanLiteral" === nodeType || "BigIntLiteral" === nodeType || "JSXAttribute" === nodeType || "JSXClosingElement" === nodeType || "JSXElement" === nodeType || "JSXExpressionContainer" === nodeType || "JSXSpreadChild" === nodeType || "JSXOpeningElement" === nodeType || "JSXText" === nodeType || "JSXFragment" === nodeType || "JSXOpeningFragment" === nodeType || "JSXClosingFragment" === nodeType || "DecimalLiteral" === nodeType || nodeType === "Placeholder" && "StringLiteral" === node.expectedNode) {
+  if (nodeType === "Immutable" || "StringLiteral" === nodeType || "NumericLiteral" === nodeType || "NullLiteral" === nodeType || "BooleanLiteral" === nodeType || "JSXAttribute" === nodeType || "JSXClosingElement" === nodeType || "JSXElement" === nodeType || "JSXExpressionContainer" === nodeType || "JSXSpreadChild" === nodeType || "JSXOpeningElement" === nodeType || "JSXText" === nodeType || "JSXFragment" === nodeType || "JSXOpeningFragment" === nodeType || "JSXClosingFragment" === nodeType || "BigIntLiteral" === nodeType || nodeType === "Placeholder" && "StringLiteral" === node.expectedNode) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -13467,7 +13163,7 @@ function isModuleSpecifier(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if (nodeType === "ModuleSpecifier" || "ExportSpecifier" === nodeType || "ImportDefaultSpecifier" === nodeType || "ImportNamespaceSpecifier" === nodeType || "ImportSpecifier" === nodeType || "ExportNamespaceSpecifier" === nodeType || "ExportDefaultSpecifier" === nodeType) {
+  if (nodeType === "ModuleSpecifier" || "ExportSpecifier" === nodeType || "ImportDefaultSpecifier" === nodeType || "ImportNamespaceSpecifier" === nodeType || "ImportSpecifier" === nodeType || "ExportDefaultSpecifier" === nodeType || "ExportNamespaceSpecifier" === nodeType) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -13633,21 +13329,6 @@ function isTSType(node, opts) {
   const nodeType = node.type;
 
   if (nodeType === "TSType" || "TSAnyKeyword" === nodeType || "TSBooleanKeyword" === nodeType || "TSBigIntKeyword" === nodeType || "TSNeverKeyword" === nodeType || "TSNullKeyword" === nodeType || "TSNumberKeyword" === nodeType || "TSObjectKeyword" === nodeType || "TSStringKeyword" === nodeType || "TSSymbolKeyword" === nodeType || "TSUndefinedKeyword" === nodeType || "TSUnknownKeyword" === nodeType || "TSVoidKeyword" === nodeType || "TSThisType" === nodeType || "TSFunctionType" === nodeType || "TSConstructorType" === nodeType || "TSTypeReference" === nodeType || "TSTypePredicate" === nodeType || "TSTypeQuery" === nodeType || "TSTypeLiteral" === nodeType || "TSArrayType" === nodeType || "TSTupleType" === nodeType || "TSOptionalType" === nodeType || "TSRestType" === nodeType || "TSUnionType" === nodeType || "TSIntersectionType" === nodeType || "TSConditionalType" === nodeType || "TSInferType" === nodeType || "TSParenthesizedType" === nodeType || "TSTypeOperator" === nodeType || "TSIndexedAccessType" === nodeType || "TSMappedType" === nodeType || "TSLiteralType" === nodeType || "TSExpressionWithTypeArguments" === nodeType || "TSImportType" === nodeType) {
-    if (typeof opts === "undefined") {
-      return true;
-    } else {
-      return (0, _shallowEqual.default)(node, opts);
-    }
-  }
-
-  return false;
-}
-
-function isTSBaseType(node, opts) {
-  if (!node) return false;
-  const nodeType = node.type;
-
-  if (nodeType === "TSBaseType" || "TSAnyKeyword" === nodeType || "TSBooleanKeyword" === nodeType || "TSBigIntKeyword" === nodeType || "TSNeverKeyword" === nodeType || "TSNullKeyword" === nodeType || "TSNumberKeyword" === nodeType || "TSObjectKeyword" === nodeType || "TSStringKeyword" === nodeType || "TSSymbolKeyword" === nodeType || "TSUndefinedKeyword" === nodeType || "TSUnknownKeyword" === nodeType || "TSVoidKeyword" === nodeType || "TSThisType" === nodeType || "TSLiteralType" === nodeType) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -13984,7 +13665,7 @@ function isNodesEquivalent(a, b) {
       continue;
     }
 
-    if (typeof a[field] === "object" && !(visitorKeys == null ? void 0 : visitorKeys.includes(field))) {
+    if (typeof a[field] === "object" && (!visitorKeys || !visitorKeys.includes(field))) {
       for (const key of Object.keys(a[field])) {
         if (a[field][key] !== b[field][key]) {
           return false;
@@ -14475,7 +14156,7 @@ function validate(node, key, val) {
 }
 
 function validateField(node, key, val, field) {
-  if (!(field == null ? void 0 : field.validate)) return;
+  if (!field || !field.validate) return;
   if (field.optional && val == null) return;
   field.validate(node, key, val);
 }
@@ -16548,7 +16229,7 @@ module.exports = invariant;
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
- * jQuery JavaScript Library v3.5.1
+ * jQuery JavaScript Library v3.4.1
  * https://jquery.com/
  *
  * Includes Sizzle.js
@@ -16558,7 +16239,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
  * Released under the MIT license
  * https://jquery.org/license
  *
- * Date: 2020-05-04T22:49Z
+ * Date: 2019-05-01T21:04Z
  */
 ( function( global, factory ) {
 
@@ -16596,16 +16277,13 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 var arr = [];
 
+var document = window.document;
+
 var getProto = Object.getPrototypeOf;
 
 var slice = arr.slice;
 
-var flat = arr.flat ? function( array ) {
-	return arr.flat.call( array );
-} : function( array ) {
-	return arr.concat.apply( [], array );
-};
-
+var concat = arr.concat;
 
 var push = arr.push;
 
@@ -16637,8 +16315,6 @@ var isWindow = function isWindow( obj ) {
 		return obj != null && obj === obj.window;
 	};
 
-
-var document = window.document;
 
 
 
@@ -16696,7 +16372,7 @@ function toType( obj ) {
 
 
 var
-	version = "3.5.1",
+	version = "3.4.1",
 
 	// Define a local copy of jQuery
 	jQuery = function( selector, context ) {
@@ -16704,7 +16380,11 @@ var
 		// The jQuery object is actually just the init constructor 'enhanced'
 		// Need init if jQuery is called (just allow error to be thrown if not included)
 		return new jQuery.fn.init( selector, context );
-	};
+	},
+
+	// Support: Android <=4.0 only
+	// Make sure we trim BOM and NBSP
+	rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
 
 jQuery.fn = jQuery.prototype = {
 
@@ -16768,18 +16448,6 @@ jQuery.fn = jQuery.prototype = {
 
 	last: function() {
 		return this.eq( -1 );
-	},
-
-	even: function() {
-		return this.pushStack( jQuery.grep( this, function( _elem, i ) {
-			return ( i + 1 ) % 2;
-		} ) );
-	},
-
-	odd: function() {
-		return this.pushStack( jQuery.grep( this, function( _elem, i ) {
-			return i % 2;
-		} ) );
 	},
 
 	eq: function( i ) {
@@ -16915,10 +16583,9 @@ jQuery.extend( {
 		return true;
 	},
 
-	// Evaluates a script in a provided context; falls back to the global one
-	// if not specified.
-	globalEval: function( code, options, doc ) {
-		DOMEval( code, { nonce: options && options.nonce }, doc );
+	// Evaluates a script in a global context
+	globalEval: function( code, options ) {
+		DOMEval( code, { nonce: options && options.nonce } );
 	},
 
 	each: function( obj, callback ) {
@@ -16940,6 +16607,13 @@ jQuery.extend( {
 		}
 
 		return obj;
+	},
+
+	// Support: Android <=4.0 only
+	trim: function( text ) {
+		return text == null ?
+			"" :
+			( text + "" ).replace( rtrim, "" );
 	},
 
 	// results is for internal usage only
@@ -17028,7 +16702,7 @@ jQuery.extend( {
 		}
 
 		// Flatten any nested arrays
-		return flat( ret );
+		return concat.apply( [], ret );
 	},
 
 	// A global GUID counter for objects
@@ -17045,7 +16719,7 @@ if ( typeof Symbol === "function" ) {
 
 // Populate the class2type map
 jQuery.each( "Boolean Number String Function Array Date RegExp Object Error Symbol".split( " " ),
-function( _i, name ) {
+function( i, name ) {
 	class2type[ "[object " + name + "]" ] = name.toLowerCase();
 } );
 
@@ -17067,16 +16741,17 @@ function isArrayLike( obj ) {
 }
 var Sizzle =
 /*!
- * Sizzle CSS Selector Engine v2.3.5
+ * Sizzle CSS Selector Engine v2.3.4
  * https://sizzlejs.com/
  *
  * Copyright JS Foundation and other contributors
  * Released under the MIT license
  * https://js.foundation/
  *
- * Date: 2020-03-14
+ * Date: 2019-04-08
  */
-( function( window ) {
+(function( window ) {
+
 var i,
 	support,
 	Expr,
@@ -17116,70 +16791,59 @@ var i,
 	},
 
 	// Instance methods
-	hasOwn = ( {} ).hasOwnProperty,
+	hasOwn = ({}).hasOwnProperty,
 	arr = [],
 	pop = arr.pop,
-	pushNative = arr.push,
+	push_native = arr.push,
 	push = arr.push,
 	slice = arr.slice,
-
 	// Use a stripped-down indexOf as it's faster than native
 	// https://jsperf.com/thor-indexof-vs-for/5
 	indexOf = function( list, elem ) {
 		var i = 0,
 			len = list.length;
 		for ( ; i < len; i++ ) {
-			if ( list[ i ] === elem ) {
+			if ( list[i] === elem ) {
 				return i;
 			}
 		}
 		return -1;
 	},
 
-	booleans = "checked|selected|async|autofocus|autoplay|controls|defer|disabled|hidden|" +
-		"ismap|loop|multiple|open|readonly|required|scoped",
+	booleans = "checked|selected|async|autofocus|autoplay|controls|defer|disabled|hidden|ismap|loop|multiple|open|readonly|required|scoped",
 
 	// Regular expressions
 
 	// http://www.w3.org/TR/css3-selectors/#whitespace
 	whitespace = "[\\x20\\t\\r\\n\\f]",
 
-	// https://www.w3.org/TR/css-syntax-3/#ident-token-diagram
-	identifier = "(?:\\\\[\\da-fA-F]{1,6}" + whitespace +
-		"?|\\\\[^\\r\\n\\f]|[\\w-]|[^\0-\\x7f])+",
+	// http://www.w3.org/TR/CSS21/syndata.html#value-def-identifier
+	identifier = "(?:\\\\.|[\\w-]|[^\0-\\xa0])+",
 
 	// Attribute selectors: http://www.w3.org/TR/selectors/#attribute-selectors
 	attributes = "\\[" + whitespace + "*(" + identifier + ")(?:" + whitespace +
-
 		// Operator (capture 2)
 		"*([*^$|!~]?=)" + whitespace +
-
-		// "Attribute values must be CSS identifiers [capture 5]
-		// or strings [capture 3 or capture 4]"
-		"*(?:'((?:\\\\.|[^\\\\'])*)'|\"((?:\\\\.|[^\\\\\"])*)\"|(" + identifier + "))|)" +
-		whitespace + "*\\]",
+		// "Attribute values must be CSS identifiers [capture 5] or strings [capture 3 or capture 4]"
+		"*(?:'((?:\\\\.|[^\\\\'])*)'|\"((?:\\\\.|[^\\\\\"])*)\"|(" + identifier + "))|)" + whitespace +
+		"*\\]",
 
 	pseudos = ":(" + identifier + ")(?:\\((" +
-
 		// To reduce the number of selectors needing tokenize in the preFilter, prefer arguments:
 		// 1. quoted (capture 3; capture 4 or capture 5)
 		"('((?:\\\\.|[^\\\\'])*)'|\"((?:\\\\.|[^\\\\\"])*)\")|" +
-
 		// 2. simple (capture 6)
 		"((?:\\\\.|[^\\\\()[\\]]|" + attributes + ")*)|" +
-
 		// 3. anything else (capture 2)
 		".*" +
 		")\\)|)",
 
 	// Leading and non-escaped trailing whitespace, capturing some non-whitespace characters preceding the latter
 	rwhitespace = new RegExp( whitespace + "+", "g" ),
-	rtrim = new RegExp( "^" + whitespace + "+|((?:^|[^\\\\])(?:\\\\.)*)" +
-		whitespace + "+$", "g" ),
+	rtrim = new RegExp( "^" + whitespace + "+|((?:^|[^\\\\])(?:\\\\.)*)" + whitespace + "+$", "g" ),
 
 	rcomma = new RegExp( "^" + whitespace + "*," + whitespace + "*" ),
-	rcombinators = new RegExp( "^" + whitespace + "*([>+~]|" + whitespace + ")" + whitespace +
-		"*" ),
+	rcombinators = new RegExp( "^" + whitespace + "*([>+~]|" + whitespace + ")" + whitespace + "*" ),
 	rdescend = new RegExp( whitespace + "|>" ),
 
 	rpseudo = new RegExp( pseudos ),
@@ -17191,16 +16855,14 @@ var i,
 		"TAG": new RegExp( "^(" + identifier + "|[*])" ),
 		"ATTR": new RegExp( "^" + attributes ),
 		"PSEUDO": new RegExp( "^" + pseudos ),
-		"CHILD": new RegExp( "^:(only|first|last|nth|nth-last)-(child|of-type)(?:\\(" +
-			whitespace + "*(even|odd|(([+-]|)(\\d*)n|)" + whitespace + "*(?:([+-]|)" +
-			whitespace + "*(\\d+)|))" + whitespace + "*\\)|)", "i" ),
+		"CHILD": new RegExp( "^:(only|first|last|nth|nth-last)-(child|of-type)(?:\\(" + whitespace +
+			"*(even|odd|(([+-]|)(\\d*)n|)" + whitespace + "*(?:([+-]|)" + whitespace +
+			"*(\\d+)|))" + whitespace + "*\\)|)", "i" ),
 		"bool": new RegExp( "^(?:" + booleans + ")$", "i" ),
-
 		// For use in libraries implementing .is()
 		// We use this for POS matching in `select`
-		"needsContext": new RegExp( "^" + whitespace +
-			"*[>+~]|:(even|odd|eq|gt|lt|nth|first|last)(?:\\(" + whitespace +
-			"*((?:-\\d)?\\d*)" + whitespace + "*\\)|)(?=[^-]|$)", "i" )
+		"needsContext": new RegExp( "^" + whitespace + "*[>+~]|:(even|odd|eq|gt|lt|nth|first|last)(?:\\(" +
+			whitespace + "*((?:-\\d)?\\d*)" + whitespace + "*\\)|)(?=[^-]|$)", "i" )
 	},
 
 	rhtml = /HTML$/i,
@@ -17216,21 +16878,18 @@ var i,
 
 	// CSS escapes
 	// http://www.w3.org/TR/CSS21/syndata.html#escaped-characters
-	runescape = new RegExp( "\\\\[\\da-fA-F]{1,6}" + whitespace + "?|\\\\([^\\r\\n\\f])", "g" ),
-	funescape = function( escape, nonHex ) {
-		var high = "0x" + escape.slice( 1 ) - 0x10000;
-
-		return nonHex ?
-
-			// Strip the backslash prefix from a non-hex escape sequence
-			nonHex :
-
-			// Replace a hexadecimal escape sequence with the encoded Unicode code point
-			// Support: IE <=11+
-			// For values outside the Basic Multilingual Plane (BMP), manually construct a
-			// surrogate pair
+	runescape = new RegExp( "\\\\([\\da-f]{1,6}" + whitespace + "?|(" + whitespace + ")|.)", "ig" ),
+	funescape = function( _, escaped, escapedWhitespace ) {
+		var high = "0x" + escaped - 0x10000;
+		// NaN means non-codepoint
+		// Support: Firefox<24
+		// Workaround erroneous numeric interpretation of +"0x"
+		return high !== high || escapedWhitespace ?
+			escaped :
 			high < 0 ?
+				// BMP codepoint
 				String.fromCharCode( high + 0x10000 ) :
+				// Supplemental Plane codepoint (surrogate pair)
 				String.fromCharCode( high >> 10 | 0xD800, high & 0x3FF | 0xDC00 );
 	},
 
@@ -17246,8 +16905,7 @@ var i,
 			}
 
 			// Control characters and (dependent upon position) numbers get escaped as code points
-			return ch.slice( 0, -1 ) + "\\" +
-				ch.charCodeAt( ch.length - 1 ).toString( 16 ) + " ";
+			return ch.slice( 0, -1 ) + "\\" + ch.charCodeAt( ch.length - 1 ).toString( 16 ) + " ";
 		}
 
 		// Other potentially-special ASCII characters get backslash-escaped
@@ -17272,20 +16930,18 @@ var i,
 // Optimize for push.apply( _, NodeList )
 try {
 	push.apply(
-		( arr = slice.call( preferredDoc.childNodes ) ),
+		(arr = slice.call( preferredDoc.childNodes )),
 		preferredDoc.childNodes
 	);
-
 	// Support: Android<4.0
 	// Detect silently failing push.apply
-	// eslint-disable-next-line no-unused-expressions
 	arr[ preferredDoc.childNodes.length ].nodeType;
 } catch ( e ) {
 	push = { apply: arr.length ?
 
 		// Leverage slice if possible
 		function( target, els ) {
-			pushNative.apply( target, slice.call( els ) );
+			push_native.apply( target, slice.call(els) );
 		} :
 
 		// Support: IE<9
@@ -17293,9 +16949,8 @@ try {
 		function( target, els ) {
 			var j = target.length,
 				i = 0;
-
 			// Can't trust NodeList.length
-			while ( ( target[ j++ ] = els[ i++ ] ) ) {}
+			while ( (target[j++] = els[i++]) ) {}
 			target.length = j - 1;
 		}
 	};
@@ -17319,21 +16974,24 @@ function Sizzle( selector, context, results, seed ) {
 
 	// Try to shortcut find operations (as opposed to filters) in HTML documents
 	if ( !seed ) {
-		setDocument( context );
+
+		if ( ( context ? context.ownerDocument || context : preferredDoc ) !== document ) {
+			setDocument( context );
+		}
 		context = context || document;
 
 		if ( documentIsHTML ) {
 
 			// If the selector is sufficiently simple, try using a "get*By*" DOM method
 			// (excepting DocumentFragment context, where the methods don't exist)
-			if ( nodeType !== 11 && ( match = rquickExpr.exec( selector ) ) ) {
+			if ( nodeType !== 11 && (match = rquickExpr.exec( selector )) ) {
 
 				// ID selector
-				if ( ( m = match[ 1 ] ) ) {
+				if ( (m = match[1]) ) {
 
 					// Document context
 					if ( nodeType === 9 ) {
-						if ( ( elem = context.getElementById( m ) ) ) {
+						if ( (elem = context.getElementById( m )) ) {
 
 							// Support: IE, Opera, Webkit
 							// TODO: identify versions
@@ -17352,7 +17010,7 @@ function Sizzle( selector, context, results, seed ) {
 						// Support: IE, Opera, Webkit
 						// TODO: identify versions
 						// getElementById can match elements by name instead of ID
-						if ( newContext && ( elem = newContext.getElementById( m ) ) &&
+						if ( newContext && (elem = newContext.getElementById( m )) &&
 							contains( context, elem ) &&
 							elem.id === m ) {
 
@@ -17362,12 +17020,12 @@ function Sizzle( selector, context, results, seed ) {
 					}
 
 				// Type selector
-				} else if ( match[ 2 ] ) {
+				} else if ( match[2] ) {
 					push.apply( results, context.getElementsByTagName( selector ) );
 					return results;
 
 				// Class selector
-				} else if ( ( m = match[ 3 ] ) && support.getElementsByClassName &&
+				} else if ( (m = match[3]) && support.getElementsByClassName &&
 					context.getElementsByClassName ) {
 
 					push.apply( results, context.getElementsByClassName( m ) );
@@ -17378,11 +17036,11 @@ function Sizzle( selector, context, results, seed ) {
 			// Take advantage of querySelectorAll
 			if ( support.qsa &&
 				!nonnativeSelectorCache[ selector + " " ] &&
-				( !rbuggyQSA || !rbuggyQSA.test( selector ) ) &&
+				(!rbuggyQSA || !rbuggyQSA.test( selector )) &&
 
 				// Support: IE 8 only
 				// Exclude object elements
-				( nodeType !== 1 || context.nodeName.toLowerCase() !== "object" ) ) {
+				(nodeType !== 1 || context.nodeName.toLowerCase() !== "object") ) {
 
 				newSelector = selector;
 				newContext = context;
@@ -17391,36 +17049,27 @@ function Sizzle( selector, context, results, seed ) {
 				// descendant combinators, which is not what we want.
 				// In such cases, we work around the behavior by prefixing every selector in the
 				// list with an ID selector referencing the scope context.
-				// The technique has to be used as well when a leading combinator is used
-				// as such selectors are not recognized by querySelectorAll.
 				// Thanks to Andrew Dupont for this technique.
-				if ( nodeType === 1 &&
-					( rdescend.test( selector ) || rcombinators.test( selector ) ) ) {
+				if ( nodeType === 1 && rdescend.test( selector ) ) {
 
-					// Expand context for sibling selectors
-					newContext = rsibling.test( selector ) && testContext( context.parentNode ) ||
-						context;
-
-					// We can use :scope instead of the ID hack if the browser
-					// supports it & if we're not changing the context.
-					if ( newContext !== context || !support.scope ) {
-
-						// Capture the context ID, setting it first if necessary
-						if ( ( nid = context.getAttribute( "id" ) ) ) {
-							nid = nid.replace( rcssescape, fcssescape );
-						} else {
-							context.setAttribute( "id", ( nid = expando ) );
-						}
+					// Capture the context ID, setting it first if necessary
+					if ( (nid = context.getAttribute( "id" )) ) {
+						nid = nid.replace( rcssescape, fcssescape );
+					} else {
+						context.setAttribute( "id", (nid = expando) );
 					}
 
 					// Prefix every selector in the list
 					groups = tokenize( selector );
 					i = groups.length;
 					while ( i-- ) {
-						groups[ i ] = ( nid ? "#" + nid : ":scope" ) + " " +
-							toSelector( groups[ i ] );
+						groups[i] = "#" + nid + " " + toSelector( groups[i] );
 					}
 					newSelector = groups.join( "," );
+
+					// Expand context for sibling selectors
+					newContext = rsibling.test( selector ) && testContext( context.parentNode ) ||
+						context;
 				}
 
 				try {
@@ -17453,14 +17102,12 @@ function createCache() {
 	var keys = [];
 
 	function cache( key, value ) {
-
 		// Use (key + " ") to avoid collision with native prototype properties (see Issue #157)
 		if ( keys.push( key + " " ) > Expr.cacheLength ) {
-
 			// Only keep the most recent entries
 			delete cache[ keys.shift() ];
 		}
-		return ( cache[ key + " " ] = value );
+		return (cache[ key + " " ] = value);
 	}
 	return cache;
 }
@@ -17479,19 +17126,17 @@ function markFunction( fn ) {
  * @param {Function} fn Passed the created element and returns a boolean result
  */
 function assert( fn ) {
-	var el = document.createElement( "fieldset" );
+	var el = document.createElement("fieldset");
 
 	try {
 		return !!fn( el );
-	} catch ( e ) {
+	} catch (e) {
 		return false;
 	} finally {
-
 		// Remove from its parent by default
 		if ( el.parentNode ) {
 			el.parentNode.removeChild( el );
 		}
-
 		// release memory in IE
 		el = null;
 	}
@@ -17503,11 +17148,11 @@ function assert( fn ) {
  * @param {Function} handler The method that will be applied
  */
 function addHandle( attrs, handler ) {
-	var arr = attrs.split( "|" ),
+	var arr = attrs.split("|"),
 		i = arr.length;
 
 	while ( i-- ) {
-		Expr.attrHandle[ arr[ i ] ] = handler;
+		Expr.attrHandle[ arr[i] ] = handler;
 	}
 }
 
@@ -17529,7 +17174,7 @@ function siblingCheck( a, b ) {
 
 	// Check if b follows a
 	if ( cur ) {
-		while ( ( cur = cur.nextSibling ) ) {
+		while ( (cur = cur.nextSibling) ) {
 			if ( cur === b ) {
 				return -1;
 			}
@@ -17557,7 +17202,7 @@ function createInputPseudo( type ) {
 function createButtonPseudo( type ) {
 	return function( elem ) {
 		var name = elem.nodeName.toLowerCase();
-		return ( name === "input" || name === "button" ) && elem.type === type;
+		return (name === "input" || name === "button") && elem.type === type;
 	};
 }
 
@@ -17600,7 +17245,7 @@ function createDisabledPseudo( disabled ) {
 					// Where there is no isDisabled, check manually
 					/* jshint -W018 */
 					elem.isDisabled !== !disabled &&
-					inDisabledFieldset( elem ) === disabled;
+						inDisabledFieldset( elem ) === disabled;
 			}
 
 			return elem.disabled === disabled;
@@ -17622,21 +17267,21 @@ function createDisabledPseudo( disabled ) {
  * @param {Function} fn
  */
 function createPositionalPseudo( fn ) {
-	return markFunction( function( argument ) {
+	return markFunction(function( argument ) {
 		argument = +argument;
-		return markFunction( function( seed, matches ) {
+		return markFunction(function( seed, matches ) {
 			var j,
 				matchIndexes = fn( [], seed.length, argument ),
 				i = matchIndexes.length;
 
 			// Match elements found at the specified indexes
 			while ( i-- ) {
-				if ( seed[ ( j = matchIndexes[ i ] ) ] ) {
-					seed[ j ] = !( matches[ j ] = seed[ j ] );
+				if ( seed[ (j = matchIndexes[i]) ] ) {
+					seed[j] = !(matches[j] = seed[j]);
 				}
 			}
-		} );
-	} );
+		});
+	});
 }
 
 /**
@@ -17658,7 +17303,7 @@ support = Sizzle.support = {};
  */
 isXML = Sizzle.isXML = function( elem ) {
 	var namespace = elem.namespaceURI,
-		docElem = ( elem.ownerDocument || elem ).documentElement;
+		docElem = (elem.ownerDocument || elem).documentElement;
 
 	// Support: IE <=8
 	// Assume HTML when documentElement doesn't yet exist, such as inside loading iframes
@@ -17676,11 +17321,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 		doc = node ? node.ownerDocument || node : preferredDoc;
 
 	// Return early if doc is invalid or already selected
-	// Support: IE 11+, Edge 17 - 18+
-	// IE/Edge sometimes throw a "Permission denied" error when strict-comparing
-	// two documents; shallow comparisons work.
-	// eslint-disable-next-line eqeqeq
-	if ( doc == document || doc.nodeType !== 9 || !doc.documentElement ) {
+	if ( doc === document || doc.nodeType !== 9 || !doc.documentElement ) {
 		return document;
 	}
 
@@ -17689,14 +17330,10 @@ setDocument = Sizzle.setDocument = function( node ) {
 	docElem = document.documentElement;
 	documentIsHTML = !isXML( document );
 
-	// Support: IE 9 - 11+, Edge 12 - 18+
+	// Support: IE 9-11, Edge
 	// Accessing iframe documents after unload throws "permission denied" errors (jQuery #13936)
-	// Support: IE 11+, Edge 17 - 18+
-	// IE/Edge sometimes throw a "Permission denied" error when strict-comparing
-	// two documents; shallow comparisons work.
-	// eslint-disable-next-line eqeqeq
-	if ( preferredDoc != document &&
-		( subWindow = document.defaultView ) && subWindow.top !== subWindow ) {
+	if ( preferredDoc !== document &&
+		(subWindow = document.defaultView) && subWindow.top !== subWindow ) {
 
 		// Support: IE 11, Edge
 		if ( subWindow.addEventListener ) {
@@ -17708,36 +17345,25 @@ setDocument = Sizzle.setDocument = function( node ) {
 		}
 	}
 
-	// Support: IE 8 - 11+, Edge 12 - 18+, Chrome <=16 - 25 only, Firefox <=3.6 - 31 only,
-	// Safari 4 - 5 only, Opera <=11.6 - 12.x only
-	// IE/Edge & older browsers don't support the :scope pseudo-class.
-	// Support: Safari 6.0 only
-	// Safari 6.0 supports :scope but it's an alias of :root there.
-	support.scope = assert( function( el ) {
-		docElem.appendChild( el ).appendChild( document.createElement( "div" ) );
-		return typeof el.querySelectorAll !== "undefined" &&
-			!el.querySelectorAll( ":scope fieldset div" ).length;
-	} );
-
 	/* Attributes
 	---------------------------------------------------------------------- */
 
 	// Support: IE<8
 	// Verify that getAttribute really returns attributes and not properties
 	// (excepting IE8 booleans)
-	support.attributes = assert( function( el ) {
+	support.attributes = assert(function( el ) {
 		el.className = "i";
-		return !el.getAttribute( "className" );
-	} );
+		return !el.getAttribute("className");
+	});
 
 	/* getElement(s)By*
 	---------------------------------------------------------------------- */
 
 	// Check if getElementsByTagName("*") returns only elements
-	support.getElementsByTagName = assert( function( el ) {
-		el.appendChild( document.createComment( "" ) );
-		return !el.getElementsByTagName( "*" ).length;
-	} );
+	support.getElementsByTagName = assert(function( el ) {
+		el.appendChild( document.createComment("") );
+		return !el.getElementsByTagName("*").length;
+	});
 
 	// Support: IE<9
 	support.getElementsByClassName = rnative.test( document.getElementsByClassName );
@@ -17746,38 +17372,38 @@ setDocument = Sizzle.setDocument = function( node ) {
 	// Check if getElementById returns elements by name
 	// The broken getElementById methods don't pick up programmatically-set names,
 	// so use a roundabout getElementsByName test
-	support.getById = assert( function( el ) {
+	support.getById = assert(function( el ) {
 		docElem.appendChild( el ).id = expando;
 		return !document.getElementsByName || !document.getElementsByName( expando ).length;
-	} );
+	});
 
 	// ID filter and find
 	if ( support.getById ) {
-		Expr.filter[ "ID" ] = function( id ) {
+		Expr.filter["ID"] = function( id ) {
 			var attrId = id.replace( runescape, funescape );
 			return function( elem ) {
-				return elem.getAttribute( "id" ) === attrId;
+				return elem.getAttribute("id") === attrId;
 			};
 		};
-		Expr.find[ "ID" ] = function( id, context ) {
+		Expr.find["ID"] = function( id, context ) {
 			if ( typeof context.getElementById !== "undefined" && documentIsHTML ) {
 				var elem = context.getElementById( id );
 				return elem ? [ elem ] : [];
 			}
 		};
 	} else {
-		Expr.filter[ "ID" ] =  function( id ) {
+		Expr.filter["ID"] =  function( id ) {
 			var attrId = id.replace( runescape, funescape );
 			return function( elem ) {
 				var node = typeof elem.getAttributeNode !== "undefined" &&
-					elem.getAttributeNode( "id" );
+					elem.getAttributeNode("id");
 				return node && node.value === attrId;
 			};
 		};
 
 		// Support: IE 6 - 7 only
 		// getElementById is not reliable as a find shortcut
-		Expr.find[ "ID" ] = function( id, context ) {
+		Expr.find["ID"] = function( id, context ) {
 			if ( typeof context.getElementById !== "undefined" && documentIsHTML ) {
 				var node, i, elems,
 					elem = context.getElementById( id );
@@ -17785,7 +17411,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 				if ( elem ) {
 
 					// Verify the id attribute
-					node = elem.getAttributeNode( "id" );
+					node = elem.getAttributeNode("id");
 					if ( node && node.value === id ) {
 						return [ elem ];
 					}
@@ -17793,8 +17419,8 @@ setDocument = Sizzle.setDocument = function( node ) {
 					// Fall back on getElementsByName
 					elems = context.getElementsByName( id );
 					i = 0;
-					while ( ( elem = elems[ i++ ] ) ) {
-						node = elem.getAttributeNode( "id" );
+					while ( (elem = elems[i++]) ) {
+						node = elem.getAttributeNode("id");
 						if ( node && node.value === id ) {
 							return [ elem ];
 						}
@@ -17807,7 +17433,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 	}
 
 	// Tag
-	Expr.find[ "TAG" ] = support.getElementsByTagName ?
+	Expr.find["TAG"] = support.getElementsByTagName ?
 		function( tag, context ) {
 			if ( typeof context.getElementsByTagName !== "undefined" ) {
 				return context.getElementsByTagName( tag );
@@ -17822,13 +17448,12 @@ setDocument = Sizzle.setDocument = function( node ) {
 			var elem,
 				tmp = [],
 				i = 0,
-
 				// By happy coincidence, a (broken) gEBTN appears on DocumentFragment nodes too
 				results = context.getElementsByTagName( tag );
 
 			// Filter out possible comments
 			if ( tag === "*" ) {
-				while ( ( elem = results[ i++ ] ) ) {
+				while ( (elem = results[i++]) ) {
 					if ( elem.nodeType === 1 ) {
 						tmp.push( elem );
 					}
@@ -17840,7 +17465,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 		};
 
 	// Class
-	Expr.find[ "CLASS" ] = support.getElementsByClassName && function( className, context ) {
+	Expr.find["CLASS"] = support.getElementsByClassName && function( className, context ) {
 		if ( typeof context.getElementsByClassName !== "undefined" && documentIsHTML ) {
 			return context.getElementsByClassName( className );
 		}
@@ -17861,14 +17486,10 @@ setDocument = Sizzle.setDocument = function( node ) {
 	// See https://bugs.jquery.com/ticket/13378
 	rbuggyQSA = [];
 
-	if ( ( support.qsa = rnative.test( document.querySelectorAll ) ) ) {
-
+	if ( (support.qsa = rnative.test( document.querySelectorAll )) ) {
 		// Build QSA regex
 		// Regex strategy adopted from Diego Perini
-		assert( function( el ) {
-
-			var input;
-
+		assert(function( el ) {
 			// Select is set to empty string on purpose
 			// This is to test IE's treatment of not explicitly
 			// setting a boolean content attribute,
@@ -17882,98 +17503,78 @@ setDocument = Sizzle.setDocument = function( node ) {
 			// Nothing should be selected when empty strings follow ^= or $= or *=
 			// The test attribute must be unknown in Opera but "safe" for WinRT
 			// https://msdn.microsoft.com/en-us/library/ie/hh465388.aspx#attribute_section
-			if ( el.querySelectorAll( "[msallowcapture^='']" ).length ) {
+			if ( el.querySelectorAll("[msallowcapture^='']").length ) {
 				rbuggyQSA.push( "[*^$]=" + whitespace + "*(?:''|\"\")" );
 			}
 
 			// Support: IE8
 			// Boolean attributes and "value" are not treated correctly
-			if ( !el.querySelectorAll( "[selected]" ).length ) {
+			if ( !el.querySelectorAll("[selected]").length ) {
 				rbuggyQSA.push( "\\[" + whitespace + "*(?:value|" + booleans + ")" );
 			}
 
 			// Support: Chrome<29, Android<4.4, Safari<7.0+, iOS<7.0+, PhantomJS<1.9.8+
 			if ( !el.querySelectorAll( "[id~=" + expando + "-]" ).length ) {
-				rbuggyQSA.push( "~=" );
-			}
-
-			// Support: IE 11+, Edge 15 - 18+
-			// IE 11/Edge don't find elements on a `[name='']` query in some cases.
-			// Adding a temporary attribute to the document before the selection works
-			// around the issue.
-			// Interestingly, IE 10 & older don't seem to have the issue.
-			input = document.createElement( "input" );
-			input.setAttribute( "name", "" );
-			el.appendChild( input );
-			if ( !el.querySelectorAll( "[name='']" ).length ) {
-				rbuggyQSA.push( "\\[" + whitespace + "*name" + whitespace + "*=" +
-					whitespace + "*(?:''|\"\")" );
+				rbuggyQSA.push("~=");
 			}
 
 			// Webkit/Opera - :checked should return selected option elements
 			// http://www.w3.org/TR/2011/REC-css3-selectors-20110929/#checked
 			// IE8 throws error here and will not see later tests
-			if ( !el.querySelectorAll( ":checked" ).length ) {
-				rbuggyQSA.push( ":checked" );
+			if ( !el.querySelectorAll(":checked").length ) {
+				rbuggyQSA.push(":checked");
 			}
 
 			// Support: Safari 8+, iOS 8+
 			// https://bugs.webkit.org/show_bug.cgi?id=136851
 			// In-page `selector#id sibling-combinator selector` fails
 			if ( !el.querySelectorAll( "a#" + expando + "+*" ).length ) {
-				rbuggyQSA.push( ".#.+[+~]" );
+				rbuggyQSA.push(".#.+[+~]");
 			}
+		});
 
-			// Support: Firefox <=3.6 - 5 only
-			// Old Firefox doesn't throw on a badly-escaped identifier.
-			el.querySelectorAll( "\\\f" );
-			rbuggyQSA.push( "[\\r\\n\\f]" );
-		} );
-
-		assert( function( el ) {
+		assert(function( el ) {
 			el.innerHTML = "<a href='' disabled='disabled'></a>" +
 				"<select disabled='disabled'><option/></select>";
 
 			// Support: Windows 8 Native Apps
 			// The type and name attributes are restricted during .innerHTML assignment
-			var input = document.createElement( "input" );
+			var input = document.createElement("input");
 			input.setAttribute( "type", "hidden" );
 			el.appendChild( input ).setAttribute( "name", "D" );
 
 			// Support: IE8
 			// Enforce case-sensitivity of name attribute
-			if ( el.querySelectorAll( "[name=d]" ).length ) {
+			if ( el.querySelectorAll("[name=d]").length ) {
 				rbuggyQSA.push( "name" + whitespace + "*[*^$|!~]?=" );
 			}
 
 			// FF 3.5 - :enabled/:disabled and hidden elements (hidden elements are still enabled)
 			// IE8 throws error here and will not see later tests
-			if ( el.querySelectorAll( ":enabled" ).length !== 2 ) {
+			if ( el.querySelectorAll(":enabled").length !== 2 ) {
 				rbuggyQSA.push( ":enabled", ":disabled" );
 			}
 
 			// Support: IE9-11+
 			// IE's :disabled selector does not pick up the children of disabled fieldsets
 			docElem.appendChild( el ).disabled = true;
-			if ( el.querySelectorAll( ":disabled" ).length !== 2 ) {
+			if ( el.querySelectorAll(":disabled").length !== 2 ) {
 				rbuggyQSA.push( ":enabled", ":disabled" );
 			}
 
-			// Support: Opera 10 - 11 only
 			// Opera 10-11 does not throw on post-comma invalid pseudos
-			el.querySelectorAll( "*,:x" );
-			rbuggyQSA.push( ",.*:" );
-		} );
+			el.querySelectorAll("*,:x");
+			rbuggyQSA.push(",.*:");
+		});
 	}
 
-	if ( ( support.matchesSelector = rnative.test( ( matches = docElem.matches ||
+	if ( (support.matchesSelector = rnative.test( (matches = docElem.matches ||
 		docElem.webkitMatchesSelector ||
 		docElem.mozMatchesSelector ||
 		docElem.oMatchesSelector ||
-		docElem.msMatchesSelector ) ) ) ) {
+		docElem.msMatchesSelector) )) ) {
 
-		assert( function( el ) {
-
+		assert(function( el ) {
 			// Check to see if it's possible to do matchesSelector
 			// on a disconnected node (IE 9)
 			support.disconnectedMatch = matches.call( el, "*" );
@@ -17982,11 +17583,11 @@ setDocument = Sizzle.setDocument = function( node ) {
 			// Gecko does not error, returns false instead
 			matches.call( el, "[s!='']:x" );
 			rbuggyMatches.push( "!=", pseudos );
-		} );
+		});
 	}
 
-	rbuggyQSA = rbuggyQSA.length && new RegExp( rbuggyQSA.join( "|" ) );
-	rbuggyMatches = rbuggyMatches.length && new RegExp( rbuggyMatches.join( "|" ) );
+	rbuggyQSA = rbuggyQSA.length && new RegExp( rbuggyQSA.join("|") );
+	rbuggyMatches = rbuggyMatches.length && new RegExp( rbuggyMatches.join("|") );
 
 	/* Contains
 	---------------------------------------------------------------------- */
@@ -18003,11 +17604,11 @@ setDocument = Sizzle.setDocument = function( node ) {
 				adown.contains ?
 					adown.contains( bup ) :
 					a.compareDocumentPosition && a.compareDocumentPosition( bup ) & 16
-			) );
+			));
 		} :
 		function( a, b ) {
 			if ( b ) {
-				while ( ( b = b.parentNode ) ) {
+				while ( (b = b.parentNode) ) {
 					if ( b === a ) {
 						return true;
 					}
@@ -18036,11 +17637,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 		}
 
 		// Calculate position if both inputs belong to the same document
-		// Support: IE 11+, Edge 17 - 18+
-		// IE/Edge sometimes throw a "Permission denied" error when strict-comparing
-		// two documents; shallow comparisons work.
-		// eslint-disable-next-line eqeqeq
-		compare = ( a.ownerDocument || a ) == ( b.ownerDocument || b ) ?
+		compare = ( a.ownerDocument || a ) === ( b.ownerDocument || b ) ?
 			a.compareDocumentPosition( b ) :
 
 			// Otherwise we know they are disconnected
@@ -18048,24 +17645,13 @@ setDocument = Sizzle.setDocument = function( node ) {
 
 		// Disconnected nodes
 		if ( compare & 1 ||
-			( !support.sortDetached && b.compareDocumentPosition( a ) === compare ) ) {
+			(!support.sortDetached && b.compareDocumentPosition( a ) === compare) ) {
 
 			// Choose the first element that is related to our preferred document
-			// Support: IE 11+, Edge 17 - 18+
-			// IE/Edge sometimes throw a "Permission denied" error when strict-comparing
-			// two documents; shallow comparisons work.
-			// eslint-disable-next-line eqeqeq
-			if ( a == document || a.ownerDocument == preferredDoc &&
-				contains( preferredDoc, a ) ) {
+			if ( a === document || a.ownerDocument === preferredDoc && contains(preferredDoc, a) ) {
 				return -1;
 			}
-
-			// Support: IE 11+, Edge 17 - 18+
-			// IE/Edge sometimes throw a "Permission denied" error when strict-comparing
-			// two documents; shallow comparisons work.
-			// eslint-disable-next-line eqeqeq
-			if ( b == document || b.ownerDocument == preferredDoc &&
-				contains( preferredDoc, b ) ) {
+			if ( b === document || b.ownerDocument === preferredDoc && contains(preferredDoc, b) ) {
 				return 1;
 			}
 
@@ -18078,7 +17664,6 @@ setDocument = Sizzle.setDocument = function( node ) {
 		return compare & 4 ? -1 : 1;
 	} :
 	function( a, b ) {
-
 		// Exit early if the nodes are identical
 		if ( a === b ) {
 			hasDuplicate = true;
@@ -18094,14 +17679,8 @@ setDocument = Sizzle.setDocument = function( node ) {
 
 		// Parentless nodes are either documents or disconnected
 		if ( !aup || !bup ) {
-
-			// Support: IE 11+, Edge 17 - 18+
-			// IE/Edge sometimes throw a "Permission denied" error when strict-comparing
-			// two documents; shallow comparisons work.
-			/* eslint-disable eqeqeq */
-			return a == document ? -1 :
-				b == document ? 1 :
-				/* eslint-enable eqeqeq */
+			return a === document ? -1 :
+				b === document ? 1 :
 				aup ? -1 :
 				bup ? 1 :
 				sortInput ?
@@ -18115,32 +17694,26 @@ setDocument = Sizzle.setDocument = function( node ) {
 
 		// Otherwise we need full lists of their ancestors for comparison
 		cur = a;
-		while ( ( cur = cur.parentNode ) ) {
+		while ( (cur = cur.parentNode) ) {
 			ap.unshift( cur );
 		}
 		cur = b;
-		while ( ( cur = cur.parentNode ) ) {
+		while ( (cur = cur.parentNode) ) {
 			bp.unshift( cur );
 		}
 
 		// Walk down the tree looking for a discrepancy
-		while ( ap[ i ] === bp[ i ] ) {
+		while ( ap[i] === bp[i] ) {
 			i++;
 		}
 
 		return i ?
-
 			// Do a sibling check if the nodes have a common ancestor
-			siblingCheck( ap[ i ], bp[ i ] ) :
+			siblingCheck( ap[i], bp[i] ) :
 
 			// Otherwise nodes in our document sort first
-			// Support: IE 11+, Edge 17 - 18+
-			// IE/Edge sometimes throw a "Permission denied" error when strict-comparing
-			// two documents; shallow comparisons work.
-			/* eslint-disable eqeqeq */
-			ap[ i ] == preferredDoc ? -1 :
-			bp[ i ] == preferredDoc ? 1 :
-			/* eslint-enable eqeqeq */
+			ap[i] === preferredDoc ? -1 :
+			bp[i] === preferredDoc ? 1 :
 			0;
 	};
 
@@ -18152,7 +17725,10 @@ Sizzle.matches = function( expr, elements ) {
 };
 
 Sizzle.matchesSelector = function( elem, expr ) {
-	setDocument( elem );
+	// Set document vars if needed
+	if ( ( elem.ownerDocument || elem ) !== document ) {
+		setDocument( elem );
+	}
 
 	if ( support.matchesSelector && documentIsHTML &&
 		!nonnativeSelectorCache[ expr + " " ] &&
@@ -18164,13 +17740,12 @@ Sizzle.matchesSelector = function( elem, expr ) {
 
 			// IE 9's matchesSelector returns false on disconnected nodes
 			if ( ret || support.disconnectedMatch ||
-
-				// As well, disconnected nodes are said to be in a document
-				// fragment in IE 9
-				elem.document && elem.document.nodeType !== 11 ) {
+					// As well, disconnected nodes are said to be in a document
+					// fragment in IE 9
+					elem.document && elem.document.nodeType !== 11 ) {
 				return ret;
 			}
-		} catch ( e ) {
+		} catch (e) {
 			nonnativeSelectorCache( expr, true );
 		}
 	}
@@ -18179,31 +17754,20 @@ Sizzle.matchesSelector = function( elem, expr ) {
 };
 
 Sizzle.contains = function( context, elem ) {
-
 	// Set document vars if needed
-	// Support: IE 11+, Edge 17 - 18+
-	// IE/Edge sometimes throw a "Permission denied" error when strict-comparing
-	// two documents; shallow comparisons work.
-	// eslint-disable-next-line eqeqeq
-	if ( ( context.ownerDocument || context ) != document ) {
+	if ( ( context.ownerDocument || context ) !== document ) {
 		setDocument( context );
 	}
 	return contains( context, elem );
 };
 
 Sizzle.attr = function( elem, name ) {
-
 	// Set document vars if needed
-	// Support: IE 11+, Edge 17 - 18+
-	// IE/Edge sometimes throw a "Permission denied" error when strict-comparing
-	// two documents; shallow comparisons work.
-	// eslint-disable-next-line eqeqeq
-	if ( ( elem.ownerDocument || elem ) != document ) {
+	if ( ( elem.ownerDocument || elem ) !== document ) {
 		setDocument( elem );
 	}
 
 	var fn = Expr.attrHandle[ name.toLowerCase() ],
-
 		// Don't get fooled by Object.prototype properties (jQuery #13807)
 		val = fn && hasOwn.call( Expr.attrHandle, name.toLowerCase() ) ?
 			fn( elem, name, !documentIsHTML ) :
@@ -18213,13 +17777,13 @@ Sizzle.attr = function( elem, name ) {
 		val :
 		support.attributes || !documentIsHTML ?
 			elem.getAttribute( name ) :
-			( val = elem.getAttributeNode( name ) ) && val.specified ?
+			(val = elem.getAttributeNode(name)) && val.specified ?
 				val.value :
 				null;
 };
 
 Sizzle.escape = function( sel ) {
-	return ( sel + "" ).replace( rcssescape, fcssescape );
+	return (sel + "").replace( rcssescape, fcssescape );
 };
 
 Sizzle.error = function( msg ) {
@@ -18242,7 +17806,7 @@ Sizzle.uniqueSort = function( results ) {
 	results.sort( sortOrder );
 
 	if ( hasDuplicate ) {
-		while ( ( elem = results[ i++ ] ) ) {
+		while ( (elem = results[i++]) ) {
 			if ( elem === results[ i ] ) {
 				j = duplicates.push( i );
 			}
@@ -18270,21 +17834,17 @@ getText = Sizzle.getText = function( elem ) {
 		nodeType = elem.nodeType;
 
 	if ( !nodeType ) {
-
 		// If no nodeType, this is expected to be an array
-		while ( ( node = elem[ i++ ] ) ) {
-
+		while ( (node = elem[i++]) ) {
 			// Do not traverse comment nodes
 			ret += getText( node );
 		}
 	} else if ( nodeType === 1 || nodeType === 9 || nodeType === 11 ) {
-
 		// Use textContent for elements
 		// innerText usage removed for consistency of new lines (jQuery #11153)
 		if ( typeof elem.textContent === "string" ) {
 			return elem.textContent;
 		} else {
-
 			// Traverse its children
 			for ( elem = elem.firstChild; elem; elem = elem.nextSibling ) {
 				ret += getText( elem );
@@ -18293,7 +17853,6 @@ getText = Sizzle.getText = function( elem ) {
 	} else if ( nodeType === 3 || nodeType === 4 ) {
 		return elem.nodeValue;
 	}
-
 	// Do not include comment or processing instruction nodes
 
 	return ret;
@@ -18321,21 +17880,19 @@ Expr = Sizzle.selectors = {
 
 	preFilter: {
 		"ATTR": function( match ) {
-			match[ 1 ] = match[ 1 ].replace( runescape, funescape );
+			match[1] = match[1].replace( runescape, funescape );
 
 			// Move the given value to match[3] whether quoted or unquoted
-			match[ 3 ] = ( match[ 3 ] || match[ 4 ] ||
-				match[ 5 ] || "" ).replace( runescape, funescape );
+			match[3] = ( match[3] || match[4] || match[5] || "" ).replace( runescape, funescape );
 
-			if ( match[ 2 ] === "~=" ) {
-				match[ 3 ] = " " + match[ 3 ] + " ";
+			if ( match[2] === "~=" ) {
+				match[3] = " " + match[3] + " ";
 			}
 
 			return match.slice( 0, 4 );
 		},
 
 		"CHILD": function( match ) {
-
 			/* matches from matchExpr["CHILD"]
 				1 type (only|nth|...)
 				2 what (child|of-type)
@@ -18346,25 +17903,22 @@ Expr = Sizzle.selectors = {
 				7 sign of y-component
 				8 y of y-component
 			*/
-			match[ 1 ] = match[ 1 ].toLowerCase();
+			match[1] = match[1].toLowerCase();
 
-			if ( match[ 1 ].slice( 0, 3 ) === "nth" ) {
-
+			if ( match[1].slice( 0, 3 ) === "nth" ) {
 				// nth-* requires argument
-				if ( !match[ 3 ] ) {
-					Sizzle.error( match[ 0 ] );
+				if ( !match[3] ) {
+					Sizzle.error( match[0] );
 				}
 
 				// numeric x and y parameters for Expr.filter.CHILD
 				// remember that false/true cast respectively to 0/1
-				match[ 4 ] = +( match[ 4 ] ?
-					match[ 5 ] + ( match[ 6 ] || 1 ) :
-					2 * ( match[ 3 ] === "even" || match[ 3 ] === "odd" ) );
-				match[ 5 ] = +( ( match[ 7 ] + match[ 8 ] ) || match[ 3 ] === "odd" );
+				match[4] = +( match[4] ? match[5] + (match[6] || 1) : 2 * ( match[3] === "even" || match[3] === "odd" ) );
+				match[5] = +( ( match[7] + match[8] ) || match[3] === "odd" );
 
-				// other types prohibit arguments
-			} else if ( match[ 3 ] ) {
-				Sizzle.error( match[ 0 ] );
+			// other types prohibit arguments
+			} else if ( match[3] ) {
+				Sizzle.error( match[0] );
 			}
 
 			return match;
@@ -18372,28 +17926,26 @@ Expr = Sizzle.selectors = {
 
 		"PSEUDO": function( match ) {
 			var excess,
-				unquoted = !match[ 6 ] && match[ 2 ];
+				unquoted = !match[6] && match[2];
 
-			if ( matchExpr[ "CHILD" ].test( match[ 0 ] ) ) {
+			if ( matchExpr["CHILD"].test( match[0] ) ) {
 				return null;
 			}
 
 			// Accept quoted arguments as-is
-			if ( match[ 3 ] ) {
-				match[ 2 ] = match[ 4 ] || match[ 5 ] || "";
+			if ( match[3] ) {
+				match[2] = match[4] || match[5] || "";
 
 			// Strip excess characters from unquoted arguments
 			} else if ( unquoted && rpseudo.test( unquoted ) &&
-
 				// Get excess from tokenize (recursively)
-				( excess = tokenize( unquoted, true ) ) &&
-
+				(excess = tokenize( unquoted, true )) &&
 				// advance to the next closing parenthesis
-				( excess = unquoted.indexOf( ")", unquoted.length - excess ) - unquoted.length ) ) {
+				(excess = unquoted.indexOf( ")", unquoted.length - excess ) - unquoted.length) ) {
 
 				// excess is a negative index
-				match[ 0 ] = match[ 0 ].slice( 0, excess );
-				match[ 2 ] = unquoted.slice( 0, excess );
+				match[0] = match[0].slice( 0, excess );
+				match[2] = unquoted.slice( 0, excess );
 			}
 
 			// Return only captures needed by the pseudo filter method (type and argument)
@@ -18406,9 +17958,7 @@ Expr = Sizzle.selectors = {
 		"TAG": function( nodeNameSelector ) {
 			var nodeName = nodeNameSelector.replace( runescape, funescape ).toLowerCase();
 			return nodeNameSelector === "*" ?
-				function() {
-					return true;
-				} :
+				function() { return true; } :
 				function( elem ) {
 					return elem.nodeName && elem.nodeName.toLowerCase() === nodeName;
 				};
@@ -18418,16 +17968,10 @@ Expr = Sizzle.selectors = {
 			var pattern = classCache[ className + " " ];
 
 			return pattern ||
-				( pattern = new RegExp( "(^|" + whitespace +
-					")" + className + "(" + whitespace + "|$)" ) ) && classCache(
-						className, function( elem ) {
-							return pattern.test(
-								typeof elem.className === "string" && elem.className ||
-								typeof elem.getAttribute !== "undefined" &&
-									elem.getAttribute( "class" ) ||
-								""
-							);
-				} );
+				(pattern = new RegExp( "(^|" + whitespace + ")" + className + "(" + whitespace + "|$)" )) &&
+				classCache( className, function( elem ) {
+					return pattern.test( typeof elem.className === "string" && elem.className || typeof elem.getAttribute !== "undefined" && elem.getAttribute("class") || "" );
+				});
 		},
 
 		"ATTR": function( name, operator, check ) {
@@ -18443,8 +17987,6 @@ Expr = Sizzle.selectors = {
 
 				result += "";
 
-				/* eslint-disable max-len */
-
 				return operator === "=" ? result === check :
 					operator === "!=" ? result !== check :
 					operator === "^=" ? check && result.indexOf( check ) === 0 :
@@ -18453,12 +17995,10 @@ Expr = Sizzle.selectors = {
 					operator === "~=" ? ( " " + result.replace( rwhitespace, " " ) + " " ).indexOf( check ) > -1 :
 					operator === "|=" ? result === check || result.slice( 0, check.length + 1 ) === check + "-" :
 					false;
-				/* eslint-enable max-len */
-
 			};
 		},
 
-		"CHILD": function( type, what, _argument, first, last ) {
+		"CHILD": function( type, what, argument, first, last ) {
 			var simple = type.slice( 0, 3 ) !== "nth",
 				forward = type.slice( -4 ) !== "last",
 				ofType = what === "of-type";
@@ -18470,7 +18010,7 @@ Expr = Sizzle.selectors = {
 					return !!elem.parentNode;
 				} :
 
-				function( elem, _context, xml ) {
+				function( elem, context, xml ) {
 					var cache, uniqueCache, outerCache, node, nodeIndex, start,
 						dir = simple !== forward ? "nextSibling" : "previousSibling",
 						parent = elem.parentNode,
@@ -18484,7 +18024,7 @@ Expr = Sizzle.selectors = {
 						if ( simple ) {
 							while ( dir ) {
 								node = elem;
-								while ( ( node = node[ dir ] ) ) {
+								while ( (node = node[ dir ]) ) {
 									if ( ofType ?
 										node.nodeName.toLowerCase() === name :
 										node.nodeType === 1 ) {
@@ -18492,7 +18032,6 @@ Expr = Sizzle.selectors = {
 										return false;
 									}
 								}
-
 								// Reverse direction for :only-* (if we haven't yet done so)
 								start = dir = type === "only" && !start && "nextSibling";
 							}
@@ -18508,22 +18047,22 @@ Expr = Sizzle.selectors = {
 
 							// ...in a gzip-friendly way
 							node = parent;
-							outerCache = node[ expando ] || ( node[ expando ] = {} );
+							outerCache = node[ expando ] || (node[ expando ] = {});
 
 							// Support: IE <9 only
 							// Defend against cloned attroperties (jQuery gh-1709)
 							uniqueCache = outerCache[ node.uniqueID ] ||
-								( outerCache[ node.uniqueID ] = {} );
+								(outerCache[ node.uniqueID ] = {});
 
 							cache = uniqueCache[ type ] || [];
 							nodeIndex = cache[ 0 ] === dirruns && cache[ 1 ];
 							diff = nodeIndex && cache[ 2 ];
 							node = nodeIndex && parent.childNodes[ nodeIndex ];
 
-							while ( ( node = ++nodeIndex && node && node[ dir ] ||
+							while ( (node = ++nodeIndex && node && node[ dir ] ||
 
 								// Fallback to seeking `elem` from the start
-								( diff = nodeIndex = 0 ) || start.pop() ) ) {
+								(diff = nodeIndex = 0) || start.pop()) ) {
 
 								// When found, cache indexes on `parent` and break
 								if ( node.nodeType === 1 && ++diff && node === elem ) {
@@ -18533,18 +18072,16 @@ Expr = Sizzle.selectors = {
 							}
 
 						} else {
-
 							// Use previously-cached element index if available
 							if ( useCache ) {
-
 								// ...in a gzip-friendly way
 								node = elem;
-								outerCache = node[ expando ] || ( node[ expando ] = {} );
+								outerCache = node[ expando ] || (node[ expando ] = {});
 
 								// Support: IE <9 only
 								// Defend against cloned attroperties (jQuery gh-1709)
 								uniqueCache = outerCache[ node.uniqueID ] ||
-									( outerCache[ node.uniqueID ] = {} );
+									(outerCache[ node.uniqueID ] = {});
 
 								cache = uniqueCache[ type ] || [];
 								nodeIndex = cache[ 0 ] === dirruns && cache[ 1 ];
@@ -18554,10 +18091,9 @@ Expr = Sizzle.selectors = {
 							// xml :nth-child(...)
 							// or :nth-last-child(...) or :nth(-last)?-of-type(...)
 							if ( diff === false ) {
-
 								// Use the same loop as above to seek `elem` from the start
-								while ( ( node = ++nodeIndex && node && node[ dir ] ||
-									( diff = nodeIndex = 0 ) || start.pop() ) ) {
+								while ( (node = ++nodeIndex && node && node[ dir ] ||
+									(diff = nodeIndex = 0) || start.pop()) ) {
 
 									if ( ( ofType ?
 										node.nodeName.toLowerCase() === name :
@@ -18566,13 +18102,12 @@ Expr = Sizzle.selectors = {
 
 										// Cache the index of each encountered element
 										if ( useCache ) {
-											outerCache = node[ expando ] ||
-												( node[ expando ] = {} );
+											outerCache = node[ expando ] || (node[ expando ] = {});
 
 											// Support: IE <9 only
 											// Defend against cloned attroperties (jQuery gh-1709)
 											uniqueCache = outerCache[ node.uniqueID ] ||
-												( outerCache[ node.uniqueID ] = {} );
+												(outerCache[ node.uniqueID ] = {});
 
 											uniqueCache[ type ] = [ dirruns, diff ];
 										}
@@ -18593,7 +18128,6 @@ Expr = Sizzle.selectors = {
 		},
 
 		"PSEUDO": function( pseudo, argument ) {
-
 			// pseudo-class names are case-insensitive
 			// http://www.w3.org/TR/selectors/#pseudo-classes
 			// Prioritize by case sensitivity in case custom pseudos are added with uppercase letters
@@ -18613,15 +18147,15 @@ Expr = Sizzle.selectors = {
 			if ( fn.length > 1 ) {
 				args = [ pseudo, pseudo, "", argument ];
 				return Expr.setFilters.hasOwnProperty( pseudo.toLowerCase() ) ?
-					markFunction( function( seed, matches ) {
+					markFunction(function( seed, matches ) {
 						var idx,
 							matched = fn( seed, argument ),
 							i = matched.length;
 						while ( i-- ) {
-							idx = indexOf( seed, matched[ i ] );
-							seed[ idx ] = !( matches[ idx ] = matched[ i ] );
+							idx = indexOf( seed, matched[i] );
+							seed[ idx ] = !( matches[ idx ] = matched[i] );
 						}
-					} ) :
+					}) :
 					function( elem ) {
 						return fn( elem, 0, args );
 					};
@@ -18632,10 +18166,8 @@ Expr = Sizzle.selectors = {
 	},
 
 	pseudos: {
-
 		// Potentially complex pseudos
-		"not": markFunction( function( selector ) {
-
+		"not": markFunction(function( selector ) {
 			// Trim the selector passed to compile
 			// to avoid treating leading and trailing
 			// spaces as combinators
@@ -18644,40 +18176,39 @@ Expr = Sizzle.selectors = {
 				matcher = compile( selector.replace( rtrim, "$1" ) );
 
 			return matcher[ expando ] ?
-				markFunction( function( seed, matches, _context, xml ) {
+				markFunction(function( seed, matches, context, xml ) {
 					var elem,
 						unmatched = matcher( seed, null, xml, [] ),
 						i = seed.length;
 
 					// Match elements unmatched by `matcher`
 					while ( i-- ) {
-						if ( ( elem = unmatched[ i ] ) ) {
-							seed[ i ] = !( matches[ i ] = elem );
+						if ( (elem = unmatched[i]) ) {
+							seed[i] = !(matches[i] = elem);
 						}
 					}
-				} ) :
-				function( elem, _context, xml ) {
-					input[ 0 ] = elem;
+				}) :
+				function( elem, context, xml ) {
+					input[0] = elem;
 					matcher( input, null, xml, results );
-
 					// Don't keep the element (issue #299)
-					input[ 0 ] = null;
+					input[0] = null;
 					return !results.pop();
 				};
-		} ),
+		}),
 
-		"has": markFunction( function( selector ) {
+		"has": markFunction(function( selector ) {
 			return function( elem ) {
 				return Sizzle( selector, elem ).length > 0;
 			};
-		} ),
+		}),
 
-		"contains": markFunction( function( text ) {
+		"contains": markFunction(function( text ) {
 			text = text.replace( runescape, funescape );
 			return function( elem ) {
 				return ( elem.textContent || getText( elem ) ).indexOf( text ) > -1;
 			};
-		} ),
+		}),
 
 		// "Whether an element is represented by a :lang() selector
 		// is based solely on the element's language value
@@ -18687,26 +18218,25 @@ Expr = Sizzle.selectors = {
 		// The identifier C does not have to be a valid language name."
 		// http://www.w3.org/TR/selectors/#lang-pseudo
 		"lang": markFunction( function( lang ) {
-
 			// lang value must be a valid identifier
-			if ( !ridentifier.test( lang || "" ) ) {
+			if ( !ridentifier.test(lang || "") ) {
 				Sizzle.error( "unsupported lang: " + lang );
 			}
 			lang = lang.replace( runescape, funescape ).toLowerCase();
 			return function( elem ) {
 				var elemLang;
 				do {
-					if ( ( elemLang = documentIsHTML ?
+					if ( (elemLang = documentIsHTML ?
 						elem.lang :
-						elem.getAttribute( "xml:lang" ) || elem.getAttribute( "lang" ) ) ) {
+						elem.getAttribute("xml:lang") || elem.getAttribute("lang")) ) {
 
 						elemLang = elemLang.toLowerCase();
 						return elemLang === lang || elemLang.indexOf( lang + "-" ) === 0;
 					}
-				} while ( ( elem = elem.parentNode ) && elem.nodeType === 1 );
+				} while ( (elem = elem.parentNode) && elem.nodeType === 1 );
 				return false;
 			};
-		} ),
+		}),
 
 		// Miscellaneous
 		"target": function( elem ) {
@@ -18719,9 +18249,7 @@ Expr = Sizzle.selectors = {
 		},
 
 		"focus": function( elem ) {
-			return elem === document.activeElement &&
-				( !document.hasFocus || document.hasFocus() ) &&
-				!!( elem.type || elem.href || ~elem.tabIndex );
+			return elem === document.activeElement && (!document.hasFocus || document.hasFocus()) && !!(elem.type || elem.href || ~elem.tabIndex);
 		},
 
 		// Boolean properties
@@ -18729,20 +18257,16 @@ Expr = Sizzle.selectors = {
 		"disabled": createDisabledPseudo( true ),
 
 		"checked": function( elem ) {
-
 			// In CSS3, :checked should return both checked and selected elements
 			// http://www.w3.org/TR/2011/REC-css3-selectors-20110929/#checked
 			var nodeName = elem.nodeName.toLowerCase();
-			return ( nodeName === "input" && !!elem.checked ) ||
-				( nodeName === "option" && !!elem.selected );
+			return (nodeName === "input" && !!elem.checked) || (nodeName === "option" && !!elem.selected);
 		},
 
 		"selected": function( elem ) {
-
 			// Accessing this property makes selected-by-default
 			// options in Safari work properly
 			if ( elem.parentNode ) {
-				// eslint-disable-next-line no-unused-expressions
 				elem.parentNode.selectedIndex;
 			}
 
@@ -18751,7 +18275,6 @@ Expr = Sizzle.selectors = {
 
 		// Contents
 		"empty": function( elem ) {
-
 			// http://www.w3.org/TR/selectors/#empty-pseudo
 			// :empty is negated by element (1) or content nodes (text: 3; cdata: 4; entity ref: 5),
 			//   but not by others (comment: 8; processing instruction: 7; etc.)
@@ -18765,7 +18288,7 @@ Expr = Sizzle.selectors = {
 		},
 
 		"parent": function( elem ) {
-			return !Expr.pseudos[ "empty" ]( elem );
+			return !Expr.pseudos["empty"]( elem );
 		},
 
 		// Element/input types
@@ -18789,40 +18312,39 @@ Expr = Sizzle.selectors = {
 
 				// Support: IE<8
 				// New HTML5 attribute values (e.g., "search") appear with elem.type === "text"
-				( ( attr = elem.getAttribute( "type" ) ) == null ||
-					attr.toLowerCase() === "text" );
+				( (attr = elem.getAttribute("type")) == null || attr.toLowerCase() === "text" );
 		},
 
 		// Position-in-collection
-		"first": createPositionalPseudo( function() {
+		"first": createPositionalPseudo(function() {
 			return [ 0 ];
-		} ),
+		}),
 
-		"last": createPositionalPseudo( function( _matchIndexes, length ) {
+		"last": createPositionalPseudo(function( matchIndexes, length ) {
 			return [ length - 1 ];
-		} ),
+		}),
 
-		"eq": createPositionalPseudo( function( _matchIndexes, length, argument ) {
+		"eq": createPositionalPseudo(function( matchIndexes, length, argument ) {
 			return [ argument < 0 ? argument + length : argument ];
-		} ),
+		}),
 
-		"even": createPositionalPseudo( function( matchIndexes, length ) {
+		"even": createPositionalPseudo(function( matchIndexes, length ) {
 			var i = 0;
 			for ( ; i < length; i += 2 ) {
 				matchIndexes.push( i );
 			}
 			return matchIndexes;
-		} ),
+		}),
 
-		"odd": createPositionalPseudo( function( matchIndexes, length ) {
+		"odd": createPositionalPseudo(function( matchIndexes, length ) {
 			var i = 1;
 			for ( ; i < length; i += 2 ) {
 				matchIndexes.push( i );
 			}
 			return matchIndexes;
-		} ),
+		}),
 
-		"lt": createPositionalPseudo( function( matchIndexes, length, argument ) {
+		"lt": createPositionalPseudo(function( matchIndexes, length, argument ) {
 			var i = argument < 0 ?
 				argument + length :
 				argument > length ?
@@ -18832,19 +18354,19 @@ Expr = Sizzle.selectors = {
 				matchIndexes.push( i );
 			}
 			return matchIndexes;
-		} ),
+		}),
 
-		"gt": createPositionalPseudo( function( matchIndexes, length, argument ) {
+		"gt": createPositionalPseudo(function( matchIndexes, length, argument ) {
 			var i = argument < 0 ? argument + length : argument;
 			for ( ; ++i < length; ) {
 				matchIndexes.push( i );
 			}
 			return matchIndexes;
-		} )
+		})
 	}
 };
 
-Expr.pseudos[ "nth" ] = Expr.pseudos[ "eq" ];
+Expr.pseudos["nth"] = Expr.pseudos["eq"];
 
 // Add button/input type pseudos
 for ( i in { radio: true, checkbox: true, file: true, password: true, image: true } ) {
@@ -18875,39 +18397,37 @@ tokenize = Sizzle.tokenize = function( selector, parseOnly ) {
 	while ( soFar ) {
 
 		// Comma and first run
-		if ( !matched || ( match = rcomma.exec( soFar ) ) ) {
+		if ( !matched || (match = rcomma.exec( soFar )) ) {
 			if ( match ) {
-
 				// Don't consume trailing commas as valid
-				soFar = soFar.slice( match[ 0 ].length ) || soFar;
+				soFar = soFar.slice( match[0].length ) || soFar;
 			}
-			groups.push( ( tokens = [] ) );
+			groups.push( (tokens = []) );
 		}
 
 		matched = false;
 
 		// Combinators
-		if ( ( match = rcombinators.exec( soFar ) ) ) {
+		if ( (match = rcombinators.exec( soFar )) ) {
 			matched = match.shift();
-			tokens.push( {
+			tokens.push({
 				value: matched,
-
 				// Cast descendant combinators to space
-				type: match[ 0 ].replace( rtrim, " " )
-			} );
+				type: match[0].replace( rtrim, " " )
+			});
 			soFar = soFar.slice( matched.length );
 		}
 
 		// Filters
 		for ( type in Expr.filter ) {
-			if ( ( match = matchExpr[ type ].exec( soFar ) ) && ( !preFilters[ type ] ||
-				( match = preFilters[ type ]( match ) ) ) ) {
+			if ( (match = matchExpr[ type ].exec( soFar )) && (!preFilters[ type ] ||
+				(match = preFilters[ type ]( match ))) ) {
 				matched = match.shift();
-				tokens.push( {
+				tokens.push({
 					value: matched,
 					type: type,
 					matches: match
-				} );
+				});
 				soFar = soFar.slice( matched.length );
 			}
 		}
@@ -18924,7 +18444,6 @@ tokenize = Sizzle.tokenize = function( selector, parseOnly ) {
 		soFar.length :
 		soFar ?
 			Sizzle.error( selector ) :
-
 			// Cache the tokens
 			tokenCache( selector, groups ).slice( 0 );
 };
@@ -18934,7 +18453,7 @@ function toSelector( tokens ) {
 		len = tokens.length,
 		selector = "";
 	for ( ; i < len; i++ ) {
-		selector += tokens[ i ].value;
+		selector += tokens[i].value;
 	}
 	return selector;
 }
@@ -18947,10 +18466,9 @@ function addCombinator( matcher, combinator, base ) {
 		doneName = done++;
 
 	return combinator.first ?
-
 		// Check against closest ancestor/preceding element
 		function( elem, context, xml ) {
-			while ( ( elem = elem[ dir ] ) ) {
+			while ( (elem = elem[ dir ]) ) {
 				if ( elem.nodeType === 1 || checkNonElements ) {
 					return matcher( elem, context, xml );
 				}
@@ -18965,7 +18483,7 @@ function addCombinator( matcher, combinator, base ) {
 
 			// We can't set arbitrary data on XML nodes, so they don't benefit from combinator caching
 			if ( xml ) {
-				while ( ( elem = elem[ dir ] ) ) {
+				while ( (elem = elem[ dir ]) ) {
 					if ( elem.nodeType === 1 || checkNonElements ) {
 						if ( matcher( elem, context, xml ) ) {
 							return true;
@@ -18973,29 +18491,27 @@ function addCombinator( matcher, combinator, base ) {
 					}
 				}
 			} else {
-				while ( ( elem = elem[ dir ] ) ) {
+				while ( (elem = elem[ dir ]) ) {
 					if ( elem.nodeType === 1 || checkNonElements ) {
-						outerCache = elem[ expando ] || ( elem[ expando ] = {} );
+						outerCache = elem[ expando ] || (elem[ expando ] = {});
 
 						// Support: IE <9 only
 						// Defend against cloned attroperties (jQuery gh-1709)
-						uniqueCache = outerCache[ elem.uniqueID ] ||
-							( outerCache[ elem.uniqueID ] = {} );
+						uniqueCache = outerCache[ elem.uniqueID ] || (outerCache[ elem.uniqueID ] = {});
 
 						if ( skip && skip === elem.nodeName.toLowerCase() ) {
 							elem = elem[ dir ] || elem;
-						} else if ( ( oldCache = uniqueCache[ key ] ) &&
+						} else if ( (oldCache = uniqueCache[ key ]) &&
 							oldCache[ 0 ] === dirruns && oldCache[ 1 ] === doneName ) {
 
 							// Assign to newCache so results back-propagate to previous elements
-							return ( newCache[ 2 ] = oldCache[ 2 ] );
+							return (newCache[ 2 ] = oldCache[ 2 ]);
 						} else {
-
 							// Reuse newcache so results back-propagate to previous elements
 							uniqueCache[ key ] = newCache;
 
 							// A match means we're done; a fail means we have to keep checking
-							if ( ( newCache[ 2 ] = matcher( elem, context, xml ) ) ) {
+							if ( (newCache[ 2 ] = matcher( elem, context, xml )) ) {
 								return true;
 							}
 						}
@@ -19011,20 +18527,20 @@ function elementMatcher( matchers ) {
 		function( elem, context, xml ) {
 			var i = matchers.length;
 			while ( i-- ) {
-				if ( !matchers[ i ]( elem, context, xml ) ) {
+				if ( !matchers[i]( elem, context, xml ) ) {
 					return false;
 				}
 			}
 			return true;
 		} :
-		matchers[ 0 ];
+		matchers[0];
 }
 
 function multipleContexts( selector, contexts, results ) {
 	var i = 0,
 		len = contexts.length;
 	for ( ; i < len; i++ ) {
-		Sizzle( selector, contexts[ i ], results );
+		Sizzle( selector, contexts[i], results );
 	}
 	return results;
 }
@@ -19037,7 +18553,7 @@ function condense( unmatched, map, filter, context, xml ) {
 		mapped = map != null;
 
 	for ( ; i < len; i++ ) {
-		if ( ( elem = unmatched[ i ] ) ) {
+		if ( (elem = unmatched[i]) ) {
 			if ( !filter || filter( elem, context, xml ) ) {
 				newUnmatched.push( elem );
 				if ( mapped ) {
@@ -19057,18 +18573,14 @@ function setMatcher( preFilter, selector, matcher, postFilter, postFinder, postS
 	if ( postFinder && !postFinder[ expando ] ) {
 		postFinder = setMatcher( postFinder, postSelector );
 	}
-	return markFunction( function( seed, results, context, xml ) {
+	return markFunction(function( seed, results, context, xml ) {
 		var temp, i, elem,
 			preMap = [],
 			postMap = [],
 			preexisting = results.length,
 
 			// Get initial elements from seed or context
-			elems = seed || multipleContexts(
-				selector || "*",
-				context.nodeType ? [ context ] : context,
-				[]
-			),
+			elems = seed || multipleContexts( selector || "*", context.nodeType ? [ context ] : context, [] ),
 
 			// Prefilter to get matcher input, preserving a map for seed-results synchronization
 			matcherIn = preFilter && ( seed || !selector ) ?
@@ -19076,7 +18588,6 @@ function setMatcher( preFilter, selector, matcher, postFilter, postFinder, postS
 				elems,
 
 			matcherOut = matcher ?
-
 				// If we have a postFinder, or filtered seed, or non-seed postFilter or preexisting results,
 				postFinder || ( seed ? preFilter : preexisting || postFilter ) ?
 
@@ -19100,8 +18611,8 @@ function setMatcher( preFilter, selector, matcher, postFilter, postFinder, postS
 			// Un-match failing elements by moving them back to matcherIn
 			i = temp.length;
 			while ( i-- ) {
-				if ( ( elem = temp[ i ] ) ) {
-					matcherOut[ postMap[ i ] ] = !( matcherIn[ postMap[ i ] ] = elem );
+				if ( (elem = temp[i]) ) {
+					matcherOut[ postMap[i] ] = !(matcherIn[ postMap[i] ] = elem);
 				}
 			}
 		}
@@ -19109,27 +18620,25 @@ function setMatcher( preFilter, selector, matcher, postFilter, postFinder, postS
 		if ( seed ) {
 			if ( postFinder || preFilter ) {
 				if ( postFinder ) {
-
 					// Get the final matcherOut by condensing this intermediate into postFinder contexts
 					temp = [];
 					i = matcherOut.length;
 					while ( i-- ) {
-						if ( ( elem = matcherOut[ i ] ) ) {
-
+						if ( (elem = matcherOut[i]) ) {
 							// Restore matcherIn since elem is not yet a final match
-							temp.push( ( matcherIn[ i ] = elem ) );
+							temp.push( (matcherIn[i] = elem) );
 						}
 					}
-					postFinder( null, ( matcherOut = [] ), temp, xml );
+					postFinder( null, (matcherOut = []), temp, xml );
 				}
 
 				// Move matched elements from seed to results to keep them synchronized
 				i = matcherOut.length;
 				while ( i-- ) {
-					if ( ( elem = matcherOut[ i ] ) &&
-						( temp = postFinder ? indexOf( seed, elem ) : preMap[ i ] ) > -1 ) {
+					if ( (elem = matcherOut[i]) &&
+						(temp = postFinder ? indexOf( seed, elem ) : preMap[i]) > -1 ) {
 
-						seed[ temp ] = !( results[ temp ] = elem );
+						seed[temp] = !(results[temp] = elem);
 					}
 				}
 			}
@@ -19147,14 +18656,14 @@ function setMatcher( preFilter, selector, matcher, postFilter, postFinder, postS
 				push.apply( results, matcherOut );
 			}
 		}
-	} );
+	});
 }
 
 function matcherFromTokens( tokens ) {
 	var checkContext, matcher, j,
 		len = tokens.length,
-		leadingRelative = Expr.relative[ tokens[ 0 ].type ],
-		implicitRelative = leadingRelative || Expr.relative[ " " ],
+		leadingRelative = Expr.relative[ tokens[0].type ],
+		implicitRelative = leadingRelative || Expr.relative[" "],
 		i = leadingRelative ? 1 : 0,
 
 		// The foundational matcher ensures that elements are reachable from top-level context(s)
@@ -19166,43 +18675,38 @@ function matcherFromTokens( tokens ) {
 		}, implicitRelative, true ),
 		matchers = [ function( elem, context, xml ) {
 			var ret = ( !leadingRelative && ( xml || context !== outermostContext ) ) || (
-				( checkContext = context ).nodeType ?
+				(checkContext = context).nodeType ?
 					matchContext( elem, context, xml ) :
 					matchAnyContext( elem, context, xml ) );
-
 			// Avoid hanging onto element (issue #299)
 			checkContext = null;
 			return ret;
 		} ];
 
 	for ( ; i < len; i++ ) {
-		if ( ( matcher = Expr.relative[ tokens[ i ].type ] ) ) {
-			matchers = [ addCombinator( elementMatcher( matchers ), matcher ) ];
+		if ( (matcher = Expr.relative[ tokens[i].type ]) ) {
+			matchers = [ addCombinator(elementMatcher( matchers ), matcher) ];
 		} else {
-			matcher = Expr.filter[ tokens[ i ].type ].apply( null, tokens[ i ].matches );
+			matcher = Expr.filter[ tokens[i].type ].apply( null, tokens[i].matches );
 
 			// Return special upon seeing a positional matcher
 			if ( matcher[ expando ] ) {
-
 				// Find the next relative operator (if any) for proper handling
 				j = ++i;
 				for ( ; j < len; j++ ) {
-					if ( Expr.relative[ tokens[ j ].type ] ) {
+					if ( Expr.relative[ tokens[j].type ] ) {
 						break;
 					}
 				}
 				return setMatcher(
 					i > 1 && elementMatcher( matchers ),
 					i > 1 && toSelector(
-
-					// If the preceding token was a descendant combinator, insert an implicit any-element `*`
-					tokens
-						.slice( 0, i - 1 )
-						.concat( { value: tokens[ i - 2 ].type === " " ? "*" : "" } )
+						// If the preceding token was a descendant combinator, insert an implicit any-element `*`
+						tokens.slice( 0, i - 1 ).concat({ value: tokens[ i - 2 ].type === " " ? "*" : "" })
 					).replace( rtrim, "$1" ),
 					matcher,
 					i < j && matcherFromTokens( tokens.slice( i, j ) ),
-					j < len && matcherFromTokens( ( tokens = tokens.slice( j ) ) ),
+					j < len && matcherFromTokens( (tokens = tokens.slice( j )) ),
 					j < len && toSelector( tokens )
 				);
 			}
@@ -19223,40 +18727,28 @@ function matcherFromGroupMatchers( elementMatchers, setMatchers ) {
 				unmatched = seed && [],
 				setMatched = [],
 				contextBackup = outermostContext,
-
 				// We must always have either seed elements or outermost context
-				elems = seed || byElement && Expr.find[ "TAG" ]( "*", outermost ),
-
+				elems = seed || byElement && Expr.find["TAG"]( "*", outermost ),
 				// Use integer dirruns iff this is the outermost matcher
-				dirrunsUnique = ( dirruns += contextBackup == null ? 1 : Math.random() || 0.1 ),
+				dirrunsUnique = (dirruns += contextBackup == null ? 1 : Math.random() || 0.1),
 				len = elems.length;
 
 			if ( outermost ) {
-
-				// Support: IE 11+, Edge 17 - 18+
-				// IE/Edge sometimes throw a "Permission denied" error when strict-comparing
-				// two documents; shallow comparisons work.
-				// eslint-disable-next-line eqeqeq
-				outermostContext = context == document || context || outermost;
+				outermostContext = context === document || context || outermost;
 			}
 
 			// Add elements passing elementMatchers directly to results
 			// Support: IE<9, Safari
 			// Tolerate NodeList properties (IE: "length"; Safari: <number>) matching elements by id
-			for ( ; i !== len && ( elem = elems[ i ] ) != null; i++ ) {
+			for ( ; i !== len && (elem = elems[i]) != null; i++ ) {
 				if ( byElement && elem ) {
 					j = 0;
-
-					// Support: IE 11+, Edge 17 - 18+
-					// IE/Edge sometimes throw a "Permission denied" error when strict-comparing
-					// two documents; shallow comparisons work.
-					// eslint-disable-next-line eqeqeq
-					if ( !context && elem.ownerDocument != document ) {
+					if ( !context && elem.ownerDocument !== document ) {
 						setDocument( elem );
 						xml = !documentIsHTML;
 					}
-					while ( ( matcher = elementMatchers[ j++ ] ) ) {
-						if ( matcher( elem, context || document, xml ) ) {
+					while ( (matcher = elementMatchers[j++]) ) {
+						if ( matcher( elem, context || document, xml) ) {
 							results.push( elem );
 							break;
 						}
@@ -19268,9 +18760,8 @@ function matcherFromGroupMatchers( elementMatchers, setMatchers ) {
 
 				// Track unmatched elements for set filters
 				if ( bySet ) {
-
 					// They will have gone through all possible matchers
-					if ( ( elem = !matcher && elem ) ) {
+					if ( (elem = !matcher && elem) ) {
 						matchedCount--;
 					}
 
@@ -19294,17 +18785,16 @@ function matcherFromGroupMatchers( elementMatchers, setMatchers ) {
 			// numerically zero.
 			if ( bySet && i !== matchedCount ) {
 				j = 0;
-				while ( ( matcher = setMatchers[ j++ ] ) ) {
+				while ( (matcher = setMatchers[j++]) ) {
 					matcher( unmatched, setMatched, context, xml );
 				}
 
 				if ( seed ) {
-
 					// Reintegrate element matches to eliminate the need for sorting
 					if ( matchedCount > 0 ) {
 						while ( i-- ) {
-							if ( !( unmatched[ i ] || setMatched[ i ] ) ) {
-								setMatched[ i ] = pop.call( results );
+							if ( !(unmatched[i] || setMatched[i]) ) {
+								setMatched[i] = pop.call( results );
 							}
 						}
 					}
@@ -19345,14 +18835,13 @@ compile = Sizzle.compile = function( selector, match /* Internal Use Only */ ) {
 		cached = compilerCache[ selector + " " ];
 
 	if ( !cached ) {
-
 		// Generate a function of recursive functions that can be used to check each element
 		if ( !match ) {
 			match = tokenize( selector );
 		}
 		i = match.length;
 		while ( i-- ) {
-			cached = matcherFromTokens( match[ i ] );
+			cached = matcherFromTokens( match[i] );
 			if ( cached[ expando ] ) {
 				setMatchers.push( cached );
 			} else {
@@ -19361,10 +18850,7 @@ compile = Sizzle.compile = function( selector, match /* Internal Use Only */ ) {
 		}
 
 		// Cache the compiled function
-		cached = compilerCache(
-			selector,
-			matcherFromGroupMatchers( elementMatchers, setMatchers )
-		);
+		cached = compilerCache( selector, matcherFromGroupMatchers( elementMatchers, setMatchers ) );
 
 		// Save selector and tokenization
 		cached.selector = selector;
@@ -19384,7 +18870,7 @@ compile = Sizzle.compile = function( selector, match /* Internal Use Only */ ) {
 select = Sizzle.select = function( selector, context, results, seed ) {
 	var i, tokens, token, type, find,
 		compiled = typeof selector === "function" && selector,
-		match = !seed && tokenize( ( selector = compiled.selector || selector ) );
+		match = !seed && tokenize( (selector = compiled.selector || selector) );
 
 	results = results || [];
 
@@ -19393,12 +18879,11 @@ select = Sizzle.select = function( selector, context, results, seed ) {
 	if ( match.length === 1 ) {
 
 		// Reduce context if the leading compound selector is an ID
-		tokens = match[ 0 ] = match[ 0 ].slice( 0 );
-		if ( tokens.length > 2 && ( token = tokens[ 0 ] ).type === "ID" &&
-			context.nodeType === 9 && documentIsHTML && Expr.relative[ tokens[ 1 ].type ] ) {
+		tokens = match[0] = match[0].slice( 0 );
+		if ( tokens.length > 2 && (token = tokens[0]).type === "ID" &&
+				context.nodeType === 9 && documentIsHTML && Expr.relative[ tokens[1].type ] ) {
 
-			context = ( Expr.find[ "ID" ]( token.matches[ 0 ]
-				.replace( runescape, funescape ), context ) || [] )[ 0 ];
+			context = ( Expr.find["ID"]( token.matches[0].replace(runescape, funescape), context ) || [] )[0];
 			if ( !context ) {
 				return results;
 
@@ -19411,22 +18896,20 @@ select = Sizzle.select = function( selector, context, results, seed ) {
 		}
 
 		// Fetch a seed set for right-to-left matching
-		i = matchExpr[ "needsContext" ].test( selector ) ? 0 : tokens.length;
+		i = matchExpr["needsContext"].test( selector ) ? 0 : tokens.length;
 		while ( i-- ) {
-			token = tokens[ i ];
+			token = tokens[i];
 
 			// Abort if we hit a combinator
-			if ( Expr.relative[ ( type = token.type ) ] ) {
+			if ( Expr.relative[ (type = token.type) ] ) {
 				break;
 			}
-			if ( ( find = Expr.find[ type ] ) ) {
-
+			if ( (find = Expr.find[ type ]) ) {
 				// Search, expanding context for leading sibling combinators
-				if ( ( seed = find(
-					token.matches[ 0 ].replace( runescape, funescape ),
-					rsibling.test( tokens[ 0 ].type ) && testContext( context.parentNode ) ||
-						context
-				) ) ) {
+				if ( (seed = find(
+					token.matches[0].replace( runescape, funescape ),
+					rsibling.test( tokens[0].type ) && testContext( context.parentNode ) || context
+				)) ) {
 
 					// If seed is empty or no tokens remain, we can return early
 					tokens.splice( i, 1 );
@@ -19457,7 +18940,7 @@ select = Sizzle.select = function( selector, context, results, seed ) {
 // One-time assignments
 
 // Sort stability
-support.sortStable = expando.split( "" ).sort( sortOrder ).join( "" ) === expando;
+support.sortStable = expando.split("").sort( sortOrder ).join("") === expando;
 
 // Support: Chrome 14-35+
 // Always assume duplicates if they aren't passed to the comparison function
@@ -19468,59 +18951,58 @@ setDocument();
 
 // Support: Webkit<537.32 - Safari 6.0.3/Chrome 25 (fixed in Chrome 27)
 // Detached nodes confoundingly follow *each other*
-support.sortDetached = assert( function( el ) {
-
+support.sortDetached = assert(function( el ) {
 	// Should return 1, but returns 4 (following)
-	return el.compareDocumentPosition( document.createElement( "fieldset" ) ) & 1;
-} );
+	return el.compareDocumentPosition( document.createElement("fieldset") ) & 1;
+});
 
 // Support: IE<8
 // Prevent attribute/property "interpolation"
 // https://msdn.microsoft.com/en-us/library/ms536429%28VS.85%29.aspx
-if ( !assert( function( el ) {
+if ( !assert(function( el ) {
 	el.innerHTML = "<a href='#'></a>";
-	return el.firstChild.getAttribute( "href" ) === "#";
-} ) ) {
+	return el.firstChild.getAttribute("href") === "#" ;
+}) ) {
 	addHandle( "type|href|height|width", function( elem, name, isXML ) {
 		if ( !isXML ) {
 			return elem.getAttribute( name, name.toLowerCase() === "type" ? 1 : 2 );
 		}
-	} );
+	});
 }
 
 // Support: IE<9
 // Use defaultValue in place of getAttribute("value")
-if ( !support.attributes || !assert( function( el ) {
+if ( !support.attributes || !assert(function( el ) {
 	el.innerHTML = "<input/>";
 	el.firstChild.setAttribute( "value", "" );
 	return el.firstChild.getAttribute( "value" ) === "";
-} ) ) {
-	addHandle( "value", function( elem, _name, isXML ) {
+}) ) {
+	addHandle( "value", function( elem, name, isXML ) {
 		if ( !isXML && elem.nodeName.toLowerCase() === "input" ) {
 			return elem.defaultValue;
 		}
-	} );
+	});
 }
 
 // Support: IE<9
 // Use getAttributeNode to fetch booleans when getAttribute lies
-if ( !assert( function( el ) {
-	return el.getAttribute( "disabled" ) == null;
-} ) ) {
+if ( !assert(function( el ) {
+	return el.getAttribute("disabled") == null;
+}) ) {
 	addHandle( booleans, function( elem, name, isXML ) {
 		var val;
 		if ( !isXML ) {
 			return elem[ name ] === true ? name.toLowerCase() :
-				( val = elem.getAttributeNode( name ) ) && val.specified ?
+					(val = elem.getAttributeNode( name )) && val.specified ?
 					val.value :
-					null;
+				null;
 		}
-	} );
+	});
 }
 
 return Sizzle;
 
-} )( window );
+})( window );
 
 
 
@@ -19889,7 +19371,7 @@ jQuery.each( {
 	parents: function( elem ) {
 		return dir( elem, "parentNode" );
 	},
-	parentsUntil: function( elem, _i, until ) {
+	parentsUntil: function( elem, i, until ) {
 		return dir( elem, "parentNode", until );
 	},
 	next: function( elem ) {
@@ -19904,10 +19386,10 @@ jQuery.each( {
 	prevAll: function( elem ) {
 		return dir( elem, "previousSibling" );
 	},
-	nextUntil: function( elem, _i, until ) {
+	nextUntil: function( elem, i, until ) {
 		return dir( elem, "nextSibling", until );
 	},
-	prevUntil: function( elem, _i, until ) {
+	prevUntil: function( elem, i, until ) {
 		return dir( elem, "previousSibling", until );
 	},
 	siblings: function( elem ) {
@@ -19917,13 +19399,7 @@ jQuery.each( {
 		return siblings( elem.firstChild );
 	},
 	contents: function( elem ) {
-		if ( elem.contentDocument != null &&
-
-			// Support: IE 11+
-			// <object> elements with no `data` attribute has an object
-			// `contentDocument` with a `null` prototype.
-			getProto( elem.contentDocument ) ) {
-
+		if ( typeof elem.contentDocument !== "undefined" ) {
 			return elem.contentDocument;
 		}
 
@@ -20266,7 +19742,7 @@ jQuery.extend( {
 					var fns = arguments;
 
 					return jQuery.Deferred( function( newDefer ) {
-						jQuery.each( tuples, function( _i, tuple ) {
+						jQuery.each( tuples, function( i, tuple ) {
 
 							// Map tuples (progress, done, fail) to arguments (done, fail, progress)
 							var fn = isFunction( fns[ tuple[ 4 ] ] ) && fns[ tuple[ 4 ] ];
@@ -20719,7 +20195,7 @@ var access = function( elems, fn, key, value, chainable, emptyGet, raw ) {
 			// ...except when executing function values
 			} else {
 				bulk = fn;
-				fn = function( elem, _key, value ) {
+				fn = function( elem, key, value ) {
 					return bulk.call( jQuery( elem ), value );
 				};
 			}
@@ -20754,7 +20230,7 @@ var rmsPrefix = /^-ms-/,
 	rdashAlpha = /-([a-z])/g;
 
 // Used by camelCase as callback to replace()
-function fcamelCase( _all, letter ) {
+function fcamelCase( all, letter ) {
 	return letter.toUpperCase();
 }
 
@@ -21282,6 +20758,27 @@ var isHiddenWithinTree = function( elem, el ) {
 			jQuery.css( elem, "display" ) === "none";
 	};
 
+var swap = function( elem, options, callback, args ) {
+	var ret, name,
+		old = {};
+
+	// Remember the old values, and insert the new ones
+	for ( name in options ) {
+		old[ name ] = elem.style[ name ];
+		elem.style[ name ] = options[ name ];
+	}
+
+	ret = callback.apply( elem, args || [] );
+
+	// Revert the old values
+	for ( name in options ) {
+		elem.style[ name ] = old[ name ];
+	}
+
+	return ret;
+};
+
+
 
 
 function adjustCSS( elem, prop, valueParts, tween ) {
@@ -21452,40 +20949,11 @@ var rscriptType = ( /^$|^module$|\/(?:java|ecma)script/i );
 
 
 
-( function() {
-	var fragment = document.createDocumentFragment(),
-		div = fragment.appendChild( document.createElement( "div" ) ),
-		input = document.createElement( "input" );
-
-	// Support: Android 4.0 - 4.3 only
-	// Check state lost if the name is set (#11217)
-	// Support: Windows Web Apps (WWA)
-	// `name` and `type` must use .setAttribute for WWA (#14901)
-	input.setAttribute( "type", "radio" );
-	input.setAttribute( "checked", "checked" );
-	input.setAttribute( "name", "t" );
-
-	div.appendChild( input );
-
-	// Support: Android <=4.1 only
-	// Older WebKit doesn't clone checked state correctly in fragments
-	support.checkClone = div.cloneNode( true ).cloneNode( true ).lastChild.checked;
-
-	// Support: IE <=11 only
-	// Make sure textarea (and checkbox) defaultValue is properly cloned
-	div.innerHTML = "<textarea>x</textarea>";
-	support.noCloneChecked = !!div.cloneNode( true ).lastChild.defaultValue;
-
-	// Support: IE <=9 only
-	// IE <=9 replaces <option> tags with their contents when inserted outside of
-	// the select element.
-	div.innerHTML = "<option></option>";
-	support.option = !!div.lastChild;
-} )();
-
-
 // We have to close these tags to support XHTML (#13200)
 var wrapMap = {
+
+	// Support: IE <=9 only
+	option: [ 1, "<select multiple='multiple'>", "</select>" ],
 
 	// XHTML parsers do not magically insert elements in the
 	// same way that tag soup parsers do. So we cannot shorten
@@ -21498,13 +20966,11 @@ var wrapMap = {
 	_default: [ 0, "", "" ]
 };
 
+// Support: IE <=9 only
+wrapMap.optgroup = wrapMap.option;
+
 wrapMap.tbody = wrapMap.tfoot = wrapMap.colgroup = wrapMap.caption = wrapMap.thead;
 wrapMap.th = wrapMap.td;
-
-// Support: IE <=9 only
-if ( !support.option ) {
-	wrapMap.optgroup = wrapMap.option = [ 1, "<select multiple='multiple'>", "</select>" ];
-}
 
 
 function getAll( context, tag ) {
@@ -21638,6 +21104,32 @@ function buildFragment( elems, context, scripts, selection, ignored ) {
 }
 
 
+( function() {
+	var fragment = document.createDocumentFragment(),
+		div = fragment.appendChild( document.createElement( "div" ) ),
+		input = document.createElement( "input" );
+
+	// Support: Android 4.0 - 4.3 only
+	// Check state lost if the name is set (#11217)
+	// Support: Windows Web Apps (WWA)
+	// `name` and `type` must use .setAttribute for WWA (#14901)
+	input.setAttribute( "type", "radio" );
+	input.setAttribute( "checked", "checked" );
+	input.setAttribute( "name", "t" );
+
+	div.appendChild( input );
+
+	// Support: Android <=4.1 only
+	// Older WebKit doesn't clone checked state correctly in fragments
+	support.checkClone = div.cloneNode( true ).cloneNode( true ).lastChild.checked;
+
+	// Support: IE <=11 only
+	// Make sure textarea (and checkbox) defaultValue is properly cloned
+	div.innerHTML = "<textarea>x</textarea>";
+	support.noCloneChecked = !!div.cloneNode( true ).lastChild.defaultValue;
+} )();
+
+
 var
 	rkeyEvent = /^key/,
 	rmouseEvent = /^(?:mouse|pointer|contextmenu|drag|drop)|click/,
@@ -21746,8 +21238,8 @@ jQuery.event = {
 			special, handlers, type, namespaces, origType,
 			elemData = dataPriv.get( elem );
 
-		// Only attach events to objects that accept data
-		if ( !acceptData( elem ) ) {
+		// Don't attach events to noData or text/comment nodes (but allow plain objects)
+		if ( !elemData ) {
 			return;
 		}
 
@@ -21771,7 +21263,7 @@ jQuery.event = {
 
 		// Init the element's event structure and main handler, if this is the first
 		if ( !( events = elemData.events ) ) {
-			events = elemData.events = Object.create( null );
+			events = elemData.events = {};
 		}
 		if ( !( eventHandle = elemData.handle ) ) {
 			eventHandle = elemData.handle = function( e ) {
@@ -21929,15 +21421,12 @@ jQuery.event = {
 
 	dispatch: function( nativeEvent ) {
 
+		// Make a writable jQuery.Event from the native event object
+		var event = jQuery.event.fix( nativeEvent );
+
 		var i, j, ret, matched, handleObj, handlerQueue,
 			args = new Array( arguments.length ),
-
-			// Make a writable jQuery.Event from the native event object
-			event = jQuery.event.fix( nativeEvent ),
-
-			handlers = (
-					dataPriv.get( this, "events" ) || Object.create( null )
-				)[ event.type ] || [],
+			handlers = ( dataPriv.get( this, "events" ) || {} )[ event.type ] || [],
 			special = jQuery.event.special[ event.type ] || {};
 
 		// Use the fix-ed jQuery.Event rather than the (read-only) native event
@@ -22512,6 +22001,13 @@ jQuery.fn.extend( {
 
 var
 
+	/* eslint-disable max-len */
+
+	// See https://github.com/eslint/eslint/issues/3229
+	rxhtmlTag = /<(?!area|br|col|embed|hr|img|input|link|meta|param)(([a-z][^\/\0>\x20\t\r\n\f]*)[^>]*)\/>/gi,
+
+	/* eslint-enable */
+
 	// Support: IE <=10 - 11, Edge 12 - 13 only
 	// In IE/Edge using regex groups here causes severe slowdowns.
 	// See https://connect.microsoft.com/IE/feedback/details/1736512/
@@ -22548,7 +22044,7 @@ function restoreScript( elem ) {
 }
 
 function cloneCopyEvent( src, dest ) {
-	var i, l, type, pdataOld, udataOld, udataCur, events;
+	var i, l, type, pdataOld, pdataCur, udataOld, udataCur, events;
 
 	if ( dest.nodeType !== 1 ) {
 		return;
@@ -22556,11 +22052,13 @@ function cloneCopyEvent( src, dest ) {
 
 	// 1. Copy private data: events, handlers, etc.
 	if ( dataPriv.hasData( src ) ) {
-		pdataOld = dataPriv.get( src );
+		pdataOld = dataPriv.access( src );
+		pdataCur = dataPriv.set( dest, pdataOld );
 		events = pdataOld.events;
 
 		if ( events ) {
-			dataPriv.remove( dest, "handle events" );
+			delete pdataCur.handle;
+			pdataCur.events = {};
 
 			for ( type in events ) {
 				for ( i = 0, l = events[ type ].length; i < l; i++ ) {
@@ -22596,7 +22094,7 @@ function fixInput( src, dest ) {
 function domManip( collection, args, callback, ignored ) {
 
 	// Flatten any nested arrays
-	args = flat( args );
+	args = concat.apply( [], args );
 
 	var fragment, first, scripts, hasScripts, node, doc,
 		i = 0,
@@ -22671,7 +22169,7 @@ function domManip( collection, args, callback, ignored ) {
 							if ( jQuery._evalUrl && !node.noModule ) {
 								jQuery._evalUrl( node.src, {
 									nonce: node.nonce || node.getAttribute( "nonce" )
-								}, doc );
+								} );
 							}
 						} else {
 							DOMEval( node.textContent.replace( rcleanScript, "" ), node, doc );
@@ -22708,7 +22206,7 @@ function remove( elem, selector, keepData ) {
 
 jQuery.extend( {
 	htmlPrefilter: function( html ) {
-		return html;
+		return html.replace( rxhtmlTag, "<$1></$2>" );
 	},
 
 	clone: function( elem, dataAndEvents, deepDataAndEvents ) {
@@ -22970,27 +22468,6 @@ var getStyles = function( elem ) {
 		return view.getComputedStyle( elem );
 	};
 
-var swap = function( elem, options, callback ) {
-	var ret, name,
-		old = {};
-
-	// Remember the old values, and insert the new ones
-	for ( name in options ) {
-		old[ name ] = elem.style[ name ];
-		elem.style[ name ] = options[ name ];
-	}
-
-	ret = callback.call( elem );
-
-	// Revert the old values
-	for ( name in options ) {
-		elem.style[ name ] = old[ name ];
-	}
-
-	return ret;
-};
-
-
 var rboxStyle = new RegExp( cssExpand.join( "|" ), "i" );
 
 
@@ -23048,7 +22525,7 @@ var rboxStyle = new RegExp( cssExpand.join( "|" ), "i" );
 	}
 
 	var pixelPositionVal, boxSizingReliableVal, scrollboxSizeVal, pixelBoxStylesVal,
-		reliableTrDimensionsVal, reliableMarginLeftVal,
+		reliableMarginLeftVal,
 		container = document.createElement( "div" ),
 		div = document.createElement( "div" );
 
@@ -23083,35 +22560,6 @@ var rboxStyle = new RegExp( cssExpand.join( "|" ), "i" );
 		scrollboxSize: function() {
 			computeStyleTests();
 			return scrollboxSizeVal;
-		},
-
-		// Support: IE 9 - 11+, Edge 15 - 18+
-		// IE/Edge misreport `getComputedStyle` of table rows with width/height
-		// set in CSS while `offset*` properties report correct values.
-		// Behavior in IE 9 is more subtle than in newer versions & it passes
-		// some versions of this test; make sure not to make it pass there!
-		reliableTrDimensions: function() {
-			var table, tr, trChild, trStyle;
-			if ( reliableTrDimensionsVal == null ) {
-				table = document.createElement( "table" );
-				tr = document.createElement( "tr" );
-				trChild = document.createElement( "div" );
-
-				table.style.cssText = "position:absolute;left:-11111px";
-				tr.style.height = "1px";
-				trChild.style.height = "9px";
-
-				documentElement
-					.appendChild( table )
-					.appendChild( tr )
-					.appendChild( trChild );
-
-				trStyle = window.getComputedStyle( tr );
-				reliableTrDimensionsVal = parseInt( trStyle.height ) > 3;
-
-				documentElement.removeChild( table );
-			}
-			return reliableTrDimensionsVal;
 		}
 	} );
 } )();
@@ -23236,7 +22684,7 @@ var
 		fontWeight: "400"
 	};
 
-function setPositiveNumber( _elem, value, subtract ) {
+function setPositiveNumber( elem, value, subtract ) {
 
 	// Any relative (+/-) values have already been
 	// normalized at this point
@@ -23341,26 +22789,17 @@ function getWidthOrHeight( elem, dimension, extra ) {
 	}
 
 
-	// Support: IE 9 - 11 only
-	// Use offsetWidth/offsetHeight for when box sizing is unreliable.
-	// In those cases, the computed value can be trusted to be border-box.
+	// Fall back to offsetWidth/offsetHeight when value is "auto"
+	// This happens for inline elements with no explicit setting (gh-3571)
+	// Support: Android <=4.1 - 4.3 only
+	// Also use offsetWidth/offsetHeight for misreported inline dimensions (gh-3602)
+	// Support: IE 9-11 only
+	// Also use offsetWidth/offsetHeight for when box sizing is unreliable
+	// We use getClientRects() to check for hidden/disconnected.
+	// In those cases, the computed value can be trusted to be border-box
 	if ( ( !support.boxSizingReliable() && isBorderBox ||
-
-		// Support: IE 10 - 11+, Edge 15 - 18+
-		// IE/Edge misreport `getComputedStyle` of table rows with width/height
-		// set in CSS while `offset*` properties report correct values.
-		// Interestingly, in some cases IE 9 doesn't suffer from this issue.
-		!support.reliableTrDimensions() && nodeName( elem, "tr" ) ||
-
-		// Fall back to offsetWidth/offsetHeight when value is "auto"
-		// This happens for inline elements with no explicit setting (gh-3571)
 		val === "auto" ||
-
-		// Support: Android <=4.1 - 4.3 only
-		// Also use offsetWidth/offsetHeight for misreported inline dimensions (gh-3602)
 		!parseFloat( val ) && jQuery.css( elem, "display", false, styles ) === "inline" ) &&
-
-		// Make sure the element is visible & connected
 		elem.getClientRects().length ) {
 
 		isBorderBox = jQuery.css( elem, "boxSizing", false, styles ) === "border-box";
@@ -23555,7 +22994,7 @@ jQuery.extend( {
 	}
 } );
 
-jQuery.each( [ "height", "width" ], function( _i, dimension ) {
+jQuery.each( [ "height", "width" ], function( i, dimension ) {
 	jQuery.cssHooks[ dimension ] = {
 		get: function( elem, computed, extra ) {
 			if ( computed ) {
@@ -24328,7 +23767,7 @@ jQuery.fn.extend( {
 			clearQueue = type;
 			type = undefined;
 		}
-		if ( clearQueue ) {
+		if ( clearQueue && type !== false ) {
 			this.queue( type || "fx", [] );
 		}
 
@@ -24411,7 +23850,7 @@ jQuery.fn.extend( {
 	}
 } );
 
-jQuery.each( [ "toggle", "show", "hide" ], function( _i, name ) {
+jQuery.each( [ "toggle", "show", "hide" ], function( i, name ) {
 	var cssFn = jQuery.fn[ name ];
 	jQuery.fn[ name ] = function( speed, easing, callback ) {
 		return speed == null || typeof speed === "boolean" ?
@@ -24632,7 +24071,7 @@ boolHook = {
 	}
 };
 
-jQuery.each( jQuery.expr.match.bool.source.match( /\w+/g ), function( _i, name ) {
+jQuery.each( jQuery.expr.match.bool.source.match( /\w+/g ), function( i, name ) {
 	var getter = attrHandle[ name ] || jQuery.find.attr;
 
 	attrHandle[ name ] = function( elem, name, isXML ) {
@@ -25256,9 +24695,7 @@ jQuery.extend( jQuery.event, {
 				special.bindType || type;
 
 			// jQuery handler
-			handle = (
-					dataPriv.get( cur, "events" ) || Object.create( null )
-				)[ event.type ] &&
+			handle = ( dataPriv.get( cur, "events" ) || {} )[ event.type ] &&
 				dataPriv.get( cur, "handle" );
 			if ( handle ) {
 				handle.apply( cur, data );
@@ -25369,10 +24806,7 @@ if ( !support.focusin ) {
 
 		jQuery.event.special[ fix ] = {
 			setup: function() {
-
-				// Handle: regular nodes (via `this.ownerDocument`), window
-				// (via `this.document`) & document (via `this`).
-				var doc = this.ownerDocument || this.document || this,
+				var doc = this.ownerDocument || this,
 					attaches = dataPriv.access( doc, fix );
 
 				if ( !attaches ) {
@@ -25381,7 +24815,7 @@ if ( !support.focusin ) {
 				dataPriv.access( doc, fix, ( attaches || 0 ) + 1 );
 			},
 			teardown: function() {
-				var doc = this.ownerDocument || this.document || this,
+				var doc = this.ownerDocument || this,
 					attaches = dataPriv.access( doc, fix ) - 1;
 
 				if ( !attaches ) {
@@ -25397,7 +24831,7 @@ if ( !support.focusin ) {
 }
 var location = window.location;
 
-var nonce = { guid: Date.now() };
+var nonce = Date.now();
 
 var rquery = ( /\?/ );
 
@@ -25529,7 +24963,7 @@ jQuery.fn.extend( {
 				rsubmittable.test( this.nodeName ) && !rsubmitterTypes.test( type ) &&
 				( this.checked || !rcheckableType.test( type ) );
 		} )
-		.map( function( _i, elem ) {
+		.map( function( i, elem ) {
 			var val = jQuery( this ).val();
 
 			if ( val == null ) {
@@ -26142,8 +25576,7 @@ jQuery.extend( {
 			// Add or update anti-cache param if needed
 			if ( s.cache === false ) {
 				cacheURL = cacheURL.replace( rantiCache, "$1" );
-				uncached = ( rquery.test( cacheURL ) ? "&" : "?" ) + "_=" + ( nonce.guid++ ) +
-					uncached;
+				uncached = ( rquery.test( cacheURL ) ? "&" : "?" ) + "_=" + ( nonce++ ) + uncached;
 			}
 
 			// Put hash and anti-cache on the URL that will be requested (gh-1732)
@@ -26276,11 +25709,6 @@ jQuery.extend( {
 				response = ajaxHandleResponses( s, jqXHR, responses );
 			}
 
-			// Use a noop converter for missing script
-			if ( !isSuccess && jQuery.inArray( "script", s.dataTypes ) > -1 ) {
-				s.converters[ "text script" ] = function() {};
-			}
-
 			// Convert no matter what (that way responseXXX fields are always set)
 			response = ajaxConvert( s, response, jqXHR, isSuccess );
 
@@ -26371,7 +25799,7 @@ jQuery.extend( {
 	}
 } );
 
-jQuery.each( [ "get", "post" ], function( _i, method ) {
+jQuery.each( [ "get", "post" ], function( i, method ) {
 	jQuery[ method ] = function( url, data, callback, type ) {
 
 		// Shift arguments if data argument was omitted
@@ -26392,17 +25820,8 @@ jQuery.each( [ "get", "post" ], function( _i, method ) {
 	};
 } );
 
-jQuery.ajaxPrefilter( function( s ) {
-	var i;
-	for ( i in s.headers ) {
-		if ( i.toLowerCase() === "content-type" ) {
-			s.contentType = s.headers[ i ] || "";
-		}
-	}
-} );
 
-
-jQuery._evalUrl = function( url, options, doc ) {
+jQuery._evalUrl = function( url, options ) {
 	return jQuery.ajax( {
 		url: url,
 
@@ -26420,7 +25839,7 @@ jQuery._evalUrl = function( url, options, doc ) {
 			"text script": function() {}
 		},
 		dataFilter: function( response ) {
-			jQuery.globalEval( response, options, doc );
+			jQuery.globalEval( response, options );
 		}
 	} );
 };
@@ -26742,7 +26161,7 @@ var oldCallbacks = [],
 jQuery.ajaxSetup( {
 	jsonp: "callback",
 	jsonpCallback: function() {
-		var callback = oldCallbacks.pop() || ( jQuery.expando + "_" + ( nonce.guid++ ) );
+		var callback = oldCallbacks.pop() || ( jQuery.expando + "_" + ( nonce++ ) );
 		this[ callback ] = true;
 		return callback;
 	}
@@ -26959,6 +26378,23 @@ jQuery.fn.load = function( url, params, callback ) {
 
 
 
+// Attach a bunch of functions for handling common AJAX events
+jQuery.each( [
+	"ajaxStart",
+	"ajaxStop",
+	"ajaxComplete",
+	"ajaxError",
+	"ajaxSuccess",
+	"ajaxSend"
+], function( i, type ) {
+	jQuery.fn[ type ] = function( fn ) {
+		return this.on( type, fn );
+	};
+} );
+
+
+
+
 jQuery.expr.pseudos.animated = function( elem ) {
 	return jQuery.grep( jQuery.timers, function( fn ) {
 		return elem === fn.elem;
@@ -27015,12 +26451,6 @@ jQuery.offset = {
 			options.using.call( elem, props );
 
 		} else {
-			if ( typeof props.top === "number" ) {
-				props.top += "px";
-			}
-			if ( typeof props.left === "number" ) {
-				props.left += "px";
-			}
 			curElem.css( props );
 		}
 	}
@@ -27171,7 +26601,7 @@ jQuery.each( { scrollLeft: "pageXOffset", scrollTop: "pageYOffset" }, function( 
 // Blink bug: https://bugs.chromium.org/p/chromium/issues/detail?id=589347
 // getComputedStyle returns percent when specified for top/left/bottom/right;
 // rather than make the css module depend on the offset module, just check for it here
-jQuery.each( [ "top", "left" ], function( _i, prop ) {
+jQuery.each( [ "top", "left" ], function( i, prop ) {
 	jQuery.cssHooks[ prop ] = addGetHookIf( support.pixelPosition,
 		function( elem, computed ) {
 			if ( computed ) {
@@ -27234,17 +26664,23 @@ jQuery.each( { Height: "height", Width: "width" }, function( name, type ) {
 } );
 
 
-jQuery.each( [
-	"ajaxStart",
-	"ajaxStop",
-	"ajaxComplete",
-	"ajaxError",
-	"ajaxSuccess",
-	"ajaxSend"
-], function( _i, type ) {
-	jQuery.fn[ type ] = function( fn ) {
-		return this.on( type, fn );
+jQuery.each( ( "blur focus focusin focusout resize scroll click dblclick " +
+	"mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave " +
+	"change select submit keydown keypress keyup contextmenu" ).split( " " ),
+	function( i, name ) {
+
+	// Handle event binding
+	jQuery.fn[ name ] = function( data, fn ) {
+		return arguments.length > 0 ?
+			this.on( name, null, data, fn ) :
+			this.trigger( name );
 	};
+} );
+
+jQuery.fn.extend( {
+	hover: function( fnOver, fnOut ) {
+		return this.mouseenter( fnOver ).mouseleave( fnOut || fnOver );
+	}
 } );
 
 
@@ -27268,32 +26704,8 @@ jQuery.fn.extend( {
 		return arguments.length === 1 ?
 			this.off( selector, "**" ) :
 			this.off( types, selector || "**", fn );
-	},
-
-	hover: function( fnOver, fnOut ) {
-		return this.mouseenter( fnOver ).mouseleave( fnOut || fnOver );
 	}
 } );
-
-jQuery.each( ( "blur focus focusin focusout resize scroll click dblclick " +
-	"mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave " +
-	"change select submit keydown keypress keyup contextmenu" ).split( " " ),
-	function( _i, name ) {
-
-		// Handle event binding
-		jQuery.fn[ name ] = function( data, fn ) {
-			return arguments.length > 0 ?
-				this.on( name, null, data, fn ) :
-				this.trigger( name );
-		};
-	} );
-
-
-
-
-// Support: Android <=4.0 only
-// Make sure we trim BOM and NBSP
-var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
 
 // Bind a function to a context, optionally partially applying any
 // arguments.
@@ -27357,11 +26769,6 @@ jQuery.isNumeric = function( obj ) {
 		!isNaN( obj - parseFloat( obj ) );
 };
 
-jQuery.trim = function( text ) {
-	return text == null ?
-		"" :
-		( text + "" ).replace( rtrim, "" );
-};
 
 
 
@@ -27411,7 +26818,7 @@ jQuery.noConflict = function( deep ) {
 // Expose jQuery and $ identifiers, even in AMD
 // (#7102#comment:10, https://github.com/jquery/jquery/pull/557)
 // and CommonJS for browser emulators (#13566)
-if ( typeof noGlobal === "undefined" ) {
+if ( !noGlobal ) {
 	window.jQuery = window.$ = jQuery;
 }
 
@@ -27625,6 +27032,44 @@ module.exports = Set;
 
 /***/ }),
 
+/***/ "./node_modules/lodash/_SetCache.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_SetCache.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var MapCache = __webpack_require__(/*! ./_MapCache */ "./node_modules/lodash/_MapCache.js"),
+    setCacheAdd = __webpack_require__(/*! ./_setCacheAdd */ "./node_modules/lodash/_setCacheAdd.js"),
+    setCacheHas = __webpack_require__(/*! ./_setCacheHas */ "./node_modules/lodash/_setCacheHas.js");
+
+/**
+ *
+ * Creates an array cache object to store unique values.
+ *
+ * @private
+ * @constructor
+ * @param {Array} [values] The values to cache.
+ */
+function SetCache(values) {
+  var index = -1,
+      length = values == null ? 0 : values.length;
+
+  this.__data__ = new MapCache;
+  while (++index < length) {
+    this.add(values[index]);
+  }
+}
+
+// Add methods to `SetCache`.
+SetCache.prototype.add = SetCache.prototype.push = setCacheAdd;
+SetCache.prototype.has = setCacheHas;
+
+module.exports = SetCache;
+
+
+/***/ }),
+
 /***/ "./node_modules/lodash/_Stack.js":
 /*!***************************************!*\
   !*** ./node_modules/lodash/_Stack.js ***!
@@ -27780,6 +27225,67 @@ function arrayFilter(array, predicate) {
 }
 
 module.exports = arrayFilter;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_arrayIncludes.js":
+/*!***********************************************!*\
+  !*** ./node_modules/lodash/_arrayIncludes.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseIndexOf = __webpack_require__(/*! ./_baseIndexOf */ "./node_modules/lodash/_baseIndexOf.js");
+
+/**
+ * A specialized version of `_.includes` for arrays without support for
+ * specifying an index to search from.
+ *
+ * @private
+ * @param {Array} [array] The array to inspect.
+ * @param {*} target The value to search for.
+ * @returns {boolean} Returns `true` if `target` is found, else `false`.
+ */
+function arrayIncludes(array, value) {
+  var length = array == null ? 0 : array.length;
+  return !!length && baseIndexOf(array, value, 0) > -1;
+}
+
+module.exports = arrayIncludes;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_arrayIncludesWith.js":
+/*!***************************************************!*\
+  !*** ./node_modules/lodash/_arrayIncludesWith.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * This function is like `arrayIncludes` except that it accepts a comparator.
+ *
+ * @private
+ * @param {Array} [array] The array to inspect.
+ * @param {*} target The value to search for.
+ * @param {Function} comparator The comparator invoked per element.
+ * @returns {boolean} Returns `true` if `target` is found, else `false`.
+ */
+function arrayIncludesWith(array, value, comparator) {
+  var index = -1,
+      length = array == null ? 0 : array.length;
+
+  while (++index < length) {
+    if (comparator(value, array[index])) {
+      return true;
+    }
+  }
+  return false;
+}
+
+module.exports = arrayIncludesWith;
 
 
 /***/ }),
@@ -28065,8 +27571,7 @@ var Stack = __webpack_require__(/*! ./_Stack */ "./node_modules/lodash/_Stack.js
     isMap = __webpack_require__(/*! ./isMap */ "./node_modules/lodash/isMap.js"),
     isObject = __webpack_require__(/*! ./isObject */ "./node_modules/lodash/isObject.js"),
     isSet = __webpack_require__(/*! ./isSet */ "./node_modules/lodash/isSet.js"),
-    keys = __webpack_require__(/*! ./keys */ "./node_modules/lodash/keys.js"),
-    keysIn = __webpack_require__(/*! ./keysIn */ "./node_modules/lodash/keysIn.js");
+    keys = __webpack_require__(/*! ./keys */ "./node_modules/lodash/keys.js");
 
 /** Used to compose bitmasks for cloning. */
 var CLONE_DEEP_FLAG = 1,
@@ -28256,6 +27761,41 @@ module.exports = baseCreate;
 
 /***/ }),
 
+/***/ "./node_modules/lodash/_baseFindIndex.js":
+/*!***********************************************!*\
+  !*** ./node_modules/lodash/_baseFindIndex.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * The base implementation of `_.findIndex` and `_.findLastIndex` without
+ * support for iteratee shorthands.
+ *
+ * @private
+ * @param {Array} array The array to inspect.
+ * @param {Function} predicate The function invoked per iteration.
+ * @param {number} fromIndex The index to search from.
+ * @param {boolean} [fromRight] Specify iterating from right to left.
+ * @returns {number} Returns the index of the matched value, else `-1`.
+ */
+function baseFindIndex(array, predicate, fromIndex, fromRight) {
+  var length = array.length,
+      index = fromIndex + (fromRight ? 1 : -1);
+
+  while ((fromRight ? index-- : ++index < length)) {
+    if (predicate(array[index], index, array)) {
+      return index;
+    }
+  }
+  return -1;
+}
+
+module.exports = baseFindIndex;
+
+
+/***/ }),
+
 /***/ "./node_modules/lodash/_baseGetAllKeys.js":
 /*!************************************************!*\
   !*** ./node_modules/lodash/_baseGetAllKeys.js ***!
@@ -28326,6 +27866,37 @@ module.exports = baseGetTag;
 
 /***/ }),
 
+/***/ "./node_modules/lodash/_baseIndexOf.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_baseIndexOf.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseFindIndex = __webpack_require__(/*! ./_baseFindIndex */ "./node_modules/lodash/_baseFindIndex.js"),
+    baseIsNaN = __webpack_require__(/*! ./_baseIsNaN */ "./node_modules/lodash/_baseIsNaN.js"),
+    strictIndexOf = __webpack_require__(/*! ./_strictIndexOf */ "./node_modules/lodash/_strictIndexOf.js");
+
+/**
+ * The base implementation of `_.indexOf` without `fromIndex` bounds checks.
+ *
+ * @private
+ * @param {Array} array The array to inspect.
+ * @param {*} value The value to search for.
+ * @param {number} fromIndex The index to search from.
+ * @returns {number} Returns the index of the matched value, else `-1`.
+ */
+function baseIndexOf(array, value, fromIndex) {
+  return value === value
+    ? strictIndexOf(array, value, fromIndex)
+    : baseFindIndex(array, baseIsNaN, fromIndex);
+}
+
+module.exports = baseIndexOf;
+
+
+/***/ }),
+
 /***/ "./node_modules/lodash/_baseIsArguments.js":
 /*!*************************************************!*\
   !*** ./node_modules/lodash/_baseIsArguments.js ***!
@@ -28380,6 +27951,29 @@ function baseIsMap(value) {
 }
 
 module.exports = baseIsMap;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseIsNaN.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_baseIsNaN.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * The base implementation of `_.isNaN` without support for number objects.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is `NaN`, else `false`.
+ */
+function baseIsNaN(value) {
+  return value !== value;
+}
+
+module.exports = baseIsNaN;
 
 
 /***/ }),
@@ -28708,6 +28302,113 @@ function baseUnary(func) {
 }
 
 module.exports = baseUnary;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseUniq.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_baseUniq.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var SetCache = __webpack_require__(/*! ./_SetCache */ "./node_modules/lodash/_SetCache.js"),
+    arrayIncludes = __webpack_require__(/*! ./_arrayIncludes */ "./node_modules/lodash/_arrayIncludes.js"),
+    arrayIncludesWith = __webpack_require__(/*! ./_arrayIncludesWith */ "./node_modules/lodash/_arrayIncludesWith.js"),
+    cacheHas = __webpack_require__(/*! ./_cacheHas */ "./node_modules/lodash/_cacheHas.js"),
+    createSet = __webpack_require__(/*! ./_createSet */ "./node_modules/lodash/_createSet.js"),
+    setToArray = __webpack_require__(/*! ./_setToArray */ "./node_modules/lodash/_setToArray.js");
+
+/** Used as the size to enable large array optimizations. */
+var LARGE_ARRAY_SIZE = 200;
+
+/**
+ * The base implementation of `_.uniqBy` without support for iteratee shorthands.
+ *
+ * @private
+ * @param {Array} array The array to inspect.
+ * @param {Function} [iteratee] The iteratee invoked per element.
+ * @param {Function} [comparator] The comparator invoked per element.
+ * @returns {Array} Returns the new duplicate free array.
+ */
+function baseUniq(array, iteratee, comparator) {
+  var index = -1,
+      includes = arrayIncludes,
+      length = array.length,
+      isCommon = true,
+      result = [],
+      seen = result;
+
+  if (comparator) {
+    isCommon = false;
+    includes = arrayIncludesWith;
+  }
+  else if (length >= LARGE_ARRAY_SIZE) {
+    var set = iteratee ? null : createSet(array);
+    if (set) {
+      return setToArray(set);
+    }
+    isCommon = false;
+    includes = cacheHas;
+    seen = new SetCache;
+  }
+  else {
+    seen = iteratee ? [] : result;
+  }
+  outer:
+  while (++index < length) {
+    var value = array[index],
+        computed = iteratee ? iteratee(value) : value;
+
+    value = (comparator || value !== 0) ? value : 0;
+    if (isCommon && computed === computed) {
+      var seenIndex = seen.length;
+      while (seenIndex--) {
+        if (seen[seenIndex] === computed) {
+          continue outer;
+        }
+      }
+      if (iteratee) {
+        seen.push(computed);
+      }
+      result.push(value);
+    }
+    else if (!includes(seen, computed, comparator)) {
+      if (seen !== result) {
+        seen.push(computed);
+      }
+      result.push(value);
+    }
+  }
+  return result;
+}
+
+module.exports = baseUniq;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_cacheHas.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_cacheHas.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * Checks if a `cache` value for `key` exists.
+ *
+ * @private
+ * @param {Object} cache The cache to query.
+ * @param {string} key The key of the entry to check.
+ * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+ */
+function cacheHas(cache, key) {
+  return cache.has(key);
+}
+
+module.exports = cacheHas;
 
 
 /***/ }),
@@ -29046,6 +28747,36 @@ var root = __webpack_require__(/*! ./_root */ "./node_modules/lodash/_root.js");
 var coreJsData = root['__core-js_shared__'];
 
 module.exports = coreJsData;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_createSet.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_createSet.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Set = __webpack_require__(/*! ./_Set */ "./node_modules/lodash/_Set.js"),
+    noop = __webpack_require__(/*! ./noop */ "./node_modules/lodash/noop.js"),
+    setToArray = __webpack_require__(/*! ./_setToArray */ "./node_modules/lodash/_setToArray.js");
+
+/** Used as references for various `Number` constants. */
+var INFINITY = 1 / 0;
+
+/**
+ * Creates a set object of `values`.
+ *
+ * @private
+ * @param {Array} values The values to add to the set.
+ * @returns {Object} Returns the new set.
+ */
+var createSet = !(Set && (1 / setToArray(new Set([,-0]))[1]) == INFINITY) ? noop : function(values) {
+  return new Set(values);
+};
+
+module.exports = createSet;
 
 
 /***/ }),
@@ -30381,6 +30112,90 @@ module.exports = root;
 
 /***/ }),
 
+/***/ "./node_modules/lodash/_setCacheAdd.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_setCacheAdd.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/** Used to stand-in for `undefined` hash values. */
+var HASH_UNDEFINED = '__lodash_hash_undefined__';
+
+/**
+ * Adds `value` to the array cache.
+ *
+ * @private
+ * @name add
+ * @memberOf SetCache
+ * @alias push
+ * @param {*} value The value to cache.
+ * @returns {Object} Returns the cache instance.
+ */
+function setCacheAdd(value) {
+  this.__data__.set(value, HASH_UNDEFINED);
+  return this;
+}
+
+module.exports = setCacheAdd;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_setCacheHas.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_setCacheHas.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * Checks if `value` is in the array cache.
+ *
+ * @private
+ * @name has
+ * @memberOf SetCache
+ * @param {*} value The value to search for.
+ * @returns {number} Returns `true` if `value` is found, else `false`.
+ */
+function setCacheHas(value) {
+  return this.__data__.has(value);
+}
+
+module.exports = setCacheHas;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_setToArray.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_setToArray.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * Converts `set` to an array of its values.
+ *
+ * @private
+ * @param {Object} set The set to convert.
+ * @returns {Array} Returns the values.
+ */
+function setToArray(set) {
+  var index = -1,
+      result = Array(set.size);
+
+  set.forEach(function(value) {
+    result[++index] = value;
+  });
+  return result;
+}
+
+module.exports = setToArray;
+
+
+/***/ }),
+
 /***/ "./node_modules/lodash/_stackClear.js":
 /*!********************************************!*\
   !*** ./node_modules/lodash/_stackClear.js ***!
@@ -30527,6 +30342,40 @@ function stackSet(key, value) {
 }
 
 module.exports = stackSet;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_strictIndexOf.js":
+/*!***********************************************!*\
+  !*** ./node_modules/lodash/_strictIndexOf.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * A specialized version of `_.indexOf` which performs strict equality
+ * comparisons of values, i.e. `===`.
+ *
+ * @private
+ * @param {Array} array The array to inspect.
+ * @param {*} value The value to search for.
+ * @param {number} fromIndex The index to search from.
+ * @returns {number} Returns the index of the matched value, else `-1`.
+ */
+function strictIndexOf(array, value, fromIndex) {
+  var index = fromIndex - 1,
+      length = array.length;
+
+  while (++index < length) {
+    if (array[index] === value) {
+      return index;
+    }
+  }
+  return -1;
+}
+
+module.exports = strictIndexOf;
 
 
 /***/ }),
@@ -31333,6 +31182,34 @@ module.exports = keysIn;
 
 /***/ }),
 
+/***/ "./node_modules/lodash/noop.js":
+/*!*************************************!*\
+  !*** ./node_modules/lodash/noop.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * This method returns `undefined`.
+ *
+ * @static
+ * @memberOf _
+ * @since 2.3.0
+ * @category Util
+ * @example
+ *
+ * _.times(2, _.noop);
+ * // => [undefined, undefined]
+ */
+function noop() {
+  // No operation performed.
+}
+
+module.exports = noop;
+
+
+/***/ }),
+
 /***/ "./node_modules/lodash/stubArray.js":
 /*!******************************************!*\
   !*** ./node_modules/lodash/stubArray.js ***!
@@ -31396,6 +31273,42 @@ module.exports = stubFalse;
 
 /***/ }),
 
+/***/ "./node_modules/lodash/uniq.js":
+/*!*************************************!*\
+  !*** ./node_modules/lodash/uniq.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseUniq = __webpack_require__(/*! ./_baseUniq */ "./node_modules/lodash/_baseUniq.js");
+
+/**
+ * Creates a duplicate-free version of an array, using
+ * [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
+ * for equality comparisons, in which only the first occurrence of each element
+ * is kept. The order of result values is determined by the order they occur
+ * in the array.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Array
+ * @param {Array} array The array to inspect.
+ * @returns {Array} Returns the new duplicate free array.
+ * @example
+ *
+ * _.uniq([2, 1, 2]);
+ * // => [2, 1]
+ */
+function uniq(array) {
+  return (array && array.length) ? baseUniq(array) : [];
+}
+
+module.exports = uniq;
+
+
+/***/ }),
+
 /***/ "./node_modules/moment/moment.js":
 /*!***************************************!*\
   !*** ./node_modules/moment/moment.js ***!
@@ -31404,10 +31317,6 @@ module.exports = stubFalse;
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module) {var require;//! moment.js
-//! version : 2.27.0
-//! authors : Tim Wood, Iskren Chernev, Moment.js contributors
-//! license : MIT
-//! momentjs.com
 
 ;(function (global, factory) {
      true ? module.exports = factory() :
@@ -31416,43 +31325,33 @@ module.exports = stubFalse;
 
     var hookCallback;
 
-    function hooks() {
+    function hooks () {
         return hookCallback.apply(null, arguments);
     }
 
     // This is done to register the method called with moment()
     // without creating circular dependencies.
-    function setHookCallback(callback) {
+    function setHookCallback (callback) {
         hookCallback = callback;
     }
 
     function isArray(input) {
-        return (
-            input instanceof Array ||
-            Object.prototype.toString.call(input) === '[object Array]'
-        );
+        return input instanceof Array || Object.prototype.toString.call(input) === '[object Array]';
     }
 
     function isObject(input) {
         // IE8 will treat undefined and null as object if it wasn't for
         // input != null
-        return (
-            input != null &&
-            Object.prototype.toString.call(input) === '[object Object]'
-        );
-    }
-
-    function hasOwnProp(a, b) {
-        return Object.prototype.hasOwnProperty.call(a, b);
+        return input != null && Object.prototype.toString.call(input) === '[object Object]';
     }
 
     function isObjectEmpty(obj) {
         if (Object.getOwnPropertyNames) {
-            return Object.getOwnPropertyNames(obj).length === 0;
+            return (Object.getOwnPropertyNames(obj).length === 0);
         } else {
             var k;
             for (k in obj) {
-                if (hasOwnProp(obj, k)) {
+                if (obj.hasOwnProperty(k)) {
                     return false;
                 }
             }
@@ -31465,26 +31364,23 @@ module.exports = stubFalse;
     }
 
     function isNumber(input) {
-        return (
-            typeof input === 'number' ||
-            Object.prototype.toString.call(input) === '[object Number]'
-        );
+        return typeof input === 'number' || Object.prototype.toString.call(input) === '[object Number]';
     }
 
     function isDate(input) {
-        return (
-            input instanceof Date ||
-            Object.prototype.toString.call(input) === '[object Date]'
-        );
+        return input instanceof Date || Object.prototype.toString.call(input) === '[object Date]';
     }
 
     function map(arr, fn) {
-        var res = [],
-            i;
+        var res = [], i;
         for (i = 0; i < arr.length; ++i) {
             res.push(fn(arr[i], i));
         }
         return res;
+    }
+
+    function hasOwnProp(a, b) {
+        return Object.prototype.hasOwnProperty.call(a, b);
     }
 
     function extend(a, b) {
@@ -31505,29 +31401,27 @@ module.exports = stubFalse;
         return a;
     }
 
-    function createUTC(input, format, locale, strict) {
+    function createUTC (input, format, locale, strict) {
         return createLocalOrUTC(input, format, locale, strict, true).utc();
     }
 
     function defaultParsingFlags() {
         // We need to deep clone this object.
         return {
-            empty: false,
-            unusedTokens: [],
-            unusedInput: [],
-            overflow: -2,
-            charsLeftOver: 0,
-            nullInput: false,
-            invalidEra: null,
-            invalidMonth: null,
-            invalidFormat: false,
-            userInvalidated: false,
-            iso: false,
-            parsedDateParts: [],
-            era: null,
-            meridiem: null,
-            rfc2822: false,
-            weekdayMismatch: false,
+            empty           : false,
+            unusedTokens    : [],
+            unusedInput     : [],
+            overflow        : -2,
+            charsLeftOver   : 0,
+            nullInput       : false,
+            invalidMonth    : null,
+            invalidFormat   : false,
+            userInvalidated : false,
+            iso             : false,
+            parsedDateParts : [],
+            meridiem        : null,
+            rfc2822         : false,
+            weekdayMismatch : false
         };
     }
 
@@ -31543,11 +31437,10 @@ module.exports = stubFalse;
         some = Array.prototype.some;
     } else {
         some = function (fun) {
-            var t = Object(this),
-                len = t.length >>> 0,
-                i;
+            var t = Object(this);
+            var len = t.length >>> 0;
 
-            for (i = 0; i < len; i++) {
+            for (var i = 0; i < len; i++) {
                 if (i in t && fun.call(this, t[i], i, t)) {
                     return true;
                 }
@@ -31559,26 +31452,23 @@ module.exports = stubFalse;
 
     function isValid(m) {
         if (m._isValid == null) {
-            var flags = getParsingFlags(m),
-                parsedParts = some.call(flags.parsedDateParts, function (i) {
-                    return i != null;
-                }),
-                isNowValid =
-                    !isNaN(m._d.getTime()) &&
-                    flags.overflow < 0 &&
-                    !flags.empty &&
-                    !flags.invalidEra &&
-                    !flags.invalidMonth &&
-                    !flags.invalidWeekday &&
-                    !flags.weekdayMismatch &&
-                    !flags.nullInput &&
-                    !flags.invalidFormat &&
-                    !flags.userInvalidated &&
-                    (!flags.meridiem || (flags.meridiem && parsedParts));
+            var flags = getParsingFlags(m);
+            var parsedParts = some.call(flags.parsedDateParts, function (i) {
+                return i != null;
+            });
+            var isNowValid = !isNaN(m._d.getTime()) &&
+                flags.overflow < 0 &&
+                !flags.empty &&
+                !flags.invalidMonth &&
+                !flags.invalidWeekday &&
+                !flags.weekdayMismatch &&
+                !flags.nullInput &&
+                !flags.invalidFormat &&
+                !flags.userInvalidated &&
+                (!flags.meridiem || (flags.meridiem && parsedParts));
 
             if (m._strict) {
-                isNowValid =
-                    isNowValid &&
+                isNowValid = isNowValid &&
                     flags.charsLeftOver === 0 &&
                     flags.unusedTokens.length === 0 &&
                     flags.bigHour === undefined;
@@ -31586,18 +31476,20 @@ module.exports = stubFalse;
 
             if (Object.isFrozen == null || !Object.isFrozen(m)) {
                 m._isValid = isNowValid;
-            } else {
+            }
+            else {
                 return isNowValid;
             }
         }
         return m._isValid;
     }
 
-    function createInvalid(flags) {
+    function createInvalid (flags) {
         var m = createUTC(NaN);
         if (flags != null) {
             extend(getParsingFlags(m), flags);
-        } else {
+        }
+        else {
             getParsingFlags(m).userInvalidated = true;
         }
 
@@ -31606,8 +31498,7 @@ module.exports = stubFalse;
 
     // Plugins that add properties should also add the key here (null value),
     // so we can properly clone ourselves.
-    var momentProperties = (hooks.momentProperties = []),
-        updateInProgress = false;
+    var momentProperties = hooks.momentProperties = [];
 
     function copyConfig(to, from) {
         var i, prop, val;
@@ -31656,6 +31547,8 @@ module.exports = stubFalse;
         return to;
     }
 
+    var updateInProgress = false;
+
     // Moment prototype object
     function Moment(config) {
         copyConfig(this, config);
@@ -31672,18 +31565,48 @@ module.exports = stubFalse;
         }
     }
 
-    function isMoment(obj) {
-        return (
-            obj instanceof Moment || (obj != null && obj._isAMomentObject != null)
-        );
+    function isMoment (obj) {
+        return obj instanceof Moment || (obj != null && obj._isAMomentObject != null);
+    }
+
+    function absFloor (number) {
+        if (number < 0) {
+            // -0 -> 0
+            return Math.ceil(number) || 0;
+        } else {
+            return Math.floor(number);
+        }
+    }
+
+    function toInt(argumentForCoercion) {
+        var coercedNumber = +argumentForCoercion,
+            value = 0;
+
+        if (coercedNumber !== 0 && isFinite(coercedNumber)) {
+            value = absFloor(coercedNumber);
+        }
+
+        return value;
+    }
+
+    // compare two arrays, return the number of differences
+    function compareArrays(array1, array2, dontConvert) {
+        var len = Math.min(array1.length, array2.length),
+            lengthDiff = Math.abs(array1.length - array2.length),
+            diffs = 0,
+            i;
+        for (i = 0; i < len; i++) {
+            if ((dontConvert && array1[i] !== array2[i]) ||
+                (!dontConvert && toInt(array1[i]) !== toInt(array2[i]))) {
+                diffs++;
+            }
+        }
+        return diffs + lengthDiff;
     }
 
     function warn(msg) {
-        if (
-            hooks.suppressDeprecationWarnings === false &&
-            typeof console !== 'undefined' &&
-            console.warn
-        ) {
+        if (hooks.suppressDeprecationWarnings === false &&
+                (typeof console !==  'undefined') && console.warn) {
             console.warn('Deprecation warning: ' + msg);
         }
     }
@@ -31696,18 +31619,14 @@ module.exports = stubFalse;
                 hooks.deprecationHandler(null, msg);
             }
             if (firstTime) {
-                var args = [],
-                    arg,
-                    i,
-                    key;
-                for (i = 0; i < arguments.length; i++) {
+                var args = [];
+                var arg;
+                for (var i = 0; i < arguments.length; i++) {
                     arg = '';
                     if (typeof arguments[i] === 'object') {
                         arg += '\n[' + i + '] ';
-                        for (key in arguments[0]) {
-                            if (hasOwnProp(arguments[0], key)) {
-                                arg += key + ': ' + arguments[0][key] + ', ';
-                            }
+                        for (var key in arguments[0]) {
+                            arg += key + ': ' + arguments[0][key] + ', ';
                         }
                         arg = arg.slice(0, -2); // Remove trailing comma and space
                     } else {
@@ -31715,13 +31634,7 @@ module.exports = stubFalse;
                     }
                     args.push(arg);
                 }
-                warn(
-                    msg +
-                        '\nArguments: ' +
-                        Array.prototype.slice.call(args).join('') +
-                        '\n' +
-                        new Error().stack
-                );
+                warn(msg + '\nArguments: ' + Array.prototype.slice.call(args).join('') + '\n' + (new Error()).stack);
                 firstTime = false;
             }
             return fn.apply(this, arguments);
@@ -31744,22 +31657,17 @@ module.exports = stubFalse;
     hooks.deprecationHandler = null;
 
     function isFunction(input) {
-        return (
-            (typeof Function !== 'undefined' && input instanceof Function) ||
-            Object.prototype.toString.call(input) === '[object Function]'
-        );
+        return input instanceof Function || Object.prototype.toString.call(input) === '[object Function]';
     }
 
-    function set(config) {
+    function set (config) {
         var prop, i;
         for (i in config) {
-            if (hasOwnProp(config, i)) {
-                prop = config[i];
-                if (isFunction(prop)) {
-                    this[i] = prop;
-                } else {
-                    this['_' + i] = prop;
-                }
+            prop = config[i];
+            if (isFunction(prop)) {
+                this[i] = prop;
+            } else {
+                this['_' + i] = prop;
             }
         }
         this._config = config;
@@ -31768,14 +31676,11 @@ module.exports = stubFalse;
         // TODO: Remove "ordinalParse" fallback in next major release.
         this._dayOfMonthOrdinalParseLenient = new RegExp(
             (this._dayOfMonthOrdinalParse.source || this._ordinalParse.source) +
-                '|' +
-                /\d{1,2}/.source
-        );
+                '|' + (/\d{1,2}/).source);
     }
 
     function mergeConfigs(parentConfig, childConfig) {
-        var res = extend({}, parentConfig),
-            prop;
+        var res = extend({}, parentConfig), prop;
         for (prop in childConfig) {
             if (hasOwnProp(childConfig, prop)) {
                 if (isObject(parentConfig[prop]) && isObject(childConfig[prop])) {
@@ -31790,11 +31695,9 @@ module.exports = stubFalse;
             }
         }
         for (prop in parentConfig) {
-            if (
-                hasOwnProp(parentConfig, prop) &&
-                !hasOwnProp(childConfig, prop) &&
-                isObject(parentConfig[prop])
-            ) {
+            if (hasOwnProp(parentConfig, prop) &&
+                    !hasOwnProp(childConfig, prop) &&
+                    isObject(parentConfig[prop])) {
                 // make sure changes to properties don't modify parent config
                 res[prop] = extend({}, res[prop]);
             }
@@ -31814,8 +31717,7 @@ module.exports = stubFalse;
         keys = Object.keys;
     } else {
         keys = function (obj) {
-            var i,
-                res = [];
+            var i, res = [];
             for (i in obj) {
                 if (hasOwnProp(obj, i)) {
                     res.push(i);
@@ -31826,139 +31728,29 @@ module.exports = stubFalse;
     }
 
     var defaultCalendar = {
-        sameDay: '[Today at] LT',
-        nextDay: '[Tomorrow at] LT',
-        nextWeek: 'dddd [at] LT',
-        lastDay: '[Yesterday at] LT',
-        lastWeek: '[Last] dddd [at] LT',
-        sameElse: 'L',
+        sameDay : '[Today at] LT',
+        nextDay : '[Tomorrow at] LT',
+        nextWeek : 'dddd [at] LT',
+        lastDay : '[Yesterday at] LT',
+        lastWeek : '[Last] dddd [at] LT',
+        sameElse : 'L'
     };
 
-    function calendar(key, mom, now) {
+    function calendar (key, mom, now) {
         var output = this._calendar[key] || this._calendar['sameElse'];
         return isFunction(output) ? output.call(mom, now) : output;
     }
 
-    function zeroFill(number, targetLength, forceSign) {
-        var absNumber = '' + Math.abs(number),
-            zerosToFill = targetLength - absNumber.length,
-            sign = number >= 0;
-        return (
-            (sign ? (forceSign ? '+' : '') : '-') +
-            Math.pow(10, Math.max(0, zerosToFill)).toString().substr(1) +
-            absNumber
-        );
-    }
-
-    var formattingTokens = /(\[[^\[]*\])|(\\)?([Hh]mm(ss)?|Mo|MM?M?M?|Do|DDDo|DD?D?D?|ddd?d?|do?|w[o|w]?|W[o|W]?|Qo?|N{1,5}|YYYYYY|YYYYY|YYYY|YY|y{2,4}|yo?|gg(ggg?)?|GG(GGG?)?|e|E|a|A|hh?|HH?|kk?|mm?|ss?|S{1,9}|x|X|zz?|ZZ?|.)/g,
-        localFormattingTokens = /(\[[^\[]*\])|(\\)?(LTS|LT|LL?L?L?|l{1,4})/g,
-        formatFunctions = {},
-        formatTokenFunctions = {};
-
-    // token:    'M'
-    // padded:   ['MM', 2]
-    // ordinal:  'Mo'
-    // callback: function () { this.month() + 1 }
-    function addFormatToken(token, padded, ordinal, callback) {
-        var func = callback;
-        if (typeof callback === 'string') {
-            func = function () {
-                return this[callback]();
-            };
-        }
-        if (token) {
-            formatTokenFunctions[token] = func;
-        }
-        if (padded) {
-            formatTokenFunctions[padded[0]] = function () {
-                return zeroFill(func.apply(this, arguments), padded[1], padded[2]);
-            };
-        }
-        if (ordinal) {
-            formatTokenFunctions[ordinal] = function () {
-                return this.localeData().ordinal(
-                    func.apply(this, arguments),
-                    token
-                );
-            };
-        }
-    }
-
-    function removeFormattingTokens(input) {
-        if (input.match(/\[[\s\S]/)) {
-            return input.replace(/^\[|\]$/g, '');
-        }
-        return input.replace(/\\/g, '');
-    }
-
-    function makeFormatFunction(format) {
-        var array = format.match(formattingTokens),
-            i,
-            length;
-
-        for (i = 0, length = array.length; i < length; i++) {
-            if (formatTokenFunctions[array[i]]) {
-                array[i] = formatTokenFunctions[array[i]];
-            } else {
-                array[i] = removeFormattingTokens(array[i]);
-            }
-        }
-
-        return function (mom) {
-            var output = '',
-                i;
-            for (i = 0; i < length; i++) {
-                output += isFunction(array[i])
-                    ? array[i].call(mom, format)
-                    : array[i];
-            }
-            return output;
-        };
-    }
-
-    // format date using native date object
-    function formatMoment(m, format) {
-        if (!m.isValid()) {
-            return m.localeData().invalidDate();
-        }
-
-        format = expandFormat(format, m.localeData());
-        formatFunctions[format] =
-            formatFunctions[format] || makeFormatFunction(format);
-
-        return formatFunctions[format](m);
-    }
-
-    function expandFormat(format, locale) {
-        var i = 5;
-
-        function replaceLongDateFormatTokens(input) {
-            return locale.longDateFormat(input) || input;
-        }
-
-        localFormattingTokens.lastIndex = 0;
-        while (i >= 0 && localFormattingTokens.test(format)) {
-            format = format.replace(
-                localFormattingTokens,
-                replaceLongDateFormatTokens
-            );
-            localFormattingTokens.lastIndex = 0;
-            i -= 1;
-        }
-
-        return format;
-    }
-
     var defaultLongDateFormat = {
-        LTS: 'h:mm:ss A',
-        LT: 'h:mm A',
-        L: 'MM/DD/YYYY',
-        LL: 'MMMM D, YYYY',
-        LLL: 'MMMM D, YYYY h:mm A',
-        LLLL: 'dddd, MMMM D, YYYY h:mm A',
+        LTS  : 'h:mm:ss A',
+        LT   : 'h:mm A',
+        L    : 'MM/DD/YYYY',
+        LL   : 'MMMM D, YYYY',
+        LLL  : 'MMMM D, YYYY h:mm A',
+        LLLL : 'dddd, MMMM D, YYYY h:mm A'
     };
 
-    function longDateFormat(key) {
+    function longDateFormat (key) {
         var format = this._longDateFormat[key],
             formatUpper = this._longDateFormat[key.toUpperCase()];
 
@@ -31966,79 +31758,64 @@ module.exports = stubFalse;
             return format;
         }
 
-        this._longDateFormat[key] = formatUpper
-            .match(formattingTokens)
-            .map(function (tok) {
-                if (
-                    tok === 'MMMM' ||
-                    tok === 'MM' ||
-                    tok === 'DD' ||
-                    tok === 'dddd'
-                ) {
-                    return tok.slice(1);
-                }
-                return tok;
-            })
-            .join('');
+        this._longDateFormat[key] = formatUpper.replace(/MMMM|MM|DD|dddd/g, function (val) {
+            return val.slice(1);
+        });
 
         return this._longDateFormat[key];
     }
 
     var defaultInvalidDate = 'Invalid date';
 
-    function invalidDate() {
+    function invalidDate () {
         return this._invalidDate;
     }
 
-    var defaultOrdinal = '%d',
-        defaultDayOfMonthOrdinalParse = /\d{1,2}/;
+    var defaultOrdinal = '%d';
+    var defaultDayOfMonthOrdinalParse = /\d{1,2}/;
 
-    function ordinal(number) {
+    function ordinal (number) {
         return this._ordinal.replace('%d', number);
     }
 
     var defaultRelativeTime = {
-        future: 'in %s',
-        past: '%s ago',
-        s: 'a few seconds',
-        ss: '%d seconds',
-        m: 'a minute',
-        mm: '%d minutes',
-        h: 'an hour',
-        hh: '%d hours',
-        d: 'a day',
-        dd: '%d days',
-        w: 'a week',
-        ww: '%d weeks',
-        M: 'a month',
-        MM: '%d months',
-        y: 'a year',
-        yy: '%d years',
+        future : 'in %s',
+        past   : '%s ago',
+        s  : 'a few seconds',
+        ss : '%d seconds',
+        m  : 'a minute',
+        mm : '%d minutes',
+        h  : 'an hour',
+        hh : '%d hours',
+        d  : 'a day',
+        dd : '%d days',
+        M  : 'a month',
+        MM : '%d months',
+        y  : 'a year',
+        yy : '%d years'
     };
 
-    function relativeTime(number, withoutSuffix, string, isFuture) {
+    function relativeTime (number, withoutSuffix, string, isFuture) {
         var output = this._relativeTime[string];
-        return isFunction(output)
-            ? output(number, withoutSuffix, string, isFuture)
-            : output.replace(/%d/i, number);
+        return (isFunction(output)) ?
+            output(number, withoutSuffix, string, isFuture) :
+            output.replace(/%d/i, number);
     }
 
-    function pastFuture(diff, output) {
+    function pastFuture (diff, output) {
         var format = this._relativeTime[diff > 0 ? 'future' : 'past'];
         return isFunction(format) ? format(output) : format.replace(/%s/i, output);
     }
 
     var aliases = {};
 
-    function addUnitAlias(unit, shorthand) {
+    function addUnitAlias (unit, shorthand) {
         var lowerCase = unit.toLowerCase();
         aliases[lowerCase] = aliases[lowerCase + 's'] = aliases[shorthand] = unit;
     }
 
     function normalizeUnits(units) {
-        return typeof units === 'string'
-            ? aliases[units] || aliases[units.toLowerCase()]
-            : undefined;
+        return typeof units === 'string' ? aliases[units] || aliases[units.toLowerCase()] : undefined;
     }
 
     function normalizeObjectUnits(inputObject) {
@@ -32065,12 +31842,9 @@ module.exports = stubFalse;
     }
 
     function getPrioritizedUnits(unitsObj) {
-        var units = [],
-            u;
-        for (u in unitsObj) {
-            if (hasOwnProp(unitsObj, u)) {
-                units.push({ unit: u, priority: priorities[u] });
-            }
+        var units = [];
+        for (var u in unitsObj) {
+            units.push({unit: u, priority: priorities[u]});
         }
         units.sort(function (a, b) {
             return a.priority - b.priority;
@@ -32078,127 +31852,137 @@ module.exports = stubFalse;
         return units;
     }
 
-    function isLeapYear(year) {
-        return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+    function zeroFill(number, targetLength, forceSign) {
+        var absNumber = '' + Math.abs(number),
+            zerosToFill = targetLength - absNumber.length,
+            sign = number >= 0;
+        return (sign ? (forceSign ? '+' : '') : '-') +
+            Math.pow(10, Math.max(0, zerosToFill)).toString().substr(1) + absNumber;
     }
 
-    function absFloor(number) {
-        if (number < 0) {
-            // -0 -> 0
-            return Math.ceil(number) || 0;
-        } else {
-            return Math.floor(number);
+    var formattingTokens = /(\[[^\[]*\])|(\\)?([Hh]mm(ss)?|Mo|MM?M?M?|Do|DDDo|DD?D?D?|ddd?d?|do?|w[o|w]?|W[o|W]?|Qo?|YYYYYY|YYYYY|YYYY|YY|gg(ggg?)?|GG(GGG?)?|e|E|a|A|hh?|HH?|kk?|mm?|ss?|S{1,9}|x|X|zz?|ZZ?|.)/g;
+
+    var localFormattingTokens = /(\[[^\[]*\])|(\\)?(LTS|LT|LL?L?L?|l{1,4})/g;
+
+    var formatFunctions = {};
+
+    var formatTokenFunctions = {};
+
+    // token:    'M'
+    // padded:   ['MM', 2]
+    // ordinal:  'Mo'
+    // callback: function () { this.month() + 1 }
+    function addFormatToken (token, padded, ordinal, callback) {
+        var func = callback;
+        if (typeof callback === 'string') {
+            func = function () {
+                return this[callback]();
+            };
+        }
+        if (token) {
+            formatTokenFunctions[token] = func;
+        }
+        if (padded) {
+            formatTokenFunctions[padded[0]] = function () {
+                return zeroFill(func.apply(this, arguments), padded[1], padded[2]);
+            };
+        }
+        if (ordinal) {
+            formatTokenFunctions[ordinal] = function () {
+                return this.localeData().ordinal(func.apply(this, arguments), token);
+            };
         }
     }
 
-    function toInt(argumentForCoercion) {
-        var coercedNumber = +argumentForCoercion,
-            value = 0;
-
-        if (coercedNumber !== 0 && isFinite(coercedNumber)) {
-            value = absFloor(coercedNumber);
+    function removeFormattingTokens(input) {
+        if (input.match(/\[[\s\S]/)) {
+            return input.replace(/^\[|\]$/g, '');
         }
-
-        return value;
+        return input.replace(/\\/g, '');
     }
 
-    function makeGetSet(unit, keepTime) {
-        return function (value) {
-            if (value != null) {
-                set$1(this, unit, value);
-                hooks.updateOffset(this, keepTime);
-                return this;
+    function makeFormatFunction(format) {
+        var array = format.match(formattingTokens), i, length;
+
+        for (i = 0, length = array.length; i < length; i++) {
+            if (formatTokenFunctions[array[i]]) {
+                array[i] = formatTokenFunctions[array[i]];
             } else {
-                return get(this, unit);
+                array[i] = removeFormattingTokens(array[i]);
             }
+        }
+
+        return function (mom) {
+            var output = '', i;
+            for (i = 0; i < length; i++) {
+                output += isFunction(array[i]) ? array[i].call(mom, format) : array[i];
+            }
+            return output;
         };
     }
 
-    function get(mom, unit) {
-        return mom.isValid()
-            ? mom._d['get' + (mom._isUTC ? 'UTC' : '') + unit]()
-            : NaN;
-    }
-
-    function set$1(mom, unit, value) {
-        if (mom.isValid() && !isNaN(value)) {
-            if (
-                unit === 'FullYear' &&
-                isLeapYear(mom.year()) &&
-                mom.month() === 1 &&
-                mom.date() === 29
-            ) {
-                value = toInt(value);
-                mom._d['set' + (mom._isUTC ? 'UTC' : '') + unit](
-                    value,
-                    mom.month(),
-                    daysInMonth(value, mom.month())
-                );
-            } else {
-                mom._d['set' + (mom._isUTC ? 'UTC' : '') + unit](value);
-            }
+    // format date using native date object
+    function formatMoment(m, format) {
+        if (!m.isValid()) {
+            return m.localeData().invalidDate();
         }
+
+        format = expandFormat(format, m.localeData());
+        formatFunctions[format] = formatFunctions[format] || makeFormatFunction(format);
+
+        return formatFunctions[format](m);
     }
 
-    // MOMENTS
+    function expandFormat(format, locale) {
+        var i = 5;
 
-    function stringGet(units) {
-        units = normalizeUnits(units);
-        if (isFunction(this[units])) {
-            return this[units]();
+        function replaceLongDateFormatTokens(input) {
+            return locale.longDateFormat(input) || input;
         }
-        return this;
-    }
 
-    function stringSet(units, value) {
-        if (typeof units === 'object') {
-            units = normalizeObjectUnits(units);
-            var prioritized = getPrioritizedUnits(units),
-                i;
-            for (i = 0; i < prioritized.length; i++) {
-                this[prioritized[i].unit](units[prioritized[i].unit]);
-            }
-        } else {
-            units = normalizeUnits(units);
-            if (isFunction(this[units])) {
-                return this[units](value);
-            }
+        localFormattingTokens.lastIndex = 0;
+        while (i >= 0 && localFormattingTokens.test(format)) {
+            format = format.replace(localFormattingTokens, replaceLongDateFormatTokens);
+            localFormattingTokens.lastIndex = 0;
+            i -= 1;
         }
-        return this;
+
+        return format;
     }
 
-    var match1 = /\d/, //       0 - 9
-        match2 = /\d\d/, //      00 - 99
-        match3 = /\d{3}/, //     000 - 999
-        match4 = /\d{4}/, //    0000 - 9999
-        match6 = /[+-]?\d{6}/, // -999999 - 999999
-        match1to2 = /\d\d?/, //       0 - 99
-        match3to4 = /\d\d\d\d?/, //     999 - 9999
-        match5to6 = /\d\d\d\d\d\d?/, //   99999 - 999999
-        match1to3 = /\d{1,3}/, //       0 - 999
-        match1to4 = /\d{1,4}/, //       0 - 9999
-        match1to6 = /[+-]?\d{1,6}/, // -999999 - 999999
-        matchUnsigned = /\d+/, //       0 - inf
-        matchSigned = /[+-]?\d+/, //    -inf - inf
-        matchOffset = /Z|[+-]\d\d:?\d\d/gi, // +00:00 -00:00 +0000 -0000 or Z
-        matchShortOffset = /Z|[+-]\d\d(?::?\d\d)?/gi, // +00 -00 +00:00 -00:00 +0000 -0000 or Z
-        matchTimestamp = /[+-]?\d+(\.\d{1,3})?/, // 123456789 123456789.123
-        // any word (or two) characters or numbers including two/three word month in arabic.
-        // includes scottish gaelic two word and hyphenated months
-        matchWord = /[0-9]{0,256}['a-z\u00A0-\u05FF\u0700-\uD7FF\uF900-\uFDCF\uFDF0-\uFF07\uFF10-\uFFEF]{1,256}|[\u0600-\u06FF\/]{1,256}(\s*?[\u0600-\u06FF]{1,256}){1,2}/i,
-        regexes;
+    var match1         = /\d/;            //       0 - 9
+    var match2         = /\d\d/;          //      00 - 99
+    var match3         = /\d{3}/;         //     000 - 999
+    var match4         = /\d{4}/;         //    0000 - 9999
+    var match6         = /[+-]?\d{6}/;    // -999999 - 999999
+    var match1to2      = /\d\d?/;         //       0 - 99
+    var match3to4      = /\d\d\d\d?/;     //     999 - 9999
+    var match5to6      = /\d\d\d\d\d\d?/; //   99999 - 999999
+    var match1to3      = /\d{1,3}/;       //       0 - 999
+    var match1to4      = /\d{1,4}/;       //       0 - 9999
+    var match1to6      = /[+-]?\d{1,6}/;  // -999999 - 999999
 
-    regexes = {};
+    var matchUnsigned  = /\d+/;           //       0 - inf
+    var matchSigned    = /[+-]?\d+/;      //    -inf - inf
 
-    function addRegexToken(token, regex, strictRegex) {
-        regexes[token] = isFunction(regex)
-            ? regex
-            : function (isStrict, localeData) {
-                  return isStrict && strictRegex ? strictRegex : regex;
-              };
+    var matchOffset    = /Z|[+-]\d\d:?\d\d/gi; // +00:00 -00:00 +0000 -0000 or Z
+    var matchShortOffset = /Z|[+-]\d\d(?::?\d\d)?/gi; // +00 -00 +00:00 -00:00 +0000 -0000 or Z
+
+    var matchTimestamp = /[+-]?\d+(\.\d{1,3})?/; // 123456789 123456789.123
+
+    // any word (or two) characters or numbers including two/three word month in arabic.
+    // includes scottish gaelic two word and hyphenated months
+    var matchWord = /[0-9]{0,256}['a-z\u00A0-\u05FF\u0700-\uD7FF\uF900-\uFDCF\uFDF0-\uFF07\uFF10-\uFFEF]{1,256}|[\u0600-\u06FF\/]{1,256}(\s*?[\u0600-\u06FF]{1,256}){1,2}/i;
+
+    var regexes = {};
+
+    function addRegexToken (token, regex, strictRegex) {
+        regexes[token] = isFunction(regex) ? regex : function (isStrict, localeData) {
+            return (isStrict && strictRegex) ? strictRegex : regex;
+        };
     }
 
-    function getParseRegexForToken(token, config) {
+    function getParseRegexForToken (token, config) {
         if (!hasOwnProp(regexes, token)) {
             return new RegExp(unescapeFormat(token));
         }
@@ -32208,19 +31992,9 @@ module.exports = stubFalse;
 
     // Code from http://stackoverflow.com/questions/3561493/is-there-a-regexp-escape-function-in-javascript
     function unescapeFormat(s) {
-        return regexEscape(
-            s
-                .replace('\\', '')
-                .replace(/\\(\[)|\\(\])|\[([^\]\[]*)\]|\\(.)/g, function (
-                    matched,
-                    p1,
-                    p2,
-                    p3,
-                    p4
-                ) {
-                    return p1 || p2 || p3 || p4;
-                })
-        );
+        return regexEscape(s.replace('\\', '').replace(/\\(\[)|\\(\])|\[([^\]\[]*)\]|\\(.)/g, function (matched, p1, p2, p3, p4) {
+            return p1 || p2 || p3 || p4;
+        }));
     }
 
     function regexEscape(s) {
@@ -32229,9 +32003,8 @@ module.exports = stubFalse;
 
     var tokens = {};
 
-    function addParseToken(token, callback) {
-        var i,
-            func = callback;
+    function addParseToken (token, callback) {
+        var i, func = callback;
         if (typeof token === 'string') {
             token = [token];
         }
@@ -32245,7 +32018,7 @@ module.exports = stubFalse;
         }
     }
 
-    function addWeekParseToken(token, callback) {
+    function addWeekParseToken (token, callback) {
         addParseToken(token, function (input, array, config, token) {
             config._w = config._w || {};
             callback(input, config._w, config, token);
@@ -32258,15 +32031,136 @@ module.exports = stubFalse;
         }
     }
 
-    var YEAR = 0,
-        MONTH = 1,
-        DATE = 2,
-        HOUR = 3,
-        MINUTE = 4,
-        SECOND = 5,
-        MILLISECOND = 6,
-        WEEK = 7,
-        WEEKDAY = 8;
+    var YEAR = 0;
+    var MONTH = 1;
+    var DATE = 2;
+    var HOUR = 3;
+    var MINUTE = 4;
+    var SECOND = 5;
+    var MILLISECOND = 6;
+    var WEEK = 7;
+    var WEEKDAY = 8;
+
+    // FORMATTING
+
+    addFormatToken('Y', 0, 0, function () {
+        var y = this.year();
+        return y <= 9999 ? '' + y : '+' + y;
+    });
+
+    addFormatToken(0, ['YY', 2], 0, function () {
+        return this.year() % 100;
+    });
+
+    addFormatToken(0, ['YYYY',   4],       0, 'year');
+    addFormatToken(0, ['YYYYY',  5],       0, 'year');
+    addFormatToken(0, ['YYYYYY', 6, true], 0, 'year');
+
+    // ALIASES
+
+    addUnitAlias('year', 'y');
+
+    // PRIORITIES
+
+    addUnitPriority('year', 1);
+
+    // PARSING
+
+    addRegexToken('Y',      matchSigned);
+    addRegexToken('YY',     match1to2, match2);
+    addRegexToken('YYYY',   match1to4, match4);
+    addRegexToken('YYYYY',  match1to6, match6);
+    addRegexToken('YYYYYY', match1to6, match6);
+
+    addParseToken(['YYYYY', 'YYYYYY'], YEAR);
+    addParseToken('YYYY', function (input, array) {
+        array[YEAR] = input.length === 2 ? hooks.parseTwoDigitYear(input) : toInt(input);
+    });
+    addParseToken('YY', function (input, array) {
+        array[YEAR] = hooks.parseTwoDigitYear(input);
+    });
+    addParseToken('Y', function (input, array) {
+        array[YEAR] = parseInt(input, 10);
+    });
+
+    // HELPERS
+
+    function daysInYear(year) {
+        return isLeapYear(year) ? 366 : 365;
+    }
+
+    function isLeapYear(year) {
+        return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+    }
+
+    // HOOKS
+
+    hooks.parseTwoDigitYear = function (input) {
+        return toInt(input) + (toInt(input) > 68 ? 1900 : 2000);
+    };
+
+    // MOMENTS
+
+    var getSetYear = makeGetSet('FullYear', true);
+
+    function getIsLeapYear () {
+        return isLeapYear(this.year());
+    }
+
+    function makeGetSet (unit, keepTime) {
+        return function (value) {
+            if (value != null) {
+                set$1(this, unit, value);
+                hooks.updateOffset(this, keepTime);
+                return this;
+            } else {
+                return get(this, unit);
+            }
+        };
+    }
+
+    function get (mom, unit) {
+        return mom.isValid() ?
+            mom._d['get' + (mom._isUTC ? 'UTC' : '') + unit]() : NaN;
+    }
+
+    function set$1 (mom, unit, value) {
+        if (mom.isValid() && !isNaN(value)) {
+            if (unit === 'FullYear' && isLeapYear(mom.year()) && mom.month() === 1 && mom.date() === 29) {
+                mom._d['set' + (mom._isUTC ? 'UTC' : '') + unit](value, mom.month(), daysInMonth(value, mom.month()));
+            }
+            else {
+                mom._d['set' + (mom._isUTC ? 'UTC' : '') + unit](value);
+            }
+        }
+    }
+
+    // MOMENTS
+
+    function stringGet (units) {
+        units = normalizeUnits(units);
+        if (isFunction(this[units])) {
+            return this[units]();
+        }
+        return this;
+    }
+
+
+    function stringSet (units, value) {
+        if (typeof units === 'object') {
+            units = normalizeObjectUnits(units);
+            var prioritized = getPrioritizedUnits(units);
+            for (var i = 0; i < prioritized.length; i++) {
+                this[prioritized[i].unit](units[prioritized[i].unit]);
+            }
+        } else {
+            units = normalizeUnits(units);
+            if (isFunction(this[units])) {
+                return this[units](value);
+            }
+        }
+        return this;
+    }
 
     function mod(n, x) {
         return ((n % x) + x) % x;
@@ -32295,11 +32189,7 @@ module.exports = stubFalse;
         }
         var modMonth = mod(month, 12);
         year += (month - modMonth) / 12;
-        return modMonth === 1
-            ? isLeapYear(year)
-                ? 29
-                : 28
-            : 31 - ((modMonth % 7) % 2);
+        return modMonth === 1 ? (isLeapYear(year) ? 29 : 28) : (31 - modMonth % 7 % 2);
     }
 
     // FORMATTING
@@ -32326,9 +32216,9 @@ module.exports = stubFalse;
 
     // PARSING
 
-    addRegexToken('M', match1to2);
-    addRegexToken('MM', match1to2, match2);
-    addRegexToken('MMM', function (isStrict, locale) {
+    addRegexToken('M',    match1to2);
+    addRegexToken('MM',   match1to2, match2);
+    addRegexToken('MMM',  function (isStrict, locale) {
         return locale.monthsShortRegex(isStrict);
     });
     addRegexToken('MMMM', function (isStrict, locale) {
@@ -32351,49 +32241,29 @@ module.exports = stubFalse;
 
     // LOCALES
 
-    var defaultLocaleMonths = 'January_February_March_April_May_June_July_August_September_October_November_December'.split(
-            '_'
-        ),
-        defaultLocaleMonthsShort = 'Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec'.split(
-            '_'
-        ),
-        MONTHS_IN_FORMAT = /D[oD]?(\[[^\[\]]*\]|\s)+MMMM?/,
-        defaultMonthsShortRegex = matchWord,
-        defaultMonthsRegex = matchWord;
-
-    function localeMonths(m, format) {
+    var MONTHS_IN_FORMAT = /D[oD]?(\[[^\[\]]*\]|\s)+MMMM?/;
+    var defaultLocaleMonths = 'January_February_March_April_May_June_July_August_September_October_November_December'.split('_');
+    function localeMonths (m, format) {
         if (!m) {
-            return isArray(this._months)
-                ? this._months
-                : this._months['standalone'];
+            return isArray(this._months) ? this._months :
+                this._months['standalone'];
         }
-        return isArray(this._months)
-            ? this._months[m.month()]
-            : this._months[
-                  (this._months.isFormat || MONTHS_IN_FORMAT).test(format)
-                      ? 'format'
-                      : 'standalone'
-              ][m.month()];
+        return isArray(this._months) ? this._months[m.month()] :
+            this._months[(this._months.isFormat || MONTHS_IN_FORMAT).test(format) ? 'format' : 'standalone'][m.month()];
     }
 
-    function localeMonthsShort(m, format) {
+    var defaultLocaleMonthsShort = 'Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec'.split('_');
+    function localeMonthsShort (m, format) {
         if (!m) {
-            return isArray(this._monthsShort)
-                ? this._monthsShort
-                : this._monthsShort['standalone'];
+            return isArray(this._monthsShort) ? this._monthsShort :
+                this._monthsShort['standalone'];
         }
-        return isArray(this._monthsShort)
-            ? this._monthsShort[m.month()]
-            : this._monthsShort[
-                  MONTHS_IN_FORMAT.test(format) ? 'format' : 'standalone'
-              ][m.month()];
+        return isArray(this._monthsShort) ? this._monthsShort[m.month()] :
+            this._monthsShort[MONTHS_IN_FORMAT.test(format) ? 'format' : 'standalone'][m.month()];
     }
 
     function handleStrictParse(monthName, format, strict) {
-        var i,
-            ii,
-            mom,
-            llc = monthName.toLocaleLowerCase();
+        var i, ii, mom, llc = monthName.toLocaleLowerCase();
         if (!this._monthsParse) {
             // this is not used
             this._monthsParse = [];
@@ -32401,10 +32271,7 @@ module.exports = stubFalse;
             this._shortMonthsParse = [];
             for (i = 0; i < 12; ++i) {
                 mom = createUTC([2000, i]);
-                this._shortMonthsParse[i] = this.monthsShort(
-                    mom,
-                    ''
-                ).toLocaleLowerCase();
+                this._shortMonthsParse[i] = this.monthsShort(mom, '').toLocaleLowerCase();
                 this._longMonthsParse[i] = this.months(mom, '').toLocaleLowerCase();
             }
         }
@@ -32436,7 +32303,7 @@ module.exports = stubFalse;
         }
     }
 
-    function localeMonthsParse(monthName, format, strict) {
+    function localeMonthsParse (monthName, format, strict) {
         var i, mom, regex;
 
         if (this._monthsParseExact) {
@@ -32456,32 +32323,17 @@ module.exports = stubFalse;
             // make the regex if we don't have it already
             mom = createUTC([2000, i]);
             if (strict && !this._longMonthsParse[i]) {
-                this._longMonthsParse[i] = new RegExp(
-                    '^' + this.months(mom, '').replace('.', '') + '$',
-                    'i'
-                );
-                this._shortMonthsParse[i] = new RegExp(
-                    '^' + this.monthsShort(mom, '').replace('.', '') + '$',
-                    'i'
-                );
+                this._longMonthsParse[i] = new RegExp('^' + this.months(mom, '').replace('.', '') + '$', 'i');
+                this._shortMonthsParse[i] = new RegExp('^' + this.monthsShort(mom, '').replace('.', '') + '$', 'i');
             }
             if (!strict && !this._monthsParse[i]) {
-                regex =
-                    '^' + this.months(mom, '') + '|^' + this.monthsShort(mom, '');
+                regex = '^' + this.months(mom, '') + '|^' + this.monthsShort(mom, '');
                 this._monthsParse[i] = new RegExp(regex.replace('.', ''), 'i');
             }
             // test the regex
-            if (
-                strict &&
-                format === 'MMMM' &&
-                this._longMonthsParse[i].test(monthName)
-            ) {
+            if (strict && format === 'MMMM' && this._longMonthsParse[i].test(monthName)) {
                 return i;
-            } else if (
-                strict &&
-                format === 'MMM' &&
-                this._shortMonthsParse[i].test(monthName)
-            ) {
+            } else if (strict && format === 'MMM' && this._shortMonthsParse[i].test(monthName)) {
                 return i;
             } else if (!strict && this._monthsParse[i].test(monthName)) {
                 return i;
@@ -32491,7 +32343,7 @@ module.exports = stubFalse;
 
     // MOMENTS
 
-    function setMonth(mom, value) {
+    function setMonth (mom, value) {
         var dayOfMonth;
 
         if (!mom.isValid()) {
@@ -32516,7 +32368,7 @@ module.exports = stubFalse;
         return mom;
     }
 
-    function getSetMonth(value) {
+    function getSetMonth (value) {
         if (value != null) {
             setMonth(this, value);
             hooks.updateOffset(this, true);
@@ -32526,11 +32378,12 @@ module.exports = stubFalse;
         }
     }
 
-    function getDaysInMonth() {
+    function getDaysInMonth () {
         return daysInMonth(this.year(), this.month());
     }
 
-    function monthsShortRegex(isStrict) {
+    var defaultMonthsShortRegex = matchWord;
+    function monthsShortRegex (isStrict) {
         if (this._monthsParseExact) {
             if (!hasOwnProp(this, '_monthsRegex')) {
                 computeMonthsParse.call(this);
@@ -32544,13 +32397,13 @@ module.exports = stubFalse;
             if (!hasOwnProp(this, '_monthsShortRegex')) {
                 this._monthsShortRegex = defaultMonthsShortRegex;
             }
-            return this._monthsShortStrictRegex && isStrict
-                ? this._monthsShortStrictRegex
-                : this._monthsShortRegex;
+            return this._monthsShortStrictRegex && isStrict ?
+                this._monthsShortStrictRegex : this._monthsShortRegex;
         }
     }
 
-    function monthsRegex(isStrict) {
+    var defaultMonthsRegex = matchWord;
+    function monthsRegex (isStrict) {
         if (this._monthsParseExact) {
             if (!hasOwnProp(this, '_monthsRegex')) {
                 computeMonthsParse.call(this);
@@ -32564,22 +32417,18 @@ module.exports = stubFalse;
             if (!hasOwnProp(this, '_monthsRegex')) {
                 this._monthsRegex = defaultMonthsRegex;
             }
-            return this._monthsStrictRegex && isStrict
-                ? this._monthsStrictRegex
-                : this._monthsRegex;
+            return this._monthsStrictRegex && isStrict ?
+                this._monthsStrictRegex : this._monthsRegex;
         }
     }
 
-    function computeMonthsParse() {
+    function computeMonthsParse () {
         function cmpLenRev(a, b) {
             return b.length - a.length;
         }
 
-        var shortPieces = [],
-            longPieces = [],
-            mixedPieces = [],
-            i,
-            mom;
+        var shortPieces = [], longPieces = [], mixedPieces = [],
+            i, mom;
         for (i = 0; i < 12; i++) {
             // make the regex if we don't have it already
             mom = createUTC([2000, i]);
@@ -32603,80 +32452,11 @@ module.exports = stubFalse;
 
         this._monthsRegex = new RegExp('^(' + mixedPieces.join('|') + ')', 'i');
         this._monthsShortRegex = this._monthsRegex;
-        this._monthsStrictRegex = new RegExp(
-            '^(' + longPieces.join('|') + ')',
-            'i'
-        );
-        this._monthsShortStrictRegex = new RegExp(
-            '^(' + shortPieces.join('|') + ')',
-            'i'
-        );
+        this._monthsStrictRegex = new RegExp('^(' + longPieces.join('|') + ')', 'i');
+        this._monthsShortStrictRegex = new RegExp('^(' + shortPieces.join('|') + ')', 'i');
     }
 
-    // FORMATTING
-
-    addFormatToken('Y', 0, 0, function () {
-        var y = this.year();
-        return y <= 9999 ? zeroFill(y, 4) : '+' + y;
-    });
-
-    addFormatToken(0, ['YY', 2], 0, function () {
-        return this.year() % 100;
-    });
-
-    addFormatToken(0, ['YYYY', 4], 0, 'year');
-    addFormatToken(0, ['YYYYY', 5], 0, 'year');
-    addFormatToken(0, ['YYYYYY', 6, true], 0, 'year');
-
-    // ALIASES
-
-    addUnitAlias('year', 'y');
-
-    // PRIORITIES
-
-    addUnitPriority('year', 1);
-
-    // PARSING
-
-    addRegexToken('Y', matchSigned);
-    addRegexToken('YY', match1to2, match2);
-    addRegexToken('YYYY', match1to4, match4);
-    addRegexToken('YYYYY', match1to6, match6);
-    addRegexToken('YYYYYY', match1to6, match6);
-
-    addParseToken(['YYYYY', 'YYYYYY'], YEAR);
-    addParseToken('YYYY', function (input, array) {
-        array[YEAR] =
-            input.length === 2 ? hooks.parseTwoDigitYear(input) : toInt(input);
-    });
-    addParseToken('YY', function (input, array) {
-        array[YEAR] = hooks.parseTwoDigitYear(input);
-    });
-    addParseToken('Y', function (input, array) {
-        array[YEAR] = parseInt(input, 10);
-    });
-
-    // HELPERS
-
-    function daysInYear(year) {
-        return isLeapYear(year) ? 366 : 365;
-    }
-
-    // HOOKS
-
-    hooks.parseTwoDigitYear = function (input) {
-        return toInt(input) + (toInt(input) > 68 ? 1900 : 2000);
-    };
-
-    // MOMENTS
-
-    var getSetYear = makeGetSet('FullYear', true);
-
-    function getIsLeapYear() {
-        return isLeapYear(this.year());
-    }
-
-    function createDate(y, m, d, h, M, s, ms) {
+    function createDate (y, m, d, h, M, s, ms) {
         // can't just apply() to create a date:
         // https://stackoverflow.com/q/181348
         var date;
@@ -32694,11 +32474,11 @@ module.exports = stubFalse;
         return date;
     }
 
-    function createUTCDate(y) {
-        var date, args;
+    function createUTCDate (y) {
+        var date;
         // the Date.UTC function remaps years 0-99 to 1900-1999
         if (y < 100 && y >= 0) {
-            args = Array.prototype.slice.call(arguments);
+            var args = Array.prototype.slice.call(arguments);
             // preserve leap years using a full 400 year cycle, then reset
             args[0] = y + 400;
             date = new Date(Date.UTC.apply(null, args));
@@ -32727,8 +32507,7 @@ module.exports = stubFalse;
         var localWeekday = (7 + weekday - dow) % 7,
             weekOffset = firstWeekOffset(year, dow, doy),
             dayOfYear = 1 + 7 * (week - 1) + localWeekday + weekOffset,
-            resYear,
-            resDayOfYear;
+            resYear, resDayOfYear;
 
         if (dayOfYear <= 0) {
             resYear = year - 1;
@@ -32743,15 +32522,14 @@ module.exports = stubFalse;
 
         return {
             year: resYear,
-            dayOfYear: resDayOfYear,
+            dayOfYear: resDayOfYear
         };
     }
 
     function weekOfYear(mom, dow, doy) {
         var weekOffset = firstWeekOffset(mom.year(), dow, doy),
             week = Math.floor((mom.dayOfYear() - weekOffset - 1) / 7) + 1,
-            resWeek,
-            resYear;
+            resWeek, resYear;
 
         if (week < 1) {
             resYear = mom.year() - 1;
@@ -32766,7 +32544,7 @@ module.exports = stubFalse;
 
         return {
             week: resWeek,
-            year: resYear,
+            year: resYear
         };
     }
 
@@ -32793,17 +32571,12 @@ module.exports = stubFalse;
 
     // PARSING
 
-    addRegexToken('w', match1to2);
+    addRegexToken('w',  match1to2);
     addRegexToken('ww', match1to2, match2);
-    addRegexToken('W', match1to2);
+    addRegexToken('W',  match1to2);
     addRegexToken('WW', match1to2, match2);
 
-    addWeekParseToken(['w', 'ww', 'W', 'WW'], function (
-        input,
-        week,
-        config,
-        token
-    ) {
+    addWeekParseToken(['w', 'ww', 'W', 'WW'], function (input, week, config, token) {
         week[token.substr(0, 1)] = toInt(input);
     });
 
@@ -32811,31 +32584,31 @@ module.exports = stubFalse;
 
     // LOCALES
 
-    function localeWeek(mom) {
+    function localeWeek (mom) {
         return weekOfYear(mom, this._week.dow, this._week.doy).week;
     }
 
     var defaultLocaleWeek = {
-        dow: 0, // Sunday is the first day of the week.
-        doy: 6, // The week that contains Jan 6th is the first week of the year.
+        dow : 0, // Sunday is the first day of the week.
+        doy : 6  // The week that contains Jan 6th is the first week of the year.
     };
 
-    function localeFirstDayOfWeek() {
+    function localeFirstDayOfWeek () {
         return this._week.dow;
     }
 
-    function localeFirstDayOfYear() {
+    function localeFirstDayOfYear () {
         return this._week.doy;
     }
 
     // MOMENTS
 
-    function getSetWeek(input) {
+    function getSetWeek (input) {
         var week = this.localeData().week(this);
         return input == null ? week : this.add((input - week) * 7, 'd');
     }
 
-    function getSetISOWeek(input) {
+    function getSetISOWeek (input) {
         var week = weekOfYear(this, 1, 4).week;
         return input == null ? week : this.add((input - week) * 7, 'd');
     }
@@ -32872,16 +32645,16 @@ module.exports = stubFalse;
 
     // PARSING
 
-    addRegexToken('d', match1to2);
-    addRegexToken('e', match1to2);
-    addRegexToken('E', match1to2);
-    addRegexToken('dd', function (isStrict, locale) {
+    addRegexToken('d',    match1to2);
+    addRegexToken('e',    match1to2);
+    addRegexToken('E',    match1to2);
+    addRegexToken('dd',   function (isStrict, locale) {
         return locale.weekdaysMinRegex(isStrict);
     });
-    addRegexToken('ddd', function (isStrict, locale) {
+    addRegexToken('ddd',   function (isStrict, locale) {
         return locale.weekdaysShortRegex(isStrict);
     });
-    addRegexToken('dddd', function (isStrict, locale) {
+    addRegexToken('dddd',   function (isStrict, locale) {
         return locale.weekdaysRegex(isStrict);
     });
 
@@ -32926,55 +32699,32 @@ module.exports = stubFalse;
     }
 
     // LOCALES
-    function shiftWeekdays(ws, n) {
+    function shiftWeekdays (ws, n) {
         return ws.slice(n, 7).concat(ws.slice(0, n));
     }
 
-    var defaultLocaleWeekdays = 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split(
-            '_'
-        ),
-        defaultLocaleWeekdaysShort = 'Sun_Mon_Tue_Wed_Thu_Fri_Sat'.split('_'),
-        defaultLocaleWeekdaysMin = 'Su_Mo_Tu_We_Th_Fr_Sa'.split('_'),
-        defaultWeekdaysRegex = matchWord,
-        defaultWeekdaysShortRegex = matchWord,
-        defaultWeekdaysMinRegex = matchWord;
-
-    function localeWeekdays(m, format) {
-        var weekdays = isArray(this._weekdays)
-            ? this._weekdays
-            : this._weekdays[
-                  m && m !== true && this._weekdays.isFormat.test(format)
-                      ? 'format'
-                      : 'standalone'
-              ];
-        return m === true
-            ? shiftWeekdays(weekdays, this._week.dow)
-            : m
-            ? weekdays[m.day()]
-            : weekdays;
+    var defaultLocaleWeekdays = 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split('_');
+    function localeWeekdays (m, format) {
+        var weekdays = isArray(this._weekdays) ? this._weekdays :
+            this._weekdays[(m && m !== true && this._weekdays.isFormat.test(format)) ? 'format' : 'standalone'];
+        return (m === true) ? shiftWeekdays(weekdays, this._week.dow)
+            : (m) ? weekdays[m.day()] : weekdays;
     }
 
-    function localeWeekdaysShort(m) {
-        return m === true
-            ? shiftWeekdays(this._weekdaysShort, this._week.dow)
-            : m
-            ? this._weekdaysShort[m.day()]
-            : this._weekdaysShort;
+    var defaultLocaleWeekdaysShort = 'Sun_Mon_Tue_Wed_Thu_Fri_Sat'.split('_');
+    function localeWeekdaysShort (m) {
+        return (m === true) ? shiftWeekdays(this._weekdaysShort, this._week.dow)
+            : (m) ? this._weekdaysShort[m.day()] : this._weekdaysShort;
     }
 
-    function localeWeekdaysMin(m) {
-        return m === true
-            ? shiftWeekdays(this._weekdaysMin, this._week.dow)
-            : m
-            ? this._weekdaysMin[m.day()]
-            : this._weekdaysMin;
+    var defaultLocaleWeekdaysMin = 'Su_Mo_Tu_We_Th_Fr_Sa'.split('_');
+    function localeWeekdaysMin (m) {
+        return (m === true) ? shiftWeekdays(this._weekdaysMin, this._week.dow)
+            : (m) ? this._weekdaysMin[m.day()] : this._weekdaysMin;
     }
 
     function handleStrictParse$1(weekdayName, format, strict) {
-        var i,
-            ii,
-            mom,
-            llc = weekdayName.toLocaleLowerCase();
+        var i, ii, mom, llc = weekdayName.toLocaleLowerCase();
         if (!this._weekdaysParse) {
             this._weekdaysParse = [];
             this._shortWeekdaysParse = [];
@@ -32982,14 +32732,8 @@ module.exports = stubFalse;
 
             for (i = 0; i < 7; ++i) {
                 mom = createUTC([2000, 1]).day(i);
-                this._minWeekdaysParse[i] = this.weekdaysMin(
-                    mom,
-                    ''
-                ).toLocaleLowerCase();
-                this._shortWeekdaysParse[i] = this.weekdaysShort(
-                    mom,
-                    ''
-                ).toLocaleLowerCase();
+                this._minWeekdaysParse[i] = this.weekdaysMin(mom, '').toLocaleLowerCase();
+                this._shortWeekdaysParse[i] = this.weekdaysShort(mom, '').toLocaleLowerCase();
                 this._weekdaysParse[i] = this.weekdays(mom, '').toLocaleLowerCase();
             }
         }
@@ -33043,7 +32787,7 @@ module.exports = stubFalse;
         }
     }
 
-    function localeWeekdaysParse(weekdayName, format, strict) {
+    function localeWeekdaysParse (weekdayName, format, strict) {
         var i, mom, regex;
 
         if (this._weekdaysParseExact) {
@@ -33062,47 +32806,20 @@ module.exports = stubFalse;
 
             mom = createUTC([2000, 1]).day(i);
             if (strict && !this._fullWeekdaysParse[i]) {
-                this._fullWeekdaysParse[i] = new RegExp(
-                    '^' + this.weekdays(mom, '').replace('.', '\\.?') + '$',
-                    'i'
-                );
-                this._shortWeekdaysParse[i] = new RegExp(
-                    '^' + this.weekdaysShort(mom, '').replace('.', '\\.?') + '$',
-                    'i'
-                );
-                this._minWeekdaysParse[i] = new RegExp(
-                    '^' + this.weekdaysMin(mom, '').replace('.', '\\.?') + '$',
-                    'i'
-                );
+                this._fullWeekdaysParse[i] = new RegExp('^' + this.weekdays(mom, '').replace('.', '\\.?') + '$', 'i');
+                this._shortWeekdaysParse[i] = new RegExp('^' + this.weekdaysShort(mom, '').replace('.', '\\.?') + '$', 'i');
+                this._minWeekdaysParse[i] = new RegExp('^' + this.weekdaysMin(mom, '').replace('.', '\\.?') + '$', 'i');
             }
             if (!this._weekdaysParse[i]) {
-                regex =
-                    '^' +
-                    this.weekdays(mom, '') +
-                    '|^' +
-                    this.weekdaysShort(mom, '') +
-                    '|^' +
-                    this.weekdaysMin(mom, '');
+                regex = '^' + this.weekdays(mom, '') + '|^' + this.weekdaysShort(mom, '') + '|^' + this.weekdaysMin(mom, '');
                 this._weekdaysParse[i] = new RegExp(regex.replace('.', ''), 'i');
             }
             // test the regex
-            if (
-                strict &&
-                format === 'dddd' &&
-                this._fullWeekdaysParse[i].test(weekdayName)
-            ) {
+            if (strict && format === 'dddd' && this._fullWeekdaysParse[i].test(weekdayName)) {
                 return i;
-            } else if (
-                strict &&
-                format === 'ddd' &&
-                this._shortWeekdaysParse[i].test(weekdayName)
-            ) {
+            } else if (strict && format === 'ddd' && this._shortWeekdaysParse[i].test(weekdayName)) {
                 return i;
-            } else if (
-                strict &&
-                format === 'dd' &&
-                this._minWeekdaysParse[i].test(weekdayName)
-            ) {
+            } else if (strict && format === 'dd' && this._minWeekdaysParse[i].test(weekdayName)) {
                 return i;
             } else if (!strict && this._weekdaysParse[i].test(weekdayName)) {
                 return i;
@@ -33112,7 +32829,7 @@ module.exports = stubFalse;
 
     // MOMENTS
 
-    function getSetDayOfWeek(input) {
+    function getSetDayOfWeek (input) {
         if (!this.isValid()) {
             return input != null ? this : NaN;
         }
@@ -33125,7 +32842,7 @@ module.exports = stubFalse;
         }
     }
 
-    function getSetLocaleDayOfWeek(input) {
+    function getSetLocaleDayOfWeek (input) {
         if (!this.isValid()) {
             return input != null ? this : NaN;
         }
@@ -33133,7 +32850,7 @@ module.exports = stubFalse;
         return input == null ? weekday : this.add(input - weekday, 'd');
     }
 
-    function getSetISODayOfWeek(input) {
+    function getSetISODayOfWeek (input) {
         if (!this.isValid()) {
             return input != null ? this : NaN;
         }
@@ -33150,7 +32867,8 @@ module.exports = stubFalse;
         }
     }
 
-    function weekdaysRegex(isStrict) {
+    var defaultWeekdaysRegex = matchWord;
+    function weekdaysRegex (isStrict) {
         if (this._weekdaysParseExact) {
             if (!hasOwnProp(this, '_weekdaysRegex')) {
                 computeWeekdaysParse.call(this);
@@ -33164,13 +32882,13 @@ module.exports = stubFalse;
             if (!hasOwnProp(this, '_weekdaysRegex')) {
                 this._weekdaysRegex = defaultWeekdaysRegex;
             }
-            return this._weekdaysStrictRegex && isStrict
-                ? this._weekdaysStrictRegex
-                : this._weekdaysRegex;
+            return this._weekdaysStrictRegex && isStrict ?
+                this._weekdaysStrictRegex : this._weekdaysRegex;
         }
     }
 
-    function weekdaysShortRegex(isStrict) {
+    var defaultWeekdaysShortRegex = matchWord;
+    function weekdaysShortRegex (isStrict) {
         if (this._weekdaysParseExact) {
             if (!hasOwnProp(this, '_weekdaysRegex')) {
                 computeWeekdaysParse.call(this);
@@ -33184,13 +32902,13 @@ module.exports = stubFalse;
             if (!hasOwnProp(this, '_weekdaysShortRegex')) {
                 this._weekdaysShortRegex = defaultWeekdaysShortRegex;
             }
-            return this._weekdaysShortStrictRegex && isStrict
-                ? this._weekdaysShortStrictRegex
-                : this._weekdaysShortRegex;
+            return this._weekdaysShortStrictRegex && isStrict ?
+                this._weekdaysShortStrictRegex : this._weekdaysShortRegex;
         }
     }
 
-    function weekdaysMinRegex(isStrict) {
+    var defaultWeekdaysMinRegex = matchWord;
+    function weekdaysMinRegex (isStrict) {
         if (this._weekdaysParseExact) {
             if (!hasOwnProp(this, '_weekdaysRegex')) {
                 computeWeekdaysParse.call(this);
@@ -33204,32 +32922,25 @@ module.exports = stubFalse;
             if (!hasOwnProp(this, '_weekdaysMinRegex')) {
                 this._weekdaysMinRegex = defaultWeekdaysMinRegex;
             }
-            return this._weekdaysMinStrictRegex && isStrict
-                ? this._weekdaysMinStrictRegex
-                : this._weekdaysMinRegex;
+            return this._weekdaysMinStrictRegex && isStrict ?
+                this._weekdaysMinStrictRegex : this._weekdaysMinRegex;
         }
     }
 
-    function computeWeekdaysParse() {
+
+    function computeWeekdaysParse () {
         function cmpLenRev(a, b) {
             return b.length - a.length;
         }
 
-        var minPieces = [],
-            shortPieces = [],
-            longPieces = [],
-            mixedPieces = [],
-            i,
-            mom,
-            minp,
-            shortp,
-            longp;
+        var minPieces = [], shortPieces = [], longPieces = [], mixedPieces = [],
+            i, mom, minp, shortp, longp;
         for (i = 0; i < 7; i++) {
             // make the regex if we don't have it already
             mom = createUTC([2000, 1]).day(i);
-            minp = regexEscape(this.weekdaysMin(mom, ''));
-            shortp = regexEscape(this.weekdaysShort(mom, ''));
-            longp = regexEscape(this.weekdays(mom, ''));
+            minp = this.weekdaysMin(mom, '');
+            shortp = this.weekdaysShort(mom, '');
+            longp = this.weekdays(mom, '');
             minPieces.push(minp);
             shortPieces.push(shortp);
             longPieces.push(longp);
@@ -33243,23 +32954,19 @@ module.exports = stubFalse;
         shortPieces.sort(cmpLenRev);
         longPieces.sort(cmpLenRev);
         mixedPieces.sort(cmpLenRev);
+        for (i = 0; i < 7; i++) {
+            shortPieces[i] = regexEscape(shortPieces[i]);
+            longPieces[i] = regexEscape(longPieces[i]);
+            mixedPieces[i] = regexEscape(mixedPieces[i]);
+        }
 
         this._weekdaysRegex = new RegExp('^(' + mixedPieces.join('|') + ')', 'i');
         this._weekdaysShortRegex = this._weekdaysRegex;
         this._weekdaysMinRegex = this._weekdaysRegex;
 
-        this._weekdaysStrictRegex = new RegExp(
-            '^(' + longPieces.join('|') + ')',
-            'i'
-        );
-        this._weekdaysShortStrictRegex = new RegExp(
-            '^(' + shortPieces.join('|') + ')',
-            'i'
-        );
-        this._weekdaysMinStrictRegex = new RegExp(
-            '^(' + minPieces.join('|') + ')',
-            'i'
-        );
+        this._weekdaysStrictRegex = new RegExp('^(' + longPieces.join('|') + ')', 'i');
+        this._weekdaysShortStrictRegex = new RegExp('^(' + shortPieces.join('|') + ')', 'i');
+        this._weekdaysMinStrictRegex = new RegExp('^(' + minPieces.join('|') + ')', 'i');
     }
 
     // FORMATTING
@@ -33281,12 +32988,8 @@ module.exports = stubFalse;
     });
 
     addFormatToken('hmmss', 0, 0, function () {
-        return (
-            '' +
-            hFormat.apply(this) +
-            zeroFill(this.minutes(), 2) +
-            zeroFill(this.seconds(), 2)
-        );
+        return '' + hFormat.apply(this) + zeroFill(this.minutes(), 2) +
+            zeroFill(this.seconds(), 2);
     });
 
     addFormatToken('Hmm', 0, 0, function () {
@@ -33294,21 +32997,13 @@ module.exports = stubFalse;
     });
 
     addFormatToken('Hmmss', 0, 0, function () {
-        return (
-            '' +
-            this.hours() +
-            zeroFill(this.minutes(), 2) +
-            zeroFill(this.seconds(), 2)
-        );
+        return '' + this.hours() + zeroFill(this.minutes(), 2) +
+            zeroFill(this.seconds(), 2);
     });
 
-    function meridiem(token, lowercase) {
+    function meridiem (token, lowercase) {
         addFormatToken(token, 0, 0, function () {
-            return this.localeData().meridiem(
-                this.hours(),
-                this.minutes(),
-                lowercase
-            );
+            return this.localeData().meridiem(this.hours(), this.minutes(), lowercase);
         });
     }
 
@@ -33324,15 +33019,15 @@ module.exports = stubFalse;
 
     // PARSING
 
-    function matchMeridiem(isStrict, locale) {
+    function matchMeridiem (isStrict, locale) {
         return locale._meridiemParse;
     }
 
-    addRegexToken('a', matchMeridiem);
-    addRegexToken('A', matchMeridiem);
-    addRegexToken('H', match1to2);
-    addRegexToken('h', match1to2);
-    addRegexToken('k', match1to2);
+    addRegexToken('a',  matchMeridiem);
+    addRegexToken('A',  matchMeridiem);
+    addRegexToken('H',  match1to2);
+    addRegexToken('h',  match1to2);
+    addRegexToken('k',  match1to2);
     addRegexToken('HH', match1to2, match2);
     addRegexToken('hh', match1to2, match2);
     addRegexToken('kk', match1to2, match2);
@@ -33362,8 +33057,8 @@ module.exports = stubFalse;
         getParsingFlags(config).bigHour = true;
     });
     addParseToken('hmmss', function (input, array, config) {
-        var pos1 = input.length - 4,
-            pos2 = input.length - 2;
+        var pos1 = input.length - 4;
+        var pos2 = input.length - 2;
         array[HOUR] = toInt(input.substr(0, pos1));
         array[MINUTE] = toInt(input.substr(pos1, 2));
         array[SECOND] = toInt(input.substr(pos2));
@@ -33375,8 +33070,8 @@ module.exports = stubFalse;
         array[MINUTE] = toInt(input.substr(pos));
     });
     addParseToken('Hmmss', function (input, array, config) {
-        var pos1 = input.length - 4,
-            pos2 = input.length - 2;
+        var pos1 = input.length - 4;
+        var pos2 = input.length - 2;
         array[HOUR] = toInt(input.substr(0, pos1));
         array[MINUTE] = toInt(input.substr(pos1, 2));
         array[SECOND] = toInt(input.substr(pos2));
@@ -33384,26 +33079,29 @@ module.exports = stubFalse;
 
     // LOCALES
 
-    function localeIsPM(input) {
+    function localeIsPM (input) {
         // IE8 Quirks Mode & IE7 Standards Mode do not allow accessing strings like arrays
         // Using charAt should be more compatible.
-        return (input + '').toLowerCase().charAt(0) === 'p';
+        return ((input + '').toLowerCase().charAt(0) === 'p');
     }
 
-    var defaultLocaleMeridiemParse = /[ap]\.?m?\.?/i,
-        // Setting the hour should keep the time, because the user explicitly
-        // specified which hour they want. So trying to maintain the same hour (in
-        // a new timezone) makes sense. Adding/subtracting hours does not follow
-        // this rule.
-        getSetHour = makeGetSet('Hours', true);
-
-    function localeMeridiem(hours, minutes, isLower) {
+    var defaultLocaleMeridiemParse = /[ap]\.?m?\.?/i;
+    function localeMeridiem (hours, minutes, isLower) {
         if (hours > 11) {
             return isLower ? 'pm' : 'PM';
         } else {
             return isLower ? 'am' : 'AM';
         }
     }
+
+
+    // MOMENTS
+
+    // Setting the hour should keep the time, because the user explicitly
+    // specified which hour they want. So trying to maintain the same hour (in
+    // a new timezone) makes sense. Adding/subtracting hours does not follow
+    // this rule.
+    var getSetHour = makeGetSet('Hours', true);
 
     var baseConfig = {
         calendar: defaultCalendar,
@@ -33422,24 +33120,13 @@ module.exports = stubFalse;
         weekdaysMin: defaultLocaleWeekdaysMin,
         weekdaysShort: defaultLocaleWeekdaysShort,
 
-        meridiemParse: defaultLocaleMeridiemParse,
+        meridiemParse: defaultLocaleMeridiemParse
     };
 
     // internal storage for locale config files
-    var locales = {},
-        localeFamilies = {},
-        globalLocale;
-
-    function commonPrefix(arr1, arr2) {
-        var i,
-            minl = Math.min(arr1.length, arr2.length);
-        for (i = 0; i < minl; i += 1) {
-            if (arr1[i] !== arr2[i]) {
-                return i;
-            }
-        }
-        return minl;
-    }
+    var locales = {};
+    var localeFamilies = {};
+    var globalLocale;
 
     function normalizeLocale(key) {
         return key ? key.toLowerCase().replace('_', '-') : key;
@@ -33449,11 +33136,7 @@ module.exports = stubFalse;
     // try ['en-au', 'en-gb'] as 'en-au', 'en-gb', 'en', as in move through the list trying each
     // substring from most specific to least, but move to the next array item if it's a more specific variant than the current root
     function chooseLocale(names) {
-        var i = 0,
-            j,
-            next,
-            locale,
-            split;
+        var i = 0, j, next, locale, split;
 
         while (i < names.length) {
             split = normalizeLocale(names[i]).split('-');
@@ -33465,11 +33148,7 @@ module.exports = stubFalse;
                 if (locale) {
                     return locale;
                 }
-                if (
-                    next &&
-                    next.length >= j &&
-                    commonPrefix(split, next) >= j - 1
-                ) {
+                if (next && next.length >= j && compareArrays(split, next, true) >= j - 1) {
                     //the next array item is better than a shallower substring of this one
                     break;
                 }
@@ -33481,25 +33160,16 @@ module.exports = stubFalse;
     }
 
     function loadLocale(name) {
-        var oldLocale = null,
-            aliasedRequire;
+        var oldLocale = null;
         // TODO: Find a better way to register and load all the locales in Node
-        if (
-            locales[name] === undefined &&
-            typeof module !== 'undefined' &&
-            module &&
-            module.exports
-        ) {
+        if (!locales[name] && (typeof module !== 'undefined') &&
+                module && module.exports) {
             try {
                 oldLocale = globalLocale._abbr;
-                aliasedRequire = require;
+                var aliasedRequire = require;
                 !(function webpackMissingModule() { var e = new Error("Cannot find module 'undefined'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
                 getSetGlobalLocale(oldLocale);
-            } catch (e) {
-                // mark as not found to avoid repeating expensive file require call causing high CPU
-                // when trying to find en-US, en_US, en-us for every format call
-                locales[name] = null; // null means not found
-            }
+            } catch (e) {}
         }
         return locales[name];
     }
@@ -33507,24 +33177,24 @@ module.exports = stubFalse;
     // This function will load locale and then set the global locale.  If
     // no arguments are passed in, it will simply return the current global
     // locale key.
-    function getSetGlobalLocale(key, values) {
+    function getSetGlobalLocale (key, values) {
         var data;
         if (key) {
             if (isUndefined(values)) {
                 data = getLocale(key);
-            } else {
+            }
+            else {
                 data = defineLocale(key, values);
             }
 
             if (data) {
                 // moment.duration._locale = moment._locale = data;
                 globalLocale = data;
-            } else {
-                if (typeof console !== 'undefined' && console.warn) {
+            }
+            else {
+                if ((typeof console !==  'undefined') && console.warn) {
                     //warn user if arguments are passed but the locale could not be set
-                    console.warn(
-                        'Locale ' + key + ' not found. Did you forget to load it?'
-                    );
+                    console.warn('Locale ' + key +  ' not found. Did you forget to load it?');
                 }
             }
         }
@@ -33532,19 +33202,16 @@ module.exports = stubFalse;
         return globalLocale._abbr;
     }
 
-    function defineLocale(name, config) {
+    function defineLocale (name, config) {
         if (config !== null) {
-            var locale,
-                parentConfig = baseConfig;
+            var locale, parentConfig = baseConfig;
             config.abbr = name;
             if (locales[name] != null) {
-                deprecateSimple(
-                    'defineLocaleOverride',
-                    'use moment.updateLocale(localeName, config) to change ' +
+                deprecateSimple('defineLocaleOverride',
+                        'use moment.updateLocale(localeName, config) to change ' +
                         'an existing locale. moment.defineLocale(localeName, ' +
                         'config) should only be used for creating a new locale ' +
-                        'See http://momentjs.com/guides/#/warnings/define-locale/ for more info.'
-                );
+                        'See http://momentjs.com/guides/#/warnings/define-locale/ for more info.');
                 parentConfig = locales[name]._config;
             } else if (config.parentLocale != null) {
                 if (locales[config.parentLocale] != null) {
@@ -33559,7 +33226,7 @@ module.exports = stubFalse;
                         }
                         localeFamilies[config.parentLocale].push({
                             name: name,
-                            config: config,
+                            config: config
                         });
                         return null;
                     }
@@ -33578,6 +33245,7 @@ module.exports = stubFalse;
             // created, so we won't end up with the child locale set.
             getSetGlobalLocale(name);
 
+
             return locales[name];
         } else {
             // useful for testing
@@ -33588,30 +33256,16 @@ module.exports = stubFalse;
 
     function updateLocale(name, config) {
         if (config != null) {
-            var locale,
-                tmpLocale,
-                parentConfig = baseConfig;
-
-            if (locales[name] != null && locales[name].parentLocale != null) {
-                // Update existing child locale in-place to avoid memory-leaks
-                locales[name].set(mergeConfigs(locales[name]._config, config));
-            } else {
-                // MERGE
-                tmpLocale = loadLocale(name);
-                if (tmpLocale != null) {
-                    parentConfig = tmpLocale._config;
-                }
-                config = mergeConfigs(parentConfig, config);
-                if (tmpLocale == null) {
-                    // updateLocale is called for creating a new locale
-                    // Set abbr so it will have a name (getters return
-                    // undefined otherwise).
-                    config.abbr = name;
-                }
-                locale = new Locale(config);
-                locale.parentLocale = locales[name];
-                locales[name] = locale;
+            var locale, tmpLocale, parentConfig = baseConfig;
+            // MERGE
+            tmpLocale = loadLocale(name);
+            if (tmpLocale != null) {
+                parentConfig = tmpLocale._config;
             }
+            config = mergeConfigs(parentConfig, config);
+            locale = new Locale(config);
+            locale.parentLocale = locales[name];
+            locales[name] = locale;
 
             // backwards compat for now: also set the locale
             getSetGlobalLocale(name);
@@ -33620,9 +33274,6 @@ module.exports = stubFalse;
             if (locales[name] != null) {
                 if (locales[name].parentLocale != null) {
                     locales[name] = locales[name].parentLocale;
-                    if (name === getSetGlobalLocale()) {
-                        getSetGlobalLocale(name);
-                    }
                 } else if (locales[name] != null) {
                     delete locales[name];
                 }
@@ -33632,7 +33283,7 @@ module.exports = stubFalse;
     }
 
     // returns locale data
-    function getLocale(key) {
+    function getLocale (key) {
         var locale;
 
         if (key && key._locale && key._locale._abbr) {
@@ -33659,35 +33310,21 @@ module.exports = stubFalse;
         return keys(locales);
     }
 
-    function checkOverflow(m) {
-        var overflow,
-            a = m._a;
+    function checkOverflow (m) {
+        var overflow;
+        var a = m._a;
 
         if (a && getParsingFlags(m).overflow === -2) {
             overflow =
-                a[MONTH] < 0 || a[MONTH] > 11
-                    ? MONTH
-                    : a[DATE] < 1 || a[DATE] > daysInMonth(a[YEAR], a[MONTH])
-                    ? DATE
-                    : a[HOUR] < 0 ||
-                      a[HOUR] > 24 ||
-                      (a[HOUR] === 24 &&
-                          (a[MINUTE] !== 0 ||
-                              a[SECOND] !== 0 ||
-                              a[MILLISECOND] !== 0))
-                    ? HOUR
-                    : a[MINUTE] < 0 || a[MINUTE] > 59
-                    ? MINUTE
-                    : a[SECOND] < 0 || a[SECOND] > 59
-                    ? SECOND
-                    : a[MILLISECOND] < 0 || a[MILLISECOND] > 999
-                    ? MILLISECOND
-                    : -1;
+                a[MONTH]       < 0 || a[MONTH]       > 11  ? MONTH :
+                a[DATE]        < 1 || a[DATE]        > daysInMonth(a[YEAR], a[MONTH]) ? DATE :
+                a[HOUR]        < 0 || a[HOUR]        > 24 || (a[HOUR] === 24 && (a[MINUTE] !== 0 || a[SECOND] !== 0 || a[MILLISECOND] !== 0)) ? HOUR :
+                a[MINUTE]      < 0 || a[MINUTE]      > 59  ? MINUTE :
+                a[SECOND]      < 0 || a[SECOND]      > 59  ? SECOND :
+                a[MILLISECOND] < 0 || a[MILLISECOND] > 999 ? MILLISECOND :
+                -1;
 
-            if (
-                getParsingFlags(m)._overflowDayOfYear &&
-                (overflow < YEAR || overflow > DATE)
-            ) {
+            if (getParsingFlags(m)._overflowDayOfYear && (overflow < YEAR || overflow > DATE)) {
                 overflow = DATE;
             }
             if (getParsingFlags(m)._overflowWeeks && overflow === -1) {
@@ -33703,64 +33340,199 @@ module.exports = stubFalse;
         return m;
     }
 
+    // Pick the first defined of two or three arguments.
+    function defaults(a, b, c) {
+        if (a != null) {
+            return a;
+        }
+        if (b != null) {
+            return b;
+        }
+        return c;
+    }
+
+    function currentDateArray(config) {
+        // hooks is actually the exported moment object
+        var nowValue = new Date(hooks.now());
+        if (config._useUTC) {
+            return [nowValue.getUTCFullYear(), nowValue.getUTCMonth(), nowValue.getUTCDate()];
+        }
+        return [nowValue.getFullYear(), nowValue.getMonth(), nowValue.getDate()];
+    }
+
+    // convert an array to a date.
+    // the array should mirror the parameters below
+    // note: all values past the year are optional and will default to the lowest possible value.
+    // [year, month, day , hour, minute, second, millisecond]
+    function configFromArray (config) {
+        var i, date, input = [], currentDate, expectedWeekday, yearToUse;
+
+        if (config._d) {
+            return;
+        }
+
+        currentDate = currentDateArray(config);
+
+        //compute day of the year from weeks and weekdays
+        if (config._w && config._a[DATE] == null && config._a[MONTH] == null) {
+            dayOfYearFromWeekInfo(config);
+        }
+
+        //if the day of the year is set, figure out what it is
+        if (config._dayOfYear != null) {
+            yearToUse = defaults(config._a[YEAR], currentDate[YEAR]);
+
+            if (config._dayOfYear > daysInYear(yearToUse) || config._dayOfYear === 0) {
+                getParsingFlags(config)._overflowDayOfYear = true;
+            }
+
+            date = createUTCDate(yearToUse, 0, config._dayOfYear);
+            config._a[MONTH] = date.getUTCMonth();
+            config._a[DATE] = date.getUTCDate();
+        }
+
+        // Default to current date.
+        // * if no year, month, day of month are given, default to today
+        // * if day of month is given, default month and year
+        // * if month is given, default only year
+        // * if year is given, don't default anything
+        for (i = 0; i < 3 && config._a[i] == null; ++i) {
+            config._a[i] = input[i] = currentDate[i];
+        }
+
+        // Zero out whatever was not defaulted, including time
+        for (; i < 7; i++) {
+            config._a[i] = input[i] = (config._a[i] == null) ? (i === 2 ? 1 : 0) : config._a[i];
+        }
+
+        // Check for 24:00:00.000
+        if (config._a[HOUR] === 24 &&
+                config._a[MINUTE] === 0 &&
+                config._a[SECOND] === 0 &&
+                config._a[MILLISECOND] === 0) {
+            config._nextDay = true;
+            config._a[HOUR] = 0;
+        }
+
+        config._d = (config._useUTC ? createUTCDate : createDate).apply(null, input);
+        expectedWeekday = config._useUTC ? config._d.getUTCDay() : config._d.getDay();
+
+        // Apply timezone offset from input. The actual utcOffset can be changed
+        // with parseZone.
+        if (config._tzm != null) {
+            config._d.setUTCMinutes(config._d.getUTCMinutes() - config._tzm);
+        }
+
+        if (config._nextDay) {
+            config._a[HOUR] = 24;
+        }
+
+        // check for mismatching day of week
+        if (config._w && typeof config._w.d !== 'undefined' && config._w.d !== expectedWeekday) {
+            getParsingFlags(config).weekdayMismatch = true;
+        }
+    }
+
+    function dayOfYearFromWeekInfo(config) {
+        var w, weekYear, week, weekday, dow, doy, temp, weekdayOverflow;
+
+        w = config._w;
+        if (w.GG != null || w.W != null || w.E != null) {
+            dow = 1;
+            doy = 4;
+
+            // TODO: We need to take the current isoWeekYear, but that depends on
+            // how we interpret now (local, utc, fixed offset). So create
+            // a now version of current config (take local/utc/offset flags, and
+            // create now).
+            weekYear = defaults(w.GG, config._a[YEAR], weekOfYear(createLocal(), 1, 4).year);
+            week = defaults(w.W, 1);
+            weekday = defaults(w.E, 1);
+            if (weekday < 1 || weekday > 7) {
+                weekdayOverflow = true;
+            }
+        } else {
+            dow = config._locale._week.dow;
+            doy = config._locale._week.doy;
+
+            var curWeek = weekOfYear(createLocal(), dow, doy);
+
+            weekYear = defaults(w.gg, config._a[YEAR], curWeek.year);
+
+            // Default to current week.
+            week = defaults(w.w, curWeek.week);
+
+            if (w.d != null) {
+                // weekday -- low day numbers are considered next week
+                weekday = w.d;
+                if (weekday < 0 || weekday > 6) {
+                    weekdayOverflow = true;
+                }
+            } else if (w.e != null) {
+                // local weekday -- counting starts from beginning of week
+                weekday = w.e + dow;
+                if (w.e < 0 || w.e > 6) {
+                    weekdayOverflow = true;
+                }
+            } else {
+                // default to beginning of week
+                weekday = dow;
+            }
+        }
+        if (week < 1 || week > weeksInYear(weekYear, dow, doy)) {
+            getParsingFlags(config)._overflowWeeks = true;
+        } else if (weekdayOverflow != null) {
+            getParsingFlags(config)._overflowWeekday = true;
+        } else {
+            temp = dayOfYearFromWeeks(weekYear, week, weekday, dow, doy);
+            config._a[YEAR] = temp.year;
+            config._dayOfYear = temp.dayOfYear;
+        }
+    }
+
     // iso 8601 regex
     // 0000-00-00 0000-W00 or 0000-W00-0 + T + 00 or 00:00 or 00:00:00 or 00:00:00.000 + +00:00 or +0000 or +00)
-    var extendedIsoRegex = /^\s*((?:[+-]\d{6}|\d{4})-(?:\d\d-\d\d|W\d\d-\d|W\d\d|\d\d\d|\d\d))(?:(T| )(\d\d(?::\d\d(?::\d\d(?:[.,]\d+)?)?)?)([+-]\d\d(?::?\d\d)?|\s*Z)?)?$/,
-        basicIsoRegex = /^\s*((?:[+-]\d{6}|\d{4})(?:\d\d\d\d|W\d\d\d|W\d\d|\d\d\d|\d\d|))(?:(T| )(\d\d(?:\d\d(?:\d\d(?:[.,]\d+)?)?)?)([+-]\d\d(?::?\d\d)?|\s*Z)?)?$/,
-        tzRegex = /Z|[+-]\d\d(?::?\d\d)?/,
-        isoDates = [
-            ['YYYYYY-MM-DD', /[+-]\d{6}-\d\d-\d\d/],
-            ['YYYY-MM-DD', /\d{4}-\d\d-\d\d/],
-            ['GGGG-[W]WW-E', /\d{4}-W\d\d-\d/],
-            ['GGGG-[W]WW', /\d{4}-W\d\d/, false],
-            ['YYYY-DDD', /\d{4}-\d{3}/],
-            ['YYYY-MM', /\d{4}-\d\d/, false],
-            ['YYYYYYMMDD', /[+-]\d{10}/],
-            ['YYYYMMDD', /\d{8}/],
-            ['GGGG[W]WWE', /\d{4}W\d{3}/],
-            ['GGGG[W]WW', /\d{4}W\d{2}/, false],
-            ['YYYYDDD', /\d{7}/],
-            ['YYYYMM', /\d{6}/, false],
-            ['YYYY', /\d{4}/, false],
-        ],
-        // iso time formats and regexes
-        isoTimes = [
-            ['HH:mm:ss.SSSS', /\d\d:\d\d:\d\d\.\d+/],
-            ['HH:mm:ss,SSSS', /\d\d:\d\d:\d\d,\d+/],
-            ['HH:mm:ss', /\d\d:\d\d:\d\d/],
-            ['HH:mm', /\d\d:\d\d/],
-            ['HHmmss.SSSS', /\d\d\d\d\d\d\.\d+/],
-            ['HHmmss,SSSS', /\d\d\d\d\d\d,\d+/],
-            ['HHmmss', /\d\d\d\d\d\d/],
-            ['HHmm', /\d\d\d\d/],
-            ['HH', /\d\d/],
-        ],
-        aspNetJsonRegex = /^\/?Date\((-?\d+)/i,
-        // RFC 2822 regex: For details see https://tools.ietf.org/html/rfc2822#section-3.3
-        rfc2822 = /^(?:(Mon|Tue|Wed|Thu|Fri|Sat|Sun),?\s)?(\d{1,2})\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s(\d{2,4})\s(\d\d):(\d\d)(?::(\d\d))?\s(?:(UT|GMT|[ECMP][SD]T)|([Zz])|([+-]\d{4}))$/,
-        obsOffsets = {
-            UT: 0,
-            GMT: 0,
-            EDT: -4 * 60,
-            EST: -5 * 60,
-            CDT: -5 * 60,
-            CST: -6 * 60,
-            MDT: -6 * 60,
-            MST: -7 * 60,
-            PDT: -7 * 60,
-            PST: -8 * 60,
-        };
+    var extendedIsoRegex = /^\s*((?:[+-]\d{6}|\d{4})-(?:\d\d-\d\d|W\d\d-\d|W\d\d|\d\d\d|\d\d))(?:(T| )(\d\d(?::\d\d(?::\d\d(?:[.,]\d+)?)?)?)([\+\-]\d\d(?::?\d\d)?|\s*Z)?)?$/;
+    var basicIsoRegex = /^\s*((?:[+-]\d{6}|\d{4})(?:\d\d\d\d|W\d\d\d|W\d\d|\d\d\d|\d\d))(?:(T| )(\d\d(?:\d\d(?:\d\d(?:[.,]\d+)?)?)?)([\+\-]\d\d(?::?\d\d)?|\s*Z)?)?$/;
+
+    var tzRegex = /Z|[+-]\d\d(?::?\d\d)?/;
+
+    var isoDates = [
+        ['YYYYYY-MM-DD', /[+-]\d{6}-\d\d-\d\d/],
+        ['YYYY-MM-DD', /\d{4}-\d\d-\d\d/],
+        ['GGGG-[W]WW-E', /\d{4}-W\d\d-\d/],
+        ['GGGG-[W]WW', /\d{4}-W\d\d/, false],
+        ['YYYY-DDD', /\d{4}-\d{3}/],
+        ['YYYY-MM', /\d{4}-\d\d/, false],
+        ['YYYYYYMMDD', /[+-]\d{10}/],
+        ['YYYYMMDD', /\d{8}/],
+        // YYYYMM is NOT allowed by the standard
+        ['GGGG[W]WWE', /\d{4}W\d{3}/],
+        ['GGGG[W]WW', /\d{4}W\d{2}/, false],
+        ['YYYYDDD', /\d{7}/]
+    ];
+
+    // iso time formats and regexes
+    var isoTimes = [
+        ['HH:mm:ss.SSSS', /\d\d:\d\d:\d\d\.\d+/],
+        ['HH:mm:ss,SSSS', /\d\d:\d\d:\d\d,\d+/],
+        ['HH:mm:ss', /\d\d:\d\d:\d\d/],
+        ['HH:mm', /\d\d:\d\d/],
+        ['HHmmss.SSSS', /\d\d\d\d\d\d\.\d+/],
+        ['HHmmss,SSSS', /\d\d\d\d\d\d,\d+/],
+        ['HHmmss', /\d\d\d\d\d\d/],
+        ['HHmm', /\d\d\d\d/],
+        ['HH', /\d\d/]
+    ];
+
+    var aspNetJsonRegex = /^\/?Date\((\-?\d+)/i;
 
     // date from iso format
     function configFromISO(config) {
-        var i,
-            l,
+        var i, l,
             string = config._i,
             match = extendedIsoRegex.exec(string) || basicIsoRegex.exec(string),
-            allowTime,
-            dateFormat,
-            timeFormat,
-            tzFormat;
+            allowTime, dateFormat, timeFormat, tzFormat;
 
         if (match) {
             getParsingFlags(config).iso = true;
@@ -33808,20 +33580,16 @@ module.exports = stubFalse;
         }
     }
 
-    function extractFromRFC2822Strings(
-        yearStr,
-        monthStr,
-        dayStr,
-        hourStr,
-        minuteStr,
-        secondStr
-    ) {
+    // RFC 2822 regex: For details see https://tools.ietf.org/html/rfc2822#section-3.3
+    var rfc2822 = /^(?:(Mon|Tue|Wed|Thu|Fri|Sat|Sun),?\s)?(\d{1,2})\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s(\d{2,4})\s(\d\d):(\d\d)(?::(\d\d))?\s(?:(UT|GMT|[ECMP][SD]T)|([Zz])|([+-]\d{4}))$/;
+
+    function extractFromRFC2822Strings(yearStr, monthStr, dayStr, hourStr, minuteStr, secondStr) {
         var result = [
             untruncateYear(yearStr),
             defaultLocaleMonthsShort.indexOf(monthStr),
             parseInt(dayStr, 10),
             parseInt(hourStr, 10),
-            parseInt(minuteStr, 10),
+            parseInt(minuteStr, 10)
         ];
 
         if (secondStr) {
@@ -33843,22 +33611,14 @@ module.exports = stubFalse;
 
     function preprocessRFC2822(s) {
         // Remove comments and folding whitespace and replace multiple-spaces with a single space
-        return s
-            .replace(/\([^)]*\)|[\n\t]/g, ' ')
-            .replace(/(\s\s+)/g, ' ')
-            .replace(/^\s\s*/, '')
-            .replace(/\s\s*$/, '');
+        return s.replace(/\([^)]*\)|[\n\t]/g, ' ').replace(/(\s\s+)/g, ' ').replace(/^\s\s*/, '').replace(/\s\s*$/, '');
     }
 
     function checkWeekday(weekdayStr, parsedInput, config) {
         if (weekdayStr) {
-            // TODO: Replace the vanilla JS Date object with an independent day-of-week check.
+            // TODO: Replace the vanilla JS Date object with an indepentent day-of-week check.
             var weekdayProvided = defaultLocaleWeekdaysShort.indexOf(weekdayStr),
-                weekdayActual = new Date(
-                    parsedInput[0],
-                    parsedInput[1],
-                    parsedInput[2]
-                ).getDay();
+                weekdayActual = new Date(parsedInput[0], parsedInput[1], parsedInput[2]).getDay();
             if (weekdayProvided !== weekdayActual) {
                 getParsingFlags(config).weekdayMismatch = true;
                 config._isValid = false;
@@ -33868,6 +33628,19 @@ module.exports = stubFalse;
         return true;
     }
 
+    var obsOffsets = {
+        UT: 0,
+        GMT: 0,
+        EDT: -4 * 60,
+        EST: -5 * 60,
+        CDT: -5 * 60,
+        CST: -6 * 60,
+        MDT: -6 * 60,
+        MST: -7 * 60,
+        PDT: -7 * 60,
+        PST: -8 * 60
+    };
+
     function calculateOffset(obsOffset, militaryOffset, numOffset) {
         if (obsOffset) {
             return obsOffsets[obsOffset];
@@ -33875,26 +33648,17 @@ module.exports = stubFalse;
             // the only allowed military tz is Z
             return 0;
         } else {
-            var hm = parseInt(numOffset, 10),
-                m = hm % 100,
-                h = (hm - m) / 100;
+            var hm = parseInt(numOffset, 10);
+            var m = hm % 100, h = (hm - m) / 100;
             return h * 60 + m;
         }
     }
 
     // date and time from ref 2822 format
     function configFromRFC2822(config) {
-        var match = rfc2822.exec(preprocessRFC2822(config._i)),
-            parsedArray;
+        var match = rfc2822.exec(preprocessRFC2822(config._i));
         if (match) {
-            parsedArray = extractFromRFC2822Strings(
-                match[4],
-                match[3],
-                match[2],
-                match[5],
-                match[6],
-                match[7]
-            );
+            var parsedArray = extractFromRFC2822Strings(match[4], match[3], match[2], match[5], match[6], match[7]);
             if (!checkWeekday(match[1], parsedArray, config)) {
                 return;
             }
@@ -33911,9 +33675,10 @@ module.exports = stubFalse;
         }
     }
 
-    // date from 1) ASP.NET, 2) ISO, 3) RFC 2822 formats, or 4) optional fallback if parsing isn't strict
+    // date from iso format or fallback
     function configFromString(config) {
         var matched = aspNetJsonRegex.exec(config._i);
+
         if (matched !== null) {
             config._d = new Date(+matched[1]);
             return;
@@ -33933,201 +33698,19 @@ module.exports = stubFalse;
             return;
         }
 
-        if (config._strict) {
-            config._isValid = false;
-        } else {
-            // Final attempt, use Input Fallback
-            hooks.createFromInputFallback(config);
-        }
+        // Final attempt, use Input Fallback
+        hooks.createFromInputFallback(config);
     }
 
     hooks.createFromInputFallback = deprecate(
         'value provided is not in a recognized RFC2822 or ISO format. moment construction falls back to js Date(), ' +
-            'which is not reliable across all browsers and versions. Non RFC2822/ISO date formats are ' +
-            'discouraged and will be removed in an upcoming major release. Please refer to ' +
-            'http://momentjs.com/guides/#/warnings/js-date/ for more info.',
+        'which is not reliable across all browsers and versions. Non RFC2822/ISO date formats are ' +
+        'discouraged and will be removed in an upcoming major release. Please refer to ' +
+        'http://momentjs.com/guides/#/warnings/js-date/ for more info.',
         function (config) {
             config._d = new Date(config._i + (config._useUTC ? ' UTC' : ''));
         }
     );
-
-    // Pick the first defined of two or three arguments.
-    function defaults(a, b, c) {
-        if (a != null) {
-            return a;
-        }
-        if (b != null) {
-            return b;
-        }
-        return c;
-    }
-
-    function currentDateArray(config) {
-        // hooks is actually the exported moment object
-        var nowValue = new Date(hooks.now());
-        if (config._useUTC) {
-            return [
-                nowValue.getUTCFullYear(),
-                nowValue.getUTCMonth(),
-                nowValue.getUTCDate(),
-            ];
-        }
-        return [nowValue.getFullYear(), nowValue.getMonth(), nowValue.getDate()];
-    }
-
-    // convert an array to a date.
-    // the array should mirror the parameters below
-    // note: all values past the year are optional and will default to the lowest possible value.
-    // [year, month, day , hour, minute, second, millisecond]
-    function configFromArray(config) {
-        var i,
-            date,
-            input = [],
-            currentDate,
-            expectedWeekday,
-            yearToUse;
-
-        if (config._d) {
-            return;
-        }
-
-        currentDate = currentDateArray(config);
-
-        //compute day of the year from weeks and weekdays
-        if (config._w && config._a[DATE] == null && config._a[MONTH] == null) {
-            dayOfYearFromWeekInfo(config);
-        }
-
-        //if the day of the year is set, figure out what it is
-        if (config._dayOfYear != null) {
-            yearToUse = defaults(config._a[YEAR], currentDate[YEAR]);
-
-            if (
-                config._dayOfYear > daysInYear(yearToUse) ||
-                config._dayOfYear === 0
-            ) {
-                getParsingFlags(config)._overflowDayOfYear = true;
-            }
-
-            date = createUTCDate(yearToUse, 0, config._dayOfYear);
-            config._a[MONTH] = date.getUTCMonth();
-            config._a[DATE] = date.getUTCDate();
-        }
-
-        // Default to current date.
-        // * if no year, month, day of month are given, default to today
-        // * if day of month is given, default month and year
-        // * if month is given, default only year
-        // * if year is given, don't default anything
-        for (i = 0; i < 3 && config._a[i] == null; ++i) {
-            config._a[i] = input[i] = currentDate[i];
-        }
-
-        // Zero out whatever was not defaulted, including time
-        for (; i < 7; i++) {
-            config._a[i] = input[i] =
-                config._a[i] == null ? (i === 2 ? 1 : 0) : config._a[i];
-        }
-
-        // Check for 24:00:00.000
-        if (
-            config._a[HOUR] === 24 &&
-            config._a[MINUTE] === 0 &&
-            config._a[SECOND] === 0 &&
-            config._a[MILLISECOND] === 0
-        ) {
-            config._nextDay = true;
-            config._a[HOUR] = 0;
-        }
-
-        config._d = (config._useUTC ? createUTCDate : createDate).apply(
-            null,
-            input
-        );
-        expectedWeekday = config._useUTC
-            ? config._d.getUTCDay()
-            : config._d.getDay();
-
-        // Apply timezone offset from input. The actual utcOffset can be changed
-        // with parseZone.
-        if (config._tzm != null) {
-            config._d.setUTCMinutes(config._d.getUTCMinutes() - config._tzm);
-        }
-
-        if (config._nextDay) {
-            config._a[HOUR] = 24;
-        }
-
-        // check for mismatching day of week
-        if (
-            config._w &&
-            typeof config._w.d !== 'undefined' &&
-            config._w.d !== expectedWeekday
-        ) {
-            getParsingFlags(config).weekdayMismatch = true;
-        }
-    }
-
-    function dayOfYearFromWeekInfo(config) {
-        var w, weekYear, week, weekday, dow, doy, temp, weekdayOverflow, curWeek;
-
-        w = config._w;
-        if (w.GG != null || w.W != null || w.E != null) {
-            dow = 1;
-            doy = 4;
-
-            // TODO: We need to take the current isoWeekYear, but that depends on
-            // how we interpret now (local, utc, fixed offset). So create
-            // a now version of current config (take local/utc/offset flags, and
-            // create now).
-            weekYear = defaults(
-                w.GG,
-                config._a[YEAR],
-                weekOfYear(createLocal(), 1, 4).year
-            );
-            week = defaults(w.W, 1);
-            weekday = defaults(w.E, 1);
-            if (weekday < 1 || weekday > 7) {
-                weekdayOverflow = true;
-            }
-        } else {
-            dow = config._locale._week.dow;
-            doy = config._locale._week.doy;
-
-            curWeek = weekOfYear(createLocal(), dow, doy);
-
-            weekYear = defaults(w.gg, config._a[YEAR], curWeek.year);
-
-            // Default to current week.
-            week = defaults(w.w, curWeek.week);
-
-            if (w.d != null) {
-                // weekday -- low day numbers are considered next week
-                weekday = w.d;
-                if (weekday < 0 || weekday > 6) {
-                    weekdayOverflow = true;
-                }
-            } else if (w.e != null) {
-                // local weekday -- counting starts from beginning of week
-                weekday = w.e + dow;
-                if (w.e < 0 || w.e > 6) {
-                    weekdayOverflow = true;
-                }
-            } else {
-                // default to beginning of week
-                weekday = dow;
-            }
-        }
-        if (week < 1 || week > weeksInYear(weekYear, dow, doy)) {
-            getParsingFlags(config)._overflowWeeks = true;
-        } else if (weekdayOverflow != null) {
-            getParsingFlags(config)._overflowWeekday = true;
-        } else {
-            temp = dayOfYearFromWeeks(weekYear, week, weekday, dow, doy);
-            config._a[YEAR] = temp.year;
-            config._dayOfYear = temp.dayOfYear;
-        }
-    }
 
     // constant that refers to the ISO standard
     hooks.ISO_8601 = function () {};
@@ -34151,81 +33734,64 @@ module.exports = stubFalse;
 
         // This array is used to make a Date, either with `new Date` or `Date.UTC`
         var string = '' + config._i,
-            i,
-            parsedInput,
-            tokens,
-            token,
-            skipped,
+            i, parsedInput, tokens, token, skipped,
             stringLength = string.length,
-            totalParsedInputLength = 0,
-            era;
+            totalParsedInputLength = 0;
 
-        tokens =
-            expandFormat(config._f, config._locale).match(formattingTokens) || [];
+        tokens = expandFormat(config._f, config._locale).match(formattingTokens) || [];
 
         for (i = 0; i < tokens.length; i++) {
             token = tokens[i];
-            parsedInput = (string.match(getParseRegexForToken(token, config)) ||
-                [])[0];
+            parsedInput = (string.match(getParseRegexForToken(token, config)) || [])[0];
+            // console.log('token', token, 'parsedInput', parsedInput,
+            //         'regex', getParseRegexForToken(token, config));
             if (parsedInput) {
                 skipped = string.substr(0, string.indexOf(parsedInput));
                 if (skipped.length > 0) {
                     getParsingFlags(config).unusedInput.push(skipped);
                 }
-                string = string.slice(
-                    string.indexOf(parsedInput) + parsedInput.length
-                );
+                string = string.slice(string.indexOf(parsedInput) + parsedInput.length);
                 totalParsedInputLength += parsedInput.length;
             }
             // don't parse if it's not a known token
             if (formatTokenFunctions[token]) {
                 if (parsedInput) {
                     getParsingFlags(config).empty = false;
-                } else {
+                }
+                else {
                     getParsingFlags(config).unusedTokens.push(token);
                 }
                 addTimeToArrayFromToken(token, parsedInput, config);
-            } else if (config._strict && !parsedInput) {
+            }
+            else if (config._strict && !parsedInput) {
                 getParsingFlags(config).unusedTokens.push(token);
             }
         }
 
         // add remaining unparsed input length to the string
-        getParsingFlags(config).charsLeftOver =
-            stringLength - totalParsedInputLength;
+        getParsingFlags(config).charsLeftOver = stringLength - totalParsedInputLength;
         if (string.length > 0) {
             getParsingFlags(config).unusedInput.push(string);
         }
 
         // clear _12h flag if hour is <= 12
-        if (
-            config._a[HOUR] <= 12 &&
+        if (config._a[HOUR] <= 12 &&
             getParsingFlags(config).bigHour === true &&
-            config._a[HOUR] > 0
-        ) {
+            config._a[HOUR] > 0) {
             getParsingFlags(config).bigHour = undefined;
         }
 
         getParsingFlags(config).parsedDateParts = config._a.slice(0);
         getParsingFlags(config).meridiem = config._meridiem;
         // handle meridiem
-        config._a[HOUR] = meridiemFixWrap(
-            config._locale,
-            config._a[HOUR],
-            config._meridiem
-        );
-
-        // handle era
-        era = getParsingFlags(config).era;
-        if (era !== null) {
-            config._a[YEAR] = config._locale.erasConvertYear(era, config._a[YEAR]);
-        }
+        config._a[HOUR] = meridiemFixWrap(config._locale, config._a[HOUR], config._meridiem);
 
         configFromArray(config);
         checkOverflow(config);
     }
 
-    function meridiemFixWrap(locale, hour, meridiem) {
+
+    function meridiemFixWrap (locale, hour, meridiem) {
         var isPm;
 
         if (meridiem == null) {
@@ -34254,11 +33820,10 @@ module.exports = stubFalse;
     function configFromStringAndArray(config) {
         var tempConfig,
             bestMoment,
+
             scoreToBeat,
             i,
-            currentScore,
-            validFormatFound,
-            bestFormatIsValid = false;
+            currentScore;
 
         if (config._f.length === 0) {
             getParsingFlags(config).invalidFormat = true;
@@ -34268,7 +33833,6 @@ module.exports = stubFalse;
 
         for (i = 0; i < config._f.length; i++) {
             currentScore = 0;
-            validFormatFound = false;
             tempConfig = copyConfig({}, config);
             if (config._useUTC != null) {
                 tempConfig._useUTC = config._useUTC;
@@ -34276,8 +33840,8 @@ module.exports = stubFalse;
             tempConfig._f = config._f[i];
             configFromStringAndFormat(tempConfig);
 
-            if (isValid(tempConfig)) {
-                validFormatFound = true;
+            if (!isValid(tempConfig)) {
+                continue;
             }
 
             // if there is any input that was not parsed add a penalty for that format
@@ -34288,23 +33852,9 @@ module.exports = stubFalse;
 
             getParsingFlags(tempConfig).score = currentScore;
 
-            if (!bestFormatIsValid) {
-                if (
-                    scoreToBeat == null ||
-                    currentScore < scoreToBeat ||
-                    validFormatFound
-                ) {
-                    scoreToBeat = currentScore;
-                    bestMoment = tempConfig;
-                    if (validFormatFound) {
-                        bestFormatIsValid = true;
-                    }
-                }
-            } else {
-                if (currentScore < scoreToBeat) {
-                    scoreToBeat = currentScore;
-                    bestMoment = tempConfig;
-                }
+            if (scoreToBeat == null || currentScore < scoreToBeat) {
+                scoreToBeat = currentScore;
+                bestMoment = tempConfig;
             }
         }
 
@@ -34316,19 +33866,15 @@ module.exports = stubFalse;
             return;
         }
 
-        var i = normalizeObjectUnits(config._i),
-            dayOrDate = i.day === undefined ? i.date : i.day;
-        config._a = map(
-            [i.year, i.month, dayOrDate, i.hour, i.minute, i.second, i.millisecond],
-            function (obj) {
-                return obj && parseInt(obj, 10);
-            }
-        );
+        var i = normalizeObjectUnits(config._i);
+        config._a = map([i.year, i.month, i.day || i.date, i.hour, i.minute, i.second, i.millisecond], function (obj) {
+            return obj && parseInt(obj, 10);
+        });
 
         configFromArray(config);
     }
 
-    function createFromConfig(config) {
+    function createFromConfig (config) {
         var res = new Moment(checkOverflow(prepareConfig(config)));
         if (res._nextDay) {
             // Adding is smart enough around DST
@@ -34339,14 +33885,14 @@ module.exports = stubFalse;
         return res;
     }
 
-    function prepareConfig(config) {
+    function prepareConfig (config) {
         var input = config._i,
             format = config._f;
 
         config._locale = config._locale || getLocale(config._l);
 
         if (input === null || (format === undefined && input === '')) {
-            return createInvalid({ nullInput: true });
+            return createInvalid({nullInput: true});
         }
 
         if (typeof input === 'string') {
@@ -34361,7 +33907,7 @@ module.exports = stubFalse;
             configFromStringAndArray(config);
         } else if (format) {
             configFromStringAndFormat(config);
-        } else {
+        }  else {
             configFromInput(config);
         }
 
@@ -34395,23 +33941,16 @@ module.exports = stubFalse;
         }
     }
 
-    function createLocalOrUTC(input, format, locale, strict, isUTC) {
+    function createLocalOrUTC (input, format, locale, strict, isUTC) {
         var c = {};
-
-        if (format === true || format === false) {
-            strict = format;
-            format = undefined;
-        }
 
         if (locale === true || locale === false) {
             strict = locale;
             locale = undefined;
         }
 
-        if (
-            (isObject(input) && isObjectEmpty(input)) ||
-            (isArray(input) && input.length === 0)
-        ) {
+        if ((isObject(input) && isObjectEmpty(input)) ||
+                (isArray(input) && input.length === 0)) {
             input = undefined;
         }
         // object construction must be done this way.
@@ -34426,32 +33965,33 @@ module.exports = stubFalse;
         return createFromConfig(c);
     }
 
-    function createLocal(input, format, locale, strict) {
+    function createLocal (input, format, locale, strict) {
         return createLocalOrUTC(input, format, locale, strict, false);
     }
 
     var prototypeMin = deprecate(
-            'moment().min is deprecated, use moment.max instead. http://momentjs.com/guides/#/warnings/min-max/',
-            function () {
-                var other = createLocal.apply(null, arguments);
-                if (this.isValid() && other.isValid()) {
-                    return other < this ? this : other;
-                } else {
-                    return createInvalid();
-                }
+        'moment().min is deprecated, use moment.max instead. http://momentjs.com/guides/#/warnings/min-max/',
+        function () {
+            var other = createLocal.apply(null, arguments);
+            if (this.isValid() && other.isValid()) {
+                return other < this ? this : other;
+            } else {
+                return createInvalid();
             }
-        ),
-        prototypeMax = deprecate(
-            'moment().max is deprecated, use moment.min instead. http://momentjs.com/guides/#/warnings/min-max/',
-            function () {
-                var other = createLocal.apply(null, arguments);
-                if (this.isValid() && other.isValid()) {
-                    return other > this ? this : other;
-                } else {
-                    return createInvalid();
-                }
+        }
+    );
+
+    var prototypeMax = deprecate(
+        'moment().max is deprecated, use moment.min instead. http://momentjs.com/guides/#/warnings/min-max/',
+        function () {
+            var other = createLocal.apply(null, arguments);
+            if (this.isValid() && other.isValid()) {
+                return other > this ? this : other;
+            } else {
+                return createInvalid();
             }
-        );
+        }
+    );
 
     // Pick a moment m from moments so that m[fn](other) is true for all
     // other. This relies on the function fn to be transitive.
@@ -34476,51 +34016,33 @@ module.exports = stubFalse;
     }
 
     // TODO: Use [].sort instead?
-    function min() {
+    function min () {
         var args = [].slice.call(arguments, 0);
 
         return pickBy('isBefore', args);
     }
 
-    function max() {
+    function max () {
         var args = [].slice.call(arguments, 0);
 
         return pickBy('isAfter', args);
     }
 
     var now = function () {
-        return Date.now ? Date.now() : +new Date();
+        return Date.now ? Date.now() : +(new Date());
     };
 
-    var ordering = [
-        'year',
-        'quarter',
-        'month',
-        'week',
-        'day',
-        'hour',
-        'minute',
-        'second',
-        'millisecond',
-    ];
+    var ordering = ['year', 'quarter', 'month', 'week', 'day', 'hour', 'minute', 'second', 'millisecond'];
 
     function isDurationValid(m) {
-        var key,
-            unitHasDecimal = false,
-            i;
-        for (key in m) {
-            if (
-                hasOwnProp(m, key) &&
-                !(
-                    indexOf.call(ordering, key) !== -1 &&
-                    (m[key] == null || !isNaN(m[key]))
-                )
-            ) {
+        for (var key in m) {
+            if (!(indexOf.call(ordering, key) !== -1 && (m[key] == null || !isNaN(m[key])))) {
                 return false;
             }
         }
 
-        for (i = 0; i < ordering.length; ++i) {
+        var unitHasDecimal = false;
+        for (var i = 0; i < ordering.length; ++i) {
             if (m[ordering[i]]) {
                 if (unitHasDecimal) {
                     return false; // only allow non-integers for smallest unit
@@ -34542,7 +34064,7 @@ module.exports = stubFalse;
         return createDuration(NaN);
     }
 
-    function Duration(duration) {
+    function Duration (duration) {
         var normalizedInput = normalizeObjectUnits(duration),
             years = normalizedInput.year || 0,
             quarters = normalizedInput.quarter || 0,
@@ -34557,18 +34079,20 @@ module.exports = stubFalse;
         this._isValid = isDurationValid(normalizedInput);
 
         // representation for dateAddRemove
-        this._milliseconds =
-            +milliseconds +
+        this._milliseconds = +milliseconds +
             seconds * 1e3 + // 1000
             minutes * 6e4 + // 1000 * 60
             hours * 1000 * 60 * 60; //using 1000 * 60 * 60 instead of 36e5 to avoid floating point rounding errors https://github.com/moment/moment/issues/2978
         // Because of dateAddRemove treats 24 hours as different from a
         // day when working around DST, we need to store them separately
-        this._days = +days + weeks * 7;
+        this._days = +days +
+            weeks * 7;
         // It is impossible to translate months into days without knowing
         // which months you are are talking about, so we have to store
         // it separately.
-        this._months = +months + quarters * 3 + years * 12;
+        this._months = +months +
+            quarters * 3 +
+            years * 12;
 
         this._data = {};
 
@@ -34577,11 +34101,11 @@ module.exports = stubFalse;
         this._bubble();
     }
 
-    function isDuration(obj) {
+    function isDuration (obj) {
         return obj instanceof Duration;
     }
 
-    function absRound(number) {
+    function absRound (number) {
         if (number < 0) {
             return Math.round(-1 * number) * -1;
         } else {
@@ -34589,39 +34113,17 @@ module.exports = stubFalse;
         }
     }
 
-    // compare two arrays, return the number of differences
-    function compareArrays(array1, array2, dontConvert) {
-        var len = Math.min(array1.length, array2.length),
-            lengthDiff = Math.abs(array1.length - array2.length),
-            diffs = 0,
-            i;
-        for (i = 0; i < len; i++) {
-            if (
-                (dontConvert && array1[i] !== array2[i]) ||
-                (!dontConvert && toInt(array1[i]) !== toInt(array2[i]))
-            ) {
-                diffs++;
-            }
-        }
-        return diffs + lengthDiff;
-    }
-
     // FORMATTING
 
-    function offset(token, separator) {
+    function offset (token, separator) {
         addFormatToken(token, 0, 0, function () {
-            var offset = this.utcOffset(),
-                sign = '+';
+            var offset = this.utcOffset();
+            var sign = '+';
             if (offset < 0) {
                 offset = -offset;
                 sign = '-';
             }
-            return (
-                sign +
-                zeroFill(~~(offset / 60), 2) +
-                separator +
-                zeroFill(~~offset % 60, 2)
-            );
+            return sign + zeroFill(~~(offset / 60), 2) + separator + zeroFill(~~(offset) % 60, 2);
         });
     }
 
@@ -34630,7 +34132,7 @@ module.exports = stubFalse;
 
     // PARSING
 
-    addRegexToken('Z', matchShortOffset);
+    addRegexToken('Z',  matchShortOffset);
     addRegexToken('ZZ', matchShortOffset);
     addParseToken(['Z', 'ZZ'], function (input, array, config) {
         config._useUTC = true;
@@ -34645,20 +34147,19 @@ module.exports = stubFalse;
     var chunkOffset = /([\+\-]|\d\d)/gi;
 
     function offsetFromString(matcher, string) {
-        var matches = (string || '').match(matcher),
-            chunk,
-            parts,
-            minutes;
+        var matches = (string || '').match(matcher);
 
         if (matches === null) {
             return null;
         }
 
-        chunk = matches[matches.length - 1] || [];
-        parts = (chunk + '').match(chunkOffset) || ['-', 0, 0];
-        minutes = +(parts[1] * 60) + toInt(parts[2]);
+        var chunk   = matches[matches.length - 1] || [];
+        var parts   = (chunk + '').match(chunkOffset) || ['-', 0, 0];
+        var minutes = +(parts[1] * 60) + toInt(parts[2]);
 
-        return minutes === 0 ? 0 : parts[0] === '+' ? minutes : -minutes;
+        return minutes === 0 ?
+          0 :
+          parts[0] === '+' ? minutes : -minutes;
     }
 
     // Return a moment from input, that is local/utc/zone equivalent to model.
@@ -34666,10 +34167,7 @@ module.exports = stubFalse;
         var res, diff;
         if (model._isUTC) {
             res = model.clone();
-            diff =
-                (isMoment(input) || isDate(input)
-                    ? input.valueOf()
-                    : createLocal(input).valueOf()) - res.valueOf();
+            diff = (isMoment(input) || isDate(input) ? input.valueOf() : createLocal(input).valueOf()) - res.valueOf();
             // Use low-level api, because this fn is low-level api.
             res._d.setTime(res._d.valueOf() + diff);
             hooks.updateOffset(res, false);
@@ -34679,10 +34177,10 @@ module.exports = stubFalse;
         }
     }
 
-    function getDateOffset(m) {
+    function getDateOffset (m) {
         // On Firefox.24 Date#getTimezoneOffset returns a floating point.
         // https://github.com/moment/moment/pull/1871
-        return -Math.round(m._d.getTimezoneOffset());
+        return -Math.round(m._d.getTimezoneOffset() / 15) * 15;
     }
 
     // HOOKS
@@ -34703,7 +34201,7 @@ module.exports = stubFalse;
     // a second time. In case it wants us to change the offset again
     // _changeInProgress == true case, then we have to adjust, because
     // there is no such time in the given timezone.
-    function getSetOffset(input, keepLocalTime, keepMinutes) {
+    function getSetOffset (input, keepLocalTime, keepMinutes) {
         var offset = this._offset || 0,
             localAdjust;
         if (!this.isValid()) {
@@ -34728,12 +34226,7 @@ module.exports = stubFalse;
             }
             if (offset !== input) {
                 if (!keepLocalTime || this._changeInProgress) {
-                    addSubtract(
-                        this,
-                        createDuration(input - offset, 'm'),
-                        1,
-                        false
-                    );
+                    addSubtract(this, createDuration(input - offset, 'm'), 1, false);
                 } else if (!this._changeInProgress) {
                     this._changeInProgress = true;
                     hooks.updateOffset(this, true);
@@ -34746,7 +34239,7 @@ module.exports = stubFalse;
         }
     }
 
-    function getSetZone(input, keepLocalTime) {
+    function getSetZone (input, keepLocalTime) {
         if (input != null) {
             if (typeof input !== 'string') {
                 input = -input;
@@ -34760,11 +34253,11 @@ module.exports = stubFalse;
         }
     }
 
-    function setOffsetToUTC(keepLocalTime) {
+    function setOffsetToUTC (keepLocalTime) {
         return this.utcOffset(0, keepLocalTime);
     }
 
-    function setOffsetToLocal(keepLocalTime) {
+    function setOffsetToLocal (keepLocalTime) {
         if (this._isUTC) {
             this.utcOffset(0, keepLocalTime);
             this._isUTC = false;
@@ -34776,21 +34269,22 @@ module.exports = stubFalse;
         return this;
     }
 
-    function setOffsetToParsedOffset() {
+    function setOffsetToParsedOffset () {
         if (this._tzm != null) {
             this.utcOffset(this._tzm, false, true);
         } else if (typeof this._i === 'string') {
             var tZone = offsetFromString(matchOffset, this._i);
             if (tZone != null) {
                 this.utcOffset(tZone);
-            } else {
+            }
+            else {
                 this.utcOffset(0, true);
             }
         }
         return this;
     }
 
-    function hasAlignedHourOffset(input) {
+    function hasAlignedHourOffset (input) {
         if (!this.isValid()) {
             return false;
         }
@@ -34799,28 +34293,27 @@ module.exports = stubFalse;
         return (this.utcOffset() - input) % 60 === 0;
     }
 
-    function isDaylightSavingTime() {
+    function isDaylightSavingTime () {
         return (
             this.utcOffset() > this.clone().month(0).utcOffset() ||
             this.utcOffset() > this.clone().month(5).utcOffset()
         );
     }
 
-    function isDaylightSavingTimeShifted() {
+    function isDaylightSavingTimeShifted () {
         if (!isUndefined(this._isDSTShifted)) {
             return this._isDSTShifted;
         }
 
-        var c = {},
-            other;
+        var c = {};
 
         copyConfig(c, this);
         c = prepareConfig(c);
 
         if (c._a) {
-            other = c._isUTC ? createUTC(c._a) : createLocal(c._a);
-            this._isDSTShifted =
-                this.isValid() && compareArrays(c._a, other.toArray()) > 0;
+            var other = c._isUTC ? createUTC(c._a) : createLocal(c._a);
+            this._isDSTShifted = this.isValid() &&
+                compareArrays(c._a, other.toArray()) > 0;
         } else {
             this._isDSTShifted = false;
         }
@@ -34828,26 +34321,27 @@ module.exports = stubFalse;
         return this._isDSTShifted;
     }
 
-    function isLocal() {
+    function isLocal () {
         return this.isValid() ? !this._isUTC : false;
     }
 
-    function isUtcOffset() {
+    function isUtcOffset () {
         return this.isValid() ? this._isUTC : false;
     }
 
-    function isUtc() {
+    function isUtc () {
         return this.isValid() ? this._isUTC && this._offset === 0 : false;
     }
 
     // ASP.NET json date format regex
-    var aspNetRegex = /^(-|\+)?(?:(\d*)[. ])?(\d+):(\d+)(?::(\d+)(\.\d*)?)?$/,
-        // from http://docs.closure-library.googlecode.com/git/closure_goog_date_date.js.source.html
-        // somewhat more in line with 4.4.3.2 2004 spec, but allows decimal anywhere
-        // and further modified to allow for strings containing both week and day
-        isoRegex = /^(-|\+)?P(?:([-+]?[0-9,.]*)Y)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)W)?(?:([-+]?[0-9,.]*)D)?(?:T(?:([-+]?[0-9,.]*)H)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)S)?)?$/;
+    var aspNetRegex = /^(\-|\+)?(?:(\d*)[. ])?(\d+)\:(\d+)(?:\:(\d+)(\.\d*)?)?$/;
 
-    function createDuration(input, key) {
+    // from http://docs.closure-library.googlecode.com/git/closure_goog_date_date.js.source.html
+    // somewhat more in line with 4.4.3.2 2004 spec, but allows decimal anywhere
+    // and further modified to allow for strings containing both week and day
+    var isoRegex = /^(-|\+)?P(?:([-+]?[0-9,.]*)Y)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)W)?(?:([-+]?[0-9,.]*)D)?(?:T(?:([-+]?[0-9,.]*)H)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)S)?)?$/;
+
+    function createDuration (input, key) {
         var duration = input,
             // matching against regexp is expensive, do it on demand
             match = null,
@@ -34857,49 +34351,42 @@ module.exports = stubFalse;
 
         if (isDuration(input)) {
             duration = {
-                ms: input._milliseconds,
-                d: input._days,
-                M: input._months,
+                ms : input._milliseconds,
+                d  : input._days,
+                M  : input._months
             };
-        } else if (isNumber(input) || !isNaN(+input)) {
+        } else if (isNumber(input)) {
             duration = {};
             if (key) {
-                duration[key] = +input;
+                duration[key] = input;
             } else {
-                duration.milliseconds = +input;
+                duration.milliseconds = input;
             }
-        } else if ((match = aspNetRegex.exec(input))) {
-            sign = match[1] === '-' ? -1 : 1;
+        } else if (!!(match = aspNetRegex.exec(input))) {
+            sign = (match[1] === '-') ? -1 : 1;
             duration = {
-                y: 0,
-                d: toInt(match[DATE]) * sign,
-                h: toInt(match[HOUR]) * sign,
-                m: toInt(match[MINUTE]) * sign,
-                s: toInt(match[SECOND]) * sign,
-                ms: toInt(absRound(match[MILLISECOND] * 1000)) * sign, // the millisecond decimal point is included in the match
+                y  : 0,
+                d  : toInt(match[DATE])                         * sign,
+                h  : toInt(match[HOUR])                         * sign,
+                m  : toInt(match[MINUTE])                       * sign,
+                s  : toInt(match[SECOND])                       * sign,
+                ms : toInt(absRound(match[MILLISECOND] * 1000)) * sign // the millisecond decimal point is included in the match
             };
-        } else if ((match = isoRegex.exec(input))) {
-            sign = match[1] === '-' ? -1 : 1;
+        } else if (!!(match = isoRegex.exec(input))) {
+            sign = (match[1] === '-') ? -1 : 1;
             duration = {
-                y: parseIso(match[2], sign),
-                M: parseIso(match[3], sign),
-                w: parseIso(match[4], sign),
-                d: parseIso(match[5], sign),
-                h: parseIso(match[6], sign),
-                m: parseIso(match[7], sign),
-                s: parseIso(match[8], sign),
+                y : parseIso(match[2], sign),
+                M : parseIso(match[3], sign),
+                w : parseIso(match[4], sign),
+                d : parseIso(match[5], sign),
+                h : parseIso(match[6], sign),
+                m : parseIso(match[7], sign),
+                s : parseIso(match[8], sign)
             };
-        } else if (duration == null) {
-            // checks for null or undefined
+        } else if (duration == null) {// checks for null or undefined
             duration = {};
-        } else if (
-            typeof duration === 'object' &&
-            ('from' in duration || 'to' in duration)
-        ) {
-            diffRes = momentsDifference(
-                createLocal(duration.from),
-                createLocal(duration.to)
-            );
+        } else if (typeof duration === 'object' && ('from' in duration || 'to' in duration)) {
+            diffRes = momentsDifference(createLocal(duration.from), createLocal(duration.to));
 
             duration = {};
             duration.ms = diffRes.milliseconds;
@@ -34912,17 +34399,13 @@ module.exports = stubFalse;
             ret._locale = input._locale;
         }
 
-        if (isDuration(input) && hasOwnProp(input, '_isValid')) {
-            ret._isValid = input._isValid;
-        }
-
         return ret;
     }
 
     createDuration.fn = Duration.prototype;
     createDuration.invalid = createInvalid$1;
 
-    function parseIso(inp, sign) {
+    function parseIso (inp, sign) {
         // We'd normally use ~~inp for this, but unfortunately it also
         // converts floats to ints.
         // inp may be undefined, so careful calling replace on it.
@@ -34934,13 +34417,13 @@ module.exports = stubFalse;
     function positiveMomentsDifference(base, other) {
         var res = {};
 
-        res.months =
-            other.month() - base.month() + (other.year() - base.year()) * 12;
+        res.months = other.month() - base.month() +
+            (other.year() - base.year()) * 12;
         if (base.clone().add(res.months, 'M').isAfter(other)) {
             --res.months;
         }
 
-        res.milliseconds = +other - +base.clone().add(res.months, 'M');
+        res.milliseconds = +other - +(base.clone().add(res.months, 'M'));
 
         return res;
     }
@@ -34948,7 +34431,7 @@ module.exports = stubFalse;
     function momentsDifference(base, other) {
         var res;
         if (!(base.isValid() && other.isValid())) {
-            return { milliseconds: 0, months: 0 };
+            return {milliseconds: 0, months: 0};
         }
 
         other = cloneWithOffset(other, base);
@@ -34969,27 +34452,19 @@ module.exports = stubFalse;
             var dur, tmp;
             //invert the arguments, but complain about it
             if (period !== null && !isNaN(+period)) {
-                deprecateSimple(
-                    name,
-                    'moment().' +
-                        name +
-                        '(period, number) is deprecated. Please use moment().' +
-                        name +
-                        '(number, period). ' +
-                        'See http://momentjs.com/guides/#/warnings/add-inverted-param/ for more info.'
-                );
-                tmp = val;
-                val = period;
-                period = tmp;
+                deprecateSimple(name, 'moment().' + name  + '(period, number) is deprecated. Please use moment().' + name + '(number, period). ' +
+                'See http://momentjs.com/guides/#/warnings/add-inverted-param/ for more info.');
+                tmp = val; val = period; period = tmp;
             }
 
+            val = typeof val === 'string' ? +val : val;
             dur = createDuration(val, period);
             addSubtract(this, dur, direction);
             return this;
         };
     }
 
-    function addSubtract(mom, duration, isAdding, updateOffset) {
+    function addSubtract (mom, duration, isAdding, updateOffset) {
         var milliseconds = duration._milliseconds,
             days = absRound(duration._days),
             months = absRound(duration._months);
@@ -35015,150 +34490,36 @@ module.exports = stubFalse;
         }
     }
 
-    var add = createAdder(1, 'add'),
-        subtract = createAdder(-1, 'subtract');
-
-    function isString(input) {
-        return typeof input === 'string' || input instanceof String;
-    }
-
-    // type MomentInput = Moment | Date | string | number | (number | string)[] | MomentInputObject | void; // null | undefined
-    function isMomentInput(input) {
-        return (
-            isMoment(input) ||
-            isDate(input) ||
-            isString(input) ||
-            isNumber(input) ||
-            isNumberOrStringArray(input) ||
-            isMomentInputObject(input) ||
-            input === null ||
-            input === undefined
-        );
-    }
-
-    function isMomentInputObject(input) {
-        var objectTest = isObject(input) && !isObjectEmpty(input),
-            propertyTest = false,
-            properties = [
-                'years',
-                'year',
-                'y',
-                'months',
-                'month',
-                'M',
-                'days',
-                'day',
-                'd',
-                'dates',
-                'date',
-                'D',
-                'hours',
-                'hour',
-                'h',
-                'minutes',
-                'minute',
-                'm',
-                'seconds',
-                'second',
-                's',
-                'milliseconds',
-                'millisecond',
-                'ms',
-            ],
-            i,
-            property;
-
-        for (i = 0; i < properties.length; i += 1) {
-            property = properties[i];
-            propertyTest = propertyTest || hasOwnProp(input, property);
-        }
-
-        return objectTest && propertyTest;
-    }
-
-    function isNumberOrStringArray(input) {
-        var arrayTest = isArray(input),
-            dataTypeTest = false;
-        if (arrayTest) {
-            dataTypeTest =
-                input.filter(function (item) {
-                    return !isNumber(item) && isString(input);
-                }).length === 0;
-        }
-        return arrayTest && dataTypeTest;
-    }
-
-    function isCalendarSpec(input) {
-        var objectTest = isObject(input) && !isObjectEmpty(input),
-            propertyTest = false,
-            properties = [
-                'sameDay',
-                'nextDay',
-                'lastDay',
-                'nextWeek',
-                'lastWeek',
-                'sameElse',
-            ],
-            i,
-            property;
-
-        for (i = 0; i < properties.length; i += 1) {
-            property = properties[i];
-            propertyTest = propertyTest || hasOwnProp(input, property);
-        }
-
-        return objectTest && propertyTest;
-    }
+    var add      = createAdder(1, 'add');
+    var subtract = createAdder(-1, 'subtract');
 
     function getCalendarFormat(myMoment, now) {
         var diff = myMoment.diff(now, 'days', true);
-        return diff < -6
-            ? 'sameElse'
-            : diff < -1
-            ? 'lastWeek'
-            : diff < 0
-            ? 'lastDay'
-            : diff < 1
-            ? 'sameDay'
-            : diff < 2
-            ? 'nextDay'
-            : diff < 7
-            ? 'nextWeek'
-            : 'sameElse';
+        return diff < -6 ? 'sameElse' :
+                diff < -1 ? 'lastWeek' :
+                diff < 0 ? 'lastDay' :
+                diff < 1 ? 'sameDay' :
+                diff < 2 ? 'nextDay' :
+                diff < 7 ? 'nextWeek' : 'sameElse';
     }
 
-    function calendar$1(time, formats) {
-        // Support for single parameter, formats only overload to the calendar function
-        if (arguments.length === 1) {
-            if (isMomentInput(arguments[0])) {
-                time = arguments[0];
-                formats = undefined;
-            } else if (isCalendarSpec(arguments[0])) {
-                formats = arguments[0];
-                time = undefined;
-            }
-        }
+    function calendar$1 (time, formats) {
         // We want to compare the start of today, vs this.
         // Getting start-of-today depends on whether we're local/utc/offset or not.
         var now = time || createLocal(),
             sod = cloneWithOffset(now, this).startOf('day'),
-            format = hooks.calendarFormat(this, sod) || 'sameElse',
-            output =
-                formats &&
-                (isFunction(formats[format])
-                    ? formats[format].call(this, now)
-                    : formats[format]);
+            format = hooks.calendarFormat(this, sod) || 'sameElse';
 
-        return this.format(
-            output || this.localeData().calendar(format, this, createLocal(now))
-        );
+        var output = formats && (isFunction(formats[format]) ? formats[format].call(this, now) : formats[format]);
+
+        return this.format(output || this.localeData().calendar(format, this, createLocal(now)));
     }
 
-    function clone() {
+    function clone () {
         return new Moment(this);
     }
 
-    function isAfter(input, units) {
+    function isAfter (input, units) {
         var localInput = isMoment(input) ? input : createLocal(input);
         if (!(this.isValid() && localInput.isValid())) {
             return false;
@@ -35171,7 +34532,7 @@ module.exports = stubFalse;
         }
     }
 
-    function isBefore(input, units) {
+    function isBefore (input, units) {
         var localInput = isMoment(input) ? input : createLocal(input);
         if (!(this.isValid() && localInput.isValid())) {
             return false;
@@ -35184,24 +34545,18 @@ module.exports = stubFalse;
         }
     }
 
-    function isBetween(from, to, units, inclusivity) {
+    function isBetween (from, to, units, inclusivity) {
         var localFrom = isMoment(from) ? from : createLocal(from),
             localTo = isMoment(to) ? to : createLocal(to);
         if (!(this.isValid() && localFrom.isValid() && localTo.isValid())) {
             return false;
         }
         inclusivity = inclusivity || '()';
-        return (
-            (inclusivity[0] === '('
-                ? this.isAfter(localFrom, units)
-                : !this.isBefore(localFrom, units)) &&
-            (inclusivity[1] === ')'
-                ? this.isBefore(localTo, units)
-                : !this.isAfter(localTo, units))
-        );
+        return (inclusivity[0] === '(' ? this.isAfter(localFrom, units) : !this.isBefore(localFrom, units)) &&
+            (inclusivity[1] === ')' ? this.isBefore(localTo, units) : !this.isAfter(localTo, units));
     }
 
-    function isSame(input, units) {
+    function isSame (input, units) {
         var localInput = isMoment(input) ? input : createLocal(input),
             inputMs;
         if (!(this.isValid() && localInput.isValid())) {
@@ -35212,23 +34567,22 @@ module.exports = stubFalse;
             return this.valueOf() === localInput.valueOf();
         } else {
             inputMs = localInput.valueOf();
-            return (
-                this.clone().startOf(units).valueOf() <= inputMs &&
-                inputMs <= this.clone().endOf(units).valueOf()
-            );
+            return this.clone().startOf(units).valueOf() <= inputMs && inputMs <= this.clone().endOf(units).valueOf();
         }
     }
 
-    function isSameOrAfter(input, units) {
+    function isSameOrAfter (input, units) {
         return this.isSame(input, units) || this.isAfter(input, units);
     }
 
-    function isSameOrBefore(input, units) {
+    function isSameOrBefore (input, units) {
         return this.isSame(input, units) || this.isBefore(input, units);
     }
 
-    function diff(input, units, asFloat) {
-        var that, zoneDelta, output;
+    function diff (input, units, asFloat) {
+        var that,
+            zoneDelta,
+            output;
 
         if (!this.isValid()) {
             return NaN;
@@ -35245,49 +34599,26 @@ module.exports = stubFalse;
         units = normalizeUnits(units);
 
         switch (units) {
-            case 'year':
-                output = monthDiff(this, that) / 12;
-                break;
-            case 'month':
-                output = monthDiff(this, that);
-                break;
-            case 'quarter':
-                output = monthDiff(this, that) / 3;
-                break;
-            case 'second':
-                output = (this - that) / 1e3;
-                break; // 1000
-            case 'minute':
-                output = (this - that) / 6e4;
-                break; // 1000 * 60
-            case 'hour':
-                output = (this - that) / 36e5;
-                break; // 1000 * 60 * 60
-            case 'day':
-                output = (this - that - zoneDelta) / 864e5;
-                break; // 1000 * 60 * 60 * 24, negate dst
-            case 'week':
-                output = (this - that - zoneDelta) / 6048e5;
-                break; // 1000 * 60 * 60 * 24 * 7, negate dst
-            default:
-                output = this - that;
+            case 'year': output = monthDiff(this, that) / 12; break;
+            case 'month': output = monthDiff(this, that); break;
+            case 'quarter': output = monthDiff(this, that) / 3; break;
+            case 'second': output = (this - that) / 1e3; break; // 1000
+            case 'minute': output = (this - that) / 6e4; break; // 1000 * 60
+            case 'hour': output = (this - that) / 36e5; break; // 1000 * 60 * 60
+            case 'day': output = (this - that - zoneDelta) / 864e5; break; // 1000 * 60 * 60 * 24, negate dst
+            case 'week': output = (this - that - zoneDelta) / 6048e5; break; // 1000 * 60 * 60 * 24 * 7, negate dst
+            default: output = this - that;
         }
 
         return asFloat ? output : absFloor(output);
     }
 
-    function monthDiff(a, b) {
-        if (a.date() < b.date()) {
-            // end-of-month calculations work correct when the start month has more
-            // days than the end month.
-            return -monthDiff(b, a);
-        }
+    function monthDiff (a, b) {
         // difference in months
-        var wholeMonthDiff = (b.year() - a.year()) * 12 + (b.month() - a.month()),
+        var wholeMonthDiff = ((b.year() - a.year()) * 12) + (b.month() - a.month()),
             // b is in (anchor - 1 month, anchor + 1 month)
             anchor = a.clone().add(wholeMonthDiff, 'months'),
-            anchor2,
-            adjust;
+            anchor2, adjust;
 
         if (b - anchor < 0) {
             anchor2 = a.clone().add(wholeMonthDiff - 1, 'months');
@@ -35306,7 +34637,7 @@ module.exports = stubFalse;
     hooks.defaultFormat = 'YYYY-MM-DDTHH:mm:ssZ';
     hooks.defaultFormatUtc = 'YYYY-MM-DDTHH:mm:ss[Z]';
 
-    function toString() {
+    function toString () {
         return this.clone().locale('en').format('ddd MMM DD YYYY HH:mm:ss [GMT]ZZ');
     }
 
@@ -35314,30 +34645,20 @@ module.exports = stubFalse;
         if (!this.isValid()) {
             return null;
         }
-        var utc = keepOffset !== true,
-            m = utc ? this.clone().utc() : this;
+        var utc = keepOffset !== true;
+        var m = utc ? this.clone().utc() : this;
         if (m.year() < 0 || m.year() > 9999) {
-            return formatMoment(
-                m,
-                utc
-                    ? 'YYYYYY-MM-DD[T]HH:mm:ss.SSS[Z]'
-                    : 'YYYYYY-MM-DD[T]HH:mm:ss.SSSZ'
-            );
+            return formatMoment(m, utc ? 'YYYYYY-MM-DD[T]HH:mm:ss.SSS[Z]' : 'YYYYYY-MM-DD[T]HH:mm:ss.SSSZ');
         }
         if (isFunction(Date.prototype.toISOString)) {
             // native implementation is ~50x faster, use it when we can
             if (utc) {
                 return this.toDate().toISOString();
             } else {
-                return new Date(this.valueOf() + this.utcOffset() * 60 * 1000)
-                    .toISOString()
-                    .replace('Z', formatMoment(m, 'Z'));
+                return new Date(this.valueOf() + this.utcOffset() * 60 * 1000).toISOString().replace('Z', formatMoment(m, 'Z'));
             }
         }
-        return formatMoment(
-            m,
-            utc ? 'YYYY-MM-DD[T]HH:mm:ss.SSS[Z]' : 'YYYY-MM-DD[T]HH:mm:ss.SSSZ'
-        );
+        return formatMoment(m, utc ? 'YYYY-MM-DD[T]HH:mm:ss.SSS[Z]' : 'YYYY-MM-DD[T]HH:mm:ss.SSSZ');
     }
 
     /**
@@ -35346,76 +34667,64 @@ module.exports = stubFalse;
      *
      * @link https://nodejs.org/dist/latest/docs/api/util.html#util_custom_inspect_function_on_objects
      */
-    function inspect() {
+    function inspect () {
         if (!this.isValid()) {
             return 'moment.invalid(/* ' + this._i + ' */)';
         }
-        var func = 'moment',
-            zone = '',
-            prefix,
-            year,
-            datetime,
-            suffix;
+        var func = 'moment';
+        var zone = '';
         if (!this.isLocal()) {
             func = this.utcOffset() === 0 ? 'moment.utc' : 'moment.parseZone';
             zone = 'Z';
         }
-        prefix = '[' + func + '("]';
-        year = 0 <= this.year() && this.year() <= 9999 ? 'YYYY' : 'YYYYYY';
-        datetime = '-MM-DD[T]HH:mm:ss.SSS';
-        suffix = zone + '[")]';
+        var prefix = '[' + func + '("]';
+        var year = (0 <= this.year() && this.year() <= 9999) ? 'YYYY' : 'YYYYYY';
+        var datetime = '-MM-DD[T]HH:mm:ss.SSS';
+        var suffix = zone + '[")]';
 
         return this.format(prefix + year + datetime + suffix);
     }
 
-    function format(inputString) {
+    function format (inputString) {
         if (!inputString) {
-            inputString = this.isUtc()
-                ? hooks.defaultFormatUtc
-                : hooks.defaultFormat;
+            inputString = this.isUtc() ? hooks.defaultFormatUtc : hooks.defaultFormat;
         }
         var output = formatMoment(this, inputString);
         return this.localeData().postformat(output);
     }
 
-    function from(time, withoutSuffix) {
-        if (
-            this.isValid() &&
-            ((isMoment(time) && time.isValid()) || createLocal(time).isValid())
-        ) {
-            return createDuration({ to: this, from: time })
-                .locale(this.locale())
-                .humanize(!withoutSuffix);
+    function from (time, withoutSuffix) {
+        if (this.isValid() &&
+                ((isMoment(time) && time.isValid()) ||
+                 createLocal(time).isValid())) {
+            return createDuration({to: this, from: time}).locale(this.locale()).humanize(!withoutSuffix);
         } else {
             return this.localeData().invalidDate();
         }
     }
 
-    function fromNow(withoutSuffix) {
+    function fromNow (withoutSuffix) {
         return this.from(createLocal(), withoutSuffix);
     }
 
-    function to(time, withoutSuffix) {
-        if (
-            this.isValid() &&
-            ((isMoment(time) && time.isValid()) || createLocal(time).isValid())
-        ) {
-            return createDuration({ from: this, to: time })
-                .locale(this.locale())
-                .humanize(!withoutSuffix);
+    function to (time, withoutSuffix) {
+        if (this.isValid() &&
+                ((isMoment(time) && time.isValid()) ||
+                 createLocal(time).isValid())) {
+            return createDuration({from: this, to: time}).locale(this.locale()).humanize(!withoutSuffix);
         } else {
             return this.localeData().invalidDate();
         }
     }
 
-    function toNow(withoutSuffix) {
+    function toNow (withoutSuffix) {
         return this.to(createLocal(), withoutSuffix);
     }
 
     // If passed a locale key, it will set the locale for this
     // instance.  Otherwise, it will return the locale configuration
     // variables for this instance.
-    function locale(key) {
+    function locale (key) {
         var newLocaleData;
 
         if (key === undefined) {
@@ -35440,18 +34749,18 @@ module.exports = stubFalse;
         }
     );
 
-    function localeData() {
+    function localeData () {
         return this._locale;
     }
 
-    var MS_PER_SECOND = 1000,
-        MS_PER_MINUTE = 60 * MS_PER_SECOND,
-        MS_PER_HOUR = 60 * MS_PER_MINUTE,
-        MS_PER_400_YEARS = (365 * 400 + 97) * 24 * MS_PER_HOUR;
+    var MS_PER_SECOND = 1000;
+    var MS_PER_MINUTE = 60 * MS_PER_SECOND;
+    var MS_PER_HOUR = 60 * MS_PER_MINUTE;
+    var MS_PER_400_YEARS = (365 * 400 + 97) * 24 * MS_PER_HOUR;
 
     // actual modulo - handles negative numbers (for dates before 1970):
     function mod$1(dividend, divisor) {
-        return ((dividend % divisor) + divisor) % divisor;
+        return (dividend % divisor + divisor) % divisor;
     }
 
     function localStartOfDate(y, m, d) {
@@ -35474,42 +34783,30 @@ module.exports = stubFalse;
         }
     }
 
-    function startOf(units) {
-        var time, startOfDate;
+    function startOf (units) {
+        var time;
         units = normalizeUnits(units);
         if (units === undefined || units === 'millisecond' || !this.isValid()) {
             return this;
         }
 
-        startOfDate = this._isUTC ? utcStartOfDate : localStartOfDate;
+        var startOfDate = this._isUTC ? utcStartOfDate : localStartOfDate;
 
         switch (units) {
             case 'year':
                 time = startOfDate(this.year(), 0, 1);
                 break;
             case 'quarter':
-                time = startOfDate(
-                    this.year(),
-                    this.month() - (this.month() % 3),
-                    1
-                );
+                time = startOfDate(this.year(), this.month() - this.month() % 3, 1);
                 break;
             case 'month':
                 time = startOfDate(this.year(), this.month(), 1);
                 break;
             case 'week':
-                time = startOfDate(
-                    this.year(),
-                    this.month(),
-                    this.date() - this.weekday()
-                );
+                time = startOfDate(this.year(), this.month(), this.date() - this.weekday());
                 break;
             case 'isoWeek':
-                time = startOfDate(
-                    this.year(),
-                    this.month(),
-                    this.date() - (this.isoWeekday() - 1)
-                );
+                time = startOfDate(this.year(), this.month(), this.date() - (this.isoWeekday() - 1));
                 break;
             case 'day':
             case 'date':
@@ -35517,10 +34814,7 @@ module.exports = stubFalse;
                 break;
             case 'hour':
                 time = this._d.valueOf();
-                time -= mod$1(
-                    time + (this._isUTC ? 0 : this.utcOffset() * MS_PER_MINUTE),
-                    MS_PER_HOUR
-                );
+                time -= mod$1(time + (this._isUTC ? 0 : this.utcOffset() * MS_PER_MINUTE), MS_PER_HOUR);
                 break;
             case 'minute':
                 time = this._d.valueOf();
@@ -35537,45 +34831,30 @@ module.exports = stubFalse;
         return this;
     }
 
-    function endOf(units) {
-        var time, startOfDate;
+    function endOf (units) {
+        var time;
         units = normalizeUnits(units);
         if (units === undefined || units === 'millisecond' || !this.isValid()) {
             return this;
         }
 
-        startOfDate = this._isUTC ? utcStartOfDate : localStartOfDate;
+        var startOfDate = this._isUTC ? utcStartOfDate : localStartOfDate;
 
         switch (units) {
             case 'year':
                 time = startOfDate(this.year() + 1, 0, 1) - 1;
                 break;
             case 'quarter':
-                time =
-                    startOfDate(
-                        this.year(),
-                        this.month() - (this.month() % 3) + 3,
-                        1
-                    ) - 1;
+                time = startOfDate(this.year(), this.month() - this.month() % 3 + 3, 1) - 1;
                 break;
             case 'month':
                 time = startOfDate(this.year(), this.month() + 1, 1) - 1;
                 break;
             case 'week':
-                time =
-                    startOfDate(
-                        this.year(),
-                        this.month(),
-                        this.date() - this.weekday() + 7
-                    ) - 1;
+                time = startOfDate(this.year(), this.month(), this.date() - this.weekday() + 7) - 1;
                 break;
             case 'isoWeek':
-                time =
-                    startOfDate(
-                        this.year(),
-                        this.month(),
-                        this.date() - (this.isoWeekday() - 1) + 7
-                    ) - 1;
+                time = startOfDate(this.year(), this.month(), this.date() - (this.isoWeekday() - 1) + 7) - 1;
                 break;
             case 'day':
             case 'date':
@@ -35583,13 +34862,7 @@ module.exports = stubFalse;
                 break;
             case 'hour':
                 time = this._d.valueOf();
-                time +=
-                    MS_PER_HOUR -
-                    mod$1(
-                        time + (this._isUTC ? 0 : this.utcOffset() * MS_PER_MINUTE),
-                        MS_PER_HOUR
-                    ) -
-                    1;
+                time += MS_PER_HOUR - mod$1(time + (this._isUTC ? 0 : this.utcOffset() * MS_PER_MINUTE), MS_PER_HOUR) - 1;
                 break;
             case 'minute':
                 time = this._d.valueOf();
@@ -35606,32 +34879,24 @@ module.exports = stubFalse;
         return this;
     }
 
-    function valueOf() {
-        return this._d.valueOf() - (this._offset || 0) * 60000;
+    function valueOf () {
+        return this._d.valueOf() - ((this._offset || 0) * 60000);
     }
 
-    function unix() {
+    function unix () {
         return Math.floor(this.valueOf() / 1000);
     }
 
-    function toDate() {
+    function toDate () {
         return new Date(this.valueOf());
     }
 
-    function toArray() {
+    function toArray () {
         var m = this;
-        return [
-            m.year(),
-            m.month(),
-            m.date(),
-            m.hour(),
-            m.minute(),
-            m.second(),
-            m.millisecond(),
-        ];
+        return [m.year(), m.month(), m.date(), m.hour(), m.minute(), m.second(), m.millisecond()];
     }
 
-    function toObject() {
+    function toObject () {
         var m = this;
         return {
             years: m.year(),
@@ -35640,24 +34905,24 @@ module.exports = stubFalse;
             hours: m.hours(),
             minutes: m.minutes(),
             seconds: m.seconds(),
-            milliseconds: m.milliseconds(),
+            milliseconds: m.milliseconds()
         };
     }
 
-    function toJSON() {
+    function toJSON () {
         // new Date(NaN).toJSON() === null
         return this.isValid() ? this.toISOString() : null;
     }
 
-    function isValid$2() {
+    function isValid$2 () {
         return isValid(this);
     }
 
-    function parsingFlags() {
+    function parsingFlags () {
         return extend({}, getParsingFlags(this));
     }
 
-    function invalidAt() {
+    function invalidAt () {
         return getParsingFlags(this).overflow;
     }
 
@@ -35667,289 +34932,8 @@ module.exports = stubFalse;
             format: this._f,
             locale: this._locale,
             isUTC: this._isUTC,
-            strict: this._strict,
+            strict: this._strict
         };
-    }
-
-    addFormatToken('N', 0, 0, 'eraAbbr');
-    addFormatToken('NN', 0, 0, 'eraAbbr');
-    addFormatToken('NNN', 0, 0, 'eraAbbr');
-    addFormatToken('NNNN', 0, 0, 'eraName');
-    addFormatToken('NNNNN', 0, 0, 'eraNarrow');
-
-    addFormatToken('y', ['y', 1], 'yo', 'eraYear');
-    addFormatToken('y', ['yy', 2], 0, 'eraYear');
-    addFormatToken('y', ['yyy', 3], 0, 'eraYear');
-    addFormatToken('y', ['yyyy', 4], 0, 'eraYear');
-
-    addRegexToken('N', matchEraAbbr);
-    addRegexToken('NN', matchEraAbbr);
-    addRegexToken('NNN', matchEraAbbr);
-    addRegexToken('NNNN', matchEraName);
-    addRegexToken('NNNNN', matchEraNarrow);
-
-    addParseToken(['N', 'NN', 'NNN', 'NNNN', 'NNNNN'], function (
-        input,
-        array,
-        config,
-        token
-    ) {
-        var era = config._locale.erasParse(input, token, config._strict);
-        if (era) {
-            getParsingFlags(config).era = era;
-        } else {
-            getParsingFlags(config).invalidEra = input;
-        }
-    });
-
-    addRegexToken('y', matchUnsigned);
-    addRegexToken('yy', matchUnsigned);
-    addRegexToken('yyy', matchUnsigned);
-    addRegexToken('yyyy', matchUnsigned);
-    addRegexToken('yo', matchEraYearOrdinal);
-
-    addParseToken(['y', 'yy', 'yyy', 'yyyy'], YEAR);
-    addParseToken(['yo'], function (input, array, config, token) {
-        var match;
-        if (config._locale._eraYearOrdinalRegex) {
-            match = input.match(config._locale._eraYearOrdinalRegex);
-        }
-
-        if (config._locale.eraYearOrdinalParse) {
-            array[YEAR] = config._locale.eraYearOrdinalParse(input, match);
-        } else {
-            array[YEAR] = parseInt(input, 10);
-        }
-    });
-
-    function localeEras(m, format) {
-        var i,
-            l,
-            date,
-            eras = this._eras || getLocale('en')._eras;
-        for (i = 0, l = eras.length; i < l; ++i) {
-            switch (typeof eras[i].since) {
-                case 'string':
-                    // truncate time
-                    date = hooks(eras[i].since).startOf('day');
-                    eras[i].since = date.valueOf();
-                    break;
-            }
-
-            switch (typeof eras[i].until) {
-                case 'undefined':
-                    eras[i].until = +Infinity;
-                    break;
-                case 'string':
-                    // truncate time
-                    date = hooks(eras[i].until).startOf('day').valueOf();
-                    eras[i].until = date.valueOf();
-                    break;
-            }
-        }
-        return eras;
-    }
-
-    function localeErasParse(eraName, format, strict) {
-        var i,
-            l,
-            eras = this.eras(),
-            name,
-            abbr,
-            narrow;
-        eraName = eraName.toUpperCase();
-
-        for (i = 0, l = eras.length; i < l; ++i) {
-            name = eras[i].name.toUpperCase();
-            abbr = eras[i].abbr.toUpperCase();
-            narrow = eras[i].narrow.toUpperCase();
-
-            if (strict) {
-                switch (format) {
-                    case 'N':
-                    case 'NN':
-                    case 'NNN':
-                        if (abbr === eraName) {
-                            return eras[i];
-                        }
-                        break;
-
-                    case 'NNNN':
-                        if (name === eraName) {
-                            return eras[i];
-                        }
-                        break;
-
-                    case 'NNNNN':
-                        if (narrow === eraName) {
-                            return eras[i];
-                        }
-                        break;
-                }
-            } else if ([name, abbr, narrow].indexOf(eraName) >= 0) {
-                return eras[i];
-            }
-        }
-    }
-
-    function localeErasConvertYear(era, year) {
-        var dir = era.since <= era.until ? +1 : -1;
-        if (year === undefined) {
-            return hooks(era.since).year();
-        } else {
-            return hooks(era.since).year() + (year - era.offset) * dir;
-        }
-    }
-
-    function getEraName() {
-        var i,
-            l,
-            val,
-            eras = this.localeData().eras();
-        for (i = 0, l = eras.length; i < l; ++i) {
-            // truncate time
-            val = this.startOf('day').valueOf();
-
-            if (eras[i].since <= val && val <= eras[i].until) {
-                return eras[i].name;
-            }
-            if (eras[i].until <= val && val <= eras[i].since) {
-                return eras[i].name;
-            }
-        }
-
-        return '';
-    }
-
-    function getEraNarrow() {
-        var i,
-            l,
-            val,
-            eras = this.localeData().eras();
-        for (i = 0, l = eras.length; i < l; ++i) {
-            // truncate time
-            val = this.startOf('day').valueOf();
-
-            if (eras[i].since <= val && val <= eras[i].until) {
-                return eras[i].narrow;
-            }
-            if (eras[i].until <= val && val <= eras[i].since) {
-                return eras[i].narrow;
-            }
-        }
-
-        return '';
-    }
-
-    function getEraAbbr() {
-        var i,
-            l,
-            val,
-            eras = this.localeData().eras();
-        for (i = 0, l = eras.length; i < l; ++i) {
-            // truncate time
-            val = this.startOf('day').valueOf();
-
-            if (eras[i].since <= val && val <= eras[i].until) {
-                return eras[i].abbr;
-            }
-            if (eras[i].until <= val && val <= eras[i].since) {
-                return eras[i].abbr;
-            }
-        }
-
-        return '';
-    }
-
-    function getEraYear() {
-        var i,
-            l,
-            dir,
-            val,
-            eras = this.localeData().eras();
-        for (i = 0, l = eras.length; i < l; ++i) {
-            dir = eras[i].since <= eras[i].until ? +1 : -1;
-
-            // truncate time
-            val = this.startOf('day').valueOf();
-
-            if (
-                (eras[i].since <= val && val <= eras[i].until) ||
-                (eras[i].until <= val && val <= eras[i].since)
-            ) {
-                return (
-                    (this.year() - hooks(eras[i].since).year()) * dir +
-                    eras[i].offset
-                );
-            }
-        }
-
-        return this.year();
-    }
-
-    function erasNameRegex(isStrict) {
-        if (!hasOwnProp(this, '_erasNameRegex')) {
-            computeErasParse.call(this);
-        }
-        return isStrict ? this._erasNameRegex : this._erasRegex;
-    }
-
-    function erasAbbrRegex(isStrict) {
-        if (!hasOwnProp(this, '_erasAbbrRegex')) {
-            computeErasParse.call(this);
-        }
-        return isStrict ? this._erasAbbrRegex : this._erasRegex;
-    }
-
-    function erasNarrowRegex(isStrict) {
-        if (!hasOwnProp(this, '_erasNarrowRegex')) {
-            computeErasParse.call(this);
-        }
-        return isStrict ? this._erasNarrowRegex : this._erasRegex;
-    }
-
-    function matchEraAbbr(isStrict, locale) {
-        return locale.erasAbbrRegex(isStrict);
-    }
-
-    function matchEraName(isStrict, locale) {
-        return locale.erasNameRegex(isStrict);
-    }
-
-    function matchEraNarrow(isStrict, locale) {
-        return locale.erasNarrowRegex(isStrict);
-    }
-
-    function matchEraYearOrdinal(isStrict, locale) {
-        return locale._eraYearOrdinalRegex || matchUnsigned;
-    }
-
-    function computeErasParse() {
-        var abbrPieces = [],
-            namePieces = [],
-            narrowPieces = [],
-            mixedPieces = [],
-            i,
-            l,
-            eras = this.eras();
-
-        for (i = 0, l = eras.length; i < l; ++i) {
-            namePieces.push(regexEscape(eras[i].name));
-            abbrPieces.push(regexEscape(eras[i].abbr));
-            narrowPieces.push(regexEscape(eras[i].narrow));
-
-            mixedPieces.push(regexEscape(eras[i].name));
-            mixedPieces.push(regexEscape(eras[i].abbr));
-            mixedPieces.push(regexEscape(eras[i].narrow));
-        }
-
-        this._erasRegex = new RegExp('^(' + mixedPieces.join('|') + ')', 'i');
-        this._erasNameRegex = new RegExp('^(' + namePieces.join('|') + ')', 'i');
-        this._erasAbbrRegex = new RegExp('^(' + abbrPieces.join('|') + ')', 'i');
-        this._erasNarrowRegex = new RegExp(
-            '^(' + narrowPieces.join('|') + ')',
-            'i'
-        );
     }
 
     // FORMATTING
@@ -35962,13 +34946,13 @@ module.exports = stubFalse;
         return this.isoWeekYear() % 100;
     });
 
-    function addWeekYearFormatToken(token, getter) {
+    function addWeekYearFormatToken (token, getter) {
         addFormatToken(0, [token, token.length], 0, getter);
     }
 
-    addWeekYearFormatToken('gggg', 'weekYear');
-    addWeekYearFormatToken('ggggg', 'weekYear');
-    addWeekYearFormatToken('GGGG', 'isoWeekYear');
+    addWeekYearFormatToken('gggg',     'weekYear');
+    addWeekYearFormatToken('ggggg',    'weekYear');
+    addWeekYearFormatToken('GGGG',  'isoWeekYear');
     addWeekYearFormatToken('GGGGG', 'isoWeekYear');
 
     // ALIASES
@@ -35981,23 +34965,19 @@ module.exports = stubFalse;
     addUnitPriority('weekYear', 1);
     addUnitPriority('isoWeekYear', 1);
 
+
     // PARSING
 
-    addRegexToken('G', matchSigned);
-    addRegexToken('g', matchSigned);
-    addRegexToken('GG', match1to2, match2);
-    addRegexToken('gg', match1to2, match2);
-    addRegexToken('GGGG', match1to4, match4);
-    addRegexToken('gggg', match1to4, match4);
-    addRegexToken('GGGGG', match1to6, match6);
-    addRegexToken('ggggg', match1to6, match6);
+    addRegexToken('G',      matchSigned);
+    addRegexToken('g',      matchSigned);
+    addRegexToken('GG',     match1to2, match2);
+    addRegexToken('gg',     match1to2, match2);
+    addRegexToken('GGGG',   match1to4, match4);
+    addRegexToken('gggg',   match1to4, match4);
+    addRegexToken('GGGGG',  match1to6, match6);
+    addRegexToken('ggggg',  match1to6, match6);
 
-    addWeekParseToken(['gggg', 'ggggg', 'GGGG', 'GGGGG'], function (
-        input,
-        week,
-        config,
-        token
-    ) {
+    addWeekParseToken(['gggg', 'ggggg', 'GGGG', 'GGGGG'], function (input, week, config, token) {
         week[token.substr(0, 2)] = toInt(input);
     });
 
@@ -36007,44 +34987,27 @@ module.exports = stubFalse;
 
     // MOMENTS
 
-    function getSetWeekYear(input) {
-        return getSetWeekYearHelper.call(
-            this,
-            input,
-            this.week(),
-            this.weekday(),
-            this.localeData()._week.dow,
-            this.localeData()._week.doy
-        );
+    function getSetWeekYear (input) {
+        return getSetWeekYearHelper.call(this,
+                input,
+                this.week(),
+                this.weekday(),
+                this.localeData()._week.dow,
+                this.localeData()._week.doy);
     }
 
-    function getSetISOWeekYear(input) {
-        return getSetWeekYearHelper.call(
-            this,
-            input,
-            this.isoWeek(),
-            this.isoWeekday(),
-            1,
-            4
-        );
+    function getSetISOWeekYear (input) {
+        return getSetWeekYearHelper.call(this,
+                input, this.isoWeek(), this.isoWeekday(), 1, 4);
     }
 
-    function getISOWeeksInYear() {
+    function getISOWeeksInYear () {
         return weeksInYear(this.year(), 1, 4);
     }
 
-    function getISOWeeksInISOWeekYear() {
-        return weeksInYear(this.isoWeekYear(), 1, 4);
-    }
-
-    function getWeeksInYear() {
+    function getWeeksInYear () {
         var weekInfo = this.localeData()._week;
         return weeksInYear(this.year(), weekInfo.dow, weekInfo.doy);
-    }
-
-    function getWeeksInWeekYear() {
-        var weekInfo = this.localeData()._week;
-        return weeksInYear(this.weekYear(), weekInfo.dow, weekInfo.doy);
     }
 
     function getSetWeekYearHelper(input, week, weekday, dow, doy) {
@@ -36091,10 +35054,8 @@ module.exports = stubFalse;
 
     // MOMENTS
 
-    function getSetQuarter(input) {
-        return input == null
-            ? Math.ceil((this.month() + 1) / 3)
-            : this.month((input - 1) * 3 + (this.month() % 3));
+    function getSetQuarter (input) {
+        return input == null ? Math.ceil((this.month() + 1) / 3) : this.month((input - 1) * 3 + this.month() % 3);
     }
 
     // FORMATTING
@@ -36110,13 +35071,13 @@ module.exports = stubFalse;
 
     // PARSING
 
-    addRegexToken('D', match1to2);
+    addRegexToken('D',  match1to2);
     addRegexToken('DD', match1to2, match2);
     addRegexToken('Do', function (isStrict, locale) {
         // TODO: Remove "ordinalParse" fallback in next major release.
-        return isStrict
-            ? locale._dayOfMonthOrdinalParse || locale._ordinalParse
-            : locale._dayOfMonthOrdinalParseLenient;
+        return isStrict ?
+          (locale._dayOfMonthOrdinalParse || locale._ordinalParse) :
+          locale._dayOfMonthOrdinalParseLenient;
     });
 
     addParseToken(['D', 'DD'], DATE);
@@ -36141,7 +35102,7 @@ module.exports = stubFalse;
 
     // PARSING
 
-    addRegexToken('DDD', match1to3);
+    addRegexToken('DDD',  match1to3);
     addRegexToken('DDDD', match3);
     addParseToken(['DDD', 'DDDD'], function (input, array, config) {
         config._dayOfYear = toInt(input);
@@ -36151,12 +35112,9 @@ module.exports = stubFalse;
 
     // MOMENTS
 
-    function getSetDayOfYear(input) {
-        var dayOfYear =
-            Math.round(
-                (this.clone().startOf('day') - this.clone().startOf('year')) / 864e5
-            ) + 1;
-        return input == null ? dayOfYear : this.add(input - dayOfYear, 'd');
+    function getSetDayOfYear (input) {
+        var dayOfYear = Math.round((this.clone().startOf('day') - this.clone().startOf('year')) / 864e5) + 1;
+        return input == null ? dayOfYear : this.add((input - dayOfYear), 'd');
     }
 
     // FORMATTING
@@ -36173,7 +35131,7 @@ module.exports = stubFalse;
 
     // PARSING
 
-    addRegexToken('m', match1to2);
+    addRegexToken('m',  match1to2);
     addRegexToken('mm', match1to2, match2);
     addParseToken(['m', 'mm'], MINUTE);
 
@@ -36195,7 +35153,7 @@ module.exports = stubFalse;
 
     // PARSING
 
-    addRegexToken('s', match1to2);
+    addRegexToken('s',  match1to2);
     addRegexToken('ss', match1to2, match2);
     addParseToken(['s', 'ss'], SECOND);
 
@@ -36233,6 +35191,7 @@ module.exports = stubFalse;
         return this.millisecond() * 1000000;
     });
 
+
     // ALIASES
 
     addUnitAlias('millisecond', 'ms');
@@ -36243,11 +35202,11 @@ module.exports = stubFalse;
 
     // PARSING
 
-    addRegexToken('S', match1to3, match1);
-    addRegexToken('SS', match1to3, match2);
-    addRegexToken('SSS', match1to3, match3);
+    addRegexToken('S',    match1to3, match1);
+    addRegexToken('SS',   match1to3, match2);
+    addRegexToken('SSS',  match1to3, match3);
 
-    var token, getSetMillisecond;
+    var token;
     for (token = 'SSSS'; token.length <= 9; token += 'S') {
         addRegexToken(token, matchUnsigned);
     }
@@ -36259,186 +35218,155 @@ module.exports = stubFalse;
     for (token = 'S'; token.length <= 9; token += 'S') {
         addParseToken(token, parseMs);
     }
+    // MOMENTS
 
-    getSetMillisecond = makeGetSet('Milliseconds', false);
+    var getSetMillisecond = makeGetSet('Milliseconds', false);
 
     // FORMATTING
 
-    addFormatToken('z', 0, 0, 'zoneAbbr');
+    addFormatToken('z',  0, 0, 'zoneAbbr');
     addFormatToken('zz', 0, 0, 'zoneName');
 
     // MOMENTS
 
-    function getZoneAbbr() {
+    function getZoneAbbr () {
         return this._isUTC ? 'UTC' : '';
     }
 
-    function getZoneName() {
+    function getZoneName () {
         return this._isUTC ? 'Coordinated Universal Time' : '';
     }
 
     var proto = Moment.prototype;
 
-    proto.add = add;
-    proto.calendar = calendar$1;
-    proto.clone = clone;
-    proto.diff = diff;
-    proto.endOf = endOf;
-    proto.format = format;
-    proto.from = from;
-    proto.fromNow = fromNow;
-    proto.to = to;
-    proto.toNow = toNow;
-    proto.get = stringGet;
-    proto.invalidAt = invalidAt;
-    proto.isAfter = isAfter;
-    proto.isBefore = isBefore;
-    proto.isBetween = isBetween;
-    proto.isSame = isSame;
-    proto.isSameOrAfter = isSameOrAfter;
-    proto.isSameOrBefore = isSameOrBefore;
-    proto.isValid = isValid$2;
-    proto.lang = lang;
-    proto.locale = locale;
-    proto.localeData = localeData;
-    proto.max = prototypeMax;
-    proto.min = prototypeMin;
-    proto.parsingFlags = parsingFlags;
-    proto.set = stringSet;
-    proto.startOf = startOf;
-    proto.subtract = subtract;
-    proto.toArray = toArray;
-    proto.toObject = toObject;
-    proto.toDate = toDate;
-    proto.toISOString = toISOString;
-    proto.inspect = inspect;
-    if (typeof Symbol !== 'undefined' && Symbol.for != null) {
-        proto[Symbol.for('nodejs.util.inspect.custom')] = function () {
-            return 'Moment<' + this.format() + '>';
-        };
-    }
-    proto.toJSON = toJSON;
-    proto.toString = toString;
-    proto.unix = unix;
-    proto.valueOf = valueOf;
-    proto.creationData = creationData;
-    proto.eraName = getEraName;
-    proto.eraNarrow = getEraNarrow;
-    proto.eraAbbr = getEraAbbr;
-    proto.eraYear = getEraYear;
-    proto.year = getSetYear;
+    proto.add               = add;
+    proto.calendar          = calendar$1;
+    proto.clone             = clone;
+    proto.diff              = diff;
+    proto.endOf             = endOf;
+    proto.format            = format;
+    proto.from              = from;
+    proto.fromNow           = fromNow;
+    proto.to                = to;
+    proto.toNow             = toNow;
+    proto.get               = stringGet;
+    proto.invalidAt         = invalidAt;
+    proto.isAfter           = isAfter;
+    proto.isBefore          = isBefore;
+    proto.isBetween         = isBetween;
+    proto.isSame            = isSame;
+    proto.isSameOrAfter     = isSameOrAfter;
+    proto.isSameOrBefore    = isSameOrBefore;
+    proto.isValid           = isValid$2;
+    proto.lang              = lang;
+    proto.locale            = locale;
+    proto.localeData        = localeData;
+    proto.max               = prototypeMax;
+    proto.min               = prototypeMin;
+    proto.parsingFlags      = parsingFlags;
+    proto.set               = stringSet;
+    proto.startOf           = startOf;
+    proto.subtract          = subtract;
+    proto.toArray           = toArray;
+    proto.toObject          = toObject;
+    proto.toDate            = toDate;
+    proto.toISOString       = toISOString;
+    proto.inspect           = inspect;
+    proto.toJSON            = toJSON;
+    proto.toString          = toString;
+    proto.unix              = unix;
+    proto.valueOf           = valueOf;
+    proto.creationData      = creationData;
+    proto.year       = getSetYear;
     proto.isLeapYear = getIsLeapYear;
-    proto.weekYear = getSetWeekYear;
+    proto.weekYear    = getSetWeekYear;
     proto.isoWeekYear = getSetISOWeekYear;
     proto.quarter = proto.quarters = getSetQuarter;
-    proto.month = getSetMonth;
+    proto.month       = getSetMonth;
     proto.daysInMonth = getDaysInMonth;
-    proto.week = proto.weeks = getSetWeek;
-    proto.isoWeek = proto.isoWeeks = getSetISOWeek;
-    proto.weeksInYear = getWeeksInYear;
-    proto.weeksInWeekYear = getWeeksInWeekYear;
+    proto.week           = proto.weeks        = getSetWeek;
+    proto.isoWeek        = proto.isoWeeks     = getSetISOWeek;
+    proto.weeksInYear    = getWeeksInYear;
     proto.isoWeeksInYear = getISOWeeksInYear;
-    proto.isoWeeksInISOWeekYear = getISOWeeksInISOWeekYear;
-    proto.date = getSetDayOfMonth;
-    proto.day = proto.days = getSetDayOfWeek;
-    proto.weekday = getSetLocaleDayOfWeek;
+    proto.date       = getSetDayOfMonth;
+    proto.day        = proto.days             = getSetDayOfWeek;
+    proto.weekday    = getSetLocaleDayOfWeek;
     proto.isoWeekday = getSetISODayOfWeek;
-    proto.dayOfYear = getSetDayOfYear;
+    proto.dayOfYear  = getSetDayOfYear;
     proto.hour = proto.hours = getSetHour;
     proto.minute = proto.minutes = getSetMinute;
     proto.second = proto.seconds = getSetSecond;
     proto.millisecond = proto.milliseconds = getSetMillisecond;
-    proto.utcOffset = getSetOffset;
-    proto.utc = setOffsetToUTC;
-    proto.local = setOffsetToLocal;
-    proto.parseZone = setOffsetToParsedOffset;
+    proto.utcOffset            = getSetOffset;
+    proto.utc                  = setOffsetToUTC;
+    proto.local                = setOffsetToLocal;
+    proto.parseZone            = setOffsetToParsedOffset;
     proto.hasAlignedHourOffset = hasAlignedHourOffset;
-    proto.isDST = isDaylightSavingTime;
-    proto.isLocal = isLocal;
-    proto.isUtcOffset = isUtcOffset;
-    proto.isUtc = isUtc;
-    proto.isUTC = isUtc;
+    proto.isDST                = isDaylightSavingTime;
+    proto.isLocal              = isLocal;
+    proto.isUtcOffset          = isUtcOffset;
+    proto.isUtc                = isUtc;
+    proto.isUTC                = isUtc;
     proto.zoneAbbr = getZoneAbbr;
     proto.zoneName = getZoneName;
-    proto.dates = deprecate(
-        'dates accessor is deprecated. Use date instead.',
-        getSetDayOfMonth
-    );
-    proto.months = deprecate(
-        'months accessor is deprecated. Use month instead',
-        getSetMonth
-    );
-    proto.years = deprecate(
-        'years accessor is deprecated. Use year instead',
-        getSetYear
-    );
-    proto.zone = deprecate(
-        'moment().zone is deprecated, use moment().utcOffset instead. http://momentjs.com/guides/#/warnings/zone/',
-        getSetZone
-    );
-    proto.isDSTShifted = deprecate(
-        'isDSTShifted is deprecated. See http://momentjs.com/guides/#/warnings/dst-shifted/ for more information',
-        isDaylightSavingTimeShifted
-    );
+    proto.dates  = deprecate('dates accessor is deprecated. Use date instead.', getSetDayOfMonth);
+    proto.months = deprecate('months accessor is deprecated. Use month instead', getSetMonth);
+    proto.years  = deprecate('years accessor is deprecated. Use year instead', getSetYear);
+    proto.zone   = deprecate('moment().zone is deprecated, use moment().utcOffset instead. http://momentjs.com/guides/#/warnings/zone/', getSetZone);
+    proto.isDSTShifted = deprecate('isDSTShifted is deprecated. See http://momentjs.com/guides/#/warnings/dst-shifted/ for more information', isDaylightSavingTimeShifted);
 
-    function createUnix(input) {
+    function createUnix (input) {
         return createLocal(input * 1000);
     }
 
-    function createInZone() {
+    function createInZone () {
         return createLocal.apply(null, arguments).parseZone();
     }
 
-    function preParsePostFormat(string) {
+    function preParsePostFormat (string) {
         return string;
     }
 
     var proto$1 = Locale.prototype;
 
-    proto$1.calendar = calendar;
-    proto$1.longDateFormat = longDateFormat;
-    proto$1.invalidDate = invalidDate;
-    proto$1.ordinal = ordinal;
-    proto$1.preparse = preParsePostFormat;
-    proto$1.postformat = preParsePostFormat;
-    proto$1.relativeTime = relativeTime;
-    proto$1.pastFuture = pastFuture;
-    proto$1.set = set;
-    proto$1.eras = localeEras;
-    proto$1.erasParse = localeErasParse;
-    proto$1.erasConvertYear = localeErasConvertYear;
-    proto$1.erasAbbrRegex = erasAbbrRegex;
-    proto$1.erasNameRegex = erasNameRegex;
-    proto$1.erasNarrowRegex = erasNarrowRegex;
+    proto$1.calendar        = calendar;
+    proto$1.longDateFormat  = longDateFormat;
+    proto$1.invalidDate     = invalidDate;
+    proto$1.ordinal         = ordinal;
+    proto$1.preparse        = preParsePostFormat;
+    proto$1.postformat      = preParsePostFormat;
+    proto$1.relativeTime    = relativeTime;
+    proto$1.pastFuture      = pastFuture;
+    proto$1.set             = set;
 
-    proto$1.months = localeMonths;
-    proto$1.monthsShort = localeMonthsShort;
-    proto$1.monthsParse = localeMonthsParse;
-    proto$1.monthsRegex = monthsRegex;
-    proto$1.monthsShortRegex = monthsShortRegex;
+    proto$1.months            =        localeMonths;
+    proto$1.monthsShort       =        localeMonthsShort;
+    proto$1.monthsParse       =        localeMonthsParse;
+    proto$1.monthsRegex       = monthsRegex;
+    proto$1.monthsShortRegex  = monthsShortRegex;
     proto$1.week = localeWeek;
     proto$1.firstDayOfYear = localeFirstDayOfYear;
     proto$1.firstDayOfWeek = localeFirstDayOfWeek;
 
-    proto$1.weekdays = localeWeekdays;
-    proto$1.weekdaysMin = localeWeekdaysMin;
-    proto$1.weekdaysShort = localeWeekdaysShort;
-    proto$1.weekdaysParse = localeWeekdaysParse;
+    proto$1.weekdays       =        localeWeekdays;
+    proto$1.weekdaysMin    =        localeWeekdaysMin;
+    proto$1.weekdaysShort  =        localeWeekdaysShort;
+    proto$1.weekdaysParse  =        localeWeekdaysParse;
 
-    proto$1.weekdaysRegex = weekdaysRegex;
-    proto$1.weekdaysShortRegex = weekdaysShortRegex;
-    proto$1.weekdaysMinRegex = weekdaysMinRegex;
+    proto$1.weekdaysRegex       =        weekdaysRegex;
+    proto$1.weekdaysShortRegex  =        weekdaysShortRegex;
+    proto$1.weekdaysMinRegex    =        weekdaysMinRegex;
 
     proto$1.isPM = localeIsPM;
     proto$1.meridiem = localeMeridiem;
 
-    function get$1(format, index, field, setter) {
-        var locale = getLocale(),
-            utc = createUTC().set(setter, index);
+    function get$1 (format, index, field, setter) {
+        var locale = getLocale();
+        var utc = createUTC().set(setter, index);
         return locale[field](utc, format);
     }
 
-    function listMonthsImpl(format, index, field) {
+    function listMonthsImpl (format, index, field) {
         if (isNumber(format)) {
             index = format;
             format = undefined;
@@ -36450,8 +35378,8 @@ module.exports = stubFalse;
             return get$1(format, index, field, 'month');
         }
 
-        var i,
-            out = [];
+        var i;
+        var out = [];
         for (i = 0; i < 12; i++) {
             out[i] = get$1(format, i, field, 'month');
         }
@@ -36466,7 +35394,7 @@ module.exports = stubFalse;
     // (true, 5)
     // (true, fmt, 5)
     // (true, fmt)
-    function listWeekdaysImpl(localeSorted, format, index, field) {
+    function listWeekdaysImpl (localeSorted, format, index, field) {
         if (typeof localeSorted === 'boolean') {
             if (isNumber(format)) {
                 index = format;
@@ -36488,127 +35416,97 @@ module.exports = stubFalse;
         }
 
         var locale = getLocale(),
-            shift = localeSorted ? locale._week.dow : 0,
-            i,
-            out = [];
+            shift = localeSorted ? locale._week.dow : 0;
 
         if (index != null) {
             return get$1(format, (index + shift) % 7, field, 'day');
         }
 
+        var i;
+        var out = [];
         for (i = 0; i < 7; i++) {
             out[i] = get$1(format, (i + shift) % 7, field, 'day');
         }
         return out;
     }
 
-    function listMonths(format, index) {
+    function listMonths (format, index) {
         return listMonthsImpl(format, index, 'months');
     }
 
-    function listMonthsShort(format, index) {
+    function listMonthsShort (format, index) {
         return listMonthsImpl(format, index, 'monthsShort');
     }
 
-    function listWeekdays(localeSorted, format, index) {
+    function listWeekdays (localeSorted, format, index) {
         return listWeekdaysImpl(localeSorted, format, index, 'weekdays');
     }
 
-    function listWeekdaysShort(localeSorted, format, index) {
+    function listWeekdaysShort (localeSorted, format, index) {
         return listWeekdaysImpl(localeSorted, format, index, 'weekdaysShort');
     }
 
-    function listWeekdaysMin(localeSorted, format, index) {
+    function listWeekdaysMin (localeSorted, format, index) {
         return listWeekdaysImpl(localeSorted, format, index, 'weekdaysMin');
     }
 
     getSetGlobalLocale('en', {
-        eras: [
-            {
-                since: '0001-01-01',
-                until: +Infinity,
-                offset: 1,
-                name: 'Anno Domini',
-                narrow: 'AD',
-                abbr: 'AD',
-            },
-            {
-                since: '0000-12-31',
-                until: -Infinity,
-                offset: 1,
-                name: 'Before Christ',
-                narrow: 'BC',
-                abbr: 'BC',
-            },
-        ],
         dayOfMonthOrdinalParse: /\d{1,2}(th|st|nd|rd)/,
-        ordinal: function (number) {
+        ordinal : function (number) {
             var b = number % 10,
-                output =
-                    toInt((number % 100) / 10) === 1
-                        ? 'th'
-                        : b === 1
-                        ? 'st'
-                        : b === 2
-                        ? 'nd'
-                        : b === 3
-                        ? 'rd'
-                        : 'th';
+                output = (toInt(number % 100 / 10) === 1) ? 'th' :
+                (b === 1) ? 'st' :
+                (b === 2) ? 'nd' :
+                (b === 3) ? 'rd' : 'th';
             return number + output;
-        },
+        }
     });
 
     // Side effect imports
 
-    hooks.lang = deprecate(
-        'moment.lang is deprecated. Use moment.locale instead.',
-        getSetGlobalLocale
-    );
-    hooks.langData = deprecate(
-        'moment.langData is deprecated. Use moment.localeData instead.',
-        getLocale
-    );
+    hooks.lang = deprecate('moment.lang is deprecated. Use moment.locale instead.', getSetGlobalLocale);
+    hooks.langData = deprecate('moment.langData is deprecated. Use moment.localeData instead.', getLocale);
 
     var mathAbs = Math.abs;
 
-    function abs() {
-        var data = this._data;
+    function abs () {
+        var data           = this._data;
 
         this._milliseconds = mathAbs(this._milliseconds);
-        this._days = mathAbs(this._days);
-        this._months = mathAbs(this._months);
+        this._days         = mathAbs(this._days);
+        this._months       = mathAbs(this._months);
 
-        data.milliseconds = mathAbs(data.milliseconds);
-        data.seconds = mathAbs(data.seconds);
-        data.minutes = mathAbs(data.minutes);
-        data.hours = mathAbs(data.hours);
-        data.months = mathAbs(data.months);
-        data.years = mathAbs(data.years);
+        data.milliseconds  = mathAbs(data.milliseconds);
+        data.seconds       = mathAbs(data.seconds);
+        data.minutes       = mathAbs(data.minutes);
+        data.hours         = mathAbs(data.hours);
+        data.months        = mathAbs(data.months);
+        data.years         = mathAbs(data.years);
 
         return this;
     }
 
-    function addSubtract$1(duration, input, value, direction) {
+    function addSubtract$1 (duration, input, value, direction) {
         var other = createDuration(input, value);
 
         duration._milliseconds += direction * other._milliseconds;
-        duration._days += direction * other._days;
-        duration._months += direction * other._months;
+        duration._days         += direction * other._days;
+        duration._months       += direction * other._months;
 
         return duration._bubble();
     }
 
     // supports only 2.0-style add(1, 's') or add(duration)
-    function add$1(input, value) {
+    function add$1 (input, value) {
         return addSubtract$1(this, input, value, 1);
     }
 
     // supports only 2.0-style subtract(1, 's') or subtract(duration)
-    function subtract$1(input, value) {
+    function subtract$1 (input, value) {
         return addSubtract$1(this, input, value, -1);
     }
 
-    function absCeil(number) {
+    function absCeil (number) {
         if (number < 0) {
             return Math.floor(number);
         } else {
@@ -36616,25 +35514,17 @@ module.exports = stubFalse;
         }
     }
 
-    function bubble() {
-        var milliseconds = this._milliseconds,
-            days = this._days,
-            months = this._months,
-            data = this._data,
-            seconds,
-            minutes,
-            hours,
-            years,
-            monthsFromDays;
+    function bubble () {
+        var milliseconds = this._milliseconds;
+        var days         = this._days;
+        var months       = this._months;
+        var data         = this._data;
+        var seconds, minutes, hours, years, monthsFromDays;
 
         // if we have a mix of positive and negative values, bubble down first
         // check: https://github.com/moment/moment/issues/2166
-        if (
-            !(
-                (milliseconds >= 0 && days >= 0 && months >= 0) ||
-                (milliseconds <= 0 && days <= 0 && months <= 0)
-            )
-        ) {
+        if (!((milliseconds >= 0 && days >= 0 && months >= 0) ||
+                (milliseconds <= 0 && days <= 0 && months <= 0))) {
             milliseconds += absCeil(monthsToDays(months) + days) * 864e5;
             days = 0;
             months = 0;
@@ -36644,14 +35534,14 @@ module.exports = stubFalse;
         // examples of what that means.
         data.milliseconds = milliseconds % 1000;
 
-        seconds = absFloor(milliseconds / 1000);
-        data.seconds = seconds % 60;
+        seconds           = absFloor(milliseconds / 1000);
+        data.seconds      = seconds % 60;
 
-        minutes = absFloor(seconds / 60);
-        data.minutes = minutes % 60;
+        minutes           = absFloor(seconds / 60);
+        data.minutes      = minutes % 60;
 
-        hours = absFloor(minutes / 60);
-        data.hours = hours % 24;
+        hours             = absFloor(minutes / 60);
+        data.hours        = hours % 24;
 
         days += absFloor(hours / 24);
 
@@ -36664,31 +35554,31 @@ module.exports = stubFalse;
         years = absFloor(months / 12);
         months %= 12;
 
-        data.days = days;
+        data.days   = days;
         data.months = months;
-        data.years = years;
+        data.years  = years;
 
         return this;
     }
 
-    function daysToMonths(days) {
+    function daysToMonths (days) {
         // 400 years have 146097 days (taking into account leap year rules)
         // 400 years have 12 months === 4800
-        return (days * 4800) / 146097;
+        return days * 4800 / 146097;
     }
 
-    function monthsToDays(months) {
+    function monthsToDays (months) {
         // the reverse of daysToMonths
-        return (months * 146097) / 4800;
+        return months * 146097 / 4800;
     }
 
-    function as(units) {
+    function as (units) {
         if (!this.isValid()) {
             return NaN;
         }
-        var days,
-            months,
-            milliseconds = this._milliseconds;
+        var days;
+        var months;
+        var milliseconds = this._milliseconds;
 
         units = normalizeUnits(units);
 
@@ -36696,38 +35586,28 @@ module.exports = stubFalse;
             days = this._days + milliseconds / 864e5;
             months = this._months + daysToMonths(days);
             switch (units) {
-                case 'month':
-                    return months;
-                case 'quarter':
-                    return months / 3;
-                case 'year':
-                    return months / 12;
+                case 'month':   return months;
+                case 'quarter': return months / 3;
+                case 'year':    return months / 12;
             }
         } else {
             // handle milliseconds separately because of floating point math errors (issue #1867)
             days = this._days + Math.round(monthsToDays(this._months));
             switch (units) {
-                case 'week':
-                    return days / 7 + milliseconds / 6048e5;
-                case 'day':
-                    return days + milliseconds / 864e5;
-                case 'hour':
-                    return days * 24 + milliseconds / 36e5;
-                case 'minute':
-                    return days * 1440 + milliseconds / 6e4;
-                case 'second':
-                    return days * 86400 + milliseconds / 1000;
+                case 'week'   : return days / 7     + milliseconds / 6048e5;
+                case 'day'    : return days         + milliseconds / 864e5;
+                case 'hour'   : return days * 24    + milliseconds / 36e5;
+                case 'minute' : return days * 1440  + milliseconds / 6e4;
+                case 'second' : return days * 86400 + milliseconds / 1000;
                 // Math.floor prevents floating point math errors here
-                case 'millisecond':
-                    return Math.floor(days * 864e5) + milliseconds;
-                default:
-                    throw new Error('Unknown unit ' + units);
+                case 'millisecond': return Math.floor(days * 864e5) + milliseconds;
+                default: throw new Error('Unknown unit ' + units);
             }
         }
     }
 
     // TODO: Use this.as('ms')?
-    function valueOf$1() {
+    function valueOf$1 () {
         if (!this.isValid()) {
             return NaN;
         }
@@ -36739,27 +35619,27 @@ module.exports = stubFalse;
         );
     }
 
-    function makeAs(alias) {
+    function makeAs (alias) {
         return function () {
             return this.as(alias);
         };
     }
 
-    var asMilliseconds = makeAs('ms'),
-        asSeconds = makeAs('s'),
-        asMinutes = makeAs('m'),
-        asHours = makeAs('h'),
-        asDays = makeAs('d'),
-        asWeeks = makeAs('w'),
-        asMonths = makeAs('M'),
-        asQuarters = makeAs('Q'),
-        asYears = makeAs('y');
+    var asMilliseconds = makeAs('ms');
+    var asSeconds      = makeAs('s');
+    var asMinutes      = makeAs('m');
+    var asHours        = makeAs('h');
+    var asDays         = makeAs('d');
+    var asWeeks        = makeAs('w');
+    var asMonths       = makeAs('M');
+    var asQuarters     = makeAs('Q');
+    var asYears        = makeAs('y');
 
-    function clone$1() {
+    function clone$1 () {
         return createDuration(this);
     }
 
-    function get$2(units) {
+    function get$2 (units) {
         units = normalizeUnits(units);
         return this.isValid() ? this[units + 's']() : NaN;
     }
@@ -36770,63 +35650,53 @@ module.exports = stubFalse;
         };
     }
 
-    var milliseconds = makeGetter('milliseconds'),
-        seconds = makeGetter('seconds'),
-        minutes = makeGetter('minutes'),
-        hours = makeGetter('hours'),
-        days = makeGetter('days'),
-        months = makeGetter('months'),
-        years = makeGetter('years');
+    var milliseconds = makeGetter('milliseconds');
+    var seconds      = makeGetter('seconds');
+    var minutes      = makeGetter('minutes');
+    var hours        = makeGetter('hours');
+    var days         = makeGetter('days');
+    var months       = makeGetter('months');
+    var years        = makeGetter('years');
 
-    function weeks() {
+    function weeks () {
         return absFloor(this.days() / 7);
     }
 
-    var round = Math.round,
-        thresholds = {
-            ss: 44, // a few seconds to seconds
-            s: 45, // seconds to minute
-            m: 45, // minutes to hour
-            h: 22, // hours to day
-            d: 26, // days to month/week
-            w: null, // weeks to month
-            M: 11, // months to year
-        };
+    var round = Math.round;
+    var thresholds = {
+        ss: 44,         // a few seconds to seconds
+        s : 45,         // seconds to minute
+        m : 45,         // minutes to hour
+        h : 22,         // hours to day
+        d : 26,         // days to month
+        M : 11          // months to year
+    };
 
     // helper function for moment.fn.from, moment.fn.fromNow, and moment.duration.fn.humanize
     function substituteTimeAgo(string, number, withoutSuffix, isFuture, locale) {
         return locale.relativeTime(number || 1, !!withoutSuffix, string, isFuture);
     }
 
-    function relativeTime$1(posNegDuration, withoutSuffix, thresholds, locale) {
-        var duration = createDuration(posNegDuration).abs(),
-            seconds = round(duration.as('s')),
-            minutes = round(duration.as('m')),
-            hours = round(duration.as('h')),
-            days = round(duration.as('d')),
-            months = round(duration.as('M')),
-            weeks = round(duration.as('w')),
-            years = round(duration.as('y')),
-            a =
-                (seconds <= thresholds.ss && ['s', seconds]) ||
-                (seconds < thresholds.s && ['ss', seconds]) ||
-                (minutes <= 1 && ['m']) ||
-                (minutes < thresholds.m && ['mm', minutes]) ||
-                (hours <= 1 && ['h']) ||
-                (hours < thresholds.h && ['hh', hours]) ||
-                (days <= 1 && ['d']) ||
-                (days < thresholds.d && ['dd', days]);
+    function relativeTime$1 (posNegDuration, withoutSuffix, locale) {
+        var duration = createDuration(posNegDuration).abs();
+        var seconds  = round(duration.as('s'));
+        var minutes  = round(duration.as('m'));
+        var hours    = round(duration.as('h'));
+        var days     = round(duration.as('d'));
+        var months   = round(duration.as('M'));
+        var years    = round(duration.as('y'));
 
-        if (thresholds.w != null) {
-            a =
-                a ||
-                (weeks <= 1 && ['w']) ||
-                (weeks < thresholds.w && ['ww', weeks]);
-        }
-        a = a ||
-            (months <= 1 && ['M']) ||
-            (months < thresholds.M && ['MM', months]) ||
-            (years <= 1 && ['y']) || ['yy', years];
+        var a = seconds <= thresholds.ss && ['s', seconds]  ||
+                seconds < thresholds.s   && ['ss', seconds] ||
+                minutes <= 1             && ['m']           ||
+                minutes < thresholds.m   && ['mm', minutes] ||
+                hours   <= 1             && ['h']           ||
+                hours   < thresholds.h   && ['hh', hours]   ||
+                days    <= 1             && ['d']           ||
+                days    < thresholds.d   && ['dd', days]    ||
+                months  <= 1             && ['M']           ||
+                months  < thresholds.M   && ['MM', months]  ||
+                years   <= 1             && ['y']           || ['yy', years];
 
         a[2] = withoutSuffix;
         a[3] = +posNegDuration > 0;
@@ -36835,11 +35705,11 @@ module.exports = stubFalse;
     }
 
     // This function allows you to set the rounding function for relative time strings
-    function getSetRelativeTimeRounding(roundingFunction) {
+    function getSetRelativeTimeRounding (roundingFunction) {
         if (roundingFunction === undefined) {
             return round;
         }
-        if (typeof roundingFunction === 'function') {
+        if (typeof(roundingFunction) === 'function') {
             round = roundingFunction;
             return true;
         }
@@ -36847,7 +35717,7 @@ module.exports = stubFalse;
     }
 
     // This function allows you to set a threshold for relative time strings
-    function getSetRelativeTimeThreshold(threshold, limit) {
+    function getSetRelativeTimeThreshold (threshold, limit) {
         if (thresholds[threshold] === undefined) {
             return false;
         }
@@ -36861,32 +35731,13 @@ module.exports = stubFalse;
         return true;
     }
 
-    function humanize(argWithSuffix, argThresholds) {
+    function humanize (withSuffix) {
         if (!this.isValid()) {
             return this.localeData().invalidDate();
         }
 
-        var withSuffix = false,
-            th = thresholds,
-            locale,
-            output;
-
-        if (typeof argWithSuffix === 'object') {
-            argThresholds = argWithSuffix;
-            argWithSuffix = false;
-        }
-        if (typeof argWithSuffix === 'boolean') {
-            withSuffix = argWithSuffix;
-        }
-        if (typeof argThresholds === 'object') {
-            th = Object.assign({}, thresholds, argThresholds);
-            if (argThresholds.s != null && argThresholds.ss == null) {
-                th.ss = argThresholds.s - 1;
-            }
-        }
-
-        locale = this.localeData();
-        output = relativeTime$1(this, !withSuffix, th, locale);
+        var locale = this.localeData();
+        var output = relativeTime$1(this, !withSuffix, locale);
 
         if (withSuffix) {
             output = locale.pastFuture(+this, output);
@@ -36898,7 +35749,7 @@ module.exports = stubFalse;
     var abs$1 = Math.abs;
 
     function sign(x) {
-        return (x > 0) - (x < 0) || +x;
+        return ((x > 0) - (x < 0)) || +x;
     }
 
     function toISOString$1() {
@@ -36913,18 +35764,30 @@ module.exports = stubFalse;
             return this.localeData().invalidDate();
         }
 
-        var seconds = abs$1(this._milliseconds) / 1000,
-            days = abs$1(this._days),
-            months = abs$1(this._months),
-            minutes,
-            hours,
-            years,
-            s,
-            total = this.asSeconds(),
-            totalSign,
-            ymSign,
-            daysSign,
-            hmsSign;
+        var seconds = abs$1(this._milliseconds) / 1000;
+        var days         = abs$1(this._days);
+        var months       = abs$1(this._months);
+        var minutes, hours, years;
+
+        // 3600 seconds -> 60 minutes -> 1 hour
+        minutes           = absFloor(seconds / 60);
+        hours             = absFloor(minutes / 60);
+        seconds %= 60;
+        minutes %= 60;
+
+        // 12 months -> 1 year
+        years  = absFloor(months / 12);
+        months %= 12;
+
+
+        // inspired by https://github.com/dordille/moment-isoduration/blob/master/moment.isoduration.js
+        var Y = years;
+        var M = months;
+        var D = days;
+        var h = hours;
+        var m = minutes;
+        var s = seconds ? seconds.toFixed(3).replace(/\.?0+$/, '') : '';
+        var total = this.asSeconds();
 
         if (!total) {
             // this is the same as C#'s (Noda) and python (isodate)...
@@ -36932,77 +35795,60 @@ module.exports = stubFalse;
             return 'P0D';
         }
 
-        // 3600 seconds -> 60 minutes -> 1 hour
-        minutes = absFloor(seconds / 60);
-        hours = absFloor(minutes / 60);
-        seconds %= 60;
-        minutes %= 60;
+        var totalSign = total < 0 ? '-' : '';
+        var ymSign = sign(this._months) !== sign(total) ? '-' : '';
+        var daysSign = sign(this._days) !== sign(total) ? '-' : '';
+        var hmsSign = sign(this._milliseconds) !== sign(total) ? '-' : '';
 
-        // 12 months -> 1 year
-        years = absFloor(months / 12);
-        months %= 12;
-
-        // inspired by https://github.com/dordille/moment-isoduration/blob/master/moment.isoduration.js
-        s = seconds ? seconds.toFixed(3).replace(/\.?0+$/, '') : '';
-
-        totalSign = total < 0 ? '-' : '';
-        ymSign = sign(this._months) !== sign(total) ? '-' : '';
-        daysSign = sign(this._days) !== sign(total) ? '-' : '';
-        hmsSign = sign(this._milliseconds) !== sign(total) ? '-' : '';
-
-        return (
-            totalSign +
-            'P' +
-            (years ? ymSign + years + 'Y' : '') +
-            (months ? ymSign + months + 'M' : '') +
-            (days ? daysSign + days + 'D' : '') +
-            (hours || minutes || seconds ? 'T' : '') +
-            (hours ? hmsSign + hours + 'H' : '') +
-            (minutes ? hmsSign + minutes + 'M' : '') +
-            (seconds ? hmsSign + s + 'S' : '')
-        );
+        return totalSign + 'P' +
+            (Y ? ymSign + Y + 'Y' : '') +
+            (M ? ymSign + M + 'M' : '') +
+            (D ? daysSign + D + 'D' : '') +
+            ((h || m || s) ? 'T' : '') +
+            (h ? hmsSign + h + 'H' : '') +
+            (m ? hmsSign + m + 'M' : '') +
+            (s ? hmsSign + s + 'S' : '');
     }
 
     var proto$2 = Duration.prototype;
 
-    proto$2.isValid = isValid$1;
-    proto$2.abs = abs;
-    proto$2.add = add$1;
-    proto$2.subtract = subtract$1;
-    proto$2.as = as;
+    proto$2.isValid        = isValid$1;
+    proto$2.abs            = abs;
+    proto$2.add            = add$1;
+    proto$2.subtract       = subtract$1;
+    proto$2.as             = as;
     proto$2.asMilliseconds = asMilliseconds;
-    proto$2.asSeconds = asSeconds;
-    proto$2.asMinutes = asMinutes;
-    proto$2.asHours = asHours;
-    proto$2.asDays = asDays;
-    proto$2.asWeeks = asWeeks;
-    proto$2.asMonths = asMonths;
-    proto$2.asQuarters = asQuarters;
-    proto$2.asYears = asYears;
-    proto$2.valueOf = valueOf$1;
-    proto$2._bubble = bubble;
-    proto$2.clone = clone$1;
-    proto$2.get = get$2;
-    proto$2.milliseconds = milliseconds;
-    proto$2.seconds = seconds;
-    proto$2.minutes = minutes;
-    proto$2.hours = hours;
-    proto$2.days = days;
-    proto$2.weeks = weeks;
-    proto$2.months = months;
-    proto$2.years = years;
-    proto$2.humanize = humanize;
-    proto$2.toISOString = toISOString$1;
-    proto$2.toString = toISOString$1;
-    proto$2.toJSON = toISOString$1;
-    proto$2.locale = locale;
-    proto$2.localeData = localeData;
+    proto$2.asSeconds      = asSeconds;
+    proto$2.asMinutes      = asMinutes;
+    proto$2.asHours        = asHours;
+    proto$2.asDays         = asDays;
+    proto$2.asWeeks        = asWeeks;
+    proto$2.asMonths       = asMonths;
+    proto$2.asQuarters     = asQuarters;
+    proto$2.asYears        = asYears;
+    proto$2.valueOf        = valueOf$1;
+    proto$2._bubble        = bubble;
+    proto$2.clone          = clone$1;
+    proto$2.get            = get$2;
+    proto$2.milliseconds   = milliseconds;
+    proto$2.seconds        = seconds;
+    proto$2.minutes        = minutes;
+    proto$2.hours          = hours;
+    proto$2.days           = days;
+    proto$2.weeks          = weeks;
+    proto$2.months         = months;
+    proto$2.years          = years;
+    proto$2.humanize       = humanize;
+    proto$2.toISOString    = toISOString$1;
+    proto$2.toString       = toISOString$1;
+    proto$2.toJSON         = toISOString$1;
+    proto$2.locale         = locale;
+    proto$2.localeData     = localeData;
 
-    proto$2.toIsoString = deprecate(
-        'toIsoString() is deprecated. Please use toISOString() instead (notice the capitals)',
-        toISOString$1
-    );
+    proto$2.toIsoString = deprecate('toIsoString() is deprecated. Please use toISOString() instead (notice the capitals)', toISOString$1);
     proto$2.lang = lang;
+
+    // Side effect imports
 
     // FORMATTING
 
@@ -37014,57 +35860,58 @@ module.exports = stubFalse;
     addRegexToken('x', matchSigned);
     addRegexToken('X', matchTimestamp);
     addParseToken('X', function (input, array, config) {
-        config._d = new Date(parseFloat(input) * 1000);
+        config._d = new Date(parseFloat(input, 10) * 1000);
     });
     addParseToken('x', function (input, array, config) {
         config._d = new Date(toInt(input));
     });
 
-    //! moment.js
+    // Side effect imports
 
-    hooks.version = '2.27.0';
+
+    hooks.version = '2.24.0';
 
     setHookCallback(createLocal);
 
-    hooks.fn = proto;
-    hooks.min = min;
-    hooks.max = max;
-    hooks.now = now;
-    hooks.utc = createUTC;
-    hooks.unix = createUnix;
-    hooks.months = listMonths;
-    hooks.isDate = isDate;
-    hooks.locale = getSetGlobalLocale;
-    hooks.invalid = createInvalid;
-    hooks.duration = createDuration;
-    hooks.isMoment = isMoment;
-    hooks.weekdays = listWeekdays;
-    hooks.parseZone = createInZone;
-    hooks.localeData = getLocale;
-    hooks.isDuration = isDuration;
-    hooks.monthsShort = listMonthsShort;
-    hooks.weekdaysMin = listWeekdaysMin;
-    hooks.defineLocale = defineLocale;
-    hooks.updateLocale = updateLocale;
-    hooks.locales = listLocales;
-    hooks.weekdaysShort = listWeekdaysShort;
-    hooks.normalizeUnits = normalizeUnits;
-    hooks.relativeTimeRounding = getSetRelativeTimeRounding;
+    hooks.fn                    = proto;
+    hooks.min                   = min;
+    hooks.max                   = max;
+    hooks.now                   = now;
+    hooks.utc                   = createUTC;
+    hooks.unix                  = createUnix;
+    hooks.months                = listMonths;
+    hooks.isDate                = isDate;
+    hooks.locale                = getSetGlobalLocale;
+    hooks.invalid               = createInvalid;
+    hooks.duration              = createDuration;
+    hooks.isMoment              = isMoment;
+    hooks.weekdays              = listWeekdays;
+    hooks.parseZone             = createInZone;
+    hooks.localeData            = getLocale;
+    hooks.isDuration            = isDuration;
+    hooks.monthsShort           = listMonthsShort;
+    hooks.weekdaysMin           = listWeekdaysMin;
+    hooks.defineLocale          = defineLocale;
+    hooks.updateLocale          = updateLocale;
+    hooks.locales               = listLocales;
+    hooks.weekdaysShort         = listWeekdaysShort;
+    hooks.normalizeUnits        = normalizeUnits;
+    hooks.relativeTimeRounding  = getSetRelativeTimeRounding;
     hooks.relativeTimeThreshold = getSetRelativeTimeThreshold;
-    hooks.calendarFormat = getCalendarFormat;
-    hooks.prototype = proto;
+    hooks.calendarFormat        = getCalendarFormat;
+    hooks.prototype             = proto;
 
     // currently HTML5 input type only supports 24-hour formats
     hooks.HTML5_FMT = {
-        DATETIME_LOCAL: 'YYYY-MM-DDTHH:mm', // <input type="datetime-local" />
-        DATETIME_LOCAL_SECONDS: 'YYYY-MM-DDTHH:mm:ss', // <input type="datetime-local" step="1" />
-        DATETIME_LOCAL_MS: 'YYYY-MM-DDTHH:mm:ss.SSS', // <input type="datetime-local" step="0.001" />
-        DATE: 'YYYY-MM-DD', // <input type="date" />
-        TIME: 'HH:mm', // <input type="time" />
-        TIME_SECONDS: 'HH:mm:ss', // <input type="time" step="1" />
-        TIME_MS: 'HH:mm:ss.SSS', // <input type="time" step="0.001" />
-        WEEK: 'GGGG-[W]WW', // <input type="week" />
-        MONTH: 'YYYY-MM', // <input type="month" />
+        DATETIME_LOCAL: 'YYYY-MM-DDTHH:mm',             // <input type="datetime-local" />
+        DATETIME_LOCAL_SECONDS: 'YYYY-MM-DDTHH:mm:ss',  // <input type="datetime-local" step="1" />
+        DATETIME_LOCAL_MS: 'YYYY-MM-DDTHH:mm:ss.SSS',   // <input type="datetime-local" step="0.001" />
+        DATE: 'YYYY-MM-DD',                             // <input type="date" />
+        TIME: 'HH:mm',                                  // <input type="time" />
+        TIME_SECONDS: 'HH:mm:ss',                       // <input type="time" step="1" />
+        TIME_MS: 'HH:mm:ss.SSS',                        // <input type="time" step="0.001" />
+        WEEK: 'GGGG-[W]WW',                             // <input type="week" />
+        MONTH: 'YYYY-MM'                                // <input type="month" />
     };
 
     return hooks;

@@ -695,7 +695,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-/* harmony default export */ __webpack_exports__["default"] = (_objectSpread(_objectSpread(_objectSpread({}, _tabHandlerAction__WEBPACK_IMPORTED_MODULE_0__), _gridHandlerAction__WEBPACK_IMPORTED_MODULE_1__), _playerDataAction__WEBPACK_IMPORTED_MODULE_2__));
+/* harmony default export */ __webpack_exports__["default"] = (_objectSpread({}, _tabHandlerAction__WEBPACK_IMPORTED_MODULE_0__, {}, _gridHandlerAction__WEBPACK_IMPORTED_MODULE_1__, {}, _playerDataAction__WEBPACK_IMPORTED_MODULE_2__));
 
 /***/ }),
 
@@ -898,7 +898,7 @@ const TabMenuItem = props => {
     onClick: () => onClickTabMenu(item.key)
   }, item.name));
 };
-/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(TabMenuItem));
+/* harmony default export */ __webpack_exports__["default"] = (react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(TabMenuItem));
 
 /***/ }),
 
@@ -940,7 +940,7 @@ const TabMenu = props => {
     });
   })));
 };
-/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(TabMenu));
+/* harmony default export */ __webpack_exports__["default"] = (react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(TabMenu));
 
 /***/ }),
 
@@ -981,7 +981,7 @@ const tabMenuList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__["default"].
   return {
     key: _,
     name: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource(_),
-    component: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(dynamicImports[_]),
+    component: react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(dynamicImports[_]),
     preLoad: dynamicImports[_]
   };
 });
@@ -1064,7 +1064,7 @@ class CommonQueryService {
       const response = await _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_0__["default"].postData('Api/PlayerSegmentation/UpdateVipStatus', params);
 
       if (response.status === 200) {
-        return _objectSpread(_objectSpread({}, _constants__WEBPACK_IMPORTED_MODULE_3__["successResponse"]), {
+        return _objectSpread({}, _constants__WEBPACK_IMPORTED_MODULE_3__["successResponse"], {}, {
           data: response.data
         });
       }
@@ -1203,7 +1203,7 @@ class ProblemPlayerQueryService {
       const response = await _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_0__["default"].postData('Api/PlayerSegmentation/GetProblemPlayerList', params);
 
       if (response.status === 200) {
-        return _objectSpread(_objectSpread({}, _lib_constants__WEBPACK_IMPORTED_MODULE_1__["successResponse"]), response.data);
+        return _objectSpread({}, _lib_constants__WEBPACK_IMPORTED_MODULE_1__["successResponse"], {}, response.data);
       }
     } catch (e) {
       console.log(e);
@@ -1242,7 +1242,7 @@ class VipPlayerQueryService {
       const response = await _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_0__["default"].postData('Api/PlayerSegmentation/GetVipPlayerList', params);
 
       if (response.status === 200) {
-        return _objectSpread(_objectSpread({}, _lib_constants__WEBPACK_IMPORTED_MODULE_1__["successResponse"]), response.data);
+        return _objectSpread({}, _lib_constants__WEBPACK_IMPORTED_MODULE_1__["successResponse"], {}, response.data);
       }
     } catch (e) {
       console.log(e);

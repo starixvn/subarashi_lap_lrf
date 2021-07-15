@@ -6171,13 +6171,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                 });
             },
 
-            getGridOption: function () {
-                const gridOption = DailyStatementOption.gridOption;
-                gridOption.colNames = DailyStatementOption.getColNames();
-
-                return gridOption;
-            },
-
             bindData: function (response) {
                 jqGridAdditional.clearGrid('BetListGrid');
                 const data = response.Main;
@@ -6186,7 +6179,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                     return;
                 }
 
-                const gridOption = _me.getGridOption();
+                const gridOption = DailyStatementOption.getGridOption();
                 gridOption.data = data;
                 gridOption.gridComplete = function () {
                     jqGridAdditional.gridComplete();
@@ -6293,18 +6286,23 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
             datatype: 'local',
             height: 'auto',
             rowNum: 5000,
-            colModel: columnModel,
-            colNames: [],
             autowidth: false,
             shrinkToFit: true,
             gridview: true,
             footerrow: false,
             cmTemplate: { sortable: false }
-        },
-        getColNames: function () {
-            return Site.getResources(columnNames);
         }
     };
+
+    _me.getGridOption = function () {
+        _me.gridOption.colNames = Site.getResources(columnNames);
+        _me.gridOption.colModel = columnModel;
+
+        const isEnableSingleWallet = Site.asBool($('#IsEnableSingleWallet').val());
+        balance.hidden = !!isEnableSingleWallet;
+
+        return _me.gridOption;
+    } 
 
     return _me;
 }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),

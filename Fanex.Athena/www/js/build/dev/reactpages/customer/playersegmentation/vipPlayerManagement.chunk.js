@@ -1,39 +1,13 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["customer/playersegmentation/vipPlayerManagement"],{
 
-/***/ "./node_modules/attr-accept/dist/es/index.js":
-/*!***************************************************!*\
-  !*** ./node_modules/attr-accept/dist/es/index.js ***!
-  \***************************************************/
+/***/ "./node_modules/attr-accept/dist/index.js":
+/*!************************************************!*\
+  !*** ./node_modules/attr-accept/dist/index.js ***!
+  \************************************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-
-
-exports.__esModule = true;
-
-exports.default = function (file, acceptedFiles) {
-  if (file && acceptedFiles) {
-    var acceptedFilesArray = Array.isArray(acceptedFiles) ? acceptedFiles : acceptedFiles.split(',');
-    var fileName = file.name || '';
-    var mimeType = file.type || '';
-    var baseMimeType = mimeType.replace(/\/.*$/, '');
-    return acceptedFilesArray.some(function (type) {
-      var validType = type.trim();
-
-      if (validType.charAt(0) === '.') {
-        return fileName.toLowerCase().endsWith(validType.toLowerCase());
-      } else if (validType.endsWith('/*')) {
-        // This is something like a image/* mime type
-        return baseMimeType === validType.replace(/\/.*$/, '');
-      }
-
-      return mimeType === validType;
-    });
-  }
-
-  return true;
-};
+module.exports=function(e){function r(n){if(t[n])return t[n].exports;var o=t[n]={i:n,l:!1,exports:{}};return e[n].call(o.exports,o,o.exports,r),o.l=!0,o.exports}var t={};return r.m=e,r.c=t,r.d=function(e,t,n){r.o(e,t)||Object.defineProperty(e,t,{configurable:!1,enumerable:!0,get:n})},r.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return r.d(t,"a",t),t},r.o=function(e,r){return Object.prototype.hasOwnProperty.call(e,r)},r.p="",r(r.s=0)}([function(e,r,t){"use strict";r.__esModule=!0,r.default=function(e,r){if(e&&r){var t=Array.isArray(r)?r:r.split(","),n=e.name||"",o=e.type||"",u=o.replace(/\/.*$/,"");return t.some(function(e){var r=e.trim();return"."===r.charAt(0)?n.toLowerCase().endsWith(r.toLowerCase()):r.endsWith("/*")?u===r.replace(/\/.*$/,""):o===r})}return!0}}]);
 
 /***/ }),
 
@@ -1127,7 +1101,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onDocumentDragOver", function() { return onDocumentDragOver; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isIeOrEdge", function() { return isIeOrEdge; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "composeEventHandlers", function() { return composeEventHandlers; });
-/* harmony import */ var attr_accept__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! attr-accept */ "./node_modules/attr-accept/dist/es/index.js");
+/* harmony import */ var attr_accept__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! attr-accept */ "./node_modules/attr-accept/dist/index.js");
 /* harmony import */ var attr_accept__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(attr_accept__WEBPACK_IMPORTED_MODULE_0__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -1244,7 +1218,7 @@ function composeEventHandlers() {
 /*!*****************************************!*\
   !*** ./node_modules/tslib/tslib.es6.js ***!
   \*****************************************/
-/*! exports provided: __extends, __assign, __rest, __decorate, __param, __metadata, __awaiter, __generator, __createBinding, __exportStar, __values, __read, __spread, __spreadArrays, __await, __asyncGenerator, __asyncDelegator, __asyncValues, __makeTemplateObject, __importStar, __importDefault, __classPrivateFieldGet, __classPrivateFieldSet */
+/*! exports provided: __extends, __assign, __rest, __decorate, __param, __metadata, __awaiter, __generator, __exportStar, __values, __read, __spread, __spreadArrays, __await, __asyncGenerator, __asyncDelegator, __asyncValues, __makeTemplateObject, __importStar, __importDefault, __classPrivateFieldGet, __classPrivateFieldSet */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1257,7 +1231,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__metadata", function() { return __metadata; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__awaiter", function() { return __awaiter; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__generator", function() { return __generator; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__createBinding", function() { return __createBinding; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__exportStar", function() { return __exportStar; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__values", function() { return __values; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__read", function() { return __read; });
@@ -1273,18 +1246,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__classPrivateFieldGet", function() { return __classPrivateFieldGet; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__classPrivateFieldSet", function() { return __classPrivateFieldSet; });
 /*! *****************************************************************************
-Copyright (c) Microsoft Corporation.
+Copyright (c) Microsoft Corporation. All rights reserved.
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+this file except in compliance with the License. You may obtain a copy of the
+License at http://www.apache.org/licenses/LICENSE-2.0
 
-Permission to use, copy, modify, and/or distribute this software for any
-purpose with or without fee is hereby granted.
+THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
+MERCHANTABLITY OR NON-INFRINGEMENT.
 
-THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
-REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
-AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
-LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
-OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-PERFORMANCE OF THIS SOFTWARE.
+See the Apache Version 2.0 License for specific language governing permissions
+and limitations under the License.
 ***************************************************************************** */
 /* global Reflect, Promise */
 
@@ -1377,13 +1350,8 @@ function __generator(thisArg, body) {
     }
 }
 
-function __createBinding(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}
-
 function __exportStar(m, exports) {
-    for (var p in m) if (p !== "default" && !exports.hasOwnProperty(p)) exports[p] = m[p];
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 
 function __values(o) {
@@ -1620,7 +1588,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 
 
-const CheckBox = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.forwardRef((props, ref) => {
+const CheckBox = react__WEBPACK_IMPORTED_MODULE_0___default.a.forwardRef((props, ref) => {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "checkbox-group",
     ref: ref
@@ -1982,7 +1950,7 @@ class UserGuide extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
       contentTitle,
       isHtml
     } = this.props;
-    const isShow = this.state.isShow && content && ( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.isValidElement(content) || content.length > 0) ? true : false;
+    const isShow = this.state.isShow && content && (react__WEBPACK_IMPORTED_MODULE_0___default.a.isValidElement(content) || content.length > 0) ? true : false;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
       className: className,
       onClick: this.onClickHandler,
@@ -2971,7 +2939,7 @@ const defaultOkButton = {
 };
 const generateDefaultConfirmOption = (content, onClose, submitProps, cancelProps, icon = predefinedIcons.warning, customOption = {}) => {
   return _objectSpread({
-    buttons: [_objectSpread(_objectSpread({}, defaultSubmitButton), submitProps), _objectSpread(_objectSpread({}, defaultCancelButton), cancelProps)],
+    buttons: [_objectSpread({}, defaultSubmitButton, {}, submitProps), _objectSpread({}, defaultCancelButton, {}, cancelProps)],
     icon,
     isShow: true,
     children: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
@@ -3160,7 +3128,7 @@ DropzoneUpload.defaultProps = {
   maxSize: 1,
   isShowInnerZone: true
 };
-/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(DropzoneUpload));
+/* harmony default export */ __webpack_exports__["default"] = (react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(DropzoneUpload));
 
 /***/ }),
 
@@ -3330,7 +3298,7 @@ function mapStateToProps(state) {
 }
 
 ;
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(VipSwitcherCell)));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(VipSwitcherCell)));
 
 /***/ }),
 
@@ -3457,7 +3425,7 @@ _defineProperty(GridHelper, "callBackToUpdatePaging", ({
     sortType
   } = response;
 
-  const newPagingOption = _objectSpread(_objectSpread({}, pagingOption), {
+  const newPagingOption = _objectSpread({}, pagingOption, {}, {
     PageIndex: pageIndex,
     PageSize: pageSize,
     orderCol,
@@ -4027,7 +3995,7 @@ const Content = props => {
   const _handlePaging = (pageIndex, pageSize) => {
     const sortInfo = _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSortInfoFromPagingOption(pagingOption);
 
-    const params = _objectSpread(_objectSpread(_objectSpread({}, selectedParams), sortInfo), {
+    const params = _objectSpread({}, selectedParams, {}, sortInfo, {}, {
       pageIndex,
       pageSize
     });
@@ -4160,7 +4128,7 @@ const DataGrid = props => {
       checked: isCheckAll,
       onChange: checked => {
         const newPlayerList = playerList.map(_ => {
-          return _objectSpread(_objectSpread({}, _), {
+          return _objectSpread({}, _, {}, {
             isSelected: checked && !_.isBA
           });
         });
@@ -4184,9 +4152,9 @@ const DataGrid = props => {
   const _handleSort = (orderCol, sortType) => {
     const sortInfo = _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSortInfo(orderCol, sortType);
 
-    const _pagingOption = _objectSpread(_objectSpread({}, pagingOption), sortInfo);
+    const _pagingOption = _objectSpread({}, pagingOption, {}, sortInfo);
 
-    const params = _objectSpread(_objectSpread({}, selectedParams), _pagingOption);
+    const params = _objectSpread({}, selectedParams, {}, _pagingOption);
 
     searchPlayer(selectedTabKey, params, _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_8__["default"].callBackToUpdatePaging({
       pagingOption,
@@ -4240,7 +4208,7 @@ function mapStateToProps(state) {
 }
 
 ;
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(DataGrid)));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(DataGrid)));
 
 /***/ }),
 
@@ -4475,7 +4443,7 @@ function mapStateToProps(state) {
 }
 
 ;
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(FormAction)));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(FormAction)));
 
 /***/ }),
 
@@ -4566,7 +4534,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
         return;
       }
 
-      const params = _objectSpread(_objectSpread({}, selectedParams), pagingOption);
+      const params = _objectSpread({}, selectedParams, {}, pagingOption);
 
       _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_14__["default"].getFile(_lib_constants__WEBPACK_IMPORTED_MODULE_16__["Url"].exportVipPlayerList, params).then(response => {
         const NoContentStatusCode = 204;
@@ -4861,7 +4829,7 @@ const PlayerRow = props => {
     index: index
   }));
 };
-/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(PlayerRow));
+/* harmony default export */ __webpack_exports__["default"] = (react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(PlayerRow));
 
 /***/ }),
 
@@ -4908,7 +4876,7 @@ const SelectionCell = props => {
     id: `selectPlayer_${dataItem.custId}`,
     checked: dataItem.isSelected === true,
     onChange: checked => {
-      const newDataItem = _objectSpread(_objectSpread({}, dataItem), {
+      const newDataItem = _objectSpread({}, dataItem, {}, {
         isSelected: checked
       });
 
@@ -4938,7 +4906,7 @@ function mapStateToProps(state) {
 }
 
 ;
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapStateToProps, mapDispatchToProps)( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(SelectionCell)));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapStateToProps, mapDispatchToProps)(react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(SelectionCell)));
 
 /***/ }),
 
@@ -4971,7 +4939,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-const initialState = _objectSpread(_objectSpread({}, window.initialState[_lib_constants__WEBPACK_IMPORTED_MODULE_5__["tabKeys"].vipPlayerManagement]), {
+const initialState = _objectSpread({}, window.initialState[_lib_constants__WEBPACK_IMPORTED_MODULE_5__["tabKeys"].vipPlayerManagement], {}, {
   userGuideContent: '',
   pagingOption: {
     PageIndex: 1,
@@ -4986,7 +4954,7 @@ const initialState = _objectSpread(_objectSpread({}, window.initialState[_lib_co
     selectedTabKey
   } = props;
 
-  const defaultState = _objectSpread(_objectSpread({}, initialState), {
+  const defaultState = _objectSpread({}, initialState, {}, {
     selectedTabKey
   });
 
@@ -5130,7 +5098,7 @@ class ParamHelper {
     subsidiarySearch,
     selectedCustomerClass
   }) {
-    return _objectSpread(_objectSpread({}, selectedParams), {
+    return _objectSpread({}, selectedParams, {}, {
       username,
       currencyIdList: selectedCurrency,
       vipOption: selectedVipOption,

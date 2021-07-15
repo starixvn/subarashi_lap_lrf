@@ -268,14 +268,14 @@ const Content = props => {
   } = Object(_jsroot_customHooks_pagingHooks__WEBPACK_IMPORTED_MODULE_11__["usePagingOption"])();
 
   const handleSort = (sortBy, sortOrder) => {
-    setRequestParam(_objectSpread(_objectSpread({}, requestParam), {}, {
+    setRequestParam(_objectSpread({}, requestParam, {
       sortBy: sortBy === 'WinLoss' ? 'WinLost' : sortBy,
       sortOrder
     }));
   };
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    const param = _objectSpread(_objectSpread({}, requestParam), {}, {
+    const param = _objectSpread({}, requestParam, {
       pageSize: pagingOption.PageSize,
       pageIndex: pagingOption.PageIndex
     });
@@ -288,7 +288,7 @@ const Content = props => {
         data: result.Data || [],
         total: result.Total
       });
-      setPagingOption(_objectSpread(_objectSpread({}, pagingOption), {}, {
+      setPagingOption(_objectSpread({}, pagingOption, {
         TotalItem: result.TotalRows
       }));
       props.toggleLoader(false);
@@ -457,7 +457,7 @@ const Title = props => {
       toggleLoader
     } = props;
 
-    const param = _objectSpread(_objectSpread({}, requestParam), {}, {
+    const param = _objectSpread({}, requestParam, {
       isExport: true
     });
 
@@ -1283,7 +1283,7 @@ const usePagingOption = (initialValue = defaultPagingOption) => {
   const [pagingOption, setPagingOption] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(_objectSpread({}, initialValue));
 
   const handleChangePaging = (pageIndex, pageSize) => {
-    setPagingOption(_objectSpread(_objectSpread({}, pagingOption), {}, {
+    setPagingOption(_objectSpread({}, pagingOption, {
       PageSize: pageSize,
       PageIndex: pageIndex
     }));
