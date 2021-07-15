@@ -2,8 +2,8 @@
 @{
     var maxDate = DateTime.Today.AddDays(1);
     var threeYearsAgo = DateTime.Today.AddYears(-3);
-    var dateGenData = new DateTime(2021, 1, 1);
-    var minDate = threeYearsAgo < dateGenData ? dateGenData : threeYearsAgo;
+    var minDateSupportData = new DateTime(2021, 6, 1);
+    var minDate = threeYearsAgo < minDateSupportData ? minDateSupportData : threeYearsAgo;
 }
 <div class="page-form">
     @using (Html.BeginForm("Index", "MatchWinLossReport", FormMethod.Post, new { @id = "MatchWinLossForm" }))

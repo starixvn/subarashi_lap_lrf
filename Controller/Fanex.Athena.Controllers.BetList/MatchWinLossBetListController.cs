@@ -54,6 +54,7 @@
             CreateDefaultMetaModel(metaModel);
             InitBaseCurrencyValue(metaModel);
             metaModel.IsServerPaging = true;
+            uspKey = metaModel.FromDate < metaModel.BalanceUpDay ? "Lrf_BetList_MatchWL_Old" : uspKey;
 
             return await ProcessDefaultRequest(metaModel, viewPath, uspKey).ConfigureAwait(false);
         }
@@ -65,7 +66,7 @@
 
             if (string.IsNullOrEmpty(metaModel.UspKey))
             {
-                metaModel.UspKey = "Lrf_BetList_MatchWL_Bettype";
+                metaModel.UspKey = metaModel.FromDate < metaModel.BalanceUpDay ? "Lrf_BetList_MatchWL_Old" : "Lrf_BetList_MatchWL_Bettype";
             }
 
             metaModel.ShowingOption = new ShowingOption
