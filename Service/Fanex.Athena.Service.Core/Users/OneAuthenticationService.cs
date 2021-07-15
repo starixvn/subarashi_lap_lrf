@@ -253,6 +253,7 @@
                 LicenseeId = licenseeInfo.Id,
                 IsAllowedCustomerComm = licenseeInfo.IsAllowedCustomerComm,
                 IsEnableBA = licenseeInfo.IsEnableBA,
+                IsEnableSingleWallet = _licenseeSettingService.IsEnableSingleWallet(licenseeInfo.Name),
                 LicenseeName = licenseeInfo.Name
             };
 

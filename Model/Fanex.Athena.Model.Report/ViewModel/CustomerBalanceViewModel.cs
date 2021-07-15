@@ -14,5 +14,6 @@ namespace Fanex.Athena.Model.Report.ViewModel
     public class CustomerBalanceViewModel : BaseViewModel
     {
         public CustomerBalanceMetaModel Param { get; set; }
+        public bool IsEnableSingleWallet { get; set; }
     }
 }

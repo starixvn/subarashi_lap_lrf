@@ -26,4 +26,5 @@
 @{
     <input type="hidden" id="BetListMetaModel" value="@Model.Param.ToJson()" />
     <input type="hidden" id="HiddenColumnList" value="" />
+    @Html.Hidden("IsEnableSingleWallet", (bool)ViewBag.IsEnableSingleWallet)
 }

@@ -117,6 +117,37 @@ namespace Fanex.Athena.Module.PlayerAdmin.Excel
             row.Cells[cellContentIndex].SetCellValue(value);
         }
 
+        public static void HideColumn(this ISheet sheet, params int[] columnIndex)
+        {
+            // Clear content
+            var firstRowNum = sheet.FirstRowNum;
+            var lastRowNum = sheet.LastRowNum;
+
+            for (int i = firstRowNum; i <= lastRowNum; i++)
+            {
+                foreach (int j in columnIndex)
+                {
+                    var cell = sheet.GetCell(i, j);
+                    if (cell != null)
+                    {
+                        cell.SetCellValue(string.Empty);
+                    }
+                }
+            }
+
+            // Hide column
+            foreach (int i in columnIndex)
+            {
+                sheet.SetColumnWidth(i, 0);
+                sheet.SetColumnHidden(i, true);
+            }
+        }
+
+        public static ICell GetCell(this ISheet sheet, int rowIndex, int colIndex)
+        {
+            return sheet.GetRow(rowIndex).GetCell(colIndex);
+        }
+
         public static int MergeCols(this ISheet sheet, int firstCol, int lastCol, int rowIndex)
         {
             var firstRow = rowIndex;

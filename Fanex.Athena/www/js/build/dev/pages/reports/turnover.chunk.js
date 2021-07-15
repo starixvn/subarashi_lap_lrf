@@ -5995,6 +5995,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             TurnoverOption.hasCustomerComm = Site.asBool($('#IsAllowedCustomerCommission').val());
             TurnoverOption.hasCasinoTransfer = Site.asBool($('#IsAllowedCasinoTransfer').val());
             TurnoverOption.isAllowBa = Site.asBool($('#IsAllowBa').val());
+            TurnoverOption.isEnableSingleWallet = Site.asBool($('#IsEnableSingleWallet').val());
             MultiSelect.initProductList();
             Site.addUserGuide({
                 resourceName: 'Turnover',
@@ -6445,6 +6446,13 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             turnoverBAColumn.hidden = !_me.isAllowBa;
             commBAColumn.hidden = !_me.isAllowBa;
             amountDueToBAColumn.hidden = !_me.isAllowBa;
+
+            //Column hidden by single wallet lic
+            const isHiddenBySingleWalletLic = !!_me.isEnableSingleWallet;
+            openingBalanceColumn.hidden = isHiddenBySingleWalletLic;
+            depositColumn.hidden = isHiddenBySingleWalletLic;
+            withdrawalColumn.hidden = isHiddenBySingleWalletLic;
+            closingBalanceColumn.hidden = isHiddenBySingleWalletLic;
 
             return colModelList;
         };

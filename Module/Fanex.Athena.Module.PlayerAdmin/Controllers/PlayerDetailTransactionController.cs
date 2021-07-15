@@ -30,7 +30,12 @@
         [FunctionAuthorization(PermissionKeys.PlayerDetailTransaction)]
         public ViewResult Index(int custId, int currencyId)
         {
-            var viewModel = new PlayerDetailTransactionReportViewModel { CustId = custId, CurrencyId = currencyId };
+            var viewModel = new PlayerDetailTransactionReportViewModel 
+            { 
+                CustId = custId,
+                CurrencyId = currencyId,
+                IsEnableSingleWallet = SessionServiceInstance.LicenseeSession.IsEnableSingleWallet
+            };
             return View("~/Views/Desktop/Module/PlayerAdmin/PlayerDetailTransaction/Index.cshtml", viewModel);
         }
 
@@ -52,9 +57,11 @@
         [FunctionAuthorization(PermissionKeys.PlayerDetailTransaction)]
         public async Task<ActionResult> ExportDetailTransactionReport(PlayerDetailTransactionsMetaModel criteria)
         {
+            var isEnableSingleWallet = SessionServiceInstance.LicenseeSession.IsEnableSingleWallet;
             criteria.PageSize = null;
             criteria.PageIndex = null;
             var data = await _playerDetailTransactionService.GetDetailTransactionReport(criteria);
+            data.IsEnableSingleWallet = isEnableSingleWallet;
 
             var templatePath = Server.MapPath(@"~/App_Data/Template/PlayerAdmin/DetailTransaction.xls");
             _excelService.SetData(templatePath, data);

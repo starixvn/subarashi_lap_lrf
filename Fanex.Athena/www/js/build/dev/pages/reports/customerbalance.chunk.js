@@ -5298,6 +5298,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         function initSetting() {
             CustomerBalanceOption.hasCustomerComm = Site.asBool($('#IsAllowedCustomerCommission').val());
             CustomerBalanceOption.isAllowBA = Site.asBool($('#IsAllowedBACommission').val());
+            CustomerBalanceOption.isEnableSingleWallet = Site.asBool($('#IsEnableSingleWallet').val());
         }
 
         function submit() {
@@ -5467,268 +5468,268 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         'use strict';
 
         const indexColumn =
-            {
-                name: 'index',
-                index: 'Index',
-                resizable: false,
-                width: 40,
-                align: 'center',
-                valign: 'middle',
-                sortable: false
-            };
+        {
+            name: 'index',
+            index: 'Index',
+            resizable: false,
+            width: 40,
+            align: 'center',
+            valign: 'middle',
+            sortable: false
+        };
 
         const externalIdColumn =
-            {
-                name: 'externalId',
-                index: 'ExternalId',
-                resizable: false,
-                width: 120,
-                align: 'left',
-                valign: 'middle',
-                sortable: false,
-                cellattr: function () {
-                    return ' style="text-overflow: ellipsis"';
-                }
-            };
+        {
+            name: 'externalId',
+            index: 'ExternalId',
+            resizable: false,
+            width: 120,
+            align: 'left',
+            valign: 'middle',
+            sortable: false,
+            cellattr: function () {
+                return ' style="text-overflow: ellipsis"';
+            }
+        };
 
         const systemIdColumn =
-            {
-                name: 'systemId',
-                index: 'SystemId',
-                resizable: false,
-                width: 120,
-                align: 'left',
-                valign: 'middle',
-                sortable: false
-            };
+        {
+            name: 'systemId',
+            index: 'SystemId',
+            resizable: false,
+            width: 120,
+            align: 'left',
+            valign: 'middle',
+            sortable: false
+        };
 
         const openingBalanceColumn =
-            {
-                name: 'openingBalance',
-                index: 'OpeningBalance',
-                width: 110,
-                align: 'right',
-                sortable: true,
-                resizable: false,
-                formatter: 'currency',
-                formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
-            };
+        {
+            name: 'openingBalance',
+            index: 'OpeningBalance',
+            width: 110,
+            align: 'right',
+            sortable: true,
+            resizable: false,
+            formatter: 'currency',
+            formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
+        };
 
         const depositColumn =
-            {
-                name: 'deposit',
-                index: 'Deposit',
-                width: 90,
-                align: 'right',
-                sortable: true,
-                resizable: false,
-                formatter: 'currency',
-                formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
-            };
+        {
+            name: 'deposit',
+            index: 'Deposit',
+            width: 90,
+            align: 'right',
+            sortable: true,
+            resizable: false,
+            formatter: 'currency',
+            formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
+        };
 
         const withdrawalColumn =
-            {
-                name: 'withdrawal',
-                index: 'Withdrawal',
-                width: 100,
-                align: 'right',
-                sortable: true,
-                resizable: false,
-                formatter: 'currency',
-                formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
-            };
+        {
+            name: 'withdrawal',
+            index: 'Withdrawal',
+            width: 100,
+            align: 'right',
+            sortable: true,
+            resizable: false,
+            formatter: 'currency',
+            formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
+        };
 
         const bonusColumn =
-            {
-                name: 'bonus',
-                index: 'Bonus',
-                width: 60,
-                align: 'right',
-                sortable: false,
-                resizable: false,
-                formatter: 'currency',
-                formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
-            };
+        {
+            name: 'bonus',
+            index: 'Bonus',
+            width: 60,
+            align: 'right',
+            sortable: false,
+            resizable: false,
+            formatter: 'currency',
+            formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
+        };
 
         const adjustmentColumn =
-            {
-                name: 'adjustment',
-                index: 'Adjustment',
-            	width: 100,
-                align: 'right',
-                sortable: false,
-                resizable: false,
-                formatter: 'currency',
-                formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
-            };
+        {
+            name: 'adjustment',
+            index: 'Adjustment',
+            width: 100,
+            align: 'right',
+            sortable: false,
+            resizable: false,
+            formatter: 'currency',
+            formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
+        };
 
         const promotionColumn =
-            {
-                name: 'promotion',
-                index: 'Promotion',
-                width: 80,
-                align: 'right',
-                sortable: false,
-                resizable: false,
-                formatter: 'currency',
-                formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
-            };
+        {
+            name: 'promotion',
+            index: 'Promotion',
+            width: 80,
+            align: 'right',
+            sortable: false,
+            resizable: false,
+            formatter: 'currency',
+            formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
+        };
 
         const turnoverColumn =
-            {
-                name: 'turnover',
-                index: 'Turnover',
-                width: 100,
-                align: 'right',
-                sortable: true,
-                resizable: false,
-                formatter: 'currency',
-                formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
-            };
+        {
+            name: 'turnover',
+            index: 'Turnover',
+            width: 100,
+            align: 'right',
+            sortable: true,
+            resizable: false,
+            formatter: 'currency',
+            formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
+        };
 
         const drawGameColumn =
-            {
-                name: 'drawGame',
-                index: 'DrawGame',
-                width: 100,
-                align: 'right',
-                sortable: false,
-                resizable: false,
-                formatter: 'currency',
-                formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
-            };
+        {
+            name: 'drawGame',
+            index: 'DrawGame',
+            width: 100,
+            align: 'right',
+            sortable: false,
+            resizable: false,
+            formatter: 'currency',
+            formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
+        };
 
         const netTurnoverColumn =
-            {
-                name: 'netTurnover',
-                index: 'NetTurnover',
-                width: 100,
-                align: 'right',
-                sortable: false,
-                resizable: false,
-                formatter: 'currency',
-                formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
-            };
+        {
+            name: 'netTurnover',
+            index: 'NetTurnover',
+            width: 100,
+            align: 'right',
+            sortable: false,
+            resizable: false,
+            formatter: 'currency',
+            formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
+        };
 
         const pendingFundsColumn =
-            {
-                name: 'pendingFunds',
-                index: 'PendingFunds',
-                width: 100,
-                align: 'right',
-                sortable: false,
-                resizable: false,
-                formatter: 'currency',
-                formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
-            };
+        {
+            name: 'pendingFunds',
+            index: 'PendingFunds',
+            width: 100,
+            align: 'right',
+            sortable: false,
+            resizable: false,
+            formatter: 'currency',
+            formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
+        };
 
         const customerWinLossMergeColumn =
-            {
-                name: 'winLoss',
-                index: 'CustomerW_L',
-                width: 200,
-                align: 'right',
-                sortable: true,
-                resizable: false,
-                formatter: 'currency',
-                formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
-            };
+        {
+            name: 'winLoss',
+            index: 'CustomerW_L',
+            width: 200,
+            align: 'right',
+            sortable: true,
+            resizable: false,
+            formatter: 'currency',
+            formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
+        };
 
         const customerWinLossColumn =
-            {
-                name: 'winLoss',
-                index: 'CustomerWinLoss',
-                width: 100,
-                align: 'right',
-                sortable: true,
-                resizable: false,
-                formatter: 'currency',
-                formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
-            };
+        {
+            name: 'winLoss',
+            index: 'CustomerWinLoss',
+            width: 100,
+            align: 'right',
+            sortable: true,
+            resizable: false,
+            formatter: 'currency',
+            formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
+        };
 
         const customerCommColumn =
-            {
-                name: 'playerComm',
-                index: 'CustomerComm',
-                width: 80,
-                align: 'right',
-                sortable: false,
-                resizable: false,
-                formatter: 'currency',
-                formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
-            };
+        {
+            name: 'playerComm',
+            index: 'CustomerComm',
+            width: 80,
+            align: 'right',
+            sortable: false,
+            resizable: false,
+            formatter: 'currency',
+            formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
+        };
 
         const customerTotalColumn =
-            {
-                name: 'totalWL',
-                index: 'CustomerTotal',
-                width: 100,
-                align: 'right',
-                sortable: false,
-                resizable: false,
-                formatter: 'currency',
-                formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
-            };
+        {
+            name: 'totalWL',
+            index: 'CustomerTotal',
+            width: 100,
+            align: 'right',
+            sortable: false,
+            resizable: false,
+            formatter: 'currency',
+            formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
+        };
 
         const closingBalanceColumn =
-            {
-                name: 'closingBalance',
-                index: 'ClosingBalance',
-                width: 100,
-                align: 'right',
-                sortable: true,
-                resizable: false,
-                formatter: 'currency',
-                formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
-            };
+        {
+            name: 'closingBalance',
+            index: 'ClosingBalance',
+            width: 100,
+            align: 'right',
+            sortable: true,
+            resizable: false,
+            formatter: 'currency',
+            formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
+        };
 
         const affiliateTransferColumn =
-            {
-                name: 'affiliateTransfer',
-                index: 'AffiliateTransfer',
-                width: 100,
-                align: 'right',
-                sortable: false,
-                resizable: false,
-                formatter: 'currency',
-                formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
-            };
+        {
+            name: 'affiliateTransfer',
+            index: 'AffiliateTransfer',
+            width: 100,
+            align: 'right',
+            sortable: false,
+            resizable: false,
+            formatter: 'currency',
+            formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
+        };
 
         const productBATurnoverColumn =
-            {
-                name: 'turnoverBA',
-                index: 'ProductBATurnover',
-                width: 100,
-                align: 'right',
-                sortable: false,
-                resizable: false,
-                formatter: 'currency',
-                formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
-            };
+        {
+            name: 'turnoverBA',
+            index: 'ProductBATurnover',
+            width: 100,
+            align: 'right',
+            sortable: false,
+            resizable: false,
+            formatter: 'currency',
+            formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
+        };
 
         const productBACommColumn =
-            {
-                name: 'commBA',
-                index: 'ProductBAComm',
-                width: 80,
-                align: 'right',
-                sortable: false,
-                resizable: false,
-                formatter: 'currency',
-                formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
-            };
+        {
+            name: 'commBA',
+            index: 'ProductBAComm',
+            width: 80,
+            align: 'right',
+            sortable: false,
+            resizable: false,
+            formatter: 'currency',
+            formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
+        };
 
         const productBAAmountDueToColumn =
-            {
-                name: 'amountDueToBA',
-                index: 'ProductBAAmountDueTo',
-                width: 100,
-                align: 'right',
-                sortable: false,
-                resizable: false,
-                formatter: 'currency',
-                formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
-            };
+        {
+            name: 'amountDueToBA',
+            index: 'ProductBAAmountDueTo',
+            width: 100,
+            align: 'right',
+            sortable: false,
+            resizable: false,
+            formatter: 'currency',
+            formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
+        };
 
         const colNameList = [
             '#',
@@ -5787,133 +5788,141 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         }
 
         const _me =
+        {
+            urlData: 'CustomerBalanceReport/Index',
+            urlExcelData: 'CustomerBalanceReport/ExportExcel',
+            hasCustomerComm: true,
+            isEnableSingleWallet: false,
+            isAllowBA: true,
+            customerCommIndex: 12,
+            productBAIndex: 14,
+            totalColspan: 3,
+            gridOption:
             {
-                urlData: 'CustomerBalanceReport/Index',
-                urlExcelData: 'CustomerBalanceReport/ExportExcel',
-                hasCustomerComm: true,
-                isAllowBA: true,
-                customerCommIndex: 12,
-                productBAIndex: 14,
-                totalColspan: 3,
-                gridOption:
+                datatype: 'local',
+                colNames: [],
+                colModel: [],
+                data: [],
+                height: '100%',
+                autowidth: false,
+                forceFit: false,
+                shrinkToFit: true,
+                loadtext: '',
+                loadui: 'disable',
+                loadonce: true,
+                footerrow: true,
+                userDataOnFooter: false,
+                gridview: true,
+                rownumbers: false,
+                sortable: false
+            },
+
+            getGridOption: function (totalRows) {
+                _me.gridOption.colNames = _me.getColName();
+                _me.gridOption.colModel = _me.getColModel(totalRows);
+                return Site.clone(_me.gridOption);
+            },
+
+            setGroupHeaderColumns: function ($grid) {
+                const groupCustomerWinloss = _me.hasCustomerComm ?
                     {
-                        datatype: 'local',
-                        colNames: [],
-                        colModel: [],
-                        data: [],
-                        height: '100%',
-                        autowidth: false,
-                        forceFit: false,
-                        shrinkToFit: true,
-                        loadtext: '',
-                        loadui: 'disable',
-                        loadonce: true,
-                        footerrow: true,
-                        userDataOnFooter: false,
-                        gridview: true,
-                        rownumbers: false,
-                        sortable: false
-                    },
+                        startColumnName: 'winLoss',
+                        numberOfColumns: 3,
+                        titleText: Site.getSingleResource('CustomerW_L')
+                    } : {};
 
-                getGridOption: function (totalRows) {
-                    _me.gridOption.colNames = _me.getColName();
-                    _me.gridOption.colModel = _me.getColModel(totalRows);
-                    return Site.clone(_me.gridOption);
-                },
+                const groupProductBA = _me.isAllowBA ?
+                    {
+                        startColumnName: 'turnoverBA',
+                        numberOfColumns: 3,
+                        titleText: Site.getSingleResource('ProductBA')
+                    } : {};
 
-                setGroupHeaderColumns: function ($grid) {
-                    const groupCustomerWinloss = _me.hasCustomerComm ?
-                        {
-                            startColumnName: 'winLoss',
-                            numberOfColumns: 3,
-                            titleText: Site.getSingleResource('CustomerW_L')
-                        } : {};
+                $grid.jqGrid('setGroupHeaders',
+                    {
+                        useColSpanStyle: true,
+                        groupHeaders: [groupCustomerWinloss, groupProductBA]
+                    });
+            },
 
-                    const groupProductBA = _me.isAllowBA ?
-                        {
-                            startColumnName: 'turnoverBA',
-                            numberOfColumns: 3,
-                            titleText: Site.getSingleResource('ProductBA')
-                        } : {};
+            getColName: function () {
+                const colNames = Site.clone(colNameList);
 
-                    $grid.jqGrid('setGroupHeaders',
-                        {
-                            useColSpanStyle: true,
-                            groupHeaders: [groupCustomerWinloss, groupProductBA]
-                        });
-                },
-
-                getColName: function () {
-                    const colNames = Site.clone(colNameList);
-
-                    if (_me.hasCustomerComm) {
-                        insertColumns(colNames, CUSTOMER_WL_COLUMNS_CONFIG.ColNames, _me.customerCommIndex);
-                    }
-                    else {
-                        insertColumns(colNames, CUSTOMER_WL_COLUMNS_CONFIG.ColMergeName, _me.customerCommIndex);
-                    }
-
-                    _me.productBAIndex = colNames.length - 1;
-
-                    if (_me.isAllowBA) {
-                        insertColumns(colNames, BA_COLUMNS_CONFIG.ColNames, _me.productBAIndex);
-                    }
-
-                    return Site.getResources(colNames);
-                },
-
-                getColModel: function (totalRows) {
-                    const colModels = Site.clone(colModelList);
-
-                    if (_me.hasCustomerComm) {
-                        insertColumns(colModels, CUSTOMER_WL_COLUMNS_CONFIG.ColModels, _me.customerCommIndex);
-                    }
-                    else {
-                        insertColumns(colModels, CUSTOMER_WL_COLUMNS_CONFIG.ColMergeModel, _me.customerCommIndex);
-                    }
-
-                    _me.productBAIndex = colModels.length - 1;
-
-                    if (_me.isAllowBA) {
-                        insertColumns(colModels, BA_COLUMNS_CONFIG.ColModels, _me.productBAIndex);
-                    }
-
-                    if (totalRows <= 1) {
-                        $.each(colModels, function (index, item) {
-                            item.sortable = false;
-                        });
-                    }
-
-                    return colModels;
-                },
-
-                getOrderColumnCode: function (indexColumn, sortType) {
-                    if (sortType === 'asc' && indexColumn !== customerWinLossColumn.index && indexColumn !== customerWinLossMergeColumn.index) {
-                        return 0;
-                    }
-
-                    switch (indexColumn) {
-                        case customerWinLossColumn.index:
-                        case customerWinLossMergeColumn.index:
-                            if (sortType === 'desc') {
-                                return 4;
-                            }
-                            return 5;
-                        case depositColumn.index:
-                            return 1;
-                        case withdrawalColumn.index:
-                            return 2;
-                        case turnoverColumn.index:
-                            return 3;
-                        case openingBalanceColumn.index:
-                            return 6;
-                        case closingBalanceColumn.index:
-                            return 7;
-                        default:
-                            return 0;
-                    }
+                if (_me.hasCustomerComm) {
+                    insertColumns(colNames, CUSTOMER_WL_COLUMNS_CONFIG.ColNames, _me.customerCommIndex);
                 }
-            };
+                else {
+                    insertColumns(colNames, CUSTOMER_WL_COLUMNS_CONFIG.ColMergeName, _me.customerCommIndex);
+                }
+
+                _me.productBAIndex = colNames.length - 1;
+
+                if (_me.isAllowBA) {
+                    insertColumns(colNames, BA_COLUMNS_CONFIG.ColNames, _me.productBAIndex);
+                }
+
+                return Site.getResources(colNames);
+            },
+
+            getColModel: function (totalRows) {
+                //Column hidden by single wallet lic
+                const isHiddenBySingleWalletLic = !!_me.isEnableSingleWallet;
+                openingBalanceColumn.hidden = isHiddenBySingleWalletLic;
+                depositColumn.hidden = isHiddenBySingleWalletLic;
+                withdrawalColumn.hidden = isHiddenBySingleWalletLic;
+                closingBalanceColumn.hidden = isHiddenBySingleWalletLic;
+
+                const colModels = Site.clone(colModelList);
+
+                if (_me.hasCustomerComm) {
+                    insertColumns(colModels, CUSTOMER_WL_COLUMNS_CONFIG.ColModels, _me.customerCommIndex);
+                }
+                else {
+                    insertColumns(colModels, CUSTOMER_WL_COLUMNS_CONFIG.ColMergeModel, _me.customerCommIndex);
+                }
+
+                _me.productBAIndex = colModels.length - 1;
+
+                if (_me.isAllowBA) {
+                    insertColumns(colModels, BA_COLUMNS_CONFIG.ColModels, _me.productBAIndex);
+                }
+
+                if (totalRows <= 1) {
+                    $.each(colModels, function (index, item) {
+                        item.sortable = false;
+                    });
+                }
+
+                return colModels;
+            },
+
+            getOrderColumnCode: function (indexColumn, sortType) {
+                if (sortType === 'asc' && indexColumn !== customerWinLossColumn.index && indexColumn !== customerWinLossMergeColumn.index) {
+                    return 0;
+                }
+
+                switch (indexColumn) {
+                    case customerWinLossColumn.index:
+                    case customerWinLossMergeColumn.index:
+                        if (sortType === 'desc') {
+                            return 4;
+                        }
+                        return 5;
+                    case depositColumn.index:
+                        return 1;
+                    case withdrawalColumn.index:
+                        return 2;
+                    case turnoverColumn.index:
+                        return 3;
+                    case openingBalanceColumn.index:
+                        return 6;
+                    case closingBalanceColumn.index:
+                        return 7;
+                    default:
+                        return 0;
+                }
+            }
+        };
         return _me;
     }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));

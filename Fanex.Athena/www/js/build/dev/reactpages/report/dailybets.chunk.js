@@ -968,7 +968,7 @@ function mapStateToProps(state) {
   });
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(AppContainer)));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(AppContainer)));
 
 /***/ }),
 
@@ -1048,13 +1048,13 @@ const DataGrid = props => {
     body: Object(_lib_gridUtils__WEBPACK_IMPORTED_MODULE_5__["renderDataSection"])(dataList),
     footer: Object(_lib_gridUtils__WEBPACK_IMPORTED_MODULE_5__["renderDataSection"])([total], true),
     containerPadding: 30,
-    onSort: (sortBy, sortOrder) => props.setRequestParam(_objectSpread(_objectSpread({}, requestParam), {}, {
+    onSort: (sortBy, sortOrder) => props.setRequestParam(_objectSpread({}, requestParam, {
       sortBy,
       sortOrder
     })),
     isPaging: true,
     pageOption: pagingOption,
-    onPaging: (pageIndex, pageSize) => props.setRequestParam(_objectSpread(_objectSpread({}, requestParam), {}, {
+    onPaging: (pageIndex, pageSize) => props.setRequestParam(_objectSpread({}, requestParam, {
       pageSize,
       pageIndex
     }))
@@ -1402,7 +1402,7 @@ const requestParam = {
   date: today
 };
 
-const defaultState = _objectSpread(_objectSpread({}, initialState), {}, {
+const defaultState = _objectSpread({}, initialState, {
   requestParam
 });
 
@@ -1725,7 +1725,7 @@ const defaultPagingOption = {
 };
 const pagingOption = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(defaultPagingOption, {
   [_actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_PAGING_OPTION"]](prevState, action) {
-    return _objectSpread(_objectSpread({}, prevState), action.data);
+    return _objectSpread({}, prevState, {}, action.data);
   }
 
 });

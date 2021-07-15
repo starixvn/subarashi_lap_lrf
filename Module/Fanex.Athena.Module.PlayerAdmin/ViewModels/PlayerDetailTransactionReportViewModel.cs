@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
+    using Newtonsoft.Json;
 
     public class PlayerDetailTransactionReportViewModel
     {
@@ -57,5 +58,8 @@
         public string FromDateStr => FromDate.ToString("MM/dd/yyyy");
 
         public string ToDateStr => ToDate.ToString("MM/dd/yyyy");
+
+        [JsonIgnore]
+        public bool IsEnableSingleWallet { get; set; }
     }
 }

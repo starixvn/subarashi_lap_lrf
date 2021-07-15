@@ -79,18 +79,23 @@ define(['jquery', 'common/site'], function ($, Site) {
             datatype: 'local',
             height: 'auto',
             rowNum: 5000,
-            colModel: columnModel,
-            colNames: [],
             autowidth: false,
             shrinkToFit: true,
             gridview: true,
             footerrow: false,
             cmTemplate: { sortable: false }
-        },
-        getColNames: function () {
-            return Site.getResources(columnNames);
         }
     };
+
+    _me.getGridOption = function () {
+        _me.gridOption.colNames = Site.getResources(columnNames);
+        _me.gridOption.colModel = columnModel;
+
+        const isEnableSingleWallet = Site.asBool($('#IsEnableSingleWallet').val());
+        balance.hidden = !!isEnableSingleWallet;
+
+        return _me.gridOption;
+    } 
 
     return _me;
 });

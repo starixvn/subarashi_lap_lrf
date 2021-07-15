@@ -7,6 +7,8 @@ namespace Fanex.Athena.Service.StatelessCore.Interfaces
     {
         bool IsFakeLicensee(string licenseeName);
 
+        bool IsEnableSingleWallet(string licenseeName);
+
         bool IsAuthorizedOnBetList(string licenseeName);
 
         FakeLicenseeSetting GetFakeLicenseeSetting(string licenseeName);

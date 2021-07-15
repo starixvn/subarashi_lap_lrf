@@ -23,6 +23,8 @@ namespace Fanex.Athena.Model.Report.ViewModel
 
         public bool IsAllowedCasinoTransfer { get; set; }
 
+        public bool IsEnableSingleWallet { get; set; }
+
         public bool IsFakeLicensee { get; set; }
     }
 }
