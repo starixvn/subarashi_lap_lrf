@@ -28,6 +28,7 @@ namespace Fanex.Athena.Api.BetList
     public class MatchWinLossBetListController : ApiBetListBaseController
     {
         private readonly ICurrencyValidation _currencyValidation;
+        private readonly string STR_SP_BETLIST_MATCHWL_OLD = "Lrf_BetList_MatchWL_Old";
 
         public MatchWinLossBetListController(
             ILanguageService languageService,
@@ -48,7 +49,8 @@ namespace Fanex.Athena.Api.BetList
             int rows,
             [FromUri]BetListMetaModel metaModel)
         {
-            const string UspKey = "Lrf_BetList_SelWinLossByBetType";
+            var balanceUp = GetBalanceUp();
+            string UspKey = metaModel.FromDate < balanceUp.BalanceUpDay ? STR_SP_BETLIST_MATCHWL_OLD : "Lrf_BetList_SelWinLossByBetType";
 
             return await GetPagingBetListResult(metaModel, UspKey, page, rows).ConfigureAwait(false);
         }
@@ -61,7 +63,7 @@ namespace Fanex.Athena.Api.BetList
             [FromUri]BetListMetaModel metaModel)
         {
             var balanceUp = GetBalanceUp();
-            string UspKey = metaModel.FromDate < balanceUp.BalanceUpDay ? "Lrf_BetList_MatchWL_Old" : "Lrf_BetList_MatchWL_Bettype";
+            string UspKey = metaModel.FromDate < balanceUp.BalanceUpDay ? STR_SP_BETLIST_MATCHWL_OLD : "Lrf_BetList_MatchWL_Bettype";
 
             return await GetPagingBetListResult(metaModel, UspKey, page, rows).ConfigureAwait(false);
         }
@@ -78,7 +80,7 @@ namespace Fanex.Athena.Api.BetList
             metaModel.IsServerPaging = true;
 
             var balanceUp = GetBalanceUp();
-            string UspKey = metaModel.FromDate < balanceUp.BalanceUpDay ? "Lrf_BetList_MatchWL_Old" : "Lrf_BetList_MatchWL_Outright";
+            string UspKey = metaModel.FromDate < balanceUp.BalanceUpDay ? STR_SP_BETLIST_MATCHWL_OLD : "Lrf_BetList_MatchWL_Outright";
             return await GetBetListResult(metaModel, UspKey).ConfigureAwait(false);
         }
 
@@ -101,7 +103,7 @@ namespace Fanex.Athena.Api.BetList
                 && _currencyValidation.IsValidCurrency(currencyId))
             {
                 var balanceUp = GetBalanceUp();
-                string UspKey = fromDate.Date < balanceUp.BalanceUpDay ? "Lrf_BetList_MatchWL_Old" : "Lrf_BetList_MatchWL_Parlay";
+                string UspKey = fromDate.Date < balanceUp.BalanceUpDay ? STR_SP_BETLIST_MATCHWL_OLD : "Lrf_BetList_MatchWL_Parlay";
                 var metaModel = new BetListMetaModel
                 {
                     LicenseeId = SessionService.LicenseeSession.LicenseeId,
