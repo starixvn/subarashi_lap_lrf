@@ -2755,7 +2755,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
             params.userName = userName;
             params.nickName = nickName;
             params.id = $('#IDList').val();
-            param.custIds = $('#CustIds').val();
+            params.custIds = $('#CustIds').val();
 
             BetSettingBase.updateBetSetting(url, params);
         }
@@ -2764,7 +2764,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
     return _me;
 }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-
 
 /***/ }),
 
