@@ -2418,8 +2418,14 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                 if (isProductOriginalChecked('BA')) {
                     productCodeList.push('BA');
                 }
+                if (isProductOriginalChecked('VS')) {
+                    productCodeList.push('VS');
+                }
                 if (isProductOriginalChecked('VS2')) {
                     productCodeList.push('VS2');
+                }
+                if (isProductOriginalChecked('NG')) {
+                    productCodeList.push('NG');
                 }
                 url = Site.setProductCodeListParam(url, productCodeList);
 

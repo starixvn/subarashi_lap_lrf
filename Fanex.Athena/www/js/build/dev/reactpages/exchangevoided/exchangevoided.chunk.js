@@ -485,6 +485,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+const _excluded = ["content", "tag"];
+
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
@@ -494,12 +496,12 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 
 
 
-const ReportTitle = (_ref) => {
+const ReportTitle = _ref => {
   let {
     content,
     tag
   } = _ref,
-      attrs = _objectWithoutProperties(_ref, ["content", "tag"]);
+      attrs = _objectWithoutProperties(_ref, _excluded);
 
   const Tag = tag;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -622,6 +624,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+const _excluded = ["tag", "className", "style"];
+
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
@@ -676,7 +680,7 @@ class CollapsiblePanel extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Comp
       className,
       style
     } = iconToggle,
-          attrs = _objectWithoutProperties(iconToggle, ["tag", "className", "style"]);
+          attrs = _objectWithoutProperties(iconToggle, _excluded);
 
     const IconTag = tag;
     const iconStyle = style || {
@@ -789,7 +793,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "bodyCellStyle", function() { return bodyCellStyle; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "totalCellStyle", function() { return totalCellStyle; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "grandTotalCellStyle", function() { return grandTotalCellStyle; });
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
@@ -852,17 +856,17 @@ const bodyDecimalStyle = {
 const bodyCellStyle = {
   rowspan: bodyTextStyle,
   center: {
-    alignment: _objectSpread({}, bodyTextStyle.alignment, {
+    alignment: _objectSpread(_objectSpread({}, bodyTextStyle.alignment), {}, {
       horizontal: "center"
     })
   },
   left: {
-    alignment: _objectSpread({}, bodyTextStyle.alignment, {
+    alignment: _objectSpread(_objectSpread({}, bodyTextStyle.alignment), {}, {
       horizontal: "left"
     })
   },
   right: {
-    alignment: _objectSpread({}, bodyTextStyle.alignment, {
+    alignment: _objectSpread(_objectSpread({}, bodyTextStyle.alignment), {}, {
       horizontal: "right"
     })
   },
@@ -870,7 +874,7 @@ const bodyCellStyle = {
     numFmt: "#,##0"
   },
   decimal: bodyDecimalStyle,
-  negativeDecimal: _objectSpread({}, bodyDecimalStyle, {
+  negativeDecimal: _objectSpread(_objectSpread({}, bodyDecimalStyle), {}, {
     font: {
       color: {
         rgb: "FF0000"
@@ -887,29 +891,29 @@ const totalTextStyle = {
   }
 };
 
-const totalDecimalStyle = _objectSpread({}, totalTextStyle, {
+const totalDecimalStyle = _objectSpread(_objectSpread({}, totalTextStyle), {}, {
   numFmt: "#,##0.00"
 });
 
 const totalCellStyle = {
   default: totalTextStyle,
-  rowspan: _objectSpread({}, totalTextStyle, {
+  rowspan: _objectSpread(_objectSpread({}, totalTextStyle), {}, {
     alignment: {
       horizontal: "center",
       vertical: "center"
     }
   }),
-  center: _objectSpread({}, totalTextStyle, {
+  center: _objectSpread(_objectSpread({}, totalTextStyle), {}, {
     alignment: {
       vertical: "center",
       horizontal: "center"
     }
   }),
-  number: _objectSpread({}, totalTextStyle, {
+  number: _objectSpread(_objectSpread({}, totalTextStyle), {}, {
     numFmt: "#,##0"
   }),
   decimal: totalDecimalStyle,
-  negativeDecimal: _objectSpread({}, totalDecimalStyle, {
+  negativeDecimal: _objectSpread(_objectSpread({}, totalDecimalStyle), {}, {
     font: {
       bold: true,
       color: {
@@ -938,28 +942,28 @@ const grandTotalTextStyle = {
   }
 };
 
-const decimalGrandTotalStyle = _objectSpread({}, grandTotalTextStyle, {
+const decimalGrandTotalStyle = _objectSpread(_objectSpread({}, grandTotalTextStyle), {}, {
   numFmt: "#,##0.00"
 });
 
 const grandTotalCellStyle = {
   default: grandTotalTextStyle,
-  rowspan: _objectSpread({}, grandTotalTextStyle, {
+  rowspan: _objectSpread(_objectSpread({}, grandTotalTextStyle), {}, {
     alignment: {
       horizontal: "center",
       vertical: "center"
     }
   }),
-  center: _objectSpread({}, grandTotalTextStyle, {
+  center: _objectSpread(_objectSpread({}, grandTotalTextStyle), {}, {
     alignment: {
       horizontal: "center"
     }
   }),
-  number: _objectSpread({}, grandTotalTextStyle, {
+  number: _objectSpread(_objectSpread({}, grandTotalTextStyle), {}, {
     numFmt: "#,##0"
   }),
   decimal: decimalGrandTotalStyle,
-  negativeDecimal: _objectSpread({}, decimalGrandTotalStyle, {
+  negativeDecimal: _objectSpread(_objectSpread({}, decimalGrandTotalStyle), {}, {
     font: {
       bold: true,
       color: {
@@ -967,7 +971,7 @@ const grandTotalCellStyle = {
       }
     }
   }),
-  percent: _objectSpread({}, grandTotalTextStyle, {
+  percent: _objectSpread(_objectSpread({}, grandTotalTextStyle), {}, {
     numFmt: "#,##0.00%"
   })
 };
@@ -1638,7 +1642,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_components_ReportTitle__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/components/ReportTitle */ "./www/js/source/reactpages/components/ReportTitle.jsx");
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _jsroot_components_SimplePagination__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @jsroot/components/SimplePagination */ "./www/js/source/reactpages/components/SimplePagination.jsx");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
@@ -1690,10 +1694,10 @@ const DataGrid = props => {
   }, [props.gridData]);
 
   const handleChangePaging = pageIndex => {
-    setPagingOption(_objectSpread({}, pagingOption, {
+    setPagingOption(_objectSpread(_objectSpread({}, pagingOption), {}, {
       pageIndex
     }));
-    props.setRequestParam(_objectSpread({}, props.requestParam, {
+    props.setRequestParam(_objectSpread(_objectSpread({}, props.requestParam), {}, {
       pageIndex
     }));
   };
@@ -1783,7 +1787,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _9softstudio_react_datepicker__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_9softstudio_react_datepicker__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _Note__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Note */ "./www/js/source/reactpages/pages/exchangevoided/components/Note.jsx");
 /* harmony import */ var _jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/components/collapsible-panel */ "./www/js/source/reactpages/components/collapsible-panel/index.jsx");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+const _excluded = ["isFilterCollapsing"];
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
@@ -1812,9 +1818,9 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0___default.a.PureCompon
             {
         isFilterCollapsing
       } = _this$state,
-            inputParam = _objectWithoutProperties(_this$state, ["isFilterCollapsing"]);
+            inputParam = _objectWithoutProperties(_this$state, _excluded);
 
-      const params = _objectSpread({}, inputParam, {
+      const params = _objectSpread(_objectSpread({}, inputParam), {}, {
         pageIndex: 1
       });
 
@@ -1858,7 +1864,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0___default.a.PureCompon
       });
     });
 
-    this.state = _objectSpread({}, this.props.requestParam, {
+    this.state = _objectSpread(_objectSpread({}, this.props.requestParam), {}, {
       isFilterCollapsing: false
     });
   }
@@ -2393,7 +2399,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requestParam", function() { return requestParam; });
 /* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./www/js/source/reactpages/actions/types.js");
 /* harmony import */ var _lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
