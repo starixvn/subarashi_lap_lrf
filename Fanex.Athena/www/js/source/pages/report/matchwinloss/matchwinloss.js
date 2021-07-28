@@ -180,8 +180,14 @@ define(['jquery', 'common/site', 'common/querystring', 'components/pluginhelper/
                 if (isProductOriginalChecked('BA')) {
                     productCodeList.push('BA');
                 }
+                if (isProductOriginalChecked('VS')) {
+                    productCodeList.push('VS');
+                }
                 if (isProductOriginalChecked('VS2')) {
                     productCodeList.push('VS2');
+                }
+                if (isProductOriginalChecked('NG')) {
+                    productCodeList.push('NG');
                 }
                 url = Site.setProductCodeListParam(url, productCodeList);
 

@@ -51,7 +51,7 @@
         {
             "turnover",
             "betcount",
-            "memberwinlost",
+            "winlost",
             "playercomm",
             "totalwl",
             "licenseewl",
@@ -260,8 +260,8 @@
 
         private void AddExtraColumns()
         {
-            _exportData.Columns.Add("totalwl", typeof(decimal), "memberwinlost + playercomm");
-            _totalData.Columns.Add("sumtotalwl", typeof(decimal), "summemberwinlost + sumplayercomm");
+            _exportData.Columns.Add("totalwl", typeof(decimal), "winlost + playercomm");
+            _totalData.Columns.Add("sumtotalwl", typeof(decimal), "sumwinlost + sumplayercomm");
         }
 
         protected internal virtual void AssignGrandTotalSummary(ISheet sheet, int currentRow)

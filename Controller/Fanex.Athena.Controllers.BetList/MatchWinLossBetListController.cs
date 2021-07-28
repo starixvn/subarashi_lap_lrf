@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="MatchWinLossBetListController.cs" company="">
-// Report controller
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Controllers.BetList
+﻿namespace Fanex.Athena.Controllers.BetList
 {
     using System.Threading.Tasks;
 
@@ -60,6 +54,7 @@ namespace Fanex.Athena.Controllers.BetList
             CreateDefaultMetaModel(metaModel);
             InitBaseCurrencyValue(metaModel);
             metaModel.IsServerPaging = true;
+            uspKey = metaModel.FromDate < metaModel.BalanceUpDay ? "Lrf_BetList_MatchWL_Old" : uspKey;
 
             return await ProcessDefaultRequest(metaModel, viewPath, uspKey).ConfigureAwait(false);
         }
@@ -71,7 +66,7 @@ namespace Fanex.Athena.Controllers.BetList
 
             if (string.IsNullOrEmpty(metaModel.UspKey))
             {
-                metaModel.UspKey = "Lrf_BetList_MatchWL_Bettype";
+                metaModel.UspKey = metaModel.FromDate < metaModel.BalanceUpDay ? "Lrf_BetList_MatchWL_Old" : "Lrf_BetList_MatchWL_Bettype";
             }
 
             metaModel.ShowingOption = new ShowingOption
