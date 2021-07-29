@@ -32,7 +32,13 @@ namespace Fanex.Athena.Model.Core.Helper
             [Product.CC] = "ArcadiaGaming",
             [Product.SBC] = "Sabaclub",
             [Product.SAG] = "SAGaming",
-            [Product.PGS] = "PGSoft"
+            [Product.PGS] = "PGSoft",
+            [Product.WM] = "WMCasino",
+            [Product.BGG] = "BigGaming",
+            [Product.JK] = "Joker",
+            [Product.GDG] = "GDG",
+            [Product.SLT] = "SportsLottery",
+            [Product.HB] = "Habanero"
         };
 
         public static IDictionary<string, string> MapHardcodedNameFromDB(IDictionary<string, bool> permissions, bool isUpdate)
