@@ -5166,10 +5166,10 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 showResultPopUp(url, { width: 800, height: 380, title: title });
                 Site.unBlockUI();
             },
-            viewVGamingResult: function (custId, gameId, siteId, gameRoundId, title, sporttype) {
+            viewVGamingResult: function (custId, gameId, siteId, gameRoundId, title, sporttype, currency) {
                 const url = Site.resolveClientUrl('ResultReport/VGaming');
                 Site.blockUI();
-                $.get(url + '?custid=' + custId + '&gameId=' + gameId + '&siteId=' + siteId + '&gameRoundId=' + gameRoundId + '&sportType=' + sporttype, function (result) {
+                $.get(url + '?custid=' + custId + '&gameId=' + gameId + '&siteId=' + siteId + '&gameRoundId=' + gameRoundId + '&sportType=' + sporttype + '&currencyName=' + currency, function (result) {
                     if (result !== '') {
                         showResultPopUp(result, { width: 800, height: 380, title: title });
                         Site.unBlockUI();
@@ -5177,7 +5177,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 });
             },
             viewResult: function (matchid, raceNo, bettype, sporttype, refno,
-                username, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid, transdecs) {
+                currency, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid, transdecs) {
                 const title = Site.getSingleResource('Result');
                 const defaultPlatform = 'd';  // desktop
 
@@ -5239,7 +5239,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                     _me.viewBGGResult(custid, transdecs, league, extension2, title);
                 }
                 else if (sporttype === SPORT_VGA || sporttype === SPORT_VGA_FreeBets) {
-                    _me.viewVGamingResult(custid, bettype, extension2, transdecs, title, sporttype);
+                    _me.viewVGamingResult(custid, bettype, extension2, transdecs, title, sporttype, currency);
                 }
                 else if (sporttype === SPORT_CG) {
                     _me.viewCGResult(custid, transdecs, league, extension2, title);
