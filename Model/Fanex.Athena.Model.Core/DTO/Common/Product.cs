@@ -85,6 +85,8 @@ namespace Fanex.Athena.Model.Core.DTO.Common
         public const string VGA = "VGA";
 
         public const string CG = "CG";
+        
+        public const string BX = "BX";
 
         #endregion Field
 

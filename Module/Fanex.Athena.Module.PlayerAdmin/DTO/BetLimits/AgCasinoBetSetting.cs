@@ -8,6 +8,8 @@
 
         public bool IsEnabled { get; set; }
 
+        public bool IsStatusEnabled { get; set; }
+
         public bool IsLineEnabled { get; set; }
 
         public string[] CheckedGroups { get; set; }

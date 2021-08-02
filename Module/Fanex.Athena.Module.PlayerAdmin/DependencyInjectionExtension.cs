@@ -52,6 +52,8 @@
             builder.RegisterType<NumberGameBetLimitService>().As<INumberGameBetLimitService>().WithAttributeFiltering();
             builder.RegisterType<RngKenoBetLimitService>().As<IRngKenoBetLimitService>().WithAttributeFiltering();
             builder.RegisterType<SportsBookBetLimitService>().As<ISportsBookBetLimitService>().WithAttributeFiltering();
+            builder.RegisterType<ThirdPartyBetLimitService>().As<IThirdPartyBetLimitService>().WithAttributeFiltering();
+            builder.RegisterType<RngCasinoBetLimitService>().As<IRngCasinoBetLimitService>().WithAttributeFiltering();
 
             builder.RegisterControllers(items).PropertiesAutowired();
         }

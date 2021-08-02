@@ -16,7 +16,9 @@
 
     public class DcsBetLimitService : IDcsBetLimitService
     {
-        private static readonly int[] ProductsHasStatus = { ProductTypes.Lottery, ProductTypes.CG };
+        private static readonly int[] ProductsHasStatus = { ProductTypes.Lottery, ProductTypes.I4D, ProductTypes.SLT, ProductTypes.AllBet, ProductTypes.Voidbridge, ProductTypes.CashOut,
+            ProductTypes.Exchange, ProductTypes.PP, ProductTypes.SXG, ProductTypes.GDG, ProductTypes.HB, ProductTypes.JK, ProductTypes.SAG, ProductTypes.PGS, ProductTypes.SBC, ProductTypes.WM,
+            ProductTypes.SG, ProductTypes.VRG, ProductTypes.CC, ProductTypes.CG};
 
         private readonly IDcsBetLinitRepository _repository;
 
@@ -35,7 +37,7 @@
             return await _repository.GetSettingAsync(custId, productId).ConfigureAwait(false);
         }
 
-        public async Task<bool> GetStatusAsync(int custId, int productId)
+        public async Task<bool?> GetStatusAsync(int custId, int productId)
         {
             if (!ProductsHasStatus.Contains(productId))
             {
@@ -65,6 +67,14 @@
         public async Task<IResultInfo> UpdateStatusAsync(PlayerBetLimitProductStatusUpdateMetaModel metaModel)
         {
             var result = await _repository.UpdateStatusAsync(metaModel).ConfigureAwait(false);
+
+            var logInfo = PlayerAdminProductStatusUpdateActionLogHelper.CreateLogInfo(
+                metaModel,
+                result.Code == 0,
+                LogActionDetailId.UpdatingProductStatus);
+
+            _businessLogService.Write(BusinessLogType.CustomerBetSetting, logInfo);
+
             return result;
         }
     }

@@ -13,14 +13,16 @@
     using Fanex.Athena.Web.ActionFilter;
 
     [ValidateProductPermission(limitedProductIds: new[] { ProductTypes.VirtualSports, ProductTypes.VirtualSports2, ProductTypes.Lottery, ProductTypes.TG, ProductTypes.I4D, ProductTypes.SLT,
-            ProductTypes.CG })]
+            ProductTypes.AllBet, ProductTypes.Voidbridge, ProductTypes.CashOut, ProductTypes.Exchange, ProductTypes.PP, ProductTypes.SXG, ProductTypes.GDG, ProductTypes.HB, ProductTypes.JK,
+            ProductTypes.SAG, ProductTypes.PGS, ProductTypes.SBC, ProductTypes.WM, ProductTypes.SG, ProductTypes.VRG, ProductTypes.CC, ProductTypes.CG })]
     public class DcsBetLimitController : PlayerBetLimitBaseControler
     {
         private readonly IDcsBetLimitService _service;
 
         private static readonly IEnumerable<int> ProductsHasStatus = new[]
         {
-            ProductTypes.CG
+            ProductTypes.I4D, ProductTypes.SLT, ProductTypes.AllBet, ProductTypes.Voidbridge, ProductTypes.CashOut, ProductTypes.Exchange, ProductTypes.PP, ProductTypes.SXG, ProductTypes.GDG,
+            ProductTypes.HB, ProductTypes.JK, ProductTypes.SAG, ProductTypes.PGS, ProductTypes.SBC, ProductTypes.WM, ProductTypes.SG, ProductTypes.VRG, ProductTypes.CC, ProductTypes.CG
         };
 
         public DcsBetLimitController(
@@ -43,9 +45,9 @@
             var viewModel = new PlayerBetLimitViewModel
             {
                 Data = AddSettingTypeName(await data),
-                Editable = isEditable && await status,
-                IsStatusEnable = ProductsHasStatus.Contains(metaModel.ProductId),
-                StatusEnable = await status
+                Editable = isEditable && (await status).GetValueOrDefault(),
+                IsStatusEnable = isEditable && ProductsHasStatus.Contains(metaModel.ProductId) && (await status).HasValue,
+                StatusEnable = (await status).GetValueOrDefault()
             };
 
             return Json(viewModel);

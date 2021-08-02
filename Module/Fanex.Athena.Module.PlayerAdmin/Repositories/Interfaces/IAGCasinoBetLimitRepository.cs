@@ -10,5 +10,7 @@
         Task<AgCasinoBetSetting> GetBetSettingAsync(int custId);
 
         Task<IResultInfo> UpdateSettingAsync(PlayerBetLimitUpdateMetaModel<AgCasinoBetLimitMetaModel> metaModel);
+
+        Task<IResultInfo> UpdateStatusAsync(PlayerBetLimitProductStatusUpdateMetaModel metaModel);
     }
 }

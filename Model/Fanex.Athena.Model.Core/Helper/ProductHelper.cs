@@ -63,7 +63,10 @@
                 { Product.WM, nameof(ViewResources.ProductWM) },
                 { Product.BGG, nameof(ViewResources.ProductBGG) },
                 { Product.VGA, nameof(ViewResources.ProductVGA) },
-                { Product.CG, nameof(ViewResources.ProductCG) }
+                { Product.CG, nameof(ViewResources.ProductCG) },
+                { Product.CO, nameof(ViewResources.ProductCO) },
+                { Product.CB, nameof(ViewResources.ProductCB) },
+                { Product.BX, nameof(ViewResources.ProductBX) }
             };
 
         public static string GetProductCode(int productId)

@@ -6,7 +6,7 @@ import { clearInterval } from 'timers';
 export const batchUpdatePermission = {
     playerCommGroup: "PlayerCommGroup",
     accountStatus: "accountStatus",
-    betLimit: "betLimit",
+    betSetting: "betSetting",
     specialLevel: "specialLevel",
     oddsGroup: "oddsGroup",
     baStatus: "baStatus"
@@ -39,7 +39,7 @@ export const batchUpdatePopups = {
     },
     popupOption_5: {
         url: 'SportsbookBetSetting/Index',
-        title: LangHelper.getSingleResource('BatchUpdate') + " - " + LangHelper.getSingleResource('UpdateBetLimit'),
+        title: LangHelper.getSingleResource('BatchUpdate') + " - " + LangHelper.getSingleResource('UpdateBetSetting'),
         width: 800,
         height: 600
     },
@@ -69,7 +69,7 @@ export const batchUpdateManager = {
         { value: 2, label: LangHelper.getSingleResource('UpdateCommissionValue'), permission: batchUpdatePermission.playerCommGroup },
         { value: 3, label: LangHelper.getSingleResource('RemoveFromGroup'), permission: batchUpdatePermission.playerCommGroup },
         { value: 4, label: LangHelper.getSingleResource('UpdateAccountStatus'), permission: batchUpdatePermission.accountStatus },
-        { value: 5, label: LangHelper.getSingleResource('UpdateBetLimit'), permission: batchUpdatePermission.betLimit },
+        { value: 5, label: LangHelper.getSingleResource('UpdateBetSetting'), permission: batchUpdatePermission.betSetting },
         { value: 6, label: LangHelper.getSingleResource('UpdateSpecialLevel'), permission: batchUpdatePermission.specialLevel },
         { value: 7, label: LangHelper.getSingleResource('UpdateOddsGroup'), permission: batchUpdatePermission.oddsGroup },
         { value: 8, label: LangHelper.getSingleResource('UpdateBAStatus'), permission: batchUpdatePermission.baStatus }

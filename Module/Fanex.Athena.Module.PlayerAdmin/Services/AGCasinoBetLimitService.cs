@@ -10,6 +10,7 @@
     using Fanex.Athena.Extension.Utility.Interfaces;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Module.PlayerAdmin.DataDomains;
     using Fanex.Athena.Module.PlayerAdmin.DTO;
     using Fanex.Athena.Module.PlayerAdmin.DTO.BetLimits;
     using Fanex.Athena.Module.PlayerAdmin.Helpers;
@@ -97,6 +98,20 @@
             var result = await _repository.UpdateSettingAsync(metaModel).ConfigureAwait(false);
 
             var logInfo = PlayerAdminBetLimitActionLogHelper.CreateLogInfo(metaModel, result.Code == 0);
+
+            _businessLogService.Write(BusinessLogType.CustomerBetSetting, logInfo);
+
+            return result;
+        }
+
+        public async Task<IResultInfo> UpdateStatusAsync(PlayerBetLimitProductStatusUpdateMetaModel metaModel)
+        {
+            var result = await _repository.UpdateStatusAsync(metaModel).ConfigureAwait(false);
+
+            var logInfo = PlayerAdminProductStatusUpdateActionLogHelper.CreateLogInfo(
+               metaModel,
+               result.Code == 0,
+               LogActionDetailId.UpdatingProductStatus);
 
             _businessLogService.Write(BusinessLogType.CustomerBetSetting, logInfo);
 
