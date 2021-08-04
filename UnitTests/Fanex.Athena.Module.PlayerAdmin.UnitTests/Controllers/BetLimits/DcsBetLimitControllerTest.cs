@@ -52,7 +52,7 @@
         [TestCase(false, true, false)]
         [TestCase(true, false, false)]
         [TestCase(true, true, true)]
-        public async Task GetSetting_WhenCall_ReturnsCorrectResult(bool hasEditPermission, bool status, bool expectedEditable)
+        public async Task GetSetting_WhenCall_ReturnsCorrectResult(bool hasEditPermission, bool? status, bool expectedEditable)
         {
             using (var controller = CreateController())
             {

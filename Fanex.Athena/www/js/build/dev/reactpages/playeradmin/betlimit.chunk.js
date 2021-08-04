@@ -304,6 +304,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _grid_data_contents_NGDataContent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./grid/data-contents/NGDataContent */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/data-contents/NGDataContent.jsx");
 /* harmony import */ var _grid_data_contents_AGCDataContent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./grid/data-contents/AGCDataContent */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/data-contents/AGCDataContent.jsx");
 /* harmony import */ var _grid_data_contents_I4DDataContent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./grid/data-contents/I4DDataContent */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/data-contents/I4DDataContent.jsx");
+/* harmony import */ var _grid_data_contents_RNGCDataContent__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./grid/data-contents/RNGCDataContent */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/data-contents/RNGCDataContent.jsx");
+/* harmony import */ var _grid_data_contents_ThirdPartyDataContent__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./grid/data-contents/ThirdPartyDataContent */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/data-contents/ThirdPartyDataContent.jsx");
+
+
 
 
 
@@ -323,7 +327,25 @@ const Setting = {
   [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].TG]: _grid_data_contents_GameDataContent__WEBPACK_IMPORTED_MODULE_4__["default"],
   [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].I4D]: _grid_data_contents_I4DDataContent__WEBPACK_IMPORTED_MODULE_7__["default"],
   [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].SLT]: _grid_data_contents_GameDataContent__WEBPACK_IMPORTED_MODULE_4__["default"],
-  [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].CG]: _grid_data_contents_GameDataContent__WEBPACK_IMPORTED_MODULE_4__["default"]
+  [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].CG]: _grid_data_contents_GameDataContent__WEBPACK_IMPORTED_MODULE_4__["default"],
+  [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].AB]: _grid_data_contents_GameDataContent__WEBPACK_IMPORTED_MODULE_4__["default"],
+  [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].VB]: _grid_data_contents_GameDataContent__WEBPACK_IMPORTED_MODULE_4__["default"],
+  [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].CO]: _grid_data_contents_ThirdPartyDataContent__WEBPACK_IMPORTED_MODULE_9__["default"],
+  [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].BX]: _grid_data_contents_GameDataContent__WEBPACK_IMPORTED_MODULE_4__["default"],
+  [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].PP]: _grid_data_contents_GameDataContent__WEBPACK_IMPORTED_MODULE_4__["default"],
+  [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].SXG]: _grid_data_contents_GameDataContent__WEBPACK_IMPORTED_MODULE_4__["default"],
+  [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].GDG]: _grid_data_contents_GameDataContent__WEBPACK_IMPORTED_MODULE_4__["default"],
+  [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].HB]: _grid_data_contents_GameDataContent__WEBPACK_IMPORTED_MODULE_4__["default"],
+  [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].JK]: _grid_data_contents_GameDataContent__WEBPACK_IMPORTED_MODULE_4__["default"],
+  [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].SAG]: _grid_data_contents_GameDataContent__WEBPACK_IMPORTED_MODULE_4__["default"],
+  [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].PGS]: _grid_data_contents_GameDataContent__WEBPACK_IMPORTED_MODULE_4__["default"],
+  [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].SBC]: _grid_data_contents_GameDataContent__WEBPACK_IMPORTED_MODULE_4__["default"],
+  [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].WM]: _grid_data_contents_GameDataContent__WEBPACK_IMPORTED_MODULE_4__["default"],
+  [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].SG]: _grid_data_contents_GameDataContent__WEBPACK_IMPORTED_MODULE_4__["default"],
+  [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].VRG]: _grid_data_contents_GameDataContent__WEBPACK_IMPORTED_MODULE_4__["default"],
+  [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].CC]: _grid_data_contents_GameDataContent__WEBPACK_IMPORTED_MODULE_4__["default"],
+  [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].CS]: _grid_data_contents_RNGCDataContent__WEBPACK_IMPORTED_MODULE_8__["default"],
+  [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].CB]: _grid_data_contents_ThirdPartyDataContent__WEBPACK_IMPORTED_MODULE_9__["default"]
 };
 
 const DataContent = props => {
@@ -454,7 +476,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_components_Balloon__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @jsroot/components/Balloon */ "./www/js/source/reactpages/components/Balloon.jsx");
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
@@ -472,7 +494,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 const SettingContent = (Grid, DataHandling) => {
-  return class extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
+  var _temp;
+
+  return _temp = class extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
     constructor(props) {
       super(props);
 
@@ -527,9 +551,10 @@ const SettingContent = (Grid, DataHandling) => {
 
       _defineProperty(this, "onUpdateStatus", () => {
         if (!this.state.showError) {
+          const oldStatus = this.state.setting.StatusEnable;
           const newStatus = !this.state.setting.StatusEnable;
 
-          this._showUpdateStatusConfirmation(() => this._updateStatus(newStatus));
+          this._showUpdateStatusConfirmation(() => this._updateStatus(oldStatus, newStatus));
         }
       });
 
@@ -654,11 +679,14 @@ const SettingContent = (Grid, DataHandling) => {
       _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__["default"].updateData(param, this._showSubmitResult.bind(this));
     }
 
-    _updateStatus(Status) {
+    _updateStatus(OldStatus, Status) {
       this.props.toggleLoader(true);
+      var productName = this.props.productLabel;
 
       const param = _objectSpread(_objectSpread({}, this.props.requestParam), {}, {
-        Status
+        Status,
+        OldStatus,
+        productName
       });
 
       _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__["default"].updateStatus(param, this._showSubmitResult.bind(this));
@@ -785,10 +813,8 @@ const SettingContent = (Grid, DataHandling) => {
       } = this.state;
       const noSetting = !data || !data.length;
 
-      if (!setting.IsStatusEnable) {
-        if (noSetting) {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_5__["default"], null);
-        }
+      if (!setting.IsStatusEnable && noSetting) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_5__["default"], null);
       }
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -825,14 +851,14 @@ const SettingContent = (Grid, DataHandling) => {
         type: "button",
         className: "btn btn-apply",
         onClick: this.onUpdateStatus
-      }, setting.StatusEnable ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Disable') + ' ' + this.props.productLabel : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Enable') + ' ' + this.props.productLabel)), setting.Editable && !noSetting && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Balloon__WEBPACK_IMPORTED_MODULE_9__["default"], _extends({
+      }, setting.StatusEnable ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('DisableProduct').replace("{0}", this.props.productLabel) : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('EnableProduct').replace("{0}", this.props.productLabel))), setting.Editable && !noSetting && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Balloon__WEBPACK_IMPORTED_MODULE_9__["default"], _extends({
         width: 140,
         isOpen: showError,
         ref: this.errorRef
       }, errorBalloon)));
     }
 
-  };
+  }, _temp;
 };
 
 function mapDispatchToProps(dispatch) {
@@ -876,7 +902,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _lib_utility__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../lib/utility */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/utility.js");
 /* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/constants.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
@@ -994,6 +1020,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-select */ "./node_modules/react-select/dist/react-select.es.js");
 /* harmony import */ var _sport_settings_AGCSettingGrid__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../sport-settings/AGCSettingGrid */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/sport-settings/AGCSettingGrid.jsx");
 /* harmony import */ var _jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @jsroot/components/NoDataTitle */ "./www/js/source/reactpages/components/NoDataTitle.jsx");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
@@ -1044,6 +1074,15 @@ class AGCDataContent extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"]
         });
       } else {
         this._showConfirmation(() => this._submit(selectedGroup, setting.BetSetting.AgGroup));
+      }
+    });
+
+    _defineProperty(this, "onUpdateStatus", () => {
+      if (!this.state.showError) {
+        const oldStatus = this.state.setting.StatusEnable;
+        const newStatus = !this.state.setting.StatusEnable;
+
+        this._showUpdateStatusConfirmation(() => this._updateStatus(oldStatus, newStatus));
       }
     });
 
@@ -1125,6 +1164,45 @@ class AGCDataContent extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"]
       }
     });
     _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__["default"].updateData(param, this._showSubmitResult.bind(this));
+  }
+
+  _updateStatus(OldStatus, Status) {
+    this.props.toggleLoader(true);
+    var productName = this.props.productLabel;
+
+    const param = _objectSpread(_objectSpread({}, this.props.requestParam), {}, {
+      Status,
+      OldStatus,
+      productName
+    });
+
+    _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__["default"].updateStatus(param, this._showSubmitResult.bind(this));
+  }
+
+  _showUpdateStatusConfirmation(onOK) {
+    const buttons = [{
+      text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('OK'),
+      onClick: onOK,
+      className: 'btn btn-apply'
+    }, {
+      text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Cancel'),
+      onClick: this.onCloseAlert,
+      className: 'btn btn-cancel'
+    }];
+    const msg = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "center-align"
+    }, _lib_utility__WEBPACK_IMPORTED_MODULE_5__["default"].getConfirmationUpdateStatusMsg(this.props.requestParam.ProductId));
+    this.setState({
+      disabledButton: !this.state.setting.StatusEnable
+    }, () => this.props.setAlertOption({
+      isShow: true,
+      title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Confirmation'),
+      children: msg,
+      buttons: buttons,
+      icon: '',
+      onClose: this.onCloseAlert,
+      height: 130
+    }));
   }
 
   _showConfirmation(onOK) {
@@ -1223,11 +1301,13 @@ class AGCDataContent extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"]
       data: data,
       isEnabled: setting.BetSetting.IsEnabled,
       group: selectedGroup
+    }) : setting.IsStatusEnable ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('CannotUpdateBetLimitForProduct').replace("{0}", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('AGCasino'))
     }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_9__["default"], {
       title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('ProblemDisplayBetSetting')
-    }), setting.Editable && hasData && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "pa-betlimit-button"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    }, hasData && setting.Editable && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       type: "button",
       className: "btn btn-cancel",
       disabled: disabledButton,
@@ -1237,7 +1317,11 @@ class AGCDataContent extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"]
       className: "btn btn-apply",
       disabled: disabledButton,
       onClick: this.onSubmit
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Submit'))));
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Submit')), " "), setting.IsStatusEnable && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      type: "button",
+      className: "btn btn-apply",
+      onClick: this.onUpdateStatus
+    }, setting.StatusEnable ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('DisableAgCasino') : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('EnableAgCasino'))));
   }
 
 }
@@ -1351,6 +1435,221 @@ const NGDataContent = () => {
 
 /***/ }),
 
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/data-contents/RNGCDataContent.jsx":
+/*!****************************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/data-contents/RNGCDataContent.jsx ***!
+  \****************************************************************************************************************/
+/*! exports provided: RNGCDataContent, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RNGCDataContent", function() { return RNGCDataContent; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../actions/index.js */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/actions/index.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _lib_utility__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../lib/utility */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/utility.js");
+/* harmony import */ var _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../lib/dataTransfer */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/dataTransfer.js");
+/* harmony import */ var _jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/components/NoDataTitle */ "./www/js/source/reactpages/components/NoDataTitle.jsx");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+
+
+
+class RNGCDataContent extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
+  constructor(props) {
+    super(props);
+
+    _defineProperty(this, "onUpdateStatus", () => {
+      if (!this.state.showError) {
+        const oldStatus = this.state.setting.StatusEnable;
+        const newStatus = !this.state.setting.StatusEnable;
+
+        this._showUpdateStatusConfirmation(() => this._updateStatus(oldStatus, newStatus));
+      }
+    });
+
+    _defineProperty(this, "onCloseAlert", () => {
+      this.setState({
+        disabledButton: false
+      }, () => this.props.setAlertOption({
+        isShow: false
+      }));
+    });
+
+    _defineProperty(this, "onRefresh", () => {
+      this._getData(this.props.requestParam);
+    });
+
+    this.state = {
+      setting: null,
+      groups: [],
+      selectedGroup: '',
+      disabledButton: false
+    };
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.setting !== this.state.setting) {
+      this.props.toggleLoader(false);
+      this.props.setAlertOption({
+        isShow: false
+      });
+    }
+  }
+
+  componentDidMount() {
+    this._getData(this.props.requestParam);
+  }
+
+  _isDisabledButton(data, selectedGroup) {
+    if (!selectedGroup) {
+      return true;
+    }
+
+    const gamesHaveGroup = data.filter(x => x.Groups.find(g => g.GroupType === selectedGroup));
+    return !gamesHaveGroup || gamesHaveGroup.length !== data.length;
+  }
+
+  _updateState(data, setting) {
+    if (setting) {
+      this.setState({
+        data: data,
+        setting: setting
+      });
+    }
+  }
+
+  _getData(param) {
+    this.props.toggleLoader(true);
+    _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__["default"].getData(param, this._updateState.bind(this));
+  }
+
+  _updateStatus(OldStatus, Status) {
+    this.props.toggleLoader(true);
+    var productName = _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('ProductCS');
+
+    const param = _objectSpread(_objectSpread({}, this.props.requestParam), {}, {
+      Status,
+      OldStatus,
+      productName
+    });
+
+    _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__["default"].updateStatus(param, this._showSubmitResult.bind(this));
+  }
+
+  _showUpdateStatusConfirmation(onOK) {
+    const buttons = [{
+      text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('OK'),
+      onClick: onOK,
+      className: 'btn btn-apply'
+    }, {
+      text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Cancel'),
+      onClick: this.onCloseAlert,
+      className: 'btn btn-cancel'
+    }];
+    const msg = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "center-align"
+    }, _lib_utility__WEBPACK_IMPORTED_MODULE_5__["default"].getConfirmationUpdateStatusMsg(this.props.requestParam.ProductId));
+    this.setState({
+      disabledButton: !this.state.setting.StatusEnable
+    }, () => this.props.setAlertOption({
+      isShow: true,
+      title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Confirmation'),
+      children: msg,
+      buttons: buttons,
+      icon: '',
+      onClose: this.onCloseAlert,
+      height: 130
+    }));
+  }
+
+  _showSubmitResult(title, msg, isSuccess) {
+    const content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "center-align"
+    }, msg);
+    const buttons = [{
+      text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('OK'),
+      onClick: this.onRefresh,
+      className: 'btn btn-apply btn-alone'
+    }];
+    this.setState({
+      disabledButton: true
+    }, () => {
+      this.props.setAlertOption({
+        isShow: true,
+        title: title,
+        children: content,
+        onClose: this.onRefresh,
+        icon: isSuccess ? 'success' : 'error',
+        height: 225,
+        buttons: buttons
+      });
+      this.props.toggleLoader(false);
+    });
+  }
+
+  render() {
+    const {
+      setting
+    } = this.state;
+
+    if (setting === null) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_7__["default"], null);
+    }
+
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "pa-betlimit"
+    }, setting.IsStatusEnable ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('CannotUpdateBetLimitForProduct').replace("{0}", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('ProductCS'))
+    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_7__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "pa-betlimit-button"
+    }, setting.IsStatusEnable && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      type: "button",
+      className: "btn btn-apply",
+      onClick: this.onUpdateStatus
+    }, setting.StatusEnable ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('DisableRNGCasino') : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('EnableRNGCasino'))));
+  }
+
+}
+
+function mapDispatchToProps(dispatch) {
+  const {
+    toggleLoader,
+    setAlertOption
+  } = _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"];
+  return Object(redux__WEBPACK_IMPORTED_MODULE_3__["bindActionCreators"])({
+    toggleLoader,
+    setAlertOption
+  }, dispatch);
+}
+
+function mapStateToProps(state) {
+  const {
+    requestParam
+  } = state;
+  return Object.assign({}, {
+    requestParam
+  });
+}
+
+;
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(RNGCDataContent));
+
+/***/ }),
+
 /***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/data-contents/SportDataContent.jsx":
 /*!*****************************************************************************************************************!*\
   !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/data-contents/SportDataContent.jsx ***!
@@ -1376,6 +1675,223 @@ const SportDataContent = () => {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (SportDataContent);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/data-contents/ThirdPartyDataContent.jsx":
+/*!**********************************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/data-contents/ThirdPartyDataContent.jsx ***!
+  \**********************************************************************************************************************/
+/*! exports provided: RNGCDataContent, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RNGCDataContent", function() { return RNGCDataContent; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../actions/index.js */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/actions/index.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _lib_utility__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../lib/utility */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/utility.js");
+/* harmony import */ var _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../lib/dataTransfer */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/dataTransfer.js");
+/* harmony import */ var _jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/components/NoDataTitle */ "./www/js/source/reactpages/components/NoDataTitle.jsx");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+
+
+
+class RNGCDataContent extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
+  constructor(props) {
+    super(props);
+
+    _defineProperty(this, "onUpdateStatus", () => {
+      if (!this.state.showError) {
+        const oldStatus = this.state.setting.StatusEnable;
+        const newStatus = !this.state.setting.StatusEnable;
+
+        this._showUpdateStatusConfirmation(() => this._updateStatus(oldStatus, newStatus));
+      }
+    });
+
+    _defineProperty(this, "onCloseAlert", () => {
+      this.setState({
+        disabledButton: false
+      }, () => this.props.setAlertOption({
+        isShow: false
+      }));
+    });
+
+    _defineProperty(this, "onRefresh", () => {
+      this._getData(this.props.requestParam);
+    });
+
+    this.state = {
+      setting: null,
+      groups: [],
+      selectedGroup: '',
+      disabledButton: false
+    };
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.setting !== this.state.setting) {
+      this.props.toggleLoader(false);
+      this.props.setAlertOption({
+        isShow: false
+      });
+    }
+  }
+
+  componentDidMount() {
+    this._getData(this.props.requestParam);
+  }
+
+  _isDisabledButton(data, selectedGroup) {
+    if (!selectedGroup) {
+      return true;
+    }
+
+    const gamesHaveGroup = data.filter(x => x.Groups.find(g => g.GroupType === selectedGroup));
+    return !gamesHaveGroup || gamesHaveGroup.length !== data.length;
+  }
+
+  _updateState(data, setting) {
+    if (setting) {
+      this.setState({
+        data: data,
+        setting: setting
+      });
+    }
+  }
+
+  _getData(param) {
+    this.props.toggleLoader(true);
+    _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__["default"].getData(param, this._updateState.bind(this));
+  }
+
+  _updateStatus(OldStatus, Status) {
+    this.props.toggleLoader(true);
+    var productName = this.props.productLabel;
+
+    const param = _objectSpread(_objectSpread({}, this.props.requestParam), {}, {
+      Status,
+      OldStatus,
+      productName
+    });
+
+    _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__["default"].updateStatus(param, this._showSubmitResult.bind(this));
+  }
+
+  _showUpdateStatusConfirmation(onOK) {
+    const buttons = [{
+      text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('OK'),
+      onClick: onOK,
+      className: 'btn btn-apply'
+    }, {
+      text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Cancel'),
+      onClick: this.onCloseAlert,
+      className: 'btn btn-cancel'
+    }];
+    const msg = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "center-align"
+    }, _lib_utility__WEBPACK_IMPORTED_MODULE_5__["default"].getConfirmationUpdateStatusMsg(this.props.requestParam.ProductId));
+    this.setState({
+      disabledButton: !this.state.setting.StatusEnable
+    }, () => this.props.setAlertOption({
+      isShow: true,
+      title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Confirmation'),
+      children: msg,
+      buttons: buttons,
+      icon: '',
+      onClose: this.onCloseAlert,
+      height: 130
+    }));
+  }
+
+  _showSubmitResult(title, msg, isSuccess) {
+    const content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "center-align"
+    }, msg);
+    const buttons = [{
+      text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('OK'),
+      onClick: this.onRefresh,
+      className: 'btn btn-apply btn-alone'
+    }];
+    this.setState({
+      disabledButton: true
+    }, () => {
+      this.props.setAlertOption({
+        isShow: true,
+        title: title,
+        children: content,
+        onClose: this.onRefresh,
+        icon: isSuccess ? 'success' : 'error',
+        height: 225,
+        buttons: buttons
+      });
+      this.props.toggleLoader(false);
+    });
+  }
+
+  render() {
+    const {
+      setting
+    } = this.state;
+
+    if (setting === null) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_7__["default"], null);
+    }
+
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "pa-betlimit"
+    }, setting.IsStatusEnable ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('CannotUpdateBetLimitForProduct').replace("{0}", this.props.productLabel)
+    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_7__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "pa-betlimit-button"
+    }, setting.IsStatusEnable && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      type: "button",
+      className: "btn btn-apply",
+      onClick: this.onUpdateStatus
+    }, setting.StatusEnable ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('DisableProduct').replace("{0}", this.props.productLabel) : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('EnableProduct').replace("{0}", this.props.productLabel))));
+  }
+
+}
+
+function mapDispatchToProps(dispatch) {
+  const {
+    toggleLoader,
+    setAlertOption
+  } = _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"];
+  return Object(redux__WEBPACK_IMPORTED_MODULE_3__["bindActionCreators"])({
+    toggleLoader,
+    setAlertOption
+  }, dispatch);
+}
+
+function mapStateToProps(state) {
+  const {
+    requestParam,
+    productLabel
+  } = state;
+  return Object.assign({}, {
+    requestParam,
+    productLabel
+  });
+}
+
+;
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(RNGCDataContent));
 
 /***/ }),
 
@@ -1445,7 +1961,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _lib_utility__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../lib/utility */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/utility.js");
 /* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/constants.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
@@ -1554,7 +2070,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_utility__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../lib/utility */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/utility.js");
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/constants.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
@@ -1713,7 +2229,25 @@ const BetLimitProduct = {
   TG: 40,
   I4D: 43,
   SLT: 63,
-  CG: 62
+  CG: 62,
+  AB: 21,
+  VB: 22,
+  CO: 25,
+  BX: 31,
+  PP: 32,
+  SXG: 45,
+  GDG: 59,
+  HB: 61,
+  JK: 56,
+  SAG: 39,
+  PGS: 55,
+  SBC: 42,
+  WM: 51,
+  SG: 36,
+  VRG: 38,
+  CC: 34,
+  CS: 6,
+  CB: 15
 };
 const BetLimitSport = {
   I4D: 223,
@@ -1853,8 +2387,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/DataService */ "./www/js/source/reactpages/lib/DataService.js");
 /* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./constants */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/constants.js");
-const _excluded = ["Data"];
-
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
 
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
@@ -1874,7 +2406,25 @@ const Url = {
   [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].TG]: 'DcsBetLimit',
   [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].I4D]: 'DcsBetLimit',
   [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].SLT]: 'DcsBetLimit',
-  [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].CG]: 'DcsBetLimit'
+  [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].CG]: 'DcsBetLimit',
+  [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].AB]: 'DcsBetLimit',
+  [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].VB]: 'DcsBetLimit',
+  [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].CO]: 'ThirdPartyBetLimit',
+  [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].BX]: 'DcsBetLimit',
+  [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].PP]: 'DcsBetLimit',
+  [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].SXG]: 'DcsBetLimit',
+  [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].GDG]: 'DcsBetLimit',
+  [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].HB]: 'DcsBetLimit',
+  [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].JK]: 'DcsBetLimit',
+  [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].SAG]: 'DcsBetLimit',
+  [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].PGS]: 'DcsBetLimit',
+  [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].SBC]: 'DcsBetLimit',
+  [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].WM]: 'DcsBetLimit',
+  [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].SG]: 'DcsBetLimit',
+  [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].VRG]: 'DcsBetLimit',
+  [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].CC]: 'DcsBetLimit',
+  [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].CS]: 'RngCasinoBetLimit',
+  [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].CB]: 'ThirdPartyBetLimit'
 };
 class DataTransfer {
   static getData(param, callBack) {
@@ -1884,7 +2434,7 @@ class DataTransfer {
             {
         Data
       } = _response$data,
-            setting = _objectWithoutProperties(_response$data, _excluded);
+            setting = _objectWithoutProperties(_response$data, ["Data"]);
 
       callBack && callBack(Data, setting);
     }).catch(error => {
@@ -2149,12 +2699,168 @@ const ConfirmationMsg = {
   [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].CG]: {
     Msg: 'UpdateProductBetSettings',
     Product: 'ProductCG'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].AB]: {
+    Msg: 'UpdateProductBetSettings',
+    Product: 'ProductAB'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].VB]: {
+    Msg: 'UpdateProductBetSettings',
+    Product: 'ProductVB'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].CO]: {
+    Msg: 'UpdateProductBetSettings',
+    Product: 'ProductCO'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].BX]: {
+    Msg: 'UpdateProductBetSettings',
+    Product: 'ProductBX'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].PP]: {
+    Msg: 'UpdateProductBetSettings',
+    Product: 'ProductPP'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].SXG]: {
+    Msg: 'UpdateProductBetSettings',
+    Product: 'ProductSXG'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].GDG]: {
+    Msg: 'UpdateProductBetSettings',
+    Product: 'ProductGDG'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].HB]: {
+    Msg: 'UpdateProductBetSettings',
+    Product: 'ProductHB'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].JK]: {
+    Msg: 'UpdateProductBetSettings',
+    Product: 'ProductJK'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].SAG]: {
+    Msg: 'UpdateProductBetSettings',
+    Product: 'ProductSAG'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].PGS]: {
+    Msg: 'UpdateProductBetSettings',
+    Product: 'ProductPGS'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].SBC]: {
+    Msg: 'UpdateProductBetSettings',
+    Product: 'ProductSBC'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].WM]: {
+    Msg: 'UpdateProductBetSettings',
+    Product: 'ProductWM'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].SG]: {
+    Msg: 'UpdateProductBetSettings',
+    Product: 'ProductSG'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].VRG]: {
+    Msg: 'UpdateProductBetSettings',
+    Product: 'ProductVRG'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].CC]: {
+    Msg: 'UpdateProductBetSettings',
+    Product: 'ProductCC'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].CS]: {
+    Msg: 'UpdateProductBetSettings',
+    Product: 'ProductCS'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].CB]: {
+    Msg: 'UpdateProductBetSettings',
+    Product: 'ProductCB'
   }
 };
 const ConfirmationUpdateProductStatusMsg = {
   [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].CG]: {
     Msg: 'UpdateProductStatus',
     Product: 'ProductCG'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].AGC]: {
+    Msg: 'UpdateProductStatus',
+    Product: 'ProductAGC'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].I4D]: {
+    Msg: 'UpdateProductStatus',
+    Product: 'ProductI4D'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].SLT]: {
+    Msg: 'UpdateProductStatus',
+    Product: 'ProductSLT'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].AB]: {
+    Msg: 'UpdateProductStatus',
+    Product: 'ProductAB'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].VB]: {
+    Msg: 'UpdateProductStatus',
+    Product: 'ProductVB'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].CO]: {
+    Msg: 'UpdateProductStatus',
+    Product: 'ProductCO'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].BX]: {
+    Msg: 'UpdateProductStatus',
+    Product: 'ProductBX'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].PP]: {
+    Msg: 'UpdateProductStatus',
+    Product: 'ProductPP'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].SXG]: {
+    Msg: 'UpdateProductStatus',
+    Product: 'ProductSXG'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].GDG]: {
+    Msg: 'UpdateProductStatus',
+    Product: 'ProductGDG'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].HB]: {
+    Msg: 'UpdateProductStatus',
+    Product: 'ProductHB'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].JK]: {
+    Msg: 'UpdateProductStatus',
+    Product: 'ProductJK'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].SAG]: {
+    Msg: 'UpdateProductStatus',
+    Product: 'ProductSAG'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].PGS]: {
+    Msg: 'UpdateProductStatus',
+    Product: 'ProductPGS'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].SBC]: {
+    Msg: 'UpdateProductStatus',
+    Product: 'ProductSBC'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].WM]: {
+    Msg: 'UpdateProductStatus',
+    Product: 'ProductWM'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].SG]: {
+    Msg: 'UpdateProductStatus',
+    Product: 'ProductSG'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].VRG]: {
+    Msg: 'UpdateProductStatus',
+    Product: 'ProductVRG'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].CC]: {
+    Msg: 'UpdateProductStatus',
+    Product: 'ProductCC'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].CS]: {
+    Msg: 'UpdateProductStatus',
+    Product: 'ProductCS'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].CB]: {
+    Msg: 'UpdateProductStatus',
+    Product: 'ProductCB'
   }
 };
 class Utility {
@@ -3097,9 +3803,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _icon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./icon */ "./www/js/source/reactpages/components/sweet-alert/icon.js");
-const _excluded = ["text"],
-      _excluded2 = ["buttons", "children"];
-
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
@@ -3128,7 +3831,7 @@ class SweetAlert extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component 
       const {
         text
       } = btnItem,
-            attrs = _objectWithoutProperties(btnItem, _excluded);
+            attrs = _objectWithoutProperties(btnItem, ["text"]);
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", _extends({
         key: index,
@@ -3161,7 +3864,7 @@ class SweetAlert extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component 
       buttons,
       children
     } = _this$props,
-          props = _objectWithoutProperties(_this$props, _excluded2);
+          props = _objectWithoutProperties(_this$props, ["buttons", "children"]);
 
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "sweet-alert"
@@ -3586,7 +4289,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requestParam", function() { return requestParam; });
 /* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./www/js/source/reactpages/actions/types.js");
 /* harmony import */ var _lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 

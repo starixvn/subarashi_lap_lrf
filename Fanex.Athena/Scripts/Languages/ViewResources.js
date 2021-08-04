@@ -1,4 +1,4 @@
-﻿// Generated at: 7/1/2021 2:46:03 PM
+﻿// Generated at: 8/3/2021 5:47:38 PM
 var _language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -820,6 +820,7 @@ UpdateNumberGameBetSettingSuccessMsg:"The Number Game bet setting of {0} was upd
 UpdateOddsGroup:"Update Odds Group",
 UpdateProductBetSettings:"Are you sure you want to update all {0} bet settings?",
 UpdateProductBetSettingSuccessMsg:"The {0} bet setting of {1} was updated successfully",
+UpdateProductStatus:"Are you sure you want to update {0} status?",
 UpdateRNGCasinoBetSettingFailMsg:"The RNG Casino bet setting of {0} updated is failed",
 UpdateRNGCasinoBetSettings:"Are you sure you want to update RNG Casino bet settings?",
 UpdateRNGCasinoBetSettingSuccessMsg:"The RNG Casino bet setting of {0} was updated successfully",

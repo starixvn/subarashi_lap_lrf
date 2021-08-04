@@ -119,6 +119,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\BetLimits\ThirdPartyBetLimitController.cs" />
+    <Compile Include="Controllers\BetLimits\RngCasinoBetLimitController.cs" />
     <Compile Include="Controllers\BetLimits\AGCasinoBetLimitController.cs" />
     <Compile Include="Controllers\BetLimits\DcsBetLimitController.cs" />
     <Compile Include="Controllers\BetLimits\NumberGameBetLimitController.cs" />
@@ -162,6 +164,7 @@
     <Compile Include="Extensions\PlayerAdminBusinessLogBuilderFactory.cs" />
     <Compile Include="Extensions\PlayerBetLimitLogBuilder.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Helpers\PlayerAdminProductStatusUpdateActionLogHelper.cs" />
     <Compile Include="Helpers\PlayerAdminBetLimitActionLogHelper.cs" />
     <Compile Include="MetaModel\AgCasinoBetLimitMetaModel.cs" />
     <Compile Include="MetaModel\PlayerBatchUpdate\BasePlayerBatchUpdateQuery.cs" />
@@ -169,7 +172,10 @@
     <Compile Include="MetaModel\PlayerBatchUpdate\UpdateBAStatusQuery.cs" />
     <Compile Include="MetaModel\PlayerBatchUpdate\UpdateOddsGroupQuery.cs" />
     <Compile Include="MetaModel\PlayerBatchUpdate\UpdateSpecialLevelQuery.cs" />
+    <Compile Include="MetaModel\PlayerBetLimitProductStatusLogMetaModel.cs" />
+    <Compile Include="MetaModel\PlayerBetLimitProductStatusDetailLogMetaModel.cs" />
     <Compile Include="MetaModel\PlayerBetLimitDetailedLogMetaModel.cs" />
+    <Compile Include="MetaModel\PlayerProductStatusLogMetaModel.cs" />
     <Compile Include="MetaModel\PlayerBetLimitLogMetaModel.cs" />
     <Compile Include="MetaModel\PlayerBetLimitSelectMetaModel.cs" />
     <Compile Include="MetaModel\PlayerBetLimitProductStatusUpdateMetaModel.cs" />
@@ -189,8 +195,12 @@
     <Compile Include="MetaModel\PlayerStatementMetaModel.cs" />
     <Compile Include="MetaModel\PlayerWinLossMetaModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\ThirdPartyBetLimitRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IThirdPartyBetLimitRepository.cs" />
+    <Compile Include="Repositories\RngCasinoBetLimitRepository.cs" />
     <Compile Include="Repositories\AGCasinoBetLimitRepository.cs" />
     <Compile Include="Repositories\DcsBetLimitRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IRngCasinoBetLimitRepository.cs" />
     <Compile Include="Repositories\Interfaces\IAGCasinoBetLimitRepository.cs" />
     <Compile Include="Repositories\Interfaces\IPlayerBatchUpdateRepository.cs" />
     <Compile Include="Repositories\Interfaces\IPlayerCommissionRepository.cs" />
@@ -206,9 +216,13 @@
     <Compile Include="Repositories\Interfaces\IPlayerBetLimitRepository.cs" />
     <Compile Include="Repositories\Interfaces\IRngKenoBetLimitRepository.cs" />
     <Compile Include="Repositories\SportsBookBetLimitRepository.cs" />
+    <Compile Include="Services\ThirdPartyBetLimitService..cs" />
+    <Compile Include="Services\Interfaces\IThirdPartyBetLimitService.cs" />
+    <Compile Include="Services\RngCasinoBetLimitService.cs" />
     <Compile Include="Services\AGCasinoBetLimitService.cs" />
     <Compile Include="Repositories\PlayerBetLimitRepository.cs" />
     <Compile Include="Services\DcsBetLimitService.cs" />
+    <Compile Include="Services\Interfaces\IRngCasinoBetLimitService.cs" />
     <Compile Include="Services\Interfaces\IAGCasinoBetLimitService.cs" />
     <Compile Include="Services\Interfaces\IDcsBetLimitService.cs" />
     <Compile Include="Services\Interfaces\INumberGameBetLimitService.cs" />
@@ -276,13 +290,25 @@
       <Project>{794C0345-2DDD-4FFD-A605-BB96FBB37DE8}</Project>
       <Name>Fanex.Athena.Model.Auth</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Model\Fanex.Athena.Model.BetSettings\Fanex.Athena.Model.BetSettings.csproj">
+      <Project>{AC255686-6654-4A34-8F56-F18C502B5B0A}</Project>
+      <Name>Fanex.Athena.Model.BetSettings</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Model\Fanex.Athena.Model.Core\Fanex.Athena.Model.Core.csproj">
       <Project>{5F410090-94C0-46A5-9FEC-B6C3B745B7A0}</Project>
       <Name>Fanex.Athena.Model.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Model\Fanex.Athena.Model.Customer\Fanex.Athena.Model.Customer.csproj">
+      <Project>{3B212F2F-4DEB-449B-9AE0-36F6E4F49F5F}</Project>
+      <Name>Fanex.Athena.Model.Customer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Resources\Fanex.Athena.Resources\Fanex.Athena.Resources.csproj">
       <Project>{17B0022C-4902-4C61-908A-5DB81568DC3A}</Project>
       <Name>Fanex.Athena.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Service\Fanex.Athena.Service.BetSettings\Fanex.Athena.Service.BetSettings.csproj">
+      <Project>{E3C3C559-CF7C-45ED-8179-0BB9159E40A8}</Project>
+      <Name>Fanex.Athena.Service.BetSettings</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Service\Fanex.Athena.Service.Core\Fanex.Athena.Service.Core.csproj">
       <Project>{FCFD7434-085B-4C93-848F-E1CBCEDCC5A0}</Project>

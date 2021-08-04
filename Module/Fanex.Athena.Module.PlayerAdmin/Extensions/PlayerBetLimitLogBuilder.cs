@@ -11,19 +11,38 @@
     {
         public BusinessLogItem Build<T>(T item) where T : class
         {
-            if (!(item is PlayerBetLimitLogMetaModel currentItem) || currentItem.Detail is null || !currentItem.Detail.Any())
+            if (item is PlayerBetLimitProductStatusLogMetaModel)
             {
-                return null;
-            }
+                if (!(item is PlayerBetLimitProductStatusLogMetaModel currentItem) || currentItem.Detail is null)
+                {
+                    return null;
+                }
 
-            return new BusinessLogItem
+                return new BusinessLogItem
+                {
+                    CustID = currentItem.CustId,
+                    UserId = currentItem.UserId,
+                    ActionID = LogActionId.PlayerAdminUpdateBetLimit,
+                    TypeId = (byte)UserControlLogType.Function,
+                    Doing = "LAP - " + currentItem.SiteName + " - " + currentItem.LicenseeCustId + " - " + JsonConvert.SerializeObject(currentItem.Detail)
+                };
+            }
+            else
             {
-                CustID = currentItem.CustId,
-                UserId = currentItem.UserId,
-                ActionID = LogActionId.PlayerAdminUpdateBetLimit,
-                TypeId = (byte)UserControlLogType.Function,
-                Doing = "LAP - " + currentItem.SiteName + " - " + currentItem.LicenseeCustId + " - "  + JsonConvert.SerializeObject(currentItem.Detail)
-            };
+                if (!(item is PlayerBetLimitLogMetaModel currentItem) || currentItem.Detail is null || !currentItem.Detail.Any())
+                {
+                    return null;
+                }
+
+                return new BusinessLogItem
+                {
+                    CustID = currentItem.CustId,
+                    UserId = currentItem.UserId,
+                    ActionID = LogActionId.PlayerAdminUpdateBetLimit,
+                    TypeId = (byte)UserControlLogType.Function,
+                    Doing = "LAP - " + currentItem.SiteName + " - " + currentItem.LicenseeCustId + " - " + JsonConvert.SerializeObject(currentItem.Detail)
+                };
+            }
         }
     }
 }

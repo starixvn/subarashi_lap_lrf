@@ -24,6 +24,8 @@
 
         public bool Status { get; set; }
 
+        public bool OldStatus { get; set; }
+
         public bool IsValid => true;
     }
 }

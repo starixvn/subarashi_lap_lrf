@@ -43,7 +43,10 @@
             {
                 Data = await getGroupBettingsTask,
                 BetSetting = setting,
-                Editable = isEditable && setting.IsEnabled && setting.IsLineEnabled
+                Editable = isEditable && setting.IsEnabled && setting.IsLineEnabled,
+                StatusEnable = setting.IsEnabled,
+                IsStatusEnable = isEditable,
+                setting.IsLineEnabled
             });
         }
 
@@ -62,6 +65,21 @@
                 return Json(new ResultInfo { Code = 1, Message = ViewResources.FunctionDeniedMsg });
             }
             var result = await _service.UpdateSettingAsync(metaModel).ConfigureAwait(false);
+            result.Message = result.Code == 0 ? ViewResources.UpdateSuccess : result.Message;
+
+            return Json(result);
+        }
+
+        [HttpPost]
+        [AjaxRequest]
+        [ValidationWebRequest(HandlingAjaxRequestWithJsonResult = true)]
+        [AutoBindMetaModel(BindIp = true, BindLanguage = true, BindSiteName = true, BindUserId = true)]
+        [ValidatePermissionOnData(isObject: true)]
+        [FunctionAuthorization(PermissionKeys.PlayerAdminBetLimit_Write)]
+        public async Task<JsonResult> UpdateStatus(PlayerBetLimitProductStatusUpdateMetaModel metaModel)
+        {
+            var result = await _service.UpdateStatusAsync(metaModel).ConfigureAwait(false);
+
             result.Message = result.Code == 0 ? ViewResources.UpdateSuccess : result.Message;
 
             return Json(result);

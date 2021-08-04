@@ -42,12 +42,46 @@
 
         private static readonly IDictionary<int, int> ProductSporttypeMap = new Dictionary<int, int>
         {
-            { ProductTypes.CG, 167 }
+            { ProductTypes.CG, 167 },
+            { ProductTypes.Exchange, (int)SportType.Exchange },
+            { ProductTypes.SLT, 169 },
+            { ProductTypes.I4D, 223 },
+            { ProductTypes.AllBet, 211 },
+            { ProductTypes.Voidbridge, 212 },
+            { ProductTypes.PP, 248 },
+            { ProductTypes.SXG, 243 },
+            { ProductTypes.GDG, 236 },
+            { ProductTypes.HB, 238 },
+            { ProductTypes.JK, 234 },
+            { ProductTypes.SAG, 244 },
+            { ProductTypes.PGS, 232 },
+            { ProductTypes.WM, 233 },
+            { ProductTypes.SG, 247 },
+            { ProductTypes.VRG, 245 },
+            { ProductTypes.CC, 165 },
+            { ProductTypes.SBC, 200 }
         };
 
         private static readonly IDictionary<int, int> ProductBettypeMap = new Dictionary<int, int>
         {
-            { ProductTypes.CG, 7301 }
+            { ProductTypes.CG, 7301 },
+            { ProductTypes.Exchange, 8001 },
+            { ProductTypes.SLT, 3611 },
+            { ProductTypes.I4D, 5001 },
+            { ProductTypes.AllBet, 2401 },
+            { ProductTypes.Voidbridge, 4001 },
+            { ProductTypes.PP, 4101 },
+            { ProductTypes.SXG, 3101 },
+            { ProductTypes.GDG, 5701 },
+            { ProductTypes.HB, 7001 },
+            { ProductTypes.JK, 6401 },
+            { ProductTypes.SAG, 3001 },
+            { ProductTypes.PGS, 6001 },
+            { ProductTypes.WM, 3401 },
+            { ProductTypes.SG, 4301 },
+            { ProductTypes.VRG, 4601 },
+            { ProductTypes.CC, 1901 },
+            { ProductTypes.SBC, 1611 }
         };
 
         public DcsBetLimitRepository(IDbFactory dbFactory, ILogger logger)
@@ -110,7 +144,7 @@
             }
         }
 
-        public async Task<bool> GetStatusAsync(int custId, int productId)
+        public async Task<bool?> GetStatusAsync(int custId, int productId)
         {
             const string UspName = "Acc_Dep_CustSetting_StatusSettingSelect";
 

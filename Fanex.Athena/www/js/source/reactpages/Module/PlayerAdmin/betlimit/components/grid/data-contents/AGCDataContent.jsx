@@ -52,6 +52,15 @@ export class AGCDataContent extends PureComponent {
         }
     }
 
+    onUpdateStatus = () => {
+        if (!this.state.showError) {
+            const oldStatus = this.state.setting.StatusEnable;
+            const newStatus = !this.state.setting.StatusEnable;
+
+            this._showUpdateStatusConfirmation(() => this._updateStatus(oldStatus, newStatus));
+        }
+    }
+
     onCloseAlert = () => {
         this.setState({ disabledButton: false }, () => this.props.setAlertOption({ isShow: false }));
     }
@@ -97,6 +106,40 @@ export class AGCDataContent extends PureComponent {
         const param = Object.assign({}, this.props.requestParam, { Setting: { group, oldGroup } });
 
         DataTransfer.updateData(param, this._showSubmitResult.bind(this));
+    }
+
+    _updateStatus(OldStatus, Status) {
+        this.props.toggleLoader(true);
+        var productName = this.props.productLabel;
+
+        const param = {...this.props.requestParam, Status, OldStatus, productName};
+
+        DataTransfer.updateStatus(param, this._showSubmitResult.bind(this));
+    }
+
+    _showUpdateStatusConfirmation(onOK) {
+        const buttons = [
+            {
+                text: LangHelper.getSingleResource('OK'),
+                onClick: onOK,
+                className: 'btn btn-apply'
+            }, {
+                text: LangHelper.getSingleResource('Cancel'),
+                onClick: this.onCloseAlert,
+                className: 'btn btn-cancel'
+            }];
+
+        const msg = (<p className="center-align">{Utility.getConfirmationUpdateStatusMsg(this.props.requestParam.ProductId)}</p>);
+
+        this.setState({ disabledButton: !this.state.setting.StatusEnable }, () => this.props.setAlertOption({
+            isShow: true,
+            title: LangHelper.getSingleResource('Confirmation'),
+            children: msg,
+            buttons: buttons,
+            icon: '',
+            onClose: this.onCloseAlert,
+            height: 130
+        }));
     }
 
     _showConfirmation(onOK) {
@@ -181,17 +224,23 @@ export class AGCDataContent extends PureComponent {
                 {
                     hasData
                         ? <AGCSettingGrid data={data} isEnabled={setting.BetSetting.IsEnabled} group={selectedGroup} />
-                        : <NoDataTitle title={LangHelper.getSingleResource('ProblemDisplayBetSetting')} />
+                        : (setting.IsStatusEnable ?  <NoDataTitle title={LangHelper.getSingleResource('CannotUpdateBetLimitForProduct').replace("{0}", LangHelper.getSingleResource('AGCasino'))}/> 
+                            : <NoDataTitle title={LangHelper.getSingleResource('ProblemDisplayBetSetting')} />)
                 }
                 {
-                    (setting.Editable && hasData) &&
                     <div className="pa-betlimit-button">
+                        {hasData && setting.Editable && <>
                         <button type='button' className='btn btn-cancel' disabled={disabledButton} onClick={this.onReset}>
                             {LangHelper.getSingleResource('Reset')}
                         </button>
                         <button type='button' className='btn btn-apply' disabled={disabledButton} onClick={this.onSubmit}>
                             {LangHelper.getSingleResource('Submit')}
-                        </button>
+                        </button> </>
+                        }
+                        
+                        {setting.IsStatusEnable && <button type='button' className='btn btn-apply' onClick={this.onUpdateStatus}>
+                                {setting.StatusEnable ? LangHelper.getSingleResource('DisableAgCasino') :  LangHelper.getSingleResource('EnableAgCasino')}
+                        </button>}                  
                     </div>
                 }
             </div>

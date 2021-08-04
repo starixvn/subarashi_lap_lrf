@@ -6,7 +6,7 @@ describe('contextMenuHelper', () => {
         playerInfo: 'lblPlayerAdminPlayerInfo',
         statement: 'lblPlayerAdminPlayerStatement',
         betlist: 'lblPlayerAdminBetList',
-        betLimit: 'lblPlayerAdminBetLimit',
+        betSetting: 'lblPlayerAdminBetSetting',
         note: 'lblPlayerAdminNote',
         password: 'lblPlayerAdminSetting',
         bankInfo: 'lblPlayerAdminPlayerInfo',
@@ -27,7 +27,7 @@ describe('contextMenuHelper', () => {
                 player: { isDeposit: true, isArchived: false, status: playerStatusByName.Active },
                 tabList: commonTabList,
                 licType: licenseeType.api,
-                expectedResult: [contextMenuKeys.note, contextMenuKeys.fundtransferLimit, contextMenuKeys.betLimit, contextMenuKeys.statement]
+                expectedResult: [contextMenuKeys.note, contextMenuKeys.fundtransferLimit, contextMenuKeys.betSetting, contextMenuKeys.statement]
             },
             {
                 player: { isDeposit: false, isArchived: false, status: playerStatusByName.Active },
@@ -39,7 +39,7 @@ describe('contextMenuHelper', () => {
                 player: { isDeposit: true, isArchived: false, status: playerStatusByName.Closed },
                 tabList: commonTabList,
                 licType: licenseeType.nonApi,
-                expectedResult: [contextMenuKeys.note, contextMenuKeys.bankInformation, contextMenuKeys.fundtransferLimit, contextMenuKeys.betLimit, contextMenuKeys.statement, contextMenuKeys.personalMessage]
+                expectedResult: [contextMenuKeys.note, contextMenuKeys.bankInformation, contextMenuKeys.fundtransferLimit, contextMenuKeys.betSetting, contextMenuKeys.statement, contextMenuKeys.personalMessage]
             },
             {
                 player: { isDeposit: true, isArchived: true, status: playerStatusByName.Active },

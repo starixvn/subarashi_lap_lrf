@@ -42,15 +42,41 @@
 
                 await db.ExecuteNonQueryAsync().ConfigureAwait(false);
 
-                var errorCode = db.GetParameterValue("ErrCode");
-                var errorMessage = db.GetParameterValue("ErrMsg");
-
-                return new ResultInfo
-                {
-                    Code = Converter.ToInt(errorCode),
-                    Message = Converter.ToString2(errorMessage)
-                };
+                return GetResult(db);
             }
+        }
+
+        public async Task<IResultInfo> UpdateStatusAsync(PlayerBetLimitProductStatusUpdateMetaModel metaModel)
+        {
+            const string UspName = "Lrf_AGC_UpdCustStatus";
+
+            using (var db = _db.GetObjectDb(UspName))
+            {
+                db.SetParameterValue("isenabled", metaModel.Status);
+                db.SetParameterValue("ip", metaModel.Ip);
+                db.SetParameterValue("language", metaModel.Language);
+                db.SetParameterValue("userid", metaModel.UserId);
+                db.SetParameterValue("custid", metaModel.CustId);
+
+                db.SetParameterValue("ErrCode", null);
+                db.SetParameterValue("ErrMsg", null);
+
+                await db.ExecuteNonQueryAsync().ConfigureAwait(false);
+
+                return GetResult(db);
+            }
+        }
+
+        protected static IResultInfo GetResult(IObjectDb db)
+        {
+            var errorCode = db.GetParameterValue("ErrCode");
+            var errorMessage = db.GetParameterValue("ErrMsg");
+
+            return new ResultInfo
+            {
+                Code = Converter.ToInt(errorCode),
+                Message = Converter.ToString2(errorMessage)
+            };
         }
 
         private static void AddUpdateParameter(IObjectDb db, PlayerBetLimitUpdateMetaModel<AgCasinoBetLimitMetaModel> metaModel)
