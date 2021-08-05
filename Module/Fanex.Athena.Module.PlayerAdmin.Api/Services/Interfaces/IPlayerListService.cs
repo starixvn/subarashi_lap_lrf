@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
-using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
+﻿using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.ViewModels;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Fanex.Athena.Module.PlayerAdmin.Api.Services.Interfaces
 {
@@ -10,7 +11,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services.Interfaces
 
         PlayerListResultViewModel GetPlayerListById(PlayerListByIdMetaModel metaModel);
 
-        List<string> CustomerClass(string licenseeName);
+        Task<IEnumerable<string>> CustomerClass();
 
         List<CommGroupViewModel> GetAllCommGroups(int licenseeId);
     }

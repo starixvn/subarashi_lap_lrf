@@ -3,6 +3,7 @@ using System.Linq;
 using Fanex.Athena.Extension.Utility.Interfaces;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services;
+using Fanex.Athena.Service.Customer.Interfaces;
 using Fanex.Athena.UnitTest.Common.Helpers;
 using Fanex.Data;
 using NSubstitute;
@@ -14,17 +15,20 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
     public class PlayerListServiceTest
     {
         private IDbFactory _dbFactory;
+        private ICustomerClassService _customerClassService;
 
         [SetUp]
         public void SetUp()
         {
             _dbFactory = Substitute.For<IDbFactory>();
+            _customerClassService = Substitute.For<ICustomerClassService>();
         }
 
         [TearDown]
         public void TearDown()
         {
             _dbFactory = null;
+            _customerClassService = null;
         }
 
         [Test]
@@ -51,7 +55,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
             objectDb.ExecuteReader().Returns(reader);
             reader.Read().Returns(false);
 
-            var service = new PlayerListService(_dbFactory);
+            var service = new PlayerListService(_dbFactory, _customerClassService);
 
             // Action
             service.Search(metaModel);
@@ -104,7 +108,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
             DataAccessTestHelper.MapReaderData(reader, expectedData);
             objectDb.GetParameterValue("TotalRows").Returns(1);
 
-            var service = new PlayerListService(_dbFactory);
+            var service = new PlayerListService(_dbFactory, _customerClassService);
 
             // Action
             var result = service.Search(metaModel);
@@ -148,7 +152,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
             objectDb.ExecuteReader().Returns(reader);
             reader.Read().Returns(false);
 
-            var service = new PlayerListService(_dbFactory);
+            var service = new PlayerListService(_dbFactory, _customerClassService);
 
             // Action
             service.GetPlayerListById(metaModel);

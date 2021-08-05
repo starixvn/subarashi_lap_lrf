@@ -12,6 +12,5 @@
         public string BaseCurrency { get; set; }
         public byte ViewType { get; set; }
         public IEnumerable<CheckedItem> SubsidiaryList { get; set; }
-        public List<string> CustomerClass { get; set; }
     }
 }

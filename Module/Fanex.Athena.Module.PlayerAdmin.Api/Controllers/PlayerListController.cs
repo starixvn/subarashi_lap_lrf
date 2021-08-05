@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Http;
 using Fanex.Athena.Api.StatelessBase;
 using Fanex.Athena.Api.StatelessBase.Attributes;
@@ -53,7 +54,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Controllers
         [AllowAnonymous]
         [HttpPost]
         [PlayerAdminAutoBindMetaModel]
-        public LRFFiltersViewModel LRFFilters(LRFFiltersMetaModel metaModel)
+        public async Task<LRFFiltersViewModel> LRFFilters(LRFFiltersMetaModel metaModel)
         {
             List<CommGroupViewModel> commGroups = playerListService.GetAllCommGroups(metaModel.LicenseeId);
             commGroups.Insert(0, new CommGroupViewModel());
@@ -71,7 +72,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Controllers
 
             return new LRFFiltersViewModel
             {
-                CustomerClass = playerListService.CustomerClass(SiteName),
+                CustomerClass = await playerListService.CustomerClass(),
                 CommGroups = commGroups,
                 Subsidiaries = playerSubsidiaryService.GetSubsidiaries(subsidiaryParam),
                 SubsidiaryViewType = (byte)playerSubsidiaryService.GetSubsidiaryViewType(viewTypeParam),
