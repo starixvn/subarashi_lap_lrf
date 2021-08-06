@@ -18,10 +18,14 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
-            base.FixtureSetUp();
+            base.FixtureSetUp(); 
+            SetUpDefaultFakeData();
             service = Substitute.For<IPlayerDetailTransactionService>();
             excelService = Substitute.For<IPlayerDetailTransactionExcel>();
-            controller = new PlayerDetailTransactionController(service, excelService);
+            controller = new PlayerDetailTransactionController(service, excelService)
+            {
+                SessionServiceInstance = SessionService
+            };
         }
 
         [OneTimeTearDown]
@@ -30,6 +34,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers
             base.FixtureTearDown();
 
             service = null;
+            excelService = null;
             controller = null;
         }
 
@@ -46,6 +51,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers
                 Assert.AreEqual("~/Views/Desktop/Module/PlayerAdmin/PlayerDetailTransaction/Index.cshtml", viewResult.ViewName);
                 Assert.AreEqual(0, viewModel.CustId);
                 Assert.AreEqual(0, viewModel.CurrencyId);
+                Assert.AreEqual(DefaultLicenseeSession.IsEnableSingleWallet, viewModel.IsEnableSingleWallet);
             });
         }
 

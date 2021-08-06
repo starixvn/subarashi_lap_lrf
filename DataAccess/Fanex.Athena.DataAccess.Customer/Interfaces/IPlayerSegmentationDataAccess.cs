@@ -16,6 +16,6 @@ namespace Fanex.Athena.DataAccess.Customer.Interfaces
 
         Task<IDictionary<int, string>> GetReasonGroupListAsync(string langKey);
 
-        Task<List<string>> CustomerClass(string licenseeName);
+        Task<IEnumerable<string>> GetProblemAccountCustomerClass();
     }
 }

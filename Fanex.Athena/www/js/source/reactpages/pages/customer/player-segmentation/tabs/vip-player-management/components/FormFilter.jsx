@@ -125,8 +125,10 @@ export class FormFilter extends PureComponent {
     }
 
     _renderCustomerClassSelectList() {
-        const customerClassList = AppData.customerClassList;
-        const dataSource = DataSourceHelper.CreateDataSourceFrom(customerClassList, this.props.selectedCustomerClass);
+        const { selectedCustomerClass, selectedTabKey } = this.props;
+
+        const customerClassList = AppData[selectedTabKey].customerClassList;
+        const dataSource = DataSourceHelper.CreateDataSourceFrom(customerClassList, selectedCustomerClass);
 
         return customerClassList && customerClassList.length && (
             <MultipleSelect id="ddlCustomerClass"

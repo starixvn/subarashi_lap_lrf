@@ -67,7 +67,7 @@
             return result;
         }
 
-        private async Task<IEnumerable<CustomerClassCategoryModel>> GetCustomerClassCategories()
+        public async Task<IEnumerable<CustomerClassCategoryModel>> GetCustomerClassCategories()
         {
             try
             {
@@ -91,7 +91,7 @@
             var isEnglish = string.Equals(metaModel.Language, "en-US", StringComparison.OrdinalIgnoreCase);
             foreach (var g in groups)
             {
-                var category = categories.Where(c => c.CustomerClass == g.Id)
+                var category = categories.Where(c => c.CustomerClass.ToString() == g.Id)
                     .Select(c => isEnglish ? c.CategoryName : c.CategoryNameCN);
                 g.Category = category.Any() ? string.Join(", ", category) : DefaultTextValue;
             }

@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Fanex.Athena.Extension.Utility.Interfaces;
 using Fanex.Athena.Module.PlayerAdmin.Api.DTO;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services.Interfaces;
 using Fanex.Athena.Module.PlayerAdmin.Api.ViewModels;
+using Fanex.Athena.Service.Customer.Interfaces;
 using Fanex.Data;
 
 namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
@@ -14,9 +17,12 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
     {
         private readonly IDbFactory _dbFactory;
 
-        public PlayerListService(IDbFactory dbFactory)
+        private readonly ICustomerClassService _customerClassService;
+
+        public PlayerListService(IDbFactory dbFactory, ICustomerClassService customerClassService)
         {
             _dbFactory = dbFactory;
+            _customerClassService = customerClassService;
         }
 
         public PlayerListResultViewModel Search(PlayerSearchingMetaModel metaModel)
@@ -57,22 +63,15 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
             return result;
         }
 
-        public List<string> CustomerClass(string licenseeName)
+        public async Task<IEnumerable<string>> CustomerClass()
         {
             var result = new List<string> { "0" };
-
-            using (var objectDb = _dbFactory.GetObjectDb("Lrf_CustomerClassSel"))
-            {
-                using (var reader = objectDb.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        result.Add(reader["CustomerClass"].ToString());
-                    }
-                }
-            }
-
-            return result;
+            var listCategory = await _customerClassService.GetCustomerClassCategories();
+            result.AddRange(listCategory
+                .OrderBy(_ => _.CustomerClass)
+                .Select(_ => _.CustomerClass.ToString())
+                );
+            return result.Distinct();
         }
 
         public List<CommGroupViewModel> GetAllCommGroups(int licenseeId)

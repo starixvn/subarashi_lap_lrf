@@ -7,6 +7,7 @@ using Fanex.Athena.Model.Customer.Enum;
 using Fanex.Athena.Model.Customer.MetaModel;
 using Fanex.Athena.Model.Report.DTO;
 using Fanex.Athena.Service.Core.Users.Interfaces;
+using Fanex.Athena.Service.Customer.Interfaces;
 using Fanex.Athena.UnitTest.Common.Helpers;
 using FluentAssertions;
 using NSubstitute;
@@ -22,6 +23,7 @@ namespace Fanex.Athena.Service.Customer.UnitTests
         private IPlayerSegmentationDataAccess _playerDataAccess;
         private IContextService _contextService;
         private ISubsidiaryService _subsidiaryService;
+        private ICustomerClassService _customerClassService;
 
         private PlayerSegmentationService _targetService;
 
@@ -31,7 +33,8 @@ namespace Fanex.Athena.Service.Customer.UnitTests
             _playerDataAccess = Substitute.For<IPlayerSegmentationDataAccess>();
             _contextService = Substitute.For<IContextService>();
             _subsidiaryService = Substitute.For<ISubsidiaryService>();
-            _targetService = new PlayerSegmentationService(_contextService, _playerDataAccess, _subsidiaryService);
+            _customerClassService = Substitute.For<ICustomerClassService>();
+            _targetService = new PlayerSegmentationService(_contextService, _playerDataAccess, _subsidiaryService, _customerClassService);
         }
 
         [TearDown]

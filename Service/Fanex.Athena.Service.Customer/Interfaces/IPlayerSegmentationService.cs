@@ -21,6 +21,7 @@
 
         PlayerSegmentationViewType GetViewType(bool anySubsidiary);
 
-        Task<List<string>> CustomerClass(string licenseeName);
+        Task<IEnumerable<string>> GetProblemAccCustomerClass();
+        Task<IEnumerable<string>> GetCustomerClass();
     }
 }

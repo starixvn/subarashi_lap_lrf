@@ -4685,8 +4685,12 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
   }
 
   _renderCustomerClassSelectList() {
-    const customerClassList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_14__["default"].customerClassList;
-    const dataSource = _lib_helpers_dataSourceHelper__WEBPACK_IMPORTED_MODULE_21__["default"].CreateDataSourceFrom(customerClassList, this.props.selectedCustomerClass);
+    const {
+      selectedCustomerClass,
+      selectedTabKey
+    } = this.props;
+    const customerClassList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_14__["default"][selectedTabKey].customerClassList;
+    const dataSource = _lib_helpers_dataSourceHelper__WEBPACK_IMPORTED_MODULE_21__["default"].CreateDataSourceFrom(customerClassList, selectedCustomerClass);
     return customerClassList && customerClassList.length && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_4___default.a, {
       id: "ddlCustomerClass",
       language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_10__["default"].currentLanguage,

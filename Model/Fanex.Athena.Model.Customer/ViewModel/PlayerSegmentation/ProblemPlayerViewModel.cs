@@ -28,5 +28,8 @@
         public IDictionary<int, string> CurrencyList { get; set; }
 
         public IDictionary<int, string> ReasonList { get; set; }
+
+        public IEnumerable<string> CustomerClass { get; set; }
+
     }
 }

@@ -104,7 +104,7 @@
             }
         }
 
-        public async Task<List<string>> CustomerClass(string licenseeName)
+        public async Task<IEnumerable<string>> GetProblemAccountCustomerClass()
         {
             var result = new List<string> { "0" };
 

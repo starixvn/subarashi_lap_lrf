@@ -1,9 +1,12 @@
 ﻿namespace Fanex.Athena.Service.Customer
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using Fanex.Athena.DataAccess.Customer.Interfaces;
+    using Fanex.Athena.Extension.Utility;
+    using Fanex.Athena.Extension.Utility.Interfaces;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
@@ -11,22 +14,26 @@
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.Customer.Interfaces;
+    using Newtonsoft.Json;
 
     public class PlayerSegmentationService : IPlayerSegmentationService
     {
         private readonly IPlayerSegmentationDataAccess _playerDataAccess;
         private readonly IContextService _contextService;
         private readonly ISubsidiaryService _subsidiaryService;
+        private readonly ICustomerClassService _customerClassService;
 
         public PlayerSegmentationService(
             IContextService contextService,
             IPlayerSegmentationDataAccess playerDataAccess,
-            ISubsidiaryService subsidiaryService
+            ISubsidiaryService subsidiaryService,
+            ICustomerClassService customerClassService
             )
         {
             _contextService = contextService;
             _playerDataAccess = playerDataAccess;
             _subsidiaryService = subsidiaryService;
+            _customerClassService = customerClassService;
         }
 
         public async Task<ApiPagingResult<PlayerInfo>> GetProblemPlayerListAsync(ProblemPlayerListMetaModel metaModel)
@@ -80,7 +87,19 @@
             return PlayerSegmentationViewType.WhiteLabel;
         }
 
-        public async Task<List<string>> CustomerClass(string licenseeName) => await _playerDataAccess.CustomerClass(licenseeName);
+        public Task<IEnumerable<string>> GetProblemAccCustomerClass() 
+            => _playerDataAccess.GetProblemAccountCustomerClass();
+
+        public async Task<IEnumerable<string>> GetCustomerClass()
+        {
+            var result = new List<string> { "0" };
+            var listCategory = await _customerClassService.GetCustomerClassCategories();
+            result.AddRange(listCategory
+                .OrderBy(_ => _.CustomerClass)
+                .Select(_ => _.CustomerClass.ToString())
+                );
+            return result.Distinct();
+        }
 
         private void BindAgentListBySubsidiaryBiz(BasePlayerListMetaModel metaModel)
         {
