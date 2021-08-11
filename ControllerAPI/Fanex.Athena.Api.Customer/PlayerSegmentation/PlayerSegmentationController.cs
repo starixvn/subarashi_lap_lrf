@@ -39,7 +39,7 @@
         [HttpPost]
         [ValidationApiRequest]
         [ApiAutoBindMetaModel(BindAgent = true, BindUserId = true, BindIp = true)]
-        [ApiFunctionAuthorization(PermissionKeys.PlayerVIPManagement)]
+        [ApiFunctionAuthorization(PermissionKeys.PlayerVIPManagement_Write)]
         public async Task<JsonResult<IEnumerable<UpdateStatusPlayerResult>>> UpdateVipStatus(UpdateStatusPlayerMetaModel metaModel)
         {
             var result = await _playerService.UpdateVipStatusAsync(metaModel).ConfigureAwait(false);

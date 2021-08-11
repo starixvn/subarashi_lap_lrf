@@ -221,7 +221,7 @@ namespace Fanex.Athena.Service.Customer.UnitTests
         {
             //Arrange
             var langKey = FakeHelper.Create<string>();
-            var expectedResult = FakeHelper.Create<IDictionary<int, string>>();
+            var expectedResult = FakeHelper.Create<List<ReasonGroup>>();
             _playerDataAccess.GetReasonGroupListAsync(langKey).Returns(expectedResult);
 
             //Act

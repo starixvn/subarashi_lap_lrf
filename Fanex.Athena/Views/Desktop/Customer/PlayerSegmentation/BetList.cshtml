@@ -22,7 +22,6 @@
     externalId: '@Model.ExternalId',
     systemId: '@Model.SystemId',
     isAllowedCustomerComm: @Model.IsAllowedCustomerComm.ToString().ToLowerInvariant(),
-    baseCurrency: '@Model.BaseCurrency.ToUpperInvariant()',
     custId: @Model.CustId,
     dateConstraint: { minDate: '01/01/2019', maxDate: '@DateTime.Today.ToString("MM/dd/yyyy")', limitedMonthRange: 6 },
     };

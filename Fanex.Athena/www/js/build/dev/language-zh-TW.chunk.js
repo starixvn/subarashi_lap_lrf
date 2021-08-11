@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 8/3/2021 5:47:51 PM
+﻿// Generated at: 8/6/2021 4:37:23 PM
 window._language_zh_TW = {
 AA:"客客",
 AbnormalBet:"非正規註單",
@@ -394,6 +394,7 @@ Last:"最後",
 LastBetsMonitoring:"最後投注監測",
 LastGoal:"最後進球",
 LastLogin:"最後登入",
+LastModifiedDate:"上次更新日期",
 Lastmonth:"上個月",
 LastName:"姓",
 LastTxn:"最後交易",

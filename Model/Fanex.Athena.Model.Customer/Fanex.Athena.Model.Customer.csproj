@@ -79,6 +79,7 @@
     <Compile Include="DTO\CustomerLog\LogInLog.cs" />
     <Compile Include="DTO\LogInfo.cs" />
     <Compile Include="DTO\CustomerClassLimitPolicyModel.cs" />
+    <Compile Include="DTO\PlayerSegmentation\ReasonGroup.cs" />
     <Compile Include="DTO\PlayerSegmentation\PlayerInfo.cs" />
     <Compile Include="DTO\PlayerSegmentation\UpdateStatusPlayerResult.cs" />
     <Compile Include="Enum\CustomerClassTabType.cs" />

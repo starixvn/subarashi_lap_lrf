@@ -4691,9 +4691,7 @@ const AppContainer = props => {
   const _contentTitle = react__WEBPACK_IMPORTED_MODULE_0___default.a.useMemo(() => {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "content-title"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, `${_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_6__["default"].externalId}(${_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_6__["default"].systemId})`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-      className: "base-currency"
-    }, ` - ${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource('Viewin').replace('{0}', _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_6__["default"].baseCurrency)}`));
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, `${_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_6__["default"].externalId}(${_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_6__["default"].systemId})`));
   }, []);
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_3__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_layouts_betlist_BetListLayout__WEBPACK_IMPORTED_MODULE_4__["default"], {

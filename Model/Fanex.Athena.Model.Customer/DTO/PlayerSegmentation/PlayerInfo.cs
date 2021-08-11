@@ -20,7 +20,7 @@ namespace Fanex.Athena.Model.Customer.DTO.PlayerSegmentation
 
         public IEnumerable<string> ReasonList => string.IsNullOrEmpty(Reason) ? new string[] { } : Reason.Trim().Split('#');
 
-        public string MarkDate { get; set; }
+        public string LastModifiedDate { get; set; }
         public bool IsVip { get; set; }
         public bool IsBA { get; set; }
     }

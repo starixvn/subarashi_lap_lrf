@@ -3056,4 +3056,7 @@
   <data name="UpdateProductStatus" xml:space="preserve">
     <value>Are you sure you want to update {0} status?</value>
   </data>
+  <data name="LastModifiedDate" xml:space="preserve">
+    <value>Last Modified Date</value>
+  </data>
 </root>

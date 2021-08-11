@@ -1,4 +1,4 @@
-﻿// Generated at: 8/3/2021 5:47:38 PM
+﻿// Generated at: 8/6/2021 4:37:13 PM
 var _language_zh_Hans = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -299,6 +299,7 @@ Last:"最后",
 LastBetsMonitoring:"最后投注监测",
 LastGoal:"最后进球",
 LastLogin:"最后登入",
+LastModifiedDate:"上次更新日期",
 Lastmonth:"上个月",
 LastName:"姓",
 LastTxn:"最后交易",

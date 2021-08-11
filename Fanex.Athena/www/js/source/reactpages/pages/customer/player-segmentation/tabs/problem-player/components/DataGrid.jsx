@@ -29,7 +29,7 @@ export const DataGrid = (props) => {
     });
 
     const _renderDataSection = dataList => dataList.map((dataItem, index) => {
-        return <PlayerRow {...{ dataItem, index, hasVipManagement: AppData.HasVipManagement, showSubsidiary, onSelectPlayer }} />
+        return <PlayerRow {...{ dataItem, index, hasVipManagement: AppData.HasVipManagement, hasVipManagementEdit: AppData.HasVipManagementEdit, showSubsidiary, onSelectPlayer }} />
     })
 
     const _handleSort = (orderCol, sortType) => {
@@ -56,7 +56,7 @@ export const DataGrid = (props) => {
                 header={GridHelper.renderHeader(_gridHeaders)}
                 body={_renderDataSection(playerList)}
                 containerPadding={30}
-                shouldResetScrollPosition={false}
+                shouldResetScrollPosition={true}
                 onSort={_handleSort} />
         </React.Fragment>
     );

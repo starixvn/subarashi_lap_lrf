@@ -1,4 +1,4 @@
-﻿// Generated at: 8/3/2021 5:47:38 PM
+﻿// Generated at: 8/6/2021 4:37:13 PM
 var _language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -400,6 +400,7 @@ Last:"Last",
 LastBetsMonitoring:"Last Bets Monitoring",
 LastGoal:"Last Goal",
 LastLogin:"Last Login",
+LastModifiedDate:"Last Modified Date",
 Lastmonth:"Last month",
 LastName:"Last Name",
 LastTransaction:"Last Transaction",

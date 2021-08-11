@@ -16,13 +16,13 @@ exports.default = function (file, acceptedFiles) {
   if (file && acceptedFiles) {
     var acceptedFilesArray = Array.isArray(acceptedFiles) ? acceptedFiles : acceptedFiles.split(',');
     var fileName = file.name || '';
-    var mimeType = (file.type || '').toLowerCase();
+    var mimeType = file.type || '';
     var baseMimeType = mimeType.replace(/\/.*$/, '');
     return acceptedFilesArray.some(function (type) {
-      var validType = type.trim().toLowerCase();
+      var validType = type.trim();
 
       if (validType.charAt(0) === '.') {
-        return fileName.toLowerCase().endsWith(validType);
+        return fileName.toLowerCase().endsWith(validType.toLowerCase());
       } else if (validType.endsWith('/*')) {
         // This is something like a image/* mime type
         return baseMimeType === validType.replace(/\/.*$/, '');
@@ -63,8 +63,8 @@ var FILES_TO_IGNORE = [
  * @param evt
  */
 function fromEvent(evt) {
-    return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
+    return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
             return [2 /*return*/, isDragEvt(evt) && evt.dataTransfer
                     ? getDataTransferFiles(evt.dataTransfer, evt.type)
                     : getInputFiles(evt)];
@@ -86,9 +86,9 @@ function isInput(value) {
     return value !== null;
 }
 function getDataTransferFiles(dt, type) {
-    return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
+    return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
         var items, files;
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
             switch (_a.label) {
                 case 0:
                     if (!dt.items) return [3 /*break*/, 2];
@@ -140,7 +140,7 @@ function toFilePromises(item) {
     return fromDataTransferItem(item);
 }
 function flatten(items) {
-    return items.reduce(function (acc, files) { return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__spread"])(acc, (Array.isArray(files) ? flatten(files) : [files])); }, []);
+    return items.reduce(function (acc, files) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__spread"](acc, (Array.isArray(files) ? flatten(files) : [files])); }, []);
 }
 function fromDataTransferItem(item) {
     var file = item.getAsFile();
@@ -152,8 +152,8 @@ function fromDataTransferItem(item) {
 }
 // https://developer.mozilla.org/en-US/docs/Web/API/FileSystemEntry
 function fromEntry(entry) {
-    return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
+    return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
             return [2 /*return*/, entry.isDirectory ? fromDirEntry(entry) : fromFileEntry(entry)];
         });
     });
@@ -167,9 +167,9 @@ function fromDirEntry(entry) {
             var _this = this;
             // https://developer.mozilla.org/en-US/docs/Web/API/FileSystemDirectoryEntry/createReader
             // https://developer.mozilla.org/en-US/docs/Web/API/FileSystemDirectoryReader/readEntries
-            reader.readEntries(function (batch) { return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, function () {
+            reader.readEntries(function (batch) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
                 var files, err_1, items;
-                return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
+                return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                     switch (_a.label) {
                         case 0:
                             if (!!batch.length) return [3 /*break*/, 5];
@@ -204,8 +204,8 @@ function fromDirEntry(entry) {
 }
 // https://developer.mozilla.org/en-US/docs/Web/API/FileSystemFileEntry
 function fromFileEntry(entry) {
-    return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
+    return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
             return [2 /*return*/, new Promise(function (resolve, reject) {
                     entry.file(function (file) {
                         var fwp = Object(_file__WEBPACK_IMPORTED_MODULE_1__["toFileWithPath"])(file, entry.fullPath);
@@ -1291,7 +1291,7 @@ PERFORMANCE OF THIS SOFTWARE.
 var extendStatics = function(d, b) {
     extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
     return extendStatics(d, b);
 };
 
@@ -1377,16 +1377,13 @@ function __generator(thisArg, body) {
     }
 }
 
-var __createBinding = Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
+function __createBinding(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
-});
+}
 
-function __exportStar(m, o) {
-    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(o, p)) __createBinding(o, m, p);
+function __exportStar(m, exports) {
+    for (var p in m) if (p !== "default" && !exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 
 function __values(o) {
@@ -1467,17 +1464,11 @@ function __makeTemplateObject(cooked, raw) {
     return cooked;
 };
 
-var __setModuleDefault = Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-};
-
 function __importStar(mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result.default = mod;
     return result;
 }
 
@@ -3243,7 +3234,8 @@ const VipSwitcherCell = props => {
     index,
     updateVipStatus,
     setSweetAlertOption,
-    playerList
+    playerList,
+    hasVipManagementEdit
   } = props;
   const {
     systemId,
@@ -3251,7 +3243,7 @@ const VipSwitcherCell = props => {
     isBA,
     customerClass
   } = playerList[index];
-  const canEditVip = !isBA;
+  const canEditVip = hasVipManagementEdit && !isBA;
 
   const _handleCloseAlert = () => {
     setSweetAlertOption(null);
@@ -4115,6 +4107,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/components/NoDataTitle */ "./www/js/source/reactpages/components/NoDataTitle.jsx");
 /* harmony import */ var _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../lib/helpers/gridHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/helpers/gridHelper.js");
 /* harmony import */ var _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../lib/helpers/gridHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/vip-player-management/lib/helpers/gridHelper.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
@@ -4126,6 +4119,7 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -4150,6 +4144,7 @@ const DataGrid = props => {
     setPagingOption,
     searchPlayer
   } = props;
+  const hasVipManagementEdit = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].HasVipManagementEdit;
 
   if (playerList == null) {
     return null;
@@ -4178,6 +4173,12 @@ const DataGrid = props => {
     })
   }, ...Object(_lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_9__["getDataGridHeaders"])(showSubsidiary)];
 
+  if (!hasVipManagementEdit) {
+    _dataGridHeaders.forEach(function (header, index) {
+      header['childComponent'] && delete header['childComponent'];
+    });
+  }
+
   const _renderDataSection = dataList => dataList.map((dataItem, index) => {
     const {
       isSelected
@@ -4186,7 +4187,8 @@ const DataGrid = props => {
 
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_grid_PlayerRow__WEBPACK_IMPORTED_MODULE_6__["default"], _extends({}, rest, {
       index: index,
-      showSubsidiary: showSubsidiary
+      showSubsidiary: showSubsidiary,
+      hasVipManagementEdit: hasVipManagementEdit
     }));
   });
 
@@ -4211,7 +4213,7 @@ const DataGrid = props => {
     header: _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_8__["default"].renderHeader(_dataGridHeaders),
     body: _renderDataSection(playerList),
     containerPadding: 30,
-    shouldResetScrollPosition: false,
+    shouldResetScrollPosition: true,
     onSort: _handleSort
   }));
 };
@@ -4276,6 +4278,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/vip-player-management/lib/constants.js");
 /* harmony import */ var _lib_helpers_excelHelper__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../lib/helpers/excelHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/vip-player-management/lib/helpers/excelHelper.js");
 /* harmony import */ var _lib_helpers_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../lib/helpers/sweetAlertHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/helpers/sweetAlertHelper.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+
 
 
 
@@ -4298,6 +4302,7 @@ const FormAction = props => {
   } = props;
   const [displayUploadDropzone, setDisplayUploadDropzone] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
   const [resultMsgSubmitVipListFile, setResultMsgSubmitVipListFile] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null);
+  const hasVipManagementEdit = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_12__["default"].HasVipManagementEdit;
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     resultMsgSubmitVipListFile && setDisplayUploadDropzone(false);
   }, [selectedParams]);
@@ -4433,7 +4438,7 @@ const FormAction = props => {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     type: "button",
     className: "btn",
-    disabled: !isActiveTaggingAction,
+    disabled: !isActiveTaggingAction || !hasVipManagementEdit,
     onClick: _handleActivateVip
   }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("ActivateVip"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "action"
@@ -4441,13 +4446,14 @@ const FormAction = props => {
     type: "button",
     className: "btn",
     onClick: _handleDeactivateVip,
-    disabled: !isActiveTaggingAction
+    disabled: !isActiveTaggingAction || !hasVipManagementEdit
   }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("DeactivateVip"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "action"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     type: "button",
     className: "btn",
-    onClick: _handleDisplayUploadDropzone
+    onClick: _handleDisplayUploadDropzone,
+    disabled: !hasVipManagementEdit
   }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("UploadVipList")))), displayUploadDropzone && _renderDropzoneUploadFile());
 };
 
@@ -4855,9 +4861,10 @@ const PlayerRow = props => {
     index,
     custId,
     showSubsidiary,
-    customerClass
+    customerClass,
+    hasVipManagementEdit
   } = props;
-  const canEditVip = !isBA;
+  const canEditVip = hasVipManagementEdit && !isBA;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Row"], {
     key: `player_row_${custId}`
   }, canEditVip ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SelectionCell__WEBPACK_IMPORTED_MODULE_2__["default"], {

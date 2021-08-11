@@ -8,12 +8,14 @@ import PlayerRow from './grid/PlayerRow';
 import NoDataTitle from '@jsroot/components/NoDataTitle';
 import GridHelper from '../../../lib/helpers/gridHelper';
 import { getDataGridHeaders } from '../lib/helpers/gridHelper';
+import AppData from '@jsroot/lib/AppData';
 
 const MAX_WIDTH_PAGE = 1920;
 
 export const DataGrid = (props) => {
     const MAX_WIDTH = Math.min(document.body.clientWidth, MAX_WIDTH_PAGE);
     const { isCheckAll, playerList, pagingOption, selectedParams, selectedTabKey, setPlayerList, setPagingOption, searchPlayer } = props;
+    const hasVipManagementEdit =  AppData.HasVipManagementEdit;
 
     if (playerList == null) {
         return null;
@@ -43,9 +45,13 @@ export const DataGrid = (props) => {
         ...getDataGridHeaders(showSubsidiary)
     ]
 
+    if(!hasVipManagementEdit) {
+        _dataGridHeaders.forEach(function(header, index) {header['childComponent'] && delete header['childComponent'];} );
+    }
+
     const _renderDataSection = dataList => dataList.map((dataItem, index) => {
         const { isSelected, ...rest } = dataItem;
-        return <PlayerRow {...rest} index={index} showSubsidiary={showSubsidiary} />
+        return <PlayerRow {...rest} index={index} showSubsidiary={showSubsidiary} hasVipManagementEdit={hasVipManagementEdit}/>
     })
 
     const _handleSort = (orderCol, sortType) => {
@@ -70,7 +76,7 @@ export const DataGrid = (props) => {
                 header={GridHelper.renderHeader(_dataGridHeaders)}
                 body={_renderDataSection(playerList)}
                 containerPadding={30}
-                shouldResetScrollPosition={false}
+                shouldResetScrollPosition={true}
                 onSort={_handleSort} />
         </React.Fragment>
     );

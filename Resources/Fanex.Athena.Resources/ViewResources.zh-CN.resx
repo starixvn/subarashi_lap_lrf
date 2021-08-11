@@ -2672,4 +2672,7 @@
   <data name="ProductCG" xml:space="preserve">
     <value>CG电子</value>
   </data>
+  <data name="LastModifiedDate" xml:space="preserve">
+    <value>上次更新日期</value>
+  </data>
 </root>

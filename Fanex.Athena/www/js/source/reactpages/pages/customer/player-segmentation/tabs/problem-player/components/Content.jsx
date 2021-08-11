@@ -33,8 +33,7 @@ export const Content = props => {
     const _renderBetListPopup = () => {
         if(selectedPlayer) {
             const params = {
-                ...selectedPlayer,
-                ...{ baseCurrency: selectedParams.baseCurrency }
+                ...selectedPlayer
             }
             const betListUrl = BetListHelper.buildAbnormalBetListUrl(params);
             return (<Popup isShow={true}

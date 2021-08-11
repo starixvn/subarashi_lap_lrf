@@ -3661,6 +3661,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Last Modified Date.
+        /// </summary>
+        public static string LastModifiedDate {
+            get {
+                return ResourceManager.GetString("LastModifiedDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Last month.
         /// </summary>
         public static string Lastmonth {

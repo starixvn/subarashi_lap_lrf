@@ -10,11 +10,13 @@ import DropzoneUpload from '../../../components/DropzoneUpload';
 import { Url, ExcelReaderColumn } from '../lib/constants';
 import ExcelHelper from '../lib/helpers/excelHelper';
 import { UpdateVipStatusAlertOption } from '../../../lib/helpers/sweetAlertHelper';
+import AppData from '@jsroot/lib/AppData';
 
 export const FormAction = props => {
     const { isActiveTaggingAction, playerList, updateVipStatus, setSweetAlertOption, selectedParams } = props;
     const [displayUploadDropzone, setDisplayUploadDropzone] = useState(false);
     const [resultMsgSubmitVipListFile, setResultMsgSubmitVipListFile] = useState(null);
+    const hasVipManagementEdit =  AppData.HasVipManagementEdit;
 
     useEffect(() => { resultMsgSubmitVipListFile && setDisplayUploadDropzone(false) }, [selectedParams]);
 
@@ -130,13 +132,13 @@ export const FormAction = props => {
         <div className="form-action">
             <>
                 <div className="action">
-                    <button type="button" className="btn" disabled={!isActiveTaggingAction} onClick={_handleActivateVip}>{LangHelper.getSingleResource("ActivateVip")}</button>
+                    <button type="button" className="btn" disabled={!isActiveTaggingAction || !hasVipManagementEdit} onClick={_handleActivateVip}>{LangHelper.getSingleResource("ActivateVip")}</button>
                 </div>
                 <div className="action">
-                    <button type="button" className="btn" onClick={_handleDeactivateVip} disabled={!isActiveTaggingAction}>{LangHelper.getSingleResource("DeactivateVip")}</button>
+                    <button type="button" className="btn" onClick={_handleDeactivateVip} disabled={!isActiveTaggingAction || !hasVipManagementEdit}>{LangHelper.getSingleResource("DeactivateVip")}</button>
                 </div>
                 <div className="action">
-                    <button type="button" className="btn" onClick={_handleDisplayUploadDropzone}>{LangHelper.getSingleResource("UploadVipList")}</button>
+                    <button type="button" className="btn" onClick={_handleDisplayUploadDropzone} disabled={!hasVipManagementEdit}>{LangHelper.getSingleResource("UploadVipList")}</button>
                 </div>
             </>
             {displayUploadDropzone && _renderDropzoneUploadFile()}
