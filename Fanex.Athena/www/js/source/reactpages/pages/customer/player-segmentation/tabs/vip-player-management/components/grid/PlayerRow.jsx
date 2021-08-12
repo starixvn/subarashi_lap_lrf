@@ -13,7 +13,7 @@ export const PlayerRow = (props) => {
         <Cell className="left-align">{externalId}</Cell>
         <Cell className="left-align">{systemId}</Cell>
         <Cell className="center-align">{customerClass}</Cell>
-        <VipSwitcherCell index={index} />
+        <VipSwitcherCell index={index} hasVipManagementEdit={hasVipManagementEdit}/>
     </Row>)
 }
 
