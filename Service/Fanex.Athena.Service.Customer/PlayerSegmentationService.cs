@@ -60,7 +60,7 @@
             return result;
         }
 
-        public async Task<IDictionary<int, string>> GetReasonGroupListAsync(string langKey)
+        public async Task<IEnumerable<ReasonGroup>> GetReasonGroupListAsync(string langKey)
         {
             var result = await _playerDataAccess.GetReasonGroupListAsync(langKey);
             return result;

@@ -24,7 +24,7 @@
 
                 var playerList = await ReadPlayerList(db, (reader, player) =>
                 {
-                    player.MarkDate = reader.ToDateTime("CreatedDate").ToString(FormatKey.DateTimeFormatIn24H);
+                    player.LastModifiedDate = reader.ToDateTime("CreatedDate").ToString(FormatKey.DateTimeFormatIn24H);
                     player.Reason = reader.ToString("Reason");
                 });
 
@@ -58,7 +58,7 @@
             }
         }
 
-        public async Task<IDictionary<int, string>> GetReasonGroupListAsync(string langKey)
+        public async Task<IEnumerable<ReasonGroup>> GetReasonGroupListAsync(string langKey)
         {
             const string spName = "Lrf_ProblemAccount_ReasonGroupSel";
             using (var db = GetObjectDb(spName))
@@ -66,12 +66,16 @@
                 db.SetParameterValue("Langkey", langKey);
                 using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
                 {
-                    var result = new Dictionary<int, string>();
+                    var result = new List<ReasonGroup>();
                     while (reader.Read())
                     {
-                        var reasonGroupId = Convert.ToInt16(reader["ReasonGroupID"]);
-                        var reasonGroupName = reader["ReasonGroup"] as string;
-                        result.Add(reasonGroupId, reasonGroupName);
+                        var record = new ReasonGroup
+                        {
+                            ReasonGroupID = Convert.ToInt16(reader["ReasonGroupID"]),
+                            ReasonGroupName = reader["ReasonGroup"] as string,
+                            CustomerClass = Convert.ToInt16(reader["CustomerClass"])
+                        };
+                        result.Add(record);
                     }
                     return result;
                 }
@@ -136,7 +140,6 @@
             objectDb.SetParameterValue("FromDate", metaModel.FromDate);
             objectDb.SetParameterValue("ToDate", metaModel.ToDate);
             objectDb.SetParameterValue("IsCheckAll", metaModel.IsGetAll);
-            objectDb.SetParameterValue("BaseCurrency", metaModel.BaseCurrency);
             objectDb.SetParameterValue("ReasonGroupID", metaModel.ReasonGroupIdList);
             objectDb.SetParameterValue("Langkey", metaModel.Language);
         }

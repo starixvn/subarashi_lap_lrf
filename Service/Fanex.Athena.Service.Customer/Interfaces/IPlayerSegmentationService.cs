@@ -15,7 +15,7 @@
 
         Task<IEnumerable<UpdateStatusPlayerResult>> UpdateVipStatusAsync(UpdateStatusPlayerMetaModel metaModel);
 
-        Task<IDictionary<int, string>> GetReasonGroupListAsync(string langKey);
+        Task<IEnumerable<ReasonGroup>> GetReasonGroupListAsync(string langKey);
 
         bool IsNormalView(BasePlayerListMetaModel metaModel);
 

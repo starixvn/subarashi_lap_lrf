@@ -47,12 +47,6 @@
         })
     } : null;
 
-    var baseCurrencyList = SystemConstants.BaseCurrencyList.Select(c => new
-    {
-        value = c.Value,
-        label = c.Value
-    }).ToList();
-
     var problemSelectedCustomerClass = string.Join(",", problemPlayerVM.CustomerClass);
     var problemCustomerClassList = problemPlayerVM.CustomerClass.Select(c => new
     {
@@ -71,7 +65,7 @@
     window.initialState = {
     ProblemPlayer: {
     dateRange: { fromDate: '@problemPlayerVM.FromDate.ToString("MM/dd/yyyy")', toDate: '@problemPlayerVM.ToDate.ToString("MM/dd/yyyy")'},
-    selectedBaseCurrency: '@(Model.BaseCurrency)',
+
     selectedCurrency: '@string.Join(",", problemPlayerVM.CurrencyList.Select(x => x.Key).ToArray())',
     selectedReason: '@string.Join(",", problemPlayerVM.ReasonList.Select(x => x.Key).ToArray())',
     selectedCustomerClass: '@problemSelectedCustomerClass',
@@ -87,8 +81,8 @@
 
     window._AppData = {
     HasVipManagement: @hasVIPManagementPermission.ToString().ToLower(),
+    HasVipManagementEdit: @Model.HasVIPManagementEditPermission.ToString().ToLower(),
     TabKeys: @Html.Raw(Model.TabKeys.ToJson()),
-    baseCurrencyList: @Html.Raw(baseCurrencyList.ToJson()),
     subsidiaryList: @Html.Raw(Model.SubsidiaryList.ToJson()),
     viewType: @Model.ViewType,
     ProblemPlayer: {

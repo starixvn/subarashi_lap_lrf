@@ -9,6 +9,7 @@
     using System.Web.SessionState;
     using Fanex.Athena.Extension.Utility.Internal;
     using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
     using Fanex.Athena.Model.Customer.ViewModel;
     using Fanex.Athena.Resources;
     using Fanex.Athena.Service.Core.Users.Interfaces;
@@ -30,8 +31,8 @@
             { PermissionKeys.PlayerVIPManagement, "VipPlayerManagement" }
         };
 
-        private static readonly ConcurrentDictionary<string, AsyncLazy<IDictionary<int, string>>> ReasonListFromCache = new ConcurrentDictionary
-            <string, AsyncLazy<IDictionary<int, string>>>(StringComparer.OrdinalIgnoreCase);
+        private static readonly ConcurrentDictionary<string, AsyncLazy<IEnumerable<ReasonGroup>>> ReasonListFromCache = new ConcurrentDictionary
+            <string, AsyncLazy<IEnumerable<ReasonGroup>>>(StringComparer.OrdinalIgnoreCase);
 
         private readonly IAuthorizationService _authService;
         private readonly ISubsidiaryService _subsidiaryService;
@@ -64,47 +65,55 @@
         private async Task<PlayerSegmentationViewModel> BuildViewModel()
         {
             var currencyList = SessionServiceInstance.UserSession.CurrencyList;
-            var baseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency;
             var lang = LangService.GetCurrentLanguage();
 
             var hasVIPManangementPermission = HasVIPManagementPermission();
+            var hasVIPManangementEditPermission = HasVIPManagementEditPermission();
             var subsidiaryList = _subsidiaryService.GetSubsidiaryTree(SessionServiceInstance.UserSession, SessionServiceInstance.LicenseeSession.LicenseeName);
             var viewType = (byte)_playerService.GetViewType(subsidiaryList.Any());
             var reasonList = await GetReasonList(lang).ConfigureAwait(false);
+            var problemPlayerCustomerClass = reasonList.OrderBy(_ => _.CustomerClass).Select(_ => _.CustomerClass.ToString()).Distinct();
+            var vipMngCustomerClass = await _playerService.GetCustomerClass();
 
             var model = new PlayerSegmentationViewModel
             {
                 TabKeys = GetTabKeys(),
                 HasVIPManagementPermission = hasVIPManangementPermission,
+                HasVIPManagementEditPermission = hasVIPManangementEditPermission,
                 ProblemPlayerVM = new ProblemPlayerViewModel
                 {
                     CurrencyList = currencyList,
-                    ReasonList = reasonList,
-                    CustomerClass = await _playerService.GetProblemAccCustomerClass(),
+                    ReasonList = reasonList.ToDictionary(_ => _.ReasonGroupID, _ => _.ReasonGroupName),
+                    CustomerClass = problemPlayerCustomerClass
                 },
                 VipPlayerVM = hasVIPManangementPermission ? new VipPlayerViewModel
                 {
                     CurrencyList = currencyList,
                     VipOptions = GetVipOptions(),
-                    CustomerClass = await _playerService.GetCustomerClass()
+                    CustomerClass = vipMngCustomerClass
                 } : null,
-                BaseCurrency = baseCurrency,
                 ViewType = viewType,
-                SubsidiaryList = subsidiaryList,
+                SubsidiaryList = subsidiaryList
             };
 
             return model;
         }
 
-        private async Task<IDictionary<int, string>> GetReasonList(string lang)
+        private async Task<IEnumerable<ReasonGroup>> GetReasonList(string lang)
         {
-            var lazyTask = ReasonListFromCache.GetOrAdd(lang, langKey => new AsyncLazy<IDictionary<int, string>>(() => _playerService.GetReasonGroupListAsync(langKey)));
+            var lazyTask = ReasonListFromCache.GetOrAdd(lang, langKey => new AsyncLazy<IEnumerable<ReasonGroup>>(() => _playerService.GetReasonGroupListAsync(langKey)));
             return await lazyTask.Value.ConfigureAwait(false);
         }
 
         private bool HasVIPManagementPermission()
         {
             var result = _authService.HasPermissions(SessionServiceInstance.UserSession, PermissionKeys.PlayerVIPManagement);
+            return result;
+        }
+
+        private bool HasVIPManagementEditPermission()
+        {
+            var result = _authService.HasPermissions(SessionServiceInstance.UserSession, PermissionKeys.PlayerVIPManagement_Write);
             return result;
         }
 

@@ -100,16 +100,6 @@ export class FormFilter extends PureComponent {
                 onChange={(_, selectedItemsKey) => this.props.setSelectedCurrency(selectedItemsKey)} />);
     }
 
-    _renderBaseCurrencySelectList() {
-        const baseCurrencyList = AppData.baseCurrencyList;
-        return baseCurrencyList && baseCurrencyList.length && (
-            <Select instanceId="ddlBased"
-                value={this.props.selectedBaseCurrency}
-                options={baseCurrencyList}
-                onChange={(item) => this.props.setSelectedBaseCurrency(item.value)} />
-        );
-    }
-
     _renderReasonSelectList() {
         const { selectedReason, selectedTabKey } = this.props;
         const reasonList = AppData[selectedTabKey].reasonList;
@@ -211,7 +201,7 @@ export class FormFilter extends PureComponent {
                             {this._renderDateRange()}
                         </div>
                     </div>
-                    <div className="col-12 col-md-2 col-sm-2 col-lg-2 col-xl-2">
+                    <div className="col-12 col-md-1 col-sm-2 col-lg-1 col-xl-1">
                         <div className="form-group">
                             <CheckBox id="IsGetAll"
                                 checked={this.props.isGetAll}
@@ -246,12 +236,6 @@ export class FormFilter extends PureComponent {
                             {this._renderCurrencySelectList()}
                         </div>
                     </div>
-                    <div className="col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2">
-                        <div className="form-group">
-                            <label className="label-text">{LangHelper.getSingleResource("BaseCurrency")}</label>
-                            {this._renderBaseCurrencySelectList()}
-                        </div>
-                    </div>
                     <div className="col-12 col-md-2 col-sm-2 col-lg-2 col-xl-1">
                         <div className="form-group">
                             <div className="button-group">
@@ -274,7 +258,7 @@ function mapDispatchToProps(dispatch) {
     const {
         setDateRange, changeIsGetAll, setUsername, setSelectedCurrency,
         setSelectedParams, searchPlayer, setPagingOption, getUserGuideContent,
-        setSelectedBaseCurrency, setReason, setSubsidiaryList, setSubsidiarySearch,
+        setReason, setSubsidiaryList, setSubsidiarySearch,
         setSelectedCustomerClass } = ActionCreators;
 
     return bindActionCreators(Object.assign({}, {
@@ -283,7 +267,6 @@ function mapDispatchToProps(dispatch) {
         setUsername,
         setReason,
         setSelectedCurrency,
-        setSelectedBaseCurrency,
         setSelectedParams,
         searchPlayer,
         setPagingOption,
@@ -298,7 +281,7 @@ function mapStateToProps(state) {
     const {
         dateRange, isGetAll, selectedCurrency, selectedParams,
         username, pagingOption, selectedTabKey, userGuideContent,
-        selectedBaseCurrency, selectedReason, selectedSubsidiary, subsidiarySearch,
+        selectedReason, selectedSubsidiary, subsidiarySearch,
         selectedCustomerClass
     } = state;
 
@@ -307,7 +290,6 @@ function mapStateToProps(state) {
         isGetAll,
         selectedReason,
         selectedCurrency,
-        selectedBaseCurrency,
         selectedSubsidiary,
         username,
         selectedParams,

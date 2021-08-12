@@ -79,6 +79,7 @@
         public const string PlayerSegmentation = "PlayerSegmentation";
         public const string PlayerProblemManagement = "PlayerSegmentation_ProblemManagement";
         public const string PlayerVIPManagement = "PlayerSegmentation_VIPManagement";
+        public const string PlayerVIPManagement_Write = "PlayerSegmentation_VIPManagement_Write";
 
         /* Account. */
 

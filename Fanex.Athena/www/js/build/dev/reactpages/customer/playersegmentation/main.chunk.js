@@ -992,7 +992,7 @@ const SortMapper = {
   sortCol: {
     'systemId': 1,
     'externalId': 2,
-    'markDate': 3,
+    'lastModifiedDate': 3,
     'customerClass': 4
   },
   sortType: {

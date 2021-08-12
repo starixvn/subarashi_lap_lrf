@@ -53,7 +53,6 @@ namespace Fanex.Athena.DataAccess.Customer.UnitTests
                 ObjectDb.Received().SetParameterValue("FromDate", metaModel.FromDate);
                 ObjectDb.Received().SetParameterValue("ToDate", metaModel.ToDate);
                 ObjectDb.Received().SetParameterValue("IsCheckAll", metaModel.IsGetAll);
-                ObjectDb.Received().SetParameterValue("BaseCurrency", metaModel.BaseCurrency);
                 ObjectDb.Received().SetParameterValue("ReasonGroupID", metaModel.ReasonGroupIdList);
                 ObjectDb.Received().SetParameterValue("Langkey", metaModel.Language);
             });
@@ -92,7 +91,7 @@ namespace Fanex.Athena.DataAccess.Customer.UnitTests
             Assert.Multiple(() =>
             {
                 AssertCommonPlayerListResult(expectedData, firstData);
-                Assert.AreEqual((expectedData["CreatedDate"] as DateTime?).Value.ToString(FormatKey.DateTimeFormatIn24H), firstData.MarkDate);
+                Assert.AreEqual((expectedData["CreatedDate"] as DateTime?).Value.ToString(FormatKey.DateTimeFormatIn24H), firstData.LastModifiedDate);
                 Assert.AreEqual(expectedData["Reason"], firstData.Reason);
             });
         }
@@ -227,6 +226,7 @@ namespace Fanex.Athena.DataAccess.Customer.UnitTests
             {
                 { "ReasonGroupID", FakeHelper.Create<int>() },
                 { "ReasonGroup", FakeHelper.Create<string>() },
+                { "CustomerClass", FakeHelper.Create<int>() },
             };
 
             MapReaderData(expectedData);
@@ -239,8 +239,9 @@ namespace Fanex.Athena.DataAccess.Customer.UnitTests
             //Assert
             Assert.Multiple(() =>
             {
-                Assert.AreEqual(expectedData["ReasonGroupID"], firstData.Key);
-                Assert.AreEqual(expectedData["ReasonGroup"], firstData.Value);
+                Assert.AreEqual(expectedData["ReasonGroupID"], firstData.ReasonGroupID);
+                Assert.AreEqual(expectedData["ReasonGroup"], firstData.ReasonGroupName);
+                Assert.AreEqual(expectedData["CustomerClass"], firstData.CustomerClass);
             });
         }
 

@@ -2,7 +2,6 @@
 import createReducer from '@jsroot/lib/createReducer.js';
 import * as dateRangeReducer from '@jsroot/reducers/dateRangeReducer';
 import * as currencyReducer from '@jsroot/reducers/currencyReducer';
-import * as baseCurrencyReducer from '@jsroot/reducers/baseCurrencyReducer';
 import * as usernameReducer from '@jsroot/reducers/usernameReducer';
 import * as paramHandlerReducer from '../../../reducers/paramHandlerReducer';
 import * as filterReducer from '../../../reducers/filterReducer';
@@ -28,7 +27,6 @@ export const selectedCustomerClass = createReducer({}, {
 export const dateRange = dateRangeReducer.dateRange;
 export const selectedCurrency = currencyReducer.selectedCurrency;
 export const username = usernameReducer.username;
-export const selectedBaseCurrency = baseCurrencyReducer.selectedBaseCurrency;
 export const selectedSubsidiary = filterReducer.selectedSubsidiary;
 export const subsidiarySearch = filterReducer.subsidiarySearch;
 export const selectedParams = paramHandlerReducer.selectedParams;

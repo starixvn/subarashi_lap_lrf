@@ -17,7 +17,7 @@ namespace Fanex.Athena.Controllers.Customer.UnitTests
                 const string ExpectedViewName = "~/Views/Desktop/Customer/PlayerSegmentation/BetList.cshtml";
 
                 // Action
-                var result = controller.BetList(FakeHelper.Create<int>(), FakeHelper.Create<string>(), FakeHelper.Create<string>(), FakeHelper.Create<string>());
+                var result = controller.BetList(FakeHelper.Create<int>(), FakeHelper.Create<string>(), FakeHelper.Create<string>());
 
                 // Assert
                 StringAssert.AreEqualIgnoringCase(ExpectedViewName, result.ViewName);
@@ -38,21 +38,19 @@ namespace Fanex.Athena.Controllers.Customer.UnitTests
                 StubLicenseeSessionData(fakeLicenseeInfo);
 
                 var custId = FakeHelper.Create<int>();
-                var baseCurrency = FakeHelper.Create<string>();
                 var externalId = FakeHelper.Create<string>();
                 var systemId = FakeHelper.Create<string>();
 
                 var expectedModel = new PlayerSegmentationBetListViewModel
                 {
                     CustId = custId,
-                    BaseCurrency = baseCurrency,
                     ExternalId = externalId,
                     SystemId = systemId,
                     IsAllowedCustomerComm = fakeLicenseeInfo.IsAllowedCustomerComm
                 };
 
                 // Action
-                var result = controller.BetList(custId, externalId, systemId, baseCurrency);
+                var result = controller.BetList(custId, externalId, systemId);
 
                 // Assert
                 (result.Model as PlayerSegmentationBetListViewModel).Should().BeEquivalentTo(expectedModel);

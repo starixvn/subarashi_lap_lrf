@@ -15,8 +15,8 @@
 
         private readonly bool _hasVIPPermission;
 
-        public ProblemPlayerExcel(IEnumerable<PlayerInfo> _dataSource, string baseCurrency, bool isNormalView, bool hasVIPPermission)
-        : base(HostingEnvironment.MapPath(ExcelTemplatePath), GetReportTitle(baseCurrency), _dataSource, isNormalView)
+        public ProblemPlayerExcel(IEnumerable<PlayerInfo> _dataSource, bool isNormalView, bool hasVIPPermission)
+        : base(HostingEnvironment.MapPath(ExcelTemplatePath), GetReportTitle(), _dataSource, isNormalView)
         {
             _hasVIPPermission = hasVIPPermission;
             AddCommonHeaders();
@@ -38,7 +38,7 @@
         private void AddCommonHeaders()
         {
             _infoHeaders.Add(new Tuple<string, string, Func<object, object>>(ViewResources.Reason, "ReasonList", DataParsers.ParseToBreaklineText));
-            _infoHeaders.Add(new Tuple<string, string, Func<object, object>>(ViewResources.MarkDate, nameof(ViewResources.MarkDate), null));
+            _infoHeaders.Add(new Tuple<string, string, Func<object, object>>(ViewResources.LastModifiedDate, nameof(ViewResources.LastModifiedDate), null));
         }
 
         private void AddVIPHeaders()
@@ -46,6 +46,6 @@
             _infoHeaders.Add(new Tuple<string, string, Func<object, object>>(ViewResources.Vip, "IsVip", DataParsers.ParseToYesNo));
         }
 
-        private static string GetReportTitle(string baseCurrency) => $"{ViewResources.ProblemPlayer} - {string.Format(ViewResources.Viewin, baseCurrency.ToUpperInvariant())}";
+        private static string GetReportTitle() => $"{ViewResources.ProblemPlayer}";
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Fanex.Athena.Controllers.Base.UnitTests;
 using Fanex.Athena.Model.Auth;
 using Fanex.Athena.Model.Auth.DataDomain;
+using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
 using Fanex.Athena.Model.Customer.ViewModel;
 using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.Service.Customer.Interfaces;
@@ -94,24 +95,24 @@ namespace Fanex.Athena.Controllers.Customer.UnitTests
             }
         }
 
-
         [Test]
         public async Task Index_WhenCall_ReturnReasonListCorrect()
         {
             using (var controller = CreateController())
             {
                 // Arrange
-                var fakeReasons = FakeHelper.Create<Dictionary<int, string>>();
+                var fakeReasons = FakeHelper.Create<List<ReasonGroup>>();
                 var fakeLanguage = FakeHelper.Create<string>();
                 LangService.GetCurrentLanguage().Returns(fakeLanguage);
-                _playerService.GetReasonGroupListAsync(fakeLanguage).Returns(Task.FromResult<IDictionary<int, string>>(fakeReasons));
+                _playerService.GetReasonGroupListAsync(fakeLanguage).Returns(Task.FromResult<IEnumerable<ReasonGroup>>(fakeReasons));
+                var expectedReasons = fakeReasons.ToDictionary(_ => _.ReasonGroupID, _ => _.ReasonGroupName);
 
                 // Action
                 var result = await controller.Index();
                 var vm = result.Model as PlayerSegmentationViewModel;
 
                 // Assert
-                Assert.AreEqual(fakeReasons, vm.ProblemPlayerVM.ReasonList);
+                Assert.AreEqual(expectedReasons, vm.ProblemPlayerVM.ReasonList);
             }
         }
 

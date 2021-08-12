@@ -14,7 +14,6 @@ export const AppContainer = props => {
     const _contentTitle = React.useMemo(() => {
         return (<div className="content-title">
             <span>{`${AppData.externalId}(${AppData.systemId})`}</span>
-            <span className="base-currency">{` - ${LangHelper.getSingleResource('Viewin').replace('{0}', AppData.baseCurrency)}`}</span>
         </div>);
     }, []);
 
