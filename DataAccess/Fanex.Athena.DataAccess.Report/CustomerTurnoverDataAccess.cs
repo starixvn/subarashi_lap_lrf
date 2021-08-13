@@ -107,7 +107,7 @@ namespace Fanex.Athena.DataAccess.Report
             db.SetParameterValue("todate", metaModel.ToDate);
             db.SetParameterValue("odds", metaModel.Odds);
             db.SetParameterValue("reportby", metaModel.ReportBy);
-            db.SetParameterValue("username", string.IsNullOrWhiteSpace(metaModel.Username) ? null : metaModel.Username);
+            db.SetParameterValue("username", string.IsNullOrWhiteSpace(metaModel.Username) ? null : SqlHelper.ToSqlTextSearch(metaModel.Username));
             db.SetParameterValue("movebetsday", balanceUp.MoveBetsDay);
             db.SetParameterValue("Langkey", languageCode);
             db.SetParameterValue("PageSize", metaModel.PageSize);

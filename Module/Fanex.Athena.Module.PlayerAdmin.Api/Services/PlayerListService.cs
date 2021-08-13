@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Fanex.Athena.Extension.Helper;
 using Fanex.Athena.Extension.Utility.Interfaces;
 using Fanex.Athena.Module.PlayerAdmin.Api.DTO;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
@@ -108,7 +109,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
 
         private static void AssignParamByUserName(IObjectDb objectDb, PlayerSearchingMetaModel metaModel)
         {
-            objectDb.SetParameterValue("UserName", metaModel.UserName);
+            objectDb.SetParameterValue("UserName", SqlHelper.ToSqlTextSearch(metaModel.UserName));
             objectDb.SetParameterValue("SearchOption", metaModel.SearchOption);
             objectDb.SetParameterValue("BaFilter", metaModel.BaFilter);
             objectDb.SetParameterValue("SpecialLevel", metaModel.SpecialLevel);

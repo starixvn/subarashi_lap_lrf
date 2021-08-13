@@ -9,6 +9,7 @@
     using Core;
     using Core.Configuration.Interfaces;
     using Data;
+    using Fanex.Athena.Extension.Helper;
     using Interfaces;
     using Model.Core.DataDomain;
     using Model.Core.Helper;
@@ -119,7 +120,7 @@
             db.SetParameterValue("fromdate", metaModel.FromDate.Date);
             db.SetParameterValue("todate", metaModel.ToDate.Date);
             db.SetParameterValue("basecurrency", metaModel.BaseCurrency);
-            db.SetParameterValue("UserName", metaModel.UserName);
+            db.SetParameterValue("UserName", SqlHelper.ToSqlTextSearch(metaModel.UserName));
             db.SetParameterValue("StatusList", string.Join(",", metaModel.Status));
             db.SetParameterValue("ProductCodes", metaModel.ProductCodeList);
             db.SetParameterValue("MoveBetsDay", _balanceUpDataAccess.GetBalanceUp().MoveBetsDay);

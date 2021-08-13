@@ -8,6 +8,7 @@
     using System.Threading.Tasks;
     using Fanex.Athena.DataAccess.Core;
     using Fanex.Athena.DataAccess.Customer.Interfaces;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Model.Customer.DTO;
@@ -156,7 +157,7 @@
         private static void AddCustomerParam(IObjectDb objectDb, CustomerListMetaModel metaModel)
         {
             objectDb.SetParameterValue("LicenseeID", metaModel.LicenseeId);
-            objectDb.SetParameterValue("username", metaModel.Username);
+            objectDb.SetParameterValue("username", SqlHelper.ToSqlTextSearch(metaModel.Username));
             objectDb.SetParameterValue("PageSize", metaModel.PageSize);
             objectDb.SetParameterValue("PageIndex", metaModel.PageIndex);
             objectDb.SetParameterValue("BAFilter", metaModel.BAFilter);

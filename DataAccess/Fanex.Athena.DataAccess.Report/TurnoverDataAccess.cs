@@ -13,6 +13,7 @@ namespace Fanex.Athena.DataAccess.Report
     using Data;
     using Fanex.Athena.DataAccess.Core;
     using Fanex.Athena.DataAccess.Report.Interfaces;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Common.Extensions;

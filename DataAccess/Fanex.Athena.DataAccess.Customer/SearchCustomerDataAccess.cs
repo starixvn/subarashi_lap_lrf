@@ -3,6 +3,7 @@ using System.Data;
 using System.Threading.Tasks;
 using Fanex.Athena.DataAccess.Core;
 using Fanex.Athena.DataAccess.Customer.Interfaces;
+using Fanex.Athena.Extension.Helper;
 
 namespace Fanex.Athena.DataAccess.Customer
 {
@@ -13,7 +14,7 @@ namespace Fanex.Athena.DataAccess.Customer
             using (var db = this.GetObjectDb("Lrf_CustomerSelUserSearch"))
             {
                 db.SetParameterValue("userid", userId);
-                db.SetParameterValue("username", userName);
+                db.SetParameterValue("username", SqlHelper.ToSqlTextSearch(userName));
                 db.SetParameterValue("AgentList", agentListXml);
                 db.SetParameterValue("IsIncludeDormant", isIncludeDormant);
                 return await db.QueryAsync<string>().ConfigureAwait(false);
