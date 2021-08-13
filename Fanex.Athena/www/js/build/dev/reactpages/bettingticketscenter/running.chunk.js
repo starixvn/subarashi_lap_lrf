@@ -4210,6 +4210,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     const productOptions = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].productOptions;
     return productOptions && productOptions.length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_4___default.a, {
       id: "ProductList",
+      hasSearchBox: true,
       language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].currentLanguage,
       dataSource: productOptions,
       keyField: "Code",
