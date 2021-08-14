@@ -25,18 +25,14 @@
 
         private readonly IAuthorizationService _authService;
 
-        private readonly IAppSettings _appSettings;
-
         public BettingTicketCenterController(
             IProductService productService,
             IBalanceUpDataAccess balanceUpDataAccess,
-            IAuthorizationService authService,
-            IAppSettings appSettings)
+            IAuthorizationService authService)
         {
             _productService = productService;
             _balanceUpDataAccess = balanceUpDataAccess;
             _authService = authService;
-            _appSettings = appSettings;
         }
 
         [FunctionAuthorization(
@@ -89,8 +85,7 @@
                 TabList = tabList
             };
 
-            ViewBag.IsAllowTxIDColumn = _appSettings.LicenseeOfferTxIDColumn.Contains(
-                licenseeSession.LicenseeName, StringComparer.InvariantCultureIgnoreCase);
+            ViewBag.IsAllowTxIDColumn = licenseeSession.IsEnableSingleWallet;
 
             return View("~/Views/Desktop/BetList/BettingTicketCenter/AdvancedSearch.cshtml", viewModel);
         }
@@ -113,8 +108,7 @@
                 TabList = tabList
             };
 
-            ViewBag.IsAllowTxIDColumn = _appSettings.LicenseeOfferTxIDColumn.Contains(
-                licenseeSession.LicenseeName, StringComparer.InvariantCultureIgnoreCase);
+            ViewBag.IsAllowTxIDColumn = licenseeSession.IsEnableSingleWallet;
 
             return View("~/Views/Desktop/BetList/BettingTicketCenter/SingleCustomer.cshtml", viewModel);
         }
@@ -132,8 +126,7 @@
             ViewBag.SelectedBaseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency;
             ViewBag.HasExchange = tabList.Any() && HasExchange();
             ViewBag.TabList = tabList;
-            ViewBag.IsAllowTxIDColumn = _appSettings.LicenseeOfferTxIDColumn.Contains(
-                licenseeSession.LicenseeName, StringComparer.InvariantCultureIgnoreCase);
+            ViewBag.IsAllowTxIDColumn = licenseeSession.IsEnableSingleWallet;
 
             return View(
                 "~/Views/Desktop/BetList/BettingTicketCenter/RefNo.cshtml",
@@ -157,8 +150,7 @@
                 TabList = tabList
             };
 
-            ViewBag.IsAllowTxIDColumn = _appSettings.LicenseeOfferTxIDColumn.Contains(
-                licenseeSession.LicenseeName, StringComparer.InvariantCultureIgnoreCase);
+            ViewBag.IsAllowTxIDColumn = licenseeSession.IsEnableSingleWallet;
 
             return View("~/Views/Desktop/BetList/BettingTicketCenter/Running.cshtml", viewModel);
         }

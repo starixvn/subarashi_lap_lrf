@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Web.Mvc;
-using Fanex.Athena.Controllers.Base.UnitTests;
-using Fanex.Athena.Extension.Utility;
+﻿using Fanex.Athena.Controllers.Base.UnitTests;
 using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Model.Core.DTO.Common;
 using Fanex.Athena.Module.PlayerAdmin.Controllers;
@@ -15,17 +7,19 @@ using Fanex.Athena.Module.PlayerAdmin.ViewModels;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
 using NSubstitute;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers
 {
     [TestFixture]
     public class PlayerBtcSingleCustomerControllerTest : CultureBaseControllerHelperTest
     {
-        private IProductService _productService;
-
         private IBetListApiClient _betListApiClient;
-
-        private IAppSettings _appSettings;
 
         [SetUp]
         public void SetUp()
@@ -34,15 +28,12 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers
 
             SetUpDefaultFakeData();
 
-            _productService = Substitute.For<IProductService>();
             _betListApiClient = Substitute.For<IBetListApiClient>();
-            _appSettings = Substitute.For<IAppSettings>();
         }
 
         [TearDown]
         public void TearDown()
         {
-            _productService = null;
             _betListApiClient = null;
         }
 
@@ -160,7 +151,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers
                 SessionService.UserSession.Language,
                 FunctionNames.BettingTicketCenter).Returns(expectedProductAccess ?? new ProductAccess(new List<Product>()));
 
-            var result = new PlayerBtcSingleCustomerController(_betListApiClient, productService, _appSettings);
+            var result = new PlayerBtcSingleCustomerController(_betListApiClient, productService);
             result.LangService = LangService;
             result.SessionServiceInstance = SessionService;
             StubLicenseeSessionData(DefaultLicenseeSession);
