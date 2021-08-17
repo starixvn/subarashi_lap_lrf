@@ -24,7 +24,7 @@
             using (var db = _db.GetObjectDb(UspName))
             {
                 db.SetParameterValue("CustID", custId);
-                db.SetParameterValue("ProductId", productid);
+                db.SetParameterValue("ProductId", productId);
                 db.SetParameterValue("IsEnabled", null);
                 db.SetParameterValue("IsLineEnabled", null);
                 db.SetParameterValue("Currency", null);
