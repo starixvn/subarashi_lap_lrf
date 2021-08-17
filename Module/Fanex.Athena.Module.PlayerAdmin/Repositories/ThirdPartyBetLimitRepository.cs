@@ -18,7 +18,7 @@
             _db = dbFactory;
         }
 
-        public async Task<ThirdPartyBetSetting> GetBetSettingAsync(int custId, int productid)
+        public async Task<ThirdPartyBetSetting> GetBetSettingAsync(int custId, int productId)
         {
             const string UspName = "Lrf_3rdProductSelCustStatus";
             using (var db = _db.GetObjectDb(UspName))
