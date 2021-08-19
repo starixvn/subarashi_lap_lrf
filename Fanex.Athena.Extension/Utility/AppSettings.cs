@@ -108,6 +108,11 @@ namespace Fanex.Athena.Extension.Utility
             }
         }
 
+        public bool IsShowIpToAllLicensee
+        {
+            get { return int.Parse(GetValue("IsShowIpToAllLicensee")) != 0; }
+        }
+
         public string ExchangeProductApiHost
         {
             get { return GetValue("ExchangeProductApiHost"); }

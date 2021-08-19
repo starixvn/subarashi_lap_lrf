@@ -238,8 +238,8 @@
             userSession.DefaultBaseCurrency = string.IsNullOrEmpty(userInfo.BaseCurrency) ? _appSettings.DefaultBaseCurrency
                 : userInfo.BaseCurrency;
             userSession.IsShowIpvn = tokenInfo.IsAdminstrator || tokenInfo.Permissions.Any(i => i.FunctionKey.Equals(PermissionKeys.BetlistViewIpvn, StringComparison.CurrentCultureIgnoreCase));
-            userSession.IsShowIp = _appSettings.LicenseeOfferShowIp.Contains(
-                _sessionService.LicenseeSession.LicenseeName, StringComparer.InvariantCultureIgnoreCase);
+            userSession.IsShowIp = _appSettings.IsShowIpToAllLicensee
+                || _appSettings.LicenseeOfferShowIp.Contains(_sessionService.LicenseeSession.LicenseeName, StringComparer.InvariantCultureIgnoreCase);
         }
 
         private void CreateSession(
@@ -279,8 +279,7 @@
                 DefaultBaseCurrency = string.IsNullOrEmpty(userInfo.BaseCurrency) ? _appSettings.DefaultBaseCurrency
                 : userInfo.BaseCurrency,
                 IsShowIpvn = tokenInfo.IsAdminstrator || tokenInfo.Permissions.Any(i => i.FunctionKey.Equals(PermissionKeys.BetlistViewIpvn, StringComparison.CurrentCultureIgnoreCase)),
-                IsShowIp = _appSettings.LicenseeOfferShowIp.Contains(
-                licSession.LicenseeName, StringComparer.InvariantCultureIgnoreCase)
+                IsShowIp = _appSettings.IsShowIpToAllLicensee || _appSettings.LicenseeOfferShowIp.Contains(licSession.LicenseeName, StringComparer.InvariantCultureIgnoreCase)
             };
 
             _sessionService.AssignCurrenciesToUserSession(userSession, licenseeInfo.Id, userInfo.CurrencyUserList);
