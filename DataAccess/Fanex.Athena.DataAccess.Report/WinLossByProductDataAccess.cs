@@ -42,8 +42,9 @@ namespace Fanex.Athena.DataAccess.Report
             WinLossByProductResultModel data;
             using (var db = this.GetObjectDb(UspName))
             {
+                
                 db.SetParameterValue("reporttype", metaModel.ReportBy);
-                db.SetParameterValue("username", metaModel.Username);
+                db.SetParameterValue("username", SqlHelper.ToSqlTextSearch(metaModel.Username));
                 db.SetParameterValue("SystemName", null);
                 db.SetParameterValue("CustID", null);
                 UpdateUspParams(db, metaModel, false);

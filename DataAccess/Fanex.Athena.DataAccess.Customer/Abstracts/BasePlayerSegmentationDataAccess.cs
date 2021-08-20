@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 using Fanex.Athena.DataAccess.Core;
+using Fanex.Athena.Extension.Helper;
 using Fanex.Athena.Model.Core.MetaModel;
 using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
 using Fanex.Athena.Model.Customer.MetaModel;
@@ -40,7 +41,7 @@ namespace Fanex.Athena.DataAccess.Customer
 
         protected static void AddPlayerListBaseParams(IObjectDb objectDb, BasePlayerListMetaModel metaModel)
         {
-            objectDb.SetParameterValue("UserName", metaModel.UserName);
+            objectDb.SetParameterValue("UserName", SqlHelper.ToSqlTextSearch(metaModel.UserName));
             objectDb.SetParameterValue("PageIndex", metaModel.PageIndex);
             objectDb.SetParameterValue("PageSize", metaModel.PageSize);
             objectDb.SetParameterValue("OrderCol", metaModel.OrderCol);

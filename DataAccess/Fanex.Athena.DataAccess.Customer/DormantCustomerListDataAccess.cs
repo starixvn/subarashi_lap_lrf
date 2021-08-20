@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Fanex.Athena.DataAccess.Core;
 using Fanex.Athena.DataAccess.Customer.Interfaces;
+using Fanex.Athena.Extension.Helper;
 using Fanex.Athena.Model.Core.Helper;
 using Fanex.Athena.Model.Core.ResultModel;
 using Fanex.Athena.Model.Customer.DTO;
@@ -20,7 +21,7 @@ namespace Fanex.Athena.DataAccess.Customer
 
             using (var db = this.GetObjectDb(UspName))
             {
-                db.SetParameterValue("username", metaModel.Username);
+                db.SetParameterValue("username", SqlHelper.ToSqlTextSearch(metaModel.Username));
                 db.SetParameterValue("PageSize", metaModel.PageSize);
                 db.SetParameterValue("PageIndex", metaModel.PageIndex);
                 db.SetParameterValue("AgentList", metaModel.AgentListXml);
