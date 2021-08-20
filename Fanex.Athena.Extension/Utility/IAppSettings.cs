@@ -30,10 +30,6 @@
 
         IEnumerable<string> LicenseeOfferTxIDColumn { get; }
 
-        IEnumerable<string> LicenseeOfferShowIp { get; }
-
-        bool IsShowIpToAllLicensee { get; }
-
         string ExchangeProductApiHost { get; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Sonar Code Smell", "S3996:UriPropertiesShouldNotBeStrings",
