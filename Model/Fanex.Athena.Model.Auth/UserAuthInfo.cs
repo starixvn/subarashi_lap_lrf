@@ -9,6 +9,7 @@ namespace Fanex.Athena.Model.Auth
 {
     using Fanex.Athena.Model.Auth.Enum;
     using System.Collections.Generic;
+
     [Serializable]
     public class UserAuthInfo
     {
@@ -25,6 +26,7 @@ namespace Fanex.Athena.Model.Auth
         public int? WhiteLabelID { get; set; }
         public string OperatorId { get; set; }
         public bool IsSuperAdmin { get; set; }
+
         /// <summary>
         /// Gets or sets Language Code.
         /// Default: en-US.
@@ -60,6 +62,6 @@ namespace Fanex.Athena.Model.Auth
 
         public bool IsShowIpvn { get; set; }
 
-        public bool IsShowIp { get; set; }
+        public bool IsShowIp { get; set; } = true;
     }
 }
