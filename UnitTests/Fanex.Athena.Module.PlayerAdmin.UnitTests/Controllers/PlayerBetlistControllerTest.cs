@@ -18,7 +18,6 @@
     public class PlayerBetlistControllerTest : CultureBaseControllerHelperTest
     {
         private IBetListApiClient _betListApiClient;
-        private IAppSettings _appSettings;
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
@@ -26,7 +25,6 @@
             base.FixtureSetUp();
 
             _betListApiClient = Substitute.For<IBetListApiClient>();
-            _appSettings = Substitute.For<IAppSettings>();
         }
 
         [OneTimeTearDown]
@@ -128,7 +126,7 @@
 
         private PlayerBetListController CreateController()
         {
-            var result = new PlayerBetListController(_betListApiClient, _appSettings);
+            var result = new PlayerBetListController(_betListApiClient);
             result.LangService = LangService;
             result.SessionServiceInstance = SessionService;
             StubLicenseeSessionData(DefaultLicenseeSession);

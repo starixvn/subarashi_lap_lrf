@@ -25,14 +25,9 @@
     {
         private readonly IBetListApiClient _betListApiClient;
 
-        private readonly IAppSettings _appSettings;
-
-        public PlayerBetListController(
-            IBetListApiClient betListApiClient,
-            IAppSettings appSettings)
+        public PlayerBetListController(IBetListApiClient betListApiClient)
         {
             _betListApiClient = betListApiClient;
-            _appSettings = appSettings;
         }
 
         [HttpGet]
@@ -48,8 +43,7 @@
                 Currency = currencyList.FirstOrDefault(x => x.Key == currencyId).Value
             };
 
-            ViewBag.IsAllowTxIDColumn = _appSettings.LicenseeOfferTxIDColumn.Contains(
-                licenseeSession.LicenseeName, StringComparer.InvariantCultureIgnoreCase);
+            ViewBag.IsAllowTxIDColumn = licenseeSession.IsEnableSingleWallet;
 
             return View("~/Views/Desktop/Module/PlayerAdmin/PlayerBetList/Running.cshtml", viewModel);
         }
@@ -81,8 +75,7 @@
         {
             var licenseeSession = SessionServiceInstance.LicenseeSession;
 
-            metaModel.IsAllowTxIDColumn = _appSettings.LicenseeOfferTxIDColumn.Contains(
-                licenseeSession.LicenseeName, StringComparer.InvariantCultureIgnoreCase);
+            metaModel.IsAllowTxIDColumn = licenseeSession.IsEnableSingleWallet;
 
             var httpResponse = await _betListApiClient.PostAsync("/PlayerAdminBetList/Export",
                 metaModel,

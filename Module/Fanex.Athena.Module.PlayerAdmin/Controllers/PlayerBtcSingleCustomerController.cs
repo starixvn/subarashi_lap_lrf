@@ -35,16 +35,12 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
 
         private readonly IBetListApiClient _betListApiClient;
 
-        private readonly IAppSettings _appSettings;
-
         public PlayerBtcSingleCustomerController(
             IBetListApiClient betListApiClient,
-            IProductService productService,
-            IAppSettings appSettings)
+            IProductService productService)
         {
             _betListApiClient = betListApiClient;
             _productService = productService;
-            _appSettings = appSettings;
         }
 
         [HttpGet]
@@ -60,8 +56,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
                 ProductCodeListString = GetProductCode()
             };
 
-            ViewBag.IsAllowTxIDColumn = _appSettings.LicenseeOfferTxIDColumn.Contains(
-               licenseeSession.LicenseeName, StringComparer.InvariantCultureIgnoreCase);
+            ViewBag.IsAllowTxIDColumn = licenseeSession.IsEnableSingleWallet;
 
             return View("~/Views/Desktop/Module/PlayerAdmin/SingleCustomer/Index.cshtml", viewModel);
         }
@@ -76,8 +71,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
             var userSession = SessionServiceInstance.UserSession;
             var licenseeSession = SessionServiceInstance.LicenseeSession;
             metaModel.HasPlayerCom = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm;
-            metaModel.IsAllowTxIDColumn = _appSettings.LicenseeOfferTxIDColumn.Contains(
-               licenseeSession.LicenseeName, StringComparer.InvariantCultureIgnoreCase);
+            metaModel.IsAllowTxIDColumn = licenseeSession.IsEnableSingleWallet;
 
             AssignMetaModelValue(metaModel);
 

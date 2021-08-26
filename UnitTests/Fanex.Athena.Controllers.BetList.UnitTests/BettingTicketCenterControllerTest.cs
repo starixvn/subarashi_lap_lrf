@@ -36,8 +36,6 @@
 
         private IAuthorizationService _authService;
 
-        private IAppSettings _appSettings;
-
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
@@ -50,7 +48,6 @@
                 BalanceUpDay = BalanceUpDate
             });
             _authService = Substitute.For<IAuthorizationService>();
-            _appSettings = Substitute.For<IAppSettings>();
 
             SetUpDefaultFakeData();
         }
@@ -328,7 +325,7 @@
         {
             _authService.CheckProductBelongsTo(SessionService.LicenseeSession.LicenseeName, ProductTypes.Exchange).Returns(hasExchangePermission);
 
-            return new BettingTicketCenterController(_productService, _balanceUpDataAccess, _authService, _appSettings)
+            return new BettingTicketCenterController(_productService, _balanceUpDataAccess, _authService)
             {
                 LangService = LangService,
                 SessionServiceInstance = SessionService
