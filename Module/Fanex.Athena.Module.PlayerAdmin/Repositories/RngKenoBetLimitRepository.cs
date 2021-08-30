@@ -42,7 +42,8 @@
                             BetValueMax = reader.ToDecimal("MaxBet_Min"),
                             BetValueMin = reader.ToDecimal("MinBet_Max"),
                             BetSettingType = reader.ToString("IBCBetTypeID"),
-                            Id = reader.ToString("GameTypeID")
+                            Id = reader.ToString("GameTypeID"),
+                            IsEnable = reader.ToString("IsDisabled") == "False"
                         });
                     }
                 }

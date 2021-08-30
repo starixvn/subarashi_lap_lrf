@@ -59,7 +59,10 @@
             { ProductTypes.SG, 247 },
             { ProductTypes.VRG, 245 },
             { ProductTypes.CC, 165 },
-            { ProductTypes.SBC, 200 }
+            { ProductTypes.SBC, 200 },
+            { ProductTypes.Lottery, 220 },
+            { ProductTypes.TG, 222 },
+            { ProductTypes.VGA, 171 }
         };
 
         private static readonly IDictionary<int, int> ProductBettypeMap = new Dictionary<int, int>
@@ -81,7 +84,10 @@
             { ProductTypes.SG, 4301 },
             { ProductTypes.VRG, 4601 },
             { ProductTypes.CC, 1901 },
-            { ProductTypes.SBC, 1611 }
+            { ProductTypes.SBC, 1611 },
+            { ProductTypes.Lottery, 1021 },
+            { ProductTypes.TG, 4901 },
+            { ProductTypes.VGA, 3801 }
         };
 
         public DcsBetLimitRepository(IDbFactory dbFactory, ILogger logger)

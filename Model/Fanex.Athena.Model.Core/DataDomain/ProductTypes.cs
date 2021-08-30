@@ -55,7 +55,7 @@ namespace Fanex.Athena.Model.Core.DataDomain
         public const int SLT = 63;
 
         public const int CG = 62;
-        
+
         public const int SXG = 45;
 
         public const int GDG = 59;
@@ -77,5 +77,7 @@ namespace Fanex.Athena.Model.Core.DataDomain
         public const int VRG = 38;
 
         public const int CC = 34;
+
+        public const int VGA = 66;
     }
 }

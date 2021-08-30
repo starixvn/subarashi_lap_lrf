@@ -26,6 +26,8 @@
 
         private IRngKenoBetLimitService _rngKenoBetLimitService;
 
+        private IThirdPartyBetLimitService _thirdPartyService;
+
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
@@ -34,6 +36,7 @@
             _authorizationService = Substitute.For<IAuthorizationService>();
             _cacheRefAdapter = Substitute.For<ICacheRefAdapter>();
             _rngKenoBetLimitService = Substitute.For<IRngKenoBetLimitService>();
+            _thirdPartyService = Substitute.For<IThirdPartyBetLimitService>();
 
             SetUpDefaultFakeData();
         }
@@ -46,6 +49,7 @@
             _authorizationService = null;
             _cacheRefAdapter = null;
             _rngKenoBetLimitService = null;
+            _thirdPartyService = null;
         }
 
         [TestCase(false)]
@@ -118,7 +122,7 @@
 
         private RngKenoBetLimitController CreateController()
         {
-            return new RngKenoBetLimitController(_rngKenoBetLimitService)
+            return new RngKenoBetLimitController(_rngKenoBetLimitService, _thirdPartyService)
             {
                 LangService = LangService,
                 SessionServiceInstance = SessionService,
