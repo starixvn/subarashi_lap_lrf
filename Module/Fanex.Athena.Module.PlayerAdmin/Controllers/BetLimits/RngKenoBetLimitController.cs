@@ -39,7 +39,7 @@
             {
                 Data = AddProductName(data),
                 Editable = isEditable,
-                IsStatusEnable = isEditable && data.Any(_ => _.IsEnable.HasValue),
+                IsStatusEnable = false,
                 StatusEnable = isEditable && data.Any(_ => _.IsEnable.GetValueOrDefault())
             };
 
