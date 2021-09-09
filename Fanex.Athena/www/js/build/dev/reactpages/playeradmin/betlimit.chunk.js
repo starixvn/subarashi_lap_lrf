@@ -345,7 +345,8 @@ const Setting = {
   [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].VRG]: _grid_data_contents_GameDataContent__WEBPACK_IMPORTED_MODULE_4__["default"],
   [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].CC]: _grid_data_contents_GameDataContent__WEBPACK_IMPORTED_MODULE_4__["default"],
   [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].CS]: _grid_data_contents_RNGCDataContent__WEBPACK_IMPORTED_MODULE_8__["default"],
-  [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].CB]: _grid_data_contents_ThirdPartyDataContent__WEBPACK_IMPORTED_MODULE_9__["default"]
+  [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].CB]: _grid_data_contents_ThirdPartyDataContent__WEBPACK_IMPORTED_MODULE_9__["default"],
+  [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].VGA]: _grid_data_contents_GameDataContent__WEBPACK_IMPORTED_MODULE_4__["default"]
 };
 
 const DataContent = props => {
@@ -2247,7 +2248,8 @@ const BetLimitProduct = {
   VRG: 38,
   CC: 34,
   CS: 6,
-  CB: 15
+  CB: 15,
+  VGA: 66
 };
 const BetLimitSport = {
   I4D: 223,
@@ -2424,7 +2426,8 @@ const Url = {
   [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].VRG]: 'DcsBetLimit',
   [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].CC]: 'DcsBetLimit',
   [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].CS]: 'RngCasinoBetLimit',
-  [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].CB]: 'ThirdPartyBetLimit'
+  [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].CB]: 'ThirdPartyBetLimit',
+  [_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].VGA]: 'DcsBetLimit'
 };
 class DataTransfer {
   static getData(param, callBack) {
@@ -2771,6 +2774,10 @@ const ConfirmationMsg = {
   [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].CB]: {
     Msg: 'UpdateProductBetSettings',
     Product: 'ProductCB'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].VGA]: {
+    Msg: 'UpdateProductBetSettings',
+    Product: 'ProductVGA'
   }
 };
 const ConfirmationUpdateProductStatusMsg = {
@@ -2861,6 +2868,22 @@ const ConfirmationUpdateProductStatusMsg = {
   [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].CB]: {
     Msg: 'UpdateProductStatus',
     Product: 'ProductCB'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].KN]: {
+    Msg: 'UpdateProductStatus',
+    Product: 'ProductKN'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].TG]: {
+    Msg: 'UpdateProductStatus',
+    Product: 'ProductTG'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].LT]: {
+    Msg: 'UpdateProductStatus',
+    Product: 'ProductLT'
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].VGA]: {
+    Msg: 'UpdateProductStatus',
+    Product: 'ProductVGA'
   }
 };
 class Utility {

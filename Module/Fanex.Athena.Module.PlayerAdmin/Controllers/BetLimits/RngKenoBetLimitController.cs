@@ -1,6 +1,7 @@
 ﻿namespace Fanex.Athena.Module.PlayerAdmin.Controllers
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Fanex.Athena.Model.Auth.DataDomain;
@@ -15,12 +16,15 @@
     [ValidateProductPermission(ProductTypes.Keno)]
     public class RngKenoBetLimitController : PlayerBetLimitBaseControler
     {
-        private readonly IRngKenoBetLimitService _service;
+        private readonly IRngKenoBetLimitService _rngKenoService;
+        private readonly IThirdPartyBetLimitService _thirdPartyService;
 
         public RngKenoBetLimitController(
-            IRngKenoBetLimitService rngKenoBetLimitService)
+            IRngKenoBetLimitService rngKenoBetLimitService,
+            IThirdPartyBetLimitService thirdPartyBetLimitService)
         {
-            _service = rngKenoBetLimitService;
+            _rngKenoService = rngKenoBetLimitService;
+            _thirdPartyService = thirdPartyBetLimitService;
         }
 
         [HttpPost]
@@ -29,12 +33,14 @@
         public async Task<JsonResult> GetSetting(PlayerBetLimitSelectMetaModel metaModel)
         {
             var isEditable = HasEditPermission();
-            var data = await _service.GetSettingAsync(metaModel.CustId).ConfigureAwait(false);
+            var data = await _rngKenoService.GetSettingAsync(metaModel.CustId).ConfigureAwait(false);
 
             var viewModel = new PlayerBetLimitViewModel
             {
                 Data = AddProductName(data),
-                Editable = isEditable
+                Editable = isEditable,
+                IsStatusEnable = false,
+                StatusEnable = isEditable && data.Any(_ => _.IsEnable.GetValueOrDefault())
             };
 
             return Json(viewModel);
@@ -48,7 +54,22 @@
         [FunctionAuthorization(PermissionKeys.PlayerAdminBetLimit_Write)]
         public async Task<JsonResult> UpdateSetting(PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>> metaModel)
         {
-            var result = await _service.UpdateSettingAsync(metaModel).ConfigureAwait(false);
+            var result = await _rngKenoService.UpdateSettingAsync(metaModel).ConfigureAwait(false);
+
+            result.Message = result.Code == 0 ? ViewResources.UpdateSuccess : result.Message;
+
+            return Json(result);
+        }
+
+        [HttpPost]
+        [AjaxRequest]
+        [ValidationWebRequest(HandlingAjaxRequestWithJsonResult = true)]
+        [AutoBindMetaModel(BindIp = true, BindLanguage = true, BindSiteName = true, BindUserId = true)]
+        [ValidatePermissionOnData(isObject: true)]
+        [FunctionAuthorization(PermissionKeys.PlayerAdminBetLimit_Write)]
+        public async Task<JsonResult> UpdateStatus(PlayerBetLimitProductStatusUpdateMetaModel metaModel)
+        {
+            var result = await _thirdPartyService.UpdateStatusAsync(metaModel);
 
             result.Message = result.Code == 0 ? ViewResources.UpdateSuccess : result.Message;
 
