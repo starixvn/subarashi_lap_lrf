@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
     using System.Web.Mvc;
     using Base.UnitTests;
     using DataAccess.Core.Configuration.Interfaces;
@@ -21,8 +22,8 @@
         private static readonly DateTime BalanceUpDate = new DateTime(2017, 3, 4);
 
         private IBalanceUpDataAccess _balanceUpDataAccess;
-
         private IBetListApiClient _betListApiClient;
+        private IPortalApiService _portalApiService;
 
         protected new IAppSettings AppSettings { get; set; }
 
@@ -31,12 +32,16 @@
         {
             base.FixtureSetUp();
             _balanceUpDataAccess = Substitute.For<IBalanceUpDataAccess>();
+            _portalApiService = Substitute.For<IPortalApiService>();
             AppSettings = Substitute.For<IAppSettings>();
 
             _balanceUpDataAccess.GetBalanceUp().Returns(new BalanceUp
             {
                 BalanceUpDay = BalanceUpDate
             });
+            _portalApiService.GetSpecialLeaguesAsync(DefaultLicenseeSession.LicenseeName)
+                .Returns(Task.FromResult(Enumerable.Empty<int>()));
+
 
             SetUpDefaultFakeData();
         }
@@ -137,9 +142,8 @@
                 SessionService.LicenseeSession.LicenseeId,
                 SessionService.UserSession.Language,
                 Arg.Any<string>()).Returns(new ProductAccess(productList.ToList()));
-            AppSettings.LicenseeOfferLeagueM88.Returns(Enumerable.Empty<int>());
 
-            var controller = new ResultReportController(_balanceUpDataAccess, _betListApiClient)
+            var controller = new ResultReportController(_balanceUpDataAccess, _betListApiClient, _portalApiService)
             {
                 ControllerContext = ControllerContext,
                 LangService = LangService,

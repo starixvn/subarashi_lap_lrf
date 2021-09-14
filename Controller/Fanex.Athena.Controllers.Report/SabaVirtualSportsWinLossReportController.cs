@@ -22,18 +22,21 @@
         private readonly ISportTypeDataAccess _sportTypeDataAccess;
         private readonly ILeagueDataAccess _leagueDataAccess;
         private readonly IReportSettingService _reportSettingService;
+        private readonly IPortalApiService _portalApiService;
 
         private readonly List<int> _sportList = new List<int> { (int)SportType.Soccer, (int)SportType.BasketBall, (int)SportType.Cricket };
 
         public SabaVirtualSportsWinLossReportController(
             ISportTypeDataAccess sportTypeDataAccess,
             ILeagueDataAccess leagueDataAccess,
-            IReportSettingService reportSettingService
+            IReportSettingService reportSettingService,
+            IPortalApiService portalApiService
             )
         {
             _sportTypeDataAccess = sportTypeDataAccess;
             _leagueDataAccess = leagueDataAccess;
             _reportSettingService = reportSettingService;
+            _portalApiService = portalApiService;
         }
 
         [HttpGet]
@@ -85,9 +88,8 @@
         [AutoBindMetaModel(BindAgent = true, BindUserId = true)]
         public async Task<ActionResult> GetLeaguesBySport(LeagueMetaModel metaModel)
         {
-            var isOfferLeagueM88 = AppSettingInstance.LicenseeOfferLeagueM88.Contains(SessionServiceInstance.LicenseeSession.LicenseeId);
-
-            var leagues = (await _leagueDataAccess.GetSabaVirtualSportLeaguesBySport(metaModel, isOfferLeagueM88).ConfigureAwait(false))
+            var specialLeagues = await _portalApiService.GetSpecialLeaguesAsync(SessionServiceInstance.LicenseeSession.LicenseeName);
+            var leagues = (await _leagueDataAccess.GetSabaVirtualSportLeaguesBySport(metaModel, specialLeagues).ConfigureAwait(false))
                             .Select(x => new { Key = x.LeagueId, Value = x.LeagueName });
             return Json(leagues);
         }

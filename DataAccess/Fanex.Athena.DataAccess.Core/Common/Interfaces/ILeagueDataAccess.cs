@@ -13,10 +13,10 @@ namespace Fanex.Athena.DataAccess.Core.Common.Interfaces
 
     public interface ILeagueDataAccess
     {
-        Task<IEnumerable<League>> GetLeaguesBySport(LeagueMetaModel metaModel, bool isOfferLeagueM88 = false);
+        Task<IEnumerable<League>> GetLeaguesBySport(LeagueMetaModel metaModel, IEnumerable<int> specialLeagues);
 
-        Task<IEnumerable<League>> GetRunningLeagues(string agentList, string betTypes, bool isOfferLeagueM88 = false);
+        Task<IEnumerable<League>> GetRunningLeagues(string agentList, string betTypes, IEnumerable<int> specialLeagues);
 
-        Task<IEnumerable<League>> GetSabaVirtualSportLeaguesBySport(LeagueMetaModel metaModel, bool isOfferLeagueM88 = false);
+        Task<IEnumerable<League>> GetSabaVirtualSportLeaguesBySport(LeagueMetaModel metaModel, IEnumerable<int> specialLeagues);
     }
 }

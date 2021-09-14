@@ -24,10 +24,6 @@
 
         IEnumerable<int> LicenseeOfferStatusFunction { get; }
 
-        IEnumerable<int> LicenseeOfferLeagueM88 { get; }
-
-        IEnumerable<int> ExcludeLeagues { get; }
-
         string ExchangeProductApiHost { get; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Sonar Code Smell", "S3996:UriPropertiesShouldNotBeStrings",

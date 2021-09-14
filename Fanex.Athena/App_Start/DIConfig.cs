@@ -168,6 +168,8 @@ namespace Fanex.Athena
             builder.Register<LGAPIClient>(x => new LGAPIClient(
                  x.ResolveNamed<HttpClient>("LGAPICLIENT")
                 )).As<ILGAPIClient>().SingleInstance();
+
+            builder.RegisterType<PortalApiService>().As<IPortalApiService>().SingleInstance();
         }
     }
 }

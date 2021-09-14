@@ -27,8 +27,7 @@
         private ICacheRefAdapter _cacheRefAdapter;
 
         private IBetListApiClient _betListApiClient;
-
-        private IAppSettings _appSettings;
+        private IPortalApiService _portalApiService;
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
@@ -38,7 +37,7 @@
             _betListApiClient = Substitute.For<IBetListApiClient>();
             _cacheRefAdapter = Substitute.For<ICacheRefAdapter>();
             _matchService = Substitute.For<IMatchService>();
-            _appSettings = Substitute.For<IAppSettings>();
+            _portalApiService = Substitute.For<IPortalApiService>();
 
             MockSessionData();
         }
@@ -67,7 +66,7 @@
                     new Match { MatchName = "Match4", IsOutRight = true, LeagueId = 3 },
                     new Match { MatchName = "Match2", IsOutRight = true, LeagueId = 5 },
                 };
-                _matchService.GetAllRunningMatchAsync(SportId, Arg.Any<string>()).Returns(matchList);
+                _matchService.GetAllRunningMatchAsync(SportId, Arg.Any<string>(), Arg.Any<IEnumerable<int>>()).Returns(matchList);
 
                 _cacheRefAdapter.GetLeagueName(Arg.Any<int>()).Returns(x => { return x[0].ToString(); });
 
@@ -134,7 +133,7 @@
 
         private LastBetMonitoringBetListController CreateController()
         {
-            return new LastBetMonitoringBetListController(LangService, _betListApiClient, _matchService, _cacheRefAdapter, _appSettings)
+            return new LastBetMonitoringBetListController(LangService, _betListApiClient, _matchService, _cacheRefAdapter, _portalApiService)
             {
                 SessionService = SessionService,
                 ProductService = ProductService

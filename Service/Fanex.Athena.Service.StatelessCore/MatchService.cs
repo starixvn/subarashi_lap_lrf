@@ -30,9 +30,9 @@ namespace Fanex.Athena.Service.StatelessCore
             _cache = cache;
         }
 
-        public async Task<IList<Match>> GetAllRunningMatchAsync(int sportId, string languageCode, bool isOfferLeagueM88 = false)
+        public async Task<IList<Match>> GetAllRunningMatchAsync(int sportId, string languageCode, IEnumerable<int> specialLeagues)
         {
-            var cacheKey = RunningMatchCacheKey + sportId + languageCode + isOfferLeagueM88;
+            var cacheKey = RunningMatchCacheKey + sportId + languageCode + "_" + string.Join("_", specialLeagues);
             var isInCache = _cache.Contains(cacheKey);
             if (isInCache)
             {
@@ -40,7 +40,7 @@ namespace Fanex.Athena.Service.StatelessCore
             }
             else
             {
-                var matchList = await _matchDataAccess.GetAllRunningMatch(sportId, isOfferLeagueM88).ConfigureAwait(false);
+                var matchList = await _matchDataAccess.GetAllRunningMatch(sportId, specialLeagues).ConfigureAwait(false);
                 _cache.Set(cacheKey, matchList);
 
                 return matchList;

@@ -76,22 +76,6 @@ namespace Fanex.Athena.Extension.Utility
             }
         }
 
-        public IEnumerable<int> LicenseeOfferLeagueM88
-        {
-            get
-            {
-                return GetIntegers("LicenseeOfferLeagueM88");
-            }
-        }
-
-        public IEnumerable<int> ExcludeLeagues
-        {
-            get
-            {
-                return GetIntegers("ExcludeLeagues");
-            }
-        }
-
         public string ExchangeProductApiHost
         {
             get { return GetValue("ExchangeProductApiHost"); }

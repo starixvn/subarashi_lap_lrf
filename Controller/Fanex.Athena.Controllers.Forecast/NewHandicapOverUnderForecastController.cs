@@ -44,19 +44,23 @@ namespace Fanex.Athena.Controllers.Forecast
 
         private readonly INewForecastDataAccess _forecastDataAccess;
 
+        private readonly IPortalApiService _portalApiService;
+
+
         public NewHandicapOverUnderForecastController(
             INewForecastDataAccess forecastDataAccess,
             ILogger logger,
             ICacheRefAdapter cacheRefAdapter,
             IMatchService matchService,
-            ILeagueDataAccess leagueDataAccess
-            )
+            ILeagueDataAccess leagueDataAccess,
+            IPortalApiService portalApiService)
         {
             _logger = logger;
             _cacheRefAdapter = cacheRefAdapter;
             _matchService = matchService;
             _forecastDataAccess = forecastDataAccess;
             _leagueDataAccess = leagueDataAccess;
+            _portalApiService = portalApiService;
         }
 
         [HttpGet]
@@ -148,8 +152,9 @@ namespace Fanex.Athena.Controllers.Forecast
 
         private async Task AssignDataForNonAjaxRequest(NewForecastHandicapOverUnderMetaModel metaModel, NewForecastHdpOuViewModel model)
         {
-            var isOfferLeagueM88 = AppSettingInstance.LicenseeOfferLeagueM88.Contains(SessionServiceInstance.LicenseeSession.LicenseeId);
-            model.LeagueList = await _leagueDataAccess.GetRunningLeagues(metaModel.AgentListXml, metaModel.BetTypeString, isOfferLeagueM88);
+            var specialLeagues = await _portalApiService.GetSpecialLeaguesAsync(SessionServiceInstance.LicenseeSession.LicenseeName);
+            model.LeagueList = await _leagueDataAccess.GetRunningLeagues(metaModel.AgentListXml, metaModel.BetTypeString, specialLeagues);
+
             if (model.LeagueList.Any())
             {
                 metaModel.LeagueId = GetLeagueId(metaModel.LeagueId, model.LeagueList);

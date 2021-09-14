@@ -32,17 +32,20 @@ namespace Fanex.Athena.Controllers.Report
         private readonly ISportTypeDataAccess _sportTypeDataAccess;
         private readonly ILeagueDataAccess _leagueDataAccess;
         private readonly IMatchService _matchService;
+        private readonly IPortalApiService _portalApiService;
 
         public WinLossByLeagueReportController(
 
             ISportTypeDataAccess sportTypeDataAccess,
             ILeagueDataAccess leagueDataAccess,
-            IMatchService matchService
+            IMatchService matchService,
+            IPortalApiService portalApiService
             )
         {
             _sportTypeDataAccess = sportTypeDataAccess;
             _leagueDataAccess = leagueDataAccess;
             _matchService = matchService;
+            _portalApiService = portalApiService;
         }
 
         [HttpGet]
@@ -53,7 +56,7 @@ namespace Fanex.Athena.Controllers.Report
             var date = DateTime.Now;
             var productAccess = ProductServiceInstance.GetProductAccess(licenseeSession.LicenseeId, userSession.Language);
             var productList = productAccess.ProductList.Where(x => x.ProductCode == Product.SB || x.ProductCode == Product.BA);
-            var isOfferLeagueM88 = AppSettingInstance.LicenseeOfferLeagueM88.Contains(licenseeSession.LicenseeId);
+            var specialLeagues = await _portalApiService.GetSpecialLeaguesAsync(SessionServiceInstance.LicenseeSession.LicenseeName);
 
             var metaModel = new WinLossByLeagueMetaModel
             {
@@ -75,7 +78,7 @@ namespace Fanex.Athena.Controllers.Report
                                 ToDate = metaModel.ToDate,
                                 AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,
                                 metaModel.CurrencyId)
-                            }, isOfferLeagueM88).ConfigureAwait(false);
+                            }, specialLeagues).ConfigureAwait(false);
 
             var firstLeague = leagues.FirstOrDefault();
 
@@ -101,9 +104,8 @@ namespace Fanex.Athena.Controllers.Report
         [AutoBindMetaModel(BindAgent = true, BindUserId = true)]
         public async Task<ActionResult> GetLeaguesBySport(LeagueMetaModel metaModel)
         {
-            var isOfferLeagueM88 = AppSettingInstance.LicenseeOfferLeagueM88.Contains(SessionServiceInstance.LicenseeSession.LicenseeId);
-
-            var leagues = (await _leagueDataAccess.GetLeaguesBySport(metaModel, isOfferLeagueM88).ConfigureAwait(false))
+            var specialLeagues = await _portalApiService.GetSpecialLeaguesAsync(SessionServiceInstance.LicenseeSession.LicenseeName);
+            var leagues = (await _leagueDataAccess.GetLeaguesBySport(metaModel, specialLeagues).ConfigureAwait(false))
                             .Select(x => new { Key = x.LeagueId, Value = x.LeagueName });
             return Json(leagues);
         }

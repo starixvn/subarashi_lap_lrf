@@ -20,12 +20,10 @@
     public class NewHandicapOverUnderForecastControllerTest : CultureBaseControllerHelperTest
     {
         private INewForecastDataAccess _forecastDataAccess;
-
         private ICacheRefAdapter _cacheRefAdapter;
-
         private IMatchService _matchService;
-
         private ILeagueDataAccess _leagueDataAccess;
+        private IPortalApiService _portalApiService;
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
@@ -33,6 +31,8 @@
             base.FixtureSetUp();
 
             SetUpDefaultFakeData();
+            _portalApiService = Substitute.For<IPortalApiService>();
+            _portalApiService.GetSpecialLeaguesAsync(DefaultLicenseeSession.LicenseeName).Returns(Task.FromResult(Enumerable.Empty<int>()));
         }
 
         [TestCase("CNY", "cny")]
@@ -82,7 +82,7 @@
                     Arg.Any<NewForecastHandicapOverUnderMetaModel>(),
                     Arg.Any<NewForecastHdpOuMatchInfo>()).Returns(mainData);
 
-                _leagueDataAccess.GetRunningLeagues(Arg.Any<string>(), Arg.Any<string>()).Returns(Enumerable.Empty<League>());
+                _leagueDataAccess.GetRunningLeagues(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<IEnumerable<int>>()).Returns(Enumerable.Empty<League>());
 
                 // Action
                 var result = await controler.Index() as ViewResult;
@@ -120,7 +120,7 @@
                 const int LeagueId = 1;
 
                 var leagueList = new List<League> { new League { LeagueId = 0 } };
-                _leagueDataAccess.GetRunningLeagues(Arg.Any<string>(), Arg.Any<string>()).Returns(leagueList);
+                _leagueDataAccess.GetRunningLeagues(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<IEnumerable<int>>()).Returns(leagueList);
 
                 // Action
                 var result = await controler.Index(leagueId: LeagueId) as ViewResult;
@@ -158,7 +158,7 @@
                 const int LeagueId = 1;
 
                 var leagueList = new List<League> { new League { LeagueId = LeagueId } };
-                _leagueDataAccess.GetRunningLeagues(Arg.Any<string>(), Arg.Any<string>()).Returns(leagueList);
+                _leagueDataAccess.GetRunningLeagues(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<IEnumerable<int>>()).Returns(leagueList);
 
                 _matchService.GetForecastMatchListByLeagueAsync(LeagueId).Returns(Task.FromResult<IList<Match>>(new List<Match>()));
 
@@ -198,7 +198,7 @@
                 const int LeagueId = 1;
 
                 var leagueList = new List<League> { new League { LeagueId = LeagueId } };
-                _leagueDataAccess.GetRunningLeagues(Arg.Any<string>(), Arg.Any<string>()).Returns(leagueList);
+                _leagueDataAccess.GetRunningLeagues(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<IEnumerable<int>>()).Returns(leagueList);
 
                 const int MatchId = 2;
                 var match = new Match { MatchId = 0, HomeId = 1, AwayId = 2, IsNeutral = true };
@@ -241,7 +241,7 @@
                 const int LeagueId = 1;
 
                 var leagueList = new List<League> { new League { LeagueId = LeagueId } };
-                _leagueDataAccess.GetRunningLeagues(Arg.Any<string>(), Arg.Any<string>()).Returns(leagueList);
+                _leagueDataAccess.GetRunningLeagues(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<IEnumerable<int>>()).Returns(leagueList);
 
                 const int MatchId = 2;
                 var match = new Match { MatchId = MatchId, HomeId = 1, AwayId = 2, IsNeutral = true };
@@ -383,7 +383,8 @@
                 Substitute.For<ILogger>(),
                 _cacheRefAdapter,
                 _matchService,
-                _leagueDataAccess)
+                _leagueDataAccess,
+                _portalApiService)
             {
                 ControllerContext = ControllerContext,
                 LangService = LangService,

@@ -22,33 +22,29 @@
     public class LastBetMonitoringBetListController : BaseApiController
     {
         private readonly IBetListApiClient _betListApiClient;
-
         private readonly IMatchService _matchService;
-
         private readonly ICacheRefAdapter _cacheRefAdapter;
-
-        private readonly IAppSettings _appSettings;
+        private readonly IPortalApiService _portalApiService;
 
         public LastBetMonitoringBetListController(
             ILanguageService languageService,
             IBetListApiClient betListApiClient,
             IMatchService matchService,
             ICacheRefAdapter cacheRefAdapter,
-            IAppSettings appSettings)
+            IPortalApiService portalApiService)
         : base(languageService)
         {
             _betListApiClient = betListApiClient;
             _matchService = matchService;
             _cacheRefAdapter = cacheRefAdapter;
-            _appSettings = appSettings;
+            _portalApiService = portalApiService;
         }
 
         [HttpGet]
         public async Task<dynamic> GetRunningMatchList(int sportId)
         {
-            var isOfferLeagueM88 = _appSettings.LicenseeOfferLeagueM88.Contains(SessionService.LicenseeSession.LicenseeId);
-
-            var matchList = await _matchService.GetAllRunningMatchAsync(sportId, SessionService.UserSession.Language, isOfferLeagueM88).ConfigureAwait(false);
+            var specialLeagues = await _portalApiService.GetSpecialLeaguesAsync(SessionService.LicenseeSession.LicenseeName);
+            var matchList = await _matchService.GetAllRunningMatchAsync(sportId, SessionService.UserSession.Language, specialLeagues).ConfigureAwait(false);
 
             var leagueListNormal = matchList.Where(i => !i.IsOutRight).Select(m => m.LeagueId).Distinct()
                                       .Select(l => new League

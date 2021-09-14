@@ -36,18 +36,25 @@
 
         private readonly IBetTypeService _betTypeService = Substitute.For<IBetTypeService>();
 
-        private IAppSettings _appSettings = Substitute.For<IAppSettings>();
+        private IPortalApiService _portalApiService;
+
 
         [OneTimeSetUp]
         public void FixtureSetUp()
         {
-            _sessionService.LicenseeSession.Returns(new LicenseeAuthInfo { LicenseeId = FakeHelper.Create<int>() });
+            const string DefaultLicenseeName = "12bet";
+
+            _sessionService.LicenseeSession.Returns(new LicenseeAuthInfo { LicenseeId = FakeHelper.Create<int>(), LicenseeName = DefaultLicenseeName });
             _sessionService.UserSession.Returns(new UserAuthInfo
             {
                 UserId = FakeHelper.Create<int>(),
                 Language = FakeHelper.Create<string>(),
                 CurrencyAgentList = new Dictionary<int, int[]>()
             });
+
+            _portalApiService = Substitute.For<IPortalApiService>();
+            _portalApiService.GetSpecialLeaguesAsync(DefaultLicenseeName)
+                .Returns(Task.FromResult(Enumerable.Empty<int>()));
         }
 
         [OneTimeTearDown]
@@ -122,7 +129,7 @@
                 // arrange
                 var league = new League { LeagueId = FakeHelper.Create<int>(), LeagueName = FakeHelper.Create<string>() };
 
-                _leagueDataAccess.GetLeaguesBySport(Arg.Any<LeagueMetaModel>())
+                _leagueDataAccess.GetLeaguesBySport(Arg.Any<LeagueMetaModel>(), Arg.Any<IEnumerable<int>>())
                     .Returns(new List<League> { league });
 
                 // action
@@ -175,7 +182,7 @@
                 _leagueDataAccess,
                 _matchDataAccess,
                 _betTypeService,
-                _appSettings);
+                _portalApiService);
         }
     }
 }

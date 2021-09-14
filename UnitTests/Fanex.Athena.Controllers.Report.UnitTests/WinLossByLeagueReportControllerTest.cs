@@ -28,10 +28,9 @@
     public class WinLossByLeagueReportControllerTest : CultureBaseControllerHelperTest
     {
         private ISportTypeDataAccess _sportTypeDataAccess;
-
         private ILeagueDataAccess _leagueDataAccess;
-
         private IMatchService _matchService;
+        private IPortalApiService _portalApiService;
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
@@ -40,6 +39,8 @@
             _sportTypeDataAccess = Substitute.For<ISportTypeDataAccess>();
             _leagueDataAccess = Substitute.For<ILeagueDataAccess>();
             _matchService = Substitute.For<IMatchService>();
+            _portalApiService = Substitute.For<IPortalApiService>();
+            _portalApiService.GetSpecialLeaguesAsync(DefaultLicenseeSession.LicenseeName).Returns(Task.FromResult(Enumerable.Empty<int>()));
             SetUpDefaultFakeData();
         }
 
@@ -67,7 +68,7 @@
                     SessionService.UserSession.Language,
                     Product.SB).Returns(sports);
 
-                _leagueDataAccess.GetLeaguesBySport(Arg.Any<LeagueMetaModel>()).Returns(leagues);
+                _leagueDataAccess.GetLeaguesBySport(Arg.Any<LeagueMetaModel>(), Arg.Any<IEnumerable<int>>()).Returns(leagues);
                 _matchService.GetMatchesByLeagueAsync(LeagueId, Arg.Any<DateTime>(), Arg.Any<DateTime>()).Returns(matches);
 
                 // Action
@@ -100,7 +101,7 @@
                     new League { LeagueId = 1, LeagueName = "League1" }
                 };
 
-                _leagueDataAccess.GetLeaguesBySport(metaModel).Returns(data);
+                _leagueDataAccess.GetLeaguesBySport(metaModel, Arg.Any<IEnumerable<int>>()).Returns(data);
 
                 // Action
                 var result = await controller.GetLeaguesBySport(metaModel) as JsonResult;
@@ -152,7 +153,8 @@
             return new WinLossByLeagueReportController(
                 _sportTypeDataAccess,
                 _leagueDataAccess,
-                _matchService)
+                _matchService,
+                _portalApiService)
             {
                 SessionServiceInstance = SessionService,
                 LangService = LangService,
