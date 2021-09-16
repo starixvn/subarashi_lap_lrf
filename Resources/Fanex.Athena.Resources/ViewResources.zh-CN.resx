@@ -2530,9 +2530,6 @@
   <data name="SportType" xml:space="preserve">
     <value>运动类型</value>
   </data>
-  <data name="LeagueGroupId" xml:space="preserve">
-    <value>联赛分类</value>
-  </data>
   <data name="BetInterval" xml:space="preserve">
     <value>投注间隔(秒)</value>
   </data>
@@ -2674,5 +2671,11 @@
   </data>
   <data name="LastModifiedDate" xml:space="preserve">
     <value>上次更新日期</value>
+  </data>
+  <data name="LeagueGroup" xml:space="preserve">
+    <value>League Group</value>
+  </data>
+  <data name="ListOfLeagues" xml:space="preserve">
+    <value>List of leagues</value>
   </data>
 </root>

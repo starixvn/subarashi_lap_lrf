@@ -9,6 +9,7 @@
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Athena.Resources;
     using Fanex.Athena.VendorAdapter.Interfaces;
+    using Fanex.Common.Extensions;
 
     public class CustomerClassDataAccess : BaseDataAccess, ICustomerClassDataAccess
     {
@@ -36,15 +37,17 @@
                     {
                         var id = Convert.ToString(reader["CustomerClass"]);
                         var betDelay = reader.ToNullableDecimal("BetDelay");
-                        var leadgroupId = Convert.ToString(reader["LeagueGroupId"]);
+                        var leagueGroupId = reader.ToInt("LeagueGroupId");
                         var platform = reader.ToNullableInt("Platform");
+                        var sportType = Convert.ToString(reader["SportType"]);
 
                         var policy = new CustomerClassLimitPolicyModel
                         {
                             Id = id,
                             LiveType = Convert.ToInt16(reader["Liveindicator"]),
-                            SportTypeName = _cacheRefAdapter.GetSportName(Convert.ToString(reader["SportType"])),
-                            LeagueGroupId = string.Equals(leadgroupId, "0") ? DefaultTextValue : leadgroupId,
+                            SportType = sportType,
+                            SportTypeName = _cacheRefAdapter.GetSportName(sportType),
+                            LeagueGroupId = leagueGroupId,
                             BetDelay = FormatNumber(betDelay.HasValue ? betDelay * 100 : null, "{0:#,##0.##}%"),
                             BetInterval = FormatNumber(reader.ToNullableDecimal("NextBetInterval"), NumberStyle),
                             MaxBet = FormatNumber(reader.ToNullableDecimal("MaxBet"), NumberStyle),

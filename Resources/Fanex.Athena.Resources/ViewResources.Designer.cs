@@ -3805,11 +3805,11 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to League Group Id.
+        ///   Looks up a localized string similar to League Group.
         /// </summary>
-        public static string LeagueGroupId {
+        public static string LeagueGroup {
             get {
-                return ResourceManager.GetString("LeagueGroupId", resourceCulture);
+                return ResourceManager.GetString("LeagueGroup", resourceCulture);
             }
         }
         
@@ -3891,6 +3891,15 @@ namespace Fanex.Athena.Resources {
         public static string LicenseeWL {
             get {
                 return ResourceManager.GetString("LicenseeWL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to List of leagues.
+        /// </summary>
+        public static string ListOfLeagues {
+            get {
+                return ResourceManager.GetString("ListOfLeagues", resourceCulture);
             }
         }
         

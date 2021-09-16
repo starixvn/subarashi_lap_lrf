@@ -1,5 +1,6 @@
 ﻿namespace Fanex.Athena.Service.StatelessCore
 {
+    using Fanex.Athena.Extension.Helpers;
     using Fanex.Athena.Extension.Utility.Interfaces;
     using Fanex.Athena.Model.Core.DTO.External;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -14,7 +15,7 @@
     public class PortalApiService : IPortalApiService
     {
         private const string DefaultLanguage = "en-US";
-        private const int OneHourInSecond = 60 * 60;
+        private const int ThirtyMinutes = 30 * 60;
         private readonly ILGAPIClient _lgApiClient;
         private readonly ILogger _logger;
         private readonly ICustomMemoryCacheService _cache;
@@ -32,7 +33,7 @@
             return TryGetOrAddFromCache(
                 $"SpecialLeagues_{licenseeName}",
                 () => Handle(path, new { SiteName = licenseeName }, Enumerable.Empty<int>()),
-                OneHourInSecond);
+                ThirtyMinutes);
         }
 
         public Task<IEnumerable<PortalApiLeagueResponse>> GetLimitLeaguesAsync(string licenseeName, int sportType, int leagueGroupId, string langCode)
@@ -48,7 +49,7 @@
 
             return TryGetOrAddFromCache($"LimitLeagues_{licenseeName}_{sportType}_{leagueGroupId}_{langCode}",
                 () => Handle(path, payload, Enumerable.Empty<PortalApiLeagueResponse>()),
-                OneHourInSecond);
+                ThirtyMinutes);
         }
 
         public Task<IEnumerable<PortalApiLeagueGroupResponse>> GetLeagueGroupsAsync(int sportType, string langCode)
@@ -61,7 +62,7 @@
             };
             return TryGetOrAddFromCache($"LeagueGroups_{sportType}_{langCode}",
                 () => Handle(path, payload, Enumerable.Empty<PortalApiLeagueGroupResponse>()),
-                OneHourInSecond);
+                ThirtyMinutes);
         }
 
         private async Task<T> Handle<T>(string path, object payload, T defaultData)
@@ -77,27 +78,25 @@
                     _logger.Error($"An error occurred while calling LGAPI {path} - ErrorMsg: {response.ErrorMsg} - ErrorCode: {response.ErrorCoode}");
                 }
 
-                _logger.Error(JsonConvert.SerializeObject(response));
-
                 return response.Data;
             }
             catch (Exception ex)
             {
-                _logger.Error($"An error occurred while calling LGAPI {path} - ErrorMsg: {ex.Message}", ex);
+                _logger.Error($"An error occurred while calling LGAPI {path} - {LogMessageHelper.GenerateMessage(ex)}", ex);
                 return defaultData;
             }
         }
 
         private async Task<T> TryGetOrAddFromCache<T>(string key, Func<Task<T>> action, int timeout)
         {
-            //var result = _cache.Get<T>(key);
-            //if (!ReferenceEquals(result, default(T)))
-            //{
-            //    return result;
-            //}
+            var result = _cache.Get<T>(key);
+            if (!ReferenceEquals(result, default(T)))
+            {
+                return result;
+            }
 
-            var result = await action.Invoke().ConfigureAwait(false);
-            //_cache.Set(key, result, timeout);
+            result = await action.Invoke().ConfigureAwait(false);
+            _cache.Set(key, result, timeout);
             return result;
         }
 

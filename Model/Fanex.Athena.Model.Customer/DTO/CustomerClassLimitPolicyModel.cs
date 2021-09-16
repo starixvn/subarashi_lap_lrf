@@ -8,7 +8,10 @@
         public string SportType { get; set; }
         public string SportTypeName { get; set; }
 
-        public string LeagueGroupId { get; set; }
+        public int LeagueGroupId { get; set; }
+        public int LicLeagueGroupId { get; set; }
+        public string LicLeagueGroupName { get; set; }
+
         public string BetDelay { get; set; }
         public string BetInterval { get; set; }
         public string MaxBet { get; set; }
