@@ -29,32 +29,34 @@
 
         public Task<IEnumerable<int>> GetSpecialLeaguesAsync(string licenseeName)
         {
-            const string path = "/Portal/GetSpecialLeagues";
+            const string path = "Portal/GetSpecialLeagues";
             return TryGetOrAddFromCache(
                 $"SpecialLeagues_{licenseeName}",
                 () => Handle(path, new { SiteName = licenseeName }, Enumerable.Empty<int>()),
                 ThirtyMinutes);
         }
 
-        public Task<IEnumerable<PortalApiLeagueResponse>> GetLimitLeaguesAsync(string licenseeName, int sportType, int leagueGroupId, string langCode)
+        public async Task<IEnumerable<PortalApiLeagueResponse>> GetLimitLeaguesAsync(string licenseeName, int sportType, int leagueGroupId, string langCode)
         {
-            const string path = "/Portal/GetLimitLeagues";
+            const string path = "Portal/GetLimitLeagues";
             var payload = new
             {
                 SiteName = licenseeName,
                 SportType = sportType,
-                LeagueGroupId = 1,
+                LeagueGroupId = leagueGroupId,
                 LangCode = MapLangCode(langCode)
             };
 
-            return TryGetOrAddFromCache($"LimitLeagues_{licenseeName}_{sportType}_{leagueGroupId}_{langCode}",
+            var result = await TryGetOrAddFromCache($"LimitLeagues_{licenseeName}_{sportType}_{leagueGroupId}_{langCode}",
                 () => Handle(path, payload, Enumerable.Empty<PortalApiLeagueResponse>()),
-                ThirtyMinutes);
+                ThirtyMinutes).ConfigureAwait(false);
+
+            return result.OrderBy(_ => _.LeagueName);
         }
 
         public Task<IEnumerable<PortalApiLeagueGroupResponse>> GetLeagueGroupsAsync(int sportType, string langCode)
         {
-            const string path = "/Portal/GetLeagueGroups";
+            const string path = "Portal/GetLeagueGroups";
             var payload = new
             {
                 SportType = sportType,

@@ -64,7 +64,7 @@
                 if (policy.LeagueGroupId > 0 && int.TryParse(policy.SportType, out int sportType))
                 {
                     var leagueGroups = await _portalApiService.GetLeagueGroupsAsync(sportType, langCode);
-                    var matchedLeagueGroup = leagueGroups.FirstOrDefault(_ => _.LeagueGroupID == policy.LeagueGroupId);
+                    var matchedLeagueGroup = leagueGroups.FirstOrDefault(_ => _.InHouseLeagueGroupID == policy.LeagueGroupId);
                     policy.LicLeagueGroupId = matchedLeagueGroup?.LicLeagueGroupID ?? 0;
                     policy.LicLeagueGroupName = matchedLeagueGroup?.LicGroupName ?? DefaultTextValue;
                 }

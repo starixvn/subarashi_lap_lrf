@@ -2673,9 +2673,9 @@
     <value>上次更新日期</value>
   </data>
   <data name="LeagueGroup" xml:space="preserve">
-    <value>League Group</value>
+    <value>联赛分类</value>
   </data>
   <data name="ListOfLeagues" xml:space="preserve">
-    <value>List of leagues</value>
+    <value>联赛列表</value>
   </data>
 </root>

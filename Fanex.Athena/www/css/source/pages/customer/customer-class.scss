@@ -1,4 +1,5 @@
-﻿
+﻿@import "../../scss/abstracts/_variables.scss";
+
 @mixin active() {
     border-bottom: 2px solid #E15F00;
 }
@@ -8,11 +9,56 @@
         a.policy-setting {
             @include active;
         }
+
         min-width: 1400px;
     }
 
     table {
         min-width: 1400px;
+    }
+
+    .view-leagues {
+        float: right;
+    }
+
+    .list-leagues {
+        position: absolute;
+        width: 350px;
+        z-index: 999;
+        background: #F2F2F2;
+        top: 10px;
+        border: 1px solid #DADADA;
+        padding: 5px 5px;
+        text-align: left;
+
+        .icon-close {
+            font-size: 14px;
+        }
+
+        .list-leagues-header {
+            .block-close {
+                float: right;
+                color: $black;
+            }
+
+            .icon-close {
+                font-size: 14px;
+            }
+        }
+
+        .list-leagues-content {
+            max-height: 200px;
+            min-height: 200px;
+            overflow: auto;
+            width: 100%;
+
+            ul {
+                li {
+                    margin-left: 15px;
+                    list-style-type: disc;
+                }
+            }
+        }
     }
 }
 
@@ -27,16 +73,19 @@
 .tab {
     box-sizing: border-box;
     font-size: 1.4rem;
+
     ul {
         list-style-type: none;
         margin: 0;
         overflow: hidden;
         border-bottom: 1px solid #C4C4C4;
         background-color: #fff;
+
         li {
             display: inline-block;
             font-weight: bold;
             cursor: pointer;
+
             a {
                 display: block;
                 color: #4C6375;
