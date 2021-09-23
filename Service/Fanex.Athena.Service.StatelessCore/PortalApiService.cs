@@ -67,7 +67,7 @@
                 ThirtyMinutes);
         }
 
-        private async Task<T> Handle<T>(string path, object payload, T defaultData)
+        protected async Task<T> Handle<T>(string path, object payload, T defaultData)
         {
             try
             {
@@ -89,7 +89,7 @@
             }
         }
 
-        private async Task<T> TryGetOrAddFromCache<T>(string key, Func<Task<T>> action, int timeout)
+        protected async Task<T> TryGetOrAddFromCache<T>(string key, Func<Task<T>> action, int timeout)
         {
             var result = _cache.Get<T>(key);
             if (!ReferenceEquals(result, default(T)))
