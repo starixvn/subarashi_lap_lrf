@@ -65,7 +65,7 @@
                 currencyAgents = userSession.CurrencyAgentList,
                 UserId = userSession.UserId,
                 CustId = metaModel.CustId,
-                Status = metaModel.Status ? 1 : 0,
+                Status = metaModel.Status ? 0 : 1,
                 Language = userSession.Language,
                 Ip = Request.UserHostAddress,
                 UserName = userSession.UserName,
