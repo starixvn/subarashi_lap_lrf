@@ -4,10 +4,17 @@
 @model IEnumerable<CustomerClassModel>
 @{
     Layout = "~/Views/Desktop/Shared/_Report.jqGridLayout.cshtml";
-    var classNameTab = ViewBag.TabKey == (byte)CustomerClassTabType.SettingPolicy ? "customer-class-policy-setting" : "customer-class-spread-setting";
+    var isSettingPolicyTab = ViewBag.TabKey == (byte)CustomerClassTabType.SettingPolicy;
+    var classNameTab = isSettingPolicyTab ? "customer-class-policy-setting" : "customer-class-spread-setting";
 }
 @section pagecss {
     <link href="@Url.ContentLinkByEnv("/www/css/build/pages/customer/customer-class.css")" rel="stylesheet" />
+}
+@section pagejs {
+    @if (isSettingPolicyTab)
+    {
+        <script src="@Url.ContentLinkByEnv("/www/js/build/pages/customer/customerclass.chunk.js")"></script>
+    }
 }
 @section Content{
     <div class="page-results @classNameTab">
@@ -17,7 +24,7 @@
                     <a class="policy-setting" href="~/CustomerClass/CustomerClassInformation?tabKey=1">@ViewResources.CustomerClassSettingPolicy</a>
                 </li>
                 <li>
-                    <a  class="spread-setting" href="~/CustomerClass/CustomerClassInformation?tabKey=2">@ViewResources.CustomerClassSpreadSettingPolicy</a>
+                    <a class="spread-setting" href="~/CustomerClass/CustomerClassInformation?tabKey=2">@ViewResources.CustomerClassSpreadSettingPolicy</a>
                 </li>
             </ul>
         </div>

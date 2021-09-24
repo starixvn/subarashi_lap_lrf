@@ -27,6 +27,7 @@
         private ILeagueDataAccess _leagueDataAccess;
 
         private IReportSettingService _reportSettingService;
+        private IPortalApiService _portalApiService;
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
@@ -35,6 +36,9 @@
             _sportTypeDataAccess = Substitute.For<ISportTypeDataAccess>();
             _leagueDataAccess = Substitute.For<ILeagueDataAccess>();
             _reportSettingService = Substitute.For<IReportSettingService>();
+            _portalApiService = Substitute.For<IPortalApiService>();
+            _portalApiService.GetSpecialLeaguesAsync(DefaultLicenseeSession.LicenseeName)
+                .Returns(Task.FromResult(Enumerable.Empty<int>()));
             SetUpDefaultFakeData();
         }
 
@@ -85,7 +89,7 @@
                     new League { LeagueId = 1, LeagueName = "League1" }
                 };
 
-                _leagueDataAccess.GetSabaVirtualSportLeaguesBySport(metaModel, Arg.Any<bool>()).Returns(data);
+                _leagueDataAccess.GetSabaVirtualSportLeaguesBySport(metaModel, Arg.Any<IEnumerable<int>>()).Returns(data);
 
                 // Action
                 var result = await controller.GetLeaguesBySport(metaModel) as JsonResult;
@@ -110,7 +114,8 @@
             return new SabaVirtualSportsWinLossReportController(
                 _sportTypeDataAccess,
                 _leagueDataAccess,
-                _reportSettingService)
+                _reportSettingService,
+                _portalApiService)
             {
                 SessionServiceInstance = SessionService,
                 LangService = LangService,

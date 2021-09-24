@@ -8,6 +8,7 @@
     using DataAccess.Core.Common.Interfaces;
     using DataAccess.Forecast.Interfaces;
     using Fanex.Athena.Extension.Utility;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DTO.Common;
     using Model.Forecast.DTO.Forecast1X2;
     using Model.Forecast.MetaModel;
@@ -20,6 +21,7 @@
         private ILeagueDataAccess _leagueDataAccess;
 
         private IForecastOneXTwoDataAccess _forecastOneXTwoDataAccess;
+        private IPortalApiService _portalApiService;
 
         protected new IAppSettings AppSettings { get; set; }
 
@@ -27,8 +29,10 @@
         public override void FixtureSetUp()
         {
             base.FixtureSetUp();
-
             SetUpDefaultFakeData();
+
+            _portalApiService = Substitute.For<IPortalApiService>();
+            _portalApiService.GetSpecialLeaguesAsync(DefaultLicenseeSession.LicenseeName).Returns(Task.FromResult(Enumerable.Empty<int>()));
         }
 
         [Test]
@@ -41,7 +45,7 @@
                 var leagueList = Enumerable.Empty<League>();
                 var mainData = new List<ForecastOneXTwo>();
 
-                _leagueDataAccess.GetRunningLeagues(Arg.Any<string>(), Arg.Any<string>()).Returns(leagueList);
+                _leagueDataAccess.GetRunningLeagues(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<IEnumerable<int>>()).Returns(leagueList);
                 _forecastOneXTwoDataAccess.GetForecastOneXTwoByLeague(Arg.Any<ForecastOneXTwoMetaModel>()).Returns(mainData);
 
                 // Action
@@ -74,7 +78,7 @@
                 var leagueList = leagueIDList.Select(x => new League { LeagueId = x }).ToList();
                 var mainData = new List<ForecastOneXTwo>();
 
-                _leagueDataAccess.GetRunningLeagues(Arg.Any<string>(), Arg.Any<string>()).Returns(leagueList);
+                _leagueDataAccess.GetRunningLeagues(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<IEnumerable<int>>()).Returns(leagueList);
                 _forecastOneXTwoDataAccess.GetForecastOneXTwoByMatch(Arg.Any<ForecastOneXTwoMetaModel>()).Returns(mainData);
 
                 var metaModel = new ForecastOneXTwoMetaModel { LeagueId = leagueId, MatchId = 1 };
@@ -108,7 +112,7 @@
                 var leagueList = leagueIDList.Select(x => new League { LeagueId = x }).ToList();
                 var mainData = new List<ForecastOneXTwo>();
 
-                _leagueDataAccess.GetRunningLeagues(Arg.Any<string>(), Arg.Any<string>()).Returns(leagueList);
+                _leagueDataAccess.GetRunningLeagues(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<IEnumerable<int>>()).Returns(leagueList);
                 _forecastOneXTwoDataAccess.GetForecastOneXTwoByMatch(Arg.Any<ForecastOneXTwoMetaModel>()).Returns(mainData);
 
                 var metaModel = new ForecastOneXTwoMetaModel { LeagueId = leagueId, MatchId = 1 };
@@ -150,12 +154,11 @@
         {
             _forecastOneXTwoDataAccess = Substitute.For<IForecastOneXTwoDataAccess>();
             _leagueDataAccess = Substitute.For<ILeagueDataAccess>();
-            AppSettings = Substitute.For<IAppSettings>();
 
-            AppSettings.LicenseeOfferLeagueM88.Returns(Enumerable.Empty<int>());
+            AppSettings = Substitute.For<IAppSettings>();
             AppSettings.LicenseeOfferNewForecast.Returns(Enumerable.Empty<int>());
 
-            var controller = new OneXTwoForecastController(_leagueDataAccess, _forecastOneXTwoDataAccess)
+            var controller = new OneXTwoForecastController(_leagueDataAccess, _forecastOneXTwoDataAccess, _portalApiService)
             {
                 ControllerContext = ControllerContext,
                 LangService = LangService,

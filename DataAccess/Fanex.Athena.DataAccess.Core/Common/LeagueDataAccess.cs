@@ -42,7 +42,7 @@ namespace Fanex.Athena.DataAccess.Core.Common
             _balanceUpDataAccess = balanceUpDataAccess;
         }
 
-        public async Task<IEnumerable<League>> GetLeaguesBySport(LeagueMetaModel metaModel, bool isOfferLeagueM88 = false)
+        public async Task<IEnumerable<League>> GetLeaguesBySport(LeagueMetaModel metaModel, IEnumerable<int> specialLeagues)
         {
             using (var db = this.GetObjectDb("Lrf_SelLeagueBySport"))
             {
@@ -52,11 +52,11 @@ namespace Fanex.Athena.DataAccess.Core.Common
                 db.SetParameterValue("AgentList", metaModel.AgentListXml);
                 db.SetParameterValue("MoveBetsDay", _balanceUpDataAccess.GetBalanceUp().MoveBetsDay);
                 db.SetParameterValue("IsIncludeTestLeague", !_appSettings.IsProduction);
-                return await ReadLeagues(db, isOfferLeagueM88).ConfigureAwait(false);
+                return await ReadLeagues(db, specialLeagues).ConfigureAwait(false);
             }
         }
 
-        public async Task<IEnumerable<League>> GetRunningLeagues(string agentList, string betTypes, bool isOfferLeagueM88 = false)
+        public async Task<IEnumerable<League>> GetRunningLeagues(string agentList, string betTypes, IEnumerable<int> specialLeagues)
         {
             const string UspName = "Lrf_LeagueSelRunning";
             using (var db = this.GetObjectDb(UspName))
@@ -64,11 +64,11 @@ namespace Fanex.Athena.DataAccess.Core.Common
                 db.SetParameterValue("AgentList", agentList);
                 db.SetParameterValue("betTypes", betTypes);
                 db.SetParameterValue("IsIncludeTestLeague", !_appSettings.IsProduction);
-                return await ReadLeagues(db, isOfferLeagueM88).ConfigureAwait(false);
+                return await ReadLeagues(db, specialLeagues).ConfigureAwait(false);
             }
         }
 
-        public async Task<IEnumerable<League>> GetSabaVirtualSportLeaguesBySport(LeagueMetaModel metaModel, bool isOfferLeagueM88 = false)
+        public async Task<IEnumerable<League>> GetSabaVirtualSportLeaguesBySport(LeagueMetaModel metaModel, IEnumerable<int> specialLeagues)
         {
             using (var db = this.GetObjectDb("Lrf_SelLeagueBySport"))
             {
@@ -78,11 +78,11 @@ namespace Fanex.Athena.DataAccess.Core.Common
                 db.SetParameterValue("AgentList", metaModel.AgentListXml);
                 db.SetParameterValue("MoveBetsDay", _balanceUpDataAccess.GetBalanceUp().MoveBetsDay);
                 db.SetParameterValue("IsIncludeTestLeague", !_appSettings.IsProduction);
-                return await ReadSabaVirtualSportLeagues(db, isOfferLeagueM88).ConfigureAwait(false);
+                return await ReadSabaVirtualSportLeagues(db, specialLeagues).ConfigureAwait(false);
             }
         }
 
-        private async Task<IEnumerable<League>> ReadSabaVirtualSportLeagues(IObjectDb db, bool isOfferLeagueM88 = false)
+        private async Task<IEnumerable<League>> ReadSabaVirtualSportLeagues(IObjectDb db, IEnumerable<int> specialLeagues)
         {
             var dataList = new List<League>();
             using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
@@ -93,7 +93,7 @@ namespace Fanex.Athena.DataAccess.Core.Common
                     var sportid = reader.ToInt("sportid");
                     var leagueGroupID = reader.ToInt("LeagueGroupID");
 
-                    if (_sportList.ContainsKey(sportid) && _sportList[sportid].Contains(leagueGroupID) && (!_appSettings.ExcludeLeagues.Contains(leagueId) || isOfferLeagueM88))
+                    if (_sportList.ContainsKey(sportid) && _sportList[sportid].Contains(leagueGroupID) && !specialLeagues.Contains(leagueId))
                     {
                         dataList.Add(new League
                         {
@@ -116,7 +116,7 @@ namespace Fanex.Athena.DataAccess.Core.Common
             }
         }
 
-        private async Task<IEnumerable<League>> ReadLeagues(IObjectDb db, bool isOfferLeagueM88 = false)
+        private async Task<IEnumerable<League>> ReadLeagues(IObjectDb db, IEnumerable<int> specialLeagues)
         {
             var dataList = new List<League>();
             using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
@@ -125,7 +125,7 @@ namespace Fanex.Athena.DataAccess.Core.Common
                 {
                     var leagueId = reader.ToInt("leagueid");
 
-                    if (!_appSettings.ExcludeLeagues.Contains(leagueId) || isOfferLeagueM88)
+                    if (!specialLeagues.Contains(leagueId))
                     {
                         dataList.Add(new League
                         {

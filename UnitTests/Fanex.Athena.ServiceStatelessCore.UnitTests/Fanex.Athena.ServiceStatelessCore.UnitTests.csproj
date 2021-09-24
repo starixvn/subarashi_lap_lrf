@@ -92,6 +92,7 @@
     <Compile Include="MockHelper\MockHttpMessageHandler.cs" />
     <Compile Include="MoveBetServiceTest.cs" />
     <Compile Include="OneBookSecurityWrapperTest.cs" />
+    <Compile Include="PortalApiServiceTest.cs" />
     <Compile Include="ProductServiceTest.GetProductAccess.cs" />
     <Compile Include="ProductServiceTest.GetProductList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

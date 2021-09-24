@@ -1,6 +1,7 @@
 ﻿namespace Fanex.Athena.Controllers.Report.Result
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Net;
     using System.Threading.Tasks;
@@ -15,6 +16,7 @@
     using Model.Report.MetaModel.Result;
     using Model.Report.ViewModel.Result;
 
+    
     public class ResultReportController : ReportBaseController
     {
         private const string ResultPageGetNormalSportsName = "ResultPage_GetNormalSports";
@@ -22,17 +24,19 @@
         private const string ROOT_URL = "{rootUrl}";
 
         private readonly IBalanceUpDataAccess _balanceUpDataAccess;
-
         private readonly IBetListApiClient _betListApiClient;
+        private readonly IPortalApiService _portalApiService;
 
         #region Result-Page
 
         public ResultReportController(
             IBalanceUpDataAccess balanceUpDataAccess,
-            IBetListApiClient betListApiClient)
+            IBetListApiClient betListApiClient,
+            IPortalApiService portalApiService)
         {
             _balanceUpDataAccess = balanceUpDataAccess;
             _betListApiClient = betListApiClient;
+            _portalApiService = portalApiService;
         }
 
         [FunctionAuthorization(PermissionKeys.ReportResults)]
@@ -69,8 +73,8 @@
         {
             if (ModelState.IsValid)
             {
-                metaModel.IsOfferLeagueM88 = AppSettingInstance.LicenseeOfferLeagueM88.Contains(SessionServiceInstance.LicenseeSession.LicenseeId);
-
+                metaModel.SpecialLeagues = await _portalApiService.GetSpecialLeaguesAsync(SessionServiceInstance.LicenseeSession.LicenseeName);
+                
                 var data = await _betListApiClient.PostStringAsync(
                     "/ResultReport/Index",
                     metaModel,
@@ -94,7 +98,7 @@
 
             const string FileName = "LRF-Result.xls";
             metaModel.LicenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
-            metaModel.IsOfferLeagueM88 = AppSettingInstance.LicenseeOfferLeagueM88.Contains(metaModel.LicenseeId);
+            metaModel.SpecialLeagues = await _portalApiService.GetSpecialLeaguesAsync(SessionServiceInstance.LicenseeSession.LicenseeName);
 
             var stream = await _betListApiClient.PostStreamAsync(
                 "/ResultReport/ResultExcel",
@@ -118,7 +122,7 @@
                    language,
                    ResultPageGetNormalSportsName);
                 metaModel.ProductCodeList = string.Join(",", productAccess.ProductList.Select(x => x.ProductCode));
-                metaModel.IsOfferLeagueM88 = AppSettingInstance.LicenseeOfferLeagueM88.Contains(metaModel.LicenseeId);
+                metaModel.SpecialLeagues = await _portalApiService.GetSpecialLeaguesAsync(SessionServiceInstance.LicenseeSession.LicenseeName);
                 var result = await _betListApiClient.PostStringAsync(
                     "/ResultReport/GetSports",
                     metaModel,

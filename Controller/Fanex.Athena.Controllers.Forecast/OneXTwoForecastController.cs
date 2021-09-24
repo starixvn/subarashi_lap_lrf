@@ -10,6 +10,7 @@ namespace Fanex.Athena.Controllers.Forecast
     using DataAccess.Forecast.Interfaces;
 
     using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
 
@@ -23,15 +24,17 @@ namespace Fanex.Athena.Controllers.Forecast
     public class OneXTwoForecastController : ForecastBaseController
     {
         private readonly ILeagueDataAccess _leagueDataAccess;
-
         private readonly IForecastOneXTwoDataAccess _forecastOneXTwoDataAccess;
+        private readonly IPortalApiService _portalApiService;
 
         public OneXTwoForecastController(
             ILeagueDataAccess leagueDataAccess,
-            IForecastOneXTwoDataAccess forecastOneXTwoDataAccess)
+            IForecastOneXTwoDataAccess forecastOneXTwoDataAccess,
+            IPortalApiService portalApiService)
         {
             _leagueDataAccess = leagueDataAccess;
             _forecastOneXTwoDataAccess = forecastOneXTwoDataAccess;
+            _portalApiService = portalApiService;
         }
 
         [HttpGet]
@@ -79,8 +82,9 @@ namespace Fanex.Athena.Controllers.Forecast
             metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,
                 metaModel.CurrencyId);
 
-            var isOfferLeagueM88 = AppSettingInstance.LicenseeOfferLeagueM88.Contains(SessionServiceInstance.LicenseeSession.LicenseeId);
-            var leagueList = await _leagueDataAccess.GetRunningLeagues(metaModel.AgentListXml, metaModel.BetTypeString, isOfferLeagueM88);
+            var specialLeagues = await _portalApiService.GetSpecialLeaguesAsync(SessionServiceInstance.LicenseeSession.LicenseeName);
+            var leagueList = await _leagueDataAccess.GetRunningLeagues(metaModel.AgentListXml, metaModel.BetTypeString, specialLeagues);
+
             var currentLeagueId = metaModel.LeagueId;
 
             if (metaModel.MatchId != 0)

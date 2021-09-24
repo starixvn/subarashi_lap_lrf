@@ -72,7 +72,7 @@ namespace Fanex.Athena.DataAccess.Core.Common
         /// </summary>
         /// <param name="sportId">Sport ID value.</param>
         /// <returns>The result value.</returns>
-        public async Task<IList<Match>> GetAllRunningMatch(int sportId, bool isOfferLeagueM88 = false)
+        public async Task<IList<Match>> GetAllRunningMatch(int sportId, IEnumerable<int> specialLeagues)
         {
             var result = new List<Match>();
 
@@ -87,7 +87,7 @@ namespace Fanex.Athena.DataAccess.Core.Common
                         var awayId = Convert.ToInt32(reader["awayid"]);
                         var leagueId = Convert.ToInt32(reader["leagueid"]);
 
-                        if (!_appSettings.ExcludeLeagues.Contains(leagueId) || isOfferLeagueM88)
+                        if (!specialLeagues.Contains(leagueId))
                         {
                             var match = new Match
                             {

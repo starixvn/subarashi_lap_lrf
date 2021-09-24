@@ -1,6 +1,7 @@
 ﻿namespace Fanex.Athena.DataAccess.Core.UnitTests.Common
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using Core.Common;
@@ -20,6 +21,8 @@
 
     public class MatchDataAccessTest : BaseDataAccessHelperTest<MatchDataAccess>
     {
+        private static readonly IEnumerable<int> DefaultSpecialLeauges = new[] { 999 };
+
         private IAppSettings _appSettings;
         private IBalanceUpDataAccess _balanceUpDataAccess;
 
@@ -89,7 +92,7 @@
             _appSettings.IsProduction.Returns(isProduction);
 
             // Action
-            await DataAccess.GetAllRunningMatch(SportId);
+            await DataAccess.GetAllRunningMatch(SportId, DefaultSpecialLeauges);
 
             // Assert
             ObjectDb.Received(1).SetParameterValue("sporttype", SportId);
@@ -108,7 +111,7 @@
             Reader.Read().Returns(true, false);
 
             // Action
-            var result = await DataAccess.GetAllRunningMatch(SportId);
+            var result = await DataAccess.GetAllRunningMatch(SportId, DefaultSpecialLeauges);
 
             // Assert
             Assert.Multiple(() =>

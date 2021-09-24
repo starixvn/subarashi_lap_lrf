@@ -11,6 +11,7 @@
     using Fanex.Athena.Model.Customer.DTO;
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Athena.Service.Customer.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Logging;
     using Newtonsoft.Json;
 
@@ -20,17 +21,20 @@
 
         private readonly ICustomerClassDataAccess _dataAccess;
         private readonly IWebClientService _webClientService;
+        private readonly IPortalApiService _portalApiService;
         private readonly IAppSettings _appSettings;
         private readonly ILogger _logger;
 
         public CustomerClassService(
             ICustomerClassDataAccess dataAccess,
             IWebClientService webClientService,
+            IPortalApiService portalApiService,
             IAppSettings appSettings,
             ILogger logger)
         {
             _dataAccess = dataAccess;
             _webClientService = webClientService;
+            _portalApiService = portalApiService;
             _appSettings = appSettings;
             _logger = logger;
         }
@@ -38,6 +42,8 @@
         public async Task<IEnumerable<CustomerClassModel>> GetSettingPolicy(GetCustomerClassInformationMetaModel metaModel)
         {
             var policies = await _dataAccess.GetSettingPolicies(metaModel);
+            await MapLicLeagueGroup(policies, metaModel.Language);
+
             var result = GroupPolicies(metaModel, policies);
             await MapCustomerClassCategories(metaModel, result);
             return result.OrderBy(r => int.Parse(r.Id));
@@ -49,6 +55,24 @@
             var result = GroupPolicies(metaModel, limitPolicies);
             await MapCustomerClassCategories(metaModel, result);
             return result;
+        }
+
+        private async Task MapLicLeagueGroup(IEnumerable<CustomerClassLimitPolicyModel> policies, string langCode)
+        {
+            foreach (var policy in policies)
+            {
+                if (policy.LeagueGroupId > 0 && int.TryParse(policy.SportType, out int sportType))
+                {
+                    var leagueGroups = await _portalApiService.GetLeagueGroupsAsync(sportType, langCode);
+                    var matchedLeagueGroup = leagueGroups.FirstOrDefault(_ => _.InHouseLeagueGroupID == policy.LeagueGroupId);
+                    policy.LicLeagueGroupId = matchedLeagueGroup?.LicLeagueGroupID ?? 0;
+                    policy.LicLeagueGroupName = matchedLeagueGroup?.LicGroupName ?? DefaultTextValue;
+                }
+                else
+                {
+                    policy.LicLeagueGroupName = DefaultTextValue;
+                }
+            }
         }
 
         private List<CustomerClassModel> GroupPolicies(GetCustomerClassInformationMetaModel metaModel, IEnumerable<CustomerClassLimitPolicyModel> policies)

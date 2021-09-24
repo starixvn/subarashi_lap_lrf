@@ -129,6 +129,7 @@ var scriptPaths = {
     kenobetsetting: "./www/js/source/pages/customer/betsetting/main-keno.js",
     numbergamebetsetting: "./www/js/source/pages/customer/betsetting/main-numbergame.js",
     exchangebetsetting: "./www/js/source/pages/customer/betsetting/main-exchange.js",
+    customerclass: "./www/js/source/pages/customer/customerclass/main.js",
 
     activecustomersummary: "./www/js/source/pages/report/activecustomersummary/main.js",
     agcasinowinloss: "./www/js/source/pages/report/agcasinowinloss/main.js",
@@ -138,6 +139,7 @@ var scriptPaths = {
     customerpendingfunds: "./www/js/source/pages/report/customerpendingfunds/main.js",
     customerturnover: "./www/js/source/pages/report/customerturnover/main.js",
     customerwinloss: "./www/js/source/pages/report/customerwinloss/main.js",
+
     playercomissionmultiplemovegroup: "./www/js/source/pages/playercommission/multiplemovegroup.js",
     playercomissionmultipleremovefromgroup: "./www/js/source/pages/playercommission/multipleremovefromgroup.js",
     playercomissionmultipleupdategroup: "./www/js/source/pages/playercommission/multipleupdategroup.js",

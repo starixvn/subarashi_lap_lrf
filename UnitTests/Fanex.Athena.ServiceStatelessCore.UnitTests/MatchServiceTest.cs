@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using DataAccess.Core.Common.Interfaces;
@@ -28,6 +29,8 @@
             {
                 new Match { MatchId = 1 }
             };
+
+        private static readonly IEnumerable<int> DefaultSpecialLeauges = new[] { 999 };
 
         private ICustomMemoryCacheService _cache;
         private IMatchDataAccess _matchDataAccess;
@@ -57,7 +60,7 @@
             _cache.Get<IList<Match>>(Arg.Any<string>()).Returns(ExpectedResultDataList);
 
             // Action
-            var result = await _matchService.GetAllRunningMatchAsync(sportId, Language);
+            var result = await _matchService.GetAllRunningMatchAsync(sportId, Language, Enumerable.Empty<int>());
 
             // Assert
             Assert.Multiple(() =>
@@ -72,15 +75,15 @@
         {
             // Arrange
             var sportId = FakeHelper.Create<int>();
-            _matchDataAccess.GetAllRunningMatch(sportId).Returns(ExpectedResultDataList);
+            _matchDataAccess.GetAllRunningMatch(sportId, DefaultSpecialLeauges).Returns(ExpectedResultDataList);
 
             // Action
-            var result = await _matchService.GetAllRunningMatchAsync(sportId, Language);
+            var result = await _matchService.GetAllRunningMatchAsync(sportId, Language, DefaultSpecialLeauges);
 
             // Assert
             Assert.Multiple(() =>
             {
-                _matchDataAccess.Received().GetAllRunningMatch(sportId);
+                _matchDataAccess.Received().GetAllRunningMatch(sportId, DefaultSpecialLeauges);
                 Assert.That(result[0].MatchId, Is.EqualTo(ExpectedResultDataList[0].MatchId));
             });
         }
@@ -90,11 +93,11 @@
         {
             // Arrange
             var sportId = FakeHelper.Create<int>();
-            _matchDataAccess.GetAllRunningMatch(sportId).Returns(ExpectedResultDataList);
-            var firstCall = await _matchService.GetAllRunningMatchAsync(sportId, Language);
+            _matchDataAccess.GetAllRunningMatch(sportId, DefaultSpecialLeauges).Returns(ExpectedResultDataList);
+            var firstCall = await _matchService.GetAllRunningMatchAsync(sportId, Language, DefaultSpecialLeauges);
 
             // Action
-            var result = await _matchService.GetAllRunningMatchAsync(sportId, Language);
+            var result = await _matchService.GetAllRunningMatchAsync(sportId, Language, DefaultSpecialLeauges);
 
             // Assert
             Assert.That(result, Is.EqualTo(ExpectedResultDataList));

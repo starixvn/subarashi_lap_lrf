@@ -1,3 +1,4 @@
+/* z-index */
 .customer-class-policy-setting .tab {
   min-width: 1400px; }
   .customer-class-policy-setting .tab a.policy-setting {
@@ -5,6 +6,34 @@
 
 .customer-class-policy-setting table {
   min-width: 1400px; }
+
+.customer-class-policy-setting .view-leagues {
+  float: right; }
+
+.customer-class-policy-setting .list-leagues {
+  position: absolute;
+  width: 350px;
+  z-index: 999;
+  background: #F2F2F2;
+  top: 10px;
+  border: 1px solid #DADADA;
+  padding: 5px 5px;
+  text-align: left; }
+  .customer-class-policy-setting .list-leagues .icon-close {
+    font-size: 14px; }
+  .customer-class-policy-setting .list-leagues .list-leagues-header .block-close {
+    float: right;
+    color: #2c2c2c; }
+  .customer-class-policy-setting .list-leagues .list-leagues-header .icon-close {
+    font-size: 14px; }
+  .customer-class-policy-setting .list-leagues .list-leagues-content {
+    max-height: 200px;
+    min-height: 200px;
+    overflow: auto;
+    width: 100%; }
+    .customer-class-policy-setting .list-leagues .list-leagues-content ul li {
+      margin-left: 15px;
+      list-style-type: disc; }
 
 .customer-class-spread-setting .tab a.spread-setting {
   border-bottom: 2px solid #E15F00; }

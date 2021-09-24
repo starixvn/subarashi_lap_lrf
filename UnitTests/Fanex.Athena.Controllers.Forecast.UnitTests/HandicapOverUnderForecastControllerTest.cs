@@ -9,7 +9,7 @@
 
     using DataAccess.Core.Common.Interfaces;
     using DataAccess.Forecast.Interfaces;
-
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DTO.Common;
     using Model.Forecast.DTO.ForecastHdou;
     using Model.Forecast.MetaModel;
@@ -22,8 +22,8 @@
     public class HandicapOverUnderForecastControllerTest : CultureBaseControllerHelperTest
     {
         private IForecastDataAccess _forecastDataAccess;
-
         private ILeagueDataAccess _leagueDataAccess;
+        private IPortalApiService _portalApiService;
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
@@ -31,6 +31,10 @@
             base.FixtureSetUp();
 
             SetUpDefaultFakeData();
+
+            _portalApiService = Substitute.For<IPortalApiService>();
+            _portalApiService.GetSpecialLeaguesAsync(DefaultLicenseeSession.LicenseeName)
+                .Returns(Task.FromResult(Enumerable.Empty<int>()));
         }
 
         [Test]
@@ -64,7 +68,7 @@
                 var leagueList = Enumerable.Empty<League>();
                 var mainData = new List<ForecastHandicapOverUnder>();
 
-                _leagueDataAccess.GetRunningLeagues(Arg.Any<string>(), Arg.Any<string>()).Returns(leagueList);
+                _leagueDataAccess.GetRunningLeagues(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<IEnumerable<int>>()).Returns(leagueList);
                 _forecastDataAccess.GetForecastHandicapOverUnder(Arg.Any<ForecastHandicapOverUnderMetaModel>()).Returns(mainData);
 
                 // Action
@@ -97,7 +101,7 @@
                 var leagueList = leagueIDList.Select(x => new League { LeagueId = x }).ToList();
                 var mainData = new List<ForecastHandicapOverUnder>();
 
-                _leagueDataAccess.GetRunningLeagues(Arg.Any<string>(), Arg.Any<string>()).Returns(leagueList);
+                _leagueDataAccess.GetRunningLeagues(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<IEnumerable<int>>()).Returns(leagueList);
                 _forecastDataAccess.GetForecastHandicapOverUnder(Arg.Any<ForecastHandicapOverUnderMetaModel>()).Returns(mainData);
 
                 var metaModel = new ForecastHandicapOverUnderMetaModel { LeagueId = leagueId };
@@ -140,7 +144,7 @@
             _forecastDataAccess = Substitute.For<IForecastDataAccess>();
             _leagueDataAccess = Substitute.For<ILeagueDataAccess>();
 
-            var controller = new HandicapOverUnderForecastController(_leagueDataAccess, _forecastDataAccess)
+            var controller = new HandicapOverUnderForecastController(_leagueDataAccess, _forecastDataAccess, _portalApiService)
             {
                 ControllerContext = ControllerContext,
                 LangService = LangService,

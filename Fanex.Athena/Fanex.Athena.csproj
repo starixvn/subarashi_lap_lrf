@@ -1199,6 +1199,7 @@
     <Content Include="www\js\build\dev\language-zh-CN.chunk.js" />
     <Content Include="www\js\build\dev\language-zh-Hans.chunk.js" />
     <Content Include="www\js\build\dev\language-zh-TW.chunk.js" />
+    <Content Include="www\js\build\dev\pages\customer\customerclass.chunk.js" />
     <Content Include="www\js\build\dev\pages\customer\exchangebetsetting.chunk.js" />
     <Content Include="www\js\build\dev\pages\lib\common.chunk.js" />
     <Content Include="www\js\build\dev\pages\lib\jqgrid.chunk.js" />
@@ -1251,6 +1252,7 @@
     <Content Include="www\js\build\pro\language-zh-CN.chunk.js" />
     <Content Include="www\js\build\pro\language-zh-Hans.chunk.js" />
     <Content Include="www\js\build\pro\language-zh-TW.chunk.js" />
+    <Content Include="www\js\build\pro\pages\customer\customerclass.chunk.js" />
     <Content Include="www\js\build\pro\pages\customer\exchangebetsetting.chunk.js" />
     <Content Include="www\js\build\pro\pages\lib\common.chunk.js" />
     <Content Include="www\js\build\pro\pages\lib\jqgrid.chunk.js" />
@@ -1310,6 +1312,7 @@
     <Content Include="www\js\source\lib\bootstrap-table\constants\index.js" />
     <Content Include="www\js\source\lib\bootstrap-table\utils\index.js" />
     <Content Include="www\js\source\lib\bootstrap-table\virtual-scroll\index.js" />
+    <Content Include="www\js\source\pages\customer\customerclass\main.js" />
     <Content Include="www\js\source\pages\customer\customerlist\customerlist.gridoption.dormant.js" />
     <Content Include="www\js\source\pages\customer\customerlist\customerlist.service.dormant.js" />
     <Content Include="www\js\source\pages\playerBatchUpdate\account-status.js" />
@@ -3389,6 +3392,7 @@
     <Content Include="www\js\build\dev\pages\playerBatchUpdate\baStatus.chunk.js.map" />
     <Content Include="www\js\build\dev\pages\playerBatchUpdate\oddsGroup.chunk.js.map" />
     <Content Include="www\js\build\dev\pages\playerBatchUpdate\specialLevel.chunk.js.map" />
+    <Content Include="www\js\build\dev\pages\customer\customerclass.chunk.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SiteConfig\WebConfigTransforms\SIT.config">

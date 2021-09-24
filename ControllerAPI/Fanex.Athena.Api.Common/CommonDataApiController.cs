@@ -38,8 +38,8 @@
         private readonly IMatchDataAccess _matchDataAccess;
 
         private readonly IBetTypeService _betTypeService;
+        private readonly IPortalApiService _portalApiService;
 
-        private readonly IAppSettings _appSettings;
 
         public CommonDataApiController(
             ILanguageService langService,
@@ -48,7 +48,7 @@
             ILeagueDataAccess leagueDataAccess,
             IMatchDataAccess matchDataAccess,
             IBetTypeService betTypeService,
-            IAppSettings appSettings)
+            IPortalApiService portalApiService)
         {
             _langService = langService;
             _sportTypeDataAccess = sportTypeDataAccess;
@@ -56,7 +56,7 @@
             _leagueDataAccess = leagueDataAccess;
             _matchDataAccess = matchDataAccess;
             _betTypeService = betTypeService;
-            _appSettings = appSettings;
+            _portalApiService = portalApiService;
         }
 
         protected override void Initialize(System.Web.Http.Controllers.HttpControllerContext controllerContext)
@@ -108,8 +108,8 @@
                 AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)
             };
 
-            var isOfferLeagueM88 = _appSettings.LicenseeOfferLeagueM88.Contains(_sessionService.LicenseeSession.LicenseeId);
-            var leagues = await _leagueDataAccess.GetLeaguesBySport(metaModel, isOfferLeagueM88).ConfigureAwait(false);
+            var specialLeagues = await _portalApiService.GetSpecialLeaguesAsync(_sessionService.LicenseeSession.LicenseeName);
+            var leagues = await _leagueDataAccess.GetLeaguesBySport(metaModel, specialLeagues).ConfigureAwait(false);
 
             return leagues.Select(x => new { value = x.LeagueId, label = x.LeagueName });
         }

@@ -1,6 +1,7 @@
 ﻿namespace Fanex.Athena.DataAccess.Core.UnitTests.Common
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -21,11 +22,14 @@
 
     public class LeagueDataAccessTest : BaseDataAccessHelperTest<LeagueDataAccess>
     {
+        private static readonly IEnumerable<int> DefaultSpecialLeauges = new[] { 999 };
+
         private ICacheRefAdapter _cacheRef;
 
         private IAppSettings _appSettings;
 
         private IBalanceUpDataAccess _balanceUpDataAccess;
+
 
         protected override void SetUpDataAccess()
         {
@@ -57,7 +61,7 @@
             });
 
             // Action
-            await DataAccess.GetLeaguesBySport(metaModel);
+            await DataAccess.GetLeaguesBySport(metaModel, DefaultSpecialLeauges);
 
             // Assert
             Assert.Multiple(() =>
@@ -91,7 +95,7 @@
             });
 
             // Action
-            var result = await DataAccess.GetLeaguesBySport(new LeagueMetaModel());
+            var result = await DataAccess.GetLeaguesBySport(new LeagueMetaModel(), DefaultSpecialLeauges);
             var firstItem = result.First();
 
             // Assert
@@ -119,7 +123,7 @@
             });
 
             // Action
-            await DataAccess.GetRunningLeagues(AgentList, BetTypes);
+            await DataAccess.GetRunningLeagues(AgentList, BetTypes, DefaultSpecialLeauges);
 
             // Assert
             ObjectDb.Received(1).SetParameterValue("AgentList", AgentList);

@@ -5,14 +5,18 @@
     using Fanex.Athena.Model.Customer.Enum;
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Athena.Service.Customer.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Web.ActionFilter;
 
     public class CustomerClassController : CultureBaseController
     {
         private readonly ICustomerClassService _service;
+        private readonly IPortalApiService _portalApiService;
 
-        public CustomerClassController(ICustomerClassService service)
+        public CustomerClassController(ICustomerClassService service, IPortalApiService portalApiService)
         {
             _service = service;
+            _portalApiService = portalApiService;
         }
 
         public async Task<ViewResult> CustomerClassInformation(byte tabKey = 1)
@@ -30,6 +34,19 @@
 
 
             return View("~/Views/Desktop/Customer/CustomerClass/CustomerClassInformation.cshtml", viewModel);
+        }
+
+        [HttpPost]
+        [AjaxRequest]
+        [CustomValidateAntiForgery]
+        public async Task<JsonResult> GetLimitLeagues(GetLimitLeaguesMetaModel metaModel)
+        {
+            var result = await _portalApiService.GetLimitLeaguesAsync(
+                SessionServiceInstance.LicenseeSession.LicenseeName,
+                metaModel.SportType, metaModel.LeagueGroupId,
+                SessionServiceInstance.UserSession.Language);
+
+            return Json(result);
         }
     }
 }

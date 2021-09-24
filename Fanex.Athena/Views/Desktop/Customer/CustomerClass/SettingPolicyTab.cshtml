@@ -20,7 +20,7 @@ else
                 <th class="col-medium">@ViewResources.Live2/<br />@ViewResources.PreMatch</th>
                 <th class="col-medium">@ViewResources.Currency</th>
                 <th class="col-medium">@ViewResources.Platform</th>
-                <th class="col-medium">@ViewResources.LeagueGroupId</th>
+                <th class="col-large">@ViewResources.LeagueGroup</th>
                 <th class="col-medium">@ViewResources.BetInterval</th>
                 <th class="col-medium">@ViewResources.AgentBetInterval</th>
                 <th class="col-medium">@ViewResources.MinBet (@currency)</th>
@@ -41,7 +41,7 @@ else
                         <td class="left-align">-</td>
                         <td class="center-align">-</td>
                         <td class="left-align">-</td>
-                        <td class="left-align">-</td>
+                        <td class="center-align">-</td>
                         <td class="right-align">-</td>
                         <td class="right-align">-</td>
                         <td class="right-align">-</td>
@@ -69,7 +69,15 @@ else
                         <td class="left-align">@(p.LiveType == 1 ? ViewResources.Live2 : ViewResources.PreMatch)</td>
                         <td class="center-align">@p.Currency</td>
                         <td class="left-align">@p.Platform</td>
-                        <td class="right-align">@p.LeagueGroupId</td>
+                        <td class="center-align" data-internal-league-group="@p.LeagueGroupId" >
+                            @p.LicLeagueGroupName
+                            @if (p.LicLeagueGroupId > 0)
+                            {
+                                <a href="javascript:;" class="view-leagues" data-sport-type="@p.SportType" data-league-group="@p.LicLeagueGroupId">
+                                    <i class="icon-info"></i>
+                                </a>
+                            }
+                        </td>
                         <td class="right-align">@p.BetInterval</td>
                         <td class="right-align">@p.AgentBetInterval</td>
                         <td class="right-align">@p.MinBet</td>
@@ -83,4 +91,19 @@ else
             }
         </tbody>
     </table>
+    if (Model.Any())
+    {
+        <div class="list-leagues hide" id="list-leagues">
+            <div class="list-leagues-header">
+                <a class="block-close" href="javascript:;">
+                    <i class="icon-close"></i>
+                </a>
+                <p>@ViewResources.ListOfLeagues:</p>
+            </div>
+            <div class="list-leagues-content">
+                <ul id="ul-list-leagues">
+                </ul>
+            </div>
+        </div>
+    }
 }
