@@ -2,6 +2,8 @@
 @import "../../components/date-range/styles";
 @import "../../components/react-grid";
 @import "../../components/react-multiselect";
+@import "../../components/dropdown";
+@import "../../components/dropdownlabel";
 @import "../../components/autocomplete";
 @import "../../components/popup";
 @import "../../components/_popup-content";
@@ -15,5 +17,27 @@
 .caret-block {
     div {
         display: inherit;
+    }
+}
+
+.search-option {
+    &.dropdown {
+        .dropdown-menu {
+            .dropdown-item {
+                padding: 0;
+            }
+        }
+    }
+
+    .selection-item {
+        margin-bottom: 0;
+        padding: 5px 10px;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+    }
+
+    .material-icons {
+        font-size: 12px;
     }
 }

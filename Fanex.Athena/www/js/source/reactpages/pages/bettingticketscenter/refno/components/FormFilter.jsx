@@ -15,6 +15,8 @@ import { ApiUrl } from '../../common/lib/constants'
 import Service from '../../common/lib/Service'
 import UserGuide from '@jsroot/components/UserGuide'
 import { validateBaseCurrency } from '@jsroot/lib/validationHelper'
+import SearchingIdOption from './SearchingIdOption'
+import { SearchingIdOptions } from '../lib/constants'
 
 export class FormFilter extends Component {
     constructor(props) {
@@ -22,7 +24,7 @@ export class FormFilter extends Component {
     }
 
     get isValidModel() {
-        return this.props.refno !== "" && validateBaseCurrency(this.props.selectedBaseCurrency);
+        return this.props.searchingId && validateBaseCurrency(this.props.selectedBaseCurrency);
     }
 
     submit = (event) => {
@@ -75,7 +77,8 @@ export class FormFilter extends Component {
         return {
             PageSize: PageSize,
             PageIndex: 1,
-            Refno: this.props.refno,
+            Refno: this.props.searchingIdOption === SearchingIdOptions.refNo ? this.props.searchingId : '',
+            TxId: this.props.searchingIdOption === SearchingIdOptions.txID ? this.props.searchingId : '',
             Username: this.props.username,
             BaseCurrency: this.props.isConvertAll ? this.props.selectedBaseCurrency : '',
             IsConvertAll: this.props.isConvertAll,
@@ -114,20 +117,31 @@ export class FormFilter extends Component {
         );
     }
 
+    _getSearchingIdText(searchingIdOption) {
+        return searchingIdOption === SearchingIdOptions.refNo ?
+            LangHelper.getSingleResource("RefNo") : LangHelper.getSingleResource("LicenseeTxId")
+    }
+
     render() {
         const excelButton = <div>
             <i className="icon-excel right" onClick={this.exportExcel} title={LangHelper.getSingleResource("ExportToExcel")}></i>
             {this._renderUserGuide()}
         </div>;
 
+        const { searchingIdOption, searchingId, setSearchingId, setSearchingIdOption } = this.props;
+        const searchingIdText = this._getSearchingIdText(searchingIdOption);
+        
         return (
             <CollapsiblePanel className="page-filter" stickyFooter={excelButton}>
                 <div className="row">
                     <div className="col-12 col-md-4 col-sm-4 col-lg-3 col-xl-2">
                         <div className="form-group">
-                            <label className="label-text">{LangHelper.getSingleResource("RefNo")} *</label>
-                            <input className="input-text" id="RefNo" name="RefNo" type="number" value={this.props.refno} placeholder={LangHelper.getSingleResource("RefNo")}
-                                onChange={(event) => this.props.setRefno(event.target.value)} />
+                            <label className="label-text">
+                                {searchingIdText}
+                                {AppData.isAllowTxIDColumn && (<SearchingIdOption value={searchingIdOption} onChange={(event) => setSearchingIdOption(event.target.value)} />)}
+                            </label>
+                            <input className="input-text" id="SearchingId" name="SearchingId" type="number" value={searchingId} placeholder={searchingIdText}
+                                onChange={(event) => setSearchingId(event.target.value)} />
                         </div>
                     </div>
 
@@ -171,6 +185,11 @@ export class FormFilter extends Component {
                         </div>
                     <div className="col-9">
                         * {LangHelper.getSingleResource('BettingTicketCenter_RefnoTabNote1')}
+                        {AppData.isAllowTxIDColumn && <>
+                            <br />
+                            * {LangHelper.getSingleResource('BettingTicketCenter_RefnoTabNote_TxIDSearch').replace('{0}', AppData.balanceupDay)}
+                        </>
+                        }
                         <br />
                         * {AppData.productsRequireUseNameNote}
                     </div>
@@ -184,8 +203,8 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators(ActionCreators, dispatch);
 }
 function mapStateToProps(state) {
-    const { requestParam, refno, username, selectedBaseCurrency, isConvertAll, userGuideContent } = state;
-    return Object.assign({}, { requestParam, refno, username, selectedBaseCurrency, isConvertAll, userGuideContent });
+    const { requestParam, searchingId, searchingIdOption, username, selectedBaseCurrency, isConvertAll, userGuideContent } = state;
+    return Object.assign({}, { requestParam, searchingId, searchingIdOption, username, selectedBaseCurrency, isConvertAll, userGuideContent });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormFilter);

@@ -1,4 +1,4 @@
-﻿// Generated at: 8/6/2021 4:37:23 PM
+﻿// Generated at: 10/4/2021 1:29:27 PM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -89,6 +89,7 @@ BettingStatement:"投注详情",
 BettingTicketCenter:"注单中心",
 BettingTicketCenter_AdvancedSearchTabNote1:"全部联赛与全部赛事仅支援单日搜寻",
 BettingTicketCenter_AdvancedSearchTabNote2:"仅支援{0}以后的注单",
+BettingTicketCenter_RefnoTabNote_TxIDSearch:"系统支持从 {0} 开始搜索 TxID",
 BettingTicketCenter_RefnoTabNote1:"在体育的搜寻结果将包含相关的红利与现金注单",
 BettingTicketCenter_RefnoTabNote2:"{0}: 请提供用户名以便查询{1}之后的注单",
 BetType:"投注类别",
@@ -367,7 +368,6 @@ lbl1stOver_Under:"半场大小盘",
 lbl3WayHandicap:"三项让分投注",
 lbl7Over:"7或以上",
 League:"联赛",
-LeagueGroupId:"联赛分类",
 Liability:"负债",
 Licensee:"承租公司",
 LicenseeComm:"承租公司佣金",
