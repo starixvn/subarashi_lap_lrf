@@ -9,5 +9,7 @@ export const headerText = {
     betType: LangHelper.getSingleResource('BetType'),
     turnover: LangHelper.getSingleResource('Turnover'),
     winloss: LangHelper.getSingleResource('WinLoss'),
+    turnoverBased: `${LangHelper.getSingleResource('Turnover')} (USD)`,
+    winlossBased: `${LangHelper.getSingleResource('WinLoss')} (USD)`,
     status: LangHelper.getSingleResource('Status'),
 }
