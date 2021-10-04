@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 8/6/2021 4:37:23 PM
+// Generated at: 10/4/2021 1:29:27 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -193,6 +193,7 @@ window._language_en_US = {
   BettingTicketCenter: "Betting Ticket Center",
   BettingTicketCenter_AdvancedSearchTabNote1: "All bettypes, League, and Match filter available only when 1 day is selected",
   BettingTicketCenter_AdvancedSearchTabNote2: "Data is available from {0}",
+  BettingTicketCenter_RefnoTabNote_TxIDSearch: "The system supports searching TxID from {0}",
   BettingTicketCenter_RefnoTabNote1: "For Sportsbook, the search result includes the related Bonus/Cash tickets.",
   BettingTicketCenter_RefnoTabNote2: "For {0}: Please provide username also in order to search ticket later than {1}",
   BetTradeCommission: "Bet Trade Commission",
@@ -511,7 +512,6 @@ window._language_en_US = {
   lbl3WayHandicap: "3-Way Handicap",
   lbl7Over: "7Over",
   League: "League",
-  LeagueGroupId: "League Group Id",
   Liability: "Liability",
   Licensee: "Licensee",
   LicenseeComm: "Licensee Comm",
