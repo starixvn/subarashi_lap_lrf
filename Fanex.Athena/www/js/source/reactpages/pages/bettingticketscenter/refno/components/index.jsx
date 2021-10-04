@@ -5,8 +5,13 @@ import { Provider } from 'react-redux'
 import reducer from '../reducers/index.js'
 import Store from '../../../../lib/store'
 import { DefaultPageSize } from '../../common/lib/constants'
+import { SearchingIdOptions } from '../lib/constants'
 
-const defaultState = Object.assign({}, window.initialState, { userGuideContent: '', requestParam: { PageSize: DefaultPageSize } });
+const defaultState = Object.assign({}, window.initialState, {
+    userGuideContent: '',
+    requestParam: { PageSize: DefaultPageSize },
+    searchingIdOption: SearchingIdOptions.refNo
+});
 const store = Store.createStore(reducer, defaultState);
 
 export default class App extends React.Component {

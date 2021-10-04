@@ -1529,6 +1529,338 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./www/js/source/reactpages/components/dropdown/DropdownButton.jsx":
+/*!*************************************************************************!*\
+  !*** ./www/js/source/reactpages/components/dropdown/DropdownButton.jsx ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _DropdownToggle__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./DropdownToggle */ "./www/js/source/reactpages/components/dropdown/DropdownToggle.jsx");
+/* harmony import */ var _DropdownMenu__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DropdownMenu */ "./www/js/source/reactpages/components/dropdown/DropdownMenu.jsx");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+
+
+
+
+
+
+const DropdownButton = props => {
+  const {
+    className,
+    children,
+    toggleButton,
+    dropdownMenu,
+    isOpen,
+    onOpen,
+    onClose,
+    onToggle,
+    buttonLabel
+  } = props,
+        attrs = _objectWithoutProperties(props, ["className", "children", "toggleButton", "dropdownMenu", "isOpen", "onOpen", "onClose", "onToggle", "buttonLabel"]);
+
+  const classes = classnames__WEBPACK_IMPORTED_MODULE_2___default()('dropdown', className);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", _extends({
+    className: classes
+  }, attrs), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DropdownToggle__WEBPACK_IMPORTED_MODULE_3__["default"], _extends({}, toggleButton, {
+    onClick: onToggle
+  }), buttonLabel), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DropdownMenu__WEBPACK_IMPORTED_MODULE_4__["default"], _extends({}, dropdownMenu, {
+    isOpen: isOpen,
+    onOpen: onOpen,
+    onClose: onClose
+  }), children));
+};
+
+const propTypes = {
+  buttonLabel: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.any,
+  children: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node.isRequired,
+  className: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
+  isOpen: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  onOpen: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  onClose: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  onToggle: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  toggleButton: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.shape({
+    caret: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+    className: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
+    disabled: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+    onClick: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+    tag: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string
+  }),
+  dropdownMenu: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.shape({
+    tag: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
+    children: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node.isRequired,
+    className: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string
+  })
+};
+const defaultProps = {
+  toggleButton: {
+    className: 'toggle-default'
+  }
+};
+DropdownButton.propTypes = propTypes;
+DropdownButton.defaultProps = defaultProps;
+/* harmony default export */ __webpack_exports__["default"] = (DropdownButton);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/components/dropdown/DropdownItem.jsx":
+/*!***********************************************************************!*\
+  !*** ./www/js/source/reactpages/components/dropdown/DropdownItem.jsx ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+class DropdownItem extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+  constructor(props) {
+    super(props);
+
+    _defineProperty(this, "handleClick", e => {
+      e.preventDefault();
+
+      if (this.props.disabled) {
+        return;
+      }
+
+      this.props.onClick && this.props.onClick(e);
+    });
+  }
+
+  render() {
+    const _this$props = this.props,
+          {
+      tag,
+      className,
+      active
+    } = _this$props,
+          props = _objectWithoutProperties(_this$props, ["tag", "className", "active"]);
+
+    const Tag = tag;
+    const type = Tag === 'button' && props.onClick ? 'button' : undefined;
+    const classes = classnames__WEBPACK_IMPORTED_MODULE_2___default()('dropdown-item', className, {
+      disabled: props.disabled,
+      active
+    });
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Tag, _extends({
+      className: classes,
+      type: type
+    }, props));
+  }
+
+}
+
+const propTypes = {
+  children: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node,
+  active: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  disabled: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  tag: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
+  onClick: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  className: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string
+};
+const defaultProps = {
+  tag: 'button',
+  disabled: false
+};
+DropdownItem.propTypes = propTypes;
+DropdownItem.defaultProps = defaultProps;
+/* harmony default export */ __webpack_exports__["default"] = (DropdownItem);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/components/dropdown/DropdownMenu.jsx":
+/*!***********************************************************************!*\
+  !*** ./www/js/source/reactpages/components/dropdown/DropdownMenu.jsx ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _Overlay__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Overlay */ "./www/js/source/reactpages/components/Overlay.jsx");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+
+
+
+
+
+class DropdownMenu extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    const _this$props = this.props,
+          {
+      tag,
+      className,
+      isOpen,
+      onOpen,
+      onClose
+    } = _this$props,
+          attrs = _objectWithoutProperties(_this$props, ["tag", "className", "isOpen", "onOpen", "onClose"]);
+
+    const Tag = tag;
+    const classes = classnames__WEBPACK_IMPORTED_MODULE_2___default()('dropdown-menu', className);
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Overlay__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      isOpening: isOpen,
+      onOpen: onOpen,
+      onClose: onClose
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Tag, _extends({
+      className: classes
+    }, attrs)));
+  }
+
+}
+
+const propTypes = {
+  tag: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
+  children: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node.isRequired,
+  className: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
+  isOpen: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  onOpen: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  onClose: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
+};
+const defaultProps = {
+  tag: 'div'
+};
+DropdownMenu.propTypes = propTypes;
+DropdownMenu.defaultProps = defaultProps;
+/* harmony default export */ __webpack_exports__["default"] = (DropdownMenu);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/components/dropdown/DropdownToggle.jsx":
+/*!*************************************************************************!*\
+  !*** ./www/js/source/reactpages/components/dropdown/DropdownToggle.jsx ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+
+
+
+
+const DropdownToggle = props => {
+  const {
+    className,
+    tag,
+    caret
+  } = props,
+        attrs = _objectWithoutProperties(props, ["className", "tag", "caret"]);
+
+  const classes = classnames__WEBPACK_IMPORTED_MODULE_2___default()('dropdown-toggle', className, {
+    'site-caret': caret
+  });
+  const Tag = tag;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Tag, _extends({
+    className: classes
+  }, attrs));
+};
+
+const propTypes = {
+  caret: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  children: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node,
+  className: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
+  disabled: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  onClick: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  tag: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string
+};
+const defaultProps = {
+  caret: true,
+  tag: 'button'
+};
+DropdownToggle.propTypes = propTypes;
+DropdownToggle.defaultProps = defaultProps;
+/* harmony default export */ __webpack_exports__["default"] = (DropdownToggle);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/components/dropdown/index.js":
+/*!***************************************************************!*\
+  !*** ./www/js/source/reactpages/components/dropdown/index.js ***!
+  \***************************************************************/
+/*! exports provided: DropdownToggle, DropdownMenu, DropdownItem, DropdownButton */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _DropdownToggle__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DropdownToggle */ "./www/js/source/reactpages/components/dropdown/DropdownToggle.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DropdownToggle", function() { return _DropdownToggle__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+/* harmony import */ var _DropdownMenu__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DropdownMenu */ "./www/js/source/reactpages/components/dropdown/DropdownMenu.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DropdownMenu", function() { return _DropdownMenu__WEBPACK_IMPORTED_MODULE_1__["default"]; });
+
+/* harmony import */ var _DropdownItem__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DropdownItem */ "./www/js/source/reactpages/components/dropdown/DropdownItem.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DropdownItem", function() { return _DropdownItem__WEBPACK_IMPORTED_MODULE_2__["default"]; });
+
+/* harmony import */ var _DropdownButton__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./DropdownButton */ "./www/js/source/reactpages/components/dropdown/DropdownButton.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DropdownButton", function() { return _DropdownButton__WEBPACK_IMPORTED_MODULE_3__["default"]; });
+
+
+
+
+
+
+
+/***/ }),
+
 /***/ "./www/js/source/reactpages/components/popup/Popup.jsx":
 /*!*************************************************************!*\
   !*** ./www/js/source/reactpages/components/popup/Popup.jsx ***!
@@ -3823,17 +4155,24 @@ const tabList = [{
 /*!**************************************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/bettingticketscenter/refno/actions/filterHandlerAction.js ***!
   \**************************************************************************************************/
-/*! exports provided: setRefno */
+/*! exports provided: setSearchingId, setSearchingIdOption */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setRefno", function() { return setRefno; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSearchingId", function() { return setSearchingId; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSearchingIdOption", function() { return setSearchingIdOption; });
 /* harmony import */ var _types_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types.js */ "./www/js/source/reactpages/pages/bettingticketscenter/refno/actions/types.js");
 
-const setRefno = value => {
+const setSearchingId = value => {
   return {
-    type: _types_js__WEBPACK_IMPORTED_MODULE_0__["SET_REFNO"],
+    type: _types_js__WEBPACK_IMPORTED_MODULE_0__["SET_SEARCHING_ID"],
+    data: value
+  };
+};
+const setSearchingIdOption = value => {
+  return {
+    type: _types_js__WEBPACK_IMPORTED_MODULE_0__["SET_SEARCHING_ID_OPTION"],
     data: value
   };
 };
@@ -3876,13 +4215,15 @@ const ActionCreators = Object.assign({}, _jsroot_actions_gridDataAction__WEBPACK
 /*!************************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/bettingticketscenter/refno/actions/types.js ***!
   \************************************************************************************/
-/*! exports provided: SET_REFNO */
+/*! exports provided: SET_SEARCHING_ID, SET_SEARCHING_ID_OPTION */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_REFNO", function() { return SET_REFNO; });
-const SET_REFNO = "SET_REFNO";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SEARCHING_ID", function() { return SET_SEARCHING_ID; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SEARCHING_ID_OPTION", function() { return SET_SEARCHING_ID_OPTION; });
+const SET_SEARCHING_ID = "SET_SEARCHING_ID";
+const SET_SEARCHING_ID_OPTION = "SET_SEARCHING_ID_OPTION";
 
 /***/ }),
 
@@ -4006,7 +4347,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _common_lib_Service__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../common/lib/Service */ "./www/js/source/reactpages/pages/bettingticketscenter/common/lib/Service.js");
 /* harmony import */ var _jsroot_components_UserGuide__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @jsroot/components/UserGuide */ "./www/js/source/reactpages/components/UserGuide.jsx");
 /* harmony import */ var _jsroot_lib_validationHelper__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @jsroot/lib/validationHelper */ "./www/js/source/reactpages/lib/validationHelper.js");
+/* harmony import */ var _SearchingIdOption__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./SearchingIdOption */ "./www/js/source/reactpages/pages/bettingticketscenter/refno/components/SearchingIdOption.jsx");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/pages/bettingticketscenter/refno/lib/constants.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -4081,7 +4426,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   }
 
   get isValidModel() {
-    return this.props.refno !== "" && Object(_jsroot_lib_validationHelper__WEBPACK_IMPORTED_MODULE_15__["validateBaseCurrency"])(this.props.selectedBaseCurrency);
+    return this.props.searchingId && Object(_jsroot_lib_validationHelper__WEBPACK_IMPORTED_MODULE_15__["validateBaseCurrency"])(this.props.selectedBaseCurrency);
   }
 
   _getParams() {
@@ -4097,7 +4442,8 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     return {
       PageSize: PageSize,
       PageIndex: 1,
-      Refno: this.props.refno,
+      Refno: this.props.searchingIdOption === _lib_constants__WEBPACK_IMPORTED_MODULE_17__["SearchingIdOptions"].refNo ? this.props.searchingId : '',
+      TxId: this.props.searchingIdOption === _lib_constants__WEBPACK_IMPORTED_MODULE_17__["SearchingIdOptions"].txID ? this.props.searchingId : '',
       Username: this.props.username,
       BaseCurrency: this.props.isConvertAll ? this.props.selectedBaseCurrency : '',
       IsConvertAll: this.props.isConvertAll,
@@ -4127,12 +4473,25 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     });
   }
 
+  _getSearchingIdText(searchingIdOption) {
+    return searchingIdOption === _lib_constants__WEBPACK_IMPORTED_MODULE_17__["SearchingIdOptions"].refNo ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("RefNo") : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("LicenseeTxId");
+  }
+
   render() {
     const excelButton = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
       className: "icon-excel right",
       onClick: this.exportExcel,
       title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("ExportToExcel")
     }), this._renderUserGuide());
+    const {
+      searchingIdOption,
+      searchingId,
+      setSearchingId,
+      setSearchingIdOption
+    } = this.props;
+
+    const searchingIdText = this._getSearchingIdText(searchingIdOption);
+
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_6__["default"], {
       className: "page-filter",
       stickyFooter: excelButton
@@ -4144,14 +4503,17 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       className: "form-group"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       className: "label-text"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("RefNo"), " *"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }, searchingIdText, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].isAllowTxIDColumn && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SearchingIdOption__WEBPACK_IMPORTED_MODULE_16__["default"], {
+      value: searchingIdOption,
+      onChange: event => setSearchingIdOption(event.target.value)
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       className: "input-text",
-      id: "RefNo",
-      name: "RefNo",
+      id: "SearchingId",
+      name: "SearchingId",
       type: "number",
-      value: this.props.refno,
-      placeholder: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("RefNo"),
-      onChange: event => this.props.setRefno(event.target.value)
+      value: searchingId,
+      placeholder: searchingIdText,
+      onChange: event => setSearchingId(event.target.value)
     }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-12 col-md-4 col-sm-4 col-lg-3 col-xl-2"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -4200,7 +4562,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       }
     }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource('Note'), ":"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-9"
-    }, "* ", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource('BettingTicketCenter_RefnoTabNote1'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "* ", _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].productsRequireUseNameNote)));
+    }, "* ", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource('BettingTicketCenter_RefnoTabNote1'), _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].isAllowTxIDColumn && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "* ", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource('BettingTicketCenter_RefnoTabNote_TxIDSearch').replace('{0}', _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].balanceupDay)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "* ", _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].productsRequireUseNameNote)));
   }
 
 }
@@ -4212,7 +4574,8 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
   const {
     requestParam,
-    refno,
+    searchingId,
+    searchingIdOption,
     username,
     selectedBaseCurrency,
     isConvertAll,
@@ -4220,7 +4583,8 @@ function mapStateToProps(state) {
   } = state;
   return Object.assign({}, {
     requestParam,
-    refno,
+    searchingId,
+    searchingIdOption,
     username,
     selectedBaseCurrency,
     isConvertAll,
@@ -4230,6 +4594,80 @@ function mapStateToProps(state) {
 
 ;
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(FormFilter));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/bettingticketscenter/refno/components/SearchingIdOption.jsx":
+/*!****************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/bettingticketscenter/refno/components/SearchingIdOption.jsx ***!
+  \****************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/components/dropdown */ "./www/js/source/reactpages/components/dropdown/index.js");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/pages/bettingticketscenter/refno/lib/constants.js");
+
+
+
+
+
+const SearchingIdOption = props => {
+  const {
+    value,
+    onChange
+  } = props;
+  const [isOpen, setIsOpen] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
+
+  const handleToggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+
+  const toggleButton = {
+    className: 'toggle-outline toggle-outline-light'
+  };
+  const selectedValue = value || _lib_constants__WEBPACK_IMPORTED_MODULE_3__["SearchingIdOptions"].refNo;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_2__["DropdownButton"], {
+    className: "search-option",
+    isOpen: isOpen,
+    toggleButton: toggleButton,
+    onToggle: handleToggleDropdown,
+    buttonLabel: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      className: "material-icons"
+    }, "settings"),
+    onClose: handleClose
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_2__["DropdownItem"], {
+    tag: "div"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "selection-item"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "radio",
+    name: "searchOption",
+    value: _lib_constants__WEBPACK_IMPORTED_MODULE_3__["SearchingIdOptions"].refNo,
+    checked: selectedValue === _lib_constants__WEBPACK_IMPORTED_MODULE_3__["SearchingIdOptions"].refNo,
+    onChange: onChange
+  }), "\xA0\xA0", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('RefNo'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_2__["DropdownItem"], {
+    tag: "div"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "selection-item"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "radio",
+    name: "searchOption",
+    value: _lib_constants__WEBPACK_IMPORTED_MODULE_3__["SearchingIdOptions"].txID,
+    checked: selectedValue === _lib_constants__WEBPACK_IMPORTED_MODULE_3__["SearchingIdOptions"].txID,
+    onChange: onChange
+  }), "\xA0\xA0", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('LicenseeTxId'))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (SearchingIdOption);
 
 /***/ }),
 
@@ -4252,6 +4690,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _reducers_index_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../reducers/index.js */ "./www/js/source/reactpages/pages/bettingticketscenter/refno/reducers/index.js");
 /* harmony import */ var _lib_store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../lib/store */ "./www/js/source/reactpages/lib/store.js");
 /* harmony import */ var _common_lib_constants__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../common/lib/constants */ "./www/js/source/reactpages/pages/bettingticketscenter/common/lib/constants.js");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/pages/bettingticketscenter/refno/lib/constants.js");
+
 
 
 
@@ -4263,7 +4703,8 @@ const defaultState = Object.assign({}, window.initialState, {
   userGuideContent: '',
   requestParam: {
     PageSize: _common_lib_constants__WEBPACK_IMPORTED_MODULE_6__["DefaultPageSize"]
-  }
+  },
+  searchingIdOption: _lib_constants__WEBPACK_IMPORTED_MODULE_7__["SearchingIdOptions"].refNo
 });
 const store = _lib_store__WEBPACK_IMPORTED_MODULE_5__["default"].createStore(_reducers_index_js__WEBPACK_IMPORTED_MODULE_4__["default"], defaultState);
 class App extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
@@ -4282,22 +4723,46 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEB
 
 /***/ }),
 
-/***/ "./www/js/source/reactpages/pages/bettingticketscenter/refno/reducers/filterHandlerReducer.js":
-/*!****************************************************************************************************!*\
-  !*** ./www/js/source/reactpages/pages/bettingticketscenter/refno/reducers/filterHandlerReducer.js ***!
-  \****************************************************************************************************/
-/*! exports provided: refno */
+/***/ "./www/js/source/reactpages/pages/bettingticketscenter/refno/lib/constants.js":
+/*!************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/bettingticketscenter/refno/lib/constants.js ***!
+  \************************************************************************************/
+/*! exports provided: SearchingIdOptions */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "refno", function() { return refno; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SearchingIdOptions", function() { return SearchingIdOptions; });
+const SearchingIdOptions = {
+  refNo: '1',
+  txID: '2'
+};
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/bettingticketscenter/refno/reducers/filterHandlerReducer.js":
+/*!****************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/bettingticketscenter/refno/reducers/filterHandlerReducer.js ***!
+  \****************************************************************************************************/
+/*! exports provided: searchingId, searchingIdOption */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "searchingId", function() { return searchingId; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "searchingIdOption", function() { return searchingIdOption; });
 /* harmony import */ var _jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
 /* harmony import */ var _actions_types_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/types.js */ "./www/js/source/reactpages/pages/bettingticketscenter/refno/actions/types.js");
 
 
-const refno = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])({}, {
-  [_actions_types_js__WEBPACK_IMPORTED_MODULE_1__["SET_REFNO"]](state, action) {
+const searchingId = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])({}, {
+  [_actions_types_js__WEBPACK_IMPORTED_MODULE_1__["SET_SEARCHING_ID"]](state, action) {
+    return action.data;
+  }
+
+});
+const searchingIdOption = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])({}, {
+  [_actions_types_js__WEBPACK_IMPORTED_MODULE_1__["SET_SEARCHING_ID_OPTION"]](state, action) {
     return action.data;
   }
 

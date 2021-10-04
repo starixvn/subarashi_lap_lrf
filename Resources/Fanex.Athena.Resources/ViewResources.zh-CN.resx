@@ -2674,8 +2674,13 @@
   </data>
   <data name="LeagueGroup" xml:space="preserve">
     <value>联赛分类</value>
+    <comment>ignorejs</comment>
   </data>
   <data name="ListOfLeagues" xml:space="preserve">
     <value>联赛列表</value>
+    <comment>ignorejs</comment>
+  </data>
+  <data name="BettingTicketCenter_RefnoTabNote_TxIDSearch" xml:space="preserve">
+    <value>系统支持从 {0} 开始搜索 TxID</value>
   </data>
 </root>

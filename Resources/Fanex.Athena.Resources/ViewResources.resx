@@ -3058,8 +3058,13 @@
   </data>
   <data name="LeagueGroup" xml:space="preserve">
     <value>League Group</value>
+    <comment>ignorejs</comment>
   </data>
   <data name="ListOfLeagues" xml:space="preserve">
     <value>List of leagues</value>
+    <comment>ignorejs</comment>
+  </data>
+  <data name="BettingTicketCenter_RefnoTabNote_TxIDSearch" xml:space="preserve">
+    <value>The system supports searching TxID from {0}</value>
   </data>
 </root>

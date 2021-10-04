@@ -118,16 +118,16 @@
         {
             var tabList = GetEnableTabList();
             var licenseeSession = SessionServiceInstance.LicenseeSession;
-
+            var balanceUpDay = _balanceUpDataAccess.GetBalanceUp().BalanceUpDay.ToString(FormatKey.DateFormat);
             ViewBag.ProductsRequireUseNameNote = string.Format(
                 ViewResources.BettingTicketCenter_RefnoTabNote2,
                 GetProductsRequireUseName(),
-                _balanceUpDataAccess.GetBalanceUp().BalanceUpDay.ToString(FormatKey.DateFormat));
+                balanceUpDay);
             ViewBag.SelectedBaseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency;
             ViewBag.HasExchange = tabList.Any() && HasExchange();
             ViewBag.TabList = tabList;
             ViewBag.IsAllowTxIDColumn = licenseeSession.IsEnableSingleWallet;
-
+            ViewBag.BalanceUpDay = balanceUpDay;
             return View(
                 "~/Views/Desktop/BetList/BettingTicketCenter/RefNo.cshtml",
                 SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm);
