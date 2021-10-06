@@ -2891,7 +2891,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                     cache: false,
                     data: {
                         custid: custId,
-                        custIds: $("#CustIds"),
                         oldCommission: oldCommission,
                         newCommission: newCommission
                     },

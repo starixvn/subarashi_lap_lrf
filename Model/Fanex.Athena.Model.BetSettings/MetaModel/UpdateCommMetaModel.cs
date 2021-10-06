@@ -5,6 +5,5 @@
         public int CustId { get; set; }
         public double OldCommission { get; set; }
         public double NewCommission { get; set; }
-        public string CustIds { get; set; }
     }
 }

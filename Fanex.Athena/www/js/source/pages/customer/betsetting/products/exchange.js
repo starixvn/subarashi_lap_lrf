@@ -26,7 +26,6 @@ define(['jquery', 'common/site', './dcsbetsetting', '../common/betsetting.helper
                     cache: false,
                     data: {
                         custid: custId,
-                        custIds: $("#CustIds"),
                         oldCommission: oldCommission,
                         newCommission: newCommission
                     },
