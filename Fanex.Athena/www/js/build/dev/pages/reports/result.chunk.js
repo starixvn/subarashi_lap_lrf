@@ -1239,6 +1239,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                 Site.initialize();
                 DatePicker.initSingleDatePicker('Date');
                 DatePicker.initDateRangePicker();
+                window.showSoccer5Result = _me.showSoccer5Result;
                 _me.initEvent();
             },
 
@@ -1396,8 +1397,12 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 
                 const url = Site.resolveClientUrl('Happy5LinkedGamesResultPopup/Soccer5') + '?matchId=' + matchId + '&balls=' + balls + '&platform=' + defaultPlatform;
 
-                const popupOption = { id: 'result-popup', width: 775, height: 520, title: Site.getSingleResource('Result') };
-                Popup.openPopupWithIframe(url, popupOption);
+                $.get(url, function (result) {
+                    if (result !== '') {
+                        const popupOption = { id: 'result-popup', width: 775, height: 520, title: Site.getSingleResource('Result') };
+                        Popup.openPopupWithIframe(result, popupOption);
+                    }
+                });
             },
 
             showKeno: function (vendorProductId) {
