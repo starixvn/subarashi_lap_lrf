@@ -27,5 +27,20 @@
 
             return await _betListApiClient.PostStringAsync("/Happy5LinkedGamesResultPopup/Index", model, language).ConfigureAwait(false);
         }
+
+        [HttpGet]
+        public async Task<string> Soccer5(string matchId, string balls, string platform)
+        {
+            var language = SessionServiceInstance.UserSession.Language;
+            var model = new
+            {
+                matchId,
+                balls,
+                platform,
+                languageCode = language
+            };
+
+            return await _betListApiClient.PostStringAsync("/Happy5LinkedGamesResultPopup/Soccer5", model, language).ConfigureAwait(false);
+        }
     }
 }

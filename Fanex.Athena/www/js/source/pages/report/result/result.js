@@ -184,6 +184,15 @@ define(['jquery', 'common/site', 'components/pluginhelper/daterangepicker', 'com
                 _me.getData();
             },
 
+            showSoccer5Result: function (matchId, balls) {
+                const defaultPlatform = 'd';
+
+                const url = Site.resolveClientUrl('Happy5LinkedGamesResultPopup/Soccer5') + '?matchId=' + matchId + '&balls=' + balls + '&platform=' + defaultPlatform;
+
+                const popupOption = { id: 'result-popup', width: 775, height: 520, title: Site.getSingleResource('Result') };
+                Popup.openPopupWithIframe(url, popupOption);
+            },
+
             showKeno: function (vendorProductId) {
                 const option = {
                     type: 'GET',
