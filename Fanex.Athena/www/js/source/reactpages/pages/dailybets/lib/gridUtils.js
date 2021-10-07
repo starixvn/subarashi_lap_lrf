@@ -15,6 +15,8 @@ export const renderHeader = () => {
             <HeaderCell colWidth={150}>{headerText.betType}</HeaderCell>
             <HeaderCell colWidth={80} sortBy={'turnover'}>{headerText.turnover}</HeaderCell>
             <HeaderCell colWidth={80} sortBy={'winLoss'}>{headerText.winloss}</HeaderCell>
+            <HeaderCell colWidth={80} sortBy={'turnoverBased'}>{headerText.turnoverBased}</HeaderCell>
+            <HeaderCell colWidth={80} sortBy={'winLossBased'}>{headerText.winlossBased}</HeaderCell>
             <HeaderCell colWidth={50}>{headerText.status}</HeaderCell>
         </HeaderRow>
     )
@@ -34,7 +36,8 @@ export const renderDataSection = (dataList, isTotalRow) => {
 }
 
 const buildDataRow = (dataItem) => {
-    const { index, playerName, currencyName, refNo, transTimeString, productName, betType, turnover, winLoss, status } = dataItem;
+    const { index, playerName, currencyName, refNo, transTimeString, productName,
+         betType, turnover, winLoss, turnoverBased, winLossBased, status } = dataItem;
 
     return (
         <Row key={index}>
@@ -47,18 +50,20 @@ const buildDataRow = (dataItem) => {
             <Cell>{betType}</Cell>
             <Cell className="right-align">{NumberFormat.formatDecimal(turnover)}</Cell>
             <Cell className="right-align">{NumberFormat.formatDecimal(winLoss)}</Cell>
+            <Cell className="right-align">{NumberFormat.formatDecimal(turnoverBased)}</Cell>
+            <Cell className="right-align">{NumberFormat.formatDecimal(winLossBased)}</Cell>
             <Cell className="center-align">{status}</Cell>
         </Row>
     )
 }
 
 const buildTotalRow = (dataItem) => {
-    const { turnover, winLoss } = dataItem;
+    const { turnoverBased, winLossBased } = dataItem;
     return (
         <Row key="totalRowUSD">
-            <Cell className="right-align" colSpan="7">Total In USD</Cell>
-            <Cell className="right-align">{NumberFormat.formatDecimal(turnover)}</Cell>
-            <Cell className="right-align">{NumberFormat.formatDecimal(winLoss)}</Cell>
+            <Cell className="right-align" colSpan="9">Total In USD</Cell>
+            <Cell className="right-align">{NumberFormat.formatDecimal(turnoverBased)}</Cell>
+            <Cell className="right-align">{NumberFormat.formatDecimal(winLossBased)}</Cell>
             <Cell></Cell>
         </Row>
     )

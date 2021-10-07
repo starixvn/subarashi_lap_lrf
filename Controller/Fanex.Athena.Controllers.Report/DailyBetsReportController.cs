@@ -18,7 +18,7 @@ namespace Fanex.Athena.Controllers.Report
     {
         private readonly IReportAPIClient _reportAPIClient;
 
-        private const int DefaultLimitedMonthRange = 3;
+        private const int DefaultLimitedMonthRange = 6;
 
         public DailyBetsReportController(
             IReportAPIClient reportAPIClient)
@@ -40,7 +40,7 @@ namespace Fanex.Athena.Controllers.Report
                 FunctionNames.DailyBets);
 
             var limitedMonthRange = licenseeSetting != null ? licenseeSetting.LimitRecentMonths : DefaultLimitedMonthRange;
-            var minDate = limitedMonthRange == 0 && licenseeSetting != null ? Convert.ToDateTime(licenseeSetting.MinDate) : today.AddMonths(-limitedMonthRange + 1);
+            var minDate = limitedMonthRange == 0 && licenseeSetting != null ? Convert.ToDateTime(licenseeSetting.MinDate) : today.AddMonths(-limitedMonthRange);
 
             var viewModel = new DailyBetsViewModel
             {
