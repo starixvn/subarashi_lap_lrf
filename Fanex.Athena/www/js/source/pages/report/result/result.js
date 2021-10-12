@@ -32,6 +32,7 @@ define(['jquery', 'common/site', 'components/pluginhelper/daterangepicker', 'com
                 Site.initialize();
                 DatePicker.initSingleDatePicker('Date');
                 DatePicker.initDateRangePicker();
+                window.showSoccer5Result = _me.showSoccer5Result;
                 _me.initEvent();
             },
 
@@ -182,6 +183,19 @@ define(['jquery', 'common/site', 'components/pluginhelper/daterangepicker', 'com
                 param.SportId = 0;
                 param.LeagueId = 0;
                 _me.getData();
+            },
+
+            showSoccer5Result: function (matchId, balls) {
+                const defaultPlatform = 'd';
+
+                const url = Site.resolveClientUrl('Happy5LinkedGamesResultPopup/Soccer5') + '?matchId=' + matchId + '&balls=' + balls + '&platform=' + defaultPlatform;
+
+                $.get(url, function (result) {
+                    if (result !== '') {
+                        const popupOption = { id: 'result-popup', width: 775, height: 520, title: Site.getSingleResource('Result') };
+                        Popup.openPopupWithIframe(result, popupOption);
+                    }
+                });
             },
 
             showKeno: function (vendorProductId) {

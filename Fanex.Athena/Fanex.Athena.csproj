@@ -944,6 +944,7 @@
     <Content Include="Views\Desktop\Customer\BetSetting\GoldDeluxe.cshtml" />
     <Content Include="www\assets\images\ajax-loader.gif" />
     <Content Include="www\assets\images\new-system.svg" />
+    <Content Include="www\css\build\dev\pages\betlist\images\info-icon.png" />
     <Content Include="www\css\build\dev\pages\betlist\images\lotto_ball.png" />
     <Content Include="www\css\build\dev\pages\betlist\images\nphPromotion.png" />
     <Content Include="www\css\build\dev\pages\betlist\images\rebateBonus.png" />
@@ -961,6 +962,7 @@
     <Content Include="www\css\build\dev\pages\reports\sabavirtualsportswinloss.css" />
     <Content Include="www\css\build\dev\reactpages\betlist\images\bonus.png" />
     <Content Include="www\css\build\dev\reactpages\betlist\images\goal-icon.png" />
+    <Content Include="www\css\build\dev\reactpages\betlist\images\info-icon.png" />
     <Content Include="www\css\build\dev\reactpages\betlist\images\lotto_ball.png" />
     <Content Include="www\css\build\dev\reactpages\betlist\images\nphPromotion.png" />
     <Content Include="www\css\build\dev\reactpages\betlist\images\q_Icon2_1.png" />
@@ -1003,6 +1005,7 @@
     <Content Include="www\css\build\images\FirstNodeSpan.png" />
     <Content Include="www\css\build\images\info.png" />
     <Content Include="www\css\build\images\red-check.jpg" />
+    <Content Include="www\css\build\pro\pages\betlist\images\info-icon.png" />
     <Content Include="www\css\build\pro\pages\betlist\images\lotto_ball.png" />
     <Content Include="www\css\build\images\MiddleLine.png" />
     <Content Include="www\css\build\images\new_icon.gif" />
@@ -1028,6 +1031,7 @@
     <Content Include="www\css\build\pro\pages\reports\sabavirtualsportswinloss.css" />
     <Content Include="www\css\build\pro\reactpages\betlist\images\bonus.png" />
     <Content Include="www\css\build\pro\reactpages\betlist\images\goal-icon.png" />
+    <Content Include="www\css\build\pro\reactpages\betlist\images\info-icon.png" />
     <Content Include="www\css\build\pro\reactpages\betlist\images\lotto_ball.png" />
     <Content Include="www\css\build\pro\reactpages\betlist\images\nphPromotion.png" />
     <Content Include="www\css\build\pro\reactpages\betlist\images\q_Icon2_1.png" />
