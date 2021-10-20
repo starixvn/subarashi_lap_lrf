@@ -130,7 +130,7 @@ export class FormFilter extends Component {
 
         const { searchingIdOption, searchingId, setSearchingId, setSearchingIdOption } = this.props;
         const searchingIdText = this._getSearchingIdText(searchingIdOption);
-        
+
         return (
             <CollapsiblePanel className="page-filter" stickyFooter={excelButton}>
                 <div className="row">
@@ -138,9 +138,15 @@ export class FormFilter extends Component {
                         <div className="form-group">
                             <label className="label-text">
                                 {searchingIdText}
-                                {AppData.isAllowTxIDColumn && (<SearchingIdOption value={searchingIdOption} onChange={(event) => setSearchingIdOption(event.target.value)} />)}
+                                {AppData.isAllowTxIDColumn && (<SearchingIdOption value={searchingIdOption} onChange={(event) => {
+                                    setSearchingIdOption(event.target.value)
+                                    setSearchingId('')
+                                }} />)}
                             </label>
-                            <input className="input-text" id="SearchingId" name="SearchingId" type="number" value={searchingId} placeholder={searchingIdText}
+                            <input className="input-text" id="SearchingId" name="SearchingId"
+                                type={searchingIdOption === SearchingIdOptions.refNo ? "number" : "text"}
+                                value={searchingId}
+                                placeholder={searchingIdText}
                                 onChange={(event) => setSearchingId(event.target.value)} />
                         </div>
                     </div>

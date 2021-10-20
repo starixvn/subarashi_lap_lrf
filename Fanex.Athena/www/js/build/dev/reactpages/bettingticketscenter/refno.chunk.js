@@ -4505,12 +4505,15 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       className: "label-text"
     }, searchingIdText, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].isAllowTxIDColumn && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SearchingIdOption__WEBPACK_IMPORTED_MODULE_16__["default"], {
       value: searchingIdOption,
-      onChange: event => setSearchingIdOption(event.target.value)
+      onChange: event => {
+        setSearchingIdOption(event.target.value);
+        setSearchingId('');
+      }
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       className: "input-text",
       id: "SearchingId",
       name: "SearchingId",
-      type: "number",
+      type: searchingIdOption === _lib_constants__WEBPACK_IMPORTED_MODULE_17__["SearchingIdOptions"].refNo ? "number" : "text",
       value: searchingId,
       placeholder: searchingIdText,
       onChange: event => setSearchingId(event.target.value)
