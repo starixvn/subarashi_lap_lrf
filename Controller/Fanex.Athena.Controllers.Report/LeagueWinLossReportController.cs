@@ -68,7 +68,7 @@ namespace Fanex.Athena.Controllers.Report
             {
                 metaModel.UserCurrencyList = userSession.CurrencyList;
                 var response = await _reportAPIClient.PostAsync("api/LeagueWinLoss/ExportExcel",
-                 metaModel, userSession.Language, MediaType.MsgPack).ConfigureAwait(false);
+                 metaModel, userSession.Language, MediaType.MsgPack, TimeOut).ConfigureAwait(false);
                 return File(response.Item1, response.Item2);
             }
 
