@@ -2333,7 +2333,7 @@ const defaultClasses = {
   show: 'rdr-Show',
   hide: 'rdr-Hide',
   calendar: 'rdr-Calendar',
-  dateRange: 'rdr-DateRange',
+  dateRange: 'rdr-DateRange rdr-DateRange-index',
   predefinedRanges: 'rdr-PredefinedRanges',
   predefinedRangesItem: 'rdr-PredefinedRangesItem',
   predefinedRangesItemActive: 'rdr-PredefinedRangesItemActive',

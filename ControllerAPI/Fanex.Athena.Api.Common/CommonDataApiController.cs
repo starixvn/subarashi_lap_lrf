@@ -7,7 +7,6 @@
     using System.Web.Http;
 
     using DataAccess.Core.Common.Interfaces;
-    using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
@@ -40,7 +39,6 @@
         private readonly IBetTypeService _betTypeService;
         private readonly IPortalApiService _portalApiService;
 
-
         public CommonDataApiController(
             ILanguageService langService,
             ISportTypeDataAccess sportTypeDataAccess,
@@ -67,14 +65,15 @@
         }
 
         [HttpGet]
-        public async Task<IEnumerable<object>> GetSports(string productCode)
+        public async Task<IEnumerable<object>> GetSports(string productCode, bool includeSabaSport = false)
         {
             var sports = await _sportTypeDataAccess.GetSportsAndProducts(
                  _sessionService.LicenseeSession.LicenseeId,
                  _sessionService.UserSession.Language,
-                 productCode).ConfigureAwait(false);
+                 productCode,
+                 includeSabaSport).ConfigureAwait(false);
 
-            return sports.Where(x => x.ParentId > -1).Select(x => new { value = x.ID, label = x.Name });
+            return sports.Where(x => x.ParentId > -1).Select(x => new { value = x.ID, label = x.Name, status = true });
         }
 
         [HttpGet]
@@ -85,16 +84,9 @@
                 productCode,
                 _sessionService.UserSession.Language).ConfigureAwait(false);
 
-            return bettypes.Select(x => new { value = x.ID, label = x.Name });
+            return bettypes.Select(x => new { value = x.ID, label = x.Name, status = true });
         }
 
-        /// <summary>
-        /// Get Leagues of SB only
-        /// </summary>
-        /// <param name="fromDate"></param>
-        /// <param name="toDate"></param>
-        /// <param name="sportId"></param>
-        /// <returns></returns>
         [HttpGet]
         public async Task<IEnumerable<object>> GetLeagues(DateTime fromDate, DateTime toDate, int sportId = 0)
         {

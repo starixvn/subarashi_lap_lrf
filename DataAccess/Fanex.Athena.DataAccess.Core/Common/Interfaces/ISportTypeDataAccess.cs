@@ -14,6 +14,6 @@ namespace Fanex.Athena.DataAccess.Core.Common.Interfaces
     {
         Task<IDictionary<int, string>> GetAllSports();
 
-        Task<IEnumerable<SportProductItem>> GetSportsAndProducts(int licenseeId, string languageCode, string productCodes = "");
+        Task<IEnumerable<SportProductItem>> GetSportsAndProducts(int licenseeId, string languageCode, string productCodes = "", bool includeSabaSport = false);
     }
 }

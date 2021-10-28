@@ -61,596 +61,605 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to TOTAL BETS.
+        ///   Looks up a localized string similar to 1 X 2.
         /// </summary>
-        public static string Menu_1 {
+        public static string _1x225 {
             get {
-                return ResourceManager.GetString("Menu_1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Correct Score.
-        /// </summary>
-        public static string Menu_10 {
-            get {
-                return ResourceManager.GetString("Menu_10", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Total Goal.
-        /// </summary>
-        public static string Menu_11 {
-            get {
-                return ResourceManager.GetString("Menu_11", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Parlay.
-        /// </summary>
-        public static string Menu_12 {
-            get {
-                return ResourceManager.GetString("Menu_12", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Outright.
-        /// </summary>
-        public static string Menu_13 {
-            get {
-                return ResourceManager.GetString("Menu_13", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to HT/FT.
-        /// </summary>
-        public static string Menu_14 {
-            get {
-                return ResourceManager.GetString("Menu_14", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to FG/LG.
-        /// </summary>
-        public static string Menu_15 {
-            get {
-                return ResourceManager.GetString("Menu_15", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Clean Sheet.
-        /// </summary>
-        public static string Menu_16 {
-            get {
-                return ResourceManager.GetString("Menu_16", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Double Chance.
-        /// </summary>
-        public static string Menu_17 {
-            get {
-                return ResourceManager.GetString("Menu_17", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Home/Draw/Away No Bet.
-        /// </summary>
-        public static string Menu_18 {
-            get {
-                return ResourceManager.GetString("Menu_18", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to B/O/N Team To Score.
-        /// </summary>
-        public static string Menu_19 {
-            get {
-                return ResourceManager.GetString("Menu_19", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to FORECAST.
-        /// </summary>
-        public static string Menu_2 {
-            get {
-                return ResourceManager.GetString("Menu_2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to To Win To Nil.
-        /// </summary>
-        public static string Menu_20 {
-            get {
-                return ResourceManager.GetString("Menu_20", resourceCulture);
+                return ResourceManager.GetString("1x225", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to 3-Way Handicap.
         /// </summary>
-        public static string Menu_21 {
+        public static string _3_wayhandicap21 {
             get {
-                return ResourceManager.GetString("Menu_21", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Handicap/Over Under/Live.
-        /// </summary>
-        public static string Menu_24 {
-            get {
-                return ResourceManager.GetString("Menu_24", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 1 X 2.
-        /// </summary>
-        public static string Menu_25 {
-            get {
-                return ResourceManager.GetString("Menu_25", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Last Bets Monitoring.
-        /// </summary>
-        public static string Menu_26 {
-            get {
-                return ResourceManager.GetString("Menu_26", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Licensee Win Loss.
-        /// </summary>
-        public static string Menu_27 {
-            get {
-                return ResourceManager.GetString("Menu_27", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Settled Match Count.
-        /// </summary>
-        public static string Menu_28 {
-            get {
-                return ResourceManager.GetString("Menu_28", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Customer Win Loss.
-        /// </summary>
-        public static string Menu_29 {
-            get {
-                return ResourceManager.GetString("Menu_29", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to REPORTS.
-        /// </summary>
-        public static string Menu_3 {
-            get {
-                return ResourceManager.GetString("Menu_3", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Customer Pending Funds.
-        /// </summary>
-        public static string Menu_30 {
-            get {
-                return ResourceManager.GetString("Menu_30", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Match Win Loss.
-        /// </summary>
-        public static string Menu_31 {
-            get {
-                return ResourceManager.GetString("Menu_31", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Win Loss By Products.
-        /// </summary>
-        public static string Menu_32 {
-            get {
-                return ResourceManager.GetString("Menu_32", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Win Loss By Bet Type.
-        /// </summary>
-        public static string Menu_33 {
-            get {
-                return ResourceManager.GetString("Menu_33", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Live Report.
-        /// </summary>
-        public static string Menu_38 {
-            get {
-                return ResourceManager.GetString("Menu_38", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Turnover .
-        /// </summary>
-        public static string Menu_39 {
-            get {
-                return ResourceManager.GetString("Menu_39", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to CUSTOMER INFORMATION.
-        /// </summary>
-        public static string Menu_4 {
-            get {
-                return ResourceManager.GetString("Menu_4", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Customer Balance.
-        /// </summary>
-        public static string Menu_40 {
-            get {
-                return ResourceManager.GetString("Menu_40", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Results.
-        /// </summary>
-        public static string Menu_41 {
-            get {
-                return ResourceManager.GetString("Menu_41", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Customer List.
-        /// </summary>
-        public static string Menu_43 {
-            get {
-                return ResourceManager.GetString("Menu_43", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Manage Account.
-        /// </summary>
-        public static string Menu_46 {
-            get {
-                return ResourceManager.GetString("Menu_46", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add New Account.
-        /// </summary>
-        public static string Menu_47 {
-            get {
-                return ResourceManager.GetString("Menu_47", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Edit New Account.
-        /// </summary>
-        public static string Menu_48 {
-            get {
-                return ResourceManager.GetString("Menu_48", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Assign Permission.
-        /// </summary>
-        public static string Menu_49 {
-            get {
-                return ResourceManager.GetString("Menu_49", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Reset Password.
-        /// </summary>
-        public static string Menu_50 {
-            get {
-                return ResourceManager.GetString("Menu_50", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Customer Turnover.
-        /// </summary>
-        public static string Menu_51 {
-            get {
-                return ResourceManager.GetString("Menu_51", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to CUSTOMER REPORTS.
-        /// </summary>
-        public static string Menu_52 {
-            get {
-                return ResourceManager.GetString("Menu_52", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Platform Win Loss.
-        /// </summary>
-        public static string Menu_53 {
-            get {
-                return ResourceManager.GetString("Menu_53", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to SpecialBA.
-        /// </summary>
-        public static string Menu_54 {
-            get {
-                return ResourceManager.GetString("Menu_54", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Commission Group List.
-        /// </summary>
-        public static string Menu_55 {
-            get {
-                return ResourceManager.GetString("Menu_55", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Customer Log.
-        /// </summary>
-        public static string Menu_56 {
-            get {
-                return ResourceManager.GetString("Menu_56", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Win Loss By Leagues.
-        /// </summary>
-        public static string Menu_59 {
-            get {
-                return ResourceManager.GetString("Menu_59", resourceCulture);
+                return ResourceManager.GetString("3-wayhandicap21", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to ACCOUNT MANAGEMENT.
         /// </summary>
-        public static string Menu_6 {
+        public static string accountmanagement6 {
             get {
-                return ResourceManager.GetString("Menu_6", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to AG Casino Win Loss.
-        /// </summary>
-        public static string Menu_62 {
-            get {
-                return ResourceManager.GetString("Menu_62", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to AG Casino Balance.
-        /// </summary>
-        public static string Menu_63 {
-            get {
-                return ResourceManager.GetString("Menu_63", resourceCulture);
+                return ResourceManager.GetString("accountmanagement6", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Active Customer Summary.
         /// </summary>
-        public static string Menu_64 {
+        public static string activecustomersummary64 {
             get {
-                return ResourceManager.GetString("Menu_64", resourceCulture);
+                return ResourceManager.GetString("activecustomersummary64", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Gold Deluxe Win Loss.
+        ///   Looks up a localized string similar to Add New Account.
         /// </summary>
-        public static string Menu_65 {
+        public static string addnewaccount47 {
             get {
-                return ResourceManager.GetString("Menu_65", resourceCulture);
+                return ResourceManager.GetString("addnewaccount47", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Weekly Live Matches.
+        ///   Looks up a localized string similar to AG Casino Balance.
         /// </summary>
-        public static string Menu_69 {
+        public static string agcasinobalance63 {
             get {
-                return ResourceManager.GetString("Menu_69", resourceCulture);
+                return ResourceManager.GetString("agcasinobalance63", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Handicap/Over Under/Live.
+        ///   Looks up a localized string similar to AG Casino Win Loss.
         /// </summary>
-        public static string Menu_7 {
+        public static string agcasinowinloss62 {
             get {
-                return ResourceManager.GetString("Menu_7", resourceCulture);
+                return ResourceManager.GetString("agcasinowinloss62", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edit Bet Setting.
+        ///   Looks up a localized string similar to Assign Permission.
         /// </summary>
-        public static string Menu_70 {
+        public static string assignpermission49 {
             get {
-                return ResourceManager.GetString("Menu_70", resourceCulture);
+                return ResourceManager.GetString("assignpermission49", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Colossus Bets Win Loss.
+        ///   Looks up a localized string similar to B/O/N Team To Score.
         /// </summary>
-        public static string Menu_71 {
+        public static string bonteamtoscore19 {
             get {
-                return ResourceManager.GetString("Menu_71", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Cash Out Win Loss.
-        /// </summary>
-        public static string Menu_72 {
-            get {
-                return ResourceManager.GetString("Menu_72", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Subsidiary Performance.
-        /// </summary>
-        public static string Menu_73 {
-            get {
-                return ResourceManager.GetString("Menu_73", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to NOTIFICATION.
-        /// </summary>
-        public static string Menu_74 {
-            get {
-                return ResourceManager.GetString("Menu_74", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Resettlement.
-        /// </summary>
-        public static string Menu_75 {
-            get {
-                return ResourceManager.GetString("Menu_75", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Win Loss By Time Zone.
-        /// </summary>
-        public static string Menu_76 {
-            get {
-                return ResourceManager.GetString("Menu_76", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Exchange Win Loss.
-        /// </summary>
-        public static string Menu_77 {
-            get {
-                return ResourceManager.GetString("Menu_77", resourceCulture);
+                return ResourceManager.GetString("bonteamtoscore19", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Betting Ticket Center.
         /// </summary>
-        public static string Menu_79 {
+        public static string btc79 {
             get {
-                return ResourceManager.GetString("Menu_79", resourceCulture);
+                return ResourceManager.GetString("btc79", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Money Line.
+        ///   Looks up a localized string similar to Cash Out Win Loss.
         /// </summary>
-        public static string Menu_8 {
+        public static string cashoutwinloss72 {
             get {
-                return ResourceManager.GetString("Menu_8", resourceCulture);
+                return ResourceManager.GetString("cashoutwinloss72", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Casino Turnover.
         /// </summary>
-        public static string Menu_80 {
+        public static string casinoturnover80 {
             get {
-                return ResourceManager.GetString("Menu_80", resourceCulture);
+                return ResourceManager.GetString("casinoturnover80", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clean Sheet.
+        /// </summary>
+        public static string cleansheet16 {
+            get {
+                return ResourceManager.GetString("cleansheet16", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Colossus Bets Win Loss.
+        /// </summary>
+        public static string colossusbetswinloss71 {
+            get {
+                return ResourceManager.GetString("colossusbetswinloss71", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Commission Group List.
+        /// </summary>
+        public static string commissiongrouplist55 {
+            get {
+                return ResourceManager.GetString("commissiongrouplist55", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Correct Score.
+        /// </summary>
+        public static string correctscore10 {
+            get {
+                return ResourceManager.GetString("correctscore10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Customer Balance.
+        /// </summary>
+        public static string customerbalance40 {
+            get {
+                return ResourceManager.GetString("customerbalance40", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CUSTOMER INFORMATION.
+        /// </summary>
+        public static string customerinformation4 {
+            get {
+                return ResourceManager.GetString("customerinformation4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Customer List.
+        /// </summary>
+        public static string customerlist43 {
+            get {
+                return ResourceManager.GetString("customerlist43", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Customer Log.
+        /// </summary>
+        public static string customerlog56 {
+            get {
+                return ResourceManager.GetString("customerlog56", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Customer Pending Funds.
+        /// </summary>
+        public static string customerpendingfunds30 {
+            get {
+                return ResourceManager.GetString("customerpendingfunds30", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CUSTOMER REPORTS.
+        /// </summary>
+        public static string customerreports52 {
+            get {
+                return ResourceManager.GetString("customerreports52", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Customer Turnover.
+        /// </summary>
+        public static string customerturnover51 {
+            get {
+                return ResourceManager.GetString("customerturnover51", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Customer Win Loss.
+        /// </summary>
+        public static string customerwinloss29 {
+            get {
+                return ResourceManager.GetString("customerwinloss29", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Daily Bets.
         /// </summary>
-        public static string Menu_81 {
+        public static string dailybets81 {
             get {
-                return ResourceManager.GetString("Menu_81", resourceCulture);
+                return ResourceManager.GetString("dailybets81", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Player Segmentation.
+        ///   Looks up a localized string similar to Double Chance.
         /// </summary>
-        public static string Menu_87 {
+        public static string doublechance17 {
             get {
-                return ResourceManager.GetString("Menu_87", resourceCulture);
+                return ResourceManager.GetString("doublechance17", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Saba Virtual Sports Win Loss.
+        ///   Looks up a localized string similar to Edit Bet Setting.
         /// </summary>
-        public static string Menu_89 {
+        public static string editbetsetting70 {
             get {
-                return ResourceManager.GetString("Menu_89", resourceCulture);
+                return ResourceManager.GetString("editbetsetting70", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit New Account.
+        /// </summary>
+        public static string editnewaccount48 {
+            get {
+                return ResourceManager.GetString("editnewaccount48", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exchange Win Loss.
+        /// </summary>
+        public static string exchangewinloss77 {
+            get {
+                return ResourceManager.GetString("exchangewinloss77", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FG/LG.
+        /// </summary>
+        public static string fglg15 {
+            get {
+                return ResourceManager.GetString("fglg15", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FORECAST.
+        /// </summary>
+        public static string forecast2 {
+            get {
+                return ResourceManager.GetString("forecast2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to God Of Fortune Win Loss.
+        /// </summary>
+        public static string godoffortunewinloss {
+            get {
+                return ResourceManager.GetString("godoffortunewinloss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gold Deluxe Win Loss.
+        /// </summary>
+        public static string golddeluxewinloss65 {
+            get {
+                return ResourceManager.GetString("golddeluxewinloss65", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Handicap/Over Under/Live.
+        /// </summary>
+        public static string handicapoverunderlive24 {
+            get {
+                return ResourceManager.GetString("handicapoverunderlive24", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Handicap/Over Under/Live.
+        /// </summary>
+        public static string handicapoverunderlive7 {
+            get {
+                return ResourceManager.GetString("handicapoverunderlive7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home/Draw/Away No Bet.
+        /// </summary>
+        public static string homedrawawaynobet18 {
+            get {
+                return ResourceManager.GetString("homedrawawaynobet18", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HT/FT.
+        /// </summary>
+        public static string htft14 {
+            get {
+                return ResourceManager.GetString("htft14", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last Bets Monitoring.
+        /// </summary>
+        public static string lastbetsmonitoring26 {
+            get {
+                return ResourceManager.GetString("lastbetsmonitoring26", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Win Loss By League.
+        /// </summary>
+        public static string leaguewinloss {
+            get {
+                return ResourceManager.GetString("leaguewinloss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Licensee Win Loss.
+        /// </summary>
+        public static string licenseewinloss27 {
+            get {
+                return ResourceManager.GetString("licenseewinloss27", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Win Loss By Time Zone.
+        /// </summary>
+        public static string licenseewinlossbytimezone76 {
+            get {
+                return ResourceManager.GetString("licenseewinlossbytimezone76", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Live Report.
+        /// </summary>
+        public static string livereport38 {
+            get {
+                return ResourceManager.GetString("livereport38", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage Account.
+        /// </summary>
+        public static string manageaccount46 {
+            get {
+                return ResourceManager.GetString("manageaccount46", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Match Win Loss.
+        /// </summary>
+        public static string matchwinloss31 {
+            get {
+                return ResourceManager.GetString("matchwinloss31", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parlay.
+        /// </summary>
+        public static string mixparlay12 {
+            get {
+                return ResourceManager.GetString("mixparlay12", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Platform Win Loss.
+        /// </summary>
+        public static string mobilewinloss53 {
+            get {
+                return ResourceManager.GetString("mobilewinloss53", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Money Line.
+        /// </summary>
+        public static string moneyline8 {
+            get {
+                return ResourceManager.GetString("moneyline8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NOTIFICATION.
+        /// </summary>
+        public static string notificationreport {
+            get {
+                return ResourceManager.GetString("notificationreport", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Odd/Even + 1x2 + DND.
         /// </summary>
-        public static string Menu_9 {
+        public static string oddeven1x2dnd9 {
             get {
-                return ResourceManager.GetString("Menu_9", resourceCulture);
+                return ResourceManager.GetString("oddeven1x2dnd9", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to God of Fortune Win Loss.
+        ///   Looks up a localized string similar to Outright.
         /// </summary>
-        public static string Menu_90 {
+        public static string outright13 {
             get {
-                return ResourceManager.GetString("Menu_90", resourceCulture);
+                return ResourceManager.GetString("outright13", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Player Segmentation.
+        /// </summary>
+        public static string playersegmentation {
+            get {
+                return ResourceManager.GetString("playersegmentation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to REPORTS.
+        /// </summary>
+        public static string reports3 {
+            get {
+                return ResourceManager.GetString("reports3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset Password.
+        /// </summary>
+        public static string resetpassword50 {
+            get {
+                return ResourceManager.GetString("resetpassword50", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resettlement.
+        /// </summary>
+        public static string resultamendment_recalculation75 {
+            get {
+                return ResourceManager.GetString("resultamendment_recalculation75", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Results.
+        /// </summary>
+        public static string results41 {
+            get {
+                return ResourceManager.GetString("results41", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saba Virtual Sports Win Loss.
+        /// </summary>
+        public static string sabavirtualsportswinloss {
+            get {
+                return ResourceManager.GetString("sabavirtualsportswinloss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settled Match Count.
+        /// </summary>
+        public static string settledmatchcount28 {
+            get {
+                return ResourceManager.GetString("settledmatchcount28", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SpecialBA.
+        /// </summary>
+        public static string specialba54 {
+            get {
+                return ResourceManager.GetString("specialba54", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Subsidiary Performance.
+        /// </summary>
+        public static string subsidiaryperformance73 {
+            get {
+                return ResourceManager.GetString("subsidiaryperformance73", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TOTAL BETS.
+        /// </summary>
+        public static string totalbets1 {
+            get {
+                return ResourceManager.GetString("totalbets1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total Goal.
+        /// </summary>
+        public static string totalgoal11 {
+            get {
+                return ResourceManager.GetString("totalgoal11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To Win To Nil.
+        /// </summary>
+        public static string towintonil20 {
+            get {
+                return ResourceManager.GetString("towintonil20", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Turnover .
+        /// </summary>
+        public static string turnover39 {
+            get {
+                return ResourceManager.GetString("turnover39", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Weekly Live Matches.
+        /// </summary>
+        public static string weeklylivematches69 {
+            get {
+                return ResourceManager.GetString("weeklylivematches69", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Win Loss By Bet Type.
+        /// </summary>
+        public static string winlossbybettype33 {
+            get {
+                return ResourceManager.GetString("winlossbybettype33", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Win Loss By Leagues.
+        /// </summary>
+        public static string winlossbyleague59 {
+            get {
+                return ResourceManager.GetString("winlossbyleague59", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Win Loss By Products.
+        /// </summary>
+        public static string winlossbyproducts32 {
+            get {
+                return ResourceManager.GetString("winlossbyproducts32", resourceCulture);
             }
         }
     }

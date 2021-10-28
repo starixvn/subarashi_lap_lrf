@@ -2195,4 +2195,7 @@
   <data name="LastModifiedDate" xml:space="preserve">
     <value>上次更新日期</value>
   </data>
+  <data name="Saba" xml:space="preserve">
+    <value>沙巴</value>
+  </data>
 </root>

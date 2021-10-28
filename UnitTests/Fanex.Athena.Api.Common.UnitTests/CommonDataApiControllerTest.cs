@@ -38,7 +38,6 @@
 
         private IPortalApiService _portalApiService;
 
-
         [OneTimeSetUp]
         public void FixtureSetUp()
         {
@@ -90,6 +89,7 @@
                 {
                     Assert.That(result.GetType().GetProperty("value").GetValue(result, null), Is.EqualTo(child.ID));
                     Assert.That(result.GetType().GetProperty("label").GetValue(result, null), Is.EqualTo(child.Name));
+                    Assert.That(result.GetType().GetProperty("status").GetValue(result, null), Is.EqualTo(true));
                 });
             }
         }
@@ -117,6 +117,7 @@
                 {
                     Assert.That(result.GetType().GetProperty("value").GetValue(result, null), Is.EqualTo(item.ID));
                     Assert.That(result.GetType().GetProperty("label").GetValue(result, null), Is.EqualTo(item.Name));
+                    Assert.That(result.GetType().GetProperty("status").GetValue(result, null), Is.EqualTo(true));
                 });
             }
         }

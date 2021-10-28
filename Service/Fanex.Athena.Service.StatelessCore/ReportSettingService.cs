@@ -84,6 +84,11 @@ namespace Fanex.Athena.Service.StatelessCore
                 return GetNowByTimeZone(timeZone).Date.AddDays(-1);
             }
 
+            if (datetime.Equals("tomorrow", StringComparison.OrdinalIgnoreCase))
+            {
+                return GetNowByTimeZone(timeZone).Date.AddDays(1);
+            }
+
             return Convert.ToDateTime(datetime);
         }
 

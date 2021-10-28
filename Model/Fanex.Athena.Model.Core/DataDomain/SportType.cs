@@ -320,6 +320,18 @@ namespace Fanex.Athena.Model.Core.DataDomain
 
         AgCasino = 250,
 
-        TG = 222
+        TG = 222,
+
+        SabaSoccer = -1,
+
+        SabaBasketball = -2,
+
+        SabaCricket = -3,
+
+        Futsal = 49,
+
+        SabaFutsal = -4,
+
+        SabaPingoal = -5
     }
 }

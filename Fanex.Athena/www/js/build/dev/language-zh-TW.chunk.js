@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 10/4/2021 1:29:27 PM
+﻿// Generated at: 10/26/2021 10:29:00 AM
 window._language_zh_TW = {
 AA:"客客",
 AbnormalBet:"非正規註單",
@@ -598,6 +598,7 @@ Results:"賽果",
 RNGCasinoUpdateSettingUnAvailableMsg:"RNG Casino Database is not currently available. Please try again later.",
 Running:"進行中",
 Sa:"Sa",
+Saba:"沙巴",
 SabaVirtualSportsWinLoss:"沙巴虛擬足球輸贏",
 Saturday:"星期日",
 Save:"保存",

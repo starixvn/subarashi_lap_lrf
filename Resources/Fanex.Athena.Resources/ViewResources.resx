@@ -3067,4 +3067,16 @@
   <data name="BettingTicketCenter_RefnoTabNote_TxIDSearch" xml:space="preserve">
     <value>The system supports searching TxID from {0}</value>
   </data>
+  <data name="IsGroupInOriginalCurrency" xml:space="preserve">
+    <value>Display group breakdown in original currency</value>
+  </data>
+  <data name="LeagueName" xml:space="preserve">
+    <value>League name</value>
+  </data>
+  <data name="LeagueWinLoss" xml:space="preserve">
+    <value>Win Loss By League</value>
+  </data>
+  <data name="Saba" xml:space="preserve">
+    <value>Saba </value>
+  </data>
 </root>

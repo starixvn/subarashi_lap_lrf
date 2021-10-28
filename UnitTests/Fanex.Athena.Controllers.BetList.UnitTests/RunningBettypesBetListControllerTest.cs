@@ -43,7 +43,7 @@
                 var result = await controller.MixParlay(metaModel) as ViewResult;
 
                 // Assert
-                AssertViewResult(Menu.Menu_12, "TotalBetsMixParlay", metaModel, result);
+                AssertViewResult(Menu.mixparlay12, "TotalBetsMixParlay", metaModel, result);
             }
         }
 

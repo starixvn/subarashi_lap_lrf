@@ -2,7 +2,7 @@ export const defaultClasses = {
     show: 'rdr-Show',
     hide: 'rdr-Hide',
     calendar: 'rdr-Calendar',
-    dateRange: 'rdr-DateRange',
+    dateRange: 'rdr-DateRange rdr-DateRange-index',
     predefinedRanges: 'rdr-PredefinedRanges',
     predefinedRangesItem: 'rdr-PredefinedRangesItem',
     predefinedRangesItemActive: 'rdr-PredefinedRangesItemActive',
@@ -223,9 +223,9 @@ export default (customTheme = {}) => {
     const cellSize = ((parseInt(calendarWidth, 10) - parseInt(calendarPadding, 10) * 2) / 7) - (parseInt(cellMargin, 10) * 2);
 
     return {
-        DateRange: {...defaultTheme.DateRange, ...customTheme.DateRange },
+        DateRange: { ...defaultTheme.DateRange, ...customTheme.DateRange },
 
-        Calendar: {...defaultTheme.Calendar, ...customTheme.Calendar },
+        Calendar: { ...defaultTheme.Calendar, ...customTheme.Calendar },
 
         Day: {
             width: cellSize,
@@ -235,23 +235,23 @@ export default (customTheme = {}) => {
             ...customTheme.Day,
         },
 
-        DayPassive: {...defaultTheme.DayPassive, ...customTheme.DayPassive },
+        DayPassive: { ...defaultTheme.DayPassive, ...customTheme.DayPassive },
 
-        DayHover: {...defaultTheme.DayHover, ...customTheme.DayHover },
+        DayHover: { ...defaultTheme.DayHover, ...customTheme.DayHover },
 
-        DayToday: {...defaultTheme.DayToday, ...customTheme.DayToday },
-        DaySunday: {...defaultTheme.DaySunday, ...customTheme.DaySunday },
-        DaySpecialDay: {...defaultTheme.DaySpecialDay, ...customTheme.DaySpecialDay },
+        DayToday: { ...defaultTheme.DayToday, ...customTheme.DayToday },
+        DaySunday: { ...defaultTheme.DaySunday, ...customTheme.DaySunday },
+        DaySpecialDay: { ...defaultTheme.DaySpecialDay, ...customTheme.DaySpecialDay },
 
-        DayActive: {...defaultTheme.DayActive, ...customTheme.DayActive },
+        DayActive: { ...defaultTheme.DayActive, ...customTheme.DayActive },
 
-        DaySelected: {...defaultTheme.DaySelected, ...customTheme.DaySelected },
+        DaySelected: { ...defaultTheme.DaySelected, ...customTheme.DaySelected },
 
-        DayStartEdge: {...defaultTheme.DayStartEdge, ...customTheme.DayStartEdge },
+        DayStartEdge: { ...defaultTheme.DayStartEdge, ...customTheme.DayStartEdge },
 
-        DayEndEdge: {...defaultTheme.DayEndEdge, ...customTheme.DayEndEdge },
+        DayEndEdge: { ...defaultTheme.DayEndEdge, ...customTheme.DayEndEdge },
 
-        DayInRange: {...defaultTheme.DayInRange, ...customTheme.DayInRange },
+        DayInRange: { ...defaultTheme.DayInRange, ...customTheme.DayInRange },
 
         Weekday: {
             width: cellSize,
@@ -261,26 +261,26 @@ export default (customTheme = {}) => {
             ...customTheme.Weekday,
         },
 
-        MonthAndYear: {...defaultTheme.MonthAndYear, ...customTheme.MonthAndYear },
+        MonthAndYear: { ...defaultTheme.MonthAndYear, ...customTheme.MonthAndYear },
 
-        MonthAndYearSelect: {...defaultTheme.MonthAndYearSelect, ...customTheme.MonthAndYearSelect },
+        MonthAndYearSelect: { ...defaultTheme.MonthAndYearSelect, ...customTheme.MonthAndYearSelect },
 
-        MonthButton: {...defaultTheme.MonthButton, ...customTheme.MonthButton },
+        MonthButton: { ...defaultTheme.MonthButton, ...customTheme.MonthButton },
 
-        MonthArrow: {...defaultTheme.MonthArrow, ...customTheme.MonthArrow },
+        MonthArrow: { ...defaultTheme.MonthArrow, ...customTheme.MonthArrow },
 
-        MonthArrowPrev: {...defaultTheme.MonthArrowPrev, ...customTheme.MonthArrowPrev },
+        MonthArrowPrev: { ...defaultTheme.MonthArrowPrev, ...customTheme.MonthArrowPrev },
 
-        MonthArrowNext: {...defaultTheme.MonthArrowNext, ...customTheme.MonthArrowNext },
+        MonthArrowNext: { ...defaultTheme.MonthArrowNext, ...customTheme.MonthArrowNext },
 
-        PredefinedRanges: {...defaultTheme.PredefinedRanges, ...customTheme.PredefinedRanges },
+        PredefinedRanges: { ...defaultTheme.PredefinedRanges, ...customTheme.PredefinedRanges },
 
-        PredefinedRangesItem: {...defaultTheme.PredefinedRangesItem, ...customTheme.PredefinedRangesItem },
+        PredefinedRangesItem: { ...defaultTheme.PredefinedRangesItem, ...customTheme.PredefinedRangesItem },
 
-        PredefinedRangesItemActive: {...defaultTheme.PredefinedRangesItemActive, ...customTheme.PredefinedRangesItemActive },
+        PredefinedRangesItemActive: { ...defaultTheme.PredefinedRangesItemActive, ...customTheme.PredefinedRangesItemActive },
 
-        RangeApplyButton: {...defaultTheme.RangeButton, ...defaultTheme.RangeApplyButton, ...customTheme.RangeApplyButton },
+        RangeApplyButton: { ...defaultTheme.RangeButton, ...defaultTheme.RangeApplyButton, ...customTheme.RangeApplyButton },
 
-        RangeCancelButton: {...defaultTheme.RangeButton, ...defaultTheme.RangeCancelButton, ...customTheme.RangeCancelButton }
+        RangeCancelButton: { ...defaultTheme.RangeButton, ...defaultTheme.RangeCancelButton, ...customTheme.RangeCancelButton }
     }
 }
