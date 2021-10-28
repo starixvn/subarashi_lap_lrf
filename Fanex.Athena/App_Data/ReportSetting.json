@@ -17,7 +17,7 @@
   },
   {
     "ReportKey": "LeagueWinLoss",
-    "MinDateString": "",
+    "MinDateString": "06/01/2021",
     "MaxDateString": "tomorrow"
   },
   {
