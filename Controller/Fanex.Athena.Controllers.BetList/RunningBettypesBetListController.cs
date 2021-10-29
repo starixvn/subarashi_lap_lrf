@@ -45,7 +45,7 @@ namespace Fanex.Athena.Controllers.BetList
         public async Task<ActionResult> MixParlay(BetListExcelMetaModel metaModel)
         {
             metaModel.MultipleBettype = string.Join(",", _parlayBettypes);
-            ViewBag.ReportTitle = Menu.Menu_12;
+            ViewBag.ReportTitle = Menu.mixparlay12;
             ViewBag.UserGuideName = "TotalBetsMixParlay";
             return await ProcessRequest(metaModel).ConfigureAwait(false);
         }

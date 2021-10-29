@@ -2683,4 +2683,16 @@
   <data name="BettingTicketCenter_RefnoTabNote_TxIDSearch" xml:space="preserve">
     <value>系统支持从 {0} 开始搜索 TxID</value>
   </data>
+  <data name="Saba" xml:space="preserve">
+    <value>沙巴</value>
+  </data>
+  <data name="IsGroupInOriginalCurrency" xml:space="preserve">
+    <value>以原始货币显示</value>
+  </data>
+  <data name="LeagueName" xml:space="preserve">
+    <value>联赛名称</value>
+  </data>
+  <data name="LeagueWinLoss" xml:space="preserve">
+    <value>联赛输赢</value>
+  </data>
 </root>

@@ -3553,6 +3553,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Display group breakdown in original currency.
+        /// </summary>
+        public static string IsGroupInOriginalCurrency {
+            get {
+                return ResourceManager.GetString("IsGroupInOriginalCurrency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to (N).
         /// </summary>
         public static string IsNeutral {
@@ -3819,6 +3828,24 @@ namespace Fanex.Athena.Resources {
         public static string LeagueGroup {
             get {
                 return ResourceManager.GetString("LeagueGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to League name.
+        /// </summary>
+        public static string LeagueName {
+            get {
+                return ResourceManager.GetString("LeagueName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Win Loss By League.
+        /// </summary>
+        public static string LeagueWinLoss {
+            get {
+                return ResourceManager.GetString("LeagueWinLoss", resourceCulture);
             }
         }
         
@@ -6231,6 +6258,15 @@ namespace Fanex.Athena.Resources {
         public static string Sa {
             get {
                 return ResourceManager.GetString("Sa", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saba .
+        /// </summary>
+        public static string Saba {
+            get {
+                return ResourceManager.GetString("Saba", resourceCulture);
             }
         }
         

@@ -1,0 +1,24 @@
+﻿import LangHelper from '@jsroot/lib/langHelper'
+import Site from '@jsroot/lib/site'
+import Report from '@jsroot/lib/report'
+
+export default class Service {
+    static getTitle(fromDate, toDate, currency, baseCurrency) {
+        const dateRangeText = fromDate && toDate 
+            ? `, ${Site.convertDateToString(fromDate)} → ${Site.convertDateToString(toDate)}` 
+            : '';
+
+        const currencyText = currency ? `, ${LangHelper.getSingleResource("Currency")}: ${currency}` : '';
+        const baseCurrencyText = baseCurrency ? `, ${LangHelper.getSingleResource("BaseCurrency")}: ${baseCurrency}` : '';
+
+        return LangHelper.getSingleResource("LeagueWinLoss") + dateRangeText + currencyText + baseCurrencyText;
+    }
+
+    static showErrorMsg() {
+        alert(LangHelper.getSingleResource('ErrorProcessingMsg'));
+    }
+
+    static getDrilldownDateRange(reportBy, fromDate, toDate, drilldownDate) {
+        return Report.getDrilldownDateRange(reportBy, fromDate, toDate, drilldownDate)
+    }
+}

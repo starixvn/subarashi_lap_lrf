@@ -16,6 +16,11 @@
     "MaxDateString": "today"
   },
   {
+    "ReportKey": "LeagueWinLoss",
+    "MinDateString": "06/01/2021",
+    "MaxDateString": "tomorrow"
+  },
+  {
     "ReportKey": "ExchangeWinloss77",
     "MinDateString": "",
     "MaxDateString": ""

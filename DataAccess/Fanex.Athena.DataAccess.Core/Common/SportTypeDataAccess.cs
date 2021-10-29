@@ -14,6 +14,7 @@ namespace Fanex.Athena.DataAccess.Core.Common
     using Fanex.Athena.DataAccess.Core.Common.Interfaces;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Resources;
     using Fanex.Common.Extensions;
     using VendorAdapter.Interfaces;
 
@@ -25,6 +26,15 @@ namespace Fanex.Athena.DataAccess.Core.Common
             (int)SportType.DuplicatedCricket // Duplicated with sport 50
         };
 
+        private static List<Tuple<int, int>> SabaVirtualSports = new List<Tuple<int, int>>
+        {
+            Tuple.Create( (int)SportType.SabaSoccer, (int)SportType.Soccer ),
+            Tuple.Create( (int)SportType.SabaBasketball, (int)SportType.BasketBall ),
+            Tuple.Create( (int)SportType.SabaCricket, (int)SportType.Cricket ),
+            Tuple.Create( (int)SportType.SabaFutsal, (int)SportType.Futsal ),
+            Tuple.Create( (int)SportType.SabaPingoal, 0)
+        };
+
         private readonly ICacheRefAdapter _cacheRefAdapter;
 
         public SportTypeDataAccess(
@@ -33,7 +43,7 @@ namespace Fanex.Athena.DataAccess.Core.Common
             _cacheRefAdapter = cacheRefAdapter;
         }
 
-        public async Task<IEnumerable<SportProductItem>> GetSportsAndProducts(int licenseeId, string languageCode, string productCodes = "")
+        public async Task<IEnumerable<SportProductItem>> GetSportsAndProducts(int licenseeId, string languageCode, string productCodes = "", bool includeSabaSport = false)
         {
             const string UspName = "Lrf_SelSportDetail";
 
@@ -60,8 +70,29 @@ namespace Fanex.Athena.DataAccess.Core.Common
                         }
                     }
 
+                    if (includeSabaSport)
+                    {
+                        GetSabaVirtualSport(result);
+                    }
+
                     return result;
                 }
+            }
+        }
+
+        private void GetSabaVirtualSport(List<SportProductItem> sports)
+        {
+            foreach (var sabaSport in SabaVirtualSports)
+            {
+                var sportName = sabaSport.Item1 == (int)SportType.SabaPingoal ? ViewResources.SoccerPinGoal : _cacheRefAdapter.GetSportName(sabaSport.Item2);
+
+                sports.Add(new SportProductItem
+                {
+                    Checked = true,
+                    ID = sabaSport.Item1,
+                    Name = $"{ViewResources.Saba}{sportName}",
+                    ParentId = ProductTypes.Sportsbook
+                });
             }
         }
 

@@ -22,6 +22,7 @@
     <Function Name="LiveReport" Product="SB,BA,NG,VS,KN,CS,VB,FW,AB,VS2,LT,SG,PP,CC,VRG,TG,I4D,SXG,SBC,SAG,PGS,JK,GDG,SLT,HB,WM,BGG,VGA,CG"></Function>
     <Function Name="CasinoTurnover" Product="CS,VB,AB,SXG,SAG,PP,PGS,SBC,GDG,HB,WM,BGG,VGA,CG"></Function>
     <Function Name="DailyBets" Product="SB,NG,CS,LC"></Function>
+    <Function Name="LeagueWinLoss" Product="SB,BA"></Function>
   </Group>
 
   <Group Name="BetList">

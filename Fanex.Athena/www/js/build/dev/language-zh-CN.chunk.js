@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 10/4/2021 1:29:27 PM
+﻿// Generated at: 10/26/2021 10:29:00 AM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -434,6 +434,7 @@ InvalidPlayerUpdateVipStatusSingle:"无效的玩家: {0}",
 InvalidRequestMsg:"请求无效",
 InvalidRequestOrNotAuthorizedMsg:"无效的请求或您未被授权访问所请求的资源",
 IPLogin:"登入IP",
+IsGroupInOriginalCurrency:"以原始货币显示",
 IsNeutral:"(中)",
 JackpotWonDetails:"积宝头奖详情",
 Jan:"一月",
@@ -463,6 +464,8 @@ lbl1stOver_Under:"半场大小盘",
 lbl3WayHandicap:"三项让分投注",
 lbl7Over:"7或以上",
 League:"联赛",
+LeagueName:"联赛名称",
+LeagueWinLoss:"联赛输赢",
 Liability:"负债",
 Licensee:"承租公司",
 LicenseeComm:"承租公司佣金",
@@ -708,6 +711,7 @@ RetractedPlayerUpdateVipStatusSingle:"遭撤回VIP的玩家: {0}",
 RNGCasinoUpdateSettingUnAvailableMsg:"RNG Casino Database is not currently available. Please try again later.",
 Running:"进行中",
 Sa:"Sa",
+Saba:"沙巴",
 SabaVirtualSportsWinLoss:"沙巴虚拟赛事输赢",
 Saturday:"星期日",
 Save:"保存",

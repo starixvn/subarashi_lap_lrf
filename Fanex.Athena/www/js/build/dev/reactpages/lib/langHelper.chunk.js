@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 10/4/2021 1:29:27 PM
+// Generated at: 10/26/2021 10:29:00 AM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -483,6 +483,7 @@ window._language_en_US = {
   InvalidRequestOrNotAuthorizedMsg: "Invalid request or you are not authorized to access the requested resource!",
   InvalidSubsidiaryNameMsg: "Please contact admin to check your subsidiary name.",
   IPLogin: "IP Login",
+  IsGroupInOriginalCurrency: "Display group breakdown in original currency",
   IsNeutral: "(N)",
   JackpotWonDetails: "Jackpot Won Details",
   Jan: "Jan",
@@ -512,6 +513,8 @@ window._language_en_US = {
   lbl3WayHandicap: "3-Way Handicap",
   lbl7Over: "7Over",
   League: "League",
+  LeagueName: "League name",
+  LeagueWinLoss: "Win Loss By League",
   Liability: "Liability",
   Licensee: "Licensee",
   LicenseeComm: "Licensee Comm",
@@ -779,6 +782,7 @@ window._language_en_US = {
   RNGCasinoUpdateSettingUnAvailableMsg: "RNG Casino Database is not currently available. Please try again later.",
   Running: "Running",
   Sa: "Sa",
+  Saba: "Saba",
   SabaVirtualSportsWinLoss: "Saba Virtual Sports Win Loss",
   Saturday: "Saturday",
   Save: "Save",

@@ -117,218 +117,220 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Menu_1" xml:space="preserve">
+  <data name="totalbets1" xml:space="preserve">
     <value>TOTAL BETS</value>
   </data>
-  <data name="Menu_10" xml:space="preserve">
+  <data name="correctscore10" xml:space="preserve">
     <value>Correct Score</value>
   </data>
-  <data name="Menu_11" xml:space="preserve">
+  <data name="totalgoal11" xml:space="preserve">
     <value>Total Goal</value>
   </data>
-  <data name="Menu_12" xml:space="preserve">
+  <data name="mixparlay12" xml:space="preserve">
     <value>Parlay</value>
   </data>
-  <data name="Menu_13" xml:space="preserve">
+  <data name="outright13" xml:space="preserve">
     <value>Outright</value>
   </data>
-  <data name="Menu_14" xml:space="preserve">
+  <data name="htft14" xml:space="preserve">
     <value>HT/FT</value>
   </data>
-  <data name="Menu_15" xml:space="preserve">
+  <data name="fglg15" xml:space="preserve">
     <value>FG/LG</value>
   </data>
-  <data name="Menu_16" xml:space="preserve">
+  <data name="cleansheet16" xml:space="preserve">
     <value>Clean Sheet</value>
   </data>
-  <data name="Menu_17" xml:space="preserve">
+  <data name="doublechance17" xml:space="preserve">
     <value>Double Chance</value>
   </data>
-  <data name="Menu_18" xml:space="preserve">
+  <data name="homedrawawaynobet18" xml:space="preserve">
     <value>Home/Draw/Away No Bet</value>
   </data>
-  <data name="Menu_19" xml:space="preserve">
+  <data name="bonteamtoscore19" xml:space="preserve">
     <value>B/O/N Team To Score</value>
   </data>
-  <data name="Menu_2" xml:space="preserve">
+  <data name="forecast2" xml:space="preserve">
     <value>FORECAST</value>
   </data>
-  <data name="Menu_20" xml:space="preserve">
+  <data name="towintonil20" xml:space="preserve">
     <value>To Win To Nil</value>
   </data>
-  <data name="Menu_21" xml:space="preserve">
+  <data name="3-wayhandicap21" xml:space="preserve">
     <value>3-Way Handicap</value>
   </data>
-  <data name="Menu_24" xml:space="preserve">
+  <data name="handicapoverunderlive24" xml:space="preserve">
     <value>Handicap/Over Under/Live</value>
   </data>
-  <data name="Menu_25" xml:space="preserve">
+  <data name="1x225" xml:space="preserve">
     <value>1 X 2</value>
   </data>
-  <data name="Menu_26" xml:space="preserve">
+  <data name="lastbetsmonitoring26" xml:space="preserve">
     <value>Last Bets Monitoring</value>
   </data>
-  <data name="Menu_27" xml:space="preserve">
+  <data name="licenseewinloss27" xml:space="preserve">
     <value>Licensee Win Loss</value>
   </data>
-  <data name="Menu_28" xml:space="preserve">
+  <data name="settledmatchcount28" xml:space="preserve">
     <value>Settled Match Count</value>
   </data>
-  <data name="Menu_29" xml:space="preserve">
+  <data name="customerwinloss29" xml:space="preserve">
     <value>Customer Win Loss</value>
   </data>
-  <data name="Menu_3" xml:space="preserve">
+  <data name="reports3" xml:space="preserve">
     <value>REPORTS</value>
   </data>
-  <data name="Menu_30" xml:space="preserve">
+  <data name="customerpendingfunds30" xml:space="preserve">
     <value>Customer Pending Funds</value>
   </data>
-  <data name="Menu_31" xml:space="preserve">
+  <data name="matchwinloss31" xml:space="preserve">
     <value>Match Win Loss</value>
   </data>
-  <data name="Menu_32" xml:space="preserve">
+  <data name="winlossbyproducts32" xml:space="preserve">
     <value>Win Loss By Products</value>
   </data>
-  <data name="Menu_33" xml:space="preserve">
+  <data name="winlossbybettype33" xml:space="preserve">
     <value>Win Loss By Bet Type</value>
   </data>
-  <data name="Menu_38" xml:space="preserve">
+  <data name="livereport38" xml:space="preserve">
     <value>Live Report</value>
   </data>
-  <data name="Menu_39" xml:space="preserve">
+  <data name="turnover39" xml:space="preserve">
     <value>Turnover </value>
   </data>
-  <data name="Menu_4" xml:space="preserve">
+  <data name="customerinformation4" xml:space="preserve">
     <value>CUSTOMER INFORMATION</value>
   </data>
-  <data name="Menu_40" xml:space="preserve">
+  <data name="customerbalance40" xml:space="preserve">
     <value>Customer Balance</value>
   </data>
-  <data name="Menu_41" xml:space="preserve">
+  <data name="results41" xml:space="preserve">
     <value>Results</value>
   </data>
-  <data name="Menu_43" xml:space="preserve">
+  <data name="customerlist43" xml:space="preserve">
     <value>Customer List</value>
   </data>
-  <data name="Menu_46" xml:space="preserve">
+  <data name="manageaccount46" xml:space="preserve">
     <value>Manage Account</value>
   </data>
-  <data name="Menu_47" xml:space="preserve">
+  <data name="addnewaccount47" xml:space="preserve">
     <value>Add New Account</value>
   </data>
-  <data name="Menu_48" xml:space="preserve">
+  <data name="editnewaccount48" xml:space="preserve">
     <value>Edit New Account</value>
   </data>
-  <data name="Menu_49" xml:space="preserve">
+  <data name="assignpermission49" xml:space="preserve">
     <value>Assign Permission</value>
   </data>
-  <data name="Menu_50" xml:space="preserve">
+  <data name="resetpassword50" xml:space="preserve">
     <value>Reset Password</value>
   </data>
-  <data name="Menu_51" xml:space="preserve">
+  <data name="customerturnover51" xml:space="preserve">
     <value>Customer Turnover</value>
   </data>
-  <data name="Menu_52" xml:space="preserve">
+  <data name="customerreports52" xml:space="preserve">
     <value>CUSTOMER REPORTS</value>
   </data>
-  <data name="Menu_53" xml:space="preserve">
+  <data name="mobilewinloss53" xml:space="preserve">
     <value>Platform Win Loss</value>
   </data>
-  <data name="Menu_54" xml:space="preserve">
+  <data name="specialba54" xml:space="preserve">
     <value>SpecialBA</value>
   </data>
-  <data name="Menu_55" xml:space="preserve">
+  <data name="commissiongrouplist55" xml:space="preserve">
     <value>Commission Group List</value>
   </data>
-  <data name="Menu_56" xml:space="preserve">
+  <data name="customerlog56" xml:space="preserve">
     <value>Customer Log</value>
   </data>
-  <data name="Menu_59" xml:space="preserve">
+  <data name="winlossbyleague59" xml:space="preserve">
     <value>Win Loss By Leagues</value>
     <comment>#8828</comment>
   </data>
-  <data name="Menu_6" xml:space="preserve">
+  <data name="accountmanagement6" xml:space="preserve">
     <value>ACCOUNT MANAGEMENT</value>
   </data>
-  <data name="Menu_62" xml:space="preserve">
+  <data name="agcasinowinloss62" xml:space="preserve">
     <value>AG Casino Win Loss</value>
   </data>
-  <data name="Menu_64" xml:space="preserve">
+  <data name="activecustomersummary64" xml:space="preserve">
     <value>Active Customer Summary</value>
   </data>
-  <data name="Menu_63" xml:space="preserve">
+  <data name="agcasinobalance63" xml:space="preserve">
     <value>AG Casino Balance</value>
     <comment>#26990</comment>
   </data>
-  <data name="Menu_65" xml:space="preserve">
+  <data name="golddeluxewinloss65" xml:space="preserve">
     <value>Gold Deluxe Win Loss</value>
   </data>
-  <data name="Menu_7" xml:space="preserve">
+  <data name="handicapoverunderlive7" xml:space="preserve">
     <value>Handicap/Over Under/Live</value>
   </data>
-  <data name="Menu_8" xml:space="preserve">
+  <data name="moneyline8" xml:space="preserve">
     <value>Money Line</value>
   </data>
-  <data name="Menu_9" xml:space="preserve">
+  <data name="oddeven1x2dnd9" xml:space="preserve">
     <value>Odd/Even + 1x2 + DND</value>
   </data>
-  <data name="Menu_69" xml:space="preserve">
+  <data name="weeklylivematches69" xml:space="preserve">
     <value>Weekly Live Matches</value>
     <comment>#52886</comment>
   </data>
-  <data name="Menu_70" xml:space="preserve">
+  <data name="editbetsetting70" xml:space="preserve">
     <value>Edit Bet Setting</value>
     <comment>#61999</comment>
   </data>
-  <data name="Menu_71" xml:space="preserve">
+  <data name="colossusbetswinloss71" xml:space="preserve">
     <value>Colossus Bets Win Loss</value>
     <comment>#63785</comment>
   </data>
-  <data name="Menu_72" xml:space="preserve">
+  <data name="cashoutwinloss72" xml:space="preserve">
     <value>Cash Out Win Loss</value>
     <comment>#71727</comment>
   </data>
-  <data name="Menu_73" xml:space="preserve">
+  <data name="subsidiaryperformance73" xml:space="preserve">
     <value>Subsidiary Performance</value>
   </data>
-  <data name="Menu_76" xml:space="preserve">
+  <data name="licenseewinlossbytimezone76" xml:space="preserve">
     <value>Win Loss By Time Zone</value>
     <comment>84932</comment>
   </data>
-  <data name="Menu_74" xml:space="preserve">
+  <data name="notificationreport" xml:space="preserve">
     <value>NOTIFICATION</value>
     <comment>84004</comment>
   </data>
-  <data name="Menu_75" xml:space="preserve">
+  <data name="resultamendment_recalculation75" xml:space="preserve">
     <value>Resettlement</value>
     <comment>84004</comment>
   </data>
-  <data name="Menu_77" xml:space="preserve">
+  <data name="exchangewinloss77" xml:space="preserve">
     <value>Exchange Win Loss</value>
     <comment>86640</comment>
   </data>
-  <data name="Menu_79" xml:space="preserve">
+  <data name="btc79" xml:space="preserve">
     <value>Betting Ticket Center</value>
     <comment>80941</comment>
   </data>
-  <data name="Menu_80" xml:space="preserve">
+  <data name="casinoturnover80" xml:space="preserve">
     <value>Casino Turnover</value>
     <comment>95178</comment>
   </data>
-  <data name="Menu_81" xml:space="preserve">
+  <data name="dailybets81" xml:space="preserve">
     <value>Daily Bets</value>
     <comment>122789</comment>
   </data>
-  <data name="Menu_87" xml:space="preserve">
+  <data name="playersegmentation" xml:space="preserve">
     <value>Player Segmentation</value>
     <comment>#128082</comment>
   </data>
-  <data name="Menu_89" xml:space="preserve">
+  <data name="sabavirtualsportswinloss" xml:space="preserve">
     <value>Saba Virtual Sports Win Loss</value>
     <comment>141454</comment>
   </data>
-  <data name="Menu_90" xml:space="preserve">
-    <value>God of Fortune Win Loss</value>
-    <comment>152900</comment>
+  <data name="godoffortunewinloss" xml:space="preserve">
+    <value>God Of Fortune Win Loss</value>
+  </data>
+  <data name="leaguewinloss" xml:space="preserve">
+    <value>Win Loss By League</value>
   </data>
 </root>

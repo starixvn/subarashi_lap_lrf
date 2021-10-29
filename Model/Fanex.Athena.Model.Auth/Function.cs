@@ -22,7 +22,7 @@ namespace Fanex.Athena.Model.Auth
         {
             get
             {
-                return Menu.ResourceManager.GetString("Menu_" + FunctionId);
+                return Menu.ResourceManager.GetString(FunctionKey.ToLowerInvariant());
             }
         }
 

@@ -39,5 +39,7 @@
         public const string CasinoTurnover = "CasinoTurnover";
 
         public const string DailyBets = "DailyBets";
+
+        public const string LeagueWinLoss = "LeagueWinLoss";
     }
 }
