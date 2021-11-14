@@ -14,6 +14,8 @@
 
         string GenerateAgentList(UserAuthInfo user, string licenseeName, string subsidiaryList, string currencyIdList = default);
 
+        IDictionary<int, int[]> GetAgentList(string siteName, IDictionary<int, int[]> agentList, string subsidiaryList);
+
         IEnumerable<Subsidiary> GetSubsidiaryList(UserAuthInfo user, string licenseeName, string subsidiaryList);
 
         IEnumerable<GroupSubsidiary> GetGroupSubsidiaryList(UserAuthInfo user, string licenseeName, string subsidiaryList, string whiteLabelList);

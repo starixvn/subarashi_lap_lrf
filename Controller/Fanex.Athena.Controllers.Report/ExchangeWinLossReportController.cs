@@ -2,6 +2,7 @@
 {
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Report.ViewModel;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     using Model.Core.DataDomain;
@@ -19,11 +20,14 @@
     public class ExchangeWinLossReportController : ReportBaseController
     {
         private readonly IReportSettingService _reportSettingService;
+        private readonly ISubsidiaryService _subsidiaryService;
 
         public ExchangeWinLossReportController(
-            IReportSettingService reportSettingService)
+            IReportSettingService reportSettingService,
+            ISubsidiaryService subsidiaryService)
         {
             _reportSettingService = reportSettingService;
+            _subsidiaryService = subsidiaryService;
         }
 
         public ActionResult Index()
@@ -51,7 +55,8 @@
             {
                 currencyList.Add(item.Key, item.Value);
             }
-
+            var subsidiaryList = _subsidiaryService.GetSubsidiaryTree(userSession, licensee.LicenseeName);
+            var viewType = !subsidiaryList.Any() ? SubsidiaryViewType.NotManagement : (SubsidiaryViewType)userSession.SubsidiaryViewType;
             var reportSetting = _reportSettingService.GetSetting(PermissionKeys.ReportExchangeWinLoss, licensee.LicenseeName);
             return new ExchangeWinLossViewModel
             {
@@ -67,7 +72,9 @@
                 {
                     { ReportByType.Daily, ViewResources.Daily },
                     { ReportByType.Monthly, ViewResources.Monthly }
-                }
+                },
+                ViewType = viewType,
+                SubsidiaryList = subsidiaryList
             };
         }
     }

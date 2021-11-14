@@ -3,11 +3,13 @@ import { connect } from 'react-redux'
 import { ActionCreators } from '../actions/index.js'
 import { bindActionCreators } from 'redux'
 import Select from 'react-select'
+import { TreeViewSelect } from '@9softstudio/react-multiselect'
+import CheckBox from '@jsroot/components/CheckBox'
 import { DateRange } from '../../../components/date-range/index'
 import LangHelper from '../../../lib/langHelper'
 import Site from '@jsroot/lib/site'
 import AppData from '@jsroot/lib/AppData'
-import { ReportLevel } from '../../../constants/report'
+import { ReportLevel, SubsidiaryViewType } from '../../../constants/report'
 import { BaseCurrency } from '../../../constants/currency'
 import ReportExcel from '../lib/reportExcel'
 import { Service } from '../lib/service'
@@ -100,6 +102,7 @@ export class FormFilter extends Component {
         let param = {};
 
         const { fromDate, toDate } = this.props.dateRange;
+        const subsidiarySearch = this.props.subsidiarySearch;
         const baseCurrency = BaseCurrency.find(x => x.value === this.props.selectedCurrency.value);
         
         param = {
@@ -110,7 +113,9 @@ export class FormFilter extends Component {
             ToDate: Site.convertDateToString(toDate),
             ReportBy: this.props.selectedReportBy,
             IsExcludedTestData: this.props.isExcludeTest,
-            Level: 0
+            Level: 0,
+            subsidiarySearch,
+            SubsidiaryList: subsidiarySearch ? this.props.selectedSubsidiary : "" 
         };
         
         return {
@@ -133,6 +138,35 @@ export class FormFilter extends Component {
         if (!isNaN(newValue) && this.props.selectedReportBy !== newValue) {
             this.props.setReportBy(newValue);
         }
+    }
+
+    _onChangeSubsidiaryList = (currentItem, selectedItemsKey, treeViewList) => {
+        this.props.setSubsidiaryList(selectedItemsKey);
+    }
+
+    _renderSubsidiaryTreeView() {
+        const TreeViewOption = {
+            childrenField: 'Children',
+            keyField: 'Value',
+            valueField: 'Name',
+            statusField: 'Checked',
+            indent: 30,
+            includeSelectedParentKey: false,
+            useOriginalDataSource: false
+        }
+
+        return <TreeViewSelect
+            language={LangHelper.currentLanguage}
+            id="SubsidiaryTreeView"
+            dataSource={AppData.subsidiaryList}
+            keyField="Value"
+            valueField="Name"
+            statusField="Checked"
+            texts={{ SelectOptions: "Please select", All: "All", SelectedItemCount: "# selected" }}
+            isAllTextShown={false}
+            hasSearchBox={false}
+            treeViewOption={TreeViewOption}
+            onChange={this._onChangeSubsidiaryList} />;
     }
 
     _renderDateRange() {
@@ -186,6 +220,14 @@ export class FormFilter extends Component {
         return (
             <div className='page-filter'>
                 <div className='row'>
+                {AppData.viewType !== SubsidiaryViewType.NOT_MANAGEMENT && this.props.subsidiarySearch && (<div className='col-12 col-sm-7 col-md-4 col-xl-3'>
+                        <div className="form-group">
+                            <label className="label-text">
+                                {AppData.viewType === SubsidiaryViewType.MASTER_MANAGEMENT ? LangHelper.getSingleResource("WhiteLabel") : LangHelper.getSingleResource("Subsidiary")}
+                            </label>
+                            {this._renderSubsidiaryTreeView()}
+                        </div>
+                    </div>)}
                     <div className='col-12 col-sm-7 col-md-4 col-xl-3'>
                         <div className='form-group'>
                             <label className='label-text'>{LangHelper.getSingleResource('Date')}</label>
@@ -212,9 +254,19 @@ export class FormFilter extends Component {
 
                     <div className='col-12 col-sm-3 col-md-2 col-xl-2'>
                         <div className='form-group button-group'>
-                            <button type='button' className='btn btn-submit' onClick={this.submit}>{LangHelper.getSingleResource('Submit')}</button>
+                            <button type='button' className='btn btn-submit' 
+                            disabled={this.props.subsidiarySearch && !this.props.selectedSubsidiary} 
+                            onClick={this.submit}>{LangHelper.getSingleResource('Submit')}</button>
                         </div>
                     </div>
+                    {AppData.viewType !== SubsidiaryViewType.NOT_MANAGEMENT && <div className='col-12 col-sm-3 col-md-2 col-xl-2'>
+                        <div className="form-group">
+                            <CheckBox id="SubsidiarySearch"
+                                checked={this.props.subsidiarySearch}
+                                onChange={checked => this.props.setSubsidiarySearch(checked)}
+                                label={LangHelper.getSingleResource("SubsidiarySearch")} />
+                        </div>
+                    </div>}
                 </div>
                 <div className='caret-block'>
                     <i className='icon-excel right' onClick={this.exportExcel} title={LangHelper.getSingleResource('ExportToExcel')}></i>

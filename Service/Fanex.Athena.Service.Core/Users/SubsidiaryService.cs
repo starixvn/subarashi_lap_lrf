@@ -33,6 +33,16 @@
             _subLicenseeDataAccess = subsidiaryDataAccess;
         }
 
+        public IDictionary<int, int[]> GetAgentList(string siteName, IDictionary<int, int[]> agentList, string subsidiaryList)
+        {
+            var needSubsidiaryList = subsidiaryList.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            var userSubsidiaryAgents = GetUserSubsidiaries(agentList, siteName);
+            return userSubsidiaryAgents
+                .Where(_ => needSubsidiaryList.Contains(_.OperatorId, StringComparer.OrdinalIgnoreCase))
+                .GroupBy(_ => _.CurrencyId, (key, group) => new KeyValuePair<int, int[]>(key, group.Select(_ => _.AgentId).ToArray()))
+                .ToDictionary(_ => _.Key, _ => _.Value);
+        }
+
         public string GenerateAgentList(UserAuthInfo user, string licenseeName, string subsidiaryList, string currencyIdList = default)
         {
             var agentIdListBySubsidiary = GetCurrencyAgentList(user, licenseeName, subsidiaryList);
@@ -51,7 +61,7 @@
 
             var subsidiaryNameList = subsidiaryNames.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
-            var subsidiaryData = GetUserSubsidiaries(user, licenseeName).ToList();
+            var subsidiaryData = GetUserSubsidiaries(user.CurrencyAgentList, licenseeName).ToList();
             var isFilterByCurrencyId = currencyId != CurrencyAll;
             var result = new List<Subsidiary>();
             for (var i = 0; i < subsidiaryData.Count; i++)
@@ -105,7 +115,7 @@
 
         public IEnumerable<Subsidiary> GetSubsidiaryList(UserAuthInfo user, string licenseeName, string subsidiaryList)
         {
-            var allSubsidiaries = GetUserSubsidiaries(user, licenseeName);
+            var allSubsidiaries = GetUserSubsidiaries(user.CurrencyAgentList, licenseeName);
 
             if (user.UserLevel == UserLevelType.Subsidiary)
             {
@@ -158,7 +168,7 @@
         {
             var cacheKey = string.Format(CacheKey.MemorycacheGroupSubsidiaryListByLicensee, licenseeName);
             var groupSubsidiaryList = _cache.Get(cacheKey, () => _subLicenseeDataAccess.GetGroupSubsidiaries(licenseeName), CacheTimeoutSeconds);
-            var operators = this.GetUserSubsidiaries(user, licenseeName);
+            var operators = this.GetUserSubsidiaries(user.CurrencyAgentList, licenseeName);
 
             return groupSubsidiaryList
                 .Where(x =>
@@ -167,11 +177,11 @@
                 .ToList();
         }
 
-        private IEnumerable<Subsidiary> GetUserSubsidiaries(UserAuthInfo user, string licenseeName)
+        private IEnumerable<Subsidiary> GetUserSubsidiaries(IDictionary<int, int[]> currencyAgentList, string licenseeName)
         {
             var cacheKey = string.Format(CacheKey.MemorycacheSubsidiaryListByLicensee, licenseeName);
             var subsidiaryList = _cache.Get(cacheKey, () => _subLicenseeDataAccess.GetSubsidiaryList(licenseeName), CacheTimeoutSeconds);
-            var userAgentList = user.CurrencyAgentList.SelectMany(i => i.Value);
+            var userAgentList = currencyAgentList.SelectMany(i => i.Value);
             return subsidiaryList.Where(i => userAgentList.Contains(i.AgentId));
         }
 

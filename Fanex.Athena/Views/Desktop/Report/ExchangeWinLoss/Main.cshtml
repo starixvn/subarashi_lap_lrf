@@ -10,6 +10,9 @@
     var reportByOption = Model.ReportByOption.Select(c => new { value = c.Key, label = c.Value }).ToList();
     var today = DateTime.Today.ToString("MM/dd/yyyy");
     var baseCurrencyList = SystemConstants.BaseCurrencyList.Select(c => new { value = c.Value, label = c.Value }).ToList();
+
+    string selectedSubsidiary = Model.ViewType == SubsidiaryViewType.MasterManagement ?
+        string.Join(",", Model.SubsidiaryList.SelectMany(x => x.Children.Select(y => y.Value)).Distinct()) : string.Join(",", Model.SubsidiaryList.Select(x => x.Value));
 }
 
 @section pagecss {
@@ -22,18 +25,21 @@
 
 @section globaljscode{
     window.initialState = {
-        selectedCurrency: @Html.Raw(currencyList.FirstOrDefault(x => x.value == Model.CurrencyId).ToJson()),
-        dateRange: { fromDate: '@Model.FromDate.ToString("MM/dd/yyyy")', toDate: '@Model.ToDate.ToString("MM/dd/yyyy")'},
-        reportByOption: @Html.Raw(reportByOption.ToJson()),
-        selectedReportBy: @Model.ReportBy,
-        isExcludeTest: true,
-        isAllowedCustomerComm: @Model.IsAllowedCustomerComm.ToJson(),
-        licenseeId: @Model.LicenseeId,
-        isLoading: false
+    selectedSubsidiary: '@(selectedSubsidiary)',
+    selectedCurrency: @Html.Raw(currencyList.FirstOrDefault(x => x.value == Model.CurrencyId).ToJson()),
+    dateRange: { fromDate: '@Model.FromDate.ToString("MM/dd/yyyy")', toDate: '@Model.ToDate.ToString("MM/dd/yyyy")'},
+    reportByOption: @Html.Raw(reportByOption.ToJson()),
+    selectedReportBy: @Model.ReportBy,
+    isExcludeTest: true,
+    isAllowedCustomerComm: @Model.IsAllowedCustomerComm.ToJson(),
+    licenseeId: @Model.LicenseeId,
+    isLoading: false
     };
     window._AppData = {
-        currencyList: @Html.Raw(currencyList.ToJson()),
-        dateConstraint: { minDate: '@Model.MinDate.ToString("MM/dd/yyyy")', maxDate: '@Model.MaxDate.ToString("MM/dd/yyyy")', toDay: '@today'}
+    subsidiaryList: @Html.Raw(Model.SubsidiaryList.ToJson()),
+    viewType: @((byte)Model.ViewType),
+    currencyList: @Html.Raw(currencyList.ToJson()),
+    dateConstraint: { minDate: '@Model.MinDate.ToString("MM/dd/yyyy")', maxDate: '@Model.MaxDate.ToString("MM/dd/yyyy")', toDay: '@today'}
     };
 }
 <div id="app-container">

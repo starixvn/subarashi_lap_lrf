@@ -4,6 +4,7 @@ import * as currencyAction from '../../../actions/currencyAction'
 import * as loaderAction from '../../../actions/loaderAction'
 import * as excludeTestAction from '../../../actions/excludeTestAction'
 import * as dateRangeAction from '../../../actions/dateRangeAction'
+import * as subsidiaryAction from '../../../actions/subsidiaryAction'
 
 export const ActionCreators = Object.assign({},
     dataHandlerAction,
@@ -11,5 +12,6 @@ export const ActionCreators = Object.assign({},
     currencyAction,
     loaderAction,
     excludeTestAction,
-    dateRangeAction
+    dateRangeAction,
+    subsidiaryAction
 );

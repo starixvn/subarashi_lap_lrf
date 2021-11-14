@@ -5,6 +5,7 @@ import * as currencyReducer from '../../../reducers/currencyReducer'
 import * as loaderReducer from '../../../reducers/loaderReducer'
 import * as excludeTestReducer from '../../../reducers/excludeTestReducer'
 import * as dateRangeReducer from '../../../reducers/dateRangeReducer'
+import * as subsidiaryReducer from '../../../reducers/subsidiaryReducer'
 
 export default combineReducers(Object.assign(
     dataHandlerReducer,
@@ -12,5 +13,6 @@ export default combineReducers(Object.assign(
     currencyReducer,
     loaderReducer,
     excludeTestReducer,
-    dateRangeReducer
+    dateRangeReducer,
+    subsidiaryReducer
 ));
