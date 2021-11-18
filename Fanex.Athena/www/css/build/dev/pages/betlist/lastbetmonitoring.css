@@ -1260,7 +1260,9 @@ ul.ui-multiselect-checkboxes {
   .betlist-container .iplink, .betlist-container .betsliplink {
     cursor: pointer;
     color: #000000;
-    font-size: 11px; }
+    font-size: 11px;
+    white-space: pre-wrap;
+    word-break: break-all; }
   .betlist-container .time {
     color: #434343;
     font-size: 7pt;
