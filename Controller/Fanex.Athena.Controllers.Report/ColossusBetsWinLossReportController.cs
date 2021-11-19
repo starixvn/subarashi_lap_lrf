@@ -9,6 +9,7 @@ namespace Fanex.Athena.Controllers.Report
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
 
     using Model.Core.DataDomain;
@@ -20,6 +21,13 @@ namespace Fanex.Athena.Controllers.Report
     [FunctionAuthorization(PermissionKeys.ReportColossusBetsWinLoss)]
     public class ColossusBetsWinLossReportController : ReportBaseController
     {
+        private readonly ISubsidiaryService _subsidiaryService;
+
+        public ColossusBetsWinLossReportController(ISubsidiaryService subsidiaryService)
+        {
+            _subsidiaryService = subsidiaryService;
+        }
+
         [HttpGet]
         public ActionResult Index()
         {
@@ -45,10 +53,14 @@ namespace Fanex.Athena.Controllers.Report
                 .Key
             };
 
+            var subsidiaryList = _subsidiaryService.GetSubsidiaryTree(userSession, licenseeSession.LicenseeName);
+            var viewType = !subsidiaryList.Any() ? SubsidiaryViewType.NotManagement : (SubsidiaryViewType)userSession.SubsidiaryViewType;
             var model = new ThirdPartyWinLossViewModel
             {
                 Param = metaModel,
-                CurrencyList = userSession.CurrencyList
+                CurrencyList = userSession.CurrencyList,
+                SubsidiaryList = subsidiaryList,
+                ViewType = viewType
             };
 
             return View("~/Views/Desktop/Report/ColossusBetsWinLoss/Main.cshtml", model);

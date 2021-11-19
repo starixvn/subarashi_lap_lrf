@@ -9,10 +9,14 @@ namespace Fanex.Athena.Service.StatelessCore.Utility
 {
     public static class AuthParameterHelper
     {
-        public static string GenerateAgentListXml(IDictionary<int, int[]> currencyAgentList,
-            int currencyId = 0, bool isExcludeTestData = false)
+        public static string GenerateAgentListXml(IDictionary<int, int[]> currencyAgentList, int currencyId = 0, bool isExcludeTestData = false)
         {
             return GenerateAgentListXml(currencyAgentList, new[] { currencyId < 0 ? 0 : currencyId }, isExcludeTestData);
+        }
+
+        public static string GenerateAgentListXml(IDictionary<int, int[]> currencyAgentList, string currencyIdList, bool isExcludeTestData = false)
+        {
+            return GenerateAgentListXml(currencyAgentList, ParseCurrencyIdList(currencyIdList), isExcludeTestData);
         }
 
         public static string GenerateAgentListXml(IDictionary<int, int[]> currencyAgentList,

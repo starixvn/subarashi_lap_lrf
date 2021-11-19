@@ -10,7 +10,6 @@
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.DTO.Users;
     using Fanex.Athena.Resources;
-    using Fanex.Athena.Service.StatelessCore.Utility;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Configuration;
     using Model.Report.DTO;
@@ -33,7 +32,10 @@
             _subLicenseeDataAccess = subsidiaryDataAccess;
         }
 
-        public IDictionary<int, int[]> GetAgentList(string siteName, IDictionary<int, int[]> agentList, string subsidiaryList)
+        public bool IsIgnoredSubsidiarySearch(bool subsidiarySearch, string subsidiaryList, byte subsidiaryViewType)
+           => subsidiaryViewType == (byte)SubsidiaryViewType.NotManagement || !subsidiarySearch || string.IsNullOrWhiteSpace(subsidiaryList);
+
+        public IDictionary<int, int[]> GetCurrencyAgentList(string siteName, IDictionary<int, int[]> agentList, string subsidiaryList)
         {
             var needSubsidiaryList = subsidiaryList.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
             var userSubsidiaryAgents = GetUserSubsidiaries(agentList, siteName);
@@ -41,14 +43,6 @@
                 .Where(_ => needSubsidiaryList.Contains(_.OperatorId, StringComparer.OrdinalIgnoreCase))
                 .GroupBy(_ => _.CurrencyId, (key, group) => new KeyValuePair<int, int[]>(key, group.Select(_ => _.AgentId).ToArray()))
                 .ToDictionary(_ => _.Key, _ => _.Value);
-        }
-
-        public string GenerateAgentList(UserAuthInfo user, string licenseeName, string subsidiaryList, string currencyIdList = default)
-        {
-            var agentIdListBySubsidiary = GetCurrencyAgentList(user, licenseeName, subsidiaryList);
-            var agentIdList = FilterAgentIdList(agentIdListBySubsidiary, currencyIdList);
-            var agentListXml = AuthParameterHelper.GenerateAgentListXml(user.CurrencyList, agentIdList);
-            return agentListXml;
         }
 
         public IDictionary<int, IEnumerable<int>> GetCurrencyAgentList(UserAuthInfo user, string licenseeName,
@@ -183,22 +177,6 @@
             var subsidiaryList = _cache.Get(cacheKey, () => _subLicenseeDataAccess.GetSubsidiaryList(licenseeName), CacheTimeoutSeconds);
             var userAgentList = currencyAgentList.SelectMany(i => i.Value);
             return subsidiaryList.Where(i => userAgentList.Contains(i.AgentId));
-        }
-
-        private static IDictionary<int, IEnumerable<int>> FilterAgentIdList(IDictionary<int, IEnumerable<int>> agentList, string currencyIdListString)
-        {
-            if (string.IsNullOrEmpty(currencyIdListString))
-            {
-                return new Dictionary<int, IEnumerable<int>>();
-            }
-
-            var currencyIdList = AuthParameterHelper.ParseCurrencyIdList(currencyIdListString);
-
-            var agentListFiltered = agentList
-               .Where(_ => currencyIdList.Any(__ => __ == _.Key))
-               .ToDictionary(_ => _.Key, _ => _.Value);
-
-            return agentListFiltered;
         }
     }
 }

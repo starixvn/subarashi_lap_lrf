@@ -12,7 +12,7 @@
     using Excel.Report;
 
     using Extension.Utility;
-
+    using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.Core.Utility.Interfaces;
 
     using Model.Core.ResultModel;
@@ -35,6 +35,7 @@
         private ICashOutWinLossDataAccess _dataAccess;
         private CashOutWinLossReportController _controller;
         private ICurrencyValidation _currencyValidation;
+        private ISubsidiaryService _subsidiaryService;
 
         [SetUp]
         public void Setup()
@@ -42,6 +43,9 @@
             MockSessionData();
             _dataAccess = Substitute.For<ICashOutWinLossDataAccess>();
             _currencyValidation = Substitute.For<ICurrencyValidation>();
+            _subsidiaryService = Substitute.For<ISubsidiaryService>();
+
+            _subsidiaryService.IsIgnoredSubsidiarySearch(Arg.Any<bool>(), Arg.Any<string>(), Arg.Any<byte>()).Returns(true);
             _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
             CreateController();
         }
@@ -49,7 +53,7 @@
         private void CreateController()
         {
             _controller = Substitute.ForPartsOf<CashOutWinLossReportController>(_dataAccess,
-                            LangService, _currencyValidation);
+                            LangService, _currencyValidation, _subsidiaryService);
             _controller.SessionService = SessionService;
             _controller.ProductService = ProductService;
         }

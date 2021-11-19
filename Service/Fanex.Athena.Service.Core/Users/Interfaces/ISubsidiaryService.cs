@@ -8,13 +8,13 @@
 
     public interface ISubsidiaryService
     {
+        bool IsIgnoredSubsidiarySearch(bool subsidiarySearch, string subsidiaryList, byte subsidiaryViewType);
+
         IEnumerable<CheckedItem> GetSubsidiaryTree(UserAuthInfo user, string licenseeName);
 
         IDictionary<int, IEnumerable<int>> GetCurrencyAgentList(UserAuthInfo user, string licenseeName, string subsidiaryNames, bool isExcludeTest = false, int currencyId = 0);
 
-        string GenerateAgentList(UserAuthInfo user, string licenseeName, string subsidiaryList, string currencyIdList = default);
-
-        IDictionary<int, int[]> GetAgentList(string siteName, IDictionary<int, int[]> agentList, string subsidiaryList);
+        IDictionary<int, int[]> GetCurrencyAgentList(string siteName, IDictionary<int, int[]> agentList, string subsidiaryList);
 
         IEnumerable<Subsidiary> GetSubsidiaryList(UserAuthInfo user, string licenseeName, string subsidiaryList);
 

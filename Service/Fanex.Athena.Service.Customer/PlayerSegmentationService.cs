@@ -14,6 +14,7 @@
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.Customer.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Newtonsoft.Json;
 
     public class PlayerSegmentationService : IPlayerSegmentationService
@@ -38,7 +39,6 @@
 
         public async Task<ApiPagingResult<PlayerInfo>> GetProblemPlayerListAsync(ProblemPlayerListMetaModel metaModel)
         {
-            BindAgentListBySubsidiaryBiz(metaModel);
             var result = await _playerDataAccess.GetProblemPlayerListAsync(metaModel);
             BindSubsidiaryName(result.Data, metaModel.SubsidiaryList);
 
@@ -47,7 +47,6 @@
 
         public async Task<ApiPagingResult<PlayerInfo>> GetVipPlayerListAsync(VipPlayerListMetaModel metaModel)
         {
-            BindAgentListBySubsidiaryBiz(metaModel);
             var result = await _playerDataAccess.GetVipPlayerListAsync(metaModel);
             BindSubsidiaryName(result.Data, metaModel.SubsidiaryList);
 
@@ -66,27 +65,6 @@
             return result;
         }
 
-        public PlayerSegmentationViewType GetViewType(bool anySubsidiary)
-        {
-            var user = _contextService.User;
-            var subsidiaryViewType = _contextService.SubsidiaryViewType;
-
-            if (user.UserLevel == UserLevelType.Subsidiary
-                || subsidiaryViewType == (byte)SubsidiaryViewType.NotManagement
-                || !anySubsidiary)
-            {
-                return PlayerSegmentationViewType.Normal;
-            }
-
-            if (subsidiaryViewType == (byte)SubsidiaryViewType.NormalManagement
-                || user.WhiteLabelID.HasValue)
-            {
-                return PlayerSegmentationViewType.Susidiary;
-            }
-
-            return PlayerSegmentationViewType.WhiteLabel;
-        }
-
         public Task<IEnumerable<string>> GetProblemAccCustomerClass() 
             => _playerDataAccess.GetProblemAccountCustomerClass();
 
@@ -99,20 +77,6 @@
                 .Select(_ => _.CustomerClass.ToString())
                 );
             return result.Distinct();
-        }
-
-        private void BindAgentListBySubsidiaryBiz(BasePlayerListMetaModel metaModel)
-        {
-            if (IsNormalView(metaModel))
-            {
-                return;
-            }
-
-            metaModel.AgentListXml = _subsidiaryService.GenerateAgentList(
-                _contextService.User,
-                _contextService.LicenseeName,
-                metaModel.SubsidiaryList,
-                metaModel.CurrencyIdList);
         }
 
         private void BindSubsidiaryName(IEnumerable<PlayerInfo> players, string subsidiaryList)
@@ -136,8 +100,6 @@
         }
 
         public bool IsNormalView(BasePlayerListMetaModel metaModel) =>
-            _contextService.UserLevel == UserLevelType.Subsidiary
-            || _contextService.SubsidiaryViewType == (byte)SubsidiaryViewType.NotManagement
-            || string.IsNullOrEmpty(metaModel.SubsidiaryList);
+            _subsidiaryService.IsIgnoredSubsidiarySearch(metaModel.SubsidiarySearch, metaModel.SubsidiaryList, _contextService.SubsidiaryViewType);
     }
 }

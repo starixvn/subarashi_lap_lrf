@@ -8,10 +8,11 @@
     'helpers/daterange',
     'moment',
     'common/popup',
+    'helpers/subsidiaryhelper',
     'lib/jqgrid/jquery.jqGrid.en',
     'lib/jqgrid/jquery.jqGrid.min',
     'extensions/jquery.extension'],
-    function ($, QueryString, Site, Report, jqGridAdditional, DatePicker, DateHelper, moment, Popup) {
+    function ($, QueryString, Site, Report, jqGridAdditional, DatePicker, DateHelper, moment, Popup, SubsidiaryHelper) {
         'use strict';
         const defaultOption = {
             UserGuideResourceName: '',
@@ -73,12 +74,19 @@
         }
 
         function initEvent() {
+            SubsidiaryHelper.initSubsidiaryOption(function (isViewOnSubsidiary) {
+                const checkedItems = $('#subsidiary-multiselect').multiSelect('getCheckedItems');
+                const isNotValid = (isViewOnSubsidiary && !checkedItems.length) || false;
+                $('#SubmitButton').prop('disabled', isNotValid);
+            });
+            
             $(_selector.SubmitButton).click(function () {
                 _me.submit();
             });
 
             $(_selector.ExportToExcel).click(function () {
                 $(_selector.ExportExcelInput).val(true);
+                SubsidiaryHelper.bindSubsidiaryData();
                 const mainForm = $(_selector.Form);
                 const url = Site.resolveClientUrl(_urlExcelData);
                 mainForm.attr('action', url);
@@ -139,6 +147,7 @@
                 toDate = moment(drilldownDateRange.ToDate).format('MM/DD/YYYY');
             }
             else {
+                SubsidiaryHelper.bindSubsidiaryData();
                 postdata = $(_selector.Form).serializeObject();
                 currencyId = postdata.CurrencyId;
                 fromDate = postdata.FromDate;

@@ -12,6 +12,7 @@
     using Extension.Utility;
 
     using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.Core.Utility.Interfaces;
     using Fanex.Athena.Service.Report.Interfaces;
 
@@ -31,13 +32,19 @@
         private IColossusBetsWinLossService _service;
         private ColossusBetsWinLossReportController _controller;
         private ICurrencyValidation _currencyValidation;
+        private ISubsidiaryService _subsidiaryService;
+
 
         [SetUp]
         public void SetUp()
         {
             _currencyValidation = Substitute.For<ICurrencyValidation>();
-            _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
             _service = Substitute.For<IColossusBetsWinLossService>();
+            _subsidiaryService = Substitute.For<ISubsidiaryService>();
+
+            _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
+            _subsidiaryService.IsIgnoredSubsidiarySearch(Arg.Any<bool>(), Arg.Any<string>(), Arg.Any<byte>()).Returns(true);
+
             CreateController();
             StubUserSessionData(new UserAuthInfo
             {
@@ -50,7 +57,7 @@
         private void CreateController()
         {
             _controller = Substitute.ForPartsOf<ColossusBetsWinLossReportController>(_service,
-                            LangService, _currencyValidation);
+                            LangService, _currencyValidation, _subsidiaryService);
             _controller.SessionService = SessionService;
             _controller.ProductService = ProductService;
 

@@ -2,6 +2,7 @@
 @model Fanex.Athena.Model.Report.ViewModel.CashOutWinLossViewModel
 @{
     var appSettings = new AppSettings();
+    var showSubsidiarySearch = Model.ViewType != SubsidiaryViewType.NotManagement;
 }
 
 <div class="page-form">
@@ -9,7 +10,16 @@
         @Html.AntiForgeryToken()
 
         <div class="row">
-            <div class="input-field input col l3 m3 s12 calendar date-range">
+            @if (showSubsidiarySearch)
+            {
+                <div class="col l2 m2 s12 input-field hide" id="subsidiary-view">
+                    <div class="multiselect-container">
+                        <select id="subsidiary-multiselect" name="subsidiary-multiselect"></select>
+                    </div>
+                    <label>@(Model.ViewType == SubsidiaryViewType.MasterManagement ? ViewResources.WhiteLabel : ViewResources.Subsidiary)</label>
+                </div>
+            }
+            <div class="input-field input col l2 m2 s12 calendar date-range">
                 @DesktopRazorHelper.DateRangePicker(Model.Param.FromDate, Model.Param.ToDate, appSettings.HistoryDate, DateTime.Today)
             </div>
 
@@ -17,7 +27,7 @@
                 @DesktopRazorHelper.CurrencyList(Model.CurrencyList, "select", Model.Param.CurrencyId, true, true)
                 <label>@ViewResources.Currency</label>
             </div>
-            <div class="input-field input col l2 m3 s12">
+            <div class="input-field input col l2 m2 s12">
                 <input type="radio" class="with-gap" value="1" @(Model.Param.ReportBy == ReportByType.Daily ? "checked=checked" : "") name="ReportBy" id="reportbydaily" />
                 <label for="reportbydaily">
                     @ViewResources.Daily
@@ -42,19 +52,41 @@
 
                 <label class="active">@ViewResources.ExcludeTestData</label>
             </div>
-
-            <div class="col l2 m2 s12 button-block">
-                <button type="button" id="SubmitButton" class="btn btn-primary">@ViewResources.Submit</button>
-            </div>
-
+            @if (!showSubsidiarySearch)
+            {
+                <div class="col l2 m2 s12 button-block">
+                    <button type="button" id="SubmitButton" class="btn btn-primary">@ViewResources.Submit</button>
+                </div>
+            }
             <div class="col right icon-block">
                 <i class="icon-book right" id="UserGuide" title="@ViewResources.UserGuide"></i>
                 <i class="icon-excel right" title="@ViewResources.ExportToExcel" id="ExportToExcel"></i>
             </div>
         </div>
+        @if (showSubsidiarySearch)
+        {
+            <div class="row">
+                <div class="col l2 m2 s12 button-block">
+                    <button type="button" id="SubmitButton" class="btn btn-primary">@ViewResources.Submit</button>
+                </div>
+                <div class="col l2 m2 s12 input-field">
+                    <input id="IsViewOnSubsidiary" type="checkbox" />
+                    <label for="IsViewOnSubsidiary">@ViewResources.SubsidiarySearch</label>
+                </div>
+            </div>
+        }
 
         @Html.Hidden("IsExportExcel", Model.Param.IsExportExcel)
+        @if (showSubsidiarySearch)
+        {
+            @Html.Hidden("SubsidiarySearch", false)
+            @Html.Hidden("SubsidiaryList", string.Empty)
+        }
     </form>
 
+    @if (showSubsidiarySearch)
+    {
+        @Html.Hidden("SubsidiaryListData", Model.SubsidiaryList.ToJson())
+    }
     <input type="hidden" id="IsLicenseeOfferBA" name="OriginalReportBy" value="@(Model.IsLicenseeOfferBA ? 1 : 0)" />
 </div>

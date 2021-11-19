@@ -2,7 +2,9 @@
 {
     using System.Web.Mvc;
     using Base.UnitTests;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
     using Model.Report.ViewModel;
+    using NSubstitute;
     using NUnit.Framework;
     using Report;
 
@@ -37,7 +39,7 @@
 
         private CashOutWinLossReportController CreateController()
         {
-            return new CashOutWinLossReportController()
+            return new CashOutWinLossReportController(Substitute.For<ISubsidiaryService>())
             {
                 LangService = LangService,
                 SessionServiceInstance = SessionService

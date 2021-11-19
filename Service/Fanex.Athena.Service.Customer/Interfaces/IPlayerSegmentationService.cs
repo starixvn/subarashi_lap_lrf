@@ -19,8 +19,6 @@
 
         bool IsNormalView(BasePlayerListMetaModel metaModel);
 
-        PlayerSegmentationViewType GetViewType(bool anySubsidiary);
-
         Task<IEnumerable<string>> GetProblemAccCustomerClass();
         Task<IEnumerable<string>> GetCustomerClass();
     }

@@ -17,7 +17,7 @@
         [HttpPost]
         [ApiFunctionAuthorization(PermissionKeys.PlayerVIPManagement)]
         [ValidationApiRequest(IsValidCurrencyList = true)]
-        [ApiAutoBindMetaModel(BindAgent = true)]
+        [ApiAutoBindMetaModel(BindAgent = true, ApplySubsidiaryBusiness = true)]
         public async Task<JsonResult<ApiPagingResult<PlayerInfo>>> GetVipPlayerList(VipPlayerListMetaModel metaModel)
         {
             var result = await _playerService.GetVipPlayerListAsync(metaModel).ConfigureAwait(false);
@@ -27,7 +27,7 @@
         [HttpPost]
         [ApiFunctionAuthorization(PermissionKeys.PlayerVIPManagement)]
         [ValidationApiRequest(IsValidCurrencyList = true)]
-        [ApiAutoBindMetaModel(BindAgent = true)]
+        [ApiAutoBindMetaModel(BindAgent = true, ApplySubsidiaryBusiness = true)]
         public async Task<HttpResponseMessage> ExportVipPlayerList(VipPlayerListMetaModel metaModel)
         {
             var isNormalView = _playerService.IsNormalView(metaModel);

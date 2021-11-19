@@ -2,7 +2,7 @@
 import { HeaderRow, HeaderCell } from '@9softstudio/react-grid';
 import AppData from '@jsroot/lib/AppData';
 import { SortMapper } from '../constants';
-import { ViewType } from '../constants';
+import { SubsidiaryViewType } from '@jsroot/constants/report'
 import CustomerClassCell from '../../tabs/problem-player/components/grid/CustomerClassCell';
 
 export default class GridHelper {
@@ -64,5 +64,5 @@ export default class GridHelper {
         setPagingOption(newPagingOption);
     }
 
-    static isShowSubsidiary = subsidiarySearch => AppData.viewType !== ViewType.Normal && subsidiarySearch;
+    static isShowSubsidiary = subsidiarySearch => AppData.viewType !== SubsidiaryViewType.NOT_MANAGEMENT && subsidiarySearch;
 }

@@ -11,8 +11,9 @@
 
     using Extension.Helper;
     using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Model.Core.DataDomain;
     using Model.Core.ResultModel;
     using Model.Report.DTO;
@@ -24,7 +25,6 @@
     public class ExchangeWinLossReportController : ApiReportBaseController
     {
         private readonly IReportSettingService _reportSettingService;
-
         private readonly IExchangeWinLossDataAccess _dataAccess;
 
         public ExchangeWinLossReportController(
@@ -39,11 +39,12 @@
 
         [HttpPost]
         [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
-        [ApiAutoBindMetaModel(BindAgent = true)]
+        [ApiAutoBindMetaModel(BindAgent = true, ApplySubsidiaryBusiness = true)]
         public async Task<dynamic> Index(ExchangeWinLossMetaModel metaModel)
         {
             var userSession = SessionService.UserSession;
             var currencyList = userSession.CurrencyList;
+
             if (IsValidParams(metaModel))
             {
                 metaModel.LicenseeId = SessionService.LicenseeSession.LicenseeId;

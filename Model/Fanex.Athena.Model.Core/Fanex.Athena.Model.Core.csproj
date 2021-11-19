@@ -167,6 +167,7 @@
     <Compile Include="MetaModel\IMetaModelProductCodeList.cs" />
     <Compile Include="MetaModel\IMetalModelValidation.cs" />
     <Compile Include="MetaModel\IMetaModelSiteName.cs" />
+    <Compile Include="MetaModel\IMetaModelSubsidiarySearch.cs" />
     <Compile Include="MetaModel\IMetaModelUserId.cs" />
     <Compile Include="MetaModel\Product\ProductOption.cs" />
     <Compile Include="MetaModel\ProductValidationOption.cs" />

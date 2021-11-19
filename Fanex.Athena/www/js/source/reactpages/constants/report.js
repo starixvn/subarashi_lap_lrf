@@ -14,3 +14,13 @@ export const SubsidiaryViewType = {
     NORMAL_MANAGEMENT: 1,
     MASTER_MANAGEMENT: 2,
 }
+
+export const TreeViewOption = {
+    childrenField: 'Children',
+    keyField: 'Value',
+    valueField: 'Name',
+    statusField: 'Checked',
+    indent: 30,
+    includeSelectedParentKey: false,
+    useOriginalDataSource: false
+}

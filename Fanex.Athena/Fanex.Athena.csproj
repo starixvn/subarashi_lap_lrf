@@ -1748,7 +1748,6 @@
     <Content Include="www\js\source\reactpages\pages\casinoturnover\lib\__tests__\reportExcel.test.js" />
     <Content Include="www\js\source\reactpages\pages\casinoturnover\lib\__tests__\service.test.js" />
     <Content Include="www\js\source\reactpages\pages\casinoturnover\reducers\index.js" />
-    <Content Include="www\js\source\reactpages\pages\customer\player-segmentation\actions\filterAction.js" />
     <Content Include="www\js\source\reactpages\pages\customer\player-segmentation\actions\gridHandlerAction.js" />
     <Content Include="www\js\source\reactpages\pages\customer\player-segmentation\actions\index.js" />
     <Content Include="www\js\source\reactpages\pages\customer\player-segmentation\actions\paramHanlderAction.js" />
@@ -1792,7 +1791,6 @@
     <Content Include="www\js\source\reactpages\pages\customer\player-segmentation\lib\helpers\messageHelper.js" />
     <Content Include="www\js\source\reactpages\pages\customer\player-segmentation\lib\helpers\sweetAlertHelper.js" />
     <Content Include="www\js\source\reactpages\pages\customer\player-segmentation\lib\queryService.js" />
-    <Content Include="www\js\source\reactpages\pages\customer\player-segmentation\reducers\filterReducer.js" />
     <Content Include="www\js\source\reactpages\pages\customer\player-segmentation\reducers\gridHandlerReducer.js" />
     <Content Include="www\js\source\reactpages\pages\customer\player-segmentation\reducers\index.js" />
     <Content Include="www\js\source\reactpages\pages\customer\player-segmentation\reducers\paramHandlerReducer.js" />

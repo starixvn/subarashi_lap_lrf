@@ -170,6 +170,7 @@ namespace Fanex.Athena
                 )).As<ILGAPIClient>().SingleInstance();
 
             builder.RegisterType<PortalApiService>().As<IPortalApiService>().SingleInstance();
+            builder.RegisterType<SubsidiaryService>().As<ISubsidiaryService>().SingleInstance();
         }
     }
 }
