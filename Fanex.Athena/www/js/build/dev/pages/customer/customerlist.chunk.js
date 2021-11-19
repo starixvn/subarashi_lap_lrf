@@ -1271,6 +1271,119 @@ Array.prototype.insertBefore = function (value, before) {
 
 /***/ }),
 
+/***/ "./www/js/source/helpers/subsidiaryhelper.js":
+/*!***************************************************!*\
+  !*** ./www/js/source/helpers/subsidiaryhelper.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
+
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js"), __webpack_require__(/*! lib/jquery.multiselect.nlevel */ "./www/js/source/lib/jquery.multiselect.nlevel.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, Site) {
+    var _me = {
+        initSubsidiaryOption: function (onChange) {
+            const data = $('#SubsidiaryListData').val();
+            if (!data) {
+                return;
+            }
+
+            $('#IsViewOnSubsidiary').on('change', function (e) {
+                const checked = e.target.checked;
+                $('#subsidiary-view').toggleClass('hide', !checked);
+                onChange && onChange(checked);
+            });
+
+            const groupData = _me.getSubsidiaryTree($.parseJSON(data));
+
+            $('#subsidiary-multiselect').multiSelect(
+                {
+                    minWidth: 100,
+                    maxHeight: 400,
+                    shadow: true,
+                    showHeader: true,
+                    isCheckAll: true,
+                    showFooter: false,
+                    checkAllText: Site.getSingleResource('All'),
+                    selectedText: Site.getSingleResource('SelectedItemCount'),
+                    noneSelectedText: Site.getSingleResource('SelectOptions'),
+                    tooltipNoItem: Site.getSingleResource('ThereIsNoSelectedItem'),
+                    listData: groupData,
+                    onCheck: function () {
+                        onChange && onChange(true);
+                    }
+                });
+        },
+        
+        bindSubsidiaryData: function() {
+            const subsidiarySearch = $('#IsViewOnSubsidiary').is(':checked');
+            let subsidiaryList = '';
+            if (subsidiarySearch && $('#subsidiary-multiselect').length > 0) {
+                const subsidiaryCheckedItems = $('#subsidiary-multiselect').multiSelect('getCheckedItems');
+
+                if (!subsidiaryCheckedItems.length) {
+                    return null;
+                }
+
+                subsidiaryList = subsidiaryCheckedItems.join();
+            }
+            $('#SubsidiarySearch').val(subsidiarySearch);
+            $('#SubsidiaryList').val(subsidiarySearch ? subsidiaryList : '');
+        },
+
+        getSubsidiaryTree: function (data) {
+            let tree = [];
+        
+            const total = data.length;
+            if (!total) {
+                return tree;
+            }
+        
+            const createItem = function (item, id) {
+                return {
+                    Id: id,
+                    Value: item.Value,
+                    Text: item.Name,
+                    Checked: true,
+                    Enable: true
+                }
+            }
+        
+            const getSubTree = function (subData, id) {
+                let subTree = createItem(subData, id);
+        
+                if (subData.Children) {
+                    const totalChild = subData.Children.length;
+        
+                    let items = [];
+        
+                    for (let c = 0; c < totalChild; c++) {
+                        const child = subData.Children[c];
+                        items.push(getSubTree(child, id + '-' + child.Value));
+                    }
+        
+                    subTree.Items = items;
+                }
+        
+                return subTree;
+            }
+        
+            for (let i = 0; i < total; i++) {
+                const subTree = data[i];
+                tree.push(getSubTree(subTree, subTree.Value));
+            }
+        
+            return tree;
+        }
+    };
+
+    return _me;
+}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+/***/ }),
+
 /***/ "./www/js/source/lib/bignumber.js":
 /*!****************************************!*\
   !*** ./www/js/source/lib/bignumber.js ***!
@@ -5650,7 +5763,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/* This colum
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js"), __webpack_require__(/*! ./customerlist.state */ "./www/js/source/pages/customer/customerlist/customerlist.state.js"), __webpack_require__(/*! ./customerlist.service */ "./www/js/source/pages/customer/customerlist/customerlist.service.js"), __webpack_require__(/*! ./customerlist.service.dormant */ "./www/js/source/pages/customer/customerlist/customerlist.service.dormant.js"),
-    __webpack_require__(/*! components/pluginhelper/autocomplete */ "./www/js/source/components/pluginhelper/autocomplete.js"), __webpack_require__(/*! lib/jquery.multiselect.nlevel */ "./www/js/source/lib/jquery.multiselect.nlevel.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, Site, CustomerListState, CustomerListService, CustomerListServiceDormant, AutoComplete) {
+    __webpack_require__(/*! components/pluginhelper/autocomplete */ "./www/js/source/components/pluginhelper/autocomplete.js"), __webpack_require__(/*! helpers/subsidiaryhelper */ "./www/js/source/helpers/subsidiaryhelper.js"), __webpack_require__(/*! lib/jquery.multiselect.nlevel */ "./www/js/source/lib/jquery.multiselect.nlevel.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, Site, CustomerListState, CustomerListService, CustomerListServiceDormant, AutoComplete, SubsidiaryHelper) {
         let _state;
         let _dormantState;
 
@@ -5828,7 +5941,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                     enableSubmitButton(checked);
                 });
 
-                const groupData = CustomerListService.getSubsidiaryTree($.parseJSON(data));
+                const groupData = SubsidiaryHelper.getSubsidiaryTree($.parseJSON(data));
 
                 $('#subsidiary-multiselect').multiSelect(
                     {
@@ -6967,51 +7080,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 
             closePopup: function (popUpSelector) {
                 $(popUpSelector).fadeOut();
-            },
-
-            getSubsidiaryTree: function (data) {
-                let tree = [];
-
-                const total = data.length;
-                if (!total) {
-                    return tree;
-                }
-
-                const createItem = function (item, id) {
-                    return {
-                        Id: id,
-                        Value: item.Value,
-                        Text: item.Name,
-                        Checked: true,
-                        Enable: true
-                    }
-                }
-
-                const getSubTree = function (subData, id) {
-                    let subTree = createItem(subData, id);
-
-                    if (subData.Children) {
-                        const totalChild = subData.Children.length;
-
-                        let items = [];
-
-                        for (let c = 0; c < totalChild; c++) {
-                            const child = subData.Children[c];
-                            items.push(getSubTree(child, id + '-' + child.Value));
-                        }
-
-                        subTree.Items = items;
-                    }
-
-                    return subTree;
-                }
-
-                for (let i = 0; i < total; i++) {
-                    const subTree = data[i];
-                    tree.push(getSubTree(subTree, subTree.Value));
-                }
-
-                return tree;
             }
         };
 
