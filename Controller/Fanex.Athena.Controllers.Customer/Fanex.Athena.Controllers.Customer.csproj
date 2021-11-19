@@ -134,7 +134,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomerClassController.cs" />
-    <Compile Include="CustomerDependencyInjection.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Helpers\CustomerComGroupHelper.cs" />
     <Compile Include="PlayerSegmentation\PlayerSegmentation.BetList.Controller.cs" />

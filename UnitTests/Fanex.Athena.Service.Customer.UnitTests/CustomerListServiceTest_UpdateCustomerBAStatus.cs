@@ -26,13 +26,10 @@
 
             // Action
             var result = _customerListService.UpdateCustomerBAStatus(licenseeId,
-                "",
                 custId,
                 modifiedBy,
-                null,
                 allowBA,
-                request
-                );
+                request);
 
             // Assert
             Assert.That(result, Is.EqualTo(expectedResult));

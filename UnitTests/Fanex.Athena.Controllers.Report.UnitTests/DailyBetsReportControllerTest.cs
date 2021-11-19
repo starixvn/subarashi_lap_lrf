@@ -19,7 +19,7 @@
 
     public class DailyBetsReportControllerTest : CultureBaseControllerHelperTest
     {
-        private const int DefaultLimitedMonthRange = 3;
+        private const int DefaultLimitedMonthRange = 6;
 
         private IReportAPIClient _reportAPIClient;
 
@@ -83,7 +83,7 @@
                 var licenseeSetting = new FakeLicenseeSetting { TimeZone = 1, LimitRecentMonths = 1 };
                 _licenseeSettingService.GetFakeLicenseeSetting(DefaultLicenseeSession.LicenseeName).Returns(licenseeSetting);
                 var expectedTodatGtm8 = DateTime.UtcNow.AddHours(licenseeSetting.TimeZone.Value);
-                var expectedMinDate = expectedTodatGtm8.AddMonths(-licenseeSetting.LimitRecentMonths + 1);
+                var expectedMinDate = expectedTodatGtm8.AddMonths(-licenseeSetting.LimitRecentMonths);
 
                 // Action
                 var result = (controller.Index() as ViewResult).Model as DailyBetsViewModel;
@@ -106,7 +106,7 @@
                 FakeLicenseeSetting licenseeSetting = null;
                 _licenseeSettingService.GetFakeLicenseeSetting(DefaultLicenseeSession.LicenseeName).Returns(licenseeSetting);
                 var expectedTodatGtm8 = DateTime.Now;
-                var expectedMinDate = expectedTodatGtm8.AddMonths(-DefaultLimitedMonthRange + 1);
+                var expectedMinDate = expectedTodatGtm8.AddMonths(-DefaultLimitedMonthRange);
 
                 // Action
                 var result = (controller.Index() as ViewResult).Model as DailyBetsViewModel;
@@ -129,7 +129,7 @@
                 var licenseeSetting = new FakeLicenseeSetting() { LimitRecentMonths = 1 };
                 _licenseeSettingService.GetFakeLicenseeSetting(DefaultLicenseeSession.LicenseeName).Returns(licenseeSetting);
                 var expectedTodatGtm8 = DateTime.Now;
-                var expectedMinDate = expectedTodatGtm8.AddMonths(-licenseeSetting.LimitRecentMonths + 1);
+                var expectedMinDate = expectedTodatGtm8.AddMonths(-licenseeSetting.LimitRecentMonths);
 
                 // Action
                 var result = (controller.Index() as ViewResult).Model as DailyBetsViewModel;

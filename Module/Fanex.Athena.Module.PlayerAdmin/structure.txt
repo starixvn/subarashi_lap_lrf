@@ -1,7 +1,0 @@
-﻿Each module contain all its layer (controller,service,data...vv.
-Controller: (contain both get/post (api) action for LRF single page
-Service :(if having business logic
-Data/Repository : //if needed
-DTO :Data transfer object , only contains property 
-ViewModel : base on MVVM => VM is data of UIView
-Api : only for external api (cross request from LAP container

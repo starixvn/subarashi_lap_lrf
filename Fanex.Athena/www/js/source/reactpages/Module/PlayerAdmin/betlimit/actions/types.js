@@ -1,2 +1,0 @@
-﻿export const SET_ALERT_OPTION = "SET_ALERT_OPTION";
-export const SET_PRODUCT_LABEL = "SET_PRODUCT_LABEL";

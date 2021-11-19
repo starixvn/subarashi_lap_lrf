@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.1000
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service", "Service", "{195AD258-DE51-497C-BA3B-1645AE32CAB6}"
 EndProject
@@ -181,15 +181,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Module", "Module", "{4F0025
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Module", "Module", "{1F82F1FE-8794-4B76-AC02-E6BD6741729E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Module.PlayerAdmin", "Module\Fanex.Athena.Module.PlayerAdmin\Fanex.Athena.Module.PlayerAdmin.csproj", "{19150CD4-08FC-4BEC-800A-57ABD7744C41}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Module.PlayerAdmin.Api", "Module\Fanex.Athena.Module.PlayerAdmin.Api\Fanex.Athena.Module.PlayerAdmin.Api.csproj", "{831FFA8D-8F5E-4ABD-AC6A-5660B71B1795}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.ServiceStatelessCore.UnitTests", "UnitTests\Fanex.Athena.ServiceStatelessCore.UnitTests\Fanex.Athena.ServiceStatelessCore.UnitTests.csproj", "{C929C398-8094-44E6-AEB1-63BDBD58F973}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Model.Auth", "Model\Fanex.Athena.Model.Auth\Fanex.Athena.Model.Auth.csproj", "{794C0345-2DDD-4FFD-A605-BB96FBB37DE8}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Module.PlayerAdmin.Api.UnitTests", "UnitTests\Fanex.Athena.Module.PlayerAdmin.Api.UnitTests\Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.csproj", "{FAB9270F-18C7-4B35-BEC0-EF0C24FAD514}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Api.StatelessBase", "ControllerAPI\Fanex.Athena.Api.StatelessBase\Fanex.Athena.Api.StatelessBase.csproj", "{0054161C-59B0-4CB6-AC5F-4E0F0D0294EC}"
 EndProject
@@ -210,8 +204,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Module.Notification.Report.UnitTests", "UnitTests\Fanex.Athena.Module.Notification.Report.UnitTests\Fanex.Athena.Module.Notification.Report.UnitTests.csproj", "{DD3D17B1-FA6B-4D4D-8BFB-B4FB0A2E47A9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Module.Notification.Api.UnitTests", "UnitTests\Fanex.Athena.Module.Notification.Api.UnitTests\Fanex.Athena.Module.Notification.Api.UnitTests.csproj", "{2B0DADD9-DEC1-4352-9246-1FEA2123D852}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Module.PlayerAdmin.UnitTests", "UnitTests\Fanex.Athena.Module.PlayerAdmin.UnitTests\Fanex.Athena.Module.PlayerAdmin.UnitTests.csproj", "{AFEA4703-4D47-40F5-B3D6-66CABC57CC62}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Api.Customer", "ControllerAPI\Fanex.Athena.Api.Customer\Fanex.Athena.Api.Customer.csproj", "{D51C20F8-9F28-47EB-AEA2-0BCFED2CFF26}"
 EndProject
@@ -1067,30 +1059,6 @@ Global
 		{A8D8F72E-D53F-4E02-A698-682D40D1F8A8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{A8D8F72E-D53F-4E02-A698-682D40D1F8A8}.Release|x86.ActiveCfg = Release|Any CPU
 		{A8D8F72E-D53F-4E02-A698-682D40D1F8A8}.Release|x86.Build.0 = Release|Any CPU
-		{19150CD4-08FC-4BEC-800A-57ABD7744C41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{19150CD4-08FC-4BEC-800A-57ABD7744C41}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{19150CD4-08FC-4BEC-800A-57ABD7744C41}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{19150CD4-08FC-4BEC-800A-57ABD7744C41}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{19150CD4-08FC-4BEC-800A-57ABD7744C41}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{19150CD4-08FC-4BEC-800A-57ABD7744C41}.Debug|x86.Build.0 = Debug|Any CPU
-		{19150CD4-08FC-4BEC-800A-57ABD7744C41}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{19150CD4-08FC-4BEC-800A-57ABD7744C41}.Release|Any CPU.Build.0 = Release|Any CPU
-		{19150CD4-08FC-4BEC-800A-57ABD7744C41}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{19150CD4-08FC-4BEC-800A-57ABD7744C41}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{19150CD4-08FC-4BEC-800A-57ABD7744C41}.Release|x86.ActiveCfg = Release|Any CPU
-		{19150CD4-08FC-4BEC-800A-57ABD7744C41}.Release|x86.Build.0 = Release|Any CPU
-		{831FFA8D-8F5E-4ABD-AC6A-5660B71B1795}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{831FFA8D-8F5E-4ABD-AC6A-5660B71B1795}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{831FFA8D-8F5E-4ABD-AC6A-5660B71B1795}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{831FFA8D-8F5E-4ABD-AC6A-5660B71B1795}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{831FFA8D-8F5E-4ABD-AC6A-5660B71B1795}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{831FFA8D-8F5E-4ABD-AC6A-5660B71B1795}.Debug|x86.Build.0 = Debug|Any CPU
-		{831FFA8D-8F5E-4ABD-AC6A-5660B71B1795}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{831FFA8D-8F5E-4ABD-AC6A-5660B71B1795}.Release|Any CPU.Build.0 = Release|Any CPU
-		{831FFA8D-8F5E-4ABD-AC6A-5660B71B1795}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{831FFA8D-8F5E-4ABD-AC6A-5660B71B1795}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{831FFA8D-8F5E-4ABD-AC6A-5660B71B1795}.Release|x86.ActiveCfg = Release|Any CPU
-		{831FFA8D-8F5E-4ABD-AC6A-5660B71B1795}.Release|x86.Build.0 = Release|Any CPU
 		{C929C398-8094-44E6-AEB1-63BDBD58F973}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C929C398-8094-44E6-AEB1-63BDBD58F973}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C929C398-8094-44E6-AEB1-63BDBD58F973}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -1115,18 +1083,6 @@ Global
 		{794C0345-2DDD-4FFD-A605-BB96FBB37DE8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{794C0345-2DDD-4FFD-A605-BB96FBB37DE8}.Release|x86.ActiveCfg = Release|Any CPU
 		{794C0345-2DDD-4FFD-A605-BB96FBB37DE8}.Release|x86.Build.0 = Release|Any CPU
-		{FAB9270F-18C7-4B35-BEC0-EF0C24FAD514}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FAB9270F-18C7-4B35-BEC0-EF0C24FAD514}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FAB9270F-18C7-4B35-BEC0-EF0C24FAD514}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{FAB9270F-18C7-4B35-BEC0-EF0C24FAD514}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{FAB9270F-18C7-4B35-BEC0-EF0C24FAD514}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{FAB9270F-18C7-4B35-BEC0-EF0C24FAD514}.Debug|x86.Build.0 = Debug|Any CPU
-		{FAB9270F-18C7-4B35-BEC0-EF0C24FAD514}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FAB9270F-18C7-4B35-BEC0-EF0C24FAD514}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FAB9270F-18C7-4B35-BEC0-EF0C24FAD514}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{FAB9270F-18C7-4B35-BEC0-EF0C24FAD514}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{FAB9270F-18C7-4B35-BEC0-EF0C24FAD514}.Release|x86.ActiveCfg = Release|Any CPU
-		{FAB9270F-18C7-4B35-BEC0-EF0C24FAD514}.Release|x86.Build.0 = Release|Any CPU
 		{0054161C-59B0-4CB6-AC5F-4E0F0D0294EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0054161C-59B0-4CB6-AC5F-4E0F0D0294EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0054161C-59B0-4CB6-AC5F-4E0F0D0294EC}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -1223,18 +1179,6 @@ Global
 		{2B0DADD9-DEC1-4352-9246-1FEA2123D852}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{2B0DADD9-DEC1-4352-9246-1FEA2123D852}.Release|x86.ActiveCfg = Release|Any CPU
 		{2B0DADD9-DEC1-4352-9246-1FEA2123D852}.Release|x86.Build.0 = Release|Any CPU
-		{AFEA4703-4D47-40F5-B3D6-66CABC57CC62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AFEA4703-4D47-40F5-B3D6-66CABC57CC62}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AFEA4703-4D47-40F5-B3D6-66CABC57CC62}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{AFEA4703-4D47-40F5-B3D6-66CABC57CC62}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{AFEA4703-4D47-40F5-B3D6-66CABC57CC62}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{AFEA4703-4D47-40F5-B3D6-66CABC57CC62}.Debug|x86.Build.0 = Debug|Any CPU
-		{AFEA4703-4D47-40F5-B3D6-66CABC57CC62}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AFEA4703-4D47-40F5-B3D6-66CABC57CC62}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AFEA4703-4D47-40F5-B3D6-66CABC57CC62}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{AFEA4703-4D47-40F5-B3D6-66CABC57CC62}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{AFEA4703-4D47-40F5-B3D6-66CABC57CC62}.Release|x86.ActiveCfg = Release|Any CPU
-		{AFEA4703-4D47-40F5-B3D6-66CABC57CC62}.Release|x86.Build.0 = Release|Any CPU
 		{D51C20F8-9F28-47EB-AEA2-0BCFED2CFF26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D51C20F8-9F28-47EB-AEA2-0BCFED2CFF26}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D51C20F8-9F28-47EB-AEA2-0BCFED2CFF26}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -1329,11 +1273,8 @@ Global
 		{CEA2BA6E-D525-48CC-B55E-CD6C1CC3D501} = {8124F11D-CD42-4473-AE75-80290172BE0A}
 		{A8D8F72E-D53F-4E02-A698-682D40D1F8A8} = {62FD2471-9E6A-4BD1-9AB3-8C4C6FF658A1}
 		{1F82F1FE-8794-4B76-AC02-E6BD6741729E} = {6AD8D3FB-0047-432F-ACAC-D67093176088}
-		{19150CD4-08FC-4BEC-800A-57ABD7744C41} = {4F0025D0-B5BA-46E4-B615-B8C6B0F5D064}
-		{831FFA8D-8F5E-4ABD-AC6A-5660B71B1795} = {4F0025D0-B5BA-46E4-B615-B8C6B0F5D064}
 		{C929C398-8094-44E6-AEB1-63BDBD58F973} = {8A922757-8C4B-44C0-9D3E-9B68E6AE956B}
 		{794C0345-2DDD-4FFD-A605-BB96FBB37DE8} = {FF903E7B-A043-4B69-B750-4830F0E5C58A}
-		{FAB9270F-18C7-4B35-BEC0-EF0C24FAD514} = {1F82F1FE-8794-4B76-AC02-E6BD6741729E}
 		{0054161C-59B0-4CB6-AC5F-4E0F0D0294EC} = {4D6B663E-04A8-4993-B33F-A445428FA349}
 		{B4CC52C8-F566-4DD4-BA89-A9D46439D2DC} = {8124F11D-CD42-4473-AE75-80290172BE0A}
 		{0110A9BD-5EE9-4222-9503-58BF070C3377} = {7D298C72-FD04-4040-93F0-27ECF8B83B9C}
@@ -1344,12 +1285,11 @@ Global
 		{16485610-BB8E-4CE8-944F-7F8DA1C83585} = {95F7F062-4360-46BD-94DA-D47BF794C07A}
 		{DD3D17B1-FA6B-4D4D-8BFB-B4FB0A2E47A9} = {95F7F062-4360-46BD-94DA-D47BF794C07A}
 		{2B0DADD9-DEC1-4352-9246-1FEA2123D852} = {95F7F062-4360-46BD-94DA-D47BF794C07A}
-		{AFEA4703-4D47-40F5-B3D6-66CABC57CC62} = {1F82F1FE-8794-4B76-AC02-E6BD6741729E}
 		{D51C20F8-9F28-47EB-AEA2-0BCFED2CFF26} = {4D6B663E-04A8-4993-B33F-A445428FA349}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {AF850210-126B-4E21-BADB-F5C02AD2CCEE}
-		RESX_ShowErrorsInErrorList = False
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35;packages\Unity.Interception.2.1.505.0\lib\NET35
+		RESX_ShowErrorsInErrorList = False
+		SolutionGuid = {AF850210-126B-4E21-BADB-F5C02AD2CCEE}
 	EndGlobalSection
 EndGlobal

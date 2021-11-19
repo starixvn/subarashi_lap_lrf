@@ -32,8 +32,7 @@ namespace Fanex.Athena.Service.Customer.Interfaces
 
         Task<IResultInfo> UpdateCustSuspendAsync(CustomerStatusMetaModel metaModel, string languageCode);
 
-        IResultInfo UpdateCustomerBAStatus(
-            int licenseeId, string siteName, int custId, int modifiedBy, string vendorId, bool allowBA, Request request);
+        IResultInfo UpdateCustomerBAStatus(int licenseeId, int custId, int modifiedBy, bool allowBA, Request request);
 
         IResultInfo UpdateSpecialLevel(int userId, int custId, int level, string ip, string language);
     }

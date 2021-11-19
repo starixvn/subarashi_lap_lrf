@@ -60,11 +60,8 @@ var cssPaths = {
     customerpendingfunds: ["./www/css/source/pages/report/customerpendingfunds.scss"],
     customerturnover: ["./www/css/source/pages/report/customerturnover.scss"],
     customerwinloss: ["./www/css/source/pages/report/customerwinloss.scss"],
-    playercomission: ["./www/css/source/pages/playercommission/index.scss"],
     customerClass: ["./www/css/source/pages/customer/customer-class.scss"],
-    fixedColumnsTable: ["./www/css/source/components/bootstrap-table/bootstrap-table.scss", "./www/css/source/components/bootstrap-table/bootstrap-table-fixed-columns.scss"], 
-
-    playerBatchUpdate: ["./www/css/source/pages/playerBatchUpdate/index.scss"]
+    fixedColumnsTable: ["./www/css/source/components/bootstrap-table/bootstrap-table.scss", "./www/css/source/components/bootstrap-table/bootstrap-table-fixed-columns.scss"]
 };
 
 var scriptPaths = {
@@ -138,19 +135,7 @@ var scriptPaths = {
     colossusbetswinloss: "./www/js/source/pages/report/thirdpartywinloss/main-colossusbetswinloss.js",
     customerpendingfunds: "./www/js/source/pages/report/customerpendingfunds/main.js",
     customerturnover: "./www/js/source/pages/report/customerturnover/main.js",
-    customerwinloss: "./www/js/source/pages/report/customerwinloss/main.js",
-
-    playercomissionmultiplemovegroup: "./www/js/source/pages/playercommission/multiplemovegroup.js",
-    playercomissionmultipleremovefromgroup: "./www/js/source/pages/playercommission/multipleremovefromgroup.js",
-    playercomissionmultipleupdategroup: "./www/js/source/pages/playercommission/multipleupdategroup.js",
-    playercomissionsinglemovegroup: "./www/js/source/pages/playercommission/singlemovegroup.js",
-    playercomissionsingleremovefromgroup: "./www/js/source/pages/playercommission/singleremovefromgroup.js",
-    playercomissionsingleupdategroup: "./www/js/source/pages/playercommission/singleupdategroup.js",
-
-    playerBatchUpdateAccountStatus: "./www/js/source/pages/playerBatchUpdate/account-status.js",
-    playerBatchUpdateSpecialLevel: "./www/js/source/pages/playerBatchUpdate/special-level.js",
-    playerBatchUpdateOddsGroup: "./www/js/source/pages/playerBatchUpdate/odds-group.js",
-    playerBatchUpdateBAStatus: "./www/js/source/pages/playerBatchUpdate/ba-status.js"
+    customerwinloss: "./www/js/source/pages/report/customerwinloss/main.js"
 };
 
 module.exports = {
