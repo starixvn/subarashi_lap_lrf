@@ -25,6 +25,10 @@ namespace Fanex.Athena.Model.Report.MetaModel
 
         public int LiveIndicator { get; set; }
 
+        public string SortDirection { get; set; }
+
+        public string SortColumn { get; set; }
+
         public override bool IsValid
         {
             get
@@ -32,7 +36,6 @@ namespace Fanex.Athena.Model.Report.MetaModel
                 return FromDate <= ToDate
                     && (string.IsNullOrEmpty(BaseCurrency) || SystemConstants.BaseCurrencyList
            .Any(x => x.Value.Equals(BaseCurrency, StringComparison.OrdinalIgnoreCase)));
-
             }
         }
     }

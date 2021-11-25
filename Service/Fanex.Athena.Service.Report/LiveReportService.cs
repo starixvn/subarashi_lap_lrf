@@ -6,11 +6,13 @@
 
 namespace Fanex.Athena.Service.Report
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
     using Fanex.Athena.DataAccess.Report.Interfaces;
+    using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Report.DTO.LiveReports;
     using Fanex.Athena.Model.Report.MetaModel;
@@ -66,7 +68,7 @@ namespace Fanex.Athena.Service.Report
             };
         }
 
-        public async Task<IList<LiveReportWinLossByMatch>> GetLiveReportWinLossByMatch(LiveReportMatchListMetalModel model)
+        public async Task<SortableList<LiveReportWinLossByMatch>> GetLiveReportWinLossByMatch(LiveReportMatchListMetalModel model)
         {
             if (model.IsValid)
             {
@@ -79,10 +81,15 @@ namespace Fanex.Athena.Service.Report
                                          : string.Format("{0} vs {1}", _cacheRefAdapter.GetTeamName(data.HomeId), _cacheRefAdapter.GetTeamName(data.AwayId));
                 }
 
-                return dataList.OrderBy(d => d.MatchName).ToList();
+                if (!string.IsNullOrEmpty(model.SortColumn) && !string.IsNullOrEmpty(model.SortDirection))
+                {
+                    dataList.Sort(model.SortColumn, model.SortDirection.Equals("ASC", StringComparison.OrdinalIgnoreCase));
+                }
+
+                return dataList;
             }
 
-            return new List<LiveReportWinLossByMatch>();
+            return new SortableList<LiveReportWinLossByMatch>();
         }
     }
 }

@@ -143,6 +143,7 @@
     <Compile Include="GoldDeluxeWinLossExcel.cs" />
     <Compile Include="ThirdPartyWinLossExcel.cs" />
     <Compile Include="WeeklyLiveMatchExcel.cs" />
+    <Compile Include="LiveReportWinLossByMatchExcel.cs" />
     <Compile Include="WinlossByLeagueExcel.cs" />
     <Compile Include="CustomerPendingFundsExcel.cs" />
     <Compile Include="CustomerTurnoverExcel.cs" />

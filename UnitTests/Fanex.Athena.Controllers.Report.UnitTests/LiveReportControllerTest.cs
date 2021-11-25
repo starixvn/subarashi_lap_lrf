@@ -10,6 +10,7 @@
     using DataAccess.Core.Configuration.Interfaces;
     using Excel.Base.Entities;
     using Excel.Report;
+    using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
@@ -169,7 +170,7 @@
                     CurrencyId = CurrencyId,
                     CurrencyName = "abc"
                 };
-                var dataList = new List<LiveReportWinLossByMatch>();
+                var dataList = new SortableList<LiveReportWinLossByMatch>();
                 _liveReportService.GetLiveReportWinLossByMatch(metaModel).Returns(dataList);
 
                 // Action
@@ -179,7 +180,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    Assert.That(viewResult.ViewName, Is.EqualTo("~/Views/Desktop/Report/LiveReport/MatchList/Content.cshtml"));
+                    Assert.That(viewResult.ViewName, Is.EqualTo("~/Views/Desktop/Report/LiveReport/MatchList/Index.cshtml"));
                     Assert.That(viewModel.MainResult, Is.EqualTo(dataList));
                     Assert.That(viewModel.Param, Is.EqualTo(metaModel));
                     Assert.That(viewModel.CurrencyName, Is.EqualTo(metaModel.CurrencyName));
