@@ -17,8 +17,6 @@ using Fanex.Athena.DataAccess.Report;
 using Fanex.Athena.DataAccess.Report.Interfaces;
 using Fanex.Athena.Extension;
 using Fanex.Athena.Extension.Utility.Internal;
-using Fanex.Athena.Module.PlayerAdmin;
-using Fanex.Athena.Module.PlayerAdmin.Api;
 using Fanex.Athena.Service.Core.Users;
 using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.Service.StatelessCore;
@@ -72,13 +70,8 @@ namespace Fanex.Athena
         private static void RegisterModule(ContainerBuilder builder, Assembly[] assemblies)
         {
             var moduleAssemblies = GetModuleAssemblies(assemblies);
-
             builder.RegisteModuleApiModule(moduleAssemblies, "Fanex.Athena.Module.Dashboard");
             builder.RegisteModuleModuleAndApi(moduleAssemblies, "Fanex.Athena.Module.Notification");
-
-            builder.RegisteModulePlayerAdminApi(moduleAssemblies);
-            builder.RegisteModulePlayerAdmin(moduleAssemblies);
-            builder.RegisteModuleCustomer(moduleAssemblies);
         }
 
         private static void RegisterHttpClient(ContainerBuilder builder)
@@ -170,6 +163,7 @@ namespace Fanex.Athena
                 )).As<ILGAPIClient>().SingleInstance();
 
             builder.RegisterType<PortalApiService>().As<IPortalApiService>().SingleInstance();
+            builder.RegisterType<SubsidiaryService>().As<ISubsidiaryService>().SingleInstance();
         }
     }
 }

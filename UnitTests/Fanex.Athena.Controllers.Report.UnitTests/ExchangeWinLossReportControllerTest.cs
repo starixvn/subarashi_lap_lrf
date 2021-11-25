@@ -2,6 +2,7 @@
 {
     using Base.UnitTests;
     using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     using Model.Core.DTO.Configuration;
@@ -68,7 +69,7 @@
                 MaxDate = _maxDate
             });
 
-            var controller = Substitute.ForPartsOf<ExchangeWinLossReportController>(reportSettingService);
+            var controller = Substitute.ForPartsOf<ExchangeWinLossReportController>(reportSettingService, Substitute.For<ISubsidiaryService>());
             controller.LangService = LangService;
             controller.SessionServiceInstance = SessionService;
 

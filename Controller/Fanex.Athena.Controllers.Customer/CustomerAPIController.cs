@@ -249,10 +249,8 @@ namespace Fanex.Athena.Controllers.Customer
 
             var updateResult = _customerListService.UpdateCustomerBAStatus(
                 licenseeSession.LicenseeId,
-                licenseeSession.LicenseeName,
                 custId,
                 userSession.UserId,
-                userSession.VendorID,
                 isAllowBA,
                 request);
 

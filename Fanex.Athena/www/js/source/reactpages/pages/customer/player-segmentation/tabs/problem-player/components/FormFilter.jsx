@@ -1,7 +1,6 @@
 ﻿import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import Select from 'react-select'
 import MultipleSelect, { TreeViewSelect } from '@9softstudio/react-multiselect'
 import AutoComplete from '@jsroot/components/auto-complete'
 import CollapsiblePanel from '@jsroot/components/collapsible-panel'
@@ -14,9 +13,9 @@ import { decode } from '@jsroot/lib/htmlHelper'
 import Site from '@jsroot/lib/site';
 import AppData from '@jsroot/lib/AppData'
 import DataService from '@jsroot/lib/DataService.js'
+import { SubsidiaryViewType, TreeViewOption } from '@jsroot/constants/report'
 import { ActionCreators } from '../actions'
 import { Url } from '../lib/constants';
-import { ViewType, TreeViewOption } from '../../../lib/constants';
 import ParamHelper from '../lib/helpers/paramHelper';
 import { bindDataUserGuideWithPermission } from '../lib/helpers/userGuideHelper';
 import DataSourceHelper from '../../../lib/helpers/dataSourceHelper';
@@ -172,22 +171,22 @@ export class FormFilter extends PureComponent {
     }
 
     render() {
-        const isDisabledSubmit = StringHelper.isEmptyOrWhiteSpace(this.props.selectedCurrency) ||
+        const isDisabledSubmit = (this.props.subsidiarySearch && StringHelper.isEmptyOrWhiteSpace(this.props.selectedSubsidiary)) || StringHelper.isEmptyOrWhiteSpace(this.props.selectedCurrency) ||
             StringHelper.isEmptyOrWhiteSpace(this.props.selectedReason)||
             StringHelper.isEmptyOrWhiteSpace(this.props.selectedCustomerClass);
 
         return (
             <CollapsiblePanel className="page-filter" stickyFooter={this._renderStickyFooter()}>
                 <div className="row">
-                    {AppData.viewType !== ViewType.Normal && this.props.subsidiarySearch && (<div className="col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2">
+                    {AppData.viewType !== SubsidiaryViewType.NOT_MANAGEMENT && this.props.subsidiarySearch && (<div className="col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">
-                                {AppData.viewType === ViewType.WhiteLabel ? LangHelper.getSingleResource("WhiteLabel") : LangHelper.getSingleResource("Subsidiary")}
+                                {AppData.viewType === SubsidiaryViewType.MASTER_MANAGEMENT ? LangHelper.getSingleResource("WhiteLabel") : LangHelper.getSingleResource("Subsidiary")}
                             </label>
                             {this._renderSubsidiaryTreeView()}
                         </div>
                     </div>)}
-                    {AppData.viewType !== ViewType.Normal && <div className="col-12 col-md-3 col-sm-2 col-lg-2 col-xl-2">
+                    {AppData.viewType !== SubsidiaryViewType.NOT_MANAGEMENT && <div className="col-12 col-md-3 col-sm-2 col-lg-2 col-xl-2">
                         <div className="form-group">
                             <CheckBox id="SubsidiarySearch"
                                 checked={this.props.subsidiarySearch}

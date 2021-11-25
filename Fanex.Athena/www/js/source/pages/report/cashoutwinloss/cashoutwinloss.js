@@ -1,8 +1,8 @@
 ﻿'use strict';
 define(['jquery', 'common/querystring', 'common/site', './cashoutwinloss.option', '../report', 'lib/jqgrid/jquery.jqgrid.additional',
-        'components/pluginhelper/daterangepicker', 'moment', 'common/popup', 'helpers/daterange',
+        'components/pluginhelper/daterangepicker', 'moment', 'common/popup', 'helpers/daterange', 'helpers/subsidiaryhelper',
         'extensions/jquery.extension', 'lib/jqgrid/jquery.jqGrid.en', 'lib/jqgrid/jquery.jqGrid.min'],
-    function ($, QueryString, Site, CashOutWinLossOption, Report, jqGridAdditional, DatePicker, moment, Popup, DateHelper) {
+    function ($, QueryString, Site, CashOutWinLossOption, Report, jqGridAdditional, DatePicker, moment, Popup, DateHelper, SubsidiaryHelper) {
         const cacheData = {};
         let ajaxRequest = null;
         let _level = 0;
@@ -32,6 +32,12 @@ define(['jquery', 'common/querystring', 'common/site', './cashoutwinloss.option'
             },
 
             initEvent: function () {
+                SubsidiaryHelper.initSubsidiaryOption(function (isViewOnSubsidiary) {
+                    const checkedItems = $('#subsidiary-multiselect').multiSelect('getCheckedItems');
+                    const isNotValid = (isViewOnSubsidiary && !checkedItems.length) || false;
+                    $('#SubmitButton').prop('disabled', isNotValid);
+                });
+
                 $('#SubmitButton').click(function () {
                     $('#IsExportExcel').val(false);
                     _level = 0;
@@ -40,6 +46,7 @@ define(['jquery', 'common/querystring', 'common/site', './cashoutwinloss.option'
 
                 $('#ExportToExcel').click(function () {
                     $('#IsExportExcel').val(true);
+                    SubsidiaryHelper.bindSubsidiaryData();
                     const $mainForm = $('#MainForm');
                     const url = Site.resolveClientUrl(CashOutWinLossOption.urlExcelData);
                     $mainForm.attr('action', url);
@@ -71,6 +78,7 @@ define(['jquery', 'common/querystring', 'common/site', './cashoutwinloss.option'
             },
 
             submit: function () {
+                SubsidiaryHelper.bindSubsidiaryData();
                 const $mainForm = $('#MainForm');
                 const postdata = $mainForm.serializeObject();
                 _submitData = postdata;
@@ -212,7 +220,9 @@ define(['jquery', 'common/querystring', 'common/site', './cashoutwinloss.option'
                     FromDate: _submitData.FromDate,
                     ToDate: _submitData.ToDate,
                     ReportBy: _submitData.ReportBy,
-                    BaseCurrency: _submitData.BaseCurrency
+                    BaseCurrency: _submitData.BaseCurrency,
+                    SubsidiarySearch: _submitData.SubsidiarySearch,
+                    SubsidiaryList: _submitData.SubsidiaryList
                 };
 
                 const drilldownDate = new Date(datetime);

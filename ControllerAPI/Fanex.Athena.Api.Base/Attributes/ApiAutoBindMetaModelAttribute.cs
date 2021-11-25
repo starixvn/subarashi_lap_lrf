@@ -3,6 +3,7 @@ using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 using Fanex.Athena.DataAccess.Core.Configuration;
 using Fanex.Athena.Extension.Helper;
+using Fanex.Athena.Model.Core.MetaModel;
 using Fanex.Athena.Service.Core.Users;
 using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.Service.StatelessCore.Utility;
@@ -24,16 +25,29 @@ namespace Fanex.Athena.Api.Base.Attributes
 
         public bool BindBalanceUpAndMoveBet { get; set; }
 
+        public bool ApplySubsidiaryBusiness { get; set; }
+
         private static readonly ISessionStorage _sessionStorage = new SessionStorage();
+
+        public ISubsidiaryService SubsidiaryService { get; set; }
+
 
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
             var userSession = _sessionStorage.UserAuthInfo;
+            var licenseeSession = _sessionStorage.LicenseeAuthInfo;
             var actionArgument = actionContext.ActionArguments;
-
+                  
             if (BindAgent)
             {
-                AutoBindMetaModelService.MapAgentXml(actionArgument, userSession.CurrencyAgentList);
+                var currencyAgentList = userSession.CurrencyAgentList;
+                if (ApplySubsidiaryBusiness && MetaModelHelper.IsMetaModel(actionArgument, out IMetaModelSubsidiarySearch subsidiaryMetaModel)
+                    && !SubsidiaryService.IsIgnoredSubsidiarySearch(subsidiaryMetaModel.SubsidiarySearch, subsidiaryMetaModel.SubsidiaryList, userSession.SubsidiaryViewType))
+                {
+                    currencyAgentList = SubsidiaryService.GetCurrencyAgentList(licenseeSession.LicenseeName, currencyAgentList, subsidiaryMetaModel.SubsidiaryList);
+                }
+
+                AutoBindMetaModelService.MapAgentXml(actionArgument, currencyAgentList);
             }
 
             if (BindUserId)

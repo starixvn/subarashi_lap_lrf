@@ -242,7 +242,7 @@ const toggleLoader = show => {
 /*!***************************************************!*\
   !*** ./www/js/source/reactpages/actions/types.js ***!
   \***************************************************/
-/*! exports provided: FETCH_DATA, SET_GRID_DATA, SET_SELECTED_PRODUCT, SET_SELECTED_BASECURRENCY, SET_BASECURRENCY_LIST, SET_SELECTED_CURRENCY, TOGGLE_LOADER, CHANGE_IS_EXCLUDE_TEST, USER_GUIDE_CONTENT, SET_DATE_RANGE, GET_DATE_CONSTRAINT, CHANGE_IS_CONVERT_ALL, SET_SELECTED_STATUS, SET_SELECTED_PLATFORM, SET_SELECTED_LIVESTATUS, SET_USERNAME, SET_REQUEST_PARAM, SET_REPORT_TITLE, SET_PAGING_OPTION */
+/*! exports provided: FETCH_DATA, SET_GRID_DATA, SET_SELECTED_PRODUCT, SET_SELECTED_BASECURRENCY, SET_BASECURRENCY_LIST, SET_SELECTED_CURRENCY, TOGGLE_LOADER, CHANGE_IS_EXCLUDE_TEST, USER_GUIDE_CONTENT, SET_DATE_RANGE, GET_DATE_CONSTRAINT, CHANGE_IS_CONVERT_ALL, SET_SELECTED_STATUS, SET_SELECTED_PLATFORM, SET_SELECTED_LIVESTATUS, SET_USERNAME, SET_REQUEST_PARAM, SET_REPORT_TITLE, SET_PAGING_OPTION, SET_SUBSIDIARY_LIST, SET_SUBSIDIARY_SEARCH */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -266,6 +266,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_REQUEST_PARAM", function() { return SET_REQUEST_PARAM; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_REPORT_TITLE", function() { return SET_REPORT_TITLE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_PAGING_OPTION", function() { return SET_PAGING_OPTION; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SUBSIDIARY_LIST", function() { return SET_SUBSIDIARY_LIST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SUBSIDIARY_SEARCH", function() { return SET_SUBSIDIARY_SEARCH; });
 const FETCH_DATA = 'FETCH_DATA';
 const SET_GRID_DATA = "SET_GRID_DATA";
 /* Product */
@@ -309,6 +311,10 @@ const SET_REPORT_TITLE = "SET_REPORT_TITLE";
 /* Live Status  */
 
 const SET_PAGING_OPTION = 'SET_PAGING_OPTION';
+/* Subsidiary Search  */
+
+const SET_SUBSIDIARY_LIST = 'SET_SUBSIDIARY_LIST';
+const SET_SUBSIDIARY_SEARCH = 'SET_SUBSIDIARY_SEARCH';
 
 /***/ }),
 
@@ -4590,7 +4596,7 @@ const setSelectedParams = options => {
 /*!**************************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/customer/player-segmentation/actions/types.js ***!
   \**************************************************************************************/
-/*! exports provided: SET_SELECTED_TAB, SET_SWEET_ALERT_OPTION, SET_PAGING_OPTION, SET_SELECTED_PARAMS, SET_PLAYER_LIST, SET_SUBSIDIARY_LIST, SET_SUBSIDIARY_SEARCH */
+/*! exports provided: SET_SELECTED_TAB, SET_SWEET_ALERT_OPTION, SET_PAGING_OPTION, SET_SELECTED_PARAMS, SET_PLAYER_LIST */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4600,15 +4606,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_PAGING_OPTION", function() { return SET_PAGING_OPTION; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SELECTED_PARAMS", function() { return SET_SELECTED_PARAMS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_PLAYER_LIST", function() { return SET_PLAYER_LIST; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SUBSIDIARY_LIST", function() { return SET_SUBSIDIARY_LIST; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SUBSIDIARY_SEARCH", function() { return SET_SUBSIDIARY_SEARCH; });
 const SET_SELECTED_TAB = 'SET_SELECTED_TAB';
 const SET_SWEET_ALERT_OPTION = 'SET_SWEET_ALERT_OPTION';
 const SET_PAGING_OPTION = 'SET_PAGING_OPTION';
 const SET_SELECTED_PARAMS = 'SET_SELECTED_PARAMS';
 const SET_PLAYER_LIST = 'SET_PLAYER_LIST';
-const SET_SUBSIDIARY_LIST = 'SET_SUBSIDIARY_LIST';
-const SET_SUBSIDIARY_SEARCH = 'SET_SUBSIDIARY_SEARCH';
 
 /***/ }),
 

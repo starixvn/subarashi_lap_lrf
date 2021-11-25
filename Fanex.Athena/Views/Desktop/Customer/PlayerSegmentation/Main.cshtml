@@ -10,19 +10,8 @@
     var problemPlayerVM = Model.ProblemPlayerVM;
     var vipPlayerManagementVM = Model.VipPlayerVM;
 
-    string selectedSubsidiary;
-    if (Model.ViewType == (byte)PlayerSegmentationViewType.Susidiary)
-    {
-        selectedSubsidiary = string.Join(",", Model.SubsidiaryList.Select(x => x.Value));
-    }
-    else if (Model.ViewType == (byte)PlayerSegmentationViewType.WhiteLabel)
-    {
-        selectedSubsidiary = string.Join(",", Model.SubsidiaryList.SelectMany(x => x.Children.Select(y => y.Value)).Distinct());
-    }
-    else //normal
-    {
-        selectedSubsidiary = string.Empty;
-    }
+    string selectedSubsidiary = Model.ViewType == SubsidiaryViewType.MasterManagement ?
+        string.Join(",", Model.SubsidiaryList.SelectMany(x => x.Children.Select(y => y.Value)).Distinct()) : string.Join(",", Model.SubsidiaryList.Select(x => x.Value));
 
     var vipPlayerManagementInitState = hasVIPManagementPermission ? new
     {
@@ -84,7 +73,7 @@
     HasVipManagementEdit: @Model.HasVIPManagementEditPermission.ToString().ToLower(),
     TabKeys: @Html.Raw(Model.TabKeys.ToJson()),
     subsidiaryList: @Html.Raw(Model.SubsidiaryList.ToJson()),
-    viewType: @Model.ViewType,
+    viewType: @((byte)Model.ViewType),
     ProblemPlayer: {
     customerClassList: @Html.Raw(problemCustomerClassList.ToJson()),
     currencyList: @Html.Raw(problemPlayerVM.CurrencyList.Select(x => new { key = x.Key, value = x.Value, status = true }).ToJson()),

@@ -44,3 +44,7 @@ export const SET_REPORT_TITLE = "SET_REPORT_TITLE"
 
 /* Live Status  */
 export const SET_PAGING_OPTION = 'SET_PAGING_OPTION';
+
+/* Subsidiary Search  */
+export const SET_SUBSIDIARY_LIST = 'SET_SUBSIDIARY_LIST';
+export const SET_SUBSIDIARY_SEARCH = 'SET_SUBSIDIARY_SEARCH';

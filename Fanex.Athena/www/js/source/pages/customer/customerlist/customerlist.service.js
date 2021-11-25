@@ -283,51 +283,6 @@ define(['jquery',
 
             closePopup: function (popUpSelector) {
                 $(popUpSelector).fadeOut();
-            },
-
-            getSubsidiaryTree: function (data) {
-                let tree = [];
-
-                const total = data.length;
-                if (!total) {
-                    return tree;
-                }
-
-                const createItem = function (item, id) {
-                    return {
-                        Id: id,
-                        Value: item.Value,
-                        Text: item.Name,
-                        Checked: true,
-                        Enable: true
-                    }
-                }
-
-                const getSubTree = function (subData, id) {
-                    let subTree = createItem(subData, id);
-
-                    if (subData.Children) {
-                        const totalChild = subData.Children.length;
-
-                        let items = [];
-
-                        for (let c = 0; c < totalChild; c++) {
-                            const child = subData.Children[c];
-                            items.push(getSubTree(child, id + '-' + child.Value));
-                        }
-
-                        subTree.Items = items;
-                    }
-
-                    return subTree;
-                }
-
-                for (let i = 0; i < total; i++) {
-                    const subTree = data[i];
-                    tree.push(getSubTree(subTree, subTree.Value));
-                }
-
-                return tree;
             }
         };
 

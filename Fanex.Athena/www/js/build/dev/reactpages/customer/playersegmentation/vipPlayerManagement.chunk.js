@@ -16,13 +16,13 @@ exports.default = function (file, acceptedFiles) {
   if (file && acceptedFiles) {
     var acceptedFilesArray = Array.isArray(acceptedFiles) ? acceptedFiles : acceptedFiles.split(',');
     var fileName = file.name || '';
-    var mimeType = file.type || '';
+    var mimeType = (file.type || '').toLowerCase();
     var baseMimeType = mimeType.replace(/\/.*$/, '');
     return acceptedFilesArray.some(function (type) {
-      var validType = type.trim();
+      var validType = type.trim().toLowerCase();
 
       if (validType.charAt(0) === '.') {
-        return fileName.toLowerCase().endsWith(validType.toLowerCase());
+        return fileName.toLowerCase().endsWith(validType);
       } else if (validType.endsWith('/*')) {
         // This is something like a image/* mime type
         return baseMimeType === validType.replace(/\/.*$/, '');
@@ -63,8 +63,8 @@ var FILES_TO_IGNORE = [
  * @param evt
  */
 function fromEvent(evt) {
-    return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+    return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
             return [2 /*return*/, isDragEvt(evt) && evt.dataTransfer
                     ? getDataTransferFiles(evt.dataTransfer, evt.type)
                     : getInputFiles(evt)];
@@ -86,9 +86,9 @@ function isInput(value) {
     return value !== null;
 }
 function getDataTransferFiles(dt, type) {
-    return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+    return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
         var items, files;
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     if (!dt.items) return [3 /*break*/, 2];
@@ -140,7 +140,7 @@ function toFilePromises(item) {
     return fromDataTransferItem(item);
 }
 function flatten(items) {
-    return items.reduce(function (acc, files) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__spread"](acc, (Array.isArray(files) ? flatten(files) : [files])); }, []);
+    return items.reduce(function (acc, files) { return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__spread"])(acc, (Array.isArray(files) ? flatten(files) : [files])); }, []);
 }
 function fromDataTransferItem(item) {
     var file = item.getAsFile();
@@ -152,8 +152,8 @@ function fromDataTransferItem(item) {
 }
 // https://developer.mozilla.org/en-US/docs/Web/API/FileSystemEntry
 function fromEntry(entry) {
-    return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+    return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
             return [2 /*return*/, entry.isDirectory ? fromDirEntry(entry) : fromFileEntry(entry)];
         });
     });
@@ -167,9 +167,9 @@ function fromDirEntry(entry) {
             var _this = this;
             // https://developer.mozilla.org/en-US/docs/Web/API/FileSystemDirectoryEntry/createReader
             // https://developer.mozilla.org/en-US/docs/Web/API/FileSystemDirectoryReader/readEntries
-            reader.readEntries(function (batch) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+            reader.readEntries(function (batch) { return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, function () {
                 var files, err_1, items;
-                return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
                     switch (_a.label) {
                         case 0:
                             if (!!batch.length) return [3 /*break*/, 5];
@@ -204,8 +204,8 @@ function fromDirEntry(entry) {
 }
 // https://developer.mozilla.org/en-US/docs/Web/API/FileSystemFileEntry
 function fromFileEntry(entry) {
-    return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+    return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
             return [2 /*return*/, new Promise(function (resolve, reject) {
                     entry.file(function (file) {
                         var fwp = Object(_file__WEBPACK_IMPORTED_MODULE_1__["toFileWithPath"])(file, entry.fullPath);
@@ -1291,7 +1291,7 @@ PERFORMANCE OF THIS SOFTWARE.
 var extendStatics = function(d, b) {
     extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
     return extendStatics(d, b);
 };
 
@@ -1377,13 +1377,16 @@ function __generator(thisArg, body) {
     }
 }
 
-function __createBinding(o, m, k, k2) {
+var __createBinding = Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
-}
+});
 
-function __exportStar(m, exports) {
-    for (var p in m) if (p !== "default" && !exports.hasOwnProperty(p)) exports[p] = m[p];
+function __exportStar(m, o) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(o, p)) __createBinding(o, m, p);
 }
 
 function __values(o) {
@@ -1464,11 +1467,17 @@ function __makeTemplateObject(cooked, raw) {
     return cooked;
 };
 
+var __setModuleDefault = Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+};
+
 function __importStar(mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result.default = mod;
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
     return result;
 }
 
@@ -1535,6 +1544,34 @@ const setDateRange = dateRange => {
   return {
     type: _types__WEBPACK_IMPORTED_MODULE_0__["SET_DATE_RANGE"],
     data: range
+  };
+};
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/actions/subsidiaryAction.js":
+/*!**************************************************************!*\
+  !*** ./www/js/source/reactpages/actions/subsidiaryAction.js ***!
+  \**************************************************************/
+/*! exports provided: setSubsidiaryList, setSubsidiarySearch */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSubsidiaryList", function() { return setSubsidiaryList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSubsidiarySearch", function() { return setSubsidiarySearch; });
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/actions/types.js");
+
+const setSubsidiaryList = subsidiaryList => {
+  return {
+    type: _types__WEBPACK_IMPORTED_MODULE_0__["SET_SUBSIDIARY_LIST"],
+    data: subsidiaryList
+  };
+};
+const setSubsidiarySearch = subsidiarySearch => {
+  return {
+    type: _types__WEBPACK_IMPORTED_MODULE_0__["SET_SUBSIDIARY_SEARCH"],
+    data: subsidiarySearch
   };
 };
 
@@ -2760,6 +2797,45 @@ class Timer {
 
 /***/ }),
 
+/***/ "./www/js/source/reactpages/constants/report.js":
+/*!******************************************************!*\
+  !*** ./www/js/source/reactpages/constants/report.js ***!
+  \******************************************************/
+/*! exports provided: ReportLevel, ReportBy, SubsidiaryViewType, TreeViewOption */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReportLevel", function() { return ReportLevel; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReportBy", function() { return ReportBy; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SubsidiaryViewType", function() { return SubsidiaryViewType; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TreeViewOption", function() { return TreeViewOption; });
+const ReportLevel = {
+  MAIN: 0,
+  LICENSEE: 1,
+  CUSTOMER: 2
+};
+const ReportBy = {
+  DAILY: 1,
+  MONTHLY: 2
+};
+const SubsidiaryViewType = {
+  NOT_MANAGEMENT: 0,
+  NORMAL_MANAGEMENT: 1,
+  MASTER_MANAGEMENT: 2
+};
+const TreeViewOption = {
+  childrenField: 'Children',
+  keyField: 'Value',
+  valueField: 'Name',
+  statusField: 'Checked',
+  indent: 30,
+  includeSelectedParentKey: false,
+  useOriginalDataSource: false
+};
+
+/***/ }),
+
 /***/ "./www/js/source/reactpages/lib/excel.js":
 /*!***********************************************!*\
   !*** ./www/js/source/reactpages/lib/excel.js ***!
@@ -2993,34 +3069,6 @@ const generateDefaultAlertOption = (content, onClose, onClick, icon = predefined
       className: "center-align"
     }, content),
     onClose
-  };
-};
-
-/***/ }),
-
-/***/ "./www/js/source/reactpages/pages/customer/player-segmentation/actions/filterAction.js":
-/*!*********************************************************************************************!*\
-  !*** ./www/js/source/reactpages/pages/customer/player-segmentation/actions/filterAction.js ***!
-  \*********************************************************************************************/
-/*! exports provided: setSubsidiaryList, setSubsidiarySearch */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSubsidiaryList", function() { return setSubsidiaryList; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSubsidiarySearch", function() { return setSubsidiarySearch; });
-/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/pages/customer/player-segmentation/actions/types.js");
-
-const setSubsidiaryList = subsidiaryList => {
-  return {
-    type: _types__WEBPACK_IMPORTED_MODULE_0__["SET_SUBSIDIARY_LIST"],
-    data: subsidiaryList
-  };
-};
-const setSubsidiarySearch = subsidiarySearch => {
-  return {
-    type: _types__WEBPACK_IMPORTED_MODULE_0__["SET_SUBSIDIARY_SEARCH"],
-    data: subsidiarySearch
   };
 };
 
@@ -3382,7 +3430,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/constants.js");
-/* harmony import */ var _tabs_problem_player_components_grid_CustomerClassCell__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../tabs/problem-player/components/grid/CustomerClassCell */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/components/grid/CustomerClassCell.jsx");
+/* harmony import */ var _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/constants/report */ "./www/js/source/reactpages/constants/report.js");
+/* harmony import */ var _tabs_problem_player_components_grid_CustomerClassCell__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../tabs/problem-player/components/grid/CustomerClassCell */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/components/grid/CustomerClassCell.jsx");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -3411,7 +3460,7 @@ class GridHelper {
     var isCustomerClass = cell.key == "customerClass";
 
     if (isCustomerClass) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tabs_problem_player_components_grid_CustomerClassCell__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tabs_problem_player_components_grid_CustomerClassCell__WEBPACK_IMPORTED_MODULE_5__["default"], {
         cell: cell
       });
     }
@@ -3469,7 +3518,7 @@ _defineProperty(GridHelper, "callBackToUpdatePaging", ({
   setPagingOption(newPagingOption);
 });
 
-_defineProperty(GridHelper, "isShowSubsidiary", subsidiarySearch => _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__["default"].viewType !== _constants__WEBPACK_IMPORTED_MODULE_3__["ViewType"].Normal && subsidiarySearch);
+_defineProperty(GridHelper, "isShowSubsidiary", subsidiarySearch => _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__["default"].viewType !== _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_4__["SubsidiaryViewType"].NOT_MANAGEMENT && subsidiarySearch);
 
 /***/ }),
 
@@ -3642,36 +3691,6 @@ const UpdateVipStatusAlertOption = {
     }
   })
 };
-
-/***/ }),
-
-/***/ "./www/js/source/reactpages/pages/customer/player-segmentation/reducers/filterReducer.js":
-/*!***********************************************************************************************!*\
-  !*** ./www/js/source/reactpages/pages/customer/player-segmentation/reducers/filterReducer.js ***!
-  \***********************************************************************************************/
-/*! exports provided: selectedSubsidiary, subsidiarySearch */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectedSubsidiary", function() { return selectedSubsidiary; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "subsidiarySearch", function() { return subsidiarySearch; });
-/* harmony import */ var _jsroot_lib_createReducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/createReducer */ "./www/js/source/reactpages/lib/createReducer.js");
-/* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/types */ "./www/js/source/reactpages/pages/customer/player-segmentation/actions/types.js");
-
-
-const selectedSubsidiary = Object(_jsroot_lib_createReducer__WEBPACK_IMPORTED_MODULE_0__["default"])(null, {
-  [_actions_types__WEBPACK_IMPORTED_MODULE_1__["SET_SUBSIDIARY_LIST"]](prevState, action) {
-    return action.data;
-  }
-
-});
-const subsidiarySearch = Object(_jsroot_lib_createReducer__WEBPACK_IMPORTED_MODULE_0__["default"])(null, {
-  [_actions_types__WEBPACK_IMPORTED_MODULE_1__["SET_SUBSIDIARY_SEARCH"]](prevState, action) {
-    return action.data;
-  }
-
-});
 
 /***/ }),
 
@@ -3853,7 +3872,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_actions_currencyAction__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/actions/currencyAction */ "./www/js/source/reactpages/actions/currencyAction.js");
 /* harmony import */ var _jsroot_actions_usernameAction__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/actions/usernameAction */ "./www/js/source/reactpages/actions/usernameAction.js");
 /* harmony import */ var _actions_paramHanlderAction__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../actions/paramHanlderAction */ "./www/js/source/reactpages/pages/customer/player-segmentation/actions/paramHanlderAction.js");
-/* harmony import */ var _actions_filterAction__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../actions/filterAction */ "./www/js/source/reactpages/pages/customer/player-segmentation/actions/filterAction.js");
+/* harmony import */ var _jsroot_actions_subsidiaryAction__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/actions/subsidiaryAction */ "./www/js/source/reactpages/actions/subsidiaryAction.js");
 
 
 
@@ -3875,8 +3894,8 @@ const setSelectedCustomerClass = selectedCustomerClass => {
 const setDateRange = _jsroot_actions_dateRangeAction__WEBPACK_IMPORTED_MODULE_1__["setDateRange"];
 const setSelectedCurrency = _jsroot_actions_currencyAction__WEBPACK_IMPORTED_MODULE_2__["setSelectedCurrency"];
 const setUsername = _jsroot_actions_usernameAction__WEBPACK_IMPORTED_MODULE_3__["setUsername"];
-const setSubsidiaryList = _actions_filterAction__WEBPACK_IMPORTED_MODULE_5__["setSubsidiaryList"];
-const setSubsidiarySearch = _actions_filterAction__WEBPACK_IMPORTED_MODULE_5__["setSubsidiarySearch"];
+const setSubsidiaryList = _jsroot_actions_subsidiaryAction__WEBPACK_IMPORTED_MODULE_5__["setSubsidiaryList"];
+const setSubsidiarySearch = _jsroot_actions_subsidiaryAction__WEBPACK_IMPORTED_MODULE_5__["setSubsidiarySearch"];
 const setSelectedParams = _actions_paramHanlderAction__WEBPACK_IMPORTED_MODULE_4__["setSelectedParams"];
 
 /***/ }),
@@ -4523,7 +4542,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @jsroot/lib/DataService.js */ "./www/js/source/reactpages/lib/DataService.js");
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../actions */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/vip-player-management/actions/index.js");
 /* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/vip-player-management/lib/constants.js");
-/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../../lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/constants.js");
+/* harmony import */ var _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @jsroot/constants/report */ "./www/js/source/reactpages/constants/report.js");
 /* harmony import */ var _lib_helpers_dataSourceHelper__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../../lib/helpers/dataSourceHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/helpers/dataSourceHelper.js");
 /* harmony import */ var _lib_helpers_paramHelper__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../lib/helpers/paramHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/vip-player-management/lib/helpers/paramHelper.js");
 /* harmony import */ var _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../../lib/helpers/gridHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/helpers/gridHelper.js");
@@ -4674,7 +4693,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       },
       isAllTextShown: false,
       hasSearchBox: false,
-      treeViewOption: _lib_constants__WEBPACK_IMPORTED_MODULE_17__["TreeViewOption"],
+      treeViewOption: _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_17__["TreeViewOption"],
       onChange: this._onChangeSubsidiaryList
     });
   }
@@ -4698,19 +4717,19 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
   }
 
   render() {
-    const isDisabledSubmit = _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_10__["default"].isEmptyOrWhiteSpace(this.props.selectedCurrency) || _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_10__["default"].isEmptyOrWhiteSpace(this.props.selectedCustomerClass);
+    const isDisabledSubmit = this.props.subsidiarySearch && _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_10__["default"].isEmptyOrWhiteSpace(this.props.selectedSubsidiary) || _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_10__["default"].isEmptyOrWhiteSpace(this.props.selectedCurrency) || _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_10__["default"].isEmptyOrWhiteSpace(this.props.selectedCustomerClass);
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_7__["default"], {
       className: "page-filter",
       stickyFooter: this._renderStickyFooter()
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "row"
-    }, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_13__["default"].viewType !== _lib_constants__WEBPACK_IMPORTED_MODULE_17__["ViewType"].Normal && this.props.subsidiarySearch && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_13__["default"].viewType !== _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_17__["SubsidiaryViewType"].NOT_MANAGEMENT && this.props.subsidiarySearch && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-12 col-md-2 col-sm-3 col-lg-3 col-xl-2"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       className: "label-text"
-    }, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_13__["default"].viewType === _lib_constants__WEBPACK_IMPORTED_MODULE_17__["ViewType"].WhiteLabel ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("WhiteLabel") : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("Subsidiary")), this._renderSubsidiaryTreeView())), _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_13__["default"].viewType !== _lib_constants__WEBPACK_IMPORTED_MODULE_17__["ViewType"].Normal && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_13__["default"].viewType === _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_17__["SubsidiaryViewType"].MASTER_MANAGEMENT ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("WhiteLabel") : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("Subsidiary")), this._renderSubsidiaryTreeView())), _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_13__["default"].viewType !== _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_17__["SubsidiaryViewType"].NOT_MANAGEMENT && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-12 col-md-2 col-sm-2 col-lg-2 col-xl-2"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
@@ -5187,8 +5206,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_reducers_dateRangeReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/reducers/dateRangeReducer */ "./www/js/source/reactpages/reducers/dateRangeReducer.js");
 /* harmony import */ var _jsroot_reducers_currencyReducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/reducers/currencyReducer */ "./www/js/source/reactpages/reducers/currencyReducer.js");
 /* harmony import */ var _jsroot_reducers_usernameReducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/reducers/usernameReducer */ "./www/js/source/reactpages/reducers/usernameReducer.js");
-/* harmony import */ var _reducers_paramHandlerReducer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../reducers/paramHandlerReducer */ "./www/js/source/reactpages/pages/customer/player-segmentation/reducers/paramHandlerReducer.js");
-/* harmony import */ var _reducers_filterReducer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../reducers/filterReducer */ "./www/js/source/reactpages/pages/customer/player-segmentation/reducers/filterReducer.js");
+/* harmony import */ var _jsroot_reducers_subsidiaryReducer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/reducers/subsidiaryReducer */ "./www/js/source/reactpages/reducers/subsidiaryReducer.js");
+/* harmony import */ var _reducers_paramHandlerReducer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../reducers/paramHandlerReducer */ "./www/js/source/reactpages/pages/customer/player-segmentation/reducers/paramHandlerReducer.js");
 
 
 
@@ -5211,9 +5230,9 @@ const selectedCustomerClass = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPOR
 const dateRange = _jsroot_reducers_dateRangeReducer__WEBPACK_IMPORTED_MODULE_2__["dateRange"];
 const selectedCurrency = _jsroot_reducers_currencyReducer__WEBPACK_IMPORTED_MODULE_3__["selectedCurrency"];
 const username = _jsroot_reducers_usernameReducer__WEBPACK_IMPORTED_MODULE_4__["username"];
-const selectedSubsidiary = _reducers_filterReducer__WEBPACK_IMPORTED_MODULE_6__["selectedSubsidiary"];
-const subsidiarySearch = _reducers_filterReducer__WEBPACK_IMPORTED_MODULE_6__["subsidiarySearch"];
-const selectedParams = _reducers_paramHandlerReducer__WEBPACK_IMPORTED_MODULE_5__["selectedParams"];
+const selectedSubsidiary = _jsroot_reducers_subsidiaryReducer__WEBPACK_IMPORTED_MODULE_5__["selectedSubsidiary"];
+const subsidiarySearch = _jsroot_reducers_subsidiaryReducer__WEBPACK_IMPORTED_MODULE_5__["subsidiarySearch"];
+const selectedParams = _reducers_paramHandlerReducer__WEBPACK_IMPORTED_MODULE_6__["selectedParams"];
 
 /***/ }),
 
@@ -5306,6 +5325,36 @@ __webpack_require__.r(__webpack_exports__);
 
 const isLoading = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, {
   [_actions_types__WEBPACK_IMPORTED_MODULE_0__["TOGGLE_LOADER"]](state, action) {
+    return action.data;
+  }
+
+});
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/reducers/subsidiaryReducer.js":
+/*!****************************************************************!*\
+  !*** ./www/js/source/reactpages/reducers/subsidiaryReducer.js ***!
+  \****************************************************************/
+/*! exports provided: selectedSubsidiary, subsidiarySearch */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectedSubsidiary", function() { return selectedSubsidiary; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "subsidiarySearch", function() { return subsidiarySearch; });
+/* harmony import */ var _lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
+/* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/types */ "./www/js/source/reactpages/actions/types.js");
+
+
+const selectedSubsidiary = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(null, {
+  [_actions_types__WEBPACK_IMPORTED_MODULE_1__["SET_SUBSIDIARY_LIST"]](prevState, action) {
+    return action.data;
+  }
+
+});
+const subsidiarySearch = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(null, {
+  [_actions_types__WEBPACK_IMPORTED_MODULE_1__["SET_SUBSIDIARY_SEARCH"]](prevState, action) {
     return action.data;
   }
 

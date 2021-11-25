@@ -78,11 +78,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomerBusinessLogBuilderFactory.cs" />
     <Compile Include="CustomerClassService.cs" />
     <Compile Include="CustomerCommService.cs" />
     <Compile Include="CustomerListService.cs" />
-    <Compile Include="CustomerLogBuilder.cs" />
     <Compile Include="CustomerService.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="GroupComService.cs" />

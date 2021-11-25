@@ -18,7 +18,7 @@
         [HttpPost]
         [ApiFunctionAuthorization(PermissionKeys.PlayerProblemManagement)]
         [ValidationApiRequest(IsValidCurrencyList = true)]
-        [ApiAutoBindMetaModel(BindAgent = true, BindLanguage = true)]
+        [ApiAutoBindMetaModel(BindAgent = true, ApplySubsidiaryBusiness = true, BindLanguage = true)]
         public async Task<JsonResult<ApiPagingResult<PlayerInfo>>> GetProblemPlayerList(ProblemPlayerListMetaModel metaModel)
         {
             var result = await _playerService.GetProblemPlayerListAsync(metaModel);
@@ -28,7 +28,7 @@
         [HttpPost]
         [ApiFunctionAuthorization(PermissionKeys.PlayerProblemManagement)]
         [ValidationApiRequest(IsValidCurrencyList = true)]
-        [ApiAutoBindMetaModel(BindAgent = true, BindExportAll = true, BindLanguage = true)]
+        [ApiAutoBindMetaModel(BindAgent = true, ApplySubsidiaryBusiness = true, BindExportAll = true, BindLanguage = true)]
         public async Task<HttpResponseMessage> ExportProblemPlayerList(ProblemPlayerListMetaModel metaModel)
         {
             var hasVIPPermission = _authService.HasPermissions(SessionService.UserSession, PermissionKeys.PlayerVIPManagement);

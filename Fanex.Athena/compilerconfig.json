@@ -2,9 +2,5 @@
     {
         "outputFile": "Content/Plugin/Toast/toast.css",
         "inputFile": "Content/Plugin/Toast/toast.scss"
-    },
-    {
-        "outputFile": "www/css/source/pages/playerBatchUpdate/index.css",
-        "inputFile": "www/css/source/pages/playerBatchUpdate/index.scss"
     }
 ]

@@ -90,7 +90,6 @@
     <Compile Include="DataDomain\ErrorType.cs" />
     <Compile Include="DataDomain\FormatKey.cs" />
     <Compile Include="DataDomain\LiveStatusTypes.cs" />
-    <Compile Include="DataDomain\LogActionId.cs" />
     <Compile Include="DataDomain\MediaType.cs" />
     <Compile Include="DataDomain\OneAuthorizationErrorCode.cs" />
     <Compile Include="DataDomain\FunctionNames.cs" />
@@ -167,6 +166,7 @@
     <Compile Include="MetaModel\IMetaModelProductCodeList.cs" />
     <Compile Include="MetaModel\IMetalModelValidation.cs" />
     <Compile Include="MetaModel\IMetaModelSiteName.cs" />
+    <Compile Include="MetaModel\IMetaModelSubsidiarySearch.cs" />
     <Compile Include="MetaModel\IMetaModelUserId.cs" />
     <Compile Include="MetaModel\Product\ProductOption.cs" />
     <Compile Include="MetaModel\ProductValidationOption.cs" />

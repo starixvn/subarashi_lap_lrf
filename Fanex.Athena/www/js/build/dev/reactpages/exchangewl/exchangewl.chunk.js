@@ -345,11 +345,39 @@ const toggleLoader = show => {
 
 /***/ }),
 
+/***/ "./www/js/source/reactpages/actions/subsidiaryAction.js":
+/*!**************************************************************!*\
+  !*** ./www/js/source/reactpages/actions/subsidiaryAction.js ***!
+  \**************************************************************/
+/*! exports provided: setSubsidiaryList, setSubsidiarySearch */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSubsidiaryList", function() { return setSubsidiaryList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSubsidiarySearch", function() { return setSubsidiarySearch; });
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/actions/types.js");
+
+const setSubsidiaryList = subsidiaryList => {
+  return {
+    type: _types__WEBPACK_IMPORTED_MODULE_0__["SET_SUBSIDIARY_LIST"],
+    data: subsidiaryList
+  };
+};
+const setSubsidiarySearch = subsidiarySearch => {
+  return {
+    type: _types__WEBPACK_IMPORTED_MODULE_0__["SET_SUBSIDIARY_SEARCH"],
+    data: subsidiarySearch
+  };
+};
+
+/***/ }),
+
 /***/ "./www/js/source/reactpages/actions/types.js":
 /*!***************************************************!*\
   !*** ./www/js/source/reactpages/actions/types.js ***!
   \***************************************************/
-/*! exports provided: FETCH_DATA, SET_GRID_DATA, SET_SELECTED_PRODUCT, SET_SELECTED_BASECURRENCY, SET_BASECURRENCY_LIST, SET_SELECTED_CURRENCY, TOGGLE_LOADER, CHANGE_IS_EXCLUDE_TEST, USER_GUIDE_CONTENT, SET_DATE_RANGE, GET_DATE_CONSTRAINT, CHANGE_IS_CONVERT_ALL, SET_SELECTED_STATUS, SET_SELECTED_PLATFORM, SET_SELECTED_LIVESTATUS, SET_USERNAME, SET_REQUEST_PARAM, SET_REPORT_TITLE, SET_PAGING_OPTION */
+/*! exports provided: FETCH_DATA, SET_GRID_DATA, SET_SELECTED_PRODUCT, SET_SELECTED_BASECURRENCY, SET_BASECURRENCY_LIST, SET_SELECTED_CURRENCY, TOGGLE_LOADER, CHANGE_IS_EXCLUDE_TEST, USER_GUIDE_CONTENT, SET_DATE_RANGE, GET_DATE_CONSTRAINT, CHANGE_IS_CONVERT_ALL, SET_SELECTED_STATUS, SET_SELECTED_PLATFORM, SET_SELECTED_LIVESTATUS, SET_USERNAME, SET_REQUEST_PARAM, SET_REPORT_TITLE, SET_PAGING_OPTION, SET_SUBSIDIARY_LIST, SET_SUBSIDIARY_SEARCH */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -373,6 +401,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_REQUEST_PARAM", function() { return SET_REQUEST_PARAM; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_REPORT_TITLE", function() { return SET_REPORT_TITLE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_PAGING_OPTION", function() { return SET_PAGING_OPTION; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SUBSIDIARY_LIST", function() { return SET_SUBSIDIARY_LIST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SUBSIDIARY_SEARCH", function() { return SET_SUBSIDIARY_SEARCH; });
 const FETCH_DATA = 'FETCH_DATA';
 const SET_GRID_DATA = "SET_GRID_DATA";
 /* Product */
@@ -416,6 +446,57 @@ const SET_REPORT_TITLE = "SET_REPORT_TITLE";
 /* Live Status  */
 
 const SET_PAGING_OPTION = 'SET_PAGING_OPTION';
+/* Subsidiary Search  */
+
+const SET_SUBSIDIARY_LIST = 'SET_SUBSIDIARY_LIST';
+const SET_SUBSIDIARY_SEARCH = 'SET_SUBSIDIARY_SEARCH';
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/components/CheckBox.jsx":
+/*!**********************************************************!*\
+  !*** ./www/js/source/reactpages/components/CheckBox.jsx ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+
+
+const CheckBox = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.forwardRef((props, ref) => {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "checkbox-group",
+    ref: ref
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "checkbox",
+    className: "checkbox",
+    id: props.id,
+    checked: props.checked,
+    disabled: props.disabled,
+    onChange: () => props.onChange(!props.checked)
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    htmlFor: props.id
+  }, props.label));
+});
+CheckBox.propTypes = {
+  id: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired,
+  label: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
+  checked: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  disabled: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  onChange: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
+};
+CheckBox.defaultProps = {
+  label: '',
+  checked: true,
+  disabled: false,
+  onChange: function () {}
+};
+/* harmony default export */ __webpack_exports__["default"] = (CheckBox);
 
 /***/ }),
 
@@ -2868,7 +2949,7 @@ const Licensee = {
 /*!******************************************************!*\
   !*** ./www/js/source/reactpages/constants/report.js ***!
   \******************************************************/
-/*! exports provided: ReportLevel, ReportBy, SubsidiaryViewType */
+/*! exports provided: ReportLevel, ReportBy, SubsidiaryViewType, TreeViewOption */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2876,6 +2957,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReportLevel", function() { return ReportLevel; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReportBy", function() { return ReportBy; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SubsidiaryViewType", function() { return SubsidiaryViewType; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TreeViewOption", function() { return TreeViewOption; });
 const ReportLevel = {
   MAIN: 0,
   LICENSEE: 1,
@@ -2889,6 +2971,15 @@ const SubsidiaryViewType = {
   NOT_MANAGEMENT: 0,
   NORMAL_MANAGEMENT: 1,
   MASTER_MANAGEMENT: 2
+};
+const TreeViewOption = {
+  childrenField: 'Children',
+  keyField: 'Value',
+  valueField: 'Name',
+  statusField: 'Checked',
+  indent: 30,
+  includeSelectedParentKey: false,
+  useOriginalDataSource: false
 };
 
 /***/ }),
@@ -3511,13 +3602,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_loaderAction__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../actions/loaderAction */ "./www/js/source/reactpages/actions/loaderAction.js");
 /* harmony import */ var _actions_excludeTestAction__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../actions/excludeTestAction */ "./www/js/source/reactpages/actions/excludeTestAction.js");
 /* harmony import */ var _actions_dateRangeAction__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../actions/dateRangeAction */ "./www/js/source/reactpages/actions/dateRangeAction.js");
+/* harmony import */ var _actions_subsidiaryAction__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../actions/subsidiaryAction */ "./www/js/source/reactpages/actions/subsidiaryAction.js");
 
 
 
 
 
 
-const ActionCreators = Object.assign({}, _dataHandlerAction_js__WEBPACK_IMPORTED_MODULE_0__, _filterHandlerAction_js__WEBPACK_IMPORTED_MODULE_1__, _actions_currencyAction__WEBPACK_IMPORTED_MODULE_2__, _actions_loaderAction__WEBPACK_IMPORTED_MODULE_3__, _actions_excludeTestAction__WEBPACK_IMPORTED_MODULE_4__, _actions_dateRangeAction__WEBPACK_IMPORTED_MODULE_5__);
+
+const ActionCreators = Object.assign({}, _dataHandlerAction_js__WEBPACK_IMPORTED_MODULE_0__, _filterHandlerAction_js__WEBPACK_IMPORTED_MODULE_1__, _actions_currencyAction__WEBPACK_IMPORTED_MODULE_2__, _actions_loaderAction__WEBPACK_IMPORTED_MODULE_3__, _actions_excludeTestAction__WEBPACK_IMPORTED_MODULE_4__, _actions_dateRangeAction__WEBPACK_IMPORTED_MODULE_5__, _actions_subsidiaryAction__WEBPACK_IMPORTED_MODULE_6__);
 
 /***/ }),
 
@@ -4559,21 +4652,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/index.js */ "./www/js/source/reactpages/pages/exchangewl/actions/index.js");
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-select */ "./node_modules/react-select/dist/react-select.es.js");
-/* harmony import */ var _components_date_range_index__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../components/date-range/index */ "./www/js/source/reactpages/components/date-range/index.js");
-/* harmony import */ var _lib_langHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-/* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
-/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
-/* harmony import */ var _constants_report__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../constants/report */ "./www/js/source/reactpages/constants/report.js");
-/* harmony import */ var _constants_currency__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../constants/currency */ "./www/js/source/reactpages/constants/currency.js");
-/* harmony import */ var _lib_reportExcel__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../lib/reportExcel */ "./www/js/source/reactpages/pages/exchangewl/lib/reportExcel.js");
-/* harmony import */ var _lib_service__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../lib/service */ "./www/js/source/reactpages/pages/exchangewl/lib/service.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @9softstudio/react-multiselect */ "./node_modules/@9softstudio/react-multiselect/dist/index.js");
+/* harmony import */ var _9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/components/CheckBox */ "./www/js/source/reactpages/components/CheckBox.jsx");
+/* harmony import */ var _components_date_range_index__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../components/date-range/index */ "./www/js/source/reactpages/components/date-range/index.js");
+/* harmony import */ var _lib_langHelper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+/* harmony import */ var _constants_report__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../constants/report */ "./www/js/source/reactpages/constants/report.js");
+/* harmony import */ var _constants_currency__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../constants/currency */ "./www/js/source/reactpages/constants/currency.js");
+/* harmony import */ var _lib_reportExcel__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../lib/reportExcel */ "./www/js/source/reactpages/pages/exchangewl/lib/reportExcel.js");
+/* harmony import */ var _lib_service__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../lib/service */ "./www/js/source/reactpages/pages/exchangewl/lib/service.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_15__);
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
 
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -4605,7 +4703,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 
       this.props.toggleLoader(true);
       this.props.getGridData(params, () => {
-        _lib_service__WEBPACK_IMPORTED_MODULE_12__["Service"].showErrorMsg();
+        _lib_service__WEBPACK_IMPORTED_MODULE_14__["Service"].showErrorMsg();
         this.props.toggleLoader(false);
       });
       this.props.setParams(params.data);
@@ -4624,9 +4722,9 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 
       this.props.toggleLoader(true);
 
-      if (level === _constants_report__WEBPACK_IMPORTED_MODULE_9__["ReportLevel"].MAIN) {
+      if (level === _constants_report__WEBPACK_IMPORTED_MODULE_11__["ReportLevel"].MAIN) {
         this.props.exportExcel(params).then(response => this._doExportExcel(level, params.data, isAllowedCustomerComm, response.data)).catch(() => {
-          _lib_service__WEBPACK_IMPORTED_MODULE_12__["Service"].showErrorMsg();
+          _lib_service__WEBPACK_IMPORTED_MODULE_14__["Service"].showErrorMsg();
           this.props.toggleLoader(false);
         });
       } else {
@@ -4638,7 +4736,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       if (isValidMonthRange) {
         this.props.setDateRange(date);
       } else {
-        const message = _lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource('DateRangeExceedMsg').replace('{0}', RANGE_MONTH_CONSTRAINT);
+        const message = _lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource('DateRangeExceedMsg').replace('{0}', RANGE_MONTH_CONSTRAINT);
         alert(message);
       }
     });
@@ -4650,25 +4748,29 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         this.props.setReportBy(newValue);
       }
     });
+
+    _defineProperty(this, "_onChangeSubsidiaryList", (currentItem, selectedItemsKey, treeViewList) => {
+      this.props.setSubsidiaryList(selectedItemsKey);
+    });
   }
 
   _doExportExcel(level, params, isAllowedCustomerComm, gridData) {
     if (!gridData || !gridData.DataList.length) {
       this.props.toggleLoader(false);
-      alert(_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource("NoInfo"));
+      alert(_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("NoInfo"));
       return;
     }
 
     let excelData;
 
-    if (level === _constants_report__WEBPACK_IMPORTED_MODULE_9__["ReportLevel"].MAIN) {
+    if (level === _constants_report__WEBPACK_IMPORTED_MODULE_11__["ReportLevel"].MAIN) {
       excelData = params;
     } else {
       const firstRow = gridData.DataList[0];
-      const drillDownDate = _lib_service__WEBPACK_IMPORTED_MODULE_12__["Service"].getDrilldownDateRange(params.ReportBy, params.FromDate, params.ToDate, firstRow.Date);
+      const drillDownDate = _lib_service__WEBPACK_IMPORTED_MODULE_14__["Service"].getDrilldownDateRange(params.ReportBy, params.FromDate, params.ToDate, firstRow.Date);
       excelData = {
-        FromDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_7__["default"].convertDateToString(moment__WEBPACK_IMPORTED_MODULE_13___default()(drillDownDate.fromDate)),
-        ToDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_7__["default"].convertDateToString(moment__WEBPACK_IMPORTED_MODULE_13___default()(drillDownDate.toDate)),
+        FromDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_9__["default"].convertDateToString(moment__WEBPACK_IMPORTED_MODULE_15___default()(drillDownDate.fromDate)),
+        ToDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_9__["default"].convertDateToString(moment__WEBPACK_IMPORTED_MODULE_15___default()(drillDownDate.toDate)),
         BaseCurrency: gridData.AdditionalInfo,
         CurrencyName: firstRow.CurrencyName,
         CurrencyId: firstRow.CurrencyId,
@@ -4676,11 +4778,11 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       };
     }
 
-    const title = _lib_service__WEBPACK_IMPORTED_MODULE_12__["Service"].getReportTitle({
+    const title = _lib_service__WEBPACK_IMPORTED_MODULE_14__["Service"].getReportTitle({
       fromDate: excelData.FromDate,
       toDate: excelData.ToDate
-    }, excelData.BaseCurrency ? excelData.BaseCurrency : excelData.CurrencyName, level === _constants_report__WEBPACK_IMPORTED_MODULE_9__["ReportLevel"].MAIN ? excelData.CurrencyId === 0 : false);
-    const excel = new _lib_reportExcel__WEBPACK_IMPORTED_MODULE_11__["default"](gridData, title, level, isAllowedCustomerComm, excelData.ReportBy);
+    }, excelData.BaseCurrency ? excelData.BaseCurrency : excelData.CurrencyName, level === _constants_report__WEBPACK_IMPORTED_MODULE_11__["ReportLevel"].MAIN ? excelData.CurrencyId === 0 : false);
+    const excel = new _lib_reportExcel__WEBPACK_IMPORTED_MODULE_13__["default"](gridData, title, level, isAllowedCustomerComm, excelData.ReportBy);
     excel.export(() => {
       this.props.toggleLoader(false);
     });
@@ -4692,28 +4794,51 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       fromDate,
       toDate
     } = this.props.dateRange;
-    const baseCurrency = _constants_currency__WEBPACK_IMPORTED_MODULE_10__["BaseCurrency"].find(x => x.value === this.props.selectedCurrency.value);
+    const subsidiarySearch = this.props.subsidiarySearch;
+    const baseCurrency = _constants_currency__WEBPACK_IMPORTED_MODULE_12__["BaseCurrency"].find(x => x.value === this.props.selectedCurrency.value);
     param = {
       CurrencyId: this.props.selectedCurrency.value,
       BaseCurrency: baseCurrency ? baseCurrency.text : "",
       CurrencyName: baseCurrency ? baseCurrency.text : this.props.selectedCurrency.label,
-      FromDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_7__["default"].convertDateToString(fromDate),
-      ToDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_7__["default"].convertDateToString(toDate),
+      FromDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_9__["default"].convertDateToString(fromDate),
+      ToDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_9__["default"].convertDateToString(toDate),
       ReportBy: this.props.selectedReportBy,
       IsExcludedTestData: this.props.isExcludeTest,
-      Level: 0
+      Level: 0,
+      SubsidiarySearch: subsidiarySearch,
+      SubsidiaryList: subsidiarySearch ? this.props.selectedSubsidiary : ""
     };
     return {
       data: param
     };
   }
 
+  _renderSubsidiaryTreeView() {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_5__["TreeViewSelect"], {
+      language: _lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].currentLanguage,
+      id: "SubsidiaryTreeView",
+      dataSource: _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].subsidiaryList,
+      keyField: "Value",
+      valueField: "Name",
+      statusField: "Checked",
+      texts: {
+        SelectOptions: "Please select",
+        All: "All",
+        SelectedItemCount: "# selected"
+      },
+      isAllTextShown: false,
+      hasSearchBox: false,
+      treeViewOption: _constants_report__WEBPACK_IMPORTED_MODULE_11__["TreeViewOption"],
+      onChange: this._onChangeSubsidiaryList
+    });
+  }
+
   _renderDateRange() {
     const {
       dateRange
     } = this.props;
-    const dateConstraint = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_8__["default"].dateConstraint;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_date_range_index__WEBPACK_IMPORTED_MODULE_5__["DateRange"], {
+    const dateConstraint = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].dateConstraint;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_date_range_index__WEBPACK_IMPORTED_MODULE_7__["DateRange"], {
       startDate: dateRange.fromDate,
       endDate: dateRange.toDate,
       minDate: dateConstraint.minDate,
@@ -4728,7 +4853,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     const {
       selectedCurrency
     } = this.props;
-    const currencyList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_8__["default"].currencyList;
+    const currencyList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].currencyList;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_4__["default"], {
       instanceId: "ddlCurrency",
       name: "form-field-name",
@@ -4747,7 +4872,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       className: "form-group"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       className: "label-text"
-    }, _lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource('ReportBy')), reportByOption.map((option, i) => {
+    }, _lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource('ReportBy')), reportByOption.map((option, i) => {
       const key = 'ReportBy' + i;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         key: `Group${key}`
@@ -4777,46 +4902,74 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         marginLeft: "0px"
       },
       htmlFor: "ExcludeTest"
-    }, _lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource("ExcludeTestData")));
+    }, _lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("ExcludeTestData")));
   }
 
   render() {
+    const showSubsidiarySearch = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].viewType !== _constants_report__WEBPACK_IMPORTED_MODULE_11__["SubsidiaryViewType"].NOT_MANAGEMENT;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "page-filter"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "row"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 col-sm-7 col-md-4 col-xl-3"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      className: "label-text"
-    }, _lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource('Date')), this._renderDateRange())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, showSubsidiarySearch && this.props.subsidiarySearch && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-12 col-sm-4 col-md-2 col-xl-2"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       className: "label-text"
-    }, _lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource('Currency')), this._renderCurrencySelectList())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].viewType === _constants_report__WEBPACK_IMPORTED_MODULE_11__["SubsidiaryViewType"].MASTER_MANAGEMENT ? _lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("WhiteLabel") : _lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("Subsidiary")), this._renderSubsidiaryTreeView())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-12 col-sm-4 col-md-2 col-xl-2"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "form-group"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      className: "label-text"
+    }, _lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource('Date')), this._renderDateRange())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-12 col-sm-4 col-md-2 col-xl-2"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "form-group"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      className: "label-text"
+    }, _lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource('Currency')), this._renderCurrencySelectList())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-6 col-sm-3 col-md-2 col-xl-2"
     }, this._renderReportByOption()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 col-sm-3 col-md-2 col-xl-2"
+      className: "col-6 col-sm-3 col-md-2 col-xl-2"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
-    }, this._renderExcludeTestDataCheckBox())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 col-sm-3 col-md-2 col-xl-2"
+    }, this._renderExcludeTestDataCheckBox())), !showSubsidiarySearch && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-12 col-sm-3 col-md-2 col-xl-1"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group button-group"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       type: "button",
       className: "btn btn-submit",
+      disabled: this.props.subsidiarySearch && !this.props.selectedSubsidiary,
       onClick: this.submit
-    }, _lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource('Submit'))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, _lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource('Submit'))))), showSubsidiarySearch && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "row"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-12 col-sm-3 col-md-2 col-xl-1"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "form-group button-group"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      type: "button",
+      className: "btn btn-submit",
+      disabled: this.props.subsidiarySearch && !this.props.selectedSubsidiary,
+      onClick: this.submit
+    }, _lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource('Submit')))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-12 col-sm-3 col-md-2 col-xl-2"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "form-group"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      id: "SubsidiarySearch",
+      checked: this.props.subsidiarySearch,
+      onChange: checked => this.props.setSubsidiarySearch(checked),
+      label: _lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("SubsidiarySearch")
+    })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "caret-block"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
       className: "icon-excel right",
       onClick: this.exportExcel,
-      title: _lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource('ExportToExcel')
+      title: _lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource('ExportToExcel')
     })));
   }
 
@@ -4866,7 +5019,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const defaultState = Object.assign({}, window.initialState);
+const defaultState = Object.assign({
+  subsidiarySearch: false
+}, window.initialState);
 const store = _lib_store__WEBPACK_IMPORTED_MODULE_5__["default"].createStore(_reducers_index_js__WEBPACK_IMPORTED_MODULE_4__["default"], defaultState);
 class App extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
   constructor(props) {
@@ -5680,6 +5835,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _reducers_loaderReducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../reducers/loaderReducer */ "./www/js/source/reactpages/reducers/loaderReducer.js");
 /* harmony import */ var _reducers_excludeTestReducer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../reducers/excludeTestReducer */ "./www/js/source/reactpages/reducers/excludeTestReducer.js");
 /* harmony import */ var _reducers_dateRangeReducer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../reducers/dateRangeReducer */ "./www/js/source/reactpages/reducers/dateRangeReducer.js");
+/* harmony import */ var _reducers_subsidiaryReducer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../reducers/subsidiaryReducer */ "./www/js/source/reactpages/reducers/subsidiaryReducer.js");
 
 
 
@@ -5687,7 +5843,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(Object.assign(_dataHandlerReducer_js__WEBPACK_IMPORTED_MODULE_1__, _filterHandlerReducer_js__WEBPACK_IMPORTED_MODULE_2__, _reducers_currencyReducer__WEBPACK_IMPORTED_MODULE_3__, _reducers_loaderReducer__WEBPACK_IMPORTED_MODULE_4__, _reducers_excludeTestReducer__WEBPACK_IMPORTED_MODULE_5__, _reducers_dateRangeReducer__WEBPACK_IMPORTED_MODULE_6__)));
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(Object.assign(_dataHandlerReducer_js__WEBPACK_IMPORTED_MODULE_1__, _filterHandlerReducer_js__WEBPACK_IMPORTED_MODULE_2__, _reducers_currencyReducer__WEBPACK_IMPORTED_MODULE_3__, _reducers_loaderReducer__WEBPACK_IMPORTED_MODULE_4__, _reducers_excludeTestReducer__WEBPACK_IMPORTED_MODULE_5__, _reducers_dateRangeReducer__WEBPACK_IMPORTED_MODULE_6__, _reducers_subsidiaryReducer__WEBPACK_IMPORTED_MODULE_7__)));
 
 /***/ }),
 
@@ -5776,6 +5933,36 @@ __webpack_require__.r(__webpack_exports__);
 
 const isLoading = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, {
   [_actions_types__WEBPACK_IMPORTED_MODULE_0__["TOGGLE_LOADER"]](state, action) {
+    return action.data;
+  }
+
+});
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/reducers/subsidiaryReducer.js":
+/*!****************************************************************!*\
+  !*** ./www/js/source/reactpages/reducers/subsidiaryReducer.js ***!
+  \****************************************************************/
+/*! exports provided: selectedSubsidiary, subsidiarySearch */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectedSubsidiary", function() { return selectedSubsidiary; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "subsidiarySearch", function() { return subsidiarySearch; });
+/* harmony import */ var _lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
+/* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/types */ "./www/js/source/reactpages/actions/types.js");
+
+
+const selectedSubsidiary = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(null, {
+  [_actions_types__WEBPACK_IMPORTED_MODULE_1__["SET_SUBSIDIARY_LIST"]](prevState, action) {
+    return action.data;
+  }
+
+});
+const subsidiarySearch = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(null, {
+  [_actions_types__WEBPACK_IMPORTED_MODULE_1__["SET_SUBSIDIARY_SEARCH"]](prevState, action) {
     return action.data;
   }
 

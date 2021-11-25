@@ -9,7 +9,7 @@ namespace Fanex.Athena.Controllers.Report
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
-
+    using Fanex.Athena.Service.Core.Users.Interfaces;
     using Model.Core.DataDomain;
 
     using System;
@@ -21,6 +21,13 @@ namespace Fanex.Athena.Controllers.Report
     [FunctionAuthorization(PermissionKeys.ReportCashOutWinLoss)]
     public class CashOutWinLossReportController : ReportBaseController
     {
+        private readonly ISubsidiaryService _subsidiaryService;
+
+        public CashOutWinLossReportController(ISubsidiaryService subsidiaryService)
+        {
+            _subsidiaryService = subsidiaryService;
+        }
+
         [HttpGet]
         public ActionResult Index()
         {
@@ -40,11 +47,15 @@ namespace Fanex.Athena.Controllers.Report
                 .Key
             };
 
+            var subsidiaryList = _subsidiaryService.GetSubsidiaryTree(userSession, licenseeSession.LicenseeName);
+            var viewType = !subsidiaryList.Any() ? SubsidiaryViewType.NotManagement : (SubsidiaryViewType)userSession.SubsidiaryViewType;
             var model = new CashOutWinLossViewModel
             {
                 IsLicenseeOfferBA = licenseeSession.IsEnableBA,
                 Param = metaModel,
-                CurrencyList = userSession.CurrencyList
+                CurrencyList = userSession.CurrencyList,
+                SubsidiaryList = subsidiaryList,
+                ViewType = viewType
             };
 
             return View("~/Views/Desktop/Report/CashOutWinLoss/Main.cshtml", model);

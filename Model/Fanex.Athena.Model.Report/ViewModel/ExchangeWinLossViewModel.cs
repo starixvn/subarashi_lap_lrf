@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using Core.DataDomain;
+    using Fanex.Athena.Model.Core.DTO.Common;
 
     public class ExchangeWinLossViewModel
     {
@@ -13,6 +14,9 @@
             ReportBy = ReportByType.Daily;
             ExcludeTestData = true;
         }
+
+        public SubsidiaryViewType ViewType { get; set; }
+        public IEnumerable<CheckedItem> SubsidiaryList { get; set; }
 
         public DateTime FromDate { get; set; }
 

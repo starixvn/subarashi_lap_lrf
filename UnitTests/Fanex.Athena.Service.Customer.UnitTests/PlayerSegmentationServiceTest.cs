@@ -1,9 +1,7 @@
 ﻿using Fanex.Athena.DataAccess.Customer.Interfaces;
 using Fanex.Athena.Model.Auth;
-using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Model.Core.DTO.Common;
 using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
-using Fanex.Athena.Model.Customer.Enum;
 using Fanex.Athena.Model.Customer.MetaModel;
 using Fanex.Athena.Model.Report.DTO;
 using Fanex.Athena.Service.Core.Users.Interfaces;
@@ -44,56 +42,6 @@ namespace Fanex.Athena.Service.Customer.UnitTests
             _contextService = null;
             _subsidiaryService = null;
             _targetService = null;
-        }
-
-        [TestCase(UserLevelType.Subsidiary, SubsidiaryViewType.NormalManagement, "1,2,3")]
-        [TestCase(UserLevelType.Licensee, SubsidiaryViewType.NotManagement, "1,2,3")]
-        [TestCase(UserLevelType.Licensee, SubsidiaryViewType.MasterManagement, "")]
-        [TestCase(UserLevelType.Licensee, SubsidiaryViewType.NormalManagement, "")]
-        public async Task GetProblemPlayerListAsync_IsNormalView_AgentListNoChange(byte userLevel, SubsidiaryViewType subsidiaryViewType, string subsidiaryList)
-        {
-            //Arrange
-            var metaModel = FakeHelper.Create<ProblemPlayerListMetaModel>();
-            metaModel.SubsidiaryList = subsidiaryList;
-
-            var expectedResult = metaModel.AgentListXml;
-
-            _contextService.UserLevel.Returns(userLevel);
-            _contextService.SubsidiaryViewType.Returns((byte)subsidiaryViewType);
-            _playerDataAccess.GetProblemPlayerListAsync(Arg.Any<ProblemPlayerListMetaModel>()).Returns(Task.FromResult(new ApiPagingResult<PlayerInfo>()));
-            _subsidiaryService.GenerateAgentList(Arg.Any<UserAuthInfo>(), Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>()).Returns(FakeHelper.Create<string>());
-
-            //Act
-            _ = await _targetService.GetProblemPlayerListAsync(metaModel);
-
-            //Assert
-
-            Assert.AreEqual(expectedResult, metaModel.AgentListXml);
-        }
-
-        [Test]
-        public async Task GetProblemPlayerListAsync_NotNormalView_AgentListChange()
-        {
-            //Arrange
-            var metaModel = FakeHelper.Create<ProblemPlayerListMetaModel>();
-
-            metaModel.SubsidiaryList = FakeHelper.Create<string>();
-            var expectedResult = FakeHelper.Create<string>();
-            var licenseeName = FakeHelper.Create<string>();
-            var user = FakeHelper.Create<UserAuthInfo>();
-
-            _contextService.LicenseeName.Returns(licenseeName);
-            _contextService.User.Returns(user);
-            _contextService.SubsidiaryViewType.Returns((byte)SubsidiaryViewType.NormalManagement);
-
-            _playerDataAccess.GetProblemPlayerListAsync(Arg.Any<ProblemPlayerListMetaModel>()).Returns(Task.FromResult(new ApiPagingResult<PlayerInfo>()));
-            _subsidiaryService.GenerateAgentList(user, licenseeName, metaModel.SubsidiaryList, metaModel.CurrencyIdList).Returns(expectedResult);
-
-            //Act
-            _ = await _targetService.GetProblemPlayerListAsync(metaModel);
-
-            //Assert
-            Assert.AreEqual(expectedResult, metaModel.AgentListXml);
         }
 
         [Test]
@@ -241,30 +189,6 @@ namespace Fanex.Athena.Service.Customer.UnitTests
 
             //Act
             var actualResult = await _targetService.UpdateVipStatusAsync(metaModel);
-
-            //Assert
-            Assert.AreEqual(expectedResult, actualResult);
-        }
-
-        [TestCase(UserLevelType.Subsidiary, null, (byte)SubsidiaryViewType.NormalManagement, true, PlayerSegmentationViewType.Normal)]
-        [TestCase(UserLevelType.Licensee, null, (byte)SubsidiaryViewType.NotManagement, true, PlayerSegmentationViewType.Normal)]
-        [TestCase(UserLevelType.Licensee, null, (byte)SubsidiaryViewType.MasterManagement, false, PlayerSegmentationViewType.Normal)]
-        [TestCase(UserLevelType.Licensee, null, (byte)SubsidiaryViewType.NormalManagement, true, PlayerSegmentationViewType.Susidiary)]
-        [TestCase(UserLevelType.Licensee, 1, (byte)SubsidiaryViewType.MasterManagement, true, PlayerSegmentationViewType.Susidiary)]
-        [TestCase(UserLevelType.Licensee, null, (byte)SubsidiaryViewType.MasterManagement, true, PlayerSegmentationViewType.WhiteLabel)]
-        public void GetViewType_WhenCall_ReturnViewTypeCorrectly(byte userLevel, int? whiteLabelID, byte subsidiaryViewType, bool anySubsidiary, PlayerSegmentationViewType expectedResult)
-        {
-            //Arrange
-            var fakeUser = new UserAuthInfo
-            {
-                UserLevel = userLevel,
-                WhiteLabelID = whiteLabelID
-            };
-            _contextService.User.Returns(fakeUser);
-            _contextService.SubsidiaryViewType.Returns(subsidiaryViewType);
-
-            //Act
-            var actualResult = _targetService.GetViewType(anySubsidiary);
 
             //Assert
             Assert.AreEqual(expectedResult, actualResult);

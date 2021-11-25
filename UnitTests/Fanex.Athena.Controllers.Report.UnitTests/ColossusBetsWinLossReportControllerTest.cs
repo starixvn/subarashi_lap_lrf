@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Web.Mvc;
     using Base.UnitTests;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
@@ -59,7 +60,7 @@
             productService.GetProductAccess(
                 SessionService.LicenseeSession.LicenseeId,
                 SessionService.UserSession.Language).Returns(new ProductAccess(productList.ToList()));
-            return new ColossusBetsWinLossReportController()
+            return new ColossusBetsWinLossReportController(Substitute.For<ISubsidiaryService>())
             {
                 LangService = LangService,
                 SessionServiceInstance = SessionService,

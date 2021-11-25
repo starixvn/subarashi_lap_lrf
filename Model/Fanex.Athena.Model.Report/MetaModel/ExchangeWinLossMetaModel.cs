@@ -3,7 +3,7 @@ using Fanex.Athena.Model.Core.MetaModel;
 
 namespace Fanex.Athena.Model.Report.MetaModel
 {
-    public class ExchangeWinLossMetaModel : BaseReportMetaModel, IMetaModelValidation
+    public class ExchangeWinLossMetaModel : BaseReportMetaModel, IMetaModelValidation, IMetaModelSubsidiarySearch
     {
         public byte ReportBy { get; set; }
 
@@ -21,5 +21,7 @@ namespace Fanex.Athena.Model.Report.MetaModel
         }
 
         public string DefaultBaseCurrency { get; set; }
+        public string SubsidiaryList { get; set; }
+        public bool SubsidiarySearch { get; set; }
     }
 }

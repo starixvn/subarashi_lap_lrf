@@ -136,21 +136,9 @@ function generateConfig(environment) {
             [`${cssPath}/pages/reports/customerpendingfunds`]: pathConfig.cssPaths.customerpendingfunds,
             [`${cssPath}/pages/reports/customerturnover`]: pathConfig.cssPaths.customerturnover,
             [`${cssPath}/pages/reports/customerwinloss`]: pathConfig.cssPaths.customerwinloss,
-            [`${cssPath}/pages/playercommission/index`]: pathConfig.cssPaths.playercomission,
-            [`${jsPath}/pages/playercommission/multiplemovegroup`]: [pathConfig.scriptPaths.playercomissionmultiplemovegroup],
-            [`${jsPath}/pages/playercommission/multipleremovefromgroup`]: [pathConfig.scriptPaths.playercomissionmultipleremovefromgroup],
-            [`${jsPath}/pages/playercommission/multipleupdategroup`]: [pathConfig.scriptPaths.playercomissionmultipleupdategroup],
-            [`${jsPath}/pages/playercommission/singlemovegroup`]: [pathConfig.scriptPaths.playercomissionsinglemovegroup],
-            [`${jsPath}/pages/playercommission/singleremovefromgroup`]: [pathConfig.scriptPaths.playercomissionsingleremovefromgroup],
-            [`${jsPath}/pages/playercommission/singleupdategroup`]: [pathConfig.scriptPaths.playercomissionsingleupdategroup],
+           
             [`${cssPath}/pages/customer/customer-class`]: pathConfig.cssPaths.customerClass,
-            [`${cssPath}/pages/components/fixedColumnsTable`]: pathConfig.cssPaths.fixedColumnsTable,
-
-            [`${cssPath}/pages/playerBatchUpdate/index`]: pathConfig.cssPaths.playerBatchUpdate,
-            [`${jsPath}/pages/playerBatchUpdate/accountStatus`]: [pathConfig.scriptPaths.playerBatchUpdateAccountStatus],
-            [`${jsPath}/pages/playerBatchUpdate/specialLevel`]: [pathConfig.scriptPaths.playerBatchUpdateSpecialLevel],
-            [`${jsPath}/pages/playerBatchUpdate/oddsGroup`]: [pathConfig.scriptPaths.playerBatchUpdateOddsGroup],
-            [`${jsPath}/pages/playerBatchUpdate/baStatus`]: [pathConfig.scriptPaths.playerBatchUpdateBAStatus]
+            [`${cssPath}/pages/components/fixedColumnsTable`]: pathConfig.cssPaths.fixedColumnsTable
         },
         output: {
             path: pathConfig.projectRoot,

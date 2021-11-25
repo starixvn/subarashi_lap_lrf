@@ -3,11 +3,13 @@ import { connect } from 'react-redux'
 import { ActionCreators } from '../actions/index.js'
 import { bindActionCreators } from 'redux'
 import Select from 'react-select'
+import { TreeViewSelect } from '@9softstudio/react-multiselect'
+import CheckBox from '@jsroot/components/CheckBox'
 import { DateRange } from '../../../components/date-range/index'
 import LangHelper from '../../../lib/langHelper'
 import Site from '@jsroot/lib/site'
 import AppData from '@jsroot/lib/AppData'
-import { ReportLevel } from '../../../constants/report'
+import { ReportLevel, SubsidiaryViewType, TreeViewOption } from '../../../constants/report'
 import { BaseCurrency } from '../../../constants/currency'
 import ReportExcel from '../lib/reportExcel'
 import { Service } from '../lib/service'
@@ -46,9 +48,9 @@ export class FormFilter extends Component {
         if (!params) {
             return;
         }
-     
+
         this.props.toggleLoader(true);
-        if (level === ReportLevel.MAIN) {            
+        if (level === ReportLevel.MAIN) {
             this.props.exportExcel(params)
                 .then(response => this._doExportExcel(level, params.data, isAllowedCustomerComm, response.data))
                 .catch(() => {
@@ -87,7 +89,7 @@ export class FormFilter extends Component {
         }
 
         const title = Service.getReportTitle(
-            { fromDate: excelData.FromDate, toDate: excelData.ToDate }, 
+            { fromDate: excelData.FromDate, toDate: excelData.ToDate },
             excelData.BaseCurrency ? excelData.BaseCurrency : excelData.CurrencyName,
             level === ReportLevel.MAIN ? excelData.CurrencyId === 0 : false);
         const excel = new ReportExcel(gridData, title, level, isAllowedCustomerComm, excelData.ReportBy);
@@ -100,8 +102,9 @@ export class FormFilter extends Component {
         let param = {};
 
         const { fromDate, toDate } = this.props.dateRange;
+        const subsidiarySearch = this.props.subsidiarySearch;
         const baseCurrency = BaseCurrency.find(x => x.value === this.props.selectedCurrency.value);
-        
+
         param = {
             CurrencyId: this.props.selectedCurrency.value,
             BaseCurrency: baseCurrency ? baseCurrency.text : "",
@@ -110,9 +113,11 @@ export class FormFilter extends Component {
             ToDate: Site.convertDateToString(toDate),
             ReportBy: this.props.selectedReportBy,
             IsExcludedTestData: this.props.isExcludeTest,
-            Level: 0
+            Level: 0,
+            SubsidiarySearch: subsidiarySearch,
+            SubsidiaryList: subsidiarySearch ? this.props.selectedSubsidiary : ""
         };
-        
+
         return {
             data: param
         };
@@ -135,6 +140,25 @@ export class FormFilter extends Component {
         }
     }
 
+    _onChangeSubsidiaryList = (currentItem, selectedItemsKey, treeViewList) => {
+        this.props.setSubsidiaryList(selectedItemsKey);
+    }
+
+    _renderSubsidiaryTreeView() {
+        return <TreeViewSelect
+            language={LangHelper.currentLanguage}
+            id="SubsidiaryTreeView"
+            dataSource={AppData.subsidiaryList}
+            keyField="Value"
+            valueField="Name"
+            statusField="Checked"
+            texts={{ SelectOptions: "Please select", All: "All", SelectedItemCount: "# selected" }}
+            isAllTextShown={false}
+            hasSearchBox={false}
+            treeViewOption={TreeViewOption}
+            onChange={this._onChangeSubsidiaryList} />;
+    }
+
     _renderDateRange() {
         const { dateRange } = this.props;
         const dateConstraint = AppData.dateConstraint;
@@ -154,21 +178,21 @@ export class FormFilter extends Component {
             value={selectedCurrency}
             options={currencyList}
             onChange={(item) => this.props.setSelectedCurrency(item)} />
-   }
+    }
 
     _renderReportByOption() {
         const { reportByOption, selectedReportBy } = this.props;
 
         return (<div className='form-group'>
             <label className='label-text'>{LangHelper.getSingleResource('ReportBy')}</label>
-            {   
+            {
                 reportByOption.map((option, i) => {
                     const key = 'ReportBy' + i;
                     return (<span key={`Group${key}`}>
                         <input type='radio' value={option.value} checked={selectedReportBy === option.value} id={key}
                             onChange={this.changeReportBy} />
                         <label htmlFor={key}>{option.label}</label>
-                    </span>)  
+                    </span>)
                 })
             }
         </div>);
@@ -177,49 +201,78 @@ export class FormFilter extends Component {
     _renderExcludeTestDataCheckBox() {
         return (<div className="checkbox-group">
             <input type="checkbox" className="checkbox" checked={this.props.isExcludeTest} id="ExcludeTest"
-                   onChange={() => this.props.changeIsExcludeTest(!this.props.isExcludeTest)} />
-            <label style={{marginLeft: "0px"}} htmlFor="ExcludeTest">{LangHelper.getSingleResource("ExcludeTestData")}</label>
+                onChange={() => this.props.changeIsExcludeTest(!this.props.isExcludeTest)} />
+            <label style={{ marginLeft: "0px" }} htmlFor="ExcludeTest">{LangHelper.getSingleResource("ExcludeTestData")}</label>
         </div>);
     }
 
     render() {
+        const showSubsidiarySearch = AppData.viewType !== SubsidiaryViewType.NOT_MANAGEMENT;
         return (
             <div className='page-filter'>
                 <div className='row'>
-                    <div className='col-12 col-sm-7 col-md-4 col-xl-3'>
+                    {showSubsidiarySearch && this.props.subsidiarySearch && (<div className='col-12 col-sm-4 col-md-2 col-xl-2'>
+                        <div className="form-group">
+                            <label className="label-text">
+                                {AppData.viewType === SubsidiaryViewType.MASTER_MANAGEMENT ? LangHelper.getSingleResource("WhiteLabel") : LangHelper.getSingleResource("Subsidiary")}
+                            </label>
+                            {this._renderSubsidiaryTreeView()}
+                        </div>
+                    </div>)}
+                    <div className='col-12 col-sm-4 col-md-2 col-xl-2'>
                         <div className='form-group'>
                             <label className='label-text'>{LangHelper.getSingleResource('Date')}</label>
                             {this._renderDateRange()}
                         </div>
                     </div>
 
-                     <div className='col-12 col-sm-4 col-md-2 col-xl-2'>
+                    <div className='col-12 col-sm-4 col-md-2 col-xl-2'>
                         <div className='form-group'>
                             <label className='label-text'>{LangHelper.getSingleResource('Currency')}</label>
                             {this._renderCurrencySelectList()}
                         </div>
                     </div>
 
-                    <div className='col-12 col-sm-4 col-md-2 col-xl-2'>
+                    <div className='col-6 col-sm-3 col-md-2 col-xl-2'>
                         {this._renderReportByOption()}
                     </div>
 
-                    <div className='col-12 col-sm-3 col-md-2 col-xl-2'>
+                    <div className='col-6 col-sm-3 col-md-2 col-xl-2'>
                         <div className="form-group">
-                           {this._renderExcludeTestDataCheckBox()}
+                            {this._renderExcludeTestDataCheckBox()}
                         </div>
                     </div>
 
-                    <div className='col-12 col-sm-3 col-md-2 col-xl-2'>
+                    {!showSubsidiarySearch && <div className='col-12 col-sm-3 col-md-2 col-xl-1'>
                         <div className='form-group button-group'>
-                            <button type='button' className='btn btn-submit' onClick={this.submit}>{LangHelper.getSingleResource('Submit')}</button>
+                            <button type='button' className='btn btn-submit'
+                                disabled={this.props.subsidiarySearch && !this.props.selectedSubsidiary}
+                                onClick={this.submit}>{LangHelper.getSingleResource('Submit')}</button>
                         </div>
-                    </div>
+                    </div>}
                 </div>
-                <div className='caret-block'>
+                {showSubsidiarySearch &&
+                    <div className='row'>
+                        <div className='col-12 col-sm-3 col-md-2 col-xl-1'>
+                            <div className='form-group button-group'>
+                                <button type='button' className='btn btn-submit'
+                                    disabled={this.props.subsidiarySearch && !this.props.selectedSubsidiary}
+                                    onClick={this.submit}>{LangHelper.getSingleResource('Submit')}</button>
+                            </div>
+                        </div>
+                        <div className='col-12 col-sm-3 col-md-2 col-xl-2'>
+                            <div className="form-group">
+                                <CheckBox id="SubsidiarySearch"
+                                    checked={this.props.subsidiarySearch}
+                                    onChange={checked => this.props.setSubsidiarySearch(checked)}
+                                    label={LangHelper.getSingleResource("SubsidiarySearch")} />
+                            </div>
+                        </div>
+                    </div>}
+                < div className='caret-block'>
                     <i className='icon-excel right' onClick={this.exportExcel} title={LangHelper.getSingleResource('ExportToExcel')}></i>
-                </div> 
-            </div>
+                </div>
+            </div >
         );
     }
 }

@@ -7,9 +7,10 @@
 namespace Fanex.Athena.Model.Report.MetaModel
 {
     using Fanex.Athena.Model.Core.Helper;
+    using Fanex.Athena.Model.Core.MetaModel;
     using System;
 
-    public class ThirdPartyWinLossMetaModel : BaseDrilldownReportMetaModel
+    public class ThirdPartyWinLossMetaModel : BaseDrilldownReportMetaModel, IMetaModelSubsidiarySearch
     {
         private DateTime? _fromDate;
 
@@ -57,5 +58,8 @@ namespace Fanex.Athena.Model.Report.MetaModel
         public DateTime ? MoveBetsDay { get; set; }
 
         public DateTime ? BalanceUpDay { get; set; }
+
+        public string SubsidiaryList { get; set; }
+        public bool SubsidiarySearch { get; set; }
     }
 }

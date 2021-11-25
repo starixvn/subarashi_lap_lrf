@@ -2,7 +2,7 @@
 {
     using Fanex.Athena.Model.Core.MetaModel;
 
-    public class BasePlayerListMetaModel : IMetaModelValidation, IMetaModelAgent, IMetaModelCurrencyIdList, IMetaModelPaging
+    public class BasePlayerListMetaModel : IMetaModelValidation, IMetaModelAgent, IMetaModelCurrencyIdList, IMetaModelPaging, IMetaModelSubsidiarySearch
     {
         private const int DefaultPageSize = 500;
         private const int MaxPageSize = 2000;
@@ -27,6 +27,7 @@
         public byte SortType { get; set; }
 
         public string SubsidiaryList { get; set; }
+        public bool SubsidiarySearch { get; set; }
         public string CustomerClass { get; set; }
 
         public virtual bool IsValid => PageIndex > 0 && PageSize <= MaxPageSize;

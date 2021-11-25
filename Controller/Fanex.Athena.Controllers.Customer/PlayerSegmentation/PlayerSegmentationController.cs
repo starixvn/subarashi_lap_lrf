@@ -9,6 +9,7 @@
     using System.Web.SessionState;
     using Fanex.Athena.Extension.Utility.Internal;
     using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
     using Fanex.Athena.Model.Customer.ViewModel;
     using Fanex.Athena.Resources;
@@ -64,13 +65,16 @@
 
         private async Task<PlayerSegmentationViewModel> BuildViewModel()
         {
-            var currencyList = SessionServiceInstance.UserSession.CurrencyList;
+            var userSession = SessionServiceInstance.UserSession;
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
+
+            var currencyList = userSession.CurrencyList;
             var lang = LangService.GetCurrentLanguage();
 
             var hasVIPManangementPermission = HasVIPManagementPermission();
             var hasVIPManangementEditPermission = HasVIPManagementEditPermission();
-            var subsidiaryList = _subsidiaryService.GetSubsidiaryTree(SessionServiceInstance.UserSession, SessionServiceInstance.LicenseeSession.LicenseeName);
-            var viewType = (byte)_playerService.GetViewType(subsidiaryList.Any());
+            var subsidiaryList = _subsidiaryService.GetSubsidiaryTree(userSession, licenseeSession.LicenseeName);
+            var viewType = !subsidiaryList.Any() ? SubsidiaryViewType.NotManagement : (SubsidiaryViewType)userSession.SubsidiaryViewType;
             var reasonList = await GetReasonList(lang).ConfigureAwait(false);
             var problemPlayerCustomerClass = reasonList.OrderBy(_ => _.CustomerClass).Select(_ => _.CustomerClass.ToString()).Distinct();
             var vipMngCustomerClass = await _playerService.GetCustomerClass();

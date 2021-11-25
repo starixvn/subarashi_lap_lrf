@@ -1,7 +1,7 @@
 ﻿'use strict';
 define(['jquery', 'common/site', './customerlist.state', './customerlist.service', './customerlist.service.dormant',
-    'components/pluginhelper/autocomplete', 'lib/jquery.multiselect.nlevel'],
-    function ($, Site, CustomerListState, CustomerListService, CustomerListServiceDormant, AutoComplete) {
+    'components/pluginhelper/autocomplete', 'helpers/subsidiaryhelper', 'lib/jquery.multiselect.nlevel'],
+    function ($, Site, CustomerListState, CustomerListService, CustomerListServiceDormant, AutoComplete, SubsidiaryHelper) {
         let _state;
         let _dormantState;
 
@@ -179,7 +179,7 @@ define(['jquery', 'common/site', './customerlist.state', './customerlist.service
                     enableSubmitButton(checked);
                 });
 
-                const groupData = CustomerListService.getSubsidiaryTree($.parseJSON(data));
+                const groupData = SubsidiaryHelper.getSubsidiaryTree($.parseJSON(data));
 
                 $('#subsidiary-multiselect').multiSelect(
                     {
