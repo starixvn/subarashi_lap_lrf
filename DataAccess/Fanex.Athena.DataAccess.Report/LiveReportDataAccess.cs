@@ -117,7 +117,7 @@ namespace Fanex.Athena.DataAccess.Report
             }
         }
 
-        public async Task<IList<LiveReportWinLossByMatch>> GetLiveReportWinlossByMatch(LiveReportMatchListMetalModel metaModel)
+        public async Task<SortableList<LiveReportWinLossByMatch>> GetLiveReportWinlossByMatch(LiveReportMatchListMetalModel metaModel)
         {
             const string UspName = "Lrf_Rpt_LiveReportWinlossByMatch";
             var moveBetsDate = _balanceUpDataAccess.GetBalanceUp().MoveBetsDay;
@@ -139,7 +139,7 @@ namespace Fanex.Athena.DataAccess.Report
 
                 using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
                 {
-                    var data = new List<LiveReportWinLossByMatch>();
+                    var data = new SortableList<LiveReportWinLossByMatch>();
 
                     while (reader.Read())
                     {

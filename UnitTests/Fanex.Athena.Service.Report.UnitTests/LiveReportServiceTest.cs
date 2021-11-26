@@ -6,7 +6,7 @@
     using System.Threading.Tasks;
 
     using DataAccess.Report.Interfaces;
-
+    using Fanex.Athena.Extension.Utility;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Report.DTO.LiveReports;
@@ -141,7 +141,7 @@
             // Arrange
             var metaModel = new LiveReportMatchListMetalModel { SportId = sportType };
 
-            var dataList = new List<LiveReportWinLossByMatch>
+            var dataList = new SortableList<LiveReportWinLossByMatch>
             {
                 new LiveReportWinLossByMatch { ShowTime = "ShowTime" }
             };

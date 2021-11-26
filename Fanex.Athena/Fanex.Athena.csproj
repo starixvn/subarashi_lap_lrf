@@ -1139,6 +1139,8 @@
     <Content Include="Views\Desktop\Report\LeagueWinLoss\Main.cshtml" />
     <Content Include="www\css\build\dev\reactpages\leaguewinloss\index.chunk.js.map" />
     <Content Include="www\css\build\dev\reactpages\leaguewinloss\index.css.map" />
+    <Content Include="Views\Desktop\Report\LiveReport\MatchList\Index.cshtml" />
+    <Content Include="Views\Desktop\Report\LiveReport\MatchList\Content.cshtml" />
     <None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
     <None Include="www\css\source\pages\betlist\result\result.happy5.scss" />
     <None Include="www\css\source\reactpages\components\alert\icons\error.scss" />
@@ -2720,7 +2722,6 @@
     <Content Include="Views\Desktop\Report\LicenseeWinLoss\Content.cshtml" />
     <Content Include="Views\Desktop\Report\LicenseeWinLoss\Filter.cshtml" />
     <Content Include="Views\Desktop\Report\LicenseeWinLoss\Main.cshtml" />
-    <Content Include="Views\Desktop\Report\LiveReport\MatchList\Content.cshtml" />
     <Content Include="Views\Desktop\Report\LiveReport\MatchList\Content.Data.cshtml" />
     <Content Include="Views\Desktop\Report\LiveReport\MatchList\Content.Header.cshtml" />
     <Content Include="Views\Desktop\Shared\_Report.jqGridLayout.cshtml" />
@@ -5985,6 +5986,7 @@
     <Content Include="App_Data\Template\Reports\Turnover.xls" />
     <Content Include="App_Data\Template\Reports\WinLossByBetType.xls" />
     <Content Include="App_Data\Template\Reports\WinLossByProducts.xls" />
+	<Content Include="App_Data\Template\Reports\LiveReportMatchList.xls" />
     <Content Include="Content\Web.config" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <Content Include="Views\Desktop\Customer\CustomerDialog\RemoveFromGroup.cshtml" />

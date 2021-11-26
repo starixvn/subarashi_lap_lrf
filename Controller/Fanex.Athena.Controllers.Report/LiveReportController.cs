@@ -13,6 +13,7 @@ namespace Fanex.Athena.Controllers.Report
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel.LiveReports;
+    using Fanex.Athena.VendorAdapter;
     using Fanex.Athena.Web.ActionFilter;
     using Fanex.Athena.Web.ResultExtension;
 
@@ -106,6 +107,60 @@ namespace Fanex.Athena.Controllers.Report
         [AutoBindMetaModel(BindAgent = true)]
         public async Task<ActionResult> MatchList(LiveReportMatchListMetalModel metaModel)
         {
+            var model = await GetMatchData(metaModel);
+            return View("~/Views/Desktop/Report/LiveReport/MatchList/Index.cshtml", model);
+        }
+
+        [HttpGet]
+        [ValidationWebRequest]
+        [AutoBindMetaModel(BindAgent = true)]
+        public async Task<ActionResult> MatchListSort(LiveReportMatchListMetalModel metaModel)
+        {
+            var model = await GetMatchData(metaModel);
+            return PartialView("~/Views/Desktop/Report/LiveReport/MatchList/Content.cshtml", model);
+        }
+
+        [HttpPost]
+        [ValidationWebRequest]
+        [AutoBindMetaModel(BindAgent = true)]
+        public async Task<ActionResult> MatchListExport(LiveReportMatchListMetalModel metaModel)
+        {
+            var model = await GetMatchData(metaModel);
+            return MatchListExcel(model);
+        }
+
+        private ActionResult MatchListExcel(LiveReportMatchListViewModel viewModel)
+        {
+            const string FileName = "LiveReport";
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
+            var productAccess = GetProductAccess(licenseeSession.LicenseeId, SessionServiceInstance.UserSession.Language);
+            var templatePath = HostingEnvironment.MapPath("~/App_Data/Template/Reports/LiveReportMatchList.xls");
+
+            var showingOption = new ShowingOption
+            {
+                CustomerCommVisible = licenseeSession.IsAllowedCustomerComm,
+                BAVisible = productAccess.IsAllowBA,
+                HasAmountDueToColumn = AppSettingInstance.HasAmountDueToColumn
+            };
+
+            var convertingOption = new ConvertingOption
+            {
+                IsConvert = viewModel.Param.IsConvert,
+                BaseCurrency = viewModel.Param.BaseCurrency,
+                CurrencyName = viewModel.Param.CurrencyName
+            };
+
+            var _cacheRefAdapter = new CacheRefAdapter();
+
+            var excel = new LiveReportWinLossByMatchExcel(templatePath, convertingOption, showingOption, viewModel, _cacheRefAdapter.GetSportName(viewModel.Param.SportId));
+
+            excel.Export();
+
+            return new ExcelResult(excel.Workbook, FileName);
+        }
+
+        private async Task<LiveReportMatchListViewModel> GetMatchData(LiveReportMatchListMetalModel metaModel)
+        {
             var licenseeSession = SessionServiceInstance.LicenseeSession;
             var userSession = SessionServiceInstance.UserSession;
 
@@ -121,7 +176,7 @@ namespace Fanex.Athena.Controllers.Report
                 CurrencyName = metaModel.CurrencyName,
             };
 
-            return View("~/Views/Desktop/Report/LiveReport/MatchList/Content.cshtml", model);
+            return model;
         }
 
         [HttpPost]

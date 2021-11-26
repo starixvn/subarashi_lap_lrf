@@ -759,6 +759,66 @@ Array.prototype.insertBefore = function (value, before) {
 
 /***/ }),
 
+/***/ "./www/js/source/helpers/sortableheader.js":
+/*!*************************************************!*\
+  !*** ./www/js/source/helpers/sortableheader.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($) {
+    var Selector = {
+        SortColumn: "#SortColumn",
+        SortDirection: "#SortDirection"
+    };
+    var COLUMN_NAME_DATA = "column-name";
+
+    var _me = {
+        createSortingIcon: function (sortHandler) {
+            if ($("#RowCount").val() <= 1) {
+                $("#header-content .sortable").removeClass("sort-heading");
+            }
+            else {
+                $("#header-content .sortable").each(function (index, element) {
+                    var $sortHeader = $(element).find(".sort-heading");
+                    var sortColumn = $sortHeader.data(COLUMN_NAME_DATA);
+                    if (sortColumn === $(Selector.SortColumn).val()) {
+                        $sortHeader.addClass("sorted-heading");
+
+                        var sortClass = $(Selector.SortDirection).val() === "DESC" ? "sort-icon-desc" : "sort-icon-asc";
+                        var sortSpan = $("<span class='sort-icon'></span>");
+                        sortSpan.addClass(sortClass);
+                        sortSpan.appendTo($sortHeader);
+                    }
+
+                    $(element).click(function () {
+                        _me.sortReport($sortHeader.data(COLUMN_NAME_DATA));
+                        sortHandler($sortHeader.data(COLUMN_NAME_DATA));
+                    });
+                });
+            }
+        },
+
+        sortReport: function (sortColumn) {
+            var sortDirection = $(Selector.SortColumn).val() === sortColumn ? $(Selector.SortDirection).val() === "DESC" ? "ASC" : "DESC" : "ASC";
+
+            $(Selector.SortColumn).val(sortColumn);
+            $(Selector.SortDirection).val(sortDirection);
+
+            var currencyName = $("#CurrencyId option:selected").text();
+            currencyName = $.trim(currencyName);
+            $("#CurrencyName").val(currencyName);
+        }
+    };
+
+    return _me;
+}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+/***/ }),
+
 /***/ "./www/js/source/pages/report/livereport/helper.js":
 /*!*********************************************************!*\
   !*** ./www/js/source/pages/report/livereport/helper.js ***!
@@ -831,24 +891,76 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function($) {var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! common/querystring */ "./www/js/source/common/querystring.js"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js"), __webpack_require__(/*! ./helper */ "./www/js/source/pages/report/livereport/helper.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (QueryString, Site, Helper) {
+/* WEBPACK VAR INJECTION */(function($) {var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! common/querystring */ "./www/js/source/common/querystring.js"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js"), __webpack_require__(/*! ./helper */ "./www/js/source/pages/report/livereport/helper.js"), __webpack_require__(/*! helpers/sortableheader */ "./www/js/source/helpers/sortableheader.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (QueryString, Site, Helper, SortableHeader) {
     'use strict';
+
+    const EXCEL_FILENAME = 'LiveReport.xls';
 
     function initialize() {
         Site.initialize();
         initEvent();
+        SortableHeader.createSortingIcon(submitForm);
+    }
+
+    function submitForm() {
+        let url = Site.resolveClientUrl('LiveReport/MatchListSort');
+        url = getMatchListUrl(url);
+
+        $.ajax({
+            url: url,
+            async: true,
+            type: 'GET',
+            cache: false,
+            success: function (result) {
+                $('#header-content').html(result);
+                SortableHeader.createSortingIcon(submitForm);
+            },
+            beforeSend: function () {
+                Site.blockUI();
+            },
+            complete: function () {
+                Site.unBlockUI();
+            }
+        });
+
+        return false;
+    }
+
+    function getMatchListUrl(url) {
+        url = Site.setLicenseeOptionOriginalParam(url);
+        url = QueryString.setParam(url, 'SportId', $('#SportId').val());
+        url = QueryString.setParam(url, 'ProductCode', $('#ProductCode').val());
+        url = QueryString.setParam(url, 'FromDate', $('#FromDate').val());
+        url = QueryString.setParam(url, 'ToDate', $('#ToDate').val());
+        url = QueryString.setParam(url, 'LiveIndicator', $('#LiveIndicator').val());
+        url = QueryString.setParam(url, 'ProductCodeList', $('#ProductCodeList').val());
+        url = QueryString.setParam(url, 'SortColumn', $('#SortColumn').val());
+        url = QueryString.setParam(url, 'SortDirection', $('#SortDirection').val());
+        url = QueryString.setParam(url, 'CurrencyId', $('#CurrencyId').val());
+        url = QueryString.setParam(url, 'CurrencyName', $('#CurrencyName').val());
+        url = QueryString.setParam(url, 'BaseCurrency', $('#BaseCurrency').val());
+        return url;
     }
 
     function initEvent() {
         $('body').on('click', '.match-detail-link', function () {
             viewMatchBetList(this);
         });
+
+        $('#SortColumn').val('');
+        $('#SortDirection').val('');
+
+        $('#ExportToExcel').click(function () {
+            $('#IsExportExcel').val(true);
+            $('#LiveReportMatchListForm').submit();
+            $('#IsExportExcel').val(false);
+        });
     }
 
     function viewMatchBetList(target) {
         let url = Site.resolveClientUrl('LiveReportBetList/Match');
 
-        const currencyName = $('#CurrencyName').attr('data-original');
+        const currencyName = $('#CurrencyName').val();
         let data = $(target).attr('data-drill-down');
         data = $.parseJSON(data);
         url = Site.setLicenseeOptionOriginalParam(url);

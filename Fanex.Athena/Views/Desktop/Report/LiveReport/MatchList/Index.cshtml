@@ -1,0 +1,66 @@
+﻿@using Fanex.Athena.Model.Core.Helper
+@using Fanex.Athena.VendorAdapter;
+@model Fanex.Athena.Model.Report.ViewModel.LiveReports.LiveReportMatchListViewModel
+@{
+    ViewBag.Title = "LAP - " + ViewResources.Report +
+    " - " + ViewResources.LiveReport;
+    Layout = "~/Views/Desktop/Shared/_ReportLayout.cshtml";
+    var _cacheRefAdapter = new CacheRefAdapter();
+}
+@section pagecss {
+    <link href="@Url.ContentLinkByEnv("/www/css/build/pages/reports/livereport.css")" rel="stylesheet" />
+}
+@section pagejs {
+    <script src="@Url.ContentLinkByEnv("/www/js/build/pages/reports/livereportmatchlist.chunk.js")"></script>
+}
+@section Content
+{
+    <div class="page-results">
+        <div class="row">
+            <a href="javascript:window.history.back();" class="waves-effect waves-light btn btn-back"><i class="icon-arrow left"></i>@ViewResources.Back</a>
+            <div class="col right">
+                <i class="icon-excel right" title="@ViewResources.ExportToExcel" id="ExportToExcel"></i>
+            </div>
+        </div>
+        <div class="result-content">
+            <div class="panel-heading active">
+                <div class="panel-title">
+                    @{var param = Model.Param;}
+                    @_cacheRefAdapter.GetSportName(param.SportId) -
+                    @(string.Format(ViewResources.Viewin, param.IsConvert ? param.BaseCurrency.ToUpper() : param.CurrencyName.ToUpper()))
+                </div>
+            </div>
+            @if (Model.MainResult.Count == 0)
+            {
+                <p class="no-info-row">@ViewResources.NoInfo</p>
+            }
+            else
+            {
+                <div class="main-content">
+                    <div class="panel-body">
+
+                        <div id="header-content" class="header-content">
+                            @{ Html.RenderPartial("~/Views/Desktop/Report/LiveReport/MatchList/Content.cshtml"); }
+                        </div>
+
+                        @using (Html.BeginForm("MatchListExport", "LiveReport", FormMethod.Post, new { @id = "LiveReportMatchListForm" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.Hidden("ProductCode", Model.Param.ProductCode)
+                            @Html.Hidden("FromDate", Model.Param.FromDate)
+                            @Html.Hidden("ToDate", Model.Param.ToDate)
+                            @Html.Hidden("ProductCodeList", Model.Param.ProductCodeList)
+                            @Html.Hidden("SportId", Model.Param.SportId)
+                            @Html.Hidden("CurrencyId", Model.Param.CurrencyId)
+                            @Html.Hidden("SortDirection", Model.Param.SortDirection)
+                            @Html.Hidden("SortColumn", Model.Param.SortColumn)
+                            @Html.Hidden("LiveIndicator", Model.Param.LiveIndicator)
+                            @Html.Hidden("BaseCurrency", Model.Param.BaseCurrency)
+                            <input id="CurrencyName2" name="CurrencyName" type="hidden" value="@Model.Param.CurrencyName">
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}

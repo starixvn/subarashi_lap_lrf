@@ -9,6 +9,7 @@ namespace Fanex.Athena.DataAccess.Report.Interfaces
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Report.DTO.LiveReports;
     using Fanex.Athena.Model.Report.MetaModel;
@@ -24,6 +25,6 @@ namespace Fanex.Athena.DataAccess.Report.Interfaces
                         IDictionary<int, string> currencyList,
             IEnumerable<Product> products);
 
-        Task<IList<LiveReportWinLossByMatch>> GetLiveReportWinlossByMatch(LiveReportMatchListMetalModel metaModel);
+        Task<SortableList<LiveReportWinLossByMatch>> GetLiveReportWinlossByMatch(LiveReportMatchListMetalModel metaModel);
     }
 }
