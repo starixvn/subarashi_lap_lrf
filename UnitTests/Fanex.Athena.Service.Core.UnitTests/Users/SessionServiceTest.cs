@@ -31,6 +31,7 @@
         private ICurrencyDataAccess _currencyDataAccess;
         private ISessionStorage _sessionStorage;
         private ISessionService _sessionService;
+        private IProductService _productService;
 
         [OneTimeSetUp]
         public void SetUp()
@@ -43,6 +44,7 @@
             _appSettings = Substitute.For<IAppSettings>();
             _functionService = Substitute.For<IFunctionService>();
             _licenseeDataAccess = Substitute.For<ILicenseeDataAccess>();
+            _productService = Substitute.For<IProductService>();
             var licenseeList = new List<Licensee>
             {
                 new Licensee
@@ -58,7 +60,8 @@
                 _licenseeDataAccess,
                 _currencyDataAccess,
                 _appSettings,
-                _sessionStorage);
+                _sessionStorage,
+                _productService);
         }
 
         [OneTimeTearDown]
@@ -68,6 +71,7 @@
             _licenseeDataAccess = null;
             _currencyDataAccess = null;
             _sessionService = null;
+            _productService = null;
         }
 
         [Test]
@@ -264,7 +268,6 @@
             // Assert
             Assert.That(result, Is.False);
         }
-
 
         [Test]
         public void GenerateAgentListXml_CurrencyIdIsNumberAndPositive_ReturnCorrectXmlString()

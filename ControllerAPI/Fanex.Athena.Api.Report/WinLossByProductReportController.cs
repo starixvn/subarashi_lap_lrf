@@ -64,6 +64,7 @@ namespace Fanex.Athena.Api.Report
 
         [HttpPost]
         [ValidationApiRequest(ObjectName = "metaModel", IsValidCurrency = true, IsIncludeKeanOcean = true)]
+        [ApiAutoBindMetaModel(BindProductOptions = true)]
 #pragma warning disable S107 // Methods should not have too many parameters
         public Task<dynamic> Index(
            WinLossByProductMetaModel metaModel,
@@ -82,6 +83,7 @@ namespace Fanex.Athena.Api.Report
 
         [HttpPost]
         [ValidationApiRequest(ObjectName = "metaModel", IsValidCurrency = true, IsIncludeKeanOcean = true)]
+        [ApiAutoBindMetaModel(BindProductOptions = true)]
         public Task<dynamic> Index([FromBody] WinLossByProductMetaModel metaModel)
         {
             return ProcessRequest(metaModel, null, null);
@@ -259,6 +261,7 @@ namespace Fanex.Athena.Api.Report
             metaModel.DrillDownCurrencyName = currencyName;
             metaModel.Level = level;
             metaModel.CustomerId = custId;
+
             var drillDownMemberId = memberId;
             if (metaModel.MemberId == 0)
             {
@@ -289,12 +292,12 @@ namespace Fanex.Athena.Api.Report
                     Data = RestructureData(result.DataList, level),
                     Total = result.TotalData,
                     result.SummaryTotal,
-                    ProductOptions = metaModel.ProductOptions.ToJson(),
+                    ProductOptions = metaModel.OriginalProductOptions.ToJson(),
                     MemberId = drillDownMemberId,
                     SystemId = drillDownSystemId,
                     ErrorMessage = result.ResultInfo.Message
                 }
-                : GetEmptyResult(metaModel.ProductOptions, memberId, drillDownSystemId, result.ResultInfo.Message);
+                : GetEmptyResult(metaModel.OriginalProductOptions, memberId, drillDownSystemId, result.ResultInfo.Message);
         }
 
         private string ValidateUserName(string userName)

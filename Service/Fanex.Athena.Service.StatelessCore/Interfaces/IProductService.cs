@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Fanex.Athena.Model.Core.DTO.Common;
+using Fanex.Athena.Model.Core.MetaModel.Product;
 
 namespace Fanex.Athena.Service.StatelessCore.Interfaces
 {
@@ -14,5 +15,11 @@ namespace Fanex.Athena.Service.StatelessCore.Interfaces
         ProductAccess GetSingleWalletProductAccess(int licenseeId, string languageCode, string functionConfigKey = null);
 
         string[] GetAllowedProducts(string functionName = null);
+
+        IList<string> GetOfferedSubProducts(int licenseeId);
+
+        IList<ProductOption> GetAllowedSubProductOptions(IEnumerable<string> offeredSubProductList, IList<ProductOption> productOptions);
+
+        string GetAllowedSubProductCodeList(IEnumerable<string> offeredSubProductList, string productCodes);
     }
 }

@@ -1,10 +1,4 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="OutStandingCompletedBetListController.cs" company="">
-// Copyright (c) . All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-
-namespace Fanex.Athena.Api.BetList
+﻿namespace Fanex.Athena.Api.BetList
 {
     using System.Threading.Tasks;
 
@@ -42,7 +36,7 @@ namespace Fanex.Athena.Api.BetList
         public async Task<dynamic> Index(
             int page,
             int rows,
-            [FromUri]BetListMetaModel metaModel)
+            [FromUri] BetListMetaModel metaModel)
         {
             return await GetPagingBetListResult(metaModel, "Lrf_BetList_CustomerList_Mem", page, rows).ConfigureAwait(false);
         }

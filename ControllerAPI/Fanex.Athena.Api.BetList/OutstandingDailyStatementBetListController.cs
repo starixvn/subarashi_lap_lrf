@@ -1,10 +1,4 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="OutstandingDailyStatementBetListController.cs" company="">
-// Copyright (c) . All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-
-namespace Fanex.Athena.Api.BetList
+﻿namespace Fanex.Athena.Api.BetList
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -39,6 +33,7 @@ namespace Fanex.Athena.Api.BetList
 
         [HttpPost]
         [ValidationApiRequest]
+        [ApiAutoBindMetaModel(BindProductCodeList = true, BindShowingBetFromIP = true)]
         public async Task<dynamic> Index(BetListMetaModel metaModel)
         {
             var licenseeSession = SessionService.LicenseeSession;
@@ -47,9 +42,8 @@ namespace Fanex.Athena.Api.BetList
             metaModel.LicenseeId = licenseeSession.LicenseeId;
             metaModel.ToDate = metaModel.ToDate.Date.AddDays(1).AddMinutes(-1);
             metaModel.HasPlayerCom = licenseeSession.IsAllowedCustomerComm;
-            metaModel.IsShowIpvn = userSession.IsShowIpvn && userSession.IsShowIp;
-            metaModel.IsShowIp = userSession.IsShowIp;
             metaModel.IsEnableSingleWallet = licenseeSession.IsEnableSingleWallet;
+
             if (_authorizationService.HasPermissionOnData(userSession.CurrencyAgentList, metaModel.CustId, metaModel.TransId))
             {
                 return await _betListApiClient.PostAsync("/OutstandingDailyStatementBetList/GetData",

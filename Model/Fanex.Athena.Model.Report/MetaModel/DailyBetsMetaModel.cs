@@ -14,6 +14,7 @@ namespace Fanex.Athena.Model.Report.MetaModel
         public DateTime Date { get; set; }
 
         public string ProductCodeList { get; set; }
+        public string OriginalProductCodeList { get; set; }
 
         public string CurrencyIdList { get; set; }
 

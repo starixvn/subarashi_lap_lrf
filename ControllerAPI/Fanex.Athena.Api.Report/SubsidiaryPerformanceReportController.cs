@@ -37,12 +37,13 @@
         [HttpPost]
         [ValidationApiRequest(IsValidProductCodeList = true,
             FunctionConfig = FunctionNames.SubsidiaryPerformance, IsSingleWalletProduct = true)]
+        [ApiAutoBindMetaModel(BindProductCodeList = true)]
         public async Task<dynamic> Index(SubsidiaryPerformanceMetaModel metaModel)
         {
             var userSession = SessionService.UserSession;
+            var licenseeSession = SessionService.LicenseeSession;
             var isSubsidiary = userSession.UserLevel == UserLevelType.Subsidiary;
-
-            metaModel.LicenseeName = SessionService.LicenseeSession.LicenseeName;
+            metaModel.LicenseeName = licenseeSession.LicenseeName;
 
             string agentListXml = null;
             if (isSubsidiary)
@@ -56,19 +57,21 @@
             }
 
             metaModel.AgentListXml = agentListXml;
+
             return await _subsidiaryPerformanceService.GetData(metaModel, userSession.CurrencyList).ConfigureAwait(false);
         }
 
         [HttpPost]
         [ValidationApiRequest(IsValidProductCodeList = true,
             FunctionConfig = FunctionNames.SubsidiaryPerformance, IsSingleWalletProduct = true)]
+        [ApiAutoBindMetaModel(BindProductCodeList = true)]
         public async Task<dynamic> Detail(SubsidiaryPerformanceMetaModel metaModel)
         {
-            var licenseeName = SessionService.LicenseeSession.LicenseeName;
+            var licenseeSession = SessionService.LicenseeSession;
             var userSession = SessionService.UserSession;
-            metaModel.LicenseeName = licenseeName;
-            var agentIdListByCurrency = _subsidiaryService.GetCurrencyAgentList(userSession, licenseeName, metaModel.SubsidiaryId, metaModel.IsExcludeTest);
+            metaModel.LicenseeName = licenseeSession.LicenseeName;
 
+            var agentIdListByCurrency = _subsidiaryService.GetCurrencyAgentList(userSession, licenseeSession.LicenseeName, metaModel.SubsidiaryId, metaModel.IsExcludeTest);
             if (agentIdListByCurrency.Any())
             {
                 metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyList, agentIdListByCurrency);

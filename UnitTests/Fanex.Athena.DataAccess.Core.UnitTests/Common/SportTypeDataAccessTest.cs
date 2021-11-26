@@ -43,7 +43,6 @@
             Assert.Multiple(() =>
             {
                 ObjectDb.Received(1).SetParameterValue("licenseeId", LicenseeId);
-                ObjectDb.Received(1).SetParameterValue("langkey", LanguageCode);
             });
         }
 

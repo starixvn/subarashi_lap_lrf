@@ -38,6 +38,8 @@
 
         private IPortalApiService _portalApiService;
 
+        private IProductService _productService = Substitute.For<IProductService>();
+
         [OneTimeSetUp]
         public void FixtureSetUp()
         {
@@ -64,6 +66,7 @@
             _leagueDataAccess = null;
             _matchDataAccess = null;
             _sessionService = null;
+            _productService = null;
         }
 
         [Test]
@@ -80,6 +83,11 @@
                  _sessionService.LicenseeSession.LicenseeId,
                  _sessionService.UserSession.Language,
                  productCode).Returns(new List<SportProductItem> { parent, child });
+
+                _productService.GetAllowedSubProductCodeList(
+                    _sessionService.LicenseeSession.OfferedSubProductList,
+                    productCode)
+                    .Returns(productCode);
 
                 // action
                 var result = (await controller.GetSports(productCode).ConfigureAwait(false)).ElementAt(0);
@@ -108,6 +116,11 @@
                  productCode,
                  _sessionService.UserSession.Language)
                  .Returns(new List<CheckedItem> { item });
+
+                _productService.GetAllowedSubProductCodeList(
+                   _sessionService.LicenseeSession.OfferedSubProductList,
+                   productCode)
+                   .Returns(productCode);
 
                 // action
                 var result = (await controller.GetBetTypes(productCode)).ElementAt(0);
@@ -183,7 +196,8 @@
                 _leagueDataAccess,
                 _matchDataAccess,
                 _betTypeService,
-                _portalApiService);
+                _portalApiService,
+                _productService);
         }
     }
 }

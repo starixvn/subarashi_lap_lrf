@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
-using Fanex.Athena.Model.Auth;
 using Fanex.Athena.Model.Core.MetaModel;
 using Fanex.Athena.Extension.Helper;
 using Fanex.Athena.Service.Core.Users;
@@ -16,6 +15,10 @@ namespace Fanex.Athena.Web.ActionFilter
     {
         private static readonly ISessionStorage _sessionStorage = new SessionStorage();
 
+        public IProductService ProductService { get; set; }
+
+        public ILicenseeSettingService LicenseeSettingService { get; set; }
+
         public bool BindAgent { get; set; }
 
         public bool BindCurrencyList { get; set; }
@@ -27,8 +30,10 @@ namespace Fanex.Athena.Web.ActionFilter
         public bool BindLanguage { get; set; }
 
         public bool BindIp { get; set; }
-        public IProductService ProductService { get; set; }
-        public ILicenseeSettingService LicenseeSettingService { get; set; }
+
+        public bool BindProductCodeList { get; set; }
+
+        public bool BindProductOptions { get; set; }
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
@@ -67,6 +72,16 @@ namespace Fanex.Athena.Web.ActionFilter
             if (BindCurrencyList)
             {
                 AutoBindMetaModelService.MapCurrencyList(actionArgument, userSession.CurrencyList);
+            }
+
+            if (BindProductCodeList)
+            {
+                AutoBindMetaModelService.MapProductCodeList(actionArgument, _sessionStorage.LicenseeAuthInfo.OfferedSubProductList, ProductService);
+            }
+
+            if (BindProductOptions)
+            {
+                AutoBindMetaModelService.MapProductOptions(actionArgument, _sessionStorage.LicenseeAuthInfo.OfferedSubProductList, ProductService);
             }
 
             base.OnActionExecuting(filterContext);

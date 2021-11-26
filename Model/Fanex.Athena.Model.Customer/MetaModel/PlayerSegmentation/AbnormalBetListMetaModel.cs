@@ -4,7 +4,7 @@
     using System;
     using System.Collections.Generic;
 
-    public class AbnormalBetListMetaModel : IMetaModelValidation, IMetaModelAgent, IMetaModelShowIP
+    public class AbnormalBetListMetaModel : IMetaModelValidation, IMetaModelAgent, IMetaModelShowBetFromIP
     {
         private const int MaxPageSize = 2000;
 

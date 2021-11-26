@@ -13,6 +13,7 @@
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Model.Core.MetaModel.Product;
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
@@ -22,8 +23,8 @@
 
     public class LicenseeWinLossDataAccess : BaseDataAccess, ILicenseeWinLossDataAccess
     {
-        private readonly string[] _ignoredLicenseeWLProducts = new[] { Product.BA };
-        private readonly string[] _ignoredTurnoverProducts = new[] { Product.BT, Product.CO };
+        private readonly string[] _ignoredLicenseeWLProducts = new[] { Product.BA, Product.SLT };
+        private readonly string[] _ignoredTurnoverProducts = new[] { Product.BT, Product.CO, Product.SLT };
 
         private readonly IBalanceUpDataAccess _balanceUpDataAccess;
 
@@ -207,11 +208,14 @@
             db.SetParameterValue("DefaultBaseCurrency", metaModel.DefaultBaseCurrency);
             db.SetParameterValue("CheckPromotionPrize", checkPromotionPrize);
             db.SetParameterValue("VIPPlayerOnly", metaModel.IsVIPPlayerOnly);
+            db.SetParameterValue("ProductList", metaModel.ProductCodeList);
 
-            foreach (var product in metaModel.ProductOptions)
+            var productBA = metaModel.ProductOptions.FirstOrDefault(_ => _.Code == Product.BA);
+            if (productBA != null)
             {
-                db.SetParameterValue("show" + product.Code, product.Status);
+                db.SetParameterValue("ShowBA", productBA.Status);
             }
+            db.SetParameterValue("ProductList", metaModel.ProductOptions.ToSelectedProductCodeList(_ => _.Code != Product.BA));
         }
 
         private SortableReportResultModel<LicenseeWinLoss> GetData(

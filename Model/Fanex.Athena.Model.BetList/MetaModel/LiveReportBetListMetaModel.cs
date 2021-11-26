@@ -14,6 +14,8 @@ namespace Fanex.Athena.Model.BetList.MetaModel
 
         public decimal SumPlayerComm { get; set; }
 
+        public string ProductName { get; set; }
+
         public int TotalRows { get; set; }
     }
 }

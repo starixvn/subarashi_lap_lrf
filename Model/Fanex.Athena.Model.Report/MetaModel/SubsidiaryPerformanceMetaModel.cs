@@ -13,6 +13,7 @@
         public DateTime ToDate { get; set; }
 
         public string ProductCodeList { get; set; }
+        public string OriginalProductCodeList { get; set; }
 
         public string SubsidiaryList { get; set; } = string.Empty;
 
@@ -34,6 +35,6 @@
 
         public bool IsValid => FromDate <= ToDate &&
                                 !string.IsNullOrEmpty(ProductCodeList) &&
-                                MetaModelValidationHelper.ValidateBaseCurrency(BaseCurrency, false);
+                                MetaModelHelper.ValidateBaseCurrency(BaseCurrency, false);
     }
 }

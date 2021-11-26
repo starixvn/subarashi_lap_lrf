@@ -12,6 +12,7 @@ namespace Fanex.Athena.DataAccess.Core.Common
     using System.Threading.Tasks;
     using Fanex.Athena.DataAccess.Core;
     using Fanex.Athena.DataAccess.Core.Common.Interfaces;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Resources;
@@ -46,11 +47,11 @@ namespace Fanex.Athena.DataAccess.Core.Common
         public async Task<IEnumerable<SportProductItem>> GetSportsAndProducts(int licenseeId, string languageCode, string productCodes = "", bool includeSabaSport = false)
         {
             const string UspName = "Lrf_SelSportDetail";
+            const int ProductType = -1;
 
             using (var db = this.GetObjectDb(UspName))
             {
                 db.SetParameterValue("licenseeId", licenseeId);
-                db.SetParameterValue("langkey", languageCode);
                 db.SetParameterValue("ProductCodes", productCodes);
                 using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
                 {
@@ -58,14 +59,18 @@ namespace Fanex.Athena.DataAccess.Core.Common
                     while (reader.Read())
                     {
                         var id = reader.ToInt("ID");
+                        var parentId = reader["ParentId"] != DBNull.Value ? reader.ToInt("ParentId") : ProductType;
+
                         if (!HiddenSports.Contains(id))
                         {
+                            var name = parentId == ProductType ? DataHelper.GetProductName(reader.ToString("Name")) : _cacheRefAdapter.GetSportName(id, languageCode);
+
                             result.Add(new SportProductItem
                             {
                                 Checked = true,
                                 ID = id,
-                                Name = reader.ToString("Name"),
-                                ParentId = reader["ParentId"] != DBNull.Value ? reader.ToInt("ParentId") : -1
+                                Name = name,
+                                ParentId = parentId
                             });
                         }
                     }

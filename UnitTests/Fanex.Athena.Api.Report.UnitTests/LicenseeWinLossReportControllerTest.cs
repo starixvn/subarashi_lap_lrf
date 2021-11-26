@@ -150,6 +150,7 @@
             // Arrange
             var metaModel = CreateValidMetaModel();
             var expectedResult = SetUpForGettingData(metaModel, totalItem: 5);
+            SetUpForSubProduct(metaModel);
 
             // Action
             var result = await _controller.Index(metaModel);
@@ -168,6 +169,7 @@
             // Arrange
             var metaModel = CreateValidMetaModel();
             var expectedResult = SetUpForGettingData(metaModel, totalItem: 0);
+            SetUpForSubProduct(metaModel);
 
             // Action
             var result = await _controller.Index(metaModel);
@@ -194,6 +196,7 @@
             var expectedSortResult = expectedResult.DataList.Select(x => x.ActualStake).ToArray();
 
             SetUpForExportingExcel();
+            SetUpForSubProduct(metaModel);
 
             var actualExcelModel = new LicenseeWinLossExcelModel();
             _controller.When(x => x.CreateExcel(
@@ -221,6 +224,7 @@
             var expectedResult = resultModel.DataList.Select(x => x.LicenseeWL["SB"]).ToArray();
 
             SetUpForExportingExcel();
+            SetUpForSubProduct(metaModel);
 
             var actualExcelModel = new LicenseeWinLossExcelModel();
             _controller.When(x => x.CreateExcel(
@@ -247,6 +251,7 @@
             var expectedResult = resultModel.DataList.Select(x => x.TurnOver["SB"]).ToArray();
 
             SetUpForExportingExcel();
+            SetUpForSubProduct(metaModel);
 
             var actualExcelModel = new LicenseeWinLossExcelModel();
             _controller.When(x => x.CreateExcel(
@@ -270,6 +275,7 @@
             var expectedResult = SetUpForGettingData(metaModel, totalItem: 5);
 
             SetUpForExportingExcel();
+            SetUpForSubProduct(metaModel);
 
             var actualExcelModel = new LicenseeWinLossExcelModel();
             _controller.When(x => x.CreateExcel(
@@ -342,6 +348,11 @@
             _controller.CreateExcel(
                   string.Empty,
                   Arg.Any<LicenseeWinLossExcelModel>()).ReturnsForAnyArgs(excel);
+        }
+
+        private void SetUpForSubProduct(LicenseeWinLossMetaModel model)
+        {
+            ProductService.GetAllowedSubProductOptions(SubProduct, model.ProductOptions).Returns(model.ProductOptions);
         }
 
         private LicenseeWinLossMetaModel CreateValidMetaModel(string sortBy = null, string sortOrder = "asc")

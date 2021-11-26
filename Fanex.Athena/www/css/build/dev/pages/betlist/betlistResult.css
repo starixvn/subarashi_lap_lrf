@@ -272,6 +272,9 @@ body {
     background: Yellow; }
   .result-container table.fn-rs .cl-bg-postponed {
     background: #fdfd87; }
+  .result-container table.fn-rs .cl-price {
+    width: 112px;
+    font-weight: bold; }
   .result-container table.number-game .cl-result {
     width: 150px; }
   .result-container table.number-game .cl-warrior, .result-container table.number-game .cl-lblOEFT, .result-container table.number-game .cl-lbl1stball, .result-container table.number-game .cl-lbl2ndball, .result-container table.number-game .cl-lastball {

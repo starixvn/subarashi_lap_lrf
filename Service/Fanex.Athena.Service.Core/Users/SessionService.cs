@@ -41,19 +41,22 @@ namespace Fanex.Athena.Service.Core.Users
 
         private readonly ISessionStorage _sessionStorage;
         private readonly IAppSettings _appSettings;
+        private readonly IProductService _productService;
 
         public SessionService(
             IFunctionService functionService,
             ILicenseeDataAccess licenseeDataAccess,
             ICurrencyDataAccess currencyDataAccess,
             IAppSettings appSettings,
-            ISessionStorage sessionStorage)
+            ISessionStorage sessionStorage,
+            IProductService productService)
         {
             _functionService = functionService;
             _licenseeDataAccess = licenseeDataAccess;
             _currencyDataAccess = currencyDataAccess;
             _sessionStorage = sessionStorage;
             _appSettings = appSettings;
+            _productService = productService;
         }
 
         #region Public Properties
@@ -174,7 +177,8 @@ namespace Fanex.Athena.Service.Core.Users
                 LicenseeName = selectedLicensee.Name,
                 IsAllowedCustomerComm = selectedLicensee.IsAllowedCustomerComm,
                 IsEnableBA = selectedLicensee.IsEnableBA,
-                IsEnableSingleWallet = _licenseeDataAccess.IsEnableSingleWallet(selectedLicensee.Name, _appSettings.IsUATTW)
+                IsEnableSingleWallet = _licenseeDataAccess.IsEnableSingleWallet(selectedLicensee.Name, _appSettings.IsUATTW),
+                OfferedSubProductList = _productService.GetOfferedSubProducts(selectedLicensee.Id)
             };
         }
 

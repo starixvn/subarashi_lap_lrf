@@ -14,6 +14,7 @@ namespace Fanex.Athena.UnitTest.Common.Helpers
         public const string DefaultSiteName = "sitenametest";
         public const string DefaultLanguage = "en";
         public const string DefaultCurrencyIdList = "1";
+        public static List<string> _subproduct = new List<string> { "SLT", "BTC" };
 
         public const string DefaultClientIp = "127.0.0.1";
 
@@ -30,7 +31,8 @@ namespace Fanex.Athena.UnitTest.Common.Helpers
                     { "sitename", DefaultSiteName },
                     { "currencyIDList", DefaultCurrencyIdList },
                     { "language", DefaultLanguage },
-                    { "currencyAgentList", authCurrencyList ?? CreateAuthCurrencyList() }
+                    { "currencyAgentList", authCurrencyList ?? CreateAuthCurrencyList() },
+                    { "subproduct", _subproduct }
                 }
             };
         }

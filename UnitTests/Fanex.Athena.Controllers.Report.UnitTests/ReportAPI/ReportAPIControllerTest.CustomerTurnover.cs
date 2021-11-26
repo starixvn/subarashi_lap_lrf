@@ -127,6 +127,9 @@
 
         private ReportAPIController CreateController()
         {
+            var productService = Substitute.For<IProductService>();
+            productService.GetAllowedSubProductCodeList(DefaultLicenseeSession.OfferedSubProductList, Arg.Any<string>()).Returns("SB");
+
             return new ReportAPIController(
                 _betTypeService,
                 _customerTurnoverService,

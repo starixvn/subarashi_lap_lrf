@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="ReportController.CustomerBalance.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Controllers.Report
+﻿namespace Fanex.Athena.Controllers.Report
 {
     using System.Linq;
     using System.Threading.Tasks;
@@ -61,17 +55,15 @@ namespace Fanex.Athena.Controllers.Report
         }
 
         [HttpPost]
-        [AutoBindMetaModel(BindAgent = true)]
+        [AutoBindMetaModel(BindAgent = true, BindProductOptions = true)]
         [ValidationWebRequest]
         public async Task<ActionResult> Index(CustomerBalanceMetaModel metaModel)
         {
-            var userSession = SessionServiceInstance.UserSession;
-
-            return JsonString(await _reportAPIClient.PostStringAsync("api/CustomerBalance/Index", metaModel, userSession.Language).ConfigureAwait(false));
+            return JsonString(await _reportAPIClient.PostStringAsync("api/CustomerBalance/Index", metaModel, SessionServiceInstance.UserSession.Language).ConfigureAwait(false));
         }
 
         [HttpPost]
-        [AutoBindMetaModel(BindAgent = true)]
+        [AutoBindMetaModel(BindAgent = true, BindProductOptions = true)]
         [ValidationWebRequest]
         public async Task<FileResult> ExportExcel(CustomerBalanceMetaModel metaModel)
         {

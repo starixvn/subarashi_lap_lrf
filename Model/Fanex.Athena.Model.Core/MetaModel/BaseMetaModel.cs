@@ -67,7 +67,7 @@ namespace Fanex.Athena.Model.Core.MetaModel
         }
 
         public virtual bool IsValid =>
-            MetaModelValidationHelper.ValidateBaseCurrency(BaseCurrency);
+            MetaModelHelper.ValidateBaseCurrency(BaseCurrency);
 
         public bool IsExcludedTestData { get; set; }
     }

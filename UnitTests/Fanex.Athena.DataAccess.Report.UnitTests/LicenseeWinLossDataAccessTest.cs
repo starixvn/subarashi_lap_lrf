@@ -246,8 +246,7 @@
             ObjectDb.Received(1).SetParameterValue("fromdate", isDrilldown ? _metaModel.DrillDownFromDate : _metaModel.FromDate);
             ObjectDb.Received(1).SetParameterValue("todate", isDrilldown ? _metaModel.DrillDownToDate : _metaModel.ToDate);
             ObjectDb.Received(1).SetParameterValue("drawfilter", _metaModel.DrawFilter);
-            ObjectDb.Received(1).SetParameterValue("showSB", true);
-            ObjectDb.Received(1).SetParameterValue("showNG", false);
+            ObjectDb.Received(1).SetParameterValue("ProductList", "SB");
             ObjectDb.Received(1).SetParameterValue("BaseCurrency", _metaModel.BaseCurrency);
             ObjectDb.Received(1).SetParameterValue("DefaultBaseCurrency", _metaModel.DefaultBaseCurrency);
             ObjectDb.Received(1).SetParameterValue("CheckPromotionPrize", checkPromotionPrize);

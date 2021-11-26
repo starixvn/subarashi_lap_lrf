@@ -193,7 +193,6 @@
                 Product.PGS,
                 Product.JK,
                 Product.GDG,
-                Product.SLT,
                 Product.HB,
                 Product.WM,
                 Product.BGG,
@@ -208,6 +207,8 @@
             var licProductsRequireUseName = productAccess.ProductList
                 .Where(product => productsRequireUseName.Contains(product.ProductCode))
                 .Select(x => x.ProductName).ToList();
+
+            licProductsRequireUseName.Add(ViewResources.ProductSLT);
 
             if (productAccess.ProductList.Any(p => string.Equals(p.ProductCode, "NG")))
             {

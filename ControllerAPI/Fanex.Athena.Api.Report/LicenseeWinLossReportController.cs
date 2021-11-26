@@ -57,6 +57,7 @@ namespace Fanex.Athena.Api.Report
 
         [HttpPost]
         [ValidationApiRequest(ObjectName = "metaModel", IsValidCurrency = true, IsIncludeKeanOcean = true)]
+        [ApiAutoBindMetaModel(BindProductOptions = true)]
         public Task<dynamic> Index(
             LicenseeWinLossMetaModel metaModel,
             DateTime? fdate,
@@ -71,6 +72,7 @@ namespace Fanex.Athena.Api.Report
 
         [HttpPost]
         [ValidationApiRequest(ObjectName = "metaModel", IsValidCurrency = true, IsIncludeKeanOcean = true)]
+        [ApiAutoBindMetaModel(BindProductOptions = true)]
         public Task<dynamic> Index([FromBody] LicenseeWinLossMetaModel metaModel)
         {
             return ProcessRequest(metaModel, null, null);
@@ -190,7 +192,6 @@ namespace Fanex.Athena.Api.Report
             licenseeWinLoss.LicenseeWLPGS = licenseeWLProducts.GetValueOrDefault(Product.PGS, 0);
             licenseeWinLoss.LicenseeWLJK = licenseeWLProducts.GetValueOrDefault(Product.JK, 0);
             licenseeWinLoss.LicenseeWLGDG = licenseeWLProducts.GetValueOrDefault(Product.GDG, 0);
-            licenseeWinLoss.LicenseeWLSLT = licenseeWLProducts.GetValueOrDefault(Product.SLT, 0);
             licenseeWinLoss.LicenseeWLHB = licenseeWLProducts.GetValueOrDefault(Product.HB, 0);
             licenseeWinLoss.LicenseeWLWM = licenseeWLProducts.GetValueOrDefault(Product.WM, 0);
             licenseeWinLoss.LicenseeWLBGG = licenseeWLProducts.GetValueOrDefault(Product.BGG, 0);
@@ -225,7 +226,6 @@ namespace Fanex.Athena.Api.Report
             licenseeWinLoss.TurnOverPGS = turnOverProducts.GetValueOrDefault(Product.PGS, 0);
             licenseeWinLoss.TurnOverJK = turnOverProducts.GetValueOrDefault(Product.JK, 0);
             licenseeWinLoss.TurnOverGDG = turnOverProducts.GetValueOrDefault(Product.GDG, 0);
-            licenseeWinLoss.TurnOverSLT = turnOverProducts.GetValueOrDefault(Product.SLT, 0);
             licenseeWinLoss.TurnOverHB = turnOverProducts.GetValueOrDefault(Product.HB, 0);
             licenseeWinLoss.TurnOverWM = turnOverProducts.GetValueOrDefault(Product.WM, 0);
             licenseeWinLoss.TurnOverBGG = turnOverProducts.GetValueOrDefault(Product.BGG, 0);
@@ -274,10 +274,10 @@ namespace Fanex.Athena.Api.Report
                 MetaModel = metaModel,
                 SummaryTotal = data.SummaryTotal,
                 TotalData = data.TotalDataList,
-                SBVisible = IsProductVisible(metaModel.ProductOptions, productAccess, Product.SB),
-                BTVisible = IsProductVisible(metaModel.ProductOptions, productAccess, Product.BT),
-                COVisible = IsProductVisible(metaModel.ProductOptions, productAccess, Product.CO),
-                BAVisible = IsProductVisible(metaModel.ProductOptions, productAccess, Product.BA),
+                SBVisible = IsProductVisible(metaModel.OriginalProductOptions, productAccess, Product.SB),
+                BTVisible = IsProductVisible(metaModel.OriginalProductOptions, productAccess, Product.BT),
+                COVisible = IsProductVisible(metaModel.OriginalProductOptions, productAccess, Product.CO),
+                BAVisible = IsProductVisible(metaModel.OriginalProductOptions, productAccess, Product.BA),
                 CustomerCommVisible = licenseeSession.IsAllowedCustomerComm,
                 IsVIPPlayerOnly = metaModel.IsVIPPlayerOnly,
                 HasVIPManagementPermission = metaModel.HasVIPManagementPermission
@@ -335,6 +335,7 @@ namespace Fanex.Athena.Api.Report
             string currencyName = null)
         {
             var userSession = SessionService.UserSession;
+            var licenseeSession = SessionService.LicenseeSession;
             metaModel.DefaultBaseCurrency = userSession.DefaultBaseCurrency;
             metaModel.DrillDownLevel = level;
             metaModel.DrillDownFromDate = fdate ?? metaModel.DrillDownFromDate;
@@ -342,11 +343,10 @@ namespace Fanex.Athena.Api.Report
 
             if (IsValidParams(metaModel))
             {
-                metaModel.LicenseeId = SessionService.LicenseeSession.LicenseeId;
+                metaModel.LicenseeId = licenseeSession.LicenseeId;
                 metaModel.DrillDownCurrencyId = currencyId;
                 metaModel.DrillDownCurrencyName = currencyName;
                 metaModel.DrillDownCustomerId = custId;
-
                 metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,
                     level == 0 ? metaModel.CurrencyId : currencyId, metaModel.IsExcludedTestData);
                 var result = await GetData(metaModel);
@@ -358,7 +358,7 @@ namespace Fanex.Athena.Api.Report
 
                 if (!result.DataList.Any())
                 {
-                    return GetEmptyResult(metaModel.ProductOptions, result.AdditionalInfo);
+                    return GetEmptyResult(metaModel.OriginalProductOptions, result.AdditionalInfo);
                 }
 
                 var summaryTotalView = result.SummaryTotal.ToDictionary(d => d.Key, d => MapToGridView(d.Value));
@@ -367,12 +367,12 @@ namespace Fanex.Athena.Api.Report
                     Data = result.DataList.Select(MapToGridView).ToList(),
                     Total = result.TotalDataList.Select(MapToGridView).ToList(),
                     SummaryTotal = summaryTotalView,
-                    ProductOptions = metaModel.ProductOptions.ToJson(),
+                    ProductOptions = metaModel.OriginalProductOptions.ToJson(),
                     PromotionPrize = result.AdditionalInfo
                 };
             }
 
-            return GetEmptyResult(metaModel.ProductOptions);
+            return GetEmptyResult(metaModel.OriginalProductOptions);
         }
 
         protected internal virtual bool IsValidParams(LicenseeWinLossMetaModel metaModel)

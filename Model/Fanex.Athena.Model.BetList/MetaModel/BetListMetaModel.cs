@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Web.Script.Serialization;
-using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Model.Core.MetaModel;
 
 namespace Fanex.Athena.Model.BetList.MetaModel
 {
-    public class BetListMetaModel : BaseMetaModel, IMetaModelValidation, IMetaModelProductCodeList, IMetaModelShowIP
+    public class BetListMetaModel : BaseMetaModel, IMetaModelValidation, IMetaModelProductCodeList, IMetaModelShowBetFromIP
     {
         public BetListMetaModel()
         {
@@ -24,7 +21,8 @@ namespace Fanex.Athena.Model.BetList.MetaModel
         [ScriptIgnore]
         public string UspKey { get; set; }
 
-        public string ProductCodeList { get; set; } = string.Empty;
+        public string ProductCodeList { get; set; }
+        public string OriginalProductCodeList { get; set; }
 
         public string ExcelFileName { get; set; }
 

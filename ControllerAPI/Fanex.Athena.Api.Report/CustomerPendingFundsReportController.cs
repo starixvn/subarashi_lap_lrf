@@ -40,7 +40,7 @@
 
         [HttpPost]
         [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
-        [ApiAutoBindMetaModel(BindAgent = true)]
+        [ApiAutoBindMetaModel(BindAgent = true, BindProductOptions = true)]
         public async Task<dynamic> Index(CustomerPendingFundsMetaModel metaModel)
         {
             var data = await _custPendingFundsDataAccess.GetDataList(metaModel).ConfigureAwait(false);
@@ -55,14 +55,13 @@
 
         [HttpPost]
         [ValidationApiRequest]
-        [ApiAutoBindMetaModel(BindAgent = true)]
+        [ApiAutoBindMetaModel(BindAgent = true, BindProductOptions = true)]
         public async Task<HttpResponseMessage> ExportExcel(CustomerPendingFundsMetaModel metaModel)
         {
             const string FileName = "CustomerPendingFunds.xls";
             const string TemplatePath = @"~/App_Data/Template/CustomerReports/CustomerPendingFunds.xls";
 
             var templatePath = HostingEnvironment.MapPath(TemplatePath);
-
             var convertingOption = new ConvertingOption
             {
                 IsConvert = metaModel.IsConvert,
@@ -72,7 +71,6 @@
 
             metaModel.PageIndex = 1;
             metaModel.PageSize = PageSizeExcel;
-            var licenseeName = SessionService.LicenseeSession.LicenseeName;
 
             var data = await _custPendingFundsDataAccess.GetDataList(metaModel).ConfigureAwait(false);
             var excelModel = new CustomerPendingFundsExcelModel
@@ -80,7 +78,7 @@
                 ConvertingOption = convertingOption,
                 DataList = data.DataList,
                 TotalData = data.TotalData,
-                SystemIdVisible = !_licenseeSettingService.IsFakeLicensee(licenseeName)
+                SystemIdVisible = !_licenseeSettingService.IsFakeLicensee(SessionService.LicenseeSession.LicenseeName)
             };
             var custPendingFundsExcel = CreateExcel(templatePath, excelModel);
             custPendingFundsExcel.Export();

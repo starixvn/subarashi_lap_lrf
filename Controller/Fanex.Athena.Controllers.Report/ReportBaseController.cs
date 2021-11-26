@@ -18,8 +18,6 @@
     {
         public const int PageSizeExcel = int.MaxValue - 1000;
 
-        public IProductService ProductServiceInstance { get; set; }
-
         protected static IList<ProductOption> ToProductOptions(IEnumerable<Product> productList)
         {
             return productList.Select(i => new ProductOption

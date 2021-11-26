@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="AuthorizationController.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Controllers
+﻿namespace Fanex.Athena.Controllers
 {
     using Extension.Utility.Interfaces;
 

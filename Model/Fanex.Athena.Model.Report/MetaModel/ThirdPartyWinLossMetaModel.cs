@@ -42,7 +42,7 @@ namespace Fanex.Athena.Model.Report.MetaModel
         {
             get
             {
-                return MetaModelValidationHelper.ValidateBaseCurrency(BaseCurrency);
+                return MetaModelHelper.ValidateBaseCurrency(BaseCurrency);
 
             }
         }

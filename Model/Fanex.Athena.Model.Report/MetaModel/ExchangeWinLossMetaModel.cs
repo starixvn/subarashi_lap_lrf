@@ -15,7 +15,7 @@ namespace Fanex.Athena.Model.Report.MetaModel
         {
             get
             {
-                return FromDate <= ToDate && MetaModelValidationHelper
+                return FromDate <= ToDate && MetaModelHelper
                     .ValidateBaseCurrency(BaseCurrency);
             }
         }

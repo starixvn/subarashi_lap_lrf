@@ -8521,8 +8521,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed"), __webpack_require__(/*! common/querystring */ "./www/js/source/common/querystring.js"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js"), __webpack_require__(/*! lib/jqgrid/jquery.jqgrid.additional */ "./www/js/source/lib/jqgrid/jquery.jqgrid.additional.js"), __webpack_require__(/*! lib/linq */ "./www/js/source/lib/linq.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, QueryString, Site, jqGridAdditional) {
         'use strict';
-        const IGNORED_LICENSEEWL_PRODUCTS = ['BA'];
-        const IGNORED_TURNOVER_PRODUCTS = ['BT', 'CO'];
+        const IGNORED_LICENSEEWL_PRODUCTS = ['BA', 'SLT'];
+        const IGNORED_TURNOVER_PRODUCTS = ['BT', 'CO', 'SLT'];
         const _me =
         {
             isDisableBetList: false,
@@ -8577,7 +8577,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
         const setDrillDownLink = function (level, currencyId, custId, datetime, currencyName, cellvalue) {
             return '<a class="drilldown" href="javascript:;" onclick="return licenseewinlossDrilldown(' + level + ',' +
-             currencyId + ',' + custId + ',\'' + datetime + '\',\'' + currencyName + '\');">' + cellvalue + '</a>';
+                currencyId + ',' + custId + ',\'' + datetime + '\',\'' + currencyName + '\');">' + cellvalue + '</a>';
         };
 
         const currencyFormatter = function (cellvalue, options, rowObject) {
@@ -8871,16 +8871,16 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             'Turnover',
             'ActualStake',
             'BuyBackAmount',
-             'TotalTransaction',
-             'WinLoss', 'Comm',
-             'Total', 'LicenseeW_L',
-             '@[ProductBT]<br/>@[Commission]',
-             '@[ProductCO]<br/>@[Commission]',
-             'BA<br/>@[Commission]',
-             '@[AmtDueToBetTrade]',
-             '@[AmtDueToBA]',
-             'CurrencyId',
-             'CustomerId'];
+            'TotalTransaction',
+            'WinLoss', 'Comm',
+            'Total', 'LicenseeW_L',
+            '@[ProductBT]<br/>@[Commission]',
+            '@[ProductCO]<br/>@[Commission]',
+            'BA<br/>@[Commission]',
+            '@[AmtDueToBetTrade]',
+            '@[AmtDueToBA]',
+            'CurrencyId',
+            'CustomerId'];
 
         const colModelList = [indexColumn, dateColumn, externalIdColumn, systemIdColumn, currencyColumn,
             turnoverColumn, actualStakeColumn, buybackColumn, totalTransColumn, customerWlColumn, playerCommColumn,
@@ -8965,10 +8965,10 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             } : {};
 
             grid.jqGrid('setGroupHeaders',
-            {
-                useColSpanStyle: true,
-                groupHeaders: [groupTurnoverWL, groupLicenseeWL, groupCustomerWinloss, groupBuyBackAmount]
-            });
+                {
+                    useColSpanStyle: true,
+                    groupHeaders: [groupTurnoverWL, groupLicenseeWL, groupCustomerWinloss, groupBuyBackAmount]
+                });
         };
 
         _me.getColName = function (productOptions) {
@@ -9009,7 +9009,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         };
 
         _me.getColModel = function (level, reportBy, productOptions) {
-            
             // Column hidden by customer comm
             customerWlTotalColumn.hidden = !_me.hasCustomerComm;
             playerCommColumn.hidden = !_me.hasCustomerComm;
@@ -9211,7 +9210,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
             function addToggleButton($container, $element, isToggle, column) {
                 $element.appendTo($container).append('<i class="btn-icon icon-arrow"></i>')
-                .click(function () { return toggle(isToggle, column); });
+                    .click(function () { return toggle(isToggle, column); });
             }
 
             const addTurnOverExpand = function () {
@@ -9228,7 +9227,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                     clear('#btnTurnOverCollapse');
 
                     const $container = $(grid).closest('.ui-jqgrid-view')
-                            .find('.ui-jqgrid-htable .ui-jqgrid-labels > .ui-th-column-header:first');
+                        .find('.ui-jqgrid-htable .ui-jqgrid-labels > .ui-th-column-header:first');
 
                     const $button = $('<button class="header-button btnCollapse btn" id="btnTurnOverCollapse"></button>');
                     addToggleButton($container, $button, false, 'TurnOver');
@@ -9249,7 +9248,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                     clear('#btnLicenseeWLCollapse');
 
                     const $container = $(grid).closest('.ui-jqgrid-view')
-                            .find('.ui-jqgrid-htable .ui-jqgrid-labels > .ui-th-column-header:last');
+                        .find('.ui-jqgrid-htable .ui-jqgrid-labels > .ui-th-column-header:last');
                     const $button = $('<button class="header-button btnCollapse btn" id="btnLicenseeWLCollapse">');
                     addToggleButton($container, $button, false, 'LicenseeWL');
                 }
@@ -9268,7 +9267,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 if (isAllowBA !== null) {
                     clear('#btnBuyBackCollapse');
                     let $container = $(grid).closest('.ui-jqgrid-view')
-                            .find('.ui-jqgrid-htable .ui-jqgrid-labels > .ui-th-column-header');
+                        .find('.ui-jqgrid-htable .ui-jqgrid-labels > .ui-th-column-header');
                     $container = $container[$container.length - (_me.hasCustomerComm ? 3 : 2)];
                     const $button = $('<button class="header-button btnCollapse btn" id="btnBuyBackCollapse">');
                     addToggleButton($container, $button, false, 'BuyBackAmount');

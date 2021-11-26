@@ -5,7 +5,7 @@
     using System.Web.Mvc;
 
     using Base.UnitTests;
-
+    using Fanex.Athena.Model.Core.MetaModel.Product;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
 
@@ -26,7 +26,15 @@
                 // Arrange
                 var metaModel = new TurnoverMetaModel
                 {
-                    CurrencyId = CurrencyId
+                    CurrencyId = CurrencyId,
+                    ProductOptions = new List<ProductOption>
+                    {
+                        new ProductOption
+                        {
+                            Code = "SB",
+                            Status = true
+                        }
+                    }
                 };
                 var data = new List<TurnoverDTO>
                     {
