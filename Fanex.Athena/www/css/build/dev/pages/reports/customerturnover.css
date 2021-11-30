@@ -497,6 +497,21 @@ input[type="checkbox"] {
 .invalid input[type="checkbox"] + label:after {
   border: 2px solid #d91a1a; }
 
+ul.list {
+  padding-top: 0.5rem;
+  margin-bottom: 10px; }
+  ul.list li {
+    line-height: 2rem; }
+    ul.list li:before {
+      content: "";
+      width: 0.6rem;
+      height: 0.6rem;
+      background-color: #F9494D;
+      float: left;
+      margin-right: 1rem;
+      margin-top: 0.7rem;
+      border-radius: 50%; }
+
 #TickerFilter > label {
   left: 0;
   color: #2c2c2c;
@@ -504,6 +519,9 @@ input[type="checkbox"] {
 
 .decimal-odds {
   color: #d91a1a; }
+
+.result-note {
+  padding-top: 0; }
 
 /*.ui-multiselect-ul-group{
     padding-left: 40px;

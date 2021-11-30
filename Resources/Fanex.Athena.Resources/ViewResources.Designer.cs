@@ -6532,6 +6532,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sports Lottery data is available from 11/22/2021.
+        /// </summary>
+        public static string SLTDateRangeNote {
+            get {
+                return ResourceManager.GetString("SLTDateRangeNote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Soccer Parlay.
         /// </summary>
         public static string SoccerParlay {

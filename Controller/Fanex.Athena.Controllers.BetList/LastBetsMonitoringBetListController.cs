@@ -62,8 +62,11 @@
             const int ProductType = -1;
             var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
             var languageCode = SessionServiceInstance.UserSession.Language;
+            var productCode = ProductServiceInstance.GetAllowedSubProductCodeList(
+               SessionServiceInstance.LicenseeSession.OfferedSubProductList,
+               Product.SB);
 
-            var sports = await _sportTypeDataAccess.GetSportsAndProducts(licenseeId, languageCode, Product.SB).ConfigureAwait(false);
+            var sports = await _sportTypeDataAccess.GetSportsAndProducts(licenseeId, languageCode, productCode).ConfigureAwait(false);
             var sportListItems = sports.Where(item => item.ParentId != ProductType).Select(item => new SelectListItem { Value = item.ID.ToString(), Text = item.Name }).ToList();
             sportListItems.Insert(0, new SelectListItem { Value = "0", Text = ViewResources.All, Selected = true });
             sportListItems.Add(new SelectListItem { Value = ParlayId, Text = ViewResources.Parlay });

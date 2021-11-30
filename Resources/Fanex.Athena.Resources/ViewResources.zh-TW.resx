@@ -2198,4 +2198,7 @@
   <data name="Saba" xml:space="preserve">
     <value>沙巴</value>
   </data>
+  <data name="SLTDateRangeNote" xml:space="preserve">
+    <value>體育時時彩僅提供11/22/2021之後的數據</value>
+  </data>
 </root>

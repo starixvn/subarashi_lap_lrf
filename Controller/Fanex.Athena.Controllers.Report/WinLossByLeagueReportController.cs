@@ -68,7 +68,11 @@ namespace Fanex.Athena.Controllers.Report
                 BaseCurrency = userSession.DefaultBaseCurrency
             };
 
-            var sports = (await this._sportTypeDataAccess.GetSportsAndProducts(licenseeSession.LicenseeId, userSession.Language, Product.SB).ConfigureAwait(true))
+            var productCode = ProductServiceInstance.GetAllowedSubProductCodeList(
+                SessionServiceInstance.LicenseeSession.OfferedSubProductList,
+                Product.SB);
+
+            var sports = (await this._sportTypeDataAccess.GetSportsAndProducts(licenseeSession.LicenseeId, userSession.Language, productCode).ConfigureAwait(true))
                 .Where(x => x.ParentId >= 0);
             var leagues = await this._leagueDataAccess.GetLeaguesBySport(
                             new LeagueMetaModel

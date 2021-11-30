@@ -208,9 +208,12 @@
                 .Where(product => productsRequireUseName.Contains(product.ProductCode))
                 .Select(x => x.ProductName).ToList();
 
-            licProductsRequireUseName.Add(ViewResources.ProductSLT);
+            if (SessionServiceInstance.LicenseeSession.OfferedSubProductList.Any(_ => _.Equals(Product.SLT, StringComparison.OrdinalIgnoreCase)))
+            {
+                licProductsRequireUseName.Add(ViewResources.ProductSLT);
+            }
 
-            if (productAccess.ProductList.Any(p => string.Equals(p.ProductCode, "NG")))
+            if (productAccess.IsAllow(Product.NG))
             {
                 licProductsRequireUseName.Add(ViewResources.Happy5LinkedGames);
             }
