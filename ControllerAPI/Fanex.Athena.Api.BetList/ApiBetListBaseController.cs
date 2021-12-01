@@ -1,10 +1,4 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="ApiBetListBaseController.cs" company="">
-// Copyright (c) . All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-
-namespace Fanex.Athena.Api.BetList
+﻿namespace Fanex.Athena.Api.BetList
 {
     using System;
     using System.Threading.Tasks;
@@ -12,7 +6,6 @@ namespace Fanex.Athena.Api.BetList
     using Base;
 
     using DataAccess.Core.Configuration.Interfaces;
-
     using Fanex.Athena.Service.StatelessCore.Utility;
 
     using Model.BetList.MetaModel;
@@ -24,7 +17,6 @@ namespace Fanex.Athena.Api.BetList
     public class ApiBetListBaseController : BaseApiController
     {
         private readonly IAuthorizationService _authorizationService;
-
         private readonly IBalanceUpDataAccess _balanceUpDataAccess;
 
         public ApiBetListBaseController(
@@ -77,6 +69,7 @@ namespace Fanex.Athena.Api.BetList
             metaModel.UspKey = uspKey;
             metaModel.IsShowIpvn = userSession.IsShowIpvn && userSession.IsShowIp;
             metaModel.IsShowIp = userSession.IsShowIp;
+            AutoBindMetaModelService.BindProductCodeList(metaModel, SessionService.LicenseeSession.OfferedSubProductList, ProductService);
 
             return await BridgeClientService.PostAsync(apiPath ?? "/BetList/GetBetList", metaModel, userSession.Language).ConfigureAwait(false);
         }
@@ -105,6 +98,7 @@ namespace Fanex.Athena.Api.BetList
             metaModel.UspKey = uspKey;
             metaModel.IsShowIpvn = userSession.IsShowIpvn && userSession.IsShowIp;
             metaModel.IsShowIp = userSession.IsShowIp;
+            AutoBindMetaModelService.BindProductCodeList(metaModel, SessionService.LicenseeSession.OfferedSubProductList, ProductService);
 
             return await BridgeClientService.PostAsync(apiPath ?? "/BetList/GetBetListPaging",
                 metaModel,

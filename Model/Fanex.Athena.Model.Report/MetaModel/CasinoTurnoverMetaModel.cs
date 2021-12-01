@@ -20,6 +20,7 @@
 
         public bool IsConvertAll { get; set; }
         public string ProductCodeList { get; set; }
+        public string OriginalProductCodeList { get; set; }
 
         public string UserName { get; set; }
 
@@ -44,7 +45,7 @@
 
         public bool IsExportExcel { get; set; }
 
-        private bool IsValidBaseCurrency => MetaModelValidationHelper.ValidateBaseCurrency(BaseCurrency);
+        private bool IsValidBaseCurrency => MetaModelHelper.ValidateBaseCurrency(BaseCurrency);
 
         public bool IsValid => FromDate <= ToDate && !string.IsNullOrEmpty(ProductCodeList) && Status.Any()
             && IsValidBaseCurrency;

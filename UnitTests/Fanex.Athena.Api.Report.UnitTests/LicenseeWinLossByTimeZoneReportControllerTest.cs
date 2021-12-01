@@ -7,7 +7,7 @@
     using Base.UnitTests;
 
     using DataAccess.Report.Interfaces;
-
+    using Fanex.Athena.Model.Auth;
     using Model.Core.ResultModel;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
@@ -99,6 +99,17 @@
 
         private LicenseeWinLossByTimeZoneReportController CreateController()
         {
+            StubLicenseeSessionData(new LicenseeAuthInfo { LicenseeId = 0 });
+            StubUserSessionData(new UserAuthInfo
+            {
+                Language = SessionLanguage
+            });
+
+            ProductService.GetAllowedSubProductCodeList(
+                    SessionService.LicenseeSession.OfferedSubProductList,
+                    "SB")
+                    .Returns("SB");
+
             return new LicenseeWinLossByTimeZoneReportController(
                 LangService,
                 _dataAccess)

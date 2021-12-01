@@ -1,16 +1,6 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="TurnoverMetaModel.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Model.Report.MetaModel
+﻿namespace Fanex.Athena.Model.Report.MetaModel
 {
     using System;
-
-    /// <summary>
-    /// TurnoverMetaModel class.
-    /// </summary>
     public class TurnoverMetaModel : BaseReportMetaModel
     {
         public TurnoverMetaModel()

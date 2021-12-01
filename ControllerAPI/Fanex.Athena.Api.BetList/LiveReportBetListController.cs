@@ -15,6 +15,7 @@ namespace Fanex.Athena.Api.BetList
 
     using DataAccess.Core.Configuration.Interfaces;
     using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Service.StatelessCore.Utility;
 
     using Model.BetList.MetaModel;
@@ -77,6 +78,16 @@ namespace Fanex.Athena.Api.BetList
         public async Task<dynamic> VirtualSports([FromUri] LiveReportBetListMetaModel metaModel, int page, int rows)
         {
             const string UspName = "Lrf_BetList_LiveReport_SelWinlossVHRacing";
+
+            return await GetPagingData(metaModel, UspName, page, rows).ConfigureAwait(false);
+        }
+
+        [HttpGet]
+        [ValidationApiRequest(ObjectName = "metaModel", IsValidCurrency = true)]
+        public async Task<dynamic> SportsLottery([FromUri] LiveReportBetListMetaModel metaModel, int page, int rows)
+        {
+            const string UspName = "Lrf_BetList_LiveReport";
+            metaModel.ProductCodeList += $",{Product.SLT}";
 
             return await GetPagingData(metaModel, UspName, page, rows).ConfigureAwait(false);
         }

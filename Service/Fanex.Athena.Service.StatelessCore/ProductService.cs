@@ -5,16 +5,19 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text;
     using System.Web.Hosting;
     using System.Xml.Linq;
 
     using Extension.Utility.Interfaces;
 
     using Fanex.Athena.DataAccess.Core.Common.Interfaces;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.DTO.Configuration;
+    using Fanex.Athena.Model.Core.MetaModel.Product;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     #endregion
@@ -28,6 +31,8 @@
         private readonly IXDocumentWrapper _xmlWrapper;
 
         private readonly ICustomMemoryCacheService _cache;
+
+        private static readonly IEnumerable<string> SubProducts = new[] { Product.SLT };
 
         public ProductService(IAppSettings appSettings, IProductDataAccess productDataAccess, IXDocumentWrapper xmlWrapper, ICustomMemoryCacheService cache)
         {
@@ -120,6 +125,52 @@
             var config = functions.FirstOrDefault(x => x.Attribute("Name").Value.Equals(configFunctionName, StringComparison.OrdinalIgnoreCase));
             return config == null ? new string[] { } : config.Attribute(nameof(Product)).Value.Split(',')
                     .Select(x => x.Trim()).Where(x => !string.IsNullOrEmpty(x)).ToArray();
+        }
+
+        public IList<string> GetOfferedSubProducts(int licenseeId)
+        {
+            var cacheKey = CacheKey.MemorycacheSubProductsByLicensee + licenseeId;
+            var offeredSubProducts = _cache.Get<IList<string>>(cacheKey);
+
+            if (offeredSubProducts == null)
+            {
+                var originalProducts = GetProductList(licenseeId, string.Empty);
+                offeredSubProducts = SubProducts
+                    .Where(subProduct => originalProducts.Any(
+                        originalProduct => string.Equals(subProduct, originalProduct.ProductCode, StringComparison.InvariantCultureIgnoreCase)))
+                    .ToList();
+
+                _cache.Set(cacheKey, offeredSubProducts);
+            }
+
+            return offeredSubProducts;
+        }
+
+        public IList<ProductOption> GetAllowedSubProductOptions(IEnumerable<string> offeredSubProductList, IList<ProductOption> productOptions)
+        {
+            if (!offeredSubProductList.IsPresent() || !productOptions.IsPresent(_ => _.Code == Product.SB && _.Status))
+            {
+                return productOptions;
+            }
+
+            var newProductOptions = new List<ProductOption>(productOptions);
+            newProductOptions.AddRange(offeredSubProductList.Select(subProduct => new ProductOption
+            {
+                Code = subProduct,
+                Status = true
+            }));
+
+            return newProductOptions;
+        }
+
+        public string GetAllowedSubProductCodeList(IEnumerable<string> offeredSubProductList, string productCodes)
+        {
+            if (!offeredSubProductList.IsPresent() || !(productCodes?.Split(',')).IsPresent(_ => _ == Product.SB))
+            {
+                return productCodes;
+            }
+
+            return productCodes + "," + string.Join(",", offeredSubProductList);
         }
     }
 }

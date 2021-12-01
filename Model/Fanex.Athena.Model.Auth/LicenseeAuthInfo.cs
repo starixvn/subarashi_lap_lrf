@@ -1,9 +1,5 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="LicenseeSession.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-using System;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Fanex.Athena.Model.Auth
 {
@@ -19,5 +15,7 @@ namespace Fanex.Athena.Model.Auth
         public bool IsEnableBA { get; set; }
 
         public bool IsEnableSingleWallet { get; set; }
+
+        public IEnumerable<string> OfferedSubProductList { get; set; }
     }
 }

@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="LiveReportMetaModel.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Model.Report.MetaModel
+﻿namespace Fanex.Athena.Model.Report.MetaModel
 {
     using Fanex.Athena.Model.Core.DataDomain;
     using System;
@@ -23,7 +17,7 @@ namespace Fanex.Athena.Model.Report.MetaModel
             {
                 return FromDate <= ToDate
                    && (string.IsNullOrEmpty(BaseCurrency) || SystemConstants.BaseCurrencyList
-           .Any(x => x.Value.Equals(BaseCurrency, StringComparison.OrdinalIgnoreCase)));
+                   .Any(x => x.Value.Equals(BaseCurrency, StringComparison.OrdinalIgnoreCase)));
             }
         }
     }

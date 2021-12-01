@@ -1141,6 +1141,7 @@
     <Content Include="www\css\build\dev\reactpages\leaguewinloss\index.css.map" />
     <Content Include="Views\Desktop\Report\LiveReport\MatchList\Index.cshtml" />
     <Content Include="Views\Desktop\Report\LiveReport\MatchList\Content.cshtml" />
+    <Content Include="Views\Desktop\BetList\LiveReport\SportsLottery.cshtml" />
     <None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
     <None Include="www\css\source\pages\betlist\result\result.happy5.scss" />
     <None Include="www\css\source\reactpages\components\alert\icons\error.scss" />
@@ -5986,7 +5987,7 @@
     <Content Include="App_Data\Template\Reports\Turnover.xls" />
     <Content Include="App_Data\Template\Reports\WinLossByBetType.xls" />
     <Content Include="App_Data\Template\Reports\WinLossByProducts.xls" />
-	<Content Include="App_Data\Template\Reports\LiveReportMatchList.xls" />
+    <Content Include="App_Data\Template\Reports\LiveReportMatchList.xls" />
     <Content Include="Content\Web.config" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <Content Include="Views\Desktop\Customer\CustomerDialog\RemoveFromGroup.cshtml" />

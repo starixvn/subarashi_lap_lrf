@@ -27,14 +27,10 @@
 
         [HttpPost]
         [ValidationApiRequest]
-        [ApiAutoBindMetaModel(BindAgent = true)]
+        [ApiAutoBindMetaModel(BindAgent = true, BindProductCodeList = true)]
         public async Task<dynamic> Index(LicenseeWinLossByTimeZoneMetaModel metaModel)
         {
-            var userSession = SessionService.UserSession;
-            var userCurrencyList = userSession.CurrencyList;
-
-            var result = await _licenseeWinLossByTimeZoneDataAccess.GetData(metaModel, userCurrencyList).ConfigureAwait(false);
-
+            var result = await _licenseeWinLossByTimeZoneDataAccess.GetData(metaModel, SessionService.UserSession.CurrencyList).ConfigureAwait(false);
             return new
             {
                 Data = result.DataList,

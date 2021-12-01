@@ -140,7 +140,7 @@
     <Compile Include="Helper\BettypeHelper.cs" />
     <Compile Include="Helper\MathHelper.cs" />
     <Compile Include="Helper\CommissionGroupHelper.cs" />
-    <Compile Include="Helper\MetaModelValidationHelper.cs" />
+    <Compile Include="Helper\MetaModelHelper.cs" />
     <Compile Include="Helper\ProductHelper.cs" />
     <Compile Include="MetaModel\Common\SPLogMetaModel.cs" />
     <Compile Include="MetaModel\CurrencyValidationOption.cs" />
@@ -157,7 +157,7 @@
     <Compile Include="MetaModel\Common\LeagueMetaModel.cs" />
     <Compile Include="MetaModel\IMetaModelCurrencyIdList.cs" />
     <Compile Include="MetaModel\IMetaModelCurrencyList.cs" />
-    <Compile Include="MetaModel\IMetaModelShowIPVN.cs" />
+    <Compile Include="MetaModel\IMetaModelShowBetFromIP.cs" />
     <Compile Include="MetaModel\IMetaModelIP.cs" />
     <Compile Include="MetaModel\IMetaModelLanguage.cs" />
     <Compile Include="MetaModel\IMetaModelFunctionContract.cs" />

@@ -31,6 +31,9 @@
         private readonly ILogger _logger;
         private readonly IOneAuthDataAccess _oneAuthDataAccess;
         private readonly IAppSettings _appSettings;
+        private readonly IProductService _productService;
+
+#pragma warning disable S107 // Methods should not have too many parameters
 
         public OneAuthenticationService(
             ISessionService sessionService,
@@ -39,7 +42,9 @@
             IOneBookSecurityWrapper oneBookSecurityWrapper,
             ILogger logger,
             IAppSettings appSettings,
-            IOneAuthDataAccess oneAuthDataAccess)
+            IOneAuthDataAccess oneAuthDataAccess,
+            IProductService productService)
+#pragma warning restore S107 // Methods should not have too many parameters
         {
             _sessionService = sessionService;
             _licenseeSettingService = licenseeSettingService;
@@ -48,6 +53,7 @@
             _logger = logger;
             _oneAuthDataAccess = oneAuthDataAccess;
             _appSettings = appSettings;
+            _productService = productService;
         }
 
         protected internal virtual string GetStringFromFile(string path)
@@ -252,7 +258,8 @@
                 IsAllowedCustomerComm = licenseeInfo.IsAllowedCustomerComm,
                 IsEnableBA = licenseeInfo.IsEnableBA,
                 IsEnableSingleWallet = _licenseeSettingService.IsEnableSingleWallet(licenseeInfo.Name),
-                LicenseeName = licenseeInfo.Name
+                LicenseeName = licenseeInfo.Name,
+                OfferedSubProductList = _productService.GetOfferedSubProducts(licenseeInfo.Id)
             };
 
             var userSession = new UserAuthInfo

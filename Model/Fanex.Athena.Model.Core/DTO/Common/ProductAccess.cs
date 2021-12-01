@@ -1,8 +1,4 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="ProductAccess.cs" company="">
-// Copyright (c) . All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
+﻿
 
 namespace Fanex.Athena.Model.Core.DTO.Common
 {
@@ -11,9 +7,6 @@ namespace Fanex.Athena.Model.Core.DTO.Common
     using System.Collections.ObjectModel;
     using System.Linq;
 
-    /// <summary>
-    /// ProductAccess class.
-    /// </summary>
     [Serializable]
     public class ProductAccess
     {

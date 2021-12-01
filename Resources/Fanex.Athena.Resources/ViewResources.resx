@@ -3079,4 +3079,7 @@
   <data name="Saba" xml:space="preserve">
     <value>Saba </value>
   </data>
+  <data name="SLTDateRangeNote" xml:space="preserve">
+    <value>Sports Lottery data is available from 11/22/2021</value>
+  </data>
 </root>

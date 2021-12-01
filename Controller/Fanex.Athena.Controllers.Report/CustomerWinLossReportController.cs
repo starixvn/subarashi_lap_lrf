@@ -46,7 +46,7 @@ namespace Fanex.Athena.Controllers.Report
         }
 
         [HttpPost]
-        [AutoBindMetaModel(BindAgent = true, BindLicenseeContract = true)]
+        [AutoBindMetaModel(BindAgent = true, BindLicenseeContract = true, BindProductOptions = true)]
         [ValidationWebRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
         public async Task<ActionResult> Index(CustomerWinLossMetaModel metaModel)
         {

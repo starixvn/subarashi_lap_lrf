@@ -5,7 +5,7 @@
     using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Model.Core.MetaModel;
 
-    public class BaseBettingTicketMetaModel : IMetaModelValidation, IMetaModelCurrencyIdList, IMetaModelShowIP
+    public class BaseBettingTicketMetaModel : IMetaModelValidation, IMetaModelAgent, IMetaModelCurrencyIdList, IMetaModelShowBetFromIP, IMetaModelProductCodeList
     {
         private const int DefaultPageSize = 50;
 
@@ -38,6 +38,8 @@
 
         public string AgentListXml { get; set; }
 
+        public bool IsExcludedTestData { get; set; }
+
         public int PageSize { get; set; }
 
         public int PageIndex { get; set; }
@@ -47,6 +49,7 @@
         public DateTime ToDate { get; set; }
 
         public string ProductCodeList { get; set; }
+        public string OriginalProductCodeList { get; set; }
 
         public string UserName
         {
@@ -71,7 +74,7 @@
 
         public virtual bool IsValid => FromDate <= ToDate
             && !string.IsNullOrWhiteSpace(ProductCodeList)
-            && MetaModelValidationHelper.ValidateBaseCurrency(BaseCurrency);
+            && MetaModelHelper.ValidateBaseCurrency(BaseCurrency);
 
         public bool HasPlayerCom { get; set; }
 

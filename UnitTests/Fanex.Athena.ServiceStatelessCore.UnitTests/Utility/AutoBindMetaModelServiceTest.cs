@@ -18,40 +18,6 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests.Utility
     public class AutoBindMetaModelServiceTest
     {
         [Test]
-        public void MapAgentXml_CallWithActionArgumentParam_AgentListXmlIsAssignedCorrectly()
-        {
-            // Arrange
-            var metaModel = Substitute.For<IMetaModelCurrencyIdList, IMetaModelAgent>();
-            metaModel.CurrencyIdList.Returns("1,2");
-
-            var actionArgument = CreateActionArgument(metaModel);
-            var currencyAgentList = new List<OneAuthCurrency> { new OneAuthCurrency { AgentId = new int[] { 11, 22 }, CurrencyId = 1 } };
-            actionArgument.Add("currencyAgentList", currencyAgentList);
-
-            // Action
-            AutoBindMetaModelService.MapAgentXml(actionArgument);
-            var agentXml = (metaModel as IMetaModelAgent)?.AgentListXml;
-
-            // Assert
-            Assert.That(agentXml, Is.Not.Null);
-        }
-
-        [Test]
-        public void MapAgentXml_MetaModelInterfaceIsNotImplemented_AgentListXmlIsNull()
-        {
-            // Arrange
-            string agentListXml = null;
-            var metaModel = new { AgentListXml = agentListXml };
-            var actionArgument = CreateActionArgument(metaModel);
-
-            // Action
-            AutoBindMetaModelService.MapAgentXml(actionArgument);
-
-            // Assert
-            Assert.That(metaModel.AgentListXml, Is.Null);
-        }
-
-        [Test]
         public void MapAgentXml_CallWithCurrencyAgentList_AgentListXmlAssignedCorrectly()
         {
             // Arrange
@@ -140,22 +106,6 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests.Utility
         }
 
         [Test]
-        public void MapUserId_CallWithActionArgument_UserIdIsAssignedCorrectly()
-        {
-            // Arrange
-            const int UserId = 111;
-            var metaModel = Substitute.For<IMetaModelUserId>();
-            var actionArgument = CreateActionArgument(metaModel);
-            actionArgument.Add("userid", UserId);
-
-            // Action
-            AutoBindMetaModelService.MapUserId(actionArgument);
-
-            // Assert
-            Assert.That(metaModel.UserId, Is.EqualTo(UserId));
-        }
-
-        [Test]
         public void MapBalanceUpAndMoveBet_WhenCall_BindBalanceUpAndMoveBetAreAssignedCorrectly()
         {
             // Arrange
@@ -193,22 +143,6 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests.Utility
             // Assert
             Assert.That(metaModel.MoveBetsDay, Is.EqualTo(DateTime.MinValue));
             Assert.That(metaModel.BalanceUpDay, Is.EqualTo(DateTime.MinValue));
-        }
-
-        [Test]
-        public void MapSiteName_WhenCall_MetaModelAssignedCorrectly()
-        {
-            // Arrange
-            const string SiteName = "Demo";
-            var metaModel = Substitute.For<IMetaModelSiteName>();
-            var actionArgument = CreateActionArgument(metaModel);
-            actionArgument.Add("sitename", SiteName);
-
-            // Action
-            AutoBindMetaModelService.MapSiteName(actionArgument);
-
-            // Assert
-            Assert.That(metaModel.SiteName, Is.EqualTo(SiteName));
         }
 
         [Test]

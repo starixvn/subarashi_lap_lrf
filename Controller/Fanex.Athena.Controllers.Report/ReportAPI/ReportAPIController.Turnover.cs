@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="ReportAPIController.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Controllers.Report
+﻿namespace Fanex.Athena.Controllers.Report
 {
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
@@ -21,7 +15,7 @@ namespace Fanex.Athena.Controllers.Report
         [FunctionAuthorization(PermissionKeys.ReportTurnover)]
         [CustomValidateAntiForgery]
         [ValidationWebRequest]
-        [AutoBindMetaModel(BindAgent = true)]
+        [AutoBindMetaModel(BindAgent = true, BindProductOptions = true)]
         public async Task<ActionResult> Turnover(TurnoverMetaModel metaModel)
         {
             var placeholderUsername = IsFakeLicensee(SessionServiceInstance.LicenseeSession.LicenseeName) ?

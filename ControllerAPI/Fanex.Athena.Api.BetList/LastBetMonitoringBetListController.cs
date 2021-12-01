@@ -75,9 +75,11 @@
 
         [HttpPost]
         [ValidationApiRequest(ObjectName = "metaModel")]
+        [ApiAutoBindMetaModel(BindShowingBetFromIP = true, BindProductCodeList = true)]
         public async Task<HttpResponseMessage> Index(LastBetsMonitoringMetaModel metaModel)
         {
             var userSession = SessionService.UserSession;
+
             if (string.IsNullOrWhiteSpace(metaModel.Currency))
             {
                 metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList);
@@ -87,8 +89,6 @@
                 var currencyIdList = metaModel.Currency.Split(',').Select(int.Parse);
                 metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, currencyIdList);
             }
-            metaModel.IsShowIpvn = userSession.IsShowIpvn && userSession.IsShowIp;
-            metaModel.IsShowIp = userSession.IsShowIp;
 
             return await _betListApiClient.PostAsync("/LastBetMonitoringBetList/GetData",
                 metaModel, userSession.Language).ConfigureAwait(false);

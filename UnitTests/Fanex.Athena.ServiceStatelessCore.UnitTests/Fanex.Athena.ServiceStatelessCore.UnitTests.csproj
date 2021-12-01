@@ -93,6 +93,7 @@
     <Compile Include="MoveBetServiceTest.cs" />
     <Compile Include="OneBookSecurityWrapperTest.cs" />
     <Compile Include="PortalApiServiceTest.cs" />
+    <Compile Include="ProductServiceTest.GetAllowedSubProductCodeList.cs" />
     <Compile Include="ProductServiceTest.GetProductAccess.cs" />
     <Compile Include="ProductServiceTest.GetProductList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -104,6 +105,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+    <Compile Include="ProductServiceTest.GetAllowedSubProducts.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\DataAccess\Fanex.Athena.DataAccess.Core\Fanex.Athena.DataAccess.Core.csproj">

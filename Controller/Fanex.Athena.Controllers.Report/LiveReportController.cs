@@ -14,6 +14,7 @@ namespace Fanex.Athena.Controllers.Report
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel.LiveReports;
     using Fanex.Athena.VendorAdapter;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
     using Fanex.Athena.Web.ResultExtension;
 
@@ -88,6 +89,7 @@ namespace Fanex.Athena.Controllers.Report
 
             var productAccess = GetProductAccess(metaModel.LicenseeId, userSession.Language);
             metaModel.ProductCodeList = string.Join(",", productAccess.ProductList.Select(x => x.ProductCode));
+            AutoBindMetaModelService.BindProductCodeList(metaModel, SessionServiceInstance.LicenseeSession.OfferedSubProductList, ProductServiceInstance);
 
             var model = CreateViewModel(
                 licenseeSession.LicenseeName,
@@ -244,6 +246,7 @@ namespace Fanex.Athena.Controllers.Report
                 metaModel.ProductCodeList = productCode;
             }
 
+            AutoBindMetaModelService.BindProductCodeList(metaModel, SessionServiceInstance.LicenseeSession.OfferedSubProductList, ProductServiceInstance);
             return await _liveReportService.GetLiveReportSumaryDetail(metaModel, SessionServiceInstance.UserSession.CurrencyList, productList).ConfigureAwait(false);
         }
 

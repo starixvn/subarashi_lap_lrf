@@ -5,8 +5,9 @@ define(
         const _me = {};
 
         // Param
-        let _betListResult = { NewRow: false, Rows: [], LastTransId: 0 };
+        let _betListResult = { NewRow: false, Rows: [], LastTransId: 0, LastTransLogId: 0 };
         let _lastTransId = '0';
+        let _lastTransLogId = '0';
 
         const _params = {
             SportId: 0,
@@ -23,6 +24,7 @@ define(
             StakeFrom: '0',
             StakeTo: '1000000000',
             TransId: _lastTransId,
+            TransLogId: _lastTransLogId,
             BetFrom: 'All'
         };
         let _postedParam;
@@ -42,17 +44,17 @@ define(
 
         _me.columns =
             [{ Name: 'Platform', IsShow: 1 },
-             { Name: 'ExternalId', IsShow: 1 },
-             { Name: 'SystemId', IsShow: 1 },
-             { Name: 'TransTime', IsShow: 1 },
-             { Name: 'Choice', IsShow: 1 },
-             { Name: 'Odds', IsShow: 1 },
-             { Name: 'Stake', IsShow: 1 },
-             { Name: 'Status', IsShow: 1 }];
+            { Name: 'ExternalId', IsShow: 1 },
+            { Name: 'SystemId', IsShow: 1 },
+            { Name: 'TransTime', IsShow: 1 },
+            { Name: 'Choice', IsShow: 1 },
+            { Name: 'Odds', IsShow: 1 },
+            { Name: 'Stake', IsShow: 1 },
+            { Name: 'Status', IsShow: 1 }];
         _me.initialize = function () {
             _intervalId = 0;
             _isLoading = false;
-            _intervalMiliseconds = 3000;
+            _intervalMiliseconds = 12000;
 
             _$tableBody = $('#last-bets-monitoring tbody');
             _$tableBody.on('click', 'tr', function () {
@@ -99,6 +101,7 @@ define(
             _me.stopMonitor();
             _me.tryUpdateStake();
             _lastTransId = 0;
+            _lastTransLogId = 0;
             _postedParam = Site.clone(_params);
 
             if (parseInt(freezeStatus, 10) === 1) {
@@ -122,7 +125,7 @@ define(
             _isLoading = true;
 
             const loadingTickBegin = (new Date()).getTime();
-            if (Number(_lastTransId) === 0) {
+            if (Number(_lastTransId) === 0 && Number(_lastTransLogId) === 0) {
                 _me.clearContent();
             }
 
@@ -153,8 +156,8 @@ define(
 
                     const loadingTime = (new Date()).getTime() - loadingTickBegin;
                     _intervalMiliseconds = loadingTime > MIN_LOADING_MILISECONDS
-                    ? _intervalMiliseconds + 1000
-                    : MIN_INTERVAL;
+                        ? _intervalMiliseconds + 1000
+                        : MIN_INTERVAL;
 
                     // Continue
                     _me.doMonitor();
@@ -216,10 +219,13 @@ define(
             $('tr:gt(' + (_postedParam.PageSize - 1) + ')', _$tableBody).remove();
 
             _lastTransId = _betListResult.LastTransId;
+            _lastTransLogId = _betListResult.LastTransLogId;
             _postedParam.TransId = _lastTransId;
+            _postedParam.TransLogId = _lastTransLogId;
 
             setTimeout(function () {
                 _me.unHighlight(_lastTransId);
+                _me.unHighlight(_lastTransLogId);
             }, 6000);
 
             _isLoading = false;
@@ -249,6 +255,7 @@ define(
 
         _me.clearContent = function () {
             _postedParam.TransId = 0;
+            _postedParam.TransLogId = 0;
             _me.bindNoInfoRow();
         };
 
@@ -256,6 +263,7 @@ define(
             _me.stopMonitor();
 
             _lastTransId = 0;
+            _lastTransLogId = 0;
             _intervalMiliseconds = MIN_INTERVAL;
             _me.doMonitor();
         };

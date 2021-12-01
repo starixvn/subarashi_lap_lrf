@@ -202,7 +202,7 @@ namespace Fanex.Athena.Excel.Report
                     _excelModel.MetaModel.DrillDownCurrencyName);
             }
 
-            var productsTitle = ReportExcelHelper.GetLicenseeWLProduct(_excelModel.MetaModel.ProductOptions, _excelModel.SystemId);
+            var productsTitle = ReportExcelHelper.GetLicenseeWLProduct(_excelModel.MetaModel.OriginalProductOptions, _excelModel.SystemId);
             return string.Format(ViewResources.WinLossByProductTitle, fromdate, todate, currencyName + productsTitle);
         }
 

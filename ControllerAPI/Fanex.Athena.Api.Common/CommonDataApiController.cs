@@ -39,6 +39,10 @@
         private readonly IBetTypeService _betTypeService;
         private readonly IPortalApiService _portalApiService;
 
+        private readonly IProductService _productService;
+
+#pragma warning disable S107 // Methods should not have too many parameters
+
         public CommonDataApiController(
             ILanguageService langService,
             ISportTypeDataAccess sportTypeDataAccess,
@@ -46,7 +50,9 @@
             ILeagueDataAccess leagueDataAccess,
             IMatchDataAccess matchDataAccess,
             IBetTypeService betTypeService,
-            IPortalApiService portalApiService)
+            IPortalApiService portalApiService,
+            IProductService productService)
+#pragma warning restore S107 // Methods should not have too many parameters
         {
             _langService = langService;
             _sportTypeDataAccess = sportTypeDataAccess;
@@ -55,6 +61,7 @@
             _matchDataAccess = matchDataAccess;
             _betTypeService = betTypeService;
             _portalApiService = portalApiService;
+            _productService = productService;
         }
 
         protected override void Initialize(System.Web.Http.Controllers.HttpControllerContext controllerContext)
@@ -67,6 +74,10 @@
         [HttpGet]
         public async Task<IEnumerable<object>> GetSports(string productCode, bool includeSabaSport = false)
         {
+            productCode = _productService.GetAllowedSubProductCodeList(
+                _sessionService.LicenseeSession.OfferedSubProductList,
+                productCode);
+
             var sports = await _sportTypeDataAccess.GetSportsAndProducts(
                  _sessionService.LicenseeSession.LicenseeId,
                  _sessionService.UserSession.Language,
@@ -79,6 +90,10 @@
         [HttpGet]
         public async Task<IEnumerable<object>> GetBetTypes(string productCode)
         {
+            productCode = _productService.GetAllowedSubProductCodeList(
+                _sessionService.LicenseeSession.OfferedSubProductList,
+                productCode);
+
             var bettypes = await _betTypeService.GetBettypesByProduct(
                 _sessionService.LicenseeSession.LicenseeId,
                 productCode,

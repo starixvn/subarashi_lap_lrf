@@ -93,7 +93,11 @@
                 {
                     new LiveReport()
                 };
+                var expectedProductList = "AB,BC,CD";
                 _liveReportService.GetLiveReportSummary(metaModel).Returns(expectedData);
+                controller.ProductServiceInstance.GetAllowedSubProductCodeList(
+                   SessionService.LicenseeSession.OfferedSubProductList,
+                   expectedProductList).Returns(expectedProductList);
 
                 // Action
                 var viewResult = await controller.Index(metaModel) as ViewResult;
@@ -106,7 +110,7 @@
                     Assert.That(viewModel.Param, Is.EqualTo(metaModel));
                     Assert.That(viewModel.BalanceUpDate, Is.EqualTo(BalanceUpDate));
                     Assert.That(viewModel.Param.LicenseeId, Is.EqualTo(SessionService.LicenseeSession.LicenseeId));
-                    Assert.That(viewModel.Param.ProductCodeList, Is.EqualTo("AB,BC,CD"));
+                    Assert.That(viewModel.Param.ProductCodeList, Is.EqualTo(expectedProductList));
                     Assert.That(viewModel.MainResult, Is.EqualTo(expectedData));
                 });
             }
@@ -207,6 +211,9 @@
                     DataByBetType = new List<LiveReportByBetType>()
                 };
                 _liveReportService.GetLiveReportSumaryDetail(metaModel, UserCurrencyList, Arg.Any<IEnumerable<Product>>()).Returns(resultModel);
+                controller.ProductServiceInstance.GetAllowedSubProductCodeList(
+                    SessionService.LicenseeSession.OfferedSubProductList,
+                    expectedProductCodeList).Returns(expectedProductCodeList);
 
                 // Action
                 var viewResult = await controller.Detail(metaModel, productCode) as ViewResult;

@@ -31,6 +31,6 @@ namespace Fanex.Athena.Model.BetList.MetaModel
         }
 
         public virtual bool IsValid => CustId > 0
-            && MetaModelValidationHelper.ValidateBaseCurrency(BaseCurrency);
+            && MetaModelHelper.ValidateBaseCurrency(BaseCurrency);
     }
 }

@@ -10,6 +10,7 @@ namespace Fanex.Athena.Controllers.Report
 
     using Fanex.Athena.Excel.Base.Entities;
     using Fanex.Athena.Excel.Report;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
@@ -56,6 +57,7 @@ namespace Fanex.Athena.Controllers.Report
                 Param = new CustomerTurnoverMetaModel { LicenseeId = licenseeSession.LicenseeId },
                 IsAllowedCustomerCommission = licenseeSession.IsAllowedCustomerComm,
                 CurrencyList = SessionServiceInstance.UserSession.CurrencyList,
+                IsAllowSLT = licenseeSession.OfferedSubProductList.IsPresent(_ => _ == Product.SLT)
             };
 
             return View("~/Views/Desktop/Report/CustomerTurnover/Main.cshtml", model);
@@ -65,7 +67,10 @@ namespace Fanex.Athena.Controllers.Report
         [AjaxRequest]
         public async Task<ActionResult> GetSportsAndProducts()
         {
-            var productCode = $"{Product.SB},{Product.NG},{Product.VS},{Product.VS2}";
+            var productCode = ProductServiceInstance.GetAllowedSubProductCodeList(
+               SessionServiceInstance.LicenseeSession.OfferedSubProductList,
+               $"{Product.SB},{Product.NG},{Product.VS},{Product.VS2}");
+
             var data = await _sportTypeDataAccess.GetSportsAndProducts(
                 SessionServiceInstance.LicenseeSession.LicenseeId,
                 SessionServiceInstance.UserSession.Language,

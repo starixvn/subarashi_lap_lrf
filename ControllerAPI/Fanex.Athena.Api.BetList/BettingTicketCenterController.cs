@@ -1,6 +1,5 @@
 ﻿namespace Fanex.Athena.Api.BetList
 {
-    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Http;
 
@@ -8,7 +7,6 @@
     using Base.Attributes;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Utility;
 
     using Model.BetList.MetaModel;
 
@@ -30,53 +28,39 @@
         [HttpPost]
         [ApiFunctionAuthorization(PermissionKeys.BtcSingleCustomer)]
         [ValidationApiRequest]
+        [ApiAutoBindMetaModel(BindAgent = true, BindShowingBetFromIP = true, BindProductCodeList = true)]
         public async Task<dynamic> GetBySingleCustomer(SingleCustomersBetListMetaModel metaModel)
         {
-            var userSession = SessionService.UserSession;
             metaModel.HasPlayerCom = SessionService.LicenseeSession.IsAllowedCustomerComm;
-            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList);
-            metaModel.IsShowIpvn = userSession.IsShowIpvn && userSession.IsShowIp;
-            metaModel.IsShowIp = userSession.IsShowIp;
-
             return await _betListApiClient.PostAsync("/BettingTicketCenter/GetBySingleCustomer",
                 metaModel,
-                userSession.Language
+                SessionService.UserSession.Language
                 ).ConfigureAwait(false);
         }
 
         [HttpPost]
         [ApiFunctionAuthorization(PermissionKeys.BtcRefNo)]
         [ValidationApiRequest]
+        [ApiAutoBindMetaModel(BindAgent = true, BindShowingBetFromIP = true, BindProductCodeList = true)]
         public async Task<dynamic> GetByRefno(RefNoBetListMetaModel metaModel)
         {
-            var userSession = SessionService.UserSession;
-            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList);
             metaModel.HasPlayerCom = SessionService.LicenseeSession.IsAllowedCustomerComm;
-            metaModel.IsShowIpvn = userSession.IsShowIpvn && userSession.IsShowIp;
-            metaModel.IsShowIp = userSession.IsShowIp;
-
             return await _betListApiClient.PostAsync("/BettingTicketCenter/GetByRefno",
                 metaModel,
-                userSession.Language
+                SessionService.UserSession.Language
                 ).ConfigureAwait(false);
         }
 
         [HttpPost]
         [ApiFunctionAuthorization(PermissionKeys.BtcRunning)]
         [ValidationApiRequest(IsValidCurrencyList = true)]
+        [ApiAutoBindMetaModel(BindAgent = true, BindShowingBetFromIP = true, BindProductCodeList = true)]
         public async Task<dynamic> GetByRunning(BaseBettingTicketMetaModel metaModel)
         {
-            var userSession = SessionService.UserSession;
-            var currencyList = metaModel.CurrencyIdList?.Split(',').Select(x => int.Parse(x)).ToArray();
-            metaModel.IsShowIpvn = userSession.IsShowIpvn && userSession.IsShowIp;
-            metaModel.IsShowIp = userSession.IsShowIp;
-
-            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, currencyList);
             metaModel.HasPlayerCom = SessionService.LicenseeSession.IsAllowedCustomerComm;
-
             return await _betListApiClient.PostAsync("/BettingTicketCenter/GetByRunning",
                 metaModel,
-                userSession.Language
+                SessionService.UserSession.Language
                 ).ConfigureAwait(false);
         }
     }

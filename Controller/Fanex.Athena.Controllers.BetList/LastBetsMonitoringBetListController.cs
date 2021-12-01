@@ -1,16 +1,11 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="LastBetsMonitoringBetListController.cs" company="Microsoft">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Controllers.BetList
+﻿namespace Fanex.Athena.Controllers.BetList
 {
     #region Using
 
     using DataAccess.Core.Common.Interfaces;
 
     using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Web.ActionFilter;
 
     using Model.BetList.MetaModel;
@@ -64,8 +59,15 @@ namespace Fanex.Athena.Controllers.BetList
         private async Task<IEnumerable<SelectListItem>> GetSports()
         {
             const string ParlayId = "999";
-            var sports = await this._sportTypeDataAccess.GetAllSports().ConfigureAwait(false);
-            var sportListItems = sports.Select(item => new SelectListItem { Value = item.Key.ToString(), Text = item.Value }).ToList();
+            const int ProductType = -1;
+            var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
+            var languageCode = SessionServiceInstance.UserSession.Language;
+            var productCode = ProductServiceInstance.GetAllowedSubProductCodeList(
+               SessionServiceInstance.LicenseeSession.OfferedSubProductList,
+               Product.SB);
+
+            var sports = await _sportTypeDataAccess.GetSportsAndProducts(licenseeId, languageCode, productCode).ConfigureAwait(false);
+            var sportListItems = sports.Where(item => item.ParentId != ProductType).Select(item => new SelectListItem { Value = item.ID.ToString(), Text = item.Name }).ToList();
             sportListItems.Insert(0, new SelectListItem { Value = "0", Text = ViewResources.All, Selected = true });
             sportListItems.Add(new SelectListItem { Value = ParlayId, Text = ViewResources.Parlay });
 

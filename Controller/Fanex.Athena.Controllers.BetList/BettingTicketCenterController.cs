@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Web.Mvc;
     using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Auth.Enum;
@@ -193,7 +194,6 @@
                 Product.PGS,
                 Product.JK,
                 Product.GDG,
-                Product.SLT,
                 Product.HB,
                 Product.WM,
                 Product.BGG,
@@ -209,7 +209,14 @@
                 .Where(product => productsRequireUseName.Contains(product.ProductCode))
                 .Select(x => x.ProductName).ToList();
 
-            if (productAccess.ProductList.Any(p => string.Equals(p.ProductCode, "NG")))
+            var offeredSubProductList = SessionServiceInstance.LicenseeSession.OfferedSubProductList;
+
+            if (offeredSubProductList.IsPresent(_ => _ == Product.SLT))
+            {
+                licProductsRequireUseName.Add(ViewResources.ProductSLT);
+            }
+
+            if (productAccess.IsAllow(Product.NG))
             {
                 licProductsRequireUseName.Add(ViewResources.Happy5LinkedGames);
             }

@@ -1,19 +1,12 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="TurnoverDataAccess.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.DataAccess.Report
+﻿namespace Fanex.Athena.DataAccess.Report
 {
     using System.Collections.Generic;
     using System.Data;
-    using System.Linq;
     using System.Threading.Tasks;
     using Data;
     using Fanex.Athena.DataAccess.Core;
     using Fanex.Athena.DataAccess.Report.Interfaces;
-    using Fanex.Athena.Extension.Helper;
+    using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Common.Extensions;
@@ -79,7 +72,7 @@ namespace Fanex.Athena.DataAccess.Report
                 }
             }
 
-            db.SetParameterValue("ProductList", string.Join(",", metaModel.ProductOptions.Where(_ => _.Status && _.Code != "BT" && _.Code != "CO").Select(_ => _.Code)));
+            db.SetParameterValue("ProductList", string.Join(",", metaModel.ProductOptions.ToSelectedProductCodeList(_ => _.Code != "BT" && _.Code != "CO")));
             db.SetParameterValue("fromdate", metaModel.FromDate);
             db.SetParameterValue("todate", metaModel.ToDate);
             db.SetParameterValue("username", metaModel.Username);

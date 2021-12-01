@@ -4,6 +4,7 @@
 @import '../../components/paging/paging';
 @import "../../components/autocomplete/autocomplete";
 @import '../../components/checkbox/checkbox';
+@import '../../components/list/list';
 
 #TickerFilter {
     > label {
@@ -15,6 +16,10 @@
 
 .decimal-odds {
     color: $red;
+}
+
+.result-note {
+    padding-top: 0;
 }
 
 /*.ui-multiselect-ul-group{

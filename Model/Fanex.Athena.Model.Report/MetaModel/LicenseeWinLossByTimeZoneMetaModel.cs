@@ -4,7 +4,7 @@
     using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Model.Core.MetaModel;
 
-    public class LicenseeWinLossByTimeZoneMetaModel : IMetaModelValidation, IMetaModelAgent, IMetaModelCurrency
+    public class LicenseeWinLossByTimeZoneMetaModel : IMetaModelValidation, IMetaModelAgent, IMetaModelCurrency, IMetaModelProductCodeList
     {
         public string AgentListXml { get; set; }
 
@@ -13,6 +13,8 @@
         public DateTime ToDate { get; set; }
 
         public string ProductCodeList { get; set; }
+
+        public string OriginalProductCodeList { get; set; }
 
         public string BaseCurrency { get; set; }
 
@@ -30,7 +32,7 @@
 
         public bool IsValid => FromDate <= ToDate &&
                                 !string.IsNullOrEmpty(ProductCodeList)
-            && MetaModelValidationHelper.ValidateBaseCurrency(BaseCurrency, false);
+            && MetaModelHelper.ValidateBaseCurrency(BaseCurrency, false);
 
         public bool IsExcludedTestData { get; set; }
     }

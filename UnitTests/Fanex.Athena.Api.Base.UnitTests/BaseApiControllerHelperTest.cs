@@ -18,6 +18,7 @@
 
     public abstract class BaseApiControllerHelperTest
     {
+        protected List<string> SubProduct = new List<string> { "SLT", "BTC" };
         protected const int SessionLicenseeId = 1;
         protected const int BetListTimeOut = 100;
         protected const string SessionLicenseeName = "Test";
@@ -49,7 +50,7 @@
             {
                 Language = SessionLanguage,
                 CurrencyList = new Dictionary<int, string>(),
-                CurrencyAgentList = new Dictionary<int, int[]>()
+                CurrencyAgentList = new Dictionary<int, int[]>(),
             });
             ProductService = Substitute.For<IProductService>();
             AppSetting = Substitute.For<IAppSettings>();
@@ -83,7 +84,8 @@
             var licenseeSession = new LicenseeAuthInfo
             {
                 LicenseeId = SessionLicenseeId,
-                LicenseeName = SessionLicenseeName
+                LicenseeName = SessionLicenseeName,
+                OfferedSubProductList = SubProduct
             };
 
             StubUserSessionData(userSession);

@@ -115,8 +115,6 @@
 
         public decimal GDGComm { get; set; }
 
-        public decimal SLTComm { get; set; }
-
         public decimal HBComm { get; set; }
 
         public decimal VGAComm { get; set; }
@@ -150,7 +148,6 @@
             CommValues.Add(Product.BGG, BGGComm);
             CommValues.Add(Product.JK, JKComm);
             CommValues.Add(Product.GDG, GDGComm);
-            CommValues.Add(Product.SLT, SLTComm);
             CommValues.Add(Product.HB, HBComm);
 
             CommValues.Add(Product.VGA, VGAComm);

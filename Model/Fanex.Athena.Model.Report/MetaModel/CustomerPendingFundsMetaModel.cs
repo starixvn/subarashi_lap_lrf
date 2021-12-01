@@ -1,19 +1,10 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="CustomerPendingFundsMetaModel.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-using Fanex.Athena.Model.Core.DataDomain;
+﻿using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Model.Core.MetaModel;
 using System;
 using System.Linq;
 
 namespace Fanex.Athena.Model.Report.MetaModel
 {
-    /// <summary>
-    /// CustomerPendingFundsMetaModel class.
-    /// </summary>
     public class CustomerPendingFundsMetaModel : BaseReportMetaModel, IMetaModelValidation
     {
         public CustomerPendingFundsMetaModel()

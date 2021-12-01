@@ -10,14 +10,9 @@
     using Extension.Utility;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Utility;
-
     using Model.BetList.MetaModel;
-
     using Resources;
-
     using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
 
     [ApiFunctionAuthorization(PermissionKeys.BtcAdvancedSearch)]
     public class BettingTicketCenterAdvancedSearchController : BaseApiController
@@ -41,6 +36,7 @@
         [HttpPost]
         [ApiFunctionAuthorization(PermissionKeys.BtcAdvancedSearch)]
         [ValidationApiRequest(IsValidCurrencyList = true)]
+        [ApiAutoBindMetaModel(BindAgent = true, BindShowingBetFromIP = true, BindProductCodeList = true)]
         public async Task<dynamic> GetData(AdvancedSearchBetListMetaModel metaModel)
         {
             var licenseeSession = SessionService.LicenseeSession;
@@ -55,17 +51,10 @@
                 };
             }
 
-            var userSession = SessionService.UserSession;
-            var currencyList = metaModel.CurrencyIdList?.Split(',').Select(x => int.Parse(x)).ToArray();
-
-            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, currencyList);
             metaModel.HasPlayerCom = SessionService.LicenseeSession.IsAllowedCustomerComm;
-            metaModel.IsShowIpvn = userSession.IsShowIpvn && userSession.IsShowIp;
-            metaModel.IsShowIp = userSession.IsShowIp;
-
             var timeOutInSecond = int.Parse(_appSettings.GetValue("BetListApiOutInSecond"));
             return await _betListApiClient.PostAsync("/BettingTicketCenterAdvancedSearch/GetData",
-                metaModel, userSession.Language, timeOutInSecond).ConfigureAwait(false);
+                metaModel, SessionService.UserSession.Language, timeOutInSecond).ConfigureAwait(false);
         }
     }
 }

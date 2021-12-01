@@ -1,14 +1,5 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="ProductOption.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Model.Core.MetaModel.Product
+﻿namespace Fanex.Athena.Model.Core.MetaModel.Product
 {
-    /// <summary>
-    /// ProductOption class.
-    /// </summary>
     public class ProductOption
     {
         public string Code { get; set; }

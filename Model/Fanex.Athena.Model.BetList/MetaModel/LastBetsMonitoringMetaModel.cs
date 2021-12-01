@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using Fanex.Athena.Model.Core.DTO.Common;
 using Fanex.Athena.Model.Core.Helper;
 using Fanex.Athena.Model.Core.MetaModel;
 
 namespace Fanex.Athena.Model.BetList.MetaModel
 {
-    public class LastBetsMonitoringMetaModel : IMetaModelValidation, IMetaModelShowIP
+    public class LastBetsMonitoringMetaModel : IMetaModelValidation, IMetaModelShowBetFromIP, IMetaModelProductCodeList
     {
         private const int DefaultPageSize = 10;
 
@@ -12,6 +12,8 @@ namespace Fanex.Athena.Model.BetList.MetaModel
         {
             PageSize = DefaultPageSize;
         }
+
+        public long TransLogId { get; set; }
 
         public int SportId { get; set; }
 
@@ -49,6 +51,9 @@ namespace Fanex.Athena.Model.BetList.MetaModel
 
         public bool IsShowIp { get; set; }
 
-        public bool IsValid => MetaModelValidationHelper.ValidateBaseCurrency(BasedCurrency);
+        public string ProductCodeList { get; set; } = Product.SB;
+        public string OriginalProductCodeList { get; set; }
+
+        public bool IsValid => MetaModelHelper.ValidateBaseCurrency(BasedCurrency);
     }
 }

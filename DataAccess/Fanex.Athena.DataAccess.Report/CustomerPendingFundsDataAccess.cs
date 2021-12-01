@@ -13,6 +13,7 @@ namespace Fanex.Athena.DataAccess.Report
     using Data;
     using Fanex.Athena.DataAccess.Core;
     using Fanex.Athena.DataAccess.Report.Interfaces;
+    using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Common.Extensions;
@@ -76,7 +77,7 @@ namespace Fanex.Athena.DataAccess.Report
                 db.SetParameterValue("ShowBA", productBA.Status);
                 metaModel.ProductOptions.Remove(productBA);
             }
-            db.SetParameterValue("ProductList", string.Join(",", metaModel.ProductOptions.Where(_ => _.Status).Select(_ => _.Code)));
+            db.SetParameterValue("ProductList", metaModel.ProductOptions.ToSelectedProductCodeList());
         }
 
         private static CustPendingFunds ReadData(IDataReader reader, int index)

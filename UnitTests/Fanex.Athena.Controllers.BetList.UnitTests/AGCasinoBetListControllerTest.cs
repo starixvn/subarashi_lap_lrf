@@ -92,12 +92,16 @@
         private AGCasinoBetListController CreateController()
         {
             var controller = Substitute.ForPartsOf<AGCasinoBetListController>();
+            ProductService.GetAllowedSubProductCodeList(
+                SessionService.LicenseeSession.OfferedSubProductList,
+                Arg.Any<string>()).Returns(string.Empty);
 
             controller.SessionServiceInstance = SessionService;
             controller.LangService = LangService;
             controller.LicenseeSettingServiceInstance = LicenseeSettingService;
             controller.BalanceUpDataAccessInstance = BalanceUpDataAccess;
             controller.BetListApiClient = BetListApiClient;
+            controller.ProductService = ProductService;
 
             return controller;
         }

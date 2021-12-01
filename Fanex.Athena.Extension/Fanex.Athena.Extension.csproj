@@ -149,6 +149,7 @@
     <Compile Include="Helper\ConvertHelper.cs" />
     <Compile Include="Helper\DateTimeHelper.cs" />
     <Compile Include="Helper\DynamicObjectHelper.cs" />
+    <Compile Include="Helper\GuardHelper.cs" />
     <Compile Include="Helper\JsonHelper.cs" />
     <Compile Include="Helper\LogMessageHelper.cs" />
     <Compile Include="Helper\MetaModelHelper.cs" />

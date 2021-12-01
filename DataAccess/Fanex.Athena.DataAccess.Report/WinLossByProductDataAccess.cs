@@ -42,7 +42,6 @@ namespace Fanex.Athena.DataAccess.Report
             WinLossByProductResultModel data;
             using (var db = this.GetObjectDb(UspName))
             {
-                
                 db.SetParameterValue("reporttype", metaModel.ReportBy);
                 db.SetParameterValue("username", SqlHelper.ToSqlTextSearch(metaModel.Username));
                 db.SetParameterValue("SystemName", null);
@@ -168,7 +167,7 @@ namespace Fanex.Athena.DataAccess.Report
             db.SetParameterValue("todate", drilldown ? metaModel.DrillDownToDate.Date : metaModel.ToDate.Date);
             db.SetParameterValue("drawfilter", metaModel.DrawFilter);
             db.SetParameterValue("movebetsday", _balanceUpDataAccess.GetBalanceUp().MoveBetsDay);
-            db.SetParameterValue("productList", string.Join(",", metaModel.ProductOptions.Where(x => x.Status).Select(x => x.Code)));
+            db.SetParameterValue("productList", metaModel.ProductOptions.ToSelectedProductCodeList());
             db.SetParameterValue("BaseCurrency", metaModel.BaseCurrency);
             db.SetParameterValue("DefaultBaseCurrency", metaModel.DefaultBaseCurrency);
         }

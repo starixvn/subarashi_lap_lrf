@@ -2218,4 +2218,7 @@
   <data name="LeagueWinLoss" xml:space="preserve">
     <value>联赛输赢</value>
   </data>
+  <data name="SLTDateRangeNote" xml:space="preserve">
+    <value>体育时时彩仅提供11/22/2021之后的数据</value>
+  </data>
 </root>

@@ -159,6 +159,8 @@
             if (IsValidExportExcel(model))
             {
                 model.UspKey = uspKey;
+                AutoBindMetaModelService.BindProductCodeList(model, SessionServiceInstance.LicenseeSession.OfferedSubProductList, ProductService);
+
                 return await ExportExcel(model).ConfigureAwait(false);
             }
 

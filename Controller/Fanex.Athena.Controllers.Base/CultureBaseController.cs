@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="BaseController.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Controllers
+﻿namespace Fanex.Athena.Controllers
 {
     using Extension.Utility;
 
@@ -24,6 +18,7 @@ namespace Fanex.Athena.Controllers
         public ISessionService SessionServiceInstance { get; set; }
         public IAppSettings AppSettingInstance { get; set; }
         public ILicenseeSettingService LicenseeSettingServiceInstance { get; set; }
+        public IProductService ProductServiceInstance { get; set; }
 
         public bool IsFakeLicensee(string licenseeName)
         {

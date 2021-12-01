@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="ReportController.PlatformWinLoss.cs" company="">
-// ReportController copyright.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Controllers.Report
+﻿namespace Fanex.Athena.Controllers.Report
 {
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
@@ -13,7 +7,6 @@ namespace Fanex.Athena.Controllers.Report
     using Fanex.Athena.Web.ActionFilter;
 
     using Model.Core.DataDomain;
-
     using System.Threading.Tasks;
     using System.Web.Mvc;
 
@@ -59,7 +52,7 @@ namespace Fanex.Athena.Controllers.Report
 
         [HttpPost]
         [ValidationWebRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
-        [AutoBindMetaModel(BindAgent = true)]
+        [AutoBindMetaModel(BindAgent = true, BindProductOptions = true)]
         public async Task<ActionResult> Index(PlatformWinLossMetaModel metaModel)
         {
             return await ProcessRequest(metaModel);
@@ -69,7 +62,6 @@ namespace Fanex.Athena.Controllers.Report
         {
             var userSession = SessionServiceInstance.UserSession;
             metaModel.HasComm = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm;
-
             return metaModel.Level == (int)ReportLevel.Main
                 ? await ProcessSummaryLevel(metaModel, userSession.Language)
                 : await ProcessMemberLevel(metaModel, userSession.Language);

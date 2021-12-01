@@ -24,5 +24,7 @@ namespace Fanex.Athena.Model.Report.ViewModel
         public IDictionary<string, int> SportsList { get; set; }
 
         public IDictionary<string, int> BettypeList { get; set; }
+
+        public bool IsAllowSLT { get; set; }
     }
 }

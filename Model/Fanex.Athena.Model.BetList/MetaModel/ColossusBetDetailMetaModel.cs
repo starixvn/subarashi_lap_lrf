@@ -17,7 +17,7 @@ namespace Fanex.Athena.Model.BetList.MetaModel
 
         public string AgentListXml { get; set; }
 
-        public bool IsValid => CustId > 0 && MetaModelValidationHelper
+        public bool IsValid => CustId > 0 && MetaModelHelper
             .ValidateBaseCurrency(BaseCurrency);
     }
 }
