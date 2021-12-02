@@ -11,5 +11,7 @@ namespace Fanex.Athena.Model.BetList.MetaModel
         public int[] HiddenColumns { get; set; }
 
         public int StartIndex { get; set; } = 1;
+
+        public string ProductCode { get; set; }
     }
 }

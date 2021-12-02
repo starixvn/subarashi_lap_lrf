@@ -16,7 +16,6 @@
     using Model.Report.MetaModel.Result;
     using Model.Report.ViewModel.Result;
 
-    
     public class ResultReportController : ReportBaseController
     {
         private const string ResultPageGetNormalSportsName = "ResultPage_GetNormalSports";
@@ -74,7 +73,7 @@
             if (ModelState.IsValid)
             {
                 metaModel.SpecialLeagues = await _portalApiService.GetSpecialLeaguesAsync(SessionServiceInstance.LicenseeSession.LicenseeName);
-                
+
                 var data = await _betListApiClient.PostStringAsync(
                     "/ResultReport/Index",
                     metaModel,
@@ -372,6 +371,40 @@
             }
 
             return this.Redirect("~/Utility/Error?err=400");
+        }
+
+        [HttpGet]
+        public async Task<string> AdvantPlay(string custId, string transId3rd, string gameId3rd, string siteId)
+        {
+            var language = SessionServiceInstance.UserSession.Language;
+            var model = new
+            {
+                custId,
+                transId3rd,
+                gameId3rd,
+                siteId,
+                languageCode = language
+            };
+
+            return await _betListApiClient.PostStringAsync("/AdvantPlayResultPopup/Index",
+               model, language).ConfigureAwait(false);
+        }
+
+        [HttpGet]
+        public async Task<string> AdvantPlayMini(string custId, string transId3rd, string gameId3rd, string siteId)
+        {
+            var language = SessionServiceInstance.UserSession.Language;
+            var model = new
+            {
+                custId,
+                transId3rd,
+                gameId3rd,
+                siteId,
+                languageCode = language
+            };
+
+            return await _betListApiClient.PostStringAsync("/AdvantPlayMiniResultPopup/Index",
+               model, language).ConfigureAwait(false);
         }
 
         #endregion PopUpPage

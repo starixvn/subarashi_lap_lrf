@@ -4582,6 +4582,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         const SPORT_VGA = 171;
         const SPORT_VGA_FreeBets = 173;
         const SPORT_CG = 167;
+        const SPORT_AP = 172;
+        const SPORT_APM = 174;
         const BETLIST_META_MODEL = '#BetListMetaModel';
 
         let _sortColumnName, _sortOrder;
@@ -4617,6 +4619,22 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
                 $frame.height(height);
             }
+        }
+
+        function showRngBetlistDetail(transId, winlostDate, custId, transType, productCode) {
+            let url = Site.resolveClientUrl('RNGBetList/Detail');
+            url = QueryString.setParam(url, 'transId', transId);
+            url = QueryString.setParam(url, 'date', winlostDate);
+            url = QueryString.setParam(url, 'custId', custId);
+            url = QueryString.setParam(url, 'transType', transType);
+            url = QueryString.setParam(url, 'BaseCurrency', getBaseCurrency());
+            url = QueryString.setParam(url, 'productCode', productCode);
+
+            const popH = Math.min($(window).height() - 100, 550);
+            const title = Site.getSingleResource(productCode) + ' - ' +
+                Site.getSingleResource('DetailedBetlist') + ' - ' + moment(new Date(winlostDate)).format('MM/DD/YYYY');
+
+            showDetailPopUp(url, { width: 890, height: popH + 50, title: title });
         }
 
         const _me = {
@@ -5176,6 +5194,29 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                     }
                 });
             },
+            viewAdvantPlayResult: function (custId, transId3rd, gameId3rd, siteId, title) {
+                const url = Site.resolveClientUrl('ResultReport/AdvantPlay');
+                Site.blockUI();
+
+                $.get(url + '?custId=' + custId + '&transId3rd=' + transId3rd + '&gameId3rd=' + gameId3rd + '&siteId=' + siteId, function (result) {
+                    if (result !== '') {
+                        showResultPopUp(result, { width: 800, height: 380, title: title });
+                        Site.unBlockUI();
+                    }
+                });
+            },
+            viewAdvantPlayMiniResult: function (custId, transId3rd, gameId3rd, siteId, title) {
+                const url = Site.resolveClientUrl('ResultReport/AdvantPlayMini');
+                Site.blockUI();
+
+                $.get(url + '?custId=' + custId + '&transId3rd=' + transId3rd + '&gameId3rd=' + gameId3rd + '&siteId=' + siteId, function (result) {
+                    if (result !== '') {
+                        showResultPopUp(result, { width: 800, height: 380, title: title });
+                        Site.unBlockUI();
+                    }
+                });
+            },
+
             viewResult: function (matchid, raceNo, bettype, sporttype, refno,
                 currency, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid, transdecs) {
                 const title = Site.getSingleResource('Result');
@@ -5243,6 +5284,12 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 }
                 else if (sporttype === SPORT_CG) {
                     _me.viewCGResult(custid, transdecs, league, extension2, title);
+                }
+                else if (sporttype === SPORT_AP) {
+                    _me.viewAdvantPlayResult(custid, transdecs, extension2, extension1, title);
+                }
+                else if (sporttype === SPORT_APM) {
+                    _me.viewAdvantPlayMiniResult(custid, transdecs, extension2, extension1, title);
                 }
                 else {
                     const numberBettype = Number(bettype);
@@ -5719,6 +5766,14 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 showDetailPopUp(url, { width: 890, height: popH + 50, title: title });
             },
 
+            showAdvantPlayBetDetails: function (transId, winlostDate, custId, transType) {
+                showRngBetlistDetail(transId, winlostDate, custId, transType, 'ProductAP');
+            },
+
+            showAdvantPlayMiniBetDetails: function (transId, winlostDate, custId, transType) {
+                showRngBetlistDetail(transId, winlostDate, custId, transType, 'ProductAPM');
+            },
+
             ValidProducts: function () {
                 let temp = true;
                 if ($('#ProductList').find('input:checked').length === 0) {
@@ -5817,6 +5872,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 window.showVGamingDetails = _me.showVGamingDetails;
                 window.showVGamingJackpotWonDetails = _me.showVGamingJackpotWonDetails;
                 window.showCGBetDetails = _me.showCGBetDetails;
+                window.showAdvantPlayBetDetails = _me.showAdvantPlayBetDetails;
+                window.showAdvantPlayMiniBetDetails = _me.showAdvantPlayMiniBetDetails;
 
                 const betList = {
                     ViewCasinoHandHistory: _me.ViewCasinoHandHistory

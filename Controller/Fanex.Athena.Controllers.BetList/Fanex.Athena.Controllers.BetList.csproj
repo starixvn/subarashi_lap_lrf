@@ -151,6 +151,7 @@
     <Compile Include="CustomerWinLossBetListController.cs" />
     <Compile Include="CashOutBetListController.cs" />
     <Compile Include="CreativeGamingBetListController.cs" />
+    <Compile Include="RNGBetListController.cs" />
     <Compile Include="HabaneroBetListController.cs" />
     <Compile Include="GlobalGamingBetListController.cs" />
     <Compile Include="GodOfFortuneWinLossBetListController.cs" />

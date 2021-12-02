@@ -391,6 +391,18 @@ class BetList {
         return url;
     }
 
+    getRngBetlistDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType, productCode) {
+        let url = rootUrl + 'RNGBetList/Detail';
+        url = QueryString.setParam(url, 'transId', transId);
+        url = QueryString.setParam(url, 'date', winlostDate);
+        url = QueryString.setParam(url, 'custId', custId);
+        url = QueryString.setParam(url, 'transType', transType);
+        url = QueryString.setParam(url, 'BaseCurrency', baseCurrency);
+        url = QueryString.setParam(url, 'productCode', productCode);
+
+        return url;
+    }
+
     getRngCasinoResultUrl(rootUrl) {
         return rootUrl + 'ResultReport/ShowRngCasinoSingleWalletResult';
     }
@@ -572,6 +584,26 @@ class BetList {
 
     getCGResultUrl(rootUrl, custId, transId3rd, gameId3rd, siteId) {
         let url = rootUrl + 'ResultReport/CG';
+        url = QueryString.setParam(url, 'custId', custId);
+        url = QueryString.setParam(url, 'transId3rd', transId3rd);
+        url = QueryString.setParam(url, 'gameId3rd', gameId3rd);
+        url = QueryString.setParam(url, 'siteId', siteId);
+
+        return url;
+    }
+
+    geAdvantPlayResultUrl(rootUrl, custId, transId3rd, gameId3rd, siteId) {
+        let url = rootUrl + 'ResultReport/AdvantPlay';
+        url = QueryString.setParam(url, 'custId', custId);
+        url = QueryString.setParam(url, 'transId3rd', transId3rd);
+        url = QueryString.setParam(url, 'gameId3rd', gameId3rd);
+        url = QueryString.setParam(url, 'siteId', siteId);
+
+        return url;
+    }
+
+    geAdvantPlayMiniResultUrl(rootUrl, custId, transId3rd, gameId3rd, siteId) {
+        let url = rootUrl + 'ResultReport/AdvantPlayMini';
         url = QueryString.setParam(url, 'custId', custId);
         url = QueryString.setParam(url, 'transId3rd', transId3rd);
         url = QueryString.setParam(url, 'gameId3rd', gameId3rd);

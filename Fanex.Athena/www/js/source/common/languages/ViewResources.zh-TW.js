@@ -1,4 +1,4 @@
-﻿// Generated at: 11/15/2021 4:53:18 PM
+﻿// Generated at: 12/2/2021 8:45:24 AM
 window._language_zh_TW = {
 AA:"客客",
 AbnormalBet:"非正規註單",
@@ -531,6 +531,7 @@ ShowAllLeagues:"顯示所有聯賽",
 ShowOldValue:"顯示舊值",
 Sincelastmonth:"從上個月",
 SingleCustomer:"單一會員",
+SLTDateRangeNote:"體育時時彩僅提供11/22/2021之後的數據",
 SoccerPinGoal:"足球檯",
 SpecialLevel:"特殊層級",
 SpecificDate:"特定日期",

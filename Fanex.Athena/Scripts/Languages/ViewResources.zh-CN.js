@@ -1,4 +1,4 @@
-﻿// Generated at: 11/15/2021 4:41:00 PM
+﻿// Generated at: 12/2/2021 8:43:50 AM
 var _language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -648,6 +648,7 @@ ShowAllLeagues:"显示所有联赛",
 ShowOldValue:"显示旧值",
 Sincelastmonth:"自上个月",
 SingleCustomer:"单一会员",
+SLTDateRangeNote:"体育时时彩仅提供11/22/2021之后的数据",
 SoccerParlay:"足球串关",
 SoccerPinGoal:"足球台",
 SpecialLevel:"特殊层级",
