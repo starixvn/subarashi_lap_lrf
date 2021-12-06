@@ -71,6 +71,7 @@
 
             metaModel.PageIndex = 1;
             metaModel.PageSize = PageSizeExcel;
+            var systemIdVisible = !_licenseeSettingService.IsFakeLicensee(SessionService.LicenseeSession.LicenseeName);
 
             var data = await _custPendingFundsDataAccess.GetDataList(metaModel).ConfigureAwait(false);
             var excelModel = new CustomerPendingFundsExcelModel
@@ -78,7 +79,7 @@
                 ConvertingOption = convertingOption,
                 DataList = data.DataList,
                 TotalData = data.TotalData,
-                SystemIdVisible = !_licenseeSettingService.IsFakeLicensee(SessionService.LicenseeSession.LicenseeName)
+                SystemIdVisible = systemIdVisible
             };
             var custPendingFundsExcel = CreateExcel(templatePath, excelModel);
             custPendingFundsExcel.Export();
