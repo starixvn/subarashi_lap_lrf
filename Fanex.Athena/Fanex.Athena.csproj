@@ -971,6 +971,8 @@
     <Content Include="www\css\build\dev\reactpages\bettingticketscenter\index.css" />
     <Content Include="www\css\build\dev\reactpages\casinoturnover\index.chunk.js" />
     <Content Include="www\css\build\dev\reactpages\casinoturnover\index.css" />
+    <Content Include="www\css\build\dev\reactpages\customersupporttask\index.chunk.js" />
+    <Content Include="www\css\build\dev\reactpages\customersupporttask\index.css" />
     <Content Include="www\css\build\dev\reactpages\dailybets\index.css" />
     <Content Include="www\css\build\dev\reactpages\exchangevoided\index.css" />
     <Content Include="www\css\build\dev\reactpages\exchangewl\index.chunk.js" />
@@ -1028,6 +1030,8 @@
     <Content Include="www\css\build\pro\reactpages\bettingticketscenter\index.css" />
     <Content Include="www\css\build\pro\reactpages\casinoturnover\index.chunk.js" />
     <Content Include="www\css\build\pro\reactpages\casinoturnover\index.css" />
+    <Content Include="www\css\build\pro\reactpages\customersupporttask\index.chunk.js" />
+    <Content Include="www\css\build\pro\reactpages\customersupporttask\index.css" />
     <Content Include="www\css\build\pro\reactpages\dailybets\index.css" />
     <Content Include="www\css\build\pro\reactpages\exchangevoided\index.css" />
     <Content Include="www\css\build\pro\reactpages\exchangewl\index.css" />
@@ -1142,7 +1146,10 @@
     <Content Include="Views\Desktop\Report\LiveReport\MatchList\Content.cshtml" />
     <Content Include="Views\Desktop\BetList\LiveReport\SportsLottery.cshtml" />
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\CustomerClassSettingPolicy.xls" />
-    <Content Include="App_Data\Template\Customers\PlayerSegmentation\CustomerClassSpreadSettingPolicy.xls" />
+    <Content Include="App_Data\Template\Customers\PlayerSegmentation\CustomerClassSpreadSettingPolicy.xls" />    
+    <Content Include="Views\Desktop\Report\CustomerSupportTask\Main.cshtml" />
+    <Content Include="www\css\build\dev\reactpages\customersupporttask\index.chunk.js.map" />
+    <Content Include="www\css\build\dev\reactpages\customersupporttask\index.css.map" />
     <Content Include="App_Data\Template\Notification\Resettlement\TicketListing.xls" />
     <None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
     <None Include="www\css\source\pages\betlist\result\result.happy5.scss" />
@@ -1180,6 +1187,7 @@
     <Content Include="www\js\build\dev\reactpages\customer\playersegmentation\vipPlayerManagement.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\customer\playersegmentation\betlist.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\report\casinoturnover.chunk.js" />
+    <Content Include="www\js\build\dev\reactpages\report\customersupporttask.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\report\dailybets.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\report\leaguewinloss.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\report\licenseewlbytimezone.chunk.js" />
@@ -1213,6 +1221,7 @@
     <Content Include="www\js\build\pro\reactpages\customer\playersegmentation\problemPlayer.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\customer\playersegmentation\vipPlayerManagement.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\report\casinoturnover.chunk.js" />
+    <Content Include="www\js\build\pro\reactpages\report\customersupporttask.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\report\dailybets.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\report\leaguewinloss.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\report\licenseewlbytimezone.chunk.js" />
@@ -3113,6 +3122,7 @@
     <Content Include="www\js\build\dev\pages\customer\customerclass.chunk.js.map" />
     <Content Include="www\css\source\reactpages\pages\leaguewinloss\index.scss" />
     <Content Include="www\js\build\dev\reactpages\report\leaguewinloss.chunk.js.map" />
+    <Content Include="www\js\build\dev\reactpages\report\customersupporttask.chunk.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SiteConfig\WebConfigTransforms\SIT.config">

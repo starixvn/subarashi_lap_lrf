@@ -67,6 +67,7 @@
         public const string ReportCasinoTurnover = "CasinoTurnover80";
         public const string ReportDailyBets = "DailyBets81";
         public const string ReportLeagueWinLoss = "LeagueWinLoss";
+        public const string ReportCustomerSupportTask = "CustomerSupportTask";
 
         /* Customer Info. */
 

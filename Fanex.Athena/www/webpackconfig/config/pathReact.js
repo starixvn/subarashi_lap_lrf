@@ -16,7 +16,8 @@ var cssPaths = {
     casinoturnover: "./www/css/source/reactpages/pages/casinoturnover/index.scss",
     dailybets: "./www/css/source/reactpages/pages/dailybets/index.scss",
     exchangevoided: "./www/css/source/reactpages/pages/exchangevoided/index.scss",
-    playersegmentation: "./www/css/source/reactpages/pages/customer/player-segmentation/index.scss"
+    playersegmentation: "./www/css/source/reactpages/pages/customer/player-segmentation/index.scss",
+    customersupporttask: "./www/css/source/reactpages/pages/customer-support-task/index.scss",
 };
 
 var scriptPaths = {
@@ -46,6 +47,7 @@ var scriptPaths = {
 
     playersegmentation: "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/index.js",
     playersegmentation_betlist: "./www/js/source/reactpages/pages/customer/player-segmentation/betlist/index.js",
+    customersupporttask: "./www/js/source/reactpages/pages/customer-support-task/components/index.jsx",
 };
 module.exports = {
     projectRoot: projectRoot,

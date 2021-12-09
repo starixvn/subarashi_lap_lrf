@@ -357,4 +357,8 @@
   <data name="leaguewinloss" xml:space="preserve">
     <value>联赛输赢</value>
   </data>
+  <data name="customerclosingbalance" xml:space="preserve">
+    <value>玩家当前余额(后台)</value>
+    <comment>165136</comment>
+  </data>
 </root>

@@ -1897,6 +1897,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Customer Support Task.
+        /// </summary>
+        public static string CustomerSupportTask {
+            get {
+                return ResourceManager.GetString("CustomerSupportTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Customer Turnover     .
         /// </summary>
         public static string CustomerTurnover {
@@ -3009,6 +3018,33 @@ namespace Fanex.Athena.Resources {
         public static string GetAll {
             get {
                 return ResourceManager.GetString("GetAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only show customers having closing balance &gt; 0.
+        /// </summary>
+        public static string GetAllCustomersHavingPositiveClosingBalance {
+            get {
+                return ResourceManager.GetString("GetAllCustomersHavingPositiveClosingBalance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Get all customers having running tickets.
+        /// </summary>
+        public static string GetAllCustomersHavingRunningTickets {
+            get {
+                return ResourceManager.GetString("GetAllCustomersHavingRunningTickets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Get all running tickets.
+        /// </summary>
+        public static string GetAllRunningTickets {
+            get {
+                return ResourceManager.GetString("GetAllRunningTickets", resourceCulture);
             }
         }
         
@@ -6762,6 +6798,15 @@ namespace Fanex.Athena.Resources {
         public static string Sunday {
             get {
                 return ResourceManager.GetString("Sunday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Support Task.
+        /// </summary>
+        public static string SupportTask {
+            get {
+                return ResourceManager.GetString("SupportTask", resourceCulture);
             }
         }
         
