@@ -111,6 +111,14 @@ class BetListLayout extends Component {
                 const url = BetList.getCGResultUrl(rootUrl, custid, transdecs, extension2, extension1);
                 this._showThirdPartyResult(url, title);
             }
+            else if (sporttype === SportType.AP) {
+                const url = BetList.geAdvantPlayResultUrl(rootUrl, custid, transdecs, extension2, extension1);
+                this._showThirdPartyResult(url, title);
+            }
+            else if (sporttype === SportType.APM) {
+                const url = BetList.geAdvantPlayMiniResultUrl(rootUrl, custid, transdecs, extension2, extension1);
+                this._showThirdPartyResult(url, title);
+            }
             else {
                 const url = BetList.getResultUrl(rootUrl, matchid, raceNo, bettype,
                     sporttype, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid);
@@ -393,6 +401,14 @@ class BetListLayout extends Component {
 
             this._openPopup(url, title);
         }
+
+        window.showAdvantPlayBetDetails = (transId, winlostDate, custId, transType) => {
+            this._showRngBetlistDetail(transId, winlostDate, custId, transType, 'ProductAP');
+        }
+
+        window.showAdvantPlayMiniBetDetails = (transId, winlostDate, custId, transType) => {
+            this._showRngBetlistDetail(transId, winlostDate, custId, transType, 'ProductAPM');
+        }
     }
 
     componentWillUnmount() {
@@ -426,6 +442,8 @@ class BetListLayout extends Component {
         window.showVGamingDetails = undefined;
         window.showVGamingJackpotWonDetails = undefined;
         window.showCGBetDetails = undefined;
+        window.showAdvantPlayBetDetails = undefined;
+        window.showAdvantPlayMiniBetDetails = undefined;
     }
 
     _getResource(key) {
@@ -572,6 +590,16 @@ class BetListLayout extends Component {
 
     _openPopup(url, title) {
         this.setState({ isShowPopup: true, popupUrl: url, popupTitle: title });
+    }
+
+    _showRngBetlistDetail(transId, winlostDate, custId, transType, productCode) {
+        const { rootUrl, baseCurrency } = this.props;
+
+        const url = BetList.getRngBetlistDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType, productCode);
+        const title = this._getResource(productCode) + ' - ' +
+            this._getResource('DetailedBetlist') + ' - ' + this._formatDateString(winlostDate);
+
+        this._openPopup(url, title);
     }
 
     _closePopup() {

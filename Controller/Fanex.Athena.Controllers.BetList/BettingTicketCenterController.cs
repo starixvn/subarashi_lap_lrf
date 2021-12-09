@@ -198,7 +198,9 @@
                 Product.WM,
                 Product.BGG,
                 Product.VGA,
-                Product.CG
+                Product.CG,
+                Product.AP,
+                Product.APM
             };
 
             var productAccess = _productService.GetSingleWalletProductAccess(

@@ -197,6 +197,8 @@ namespace Fanex.Athena.Api.Report
             licenseeWinLoss.LicenseeWLBGG = licenseeWLProducts.GetValueOrDefault(Product.BGG, 0);
             licenseeWinLoss.LicenseeWLVGA = licenseeWLProducts.GetValueOrDefault(Product.VGA, 0);
             licenseeWinLoss.LicenseeWLCG = licenseeWLProducts.GetValueOrDefault(Product.CG, 0);
+            licenseeWinLoss.LicenseeWLAP = licenseeWLProducts.GetValueOrDefault(Product.AP, 0);
+            licenseeWinLoss.LicenseeWLAPM = licenseeWLProducts.GetValueOrDefault(Product.APM, 0);
         }
 
         private static void SetTurnOverProductData(LicenseeWinLossGridViewModel licenseeWinLoss, IDictionary<string, decimal> turnOverProducts)
@@ -231,6 +233,8 @@ namespace Fanex.Athena.Api.Report
             licenseeWinLoss.TurnOverBGG = turnOverProducts.GetValueOrDefault(Product.BGG, 0);
             licenseeWinLoss.TurnOverVGA = turnOverProducts.GetValueOrDefault(Product.VGA, 0);
             licenseeWinLoss.TurnOverCG = turnOverProducts.GetValueOrDefault(Product.CG, 0);
+            licenseeWinLoss.TurnOverAP = turnOverProducts.GetValueOrDefault(Product.AP, 0);
+            licenseeWinLoss.TurnOverAPM = turnOverProducts.GetValueOrDefault(Product.APM, 0);
         }
 
         private static bool IsProductVisible(IEnumerable<ProductOption> productOptions, ProductAccess productAccess, string productCode)

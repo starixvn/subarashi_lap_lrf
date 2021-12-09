@@ -32,5 +32,7 @@ export const SportType = {
     BGG: 239,
     VGA: 171,
     VGA_FreeBets: 173,
-    CG: 167
+    CG: 167,
+    AP: 172,
+    APM: 174
 }

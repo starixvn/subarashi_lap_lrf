@@ -79,5 +79,9 @@ namespace Fanex.Athena.Model.Core.DataDomain
         public const int CC = 34;
 
         public const int VGA = 66;
+
+        public const int AP = 67;
+
+        public const int APM = 68;
     }
 }

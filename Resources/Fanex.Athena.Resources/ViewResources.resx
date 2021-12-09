@@ -3082,4 +3082,10 @@
   <data name="SLTDateRangeNote" xml:space="preserve">
     <value>Sports Lottery data is available from 11/22/2021</value>
   </data>
+  <data name="ProductAP" xml:space="preserve">
+    <value>AdvantPlay</value>
+  </data>
+  <data name="ProductAPM" xml:space="preserve">
+    <value>AdvantPlay Mini</value>
+  </data>
 </root>

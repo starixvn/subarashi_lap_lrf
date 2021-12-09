@@ -66,7 +66,9 @@
                 { Product.CG, nameof(ViewResources.ProductCG) },
                 { Product.CO, nameof(ViewResources.ProductCO) },
                 { Product.CB, nameof(ViewResources.ProductCB) },
-                { Product.BX, nameof(ViewResources.ProductBX) }
+                { Product.BX, nameof(ViewResources.ProductBX) },
+                { Product.AP, nameof(ViewResources.ProductAP) },
+                { Product.APM, nameof(ViewResources.ProductAPM) }
             };
 
         public static string GetProductCode(int productId)

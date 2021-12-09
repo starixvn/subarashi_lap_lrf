@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 11/15/2021 4:53:18 PM
+// Generated at: 12/2/2021 8:45:24 AM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -712,6 +712,8 @@ window._language_en_US = {
   Product: "Product",
   ProductAB: "AllBet",
   ProductAGC: "AG Casino",
+  ProductAP: "AdvantPlay",
+  ProductAPM: "AdvantPlay Mini",
   ProductBA: "BA",
   ProductBGG: "BG",
   ProductBT: "Bet Trade",
@@ -812,6 +814,7 @@ window._language_en_US = {
   ShowOldValue: "Show old value",
   Sincelastmonth: "Since last month",
   SingleCustomer: "Single Customer",
+  SLTDateRangeNote: "Sports Lottery data is available from 11/22/2021",
   SoccerParlay: "Soccer Parlay",
   SoccerPinGoal: "Soccer PinGoal",
   SolutionForRestriction: "1. Login at Licensee Admin.&lt;br/&gt;2. Access the reports/ functions you want. &lt;br/&gt; 请洽你们的最高管理者替你设置币别权限",
