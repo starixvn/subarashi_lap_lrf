@@ -8,9 +8,9 @@
 
     public interface ISubsidiaryService
     {
-        bool IsIgnoredSubsidiarySearch(bool subsidiarySearch, string subsidiaryList, byte subsidiaryViewType);
+        bool IsIgnoredSubsidiarySearch(bool subsidiarySearch, string subsidiaryList, UserAuthInfo userInfo);
 
-        IEnumerable<CheckedItem> GetSubsidiaryTree(UserAuthInfo user, string licenseeName);
+        IEnumerable<CheckedItem> GetSubsidiaryTree(UserAuthInfo user, string licenseeName, bool ignoreViewType = false);
 
         IDictionary<int, IEnumerable<int>> GetCurrencyAgentList(UserAuthInfo user, string licenseeName, string subsidiaryNames, bool isExcludeTest = false, int currencyId = 0);
 

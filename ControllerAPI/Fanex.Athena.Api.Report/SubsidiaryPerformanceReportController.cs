@@ -20,17 +20,13 @@
     [ApiFunctionAuthorization(PermissionKeys.ReportSubsidiaryPerformance)]
     public class SubsidiaryPerformanceReportController : ApiReportBaseController
     {
-        private readonly ISubsidiaryService _subsidiaryService;
-
         private readonly ISubsidiaryPerformanceService _subsidiaryPerformanceService;
 
         public SubsidiaryPerformanceReportController(
             ILanguageService langService,
-            ISubsidiaryService subsidiaryService,
             ISubsidiaryPerformanceService subLicenseePerformanceService)
             : base(langService)
         {
-            _subsidiaryService = subsidiaryService;
             _subsidiaryPerformanceService = subLicenseePerformanceService;
         }
 
@@ -52,7 +48,7 @@
             }
             else
             {
-                var agentIdListByCurrency = _subsidiaryService.GetCurrencyAgentList(userSession, metaModel.LicenseeName, metaModel.SubsidiaryList, metaModel.IsExcludeTest);
+                var agentIdListByCurrency = SubsidiaryService.GetCurrencyAgentList(userSession, metaModel.LicenseeName, metaModel.SubsidiaryList, metaModel.IsExcludeTest);
                 agentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyList, agentIdListByCurrency);
             }
 
@@ -71,7 +67,7 @@
             var userSession = SessionService.UserSession;
             metaModel.LicenseeName = licenseeSession.LicenseeName;
 
-            var agentIdListByCurrency = _subsidiaryService.GetCurrencyAgentList(userSession, licenseeSession.LicenseeName, metaModel.SubsidiaryId, metaModel.IsExcludeTest);
+            var agentIdListByCurrency = SubsidiaryService.GetCurrencyAgentList(userSession, licenseeSession.LicenseeName, metaModel.SubsidiaryId, metaModel.IsExcludeTest);
             if (agentIdListByCurrency.Any())
             {
                 metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyList, agentIdListByCurrency);

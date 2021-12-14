@@ -84,7 +84,7 @@
                 StubBetListApiPostAsync(Arg.Any<BetListMetaModel>(), ApiPath, expect);
 
                 // Action
-                var actual = await controller.Index(Page, Rows, currencyId, CurrencyName, baseCurrency, fromDate, toDate, BetType, SortBy, SortOrder);
+                var actual = await controller.Index(Page, Rows, currencyId, CurrencyName, baseCurrency, fromDate, toDate, BetType, sortBy: SortBy, sortOrder: SortOrder);
 
                 // Assert
                 Assert.Multiple(() =>

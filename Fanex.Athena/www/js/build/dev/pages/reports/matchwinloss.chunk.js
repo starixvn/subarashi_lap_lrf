@@ -2276,6 +2276,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 
             initEvent: function () {
                 $('#ExportToExcel').click(function () {
+                    Site.assignSubsidiaryData();
                     $(Selector.isExportExcel).val(true);
                     $(Selector.matchWinLossForm).submit();
                 });
@@ -2307,6 +2308,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 
             submit: function () {
                 Site.blockUI();
+                Site.assignSubsidiaryData();
                 $(Selector.isExportExcel).val(false);
                 $(Selector.matchWinLossForm).submit();
             },
@@ -2318,7 +2320,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                 let submitData = {
                     LeagueId: matchData.LeagueId,
                     MatchId: matchData.MatchId,
-                    ProductCode: matchData.ProductCode
+                    ProductCode: matchData.ProductCode,
+                    SubsidiarySearch: $('#SubsidiarySearch').val(),
+                    SubsidiaryList: $('#SubsidiaryList').val(),
                 };
 
                 submitData = Site.setLicenseeOptionOriginalParam(submitData);
@@ -2387,6 +2391,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                 url = QueryString.setParam(url, 'LiveIndicator', matchData.IsLive);
                 url = QueryString.setParam(url, 'homeid', matchData.HomeId);
                 url = QueryString.setParam(url, 'awayid', matchData.AwayId);
+                url = QueryString.setParam(url, 'subsidiarySearch', $('#SubsidiarySearch').val());
+                url = QueryString.setParam(url, 'subsidiaryList', $('#SubsidiaryList').val());
 
                 const productCodeList = _me.getProductCodeList(productCode);
                 url = Site.setProductCodeListParam(url, productCodeList);
@@ -2410,6 +2416,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                 url = QueryString.setParam(url, 'fromdate', date);
                 url = QueryString.setParam(url, 'todate', date);
                 url = QueryString.setParam(url, 'bettype', betType);
+                url = QueryString.setParam(url, 'subsidiarySearch', $('#SubsidiarySearch').val());
+                url = QueryString.setParam(url, 'subsidiaryList', $('#SubsidiaryList').val());
 
                 const productCodeList = [];
                 if (isProductOriginalChecked('SB')) {

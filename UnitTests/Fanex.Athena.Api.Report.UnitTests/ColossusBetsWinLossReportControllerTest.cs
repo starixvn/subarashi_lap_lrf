@@ -43,7 +43,7 @@
             _subsidiaryService = Substitute.For<ISubsidiaryService>();
 
             _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
-            _subsidiaryService.IsIgnoredSubsidiarySearch(Arg.Any<bool>(), Arg.Any<string>(), Arg.Any<byte>()).Returns(true);
+            _subsidiaryService.IsIgnoredSubsidiarySearch(Arg.Any<bool>(), Arg.Any<string>(), Arg.Any<UserAuthInfo>()).Returns(true);
 
             CreateController();
             StubUserSessionData(new UserAuthInfo

@@ -12,6 +12,7 @@
     using Excel.Report;
 
     using Extension.Utility;
+    using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.Core.Utility.Interfaces;
 
@@ -45,7 +46,7 @@
             _currencyValidation = Substitute.For<ICurrencyValidation>();
             _subsidiaryService = Substitute.For<ISubsidiaryService>();
 
-            _subsidiaryService.IsIgnoredSubsidiarySearch(Arg.Any<bool>(), Arg.Any<string>(), Arg.Any<byte>()).Returns(true);
+            _subsidiaryService.IsIgnoredSubsidiarySearch(Arg.Any<bool>(), Arg.Any<string>(), Arg.Any<UserAuthInfo>()).Returns(true);
             _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
             CreateController();
         }

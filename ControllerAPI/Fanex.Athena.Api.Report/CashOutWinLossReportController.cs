@@ -38,19 +38,16 @@ namespace Fanex.Athena.Api.Report
     {
         private readonly ICashOutWinLossDataAccess _cashOutWinLossDataAccess;
         private readonly ICurrencyValidation _currencyValidation;
-        private readonly ISubsidiaryService _subsidiaryService;
 
         public CashOutWinLossReportController(
             ICashOutWinLossDataAccess cashOutWinLossDataAccess,
             ILanguageService langService,
-            ICurrencyValidation currencyValidation,
-            ISubsidiaryService subsidiaryService
+            ICurrencyValidation currencyValidation
             )
             : base(langService)
         {
             _cashOutWinLossDataAccess = cashOutWinLossDataAccess;
             _currencyValidation = currencyValidation;
-            _subsidiaryService = subsidiaryService;
     }
 
         [HttpPost]
@@ -183,9 +180,8 @@ namespace Fanex.Athena.Api.Report
             metaModel.DrillDownCustomerId = custId;
             metaModel.DrillDownFromDate = fdate ?? metaModel.DrillDownFromDate;
             metaModel.DrillDownToDate = tdate ?? metaModel.DrillDownToDate;
-            var currencyAgentList = _subsidiaryService.IsIgnoredSubsidiarySearch(metaModel.SubsidiarySearch, metaModel.SubsidiaryList, userSession.SubsidiaryViewType) ?
-                     userSession.CurrencyAgentList : _subsidiaryService.GetCurrencyAgentList(SessionService.LicenseeSession.LicenseeName, userSession.CurrencyAgentList, metaModel.SubsidiaryList);
-            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(currencyAgentList, level > 0 ? currencyId : metaModel.CurrencyId, metaModel.IsExcludedTestData);
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(CurrencyAgentListBySubsidiaryBusiness(metaModel),
+                level > 0 ? currencyId : metaModel.CurrencyId, metaModel.IsExcludedTestData);
             metaModel.DefaultBaseCurrency = userSession.DefaultBaseCurrency;
         }
 

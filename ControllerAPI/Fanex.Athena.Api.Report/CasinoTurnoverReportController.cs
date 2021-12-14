@@ -7,13 +7,11 @@
 
     using DataAccess.Report.Interfaces;
     using Fanex.Athena.Model.Auth.DataDomain;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     using Model.Core.DataDomain;
     using Model.Report.MetaModel;
 
     using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
 
     [ApiFunctionAuthorization(PermissionKeys.ReportCasinoTurnover)]
     public class CasinoTurnoverReportController : ApiReportBaseController

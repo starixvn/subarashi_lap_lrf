@@ -7792,6 +7792,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to View subsidiary on reports.
+        /// </summary>
+        public static string ViewSubsidiaryOnReports {
+            get {
+                return ResourceManager.GetString("ViewSubsidiaryOnReports", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to VIP.
         /// </summary>
         public static string Vip {

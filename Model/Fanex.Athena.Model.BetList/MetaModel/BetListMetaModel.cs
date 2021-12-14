@@ -5,7 +5,7 @@ using Fanex.Athena.Model.Core.MetaModel;
 
 namespace Fanex.Athena.Model.BetList.MetaModel
 {
-    public class BetListMetaModel : BaseMetaModel, IMetaModelValidation, IMetaModelProductCodeList, IMetaModelShowBetFromIP
+    public class BetListMetaModel : BaseMetaModel, IMetaModelValidation, IMetaModelProductCodeList, IMetaModelShowBetFromIP, IMetaModelSubsidiarySearch
     {
         public BetListMetaModel()
         {
@@ -133,5 +133,7 @@ namespace Fanex.Athena.Model.BetList.MetaModel
         public bool IsShowIp { get; set; }
 
         public bool IsEnableSingleWallet { get; set; }
+        public string SubsidiaryList { get; set; }
+        public bool SubsidiarySearch { get; set; }
     }
 }

@@ -1,5 +1,7 @@
 ﻿namespace Fanex.Athena.Api.Base
 {
+    using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Core.MetaModel;
     using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -7,7 +9,6 @@
     using Newtonsoft.Json.Serialization;
     using NPOI.SS.UserModel;
     using ONEbook.UM.Filters;
-    using System;
     using System.Collections.Generic;
     using System.Net;
     using System.Net.Http;
@@ -23,13 +24,22 @@
 
         protected internal BaseApiController(ILanguageService languageService)
         {
-            _langService = languageService ?? throw new ArgumentNullException(nameof(languageService));
+            _langService = languageService;
         }
 
-        protected IDictionary<int, string> UserCurrencyList => SessionService.UserSession.CurrencyList;
-
         public IProductService ProductService { get; set; }
+
         public ISessionService SessionService { get; set; }
+
+        public ISubsidiaryService SubsidiaryService { get; set; }
+
+        protected UserAuthInfo UserSession => SessionService.UserSession;
+
+        protected LicenseeAuthInfo LicenseeSession => SessionService.LicenseeSession;
+
+        protected IDictionary<int, int[]> CurrencyAgentListBySubsidiaryBusiness(IMetaModelSubsidiarySearch metaModel) =>
+            SubsidiaryService.IsIgnoredSubsidiarySearch(metaModel.SubsidiarySearch, metaModel.SubsidiaryList, UserSession) ? UserSession.CurrencyAgentList
+            : SubsidiaryService.GetCurrencyAgentList(LicenseeSession.LicenseeName, UserSession.CurrencyAgentList, metaModel.SubsidiaryList);
 
         [System.CLSCompliant(false)]
         protected internal virtual HttpResponseMessage ExcelStream(IWorkbook workbook, string fileName)

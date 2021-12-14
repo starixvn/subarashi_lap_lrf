@@ -411,7 +411,7 @@ namespace Fanex.Athena.Controllers.Customer
 
         private string GetAgentListXml(UserAuthInfo user, string licenseeName, CustomerListMetaModel metaModel)
         {
-            var currencyAgentList = _subsidiaryService.IsIgnoredSubsidiarySearch(metaModel.IsViewOnSubsidiary, metaModel.SubsidiaryList, user.SubsidiaryViewType) ?
+            var currencyAgentList = _subsidiaryService.IsIgnoredSubsidiarySearch(metaModel.IsViewOnSubsidiary, metaModel.SubsidiaryList, user) ?
                     user.CurrencyAgentList : _subsidiaryService.GetCurrencyAgentList(licenseeName, user.CurrencyAgentList, metaModel.SubsidiaryList);
             return AuthParameterHelper.GenerateAgentListXml(currencyAgentList, metaModel.CurrencyId);
         }

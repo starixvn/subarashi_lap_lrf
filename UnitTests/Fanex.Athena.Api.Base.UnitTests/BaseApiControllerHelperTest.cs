@@ -35,6 +35,8 @@
 
         protected IProductService ProductService { get; private set; }
 
+        protected ISubsidiaryService SubsidiaryService { get; private set; }
+
         protected IAppSettings AppSetting { get; private set; }
 
         protected ILanguageService LangService { get; private set; }
@@ -53,6 +55,7 @@
                 CurrencyAgentList = new Dictionary<int, int[]>(),
             });
             ProductService = Substitute.For<IProductService>();
+            SubsidiaryService = Substitute.For<ISubsidiaryService>();
             AppSetting = Substitute.For<IAppSettings>();
             LangService = Substitute.For<ILanguageService>();
 
@@ -66,6 +69,7 @@
         {
             SessionService = null;
             ProductService = null;
+            SubsidiaryService = null;
             AppSetting = null;
             LangService = null;
         }

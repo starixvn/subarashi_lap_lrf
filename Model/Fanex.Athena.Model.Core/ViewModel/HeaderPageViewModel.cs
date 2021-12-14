@@ -20,6 +20,8 @@ namespace Fanex.Athena.Model.Core.ViewModel
 
         public IList<Licensee> LicenseeList { get; set; }
 
+        public IEnumerable<CheckedItem> SubsidiaryList { get; set; }
+
         public bool IsInternalLogin { get; set; }
 
         public bool HasRecheckIn { get; set; }
@@ -35,5 +37,6 @@ namespace Fanex.Athena.Model.Core.ViewModel
         public bool IsFakeLicensee { get; set; }
 
         public bool IsAllowedNotification { get; set; }
+
     }
 }

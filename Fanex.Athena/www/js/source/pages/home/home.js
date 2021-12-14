@@ -5,12 +5,13 @@ define([
     './recheckin',
     'components/pluginhelper/autocomplete',
     './notification',
+    './subsidiary',
     'lib/jquery.cookie',
     'lib/jquery.marquee',
     'components/selectlist',
     'lib/jquery.jclock',
     'vendor-materialize'],
-    function (Site, Recheckin, AutoComplete, Notification) {
+    function (Site, Recheckin, AutoComplete, Notification, Subsidiary) {
         let $searchBox;
 
         function initialize() {
@@ -19,6 +20,7 @@ define([
             initEvent();
             checkMoveBetNotification();
             Notification.add();
+            Subsidiary.init();
             activeDefaultMenuItem();
             setTimeout(function () {
                 const $mainFrame = $('#mainFrame');
@@ -90,6 +92,7 @@ define([
                 $('.dropdown-button', '.languages-block').dropdown('close');
                 $('#ddlLicensee').selectList('close');
                 $('#suggestionDropdown').hide();
+
             });
         }
 

@@ -3,8 +3,10 @@
     using DataAccess.Core.Configuration.Interfaces;
 
     using Excel.Base.Helpers;
-
+    using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Model.Core.MetaModel;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
 
@@ -28,7 +30,6 @@
     public class BetListBaseController : CultureBaseController
     {
         protected const int PageSizeExcel = 63000;
-
         protected const int ExternalIdColumn = 1;
         protected const int SystemIdColumn = 2;
         protected const int WinLostColumn = 7;
@@ -38,11 +39,8 @@
         protected static readonly int[] HiddenColumnIndexes = new[] { WinLostColumn, BetEffectiveColumn, LicenseeWLColumn };
 
         public IBalanceUpDataAccess BalanceUpDataAccessInstance { get; set; }
-
-        protected IDictionary<int, string> UserCurrencyList => SessionServiceInstance.UserSession.CurrencyList;
-
         public IProductService ProductService { get; set; }
-
+        public ISubsidiaryService SubsidiaryService { get; set; }
         public ICacheRefAdapter CacheRefAdapter { get; set; }
         public IBetListApiClient BetListApiClient { get; set; }
 
@@ -86,12 +84,10 @@
             return BalanceUpDataAccessInstance.GetBalanceUp();
         }
 
-        /// <summary>
-        /// Set the Licensee Id, Balance Up Date.
-        /// Remove the UTC part of DateTime value.
-        /// </summary>
-        /// <param name="metaModel">The metal model.</param>
-        /// <returns>The bet list metal model.</returns>
+        protected IDictionary<int, int[]> CurrencyAgentListBySubsidiaryBusiness(IMetaModelSubsidiarySearch metaModel) =>
+           SubsidiaryService.IsIgnoredSubsidiarySearch(metaModel.SubsidiarySearch, metaModel.SubsidiaryList, SessionServiceInstance.UserSession) ? SessionServiceInstance.UserSession.CurrencyAgentList
+           : SubsidiaryService.GetCurrencyAgentList(SessionServiceInstance.LicenseeSession.LicenseeName, SessionServiceInstance.UserSession.CurrencyAgentList, metaModel.SubsidiaryList);
+
         protected BetListMetaModel CreateDefaultMetaModel(BetListMetaModel metaModel = null)
         {
             var licenseeSession = SessionServiceInstance.LicenseeSession;
@@ -104,8 +100,7 @@
             defaultMetaModel.ToDate = DateTime.SpecifyKind(defaultMetaModel.ToDate.Date, DateTimeKind.Unspecified);
             defaultMetaModel.Date = DateTime.SpecifyKind(defaultMetaModel.Date.Date, DateTimeKind.Unspecified);
             defaultMetaModel.IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeName);
-            defaultMetaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,
-                defaultMetaModel.CurrencyId);
+            defaultMetaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(CurrencyAgentListBySubsidiaryBusiness(metaModel ?? new BetListMetaModel()), defaultMetaModel.CurrencyId);
             defaultMetaModel.IsShowIpvn = userSession.IsShowIpvn && userSession.IsShowIp;
             defaultMetaModel.IsShowIp = userSession.IsShowIp;
 

@@ -12,7 +12,8 @@
         let _submitData = {}; // cache submit data of level 0.
 
         function getPostData() {
-            const data = $('#SearchForm').serializeObject();
+            const data = $.extend({}, $('#SearchForm').serializeObject(), Site.getLrfSubsidiary());
+
             if (data.Username === '') {
                 data.Username = null;
             }
@@ -142,7 +143,9 @@
                             ToDate: new Date(data.ToDate),
                             CurrencyName: data.CurrencyName,
                             IsExcludedTestData: data.IsExcludedTestData,
-                            BaseCurrency: data.BaseCurrency
+                            BaseCurrency: data.BaseCurrency,
+                            SubsidiarySearch: data.SubsidiarySearch,
+                            SubsidiaryList: data.SubsidiaryList
                         };
 
                         _systemId = response.SystemId;
@@ -384,7 +387,9 @@
                     ReportBy: _submitData.ReportBy,
                     FromDate: _submitData.FromDate,
                     ToDate: _submitData.ToDate,
-                    BaseCurrency: _submitData.BaseCurrency
+                    BaseCurrency: _submitData.BaseCurrency,
+                    SubsidiarySearch: _submitData.SubsidiarySearch,
+                    SubsidiaryList: _submitData.SubsidiaryList
                 };
                 const drilldownDate = new Date(datetime);
                 const dateRange = Report.GetDrilldownDateRange(param.ReportBy, param.FromDate, param.ToDate, drilldownDate);

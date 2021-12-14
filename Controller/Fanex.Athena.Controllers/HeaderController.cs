@@ -12,7 +12,7 @@ namespace Fanex.Athena.Controllers
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Model.Core.ViewModel;
-
+    using Fanex.Athena.Service.Core.Users.Interfaces;
     using System.Linq;
     using System.Web.Mvc;
 
@@ -22,11 +22,12 @@ namespace Fanex.Athena.Controllers
     public class HeaderController : CultureBaseController
     {
         private readonly ILicenseeDataAccess _licenseeDataAccess;
+        private readonly ISubsidiaryService _subsidiaryService;
 
-        public HeaderController(
-            ILicenseeDataAccess licenseeDataAccess)
+        public HeaderController(ILicenseeDataAccess licenseeDataAccess, ISubsidiaryService subsidiaryService)
         {
             _licenseeDataAccess = licenseeDataAccess;
+            _subsidiaryService = subsidiaryService;
         }
 
         [HttpGet]
@@ -39,6 +40,8 @@ namespace Fanex.Athena.Controllers
                 Language = userSession.Language,
                 OnUserId = userSession.OnUserId,
                 LicenseeList = _licenseeDataAccess.GetByUser(userSession.UserId),
+                SubsidiaryList = _subsidiaryService.GetSubsidiaryTree(userSession, licensee.LicenseeName,
+                ignoreViewType: userSession.FunctionList.Any(x => x.FunctionKey == PermissionKeys.Subsidiary)),
                 IsInternalLogin = userSession.IsInternal,
                 HasRecheckIn = !AppSettingInstance.LocalTest,
                 SupportedLanguageList = Util.SupportedLanguages,

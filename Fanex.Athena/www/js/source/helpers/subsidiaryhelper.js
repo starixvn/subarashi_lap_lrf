@@ -36,9 +36,19 @@ define(['jquery', 'common/site', 'lib/jquery.multiselect.nlevel'], function ($, 
         },
         
         bindSubsidiaryData: function() {
-            const subsidiarySearch = $('#IsViewOnSubsidiary').is(':checked');
+            const subsidiarySearch = _me.getSubsidiarySearchValue();
+            let subsidiaryList = subsidiarySearch ? getSubsidiaryListValue() : '';
+            $('#SubsidiarySearch').val(subsidiarySearch);
+            $('#SubsidiaryList').val(subsidiaryList);
+        },
+
+        getSubsidiarySearchValue: function () {
+            return $('#IsViewOnSubsidiary').is(':checked');
+        },
+
+        getSubsidiaryListValue: function () {
             let subsidiaryList = '';
-            if (subsidiarySearch && $('#subsidiary-multiselect').length > 0) {
+            if ($('#subsidiary-multiselect').length > 0) {
                 const subsidiaryCheckedItems = $('#subsidiary-multiselect').multiSelect('getCheckedItems');
 
                 if (!subsidiaryCheckedItems.length) {
@@ -47,8 +57,8 @@ define(['jquery', 'common/site', 'lib/jquery.multiselect.nlevel'], function ($, 
 
                 subsidiaryList = subsidiaryCheckedItems.join();
             }
-            $('#SubsidiarySearch').val(subsidiarySearch);
-            $('#SubsidiaryList').val(subsidiarySearch ? subsidiaryList : '');
+
+            return subsidiaryList;
         },
 
         getSubsidiaryTree: function (data) {

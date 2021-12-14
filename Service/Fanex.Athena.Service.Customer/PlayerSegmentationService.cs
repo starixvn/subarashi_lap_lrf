@@ -100,6 +100,6 @@
         }
 
         public bool IsNormalView(BasePlayerListMetaModel metaModel) =>
-            _subsidiaryService.IsIgnoredSubsidiarySearch(metaModel.SubsidiarySearch, metaModel.SubsidiaryList, _contextService.SubsidiaryViewType);
+            _subsidiaryService.IsIgnoredSubsidiarySearch(metaModel.SubsidiarySearch, metaModel.SubsidiaryList, _contextService.User);
     }
 }

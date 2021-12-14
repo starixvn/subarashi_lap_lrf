@@ -29,6 +29,7 @@ namespace Fanex.Athena.Api.Report
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
 
@@ -42,7 +43,6 @@ namespace Fanex.Athena.Api.Report
     public class LicenseeWinLossReportController : ApiReportBaseController
     {
         private readonly IReportSettingService _reportSettingService;
-
         private readonly ILicenseeWinLossDataAccess _licenseeWinLossDataAccess;
 
         public LicenseeWinLossReportController(
@@ -351,7 +351,7 @@ namespace Fanex.Athena.Api.Report
                 metaModel.DrillDownCurrencyId = currencyId;
                 metaModel.DrillDownCurrencyName = currencyName;
                 metaModel.DrillDownCustomerId = custId;
-                metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,
+                metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(CurrencyAgentListBySubsidiaryBusiness(metaModel),
                     level == 0 ? metaModel.CurrencyId : currencyId, metaModel.IsExcludedTestData);
                 var result = await GetData(metaModel);
 

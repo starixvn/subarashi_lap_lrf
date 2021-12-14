@@ -42,6 +42,8 @@
             DateTime fromDate,
             DateTime toDate,
             int bettype,
+            bool? subsidiarySearch = false,
+            string subsidiaryList = null,
             string sortBy = null,
             string sortOrder = null)
 #pragma warning restore S107 // Methods should not have too many parameters
@@ -60,6 +62,8 @@
                 FromDate = fromDate,
                 ToDate = toDate,
                 BetType = bettype,
+                SubsidiarySearch = subsidiarySearch.GetValueOrDefault(),
+                SubsidiaryList = subsidiaryList,
                 SortBy = sortBy,
                 SortOrder = sortOrder
             };

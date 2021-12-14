@@ -1,5 +1,6 @@
 ﻿@import "../abstracts/_variables.scss";
 @import '../../components/flatpopup/flatpopup';
+@import "../../components/checkbox/checkbox";
 @import '../../vendors/materialize/components/buttons';
 @import '../../scss/components/button';
 
@@ -406,6 +407,86 @@ header {
                 }
             }
         }
+        //------------ Subsidiary block -------------------//
+        .subsidiary-search-block {
+            position: relative;
+            padding: 0 1rem;
+            label {
+                top: 5px;
+                color: $white;
+                font-size: inherit;
+            }
+
+            input[type="checkbox"] + label {
+                display: initial;
+            }
+
+            input[type="checkbox"] + label:after {
+                background-color: $white;
+                border: none;
+            }
+
+            .tooltip-subsidiary { 
+                visibility: hidden;
+                opacity:0;
+                background-color: $white;
+                color: $black;
+                text-align: left;
+                border-radius: 6px;
+                padding: .7rem;
+                position: absolute;
+                z-index: 999;
+                top: 120%;
+                left: -20px;
+                margin-left: -60px;
+                box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+                transition: visibility 0.3s linear, opacity 0.3s linear;
+
+                ::after {
+                    content: "";
+                    position: absolute;
+                    bottom: 100%;
+                    left: 50%;
+                    margin-left: -5px;
+                    border-width: 5px;
+                    border-style: solid;
+                    border-color: transparent transparent $white transparent;
+                }
+
+                ul {
+                    padding-left: 15px;
+                    li {
+                        float: none;
+                        line-height: 20px;
+                        list-style-type: number;
+                    }
+                }
+            }
+
+            &:hover {
+                .tooltip-subsidiary {
+                    visibility: visible;
+                    opacity:1;
+
+                }
+            }
+        }
+
+        .subsidiary-dropdown-block {    
+            padding: 0 1rem;
+            #subsidiary-multiselect {
+                background: transparent;
+                input {
+                    color: $white;
+                    font-size: inherit;
+                }
+            }
+
+            .multiselect-container > a.ui-multiselect .ui-multiselect-icon:before {
+                color: $white;
+            }
+        }
+
         //------------ Notification block -------------------//
         .notifications-block {
             position: relative;

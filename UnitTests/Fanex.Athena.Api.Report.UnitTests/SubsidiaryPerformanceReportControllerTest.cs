@@ -21,8 +21,6 @@
     [TestFixture]
     public partial class SubsidiaryPerformanceReportControllerTest : BaseApiControllerHelperTest
     {
-        private ISubsidiaryService _subsidiaryService;
-
         private ISubsidiaryPerformanceService _service;
 
         private SubsidiaryPerformanceReportController _controller;
@@ -31,7 +29,6 @@
         public override void FixtureSetUp()
         {
             base.FixtureSetUp();
-            _subsidiaryService = Substitute.For<ISubsidiaryService>();
             _service = Substitute.For<ISubsidiaryPerformanceService>();
             CreateController();
             MockSessionData();
@@ -39,10 +36,11 @@
 
         private void CreateController()
         {
-            _controller = new SubsidiaryPerformanceReportController(LangService, _subsidiaryService, _service)
+            _controller = new SubsidiaryPerformanceReportController(LangService, _service)
             {
                 SessionService = SessionService,
-                ProductService = ProductService
+                ProductService = ProductService ,
+                SubsidiaryService = SubsidiaryService
             };
         }
 
@@ -59,7 +57,7 @@
         public void TearDown()
         {
             SessionService.ClearReceivedCalls();
-            _subsidiaryService.ClearReceivedCalls();
+            SubsidiaryService.ClearReceivedCalls();
             _service.ClearReceivedCalls();
         }
 
@@ -88,7 +86,7 @@
             // Assert
             Assert.Multiple(() =>
             {
-                _subsidiaryService.DidNotReceiveWithAnyArgs().GetCurrencyAgentList(Arg.Any<UserAuthInfo>(), Arg.Any<string>(), Arg.Any<string>(), Arg.Any<bool>(), 0);
+                SubsidiaryService.DidNotReceiveWithAnyArgs().GetCurrencyAgentList(Arg.Any<UserAuthInfo>(), Arg.Any<string>(), Arg.Any<string>(), Arg.Any<bool>(), 0);
             });
         }
 
@@ -108,7 +106,7 @@
             SessionService.UserSession.Returns(user);
 
             var currencyAgentList = new Dictionary<int, IEnumerable<int>> { { 1, new[] { 1, 2, 3 } } };
-            _subsidiaryService.GetCurrencyAgentList(Arg.Any<UserAuthInfo>(), Arg.Any<string>(), Arg.Any<string>(), Arg.Any<bool>(), 0)
+            SubsidiaryService.GetCurrencyAgentList(Arg.Any<UserAuthInfo>(), Arg.Any<string>(), Arg.Any<string>(), Arg.Any<bool>(), 0)
                 .Returns(currencyAgentList);
 
             var resultData = new SubsidiaryResultViewModel
@@ -123,7 +121,7 @@
             // Assert
             Assert.Multiple(() =>
             {
-                _subsidiaryService.Received().GetCurrencyAgentList(user, SessionLicenseeName, metaModel.SubsidiaryList, metaModel.IsExcludeTest, 0);
+                SubsidiaryService.Received().GetCurrencyAgentList(user, SessionLicenseeName, metaModel.SubsidiaryList, metaModel.IsExcludeTest, 0);
             });
         }
 

@@ -1226,6 +1226,7 @@
     <Content Include="www\js\source\extensions\ajaxBinaryTransporting.js" />
     <Content Include="www\js\source\helpers\datahelper.js" />
     <Content Include="www\js\source\helpers\downloader.js" />
+    <Content Include="www\js\source\helpers\subsidiaryhelper.js" />
     <Content Include="www\js\source\lib\bootstrap-table\bootstrap-table-fixed-columns.js" />
     <Content Include="www\js\source\lib\bootstrap-table\bootstrap-table.js" />
     <Content Include="www\js\source\lib\bootstrap-table\constants\index.js" />

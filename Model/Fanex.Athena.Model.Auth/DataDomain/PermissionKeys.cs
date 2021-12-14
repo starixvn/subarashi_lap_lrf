@@ -8,6 +8,7 @@
         public const string GroupCustomerReport = "CUSTOMERREPORTS52";
         public const string GroupCustomerInformation = "CUSTOMERINFORMATION4";
         public const string GroupAccountManagement = "ACCOUNTMANAGEMENT6";
+        public const string Subsidiary = "SUBSIDIARY";
 
         /* Total Bet */
 

@@ -1,19 +1,10 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="PlatformWinLossMetaModel.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Model.Report.MetaModel
+﻿namespace Fanex.Athena.Model.Report.MetaModel
 {
     using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.MetaModel;
     using DataDomain = Core.DataDomain;
 
-    public class PlatformWinLossMetaModel : BaseReportMetaModel
+    public class PlatformWinLossMetaModel : BaseReportMetaModel, IMetaModelSubsidiarySearch
     {
         public PlatformWinLossMetaModel()
         {
@@ -66,5 +57,7 @@ namespace Fanex.Athena.Model.Report.MetaModel
         }
 
         public bool HasComm { get; set; }
+        public string SubsidiaryList { get; set; }
+        public bool SubsidiarySearch { get; set; }
     }
 }

@@ -21,7 +21,6 @@ namespace Fanex.Athena.Api.Report
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
-    using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.Core.Utility.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
 
@@ -36,19 +35,16 @@ namespace Fanex.Athena.Api.Report
     public class ColossusBetsWinLossReportController : ApiReportBaseController
     {
         private readonly IColossusBetsWinLossService _colossusBetsWinLossService;
-        private readonly ISubsidiaryService _subsidiaryService;
         private readonly ICurrencyValidation _currencyValidation;
 
         public ColossusBetsWinLossReportController(
             IColossusBetsWinLossService colossusBetsWinLossService,
             ILanguageService langService,
-            ICurrencyValidation currencyValidation,
-            ISubsidiaryService subsidiaryService)
+            ICurrencyValidation currencyValidation)
             : base(langService)
         {
             _colossusBetsWinLossService = colossusBetsWinLossService;
             _currencyValidation = currencyValidation;
-            _subsidiaryService = subsidiaryService;
         }
 
         [HttpPost]
@@ -147,9 +143,8 @@ namespace Fanex.Athena.Api.Report
                 metaModel.DrillDownCustomerId = custId;
                 metaModel.DrillDownFromDate = fdate.HasValue ? fdate.Value : metaModel.DrillDownFromDate;
                 metaModel.DrillDownToDate = tdate.HasValue ? tdate.Value : metaModel.DrillDownToDate;
-                var currencyAgentList = _subsidiaryService.IsIgnoredSubsidiarySearch(metaModel.SubsidiarySearch, metaModel.SubsidiaryList, userSession.SubsidiaryViewType) ?
-                      userSession.CurrencyAgentList : _subsidiaryService.GetCurrencyAgentList(SessionService.LicenseeSession.LicenseeName, userSession.CurrencyAgentList, metaModel.SubsidiaryList);
-                metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(currencyAgentList, level > 0 ? currencyId : metaModel.CurrencyId, metaModel.IsExcludedTestData);
+                metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(CurrencyAgentListBySubsidiaryBusiness(metaModel),
+                    level > 0 ? currencyId : metaModel.CurrencyId, metaModel.IsExcludedTestData);
                 metaModel.DefaultBaseCurrency = userSession.DefaultBaseCurrency;
 
                 var result = await GetData(metaModel);

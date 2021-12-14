@@ -1,10 +1,4 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="MatchWinLossBetListController.cs" company="">
-// Copyright (c) . All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-
-namespace Fanex.Athena.Api.BetList
+﻿namespace Fanex.Athena.Api.BetList
 {
     #region Using
 
@@ -95,6 +89,8 @@ namespace Fanex.Athena.Api.BetList
             DateTime fromDate,
             DateTime toDate,
             string productCodeList,
+            bool? subsidiarySearch = false,
+            string subsidiaryList = null,
             string sortBy = null,
             string sortOrder = null)
 #pragma warning restore S107 // Methods should not have too many parameters
@@ -115,7 +111,9 @@ namespace Fanex.Athena.Api.BetList
                     ToDate = toDate.Date,
                     SortBy = sortBy,
                     SortOrder = sortOrder,
-                    ProductCodeList = productCodeList
+                    ProductCodeList = productCodeList,
+                    SubsidiarySearch = subsidiarySearch.GetValueOrDefault(),
+                    SubsidiaryList = subsidiaryList
                 };
 
                 return await GetPagingBetListResult(metaModel, UspKey, page, rows).ConfigureAwait(false);

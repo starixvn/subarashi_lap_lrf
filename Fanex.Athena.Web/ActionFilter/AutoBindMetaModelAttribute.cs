@@ -7,6 +7,8 @@ using Fanex.Athena.Service.Core.Users;
 using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
 using Fanex.Athena.Service.StatelessCore.Utility;
+using System.Collections.Generic;
+using Fanex.Athena.Model.Auth;
 
 namespace Fanex.Athena.Web.ActionFilter
 {
@@ -18,6 +20,8 @@ namespace Fanex.Athena.Web.ActionFilter
         public IProductService ProductService { get; set; }
 
         public ILicenseeSettingService LicenseeSettingService { get; set; }
+
+        public ISubsidiaryService SubsidiaryService { get; set; }
 
         public bool BindAgent { get; set; }
 
@@ -35,14 +39,16 @@ namespace Fanex.Athena.Web.ActionFilter
 
         public bool BindProductOptions { get; set; }
 
+        public bool ApplySubsidiaryBusiness { get; set; }
+
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             var userSession = _sessionStorage.UserAuthInfo;
-
+            var licenseeSession = _sessionStorage.LicenseeAuthInfo;
             var actionArgument = filterContext.ActionParameters;
             if (BindAgent)
             {
-                AutoBindMetaModelService.MapAgentXml(actionArgument, userSession.CurrencyAgentList);
+                MapAgent(actionArgument, userSession, licenseeSession);
             }
 
             if (BindUserId)
@@ -106,6 +112,18 @@ namespace Fanex.Athena.Web.ActionFilter
 
                 filterContext.ActionParameters[item.Key] = metaModel;
             }
+        }
+
+        private void MapAgent(IDictionary<string, object> actionArguments, UserAuthInfo userSession, LicenseeAuthInfo licenseeSession)
+        {
+            var currencyAgentList = userSession.CurrencyAgentList;
+            if (ApplySubsidiaryBusiness && MetaModelHelper.IsMetaModel(actionArguments, out IMetaModelSubsidiarySearch subsidiaryMetaModel)
+                && !SubsidiaryService.IsIgnoredSubsidiarySearch(subsidiaryMetaModel.SubsidiarySearch, subsidiaryMetaModel.SubsidiaryList, userSession))
+            {
+                currencyAgentList = SubsidiaryService.GetCurrencyAgentList(licenseeSession.LicenseeName, currencyAgentList, subsidiaryMetaModel.SubsidiaryList);
+            }
+
+            AutoBindMetaModelService.MapAgentXml(actionArguments, currencyAgentList);
         }
     }
 }
