@@ -87,6 +87,19 @@
 
         public IEnumerable<CheckedItem> GetSubsidiaryTree(UserAuthInfo user, string licenseeName, bool ignoreViewType = false)
         {
+            if (user.UserLevel == UserLevelType.Subsidiary && !string.IsNullOrWhiteSpace(user.OperatorId))
+            {
+                return new List<CheckedItem>
+                {
+                    new CheckedItem
+                    {
+                        Value = user.OperatorId,
+                        Name = user.OperatorId,
+                        Checked = true
+                    }
+                };
+            }
+
             if (!ignoreViewType && user.SubsidiaryViewType == (int)SubsidiaryViewType.NotManagement)
             {
                 return Enumerable.Empty<CheckedItem>();
