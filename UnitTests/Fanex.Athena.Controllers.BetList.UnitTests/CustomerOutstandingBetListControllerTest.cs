@@ -154,7 +154,8 @@
                 BalanceUpDataAccessInstance = BalanceUpDataAccess,
                 CacheRefAdapter = CacheRefAdapter,
                 BetListApiClient = BetListApiClient,
-                LicenseeSettingServiceInstance = LicenseeSettingService
+                LicenseeSettingServiceInstance = LicenseeSettingService,
+                SubsidiaryService = SubsidiaryService
             };
         }
     }

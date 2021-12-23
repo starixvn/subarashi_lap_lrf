@@ -36,7 +36,6 @@
         private ICashOutWinLossDataAccess _dataAccess;
         private CashOutWinLossReportController _controller;
         private ICurrencyValidation _currencyValidation;
-        private ISubsidiaryService _subsidiaryService;
 
         [SetUp]
         public void Setup()
@@ -44,9 +43,6 @@
             MockSessionData();
             _dataAccess = Substitute.For<ICashOutWinLossDataAccess>();
             _currencyValidation = Substitute.For<ICurrencyValidation>();
-            _subsidiaryService = Substitute.For<ISubsidiaryService>();
-
-            _subsidiaryService.IsIgnoredSubsidiarySearch(Arg.Any<bool>(), Arg.Any<string>(), Arg.Any<UserAuthInfo>()).Returns(true);
             _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
             CreateController();
         }
@@ -54,9 +50,10 @@
         private void CreateController()
         {
             _controller = Substitute.ForPartsOf<CashOutWinLossReportController>(_dataAccess,
-                            LangService, _currencyValidation, _subsidiaryService);
+                            LangService, _currencyValidation);
             _controller.SessionService = SessionService;
             _controller.ProductService = ProductService;
+            _controller.SubsidiaryService = SubsidiaryService;
         }
 
         [TearDown]

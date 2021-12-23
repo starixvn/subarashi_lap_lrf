@@ -48,6 +48,7 @@ namespace Fanex.Athena.Excel.Report.UnitTests
             CurrencyId = 1,
             DrillDownCurrencyId = 2,
             ProductOptions = new List<ProductOption>(),
+            OriginalProductOptions = new List<ProductOption>(),
             CurrencyName = "AUD",
             DrillDownCurrencyName = "EUR"
         };

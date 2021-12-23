@@ -3,7 +3,8 @@
     using Base.UnitTests;
 
     using DataAccess.Core.Configuration.Interfaces;
-
+    using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     using Model.BetList.MetaModel;
@@ -29,6 +30,8 @@
 
         protected IProductService ProductService { get; private set; }
 
+        public ISubsidiaryService SubsidiaryService { get; set; }
+
         protected ICacheRefAdapter CacheRefAdapter { get; private set; }
 
         protected IBetListApiClient BetListApiClient { get; private set; }
@@ -44,7 +47,10 @@
             ProductService = Substitute.For<IProductService>();
             BetListApiClient = Substitute.For<IBetListApiClient>();
             CacheRefAdapter = Substitute.For<ICacheRefAdapter>();
+            SubsidiaryService = Substitute.For<ISubsidiaryService>();
 
+            SubsidiaryService.IsIgnoredSubsidiarySearch(Arg.Any<bool>(), Arg.Any<string>(), Arg.Any<UserAuthInfo>())
+            .Returns(true);
             BalanceUpDataAccess.GetBalanceUp().Returns(BalanceUp);
         }
 
@@ -57,6 +63,7 @@
             ProductService = null;
             BetListApiClient = null;
             LicenseeSettingService = null;
+            SubsidiaryService = null;
         }
 
         protected void AssertDefaultBetListViewModel(BetListMetaModel viewModel, BetListMetaModel metaModel)

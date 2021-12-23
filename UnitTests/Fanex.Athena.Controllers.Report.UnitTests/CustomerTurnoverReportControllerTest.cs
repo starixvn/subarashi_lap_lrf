@@ -65,11 +65,16 @@
                     new SportProductItem { ID = 1 },
                     new SportProductItem { ID = 2 }
                 };
+                var subProductCodes = $"{Product.SB},{Product.NG},{Product.VS}";
+
+                StubGetAllowedSubProductCodeList($"{Product.SB},{Product.NG},{Product.VS},{Product.VS2}", subProductCodes);
+
                 _sportTypeDataAccess.GetSportsAndProducts(
                     SessionService.LicenseeSession.LicenseeId,
                     SessionService.UserSession.Language,
-                    $"{Product.SB},{Product.NG},{Product.VS},{Product.VS2}")
+                    subProductCodes)
                     .Returns(expectedData);
+
 
                 // Action
                 var result = await controller.GetSportsAndProducts() as JsonResult;
@@ -159,6 +164,7 @@
             controller.LangService = LangService;
             controller.SessionServiceInstance = SessionService;
             controller.When(x => x.CreateExcel(string.Empty, string.Empty, null, null, string.Empty)).DoNotCallBase();
+            controller.ProductServiceInstance = ProductService;
 
             return controller;
         }

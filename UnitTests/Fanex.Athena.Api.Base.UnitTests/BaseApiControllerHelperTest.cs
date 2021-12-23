@@ -56,6 +56,8 @@
             });
             ProductService = Substitute.For<IProductService>();
             SubsidiaryService = Substitute.For<ISubsidiaryService>();
+            SubsidiaryService.IsIgnoredSubsidiarySearch(Arg.Any<bool>(), Arg.Any<string>(), Arg.Any<UserAuthInfo>())
+                .Returns(true);
             AppSetting = Substitute.For<IAppSettings>();
             LangService = Substitute.For<ILanguageService>();
 

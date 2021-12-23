@@ -70,6 +70,7 @@
             {
                 SessionService = SessionService,
                 ProductService = ProductService,
+                SubsidiaryService = SubsidiaryService
             };
         }
     }

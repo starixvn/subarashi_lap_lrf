@@ -220,7 +220,8 @@
                 BalanceUpDataAccess, _currencyValidation)
             {
                 SessionService = SessionService,
-                ProductService = ProductService
+                ProductService = ProductService,
+                SubsidiaryService = SubsidiaryService
             };
         }
     }

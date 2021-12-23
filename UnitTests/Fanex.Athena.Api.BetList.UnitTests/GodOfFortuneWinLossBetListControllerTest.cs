@@ -111,7 +111,8 @@
                 _reportSettingService)
             {
                 SessionService = SessionService,
-                ProductService = ProductService
+                ProductService = ProductService,
+                SubsidiaryService = SubsidiaryService
             };
         }
     }

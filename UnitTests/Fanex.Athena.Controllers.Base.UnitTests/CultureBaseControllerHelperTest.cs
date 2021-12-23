@@ -7,7 +7,7 @@
     using Extension.Utility;
 
     using Fanex.Athena.Model.Auth;
-
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using NSubstitute;
 
     using NUnit.Framework;
@@ -35,7 +35,8 @@
         protected static readonly LicenseeAuthInfo DefaultLicenseeSession = new LicenseeAuthInfo
         {
             LicenseeId = 100,
-            LicenseeName = "Spondemo"
+            LicenseeName = "Spondemo",
+            OfferedSubProductList = Enumerable.Empty<string>()
         };
 
         protected UrlHelper Url { get; set; }
@@ -45,6 +46,8 @@
         protected ILanguageService LangService { get; set; }
 
         protected ISessionService SessionService { get; set; }
+
+        public IProductService ProductService { get; set; }
 
         protected IAppSettings AppSettings { get; set; }
 
@@ -56,6 +59,7 @@
             LangService = Substitute.For<ILanguageService>();
             SessionService = Substitute.For<ISessionService>();
             AppSettings = Substitute.For<IAppSettings>();
+            ProductService = Substitute.For<IProductService>();
             SetUpForContexts();
         }
 
@@ -67,6 +71,7 @@
             LangService = null;
             SessionService = null;
             AppSettings = null;
+            ProductService = null;
         }
 
         protected void SetUpDefaultFakeData()
@@ -89,6 +94,14 @@
         protected void StubGetValueAppSettings(string valueName, string fakeValue)
         {
             AppSettings.GetValue(valueName).Returns(fakeValue);
+        }
+
+        protected void StubGetAllowedSubProductCodeList(string productCodes, string fakeProductCodes)
+        {
+            ProductService.GetAllowedSubProductCodeList(
+              SessionService.LicenseeSession.OfferedSubProductList,
+              productCodes)
+                .Returns(fakeProductCodes);
         }
 
         private void SetUpForContexts()

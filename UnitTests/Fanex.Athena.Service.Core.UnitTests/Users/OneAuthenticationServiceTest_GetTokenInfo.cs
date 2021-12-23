@@ -34,8 +34,8 @@
                 _oneBookSecurityWrapper,
                 Substitute.For<ILogger>(),
                  _appSettings,
-                Substitute.For<IOneAuthDataAccess>()
-
+                Substitute.For<IOneAuthDataAccess>(),
+                Substitute.For<IProductService>()
                 );
         }
 

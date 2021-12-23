@@ -355,7 +355,7 @@
             MapReaderData(readerDataMapping);
 
             // Action
-            var result = await DataAccess.GetLiveReportWinlossByMatch(new LiveReportMatchListMetalModel());
+            var result = await DataAccess.GetLiveReportWinlossByMatch(new LiveReportMatchListMetalModel { ProductCodeList = string.Empty });
 
             // Assert
             Assert.Multiple(() =>

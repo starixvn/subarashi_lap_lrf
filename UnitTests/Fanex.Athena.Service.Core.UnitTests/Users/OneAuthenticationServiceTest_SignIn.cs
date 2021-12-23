@@ -42,6 +42,9 @@
         private ILogger _logger;
         private IOneAuthDataAccess _oneAuthDataAccess;
         private IAppSettings _appSettings;
+        private IProductService _productService;
+
+        private IEnumerable<string> OfferedSubProducts = new List<string> { "SLT" };
 
         [SetUp]
         public void SetUp()
@@ -55,6 +58,7 @@
             _oneAuthDataAccess.GetUserInfo(Arg.Any<int>(), Arg.Any<string>()).Returns(new OneAuthUserInfo());
             _appSettings = Substitute.For<IAppSettings>();
             _appSettings.DefaultBaseCurrency.Returns("EUR");
+            _productService = Substitute.For<IProductService>();
             _oneAuthenticationService = Substitute.ForPartsOf<OneAuthenticationService>(
                 _sessionService,
                 _licenseeSettingService,
@@ -62,7 +66,8 @@
                 _oneBookSecurityWrapper,
                 _logger,
                 _appSettings,
-                _oneAuthDataAccess);
+                _oneAuthDataAccess,
+                _productService);
         }
 
         [TearDown]
@@ -143,6 +148,8 @@
 
             _sessionService.UserSession.Returns(x => null);
             _sessionService.LicenseeSession.Returns(x => null);
+            _productService.GetOfferedSubProducts(licensee.Id).Returns(OfferedSubProducts);
+
 
             var fakeHttpContext = Substitute.For<HttpContextBase>();
 
@@ -158,7 +165,7 @@
                     Arg.Any<IEnumerable<CurrencyUser>>());
                 _sessionService.Received().AssignSessions(
                     Arg.Is<UserAuthInfo>(x => AssertNewUserSession(x, tokenInfo)),
-                    Arg.Is<LicenseeAuthInfo>(x => AssertNewLicenseeSession(x, licensee)));
+                    Arg.Is<LicenseeAuthInfo>(x => AssertNewLicenseeSession(x, licensee, OfferedSubProducts)));
             });
         }
 
@@ -173,6 +180,8 @@
 
             _sessionService.UserSession.Returns(new UserAuthInfo());
             _sessionService.LicenseeSession.Returns(new LicenseeAuthInfo());
+
+            _productService.GetOfferedSubProducts(licensee.Id).Returns(OfferedSubProducts);
 
             var fakeHttpContext = Substitute.For<HttpContextBase>();
             fakeHttpContext.User.Identity.Returns(x => { return null; });
@@ -189,7 +198,7 @@
                     Arg.Any<IEnumerable<CurrencyUser>>());
                 _sessionService.Received().AssignSessions(
                     Arg.Is<UserAuthInfo>(x => AssertNewUserSession(x, tokenInfo)),
-                    Arg.Is<LicenseeAuthInfo>(x => AssertNewLicenseeSession(x, licensee)));
+                    Arg.Is<LicenseeAuthInfo>(x => AssertNewLicenseeSession(x, licensee, OfferedSubProducts)));
             });
         }
 
@@ -218,6 +227,8 @@
             };
             _sessionService.LicenseeSession.Returns(validLicensee);
 
+            _productService.GetOfferedSubProducts(licensee.Id).Returns(OfferedSubProducts);
+
             var fakeHttpContext = CreateValidFakeContext(tokenInfo.UserID);
 
             // Action
@@ -232,7 +243,7 @@
                     Arg.Any<IEnumerable<CurrencyUser>>());
                 _sessionService.Received().AssignSessions(
                     Arg.Is<UserAuthInfo>(x => AssertNewUserSession(x, tokenInfo)),
-                    Arg.Is<LicenseeAuthInfo>(x => AssertNewLicenseeSession(x, licensee)));
+                    Arg.Is<LicenseeAuthInfo>(x => AssertNewLicenseeSession(x, licensee, OfferedSubProducts)));
             });
         }
 
@@ -260,6 +271,7 @@
                 LicenseeId = 0
             };
             _sessionService.LicenseeSession.Returns(inValidLicensee);
+            _productService.GetOfferedSubProducts(licensee.Id).Returns(OfferedSubProducts);
 
             var fakeHttpContext = CreateValidFakeContext(tokenInfo.UserID);
 
@@ -275,7 +287,7 @@
                     Arg.Any<IEnumerable<CurrencyUser>>());
                 _sessionService.Received().AssignSessions(
                     Arg.Is<UserAuthInfo>(x => AssertNewUserSession(x, tokenInfo)),
-                    Arg.Is<LicenseeAuthInfo>(x => AssertNewLicenseeSession(x, licensee)));
+                    Arg.Is<LicenseeAuthInfo>(x => AssertNewLicenseeSession(x, licensee, OfferedSubProducts)));
             });
         }
 
@@ -305,6 +317,8 @@
             };
             _sessionService.LicenseeSession.Returns(validAnotherLicensee);
 
+            _productService.GetOfferedSubProducts(licensee.Id).Returns(OfferedSubProducts);
+
             var fakeHttpContext = CreateValidFakeContext(tokenInfo.UserID);
 
             // Action
@@ -319,7 +333,7 @@
                     Arg.Any<IEnumerable<CurrencyUser>>());
                 _sessionService.Received().AssignSessions(
                     Arg.Is<UserAuthInfo>(x => AssertNewUserSession(x, tokenInfo)),
-                    Arg.Is<LicenseeAuthInfo>(x => AssertNewLicenseeSession(x, licensee)));
+                    Arg.Is<LicenseeAuthInfo>(x => AssertNewLicenseeSession(x, licensee, OfferedSubProducts)));
             });
         }
 
@@ -547,10 +561,11 @@
                 && newUser.VendorID == token.VendorID
                 && newUser.VendorIdentityID == token.UserID;
 
-        private bool AssertNewLicenseeSession(LicenseeAuthInfo newLicensee, Licensee licenseeInfo)
+        private bool AssertNewLicenseeSession(LicenseeAuthInfo newLicensee, Licensee licenseeInfo, IEnumerable<string> offeredSubProducts)
         => newLicensee.LicenseeId == licenseeInfo.Id
                 && newLicensee.IsAllowedCustomerComm == licenseeInfo.IsAllowedCustomerComm
                 && newLicensee.IsEnableBA == licenseeInfo.IsEnableBA
-                && newLicensee.LicenseeName == licenseeInfo.Name;
+                && newLicensee.LicenseeName == licenseeInfo.Name
+                && newLicensee.OfferedSubProductList == offeredSubProducts;
     }
 }

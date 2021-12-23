@@ -33,7 +33,7 @@
                 AuthorizationService,
                 BetListApiClient,
                 BalanceUpDataAccess)
-            { ProductService = ProductService, SessionService = SessionService })
+            { ProductService = ProductService, SessionService = SessionService, SubsidiaryService = SubsidiaryService })
             {
                 // Arrange
                 var expect = new HttpResponseMessage();
