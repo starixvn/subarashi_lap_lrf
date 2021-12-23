@@ -24,7 +24,7 @@
             => View("~/Views/Desktop/Report/CustomerSupportTask/Main.cshtml", SessionServiceInstance.UserSession.CurrencyList);
 
         [HttpPost]
-        [AutoBindMetaModel(BindAgent = true)]
+        [AutoBindMetaModel(BindAgent = true, ApplySubsidiaryBusiness = true)]
         [ValidationWebRequest(IsValidCurrencyList = true)]
         public async Task<ActionResult> ExportExcel(CustomerSupportTaskMetaModel metaModel)
         {

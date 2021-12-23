@@ -3110,4 +3110,8 @@
   <data name="SupportTask" xml:space="preserve">
     <value>Support Task</value>
   </data>
+  <data name="CustomerReports" xml:space="preserve">
+    <value>Customer Reports</value>
+    <comment>ignorejs</comment>
+  </data>
 </root>

@@ -1861,6 +1861,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Customer Reports.
+        /// </summary>
+        public static string CustomerReports {
+            get {
+                return ResourceManager.GetString("CustomerReports", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Customer(s).
         /// </summary>
         public static string Customers {

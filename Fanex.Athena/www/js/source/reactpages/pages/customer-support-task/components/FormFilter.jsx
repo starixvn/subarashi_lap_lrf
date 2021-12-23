@@ -30,7 +30,8 @@ const FormFilter = ({ selectedCurrency, selectedSupportTask, setSelectedSupportT
 
         const params = {
             currencyIdList: selectedCurrency,
-            supportTask: selectedSupportTask 
+            supportTask: selectedSupportTask,
+            ...Site.getLrfSubsidiary()
         }
 
         DataService.getFile(ExportUrl, params)

@@ -1,4 +1,5 @@
 const _rootUrl = window.rootUrl || "/";
+const _isSelfMode = !!window.isSelfMode;
 let _xsrfToken = null;
 export default class Site {
     static getXsrfToken() {
@@ -11,6 +12,14 @@ export default class Site {
 
     static resolveClientUrl(relativeUrl) {
         return _rootUrl + relativeUrl;
+    }
+
+    static getLrfSubsidiary() {
+        try {
+            return (_isSelfMode && top.getLrfSubsidiarySearch && top.getLrfSubsidiarySearch()) || {}
+        } catch (e) {
+            return {}
+        }
     }
 
     static convertDateToString(date) {
