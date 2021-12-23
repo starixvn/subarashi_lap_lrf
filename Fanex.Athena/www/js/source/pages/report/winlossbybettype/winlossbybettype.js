@@ -28,6 +28,7 @@ define([
 
             initEvent: function () {
                 $('#ExportToExcel').click(function () {
+                    Site.assignSubsidiaryData();
                     $('#IsExportExcel').val(true);
                     $('#WinLossByBetTypeForm').submit();
                 });
@@ -54,6 +55,8 @@ define([
                 url = QueryString.setParams(url, {
                     fromdate: $('#FromDate').val(),
                     todate: $('#ToDate').val(),
+                    subsidiarySearch: $('#SubsidiarySearch').val(),
+                    subsidiaryList: $('#SubsidiaryList').val(),
                     bettype: betType
                 });
                 Site.blockUI();
@@ -62,6 +65,7 @@ define([
 
             submitForm: function () {
                 Site.blockUI();
+                Site.assignSubsidiaryData();
                 $('#IsExportExcel').val(false);
                 $('#WinLossByBetTypeForm').submit();
                 return false;

@@ -52,6 +52,7 @@
                             );
             _controller.SessionService = SessionService;
             _controller.ProductService = ProductService;
+            _controller.SubsidiaryService = SubsidiaryService;
         }
 
         [TearDown]

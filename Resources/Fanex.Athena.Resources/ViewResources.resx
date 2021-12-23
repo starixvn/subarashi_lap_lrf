@@ -3088,4 +3088,8 @@
   <data name="ProductAPM" xml:space="preserve">
     <value>AdvantPlay Mini</value>
   </data>
+  <data name="ViewSubsidiaryOnReports" xml:space="preserve">
+    <value>View subsidiary on reports</value>
+    <comment>ignorejs</comment>
+  </data>
 </root>

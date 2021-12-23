@@ -56,16 +56,15 @@
         {
             CheckDataPermission(metaModel.CustId, metaModel.TransId);
 
-            var licenseeSession = SessionService.LicenseeSession;
             var balanceUp = GetBalanceUp();
             var userSession = SessionService.UserSession;
             metaModel.PageIndex = 1;
             metaModel.PageSize = int.MaxValue - 1;
-            metaModel.LicenseeId = licenseeSession.LicenseeId;
+            metaModel.LicenseeId = LicenseeSession.LicenseeId;
             metaModel.BalanceUpDay = DateTime.SpecifyKind(balanceUp.BalanceUpDay.Date, DateTimeKind.Utc);
             metaModel.MoveBetsDay = DateTime.SpecifyKind(balanceUp.MoveBetsDay.Date, DateTimeKind.Utc);
-            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId);
-            metaModel.HasPlayerCom = licenseeSession.IsAllowedCustomerComm;
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(CurrencyAgentListBySubsidiaryBusiness(metaModel), metaModel.CurrencyId);
+            metaModel.HasPlayerCom = LicenseeSession.IsAllowedCustomerComm;
             metaModel.UspKey = uspKey;
             metaModel.IsShowIpvn = userSession.IsShowIpvn && userSession.IsShowIp;
             metaModel.IsShowIp = userSession.IsShowIp;
@@ -82,27 +81,25 @@
             string apiPath = null)
         {
             CheckDataPermission(metaModel.CustId, metaModel.TransId);
-            var userSession = SessionService.UserSession;
             const int DefaultPageSize = 100;
-            var licenseeSession = SessionService.LicenseeSession;
             var balanceUp = GetBalanceUp();
 
             metaModel.IsServerPaging = true;
             metaModel.PageIndex = pageIndex < 1 ? 1 : pageIndex;
             metaModel.PageSize = pageSize < 1 ? DefaultPageSize : pageSize;
-            metaModel.LicenseeId = licenseeSession.LicenseeId;
+            metaModel.LicenseeId = LicenseeSession.LicenseeId;
             metaModel.BalanceUpDay = DateTime.SpecifyKind(balanceUp.BalanceUpDay.Date, DateTimeKind.Utc);
             metaModel.MoveBetsDay = DateTime.SpecifyKind(balanceUp.MoveBetsDay.Date, DateTimeKind.Utc);
-            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId);
-            metaModel.HasPlayerCom = licenseeSession.IsAllowedCustomerComm;
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(CurrencyAgentListBySubsidiaryBusiness(metaModel), metaModel.CurrencyId);
+            metaModel.HasPlayerCom = LicenseeSession.IsAllowedCustomerComm;
             metaModel.UspKey = uspKey;
-            metaModel.IsShowIpvn = userSession.IsShowIpvn && userSession.IsShowIp;
-            metaModel.IsShowIp = userSession.IsShowIp;
+            metaModel.IsShowIpvn = UserSession.IsShowIpvn && UserSession.IsShowIp;
+            metaModel.IsShowIp = UserSession.IsShowIp;
             AutoBindMetaModelService.BindProductCodeList(metaModel, SessionService.LicenseeSession.OfferedSubProductList, ProductService);
 
             return await BridgeClientService.PostAsync(apiPath ?? "/BetList/GetBetListPaging",
                 metaModel,
-                userSession.Language
+                UserSession.Language
                 ).ConfigureAwait(false);
         }
     }

@@ -8,6 +8,7 @@ define(['jquery', 'common/querystring', 'common/popup', 'extensions/prototype', 
         let _rootUrl = null;
         let _pageLanguage = null;
         let _isFakeLicensee = null;
+        let _isSelfMode = false;
 
         function setProductCodeListParam(url, productCodeList) {
             return QueryString.setParam(url, 'ProductCodeList', productCodeList);
@@ -19,6 +20,20 @@ define(['jquery', 'common/querystring', 'common/popup', 'extensions/prototype', 
 
         function resolveClientUrl(relativeUrl) {
             return _rootUrl + relativeUrl;
+        }
+
+        function getLrfSubsidiary() {
+            try {
+                return (_isSelfMode && top.getLrfSubsidiarySearch && top.getLrfSubsidiarySearch()) || {}
+            } catch (e) {
+                return {}
+            }
+        }
+
+        function assignSubsidiaryData() {
+            const subsidiary = getLrfSubsidiary();
+            $('#SubsidiarySearch').val(subsidiary.SubsidiarySearch);
+            $('#SubsidiaryList').val(subsidiary.SubsidiaryList);
         }
 
         function setLicenseeOption(urlOrParams, currencyId, currencyName, baseCurrency) {
@@ -53,6 +68,7 @@ define(['jquery', 'common/querystring', 'common/popup', 'extensions/prototype', 
             _historyDate = new Date($('#HistoryDate').val());
             _rootUrl = $('#RootUrl').val();
             _pageLanguage = $('#PageLanguage').val();
+            _isSelfMode = $('#IsSelfMode').val() === '1';
         }
         function initEvent() {
             $('#CurrencyId').change(function () {
@@ -497,6 +513,8 @@ define(['jquery', 'common/querystring', 'common/popup', 'extensions/prototype', 
             addFilterCollapseExpand: addFilterCollapseExpand,
             isFakeLicensee: isFakeLicensee,
             getXsrfToken: getXsrfToken,
-            getBaseCurrencyName: getBaseCurrencyName
+            getBaseCurrencyName: getBaseCurrencyName,
+            getLrfSubsidiary: getLrfSubsidiary,
+            assignSubsidiaryData: assignSubsidiaryData
         };
     });

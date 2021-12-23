@@ -6,7 +6,10 @@
     using Core.Users.Interfaces;
     using DataAccess.Core.Users.Interfaces;
     using Extension.Utility.Interfaces;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.DTO.Users;
     using Fanex.Athena.Resources;
@@ -32,8 +35,10 @@
             _subLicenseeDataAccess = subsidiaryDataAccess;
         }
 
-        public bool IsIgnoredSubsidiarySearch(bool subsidiarySearch, string subsidiaryList, byte subsidiaryViewType)
-           => subsidiaryViewType == (byte)SubsidiaryViewType.NotManagement || !subsidiarySearch || string.IsNullOrWhiteSpace(subsidiaryList);
+        public bool IsIgnoredSubsidiarySearch(bool subsidiarySearch, string subsidiaryList, UserAuthInfo userInfo)
+            => !subsidiarySearch || string.IsNullOrWhiteSpace(subsidiaryList) 
+                || (userInfo.ApplicationMode == AppMode.Parasitic ? userInfo.SubsidiaryViewType == (byte)SubsidiaryViewType.NotManagement
+                : !userInfo.FunctionList.IsPresent(_ => string.Equals(_.FunctionKey, PermissionKeys.Subsidiary, StringComparison.InvariantCultureIgnoreCase)));
 
         public IDictionary<int, int[]> GetCurrencyAgentList(string siteName, IDictionary<int, int[]> agentList, string subsidiaryList)
         {
@@ -80,22 +85,9 @@
             return result.GroupBy(x => x.CurrencyId).ToDictionary(x => x.Key, x => x.Select(i => i.AgentId));
         }
 
-        public IEnumerable<CheckedItem> GetSubsidiaryTree(UserAuthInfo user, string licenseeName)
+        public IEnumerable<CheckedItem> GetSubsidiaryTree(UserAuthInfo user, string licenseeName, bool ignoreViewType = false)
         {
-            if (user.UserLevel == UserLevelType.Subsidiary && !string.IsNullOrWhiteSpace(user.OperatorId))
-            {
-                return new List<CheckedItem>
-                {
-                    new CheckedItem
-                    {
-                        Value = user.OperatorId,
-                        Name = user.OperatorId,
-                        Checked = true
-                    }
-                };
-            }
-
-            if (user.SubsidiaryViewType == (int)SubsidiaryViewType.NotManagement)
+            if (!ignoreViewType && user.SubsidiaryViewType == (int)SubsidiaryViewType.NotManagement)
             {
                 return Enumerable.Empty<CheckedItem>();
             }
@@ -103,7 +95,7 @@
             var groupSub = GetAllGroupSubsidiaries(user, licenseeName, user.WhiteLabelID);
 
             return user.SubsidiaryViewType == (int)SubsidiaryViewType.MasterManagement
-                ? GetWhiteLableTree(groupSub)
+                ? GetWhiteLabelTree(groupSub)
                 : GetOperatorTree(groupSub);
         }
 
@@ -136,7 +128,7 @@
                 .ToList();
         }
 
-        private static IEnumerable<CheckedItem> GetWhiteLableTree(IEnumerable<GroupSubsidiary> groupSubsidiaries)
+        private static IEnumerable<CheckedItem> GetWhiteLabelTree(IEnumerable<GroupSubsidiary> groupSubsidiaries)
         {
             return groupSubsidiaries
                 .OrderByDescending(x => x.WhiteLabelID)

@@ -5,6 +5,7 @@
     using Controllers.Base.UnitTests;
 
     using DataAccess.Core.Users.Interfaces;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.ViewModel;
 
@@ -15,11 +16,13 @@
     public class HeaderControllerTest : CultureBaseControllerHelperTest
     {
         private ILicenseeDataAccess _licenseeDataAccess;
+        private ISubsidiaryService _subsidiaryService;
         private ILicenseeSettingService _licenseeSettingService;
         [SetUp]
         public void SetUp()
         {
             _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
+            _subsidiaryService = Substitute.For<ISubsidiaryService>();
         }
         [OneTimeSetUp]
         public override void FixtureSetUp()
@@ -187,7 +190,8 @@
         private HeaderController CreateController()
         {
             return new HeaderController(
-                _licenseeDataAccess)
+                _licenseeDataAccess,
+                _subsidiaryService)
             {
                 LangService = LangService,
                 SessionServiceInstance = SessionService,

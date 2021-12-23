@@ -113,6 +113,7 @@
             controller.BetListApiClient = BetListApiClient;
             controller.ProductService = ProductService;
             controller.CacheRefAdapter = CacheRefAdapter;
+            controller.SubsidiaryService = SubsidiaryService;
 
             return controller;
         }

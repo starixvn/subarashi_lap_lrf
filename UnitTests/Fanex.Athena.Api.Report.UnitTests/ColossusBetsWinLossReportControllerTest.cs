@@ -32,7 +32,6 @@
         private IColossusBetsWinLossService _service;
         private ColossusBetsWinLossReportController _controller;
         private ICurrencyValidation _currencyValidation;
-        private ISubsidiaryService _subsidiaryService;
 
 
         [SetUp]
@@ -40,10 +39,8 @@
         {
             _currencyValidation = Substitute.For<ICurrencyValidation>();
             _service = Substitute.For<IColossusBetsWinLossService>();
-            _subsidiaryService = Substitute.For<ISubsidiaryService>();
 
             _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
-            _subsidiaryService.IsIgnoredSubsidiarySearch(Arg.Any<bool>(), Arg.Any<string>(), Arg.Any<byte>()).Returns(true);
 
             CreateController();
             StubUserSessionData(new UserAuthInfo
@@ -57,9 +54,10 @@
         private void CreateController()
         {
             _controller = Substitute.ForPartsOf<ColossusBetsWinLossReportController>(_service,
-                            LangService, _currencyValidation, _subsidiaryService);
+                            LangService, _currencyValidation);
             _controller.SessionService = SessionService;
             _controller.ProductService = ProductService;
+            _controller.SubsidiaryService = SubsidiaryService;
 
             _controller.When(x => x.ExcelStream(Arg.Any<IWorkbook>(), Arg.Any<string>())).DoNotCallBase();
         }

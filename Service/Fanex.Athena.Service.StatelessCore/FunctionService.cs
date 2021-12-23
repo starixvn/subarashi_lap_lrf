@@ -90,7 +90,7 @@ namespace Fanex.Athena.Service.StatelessCore
                 var userSubFunctionCount = functionList.Count(f => f.ParentId == masterFunction.FunctionId);
 
                 // User has permission on all sub functions, so he/she has permission on parent function
-                if (subFunctionCount == userSubFunctionCount)
+                if (userSubFunctionCount > 0 && subFunctionCount == userSubFunctionCount)
                 {
                     functionList.Add(masterFunction);
                 }

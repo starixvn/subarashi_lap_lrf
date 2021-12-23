@@ -60,6 +60,7 @@
                             _dataAccess);
             _controller.SessionService = SessionService;
             _controller.ProductService = ProductService;
+            _controller.SubsidiaryService = SubsidiaryService;
 
             _controller.When(x => x.ExcelStream(Arg.Any<IWorkbook>(), Arg.Any<string>())).DoNotCallBase();
         }
@@ -106,7 +107,7 @@
                 Assert.That(result.Data, Is.Empty);
                 Assert.That(result.Total, Is.Empty);
                 Assert.That(result.SummaryTotal, Is.Empty);
-                Assert.That(result.ProductOptions, Is.EqualTo(model.ProductOptions.ToJson()));
+                Assert.That(result.ProductOptions, Is.EqualTo(model.OriginalProductOptions.ToJson()));
                 Assert.That(result.PromotionPrize, Is.EqualTo("0"));
             });
         }
@@ -120,7 +121,6 @@
             var toDate = new DateTime(2019, 2, 28);
 
             var model = new LicenseeWinLossMetaModel();
-
             var reportSetting = new ReportSetting
             {
                 MinDate = new DateTime(2019, 1, 1),
@@ -139,7 +139,7 @@
                 Assert.That(result.Data, Is.Empty);
                 Assert.That(result.Total, Is.Empty);
                 Assert.That(result.SummaryTotal, Is.Empty);
-                Assert.That(result.ProductOptions, Is.EqualTo(model.ProductOptions.ToJson()));
+                Assert.That(result.ProductOptions, Is.EqualTo(model.OriginalProductOptions.ToJson()));
                 Assert.That(result.PromotionPrize, Is.EqualTo("0"));
             });
         }
@@ -365,6 +365,14 @@
                 FromDate = new DateTime(2016, 1, 1),
                 ToDate = new DateTime(2017, 1, 1),
                 ProductOptions = new List<ProductOption>
+                {
+                    new ProductOption
+                    {
+                        Code = "SB",
+                        Status = true
+                    }
+                },
+                OriginalProductOptions = new List<ProductOption>
                 {
                     new ProductOption
                     {

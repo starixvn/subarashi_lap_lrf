@@ -11,38 +11,36 @@
             @if (Model.AllMasterFunctions != null && Model.AllFunctionMap != null && Model.AllUserFunctions != null)
             {
                 string check;
-                var expUrl = Url.ContentLink("/Resources/Images/expand.png");
-                var nullUrl = Url.ContentLink("/Resources/Images/null.png");
-                string url;
+                var expandImage = Url.ContentLink("/Resources/Images/expand.png");
                 foreach (var masterFunction in Model.AllMasterFunctions)
                 {
                     check = string.Empty;
-                    url = expUrl;
-            
-                    if (masterFunction.FunctionId == 6)
-                    {
-                        url = nullUrl;
-                    }
-            
+                    var foundMap = Model.AllFunctionMap
+                       .Where(f => f.Key == masterFunction.FunctionId)
+                       .SingleOrDefault();
+
+                    var hasNoSubFunctions = foundMap.Key == 0 || masterFunction.FunctionId == 6;
+
                     if (Model.AllUserFunctions.Any(f => f.FunctionId == masterFunction.FunctionId))
                     {
                         check = "checked=checked";
                     }
 
                     <!-- write this master function -->
-                    <div class="masterItem">
-                        <img class="icon" id="@string.Format("img{0}", masterFunction.FunctionId)" src="@url")"
-                                    onclick="EditPermission.collapseExpand(this)" data-status="collapse" />
-                        <input type="checkbox" id="@masterFunction.FunctionId" onclick="EditPermission.checkedChange(this)" class="parentCheckBox" @check>
-                        <label for="@masterFunction.FunctionId">@masterFunction.Name</label>
-                    </div>
+            <div class="masterItem">
+                @if (!hasNoSubFunctions)
+                {
+                    <img class="icon" id="@string.Format("img{0}", masterFunction.FunctionId)" src="@expandImage" )"
+                         onclick="EditPermission.collapseExpand(this)" data-status="collapse" />
+                }
+
+                <input type="checkbox" id="@masterFunction.FunctionId" onclick="EditPermission.checkedChange(this)" class="parentCheckBox @(hasNoSubFunctions ? "no-sub" : "")" @check>
+                <label for="@masterFunction.FunctionId">@masterFunction.Name</label>
+            </div>
                 
                     <!-- write its sub function -->
-                    var foundMap = Model.AllFunctionMap
-                        .Where(f => f.Key == masterFunction.FunctionId)
-                        .SingleOrDefault();
-
-                    if (foundMap.Key > 0)
+                   
+                    if (!hasNoSubFunctions)
                     {
                         var subFunctionList = foundMap.Value;
                         <div id="@string.Format("group_img{0}", masterFunction.FunctionId)" class="groupStyle">

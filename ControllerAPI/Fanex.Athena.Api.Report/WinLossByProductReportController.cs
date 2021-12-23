@@ -255,7 +255,7 @@ namespace Fanex.Athena.Api.Report
             var userSession = SessionService.UserSession;
             metaModel.DefaultBaseCurrency = userSession.DefaultBaseCurrency;
             metaModel.Username = ValidateUserName(metaModel.Username);
-            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(CurrencyAgentListBySubsidiaryBusiness(metaModel),
                 level == 0 ? metaModel.CurrencyId : currencyId, metaModel.IsExcludedTestData);
             metaModel.DrillDownCurrencyId = currencyId;
             metaModel.DrillDownCurrencyName = currencyName;

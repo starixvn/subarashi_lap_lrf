@@ -112,9 +112,10 @@ var EditPermission = (function ($) {
                 data: param,
                 url: url,
                 success: function (response) {
-                    $('#resultMessage').toggleClass('field-validation-success', response.IsSuccessful)
-                                       .toggleClass('field-validation-error', !response.IsSuccessful)
-                                       .text(response.Message);
+                    var result = response.Result || {};
+                    $('#resultMessage').toggleClass('field-validation-success', result.IsSuccessful)
+                        .toggleClass('field-validation-error', !result.IsSuccessful)
+                        .text(result.Message);
 
                     $('.response-area').show()
                                        .animate({ "opacity": "hidden" }, 10000, function () { $(this).fadeOut(1000); });

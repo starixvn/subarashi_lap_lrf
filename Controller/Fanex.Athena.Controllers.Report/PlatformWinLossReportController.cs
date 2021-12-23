@@ -52,7 +52,7 @@
 
         [HttpPost]
         [ValidationWebRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
-        [AutoBindMetaModel(BindAgent = true, BindProductOptions = true)]
+        [AutoBindMetaModel(BindAgent = true, ApplySubsidiaryBusiness = true, BindProductOptions = true)]
         public async Task<ActionResult> Index(PlatformWinLossMetaModel metaModel)
         {
             return await ProcessRequest(metaModel);

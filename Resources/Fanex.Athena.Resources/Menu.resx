@@ -333,4 +333,8 @@
   <data name="leaguewinloss" xml:space="preserve">
     <value>Win Loss By League</value>
   </data>
+  <data name="subsidiary" xml:space="preserve">
+    <value>SUBSIDIARY</value>
+    <comment>162250</comment>
+  </data>
 </root>

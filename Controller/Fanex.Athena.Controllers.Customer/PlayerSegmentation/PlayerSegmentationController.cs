@@ -75,7 +75,7 @@
             var hasVIPManangementEditPermission = HasVIPManagementEditPermission();
             var subsidiaryList = _subsidiaryService.GetSubsidiaryTree(userSession, licenseeSession.LicenseeName);
             var viewType = !subsidiaryList.Any() ? SubsidiaryViewType.NotManagement : (SubsidiaryViewType)userSession.SubsidiaryViewType;
-            var reasonList = await GetReasonList(lang).ConfigureAwait(false);
+            var reasonList = await GetReasonList(lang);
             var problemPlayerCustomerClass = reasonList.OrderBy(_ => _.CustomerClass).Select(_ => _.CustomerClass.ToString()).Distinct();
             var vipMngCustomerClass = await _playerService.GetCustomerClass();
 
@@ -103,10 +103,10 @@
             return model;
         }
 
-        private async Task<IEnumerable<ReasonGroup>> GetReasonList(string lang)
+        private Task<IEnumerable<ReasonGroup>> GetReasonList(string lang)
         {
             var lazyTask = ReasonListFromCache.GetOrAdd(lang, langKey => new AsyncLazy<IEnumerable<ReasonGroup>>(() => _playerService.GetReasonGroupListAsync(langKey)));
-            return await lazyTask.Value.ConfigureAwait(false);
+            return lazyTask.Value;
         }
 
         private bool HasVIPManagementPermission()

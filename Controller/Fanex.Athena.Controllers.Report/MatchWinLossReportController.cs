@@ -81,7 +81,7 @@
         [HttpPost]
         [CustomValidateAntiForgery]
         [ValidationWebRequest]
-        [AutoBindMetaModel(BindAgent = true)]
+        [AutoBindMetaModel(BindAgent = true, ApplySubsidiaryBusiness = true)]
         public async Task<ActionResult> Index(MatchWinLossMetaModel metaModel)
         {
             var userSession = SessionServiceInstance.UserSession;
@@ -133,7 +133,7 @@
 
         [HttpPost]
         [CustomValidateAntiForgery]
-        [AutoBindMetaModel(BindAgent = true)]
+        [AutoBindMetaModel(BindAgent = true, ApplySubsidiaryBusiness = true)]
         public async Task<ActionResult> Detail(MatchWinLossMetaModel metaModel)
         {
             if (!metaModel.IsValidDetailRequest)
@@ -162,7 +162,7 @@
         [HttpPost]
         [CustomValidateAntiForgery]
         [ValidationWebRequest]
-        [AutoBindMetaModel(BindAgent = true)]
+        [AutoBindMetaModel(BindAgent = true, ApplySubsidiaryBusiness = true)]
         public async Task<ActionResult> Excel(MatchWinLossMetaModel metaModel)
         {
             const int PageSize = 63000;

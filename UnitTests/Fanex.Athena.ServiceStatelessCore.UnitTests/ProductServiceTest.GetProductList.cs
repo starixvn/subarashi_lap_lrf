@@ -24,7 +24,7 @@
     {
         private readonly int _licenseeId = FakeHelper.Create<int>();
         private readonly string _languageCode = FakeHelper.Create<string>();
-        private readonly List<string> _subproduct = new List<string> { "BTC" };
+        private readonly List<string> _subproduct = new List<string> { "SLT" };
 
         private IAppSettings _appSettings;
         private IProductDataAccess _productDataAccess;

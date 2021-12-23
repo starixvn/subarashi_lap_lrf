@@ -102,6 +102,7 @@
             controller.BalanceUpDataAccessInstance = BalanceUpDataAccess;
             controller.BetListApiClient = BetListApiClient;
             controller.ProductService = ProductService;
+            controller.SubsidiaryService = SubsidiaryService;
 
             return controller;
         }

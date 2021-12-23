@@ -1,14 +1,8 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="LicenseeWinLossMetaModel.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-using Fanex.Athena.Model.Core.MetaModel;
+﻿using Fanex.Athena.Model.Core.MetaModel;
 
 namespace Fanex.Athena.Model.Report.MetaModel
 {
-    public class LicenseeWinLossMetaModel : BaseDrilldownReportMetaModel
+    public class LicenseeWinLossMetaModel : BaseDrilldownReportMetaModel, IMetaModelSubsidiarySearch
     {
         public byte ReportBy { get; set; }
 
@@ -25,5 +19,7 @@ namespace Fanex.Athena.Model.Report.MetaModel
         public bool IsVIPPlayerOnly { get; set; }
 
         public bool HasVIPManagementPermission { get; set; }
+        public string SubsidiaryList { get; set; }
+        public bool SubsidiarySearch { get; set; }
     }
 }

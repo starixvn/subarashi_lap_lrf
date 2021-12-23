@@ -1,6 +1,7 @@
 ﻿using Fanex.Athena.Model.Core.DTO.Common;
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Fanex.Athena.ServiceStatelessCore.UnitTests
 {
@@ -11,18 +12,10 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
         public void GetAllowedSubProductCodeList_OfferSubProduct_ReturnCorrectResult()
         {
             // Arrange
-            var productList = new List<Product>
-            {
-                new Product { ProductID = 100, ProductCode = "SB" },
-                new Product { ProductID = 200, ProductCode = "AB" },
-                new Product { ProductID = 300, ProductCode = "BTC" },
-            };
 
             var productCodeList = "SB,BA";
 
-            var expectedResult = "SB,BA,BTC";
-
-            SetUpForGetProductListFromCache(productList);
+            var expectedResult = "SB,BA,SLT";
 
             // Action
             var result = _productService.GetAllowedSubProductCodeList(_subproduct, productCodeList);
@@ -35,18 +28,12 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
         public void GetAllowedSubProductCodeList_NotOfferSubProduct_ReturnCorrectResult()
         {
             // Arrange
-            var productList = new List<Product>
-            {
-                new Product { ProductID = 100, ProductCode = "SB" },
-                new Product { ProductID = 200, ProductCode = "AB" },
-            };
 
+            var productCodes = "SB,BA";
             var expectedResult = "SB,BA";
 
-            SetUpForGetProductListFromCache(productList);
-
             // Action
-            var result = _productService.GetAllowedSubProductCodeList(_subproduct, expectedResult);
+            var result = _productService.GetAllowedSubProductCodeList(Enumerable.Empty<string>(), productCodes);
 
             // Assert
             Assert.That(result, Is.EqualTo(expectedResult));

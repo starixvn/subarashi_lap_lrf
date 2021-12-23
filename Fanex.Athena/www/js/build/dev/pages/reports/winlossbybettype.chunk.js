@@ -1295,6 +1295,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 
             initEvent: function () {
                 $('#ExportToExcel').click(function () {
+                    Site.assignSubsidiaryData();
                     $('#IsExportExcel').val(true);
                     $('#WinLossByBetTypeForm').submit();
                 });
@@ -1321,6 +1322,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                 url = QueryString.setParams(url, {
                     fromdate: $('#FromDate').val(),
                     todate: $('#ToDate').val(),
+                    subsidiarySearch: $('#SubsidiarySearch').val(),
+                    subsidiaryList: $('#SubsidiaryList').val(),
                     bettype: betType
                 });
                 Site.blockUI();
@@ -1329,6 +1332,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 
             submitForm: function () {
                 Site.blockUI();
+                Site.assignSubsidiaryData();
                 $('#IsExportExcel').val(false);
                 $('#WinLossByBetTypeForm').submit();
                 return false;

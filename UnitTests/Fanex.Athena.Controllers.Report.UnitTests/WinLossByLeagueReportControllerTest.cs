@@ -63,6 +63,13 @@
                 {
                     new Match { MatchId = 3, MatchName = "C" }
                 };
+
+                ProductService.GetProductAccess(
+                SessionService.LicenseeSession.LicenseeId,
+                SessionService.UserSession.Language).Returns(new ProductAccess(new List<Product>()));
+
+                StubGetAllowedSubProductCodeList(Product.SB, Product.SB);
+
                 _sportTypeDataAccess.GetSportsAndProducts(
                     SessionService.LicenseeSession.LicenseeId,
                     SessionService.UserSession.Language,
@@ -145,10 +152,7 @@
 
         private WinLossByLeagueReportController CreateController()
         {
-            var productService = Substitute.For<IProductService>();
-            productService.GetProductAccess(
-                SessionService.LicenseeSession.LicenseeId,
-                SessionService.UserSession.Language).Returns(new ProductAccess(new List<Product>()));
+            
 
             return new WinLossByLeagueReportController(
                 _sportTypeDataAccess,
@@ -160,7 +164,7 @@
                 LangService = LangService,
                 LicenseeSettingServiceInstance = Substitute.For<ILicenseeSettingService>(),
                 AppSettingInstance = AppSettings,
-                ProductServiceInstance = productService
+                ProductServiceInstance = ProductService
             };
         }
     }

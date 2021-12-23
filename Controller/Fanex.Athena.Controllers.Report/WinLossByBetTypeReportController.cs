@@ -72,7 +72,7 @@ namespace Fanex.Athena.Controllers.Report
         [HttpPost]
         [CustomValidateAntiForgery]
         [ValidationWebRequest]
-        [AutoBindMetaModel(BindAgent = true)]
+        [AutoBindMetaModel(BindAgent = true, ApplySubsidiaryBusiness = true)]
         public async Task<ActionResult> Index(WinLossByBetTypeMetaModel metaModel)
         {
             var licenseeSession = SessionServiceInstance.LicenseeSession;

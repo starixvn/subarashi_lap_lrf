@@ -3,7 +3,7 @@
     using Fanex.Athena.Model.Core.MetaModel;
     using System;
 
-    public class PromotionPrizeMetaModel : IMetaModelValidation, IMetaModelCurrency, IMetaModelAgent
+    public class PromotionPrizeMetaModel : IMetaModelValidation, IMetaModelCurrency, IMetaModelAgent, IMetaModelSubsidiarySearch 
     {
         public DateTime FromDate { get; set; }
 
@@ -26,5 +26,7 @@
         public bool IsVIPPlayerOnly { get; set; }
 
         public bool HasVIPManagementPermission { get; set; }
+        public string SubsidiaryList { get; set; }
+        public bool SubsidiarySearch { get; set; }
     }
 }

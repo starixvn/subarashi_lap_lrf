@@ -8639,7 +8639,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         }
 
         function getSubmitData() {
-            const data = $('#platformwinloss').serializeObject();
+            const data = $.extend({}, $('#platformwinloss').serializeObject(), Site.getLrfSubsidiary());
             data.Level = 0;
             addDateParam(data);
             data.PlatformType = getPlaformTypes();
@@ -8669,7 +8669,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                     ToDate: data.ToDate,
                     CurrencyName: data.CurrencyName,
                     IsExcludedTestData: data.IsExcludedTestData,
-                    BaseCurrency: data.BaseCurrency
+                    BaseCurrency: data.BaseCurrency,
+                    SubsidiarySearch: data.SubsidiarySearch,
+                    SubsidiaryList: data.SubsidiaryList
                 };
                 _filterData[gridControl.level] = submitData;
                 _cacheData[gridControl.level] = response;

@@ -74,7 +74,8 @@
             return new LastBetsMonitoringBetListController(_sportTypeDataAccess)
             {
                 LangService = LangService,
-                SessionServiceInstance = SessionService
+                SessionServiceInstance = SessionService,
+                ProductServiceInstance = ProductService
             };
         }
     }

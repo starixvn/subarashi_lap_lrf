@@ -181,7 +181,7 @@
                 StubBetListApiPostAsync(Arg.Any<BetListMetaModel>(), PageApiPath, expect);
 
                 // Action
-                var actual = await controller.MixParlay(page, rows, currencyId, baseCurrency, betType, fromDate, toDate, productCodeList, sortBy, sortOrder);
+                var actual = await controller.MixParlay(page, rows, currencyId, baseCurrency, betType, fromDate, toDate, productCodeList, sortBy: sortBy, sortOrder: sortOrder);
 
                 // Assert
                 Assert.Multiple(() =>
@@ -220,7 +220,8 @@
                 BalanceUpDataAccess, _currencyValidation)
             {
                 SessionService = SessionService,
-                ProductService = ProductService
+                ProductService = ProductService,
+                SubsidiaryService = SubsidiaryService
             };
         }
     }

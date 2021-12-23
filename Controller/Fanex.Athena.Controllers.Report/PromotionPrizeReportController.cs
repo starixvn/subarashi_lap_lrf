@@ -20,7 +20,7 @@
         }
 
         [ValidationWebRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
-        [AutoBindMetaModel(BindAgent = true)]
+        [AutoBindMetaModel(BindAgent = true, ApplySubsidiaryBusiness = true)]
         public async Task<ActionResult> ExportExcel(PromotionPrizeMetaModel metaModel)
         {
             var result = await _reportAPIClient.PostAsync(
