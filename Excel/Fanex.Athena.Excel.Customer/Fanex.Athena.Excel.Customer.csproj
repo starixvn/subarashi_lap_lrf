@@ -125,6 +125,8 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomerClass\CustomerClassSpreadSettingPolicyExcel.cs" />
+    <Compile Include="CustomerClass\CustomerClassSettingPolicyExcel.cs" />
     <Compile Include="CustomerCommGroupExcel.cs" />
     <Compile Include="DormantCustomerListExcel.cs" />
     <Compile Include="CustomerListExcel.cs" />
