@@ -759,6 +759,38 @@ Array.prototype.insertBefore = function (value, before) {
 
 /***/ }),
 
+/***/ "./www/js/source/helpers/downloader.js":
+/*!*********************************************!*\
+  !*** ./www/js/source/helpers/downloader.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+var __WEBPACK_AMD_DEFINE_RESULT__;﻿
+!(__WEBPACK_AMD_DEFINE_RESULT__ = (function () {
+    var _me = {
+        download: function (blob, fileName) {
+            // IE 10+
+            if (typeof navigator !== "undefined" && navigator.msSaveOrOpenBlob) {
+                navigator.msSaveOrOpenBlob(blob, fileName);
+            } else {
+                var element = window.document.createElement('a');
+                element.href = window.URL.createObjectURL(blob);
+                element.download = fileName;
+                document.body.appendChild(element);
+                element.click();
+                document.body.removeChild(element);
+            }
+        }
+    };
+
+    return _me;
+}).call(exports, __webpack_require__, exports, module),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+/***/ }),
+
 /***/ "./www/js/source/lib/jquery.multiselect.nlevel.js":
 /*!********************************************************!*\
   !*** ./www/js/source/lib/jquery.multiselect.nlevel.js ***!
@@ -1605,7 +1637,7 @@ Array.prototype.insertBefore = function (value, before) {
 
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js"), __webpack_require__(/*! lib/jquery.multiselect.nlevel */ "./www/js/source/lib/jquery.multiselect.nlevel.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, Site) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js"), __webpack_require__(/*! helpers/downloader */ "./www/js/source/helpers/downloader.js"), __webpack_require__(/*! lib/jquery.multiselect.nlevel */ "./www/js/source/lib/jquery.multiselect.nlevel.js"), ], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, Site, Downloader) {
 
         var LIST_LEAGUES_HEIGHT = 250;
         var LIST_LEAGUES_WIDTH = 350;
@@ -1741,17 +1773,10 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                     .then(response => {
                         if(response.status === 200)
                         {
-                            console.log(response);
                              response.blob().then(file =>
                              {
-                                console.log(response);
-                                const blob = new Blob([file]);
-                                const downloadUrl = URL.createObjectURL(blob);
-                                const a = document.createElement("a");
-                                a.href = downloadUrl;
-                                a.download = _me.getFileName(response);
-                                document.body.appendChild(a);
-                                a.click();
+                                 const fileName = _me.getFileName(response);
+                                 Downloader.download(file, fileName);
                              })
                         }
                         else
