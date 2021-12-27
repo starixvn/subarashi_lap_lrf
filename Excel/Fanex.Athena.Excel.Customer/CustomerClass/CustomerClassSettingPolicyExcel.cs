@@ -32,6 +32,8 @@ namespace Fanex.Athena.Excel.Customer.CustomerClass
         private const int MaxPerMatchColumn = 11;
         private const int RepeatedBetColumn = 12;
 
+        private const string CURRENCY = "MYR";
+
         private readonly string _reporTitle;
         private readonly IList<string> _headerTexts;
 
@@ -67,9 +69,10 @@ namespace Fanex.Athena.Excel.Customer.CustomerClass
                 ViewResources.Platform,
                 ViewResources.LeagueGroup,
                 ViewResources.BetInterval,
-                ViewResources.MinBet,
-                ViewResources.MaxPerBet,
-                ViewResources.MaxPerMatch2,
+                ViewResources.AgentBetInterval,
+                ViewResources.MinBet + $" ({CURRENCY})",
+                ViewResources.MaxPerBet + $" ({CURRENCY})",
+                ViewResources.MaxPerMatch2 + $" ({CURRENCY})",
                 ViewResources.RepeatedBets
             };
         }

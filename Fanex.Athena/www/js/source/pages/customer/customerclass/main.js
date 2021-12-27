@@ -1,7 +1,7 @@
 ﻿'use strict';
 define(
-    ['jquery', 'common/site', 'lib/jquery.multiselect.nlevel'],
-    function ($, Site) {
+    ['jquery', 'common/site', 'helpers/downloader', 'lib/jquery.multiselect.nlevel', ],
+    function ($, Site, Downloader) {
 
         var LIST_LEAGUES_HEIGHT = 250;
         var LIST_LEAGUES_WIDTH = 350;
@@ -137,17 +137,10 @@ define(
                     .then(response => {
                         if(response.status === 200)
                         {
-                            console.log(response);
                              response.blob().then(file =>
                              {
-                                console.log(response);
-                                const blob = new Blob([file]);
-                                const downloadUrl = URL.createObjectURL(blob);
-                                const a = document.createElement("a");
-                                a.href = downloadUrl;
-                                a.download = _me.getFileName(response);
-                                document.body.appendChild(a);
-                                a.click();
+                                 const fileName = _me.getFileName(response);
+                                 Downloader.download(file, fileName);
                              })
                         }
                         else
