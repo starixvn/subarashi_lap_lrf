@@ -22,17 +22,9 @@ define(
             },
             initialize: function () {
                 Site.initialize();
-                _me.initElements();
-                _me.initCustomerClassOption();
+                _me.initCustomerClassOption(); 
                 _me.initBtnClickEvent();
-                _me.elements.viewLeaguesIcon.click(function () {
-                    var self = $(this);
-                    _me.showLeagues(self);
-                });
-                _me.elements.closeIcon.click(function () {
-                    _me.resetListLeagues();
-                    _me.elements.listLeaguesDiv.addClass("hide");
-                });
+                _me.initTableIconClick();               
             },
             initElements: function () {
                 _me.elements.viewLeaguesIcon = $(".view-leagues");
@@ -88,6 +80,17 @@ define(
                     }
                 });
             },
+            initTableIconClick: function (){
+                _me.initElements();
+                _me.elements.viewLeaguesIcon.click(function () {
+                    var self = $(this);
+                    _me.showLeagues(self);
+                });
+                _me.elements.closeIcon.click(function () {
+                    _me.resetListLeagues();
+                    _me.elements.listLeaguesDiv.addClass("hide");
+                });
+            },
             initBtnClickEvent: function (){
                 $('#btn-submit').click(() => {
                     const checkedItem = $('#customer-class-multiselect').multiSelect('getCheckedItems');
@@ -103,6 +106,7 @@ define(
                         url: Site.resolveClientUrl(URL_DATA),
                         success: function (response) {
                             $('#main-content').html(response);
+                            _me.initTableIconClick();
                             Site.unBlockUI();
                             _curSearchCustomerClasses = data.customerClassIds;
                         },

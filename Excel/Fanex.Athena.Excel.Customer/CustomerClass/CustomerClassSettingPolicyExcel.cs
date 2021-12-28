@@ -33,6 +33,7 @@ namespace Fanex.Athena.Excel.Customer.CustomerClass
         private const int RepeatedBetColumn = 12;
 
         private const string CURRENCY = "MYR";
+        private const string DEFAULT_VALUE = "-";
 
         private readonly string _reporTitle;
         private readonly IList<string> _headerTexts;
@@ -140,7 +141,14 @@ namespace Fanex.Athena.Excel.Customer.CustomerClass
                 }
                 else
                 {
-                    row.Cells[columnName.Key].SetCellValue(cellValue);
+                    if (cellValue == null)
+                    {
+                        row.Cells[columnName.Key].SetCellValue(DEFAULT_VALUE);
+                    }
+                    else
+                    {
+                        row.Cells[columnName.Key].SetCellValue(cellValue);
+                    }
                 }
             }
         }

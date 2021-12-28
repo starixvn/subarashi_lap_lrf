@@ -14,6 +14,7 @@ namespace Fanex.Athena.Excel.Customer.CustomerClass
 {
     public class CustomerClassSpreadSettingPolicyExcel : ReportBase
     {
+        private const string DEFAULT_VALUE = "-";
 
         private const int ColumnTemplateCount = 5;
         private const int RowContentTemplate = 2;
@@ -26,7 +27,6 @@ namespace Fanex.Athena.Excel.Customer.CustomerClass
 
         private readonly string _reporTitle;
         private readonly IList<string> _headerTexts;
-
         private readonly IEnumerable<CustomerClassModel> _data;
 
         private readonly IDictionary<int, string> _gridCommonColumNames = new Dictionary<int, string>
@@ -107,7 +107,14 @@ namespace Fanex.Athena.Excel.Customer.CustomerClass
             foreach (var columnName in _gridCommonColumNames)
             {
                 var cellValue = itemType.GetProperty(columnName.Value).GetValue(item, null);
-                row.Cells[columnName.Key].SetCellValue(cellValue);
+                if (cellValue == null)
+                {
+                    row.Cells[columnName.Key].SetCellValue(DEFAULT_VALUE);
+                }
+                else
+                {
+                    row.Cells[columnName.Key].SetCellValue(cellValue);
+                }
             }
         }
 
