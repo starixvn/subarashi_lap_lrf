@@ -6,17 +6,21 @@
     Layout = "~/Views/Desktop/Shared/_Report.jqGridLayout.cshtml";
     var isSettingPolicyTab = ViewBag.TabKey == (byte)CustomerClassTabType.SettingPolicy;
     var classNameTab = isSettingPolicyTab ? "customer-class-policy-setting" : "customer-class-spread-setting";
+    var customerClassOption = Model.Select(m => Convert.ToInt32(m.Id));
 }
 @section pagecss {
     <link href="@Url.ContentLinkByEnv("/www/css/build/pages/customer/customer-class.css")" rel="stylesheet" />
 }
 @section pagejs {
-    @if (isSettingPolicyTab)
-    {
-        <script src="@Url.ContentLinkByEnv("/www/js/build/pages/customer/customerclass.chunk.js")"></script>
-    }
+    <script src="@Url.ContentLinkByEnv("/www/js/build/pages/customer/customerclass.chunk.js")"></script>
+    <script>
+        window.customerClasses = @JsonHelper.ToJson(ViewBag.CustomerClass);
+    </script>
+
 }
 @section Content{
+    <input id="tab-key-val" hidden value="@ViewBag.TabKey" />
+    @Html.Hidden("CustomerClasses", customerClassOption.ToJson())
     <div class="page-results @classNameTab">
         <div class="tab">
             <ul>
@@ -28,8 +32,25 @@
                 </li>
             </ul>
         </div>
+        <div class="card-panel">
+            <div class="row">
+                <div class="col m3 s3 l3 xl2 input-field col">
+                    <div class="multiselect-container">
+                        <select id="customer-class-multiselect" name="customer-class-multiselect"></select>
+                    </div>
+                    <label for="customer-class-ids"> @ViewResources.CustomerClass</label>
+                </div>
+                <div class="col m5 s5 l5 xl5">
+                    <div class="button-block">
+                        <button id="btn-submit" class="btn orange accent-4 white-text">@ViewResources.Submit</button>
+                        <button id="btn-export-excel" class="btn orange accent-4 white-text">@ViewResources.ExportToExcel</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
         <div class="result-content">
-            <div class="main-content">
+            <div class="main-content" id="main-content">
                 @if (ViewBag.TabKey == (byte)CustomerClassTabType.SettingPolicy)
                 {
                     Html.RenderPartial("~/Views/Desktop/Customer/CustomerClass/SettingPolicyTab.cshtml", Model);
@@ -42,3 +63,4 @@
         </div>
     </div>
 }
+

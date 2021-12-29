@@ -665,5 +665,8 @@ div.icon-edit, div.icon-delete {
 .fixed-table-container {
   min-width: 1100px; }
 
+.input-field label {
+  width: 100%; }
+
 
 /*# sourceMappingURL=commgrouplist.css.map*/

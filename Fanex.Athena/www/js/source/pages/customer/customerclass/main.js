@@ -1,10 +1,15 @@
 ﻿'use strict';
 define(
-    ['jquery', 'common/site'],
-    function ($, Site) {
+    ['jquery', 'common/site', 'helpers/downloader', 'lib/jquery.multiselect.nlevel', ],
+    function ($, Site, Downloader) {
 
         var LIST_LEAGUES_HEIGHT = 250;
         var LIST_LEAGUES_WIDTH = 350;
+        const URL_DATA = 'CustomerClass/GetCustomerSettingPolicy';
+        const URL_EXCEL = 'CustomerClass/ExportExcel';
+        let _xsrfToken = null;
+
+        let _curSearchCustomerClasses = [];
 
         const _me = {
             elements: {
@@ -12,10 +17,70 @@ define(
                 closeIcon: null,
                 listLeaguesDiv: null,
                 listLeaguesUl: null,
-                wrapper: null
+                wrapper: null,
+                customerClassSel: null,
             },
             initialize: function () {
                 Site.initialize();
+                _me.initCustomerClassOption(); 
+                _me.initBtnClickEvent();
+                _me.initTableIconClick();               
+            },
+            initElements: function () {
+                _me.elements.viewLeaguesIcon = $(".view-leagues");
+                _me.elements.closeIcon = $(".icon-close");
+                _me.elements.listLeaguesDiv = $("#list-leagues");
+                _me.elements.listLeaguesUl = $("#ul-list-leagues");
+                _me.elements.wrapper = $(".wrapper")[0];
+                _me.elements.customerClassSel = $("#customer-class-ids");
+            },
+            initCustomerClassOption: function() {
+                let data = $('#CustomerClasses').val();
+                if (!data) {
+                    return;
+                }
+
+                data = $.parseJSON(data);
+                _curSearchCustomerClasses = data;
+
+                const totalColumns = data.length;
+                const dataUI = [];
+                for (let i = 0; i < totalColumns; i++) {
+
+                    dataUI.push({
+                        Id: data[i],
+                        Value: data[i],
+                        Text: data[i],
+                        Checked: true,
+                        Enable: true,
+                        Css: '',
+                        CssClass: ''
+                    });
+                }
+                $('#customer-class-multiselect').multiSelect({
+                    minWidth: 100,
+                    maxHeight: 400,
+                    shadow: true,
+                    showHeader: true,
+                    isCheckAll: true,
+                    showFooter: false,
+                    checkAllText: Site.getSingleResource('All'),
+                    noneSelectedText: Site.getSingleResource('SelectOptions'),
+                    tooltipNoItem: Site.getSingleResource('ThereIsNoSelectedItem'),
+                    selectedText: Site.getSingleResource('SelectedItemCount'),
+                    listData: dataUI,
+                    onCheck: function () {
+                        const checkedItems = $('#customer-class-multiselect').multiSelect('getCheckedItems');
+                        if (!checkedItems.length) {
+                            $('#btn-submit').prop('disabled', true);
+                        }
+                        else{
+                            $('#btn-submit').prop('disabled', false);
+                        }
+                    }
+                });
+            },
+            initTableIconClick: function (){
                 _me.initElements();
                 _me.elements.viewLeaguesIcon.click(function () {
                     var self = $(this);
@@ -26,13 +91,91 @@ define(
                     _me.elements.listLeaguesDiv.addClass("hide");
                 });
             },
-            initElements: function () {
-                _me.elements.viewLeaguesIcon = $(".view-leagues");
-                _me.elements.closeIcon = $(".icon-close");
-                _me.elements.listLeaguesDiv = $("#list-leagues");
-                _me.elements.listLeaguesUl = $("#ul-list-leagues");
-                _me.elements.wrapper = $(".wrapper")[0];
+            initBtnClickEvent: function (){
+                $('#btn-submit').click(() => {
+                    const checkedItem = $('#customer-class-multiselect').multiSelect('getCheckedItems');
+                    let data = {};
+                    data.tabKey = $('#tab-key-val').val();
+                    data.customerClassIds = checkedItem;
+                    const option = {
+                        type: 'POST',
+                        data: data,
+                        dataType: 'text',
+                        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                        cache: false,
+                        url: Site.resolveClientUrl(URL_DATA),
+                        success: function (response) {
+                            $('#main-content').html(response);
+                            _me.initTableIconClick();
+                            Site.unBlockUI();
+                            _curSearchCustomerClasses = data.customerClassIds;
+                        },
+                        beforeSend: function () {
+                            Site.blockUI();
+                        },
+                        error: function () {
+                            Site.unBlockUI();
+                        }
+                    };
+
+                    $.ajax(option);
+                })
+
+                $('#btn-export-excel').click(() => {
+                    let data = new URLSearchParams();
+                    data.append('tabKey', $('#tab-key-val').val());
+                    for (const id of _curSearchCustomerClasses) {
+                        data.append('customerClassIds', id);
+                    }
+                    
+                    data.customerClassIds = _curSearchCustomerClasses;
+                    fetch(Site.resolveClientUrl(URL_EXCEL), {
+                        body: data,
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                            'X-Requested-With': 'XMLHttpRequest',
+                            '__RequestVerificationToken': _me.getXsrfToken()
+                        }
+                    })
+                    .then(response => {
+                        if(response.status === 200)
+                        {
+                             response.blob().then(file =>
+                             {
+                                 const fileName = _me.getFileName(response);
+                                 Downloader.download(file, fileName);
+                             })
+                        }
+                        else
+                        {
+                            alert("Download Error");
+                        }
+                    })               
+                })
             },
+
+            getXsrfToken: function(){
+                if (!_xsrfToken) {
+                    _xsrfToken = document.querySelector("input[name=__RequestVerificationToken]").value;
+                }
+            
+                return _xsrfToken;
+            },
+
+            getFileName:  function(response){
+                var filename = "";
+                var disposition = response.headers.get('Content-Disposition');
+                if (disposition && disposition.indexOf('attachment') !== -1) {
+                    var filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+                    var matches = filenameRegex.exec(disposition);
+                    if (matches != null && matches[1]) { 
+                      filename = matches[1].replace(/['"]/g, '');
+                    }
+                }
+                return filename;
+            },
+
             showLeagues: function (self) {
                 var sportType = self.attr("data-sport-type");
                 var leagueGroupId = self.attr("data-league-group");
