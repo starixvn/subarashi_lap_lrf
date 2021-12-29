@@ -1096,7 +1096,6 @@
     <Content Include="Views\Desktop\Customer\CustomerClass\CustomerClassInformation.cshtml" />
     <Content Include="Views\Desktop\BetList\Joker\Main.cshtml" />
     <Content Include="Views\Desktop\Report\SabaVirtualSportsWinLoss\Content.cshtml" />
-    <Content Include="App_Data\Template\PlayerAdmin\DetailTransaction.xls" />
     <Content Include="Views\Desktop\BetList\PGSDetail\Main.cshtml" />
     <Content Include="Views\Desktop\Report\SabaVirtualSportsWinLoss\Filter.cshtml" />
     <Content Include="Views\Desktop\Report\SabaVirtualSportsWinLoss\Main.cshtml" />
@@ -1144,6 +1143,7 @@
     <Content Include="Views\Desktop\BetList\LiveReport\SportsLottery.cshtml" />
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\CustomerClassSettingPolicy.xls" />
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\CustomerClassSpreadSettingPolicy.xls" />
+    <Content Include="App_Data\Template\Notification\Resettlement\TicketListing.xls" />
     <None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
     <None Include="www\css\source\pages\betlist\result\result.happy5.scss" />
     <None Include="www\css\source\reactpages\components\alert\icons\error.scss" />
@@ -3100,12 +3100,6 @@
     <Content Include="www\js\source\reactpages\pages\casinoturnover\components\FormFilter.jsx" />
     <Content Include="www\js\source\reactpages\pages\casinoturnover\components\index.jsx" />
     <Content Include="www\js\source\reactpages\pages\casinoturnover\components\DataGrid.jsx" />
-    <Content Include="www\css\source\reactpages\pages\playeradmin\index.scss" />
-    <Content Include="www\css\source\reactpages\pages\playeradmin\account-info.scss" />
-    <Content Include="www\css\source\reactpages\pages\playeradmin\running-betlist.scss" />
-    <Content Include="www\css\source\reactpages\pages\playeradmin\betlimit.scss" />
-    <Content Include="www\css\source\reactpages\pages\playeradmin\playerwinloss.scss" />
-    <Content Include="www\css\source\reactpages\pages\playeradmin\statement.scss" />
     <Content Include="www\css\source\reactpages\pages\dailybets\index.scss" />
     <Content Include="www\js\build\dev\reactpages\report\dailybets.chunk.js.map" />
     <Content Include="www\css\source\reactpages\pages\exchangevoided\index.scss" />
@@ -3114,7 +3108,6 @@
     <Content Include="www\js\source\reactpages\pages\bettingticketscenter\advancedsearch\components\__tests__\__snapshots__\DataGrid.test.js.snap" />
     <Content Include="www\js\source\reactpages\pages\bettingticketscenter\advancedsearch\components\__tests__\__snapshots__\FormFilter.render.test.js.snap" />
     <Content Include="www\js\build\dev\reactpages\bettingticketscenter\advancedsearch.chunk.js.map" />
-    <Content Include="www\css\source\reactpages\pages\playeradmin\detailtransaction.scss" />
     <Content Include="www\js\build\dev\pages\reports\sabavirtualsportswinloss.chunk.js.map" />
     <Content Include="www\js\build\dev\pages\reports\godoffortunewinLoss.chunk.js.map" />
     <Content Include="www\js\build\dev\pages\customer\customerclass.chunk.js.map" />

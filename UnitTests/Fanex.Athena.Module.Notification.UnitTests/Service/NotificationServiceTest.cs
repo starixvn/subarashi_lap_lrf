@@ -5,12 +5,13 @@
 
     using Extension.Utility;
     using Extension.Utility.Interfaces;
-
+    using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
     using Fanex.Athena.Module.Notification.DTO;
     using Fanex.Athena.Module.Notification.MetaModel;
     using Fanex.Athena.Module.Notification.Service;
     using Fanex.Athena.Module.Notification.Service.Interfaces;
     using Fanex.Athena.Resources;
+    using Fanex.Athena.VendorAdapter.Interfaces;
     using Fanex.Logging;
 
     using Model.Core.DTO.Common;
@@ -29,13 +30,22 @@
 
         private INotificationService _notificationService;
 
+        private IDbFactory _dbFactory;
+        private IBalanceUpDataAccess _balanceUpDataAccess;
+        private ICacheRefAdapter _cacheRefAdapter;
+
+
         [OneTimeSetUp]
         public void FixtureSetUp()
         {
             _logger = Substitute.For<ILogger>();
             _appSettings = Substitute.For<IAppSettings>();
             _webClientService = Substitute.For<IWebClientService>();
-            _notificationService = new NotificationService(_logger, _appSettings, _webClientService);
+            _dbFactory = Substitute.For<IDbFactory>();
+            _balanceUpDataAccess = Substitute.For<IBalanceUpDataAccess>();
+            _cacheRefAdapter = Substitute.For<ICacheRefAdapter>();
+
+            _notificationService = new NotificationService(_logger, _appSettings, _webClientService, _dbFactory, _balanceUpDataAccess, _cacheRefAdapter);
         }
 
         [OneTimeTearDown]

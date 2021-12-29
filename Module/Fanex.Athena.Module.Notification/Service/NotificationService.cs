@@ -1,5 +1,6 @@
 ﻿namespace Fanex.Athena.Module.Notification.Service
 {
+    using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Extension.Utility.Interfaces;
     using Fanex.Athena.Model.Core.DTO.Common;
@@ -7,12 +8,16 @@
     using Fanex.Athena.Module.Notification.DTO;
     using Fanex.Athena.Module.Notification.MetaModel;
     using Fanex.Athena.Resources;
+    using Fanex.Athena.VendorAdapter.Interfaces;
+    using Fanex.Data;
     using Fanex.Logging;
     using Interfaces;
     using Newtonsoft.Json.Linq;
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
 
     public class NotificationService : INotificationService
     {
@@ -30,19 +35,26 @@
         };
 
         private readonly ILogger _logger;
-
         private readonly IAppSettings _appSetting;
-
         private readonly IWebClientService _webClientService;
+        private readonly IDbFactory _dbFactory;
+        private readonly IBalanceUpDataAccess _balanceUpDataAccess;
+        private readonly ICacheRefAdapter _cacheRefAdapter;
 
         public NotificationService(
             ILogger logger,
             IAppSettings appSetting,
-            IWebClientService webClientService)
+            IWebClientService webClientService,
+            IDbFactory dbFactory,
+            IBalanceUpDataAccess balanceUpDataAccess,
+            ICacheRefAdapter cacheRefAdapter)
         {
             _logger = logger;
             _appSetting = appSetting;
             _webClientService = webClientService;
+            _dbFactory = dbFactory;
+            _balanceUpDataAccess = balanceUpDataAccess;
+            _cacheRefAdapter = cacheRefAdapter;
         }
 
         public ReportResultModel<NotificationMessage> GetNotificationMessages(NotificationMetaModel metaModel)
@@ -143,6 +155,40 @@
             return result;
         }
 
+        public async Task<AmendmentTicketListing> GetAmendmentTicketListing(AmendmentTicketListingMetaModel metaModel)
+        {
+            const string SpKey = "Lrf_AmendmentTicketListingSel";
+            var result = AmendmentTicketListing.Empty();
+            using (var objectDb = _dbFactory.GetObjectDb(SpKey))
+            {
+                var balanceUp = _balanceUpDataAccess.GetBalanceUp();
+                objectDb.SetParameterValue("SessionId", metaModel.SessionId);
+                objectDb.SetParameterValue("AgentList", metaModel.AgentListXml);
+                objectDb.SetParameterValue("MoveBetsDay", balanceUp.MoveBetsDay);
+                objectDb.SetParameterValue("BalanceUpDay", balanceUp.BalanceUpDay);
+
+                using (var reader = await objectDb.ExecuteReaderAsync())
+                {
+                    var index = 0;
+                    while (reader.Read())
+                    {
+                        result.Data.Add(new AmendmentTicket
+                        {
+                            Index = ++index,
+                            RefNo = Convert.ToString(reader["RefNo"]),
+                            ExternalId = Convert.ToString(reader["ExternalId"]),
+                            SystemId = Convert.ToString(reader["SystemId"])
+                        });
+                    }
+                }
+
+                result.MatchInfo = ReadMatchInfo(objectDb);
+            }
+
+            return result;
+        }
+
+
         public IResultInfo GetFileAttachmentData(NotificationAttachmentMetaModel metaModel)
         {
             var url = string.Format(_appSetting.ResultAmendmentAttachmentApiUrl, metaModel.FileName);
@@ -208,13 +254,17 @@
 
         private ResultAmendment MapToResultAmendment(JToken token, string subjectKey, string contentKey)
         {
+            const string DefaultSubjectKey = "SubjectEn";
+            var subject = token[subjectKey].Value<string>();
+
             return new ResultAmendment
             {
                 Id = token["MessageId"].Value<int>(),
                 DateTime = token["EventDate"].Value<DateTime>(),
                 Content = token[contentKey].Value<string>(),
-                Subject = token[subjectKey].Value<string>(),
+                Subject = string.IsNullOrWhiteSpace(subject) ? token[DefaultSubjectKey].Value<string>() : subject,
                 DataFilePath = token["DataFilePath"].Value<string>(),
+                SessionId = token["SessionId"].Value<string>(),
                 IsRead = token["IsRead"].Value<bool>(),
                 Type = _notificationType[nameof(ResultAmendment)]
             };
@@ -223,6 +273,32 @@
         private void LogError(string api, Exception exception)
         {
             _logger.Error(exception.Message + "\nApiUrl: " + api, exception);
+        }
+
+        private string ReadMatchInfo(IObjectDb objectDb)
+        {
+            var outputParams = objectDb.GetOutputParams();
+            if (int.TryParse(outputParams["ProductId"]?.ToString(), out int productId)
+                && DateTime.TryParse(outputParams["EventDate"]?.ToString(), out DateTime eventDate))
+            {
+                const int ProductSB = 1;
+                return productId == ProductSB ? GetSBMatchInfo(outputParams, eventDate) : GetOtherProductMatchInfo(outputParams, eventDate);
+            }
+            return string.Empty;
+        }
+
+        private string GetSBMatchInfo(Hashtable outputParams, DateTime eventDate)
+        {
+            const string SBMatchFormat = "{0}{1} -vs- {2} - {3}";
+            return string.Format(SBMatchFormat, _cacheRefAdapter.GetTeamName(outputParams["HomeId"]), (outputParams["IsNeutral"] as bool?).GetValueOrDefault() ? " (N)" : string.Empty,
+              _cacheRefAdapter.GetTeamName(outputParams["AwayId"]),
+              eventDate.ToString("MM/d/yyyy"));
+        }
+
+        private string GetOtherProductMatchInfo(Hashtable outputParams, DateTime eventDate)
+        {
+            const string OtherSportMatchFormat = "{0} No.{1} - {2}";
+            return string.Format(OtherSportMatchFormat, _cacheRefAdapter.GetSportName(outputParams["SportType"]), outputParams["MatchCode"], eventDate.ToString("MM/d/yyyy"));
         }
     }
 }

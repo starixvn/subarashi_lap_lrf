@@ -1,4 +1,4 @@
-﻿// Generated at: 12/2/2021 8:45:24 AM
+﻿// Generated at: 12/28/2021 5:57:01 PM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -755,6 +755,7 @@ Thursday:"Thursday",
 TicketDetailOf:"Ticket detail of {0}",
 TicketFilter:"Ticket filter",
 TicketList:"Ticket List",
+TicketListing:"Ticket Listing",
 TicketNo:"Ticket No.",
 TicketPayout:"Ticket Payout",
 TicketType:"Ticket Type",

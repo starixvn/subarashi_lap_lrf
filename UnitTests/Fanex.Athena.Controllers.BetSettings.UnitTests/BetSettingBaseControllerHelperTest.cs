@@ -22,8 +22,9 @@
     {
         protected ICoreBetSettingService CoreBetSettingService { get; private set; }
 
-        protected IProductService ProductService { get; private set; }
         protected ILicenseeSettingService LicenseeSettingService { get; set; }
+
+
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {

@@ -32,6 +32,12 @@ const downloadData = (params) => {
     });
 }
 
+export const setSelectedViewEvent = data => ({
+    type: types.SET_SELECTED_VIEW_EVENT,
+    data
+})
+
+
 export function getGridData(params) {
     return (dispatch) => {
         fetchData(params).then(response => {
