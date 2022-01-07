@@ -11,6 +11,7 @@ import * as dateRangeAction from '@jsroot/actions/dateRangeAction'
 import * as userGuideAction from '@jsroot/actions/userGuideAction'
 import * as requestParamAction from '@jsroot/actions/requestParamAction'
 import * as reportTitleAction from '@jsroot/actions/reportTitleAction'
+import * as usernameAction from '@jsroot/actions/usernameAction'
 
 
 export default {
@@ -26,5 +27,6 @@ export default {
     ...dateRangeAction,
     ...userGuideAction,
     ...requestParamAction,
-    ...reportTitleAction
+    ...reportTitleAction,
+    ...usernameAction
 }
