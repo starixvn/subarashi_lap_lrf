@@ -358,4 +358,7 @@
     <value>玩家當前餘額(後台)</value>
     <comment>165136</comment>
   </data>
+  <data name="extrapayout" xml:space="preserve">
+    <value>额外派彩</value>
+  </data>
 </root>

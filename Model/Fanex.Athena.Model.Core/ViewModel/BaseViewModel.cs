@@ -12,6 +12,8 @@ namespace Fanex.Athena.Model.Core.ViewModel
     {
         public bool IsAllowedCustomerCommission { get; set; }
 
+        public bool HasExtraPayoutPermission { get; set; }
+
         public ProductAccess ProductAccess { get; set; }
 
         public IDictionary<int, string> CurrencyList { get; set; }

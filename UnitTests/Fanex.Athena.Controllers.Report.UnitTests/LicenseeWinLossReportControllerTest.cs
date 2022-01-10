@@ -104,6 +104,9 @@
                 SessionService.UserSession.Language,
                 Arg.Is<string>(x => x == FunctionNames.LicenseeWinLoss || x == FunctionNames.SpecialLicenseeWinLoss))
                 .Returns(new ProductAccess(new List<Product>()));
+
+            authService.HasPermissions(SessionService.UserSession, PermissionKeys.ReportExtraPayout).Returns(true);
+
             return new LicenseeWinLossReportController(reportSettingService, authService)
             {
                 LangService = LangService,

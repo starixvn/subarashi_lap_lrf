@@ -44,6 +44,14 @@
     <footer>
         <p class="center-align copy-right">Copyright &#169;@licenseeName. All rights reserved.</p>
     </footer>
+    <script>
+        window.addEventListener("message", function (event) {
+            const message = event.data;
+            if (message && message.key === 'lrf_go_to_extra_payout_report') {
+                $('li>#MenuItem96').get(0)?.click();
+            }
+        }, false);
+    </script>
     <script src="@Url.ContentLinkByEnv("/www/js/build/language.chunk.js")"></script>
     @if (langCode != "en-US")
     {

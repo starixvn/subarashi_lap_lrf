@@ -22,15 +22,19 @@ namespace Fanex.Athena.Controllers.Report
 
         private readonly IReportAPIClient _reportAPIClient;
 
+        private readonly IAuthorizationService _authService;
+
         private const int TimeOutInSecond = 180;
 
         public CustomerWinLossReportController(
             IReportSettingService reportSettingService,
+            IAuthorizationService authService,
             IReportAPIClient reportAPIClient
             )
         {
             _reportSettingService = reportSettingService;
             _reportAPIClient = reportAPIClient;
+            _authService = authService;
         }
 
         [HttpGet]
@@ -93,7 +97,8 @@ namespace Fanex.Athena.Controllers.Report
                 ProductAccess = productAccess,
                 IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeName),
                 MinDate = reportSetting.MinDate,
-                MaxDate = reportSetting.MaxDate
+                MaxDate = reportSetting.MaxDate,
+                HasExtraPayoutPermission = _authService.HasPermissions(SessionServiceInstance.UserSession, PermissionKeys.ReportExtraPayout)
             };
 
             return View("~/Views/Desktop/Report/CustomerWinLoss/Main.cshtml", model);

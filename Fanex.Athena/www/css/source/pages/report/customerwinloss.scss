@@ -5,6 +5,7 @@
 @import '../../components/sortableheader/sortableheader';
 @import "../../components/autocomplete/autocomplete";
 @import "../../components/toast/toast";
+@import '../../reactpages/components/alert/icons.scss';
 
 .right-filter-menu {
     position: absolute;
@@ -15,4 +16,16 @@
         margin-top: 3px;
         text-decoration: underline;
     }
+}
+
+.confirm-action {
+    text-align: center;
+}
+
+.btn-popup {
+    margin-right: 15px;
+}
+
+.flat-popup .wrapContent .popup-button .btn {
+    margin: 15px 0 0 0;
 }

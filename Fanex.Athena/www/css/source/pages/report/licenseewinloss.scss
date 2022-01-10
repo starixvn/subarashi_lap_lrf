@@ -4,6 +4,7 @@
 @import '../../components/sortableheader/sortableheader';
 @import "../../components/jqgrid/multipletotalblock";
 @import "../../components/toast/toast";
+@import '../../reactpages/components/alert/icons.scss';
 
 $bgheaderButton: #2c3d4b;
 $colorTextTotal: $black;
@@ -59,4 +60,16 @@ $colorTextTotal: $black;
         margin-top: 3px;
         text-decoration: underline;
     }
+}
+
+.confirm-action {
+    text-align: center;
+}
+
+.btn-popup {
+    margin-right: 15px;
+}
+
+.flat-popup .wrapContent .popup-button .btn {
+    margin: 15px 0 0 0;
 }

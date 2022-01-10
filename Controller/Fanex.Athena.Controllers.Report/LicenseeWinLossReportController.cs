@@ -108,6 +108,7 @@ namespace Fanex.Athena.Controllers.Report
                 IsAllowedCustomerCommission = licenseeSession.IsAllowedCustomerComm,
                 ProductAccess = productAccess,
                 ReportSetting = reportSetting,
+                HasExtraPayoutPermission = _authService.HasPermissions(SessionServiceInstance.UserSession, PermissionKeys.ReportExtraPayout)
             };
             return View("~/Views/Desktop/Report/LicenseeWinLoss/Main.cshtml", model);
         }
