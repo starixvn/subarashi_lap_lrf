@@ -28,7 +28,7 @@ namespace Fanex.Athena.Module.Notification.Excels
 
         protected override void AssignTitle(ISheet sheet)
         {
-            sheet.SetTextRowValue(TemplateSheet, RowTitleTemplate, destRowIndex: RowTitleTemplate, 1, _data.MatchInfo);
+            sheet.SetTextRowValue(TemplateSheet, RowTitleTemplate, destRowIndex: RowTitleTemplate, 1, $"{ViewResources.TicketList} - {_data.MatchInfo}");
             sheet.CreateFreezePane(0, RowContentTemplate);
             ClearTemplate(sheet, RowContentTemplate);
         }
