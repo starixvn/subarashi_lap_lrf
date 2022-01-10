@@ -5357,6 +5357,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Site; });
 const _rootUrl = window.rootUrl || "/";
 
+const _isSelfMode = !!window.isSelfMode;
+
 let _xsrfToken = null;
 class Site {
   static getXsrfToken() {
@@ -5369,6 +5371,14 @@ class Site {
 
   static resolveClientUrl(relativeUrl) {
     return _rootUrl + relativeUrl;
+  }
+
+  static getLrfSubsidiary() {
+    try {
+      return _isSelfMode && top.getLrfSubsidiarySearch && top.getLrfSubsidiarySearch() || {};
+    } catch (e) {
+      return {};
+    }
   }
 
   static convertDateToString(date) {
