@@ -2,7 +2,28 @@
 @import "../../components/react-grid";
 @import "../../components/collapsibleRow";
 @import "../../vendors/notification";
+@import '../../components/popup';
 
 .unread td {
     background-color: #f5c0ab !important;
 }
+
+.popup-content {
+    padding: 10px 40px 10px 20px;
+}
+
+.ticket-listing-popup {
+    .ticket-listing-caption {
+        position: relative;
+        font-weight: bold;
+        font-size: 15px;
+        min-height: 30px;
+        color: #D2592D;
+        
+        .caret-block {
+            bottom: 5px;
+            right: 0;
+        }
+    }
+}
+

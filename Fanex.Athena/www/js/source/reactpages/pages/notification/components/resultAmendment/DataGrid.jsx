@@ -22,7 +22,7 @@ export class DataGrid extends Component {
     componentDidUpdate(prevProps, prevState) {
         if (this.props.param !== prevProps.param) {
             const paramData = this.props.param;
-            if(paramData) {
+            if (paramData) {
                 this.reportTitle = service.getReportTitle({
                     fromDate: paramData.FromDate,
                     toDate: paramData.ToDate
@@ -54,7 +54,7 @@ export class DataGrid extends Component {
         const { Data, Total } = this.props.gridData;
         Data[index].IsExpand = true;
 
-        if(!item.IsRead) {
+        if (!item.IsRead) {
             this.props.markItemAsRead({
                 Index: index,
                 Id: item.Id,
@@ -76,10 +76,10 @@ export class DataGrid extends Component {
 
         this.props.toggleLoader(true);
         this.props.exportAttachment(params).then(response => {
-            if(response.status === 204) {
+            if (response.status === 204) {
                 alert(LangHelper.getSingleResource('FileIsNotReady'));
             }
-            else{
+            else {
                 const blob = response.data;
                 Excel.downloadFromBolb(blob, fileName);
             }
@@ -102,35 +102,43 @@ export class DataGrid extends Component {
 
     _buildBody() {
         const data = this.props.gridData.Data;
-        const exportToExcelTitle = LangHelper.getSingleResource("ExportToExcel");
-
         let rows = [];
         let index = ((this.props.param.PageIndex - 1) * this.props.param.PageSize) + 1;
         for (let i = 0; i < data.length; i++) {
             const item = data[i];
             const datetimeString = moment(item.DateTime).format("MM/DD/YYYY");
             rows.push(
-                <Row key={`tr${i}`} className={ item.IsRead ? "" : "unread" }>
+                <Row key={`tr${i}`} className={item.IsRead ? "" : "unread"}>
                     <Cell title={index} className="center-align">{index}</Cell>
                     <Cell title={datetimeString} className="center-align">{datetimeString}</Cell>
                     <Cell className="notification-content">
-                        <CollapsibleRow 
-                            subject={item.Subject} 
+                        <CollapsibleRow
+                            subject={item.Subject}
                             content={item.Content}
-                            onExpand={() => this.onExpand(i, item)} 
+                            onExpand={() => this.onExpand(i, item)}
                             isExpand={item.IsExpand}
                             isHtml={true} />
                     </Cell>
-                    {
-                        Site.asNull(item.DataFilePath) === null 
-                        ? <Cell></Cell>
-                        : <Cell title={exportToExcelTitle} className="center-align"><a onClick={() => this.exportExcel(item)} className="icon-excel"></a></Cell>
-                    }
+                    {this._buildTicketListView(item)}
                 </Row>)
             index++;
         }
 
         return rows;
+    }
+
+    _buildTicketListView(item) {
+        if (!!Site.asNull(item.SessionId)) {
+            return <Cell className="center-align">
+                <button className="btn-default btn-link" onClick={() => this.props.setSelectedViewEvent(item)}>
+                    {LangHelper.getSingleResource("View")}
+                </button></Cell>
+        }
+
+        if (!!Site.asNull(item.DataFilePath)) {
+            return <Cell title={LangHelper.getSingleResource("ExportToExcel")} className="center-align"><a onClick={() => this.exportExcel(item)} className="icon-excel"></a></Cell>
+        }
+        return  <Cell />
     }
 
     _renderNodata() {
@@ -165,13 +173,13 @@ export class DataGrid extends Component {
                 <ReportTitle content={this.reportTitle} />
 
                 <Table minWidth={650}
-                       autoWidth={true}
-                       adjustedHeight={32}
-                       header={this._buildHeader()}
-                       body={this._buildBody()}
-                       isPaging={true}
-                       pageOption={pageOption}
-                       onPaging={this.onPaging} />
+                    autoWidth={true}
+                    adjustedHeight={32}
+                    header={this._buildHeader()}
+                    body={this._buildBody()}
+                    isPaging={true}
+                    pageOption={pageOption}
+                    onPaging={this.onPaging} />
             </div>
         );
     }

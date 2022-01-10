@@ -4,12 +4,15 @@
     using Fanex.Athena.Module.Notification.DTO;
     using Fanex.Athena.Module.Notification.MetaModel;
     using Model.Core.ResultModel;
+    using System.Threading.Tasks;
 
     public interface INotificationService
     {
         ReportResultModel<NotificationMessage> GetNotificationMessages(NotificationMetaModel metaModel);
 
         ReportResultModel<ResultAmendment> GetResultAmendment(NotificationMetaModel metaModel);
+
+        Task<AmendmentTicketListing> GetAmendmentTicketListing(AmendmentTicketListingMetaModel metaModel);
 
         IResultInfo MarkNotificationAsRead(NotificationMarkAsReadMetaModel metaModel);
 
