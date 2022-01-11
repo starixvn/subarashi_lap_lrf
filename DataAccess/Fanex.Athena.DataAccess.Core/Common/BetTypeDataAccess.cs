@@ -6,10 +6,13 @@
 
 namespace Fanex.Athena.DataAccess.Core.Common
 {
+    using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using Fanex.Athena.DataAccess.Core;
     using Fanex.Athena.DataAccess.Core.Common.Interfaces;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using VendorAdapter.Interfaces;
@@ -78,7 +81,20 @@ namespace Fanex.Athena.DataAccess.Core.Common
         public async Task<IList<CheckedItem>> GetBettypesByProduct(int licenseeId, string productCode, string languageCode)
         {
             const string UspName = "Lrf_SelBetTypesByProduct";
+
             IList<CheckedItem> results = new List<CheckedItem>();
+            var products = productCode?.ToUpperInvariant().Split(',');
+
+            if (products != null && products.IsPresent(_ => _ == Product.CO))
+            {
+                results = GetNewCOBettypes();
+                productCode = string.Join(",", products.Where(_ => _ != Product.CO));
+            }
+
+            if (string.IsNullOrEmpty(productCode))
+            {
+                return results;
+            }
 
             using (var db = this.GetObjectDb(UspName))
             {
@@ -107,6 +123,23 @@ namespace Fanex.Athena.DataAccess.Core.Common
             }
 
             return results;
+        }
+
+        public List<CheckedItem> GetNewCOBettypes()
+        {
+            var bettypeList = new List<CheckedItem>();
+
+            bettypeList.AddRange(new List<CheckedItem>
+            {
+                new CheckedItem { ID = (int)BetType.Handicap, Name = _cacheRefAdapter.GetBettype((int)BetType.Handicap) },
+                new CheckedItem { ID = (int)BetType.OverUnder, Name = _cacheRefAdapter.GetBettype((int)BetType.OverUnder) },
+                new CheckedItem { ID = (int)BetType.Ft1X2, Name = _cacheRefAdapter.GetBettype((int)BetType.Ft1X2) },
+                new CheckedItem { ID = (int)BetType.FirstHalfHandicap, Name = _cacheRefAdapter.GetBettype((int)BetType.FirstHalfHandicap) },
+                new CheckedItem { ID = (int)BetType.FirstHalfOverUnder, Name = _cacheRefAdapter.GetBettype((int)BetType.FirstHalfOverUnder) },
+                new CheckedItem { ID = (int)BetType.FirstHalf1X2, Name = _cacheRefAdapter.GetBettype((int)BetType.FirstHalf1X2) }
+            });
+
+            return bettypeList;
         }
     }
 }
