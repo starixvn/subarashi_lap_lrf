@@ -3092,4 +3092,26 @@
     <value>View subsidiary on reports</value>
     <comment>ignorejs</comment>
   </data>
+  <data name="GetAllCustomersHavingPositiveClosingBalance" xml:space="preserve">
+    <value>Only show customers having closing balance &gt; 0</value>
+  </data>
+  <data name="CustomerSupportTask" xml:space="preserve">
+    <value>Customer Support Task</value>
+    <comment>ignorejs</comment>
+  </data>
+  <data name="GetAllCustomersHavingRunningTickets" xml:space="preserve">
+    <value>Get all customers having running tickets</value>
+    <comment>165136</comment>
+  </data>
+  <data name="GetAllRunningTickets" xml:space="preserve">
+    <value>Get all running tickets</value>
+    <comment>165136</comment>
+  </data>
+  <data name="SupportTask" xml:space="preserve">
+    <value>Support Task</value>
+  </data>
+  <data name="CustomerReports" xml:space="preserve">
+    <value>Customer Reports</value>
+    <comment>ignorejs</comment>
+  </data>
 </root>

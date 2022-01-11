@@ -10,6 +10,7 @@
         new Dictionary<string, string>() :
         userSession.CurrencyList.ToDictionary(x => x.Key.ToString(), x => x.Value);
     var isParasiticMode = userSession != null && userSession.ApplicationMode == AppMode.Parasitic;
+    var isSelfMode = !isParasiticMode;
     var langCode = System.Globalization.CultureInfo.CurrentUICulture.IetfLanguageTag;
     var rootUrl = Url.Content("~");
 }
@@ -36,6 +37,7 @@
     <script type="text/javascript">
         var PageLanguage = "@langCode";
         window.rootUrl = '@rootUrl';
+        window.isSelfMode = @isSelfMode.ToString().ToLowerInvariant();
 
         @RenderSection("globaljscode", required: false)
     </script>

@@ -259,6 +259,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Customer Support Task.
+        /// </summary>
+        public static string customersupporttask {
+            get {
+                return ResourceManager.GetString("customersupporttask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Customer Turnover.
         /// </summary>
         public static string customerturnover51 {

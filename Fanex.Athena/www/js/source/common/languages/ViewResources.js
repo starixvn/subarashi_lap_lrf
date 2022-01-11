@@ -1,4 +1,4 @@
-﻿// Generated at: 12/28/2021 5:57:01 PM
+﻿// Generated at: 12/20/2021 10:19:25 AM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -328,6 +328,9 @@ GameType:"Game Type",
 GameTypeName:"Game Type Name",
 General:"General",
 GetAll:"Get All",
+GetAllCustomersHavingPositiveClosingBalance:"Only show customers having closing balance &gt; 0",
+GetAllCustomersHavingRunningTickets:"Get all customers having running tickets",
+GetAllRunningTickets:"Get all running tickets",
 Go:"Go",
 GodOfFortuneWinLoss:"God of Fortune Win Loss",
 GoldDeluxeNotOfferCurrency:"Gold Deluxe is not offered for this currency.",
@@ -743,6 +746,7 @@ SuccessUpdateVipStatus:"Successfully update: {0}",
 SuccessUpdateVipStatusSingle:"Successfully update",
 Summary:"Summary",
 Sunday:"Sunday",
+SupportTask:"Support Task",
 Suspended:"Suspended",
 SystemId:"System ID",
 SystemParlay:"System Parlay",

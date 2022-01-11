@@ -351,4 +351,8 @@
   <data name="godoffortunewinloss" xml:space="preserve">
     <value>財神爺輸贏</value>
   </data>
+  <data name="customerclosingbalance" xml:space="preserve">
+    <value>玩家當前餘額(後台)</value>
+    <comment>165136</comment>
+  </data>
 </root>
