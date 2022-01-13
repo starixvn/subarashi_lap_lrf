@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 1/10/2022 4:28:21 PM
+﻿// Generated at: 1/13/2022 9:07:18 AM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -425,6 +425,9 @@ GameType:"Game Type",
 GameTypeName:"Game Type Name",
 General:"General",
 GetAll:"Get All",
+GetAllCustomersHavingPositiveClosingBalance:"Only show customers having closing balance &gt; 0",
+GetAllCustomersHavingRunningTickets:"Get all customers having running tickets",
+GetAllRunningTickets:"Get all running tickets",
 Go:"Go",
 GodOfFortuneWinLoss:"God of Fortune Win Loss",
 GoldDeluxeNotOfferCurrency:"Gold Deluxe is not offered for this currency.",
@@ -844,6 +847,7 @@ SuccessUpdateVipStatus:"Successfully update: {0}",
 SuccessUpdateVipStatusSingle:"Successfully update",
 Summary:"Summary",
 Sunday:"Sunday",
+SupportTask:"Support Task",
 Suspended:"Suspended",
 SystemId:"System ID",
 SystemParlay:"System Parlay",

@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 12/20/2021 10:19:25 AM
+// Generated at: 1/13/2022 9:07:18 AM
 window._language_zh_TW = {
   AA: "客客",
   AbnormalBet: "非正規註單",
@@ -238,6 +238,7 @@ window._language_zh_TW = {
   Currentmonth: "本月",
   Currentweek: "本週",
   Customer: "會員",
+  CustomerAmount: "玩家金额",
   CustomerBalance: "會員餘額",
   CustomerBetList: "會員注單",
   CustomerComm: "會員傭金",
@@ -322,6 +323,7 @@ window._language_zh_TW = {
   ForecastAway: "客隊預測",
   ForecastHome: "主隊預測",
   Fr: "Fr",
+  FreeBets: "免費投注",
   FreePlay: "免費投注",
   Freeze: "暫停更新",
   Friday: "星期五",
@@ -415,6 +417,7 @@ window._language_zh_TW = {
   LicenseeW_L: "承租公司輸贏",
   LicenseeWinLoss: "承租公司輸贏",
   LicenseeWL: "承租公司輸贏",
+  LicSharingAmount: "承租公司分担金额",
   Live: "滾球",
   LiveGame: "滾球遊戲",
   LiveReport: "滾球報告",
@@ -576,7 +579,9 @@ window._language_zh_TW = {
   ProductVS2: "虛擬運動2",
   ProductWM: "完美真人",
   Promotion: "促銷活動",
+  PromotionDetails: "活動詳情",
   PromotionPrize: "活動獎金",
+  PromotionType: "活動類別",
   RB: "賽馬",
   RecommendBrowserOnReportPageMsg: "若頁面大小&gt; 1,000，請您考慮使用火狐或Chrome瀏覽器以獲得更好的體驗",
   RefNo: "注單號碼",
