@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "LAP - " + ViewResources.PromotionDetails;
+    Layout = "~/Views/Desktop/Shared/_ReactPageLayout.cshtml";
+}
+@model Fanex.Athena.Model.Report.MetaModel.ExtraPayoutMetaModel
+@section pagecss {
+    <link href="@Url.ContentLinkByEnv("/www/css/build/reactpages/betlist/index.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.ContentLinkByEnv("/www/css/build/reactpages/extrapayout/index.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.ContentLinkByEnv("/www/css/build/pages/betlist/betlistSimpleLayout.css")" rel="stylesheet" />
+}
+@section pagejs {
+    <script src="@Url.ContentLinkByEnv("/www/js/build/reactpages/report/extrapayout.chunk.js")"></script>
+}
+
+@section globaljscode{
+    window.initialState = {
+    selectedParams: { pageIndex: 1, pageSize: 50 },
+    isLoading: false,
+    dateRange: { fromDate: '@Model.FromDate.ToString("MM/dd/yyyy")', toDate: '@Model.ToDate.ToString("MM/dd/yyyy")'},
+    };
+}
+<div id="app-container">
+</div>

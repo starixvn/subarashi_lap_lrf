@@ -119,32 +119,13 @@
                 });
 
                 $('#ExportPromotionPrizeLink').click(function () {
-                    let filterData = {};
-
-                    if (_level === 0) {
-                        filterData = $.extend({}, $('#licenseewinloss').serializeObject(), Site.getLrfSubsidiary());
+                    if (Site.asBool($('#HasExtraPayoutPermission').val())) {
+                        _me.goToExtraPayout();
                     }
                     else {
-                        filterData = drillDownData;
+                        _me.showExtraPayoutErrorPopup();
                     }
-
-                    const data = {
-                        __RequestVerificationToken: Site.getXsrfToken(),
-                        FromDate: filterData.FromDate,
-                        ToDate: filterData.ToDate,
-                        CurrencyId: filterData.CurrencyId,
-                        CurrencyName: filterData.CurrencyName,
-                        IsExcludedTestData: filterData.IsExcludedTestData,
-                        AgentId: filterData.AgentId,
-                        IsVIPPlayerOnly: filterData.IsVIPPlayerOnly,
-                        HasVIPManagementPermission: filterData.HasVIPManagementPermission,
-                        SubsidiarySearch: filterData.SubsidiarySearch,
-                        SubsidiaryList: filterData.SubsidiaryList
-                    };
-
-                    _me.exportExcel(LicenseeWinLossOption.urlPromotionPrizeExcelData, data, EXCEL_PP_FILENAME);
                 });
-
                 $('#level-link-container').on('click', '.level-link', function () {
                     const level = Number($(this).attr('data-level'));
                     _level = level;
@@ -193,6 +174,39 @@
                         + '&tdate=' + tdate + '&currencyName=' + currencyName;
                 }
                 LicenseeWinLossOption.urlExcelData = temp;
+            },
+
+            goToExtraPayout: function () {
+                window.top.postMessage({
+                    key: 'lrf_go_to_extra_payout_report'
+                }, '*');
+            },
+
+            showExtraPayoutErrorPopup: function () {
+                const options = {
+                    modal: true,
+                    title: Site.getSingleResource('Error'),
+                    height: 'auto',
+                    id: 'confirm-action',
+                    width: 450,
+                    float: 'center'
+                };
+
+                var buttons = [
+                    {
+                        text: Site.getSingleResource('OK'),
+                        isClosedOnClick: true,
+                        classes: 'btn btn-submit'
+                    }];
+
+                const icon = `<div class="swal-icon swal-icon--error">
+                        <div class="swal-icon--error__x-mark">
+                          <span class="swal-icon--error__line swal-icon--error__line--left"></span>
+                          <span class="swal-icon--error__line swal-icon--error__line--right"></span>
+                        </div>
+                     </div>`;
+
+                Popup.openPopupWithButton('<div>' + icon + '<p class="center-align">' + Site.getSingleResource('FunctionDeniedMsg') + '</p></div>', options, buttons);
             },
 
             setReportTitle: function (currencyId, fromdate, todate, currencyName) {
@@ -305,20 +319,20 @@
                     _level = levelNumber;
                 }
                 const param =
-                    {
-                        ProductOptions: $.parseJSON(_submitData.ProductOptions),
-                        DrawFilter: _submitData.DrawFilter,
-                        IsExcludedTestData: _submitData.IsExcludedTestData,
-                        CurrencyId: _submitData.CurrencyId,
-                        ReportBy: _submitData.ReportBy,
-                        FromDate: _submitData.FromDate,
-                        ToDate: _submitData.ToDate,
-                        BaseCurrency: $('#BaseCurrency').attr('data-original'),
-                        IsVIPPlayerOnly: _submitData.IsVIPPlayerOnly,
-                        HasVIPManagementPermission: _submitData.HasVIPManagementPermission,
-                        SubsidiarySearch: _submitData.SubsidiarySearch,
-                        SubsidiaryList: _submitData.SubsidiaryList
-                    };
+                {
+                    ProductOptions: $.parseJSON(_submitData.ProductOptions),
+                    DrawFilter: _submitData.DrawFilter,
+                    IsExcludedTestData: _submitData.IsExcludedTestData,
+                    CurrencyId: _submitData.CurrencyId,
+                    ReportBy: _submitData.ReportBy,
+                    FromDate: _submitData.FromDate,
+                    ToDate: _submitData.ToDate,
+                    BaseCurrency: $('#BaseCurrency').attr('data-original'),
+                    IsVIPPlayerOnly: _submitData.IsVIPPlayerOnly,
+                    HasVIPManagementPermission: _submitData.HasVIPManagementPermission,
+                    SubsidiarySearch: _submitData.SubsidiarySearch,
+                    SubsidiaryList: _submitData.SubsidiaryList
+                };
                 const drilldownDate = new Date(datetime);
                 const dateRange = Report.GetDrilldownDateRange(param.ReportBy, param.FromDate, param.ToDate, drilldownDate);
                 const drillDownFDate = moment(dateRange.FromDate).format('MM/DD/YYYY');

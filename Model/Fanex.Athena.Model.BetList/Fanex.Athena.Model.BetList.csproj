@@ -120,6 +120,7 @@
     <Compile Include="ViewModel\CashOutBetListDetailViewModel.cs" />
     <Compile Include="ViewModel\ColossusBetDetailViewModel.cs" />
     <Compile Include="ViewModel\ExchangeBetListViewModel.cs" />
+    <Compile Include="ViewModel\ExtraPayoutBetListViewModel.cs" />
     <Compile Include="ViewModel\LastBetsMonitoringViewModel.cs" />
     <Compile Include="ViewModel\SystemParlayDetailViewModel.cs" />
   </ItemGroup>

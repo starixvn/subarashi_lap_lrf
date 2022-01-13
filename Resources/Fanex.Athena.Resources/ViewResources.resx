@@ -3114,4 +3114,22 @@
     <value>Customer Reports</value>
     <comment>ignorejs</comment>
   </data>
+  <data name="ProductSPR" xml:space="preserve">
+    <value>Saba Promotion</value>
+  </data>
+  <data name="FreeBets" xml:space="preserve">
+    <value>Free Bets</value>
+  </data>
+  <data name="LicSharingAmount" xml:space="preserve">
+    <value>Licensee Sharing Amount</value>
+  </data>
+  <data name="PromotionType" xml:space="preserve">
+    <value>Promotion Type</value>
+  </data>
+  <data name="CustomerAmount" xml:space="preserve">
+    <value>Customer Amount</value>
+  </data>
+  <data name="PromotionDetails" xml:space="preserve">
+    <value>Promotion Details</value>
+  </data>
 </root>

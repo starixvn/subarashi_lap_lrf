@@ -23,6 +23,8 @@
     {
         private IReportAPIClient _reportApiClient;
 
+        private IAuthorizationService _authService;
+
         private const int TimeOutInSecond = 180;
 
         [OneTimeSetUp]
@@ -124,10 +126,13 @@
                 SessionService.UserSession.Language,
                 FunctionNames.CustomerWinLoss).Returns(expectedProductAccess ?? new ProductAccess(new List<Product>()));
 
+            _authService = Substitute.For<IAuthorizationService>();
+            _authService.HasPermissions(SessionService.UserSession, PermissionKeys.ReportExtraPayout).Returns(true);
+
             var licenseeSettingService = stubLicenseeSettingService ?? Substitute.For<ILicenseeSettingService>();
             _reportApiClient = Substitute.For<IReportAPIClient>();
 
-            return new CustomerWinLossReportController(reportSettingService, _reportApiClient)
+            return new CustomerWinLossReportController(reportSettingService, _authService, _reportApiClient)
             {
                 LangService = LangService,
                 SessionServiceInstance = SessionService,

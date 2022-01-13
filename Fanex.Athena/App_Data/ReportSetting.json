@@ -35,5 +35,10 @@
     "ReportKey": "CasinoTurnover80",
     "MinDateString": "08/01/2018",
     "MaxDateString": ""
+  },
+  {
+    "ReportKey": "ExtraPayout",
+    "MinDateString": "",
+    "MaxDateString": "today"
   }
 ]

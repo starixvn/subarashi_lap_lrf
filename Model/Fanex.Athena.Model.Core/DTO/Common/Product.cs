@@ -89,6 +89,8 @@ namespace Fanex.Athena.Model.Core.DTO.Common
         public const string BX = "BX";
 
         public const string AP = "AP";
+        
+        public const string SPR = "SPR";
 
         public const string APM = "APM";
 

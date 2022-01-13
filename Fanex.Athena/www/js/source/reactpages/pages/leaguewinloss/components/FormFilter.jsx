@@ -247,19 +247,19 @@ export const FormFilter = props => {
         return result;
     }
 
-    
     const exportExcel = (event) => {
         event.preventDefault();
+        let exportParam = props.requestParam;
 
-        if (!props.requestParam) {
-            return;
+        if (!exportParam || Site.isEmptyObject(exportParam)) {
+            exportParam = getParams();
         }
 
         const exportRequestParam = { 
-            ...props.requestParam,
+            ...exportParam,
             IsExportExcel : true
         };
-
+        
         props.toggleLoader(true);
         DataService.getFile(ApiUrl.REPORT_DATA_URL, exportRequestParam).then((response) => {
             toast.dismiss();

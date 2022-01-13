@@ -4573,6 +4573,10 @@ class Site {
     return typeof date === "string" ? date : date.format("MM/DD/YYYY");
   }
 
+  static isEmptyObject(obj = {}) {
+    return Object.entries(obj).length === 0 && obj.constructor === Object;
+  }
+
   static asNull(text) {
     if (text != null) {
       text = text.trim();

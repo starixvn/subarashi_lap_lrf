@@ -1,0 +1,53 @@
+﻿@import "../../components/forms/checkbox";
+@import "../../components/forms/radio-buttons";
+@import "../../components/date-range/styles";
+@import "../../components/react-grid";
+@import "../../components/react-multiselect";
+@import "../../components/popup";
+@import "../../components/breadcrumb";
+@import "../../abstracts/variables";
+
+.right {
+    float: right;
+}
+
+.left {
+    float: left;
+    display: flex;
+}
+
+.popup-content-default {
+    padding: 15px;
+
+    .caption {
+        font-weight: bold;
+        font-size: 15px;
+        min-width: 650px;
+        color: #D2592D;
+
+        .base-currency-title {
+            color: #024584;
+        }
+    }
+
+    .table {
+        > thead {
+            > tr > th {
+                background: $bgHeaderTableLevel1;
+                color: $white;
+            }
+        }
+    }
+}
+
+.popup-detail-default {
+    padding-top: 10px;
+}
+
+.rdr-DateRange-index {
+    z-index: 200;
+}
+
+.caret-block div {
+    display: inherit;
+}

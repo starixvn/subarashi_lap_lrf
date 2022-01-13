@@ -6400,16 +6400,16 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         let _isFirstLoad = false;
 
         let _pagingOption =
-            {
-                pageindex: 1,
-                pagesize: 500,
-                pagelist: [500, 1000, 2000],
-                totalrow: 1,
-                elementcontainer: '.paging',
-                method: 'AJAX',
-                ajaxfunction: 'CustomerWinLoss.ajaxPaging()',
-                alwayshow: true
-            };
+        {
+            pageindex: 1,
+            pagesize: 500,
+            pagelist: [500, 1000, 2000],
+            totalrow: 1,
+            elementcontainer: '.paging',
+            method: 'AJAX',
+            ajaxfunction: 'CustomerWinLoss.ajaxPaging()',
+            alwayshow: true
+        };
 
         const _url = {
             SearchCustomer: 'SearchCustomerAPI/SearchCustomer'
@@ -6475,18 +6475,12 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             });
 
             $(_selector.PromotionPrizeLink).click(function () {
-                const filterData = getPostData();
-                const data = {
-                    __RequestVerificationToken: filterData.__RequestVerificationToken,
-                    FromDate: filterData.FromDate,
-                    ToDate: filterData.ToDate,
-                    CurrencyId: filterData.CurrencyId,
-                    CurrencyName: filterData.CurrencyName,
-                    Username: filterData.Username,
-                    IsExcludedTestData: filterData.IsExcludedTestData
-                };
-
-                exportExcel(CustomerWinLossOption.urlPromotionPrizeExcelData, data, EXCEL_PP_FILENAME);
+                if (Site.asBool($('#HasExtraPayoutPermission').val())) {
+                    _me.goToExtraPayout();
+                }
+                else {
+                    _me.showExtraPayoutErrorPopup();
+                }
             });
 
             $(_selector.HistoryLink).click(function () {
@@ -6557,24 +6551,24 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             buildPostData();
 
             const option =
-                {
-                    type: 'POST',
-                    data: _submitData,
-                    dataType: 'json',
-                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                    cache: false,
-                    url: Site.resolveClientUrl(CustomerWinLossOption.urlData),
-                    success: function (response) {
-                        setReportTitle();
-                        _me.bindData(response);
-                    },
-                    beforeSend: function () {
-                        Site.blockUI();
-                    },
-                    complete: function () {
-                        Site.unBlockUI();
-                    }
-                };
+            {
+                type: 'POST',
+                data: _submitData,
+                dataType: 'json',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                cache: false,
+                url: Site.resolveClientUrl(CustomerWinLossOption.urlData),
+                success: function (response) {
+                    setReportTitle();
+                    _me.bindData(response);
+                },
+                beforeSend: function () {
+                    Site.blockUI();
+                },
+                complete: function () {
+                    Site.unBlockUI();
+                }
+            };
 
             if (_ajaxRequest != null) {
                 _ajaxRequest.abort();
@@ -6582,6 +6576,39 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
             _ajaxRequest = $.ajax(option);
             return true;
+        }
+
+        function goToExtraPayout() {
+            window.top.postMessage({
+                key: 'lrf_go_to_extra_payout_report'
+            }, '*');
+        }
+
+        function showExtraPayoutErrorPopup() {
+            const options = {
+                modal: true,
+                title: Site.getSingleResource('Error'),
+                height: 'auto',
+                id: 'confirm-action',
+                width: 450,
+                float: 'center'
+            };
+
+            var buttons = [
+                {
+                    text: Site.getSingleResource('OK'),
+                    isClosedOnClick: true,
+                    classes: 'btn btn-submit'
+                }];
+
+            const icon = `<div class="swal-icon swal-icon--error">
+                        <div class="swal-icon--error__x-mark">
+                          <span class="swal-icon--error__line swal-icon--error__line--left"></span>
+                          <span class="swal-icon--error__line swal-icon--error__line--right"></span>
+                        </div>
+                     </div>`;
+
+            Popup.openPopupWithButton('<div>' + icon + '<p class="center-align">' + Site.getSingleResource('FunctionDeniedMsg') + '</p></div>', options, buttons);
         }
 
         function bindData(response) {
@@ -6800,7 +6827,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             viewWinlossBetList: viewWinlossBetList,
             ajaxPaging: ajaxPaging,
             bindData: bindData,
-            getSubmitData: getPostData
+            getSubmitData: getPostData,
+            goToExtraPayout: goToExtraPayout,
+            showExtraPayoutErrorPopup: showExtraPayoutErrorPopup
         };
 
         return _me;

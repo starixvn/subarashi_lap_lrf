@@ -173,6 +173,8 @@
     <Compile Include="MetaModel\ExchangeWinLossMetaModel.cs" />
     <Compile Include="MetaModel\BaseReportMetaModel.cs" />
     <Compile Include="MetaModel\ActiveCustomerMetaModel.cs" />
+    <Compile Include="MetaModel\ExtraPayoutDetailMetaModel.cs" />
+    <Compile Include="MetaModel\ExtraPayoutMetaModel.cs" />
     <Compile Include="MetaModel\LeagueWinLossMetaModel.cs" />
     <Compile Include="MetaModel\LicenseeWinLossByTimeZoneMetaModel.cs" />
     <Compile Include="MetaModel\GodOfFortuneWinLossMetaModel.cs" />
@@ -210,6 +212,7 @@
     <Compile Include="ViewModel\DailyBetsViewModel.cs" />
     <Compile Include="ViewModel\ExchangeVoidedViewModel.cs" />
     <Compile Include="ViewModel\ExchangeWinLossViewModel.cs" />
+    <Compile Include="ViewModel\ExtraPayoutViewModel.cs" />
     <Compile Include="ViewModel\LeagueWinLossViewModel.cs" />
     <Compile Include="ViewModel\SabaVirtualSportsWinLossGridViewModel .cs" />
     <Compile Include="ViewModel\GodOfFortuneWinLossViewModel.cs" />

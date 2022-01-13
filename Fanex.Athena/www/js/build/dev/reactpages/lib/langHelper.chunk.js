@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 12/20/2021 10:19:25 AM
+// Generated at: 1/13/2022 9:07:18 AM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -280,6 +280,7 @@ window._language_en_US = {
   Currentmonth: "Current month",
   Currentweek: "Current week",
   Customer: "Customer",
+  CustomerAmount: "Customer Amount",
   CustomerBalance: "Customer Balance",
   CustomerBetList: "Customer Bet List",
   CustomerClass: "Customer Class",
@@ -406,6 +407,7 @@ window._language_en_US = {
   ForecastAway: "Forecast Away",
   ForecastHome: "Forecast Home",
   Fr: "Fr",
+  FreeBets: "Free Bets",
   FreePlay: "Free Play",
   Freeze: "Freeze",
   Friday: "Friday",
@@ -527,6 +529,7 @@ window._language_en_US = {
   LicenseeW_L: "Licensee W/L",
   LicenseeWinLoss: "Licensee Win Loss",
   LicenseeWL: "Licensee WL",
+  LicSharingAmount: "Licensee Sharing Amount",
   Live: "Live",
   Live2: "Live",
   LiveAndNonLive: "Live and Non-live",
@@ -746,6 +749,7 @@ window._language_en_US = {
   ProductSBVS: "Saba Virtual Sports",
   ProductSG: "SG",
   ProductSLT: "Sports Lottery",
+  ProductSPR: "Saba Promotion",
   ProductSXG: "AE Sexy",
   ProductTG: "Table Game",
   ProductVB: "Macau Games",
@@ -756,7 +760,9 @@ window._language_en_US = {
   ProductVS2: "Virtual Sports 2",
   ProductWM: "WM",
   Promotion: "Promotion",
+  PromotionDetails: "Promotion Details",
   PromotionPrize: "Promotion Prize",
+  PromotionType: "Promotion Type",
   RB: "RB",
   RealName: "Real Name",
   Reason: "Reason",
@@ -854,7 +860,6 @@ window._language_en_US = {
   TicketDetailOf: "Ticket detail of {0}",
   TicketFilter: "Ticket filter",
   TicketList: "Ticket List",
-  TicketListing: "Ticket Listing",
   TicketNo: "Ticket No.",
   TicketPayout: "Ticket Payout",
   TicketType: "Ticket Type",

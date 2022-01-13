@@ -2201,4 +2201,19 @@
   <data name="SLTDateRangeNote" xml:space="preserve">
     <value>體育時時彩僅提供11/22/2021之後的數據</value>
   </data>
+  <data name="CustomerAmount" xml:space="preserve">
+    <value>玩家金额</value>
+  </data>
+  <data name="LicSharingAmount" xml:space="preserve">
+    <value>承租公司分担金额</value>
+  </data>
+  <data name="PromotionDetails" xml:space="preserve">
+    <value>活動詳情</value>
+  </data>
+  <data name="FreeBets" xml:space="preserve">
+    <value>免費投注</value>
+  </data>
+  <data name="PromotionType" xml:space="preserve">
+    <value>活動類別</value>
+  </data>
 </root>

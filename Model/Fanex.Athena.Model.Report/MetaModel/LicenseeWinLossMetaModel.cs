@@ -19,7 +19,9 @@ namespace Fanex.Athena.Model.Report.MetaModel
         public bool IsVIPPlayerOnly { get; set; }
 
         public bool HasVIPManagementPermission { get; set; }
+
         public string SubsidiaryList { get; set; }
+
         public bool SubsidiarySearch { get; set; }
     }
 }

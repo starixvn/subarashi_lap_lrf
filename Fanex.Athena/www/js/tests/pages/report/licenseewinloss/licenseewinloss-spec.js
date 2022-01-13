@@ -255,7 +255,6 @@
 
                     expect($("#ExportPromotionPrizeLink").css("display")).toEqual("none");
                 });
-                
             });
 
             describe("ajaxComplete", function () {
@@ -343,12 +342,12 @@
                         spyOn(Site, "unBlockUI");
 
                         jasmine.Ajax
-                                .stubRequest("api/LicenseeWinLossReport/Index")
-                                .andReturn({
-                                    'status': 200,
-                                    'contentType': 'application/json',
-                                    'responseText': '{ "ProductOptions": "SB,RC" }'
-                                });
+                            .stubRequest("api/LicenseeWinLossReport/Index")
+                            .andReturn({
+                                'status': 200,
+                                'contentType': 'application/json',
+                                'responseText': '{ "ProductOptions": "SB,RC" }'
+                            });
 
                         LicenseeWinLoss.submit();
                         request = jasmine.Ajax.requests.mostRecent();
@@ -403,8 +402,6 @@
                                 IsExcludedTestData: submitData.IsExcludedTestData,
                                 AgentId: submitData.AgentId
                             };
-
-                            $('#ExportPromotionPrizeLink').click();
 
                             expect(LicenseeWinLoss.exportExcel).toHaveBeenCalledWith(LicenseeWinLossOption.urlPromotionPrizeExcelData, expectedParamData, "PromotionPrize.xls");
                         });
@@ -675,7 +672,7 @@
 
                         LicenseeWinLoss.submit();
                         var ajaxOptionForCreateSubmitData = $.ajax.calls.mostRecent().args[0];
-                        ajaxOptionForCreateSubmitData.success(submitData);   
+                        ajaxOptionForCreateSubmitData.success(submitData);
 
                         spyOn(LicenseeWinLoss, "setReportTitle");
 
@@ -730,8 +727,6 @@
                                 IsExcludedTestData: submitData.IsExcludedTestData,
                                 AgentId: custId
                             };
-
-                            $('#ExportPromotionPrizeLink').click();
 
                             expect(LicenseeWinLoss.exportExcel).toHaveBeenCalledWith(LicenseeWinLossOption.urlPromotionPrizeExcelData, expectedParamData, "PromotionPrize.xls");
                         });
