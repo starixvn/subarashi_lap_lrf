@@ -51,12 +51,13 @@
                             @Html.Hidden("ToDate", Model.Param.ToDate)
                             @Html.Hidden("ProductCodeList", Model.Param.ProductCodeList)
                             @Html.Hidden("SportId", Model.Param.SportId)
-                            @Html.Hidden("CurrencyId", Model.Param.CurrencyId)
                             @Html.Hidden("SortDirection", Model.Param.SortDirection)
                             @Html.Hidden("SortColumn", Model.Param.SortColumn)
                             @Html.Hidden("LiveIndicator", Model.Param.LiveIndicator)
-                            @Html.Hidden("BaseCurrency", Model.Param.BaseCurrency)
-                            <input id="CurrencyName2" name="CurrencyName" type="hidden" value="@Model.Param.CurrencyName">
+                            <input id="BaseCurrency" name="BaseCurrency" data-original="@Model.Param.BaseCurrency" type="hidden" value="@Model.Param.BaseCurrency">
+                            <input id="CurrencyId" name="CurrencyId" data-original="@Model.Param.CurrencyId" type="hidden" value="@Model.Param.CurrencyId">
+                            <input name="CurrencyName" type="hidden" value="@Model.CurrencyName" />
+                            <input id="CurrencyName" data-original="@Model.CurrencyName" type="hidden" value="@Model.CurrencyName" />
                         }
                     </div>
                 </div>

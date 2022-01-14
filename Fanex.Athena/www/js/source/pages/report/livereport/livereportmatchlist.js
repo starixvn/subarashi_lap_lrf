@@ -44,8 +44,8 @@
         url = QueryString.setParam(url, 'SortColumn', $('#SortColumn').val());
         url = QueryString.setParam(url, 'SortDirection', $('#SortDirection').val());
         url = QueryString.setParam(url, 'CurrencyId', $('#CurrencyId').val());
-        url = QueryString.setParam(url, 'CurrencyName', $('#CurrencyName').val());
-        url = QueryString.setParam(url, 'BaseCurrency', $('#BaseCurrency').val());
+        url = QueryString.setParam(url, 'CurrencyName', $('#CurrencyName').attr('data-original'));
+        url = QueryString.setParam(url, 'BaseCurrency', $('#BaseCurrency').attr('data-original'));
         return url;
     }
 
@@ -67,7 +67,7 @@
     function viewMatchBetList(target) {
         let url = Site.resolveClientUrl('LiveReportBetList/Match');
 
-        const currencyName = $('#CurrencyName').val();
+        const currencyName = $('#CurrencyName').attr('data-original');
         let data = $(target).attr('data-drill-down');
         data = $.parseJSON(data);
         url = Site.setLicenseeOptionOriginalParam(url);
