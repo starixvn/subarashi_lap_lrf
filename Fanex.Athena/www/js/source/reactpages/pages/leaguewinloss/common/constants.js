@@ -4,6 +4,7 @@ import LangHelper from '@jsroot/lib/langHelper';
 export const DefaultPageSize = 50;
 
 export const ApiUrl = {
+    CUSTOMER_SEARCH_URL: Site.resolveClientUrl("SearchCustomerAPI/SearchCustomer"),
     REPORT_DATA_URL: Site.resolveClientUrl("LeagueWinLossReport/Index"),
     REPORT_CURRENCY_DATA_URL: Site.resolveClientUrl("LeagueWinLossReport/CurrencyData")
 }

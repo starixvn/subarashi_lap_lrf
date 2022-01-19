@@ -12,6 +12,7 @@ import MultipleSelect from '@9softstudio/react-multiselect';
 import moment from 'moment'
 import CheckBox from '@jsroot/components/CheckBox'
 import UserGuide from '@jsroot/components/UserGuide'
+import AutoComplete from '@jsroot/components/auto-complete'
 import { ToastContainer, toast, Flip } from 'react-toastify';
 import { ApiUrl, ReportLevel } from '../common/constants'
 import Service from '../common/service'
@@ -112,16 +113,16 @@ export const FormFilter = props => {
         const productArray = productCode.split(",");
         const BAIndex = productArray.indexOf("BA");
 
-        if(BAIndex !== -1) {
+        if (BAIndex !== -1) {
             productArray.splice(BAIndex, 1);
             setShowBA(true);
         }
         else {
             setShowBA(false);
         }
-        let  newProductCode = productArray.join(",");
+        let newProductCode = productArray.join(",");
 
-        newProductCode = newProductCode === "" &&  BAIndex !== -1 ? "BA" : newProductCode;
+        newProductCode = newProductCode === "" && BAIndex !== -1 ? "BA" : newProductCode;
         props.setSelectedProduct(newProductCode);
         props.getSportList(newProductCode, isSingleDate() && props.dateRange.fromDate);
         props.getBettypeList(newProductCode, isSingleDate());
@@ -140,7 +141,7 @@ export const FormFilter = props => {
                 onChange={(currentItem, selectedItemsKey) => onChangeCurrency(selectedItemsKey)} />);
     }
 
-   const onChangeCurrency = (currencyIdList) => {
+    const onChangeCurrency = (currencyIdList) => {
         let baseCurrency = "";
         let newBaseCurrencyList;
 
@@ -209,8 +210,8 @@ export const FormFilter = props => {
         const selectedSportArray = props.selectedSport.split(',');
         const selectedBettypeArray = props.selectedBettype.split(',');
 
-        const currencyText = selectedCurrencyArray.length === AppData.currencyList.length ? 'All' 
-            : AppData.currencyList.filter(item => selectedCurrencyArray.includes(item.Id.toString())).map(item => item.Value).join(',');        
+        const currencyText = selectedCurrencyArray.length === AppData.currencyList.length ? 'All'
+            : AppData.currencyList.filter(item => selectedCurrencyArray.includes(item.Id.toString())).map(item => item.Value).join(',');
 
         const baseCurrency = baseCurrencyList.find(x => x.value === props.selectedBaseCurrency);
         return {
@@ -218,24 +219,25 @@ export const FormFilter = props => {
             PageIndex: 1,
             FromDate: Site.convertDateToString(fromDate),
             ToDate: Site.convertDateToString(toDate),
-            ProductCodeList: props.selectedProduct, 
+            ProductCodeList: props.selectedProduct,
             CurrencyIdList: props.selectedCurrency,
             BaseCurrency: props.selectedBaseCurrency,
             StatusIdList: props.selectedStatus,
             SportIdList: props.sportList.length === selectedSportArray.length ? 'All' : props.selectedSport,
-            BetTypeIdList: props.bettypeList.length === selectedBettypeArray.length ? 'All' :props.selectedBettype,
-            LeagueName : leagueName,
+            BetTypeIdList: props.bettypeList.length === selectedBettypeArray.length ? 'All' : props.selectedBettype,
+            LeagueName: leagueName,
             SortBy: SortBy,
             SortOrder: SortOrder,
             IsGroupInOriginalCurrency: isGroupInOriginalCurrency,
             BaseCurrencyName: baseCurrency ? baseCurrency.label : '',
             CurrencyName: currencyText ? currencyText : '',
             ShowBA: showBA,
-            DrillDownLevel: ReportLevel.MAIN
+            DrillDownLevel: ReportLevel.MAIN,
+            UserName: props.username,
         }
     }
 
-    
+
     const isValidModel = () => {
         const result = !!props.selectedProduct
             && !!props.selectedStatus
@@ -247,6 +249,7 @@ export const FormFilter = props => {
         return result;
     }
 
+
     const exportExcel = (event) => {
         event.preventDefault();
         let exportParam = props.requestParam;
@@ -255,9 +258,9 @@ export const FormFilter = props => {
             exportParam = getParams();
         }
 
-        const exportRequestParam = { 
+        const exportRequestParam = {
             ...exportParam,
-            IsExportExcel : true
+            IsExportExcel: true
         };
         
         props.toggleLoader(true);
@@ -270,7 +273,7 @@ export const FormFilter = props => {
             else {
                 const fileName = "WinLossByLeague.xls";
                 Site.downloadFile(response.data, fileName);
-            } 
+            }
             props.toggleLoader(false);
         }).catch(error => {
             alert(LangHelper.getSingleResource("ErrorProcessingMsg"));
@@ -284,101 +287,110 @@ export const FormFilter = props => {
 
     return (
         <>
-        <CollapsiblePanel className="page-filter" stickyFooter={excelButton}>
-            <div className="row">
-                <ToastContainer
-                    autoClose={10000}
-                    pauseOnFocusLoss={false}
-                    style={{ width: "500px" }}
-                    transition={Flip} />
-                <div className="col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2">
-                    <div className="form-group">
-                        <label className="label-text">{LangHelper.getSingleResource("Date")}</label>
-                        {_renderDateFilter()}
+            <CollapsiblePanel className="page-filter" stickyFooter={excelButton}>
+                <div className="row">
+                    <ToastContainer
+                        autoClose={10000}
+                        pauseOnFocusLoss={false}
+                        style={{ width: "500px" }}
+                        transition={Flip} />
+                    <div className="col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2">
+                        <div className="form-group">
+                            <label className="label-text">{LangHelper.getSingleResource("Date")}</label>
+                            {_renderDateFilter()}
+                        </div>
                     </div>
-                </div>
 
-                <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
-                    <div className="form-group">
-                        <label className="label-text">{LangHelper.getSingleResource("Product")}</label>
-                        {_renderProductSelectList()}
+                    <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
+                        <div className="form-group">
+                            <label className="label-text">{LangHelper.getSingleResource("Product")}</label>
+                            {_renderProductSelectList()}
+                        </div>
                     </div>
-                </div>
 
-                <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
-                    <div className="form-group">
-                        <label className="label-text">{LangHelper.getSingleResource("Sport")}</label>
-                        {_renderSportSelectList()}
+                    <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
+                        <div className="form-group">
+                            <label className="label-text">{LangHelper.getSingleResource("Sport")}</label>
+                            {_renderSportSelectList()}
+                        </div>
                     </div>
-                </div>
 
-                <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
-                    <div className="form-group">
-                        <label className="label-text">{LangHelper.getSingleResource("League")}</label>
-                        <input className="input-text" id="LeagueName" name="LeagueName" type="text" value={leagueName} placeholder={LangHelper.getSingleResource("LeagueName")}
+                    <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
+                        <div className="form-group">
+                            <label className="label-text">{LangHelper.getSingleResource("League")}</label>
+                            <input className="input-text" id="LeagueName" name="LeagueName" type="text" value={leagueName} placeholder={LangHelper.getSingleResource("LeagueName")}
                                 onChange={(event) => setLeagueName(event.target.value)} />
+                        </div>
                     </div>
-                </div>
 
-                <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
-                    <div className="form-group">
-                        <label className="label-text">{LangHelper.getSingleResource("BetType")}</label>
-                        {_renderBettypeSelectList()}
+                    <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
+                        <div className="form-group">
+                            <label className="label-text">{LangHelper.getSingleResource("BetType")}</label>
+                            {_renderBettypeSelectList()}
+                        </div>
                     </div>
-                </div>
 
 
-                <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
-                    <div className="form-group">
-                        <label className="label-text">{LangHelper.getSingleResource("Status")}</label>
-                        {_renderStatusSelectList()}
+                    <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
+                        <div className="form-group">
+                            <label className="label-text">{LangHelper.getSingleResource("Status")}</label>
+                            {_renderStatusSelectList()}
+                        </div>
                     </div>
-                </div>
 
-            </div>
-            <div className="row">
-                <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
-                    <div className="form-group">
-                        <label className="label-text">{LangHelper.getSingleResource("Currency")}</label>
-                        {_renderCurrencySelectList()}
+                </div>
+                <div className="row">
+                    <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
+                        <div className="form-group">
+                            <label className="label-text">{LangHelper.getSingleResource("Username")} *</label>
+                            <AutoComplete url={ApiUrl.CUSTOMER_SEARCH_URL}
+                                onSelect={(value) => props.setUsername(value)}
+                                onInput={(value) => props.setUsername(value)}
+                                htmlAttributes={{ placeholder: LangHelper.getSingleResource("ExternalIdOrSystemId") }} />
+                        </div>
                     </div>
-                </div>
-
-                <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
-                    <div className="form-group">
-                        <label className="label-text">{LangHelper.getSingleResource("BaseCurrency")}</label>
-                        {_renderBaseCurrencySelectList()}
+                    <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
+                        <div className="form-group">
+                            <label className="label-text">{LangHelper.getSingleResource("Currency")}</label>
+                            {_renderCurrencySelectList()}
+                        </div>
                     </div>
-                </div>
 
-                <div className="col-12 col-md-4 col-sm-3 col-lg-2 col-xl-3">
-                    <div className="form-group">
-                        <CheckBox id="IsGroupInOriginalCurrency"
-                            checked={isGroupInOriginalCurrency}
-                            onChange={(checked) => setGroupInOriginalCurrency(checked)}
-                            label={LangHelper.getSingleResource("IsGroupInOriginalCurrency")} />
+                    <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
+                        <div className="form-group">
+                            <label className="label-text">{LangHelper.getSingleResource("BaseCurrency")}</label>
+                            {_renderBaseCurrencySelectList()}
+                        </div>
                     </div>
-                </div>
 
-                <div className="col-12 col-md-2 col-sm-2 col-lg-2 col-xl-1">
-                    <div className="form-group">
-                        <div className="button-group">
-                            <button type="button" disabled={!isValidModel()} className="btn btn-submit" onClick={onSubmit}>{LangHelper.getSingleResource("Submit")}</button>
+                    <div className="col-12 col-md-4 col-sm-3 col-lg-2 col-xl-3">
+                        <div className="form-group">
+                            <CheckBox id="IsGroupInOriginalCurrency"
+                                checked={isGroupInOriginalCurrency}
+                                onChange={(checked) => setGroupInOriginalCurrency(checked)}
+                                label={LangHelper.getSingleResource("IsGroupInOriginalCurrency")} />
+                        </div>
+                    </div>
+
+                    <div className="col-12 col-md-2 col-sm-2 col-lg-2 col-xl-1">
+                        <div className="form-group">
+                            <div className="button-group">
+                                <button type="button" disabled={!isValidModel()} className="btn btn-submit" onClick={onSubmit}>{LangHelper.getSingleResource("Submit")}</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-        </CollapsiblePanel>
+            </CollapsiblePanel>
         </>);
-}     
-    
+}
+
 
 function mapStateToProps(state) {
-    const { requestParam, dateRange, selectedProduct, sportList, selectedSport, selectedBettype, bettypeList, selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, userGuideContent } = state;
+    const { requestParam, dateRange, selectedProduct, sportList, selectedSport, selectedBettype, bettypeList, selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, userGuideContent, username } = state;
 
     return Object.assign({}, {
-        requestParam, dateRange, selectedProduct, sportList, selectedSport, selectedBettype, bettypeList, selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, userGuideContent
+        requestParam, dateRange, selectedProduct, sportList, selectedSport, selectedBettype, bettypeList, selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, userGuideContent, username
     });
 }
 

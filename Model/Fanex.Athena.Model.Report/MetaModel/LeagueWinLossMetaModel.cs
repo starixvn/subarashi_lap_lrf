@@ -22,6 +22,8 @@ namespace Fanex.Athena.Model.Report.MetaModel
 
         public string SportIdList { get; set; }
 
+        public string UserName { get; set; }
+
         public string DrillDownCurrencyName { get; set; }
 
         public string SortBy { get; set; }
