@@ -69,6 +69,7 @@
         public const string ReportLeagueWinLoss = "LeagueWinLoss";
         public const string ReportCustomerSupportTask = "CustomerSupportTask";
         public const string ReportExtraPayout = "ExtraPayout";
+        public const string ReportNewCashOutWinLoss = "NewCashOutWinLoss";
 
         /* Customer Info. */
 

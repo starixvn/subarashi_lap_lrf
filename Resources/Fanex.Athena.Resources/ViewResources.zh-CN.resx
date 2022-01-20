@@ -1689,11 +1689,11 @@
     <comment>#71725</comment>
   </data>
   <data name="ProductCO" xml:space="preserve">
-    <value>即时兑现</value>
+    <value>实时兑现</value>
     <comment>#71727</comment>
   </data>
   <data name="CashOutWinLoss" xml:space="preserve">
-    <value>即时兑现输赢</value>
+    <value>实时兑现输赢</value>
     <comment>Cash Out Win Loss</comment>
   </data>
   <data name="CashOutAmount" xml:space="preserve">

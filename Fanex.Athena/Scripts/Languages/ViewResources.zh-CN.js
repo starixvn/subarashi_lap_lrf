@@ -1,4 +1,4 @@
-﻿// Generated at: 1/13/2022 9:07:09 AM
+﻿// Generated at: 1/20/2022 1:40:19 PM
 var _language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -118,7 +118,7 @@ CashOutTickets:"即时兑现注单",
 CashOutTicketsList:"即时兑现注单",
 CashOutTimes:"即时兑现次数",
 CashOutValue:"会员卖出的实际投注额",
-CashOutWinLoss:"即时兑现输赢",
+CashOutWinLoss:"实时兑现输赢",
 CasinoTransfer:"娱乐城的总转账额",
 CasinoTurnover:"电子游戏交易额",
 Category:"类别",
@@ -567,7 +567,7 @@ ProductAB:"欧博",
 ProductBGG:"大遊真人",
 ProductCC:"乐卡迪亚",
 ProductCG:"CG电子",
-ProductCO:"即时兑现",
+ProductCO:"实时兑现",
 ProductCS:"娱乐城",
 ProductFW:"GG捕鱼",
 ProductGD:"GD真人娱乐场",
