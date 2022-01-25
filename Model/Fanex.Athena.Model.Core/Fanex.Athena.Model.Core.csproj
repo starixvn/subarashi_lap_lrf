@@ -120,6 +120,7 @@
     <Compile Include="DTO\Common\ApiPagingResult.cs" />
     <Compile Include="DTO\Common\ResultInfoGeneric.cs" />
     <Compile Include="DTO\Common\ShowingOption.cs" />
+    <Compile Include="DTO\Common\SportGame.cs" />
     <Compile Include="DTO\Configuration\FakeLicenseeSetting.cs" />
     <Compile Include="DTO\Configuration\ReportSetting.cs" />
     <Compile Include="DTO\Common\Product.cs" />

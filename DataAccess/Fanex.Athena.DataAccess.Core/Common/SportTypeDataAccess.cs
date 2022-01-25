@@ -124,5 +124,15 @@ namespace Fanex.Athena.DataAccess.Core.Common
 
             return result;
         }
+
+        public async Task<IEnumerable<SportGame>> GetSportBySiteNameAsync(string siteName)
+        {
+            const string UspName = "Lrf_SelSportBySiteName";
+
+            using (var db = this.GetObjectDb(UspName))
+            {
+                return await db.QueryAsync<SportGame>(new { SiteName = siteName });
+            }
+        }
     }
 }

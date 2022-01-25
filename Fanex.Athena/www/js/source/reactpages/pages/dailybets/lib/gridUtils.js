@@ -12,6 +12,7 @@ export const renderHeader = () => {
             <HeaderCell colWidth={100}>{headerText.refNo}</HeaderCell>
             <HeaderCell colWidth={100}>{headerText.transTime}</HeaderCell>
             <HeaderCell colWidth={80}>{headerText.product}</HeaderCell>
+            <HeaderCell colWidth={80}>{headerText.sport}</HeaderCell>
             <HeaderCell colWidth={150}>{headerText.betType}</HeaderCell>
             <HeaderCell colWidth={80} sortBy={'turnover'}>{headerText.turnover}</HeaderCell>
             <HeaderCell colWidth={80} sortBy={'winLoss'}>{headerText.winloss}</HeaderCell>
@@ -37,7 +38,7 @@ export const renderDataSection = (dataList, isTotalRow) => {
 
 const buildDataRow = (dataItem) => {
     const { index, playerName, currencyName, refNo, transTimeString, productName,
-         betType, turnover, winLoss, turnoverBased, winLossBased, status } = dataItem;
+         betType, turnover, winLoss, turnoverBased, winLossBased, status, sportName } = dataItem;
 
     return (
         <Row key={index}>
@@ -47,6 +48,7 @@ const buildDataRow = (dataItem) => {
             <Cell className="center-align">{refNo}</Cell>
             <Cell className="center-align">{transTimeString}</Cell>
             <Cell>{productName}</Cell>
+            <Cell>{sportName}</Cell>
             <Cell>{betType}</Cell>
             <Cell className="right-align">{NumberFormat.formatDecimal(turnover)}</Cell>
             <Cell className="right-align">{NumberFormat.formatDecimal(winLoss)}</Cell>
@@ -61,7 +63,7 @@ const buildTotalRow = (dataItem) => {
     const { turnoverBased, winLossBased } = dataItem;
     return (
         <Row key="totalRowUSD">
-            <Cell className="right-align" colSpan="9">Total In USD</Cell>
+            <Cell className="right-align" colSpan="10">Total In USD</Cell>
             <Cell className="right-align">{NumberFormat.formatDecimal(turnoverBased)}</Cell>
             <Cell className="right-align">{NumberFormat.formatDecimal(winLossBased)}</Cell>
             <Cell></Cell>

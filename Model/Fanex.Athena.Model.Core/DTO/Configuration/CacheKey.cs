@@ -26,5 +26,7 @@ namespace Fanex.Athena.Model.Core.DTO.Configuration
         public static readonly string MemorycacheGroupSubsidiaryListByLicensee = "MemoryCache_GroupSubsidiaryList_{0}";
 
         public static readonly string MemorycacheSubProductsByLicensee = "MemoryCache_SubProductsList";
+
+        public static readonly string MemorycacheSportListByLicensee = "MemoryCache_SportList";
     }
 }

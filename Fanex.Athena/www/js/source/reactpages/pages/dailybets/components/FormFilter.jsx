@@ -7,18 +7,20 @@ import LangHelper from '@jsroot/lib/langHelper';
 import AppData from '@jsroot/lib/AppData';
 import { DatePicker } from '@9softstudio/react-datepicker';
 import { getFormattedDate } from '../lib/utils';
-import { renderProductSelectList, renderCurrencySelectList } from '../lib/formFilterUtils';
+import { renderProductSelectList, renderCurrencySelectList, renderSportSelectList } from '../lib/formFilterUtils';
 
 export const FormFilter = (props) => {
     const { requestParam } = props;
-    const { productCodeList, currencyIdList, date, pageSize, sortBy, sortOrder } = requestParam;
+    const { productCodeList, currencyIdList, sportCodeList, date, pageSize, sortBy, sortOrder } = requestParam;
 
     const [selectedProduct, setSelectedProduct] = useState(productCodeList);
     const [selectedCurrency, setSelectedCurrency] = useState(currencyIdList);
+    const [selectedSport, setSelectedSport] = useState(sportCodeList)
     const [selectedDate, setSelectedDate] = useState(date);
 
     const handleChangeProduct = (currentItem, selectedItemsKey) => setSelectedProduct(selectedItemsKey);
     const handleChangeCurrency = (currentItem, selectedItemsKey) => setSelectedCurrency(selectedItemsKey);
+    const handleChangeSport = (currentItem, selectedItemsKey) => setSelectedSport(selectedItemsKey);
 
     const buildParam = () => ({
         pageSize: pageSize,
@@ -27,6 +29,7 @@ export const FormFilter = (props) => {
         sortOrder,
         currencyIdList: selectedCurrency,
         productCodeList: selectedProduct,
+        gameCodes: selectedSport,
         date: selectedDate
     });
 
@@ -45,7 +48,7 @@ export const FormFilter = (props) => {
         props.exportExcel(params);
     }
 
-    const { productOptions, currencyList } = AppData;
+    const { productOptions, currencyList, sportList } = AppData;
     const { dateConstraint } = props;
     const dateString = getFormattedDate(selectedDate);
 
@@ -70,6 +73,16 @@ export const FormFilter = (props) => {
                                 {renderProductSelectList(productOptions, handleChangeProduct)}
                             </div>
                         </div>
+                    ) : null
+                }
+                {
+                    sportList && sportList.length ? (
+                        <div className="col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2">
+                        <div className="form-group">
+                            <label className="label-text">{LangHelper.getSingleResource("Sport")}</label>
+                            {renderSportSelectList(sportList, handleChangeSport)}
+                        </div>
+                    </div>
                     ) : null
                 }
 
