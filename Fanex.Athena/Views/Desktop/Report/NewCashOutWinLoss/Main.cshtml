@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "LAP - " + ViewResources.Report +
+    " - " + ViewResources.CashOutWinLoss;
+    Layout = "~/Views/Desktop/Shared/_ReactPageLayout.cshtml";
+}
+@using Fanex.Athena.Model.Core.DataDomain;
+@model Fanex.Athena.Model.Report.ViewModel.NewCashOutWinLossViewModel
+@{
+    var productOptions = Model.Param.ProductOptions;
+    var selectedProductCode = string.Join(",", productOptions.Where(x => x.Status).Select(x => x.Code).ToArray());
+    var baseCurrencyList = SystemConstants.BaseCurrencyList.Select(c => new
+    {
+        value = c.Value,
+        label = c.Value
+    }).ToList();
+
+    var selectedCurrency = string.Join(",", Model.CurrencyList.Select(x => x.Key).ToArray());
+
+    string selectedSubsidiary = Model.ViewType == SubsidiaryViewType.MasterManagement ?
+        string.Join(",", Model.SubsidiaryList.SelectMany(x => x.Children.Select(y => y.Value)).Distinct()) : string.Join(",", Model.SubsidiaryList.Select(x => x.Value));
+
+    var appSettings = new AppSettings();
+    var minDate = Model.ReportSetting.MinDate;
+    var maxDate = Model.ReportSetting.MaxDate;
+}
+
+@section pagecss {
+
+    <link href="@Url.ContentLinkByEnv("/www/css/build/reactpages/newcashoutwinloss/index.css")" rel="stylesheet" type="text/css" />
+
+}
+@section pagejs {
+    <script src="@Url.ContentLinkByEnv("/www/js/build/reactpages/report/newcashoutwinloss.chunk.js")"></script>
+}
+
+@section globaljscode{
+    window.initialState = {
+    selectedProduct: '@(selectedProductCode)',
+    selectedCurrency:  '@(selectedCurrency)',
+    selectedBaseCurrency: '@(ViewBag.DefaultSelectedBaseCurrency)',
+    dateRange: {fromDate: '@Model.Param.FromDate.ToString("MM/dd/yyyy")', toDate: '@Model.Param.ToDate.ToString("MM/dd/yyyy")'},
+    isLoading: false,
+    reloadReport: false
+    }
+    window._AppData = {
+    subsidiaryList: @Html.Raw(Model.SubsidiaryList.ToJson()),
+    viewType: @((byte)Model.ViewType),
+    productOptions: @Html.Raw(productOptions.ToJson()),
+    currencyList: @Html.Raw(Model.CurrencyList.Select(x => new { Id = x.Key, Value = x.Value, Status = true }).ToJson()),
+    baseCurrencyList: @Html.Raw(baseCurrencyList.ToJson()),
+    dateConstraint: {minDate: '@minDate.ToString("MM/dd/yyyy")', maxDate: '@maxDate.ToString("MM/dd/yyyy")', limitedMonthRange: 3},
+    defaultBaseCurrency: '@(ViewBag.DefaultSelectedBaseCurrency)'
+    };
+}
+<div id="app-container">
+</div>

@@ -361,4 +361,7 @@
   <data name="extrapayout" xml:space="preserve">
     <value>额外派彩</value>
   </data>
+  <data name="newcashoutwinloss" xml:space="preserve">
+    <value>实时兑现输赢(新)</value>
+  </data>
 </root>

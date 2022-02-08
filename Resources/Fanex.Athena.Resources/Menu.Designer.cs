@@ -502,6 +502,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cash Out Win Loss (New).
+        /// </summary>
+        public static string newcashoutwinloss {
+            get {
+                return ResourceManager.GetString("newcashoutwinloss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to NOTIFICATION.
         /// </summary>
         public static string notificationreport {
@@ -597,15 +606,6 @@ namespace Fanex.Athena.Resources {
         public static string specialba54 {
             get {
                 return ResourceManager.GetString("specialba54", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to SUBSIDIARY.
-        /// </summary>
-        public static string subsidiary {
-            get {
-                return ResourceManager.GetString("subsidiary", resourceCulture);
             }
         }
         

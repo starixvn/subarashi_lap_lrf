@@ -340,4 +340,7 @@
   <data name="extrapayout" xml:space="preserve">
     <value>Extra Payout</value>
   </data>
+  <data name="newcashoutwinloss" xml:space="preserve">
+    <value>Cash Out Win Loss (New)</value>
+  </data>
 </root>

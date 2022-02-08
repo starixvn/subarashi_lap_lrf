@@ -1895,7 +1895,7 @@
     <comment>93729</comment>
   </data>
   <data name="CashOutWinLoss" xml:space="preserve">
-    <value>即时兑现输赢</value>
+    <value>实时兑现输赢</value>
     <comment>93729</comment>
   </data>
   <data name="OriginalBetTicket" xml:space="preserve">
@@ -1903,7 +1903,7 @@
     <comment>93729</comment>
   </data>
   <data name="ProductCO" xml:space="preserve">
-    <value>即时兑现</value>
+    <value>实时兑现</value>
     <comment>93729</comment>
   </data>
   <data name="SettleAmount" xml:space="preserve">

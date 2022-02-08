@@ -291,6 +291,10 @@
     <Content Include="App_Data\UserGuide\CashOutWL\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\CashOutWL\en-US.htm" />
     <Content Include="App_Data\UserGuide\CustomerList\zh-Hans.htm" />
+    <Content Include="App_Data\UserGuide\NewCashOutWinLoss\en-US.htm" />
+    <Content Include="App_Data\UserGuide\NewCashOutWinLoss\zh-CN.htm" />
+    <Content Include="App_Data\UserGuide\NewCashOutWinLoss\zh-Hans.htm" />
+    <Content Include="App_Data\UserGuide\NewCashOutWinLoss\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\GoldDeluxeWL\en-US.htm" />
     <Content Include="App_Data\UserGuide\ColossusBetsWL\en-US.htm" />
     <Content Include="App_Data\UserGuide\ColossusBetsWL\zh-CN.htm" />
@@ -987,6 +991,8 @@
     <Content Include="www\css\build\dev\reactpages\leaguewinloss\index.css" />
     <Content Include="www\css\build\dev\reactpages\licenseewlbytimezone\index.chunk.js" />
     <Content Include="www\css\build\dev\reactpages\licenseewlbytimezone\index.css" />
+    <Content Include="www\css\build\dev\reactpages\newcashoutwinloss\index.chunk.js" />
+    <Content Include="www\css\build\dev\reactpages\newcashoutwinloss\index.css" />
     <Content Include="www\css\build\dev\reactpages\notification\index.chunk.js" />
     <Content Include="www\css\build\dev\reactpages\notification\index.chunk.js.map" />
     <Content Include="www\css\build\dev\reactpages\notification\index.css" />
@@ -1046,6 +1052,8 @@
     <Content Include="www\css\build\pro\reactpages\leaguewinloss\index.chunk.js" />
     <Content Include="www\css\build\pro\reactpages\leaguewinloss\index.css" />
     <Content Include="www\css\build\pro\reactpages\licenseewlbytimezone\index.css" />
+    <Content Include="www\css\build\pro\reactpages\newcashoutwinloss\index.chunk.js" />
+    <Content Include="www\css\build\pro\reactpages\newcashoutwinloss\index.css" />
     <Content Include="www\css\build\pro\reactpages\notification\index.chunk.js" />
     <Content Include="www\css\build\pro\reactpages\notification\index.css" />
     <Content Include="www\css\build\pro\reactpages\customer\playersegmentation\index.css" />
@@ -1155,14 +1163,17 @@
     <Content Include="Views\Desktop\Report\LiveReport\MatchList\Content.cshtml" />
     <Content Include="Views\Desktop\BetList\LiveReport\SportsLottery.cshtml" />
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\CustomerClassSettingPolicy.xls" />
-    <Content Include="App_Data\Template\Customers\PlayerSegmentation\CustomerClassSpreadSettingPolicy.xls" />    
+    <Content Include="App_Data\Template\Customers\PlayerSegmentation\CustomerClassSpreadSettingPolicy.xls" />
     <Content Include="Views\Desktop\Report\CustomerSupportTask\Main.cshtml" />
     <Content Include="www\css\build\dev\reactpages\customersupporttask\index.chunk.js.map" />
     <Content Include="www\css\build\dev\reactpages\customersupporttask\index.css.map" />
     <Content Include="App_Data\Template\Notification\Resettlement\TicketListing.xls" />
     <Content Include="www\css\build\dev\reactpages\extrapayout\index.chunk.js.map" />
+    <Content Include="Views\Desktop\Report\NewCashOutWinLoss\Main.cshtml" />
     <Content Include="www\css\build\dev\reactpages\extrapayout\index.css.map" />
     <Content Include="Views\Desktop\Report\ExtraPayout\Detail.cshtml" />
+    <Content Include="www\css\build\dev\reactpages\newcashoutwinloss\index.chunk.js.map" />
+    <Content Include="www\css\build\dev\reactpages\newcashoutwinloss\index.css.map" />
     <None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
     <None Include="www\css\source\pages\betlist\result\result.happy5.scss" />
     <None Include="www\css\source\reactpages\components\alert\icons\error.scss" />
@@ -1206,6 +1217,7 @@
     <Content Include="www\js\build\dev\reactpages\report\licenseewlbytimezone.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\notification\notification.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\notification\notification.chunk.js.map" />
+    <Content Include="www\js\build\dev\reactpages\report\newcashoutwinloss.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\report\speciallicenseewl.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\subsidiaryperformance\subsidiaryperformance.chunk.js" />
     <Content Include="www\js\build\pro\language-zh-CN.chunk.js" />
@@ -1240,6 +1252,7 @@
     <Content Include="www\js\build\pro\reactpages\report\leaguewinloss.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\report\licenseewlbytimezone.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\notification\notification.chunk.js" />
+    <Content Include="www\js\build\pro\reactpages\report\newcashoutwinloss.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\report\speciallicenseewl.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\subsidiaryperformance\subsidiaryperformance.chunk.js" />
     <Content Include="www\js\source\common\languages\ViewResources.txt">
@@ -3138,7 +3151,9 @@
     <Content Include="www\js\build\dev\reactpages\report\leaguewinloss.chunk.js.map" />
     <Content Include="www\js\build\dev\reactpages\report\customersupporttask.chunk.js.map" />
     <Content Include="www\js\build\dev\reactpages\report\extrapayout.chunk.js.map" />
+    <Content Include="www\css\source\reactpages\pages\newcashoutwinloss\index.scss" />
     <Content Include="www\css\source\reactpages\pages\extrapayout\index.scss" />
+    <Content Include="www\js\build\dev\reactpages\report\newcashoutwinloss.chunk.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SiteConfig\WebConfigTransforms\SIT.config">
