@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -46,7 +47,9 @@ namespace Fanex.Athena.Controllers.Report
             var minDate = limitedMonthRange == 0 && licenseeSetting != null ? Convert.ToDateTime(licenseeSetting.MinDate) : today.AddMonths(-limitedMonthRange);
 
             var siteName = SessionServiceInstance.LicenseeSession.LicenseeName;
-            var sportList = await _sportService.GetSportBySiteNameAsync(siteName);
+
+            var productCode = String.Join(",", productAccess.ProductList.Select(p => p.ProductCode));
+            var sportList = await _sportService.GetSportForProductAsync(siteName, productCode);
 
             var viewModel = new DailyBetsViewModel
             {

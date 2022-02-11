@@ -23,9 +23,9 @@ namespace Fanex.Athena.Service.StatelessCore
             _cache = cache;
         }
 
-        public async Task<IEnumerable<SportGame>> GetSportBySiteNameAsync(string siteName)
+        public async Task<IEnumerable<SportGame>> GetSportForProductAsync(string siteName, string productCode)
         {
-            var cacheKey = CacheKey.MemorycacheSportListByLicensee + siteName;
+            var cacheKey = CacheKey.MemorycacheSportListByLicensee + siteName + productCode;
             var sportList = _cache.Get<IList<SportGame>>(cacheKey);
 
             if (sportList != null)
@@ -33,7 +33,7 @@ namespace Fanex.Athena.Service.StatelessCore
                 return sportList;
             }
 
-            return await _sportDataAccess.GetSportBySiteNameAsync(siteName);
+            return await _sportDataAccess.GetSportForProductsAsync(siteName, productCode);
         }
     }
 }

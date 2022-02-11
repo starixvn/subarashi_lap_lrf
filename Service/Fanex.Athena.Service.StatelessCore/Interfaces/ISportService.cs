@@ -9,6 +9,6 @@ namespace Fanex.Athena.Service.StatelessCore.Interfaces
 {
     public interface ISportService
     {
-        Task<IEnumerable<SportGame>> GetSportBySiteNameAsync(string siteName);
+        Task<IEnumerable<SportGame>> GetSportForProductAsync(string siteName, string productCode);
     }
 }

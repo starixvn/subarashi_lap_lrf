@@ -1,6 +1,7 @@
 import { toggleLoader } from '@jsroot/actions/loaderAction';
 import { setPagingOption } from '@jsroot/actions/pagingOptionAction';
 import { setGridData } from '@jsroot/actions/gridDataAction';
+import { setSportList } from '@jsroot/actions/sportlistAction'
 
 import Site from '@jsroot/lib/site';
 import DataService from '@jsroot/lib/DataService';
@@ -37,6 +38,28 @@ export const getData = (param) => (dispatch) => {
             console.log(error.message);
             dispatchResult(dispatch, {...emptyData }, {...defaultPaingOption });
         });
+}
+
+export const getSportList = (param) => dispatch => {
+    const url = Site.resolveClientUrl('api/CommonDataApi/GetSportsByProducts');
+
+    dispatch(toggleLoader(true));
+    DataService.getData(url, param)
+        .then(reponse => {
+            const data = reponse.data.map(item => {
+                return {
+                    Key: item.GameCode,
+                    Value: item.GameName,
+                    Status: true
+                }
+            });
+            dispatch(setSportList(data));
+            dispatch(toggleLoader(false));
+        })
+        .catch(error => {
+            console.log(error);
+            dispatch(toggleLoader(false));
+        })
 }
 
 export const exportExcel = (param) => (dispatch) => {

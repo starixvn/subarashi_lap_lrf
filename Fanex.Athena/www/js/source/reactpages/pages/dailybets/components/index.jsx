@@ -23,7 +23,7 @@ const requestParam = {
   date: today
 }
 
-const defaultState = { ...initialState, requestParam };
+const defaultState = { ...initialState, requestParam, sportList };
 const store = Store.createStore(reducer, defaultState);
 
 const App = () => {

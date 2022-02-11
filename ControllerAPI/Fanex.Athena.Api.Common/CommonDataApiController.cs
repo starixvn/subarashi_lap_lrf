@@ -8,6 +8,7 @@
 
     using DataAccess.Core.Common.Interfaces;
     using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
 
@@ -30,6 +31,8 @@
 
         private readonly ISportTypeDataAccess _sportTypeDataAccess;
 
+        private readonly ISportService _sportService;
+
         private readonly ISessionService _sessionService;
 
         private readonly ILeagueDataAccess _leagueDataAccess;
@@ -51,7 +54,8 @@
             IMatchDataAccess matchDataAccess,
             IBetTypeService betTypeService,
             IPortalApiService portalApiService,
-            IProductService productService)
+            IProductService productService,
+            ISportService sportService)
 #pragma warning restore S107 // Methods should not have too many parameters
         {
             _langService = langService;
@@ -62,6 +66,7 @@
             _betTypeService = betTypeService;
             _portalApiService = portalApiService;
             _productService = productService;
+            _sportService = sportService;
         }
 
         protected override void Initialize(System.Web.Http.Controllers.HttpControllerContext controllerContext)
@@ -85,6 +90,16 @@
                  includeSabaSport).ConfigureAwait(false);
 
             return sports.Where(x => x.ParentId > -1).Select(x => new { value = x.ID, label = x.Name, status = true });
+        }
+
+        [HttpGet]
+        public async Task<IEnumerable<object>> GetSportsByProducts(string productCode)
+        {
+            if (String.IsNullOrWhiteSpace(productCode))
+            {
+                return new List<SportGame>();
+            }
+            return await _sportService.GetSportForProductAsync(_sessionService.LicenseeSession.LicenseeName, productCode);
         }
 
         [HttpGet]

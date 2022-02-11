@@ -42,6 +42,9 @@ export const SET_REQUEST_PARAM = "SET_REQUEST_PARAM"
 
 export const SET_REPORT_TITLE = "SET_REPORT_TITLE"
 
+/*Sport list*/
+export const SET_SPORT_LIST = "SET_SPORT_LIST";
+
 /* Live Status  */
 export const SET_PAGING_OPTION = 'SET_PAGING_OPTION';
 
