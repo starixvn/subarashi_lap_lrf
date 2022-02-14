@@ -28,7 +28,9 @@ namespace Fanex.Athena.Web.ActionFilter
         public bool BindCurrencyList { get; set; }
 
         public bool BindUserId { get; set; }
+
         public bool BindSiteName { get; set; }
+
         public bool BindLicenseeContract { get; set; }
 
         public bool BindLanguage { get; set; }
@@ -55,14 +57,16 @@ namespace Fanex.Athena.Web.ActionFilter
             {
                 AutoBindMetaModelService.MapUserId(actionArgument, userSession.UserId);
             }
+
             if (BindSiteName)
             {
                 var licensee = _sessionStorage.LicenseeAuthInfo;
                 AutoBindMetaModelService.MapSiteName(actionArgument, licensee.LicenseeName);
             }
+
             if (BindLanguage)
             {
-                AutoBindMetaModelService.MapLanguage(actionArgument);
+                AutoBindMetaModelService.MapLanguage(actionArgument, userSession.Language);
             }
 
             if (BindIp)

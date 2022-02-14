@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import LangHelper from '@jsroot/lib/langHelper';
 import Excel from '@jsroot/lib/excel';
 import { decode } from '@jsroot/lib/htmlHelper';
-import { generateDefaultConfirmOption } from '@jsroot/lib/sweetAlert';
+import { generateDefaultConfirmOption, predefinedIcons } from '@jsroot/lib/sweetAlert';
 import { ActionCreators } from '../actions';
 import DropzoneUpload from '../../../components/DropzoneUpload';
 import { Url, ExcelReaderColumn } from '../lib/constants';
@@ -43,7 +43,7 @@ export const FormAction = props => {
         handlerUpdateVipStatusSuccess = handlerUpdateVipStatusSuccess || UpdateVipStatusAlertOption.createHandlerAfterUpdateVipStatusSuccess(props);
         const handlerAfterUpdateVipStatus = UpdateVipStatusAlertOption.createHandlerAfterUpdateVipStatus({ setSweetAlertOption, handlerUpdateVipStatusSuccess, isUpdateVip, noAlertResult });
         const confirmProps = UpdateVipStatusAlertOption.createUpdateVipStatusConfirmProps({ params, updateVipStatus, handlerAfterUpdateVipStatus });
-        const confirmOptions = generateDefaultConfirmOption(confirmMessage, _handleCloseAlert, confirmProps, _cancelProps);
+        const confirmOptions = generateDefaultConfirmOption(confirmMessage, _handleCloseAlert, confirmProps, _cancelProps, predefinedIcons.warning, { height: 210 });
         return confirmOptions;
     }
 

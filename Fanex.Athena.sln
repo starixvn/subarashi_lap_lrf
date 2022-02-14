@@ -207,6 +207,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Module.Notific
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Api.Customer", "ControllerAPI\Fanex.Athena.Api.Customer\Fanex.Athena.Api.Customer.csproj", "{D51C20F8-9F28-47EB-AEA2-0BCFED2CFF26}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LicenseeContact", "LicenseeContact", "{FD83BD01-4FA6-4167-818D-D878133A853C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Module.LicenseeContact", "Module\LicenseeContact\Fanex.Athena.Module.LicenseeContact\Fanex.Athena.Module.LicenseeContact.csproj", "{50BB0320-2C39-47E3-BC6B-2C54834103DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1191,6 +1195,18 @@ Global
 		{D51C20F8-9F28-47EB-AEA2-0BCFED2CFF26}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{D51C20F8-9F28-47EB-AEA2-0BCFED2CFF26}.Release|x86.ActiveCfg = Release|Any CPU
 		{D51C20F8-9F28-47EB-AEA2-0BCFED2CFF26}.Release|x86.Build.0 = Release|Any CPU
+		{50BB0320-2C39-47E3-BC6B-2C54834103DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50BB0320-2C39-47E3-BC6B-2C54834103DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50BB0320-2C39-47E3-BC6B-2C54834103DE}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{50BB0320-2C39-47E3-BC6B-2C54834103DE}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{50BB0320-2C39-47E3-BC6B-2C54834103DE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{50BB0320-2C39-47E3-BC6B-2C54834103DE}.Debug|x86.Build.0 = Debug|Any CPU
+		{50BB0320-2C39-47E3-BC6B-2C54834103DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50BB0320-2C39-47E3-BC6B-2C54834103DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50BB0320-2C39-47E3-BC6B-2C54834103DE}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{50BB0320-2C39-47E3-BC6B-2C54834103DE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{50BB0320-2C39-47E3-BC6B-2C54834103DE}.Release|x86.ActiveCfg = Release|Any CPU
+		{50BB0320-2C39-47E3-BC6B-2C54834103DE}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1286,10 +1302,12 @@ Global
 		{DD3D17B1-FA6B-4D4D-8BFB-B4FB0A2E47A9} = {95F7F062-4360-46BD-94DA-D47BF794C07A}
 		{2B0DADD9-DEC1-4352-9246-1FEA2123D852} = {95F7F062-4360-46BD-94DA-D47BF794C07A}
 		{D51C20F8-9F28-47EB-AEA2-0BCFED2CFF26} = {4D6B663E-04A8-4993-B33F-A445428FA349}
+		{FD83BD01-4FA6-4167-818D-D878133A853C} = {4F0025D0-B5BA-46E4-B615-B8C6B0F5D064}
+		{50BB0320-2C39-47E3-BC6B-2C54834103DE} = {FD83BD01-4FA6-4167-818D-D878133A853C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35;packages\Unity.Interception.2.1.505.0\lib\NET35
-		RESX_ShowErrorsInErrorList = False
 		SolutionGuid = {AF850210-126B-4E21-BADB-F5C02AD2CCEE}
+		RESX_ShowErrorsInErrorList = False
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35;packages\Unity.Interception.2.1.505.0\lib\NET35
 	EndGlobalSection
 EndGlobal

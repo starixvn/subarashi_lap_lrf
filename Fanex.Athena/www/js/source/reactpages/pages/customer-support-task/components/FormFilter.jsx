@@ -77,7 +77,7 @@ const FormFilter = ({ selectedCurrency, selectedSupportTask, setSelectedSupportT
                 <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
                     <div className="form-group">
                         <div className="button-group">
-                            <button type="button" className="btn btn-submit" disabled={!selectedCurrency} onClick={_exportExcel}>{'Export To Excel'}</button>
+                            <button type="button" className="btn btn-submit" disabled={!selectedCurrency} onClick={_exportExcel}>{LangHelper.getSingleResource('ExportToExcel')}</button>
                         </div>
                     </div>
                 </div>

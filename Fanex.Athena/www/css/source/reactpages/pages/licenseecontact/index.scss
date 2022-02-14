@@ -1,0 +1,102 @@
+@import "../../components/react-grid";
+@import '../../components/popup';
+@import "../../components/autocomplete";
+@import '../../components/forms/radio-buttons';
+@import '../../components/forms/checkbox';
+@import "../../components/alert/index";
+
+.form-action {
+    position: relative;
+    .form-group {
+        .button-group {
+            margin-top: 0;
+
+        }
+    }
+}
+
+.action-cell {
+    .material-icons {
+        font-size: 19px;
+    }
+
+    .delete-icon {
+        color: $red
+    }
+}
+
+.general-information {
+    border-right: 1px solid #e8e8e8;
+
+    .row {
+        margin-bottom: 10px;
+    }
+
+    textarea {
+        resize: vertical;
+        padding: 6px 12px 3px;
+        font-size: 13px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        width: 100%;
+    }
+    
+    .character-remain {
+        font-size: 11px;
+        color: #b6b6b6;
+    }
+}
+
+.category-selection {
+    .row {
+        margin-bottom: 5px;
+        .radio-group {
+            margin-top: 10px;
+
+            input[type="checkbox"].checkbox + label:after {
+                border-bottom: 1px solid $red !important;
+
+            }
+        }
+    }
+
+}
+
+.select-highlight {
+    .Select-control {
+        border-bottom: 1px solid $red !important;
+    }
+}
+
+.form-bottom {
+    margin-top: 10px;
+    .button-group {
+        float: right;
+    }
+}
+
+.popup-content {
+    padding: 15px;
+}
+
+.required {
+    top: 0;
+    color: $red;
+    margin-left: 2px;
+}
+
+.title  {
+    font-weight: bold;
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+.warning-title {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.input-highlight {
+    border-bottom: 1px solid $red !important;
+}

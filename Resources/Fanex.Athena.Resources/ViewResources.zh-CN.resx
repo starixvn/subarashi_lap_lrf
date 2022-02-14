@@ -1117,7 +1117,7 @@
     <value>退款</value>
   </data>
   <data name="Remark" xml:space="preserve">
-    <value>备注</value>
+    <value>备註</value>
   </data>
   <data name="RemoveFromGroup" xml:space="preserve">
     <value>从该组中删除</value>
@@ -2712,5 +2712,129 @@
   </data>
   <data name="PromotionType" xml:space="preserve">
     <value>基础货币</value>
+  </data>
+  <data name="AddContact" xml:space="preserve">
+    <value>新增联络人</value>
+    <comment>165286</comment>
+  </data>
+  <data name="AddSuccess" xml:space="preserve">
+    <value>新增成功</value>
+    <comment>165286</comment>
+  </data>
+  <data name="AlertDeleteLicenseeContact" xml:space="preserve">
+    <value>确定将删除此联络人资讯吗{0}?</value>
+    <comment>165286</comment>
+  </data>
+  <data name="AlertUpdateLicenseeContact" xml:space="preserve">
+    <value>确定将更新此联络人资讯吗?</value>
+    <comment>165286</comment>
+  </data>
+  <data name="AllCategories" xml:space="preserve">
+    <value>全选种类</value>
+    <comment>165286</comment>
+  </data>
+  <data name="AtLeastOneCategoryMustBeSelected" xml:space="preserve">
+    <value>至少选择一项种类</value>
+    <comment>165286</comment>
+  </data>
+  <data name="CategoriesSelection" xml:space="preserve">
+    <value>种类</value>
+    <comment>165286</comment>
+  </data>
+  <data name="CcList" xml:space="preserve">
+    <value>cc列表</value>
+    <comment>165286</comment>
+  </data>
+  <data name="CharactersRemaining" xml:space="preserve">
+    <value>剩馀{0}字</value>
+    <comment>165286</comment>
+  </data>
+  <data name="ContactType" xml:space="preserve">
+    <value>种类</value>
+    <comment>165286</comment>
+  </data>
+  <data name="DeleteSuccess" xml:space="preserve">
+    <value>删除成功</value>
+    <comment>165286</comment>
+  </data>
+  <data name="Department" xml:space="preserve">
+    <value>部门</value>
+    <comment>165286</comment>
+  </data>
+  <data name="EditContact" xml:space="preserve">
+    <value>编辑联络人</value>
+    <comment>165286</comment>
+  </data>
+  <data name="GeneralInformation" xml:space="preserve">
+    <value>一般资讯</value>
+    <comment>165286</comment>
+  </data>
+  <data name="Individual" xml:space="preserve">
+    <value>个人</value>
+    <comment>165286</comment>
+  </data>
+  <data name="LicenseeContactAddErrorMsg_100" xml:space="preserve">
+    <value>Parameters are invalid!</value>
+    <comment>165286</comment>
+  </data>
+  <data name="LicenseeContactAddErrorMsg_101" xml:space="preserve">
+    <value>Licensee does not exist!</value>
+    <comment>165286</comment>
+  </data>
+  <data name="LicenseeContactCategoryNote" xml:space="preserve">
+    <value>此种类不能为空白</value>
+    <comment>165286</comment>
+  </data>
+  <data name="LicenseeContactCategoryRuleNote" xml:space="preserve">
+    <value>请确保每项种类皆至少有一位联络人</value>
+    <comment>165286</comment>
+  </data>
+  <data name="LicenseeContactDeleteErrorMsg_101" xml:space="preserve">
+    <value>Licensee does not exist!</value>
+    <comment>165286</comment>
+  </data>
+  <data name="LicenseeContactDeleteErrorMsg_102" xml:space="preserve">
+    <value>其他人已更动联络人资讯，请再次确认</value>
+    <comment>165286</comment>
+  </data>
+  <data name="LicenseeContactEditErrorMsg_100" xml:space="preserve">
+    <value>Parameters are invalid!</value>
+    <comment>165286</comment>
+  </data>
+  <data name="LicenseeContactEditErrorMsg_101" xml:space="preserve">
+    <value>Licensee does not exist!</value>
+    <comment>165286</comment>
+  </data>
+  <data name="LicenseeContactEditErrorMsg_102" xml:space="preserve">
+    <value>其他人已更动联络人资讯，请再次确认</value>
+    <comment>165286</comment>
+  </data>
+  <data name="LicenseeContacts" xml:space="preserve">
+    <value>联络人资讯</value>
+    <comment>165286</comment>
+  </data>
+  <data name="NotReceiveNotificationOnCategoriesWarning" xml:space="preserve">
+    <value>确定将此联络人停止收取通知信吗?</value>
+    <comment>165286</comment>
+  </data>
+  <data name="Position" xml:space="preserve">
+    <value>职称</value>
+    <comment>165286</comment>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>搜寻</value>
+    <comment>165286</comment>
+  </data>
+  <data name="Skype" xml:space="preserve">
+    <value>Skype</value>
+    <comment>165286</comment>
+  </data>
+  <data name="TheLicenseeHasNoAssignedCategory" xml:space="preserve">
+    <value>此商户尚未设置联络人资讯，请联繫主帐户设置联络人资讯</value>
+    <comment>165286</comment>
+  </data>
+  <data name="ToList" xml:space="preserve">
+    <value>To列表</value>
+    <comment>165286</comment>
   </data>
 </root>

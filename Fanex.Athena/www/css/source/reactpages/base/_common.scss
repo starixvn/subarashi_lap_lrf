@@ -59,6 +59,15 @@ ul {
     font-weight: bold;
 }
 
+.warning-note {
+    color: $red;
+}
+
+.info-note {
+    color: #ff7b26;
+    font-style: italic;
+}
+
 .circle {
     display: inline-block;
     vertical-align: middle;

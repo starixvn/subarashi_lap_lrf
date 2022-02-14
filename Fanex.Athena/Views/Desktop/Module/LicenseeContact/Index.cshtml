@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "LAP - " + ViewResources.LicenseeContacts;
+    Layout = "~/Views/Desktop/Shared/_ReactPageLayout.cshtml";
+}
+@{
+}
+
+@section pagecss {
+    <link href="@Url.ContentLinkByEnv("/www/css/build/reactpages/licenseecontact/index.css")" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+}
+@section pagejs {
+    <script src="@Url.ContentLinkByEnv("/www/js/build/reactpages/licenseecontact/licenseecontact.chunk.js")"></script>
+}
+
+@section globaljscode{
+    window.initialState = {
+    isLoading: false
+    }
+}
+<div id="app-container">
+</div>

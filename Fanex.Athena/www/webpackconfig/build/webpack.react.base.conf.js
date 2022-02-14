@@ -22,6 +22,7 @@ function generateConfig(environment) {
 
             [`${jsPath}/subsidiaryperformance/subsidiaryperformance`]: pathConfig.scriptPaths.subsidiaryperformance,
             [`${jsPath}/notification/notification`]: pathConfig.scriptPaths.notification,
+            [`${jsPath}/licenseecontact/licenseecontact`]: pathConfig.scriptPaths.licenseecontact,
             [`${jsPath}/report/licenseewlbytimezone`]: pathConfig.scriptPaths.licenseewlbytimezone,
             [`${jsPath}/report/leaguewinloss`]: pathConfig.scriptPaths.leaguewinloss,
             [`${jsPath}/report/extrapayout`]: pathConfig.scriptPaths.extrapayout,
@@ -46,6 +47,7 @@ function generateConfig(environment) {
             [`${cssPath}/leaguewinloss/index`]: pathConfig.cssPaths.leaguewinloss,
             [`${cssPath}/extrapayout/index`]: pathConfig.cssPaths.extrapayout,
             [`${cssPath}/notification/index`]: pathConfig.cssPaths.notification,
+            [`${cssPath}/licenseecontact/index`]: pathConfig.cssPaths.licenseecontact,
             [`${cssPath}/exchangewl/index`]: pathConfig.cssPaths.exchangewl,
             [`${cssPath}/speciallicenseewl/index`]: pathConfig.cssPaths.speciallicenseewl,
             [`${cssPath}/bettingticketscenter/index`]: pathConfig.cssPaths.bettingticketscenter,

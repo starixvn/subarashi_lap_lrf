@@ -995,6 +995,8 @@
     <Content Include="www\css\build\dev\reactpages\extrapayout\index.css" />
     <Content Include="www\css\build\dev\reactpages\leaguewinloss\index.chunk.js" />
     <Content Include="www\css\build\dev\reactpages\leaguewinloss\index.css" />
+    <Content Include="www\css\build\dev\reactpages\licenseecontact\index.chunk.js" />
+    <Content Include="www\css\build\dev\reactpages\licenseecontact\index.css" />
     <Content Include="www\css\build\dev\reactpages\licenseewlbytimezone\index.chunk.js" />
     <Content Include="www\css\build\dev\reactpages\licenseewlbytimezone\index.css" />
     <Content Include="www\css\build\dev\reactpages\newcashoutwinloss\index.chunk.js" />
@@ -1057,6 +1059,8 @@
     <Content Include="www\css\build\pro\reactpages\extrapayout\index.css" />
     <Content Include="www\css\build\pro\reactpages\leaguewinloss\index.chunk.js" />
     <Content Include="www\css\build\pro\reactpages\leaguewinloss\index.css" />
+    <Content Include="www\css\build\pro\reactpages\licenseecontact\index.chunk.js" />
+    <Content Include="www\css\build\pro\reactpages\licenseecontact\index.css" />
     <Content Include="www\css\build\pro\reactpages\licenseewlbytimezone\index.css" />
     <Content Include="www\css\build\pro\reactpages\newcashoutwinloss\index.chunk.js" />
     <Content Include="www\css\build\pro\reactpages\newcashoutwinloss\index.css" />
@@ -1192,6 +1196,9 @@
     <Content Include="Views\Desktop\Report\NewCashOutWinLoss\Main.cshtml" />
     <Content Include="www\css\build\dev\reactpages\extrapayout\index.css.map" />
     <Content Include="Views\Desktop\Report\ExtraPayout\Detail.cshtml" />
+    <Content Include="Views\Desktop\Module\LicenseeContact\Index.cshtml" />
+    <Content Include="www\css\build\dev\reactpages\licenseecontact\index.chunk.js.map" />
+    <Content Include="www\css\build\dev\reactpages\licenseecontact\index.css.map" />
     <Content Include="www\css\build\dev\reactpages\newcashoutwinloss\index.chunk.js.map" />
     <Content Include="www\css\build\dev\reactpages\newcashoutwinloss\index.css.map" />
     <None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
@@ -1229,6 +1236,7 @@
     <Content Include="www\js\build\dev\reactpages\customer\playersegmentation\problemPlayer.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\customer\playersegmentation\vipPlayerManagement.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\customer\playersegmentation\betlist.chunk.js" />
+    <Content Include="www\js\build\dev\reactpages\licenseecontact\licenseecontact.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\report\casinoturnover.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\report\customersupporttask.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\report\dailybets.chunk.js" />
@@ -1265,6 +1273,7 @@
     <Content Include="www\js\build\pro\reactpages\customer\playersegmentation\main.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\customer\playersegmentation\problemPlayer.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\customer\playersegmentation\vipPlayerManagement.chunk.js" />
+    <Content Include="www\js\build\pro\reactpages\licenseecontact\licenseecontact.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\report\casinoturnover.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\report\customersupporttask.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\report\dailybets.chunk.js" />
@@ -3174,6 +3183,7 @@
     <Content Include="www\css\source\reactpages\pages\newcashoutwinloss\index.scss" />
     <Content Include="www\css\source\reactpages\pages\extrapayout\index.scss" />
     <Content Include="www\js\build\dev\reactpages\report\newcashoutwinloss.chunk.js.map" />
+    <Content Include="www\js\build\dev\reactpages\licenseecontact\licenseecontact.chunk.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SiteConfig\WebConfigTransforms\SIT.config">
@@ -6164,6 +6174,10 @@
     <ProjectReference Include="..\Module\Fanex.Athena.Module.Notification.Report\Fanex.Athena.Module.Notification.Report.csproj">
       <Project>{eaa832b4-1501-4a05-b459-aeef528b521f}</Project>
       <Name>Fanex.Athena.Module.Notification.Report</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Module\LicenseeContact\Fanex.Athena.Module.LicenseeContact\Fanex.Athena.Module.LicenseeContact.csproj">
+      <Project>{50bb0320-2c39-47e3-bc6b-2c54834103de}</Project>
+      <Name>Fanex.Athena.Module.LicenseeContact</Name>
     </ProjectReference>
     <ProjectReference Include="..\Resources\Fanex.Athena.Resources\Fanex.Athena.Resources.csproj">
       <Project>{17b0022c-4902-4c61-908a-5db81568dc3a}</Project>
