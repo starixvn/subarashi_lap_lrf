@@ -407,31 +407,6 @@ class BetList {
         return rootUrl + 'ResultReport/ShowRngCasinoSingleWalletResult';
     }
 
-    getVoidbridgeResultUrl(rootUrl, custid, gamePlayID) {
-        let url = rootUrl + 'ResultReport/VoidbridgeResult';
-        url = QueryString.setParam(url, 'custid', custid);
-        url = QueryString.setParam(url, 'gamePlayID', gamePlayID);
-
-        return url;
-    }
-
-    getPPResultUrl(rootUrl, custid, gamePlayId) {
-        let url = rootUrl + 'PPResultPopup/Index';
-        url = QueryString.setParam(url, 'custid', custid);
-        url = QueryString.setParam(url, 'gamePlayId', gamePlayId);
-
-        return url;
-    }
-
-    getCardClubResultUrl(rootUrl, custid, gameTypeId, transId3rd) {
-        let url = rootUrl + 'CardClubResultPopup/Index';
-        url = QueryString.setParam(url, 'custid', custid);
-        url = QueryString.setParam(url, 'gameTypeId', gameTypeId);
-        url = QueryString.setParam(url, 'transId3rd', transId3rd);
-
-        return url;
-    }
-
     getSabaClubResultUrl(rootUrl, custid, gameId, siteId, gameRoundId, sportType) {
         let url = rootUrl + 'SabaClubResultPopup/Index';
         url = QueryString.setParam(url, 'custid', custid);
@@ -439,14 +414,6 @@ class BetList {
         url = QueryString.setParam(url, 'siteId', siteId);
         url = QueryString.setParam(url, 'gameRoundId', gameRoundId);
         url = QueryString.setParam(url, 'sportType', sportType);
-
-        return url;
-    }
-
-    getSGResultUrl(rootUrl, custid, gamePlayId) {
-        let url = rootUrl + 'SGResultPopup/Index';
-        url = QueryString.setParam(url, 'custid', custid);
-        url = QueryString.setParam(url, 'gamePlayId', gamePlayId);
 
         return url;
     }
@@ -478,15 +445,6 @@ class BetList {
         return url;
     }
 
-    getJokerResultUrl(rootUrl, custId, gamePlayId, gameCode) {
-        let url = rootUrl + 'ResultReport/Joker';
-        url = QueryString.setParam(url, 'custId', custId);
-        url = QueryString.setParam(url, 'gamePlayId', gamePlayId);
-        url = QueryString.setParam(url, 'gameCode', gameCode);
-
-        return url;
-    }
-
     getSexyGamingResultUrl(rootUrl, transdesc, matchCode, bettype) {
         let url = rootUrl + 'ResultReport/SexyGaming';
         url = QueryString.setParam(url, 'matchCode', matchCode);
@@ -500,63 +458,6 @@ class BetList {
         let url = rootUrl + 'ResultReport/GlobalGamingResult';
         url = QueryString.setParam(url, 'custid', custid);
         url = QueryString.setParam(url, 'gameId', gameId);
-
-        return url;
-    }
-
-    getPGSoftResultUrl(rootUrl, custid, gamePlayId, gameId3rd) {
-        let url = rootUrl + 'PGSoftResultPopup/Index';
-        url = QueryString.setParam(url, 'custid', custid);
-        url = QueryString.setParam(url, 'gamePlayId', gamePlayId);
-        url = QueryString.setParam(url, 'gameId3rd', gameId3rd);
-
-        return url;
-    }
-
-    getBGGResultUrl(rootUrl, custid, transId3rd, currencyId, siteId) {
-        let url = rootUrl + 'BGGResultPopup/Index';
-        url = QueryString.setParam(url, 'custid', custid);
-        url = QueryString.setParam(url, 'transId3rd', transId3rd);
-        url = QueryString.setParam(url, 'currencyId', currencyId);
-        url = QueryString.setParam(url, 'siteId', siteId);
-
-        return url;
-    }
-
-    getHappy5LinkedGamesResultUrl(rootUrl, custId, transId3rd, platform) {
-        let url = rootUrl + 'Happy5LinkedGamesResultPopup/Index';
-        url = QueryString.setParam(url, 'custId', custId);
-        url = QueryString.setParam(url, 'transId3rd', transId3rd);
-        url = QueryString.setParam(url, 'platform', platform);
-
-        return url;
-    }
-
-    getGDGResultUrl(rootUrl, custId, transId3rd, gameId3rd, siteId) {
-        let url = rootUrl + 'ResultReport/GDG';
-        url = QueryString.setParam(url, 'custId', custId);
-        url = QueryString.setParam(url, 'transId3rd', transId3rd);
-        url = QueryString.setParam(url, 'gameId3rd', gameId3rd);
-        url = QueryString.setParam(url, 'siteId', siteId);
-
-        return url;
-    }
-
-    getSportsLotteryResultUrl(rootUrl, custId, transId3rd, platform) {
-        let url = rootUrl + 'SportsLotteryResultPopup/Index';
-        url = QueryString.setParam(url, 'custId', custId);
-        url = QueryString.setParam(url, 'transId3rd', transId3rd);
-        url = QueryString.setParam(url, 'platform', platform);
-
-        return url;
-    }
-
-    getHabaneroResultUrl(rootUrl, custId, transId3rd, gameId3rd, siteId) {
-        let url = rootUrl + 'ResultReport/Habanero';
-        url = QueryString.setParam(url, 'custId', custId);
-        url = QueryString.setParam(url, 'transId3rd', transId3rd);
-        url = QueryString.setParam(url, 'gameId3rd', gameId3rd);
-        url = QueryString.setParam(url, 'siteId', siteId);
 
         return url;
     }
@@ -582,32 +483,15 @@ class BetList {
         return url;
     }
 
-    getCGResultUrl(rootUrl, custId, transId3rd, gameId3rd, siteId) {
-        let url = rootUrl + 'ResultReport/CG';
+    getThirdPartyProductResultUrl(rootUrl, custId, transId3rd, gameId3rd, currencyId, siteId, betTypeId, productPath) {
+        let url = rootUrl + 'ThirdPartyResultPopup/Index';
         url = QueryString.setParam(url, 'custId', custId);
         url = QueryString.setParam(url, 'transId3rd', transId3rd);
         url = QueryString.setParam(url, 'gameId3rd', gameId3rd);
+        url = QueryString.setParam(url, 'currencyId', currencyId);
         url = QueryString.setParam(url, 'siteId', siteId);
-
-        return url;
-    }
-
-    geAdvantPlayResultUrl(rootUrl, custId, transId3rd, gameId3rd, siteId) {
-        let url = rootUrl + 'ResultReport/AdvantPlay';
-        url = QueryString.setParam(url, 'custId', custId);
-        url = QueryString.setParam(url, 'transId3rd', transId3rd);
-        url = QueryString.setParam(url, 'gameId3rd', gameId3rd);
-        url = QueryString.setParam(url, 'siteId', siteId);
-
-        return url;
-    }
-
-    geAdvantPlayMiniResultUrl(rootUrl, custId, transId3rd, gameId3rd, siteId) {
-        let url = rootUrl + 'ResultReport/AdvantPlayMini';
-        url = QueryString.setParam(url, 'custId', custId);
-        url = QueryString.setParam(url, 'transId3rd', transId3rd);
-        url = QueryString.setParam(url, 'gameId3rd', gameId3rd);
-        url = QueryString.setParam(url, 'siteId', siteId);
+        url = QueryString.setParam(url, 'betTypeId', betTypeId);
+        url = QueryString.setParam(url, 'productPath', productPath);
 
         return url;
     }

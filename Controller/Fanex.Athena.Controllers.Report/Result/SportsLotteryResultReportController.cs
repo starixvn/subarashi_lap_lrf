@@ -26,7 +26,7 @@
             if (ModelState.IsValid)
             {
                 var data = await _betListApiClient.PostStringAsync(
-                    "/SportsLotteryResultPopup/ResultPage",
+                    "/SportsLotteryResultMainPage/ResultPage",
                      obj,
                      SessionServiceInstance.UserSession.Language
                     ).ConfigureAwait(false);
