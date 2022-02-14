@@ -14,21 +14,6 @@
         }
 
         [HttpGet]
-        public async Task<string> Index(string custId, string transId3rd, string platform)
-        {
-            var language = SessionServiceInstance.UserSession.Language;
-            var model = new
-            {
-                custId,
-                transId3rd,
-                platform,
-                languageCode = language
-            };
-
-            return await _betListApiClient.PostStringAsync("/Happy5LinkedGamesResultPopup/Index", model, language).ConfigureAwait(false);
-        }
-
-        [HttpGet]
         public async Task<string> Soccer5(string matchId, string balls, string platform)
         {
             var language = SessionServiceInstance.UserSession.Language;

@@ -23,25 +23,25 @@ class BetListLayout extends Component {
         };
 
         window.ViewResult = (matchid, raceNo, bettype, sporttype, refno,
-            currency, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid, transdecs) => {
+            currency, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid, transdecs, siteId) => {
             const title = this._getResource('Result');
             const defaultPlatform = 'd';
             const rootUrl = this.props.rootUrl;
 
             if (sporttype === SportType.RNG_GAME || sporttype === SportType.RNG_MINIGAME || sporttype === SportType.RNG_MOBILE) {
-                const url = BetList.getRngCasinoResultUrl(rootUrl)
-                this._showRngCasinoResult(refno, url, title);
+                const url = BetList.getThirdPartyProductResultUrl(rootUrl, custid, transdecs, extension2, extension1, siteId, bettype, 'RNGCasino');
+                this._showThirdPartyResult(url, title);
             }
             else if (sporttype === SportType.VOIDBRIDGE) {
-                const url = BetList.getVoidbridgeResultUrl(rootUrl, custid, extension2);
+                const url = BetList.getThirdPartyProductResultUrl(rootUrl, custid, transdecs, extension2, extension1, siteId, bettype, 'Voidbridge');
                 this._showThirdPartyResult(url, title);
             }
             else if (sporttype === SportType.PP) {
-                const url = BetList.getPPResultUrl(rootUrl, custid, extension2);
+                const url = BetList.getThirdPartyProductResultUrl(rootUrl, custid, transdecs, extension2, extension1, siteId, bettype, 'PP');
                 this._showThirdPartyResult(url, title);
             }
             else if (sporttype === SportType.CARDCLUB) {
-                const url = BetList.getCardClubResultUrl(rootUrl, custid, bettype, extension2);
+                const url = BetList.getThirdPartyProductResultUrl(rootUrl, custid, transdecs, extension2, extension1, siteId, bettype, 'CardClub');
                 this._showThirdPartyResult(url, title);
             }
             else if (sporttype === SportType.SBC || sporttype === SportType.SBC_FreeBets) {
@@ -49,7 +49,7 @@ class BetListLayout extends Component {
                 this._showThirdPartyResult(url, title);
             }
             else if (sporttype === SportType.SG) {
-                const url = BetList.getSGResultUrl(rootUrl, custid, extension2);
+                const url = BetList.getThirdPartyProductResultUrl(rootUrl, custid, transdecs, extension2, extension1, siteId, bettype, 'SG');
                 this._showThirdPartyResult(url, title);
             }
             else if (sporttype === SportType.VRG) {
@@ -69,7 +69,7 @@ class BetListLayout extends Component {
                 this._showThirdPartyResult(url, title);
             }
             else if (sporttype === SportType.JK) {
-                const url = BetList.getJokerResultUrl(rootUrl, custid, transdecs, extension2);
+                const url = BetList.getThirdPartyProductResultUrl(rootUrl, custid, transdecs, extension2, extension1, siteId, bettype, 'Joker');
                 this._showThirdPartyResult(url, title);
             }
             else if (sporttype === SportType.SXG) {
@@ -77,26 +77,26 @@ class BetListLayout extends Component {
                 this._openPopup(url, title);
             }
             else if (sporttype === SportType.PGS) {
-                const url = BetList.getPGSoftResultUrl(rootUrl, custid, transdecs, extension2);
+                const url = BetList.getThirdPartyProductResultUrl(rootUrl, custid, transdecs, extension2, extension1, siteId, bettype, 'PGSoft');
                 this._showThirdPartyResult(url, title);
             }
             else if (sporttype === SportType.Happy5LinkedGames) {
-                const url = BetList.getHappy5LinkedGamesResultUrl(rootUrl, extension1, refno, defaultPlatform);
+                const url = BetList.getThirdPartyProductResultUrl(rootUrl, custid, refno, extension2, extension1, siteId, bettype, 'Happy5LinkedGames');
                 this._showThirdPartyResult(url, title);
             }
             else if (sporttype === SportType.GDG) {
-                const url = BetList.getGDGResultUrl(rootUrl, custid, transdecs, extension2, league);
+                const url = BetList.getThirdPartyProductResultUrl(rootUrl, custid, transdecs, extension2, extension1, siteId, bettype, 'GDG');
                 this._showThirdPartyResult(url, title);
             } else if (sporttype === SportType.BGG) {
-                const url = BetList.getBGGResultUrl(rootUrl, custid, transdecs, league, extension2);
+                const url = BetList.getThirdPartyProductResultUrl(rootUrl, custid, transdecs, extension2, extension1, siteId, bettype, 'BGG');
                 this._showThirdPartyResult(url, title);
             }
             else if (sporttype === SportType.SLT) {
-                const url = BetList.getSportsLotteryResultUrl(rootUrl, custid, transdecs, defaultPlatform);
+                const url = BetList.getThirdPartyProductResultUrl(rootUrl, custid, transdecs, extension2, extension1, siteId, bettype, 'SportsLottery');
                 this._showThirdPartyResult(url, title);
             }
             else if (sporttype === SportType.HB) {
-                const url = BetList.getHabaneroResultUrl(rootUrl, custid, transdecs, extension2, extension1);
+                const url = BetList.getThirdPartyProductResultUrl(rootUrl, custid, transdecs, extension2, extension1, siteId, bettype, 'Habanero');
                 this._showThirdPartyResult(url, title);
             }
             else if (sporttype === SportType.WM) {
@@ -108,15 +108,15 @@ class BetListLayout extends Component {
                 this._showThirdPartyResult(url, title);
             }
             else if (sporttype === SportType.CG) {
-                const url = BetList.getCGResultUrl(rootUrl, custid, transdecs, extension2, extension1);
+                const url = BetList.getThirdPartyProductResultUrl(rootUrl, custid, transdecs, extension2, extension1, siteId, bettype, 'CG');
                 this._showThirdPartyResult(url, title);
             }
             else if (sporttype === SportType.AP) {
-                const url = BetList.geAdvantPlayResultUrl(rootUrl, custid, transdecs, extension2, extension1);
+                const url = BetList.getThirdPartyProductResultUrl(rootUrl, custid, transdecs, extension2, extension1, siteId, bettype, 'AdvantPlay');
                 this._showThirdPartyResult(url, title);
             }
             else if (sporttype === SportType.APM) {
-                const url = BetList.geAdvantPlayMiniResultUrl(rootUrl, custid, transdecs, extension2, extension1);
+                const url = BetList.getThirdPartyProductResultUrl(rootUrl, custid, transdecs, extension2, extension1, siteId, bettype, 'AdvantPlayMini');
                 this._showThirdPartyResult(url, title);
             }
             else {

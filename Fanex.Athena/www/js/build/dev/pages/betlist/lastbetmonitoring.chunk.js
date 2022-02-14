@@ -4967,56 +4967,10 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 });
             },
 
-            viewVoidbridgeResult: function (custId, gamePlayId, title) {
-                const url = Site.resolveClientUrl('ResultReport/VoidbridgeResult');
-                Site.blockUI();
-                $.get(url + '?custid=' + custId + '&gamePlayId=' + gamePlayId, function (result) {
-                    if (result !== '') {
-                        showResultPopUp(result, { width: 800, height: 1200, title: title });
-                        Site.unBlockUI();
-                    }
-                });
-            },
-
-            viewPPResult: function (custId, gamePlayId, title) {
-                const url = Site.resolveClientUrl('PPResultPopup/Index');
-                Site.blockUI();
-                $.get(url + '?custid=' + custId + '&gamePlayId=' + gamePlayId, function (result) {
-                    if (result !== '') {
-                        var height = 450;
-                        showResultPopUp(result, { width: 800, height: height, title: title });
-                        resize3rdPartyResultFrame(height);
-                        Site.unBlockUI();
-                    }
-                });
-            },
-
-            viewCardClubResult: function (custId, gameTypeId, transId3rd, title) {
-                const url = Site.resolveClientUrl('CardClubResultPopup/Index');
-                Site.blockUI();
-                $.get(url + '?custid=' + custId + '&gameTypeId=' + gameTypeId + '&transId3rd=' + transId3rd, function (result) {
-                    if (result !== '') {
-                        showResultPopUp(result, { width: 800, height: 380, title: title });
-                        Site.unBlockUI();
-                    }
-                });
-            },
-
             viewSabaClubResult: function (custId, gameId, siteId, gameRoundId, title, sporttype) {
                 const url = Site.resolveClientUrl('SabaClubResultPopup/Index');
                 Site.blockUI();
                 $.get(url + '?custid=' + custId + '&gameId=' + gameId + '&siteId=' + siteId + '&gameRoundId=' + gameRoundId + '&sportType=' + sporttype, function (result) {
-                    if (result !== '') {
-                        showResultPopUp(result, { width: 800, height: 380, title: title });
-                        Site.unBlockUI();
-                    }
-                });
-            },
-
-            viewSGResult: function (custId, gamePlayId, title) {
-                const url = Site.resolveClientUrl('SGResultPopup/Index');
-                Site.blockUI();
-                $.get(url + '?custid=' + custId + '&gamePlayId=' + gamePlayId, function (result) {
                     if (result !== '') {
                         showResultPopUp(result, { width: 800, height: 380, title: title });
                         Site.unBlockUI();
@@ -5044,35 +4998,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 showResultPopUp(url, { width: 800, height: 380, title: title });
                 Site.unBlockUI();
             },
-            viewPGSResult: function (custId, gamePlayId, gameId3rd, title) {
-                const param = 'custId=' + custId +
-                    '&gamePlayId=' + gamePlayId +
-                    '&gameId3rd=' + gameId3rd;
-                const url = Site.resolveClientUrl('PGSoftResultPopup/Index?' + param);
-
-                Site.blockUI();
-                $.get(url, function (result) {
-                    if (result !== '') {
-                        showResultPopUp(result, { width: 800, height: 450, title: title });
-                        Site.unBlockUI();
-                    }
-                });
-            },
-            viewBGGResult: function (custId, transId3rd, currencyId, siteId, title) {
-                const param = 'custId=' + custId +
-                    '&transId3rd=' + transId3rd +
-                    '&currencyId=' + currencyId +
-                    '&siteId=' + siteId;
-                const url = Site.resolveClientUrl('BGGResultPopup/Index?' + param);
-
-                Site.blockUI();
-                $.get(url, function (result) {
-                    if (result !== '') {
-                        showResultPopUp(result, { width: 800, height: 450, title: title });
-                        Site.unBlockUI();
-                    }
-                });
-            },
 
             viewSAGamingResult: function (trasdesc, matchCode, bettype, title) {
                 const url = Site.resolveClientUrl('ResultReport/SAGaming?transdesc=' +
@@ -5083,42 +5008,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 Site.unBlockUI();
             },
 
-            viewJokerResult: function (custId, gamePlayId, gameCode, title) {
-                const url = Site.resolveClientUrl('ResultReport/Joker');
-                Site.blockUI();
-
-                $.get(url + '?custId=' + custId + '&gamePlayId=' + gamePlayId + '&gameCode=' + gameCode, function (result) {
-                    if (result !== '') {
-                        showResultPopUp(result, { width: 800, height: 380, title: title });
-                        Site.unBlockUI();
-                    }
-                });
-            },
-
-            viewGDGResult: function (custId, transId3rd, gameId3rd, siteId, title) {
-                const url = Site.resolveClientUrl('ResultReport/GDG');
-                Site.blockUI();
-
-                $.get(url + '?custId=' + custId + '&transId3rd=' + transId3rd + '&gameId3rd=' + gameId3rd + '&siteId=' + siteId, function (result) {
-                    if (result !== '') {
-                        showResultPopUp(result, { width: 800, height: 380, title: title });
-                        Site.unBlockUI();
-                    }
-                });
-            },
-
-            viewHabaneroResult: function (custId, transId3rd, gameId3rd, siteId, title) {
-                const url = Site.resolveClientUrl('ResultReport/Habanero');
-                Site.blockUI();
-
-                $.get(url + '?custId=' + custId + '&transId3rd=' + transId3rd + '&gameId3rd=' + gameId3rd + '&siteId=' + siteId, function (result) {
-                    if (result !== '') {
-                        showResultPopUp(result, { width: 800, height: 380, title: title });
-                        Site.unBlockUI();
-                    }
-                });
-            },
-
             viewAllBetResult: function (trasdesc, betcheck, bettype, title) {
                 const url = Site.resolveClientUrl('ResultReport/AllBetResult?transdesc=' +
                     encodeURIComponent(trasdesc) + '&betcheck=' + betcheck + '&bettype=' + bettype);
@@ -5126,18 +5015,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 Site.blockUI();
                 showResultPopUp(url, { width: 800, height: 380, title: title });
                 Site.unBlockUI();
-            },
-
-            viewCGResult: function (custId, transId3rd, gameId3rd, siteId, title) {
-                const url = Site.resolveClientUrl('ResultReport/CG');
-                Site.blockUI();
-
-                $.get(url + '?custId=' + custId + '&transId3rd=' + transId3rd + '&gameId3rd=' + gameId3rd + '&siteId=' + siteId, function (result) {
-                    if (result !== '') {
-                        showResultPopUp(result, { width: 800, height: 380, title: title });
-                        Site.unBlockUI();
-                    }
-                });
             },
 
             setLeagueTitle: function (leagueName) {
@@ -5154,18 +5031,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                     }
                 });
             },
-            viewHappy5LinkedGamesResult: function (custId, transId3rd, platform, title) {
-                const url = Site.resolveClientUrl('Happy5LinkedGamesResultPopup/Index');
-                Site.blockUI();
-
-                $.get(url + '?custId=' + custId + '&transId3rd=' + transId3rd + '&platform=' + platform, function (result) {
-                    if (result !== '') {
-                        showResultPopUp(result, { width: 800, height: 380, title: title });
-                        Site.unBlockUI();
-                    }
-                });
-            },
-            viewSportsLotteryResult: function (custId, transId3rd, platform, title) {
+            viewSportsLotteryResult: function (custId, transId3rd, gameId3rd, currencyId, siteId, title) {
                 const url = Site.resolveClientUrl('SportsLotteryResultPopup/Index');
                 Site.blockUI();
 
@@ -5194,22 +5060,19 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                     }
                 });
             },
-            viewAdvantPlayResult: function (custId, transId3rd, gameId3rd, siteId, title) {
-                const url = Site.resolveClientUrl('ResultReport/AdvantPlay');
+
+            viewThirdPartyProductResult: function (custId, transId3rd, gameId3rd, currencyId, siteId, betTypeId, productPath, title) {
+                const param = 'custId=' + custId +
+                    '&transId3rd=' + transId3rd +
+                    '&gameId3rd=' + gameId3rd +
+                    '&siteId=' + siteId +
+                    '&currencyId=' + currencyId +
+                    '&betTypeId=' + betTypeId +
+                    '&productPath=' + productPath;
+                const url = Site.resolveClientUrl('ThirdPartyResultPopup/Index?' + param);
                 Site.blockUI();
 
-                $.get(url + '?custId=' + custId + '&transId3rd=' + transId3rd + '&gameId3rd=' + gameId3rd + '&siteId=' + siteId, function (result) {
-                    if (result !== '') {
-                        showResultPopUp(result, { width: 800, height: 380, title: title });
-                        Site.unBlockUI();
-                    }
-                });
-            },
-            viewAdvantPlayMiniResult: function (custId, transId3rd, gameId3rd, siteId, title) {
-                const url = Site.resolveClientUrl('ResultReport/AdvantPlayMini');
-                Site.blockUI();
-
-                $.get(url + '?custId=' + custId + '&transId3rd=' + transId3rd + '&gameId3rd=' + gameId3rd + '&siteId=' + siteId, function (result) {
+                $.get(url, function (result) {
                     if (result !== '') {
                         showResultPopUp(result, { width: 800, height: 380, title: title });
                         Site.unBlockUI();
@@ -5218,27 +5081,27 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             },
 
             viewResult: function (matchid, raceNo, bettype, sporttype, refno,
-                currency, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid, transdecs) {
+                currency, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid, transdecs, siteId) {
                 const title = Site.getSingleResource('Result');
                 const defaultPlatform = 'd';  // desktop
 
                 if (sporttype === SPORT_RNG_GAME || sporttype === SPORT_RNG_MINIGAME || sporttype === SPORT_RNG_MOBILE) {
-                    _me.viewRngCasinoResult(title, refno);
+                    _me.viewThirdPartyProductResult(custid, transdecs, extension2, extension1, siteId, bettype, 'RNGCasino', title);
                 }
                 else if (sporttype === SPORT_VOIDBRIDGE) {
-                    _me.viewVoidbridgeResult(custid, extension2, title);
+                    _me.viewThirdPartyProductResult(custid, transdecs, extension2, extension1, siteId, bettype, 'Voidbridge', title);
                 }
                 else if (sporttype === SPORT_PP) {
-                    _me.viewPPResult(custid, extension2, title);
+                    _me.viewThirdPartyProductResult(custid, transdecs, extension2, extension1, siteId, bettype, 'PP', title);
                 }
                 else if (sporttype === SPORT_CARDCLUB) {
-                    _me.viewCardClubResult(custid, bettype, extension2, title);
+                    _me.viewThirdPartyProductResult(custid, transdecs, extension2, extension1, siteId, bettype, 'CardClub', title);
                 }
                 else if (sporttype === SPORT_SBC || sporttype === SBC_FreeBets) {
                     _me.viewSabaClubResult(custid, bettype, extension2, transdecs, title, sporttype);
                 }
                 else if (sporttype === SPORT_SG) {
-                    _me.viewSGResult(custid, extension2, title);
+                    _me.viewThirdPartyProductResult(custid, transdecs, extension2, extension1, siteId, bettype, 'SG', title);
                 }
                 else if (sporttype === SPORT_ALLBET) {
                     _me.viewAllBetResult(transdecs, extension2, bettype, title);
@@ -5250,7 +5113,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                     _me.viewVRGResult(refno, defaultPlatform, title);
                 }
                 else if (sporttype === SPORT_JK) {
-                    _me.viewJokerResult(custid, transdecs, extension2, title);
+                    _me.viewThirdPartyProductResult(custid, transdecs, extension2, extension1, siteId, bettype, 'Joker', title);
                 }
                 else if (sporttype === SPORT_SXG) {
                     _me.viewSexyGamingResult(transdecs, extension2, bettype, title);
@@ -5259,37 +5122,37 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                     _me.viewSAGamingResult(transdecs, extension2, bettype, title);
                 }
                 else if (sporttype === SPORT_PGS) {
-                    _me.viewPGSResult(custid, transdecs, extension2, title);
+                    _me.viewThirdPartyProductResult(custid, transdecs, extension2, extension1, siteId, bettype, 'PGSoft', title);
                 }
                 else if (sporttype === SPORT_HAPPY5LINKEDGAMES) {
-                    _me.viewHappy5LinkedGamesResult(extension1, refno, defaultPlatform, title);
+                    _me.viewThirdPartyProductResult(custid, refno, extension2, extension1, siteId, bettype, 'Happy5LinkedGames', title);
                 }
                 else if (sporttype === SPORT_GDG) {
-                    _me.viewGDGResult(custid, transdecs, extension2, league, title);
+                    _me.viewThirdPartyProductResult(custid, transdecs, extension2, extension1, siteId, bettype, 'GDG', title);
                 }
                 else if (sporttype === SPORT_SLT) {
-                    _me.viewSportsLotteryResult(custid, transdecs, defaultPlatform, title);
+                    _me.viewThirdPartyProductResult(custid, transdecs, extension2, extension1, siteId, bettype, 'SportsLottery', title);
                 }
                 else if (sporttype === SPORT_HB) {
-                    _me.viewHabaneroResult(custid, transdecs, extension2, extension1, title);
+                    _me.viewThirdPartyProductResult(custid, transdecs, extension2, extension1, siteId, bettype, 'Habanero', title);
                 }
                 else if (sporttype === SPORT_WM) {
                     _me.viewWMResult(transdecs, extension2, bettype, title);
                 }
                 else if (sporttype === SPORT_BGG) {
-                    _me.viewBGGResult(custid, transdecs, league, extension2, title);
+                    _me.viewThirdPartyProductResult(custid, transdecs, extension2, extension1, siteId, bettype, 'BGG', title);
                 }
                 else if (sporttype === SPORT_VGA || sporttype === SPORT_VGA_FreeBets) {
                     _me.viewVGamingResult(custid, bettype, extension2, transdecs, title, sporttype, currency);
                 }
                 else if (sporttype === SPORT_CG) {
-                    _me.viewCGResult(custid, transdecs, league, extension2, title);
+                    _me.viewThirdPartyProductResult(custid, transdecs, extension2, extension1, siteId, bettype, 'CG', title);
                 }
                 else if (sporttype === SPORT_AP) {
-                    _me.viewAdvantPlayResult(custid, transdecs, extension2, extension1, title);
+                    _me.viewThirdPartyProductResult(custid, transdecs, extension2, extension1, siteId, bettype, 'AdvantPlay', title);
                 }
                 else if (sporttype === SPORT_APM) {
-                    _me.viewAdvantPlayMiniResult(custid, transdecs, extension2, extension1, title);
+                    _me.viewThirdPartyProductResult(custid, transdecs, extension2, extension1, siteId, bettype, 'AdvantPlayMini', title);
                 }
                 else {
                     const numberBettype = Number(bettype);

@@ -8,6 +8,7 @@
     using System.Web;
     using System.Web.Mvc;
     using DataAccess.Core.Configuration.Interfaces;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -55,12 +56,14 @@
                 }
             };
             var productAccess = ProductServiceInstance.GetProductAccess(SessionServiceInstance.LicenseeSession.LicenseeId, SessionServiceInstance.UserSession.Language);
+            var offeredSubProductList = SessionServiceInstance.LicenseeSession.OfferedSubProductList;
+
             ViewBag.IsAllowedVRG = productAccess.IsAllowVRG;
             ViewBag.IsAllowedI4D = productAccess.IsAllowI4D;
             ViewBag.IsAllowedKeno = productAccess.IsAllowKN;
             ViewBag.IsAllowedLottery = productAccess.IsAllow(Product.LT);
             ViewBag.IsAllowedTG = productAccess.IsAllow(Product.TG);
-            ViewBag.IsAllowedSLT = productAccess.IsAllowSLT;
+            ViewBag.IsAllowedSLT = offeredSubProductList.IsPresent(_ => _ == Product.SLT);
             return View("~/Views/Desktop/Report/Result/Main.cshtml", model);
         }
 
@@ -171,20 +174,6 @@
         }
 
         [HttpGet]
-        public async Task<string> VoidbridgeResult(string custId, string gamePlayId)
-        {
-            var language = SessionServiceInstance.UserSession.Language;
-            var model = new
-            {
-                custId,
-                gamePlayId,
-                languageCode = language
-            };
-            return await _betListApiClient.PostStringAsync("/VoidbridgeResultPopup/Index",
-                model, language).ConfigureAwait(false);
-        }
-
-        [HttpGet]
         public async Task<ActionResult> AllBetResult(string transDesc, string betCheck, string betType)
         {
             var language = SessionServiceInstance.UserSession.Language;
@@ -198,22 +187,6 @@
             var data = await _betListApiClient.PostStringAsync("/AllBetResultPopup/Index", model, language).ConfigureAwait(false);
             ViewBag.Data = data.Replace(ROOT_URL, HttpRuntime.AppDomainAppVirtualPath.TrimEnd('/'));
             return View("~/Views/Desktop/Report/Result/Popup/AllBet.cshtml");
-        }
-
-        [HttpGet]
-        public async Task<string> Joker(string custId, string gamePlayId, string gameCode)
-        {
-            var language = SessionServiceInstance.UserSession.Language;
-            var model = new
-            {
-                custId,
-                gamePlayId,
-                gameCode,
-                languageCode = language
-            };
-
-            return await _betListApiClient.PostStringAsync("/JokerResultPopup/Index",
-               model, language).ConfigureAwait(false);
         }
 
         [HttpGet]
@@ -246,57 +219,6 @@
             var data = await _betListApiClient.PostStringAsync("/SAGamingResultPopup/Index", model, language).ConfigureAwait(false);
             ViewBag.Data = data.Replace(ROOT_URL, HttpRuntime.AppDomainAppVirtualPath.TrimEnd('/'));
             return View("~/Views/Desktop/Report/Result/Popup/SAGaming.cshtml");
-        }
-
-        [HttpGet]
-        public async Task<string> GDG(string custId, string transId3rd, string gameId3rd, string siteId)
-        {
-            var language = SessionServiceInstance.UserSession.Language;
-            var model = new
-            {
-                custId,
-                transId3rd,
-                gameId3rd,
-                siteId,
-                languageCode = language
-            };
-
-            return await _betListApiClient.PostStringAsync("/GDGResultPopup/Index",
-               model, language).ConfigureAwait(false);
-        }
-
-        [HttpGet]
-        public async Task<string> Habanero(string custId, string transId3rd, string gameId3rd, string siteId)
-        {
-            var language = SessionServiceInstance.UserSession.Language;
-            var model = new
-            {
-                custId,
-                transId3rd,
-                gameId3rd,
-                siteId,
-                languageCode = language
-            };
-
-            return await _betListApiClient.PostStringAsync("/HabaneroResultPopup/Index",
-               model, language).ConfigureAwait(false);
-        }
-
-        [HttpGet]
-        public async Task<string> CG(string custId, string transId3rd, string gameId3rd, string siteId)
-        {
-            var language = SessionServiceInstance.UserSession.Language;
-            var model = new
-            {
-                custId,
-                transId3rd,
-                gameId3rd,
-                siteId,
-                languageCode = language
-            };
-
-            return await _betListApiClient.PostStringAsync("/CGResultPopup/Index",
-               model, language).ConfigureAwait(false);
         }
 
         [HttpGet]
@@ -371,40 +293,6 @@
             }
 
             return this.Redirect("~/Utility/Error?err=400");
-        }
-
-        [HttpGet]
-        public async Task<string> AdvantPlay(string custId, string transId3rd, string gameId3rd, string siteId)
-        {
-            var language = SessionServiceInstance.UserSession.Language;
-            var model = new
-            {
-                custId,
-                transId3rd,
-                gameId3rd,
-                siteId,
-                languageCode = language
-            };
-
-            return await _betListApiClient.PostStringAsync("/AdvantPlayResultPopup/Index",
-               model, language).ConfigureAwait(false);
-        }
-
-        [HttpGet]
-        public async Task<string> AdvantPlayMini(string custId, string transId3rd, string gameId3rd, string siteId)
-        {
-            var language = SessionServiceInstance.UserSession.Language;
-            var model = new
-            {
-                custId,
-                transId3rd,
-                gameId3rd,
-                siteId,
-                languageCode = language
-            };
-
-            return await _betListApiClient.PostStringAsync("/AdvantPlayMiniResultPopup/Index",
-               model, language).ConfigureAwait(false);
         }
 
         #endregion PopUpPage
