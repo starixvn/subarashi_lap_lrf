@@ -9,3 +9,5 @@ export const SET_LEAGUE_LIST = "SET_LEAGUE_LIST";
 
 export const SET_SELECTED_MATCH = "SET_SELECTED_MATCH";
 export const SET_MATCH_LIST = "SET_MATCH_LIST";
+
+export const SET_IP ="SET_IP";

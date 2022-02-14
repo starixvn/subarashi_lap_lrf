@@ -15,6 +15,7 @@ import * as matchAction from './matchAction'
 import * as usernameAction from '@jsroot/actions/usernameAction'
 import * as convertAllAction from '@jsroot/actions/convertAllAction'
 import * as userGuideAction from '@jsroot/actions/userGuideAction'
+import * as ipAction from './ipAction.js'
 
 export const ActionCreators = Object.assign({},
     gridDataAction,
@@ -33,5 +34,6 @@ export const ActionCreators = Object.assign({},
     matchAction,
     usernameAction,
     convertAllAction,
-    userGuideAction
+    userGuideAction,
+    ipAction
 );

@@ -38,13 +38,13 @@ export class BetList extends Component {
             <HeaderRow style={{ height: 32 }}>
                 <HeaderCell colWidth={40}>{"#"}</HeaderCell>
                 <HeaderCell colWidth={300}>{LangHelper.getSingleResource("Market")}</HeaderCell>
-                <HeaderCell colWidth={70}>{LangHelper.getSingleResource("BetId")}</HeaderCell>
+                <HeaderCell colWidth={120}>{LangHelper.getSingleResource("BetId")}</HeaderCell>
                 <HeaderCell colWidth={120}>{LangHelper.getSingleResource("Selection")}</HeaderCell>
                 <HeaderCell colWidth={50}>{LangHelper.getSingleResource("Type")}</HeaderCell>
                 <HeaderCell colWidth={100}>{LangHelper.getSingleResource("BetPlaced")}</HeaderCell>
                 <HeaderCell colWidth={100}>{LangHelper.getSingleResource("OddsAvg")}</HeaderCell>
-                <HeaderCell colWidth={80}>{LangHelper.getSingleResource("Stake")}</HeaderCell>
-                <HeaderCell colWidth={80}>{LangHelper.getSingleResource("WinLoss")}</HeaderCell>
+                <HeaderCell colWidth={100}>{LangHelper.getSingleResource("Stake")}</HeaderCell>
+                <HeaderCell colWidth={100}>{LangHelper.getSingleResource("WinLoss")}</HeaderCell>
                 <HeaderCell colWidth={100}>{LangHelper.getSingleResource("WL")}/{LangHelper.getSingleResource("Comm")}</HeaderCell>
             </HeaderRow>
         )
@@ -152,7 +152,7 @@ export class BetList extends Component {
                             (<Table
                                 autoWidth={false}
                                 autoHeight={false}
-                                width={870}
+                                width={970}
                                 bodyHeight={430}
                                 header={this._buildHeader()}
                                 body={this._buildBody()}
