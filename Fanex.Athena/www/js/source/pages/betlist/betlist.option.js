@@ -31,7 +31,7 @@
     {
         name: 'TransTime',
         index: 'TransTime',
-        width: 110,
+        width: 140,
         align: 'center',
         sortable: false,
         resizable: false,
@@ -61,7 +61,7 @@
     {
         name: 'Stake',
         index: 'Stake',
-        width: 120,
+        width: 90,
         align: 'right',
         sortable: true,
         resizable: false
