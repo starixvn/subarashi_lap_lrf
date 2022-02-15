@@ -32,6 +32,7 @@
     isAllowedCustomerComm: @Model.ToJson(),
     baseCurrencyList:@Html.Raw(baseCurrencyList.ToJson()),
     productsRequireUseNameNote: '@ViewBag.ProductsRequireUseNameNote',
+    productsRequireTxIdNote: '@ViewBag.ProductsRequireTxIdNote',
     balanceupDay: '@ViewBag.BalanceUpDay',
     tabList: @Html.Raw((ViewBag.TabList as IEnumerable<string>).ToJson())
     };

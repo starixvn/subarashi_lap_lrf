@@ -194,8 +194,11 @@ export class FormFilter extends Component {
                         {AppData.isAllowTxIDColumn && <>
                             <br />
                             * {LangHelper.getSingleResource('BettingTicketCenter_RefnoTabNote_TxIDSearch').replace('{0}', AppData.balanceupDay)}
-                        </>
-                        }
+                        </>}
+                        {AppData.isAllowTxIDColumn && <>
+                            <br />
+                            * {AppData.productsRequireTxIdNote}
+                        </>}                        
                         <br />
                         * {AppData.productsRequireUseNameNote}
                     </div>

@@ -952,6 +952,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to For {0}: The system supports searching TxID for settled tickets only..
+        /// </summary>
+        public static string BettingTicketCenter_RefnoTabNote_TxIDSearch2 {
+            get {
+                return ResourceManager.GetString("BettingTicketCenter_RefnoTabNote_TxIDSearch2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to For Sportsbook, the search result includes the related Bonus/Cash tickets..
         /// </summary>
         public static string BettingTicketCenter_RefnoTabNote1 {

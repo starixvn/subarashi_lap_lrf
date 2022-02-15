@@ -2963,7 +2963,7 @@ class BetListLayout extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 
         this._showThirdPartyResult(url, title);
       } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].CARDCLUB) {
-        const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getCardClubResultUrl(rootUrl, custid, transdecs, extension2, extension1, siteId, bettype, 'CardClub');
+        const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getThirdPartyProductResultUrl(rootUrl, custid, transdecs, extension2, extension1, siteId, bettype, 'CardClub');
 
         this._showThirdPartyResult(url, title);
       } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].SBC || sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].SBC_FreeBets) {
@@ -4045,13 +4045,6 @@ class BetList {
     return url;
   }
 
-  getSGResultUrl(rootUrl, custid, gamePlayId) {
-    let url = rootUrl + 'SGResultPopup/Index';
-    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custid', custid);
-    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'gamePlayId', gamePlayId);
-    return url;
-  }
-
   getVRGResultUrl(rootUrl, gamePlayId, platform) {
     let url = rootUrl + 'VirtualGamesResultPopup/Index';
     console.log(gamePlayId);
@@ -4088,31 +4081,6 @@ class BetList {
     let url = rootUrl + 'ResultReport/GlobalGamingResult';
     url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custid', custid);
     url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'gameId', gameId);
-    return url;
-  }
-
-  getHappy5LinkedGamesResultUrl(rootUrl, custId, transId3rd, platform) {
-    let url = rootUrl + 'Happy5LinkedGamesResultPopup/Index';
-    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
-    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId3rd', transId3rd);
-    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'platform', platform);
-    return url;
-  }
-
-  getSportsLotteryResultUrl(rootUrl, custId, transId3rd, platform) {
-    let url = rootUrl + 'SportsLotteryResultPopup/Index';
-    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
-    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId3rd', transId3rd);
-    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'platform', platform);
-    return url;
-  }
-
-  getHabaneroResultUrl(rootUrl, custId, transId3rd, gameId3rd, siteId) {
-    let url = rootUrl + 'ResultReport/Habanero';
-    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
-    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId3rd', transId3rd);
-    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'gameId3rd', gameId3rd);
-    url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'siteId', siteId);
     return url;
   }
 
