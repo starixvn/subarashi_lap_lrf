@@ -3132,4 +3132,7 @@
   <data name="PromotionDetails" xml:space="preserve">
     <value>Promotion Details</value>
   </data>
+  <data name="BettingTicketCenter_RefnoTabNote_TxIDSearch2" xml:space="preserve">
+    <value>For {0}: The system supports searching TxID for settled tickets only.</value>
+  </data>
 </root>

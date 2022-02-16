@@ -5941,7 +5941,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
     {
         name: 'TransTime',
         index: 'TransTime',
-        width: 110,
+        width: 140,
         align: 'center',
         sortable: false,
         resizable: false,
@@ -5971,7 +5971,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
     {
         name: 'Stake',
         index: 'Stake',
-        width: 120,
+        width: 90,
         align: 'right',
         sortable: true,
         resizable: false
@@ -6055,7 +6055,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
     };
 }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-
 
 /***/ }),
 

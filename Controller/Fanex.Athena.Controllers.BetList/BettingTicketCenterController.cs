@@ -129,6 +129,10 @@
             ViewBag.TabList = tabList;
             ViewBag.IsAllowTxIDColumn = licenseeSession.IsEnableSingleWallet;
             ViewBag.BalanceUpDay = balanceUpDay;
+            ViewBag.ProductsRequireTxIdNote = string.Format(
+                ViewResources.BettingTicketCenter_RefnoTabNote_TxIDSearch2,
+                GetProductsSupportTxIDSearchOnly(),
+                balanceUpDay);
             return View(
                 "~/Views/Desktop/BetList/BettingTicketCenter/RefNo.cshtml",
                 SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm);
@@ -203,27 +207,45 @@
                 Product.APM
             };
 
+            return string.Join(", ", GetProductRequireNote(productsRequireUseName));
+        }
+
+        private string GetProductsSupportTxIDSearchOnly()
+        {
+            var productsRequireTxId = new[]
+            {
+                Product.KN,
+                Product.LT,
+                Product.TG,
+                Product.SLT
+            };
+
+            return string.Join(", ", GetProductRequireNote(productsRequireTxId));
+        }
+
+        private List<string> GetProductRequireNote(string[] productCode)
+        {
             var productAccess = _productService.GetSingleWalletProductAccess(
                 SessionServiceInstance.LicenseeSession.LicenseeId,
                 SessionServiceInstance.UserSession.Language);
 
-            var licProductsRequireUseName = productAccess.ProductList
-                .Where(product => productsRequireUseName.Contains(product.ProductCode))
+            var licProductsRequire = productAccess.ProductList
+                .Where(product => productCode.Contains(product.ProductCode))
                 .Select(x => x.ProductName).ToList();
 
             var offeredSubProductList = SessionServiceInstance.LicenseeSession.OfferedSubProductList;
 
             if (offeredSubProductList.IsPresent(_ => _ == Product.SLT))
             {
-                licProductsRequireUseName.Add(ViewResources.ProductSLT);
+                licProductsRequire.Add(ViewResources.ProductSLT);
             }
 
             if (productAccess.IsAllow(Product.NG))
             {
-                licProductsRequireUseName.Add(ViewResources.Happy5LinkedGames);
+                licProductsRequire.Add(ViewResources.Happy5LinkedGames);
             }
 
-            return string.Join(", ", licProductsRequireUseName);
+            return licProductsRequire;
         }
 
         private static IEnumerable<CheckedItem> GetRunningStatusList()
