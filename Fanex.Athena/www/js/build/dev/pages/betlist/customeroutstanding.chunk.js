@@ -5588,6 +5588,19 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
                 showDetailPopUp(url, { width: 890, height: popH + 50, title: title });
             },
+            showSGJackpotWonDetails: function (transId, custId, betTypeId) {
+                let url = Site.resolveClientUrl('SGJackpotWonBetList/Detail');
+                url = QueryString.setParam(url, 'transId', transId);
+                url = QueryString.setParam(url, 'custId', custId);
+                url = QueryString.setParam(url, 'betType', betTypeId);
+                url = QueryString.setParam(url, 'BaseCurrency', getBaseCurrency());
+
+                const popH = Math.min($(window).height() - 100, 550);
+                const title = Site.getSingleResource('ProductSG') + ' - ' +
+                    Site.getSingleResource('JackpotWonDetails');
+
+                showDetailPopUp(url, { width: 890, height: popH + 50, title: title });
+            },
             showVideoPokerGameDetails: function (transId, winlostDate, custId, transType) {
                 let url = Site.resolveClientUrl('CardClubBetList/Detail');
                 url = QueryString.setParam(url, 'transId', transId);
@@ -5881,6 +5894,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 window.showCGBetDetails = _me.showCGBetDetails;
                 window.showAdvantPlayBetDetails = _me.showAdvantPlayBetDetails;
                 window.showAdvantPlayMiniBetDetails = _me.showAdvantPlayMiniBetDetails;
+                window.showSGJackpotWonDetails = _me.showSGJackpotWonDetails;
 
                 const betList = {
                     ViewCasinoHandHistory: _me.ViewCasinoHandHistory

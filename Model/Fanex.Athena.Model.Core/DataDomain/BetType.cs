@@ -301,6 +301,10 @@
 
         VgamingFreeBetsJackpotPrize = 3899,
 
-        VgamingFreeBetsJackpotContribution = 3898
+        VgamingFreeBetsJackpotContribution = 3898,
+
+        SGJackpotPrize = 4600,
+
+        SGJackpotContribution = 4599
     }
 }

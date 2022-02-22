@@ -272,6 +272,16 @@ class BetListLayout extends Component {
             this._openPopup(url, title);
         }
 
+        window.showSGJackpotWonDetails = (transId, custId, betTypeId) => {
+            const { rootUrl, baseCurrency } = this.props;
+
+            const url = BetList.getSGJackpotWonDetailUrl(rootUrl, baseCurrency, transId, custId, betTypeId);
+            const title = this._getResource('ProductSG') + ' - ' +
+                this._getResource('JackpotWonDetails');
+
+            this._openPopup(url, title);
+        }
+
         window.showVideoPokerGameDetails = (transId, winlostDate, custId, transType) => {
             const { rootUrl, baseCurrency } = this.props;
 
@@ -444,6 +454,7 @@ class BetListLayout extends Component {
         window.showCGBetDetails = undefined;
         window.showAdvantPlayBetDetails = undefined;
         window.showAdvantPlayMiniBetDetails = undefined;
+        window.SGJackpotWonBetList = undefined;
     }
 
     _getResource(key) {

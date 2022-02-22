@@ -380,6 +380,16 @@ class BetList {
         return url;
     }
 
+    getSGJackpotWonDetailUrl(rootUrl, baseCurrency, transId, custId, betTypeId) {
+        let url = rootUrl + 'SGJackpotWonBetList/Detail';
+        url = QueryString.setParam(url, 'transId', transId);
+        url = QueryString.setParam(url, 'custId', custId);
+        url = QueryString.setParam(url, 'bettype', betTypeId);
+        url = QueryString.setParam(url, 'BaseCurrency', baseCurrency);
+
+        return url;
+    }
+
     getCGDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
         let url = rootUrl + 'CreativeGamingBetList/Detail';
         url = QueryString.setParam(url, 'transId', transId);
