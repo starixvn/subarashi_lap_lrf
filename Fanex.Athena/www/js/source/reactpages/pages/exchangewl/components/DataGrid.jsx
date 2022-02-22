@@ -390,7 +390,7 @@ export class DataGrid extends Component {
 
                 {
                     reportLevel === ReportLevel.CUSTOMER && showBetList &&
-                    <Popup isShow={showBetList} title={CUSTOMER_BETLIST_TEXT} width={900} height={600} onClose={this.closeBetListPopup}>
+                    <Popup isShow={showBetList} title={CUSTOMER_BETLIST_TEXT} width={1000} height={600} onClose={this.closeBetListPopup}>
                         <BetList data={betListData} title={this.betlistTitle} params={this.betlistParams} />
                     </Popup>
                 }

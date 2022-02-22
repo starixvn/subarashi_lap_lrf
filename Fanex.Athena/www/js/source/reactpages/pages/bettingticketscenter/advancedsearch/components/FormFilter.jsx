@@ -105,7 +105,8 @@ export class FormFilter extends Component {
             SortBy: SortBy,
             SortOrder: SortOrder,
             IsConvertAll: this.props.isConvertAll,
-            BaseCurrencyName: baseCurrency ? baseCurrency.label : ''
+            BaseCurrencyName: baseCurrency ? baseCurrency.label : '',
+            Ip: this.props.ip
         }
     }
 
@@ -456,7 +457,17 @@ export class FormFilter extends Component {
                             {this._renderLiveStatusSelectList()}
                         </div>
                     </div>
+                </div>
 
+                <div className="row">
+                    <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
+                        <div className="form-group">
+                            <label className="label-text">{LangHelper.getSingleResource("IP")}</label>
+                            <input className="input-text" id='ip' name='ip' type='text'
+                                value={this.props.ip}
+                                onChange={(event) => this.props.setIp(event.target.value)} />
+                        </div>
+                    </div>
                     <div className="col-12 col-md-2 col-sm-2 col-lg-2 col-xl-1">
                         <div className="form-group">
                             <div className="button-group">
@@ -487,12 +498,12 @@ function mapDispatchToProps(dispatch) {
 }
 function mapStateToProps(state) {
     const { requestParam, dateRange, selectedProduct, sportList, selectedSport, selectedBettype, bettypeList, selectedLeague, leagueList, selectedMatch, matchList,
-        selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, selectedLiveStatus, username, isConvertAll, userGuideContent } = state;
+        selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, selectedLiveStatus, username, isConvertAll, userGuideContent, ip } = state;
 
     return Object.assign({}, {
         requestParam, dateRange, selectedProduct, sportList, selectedSport, selectedBettype, bettypeList, selectedLeague, leagueList, selectedMatch, matchList,
-        selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, selectedLiveStatus, username, isConvertAll, userGuideContent
+        selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, selectedLiveStatus, username, isConvertAll, userGuideContent, ip
     });
-};
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormFilter);
