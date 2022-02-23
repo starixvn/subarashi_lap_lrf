@@ -31,7 +31,7 @@ namespace Fanex.Athena.DataAccess.Core.Common
         private readonly IDictionary<int, List<int>> _sportList = new Dictionary<int, List<int>>
         {
             { (int)SportType.Soccer, new List<int>{42, 74, 108, 113 } },
-            { (int)SportType.BasketBall, new List<int>{42 } },
+            { (int)SportType.BasketBall, new List<int>{42, 122 } },
             { (int)SportType.Cricket, new List<int>{42 } }
         };
 

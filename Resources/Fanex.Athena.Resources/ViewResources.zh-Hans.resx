@@ -2236,4 +2236,7 @@
   <data name="PromotionType" xml:space="preserve">
     <value>基础货币</value>
   </data>
+  <data name="BasketballPinGoal" xml:space="preserve">
+    <value>篮球台</value>
+  </data>
 </root>

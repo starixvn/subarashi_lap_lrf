@@ -2216,4 +2216,7 @@
   <data name="PromotionType" xml:space="preserve">
     <value>活動類別</value>
   </data>
+  <data name="BasketballPinGoal" xml:space="preserve">
+    <value>籃球檯</value>
+  </data>
 </root>

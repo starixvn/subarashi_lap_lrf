@@ -2837,4 +2837,7 @@
     <value>To列表</value>
     <comment>165286</comment>
   </data>
+  <data name="BasketballPinGoal" xml:space="preserve">
+    <value>篮球台</value>
+  </data>
 </root>
