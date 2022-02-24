@@ -58,10 +58,8 @@
     <Compile Include="CoreBetSettingService.cs" />
     <Compile Include="Interfaces\IExchangeCommApiService.cs" />
     <Compile Include="Interfaces\IKenoBetSettingService.cs" />
-    <Compile Include="Interfaces\IRngCasinoBetSettingService.cs" />
     <Compile Include="KenoBetSettingService.cs" />
     <Compile Include="ExchangeCommApiService.cs" />
-    <Compile Include="RngCasinoBetSettingService.cs" />
     <Compile Include="BetSettingBaseService.cs" />
     <Compile Include="SportsbookBetSettingService.cs" />
     <Compile Include="Interfaces\IAgCasinoBetSettingService.cs" />

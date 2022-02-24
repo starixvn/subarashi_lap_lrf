@@ -67,8 +67,6 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomerDataAccessTest.cs" />
-    <Compile Include="CustomerCommDataAccessTest.cs" />
     <Compile Include="DormantCustomerListDataAccessTest.cs" />
     <Compile Include="PlayerSegmentationTest.cs" />
     <Compile Include="SearchCustomerDataAccessTest.cs" />

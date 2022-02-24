@@ -153,15 +153,6 @@
         
         #endregion Configurations
 
-        #region Casino
-
-        public bool IsDisableRngCasino
-        {
-            get { return bool.Parse(GetValue("IsDisableRngCasino")); }
-        }
-
-        #endregion Casino
-
         #region Assign Currency
 
         public bool EnableAssignCurrency

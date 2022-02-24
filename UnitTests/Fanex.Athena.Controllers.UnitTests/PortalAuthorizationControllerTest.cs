@@ -35,11 +35,8 @@
             _portalAuthService = Substitute.For<IPortalAuthService>();
             _logger = Substitute.For<ILogger>();
             _oauthInfo = Substitute.For<IOAuthInfo>();
-
             StubGetValueAppSettings("EnableLogForOneAuthorization", "0");
             _logger.When(x => x.Error(Arg.Any<string>())).Do(x => _loggerCounnter++);
-
-            //_portalAuthService.RequestOAuthInfoAsync(Arg.Any<string>()).Returns(_oauthInfo);
         }
 
         [TearDown]

@@ -27,6 +27,8 @@
 
         public string ClientIP => HttpContext.Current.Request.UserHostAddress;
 
+        public string FromReferer => HttpContext.Current.Request.Headers["Referer"];
+
         public void AssignSessions(UserAuthInfo userSession, LicenseeAuthInfo licenseeSession)
         {
             CurrentSession[UserSessionKey] = userSession;

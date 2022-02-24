@@ -10,6 +10,8 @@
 
         string ClientIP { get; }
 
+        string FromReferer { get; }
+
         LicenseeAuthInfo LicenseeSession { get; }
 
         UserAuthInfo UserSession { get; }

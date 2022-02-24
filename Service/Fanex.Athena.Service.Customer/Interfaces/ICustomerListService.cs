@@ -1,22 +1,10 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="ICustomerService.cs" company="Microsoft">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Service.Customer.Interfaces
+﻿namespace Fanex.Athena.Service.Customer.Interfaces
 {
     using System.Threading.Tasks;
-
-    #region Using
-
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.DTO;
     using Fanex.Athena.Model.Customer.MetaModel;
-
     using Model.Core.ResultModel;
-
-    #endregion Using
 
     public interface ICustomerListService
     {
@@ -28,9 +16,9 @@ namespace Fanex.Athena.Service.Customer.Interfaces
 
         IResultInfo UpdateOddsGroup(CustomerOddsGroupMetaModel metaModel);
 
-        Task<IResultInfo> UpdateCustClosedAsync(CustomerStatusMetaModel metaModel, string languageCode);
+        IResultInfo UpdateCustClosed(CustomerStatusMetaModel metaModel);
 
-        Task<IResultInfo> UpdateCustSuspendAsync(CustomerStatusMetaModel metaModel, string languageCode);
+        IResultInfo UpdateCustSuspend(CustomerStatusMetaModel metaModel);
 
         IResultInfo UpdateCustomerBAStatus(int licenseeId, int custId, int modifiedBy, bool allowBA, Request request);
 

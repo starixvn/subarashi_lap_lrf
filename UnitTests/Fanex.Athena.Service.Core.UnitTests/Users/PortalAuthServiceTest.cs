@@ -59,7 +59,9 @@
         {
             // Arrange
             var token = FakeHelper.Create<string>();
+
             _sessionService.ClientIP.Returns("127.0.0.1");
+            _sessionService.FromReferer.Returns("http://portal.xyz");
             _sessionService.UserSession.Returns(new UserAuthInfo { AccessToken = "123" });
 
             // Action
@@ -70,6 +72,7 @@
             _["token"] == token
             && _["access_token"] == "123"
             && _["client_ip"] == "127.0.0.1"
+            && _["from_referer"] == "http://portal.xyz"
             ));
         }
 

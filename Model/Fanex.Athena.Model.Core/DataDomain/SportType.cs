@@ -322,7 +322,9 @@ namespace Fanex.Athena.Model.Core.DataDomain
 
         TG = 222,
 
-        Parlay = 999,
+	  	SabaCasino = 208,
+
+		Parlay = 999,
 
         SabaSoccer = -1,
 

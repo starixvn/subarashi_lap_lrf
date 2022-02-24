@@ -77,7 +77,6 @@
     <Compile Include="DcsBetSettingServiceTest.cs" />
     <Compile Include="DcsBetSettingServiceTest_BetLimit.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="RngCasinoBetSettingServiceTest.cs" />
     <Compile Include="ThirdPartyBetSettingServiceTest.cs" />
     <Compile Include="SportsbookBetSettingServiceTest.cs" />
     <Compile Include="NumberGameBetSettingServiceTest.cs" />

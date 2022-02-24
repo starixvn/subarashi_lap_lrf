@@ -28,11 +28,8 @@
     public class AgCasinoBetSettingService : BetSettingBaseService, IAgCasinoBetSettingService
     {
         private readonly ILogger _logger;
-
         private readonly IAgCasinoBetSettingDataAccess _betSettingDataAccess;
-
         private readonly IAppSettings _appSettings;
-
         private readonly IWebClientService _webClientService;
 
         public AgCasinoBetSettingService(

@@ -200,12 +200,12 @@
             {
                 // Arrange
                 const string ResourceName = "LicenseeWL";
-                const string Content = "{casino-productlist-section}{casino-productlist} content-here{/casino-productlist-section}";
-                const string ExpectedContent = "AllBet content-here";
+                const string Content = "{casino-productlist-section}content-here{/casino-productlist-section}";
+                const string ExpectedContent = "content-here";
 
                 _productService.GetProductList(Arg.Any<int>(), Arg.Any<string>()).ReturnsForAnyArgs(new List<Product>
                 {
-                    new Product { ProductID = ProductTypes.AllBet, ProductName = "AllBet" }
+                    new Product { ProductID = ProductTypes.SabaCasino }
                 });
 
                 controller.Url = Url;
@@ -228,7 +228,7 @@
             {
                 // Arrange
                 const string ResourceName = "LicenseeWL";
-                const string Content = "{casino-productlist-section}{casino-productlist} content-here{/casino-productlist-section}ABC";
+                const string Content = "{casino-productlist-section}content-here{/casino-productlist-section}ABC";
                 const string ExpectedContent = "ABC";
 
                 _productService.GetProductList(Arg.Any<int>(), Arg.Any<string>()).ReturnsForAnyArgs(new List<Product>

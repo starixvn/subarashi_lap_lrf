@@ -107,26 +107,18 @@
     <Setting Key="Lrf_CustomerUpdSuspended" SpName="Lrf_CustomerUpdSuspended" DbName="DBCUST.CustDB.bodbLicenseeNet" />
     <Setting Key="Lrf_CustomerUpdSpecialLevel" SpName="Lrf_CustomerUpdSpecialLevel" DbName="DBCUST.CustDB.bodbLicenseeNet" />
 
-    <Setting Key="Lrf_LicenseeCustCommSel" SpName="Lrf_LicenseeCustCommSel" DbName="DBLIC.bodb_Licensee.bodbLicenseeNet" TimeOut="240" />
-    <Setting Key="Lrf_LicenseeCustCommUpd" SpName="Lrf_LicenseeCustCommUpd" DbName="DBCUST.bodb_Licensee.bodbLicenseeNet" TimeOut="240" />
-    <Setting Key="Lrf_CustomerRemoveGroupComm" SpName="Lrf_CustomerRemoveGroupComm" DbName="DBCUST.bodb_Licensee.bodbLicenseeNet" TimeOut="240" />
-    <Setting Key="Lrf_CustomerMoveGroupComm" SpName="Lrf_CustomerMoveGroupComm" DbName="DBCUST.bodb_Licensee.bodbLicenseeNet" TimeOut="240" />
     <Setting Key="Lrf_CustomerSelUserSearch" SpName="Lrf_CustomerSelUserSearch" DbName="DBLIC.bodb_Licensee.bodbLicenseeNet" />
     <Setting Key="Lrf_CustomerLoginInfo" SpName="Lrf_CustomerLoginInfo" DbName="DBEXT.bodb02.bodbLicenseeNet" />
-    <Setting Key="Lrf_CustomerSelStatus" SpName="Lrf_CustomerSelStatus" DbName="DBEXT.bodb02.bodbLicenseeNet" />
     <Setting Key="Lrf_CustomerUpdUgroup" SpName="Lrf_CustomerUpdUgroup" DbName="DBCUST.CustDB.bodbLicenseeNet" />
     <Setting Key="Lrf_UserInfoByUserNameSel" SpName="Lrf_UserInfoByUserNameSel" DbName="DBEXT.bodb02.bodbLicenseeNet" />
-
-    <!-- PlayerSegmentation -->
-    <Function Name="PlayerSegmentation">
-      <Setting Key="Lrf_ProblemAccount_LicenseeProblemPlayerSel" SpName="Lrf_ProblemAccount_LicenseeProblemPlayerSel" DbName="DBACC.bodb02.bodbLicenseeNet" />
-      <Setting Key="Lrf_ProblemAccount_LicenseeVIPPlayerSel" SpName="Lrf_ProblemAccount_LicenseeVIPPlayerSel" DbName="DBACC.bodb02.bodbLicenseeNet" />
-      <Setting Key="Lrf_ProblemAccount_LicenseeVipPlayerUpd" SpName="Lrf_ProblemAccount_LicenseeVipPlayerUpd" DbName="DBCUST.CustDB.bodbLicenseeNet" />
-      <Setting Key="Lrf_ProblemAccount_ReasonGroupSel" SpName="Lrf_ProblemAccount_ReasonGroupSel" DbName="DBACC.bodb02.bodbLicenseeNet" />
-    </Function>
-    <!-- End - PlayerSegmentation -->
   </Function>
 
+  <Function Name="PlayerSegmentation">
+    <Setting Key="Lrf_ProblemAccount_LicenseeProblemPlayerSel" SpName="Lrf_ProblemAccount_LicenseeProblemPlayerSel" DbName="DBACC.bodb02.bodbLicenseeNet" />
+    <Setting Key="Lrf_ProblemAccount_LicenseeVIPPlayerSel" SpName="Lrf_ProblemAccount_LicenseeVIPPlayerSel" DbName="DBACC.bodb02.bodbLicenseeNet" />
+    <Setting Key="Lrf_ProblemAccount_LicenseeVipPlayerUpd" SpName="Lrf_ProblemAccount_LicenseeVipPlayerUpd" DbName="DBCUST.CustDB.bodbLicenseeNet" />
+    <Setting Key="Lrf_ProblemAccount_ReasonGroupSel" SpName="Lrf_ProblemAccount_ReasonGroupSel" DbName="DBACC.bodb02.bodbLicenseeNet" />
+  </Function>
   <Function Name="GroupComm">
     <Setting Key="Lrf_LicenseeGroupCommSel" SpName="Lrf_LicenseeGroupCommSel" DbName="DBCUST.bodb_Licensee.bodbLicenseeNet">
       <Mapping DataField="Parlaycomm" ObjectProperty="ParlayComm" />
@@ -145,7 +137,6 @@
   </Function>
 
   <Function Name="CustomerSettings">
-    <Setting Key="Lrf_CustomerUpdCasinoStatus" SpName="Lrf_CustomerUpdCasinoStatus" DbName="DBCUST.CustDB.bodbLicenseeNet" />
     <Setting Key="Lrf_CustomerSelEditCustomer" SpName="Lrf_CustomerSelEditCustomer" DbName="DBCUST.CustDB.bodbLicenseeNet" />
     <Setting Key="Lrf_CustomerSelEditNG" SpName="Lrf_CustomerSelEditNG" DbName="DBCUST.CustDB.bodbLicenseeNet" />
     <Setting Key="Lrf_CustomerSelEditKN" SpName="Lrf_CustomerSelEditKN" DbName="DBCUST.CustDB.bodbLicenseeNet" />
@@ -214,9 +205,6 @@
   <Function Name="SiteConfig">
     <Setting Key="Lrf_SubsidiarySel" SpName="Lrf_SubsidiarySel" DbName="DBCUST.SiteConfig.bodbLicenseeNet" />
     <Setting Key="Portal_Sub_GetSubsidiaryList" SpName="Portal_Sub_GetSubsidiaryList" DbName="DBCUST.SiteConfig.Dot_Admin_Portal" />
-  </Function>
-  <Function Name="Player Admin - Detail Transaction">
-    <Setting Key="LAP_Rpt_DetailTransaction_Mem" SpName="LAP_Rpt_DetailTransaction_Mem" DbName="DBBAH.bodb02.bodbLicenseeNet" />
   </Function>
   <Function Name="Player Admin - Batch Update">
     <Setting Key="Lrf_CustomerSpecialLevelSel" SpName="Lrf_CustomerSpecialLevelSel" DbName="DBCUST.CustDB.bodbLicenseeNet" />

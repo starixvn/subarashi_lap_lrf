@@ -72,11 +72,9 @@
   <ItemGroup>
     <Compile Include="DcsBetSettingDataAccessTest.cs" />
     <Compile Include="AgCasinoBetSettingDataAccessTest.cs" />
-    <Compile Include="CoreCasinoBetSettingDataAccessTest.cs" />
     <Compile Include="CoreBetSettingDataAccessTest.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="KenoBetSettingDataAccessTest.cs" />
-    <Compile Include="RngCasinoBetSettingDataAccessTest.cs" />
     <Compile Include="NumberGameBetSettingDataAccessTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SportsbookBetSettingDataAccessTest.cs" />

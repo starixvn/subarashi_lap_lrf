@@ -7,10 +7,7 @@
     using Model.BetSettings.DTO;
     using Model.BetSettings.MetaModel;
     using Model.BetSettings.ViewModel;
-    using Model.Customer.DTO;
     using Service.BetSettings.Interfaces;
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
 
     internal class FakeBetSettingBaseController : BetSettingBaseController
     {
@@ -24,11 +21,6 @@
         internal new JsonResult AccessDenied()
         {
             return base.AccessDenied();
-        }
-
-        internal new CustomerInfo GetCustomerInfo(int custId)
-        {
-            return base.GetCustomerInfo(custId);
         }
 
         internal async Task AssignRequiredProperties(BetSettingBaseViewModel viewModel, BetSettingMetaModel metaModel)

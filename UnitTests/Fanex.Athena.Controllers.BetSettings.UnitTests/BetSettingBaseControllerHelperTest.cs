@@ -45,7 +45,6 @@
 
         protected void SetUpDefaultFakeBetSettingData()
         {
-            CoreBetSettingService.GetCustomerInfo(Arg.Any<int>()).Returns(new CustomerInfo { SyncCasino = true });
             CoreBetSettingService.GetBetSettingProductsAsync(Arg.Any<int>(),
                 DefaultLicenseeSession.LicenseeId)
                 .Returns(Task.FromResult<IEnumerable<BetSettingProduct>>(new List<BetSettingProduct>()));

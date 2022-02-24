@@ -59,7 +59,6 @@
     <Compile Include="DTO\CustomerClassModel.cs" />
     <Compile Include="DTO\DormantCustomer.cs" />
     <Compile Include="DTO\CustomerDTO.cs" />
-    <Compile Include="DTO\CustomerInfo.cs" />
     <Compile Include="DTO\CustomerLog\CustomerLog.cs" />
     <Compile Include="DTO\CustomerLog\LogInLog.cs" />
     <Compile Include="DTO\LogInfo.cs" />
@@ -69,7 +68,6 @@
     <Compile Include="DTO\PlayerSegmentation\UpdateStatusPlayerResult.cs" />
     <Compile Include="Enum\CustomerClassTabType.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="MetaModel\BaseCustomerComMetaModel.cs" />
     <Compile Include="MetaModel\CustomerListMetaModel.cs" />
     <Compile Include="MetaModel\CustomerLog\CustomerLogMetaModel.cs" />
     <Compile Include="MetaModel\CustomerLog\PlayerUpdatingLogMetaModel.cs" />
@@ -78,16 +76,13 @@
     <Compile Include="MetaModel\DeleteGroupMetaModel.cs" />
     <Compile Include="MetaModel\GetLimitLeaguesMetaModel.cs" />
     <Compile Include="MetaModel\GroupCommMetaModel.cs" />
-    <Compile Include="MetaModel\MoveToGroupComMetaModel.cs" />
     <Compile Include="MetaModel\PlayerSegmentation\AbnormalBetListMetaModel.cs" />
     <Compile Include="MetaModel\PlayerSegmentation\BasePlayerListMetaModel.cs" />
     <Compile Include="MetaModel\GetCustomerClassInformationMetaModel.cs" />
     <Compile Include="MetaModel\PlayerSegmentation\UpdateStatusPlayerMetaModel.cs" />
     <Compile Include="MetaModel\PlayerSegmentation\VipPlayerListMetaModel.cs" />
     <Compile Include="MetaModel\PlayerSegmentation\ProblemPlayerListMetaModel.cs" />
-    <Compile Include="MetaModel\RemoveFromGroupComMetaModel.cs" />
     <Compile Include="MetaModel\RNGCasinoUpdateMemberComMetaModel.cs" />
-    <Compile Include="MetaModel\UpdatedCustomerComMetaModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\CommissionGroupList\CommissionGroupListViewModel.cs" />
     <Compile Include="ViewModel\CustomerListViewModel.cs" />

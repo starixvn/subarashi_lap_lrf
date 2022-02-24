@@ -28,13 +28,14 @@
             { ProductTypes.Lottery, "Lottery" },
             { ProductTypes.Exchange, "Exchange" },
             { ProductTypes.PP, "PP" },
-            { ProductTypes.SLT, "SLT" }
+            { ProductTypes.SLT, "SLT" },
+            { ProductTypes.SabaCasino, "SabaCasino" },
         };
 
         private static readonly IEnumerable<int> ProductsHasStatus = new[]
         {
              ProductTypes.AllBet, ProductTypes.Voidbridge, ProductTypes.FishingWorld,
-             ProductTypes.Lottery, ProductTypes.Exchange, ProductTypes.PP, ProductTypes.SLT
+             ProductTypes.Lottery, ProductTypes.Exchange, ProductTypes.PP, ProductTypes.SLT, ProductTypes.SabaCasino
         };
 
         private static readonly IEnumerable<int> ProductsHasBetLimit = new[]
