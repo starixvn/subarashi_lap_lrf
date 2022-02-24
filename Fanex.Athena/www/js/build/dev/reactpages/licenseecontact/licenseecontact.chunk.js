@@ -2768,7 +2768,7 @@ const FormDelete = ({
           Message
         } = response;
         const displayIcon = IsSuccess ? _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_4__["predefinedIcons"].success : _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_4__["predefinedIcons"].error;
-        const title = IsSuccess ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("Successful") : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("Error");
+        const title = IsSuccess ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("MessageSuccess") : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("Error");
         const alertOpt = Object(_jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_4__["generateDefaultAlertOption"])(Message, () => {
           handleCloseAlert();
           onClose();
@@ -2780,7 +2780,8 @@ const FormDelete = ({
     });
 
     const confirmOption = Object(_jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_4__["generateDefaultConfirmOption"])(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('AlertDeleteLicenseeContact').replace('{0}', contactName), handleCloseAlert, confirmProps, cancelProps, _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_4__["predefinedIcons"].warning, {
-      title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("Confirmation")
+      title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("Confirmation"),
+      height: 210
     });
     setSweetAlertOption(confirmOption);
   }, []);
@@ -2830,7 +2831,12 @@ const FormEdit = (_ref) => {
     contact: contact,
     setContact: setContact,
     api: _lib_service__WEBPACK_IMPORTED_MODULE_3__["default"].editContact,
-    msgConfirm: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('AlertUpdateLicenseeContact'),
+    msgConfirm: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      style: {
+        marginTop: 10,
+        display: 'block'
+      }
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('AlertUpdateLicenseeContact')),
     hasConfirm: true
   }, props));
 };
@@ -3037,7 +3043,7 @@ const FormContact = ({
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       className: "col-5 label-text"
     }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("ContactType"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-      class: "required"
+      className: "required"
     }, "*")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-7"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -3054,7 +3060,7 @@ const FormContact = ({
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       className: "col-5 label-text"
     }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-      class: "required"
+      className: "required"
     }, "*")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-7"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -3072,7 +3078,7 @@ const FormContact = ({
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       className: "col-5 label-text"
     }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("Position"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-      class: "required"
+      className: "required"
     }, "*")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-7"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -3090,7 +3096,7 @@ const FormContact = ({
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       className: "col-5 label-text"
     }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("Department"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-      class: "required"
+      className: "required"
     }, "*")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-7"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -3108,7 +3114,7 @@ const FormContact = ({
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       className: "col-5 label-text"
     }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("Email"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-      class: "required"
+      className: "required"
     }, "*")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-7"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -3126,7 +3132,7 @@ const FormContact = ({
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       className: "col-5 label-text"
     }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("Skype"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-      class: "required"
+      className: "required"
     }, "*")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-7"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -3255,9 +3261,9 @@ const FormContact = ({
         onClick: hasUnassignedCategories ? () => _handleUnassignedCategoriesWarning(unassignedCategories) : _handleCallApi
       }), {
         onClick: handleCloseAlert
-      }, _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_8__["predefinedIcons"].warning, {
+      }, null, {
         width: 300,
-        height: 200,
+        height: 130,
         title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("Confirmation")
       }));
     } else if (hasUnassignedCategories) {
@@ -3293,7 +3299,7 @@ const FormContact = ({
       Message
     } = response;
     const displayIcon = IsSuccess ? _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_8__["predefinedIcons"].success : _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_8__["predefinedIcons"].error;
-    const title = IsSuccess ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("Successful") : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("Error");
+    const title = IsSuccess ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("MessageSuccess") : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("Error");
     const alertOpt = Object(_jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_8__["generateDefaultAlertOption"])(Message, () => {
       handleCloseAlert();
       IsSuccess && afterSuccess();

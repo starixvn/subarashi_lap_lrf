@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 1/20/2022 1:41:05 PM
+// Generated at: 2/24/2022 4:00:13 PM
 window._language_zh_Hans = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -592,7 +592,7 @@ window._language_zh_Hans = {
   RefNo: "注单号码",
   Refund: "退款",
   Reject: "已取消",
-  Remark: "备注",
+  Remark: "备註",
   RemoveFromGroup: "从该组中删除",
   RemoveGroupMsg: "您确定要从组中移除此(这些)会员?",
   RemoveTheseCustomersFromGroupMsg: "您确定要从组中移除这些会员?",
