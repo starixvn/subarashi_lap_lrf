@@ -779,6 +779,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ViewResources.tt</DependentUpon>
     </Content>
+    <Content Include="SpNameConfig\FanexSpName.AWS.xml">
+      <DependentUpon>FanexSpName.xml.tt</DependentUpon>
+    </Content>
+    <Content Include="SpNameConfig\FanexSpName.AWSStatic.xml">
+      <DependentUpon>FanexSpName.xml.tt</DependentUpon>
+    </Content>
     <Content Include="SpNameConfig\FanexSpName.BACKUPMNL.xml">
       <DependentUpon>FanexSpName.xml.tt</DependentUpon>
     </Content>
@@ -1138,6 +1144,20 @@
     <Content Include="www\css\source\components\bootstrap-table\themes\bootstrap\_variables.scss" />
     <Content Include="www\css\source\components\bootstrap-table\themes\_theme.scss" />
     <Content Include="Views\Desktop\BetList\SabaClubJackpotWonDetail\Main.cshtml" />
+    <Content Include="SiteConfig\WebConfigTransforms\AWS.config" />
+    <Content Include="SiteConfig\WebConfigTransforms\AWSStatic.config" />
+    <Content Include="SiteConfig\Web.AppSettings.AWSStatic.config" />
+    <Content Include="SiteConfig\Web.AppSettings.AWS.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="SiteConfig\Web.AWS.config" />
+    <Content Include="SiteConfig\Web.AWSStatic.config" />
+    <Content Include="SiteConfig\Web.ConnectionStrings.AWSStatic.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="SiteConfig\Web.ConnectionStrings.AWS.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\Desktop\Customer\BetSetting\SLT.cshtml" />
     <Content Include="Views\Desktop\Customer\CustomerClass\SettingPolicyTab.cshtml" />
     <Content Include="Views\Desktop\Customer\CustomerClass\SpreadSettingPolicyTab.cshtml" />

@@ -36,6 +36,14 @@
 		new SiteInfo
         {
             SiteEnvironment = SiteEnvironment.BACKUPMNL
+        },
+		new SiteInfo
+        {
+            SiteEnvironment = SiteEnvironment.AWS
+        },
+		new SiteInfo
+        {
+            SiteEnvironment = SiteEnvironment.AWSStatic
         }
     };
 #>
@@ -49,7 +57,9 @@
 		SIT,
         PRO,
 		Staging,
-		BACKUPMNL
+		BACKUPMNL,
+		AWS,
+		AWSStatic
     }
 
 	class SiteInfo
