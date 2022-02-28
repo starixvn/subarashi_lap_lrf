@@ -77,7 +77,7 @@
             _appSettings.ResultAmendmentApiUrl.Returns(url);
 
             var jsonString = "{'TotalItems':'1','AttachmentFileApi':'AttachmentFileApi',"
-                + "'Data':[{'SubjectEn':'Subject','ContentEn':'Content','MessageId':'1','EventDate':'2017-01-01T12:00:00','IsRead':'true','DataFilePath':'Path1'}]}";
+                + "'Data':[{'SubjectEn':'Subject','ContentEn':'Content','MessageId':'1','EventDate':'2017-01-01T12:00:00','IsRead':'true','DataFilePath':'Path1', 'SessionId': '123123-123-1as23-123'}]}";
             _webClientService.DownloadString(url).Returns(jsonString);
 
             var expectedData = new ResultAmendment
@@ -85,6 +85,7 @@
                 Id = 1,
                 DateTime = new DateTime(2017, 01, 01, 12, 0, 0),
                 DataFilePath = "Path1",
+                SessionId = "123123-123-1as23-123",
                 Content = "Content",
                 Subject = "Subject",
                 IsRead = true,
@@ -102,6 +103,7 @@
                 Assert.That(data.Id, Is.EqualTo(expectedData.Id));
                 Assert.That(data.DateTime, Is.EqualTo(expectedData.DateTime));
                 Assert.That(data.DataFilePath, Is.EqualTo(expectedData.DataFilePath));
+                Assert.That(data.SessionId, Is.EqualTo(expectedData.SessionId));
                 Assert.That(data.Content, Is.EqualTo(expectedData.Content));
                 Assert.That(data.Subject, Is.EqualTo(expectedData.Subject));
                 Assert.That(data.IsRead, Is.EqualTo(expectedData.IsRead));
