@@ -3135,4 +3135,127 @@
   <data name="BettingTicketCenter_RefnoTabNote_TxIDSearch2" xml:space="preserve">
     <value>For {0}: The system supports searching TxID for settled tickets only.</value>
   </data>
+  <data name="AddContact" xml:space="preserve">
+    <value>Add Contact</value>
+    <comment>165286</comment>
+  </data>
+  <data name="AddSuccess" xml:space="preserve">
+    <value>Add successfully!</value>
+    <comment>165286</comment>
+  </data>
+  <data name="AlertDeleteLicenseeContact" xml:space="preserve">
+    <value>Are you sure you want to delete contact {0}?</value>
+    <comment>165286</comment>
+  </data>
+  <data name="AlertUpdateLicenseeContact" xml:space="preserve">
+    <value>Are you sure you want to update the contact?</value>
+    <comment>165286</comment>
+  </data>
+  <data name="AllCategories" xml:space="preserve">
+    <value>All Categories</value>
+    <comment>165286</comment>
+  </data>
+  <data name="AtLeastOneCategoryMustBeSelected" xml:space="preserve">
+    <value>At least one category must be selected.</value>
+    <comment>165286</comment>
+  </data>
+  <data name="CategoriesSelection" xml:space="preserve">
+    <value>Categories Selection</value>
+    <comment>165286</comment>
+  </data>
+  <data name="CharactersRemaining" xml:space="preserve">
+    <value>{0} characters remaining</value>
+    <comment>165286</comment>
+  </data>
+  <data name="ContactType" xml:space="preserve">
+    <value>Contact Type</value>
+    <comment>165286</comment>
+  </data>
+  <data name="DeleteSuccess" xml:space="preserve">
+    <value>Delete successfully!</value>
+    <comment>165286</comment>
+  </data>
+  <data name="Department" xml:space="preserve">
+    <value>Department</value>
+    <comment>165286</comment>
+  </data>
+  <data name="EditContact" xml:space="preserve">
+    <value>Edit Contact</value>
+    <comment>165286</comment>
+  </data>
+  <data name="GeneralInformation" xml:space="preserve">
+    <value>General Information</value>
+    <comment>165286</comment>
+  </data>
+  <data name="LicenseeContactAddErrorMsg_100" xml:space="preserve">
+    <value>Parameters are invalid!</value>
+    <comment>165286</comment>
+  </data>
+  <data name="LicenseeContactAddErrorMsg_101" xml:space="preserve">
+    <value>Licensee does not exist!</value>
+    <comment>165286</comment>
+  </data>
+  <data name="LicenseeContactCategoryNote" xml:space="preserve">
+    <value>The categories have not been assigned any contact.</value>
+    <comment>165286</comment>
+  </data>
+  <data name="LicenseeContactCategoryRuleNote" xml:space="preserve">
+    <value>Please make sure each type of category has at least a contact to receive the notification</value>
+    <comment>165286</comment>
+  </data>
+  <data name="LicenseeContactDeleteErrorMsg_101" xml:space="preserve">
+    <value>Licensee does not exist!</value>
+    <comment>165286</comment>
+  </data>
+  <data name="LicenseeContactDeleteErrorMsg_102" xml:space="preserve">
+    <value>Someone has changed the contact, please check again!</value>
+    <comment>165286</comment>
+  </data>
+  <data name="LicenseeContactEditErrorMsg_100" xml:space="preserve">
+    <value>Parameters are invalid!</value>
+    <comment>165286</comment>
+  </data>
+  <data name="LicenseeContactEditErrorMsg_101" xml:space="preserve">
+    <value>Licensee does not exist!</value>
+    <comment>165286</comment>
+  </data>
+  <data name="LicenseeContactEditErrorMsg_102" xml:space="preserve">
+    <value>Someone has changed the contact, please check again!</value>
+    <comment>165286</comment>
+  </data>
+  <data name="LicenseeContacts" xml:space="preserve">
+    <value>Licensee Contacts</value>
+    <comment>165286</comment>
+  </data>
+  <data name="Position" xml:space="preserve">
+    <value>Position</value>
+    <comment>165286</comment>
+  </data>
+  <data name="Skype" xml:space="preserve">
+    <value>Skype</value>
+    <comment>165286</comment>
+  </data>
+  <data name="TheLicenseeHasNoAssignedCategory" xml:space="preserve">
+    <value>The Licensee has no assigned category. Please contact admin to assign at least one category before creating contacts</value>
+    <comment>165286</comment>
+  </data>
+  <data name="CcList" xml:space="preserve">
+    <value>CC List</value>
+    <comment>165286</comment>
+  </data>
+  <data name="ToList" xml:space="preserve">
+    <value>To List</value>
+    <comment>165286</comment>
+  </data>
+  <data name="Individual" xml:space="preserve">
+    <value>Individual</value>
+  </data>
+  <data name="NotReceiveNotificationOnCategoriesWarning" xml:space="preserve">
+    <value>Are you sure the contact shall not receive notification on categories?</value>
+    <comment>165286</comment>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+    <comment>165286</comment>
+  </data>
 </root>

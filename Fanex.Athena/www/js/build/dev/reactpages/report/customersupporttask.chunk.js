@@ -857,7 +857,7 @@ const FormFilter = ({
     className: "btn btn-submit",
     disabled: !selectedCurrency,
     onClick: _exportExcel
-  }, 'Export To Excel'))))));
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource('ExportToExcel')))))));
 };
 
 function mapStateToProps(state) {

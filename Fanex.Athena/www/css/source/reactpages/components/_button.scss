@@ -81,6 +81,19 @@ $btnOutlineHorverLightColor: #e6c95a;
     }
 }
 
+.btn-add {
+    background: #4caf50;
+    color: #fff;
+
+    &:hover {
+        background: lighten(#4caf50, 10%);
+    }
+
+    &:focus {
+        background: #4caf50;
+    }
+}
+
 button {
     &:focus {
         outline: none;

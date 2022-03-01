@@ -70,7 +70,7 @@ namespace Fanex.Athena
         private static void RegisterModule(ContainerBuilder builder, Assembly[] assemblies)
         {
             var moduleAssemblies = GetModuleAssemblies(assemblies);
-            builder.RegisteModuleApiModule(moduleAssemblies, "Fanex.Athena.Module.Dashboard");
+            builder.RegisteModuleModuleAndApi(moduleAssemblies, "Fanex.Athena.Module.LicenseeContact");
             builder.RegisteModuleModuleAndApi(moduleAssemblies, "Fanex.Athena.Module.Notification");
         }
 
@@ -89,6 +89,9 @@ namespace Fanex.Athena
             var lgApiheaedr = new Dictionary<string, string>
             { { "LGAPI_TOKEN_KEY", ConfigurationManager.AppSettings["LGAPITokenValue"] } };
             builder.WithHttpClient("LGAPICLIENT", ConfigurationManager.AppSettings["LGAPIHostUrl"], lgApiheaedr);
+            builder.WithHttpClient("EXTServiceTokenClient", ConfigurationManager.AppSettings["ExtAPITokenHostUrl"]);
+            builder.WithHttpClient("OICAPICLIENT", ConfigurationManager.AppSettings["OicApiHostUrl"]);
+
         }
 
         private static void RegisterThirdpartyServices(ContainerBuilder builder)
@@ -148,17 +151,23 @@ namespace Fanex.Athena
              .OnRelease(x => x.Dispose());
             builder.RegisterType<SessionStorage>().As<ISessionStorage>().SingleInstance();
             builder.RegisterType<SessionService>().As<ISessionService>().SingleInstance();
-            builder.Register<ReportAPIClient>(x => new ReportAPIClient(
+
+            builder.Register(x => new ReportAPIClient(
                  x.ResolveNamed<HttpClient>("ReportAPIClient")
                 )).As<IReportAPIClient>().SingleInstance();
 
-            builder.Register<BetListApiClient>(x => new BetListApiClient(
+            builder.Register(x => new BetListApiClient(
                  x.ResolveNamed<HttpClient>("BETLISTAPICLIENT")
                 )).As<IBetListApiClient>().SingleInstance();
 
-            builder.Register<LGAPIClient>(x => new LGAPIClient(
+            builder.Register(x => new LGAPIClient(
                  x.ResolveNamed<HttpClient>("LGAPICLIENT")
                 )).As<ILGAPIClient>().SingleInstance();
+
+            builder.Register(x => new OicApiClient(
+               x.ResolveNamed<HttpClient>("OICAPICLIENT")
+              )).As<IOicApiClient>().SingleInstance();
+
 
             builder.RegisterType<PortalApiService>().As<IPortalApiService>().SingleInstance();
             builder.RegisterType<SubsidiaryService>().As<ISubsidiaryService>().SingleInstance();

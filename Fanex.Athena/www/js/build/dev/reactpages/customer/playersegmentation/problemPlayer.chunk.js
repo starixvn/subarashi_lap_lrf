@@ -5034,7 +5034,7 @@ __webpack_require__.r(__webpack_exports__);
 const dataGridFullHeaders = [{
   key: 'subsidiary',
   text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Subsidiary'),
-  colWidth: 100,
+  colWidth: 80,
   show: false
 }, {
   key: 'externalId',
@@ -5049,7 +5049,7 @@ const dataGridFullHeaders = [{
 }, {
   key: 'customerClass',
   text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('CustomerClass'),
-  colWidth: 100,
+  colWidth: 80,
   sortBy: 'customerClass'
 }, {
   key: 'reason',

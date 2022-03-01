@@ -169,6 +169,24 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Contact.
+        /// </summary>
+        public static string AddContact {
+            get {
+                return ResourceManager.GetString("AddContact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add successfully!.
+        /// </summary>
+        public static string AddSuccess {
+            get {
+                return ResourceManager.GetString("AddSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Adjustment.
         /// </summary>
         public static string Adjustment {
@@ -304,6 +322,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete contact {0}?.
+        /// </summary>
+        public static string AlertDeleteLicenseeContact {
+            get {
+                return ResourceManager.GetString("AlertDeleteLicenseeContact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please Enter Old Password!!!.
         /// </summary>
         public static string AlertInputOldPwdMsg {
@@ -367,6 +394,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to update the contact?.
+        /// </summary>
+        public static string AlertUpdateLicenseeContact {
+            get {
+                return ResourceManager.GetString("AlertUpdateLicenseeContact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please Enter Username!.
         /// </summary>
         public static string AlertUserNameMsg {
@@ -390,6 +426,15 @@ namespace Fanex.Athena.Resources {
         public static string AllBetTypes {
             get {
                 return ResourceManager.GetString("AllBetTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All Categories.
+        /// </summary>
+        public static string AllCategories {
+            get {
+                return ResourceManager.GetString("AllCategories", resourceCulture);
             }
         }
         
@@ -579,6 +624,15 @@ namespace Fanex.Athena.Resources {
         public static string Asia {
             get {
                 return ResourceManager.GetString("Asia", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to At least one category must be selected..
+        /// </summary>
+        public static string AtLeastOneCategoryMustBeSelected {
+            get {
+                return ResourceManager.GetString("AtLeastOneCategoryMustBeSelected", resourceCulture);
             }
         }
         
@@ -1267,11 +1321,29 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Categories Selection.
+        /// </summary>
+        public static string CategoriesSelection {
+            get {
+                return ResourceManager.GetString("CategoriesSelection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Category.
         /// </summary>
         public static string Category {
             get {
                 return ResourceManager.GetString("Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CC List.
+        /// </summary>
+        public static string CcList {
+            get {
+                return ResourceManager.GetString("CcList", resourceCulture);
             }
         }
         
@@ -1299,6 +1371,15 @@ namespace Fanex.Athena.Resources {
         public static string ChangeStatusOfThisCustomerMsg {
             get {
                 return ResourceManager.GetString("ChangeStatusOfThisCustomerMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} characters remaining.
+        /// </summary>
+        public static string CharactersRemaining {
+            get {
+                return ResourceManager.GetString("CharactersRemaining", resourceCulture);
             }
         }
         
@@ -1596,6 +1677,15 @@ namespace Fanex.Athena.Resources {
         public static string ConfirmPassword {
             get {
                 return ResourceManager.GetString("ConfirmPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contact Type.
+        /// </summary>
+        public static string ContactType {
+            get {
+                return ResourceManager.GetString("ContactType", resourceCulture);
             }
         }
         
@@ -2203,6 +2293,24 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete successfully!.
+        /// </summary>
+        public static string DeleteSuccess {
+            get {
+                return ResourceManager.GetString("DeleteSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Department.
+        /// </summary>
+        public static string Department {
+            get {
+                return ResourceManager.GetString("Department", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Deposit.
         /// </summary>
         public static string Deposit {
@@ -2460,6 +2568,15 @@ namespace Fanex.Athena.Resources {
         public static string EditAccount {
             get {
                 return ResourceManager.GetString("EditAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Contact.
+        /// </summary>
+        public static string EditContact {
+            get {
+                return ResourceManager.GetString("EditContact", resourceCulture);
             }
         }
         
@@ -3049,6 +3166,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to General Information.
+        /// </summary>
+        public static string GeneralInformation {
+            get {
+                return ResourceManager.GetString("GeneralInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Get All.
         /// </summary>
         public static string GetAll {
@@ -3508,6 +3634,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Individual.
+        /// </summary>
+        public static string Individual {
+            get {
+                return ResourceManager.GetString("Individual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Internal System.
         /// </summary>
         public static string InternalSystem {
@@ -3945,6 +4080,96 @@ namespace Fanex.Athena.Resources {
         public static string LicenseeComm {
             get {
                 return ResourceManager.GetString("LicenseeComm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parameters are invalid!.
+        /// </summary>
+        public static string LicenseeContactAddErrorMsg_100 {
+            get {
+                return ResourceManager.GetString("LicenseeContactAddErrorMsg_100", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Licensee does not exist!.
+        /// </summary>
+        public static string LicenseeContactAddErrorMsg_101 {
+            get {
+                return ResourceManager.GetString("LicenseeContactAddErrorMsg_101", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The categories have not been assigned any contact..
+        /// </summary>
+        public static string LicenseeContactCategoryNote {
+            get {
+                return ResourceManager.GetString("LicenseeContactCategoryNote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please make sure each type of category has at least a contact to receive the notification.
+        /// </summary>
+        public static string LicenseeContactCategoryRuleNote {
+            get {
+                return ResourceManager.GetString("LicenseeContactCategoryRuleNote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Licensee does not exist!.
+        /// </summary>
+        public static string LicenseeContactDeleteErrorMsg_101 {
+            get {
+                return ResourceManager.GetString("LicenseeContactDeleteErrorMsg_101", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Someone has changed the contact, please check again!.
+        /// </summary>
+        public static string LicenseeContactDeleteErrorMsg_102 {
+            get {
+                return ResourceManager.GetString("LicenseeContactDeleteErrorMsg_102", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parameters are invalid!.
+        /// </summary>
+        public static string LicenseeContactEditErrorMsg_100 {
+            get {
+                return ResourceManager.GetString("LicenseeContactEditErrorMsg_100", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Licensee does not exist!.
+        /// </summary>
+        public static string LicenseeContactEditErrorMsg_101 {
+            get {
+                return ResourceManager.GetString("LicenseeContactEditErrorMsg_101", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Someone has changed the contact, please check again!.
+        /// </summary>
+        public static string LicenseeContactEditErrorMsg_102 {
+            get {
+                return ResourceManager.GetString("LicenseeContactEditErrorMsg_102", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Licensee Contacts.
+        /// </summary>
+        public static string LicenseeContacts {
+            get {
+                return ResourceManager.GetString("LicenseeContacts", resourceCulture);
             }
         }
         
@@ -5047,6 +5272,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure the contact shall not receive notification on categories?.
+        /// </summary>
+        public static string NotReceiveNotificationOnCategoriesWarning {
+            get {
+                return ResourceManager.GetString("NotReceiveNotificationOnCategoriesWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nov.
         /// </summary>
         public static string Nov {
@@ -5628,6 +5862,15 @@ namespace Fanex.Athena.Resources {
         public static string PleaseSelectOne {
             get {
                 return ResourceManager.GetString("PleaseSelectOne", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Position.
+        /// </summary>
+        public static string Position {
+            get {
+                return ResourceManager.GetString("Position", resourceCulture);
             }
         }
         
@@ -6451,6 +6694,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Search.
+        /// </summary>
+        public static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search All Players.
         /// </summary>
         public static string SearchAllPlayers {
@@ -6654,6 +6906,15 @@ namespace Fanex.Athena.Resources {
         public static string SingleCustomer {
             get {
                 return ResourceManager.GetString("SingleCustomer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Skype.
+        /// </summary>
+        public static string Skype {
+            get {
+                return ResourceManager.GetString("Skype", resourceCulture);
             }
         }
         
@@ -6946,6 +7207,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The Licensee has no assigned category. Please contact admin to assign at least one category before creating contacts.
+        /// </summary>
+        public static string TheLicenseeHasNoAssignedCategory {
+            get {
+                return ResourceManager.GetString("TheLicenseeHasNoAssignedCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There is no selected item..
         /// </summary>
         public static string ThereIsNoSelectedItem {
@@ -7104,6 +7374,15 @@ namespace Fanex.Athena.Resources {
         public static string TokenWasExpired {
             get {
                 return ResourceManager.GetString("TokenWasExpired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To List.
+        /// </summary>
+        public static string ToList {
+            get {
+                return ResourceManager.GetString("ToList", resourceCulture);
             }
         }
         

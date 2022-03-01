@@ -40,9 +40,9 @@
             };
         }
 
-        protected static JsonNetResult JsonString(string jsonData)
+        protected static JsonNetResult JsonString(string jsonData, JsonRequestBehavior jsonRequestBehavior = JsonRequestBehavior.DenyGet)
         {
-            return new JsonNetResult(jsonData);
+            return new JsonNetResult(jsonData) { JsonRequestBehavior = jsonRequestBehavior };
         }
     }
 }

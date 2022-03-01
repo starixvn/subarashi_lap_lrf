@@ -1115,7 +1115,7 @@
     <value>退款</value>
   </data>
   <data name="Remark" xml:space="preserve">
-    <value>备注</value>
+    <value>备註</value>
   </data>
   <data name="RemoveFromGroup" xml:space="preserve">
     <value>从该组中删除</value>

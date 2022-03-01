@@ -5381,17 +5381,20 @@ class Store {
 /*!**********************************************************!*\
   !*** ./www/js/source/reactpages/lib/validationHelper.js ***!
   \**********************************************************/
-/*! exports provided: validateBaseCurrency */
+/*! exports provided: validateBaseCurrency, validateEmail */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "validateBaseCurrency", function() { return validateBaseCurrency; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "validateEmail", function() { return validateEmail; });
 /* harmony import */ var _AppData__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AppData */ "./www/js/source/reactpages/lib/AppData.js");
 
+const emailPattern = '^([a-zA-Z0-9_\\.\\-])+\\@(([a-zA-Z0-9\\-])+\\.)+([a-zA-Z0-9]{2,4})+$';
 const validateBaseCurrency = (baseCurrency = "", allowEmpty = true) => {
   return allowEmpty && !baseCurrency || !!baseCurrency && _AppData__WEBPACK_IMPORTED_MODULE_0__["default"].baseCurrencyList.find(x => x.value === baseCurrency);
 };
+const validateEmail = email => email && new RegExp(emailPattern).test(email);
 
 /***/ }),
 

@@ -102,5 +102,8 @@
 
         /*BetList*/
         public const string BetlistViewIpvn = "bl_view_ipvn";
+
+        /*Contacts*/
+        public const string LicenseeContacts = "LicenseeContacts";
     }
 }

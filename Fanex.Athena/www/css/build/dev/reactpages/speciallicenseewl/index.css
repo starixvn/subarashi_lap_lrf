@@ -508,6 +508,13 @@ ul {
 .text-bold {
   font-weight: bold; }
 
+.warning-note {
+  color: #e51c23; }
+
+.info-note {
+  color: #ff7b26;
+  font-style: italic; }
+
 .circle {
   display: inline-block;
   vertical-align: middle;

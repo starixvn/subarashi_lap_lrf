@@ -13,7 +13,7 @@ export const headerCellStyle = {
     border: { left: { style: "thin", color: { rgb: "D6D6D6" } }, bottom: { style: "thin", color: { rgb: "D6D6D6" } } }
 }
 
-const bodyTextStyle = { alignment: { vertical: "center" } };
+const bodyTextStyle = { alignment: { vertical: "center", wrapText: '1' } };
 const bodyDecimalStyle = { numFmt: "#,##0.00" };
 export const bodyCellStyle = {
     rowspan: bodyTextStyle,

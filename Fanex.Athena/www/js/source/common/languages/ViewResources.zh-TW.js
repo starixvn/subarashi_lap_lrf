@@ -1,4 +1,4 @@
-﻿// Generated at: 1/20/2022 1:41:05 PM
+﻿// Generated at: 2/24/2022 4:00:13 PM
 window._language_zh_TW = {
 AA:"客客",
 AbnormalBet:"非正規註單",
@@ -492,7 +492,7 @@ RecommendBrowserOnReportPageMsg:"若頁面大小&gt; 1,000，請您考慮使用�
 RefNo:"注單號碼",
 Refund:"退款",
 Reject:"已取消",
-Remark:"備註",
+Remark:"备註",
 RemoveFromGroup:"從該組中刪除",
 RemoveGroupMsg:"您確定要從組中移除此（這些）會員?",
 RemoveTheseCustomersFromGroupMsg:"您確定要從組中移除這些會員?",

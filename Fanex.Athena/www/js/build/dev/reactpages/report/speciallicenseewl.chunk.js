@@ -1225,7 +1225,8 @@ const headerCellStyle = {
 };
 const bodyTextStyle = {
   alignment: {
-    vertical: "center"
+    vertical: "center",
+    wrapText: '1'
   }
 };
 const bodyDecimalStyle = {

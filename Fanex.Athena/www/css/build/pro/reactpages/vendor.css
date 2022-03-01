@@ -379,6 +379,13 @@ ul {
 .text-bold {
   font-weight: bold; }
 
+.warning-note {
+  color: #e51c23; }
+
+.info-note {
+  color: #ff7b26;
+  font-style: italic; }
+
 .circle {
   display: inline-block;
   vertical-align: middle;
@@ -1283,6 +1290,14 @@ ul {
     background: #7287c5; }
   .btn-apply:focus {
     background: #4e68b6; }
+
+.btn-add {
+  background: #4caf50;
+  color: #fff; }
+  .btn-add:hover {
+    background: #6ec071; }
+  .btn-add:focus {
+    background: #4caf50; }
 
 button:focus {
   outline: none; }
