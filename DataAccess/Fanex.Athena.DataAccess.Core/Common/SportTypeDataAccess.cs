@@ -10,7 +10,6 @@ namespace Fanex.Athena.DataAccess.Core.Common
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using Fanex.Athena.DataAccess.Core;
     using Fanex.Athena.DataAccess.Core.Common.Interfaces;
     using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Core.DataDomain;
@@ -27,13 +26,14 @@ namespace Fanex.Athena.DataAccess.Core.Common
             (int)SportType.DuplicatedCricket // Duplicated with sport 50
         };
 
-        private static List<Tuple<int, int>> SabaVirtualSports = new List<Tuple<int, int>>
+        private static readonly List<Tuple<int, int, string>> SabaVirtualSports = new List<Tuple<int, int, string>>
         {
-            Tuple.Create( (int)SportType.SabaSoccer, (int)SportType.Soccer ),
-            Tuple.Create( (int)SportType.SabaBasketball, (int)SportType.BasketBall ),
-            Tuple.Create( (int)SportType.SabaCricket, (int)SportType.Cricket ),
-            Tuple.Create( (int)SportType.SabaFutsal, (int)SportType.Futsal ),
-            Tuple.Create( (int)SportType.SabaPingoal, 0)
+            Tuple.Create( (int)SportType.SabaSoccer, (int)SportType.Soccer, "" ),
+            Tuple.Create( (int)SportType.SabaSoccerPingoal, 0, ViewResources.SoccerPinGoal),
+            Tuple.Create( (int)SportType.SabaBasketball, (int)SportType.BasketBall, "" ),
+            Tuple.Create( (int)SportType.SabaBasketballPinGoal, 0, ViewResources.BasketballPinGoal),
+            Tuple.Create( (int)SportType.SabaCricket, (int)SportType.Cricket, "" ),
+            Tuple.Create( (int)SportType.SabaFutsal, (int)SportType.Futsal, "" )
         };
 
         private readonly ICacheRefAdapter _cacheRefAdapter;
@@ -89,7 +89,7 @@ namespace Fanex.Athena.DataAccess.Core.Common
         {
             foreach (var sabaSport in SabaVirtualSports)
             {
-                var sportName = sabaSport.Item1 == (int)SportType.SabaPingoal ? ViewResources.SoccerPinGoal : _cacheRefAdapter.GetSportName(sabaSport.Item2);
+                var sportName = sabaSport.Item2 == 0 ? sabaSport.Item3 : _cacheRefAdapter.GetSportName(sabaSport.Item2);
 
                 sports.Add(new SportProductItem
                 {

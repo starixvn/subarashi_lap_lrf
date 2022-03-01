@@ -332,6 +332,9 @@ namespace Fanex.Athena.Model.Core.DataDomain
 
         SabaFutsal = -4,
 
-        SabaPingoal = -5
+        SabaSoccerPingoal = -5,
+
+        SabaBasketballPinGoal = -6,
+
     }
 }
