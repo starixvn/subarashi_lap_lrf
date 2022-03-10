@@ -10,6 +10,8 @@
 
     var currencyList = Model.CurrencyList.Select(x => new { Key = x.Key, Value = x.Value, Status = true });
 
+    var sportList = Model.SportList.Select(x => new { Key = x.GameCode, Value = x.GameName, Status = true });
+
     var today = Model.TodayByGmt8;
     var minDate = Model.MinDate.ToString("dd/MM/yyyy");
     var maxDate = today.ToString("dd/MM/yyyy");
@@ -33,7 +35,8 @@
     }
     window._AppData = {
     productOptions: @Html.Raw(productOptions.ToJson()),
-    currencyList: @Html.Raw(currencyList.ToJson())
+    currencyList: @Html.Raw(currencyList.ToJson()),
+    sportList: @Html.Raw(sportList.ToJson())
     };
 }
 <div id="app-container">

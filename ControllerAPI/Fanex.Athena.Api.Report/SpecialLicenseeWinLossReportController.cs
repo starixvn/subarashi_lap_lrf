@@ -31,11 +31,6 @@
 
         private readonly ISpecialLicenseeWinLossDataAccess _licenseeWinLossDataAccess;
 
-        private readonly IDictionary<string, string> _siteNameList = new Dictionary<string, string>
-        {
-            { "IvoryBet", "ivorysport" },
-            { "12B", "12Bet"}
-        };
 
         public SpecialLicenseeWinLossReportController(
             IReportSettingService reportSettingService,
@@ -103,7 +98,7 @@
                 var userSession = SessionService.UserSession;
                 var licenseeName = SessionService.LicenseeSession.LicenseeName;
                 metaModel.BaseCurrencySetting = setting.BaseCurrencies;
-                metaModel.SiteName = _siteNameList.GetValueOrDefault(licenseeName, defaultValue: licenseeName);
+                metaModel.SiteName = licenseeName;
                 metaModel.CurrencyListXml = GenerateCurrencyListXml(metaModel);
                 metaModel.DefaultBaseCurrency = userSession.DefaultBaseCurrency;
 

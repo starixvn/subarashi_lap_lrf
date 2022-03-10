@@ -99,9 +99,11 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Interfaces\IPortalApiService.cs" />
     <Compile Include="Interfaces\IOicApiClient.cs" />
+    <Compile Include="Interfaces\ISportService.cs" />
     <Compile Include="Interfaces\IStatelessValidationService.cs" />
     <Compile Include="PortalApiService.cs" />
     <Compile Include="OicApiClient.cs" />
+    <Compile Include="SportService.cs" />
     <Compile Include="Utility\AutoBindMetaModelService.cs" />
     <Compile Include="Extensions\OneBookSecurityDependencyExtension.cs" />
     <Compile Include="BusinessLogService.cs" />

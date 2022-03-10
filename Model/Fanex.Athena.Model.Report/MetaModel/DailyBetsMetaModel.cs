@@ -22,6 +22,8 @@ namespace Fanex.Athena.Model.Report.MetaModel
 
         public string BaseCurrency { get; set; } = TotalBaseCurrency;
 
+        public string GameCodes { get; set; }
+
         public int PageIndex { get; set; }
 
         public int PageSize { get; set; }

@@ -6,9 +6,10 @@ import reducer from '../reducers';
 import Store from '@jsroot/lib/store';
 import AppData from '@jsroot/lib/AppData';
 
-const { productOptions, currencyList } = AppData;
+const { productOptions, currencyList, sportList } = AppData;
 const selectedProduct = productOptions.map(x => x.Code).join(',');
 const selectedCurrency = currencyList.map(x => x.Key).join(',');
+const selectedSport = sportList.map(x => x.Key).join(',');
 
 const { today, ...initialState } = window.initialState;
 const requestParam = {
@@ -18,10 +19,11 @@ const requestParam = {
   sortOrder: '',
   productCodeList: selectedProduct,
   currencyIdList: selectedCurrency,
+  sportCodeList: selectedSport,
   date: today
 }
 
-const defaultState = { ...initialState, requestParam };
+const defaultState = { ...initialState, requestParam, sportList };
 const store = Store.createStore(reducer, defaultState);
 
 const App = () => {

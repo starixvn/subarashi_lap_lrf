@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -7,18 +7,26 @@ import LangHelper from '@jsroot/lib/langHelper';
 import AppData from '@jsroot/lib/AppData';
 import { DatePicker } from '@9softstudio/react-datepicker';
 import { getFormattedDate } from '../lib/utils';
-import { renderProductSelectList, renderCurrencySelectList } from '../lib/formFilterUtils';
+import { renderProductSelectList, renderCurrencySelectList, renderSportSelectList } from '../lib/formFilterUtils';
 
 export const FormFilter = (props) => {
-    const { requestParam } = props;
+    const { requestParam, sportList } = props;
     const { productCodeList, currencyIdList, date, pageSize, sortBy, sortOrder } = requestParam;
+
+    const sportCodeList = sportList.map(item => item.Key).join(',');
 
     const [selectedProduct, setSelectedProduct] = useState(productCodeList);
     const [selectedCurrency, setSelectedCurrency] = useState(currencyIdList);
+    const [selectedSport, setSelectedSport] = useState(sportCodeList);
     const [selectedDate, setSelectedDate] = useState(date);
 
-    const handleChangeProduct = (currentItem, selectedItemsKey) => setSelectedProduct(selectedItemsKey);
+    useEffect(() => {
+        console.log('useEffect has been called!');
+        setSelectedSport(sportCodeList);
+    },[sportCodeList])
+
     const handleChangeCurrency = (currentItem, selectedItemsKey) => setSelectedCurrency(selectedItemsKey);
+    const handleChangeSport = (currentItem, selectedItemsKey) => setSelectedSport(selectedItemsKey);
 
     const buildParam = () => ({
         pageSize: pageSize,
@@ -27,8 +35,15 @@ export const FormFilter = (props) => {
         sortOrder,
         currencyIdList: selectedCurrency,
         productCodeList: selectedProduct,
+        gameCodes: selectedSport,
         date: selectedDate
     });
+
+    const handleChangeProduct = (currentItem, selectedItemsKey) => {
+        const param = {productCode: selectedItemsKey}
+        props.getSportList(param)
+        setSelectedProduct(selectedItemsKey);
+    };
 
     const submit = (event) => {
         event.preventDefault();
@@ -49,7 +64,7 @@ export const FormFilter = (props) => {
     const { dateConstraint } = props;
     const dateString = getFormattedDate(selectedDate);
 
-    const isValidParam = !!selectedProduct && !!selectedCurrency;
+    const isValidParam = !!selectedProduct && !!selectedCurrency && (!sportList || !!selectedSport);
 
     return (
         <div className="page-filter">
@@ -70,6 +85,16 @@ export const FormFilter = (props) => {
                                 {renderProductSelectList(productOptions, handleChangeProduct)}
                             </div>
                         </div>
+                    ) : null
+                }
+                {
+                    sportList && sportList.length ? (
+                        <div className="col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2">
+                        <div className="form-group">
+                            <label className="label-text">{LangHelper.getSingleResource("Sport")}</label>
+                            {renderSportSelectList(sportList, handleChangeSport)}
+                        </div>
+                    </div>
                     ) : null
                 }
 
@@ -102,12 +127,12 @@ export const FormFilter = (props) => {
 }
 
 function mapDispatchToProps(dispatch) {
-    const { setRequestParam, exportExcel } = ActionCreators;
-    return bindActionCreators({ setRequestParam, exportExcel }, dispatch);
+    const { setRequestParam, exportExcel, getSportList } = ActionCreators;
+    return bindActionCreators({ setRequestParam, exportExcel, getSportList }, dispatch);
 }
 function mapStateToProps(state) {
-    const { requestParam, dateConstraint } = state;
-    return Object.assign({}, { requestParam, dateConstraint });
+    const { requestParam, dateConstraint, sportList } = state;
+    return Object.assign({}, { requestParam, dateConstraint, sportList });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormFilter);

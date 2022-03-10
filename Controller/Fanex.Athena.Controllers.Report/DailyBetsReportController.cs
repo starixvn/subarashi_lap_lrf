@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -17,17 +18,20 @@ namespace Fanex.Athena.Controllers.Report
     public class DailyBetsReportController : ReportBaseController
     {
         private readonly IReportAPIClient _reportAPIClient;
+        private readonly ISportService _sportService;
 
         private const int DefaultLimitedMonthRange = 6;
 
         public DailyBetsReportController(
-            IReportAPIClient reportAPIClient)
+            IReportAPIClient reportAPIClient,
+            ISportService sportService)
         {
             _reportAPIClient = reportAPIClient;
+            _sportService = sportService;
         }
 
         [HttpGet]
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             var userSession = SessionServiceInstance.UserSession;
             var licenseeSetting = LicenseeSettingServiceInstance.GetFakeLicenseeSetting(SessionServiceInstance.LicenseeSession.LicenseeName);
@@ -42,9 +46,15 @@ namespace Fanex.Athena.Controllers.Report
             var limitedMonthRange = licenseeSetting != null ? licenseeSetting.LimitRecentMonths : DefaultLimitedMonthRange;
             var minDate = limitedMonthRange == 0 && licenseeSetting != null ? Convert.ToDateTime(licenseeSetting.MinDate) : today.AddMonths(-limitedMonthRange);
 
+            var siteName = SessionServiceInstance.LicenseeSession.LicenseeName;
+
+            var productCode = String.Join(",", productAccess.ProductList.Select(p => p.ProductCode));
+            var sportList = await _sportService.GetSportForProductAsync(siteName, productCode);
+
             var viewModel = new DailyBetsViewModel
             {
                 CurrencyList = userSession.CurrencyList,
+                SportList = sportList,
                 ProductOptions = productAccess.ProductList.Select(i => new ProductOption
                 {
                     Code = i.ProductCode,

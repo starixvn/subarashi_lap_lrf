@@ -4,6 +4,7 @@ import * as requestParamReducer from '@jsroot/reducers/requestParamReducer';
 import * as reportTitleReducer from '@jsroot/reducers/reportTitleReducer';
 import * as pagingOptionReducer from '@jsroot/reducers/pagingOptionReducer';
 import * as gridDataReducer from '@jsroot/reducers/gridDataReducer';
+import * as sportListReducer from '@jsroot/reducers/sportListReducer';
 
 import createReducer from '@jsroot/lib/createReducer.js';
 
@@ -14,5 +15,6 @@ export default combineReducers(Object.assign(
     requestParamReducer,
     reportTitleReducer,
     pagingOptionReducer,
+    sportListReducer,
     gridDataReducer, { dateConstraint }
 ));

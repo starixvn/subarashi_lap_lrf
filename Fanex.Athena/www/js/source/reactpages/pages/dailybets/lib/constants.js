@@ -12,4 +12,5 @@ export const headerText = {
     turnoverBased: `${LangHelper.getSingleResource('Turnover')} (USD)`,
     winlossBased: `${LangHelper.getSingleResource('WinLoss')} (USD)`,
     status: LangHelper.getSingleResource('Status'),
+    sport: LangHelper.getSingleResource('Sport')
 }

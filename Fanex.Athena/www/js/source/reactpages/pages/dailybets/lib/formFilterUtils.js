@@ -24,3 +24,15 @@ export const renderCurrencySelectList = (dataSource, onChangeHandler) => {
             statusField={"Status"}
             onChange={onChangeHandler} />);
 }
+
+export const renderSportSelectList = (dataSource, onChangeHandler) => {
+    return(
+        <MultipleSelect id="GameCodes" 
+            language={LangHelper.currentLanguage}
+            dataSource={dataSource}
+            keyField={"Key"}
+            valueField={"Value"}
+            statusField={"Status"}
+            onChange={onChangeHandler} />
+    );
+}
