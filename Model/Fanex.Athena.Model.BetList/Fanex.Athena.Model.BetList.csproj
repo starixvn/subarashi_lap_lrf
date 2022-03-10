@@ -122,6 +122,7 @@
     <Compile Include="ViewModel\ExchangeBetListViewModel.cs" />
     <Compile Include="ViewModel\ExtraPayoutBetListViewModel.cs" />
     <Compile Include="ViewModel\LastBetsMonitoringViewModel.cs" />
+    <Compile Include="ViewModel\SportProductViewModel.cs" />
     <Compile Include="ViewModel\SystemParlayDetailViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

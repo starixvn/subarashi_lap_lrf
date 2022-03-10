@@ -5,10 +5,12 @@
 
 namespace Fanex.Athena.Controllers.Report
 {
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
+    using Fanex.Athena.Service.Customer.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
     using System;
@@ -24,27 +26,31 @@ namespace Fanex.Athena.Controllers.Report
 
         private readonly IAuthorizationService _authService;
 
+        private readonly IPlayerSegmentationService _playerService;
+
         private const int TimeOutInSecond = 180;
 
         public CustomerWinLossReportController(
             IReportSettingService reportSettingService,
             IAuthorizationService authService,
-            IReportAPIClient reportAPIClient
+            IReportAPIClient reportAPIClient,
+            IPlayerSegmentationService playerService
             )
         {
             _reportSettingService = reportSettingService;
             _reportAPIClient = reportAPIClient;
             _authService = authService;
+            _playerService = playerService;
         }
 
         [HttpGet]
-        public ActionResult Index()
+        public Task<ActionResult> Index()
         {
             return GetView(false);
         }
 
         [HttpGet]
-        public ActionResult History()
+        public Task<ActionResult> History()
         {
             return GetView(true);
         }
@@ -67,7 +73,7 @@ namespace Fanex.Athena.Controllers.Report
             return JsonString(await _reportAPIClient.PostStringAsync("api/CustomerWinLoss/Index", metaModel, userSession.Language, TimeOutInSecond).ConfigureAwait(false));
         }
 
-        private ActionResult GetView(bool isHistory)
+        private async Task<ActionResult> GetView(bool isHistory)
         {
             var licenseeSession = SessionServiceInstance.LicenseeSession;
             var userSession = SessionServiceInstance.UserSession;
@@ -98,7 +104,9 @@ namespace Fanex.Athena.Controllers.Report
                 IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeName),
                 MinDate = reportSetting.MinDate,
                 MaxDate = reportSetting.MaxDate,
-                HasExtraPayoutPermission = _authService.HasPermissions(SessionServiceInstance.UserSession, PermissionKeys.ReportExtraPayout)
+                HasExtraPayoutPermission = _authService.HasPermissions(SessionServiceInstance.UserSession, PermissionKeys.ReportExtraPayout),
+                OddsGroups = OddsGroupHelper.GetOddsGroups(),
+                CustomerClassList = await _playerService.GetCustomerClass(),
             };
 
             return View("~/Views/Desktop/Report/CustomerWinLoss/Main.cshtml", model);

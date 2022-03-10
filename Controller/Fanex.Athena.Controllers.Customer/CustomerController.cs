@@ -15,6 +15,7 @@ namespace Fanex.Athena.Controllers.Customer
     using DataAccess.Core.Users.Interfaces;
     using Excel.Base.Helpers;
     using Fanex.Athena.Excel.Customer;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
@@ -277,17 +278,11 @@ namespace Fanex.Athena.Controllers.Customer
         }
 
         private static IEnumerable<CheckedItem> GetOddsGroups()
-        {
-            return new List<CheckedItem>
+            => OddsGroupHelper.GetOddsGroups().Select(g => new CheckedItem
             {
-                new CheckedItem { Name = "A", Checked = true },
-                new CheckedItem { Name = "B", Checked = true },
-                new CheckedItem { Name = "C", Checked = true },
-                new CheckedItem { Name = "D", Checked = true },
-                new CheckedItem { Name = "E", Checked = true },
-                new CheckedItem { Name = "F", Checked = true }
-            };
-        }
+                Name = g,
+                Checked = true
+            });
 
         private void AssignMetaModelData(CustomerListMetaModel metaModel)
         {

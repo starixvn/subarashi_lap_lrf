@@ -154,6 +154,7 @@
     <Compile Include="Helper\LogMessageHelper.cs" />
     <Compile Include="Helper\MetaModelHelper.cs" />
     <Compile Include="Helper\NumberHelper.cs" />
+    <Compile Include="Helper\OddsGroupHelper.cs" />
     <Compile Include="Helper\SqlHelper.cs" />
     <Compile Include="Helper\StringHelper.cs" />
     <Compile Include="Utility\AntiForgeryService.cs" />
