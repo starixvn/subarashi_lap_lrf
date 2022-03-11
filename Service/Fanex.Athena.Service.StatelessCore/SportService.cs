@@ -96,6 +96,9 @@ namespace Fanex.Athena.Service.StatelessCore
                 case (int)SportType.SabaBasketballPinGoal:
                     sportName = ViewResources.BasketballPinGoal;
                     break;
+                case (int)SportType.SabaFutsal:
+                    sportName = _cacheRefAdapter.GetSportName((int)SportType.Futsal);
+                    break;
                 default:
                     sportName = _cacheRefAdapter.GetSportName(sportTypeId);
                     break;
