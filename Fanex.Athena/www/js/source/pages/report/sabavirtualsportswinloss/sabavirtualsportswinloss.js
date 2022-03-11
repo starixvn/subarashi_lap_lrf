@@ -1,9 +1,9 @@
 ﻿define(
     ['jquery', 'common/querystring', 'common/site', '../report', './sabavirtualsportswinloss.option',
-        'lib/jqgrid/jquery.jqgrid.additional', 'components/pluginhelper/daterangepicker', 'moment', 'common/popup', 'components/pluginhelper/multiselect',
+        'lib/jqgrid/jquery.jqgrid.additional', 'components/pluginhelper/daterangepicker', 'components/pluginhelper/autocomplete', 'moment', 'common/popup', 'components/pluginhelper/multiselect',
         'helpers/daterange', 'helpers/downloader', 'components/toast', 'helpers/datahelper', 'lib/jqgrid/jquery.jqGrid.en',
         'lib/jqgrid/jquery.jqGrid.min', 'extensions/jquery.extension', 'lib/linq', 'extensions/ajaxBinaryTransporting'],
-    function ($, QueryString, Site, Report, SabaVirtualSportsWinLossOption, jqGridAdditional, DatePicker, moment, Popup,
+    function ($, QueryString, Site, Report, SabaVirtualSportsWinLossOption, jqGridAdditional, DatePicker, AutoComplete, moment, Popup,
         MultiSelect, DateHelper, Downloader, Toast, DataHelper) {
         'use strict';
         const REPORT_BY_MONTHLY = 2;
@@ -27,6 +27,11 @@
                 _me.initEvent();
                 _me.initSetting();
                 _me.registerGlobalFunction();
+
+                AutoComplete.initialize({
+                    url: Site.resolveClientUrl('SearchCustomerAPI/SearchCustomer'),
+                    target: '#Username'
+                });
 
                 SabaVirtualSportsWinLossOption.gridOption.onSortCol = function (index) {
                     Site.blockUI();

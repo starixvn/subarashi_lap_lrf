@@ -187,6 +187,7 @@
         {
             db.SetParameterValue("SportType", metaModel.Sport);
             db.SetParameterValue("LeagueId", metaModel.League);
+            db.SetParameterValue("UserName", metaModel.UserName ?? string.Empty);
             db.SetParameterValue("AgentList", metaModel.AgentListXml);
             db.SetParameterValue("fromdate", drilldown ? metaModel.DrillDownFromDate : metaModel.FromDate.Date);
             db.SetParameterValue("todate", drilldown ? metaModel.DrillDownToDate : metaModel.ToDate.Date);

@@ -47,6 +47,12 @@
                 <label>@ViewResources.League</label>
             </div>
 
+            <div class="col l2 m2 s12 input-field">
+                @Html.TextBox("Username", null, new { placeholder = ViewResources.ExternalIdOrSystemId, autocomplete = "off" })
+                <label>@ViewResources.Username</label>
+                <ul id="suggestionDropdown" class="dropdown-content ac-dropdown"></ul>
+            </div>
+
             <div class="col right right-filter-menu">
                 <i class="icon-book right" id="UserGuide" title="@ViewResources.UserGuide"></i>
                 <i class="icon-excel right" title="@ViewResources.ExportToExcel" id="ExportToExcel"></i>
