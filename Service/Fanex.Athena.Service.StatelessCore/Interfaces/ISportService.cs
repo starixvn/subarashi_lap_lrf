@@ -10,7 +10,9 @@ namespace Fanex.Athena.Service.StatelessCore.Interfaces
         
         Task<IDictionary<int, string>> GetAllSports();
 
-        Task<IEnumerable<SportProductItem>> GetSportsAndProducts(int licenseeId, string languageCode, string productCodes = "", bool includeSabaSport = false);
+        Task<IEnumerable<SportProductItem>> GetSportsAndProducts(int licenseeId, string languageCode, string productCodes = "");
+
+        Task<IEnumerable<SportProductItem>> GetSportAndProductAndSabaSport(int licenseeId, string languageCode, string productCodes = "");
 
         IEnumerable<SabaSport> GetSabaSports();
 

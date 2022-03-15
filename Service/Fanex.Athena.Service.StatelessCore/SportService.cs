@@ -25,7 +25,7 @@ namespace Fanex.Athena.Service.StatelessCore
             ((int)SportType.SabaCricket, (int)SportType.Cricket, new List<int>{42}),
             ((int)SportType.SabaFutsal, (int)SportType.Soccer, new List<int>{ 108 }),
             ((int)SportType.SabaSoccerPingoal, (int)SportType.Soccer, new List<int>{113}),
-            ((int)SportType.SabaBasketballPinGoal, (int)SportType.BasketBall, new List<int>{123})
+            ((int)SportType.SabaBasketballPinGoal, (int)SportType.BasketBall, new List<int>{122})
         };
 
         public SportService(ISportTypeDataAccess sportTypeDataAccess, ICacheRefAdapter cacheRefAdapter, ICustomMemoryCacheService cache)
@@ -34,7 +34,7 @@ namespace Fanex.Athena.Service.StatelessCore
             _cacheRefAdapter = cacheRefAdapter;
             _cache = cache;
         }
-        
+
         public async Task<IEnumerable<SportGame>> GetSportForProductAsync(string siteName, string productCode)
         {
             var cacheKey = CacheKey.MemorycacheSportListByLicensee + siteName + productCode;
@@ -47,27 +47,33 @@ namespace Fanex.Athena.Service.StatelessCore
 
             return await _sportTypeDataAccess.GetSportForProductsAsync(siteName, productCode);
         }
-        
+
         public Task<IDictionary<int, string>> GetAllSports()
             => _sportTypeDataAccess.GetAllSports();
 
         public async Task<IEnumerable<SportProductItem>> GetSportsAndProducts(int licenseeId
             , string languageCode
-            , string productCodes = ""
-            , bool includeSabaSport = false)
+            , string productCodes = "")
         {
             var result = new List<SportProductItem>();
             result.AddRange(await _sportTypeDataAccess.GetSportsAndProducts(licenseeId, languageCode, productCodes));
-            if (includeSabaSport)
+
+
+            return result;
+        }
+
+        public async Task<IEnumerable<SportProductItem>> GetSportAndProductAndSabaSport(int licenseeId, string languageCode, string productCodes = "")
+        {
+            var result = new List<SportProductItem>();
+            result.AddRange(await GetSportsAndProducts(licenseeId, languageCode, productCodes));
+
+            result.AddRange(GetSabaSports().Select(t => new SportProductItem
             {
-                result.AddRange(GetSabaSports().Select(t => new SportProductItem
-                {
-                    Checked = true,
-                    ID = t.Id,
-                    Name = t.Name,
-                    ParentId = ProductTypes.Sportsbook
-                }));
-            }
+                Checked = true,
+                ID = t.Id,
+                Name = t.Name,
+                ParentId = ProductTypes.Sportsbook
+            }));
 
             return result;
         }
@@ -83,7 +89,7 @@ namespace Fanex.Athena.Service.StatelessCore
 
         public SabaSport GetSabaSport(int id)
             => GetSabaSports().FirstOrDefault(t => t.Id == id);
-            
+
 
         private string GetSabaName(int id, int sportTypeId)
         {

@@ -50,7 +50,7 @@
         [HttpGet]
         public async Task<dynamic> GetRunningMatchList(int sportId)
         {
- 
+
             var filterMatches = await GetMatchList(sportId);
 
             var leagueListNormal = filterMatches.Where(i => !i.IsOutRight).Select(m => m.LeagueId).Distinct()
@@ -105,22 +105,26 @@
 
         private string BuildSportTypeList(string sportIds)
         {
-            if (sportIds == ALL)
+            if (string.IsNullOrWhiteSpace(sportIds))
+            {
+                return string.Empty;
+            }
+
+            if (string.Equals(sportIds, ALL, System.StringComparison.OrdinalIgnoreCase))
             {
                 return ALL;
             }
-            else
+
+            var listSportId = sportIds.Split(',').Select(int.Parse);
+            XDocument x = new XDocument(new XElement("ROOT"));
+            var root = x.Root;
+            foreach (var id in listSportId)
             {
-                var listSportId = sportIds.Split(',').Select(int.Parse);
-                XDocument x = new XDocument(new XElement("ROOT"));
-                var root = x.Root;
-                foreach (var id in listSportId)
-                {
-                    var elem = BuildSportTypeElement(id);
-                    root.Add(elem);
-                }
-                return x.ToString();
+                var elem = BuildSportTypeElement(id);
+                root.Add(elem);
             }
+            return x.ToString();
+
         }
 
         private XElement BuildSportTypeElement(int id)
@@ -158,8 +162,8 @@
 
             var excludeSabaSport = sabaSports.Where(s => s.SportTypeId == sportId);
 
-            return isSabaSport 
-                ? GetSabaSportMatchList(matchList, selectedSabaSport) 
+            return isSabaSport
+                ? GetSabaSportMatchList(matchList, selectedSabaSport)
                 : GetMatchListExcludeSabaSport(matchList, excludeSabaSport);
         }
 
