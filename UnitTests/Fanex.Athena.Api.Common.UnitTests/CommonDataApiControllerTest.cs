@@ -26,7 +26,7 @@
 
     public class CommonDataApiControllerTest
     {
-        private ISportTypeDataAccess _sportTypeDataAccess = Substitute.For<ISportTypeDataAccess>();
+        private ISportService _sportService = Substitute.For<ISportService>();
 
         private ISessionService _sessionService = Substitute.For<ISessionService>();
 
@@ -61,7 +61,7 @@
         [OneTimeTearDown]
         public void FixtureTearDown()
         {
-            _sportTypeDataAccess = null;
+            _sportService = null;
             _sessionService = null;
             _leagueDataAccess = null;
             _matchDataAccess = null;
@@ -79,7 +79,7 @@
                 var parent = new SportProductItem { ParentId = -1, ID = FakeHelper.Create<int>(), Name = FakeHelper.Create<string>() };
                 var child = new SportProductItem { ParentId = parent.ID, ID = FakeHelper.Create<int>(), Name = FakeHelper.Create<string>() };
 
-                _sportTypeDataAccess.GetSportsAndProducts(
+                _sportService.GetSportsAndProducts(
                  _sessionService.LicenseeSession.LicenseeId,
                  _sessionService.UserSession.Language,
                  productCode).Returns(new List<SportProductItem> { parent, child });
@@ -191,13 +191,13 @@
         {
             return new CommonDataApiController(
                 Substitute.For<ILanguageService>(),
-                _sportTypeDataAccess,
                 _sessionService,
                 _leagueDataAccess,
                 _matchDataAccess,
                 _betTypeService,
                 _portalApiService,
-                _productService);
+                _productService,
+                _sportService);
         }
     }
 }

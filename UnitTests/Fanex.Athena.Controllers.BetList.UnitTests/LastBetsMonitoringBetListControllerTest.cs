@@ -7,20 +7,24 @@
     using Base.UnitTests;
     using DataAccess.Core.Common.Interfaces;
     using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Service.Customer.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.BetList.ViewModel;
     using NSubstitute;
     using NUnit.Framework;
 
     public class LastBetsMonitoringBetListControllerTest : CultureBaseControllerHelperTest
     {
-        private ISportTypeDataAccess _sportTypeDataAccess;
+        private ISportService _sportService;
+        private IPlayerSegmentationService _playerSegmentationService;
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
             base.FixtureSetUp();
 
-            _sportTypeDataAccess = Substitute.For<ISportTypeDataAccess>();
+            _sportService = Substitute.For<ISportService>();
+            _playerSegmentationService = Substitute.For<IPlayerSegmentationService>();
 
             SetUpDefaultFakeData();
         }
@@ -31,7 +35,8 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                _sportTypeDataAccess.GetAllSports().Returns(new Dictionary<int, string>());
+                _sportService.GetAllSports().Returns(new Dictionary<int, string>());
+                _playerSegmentationService.GetCustomerClass().Returns(new List<string>());
 
                 // Action
                 var result = await controller.Index() as ViewResult;
@@ -51,8 +56,8 @@
 
                 var sports = new List<SportProductItem>() { new SportProductItem { ID = 1, ParentId = 0, Name = "Test Sport" } };
 
-                _sportTypeDataAccess.GetSportsAndProducts(DefaultLicenseeSession.LicenseeId, DefaultUserSession.Language, string.Empty).Returns(sports);
-
+                _sportService.GetSportAndProductAndSabaSport(DefaultLicenseeSession.LicenseeId, DefaultUserSession.Language, string.Empty).Returns(sports);
+                _playerSegmentationService.GetCustomerClass().Returns(new List<string> { "1" });
                 // Action
                 var result = await controller.Index() as ViewResult;
                 var model = (LastBetsMonitoringViewModel)result.Model;
@@ -61,17 +66,17 @@
                 Assert.Multiple(() =>
                 {
                     Assert.That(model.Param.LicenseeId, Is.EqualTo(DefaultLicenseeSession.LicenseeId));
-                    Assert.That(model.SportsList.Count, Is.EqualTo(3));
-                    Assert.That(model.SportsList.ElementAt(0).Value, Is.EqualTo("0"));
-                    Assert.That(model.SportsList.ElementAt(1).Value, Is.EqualTo(sports[0].ID.ToString()));
-                    Assert.That(model.SportsList.ElementAt(2).Value, Is.EqualTo(ParlayId));
+                    Assert.That(model.SportsList.Count, Is.EqualTo(2));
+                    Assert.That(model.SportsList.ElementAt(0).Value, Is.EqualTo(sports[0].ID.ToString()));
+                    Assert.That(model.SportsList.ElementAt(1).Value, Is.EqualTo(ParlayId));
+                    Assert.That(model.CustomerClassList.ElementAt(0), Is.EqualTo("1"));
                 });
             }
         }
 
         private LastBetsMonitoringBetListController CreateController()
         {
-            return new LastBetsMonitoringBetListController(_sportTypeDataAccess)
+            return new LastBetsMonitoringBetListController(_sportService, _playerSegmentationService)
             {
                 LangService = LangService,
                 SessionServiceInstance = SessionService,

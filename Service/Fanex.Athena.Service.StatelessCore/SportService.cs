@@ -51,16 +51,8 @@ namespace Fanex.Athena.Service.StatelessCore
         public Task<IDictionary<int, string>> GetAllSports()
             => _sportTypeDataAccess.GetAllSports();
 
-        public async Task<IEnumerable<SportProductItem>> GetSportsAndProducts(int licenseeId
-            , string languageCode
-            , string productCodes = "")
-        {
-            var result = new List<SportProductItem>();
-            result.AddRange(await _sportTypeDataAccess.GetSportsAndProducts(licenseeId, languageCode, productCodes));
-
-
-            return result;
-        }
+        public async Task<IEnumerable<SportProductItem>> GetSportsAndProducts(int licenseeId, string languageCode, string productCodes = "")
+            => await _sportTypeDataAccess.GetSportsAndProducts(licenseeId, languageCode, productCodes);
 
         public async Task<IEnumerable<SportProductItem>> GetSportAndProductAndSabaSport(int licenseeId, string languageCode, string productCodes = "")
         {

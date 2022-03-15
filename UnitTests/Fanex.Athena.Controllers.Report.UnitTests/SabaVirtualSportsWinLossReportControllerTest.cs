@@ -22,7 +22,7 @@
     [TestFixture]
     public class SabaVirtualSportsWinLossReportControllerTest : CultureBaseControllerHelperTest
     {
-        private ISportTypeDataAccess _sportTypeDataAccess;
+        private ISportService _sportService;
 
         private ILeagueDataAccess _leagueDataAccess;
 
@@ -33,7 +33,7 @@
         public override void FixtureSetUp()
         {
             base.FixtureSetUp();
-            _sportTypeDataAccess = Substitute.For<ISportTypeDataAccess>();
+            _sportService = Substitute.For<ISportService>();
             _leagueDataAccess = Substitute.For<ILeagueDataAccess>();
             _reportSettingService = Substitute.For<IReportSettingService>();
             _portalApiService = Substitute.For<IPortalApiService>();
@@ -54,7 +54,7 @@
                 };
                 var leagues = new Dictionary<int, string>();
 
-                _sportTypeDataAccess.GetSportsAndProducts(
+                _sportService.GetSportsAndProducts(
                     SessionService.LicenseeSession.LicenseeId,
                     SessionService.UserSession.Language,
                     Product.SB).Returns(sports);
@@ -112,7 +112,7 @@
                            .Returns(new ProductAccess(new List<Product>()));
 
             return new SabaVirtualSportsWinLossReportController(
-                _sportTypeDataAccess,
+                _sportService,
                 _leagueDataAccess,
                 _reportSettingService,
                 _portalApiService)

@@ -176,6 +176,10 @@
       <Project>{fcfd7434-085b-4c93-848f-e1cbcedcc5a0}</Project>
       <Name>Fanex.Athena.Service.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Service\Fanex.Athena.Service.Customer\Fanex.Athena.Service.Customer.csproj">
+      <Project>{EC87B5F7-32CA-485B-A3FF-52A5D0EDCE42}</Project>
+      <Name>Fanex.Athena.Service.Customer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Service\Fanex.Athena.Service.StatelessCore\Fanex.Athena.Service.StatelessCore.csproj">
       <Project>{da9a50e3-c62d-4f12-96c2-3ac289d423fe}</Project>
       <Name>Fanex.Athena.Service.StatelessCore</Name>
