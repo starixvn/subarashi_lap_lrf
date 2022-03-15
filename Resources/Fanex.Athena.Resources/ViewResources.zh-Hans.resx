@@ -2238,5 +2238,6 @@
   </data>
   <data name="BasketballPinGoal" xml:space="preserve">
     <value>篮球台</value>
+    <comment>ignorejs</comment>
   </data>
 </root>

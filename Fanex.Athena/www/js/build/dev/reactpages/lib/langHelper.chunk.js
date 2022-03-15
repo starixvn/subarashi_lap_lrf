@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 2/24/2022 4:00:13 PM
+// Generated at: 3/15/2022 3:23:42 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -176,6 +176,7 @@ window._language_en_US = {
   BAPlayerNoUpdateVIPSingle: "BA player, no update",
   BaseCurrency: "Base Currency",
   Based: "Based",
+  BasketballPinGoal: "Basketball PinGoal",
   BAStatus: "BA Status",
   BatchUpdate: "Batch Update",
   BAUpdatedBy: "BA Updated By",
