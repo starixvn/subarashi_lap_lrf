@@ -277,12 +277,16 @@ namespace Fanex.Athena.Controllers.Customer
             return new DormantCustomerListExcel(templatePath, reportTitle, dataList);
         }
 
-        private static IEnumerable<CheckedItem> GetOddsGroups()
-            => OddsGroupHelper.GetOddsGroups().Select(g => new CheckedItem
-            {
-                Name = g,
-                Checked = true
-            });
+        private IEnumerable<CheckedItem> GetOddsGroups()
+        {
+            var licenseeName = SessionServiceInstance.LicenseeSession.LicenseeName;
+
+            return LicenseeSettingServiceInstance.GetOddGroups(licenseeName).Select(g => new CheckedItem
+               {
+                   Name = g,
+                   Checked = true
+               });
+        }
 
         private void AssignMetaModelData(CustomerListMetaModel metaModel)
         {

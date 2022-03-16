@@ -12,7 +12,7 @@ namespace Fanex.Athena.Extension.Helper
         {
             return new List<string>
             {
-                "A", "B", "C", "D", "E", "F", "I", "M", "Q"
+                "A", "B", "C", "D", "E", "F"
             };
         }
     }

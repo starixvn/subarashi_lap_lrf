@@ -105,7 +105,7 @@ namespace Fanex.Athena.Controllers.Report
                 MinDate = reportSetting.MinDate,
                 MaxDate = reportSetting.MaxDate,
                 HasExtraPayoutPermission = _authService.HasPermissions(SessionServiceInstance.UserSession, PermissionKeys.ReportExtraPayout),
-                OddsGroups = OddsGroupHelper.GetOddsGroups(),
+                OddsGroups = LicenseeSettingServiceInstance.GetOddGroups(licenseeSession.LicenseeName),
                 CustomerClassList = await _playerService.GetCustomerClass(),
             };
 

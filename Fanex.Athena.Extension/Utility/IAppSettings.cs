@@ -75,5 +75,7 @@
         IEnumerable<string> ListActionNoView { get; }
 
         bool IsUATTW { get; }
+
+        IEnumerable<string> LicenseeOfferIMQOddGroup { get; }
     }
 }

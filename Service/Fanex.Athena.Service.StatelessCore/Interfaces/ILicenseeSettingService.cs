@@ -1,5 +1,6 @@
 ﻿using Fanex.Athena.Model.Core.DTO.Common;
 using Fanex.Athena.Model.Core.DTO.Configuration;
+using System.Collections.Generic;
 
 namespace Fanex.Athena.Service.StatelessCore.Interfaces
 {
@@ -14,5 +15,7 @@ namespace Fanex.Athena.Service.StatelessCore.Interfaces
         FakeLicenseeSetting GetFakeLicenseeSetting(string licenseeName);
 
         Licensee GetLicenseeInfo(string licenseeName);
+
+        IEnumerable<string> GetOddGroups(string licenseeName);
     }
 }
