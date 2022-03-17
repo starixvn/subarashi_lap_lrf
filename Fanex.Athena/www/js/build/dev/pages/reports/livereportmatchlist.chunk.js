@@ -848,6 +848,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             if (newSportId === 180 || newSportId === 186) {
                 productOptions.push('VS');
             }
+            else if (newSportId === 231) {
+                productOptions.push('VS3');
+            }
             else if (newSportId === 162) {
                 productOptions.push('LC');
             }
@@ -865,7 +868,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         }
         else {
             if (productCode === 'ALL') {
-                productOptions = ['SB', 'BA', 'NG', 'LC', 'VS', 'CS', 'VS2'];
+                productOptions = ['SB', 'BA', 'NG', 'LC', 'VS', 'CS', 'VS2', 'VS3'];
             }
             else {
                 productOptions.push(productCode);

@@ -430,7 +430,6 @@ class BetList {
 
     getVRGResultUrl(rootUrl, gamePlayId, platform) {
         let url = rootUrl + 'VirtualGamesResultPopup/Index';
-        console.log(gamePlayId)
         url = QueryString.setParam(url, 'gamePlayId', gamePlayId);
         url = QueryString.setParam(url, 'platform', platform);
 
@@ -502,6 +501,12 @@ class BetList {
         url = QueryString.setParam(url, 'siteId', siteId);
         url = QueryString.setParam(url, 'betTypeId', betTypeId);
         url = QueryString.setParam(url, 'productPath', productPath);
+
+        return url;
+    }
+
+    getVS3ResultUrl(rootUrl, transdecs, sporttype) {
+        let url = rootUrl + 'ResultReport/ResultPopup' + '?transDesc=' + transdecs + '&sporttype=' + sporttype;
 
         return url;
     }

@@ -111,7 +111,8 @@
                 Key184: 'LiveReportBetList/VirtualSports?SportType=184',
                 Key185: 'LiveReportBetList/VirtualSports?SportType=185',
                 Key104: 'LiveReportBetList/MixParlay?bettype=2799',
-                Key169: 'LiveReportBetList/SportsLottery?Sporttype=169'
+                Key169: 'LiveReportBetList/SportsLottery?Sporttype=169',
+                Key231: 'LiveReportBetList/VS3?Sporttype=231'
             };
 
             let url = urlMap['Key' + jsonData.SportId];

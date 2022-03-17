@@ -28,8 +28,6 @@
 
         protected IBalanceUpDataAccess BalanceUpDataAccess { get; private set; }
 
-        protected IProductService ProductService { get; private set; }
-
         public ISubsidiaryService SubsidiaryService { get; set; }
 
         protected ICacheRefAdapter CacheRefAdapter { get; private set; }

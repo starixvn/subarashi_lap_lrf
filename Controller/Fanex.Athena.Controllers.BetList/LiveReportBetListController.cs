@@ -85,6 +85,21 @@
                 sportName).ConfigureAwait(false);
         }
 
+        [HttpGet]
+        [ValidationWebRequest(IsValidCurrency = true)]
+        public async Task<ActionResult> VS3(LiveReportBetListMetaModel metaModel)
+        {
+            var caption = CacheRefAdapter.GetSportName(metaModel.SportType);
+            var sportName = caption;
+
+            return await ProcessRequest(
+                metaModel,
+                "Lrf_BetList_LiveReport",
+                "~/Views/Desktop/BetList/LiveReport/VirtualSports3.cshtml",
+                caption,
+                sportName).ConfigureAwait(false);
+        }
+
         private string GetMatchName(LiveReportBetListMetaModel model)
         {
             return model.HomeId > 0 && model.AwayId > 0 ?
