@@ -94,6 +94,8 @@ namespace Fanex.Athena.Model.Core.DTO.Common
 
         public const string APM = "APM";
 
+        public const string VS3 = "VS3";
+
         #endregion Field
 
         #region Constructor

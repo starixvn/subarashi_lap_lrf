@@ -119,6 +119,10 @@ class BetListLayout extends Component {
                 const url = BetList.getThirdPartyProductResultUrl(rootUrl, custid, transdecs, extension2, extension1, siteId, bettype, 'AdvantPlayMini');
                 this._showThirdPartyResult(url, title);
             }
+            else if (sporttype === SportType.VS3) {
+                const url = BetList.getVS3ResultUrl(rootUrl, transdecs, sporttype);
+                this._openPopup(url, title);
+            }
             else {
                 const url = BetList.getResultUrl(rootUrl, matchid, raceNo, bettype,
                     sporttype, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid);
@@ -419,6 +423,16 @@ class BetListLayout extends Component {
         window.showAdvantPlayMiniBetDetails = (transId, winlostDate, custId, transType) => {
             this._showRngBetlistDetail(transId, winlostDate, custId, transType, 'ProductAPM');
         }
+
+        window.showDetail = (id) => {
+            var e = document.getElementById(id);
+            if (e.style.display == 'block') {
+                e.style.display = 'none';
+            }
+            else {
+                e.style.display = 'block';
+            }
+        }
     }
 
     componentWillUnmount() {
@@ -455,6 +469,7 @@ class BetListLayout extends Component {
         window.showAdvantPlayBetDetails = undefined;
         window.showAdvantPlayMiniBetDetails = undefined;
         window.SGJackpotWonBetList = undefined;
+        window.showDetail = undefined;
     }
 
     _getResource(key) {

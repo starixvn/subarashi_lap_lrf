@@ -1,4 +1,4 @@
-﻿// Generated at: 1/20/2022 1:40:19 PM
+﻿// Generated at: 3/17/2022 10:30:22 AM
 var _language_zh_Hans = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -53,6 +53,7 @@ Balance:"余额",
 BalanceChange:"余额变动",
 BaseCurrency:"基础货币",
 Based:"基于",
+BasketballPinGoal:"篮球台",
 BAStatus:"BA 状态",
 BatchUpdate:"批次更新",
 BAUpdatedBy:"BA更新帐号",
@@ -497,7 +498,7 @@ RecommendBrowserOnReportPageMsg:"若页面大小 &gt; 1,000, 请您考虑使用�
 RefNo:"注单号码",
 Refund:"退款",
 Reject:"已取消",
-Remark:"备注",
+Remark:"备註",
 RemoveFromGroup:"从该组中删除",
 RemoveGroupMsg:"您确定要从组中移除此(这些)会员?",
 RemoveTheseCustomersFromGroupMsg:"您确定要从组中移除这些会员?",

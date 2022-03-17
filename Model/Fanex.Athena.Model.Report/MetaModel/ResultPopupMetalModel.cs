@@ -45,5 +45,7 @@ namespace Fanex.Athena.Model.Report.MetaModel
         public int Handicap1 { get; set; }
 
         public int Handicap2 { get; set; }
+
+        public string TransDesc { get; set; }
     }
 }

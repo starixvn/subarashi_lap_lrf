@@ -20,6 +20,9 @@
             if (newSportId === 180 || newSportId === 186) {
                 productOptions.push('VS');
             }
+            else if (newSportId === 231) {
+                productOptions.push('VS3');
+            }
             else if (newSportId === 162) {
                 productOptions.push('LC');
             }
@@ -37,7 +40,7 @@
         }
         else {
             if (productCode === 'ALL') {
-                productOptions = ['SB', 'BA', 'NG', 'LC', 'VS', 'CS', 'VS2'];
+                productOptions = ['SB', 'BA', 'NG', 'LC', 'VS', 'CS', 'VS2', 'VS3'];
             }
             else {
                 productOptions.push(productCode);

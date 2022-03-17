@@ -2213,6 +2213,10 @@ class BetListLayout extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getThirdPartyProductResultUrl(rootUrl, custid, transdecs, extension2, extension1, siteId, bettype, 'AdvantPlayMini');
 
         this._showThirdPartyResult(url, title);
+      } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].VS3) {
+        const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getVS3ResultUrl(rootUrl, transdecs, sporttype);
+
+        this._openPopup(url, title);
       } else {
         const url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getResultUrl(rootUrl, matchid, raceNo, bettype, sporttype, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid);
 
@@ -2577,6 +2581,16 @@ class BetListLayout extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     window.showAdvantPlayMiniBetDetails = (transId, winlostDate, custId, transType) => {
       this._showRngBetlistDetail(transId, winlostDate, custId, transType, 'ProductAPM');
     };
+
+    window.showDetail = id => {
+      var e = document.getElementById(id);
+
+      if (e.style.display == 'block') {
+        e.style.display = 'none';
+      } else {
+        e.style.display = 'block';
+      }
+    };
   }
 
   componentWillUnmount() {
@@ -2613,6 +2627,7 @@ class BetListLayout extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     window.showAdvantPlayBetDetails = undefined;
     window.showAdvantPlayMiniBetDetails = undefined;
     window.SGJackpotWonBetList = undefined;
+    window.showDetail = undefined;
   }
 
   _getResource(key) {
@@ -3240,7 +3255,6 @@ class BetList {
 
   getVRGResultUrl(rootUrl, gamePlayId, platform) {
     let url = rootUrl + 'VirtualGamesResultPopup/Index';
-    console.log(gamePlayId);
     url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'gamePlayId', gamePlayId);
     url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'platform', platform);
     return url;
@@ -3308,6 +3322,11 @@ class BetList {
     return url;
   }
 
+  getVS3ResultUrl(rootUrl, transdecs, sporttype) {
+    let url = rootUrl + 'ResultReport/ResultPopup' + '?transDesc=' + transdecs + '&sporttype=' + sporttype;
+    return url;
+  }
+
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (new BetList());
@@ -3360,7 +3379,8 @@ const SportType = {
   VGA_FreeBets: 173,
   CG: 167,
   AP: 172,
-  APM: 174
+  APM: 174,
+  VS3: 231
 };
 
 /***/ }),

@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 2/24/2022 4:00:13 PM
+﻿// Generated at: 3/17/2022 10:31:12 AM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -223,7 +223,7 @@ CasinoTransfer:"娱乐城的总转账额",
 CasinoTurnover:"电子游戏交易额",
 CategoriesSelection:"种类",
 Category:"类别",
-CcList:"cc列表",
+CcList:"抄送列表",
 ChangePassword:"更改密码",
 ChangeStatus:"更改 {0}&apos;s 状态",
 ChangeStatusOfThisCustomerMsg:"您确定您要更换此会员的状态吗?",

@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 2/24/2022 4:00:13 PM
+﻿// Generated at: 3/17/2022 10:31:12 AM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -786,6 +786,7 @@ ProductVGA:"Vgaming",
 ProductVRG:"Virtual Games",
 ProductVS:"Virtual Sports",
 ProductVS2:"Virtual Sports 2",
+ProductVS3:"Virtual Sports 3",
 ProductWM:"WM",
 Promotion:"Promotion",
 PromotionDetails:"Promotion Details",

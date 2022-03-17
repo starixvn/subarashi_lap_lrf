@@ -1,4 +1,4 @@
-﻿// Generated at: 1/20/2022 1:40:19 PM
+﻿// Generated at: 3/17/2022 10:30:22 AM
 var _language_zh_TW = {
 AA:"客客",
 AbnormalBet:"非正規註單",
@@ -52,6 +52,7 @@ Balance:"餘額",
 BalanceChange:"餘額變動",
 BaseCurrency:"基礎貨幣",
 Based:"基於",
+BasketballPinGoal:"籃球檯",
 BAStatus:"BA 狀態",
 BatchUpdate:"批次更新",
 BAUpdatedBy:"BA更新帐号",
@@ -492,7 +493,7 @@ RecommendBrowserOnReportPageMsg:"若頁面大小&gt; 1,000，請您考慮使用�
 RefNo:"注單號碼",
 Refund:"退款",
 Reject:"已取消",
-Remark:"備註",
+Remark:"备註",
 RemoveFromGroup:"從該組中刪除",
 RemoveGroupMsg:"您確定要從組中移除此（這些）會員?",
 RemoveTheseCustomersFromGroupMsg:"您確定要從組中移除這些會員?",

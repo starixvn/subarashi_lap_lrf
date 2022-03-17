@@ -116,7 +116,7 @@ namespace Fanex.Athena.Controllers
                 }
                 else
                 {
-                    result = new Regex(@"\{casino-productlist-section\}.*\{/casino-productlist-section\}").Replace(result, string.Empty);
+                    result = new Regex(@"\{casino-productlist-section\}[\s\S]*{/casino-productlist-section\}").Replace(result, string.Empty);
                 }
             }
 
@@ -128,6 +128,7 @@ namespace Fanex.Athena.Controllers
             var customcontent = AddCasinoProducts(content, products);
             customcontent = RemoveProductSection(customcontent, products, ProductTypes.VirtualSports, "VS");
             customcontent = RemoveProductSection(customcontent, products, ProductTypes.VirtualSports2, "VS2");
+            customcontent = RemoveProductSection(customcontent, products, ProductTypes.VS3, Product.VS3);
             return customcontent;
         }
 
@@ -146,7 +147,7 @@ namespace Fanex.Athena.Controllers
                 }
                 else
                 {
-                    var pattern = @"\{" + productCode + @"-productlist-section\}.*\{/" + productCode + @"-productlist-section\}";
+                    var pattern = @"\{" + productCode + @"-productlist-section\}[\s\S]*{/" + productCode + @"-productlist-section\}";
                     customContent = new Regex(pattern).Replace(customContent, string.Empty);
                 }
             }

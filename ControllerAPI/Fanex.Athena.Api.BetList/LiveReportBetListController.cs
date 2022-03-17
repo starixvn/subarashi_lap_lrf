@@ -92,6 +92,15 @@ namespace Fanex.Athena.Api.BetList
             return await GetPagingData(metaModel, UspName, page, rows).ConfigureAwait(false);
         }
 
+        [HttpGet]
+        [ValidationApiRequest(ObjectName = "metaModel", IsValidCurrency = true)]
+        public async Task<dynamic> VS3([FromUri] LiveReportBetListMetaModel metaModel, int page, int rows)
+        {
+            const string UspName = "Lrf_BetList_LiveReport";
+
+            return await GetPagingData(metaModel, UspName, page, rows).ConfigureAwait(false);
+        }
+
         #region Utility
 
         private async Task<HttpResponseMessage> GetData(LiveReportBetListMetaModel metaModel, string uspKey)

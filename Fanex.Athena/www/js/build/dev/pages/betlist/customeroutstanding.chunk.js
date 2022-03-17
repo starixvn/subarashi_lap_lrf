@@ -4728,6 +4728,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         const SPORT_CG = 167;
         const SPORT_AP = 172;
         const SPORT_APM = 174;
+        const SPORT_VS3 = 231;
         const BETLIST_META_MODEL = '#BetListMetaModel';
 
         let _sortColumnName, _sortOrder;
@@ -5224,6 +5225,14 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 });
             },
 
+            viewVS3Result: function (transdecs, sporttype, title) {
+                let url = Site.resolveClientUrl('ResultReport/ResultPopup') + '?transDesc=' + transdecs + '&sporttype=' + sporttype;
+
+                Site.blockUI();                
+                showResultPopUp(url, { width: 800, height: 380, title: title });
+                Site.unBlockUI();
+            },
+
             viewResult: function (matchid, raceNo, bettype, sporttype, refno,
                 currency, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid, transdecs, siteId) {
                 const title = Site.getSingleResource('Result');
@@ -5297,6 +5306,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 }
                 else if (sporttype === SPORT_APM) {
                     _me.viewThirdPartyProductResult(custid, transdecs, extension2, extension1, siteId, bettype, 'AdvantPlayMini', title);
+                }
+                else if (sporttype === SPORT_VS3) {
+                    _me.viewVS3Result(transdecs, sporttype, title);
                 }
                 else {
                     const numberBettype = Number(bettype);
@@ -5848,6 +5860,16 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 showDetailPopUp(url, { width: popW + 50, height: popH + 50, title: title });
             },
 
+            showDetail: function (id) {
+                var e = document.getElementById(id);
+                if (e.style.display == 'block') {
+                    e.style.display = 'none';
+                }
+                else {
+                    e.style.display = 'block';
+                }
+            },
+
             registerBetListGlobalFunctions: function () {
                 window.ViewResult = _me.viewResult;
                 // showMP and showCombMP are only for old tickets
@@ -5895,6 +5917,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 window.showAdvantPlayBetDetails = _me.showAdvantPlayBetDetails;
                 window.showAdvantPlayMiniBetDetails = _me.showAdvantPlayMiniBetDetails;
                 window.showSGJackpotWonDetails = _me.showSGJackpotWonDetails;
+                window.showDetail = _me.showDetail;
 
                 const betList = {
                     ViewCasinoHandHistory: _me.ViewCasinoHandHistory
