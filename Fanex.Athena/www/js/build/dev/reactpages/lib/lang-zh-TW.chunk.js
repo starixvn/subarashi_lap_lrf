@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 2/24/2022 4:00:13 PM
+// Generated at: 3/15/2022 3:23:42 PM
 window._language_zh_TW = {
   AA: "客客",
   AbnormalBet: "非正規註單",
@@ -147,6 +147,7 @@ window._language_zh_TW = {
   BalanceChange: "餘額變動",
   BaseCurrency: "基礎貨幣",
   Based: "基於",
+  BasketballPinGoal: "籃球檯",
   BAStatus: "BA 狀態",
   BatchUpdate: "批次更新",
   BAUpdatedBy: "BA更新帐号",

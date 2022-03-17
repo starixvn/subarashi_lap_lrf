@@ -2742,7 +2742,7 @@
     <comment>165286</comment>
   </data>
   <data name="CcList" xml:space="preserve">
-    <value>cc列表</value>
+    <value>抄送列表</value>
     <comment>165286</comment>
   </data>
   <data name="CharactersRemaining" xml:space="preserve">
@@ -2839,5 +2839,6 @@
   </data>
   <data name="BasketballPinGoal" xml:space="preserve">
     <value>篮球台</value>
+    <comment>ignorejs</comment>
   </data>
 </root>

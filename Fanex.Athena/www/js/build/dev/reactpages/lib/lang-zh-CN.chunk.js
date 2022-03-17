@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 2/24/2022 4:00:13 PM
+// Generated at: 3/15/2022 3:23:42 PM
 window._language_zh_CN = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -168,6 +168,7 @@ window._language_zh_CN = {
   BAPlayerNoUpdateVIPSingle: "BA玩家，無任何更新",
   BaseCurrency: "基础货币",
   Based: "基于",
+  BasketballPinGoal: "篮球台",
   BAStatus: "BA 状态",
   BatchUpdate: "批次更新",
   BAUpdatedBy: "BA更新帳號",
@@ -223,7 +224,7 @@ window._language_zh_CN = {
   CasinoTurnover: "电子游戏交易额",
   CategoriesSelection: "种类",
   Category: "类别",
-  CcList: "cc列表",
+  CcList: "抄送列表",
   ChangePassword: "更改密码",
   ChangeStatus: "更改 {0}&apos;s 状态",
   ChangeStatusOfThisCustomerMsg: "您确定您要更换此会员的状态吗?",
