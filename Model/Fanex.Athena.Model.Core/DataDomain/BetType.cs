@@ -305,6 +305,8 @@
 
         SGJackpotPrize = 4600,
 
-        SGJackpotContribution = 4599
+        SGJackpotContribution = 4599,
+
+        AllbetPromotion = 2499
     }
 }

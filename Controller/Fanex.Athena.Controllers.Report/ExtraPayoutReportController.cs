@@ -217,6 +217,15 @@ namespace Fanex.Athena.Controllers.Report
                 });
             }
 
+            if (productCodeList.IsPresent(_ => _ == Product.AB))
+            {
+                promotionTypeList.AddRange(new List<CheckedItem>
+                {
+                    new CheckedItem { ID = ExtraPayoutMapType.AllbetPromotion,
+                        Name = $"{ViewResources.ResourceManager.GetString(productResource + Product.AB)} - {_cacheRefAdapter.GetBettype((int)BetType.AllbetPromotion)}", Checked = true }
+                });
+            }
+
             return promotionTypeList;
         }
     }
