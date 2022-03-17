@@ -3,15 +3,16 @@ import Site from '@jsroot/lib/site'
 import Report from '@jsroot/lib/report'
 
 export default class Service {
-    static getTitle(fromDate, toDate, currency, baseCurrency) {
+    static getTitle(fromDate, toDate, currency, baseCurrency, username) {
         const dateRangeText = fromDate && toDate 
             ? `, ${Site.convertDateToString(fromDate)} → ${Site.convertDateToString(toDate)}` 
             : '';
 
         const currencyText = currency ? `, ${LangHelper.getSingleResource("Currency")}: ${currency}` : '';
         const baseCurrencyText = baseCurrency ? `, ${LangHelper.getSingleResource("BaseCurrency")}: ${baseCurrency}` : '';
+        const usernameText = username ? `, ${LangHelper.getSingleResource("Username")}: ${username}` : '';
 
-        return LangHelper.getSingleResource("LeagueWinLoss") + dateRangeText + currencyText + baseCurrencyText;
+        return LangHelper.getSingleResource("LeagueWinLoss") + dateRangeText + currencyText + baseCurrencyText + usernameText;
     }
 
     static showErrorMsg() {

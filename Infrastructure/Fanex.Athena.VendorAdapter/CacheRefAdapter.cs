@@ -90,6 +90,16 @@ namespace Fanex.Athena.VendorAdapter
             return betTypeName;
         }
 
+        public string GetBetTypeName(object bettypeId, string languageCode)
+        {
+            if (!IsValidId(bettypeId))
+            {
+                return string.Empty;
+            }
+
+            return RemotingRefService.GetBetTypeName(bettypeId.ToString(), languageCode);
+        }
+
         public string GetBettypeWithProductName(int betType, bool liveIndicator = false)
         {
             var betTypeName = GetBettype(betType, liveIndicator);
@@ -131,5 +141,6 @@ namespace Fanex.Athena.VendorAdapter
         {
             return string.IsNullOrEmpty(languageCode) ? Thread.CurrentThread.CurrentUICulture.IetfLanguageTag : languageCode;
         }
+
     }
 }

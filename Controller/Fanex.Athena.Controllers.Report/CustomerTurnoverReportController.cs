@@ -12,6 +12,7 @@ namespace Fanex.Athena.Controllers.Report
     using Fanex.Athena.Excel.Report;
     using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
     using Fanex.Athena.Service.StatelessCore.Utility;
@@ -27,7 +28,7 @@ namespace Fanex.Athena.Controllers.Report
     using Resources;
 
     using Service.Report.Interfaces;
-
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Hosting;
@@ -67,6 +68,16 @@ namespace Fanex.Athena.Controllers.Report
         [AjaxRequest]
         public async Task<ActionResult> GetSportsAndProducts()
         {
+            var listItem = new List<SportProductItem>();
+            var parlayProduct = new SportProductItem
+            {
+                Checked = true,
+                ID = ProductTypes.Parlay,
+                Name = ViewResources.Parlay,
+                ParentId = ProductTypes.Sportsbook
+            };
+            listItem.Add(parlayProduct);
+
             var productCode = ProductServiceInstance.GetAllowedSubProductCodeList(
                SessionServiceInstance.LicenseeSession.OfferedSubProductList,
                $"{Product.SB},{Product.NG},{Product.VS},{Product.VS2},{Product.VS3}");
@@ -76,7 +87,9 @@ namespace Fanex.Athena.Controllers.Report
                 SessionServiceInstance.UserSession.Language,
                 productCode)
                 .ConfigureAwait(false);
-            return Json(data, JsonRequestBehavior.AllowGet);
+            listItem.AddRange(data);
+
+            return Json(listItem, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]

@@ -11,6 +11,8 @@ namespace Fanex.Athena.Model.Report.MetaModel
 
         public int Level { get; set; }
 
+        public string UserName { get; set; }
+
         public override bool IsValid
         {
             get

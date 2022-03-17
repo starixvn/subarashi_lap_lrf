@@ -5,6 +5,7 @@
     using DataAccess.Core.Common.Interfaces;
 
     using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Service.Customer.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -64,7 +65,7 @@
 
         private async Task<IEnumerable<SelectListItem>> GetSports()
         {
-            const string ParlayId = "999";
+            var ParlayId = ((int)SportType.Parlay).ToString();
             const int ProductType = -1;
             var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
             var languageCode = SessionServiceInstance.UserSession.Language;

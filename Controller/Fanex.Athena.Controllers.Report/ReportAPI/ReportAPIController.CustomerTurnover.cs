@@ -29,7 +29,7 @@ namespace Fanex.Athena.Controllers.Report
                 return Json(new List<SportProductItem>());
             }
 
-            var data = await _betTypeService.GetBettypes(SessionServiceInstance.LicenseeSession.LicenseeId, sports, SessionServiceInstance.UserSession.Language).ConfigureAwait(false);
+            var data = await _betTypeService.GetBettypes(sports, SessionServiceInstance.UserSession.Language).ConfigureAwait(false);
 
             return Json(data);
         }

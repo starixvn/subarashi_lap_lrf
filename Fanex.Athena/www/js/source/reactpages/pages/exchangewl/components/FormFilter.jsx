@@ -10,7 +10,9 @@ import LangHelper from '../../../lib/langHelper'
 import Site from '@jsroot/lib/site'
 import AppData from '@jsroot/lib/AppData'
 import { ReportLevel, SubsidiaryViewType, TreeViewOption } from '../../../constants/report'
+import AutoComplete from '@jsroot/components/auto-complete'
 import { BaseCurrency } from '../../../constants/currency'
+import { CUSTOMER_SEARCH_URL } from '../../../constants/url'
 import ReportExcel from '../lib/reportExcel'
 import { Service } from '../lib/service'
 import moment from 'moment'
@@ -91,7 +93,8 @@ export class FormFilter extends Component {
         const title = Service.getReportTitle(
             { fromDate: excelData.FromDate, toDate: excelData.ToDate },
             excelData.BaseCurrency ? excelData.BaseCurrency : excelData.CurrencyName,
-            level === ReportLevel.MAIN ? excelData.CurrencyId === 0 : false);
+            level === ReportLevel.MAIN ? excelData.CurrencyId === 0 : false,
+            this.props.username);
         const excel = new ReportExcel(gridData, title, level, isAllowedCustomerComm, excelData.ReportBy);
         excel.export(() => {
             this.props.toggleLoader(false);
@@ -109,6 +112,7 @@ export class FormFilter extends Component {
             CurrencyId: this.props.selectedCurrency.value,
             BaseCurrency: baseCurrency ? baseCurrency.text : "",
             CurrencyName: baseCurrency ? baseCurrency.text : this.props.selectedCurrency.label,
+            UserName: this.props.username,
             FromDate: Site.convertDateToString(fromDate),
             ToDate: Site.convertDateToString(toDate),
             ReportBy: this.props.selectedReportBy,
@@ -230,6 +234,16 @@ export class FormFilter extends Component {
                         <div className='form-group'>
                             <label className='label-text'>{LangHelper.getSingleResource('Currency')}</label>
                             {this._renderCurrencySelectList()}
+                        </div>
+                    </div>
+
+                    <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
+                        <div className="form-group">
+                            <label className="label-text">{LangHelper.getSingleResource("Username")} *</label>
+                            <AutoComplete url={CUSTOMER_SEARCH_URL}
+                                onSelect={(value) => this.props.setUsername(value)}
+                                onInput={(value) => this.props.setUsername(value)}
+                                htmlAttributes={{ placeholder: LangHelper.getSingleResource("ExternalIdOrSystemId") }} />
                         </div>
                     </div>
 

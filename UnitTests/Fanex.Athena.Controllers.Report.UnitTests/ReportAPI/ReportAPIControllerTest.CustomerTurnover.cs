@@ -77,7 +77,6 @@
                 };
 
                 _betTypeService.GetBettypes(
-                    SessionService.LicenseeSession.LicenseeId,
                     sports,
                     SessionService.UserSession.Language).Returns(dataList);
 
