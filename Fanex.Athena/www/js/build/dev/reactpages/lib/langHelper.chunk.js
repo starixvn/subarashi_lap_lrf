@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 3/15/2022 3:23:42 PM
+// Generated at: 3/17/2022 10:31:12 AM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -176,7 +176,6 @@ window._language_en_US = {
   BAPlayerNoUpdateVIPSingle: "BA player, no update",
   BaseCurrency: "Base Currency",
   Based: "Based",
-  BasketballPinGoal: "Basketball PinGoal",
   BAStatus: "BA Status",
   BatchUpdate: "Batch Update",
   BAUpdatedBy: "BA Updated By",
@@ -787,6 +786,7 @@ window._language_en_US = {
   ProductVRG: "Virtual Games",
   ProductVS: "Virtual Sports",
   ProductVS2: "Virtual Sports 2",
+  ProductVS3: "Virtual Sports 3",
   ProductWM: "WM",
   Promotion: "Promotion",
   PromotionDetails: "Promotion Details",

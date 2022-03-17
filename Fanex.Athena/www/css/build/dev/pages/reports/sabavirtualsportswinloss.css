@@ -579,6 +579,13 @@ input[type="checkbox"].checkbox {
   .form-group .button-group {
     margin-top: 12px; }
 
+.dropdown-content {
+  opacity: 1;
+  top: 25px; }
+
+.ac-hover {
+  background-color: #eee; }
+
 .header-button {
   margin: 0;
   height: 16px;
