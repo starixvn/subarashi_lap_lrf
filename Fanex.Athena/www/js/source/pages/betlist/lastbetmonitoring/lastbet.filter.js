@@ -71,7 +71,7 @@ define(
             const htmlAllOption = '<option value="0">' + Site.getSingleResource('All') + '</option>';
             $matchDropdown.html(htmlAllOption);
 
-            const canRequest = selectedSports.length === 1 && selectedSports[0] !== mixParlaySportId;
+            const canRequest = selectedSports.length === 1 && selectedSports[0] != mixParlaySportId;
             if (canRequest) {
                 let sportId = selectedSports[0];
                 $.ajax({

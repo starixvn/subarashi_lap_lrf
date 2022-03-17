@@ -11,6 +11,7 @@
     using Base.Attributes;
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -152,6 +153,11 @@
 
         private async Task<IEnumerable<Match>> GetMatchList(int sportId)
         {
+            if (sportId == ProductTypes.Parlay)
+            {
+                return new List<Match>();
+            }    
+
             var isSabaSport = sportId < 0;
             var sabaSports = _sportService.GetSabaSports();
             var selectedSabaSport = isSabaSport ? sabaSports.FirstOrDefault(s => s.Id == sportId) : null;

@@ -295,7 +295,8 @@
                             BaseCurrency: data.BaseCurrency,
                             IsExcludedTestData: data.IsExcludedTestData,
                             League: data.League,
-                            Sport: data.Sport
+                            Sport: data.Sport,
+                            Username: data.Username
                         };
 
                         _me.setExcelUrl(0, 0, 0, '', '', '');
@@ -337,7 +338,8 @@
                     ToDate: _submitData.ToDate,
                     BaseCurrency: $('#BaseCurrency').attr('data-original'),
                     Sport: _submitData.Sport,
-                    League: _submitData.League
+                    League: _submitData.League,
+                    Username: _submitData.Username
                 };
                 const drilldownDate = new Date(datetime);
                 const dateRange = Report.GetDrilldownDateRange(param.ReportBy, param.FromDate, param.ToDate, drilldownDate);
