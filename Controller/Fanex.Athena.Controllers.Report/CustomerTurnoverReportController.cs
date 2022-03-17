@@ -69,14 +69,6 @@ namespace Fanex.Athena.Controllers.Report
         public async Task<ActionResult> GetSportsAndProducts()
         {
             var listItem = new List<SportProductItem>();
-            var parlayProduct = new SportProductItem
-            {
-                Checked = true,
-                ID = ProductTypes.Parlay,
-                Name = ViewResources.Parlay,
-                ParentId = ProductTypes.Sportsbook
-            };
-            listItem.Add(parlayProduct);
 
             var productCode = ProductServiceInstance.GetAllowedSubProductCodeList(
                SessionServiceInstance.LicenseeSession.OfferedSubProductList,
@@ -87,7 +79,16 @@ namespace Fanex.Athena.Controllers.Report
                 SessionServiceInstance.UserSession.Language,
                 productCode)
                 .ConfigureAwait(false);
+
             listItem.AddRange(data);
+            var parlayProduct = new SportProductItem
+            {
+                Checked = true,
+                ID = ProductTypes.Parlay,
+                Name = ViewResources.Parlay,
+                ParentId = ProductTypes.Sportsbook
+            };
+            listItem.Add(parlayProduct);
 
             return Json(listItem, JsonRequestBehavior.AllowGet);
         }
