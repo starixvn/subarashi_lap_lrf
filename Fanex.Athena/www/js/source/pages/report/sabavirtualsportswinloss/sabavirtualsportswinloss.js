@@ -192,14 +192,17 @@
             },
 
             setReportTitle: function (currencyId, fromdate, todate, currencyName) {
-                const titlePattern = Site.getSingleResource('SabaVirtualSportsWinLoss') + ', {0} → {1} - {2}';
+                const titlePattern = Site.getSingleResource('SabaVirtualSportsWinLoss') + ', {0} → {1} - {2} {3}';
                 const currencyNameOnTitle = currencyName ? Site.getSingleResource('Viewin').replace('{0}', currencyName.toUpperCase())
                     : Report.getCurrencyNameForReportTitle(currencyId);
+                
+                const userNameTitle = _submitData.Username ? `- Username: ${_submitData.Username}` : "";
 
                 const title = $.format(titlePattern,
                     moment(fromdate, 'MM/DD/YYYY').format('MM/DD/YYYY'),
                     moment(todate, 'MM/DD/YYYY').format('MM/DD/YYYY'),
-                    currencyNameOnTitle);
+                    currencyNameOnTitle,
+                    userNameTitle);
                 $('.report-title').html(title);
                 $('.panel-heading').removeClass('hide');
             },
