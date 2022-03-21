@@ -95,7 +95,8 @@ namespace Fanex.Athena.DataAccess.Core.Common
                                 LeagueId = leagueId,
                                 IsOutRight = awayId == 0,
                                 HomeId = Convert.ToInt32(reader["homeid"]),
-                                AwayId = awayId
+                                AwayId = awayId,
+                                LeagueGroupId = reader.ToInt("LeagueGroupId")
                             };
 
                             match.MatchName = GetMatchName(match);

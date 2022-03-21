@@ -144,7 +144,6 @@
             });
         }
 
-        [TestCase("IvoryBet", "ivorysport")]
         [TestCase("123", "123")]
         public async Task Index_ValidRequest_CallServiceWithCorrectParameters(string licenseeName, string expectedSiteName)
         {

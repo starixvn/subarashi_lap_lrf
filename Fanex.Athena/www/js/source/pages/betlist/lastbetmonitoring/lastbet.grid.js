@@ -1,7 +1,7 @@
 ﻿'use strict';
 define(
-    ['jquery', 'common/site', '../betlist'],
-    function ($, Site, BetList) {
+    ['jquery', 'common/site', 'common/popup', '../betlist'],
+    function ($, Site, Popup, BetList) {
         const _me = {};
 
         // Param
@@ -10,8 +10,8 @@ define(
         let _lastTransLogId = '0';
 
         const _params = {
-            SportId: 0,
-            LeagueId: 0,
+            SportIds: "All",
+            LeagueList: "All",
             MatchId: 0,
             BetType: '',
             LiveStatus: '3',
@@ -25,7 +25,8 @@ define(
             StakeTo: '1000000000',
             TransId: _lastTransId,
             TransLogId: _lastTransLogId,
-            BetFrom: 'All'
+            BetFrom: 'All',
+            CustomerClass: 'All'
         };
         let _postedParam;
         let _intervalId;
@@ -42,10 +43,13 @@ define(
         const SELECTED_CLASS = 'monitor-keep';
         const MAX_STAKE = 999999999;
 
+        const ID_CUSTOMER_CLASS_IFRAME = 'iframe-customer-class';
+
         _me.columns =
             [{ Name: 'Platform', IsShow: 1 },
             { Name: 'ExternalId', IsShow: 1 },
             { Name: 'SystemId', IsShow: 1 },
+            { Name: 'CustomerClass', IsShow: 1},
             { Name: 'TransTime', IsShow: 1 },
             { Name: 'Choice', IsShow: 1 },
             { Name: 'Odds', IsShow: 1 },
@@ -64,8 +68,18 @@ define(
             _params.BasedCurrency = $('#last-bet-monitor-base-currency').val();
             _postedParam = Site.clone(_params);
 
+            _me.initClickCustomerClassIcon();
             BetList.registerBetListGlobalFunctions();
         };
+        _me.initClickCustomerClassIcon = () => {
+            const $customerClassIcon = $('#monitor-header th[data-name=CustomerClass] .icon-info');
+            var url = "CustomerClass/CustomerClassInformation?time=" + (new Date().getTime());
+            const popupOption = { id: ID_CUSTOMER_CLASS_IFRAME, width: 1000, height: 600, title: Site.getSingleResource('CustomerClassInformation') };
+            $customerClassIcon.on('click', function(){
+                Popup.openPopupWithIframe(url, popupOption);
+            })
+        }
+
         _me.getMaxStake = function () {
             return MAX_STAKE;
         };
@@ -81,7 +95,10 @@ define(
             return _postedParam.StakeFrom <= _postedParam.StakeTo
                 && $('#currency').multiSelect('getCheckedItems').length > 0
                 && $('#PlatformType').multiSelect('getCheckedItems').length > 0
-                && $('#special-level').multiSelect('getCheckedItems').length > 0;
+                && $('#special-level').multiSelect('getCheckedItems').length > 0
+                && $('#sport').multiSelect('getCheckedItems').length > 0
+                && $('#customer-class').multiSelect('getCheckedItems').length > 0
+                && $('#league').multiSelect('getCheckedItems').length > 0;
         };
         _me.tryUpdateStake = function () {
             let tempF = $('#stake-from').val();

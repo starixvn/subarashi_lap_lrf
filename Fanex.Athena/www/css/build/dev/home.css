@@ -6838,6 +6838,11 @@ Rad tree view css
       top: 7px;
       right: -5px;
       line-height: 1; }
+  .multiselect-container > a.ui-multiselect.ui-multiselect-state-disabled {
+    cursor: default; }
+    .multiselect-container > a.ui-multiselect.ui-multiselect-state-disabled > input {
+      color: rgba(0, 0, 0, 0.26);
+      cursor: default; }
 
 .multiselect-container.invalid > a.ui-multiselect {
   border-bottom: 2px solid #d91a1a; }

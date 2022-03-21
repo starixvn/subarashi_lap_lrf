@@ -160,6 +160,9 @@ namespace Fanex.Athena.Extension.Utility
             get { return GetValue("IsUATTW") == "1"; }
         }
 
+        public IEnumerable<string> LicenseeOfferIMQOddGroup
+            => GetValue("LicenseeOfferIMQOddGroup").Split(',');
+
         #endregion Configurations
 
         #region Casino

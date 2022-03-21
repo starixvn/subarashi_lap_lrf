@@ -6,5 +6,7 @@
     public class LastBetsMonitoringViewModel : BetListBaseViewModel
     {
         public IEnumerable<SelectListItem> SportsList { get; set; }
+
+        public  IEnumerable<string> CustomerClassList { get; set; }
     }
 }

@@ -18,6 +18,28 @@
                 @DesktopRazorHelper.BasedCurrency(Model.Param.BaseCurrency, Model.Param.CurrencyName)
                 <label>@ViewResources.BaseCurrency</label>
             </div>
+            <div class="col l2 m2 s12 input-field">
+                <div class="multiselect-container">
+                    <select id="customer-class">
+                        @foreach (var item in Model.CustomerClassList)
+                        {
+                            <option value="@item">@(item.Equals("0") ? ViewResources.None : item)</option>
+                        }
+                    </select>
+                </div>
+                <label>@ViewResources.CustomerClass</label>
+            </div>
+            <div class="col l2 m2 s12 input-field">
+                <div class="multiselect-container">
+                    <select id="odds-group">
+                        @foreach (var item in Model.OddsGroups)
+                        {
+                            <option value="@item">@item</option>
+                        }
+                    </select>
+                </div>
+                <label>@ViewResources.OddsGroup</label>
+            </div>
         </div>
         <div class="row">
             @if (!Model.IsFakeLicensee)

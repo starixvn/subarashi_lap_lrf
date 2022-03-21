@@ -19,7 +19,7 @@
     [FunctionAuthorization(PermissionKeys.ReportSabaVirtualSportsWinLoss)]
     public class SabaVirtualSportsWinLossReportController : ReportBaseController
     {
-        private readonly ISportTypeDataAccess _sportTypeDataAccess;
+        private readonly ISportService _sportService;
         private readonly ILeagueDataAccess _leagueDataAccess;
         private readonly IReportSettingService _reportSettingService;
         private readonly IPortalApiService _portalApiService;
@@ -27,13 +27,13 @@
         private readonly List<int> _sportList = new List<int> { (int)SportType.Soccer, (int)SportType.BasketBall, (int)SportType.Cricket };
 
         public SabaVirtualSportsWinLossReportController(
-            ISportTypeDataAccess sportTypeDataAccess,
+            ISportService sportService,
             ILeagueDataAccess leagueDataAccess,
             IReportSettingService reportSettingService,
             IPortalApiService portalApiService
             )
         {
-            _sportTypeDataAccess = sportTypeDataAccess;
+            _sportService = sportService;
             _leagueDataAccess = leagueDataAccess;
             _reportSettingService = reportSettingService;
             _portalApiService = portalApiService;
@@ -67,7 +67,7 @@
                 .Key,
             };
 
-            var sports = (await this._sportTypeDataAccess.GetSportsAndProducts(licenseeSession.LicenseeId, userSession.Language, Product.SB).ConfigureAwait(true))
+            var sports = (await this._sportService.GetSportsAndProducts(licenseeSession.LicenseeId, userSession.Language, Product.SB).ConfigureAwait(true))
                     .Where(x => x.ParentId >= 0 && _sportList.Contains(x.ID));
 
             var model = new SabaVirtualSportsWinLossViewModel

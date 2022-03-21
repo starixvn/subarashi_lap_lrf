@@ -1,7 +1,7 @@
 ﻿'use strict';
 define(['jquery', 'common/site', 'lib/jquery.multiselect'], function ($, Site) {
     const _me = {
-        initProductList: function () {
+        initProductList: function (onChangeCallback) {
             const selector = '#grid-products-multiselect';
             const data = $.parseJSON($('#productsData').val());
             const length = data.length;
@@ -48,6 +48,7 @@ define(['jquery', 'common/site', 'lib/jquery.multiselect'], function ($, Site) {
 
                     $('#ProductList').toggleClass('invalid', !hasItemsChecked);
                     $('#SubmitButton').prop('disabled', canNotSubmit);
+                    onChangeCallback && onChangeCallback();
                 }
             });
         },

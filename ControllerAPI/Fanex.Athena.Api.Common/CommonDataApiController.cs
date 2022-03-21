@@ -29,8 +29,6 @@
     {
         private readonly ILanguageService _langService;
 
-        private readonly ISportTypeDataAccess _sportTypeDataAccess;
-
         private readonly ISportService _sportService;
 
         private readonly ISessionService _sessionService;
@@ -48,7 +46,6 @@
 
         public CommonDataApiController(
             ILanguageService langService,
-            ISportTypeDataAccess sportTypeDataAccess,
             ISessionService sessionService,
             ILeagueDataAccess leagueDataAccess,
             IMatchDataAccess matchDataAccess,
@@ -59,7 +56,6 @@
 #pragma warning restore S107 // Methods should not have too many parameters
         {
             _langService = langService;
-            _sportTypeDataAccess = sportTypeDataAccess;
             _sessionService = sessionService;
             _leagueDataAccess = leagueDataAccess;
             _matchDataAccess = matchDataAccess;
@@ -83,11 +79,12 @@
                 _sessionService.LicenseeSession.OfferedSubProductList,
                 productCode);
 
-            var sports = await _sportTypeDataAccess.GetSportsAndProducts(
-                 _sessionService.LicenseeSession.LicenseeId,
-                 _sessionService.UserSession.Language,
-                 productCode,
-                 includeSabaSport).ConfigureAwait(false);
+            var licenseeId = _sessionService.LicenseeSession.LicenseeId;
+            var lang = _sessionService.UserSession.Language;
+
+            var sports = includeSabaSport
+                ? await _sportService.GetSportAndProductAndSabaSport(licenseeId, lang, productCode)
+                : await _sportService.GetSportsAndProducts(licenseeId, lang, productCode);
 
             return sports.Where(x => x.ParentId > -1).Select(x => new { value = x.ID, label = x.Name, status = true });
         }

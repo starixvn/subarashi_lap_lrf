@@ -6,6 +6,8 @@
 
         public int League { get; set; }
 
+        public string UserName { get; set; } = string.Empty;
+
         public byte ReportBy { get; set; }
 
         public int DrawFilter { get; set; }

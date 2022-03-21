@@ -486,7 +486,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js"), __webpack_require__(/*! lib/jquery.multiselect */ "./www/js/source/lib/jquery.multiselect.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, Site) {
     const _me = {
-        initProductList: function () {
+        initProductList: function (onChangeCallback) {
             const selector = '#grid-products-multiselect';
             const data = $.parseJSON($('#productsData').val());
             const length = data.length;
@@ -533,6 +533,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 
                     $('#ProductList').toggleClass('invalid', !hasItemsChecked);
                     $('#SubmitButton').prop('disabled', canNotSubmit);
+                    onChangeCallback && onChangeCallback();
                 }
             });
         },

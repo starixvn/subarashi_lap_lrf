@@ -4,14 +4,22 @@
     @Html.AntiForgeryToken()
     <div class="row">
         <div class="col l2 m2 s12 input-field">
-            @Html.DropDownList("sports", Model.SportsList, new { @class = "select hide", tabindex = "0" })
+            <div class="multiselect-container">
+                <select id="sport">
+                    @foreach (var item in Model.SportsList)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                </select>
+            </div>
             <label>@ViewResources.Sport</label>
         </div>
 
         <div class="col l4 m4 s12 input-field">
-            <select id="league" disabled="disabled" class="select hide">
-                <option value="0">@ViewResources.All</option>
-            </select>
+            <div class="multiselect-container">
+                <select id="league">
+                </select>
+            </div>
             <label>@ViewResources.League</label>
         </div>
 
@@ -113,14 +121,26 @@
             <label>@ViewResources.Platform</label>
         </div>
 
-        <div class="col l2 m2 s12 input-field">                                                     
-            <div id="pagesize">                                                                     
-                <a href="javascript:;" class="center-align label label-default active" disabled>10</a>     
-                <a href="javascript:;" class="center-align label label-default">20</a>              
-                <a href="javascript:;" class="center-align label label-default">30</a>              
-            </div>                                                                                  
-            <label>@ViewResources.Last</label>                                                      
-        </div>                                                                                      
+        <div class="col l2 m2 s12 input-field">
+            <div class="multiselect-container">
+                <select id="customer-class">
+                    @foreach (var item in Model.CustomerClassList)
+                    {
+                        <option value="@item">@(item.Equals("0") ? ViewResources.None : item)</option>
+                    }
+                </select>
+            </div>
+            <label>@ViewResources.CustomerClass</label>
+        </div>
+
+        <div class="col l2 m2 s12 input-field">
+            <div id="pagesize">
+                <a href="javascript:;" class="center-align label label-default active" disabled>10</a>
+                <a href="javascript:;" class="center-align label label-default">20</a>
+                <a href="javascript:;" class="center-align label label-default">30</a>
+            </div>
+            <label>@ViewResources.Last</label>
+        </div>
 
         <div class="col l1 m2 s5 button-block">
             <a id="FreezeButton" data-status="1" class="waves-effect waves-light btn btn-primary">@ViewResources.Freeze</a>

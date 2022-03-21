@@ -8,8 +8,11 @@ define(
 
         let _currentMatchList = [];
         let _currentLeagueList = [];
+        let _currentSportList = [];
 
         const SPECIAL_LEVEL_LENGTH = 11;
+        const ALL = "All";
+
         const DataType = {
             NUMBER: 'number',
             STRING: 'string'
@@ -20,86 +23,203 @@ define(
             Match: '#match'
         };
 
-        _me.initSports = function () {
-            $('#sports').change(function () {
-                const sportId = Number($(this).val());
-                _me.changeFilterParam(DataType.NUMBER, 'SportId', sportId);
+        const _paramName = {
+            SportType: 'SportTypeList',
+            League: 'LeagueList',
+            CustomerClass: 'CustomerClass',
+            MatchId: "MatchId"
+        }
 
-                const mixParlaySportId = 999;
-                const $leagueDropdown = $(Selector.League);
-                const $matchDropdown = $(Selector.Match);
+        const getDefaultLeagueOpts = () => {
+            return {
+                minWidth: 200,
+                maxHeight: 400,
+                shadow: true,
+                showHeader: true,
+                isCheckAll: true,
+                showFooter: false,
+                disabled: true,
+                isUsedCustomCheckAllText: true,
+                customCheckAllText: Site.getSingleResource('All'),
+                showSearchBox: true,
+                checkAllText: Site.getSingleResource('All'),
+                noneSelectedText: Site.getSingleResource('None'), // Text show on Multiselect when it has no selected item
+                selectedText: Site.getSingleResource('SelectedItemCount'), // Text show when item was selected
+                listData: [],
+                onCheck: handleLeagueCheck
+            }
+        }
 
-                const htmlAllOption = '<option value="0">' + Site.getSingleResource('All') + '</option>';
-                $leagueDropdown.html(htmlAllOption);
-                $matchDropdown.html(htmlAllOption);
+        const genDefaultList = (prefixIdText) => {
+            return [{
+                Id: `${prefixIdText}-0`,
+                Value: 0,
+                Text: '',
+                Checked: true,
+                Enable: true,
+                Css: '',
+                CssClass: ''
+            }]
+        }
 
-                const canRequest = sportId !== 0 && sportId !== mixParlaySportId;
-                $leagueDropdown.selectList('disabled', !canRequest);
-                if (canRequest) {
-                    $.ajax({
-                        url: Site.resolveClientUrl('api/LastBetMonitoringBetList/GetRunningMatchList'),
-                        data: 'sportid=' + sportId,
-                        dataType: 'json',
-                        type: 'GET',
-                        contentType: 'application/json; charset=utf-8',
-                        beforeSend: function () {
-                            Site.blockUI();
-                        },
-                        complete: function () {
-                            Site.unBlockUI();
-                        },
-                        success: function (data) {
-                            _currentMatchList = data.MatchList;
-                            _currentLeagueList = data.LeagueList;
+        const handleSportCheck = () => {
+            const mixParlaySportId = 999;
+            const $matchDropdown = $(Selector.Match);
 
-                            let htmlOption = '';
+            let selectedSports = $('#sport').multiSelect('getCheckedItems');
+
+            const htmlAllOption = '<option value="0">' + Site.getSingleResource('All') + '</option>';
+            $matchDropdown.html(htmlAllOption);
+
+            const canRequest = selectedSports.length === 1 && selectedSports[0] != mixParlaySportId;
+            if (canRequest) {
+                let sportId = selectedSports[0];
+                $.ajax({
+                    url: Site.resolveClientUrl('api/LastBetMonitoringBetList/GetRunningMatchList'),
+                    data: 'sportid=' + sportId,
+                    dataType: 'json',
+                    type: 'GET',
+                    contentType: 'application/json; charset=utf-8',
+                    beforeSend: function () {
+                        Site.blockUI();
+                    },
+                    complete: function () {
+                        Site.unBlockUI();
+                    },
+                    success: function (data) {
+                        _currentMatchList = data.MatchList;
+                        _currentLeagueList = data.LeagueList;
+
+                        let leagueList = [];
+                        if (data.LeagueList.length > 0) {
                             $(data.LeagueList).each(function (i, e) {
-                                htmlOption += '<option value="' + e.LeagueId + '">' + e.LeagueName + '</option>';
+                                leagueList.push({
+                                    Id: 'league-' + i,
+                                    Value: e.LeagueId,
+                                    Text: e.LeagueName,
+                                    Checked: true,
+                                    Enable: true,
+                                    Css: '',
+                                    CssClass: ''
+                                })
                             });
 
-                            $leagueDropdown.append(htmlOption);
+                            let opts = {
+                                disabled: false,
+                                listData: leagueList
+                            }
+                            opts = $.extend({}, getDefaultLeagueOpts(), opts);
+                            $(Selector.League).multiSelect('updateItems', opts);
                         }
-                    });
-                }
+                        else {
+                            _me.initLeague();
+                        }
+                    }
+                });
+            }
+            else {
+                _me.initLeague();
+            }
+            $matchDropdown.selectList('update', { isDisabled: true });
+            setSportFilterParam();
+            setLeagueFilterParam();
+            LastBetGrid.updateParam(DataType.NUMBER, 'MatchId', $matchDropdown.val());
+        }
 
-                $leagueDropdown.selectList('update', { isDisabled: !canRequest });
-                $matchDropdown.selectList('update', { isDisabled: true });
-                LastBetGrid.updateParam(DataType.NUMBER, 'LeagueId', $leagueDropdown.val());
-                LastBetGrid.updateParam(DataType.NUMBER, 'MatchId', $matchDropdown.val());
+        const handleLeagueCheck = () => {
+            let selectedLeagues = $('#league').multiSelect('getCheckedItems');
+            setLeagueFilterParam();
+
+            const $matchDropdown = $(Selector.Match);
+            $matchDropdown.html('<option value="0">' + Site.getSingleResource('All') + '</option>');
+
+            const isShowOnlyOneLeague = selectedLeagues.length === 1 && selectedLeagues[0] != 0;
+            let canShowMatch = isShowOnlyOneLeague;
+            if (isShowOnlyOneLeague) {
+                const leagueId = selectedLeagues[0];
+                const filteredLeague = _currentLeagueList.filter(function (item) { return item.LeagueId == leagueId; });
+                const leagueItem = filteredLeague.length ? filteredLeague[0] : null;
+
+                canShowMatch = leagueItem && Site.asBool(leagueItem.IsOutRight) === false;
+                if (canShowMatch) {
+                    const matchList = _currentMatchList.filter(function (item) { return item.LeagueId == leagueId; });
+
+                    let htmlOption = '';
+                    $(matchList).each(function (i, e) {
+                        htmlOption += '<option value="' + e.MatchId + '">' + e.MatchName + '</option>';
+                    });
+
+                    $matchDropdown.append(htmlOption);
+                }
+            }
+
+            $matchDropdown.selectList('disabled', !isShowOnlyOneLeague && !canShowMatch);
+            $matchDropdown.selectList('update', { isDisabled: !isShowOnlyOneLeague && !canShowMatch });
+            LastBetGrid.updateParam(DataType.NUMBER, 'MatchId', $matchDropdown.val());
+        }
+
+        const setSportFilterParam = () => {
+            let selectedSports = $('#sport').multiSelect('getCheckedItems');
+            if (selectedSports.length == _currentSportList.length)
+            {
+                LastBetGrid.updateParam(DataType.STRING, 'SportIds',ALL);
+            }
+            else{
+                let sportIds = selectedSports.length > 0 ? selectedSports.join(',') : '';
+                LastBetGrid.updateParam(DataType.STRING, 'SportIds', sportIds);
+            }
+        }
+
+        const setLeagueFilterParam = () => {
+            let selectedSports = $('#league').multiSelect('getCheckedItems');
+            if (selectedSports.length == _currentLeagueList.length)
+            {
+                LastBetGrid.updateParam(DataType.STRING, 'LeagueList',ALL);
+            }
+            else{
+                let leagueIds = selectedSports.length > 0 ? selectedSports.join(',') : '';
+                LastBetGrid.updateParam(DataType.STRING, 'LeagueList', leagueIds);
+            }
+        }
+
+        _me.initSports = function () {
+            const sportList = [];
+            $('#sport option').each(function (i, e) {
+                sportList.push({
+                    Id: 'sport-' + i,
+                    Value: $(e).val(),
+                    Text: $(e).text(),
+                    Checked: true,
+                    Enable: true,
+                    Css: '',
+                    CssClass: ''
+                });
             });
-        };
+
+            _currentSportList = sportList;
+
+            $('#sport').html('');
+            $('#sport').multiSelect({
+                minWidth: 100,
+                maxHeight: 400,
+                shadow: true,
+                showSearchBox: true,
+                showHeader: true,
+                isCheckAll: true,
+                showFooter: false,
+                checkAllText: Site.getSingleResource('All'),
+                noneSelectedText: Site.getSingleResource('None'), // Text show on Multiselect when it has no selected item
+                selectedText: Site.getSingleResource('SelectedItemCount'), // Text show when item was selected
+                listData: sportList,
+                onCheck: handleSportCheck
+            });
+        }
 
         _me.initLeague = function () {
-            $(Selector.League).change(function () {
-                const leagueId = Number($(this).val());
-                _me.changeFilterParam(DataType.NUMBER, 'LeagueId', leagueId);
-
-                const $matchDropdown = $(Selector.Match);
-                $matchDropdown.html('<option value="0">' + Site.getSingleResource('All') + '</option>');
-
-                const isShowAllLeague = leagueId === 0;
-                let canShowMatch = !isShowAllLeague;
-                if (!isShowAllLeague) {
-                    const filteredLeague = _currentLeagueList.filter(function (item) { return item.LeagueId === leagueId; });
-                    const leagueItem = filteredLeague.length ? filteredLeague[0] : null;
-
-                    canShowMatch = leagueItem && Site.asBool(leagueItem.IsOutRight) === false;
-                    if (canShowMatch) {
-                        const matchList = _currentMatchList.filter(function (item) { return item.LeagueId === leagueId; });
-
-                        let htmlOption = '';
-                        $(matchList).each(function (i, e) {
-                            htmlOption += '<option value="' + e.MatchId + '">' + e.MatchName + '</option>';
-                        });
-
-                        $matchDropdown.append(htmlOption);
-                    }
-                }
-
-                $matchDropdown.selectList('disabled', isShowAllLeague && !canShowMatch);
-                $matchDropdown.selectList('update', { isDisabled: isShowAllLeague && !canShowMatch });
-                LastBetGrid.updateParam(DataType.NUMBER, 'MatchId', $matchDropdown.val());
-            });
+            const leagueList = genDefaultList('league');
+            let opts = $.extend({}, getDefaultLeagueOpts(), { listData: leagueList });
+            _me.changeFilterParam(DataType.STRING, _paramName.League, 'All')
+            $(Selector.League).multiSelect(opts);
         };
 
         _me.initMatch = function () {
@@ -383,6 +503,42 @@ define(
             });
         };
 
+        _me.initCustomerClass = function () {
+            const customerClassList = [];
+            $('#customer-class option').each(function (i, e) {
+                customerClassList.push({
+                    Id: 'customer-class-' + i,
+                    Value: $(e).val(),
+                    Text: $(e).text(),
+                    Checked: true,
+                    Enable: true,
+                    Css: '',
+                    CssClass: ''
+                });
+            });
+
+            const count = customerClassList.length;
+            $('#customer-class').html('');
+            $('#customer-class').multiSelect({
+                minWidth: 130,
+                maxHeight: 400,
+                shadow: true,
+                showHeader: true,
+                isCheckAll: true,
+                showFooter: false,
+                checkAllText: Site.getSingleResource('All'),
+                noneSelectedText: Site.getSingleResource('SelectOptions'), // Text show on Multiselect when it has no selected item
+                selectedText: Site.getSingleResource('SelectedItemCount'), // Text show when item was selected
+                listData: customerClassList,
+                onCheck: function () {
+                    let checkedItems = $('#customer-class').multiSelect('getCheckedItems');
+                    checkedItems = count === checkedItems.length ? ALL : checkedItems.join(',');
+
+                    _me.changeFilterParam(DataType.STRING, 'CustomerClass', checkedItems);
+                }
+            });
+        };
+
         _me.changeFilterParam = function (type, paramName, value) {
             _me.setHighlightSubmit();
             LastBetGrid.updateParam(type, paramName, value);
@@ -412,8 +568,8 @@ define(
             _me.initSubmit();
             _me.initPlatForm();
             _me.initColumns();
+            _me.initCustomerClass();
 
-            $(Selector.League).selectList('disabled', true);
             $(Selector.Match).selectList('disabled', true);
         };
 

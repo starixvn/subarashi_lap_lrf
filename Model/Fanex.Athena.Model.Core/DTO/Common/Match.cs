@@ -21,5 +21,7 @@ namespace Fanex.Athena.Model.Core.DTO.Common
         public bool IsOutRight { get; set; }
 
         public bool IsNeutral { get; set; }
+
+        public int LeagueGroupId { get; set; }
     }
 }

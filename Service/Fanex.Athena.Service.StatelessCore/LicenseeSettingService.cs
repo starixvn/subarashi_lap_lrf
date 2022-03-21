@@ -14,6 +14,7 @@ namespace Fanex.Athena.Service.StatelessCore
 
     using Extension.Utility.Interfaces;
     using Fanex.Athena.DataAccess.Core.Users.Interfaces;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.DTO.Configuration;
@@ -94,6 +95,15 @@ namespace Fanex.Athena.Service.StatelessCore
             return result.Value;
         }
 
+        public IEnumerable<string> GetOddGroups(string licenseeName)
+        {
+            var imqOddGroups = new List<string> { "I", "M", "Q" };
+            var licenseeIncludeIMQOddGroup = _appSettings.LicenseeOfferIMQOddGroup;
+            return licenseeIncludeIMQOddGroup.Any(name => string.Equals(name, licenseeName, StringComparison.OrdinalIgnoreCase))
+                ? OddsGroupHelper.GetOddsGroups().Concat(imqOddGroups)
+                : OddsGroupHelper.GetOddsGroups();
+        }
+
         private IEnumerable<FakeLicenseeSetting> GetAndCacheFakeLicenseeSettingList()
         {
             var settings = _cache.Get<IEnumerable<FakeLicenseeSetting>>(FakeLicenseeSettingsCacheKey);
@@ -130,5 +140,7 @@ namespace Fanex.Athena.Service.StatelessCore
                 return reader.ReadToEnd();
             }
         }
+
+
     }
 }

@@ -818,7 +818,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js"), __webpack_require__(/*! lib/jquery.multiselect */ "./www/js/source/lib/jquery.multiselect.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, Site) {
     const _me = {
-        initProductList: function () {
+        initProductList: function (onChangeCallback) {
             const selector = '#grid-products-multiselect';
             const data = $.parseJSON($('#productsData').val());
             const length = data.length;
@@ -865,6 +865,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 
                     $('#ProductList').toggleClass('invalid', !hasItemsChecked);
                     $('#SubmitButton').prop('disabled', canNotSubmit);
+                    onChangeCallback && onChangeCallback();
                 }
             });
         },
@@ -6368,7 +6369,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
     __webpack_require__(/*! lib/jqgrid/jquery.jqGrid.en */ "./www/js/source/lib/jqgrid/jquery.jqGrid.en.js"),
     __webpack_require__(/*! lib/jqgrid/jquery.jqGrid.min */ "./www/js/source/lib/jqgrid/jquery.jqGrid.min.js"),
     __webpack_require__(/*! extensions/jquery.extension */ "./www/js/source/extensions/jquery.extension.js"),
-    __webpack_require__(/*! extensions/ajaxBinaryTransporting */ "./www/js/source/extensions/ajaxBinaryTransporting.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, QueryString, Site, Report, CustomerWinLossOption, jqGridAdditional, DatePicker, MonthPicker, MultiSelect, Popup,
+    __webpack_require__(/*! extensions/ajaxBinaryTransporting */ "./www/js/source/extensions/ajaxBinaryTransporting.js"),
+__webpack_require__(/*! lib/jquery.multiselect */ "./www/js/source/lib/jquery.multiselect.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, QueryString, Site, Report, CustomerWinLossOption, jqGridAdditional, DatePicker, MonthPicker, MultiSelect, Popup,
         PagingHelper, ExcelHelper, AutoComplete, Downloader, Toast) {
         'use strict';
 
@@ -6388,6 +6390,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             'racingRevenue': 15,
             'amtDueToBA': 11,
             'amtDueToRacing': 12
+        };
+        const SELECTOR = {
+
         };
 
         let _ajaxRequest = null;
@@ -6429,7 +6434,10 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             CurrentLink: '#current-report-link',
             BetListLink: '.bet-list-link',
             Username: '#Username',
-            PromotionPrizeLink: '#ExportPromotionPrizeLink'
+            PromotionPrizeLink: '#ExportPromotionPrizeLink',
+            Product: '#grid-products-multiselect',
+            CustomerClass: '#customer-class',
+            OddsGroup: '#odds-group'
         };
 
         function initialize() {
@@ -6439,7 +6447,11 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 resourceName: 'CustomerWL',
                 title: Site.getSingleResource('CustomerWinLoss')
             });
-            MultiSelect.initProductList();
+
+            MultiSelect.initProductList(setBtnSubmitStatus);
+            initCustomerClass();
+            initOddsGroup();
+
             DatePicker.initDateRangePicker();
             if ($(_selector.IsHistoryInput).val() === 'True') {
                 MonthPicker.initMonthPicker();
@@ -6507,6 +6519,84 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             $(window).on('unload', function () {
                 $(window).off('resize');
             });
+        }
+
+        function initCustomerClass() {
+            const customerClassList = [];
+            $('#customer-class option').each(function (i, e) {
+                customerClassList.push({
+                    Id: 'customer-class-' + i,
+                    Value: $(e).val(),
+                    Text: $(e).text(),
+                    Checked: true,
+                    Enable: true,
+                    Css: '',
+                    CssClass: ''
+                });
+            });
+            $('#customer-class').html('');
+            $('#customer-class').multiSelect({
+                minWidth: 130,
+                maxHeight: 400,
+                shadow: true,
+                showHeader: true,
+                isCheckAll: true,
+                showFooter: false,
+                checkAllText: Site.getSingleResource('All'),
+                noneSelectedText: Site.getSingleResource('SelectOptions'), // Text show on Multiselect when it has no selected item
+                selectedText: Site.getSingleResource('SelectedItemCount'), // Text show when item was selected
+                listData: customerClassList,
+                onCheck: function () {
+                    const checkedItems = $(_selector.CustomerClass).multiSelect('getCheckedItems');
+                    const parent = $(_selector.CustomerClass).parent();
+                    const isHasItem = checkedItems.length > 0;
+                    parent.toggleClass('invalid', !isHasItem);
+                    setBtnSubmitStatus();
+                }
+            });
+        }
+
+        function initOddsGroup() {
+            const oddsGroupList = [];
+            $('#odds-group option').each(function (i, e) {
+                oddsGroupList.push({
+                    Id: 'odds-group-' + i,
+                    Value: $(e).val(),
+                    Text: $(e).text(),
+                    Checked: true,
+                    Enable: true,
+                    Css: '',
+                    CssClass: ''
+                });
+            });
+            $('#odds-group').html('');
+            $('#odds-group').multiSelect({
+                minWidth: 130,
+                maxHeight: 400,
+                shadow: true,
+                showHeader: true,
+                isCheckAll: true,
+                showFooter: false,
+                checkAllText: Site.getSingleResource('All'),
+                noneSelectedText: Site.getSingleResource('SelectOptions'), // Text show on Multiselect when it has no selected item
+                selectedText: Site.getSingleResource('SelectedItemCount'), // Text show when item was selected
+                listData: oddsGroupList,
+                onCheck: function () {
+                    const checkedItems = $(_selector.OddsGroup).multiSelect('getCheckedItems');
+                    const parent = $(_selector.OddsGroup).parent();
+                    const isHasItem = checkedItems.length > 0;
+                    parent.toggleClass('invalid', !isHasItem);
+                    setBtnSubmitStatus();
+                }
+            });
+        }
+
+        function setBtnSubmitStatus(){
+            const productList = $(_selector.Product).multiSelect('getCheckedItems');
+            const customerClassList = $(_selector.CustomerClass).multiSelect('getCheckedItems');
+            const oddsGroupList = $(_selector.OddsGroup).multiSelect('getCheckedItems');
+            const isDisabled = productList.length === 0 || customerClassList.length === 0 || oddsGroupList.length === 0;
+            $(_selector.SubmitButton).prop('disabled', isDisabled);
         }
 
         function exportExcel(url, data, fileName) {
@@ -6804,6 +6894,12 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             param.OrderItem = _orderItem;
             param.IsAscSort = _sortOrder === 'asc';
 
+            const customerList = $(_selector.CustomerClass).multiSelect('getCheckedItems');
+            const oddsGroupList = $(_selector.OddsGroup).multiSelect('getCheckedItems');
+
+            param.CustomerClass = customerList.join(',');
+            param.OddsGroup = oddsGroupList.join(',');
+            
             if (param.Username === undefined) {
                 param.Username = '';
             }

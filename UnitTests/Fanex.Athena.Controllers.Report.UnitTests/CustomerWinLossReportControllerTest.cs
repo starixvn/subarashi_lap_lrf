@@ -9,6 +9,7 @@
     using Fanex.Athena.Controllers.Base;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
+    using Fanex.Athena.Service.Customer.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
@@ -25,23 +26,33 @@
 
         private IAuthorizationService _authService;
 
+        private IPlayerSegmentationService _playerService;
+
         private const int TimeOutInSecond = 180;
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
             base.FixtureSetUp();
+            _playerService = Substitute.For<IPlayerSegmentationService>();
 
             SetUpDefaultFakeData();
         }
 
+        [OneTimeTearDown]
+        public override void FixtureTearDown()
+        {
+            base.FixtureTearDown();
+            _playerService = null;
+        }
+
         [Test]
-        public void Index_WhenGet_ReturnCorrectViewResult()
+        public async Task Index_WhenGet_ReturnCorrectViewResult()
         {
             using (var controller = CreateController())
             {
                 // Action
-                var viewResult = controller.Index() as ViewResult;
+                var viewResult = await controller.Index() as ViewResult;
                 var viewModel = viewResult.Model as CustomerWinLossViewModel;
 
                 // Assert
@@ -54,12 +65,12 @@
         }
 
         [Test]
-        public void History_WhenGet_ReturnCorrectViewResult()
+        public async Task History_WhenGet_ReturnCorrectViewResult()
         {
             using (var controller = CreateController())
             {
                 // Action
-                var viewResult = controller.History() as ViewResult;
+                var viewResult = await controller.History() as ViewResult;
                 var viewModel = viewResult.Model as CustomerWinLossViewModel;
 
                 // Assert
@@ -132,7 +143,7 @@
             var licenseeSettingService = stubLicenseeSettingService ?? Substitute.For<ILicenseeSettingService>();
             _reportApiClient = Substitute.For<IReportAPIClient>();
 
-            return new CustomerWinLossReportController(reportSettingService, _authService, _reportApiClient)
+            return new CustomerWinLossReportController(reportSettingService, _authService, _reportApiClient, _playerService)
             {
                 LangService = LangService,
                 SessionServiceInstance = SessionService,

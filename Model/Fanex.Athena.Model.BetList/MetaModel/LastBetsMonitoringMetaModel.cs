@@ -15,9 +15,13 @@ namespace Fanex.Athena.Model.BetList.MetaModel
 
         public long TransLogId { get; set; }
 
-        public int SportId { get; set; }
+        public string SportIds { get; set; }
 
-        public int LeagueId { get; set; }
+        public string SportTypeList { get; set; }
+
+        public string LeagueList { get; set; }
+
+        public string CustomerClass { get; set; }
 
         public int MatchId { get; set; }
 

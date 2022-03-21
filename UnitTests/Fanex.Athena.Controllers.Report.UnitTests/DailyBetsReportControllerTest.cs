@@ -25,6 +25,8 @@
 
         private ILicenseeSettingService _licenseeSettingService;
 
+        private ISportService _sportService;
+
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
@@ -32,6 +34,7 @@
 
             _reportAPIClient = Substitute.For<IReportAPIClient>();
             _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
+            _sportService = Substitute.For<ISportService>();
 
             SetUpDefaultFakeData();
         }
@@ -42,6 +45,7 @@
             base.FixtureTearDown();
             _reportAPIClient = null;
             _licenseeSettingService = null;
+            _sportService = null;
         }
 
         [TearDown]
@@ -52,14 +56,14 @@
 
         [TestCase("test", "test name", "test name")]
         [TestCase(Product.CS, "test name", "RNG")]
-        public void Index_WhenCall_ReturnCorrectResult(string productCode, string productName, string expectedProductName)
+        public async Task Index_WhenCall_ReturnCorrectResult(string productCode, string productName, string expectedProductName)
         {
             // Arrange
             var productList = new List<Product> { new Product { ProductCode = productCode, ProductName = productName } };
             using (var controller = CreateController(productList))
             {
                 // Action
-                var result = controller.Index() as ViewResult;
+                var result = (await controller.Index()) as ViewResult;
                 var model = result.Model as DailyBetsViewModel;
 
                 // Assert
@@ -75,7 +79,7 @@
         }
 
         [Test]
-        public void Index_LicenseeSettingHasTimeZone_ReturnsViewModelWithCorrectTime()
+        public async Task Index_LicenseeSettingHasTimeZone_ReturnsViewModelWithCorrectTime()
         {
             using (var controller = CreateController())
             {
@@ -86,7 +90,7 @@
                 var expectedMinDate = expectedTodatGtm8.AddMonths(-licenseeSetting.LimitRecentMonths);
 
                 // Action
-                var result = (controller.Index() as ViewResult).Model as DailyBetsViewModel;
+                var result = ( (await controller.Index()) as ViewResult).Model as DailyBetsViewModel;
 
                 // Assert
                 Assert.Multiple(() =>
@@ -98,7 +102,7 @@
         }
 
         [Test]
-        public void Index_LicenseeSettingIsNull_ReturnsViewModelWithCorrectTime()
+        public async Task Index_LicenseeSettingIsNull_ReturnsViewModelWithCorrectTime()
         {
             using (var controller = CreateController())
             {
@@ -109,7 +113,7 @@
                 var expectedMinDate = expectedTodatGtm8.AddMonths(-DefaultLimitedMonthRange);
 
                 // Action
-                var result = (controller.Index() as ViewResult).Model as DailyBetsViewModel;
+                var result = ((await controller.Index()) as ViewResult).Model as DailyBetsViewModel;
 
                 // Assert
                 Assert.Multiple(() =>
@@ -121,7 +125,7 @@
         }
 
         [Test]
-        public void Index_LicenseeSettingNotHasTimeZone_ReturnsViewModelWithCorrectTime()
+        public async Task Index_LicenseeSettingNotHasTimeZone_ReturnsViewModelWithCorrectTime()
         {
             using (var controller = CreateController())
             {
@@ -132,7 +136,7 @@
                 var expectedMinDate = expectedTodatGtm8.AddMonths(-licenseeSetting.LimitRecentMonths);
 
                 // Action
-                var result = (controller.Index() as ViewResult).Model as DailyBetsViewModel;
+                var result = ( (await controller.Index())  as ViewResult).Model as DailyBetsViewModel;
 
                 // Assert
                 Assert.Multiple(() =>
@@ -200,7 +204,7 @@
                 DefaultUserSession.Language,
                 FunctionNames.DailyBets).ReturnsForAnyArgs(new ProductAccess(productList ?? new List<Product>()));
 
-            return new DailyBetsReportController(_reportAPIClient)
+            return new DailyBetsReportController(_reportAPIClient, _sportService)
             {
                 LangService = LangService,
                 SessionServiceInstance = SessionService,

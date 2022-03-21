@@ -30,6 +30,10 @@
 
         public bool SystemIdVisible { get; set; }
 
+        public string OddsGroup { get; set; }
+
+        public string CustomerClass { get; set; }
+
         public string FunctionKey => FunctionNames.CustomerWinLoss;
     }
 }
