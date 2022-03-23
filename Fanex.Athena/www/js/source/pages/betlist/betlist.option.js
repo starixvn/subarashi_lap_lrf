@@ -45,7 +45,8 @@
         width: 300,
         align: 'right',
         sortable: false,
-        title: false
+        title: false,
+        cellattr: function (rowId, tv, rawObject, cm, rdata) { return 'style="white-space: normal;"' }
     };
     const odds =
     {

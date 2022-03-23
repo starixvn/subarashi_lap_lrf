@@ -131,11 +131,10 @@ namespace Fanex.Athena.DataAccess.Report
                 db.SetParameterValue("sportid", metaModel.SportId);
                 db.SetParameterValue("liveindicator", metaModel.LiveIndicator);
                 db.SetParameterValue("BaseCurrency", metaModel.BaseCurrency);
+
                 var productList = metaModel.ProductCodeList.Split(',');
-                foreach (var product in productList)
-                {
-                    db.SetParameterValue("show" + product, true);
-                }
+                db.SetParameterValue("ShowBA", productList.Any(_ => string.Equals(_, Product.BA, StringComparison.OrdinalIgnoreCase)));
+                db.SetParameterValue("ProductList", string.Join(",", productList.Where(_ => !string.Equals(_, Product.BA, StringComparison.OrdinalIgnoreCase))));
 
                 using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
                 {
@@ -148,15 +147,12 @@ namespace Fanex.Athena.DataAccess.Report
                             MatchId = reader.ToLong("matchid"),
                             HomeId = reader.ToInt("homeid"),
                             AwayId = reader.ToInt("awayid"),
-                            BetType = reader.ToInt("bettype"),
-                            ShowTime = reader.ToString("showtime"),
                             BetCount = reader.ToInt("Betcount"),
                             TurnOver = reader.ToDecimal("Turnover"),
                             CustomerWinLoss = reader.ToDecimal("Winlost"),
                             CustomerComm = reader.ToDecimal("PlayerComm"),
                             LicenseeComm = reader.ToDecimal("Comm"),
                             LicenseeWinLoss = reader.ToDecimal("LicenseeWL"),
-                            AmountDue = reader.ToDecimal("AmtDueto3rd"),
                             SportId = metaModel.SportId
                         });
                     }
