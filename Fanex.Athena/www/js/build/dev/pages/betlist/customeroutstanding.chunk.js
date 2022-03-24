@@ -5075,6 +5075,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 }
                 else {
                     url = QueryString.setParam(url, 'betid', extension1);
+                    url = QueryString.setParam(url, 'transdesc', extension2);
                 }
 
                 return url;
@@ -5229,7 +5230,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             viewVS3Result: function (transdecs, sporttype, title) {
                 let url = Site.resolveClientUrl('ResultReport/ResultPopup') + '?transDesc=' + transdecs + '&sporttype=' + sporttype;
 
-                Site.blockUI();                
+                Site.blockUI();
                 showResultPopUp(url, { width: 800, height: 380, title: title });
                 Site.unBlockUI();
             },
@@ -5316,7 +5317,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                     const isParlay = numberBettype === BETTYPE_MIXPARLAY || numberBettype === BETTYPE_SYSTEMPARLAY || numberBettype === BETTYPE_MIXPARLAY_BETRADAR;
                     const url = isParlay
                         ? _me.getMixParlayResultUrl(refnoMixParlay, winlostdate, numberBettype)
-                        : _me.getSportBookResultUrl(matchid, numberBettype, raceNo, sporttype, league, isOutright, extension1, extension2, custid);
+                        : _me.getSportBookResultUrl(matchid, numberBettype, raceNo, sporttype, league, isOutright, extension1, extension2, custid, transdecs);
 
                     const height = 450;
                     const width = 750;
@@ -5993,7 +5994,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         width: 300,
         align: 'right',
         sortable: false,
-        title: false
+        title: false,
+        cellattr: function (rowId, tv, rawObject, cm, rdata) { return 'style="white-space: normal;"' }
     };
     const odds =
     {
