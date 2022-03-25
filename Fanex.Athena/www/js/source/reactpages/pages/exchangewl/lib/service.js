@@ -40,7 +40,7 @@ export class Service {
         const viewInByCurrency = allCurrencies 
             ? LangHelper.getSingleResource('AllCurrencies') 
             : `${LangHelper.getSingleResource('Viewin').replace('{0}', selectedCurrency)}`;
-        const usernameText = !username ? "" : `, Username: ${username}`;
+        const usernameText = !username ? "" : `, ${LangHelper.getSingleResource('Username')}: ${username}`;
 
         return `${LangHelper.getSingleResource('ExchangeWinLoss')}, ${fromDate} - ${toDate}, ${viewInByCurrency}${usernameText}`;
     }

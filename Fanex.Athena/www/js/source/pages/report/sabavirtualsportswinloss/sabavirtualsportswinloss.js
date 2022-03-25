@@ -196,7 +196,7 @@
                 const currencyNameOnTitle = currencyName ? Site.getSingleResource('Viewin').replace('{0}', currencyName.toUpperCase())
                     : Report.getCurrencyNameForReportTitle(currencyId);
                 
-                const userNameTitle = _submitData.Username ? `- Username: ${_submitData.Username}` : "";
+                const userNameTitle = _submitData.Username ? `- ${Site.getSingleResource('Username')}: ${_submitData.Username}` : "";
 
                 const title = $.format(titlePattern,
                     moment(fromdate, 'MM/DD/YYYY').format('MM/DD/YYYY'),

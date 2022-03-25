@@ -86,7 +86,8 @@ export class FormFilter extends Component {
                 BaseCurrency: gridData.AdditionalInfo,
                 CurrencyName: firstRow.CurrencyName,
                 CurrencyId: firstRow.CurrencyId,
-                ReportBy: params.ReportBy
+                ReportBy: params.ReportBy,
+                UserName: params.UserName
             };
         }
 
@@ -94,7 +95,7 @@ export class FormFilter extends Component {
             { fromDate: excelData.FromDate, toDate: excelData.ToDate },
             excelData.BaseCurrency ? excelData.BaseCurrency : excelData.CurrencyName,
             level === ReportLevel.MAIN ? excelData.CurrencyId === 0 : false,
-            this.props.username);
+            excelData.UserName);
         const excel = new ReportExcel(gridData, title, level, isAllowedCustomerComm, excelData.ReportBy);
         excel.export(() => {
             this.props.toggleLoader(false);
