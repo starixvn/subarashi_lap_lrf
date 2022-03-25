@@ -5159,14 +5159,15 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         BaseCurrency: gridData.AdditionalInfo,
         CurrencyName: firstRow.CurrencyName,
         CurrencyId: firstRow.CurrencyId,
-        ReportBy: params.ReportBy
+        ReportBy: params.ReportBy,
+        UserName: params.UserName
       };
     }
 
     const title = _lib_service__WEBPACK_IMPORTED_MODULE_16__["Service"].getReportTitle({
       fromDate: excelData.FromDate,
       toDate: excelData.ToDate
-    }, excelData.BaseCurrency ? excelData.BaseCurrency : excelData.CurrencyName, level === _constants_report__WEBPACK_IMPORTED_MODULE_11__["ReportLevel"].MAIN ? excelData.CurrencyId === 0 : false, this.props.username);
+    }, excelData.BaseCurrency ? excelData.BaseCurrency : excelData.CurrencyName, level === _constants_report__WEBPACK_IMPORTED_MODULE_11__["ReportLevel"].MAIN ? excelData.CurrencyId === 0 : false, excelData.UserName);
     const excel = new _lib_reportExcel__WEBPACK_IMPORTED_MODULE_15__["default"](gridData, title, level, isAllowedCustomerComm, excelData.ReportBy);
     excel.export(() => {
       this.props.toggleLoader(false);
@@ -6129,7 +6130,7 @@ class Service {
     const fromDate = _lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].convertDateToString(dateRange.fromDate);
     const toDate = _lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].convertDateToString(dateRange.toDate);
     const viewInByCurrency = allCurrencies ? _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('AllCurrencies') : `${_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Viewin').replace('{0}', selectedCurrency)}`;
-    const usernameText = !username ? "" : `, Username: ${username}`;
+    const usernameText = !username ? "" : `, ${_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Username')}: ${username}`;
     return `${_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('ExchangeWinLoss')}, ${fromDate} - ${toDate}, ${viewInByCurrency}${usernameText}`;
   }
 
