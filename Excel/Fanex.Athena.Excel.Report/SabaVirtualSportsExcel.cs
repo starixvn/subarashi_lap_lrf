@@ -181,7 +181,7 @@
         {
             var title = ReportExcelHelper.GetTitleCurrencyName(_excelModel.ConvertingOption, _excelModel.MetaModel);
             var userName = _excelModel.MetaModel.UserName;
-            var userNameText = string.IsNullOrWhiteSpace(userName) ? string.Empty : $", Username: {userName}";
+            var userNameText = string.IsNullOrWhiteSpace(userName) ? string.Empty : $", {ViewResources.Username}: {userName}";
             title += userNameText;
 
             var reportTitle = ReportExcelHelper.GenerateReportTitle(
