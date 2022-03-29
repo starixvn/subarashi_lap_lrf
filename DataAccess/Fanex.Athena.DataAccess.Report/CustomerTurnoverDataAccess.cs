@@ -8,6 +8,7 @@ namespace Fanex.Athena.DataAccess.Report
 {
     using System.Collections.Generic;
     using System.Data;
+    using System.Threading;
     using System.Threading.Tasks;
     using Core.Configuration.Interfaces;
     using Extension.Utility;
@@ -17,6 +18,7 @@ namespace Fanex.Athena.DataAccess.Report
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
+    using Fanex.Athena.Resources;
     using Fanex.Common.Extensions;
     using Fanex.Data;
     using Model.Core.ResultModel;
@@ -57,7 +59,7 @@ namespace Fanex.Athena.DataAccess.Report
                             SystemId = reader.ToString("username"),
                             Currency = currencyList?.GetValueOrDefault(currencyid, currencyid.ToString()),
                             SportId = sportId,
-                            SportType = _cacheRefAdapter.GetSportName(sportId, languageCode),
+                            SportType = GetSportName(sportId, languageCode),
                             TotalTransactions = reader.ToInt("BetCount"),
                             Bettype = reader.ToString("Bettype"),
                             Turnover = turnover,
@@ -84,6 +86,17 @@ namespace Fanex.Athena.DataAccess.Report
                     };
                 }
             }
+        }
+
+        private string GetSportName(int sportId, string languageCode)
+        {
+            Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(languageCode);            
+            if (sportId == ProductTypes.Parlay)
+            {
+                return ViewResources.Parlay;
+            }
+            
+            return _cacheRefAdapter.GetSportName(sportId, languageCode);
         }
 
         private static CustTurnover ReadTotalData(IDataReader reader)

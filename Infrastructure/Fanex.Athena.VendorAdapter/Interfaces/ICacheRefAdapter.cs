@@ -12,6 +12,8 @@ namespace Fanex.Athena.VendorAdapter.Interfaces
 
         string GetBettype(int betType, bool liveIndicator);
 
+        string GetBetTypeName(object bettypeId, string languageCode);
+
         string GetBettypeWithProductName(int betType, bool liveIndicator = false);
 
         string[] GetCombinationTypeCombo(string betTeam, string betCheck, decimal handicap1, decimal handicap2);

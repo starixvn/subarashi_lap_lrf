@@ -191,7 +191,7 @@ export const FormFilter = props => {
         }
 
         toast.dismiss();
-        const title = Service.getTitle(params.FromDate, params.ToDate, params.CurrencyName, params.BaseCurrencyName);
+        const title = Service.getTitle(params.FromDate, params.ToDate, params.CurrencyName, params.BaseCurrencyName, params.UserName);
         props.setReportTitle(title);
         props.setRequestParam(params);
         props.toggleLoader(true);

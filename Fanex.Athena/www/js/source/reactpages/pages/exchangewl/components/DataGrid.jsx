@@ -364,7 +364,8 @@ export class DataGrid extends Component {
         const title = Service.getReportTitle(
             { fromDate: params.FromDate, toDate: params.ToDate },
             params.BaseCurrency ? params.BaseCurrency : params.CurrencyName,
-            reportLevel === ReportLevel.MAIN ? params.CurrencyId === 0 : false);
+            reportLevel === ReportLevel.MAIN ? params.CurrencyId === 0 : false,
+            params.UserName);
 
         if (!gridData.data.DataList.length) {
             return this._renderNodata(title);

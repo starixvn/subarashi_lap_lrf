@@ -71,6 +71,7 @@
             db.SetParameterValue("LicenseeId", metaModel.LicenseeId);
             db.SetParameterValue("BaseCurrency", metaModel.BaseCurrency);
             db.SetParameterValue("DefaultBaseCurrency", metaModel.DefaultBaseCurrency);
+            db.SetParameterValue("UserName", metaModel.UserName ?? string.Empty);
         }
 
         private static void ReadSummaryTotal(IDataReader reader, IDictionary<string, ExchangeWinLoss> summaryTotal, string defaultBaseCurrency)

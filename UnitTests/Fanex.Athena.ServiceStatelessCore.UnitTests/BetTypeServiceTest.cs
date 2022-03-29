@@ -9,7 +9,7 @@
 
     using Fanex.Athena.Service.StatelessCore;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-
+    using Fanex.Athena.VendorAdapter.Interfaces;
     using Model.Core.DTO.Common;
 
     using NSubstitute;
@@ -22,6 +22,7 @@
     public class BetTypeServiceTest
     {
         private IBetTypeDataAccess _betTypeDataAccess;
+        private ICacheRefAdapter _cacheAdapter;
 
         private IBetTypeService _betTypeService;
 
@@ -29,13 +30,15 @@
         public void SetUp()
         {
             _betTypeDataAccess = Substitute.For<IBetTypeDataAccess>();
-            _betTypeService = new BetTypeService(_betTypeDataAccess);
+            _cacheAdapter = Substitute.For<ICacheRefAdapter>();
+            _betTypeService = new BetTypeService(_betTypeDataAccess, _cacheAdapter);
         }
 
         [TearDown]
         public void TearDown()
         {
             _betTypeDataAccess.ClearReceivedCalls();
+            _cacheAdapter.ClearReceivedCalls();
         }
 
         [Test]
@@ -49,14 +52,13 @@
 
             var expectedSportXmlString = $"<products><product ID=\"{parentSport.ID}\" Sport=\"{childSport1.ID},{childSport2.ID}\"> </product></products>";
 
-            var licenseeId = Math.Abs(FakeHelper.Create<int>()) + 1;
             var languageCode = FakeHelper.Create<string>();
 
             // Action
-            _betTypeService.GetBettypes(licenseeId, sports, languageCode);
+            _betTypeService.GetBettypes(sports, languageCode);
 
             // Assert
-            _betTypeDataAccess.Received().GetBettypes(licenseeId, expectedSportXmlString, languageCode);
+            _betTypeDataAccess.Received().GetBettypes(expectedSportXmlString);
         }
 
         [Test]
@@ -68,47 +70,45 @@
 
             var expectedSportXmlString = $"<products><product ID=\"{parentSport.ID}\" Sport=\"{parentSport.ID}\"> </product></products>";
 
-            var licenseeId = Math.Abs(FakeHelper.Create<int>()) + 1;
             var languageCode = FakeHelper.Create<string>();
 
             // Action
-            _betTypeService.GetBettypes(licenseeId, sports, languageCode);
+            _betTypeService.GetBettypes( sports, languageCode);
 
             // Assert
-            _betTypeDataAccess.Received().GetBettypes(licenseeId, expectedSportXmlString, languageCode);
+            _betTypeDataAccess.Received().GetBettypes(expectedSportXmlString);
         }
 
         [Test]
         public async Task GetBettypes_WhenCall_ReturnResultFromDataAccess()
         {
             // Arrange
-            var expectedResult = new List<CheckedItem> { new CheckedItem() };
+            var expectedResult = new List<(string, int)> { ("", 1) };
             var sports = new List<SportProductItem>
             {
                 new SportProductItem()
             };
-            var licenseeId = Math.Abs(FakeHelper.Create<int>()) + 1;
+
             var languageCode = FakeHelper.Create<string>();
-            _betTypeDataAccess.GetBettypes(licenseeId, Arg.Any<string>(), languageCode).Returns(expectedResult);
+            _betTypeDataAccess.GetBettypes(Arg.Any<string>()).Returns(expectedResult);
 
             // Action
-            var result = await _betTypeService.GetBettypes(licenseeId, sports, languageCode);
+            var result = await _betTypeService.GetBettypes(sports, languageCode);
 
             // Assert
-            Assert.That(result, Is.EqualTo(expectedResult));
+            Assert.That(result.Count, Is.EqualTo(expectedResult.Count));
         }
 
         [Test]
         public async Task GetBettypes_SportsIsNull_ReturnEmptyDataList()
         {
             // Arrange
-            var licenseeId = Math.Abs(FakeHelper.Create<int>()) + 1;
             var languageCode = FakeHelper.Create<string>();
 
             IList<SportProductItem> sports = null;
 
             // Action
-            var result = await _betTypeService.GetBettypes(licenseeId, sports, languageCode);
+            var result = await _betTypeService.GetBettypes(sports, languageCode);
 
             // Assert
             Assert.That(result.Count, Is.EqualTo(0));
@@ -118,61 +118,12 @@
         public async Task GetBettypes_SportsIsEmpty_ReturnEmptyDataList()
         {
             // Arrange
-            var licenseeId = Math.Abs(FakeHelper.Create<int>()) + 1;
             var languageCode = FakeHelper.Create<string>();
 
             IList<SportProductItem> sports = new List<SportProductItem>();
 
             // Action
-            var result = await _betTypeService.GetBettypes(licenseeId, sports, languageCode);
-
-            // Assert
-            Assert.That(result.Count, Is.EqualTo(0));
-        }
-
-        [Test]
-        public async Task GetBettypes_InvalidLicensee_ReturnEmptyDataList()
-        {
-            // Arrange
-            var licenseeId = Math.Abs(FakeHelper.Create<int>()) * (-1);
-            var languageCode = FakeHelper.Create<string>();
-            var sports = new List<SportProductItem>
-            {
-                new SportProductItem()
-            };
-
-            // Action
-            var result = await _betTypeService.GetBettypes(licenseeId, sports, languageCode);
-
-            // Assert
-            Assert.That(result.Count, Is.EqualTo(0));
-        }
-
-        [Test]
-        public async Task GetBettypes_EmptySportAndInvalidLicensee_ReturnEmptyDataList()
-        {
-            // Arrange
-            var licenseeId = Math.Abs(FakeHelper.Create<int>()) * (-1);
-            var languageCode = FakeHelper.Create<string>();
-            var sports = new List<SportProductItem>();
-
-            // Action
-            var result = await _betTypeService.GetBettypes(licenseeId, sports, languageCode);
-
-            // Assert
-            Assert.That(result.Count, Is.EqualTo(0));
-        }
-
-        [Test]
-        public async Task GetBettypes_SportNullAndInvalidLicensee_ReturnEmptyDataList()
-        {
-            // Arrange
-            var licenseeId = Math.Abs(FakeHelper.Create<int>()) * (-1);
-            var languageCode = FakeHelper.Create<string>();
-            IList<SportProductItem> sports = null;
-
-            // Action
-            var result = await _betTypeService.GetBettypes(licenseeId, sports, languageCode);
+            var result = await _betTypeService.GetBettypes( sports, languageCode);
 
             // Assert
             Assert.That(result.Count, Is.EqualTo(0));

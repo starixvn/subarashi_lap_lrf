@@ -34,14 +34,15 @@ export const BreadcrumbText = {
 }
 
 export class Service {
-    static getReportTitle(dateRange, selectedCurrency, allCurrencies) {
+    static getReportTitle(dateRange, selectedCurrency, allCurrencies, username) {
         const fromDate = Site.convertDateToString(dateRange.fromDate);
         const toDate = Site.convertDateToString(dateRange.toDate);
         const viewInByCurrency = allCurrencies 
             ? LangHelper.getSingleResource('AllCurrencies') 
             : `${LangHelper.getSingleResource('Viewin').replace('{0}', selectedCurrency)}`;
+        const usernameText = !username ? "" : `, ${LangHelper.getSingleResource('Username')}: ${username}`;
 
-        return `${LangHelper.getSingleResource('ExchangeWinLoss')}, ${fromDate} - ${toDate}, ${viewInByCurrency}`;
+        return `${LangHelper.getSingleResource('ExchangeWinLoss')}, ${fromDate} - ${toDate}, ${viewInByCurrency}${usernameText}`;
     }
 
     static showErrorMsg() {
