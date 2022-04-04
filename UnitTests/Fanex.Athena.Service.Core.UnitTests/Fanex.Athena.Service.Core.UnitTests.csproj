@@ -92,12 +92,8 @@
     <Compile Include="Common\LanguageServiceTest.cs" />
     <Compile Include="Exception\ServiceExceptionTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Users\OneAuthenticationServiceTest_SetAuthorize.cs" />
-    <Compile Include="Users\OneAuthenticationServiceTest_GetTokenInfo.cs" />
-    <Compile Include="Users\OneAuthenticationServiceTest_SignIn.cs" />
-    <Compile Include="Users\SessionServiceTest.CreateNewSession.cs" />
-    <Compile Include="Users\SessionServiceTest.cs" />
-    <Compile Include="Users\AuthServiceTest.cs" />
+    <Compile Include="Users\PortalAuthServiceTest.cs" />
+    <Compile Include="Users\InternalAuthServiceTest.cs" />
     <Compile Include="Users\SubsidiaryServiceTest.cs" />
     <Compile Include="Users\UserServiceTest.cs" />
     <Compile Include="Utility\ProductValidationTest.cs" />

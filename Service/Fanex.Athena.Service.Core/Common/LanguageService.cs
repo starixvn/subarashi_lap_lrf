@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="LanguageService.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Service.Core.Common
+﻿namespace Fanex.Athena.Service.Core.Common
 {
     using System.Globalization;
     using System.Threading;
@@ -45,13 +39,9 @@ namespace Fanex.Athena.Service.Core.Common
         {
             if (!string.IsNullOrEmpty(languageCode))
             {
-                var updated = _sessionService.UpdateLanguage(languageCode);
-                if (updated)
-                {
-                    this.SetPageCulture(languageCode);
-                    CookiesHelper.SetCookies(_cookieName, languageCode);
-                    return true;
-                }
+                SetPageCulture(languageCode);
+                CookiesHelper.SetCookies(_cookieName, languageCode);
+                return true;
             }
 
             return false;
