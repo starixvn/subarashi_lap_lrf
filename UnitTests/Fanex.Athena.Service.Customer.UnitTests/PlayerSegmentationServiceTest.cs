@@ -19,7 +19,7 @@ namespace Fanex.Athena.Service.Customer.UnitTests
     public class PlayerSegmentationServiceTest
     {
         private IPlayerSegmentationDataAccess _playerDataAccess;
-        private IContextService _contextService;
+        private ISessionService _sessionService;
         private ISubsidiaryService _subsidiaryService;
         private ICustomerClassService _customerClassService;
 
@@ -29,17 +29,17 @@ namespace Fanex.Athena.Service.Customer.UnitTests
         public void SetUp()
         {
             _playerDataAccess = Substitute.For<IPlayerSegmentationDataAccess>();
-            _contextService = Substitute.For<IContextService>();
+            _sessionService = Substitute.For<ISessionService>();
             _subsidiaryService = Substitute.For<ISubsidiaryService>();
             _customerClassService = Substitute.For<ICustomerClassService>();
-            _targetService = new PlayerSegmentationService(_contextService, _playerDataAccess, _subsidiaryService, _customerClassService);
+            _targetService = new PlayerSegmentationService(_sessionService, _playerDataAccess, _subsidiaryService, _customerClassService);
         }
 
         [TearDown]
         public void TearDown()
         {
             _playerDataAccess = null;
-            _contextService = null;
+            _sessionService = null;
             _subsidiaryService = null;
             _targetService = null;
         }
@@ -91,8 +91,8 @@ namespace Fanex.Athena.Service.Customer.UnitTests
             var licenseeName = FakeHelper.Create<string>();
             var user = FakeHelper.Create<UserAuthInfo>();
 
-            _contextService.LicenseeName.Returns(licenseeName);
-            _contextService.User.Returns(user);
+            _sessionService.LicenseeSession.Returns(new LicenseeAuthInfo { LicenseeName = licenseeName });
+            _sessionService.UserSession.Returns(user);
 
             _playerDataAccess.GetProblemPlayerListAsync(metaModel).Returns(Task.FromResult(rawData));
             _subsidiaryService.GetSubsidiaryList(user, licenseeName, metaModel.SubsidiaryList).Returns(subsidiaryList);
@@ -151,8 +151,8 @@ namespace Fanex.Athena.Service.Customer.UnitTests
             var licenseeName = FakeHelper.Create<string>();
             var user = FakeHelper.Create<UserAuthInfo>();
 
-            _contextService.LicenseeName.Returns(licenseeName);
-            _contextService.User.Returns(user);
+            _sessionService.LicenseeSession.Returns(new LicenseeAuthInfo { LicenseeName = licenseeName });
+            _sessionService.UserSession.Returns(user);
 
             _playerDataAccess.GetVipPlayerListAsync(metaModel).Returns(Task.FromResult(rawData));
             _subsidiaryService.GetSubsidiaryList(user, licenseeName, metaModel.SubsidiaryList).Returns(subsidiaryList);

@@ -101,7 +101,7 @@
             defaultMetaModel.Date = DateTime.SpecifyKind(defaultMetaModel.Date.Date, DateTimeKind.Unspecified);
             defaultMetaModel.IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeName);
             defaultMetaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(CurrencyAgentListBySubsidiaryBusiness(metaModel ?? new BetListMetaModel()), defaultMetaModel.CurrencyId);
-            defaultMetaModel.IsShowIpvn = userSession.IsShowIpvn && userSession.IsShowIp;
+            defaultMetaModel.IsShowIpvn = userSession.IsShowIpvn;
             defaultMetaModel.IsShowIp = userSession.IsShowIp;
 
             var balanceUp = GetBalanceUp();

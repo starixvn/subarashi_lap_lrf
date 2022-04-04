@@ -31,11 +31,11 @@
                 var viewModel = viewResult.Model as ActiveCustomerViewModel;
 
                 // Assert
-                Assert.Multiple(() =>
+                Assert.Multiple((TestDelegate)(() =>
                 {
                     StringAssert.Contains("Report/ActiveCustomerSummary/Main.cshtml", viewResult.ViewName);
-                    Assert.That(viewModel.Param.LicenseeId, Is.EqualTo(SessionService.LicenseeSession.LicenseeId));
-                });
+                    Assert.That(viewModel.Param.LicenseeId, Is.EqualTo((object)SessionService.LicenseeSession.LicenseeId));
+                }));
             }
         }
 

@@ -17,7 +17,7 @@ namespace Fanex.Athena.Model.Core.Helper
 
         public static readonly string[] ExcludeProductsSPParam = new[] { "SB", "Parlay" };
 
-        public static readonly IDictionary<string, string> ProductCodeMapper = new Dictionary<string, string>
+        public static readonly IReadOnlyDictionary<string, string> ProductCodeMapper = new Dictionary<string, string>
         {
             [Product.CS] = "RNG",
             [Product.VB] = "Macau",

@@ -3,19 +3,19 @@ using System.Linq;
 using System.Web.Mvc;
 using Fanex.Athena.Model.Core.MetaModel;
 using Fanex.Athena.Extension.Helper;
-using Fanex.Athena.Service.Core.Users;
 using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
 using Fanex.Athena.Service.StatelessCore.Utility;
 using System.Collections.Generic;
 using Fanex.Athena.Model.Auth;
+using Fanex.Athena.Service.Core.Users;
 
 namespace Fanex.Athena.Web.ActionFilter
 {
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
     public sealed class AutoBindMetaModelAttribute : ActionFilterAttribute
     {
-        private static readonly ISessionStorage _sessionStorage = new SessionStorage();
+        private static readonly ISessionService _sessionService = new SessionService();
 
         public IProductService ProductService { get; set; }
 
@@ -45,8 +45,8 @@ namespace Fanex.Athena.Web.ActionFilter
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            var userSession = _sessionStorage.UserAuthInfo;
-            var licenseeSession = _sessionStorage.LicenseeAuthInfo;
+            var userSession = _sessionService.UserSession;
+            var licenseeSession = _sessionService.LicenseeSession;
             var actionArgument = filterContext.ActionParameters;
             if (BindAgent)
             {
@@ -60,7 +60,7 @@ namespace Fanex.Athena.Web.ActionFilter
 
             if (BindSiteName)
             {
-                var licensee = _sessionStorage.LicenseeAuthInfo;
+                var licensee = _sessionService.LicenseeSession;
                 AutoBindMetaModelService.MapSiteName(actionArgument, licensee.LicenseeName);
             }
 
@@ -86,12 +86,12 @@ namespace Fanex.Athena.Web.ActionFilter
 
             if (BindProductCodeList)
             {
-                AutoBindMetaModelService.MapProductCodeList(actionArgument, _sessionStorage.LicenseeAuthInfo.OfferedSubProductList, ProductService);
+                AutoBindMetaModelService.MapProductCodeList(actionArgument, _sessionService.LicenseeSession.OfferedSubProductList, ProductService);
             }
 
             if (BindProductOptions)
             {
-                AutoBindMetaModelService.MapProductOptions(actionArgument, _sessionStorage.LicenseeAuthInfo.OfferedSubProductList, ProductService);
+                AutoBindMetaModelService.MapProductOptions(actionArgument, _sessionService.LicenseeSession.OfferedSubProductList, ProductService);
             }
 
             base.OnActionExecuting(filterContext);
@@ -104,7 +104,7 @@ namespace Fanex.Athena.Web.ActionFilter
 
             if (item.Value is IMetaModelFunctionContract metaModel)
             {
-                var licenseeSession = _sessionStorage.LicenseeAuthInfo;
+                var licenseeSession = _sessionService.LicenseeSession;
                 var productAccess = ProductService.GetSingleWalletProductAccess(
                     licenseeSession.LicenseeId,
                     "en-US",

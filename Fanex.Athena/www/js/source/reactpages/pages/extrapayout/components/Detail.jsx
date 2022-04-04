@@ -23,12 +23,11 @@ export const Detail = (props) => {
         }
 
         const exportRequestParam = { 
-            ...param,
-            IsExportExcel : true
+            ...param
         };
 
         toggleLoader(true);
-        DataService.getFile(ApiUrl.REPORT_DETAIL_DATA_URL, exportRequestParam).then((response) => {
+        DataService.getReportFile(ApiUrl.EXPORT_REPORT_DETAIL_DATA_URL, exportRequestParam).then((response) => {
             toast.dismiss();
             const NoContentStatusCode = 204;
             if (response.status === NoContentStatusCode) {

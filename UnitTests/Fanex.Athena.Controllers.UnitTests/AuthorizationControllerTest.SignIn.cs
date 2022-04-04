@@ -1,9 +1,10 @@
 ﻿namespace Fanex.Athena.Controllers.UnitTests
 {
+    using System.Threading.Tasks;
     using System.Web.Mvc;
 
     using Fanex.Athena.Model.Auth.MetaModel;
-
+    using Fanex.Athena.Service.Core.OAuth;
     using Model.Core.DTO.Common;
     using Model.Core.DTO.Users;
 
@@ -73,7 +74,7 @@
         }
 
         [Test]
-        public void SignIn_WhenPost_InvalidCaptcha_ReturnSignInViewWithError()
+        public async Task SignIn_WhenPost_InvalidCaptcha_ReturnSignInViewWithError()
         {
             using (var controller = CreateController())
             {
@@ -82,7 +83,7 @@
                 SessionService.CaptchaCode.Returns("OriginalCaptcha");
 
                 // Action
-                var result = controller.SignIn(new LoginMetalModel
+                var result = await controller.SignIn(new LoginMetalModel
                 {
                     UserName = "anything",
                     PassWord = "anything",
@@ -100,7 +101,7 @@
         }
 
         [Test]
-        public void SignIn_WhenPost_UserNameIsEmpty_ReturnSignInViewWithError()
+        public async Task SignIn_WhenPost_UserNameIsEmpty_ReturnSignInViewWithError()
         {
             using (var controller = CreateController())
             {
@@ -109,7 +110,7 @@
                 SessionService.CaptchaCode.Returns("OriginalCaptcha");
 
                 // Action
-                var result = controller.SignIn(new LoginMetalModel
+                var result = await controller.SignIn(new LoginMetalModel
                 {
                     UserName = string.Empty
                 }) as ViewResult;
@@ -124,7 +125,7 @@
         }
 
         [Test]
-        public void SignIn_WhenPost_PassWordIsEmpty_ReturnSignInViewWithError()
+        public async Task SignIn_WhenPost_PassWordIsEmpty_ReturnSignInViewWithError()
         {
             using (var controller = CreateController())
             {
@@ -133,7 +134,7 @@
                 SessionService.CaptchaCode.Returns("OriginalCaptcha");
 
                 // Action
-                var result = controller.SignIn(new LoginMetalModel
+                var result = await controller.SignIn(new LoginMetalModel
                 {
                     UserName = "User name",
                     PassWord = string.Empty
@@ -149,7 +150,7 @@
         }
 
         [Test]
-        public void SignIn_WhenPost_LoginFail_ReturnSignInViewWithError()
+        public async Task SignIn_WhenPost_LoginFail_ReturnSignInViewWithError()
         {
             using (var controller = CreateController())
             {
@@ -157,31 +158,27 @@
                 StubGetValueAppSettings("AllowAutomationCaptchaCode", "1");
                 SessionService.CaptchaCode.Returns("OriginalCaptcha");
 
-                _authService.ValidateUserForLrf(Arg.Any<User>(), Arg.Any<string>())
-                    .Returns(new ResultInfo<User>
-                    {
-                        Code = 999,
-                        Message = "Error999"
-                    });
-
-                // Action
-                var result = controller.SignIn(new LoginMetalModel
+                var loginMetaModel = new LoginMetalModel
                 {
                     UserName = "xxx",
                     PassWord = "xxx"
-                }) as ViewResult;
+                };
+
+                var oauthInfo = Substitute.For<IOAuthInfo>();
+                oauthInfo.IsError.Returns(true);
+
+                _authService.RequestOAuthInfoAsync(loginMetaModel, Arg.Any<string>(), Arg.Any<string>())
+                  .Returns(oauthInfo);
+                // Action
+                var result = await controller.SignIn(loginMetaModel) as ViewResult;
 
                 // Assert
-                Assert.Multiple(() =>
-                {
-                    Assert.That(result.ViewBag.errCode, Is.EqualTo(999));
-                    Assert.That(result.ViewName, Is.EqualTo("~/Views/Desktop/Authorization/SignIn.cshtml"));
-                });
+                Assert.That(result.ViewName, Is.EqualTo("~/Views/Desktop/Authorization/SignIn.cshtml"));
             }
         }
 
         [Test]
-        public void SignIn_WhenPost_LoginWithSecretCaptcha_Successfully()
+        public async Task SignIn_WhenPost_LoginWithSecretCaptcha_Successfully()
         {
             using (var controller = CreateController())
             {
@@ -191,25 +188,22 @@
                 StubGetValueAppSettings("SecretCaptcha", "SecretCaptcha");
                 StubGetValueAppSettings("CompanyIP", controller.ControllerContext.HttpContext.Request.UserHostAddress);
 
-                _authService.ValidateUserForLrf(Arg.Any<User>(), Arg.Any<string>())
-                    .Returns(new ResultInfo<User>
-                    {
-                        Code = 0,
-                        ExtendedData = new User
-                        {
-                            UserID = 111,
-                            Role = UserRole.Admin.ToString(),
-                            Licensee = new Licensee()
-                        }
-                    });
-
-                // Action
-                var result = controller.SignIn(new LoginMetalModel
+                var loginMetaModel = new LoginMetalModel
                 {
                     UserName = "xxx",
                     PassWord = "xxx",
                     Captcha = "SecretCaptcha"
-                }) as RedirectToRouteResult;
+                };
+
+                var oauthInfo = Substitute.For<IOAuthInfo>();
+                oauthInfo.IsError.Returns(false);
+                oauthInfo.IsAdministrator.Returns(true);
+
+                _authService.RequestOAuthInfoAsync(loginMetaModel, Arg.Any<string>(), Arg.Any<string>())
+                  .Returns(oauthInfo);
+
+                // Action
+                var result = await controller.SignIn(loginMetaModel) as RedirectToRouteResult;
 
                 // Assert
                 Assert.Multiple(() =>
@@ -221,7 +215,7 @@
         }
 
         [Test]
-        public void SignIn_WhenPost_AdminUser_RedirectToLicenseeList()
+        public async Task SignIn_WhenPost_AdminUser_RedirectToLicenseeList()
         {
             using (var controller = CreateController())
             {
@@ -229,24 +223,21 @@
                 StubGetValueAppSettings("AllowAutomationCaptchaCode", "1");
                 SessionService.CaptchaCode.Returns("OriginalCaptcha");
 
-                _authService.ValidateUserForLrf(Arg.Any<User>(), Arg.Any<string>())
-                    .Returns(new ResultInfo<User>
-                    {
-                        Code = 0,
-                        ExtendedData = new User
-                        {
-                            UserID = 111,
-                            Role = UserRole.Admin.ToString(),
-                            Licensee = new Licensee()
-                        }
-                    });
-
-                // Action
-                var result = controller.SignIn(new LoginMetalModel
+                var loginMetaModel = new LoginMetalModel
                 {
                     UserName = "xxx",
                     PassWord = "xxx"
-                }) as RedirectToRouteResult;
+                };
+
+                var oauthInfo = Substitute.For<IOAuthInfo>();
+                oauthInfo.IsError.Returns(false);
+                oauthInfo.IsAdministrator.Returns(true);
+
+                _authService.RequestOAuthInfoAsync(loginMetaModel, Arg.Any<string>(), Arg.Any<string>())
+                  .Returns(oauthInfo);
+
+                // Action
+                var result = await controller.SignIn(loginMetaModel) as RedirectToRouteResult;
 
                 // Assert
                 Assert.Multiple(() =>
@@ -258,7 +249,7 @@
         }
 
         [Test]
-        public void SignIn_WhenPost_ValidUser_CreateNewSession()
+        public async Task SignIn_WhenPost_ValidUser_CreateNewSession()
         {
             using (var controller = CreateController())
             {
@@ -266,27 +257,24 @@
                 StubGetValueAppSettings("AllowAutomationCaptchaCode", "1");
                 SessionService.CaptchaCode.Returns("OriginalCaptcha");
 
-                _authService.ValidateUserForLrf(Arg.Any<User>(), Arg.Any<string>())
-                    .Returns(new ResultInfo<User>
-                    {
-                        Code = 0,
-                        ExtendedData = new User
-                        {
-                            UserID = 111,
-                            Role = UserRole.Licensee.ToString(),
-                            Licensee = new Licensee()
-                        }
-                    });
+                var oauthInfo = Substitute.For<IOAuthInfo>();
+                oauthInfo.IsError.Returns(false);
+                oauthInfo.IsAdministrator.Returns(true);
 
-                // Action
-                var result = controller.SignIn(new LoginMetalModel
+                var loginMetaModel = new LoginMetalModel
                 {
                     UserName = "xxx",
                     PassWord = "xxx"
-                }) as RedirectToRouteResult;
+                };
+               
+                _authService.RequestOAuthInfoAsync(loginMetaModel, Arg.Any<string>(), Arg.Any<string>())
+                    .Returns(oauthInfo);
+
+                // Action
+                _ = await controller.SignIn(loginMetaModel) as RedirectToRouteResult;
 
                 // Assert
-                SessionService.Received(1).CreateNewSession(111, Arg.Any<int>(), Arg.Any<string>(), Arg.Any<bool>());
+                _authService.Received(1).SignIn(oauthInfo);
             }
         }
     }

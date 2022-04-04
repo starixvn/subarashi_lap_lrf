@@ -1,12 +1,8 @@
 ﻿namespace Fanex.Athena.Controllers
 {
-    using Extension.Utility.Interfaces;
-
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth.MetaModel;
     using Fanex.Athena.Model.Core.DataDomain;
-    using Fanex.Athena.Model.Core.DTO.Common;
-    using Fanex.Athena.Model.Core.DTO.Users;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
 
@@ -23,6 +19,7 @@
     using System.IO;
     using System.Text;
     using System.Text.RegularExpressions;
+    using System.Threading.Tasks;
     using System.Web;
     using System.Web.Caching;
     using System.Web.Mvc;
@@ -31,38 +28,29 @@
 
     public class AuthorizationController : CultureBaseController
     {
-        #region Constant
-
         private const int InvalidCaptchaError = 101;
         private const int InvalidUserNameError = 102;
         private const int InvalidPasswordError = 103;
 
-        #endregion Constant
-
         private readonly IUserService _userService;
-        private readonly IAuthService _authService;
+        private readonly IInternalAuthService _authService;
         private readonly IMaintenanceService _maintenanceService;
-        private readonly IFormsAuthenticationService _formAuthenticationService;
-
-#pragma warning disable S107 // Methods should not have too many parameters
 
         public AuthorizationController(
             IMaintenanceService maintenanceService,
             IUserService userService,
-            IAuthService authService,
-            IFormsAuthenticationService formAuthenticationService
+            IInternalAuthService authService
             )
         {
             _maintenanceService = maintenanceService;
             _userService = userService;
             _authService = authService;
-            _formAuthenticationService = formAuthenticationService;
         }
 
         [CheckUMFilter]
         [AllowAnonymous]
         [HttpGet]
-        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+        [OutputCache(NoStore = true, Location = OutputCacheLocation.None, Duration = 0, VaryByParam = "*")]
         public ActionResult SignIn()
         {
             var requestHost = Request.Url.AbsoluteUri;
@@ -84,8 +72,8 @@
         [HandleAntiForgeryError]
         [HttpPost]
         [CustomValidateAntiForgery]
-        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
-        public ActionResult SignIn(LoginMetalModel model)
+        [OutputCache(NoStore = true, Location = OutputCacheLocation.None, Duration = 0, VaryByParam = "*")]
+        public async Task<ActionResult> SignIn(LoginMetalModel model)
         {
             if (string.IsNullOrEmpty(model.UserName))
             {
@@ -102,31 +90,24 @@
             }
             else
             {
-                var requestUser = new User
-                {
-                    Username = model.UserName,
-                    Password = model.PassWord,
-                    Request = new Request { Ip = Request.UserHostAddress },
-                };
+                var oauthInfo = await _authService.RequestOAuthInfoAsync(model, Request.UserHostAddress, Session.SessionID);
 
-                var resultInfo = _authService.ValidateUserForLrf(requestUser, model.LogInToken);
-
-                if (resultInfo.IsSuccessful)
+                if (!oauthInfo.IsError)
                 {
-                    var user = resultInfo.ExtendedData;
-                    CreateSession(user);
-                    if (user.IsInRole(UserRole.Admin.ToString()))
+                    _authService.SignIn(oauthInfo);
+
+                    if (oauthInfo.IsAdministrator)
                     {
                         return RedirectToAction("Index", "LicenseeList");
                     }
                     else
                     {
-                        FormsAuthentication.RedirectFromLoginPage(user.Username, false);
+                        FormsAuthentication.RedirectFromLoginPage(oauthInfo.IdentityName, false);
                     }
                 }
                 else
                 {
-                    SetErrorForView(resultInfo.Code, resultInfo.Message);
+                    SetErrorForView(1, oauthInfo.ErrorMsg);
                 }
             }
 
@@ -137,7 +118,7 @@
         [HttpGet]
         [AllowAnonymous]
         [OutputCache(NoStore = true, Duration = 0, Location = OutputCacheLocation.None, VaryByParam = "*")]
-        public ActionResult RecheckIn()
+        public async Task<ActionResult> RecheckIn()
         {
             if (_maintenanceService.IsUnderMaintenance())
             {
@@ -153,20 +134,36 @@
                 return Json(RecheckInResult(ErrorType.AccessDenied, ViewResources.InvalidRequestOrNotAuthorizedMsg), JsonRequestBehavior.AllowGet);
             }
 
-            if (currentLoginId != userSession.OnUserId.ToString())
+            if (currentLoginId != userSession.OnUserId.ToString() 
+                || !string.Equals(User.Identity.Name, userSession.IdentityName, StringComparison.InvariantCultureIgnoreCase))
             {
                 return Json(RecheckInResult(ErrorType.SessionOverride, ViewResources.SessionLoggedMsg), JsonRequestBehavior.AllowGet);
             }
 
-            var isKickout = _userService.RecheckIn(userSession.OnUserId);
-
             var errorCode = ErrorType.Success;
+
+            var isKickout = _userService.RecheckIn(userSession.OnUserId);
             var errorMsg = string.Empty;
             if (isKickout)
             {
                 errorCode = ErrorType.KickedOut;
                 errorMsg = ViewResources.SessionLoggedMsg;
-                _formAuthenticationService.SignOut();
+            }
+            else if(userSession.AccessTokenLifeTime <= DateTime.Now)
+            {
+                var (newAccessToken, lifeTime) = await _authService.RequestAccessTokenAsync(userSession.RefreshToken);
+                if (!string.IsNullOrEmpty(newAccessToken) && lifeTime.HasValue)
+                {
+                    userSession.AccessToken = newAccessToken;
+                    userSession.AccessTokenLifeTime = lifeTime.Value;
+                    SessionServiceInstance.AssignUserSession(userSession);
+                    return Json(RecheckInResult(errorCode, errorMsg, newAccessToken), JsonRequestBehavior.AllowGet);
+                }
+                return Json(RecheckInResult(ErrorType.AccessTokenInvalid, ViewResources.TokenWasExpired), JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                //no thing
             }
 
             return Json(RecheckInResult(errorCode, errorMsg), JsonRequestBehavior.AllowGet);
@@ -205,18 +202,18 @@
         [HttpGet]
         [AllowAnonymous]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
-        public ActionResult SignOut()
+        public async Task<ActionResult> SignOut()
         {
-            DoSignOut();
+            await _authService.SignOut(Response, Request);
             return RedirectToAction("LocationRestriction", "Utility");
         }
 
         [HttpGet]
         [AllowAnonymous]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
-        public ActionResult InternalSignOut()
+        public async Task<ActionResult> InternalSignOut()
         {
-            DoSignOut();
+            await _authService.SignOut(Response, Request);
             return RedirectToAction("OneTokenRestriction", "Utility", new { Code = OneAuthorizationErrorCode.TokenWasExpired });
         }
 
@@ -276,12 +273,13 @@
             }
         }
 
-        private static dynamic RecheckInResult(ErrorType type, string msg)
+        private static dynamic RecheckInResult(ErrorType type, string msg, string accessToken = null)
         {
             return new
             {
                 ErrCode = (int)type,
-                ErrMsg = msg
+                ErrMsg = msg,
+                AccessToken = accessToken
             };
         }
 
@@ -323,54 +321,10 @@
                  Regex.IsMatch(Request.UserHostAddress, AppSettingInstance.GetValue("CompanyIP"));
         }
 
-        private void CreateSession(User user)
-        {
-            var onuserId = _authService.LoginOnUser(user, Session.SessionID, user.ServerId, Request.UserHostAddress);
-            SessionServiceInstance.CreateNewSession(
-                user.UserID,
-                onuserId,
-                user.Username,
-                user.IsInternal,
-                user.Licensee.Id);
-
-            _formAuthenticationService.SetAuthCookie(user.Username, false);
-        }
-
-        private void DoSignOut()
-        {
-            var userSession = SessionServiceInstance.UserSession;
-            if (userSession != null)
-            {
-                _authService.Logout(userSession.OnUserId);
-            }
-
-            Session.Clear();
-            ClearCookies();
-            _formAuthenticationService.SignOut();
-        }
-
         private void SetErrorForView(int errorCode, string errorMsg)
         {
             ViewBag.errCode = errorCode;
             ViewBag.errMsg = errorMsg;
-        }
-
-        private void ClearCookies()
-        {
-            var cache = Response.Cache;
-            cache.SetNoStore();
-            cache.SetExpires(DateTime.Now.AddMinutes(-1));
-            cache.SetCacheability(HttpCacheability.NoCache);
-            var cookies = Request.Cookies.AllKeys;
-            foreach (string cookie in cookies)
-            {
-                var item = new HttpCookie(cookie)
-                {
-                    Expires = DateTime.Now.AddDays(-1),
-                    HttpOnly = true
-                };
-                Response.Cookies.Add(item);
-            }
         }
 
         private FileContentResult CreateCaptcha(string code, int height = 25)

@@ -77,5 +77,9 @@
         bool IsUATTW { get; }
 
         IEnumerable<string> LicenseeOfferIMQOddGroup { get; }
+
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Sonar Code Smell", "S3996:UriPropertiesShouldNotBeStrings",
+            Justification = "Reviewed. Suppression is OK here.")]
+        string BetTicketEventBuilderUrl { get; }
     }
 }

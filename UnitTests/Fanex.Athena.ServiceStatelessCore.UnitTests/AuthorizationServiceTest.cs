@@ -42,8 +42,8 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
         public void IsAllowedEditCommission_ApplicationModeIsParasiticAndPortalFunctionListContainCorrectKey_ReturnTrue()
         {
             // Arrange
-            var functionList = new OneAuthPermission[] {
-                new OneAuthPermission {FunctionKey="CommissionGroupList55" } };
+            var functionList = new PortalFunction[] {
+                new PortalFunction {FunctionKey="CommissionGroupList55" } };
             var userSession = new UserAuthInfo { PortalFunctionList = functionList, ApplicationMode = AppMode.Parasitic };
 
             // Action
@@ -57,8 +57,8 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
         public void IsAllowedEditCommission_ApplicationModeIsParasiticAndPortalFunctionListNotContainCorrectKey_ReturnFalse()
         {
             // Arrange
-            var functionList = new OneAuthPermission[] {
-                new OneAuthPermission {FunctionKey=PermissionKeys.BettingTicketCenter } };
+            var functionList = new PortalFunction[] {
+                new PortalFunction {FunctionKey=PermissionKeys.BettingTicketCenter } };
             var userSession = new UserAuthInfo { PortalFunctionList = functionList, ApplicationMode = AppMode.Parasitic };
 
             // Action
@@ -107,8 +107,8 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
         public void IsAllowedSpecialBA_ApplicationModeIsParasiticAndPortalFunctionListContainCorrectKey_ReturnTrue()
         {
             // Arrange
-            var functionList = new OneAuthPermission[] {
-                new OneAuthPermission {FunctionKey= PermissionKeys.CustomerInfoSpecialBA } };
+            var functionList = new PortalFunction[] {
+                new PortalFunction {FunctionKey= PermissionKeys.CustomerInfoSpecialBA } };
             var userSession = new UserAuthInfo { PortalFunctionList = functionList, ApplicationMode = AppMode.Parasitic };
 
             // Action
@@ -122,8 +122,8 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
         public void IsAllowedSpecialBA_ApplicationModeIsParasiticAndPortalFunctionListNotContainCorrectKey_ReturnFalse()
         {
             // Arrange
-            var functionList = new OneAuthPermission[] {
-                new OneAuthPermission {FunctionKey= PermissionKeys.BettingTicketCenter } };
+            var functionList = new PortalFunction[] {
+                new PortalFunction {FunctionKey= PermissionKeys.BettingTicketCenter } };
 
             var userSession = new UserAuthInfo { PortalFunctionList = functionList, ApplicationMode = AppMode.Parasitic };
 
@@ -240,26 +240,8 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
             bool expectedResult)
         {
             //Arrange
-            var userFunctionList = userPermissionKey.Split(',').Select(x => new OneAuthPermission { FunctionKey = x }).ToArray();
+            var userFunctionList = userPermissionKey.Split(',').Select(x => new PortalFunction { FunctionKey = x }).ToArray();
             var userAuthInfo = new UserAuthInfo { PortalFunctionList = userFunctionList, IsSuperAdmin = isAdmin, ApplicationMode = AppMode.Parasitic };
-
-            //Action
-
-            var result = _authorizationService.HasPermissions(userAuthInfo, permissionKey1, permissinKey2);
-
-            //Assert
-
-            Assert.AreEqual(expectedResult, result);
-        }
-
-        [TestCase("alex", "alex2", "any,any2", false)]
-        [TestCase("alex", "any2", "alex,any2", true)]
-        [TestCase("alex", "any2", "alex", true)]
-        public void HasPermissions_WhenCallWithPortalSubFunctionKey_ReturnCorrectResult(string permissionKey1, string permissinKey2, string userPermissionKey, bool expectedResult)
-        {
-            //Arrange
-            var userFunctionList = new OneAuthPermission[] { new OneAuthPermission { SubFunctionKeys = userPermissionKey.Split(',') } };
-            var userAuthInfo = new UserAuthInfo { PortalFunctionList = userFunctionList, ApplicationMode = AppMode.Parasitic };
 
             //Action
 

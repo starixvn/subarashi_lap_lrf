@@ -26,6 +26,19 @@
             return GenerateReportTitle(reportName, fromDate, toDate, title);
         }
 
+        public static string GenerateReportTitle(string reportName, DateTime fromDate, DateTime toDate, string currencyTitle, string extendedInfo = "")
+        {
+            var reportTitle = new StringBuilder(reportName);
+            reportTitle.Append($", {fromDate.ToString(FormatDate)} --> {toDate.ToString(FormatDate)}, {currencyTitle}");
+
+            if (!string.IsNullOrEmpty(extendedInfo))
+            {
+                reportTitle.Append($", {extendedInfo}");
+            }
+
+            return reportTitle.ToString();
+        }
+
         public static string GetLicenseeWLProduct(IEnumerable<ProductOption> productOptions, string caption = null)
         {
             var productCodeList = productOptions.Where(p => p.Status)
@@ -62,15 +75,6 @@
                 : string.Format(ViewResources.Viewin, defaultName);
         }
 
-        public static string GetTitleBaseCurrency(string baseCurrency, string currencyName)
-        {
-            var currency = string.IsNullOrEmpty(baseCurrency) ?
-                currencyName :
-                baseCurrency;
-            return ViewResources.Currency + ": " + currencyName + ", " +
-                ViewResources.BaseCurrency + ": " + currency.ToUpperInvariant();
-        }
-
         public static string GetTitleCurrencyName(ConvertingOption convertingOption)
         {
             return convertingOption.IsConvert
@@ -85,17 +89,15 @@
                 : GetExactTitleCurrencyName(convertingOption, metaModel.CurrencyId);
         }
 
-        public static string GenerateReportTitle(string reportName, DateTime fromDate, DateTime toDate, string currencyTitle, string extendedInfo = "")
+        public static string GetTitleBaseCurrency(string baseCurrency, string currencyName)
         {
-            var reportTitle = new StringBuilder(reportName);
-            reportTitle.Append($", {fromDate.ToString(FormatDate)} --> {toDate.ToString(FormatDate)}, {currencyTitle}");
-
-            if (!string.IsNullOrEmpty(extendedInfo))
-            {
-                reportTitle.Append($", {extendedInfo}");
-            }
-
-            return reportTitle.ToString();
+            var currency = string.IsNullOrEmpty(baseCurrency) ?
+                currencyName :
+                baseCurrency;
+            return ViewResources.Currency + ": " + currencyName + ", " +
+                ViewResources.BaseCurrency + ": " + currency.ToUpperInvariant();
         }
+
+        
     }
 }

@@ -7,10 +7,9 @@
     var appSettings = DependencyResolver.Current.GetService<IAppSettings>();
     var userSession = sessionService.UserSession;
     var userCurrencies = userSession == null || userSession.CurrencyList == null ?
-        new Dictionary<string, string>() :
-        userSession.CurrencyList.ToDictionary(x => x.Key.ToString(), x => x.Value);
-    var isParasiticMode = userSession != null && userSession.ApplicationMode == AppMode.Parasitic;
-    var isSelfMode = !isParasiticMode;
+new Dictionary<string, string>() :
+userSession.CurrencyList.ToDictionary(x => x.Key.ToString(), x => x.Value);
+    var isSelfMode = userSession != null && userSession.ApplicationMode == AppMode.Self;
     var langCode = System.Globalization.CultureInfo.CurrentUICulture.IetfLanguageTag;
     var rootUrl = Url.Content("~");
 }
@@ -49,10 +48,9 @@
     }
 
     @RenderSection("pagejs", required: false)
-    @if (isParasiticMode)
-    {
-        Html.RenderPartial("~/Views/Desktop/Shared/_SessionScript.cshtml");
-    }
+
+    <script async src="@Url.Action("checking", "home")"></script>
+
     @if (appSettings.Environment.Equals("PRO", StringComparison.OrdinalIgnoreCase))
     {
         <!-- Global site tag (gtag.js) - Google Analytics -->

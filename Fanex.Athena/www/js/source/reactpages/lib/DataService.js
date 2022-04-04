@@ -2,6 +2,32 @@ import axios from 'axios'
 import Site from '@jsroot/lib/site'
 
 export default class DataService {
+    static apiKeys = {
+        report: 'Report',
+        betlist: 'BetList'
+    }
+
+    static buildProxyUrl(apiKey, apiUrl) {
+        const encodeUrl = apiUrl.replace(new RegExp('/', 'g'), '_');
+        const proxyUrl = `Proxy/${apiKey}/${encodeUrl}`;
+        return proxyUrl;
+    }
+
+    static getProxyData(apiKey, apiUrl, params) {
+        const proxyUrl = this.buildProxyUrl(apiKey, apiUrl);
+        return this.getData(proxyUrl, params);
+    }
+
+    static postProxyData(apiKey, apiUrl, params) {
+        const proxyUrl = this.buildProxyUrl(apiKey, apiUrl);
+        return this.postData(proxyUrl, params);
+    }
+
+    static getProxyFile(apiKey, apiUrl, params) {
+        const proxyUrl = this.buildProxyUrl(apiKey, apiUrl);
+        return this.getFile(proxyUrl, params);
+    }
+
     static getData(url, params) {
         return axios.get(url, { params: params });
     }
@@ -23,5 +49,26 @@ export default class DataService {
                 '__RequestVerificationToken': Site.getXsrfToken()
             }
         });
+    }
+
+
+    static postReportData(url, params) {
+        return this.postProxyData(this.apiKeys.report, url, params);
+    }
+
+    static getReportData(url, params) {
+        return this.getProxyData(this.apiKeys.report, url, params);
+    }
+
+    static getReportFile(url, params) {
+        return this.getProxyFile(this.apiKeys.report, url, params);
+    }
+
+    static postBetListData(url, params) {
+        return this.postProxyData(this.apiKeys.betlist, url, params);
+    }
+
+    static getBetListFile(url, params) {
+        return this.getProxyFile(this.apiKeys.betlist, url, params);
     }
 }

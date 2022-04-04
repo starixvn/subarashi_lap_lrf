@@ -33,7 +33,7 @@ namespace Fanex.Athena.Web.ActionFilter
             _isObject = isObject;
         }
 
-        public ISessionStorage SessionStorage { get; set; }
+        public ISessionService SessionService { get; set; }
 
         public IAuthorizationService AuthorizationServiceInstance { get; set; }
 
@@ -41,7 +41,7 @@ namespace Fanex.Athena.Web.ActionFilter
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            var userSession = SessionStorage.UserAuthInfo;
+            var userSession = SessionService.UserSession;
             var authorized = userSession != null;
             if (authorized)
             {

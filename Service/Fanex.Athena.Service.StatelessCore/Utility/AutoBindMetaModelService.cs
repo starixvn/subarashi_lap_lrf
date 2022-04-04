@@ -132,7 +132,7 @@ namespace Fanex.Athena.Service.StatelessCore.Utility
         {
             if (MetaModelHelper.IsMetaModel(actionArguments, out IMetaModelShowBetFromIP metaModelShowBetFromIP))
             {
-                metaModelShowBetFromIP.IsShowIpvn = isShowIp && isShowIpvn;
+                metaModelShowBetFromIP.IsShowIpvn = isShowIpvn;
                 metaModelShowBetFromIP.IsShowIp = isShowIp;
             }
         }

@@ -8,7 +8,6 @@
     using Newtonsoft.Json;
     using Newtonsoft.Json.Serialization;
     using NPOI.SS.UserModel;
-    using ONEbook.UM.Filters;
     using System.Collections.Generic;
     using System.Net;
     using System.Net.Http;
@@ -16,7 +15,6 @@
     using System.Web.Http;
     using System.Web.Http.Results;
 
-    [CheckUMFilter]
     [XFrameOptionApi]
     public class BaseApiController : ApiController
     {

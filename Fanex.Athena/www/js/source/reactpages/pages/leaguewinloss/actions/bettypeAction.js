@@ -1,6 +1,5 @@
 import DataService from '@jsroot/lib/DataService.js'
 import Site from '@jsroot/lib/site'
-import LangHelper from '@jsroot/lib/langHelper'
 import Cache from '@jsroot/lib/Cache'
 import * as types from './types'
 

@@ -7,5 +7,5 @@ export const SupportTaskOptions = [
     { value: 3, label: LangHelper.getSingleResource('GetAllRunningTickets') }
 ] 
 
-export const ExportUrl = 'CustomerSupportTaskReport/ExportExcel';
+export const ExportUrl = 'Api/CustomerSupportTask/ExportExcel';
 export const ExportFileName = 'CustomerSupportTask.zip';

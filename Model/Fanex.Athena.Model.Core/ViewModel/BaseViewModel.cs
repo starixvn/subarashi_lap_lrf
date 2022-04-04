@@ -1,9 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="BaseViewModel.cs" company="">
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Model.Core.ViewModel
+﻿namespace Fanex.Athena.Model.Core.ViewModel
 {
     using System.Collections.Generic;
     using Fanex.Athena.Model.Core.DTO.Common;

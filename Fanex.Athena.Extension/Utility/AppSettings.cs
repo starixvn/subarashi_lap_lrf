@@ -162,7 +162,12 @@ namespace Fanex.Athena.Extension.Utility
 
         public IEnumerable<string> LicenseeOfferIMQOddGroup
             => GetValue("LicenseeOfferIMQOddGroup").Split(',');
-
+        
+        public string BetTicketEventBuilderUrl
+        {
+            get { return GetValue("BetTicketEventBuilderUrl"); }
+        }    
+        
         #endregion Configurations
 
         #region Casino

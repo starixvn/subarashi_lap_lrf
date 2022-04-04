@@ -14,8 +14,9 @@
             totalColspan: [2, 2, 3],
 
             //level 0,1,2
-            urlData: 'GodOfFortuneWinLossReport/Index',
-            urlExcelData: 'GodOfFortuneWinLossReport/Index',
+            urlData: 'Api/GodOfFortuneWinLoss/Index',
+            urlExcelData: 'Api/GodOfFortuneWinLoss/ExportExcel',
+            urlPrefix: 'Api/GodOfFortuneWinLoss',
 
             gridOption:
             {

@@ -256,7 +256,7 @@
                 responseType: 'blob',
                 contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                 cache: false,
-                url: Site.resolveClientUrl(url),
+                url: Site.buildReportProxyUrl(url),
                 success: function (response) {
                     Downloader.download(response, fileName);
                 },
@@ -296,7 +296,7 @@
                 dataType: 'json',
                 contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                 cache: false,
-                url: Site.resolveClientUrl(CustomerWinLossOption.urlData),
+                url: Site.buildReportProxyUrl(CustomerWinLossOption.urlData),
                 success: function (response) {
                     setReportTitle();
                     _me.bindData(response);

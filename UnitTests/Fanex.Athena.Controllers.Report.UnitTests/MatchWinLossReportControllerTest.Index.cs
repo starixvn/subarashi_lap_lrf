@@ -30,13 +30,13 @@
                 var viewModel = viewResult.Model as MatchWinLossViewModel;
 
                 // Assert
-                Assert.Multiple(() =>
+                Assert.Multiple((TestDelegate)(() =>
                 {
                     Assert.That(viewResult.ViewName, Is.EqualTo("~/Views/Desktop/Report/MatchWinLoss/Main.cshtml"));
                     Assert.That(viewModel.CurrencyList, Is.EqualTo(SessionService.UserSession.CurrencyList));
                     Assert.That(viewModel.Param.BalanceUpDay, Is.EqualTo(BalanceUpDate.ToShortDateString()));
-                    Assert.That(viewModel.Param.LicenseeId, Is.EqualTo(SessionService.LicenseeSession.LicenseeId));
-                });
+                    Assert.That(viewModel.Param.LicenseeId, Is.EqualTo((object)SessionService.LicenseeSession.LicenseeId));
+                }));
             }
         }
 

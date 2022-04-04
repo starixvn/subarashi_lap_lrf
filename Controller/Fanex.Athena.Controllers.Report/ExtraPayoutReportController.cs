@@ -1,5 +1,4 @@
 ﻿using Fanex.Athena.Extension.Helper;
-using Fanex.Athena.Model.Auth;
 using Fanex.Athena.Model.Auth.DataDomain;
 using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Model.Core.DTO.Common;
@@ -7,12 +6,10 @@ using Fanex.Athena.Model.Report.MetaModel;
 using Fanex.Athena.Model.Report.ViewModel;
 using Fanex.Athena.Resources;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
-using Fanex.Athena.Service.StatelessCore.Utility;
 using Fanex.Athena.VendorAdapter.Interfaces;
 using Fanex.Athena.Web.ActionFilter;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace Fanex.Athena.Controllers.Report
@@ -21,18 +18,14 @@ namespace Fanex.Athena.Controllers.Report
     public class ExtraPayoutReportController : ReportBaseController
     {
         private readonly IReportSettingService _reportSettingService;
-        private readonly IReportAPIClient _reportAPIClient;
         private readonly ICacheRefAdapter _cacheRefAdapter;
-        private const int TimeOut = 300;
-
         public ExtraPayoutReportController(
             IReportSettingService reportSettingService,
-            ICacheRefAdapter cacheRefAdapter,
-            IReportAPIClient reportAPIClient)
+            ICacheRefAdapter cacheRefAdapter
+            )
         {
             _reportSettingService = reportSettingService;
             _cacheRefAdapter = cacheRefAdapter;
-            _reportAPIClient = reportAPIClient;
         }
 
         public ActionResult Index()
@@ -64,51 +57,6 @@ namespace Fanex.Athena.Controllers.Report
             ViewBag.DefaultSelectedBaseCurrency = userSession.DefaultBaseCurrency;
 
             return View("~/Views/Desktop/Report/ExtraPayout/Main.cshtml", model);
-        }
-
-        [HttpPost]
-        public async Task<ActionResult> Index(ExtraPayoutMetaModel metaModel)
-        {
-            var userSession = SessionServiceInstance.UserSession;
-            UpdateMetaModel(metaModel, userSession);
-
-            if (metaModel.IsExportExcel)
-            {
-                var response = await _reportAPIClient.PostAsync("api/ExtraPayout/ExportExcel",
-                 metaModel, userSession.Language, MediaType.MsgPack, TimeOut).ConfigureAwait(false);
-                return File(response.Item1, response.Item2);
-            }
-
-            return JsonString(await _reportAPIClient.PostStringAsync("api/ExtraPayout/GetData", metaModel, userSession.Language, TimeOut).ConfigureAwait(false));
-        }
-
-        [HttpPost]
-        public async Task<ActionResult> Detail(ExtraPayoutDetailMetaModel metaModel)
-        {
-            var userSession = SessionServiceInstance.UserSession;
-            UpdateMetaModel(metaModel, userSession);
-
-            if (metaModel.IsExportExcel)
-            {
-                var response = await _reportAPIClient.PostAsync("api/ExtraPayout/ExportDetailExcel",
-                 metaModel, userSession.Language, MediaType.MsgPack, TimeOut).ConfigureAwait(false);
-                return File(response.Item1, response.Item2);
-            }
-
-            return JsonString(await _reportAPIClient.PostStringAsync("api/ExtraPayout/GetDetailData", metaModel, userSession.Language, TimeOut).ConfigureAwait(false));
-        }
-
-        public void UpdateMetaModel(ExtraPayoutMetaModel metaModel, UserAuthInfo userSession)
-        {
-            metaModel.AgentListXml = GetAgentList(metaModel, userSession);
-            metaModel.UserCurrencyList = userSession.CurrencyList;
-        }
-
-        private static string GetAgentList(ExtraPayoutMetaModel metaModel, UserAuthInfo userSession)
-        {
-            var currencyList = metaModel.CurrencyIdList?.Split(',').Select(x => int.Parse(x)).ToArray();
-
-            return AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, currencyList, metaModel.IsExcludedTestData);
         }
 
         [HttpGet]

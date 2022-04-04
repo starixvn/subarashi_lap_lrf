@@ -294,8 +294,8 @@
             hasCustomerComm: true,
             pageSize: 50,
             totalColspan: [0, 4],
-            urlData: 'PlatformWinLossReport/Index',
-            urlExcelData: 'PlatformWinLossReport/Index',
+            urlData: 'Api/PlatformWinLoss/GetData',
+            urlExcelData: 'Api/PlatformWinLoss/ExportExcel',
             gridOption: {
                 datatype: 'jsonstring',
                 colNames: [],

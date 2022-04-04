@@ -7,6 +7,6 @@
     [CLSCompliant(false)]
     public interface IOneBookSecurityWrapper
     {
-        DefaultAuthInfo<OneAuthPermission, OneAuthCurrency> Authenticate(string token);
+        DefaultAuthInfo<PortalFunction, AuthCurrency> Authenticate(string token);
     }
 }

@@ -2,13 +2,14 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
     using System.Web;
     using System.Web.Mvc;
 
     using Base.UnitTests;
 
     using Extension.Utility.Interfaces;
-
+    using Fanex.Athena.Service.Core.OAuth;
     using Fanex.Athena.Service.Core.Users.Interfaces;
 
     using Model.Core.DataDomain;
@@ -28,20 +29,14 @@
     {
         private IMaintenanceService _maintenanceService;
         private IUserService _userService;
-        private IAuthService _authService;
-        private IFormsAuthenticationService _formAuthenticationService;
-        private IFileSystem _fileSystem;
+        private IInternalAuthService _authService;
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
-            base.FixtureSetUp();
-
             _maintenanceService = Substitute.For<IMaintenanceService>();
             _userService = Substitute.For<IUserService>();
-            _authService = Substitute.For<IAuthService>();
-            _formAuthenticationService = Substitute.For<IFormsAuthenticationService>();
-            _fileSystem = Substitute.For<IFileSystem>();
+            _authService = Substitute.For<IInternalAuthService>();
         }
 
         [OneTimeTearDown]
@@ -49,12 +44,15 @@
         {
             _maintenanceService = null;
             _userService = null;
-            _formAuthenticationService = null;
+            _authService = null;
         }
 
+
         [SetUp]
-        public void SetUp()
+        public void Setup()
         {
+            base.FixtureSetUp();
+
             SetUpDefaultFakeData();
         }
 
@@ -76,7 +74,7 @@
                 SessionService.CaptchaCode = null;
 
                 // Action
-                var result = controller.Captcha() as FileContentResult;
+                var result = controller.Captcha();
 
                 // Assert
                 Assert.That(result, Is.Not.Null);
@@ -112,7 +110,7 @@
                 });
 
                 // Action
-                var result = controller.GetUserSalt(UserName) as string;
+                var result = controller.GetUserSalt(UserName);
 
                 // Assert
                 Assert.That(result, Is.EqualTo("xxx"));
@@ -129,7 +127,7 @@
                 _userService.GetByUsername(UserName, false).Returns(x => null);
 
                 // Action
-                var result = controller.GetUserSalt(UserName) as string;
+                var result = controller.GetUserSalt(UserName);
 
                 // Assert
                 Assert.That(result, Is.Empty);
@@ -137,46 +135,26 @@
         }
 
         [Test]
-        public void SignOut_WhenCall_CallSignOutFromService()
+        public async Task SignOut_WhenCall_CallSignOutFromService()
         {
             using (var controller = CreateController())
             {
                 // Action
-                var result = controller.SignOut() as RedirectToRouteResult;
+                _ = await controller.SignOut();
 
                 // Assert
-                _authService.Received().Logout(DefaultUserSession.OnUserId);
-                _formAuthenticationService.Received().SignOut();
+                await _authService.Received()
+                    .SignOut(ControllerContext.HttpContext.Response, ControllerContext.HttpContext.Request);
             }
         }
 
         [Test]
-        public void SignOut_UserDoesNotExist_NotCallLogoutFromUserService()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                StubUserSessionData(null);
-
-                // Action
-                var result = controller.SignOut() as RedirectToRouteResult;
-
-                // Assert
-                Assert.Multiple(() =>
-                {
-                    _authService.DidNotReceive().Logout(Arg.Any<int>());
-                    _formAuthenticationService.Received().SignOut();
-                });
-            }
-        }
-
-        [Test]
-        public void SignOut_WhenCall_RedirectToLocationRestriction()
+        public async Task SignOut_WhenCall_RedirectToLocationRestriction()
         {
             using (var controller = CreateController())
             {
                 // Action
-                var result = controller.SignOut() as RedirectToRouteResult;
+                var result = await controller.SignOut() as RedirectToRouteResult;
 
                 // Assert
                 Assert.Multiple(() =>
@@ -187,82 +165,79 @@
             }
         }
 
+        //[Test]
+        //public async Task SignOut_WhenCall_ClearCookies()
+        //{
+        //    using (var controller = CreateController())
+        //    {
+        //        // Arrange
+        //        const string CookieName = "cookie1";
+        //        controller.ControllerContext.HttpContext.Request.Cookies.Add(new HttpCookie(CookieName));
+
+        //        // Action
+        //        _ = await controller.SignOut();
+
+        //        // Assert
+        //        Assert.Multiple(() =>
+        //        {
+        //            Assert.That(controller.ControllerContext.HttpContext.Response.Cookies[0].Name, Is.EqualTo(CookieName));
+        //            Assert.That(controller.ControllerContext.HttpContext.Response.Cookies[0].Expires, Is.LessThan(DateTime.Now));
+        //        });
+        //    }
+        //}
+
+        //[Test]
+        //public async Task SignOut_WhenCall_ClearSession()
+        //{
+        //    using (var controller = CreateController())
+        //    {
+        //        // Action
+        //        _ = await controller.SignOut();
+
+        //        // Assert
+        //        controller.Session.Received().Clear();
+        //    }
+        //}
+
+        //[Test]
+        //public async Task SignOut_WhenCall_ClearCache()
+        //{
+        //    using (var controller = CreateController())
+        //    {
+        //        // Action
+        //        _ = await controller.SignOut();
+
+        //        // Assert
+        //        Assert.Multiple(() =>
+        //        {
+        //            controller.Response.Cache.Received().SetNoStore();
+        //            controller.Response.Cache.Received().SetExpires(Arg.Any<DateTime>());
+        //            controller.Response.Cache.Received().SetCacheability(HttpCacheability.NoCache);
+        //        });
+        //    }
+        //}
+
         [Test]
-        public void SignOut_WhenCall_ClearCookies()
+        public async Task InternalSignOut_WhenCall_CallSignOutFromService()
         {
             using (var controller = CreateController())
             {
-                // Arrange
-                const string CookieName = "cookie1";
-                controller.ControllerContext.HttpContext.Request.Cookies.Add(new HttpCookie(CookieName));
-
                 // Action
-                var result = controller.SignOut() as RedirectToRouteResult;
+                _ = await controller.InternalSignOut();
 
                 // Assert
-                Assert.Multiple(() =>
-                {
-                    Assert.That(controller.ControllerContext.HttpContext.Response.Cookies[0].Name, Is.EqualTo(CookieName));
-                    Assert.That(controller.ControllerContext.HttpContext.Response.Cookies[0].Expires, Is.LessThan(DateTime.Now));
-                });
+                await _authService.Received()
+                                    .SignOut(ControllerContext.HttpContext.Response, ControllerContext.HttpContext.Request);
             }
         }
 
         [Test]
-        public void SignOut_WhenCall_ClearSession()
+        public async Task InternalSignOut_WhenCall_RedirectToOneTokenRestriction()
         {
             using (var controller = CreateController())
             {
                 // Action
-                var result = controller.SignOut() as RedirectToRouteResult;
-
-                // Assert
-                controller.Session.Received().Clear();
-            }
-        }
-
-        [Test]
-        public void SignOut_WhenCall_ClearCache()
-        {
-            using (var controller = CreateController())
-            {
-                // Action
-                var result = controller.SignOut() as RedirectToRouteResult;
-
-                // Assert
-                Assert.Multiple(() =>
-                {
-                    controller.Response.Cache.Received().SetNoStore();
-                    controller.Response.Cache.Received().SetExpires(Arg.Any<DateTime>());
-                    controller.Response.Cache.Received().SetCacheability(HttpCacheability.NoCache);
-                });
-            }
-        }
-
-        [Test]
-        public void InternalSignOut_WhenCall_CallSignOutFromService()
-        {
-            using (var controller = CreateController())
-            {
-                // Action
-                var result = controller.InternalSignOut() as RedirectToRouteResult;
-
-                // Assert
-                Assert.Multiple(() =>
-                {
-                    _authService.Received().Logout(DefaultUserSession.OnUserId);
-                    _formAuthenticationService.Received().SignOut();
-                });
-            }
-        }
-
-        [Test]
-        public void InternalSignOut_WhenCall_RedirectToOneTokenRestriction()
-        {
-            using (var controller = CreateController())
-            {
-                // Action
-                var result = controller.InternalSignOut() as RedirectToRouteResult;
+                var result = await controller.InternalSignOut() as RedirectToRouteResult;
 
                 // Assert
                 Assert.Multiple(() =>
@@ -375,14 +350,13 @@
             return new AuthorizationController(
                _maintenanceService,
                _userService,
-               _authService,
-               _formAuthenticationService)
+               _authService
+               )
             {
                 ControllerContext = ControllerContext,
                 LangService = LangService,
                 SessionServiceInstance = SessionService,
                 AppSettingInstance = AppSettings
-
             };
         }
     }

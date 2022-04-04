@@ -351,9 +351,9 @@
         {
             var userSession = JsonConvert.DeserializeObject<UserAuthInfo>(JsonConvert.SerializeObject(DefaultUserSession));
             userSession.ApplicationMode = appMode;
-            userSession.PortalFunctionList = new OneAuthPermission[]
+            userSession.PortalFunctionList = new PortalFunction[]
             {
-                    new OneAuthPermission { FunctionKey =  permissionKey }
+                    new PortalFunction { FunctionKey =  permissionKey }
             };
             userSession.FunctionList = new List<Function>
             {

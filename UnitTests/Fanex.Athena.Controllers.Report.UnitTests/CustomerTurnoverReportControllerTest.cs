@@ -50,12 +50,12 @@
                 var viewModel = viewResult.Model as CustomerTurnoverViewModel;
 
                 // Assert
-                Assert.Multiple(() =>
+                Assert.Multiple((TestDelegate)(() =>
                 {
                     Assert.That(viewResult.ViewName, Is.EqualTo("~/Views/Desktop/Report/CustomerTurnover/Main.cshtml"));
-                    Assert.That(viewModel.Param.LicenseeId, Is.EqualTo(SessionService.LicenseeSession.LicenseeId));
+                    Assert.That(viewModel.Param.LicenseeId, Is.EqualTo((object)SessionService.LicenseeSession.LicenseeId));
                     Assert.That(viewModel.CurrencyList, Is.EqualTo(SessionService.UserSession.CurrencyList));
-                });
+                }));
             }
         }
 

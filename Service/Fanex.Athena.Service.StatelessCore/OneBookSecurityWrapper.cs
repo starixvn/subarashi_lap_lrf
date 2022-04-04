@@ -15,11 +15,11 @@
             _storageProvider = storageProvider;
         }
 
-        public DefaultAuthInfo<OneAuthPermission, OneAuthCurrency> Authenticate(string token)
+        public DefaultAuthInfo<PortalFunction, AuthCurrency> Authenticate(string token)
         {
             try
             {
-                var oneBookSecurity = new Auth<DefaultAuthInfo<OneAuthPermission, OneAuthCurrency>>(_storageProvider);
+                var oneBookSecurity = new Auth<DefaultAuthInfo<PortalFunction, AuthCurrency>>(_storageProvider);
                 return oneBookSecurity.Authenticate(token);
             }
             catch (Exception exception)

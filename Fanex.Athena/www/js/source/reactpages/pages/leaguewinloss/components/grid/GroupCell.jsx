@@ -125,7 +125,7 @@ export const GroupCell = props => {
         const params = { ...requestParam, leagueId: rowData.leagueId, eventType: rowData.eventType, betTypeId : rowData.betTypeId, matchId : rowData.matchId };
     
         try {
-            const response = await DataService.postData(ApiUrl.REPORT_CURRENCY_DATA_URL, params);
+            const response = await DataService.postReportData(ApiUrl.REPORT_CURRENCY_DATA_URL, params);
 
             if (response.status === 200) {
                 return response.data

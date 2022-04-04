@@ -66,7 +66,7 @@
             metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(CurrencyAgentListBySubsidiaryBusiness(metaModel), metaModel.CurrencyId);
             metaModel.HasPlayerCom = LicenseeSession.IsAllowedCustomerComm;
             metaModel.UspKey = uspKey;
-            metaModel.IsShowIpvn = userSession.IsShowIpvn && userSession.IsShowIp;
+            metaModel.IsShowIpvn = userSession.IsShowIpvn;
             metaModel.IsShowIp = userSession.IsShowIp;
             AutoBindMetaModelService.BindProductCodeList(metaModel, SessionService.LicenseeSession.OfferedSubProductList, ProductService);
 
@@ -93,7 +93,7 @@
             metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(CurrencyAgentListBySubsidiaryBusiness(metaModel), metaModel.CurrencyId);
             metaModel.HasPlayerCom = LicenseeSession.IsAllowedCustomerComm;
             metaModel.UspKey = uspKey;
-            metaModel.IsShowIpvn = UserSession.IsShowIpvn && UserSession.IsShowIp;
+            metaModel.IsShowIpvn = UserSession.IsShowIpvn;
             metaModel.IsShowIp = UserSession.IsShowIp;
             AutoBindMetaModelService.BindProductCodeList(metaModel, SessionService.LicenseeSession.OfferedSubProductList, ProductService);
 

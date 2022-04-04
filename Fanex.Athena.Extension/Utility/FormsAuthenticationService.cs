@@ -8,7 +8,7 @@
 
     public class FormsAuthenticationService : IFormsAuthenticationService
     {
-        public void SetAuthCookie(string userName, bool createPersistentCookie)
+        public void CreateFormAuth(string userName, bool createPersistentCookie)
         {
             var cache = HttpContext.Current.Response.Cache;
             cache.SetNoStore();

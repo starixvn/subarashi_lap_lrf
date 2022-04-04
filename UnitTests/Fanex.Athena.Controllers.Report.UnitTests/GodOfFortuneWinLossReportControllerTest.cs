@@ -22,14 +22,12 @@
     [TestFixture]
     public class GodOfFortuneWinLossReportControllerTest : CultureBaseControllerHelperTest
     {
-        private IReportAPIClient _reportAPIClient;
         private IReportSettingService _reportSettingService;
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
             base.FixtureSetUp();
-            _reportAPIClient = Substitute.For<IReportAPIClient>();
             _reportSettingService = Substitute.For<IReportSettingService>();
             SetUpDefaultFakeData();
         }
@@ -44,11 +42,11 @@
                 var viewModel = viewResult.Model as GodOfFortuneWinLossViewModel;
 
                 // Assert
-                Assert.Multiple(() =>
+                Assert.Multiple((TestDelegate)(() =>
                 {
                     StringAssert.Contains("~/Views/Desktop/Report/GodOfFortuneWinLoss/Main.cshtml", viewResult.ViewName);
-                    Assert.That(viewModel.Param.LicenseeId, Is.EqualTo(SessionService.LicenseeSession.LicenseeId));
-                });
+                    Assert.That(viewModel.Param.LicenseeId, Is.EqualTo((object)SessionService.LicenseeSession.LicenseeId));
+                }));
             }
         }
 
@@ -66,63 +64,7 @@
             }
         }
 
-        [Test]
-        public async Task IndexPost_ValidModelNoSorting_GetDataFromAPI()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = CreateValidMetaModel();
-                metaModel.CurrencyIdList = "9,3";
-                var expectedResult = SetUpForGettingData(metaModel, totalItem: 5);
-
-                // Action
-                var result = await controller.Index(metaModel, null, null, 0);
-            }
-        }
-
-        private GodOfFortuneWinLossMetaModel CreateValidMetaModel(string sortBy = null, string sortOrder = "asc")
-        {
-            var model = new GodOfFortuneWinLossMetaModel
-            {
-                CurrencyId = 1,
-                SortBy = sortBy,
-                SortOrder = sortOrder,
-                FromDate = new DateTime(2021, 2, 16),
-                ToDate = new DateTime(2021, 2, 20)
-            };
-            return model;
-        }
-
-        private SortableReportResultModel<GodOfFortuneWinLoss> SetUpForGettingData(GodOfFortuneWinLossMetaModel metaModel, int totalItem = 0)
-        {
-            var dataList = new SortableList<GodOfFortuneWinLoss>();
-
-            var random = new Random();
-            for (int i = 0; i < totalItem; i++)
-            {
-                dataList.Add(new GodOfFortuneWinLoss
-                {
-                    TurnOver = random.Next(1, 100),
-                    LicenseeWinLoss = random.Next(1, 100)
-                });
-            }
-
-            var result = new SortableReportResultModel<GodOfFortuneWinLoss>
-            {
-                DataList = dataList,
-                TotalDataList = new List<GodOfFortuneWinLoss>(),
-                SummaryTotal = new Dictionary<string, GodOfFortuneWinLoss>(),
-                AdditionalInfo = "1"
-            };
-
-            var json = new JavaScriptSerializer().Serialize(result);
-
-            _reportAPIClient.PostStringAsync("api/GodOfFortuneWinLoss/Index", Arg.Any<GodOfFortuneWinLossMetaModel>(), DefaultUserSession.Language).Returns(json);
-
-            return result;
-        }
-
+        
         private GodOfFortuneWinLossReportController CreateController()
         {
             var reportSetting = new ReportSetting
@@ -151,7 +93,7 @@
 
             SessionService.UserSession.Returns(userSession);
 
-            return new GodOfFortuneWinLossReportController(_reportSettingService, _reportAPIClient)
+            return new GodOfFortuneWinLossReportController(_reportSettingService)
             {
                 SessionServiceInstance = SessionService,
                 LangService = LangService,

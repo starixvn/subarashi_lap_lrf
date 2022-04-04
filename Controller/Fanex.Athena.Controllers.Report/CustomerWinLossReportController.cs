@@ -1,11 +1,5 @@
-﻿// <copyright file="ReportController.CustomerWinloss.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Controllers.Report
+﻿namespace Fanex.Athena.Controllers.Report
 {
-    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
@@ -21,24 +15,16 @@ namespace Fanex.Athena.Controllers.Report
     public class CustomerWinLossReportController : ReportBaseController
     {
         private readonly IReportSettingService _reportSettingService;
-
-        private readonly IReportAPIClient _reportAPIClient;
-
         private readonly IAuthorizationService _authService;
-
         private readonly IPlayerSegmentationService _playerService;
-
-        private const int TimeOutInSecond = 180;
 
         public CustomerWinLossReportController(
             IReportSettingService reportSettingService,
             IAuthorizationService authService,
-            IReportAPIClient reportAPIClient,
             IPlayerSegmentationService playerService
             )
         {
             _reportSettingService = reportSettingService;
-            _reportAPIClient = reportAPIClient;
             _authService = authService;
             _playerService = playerService;
         }
@@ -53,24 +39,6 @@ namespace Fanex.Athena.Controllers.Report
         public Task<ActionResult> History()
         {
             return GetView(true);
-        }
-
-        [HttpPost]
-        [AutoBindMetaModel(BindAgent = true, BindLicenseeContract = true, BindProductOptions = true)]
-        [ValidationWebRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
-        public async Task<ActionResult> Index(CustomerWinLossMetaModel metaModel)
-        {
-            var userSession = SessionServiceInstance.UserSession;
-            if (metaModel.IsExportExcel)
-            {
-                const string FileName = "CustomerWinLoss";
-                var httpResponse = await _reportAPIClient.PostAsync("api/CustomerWinLoss/ExportExcel",
-                    metaModel, userSession.Language, timeOut: TimeOutInSecond).ConfigureAwait(false);
-
-                return File(httpResponse.Item1, httpResponse.Item2, FileName);
-            }
-
-            return JsonString(await _reportAPIClient.PostStringAsync("api/CustomerWinLoss/Index", metaModel, userSession.Language, TimeOutInSecond).ConfigureAwait(false));
         }
 
         private async Task<ActionResult> GetView(bool isHistory)

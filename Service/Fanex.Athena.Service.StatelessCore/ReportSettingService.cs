@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="MoveBetService.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Service.StatelessCore
+﻿namespace Fanex.Athena.Service.StatelessCore
 {
     using System;
     using System.Collections.Generic;

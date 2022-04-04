@@ -1,37 +1,19 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="Function.cs" company="">
-// Copyright (c) . All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-
-namespace Fanex.Athena.Model.Auth
+﻿namespace Fanex.Athena.Model.Auth
 {
     using System;
-    using System.Resources;
     using Fanex.Athena.Resources;
 
-    /// <summary>
-    /// Function class.
-    /// </summary>
     [Serializable]
     public class Function
     {
         public int FunctionId { get; set; }
 
-        public string Name
-        {
-            get
-            {
-                return Menu.ResourceManager.GetString(FunctionKey.ToLowerInvariant());
-            }
-        }
+        public string Name => Menu.ResourceManager.GetString(FunctionKey.ToLowerInvariant());
 
         public string Description { get; set; }
 
         public int ParentId { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Sonar Code Smell", "S3996:UriPropertiesShouldNotBeStrings",
-            Justification = "Reviewed. Suppression is OK here.")]
         public string Url { get; set; }
 
         public bool IsMenu { get; set; }

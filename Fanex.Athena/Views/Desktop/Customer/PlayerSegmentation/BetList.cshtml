@@ -4,12 +4,17 @@
     Layout = "~/Views/Desktop/Shared/_ReactPageLayout.cshtml";
 }
 @model Fanex.Athena.Model.Customer.ViewModel.PlayerSegmentationBetListViewModel
+@{
+    var appSettings = DependencyResolver.Current.GetService<IAppSettings>();
+    var betTicketEventBuilderUrl = appSettings.BetTicketEventBuilderUrl;
+}
 @section pagecss {
     <link href="@Url.ContentLinkByEnv("/www/css/build/reactpages/betlist/index.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.ContentLinkByEnv("/www/css/build/reactpages/customer/playersegmentation/index.css")" rel="stylesheet" type="text/css" />
 }
 @section pagejs {
     <script src="@Url.ContentLinkByEnv("/www/js/build/reactpages/customer/playersegmentation/betlist.chunk.js")"></script>
+    <script async src="@betTicketEventBuilderUrl" id="event-builder-script"></script>
 }
 
 @section globaljscode{

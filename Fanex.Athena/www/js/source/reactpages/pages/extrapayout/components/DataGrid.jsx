@@ -105,7 +105,7 @@ export const DataGrid = (props) => {
         props.setDetailParams(detailParams);
         props.toggleLoader(true);
 
-        DataService.postData(ApiUrl.REPORT_DETAIL_DATA_URL, detailParams)
+        DataService.postReportData(ApiUrl.REPORT_DETAIL_DATA_URL, detailParams)
         .then(response => {
             setShowBetList(true);
             setBetListData(response.data)

@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="HeaderController.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Controllers
+﻿namespace Fanex.Athena.Controllers
 {
     using DataAccess.Core.Users.Interfaces;
 
@@ -14,6 +8,7 @@ namespace Fanex.Athena.Controllers
     using Fanex.Athena.Model.Core.ViewModel;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using System.Linq;
+    using System.Threading.Tasks;
     using System.Web.Mvc;
 
     using Web.ActionFilter;
@@ -22,11 +17,16 @@ namespace Fanex.Athena.Controllers
     public class HeaderController : CultureBaseController
     {
         private readonly ILicenseeDataAccess _licenseeDataAccess;
+        private readonly IInternalAuthService _authService;
         private readonly ISubsidiaryService _subsidiaryService;
 
-        public HeaderController(ILicenseeDataAccess licenseeDataAccess, ISubsidiaryService subsidiaryService)
+        public HeaderController(
+            ILicenseeDataAccess licenseeDataAccess,
+            IInternalAuthService authService,
+            ISubsidiaryService subsidiaryService)
         {
             _licenseeDataAccess = licenseeDataAccess;
+            _authService = authService;
             _subsidiaryService = subsidiaryService;
         }
 
@@ -54,11 +54,12 @@ namespace Fanex.Athena.Controllers
             return View("~/Views/Desktop/Header/Index.cshtml", viewModel);
         }
 
-        public ActionResult ChangeLicensee(int? licenseeId)
+        public async Task<ActionResult> ChangeLicensee(int? licenseeId)
         {
             var newLicenseeId = licenseeId ?? 0;
             var originalLicenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
             var originalUserId = SessionServiceInstance.UserSession.UserId;
+            var defaultReportUrl = SessionServiceInstance.UserSession.DefaultReportUrl;
 
             if (newLicenseeId <= 0 || !_licenseeDataAccess.IsLicenseeBelongToUser(originalLicenseeId, originalUserId))
             {
@@ -67,10 +68,15 @@ namespace Fanex.Athena.Controllers
 
             if (newLicenseeId != originalLicenseeId)
             {
-                SessionServiceInstance.UpdateLiceseeSession(newLicenseeId);
+                var oauthInfo = await _authService.RenewOAuthInfoAsync(newLicenseeId, SessionServiceInstance.UserSession.AccessToken, SessionServiceInstance.UserSession.RefreshToken);
+                if (!oauthInfo.IsError)
+                {
+                    _authService.ReSignIn(oauthInfo);
+                    defaultReportUrl = oauthInfo.DefaultReportUrl;
+                }
             }
 
-            ViewBag.DefaultReportUrl = SessionServiceInstance.UserSession.DefaultReportUrl;
+            ViewBag.DefaultReportUrl = defaultReportUrl;
             return Redirect("~");
         }
 
@@ -80,7 +86,7 @@ namespace Fanex.Athena.Controllers
         /// <param name="languagesite">The language code.</param>
         /// <returns>Return "1" if changing is success.</returns>
         [HttpGet]
-        public string ChangeLanguage(string languagesite)
+        public async Task<string> ChangeLanguage(string languagesite)
         {
             var changed = false;
             if (!string.IsNullOrEmpty(languagesite))
@@ -91,12 +97,26 @@ namespace Fanex.Athena.Controllers
                     var currentLang = LangService.GetCurrentLanguage();
                     if (!currentLang.Equals(languageCode))
                     {
-                        changed = LangService.ChangeLanguage(languageCode);
+                        changed = await UpdateToken(languageCode);
                     }
                 }
             }
 
             return changed ? "1" : "0";
+        }
+
+        private async Task<bool> UpdateToken(string languageCode)
+        {
+            var changed = false;
+            var oauthInfo = await _authService.RenewOAuthInfoAsync(SessionServiceInstance.LicenseeSession.LicenseeId,
+                           SessionServiceInstance.UserSession.AccessToken, SessionServiceInstance.UserSession.RefreshToken, Util.MapLanguages[languageCode]);
+            if (!oauthInfo.IsError)
+            {
+                _authService.CreateSession(oauthInfo);
+                changed = LangService.ChangeLanguage(languageCode);
+            }
+
+            return changed;
         }
     }
 }

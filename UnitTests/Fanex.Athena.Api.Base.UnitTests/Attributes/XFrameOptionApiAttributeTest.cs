@@ -22,14 +22,14 @@
     {
         private const string XFrameOptionHeaderName = "X-Frame-Options";
 
-        private ISessionStorage _sessionStorage;
+        private ISessionService _sessionStorage;
 
         private HttpActionExecutedContext _actionExecutedContext;
 
         [SetUp]
         public void SetUp()
         {
-            _sessionStorage = Substitute.For<ISessionStorage>();
+            _sessionStorage = Substitute.For<ISessionService>();
             _actionExecutedContext = CreateActionExecutedContext();
         }
 
@@ -56,7 +56,7 @@
         {
             // Arrange
             var attribute = new XFrameOptionApiAttribute();
-            _sessionStorage.UserAuthInfo.Returns(new UserAuthInfo
+            _sessionStorage.UserSession.Returns(new UserAuthInfo
             {
                 ApplicationMode = AppMode.Parasitic
             });

@@ -1,37 +1,30 @@
 ﻿namespace Fanex.Athena.Service.Customer
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using Fanex.Athena.DataAccess.Customer.Interfaces;
-    using Fanex.Athena.Extension.Utility;
-    using Fanex.Athena.Extension.Utility.Interfaces;
-    using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
-    using Fanex.Athena.Model.Customer.Enum;
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.Customer.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Utility;
-    using Newtonsoft.Json;
 
     public class PlayerSegmentationService : IPlayerSegmentationService
     {
         private readonly IPlayerSegmentationDataAccess _playerDataAccess;
-        private readonly IContextService _contextService;
+        private readonly ISessionService _sessionService;
         private readonly ISubsidiaryService _subsidiaryService;
         private readonly ICustomerClassService _customerClassService;
 
         public PlayerSegmentationService(
-            IContextService contextService,
+            ISessionService sessionService,
             IPlayerSegmentationDataAccess playerDataAccess,
             ISubsidiaryService subsidiaryService,
             ICustomerClassService customerClassService
             )
         {
-            _contextService = contextService;
+            _sessionService = sessionService;
             _playerDataAccess = playerDataAccess;
             _subsidiaryService = subsidiaryService;
             _customerClassService = customerClassService;
@@ -86,7 +79,7 @@
                 return;
             }
 
-            var subsidiaries = _subsidiaryService.GetSubsidiaryList(_contextService.User, _contextService.LicenseeName, subsidiaryList);
+            var subsidiaries = _subsidiaryService.GetSubsidiaryList(_sessionService.UserSession, _sessionService.LicenseeSession.LicenseeName, subsidiaryList);
             if (!subsidiaries.Any())
             {
                 return;
@@ -100,6 +93,6 @@
         }
 
         public bool IsNormalView(BasePlayerListMetaModel metaModel) =>
-            _subsidiaryService.IsIgnoredSubsidiarySearch(metaModel.SubsidiarySearch, metaModel.SubsidiaryList, _contextService.User);
+            _subsidiaryService.IsIgnoredSubsidiarySearch(metaModel.SubsidiarySearch, metaModel.SubsidiaryList, _sessionService.UserSession);
     }
 }

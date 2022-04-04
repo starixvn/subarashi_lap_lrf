@@ -5,7 +5,6 @@ using System.Web.Http.Filters;
 using Fanex.Athena.DataAccess.Core.Configuration;
 using Fanex.Athena.Extension.Helper;
 using Fanex.Athena.Model.Auth;
-using Fanex.Athena.Model.Auth.Enum;
 using Fanex.Athena.Model.Core.MetaModel;
 using Fanex.Athena.Service.Core.Users;
 using Fanex.Athena.Service.Core.Users.Interfaces;
@@ -17,7 +16,7 @@ namespace Fanex.Athena.Api.Base.Attributes
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
     public sealed class ApiAutoBindMetaModelAttribute : ActionFilterAttribute
     {
-        private static readonly ISessionStorage _sessionStorage = new SessionStorage();
+        private static readonly ISessionService _sessionService = new SessionService();
 
         public IProductService ProductService { get; set; }
 
@@ -45,8 +44,8 @@ namespace Fanex.Athena.Api.Base.Attributes
 
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
-            var userSession = _sessionStorage.UserAuthInfo;
-            var licenseeSession = _sessionStorage.LicenseeAuthInfo;
+            var userSession = _sessionService.UserSession;
+            var licenseeSession = _sessionService.LicenseeSession;
             var actionArguments = actionContext.ActionArguments;
 
             if (BindAgent)
@@ -87,12 +86,12 @@ namespace Fanex.Athena.Api.Base.Attributes
 
             if (BindProductCodeList)
             {
-                AutoBindMetaModelService.MapProductCodeList(actionArguments, _sessionStorage.LicenseeAuthInfo.OfferedSubProductList, ProductService);
+                AutoBindMetaModelService.MapProductCodeList(actionArguments, _sessionService.LicenseeSession.OfferedSubProductList, ProductService);
             }
 
             if (BindProductOptions)
             {
-                AutoBindMetaModelService.MapProductOptions(actionArguments, _sessionStorage.LicenseeAuthInfo.OfferedSubProductList, ProductService);
+                AutoBindMetaModelService.MapProductOptions(actionArguments, _sessionService.LicenseeSession.OfferedSubProductList, ProductService);
             }
 
             base.OnActionExecuting(actionContext);

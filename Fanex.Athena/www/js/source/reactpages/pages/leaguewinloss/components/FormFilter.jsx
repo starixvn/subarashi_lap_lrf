@@ -11,7 +11,6 @@ import { DateRange } from '@jsroot/components/date-range';
 import MultipleSelect from '@9softstudio/react-multiselect';
 import moment from 'moment'
 import CheckBox from '@jsroot/components/CheckBox'
-import UserGuide from '@jsroot/components/UserGuide'
 import AutoComplete from '@jsroot/components/auto-complete'
 import { ToastContainer, toast, Flip } from 'react-toastify';
 import { ApiUrl, ReportLevel } from '../common/constants'
@@ -264,7 +263,7 @@ export const FormFilter = props => {
         };
         
         props.toggleLoader(true);
-        DataService.getFile(ApiUrl.REPORT_DATA_URL, exportRequestParam).then((response) => {
+        DataService.getReportFile(ApiUrl.EXPORT_REPORT_DATA_URL, exportRequestParam).then((response) => {
             toast.dismiss();
             const NoContentStatusCode = 204;
             if (response.status === NoContentStatusCode) {
@@ -342,7 +341,7 @@ export const FormFilter = props => {
                 <div className="row">
                     <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
                         <div className="form-group">
-                            <label className="label-text">{LangHelper.getSingleResource("Username")} *</label>
+                            <label className="label-text">{LangHelper.getSingleResource("Username")}</label>
                             <AutoComplete url={ApiUrl.CUSTOMER_SEARCH_URL}
                                 onSelect={(value) => props.setUsername(value)}
                                 onInput={(value) => props.setUsername(value)}

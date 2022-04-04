@@ -8,7 +8,7 @@ export const selectedSubsidiary = createReducer(null, {
     }
 })
 
-export const subsidiarySearch = createReducer(null, {
+export const subsidiarySearch = createReducer(false, {
     [SET_SUBSIDIARY_SEARCH](prevState, action) {
         return action.data;
     }

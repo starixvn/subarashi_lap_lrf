@@ -35,8 +35,8 @@
             if (actionExecutedContext.Response != null)
             {
                 var scope = actionExecutedContext.Request.GetDependencyScope();
-                var sessionStorage = scope.Resolve<ISessionStorage>();
-                var user = sessionStorage.UserAuthInfo;
+                var sessionStorage = scope.Resolve<ISessionService>();
+                var user = sessionStorage.UserSession;
 
                 IEnumerable<string> headerValues;
 

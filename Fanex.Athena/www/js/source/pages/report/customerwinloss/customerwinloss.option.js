@@ -188,9 +188,8 @@
 
         const _me =
         {
-            urlData: 'CustomerWinLossReport/Index',
-            urlExcelData: 'CustomerWinLossReport/Index',
-            urlPromotionPrizeExcelData: 'PromotionPrizeReport/ExportExcel',
+            urlData: 'Api/CustomerWinLoss/Index',
+            urlExcelData: 'Api/CustomerWinLoss/ExportExcel',
             hasCustomerComm: true,
             isAllowBA: true,
             customerCommIndex: 11,

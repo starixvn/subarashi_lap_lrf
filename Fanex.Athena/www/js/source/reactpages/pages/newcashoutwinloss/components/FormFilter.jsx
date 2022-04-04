@@ -14,7 +14,7 @@ import UserGuide from '@jsroot/components/UserGuide';
 import { ToastContainer, toast, Flip } from 'react-toastify';
 import { ApiUrl, ReportLevel } from '../common/constants';
 import Service from '../common/service';
-import DataService from '@jsroot/lib/DataService.js';
+import DataService from '@jsroot/lib/DataService';
 import { SubsidiaryViewType, TreeViewOption } from '../../../constants/report'
 import { TreeViewSelect } from '@9softstudio/react-multiselect'
 
@@ -191,7 +191,8 @@ export const FormFilter = props => {
 
     
     const isValidModel = () => {
-        const result = !!props.selectedCurrency && !!props.selectedBaseCurrency;
+        const result = (!props.subsidiarySearch || !!props.selectedSubsidiary)
+            && !!props.selectedCurrency && !!props.selectedBaseCurrency;
         return result;
     }
 
@@ -209,7 +210,7 @@ export const FormFilter = props => {
         };
 
         props.toggleLoader(true);
-        DataService.getFile(ApiUrl.REPORT_DATA_URL, exportRequestParam).then((response) => {
+        DataService.getReportFile(ApiUrl.EXPORT_REPORT_DATA_URL, exportRequestParam).then((response) => {
             toast.dismiss();
             const NoContentStatusCode = 204;
             if (response.status === NoContentStatusCode) {
@@ -307,7 +308,7 @@ export const FormFilter = props => {
                         <div className="form-group">
                             <div className="button-group">
                                 <button type='button' className='btn btn-submit'
-                                    disabled={props.subsidiarySearch && !props.selectedSubsidiary && !isValidModel()}
+                                    disabled={!isValidModel()}
                                     onClick={onSubmit}>{LangHelper.getSingleResource('Submit')}</button>
                             </div>
                         </div>
@@ -318,7 +319,7 @@ export const FormFilter = props => {
                         <div className="form-group">
                             <div className="button-group">
                                 <button type='button' className='btn btn-submit'
-                                    disabled={props.subsidiarySearch && !props.selectedSubsidiary && !isValidModel()}
+                                    disabled={!isValidModel()}
                                     onClick={onSubmit}>{LangHelper.getSingleResource('Submit')}</button>
                             </div>
                         </div>

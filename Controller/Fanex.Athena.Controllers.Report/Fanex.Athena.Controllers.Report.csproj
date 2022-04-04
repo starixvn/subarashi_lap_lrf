@@ -101,26 +101,11 @@
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.3.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Diagnostics.DiagnosticSource.4.5.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
-    <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.Net.Http.4.3.4\lib\net46\System.Net.Http.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http.Formatting, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Client.5.2.6\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net461\System.Security.Cryptography.Algorithms.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
-    </Reference>
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Threading.Tasks.Extensions.4.3.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
@@ -162,7 +147,6 @@
     <Compile Include="ExtraPayoutReportController.cs" />
     <Compile Include="NewCashOutWinLossReportController.cs" />
     <Compile Include="LeagueWinLossReportController.cs" />
-    <Compile Include="Result\ResultPopup\ThirdPartyResultPopupController.cs" />
     <Compile Include="Result\SportsLotteryResultReportController.cs" />
     <Compile Include="Result\ResultPopup\Happy5LinkedGamesResultPopupController.cs" />
     <Compile Include="GodOfFortuneWinLossReportController.cs" />
@@ -171,10 +155,7 @@
     <Compile Include="LiveReportController.cs" />
     <Compile Include="NoteController.cs" />
     <Compile Include="LicenseeWinLossByTimeZoneReportController.cs" />
-    <Compile Include="PromotionPrizeReportController.cs" />
     <Compile Include="Result\Indo4DResultReportController.cs" />
-    <Compile Include="Result\ResultPopup\SabaClubResultPopupController.cs" />
-    <Compile Include="Result\ResultPopup\VirtualGamesResultPopupController.cs" />
     <Compile Include="Result\VirtualGamesResultReportController.cs" />
     <Compile Include="SubsidiaryPerformanceReportController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -203,7 +184,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Fanex.Athena.Controllers.Report-1.ruleset" />
     <None Include="Fanex.Athena.Controllers.Report.ruleset" />
     <None Include="packages.config" />
   </ItemGroup>

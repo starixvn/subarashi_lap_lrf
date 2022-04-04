@@ -55,14 +55,14 @@
                 var viewModel = viewResult.Model as ThirdPartyWinLossViewModel;
 
                 // Assert
-                Assert.Multiple(() =>
+                Assert.Multiple((TestDelegate)(() =>
                 {
                     Assert.That(viewResult.ViewName, Is.EqualTo("~/Views/Desktop/Report/GoldDeluxeWinLoss/Main.cshtml"));
                     Assert.That(viewModel.Param.ProductId, Is.EqualTo(product.ProductID));
                     Assert.That(viewModel.Param.ProductCode, Is.EqualTo(product.ProductCode));
                     Assert.That(viewModel.Param.ProductName, Is.EqualTo(product.ProductName));
-                    Assert.That(viewModel.CurrencyList, Is.EqualTo(SessionService.UserSession.CurrencyList));
-                });
+                    Assert.That(viewModel.CurrencyList, Is.EqualTo((object)SessionService.UserSession.CurrencyList));
+                }));
             }
         }
 

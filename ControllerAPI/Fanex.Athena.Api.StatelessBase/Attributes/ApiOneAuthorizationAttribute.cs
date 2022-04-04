@@ -83,7 +83,7 @@ namespace Fanex.Athena.Api.StatelessBase.Attributes
             }
         }
 
-        private bool HasPermission(DefaultAuthInfo<OneAuthPermission, OneAuthCurrency> token)
+        private bool HasPermission(DefaultAuthInfo<PortalFunction, AuthCurrency> token)
         {
             var allowedFunctionKeyList = GetAllowedFunctionKeyList();
             if (allowedFunctionKeyList != null && allowedFunctionKeyList.Any())
@@ -107,7 +107,7 @@ namespace Fanex.Athena.Api.StatelessBase.Attributes
             return functionKeys.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim());
         }
 
-        private static void AssignActionArguments(HttpActionContext actionContext, DefaultAuthInfo<OneAuthPermission, OneAuthCurrency> token)
+        private static void AssignActionArguments(HttpActionContext actionContext, DefaultAuthInfo<PortalFunction, AuthCurrency> token)
         {
             actionContext.ActionArguments["userid"] = token.UserSEQ;
             actionContext.ActionArguments["currencyIDList"] = string.Join(",", token.Currency.Select(i => i.CurrencyId).ToArray());

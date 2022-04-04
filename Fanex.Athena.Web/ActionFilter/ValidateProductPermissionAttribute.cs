@@ -30,7 +30,7 @@
             _isCheckDirectly = true;
         }
 
-        public ISessionStorage SessionStorage { get; set; }
+        public ISessionService SessionService { get; set; }
 
         public IAuthorizationService AuthorizationService { get; set; }
 
@@ -43,7 +43,7 @@
 
         private bool ValidateRequest(ActionExecutingContext filterContext)
         {
-            var licenseeSession = SessionStorage.LicenseeAuthInfo;
+            var licenseeSession = SessionService.LicenseeSession;
 
             if (licenseeSession is null)
             {

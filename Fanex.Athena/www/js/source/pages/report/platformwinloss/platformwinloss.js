@@ -8,13 +8,15 @@
     'components/pluginhelper/monthpicker',
     'components/pluginhelper/multiselect',
     'common/popup',
-    'helpers/excel',
+    'helpers/downloader',
     'helpers/datahelper',
+    'components/toast',
     'lib/jqgrid/jquery.jqGrid.en',
     'lib/jqgrid/jquery.jqGrid.min',
     'extensions/jquery.extension',
+    'extensions/ajaxBinaryTransporting',
     'lib/linq'],
-    function ($, QueryString, Site, Report, PlatformWinLossOption, jqGridAdditional, MonthPicker, MultiSelect, Popup, ExcelHelper, DataHelper) {
+    function ($, QueryString, Site, Report, PlatformWinLossOption, jqGridAdditional, MonthPicker, MultiSelect, Popup, Downloader, DataHelper, Toast) {
         'use strict';
 
         const BETLIST_IGNORED_PRODUCTS = ['AB', 'PP', 'CC', 'SG', 'VRG', 'SXG', 'SBC', 'SAG', 'PGS', 'JK', 'GDG', 'HB', 'WM', 'BGG', 'VGA', 'CG', 'AP', 'APM'];
@@ -146,7 +148,7 @@
             gridControl.level = 0;
             const data = getSubmitData();
             const productOption = getProductOptions(data);
-            getData(data, Site.resolveClientUrl(PlatformWinLossOption.urlData), function (response) {
+            getData(data, Site.buildReportProxyUrl(PlatformWinLossOption.urlData), function (response) {
                 const submitData = {
                     FromDay: data.FromDay,
                     ToDay: data.ToDay,
@@ -176,13 +178,27 @@
 
         function exportToExcel(level, sortBy, sortOrder) {
             const data = _filterData[level] ? Site.clone(_filterData[level]) : getSubmitData();
-            data.IsExportExcel = true;
             data.Level = level;
             if (level === 1 && sortBy) {
                 data.SortBy = sortBy;
                 data.SortOrder = sortOrder;
             }
-            ExcelHelper.exportExcel(data, Site.resolveClientUrl(PlatformWinLossOption.urlExcelData));
+            const option = {
+                type: 'POST',
+                data: data,
+                dataType: 'binary',
+                responseType: 'blob',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                cache: false,
+                url: Site.buildReportProxyUrl(PlatformWinLossOption.urlExcelData),
+                success: function (response) {
+                    Downloader.download(response, level === 0 ? 'PlatformWinLossSummary.xls' : 'PlatformWinLossMember.xls');
+                },
+                beforeSend: function () {
+                    Toast.show();
+                }
+            };
+            $.ajax(option);
             return false;
         }
 
@@ -319,7 +335,7 @@
             drilldownData.PlatformType = data.PlatformType;
             drilldownData.ProductOptions = productOptions;
 
-            getData(drilldownData, Site.resolveClientUrl(PlatformWinLossOption.urlData), function (response) {
+            getData(drilldownData, Site.buildReportProxyUrl(PlatformWinLossOption.urlData), function (response) {
                 _cacheData[level] = response;
                 _filterData[level] = drilldownData;
                 _me.setReportTitle(drilldownData);

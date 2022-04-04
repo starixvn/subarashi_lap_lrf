@@ -1,11 +1,13 @@
 ﻿namespace Fanex.Athena.Controllers.UnitTests
 {
+    using System.Threading.Tasks;
     using System.Web.Mvc;
 
     using Controllers.Base.UnitTests;
 
     using DataAccess.Core.Users.Interfaces;
-    using Fanex.Athena.Service.Core.Users.Interfaces;
+    using Fanex.Athena.Service.Core.OAuth;
+	using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.ViewModel;
 
@@ -18,12 +20,15 @@
         private ILicenseeDataAccess _licenseeDataAccess;
         private ISubsidiaryService _subsidiaryService;
         private ILicenseeSettingService _licenseeSettingService;
+        private IInternalAuthService _authService;
+
         [SetUp]
         public void SetUp()
         {
             _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
             _subsidiaryService = Substitute.For<ISubsidiaryService>();
         }
+
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
@@ -32,14 +37,15 @@
             SetUpDefaultFakeData();
 
             _licenseeDataAccess = Substitute.For<ILicenseeDataAccess>();
+            _authService = Substitute.For<IInternalAuthService>();
             LangService.When(x => x.ChangeLanguage(Arg.Any<string>())).DoNotCallBase();
-            SessionService.When(x => x.UpdateLiceseeSession(Arg.Any<int>())).DoNotCallBase();
         }
 
         [TearDown]
         public void TearDown()
         {
             _licenseeDataAccess.ClearReceivedCalls();
+            _authService.ClearReceivedCalls();
             SessionService.ClearReceivedCalls();
         }
 
@@ -94,10 +100,11 @@
             using (var controller = CreateController())
             {
                 // Action
-                var result = controller.ChangeLicensee(licenseeId);
+                _ = controller.ChangeLicensee(licenseeId);
 
                 // Assert
-                SessionService.DidNotReceive().UpdateLiceseeSession(Arg.Any<int>());
+                _authService.DidNotReceive().RenewOAuthInfoAsync(licenseeId ?? 0, DefaultUserSession.AccessToken, DefaultUserSession.RefreshToken);
+                _authService.DidNotReceive().ReSignIn(Arg.Any<IOAuthInfo>());
             }
         }
 
@@ -107,10 +114,11 @@
             using (var controller = CreateController())
             {
                 // Action
-                var result = controller.ChangeLicensee(DefaultLicenseeSession.LicenseeId);
+                _ = controller.ChangeLicensee(DefaultLicenseeSession.LicenseeId);
 
                 // Assert
-                SessionService.DidNotReceive().UpdateLiceseeSession(Arg.Any<int>());
+                _authService.DidNotReceive().RenewOAuthInfoAsync(DefaultLicenseeSession.LicenseeId, DefaultUserSession.AccessToken, DefaultUserSession.RefreshToken);
+                _authService.DidNotReceive().ReSignIn(Arg.Any<IOAuthInfo>());
             }
         }
 
@@ -124,15 +132,16 @@
                 _licenseeDataAccess.IsLicenseeBelongToUser(Arg.Any<int>(), Arg.Any<int>()).Returns(false);
 
                 // Action
-                var result = controller.ChangeLicensee(LicenseeId);
+                _ = controller.ChangeLicensee(LicenseeId);
 
                 // Assert
-                SessionService.DidNotReceive().UpdateLiceseeSession(Arg.Any<int>());
+                _authService.DidNotReceive().RenewOAuthInfoAsync(DefaultLicenseeSession.LicenseeId, DefaultUserSession.AccessToken, DefaultUserSession.RefreshToken);
+                _authService.DidNotReceive().ReSignIn(Arg.Any<IOAuthInfo>());
             }
         }
 
         [Test]
-        public void ChangeLicensee_InvalidNewLicenseeId_UpdateLicenseeSession()
+        public async Task ChangeLicensee_ValidNewLicenseeId_UpdateLicenseeSession()
         {
             using (var controller = CreateController())
             {
@@ -140,18 +149,23 @@
                 const int LicenseeId = 10;
                 _licenseeDataAccess.IsLicenseeBelongToUser(Arg.Any<int>(), Arg.Any<int>()).Returns(true);
 
+                var oauthInfo = Substitute.For<IOAuthInfo>();
+                oauthInfo.IsError.Returns(false);
+                _authService.RenewOAuthInfoAsync(LicenseeId, DefaultUserSession.AccessToken, DefaultUserSession.RefreshToken).Returns(oauthInfo);
+
                 // Action
-                var result = controller.ChangeLicensee(LicenseeId);
+                _ = await controller.ChangeLicensee(LicenseeId);
 
                 // Assert
-                SessionService.Received().UpdateLiceseeSession(LicenseeId);
+                _authService.Received().RenewOAuthInfoAsync(LicenseeId, DefaultUserSession.AccessToken, DefaultUserSession.RefreshToken);
+                _authService.Received().ReSignIn(oauthInfo);
             }
         }
 
         [TestCase("")]
         [TestCase("Invalid")]
         [TestCase("en-US")]
-        public void ChangeLanguage_InvalidLanguageCode_ReturnZero(string languagesite)
+        public async Task ChangeLanguage_InvalidLanguageCode_ReturnZero(string languagesite)
         {
             using (var controller = CreateController())
             {
@@ -160,7 +174,7 @@
                 LangService.ChangeLanguage(Arg.Any<string>()).Returns(false);
 
                 // Action
-                var result = controller.ChangeLanguage(languagesite);
+                var result = await controller.ChangeLanguage(languagesite);
 
                 // Assert
                 Assert.That(result, Is.EqualTo("0"));
@@ -171,7 +185,7 @@
         [TestCase("en-US ")]
         [TestCase(" en-US ")]
         [TestCase("en-US")]
-        public void ChangeLanguage_ValidLanguageCode_ReturnOne(string languagesite)
+        public async Task ChangeLanguage_ValidLanguageCode_ReturnOne(string languagesite)
         {
             using (var controller = CreateController())
             {
@@ -180,7 +194,7 @@
                 LangService.ChangeLanguage(Arg.Any<string>()).Returns(true);
 
                 // Action
-                var result = controller.ChangeLanguage(languagesite);
+                var result = await controller.ChangeLanguage(languagesite);
 
                 // Assert
                 Assert.That(result, Is.EqualTo("1"));
@@ -191,7 +205,8 @@
         {
             return new HeaderController(
                 _licenseeDataAccess,
-                _subsidiaryService)
+				_authService,
+				_subsidiaryService)
             {
                 LangService = LangService,
                 SessionServiceInstance = SessionService,

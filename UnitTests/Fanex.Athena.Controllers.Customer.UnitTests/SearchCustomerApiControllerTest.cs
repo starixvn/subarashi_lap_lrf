@@ -31,16 +31,16 @@
                 var resultData = result.Data as object;
 
                 // Assert
-                Assert.Multiple(() =>
+                Assert.Multiple((TestDelegate)(() =>
                 {
                     searchCustomerDataAccess.Received(1).SearchCustomers(
-                        SessionService.UserSession.UserId,
+                        (int)SessionService.UserSession.UserId,
                         Query.Trim(),
                         Arg.Any<string>(),
                         false);
                     Assert.That(resultData.GetValue("query"), Is.EqualTo(Query.Trim()));
                     Assert.That(resultData.GetValue("suggestions"), Is.EqualTo(expectedCustomerNames));
-                });
+                }));
             }
         }
 

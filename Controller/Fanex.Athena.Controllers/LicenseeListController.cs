@@ -3,7 +3,8 @@
     using DataAccess.Core.Users.Interfaces;
 
     using Fanex.Athena.Model.Auth.Enum;
-
+    using Fanex.Athena.Service.Core.Users.Interfaces;
+    using System.Threading.Tasks;
     using System.Web.Mvc;
 
     using Web.ActionFilter;
@@ -12,16 +13,19 @@
     public class LicenseeListController : CultureBaseController
     {
         private readonly ILicenseeDataAccess _licenseeDataAccess;
+        private readonly IInternalAuthService _authService;
 
         public LicenseeListController(
-            ILicenseeDataAccess licenseeDataAccess)
+            ILicenseeDataAccess licenseeDataAccess,
+            IInternalAuthService authService)
         {
             _licenseeDataAccess = licenseeDataAccess;
+            _authService = authService;
         }
 
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult Index(int? licenseeId)
+        public async Task<ActionResult> Index(int? licenseeId)
         {
             var userSession = SessionServiceInstance.UserSession;
             if (userSession == null || userSession.UserId <= 0)
@@ -31,7 +35,7 @@
 
             if (licenseeId.HasValue && licenseeId.Value > 0)
             {
-                return RedirectToHome(licenseeId.Value);
+                return await RedirectToHome(licenseeId.Value);
             }
             else
             {
@@ -44,7 +48,7 @@
 
                 if (licenseeList.Count == 1)
                 {
-                    return RedirectToHome(licenseeList[0].Id);
+                    return await RedirectToHome(licenseeList[0].Id);
                 }
 
                 ViewBag.CurrentUsername = userSession.UserName;
@@ -54,9 +58,13 @@
             return View("~/Views/Desktop/LicenseeList/Index.cshtml");
         }
 
-        private ActionResult RedirectToHome(int licenseeId)
+        private async Task<ActionResult> RedirectToHome(int licenseeId)
         {
-            SessionServiceInstance.UpdateLiceseeSession(licenseeId);
+            var oauthInfo = await _authService.RenewOAuthInfoAsync(licenseeId, SessionServiceInstance.UserSession.AccessToken, SessionServiceInstance.UserSession.RefreshToken);
+            if (!oauthInfo.IsError)
+            {
+                _authService.ReSignIn(oauthInfo);
+            }
 
             return RedirectToAction(nameof(Index), "Home");
         }

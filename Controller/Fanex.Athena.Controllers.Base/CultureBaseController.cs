@@ -21,9 +21,7 @@
         public IProductService ProductServiceInstance { get; set; }
 
         public bool IsFakeLicensee(string licenseeName)
-        {
-            return LicenseeSettingServiceInstance.IsFakeLicensee(licenseeName);
-        }
+            => LicenseeSettingServiceInstance.IsFakeLicensee(licenseeName);
 
         protected override void Initialize(System.Web.Routing.RequestContext requestContext)
         {

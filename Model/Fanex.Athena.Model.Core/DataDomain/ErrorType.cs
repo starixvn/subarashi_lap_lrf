@@ -41,6 +41,8 @@ namespace Fanex.Athena.Model.Core.DataDomain
         /// <summary>
         /// Session override.
         /// </summary>
-        SessionOverride
+        SessionOverride = 5,
+
+        AccessTokenInvalid = 6
     }
 }

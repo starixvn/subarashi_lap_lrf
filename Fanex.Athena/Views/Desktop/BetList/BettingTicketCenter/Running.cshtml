@@ -6,6 +6,9 @@
 @using Fanex.Athena.Model.Core.DataDomain
 @model Fanex.Athena.Model.BetList.ViewModel.BettingTicketCenterViewModel
 @{
+    var appSettings = DependencyResolver.Current.GetService<IAppSettings>();
+    var betTicketEventBuilderUrl = appSettings.BetTicketEventBuilderUrl;
+
     var productOptions = Model.ProductOptionList;
     var selectedProductCode = string.Join(",", productOptions.Where(x => x.Status).Select(x => x.Code).ToArray());
 
@@ -23,6 +26,7 @@
 }
 @section pagejs {
     <script src="@Url.ContentLinkByEnv("/www/js/build/reactpages/bettingticketscenter/running.chunk.js")"></script>
+    <script async src="@betTicketEventBuilderUrl" id="event-builder-script"></script>
 }
 
 @section globaljscode{

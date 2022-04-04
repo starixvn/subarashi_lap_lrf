@@ -1,6 +1,11 @@
-﻿@using System.Web.Optimization
-@{    
+﻿@using Fanex.Athena.Service.Core.Users.Interfaces;
+
+@{
     Layout = "~/Views/Desktop/Shared/_Layout.cshtml";
+}
+@{ 
+    var appSettings = DependencyResolver.Current.GetService<IAppSettings>();
+    var betTicketEventBuilderUrl = appSettings.BetTicketEventBuilderUrl;
 }
 @section css
 {
@@ -11,7 +16,8 @@
 {
     <script src="@Url.ContentLinkByEnv("/www/js/build/pages/lib/jqgrid.chunk.js")"></script>
     <script src="@Url.ContentLinkByEnv("/www/js/build/pages/betlist/betlistsimple.chunk.js")"></script>
-    
+    <script async src="@betTicketEventBuilderUrl" id="event-builder-script"></script>
+
     @RenderSection("pagejs", required: false)
 }
 

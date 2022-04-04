@@ -32,11 +32,11 @@
                 var viewModel = viewResult.Model as WinLossByProductViewModel;
 
                 // Assert
-                Assert.Multiple(() =>
+                Assert.Multiple((TestDelegate)(() =>
                 {
                     Assert.That(viewResult.ViewName, Is.EqualTo("~/Views/Desktop/Report/WinLossByProduct/Main.cshtml"));
-                    Assert.That(viewModel.CurrencyList, Is.EqualTo(SessionService.UserSession.CurrencyList));
-                });
+                    Assert.That(viewModel.CurrencyList, Is.EqualTo((object)SessionService.UserSession.CurrencyList));
+                }));
             }
         }
 

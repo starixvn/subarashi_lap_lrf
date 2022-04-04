@@ -13,15 +13,12 @@
         [HttpPost]
         [ApiFunctionAuthorization(PermissionKeys.PlayerProblemManagement, PermissionKeys.PlayerVIPManagement)]
         [ValidationApiRequest]
-        [ApiAutoBindMetaModel(BindAgent = true)]
+        [ApiAutoBindMetaModel(BindAgent = true, BindShowingBetFromIP = true)]
         public async Task<dynamic> AbnormalBets(AbnormalBetListMetaModel metaModel)
         {
             const string betlistApi = "/PlayerSegmentationBetList/AbnormalBets";
 
             BindAbnormalBetsMetaModel(metaModel);
-
-            metaModel.IsShowIpvn = SessionService.UserSession.IsShowIpvn && SessionService.UserSession.IsShowIp;
-            metaModel.IsShowIp = SessionService.UserSession.IsShowIp;
 
             var result = await _betListApiClient.PostAsync(
                     betlistApi,

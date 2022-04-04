@@ -160,30 +160,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiBetListBaseController.cs" />
-    <Compile Include="AGCasinoBetListController.cs" />
     <Compile Include="BettingTicketCenterAdvancedSearchController.cs" />
     <Compile Include="BettingTicketCenterController.cs" />
-    <Compile Include="CreativeGamingBetListController.cs" />
     <Compile Include="LiveCasinoController.cs" />
-    <Compile Include="BonusBetListController.cs" />
     <Compile Include="DailyStatementBetListController.cs" />
     <Compile Include="ExchangeWinLossBetListController.cs" />
-    <Compile Include="HabaneroBetListController.cs" />
-    <Compile Include="GlobalGamingBetListController.cs" />
-    <Compile Include="JackpotWonBetListController.cs" />
     <Compile Include="GodOfFortuneWinLossBetListController.cs" />
     <Compile Include="SabaVirtualSportsWinLossBetListController.cs" />
-    <Compile Include="MixParlayBetListController.cs" />
     <Compile Include="PlatformWinLossBetListController.cs" />
-    <Compile Include="RNGCasinoBetListController.cs" />
     <Compile Include="RunningMatchChoiceBetListController.cs" />
-    <Compile Include="JokerBetListController.cs" />
-    <Compile Include="GDGBetListController.cs" />
-    <Compile Include="WMBetListController.cs" />
-    <Compile Include="SexyGamingBetListController.cs" />
-    <Compile Include="SAGamingBetListController.cs" />
-    <Compile Include="SingleMatchParlayBetListController.cs" />
-    <Compile Include="VoidbridgeBetListController.cs" />
     <Compile Include="WinlossByBetTypeBetListController.cs" />
     <Compile Include="WinlossByLeagueBetListController.cs" />
     <Compile Include="RunningBettypesOfMatchBetListController.cs" />
