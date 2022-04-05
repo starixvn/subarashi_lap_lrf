@@ -3,6 +3,7 @@
     using Fanex.Athena.Model.Auth.Enum;
 
     using ONEbook.UM.Filters;
+    using System;
     using System.Text;
     using System.Web.Mvc;
     using System.Web.UI;
@@ -56,6 +57,11 @@
                     Session.Clear();
                     return RedirectToAction("LocationRestriction", "Utility");
                 }
+            }
+
+            if(SessionServiceInstance.UserSession.AccessTokenLifeTime <= DateTime.Now)
+            {
+                return RedirectToAction("LocationRestriction", "Utility");
             }
 
             return View(defaultView);

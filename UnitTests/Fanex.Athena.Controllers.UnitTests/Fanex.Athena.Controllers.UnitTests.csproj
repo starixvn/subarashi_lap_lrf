@@ -109,6 +109,7 @@
     <Compile Include="HeaderControllerTest.cs" />
     <Compile Include="HomeControllerTest.cs" />
     <Compile Include="LicenseeListControllerTest.cs" />
+    <Compile Include="PortalAuthorizationControllerTest.cs" />
     <Compile Include="UserGuideControllerTest.cs" />
     <Compile Include="MenuControllerTest.cs" />
     <Compile Include="AuthorizationControllerTest.RecheckIn.cs" />
@@ -118,7 +119,6 @@
     <Compile Include="AccountPermissionControllerTest.AssignCurrency.cs" />
     <Compile Include="AccountPermissionControllerTest.EditPermission.cs" />
     <Compile Include="AccountControllerTest.EditAccount.cs" />
-    <Compile Include="OneAuthorizationControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UtilityControllerTest.cs" />
   </ItemGroup>
