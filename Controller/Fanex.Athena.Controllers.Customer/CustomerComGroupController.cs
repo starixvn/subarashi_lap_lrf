@@ -11,11 +11,13 @@
     using Fanex.Athena.Excel.Customer;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Model.Core.Enum;
     using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Athena.Model.Customer.ViewModel.CommissionGroupList;
     using Fanex.Athena.Service.Customer.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
     using Fanex.Athena.Web.ResultExtension;
     using Helpers;
@@ -33,14 +35,17 @@
 
         private readonly IGroupComService _groupComService;
         private readonly IProductService _productService;
+        private readonly IFunctionUMService _functionUMService;
         private readonly string[] supportedProducts;
 
         public CustomerComGroupController(
             IGroupComService groupComService,
-            IProductService productService)
+            IProductService productService,
+            IFunctionUMService functionUMService)
         {
             _groupComService = groupComService;
             _productService = productService;
+            _functionUMService = functionUMService;
 
             supportedProducts = _productService.GetAllowedProducts("CommissionGroups");
         }
@@ -86,7 +91,7 @@
 
             var userSession = SessionServiceInstance.UserSession;
             IResultInfo result = new ResultInfo();
-            ValidateGroupCommMetaModel(metaModel, result);
+            ValidateGroupCommRequest(metaModel, result);
 
             if (result.IsSuccessful)
             {
@@ -150,7 +155,7 @@
             IResultInfo result = new ResultInfo();
             metaModel.LicenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
 
-            ValidateGroupCommMetaModel(metaModel, result);
+            ValidateGroupCommRequest(metaModel, result);
 
             if (result.IsSuccessful)
             {
@@ -167,6 +172,7 @@
 
         [HttpPost]
         [CustomValidateAntiForgery]
+        [FunctionUMFilter(FunctionUMType.Commission)]
         public async Task<JsonResult> Delete(int groupId, bool isRemovePlayerComm, bool isResetDefault)
         {
             var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
@@ -312,8 +318,16 @@
             return result;
         }
 
-        private void ValidateGroupCommMetaModel(GroupCommMetaModel metaModel, IResultInfo result)
+        private void ValidateGroupCommRequest(GroupCommMetaModel metaModel, IResultInfo result)
         {
+            (bool isUM, string timeFrom, string timeTo) = _functionUMService.GetUnderMaintenanceInfo(FunctionUMType.Commission);
+            if (isUM)
+            {
+                result.Code = FunctionUMHelper.UMCode;
+                result.Message = FunctionUMHelper.BuildUMMessage(timeFrom, timeTo);
+                return;
+            }
+
             if (!ModelState.IsValid)
             {
                 result.Code = InvalidParams;

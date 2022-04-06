@@ -1,0 +1,8 @@
+﻿[
+  {
+    "Type": 1, //commission
+    "IsUM": false,
+    "TimeFrom": "4:00",
+    "TimeTo": "5:00"
+  }
+]

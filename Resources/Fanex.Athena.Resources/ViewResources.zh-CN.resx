@@ -2859,4 +2859,8 @@
   <data name="NetworkLatency" xml:space="preserve">
     <value>由于网络延迟，无法使用信息，请稍等几分钟后再次尝试。</value>
   </data>
+  <data name="FunctionUMMessage" xml:space="preserve">
+    <value>系统正在维护中，此功能从 {0} 到 {1} （香港时间 GMT +8）将无法更新。很抱歉造成您的困扰。</value>
+    <comment>ignorejs</comment>
+  </data>
 </root>

@@ -18,6 +18,8 @@
     {
         private IGroupComService _groupComService;
         private IProductService _productService;
+        private IFunctionUMService _functionUMService;
+
 
         [SetUp]
         public override void FixtureSetUp()
@@ -26,6 +28,7 @@
             SetUpDefaultFakeData();
             _groupComService = Substitute.For<IGroupComService>();
             _productService = Substitute.For<IProductService>();
+            _functionUMService = Substitute.For<IFunctionUMService>();
         }
 
         [TearDown]
@@ -99,7 +102,8 @@
         {
             var controller = Substitute.ForPartsOf<CustomerComGroupController>(
                _groupComService,
-               _productService);
+               _productService,
+               _functionUMService);
 
             controller.LangService = LangService;
             controller.SessionServiceInstance = SessionService;

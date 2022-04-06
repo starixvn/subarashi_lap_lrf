@@ -139,6 +139,7 @@
     <Compile Include="DTO\Common\SportGame.cs" />
     <Compile Include="DTO\Common\SabaSport.cs" />
     <Compile Include="DTO\Configuration\FakeLicenseeSetting.cs" />
+    <Compile Include="DTO\Configuration\FunctionUMSetting.cs" />
     <Compile Include="DTO\Configuration\ReportSetting.cs" />
     <Compile Include="DTO\Common\Product.cs" />
     <Compile Include="DTO\Common\ProductAccess.cs" />
@@ -156,6 +157,7 @@
     <Compile Include="DTO\Users\Subsidiary.cs" />
     <Compile Include="DTO\Users\User.cs" />
     <Compile Include="DTO\Users\UserRole.cs" />
+    <Compile Include="Enum\FunctionUMType.cs" />
     <Compile Include="Helper\BettypeHelper.cs" />
     <Compile Include="Helper\MappingHelper.cs" />
     <Compile Include="Helper\MathHelper.cs" />

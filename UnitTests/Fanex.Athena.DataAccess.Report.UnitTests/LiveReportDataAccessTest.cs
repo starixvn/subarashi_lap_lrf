@@ -312,7 +312,7 @@
             DataAccess.GetObjectDb(Arg.Is(GetLiveReportWinlossByMatch)).Returns(ObjectDb);
             var metaModel = new LiveReportMatchListMetalModel
             {
-                ProductCodeList = "NG",
+                ProductCodeList = "BA,SB,NG",
                 AgentListXml = "3",
                 FromDate = new DateTime(2017, 1, 1),
                 ToDate = new DateTime(2017, 2, 2),
@@ -333,7 +333,8 @@
                 ObjectDb.Received(1).SetParameterValue("movebetsday", _balance.MoveBetsDay);
                 ObjectDb.Received(1).SetParameterValue("sportid", metaModel.SportId);
                 ObjectDb.Received(1).SetParameterValue("BaseCurrency", metaModel.BaseCurrency);
-                ObjectDb.Received(1).SetParameterValue("showNG", true);
+                ObjectDb.Received(1).SetParameterValue("ShowBA", true);
+                ObjectDb.Received(1).SetParameterValue("ProductList", "SB,NG");
             });
         }
 
