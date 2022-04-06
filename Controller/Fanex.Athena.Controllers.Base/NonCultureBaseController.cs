@@ -1,12 +1,12 @@
 ﻿namespace Fanex.Athena.Controllers
 {
     using Fanex.Athena.Service.Core.Users.Interfaces;
-    using ONEbook.UM.Filters;
+    using Fanex.Athena.Web.ActionFilter;
     using System.Web.Mvc;
     using System.Web.SessionState;
 
     [SessionState(SessionStateBehavior.ReadOnly)]
-    [CheckUMFilter]
+    [UMFilter]
     public class NonCultureBaseController : Controller
     {
         public ISessionService SessionServiceInstance { get; set; }

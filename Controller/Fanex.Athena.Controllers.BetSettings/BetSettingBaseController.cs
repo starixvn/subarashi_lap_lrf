@@ -11,13 +11,12 @@
     using Model.BetSettings.ViewModel;
     using Model.Core.DTO.Common;
     using Model.Customer.DTO;
-    using ONEbook.UM.Filters;
     using Resources;
     using Service.BetSettings.Interfaces;
     using Web.ActionFilter;
 
     [SessionState(SessionStateBehavior.ReadOnly)]
-    [CheckUMFilter]
+    [UMFilter]
     [FunctionAuthorization(PermissionKeys.CustomerInfoCustomerList)]
     public class BetSettingBaseController : CultureBaseController
     {

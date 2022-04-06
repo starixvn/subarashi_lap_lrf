@@ -1,23 +1,15 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="AccountController.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Controllers.Account
+﻿namespace Fanex.Athena.Controllers.Account
 {
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Auth.Enum;
 
     using Model.Core.DTO.Common;
 
-    using ONEbook.UM.Filters;
-
     using System.Web.Mvc;
 
     using Web.ActionFilter;
 
-    [CheckUMFilter]
+    [UMFilter]
     [FunctionAuthorization(PermissionKeys.AccountManageAccount)]
     [AuthorizeRestriction(AppMode.Self)]
     public class AccountBaseController : CultureBaseController

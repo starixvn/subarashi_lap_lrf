@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="UserGuideController.cs" company="">
-// Report controller
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Controllers
+﻿namespace Fanex.Athena.Controllers
 {
     using DataAccess.Core.Configuration.Interfaces;
 
@@ -15,11 +9,7 @@ namespace Fanex.Athena.Controllers
 
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
-
-    using ONEbook.UM.Filters;
-
     using System.Collections.Generic;
-    using System.Globalization;
     using System.IO;
     using System.Linq;
     using System.Text.RegularExpressions;
@@ -29,7 +19,7 @@ namespace Fanex.Athena.Controllers
     using Web.ActionFilter;
 
     [SessionState(SessionStateBehavior.ReadOnly)]
-    [CheckUMFilter]
+    [UMFilter]
     public class UserGuideController : CultureBaseController
     {
         private const string CustomerListResourceName = "CustomerList";

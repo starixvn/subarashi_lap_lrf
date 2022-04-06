@@ -27,12 +27,10 @@ namespace Fanex.Athena.Api.Report
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     using Model.Report.ResultModel;
 
     using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
 
     [ApiFunctionAuthorization(PermissionKeys.ReportActiveCustomerSummary)]
     public class ActiveCustomerSummaryReportController : ApiReportBaseController

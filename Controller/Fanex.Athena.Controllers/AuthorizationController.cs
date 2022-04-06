@@ -5,8 +5,6 @@
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
-
-    using ONEbook.UM.Filters;
     using ONEbook.UM.Services;
 
     using Resources;
@@ -47,7 +45,7 @@
             _authService = authService;
         }
 
-        [CheckUMFilter]
+        [UMFilter]
         [AllowAnonymous]
         [HttpGet]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None, Duration = 0, VaryByParam = "*")]
@@ -67,7 +65,7 @@
             return View("~/Views/Desktop/Authorization/SignIn.cshtml");
         }
 
-        [CheckUMFilter]
+        [UMFilter]
         [AllowAnonymous]
         [HandleAntiForgeryError]
         [HttpPost]

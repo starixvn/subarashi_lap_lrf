@@ -1,11 +1,8 @@
 ﻿namespace Fanex.Athena.Controllers.Report
 {
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
-
+    using Fanex.Athena.Web.ActionFilter;
     using Model.Core.DTO.Common;
     using Model.Core.MetaModel.Product;
-
-    using ONEbook.UM.Filters;
 
     using System.Collections.Generic;
     using System.Linq;
@@ -13,7 +10,7 @@
     using System.Web.SessionState;
 
     [SessionState(SessionStateBehavior.ReadOnly)]
-    [CheckUMFilter]
+    [UMFilter]
     public class ReportBaseController : CultureBaseController
     {
         public const int PageSizeExcel = int.MaxValue - 1000;

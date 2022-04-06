@@ -86,6 +86,9 @@
     <Reference Include="NPOI.OpenXmlFormats, Version=2.4.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
       <HintPath>..\packages\NPOI.2.4.1\lib\net45\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
+    <Reference Include="ONEbook.UM, Version=3.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ONEbook.UM.3.1.1\lib\net461\ONEbook.UM.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -154,9 +157,9 @@
     </Compile>
     <Compile Include="ActionFilter\AuthorizeRestrictionAttribute.cs" />
     <Compile Include="ActionFilter\AutoBindMetaModelAttribute.cs">
-      <SonarQubeExclude>true</SonarQubeExclude>
-    </Compile>
+	</Compile>
     <Compile Include="ActionFilter\FunctionUMFilterAttribute.cs" />
+	<Compile Include="ActionFilter\UMFilterAttribute.cs" />
     <Compile Include="ActionFilter\ValidateProductPermissionAttribute.cs">
       <SonarQubeExclude>true</SonarQubeExclude>
     </Compile>

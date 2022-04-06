@@ -10,14 +10,12 @@ namespace Fanex.Athena.Controllers.Report
 
     using Fanex.Athena.Model.Report.ViewModel.Note;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-
-    using ONEbook.UM.Filters;
-
+    using Fanex.Athena.Web.ActionFilter;
     using System.Web.Mvc;
     using System.Web.SessionState;
 
     [SessionState(SessionStateBehavior.ReadOnly)]
-    [CheckUMFilter]
+    [UMFilter]
     public class NoteController : CultureBaseController
     {
         private readonly IBalanceUpDataAccess _balanceUpDataAccess;

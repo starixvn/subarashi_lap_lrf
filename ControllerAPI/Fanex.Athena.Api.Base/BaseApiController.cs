@@ -1,5 +1,6 @@
 ﻿namespace Fanex.Athena.Api.Base
 {
+    using Fanex.Athena.Api.Base.Attributes;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Core.MetaModel;
     using Fanex.Athena.Service.Core.Common.Interfaces;
@@ -16,6 +17,7 @@
     using System.Web.Http.Results;
 
     [XFrameOptionApi]
+    [ApiUMFilter]
     public class BaseApiController : ApiController
     {
         private readonly ILanguageService _langService;

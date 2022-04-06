@@ -6,6 +6,7 @@
     using System.Net;
     using System.Net.Http;
     using System.Web.Http;
+    using System.Web.Http.Controllers;
 
     [AttributeUsage(AttributeTargets.All)]
     public sealed class CustomApiAuthorizeAttribute : AuthorizeAttribute
@@ -13,8 +14,8 @@
         private readonly ISessionService _sessionService;
 
         public CustomApiAuthorizeAttribute()
+            : this(null)
         {
-            _sessionService = new SessionService();
         }
 
         public CustomApiAuthorizeAttribute(ISessionService sessionStorage)
@@ -22,7 +23,7 @@
             _sessionService = sessionStorage ?? new SessionService();
         }
 
-        protected override bool IsAuthorized(System.Web.Http.Controllers.HttpActionContext actionContext)
+        protected override bool IsAuthorized(HttpActionContext actionContext)
         {
             if (!base.IsAuthorized(actionContext))
             {

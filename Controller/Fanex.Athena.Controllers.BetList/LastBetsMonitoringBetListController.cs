@@ -2,8 +2,6 @@
 {
     #region Using
 
-    using DataAccess.Core.Common.Interfaces;
-
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
@@ -13,8 +11,6 @@
 
     using Model.BetList.MetaModel;
     using Model.BetList.ViewModel;
-
-    using ONEbook.UM.Filters;
 
     using Resources;
 
@@ -27,7 +23,7 @@
     #endregion Using
 
     [SessionState(SessionStateBehavior.ReadOnly)]
-    [CheckUMFilter]
+    [UMFilter]
     [FunctionAuthorization(PermissionKeys.ReportLastBetsMonitoring)]
     public class LastBetsMonitoringBetListController : CultureBaseController
     {

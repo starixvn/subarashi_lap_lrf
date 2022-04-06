@@ -1,15 +1,13 @@
 ﻿namespace Fanex.Athena.Controllers
 {
     using Fanex.Athena.Model.Auth.Enum;
-
-    using ONEbook.UM.Filters;
     using System;
     using System.Text;
     using System.Web.Mvc;
     using System.Web.UI;
     using Web.ActionFilter;
 
-    [CheckUMFilter]
+    [UMFilter]
     public class HomeController : CultureBaseController
     {
         [AuthorizeRestriction(AppMode.Self)]
@@ -30,6 +28,12 @@
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None, Duration = 0, VaryByParam = "*")]
         public ContentResult Checking()
         {
+            var fromReferer = Request.Headers["Referer"];
+            if (string.IsNullOrEmpty(fromReferer) || !string.Equals(Request.Url.Host, new Uri(fromReferer).Host, StringComparison.InvariantCultureIgnoreCase))
+            {
+                return Content($"Request is invalid from {fromReferer} to {Request.Url.Host}", "application/javascript", Encoding.UTF8);
+            }
+
             var content = new StringBuilder();
 
             BuildTokenCheckingScript(content);
@@ -38,12 +42,7 @@
                 BuildSessionCheckingScript(content);
             }
 
-            return new ContentResult
-            {
-                Content = content.ToString(),
-                ContentEncoding = Encoding.UTF8,
-                ContentType = "application/javascript"
-            };
+            return Content(content.ToString(), "application/javascript", Encoding.UTF8);
         }
 
         private ActionResult ReAuthorize(string defaultView)

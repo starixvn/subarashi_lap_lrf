@@ -24,15 +24,16 @@ using Fanex.Athena.Service.StatelessCore;
 using Fanex.Athena.Service.StatelessCore.Extensions;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
 using Fanex.Logging;
+using ONEbook.UM;
 using ONEbook.UM.Services;
-using ONEbook.UM.Services.Impl;
 
 namespace Fanex.Athena
 {
     public static class DIConfig
     {
         public static void Register()
-        {     
+        {
+            
             var builder = new ContainerBuilder();
             var config = GlobalConfiguration.Configuration;
             var assemblies = GetAssemblies();
@@ -77,11 +78,6 @@ namespace Fanex.Athena
 
         private static void RegisterHttpClient(ContainerBuilder builder)
         {
-            var reportAPIheader = new Dictionary<string, string>
-            { { "AUTH_TOKEN", ConfigurationManager.AppSettings["ReportAPITokenValue"] } };
-
-            builder.WithHttpClient("ReportAPIClient", ConfigurationManager.AppSettings["ReportAPIHostUrl"], reportAPIheader);
-
             var betListAPIheader = new Dictionary<string, string>
             { { "BETLIST_TOKEN_KEY", ConfigurationManager.AppSettings["BetListApiTokenValue"] } };
 
@@ -96,10 +92,10 @@ namespace Fanex.Athena
 
         private static void RegisterThirdpartyServices(ContainerBuilder builder)
         {
-            builder.RegisterType<MaintenanceService>().As<IMaintenanceService>().SingleInstance();
-
-            builder.RegisterInstance(Logger.Log).As<Logging.ILogger>();
-            builder.RegisterType<RestSharp.RestClient>().As<RestSharp.IRestClient>().InstancePerDependency();
+            builder.RegisterInstance(new MaintenanceService(UMClientManager.RestClient, UMClientManager.CacheService,
+                UMClientManager.UMClientConfigs, UMClientManager.HttpContext))
+                .As<IMaintenanceService>().SingleInstance();
+            builder.RegisterInstance(Logger.Log).As<ILogger>();
         }
 
         private static Assembly[] GetAssemblies()

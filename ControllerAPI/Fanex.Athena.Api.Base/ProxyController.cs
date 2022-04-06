@@ -2,13 +2,12 @@
 {
     using Fanex.Athena.Api.Base.Attributes;
     using Fanex.Athena.Service.Core.Proxy;
-    using ONEbook.UM.Filters;
     using System;
     using System.Net.Http;
     using System.Threading.Tasks;
     using System.Web.Http;
 
-    [CheckUMFilter]
+    [ApiUMFilter]
     public class ProxyController : ApiController
     {
         private readonly IProxyService _proxyService;

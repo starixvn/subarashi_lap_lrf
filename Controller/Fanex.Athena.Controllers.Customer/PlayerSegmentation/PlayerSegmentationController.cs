@@ -17,10 +17,9 @@
     using Fanex.Athena.Service.Customer.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
-    using ONEbook.UM.Filters;
 
     [SessionState(SessionStateBehavior.ReadOnly)]
-    [CheckUMFilter]
+    [UMFilter]
     [FunctionAuthorization(PermissionKeys.PlayerSegmentation)]
     public partial class PlayerSegmentationController : CultureBaseController
     {

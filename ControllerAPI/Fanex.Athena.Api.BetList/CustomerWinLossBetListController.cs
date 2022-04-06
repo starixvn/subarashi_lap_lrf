@@ -1,10 +1,4 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="CustomerWinLossBetListController.cs" company="">
-// Copyright (c) . All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-
-namespace Fanex.Athena.Api.BetList
+﻿namespace Fanex.Athena.Api.BetList
 {
     using System.Threading.Tasks;
     using System.Web.Http;

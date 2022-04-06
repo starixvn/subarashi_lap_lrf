@@ -21,11 +21,10 @@
     using Fanex.Athena.Web.ActionFilter;
     using Fanex.Athena.Web.ResultExtension;
     using Helpers;
-    using ONEbook.UM.Filters;
     using Resources;
 
     [SessionState(SessionStateBehavior.ReadOnly)]
-    [CheckUMFilter]
+    [UMFilter]
     [FunctionAuthorization(PermissionKeys.CustomerInfoCommissionGroupList)]
     public class CustomerComGroupController : CultureBaseController
     {

@@ -81,12 +81,8 @@
     <Reference Include="NPOI.OpenXmlFormats, Version=2.4.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
       <HintPath>..\..\packages\NPOI.2.4.1\lib\net45\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
-    <Reference Include="ONEbook.UM, Version=2.0.2.9, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\ONEbook.UM.2.0.2.9\lib\net40\ONEbook.UM.dll</HintPath>
-    </Reference>
-    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\RestSharp.105.2.3\lib\net46\RestSharp.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="ONEbook.UM, Version=3.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ONEbook.UM.3.1.1\lib\net461\ONEbook.UM.dll</HintPath>
     </Reference>
     <Reference Include="SPSRemoting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\SPSRemoting.1.0.0\lib\net40\SPSRemoting.dll</HintPath>
@@ -166,6 +162,7 @@
     <Compile Include="Attributes\ApiAutoBindMetaModelAttribute.cs">
       <SonarQubeExclude>true</SonarQubeExclude>
     </Compile>
+    <Compile Include="Attributes\ApiUMFilterAttribute.cs" />
     <Compile Include="Attributes\ApiValidateAntiForgeryAttribute.cs" />
     <Compile Include="Attributes\CustomApiAuthorizeAttribute.cs">
       <SonarQubeExclude>true</SonarQubeExclude>
@@ -210,7 +207,7 @@
       <Name>Fanex.Athena.Service.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Fanex.Athena.Api.StatelessBase\Fanex.Athena.Api.StatelessBase.csproj">
-      <Project>{0054161C-59B0-4CB6-AC5F-4E0F0D0294EC}</Project>
+      <Project>{0054161c-59b0-4cb6-ac5f-4e0f0d0294ec}</Project>
       <Name>Fanex.Athena.Api.StatelessBase</Name>
     </ProjectReference>
   </ItemGroup>
