@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 3/17/2022 10:31:12 AM
+// Generated at: 4/12/2022 9:17:21 AM
 window._language_zh_TW = {
   AA: "客客",
   AbnormalBet: "非正規註單",
@@ -102,6 +102,7 @@ window._language_zh_TW = {
   AccountManagement: "帳戶管理",
   Action: "動作",
   ActiveCustomerSummary: "活躍會員人數摘要",
+  Activity: "活動",
   AD: "客和",
   Adjustment: "調整",
   AffiliateTransfer: "合作夥伴轉賬",
@@ -184,9 +185,12 @@ window._language_zh_TW = {
   Cancel: "取消",
   CashOutAmount: "即時兌現金額",
   CashOutAmt: "兌現金額",
+  CashOutCancelled: "取消即時兌現",
   CashOutCommission: "即時兌現佣金",
   CashOutDetails: "即時兌現詳情",
+  CashOutHistory: "即時兌現歷史記錄",
   CashOutNotOfferCurrency: "即時兌現不支援此貨幣",
+  CashOutRecovered: "恢復即時兌現",
   CashOutShare: "兌現分紅",
   CashOutStake: "即時兌現本金",
   CashOutTickets: "即時兌現注單",
@@ -266,6 +270,7 @@ window._language_zh_TW = {
   Date: "日期",
   DateRange: "日期範圍",
   DateRangeNote: "數據可從{0:d MMM yyyy}查看",
+  DateTime: "日期/時間",
   DD: "和和",
   Dec: "十二月",
   December: "十二月",
@@ -485,6 +490,7 @@ window._language_zh_TW = {
   MultiCustomers: "多個會員",
   Name: "姓名",
   NetTurnover: "淨交易額",
+  NetworkLatency: "由於網絡延遲，無法使用信息，請稍等幾分鐘後再次嘗試。",
   NewAsia: "新亞洲版",
   NewGroup: "新組別",
   Next: "下個",
