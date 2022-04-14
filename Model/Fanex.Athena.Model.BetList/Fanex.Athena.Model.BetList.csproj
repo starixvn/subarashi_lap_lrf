@@ -83,8 +83,10 @@
       <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\CashoutHistoryDetail.cs" />
     <Compile Include="DTO\CashOutTicket.cs" />
     <Compile Include="DTO\CashOutTicketText.cs" />
     <Compile Include="DTO\ColossusBetDetail.cs" />
@@ -99,6 +101,7 @@
     <Compile Include="MetaModel\BaseExchangeBetListMetaModel.cs" />
     <Compile Include="MetaModel\BetListExcelMetaModel.cs" />
     <Compile Include="MetaModel\BetListMetaModel.cs" />
+    <Compile Include="MetaModel\NewCashOutBetListDetailMetaModel.cs" />
     <Compile Include="MetaModel\CashOutBetListDetailMetaModel.cs" />
     <Compile Include="MetaModel\ColossusBetDetailMetaModel.cs" />
     <Compile Include="MetaModel\ExchangeBetListDetailMetaModel.cs" />
@@ -117,6 +120,7 @@
     <Compile Include="ViewModel\BetListBaseViewModel.cs" />
     <Compile Include="ViewModel\BettingTicketCenterViewModel.cs" />
     <Compile Include="ViewModel\CancelledBetsBetListViewModel.cs" />
+    <Compile Include="ViewModel\NewCashOutBetListDetailViewModel.cs" />
     <Compile Include="ViewModel\CashOutBetListDetailViewModel.cs" />
     <Compile Include="ViewModel\ColossusBetDetailViewModel.cs" />
     <Compile Include="ViewModel\ExchangeBetListViewModel.cs" />

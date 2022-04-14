@@ -132,6 +132,17 @@ class BetList {
         };
     }
 
+    getNewCashOutHistoryPopupSetting(rootUrl, transId, custId, winlostDate, currency, baseCurrency) {
+        var url = rootUrl + 'CashOutBetList/NewDetail';
+        url = QueryString.setParam(url, 'transId', transId);
+        url = QueryString.setParam(url, 'custId', custId);
+        url = QueryString.setParam(url, 'date', winlostDate);
+        url = QueryString.setParam(url, 'currency', currency);
+        url = QueryString.setParam(url, 'BaseCurrency', baseCurrency);
+
+        return url;
+    }
+
     getBonusDetailUrl(rootUrl, refCode, transId, baseCurrency) {
         let url = rootUrl + 'BonusBetList/Detail';
         url = QueryString.setParam(url, 'RefCode', refCode);

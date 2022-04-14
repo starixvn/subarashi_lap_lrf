@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = string.Format("LAP - {0}", ViewResources.BetList);
+    Layout = "~/Views/Desktop/Shared/_Layout.cshtml";
+}
+@section css{
+    <link href="@Url.ContentLinkByEnv("/www/css/build/pages/betlist/cashouthistory.css")" rel="stylesheet" type="text/css" />
+}
+@model Fanex.Athena.Model.BetList.ViewModel.NewCashOutBetListDetailViewModel
+
+<div class="page-results betlist-container">
+    <div class="table-content">
+        <div class="content-title">
+            @ViewResources.RefNo: @Html.Raw(Model.TransId) - <span class="base-currency">
+                @DesktopRazorHelper.ViewBaseCurrency(Model.Currency, Model.BaseCurrency)
+            </span>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="col-transtime">@ViewResources.DateTime</th>
+                    <th class="col-transtime">@ViewResources.CashOutAmount</th>
+                    <th class="">@ViewResources.Activity</th>
+                </tr>
+            </thead>
+            @if (Model == null || !Model.DetailHistory.Any())
+            {
+                <tbody>
+                    <tr>
+                        <td colspan="3" class="text-center">@ViewResources.NetworkLatency</td>
+                    </tr>
+                </tbody>
+            }
+            else
+            {
+                foreach (var item in Model.DetailHistory)
+                {
+                    <tr>
+                        <td class="right-align">
+                            @Html.Raw(item.ChangeTimeText)
+                        </td>
+                        <td class="right-align">
+                            @Html.Raw(item.CashoutAmountText)
+                        </td>
+                        <td>
+                            <div class="text-left">@Html.Raw(item.ActionName)</div>
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+</div>

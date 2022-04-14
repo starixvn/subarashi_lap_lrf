@@ -168,6 +168,14 @@ class BetListLayout extends Component {
             this._openPopup(url, title);
         }
 
+        window.ViewNewCashOutHistory = (transId, custId, winlostDate, currency) => {
+            const { rootUrl, baseCurrency } = this.props;
+
+            const url = BetList.getNewCashOutHistoryPopupSetting(rootUrl, transId, custId, winlostDate, currency, baseCurrency);
+            const title = this._getResource('CashOutHistory');
+            this._openPopup(url, title);
+        }
+
         window.ShowBonusDetails = (refCode, transId) => {
             const { rootUrl, baseCurrency } = this.props;
 
@@ -469,6 +477,7 @@ class BetListLayout extends Component {
         window.showAdvantPlayBetDetails = undefined;
         window.showAdvantPlayMiniBetDetails = undefined;
         window.SGJackpotWonBetList = undefined;
+        window.ViewNewCashOutHistory = undefined;
         window.showDetail = undefined;
     }
 
