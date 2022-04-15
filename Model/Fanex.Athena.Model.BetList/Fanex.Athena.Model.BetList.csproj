@@ -85,9 +85,6 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DTO\CashOutTicket.cs" />
-    <Compile Include="DTO\CashOutTicketText.cs" />
-    <Compile Include="DTO\ColossusBetDetail.cs" />
     <Compile Include="DTO\CustomerCancelBetItem.cs" />
     <Compile Include="DTO\DailyStatement.cs" />
     <Compile Include="DTO\ExchangeBetList.cs" />
@@ -110,13 +107,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\BetListBaseViewModel.cs" />
     <Compile Include="ViewModel\BettingTicketCenterViewModel.cs" />
-    <Compile Include="ViewModel\CancelledBetsBetListViewModel.cs" />
-    <Compile Include="ViewModel\ColossusBetDetailViewModel.cs" />
     <Compile Include="ViewModel\ExchangeBetListViewModel.cs" />
-    <Compile Include="ViewModel\ExtraPayoutBetListViewModel.cs" />
     <Compile Include="ViewModel\LastBetsMonitoringViewModel.cs" />
     <Compile Include="ViewModel\SportProductViewModel.cs" />
-    <Compile Include="ViewModel\SystemParlayDetailViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

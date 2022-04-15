@@ -1,13 +1,5 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="FormatKey.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-namespace Fanex.Athena.Model.Core.DataDomain
+﻿namespace Fanex.Athena.Model.Core.DataDomain
 {
-    /// <summary>
-    /// Format Key constant.
-    /// </summary>
     public static class FormatKey
     {
         public const string ShortDateFormat = "M/d/yyyy";
