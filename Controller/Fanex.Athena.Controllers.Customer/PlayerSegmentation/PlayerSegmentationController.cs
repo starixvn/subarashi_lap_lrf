@@ -37,14 +37,18 @@
         private readonly IAuthorizationService _authService;
         private readonly ISubsidiaryService _subsidiaryService;
         private readonly IPlayerSegmentationService _playerService;
+        private readonly ICustomerClassService _customerClassService;
 
         public PlayerSegmentationController(IAuthorizationService authService,
             ISubsidiaryService subsidiaryService,
-            IPlayerSegmentationService playerService)
+            IPlayerSegmentationService playerService,
+            ICustomerClassService customerClassService
+            )
         {
             _authService = authService;
             _subsidiaryService = subsidiaryService;
             _playerService = playerService;
+            _customerClassService = customerClassService;
         }
 
         [FunctionAuthorization(PermissionKeys.PlayerProblemManagement, PermissionKeys.PlayerVIPManagement)]
@@ -76,7 +80,7 @@
             var viewType = !subsidiaryList.Any() ? SubsidiaryViewType.NotManagement : (SubsidiaryViewType)userSession.SubsidiaryViewType;
             var reasonList = await GetReasonList(lang);
             var problemPlayerCustomerClass = reasonList.OrderBy(_ => _.CustomerClass).Select(_ => _.CustomerClass.ToString()).Distinct();
-            var vipMngCustomerClass = await _playerService.GetCustomerClass();
+            var vipMngCustomerClass = await _customerClassService.GetAllCustomerClass();
 
             var model = new PlayerSegmentationViewModel
             {

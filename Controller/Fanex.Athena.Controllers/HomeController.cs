@@ -26,7 +26,7 @@
 
         [HttpGet]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None, Duration = 0, VaryByParam = "*")]
-        public ContentResult Checking()
+        public ContentResult Token()
         {
             var fromReferer = Request.Headers["Referer"];
             if (string.IsNullOrEmpty(fromReferer) || !string.Equals(Request.Url.Host, new Uri(fromReferer).Host, StringComparison.InvariantCultureIgnoreCase))
@@ -34,15 +34,11 @@
                 return Content($"Request is invalid from {fromReferer} to {Request.Url.Host}", "application/javascript", Encoding.UTF8);
             }
 
-            var content = new StringBuilder();
+            const string tokenCheckingContent = "function getTopSameOriginWindow(e){try{e.name}catch(n){return getTopSameOriginWindow(e.frames[0])}return e}"
+             + "var topSameOriginWindow=getTopSameOriginWindow(top);topSameOriginWindow.lrf={access_token:'<0>'};";
+            var content = tokenCheckingContent.Replace("<0>", SessionServiceInstance.UserSession.AccessToken);
 
-            BuildTokenCheckingScript(content);
-            if (SessionServiceInstance.UserSession.ApplicationMode == AppMode.Parasitic)
-            {
-                BuildSessionCheckingScript(content);
-            }
-
-            return Content(content.ToString(), "application/javascript", Encoding.UTF8);
+            return Content(content, "application/javascript", Encoding.UTF8);
         }
 
         private ActionResult ReAuthorize(string defaultView)
@@ -76,25 +72,6 @@
             ViewBag.HasRecheckIn = AppSettingInstance.LocalTest ? "0" : "1";
             ViewBag.IsEnabledMoveBetNotification = AppSettingInstance.IsEnabledMoveBetNotification
                 && !IsFakeLicensee(SessionServiceInstance.LicenseeSession?.LicenseeName);
-        }
-
-        private void BuildTokenCheckingScript(StringBuilder content)
-        {
-            const string tokenCheckingContent = "function getTopSameOriginWindow(e){try{e.name}catch(n){return getTopSameOriginWindow(e.frames[0])}return e}"
-             + "var topSameOriginWindow=getTopSameOriginWindow(top);topSameOriginWindow.lrf={access_token:'<0>'};";
-            content.Append(tokenCheckingContent.Replace("<0>", SessionServiceInstance.UserSession.AccessToken));
-        }
-
-        private void BuildSessionCheckingScript(StringBuilder content)
-        {
-            const string sessionCheckingContent = "function getJSON(e,t){var n=new XMLHttpRequest;n.open('GET',e,!0),n.onreadystatechange=function()" +
-               "{if(4==n.readyState&&200==n.status&&'function'==typeof t){var e=JSON.parse(n.responseText);t(e)}},n.send(null)}window.onload=function(){" +
-               "var n='<0>',e='<1>',t='<2>';setInterval(function(){getJSON(n,function(n){n.IsUM===!0?document.location.href=t:n.IsAuthenticated===!1?document.location.href=e:" +
-               "n.AccessToken&&window.topSameOriginWindow?.lrf&&(window.topSameOriginWindow.lrf.access_token=n.AccessToken)})},3e4)}";
-
-            content.Append(sessionCheckingContent.Replace("<0>", Url.Content($"~/Utility/SessionIsAlive?identityName={User.Identity.Name}"))
-                .Replace("<1>", Url.Content("~/Authorization/InternalSignOut"))
-                .Replace("<2>", Url.Content("~/Utility/UnderMaintenance")));
         }
     }
 }

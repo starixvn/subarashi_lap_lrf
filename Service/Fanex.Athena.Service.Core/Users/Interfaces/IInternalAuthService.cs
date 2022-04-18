@@ -1,6 +1,5 @@
 ﻿using Fanex.Athena.Model.Auth.MetaModel;
 using Fanex.Athena.Service.Core.OAuth;
-using System;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -16,10 +15,8 @@ namespace Fanex.Athena.Service.Core.Users.Interfaces
 
         void CreateSession(IOAuthInfo oauthInfo);
 
-        Task<IOAuthInfo> RequestOAuthInfoAsync(LoginMetalModel loginInfo, string clientIP, string sessionId);
+        Task<IOAuthInfo> RequestOAuthInfoAsync(LoginMetalModel loginInfo);
 
-        Task<IOAuthInfo> RenewOAuthInfoAsync(int licenseeId, string accessToken, string refreshToken, string langCode = null);
-
-        Task<(string accessToken, DateTime? lifeTime)> RequestAccessTokenAsync(string refreshToken);
+        Task<IOAuthInfo> RenewOAuthInfoAsync(int licenseeId, string accessToken, string langCode = null);
     }
 }

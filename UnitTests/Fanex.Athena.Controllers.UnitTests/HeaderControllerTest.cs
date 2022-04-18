@@ -103,7 +103,7 @@
                 _ = controller.ChangeLicensee(licenseeId);
 
                 // Assert
-                _authService.DidNotReceive().RenewOAuthInfoAsync(licenseeId ?? 0, DefaultUserSession.AccessToken, DefaultUserSession.RefreshToken);
+                _authService.DidNotReceive().RenewOAuthInfoAsync(licenseeId ?? 0, DefaultUserSession.AccessToken);
                 _authService.DidNotReceive().ReSignIn(Arg.Any<IOAuthInfo>());
             }
         }
@@ -117,7 +117,7 @@
                 _ = controller.ChangeLicensee(DefaultLicenseeSession.LicenseeId);
 
                 // Assert
-                _authService.DidNotReceive().RenewOAuthInfoAsync(DefaultLicenseeSession.LicenseeId, DefaultUserSession.AccessToken, DefaultUserSession.RefreshToken);
+                _authService.DidNotReceive().RenewOAuthInfoAsync(DefaultLicenseeSession.LicenseeId, DefaultUserSession.AccessToken);
                 _authService.DidNotReceive().ReSignIn(Arg.Any<IOAuthInfo>());
             }
         }
@@ -135,7 +135,7 @@
                 _ = controller.ChangeLicensee(LicenseeId);
 
                 // Assert
-                _authService.DidNotReceive().RenewOAuthInfoAsync(DefaultLicenseeSession.LicenseeId, DefaultUserSession.AccessToken, DefaultUserSession.RefreshToken);
+                _authService.DidNotReceive().RenewOAuthInfoAsync(DefaultLicenseeSession.LicenseeId, DefaultUserSession.AccessToken);
                 _authService.DidNotReceive().ReSignIn(Arg.Any<IOAuthInfo>());
             }
         }
@@ -151,13 +151,13 @@
 
                 var oauthInfo = Substitute.For<IOAuthInfo>();
                 oauthInfo.IsError.Returns(false);
-                _authService.RenewOAuthInfoAsync(LicenseeId, DefaultUserSession.AccessToken, DefaultUserSession.RefreshToken).Returns(oauthInfo);
+                _authService.RenewOAuthInfoAsync(LicenseeId, DefaultUserSession.AccessToken).Returns(oauthInfo);
 
                 // Action
                 _ = await controller.ChangeLicensee(LicenseeId);
 
                 // Assert
-                _authService.Received().RenewOAuthInfoAsync(LicenseeId, DefaultUserSession.AccessToken, DefaultUserSession.RefreshToken);
+                _authService.Received().RenewOAuthInfoAsync(LicenseeId, DefaultUserSession.AccessToken);
                 _authService.Received().ReSignIn(oauthInfo);
             }
         }

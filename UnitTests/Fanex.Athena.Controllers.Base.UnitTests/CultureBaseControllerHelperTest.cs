@@ -33,8 +33,7 @@
             DefaultBaseCurrency = "EUR",
             CurrencyAgentList = new Dictionary<int, int[]>(),
             AccessToken = "token",
-            AccessTokenLifeTime = DateTime.Now.AddHours(1),
-            RefreshToken = "refresh_token"
+            AccessTokenLifeTime = DateTime.Now.AddHours(1)
         };
 
         protected static readonly LicenseeAuthInfo DefaultLicenseeSession = new LicenseeAuthInfo

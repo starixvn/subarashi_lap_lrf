@@ -16,7 +16,7 @@
     public class LastBetsMonitoringBetListControllerTest : CultureBaseControllerHelperTest
     {
         private ISportService _sportService;
-        private IPlayerSegmentationService _playerSegmentationService;
+        private ICustomerClassService _customerClass;
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
@@ -24,7 +24,7 @@
             base.FixtureSetUp();
 
             _sportService = Substitute.For<ISportService>();
-            _playerSegmentationService = Substitute.For<IPlayerSegmentationService>();
+            _customerClass = Substitute.For<ICustomerClassService>();
 
             SetUpDefaultFakeData();
         }
@@ -36,7 +36,7 @@
             {
                 // Arrange
                 _sportService.GetAllSports().Returns(new Dictionary<int, string>());
-                _playerSegmentationService.GetCustomerClass().Returns(new List<string>());
+                _customerClass.GetAllCustomerClass().Returns(new List<string>());
 
                 // Action
                 var result = await controller.Index() as ViewResult;
@@ -57,7 +57,7 @@
                 var sports = new List<SportProductItem>() { new SportProductItem { ID = 1, ParentId = 0, Name = "Test Sport" } };
 
                 _sportService.GetSportAndProductAndSabaSport(DefaultLicenseeSession.LicenseeId, DefaultUserSession.Language, string.Empty).Returns(sports);
-                _playerSegmentationService.GetCustomerClass().Returns(new List<string> { "1" });
+                _customerClass.GetAllCustomerClass().Returns(new List<string> { "1" });
                 // Action
                 var result = await controller.Index() as ViewResult;
                 var model = (LastBetsMonitoringViewModel)result.Model;
@@ -76,7 +76,7 @@
 
         private LastBetsMonitoringBetListController CreateController()
         {
-            return new LastBetsMonitoringBetListController(_sportService, _playerSegmentationService)
+            return new LastBetsMonitoringBetListController(_sportService, _customerClass)
             {
                 LangService = LangService,
                 SessionServiceInstance = SessionService,

@@ -1,7 +1,6 @@
 ﻿namespace Fanex.Athena.Controllers.UnitTests
 {
     using System;
-    using System.Threading.Tasks;
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Security;
@@ -10,7 +9,6 @@
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Resources;
     using Fanex.Athena.Service.Core.OAuth;
-    using Fanex.Athena.Service.Core.Users.Interfaces;
     using Model.Core.DataDomain;
 
     using NSubstitute;
@@ -23,7 +21,6 @@
     public class UtilityControllerTest : CultureBaseControllerHelperTest
     {
         private IMaintenanceService _maintenanceService;
-        private IOAuthService _oauthService;
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
@@ -39,39 +36,22 @@
         {
             SetUpDefaultFakeData();
             _maintenanceService = Substitute.For<IMaintenanceService>();
-            _oauthService = Substitute.For<IOAuthService>();
         }
 
         [TearDown]
         public void TearDown()
         {
             _maintenanceService = null;
-            _oauthService = null;
         }
 
         [Test]
-        public async Task SessionIsAlive_IsUM_ReturnFailResult()
-        {
-            using (var controller = CreateController())
-            {
-                // Action     
-                _maintenanceService.IsUnderMaintenance().Returns(true);
-                var result = await controller.SessionIsAlive(DefaultUserSession.IdentityName) as JsonResult;
-                var data = result.Data as dynamic;
-
-                // Assert
-                Assert.IsTrue(data.IsUM);
-            }
-        }
-
-        [Test]
-        public async Task SessionIsAlive_IdentityNameIsInvalid_ReturnFailResult()
+        public void SessionIsAlive_IdentityNameIsInvalid_ReturnFailResult()
         {
             using (var controller = CreateController())
             {
                 // Action     
                 _maintenanceService.IsUnderMaintenance().Returns(false);
-                var result = await controller.SessionIsAlive("user1") as JsonResult;
+                var result = controller.SessionIsAlive("user1") as JsonResult;
                 var data = result.Data as dynamic;
 
                 // Assert
@@ -80,75 +60,16 @@
         }
 
         [Test]
-        public async Task SessionIsAlive_Valid_ReturnSuccessfulResult()
+        public void SessionIsAlive_Valid_ReturnSuccessfulResult()
         {
             using (var controller = CreateController())
             {
                 // Action
-                var result = await controller.SessionIsAlive(DefaultUserSession.IdentityName) as JsonResult;
+                var result = controller.SessionIsAlive(DefaultUserSession.IdentityName) as JsonResult;
                 var data = result.Data as dynamic;
 
                 // Assert
                 Assert.That(data.IsAuthenticated, Is.EqualTo(true));
-            }
-        }
-
-        [Test]
-        public async Task SessionIsAlive_AccessTokenExpired_ReNewFault()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var userSession = new UserAuthInfo
-                {
-                    IdentityName = DefaultUserSession.IdentityName,
-                    OnUserId = DefaultUserSession.OnUserId,
-                    RefreshToken = DefaultUserSession.RefreshToken,
-                    AccessTokenLifeTime = DateTime.Now.AddMinutes(-5)
-                };
-
-                StubUserSessionData(userSession);
-
-                _maintenanceService.IsUnderMaintenance().Returns(false);
-                _oauthService.RequestAccessTokenAsync(userSession.RefreshToken).Returns((null, null));
-
-                // Action
-                var result = await controller.SessionIsAlive(userSession.IdentityName) as JsonResult;
-                var data = result.Data as dynamic;
-
-                // Assert
-                Assert.That(data.IsAuthenticated, Is.EqualTo(false));
-                SessionService.DidNotReceive().AssignUserSession(userSession);
-            }
-        }
-
-        [Test]
-        public async Task SessionIsAlive_AccessTokenExpired_ReNewSuccess()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                const string NewAccessToken = "new_access_token";
-                var userSession = new UserAuthInfo
-                {
-                    IdentityName = DefaultUserSession.IdentityName,
-                    OnUserId = DefaultUserSession.OnUserId,
-                    RefreshToken = DefaultUserSession.RefreshToken,
-                    AccessTokenLifeTime = DateTime.Now.AddMinutes(-5)
-                };
-
-                StubUserSessionData(userSession);
-                _maintenanceService.IsUnderMaintenance().Returns(false);
-                _oauthService.RequestAccessTokenAsync(userSession.RefreshToken).Returns((NewAccessToken, DateTime.Now));
-
-                // Action
-                var result = await controller.SessionIsAlive(userSession.IdentityName) as JsonResult;
-                var data = result.Data as dynamic;
-
-                // Assert
-                Assert.That(data.IsAuthenticated, Is.EqualTo(true));
-                Assert.That(data.AccessToken, Is.EqualTo(NewAccessToken));
-                SessionService.Received().AssignUserSession(userSession);
             }
         }
 
@@ -390,7 +311,7 @@
 
         private UtilityController CreateController()
         {
-            return new UtilityController(AppSettings, LangService, _maintenanceService, _oauthService, SessionService)
+            return new UtilityController(AppSettings, LangService, _maintenanceService, SessionService)
             {
                 ControllerContext = ControllerContext
             };

@@ -91,7 +91,19 @@
             return result;
         }
 
-        public async Task<IEnumerable<CustomerClassCategoryModel>> GetCustomerClassCategories()
+
+        public async Task<IEnumerable<string>> GetAllCustomerClass()
+        {
+            var result = new List<string> { "0" };
+            var listCategory = await GetCustomerClassCategories();
+            result.AddRange(listCategory
+                .OrderBy(_ => _.CustomerClass)
+                .Select(_ => _.CustomerClass.ToString())
+                );
+            return result.Distinct();
+        }
+
+        private async Task<IEnumerable<CustomerClassCategoryModel>> GetCustomerClassCategories()
         {
             try
             {

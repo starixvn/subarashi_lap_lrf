@@ -21,7 +21,6 @@ namespace Fanex.Athena.Service.Customer.UnitTests
         private IPlayerSegmentationDataAccess _playerDataAccess;
         private ISessionService _sessionService;
         private ISubsidiaryService _subsidiaryService;
-        private ICustomerClassService _customerClassService;
 
         private PlayerSegmentationService _targetService;
 
@@ -31,8 +30,7 @@ namespace Fanex.Athena.Service.Customer.UnitTests
             _playerDataAccess = Substitute.For<IPlayerSegmentationDataAccess>();
             _sessionService = Substitute.For<ISessionService>();
             _subsidiaryService = Substitute.For<ISubsidiaryService>();
-            _customerClassService = Substitute.For<ICustomerClassService>();
-            _targetService = new PlayerSegmentationService(_sessionService, _playerDataAccess, _subsidiaryService, _customerClassService);
+            _targetService = new PlayerSegmentationService(_sessionService, _playerDataAccess, _subsidiaryService);
         }
 
         [TearDown]

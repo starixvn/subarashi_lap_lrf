@@ -16,17 +16,17 @@
     {
         private readonly IReportSettingService _reportSettingService;
         private readonly IAuthorizationService _authService;
-        private readonly IPlayerSegmentationService _playerService;
+        private readonly ICustomerClassService _customerClassService;
 
         public CustomerWinLossReportController(
             IReportSettingService reportSettingService,
             IAuthorizationService authService,
-            IPlayerSegmentationService playerService
+            ICustomerClassService customerClassService
             )
         {
             _reportSettingService = reportSettingService;
             _authService = authService;
-            _playerService = playerService;
+            _customerClassService = customerClassService;
         }
 
         [HttpGet]
@@ -74,7 +74,7 @@
                 MaxDate = reportSetting.MaxDate,
                 HasExtraPayoutPermission = _authService.HasPermissions(SessionServiceInstance.UserSession, PermissionKeys.ReportExtraPayout),
                 OddsGroups = LicenseeSettingServiceInstance.GetOddGroups(licenseeSession.LicenseeName),
-                CustomerClassList = await _playerService.GetCustomerClass(),
+                CustomerClassList = await _customerClassService.GetAllCustomerClass(),
             };
 
             return View("~/Views/Desktop/Report/CustomerWinLoss/Main.cshtml", model);

@@ -10,6 +10,7 @@
 new Dictionary<string, string>() :
 userSession.CurrencyList.ToDictionary(x => x.Key.ToString(), x => x.Value);
     var isSelfMode = userSession != null && userSession.ApplicationMode == AppMode.Self;
+    var identityName = userSession.IdentityName;
     var langCode = System.Globalization.CultureInfo.CurrentUICulture.IetfLanguageTag;
     var rootUrl = Url.Content("~");
 }
@@ -49,7 +50,10 @@ userSession.CurrencyList.ToDictionary(x => x.Key.ToString(), x => x.Value);
 
     @RenderSection("pagejs", required: false)
 
-    <script async src="@Url.Action("checking", "home")"></script>
+    @if (!isSelfMode)
+    {
+        Html.RenderPartial("~/Views/Desktop/Shared/_SessionScript.cshtml", identityName);
+    }
 
     @if (appSettings.Environment.Equals("PRO", StringComparison.OrdinalIgnoreCase))
     {

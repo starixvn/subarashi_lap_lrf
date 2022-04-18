@@ -7,7 +7,6 @@ using Fanex.Athena.Model.Auth.MetaModel;
 using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Service.Core.OAuth;
 using Fanex.Athena.Service.Core.Users.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -56,7 +55,7 @@ namespace Fanex.Athena.Service.Core.Users
             if (userSession != null)
             {
                 _authenticationDataAccess.Logout(userSession.OnUserId);
-                await _oauthService.RevokeTokensAsync(userSession.AccessToken, userSession.RefreshToken);
+                await _oauthService.RevokeAccessTokenAsync(userSession.AccessToken);
             }
         }
 
@@ -67,28 +66,24 @@ namespace Fanex.Athena.Service.Core.Users
             _sessionService.AssignSessions(userSession, licenseeSession);
         }
 
-        public Task<IOAuthInfo> RequestOAuthInfoAsync(LoginMetalModel loginInfo, string clientIP, string sessionId)
+        public Task<IOAuthInfo> RequestOAuthInfoAsync(LoginMetalModel loginInfo)
             => _oauthService.RequestOAuthInfoAsync("lrf_password", new Dictionary<string, string>
                 {
                     { "username", loginInfo.UserName },
                     { "password", loginInfo.PassWord },
                     { "login_token", loginInfo.LogInToken },
-                    { "session_id", sessionId },
-                    { "client_ip", clientIP }
+                    { "session_id", HttpContext.Current.Session.SessionID },
+                    { "client_ip", HttpContext.Current.Request.UserHostAddress }
                 });
 
-        public Task<IOAuthInfo> RenewOAuthInfoAsync(int licenseeId, string accessToken, string refreshToken, string langCode = null)
+        public Task<IOAuthInfo> RenewOAuthInfoAsync(int licenseeId, string accessToken, string langCode = null)
             => _oauthService.RequestOAuthInfoAsync("lrf_password", new Dictionary<string, string>
                 {
                     { "is_renew_token", "1" },
                     { "licensee_id", licenseeId.ToString() },
                     { "access_token", accessToken },
-                    { "refresh_token", refreshToken },
                     { "lang_code", langCode }
                 });
-
-        public Task<(string accessToken, DateTime? lifeTime)> RequestAccessTokenAsync(string refreshToken)
-            => _oauthService.RequestAccessTokenAsync(refreshToken);
 
         private static UserAuthInfo GenerateUserInfo(IOAuthInfo oauthInfo)
            => new UserAuthInfo
@@ -108,7 +103,6 @@ namespace Fanex.Athena.Service.Core.Users
                IsShowIp = oauthInfo.IsShowIP,
                AccessToken = oauthInfo.AccessToken,
                AccessTokenLifeTime = oauthInfo.AccessTokenLifeTime,
-               RefreshToken = oauthInfo.RefreshToken,
                CurrencyList = oauthInfo.CurrencyList,
                CurrencyAgentList = oauthInfo.CurrencyAgentList
            };

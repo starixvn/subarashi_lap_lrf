@@ -54,10 +54,6 @@ define(['common/site'], function (Site) {
                     } else {
                         logout();
                     }
-                } else if (result.AccessToken) {
-                    window.lrf && (window.lrf.access_token = result.AccessToken);
-                } else {
-                    //no thing
                 }
             }
         });

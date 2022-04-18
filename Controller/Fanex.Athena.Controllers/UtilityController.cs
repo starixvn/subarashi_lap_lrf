@@ -12,7 +12,6 @@
 
     using Service.Core.Common.Interfaces;
     using System;
-    using System.Threading.Tasks;
     using System.Web.Mvc;
     using System.Web.Security;
     using System.Web.UI;
@@ -23,49 +22,27 @@
         private readonly IAppSettings _appSettings;
         private readonly ILanguageService _languageService;
         private readonly IMaintenanceService _maintenanceService;
-        private readonly IOAuthService _oauthService;
         private readonly ISessionService _sessionService;
 
         public UtilityController(
             IAppSettings appSettings, 
             ILanguageService languageService,
             IMaintenanceService maintenanceService,
-            IOAuthService oauthService,
             ISessionService sessionService
             )
         {
             _appSettings = appSettings;
             _languageService = languageService;
             _maintenanceService = maintenanceService;
-            _oauthService = oauthService;
             _sessionService = sessionService;
         }
 
         [HttpGet]
         [OutputCache(NoStore = true, Duration = 0, Location = OutputCacheLocation.None, VaryByParam = "*")]
-        public async Task<ActionResult> SessionIsAlive(string identityName)
+        public ActionResult SessionIsAlive(string identityName)
         {
-            if(_maintenanceService.IsUnderMaintenance())
-            {
-                return Json(new { IsUM = true }, JsonRequestBehavior.AllowGet);
-            }
-
             if (!IsAuthenticated(identityName) || !IsValidSession(identityName))
             {
-                return Json(new { IsAuthenticated = false }, JsonRequestBehavior.AllowGet);
-            }
-
-            var userSession = _sessionService.UserSession;
-            if (userSession.AccessTokenLifeTime <= DateTime.Now)
-            {
-                var (newAccessToken, lifeTime) = await _oauthService.RequestAccessTokenAsync(userSession.RefreshToken);
-                if (!string.IsNullOrEmpty(newAccessToken) && lifeTime.HasValue)
-                {
-                    userSession.AccessToken = newAccessToken;
-                    userSession.AccessTokenLifeTime = lifeTime.Value;
-                    _sessionService.AssignUserSession(userSession);
-                    return Json(new { IsAuthenticated = true, AccessToken = newAccessToken }, JsonRequestBehavior.AllowGet);
-                }
                 return Json(new { IsAuthenticated = false }, JsonRequestBehavior.AllowGet);
             }
 

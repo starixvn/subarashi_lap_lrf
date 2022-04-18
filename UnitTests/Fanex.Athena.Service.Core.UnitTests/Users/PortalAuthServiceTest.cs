@@ -202,7 +202,6 @@
               && newUser.ApplicationMode == AppMode.Parasitic
               && newUser.VendorID == oauthInfo.VendorID
               && newUser.VendorIdentityID == oauthInfo.Username
-              && newUser.RefreshToken == oauthInfo.RefreshToken
               && newUser.AccessTokenLifeTime == oauthInfo.AccessTokenLifeTime;
 
         private bool AssertNewLicenseeSession(LicenseeAuthInfo newLicensee, IOAuthInfo oauthInfo)

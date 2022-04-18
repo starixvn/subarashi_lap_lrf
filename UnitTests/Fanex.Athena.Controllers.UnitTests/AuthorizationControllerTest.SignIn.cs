@@ -167,7 +167,7 @@
                 var oauthInfo = Substitute.For<IOAuthInfo>();
                 oauthInfo.IsError.Returns(true);
 
-                _authService.RequestOAuthInfoAsync(loginMetaModel, Arg.Any<string>(), Arg.Any<string>())
+                _authService.RequestOAuthInfoAsync(loginMetaModel)
                   .Returns(oauthInfo);
                 // Action
                 var result = await controller.SignIn(loginMetaModel) as ViewResult;
@@ -199,7 +199,7 @@
                 oauthInfo.IsError.Returns(false);
                 oauthInfo.IsAdministrator.Returns(true);
 
-                _authService.RequestOAuthInfoAsync(loginMetaModel, Arg.Any<string>(), Arg.Any<string>())
+                _authService.RequestOAuthInfoAsync(loginMetaModel)
                   .Returns(oauthInfo);
 
                 // Action
@@ -233,7 +233,7 @@
                 oauthInfo.IsError.Returns(false);
                 oauthInfo.IsAdministrator.Returns(true);
 
-                _authService.RequestOAuthInfoAsync(loginMetaModel, Arg.Any<string>(), Arg.Any<string>())
+                _authService.RequestOAuthInfoAsync(loginMetaModel)
                   .Returns(oauthInfo);
 
                 // Action
@@ -267,7 +267,7 @@
                     PassWord = "xxx"
                 };
                
-                _authService.RequestOAuthInfoAsync(loginMetaModel, Arg.Any<string>(), Arg.Any<string>())
+                _authService.RequestOAuthInfoAsync(loginMetaModel)
                     .Returns(oauthInfo);
 
                 // Action

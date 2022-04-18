@@ -25,9 +25,8 @@
                     document.location.href = umUrl;
                 } else if (data.IsAuthenticated === false) {
                     document.location.href = internalSignOutUrl;
-                } else if (data.AccessToken) {
-                    window.topSameOriginWindow?.lrf
-                        && (window.topSameOriginWindow.lrf.access_token = data.AccessToken);
+                } else {
+                    //no thing
                 }
             });
         }, 30000);

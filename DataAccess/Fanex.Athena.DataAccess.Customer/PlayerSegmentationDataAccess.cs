@@ -108,24 +108,6 @@
             }
         }
 
-        public async Task<IEnumerable<string>> GetProblemAccountCustomerClass()
-        {
-            var result = new List<string> { "0" };
-
-            using (var objectDb = GetObjectDb("Lrf_CustomerClassSel", 180))
-            {
-                using (var reader = await objectDb.ExecuteReaderAsync().ConfigureAwait(false))
-                {
-                    while (reader.Read())
-                    {
-                        result.Add(reader["CustomerClass"].ToString());
-                    }
-                }
-            }
-
-            return result;
-        }
-
         private static void AddVipStatusUpdateParams(IObjectDb objectDb, UpdateStatusPlayerMetaModel metaModel)
         {
             objectDb.SetParameterValue("Username", metaModel.SystemIds);

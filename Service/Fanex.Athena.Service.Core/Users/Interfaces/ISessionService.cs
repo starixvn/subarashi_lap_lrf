@@ -10,8 +10,6 @@
 
         UserAuthInfo UserSession { get; }
 
-        void AssignUserSession(UserAuthInfo userSession);
-
         void AssignSessions(UserAuthInfo userSession, LicenseeAuthInfo licenseeSession);
     }
 }

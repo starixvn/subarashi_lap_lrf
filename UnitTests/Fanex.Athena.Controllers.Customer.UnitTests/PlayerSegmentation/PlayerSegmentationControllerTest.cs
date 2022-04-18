@@ -21,6 +21,7 @@ namespace Fanex.Athena.Controllers.Customer.UnitTests
         private IAuthorizationService _authService;
         private ISubsidiaryService _subsidiaryService;
         private IPlayerSegmentationService _playerService;
+        private ICustomerClassService _customerClassService;
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
@@ -35,6 +36,7 @@ namespace Fanex.Athena.Controllers.Customer.UnitTests
             _subsidiaryService = Substitute.For<ISubsidiaryService>();
             _playerService = Substitute.For<IPlayerSegmentationService>();
             _authService = Substitute.For<IAuthorizationService>();
+            _customerClassService = Substitute.For<ICustomerClassService>();
         }
 
         [TearDown]
@@ -43,6 +45,7 @@ namespace Fanex.Athena.Controllers.Customer.UnitTests
             _subsidiaryService.ClearReceivedCalls();
             _playerService.ClearReceivedCalls();
             _authService.ClearReceivedCalls();
+            _customerClassService.ClearReceivedCalls();
         }
 
         [Test]
@@ -118,7 +121,7 @@ namespace Fanex.Athena.Controllers.Customer.UnitTests
 
         private PlayerSegmentationController CreateController()
         {
-            return new PlayerSegmentationController(_authService, _subsidiaryService, _playerService)
+            return new PlayerSegmentationController(_authService, _subsidiaryService, _playerService, _customerClassService)
             {
                 LangService = LangService,
                 SessionServiceInstance = SessionService,

@@ -68,7 +68,7 @@
 
             if (newLicenseeId != originalLicenseeId)
             {
-                var oauthInfo = await _authService.RenewOAuthInfoAsync(newLicenseeId, SessionServiceInstance.UserSession.AccessToken, SessionServiceInstance.UserSession.RefreshToken);
+                var oauthInfo = await _authService.RenewOAuthInfoAsync(newLicenseeId, SessionServiceInstance.UserSession.AccessToken);
                 if (!oauthInfo.IsError)
                 {
                     _authService.ReSignIn(oauthInfo);
@@ -109,7 +109,7 @@
         {
             var changed = false;
             var oauthInfo = await _authService.RenewOAuthInfoAsync(SessionServiceInstance.LicenseeSession.LicenseeId,
-                           SessionServiceInstance.UserSession.AccessToken, SessionServiceInstance.UserSession.RefreshToken, Util.MapLanguages[languageCode]);
+                           SessionServiceInstance.UserSession.AccessToken, Util.MapLanguages[languageCode]);
             if (!oauthInfo.IsError)
             {
                 _authService.CreateSession(oauthInfo);

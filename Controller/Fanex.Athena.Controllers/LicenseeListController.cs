@@ -60,7 +60,7 @@
 
         private async Task<ActionResult> RedirectToHome(int licenseeId)
         {
-            var oauthInfo = await _authService.RenewOAuthInfoAsync(licenseeId, SessionServiceInstance.UserSession.AccessToken, SessionServiceInstance.UserSession.RefreshToken);
+            var oauthInfo = await _authService.RenewOAuthInfoAsync(licenseeId, SessionServiceInstance.UserSession.AccessToken);
             if (!oauthInfo.IsError)
             {
                 _authService.ReSignIn(oauthInfo);

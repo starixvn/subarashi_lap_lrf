@@ -38,24 +38,6 @@ namespace Fanex.Athena.Service.Core.OAuth
                 DateTime.Now.AddSeconds(tokenResponse.ExpiresIn - AccessTokenExpireTimeGapInSeconds), tokenResponse.RefreshToken);
         }
 
-        public async Task<(string accessToken, DateTime? lifeTime)> RequestAccessTokenAsync(string refreshToken)
-        {
-            var tokenResponse = await _httpClient.RequestRefreshTokenAsync(new RefreshTokenRequest 
-            {
-                Address = $"{_options.Host}/{_options.TokenPath}",
-                ClientId = _options.ClientId,
-                ClientSecret = _options.ClientSecret,
-                RefreshToken = refreshToken
-            });
-
-            if (tokenResponse.IsError)
-            {
-                return (null, null);
-            }
-
-            return (tokenResponse.AccessToken, DateTime.Now.AddSeconds(tokenResponse.ExpiresIn - AccessTokenExpireTimeGapInSeconds));
-        }
-
         public async Task RevokeAccessTokenAsync(string accessToken)
         {
             if (string.IsNullOrEmpty(accessToken))
@@ -76,31 +58,6 @@ namespace Fanex.Athena.Service.Core.OAuth
                 HandleError(tokenRevocationResponse.Exception, tokenRevocationResponse.Error);
             }
         }
-
-        public async Task RevokeRefreshTokenAsync(string refreshToken)
-        {
-            if (string.IsNullOrEmpty(refreshToken))
-            {
-                return;
-            }
-
-            var tokenRevocationResponse = await _httpClient.RevokeTokenAsync(new TokenRevocationRequest
-            {
-                Address = $"{_options.Host}/{_options.RevocationPath}",
-                ClientId = _options.ClientId,
-                ClientSecret = _options.ClientSecret,
-                Token = refreshToken,
-                TokenTypeHint = "refresh_token"
-            }).ConfigureAwait(false);
-
-            if (tokenRevocationResponse.IsError)
-            {
-                HandleError(tokenRevocationResponse.Exception, tokenRevocationResponse.Error);
-            }
-        }
-
-        public Task RevokeTokensAsync(string accessToken, string refreshToken)
-         => Task.WhenAll(RevokeAccessTokenAsync(accessToken), RevokeRefreshTokenAsync(refreshToken));
 
         private Task<UserInfoResponse> RequestUserInfo(string accessToken)
             => _httpClient.GetUserInfoAsync(new UserInfoRequest

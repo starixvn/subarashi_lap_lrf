@@ -16,7 +16,6 @@
     var isFakeLicensee = licenseeSettingService.IsFakeLicensee(licSession.LicenseeName);
     var langCode = System.Globalization.CultureInfo.CurrentUICulture.IetfLanguageTag;
     var identityName = userSession.IdentityName;
-
 }
 <!DOCTYPE html>
 
@@ -63,7 +62,10 @@
     <script src="@Url.ContentLinkByEnv("/www/js/build/pages/lib/common.chunk.js")"></script>
     @RenderSection("js", required: false)
 
-    <script async src="@Url.Action("checking", "home")"></script>
+    @if (!isSelfMode)
+    {
+        Html.RenderPartial("~/Views/Desktop/Shared/_SessionScript.cshtml", identityName);
+    }
 
     @if (appSettings.Environment.Equals("PRO", StringComparison.OrdinalIgnoreCase))
     {

@@ -88,7 +88,7 @@
             }
             else
             {
-                var oauthInfo = await _authService.RequestOAuthInfoAsync(model, Request.UserHostAddress, Session.SessionID);
+                var oauthInfo = await _authService.RequestOAuthInfoAsync(model);
 
                 if (!oauthInfo.IsError)
                 {
@@ -116,7 +116,7 @@
         [HttpGet]
         [AllowAnonymous]
         [OutputCache(NoStore = true, Duration = 0, Location = OutputCacheLocation.None, VaryByParam = "*")]
-        public async Task<ActionResult> RecheckIn()
+        public ActionResult RecheckIn()
         {
             if (_maintenanceService.IsUnderMaintenance())
             {
@@ -146,22 +146,6 @@
             {
                 errorCode = ErrorType.KickedOut;
                 errorMsg = ViewResources.SessionLoggedMsg;
-            }
-            else if(userSession.AccessTokenLifeTime <= DateTime.Now)
-            {
-                var (newAccessToken, lifeTime) = await _authService.RequestAccessTokenAsync(userSession.RefreshToken);
-                if (!string.IsNullOrEmpty(newAccessToken) && lifeTime.HasValue)
-                {
-                    userSession.AccessToken = newAccessToken;
-                    userSession.AccessTokenLifeTime = lifeTime.Value;
-                    SessionServiceInstance.AssignUserSession(userSession);
-                    return Json(RecheckInResult(errorCode, errorMsg, newAccessToken), JsonRequestBehavior.AllowGet);
-                }
-                return Json(RecheckInResult(ErrorType.AccessTokenInvalid, ViewResources.TokenWasExpired), JsonRequestBehavior.AllowGet);
-            }
-            else
-            {
-                //no thing
             }
 
             return Json(RecheckInResult(errorCode, errorMsg), JsonRequestBehavior.AllowGet);

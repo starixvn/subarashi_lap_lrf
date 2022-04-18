@@ -24,7 +24,7 @@
     {
         private IAuthorizationService _authService;
 
-        private IPlayerSegmentationService _playerService;
+        private ICustomerClassService _customerClassService;
 
         private const int TimeOutInSecond = 180;
 
@@ -32,7 +32,7 @@
         public override void FixtureSetUp()
         {
             base.FixtureSetUp();
-            _playerService = Substitute.For<IPlayerSegmentationService>();
+            _customerClassService = Substitute.For<ICustomerClassService>();
 
             SetUpDefaultFakeData();
         }
@@ -41,7 +41,7 @@
         public override void FixtureTearDown()
         {
             base.FixtureTearDown();
-            _playerService = null;
+            _customerClassService = null;
         }
 
         [Test]
@@ -99,7 +99,8 @@
 
             var licenseeSettingService = stubLicenseeSettingService ?? Substitute.For<ILicenseeSettingService>();
 
-            return new CustomerWinLossReportController(reportSettingService, _authService, _playerService)            {
+            return new CustomerWinLossReportController(reportSettingService, _authService, _customerClassService) 
+            {
                 LangService = LangService,
                 SessionServiceInstance = SessionService,
                 ProductServiceInstance = productService,

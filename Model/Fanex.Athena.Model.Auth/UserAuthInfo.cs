@@ -54,7 +54,5 @@
         public string AccessToken { get; set; }
 
         public DateTime AccessTokenLifeTime { get; set; } = DateTime.MinValue;
-
-        public string RefreshToken { get; set; }
     }
 }

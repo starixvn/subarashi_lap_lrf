@@ -12,10 +12,7 @@
         public void OnAuthorization(AuthorizationContext filterContext)
         {
             var request = filterContext.RequestContext.HttpContext.Request;
-            string clientToken = null;
-
-            clientToken = request.IsAjaxRequest() ? request.Headers.Get(KEYNAME) : request.Form[KEYNAME];
-
+            var clientToken = request.IsAjaxRequest() ? request.Headers.Get(KEYNAME) : request.Form[KEYNAME];
             if (clientToken == null)
             {
                 throw new HttpAntiForgeryException($"Header/Form does not contain {KEYNAME}");

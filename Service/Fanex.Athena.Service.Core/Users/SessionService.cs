@@ -28,9 +28,5 @@
             CurrentSession[UserSessionKey] = userSession;
             CurrentSession[LicenseeSessionKey] = licenseeSession;
         }
-
-        public void AssignUserSession(UserAuthInfo userSession)
-            => CurrentSession[UserSessionKey] = userSession;
-
     }
 }

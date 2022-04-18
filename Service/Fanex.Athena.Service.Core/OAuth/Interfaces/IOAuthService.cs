@@ -8,12 +8,6 @@ namespace Fanex.Athena.Service.Core.OAuth
     {
         Task<IOAuthInfo> RequestOAuthInfoAsync(string grantType, IDictionary<string, string> parameters);
 
-        Task<(string accessToken, DateTime? lifeTime)> RequestAccessTokenAsync(string refreshToken);
-
         Task RevokeAccessTokenAsync(string accessToken);
-
-        Task RevokeRefreshTokenAsync(string refreshToken);
-
-        Task RevokeTokensAsync(string accessToken, string refreshToken);
     }
 }

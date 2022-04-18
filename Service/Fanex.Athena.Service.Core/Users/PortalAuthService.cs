@@ -43,7 +43,7 @@
             {
                 { nameof(token), token },
                 { "access_token", _sessionService.UserSession?.AccessToken },
-                { "refresh_token", _sessionService.UserSession?.RefreshToken }
+                { "client_ip", HttpContext.Current.Request.UserHostAddress }
             });
 
         public IResultInfo SignIn(HttpContextBase currentContext, IOAuthInfo oauthInfo)
@@ -81,7 +81,7 @@
 
             if (userSession != null)
             {
-                await _oauthService.RevokeTokensAsync(userSession.AccessToken, userSession.RefreshToken);
+                await _oauthService.RevokeAccessTokenAsync(userSession.AccessToken);
             }
         }
 
@@ -175,7 +175,6 @@
                 : oauthInfo.BaseCurrency,
                AccessToken = oauthInfo.AccessToken,
                AccessTokenLifeTime = oauthInfo.AccessTokenLifeTime,
-               RefreshToken = oauthInfo.RefreshToken,
                CurrencyList = oauthInfo.CurrencyList,
                CurrencyAgentList = oauthInfo.CurrencyAgentList,
                IsShowIp = oauthInfo.IsShowIP,

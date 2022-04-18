@@ -69,7 +69,7 @@
                 const int LicenseeId = 1;
 
                 _oauthInfo.IsError.Returns(false);
-                _authService.RenewOAuthInfoAsync(LicenseeId, DefaultUserSession.AccessToken, DefaultUserSession.RefreshToken).Returns(_oauthInfo);
+                _authService.RenewOAuthInfoAsync(LicenseeId, DefaultUserSession.AccessToken).Returns(_oauthInfo);
 
                 // Action
                 var result = await controller.Index(LicenseeId) as RedirectToRouteResult;
