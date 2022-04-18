@@ -4477,7 +4477,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   }
 
   get isValidModel() {
-    return this.props.searchingId && Object(_jsroot_lib_validationHelper__WEBPACK_IMPORTED_MODULE_15__["validateBaseCurrency"])(this.props.selectedBaseCurrency);
+    return this.props.searchingId && Object(_jsroot_lib_validationHelper__WEBPACK_IMPORTED_MODULE_15__["validateBaseCurrency"])(this.props.selectedBaseCurrency) && (this.props.username || this.props.searchingIdOption === _lib_constants__WEBPACK_IMPORTED_MODULE_17__["SearchingIdOptions"].refNo);
   }
 
   _getParams() {
@@ -4528,6 +4528,10 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     return searchingIdOption === _lib_constants__WEBPACK_IMPORTED_MODULE_17__["SearchingIdOptions"].refNo ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("RefNo") : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("LicenseeTxId");
   }
 
+  _getUserNameText(searchingIdOption) {
+    return searchingIdOption === _lib_constants__WEBPACK_IMPORTED_MODULE_17__["SearchingIdOptions"].txID ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("Username") + " *" : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("Username");
+  }
+
   render() {
     const excelButton = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
       className: "icon-excel right",
@@ -4542,6 +4546,8 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     } = this.props;
 
     const searchingIdText = this._getSearchingIdText(searchingIdOption);
+
+    const userNameText = this._getUserNameText(searchingIdOption);
 
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_6__["default"], {
       className: "page-filter",
@@ -4574,7 +4580,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       className: "form-group"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       className: "label-text"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("Username")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_auto_complete__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    }, userNameText), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_auto_complete__WEBPACK_IMPORTED_MODULE_4__["default"], {
       url: _common_lib_constants__WEBPACK_IMPORTED_MODULE_12__["ApiUrl"].CUSTOMER_SEARCH_URL,
       onSelect: value => this.props.setUsername(value),
       onInput: value => this.props.setUsername(value),

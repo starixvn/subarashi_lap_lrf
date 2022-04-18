@@ -24,7 +24,9 @@ export class FormFilter extends Component {
     }
 
     get isValidModel() {
-        return this.props.searchingId && validateBaseCurrency(this.props.selectedBaseCurrency);
+        return this.props.searchingId 
+        && validateBaseCurrency(this.props.selectedBaseCurrency) 
+        && (this.props.username || this.props.searchingIdOption === SearchingIdOptions.refNo);
     }
 
     submit = (event) => {
@@ -122,6 +124,11 @@ export class FormFilter extends Component {
             LangHelper.getSingleResource("RefNo") : LangHelper.getSingleResource("LicenseeTxId")
     }
 
+    _getUserNameText(searchingIdOption) {
+        return searchingIdOption === SearchingIdOptions.txID ?
+            LangHelper.getSingleResource("Username") + " *": LangHelper.getSingleResource("Username")
+    }
+
     render() {
         const excelButton = <div>
             <i className="icon-excel right" onClick={this.exportExcel} title={LangHelper.getSingleResource("ExportToExcel")}></i>
@@ -130,6 +137,7 @@ export class FormFilter extends Component {
 
         const { searchingIdOption, searchingId, setSearchingId, setSearchingIdOption } = this.props;
         const searchingIdText = this._getSearchingIdText(searchingIdOption);
+        const userNameText = this._getUserNameText(searchingIdOption);
 
         return (
             <CollapsiblePanel className="page-filter" stickyFooter={excelButton}>
@@ -153,7 +161,7 @@ export class FormFilter extends Component {
 
                     <div className="col-12 col-md-4 col-sm-4 col-lg-3 col-xl-2">
                         <div className="form-group">
-                            <label className="label-text">{LangHelper.getSingleResource("Username")}</label>
+                            <label className="label-text">{userNameText}</label>
                             <AutoComplete url={ApiUrl.CUSTOMER_SEARCH_URL}
                                 onSelect={(value) => this.props.setUsername(value)}
                                 onInput={(value) => this.props.setUsername(value)}
