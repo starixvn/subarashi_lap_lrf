@@ -1,16 +1,21 @@
 ﻿namespace Fanex.Athena.Controllers.Report.UnitTests
 {
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Base.UnitTests;
     using DataAccess.Core.Common.Interfaces;
     using Excel.Base.Entities;
     using Excel.Report;
+    using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Resources;
     using Model.Core.DTO.Common;
     using Model.Core.ResultModel;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
     using Model.Report.ViewModel;
+    using Newtonsoft.Json;
     using NSubstitute;
     using NUnit.Framework;
     using Report;
@@ -60,29 +65,40 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                var expectedData = new[]
+                var fakeData = new List<SportProductItem>
                 {
                     new SportProductItem { ID = 1 },
                     new SportProductItem { ID = 2 }
                 };
                 var subProductCodes = $"{Product.SB},{Product.NG},{Product.VS}";
 
-                StubGetAllowedSubProductCodeList($"{Product.SB},{Product.NG},{Product.VS},{Product.VS2}", subProductCodes);
+                StubGetAllowedSubProductCodeList($"{Product.SB},{Product.NG},{Product.VS},{Product.VS2},{Product.VS3}", subProductCodes);
 
                 _sportTypeDataAccess.GetSportsAndProducts(
                     SessionService.LicenseeSession.LicenseeId,
                     SessionService.UserSession.Language,
                     subProductCodes)
-                    .Returns(expectedData);
+                    .Returns(fakeData);
 
 
                 // Action
                 var result = await controller.GetSportsAndProducts() as JsonResult;
 
+                var expectedData = fakeData.ToList();
+                expectedData.Add(new SportProductItem
+                {
+                    Checked = true,
+                    ID = ProductTypes.Parlay,
+                    Name = ViewResources.Parlay,
+                    ParentId = ProductTypes.Sportsbook
+                });
+
                 // Assert
-                Assert.That(result.Data, Is.EqualTo(expectedData));
+                Assert.That(JsonConvert.SerializeObject(result.Data), Is.EqualTo(JsonConvert.SerializeObject(expectedData)));
             }
         }
+
+
 
         [Test]
         public async Task Excel_EmptyExcelParam_ReturnNull()

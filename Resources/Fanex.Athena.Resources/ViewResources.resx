@@ -3283,4 +3283,8 @@
   <data name="NetworkLatency" xml:space="preserve">
     <value>Information is not available due to network latency. Please wait a few minutes and try again.</value>
   </data>
+  <data name="FunctionUMMessage" xml:space="preserve">
+    <value>Unable to update since this function is under maintenance from {0} to {1} (HK Time GMT +8). We are sorry for any inconvenience caused!</value>
+    <comment>ignorejs</comment>
+  </data>
 </root>

@@ -151,6 +151,7 @@ namespace Fanex.Athena
              .OnRelease(x => x.Dispose());
             builder.RegisterType<SessionStorage>().As<ISessionStorage>().SingleInstance();
             builder.RegisterType<SessionService>().As<ISessionService>().SingleInstance();
+            builder.RegisterInstance(new FunctionUMService()).As<IFunctionUMService>().SingleInstance();
 
             builder.Register(x => new ReportAPIClient(
                  x.ResolveNamed<HttpClient>("ReportAPIClient")

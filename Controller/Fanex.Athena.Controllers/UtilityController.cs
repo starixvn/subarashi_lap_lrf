@@ -7,7 +7,7 @@
 namespace Fanex.Athena.Controllers
 {
     using Extension.Utility;
-
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Model.Core.DataDomain;
 
     using ONEbook.UM.Services;
@@ -135,6 +135,12 @@ namespace Fanex.Athena.Controllers
             ViewBag.UmTimeFrom = underMaintenanceTimeFrom;
             ViewBag.UmTimeTo = underMaintenanceTimeTo;
             return View("~/Views/Desktop/Utility/UnderMaintenance.cshtml");
+        }
+
+        public ActionResult FunctionUnderMaintenance(string timeFrom, string timeTo)
+        {
+            ViewBag.Message = FunctionUMHelper.BuildUMMessage(timeFrom, timeTo);
+            return View("~/Views/Desktop/Utility/FunctionUnderMaintenance.cshtml");
         }
 
         protected override void Initialize(System.Web.Routing.RequestContext requestContext)
