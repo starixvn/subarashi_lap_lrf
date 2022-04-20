@@ -3048,9 +3048,32 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 class DataService {
+  static buildProxyUrl(apiKey, apiUrl) {
+    const encodeUrl = apiUrl.replace(new RegExp('/', 'g'), '_');
+    const proxyUrl = `Proxy/${apiKey}/${encodeUrl}`;
+    return proxyUrl;
+  }
+
+  static getProxyData(apiKey, apiUrl, params) {
+    const proxyUrl = this.buildProxyUrl(apiKey, apiUrl);
+    return this.getData(proxyUrl, params);
+  }
+
+  static postProxyData(apiKey, apiUrl, params) {
+    const proxyUrl = this.buildProxyUrl(apiKey, apiUrl);
+    return this.postData(proxyUrl, params);
+  }
+
+  static getProxyFile(apiKey, apiUrl, params) {
+    const proxyUrl = this.buildProxyUrl(apiKey, apiUrl);
+    return this.getFile(proxyUrl, params);
+  }
+
   static getData(url, params) {
     return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(url, {
       params: params
@@ -3076,7 +3099,32 @@ class DataService {
     });
   }
 
+  static postReportData(url, params) {
+    return this.postProxyData(this.apiKeys.report, url, params);
+  }
+
+  static getReportData(url, params) {
+    return this.getProxyData(this.apiKeys.report, url, params);
+  }
+
+  static getReportFile(url, params) {
+    return this.getProxyFile(this.apiKeys.report, url, params);
+  }
+
+  static postBetListData(url, params) {
+    return this.postProxyData(this.apiKeys.betlist, url, params);
+  }
+
+  static getBetListFile(url, params) {
+    return this.getProxyFile(this.apiKeys.betlist, url, params);
+  }
+
 }
+
+_defineProperty(DataService, "apiKeys", {
+  report: 'Report',
+  betlist: 'BetList'
+});
 
 /***/ }),
 
@@ -3437,7 +3485,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const getReportData = (url, params) => {
   return dispatch => {
-    _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_1__["default"].postData(url, params).then(response => {
+    _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_1__["default"].postReportData(url, params).then(response => {
       response.data.timestamp = new Date().getTime();
       dispatch(setReportData(response.data));
       dispatch(Object(_jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_2__["toggleLoader"])(false));
@@ -3637,31 +3685,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BreadcrumbText", function() { return BreadcrumbText; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReportLevel", function() { return ReportLevel; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DefaultPagingOption", function() { return DefaultPagingOption; });
-/* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
-/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 
 const DefaultPageSize = 50;
 const ApiUrl = {
-  REPORT_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_0__["default"].resolveClientUrl("ExtraPayoutReport/Index"),
-  REPORT_DETAIL_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_0__["default"].resolveClientUrl("ExtraPayoutReport/Detail")
+  REPORT_DATA_URL: "Api/ExtraPayout/GetData",
+  EXPORT_REPORT_DATA_URL: "Api/ExtraPayout/ExportExcel",
+  REPORT_DETAIL_DATA_URL: "Api/ExtraPayout/GetDetailData",
+  EXPORT_REPORT_DETAIL_DATA_URL: "Api/ExtraPayout/ExportDetailExcel"
 };
 const headerText = {
-  date: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Date'),
-  refno: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('RefNo'),
-  externalId: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('ExternalId'),
-  systemId: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('SystemId'),
-  currency: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Currency'),
-  product: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Product'),
-  promotionType: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('PromotionType'),
-  turnover: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Turnover'),
-  totalTransaction: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('TotalTransaction'),
-  customerAmount: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('CustomerAmount'),
-  licSharingAmount: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('LicSharingAmount')
+  date: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Date'),
+  refno: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('RefNo'),
+  externalId: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('ExternalId'),
+  systemId: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('SystemId'),
+  currency: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Currency'),
+  product: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Product'),
+  promotionType: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('PromotionType'),
+  turnover: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Turnover'),
+  totalTransaction: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('TotalTransaction'),
+  customerAmount: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('CustomerAmount'),
+  licSharingAmount: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('LicSharingAmount')
 };
 const BreadcrumbText = {
-  main: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Main'),
-  customer: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Customer')
+  main: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Main'),
+  customer: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Customer')
 };
 const ReportLevel = {
   MAIN: 0,
@@ -3698,7 +3746,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./constants */ "./www/js/source/reactpages/pages/extrapayout/common/constants.js");
 /* harmony import */ var _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/numberFormat */ "./www/js/source/reactpages/lib/numberFormat.js");
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/dist/esm-browser/index.js");
+/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/index.js");
+/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(uuid__WEBPACK_IMPORTED_MODULE_5__);
 
 
 
@@ -4163,7 +4212,7 @@ const DataGrid = props => {
     setBetlistTitle(betlistTitle);
     props.setDetailParams(detailParams);
     props.toggleLoader(true);
-    _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_13__["default"].postData(_common_constants__WEBPACK_IMPORTED_MODULE_9__["ApiUrl"].REPORT_DETAIL_DATA_URL, detailParams).then(response => {
+    _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_13__["default"].postReportData(_common_constants__WEBPACK_IMPORTED_MODULE_9__["ApiUrl"].REPORT_DETAIL_DATA_URL, detailParams).then(response => {
       setShowBetList(true);
       setBetListData(response.data);
       props.toggleLoader(false);
@@ -4388,12 +4437,10 @@ const Detail = props => {
       return;
     }
 
-    const exportRequestParam = _objectSpread(_objectSpread({}, param), {}, {
-      IsExportExcel: true
-    });
+    const exportRequestParam = _objectSpread({}, param);
 
     toggleLoader(true);
-    _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_8__["default"].getFile(_common_constants__WEBPACK_IMPORTED_MODULE_11__["ApiUrl"].REPORT_DETAIL_DATA_URL, exportRequestParam).then(response => {
+    _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_8__["default"].getReportFile(_common_constants__WEBPACK_IMPORTED_MODULE_11__["ApiUrl"].EXPORT_REPORT_DETAIL_DATA_URL, exportRequestParam).then(response => {
       react_toastify__WEBPACK_IMPORTED_MODULE_12__["toast"].dismiss();
       const NoContentStatusCode = 204;
 
@@ -4703,12 +4750,10 @@ const FormFilter = props => {
       exportParam = getParams();
     }
 
-    const exportRequestParam = _objectSpread(_objectSpread({}, exportParam), {}, {
-      IsExportExcel: true
-    });
+    const exportRequestParam = _objectSpread({}, exportParam);
 
     props.toggleLoader(true);
-    _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_16__["default"].getFile(_common_constants__WEBPACK_IMPORTED_MODULE_14__["ApiUrl"].REPORT_DATA_URL, exportRequestParam).then(response => {
+    _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_16__["default"].getReportFile(_common_constants__WEBPACK_IMPORTED_MODULE_14__["ApiUrl"].EXPORT_REPORT_DATA_URL, exportRequestParam).then(response => {
       react_toastify__WEBPACK_IMPORTED_MODULE_13__["toast"].dismiss();
       const NoContentStatusCode = 204;
 
