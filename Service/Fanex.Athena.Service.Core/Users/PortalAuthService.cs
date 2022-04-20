@@ -148,7 +148,8 @@
                 IsAllowedCustomerComm = oauthInfo.IsAllowedCustomerComm,
                 IsEnableBA = oauthInfo.IsEnableBA,
                 IsEnableSingleWallet = oauthInfo.IsEnableSingleWallet,
-                OfferedSubProductList = oauthInfo.OfferedSubProductList
+                OfferedSubProductList = oauthInfo.OfferedSubProductList,
+                OfferedOddsGroupsList = oauthInfo.OfferedOddsGroupList
             };
 
         private UserAuthInfo GenerateUserInfo(IOAuthInfo oauthInfo)

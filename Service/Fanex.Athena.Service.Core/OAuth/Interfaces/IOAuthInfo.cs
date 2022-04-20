@@ -30,6 +30,7 @@ namespace Fanex.Athena.Service.Core.OAuth
         bool IsEnableBA { get; }
         bool IsEnableSingleWallet { get; }
         IEnumerable<string> OfferedSubProductList { get; }
+        IEnumerable<string> OfferedOddsGroupList { get; }
         byte UserLevel { get; }
         string OperatorID { get; }
         int? WhiteLabelID { get; }

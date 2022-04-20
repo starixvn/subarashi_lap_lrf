@@ -55,6 +55,15 @@ namespace Fanex.Athena.Service.Core.OAuth
             }
         }
 
+        public IEnumerable<string> OfferedOddsGroupList
+        {
+            get
+            {
+                var offeredOddsGroupList = GetClaimValue("OfferedOddsGroups");
+                return string.IsNullOrEmpty(offeredOddsGroupList) ? new string[] { } : offeredOddsGroupList.Split(',');
+            }
+        }
+
         public int? WhiteLabelID
         {
             get

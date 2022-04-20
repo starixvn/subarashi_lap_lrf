@@ -1,19 +1,10 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="AppSettings.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Extension.Utility
+﻿namespace Fanex.Athena.Extension.Utility
 {
     using System;
     using System.Collections.Generic;
     using System.Configuration;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
-    [SuppressMessage("Sonar Code Smell", "S3996:UriPropertiesShouldNotBeStrings",
-             Justification = "Reviewed. Suppression is OK here.")]
     public class AppSettings : IAppSettings
     {
         internal const string HttpSlashSlash = "http://";
@@ -154,14 +145,6 @@ namespace Fanex.Athena.Extension.Utility
         {
             get { return GetValue("LiveReportNoDetailLinkSports").Split(',').Select(n => Convert.ToInt32(n)); }
         }
-
-        public bool IsUATTW
-        {
-            get { return GetValue("IsUATTW") == "1"; }
-        }
-
-        public IEnumerable<string> LicenseeOfferIMQOddGroup
-            => GetValue("LicenseeOfferIMQOddGroup").Split(',');
         
         public string BetTicketEventBuilderUrl
         {

@@ -278,15 +278,11 @@ namespace Fanex.Athena.Controllers.Customer
         }
 
         private IEnumerable<CheckedItem> GetOddsGroups()
-        {
-            var licenseeName = SessionServiceInstance.LicenseeSession.LicenseeName;
-
-            return LicenseeSettingServiceInstance.GetOddGroups(licenseeName).Select(g => new CheckedItem
-               {
-                   Name = g,
-                   Checked = true
-               });
-        }
+            => SessionServiceInstance.LicenseeSession.OfferedOddsGroupsList.Select(g => new CheckedItem
+            {
+                Name = g,
+                Checked = true
+            });
 
         private void AssignMetaModelData(CustomerListMetaModel metaModel)
         {
@@ -394,10 +390,10 @@ namespace Fanex.Athena.Controllers.Customer
                 items.Add(new CheckedItem { Name = STATUS, Checked = true });
             }
 
-            if(licenseeSession.IsEnableSingleWallet)
+            if (licenseeSession.IsEnableSingleWallet)
             {
                 var availableFundItem = items.FirstOrDefault(_ => _.Name.Equals(AVAILABLEFUNDS, StringComparison.OrdinalIgnoreCase));
-                if(availableFundItem != null)
+                if (availableFundItem != null)
                 {
                     items.Remove(availableFundItem);
                 }

@@ -72,8 +72,8 @@
                 IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeName),
                 MinDate = reportSetting.MinDate,
                 MaxDate = reportSetting.MaxDate,
-                HasExtraPayoutPermission = _authService.HasPermissions(SessionServiceInstance.UserSession, PermissionKeys.ReportExtraPayout),
-                OddsGroups = LicenseeSettingServiceInstance.GetOddGroups(licenseeSession.LicenseeName),
+                HasExtraPayoutPermission = _authService.HasPermissions(userSession, PermissionKeys.ReportExtraPayout),
+                OddsGroups = licenseeSession.OfferedOddsGroupsList,
                 CustomerClassList = await _customerClassService.GetAllCustomerClass(),
             };
 
