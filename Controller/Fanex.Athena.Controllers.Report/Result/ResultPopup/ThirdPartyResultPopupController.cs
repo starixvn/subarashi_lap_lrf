@@ -35,7 +35,8 @@ namespace Fanex.Athena.Controllers.Report.Result.ResultPopup
                 currencyId,
                 siteId,
                 betTypeId,
-                languageCode = language
+                languageCode = language,
+                clientIp = Request.UserHostAddress
             };
 
             return await _betListApiClient.PostStringAsync($"/{productPath}ResultPopup/Index",
