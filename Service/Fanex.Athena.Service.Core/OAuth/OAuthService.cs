@@ -44,7 +44,8 @@ namespace Fanex.Athena.Service.Core.OAuth
             {
                 return;
             }
-            var tokenRevocationResponse = await _httpClient.RevokeTokenAsync(new TokenRevocationRequest
+
+            await _httpClient.RevokeTokenAsync(new TokenRevocationRequest
             {
                 Address = $"{_options.Host}/{_options.RevocationPath}",
                 ClientId = _options.ClientId,
@@ -52,11 +53,6 @@ namespace Fanex.Athena.Service.Core.OAuth
                 Token = accessToken,
                 TokenTypeHint = "access_token"
             }).ConfigureAwait(false);
-
-            if (tokenRevocationResponse.IsError)
-            {
-                HandleError(tokenRevocationResponse.Exception, tokenRevocationResponse.Error);
-            }
         }
 
         private Task<UserInfoResponse> RequestUserInfo(string accessToken)

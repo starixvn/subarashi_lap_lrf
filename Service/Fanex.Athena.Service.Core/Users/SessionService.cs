@@ -23,10 +23,17 @@
             set { CurrentSession[CaptchaCodeKey] = value; }
         }
 
+        public string SessionID => CurrentSession.SessionID;
+
+        public string ClientIP => HttpContext.Current.Request.UserHostAddress;
+
         public void AssignSessions(UserAuthInfo userSession, LicenseeAuthInfo licenseeSession)
         {
             CurrentSession[UserSessionKey] = userSession;
             CurrentSession[LicenseeSessionKey] = licenseeSession;
         }
+
+        public void ClearSessions()
+            => CurrentSession?.Clear();
     }
 }

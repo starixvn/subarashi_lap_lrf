@@ -37,10 +37,12 @@ namespace Fanex.Athena.VendorAdapter
         }
 
         public T ExecuteGet<T>(string endPoint) where T : new()
+#pragma warning disable S4462 // Calls to "async" methods should not be blocking
             => ExecuteAsync<T>(endPoint, HttpMethod.Get, null).Result;
 
         public T ExecutePost<T>(string endPoint, object data = null) where T : new()
             => ExecuteAsync<T>(endPoint, HttpMethod.Post, data).Result;
+#pragma warning restore S4462 // Calls to "async" methods should not be blocking
 
         public Task<T> ExecuteGetAsync<T>(string endPoint)
             => ExecuteAsync<T>(endPoint, HttpMethod.Get, null);

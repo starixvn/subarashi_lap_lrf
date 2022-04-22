@@ -40,7 +40,8 @@
         {
             LicenseeId = 100,
             LicenseeName = "Spondemo",
-            OfferedSubProductList = Enumerable.Empty<string>()
+            OfferedSubProductList = Enumerable.Empty<string>(),
+            OfferedOddsGroupsList = Enumerable.Empty<string>()
         };
 
         protected UrlHelper Url { get; set; }

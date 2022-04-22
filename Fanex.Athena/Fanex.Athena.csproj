@@ -55,8 +55,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
-    <CodeAnalysisRuleSet>
-    </CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\.sonarlint\lrfcsharp.ruleset</CodeAnalysisRuleSet>
     <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -68,8 +67,7 @@
     <WarningLevel>4</WarningLevel>
     <FilesToIncludeForPublish>OnlyFilesToRunTheApp</FilesToIncludeForPublish>
     <Prefer32Bit>false</Prefer32Bit>
-    <CodeAnalysisRuleSet>
-    </CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\.sonarlint\lrfcsharp.ruleset</CodeAnalysisRuleSet>
     <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <ItemGroup>
@@ -280,6 +278,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <AdditionalFiles Include="..\.sonarlint\lrf\CSharp\SonarLint.xml">
+      <Link>SonarLint.xml</Link>
+    </AdditionalFiles>
     <Content Include="App_Code\DesktopLiveReportRazorHelper.cshtml" />
     <Content Include="App_Data\UserGuide\BettingTicketCenterRefno\en-US.htm" />
     <Content Include="App_Data\UserGuide\BettingTicketCenterRefno\zh-CN.htm" />
@@ -668,7 +669,6 @@
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\ProblemPlayerList.xls" />
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\VipPlayerList.xls" />
     <Content Include="www\css\source\pages\playercommission\index.scss" />
-    <Content Include="Fanex.Athena-1.ruleset" />
     <Content Include="Views\Desktop\Customer\CustomerComm\Menu.cshtml" />
     <Content Include="Views\Desktop\Customer\CustomerLog\GroupCommLog\Menu.cshtml" />
     <Content Include="Views\Desktop\Customer\PlayerSegmentation\BetList.cshtml" />
@@ -740,9 +740,12 @@
     <Content Include="www\css\build\dev\reactpages\newcashoutwinloss\index.css.map" />
     <Content Include="Views\Desktop\BetList\LiveReport\VirtualSports3.cshtml" />
     <Content Include="Views\Desktop\Report\Result\Popup\Main.cshtml" />
-	<Content Include="Views\Desktop\Utility\FunctionUnderMaintenance.cshtml" />
-	<Content Include="App_Data\FunctionUMSetting.json" /> 
-	<None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
+    <Content Include="Views\Desktop\Utility\FunctionUnderMaintenance.cshtml" />
+    <Content Include="App_Data\FunctionUMSetting.json" />
+    <Content Include="..\.sonarlint\lrfcsharp.ruleset">
+      <Link>lrfcsharp.ruleset</Link>
+    </Content>
+    <None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
     <None Include="www\css\source\pages\betlist\result\result.happy5.scss" />
     <None Include="www\css\source\reactpages\components\alert\icons\error.scss" />
     <None Include="www\css\source\reactpages\components\alert\icons\info.scss" />
@@ -1556,7 +1559,6 @@
     <Content Include="www\css\build\dev\pages\reports\agcasinowinloss.chunk.js.map" />
     <Content Include="www\css\build\dev\pages\reports\agcasinowinloss.css.map" />
     <Content Include=".babelrc" />
-    <Content Include="Fanex.Athena.ruleset" />
     <None Include="www\css\source\pages\customer\customerlist.scss" />
     <Content Include="www\css\source\pages\customer\customerlog.scss" />
     <Content Include="www\css\source\components\tab\_tab.scss" />

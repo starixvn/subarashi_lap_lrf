@@ -32,8 +32,6 @@
 
         private readonly ICustomMemoryCacheService _cache;
 
-        private static readonly IEnumerable<string> SubProducts = new[] { Product.SLT };
-
         public ProductService(IAppSettings appSettings, IProductDataAccess productDataAccess, IXDocumentWrapper xmlWrapper, ICustomMemoryCacheService cache)
         {
             _appSettings = appSettings;
@@ -125,25 +123,6 @@
             var config = functions.FirstOrDefault(x => x.Attribute("Name").Value.Equals(configFunctionName, StringComparison.OrdinalIgnoreCase));
             return config == null ? new string[] { } : config.Attribute(nameof(Product)).Value.Split(',')
                     .Select(x => x.Trim()).Where(x => !string.IsNullOrEmpty(x)).ToArray();
-        }
-
-        public IList<string> GetOfferedSubProducts(int licenseeId)
-        {
-            var cacheKey = CacheKey.MemorycacheSubProductsByLicensee + licenseeId;
-            var offeredSubProducts = _cache.Get<IList<string>>(cacheKey);
-
-            if (offeredSubProducts == null)
-            {
-                var originalProducts = GetProductList(licenseeId, string.Empty);
-                offeredSubProducts = SubProducts
-                    .Where(subProduct => originalProducts.Any(
-                        originalProduct => string.Equals(subProduct, originalProduct.ProductCode, StringComparison.InvariantCultureIgnoreCase)))
-                    .ToList();
-
-                _cache.Set(cacheKey, offeredSubProducts);
-            }
-
-            return offeredSubProducts;
         }
 
         public IList<ProductOption> GetAllowedSubProductOptions(IEnumerable<string> offeredSubProductList, IList<ProductOption> productOptions)

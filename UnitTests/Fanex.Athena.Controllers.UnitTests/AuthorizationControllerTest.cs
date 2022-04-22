@@ -165,57 +165,21 @@
             }
         }
 
-        //[Test]
-        //public async Task SignOut_WhenCall_ClearCookies()
-        //{
-        //    using (var controller = CreateController())
-        //    {
-        //        // Arrange
-        //        const string CookieName = "cookie1";
-        //        controller.ControllerContext.HttpContext.Request.Cookies.Add(new HttpCookie(CookieName));
+        [Test]
+        public async Task SignOut_WhenCall_CallInternalAuthServiceToSignOut()
+        {
+            using (var controller = CreateController())
+            {
+                // Arrange
 
-        //        // Action
-        //        _ = await controller.SignOut();
+                // Action
+                _ = await controller.SignOut();
 
-        //        // Assert
-        //        Assert.Multiple(() =>
-        //        {
-        //            Assert.That(controller.ControllerContext.HttpContext.Response.Cookies[0].Name, Is.EqualTo(CookieName));
-        //            Assert.That(controller.ControllerContext.HttpContext.Response.Cookies[0].Expires, Is.LessThan(DateTime.Now));
-        //        });
-        //    }
-        //}
-
-        //[Test]
-        //public async Task SignOut_WhenCall_ClearSession()
-        //{
-        //    using (var controller = CreateController())
-        //    {
-        //        // Action
-        //        _ = await controller.SignOut();
-
-        //        // Assert
-        //        controller.Session.Received().Clear();
-        //    }
-        //}
-
-        //[Test]
-        //public async Task SignOut_WhenCall_ClearCache()
-        //{
-        //    using (var controller = CreateController())
-        //    {
-        //        // Action
-        //        _ = await controller.SignOut();
-
-        //        // Assert
-        //        Assert.Multiple(() =>
-        //        {
-        //            controller.Response.Cache.Received().SetNoStore();
-        //            controller.Response.Cache.Received().SetExpires(Arg.Any<DateTime>());
-        //            controller.Response.Cache.Received().SetCacheability(HttpCacheability.NoCache);
-        //        });
-        //    }
-        //}
+                // Assert
+                await _authService.Received()
+                    .SignOut(controller.ControllerContext.HttpContext.Response, controller.ControllerContext.HttpContext.Request);
+            }
+        }
 
         [Test]
         public async Task InternalSignOut_WhenCall_CallSignOutFromService()

@@ -124,7 +124,7 @@
 
                 _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(false);
                 _productService.GetProductAccess(Arg.Any<int>(), Arg.Any<string>()).Returns(new ProductAccess(new List<Product>()));
-                StubLicenseeSessionData(new LicenseeAuthInfo { IsAllowedCustomerComm = true });
+                StubLicenseeSessionData(new LicenseeAuthInfo { IsAllowedCustomerComm = true, OfferedOddsGroupsList = Enumerable.Empty<string>() });
 
                 // Action
                 var result = (CustomerListViewModel)(controller.CustomerList() as ViewResult).Model;

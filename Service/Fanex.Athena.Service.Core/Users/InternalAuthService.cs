@@ -49,7 +49,7 @@ namespace Fanex.Athena.Service.Core.Users
         public async Task SignOut(HttpResponseBase response, HttpRequestBase request)
         {
             var userSession = _sessionService.UserSession;
-            HttpContext.Current.Session.Clear();
+            _sessionService.ClearSessions();
             CookiesHelper.ClearCookies(response, request.Cookies.AllKeys);
             _formsAuthService.SignOut();
             if (userSession != null)
@@ -72,8 +72,8 @@ namespace Fanex.Athena.Service.Core.Users
                     { "username", loginInfo.UserName },
                     { "password", loginInfo.PassWord },
                     { "login_token", loginInfo.LogInToken },
-                    { "session_id", HttpContext.Current.Session.SessionID },
-                    { "client_ip", HttpContext.Current.Request.UserHostAddress }
+                    { "session_id", _sessionService.SessionID },
+                    { "client_ip", _sessionService.ClientIP }
                 });
 
         public Task<IOAuthInfo> RenewOAuthInfoAsync(int licenseeId, string accessToken, string langCode = null)

@@ -24,7 +24,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
-    <CodeAnalysisRuleSet>Fanex.Athena.Controllers.Customer-1.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>Fanex.Athena.Controllers.Customer.Debug.ruleset</CodeAnalysisRuleSet>
     <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -35,7 +35,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
-    <CodeAnalysisRuleSet>Fanex.Athena.Controllers.Customer.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>Fanex.Athena.Controllers.Customer.Release.ruleset</CodeAnalysisRuleSet>
     <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <ItemGroup>
@@ -133,8 +133,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Fanex.Athena.Controllers.Customer-1.ruleset" />
-    <None Include="Fanex.Athena.Controllers.Customer.ruleset" />
+    <None Include="Fanex.Athena.Controllers.Customer.Debug.ruleset" />
+    <None Include="Fanex.Athena.Controllers.Customer.Release.ruleset" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -194,6 +194,11 @@
       <Project>{255e120a-83bf-4f72-9e31-6050d5704069}</Project>
       <Name>Fanex.Athena.Controllers.Base</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="..\..\.sonarlint\lrf\CSharp\SonarLint.xml">
+      <Link>SonarLint.xml</Link>
+    </AdditionalFiles>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

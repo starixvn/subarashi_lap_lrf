@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="LicenseeWinLossReportController.cs" company="Microsoft">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Controllers.Report
+﻿namespace Fanex.Athena.Controllers.Report
 {
     using System;
     using System.Collections.Generic;
@@ -49,8 +43,8 @@ namespace Fanex.Athena.Controllers.Report
 
         private static IDictionary<int, string> GetFakeBaseCurrencies(string baseCurrencySetting, string defaultBaseCurrency)
         {
-            var baseCurrencyList = string.IsNullOrWhiteSpace(baseCurrencySetting)
-                    ? SystemConstants.BaseCurrencyList
+            IDictionary<int, string> baseCurrencyList = string.IsNullOrWhiteSpace(baseCurrencySetting)
+                    ? SystemConstants.BaseCurrencyList.ToDictionary(_ => _.Key, _ => _.Value)
                     : SystemConstants.BaseCurrencyList.Where(x => baseCurrencySetting.Split(',').Contains(x.Value)).ToDictionary(x => x.Key, x => x.Value);
 
             var defaultBaseCurrencyKey = defaultBaseCurrency?.ToUpperInvariant();

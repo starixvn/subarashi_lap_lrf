@@ -157,9 +157,9 @@
     </Compile>
     <Compile Include="ActionFilter\AuthorizeRestrictionAttribute.cs" />
     <Compile Include="ActionFilter\AutoBindMetaModelAttribute.cs">
-	</Compile>
+    </Compile>
     <Compile Include="ActionFilter\FunctionUMFilterAttribute.cs" />
-	<Compile Include="ActionFilter\UMFilterAttribute.cs" />
+    <Compile Include="ActionFilter\UMFilterAttribute.cs" />
     <Compile Include="ActionFilter\ValidateProductPermissionAttribute.cs">
       <SonarQubeExclude>true</SonarQubeExclude>
     </Compile>
@@ -231,6 +231,11 @@
     <None Include="Fanex.Athena.Web-1.ruleset" />
     <None Include="Fanex.Athena.Web.ruleset" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="..\.sonarlint\lrf\CSharp\SonarLint.xml">
+      <Link>SonarLint.xml</Link>
+    </AdditionalFiles>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

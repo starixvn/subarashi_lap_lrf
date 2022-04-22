@@ -1,7 +1,6 @@
 ﻿namespace Fanex.Athena.Service.Core.UnitTests.Users
 {
     using Core.Users.Interfaces;
-    using DataAccess.Core.Users.Interfaces;
     using Extension.Utility.Interfaces;
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth;
@@ -16,6 +15,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
     using System.Web;
     using UnitTest.Common.Helpers;
 
@@ -52,6 +52,56 @@
             _oauthService = null;
             _formAuthenticationService = null;
             _appSettings = null;
+        }
+
+        [Test]
+        public async Task RequestOAuthInfoAsync_WhenCall_SendParamsToOAuthServiceCorrectly()
+        {
+            // Arrange
+            var token = FakeHelper.Create<string>();
+            _sessionService.ClientIP.Returns("127.0.0.1");
+            _sessionService.UserSession.Returns(new UserAuthInfo { AccessToken = "123" });
+
+            // Action
+            await _portalAuthService.RequestOAuthInfoAsync(token);
+
+            // Assert
+            await _oauthService.Received().RequestOAuthInfoAsync("lap_token", Arg.Is<IDictionary<string, string>>(_ =>
+            _["token"] == token
+            && _["access_token"] == "123"
+            && _["client_ip"] == "127.0.0.1"
+            ));
+        }
+
+        [Test]
+        public async Task SignOut_WhenCall_ClearCookieAndSession()
+        {
+            // Arrange
+            var userSession = new UserAuthInfo
+            {
+                AccessToken = FakeHelper.Create<string>()
+            };
+            _sessionService.UserSession.Returns(userSession);
+            var httpRequest = Substitute.For<HttpRequestBase>();
+            var httpResponse = Substitute.For<HttpResponseBase>();
+            var httpCache = Substitute.For<HttpCachePolicyBase>();
+            httpResponse.Cache.Returns(httpCache);
+            httpRequest.Cookies.Returns(new HttpCookieCollection());
+
+            // Action
+            await _portalAuthService.SignOut(httpResponse, httpRequest);
+
+            // Assert
+            Assert.Multiple(() =>
+            {
+                httpCache.Received().SetNoStore();
+                httpCache.Received().SetExpires(Arg.Any<DateTime>());
+                httpCache.Received().SetCacheability(HttpCacheability.NoCache);
+
+                _oauthService.Received().RevokeAccessTokenAsync(userSession.AccessToken);
+                _sessionService.Received().ClearSessions();
+                _formAuthenticationService.Received().SignOut();
+            });
         }
 
         [Test]

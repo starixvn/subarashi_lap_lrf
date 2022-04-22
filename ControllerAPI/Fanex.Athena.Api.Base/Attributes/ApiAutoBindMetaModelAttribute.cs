@@ -5,6 +5,7 @@ using System.Web.Http.Filters;
 using Fanex.Athena.DataAccess.Core.Configuration;
 using Fanex.Athena.Extension.Helper;
 using Fanex.Athena.Model.Auth;
+using Fanex.Athena.Model.Core.Helper;
 using Fanex.Athena.Model.Core.MetaModel;
 using Fanex.Athena.Service.Core.Users;
 using Fanex.Athena.Service.Core.Users.Interfaces;
@@ -100,7 +101,7 @@ namespace Fanex.Athena.Api.Base.Attributes
         private void MapAgent(IDictionary<string, object> actionArguments, UserAuthInfo userSession, LicenseeAuthInfo licenseeSession)
         {
             var currencyAgentList = userSession.CurrencyAgentList;
-            if (ApplySubsidiaryBusiness && MetaModelHelper.IsMetaModel(actionArguments, out IMetaModelSubsidiarySearch subsidiaryMetaModel)
+            if (ApplySubsidiaryBusiness && MetaModelHelper.TryMetaModel(actionArguments, out IMetaModelSubsidiarySearch subsidiaryMetaModel)
                 && !SubsidiaryService.IsIgnoredSubsidiarySearch(subsidiaryMetaModel.SubsidiarySearch, subsidiaryMetaModel.SubsidiaryList, userSession))
             {
                 currencyAgentList = SubsidiaryService.GetCurrencyAgentList(licenseeSession.LicenseeName, currencyAgentList, subsidiaryMetaModel.SubsidiaryList);

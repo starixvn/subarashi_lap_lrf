@@ -12,6 +12,6 @@ namespace Fanex.Athena.Service.Core.OAuth
         public string ClientSecret { get; set; }
         public string Scope { get; set; }
 
-        public HttpClientHandler MessageHandler { get; set; }
+        public HttpMessageHandler MessageHandler { get; set; }
     }
 }

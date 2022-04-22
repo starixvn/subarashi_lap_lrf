@@ -1,9 +1,8 @@
 ﻿namespace Fanex.Athena.Controllers
 {
     using Extension.Utility;
-    using Fanex.Athena.Service.Core.OAuth;
     using Fanex.Athena.Service.Core.Users.Interfaces;
-	using Fanex.Athena.Service.StatelessCore.Utility;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Model.Core.DataDomain;
 
     using ONEbook.UM.Services;
@@ -25,7 +24,7 @@
         private readonly ISessionService _sessionService;
 
         public UtilityController(
-            IAppSettings appSettings, 
+            IAppSettings appSettings,
             ILanguageService languageService,
             IMaintenanceService maintenanceService,
             ISessionService sessionService
@@ -156,10 +155,10 @@
         }
 
         private bool IsAuthenticated(string identityName)
-           => User.Identity.IsAuthenticated && string.Equals(User.Identity.Name, identityName, StringComparison.InvariantCultureIgnoreCase);
+            => User.Identity.IsAuthenticated && string.Equals(User.Identity.Name, identityName, StringComparison.InvariantCultureIgnoreCase);
 
         private bool IsValidSession(string identityName)
-          => _sessionService.UserSession != null && string.Equals(_sessionService.UserSession.IdentityName, identityName, StringComparison.InvariantCultureIgnoreCase);
+            => _sessionService.UserSession != null && string.Equals(_sessionService.UserSession.IdentityName, identityName, StringComparison.InvariantCultureIgnoreCase);
 
         private static string GetMessageRestriction(int code)
         {

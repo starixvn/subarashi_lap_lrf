@@ -162,7 +162,7 @@ namespace Fanex.Athena
 
 
             builder.RegisterType<PortalApiService>().As<IPortalApiService>().SingleInstance();
-			builder.RegisterType<SubsidiaryService>().As<ISubsidiaryService>().SingleInstance();
+            builder.RegisterType<SubsidiaryService>().As<ISubsidiaryService>().SingleInstance();
 
             builder.Register(x => new ProxyService(
                new ProxyOptions(Convert.ToInt16(ConfigurationManager.AppSettings["Proxy_Timeout"])))

@@ -9,6 +9,7 @@ using Fanex.Athena.Service.StatelessCore.Utility;
 using System.Collections.Generic;
 using Fanex.Athena.Model.Auth;
 using Fanex.Athena.Service.Core.Users;
+using Fanex.Athena.Model.Core.Helper;
 
 namespace Fanex.Athena.Web.ActionFilter
 {
@@ -121,7 +122,7 @@ namespace Fanex.Athena.Web.ActionFilter
         private void MapAgent(IDictionary<string, object> actionArguments, UserAuthInfo userSession, LicenseeAuthInfo licenseeSession)
         {
             var currencyAgentList = userSession.CurrencyAgentList;
-            if (ApplySubsidiaryBusiness && MetaModelHelper.IsMetaModel(actionArguments, out IMetaModelSubsidiarySearch subsidiaryMetaModel)
+            if (ApplySubsidiaryBusiness && MetaModelHelper.TryMetaModel(actionArguments, out IMetaModelSubsidiarySearch subsidiaryMetaModel)
                 && !SubsidiaryService.IsIgnoredSubsidiarySearch(subsidiaryMetaModel.SubsidiarySearch, subsidiaryMetaModel.SubsidiaryList, userSession))
             {
                 currencyAgentList = SubsidiaryService.GetCurrencyAgentList(licenseeSession.LicenseeName, currencyAgentList, subsidiaryMetaModel.SubsidiaryList);

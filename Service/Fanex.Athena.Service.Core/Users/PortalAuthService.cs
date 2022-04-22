@@ -43,7 +43,7 @@
             {
                 { nameof(token), token },
                 { "access_token", _sessionService.UserSession?.AccessToken },
-                { "client_ip", HttpContext.Current.Request.UserHostAddress }
+                { "client_ip", _sessionService.ClientIP }
             });
 
         public IResultInfo SignIn(HttpContextBase currentContext, IOAuthInfo oauthInfo)
@@ -75,7 +75,7 @@
         public async Task SignOut(HttpResponseBase response, HttpRequestBase request)
         {
             var userSession = _sessionService.UserSession;
-            HttpContext.Current.Session.Clear();
+            _sessionService.ClearSessions();
             CookiesHelper.ClearCookies(response, request.Cookies.AllKeys);
             _formsAuthService.SignOut();
 

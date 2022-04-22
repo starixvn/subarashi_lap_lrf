@@ -8,7 +8,6 @@
     using Extension.Utility.Interfaces;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Core.DataDomain;
-    using Fanex.Athena.Model.Core.DTO.Configuration;
     using Fanex.Athena.Model.Core.DTO.Users;
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Service.Core.Users;
@@ -58,7 +57,7 @@
             var result = _service.GetCurrencyAgentList(_userAuthInfo, LicenseeName, subsidairyNames, false, 0);
 
             // Assert
-            Assert.AreEqual(false, result.Any());
+            Assert.IsFalse(result.Any());
         }
 
         [Test]
@@ -68,7 +67,7 @@
             var result = _service.GetCurrencyAgentList(_userAuthInfo, LicenseeName, string.Empty, true, CurrencyType.Uus);
 
             // Assert
-            Assert.AreEqual(false, result.Any());
+            Assert.IsFalse(result.Any());
         }
 
         [TestCase("alex,qc", true, 0)]

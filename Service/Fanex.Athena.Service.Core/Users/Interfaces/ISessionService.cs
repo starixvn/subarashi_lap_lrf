@@ -6,10 +6,16 @@
     {
         string CaptchaCode { get; set; }
 
+        string SessionID { get; }
+
+        string ClientIP { get; }
+
         LicenseeAuthInfo LicenseeSession { get; }
 
         UserAuthInfo UserSession { get; }
 
         void AssignSessions(UserAuthInfo userSession, LicenseeAuthInfo licenseeSession);
+
+        void ClearSessions();
     }
 }

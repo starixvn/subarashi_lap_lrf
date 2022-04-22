@@ -21,8 +21,6 @@
     {
         private const string ResultPageGetNormalSportsName = "ResultPage_GetNormalSports";
 
-        private const string ROOT_URL = "{rootUrl}";
-
         private readonly IBalanceUpDataAccess _balanceUpDataAccess;
         private readonly IBetListApiClient _betListApiClient;
         private readonly IPortalApiService _portalApiService;

@@ -157,7 +157,7 @@
                 _ = await controller.ChangeLicensee(LicenseeId);
 
                 // Assert
-                _authService.Received().RenewOAuthInfoAsync(LicenseeId, DefaultUserSession.AccessToken);
+                await _authService.Received().RenewOAuthInfoAsync(LicenseeId, DefaultUserSession.AccessToken);
                 _authService.Received().ReSignIn(oauthInfo);
             }
         }
