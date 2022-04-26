@@ -2,7 +2,11 @@
     ViewBag.Title = "LAP - " + ViewResources.LicenseeContacts;
     Layout = "~/Views/Desktop/Shared/_ReactPageLayout.cshtml";
 }
+@using Fanex.Athena.Model.Core.DTO.Common;
+
 @{
+    var whitelabelList = ViewBag.SubsidiaryList as IEnumerable<CheckedItem>;
+    var subsidiaryList = whitelabelList.SelectMany(x => x.Children.Select(y => y.Value)).Distinct();
 }
 
 @section pagecss {
@@ -16,6 +20,12 @@
 @section globaljscode{
     window.initialState = {
     isLoading: false
+    }
+
+    window._AppData = {
+    subsidiaryViewType: @ViewBag.SubsidiaryViewType,
+    whitelabelList: @Html.Raw(whitelabelList.ToJson()),
+    subsidiaryList: @Html.Raw(subsidiaryList.ToJson()),
     }
 }
 <div id="app-container">

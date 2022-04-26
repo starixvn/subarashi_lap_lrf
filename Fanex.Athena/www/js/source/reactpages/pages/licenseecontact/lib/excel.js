@@ -12,8 +12,9 @@ const MAIN_SECTION_STYLE = 'mainSectionStyle';
 
 
 export default class LicenseeContactExcel {
-    constructor(data) {
+    constructor(data, excludedColumns) {
         this.data = data;
+        this.excludedColumns = excludedColumns;
         this.title = LangHelper.getSingleResource('LicenseeContacts');
         this.worksheet = {};
         this.currentRowIndex = DATA_ROW_INDEX;
@@ -48,10 +49,6 @@ export default class LicenseeContactExcel {
         const totalColumn = this.columnConfigs.length;
         for (let i = 0; i < totalColumn; i++) {
             const field = this.columnConfigs[i].field;
-            const address = Excel.getCellAddress({
-                c: i,
-                r: HEADER_ROW_INDEX
-            });
 
             this.worksheet[Excel.getCellAddress({
                 c: i,
@@ -134,6 +131,10 @@ export default class LicenseeContactExcel {
             [MAIN_SECTION_STYLE]: bodyCellStyle.center,
             width: 50
         }, {
+            field: fields.Subsidiary,
+            [MAIN_SECTION_STYLE]: bodyCellStyle.left,
+            width: 150
+        }, {
             field: fields.ContactName,
             [MAIN_SECTION_STYLE]: bodyCellStyle.left,
             width: 150
@@ -170,6 +171,6 @@ export default class LicenseeContactExcel {
             [MAIN_SECTION_STYLE]: bodyCellStyle.left,
             width: 200
         }];
-        return result;
+        return result.filter(_ => !this.excludedColumns[_.field]);
     }
 }

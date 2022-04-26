@@ -2,9 +2,9 @@ import { toggleLoader } from '@jsroot/actions/loaderAction';
 import { SET_CONTACT_LIST, SET_MODIFICATION_ACTION } from './types';
 import ApiService from '../lib/service';
 
-export const fetchContactList = contactName => async dispatch => {
+export const fetchContactList = (contactName, subsidiaryList) => async dispatch => {
     dispatch(toggleLoader(true))
-    const contactList = await ApiService.getContactList(contactName)
+    const contactList = await ApiService.getContactList(contactName, subsidiaryList)
     dispatch(setContactList(contactList))
     dispatch(toggleLoader(false))
 }

@@ -70,9 +70,10 @@
     <Compile Include="Models\GetLicenseeContactCategoriesMetaModel.cs" />
     <Compile Include="Models\GetLicenseeContactsMetaModel.cs" />
     <Compile Include="Models\LicenseeContactCategory.cs" />
-    <Compile Include="Models\ModifyLicenseeContactMetaModel.cs" />
+    <Compile Include="Models\ModificationLicenseeContactMetaModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <AdditionalFiles Include="..\..\..\.sonarlint\lrf\CSharp\SonarLint.xml">
       <Link>SonarLint.xml</Link>

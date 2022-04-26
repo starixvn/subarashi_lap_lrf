@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { HeaderRow, HeaderCell, Row, Cell } from '@9softstudio/react-grid';
@@ -6,8 +6,9 @@ import ActionCreators from '../actions';
 import { Table } from '@9softstudio/react-grid';
 import NoDataTitle from '@jsroot/components/NoDataTitle';
 import { decode } from '@jsroot/lib/htmlHelper';
+import AppData from '@jsroot/lib/AppData'
 import { ModificationActionType, fields, textHeaders, } from '../lib/contants'
-import { getContactTypeText } from '../lib/helper';
+import { getContactTypeText, isShowSubsidiaryInfo } from '../lib/helper';
 
 const MAX_WIDTH_PAGE = 1920;
 
@@ -21,9 +22,12 @@ export const DataGrid = ({ contactList, setModificationAction }) => {
         return <NoDataTitle />;
     }
 
+    const _showSubsidiaryColumn = useMemo(() => isShowSubsidiaryInfo(AppData.subsidiaryViewType, AppData.subsidiaryList), []);
+
     const _headers = React.useMemo(() => {
         return <HeaderRow style={{ height: 35 }}>
             <HeaderCell colWidth={10}>{textHeaders[fields.Index]}</HeaderCell>
+            {_showSubsidiaryColumn && <HeaderCell colWidth={30}>{textHeaders[fields.Subsidiary]}</HeaderCell>}
             <HeaderCell colWidth={40}>{textHeaders[fields.ContactName]}</HeaderCell>
             <HeaderCell colWidth={30}>{textHeaders[fields.ContactType]}</HeaderCell>
             <HeaderCell colWidth={30}>{textHeaders[fields.Position]}</HeaderCell>
@@ -37,10 +41,10 @@ export const DataGrid = ({ contactList, setModificationAction }) => {
         </HeaderRow>
     }, [])
 
-
     const _body = React.useMemo(() => {
         return contactList.map((contact, index) => <Row key={'contact_' + contact.ContactID}>
             <Cell className="center-align">{index + 1}</Cell>
+            {_showSubsidiaryColumn && <Cell className="left-align" title={contact[fields.Subsidiary]} >{contact[fields.Subsidiary]}</Cell>}
             <Cell className="left-align" title={contact[fields.ContactName]} >{contact[fields.ContactName]}</Cell>
             <Cell className="center-align">{getContactTypeText(contact[fields.ContactType])}</Cell>
             <Cell className="center-align">{contact[fields.Position]}</Cell>

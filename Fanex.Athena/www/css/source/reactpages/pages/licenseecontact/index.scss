@@ -3,6 +3,7 @@
 @import "../../components/autocomplete";
 @import '../../components/forms/radio-buttons';
 @import '../../components/forms/checkbox';
+@import '../../components/react-multiselect';
 @import "../../components/alert/index";
 
 .form-action {
@@ -45,6 +46,14 @@
         font-size: 11px;
         color: #b6b6b6;
     }
+    .Select-placeholder {
+        bottom: 0;
+        color: #aaa;
+        left: 0;
+        line-height: 30px;
+        padding-left: 0;
+    }
+    
 }
 
 .category-selection {

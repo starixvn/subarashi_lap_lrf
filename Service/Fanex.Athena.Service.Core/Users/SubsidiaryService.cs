@@ -105,11 +105,16 @@
                 return Enumerable.Empty<CheckedItem>();
             }
 
-            var groupSub = GetAllGroupSubsidiaries(user, licenseeName, user.WhiteLabelID);
+            var groupSub = GetAllGroupSubsidiaries(user, licenseeName);
 
             return user.SubsidiaryViewType == (int)SubsidiaryViewType.MasterManagement
                 ? GetWhiteLabelTree(groupSub)
                 : GetOperatorTree(groupSub);
+        }
+        public IEnumerable<CheckedItem> GetWhiteLabelTree(UserAuthInfo user, string licenseeName)
+        {
+            var groupSub = GetAllGroupSubsidiaries(user, licenseeName);
+            return GetWhiteLabelTree(groupSub);
         }
 
         public IEnumerable<Subsidiary> GetSubsidiaryList(UserAuthInfo user, string licenseeName, string subsidiaryList)
@@ -134,7 +139,7 @@
             var selectedSubsidiaries = subsidiaryList.Split(',');
             var selectedWhiteLabels = whiteLabelList.Split(',').Select(x => x == OtherWhiteaLableId ? (int?)null : int.Parse(x));
 
-            var allGroups = GetAllGroupSubsidiaries(user, licenseeName, user.WhiteLabelID);
+            var allGroups = GetAllGroupSubsidiaries(user, licenseeName);
 
             return allGroups
                 .Where(x => selectedSubsidiaries.Any(s => s.Equals(x.OperatorId, StringComparison.OrdinalIgnoreCase)) && selectedWhiteLabels.Contains(x.WhiteLabelID))
@@ -163,15 +168,16 @@
                 .ToList();
         }
 
-        private IEnumerable<GroupSubsidiary> GetAllGroupSubsidiaries(UserAuthInfo user, string licenseeName, int? whitteLabelId)
+        private IEnumerable<GroupSubsidiary> GetAllGroupSubsidiaries(UserAuthInfo user, string licenseeName)
         {
             var cacheKey = string.Format(CacheKey.MemorycacheGroupSubsidiaryListByLicensee, licenseeName);
             var groupSubsidiaryList = _cache.Get(cacheKey, () => _subLicenseeDataAccess.GetGroupSubsidiaries(licenseeName), CacheTimeoutSeconds);
             var operators = this.GetUserSubsidiaries(user.CurrencyAgentList, licenseeName);
+            var whiteLabelId = user.WhiteLabelID;
 
             return groupSubsidiaryList
                 .Where(x =>
-                    (!whitteLabelId.HasValue || x.WhiteLabelID == whitteLabelId)
+                    (!whiteLabelId.HasValue || x.WhiteLabelID == whiteLabelId)
                     && operators.Any(o => o.OperatorId.Equals(x.OperatorId, StringComparison.OrdinalIgnoreCase)))
                 .ToList();
         }
