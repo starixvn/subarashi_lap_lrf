@@ -113,17 +113,17 @@
                 var resultData = result.Data as object;
 
                 // Assert
-                Assert.Multiple(() =>
+                Assert.Multiple((TestDelegate)(() =>
                 {
                     _customerListService.Received(1).UpdateCustomerBAStatus(
-                        SessionService.LicenseeSession.LicenseeId,
+                        (int)SessionService.LicenseeSession.LicenseeId,
                         CustId,
                         SessionService.UserSession.UserId,
                         isAllowBa,
                         Arg.Any<Request>());
                     Assert.That(resultData.GetValue("IsSuccessful"), Is.True);
                     Assert.That(resultData.GetValue("OddsGroup"), Is.EqualTo(OddsGroup));
-                });
+                }));
             }
         }
     }

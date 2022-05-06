@@ -15,7 +15,7 @@ namespace Fanex.Athena.Web.UnitTests.ActionFilter
 {
     public class CustomAuthorizeAttributeTest
     {
-        private ISessionStorage _sessionStorage;
+        private ISessionService _sessionStorage;
         private IAppSettings _appSettings;
 
         private CustomAuthorizeAttribute _attribute;
@@ -23,7 +23,7 @@ namespace Fanex.Athena.Web.UnitTests.ActionFilter
         [SetUp]
         public void Setup()
         {
-            _sessionStorage = Substitute.For<ISessionStorage>();
+            _sessionStorage = Substitute.For<ISessionService>();
             _appSettings = Substitute.For<IAppSettings>();
             _attribute = new CustomAuthorizeAttribute(_sessionStorage, _appSettings);
         }
@@ -38,7 +38,7 @@ namespace Fanex.Athena.Web.UnitTests.ActionFilter
             _attribute.OnAuthorization(filterContext);
 
             // Assert
-            var temp = _sessionStorage.DidNotReceive().UserAuthInfo;
+            var temp = _sessionStorage.DidNotReceive().UserSession;
         }
 
         [Test]
@@ -51,7 +51,7 @@ namespace Fanex.Athena.Web.UnitTests.ActionFilter
             _attribute.OnAuthorization(filterContext);
 
             // Assert
-            var temp = _sessionStorage.Received(1).LicenseeAuthInfo;
+            var temp = _sessionStorage.Received(1).LicenseeSession;
         }
 
         [Test]
@@ -94,12 +94,12 @@ namespace Fanex.Athena.Web.UnitTests.ActionFilter
         }
 
         [Test]
-        public void OnAuthorization_NotAuthorized_FilterContextResultNull()
+        public void OnAuthorization_Authorized_FilterContextResultNull()
         {
             // Arrange
             var filterContext = CreateFilterContext(false);
-            _sessionStorage.LicenseeAuthInfo.Returns(new LicenseeAuthInfo());
-            _sessionStorage.UserAuthInfo.Returns(new UserAuthInfo());
+            _sessionStorage.LicenseeSession.Returns(new LicenseeAuthInfo());
+            _sessionStorage.UserSession.Returns(new UserAuthInfo { AccessTokenLifeTime = DateTime.Now.AddDays(1) });
 
             // Action
             _attribute.OnAuthorization(filterContext);

@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="FunctionAuthorizationAttribute.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Web.ActionFilter
+﻿namespace Fanex.Athena.Web.ActionFilter
 {
     using System;
     using System.Web.Mvc;
@@ -25,14 +19,14 @@ namespace Fanex.Athena.Web.ActionFilter
             _permissionKeys = permissionKeys;
         }
 
-        public ISessionStorage SessionStorage { get; set; }
+        public ISessionService SessionService { get; set; }
 
         public IAuthorizationService AuthorizationServiceInstance { get; set; }
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            var licenseeSession = SessionStorage.LicenseeAuthInfo;
-            var userSession = SessionStorage.UserAuthInfo;
+            var licenseeSession = SessionService.LicenseeSession;
+            var userSession = SessionService.UserSession;
             var authorized = userSession != null && licenseeSession != null;
             if (authorized)
             {

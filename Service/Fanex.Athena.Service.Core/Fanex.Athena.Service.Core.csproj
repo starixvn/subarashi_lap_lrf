@@ -24,7 +24,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
-    <CodeAnalysisRuleSet>Fanex.Athena.Service.Core.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>Fanex.Athena.Service.Core.Debug.ruleset</CodeAnalysisRuleSet>
     <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -38,9 +38,15 @@
     <CodeAnalysisRuleSet>Fanex.Athena.Service.Core.Release.ruleset</CodeAnalysisRuleSet>
     <LangVersion>7.2</LangVersion>
   </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Fanex.Common, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Fanex.Common.1.1.0.1\lib\net40\Fanex.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.IdentityModel, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Fanex.IdentityModel.1.0.0\lib\net461\Fanex.IdentityModel.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.Logging, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Fanex.Logging.2.0.1\lib\net461\Fanex.Logging.dll</HintPath>
@@ -88,6 +94,9 @@
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Threading.Tasks.Extensions.4.3.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
@@ -97,19 +106,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Users\ContextService.cs" />
-    <Compile Include="Users\Interfaces\IContextService.cs" />
-    <Compile Include="Users\Interfaces\ISessionStorage.cs" />
+    <Compile Include="OAuth\Interfaces\IOAuthInfo.cs" />
+    <Compile Include="OAuth\Interfaces\IOAuthService.cs" />
+    <Compile Include="OAuth\OAuthInfo.cs" />
+    <Compile Include="OAuth\OAuthOptions.cs" />
+    <Compile Include="Proxy\Interfaces\IProxyOptions.cs" />
+    <Compile Include="Proxy\Interfaces\IProxyService.cs" />
+    <Compile Include="Proxy\ProxyOptions.cs" />
+    <Compile Include="Proxy\ProxyService.cs" />
     <Compile Include="Users\Interfaces\ISubsidiaryService.cs" />
-    <Compile Include="Users\SessionStorage.cs" />
+    <Compile Include="OAuth\OAuthService.cs" />
     <Compile Include="Users\SubsidiaryService.cs" />
-    <Compile Include="Users\AuthService.cs" />
-    <Compile Include="Users\Interfaces\IAuthService.cs" />
-    <Compile Include="Users\Interfaces\IOneAuthenticationService.cs" />
+    <Compile Include="Users\InternalAuthService.cs" />
+    <Compile Include="Users\Interfaces\IInternalAuthService.cs" />
+    <Compile Include="Users\Interfaces\IPortalAuthService.cs" />
     <Compile Include="Common\LanguageService.cs" />
     <Compile Include="Common\Interfaces\IExChangeRateService.cs" />
     <Compile Include="Common\Interfaces\ILanguageService.cs" />
-    <Compile Include="Users\OneAuthenticationService.cs" />
+    <Compile Include="Users\PortalAuthService.cs" />
     <Compile Include="Users\Interfaces\ISessionService.cs" />
     <Compile Include="Users\Interfaces\IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -124,8 +138,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Fanex.Athena.Service.Core.Debug.ruleset" />
     <None Include="Fanex.Athena.Service.Core.Release.ruleset" />
-    <None Include="Fanex.Athena.Service.Core.ruleset" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -157,6 +171,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <AdditionalFiles Include="..\..\.sonarlint\lrf\CSharp\SonarLint.xml">
+      <Link>SonarLint.xml</Link>
+    </AdditionalFiles>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

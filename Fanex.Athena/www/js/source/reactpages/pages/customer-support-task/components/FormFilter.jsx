@@ -34,7 +34,7 @@ const FormFilter = ({ selectedCurrency, selectedSupportTask, setSelectedSupportT
             ...Site.getLrfSubsidiary()
         }
 
-        DataService.getFile(ExportUrl, params)
+        DataService.getReportFile(ExportUrl, params)
             .then((response) => {
                 toggleLoader(false);
                 const NoContentStatusCode = 204;

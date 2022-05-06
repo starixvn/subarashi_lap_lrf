@@ -21,7 +21,7 @@ namespace Fanex.Athena.Web.UnitTests.ActionFilter
 
         private ActionExecutingContext _filterContext;
 
-        private ISessionStorage _sessionStorage;
+        private ISessionService _sessionStorage;
 
         private IAuthorizationService _authorizationService;
 
@@ -31,10 +31,10 @@ namespace Fanex.Athena.Web.UnitTests.ActionFilter
         public void Setup()
         {
             _filterContext = CreateFilterContext();
-            _sessionStorage = Substitute.For<ISessionStorage>();
+            _sessionStorage = Substitute.For<ISessionService>();
             _authorizationService = Substitute.For<IAuthorizationService>();
             _attribute = new FunctionAuthorizationAttribute();
-            _attribute.SessionStorage = _sessionStorage;
+            _attribute.SessionService = _sessionStorage;
             _attribute.AuthorizationServiceInstance = _authorizationService;
         }
 
@@ -43,8 +43,8 @@ namespace Fanex.Athena.Web.UnitTests.ActionFilter
         public void OnActionExecuting_IsAuthorized_FilterContextResultNull(AppMode appMode)
         {
             // Arrange
-            _sessionStorage.LicenseeAuthInfo.Returns(new LicenseeAuthInfo());
-            _sessionStorage.UserAuthInfo.Returns(new UserAuthInfo { ApplicationMode = appMode });
+            _sessionStorage.LicenseeSession.Returns(new LicenseeAuthInfo());
+            _sessionStorage.UserSession.Returns(new UserAuthInfo { ApplicationMode = appMode });
             _authorizationService.HasPermissions(Arg.Any<UserAuthInfo>(), Arg.Any<string[]>()).Returns(true);
             _authorizationService.HasPermissions(Arg.Any<UserAuthInfo>(), Arg.Any<string[]>()).Returns(true);
 

@@ -1,24 +1,13 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="BaseApiController.cs" company="">
-// Copyright (c) . All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-
-namespace Fanex.Athena.Api.Base
+﻿namespace Fanex.Athena.Api.Base
 {
     using System.Threading.Tasks;
     using System.Web.Http;
-
-    using Attributes;
-
+    using Fanex.Athena.Api.Base.Attributes;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-
-    using ONEbook.UM.Filters;
-
     using Service.Core.Common.Interfaces;
 
-    [CheckUMFilter]
     [XFrameOptionApi]
+    [ApiUMFilter]
     public class CommonApiController : ApiController
     {
         private readonly IMoveBetService _moveBetService;

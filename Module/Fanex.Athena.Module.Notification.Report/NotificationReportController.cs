@@ -11,8 +11,6 @@
     using Fanex.Athena.Module.Notification.ViewModel;
     using Fanex.Athena.Web.ActionFilter;
     using Fanex.Athena.Web.ResultExtension;
-    using ONEbook.UM.Filters;
-
     using System;
     using System.Net;
     using System.Threading.Tasks;
@@ -21,7 +19,7 @@
 
     [FunctionAuthorization(PermissionKeys.ResultAmendmentNotificationReport)]
     [SessionState(SessionStateBehavior.ReadOnly)]
-    [CheckUMFilter]
+    [UMFilter]
     public class NotificationReportController : CultureBaseController
     {
         private readonly INotificationService _notificationService;

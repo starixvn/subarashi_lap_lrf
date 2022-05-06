@@ -15,7 +15,5 @@ namespace Fanex.Athena.DataAccess.Customer.Interfaces
         Task<IEnumerable<UpdateStatusPlayerResult>> UpdateVipStatusAsync(UpdateStatusPlayerMetaModel metaModel);
 
         Task<IEnumerable<ReasonGroup>> GetReasonGroupListAsync(string langKey);
-
-        Task<IEnumerable<string>> GetProblemAccountCustomerClass();
     }
 }

@@ -9,6 +9,6 @@
     {
         Task<IEnumerable<CustomerClassModel>> GetSettingPolicy(GetCustomerClassInformationMetaModel metaModel);
         Task<IEnumerable<CustomerClassModel>> GetSpreadSettingPolicy(GetCustomerClassInformationMetaModel metaModel);
-        Task<IEnumerable<CustomerClassCategoryModel>> GetCustomerClassCategories();
+        Task<IEnumerable<string>> GetAllCustomerClass();
     }
 }

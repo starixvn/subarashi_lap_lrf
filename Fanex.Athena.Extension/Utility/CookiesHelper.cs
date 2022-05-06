@@ -42,5 +42,22 @@ namespace Fanex.Athena.Extension.Utility
             HttpContext.Current.Response.Cookies.Remove(name);
             HttpContext.Current.Response.SetCookie(cookie);
         }
+
+        public static  void ClearCookies(HttpResponseBase response, string[] cookies)
+        {
+            var cache = response.Cache;
+            cache.SetNoStore();
+            cache.SetExpires(DateTime.Now.AddMinutes(-1));
+            cache.SetCacheability(HttpCacheability.NoCache);
+            foreach (string cookie in cookies)
+            {
+                var item = new HttpCookie(cookie)
+                {
+                    Expires = DateTime.Now.AddDays(-1),
+                    HttpOnly = true
+                };
+                response.Cookies.Add(item);
+            }
+        }
     }
 }

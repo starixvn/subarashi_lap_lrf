@@ -30,36 +30,6 @@ namespace Fanex.Athena.VendorAdapter
             return RemotingRefService.GetBetTypeName(bettypeId.ToString(), GetCurrentIBCLanguageCode());
         }
 
-        public string GetSportName(object sportId, string languageCode = null)
-        {
-            if (!IsValidId(sportId))
-            {
-                return string.Empty;
-            }
-
-            return RemotingRefService.GetSportName(sportId.ToString(), GetCurrentIBCLanguageCode(languageCode), string.Empty);
-        }
-
-        public string GetTeamName(object teamId)
-        {
-            if (!IsValidId(teamId))
-            {
-                return string.Empty;
-            }
-
-            return RemotingRefService.GetTeamName(teamId.ToString(), GetCurrentIBCLanguageCode(), string.Empty);
-        }
-
-        public string GetLeagueName(object leagueId)
-        {
-            if (!IsValidId(leagueId))
-            {
-                return string.Empty;
-            }
-
-            return RemotingRefService.GetLeagueName(leagueId.ToString(), GetCurrentIBCLanguageCode(), string.Empty);
-        }
-
         /// <summary>
         /// Get bet type text by bet type and live indicator.
         /// </summary>
@@ -88,6 +58,36 @@ namespace Fanex.Athena.VendorAdapter
             }
 
             return betTypeName;
+        }
+
+        public string GetSportName(object sportId, string languageCode = null)
+        {
+            if (!IsValidId(sportId))
+            {
+                return string.Empty;
+            }
+
+            return RemotingRefService.GetSportName(sportId.ToString(), GetCurrentIBCLanguageCode(languageCode), string.Empty);
+        }
+
+        public string GetTeamName(object teamId)
+        {
+            if (!IsValidId(teamId))
+            {
+                return string.Empty;
+            }
+
+            return RemotingRefService.GetTeamName(teamId.ToString(), GetCurrentIBCLanguageCode(), string.Empty);
+        }
+
+        public string GetLeagueName(object leagueId)
+        {
+            if (!IsValidId(leagueId))
+            {
+                return string.Empty;
+            }
+
+            return RemotingRefService.GetLeagueName(leagueId.ToString(), GetCurrentIBCLanguageCode(), string.Empty);
         }
 
         public string GetBetTypeName(object bettypeId, string languageCode)

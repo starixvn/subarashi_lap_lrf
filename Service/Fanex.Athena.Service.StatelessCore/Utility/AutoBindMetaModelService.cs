@@ -68,7 +68,7 @@ namespace Fanex.Athena.Service.StatelessCore.Utility
 
         public static void MapUserId(IDictionary<string, object> actionArguments, int userId)
         {
-            if (MetaModelHelper.IsMetaModel(actionArguments, out IMetaModelUserId value))
+            if (MetaModelHelper.TryMetaModel(actionArguments, out IMetaModelUserId value))
             {
                 value.UserId = userId;
             }
@@ -76,7 +76,7 @@ namespace Fanex.Athena.Service.StatelessCore.Utility
 
         public static void MapSiteName(IDictionary<string, object> actionArguments, string siteName)
         {
-            if (MetaModelHelper.IsMetaModel(actionArguments, out IMetaModelSiteName value))
+            if (MetaModelHelper.TryMetaModel(actionArguments, out IMetaModelSiteName value))
             {
                 value.SiteName = siteName;
             }
@@ -86,7 +86,7 @@ namespace Fanex.Athena.Service.StatelessCore.Utility
         {
             if (actionArguments.ContainsKey("language")
                 && actionArguments["language"] is string lang
-                && MetaModelHelper.IsMetaModel(actionArguments, out IMetaModelLanguage model))
+                && MetaModelHelper.TryMetaModel(actionArguments, out IMetaModelLanguage model))
             {
                 model.Language = Util.MapIetfLanguageCodes[lang];
             }
@@ -94,7 +94,7 @@ namespace Fanex.Athena.Service.StatelessCore.Utility
 
         public static void MapLanguage(IDictionary<string, object> actionArguments, string lang)
         {
-            if (MetaModelHelper.IsMetaModel(actionArguments, out IMetaModelLanguage model))
+            if (MetaModelHelper.TryMetaModel(actionArguments, out IMetaModelLanguage model))
             {
                 model.Language = lang;
             }
@@ -102,7 +102,7 @@ namespace Fanex.Athena.Service.StatelessCore.Utility
 
         public static void MapIp(IDictionary<string, object> actionArguments, string ip)
         {
-            if (MetaModelHelper.IsMetaModel(actionArguments, out IMetaModelIp model))
+            if (MetaModelHelper.TryMetaModel(actionArguments, out IMetaModelIp model))
             {
                 model.Ip = ip;
             }
@@ -110,7 +110,7 @@ namespace Fanex.Athena.Service.StatelessCore.Utility
 
         public static void MapBalanceUpAndMoveBet(IDictionary<string, object> actionArguments, IBalanceUpDataAccess balanceUpDataAccess)
         {
-            if (MetaModelHelper.IsMetaModel(actionArguments, out IMetaModelBalanceUpAndMoveBet value))
+            if (MetaModelHelper.TryMetaModel(actionArguments, out IMetaModelBalanceUpAndMoveBet value))
             {
                 var temp = balanceUpDataAccess.GetBalanceUp();
                 value.BalanceUpDay = temp.BalanceUpDay;
@@ -120,7 +120,7 @@ namespace Fanex.Athena.Service.StatelessCore.Utility
 
         public static void MapExportAll(IDictionary<string, object> actionArguments)
         {
-            if (MetaModelHelper.IsMetaModel(actionArguments, out IMetaModelPaging metaModelPaging))
+            if (MetaModelHelper.TryMetaModel(actionArguments, out IMetaModelPaging metaModelPaging))
             {
                 const int UnlimitPageSize = int.MaxValue - 1000;
                 metaModelPaging.PageIndex = 1;
@@ -130,16 +130,16 @@ namespace Fanex.Athena.Service.StatelessCore.Utility
 
         public static void MapShowingBetFromIP(IDictionary<string, object> actionArguments, bool isShowIp, bool isShowIpvn)
         {
-            if (MetaModelHelper.IsMetaModel(actionArguments, out IMetaModelShowBetFromIP metaModelShowBetFromIP))
+            if (MetaModelHelper.TryMetaModel(actionArguments, out IMetaModelShowBetFromIP metaModelShowBetFromIP))
             {
-                metaModelShowBetFromIP.IsShowIpvn = isShowIp && isShowIpvn;
+                metaModelShowBetFromIP.IsShowIpvn = isShowIpvn;
                 metaModelShowBetFromIP.IsShowIp = isShowIp;
             }
         }
 
         public static void MapProductCodeList(IDictionary<string, object> actionArguments, IEnumerable<string> offeredSubProducts, IProductService productService)
         {
-            if (MetaModelHelper.IsMetaModel(actionArguments, out IMetaModelProductCodeList metaModelProductCodeList)
+            if (MetaModelHelper.TryMetaModel(actionArguments, out IMetaModelProductCodeList metaModelProductCodeList)
                 && !string.IsNullOrEmpty(metaModelProductCodeList.ProductCodeList))
             {
                 BindProductCodeList(metaModelProductCodeList, offeredSubProducts, productService);
@@ -148,7 +148,7 @@ namespace Fanex.Athena.Service.StatelessCore.Utility
 
         public static void MapProductOptions(IDictionary<string, object> actionArguments, IEnumerable<string> offeredSubProducts, IProductService productService)
         {
-            if (MetaModelHelper.IsMetaModel(actionArguments, out IMetaModelProductOptions metaModelProductOptions)
+            if (MetaModelHelper.TryMetaModel(actionArguments, out IMetaModelProductOptions metaModelProductOptions)
                 && metaModelProductOptions.ProductOptions != null && metaModelProductOptions.ProductOptions.Any())
             {
                 BindProductOptions(metaModelProductOptions, offeredSubProducts, productService);

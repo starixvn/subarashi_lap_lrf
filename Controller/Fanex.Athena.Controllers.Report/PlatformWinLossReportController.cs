@@ -3,24 +3,13 @@
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
-
     using Model.Core.DataDomain;
-    using System.Threading.Tasks;
     using System.Web.Mvc;
 
     [FunctionAuthorization(PermissionKeys.ReportPlatformWinLoss)]
     public class PlatformWinLossReportController : ReportBaseController
     {
-        private readonly IReportAPIClient _reportAPIClient;
-
-        public PlatformWinLossReportController(
-            IReportAPIClient reportAPIClient)
-        {
-            _reportAPIClient = reportAPIClient;
-        }
-
         [HttpGet]
         public ActionResult Index()
         {
@@ -48,54 +37,6 @@
             };
 
             return View("~/Views/Desktop/Report/PlatformWinLoss/Main.cshtml", model);
-        }
-
-        [HttpPost]
-        [ValidationWebRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
-        [AutoBindMetaModel(BindAgent = true, ApplySubsidiaryBusiness = true, BindProductOptions = true)]
-        public async Task<ActionResult> Index(PlatformWinLossMetaModel metaModel)
-        {
-            return await ProcessRequest(metaModel);
-        }
-
-        private async Task<ActionResult> ProcessRequest(PlatformWinLossMetaModel metaModel)
-        {
-            var userSession = SessionServiceInstance.UserSession;
-            metaModel.HasComm = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm;
-            return metaModel.Level == (int)ReportLevel.Main
-                ? await ProcessSummaryLevel(metaModel, userSession.Language)
-                : await ProcessMemberLevel(metaModel, userSession.Language);
-        }
-
-        private async Task<ActionResult> ProcessMemberLevel(PlatformWinLossMetaModel metaModel, string language)
-        {
-            const string FileName = "PlatformWinLossMember.xls";
-            if (metaModel.IsExportExcel)
-            {
-                var response = await _reportAPIClient.PostAsync("api/PlatformWinLoss/ExportMemberData", metaModel,
-                language, MediaType.MsgPack).ConfigureAwait(false);
-                return File(response.Item1, "application/octet-stream", FileName);
-            }
-            else
-            {
-                return JsonString(await _reportAPIClient.PostStringAsync("api/PlatformWinLoss/GetMemberData", metaModel, language).ConfigureAwait(false));
-            }
-        }
-
-        private async Task<ActionResult> ProcessSummaryLevel(PlatformWinLossMetaModel metaModel, string language)
-        {
-            if (metaModel.IsExportExcel)
-            {
-                const string FileName = "PlatformWinLossSummary.xls";
-
-                var response = await _reportAPIClient.PostAsync("api/PlatformWinLoss/ExportSummaryData",
-                 metaModel, language, MediaType.MsgPack).ConfigureAwait(false);
-                return File(response.Item1, "application/octet-stream", FileName);
-            }
-            else
-            {
-                return JsonString(await _reportAPIClient.PostStringAsync("api/PlatformWinLoss/GetSummaryData", metaModel, language).ConfigureAwait(false));
-            }
         }
     }
 }

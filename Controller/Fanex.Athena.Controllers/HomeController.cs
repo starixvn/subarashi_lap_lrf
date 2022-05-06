@@ -1,20 +1,13 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="HomeController.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Controllers
+﻿namespace Fanex.Athena.Controllers
 {
     using Fanex.Athena.Model.Auth.Enum;
-
-    using ONEbook.UM.Filters;
-
+    using System;
+    using System.Text;
     using System.Web.Mvc;
-
+    using System.Web.UI;
     using Web.ActionFilter;
 
-    [CheckUMFilter]
+    [UMFilter]
     public class HomeController : CultureBaseController
     {
         [AuthorizeRestriction(AppMode.Self)]
@@ -31,11 +24,23 @@ namespace Fanex.Athena.Controllers
             return ReAuthorize("~/Views/Desktop/Home/IndexIpad.cshtml");
         }
 
-        /// <summary>
-        /// Checking existing user in the system.
-        /// </summary>
-        /// <param name="defaultView">The client device (IPAD or others).</param>
-        /// <returns>Redirect to sign in page or the home page.</returns>
+        [HttpGet]
+        [OutputCache(NoStore = true, Location = OutputCacheLocation.None, Duration = 0, VaryByParam = "*")]
+        public ContentResult Token()
+        {
+            var fromReferer = Request.Headers["Referer"];
+            if (string.IsNullOrEmpty(fromReferer) || !string.Equals(Request.Url.Host, new Uri(fromReferer).Host, StringComparison.InvariantCultureIgnoreCase))
+            {
+                return Content($"Request is invalid from {fromReferer} to {Request.Url.Host}", "application/javascript", Encoding.UTF8);
+            }
+
+            const string tokenCheckingContent = "function getTopSameOriginWindow(e){try{e.name}catch(n){return getTopSameOriginWindow(e.frames[0])}return e}"
+             + "var topSameOriginWindow=getTopSameOriginWindow(top);topSameOriginWindow.lrf={access_token:'<0>'};";
+            var content = tokenCheckingContent.Replace("<0>", SessionServiceInstance.UserSession.AccessToken);
+
+            return Content(content, "application/javascript", Encoding.UTF8);
+        }
+
         private ActionResult ReAuthorize(string defaultView)
         {
             if (!HttpContext.Response.IsRequestBeingRedirected)
@@ -47,6 +52,11 @@ namespace Fanex.Athena.Controllers
                     Session.Clear();
                     return RedirectToAction("LocationRestriction", "Utility");
                 }
+            }
+
+            if(SessionServiceInstance.UserSession.AccessTokenLifeTime <= DateTime.Now)
+            {
+                return RedirectToAction("LocationRestriction", "Utility");
             }
 
             return View(defaultView);

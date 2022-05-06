@@ -27,54 +27,16 @@
         }
 
         public bool HasPermissions(UserAuthInfo userAuthInfo, params string[] permissionKeys)
-        {
-            if (userAuthInfo.ApplicationMode == AppMode.Parasitic)
-            {
-                if (userAuthInfo.IsSuperAdmin)
-                {
-                    return true;
-                }
-
-                return userAuthInfo.PortalFunctionList.Any(i => permissionKeys.Contains(i.FunctionKey,
-                    StringComparer.InvariantCultureIgnoreCase)
-                || (i.SubFunctionKeys != null && i.SubFunctionKeys.Intersect(permissionKeys).Any()));
-            }
-
-            return userAuthInfo.FunctionList.Any(x => permissionKeys.Contains(x.FunctionKey, StringComparer.InvariantCultureIgnoreCase));
-        }
+            => userAuthInfo.ApplicationMode == AppMode.Parasitic ?
+            userAuthInfo.IsSuperAdmin || userAuthInfo.PortalFunctionList.Any(i => permissionKeys.Contains(i.FunctionKey,
+                    StringComparer.InvariantCultureIgnoreCase)) 
+            : userAuthInfo.FunctionList.Any(x => permissionKeys.Contains(x.FunctionKey, StringComparer.InvariantCultureIgnoreCase));
 
         public bool IsAllowedEditCommission(UserAuthInfo userAuthInfo)
-        {
-            if (userAuthInfo.ApplicationMode == AppMode.Parasitic)
-            {
-                if (userAuthInfo.IsSuperAdmin)
-                {
-                    return true;
-                }
-                return userAuthInfo.PortalFunctionList != null && userAuthInfo.PortalFunctionList.Any(i => i.FunctionKey
-                      == PermissionKeys.CustomerInfoCommissionGroupList ||
-                      (i.SubFunctionKeys != null && i.SubFunctionKeys.Contains(PermissionKeys.CustomerInfoCommissionGroupList)));
-
-            }
-            return userAuthInfo.FunctionList != null && userAuthInfo.FunctionList.Any(x => x.FunctionKey == PermissionKeys.CustomerInfoCommissionGroupList);
-        }
+            => HasPermissions(userAuthInfo, PermissionKeys.CustomerInfoCommissionGroupList);
 
         public bool IsAllowedSpecialBA(UserAuthInfo userAuthInfo)
-        {
-            const string fKey = PermissionKeys.CustomerInfoSpecialBA;
-            if (userAuthInfo.ApplicationMode == AppMode.Parasitic)
-            {
-                if (userAuthInfo.IsSuperAdmin)
-                {
-                    return true;
-                }
-
-                return userAuthInfo.PortalFunctionList != null && userAuthInfo.PortalFunctionList.Any(i =>
-                    i.FunctionKey == fKey || (i.SubFunctionKeys != null && i.SubFunctionKeys.Contains(fKey)));
-            }
-
-            return userAuthInfo.FunctionList != null && userAuthInfo.FunctionList.Any(x => x.FunctionKey == fKey);
-        }
+            => HasPermissions(userAuthInfo, PermissionKeys.CustomerInfoSpecialBA);
 
         public bool HasPermissionOnData(IDictionary<int, int[]> currencyAgents, int custId, long transId)
         {
@@ -87,6 +49,19 @@
 
             return currencyAgents.Any(i => i.Key == item.Item1 && i.Value.Contains(item.Item2));
         }
+
+        public bool HasPermissionOnData(IEnumerable<AuthCurrency> currencyAgents, int custId, long transId)
+        {
+            if (custId == 0 && transId == 0)
+            {
+                return true;
+            }
+
+            var item = _authorizationDataAccess.IsCustomerBelonging(custId, transId);
+
+            return currencyAgents.Any(i => i.CurrencyId == item.Item1 && i.AgentId.Contains(item.Item2));
+        }
+
 
         public List<int> GetBelongingCustIds(IDictionary<int, int[]> currencyAgents, string custIds)
         {
@@ -112,18 +87,6 @@
             var item = _authorizationDataAccess.IsCustomerBelonging(custId, 0);
 
             return currencyAgents.Any(i => i.Key == item.Item1 && i.Value.Contains(item.Item2) && (currencyId == 0 || item.Item1 == currencyId));
-        }
-
-        public bool HasPermissionOnData(IEnumerable<OneAuthCurrency> currencyAgents, int custId, long transId)
-        {
-            if (custId == 0 && transId == 0)
-            {
-                return true;
-            }
-
-            var item = _authorizationDataAccess.IsCustomerBelonging(custId, transId);
-
-            return currencyAgents.Any(i => i.CurrencyId == item.Item1 && i.AgentId.Contains(item.Item2));
         }
 
         public bool CheckProductBelongsTo(string licenseeName, int productId, int[] limitedProductIds = null)

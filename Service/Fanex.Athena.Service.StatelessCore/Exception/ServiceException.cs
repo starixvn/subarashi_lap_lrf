@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="ServiceException.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Service.StatelessCore.CustomException
+﻿namespace Fanex.Athena.Service.StatelessCore.CustomException
 {
     using System;
     using System.Runtime.Serialization;

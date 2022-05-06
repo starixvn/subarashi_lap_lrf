@@ -10,7 +10,7 @@
 
         bool HasPermissionOnData(IDictionary<int, int[]> currencyAgents, int custId, long transId);
 
-        bool HasPermissionOnData(IEnumerable<OneAuthCurrency> currencyAgents, int custId, long transId);
+        bool HasPermissionOnData(IEnumerable<AuthCurrency> currencyAgents, int custId, long transId);
 
         bool IsAllowedEditCommission(UserAuthInfo userAuthInfo);
 

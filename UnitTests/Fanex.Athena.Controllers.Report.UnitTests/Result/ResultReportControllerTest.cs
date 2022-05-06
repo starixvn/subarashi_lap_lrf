@@ -53,34 +53,6 @@
         }
 
         [Test]
-        public void ShowRngCasinoSingleWalletResult_WhenCall_ReturnCorrectResult()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                const string RefNo = "hohoho";
-                const string ExpectedData = "huhuhu";
-                const string Url = "/ResultReport/ShowRngCasinoSingleWalletResult";
-                _betListApiClient.PostStringAsync(Url, Arg.Any<object>(),
-                    SessionService.UserSession.Language).Returns(ExpectedData);
-
-                // Action
-                var result = controller.ShowRngCasinoSingleWalletResult(RefNo).Result as ContentResult;
-
-                // Assert
-                Assert.Multiple(() =>
-                {
-                    _betListApiClient.Received(1).PostStringAsync(
-                           Url,
-                           Arg.Is<object>(x => (string)x.GetValue("refNo") == RefNo),
-                           SessionService.UserSession.Language
-                           );
-                    Assert.That(result.Content, Is.EqualTo(ExpectedData));
-                });
-            }
-        }
-
-        [Test]
         public void ResultDetail_DataIsNull_ReturnCorrectResult()
         {
             using (var controller = CreateController())
@@ -114,17 +86,17 @@
                 var result = controller.ResultDetail(MatchId, SportId).Result as ViewResult;
 
                 // Assert
-                Assert.Multiple(() =>
+                Assert.Multiple((TestDelegate)(() =>
                 {
                     _betListApiClient.Received(1).PostStringAsync(
                         Url,
                         Arg.Is<object>(
-                            x => (int)x.GetValue("matchId") == MatchId &&
+                            (System.Linq.Expressions.Expression<Predicate<object>>)(                            x => (int)x.GetValue("matchId") == MatchId &&
                                 (int)x.GetValue("sportType") == SportId &&
-                                (string)x.GetValue("languageCode") == SessionService.UserSession.Language), SessionService.UserSession.Language);
+                                (string)x.GetValue("languageCode") == SessionService.UserSession.Language)), (string)SessionService.UserSession.Language);
                     Assert.That(result.ViewBag.Data, Is.EqualTo(ExpectedData));
                     Assert.That(result.ViewName, Is.EqualTo("~/Views/Desktop/Report/Result/Popup/Main.cshtml"));
-                });
+                }));
             }
         }
 

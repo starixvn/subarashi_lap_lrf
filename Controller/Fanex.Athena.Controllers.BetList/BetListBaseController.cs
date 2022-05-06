@@ -3,18 +3,14 @@
     using DataAccess.Core.Configuration.Interfaces;
 
     using Excel.Base.Helpers;
-    using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.MetaModel;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
-
+    using Fanex.Athena.Web.ActionFilter;
     using Model.BetList.MetaModel;
     using Model.Core.DTO.Configuration;
-
-    using ONEbook.UM.Filters;
-
     using Resources;
 
     using System;
@@ -26,7 +22,7 @@
     using VendorAdapter.Interfaces;
 
     [SessionState(SessionStateBehavior.ReadOnly)]
-    [CheckUMFilter]
+    [UMFilter]
     public class BetListBaseController : CultureBaseController
     {
         protected const int PageSizeExcel = 63000;
@@ -101,7 +97,7 @@
             defaultMetaModel.Date = DateTime.SpecifyKind(defaultMetaModel.Date.Date, DateTimeKind.Unspecified);
             defaultMetaModel.IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeName);
             defaultMetaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(CurrencyAgentListBySubsidiaryBusiness(metaModel ?? new BetListMetaModel()), defaultMetaModel.CurrencyId);
-            defaultMetaModel.IsShowIpvn = userSession.IsShowIpvn && userSession.IsShowIp;
+            defaultMetaModel.IsShowIpvn = userSession.IsShowIpvn;
             defaultMetaModel.IsShowIp = userSession.IsShowIp;
 
             var balanceUp = GetBalanceUp();

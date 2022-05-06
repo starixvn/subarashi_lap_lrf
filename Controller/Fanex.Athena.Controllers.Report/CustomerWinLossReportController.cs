@@ -1,11 +1,5 @@
-﻿// <copyright file="ReportController.CustomerWinloss.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Controllers.Report
+﻿namespace Fanex.Athena.Controllers.Report
 {
-    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
@@ -21,56 +15,30 @@ namespace Fanex.Athena.Controllers.Report
     public class CustomerWinLossReportController : ReportBaseController
     {
         private readonly IReportSettingService _reportSettingService;
-
-        private readonly IReportAPIClient _reportAPIClient;
-
         private readonly IAuthorizationService _authService;
-
-        private readonly IPlayerSegmentationService _playerService;
-
-        private const int TimeOutInSecond = 180;
+        private readonly ICustomerClassService _customerClassService;
 
         public CustomerWinLossReportController(
             IReportSettingService reportSettingService,
             IAuthorizationService authService,
-            IReportAPIClient reportAPIClient,
-            IPlayerSegmentationService playerService
+            ICustomerClassService customerClassService
             )
         {
             _reportSettingService = reportSettingService;
-            _reportAPIClient = reportAPIClient;
             _authService = authService;
-            _playerService = playerService;
+            _customerClassService = customerClassService;
         }
 
         [HttpGet]
-        public Task<ActionResult> Index()
+        public async Task<ActionResult> Index()
         {
-            return GetView(false);
+            return await GetView(false);
         }
 
         [HttpGet]
-        public Task<ActionResult> History()
+        public async Task<ActionResult> History()
         {
-            return GetView(true);
-        }
-
-        [HttpPost]
-        [AutoBindMetaModel(BindAgent = true, BindLicenseeContract = true, BindProductOptions = true)]
-        [ValidationWebRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
-        public async Task<ActionResult> Index(CustomerWinLossMetaModel metaModel)
-        {
-            var userSession = SessionServiceInstance.UserSession;
-            if (metaModel.IsExportExcel)
-            {
-                const string FileName = "CustomerWinLoss";
-                var httpResponse = await _reportAPIClient.PostAsync("api/CustomerWinLoss/ExportExcel",
-                    metaModel, userSession.Language, timeOut: TimeOutInSecond).ConfigureAwait(false);
-
-                return File(httpResponse.Item1, httpResponse.Item2, FileName);
-            }
-
-            return JsonString(await _reportAPIClient.PostStringAsync("api/CustomerWinLoss/Index", metaModel, userSession.Language, TimeOutInSecond).ConfigureAwait(false));
+            return await GetView(true);
         }
 
         private async Task<ActionResult> GetView(bool isHistory)
@@ -104,9 +72,9 @@ namespace Fanex.Athena.Controllers.Report
                 IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeName),
                 MinDate = reportSetting.MinDate,
                 MaxDate = reportSetting.MaxDate,
-                HasExtraPayoutPermission = _authService.HasPermissions(SessionServiceInstance.UserSession, PermissionKeys.ReportExtraPayout),
-                OddsGroups = LicenseeSettingServiceInstance.GetOddGroups(licenseeSession.LicenseeName),
-                CustomerClassList = await _playerService.GetCustomerClass(),
+                HasExtraPayoutPermission = _authService.HasPermissions(userSession, PermissionKeys.ReportExtraPayout),
+                OddsGroups = licenseeSession.OfferedOddsGroupsList,
+                CustomerClassList = await _customerClassService.GetAllCustomerClass(),
             };
 
             return View("~/Views/Desktop/Report/CustomerWinLoss/Main.cshtml", model);

@@ -1,7 +1,7 @@
 ﻿namespace Fanex.Athena.Controllers.UnitTests
 {
+    using System.Security.Principal;
     using System.Web.Mvc;
-
     using Model.Core.DataDomain;
 
     using NSubstitute;
@@ -74,13 +74,16 @@
         }
 
         [Test]
-        public void RecheckIn_Kickout_SignOut()
+        public void RecheckIn_IdentityNameNotSame_ReturnSessionOverrideResult()
         {
             using (var controller = CreateController())
             {
                 // Arrange
+                var fakeIdentity = new GenericIdentity("user1");
+                var principal = new GenericPrincipal(fakeIdentity, null);
+                controller.ControllerContext.HttpContext.User.Returns(principal);
+
                 _maintenanceService.IsUnderMaintenance().Returns(false);
-                _userService.RecheckIn(DefaultUserSession.OnUserId).Returns(true);
 
                 controller.ControllerContext.HttpContext.Request.IsAuthenticated.Returns(true);
                 controller.ControllerContext.HttpContext.Request["onid"].Returns(DefaultUserSession.OnUserId.ToString());
@@ -90,7 +93,7 @@
                 var data = result.Data as dynamic;
 
                 // Assert
-                _formAuthenticationService.Received().SignOut();
+                Assert.That(data.ErrCode, Is.EqualTo((int)ErrorType.SessionOverride));
             }
         }
 

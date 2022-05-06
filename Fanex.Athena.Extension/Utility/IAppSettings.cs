@@ -2,14 +2,11 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
 
     public interface IAppSettings
     {
         bool HasAmountDueToColumn { get; }
 
-        [SuppressMessage("Sonar Code Smell", "S3996:UriPropertiesShouldNotBeStrings",
-            Justification = "Reviewed. Suppression is OK here.")]
         string BetListApiHostUrl { get; }
 
         bool IsProduction { get; }
@@ -26,16 +23,10 @@
 
         string ExchangeProductApiHost { get; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Sonar Code Smell", "S3996:UriPropertiesShouldNotBeStrings",
-            Justification = "Reviewed. Suppression is OK here.")]
         string ResultAmendmentApiUrl { get; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Sonar Code Smell", "S3996:UriPropertiesShouldNotBeStrings",
-            Justification = "Reviewed. Suppression is OK here.")]
         string MarkNotificationAsReadApiUrl { get; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Sonar Code Smell", "S3996:UriPropertiesShouldNotBeStrings",
-            Justification = "Reviewed. Suppression is OK here.")]
         string ResultAmendmentAttachmentApiUrl { get; }
 
         bool IsEnabledMoveBetNotification { get; }
@@ -62,8 +53,6 @@
 
         DateTime MaxDate { get; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Sonar Code Smell", "S3996:UriPropertiesShouldNotBeStrings",
-            Justification = "Reviewed. Suppression is OK here.")]
         string RemoteRefUrl { get; }
 
         string TempFilePath { get; }
@@ -72,10 +61,7 @@
 
         int BetListApiClientTimeOutMinutes { get; }
 
-        IEnumerable<string> ListActionNoView { get; }
-
-        bool IsUATTW { get; }
-
-        IEnumerable<string> LicenseeOfferIMQOddGroup { get; }
+        IEnumerable<string> ListActionNoView { get; }        
+        string BetTicketEventBuilderUrl { get; }
     }
 }

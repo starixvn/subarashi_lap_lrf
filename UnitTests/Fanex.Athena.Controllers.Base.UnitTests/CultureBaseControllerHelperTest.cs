@@ -1,5 +1,6 @@
 ﻿namespace Fanex.Athena.Controllers.Base.UnitTests
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
@@ -22,6 +23,7 @@
     {
         protected static readonly UserAuthInfo DefaultUserSession = new UserAuthInfo
         {
+            IdentityName = "user",
             CurrencyList = new Dictionary<int, string> { { 1, "UUS" } },
             UserId = 1,
             Language = "lan",
@@ -29,14 +31,17 @@
             OnUserId = 999,
             FunctionList = new List<Function>(),
             DefaultBaseCurrency = "EUR",
-            CurrencyAgentList = new Dictionary<int, int[]>()
+            CurrencyAgentList = new Dictionary<int, int[]>(),
+            AccessToken = "token",
+            AccessTokenLifeTime = DateTime.Now.AddHours(1)
         };
 
         protected static readonly LicenseeAuthInfo DefaultLicenseeSession = new LicenseeAuthInfo
         {
             LicenseeId = 100,
             LicenseeName = "Spondemo",
-            OfferedSubProductList = Enumerable.Empty<string>()
+            OfferedSubProductList = Enumerable.Empty<string>(),
+            OfferedOddsGroupsList = Enumerable.Empty<string>()
         };
 
         protected UrlHelper Url { get; set; }
@@ -77,7 +82,6 @@
         protected void SetUpDefaultFakeData()
         {
             StubUserSessionData(DefaultUserSession);
-
             StubLicenseeSessionData(DefaultLicenseeSession);
         }
 

@@ -59,13 +59,13 @@
                 var viewModel = viewResult.Model as LicenseeWinLossViewModel;
 
                 // Assert
-                Assert.Multiple(() =>
+                Assert.Multiple((TestDelegate)(() =>
                 {
                     StringAssert.Contains("Report/LicenseeWinLoss/Main.cshtml", viewResult.ViewName);
-                    Assert.That(viewModel.Param.LicenseeId, Is.EqualTo(SessionService.LicenseeSession.LicenseeId));
+                    Assert.That(viewModel.Param.LicenseeId, Is.EqualTo((object)SessionService.LicenseeSession.LicenseeId));
                     Assert.That(viewModel.Param.DrawFilter, Is.EqualTo(DrawFilterType.Normal));
                     Assert.That(viewModel.Param.ReportBy, Is.EqualTo(ReportByType.Daily));
-                });
+                }));
             }
         }
 

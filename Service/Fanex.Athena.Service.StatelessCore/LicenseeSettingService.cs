@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="MoveBetService.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Service.StatelessCore
+﻿namespace Fanex.Athena.Service.StatelessCore
 {
     using System;
     using System.Collections.Generic;
@@ -14,7 +8,6 @@ namespace Fanex.Athena.Service.StatelessCore
 
     using Extension.Utility.Interfaces;
     using Fanex.Athena.DataAccess.Core.Users.Interfaces;
-    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.DTO.Configuration;
@@ -80,28 +73,6 @@ namespace Fanex.Athena.Service.StatelessCore
             }
 
             return licenseeInfo;
-        }
-
-        public bool IsEnableSingleWallet(string licenseeName)
-        {
-            var cacheKey = "Lrf_LicenseeIsEnableSingleWallet_" + licenseeName;
-            var result = _cache.Get<bool?>(cacheKey);
-            if (!result.HasValue)
-            {
-                result = _licenseeDataAccess.IsEnableSingleWallet(licenseeName, _appSettings.IsUATTW);
-                _cache.Set(cacheKey, result, OneDayInSecond);
-            }
-
-            return result.Value;
-        }
-
-        public IEnumerable<string> GetOddGroups(string licenseeName)
-        {
-            var imqOddGroups = new List<string> { "I", "M", "Q" };
-            var licenseeIncludeIMQOddGroup = _appSettings.LicenseeOfferIMQOddGroup;
-            return licenseeIncludeIMQOddGroup.Any(name => string.Equals(name, licenseeName, StringComparison.OrdinalIgnoreCase))
-                ? OddsGroupHelper.GetOddsGroups().Concat(imqOddGroups)
-                : OddsGroupHelper.GetOddsGroups();
         }
 
         private IEnumerable<FakeLicenseeSetting> GetAndCacheFakeLicenseeSettingList()

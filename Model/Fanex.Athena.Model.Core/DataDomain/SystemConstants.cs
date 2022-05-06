@@ -1,17 +1,8 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="SystemConstants.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Model.Core.DataDomain
+﻿namespace Fanex.Athena.Model.Core.DataDomain
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public static class SystemConstants
     {
         public const int SheetSizeExcel = 65000;
@@ -23,7 +14,7 @@ namespace Fanex.Athena.Model.Core.DataDomain
         public static readonly ReadOnlyCollection<string> BaseCurrencyListOfSummaryTotalRow = new ReadOnlyCollection<string>(
          new List<string> { "EUR", "USD", "GBP" });
 
-        public static readonly IDictionary<int, string> BaseCurrencyList = new Dictionary<int, string> {
+        public static readonly IReadOnlyDictionary<int, string> BaseCurrencyList = new Dictionary<int, string> {
 
             { BaseCurrencyType.Eur,"EUR" },
             { BaseCurrencyType.Usd,"USD" },
@@ -34,9 +25,7 @@ namespace Fanex.Athena.Model.Core.DataDomain
             { BaseCurrencyType.IDR,"IDR" },
             { BaseCurrencyType.INH,"INH" },
             { BaseCurrencyType.BDT,"BDT" },
-            { BaseCurrencyType.INR,"INR" },
-
+            { BaseCurrencyType.INR,"INR" }
         };
-
     }
 }

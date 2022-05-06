@@ -1,5 +1,6 @@
 ﻿namespace Fanex.Athena.Controllers.UnitTests
 {
+    using System;
     using System.Web.Mvc;
     using Base.UnitTests;
     using Fanex.Athena.Model.Auth;
@@ -127,6 +128,34 @@
         }
 
         [Test]
+        public void Index_AccessTokenExpire_RedirectToLocationRestriction()
+        {
+            using (var controller = CreateController())
+            {
+                // Arrange
+
+                StubUserSessionData(new UserAuthInfo 
+                {
+                    AccessTokenLifeTime = DateTime.Now,
+                    OnUserId = DefaultUserSession.OnUserId,
+                    IsInternal = DefaultUserSession.IsInternal
+                });
+
+                controller.ControllerContext.HttpContext.Response.IsRequestBeingRedirected.Returns(true);
+
+                // Action
+                var result = controller.Index() as RedirectToRouteResult;
+
+                // Assert
+                Assert.Multiple(() =>
+                {
+                    Assert.That(result.RouteValues["action"], Is.EqualTo("LocationRestriction"));
+                    Assert.That(result.RouteValues["controller"], Is.EqualTo("Utility"));
+                });
+            }
+        }
+
+        [Test]
         public void Index_IsNotRequestBeingRedirected_ReturnIndexView()
         {
             using (var controller = CreateController())
@@ -171,6 +200,7 @@
 
                 StubUserSessionData(new UserAuthInfo
                 {
+                    AccessTokenLifeTime = DefaultUserSession.AccessTokenLifeTime,
                     UserId = 0,
                     IsInternal = isInternal
                 });

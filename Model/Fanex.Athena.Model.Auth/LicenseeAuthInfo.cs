@@ -17,5 +17,7 @@ namespace Fanex.Athena.Model.Auth
         public bool IsEnableSingleWallet { get; set; }
 
         public IEnumerable<string> OfferedSubProductList { get; set; }
+
+        public IEnumerable<string> OfferedOddsGroupsList { get; set; }
     }
 }

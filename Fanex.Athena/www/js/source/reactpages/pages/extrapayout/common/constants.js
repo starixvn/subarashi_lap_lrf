@@ -1,11 +1,12 @@
-import Site from '@jsroot/lib/site';
 import LangHelper from '@jsroot/lib/langHelper';
 
 export const DefaultPageSize = 50;
 
 export const ApiUrl = {
-    REPORT_DATA_URL: Site.resolveClientUrl("ExtraPayoutReport/Index"),
-    REPORT_DETAIL_DATA_URL: Site.resolveClientUrl("ExtraPayoutReport/Detail")
+    REPORT_DATA_URL: "Api/ExtraPayout/GetData",
+    EXPORT_REPORT_DATA_URL: "Api/ExtraPayout/ExportExcel",
+    REPORT_DETAIL_DATA_URL: "Api/ExtraPayout/GetDetailData",
+    EXPORT_REPORT_DETAIL_DATA_URL: "Api/ExtraPayout/ExportDetailExcel"
 }
 
 export const headerText = {

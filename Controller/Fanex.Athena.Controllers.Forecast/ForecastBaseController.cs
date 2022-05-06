@@ -1,14 +1,7 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="ForecastBaseController.cs" company="">
-// Copyright (c) . All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-
-namespace Fanex.Athena.Controllers.Forecast
+﻿namespace Fanex.Athena.Controllers.Forecast
 {
+    using Fanex.Athena.Web.ActionFilter;
     using Model.Core.DTO.Common;
-
-    using ONEbook.UM.Filters;
 
     using System.Collections.Generic;
     using System.Linq;
@@ -16,7 +9,7 @@ namespace Fanex.Athena.Controllers.Forecast
     using System.Web.SessionState;
 
     [SessionState(SessionStateBehavior.ReadOnly)]
-    [CheckUMFilter]
+    [UMFilter]
     public class ForecastBaseController : CultureBaseController
     {
         protected static int GetLeagueId(int leagueId, IEnumerable<League> leagueList)

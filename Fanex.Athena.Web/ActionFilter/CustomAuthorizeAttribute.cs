@@ -1,9 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="CustomAuthorizeAttribute.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-namespace Fanex.Athena.Web.ActionFilter
+﻿namespace Fanex.Athena.Web.ActionFilter
 {
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Service.Core.Users;
@@ -17,25 +12,26 @@ namespace Fanex.Athena.Web.ActionFilter
     [AttributeUsage(AttributeTargets.All)]
     public sealed class CustomAuthorizeAttribute : AuthorizeAttribute
     {
-        private readonly ISessionStorage _sessionStorage;
+        private readonly ISessionService _sessionService;
         private readonly IAppSettings _appSettings;
 
         public CustomAuthorizeAttribute()
         {
-            _sessionStorage = new SessionStorage();
+            _sessionService = new SessionService();
             _appSettings = new AppSettings();
         }
 
-        public CustomAuthorizeAttribute(ISessionStorage sessionStorage, IAppSettings appSettings)
+        public CustomAuthorizeAttribute(ISessionService sessionStorage, IAppSettings appSettings)
         {
-            _sessionStorage = sessionStorage ?? new SessionStorage();
+            _sessionService = sessionStorage ?? new SessionService();
             _appSettings = appSettings ?? new AppSettings();
         }
 
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
             var isAuthenticated = base.AuthorizeCore(httpContext);
-            isAuthenticated = isAuthenticated && _sessionStorage.LicenseeAuthInfo != null && _sessionStorage.UserAuthInfo != null;
+            isAuthenticated = isAuthenticated
+                && _sessionService.LicenseeSession != null && _sessionService.UserSession != null;
             return isAuthenticated;
         }
 

@@ -13,12 +13,10 @@
     using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
 
-    using ONEbook.UM.Filters;
-
     #endregion Using
 
     [SessionState(SessionStateBehavior.ReadOnly)]
-    [CheckUMFilter]
+    [UMFilter]
     [FunctionAuthorization(
         PermissionKeys.ReportTurnover,
         PermissionKeys.ReportWinLossByProduct,

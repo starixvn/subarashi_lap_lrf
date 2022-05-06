@@ -1,4 +1,5 @@
-﻿<script type="text/javascript" language="javascript">
+﻿@model string
+<script type="text/javascript" language="javascript">
     function getJSON(url, onSuccess) {
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.open('GET', url, true);
@@ -15,12 +16,17 @@
     }
 
     window.onload = function () {
-        var internalSessionUrl = '@Url.Content("~/Utility/SessionIsAlive")';
+        var internalSessionUrl = '@Url.Content("~/Utility/SessionIsAlive")' + '?identityName=' + '@Model';
         var internalSignOutUrl = '@Url.Content("~/Authorization/InternalSignOut")';
+        var umUrl = '@Url.Content("~/Utility/UnderMaintenance")';
         setInterval(function () {
             getJSON(internalSessionUrl, function (data) {
-                if (data === false) {
+                if (data.IsUM === true) {
+                    document.location.href = umUrl;
+                } else if (data.IsAuthenticated === false) {
                     document.location.href = internalSignOutUrl;
+                } else {
+                    //no thing
                 }
             });
         }, 30000);

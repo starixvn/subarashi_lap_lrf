@@ -1,9 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="CustomApiAuthorizeAttribute.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-namespace Fanex.Athena.Api.Base.Attributes
+﻿namespace Fanex.Athena.Api.Base.Attributes
 {
     using Fanex.Athena.Service.Core.Users;
     using Fanex.Athena.Service.Core.Users.Interfaces;
@@ -11,30 +6,31 @@ namespace Fanex.Athena.Api.Base.Attributes
     using System.Net;
     using System.Net.Http;
     using System.Web.Http;
+    using System.Web.Http.Controllers;
 
     [AttributeUsage(AttributeTargets.All)]
     public sealed class CustomApiAuthorizeAttribute : AuthorizeAttribute
     {
-        private readonly ISessionStorage _sessionStorage;
+        private readonly ISessionService _sessionService;
 
         public CustomApiAuthorizeAttribute()
+            : this(null)
         {
-            _sessionStorage = new SessionStorage();
         }
 
-        public CustomApiAuthorizeAttribute(ISessionStorage sessionStorage)
+        public CustomApiAuthorizeAttribute(ISessionService sessionStorage)
         {
-            _sessionStorage = sessionStorage ?? new SessionStorage();
+            _sessionService = sessionStorage ?? new SessionService();
         }
 
-        protected override bool IsAuthorized(System.Web.Http.Controllers.HttpActionContext actionContext)
+        protected override bool IsAuthorized(HttpActionContext actionContext)
         {
             if (!base.IsAuthorized(actionContext))
             {
                 return false;
             }
 
-            return _sessionStorage.LicenseeAuthInfo != null && _sessionStorage.UserAuthInfo != null;
+            return _sessionService.LicenseeSession != null && _sessionService.UserSession != null;
         }
 
         protected override void HandleUnauthorizedRequest(System.Web.Http.Controllers.HttpActionContext actionContext)

@@ -16,12 +16,12 @@ namespace Fanex.Athena.Web.UnitTests.ActionFilter
     {
         private readonly ControllerContext _controllerContext = MvcHelper.CreateControllerContext();
 
-        private ISessionStorage _sessionStorage;
+        private ISessionService _sessionStorage;
 
         [SetUp]
         public void Setup()
         {
-            _sessionStorage = Substitute.For<ISessionStorage>();
+            _sessionStorage = Substitute.For<ISessionService>();
         }
 
         [Test]
@@ -35,7 +35,7 @@ namespace Fanex.Athena.Web.UnitTests.ActionFilter
             attribute.OnAuthorization(filterContext);
 
             // Assert
-            var temp = _sessionStorage.DidNotReceive().UserAuthInfo;
+            var temp = _sessionStorage.DidNotReceive().UserSession;
         }
 
         [Test]
@@ -49,7 +49,7 @@ namespace Fanex.Athena.Web.UnitTests.ActionFilter
             attribute.OnAuthorization(filterContext);
 
             // Assert
-            var temp = _sessionStorage.Received(1).UserAuthInfo;
+            var temp = _sessionStorage.Received(1).UserSession;
         }
 
         [Test]
@@ -79,7 +79,7 @@ namespace Fanex.Athena.Web.UnitTests.ActionFilter
             // Arrange
             var filterContext = CreateFilterContext(false);
             var attribute = new AuthorizeRestrictionAttribute(_sessionStorage, appMode);
-            _sessionStorage.UserAuthInfo.Returns(new UserAuthInfo
+            _sessionStorage.UserSession.Returns(new UserAuthInfo
             {
                 ApplicationMode = appMode
             });

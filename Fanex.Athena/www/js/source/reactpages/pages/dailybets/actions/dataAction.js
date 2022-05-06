@@ -7,6 +7,9 @@ import Site from '@jsroot/lib/site';
 import DataService from '@jsroot/lib/DataService';
 import LangHelper from '@jsroot/lib/langHelper';
 
+
+const apiUrl = 'Api/DailyBets/Index';
+const apiExportUrl = 'Api/DailyBets/Export';
 const emptyData = { dataList: [], total: {} };
 const defaultPaingOption = { TotalItem: 0 };
 
@@ -16,11 +19,10 @@ const dispatchResult = (dispatch, data, pagingOption) => {
     dispatch(toggleLoader(false));
 }
 
-const apiUrl = Site.resolveClientUrl('DailyBetsReport/Index');
 export const getData = (param) => (dispatch) => {
     dispatch(toggleLoader(true));
 
-    DataService.postData(apiUrl, param)
+    DataService.postReportData(apiUrl, param)
         .then(response => {
             const { dataList, total, totalRows } = response.data;
             const data = {
@@ -65,7 +67,7 @@ export const getSportList = (param) => dispatch => {
 export const exportExcel = (param) => (dispatch) => {
     dispatch(toggleLoader(true));
 
-    DataService.getFile(apiUrl, param)
+    DataService.getReportFile(apiExportUrl, param)
         .then(response => {
             if (response.data.size === 0) {
                 alert(LangHelper.getSingleResource("NoInfo"));

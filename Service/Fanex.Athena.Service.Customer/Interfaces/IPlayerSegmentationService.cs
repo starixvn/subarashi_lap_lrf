@@ -4,7 +4,6 @@
     using System.Threading.Tasks;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
-    using Fanex.Athena.Model.Customer.Enum;
     using Fanex.Athena.Model.Customer.MetaModel;
 
     public interface IPlayerSegmentationService
@@ -18,8 +17,5 @@
         Task<IEnumerable<ReasonGroup>> GetReasonGroupListAsync(string langKey);
 
         bool IsNormalView(BasePlayerListMetaModel metaModel);
-
-        Task<IEnumerable<string>> GetProblemAccCustomerClass();
-        Task<IEnumerable<string>> GetCustomerClass();
     }
 }

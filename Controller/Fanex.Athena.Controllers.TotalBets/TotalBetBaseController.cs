@@ -1,18 +1,11 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="TotalBetController : TotalBetBaseController.cs" company="">
-// Copyright (c) . All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-
-namespace Fanex.Athena.Controllers.TotalBets
+﻿namespace Fanex.Athena.Controllers.TotalBets
 {
-    using ONEbook.UM.Filters;
-
+    using Fanex.Athena.Web.ActionFilter;
     using System.Web.Mvc;
     using System.Web.SessionState;
 
     [SessionState(SessionStateBehavior.ReadOnly)]
-    [CheckUMFilter]
+    [UMFilter]
     public class TotalBetBaseController : CultureBaseController
     {
     }

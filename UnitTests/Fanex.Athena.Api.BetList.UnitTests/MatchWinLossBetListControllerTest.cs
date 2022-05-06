@@ -184,14 +184,14 @@
                 var actual = await controller.MixParlay(page, rows, currencyId, baseCurrency, betType, fromDate, toDate, productCodeList, sortBy: sortBy, sortOrder: sortOrder);
 
                 // Assert
-                Assert.Multiple(() =>
+                Assert.Multiple((TestDelegate)(() =>
                 {
                     Assert.That(expect, Is.EqualTo(actual));
                     BetListApiClient.Received().PostAsync(
                         PageApiPath,
                         Arg.Is<BetListMetaModel>(x => x.UspKey == MixParlayUspKey && x.BaseCurrency == expectedBaseCurrency),
-                        SessionService.UserSession.Language);
-                });
+                        (string)SessionService.UserSession.Language);
+                }));
             }
         }
 

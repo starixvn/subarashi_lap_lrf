@@ -108,30 +108,30 @@
                 await controller.UpdateCustStatus(CustId, isClosed, isSuspended);
 
                 // Assert
-                Assert.Multiple(() =>
+                Assert.Multiple((TestDelegate)(() =>
                 {
                     _customerListService.Received(1).UpdateCustClosedAsync(
-                        Arg.Is<CustomerStatusMetaModel>(x =>
+                        Arg.Is<CustomerStatusMetaModel>((System.Linq.Expressions.Expression<Predicate<CustomerStatusMetaModel>>)(x =>
                         x.LicenseeId == licenseeId &&
                         x.LicenseeName == SessionService.LicenseeSession.LicenseeName &&
                         x.CustId == CustId &&
                         x.IsOn == isClosed &&
                         x.ModifyById == SessionService.UserSession.UserId &&
                         x.ModifyByUsername == SessionService.UserSession.UserName &&
-                        x.Ip == controller.Request.UserHostAddress),
+                        x.Ip == controller.Request.UserHostAddress)),
                         SessionService.UserSession.Language);
 
                     _customerListService.Received(1).UpdateCustSuspendAsync(
-                        Arg.Is<CustomerStatusMetaModel>(x =>
+                        Arg.Is<CustomerStatusMetaModel>((System.Linq.Expressions.Expression<Predicate<CustomerStatusMetaModel>>)(x =>
                         x.LicenseeId == licenseeId &&
                         x.LicenseeName == SessionService.LicenseeSession.LicenseeName &&
                         x.CustId == CustId &&
                         x.IsOn == isSuspended &&
                         x.ModifyById == SessionService.UserSession.UserId &&
                         x.ModifyByUsername == SessionService.UserSession.UserName &&
-                        x.Ip == controller.Request.UserHostAddress),
+                        x.Ip == controller.Request.UserHostAddress)),
                         SessionService.UserSession.Language);
-                });
+                }));
             }
         }
 
@@ -197,15 +197,15 @@
                 controller.UpdateSpecialLevel(CustId, Level);
 
                 // Assert
-                Assert.Multiple(() =>
+                Assert.Multiple((TestDelegate)(() =>
                 {
                     _customerListService.Received(1).UpdateSpecialLevel(
-                        SessionService.UserSession.UserId,
+                        (int)SessionService.UserSession.UserId,
                         CustId,
                         Level,
                         Arg.Any<string>(),
-                        SessionService.UserSession.Language);
-                });
+                        (string)SessionService.UserSession.Language);
+                }));
             }
         }
 
@@ -244,16 +244,16 @@
                 controller.UpdateOddsGroup(CustId, OddsGroup);
 
                 // Assert
-                Assert.Multiple(() =>
+                Assert.Multiple((TestDelegate)(() =>
                 {
                     _customerListService.Received(1).UpdateOddsGroup(
-                        Arg.Is<CustomerOddsGroupMetaModel>(x =>
+                        Arg.Is<CustomerOddsGroupMetaModel>((System.Linq.Expressions.Expression<Predicate<CustomerOddsGroupMetaModel>>)(x =>
                         x.CustId == CustId &&
                         x.Ip == controller.Request.UserHostAddress &&
                         x.Language == SessionService.UserSession.Language &&
                         x.OddsGroup == OddsGroup &&
-                        x.UserId == SessionService.UserSession.UserId));
-                });
+                        x.UserId == SessionService.UserSession.UserId)));
+                }));
             }
         }
 

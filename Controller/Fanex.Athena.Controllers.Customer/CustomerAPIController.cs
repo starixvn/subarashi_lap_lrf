@@ -26,14 +26,13 @@ namespace Fanex.Athena.Controllers.Customer
     using Fanex.Athena.Web.ActionFilter;
     using Fanex.Logging;
     using Model.Core.ViewModel;
-    using ONEbook.UM.Filters;
     using Resources;
     using Service.Customer.Helpers;
 
     #endregion Using
 
     [SessionState(SessionStateBehavior.ReadOnly)]
-    [CheckUMFilter]
+    [UMFilter]
     [FunctionAuthorization(PermissionKeys.CustomerInfoCustomerList)]
     public class CustomerApiController : CultureBaseController
     {

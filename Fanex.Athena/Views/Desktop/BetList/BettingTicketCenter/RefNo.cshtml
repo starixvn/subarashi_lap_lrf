@@ -6,8 +6,11 @@
 @using Fanex.Athena.Model.Core.DataDomain;
 @model bool
 @{
+    var appSettings = DependencyResolver.Current.GetService<IAppSettings>();
+    var betTicketEventBuilderUrl = appSettings.BetTicketEventBuilderUrl;
     var baseCurrencyList = SystemConstants.BaseCurrencyList.Select(c =>
-    new { value = c.Value, label = c.Value }).ToList();
+new { value = c.Value, label = c.Value }).ToList();
+
 }
 @section pagecss {
     <link href="@Url.ContentLinkByEnv("/www/css/build/reactpages/betlist/index.css")" rel="stylesheet" type="text/css" />
@@ -16,6 +19,8 @@
 }
 @section pagejs {
     <script src="@Url.ContentLinkByEnv("/www/js/build/reactpages/bettingticketscenter/refno.chunk.js")"></script>
+    <script async src="@betTicketEventBuilderUrl" id="event-builder-script"></script>
+    <script async src="@Url.Action("token", "home")"></script>
 }
 
 @section globaljscode{

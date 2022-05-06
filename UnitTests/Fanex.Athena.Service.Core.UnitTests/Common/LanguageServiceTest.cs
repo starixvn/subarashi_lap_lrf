@@ -53,19 +53,6 @@
         }
 
         [Test]
-        public void ChangeLanguage_WhenCall_CallAndPassCorrectParamToSessionService()
-        {
-            // Arrange
-            var languageCode = FakeHelper.Create<string>();
-
-            // Action
-            var result = _languageService.ChangeLanguage(languageCode);
-
-            // Assert
-            _sessionService.Received().UpdateLanguage(languageCode);
-        }
-
-        [Test]
         public void GetCurrentLanguage_WhenCall_ReturnLanguageFromCookie()
         {
             // Arrange
@@ -143,12 +130,6 @@
             const string LanguageCode = "vi-VN";
             HttpContext.Current = GetHttpContext();
             HttpContext.Current.Request.Cookies.Add(new HttpCookie(CookieName, LanguageCode));
-
-            _sessionService.UserSession.Returns(new UserAuthInfo
-            {
-                Language = LanguageCode
-            });
-            _sessionService.UpdateLanguage(LanguageCode).Returns(true);
 
             // Action
             var result = _languageService.ChangeLanguage(LanguageCode);

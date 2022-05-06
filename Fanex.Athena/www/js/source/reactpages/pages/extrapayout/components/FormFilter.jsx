@@ -223,12 +223,11 @@ export const FormFilter = props => {
         }
 
         const exportRequestParam = { 
-            ...exportParam,
-            IsExportExcel : true
+            ...exportParam
         };
 
         props.toggleLoader(true);
-        DataService.getFile(ApiUrl.REPORT_DATA_URL, exportRequestParam).then((response) => {
+        DataService.getReportFile(ApiUrl.EXPORT_REPORT_DATA_URL, exportRequestParam).then((response) => {
             toast.dismiss();
             const NoContentStatusCode = 204;
             if (response.status === NoContentStatusCode) {

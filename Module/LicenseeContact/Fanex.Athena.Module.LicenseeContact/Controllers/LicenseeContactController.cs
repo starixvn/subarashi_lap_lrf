@@ -4,7 +4,6 @@ using Fanex.Athena.Model.Auth.Enum;
 using Fanex.Athena.Module.LicenseeContact.Models;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
 using Fanex.Athena.Web.ActionFilter;
-using ONEbook.UM.Filters;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.SessionState;
@@ -14,7 +13,7 @@ namespace Fanex.Athena.Module.LicenseeContact.Controllers
     [FunctionAuthorization(PermissionKeys.LicenseeContacts)]
     [AuthorizeRestriction(AppMode.Parasitic)]
     [SessionState(SessionStateBehavior.ReadOnly)]
-    [CheckUMFilter]
+    [UMFilter]
     public class LicenseeContactController : CultureBaseController
     {
         private const int SiteId = -1; //from LAP

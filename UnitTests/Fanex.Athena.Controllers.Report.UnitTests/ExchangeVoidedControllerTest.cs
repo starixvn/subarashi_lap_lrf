@@ -134,12 +134,12 @@ namespace Fanex.Athena.Controllers.Report.UnitTests
                 var result = await controller.Index(metaModel) as JsonResult;
 
                 // Assert
-                Assert.Multiple(() =>
+                Assert.Multiple((TestDelegate)(() =>
                 {
                     Assert.That(result.Data, Is.EqualTo(expectedData));
                     Assert.That(metaModel.Environment, Is.EqualTo(Environment));
-                    Assert.That(metaModel.Language, Is.EqualTo(SessionService.UserSession.Language));
-                });
+                    Assert.That(metaModel.Language, Is.EqualTo((object)SessionService.UserSession.Language));
+                }));
             }
         }
 

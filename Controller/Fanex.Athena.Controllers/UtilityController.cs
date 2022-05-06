@@ -1,12 +1,7 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="UtilityController.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Controllers
+﻿namespace Fanex.Athena.Controllers
 {
     using Extension.Utility;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
     using Model.Core.DataDomain;
 
@@ -15,33 +10,42 @@ namespace Fanex.Athena.Controllers
     using Resources;
 
     using Service.Core.Common.Interfaces;
-
+    using System;
     using System.Web.Mvc;
     using System.Web.Security;
+    using System.Web.UI;
 
-    /// <summary>
-    /// Utility controller.
-    /// </summary>
     [AllowAnonymous]
     public class UtilityController : Controller
     {
         private readonly IAppSettings _appSettings;
-
         private readonly ILanguageService _languageService;
-
         private readonly IMaintenanceService _maintenanceService;
+        private readonly ISessionService _sessionService;
 
-        public UtilityController(IAppSettings appSettings, ILanguageService languageService, IMaintenanceService maintenanceService)
+        public UtilityController(
+            IAppSettings appSettings,
+            ILanguageService languageService,
+            IMaintenanceService maintenanceService,
+            ISessionService sessionService
+            )
         {
             _appSettings = appSettings;
             _languageService = languageService;
             _maintenanceService = maintenanceService;
+            _sessionService = sessionService;
         }
 
         [HttpGet]
-        public ActionResult SessionIsAlive()
+        [OutputCache(NoStore = true, Duration = 0, Location = OutputCacheLocation.None, VaryByParam = "*")]
+        public ActionResult SessionIsAlive(string identityName)
         {
-            return Json(HttpContext.User.Identity.IsAuthenticated, JsonRequestBehavior.AllowGet);
+            if (!IsAuthenticated(identityName) || !IsValidSession(identityName))
+            {
+                return Json(new { IsAuthenticated = false }, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(new { IsAuthenticated = true }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult AccessDenied()
@@ -149,6 +153,12 @@ namespace Fanex.Athena.Controllers
             var currentLanguage = _languageService.GetCurrentLanguage();
             _languageService.SetPageCulture(currentLanguage);
         }
+
+        private bool IsAuthenticated(string identityName)
+            => User.Identity.IsAuthenticated && string.Equals(User.Identity.Name, identityName, StringComparison.InvariantCultureIgnoreCase);
+
+        private bool IsValidSession(string identityName)
+            => _sessionService.UserSession != null && string.Equals(_sessionService.UserSession.IdentityName, identityName, StringComparison.InvariantCultureIgnoreCase);
 
         private static string GetMessageRestriction(int code)
         {

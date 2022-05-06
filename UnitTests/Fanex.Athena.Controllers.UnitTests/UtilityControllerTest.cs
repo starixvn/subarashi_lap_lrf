@@ -6,9 +6,9 @@
     using System.Web.Security;
 
     using Base.UnitTests;
-
+    using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Resources;
-
+    using Fanex.Athena.Service.Core.OAuth;
     using Model.Core.DataDomain;
 
     using NSubstitute;
@@ -27,8 +27,6 @@
         {
             base.FixtureSetUp();
 
-            SetUpDefaultFakeData();
-
             StubGetValueAppSettings("InternalSubDomain", "internal.");
             StubGetValueAppSettings("LapSubDomain", "lap.");
         }
@@ -36,6 +34,7 @@
         [SetUp]
         public void SetUp()
         {
+            SetUpDefaultFakeData();
             _maintenanceService = Substitute.For<IMaintenanceService>();
         }
 
@@ -46,15 +45,31 @@
         }
 
         [Test]
-        public void SessionIsAlive_WhenCall_ReturnCorrectData()
+        public void SessionIsAlive_IdentityNameIsInvalid_ReturnFailResult()
+        {
+            using (var controller = CreateController())
+            {
+                // Action     
+                _maintenanceService.IsUnderMaintenance().Returns(false);
+                var result = controller.SessionIsAlive("user1") as JsonResult;
+                var data = result.Data as dynamic;
+
+                // Assert
+                Assert.That(data.IsAuthenticated, Is.EqualTo(false));
+            }
+        }
+
+        [Test]
+        public void SessionIsAlive_Valid_ReturnSuccessfulResult()
         {
             using (var controller = CreateController())
             {
                 // Action
-                var result = controller.SessionIsAlive() as JsonResult;
+                var result = controller.SessionIsAlive(DefaultUserSession.IdentityName) as JsonResult;
+                var data = result.Data as dynamic;
 
                 // Assert
-                Assert.That(result.Data, Is.EqualTo(controller.HttpContext.User.Identity.IsAuthenticated));
+                Assert.That(data.IsAuthenticated, Is.EqualTo(true));
             }
         }
 
@@ -296,7 +311,7 @@
 
         private UtilityController CreateController()
         {
-            return new UtilityController(AppSettings, LangService, _maintenanceService)
+            return new UtilityController(AppSettings, LangService, _maintenanceService, SessionService)
             {
                 ControllerContext = ControllerContext
             };

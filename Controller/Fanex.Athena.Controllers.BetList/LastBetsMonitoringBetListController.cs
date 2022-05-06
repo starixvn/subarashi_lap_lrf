@@ -2,8 +2,6 @@
 {
     #region Using
 
-    using DataAccess.Core.Common.Interfaces;
-
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
@@ -13,8 +11,6 @@
 
     using Model.BetList.MetaModel;
     using Model.BetList.ViewModel;
-
-    using ONEbook.UM.Filters;
 
     using Resources;
 
@@ -27,19 +23,19 @@
     #endregion Using
 
     [SessionState(SessionStateBehavior.ReadOnly)]
-    [CheckUMFilter]
+    [UMFilter]
     [FunctionAuthorization(PermissionKeys.ReportLastBetsMonitoring)]
     public class LastBetsMonitoringBetListController : CultureBaseController
     {
         private readonly ISportService _sportService;
-        private readonly IPlayerSegmentationService _playerService;
+        private readonly ICustomerClassService _customerClassService;
 
         public LastBetsMonitoringBetListController(
             ISportService sportService,
-            IPlayerSegmentationService playerService)
+            ICustomerClassService customerClassService)
         {
             _sportService = sportService;
-            _playerService = playerService;
+            _customerClassService = customerClassService;
         }
 
         [HttpGet]
@@ -56,7 +52,7 @@
             {
                 CurrencyList = SessionServiceInstance.UserSession.CurrencyList,
                 SportsList = await GetSports().ConfigureAwait(false),
-                CustomerClassList = await _playerService.GetCustomerClass(),
+                CustomerClassList = await _customerClassService.GetAllCustomerClass(),
                 Param = metaModel
             };
 

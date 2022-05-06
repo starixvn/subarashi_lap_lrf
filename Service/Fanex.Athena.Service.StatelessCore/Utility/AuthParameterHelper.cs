@@ -79,7 +79,7 @@ namespace Fanex.Athena.Service.StatelessCore.Utility
             return result;
         }
 
-        public static string GenerateAgentListXml(IEnumerable<OneAuthCurrency> authCurrencyList, string currencyIdList)
+        public static string GenerateAgentListXml(IEnumerable<AuthCurrency> authCurrencyList, string currencyIdList)
         {
             if (authCurrencyList == null || !authCurrencyList.Any())
             {
@@ -109,7 +109,7 @@ namespace Fanex.Athena.Service.StatelessCore.Utility
             return selectedCurrencyIdList;
         }
 
-        private static IEnumerable<OneAuthCurrency> GetSelectedCurrencyAgentList(IEnumerable<OneAuthCurrency> authCurrencyList, string currencyIdList)
+        private static IEnumerable<AuthCurrency> GetSelectedCurrencyAgentList(IEnumerable<AuthCurrency> authCurrencyList, string currencyIdList)
         {
             if (string.IsNullOrEmpty(currencyIdList))
             {

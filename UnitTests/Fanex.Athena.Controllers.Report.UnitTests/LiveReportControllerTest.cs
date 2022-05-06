@@ -63,17 +63,17 @@
                 var viewModel = viewResult.Model as LiveReportViewModel;
 
                 // Assert
-                Assert.Multiple(() =>
+                Assert.Multiple((TestDelegate)(() =>
                 {
                     Assert.That(viewResult.ViewName, Is.EqualTo("~/Views/Desktop/Report/LiveReport/Main.cshtml"));
                     Assert.That(viewModel.CurrencyList, Is.EqualTo(SessionService.UserSession.CurrencyList));
                     Assert.That(viewModel.BalanceUpDate, Is.EqualTo(BalanceUpDate));
-                    Assert.That(viewModel.Param.LicenseeId, Is.EqualTo(SessionService.LicenseeSession.LicenseeId));
+                    Assert.That(viewModel.Param.LicenseeId, Is.EqualTo((object)SessionService.LicenseeSession.LicenseeId));
                     Assert.That(viewModel.Param.UserId, Is.EqualTo(SessionService.UserSession.UserId));
                     Assert.That(viewModel.Param.IsViewedHistory, Is.EqualTo(isViewedHistory));
                     Assert.That(viewModel.Param.CurrencyId, Is.EqualTo(0));
                     Assert.That(viewModel.Param.LiveIndicator, Is.EqualTo(1));
-                });
+                }));
             }
         }
 
@@ -104,15 +104,15 @@
                 var viewModel = viewResult.Model as LiveReportViewModel;
 
                 // Assert
-                Assert.Multiple(() =>
+                Assert.Multiple((TestDelegate)(() =>
                 {
                     Assert.That(viewResult.ViewName, Is.EqualTo("~/Views/Desktop/Report/LiveReport/Main.cshtml"));
                     Assert.That(viewModel.Param, Is.EqualTo(metaModel));
                     Assert.That(viewModel.BalanceUpDate, Is.EqualTo(BalanceUpDate));
-                    Assert.That(viewModel.Param.LicenseeId, Is.EqualTo(SessionService.LicenseeSession.LicenseeId));
+                    Assert.That(viewModel.Param.LicenseeId, Is.EqualTo((object)SessionService.LicenseeSession.LicenseeId));
                     Assert.That(viewModel.Param.ProductCodeList, Is.EqualTo(expectedProductList));
                     Assert.That(viewModel.MainResult, Is.EqualTo(expectedData));
-                });
+                }));
             }
         }
 

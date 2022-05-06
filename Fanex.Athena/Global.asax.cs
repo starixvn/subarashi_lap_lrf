@@ -1,32 +1,30 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="Global.asax.cs" company="">
-// Copyright (c) . All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-
-namespace Fanex.Athena
+﻿namespace Fanex.Athena
 {
     using Api.Base.Attributes;
 
     using Data;
 
     using Fanex.Athena.Extension.Helpers;
+    using Fanex.Athena.VendorAdapter;
     using Fanex.Athena.Web.ActionFilter;
     using Fanex.Athena.Web.RouterConfig;
+    using Fanex.Caching;
     using Fanex.Data.SqlServer;
     using Fanex.Logging.Sentry.RavenClient;
 
     using Logging;
 
     using MessagePack.Resolvers;
-
+    using ONEbook.UM;
+    using ONEbook.UM.Configurations;
+    using ONEbook.UM.Helpers;
+    using ONEbook.UM.NETFramework;
     using RemotingRef;
 
     using SharpRaven;
 
     using System;
     using System.Configuration;
-    using System.Diagnostics.CodeAnalysis;
     using System.Web;
     using System.Web.Helpers;
     using System.Web.Http;
@@ -57,18 +55,13 @@ namespace Fanex.Athena
             }
         }
 
-        [SuppressMessage("Sonar Code Smell", "S2325:Methods and properties that don't access instance data should be static", Justification = "Reviewed.")]
         public void Application_Start(object sender, EventArgs e)
         {
             var deploymentMode = ConfigurationManager.AppSettings["DeploymentMode"];
             if (string.IsNullOrEmpty(deploymentMode) || !deploymentMode.Equals("Static"))
             {
-                LogManager
-                    .SetDefaultLogCategory(ConfigurationManager.AppSettings["Fanex.Logging-LogCategory"])
-                    .Use(new SentryLogging(new SentryEngineOptions
-                    {
-                        Dsn = new Dsn(ConfigurationManager.AppSettings["Sentry-Dsn"])
-                    }));
+                SetupLogging();
+                SetupUM();
 
                 ViewEngines.Engines.Clear();
                 ViewEngines.Engines.Add(new RazorViewEngine());
@@ -128,6 +121,27 @@ namespace Fanex.Athena
                     }
                 }
             }
+        }
+
+        private static void SetupUM()
+        {              
+            UMClientManager
+               .UseConfig(new UMClientConfiguration().Initialize())
+               .UseCacheService(new CustomUMCacheService(new CacheService()))
+               .UseRestClient(new CustomUMRestClient())
+               .UseHttpContext(new HttpContextHelper());
+        }
+
+
+        private static void SetupLogging()
+        {
+            LogManager
+                    .SetDefaultLogCategory(ConfigurationManager.AppSettings["Fanex.Logging-LogCategory"])
+                    .Use(new SentryLogging(new SentryEngineOptions
+                    {
+                        Dsn = new Dsn(ConfigurationManager.AppSettings["Sentry-Dsn"])
+                    }));
+
         }
     }
 }

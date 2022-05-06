@@ -4,8 +4,11 @@
     Layout = "~/Views/Desktop/Shared/_ReactPageLayout.cshtml";
 }
 @using Fanex.Athena.Model.Core.DataDomain
+
 @model Fanex.Athena.Model.BetList.ViewModel.BettingTicketCenterViewModel
 @{
+    var appSettings = DependencyResolver.Current.GetService<IAppSettings>();
+    var betTicketEventBuilderUrl = appSettings.BetTicketEventBuilderUrl;
     var productList = Model.ProductOptionList;
     var selectedStatus = string.Join(",", Model.StatusList.Where(x => x.Checked).Select(x => x.ID).ToArray());
     var selectedLiveStatus = string.Join(",", Model.LiveStatusList.Select(x => x.Key).ToArray());
@@ -19,6 +22,8 @@
 }
 @section pagejs {
     <script src="@Url.ContentLinkByEnv("/www/js/build/reactpages/bettingticketscenter/advancedsearch.chunk.js")"></script>
+    <script async src="@betTicketEventBuilderUrl" id="event-builder-script"></script>
+    <script async src="@Url.Action("token", "home")"></script>
 }
 
 @section globaljscode{

@@ -97,7 +97,7 @@
             // Arrange
             var attribute = new ApiOneAuthorizationAttribute();
             var actionContext = CreateActionContext(hasAuthToken: true);
-            var token = new DefaultAuthInfo<OneAuthPermission, OneAuthCurrency>
+            var token = new DefaultAuthInfo<PortalFunction, AuthCurrency>
             {
                 UserSEQ = 1,
                 SiteName = "spondemo"
@@ -121,11 +121,11 @@
             // Arrange
             var attribute = new ApiOneAuthorizationAttribute { AllowFunctionKeys = "func2" };
             var actionContext = CreateActionContext(hasAuthToken: true);
-            var token = new DefaultAuthInfo<OneAuthPermission, OneAuthCurrency>
+            var token = new DefaultAuthInfo<PortalFunction, AuthCurrency>
             {
                 UserSEQ = 1,
                 SiteName = "spondemo",
-                Permissions = new OneAuthPermission[] { new OneAuthPermission { SubFunctionKeys = new[] { "func1" } } }
+                Permissions = new PortalFunction[] { new PortalFunction { SubFunctionKeys = new[] { "func1" } } }
             };
             _oneAuthenticationService.Authenticate(TokenValue).Returns(token);
 
@@ -149,11 +149,11 @@
             // Arrange
             var attribute = new ApiOneAuthorizationAttribute();
             var actionContext = CreateActionContext(hasAuthToken: true);
-            var token = new DefaultAuthInfo<OneAuthPermission, OneAuthCurrency>
+            var token = new DefaultAuthInfo<PortalFunction, AuthCurrency>
             {
                 UserSEQ = 1,
                 SiteName = "spondemo",
-                Currency = new[] { new OneAuthCurrency { CurrencyId = 123 } },
+                Currency = new[] { new AuthCurrency { CurrencyId = 123 } },
                 UserID = "badman"
             };
             _oneAuthenticationService.Authenticate(TokenValue).Returns(token);

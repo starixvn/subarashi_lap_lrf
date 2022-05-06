@@ -69,10 +69,10 @@
             {
                 ApplicationMode = AppMode.Parasitic,
                 UserId = 234234,
-                PortalFunctionList = new OneAuthPermission[] {
-                    new OneAuthPermission {FunctionKey="sdf" } ,
-                                        new OneAuthPermission {FunctionKey="cxv" } ,
-                                        new OneAuthPermission {FunctionKey="sdfsdf" }
+                PortalFunctionList = new PortalFunction[] {
+                    new PortalFunction {FunctionKey="sdf" } ,
+                                        new PortalFunction {FunctionKey="cxv" } ,
+                                        new PortalFunction {FunctionKey="sdfsdf" }
                 }
             };
             _authorizationService.HasPermissions(userSession, PermissionKeys.CustomerInfoEditBetSetting).Returns(true);

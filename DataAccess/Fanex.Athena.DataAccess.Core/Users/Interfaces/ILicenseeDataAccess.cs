@@ -14,7 +14,5 @@
         IList<Licensee> GetByUser(int userId);
 
         Licensee GetLicenseeByName(string licenseeName);
-
-        bool IsEnableSingleWallet(string licenseeName, bool isUATTW);
     }
 }

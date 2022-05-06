@@ -6,15 +6,19 @@
     'components/pluginhelper/daterangepicker',
     'components/pluginhelper/multiselect',
     'helpers/daterange',
+    'helpers/downloader',
     'components/paging',
     '../report',
+    'components/toast',
     'lib/jqgrid/jquery.jqGrid.en',
     'lib/jqgrid/jquery.jqGrid.min',
-    'extensions/jquery.extension'],
-    function ($, Site, jqGridAdditional, CustomerBalanceOption, DatePicker, MultiSelect, DateHelper, PagingHelper, Report) {
+    'extensions/jquery.extension',
+    'extensions/ajaxBinaryTransporting'],
+    function ($, Site, jqGridAdditional, CustomerBalanceOption, DatePicker, MultiSelect, DateHelper, Downloader, PagingHelper, Report, Toast) {
         'use strict';
 
         const VALID_MONTH_RANGE = 2;
+        const EXCEL_FILENAME = 'CustomerBalance.csv';
 
         let _ajaxRequest = null;
         let _sortColumnIndex = 'Deposit';
@@ -51,7 +55,7 @@
             });
             MultiSelect.initProductList();
             DatePicker.initDateRangePicker();
-            DateHelper.setConstraintMonthRange(VALID_MONTH_RANGE, CustomerBalanceOption.urlExcelData);
+            DateHelper.setConstraintMonthRange(VALID_MONTH_RANGE, Site.buildReportProxyUrl(CustomerBalanceOption.urlPrefix));
 
             _me.initEvent();
             _me.initSetting();
@@ -74,13 +78,8 @@
                 if (!validProduct) {
                     return false;
                 }
-
-                const mainForm = $(_selector.Form);
-                const url = Site.resolveClientUrl(CustomerBalanceOption.urlExcelData);
-                $(_selector.OrderItemInput, _selector.Form).val(_orderColumnCode);
-                mainForm.attr('action', url);
-                mainForm.submit();
-                return false;
+                const data = getPostData();
+                exportExcel(CustomerBalanceOption.urlExcelData, data, EXCEL_FILENAME);
             });
 
             $(window).on('resize', function () {
@@ -112,7 +111,7 @@
                 dataType: 'json',
                 contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                 cache: false,
-                url: Site.resolveClientUrl(CustomerBalanceOption.urlData),
+                url: Site.buildReportProxyUrl(CustomerBalanceOption.urlData),
                 success: function (response) {
                     setReportTitle(_submitData.FromDate, _submitData.ToDate, _submitData.CurrencyName);
                     _me.bindData(response);
@@ -131,6 +130,27 @@
 
             _ajaxRequest = $.ajax(option);
             return true;
+        }
+
+        function exportExcel(url, data, fileName) {
+            const option = {
+                type: 'POST',
+                data: data,
+                dataType: 'binary',
+                responseType: 'blob',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                cache: false,
+                url: Site.buildReportProxyUrl(url),
+                success: function (response) {
+                    Downloader.download(response, fileName);
+                },
+                beforeSend: function () {
+                    Toast.show();
+                }
+            };
+            $.ajax(option);
+
+            return false;
         }
 
         function bindData(response) {
@@ -172,11 +192,20 @@
 
         function buildPostData() {
             if (!_submitData) {
-                _submitData = $(_selector.Form).serializeObject();
+                _submitData = getPostData();
+            } else {
+                _submitData.PageIndex = _pagingOption.pageindex;
+                _submitData.PageSize = _pagingOption.pagesize;
+                _submitData.OrderItem = _orderColumnCode;
             }
-            _submitData.PageIndex = _pagingOption.pageindex;
-            _submitData.PageSize = _pagingOption.pagesize;
-            _submitData.OrderItem = _orderColumnCode;
+        }
+
+        function getPostData() {
+            const param = $(_selector.Form).serializeObject();
+            param.PageIndex = _pagingOption.pageindex;
+            param.PageSize = _pagingOption.pagesize;
+            param.OrderItem = _orderColumnCode;
+            return param;
         }
 
         function setReportTitle(fromDate, toDate, currencyName) {

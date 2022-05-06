@@ -18,14 +18,14 @@ namespace Fanex.Athena.Service.StatelessCore
         private readonly ICacheRefAdapter _cacheRefAdapter;
         private readonly ICustomMemoryCacheService _cache;
 
-        private static IEnumerable<(int Id, int SportTypeId, IEnumerable<int> LeagueGroupIds)> SabaVirtualSports => new List<(int, int, IEnumerable<int>)>
+        private static readonly IEnumerable<(int Id, int SportTypeId, IEnumerable<int> LeagueGroupIds)> SabaVirtualSports = new List<(int, int, IEnumerable<int>)>
         {
-            ((int)SportType.SabaSoccer, (int)SportType.Soccer, new List<int>{ 42, 74 }),
-            ((int)SportType.SabaBasketball, (int)SportType.BasketBall, new List<int>{42}),
-            ((int)SportType.SabaCricket, (int)SportType.Cricket, new List<int>{42}),
-            ((int)SportType.SabaFutsal, (int)SportType.Soccer, new List<int>{ 108 }),
-            ((int)SportType.SabaSoccerPingoal, (int)SportType.Soccer, new List<int>{113}),
-            ((int)SportType.SabaBasketballPinGoal, (int)SportType.BasketBall, new List<int>{122})
+            ((int)SportType.SabaSoccer, (int)SportType.Soccer, new [] { 42, 74 }),
+            ((int)SportType.SabaBasketball, (int)SportType.BasketBall, new [] { 42 }),
+            ((int)SportType.SabaCricket, (int)SportType.Cricket, new [] { 42 }),
+            ((int)SportType.SabaFutsal, (int)SportType.Soccer, new [] { 108 }),
+            ((int)SportType.SabaSoccerPingoal, (int)SportType.Soccer, new [] { 113 }),
+            ((int)SportType.SabaBasketballPinGoal, (int)SportType.BasketBall, new [] { 122 })
         };
 
         public SportService(ISportTypeDataAccess sportTypeDataAccess, ICacheRefAdapter cacheRefAdapter, ICustomMemoryCacheService cache)
@@ -51,8 +51,8 @@ namespace Fanex.Athena.Service.StatelessCore
         public Task<IDictionary<int, string>> GetAllSports()
             => _sportTypeDataAccess.GetAllSports();
 
-        public async Task<IEnumerable<SportProductItem>> GetSportsAndProducts(int licenseeId, string languageCode, string productCodes = "")
-            => await _sportTypeDataAccess.GetSportsAndProducts(licenseeId, languageCode, productCodes);
+        public Task<IEnumerable<SportProductItem>> GetSportsAndProducts(int licenseeId, string languageCode, string productCodes = "")
+            => _sportTypeDataAccess.GetSportsAndProducts(licenseeId, languageCode, productCodes);
 
         public async Task<IEnumerable<SportProductItem>> GetSportAndProductAndSabaSport(int licenseeId, string languageCode, string productCodes = "")
         {

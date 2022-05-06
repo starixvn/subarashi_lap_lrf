@@ -4,7 +4,7 @@ import { toggleLoader } from '@jsroot/actions/loaderAction'
 
 const getReportData = (url, params) => {
     return (dispatch) => {
-        DataService.postData(url, params)
+        DataService.postReportData(url, params)
             .then(response => {
                 response.data.timestamp = new Date().getTime();
                 dispatch(setReportData(response.data));

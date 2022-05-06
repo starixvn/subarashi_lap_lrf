@@ -1,5 +1,6 @@
 ﻿namespace Fanex.Athena.Api.Base
 {
+    using Fanex.Athena.Api.Base.Attributes;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Core.MetaModel;
     using Fanex.Athena.Service.Core.Common.Interfaces;
@@ -8,7 +9,6 @@
     using Newtonsoft.Json;
     using Newtonsoft.Json.Serialization;
     using NPOI.SS.UserModel;
-    using ONEbook.UM.Filters;
     using System.Collections.Generic;
     using System.Net;
     using System.Net.Http;
@@ -16,8 +16,8 @@
     using System.Web.Http;
     using System.Web.Http.Results;
 
-    [CheckUMFilter]
     [XFrameOptionApi]
+    [ApiUMFilter]
     public class BaseApiController : ApiController
     {
         private readonly ILanguageService _langService;

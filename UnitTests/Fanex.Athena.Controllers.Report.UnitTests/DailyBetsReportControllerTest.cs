@@ -11,7 +11,6 @@
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.DTO.Configuration;
-    using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using NSubstitute;
@@ -21,7 +20,6 @@
     {
         private const int DefaultLimitedMonthRange = 6;
 
-        private IReportAPIClient _reportAPIClient;
 
         private ILicenseeSettingService _licenseeSettingService;
 
@@ -32,7 +30,6 @@
         {
             base.FixtureSetUp();
 
-            _reportAPIClient = Substitute.For<IReportAPIClient>();
             _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
             _sportService = Substitute.For<ISportService>();
 
@@ -43,15 +40,8 @@
         public override void FixtureTearDown()
         {
             base.FixtureTearDown();
-            _reportAPIClient = null;
             _licenseeSettingService = null;
             _sportService = null;
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            _reportAPIClient.ClearReceivedCalls();
         }
 
         [TestCase("test", "test name", "test name")]
@@ -147,55 +137,7 @@
             }
         }
 
-        [Test]
-        public async Task IndexPost_NotExportExcel_ReturnsJsonResult()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = new DailyBetsMetaModel
-                {
-                    IsExportExcel = false
-                };
-
-                // Action
-                var result = await controller.Index(metaModel);
-
-                // Assert
-                Assert.Multiple(() =>
-                {
-                    Assert.IsInstanceOf<JsonNetResult>(result);
-                    _reportAPIClient.Received(1).PostStringAsync("api/DailyBets/Index", metaModel, DefaultUserSession.Language);
-                });
-            }
-        }
-
-        [Test]
-        public async Task IndexPost_ExportExcel_ReturnsCorrectFileContent()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = new DailyBetsMetaModel
-                {
-                    IsExportExcel = true
-                };
-
-                var expectedFileContent = new Tuple<Stream, string>(new MemoryStream(new byte[] { 1 }), "application/octet-stream");
-                _reportAPIClient.PostAsync("api/DailyBets/Export", metaModel, DefaultUserSession.Language).Returns(expectedFileContent);
-
-                // Action
-                var result = await controller.Index(metaModel) as FileStreamResult;
-
-                // Assert
-                Assert.Multiple(() =>
-                {
-                    Assert.That(result.FileStream, Is.EqualTo(expectedFileContent.Item1));
-                    Assert.That(result.ContentType, Is.EqualTo(expectedFileContent.Item2));
-                });
-            }
-        }
-
+      
         private DailyBetsReportController CreateController(IList<Product> productList = null)
         {
             var productService = Substitute.For<IProductService>();
@@ -204,8 +146,7 @@
                 DefaultUserSession.Language,
                 FunctionNames.DailyBets).ReturnsForAnyArgs(new ProductAccess(productList ?? new List<Product>()));
 
-            return new DailyBetsReportController(_reportAPIClient, _sportService)
-            {
+            return new DailyBetsReportController(_sportService)            {
                 LangService = LangService,
                 SessionServiceInstance = SessionService,
                 ProductServiceInstance = productService,

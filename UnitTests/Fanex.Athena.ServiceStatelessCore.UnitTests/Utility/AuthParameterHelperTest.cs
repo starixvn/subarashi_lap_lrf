@@ -10,36 +10,36 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests.Utility
     public class AuthParameterHelperTest
     {
         [TestCaseSource(typeof(TestingData), "TestCases")]
-        public string ToXml_WhenCall_ReturnCorrectString(IEnumerable<OneAuthCurrency> authCurrencyList, string selectedCurrency)
+        public string ToXml_WhenCall_ReturnCorrectString(IEnumerable<AuthCurrency> authCurrencyList, string selectedCurrency)
         {
             return AuthParameterHelper.GenerateAgentListXml(authCurrencyList, selectedCurrency);
         }
     }
 
-    public class TestingData
+    public static class TestingData
     {
         public static IEnumerable TestCases
         {
             get
             {
                 yield return new TestCaseData(null, string.Empty).Returns(string.Empty);
-                yield return new TestCaseData(new List<OneAuthCurrency>(), "1,2,3").Returns(string.Empty);
+                yield return new TestCaseData(new List<AuthCurrency>(), "1,2,3").Returns(string.Empty);
                 yield return new TestCaseData(CreateAuthCurrencyList(), string.Empty).Returns(CreateDefaultAgentListXml());
                 yield return new TestCaseData(CreateAuthCurrencyList(), "1,2").Returns(CreateDefaultAgentListXml());
             }
         }
 
-        private static IEnumerable<OneAuthCurrency> CreateAuthCurrencyList()
+        private static IEnumerable<AuthCurrency> CreateAuthCurrencyList()
         {
-            return new OneAuthCurrency[]
+            return new AuthCurrency[]
             {
-                new OneAuthCurrency
+                new AuthCurrency
                 {
                     CurrencyId = 1,
                     Currency = "USD",
                     AgentId = new int [] { 1,2 }
                 },
-                new OneAuthCurrency
+                new AuthCurrency
                 {
                     CurrencyId = 2,
                     Currency = "EUR",

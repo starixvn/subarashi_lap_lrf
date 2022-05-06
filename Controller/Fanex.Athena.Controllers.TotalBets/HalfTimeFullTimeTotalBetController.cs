@@ -1,10 +1,4 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="HalfTimeFullTimeTotalBetController.cs" company="">
-// Copyright (c) . All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-
-namespace Fanex.Athena.Controllers.TotalBets
+﻿namespace Fanex.Athena.Controllers.TotalBets
 {
     using DataAccess.TotalBet.Interfaces;
 

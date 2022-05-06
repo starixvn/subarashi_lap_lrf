@@ -32,11 +32,11 @@
                 var viewModel = viewResult.Model as CustomerPendingFundsViewModel;
 
                 // Assert
-                Assert.Multiple(() =>
+                Assert.Multiple((TestDelegate)(() =>
                 {
                     StringAssert.Contains("Report/CustomerPendingFunds/Main.cshtml", viewResult.ViewName);
-                    Assert.That(viewModel.Param.LicenseeId, Is.EqualTo(SessionService.LicenseeSession.LicenseeId));
-                });
+                    Assert.That(viewModel.Param.LicenseeId, Is.EqualTo((object)SessionService.LicenseeSession.LicenseeId));
+                }));
             }
         }
 

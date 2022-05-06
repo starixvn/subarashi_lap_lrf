@@ -1,4 +1,4 @@
-﻿// Generated at: 4/12/2022 9:17:11 AM
+﻿// Generated at: 4/15/2022 12:54:40 PM
 var _language_zh_TW = {
 AA:"客客",
 AbnormalBet:"非正規註單",
@@ -89,7 +89,6 @@ ByBetType:"根據投注類型",
 ByCurrency:"根據貨幣",
 BySportsType:"根據運動類型",
 Cancel:"取消",
-CashOutAmount:"即時兌現金額",
 CashOutAmt:"兌現金額",
 CashOutCancelled:"取消即時兌現",
 CashOutCommission:"即時兌現佣金",

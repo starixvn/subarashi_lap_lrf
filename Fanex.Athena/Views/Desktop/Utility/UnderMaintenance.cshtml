@@ -23,7 +23,14 @@
     </div>
     <script type="text/javascript">
         if (window.parent != window) {
-            window.parent.location = location.href;
+            var sameOrigin;
+            try {
+                sameOrigin = window.parent.location.host == window.location.host;
+            }
+            catch (e) {
+                sameOrigin = false;
+            }
+            sameOrigin && (window.parent.location = location.href);
         }
     </script>
 </body>

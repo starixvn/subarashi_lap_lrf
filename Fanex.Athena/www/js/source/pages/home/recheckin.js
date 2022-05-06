@@ -24,11 +24,6 @@ define(['common/site'], function (Site) {
 
     function reCheckin() {
         const Success = 0;
-        // const Unknown = -1;
-        // const AccessDenied = 1;
-        // const AccountClosed = 2;
-        // const KickedOut = 3;
-        // const UnderMaintenance = 4;
         const SessionOverride = 5;
 
         $.ajax({
@@ -56,8 +51,7 @@ define(['common/site'], function (Site) {
                             type: 'GET',
                             async: true
                         });
-                    }
-                    else {
+                    } else {
                         logout();
                     }
                 }

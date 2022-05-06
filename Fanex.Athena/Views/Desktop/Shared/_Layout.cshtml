@@ -12,9 +12,10 @@
         userSession.CurrencyList.ToDictionary(x => x.Key.ToString(), x => x.Value);
 
     var hasCustComm = licSession != null && licSession.IsAllowedCustomerComm;
-    var isParasiticMode = userSession != null && userSession.ApplicationMode == AppMode.Parasitic;
+    var isSelfMode = userSession != null && userSession.ApplicationMode == AppMode.Self;
     var isFakeLicensee = licenseeSettingService.IsFakeLicensee(licSession.LicenseeName);
     var langCode = System.Globalization.CultureInfo.CurrentUICulture.IetfLanguageTag;
+    var identityName = userSession.IdentityName;
 }
 <!DOCTYPE html>
 
@@ -35,7 +36,7 @@
     <input type="hidden" id="HasCustComm" value="@( hasCustComm ? 1 : 0)" />
     <input type="hidden" id="HistoryDate" value="@( appSettings.HistoryDate)" />
     <input type="hidden" id="IsFakeLicensee" value="@( isFakeLicensee ? 1 : 0)" />
-    <input type="hidden" id="IsSelfMode" value="@( isParasiticMode ? 0 : 1)" />
+    <input type="hidden" id="IsSelfMode" value="@( isSelfMode ? 1 : 0)" />
     @Html.AntiForgeryToken()
 
     <div class="loading" style="display: none">
@@ -53,7 +54,6 @@
     <div class="wrapper">
         @RenderBody()
     </div>
-
     <script src="@Url.ContentLinkByEnv("/www/js/build/language.chunk.js")"></script>
     @if (langCode != "en-US")
     {
@@ -61,10 +61,12 @@
     }
     <script src="@Url.ContentLinkByEnv("/www/js/build/pages/lib/common.chunk.js")"></script>
     @RenderSection("js", required: false)
-    @if (isParasiticMode)
+
+    @if (!isSelfMode)
     {
-        Html.RenderPartial("~/Views/Desktop/Shared/_SessionScript.cshtml");
+        Html.RenderPartial("~/Views/Desktop/Shared/_SessionScript.cshtml", identityName);
     }
+
     @if (appSettings.Environment.Equals("PRO", StringComparison.OrdinalIgnoreCase))
     {
         <!-- Global site tag (gtag.js) - Google Analytics -->

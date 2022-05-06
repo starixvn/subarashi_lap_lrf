@@ -16,6 +16,7 @@
         userSession.CurrencyList.ToDictionary(x => x.Key.ToString(), x => x.Value);
     var isParasiticMode = userSession != null && userSession.ApplicationMode == AppMode.Parasitic;
     var isFakeLicensee = licenseeSettingService.IsFakeLicensee(licSession.LicenseeName);
+    var identityName = userSession.IdentityName;
 }
 <!DOCTYPE html>
 <html>
@@ -60,10 +61,12 @@
             };
         });
     </script>
+
     @if (isParasiticMode)
     {
-        Html.RenderPartial("~/Views/Shared/_SessionScript.cshtml");
+        Html.RenderPartial("~/Views/Shared/_SessionScript.cshtml", identityName);
     }
+
     @if (appSettings.Environment.Equals("PRO", StringComparison.OrdinalIgnoreCase))
     {
         <!-- Global site tag (gtag.js) - Google Analytics -->

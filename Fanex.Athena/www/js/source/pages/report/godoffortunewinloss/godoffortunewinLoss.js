@@ -49,7 +49,7 @@
                 });
                 MultiSelect.initCurrencyList();
                 DatePicker.initDateRangePicker();
-                DateHelper.setConstraintMonthRange(VALID_MONTH_RANGE, GodOfFortuneWinLossOption.urlExcelData);
+                DateHelper.setConstraintMonthRange(VALID_MONTH_RANGE, Site.buildReportProxyUrl(GodOfFortuneWinLossOption.urlPrefix));
             },
 
             registerGlobalFunction: function () {
@@ -97,10 +97,6 @@
                     _me.openBetlistPopUp(dataDrillDown);
                 });
 
-                //$("#grid-currency-multiselect").on('change', function () {
-                //    alert($(this).val());
-                //});
-
                 $("#grid-currency-multiselect").on("click", "option", function () {
                     console.log($(this)); //this will log the clicked option.
                 });
@@ -132,6 +128,14 @@
 
                     const data = $('#godoffortunewinloss').serializeObject();
                     data.CurrencyIdList = $('#grid-currency-multiselect').multiSelect('getCheckedItems').join(',');
+
+                    if(_level > 0) {
+                        data.DrillDownLevel = _level;
+                        data.CurrencyIdList = drillDownData.CurrencyId;
+                        data.DrillDownFromDate = drillDownData.FromDate;
+                        data.DrillDownToDate = drillDownData.ToDate;
+                        data.DrillDownCustomerId = drillDownData.AgentId
+                    }
 
                     if (_sortColumnName) {
                         data.sortby = _sortColumnName;
@@ -166,7 +170,7 @@
                     responseType: 'blob',
                     contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                     cache: false,
-                    url: Site.resolveClientUrl(url),
+                    url: Site.buildReportProxyUrl(url),
                     success: function (response) {
                         Downloader.download(response, fileName);
                     },
@@ -181,16 +185,6 @@
             },
 
             //#region Layout
-            setExcelUrl: function (level, currencyId, custId, fdate, tdate) {
-                let temp = 'GodOfFortuneWinLossReport/Index';
-                if (level > 0) {
-                    temp += '?level=' + level + '&dCurrencyId='
-                        + currencyId + '&custId=' + custId + '&fdate=' + fdate
-                        + '&tdate=' + tdate;
-                }
-                GodOfFortuneWinLossOption.urlExcelData = temp;
-            },
-
             setReportTitle: function (fromdate, todate, currencyName) {
                 const titlePattern = Site.getSingleResource('GodOfFortuneWinLoss') + ', {0} → {1} - {2}';
                 const currencyNameOnTitle = Site.getSingleResource('Viewin').replace('{0}', currencyName.toUpperCase());
@@ -237,7 +231,7 @@
                     dataType: 'json',
                     contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                     cache: false,
-                    url: Site.resolveClientUrl(GodOfFortuneWinLossOption.urlData),
+                    url: Site.buildReportProxyUrl(GodOfFortuneWinLossOption.urlData),
                     success: function (response) {
                         _submitData = {
                             DrawFilter: data.DrawFilter,
@@ -250,8 +244,6 @@
                             IsConvertAll: data.IsConvertAll,
                             CurrencyIdList: data.CurrencyIdList
                         };
-
-                        _me.setExcelUrl(0, 0, 0, '', '');
                         _me.ajaxComplete(0, response);
                     },
                     beforeSend: function () {
@@ -279,32 +271,34 @@
                 if (_level !== levelNumber) {
                     _level = levelNumber;
                 }
+                const drilldownDate = new Date(datetime);
+                const dateRange = Report.GetDrilldownDateRange(_submitData.ReportBy, _submitData.FromDate, _submitData.ToDate, drilldownDate);
+                const drillDownFDate = moment(dateRange.FromDate).format('MM/DD/YYYY');
+                const drillDownTDate = moment(dateRange.ToDate).format('MM/DD/YYYY');
+                
                 const param =
                 {
                     DrawFilter: _submitData.DrawFilter,
                     IsExcludedTestData: _submitData.IsExcludedTestData,
                     IsConvertAll: _submitData.IsConvertAll,
-                    CurrencyId: _submitData.CurrencyId,
                     ReportBy: _submitData.ReportBy,
                     FromDate: _submitData.FromDate,
                     ToDate: _submitData.ToDate,
-                    BaseCurrency: _submitData.BaseCurrency
+                    BaseCurrency: _submitData.BaseCurrency,
+                    CurrencyIdList: currencyId,
+                    DrillDownLevel: levelNumber,
+                    DrillDownCustomerId: customerId,
+                    DrillDownFromDate: drillDownFDate,
+                    DrillDownToDate: drillDownTDate
                 };
-                const drilldownDate = new Date(datetime);
-                const dateRange = Report.GetDrilldownDateRange(param.ReportBy, param.FromDate, param.ToDate, drilldownDate);
-                const drillDownFDate = moment(dateRange.FromDate).format('MM/DD/YYYY');
-                const drillDownTDate = moment(dateRange.ToDate).format('MM/DD/YYYY');
-                const postData = JSON.stringify(param);
+                
                 const option = {
                     type: 'POST',
-                    data: postData,
+                    data: param,
                     dataType: 'json',
-                    contentType: 'application/json',
+                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                     cache: false,
-
-                    url: Site.resolveClientUrl(GodOfFortuneWinLossOption.urlData +
-                        '?level=' + levelNumber + '&dCurrencyId=' + currencyId + '&custId=' + customerId + '&fdate=' +
-                        drillDownFDate + '&tdate=' + drillDownTDate),
+                    url: Site.buildReportProxyUrl(GodOfFortuneWinLossOption.urlData),
                     success: function (response) {
                         _me.ajaxComplete(levelNumber, response);
                         if (response !== null && response.data.length > 0) {
@@ -312,7 +306,6 @@
                         }
 
                         //update excel ULR
-                        _me.setExcelUrl(levelNumber, currencyId, customerId, drillDownFDate, drillDownTDate);
                         _me.updateDrilldownData(currencyId, currencyName, drillDownFDate, drillDownTDate, customerId);
                     },
                     beforeSend: function () {
@@ -348,7 +341,6 @@
                 _me.bindData(level, reportBy, data);
 
                 if (level === 0) {
-                    _me.setExcelUrl(0, 0, 0, '', '');
                     _me.setReportTitle(_submitData.FromDate, _submitData.ToDate, _submitData.BaseCurrency);
                 }
                 else if (level === 1) {

@@ -55,8 +55,6 @@ export const FormFilter = (props) => {
     const exportExcel = (event) => {
         event.preventDefault();
         const params = buildParam();
-        params.isExportExcel = true;
-
         props.exportExcel(params);
     }
 

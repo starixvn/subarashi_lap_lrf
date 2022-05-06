@@ -1,13 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IUserService.cs" company="">
-// The  user service.
-// </copyright>
-// <summary>
-//   The  user service.
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
-
-namespace Fanex.Athena.Service.Core.Users.Interfaces
+﻿namespace Fanex.Athena.Service.Core.Users.Interfaces
 {
     using System.Collections.Generic;
 

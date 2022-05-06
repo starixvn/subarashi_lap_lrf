@@ -22,11 +22,9 @@
     [TestFixture]
     public class CustomerWinLossReportControllerTest : CultureBaseControllerHelperTest
     {
-        private IReportAPIClient _reportApiClient;
-
         private IAuthorizationService _authService;
 
-        private IPlayerSegmentationService _playerService;
+        private ICustomerClassService _customerClassService;
 
         private const int TimeOutInSecond = 180;
 
@@ -34,7 +32,7 @@
         public override void FixtureSetUp()
         {
             base.FixtureSetUp();
-            _playerService = Substitute.For<IPlayerSegmentationService>();
+            _customerClassService = Substitute.For<ICustomerClassService>();
 
             SetUpDefaultFakeData();
         }
@@ -43,7 +41,7 @@
         public override void FixtureTearDown()
         {
             base.FixtureTearDown();
-            _playerService = null;
+            _customerClassService = null;
         }
 
         [Test]
@@ -82,48 +80,7 @@
             }
         }
 
-        [Test]
-        public async Task PostIndex_ExportExcel_ReturnCorrectFileContentResult()
-        {
-            // Arrange
-            var language = SessionService.UserSession.Language;
-            var expectedResponseData = new Tuple<Stream, string>(new MemoryStream(new byte[] { 1 }), "application/octet-stream");
 
-            var metaModel = new CustomerWinLossMetaModel { IsExportExcel = true };
-
-            using (var controller = CreateController())
-            {
-                _reportApiClient.PostAsync("api/CustomerWinLoss/ExportExcel", metaModel, language, timeOut: TimeOutInSecond)
-                    .Returns(expectedResponseData);
-
-                // Action
-                var result = await controller.Index(metaModel) as FileStreamResult;
-
-                // Assert
-                Assert.That(result.FileStream, Is.EqualTo(expectedResponseData.Item1));
-                Assert.That(result.ContentType, Is.EqualTo(expectedResponseData.Item2));
-            }
-        }
-
-        [Test]
-        public async Task PostIndex_GetData_ReturnCorrectResult()
-        {
-            // Arrange
-            var userSession = SessionService.UserSession;
-
-            using (var controller = CreateController())
-            {
-                const string ExpectedResult = "json result";
-                _reportApiClient.PostStringAsync("api/CustomerWinLoss/Index",
-                    Arg.Any<CustomerWinLossMetaModel>(), userSession.Language, TimeOutInSecond).Returns(ExpectedResult);
-
-                // Action
-                var result = await controller.Index(new CustomerWinLossMetaModel()) as JsonNetResult;
-
-                // Assert
-                Assert.That(result, Is.Not.Null);
-            }
-        }
 
         private CustomerWinLossReportController CreateController(ProductAccess expectedProductAccess = null,
             ILicenseeSettingService stubLicenseeSettingService = null)
@@ -141,9 +98,8 @@
             _authService.HasPermissions(SessionService.UserSession, PermissionKeys.ReportExtraPayout).Returns(true);
 
             var licenseeSettingService = stubLicenseeSettingService ?? Substitute.For<ILicenseeSettingService>();
-            _reportApiClient = Substitute.For<IReportAPIClient>();
 
-            return new CustomerWinLossReportController(reportSettingService, _authService, _reportApiClient, _playerService)
+            return new CustomerWinLossReportController(reportSettingService, _authService, _customerClassService) 
             {
                 LangService = LangService,
                 SessionServiceInstance = SessionService,

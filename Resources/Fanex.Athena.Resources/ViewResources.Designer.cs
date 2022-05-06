@@ -151,15 +151,6 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Activity.
-        /// </summary>
-        public static string Activity {
-            get {
-                return ResourceManager.GetString("Activity", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Actual Stake.
         /// </summary>
         public static string ActualStake {
@@ -1204,29 +1195,11 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cash Out Amount.
-        /// </summary>
-        public static string CashOutAmount {
-            get {
-                return ResourceManager.GetString("CashOutAmount", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Cash-out Amt.
         /// </summary>
         public static string CashOutAmt {
             get {
                 return ResourceManager.GetString("CashOutAmt", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Cash Out Cancelled.
-        /// </summary>
-        public static string CashOutCancelled {
-            get {
-                return ResourceManager.GetString("CashOutCancelled", resourceCulture);
             }
         }
         
@@ -1249,29 +1222,11 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cash Out History.
-        /// </summary>
-        public static string CashOutHistory {
-            get {
-                return ResourceManager.GetString("CashOutHistory", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Cash Out is not offered for this currency..
         /// </summary>
         public static string CashOutNotOfferCurrency {
             get {
                 return ResourceManager.GetString("CashOutNotOfferCurrency", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Cash Out Recovered.
-        /// </summary>
-        public static string CashOutRecovered {
-            get {
-                return ResourceManager.GetString("CashOutRecovered", resourceCulture);
             }
         }
         
@@ -2208,15 +2163,6 @@ namespace Fanex.Athena.Resources {
         public static string DateRangeNote {
             get {
                 return ResourceManager.GetString("DateRangeNote", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Date/Time.
-        /// </summary>
-        public static string DateTime {
-            get {
-                return ResourceManager.GetString("DateTime", resourceCulture);
             }
         }
         
@@ -5106,15 +5052,6 @@ namespace Fanex.Athena.Resources {
         public static string NetTurnover {
             get {
                 return ResourceManager.GetString("NetTurnover", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Information is not available due to network latency. Please wait a few minutes and try again..
-        /// </summary>
-        public static string NetworkLatency {
-            get {
-                return ResourceManager.GetString("NetworkLatency", resourceCulture);
             }
         }
         

@@ -105,11 +105,11 @@
             await _controller.Index(model);
 
             // Assert
-            Assert.Multiple(() =>
+            Assert.Multiple((TestDelegate)(() =>
             {
                 Assert.That(model.LicenseeId, Is.EqualTo(SessionLicenseeId));
-                _dataAccess.Received().GetMainWinloss(model, SessionService.UserSession.CurrencyList);
-            });
+                _dataAccess.Received().GetMainWinloss(model, (System.Collections.Generic.IDictionary<int, string>)SessionService.UserSession.CurrencyList);
+            }));
         }
 
         [Test]
@@ -128,11 +128,11 @@
             await _controller.Index(model);
 
             // Assert
-            Assert.Multiple(() =>
+            Assert.Multiple((TestDelegate)(() =>
             {
                 Assert.That(model.LicenseeId, Is.EqualTo(SessionLicenseeId));
-                _dataAccess.Received().GetCustomerWinloss(model, SessionService.UserSession.CurrencyList);
-            });
+                _dataAccess.Received().GetCustomerWinloss(model, (System.Collections.Generic.IDictionary<int, string>)SessionService.UserSession.CurrencyList);
+            }));
         }
 
         [Test]
@@ -157,11 +157,11 @@
             await _controller.Index(model);
 
             // Assert
-            Assert.Multiple(() =>
+            Assert.Multiple((TestDelegate)(() =>
             {
                 Assert.That(model.LicenseeId, Is.EqualTo(LicenseeId));
-                _dataAccess.Received().GetCustomerWinloss(model, SessionService.UserSession.CurrencyList);
-            });
+                _dataAccess.Received().GetCustomerWinloss(model, (System.Collections.Generic.IDictionary<int, string>)SessionService.UserSession.CurrencyList);
+            }));
         }
 
         [Test]
@@ -185,11 +185,11 @@
             await _controller.Index(model);
 
             // Assert
-            Assert.Multiple(() =>
+            Assert.Multiple((TestDelegate)(() =>
             {
                 Assert.That(model.LicenseeId, Is.EqualTo(LicenseeIdentity.OneTwoBet));
-                _dataAccess.Received().GetLicenseeWinloss(model, SessionService.UserSession.CurrencyList);
-            });
+                _dataAccess.Received().GetLicenseeWinloss(model, (System.Collections.Generic.IDictionary<int, string>)SessionService.UserSession.CurrencyList);
+            }));
         }
     }
 }

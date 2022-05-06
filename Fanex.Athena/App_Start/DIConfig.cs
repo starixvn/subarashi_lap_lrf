@@ -12,19 +12,20 @@ using Autofac;
 using Autofac.Integration.Mvc;
 using Autofac.Integration.WebApi;
 using Fanex.Athena.Api.StatelessBase.Logger;
-using Fanex.Athena.Controllers.Customer;
 using Fanex.Athena.DataAccess.Report;
 using Fanex.Athena.DataAccess.Report.Interfaces;
 using Fanex.Athena.Extension;
 using Fanex.Athena.Extension.Utility.Internal;
+using Fanex.Athena.Service.Core.OAuth;
+using Fanex.Athena.Service.Core.Proxy;
 using Fanex.Athena.Service.Core.Users;
 using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.Service.StatelessCore;
 using Fanex.Athena.Service.StatelessCore.Extensions;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
 using Fanex.Logging;
+using ONEbook.UM;
 using ONEbook.UM.Services;
-using ONEbook.UM.Services.Impl;
 
 namespace Fanex.Athena
 {
@@ -32,6 +33,7 @@ namespace Fanex.Athena
     {
         public static void Register()
         {
+            
             var builder = new ContainerBuilder();
             var config = GlobalConfiguration.Configuration;
             var assemblies = GetAssemblies();
@@ -76,11 +78,6 @@ namespace Fanex.Athena
 
         private static void RegisterHttpClient(ContainerBuilder builder)
         {
-            var reportAPIheader = new Dictionary<string, string>
-            { { "AUTH_TOKEN", ConfigurationManager.AppSettings["ReportAPITokenValue"] } };
-
-            builder.WithHttpClient("ReportAPIClient", ConfigurationManager.AppSettings["ReportAPIHostUrl"], reportAPIheader);
-
             var betListAPIheader = new Dictionary<string, string>
             { { "BETLIST_TOKEN_KEY", ConfigurationManager.AppSettings["BetListApiTokenValue"] } };
 
@@ -89,17 +86,16 @@ namespace Fanex.Athena
             var lgApiheaedr = new Dictionary<string, string>
             { { "LGAPI_TOKEN_KEY", ConfigurationManager.AppSettings["LGAPITokenValue"] } };
             builder.WithHttpClient("LGAPICLIENT", ConfigurationManager.AppSettings["LGAPIHostUrl"], lgApiheaedr);
-            builder.WithHttpClient("EXTServiceTokenClient", ConfigurationManager.AppSettings["ExtAPITokenHostUrl"]);
             builder.WithHttpClient("OICAPICLIENT", ConfigurationManager.AppSettings["OicApiHostUrl"]);
 
         }
 
         private static void RegisterThirdpartyServices(ContainerBuilder builder)
         {
-            builder.RegisterType<MaintenanceService>().As<IMaintenanceService>().SingleInstance();
-
-            builder.RegisterInstance(Logger.Log).As<Logging.ILogger>();
-            builder.RegisterType<RestSharp.RestClient>().As<RestSharp.IRestClient>().InstancePerDependency();
+            builder.RegisterInstance(new MaintenanceService(UMClientManager.RestClient, UMClientManager.CacheService,
+                UMClientManager.UMClientConfigs, UMClientManager.HttpContext))
+                .As<IMaintenanceService>().SingleInstance();
+            builder.RegisterInstance(Logger.Log).As<ILogger>();
         }
 
         private static Assembly[] GetAssemblies()
@@ -149,13 +145,8 @@ namespace Fanex.Athena
         {
             builder.RegisterType<CustomMemoryCache>().As<ICustomMemoryCache>().SingleInstance()
              .OnRelease(x => x.Dispose());
-            builder.RegisterType<SessionStorage>().As<ISessionStorage>().SingleInstance();
             builder.RegisterType<SessionService>().As<ISessionService>().SingleInstance();
             builder.RegisterInstance(new FunctionUMService()).As<IFunctionUMService>().SingleInstance();
-
-            builder.Register(x => new ReportAPIClient(
-                 x.ResolveNamed<HttpClient>("ReportAPIClient")
-                )).As<IReportAPIClient>().SingleInstance();
 
             builder.Register(x => new BetListApiClient(
                  x.ResolveNamed<HttpClient>("BETLISTAPICLIENT")
@@ -172,6 +163,23 @@ namespace Fanex.Athena
 
             builder.RegisterType<PortalApiService>().As<IPortalApiService>().SingleInstance();
             builder.RegisterType<SubsidiaryService>().As<ISubsidiaryService>().SingleInstance();
+
+            builder.Register(x => new ProxyService(
+               new ProxyOptions(Convert.ToInt16(ConfigurationManager.AppSettings["Proxy_Timeout"])))
+               ).As<IProxyService>().SingleInstance();
+
+            builder.Register(x => new OAuthService(
+               new OAuthOptions
+               {
+                   Host = ConfigurationManager.AppSettings["IdentityServer_Host"],
+                   TokenPath = ConfigurationManager.AppSettings["IdentityServer_TokenPath"],
+                   UserInfoPath = ConfigurationManager.AppSettings["IdentityServer_UserInfoPath"],
+                   RevocationPath = ConfigurationManager.AppSettings["IdentityServer_RevocationPath"],
+                   ClientId = ConfigurationManager.AppSettings["IdentityServer_ClientId"],
+                   ClientSecret = ConfigurationManager.AppSettings["IdentityServer_ClientSecret"],
+                   Scope = ConfigurationManager.AppSettings["IdentityServer_Scope"]
+               })
+               ).As<IOAuthService>().SingleInstance().OnRelease(x => x.Dispose());
         }
     }
 }
