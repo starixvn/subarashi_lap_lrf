@@ -30,15 +30,15 @@
         }
 
         [HttpGet]
-        public Task<ActionResult> Index()
+        public async Task<ActionResult> Index()
         {
-            return GetView(false);
+            return await GetView(false);
         }
 
         [HttpGet]
-        public Task<ActionResult> History()
+        public async Task<ActionResult> History()
         {
-            return GetView(true);
+            return await GetView(true);
         }
 
         private async Task<ActionResult> GetView(bool isHistory)
