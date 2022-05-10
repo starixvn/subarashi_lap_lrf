@@ -24,11 +24,6 @@
     {
         private const string CustomerListResourceName = "CustomerList";
 
-        private static readonly int[] CasinoProducts = new[]
-        {
-            ProductTypes.AllBet, ProductTypes.RngCasino, ProductTypes.Voidbridge
-        };
-
         private static readonly IReadOnlyDictionary<string, bool> ListResourceNoBindData = new Dictionary<string, bool>
         {
             { "PlayerSegmentationProblem".ToLowerInvariant(), true },
@@ -95,12 +90,11 @@
         private static string AddCasinoProducts(string content, IEnumerable<Product> products)
         {
             var result = content;
-            if (content.Contains("{casino-productlist}"))
+            if (content.Contains("{casino-productlist-section}"))
             {
-                var casinoProducts = products.Where(x => CasinoProducts.Contains(x.ProductID)).Select(x => x.ProductName);
-                if (casinoProducts.Any())
+                var offerCasino = products.Any(_ => _.ProductID == ProductTypes.SabaCasino);
+                if (offerCasino)
                 {
-                    result = result.Replace("{casino-productlist}", string.Join<string>(", ", casinoProducts));
                     result = result.Replace("{casino-productlist-section}", string.Empty);
                     result = result.Replace("{/casino-productlist-section}", string.Empty);
                 }

@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="INumberGameBetSettingDataAccess.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.DataAccess.BetSettings.Interfaces
+﻿namespace Fanex.Athena.DataAccess.BetSettings.Interfaces
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;

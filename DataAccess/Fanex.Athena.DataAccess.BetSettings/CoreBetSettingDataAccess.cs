@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="CoreBetSettingDataAccess.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.DataAccess.BetSettings
+﻿namespace Fanex.Athena.DataAccess.BetSettings
 {
     using System.Collections;
     using System.Collections.Generic;

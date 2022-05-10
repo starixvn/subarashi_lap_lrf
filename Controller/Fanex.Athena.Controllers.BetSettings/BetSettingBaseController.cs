@@ -10,7 +10,6 @@
     using Model.BetSettings.MetaModel;
     using Model.BetSettings.ViewModel;
     using Model.Core.DTO.Common;
-    using Model.Customer.DTO;
     using Resources;
     using Service.BetSettings.Interfaces;
     using Web.ActionFilter;
@@ -42,11 +41,6 @@
         protected JsonResult AccessDenied()
         {
             return Json(new ResultInfo { Code = -1, Message = ViewResources.AccessDeniedMsg });
-        }
-
-        protected CustomerInfo GetCustomerInfo(int custId)
-        {
-            return _coreBetSettingService.GetCustomerInfo(custId);
         }
 
         protected async Task AssignRequiredPropertiesAsync(BetSettingBaseViewModel viewModel, BetSettingMetaModel metaModel)

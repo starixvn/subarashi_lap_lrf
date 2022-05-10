@@ -39,22 +39,6 @@
         }
 
         [Test]
-        public void GetCustomerInfo_WhenCall_CallService()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                const int CustId = 2;
-
-                // Action
-                controller.GetCustomerInfo(CustId);
-
-                // Assert
-                CoreBetSettingService.Received(1).GetCustomerInfo(CustId);
-            }
-        }
-
-        [Test]
         public async Task AssignRequiredProperties_WhenCall_ReturnCorrectData()
         {
             using (var controller = CreateController())
@@ -84,7 +68,7 @@
 
                 var betSettingProducts = new List<BetSettingProduct>
                 {
-                    new BetSettingProduct { ProductId = ProductTypes.RngCasino, IsEnable = isEnableRngCasino }
+                    new BetSettingProduct { ProductId = ProductTypes.SabaCasino, IsEnable = isEnableRngCasino }
                 };
                 CoreBetSettingService.GetBetSettingProductsAsync(metaModel.CustId,
                     DefaultLicenseeSession.LicenseeId)

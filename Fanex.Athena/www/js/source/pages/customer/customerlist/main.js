@@ -1,8 +1,8 @@
 ﻿'use strict';
 define(['jquery', 'common/site', 'common/querystring', 'lib/jqgrid/jquery.jqgrid.additional', './customerlist.filter', './customerlist.grid',
-    './customerlist.service', './customerlist.service.dormant', './customerlist.commision', './customerlist.custoption'],
+    './customerlist.service', './customerlist.service.dormant', './customerlist.custoption'],
     function ($, Site, QueryString, jqGridAdditional, CustomerListFilter, CustomerListGrid,
-        CustomerListService, CustomerListServiceDormant, CustomerComm, CustomerListViewOption) {
+        CustomerListService, CustomerListServiceDormant, CustomerListViewOption) {
 
         $(document).ready(function () {
             Site.initialize();
@@ -39,7 +39,5 @@ define(['jquery', 'common/site', 'common/querystring', 'lib/jqgrid/jquery.jqgrid
             } else {
                 Site.unBlockUI();
             }
-
-            CustomerComm.initialize();
         });
     });

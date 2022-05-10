@@ -31,7 +31,6 @@
 
         private ICoreBetSettingDataAccess _coreBetSettingDataAccess;
         private IAuthorizationService _authorizationService;
-        private ICustomerService _customerService;
         private CoreBetSettingService _coreBetSettingService;
 
         [OneTimeSetUp]
@@ -39,26 +38,9 @@
         {
             _coreBetSettingDataAccess = Substitute.For<ICoreBetSettingDataAccess>();
             _authorizationService = Substitute.For<IAuthorizationService>();
-            _customerService = Substitute.For<ICustomerService>();
             _coreBetSettingService = new CoreBetSettingService(
                 _authorizationService,
-                _coreBetSettingDataAccess,
-                _customerService);
-        }
-
-        [Test]
-        public void GetCustomerInfo_WhenCall_ReturnCorrectData()
-        {
-            // Arrange
-            const int CustId = 3423423;
-            var expectedCustomer = FakeHelper.Create<CustomerInfo>();
-            _customerService.GetCustomerInfo(CustId).Returns(expectedCustomer);
-
-            // Action
-            var result = _coreBetSettingService.GetCustomerInfo(CustId);
-
-            // Assert
-            Assert.That(result, Is.EqualTo(expectedCustomer));
+                _coreBetSettingDataAccess);
         }
 
         [Test]
@@ -85,12 +67,10 @@
         }
 
         [Test]
-        public async Task GetBetSettingProducts_IsSyncCasino_ReturnCorrectData()
+        public async Task GetBetSettingProducts_WhenCall_ReturnCorrectData()
         {
             // Arrange
             const int CustId = 3434;
-            _customerService.GetCustomerInfo(CustId).Returns(new CustomerInfo { SyncCasino = true });
-
             _coreBetSettingDataAccess.GetBetSettingProductsAsync(LicenseeId).Returns(Task.FromResult(GetSampleBetSettingProducts()));
 
             // Action
@@ -99,32 +79,14 @@
             // Assert
             Assert.That(
                 result.Select(x => x.ProductId).ToArray(),
-                Is.EqualTo(new[] { ProductTypes.RngCasino, ProductTypes.Sportsbook, ProductTypes.Macau }));
-        }
-
-        [Test]
-        public async Task GetBetSettingProducts_IsNotSyncCasino_ReturnCorrectData()
-        {
-            // Arrange
-            const int CustId = 3434;
-            _customerService.GetCustomerInfo(CustId).Returns(new CustomerInfo { SyncCasino = false });
-
-            _coreBetSettingDataAccess.GetBetSettingProductsAsync(LicenseeId).Returns(Task.FromResult(GetSampleBetSettingProducts()));
-
-            // Action
-            var result = await _coreBetSettingService.GetBetSettingProductsAsync(CustId, LicenseeId).ConfigureAwait(false);
-
-            // Assert
-            Assert.That(
-                result.Select(x => x.ProductId).ToArray(),
-                Is.EqualTo(new[] { ProductTypes.Sportsbook, ProductTypes.Macau }));
+                Is.EqualTo(new[] { ProductTypes.SabaCasino, ProductTypes.Sportsbook, ProductTypes.Macau }));
         }
 
         private static IEnumerable<BetSettingProduct> GetSampleBetSettingProducts()
         {
             return new[]
             {
-                new BetSettingProduct { ProductId = ProductTypes.RngCasino, IsEnable = true },
+                new BetSettingProduct { ProductId = ProductTypes.SabaCasino, IsEnable = true },
                 new BetSettingProduct { ProductId = ProductTypes.Sportsbook, IsEnable = true },
                 new BetSettingProduct { ProductId = ProductTypes.NumberGame, IsEnable = false },
                 new BetSettingProduct { ProductId = ProductTypes.Macau, IsEnable = true },

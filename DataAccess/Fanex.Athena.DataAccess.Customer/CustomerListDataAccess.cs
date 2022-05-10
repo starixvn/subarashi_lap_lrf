@@ -67,23 +67,6 @@
 
         #region Update
 
-        public IResultInfo UpdateOddsGroup(CustomerOddsGroupMetaModel metaModel)
-        {
-            using (var db = this.GetObjectDb("Lrf_CustomerUpdUgroup"))
-            {
-                db.SetParameterValue("UserId", metaModel.UserId);
-                db.SetParameterValue("CustId", metaModel.CustId);
-                db.SetParameterValue("OddsGroup", metaModel.OddsGroup);
-                db.SetParameterValue("IP", metaModel.Ip);
-                db.SetParameterValue("Langkey", metaModel.Language);
-
-                AddResultParam(db);
-                db.ExecuteNonQuery();
-
-                return GetResult(db);
-            }
-        }
-
         public IResultInfo UpdateCustClosed(CustomerStatusMetaModel metaModel)
         {
             return UpdateCustomerStatus(metaModel, "Lrf_CustomerUpdClosed", "Closed");
@@ -134,17 +117,16 @@
             }
         }
 
-        public IResultInfo UpdateOddsGroup(int userId, int custId, string group, string ip, string language)
+        public IResultInfo UpdateOddsGroup(CustomerOddsGroupMetaModel metaModel)
         {
-            const string UspName = "Lrf_CustomerUpdOddsGroup";
-
-            using (var db = this.GetObjectDb(UspName))
+            using (var db = this.GetObjectDb("Lrf_CustomerUpdUgroup"))
             {
-                db.SetParameterValue("custid", custId);
-                db.SetParameterValue("userid", userId);
-                db.SetParameterValue("oddsgroup", group);
-                db.SetParameterValue("ip", ip);
-                db.SetParameterValue("langkey", language);
+                db.SetParameterValue("UserId", metaModel.UserId);
+                db.SetParameterValue("CustId", metaModel.CustId);
+                db.SetParameterValue("OddsGroup", metaModel.OddsGroup);
+                db.SetParameterValue("IP", metaModel.Ip);
+                db.SetParameterValue("Langkey", metaModel.Language);
+
                 AddResultParam(db);
                 db.ExecuteNonQuery();
 

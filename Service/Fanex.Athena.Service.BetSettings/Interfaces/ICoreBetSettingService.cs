@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="ICoreBetSettingService.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Service.BetSettings.Interfaces
+﻿namespace Fanex.Athena.Service.BetSettings.Interfaces
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -16,8 +10,6 @@ namespace Fanex.Athena.Service.BetSettings.Interfaces
 
     public interface ICoreBetSettingService
     {
-        CustomerInfo GetCustomerInfo(int custId);
-
         bool IsBetSettingEditable(UserAuthInfo userSession);
 
         Task<IEnumerable<BetSettingProduct>> GetBetSettingProductsAsync(int custId, int licenseeId);

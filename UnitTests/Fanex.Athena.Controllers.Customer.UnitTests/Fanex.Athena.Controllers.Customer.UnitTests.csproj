@@ -102,8 +102,6 @@
     <Compile Include="PlayerSegmentation\PlayerSegmentationControllerTest.cs" />
     <Compile Include="SearchCustomerApiControllerTest.cs" />
     <Compile Include="CustomerComGroupControllerTest.cs" />
-    <Compile Include="CustomerApiControllerTest.MoveToGroupCom.cs" />
-    <Compile Include="CustomerApiControllerTest.UpdateCustomerCom.cs" />
     <Compile Include="CustomerApiControllerTest.UpdateBAStatus.cs" />
     <Compile Include="CustomerApiControllerTest.cs" />
     <Compile Include="CustomerControllerTest.cs" />

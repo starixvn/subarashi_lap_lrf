@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Fanex.Athena.DataAccess.Customer.Interfaces;
 using Fanex.Athena.Model.Auth;
 using Fanex.Athena.Model.Core.DTO.Common;
@@ -13,22 +14,19 @@ namespace Fanex.Athena.Service.Customer.UnitTests
     public class GroupComServiceTests
     {
         private IGroupComDataAccess repository;
-        private ILGAPIClient lgClient;
         private GroupComService service;
 
         [OneTimeSetUp]
         public void FixtureSetUp()
         {
             repository = Substitute.For<IGroupComDataAccess>();
-            lgClient = Substitute.For<ILGAPIClient>();
-            service = new GroupComService(repository, lgClient);
+            service = new GroupComService(repository);
         }
 
         [OneTimeTearDown]
         public void FixtureTearDown()
         {
             repository = null;
-            lgClient = null;
             service = null;
         }
 
@@ -69,7 +67,7 @@ namespace Fanex.Athena.Service.Customer.UnitTests
         }
 
         [Test]
-        public void InsertGroupAsync_Always_InsertData()
+        public async Task InsertGroupAsync_Always_InsertData()
         {
             // Arrange
             var permissions = new Dictionary<string, bool>();
@@ -77,10 +75,10 @@ namespace Fanex.Athena.Service.Customer.UnitTests
             var request = Substitute.For<IRequest>();
 
             // Action
-            service.InsertGroupAsync(item, request, 1, permissions);
+            await service.InsertGroupAsync(item, request, 1, permissions);
 
             // Assert
-            repository.Received().InsertGroupAsync(item, request, 1, permissions);
+            await repository.Received().InsertGroupAsync(item, request, 1, permissions);
         }
 
         [Test]

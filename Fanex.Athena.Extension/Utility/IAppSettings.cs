@@ -41,8 +41,6 @@
 
         DateTime HistoryDate { get; }
 
-        bool IsDisableRngCasino { get; }
-
         bool IsShowMixedSport { get; }
 
         bool IsShowAllDataForSettleMatchCountReport { get; }

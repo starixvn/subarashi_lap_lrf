@@ -745,6 +745,7 @@
     <Content Include="..\.sonarlint\lrfcsharp.ruleset">
       <Link>lrfcsharp.ruleset</Link>
     </Content>
+    <Content Include="Views\Desktop\Customer\BetSetting\SabaCasino.cshtml" />
     <None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
     <None Include="www\css\source\pages\betlist\result\result.happy5.scss" />
     <None Include="www\css\source\reactpages\components\alert\icons\error.scss" />
@@ -844,6 +845,7 @@
     <Content Include="www\js\source\lib\bootstrap-table\utils\index.js" />
     <Content Include="www\js\source\lib\bootstrap-table\virtual-scroll\index.js" />
     <Content Include="www\js\source\pages\customer\customerclass\main.js" />
+    <Content Include="www\js\source\pages\customer\customerlist\customerlist.custstatus.js" />
     <Content Include="www\js\source\pages\customer\customerlist\customerlist.gridoption.dormant.js" />
     <Content Include="www\js\source\pages\customer\customerlist\customerlist.service.dormant.js" />
     <Content Include="www\js\source\pages\report\godoffortunewinloss\main.js" />
@@ -1499,7 +1501,6 @@
     <Content Include="Views\Desktop\Customer\BetSetting\Voidbridge.cshtml" />
     <Content Include="Views\Desktop\Customer\BetSetting\AgCasino.cshtml" />
     <Content Include="Views\Desktop\Customer\BetSetting\Keno.cshtml" />
-    <Content Include="Views\Desktop\Customer\BetSetting\RngCasino.cshtml" />
     <Content Include="Views\Desktop\Customer\BetSetting\CashOut.cshtml" />
     <Content Include="Views\Desktop\Customer\BetSetting\NumberGame.cshtml" />
     <Content Include="Views\Desktop\Shared\_BetSettingLayout.cshtml" />
@@ -1741,7 +1742,6 @@
     <Content Include="www\js\build\dev\pages\customer\kenobetsetting.chunk.js" />
     <Content Include="www\js\build\dev\pages\customer\loginlog.chunk.js" />
     <Content Include="www\js\build\dev\pages\customer\numbergamebetsetting.chunk.js" />
-    <Content Include="www\js\build\dev\pages\customer\rngcasinobetsetting.chunk.js" />
     <Content Include="www\js\build\dev\pages\customer\thirdpartybetsetting.chunk.js" />
     <Content Include="www\js\build\dev\pages\forecast\ahforecast.chunk.js" />
     <Content Include="www\js\build\dev\pages\forecast\forecasthdpou.chunk.js" />
@@ -1798,7 +1798,6 @@
     <Content Include="www\js\build\pro\pages\customer\kenobetsetting.chunk.js" />
     <Content Include="www\js\build\pro\pages\customer\loginlog.chunk.js" />
     <Content Include="www\js\build\pro\pages\customer\numbergamebetsetting.chunk.js" />
-    <Content Include="www\js\build\pro\pages\customer\rngcasinobetsetting.chunk.js" />
     <Content Include="www\js\build\pro\pages\customer\thirdpartybetsetting.chunk.js" />
     <Content Include="www\js\build\pro\pages\forecast\ahforecast.chunk.js" />
     <Content Include="www\js\build\pro\pages\forecast\forecasthdpou.chunk.js" />
@@ -1913,14 +1912,12 @@
     <Content Include="www\js\source\pages\customer\betsetting\main-dcsbetsetting.js" />
     <Content Include="www\js\source\pages\customer\betsetting\main-keno.js" />
     <Content Include="www\js\source\pages\customer\betsetting\main-numbergame.js" />
-    <Content Include="www\js\source\pages\customer\betsetting\main-rngcasino.js" />
     <Content Include="www\js\source\pages\customer\betsetting\main-thirdparty.js" />
     <Content Include="www\js\source\pages\customer\betsetting\products\betsettingbygroup.js" />
     <Content Include="www\js\source\pages\customer\betsetting\products\dcsbetsetting.js" />
     <Content Include="www\js\source\pages\customer\betsetting\products\betsettingmain.js" />
     <Content Include="www\js\source\pages\customer\betsetting\products\keno.js" />
     <Content Include="www\js\source\pages\customer\betsetting\products\numbergame.js" />
-    <Content Include="www\js\source\pages\customer\betsetting\products\rngcasino.js" />
     <Content Include="www\js\source\pages\customer\betsetting\products\thirdparty.js" />
     <Content Include="www\js\source\pages\customer\customercomm\commgroup.js" />
     <Content Include="www\js\source\pages\customer\customercomm\commgroupadd.js" />
@@ -1930,11 +1927,9 @@
     <Content Include="www\js\source\pages\customer\customercomm\main-commgroupadd.js" />
     <Content Include="www\js\source\pages\customer\customercomm\main-commgroupedit.js" />
     <Content Include="www\js\source\pages\customer\customercomm\main-commgrouplist.js" />
-    <Content Include="www\js\source\pages\customer\customerlist\customerlist.custstatus.js" />
     <Content Include="www\js\source\pages\customer\customerlist\customerlist.filter.js" />
     <Content Include="www\js\source\pages\customer\customerlist\customerlist.grid.js" />
     <Content Include="www\js\source\pages\customer\customerlist\customerlist.bastatus.js" />
-    <Content Include="www\js\source\pages\customer\customerlist\customerlist.commision.js" />
     <Content Include="www\js\source\pages\customer\customerlist\customerlist.custoption.js" />
     <Content Include="www\js\source\pages\customer\customerlist\customerlist.oddsgroup.js" />
     <Content Include="www\js\source\pages\customer\customerlist\customerlist.gridoption.js" />
@@ -2631,7 +2626,6 @@
     <Content Include="www\js\build\dev\pages\customer\dcsbetsetting.chunk.js.map" />
     <Content Include="www\js\build\dev\pages\customer\kenobetsetting.chunk.js.map" />
     <Content Include="www\js\build\dev\pages\customer\numbergamebetsetting.chunk.js.map" />
-    <Content Include="www\js\build\dev\pages\customer\rngcasinobetsetting.chunk.js.map" />
     <Content Include="www\js\build\dev\pages\customer\thirdpartybetsetting.chunk.js.map" />
     <Content Include="www\webpackconfig\build\webpack.react.pro.conf.js" />
     <Content Include="www\css\source\scss\fonts\roboto\_style.scss" />
@@ -5564,8 +5558,6 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Code\RazorHelper.cshtml" />
-    <Content Include="Views\Desktop\Customer\CustomerDialog\MoveToGroup.cshtml" />
-    <Content Include="Views\Desktop\Customer\CustomerDialog\UpdateCustComm.cshtml" />
     <Content Include="App_Code\DatePickerHelper.cshtml" />
     <Content Include="WhoAmI.aspx" />
     <Content Include="packages.config">
@@ -5588,7 +5580,6 @@
     <Content Include="App_Data\Template\Reports\LiveReportMatchList.xls" />
     <Content Include="Content\Web.config" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
-    <Content Include="Views\Desktop\Customer\CustomerDialog\RemoveFromGroup.cshtml" />
     <Content Include="Views\Desktop\Customer\CustomerDialog\LogInfo.cshtml" />
     <Content Include="Views\Shared\_Report.jqGridLayout.cshtml" />
     <None Include="Scripts\Languages\ViewResources.tt">

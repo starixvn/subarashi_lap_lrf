@@ -75,16 +75,11 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="CustomerCommServiceTest_RemoveCustomersFromGroup.cs" />
-    <Compile Include="CustomerCommServiceTest_UpdateCustomersCommission.cs">
-      <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
-    </Compile>
     <Compile Include="CustomerListServiceTest_UpdateSpecialLevel.cs" />
     <Compile Include="CustomerListServiceTest_UpdateCustomerBAStatus.cs" />
     <Compile Include="CustomerListServiceTest_UpdateCustStatus.cs" />
     <Compile Include="CustomerListServiceTest_UpdateOddsGroup.cs" />
     <Compile Include="CustomerListServiceTest_GetCustomerLoginInfo.cs" />
-    <Compile Include="CustomerServiceTest.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Helpers\GroupCommSettingTest.cs" />
     <Compile Include="GroupComServiceTests.cs" />

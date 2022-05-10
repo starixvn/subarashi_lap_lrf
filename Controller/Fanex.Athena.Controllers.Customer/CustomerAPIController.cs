@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="CustomerApiController.cs" company="Microsoft">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Controllers.Customer
+﻿namespace Fanex.Athena.Controllers.Customer
 {
     #region Using
 
@@ -36,30 +30,22 @@ namespace Fanex.Athena.Controllers.Customer
     [FunctionAuthorization(PermissionKeys.CustomerInfoCustomerList)]
     public class CustomerApiController : CultureBaseController
     {
-        private const string CustomerAPIRemoveFromGroupComName = "CustomerAPI_RemoveFromGroupCom";
-
         private readonly ILogger _logger;
-        private readonly ICustomerCommService _customerCommService;
         private readonly ICustomerListService _customerListService;
-        private readonly IGroupComService _groupComService;
         private readonly ILicenseeDataAccess _licenseeDataAccess;
         private readonly IProductService _productService;
         private readonly IAuthorizationService _authorizationService;
 
         public CustomerApiController(
             ILogger logger,
-            ICustomerCommService customerCommService,
             ICustomerListService customerListService,
-            IGroupComService groupComService,
             ILicenseeDataAccess licenseeDataAccess,
             IProductService productService,
             IAuthorizationService authorizationService)
         {
             _logger = logger;
-            _customerCommService = customerCommService;
             _licenseeDataAccess = licenseeDataAccess;
             _customerListService = customerListService;
-            _groupComService = groupComService;
             _productService = productService;
             _authorizationService = authorizationService;
         }
@@ -70,7 +56,7 @@ namespace Fanex.Athena.Controllers.Customer
         [AjaxRequest]
         [CustomValidateAntiForgery]
         [ValidatePermissionOnData]
-        public async Task<ActionResult> UpdateCustStatus(int custId, bool isClosed, bool isSuspended)
+        public ActionResult UpdateCustStatus(int custId, bool isClosed, bool isSuspended)
         {
             try
             {
@@ -89,13 +75,12 @@ namespace Fanex.Athena.Controllers.Customer
                         Ip = Request.UserHostAddress
                     };
 
-                    var result = await
-                        _customerListService.UpdateCustClosedAsync(customerStatusMetaModel, userSession.Language);
+                    var result = _customerListService.UpdateCustClosed(customerStatusMetaModel);
 
                     if (result.Code == 0)
                     {
                         customerStatusMetaModel.IsOn = isSuspended;
-                        result = await _customerListService.UpdateCustSuspendAsync(customerStatusMetaModel, userSession.Language);
+                        result = _customerListService.UpdateCustSuspend(customerStatusMetaModel);
                     }
 
                     return Json(result);
@@ -262,220 +247,6 @@ namespace Fanex.Athena.Controllers.Customer
         }
 
         #endregion BA API
-
-        #region Customer Comm API
-
-        [HttpPost]
-        [AjaxRequest]
-        [CustomValidateAntiForgery]
-        [FunctionAuthorization(PermissionKeys.CustomerInfoCommissionGroupList)]
-        public async Task<ActionResult> UpdateCustomerCom(UpdatedCustomerComMetaModel metaModel)
-        {
-            var licenseeSession = SessionServiceInstance.LicenseeSession;
-            if (!licenseeSession.IsAllowedCustomerComm)
-            {
-                return AccessDenied();
-            }
-
-            var result = new ResultViewModel
-            {
-                Success = false,
-                ErrorMessage = ViewResources.HttpError_Default
-            };
-            if (metaModel.Customers != null && metaModel.Customers.Count > 0)
-            {
-                var isvalid = GroupCommHelper.IsAllValid(
-                                metaModel.SBComm,
-                                metaModel.ParlayComm,
-                                metaModel.NGComm,
-                                metaModel.CSComm);
-                var userSession = SessionServiceInstance.UserSession;
-
-                var productAccess = _productService.GetProductAccess(licenseeSession.LicenseeId, userSession.Language);
-                if (isvalid)
-                {
-                    metaModel.LicenseeId = licenseeSession.LicenseeId;
-                    metaModel.UserId = userSession.UserId;
-                    metaModel.UserName = userSession.UserName;
-                    metaModel.Ip = this.Request.UserHostAddress;
-                    metaModel.IsAllowedNG = productAccess.IsAllowNG;
-                    metaModel.IsAllowedCS = productAccess.IsAllowCS;
-                    metaModel.Language = userSession.Language;
-                    /* Get oldGroup Commission to compare with new group commission.
-                     * Check data for Update group commission
-                     * exclude groupId = -1, 0 (get all group or get none group)*/
-                    if (metaModel.GroupId > 0 && IsSameOldComm(metaModel))
-                    {
-                        result.Success = false;
-                        result.ErrorMessage = ViewResources.MessageCommNoChange;
-                    }
-                    else
-                    {
-                        await this.ProcessUpdatingCustomerComAsync(metaModel, result);
-                    }
-                }
-            }
-
-            return Json(result);
-        }
-
-        [HttpPost]
-        [AjaxRequest]
-        [CustomValidateAntiForgery]
-        [FunctionAuthorization(PermissionKeys.CustomerInfoCommissionGroupList)]
-        public async Task<ActionResult> RemoveFromGroupCom(string customerIds, bool isRemovePlayercomm)
-        {
-            var licenseeSession = SessionServiceInstance.LicenseeSession;
-            if (!licenseeSession.IsAllowedCustomerComm)
-            {
-                return AccessDenied();
-            }
-
-            var userSession = SessionServiceInstance.UserSession;
-
-            var productAccess = _productService.GetProductAccess(
-                licenseeSession.LicenseeId,
-                userSession.Language,
-                CustomerAPIRemoveFromGroupComName);
-            var metaModel = new RemoveFromGroupComMetaModel
-            {
-                CustomerIds = customerIds,
-                IsRemovePlayercomm = isRemovePlayercomm,
-                LicenseeId = licenseeSession.LicenseeId,
-                UserId = userSession.UserId,
-                UserName = userSession.UserName,
-                Ip = Request.UserHostAddress,
-                Language = userSession.Language
-            };
-            var removalResult = await _customerCommService.RemoveCustomersFromGroupAsync(metaModel, productAccess.IsAllowCS);
-
-            var result = new ResultViewModel
-            {
-                Success = removalResult.IsSuccessful,
-                Message = ViewResources.MessageSuccess,
-                ErrorMessage = removalResult.Message,
-                ErrorCode = removalResult.Code,
-                ExtendedData = new
-                {
-                    SBComm = 0,
-                    RCComm = 0,
-                    NGComm = 0,
-                    RNGComm = 0,
-                    GroupName = ViewResources.None,
-                    GroupColor = "#ffffff",
-                }
-            };
-
-            return Json(result);
-        }
-
-        [HttpPost]
-        [AjaxRequest]
-        [CustomValidateAntiForgery]
-        [FunctionAuthorization(PermissionKeys.CustomerInfoCommissionGroupList)]
-        public async Task<ActionResult> MoveToGroupCom(string customerIds, int groupComId)
-        {
-            var licenseeSession = SessionServiceInstance.LicenseeSession;
-            if (!licenseeSession.IsAllowedCustomerComm)
-            {
-                return AccessDenied();
-            }
-
-            var userSession = SessionServiceInstance.UserSession;
-            var productAccess = _productService.GetProductAccess(
-                licenseeSession.LicenseeId,
-                userSession.Language,
-                CustomerAPIRemoveFromGroupComName);
-
-            var supportedProducts = _productService.GetAllowedProducts("CommissionGroups");
-            var metaModel = new MoveToGroupComMetaModel(productAccess)
-            {
-                CustomerIds = customerIds,
-                GroupComId = groupComId,
-                LicenseeId = licenseeSession.LicenseeId,
-                UserId = userSession.UserId,
-                UserName = userSession.UserName,
-                Ip = Request.UserHostAddress,
-                Language = userSession.Language,
-                ProductPermissions = CommissionGroupHelper.GetProductPermissions(supportedProducts, productAccess)
-            };
-
-            var temp = await _customerCommService.MoveCustomersToGroupAsync(metaModel);
-            var result = new ResultViewModel
-            {
-                Success = temp.IsSuccessful,
-                Message = ViewResources.MessageSuccess,
-                ErrorMessage = temp.Message,
-                ErrorCode = temp.Code
-            };
-
-            if (result.Success)
-            {
-                var newGroup = _groupComService.GetById(metaModel.GroupComId, licenseeSession.LicenseeId, metaModel.ProductPermissions);
-                if (newGroup != null)
-                {
-                    result.ExtendedData = CreateExtendedData(newGroup);
-                }
-            }
-
-            return Json(result);
-        }
-
-        #endregion Customer Comm API
-
-        private static object CreateExtendedData(GroupCommMetaModel newGroup)
-        {
-            return new
-            {
-                SBComm = NumberHelper.PercentageFormat(newGroup.CommValues[Product.SB]),
-                NGComm = NumberHelper.PercentageFormat(newGroup.CommValues[Product.NG]),
-                RNGComm = NumberHelper.PercentageFormat(newGroup.CommValues[Product.CS]),
-                newGroup.GroupName,
-                newGroup.GroupColor,
-            };
-        }
-
-        private JsonResult AccessDenied()
-        {
-            HttpContext.Response.StatusCode = (int)HttpStatusCode.Forbidden;
-            return new JsonResult
-            {
-                Data = new { ErrCode = (int)HttpStatusCode.Forbidden, ErrMsg = "Access Denied." },
-                JsonRequestBehavior = JsonRequestBehavior.AllowGet
-            };
-        }
-
-        private bool IsSameOldComm(UpdatedCustomerComMetaModel metaModel)
-        {
-            var supportedProducts = _productService.GetAllowedProducts("CommissionGroups");
-            var licenseeSession = SessionServiceInstance.LicenseeSession;
-            var userSession = SessionServiceInstance.UserSession;
-            var productAccess = _productService.GetProductAccess(licenseeSession.LicenseeId, userSession.Language, CustomerAPIRemoveFromGroupComName);
-            metaModel.ProductPermissions = CommissionGroupHelper.GetProductPermissions(supportedProducts, productAccess);
-
-            var oldGroup = this._groupComService.GetById(metaModel.GroupId, metaModel.LicenseeId, metaModel.ProductPermissions);
-            return oldGroup.CommValues[Product.NG] == metaModel.NGComm
-                && oldGroup.CommValues[Product.SB] == metaModel.SBComm
-                && oldGroup.CommValues[Product.CS] == metaModel.CSComm;
-        }
-
-        private async Task ProcessUpdatingCustomerComAsync(UpdatedCustomerComMetaModel metaModel, ResultViewModel result)
-        {
-            metaModel.Language = SessionServiceInstance.UserSession.Language;
-            var temp = await _customerCommService.UpdateCustomersCommissionAsync(metaModel, metaModel.IsAllowedCS);
-            result.Success = temp.IsSuccessful;
-            result.Message = ViewResources.MessageSuccess;
-            result.ErrorMessage = temp.Message;
-            result.ErrorCode = temp.Code;
-            result.ExtendedData = new
-            {
-                SBComm = NumberHelper.PercentageFormat(metaModel.SBComm),
-                NGComm = NumberHelper.PercentageFormat(metaModel.NGComm),
-                RNGComm = NumberHelper.PercentageFormat(metaModel.CSComm),
-                GroupName = ViewResources.None,
-                GroupColor = "#ffffff",
-            };
-        }
 
         protected internal virtual ActionResult CreateUpdatingBaResult(bool isAllowBA, bool isSuccessful, string message, string oddsGroup = null)
         {

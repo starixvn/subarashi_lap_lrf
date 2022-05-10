@@ -62,9 +62,6 @@
     <Compile Include="DTO\KenoBetSetting.cs" />
     <Compile Include="DTO\LogParam.cs" />
     <Compile Include="DTO\NumberGameBetSetting.cs" />
-    <Compile Include="DTO\RngCasino\GameKind.cs" />
-    <Compile Include="DTO\RngCasino\GameType.cs" />
-    <Compile Include="DTO\RngCasino\StakeLevel.cs" />
     <Compile Include="DTO\ThirdPartyBetSetting.cs" />
     <Compile Include="DTO\DcsBetSetting.cs" />
     <Compile Include="MetaModel\BetSettingMetaModel.cs" />
@@ -78,7 +75,6 @@
     <Compile Include="ViewModel\BetSettingBaseViewModel.cs" />
     <Compile Include="ViewModel\ExchangeBetSettingViewModel.cs" />
     <Compile Include="ViewModel\BetSettingViewModel.cs" />
-    <Compile Include="ViewModel\RngCasinoBetSettingViewModel.cs" />
     <Compile Include="ViewModel\ThirdPartyBetSettingViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

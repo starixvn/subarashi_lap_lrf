@@ -63,16 +63,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomerClassService.cs" />
-    <Compile Include="CustomerCommService.cs" />
     <Compile Include="CustomerListService.cs" />
-    <Compile Include="CustomerService.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="GroupComService.cs" />
     <Compile Include="Helpers\GroupCommHelper.cs" />
-    <Compile Include="Interfaces\ICustomerCommService.cs">
-      <SonarQubeExclude>true</SonarQubeExclude>
-    </Compile>
-    <Compile Include="Interfaces\ICustomerService.cs" />
     <Compile Include="Interfaces\ICustomerListService.cs" />
     <Compile Include="Interfaces\IGroupComService.cs" />
     <Compile Include="Interfaces\ICustomerClassService.cs" />

@@ -1,4 +1,4 @@
-﻿// Generated at: 4/15/2022 12:54:32 PM
+﻿// Generated at: 3/25/2022 3:44:03 PM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -660,7 +660,7 @@ ProductCB:"Colossus Bets",
 ProductCC:"Arcadia Gaming",
 ProductCG:"CG",
 ProductCO:"Cash Out",
-ProductCS:"RNG Casino",
+ProductCS:"Saba Casino",
 ProductFW:"Fishing World",
 ProductGD:"Gold Deluxe",
 ProductGDG:"GDG",

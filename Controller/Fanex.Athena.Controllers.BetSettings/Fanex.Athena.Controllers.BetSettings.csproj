@@ -96,7 +96,6 @@
   <ItemGroup>
     <Compile Include="ExchangeDcsBetSettingController.cs" />
     <Compile Include="KenoBetSettingController.cs" />
-    <Compile Include="RngCasinoBetSettingController.cs" />
     <Compile Include="BetSettingBaseController.cs" />
     <Compile Include="SportsbookBetSettingController.cs" />
     <Compile Include="AgCasinoBetSettingController.cs" />

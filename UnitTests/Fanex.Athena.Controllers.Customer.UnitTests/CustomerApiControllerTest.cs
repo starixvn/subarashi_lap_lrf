@@ -25,9 +25,7 @@
     public partial class CustomerApiControllerTest : CultureBaseControllerHelperTest
     {
         private ILogger _logger;
-        private ICustomerCommService _customerCommService;
         private ICustomerListService _customerListService;
-        private IGroupComService _groupComService;
         private ILicenseeDataAccess _licenseeDataAccess;
         private IProductService _productService;
         private IAuthorizationService _authorizationService;
@@ -47,9 +45,7 @@
             _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
             AppSettings = Substitute.For<IAppSettings>();
             _logger = Substitute.For<ILogger>();
-            _customerCommService = Substitute.For<ICustomerCommService>();
             _customerListService = Substitute.For<ICustomerListService>();
-            _groupComService = Substitute.For<IGroupComService>();
             _licenseeDataAccess = Substitute.For<ILicenseeDataAccess>();
             _productService = Substitute.For<IProductService>();
             _authorizationService = Substitute.For<IAuthorizationService>();
@@ -59,12 +55,9 @@
         public void TearDown()
         {
             _customerListService.ClearReceivedCalls();
-            _groupComService.ClearReceivedCalls();
             _licenseeSettingService = null;
             _logger = null;
-            _customerCommService = null;
             _customerListService = null;
-            _groupComService = null;
             _licenseeDataAccess = null;
             _productService = null;
             _authorizationService = null;
@@ -72,7 +65,7 @@
         }
 
         [Test]
-        public async Task UpdateCustStatus_LicenseeNotAllowStatusFunction_ReturnErrorResultAsync()
+        public void UpdateCustStatus_LicenseeNotAllowStatusFunction_ReturnErrorResultAsync()
         {
             using (var controller = CreateController())
             {
@@ -80,7 +73,7 @@
                 AppSettings.GetValue("LicenseeOfferStatusFunction").Returns("0");
 
                 // Action
-                var result = await controller.UpdateCustStatus(0, false, false).ConfigureAwait(false) as JsonResult;
+                var result = controller.UpdateCustStatus(0, false, false) as JsonResult;
                 var resultInfo = result.Data as ResultInfo;
 
                 // Assert
@@ -93,7 +86,7 @@
         }
 
         [Test]
-        public async Task UpdateCustStatus_LicenseeAllowStatusFunction_ReturnErrorResultAsync()
+        public void UpdateCustStatus_LicenseeAllowStatusFunction_ReturnErrorResultAsync()
         {
             using (var controller = CreateController())
             {
@@ -105,38 +98,36 @@
                 AppSettings.LicenseeOfferStatusFunction.Returns(new[] { licenseeId });
 
                 // Action
-                await controller.UpdateCustStatus(CustId, isClosed, isSuspended);
+                controller.UpdateCustStatus(CustId, isClosed, isSuspended);
 
                 // Assert
                 Assert.Multiple((TestDelegate)(() =>
                 {
-                    _customerListService.Received(1).UpdateCustClosedAsync(
-                        Arg.Is<CustomerStatusMetaModel>((System.Linq.Expressions.Expression<Predicate<CustomerStatusMetaModel>>)(x =>
+                    _customerListService.Received(1).UpdateCustClosed(
+                        Arg.Is<CustomerStatusMetaModel>(x =>
                         x.LicenseeId == licenseeId &&
                         x.LicenseeName == SessionService.LicenseeSession.LicenseeName &&
                         x.CustId == CustId &&
                         x.IsOn == isClosed &&
                         x.ModifyById == SessionService.UserSession.UserId &&
                         x.ModifyByUsername == SessionService.UserSession.UserName &&
-                        x.Ip == controller.Request.UserHostAddress)),
-                        SessionService.UserSession.Language);
+                        x.Ip == controller.Request.UserHostAddress));
 
-                    _customerListService.Received(1).UpdateCustSuspendAsync(
-                        Arg.Is<CustomerStatusMetaModel>((System.Linq.Expressions.Expression<Predicate<CustomerStatusMetaModel>>)(x =>
+                    _customerListService.Received(1).UpdateCustSuspend(
+                        Arg.Is<CustomerStatusMetaModel>(x =>
                         x.LicenseeId == licenseeId &&
                         x.LicenseeName == SessionService.LicenseeSession.LicenseeName &&
                         x.CustId == CustId &&
                         x.IsOn == isSuspended &&
                         x.ModifyById == SessionService.UserSession.UserId &&
                         x.ModifyByUsername == SessionService.UserSession.UserName &&
-                        x.Ip == controller.Request.UserHostAddress)),
-                        SessionService.UserSession.Language);
+                        x.Ip == controller.Request.UserHostAddress));
                 }));
             }
         }
 
         [Test]
-        public async Task UpdateCustStatus_HasException_WriteLogAndReturnErrorAsync()
+        public void UpdateCustStatus_HasException_WriteLogAndReturnErrorAsync()
         {
             using (var controller = CreateController())
             {
@@ -144,10 +135,10 @@
                 var exception = new Exception("Sdf");
                 var licenseeId = SessionService.LicenseeSession.LicenseeId;
                 AppSettings.LicenseeOfferStatusFunction.Returns(new[] { licenseeId });
-                _customerListService.When(x => x.UpdateCustClosedAsync(Arg.Any<CustomerStatusMetaModel>(), Arg.Any<string>()))
+                _customerListService.When(x => x.UpdateCustClosed(Arg.Any<CustomerStatusMetaModel>()))
                     .Throw(exception);
                 // Action
-                var result = await controller.UpdateCustStatus(0, false, false).ConfigureAwait(false) as JsonResult;
+                var result = controller.UpdateCustStatus(0, false, false) as JsonResult;
                 var resultInfo = result.Data as ResultInfo;
                 var errorMessage = LogMessageHelper.GenerateMessage(exception);
 
@@ -200,11 +191,11 @@
                 Assert.Multiple((TestDelegate)(() =>
                 {
                     _customerListService.Received(1).UpdateSpecialLevel(
-                        (int)SessionService.UserSession.UserId,
+                        SessionService.UserSession.UserId,
                         CustId,
                         Level,
                         Arg.Any<string>(),
-                        (string)SessionService.UserSession.Language);
+                        SessionService.UserSession.Language);
                 }));
             }
         }
@@ -254,61 +245,6 @@
                         x.OddsGroup == OddsGroup &&
                         x.UserId == SessionService.UserSession.UserId)));
                 }));
-            }
-        }
-
-        [Test]
-        public async Task RemoveFromGroupCom_NotAllowedCustomerComm_ReturnErrorResult()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                SessionService.LicenseeSession.Returns(new LicenseeAuthInfo
-                {
-                    IsAllowedCustomerComm = false
-                });
-
-                // Action
-                var result = await controller.RemoveFromGroupCom(string.Empty, false) as JsonResult;
-                var resultData = result.Data;
-
-                // Assert
-                Assert.Multiple(() =>
-                {
-                    Assert.That(controller.Response.StatusCode, Is.EqualTo(403));
-                    Assert.That(resultData.GetValue("ErrCode"), Is.EqualTo(403));
-                });
-            }
-        }
-
-        [Test]
-        public async Task RemoveFromGroupCom_WhenCall_CallRemoveCustomerComm()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                const string CustmerIds = "1,2";
-                bool isRemovePlayerComm = true;
-                _productService.GetProductAccess(0, string.Empty, string.Empty).ReturnsForAnyArgs(new ProductAccess(new List<Product>()));
-                SessionService.LicenseeSession.Returns(new LicenseeAuthInfo
-                {
-                    IsAllowedCustomerComm = true
-                });
-
-                // Action
-                var result = await controller.RemoveFromGroupCom(CustmerIds, isRemovePlayerComm) as JsonResult;
-                var resultData = result.Data as ResultViewModel;
-
-                // Assert
-                Assert.Multiple(() =>
-                {
-                    _customerCommService.Received(1).RemoveCustomersFromGroupAsync(
-                        Arg.Is<RemoveFromGroupComMetaModel>(x =>
-                        x.CustomerIds == CustmerIds && x.IsRemovePlayercomm == isRemovePlayerComm),
-                        false);
-                    Assert.That(resultData.ExtendedData.GetValue("GroupName"), Is.EqualTo("None"));
-                    Assert.That(resultData.ExtendedData.GetValue("GroupColor"), Is.EqualTo("#ffffff"));
-                });
             }
         }
 
@@ -370,9 +306,7 @@
         {
             var controller = Substitute.ForPartsOf<CustomerApiController>(
                _logger,
-               _customerCommService,
                _customerListService,
-               _groupComService,
                _licenseeDataAccess,
                _productService,
                _authorizationService

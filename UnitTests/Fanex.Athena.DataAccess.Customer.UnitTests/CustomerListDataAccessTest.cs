@@ -250,30 +250,5 @@
                 ObjectDb.Received(1).SetParameterValue("ErrMsg", null);
             });
         }
-
-        [Test]
-        public void UpdateOddsGroup_WhenCallWithFiveParameters_ParametersPassedCorrectly()
-        {
-            // Arrange
-            DataAccess.GetObjectDb(Arg.Is("Lrf_CustomerUpdOddsGroup")).Returns(ObjectDb);
-            const int UserId = 0;
-            const int CustId = 0;
-            const string Group = "";
-            const string Ip = "";
-            const string Language = "";
-
-            // Action
-            DataAccess.UpdateOddsGroup(UserId, CustId, Group, Ip, Language);
-
-            // Assert
-            Assert.Multiple(() =>
-            {
-                ObjectDb.Received(1).SetParameterValue("custid", CustId);
-                ObjectDb.Received(1).SetParameterValue("userid", UserId);
-                ObjectDb.Received(1).SetParameterValue("oddsgroup", Group);
-                ObjectDb.Received(1).SetParameterValue("ip", Ip);
-                ObjectDb.Received(1).SetParameterValue("langkey", Language);
-            });
-        }
     }
 }

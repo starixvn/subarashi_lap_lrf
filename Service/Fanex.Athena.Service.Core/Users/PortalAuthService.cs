@@ -43,7 +43,8 @@
             {
                 { nameof(token), token },
                 { "access_token", _sessionService.UserSession?.AccessToken },
-                { "client_ip", _sessionService.ClientIP }
+                { "client_ip", _sessionService.ClientIP },
+                { "from_referer", _sessionService.FromReferer }
             });
 
         public IResultInfo SignIn(HttpContextBase currentContext, IOAuthInfo oauthInfo)
