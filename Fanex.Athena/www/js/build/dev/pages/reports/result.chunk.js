@@ -1356,7 +1356,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 
                 if ($('#submitVirtualGame').length) {
                     $('#submitVirtualGame').click(function () {
-                        _me.showVirtualGame();
+                        _me.showVirtualGame($(this).data('vendorproductid'));
                     });
                 }
 
@@ -1445,11 +1445,12 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                 lotteryAjaxRequest = $.ajax(option);
             },
 
-            showVirtualGame: function () {
+            showVirtualGame: function (vendorProductId) {
                 const option = {
                     type: 'GET',
                     cache: false,
-                    url: Site.resolveClientUrl(VIRTUAL_RESULT_API),
+                    data: { vendorProductId: vendorProductId },
+                    url: Site.resolveClientUrl(KENO_RESULT_API),
                     success: function (response) {
                         window.open(response, '_blank', 'left=20,top=20,width=950,height=650,toolbar=1,resizable=1,scrollbars,status=1');
                     },
