@@ -5,7 +5,12 @@
     <ul>
         <li>此報告提供最新數據。您每次查詢可以過濾最多2個月內的數據。</li>
         {casino-productlist-section}
-        <li>數據庫將會在電子娛樂以及真人娛樂等產品注單結算後大約5分鐘內更新。</li>{/casino-productlist-section}
+        <li>在{casino-productlist}結算後，數據庫將會在大約5分鐘內更新。</li>
+        {/casino-productlist-section}
+        <li>OANDA 匯率換算服務將會使用所選擇當月最後一天的匯率來轉換數值。</li>
+        {VS2-productlist-section}
+        <li>“虛擬運動2” 包含: {VS2-sportList}。</li>
+        {/VS2-productlist-section}
     </ul>
 </div>
 <div class="line">
@@ -39,9 +44,11 @@
     <ul>
         <li><b>外部ID：</b>會員註冊的用戶名。</li>
         <li><b>系統帳號：</b>系統為每個帳戶產生的數位序列ID。</li>
+        {open-balance-section}
         <li><b>前期餘額：</b>這是會員的前期餘額，即從第一天開始時會員帳戶中的資金額。注意，本報告把"從"作為前期餘額的檢索日期。</li>
         <li><b>存款：</b>會員每天存入的總金額。</li>
         <li><b>提款：</b>會員的提款總金額。</li>
+         {/open-balance-section}
         <li><b>紅利：</b>承租公司提供給會員的紅利總額。</li>
         <li><b>額外派彩: </b>小費金額，活動獎金，積寶獎金，積寶貢獻金，沙巴體育忠誠計畫點數兌換，Saba.Club 免費投注，樂卡迪亞額外獎金，沙巴紅包，AE真人紅包雨以及Vgaming 免費投注獎金的總額。 </li>
         <li><b>交易額：</b>在選定的日期範圍內會員每天的交易額。</li>
@@ -65,12 +72,14 @@
                 </li>
             </ul>
         </li>
+        {open-balance-section}
         <li>
             <b>期末餘額：</b>期末餘額：這是會員的期末餘額，一天結束時的資金額。
             <center>
                 期末餘額＝前期餘額+存款－提款+紅利+調整－待定資金+會員輸贏
             </center>
         </li>
+         {/open-balance-section}
         <li><b>合作夥伴轉帳：</b>支付給合作夥伴的總金額。</li>
     </ul>
 </div>
