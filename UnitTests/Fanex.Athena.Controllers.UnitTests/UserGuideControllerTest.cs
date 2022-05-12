@@ -11,7 +11,7 @@
     using Extension.Utility.Interfaces;
 
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-
+    using Fanex.Athena.VendorAdapter.Interfaces;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Core.DTO.Configuration;
@@ -31,6 +31,8 @@
 
         private IBalanceUpDataAccess _balanceUpDataAccess;
 
+        private ICacheRefAdapter _cacheRefAdapter;
+
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
@@ -45,6 +47,7 @@
             _productService = Substitute.For<IProductService>();
             _fileSystem = Substitute.For<IFileSystem>();
             _balanceUpDataAccess = Substitute.For<IBalanceUpDataAccess>();
+            _cacheRefAdapter = Substitute.For<ICacheRefAdapter>();
         }
 
         [TearDown]
@@ -368,13 +371,13 @@
             var controller = new UserGuideController(
                 _fileSystem,
                 _productService,
-                _balanceUpDataAccess)
+                _balanceUpDataAccess,
+                _cacheRefAdapter)
             {
                 ControllerContext = ControllerContext,
                 LangService = LangService,
                 SessionServiceInstance = SessionService,
                 AppSettingInstance = AppSettings
-
             };
 
             controller.Server.MapPath(Arg.Any<string>()).Returns(x => x.ArgAt<string>(0));

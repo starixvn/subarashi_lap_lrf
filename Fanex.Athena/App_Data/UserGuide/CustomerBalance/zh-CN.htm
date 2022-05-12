@@ -1,18 +1,19 @@
 ﻿<div class="rule">
-    <h4>
-        一般信息
+    <h4>一般信息
     </h4>
     <ul>
         <li>此报告提供最新数据。 您每次查询可以过滤最多2个月内的数据。</li>
-        {casino-productlist-section}
-        <li>数据库将会在电子娱乐以及真人娱乐等产品注单结算后大约5分钟内更新。</li>{/casino-productlist-section}
+        <li>数据库将会在电子娱乐以及真人娱乐等产品注单结算后大约5分钟内更新。</li>
+        <li>OANDA 匯率換算服務將會使用所選擇當月最後一天的匯率來轉換數值。</li>
+        {VS2-productlist-section}
+        <li>“虚拟运动2” 包含: {VS2-sportList}。</li>
+        {/VS2-productlist-section}
     </ul>
 </div>
 <div class="line">
 </div>
 <div class="rule">
-    <h4>
-        搜索过滤器
+    <h4>搜索过滤器
     </h4>
     <ul>
         <li><b>货币：</b>以货币來选择所会列出的数据。</li>
@@ -33,15 +34,16 @@
 <div class="line">
 </div>
 <div class="rule">
-    <h4>
-        报告指南
+    <h4>报告指南
     </h4>
     <ul>
         <li><b>用户名：</b>会员注册的用户名。</li>
         <li><b>系统账号：</b>系统为每个账户产生的数字序列ID。</li>
+        {open-balance-section}
         <li><b>前期余额：</b>这是会员的前期余额，即从第一天开始时会员账户中的资金额。注意，本报告把"从"作为前期余额的检索日期。</li>
         <li><b>存款：</b>会员每天存入的总金额。</li>
         <li><b>提款：</b>会员的提款总金额。</li>
+         {/open-balance-section}
         <li><b>红利：</b>承租公司提供给会员的红利总额。</li>
         <li><b>额外派彩: </b>小费金额，活动奖金，积宝奖金，积宝贡献金，沙巴体育忠诚计画点数兑换，Saba.Club 免费投注，乐卡迪亚额外奖金，沙巴红包，AE真人红包雨以及Vgaming 免费投注奖金的总额。 </li>
         <li><b>交易额：</b>在选定的日期范围内会员每天的交易额。</li>
@@ -65,20 +67,21 @@
                 </li>
             </ul>
         </li>
+         {open-balance-section}
         <li>
             <b>期末余额：</b>这是会员的期末余额，一天结束时的资金额。
             <center>
                 期末余额＝前期余额+存款－提款+红利+调整－待定资金+会员输赢
             </center>
         </li>
+         {/open-balance-section}
         <li><b>合作伙伴转账：</b>支付给合作伙伴的总金额。</li>
     </ul>
 </div>
 <div class="line">
 </div>
 <div class="rule">
-    <h4>
-        BA
+    <h4>BA
     </h4>
     <ul>
         <li>

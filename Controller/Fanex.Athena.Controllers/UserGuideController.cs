@@ -6,7 +6,8 @@
 
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-
+    using Fanex.Athena.VendorAdapter;
+    using Fanex.Athena.VendorAdapter.Interfaces;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using System.Collections.Generic;
@@ -24,6 +25,11 @@
     {
         private const string CustomerListResourceName = "CustomerList";
 
+        private static readonly int[] VS2Sports = new[]
+        {
+            190, 191, 192, 194, 196, 193, 197
+        };
+
         private static readonly IReadOnlyDictionary<string, bool> ListResourceNoBindData = new Dictionary<string, bool>
         {
             { "PlayerSegmentationProblem".ToLowerInvariant(), true },
@@ -36,14 +42,18 @@
 
         private readonly IBalanceUpDataAccess _balanceUpDataAccess;
 
+        private readonly ICacheRefAdapter _cacheRefAdapter;
+
         public UserGuideController(
             IFileSystem fileSystem,
             IProductService productService,
-            IBalanceUpDataAccess balanceUpDataAccess)
+            IBalanceUpDataAccess balanceUpDataAccess,
+            ICacheRefAdapter cacheRefAdapter)
         {
             _productService = productService;
             _fileSystem = fileSystem;
             _balanceUpDataAccess = balanceUpDataAccess;
+            _cacheRefAdapter = cacheRefAdapter;
         }
 
         [AjaxRequest]
@@ -57,6 +67,8 @@
                 var products = _productService.GetProductList(SessionServiceInstance.LicenseeSession.LicenseeId, SessionServiceInstance.UserSession.Language);
                 content = AddSpecialProducts(content, products);
                 content = AddBalanceUpDate(content);
+                content = AddVS2Sport(content);
+                content = AddOpenBalanceInfo(content);
             }
 
             return View("~/Views/UserGuide/Index.cshtml", null, content);
@@ -114,6 +126,47 @@
             customcontent = RemoveProductSection(customcontent, products, ProductTypes.VirtualSports2, "VS2");
             customcontent = RemoveProductSection(customcontent, products, ProductTypes.VS3, Product.VS3);
             return customcontent;
+        }
+
+        private string AddVS2Sport(string content)
+        {
+            const string VS2SportTag = "{VS2-sportList}";
+            var customContent = content;
+
+            if (content.Contains(VS2SportTag))
+            {
+                var language = SessionServiceInstance.UserSession.Language;
+                var VS2SportNames = VS2Sports.Select(_ => _cacheRefAdapter.GetSportName(_, language));
+
+                customContent = customContent.Replace(VS2SportTag, string.Join<string>(", ", VS2SportNames));
+                customContent = customContent.Replace(VS2SportTag, string.Empty);
+                customContent = customContent.Replace(VS2SportTag, string.Empty);
+            }
+
+            return customContent;
+        }
+
+        private string AddOpenBalanceInfo(string content)
+        {
+            const string openingTag = "{open-balance-section}";
+            const string closingTag = "{/open-balance-section}";
+
+            var customContent = content;
+            if (customContent.Contains(openingTag))
+            {
+                if (SessionServiceInstance.LicenseeSession.IsEnableSingleWallet)
+                {
+                    const string pattern = @"\{open-balance-section\}[\s\S]*{/open-balance-section\}";
+                    customContent = new Regex(pattern).Replace(customContent, string.Empty);
+                }
+                else
+                {
+                    customContent = customContent.Replace(openingTag, string.Empty);
+                    customContent = customContent.Replace(closingTag, string.Empty);
+                }
+            }
+
+            return customContent;
         }
 
         private static string RemoveProductSection(string content, IEnumerable<Product> products, int productId, string productCode)

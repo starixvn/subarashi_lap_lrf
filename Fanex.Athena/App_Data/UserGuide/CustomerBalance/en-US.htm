@@ -4,8 +4,11 @@
     </h4>
     <ul>
         <li>This report supports up-to-date data. You can filter data up to 2 months per query. </li>
-        {casino-productlist-section}
-        <li>Data of RNG Products, Live Casino Products will be delayed up to 5 minutes after settling tickets.</li>{/casino-productlist-section}
+        <li>Data of RNG Products, Live Casino Products will be delayed up to 5 minutes after settling tickets.</li>
+        <li>OANDA Exchange Service will use the exchange rate of the end date of each selected month when converting the figures.</li>
+        {VS2-productlist-section}
+        <li>"Virtual Sports 2" consists of: {VS2-sportList}.</li>
+        {/VS2-productlist-section}
     </ul>
 </div>
 <div class="line">
@@ -40,6 +43,7 @@
     <ul>
         <li><b>External ID:</b> the username registered by ticket owner.</li>
         <li><b>System ID:</b> the Numeric sequential ID generated from system for each account.</li>
+        {open-balance-section}
         <li>
             <b>Opening Balance:</b> this is Customer Opening Balance, the amount of funds in
             Customer account at the beginning of a day. Note that report will take From date
@@ -47,6 +51,7 @@
         </li>
         <li><b>Deposit:</b> The total amount Customer has deposited for each day.</li>
         <li><b>Withdrawal:</b> Customer withdrawal amount.</li>
+        {/open-balance-section}
         <li><b>Bonus:</b> the bonus amount that Licensee has given to Customer.</li>
         <li>
             <b>Adjustment:</b> the total adjustment amount Licensee used to adjust the Customer
@@ -74,6 +79,7 @@
                 </li>
             </ul>
         </li>
+        {open-balance-section}
         <li>
             <b>Closing Balance:</b> this is Customer Closing Balance, the amount of funds at
             the end of a day.
@@ -82,6 +88,7 @@
                 Pending funds + Customer W/L
             </center>
         </li>
+        {/open-balance-section}
         <li><b>Affiliate Transfer:</b> the total payout for affiliate.</li>
     </ul>
 </div>

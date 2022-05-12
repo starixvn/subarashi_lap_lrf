@@ -1,26 +1,27 @@
 ﻿<div class="rule">
-    <h4>
-        General Info
+    <h4>General Info
     </h4>
     <ul>
         <li>The report provides a view of bets coming through platforms.</li>
-        <li>This report supports up-to-date data. You can filter data up to 1 month per query. </li>
+        <li>This report supports up-to-date data. You can filter data up to 1 month per query.</li>
         <li>Platform data is available from 27 Feb 2016.</li>
-        {casino-productlist-section}
-        <li>Data of RNG Products, Live Casino Products will be delayed up to 5 minutes after settling tickets.</li>{/casino-productlist-section}
+        <li>OANDA Exchange Service will use the exchange rate of the end date of each selected month when converting the figures.</li>
+        <li>Data of RNG Products, Live Casino Products will be delayed up to 5 minutes after settling tickets.</li>
         {VS-productlist-section}
-        <li>"Virtual Sports" consists of: Virtual Soccer, Virtual Horse Racing, Virtual Greyhounds, Virtual Speedway, Virtual Motorsports, Virtual Cycling, Virtual Tennis.</li>{/VS-productlist-section}
+        <li>"Virtual Sports" consists of: Virtual Soccer, Virtual Horse Racing, Virtual Greyhounds, Virtual Speedway, Virtual Motorsports, Virtual Cycling, Virtual Tennis.</li>
+        {/VS-productlist-section}
         {VS2-productlist-section}
-        <li>"Virtual Sports 2" consists of: Virtual Soccer League, Virtual Soccer Nation.</li>{/VS2-productlist-section}
+        <li>"Virtual Sports 2" consists of: {VS2-sportList}.</li>
+        {/VS2-productlist-section}
         {VS3-productlist-section}
-        <li>"Virtual Sports 3" consists of: LG Virtual Sports.</li>{/VS3-productlist-section}
+        <li>"Virtual Sports 3" consists of: LG Virtual Sports.</li>
+        {/VS3-productlist-section}
     </ul>
 </div>
 <div class="line">
 </div>
 <div class="rule">
-    <h4>
-        Search Filters
+    <h4>Search Filters
     </h4>
     <ul>
         <li>
@@ -39,23 +40,14 @@
                 <li><b>No draws For Turnover Only:</b> Draw tickets will not be counted in Turnover value.</li>
             </ul>
         </li>
-        <li>
-            <b>Platform:</b> filters data by Asia/New Asia/China/Euro platform, SmartSite, WAP and Tablet.
-            <ul>
-                <li><b>Asia/New Asia/China/Euro:</b> includes bets from Asia/New Asia/China/Euro platform.</li>
-                <li><b>WAP:</b> includes bets from WAP.</li>
-                <li><b>Smartsite:</b> includes bets from Smart Site.</li>
-                <li><b>Tablet:</b> includes bets from Tablet.</li>
-            </ul>
-        </li>
+        <li><b>Platform:</b> The platform that Player used to place bets.</li>
         <li><b>Product:</b> selects the Product type of bet tickets.</li>
     </ul>
 </div>
 <div class="line">
 </div>
 <div class="rule">
-    <h4>
-        Report Guidelines
+    <h4>Report Guidelines
     </h4>
     <ul>
         <li><b>External ID:</b> the username registered by ticket owner.</li>
