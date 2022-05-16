@@ -3,9 +3,9 @@ import LangHelper from '@jsroot/lib/langHelper'
 import { Url } from './contants';
 
 export default class ApiService {
-    static async getContactList(contactName) {
+    static async getContactList(contactName, subsidiaryList) {
         try {
-            const response = await DataService.postData(Url.ContactList, { contactName });
+            const response = await DataService.postData(Url.ContactList, { contactName, subsidiaryList });
             if (response.status === 200 && response.data.IsSuccess) {
                 return response.data.Data;
             }

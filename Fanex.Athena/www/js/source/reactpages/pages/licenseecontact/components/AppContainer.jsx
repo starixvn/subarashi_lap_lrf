@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import AppLayout from '../../../layouts/AppLayout'
 import Loader from '@jsroot/components/Loader'
 import Popup from '@jsroot/components/popup'
+import AppData from '@jsroot/lib/AppData'
 import ActionCreators from '../actions';
 import { bindActionCreators } from 'redux';
 import LangHelper from '@jsroot/lib/langHelper'
@@ -11,8 +12,9 @@ import DataGrid from './DataGrid'
 import FormEdit from './FormEdit'
 import FormAdd from './FormAdd';
 import FormDelete from './FormDelete'
-import { ModificationActionType } from '../lib/contants'
+import { fields, ModificationActionType } from '../lib/contants'
 import ExcelHandler from '../lib/excel';
+import { isShowSubsidiaryInfo } from '../lib/helper';
 
 const AppContainer = ({ isLoading, currentModificationAction, contactList, setModificationAction, fetchContactList, toggleLoader }) => {
   const _renderModificationPopup = () => {
@@ -38,7 +40,7 @@ const AppContainer = ({ isLoading, currentModificationAction, contactList, setMo
   }
 
   const _exportExcel = () => {
-    const excel = new ExcelHandler(contactList);
+    const excel = new ExcelHandler(contactList, { [fields.Subsidiary]: !isShowSubsidiaryInfo(AppData.subsidiaryViewType, AppData.subsidiaryList) });
     excel.export();
   }
 

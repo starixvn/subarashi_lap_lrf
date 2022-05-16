@@ -6,6 +6,7 @@ import ApiService from '../lib/service';
 const  FormAdd = props => {
     const [contact, setContact] = useState({
         Categories: [],
+        Subsidiary: null,
         ContactName: null,
         ContactType: -1,
         Department: null,

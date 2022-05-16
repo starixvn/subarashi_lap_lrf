@@ -9,17 +9,28 @@ import SweetAlert from '@jsroot/components/sweet-alert';
 import { generateDefaultConfirmOption, generateDefaultAlertOption, defaultOkButton, predefinedIcons } from '@jsroot/lib/sweetAlert';
 import StringHelper from '@jsroot/lib/stringHelper';
 import { validateContact, contactValidationHandler, getCategoryDisplayName } from '../../lib/helper';
+import AppData from '@jsroot/lib/AppData'
+import { isShowSubsidiaryInfo } from '../../lib/helper';
+import { SubsidiaryViewType } from '@jsroot/constants/report'
 
 const FormContact = ({ contact, setContact, api, msgConfirm, hasConfirm, afterSuccess, toggleLoader }) => {
 
     const [sweetAlertOption, setSweetAlertOption] = useState(null);
+    const [isSubmitted, setIsSubmitted] = useState(false);
 
-    const _isDisabledSubmit = useMemo(() => !validateContact(contact), [contact])
+    const _showSubsidiaryDropdown = useMemo(() => isShowSubsidiaryInfo(AppData.subsidiaryViewType, AppData.subsidiaryList), []);
+    const _requiredSubsidiary = useMemo(() => _showSubsidiaryDropdown && AppData.subsidiaryViewType !== SubsidiaryViewType.MASTER_MANAGEMENT, [_showSubsidiaryDropdown]);
+    const _subsidiaryListSource = useMemo(() => {
+        let subsidiarylist = AppData.subsidiaryList.map(_ => ({ value: _, label: _ }));
+        if(AppData.subsidiaryViewType === SubsidiaryViewType.MASTER_MANAGEMENT) {
+            subsidiarylist = [ { value: 'none', label: LangHelper.getSingleResource('None') }, ...subsidiarylist]
+        }
+        return subsidiarylist;
+    }, []);
 
     if (!contact) {
         return <NoDataTitle />;
     }
-
 
     const _renderGeneralInformation = () => {
         return <div className="general-information col-12 col-md-6 col-sm-6 col-lg-6 col-xl-6">
@@ -28,12 +39,25 @@ const FormContact = ({ contact, setContact, api, msgConfirm, hasConfirm, afterSu
                     {LangHelper.getSingleResource('GeneralInformation')}
                 </div>
             </div>
+            {_showSubsidiaryDropdown && <div className="row">
+                <label className="col-5 label-text">{LangHelper.getSingleResource("Subsidiary")}{_requiredSubsidiary && <span className="required">*</span>}</label>
+                <div className="col-7">
+                    <Select instanceId="SubsidiaryList"
+                        className={isSubmitted && !contactValidationHandler[fields.Subsidiary](contact.Subsidiary, _requiredSubsidiary) ? 'select-highlight' : ''}
+                        isSearchable={false}
+                        placeholder={LangHelper.getSingleResource('PleaseSelectOne')}
+                        value={contact.Subsidiary || 'none'}
+                        options={_subsidiaryListSource}
+                        onChange={(item) => setContact({ ...contact, Subsidiary: item.value === 'none' ? null : item.value})} />
+                </div>
+            </div>}
             <div className="row">
                 <label className="col-5 label-text">{LangHelper.getSingleResource("ContactType")}<span className="required">*</span></label>
                 <div className="col-7">
                     <Select instanceId="ContactTypeOptions"
-                        className={!contactValidationHandler[fields.ContactType](contact.ContactType) ? 'select-highlight' : ''}
+                        className={isSubmitted && !contactValidationHandler[fields.ContactType](contact.ContactType) ? 'select-highlight' : ''}
                         isSearchable={false}
+                        placeholder={LangHelper.getSingleResource('PleaseSelectOne')}
                         value={contact.ContactType}
                         options={ContactTypeOptions}
                         onChange={(item) => setContact({ ...contact, ContactType: item.value })} />
@@ -42,7 +66,7 @@ const FormContact = ({ contact, setContact, api, msgConfirm, hasConfirm, afterSu
             <div className="row">
                 <label className="col-5 label-text">{LangHelper.getSingleResource("Name")}<span className="required">*</span></label>
                 <div className="col-7">
-                    <input type="text" id="Name" name="Name" className={`input-text ${StringHelper.isEmptyOrWhiteSpace(contact.ContactName) ? 'input-highlight' : ''}`}
+                    <input type="text" id="Name" name="Name" className={`input-text ${isSubmitted && StringHelper.isEmptyOrWhiteSpace(contact.ContactName) ? 'input-highlight' : ''}`}
                         maxLength={50}
                         value={contact.ContactName}
                         onChange={(event) => setContact({ ...contact, ContactName: event.target.value })} />
@@ -51,7 +75,7 @@ const FormContact = ({ contact, setContact, api, msgConfirm, hasConfirm, afterSu
             <div className="row">
                 <label className="col-5 label-text">{LangHelper.getSingleResource("Position")}<span className="required">*</span></label>
                 <div className="col-7">
-                    <input type="text" id="Position" name="Position" className={`input-text ${StringHelper.isEmptyOrWhiteSpace(contact.Position) ? 'input-highlight' : ''}`}
+                    <input type="text" id="Position" name="Position" className={`input-text ${isSubmitted && StringHelper.isEmptyOrWhiteSpace(contact.Position) ? 'input-highlight' : ''}`}
                         maxLength={50}
                         value={contact.Position}
                         onChange={(event) => setContact({ ...contact, Position: event.target.value })} />
@@ -60,7 +84,7 @@ const FormContact = ({ contact, setContact, api, msgConfirm, hasConfirm, afterSu
             <div className="row">
                 <label className="col-5 label-text">{LangHelper.getSingleResource("Department")}<span className="required">*</span></label>
                 <div className="col-7">
-                    <input type="text" id="Department" name="Department" className={`input-text ${StringHelper.isEmptyOrWhiteSpace(contact.Department) ? 'input-highlight' : ''}`}
+                    <input type="text" id="Department" name="Department" className={`input-text ${isSubmitted && StringHelper.isEmptyOrWhiteSpace(contact.Department) ? 'input-highlight' : ''}`}
                         maxLength={50}
 
                         value={contact.Department}
@@ -70,7 +94,7 @@ const FormContact = ({ contact, setContact, api, msgConfirm, hasConfirm, afterSu
             <div className="row">
                 <label className="col-5 label-text">{LangHelper.getSingleResource("Email")}<span className="required">*</span></label>
                 <div className="col-7">
-                    <input type="email" id="Email" name="Email" className={`input-text ${!contactValidationHandler[fields.Email](contact.Email) ? 'input-highlight' : ''}`}
+                    <input type="email" id="Email" name="Email" className={`input-text ${isSubmitted && !contactValidationHandler[fields.Email](contact.Email) ? 'input-highlight' : ''}`}
                         maxLength={50}
                         value={contact.Email}
                         onChange={(event) => setContact({ ...contact, Email: event.target.value })} />
@@ -79,7 +103,7 @@ const FormContact = ({ contact, setContact, api, msgConfirm, hasConfirm, afterSu
             <div className="row">
                 <label className="col-5 label-text">{LangHelper.getSingleResource("Skype")}<span className="required">*</span></label>
                 <div className="col-7">
-                    <input type="text" id="Skype" name="Skype" className={`input-text ${StringHelper.isEmptyOrWhiteSpace(contact.Skype) ? 'input-highlight' : ''}`}
+                    <input type="text" id="Skype" name="Skype" className={`input-text ${isSubmitted && StringHelper.isEmptyOrWhiteSpace(contact.Skype) ? 'input-highlight' : ''}`}
                         maxLength={50}
 
                         value={contact.Skype}
@@ -119,7 +143,7 @@ const FormContact = ({ contact, setContact, api, msgConfirm, hasConfirm, afterSu
                 </>}
             </div>
             {existedCategories && _renderCategoryAllSelection()}
-            {<div className={isInvalid ? "invalid" : ""}>
+            {<div className={isSubmitted && isInvalid ? "invalid" : ""}>
                 {existedCategories && contact.Categories.map(_renderCategorySelection)}
             </div>}
         </div>
@@ -188,7 +212,10 @@ const FormContact = ({ contact, setContact, api, msgConfirm, hasConfirm, afterSu
     }
 
     const _handleSubmit = () => {
-        if (!validateContact(contact)) {
+
+        !isSubmitted && setIsSubmitted(true);
+
+        if (!validateContact(contact, _requiredSubsidiary)) {
             return;
         }
 
@@ -235,13 +262,12 @@ const FormContact = ({ contact, setContact, api, msgConfirm, hasConfirm, afterSu
         return categories
             .filter(category => category.RecipientType === null)
             .map(getCategoryDisplayName);
-    
     }
 
     const _renderSubmit = () => {
         return <div className="form-bottom col-12">
             <div className="button-group">
-                <button type="button" className="btn btn-submit" disabled={_isDisabledSubmit} onClick={_handleSubmit}>{LangHelper.getSingleResource('Submit')}</button>
+                <button type="button" className="btn btn-submit" onClick={_handleSubmit}>{LangHelper.getSingleResource('Submit')}</button>
             </div>
         </div>
     }

@@ -1717,6 +1717,45 @@ const grandTotalCellStyle = {
 
 /***/ }),
 
+/***/ "./www/js/source/reactpages/constants/report.js":
+/*!******************************************************!*\
+  !*** ./www/js/source/reactpages/constants/report.js ***!
+  \******************************************************/
+/*! exports provided: ReportLevel, ReportBy, SubsidiaryViewType, TreeViewOption */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReportLevel", function() { return ReportLevel; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReportBy", function() { return ReportBy; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SubsidiaryViewType", function() { return SubsidiaryViewType; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TreeViewOption", function() { return TreeViewOption; });
+const ReportLevel = {
+  MAIN: 0,
+  LICENSEE: 1,
+  CUSTOMER: 2
+};
+const ReportBy = {
+  DAILY: 1,
+  MONTHLY: 2
+};
+const SubsidiaryViewType = {
+  NOT_MANAGEMENT: 0,
+  NORMAL_MANAGEMENT: 1,
+  MASTER_MANAGEMENT: 2
+};
+const TreeViewOption = {
+  childrenField: 'Children',
+  keyField: 'Value',
+  valueField: 'Name',
+  statusField: 'Checked',
+  indent: 30,
+  includeSelectedParentKey: false,
+  useOriginalDataSource: false
+};
+
+/***/ }),
+
 /***/ "./www/js/source/reactpages/layouts/AppLayout.jsx":
 /*!********************************************************!*\
   !*** ./www/js/source/reactpages/layouts/AppLayout.jsx ***!
@@ -2332,9 +2371,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const fetchContactList = contactName => async dispatch => {
+const fetchContactList = (contactName, subsidiaryList) => async dispatch => {
   dispatch(Object(_jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_0__["toggleLoader"])(true));
-  const contactList = await _lib_service__WEBPACK_IMPORTED_MODULE_2__["default"].getContactList(contactName);
+  const contactList = await _lib_service__WEBPACK_IMPORTED_MODULE_2__["default"].getContactList(contactName, subsidiaryList);
   dispatch(setContactList(contactList));
   dispatch(Object(_jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_0__["toggleLoader"])(false));
 };
@@ -2404,17 +2443,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _layouts_AppLayout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../layouts/AppLayout */ "./www/js/source/reactpages/layouts/AppLayout.jsx");
 /* harmony import */ var _jsroot_components_Loader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/components/Loader */ "./www/js/source/reactpages/components/Loader.jsx");
 /* harmony import */ var _jsroot_components_popup__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/components/popup */ "./www/js/source/reactpages/components/popup/index.jsx");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../actions */ "./www/js/source/reactpages/pages/licenseecontact/actions/index.js");
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-/* harmony import */ var _FormFilter__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./FormFilter */ "./www/js/source/reactpages/pages/licenseecontact/components/FormFilter.jsx");
-/* harmony import */ var _DataGrid__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./DataGrid */ "./www/js/source/reactpages/pages/licenseecontact/components/DataGrid.jsx");
-/* harmony import */ var _FormEdit__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./FormEdit */ "./www/js/source/reactpages/pages/licenseecontact/components/FormEdit.jsx");
-/* harmony import */ var _FormAdd__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./FormAdd */ "./www/js/source/reactpages/pages/licenseecontact/components/FormAdd.jsx");
-/* harmony import */ var _FormDelete__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./FormDelete */ "./www/js/source/reactpages/pages/licenseecontact/components/FormDelete.jsx");
-/* harmony import */ var _lib_contants__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../lib/contants */ "./www/js/source/reactpages/pages/licenseecontact/lib/contants.js");
-/* harmony import */ var _lib_excel__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../lib/excel */ "./www/js/source/reactpages/pages/licenseecontact/lib/excel.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../actions */ "./www/js/source/reactpages/pages/licenseecontact/actions/index.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _FormFilter__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./FormFilter */ "./www/js/source/reactpages/pages/licenseecontact/components/FormFilter.jsx");
+/* harmony import */ var _DataGrid__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./DataGrid */ "./www/js/source/reactpages/pages/licenseecontact/components/DataGrid.jsx");
+/* harmony import */ var _FormEdit__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./FormEdit */ "./www/js/source/reactpages/pages/licenseecontact/components/FormEdit.jsx");
+/* harmony import */ var _FormAdd__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./FormAdd */ "./www/js/source/reactpages/pages/licenseecontact/components/FormAdd.jsx");
+/* harmony import */ var _FormDelete__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./FormDelete */ "./www/js/source/reactpages/pages/licenseecontact/components/FormDelete.jsx");
+/* harmony import */ var _lib_contants__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../lib/contants */ "./www/js/source/reactpages/pages/licenseecontact/lib/contants.js");
+/* harmony import */ var _lib_excel__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../lib/excel */ "./www/js/source/reactpages/pages/licenseecontact/lib/excel.js");
+/* harmony import */ var _lib_helper__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../lib/helper */ "./www/js/source/reactpages/pages/licenseecontact/lib/helper.js");
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+
 
 
 
@@ -2446,32 +2489,32 @@ const AppContainer = ({
       data
     } = currentModificationAction;
 
-    if (type === _lib_contants__WEBPACK_IMPORTED_MODULE_13__["ModificationActionType"].AddContact) {
+    if (type === _lib_contants__WEBPACK_IMPORTED_MODULE_14__["ModificationActionType"].AddContact) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_popup__WEBPACK_IMPORTED_MODULE_4__["default"], {
         height: 550,
         width: 750,
         isShow: true,
-        title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("AddContact"),
+        title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("AddContact"),
         onClose: _onCloseModificationPopup
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormAdd__WEBPACK_IMPORTED_MODULE_11__["default"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormAdd__WEBPACK_IMPORTED_MODULE_12__["default"], {
         contactId: data,
         afterSuccess: _onCloseModificationPopup,
         toggleLoader: toggleLoader
       }));
-    } else if (type === _lib_contants__WEBPACK_IMPORTED_MODULE_13__["ModificationActionType"].EditContact) {
+    } else if (type === _lib_contants__WEBPACK_IMPORTED_MODULE_14__["ModificationActionType"].EditContact) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_popup__WEBPACK_IMPORTED_MODULE_4__["default"], {
         height: 550,
         width: 750,
         isShow: true,
-        title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("EditContact"),
+        title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("EditContact"),
         onClose: _onCloseModificationPopup
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormEdit__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormEdit__WEBPACK_IMPORTED_MODULE_11__["default"], {
         contactId: data,
         afterSuccess: _onCloseModificationPopup,
         toggleLoader: toggleLoader
       }));
-    } else if (type === _lib_contants__WEBPACK_IMPORTED_MODULE_13__["ModificationActionType"].DeleteContact) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormDelete__WEBPACK_IMPORTED_MODULE_12__["default"], _extends({}, data, {
+    } else if (type === _lib_contants__WEBPACK_IMPORTED_MODULE_14__["ModificationActionType"].DeleteContact) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormDelete__WEBPACK_IMPORTED_MODULE_13__["default"], _extends({}, data, {
         onClose: _onCloseModificationPopup,
         toggleLoader: toggleLoader
       }));
@@ -2484,7 +2527,9 @@ const AppContainer = ({
   };
 
   const _exportExcel = () => {
-    const excel = new _lib_excel__WEBPACK_IMPORTED_MODULE_14__["default"](contactList);
+    const excel = new _lib_excel__WEBPACK_IMPORTED_MODULE_15__["default"](contactList, {
+      [_lib_contants__WEBPACK_IMPORTED_MODULE_14__["fields"].Subsidiary]: !Object(_lib_helper__WEBPACK_IMPORTED_MODULE_16__["isShowSubsidiaryInfo"])(_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__["default"].subsidiaryViewType, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__["default"].subsidiaryList)
+    });
     excel.export();
   };
 
@@ -2494,7 +2539,7 @@ const AppContainer = ({
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
       className: "icon-excel right",
       onClick: _exportExcel,
-      title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("ExportToExcel")
+      title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("ExportToExcel")
     }));
   };
 
@@ -2510,15 +2555,15 @@ const AppContainer = ({
       className: "btn btn-add",
       onClick: () => {
         setModificationAction({
-          type: _lib_contants__WEBPACK_IMPORTED_MODULE_13__["ModificationActionType"].AddContact
+          type: _lib_contants__WEBPACK_IMPORTED_MODULE_14__["ModificationActionType"].AddContact
         });
       }
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource('AddContact')))), _renderStickyFooter());
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource('AddContact')))), _renderStickyFooter());
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_2__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Loader__WEBPACK_IMPORTED_MODULE_3__["default"], {
     isLoading: isLoading
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormFilter__WEBPACK_IMPORTED_MODULE_8__["default"], null), _renderFormAction(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DataGrid__WEBPACK_IMPORTED_MODULE_9__["default"], null), currentModificationAction && _renderModificationPopup());
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormFilter__WEBPACK_IMPORTED_MODULE_9__["default"], null), _renderFormAction(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DataGrid__WEBPACK_IMPORTED_MODULE_10__["default"], null), currentModificationAction && _renderModificationPopup());
 };
 
 function mapDispatchToProps(dispatch) {
@@ -2526,8 +2571,8 @@ function mapDispatchToProps(dispatch) {
     setModificationAction,
     fetchContactList,
     toggleLoader
-  } = _actions__WEBPACK_IMPORTED_MODULE_5__["default"];
-  return Object(redux__WEBPACK_IMPORTED_MODULE_6__["bindActionCreators"])({
+  } = _actions__WEBPACK_IMPORTED_MODULE_6__["default"];
+  return Object(redux__WEBPACK_IMPORTED_MODULE_7__["bindActionCreators"])({
     setModificationAction,
     fetchContactList,
     toggleLoader
@@ -2570,8 +2615,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../actions */ "./www/js/source/reactpages/pages/licenseecontact/actions/index.js");
 /* harmony import */ var _jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/components/NoDataTitle */ "./www/js/source/reactpages/components/NoDataTitle.jsx");
 /* harmony import */ var _jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/lib/htmlHelper */ "./www/js/source/reactpages/lib/htmlHelper.js");
-/* harmony import */ var _lib_contants__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../lib/contants */ "./www/js/source/reactpages/pages/licenseecontact/lib/contants.js");
-/* harmony import */ var _lib_helper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../lib/helper */ "./www/js/source/reactpages/pages/licenseecontact/lib/helper.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+/* harmony import */ var _lib_contants__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../lib/contants */ "./www/js/source/reactpages/pages/licenseecontact/lib/contants.js");
+/* harmony import */ var _lib_helper__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../lib/helper */ "./www/js/source/reactpages/pages/licenseecontact/lib/helper.js");
+
 
 
 
@@ -2597,6 +2644,8 @@ const DataGrid = ({
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_5__["default"], null);
   }
 
+  const _showSubsidiaryColumn = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => Object(_lib_helper__WEBPACK_IMPORTED_MODULE_9__["isShowSubsidiaryInfo"])(_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_7__["default"].subsidiaryViewType, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_7__["default"].subsidiaryList), []);
+
   const _headers = react__WEBPACK_IMPORTED_MODULE_0___default.a.useMemo(() => {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderRow"], {
       style: {
@@ -2604,27 +2653,29 @@ const DataGrid = ({
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
       colWidth: 10
-    }, _lib_contants__WEBPACK_IMPORTED_MODULE_7__["textHeaders"][_lib_contants__WEBPACK_IMPORTED_MODULE_7__["fields"].Index]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
-      colWidth: 40
-    }, _lib_contants__WEBPACK_IMPORTED_MODULE_7__["textHeaders"][_lib_contants__WEBPACK_IMPORTED_MODULE_7__["fields"].ContactName]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
+    }, _lib_contants__WEBPACK_IMPORTED_MODULE_8__["textHeaders"][_lib_contants__WEBPACK_IMPORTED_MODULE_8__["fields"].Index]), _showSubsidiaryColumn && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
       colWidth: 30
-    }, _lib_contants__WEBPACK_IMPORTED_MODULE_7__["textHeaders"][_lib_contants__WEBPACK_IMPORTED_MODULE_7__["fields"].ContactType]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
-      colWidth: 30
-    }, _lib_contants__WEBPACK_IMPORTED_MODULE_7__["textHeaders"][_lib_contants__WEBPACK_IMPORTED_MODULE_7__["fields"].Position]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
-      colWidth: 30
-    }, _lib_contants__WEBPACK_IMPORTED_MODULE_7__["textHeaders"][_lib_contants__WEBPACK_IMPORTED_MODULE_7__["fields"].Department]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
+    }, _lib_contants__WEBPACK_IMPORTED_MODULE_8__["textHeaders"][_lib_contants__WEBPACK_IMPORTED_MODULE_8__["fields"].Subsidiary]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
       colWidth: 40
-    }, _lib_contants__WEBPACK_IMPORTED_MODULE_7__["textHeaders"][_lib_contants__WEBPACK_IMPORTED_MODULE_7__["fields"].Email]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
+    }, _lib_contants__WEBPACK_IMPORTED_MODULE_8__["textHeaders"][_lib_contants__WEBPACK_IMPORTED_MODULE_8__["fields"].ContactName]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
+      colWidth: 30
+    }, _lib_contants__WEBPACK_IMPORTED_MODULE_8__["textHeaders"][_lib_contants__WEBPACK_IMPORTED_MODULE_8__["fields"].ContactType]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
+      colWidth: 30
+    }, _lib_contants__WEBPACK_IMPORTED_MODULE_8__["textHeaders"][_lib_contants__WEBPACK_IMPORTED_MODULE_8__["fields"].Position]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
+      colWidth: 30
+    }, _lib_contants__WEBPACK_IMPORTED_MODULE_8__["textHeaders"][_lib_contants__WEBPACK_IMPORTED_MODULE_8__["fields"].Department]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
       colWidth: 40
-    }, _lib_contants__WEBPACK_IMPORTED_MODULE_7__["textHeaders"][_lib_contants__WEBPACK_IMPORTED_MODULE_7__["fields"].Skype]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
+    }, _lib_contants__WEBPACK_IMPORTED_MODULE_8__["textHeaders"][_lib_contants__WEBPACK_IMPORTED_MODULE_8__["fields"].Email]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
+      colWidth: 40
+    }, _lib_contants__WEBPACK_IMPORTED_MODULE_8__["textHeaders"][_lib_contants__WEBPACK_IMPORTED_MODULE_8__["fields"].Skype]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
       colWidth: 70
-    }, _lib_contants__WEBPACK_IMPORTED_MODULE_7__["textHeaders"][_lib_contants__WEBPACK_IMPORTED_MODULE_7__["fields"].ToList]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
+    }, _lib_contants__WEBPACK_IMPORTED_MODULE_8__["textHeaders"][_lib_contants__WEBPACK_IMPORTED_MODULE_8__["fields"].ToList]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
       colWidth: 70
-    }, _lib_contants__WEBPACK_IMPORTED_MODULE_7__["textHeaders"][_lib_contants__WEBPACK_IMPORTED_MODULE_7__["fields"].CcList]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
+    }, _lib_contants__WEBPACK_IMPORTED_MODULE_8__["textHeaders"][_lib_contants__WEBPACK_IMPORTED_MODULE_8__["fields"].CcList]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
       colWidth: 40
-    }, _lib_contants__WEBPACK_IMPORTED_MODULE_7__["textHeaders"][_lib_contants__WEBPACK_IMPORTED_MODULE_7__["fields"].Remark]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
+    }, _lib_contants__WEBPACK_IMPORTED_MODULE_8__["textHeaders"][_lib_contants__WEBPACK_IMPORTED_MODULE_8__["fields"].Remark]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
       colWidth: 30
-    }, _lib_contants__WEBPACK_IMPORTED_MODULE_7__["textHeaders"]['Action']));
+    }, _lib_contants__WEBPACK_IMPORTED_MODULE_8__["textHeaders"]['Action']));
   }, []);
 
   const _body = react__WEBPACK_IMPORTED_MODULE_0___default.a.useMemo(() => {
@@ -2632,33 +2683,36 @@ const DataGrid = ({
       key: 'contact_' + contact.ContactID
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
       className: "center-align"
-    }, index + 1), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
+    }, index + 1), _showSubsidiaryColumn && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
       className: "left-align",
-      title: contact[_lib_contants__WEBPACK_IMPORTED_MODULE_7__["fields"].ContactName]
-    }, contact[_lib_contants__WEBPACK_IMPORTED_MODULE_7__["fields"].ContactName]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
-      className: "center-align"
-    }, Object(_lib_helper__WEBPACK_IMPORTED_MODULE_8__["getContactTypeText"])(contact[_lib_contants__WEBPACK_IMPORTED_MODULE_7__["fields"].ContactType])), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
-      className: "center-align"
-    }, contact[_lib_contants__WEBPACK_IMPORTED_MODULE_7__["fields"].Position]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
-      className: "center-align"
-    }, contact[_lib_contants__WEBPACK_IMPORTED_MODULE_7__["fields"].Department]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
+      title: contact[_lib_contants__WEBPACK_IMPORTED_MODULE_8__["fields"].Subsidiary]
+    }, contact[_lib_contants__WEBPACK_IMPORTED_MODULE_8__["fields"].Subsidiary]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
       className: "left-align",
-      title: contact[_lib_contants__WEBPACK_IMPORTED_MODULE_7__["fields"].Email]
-    }, contact[_lib_contants__WEBPACK_IMPORTED_MODULE_7__["fields"].Email]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
+      title: contact[_lib_contants__WEBPACK_IMPORTED_MODULE_8__["fields"].ContactName]
+    }, contact[_lib_contants__WEBPACK_IMPORTED_MODULE_8__["fields"].ContactName]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
+      className: "center-align"
+    }, Object(_lib_helper__WEBPACK_IMPORTED_MODULE_9__["getContactTypeText"])(contact[_lib_contants__WEBPACK_IMPORTED_MODULE_8__["fields"].ContactType])), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
+      className: "center-align"
+    }, contact[_lib_contants__WEBPACK_IMPORTED_MODULE_8__["fields"].Position]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
+      className: "center-align"
+    }, contact[_lib_contants__WEBPACK_IMPORTED_MODULE_8__["fields"].Department]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
       className: "left-align",
-      title: contact[_lib_contants__WEBPACK_IMPORTED_MODULE_7__["fields"].Skype]
-    }, contact[_lib_contants__WEBPACK_IMPORTED_MODULE_7__["fields"].Skype]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
+      title: contact[_lib_contants__WEBPACK_IMPORTED_MODULE_8__["fields"].Email]
+    }, contact[_lib_contants__WEBPACK_IMPORTED_MODULE_8__["fields"].Email]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
+      className: "left-align",
+      title: contact[_lib_contants__WEBPACK_IMPORTED_MODULE_8__["fields"].Skype]
+    }, contact[_lib_contants__WEBPACK_IMPORTED_MODULE_8__["fields"].Skype]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
       className: "left-align"
-    }, contact[_lib_contants__WEBPACK_IMPORTED_MODULE_7__["fields"].ToList].map(to => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, Object(_jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_6__["decode"])(to)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
+    }, contact[_lib_contants__WEBPACK_IMPORTED_MODULE_8__["fields"].ToList].map(to => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, Object(_jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_6__["decode"])(to)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
       className: "left-align"
-    }, contact[_lib_contants__WEBPACK_IMPORTED_MODULE_7__["fields"].CcList].map(cc => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, Object(_jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_6__["decode"])(cc)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
+    }, contact[_lib_contants__WEBPACK_IMPORTED_MODULE_8__["fields"].CcList].map(cc => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, Object(_jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_6__["decode"])(cc)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
       className: "left-align"
-    }, contact[_lib_contants__WEBPACK_IMPORTED_MODULE_7__["fields"].Remark]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
+    }, contact[_lib_contants__WEBPACK_IMPORTED_MODULE_8__["fields"].Remark]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
       className: "center-align action-cell"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       className: "btn-default btn-link btn-icon",
       onClick: () => setModificationAction({
-        type: _lib_contants__WEBPACK_IMPORTED_MODULE_7__["ModificationActionType"].EditContact,
+        type: _lib_contants__WEBPACK_IMPORTED_MODULE_8__["ModificationActionType"].EditContact,
         data: contact.ContactID
       })
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
@@ -2666,7 +2720,7 @@ const DataGrid = ({
     }, "edit")), !contact.IsMain && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       className: "btn-default btn-link btn-icon delete-icon",
       onClick: () => setModificationAction({
-        type: _lib_contants__WEBPACK_IMPORTED_MODULE_7__["ModificationActionType"].DeleteContact,
+        type: _lib_contants__WEBPACK_IMPORTED_MODULE_8__["ModificationActionType"].DeleteContact,
         data: {
           contactId: contact.ContactID,
           contactName: contact.ContactName
@@ -2741,6 +2795,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 const FormAdd = props => {
   const [contact, setContact] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
     Categories: [],
+    Subsidiary: null,
     ContactName: null,
     ContactType: -1,
     Department: null,
@@ -2912,11 +2967,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions */ "./www/js/source/reactpages/pages/licenseecontact/actions/index.js");
 /* harmony import */ var _jsroot_components_auto_complete__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/components/auto-complete */ "./www/js/source/reactpages/components/auto-complete/index.jsx");
-/* harmony import */ var _jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/components/collapsible-panel */ "./www/js/source/reactpages/components/collapsible-panel/index.jsx");
-/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-/* harmony import */ var _lib_contants__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../lib/contants */ "./www/js/source/reactpages/pages/licenseecontact/lib/contants.js");
-/* harmony import */ var _lib_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../lib/service */ "./www/js/source/reactpages/pages/licenseecontact/lib/service.js");
-/* harmony import */ var _lib_helper__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../lib/helper */ "./www/js/source/reactpages/pages/licenseecontact/lib/helper.js");
+/* harmony import */ var _9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @9softstudio/react-multiselect */ "./node_modules/@9softstudio/react-multiselect/dist/index.js");
+/* harmony import */ var _9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/components/CheckBox */ "./www/js/source/reactpages/components/CheckBox.jsx");
+/* harmony import */ var _jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/components/collapsible-panel */ "./www/js/source/reactpages/components/collapsible-panel/index.jsx");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+/* harmony import */ var _lib_contants__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../lib/contants */ "./www/js/source/reactpages/pages/licenseecontact/lib/contants.js");
+/* harmony import */ var _lib_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../lib/service */ "./www/js/source/reactpages/pages/licenseecontact/lib/service.js");
+/* harmony import */ var _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @jsroot/constants/report */ "./www/js/source/reactpages/constants/report.js");
+/* harmony import */ var _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @jsroot/lib/stringHelper */ "./www/js/source/reactpages/lib/stringHelper.js");
+/* harmony import */ var _lib_helper__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../lib/helper */ "./www/js/source/reactpages/pages/licenseecontact/lib/helper.js");
+
+
+
+
+
 
 
 
@@ -2932,7 +2998,15 @@ const FormFilter = ({
   fetchContactList,
   contactList
 }) => {
+  const _defaultSelectedSubsidiary = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_9__["default"].subsidiaryList.join(','), []);
+
+  const _showSubsidiaryDropdown = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => Object(_lib_helper__WEBPACK_IMPORTED_MODULE_14__["isShowSubsidiaryInfo"])(_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_9__["default"].subsidiaryViewType, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_9__["default"].subsidiaryList), []);
+
+  const _showSubsidiarySearchCheckBox = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => _showSubsidiaryDropdown && _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_9__["default"].subsidiaryViewType === _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_12__["SubsidiaryViewType"].MASTER_MANAGEMENT, [_showSubsidiaryDropdown]);
+
   const [contactName, setContactName] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null);
+  const [subsidiarySearch, setSubsidiarySearch] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(!_showSubsidiarySearchCheckBox && _showSubsidiaryDropdown);
+  const [subsidiaryList, setSubsidiaryList] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(_defaultSelectedSubsidiary);
   const [unassignedCategories, setUnassignedCategories] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]);
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     fetchContactList(null);
@@ -2942,14 +3016,34 @@ const FormFilter = ({
   }, [contactList]);
 
   const _getUnassignedCategories = async () => {
-    const _unassignedCategories = await _lib_service__WEBPACK_IMPORTED_MODULE_8__["default"].getUnassignedCategories();
+    const _unassignedCategories = await _lib_service__WEBPACK_IMPORTED_MODULE_11__["default"].getUnassignedCategories();
 
     setUnassignedCategories(_unassignedCategories);
     _unassignedCategories.length && window.dispatchEvent(new Event('resize'));
   };
 
   const _handleSearch = () => {
-    fetchContactList(contactName);
+    fetchContactList(contactName, subsidiarySearch ? subsidiaryList.split(',') : null);
+  };
+
+  const _renderSubsidiaryTreeView = () => {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_5__["TreeViewSelect"], {
+      language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].currentLanguage,
+      id: "SubsidiaryTreeView",
+      dataSource: _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_9__["default"].whitelabelList,
+      keyField: "Value",
+      valueField: "Name",
+      statusField: "Checked",
+      texts: {
+        SelectOptions: "Please select",
+        All: "All",
+        SelectedItemCount: "# selected"
+      },
+      isAllTextShown: false,
+      hasSearchBox: false,
+      treeViewOption: _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_12__["TreeViewOption"],
+      onChange: (currentItem, selectedItemsKey, treeViewList) => setSubsidiaryList(selectedItemsKey)
+    });
   };
 
   const _renderCategoryNote = () => {
@@ -2963,35 +3057,41 @@ const FormFilter = ({
       className: "col-5 warning-note"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       className: "text-bold"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource('Note') + ': '), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource('LicenseeContactCategoryNote')))), unassignedCategories.map(category => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource('Note') + ': '), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource('LicenseeContactCategoryNote')))), unassignedCategories.map(category => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: 'UnassignedCategory_' + category.CategoryId,
       className: "row"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-5 warning-note"
-    }, `- ${Object(_lib_helper__WEBPACK_IMPORTED_MODULE_9__["getCategoryDisplayName"])(category)}`))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, `- ${Object(_lib_helper__WEBPACK_IMPORTED_MODULE_14__["getCategoryDisplayName"])(category)}`))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "row"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-5 warning-note"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource('LicenseeContactCategoryRuleNote'))));
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource('LicenseeContactCategoryRuleNote'))));
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_7__["default"], {
     className: "page-filter"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, _showSubsidiaryDropdown && subsidiarySearch && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "form-group"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
     className: "label-text"
-  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource("Name")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_auto_complete__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    url: _lib_contants__WEBPACK_IMPORTED_MODULE_7__["Url"].ContactSuggestions,
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("WhiteLabel")), _renderSubsidiaryTreeView())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "label-text"
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("Name")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_auto_complete__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    url: _lib_contants__WEBPACK_IMPORTED_MODULE_10__["Url"].ContactSuggestions,
     queryParamName: 'contactName',
     onSelect: setContactName,
     onInput: setContactName
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2"
+    className: "col-12 col-md-3 col-sm-3 col-lg-2 col-xl-1"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "form-group"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2999,8 +3099,21 @@ const FormFilter = ({
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     type: "button",
     className: "btn btn-submit",
+    disabled: subsidiarySearch && _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_9__["default"].subsidiaryList.length > 0 && _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_13__["default"].isEmptyOrWhiteSpace(subsidiaryList),
     onClick: _handleSearch
-  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource('Search')))))), _renderCategoryNote());
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource('Search'))))), _showSubsidiarySearchCheckBox && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    id: "SubsidiarySearch",
+    checked: subsidiarySearch,
+    onChange: checked => {
+      setSubsidiarySearch(checked);
+      checked && setSubsidiaryList(_defaultSelectedSubsidiary);
+    },
+    label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("SubsidiarySearch")
+  })))), _renderCategoryNote());
 };
 
 function mapDispatchToProps(dispatch) {
@@ -3046,11 +3159,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @jsroot/lib/sweetAlert */ "./www/js/source/reactpages/lib/sweetAlert.js");
 /* harmony import */ var _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @jsroot/lib/stringHelper */ "./www/js/source/reactpages/lib/stringHelper.js");
 /* harmony import */ var _lib_helper__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../lib/helper */ "./www/js/source/reactpages/pages/licenseecontact/lib/helper.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+/* harmony import */ var _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @jsroot/constants/report */ "./www/js/source/reactpages/constants/report.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
 
 
 
@@ -3074,8 +3192,27 @@ const FormContact = ({
   toggleLoader
 }) => {
   const [sweetAlertOption, setSweetAlertOption] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null);
+  const [isSubmitted, setIsSubmitted] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
 
-  const _isDisabledSubmit = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => !Object(_lib_helper__WEBPACK_IMPORTED_MODULE_10__["validateContact"])(contact), [contact]);
+  const _showSubsidiaryDropdown = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => Object(_lib_helper__WEBPACK_IMPORTED_MODULE_10__["isShowSubsidiaryInfo"])(_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].subsidiaryViewType, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].subsidiaryList), []);
+
+  const _requiredSubsidiary = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => _showSubsidiaryDropdown && _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].subsidiaryViewType !== _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_12__["SubsidiaryViewType"].MASTER_MANAGEMENT, [_showSubsidiaryDropdown]);
+
+  const _subsidiaryListSource = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => {
+    let subsidiarylist = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].subsidiaryList.map(_ => ({
+      value: _,
+      label: _
+    }));
+
+    if (_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].subsidiaryViewType === _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_12__["SubsidiaryViewType"].MASTER_MANAGEMENT) {
+      subsidiarylist = [{
+        value: 'none',
+        label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('None')
+      }, ...subsidiarylist];
+    }
+
+    return subsidiarylist;
+  }, []);
 
   if (!contact) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_5__["default"], null);
@@ -3090,7 +3227,25 @@ const FormContact = ({
       className: "row"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "title col-12"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('GeneralInformation'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('GeneralInformation'))), _showSubsidiaryDropdown && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "row"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      className: "col-5 label-text"
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("Subsidiary"), _requiredSubsidiary && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      className: "required"
+    }, "*")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-7"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      instanceId: "SubsidiaryList",
+      className: isSubmitted && !_lib_helper__WEBPACK_IMPORTED_MODULE_10__["contactValidationHandler"][_lib_contants__WEBPACK_IMPORTED_MODULE_6__["fields"].Subsidiary](contact.Subsidiary, _requiredSubsidiary) ? 'select-highlight' : '',
+      isSearchable: false,
+      placeholder: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('PleaseSelectOne'),
+      value: contact.Subsidiary || 'none',
+      options: _subsidiaryListSource,
+      onChange: item => setContact(_objectSpread(_objectSpread({}, contact), {}, {
+        Subsidiary: item.value === 'none' ? null : item.value
+      }))
+    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "row"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       className: "col-5 label-text"
@@ -3100,8 +3255,9 @@ const FormContact = ({
       className: "col-7"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_2__["default"], {
       instanceId: "ContactTypeOptions",
-      className: !_lib_helper__WEBPACK_IMPORTED_MODULE_10__["contactValidationHandler"][_lib_contants__WEBPACK_IMPORTED_MODULE_6__["fields"].ContactType](contact.ContactType) ? 'select-highlight' : '',
+      className: isSubmitted && !_lib_helper__WEBPACK_IMPORTED_MODULE_10__["contactValidationHandler"][_lib_contants__WEBPACK_IMPORTED_MODULE_6__["fields"].ContactType](contact.ContactType) ? 'select-highlight' : '',
       isSearchable: false,
+      placeholder: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('PleaseSelectOne'),
       value: contact.ContactType,
       options: _lib_contants__WEBPACK_IMPORTED_MODULE_6__["ContactTypeOptions"],
       onChange: item => setContact(_objectSpread(_objectSpread({}, contact), {}, {
@@ -3119,7 +3275,7 @@ const FormContact = ({
       type: "text",
       id: "Name",
       name: "Name",
-      className: `input-text ${_jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_9__["default"].isEmptyOrWhiteSpace(contact.ContactName) ? 'input-highlight' : ''}`,
+      className: `input-text ${isSubmitted && _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_9__["default"].isEmptyOrWhiteSpace(contact.ContactName) ? 'input-highlight' : ''}`,
       maxLength: 50,
       value: contact.ContactName,
       onChange: event => setContact(_objectSpread(_objectSpread({}, contact), {}, {
@@ -3137,7 +3293,7 @@ const FormContact = ({
       type: "text",
       id: "Position",
       name: "Position",
-      className: `input-text ${_jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_9__["default"].isEmptyOrWhiteSpace(contact.Position) ? 'input-highlight' : ''}`,
+      className: `input-text ${isSubmitted && _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_9__["default"].isEmptyOrWhiteSpace(contact.Position) ? 'input-highlight' : ''}`,
       maxLength: 50,
       value: contact.Position,
       onChange: event => setContact(_objectSpread(_objectSpread({}, contact), {}, {
@@ -3155,7 +3311,7 @@ const FormContact = ({
       type: "text",
       id: "Department",
       name: "Department",
-      className: `input-text ${_jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_9__["default"].isEmptyOrWhiteSpace(contact.Department) ? 'input-highlight' : ''}`,
+      className: `input-text ${isSubmitted && _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_9__["default"].isEmptyOrWhiteSpace(contact.Department) ? 'input-highlight' : ''}`,
       maxLength: 50,
       value: contact.Department,
       onChange: event => setContact(_objectSpread(_objectSpread({}, contact), {}, {
@@ -3173,7 +3329,7 @@ const FormContact = ({
       type: "email",
       id: "Email",
       name: "Email",
-      className: `input-text ${!_lib_helper__WEBPACK_IMPORTED_MODULE_10__["contactValidationHandler"][_lib_contants__WEBPACK_IMPORTED_MODULE_6__["fields"].Email](contact.Email) ? 'input-highlight' : ''}`,
+      className: `input-text ${isSubmitted && !_lib_helper__WEBPACK_IMPORTED_MODULE_10__["contactValidationHandler"][_lib_contants__WEBPACK_IMPORTED_MODULE_6__["fields"].Email](contact.Email) ? 'input-highlight' : ''}`,
       maxLength: 50,
       value: contact.Email,
       onChange: event => setContact(_objectSpread(_objectSpread({}, contact), {}, {
@@ -3191,7 +3347,7 @@ const FormContact = ({
       type: "text",
       id: "Skype",
       name: "Skype",
-      className: `input-text ${_jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_9__["default"].isEmptyOrWhiteSpace(contact.Skype) ? 'input-highlight' : ''}`,
+      className: `input-text ${isSubmitted && _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_9__["default"].isEmptyOrWhiteSpace(contact.Skype) ? 'input-highlight' : ''}`,
       maxLength: 50,
       value: contact.Skype,
       onChange: event => setContact(_objectSpread(_objectSpread({}, contact), {}, {
@@ -3233,7 +3389,7 @@ const FormContact = ({
     }, "* ", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('AtLeastOneCategoryMustBeSelected')) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-12 warning-note"
     }, "* ", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('TheLicenseeHasNoAssignedCategory')))), existedCategories && _renderCategoryAllSelection(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: isInvalid ? "invalid" : ""
+      className: isSubmitted && isInvalid ? "invalid" : ""
     }, existedCategories && contact.Categories.map(_renderCategorySelection)));
   };
 
@@ -3300,7 +3456,9 @@ const FormContact = ({
   };
 
   const _handleSubmit = () => {
-    if (!Object(_lib_helper__WEBPACK_IMPORTED_MODULE_10__["validateContact"])(contact)) {
+    !isSubmitted && setIsSubmitted(true);
+
+    if (!Object(_lib_helper__WEBPACK_IMPORTED_MODULE_10__["validateContact"])(contact, _requiredSubsidiary)) {
       return;
     }
 
@@ -3373,7 +3531,6 @@ const FormContact = ({
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       type: "button",
       className: "btn btn-submit",
-      disabled: _isDisabledSubmit,
       onClick: _handleSubmit
     }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Submit'))));
   };
@@ -3488,6 +3645,7 @@ const RecipientTypeOptions = [{
 }];
 const fields = {
   Index: 'Index',
+  Subsidiary: 'Subsidiary',
   ContactName: 'ContactName',
   ContactType: 'ContactType',
   Position: 'Position',
@@ -3500,6 +3658,7 @@ const fields = {
 };
 const textHeaders = {
   [fields.Index]: '#',
+  [fields.Subsidiary]: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Subsidiary'),
   [fields.ContactName]: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Name'),
   [fields.ContactType]: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('ContactType'),
   [fields.Position]: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Position'),
@@ -3545,8 +3704,9 @@ const HEADER_ROW_INDEX = 1;
 const DATA_ROW_INDEX = 3;
 const MAIN_SECTION_STYLE = 'mainSectionStyle';
 class LicenseeContactExcel {
-  constructor(data) {
+  constructor(data, excludedColumns) {
     this.data = data;
+    this.excludedColumns = excludedColumns;
     this.title = _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('LicenseeContacts');
     this.worksheet = {};
     this.currentRowIndex = DATA_ROW_INDEX;
@@ -3601,10 +3761,6 @@ class LicenseeContactExcel {
 
     for (let i = 0; i < totalColumn; i++) {
       const field = this.columnConfigs[i].field;
-      const address = _jsroot_lib_excel__WEBPACK_IMPORTED_MODULE_0__["default"].getCellAddress({
-        c: i,
-        r: HEADER_ROW_INDEX
-      });
       this.worksheet[_jsroot_lib_excel__WEBPACK_IMPORTED_MODULE_0__["default"].getCellAddress({
         c: i,
         r: HEADER_ROW_INDEX
@@ -3698,6 +3854,10 @@ class LicenseeContactExcel {
       [MAIN_SECTION_STYLE]: _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].center,
       width: 50
     }, {
+      field: _contants__WEBPACK_IMPORTED_MODULE_4__["fields"].Subsidiary,
+      [MAIN_SECTION_STYLE]: _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].left,
+      width: 150
+    }, {
       field: _contants__WEBPACK_IMPORTED_MODULE_4__["fields"].ContactName,
       [MAIN_SECTION_STYLE]: _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].left,
       width: 150
@@ -3734,7 +3894,7 @@ class LicenseeContactExcel {
       [MAIN_SECTION_STYLE]: _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].left,
       width: 200
     }];
-    return result;
+    return result.filter(_ => !this.excludedColumns[_.field]);
   }
 
 }
@@ -3745,7 +3905,7 @@ class LicenseeContactExcel {
 /*!**********************************************************************!*\
   !*** ./www/js/source/reactpages/pages/licenseecontact/lib/helper.js ***!
   \**********************************************************************/
-/*! exports provided: contactValidationHandler, getContactTypeText, validateContact, getCategoryDisplayName */
+/*! exports provided: contactValidationHandler, getContactTypeText, validateContact, getCategoryDisplayName, isShowSubsidiaryInfo */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3754,10 +3914,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getContactTypeText", function() { return getContactTypeText; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "validateContact", function() { return validateContact; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCategoryDisplayName", function() { return getCategoryDisplayName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isShowSubsidiaryInfo", function() { return isShowSubsidiaryInfo; });
 /* harmony import */ var _contants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./contants */ "./www/js/source/reactpages/pages/licenseecontact/lib/contants.js");
 /* harmony import */ var _jsroot_lib_validationHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/validationHelper */ "./www/js/source/reactpages/lib/validationHelper.js");
 /* harmony import */ var _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/stringHelper */ "./www/js/source/reactpages/lib/stringHelper.js");
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/constants/report */ "./www/js/source/reactpages/constants/report.js");
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
 
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
@@ -3766,9 +3928,11 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 
 
 
+
 const contactValidationHandler = {
   [_contants__WEBPACK_IMPORTED_MODULE_0__["fields"].Email]: value => Object(_jsroot_lib_validationHelper__WEBPACK_IMPORTED_MODULE_1__["validateEmail"])(value),
   [_contants__WEBPACK_IMPORTED_MODULE_0__["fields"].ContactType]: value => value === _contants__WEBPACK_IMPORTED_MODULE_0__["ContactType"].Individual || value === _contants__WEBPACK_IMPORTED_MODULE_0__["ContactType"].Group,
+  [_contants__WEBPACK_IMPORTED_MODULE_0__["fields"].Subsidiary]: (value, requiredSubsidiary) => !requiredSubsidiary || !!value,
   ['Categories']: value => value.length && value.some(category => category.RecipientType !== null)
 };
 const getContactTypeText = contactType => {
@@ -3776,7 +3940,7 @@ const getContactTypeText = contactType => {
 
   return ((_ContactTypeOptions$f = _contants__WEBPACK_IMPORTED_MODULE_0__["ContactTypeOptions"].find(_ => _.value === contactType)) === null || _ContactTypeOptions$f === void 0 ? void 0 : _ContactTypeOptions$f.label) || '';
 };
-const validateContact = contact => {
+const validateContact = (contact, requiredSubsidiary) => {
   if (!contact) {
     return false;
   }
@@ -3787,10 +3951,11 @@ const validateContact = contact => {
   } = contact,
         validateFields = _objectWithoutProperties(contact, ["Remark", "ContactID"]);
 
-  const isInvalid = Object.keys(validateFields).some(field => contactValidationHandler[field] ? !contactValidationHandler[field](contact[field]) : _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_2__["default"].isEmptyOrWhiteSpace(contact[field]));
+  const isInvalid = Object.keys(validateFields).some(field => contactValidationHandler[field] ? !contactValidationHandler[field](contact[field], requiredSubsidiary) : _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_2__["default"].isEmptyOrWhiteSpace(contact[field]));
   return !isInvalid;
 };
 const getCategoryDisplayName = category => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].currentLanguage === _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].languageKeys.zhCN ? category.CategoryNameCN || category.CategoryName : category.CategoryName;
+const isShowSubsidiaryInfo = (subsidiaryViewType, subsidiaryList) => subsidiaryViewType !== _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_4__["SubsidiaryViewType"].NOT_MANAGEMENT && subsidiaryList.length > 0;
 
 /***/ }),
 
@@ -3811,10 +3976,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class ApiService {
-  static async getContactList(contactName) {
+  static async getContactList(contactName, subsidiaryList) {
     try {
       const response = await _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_0__["default"].postData(_contants__WEBPACK_IMPORTED_MODULE_2__["Url"].ContactList, {
-        contactName
+        contactName,
+        subsidiaryList
       });
 
       if (response.status === 200 && response.data.IsSuccess) {

@@ -40,6 +40,7 @@ export const RecipientTypeOptions = [
 
 export const fields = {
     Index: 'Index',
+    Subsidiary: 'Subsidiary',
     ContactName: 'ContactName',
     ContactType: 'ContactType',
     Position: 'Position',
@@ -53,6 +54,7 @@ export const fields = {
 
 export const textHeaders = {
     [fields.Index]: '#',
+    [fields.Subsidiary]: LangHelper.getSingleResource('Subsidiary'),
     [fields.ContactName]: LangHelper.getSingleResource('Name'),
     [fields.ContactType]: LangHelper.getSingleResource('ContactType'),
     [fields.Position]: LangHelper.getSingleResource('Position'),
