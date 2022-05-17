@@ -1,4 +1,4 @@
-﻿// Generated at: 3/25/2022 3:44:03 PM
+﻿// Generated at: 5/17/2022 10:35:17 AM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -775,6 +775,7 @@ Su:"Su",
 Subject:"Subject",
 Submit:"Submit",
 Subsidiary:"Subsidiary",
+Subsidiary2:"Subsidiary",
 SubsidiaryPerformance:"Subsidiary Performance",
 SubsidiarySearch:"Subsidiary Search",
 SubsidiaryWL:"Subsidiary W/L",

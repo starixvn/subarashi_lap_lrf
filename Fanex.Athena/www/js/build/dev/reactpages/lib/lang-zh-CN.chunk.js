@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 3/25/2022 3:44:03 PM
+// Generated at: 5/17/2022 10:35:17 AM
 window._language_zh_CN = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -787,6 +787,7 @@ window._language_zh_CN = {
   Su: "Su",
   Submit: "提交",
   Subsidiary: "子网站",
+  Subsidiary2: "子代理",
   SubsidiaryPerformance: "子网站报告",
   SubsidiarySearch: "子网站搜寻",
   SubsidiaryWL: "子网站输赢",

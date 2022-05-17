@@ -2842,4 +2842,7 @@
     <value>系统正在维护中，此功能从 {0} 到 {1} （香港时间 GMT +8）将无法更新。很抱歉造成您的困扰。</value>
     <comment>ignorejs</comment>
   </data>
+  <data name="Subsidiary2" xml:space="preserve">
+    <value>子代理</value>
+  </data>
 </root>

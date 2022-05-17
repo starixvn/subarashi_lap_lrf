@@ -3266,4 +3266,7 @@
     <value>Unable to update since this function is under maintenance from {0} to {1} (HK Time GMT +8). We are sorry for any inconvenience caused!</value>
     <comment>ignorejs</comment>
   </data>
+  <data name="Subsidiary2" xml:space="preserve">
+    <value>Subsidiary</value>
+  </data>
 </root>

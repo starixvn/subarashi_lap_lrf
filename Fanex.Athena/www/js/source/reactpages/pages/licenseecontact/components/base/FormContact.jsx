@@ -40,7 +40,7 @@ const FormContact = ({ contact, setContact, api, msgConfirm, hasConfirm, afterSu
                 </div>
             </div>
             {_showSubsidiaryDropdown && <div className="row">
-                <label className="col-5 label-text">{LangHelper.getSingleResource("Subsidiary")}{_requiredSubsidiary && <span className="required">*</span>}</label>
+                <label className="col-5 label-text">{LangHelper.getSingleResource("Subsidiary2")}{_requiredSubsidiary && <span className="required">*</span>}</label>
                 <div className="col-7">
                     <Select instanceId="SubsidiaryList"
                         className={isSubmitted && !contactValidationHandler[fields.Subsidiary](contact.Subsidiary, _requiredSubsidiary) ? 'select-highlight' : ''}
