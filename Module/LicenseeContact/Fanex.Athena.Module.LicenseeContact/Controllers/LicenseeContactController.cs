@@ -130,7 +130,7 @@ namespace Fanex.Athena.Module.LicenseeContact.Controllers
             var allowedSubsidiaryList = GetAllowedSubsidiaryList();
             if (subsidiaryList != null && subsidiaryList.Any())
             {
-                allowedSubsidiaryList = subsidiaryList.Where(sub => allowedSubsidiaryList.Any(allowedSub => string.Equals(allowedSub, sub, StringComparison.InvariantCultureIgnoreCase)));
+                allowedSubsidiaryList = subsidiaryList.Intersect(allowedSubsidiaryList, StringComparer.InvariantCultureIgnoreCase);
             }
             return allowedSubsidiaryList;
         }

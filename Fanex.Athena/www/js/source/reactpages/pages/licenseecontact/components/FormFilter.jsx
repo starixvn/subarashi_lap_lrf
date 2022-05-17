@@ -89,7 +89,7 @@ const FormFilter = ({ fetchContactList, contactList }) => {
                 {_showSubsidiaryDropdown && subsidiarySearch && <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
                     <div className="form-group">
                         <label className="label-text">
-                            {LangHelper.getSingleResource("WhiteLabel")}
+                            {LangHelper.getSingleResource("Subsidiary2")}
                         </label>
                         {_renderSubsidiaryTreeView()}
                     </div>

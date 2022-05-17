@@ -54,7 +54,7 @@ export const fields = {
 
 export const textHeaders = {
     [fields.Index]: '#',
-    [fields.Subsidiary]: LangHelper.getSingleResource('Subsidiary'),
+    [fields.Subsidiary]: LangHelper.getSingleResource('Subsidiary2'),
     [fields.ContactName]: LangHelper.getSingleResource('Name'),
     [fields.ContactType]: LangHelper.getSingleResource('ContactType'),
     [fields.Position]: LangHelper.getSingleResource('Position'),
