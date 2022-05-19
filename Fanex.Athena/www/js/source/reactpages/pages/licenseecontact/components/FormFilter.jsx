@@ -19,6 +19,7 @@ const FormFilter = ({ fetchContactList, contactList }) => {
     const _defaultSelectedSubsidiary = useMemo(() => AppData.subsidiaryList.join(','), []);
     const _showSubsidiaryDropdown = useMemo(() => isShowSubsidiaryInfo(AppData.subsidiaryViewType, AppData.subsidiaryList), []);
     const _showSubsidiarySearchCheckBox = useMemo(() => _showSubsidiaryDropdown && AppData.subsidiaryViewType === SubsidiaryViewType.MASTER_MANAGEMENT, [_showSubsidiaryDropdown]);
+    const _whiteLabelView = useMemo(() => AppData.subsidiaryViewType === SubsidiaryViewType.MASTER_MANAGEMENT && !AppData.isOneworksMaster);
 
     const [contactName, setContactName] = useState(null);
     const [subsidiarySearch, setSubsidiarySearch] = useState(!_showSubsidiarySearchCheckBox && _showSubsidiaryDropdown);
@@ -86,15 +87,15 @@ const FormFilter = ({ fetchContactList, contactList }) => {
     return (
         <CollapsiblePanel className="page-filter">
             <div className="row">
-                {_showSubsidiaryDropdown && subsidiarySearch && <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
+                {_showSubsidiaryDropdown && subsidiarySearch && <div className="col-12 col-md-3 col-sm-4 col-lg-3 col-xl-2">
                     <div className="form-group">
                         <label className="label-text">
-                            {LangHelper.getSingleResource("Subsidiary2")}
+                            {_whiteLabelView ? LangHelper.getSingleResource("WhiteLabel") : LangHelper.getSingleResource("Subsidiary2")}
                         </label>
                         {_renderSubsidiaryTreeView()}
                     </div>
                 </div>}
-                <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
+                <div className="col-12 col-md-3 col-sm-4 col-lg-3 col-xl-2">
                     <div className="form-group">
                         <label className="label-text">{LangHelper.getSingleResource("Name")}</label>
                         <AutoComplete url={Url.ContactSuggestions}
