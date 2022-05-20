@@ -3004,6 +3004,8 @@ const FormFilter = ({
 
   const _showSubsidiarySearchCheckBox = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => _showSubsidiaryDropdown && _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_9__["default"].subsidiaryViewType === _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_12__["SubsidiaryViewType"].MASTER_MANAGEMENT, [_showSubsidiaryDropdown]);
 
+  const _whiteLabelView = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_9__["default"].subsidiaryViewType === _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_12__["SubsidiaryViewType"].MASTER_MANAGEMENT && !_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_9__["default"].isOneworksMaster);
+
   const [contactName, setContactName] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null);
   const [subsidiarySearch, setSubsidiarySearch] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(!_showSubsidiarySearchCheckBox && _showSubsidiaryDropdown);
   const [subsidiaryList, setSubsidiaryList] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(_defaultSelectedSubsidiary);
@@ -3074,13 +3076,13 @@ const FormFilter = ({
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row"
   }, _showSubsidiaryDropdown && subsidiarySearch && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2"
+    className: "col-12 col-md-3 col-sm-4 col-lg-3 col-xl-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "form-group"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
     className: "label-text"
-  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("Subsidiary2")), _renderSubsidiaryTreeView())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2"
+  }, _whiteLabelView ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("WhiteLabel") : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("Subsidiary2")), _renderSubsidiaryTreeView())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-3 col-sm-4 col-lg-3 col-xl-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "form-group"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {

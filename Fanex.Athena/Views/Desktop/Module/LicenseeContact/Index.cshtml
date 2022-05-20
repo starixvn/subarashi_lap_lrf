@@ -24,6 +24,7 @@
 
     window._AppData = {
     subsidiaryViewType: @ViewBag.SubsidiaryViewType,
+    isOneworksMaster: '@ViewBag.IsOneworksMaster' === 'True',
     whitelabelList: @Html.Raw(whitelabelList.ToJson()),
     subsidiaryList: @Html.Raw(subsidiaryList.ToJson()),
     }

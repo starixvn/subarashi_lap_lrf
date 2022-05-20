@@ -26,6 +26,15 @@ namespace Fanex.Athena.Module.LicenseeContact.Controllers
         private readonly IOicApiClient _oicApiClient;
         private readonly ISubsidiaryService _subsidiaryService;
 
+        private bool IsOneworksMaster =>
+           SessionServiceInstance.UserSession.UserLevel == UserLevelType.Oneworks
+           && SessionServiceInstance.UserSession.SubsidiaryViewType == (byte)SubsidiaryViewType.NormalManagement;
+
+        private bool CanViewMainlineContact =>
+            (SessionServiceInstance.UserSession.SubsidiaryViewType != (byte)SubsidiaryViewType.NormalManagement
+            && SessionServiceInstance.UserSession.UserLevel != UserLevelType.Subsidiary)
+            || IsOneworksMaster;
+
         public LicenseeContactController(IOicApiClient oicApiClient, ISubsidiaryService subsidiaryService)
         {
             _oicApiClient = oicApiClient;
@@ -35,9 +44,11 @@ namespace Fanex.Athena.Module.LicenseeContact.Controllers
         [HttpGet]
         public ViewResult Index()
         {
-            var subsidiaryList = _subsidiaryService.GetWhiteLabelTree(SessionServiceInstance.UserSession, SessionServiceInstance.LicenseeSession.LicenseeName);
+            var userSession = SessionServiceInstance.UserSession;
+            var subsidiaryList = _subsidiaryService.GetWhiteLabelTree(userSession, SessionServiceInstance.LicenseeSession.LicenseeName);
             ViewBag.SubsidiaryList = subsidiaryList;
-            ViewBag.SubsidiaryViewType = SessionServiceInstance.UserSession.SubsidiaryViewType;
+            ViewBag.IsOneworksMaster = IsOneworksMaster;
+            ViewBag.SubsidiaryViewType = IsOneworksMaster ? (byte)SubsidiaryViewType.MasterManagement : userSession.SubsidiaryViewType;
 
             return View("~/Views/Desktop/Module/LicenseeContact/Index.cshtml");
         }
@@ -118,7 +129,7 @@ namespace Fanex.Athena.Module.LicenseeContact.Controllers
             var licenseeName = SessionServiceInstance.LicenseeSession.LicenseeName;
             var allowedSubsidiaryList = _subsidiaryService.GetWhiteLabelTree(userSession, licenseeName)
                     .SelectMany(_ => _.Children.Select(__ => __.Name));
-            if (userSession.SubsidiaryViewType != (byte)SubsidiaryViewType.NormalManagement && userSession.UserLevel != UserLevelType.Subsidiary)
+            if (CanViewMainlineContact)
             {
                 allowedSubsidiaryList = allowedSubsidiaryList.Concat(new[] { licenseeName });
             }
