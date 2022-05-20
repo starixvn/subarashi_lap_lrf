@@ -94,6 +94,16 @@ namespace Fanex.Athena.Api.BetList
 
         [HttpGet]
         [ValidationApiRequest(ObjectName = "metaModel", IsValidCurrency = true)]
+        public async Task<dynamic> BitCoin([FromUri] LiveReportBetListMetaModel metaModel, int page, int rows)
+        {
+            const string UspName = "Lrf_BetList_LiveReport";
+            metaModel.ProductCodeList += $",{Product.BTC}";
+
+            return await GetPagingData(metaModel, UspName, page, rows).ConfigureAwait(false);
+        }
+
+        [HttpGet]
+        [ValidationApiRequest(ObjectName = "metaModel", IsValidCurrency = true)]
         public async Task<dynamic> VS3([FromUri] LiveReportBetListMetaModel metaModel, int page, int rows)
         {
             const string UspName = "Lrf_BetList_LiveReport";

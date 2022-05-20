@@ -3067,6 +3067,9 @@
   <data name="IsGroupInOriginalCurrency" xml:space="preserve">
     <value>Display group breakdown in original currency</value>
   </data>
+  <data name="ProductBTC" xml:space="preserve">
+    <value>Bitcoin</value>
+  </data>
   <data name="LeagueName" xml:space="preserve">
     <value>League name</value>
   </data>

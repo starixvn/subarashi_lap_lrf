@@ -1,4 +1,4 @@
-﻿// Generated at: 5/17/2022 10:35:17 AM
+﻿// Generated at: 5/17/2022 4:04:41 PM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -655,6 +655,7 @@ ProductAPM:"AdvantPlay Mini",
 ProductBA:"BA",
 ProductBGG:"BG",
 ProductBT:"Bet Trade",
+ProductBTC:"Bitcoin",
 ProductBX:"Exchange",
 ProductCB:"Colossus Bets",
 ProductCC:"Arcadia Gaming",

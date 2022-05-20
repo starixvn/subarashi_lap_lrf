@@ -1,4 +1,4 @@
-﻿// Generated at: 3/25/2022 3:43:55 PM
+﻿// Generated at: 5/17/2022 4:04:15 PM
 var _language_zh_TW = {
 AA:"客客",
 AbnormalBet:"非正規註單",
@@ -470,6 +470,7 @@ PreGame:"遊戲開始前",
 Prev:"上個",
 Product:"產品",
 ProductBGG:"大遊真人",
+ProductBTC:"比特幣",
 ProductCC:"樂卡迪亞",
 ProductCG:"CG電子",
 ProductCO:"即時兌現",

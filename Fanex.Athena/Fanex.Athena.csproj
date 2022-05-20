@@ -717,6 +717,7 @@
     <Content Include="www\css\build\dev\pages\reports\godoffortunewinLoss.css.map" />
     <Content Include="www\css\source\pages\playerBatchUpdate\index.scss" />
     <Content Include="Views\Desktop\Report\LeagueWinLoss\Main.cshtml" />
+    <Content Include="Views\Desktop\BetList\LiveReport\BitCoin.cshtml" />
     <Content Include="www\css\build\dev\reactpages\leaguewinloss\index.chunk.js.map" />
     <Content Include="www\css\build\dev\reactpages\leaguewinloss\index.css.map" />
     <Content Include="Views\Desktop\Report\LiveReport\MatchList\Index.cshtml" />

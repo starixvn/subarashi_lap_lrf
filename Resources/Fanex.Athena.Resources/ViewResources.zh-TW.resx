@@ -2235,4 +2235,7 @@
   <data name="NetworkLatency" xml:space="preserve">
     <value>由於網絡延遲，無法使用信息，請稍等幾分鐘後再次嘗試。</value>
   </data>
+  <data name="ProductBTC" xml:space="preserve">
+    <value>比特幣</value>
+  </data>
 </root>

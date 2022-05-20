@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 5/17/2022 10:35:17 AM
+// Generated at: 5/17/2022 4:04:41 PM
 window._language_zh_Hans = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -564,6 +564,7 @@ window._language_zh_Hans = {
   Prev: "上个月",
   Product: "产品",
   ProductBGG: "大遊真人",
+  ProductBTC: "比特币",
   ProductCC: "乐卡迪亚",
   ProductCG: "CG电子",
   ProductCO: "实时兑现",
