@@ -74,7 +74,7 @@ namespace Fanex.Athena.Controllers.Report
         [HttpPost]
         [CustomValidateAntiForgery]
         [ValidationWebRequest]
-        [AutoBindMetaModel(BindAgent = true)]
+        [AutoBindMetaModel(BindAgent = true, BindProductOptions = true)]
         public async Task<ActionResult> Excel(TurnoverMetaModel metaModel)
         {
             var licenseeSession = SessionServiceInstance.LicenseeSession;
