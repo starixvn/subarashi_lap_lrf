@@ -2240,4 +2240,7 @@
     <value>篮球台</value>
     <comment>ignorejs</comment>
   </data>
+  <data name="ProductBTC" xml:space="preserve">
+    <value>比特币</value>
+  </data>
 </root>

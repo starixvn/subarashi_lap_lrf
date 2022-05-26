@@ -23,8 +23,8 @@
 
     public class LicenseeWinLossDataAccess : BaseDataAccess, ILicenseeWinLossDataAccess
     {
-        private readonly string[] _ignoredLicenseeWLProducts = new[] { Product.BA, Product.SLT };
-        private readonly string[] _ignoredTurnoverProducts = new[] { Product.BT, Product.CO, Product.SLT };
+        private readonly string[] _ignoredLicenseeWLProducts = new[] { Product.BA, Product.SLT, Product.BTC };
+        private readonly string[] _ignoredTurnoverProducts = new[] { Product.BT, Product.CO, Product.SLT, Product.BTC };
 
         private readonly IBalanceUpDataAccess _balanceUpDataAccess;
 

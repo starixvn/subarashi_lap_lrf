@@ -1,4 +1,4 @@
-﻿// Generated at: 5/17/2022 10:35:17 AM
+﻿// Generated at: 5/17/2022 4:04:41 PM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -587,6 +587,7 @@ ProblemPlayer:"问题玩家",
 Product:"产品",
 ProductAB:"欧博",
 ProductBGG:"大遊真人",
+ProductBTC:"比特币",
 ProductCC:"乐卡迪亚",
 ProductCG:"CG电子",
 ProductCO:"实时兑现",

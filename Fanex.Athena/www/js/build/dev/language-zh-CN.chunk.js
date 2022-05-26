@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 3/25/2022 3:44:03 PM
+﻿// Generated at: 5/17/2022 4:04:41 PM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -682,6 +682,7 @@ ProblemPlayer:"问题玩家",
 Product:"产品",
 ProductAB:"欧博",
 ProductBGG:"大遊真人",
+ProductBTC:"比特币",
 ProductCC:"乐卡迪亚",
 ProductCG:"CG电子",
 ProductCO:"实时兑现",
@@ -787,6 +788,7 @@ Status:"状态",
 Su:"Su",
 Submit:"提交",
 Subsidiary:"子网站",
+Subsidiary2:"子代理",
 SubsidiaryPerformance:"子网站报告",
 SubsidiarySearch:"子网站搜寻",
 SubsidiaryWL:"子网站输赢",

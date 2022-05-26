@@ -2845,4 +2845,7 @@
   <data name="Subsidiary2" xml:space="preserve">
     <value>子代理</value>
   </data>
+  <data name="ProductBTC" xml:space="preserve">
+    <value>比特币</value>
+  </data>
 </root>

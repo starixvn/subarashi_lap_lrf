@@ -8543,8 +8543,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed"), __webpack_require__(/*! common/querystring */ "./www/js/source/common/querystring.js"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js"), __webpack_require__(/*! lib/jqgrid/jquery.jqgrid.additional */ "./www/js/source/lib/jqgrid/jquery.jqgrid.additional.js"), __webpack_require__(/*! lib/linq */ "./www/js/source/lib/linq.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, QueryString, Site, jqGridAdditional) {
         'use strict';
-        const IGNORED_LICENSEEWL_PRODUCTS = ['BA', 'SLT'];
-        const IGNORED_TURNOVER_PRODUCTS = ['BT', 'CO', 'SLT'];
+        const IGNORED_LICENSEEWL_PRODUCTS = ['BA', 'SLT', 'BTC'];
+        const IGNORED_TURNOVER_PRODUCTS = ['BT', 'CO', 'SLT', 'BTC'];
         const _me =
         {
             isDisableBetList: false,

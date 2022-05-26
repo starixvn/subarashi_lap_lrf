@@ -87,6 +87,20 @@
 
         [HttpGet]
         [ValidationWebRequest(IsValidCurrency = true)]
+        public Task<ActionResult> Bitcoin(LiveReportBetListMetaModel metaModel)
+        {
+            metaModel.ProductName = ViewResources.ProductBTC;
+            metaModel.ProductCodeList += $",{Product.BTC}";
+
+            return ProcessRequest(
+                metaModel,
+                "Lrf_BetList_LiveReport",
+                "~/Views/Desktop/BetList/LiveReport/BitCoin.cshtml",
+                metaModel.ProductName);
+        }
+
+        [HttpGet]
+        [ValidationWebRequest(IsValidCurrency = true)]
         public async Task<ActionResult> VS3(LiveReportBetListMetaModel metaModel)
         {
             var caption = CacheRefAdapter.GetSportName(metaModel.SportType);

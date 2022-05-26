@@ -2,8 +2,8 @@
     ['jquery', 'common/querystring', 'common/site', 'lib/jqgrid/jquery.jqgrid.additional', 'lib/linq'],
     function ($, QueryString, Site, jqGridAdditional) {
         'use strict';
-        const IGNORED_LICENSEEWL_PRODUCTS = ['BA', 'SLT'];
-        const IGNORED_TURNOVER_PRODUCTS = ['BT', 'CO', 'SLT'];
+        const IGNORED_LICENSEEWL_PRODUCTS = ['BA', 'SLT', 'BTC'];
+        const IGNORED_TURNOVER_PRODUCTS = ['BT', 'CO', 'SLT', 'BTC'];
         const _me =
         {
             isDisableBetList: false,
