@@ -2717,7 +2717,7 @@ const DataGrid = ({
       })
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
       className: "material-icons"
-    }, "edit")), !contact.IsMain && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    }, "edit")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       className: "btn-default btn-link btn-icon delete-icon",
       onClick: () => setModificationAction({
         type: _lib_contants__WEBPACK_IMPORTED_MODULE_8__["ModificationActionType"].DeleteContact,

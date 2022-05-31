@@ -60,14 +60,14 @@ export const DataGrid = ({ contactList, setModificationAction }) => {
                 >
                     <i className="material-icons">edit</i>
                 </button>
-                {!contact.IsMain && <button className="btn-default btn-link btn-icon delete-icon"
+                <button className="btn-default btn-link btn-icon delete-icon"
                     onClick={() => setModificationAction({
                         type: ModificationActionType.DeleteContact, data:
                             { contactId: contact.ContactID, contactName: contact.ContactName }
                     })}
                 >
                     <i className="material-icons">delete</i>
-                </button>}
+                </button>
             </Cell>
         </Row>)
     }, [contactList])
