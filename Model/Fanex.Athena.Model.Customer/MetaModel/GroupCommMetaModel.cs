@@ -119,6 +119,14 @@
 
         public decimal VGAComm { get; set; }
 
+        public decimal CGComm { get; set; }
+
+        public decimal APComm { get; set; }
+
+        public decimal APMComm { get; set; }
+
+        public decimal VS3Comm { get; set; }
+
         public void MapQuery()
         {
             CommValues = new Dictionary<string, decimal>();
@@ -151,6 +159,10 @@
             CommValues.Add(Product.HB, HBComm);
 
             CommValues.Add(Product.VGA, VGAComm);
+            CommValues.Add(Product.CG, CGComm);
+            CommValues.Add(Product.AP, APComm);
+            CommValues.Add(Product.APM, APMComm);
+            CommValues.Add(Product.VS3, VS3Comm);
         }
 
         public void MapData(IDataReader reader, IDictionary<string, string> columns, IDictionary<string, bool> visibility)
