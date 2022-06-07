@@ -24,6 +24,7 @@ namespace Fanex.Athena.Service.Core.OAuth
                 UseCookies = false,
                 AutomaticDecompression = DecompressionMethods.GZip
             });
+            _httpClient.DefaultRequestHeaders.ExpectContinue = false;
         }
 
         public async Task<IOAuthInfo> RequestOAuthInfoAsync(string grantType, IDictionary<string, string> parameters)
