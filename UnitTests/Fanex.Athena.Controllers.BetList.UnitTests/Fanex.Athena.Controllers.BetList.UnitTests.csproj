@@ -105,7 +105,6 @@
     <Compile Include="RunningMatchBetListControllerTest.cs" />
     <Compile Include="RunningMatchChoiceBetListControllerTest.cs" />
     <Compile Include="WinlossByBetTypeBetListControllerTest.cs" />
-    <Compile Include="WinlossByLeagueBetListControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Controller\Fanex.Athena.Controllers.Base\Fanex.Athena.Controllers.Base.csproj">

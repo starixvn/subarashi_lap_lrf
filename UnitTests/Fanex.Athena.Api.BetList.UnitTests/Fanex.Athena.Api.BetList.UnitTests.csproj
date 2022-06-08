@@ -107,7 +107,6 @@
     <Compile Include="RunningMatchBetListControllerTest.cs" />
     <Compile Include="RunningMatchChoiceBetListControllerTest.cs" />
     <Compile Include="WinlossByBetTypeBetListControllerTest.cs" />
-    <Compile Include="WinlossByLeagueBetListControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

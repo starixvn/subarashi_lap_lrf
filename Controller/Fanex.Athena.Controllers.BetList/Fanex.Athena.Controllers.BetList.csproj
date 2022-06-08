@@ -132,7 +132,6 @@
     <Compile Include="RunningBettypesBetListController.cs" />
     <Compile Include="RunningMatchBetListController.cs" />
     <Compile Include="RunningMatchChoiceBetListController.cs" />
-    <Compile Include="WinlossByLeagueBetListController.cs" />
     <Compile Include="WinlossByBetTypeBetListController.cs" />
     <Compile Include="LicenseeWinLossBetListController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

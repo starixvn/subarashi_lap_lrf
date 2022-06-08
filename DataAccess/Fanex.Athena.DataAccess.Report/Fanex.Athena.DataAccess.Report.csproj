@@ -105,7 +105,6 @@
     <Compile Include="Interfaces\ISabaVirtualSportsWinLossDataAccess.cs" />
     <Compile Include="Interfaces\ISpecialLicenseeWinLossDataAccess.cs" />
     <Compile Include="Interfaces\ISubsidiaryPerformanceDataAccess.cs" />
-    <Compile Include="Interfaces\IGoldDeluxeWinLossDataAccess.cs" />
     <Compile Include="Interfaces\IWeeklyLiveMatchDataAccess.cs" />
     <Compile Include="SabaVirtualSportsWinLossDataAccess.cs" />
     <Compile Include="SpecialLicenseeWinLossDataAccess.cs" />
@@ -113,14 +112,11 @@
     <Compile Include="ColossusBetsWinLossDataAccess.cs" />
     <Compile Include="LicenseeWinLossByTimeZoneDataAccess.cs" />
     <Compile Include="SubsidiaryPerformanceDataAccess.cs" />
-    <Compile Include="GoldDeluxeWinLossDataAccess.cs" />
     <Compile Include="ThirdPartyWinLossDataAccess.cs" />
     <Compile Include="WeeklyLiveMatchDataAccess.cs" />
-    <Compile Include="WinLossByLeagueDataAccess.cs" />
     <Compile Include="Interfaces\IActiveCustomerSummaryDataAccess.cs" />
     <Compile Include="Interfaces\IAgCasinoBalanceDataAccess.cs" />
     <Compile Include="Interfaces\IThirdPartyWinLossDataAccess.cs" />
-    <Compile Include="Interfaces\IWinLossByLeagueDataAccess.cs" />
     <Compile Include="CustomerPendingFundsDataAccess.cs" />
     <Compile Include="CustomerTurnoverDataAccess.cs" />
     <Compile Include="WinLossByProductDataAccess.cs">

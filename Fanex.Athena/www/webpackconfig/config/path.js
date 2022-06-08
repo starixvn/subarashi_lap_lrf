@@ -40,7 +40,6 @@ var cssPaths = {
     cashouthistory: ["./www/css/source/pages/betlist/cashouthistory.main.scss", "./www/css/source/extensions/popup-ex.scss"],
 
     winlossbyproduct: ["./www/css/source/pages/report/winlossbyproduct.scss"],
-    winlossbyleague: ["./www/css/source/pages/report/winlossbyleague.scss"],
     matchwinloss: ["./www/css/source/pages/report/matchwinloss.scss"],
     platformwinloss: ["./www/css/source/pages/report/platformwinloss.scss"],
     winlossbybettype: ["./www/css/source/pages/report/winlossbybettype.scss"],
@@ -55,7 +54,6 @@ var cssPaths = {
     activecustomersummary: ["./www/css/source/pages/report/activecustomersummary.scss"],
     agcasinowinloss: ["./www/css/source/pages/report/agcasinowinloss.scss"],
     customerbalance: ["./www/css/source/pages/report/customerbalance.scss"],
-    golddeluxewinloss: ["./www/css/source/pages/report/golddeluxewinloss.scss"],
     colossusbetswinloss: ["./www/css/source/pages/report/colossusbetswinloss.scss"],
     customerpendingfunds: ["./www/css/source/pages/report/customerpendingfunds.scss"],
     customerturnover: ["./www/css/source/pages/report/customerturnover.scss"],
@@ -105,7 +103,6 @@ var scriptPaths = {
     cashoutwinloss: "./www/js/source/pages/report/cashoutwinloss/main.js",
 
     winlossbyproduct: "./www/js/source/pages/report/winlossbyproduct/main-winlossbyproduct.js",
-    winlossbyleague: "./www/js/source/pages/report/winlossbyleague/main.js",
     matchwinloss: "./www/js/source/pages/report/matchwinloss/main.js",
     platformwinloss: "./www/js/source/pages/report/platformwinloss/main-platformwinloss.js",
     winlossbybettype: "./www/js/source/pages/report/winlossbybettype/main.js",
@@ -131,7 +128,6 @@ var scriptPaths = {
     activecustomersummary: "./www/js/source/pages/report/activecustomersummary/main.js",
     agcasinowinloss: "./www/js/source/pages/report/agcasinowinloss/main.js",
     customerbalance: "./www/js/source/pages/report/customerbalance/main.js",
-    golddeluxewinloss: "./www/js/source/pages/report/thirdpartywinloss/main-golddeluxewinloss.js",
     colossusbetswinloss: "./www/js/source/pages/report/thirdpartywinloss/main-colossusbetswinloss.js",
     customerpendingfunds: "./www/js/source/pages/report/customerpendingfunds/main.js",
     customerturnover: "./www/js/source/pages/report/customerturnover/main.js",
