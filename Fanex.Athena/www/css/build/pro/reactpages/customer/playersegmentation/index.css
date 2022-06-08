@@ -1222,3 +1222,6 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
 .caret-block div {
   display: inherit; }
 
+.page-filter {
+  padding-bottom: 30px; }
+

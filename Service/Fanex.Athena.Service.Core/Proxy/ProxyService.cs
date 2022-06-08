@@ -20,7 +20,6 @@
             {
                 Timeout = Timeout.InfiniteTimeSpan
             };
-            _client.DefaultRequestHeaders.ExpectContinue = false;
         }
 
         public async Task<HttpResponseMessage> HandleRequest(string apiKey, string apiUrl, HttpRequest originalRequest)

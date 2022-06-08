@@ -243,11 +243,6 @@ export class FormFilter extends PureComponent {
                         </div>
                     </div>
                 </div>
-                {AppData.HasVipManagement && <div className="row">
-                    <div className="col-12 text-bold">
-                        {`${decode(LangHelper.getSingleResource("NotAllowedBAPlayerTurnonVip"))}`}
-                    </div>
-                </div>}
             </CollapsiblePanel>
         )
     }
