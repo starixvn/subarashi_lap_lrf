@@ -203,7 +203,8 @@
                 Product.VGA,
                 Product.CG,
                 Product.AP,
-                Product.APM
+                Product.APM,
+                Product.FGGL
             };
 
             return string.Join(", ", GetProductRequireNote(productsRequireUseName));
