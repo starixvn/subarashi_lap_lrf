@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 5/17/2022 4:04:41 PM
+﻿// Generated at: 6/8/2022 9:57:58 AM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -757,6 +757,7 @@ ProductCC:"Arcadia Gaming",
 ProductCG:"CG",
 ProductCO:"Cash Out",
 ProductCS:"Saba Casino",
+ProductFGGL:"FGG",
 ProductFW:"Fishing World",
 ProductGD:"Gold Deluxe",
 ProductGDG:"GDG",

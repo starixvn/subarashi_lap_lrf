@@ -89,7 +89,7 @@ namespace Fanex.Athena.Model.Core.DTO.Common
         public const string BX = "BX";
 
         public const string AP = "AP";
-        
+
         public const string BTC = "BTC";
         
         public const string SPR = "SPR";
@@ -97,6 +97,8 @@ namespace Fanex.Athena.Model.Core.DTO.Common
         public const string APM = "APM";
 
         public const string VS3 = "VS3";
+
+        public const string FGGL = "FGGL";
 
         #endregion Field
 

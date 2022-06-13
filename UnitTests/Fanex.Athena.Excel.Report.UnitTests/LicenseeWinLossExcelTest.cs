@@ -31,30 +31,30 @@ namespace Fanex.Athena.Excel.Report.UnitTests
         private const int ColumnCurrency = 4;
 
         private const int ColumnTurnoverSportBook = 5;
-        private const int ColumnTurnoverTotal = 39;
+        private const int ColumnTurnoverTotal = 40;
 
-        private const int ColumnActualStake = 40;
+        private const int ColumnActualStake = 41;
 
-        private const int ColumnBuyBackAmountSportsbook = 41;
-        private const int ColumnBuyBackAmountBA = 42;
-        private const int ColumnBuyBackAmountTotal = 43;
+        private const int ColumnBuyBackAmountSportsbook = 42;
+        private const int ColumnBuyBackAmountBA = 43;
+        private const int ColumnBuyBackAmountTotal = 44;
 
-        private const int ColumnTotalTransaction = 44;
+        private const int ColumnTotalTransaction = 45;
 
-        private const int ColumnCustomerWl = 45;
-        private const int ColumnCustomerComm = 46;
-        private const int ColumnCustomerTotal = 47;
+        private const int ColumnCustomerWl = 46;
+        private const int ColumnCustomerComm = 47;
+        private const int ColumnCustomerTotal = 48;
 
-        private const int ColumnLicenseeWlSportsBook = 48;
-        private const int ColumnLicenseeWlTotal = 82;
+        private const int ColumnLicenseeWlSportsBook = 49;
+        private const int ColumnLicenseeWlTotal = 84;
 
-        private const int ColumnBetTradeCommission = 83;
-        private const int ColumnCashOutCommission = 84;
-        private const int ColumnBaCommission = 85;
-        private const int ColumnAmtDueToBetTrade = 86;
-        private const int ColumnAmtDueToBa = 87;
+        private const int ColumnBetTradeCommission = 85;
+        private const int ColumnCashOutCommission = 86;
+        private const int ColumnBaCommission = 87;
+        private const int ColumnAmtDueToBetTrade = 88;
+        private const int ColumnAmtDueToBa = 89;
 
-        private const int ColumnTemplateCount = 88;
+        private const int ColumnTemplateCount = 90;
 
         private const int RowContentTemplate = 3;
 
