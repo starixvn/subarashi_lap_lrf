@@ -134,7 +134,6 @@
     <Compile Include="DTO\GoldDeluxeWinLoss.cs" />
     <Compile Include="DTO\ThirdPartyWinLoss.cs" />
     <Compile Include="DTO\WeeklyLiveMatch.cs" />
-    <Compile Include="DTO\WinLossByLeague.cs" />
     <Compile Include="DTO\CustPendingFunds.cs" />
     <Compile Include="DTO\CustTurnover.cs" />
     <Compile Include="DTO\CustomerWinLoss.cs" />
@@ -171,7 +170,6 @@
     <Compile Include="MetaModel\ColossusBetsWinLossMetaModel.cs" />
     <Compile Include="MetaModel\ThirdPartyWinLossMetaModel.cs" />
     <Compile Include="MetaModel\WeeklyLiveMatchMetaModel.cs" />
-    <Compile Include="MetaModel\WinLossByLeagueMetaModel.cs" />
     <Compile Include="MetaModel\LiveReportMatchListMetalModel.cs" />
     <Compile Include="MetaModel\ResultPopupMetalModel.cs" />
     <Compile Include="MetaModel\WinLossByProductMetaModel.cs" />
@@ -211,7 +209,6 @@
     <Compile Include="ViewModel\LicenseeWinLossByTimeZoneViewModel.cs" />
     <Compile Include="ViewModel\SubsidiaryPerformanceViewModel.cs" />
     <Compile Include="ViewModel\ThirdPartyWinLossViewModel.cs" />
-    <Compile Include="ViewModel\WinLossByLeagueViewModel.cs" />
     <Compile Include="ViewModel\AgCasinoBalanceViewModel.cs" />
     <Compile Include="ViewModel\LicenseeWinLossGridViewModel.cs" />
     <Compile Include="ViewModel\WinLossByProductViewModel.cs" />

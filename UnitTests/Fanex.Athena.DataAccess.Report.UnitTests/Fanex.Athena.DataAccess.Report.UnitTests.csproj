@@ -81,10 +81,7 @@
     <Compile Include="SabaVirtualSportsWinLossDataAccessTest.cs" />
     <Compile Include="SpecialLicenseeWinLossDataAccessTest.cs" />
     <Compile Include="SubsidiaryPerformanceDataAccessTest.cs" />
-    <Compile Include="GoldDeluxeWinLossDataAccessTest.cs" />
-    <Compile Include="Testable\GoldDeluxeWinLossDataAccessTestable.cs" />
     <Compile Include="WinLossByProductDataAccessTest.cs" />
-    <Compile Include="WinLossByLeagueDataAccessTest.cs" />
     <Compile Include="WinLossByBetTypeDataAccessTest.cs" />
     <Compile Include="WeeklyLiveMatchDataAccessTest.cs" />
     <Compile Include="TurnoverDataAccessTest.cs" />
@@ -139,6 +136,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Testable\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

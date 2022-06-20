@@ -119,14 +119,12 @@
     <Compile Include="WinLossByProductReportControllerTest.cs" />
     <Compile Include="ReportAPI\ReportAPIControllerTest.CustomerTurnover.cs" />
     <Compile Include="ReportAPI\ReportAPIControllerTest.Turnover.cs" />
-    <Compile Include="WinLossByLeagueReportControllerTest.cs" />
     <Compile Include="WinLossByBetTypeReportControllerTest.cs" />
     <Compile Include="TurnoverReportControllerTest.cs" />
     <Compile Include="SettledMatchCountReportControllerTest.cs" />
     <Compile Include="PlatformWinLossReportControllerTest.cs" />
     <Compile Include="MatchWinLossReportControllerTest.cs" />
     <Compile Include="LiveReportControllerTest.cs" />
-    <Compile Include="GoldDeluxeWinLossReportControllerTest.cs" />
     <Compile Include="CustomerWinLossReportControllerTest.cs" />
     <Compile Include="CustomerTurnoverReportControllerTest.cs" />
     <Compile Include="CustomerPendingFundsReportControllerTest.cs" />

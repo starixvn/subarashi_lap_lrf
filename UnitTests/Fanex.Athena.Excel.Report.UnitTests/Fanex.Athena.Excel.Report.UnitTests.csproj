@@ -79,12 +79,10 @@
     <Compile Include="TestableClasses\MatchWinLossExcelTestable.cs" />
     <Compile Include="TestableClasses\GoldDeluxeWinLossExcelTestable.cs" />
     <Compile Include="TestableClasses\WinlossByProductExcelTestable.cs" />
-    <Compile Include="TestableClasses\WinlossByLeagueExcelTestable.cs" />
     <Compile Include="LicenseeWinLossExcelTest.cs" />
     <Compile Include="MatchWinLossExcelTest.cs" />
     <Compile Include="GoldDeluxeWinLossExcelTest.cs" />
     <Compile Include="WinlossByProductExcelTest.cs" />
-    <Compile Include="WinlossByLeagueExcelTest.cs" />
     <Compile Include="WinLossByBetTypeExcelTest.cs" />
     <Compile Include="TestableClasses\WinLossByBetTypeExcelTestable.cs" />
     <Compile Include="WeeklyLiveMatchExcelTest.cs" />

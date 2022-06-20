@@ -1408,8 +1408,6 @@
     <Content Include="www\css\build\dev\pages\reports\customerturnover.css" />
     <Content Include="www\css\build\dev\pages\reports\customerwinloss.chunk.js" />
     <Content Include="www\css\build\dev\pages\reports\customerwinloss.css" />
-    <Content Include="www\css\build\dev\pages\reports\golddeluxewinloss.chunk.js" />
-    <Content Include="www\css\build\dev\pages\reports\golddeluxewinloss.css" />
     <Content Include="www\css\build\dev\pages\reports\licenseewinloss.chunk.js" />
     <Content Include="www\css\build\dev\pages\reports\licenseewinloss.css" />
     <Content Include="www\css\build\dev\pages\reports\livereport.chunk.js" />
@@ -1430,8 +1428,6 @@
     <Content Include="www\css\build\dev\pages\reports\weeklylivematch.css" />
     <Content Include="www\css\build\dev\pages\reports\winlossbybettype.chunk.js" />
     <Content Include="www\css\build\dev\pages\reports\winlossbybettype.css" />
-    <Content Include="www\css\build\dev\pages\reports\winlossbyleague.chunk.js" />
-    <Content Include="www\css\build\dev\pages\reports\winlossbyleague.css" />
     <Content Include="www\css\build\dev\pages\reports\winlossbyproduct.chunk.js" />
     <Content Include="www\css\build\dev\pages\reports\winlossbyproduct.css" />
     <Content Include="www\css\build\dev\pages\totalbet\mixparlay.chunk.js" />
@@ -1470,7 +1466,6 @@
     <Content Include="www\css\build\pro\pages\reports\customerpendingfunds.css" />
     <Content Include="www\css\build\pro\pages\reports\customerturnover.css" />
     <Content Include="www\css\build\pro\pages\reports\customerwinloss.css" />
-    <Content Include="www\css\build\pro\pages\reports\golddeluxewinloss.css" />
     <Content Include="www\css\build\pro\pages\utility\licenseelist.css" />
     <Content Include="www\css\build\pro\um.css" />
     <Content Include="www\css\source\components\jquery.colorpicker\colorPicker.css" />
@@ -1531,11 +1526,6 @@
     <Content Include="www\css\build\dev\pages\reports\activecustomersummary.css.map" />
     <Content Include="www\css\build\dev\pages\reports\customerbalance.chunk.js.map" />
     <Content Include="www\css\build\dev\pages\reports\customerbalance.css.map" />
-    <Content Include="Views\Desktop\Report\GoldDeluxeWinLoss\Content.cshtml" />
-    <Content Include="Views\Desktop\Report\GoldDeluxeWinLoss\Filter.cshtml" />
-    <Content Include="Views\Desktop\Report\GoldDeluxeWinLoss\Main.cshtml" />
-    <Content Include="www\css\build\dev\pages\reports\golddeluxewinloss.chunk.js.map" />
-    <Content Include="www\css\build\dev\pages\reports\golddeluxewinloss.css.map" />
     <Content Include="Views\Desktop\Report\ColossusBetsWinLoss\Content.cshtml" />
     <Content Include="Views\Desktop\Report\ColossusBetsWinLoss\Filter.cshtml" />
     <Content Include="Views\Desktop\Report\ColossusBetsWinLoss\Main.cshtml" />
@@ -1587,7 +1577,6 @@
     <Content Include="www\css\build\dev\pages\customer\commgroupdetail.css.map" />
     <Content Include="www\css\source\pages\report\activecustomersummary.scss" />
     <Content Include="www\css\source\pages\report\agcasinowinloss.scss" />
-    <Content Include="www\css\source\pages\report\golddeluxewinloss.scss" />
     <Content Include="www\css\source\pages\report\thirdpartywinloss.scss" />
     <Content Include="www\css\source\pages\report\colossusbetswinLoss.scss" />
     <Content Include="www\css\source\pages\report\customerpendingfunds.scss" />
@@ -1627,7 +1616,6 @@
     <Content Include="www\css\build\pro\pages\reports\turnover.css" />
     <Content Include="www\css\build\pro\pages\reports\weeklylivematch.css" />
     <Content Include="www\css\build\pro\pages\reports\winlossbybettype.css" />
-    <Content Include="www\css\build\pro\pages\reports\winlossbyleague.css" />
     <Content Include="www\css\build\pro\pages\reports\winlossbyproduct.css" />
     <Content Include="www\css\build\pro\pages\totalbet\mixparlay.css" />
     <Content Include="www\css\build\pro\pages\totalbet\totalbetlayout.css" />
@@ -1673,9 +1661,6 @@
     <Content Include="Views\Desktop\Report\WinLossByProduct\Content.cshtml" />
     <Content Include="www\css\build\dev\pages\reports\winlossbyproduct.chunk.js.map" />
     <Content Include="www\css\build\dev\pages\reports\winlossbyproduct.css.map" />
-    <Content Include="Views\Desktop\Report\WinLossByLeague\Content.cshtml" />
-    <Content Include="Views\Desktop\Report\WinLossByLeague\Filter.cshtml" />
-    <Content Include="Views\Desktop\Report\WinLossByLeague\Main.cshtml" />
     <Content Include="Views\Desktop\Report\MatchWinLoss\Content.cshtml" />
     <Content Include="Views\Desktop\Report\MatchWinLoss\Filter.cshtml" />
     <Content Include="Views\Desktop\Report\MatchWinLoss\Main.cshtml" />
@@ -1696,9 +1681,6 @@
     <Content Include="www\css\build\dev\pages\reports\matchwinloss.css.map" />
     <Content Include="www\css\build\dev\pages\reports\platformwinloss.chunk.js.map" />
     <Content Include="www\css\build\dev\pages\reports\platformwinloss.css.map" />
-    <Content Include="www\css\build\dev\pages\reports\winlossbyleague.chunk.js.map" />
-    <Content Include="www\css\build\dev\pages\reports\winlossbyleague.css.map" />
-    <Content Include="Views\Desktop\BetList\WinLossByLeague\Main.cshtml" />
     <Content Include="Views\Desktop\Report\WinLossByBetType\Main.cshtml" />
     <Content Include="Views\Desktop\Report\WinLossByBetType\Filter.cshtml" />
     <Content Include="Views\Desktop\Report\WinLossByBetType\Content.cshtml" />
@@ -1721,7 +1703,6 @@
     <Content Include="www\css\build\fonts\roboto\Roboto-Regular.woff2" />
     <None Include="www\css\source\pages\report\turnover.scss" />
     <Content Include="www\css\source\pages\report\winlossbybettype.scss" />
-    <None Include="www\css\source\pages\report\winlossbyleague.scss" />
     <None Include="www\css\source\pages\utility\licenseelist.scss" />
     <Content Include="www\js\build\dev\language.chunk.js" />
     <Content Include="www\js\build\dev\pages\betlist\betlist.chunk.js" />
@@ -1757,7 +1738,6 @@
     <Content Include="www\js\build\dev\pages\reports\customerpendingfunds.chunk.js" />
     <Content Include="www\js\build\dev\pages\reports\customerturnover.chunk.js" />
     <Content Include="www\js\build\dev\pages\reports\customerwinloss.chunk.js" />
-    <Content Include="www\js\build\dev\pages\reports\golddeluxewinloss.chunk.js" />
     <Content Include="www\js\build\dev\pages\reports\licenseewinloss.chunk.js" />
     <Content Include="www\js\build\dev\pages\reports\livereport.chunk.js" />
     <Content Include="www\js\build\dev\pages\reports\livereportmatchlist.chunk.js" />
@@ -1768,7 +1748,6 @@
     <Content Include="www\js\build\dev\pages\reports\turnover.chunk.js" />
     <Content Include="www\js\build\dev\pages\reports\weeklylivematch.chunk.js" />
     <Content Include="www\js\build\dev\pages\reports\winlossbybettype.chunk.js" />
-    <Content Include="www\js\build\dev\pages\reports\winlossbyleague.chunk.js" />
     <Content Include="www\js\build\dev\pages\reports\winlossbyproduct.chunk.js" />
     <Content Include="www\js\build\dev\pages\signin\signin.chunk.js" />
     <Content Include="www\js\build\dev\pages\totalbet\firstgoallastgoal.chunk.js" />
@@ -1813,7 +1792,6 @@
     <Content Include="www\js\build\pro\pages\reports\customerpendingfunds.chunk.js" />
     <Content Include="www\js\build\pro\pages\reports\customerturnover.chunk.js" />
     <Content Include="www\js\build\pro\pages\reports\customerwinloss.chunk.js" />
-    <Content Include="www\js\build\pro\pages\reports\golddeluxewinloss.chunk.js" />
     <Content Include="www\js\build\pro\pages\reports\licenseewinloss.chunk.js" />
     <Content Include="www\js\build\pro\pages\reports\livereport.chunk.js" />
     <Content Include="www\js\build\pro\pages\reports\livereportmatchlist.chunk.js" />
@@ -1824,7 +1802,6 @@
     <Content Include="www\js\build\pro\pages\reports\turnover.chunk.js" />
     <Content Include="www\js\build\pro\pages\reports\weeklylivematch.chunk.js" />
     <Content Include="www\js\build\pro\pages\reports\winlossbybettype.chunk.js" />
-    <Content Include="www\js\build\pro\pages\reports\winlossbyleague.chunk.js" />
     <Content Include="www\js\build\pro\pages\reports\winlossbyproduct.chunk.js" />
     <Content Include="www\js\build\pro\pages\signin\signin.chunk.js" />
     <Content Include="www\js\build\pro\pages\totalbet\firstgoallastgoal.chunk.js" />
@@ -1981,8 +1958,6 @@
     <Content Include="www\js\source\pages\report\thirdpartywinloss\main-colossusbetswinloss.js" />
     <Content Include="www\js\source\pages\report\thirdpartywinloss\reports\colossusbetswinloss.js" />
     <Content Include="www\js\source\pages\report\thirdpartywinloss\reports\colossusbetswinloss.option.js" />
-    <Content Include="www\js\source\pages\report\thirdpartywinloss\reports\golddeluxewinloss.js" />
-    <Content Include="www\js\source\pages\report\thirdpartywinloss\main-golddeluxewinloss.js" />
     <Content Include="www\js\source\pages\report\livereport\helper.js" />
     <Content Include="www\js\source\pages\report\livereport\livereport.js" />
     <Content Include="www\js\source\pages\report\livereport\livereportmatchlist.js" />
@@ -2003,7 +1978,6 @@
     <Content Include="www\js\source\pages\report\result\result.js" />
     <Content Include="www\js\source\pages\report\settledmatchcount\main-settledmatchcount.js" />
     <Content Include="www\js\source\pages\report\settledmatchcount\settledmatchcount.js" />
-    <Content Include="www\js\source\pages\report\thirdpartywinloss\reports\golddeluxewinloss.option.js" />
     <Content Include="www\js\source\pages\report\turnover\main.js" />
     <Content Include="www\js\source\pages\report\turnover\turnover.js" />
     <Content Include="www\js\source\pages\report\turnover\turnover.option.js" />
@@ -2012,10 +1986,6 @@
     <Content Include="www\js\source\pages\report\weeklylivematch\weeklylivematch.option.js" />
     <Content Include="www\js\source\pages\report\winlossbybettype\main.js" />
     <Content Include="www\js\source\pages\report\winlossbybettype\winlossbybettype.js" />
-    <Content Include="www\js\source\pages\report\winlossbyleague\main.js" />
-    <Content Include="www\js\source\pages\report\winlossbyleague\winlossbyleague.filter.js" />
-    <Content Include="www\js\source\pages\report\winlossbyleague\winlossbyleague.js" />
-    <Content Include="www\js\source\pages\report\winlossbyleague\winlossbyleague.option.js" />
     <Content Include="www\js\source\pages\report\winlossbyproduct\main-winlossbyproduct.js" />
     <Content Include="www\js\source\pages\report\winlossbyproduct\winlossbyproduct.js" />
     <Content Include="www\js\source\pages\report\winlossbyproduct\winlossbyproduct.option.js" />
@@ -2611,7 +2581,6 @@
     <Content Include="www\js\build\dev\pages\reports\winlossbyproduct.chunk.js.map" />
     <Content Include="www\js\build\dev\pages\reports\matchwinloss.chunk.js.map" />
     <Content Include="www\js\build\dev\pages\reports\platformwinloss.chunk.js.map" />
-    <Content Include="www\js\build\dev\pages\reports\winlossbyleague.chunk.js.map" />
     <Content Include="www\js\build\dev\pages\reports\winlossbybettype.chunk.js.map" />
     <Content Include="www\js\build\dev\pages\betlist\lastbetmonitoring.chunk.js.map" />
     <Content Include="www\js\build\dev\pages\customer\commgrouplist.chunk.js.map" />
@@ -2634,7 +2603,6 @@
     <Content Include="www\js\build\dev\pages\reports\customerbalance.chunk.js.map" />
     <Content Include="www\js\build\dev\pages\reports\agcasinowinloss.chunk.js.map" />
     <Content Include="www\js\build\dev\pages\reports\colossusbetswinloss.chunk.js.map" />
-    <Content Include="www\js\build\dev\pages\reports\golddeluxewinloss.chunk.js.map" />
     <Content Include="www\js\build\dev\pages\reports\customerpendingfunds.chunk.js.map" />
     <Content Include="www\js\build\dev\pages\reports\customerturnover.chunk.js.map" />
     <Content Include="www\js\build\dev\pages\reports\customerwinloss.chunk.js.map" />
@@ -5571,7 +5539,6 @@
     <Content Include="App_Data\Template\CustomerReports\CustomerTurnover.xls" />
     <Content Include="App_Data\Template\CustomerReports\CustomerWinLoss.xls" />
     <Content Include="App_Data\Template\Customers\CustomerList.xls" />
-    <Content Include="App_Data\Template\Reports\WinLossByLeagues.xls" />
     <Content Include="App_Data\Template\Reports\LicenseeWinLoss.xls" />
     <Content Include="App_Data\Template\Reports\LiveReport.xls" />
     <Content Include="App_Data\Template\Reports\MatchWinLoss.xls" />

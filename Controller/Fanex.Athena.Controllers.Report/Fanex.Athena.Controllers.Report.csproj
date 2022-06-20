@@ -159,7 +159,6 @@
     <Compile Include="CustomerPendingFundsReportController.cs" />
     <Compile Include="CustomerTurnoverReportController.cs" />
     <Compile Include="CustomerWinLossReportController.cs" />
-    <Compile Include="GoldDeluxeWinLossReportController.cs" />
     <Compile Include="MatchWinLossReportController.cs" />
     <Compile Include="PlatformWinLossReportController.cs" />
     <Compile Include="Result\ResultKenoReportController.cs" />
@@ -167,7 +166,6 @@
     <Compile Include="SettledMatchCountReportController.cs" />
     <Compile Include="TurnoverReportController.cs" />
     <Compile Include="WinLossByBetTypeReportController.cs" />
-    <Compile Include="WinLossByLeagueReportController.cs" />
     <Compile Include="WinLossByProductReportController.cs" />
     <Compile Include="WeeklyLiveMatchReportController.cs" />
   </ItemGroup>

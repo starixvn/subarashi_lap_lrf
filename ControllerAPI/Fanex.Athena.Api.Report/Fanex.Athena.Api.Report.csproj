@@ -148,7 +148,6 @@
     <Compile Include="CashOutWinLossReportController.cs" />
     <Compile Include="CustomerPendingFundsReportController.cs" />
     <Compile Include="ExchangeWinLossReportController.cs" />
-    <Compile Include="GoldDeluxeWinLossReportController.cs" />
     <Compile Include="LicenseeWinLossByTimeZoneReportController.cs" />
     <Compile Include="CasinoTurnoverReportController.cs" />
     <Compile Include="SabaVirtualSportsWinLossReportController.cs" />
@@ -161,7 +160,6 @@
     <Compile Include="AgCasinoWinLossReportController.cs" />
     <Compile Include="ColossusBetsWinLossReportController.cs" />
     <Compile Include="WeeklyLiveMatchReportController.cs" />
-    <Compile Include="WinLossByLeagueReportController.cs" />
     <Compile Include="LicenseeWinLossReportController.cs" />
     <Compile Include="WinLossByProductReportController.cs" />
   </ItemGroup>

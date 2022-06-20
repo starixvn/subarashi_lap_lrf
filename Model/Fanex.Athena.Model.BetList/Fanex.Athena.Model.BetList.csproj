@@ -103,7 +103,6 @@
     <Compile Include="MetaModel\AdvancedSearchBetListMetaModel.cs" />
     <Compile Include="MetaModel\RefNoBetListMetaModel.cs" />
     <Compile Include="MetaModel\SingleCustomersBetListMetaModel.cs" />
-    <Compile Include="MetaModel\WinLossByLeagueBetListMetaModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\BetListBaseViewModel.cs" />
     <Compile Include="ViewModel\BettingTicketCenterViewModel.cs" />
