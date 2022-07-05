@@ -8098,6 +8098,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Upload External ID List.
+        /// </summary>
+        public static string UploadExternalIdList {
+            get {
+                return ResourceManager.GetString("UploadExternalIdList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not load the file, please check file&apos;s template again !.
         /// </summary>
         public static string UploadFileError {
@@ -8107,7 +8116,16 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upload Vip List.
+        ///   Looks up a localized string similar to Upload System ID List.
+        /// </summary>
+        public static string UploadSystemIdList {
+            get {
+                return ResourceManager.GetString("UploadSystemIdList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload VIP List.
         /// </summary>
         public static string UploadVipList {
             get {

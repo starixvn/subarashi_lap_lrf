@@ -2848,4 +2848,10 @@
   <data name="ProductBTC" xml:space="preserve">
     <value>比特币</value>
   </data>
+  <data name="UploadExternalIdList" xml:space="preserve">
+    <value>上传用户名名单</value>
+  </data>
+  <data name="UploadSystemIdList" xml:space="preserve">
+    <value>上传系统ID名单</value>
+  </data>
 </root>

@@ -1,3 +1,5 @@
+@import "../../../components/forms/radio-buttons";
+
 #player-segmentation { 
     .vip-player-management {
         .form-action {
@@ -10,6 +12,17 @@
                 background-color: $bgHeaderTableLevel1;
                 color: $white;
                 padding: 0 30px;
+            }
+        }
+    }
+
+    .dropzone {
+        .radio-group {
+            position: absolute;
+            top: 0;
+            
+            span {
+                display: block;
             }
         }
     }
