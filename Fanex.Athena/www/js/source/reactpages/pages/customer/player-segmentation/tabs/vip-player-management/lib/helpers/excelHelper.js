@@ -8,7 +8,7 @@ export default class ExcelHelper {
     }
 
     static isValidHeader(header) {
-        return header && header.length > 0;
+        return header && header.length == 1;
     }
 
     static isValidContent(content) {
