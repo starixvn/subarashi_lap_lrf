@@ -178,6 +178,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add New.
+        /// </summary>
+        public static string AddNew {
+            get {
+                return ResourceManager.GetString("AddNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add successfully!.
         /// </summary>
         public static string AddSuccess {
@@ -1825,6 +1834,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Current Winning Threshold.
+        /// </summary>
+        public static string CurrentWinningThreshold {
+            get {
+                return ResourceManager.GetString("CurrentWinningThreshold", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Customer.
         /// </summary>
         public static string Customer {
@@ -2122,6 +2140,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Daily Winning Threshold.
+        /// </summary>
+        public static string DailyWinningThreshold {
+            get {
+                return ResourceManager.GetString("DailyWinningThreshold", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to  data.
         /// </summary>
         public static string Data {
@@ -2298,6 +2325,15 @@ namespace Fanex.Athena.Resources {
         public static string DeleteGroup {
             get {
                 return ResourceManager.GetString("DeleteGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} will be removed from the monitored player list. Are you sure you want to remove?.
+        /// </summary>
+        public static string DeleteMonitoredPlayerConfirm {
+            get {
+                return ResourceManager.GetString("DeleteMonitoredPlayerConfirm", resourceCulture);
             }
         }
         
@@ -2626,6 +2662,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Either System ID or External ID is required.
+        /// </summary>
+        public static string EitherSystemIdOrExternalIdIsRequired {
+            get {
+                return ResourceManager.GetString("EitherSystemIdOrExternalIdIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email.
         /// </summary>
         public static string Email {
@@ -2865,6 +2910,15 @@ namespace Fanex.Athena.Resources {
         public static string ExcludeTestData {
             get {
                 return ResourceManager.GetString("ExcludeTestData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This player is existing in the list. Please check again!.
+        /// </summary>
+        public static string ExistingInMonitoredPlayerList {
+            get {
+                return ResourceManager.GetString("ExistingInMonitoredPlayerList", resourceCulture);
             }
         }
         
@@ -3661,6 +3715,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} will be added into the list of monitored players with the Daily Winning Threshold = {1}. Are you sure you want to add?.
+        /// </summary>
+        public static string InsertMonitoredPlayerConfirm {
+            get {
+                return ResourceManager.GetString("InsertMonitoredPlayerConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The Real Time report shall support instant data from {0}..
         /// </summary>
         public static string InstantDataReportNote {
@@ -3711,6 +3774,24 @@ namespace Fanex.Athena.Resources {
         public static string InvalidEmail {
             get {
                 return ResourceManager.GetString("InvalidEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid External ID.
+        /// </summary>
+        public static string InvalidExternalId {
+            get {
+                return ResourceManager.GetString("InvalidExternalId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid External ID(s): {0}.
+        /// </summary>
+        public static string InvalidExternalIdBatchCommand {
+            get {
+                return ResourceManager.GetString("InvalidExternalIdBatchCommand", resourceCulture);
             }
         }
         
@@ -3774,6 +3855,42 @@ namespace Fanex.Athena.Resources {
         public static string InvalidSubsidiaryNameMsg {
             get {
                 return ResourceManager.GetString("InvalidSubsidiaryNameMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid System ID.
+        /// </summary>
+        public static string InvalidSystemId {
+            get {
+                return ResourceManager.GetString("InvalidSystemId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid System ID(s): {0}.
+        /// </summary>
+        public static string InvalidSystemIdBatchCommand {
+            get {
+                return ResourceManager.GetString("InvalidSystemIdBatchCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid Daily Winning Threshold.
+        /// </summary>
+        public static string InvalidWinningThreshold {
+            get {
+                return ResourceManager.GetString("InvalidWinningThreshold", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid Daily Winning Threshold(s): {0}.
+        /// </summary>
+        public static string InvalidWinningThresholdBatchCommand {
+            get {
+                return ResourceManager.GetString("InvalidWinningThresholdBatchCommand", resourceCulture);
             }
         }
         
@@ -3936,6 +4053,15 @@ namespace Fanex.Athena.Resources {
         public static string LastName {
             get {
                 return ResourceManager.GetString("LastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last Reached Date (GMT -4).
+        /// </summary>
+        public static string LastReachedDate {
+            get {
+                return ResourceManager.GetString("LastReachedDate", resourceCulture);
             }
         }
         
@@ -4561,6 +4687,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Only allow to upload maximum of 2000 data rows, please check your file again!.
+        /// </summary>
+        public static string MaxBatchUpdateMonitoredPlayerError {
+            get {
+                return ResourceManager.GetString("MaxBatchUpdateMonitoredPlayerError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Max Bet.
         /// </summary>
         public static string MaxBet {
@@ -4975,6 +5110,33 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Monitored Player.
+        /// </summary>
+        public static string MonitoredPlayer {
+            get {
+                return ResourceManager.GetString("MonitoredPlayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Monitored Player List.
+        /// </summary>
+        public static string MonitoredPlayerList {
+            get {
+                return ResourceManager.GetString("MonitoredPlayerList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notification History {0} -&gt; {1} - {2}.
+        /// </summary>
+        public static string MonitoredPlayerNotificationHistoryTitle {
+            get {
+                return ResourceManager.GetString("MonitoredPlayerNotificationHistoryTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Month.
         /// </summary>
         public static string Month {
@@ -5236,6 +5398,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No. of Reached.
+        /// </summary>
+        public static string NoOfReached {
+            get {
+                return ResourceManager.GetString("NoOfReached", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No product found.
         /// </summary>
         public static string NoProductFound {
@@ -5290,6 +5461,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not update because the player no longer exists on the monitored list..
+        /// </summary>
+        public static string NotExistingInMonitoredPlayerList {
+            get {
+                return ResourceManager.GetString("NotExistingInMonitoredPlayerList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Notification.
         /// </summary>
         public static string Notification {
@@ -5304,6 +5484,15 @@ namespace Fanex.Athena.Resources {
         public static string NotificationDateRangeLimitNote {
             get {
                 return ResourceManager.GetString("NotificationDateRangeLimitNote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notification History.
+        /// </summary>
+        public static string NotificationHistory {
+            get {
+                return ResourceManager.GetString("NotificationHistory", resourceCulture);
             }
         }
         
@@ -6442,6 +6631,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reached Date.
+        /// </summary>
+        public static string ReachedDate {
+            get {
+                return ResourceManager.GetString("ReachedDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Real Name.
         /// </summary>
         public static string RealName {
@@ -7189,6 +7387,24 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Successfully update.
+        /// </summary>
+        public static string SuccessfullyUpdate {
+            get {
+                return ResourceManager.GetString("SuccessfullyUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Successfully update: {0}.
+        /// </summary>
+        public static string SuccessfullyUpdateBatchCommand {
+            get {
+                return ResourceManager.GetString("SuccessfullyUpdateBatchCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Successfully update: {0}.
         /// </summary>
         public static string SuccessUpdateVipStatus {
@@ -7563,6 +7779,15 @@ namespace Fanex.Athena.Resources {
         public static string TotalTurnover {
             get {
                 return ResourceManager.GetString("TotalTurnover", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total Winning Amount.
+        /// </summary>
+        public static string TotalWinningAmount {
+            get {
+                return ResourceManager.GetString("TotalWinningAmount", resourceCulture);
             }
         }
         
@@ -8152,6 +8377,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Upload File.
+        /// </summary>
+        public static string UploadFile {
+            get {
+                return ResourceManager.GetString("UploadFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not load the file, please check file&apos;s template again !.
         /// </summary>
         public static string UploadFileError {
@@ -8310,6 +8544,15 @@ namespace Fanex.Athena.Resources {
         public static string Vip {
             get {
                 return ResourceManager.GetString("Vip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VIP Player.
+        /// </summary>
+        public static string VIPPlayer {
+            get {
+                return ResourceManager.GetString("VIPPlayer", resourceCulture);
             }
         }
         

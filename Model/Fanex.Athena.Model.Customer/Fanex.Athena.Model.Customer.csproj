@@ -63,8 +63,11 @@
     <Compile Include="DTO\CustomerLog\LogInLog.cs" />
     <Compile Include="DTO\LogInfo.cs" />
     <Compile Include="DTO\CustomerClassLimitPolicyModel.cs" />
+    <Compile Include="DTO\PlayerSegmentation\MonitoredPlayerInfo.cs" />
+    <Compile Include="DTO\PlayerSegmentation\MonitoredPlayerReachedHistory.cs" />
     <Compile Include="DTO\PlayerSegmentation\ReasonGroup.cs" />
     <Compile Include="DTO\PlayerSegmentation\PlayerInfo.cs" />
+    <Compile Include="DTO\PlayerSegmentation\MonitoredPlayerCommand.cs" />
     <Compile Include="DTO\PlayerSegmentation\UpdateStatusPlayerResult.cs" />
     <Compile Include="Enum\CustomerClassTabType.cs" />
     <Compile Include="GlobalSuppressions.cs" />
@@ -79,6 +82,12 @@
     <Compile Include="MetaModel\PlayerSegmentation\AbnormalBetListMetaModel.cs" />
     <Compile Include="MetaModel\PlayerSegmentation\BasePlayerListMetaModel.cs" />
     <Compile Include="MetaModel\GetCustomerClassInformationMetaModel.cs" />
+    <Compile Include="MetaModel\PlayerSegmentation\DeleteMonitoredPlayerMetaModel.cs" />
+    <Compile Include="MetaModel\PlayerSegmentation\BatchUpdateMonitoredPlayerMetaModel.cs" />
+    <Compile Include="MetaModel\PlayerSegmentation\MonitoredPlayerReachedHistoryMetaModel.cs" />
+    <Compile Include="MetaModel\PlayerSegmentation\UpdateMonitoredPlayerMetaModel.cs" />
+    <Compile Include="MetaModel\PlayerSegmentation\InsertMonitoredPlayerMetaModel.cs" />
+    <Compile Include="MetaModel\PlayerSegmentation\MonitoredPlayerListMetaModel.cs" />
     <Compile Include="MetaModel\PlayerSegmentation\UpdateStatusPlayerMetaModel.cs" />
     <Compile Include="MetaModel\PlayerSegmentation\VipPlayerListMetaModel.cs" />
     <Compile Include="MetaModel\PlayerSegmentation\ProblemPlayerListMetaModel.cs" />
@@ -90,6 +99,7 @@
     <Compile Include="ViewModel\CustomerLog\CustomerLogViewModel.cs" />
     <Compile Include="ViewModel\CustomerLog\LogInLogViewModel.cs" />
     <Compile Include="ViewModel\LogInfoViewModel.cs" />
+    <Compile Include="ViewModel\PlayerSegmentation\MonitoredPlayerViewModel.cs" />
     <Compile Include="ViewModel\PlayerSegmentation\PlayerSegmentationBetListViewModel.cs" />
     <Compile Include="ViewModel\PlayerSegmentation\VipPlayerViewModel.cs" />
     <Compile Include="ViewModel\PlayerSegmentation\ProblemPlayerViewModel.cs" />

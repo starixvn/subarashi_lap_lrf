@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using Fanex.Athena.Model.Core.DTO.Common;
 using Newtonsoft.Json;
 
 namespace Fanex.Athena.Model.Customer.DTO.PlayerSegmentation
 {
-    public class PlayerInfo
+    public class PlayerInfo : ISubsidiaryInfo
     {
         public int CustId { get; set; }
         public string ExternalId { get; set; }
@@ -11,8 +12,8 @@ namespace Fanex.Athena.Model.Customer.DTO.PlayerSegmentation
 
         [JsonIgnore]
         public int AgentId { get; set; }
-
         public string Subsidiary { get; set; }
+
         public string CustomerClass { get; set; }
 
         [JsonIgnore]

@@ -68,5 +68,12 @@ namespace Fanex.Athena.DataAccess.Customer
             var total = Convert.ToInt32(db.GetParameterValue("TotalItems"));
             return total;
         }
+
+        protected static void AddTrackingParams<T>(IObjectDb objectDb, T metaModel)
+            where T : IMetaModelUserId, IMetaModelIp
+        {
+            objectDb.SetParameterValue("UserID", metaModel.UserId);
+            objectDb.SetParameterValue("Ip", metaModel.Ip);
+        }
     }
 }

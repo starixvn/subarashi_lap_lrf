@@ -2856,6 +2856,77 @@
   </data>
   <data name="AllCustomerClassCategory" xml:space="preserve">
     <value>所有玩家分类</value>
+  <data name="CurrentWinningThreshold" xml:space="preserve">
+    <value>当前赢额临界值</value>
+  </data>
+  <data name="LastReachedDate" xml:space="preserve">
+    <value>最近到达日期(GMT -4)</value>
+  </data>
+  <data name="NoOfReached" xml:space="preserve">
+    <value>到达上限次数</value>
+  </data>
+  <data name="VIPPlayer" xml:space="preserve">
+    <value>VIP玩家</value>
+  </data>
+  <data name="DailyWinningThreshold" xml:space="preserve">
+    <value>每日临界值</value>
+  </data>
+  <data name="DeleteMonitoredPlayerConfirm" xml:space="preserve">
+    <value>{0} 将从被观察的玩家列表中删除，您确定要删除吗？</value>
+  </data>
+  <data name="EitherSystemIdOrExternalIdIsRequired" xml:space="preserve">
+    <value>需要系统 ID 或用户名</value>
+  </data>
+  <data name="InsertMonitoredPlayerConfirm" xml:space="preserve">
+    <value>{0}将被新增到每日赢额临界值观察名单 = {1}，您确定要添加吗？</value>
+  </data>
+  <data name="InvalidExternalId" xml:space="preserve">
+    <value>无效的用户名</value>
+  </data>
+  <data name="InvalidExternalIdBatchCommand" xml:space="preserve">
+    <value>无效的用户名: {0} ({1})</value>
+  </data>
+  <data name="InvalidSystemId" xml:space="preserve">
+    <value>无效的系统ID</value>
+  </data>
+  <data name="InvalidSystemIdBatchCommand" xml:space="preserve">
+    <value>无效的系统ID: {0} ({1})</value>
+  </data>
+  <data name="InvalidWinningThreshold" xml:space="preserve">
+    <value>无效的每日临界值</value>
+  </data>
+  <data name="InvalidWinningThresholdBatchCommand" xml:space="preserve">
+    <value>无效的每日临界值: {0}</value>
+  </data>
+  <data name="MaxBatchUpdateMonitoredPlayerError" xml:space="preserve">
+    <value>最多只能上传 2000 行数据，请再次检查您的档案！</value>
+  </data>
+  <data name="MonitoredPlayer" xml:space="preserve">
+    <value>观察中玩家</value>
+  </data>
+  <data name="MonitoredPlayerNotificationHistoryTitle" xml:space="preserve">
+    <value>通知纪录 {0} -&gt; {1} - {2}</value>
+  </data>
+  <data name="NotExistingInMonitoredPlayerList" xml:space="preserve">
+    <value>无法更新，因为该玩家已不在于受观察的名单中。</value>
+  </data>
+  <data name="NotificationHistory" xml:space="preserve">
+    <value>通知纪录</value>
+  </data>
+  <data name="ReachedDate" xml:space="preserve">
+    <value>到达日期</value>
+  </data>
+  <data name="SuccessfullyUpdate" xml:space="preserve">
+    <value>更新成功</value>
+  </data>
+  <data name="SuccessfullyUpdateBatchCommand" xml:space="preserve">
+    <value>更新成功: {0}</value>
+  </data>
+  <data name="TotalWinningAmount" xml:space="preserve">
+    <value>日期</value>
+  </data>
+  <data name="UploadFile" xml:space="preserve">
+    <value>上传档案</value>
   </data>
   <data name="NormalReport" xml:space="preserve">
     <value>一般报表</value>

@@ -2,9 +2,11 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text;
     using System.Threading.Tasks;
     using Fanex.Athena.DataAccess.Customer.Interfaces;
     using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Athena.Service.Core.Users.Interfaces;
@@ -55,9 +57,17 @@
             return result;
         }
 
-        public async Task<IEnumerable<UpdateStatusPlayerResult>> UpdateVipStatusAsync(UpdateStatusPlayerMetaModel metaModel)
+        public Task<IEnumerable<UpdateStatusPlayerResult>> UpdateVipStatusAsync(UpdateStatusPlayerMetaModel metaModel)
+            => _playerDataAccess.UpdateVipStatusAsync(metaModel);
+
+        public async Task<IEnumerable<ReasonGroup>> GetReasonGroupListAsync(string langKey)
+            => await _playerDataAccess.GetReasonGroupListAsync(langKey);
+
+        public async Task<ApiPagingResult<MonitoredPlayerInfo>> GetMonitoredPlayerListAsync(MonitoredPlayerListMetaModel metaModel)
         {
-            var result = await _playerDataAccess.UpdateVipStatusAsync(metaModel);
+            var result = await _playerDataAccess.GetMonitoredPlayerListAsync(metaModel);
+            BindSubsidiaryName(result.Data, metaModel.SubsidiaryList);
+            CurrencyHelper.BindCurrencyDisplayName(result.Data, _sessionService.UserSession.CurrencyList);
             var listAffCustId = result.ListAffectCustId;
             var returnResult = result.ListUpdateStatusPlayerResult;
 
@@ -79,13 +89,26 @@
             return returnResult;
         }
 
-        public async Task<IEnumerable<ReasonGroup>> GetReasonGroupListAsync(string langKey)
+        public Task<IEnumerable<MonitoredPlayerReachedHistory>> GetMonitoredPlayerReachedHistoryAsync(MonitoredPlayerReachedHistoryMetaModel metaModel)
+    => _playerDataAccess.GetMonitoredPlayerReachedHistoryAsync(metaModel);
+
+        public Task<MonitoredPlayerCommand> InsertMonitoredPlayerAsync(InsertMonitoredPlayerMetaModel metaModel)
+            => _playerDataAccess.InsertMonitoredPlayerAsync(metaModel);
+
+        public Task<MonitoredPlayerCommand> UpdateMonitoredPlayerAsync(UpdateMonitoredPlayerMetaModel metaModel)
+            => _playerDataAccess.UpdateMonitoredPlayerAsync(metaModel);
+
+        public Task<MonitoredPlayerCommand> DeleteMonitoredPlayerAsync(DeleteMonitoredPlayerMetaModel metaModel)
+            => _playerDataAccess.DeleteMonitoredPlayerAsync(metaModel);
+
+        public async Task<IEnumerable<MonitoredPlayerCommand>> BatchUpdateMonitoredPlayerAsync(BatchUpdateMonitoredPlayerMetaModel metaModel)
         {
-            var result = await _playerDataAccess.GetReasonGroupListAsync(langKey);
-            return result;
+            BuildBatchPlayerXml(metaModel);
+            var commandResults = await _playerDataAccess.BatchUpdateMonitoredPlayerAsync(metaModel);
+            return CombineResult(commandResults);
         }
 
-        private void LogAbnormalRequest(UpdateStatusPlayerMetaModel metaModel, IEnumerable<UpdateStatusPlayerResult> updateResult)
+		private void LogAbnormalRequest(UpdateStatusPlayerMetaModel metaModel, IEnumerable<UpdateStatusPlayerResult> updateResult)
         {
             const int successCode = 0;
             if (updateResult.Any(r => r.Code == successCode))
@@ -97,7 +120,28 @@
             
         }
 
-        private void BindSubsidiaryName(IEnumerable<PlayerInfo> players, string subsidiaryList)
+        private static IEnumerable<MonitoredPlayerCommand> CombineResult(IEnumerable<MonitoredPlayerCommand> result)
+            => result.GroupBy(_ => _.ErrorCode).Select(_ => new MonitoredPlayerCommand
+            {
+                ErrorCode = _.Key,
+                NumberOfError = _.Count(),
+                ExternalId = string.Join(", ", _.Select(__ => __.ExternalId)).Trim(' ', ','),
+                SystemId = string.Join(", ", _.Select(__ => __.SystemId)).Trim(' ', ',')
+            });
+
+ 		private static void BuildBatchPlayerXml(BatchUpdateMonitoredPlayerMetaModel metaModel)        {
+            var body = new StringBuilder();
+            var index = 0;
+            foreach (var player in metaModel.BatchPlayer)
+            {
+                body.AppendFormat("<CustList RID=\"{0}\" U1=\"{1}\" U2=\"{2}\" WT=\"{3}\" />", ++index, player.SystemId, player.ExternalId, player.WinningThreshold);
+            }
+
+            metaModel.BatchPlayerXml = "<ROOT>" + body + "</ROOT>";
+        }
+
+        private void BindSubsidiaryName<T>(IEnumerable<T> players, string subsidiaryList)
+            where T : ISubsidiaryInfo
         {
             if (!players.Any() || string.IsNullOrEmpty(subsidiaryList))
             {

@@ -1,6 +1,8 @@
 import DataService from '@jsroot/lib/DataService';
 import ProblemPlayerService from '../tabs/problem-player/lib/queryService';
 import VipPlayerService from '../tabs/vip-player-management/lib/queryService';
+import MonitoredPlayerQueryService from '../tabs/monitored-player/lib/queryService';
+
 import { tabKeys, errorResponse, successResponse } from './constants';
 
 class CommonQueryService {
@@ -27,6 +29,9 @@ export const queryServiceCommonFactory = {
     },
     [tabKeys.vipPlayerManagement]: {
         getPlayerList: VipPlayerService.getPlayerList
+    },
+    [tabKeys.monitoredPlayer] : {
+        getPlayerList: MonitoredPlayerQueryService.getMontioredPlayerList
     },
     common: {
         updateVipStatus: CommonQueryService.updateVipStatus

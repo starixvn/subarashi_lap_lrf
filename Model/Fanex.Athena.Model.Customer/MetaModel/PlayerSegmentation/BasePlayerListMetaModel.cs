@@ -2,7 +2,8 @@
 {
     using Fanex.Athena.Model.Core.MetaModel;
 
-    public class BasePlayerListMetaModel : IMetaModelValidation, IMetaModelAgent, IMetaModelCurrencyIdList, IMetaModelPaging, IMetaModelSubsidiarySearch
+    public class BasePlayerListMetaModel : IMetaModelValidation, IMetaModelAgent, IMetaModelCurrencyIdList,
+        IMetaModelPaging, IMetaModelSubsidiarySearch
     {
         private const int DefaultPageSize = 500;
         private const int MaxPageSize = 2000;

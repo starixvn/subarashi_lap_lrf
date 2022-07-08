@@ -4,19 +4,19 @@ import AppData from '@jsroot/lib/AppData';
 
 export const tabKeys = {
     problemPlayer: 'ProblemPlayer',
-    vipPlayerManagement: 'VipPlayerManagement'
+    vipPlayerManagement: 'VipPlayerManagement',
+    monitoredPlayer: 'MonitoredPlayer',
 }
 
 const dynamicImports = {
     [tabKeys.problemPlayer]: () => import(/* webpackChunkName: "customer/playersegmentation/problemPlayer" */ '../tabs/problem-player/index'),
-    [tabKeys.vipPlayerManagement]: () => import(/* webpackChunkName: "customer/playersegmentation/vipPlayerManagement" */ '../tabs/vip-player-management/index')
+    [tabKeys.vipPlayerManagement]: () => import(/* webpackChunkName: "customer/playersegmentation/vipPlayerManagement" */ '../tabs/vip-player-management/index'),
+    [tabKeys.monitoredPlayer]: () => import(/* webpackChunkName: "customer/playersegmentation/monitoredPlayer" */ '../tabs/monitored-player/index')
 }
 
-export const tabMenuList = AppData.TabKeys.map(_ => {
-    return {
+export const tabMenuList = AppData.TabKeys.map(_ => ({
         key: _, name: LangHelper.getSingleResource(_), component: React.lazy(dynamicImports[_]), preLoad: dynamicImports[_]
-    }
-})
+    }))
 
 export const preLoadComponents = (lazyComponents) => {
     lazyComponents && setTimeout(() => lazyComponents.forEach(_ => _.preLoad && _.preLoad()), 0)

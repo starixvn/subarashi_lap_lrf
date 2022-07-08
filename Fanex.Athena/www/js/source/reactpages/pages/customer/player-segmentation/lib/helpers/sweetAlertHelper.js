@@ -28,5 +28,4 @@ export const UpdateVipStatusAlertOption = {
             updateVipStatus(params, handlerAfterUpdateVipStatus);
         }
     })
-
 }

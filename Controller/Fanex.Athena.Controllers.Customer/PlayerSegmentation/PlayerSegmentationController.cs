@@ -28,10 +28,14 @@
         private const string VipPlayerUploadByExternalIdTemplate = "~/App_Data/Template/Customers/PlayerSegmentation/VipPlayerUploadByExternalIdTemplate.xls";
         private const string VipPlayerUploadBySystemIdTemplate = "~/App_Data/Template/Customers/PlayerSegmentation/VipPlayerUploadBySystemIdTemplate.xls";
 
+        private const string MonitoredPlayerUploadByExternalIdTemplate = "~/App_Data/Template/Customers/PlayerSegmentation/MonitoredPlayerUploadByExternalIdTemplate.xls";
+        private const string MonitoredPlayerUploadBySystemIdTemplate = "~/App_Data/Template/Customers/PlayerSegmentation/MonitoredPlayerUploadBySystemIdTemplate.xls";
+
         private static readonly IDictionary<string, string> TabKeys = new Dictionary<string, string>
         {
             { PermissionKeys.PlayerProblemManagement, "ProblemPlayer" },
-            { PermissionKeys.PlayerVIPManagement, "VipPlayerManagement" }
+            { PermissionKeys.PlayerVIPManagement, "VipPlayerManagement" },
+            { PermissionKeys.MonitoredPlayer, "MonitoredPlayer" }
         };
 
         private static readonly ConcurrentDictionary<string, AsyncLazy<IEnumerable<ReasonGroup>>> ReasonListFromCache = new ConcurrentDictionary
@@ -62,11 +66,19 @@
         }
 
         [HttpGet]
-        [FunctionAuthorization(PermissionKeys.PlayerVIPManagement)]
+        [FunctionAuthorization(PermissionKeys.PlayerVIPManagement_Write)]
         public FileResult DowloadVipListTemplate(byte uploadBy = UploadByExternalId)
         {
             var templatePath = Server.MapPath(uploadBy == UploadByExternalId ? VipPlayerUploadByExternalIdTemplate : VipPlayerUploadBySystemIdTemplate);
             return File(templatePath, "application/vnd.ms-excel", "VipPlayerList.xls");
+        }
+
+        [HttpGet]
+        [FunctionAuthorization(PermissionKeys.MonitoredPlayer_Write)]
+        public FileResult DowloadMonitoredListTemplate(byte uploadBy = UploadByExternalId)
+        {
+            var templatePath = Server.MapPath(uploadBy == UploadByExternalId ? MonitoredPlayerUploadByExternalIdTemplate : MonitoredPlayerUploadBySystemIdTemplate);
+            return File(templatePath, "application/vnd.ms-excel", "MonitoredPlayerList.xls");
         }
 
         private async Task<PlayerSegmentationViewModel> BuildViewModel()
@@ -79,6 +91,7 @@
 
             var hasVIPManangementPermission = HasVIPManagementPermission();
             var hasVIPManangementEditPermission = HasVIPManagementEditPermission();
+            var hasMonitoredPlayerPermission = _authService.HasPermissions(SessionServiceInstance.UserSession, PermissionKeys.MonitoredPlayer);
             var subsidiaryList = _subsidiaryService.GetSubsidiaryTree(userSession, licenseeSession.LicenseeName);
             var viewType = !subsidiaryList.Any() ? SubsidiaryViewType.NotManagement : (SubsidiaryViewType)userSession.SubsidiaryViewType;
             var reasonList = await GetReasonList(lang);
@@ -101,6 +114,11 @@
                     CurrencyList = currencyList,
                     VipOptions = GetVipOptions(),
                     CustomerClass = vipMngCustomerClass
+                } : null,
+                MonitoredPlayerVM = hasMonitoredPlayerPermission ? new MonitoredPlayerViewModel
+                {
+                    CanEdit = _authService.HasPermissions(SessionServiceInstance.UserSession, PermissionKeys.MonitoredPlayer_Write),
+                    CurrencyList = currencyList
                 } : null,
                 ViewType = viewType,
                 SubsidiaryList = subsidiaryList

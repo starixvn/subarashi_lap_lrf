@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PlayerSegmentation\PlayerSegmentation.BetList.Controller.cs" />
+    <Compile Include="PlayerSegmentation\PlayerSegmentation.MonitoredPlayer.Controller.cs" />
     <Compile Include="PlayerSegmentation\PlayerSegmentation.VipPlayer.Controller.cs" />
     <Compile Include="PlayerSegmentation\PlayerSegmentation.ProblemPlayer.Controller.cs" />
     <Compile Include="PlayerSegmentation\PlayerSegmentationController.cs" />
