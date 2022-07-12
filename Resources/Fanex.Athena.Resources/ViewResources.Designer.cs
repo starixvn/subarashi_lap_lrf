@@ -2860,7 +2860,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Export To Excel.
+        ///   Looks up a localized string similar to Export to Excel.
         /// </summary>
         public static string ExportToExcel {
             get {

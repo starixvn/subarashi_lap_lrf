@@ -380,7 +380,7 @@
     <value>Exclude Test Data</value>
   </data>
   <data name="ExportToExcel" xml:space="preserve">
-    <value>Export To Excel</value>
+    <value>Export to Excel</value>
   </data>
   <data name="ExternalId" xml:space="preserve">
     <value>External ID</value>

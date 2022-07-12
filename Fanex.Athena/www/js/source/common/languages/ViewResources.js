@@ -1,4 +1,4 @@
-﻿// Generated at: 7/6/2022 10:14:04 AM
+﻿// Generated at: 7/12/2022 9:24:27 AM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -308,7 +308,7 @@ EventType:"Event Type",
 ExcelExceedRowsMsg:"This file exceeded 65535 entries. Please contact administrator for more details.",
 ExchangeWinLoss:"Exchange Win Loss",
 ExcludeTestData:"Exclude Test Data",
-ExportToExcel:"Export To Excel",
+ExportToExcel:"Export to Excel",
 ExternalId:"External ID",
 ExternalIdOrSystemId:"External ID or System ID",
 ExtraPayout:"Extra Payout",
