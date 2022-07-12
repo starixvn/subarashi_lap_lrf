@@ -1,4 +1,4 @@
-﻿// Generated at: 6/8/2022 9:57:58 AM
+﻿// Generated at: 7/12/2022 9:24:27 AM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -308,7 +308,7 @@ EventType:"Event Type",
 ExcelExceedRowsMsg:"This file exceeded 65535 entries. Please contact administrator for more details.",
 ExchangeWinLoss:"Exchange Win Loss",
 ExcludeTestData:"Exclude Test Data",
-ExportToExcel:"Export To Excel",
+ExportToExcel:"Export to Excel",
 ExternalId:"External ID",
 ExternalIdOrSystemId:"External ID or System ID",
 ExtraPayout:"Extra Payout",
@@ -887,8 +887,10 @@ UpdateToActiveConfirmMsg:"Are you sure you want to change the status of this pla
 UpdateToClosedConfirmMsg:"Are you sure you want to change the status of this player to CLOSED?",
 UpdateToLockedConfirmMsg:"Are you sure you want to change the status of this player to LOCKED?",
 UpdateUnSuccess:"Update unsucessfully!",
+UploadExternalIdList:"Upload External ID List",
 UploadFileError:"Could not load the file, please check file&apos;s template again !",
-UploadVipList:"Upload Vip List",
+UploadSystemIdList:"Upload System ID List",
+UploadVipList:"Upload VIP List",
 UserGuide:"User Guide",
 UserInformation:"User Information",
 Username:"Username",

@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import LangHelper from '@jsroot/lib/langHelper';
+import RadioGroup from '@jsroot/components/radio/RadioGroup';
 import Excel from '@jsroot/lib/excel';
 import { decode } from '@jsroot/lib/htmlHelper';
 import { generateDefaultConfirmOption, predefinedIcons } from '@jsroot/lib/sweetAlert';
 import { ActionCreators } from '../actions';
 import DropzoneUpload from '../../../components/DropzoneUpload';
 import { Url, ExcelReaderColumn } from '../lib/constants';
+import { UploadFileOptions, UploadFileOptionValue } from '../../../lib/constants';
 import ExcelHelper from '../lib/helpers/excelHelper';
 import { UpdateVipStatusAlertOption } from '../../../lib/helpers/sweetAlertHelper';
 import AppData from '@jsroot/lib/AppData';
@@ -16,6 +18,8 @@ export const FormAction = props => {
     const { isActiveTaggingAction, playerList, updateVipStatus, setSweetAlertOption, selectedParams } = props;
     const [displayUploadDropzone, setDisplayUploadDropzone] = useState(false);
     const [resultMsgSubmitVipListFile, setResultMsgSubmitVipListFile] = useState(null);
+    const [uploadFileOption, setUploadFileOption] = useState(UploadFileOptionValue.byExternalId);
+
     const hasVipManagementEdit =  AppData.HasVipManagementEdit;
 
     useEffect(() => { resultMsgSubmitVipListFile && setDisplayUploadDropzone(false) }, [selectedParams]);
@@ -85,30 +89,34 @@ export const FormAction = props => {
                     alert(decode(LangHelper.getSingleResource("UploadFileError")))
                     return;
                 }
-
-                const columnSystemId = ExcelHelper.getColumnName(header, ExcelReaderColumn.SystemId);
-                const columnExternalId = ExcelHelper.getColumnName(header, ExcelReaderColumn.ExternalId);
-                if (!columnSystemId && !columnExternalId) {
+                const byExternalId = uploadFileOption == UploadFileOptionValue.byExternalId;
+                const selectedColumn = ExcelHelper.getColumnName(header, byExternalId ? ExcelReaderColumn.ExternalId : ExcelReaderColumn.SystemId);
+                if (!selectedColumn) {
                     alert(decode(LangHelper.getSingleResource("UploadFileError")))
                     return;
                 }
 
-                const systemIds = content.map(_ => _[columnSystemId]).join();
-                const externalIds = content.map(_ => _[columnExternalId]).join();
+                const value = content.map(_ => _[selectedColumn]).join();
                 const params = {
-                    systemIds,
-                    externalIds,
+                    [byExternalId ? 'externalIds' : 'systemIds']: value,
                     isVip: true
                 }
+
                 _handleActiveVipStatusFromFile(params);
             })
         })
     }
 
-    const _renderNoteDropzoneUploadFile = () => {
+    const _renderExtraInfoDropzoneUploadFile = () => {
         return (<>
+            <RadioGroup
+                name={'UploadByOptions'}
+                value={uploadFileOption}
+                options={UploadFileOptions}
+                onChange={setUploadFileOption}
+            />
             <div>
-                <a href={Url.vipPlayerListTemplate}>*{LangHelper.getSingleResource('ClickHere')}</a>&nbsp;
+                <a href={`${Url.vipPlayerListTemplate}?uploadBy=${uploadFileOption}`}>*{LangHelper.getSingleResource('ClickHere')}</a>&nbsp;
                 <span>{LangHelper.getSingleResource('ToDowloadTemplate')}</span>
             </div>
             <div>
@@ -123,7 +131,7 @@ export const FormAction = props => {
             onSubmit={_onSubmitVipListFile}
             isShowInnerZone={!resultMsgSubmitVipListFile}>
             <div>
-                {resultMsgSubmitVipListFile ? resultMsgSubmitVipListFile : _renderNoteDropzoneUploadFile()}
+                {resultMsgSubmitVipListFile ? resultMsgSubmitVipListFile : _renderExtraInfoDropzoneUploadFile()}
             </div>
         </DropzoneUpload>
     }

@@ -545,3 +545,6 @@ ul.ui-multiselect-checkboxes {
 .button-block {
   margin-left: 20px; }
 
+.btn {
+  text-transform: none; }
+

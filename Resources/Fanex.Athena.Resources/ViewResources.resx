@@ -380,7 +380,7 @@
     <value>Exclude Test Data</value>
   </data>
   <data name="ExportToExcel" xml:space="preserve">
-    <value>Export To Excel</value>
+    <value>Export to Excel</value>
   </data>
   <data name="ExternalId" xml:space="preserve">
     <value>External ID</value>
@@ -2709,7 +2709,7 @@
     <comment>#128082</comment>
   </data>
   <data name="UploadVipList" xml:space="preserve">
-    <value>Upload Vip List</value>
+    <value>Upload VIP List</value>
     <comment>#128082</comment>
   </data>
   <data name="VipPlayerManagement" xml:space="preserve">
@@ -3274,5 +3274,11 @@
   </data>
   <data name="ProductFGGL" xml:space="preserve">
     <value>FGG</value>
+  </data>
+  <data name="UploadExternalIdList" xml:space="preserve">
+    <value>Upload External ID List</value>
+  </data>
+  <data name="UploadSystemIdList" xml:space="preserve">
+    <value>Upload System ID List</value>
   </data>
 </root>

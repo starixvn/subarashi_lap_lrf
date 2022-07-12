@@ -1016,7 +1016,7 @@ const TabMenu = props => {
 /*!**************************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/customer/player-segmentation/lib/constants.js ***!
   \**************************************************************************************/
-/*! exports provided: tabKeys, tabMenuList, preLoadComponents, SortMapper, UpdateVIPStatusCode, errorResponse, successResponse */
+/*! exports provided: tabKeys, tabMenuList, preLoadComponents, SortMapper, UploadFileOptionValue, UploadFileOptions, UpdateVIPStatusCode, errorResponse, successResponse */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1025,6 +1025,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tabMenuList", function() { return tabMenuList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "preLoadComponents", function() { return preLoadComponents; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SortMapper", function() { return SortMapper; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UploadFileOptionValue", function() { return UploadFileOptionValue; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UploadFileOptions", function() { return UploadFileOptions; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UpdateVIPStatusCode", function() { return UpdateVIPStatusCode; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "errorResponse", function() { return errorResponse; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "successResponse", function() { return successResponse; });
@@ -1066,6 +1068,17 @@ const SortMapper = {
     'desc': 2
   }
 };
+const UploadFileOptionValue = {
+  byExternalId: 1,
+  bySystemId: 2
+};
+const UploadFileOptions = [{
+  label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("UploadExternalIdList"),
+  value: UploadFileOptionValue.byExternalId
+}, {
+  label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("UploadSystemIdList"),
+  value: UploadFileOptionValue.bySystemId
+}];
 const UpdateVIPStatusCode = {
   Success: 0,
   InvalidSystemId: 100,

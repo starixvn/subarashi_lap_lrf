@@ -23,7 +23,10 @@
     [FunctionAuthorization(PermissionKeys.PlayerSegmentation)]
     public partial class PlayerSegmentationController : CultureBaseController
     {
-        private const string VIP_LIST_TEMPLATE_PATH = "~/App_Data/Template/Customers/PlayerSegmentation/VipPlayerUploadTemplate.xls";
+        const byte UploadByExternalId = 1;
+
+        private const string VipPlayerUploadByExternalIdTemplate = "~/App_Data/Template/Customers/PlayerSegmentation/VipPlayerUploadByExternalIdTemplate.xls";
+        private const string VipPlayerUploadBySystemIdTemplate = "~/App_Data/Template/Customers/PlayerSegmentation/VipPlayerUploadBySystemIdTemplate.xls";
 
         private static readonly IDictionary<string, string> TabKeys = new Dictionary<string, string>
         {
@@ -60,9 +63,9 @@
 
         [HttpGet]
         [FunctionAuthorization(PermissionKeys.PlayerVIPManagement)]
-        public FileResult DowloadVipListTemplate()
+        public FileResult DowloadVipListTemplate(byte uploadBy = UploadByExternalId)
         {
-            var templatePath = Server.MapPath(VIP_LIST_TEMPLATE_PATH);
+            var templatePath = Server.MapPath(uploadBy == UploadByExternalId ? VipPlayerUploadByExternalIdTemplate : VipPlayerUploadBySystemIdTemplate);
             return File(templatePath, "application/vnd.ms-excel", "VipPlayerList.xls");
         }
 

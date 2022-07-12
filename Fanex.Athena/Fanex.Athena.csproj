@@ -665,7 +665,6 @@
     <Content Include="SiteConfig\Web.BACKUPMNLStatic.config" />
     <Content Include="www\css\build\dev\reactpages\dailybets\index.css.map" />
     <Content Include="Views\Desktop\Customer\PlayerSegmentation\Main.cshtml" />
-    <Content Include="App_Data\Template\Customers\PlayerSegmentation\VipPlayerUploadTemplate.xls" />
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\ProblemPlayerList.xls" />
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\VipPlayerList.xls" />
     <Content Include="www\css\source\pages\playercommission\index.scss" />
@@ -747,6 +746,8 @@
       <Link>lrfcsharp.ruleset</Link>
     </Content>
     <Content Include="Views\Desktop\Customer\BetSetting\SabaCasino.cshtml" />
+    <Content Include="App_Data\Template\Customers\PlayerSegmentation\VipPlayerUploadByExternalIdTemplate.xls" />
+    <Content Include="App_Data\Template\Customers\PlayerSegmentation\VipPlayerUploadBySystemIdTemplate.xls" />
     <None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
     <None Include="www\css\source\pages\betlist\result\result.happy5.scss" />
     <None Include="www\css\source\reactpages\components\alert\icons\error.scss" />

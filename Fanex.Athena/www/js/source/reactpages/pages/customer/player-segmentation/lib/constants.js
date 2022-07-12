@@ -35,6 +35,15 @@ export const SortMapper = {
     }
 }
 
+export const UploadFileOptionValue = {
+    byExternalId: 1,
+    bySystemId: 2
+}
+export const UploadFileOptions = [
+    { label: LangHelper.getSingleResource("UploadExternalIdList"), value: UploadFileOptionValue.byExternalId },
+    { label: LangHelper.getSingleResource("UploadSystemIdList"), value: UploadFileOptionValue.bySystemId }
+]
+
 export const UpdateVIPStatusCode = {
     Success: 0,
     InvalidSystemId: 100,

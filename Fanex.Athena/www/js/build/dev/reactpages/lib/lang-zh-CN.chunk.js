@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 6/8/2022 9:57:58 AM
+// Generated at: 7/6/2022 10:14:04 AM
 window._language_zh_CN = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -885,7 +885,9 @@ window._language_zh_CN = {
   UpdateToClosedConfirmMsg: "确定要将此玩家更改为关闭吗?",
   UpdateToLockedConfirmMsg: "确定要将此玩家更改为锁定吗?",
   UpdateUnSuccess: "Update unsucessfully!",
+  UploadExternalIdList: "上传用户名名单",
   UploadFileError: "无法上传档案，请确认档案格式!",
+  UploadSystemIdList: "上传系统ID名单",
   UploadVipList: "上传VIP清单",
   UserGuide: "报告指南",
   UserInformation: "用户信息",

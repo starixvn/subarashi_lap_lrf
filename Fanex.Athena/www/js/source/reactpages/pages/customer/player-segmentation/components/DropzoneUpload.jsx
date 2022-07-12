@@ -44,7 +44,6 @@ const DropzoneUpload = (props) => {
         return !isValid;
     }
 
-
     const _renderAcceptedFiles = () => {
         return <ul className="dropzone-row">{uploadedFiles.map(file => (
             <li key={file.path} className="file-item">
@@ -59,7 +58,7 @@ const DropzoneUpload = (props) => {
     return (
         <div className="dropzone">
             <a className="dropzone-close" onClick={() => onClose && onClose()}><i className="icon-close"></i></a>
-            { isShowInnerZone &&
+            {isShowInnerZone &&
                 (_isExistFiles ? _renderAcceptedFiles() :
                     <div className="dropzone-row">
                         <div {...getRootProps({ className: 'inner-dropzone' })}>
