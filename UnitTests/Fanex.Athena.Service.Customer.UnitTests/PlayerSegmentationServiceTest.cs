@@ -5,13 +5,14 @@ using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
 using Fanex.Athena.Model.Customer.MetaModel;
 using Fanex.Athena.Model.Report.DTO;
 using Fanex.Athena.Service.Core.Users.Interfaces;
-using Fanex.Athena.Service.Customer.Interfaces;
+using Fanex.Athena.Service.StatelessCore.Interfaces;
 using Fanex.Athena.UnitTest.Common.Helpers;
 using FluentAssertions;
 using NSubstitute;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Fanex.Logging;
 
 namespace Fanex.Athena.Service.Customer.UnitTests
 {
@@ -21,6 +22,8 @@ namespace Fanex.Athena.Service.Customer.UnitTests
         private IPlayerSegmentationDataAccess _playerDataAccess;
         private ISessionService _sessionService;
         private ISubsidiaryService _subsidiaryService;
+        private ICTSApiClient _ctsApiClient;
+        private ILogger _logger;
 
         private PlayerSegmentationService _targetService;
 
@@ -30,7 +33,9 @@ namespace Fanex.Athena.Service.Customer.UnitTests
             _playerDataAccess = Substitute.For<IPlayerSegmentationDataAccess>();
             _sessionService = Substitute.For<ISessionService>();
             _subsidiaryService = Substitute.For<ISubsidiaryService>();
-            _targetService = new PlayerSegmentationService(_sessionService, _playerDataAccess, _subsidiaryService);
+            _ctsApiClient = Substitute.For<ICTSApiClient>();
+            _logger = Substitute.For<ILogger>();
+            _targetService = new PlayerSegmentationService(_sessionService, _playerDataAccess, _subsidiaryService, _ctsApiClient, _logger);
         }
 
         [TearDown]
@@ -40,6 +45,8 @@ namespace Fanex.Athena.Service.Customer.UnitTests
             _sessionService = null;
             _subsidiaryService = null;
             _targetService = null;
+            _ctsApiClient = null;
+            _logger = null;
         }
 
         [Test]
@@ -183,7 +190,7 @@ namespace Fanex.Athena.Service.Customer.UnitTests
             //Arrange
             var metaModel = FakeHelper.Create<UpdateStatusPlayerMetaModel>();
             var expectedResult = FakeHelper.Create<IEnumerable<UpdateStatusPlayerResult>>();
-            _playerDataAccess.UpdateVipStatusAsync(metaModel).Returns(expectedResult);
+            _playerDataAccess.UpdateVipStatusAsync(metaModel).Returns((string.Empty, expectedResult));
 
             //Act
             var actualResult = await _targetService.UpdateVipStatusAsync(metaModel);
