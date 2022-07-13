@@ -12,7 +12,7 @@ namespace Fanex.Athena.DataAccess.Customer.Interfaces
 
         Task<ApiPagingResult<PlayerInfo>> GetVipPlayerListAsync(VipPlayerListMetaModel metaModel);
 
-        Task<IEnumerable<UpdateStatusPlayerResult>> UpdateVipStatusAsync(UpdateStatusPlayerMetaModel metaModel);
+        Task<(string ListAffectCustId, IEnumerable<UpdateStatusPlayerResult> ListUpdateStatusPlayerResult)> UpdateVipStatusAsync(UpdateStatusPlayerMetaModel metaModel);
 
         Task<IEnumerable<ReasonGroup>> GetReasonGroupListAsync(string langKey);
     }

@@ -82,7 +82,7 @@
             }
         }
 
-        public async Task<IEnumerable<UpdateStatusPlayerResult>> UpdateVipStatusAsync(UpdateStatusPlayerMetaModel metaModel)
+        public async Task<(string ListAffectCustId, IEnumerable<UpdateStatusPlayerResult> ListUpdateStatusPlayerResult)> UpdateVipStatusAsync(UpdateStatusPlayerMetaModel metaModel)
         {
             const string spName = "Lrf_ProblemAccount_LicenseeVipPlayerUpd";
             const int commandTimeout = 180;
@@ -93,6 +93,10 @@
 
                 using (var reader = await db.ExecuteReaderAsync())
                 {
+                    var ouptParams = db.GetOutputParams();
+
+                    var listAffectCustId = Convert.ToString(db.GetOutputParams()["CustIDList"]);
+
                     var result = new List<UpdateStatusPlayerResult>();
                     while (reader.Read())
                     {
@@ -103,7 +107,7 @@
                         result.Add(record);
                     }
 
-                    return result;
+                    return (listAffectCustId, result);
                 }
             }
         }
@@ -115,6 +119,7 @@
             objectDb.SetParameterValue("IsVip", metaModel.IsVip);
             objectDb.SetParameterValue("UserID", metaModel.UserId);
             objectDb.SetParameterValue("Ip", metaModel.Ip);
+            objectDb.SetParameterValue("CustIDList", string.Empty);
         }
 
         private static void AddProblemPlayerListParams(IObjectDb objectDb, ProblemPlayerListMetaModel metaModel)

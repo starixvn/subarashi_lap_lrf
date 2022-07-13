@@ -126,6 +126,77 @@ namespace Fanex.Athena.Service.StatelessCore.Abstraction
             }
         }
 
+        protected virtual async Task<T>
+           HandleAsync<T>(string path, object value, string language, MediaType mediaType, Func<HttpResponseMessage, Task<T>> codeBlock,
+            Action<HttpResponseMessage> UnSuccessRequestHandler,
+            bool disposeHttpResponse = true, int timeOut = 100)
+        {
+            if (codeBlock == null)
+            {
+                return await Task.FromResult(default(T));
+            }
+            using (var cancelToken = new CancellationTokenSource(new TimeSpan(0, 0, timeOut)))
+            {
+                using (var httpRequest = new HttpRequestMessage(HttpMethod.Post, new Uri(_client.BaseAddress + path)))
+                {
+                    httpRequest.Headers.Add(LANGUAGEKEY, language);
+                    HttpResponseMessage response = null;
+                    try
+                    {
+                        if (mediaType == MediaType.MsgPack)
+                        {
+                            httpRequest.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(MsgPackContentType));
+                            using (var content = new ByteArrayContent(MessagePackSerializer.Serialize(value)))
+                            {
+                                content.Headers.ContentType = new MediaTypeHeaderValue(MsgPackContentType);
+                                httpRequest.Content = content;
+                                response = await _client.SendAsync(httpRequest, HttpCompletionOption.ResponseHeadersRead, cancelToken.Token).ConfigureAwait(false);
+                            }
+                        }
+
+                        if (mediaType == MediaType.Json)
+                        {
+                            httpRequest.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(JsonContentType));
+                            using (var content = new StringContent(JsonConvert.SerializeObject(value, _jsonSerializerSettings),
+                                Encoding.UTF8, JsonContentType))
+                            {
+                                httpRequest.Content = content;
+                                response = await _client.SendAsync(httpRequest, HttpCompletionOption.ResponseHeadersRead, cancelToken.Token).ConfigureAwait(false);
+                            }
+                        }
+
+                        if (response != null && !response.IsSuccessStatusCode)
+                        {
+                            await HandleUnSucessReponseAsync(response);
+                        }
+                        return await codeBlock(response).ConfigureAwait(false);
+                    }
+                    catch (Exception ex)
+                    {
+                        if (!disposeHttpResponse)
+                        {
+                            response?.Dispose();
+                        }
+
+                        throw new ServiceException(ex.Message, ApiName, ex);
+                    }
+                    finally
+                    {
+                        if (disposeHttpResponse && response != null)
+                        {
+                            response.Dispose();
+                        }
+                    }
+                }
+            }
+        }
+
+        protected virtual Task HandleUnSucessReponseAsync(HttpResponseMessage response)
+        {
+            response?.EnsureSuccessStatusCode();
+            return Task.CompletedTask;
+        }
+
         public virtual async Task<T> PostAsync<T>(string path, object value, string language) where T : class
         {
             return await HandleAsync<T>(
