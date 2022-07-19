@@ -3,25 +3,24 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Table, Row, Cell } from '@9softstudio/react-grid';
 import CheckBox from '@jsroot/components/CheckBox'
-import AppData from '@jsroot/lib/AppData';
 import { ActionCreators } from '../actions';
 import NoDataTitle from '@jsroot/components/NoDataTitle';
 import GridHelper from '../../../lib/helpers/gridHelper';
 import LangHelper from '@jsroot/lib/langHelper'
-import { getDataGridHeaders } from '../helper/gridHelper';
 import { tabKeys } from '../../../lib/constants';
 import { UserActionType } from '../lib/constants'
 import { BatchUpdateMonitoredPlayerAlertOption } from '../helper/sweetAlertHelper';
 import ThresholdCell from './grid/ThresholdCell';
 import { SortMapper } from '../../../lib/constants';
+import { dataGridFullHeaders } from '../lib/constants';
+
 
 const MAX_WIDTH_PAGE = 1920;
 
 export const DataGrid = (props) => {
     const MAX_WIDTH = Math.min(document.body.clientWidth, MAX_WIDTH_PAGE);
     const { isCheckAll, playerList, pagingOption, selectedParams, setPlayerList, setCurrentUserAction,
-        setPagingOption, searchPlayer, setSweetAlertOption, deleteMonitoredPlayer } = props;
-    const canEdit = AppData[tabKeys.monitoredPlayer].canEdit;
+        setPagingOption, searchPlayer, setSweetAlertOption, deleteMonitoredPlayer, isLoading, permissions } = props;
 
     if (playerList == null) {
         return null;
@@ -30,11 +29,11 @@ export const DataGrid = (props) => {
         return <NoDataTitle />;
     }
 
-    const showSubsidiary = GridHelper.isShowSubsidiary(selectedParams.subsidiarySearch);
+    const permissionObject = React.useMemo(() => ({ ...permissions, showSubsidiary: GridHelper.isShowSubsidiary(selectedParams.subsidiarySearch) }), [permissions, selectedParams.showSubsidiary]);
 
     const _dataGridHeaders = React.useMemo(() => {
-        const headers = getDataGridHeaders(canEdit, showSubsidiary);
-        if (canEdit) {
+        const headers = dataGridFullHeaders.filter(header => !header.show || header.show(permissionObject));
+        if (permissionObject.canEdit) {
             return [{
                 key: 'CheckAll', text: null, colWidth: 30, childComponent: <CheckBox id="IsCheckAll"
                     checked={isCheckAll}
@@ -53,15 +52,15 @@ export const DataGrid = (props) => {
 
         return headers;
 
-    }, [playerList, canEdit, showSubsidiary]);
+    }, [playerList, permissionObject]);
 
     const _headers = React.useMemo(() => GridHelper.renderHeader(_dataGridHeaders, [_dataGridHeaders]));
 
     const _body = React.useMemo(() => playerList.map((dataItem, rowIndex) => {
         return <Row key={`player_row_${dataItem.custId}`}>
-            {canEdit && <Cell className="center-align">
+            {permissionObject.canEdit && <Cell className="center-align">
                 <CheckBox id={`selectPlayer_${dataItem.custId}`}
-                    checked={dataItem.isSelected === true}
+                    checked={!!dataItem.isSelected}
                     onChange={(checked) => {
                         const newDataItem = {
                             ...dataItem,
@@ -69,15 +68,15 @@ export const DataGrid = (props) => {
                         }
                         const newPlayerList = [...playerList];
                         newPlayerList[rowIndex] = newDataItem;
-                        setPlayerList([...newPlayerList])
+                        setPlayerList(newPlayerList)
                     }} /></Cell>}
-            {showSubsidiary && <Cell className="left-align">{dataItem.subsidiary}</Cell>}
+            {permissionObject.showSubsidiary && <Cell className="left-align">{dataItem.subsidiary}</Cell>}
             <Cell className="left-align">{dataItem.externalId}</Cell>
             <Cell className="left-align">{dataItem.systemId}</Cell>
             <Cell className="center-align">{dataItem.currency}</Cell>
-            <ThresholdCell player={dataItem} canEdit={canEdit} />
+            <ThresholdCell player={dataItem} canEdit={permissionObject.canEdit} />
             <Cell className="center-align">
-                <button className="btn-default btn-link"
+                {!!dataItem.noOfReached && <button className="btn-default btn-link"
                     onClick={() => {
                         const { fromDate, toDate } = selectedParams;
                         setCurrentUserAction({
@@ -91,12 +90,12 @@ export const DataGrid = (props) => {
                         })
                     }}>
                     {dataItem.noOfReached}
-                </button>
+                </button>}
             </Cell>
             <Cell className="center-align">{dataItem.lastReachedDateDisplay}</Cell>
-            <Cell className="center-align">{LangHelper.getSingleResource(LangHelper.getSingleResource(dataItem.problemPlayer ? 'Yes' : 'No'))}</Cell>
-            <Cell className="center-align">{LangHelper.getSingleResource(LangHelper.getSingleResource(dataItem.vipPlayer ? 'Yes' : 'No'))}</Cell>
-            <Cell className="center-align action-cell">
+            {permissionObject.showProblemPlayer && <Cell className="center-align">{LangHelper.getSingleResource(LangHelper.getSingleResource(dataItem.problemPlayer ? 'Yes' : 'No'))}</Cell>}
+            {permissionObject.showVipPlayer && <Cell className="center-align">{LangHelper.getSingleResource(LangHelper.getSingleResource(dataItem.vipPlayer ? 'Yes' : 'No'))}</Cell>}
+            {permissionObject.canEdit && <Cell className="center-align action-cell">
                 <button className="btn-default btn-link btn-icon delete-icon"
                     onClick={() => {
                         const onSuccess = BatchUpdateMonitoredPlayerAlertOption
@@ -105,7 +104,7 @@ export const DataGrid = (props) => {
                     }}>
                     <i className="material-icons">delete</i>
                 </button>
-            </Cell>
+            </Cell>}
         </Row>
     }), [playerList])
 
@@ -131,7 +130,7 @@ export const DataGrid = (props) => {
                 header={_headers}
                 body={_body}
                 containerPadding={30}
-                shouldResetScrollPosition={true}
+                shouldResetScrollPosition={isLoading}
                 onSort={_handleSort} />
         </React.Fragment>
     );
@@ -147,9 +146,9 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-    const { playerList, selectedParams, pagingOption } = state;
+    const { playerList, selectedParams, pagingOption, isLoading, permissions } = state;
     const isCheckAll = playerList && !playerList.some(_ => !_.isSelected);
-    return Object.assign({}, { playerList, isCheckAll, pagingOption, selectedParams });
+    return Object.assign({}, { playerList, isCheckAll, pagingOption, isLoading, selectedParams, permissions });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DataGrid);

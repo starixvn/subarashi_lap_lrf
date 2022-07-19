@@ -317,6 +317,9 @@
     <Content Include="App_Data\UserGuide\ExtraPayout\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\ExtraPayout\zh-Hans.htm" />
     <Content Include="App_Data\UserGuide\ExtraPayout\zh-TW.htm" />
+    <Content Include="App_Data\UserGuide\PlayerSegmentationMonitored\en-US.htm" />
+    <Content Include="App_Data\UserGuide\PlayerSegmentationMonitored\zh-CN.htm" />
+    <Content Include="App_Data\UserGuide\PlayerSegmentationMonitored\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\SabaVirtualSportsWL\en-US.htm" />
     <Content Include="App_Data\UserGuide\SabaVirtualSportsWL\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\SabaVirtualSportsWL\zh-TW.htm" />

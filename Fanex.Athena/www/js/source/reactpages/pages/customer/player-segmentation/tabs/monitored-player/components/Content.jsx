@@ -6,9 +6,10 @@ import GridCaption from '../../../components/GridCaption';
 import DataGrid from './DataGrid';
 import { ActionCreators } from '../actions';
 import GridHelper from "../../../lib/helpers/gridHelper";
+import { tabKeys } from '../../../lib/constants';
 
 export const Content = props => {
-    const { playerCount, selectedParams, selectedTabKey, searchPlayer, pagingOption, setPagingOption } = props;
+    const { playerCount, selectedParams, searchPlayer, pagingOption, setPagingOption } = props;
 
     if (pagingOption.TotalItem == null) {
         return null;
@@ -24,7 +25,7 @@ export const Content = props => {
                 pageSize
             },
         }
-        searchPlayer(selectedTabKey, params, GridHelper.callBackToUpdatePaging({ pagingOption, setPagingOption }));
+        searchPlayer(tabKeys.monitoredPlayer, params, GridHelper.callBackToUpdatePaging({ pagingOption, setPagingOption }));
     }
 
     return (
@@ -41,9 +42,9 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({ searchPlayer, setPagingOption }, dispatch);
 }
 function mapStateToProps(state) {
-    const { pagingOption, selectedParams, playerList, selectedTabKey } = state;
+    const { pagingOption, selectedParams, playerList } = state;
     const playerCount = pagingOption.TotalItem || (playerList && playerList.length) || 0;
-    return Object.assign({}, { pagingOption, selectedParams, selectedTabKey, playerCount });
+    return Object.assign({}, { pagingOption, selectedParams, playerCount });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Content);

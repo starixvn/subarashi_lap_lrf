@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import MultipleSelect, { TreeViewSelect } from '@9softstudio/react-multiselect'
 import AutoComplete from '@jsroot/components/auto-complete'
 import CollapsiblePanel from '@jsroot/components/collapsible-panel'
+import UserGuide from '@jsroot/components/UserGuide'
 import CheckBox from '@jsroot/components/CheckBox'
 import { DateRange } from '@jsroot/components/date-range'
 import LangHelper from '@jsroot/lib/langHelper'
@@ -21,6 +22,8 @@ import MonitoredPlayerService from '../lib/queryService'
 export class FormFilter extends PureComponent {
     constructor(props) {
         super(props);
+        this.notificationHistoryDataNote = LangHelper.getSingleResource("NotificationHistoryDataNote")
+        .replace("{0}", AppData[tabKeys.monitoredPlayer].dateConstraint.minDate);
     }
 
     _submit = (event) => {
@@ -46,6 +49,21 @@ export class FormFilter extends PureComponent {
             return;
         }
         MonitoredPlayerService.exportMontioredPlayerList({ ...selectedParams, ...pagingOption }); 
+    }
+
+    showUserGuide = () => {
+        const userGuideContent = this.props.userGuideContent;
+        if (!userGuideContent || userGuideContent.length === 0) {
+            this.props.getUserGuideContent('PlayerSegmentationMonitored');
+        }
+    }
+
+    _renderUserGuide() {
+        return (<UserGuide
+            title={LangHelper.getSingleResource("UserGuide")}
+            contentTitle={`${LangHelper.getSingleResource("PlayerSegmentation")} / ${LangHelper.getSingleResource('MonitoredPlayer')}`}
+            onClick={this.showUserGuide}
+            content={this.props.userGuideContent} />)
     }
 
     _renderDateRange() {
@@ -80,6 +98,7 @@ export class FormFilter extends PureComponent {
     _renderStickyFooter() {
         return (<div>
             <i className="icon-excel right" onClick={this._exportExcel} title={LangHelper.getSingleResource("ExportToExcel")}></i>
+            {this._renderUserGuide()}
         </div>);
     }
 
@@ -162,18 +181,25 @@ export class FormFilter extends PureComponent {
                     <div className="col-12 col-md-2 col-sm-2 col-lg-2 col-xl-1">
                         <div className="form-group">
                             <div className="button-group">
-                                <button type="button" className="btn btn-add" onClick={this._addNew}>{LangHelper.getSingleResource("AddNew")}</button>
+                                <button type="button" className="btn btn-add" disabled={!this.props.canEdit} onClick={this._addNew}>{LangHelper.getSingleResource("AddNew")}</button>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div className="row">
+                    <div className="col-6">
+                        <span className="circle"></span>
+                        <span>{this.notificationHistoryDataNote}</span>
+                    </div>
+                </div>
+
             </CollapsiblePanel>
         )
     }
 }
 
 function mapDispatchToProps(dispatch) {
-    const { setDateRange, changeIsGetAll, setUsername, setSelectedCurrency,
+    const { setDateRange, changeIsGetAll, setUsername, setSelectedCurrency, getUserGuideContent,
         setSelectedParams, setSubsidiaryList, setSubsidiarySearch, searchPlayer, setPagingOption, setCurrentUserAction } = ActionCreators;
 
     return bindActionCreators(Object.assign({}, {
@@ -181,6 +207,7 @@ function mapDispatchToProps(dispatch) {
         changeIsGetAll,
         setUsername,
         setSelectedCurrency,
+        getUserGuideContent,
         setSelectedParams,
         setSubsidiaryList,
         setSubsidiarySearch,
@@ -192,7 +219,7 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
     const { dateRange, supportedReachedDateRange, isGetAll, selectedCurrency, selectedParams,
-        username, selectedSubsidiary, subsidiarySearch, pagingOption } = state;
+        username, selectedSubsidiary, subsidiarySearch, pagingOption, userGuideContent } = state;
 
     return Object.assign({}, {
         dateRange,
@@ -203,7 +230,9 @@ function mapStateToProps(state) {
         username,
         selectedParams,
         subsidiarySearch,
-        pagingOption
+        pagingOption,
+        userGuideContent,
+        canEdit: state.permissions.canEdit
     });
 };
 

@@ -2896,7 +2896,7 @@
     <value>无效的每日临界值</value>
   </data>
   <data name="InvalidWinningThresholdBatchCommand" xml:space="preserve">
-    <value>无效的每日临界值: {0}</value>
+    <value>无效的每日临界值: {0} ({1})</value>
   </data>
   <data name="MaxBatchUpdateMonitoredPlayerError" xml:space="preserve">
     <value>最多只能上传 2000 行数据，请再次检查您的档案！</value>
@@ -2923,10 +2923,22 @@
     <value>更新成功: {0}</value>
   </data>
   <data name="TotalWinningAmount" xml:space="preserve">
-    <value>日期</value>
+    <value>总赢额</value>
   </data>
   <data name="UploadFile" xml:space="preserve">
     <value>上传档案</value>
+  </data>
+  <data name="NotificationHistoryDataNote" xml:space="preserve">
+    <value>可查询 {0}之后的通知纪录</value>
+  </data>
+  <data name="ConfirmUpdateMonitoredPlayer" xml:space="preserve">
+    <value>确定要更新每日赢额临界值({0}) = {1}？</value>
+  </data>
+  <data name="AddNew" xml:space="preserve">
+    <value>新增</value>
+  </data>
+  <data name="ExistingInMonitoredPlayerList" xml:space="preserve">
+    <value>该玩家已存在于名单中。请再检查一次！</value>
   </data>
   <data name="NormalReport" xml:space="preserve">
     <value>一般报表</value>

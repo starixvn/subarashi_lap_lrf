@@ -15,7 +15,7 @@
     using System.Web.Http;
     using System.Web.Http.Results;
 
-    //[ApiFunctionAuthorization(PermissionKeys.PlayerSegmentation)]
+    [ApiFunctionAuthorization(PermissionKeys.PlayerSegmentation)]
     public partial class PlayerSegmentationController : BaseApiController
     {
         private readonly IAuthorizationService _authService;

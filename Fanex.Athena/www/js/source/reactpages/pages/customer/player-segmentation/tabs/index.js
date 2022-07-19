@@ -7,7 +7,7 @@ import reducers from '../reducers';
 import { tabMenuList } from '../lib/constants';
 
 const defaultState = {
-  selectedTabKey: tabMenuList[0].key
+  selectedTabKey: tabMenuList[2].key
 }
 const store = Store.createStore(reducers, defaultState);
 

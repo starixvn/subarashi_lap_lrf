@@ -1,6 +1,7 @@
 import { SET_CURRENT_USER_ACTION } from './types';
 import * as loaderAction from '@jsroot/actions/loaderAction';
 import * as filterAction from './filterAction';
+import * as userGuideAction from '@jsroot/actions/userGuideAction';
 import * as gridHandlerAction from '../../../actions/gridHandlerAction';
 import LangHelper from '@jsroot/lib/langHelper';
 import { searchPlayer, setPlayerList } from '../../../actions/playerDataAction';
@@ -43,6 +44,7 @@ const setCurrentUserAction = data => ({
 export const ActionCreators = Object.assign({},
     loaderAction,
     filterAction,
+    userGuideAction,
     gridHandlerAction,
     { searchPlayer, setPlayerList, deleteMonitoredPlayer, setCurrentUserAction }
 );

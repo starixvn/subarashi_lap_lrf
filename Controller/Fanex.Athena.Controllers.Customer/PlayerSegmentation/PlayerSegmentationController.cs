@@ -58,7 +58,7 @@
             _customerClassService = customerClassService;
         }
 
-        [FunctionAuthorization(PermissionKeys.PlayerProblemManagement, PermissionKeys.PlayerVIPManagement)]
+        [FunctionAuthorization(PermissionKeys.PlayerProblemManagement, PermissionKeys.PlayerVIPManagement, PermissionKeys.MonitoredPlayer)]
         public async Task<ViewResult> Index()
         {
             var model = await BuildViewModel();

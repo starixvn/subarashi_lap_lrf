@@ -1699,6 +1699,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to update Daily Winning Threshold ({0}) = {1}?.
+        /// </summary>
+        public static string ConfirmUpdateMonitoredPlayer {
+            get {
+                return ResourceManager.GetString("ConfirmUpdateMonitoredPlayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contact Type.
         /// </summary>
         public static string ContactType {
@@ -3787,7 +3796,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid External ID(s): {0}.
+        ///   Looks up a localized string similar to Invalid External ID(s): {0} ({1}).
         /// </summary>
         public static string InvalidExternalIdBatchCommand {
             get {
@@ -3868,7 +3877,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid System ID(s): {0}.
+        ///   Looks up a localized string similar to Invalid System ID(s): {0} ({1}).
         /// </summary>
         public static string InvalidSystemIdBatchCommand {
             get {
@@ -3886,7 +3895,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid Daily Winning Threshold(s): {0}.
+        ///   Looks up a localized string similar to Invalid Daily Winning Threshold(s): {0} ({1}).
         /// </summary>
         public static string InvalidWinningThresholdBatchCommand {
             get {
@@ -5493,6 +5502,15 @@ namespace Fanex.Athena.Resources {
         public static string NotificationHistory {
             get {
                 return ResourceManager.GetString("NotificationHistory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data for notification history is available from {0}..
+        /// </summary>
+        public static string NotificationHistoryDataNote {
+            get {
+                return ResourceManager.GetString("NotificationHistoryDataNote", resourceCulture);
             }
         }
         

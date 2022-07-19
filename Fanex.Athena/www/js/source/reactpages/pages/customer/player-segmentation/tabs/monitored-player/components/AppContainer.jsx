@@ -16,18 +16,18 @@ import { ActionCreators } from '../actions';
 export const AppContainer = props => {
     const { isLoading, sweetAlertOption, currentUserAction, setCurrentUserAction } = props;
 
-    const _onCloseModificationPopup = () => {
+    const _onClosePopup = () => {
         setCurrentUserAction(null);
     }
 
     const _renderActionPopup = () => {
         const { type, data } = currentUserAction;
         if (type === UserActionType.AddNew) {
-          return (<Popup height={260} width={450} isShow={true} title={LangHelper.getSingleResource("AddNew")} onClose={_onCloseModificationPopup}>
-            <FormAdd {...data} onClose={_onCloseModificationPopup}  />
+          return (<Popup height={260} width={450} isShow={true} title={LangHelper.getSingleResource("AddNew")} onClose={_onClosePopup}>
+            <FormAdd {...data} onClose={_onClosePopup}  />
           </Popup>)
         } else if(type === UserActionType.ViewReachedHistory) {
-            return (<Popup height={500} width={680} isShow={true} title={LangHelper.getSingleResource("NotificationHistory")} onClose={_onCloseModificationPopup}>
+            return (<Popup height={500} width={680} isShow={true} title={LangHelper.getSingleResource("NotificationHistory")} onClose={_onClosePopup}>
             <FormReachedHistory {...data}  />
           </Popup>)
         } else {

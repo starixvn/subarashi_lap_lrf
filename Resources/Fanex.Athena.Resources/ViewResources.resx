@@ -3323,19 +3323,19 @@
     <value>Invalid External ID</value>
   </data>
   <data name="InvalidExternalIdBatchCommand" xml:space="preserve">
-    <value>Invalid External ID(s): {0}</value>
+    <value>Invalid External ID(s): {0} ({1})</value>
   </data>
   <data name="InvalidSystemId" xml:space="preserve">
     <value>Invalid System ID</value>
   </data>
   <data name="InvalidSystemIdBatchCommand" xml:space="preserve">
-    <value>Invalid System ID(s): {0}</value>
+    <value>Invalid System ID(s): {0} ({1})</value>
   </data>
   <data name="InvalidWinningThreshold" xml:space="preserve">
     <value>Invalid Daily Winning Threshold</value>
   </data>
   <data name="InvalidWinningThresholdBatchCommand" xml:space="preserve">
-    <value>Invalid Daily Winning Threshold(s): {0}</value>
+    <value>Invalid Daily Winning Threshold(s): {0} ({1})</value>
   </data>
   <data name="MaxBatchUpdateMonitoredPlayerError" xml:space="preserve">
     <value>Only allow to upload maximum of 2000 data rows, please check your file again!</value>
@@ -3366,6 +3366,12 @@
   </data>
   <data name="UploadFile" xml:space="preserve">
     <value>Upload File</value>
+  </data>
+  <data name="NotificationHistoryDataNote" xml:space="preserve">
+    <value>Data for notification history is available from {0}.</value>
+  </data>
+  <data name="ConfirmUpdateMonitoredPlayer" xml:space="preserve">
+    <value>Are you sure you want to update Daily Winning Threshold ({0}) = {1}?</value>
   </data>
   <data name="NormalReport" xml:space="preserve">
     <value>Normal Report</value>

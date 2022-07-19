@@ -16,7 +16,7 @@
         [HttpPost]
         [ApiFunctionAuthorization(PermissionKeys.MonitoredPlayer)]
         [ValidationApiRequest(IsValidCurrencyList = true)]
-        [ApiAutoBindMetaModel(BindAgent = true, ApplySubsidiaryBusiness = true, BindLanguage = true)]
+        [ApiAutoBindMetaModel(BindAgent = true, ApplySubsidiaryBusiness = true)]
         public async Task<IHttpActionResult> GetMonitoredPlayerList(MonitoredPlayerListMetaModel metaModel)
         {
             var result = await _playerService.GetMonitoredPlayerListAsync(metaModel);
@@ -33,7 +33,7 @@
         }
 
         [HttpPost]
-        [ApiFunctionAuthorization(PermissionKeys.PlayerVIPManagement_Write)]
+        [ApiFunctionAuthorization(PermissionKeys.MonitoredPlayer_Write)]
         [ValidationApiRequest]
         [ApiAutoBindMetaModel(BindAgent = true, BindUserId = true, BindIp = true)]
         public async Task<IHttpActionResult> InsertMonitoredPlayer(InsertMonitoredPlayerMetaModel metaModel)
@@ -43,7 +43,7 @@
         }
 
         [HttpPost]
-        [ApiFunctionAuthorization(PermissionKeys.PlayerVIPManagement_Write)]
+        [ApiFunctionAuthorization(PermissionKeys.MonitoredPlayer_Write)]
         [ValidationApiRequest]
         [ApiAutoBindMetaModel(BindAgent = true, BindUserId = true, BindIp = true)]
         public async Task<IHttpActionResult> UpdateMonitoredPlayer(UpdateMonitoredPlayerMetaModel metaModel)
@@ -53,7 +53,7 @@
         }
 
         [HttpPost]
-        [ApiFunctionAuthorization(PermissionKeys.PlayerVIPManagement_Write)]
+        [ApiFunctionAuthorization(PermissionKeys.MonitoredPlayer_Write)]
         [ValidationApiRequest]
         [ApiAutoBindMetaModel(BindAgent = true, BindUserId = true, BindIp = true)]
         public async Task<IHttpActionResult> DeleteMonitoredPlayer(DeleteMonitoredPlayerMetaModel metaModel)
@@ -63,7 +63,7 @@
         }
 
         [HttpPost]
-        [ApiFunctionAuthorization(PermissionKeys.PlayerVIPManagement_Write)]
+        [ApiFunctionAuthorization(PermissionKeys.MonitoredPlayer_Write)]
         [ValidationApiRequest]
         [ApiAutoBindMetaModel(BindAgent = true, BindUserId = true, BindIp = true)]
         public async Task<IHttpActionResult> BatchUpdateMonitoredPlayer(BatchUpdateMonitoredPlayerMetaModel metaModel)
@@ -85,7 +85,9 @@
 
                 BindSelectedCurrencyCodes(metaModel);
 
-                var excel = new MonitoredPlayerExcel(dataSource.Data, metaModel);
+                var excel = new MonitoredPlayerExcel(dataSource.Data, metaModel,
+                    _authService.HasPermissions(SessionService.UserSession, PermissionKeys.PlayerProblemManagement),
+                    _authService.HasPermissions(SessionService.UserSession, PermissionKeys.PlayerVIPManagement));
                 excel.Export();
 
                 var result = ExcelStream(excel.Workbook, fileName);

@@ -90,7 +90,7 @@
         }
 
         public Task<IEnumerable<MonitoredPlayerReachedHistory>> GetMonitoredPlayerReachedHistoryAsync(MonitoredPlayerReachedHistoryMetaModel metaModel)
-    => _playerDataAccess.GetMonitoredPlayerReachedHistoryAsync(metaModel);
+            => _playerDataAccess.GetMonitoredPlayerReachedHistoryAsync(metaModel);
 
         public Task<MonitoredPlayerCommand> InsertMonitoredPlayerAsync(InsertMonitoredPlayerMetaModel metaModel)
             => _playerDataAccess.InsertMonitoredPlayerAsync(metaModel);

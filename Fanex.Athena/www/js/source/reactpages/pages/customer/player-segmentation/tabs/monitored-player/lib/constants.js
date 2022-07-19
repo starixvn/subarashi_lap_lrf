@@ -1,16 +1,16 @@
 import LangHelper from '@jsroot/lib/langHelper';
 
 export const dataGridFullHeaders = [
-    { key: 'subsidiary', text: LangHelper.getSingleResource('Subsidiary'), colWidth: 80, show: false },
+    { key: 'subsidiary', text: LangHelper.getSingleResource('Subsidiary'), colWidth: 80, show: ({ showSubsidiary }) => showSubsidiary },
     { key: 'externalId', text: LangHelper.getSingleResource('ExternalId'), sortBy: 1, colWidth: 80 },
     { key: 'systemId', text: LangHelper.getSingleResource('SystemId'), sortBy: 2, colWidth: 80 },
     { key: 'currency', text: LangHelper.getSingleResource('Currency'), colWidth: 50 },
     { key: 'currentWinningThreshold', text: LangHelper.getSingleResource('CurrentWinningThreshold'), sortBy: 4, colWidth: 100 },
     { key: 'noOfReached', text: LangHelper.getSingleResource('NoOfReached'), sortBy: 5, colWidth: 60 },
     { key: 'lastReachedDate', text: LangHelper.getSingleResource('LastReachedDate'), sortBy: 6, colWidth: 100 },
-    { key: 'problemPlayer', text: LangHelper.getSingleResource('ProblemPlayer'), sortBy: 7, colWidth: 50 },
-    { key: 'vipPlayer', text: LangHelper.getSingleResource('VIPPlayer'), sortBy: 8, colWidth: 50 },
-    { key: 'action', text: LangHelper.getSingleResource('Action'), colWidth: 50 }
+    { key: 'problemPlayer', text: LangHelper.getSingleResource('ProblemPlayer'), sortBy: 7, colWidth: 50, show: ({ showProblemPlayer }) => showProblemPlayer },
+    { key: 'vipPlayer', text: LangHelper.getSingleResource('VIPPlayer'), sortBy: 8, colWidth: 50, show: ({ showVipPlayer }) => showVipPlayer },
+    { key: 'action', text: LangHelper.getSingleResource('Action'), colWidth: 50, show: ({ canEdit }) => canEdit  }
 ]
 
 export const Url = {

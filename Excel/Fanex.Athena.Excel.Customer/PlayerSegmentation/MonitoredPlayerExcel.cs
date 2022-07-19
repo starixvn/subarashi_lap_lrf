@@ -35,12 +35,18 @@ namespace Fanex.Athena.Excel.Customer
 
         private readonly IEnumerable<MonitoredPlayerInfo> _data;
         private readonly MonitoredPlayerListMetaModel _metaModel;
+        private readonly bool _hasProblemPlayerPermission;
+        private readonly bool _hasVIPPlayerPermission;
 
-        public MonitoredPlayerExcel(IEnumerable<MonitoredPlayerInfo> data, MonitoredPlayerListMetaModel metaModel)
+        public MonitoredPlayerExcel(IEnumerable<MonitoredPlayerInfo> data, MonitoredPlayerListMetaModel metaModel,
+            bool hasProblemPlayerPermission,
+            bool hasVIPPlayerPermission)
             : base(HostingEnvironment.MapPath(ExcelTemplatePath), data.Count())
         {
             _data = data;
             _metaModel = metaModel;
+            _hasProblemPlayerPermission = hasProblemPlayerPermission;
+            _hasVIPPlayerPermission = hasVIPPlayerPermission;
         }
 
         protected override void AssignHeader(ISheet sheet)
@@ -48,7 +54,7 @@ namespace Fanex.Athena.Excel.Customer
             var row = sheet.CopyRow(TemplateSheet, RowHeaderTemplate);
             row.Cells[ColumnSubsidiary].SetCellValue(ViewResources.Subsidiary);
             row.Cells[ColumnExternalId].SetCellValue(ViewResources.ExternalId);
-            row.Cells[ColumnSystemId].SetCellValue(ViewResources.ExternalId);
+            row.Cells[ColumnSystemId].SetCellValue(ViewResources.SystemId);
             row.Cells[ColumnCurrency].SetCellValue(ViewResources.Currency);
             row.Cells[ColumnWinningThreshold].SetCellValue(ViewResources.CurrentWinningThreshold);
             row.Cells[ColumnNoOfReached].SetCellValue(ViewResources.NoOfReached);
@@ -104,6 +110,16 @@ namespace Fanex.Athena.Excel.Customer
             if (!_metaModel.SubsidiarySearch)
             {
                 sheet.HideColumn(ColumnSubsidiary);
+            }
+
+            if(!_hasProblemPlayerPermission)
+            {
+                sheet.HideColumn(ColumnProblemPlayer);
+            }
+
+            if (!_hasVIPPlayerPermission)
+            {
+                sheet.HideColumn(ColumnVipPlayer);
             }
         }
 

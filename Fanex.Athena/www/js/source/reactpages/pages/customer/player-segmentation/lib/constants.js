@@ -8,6 +8,8 @@ export const tabKeys = {
     monitoredPlayer: 'MonitoredPlayer',
 }
 
+const newTabs = [tabKeys.monitoredPlayer];
+
 const dynamicImports = {
     [tabKeys.problemPlayer]: () => import(/* webpackChunkName: "customer/playersegmentation/problemPlayer" */ '../tabs/problem-player/index'),
     [tabKeys.vipPlayerManagement]: () => import(/* webpackChunkName: "customer/playersegmentation/vipPlayerManagement" */ '../tabs/vip-player-management/index'),
@@ -15,7 +17,7 @@ const dynamicImports = {
 }
 
 export const tabMenuList = AppData.TabKeys.map(_ => ({
-        key: _, name: LangHelper.getSingleResource(_), component: React.lazy(dynamicImports[_]), preLoad: dynamicImports[_]
+        key: _, name: LangHelper.getSingleResource(_), component: React.lazy(dynamicImports[_]), preLoad: dynamicImports[_], isNew: newTabs.some(newTab => newTab === _)
     }))
 
 export const preLoadComponents = (lazyComponents) => {

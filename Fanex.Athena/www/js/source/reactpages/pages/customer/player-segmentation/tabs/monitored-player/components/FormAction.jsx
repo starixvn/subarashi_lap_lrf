@@ -34,11 +34,10 @@ class ExcelHelper {
 
 
 export const FormAction = props => {
-    const { enableRemoveAction, playerList, setSweetAlertOption, toggleLoader, selectedParams, deleteMonitoredPlayer } = props;
+    const { enableRemoveAction, playerList, canEdit, setSweetAlertOption, toggleLoader, selectedParams, deleteMonitoredPlayer } = props;
     const [displayUploadDropzone, setDisplayUploadDropzone] = useState(false);
     const [resultMsgSubmitMonitoredListFile, setResultMsgSubmitMonitoredListFile] = useState(null);
     const [uploadFileOption, setUploadFileOption] = useState(UploadFileOptionValue.byExternalId);
-    const canEdit = AppData[tabKeys.monitoredPlayer].canEdit;
 
     useEffect(() => { resultMsgSubmitMonitoredListFile && setDisplayUploadDropzone(false) }, [selectedParams]);
 
@@ -82,9 +81,7 @@ export const FormAction = props => {
         }
 
         const handlerAfterBatchUpdateMonitoredPlayer = BatchUpdateMonitoredPlayerAlertOption.createHandlerAfterBatchUpdateMonitoredPlayer({ setSweetAlertOption, batchUpdateSuccess, noAlertResult: true });
-        const confirmProps = BatchUpdateMonitoredPlayerAlertOption.createBatchUpdateMonitoredPlayerConfirmProps({ batchPlayer: monitoredList }, _batchUpdateMonitoredPlayer, handlerAfterBatchUpdateMonitoredPlayer);
-        const alertOption = generateDefaultConfirmOption(LangHelper.getSingleResource("ConfirmBatchUpdateMonitoredPlayer"), _handleCloseAlert, confirmProps, _cancelProps, predefinedIcons.warning);
-        setSweetAlertOption(alertOption);
+        _batchUpdateMonitoredPlayer({ batchPlayer: monitoredList }, handlerAfterBatchUpdateMonitoredPlayer);
     }
 
     const _onSubmitMonitoredListFile = (files) => {
@@ -188,7 +185,7 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
     const { playerList, selectedParams, pagingOption } = state;
     const enableRemoveAction = playerList && playerList.length && playerList.some(_ => _.isSelected);
-    return Object.assign({}, { enableRemoveAction, playerList, selectedParams, pagingOption  });
+    return Object.assign({}, { enableRemoveAction, playerList, selectedParams, pagingOption, canEdit: state.permissions.canEdit  });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(React.memo(FormAction));

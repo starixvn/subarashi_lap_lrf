@@ -59,7 +59,9 @@ const ThresholdCell = props => {
 
         const handlerAfterBatchUpdateMonitoredPlayer = BatchUpdateMonitoredPlayerAlertOption.createHandlerAfterBatchUpdateMonitoredPlayer({ setSweetAlertOption, batchUpdateSuccess, noAlertResult, onFail: _handleCloseAlert });
         const confirmProps = BatchUpdateMonitoredPlayerAlertOption.createBatchUpdateMonitoredPlayerConfirmProps(params, _updateMonitoredPlayer, handlerAfterBatchUpdateMonitoredPlayer);
-        const alertOption = generateDefaultConfirmOption(LangHelper.getSingleResource('ConfirmUpdateMonitoredPlayer').replace('{0}', player.systemId), _handleCloseAlert, confirmProps, _cancelProps, predefinedIcons.warning);
+        const alertOption = generateDefaultConfirmOption(LangHelper.getSingleResource('ConfirmUpdateMonitoredPlayer').replace('{0}', player.currency).replace('{1}',  NumberFormat.format(winningThreshold)),
+         _handleCloseAlert, confirmProps, _cancelProps, predefinedIcons.warning, { height: 210 });
+
         setSweetAlertOption(alertOption);
     }
 
@@ -75,7 +77,7 @@ const ThresholdCell = props => {
             }} >
                 <i class="material-icons">check</i>
             </button>
-            <button class="btn-default btn-link btn-icon close-icon" onClick={() => setIsEditing(false)} >
+            <button class="btn-default btn-link btn-icon close-icon" >
                 <i class="material-icons">close</i>
             </button>
         </>
@@ -87,13 +89,13 @@ const ThresholdCell = props => {
     }
 
     const _onBlur = () => (prevTimer = setTimeout(() => {
-        _reset();
-    }, 100))
+       _reset();
+    }, 150))
 
     return <Cell className="right-align action-cell threshold-cell">
         {canEdit && <div className="threshold-cell-action">{isEditing ? _renderSubmit() :
-            <button class="btn-default btn-link btn-icon" onClick={() => setIsEditing(true)} >
-                <i class="material-icons">edit</i>
+            <button className="btn-default btn-link btn-icon" onClick={() => setIsEditing(true)} >
+                <i className="material-icons">edit</i>
             </button>}
         </div>}
         <input type="text" id="Name" name="Name" className={'input-text right-align'} disabled={!isEditing}
@@ -111,9 +113,4 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({ toggleLoader, setSweetAlertOption }, dispatch);
 }
 
-function mapStateToProps(state) {
-    const { } = state;
-    return Object.assign({}, {});
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(React.memo(ThresholdCell));
+export default connect(null, mapDispatchToProps)(React.memo(ThresholdCell));

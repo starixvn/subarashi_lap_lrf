@@ -28,7 +28,6 @@ const FormReachedHistory = ({ custId, systemId, externalId, fromDate, toDate }) 
         _fetchData();
     }, [])
 
-
     const _onSort = (orderCol, sortType) => _fetchData({ orderCol, sortType: SortMapper.sortType[sortType] });
 
     const _exportExcel = (event) => {
