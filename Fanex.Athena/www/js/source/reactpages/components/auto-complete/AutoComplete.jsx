@@ -23,6 +23,7 @@ export default class AutoComplete extends Component {
         this.cacheData = {};
 
         this.onChange = Timer.debounce(this._onChange, DELAY_TIME_MILLISECOND).bind(this);
+        this.wrapperRef = React.createRef();
     }
 
     static propTypes = {
@@ -40,6 +41,20 @@ export default class AutoComplete extends Component {
         responseDataField: "suggestions",
         cache: true,
         queryParamName: "query"
+    }
+
+    componentDidMount() {
+        document.addEventListener("mousedown", this._handleClickOut);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener("mousedown", this._handleClickOut);
+      }
+
+    _handleClickOut = (event) => {
+        if (this.isShowSuggestionList && this.wrapperRef && !this.wrapperRef.current.contains(event.target)) {
+            this._clearState();
+        }
     }
 
     get isShowSuggestionList() {
@@ -132,7 +147,7 @@ export default class AutoComplete extends Component {
 
     render() {
         return (
-            <div className="ac-container">
+            <div className="ac-container" ref={this.wrapperRef}>
                 <input type="text" className="input-text" {...this.props.htmlAttributes}
                     onChange={this.onChange} onKeyDown={this._onKeyDown}
                     ref={(element) => this.input = element} />

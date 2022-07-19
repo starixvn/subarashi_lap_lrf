@@ -978,6 +978,12 @@ class AutoComplete extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   constructor(props) {
     super(props);
 
+    _defineProperty(this, "_handleClickOut", event => {
+      if (this.isShowSuggestionList && this.wrapperRef && !this.wrapperRef.current.contains(event.target)) {
+        this._clearState();
+      }
+    });
+
     _defineProperty(this, "_onKeyDown", event => {
       if (!this.isShowSuggestionList) {
         return;
@@ -1073,6 +1079,15 @@ class AutoComplete extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     this.input = null;
     this.cacheData = {};
     this.onChange = _utils_timer__WEBPACK_IMPORTED_MODULE_6__["default"].debounce(this._onChange, DELAY_TIME_MILLISECOND).bind(this);
+    this.wrapperRef = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
+  }
+
+  componentDidMount() {
+    document.addEventListener("mousedown", this._handleClickOut);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("mousedown", this._handleClickOut);
   }
 
   get isShowSuggestionList() {
@@ -1109,7 +1124,8 @@ class AutoComplete extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 
   render() {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "ac-container"
+      className: "ac-container",
+      ref: this.wrapperRef
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", _extends({
       type: "text",
       className: "input-text"

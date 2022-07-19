@@ -204,7 +204,8 @@
                 Product.CG,
                 Product.AP,
                 Product.APM,
-                Product.FGGL
+                Product.FGGL,
+                Product.MXG
             };
 
             return string.Join(", ", GetProductRequireNote(productsRequireUseName));
