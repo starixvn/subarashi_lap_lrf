@@ -110,8 +110,7 @@ export default class ApiService {
     static async getUnassignedCategories() {
         const [contactList, categories] = await Promise.all([this.getContactList(null), this.getLicenseeCategories()]);
         const unassignedCategories = categories.filter(category => {
-            const assigned = contactList.some(contact => contact.ToListId.some(to => to === category.CategoryId)
-                || contact.CcListId.some(cc => cc === category.CategoryId));
+            const assigned = contactList.some(contact => contact.ToListId.some(to => to === category.CategoryId));
             return !assigned;
         })
         return unassignedCategories;

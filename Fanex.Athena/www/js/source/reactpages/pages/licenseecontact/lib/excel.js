@@ -93,7 +93,7 @@ export default class LicenseeContactExcel {
     _buildDataRow(item, colIndex) {
         const columnConfig = this.columnConfigs[colIndex];
         let value = item[columnConfig.field];
-        if(columnConfig.field === fields.ToList || columnConfig.field === fields.CcList) {
+        if(columnConfig.field === fields.ToList) {
             value = value.join('\n')
         } else if(columnConfig.field === fields.ContactType) {
             value = getContactTypeText(value)
@@ -160,10 +160,6 @@ export default class LicenseeContactExcel {
             width: 150
         }, {
             field: fields.ToList,
-            [MAIN_SECTION_STYLE]: bodyCellStyle.left,
-            width: 200
-        }, {
-            field: fields.CcList,
             [MAIN_SECTION_STYLE]: bodyCellStyle.left,
             width: 200
         }, {
