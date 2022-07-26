@@ -1,4 +1,4 @@
-﻿// Generated at: 7/12/2022 9:24:27 AM
+﻿// Generated at: 7/19/2022 11:38:05 AM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -672,6 +672,7 @@ ProductJK:"Joker",
 ProductKN:"RNG Keno",
 ProductLC:"Live Casino",
 ProductLT:"Lottery",
+ProductMXG:"MaxGame",
 ProductNG:"Number Game",
 ProductParlay:"Sportsbook Parlay",
 ProductPGS:"PG Soft",

@@ -3281,4 +3281,7 @@
   <data name="UploadSystemIdList" xml:space="preserve">
     <value>Upload System ID List</value>
   </data>
+  <data name="ProductMXG" xml:space="preserve">
+    <value>MaxGame</value>
+  </data>
 </root>

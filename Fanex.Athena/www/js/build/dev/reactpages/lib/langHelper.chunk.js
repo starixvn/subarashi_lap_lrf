@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 7/6/2022 10:14:04 AM
+// Generated at: 7/19/2022 11:38:05 AM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -403,7 +403,7 @@ window._language_en_US = {
   ExcelExceedRowsMsg: "This file exceeded 65535 entries. Please contact administrator for more details.",
   ExchangeWinLoss: "Exchange Win Loss",
   ExcludeTestData: "Exclude Test Data",
-  ExportToExcel: "Export To Excel",
+  ExportToExcel: "Export to Excel",
   ExternalId: "External ID",
   ExternalIdOrSystemId: "External ID or System ID",
   ExtraPayout: "Extra Payout",
@@ -767,6 +767,7 @@ window._language_en_US = {
   ProductKN: "RNG Keno",
   ProductLC: "Live Casino",
   ProductLT: "Lottery",
+  ProductMXG: "MaxGame",
   ProductNG: "Number Game",
   ProductParlay: "Sportsbook Parlay",
   ProductPGS: "PG Soft",

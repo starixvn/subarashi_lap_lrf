@@ -70,7 +70,8 @@
                 { Product.AP, nameof(ViewResources.ProductAP) },
                 { Product.APM, nameof(ViewResources.ProductAPM) },
                 { Product.VS3, nameof(ViewResources.ProductVS3) },
-                { Product.FGGL, nameof(ViewResources.ProductFGGL) }
+                { Product.FGGL, nameof(ViewResources.ProductFGGL) },
+                { Product.MXG, nameof(ViewResources.ProductMXG) }
             };
 
         public static string GetProductCode(int productId)

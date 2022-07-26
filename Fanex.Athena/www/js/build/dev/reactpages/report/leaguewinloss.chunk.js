@@ -813,6 +813,12 @@ class AutoComplete extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   constructor(props) {
     super(props);
 
+    _defineProperty(this, "_handleClickOut", event => {
+      if (this.isShowSuggestionList && this.wrapperRef && !this.wrapperRef.current.contains(event.target)) {
+        this._clearState();
+      }
+    });
+
     _defineProperty(this, "_onKeyDown", event => {
       if (!this.isShowSuggestionList) {
         return;
@@ -908,6 +914,15 @@ class AutoComplete extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     this.input = null;
     this.cacheData = {};
     this.onChange = _utils_timer__WEBPACK_IMPORTED_MODULE_6__["default"].debounce(this._onChange, DELAY_TIME_MILLISECOND).bind(this);
+    this.wrapperRef = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
+  }
+
+  componentDidMount() {
+    document.addEventListener("mousedown", this._handleClickOut);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("mousedown", this._handleClickOut);
   }
 
   get isShowSuggestionList() {
@@ -944,7 +959,8 @@ class AutoComplete extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 
   render() {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "ac-container"
+      className: "ac-container",
+      ref: this.wrapperRef
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", _extends({
       type: "text",
       className: "input-text"
@@ -3987,8 +4003,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_grid_GroupCell__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/grid/GroupCell */ "./www/js/source/reactpages/pages/leaguewinloss/components/grid/GroupCell.jsx");
 /* harmony import */ var _components_grid_TotalCell__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/grid/TotalCell */ "./www/js/source/reactpages/pages/leaguewinloss/components/grid/TotalCell.jsx");
 /* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
-/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/index.js");
-/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(uuid__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/dist/esm-browser/index.js");
 
 
 

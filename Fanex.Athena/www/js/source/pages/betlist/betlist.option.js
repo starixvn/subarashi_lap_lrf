@@ -71,7 +71,7 @@
     {
         name: 'WinLoss',
         index: 'WinLoss',
-        width: 80,
+        width: 85,
         align: 'right',
         sortable: true,
         resizable: false,
