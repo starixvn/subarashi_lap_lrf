@@ -150,7 +150,8 @@
                 IsEnableBA = oauthInfo.IsEnableBA,
                 IsEnableSingleWallet = oauthInfo.IsEnableSingleWallet,
                 OfferedSubProductList = oauthInfo.OfferedSubProductList,
-                OfferedOddsGroupsList = oauthInfo.OfferedOddsGroupList
+                OfferedOddsGroupsList = oauthInfo.OfferedOddsGroupList,
+                SiteDBGroupID = oauthInfo.SiteDBGroupID
             };
 
         private UserAuthInfo GenerateUserInfo(IOAuthInfo oauthInfo)

@@ -16,7 +16,6 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
     {
         private const string APIURL = "http://localhost";
         private const string TestPath = "/ANYPATH";
-        private const string Result = "ANYRESULT";
         private readonly object TestValue = new { Name = "Alex", Code = 1 };
         private readonly string LANG = "vi-VN";
 
