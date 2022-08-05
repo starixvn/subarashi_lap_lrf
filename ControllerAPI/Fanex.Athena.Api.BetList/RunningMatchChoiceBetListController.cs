@@ -33,7 +33,7 @@ namespace Fanex.Athena.Api.BetList
         [ValidationApiRequest(IsValidCurrency = true)]
         public async Task<dynamic> Index(BetListMetaModel metaModel)
         {
-            return await GetBetListResult(metaModel, "Lrf_BetList_Forecast_SelByMatch").ConfigureAwait(false);
+            return await GetBetListResult(metaModel, "Shard_Lrf_BetList_Forecast_SelByMatch").ConfigureAwait(false);
         }
     }
 }

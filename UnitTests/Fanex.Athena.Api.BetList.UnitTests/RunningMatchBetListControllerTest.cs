@@ -14,7 +14,7 @@
 
     public class RunningMatchBetListControllerTest : ApiBetListBaseControllerHelperTest
     {
-        private const string UspKey = "Lrf_BetList_SelRunningByBettypeMatch";
+        private const string UspKey = "Shard_Lrf_BetList_SelRunningByBettypeMatch";
 
         private const string ApiPath = "/BetList/GetBetList";
 

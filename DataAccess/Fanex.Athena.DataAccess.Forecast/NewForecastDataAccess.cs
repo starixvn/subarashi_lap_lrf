@@ -22,7 +22,7 @@ namespace Fanex.Athena.DataAccess.Forecast
             NewForecastHandicapOverUnderMetaModel metaModel,
             NewForecastHdpOuMatchInfo matchInfo)
         {
-            using (var db = this.GetObjectDb("Lrf_Forecast_MatchTotalForecast"))
+            using (var db = GetObjectDb("Shard_Lrf_Forecast_MatchTotalForecast"))
             {
                 SetParams(metaModel, db);
 

@@ -2,6 +2,7 @@
 {
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.Core.Users.Interfaces;
+    using System.Collections.Specialized;
     using System.Web;
     using System.Web.SessionState;
 
@@ -11,11 +12,15 @@
         private const string UserSessionKey = "UserSessionKey";
         private const string CaptchaCodeKey = "CaptchaCodeKey";
 
-        private static HttpSessionState CurrentSession => HttpContext.Current.Session;
+        private static HttpContext CurrentContext => HttpContext.Current;
+
+        private static HttpSessionState CurrentSession => CurrentContext.Session;
 
         public LicenseeAuthInfo LicenseeSession => CurrentSession[LicenseeSessionKey] as LicenseeAuthInfo;
 
         public UserAuthInfo UserSession => CurrentSession[UserSessionKey] as UserAuthInfo;
+
+        public NameValueCollection RequestHeaders => CurrentContext.Request.Headers;
 
         public string CaptchaCode
         {
@@ -25,9 +30,9 @@
 
         public string SessionID => CurrentSession.SessionID;
 
-        public string ClientIP => HttpContext.Current.Request.UserHostAddress;
+        public string ClientIP => CurrentContext.Request.UserHostAddress;
 
-        public string FromReferer => HttpContext.Current.Request.Headers["Referer"];
+        public string FromReferer => RequestHeaders["Referer"];
 
         public void AssignSessions(UserAuthInfo userSession, LicenseeAuthInfo licenseeSession)
         {

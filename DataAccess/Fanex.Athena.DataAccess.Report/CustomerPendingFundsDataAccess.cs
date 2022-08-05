@@ -23,7 +23,7 @@ namespace Fanex.Athena.DataAccess.Report
     {
         public async Task<ReportResultModel<CustPendingFunds>> GetDataList(CustomerPendingFundsMetaModel metaModel)
         {
-            const string UspName = "Lrf_Rpt_Outstanding";
+            const string UspName = "Shard_Lrf_Rpt_Outstanding";
 
             using (var db = GetObjectDb(UspName))
             {

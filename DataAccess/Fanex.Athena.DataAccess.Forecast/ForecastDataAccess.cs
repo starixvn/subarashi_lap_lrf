@@ -24,7 +24,7 @@ namespace Fanex.Athena.DataAccess.Forecast
 
         public async Task<IList<ForecastHandicapOverUnder>> GetForecastHandicapOverUnder(ForecastHandicapOverUnderMetaModel metaModel)
         {
-            const string UspName = "Lrf_Forecast_SelByLeague";
+            const string UspName = "Shard_Lrf_Forecast_SelByLeague";
 
             var paramValues = new
             {

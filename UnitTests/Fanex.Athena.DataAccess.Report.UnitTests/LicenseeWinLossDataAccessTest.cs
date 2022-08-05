@@ -21,11 +21,11 @@
     [TestFixture]
     public class LicenseeWinLossDataAccessTest : BaseDataAccessHelperTest<LicenseeWinLossDataAccess>
     {
-        private const string GetSummaryWinlossSp = "Lrf_Rpt_LicWinloss";
+        private const string GetSummaryWinlossSp = "Shard_Lrf_Rpt_LicWinloss";
 
-        private const string GetCustomerWinlossDetailSp = "Lrf_Rpt_LicWinlossDetail";
+        private const string GetCustomerWinlossDetailSp = "Shard_Lrf_Rpt_LicWinlossDetail";
 
-        private const string GetAgentWinlossDetailSp = "Lrf_Rpt_LicWinlossDetail_Ag";
+        private const string GetAgentWinlossDetailSp = "Shard_Lrf_Rpt_LicWinlossDetail_Ag";
 
         private LicenseeWinLossMetaModel _metaModel;
 

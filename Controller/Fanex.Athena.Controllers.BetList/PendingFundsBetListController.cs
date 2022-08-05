@@ -36,7 +36,7 @@ namespace Fanex.Athena.Controllers.BetList
             metaModel.FromDate = DateTime.Today.AddYears(-ExpandedYears);
             metaModel.ToDate = DateTime.Today.AddYears(ExpandedYears);
 
-            return await ProcessDefaultRequest(metaModel, "~/Views/Desktop/BetList/PendingFunds/Main.cshtml", "Lrf_BetList_SelRunningByDate_Mem").ConfigureAwait(false);
+            return await ProcessDefaultRequest(metaModel, "~/Views/Desktop/BetList/PendingFunds/Main.cshtml", "Shard_Lrf_BetList_SelRunningByDate_Mem").ConfigureAwait(false);
         }
 
         protected override async Task<ActionResult> ExportExcel(BetListExcelMetaModel metaModel)

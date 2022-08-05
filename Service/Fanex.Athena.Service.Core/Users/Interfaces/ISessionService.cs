@@ -1,6 +1,7 @@
 ﻿namespace Fanex.Athena.Service.Core.Users.Interfaces
 {
     using Fanex.Athena.Model.Auth;
+    using System.Collections.Specialized;
 
     public interface ISessionService
     {
@@ -11,6 +12,8 @@
         string ClientIP { get; }
 
         string FromReferer { get; }
+
+        NameValueCollection RequestHeaders { get; }
 
         LicenseeAuthInfo LicenseeSession { get; }
 

@@ -20,7 +20,7 @@
 
         protected override Task PrepareHeaders(HttpRequestHeaders headers)
         {
-            headers.Add("X-SiteDBGroupID", ((HttpContext.Current?.Session["LicenseeSessionKey"] as LicenseeAuthInfo)?.SiteDBGroupID ?? 0).ToString());
+            headers.Add("X-SiteDBGroupID", SiteDBGroupId.ToString());
             return Task.CompletedTask;
         }
 
@@ -44,5 +44,7 @@
             }
           , false, timeOut).ConfigureAwait(false);
         }
+
+        protected static int SiteDBGroupId => (HttpContext.Current?.Session["LicenseeSessionKey"] as LicenseeAuthInfo)?.SiteDBGroupID ?? 0;
     }
 }

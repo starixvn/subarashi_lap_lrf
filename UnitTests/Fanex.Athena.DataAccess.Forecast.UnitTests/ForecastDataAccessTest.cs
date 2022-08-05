@@ -31,7 +31,7 @@
         public async Task GetForecastHandicapOverUnder_WhenCall_ParametersPassedCorrectly()
         {
             // Arrange
-            DataAccess.GetObjectDb(Arg.Is("Lrf_Forecast_SelByLeague")).Returns(ObjectDb);
+            DataAccess.GetObjectDb(Arg.Is("Shard_Lrf_Forecast_SelByLeague")).Returns(ObjectDb);
             var metaModel = new ForecastHandicapOverUnderMetaModel();
 
             // Action
@@ -45,7 +45,7 @@
         public async Task GetForecastHandicapOverUnder_WhenCall_DataReturnedCorrectly()
         {
             // Arrange
-            DataAccess.GetObjectDb(Arg.Is("Lrf_Forecast_SelByLeague")).Returns(ObjectDb);
+            DataAccess.GetObjectDb(Arg.Is("Shard_Lrf_Forecast_SelByLeague")).Returns(ObjectDb);
             ObjectDb.ExecuteReaderAsync(Arg.Any<object>()).Returns(Reader);
             var metaModel = new ForecastHandicapOverUnderMetaModel();
             var expected = FakeHelper.Create<ForecastHandicapOverUnder>();

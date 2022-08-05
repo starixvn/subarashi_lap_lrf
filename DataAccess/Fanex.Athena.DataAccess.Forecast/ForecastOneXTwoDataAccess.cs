@@ -25,7 +25,7 @@ namespace Fanex.Athena.DataAccess.Forecast
 
         public async Task<IList<ForecastOneXTwo>> GetForecastOneXTwoByLeague(ForecastOneXTwoMetaModel metaModel)
         {
-            const string UspName = "Lrf_Forecast1x2_SelByLeague";
+            const string UspName = "Shard_Lrf_Forecast1x2_SelByLeague";
 
             using (var db = this.GetObjectDb(UspName))
             {
@@ -42,7 +42,7 @@ namespace Fanex.Athena.DataAccess.Forecast
 
         public async Task<IList<ForecastOneXTwo>> GetForecastOneXTwoByMatch(ForecastOneXTwoMetaModel metaModel)
         {
-            const string UspName = "Lrf_Forecast_Sel1X2";
+            const string UspName = "Shard_Lrf_Forecast_Sel1X2";
 
             using (var db = this.GetObjectDb(UspName))
             {

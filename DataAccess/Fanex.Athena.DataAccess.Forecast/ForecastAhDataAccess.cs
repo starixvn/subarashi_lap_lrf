@@ -36,12 +36,12 @@ namespace Fanex.Athena.DataAccess.Forecast
 
         public async Task<DataTable> GetForecastHandicap(ForecastAHMetaModel metaModel, int userId)
         {
-            return await GetForecastAH(metaModel, "Lrf_Forecast_SelHDP");
+            return await GetForecastAH(metaModel, "Shard_Lrf_Forecast_SelHDP");
         }
 
         public async Task<DataTable> GetForecastOverUnder(ForecastAHMetaModel metaModel, int userId)
         {
-            return await GetForecastAH(metaModel, "Lrf_Forecast_SelOU");
+            return await GetForecastAH(metaModel, "Shard_Lrf_Forecast_SelOU");
         }
 
         private async Task<DataTable> GetForecastAH(ForecastAHMetaModel metaModel, string spName)

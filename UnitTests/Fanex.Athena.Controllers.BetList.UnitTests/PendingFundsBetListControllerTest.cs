@@ -93,7 +93,7 @@
                 await controller.Received().ProcessExportExcel(
                     Arg.Is<BetListExcelMetaModel>(x => x.ShowingOption.CustomerCommVisible == DefaultLicenseeSession.IsAllowedCustomerComm
                         && x.Title == expectedTitle
-                        && x.UspKey == "Lrf_BetList_SelRunningByDate_Mem"
+                        && x.UspKey == "Shard_Lrf_BetList_SelRunningByDate_Mem"
                         && string.Join(",", x.HiddenColumns) == "1,2,7,8,9"
                         && x.LicenseeId == DefaultLicenseeSession.LicenseeId
                         && !x.IsShowSumStake

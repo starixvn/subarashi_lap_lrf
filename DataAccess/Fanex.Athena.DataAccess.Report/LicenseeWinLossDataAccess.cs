@@ -39,7 +39,7 @@
             IDictionary<int, string> currencyList,
             bool checkPromotionPrize = false)
         {
-            const string UspName = "Lrf_Rpt_LicWinloss";
+            const string UspName = "Shard_Lrf_Rpt_LicWinloss";
 
             using (var db = this.GetObjectDb(UspName))
             {
@@ -58,7 +58,7 @@
             IDictionary<int, string> currencyList,
             bool checkPromotionPrize = false)
         {
-            const string UspName = "Lrf_Rpt_LicWinlossDetail";
+            const string UspName = "Shard_Lrf_Rpt_LicWinlossDetail";
 
             using (var db = this.GetObjectDb(UspName))
             {
@@ -76,7 +76,7 @@
             IDictionary<int, string> currencyList,
             bool checkPromotionPrize = false)
         {
-            const string UspName = "Lrf_Rpt_LicWinlossDetail_Ag";
+            const string UspName = "Shard_Lrf_Rpt_LicWinlossDetail_Ag";
 
             using (var db = this.GetObjectDb(UspName))
             {
