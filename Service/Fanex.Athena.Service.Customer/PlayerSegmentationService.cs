@@ -59,6 +59,12 @@
         {
             var result = await _playerDataAccess.UpdateVipStatusAsync(metaModel);
             var listAffCustId = result.ListAffectCustId;
+            var returnResult = result.ListUpdateStatusPlayerResult;
+
+            if (!metaModel.IsUseCtsApi)
+            {
+                return returnResult;
+            }    
 
             if (string.IsNullOrWhiteSpace(listAffCustId))
             {
@@ -70,7 +76,7 @@
                 await _ctsApiClient.PostAsync(path, new { CustIds = listAffCustId }, _sessionService.UserSession.Language);
             }
 
-            return result.ListUpdateStatusPlayerResult;
+            return returnResult;
         }
 
         public async Task<IEnumerable<ReasonGroup>> GetReasonGroupListAsync(string langKey)

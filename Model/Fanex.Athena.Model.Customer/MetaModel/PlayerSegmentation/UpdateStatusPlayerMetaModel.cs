@@ -15,6 +15,8 @@ namespace Fanex.Athena.Model.Customer.MetaModel
         public int UserId { get; set; }
         public string Ip { get; set; }
 
+        public bool IsUseCtsApi { get; set; }
+
         public bool IsValid => !string.IsNullOrWhiteSpace(SystemIds) || !string.IsNullOrWhiteSpace(ExternalIds);
     }
 }
