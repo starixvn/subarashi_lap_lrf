@@ -96,9 +96,11 @@
     <Compile Include="Abstraction\BaseApiClient.cs" />
     <Compile Include="AuthorizationService.cs" />
     <Compile Include="BetTypeService.cs" />
+    <Compile Include="CTSApiClient.cs" />
     <Compile Include="FunctionUMService.cs" />
     <Compile Include="Exception\ProxyException.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Interfaces\ICTSApiClient.cs" />
     <Compile Include="Interfaces\IFunctionUMService.cs" />
     <Compile Include="Interfaces\IPortalApiService.cs" />
     <Compile Include="Interfaces\IOicApiClient.cs" />

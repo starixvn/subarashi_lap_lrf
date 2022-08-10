@@ -61,5 +61,7 @@
 
         IEnumerable<string> ListActionNoView { get; }        
         string BetTicketEventBuilderUrl { get; }
+
+        bool IsUseCtsApi { get; }
     }
 }

@@ -3,6 +3,7 @@
     using Fanex.Athena.Api.Base;
     using Fanex.Athena.Api.Base.Attributes;
     using Fanex.Athena.DataAccess.Core.Common.Interfaces;
+    using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
     using Fanex.Athena.Model.Customer.MetaModel;
@@ -21,12 +22,14 @@
         private readonly IPlayerSegmentationService _playerService;
         private readonly IBetListApiClient _betListApiClient;
         private readonly IProductDataAccess _productDataAccess;
+        private readonly IAppSettings _appSettings;
 
         public PlayerSegmentationController(ILanguageService languageService,
             IAuthorizationService authService,
             IPlayerSegmentationService playerService,
             IProductDataAccess productDataAccess,
-            IBetListApiClient betListApiClient
+            IBetListApiClient betListApiClient,
+            IAppSettings appSettings
             )
             : base(languageService)
         {
@@ -34,6 +37,7 @@
             _playerService = playerService;
             _productDataAccess = productDataAccess;
             _betListApiClient = betListApiClient;
+            _appSettings = appSettings;
         }
 
         [HttpPost]
@@ -42,6 +46,7 @@
         [ApiFunctionAuthorization(PermissionKeys.PlayerVIPManagement_Write)]
         public async Task<JsonResult<IEnumerable<UpdateStatusPlayerResult>>> UpdateVipStatus(UpdateStatusPlayerMetaModel metaModel)
         {
+            metaModel.IsUseCtsApi = _appSettings.IsUseCtsApi;
             var result = await _playerService.UpdateVipStatusAsync(metaModel).ConfigureAwait(false);
             return JsonApi(result);
         }

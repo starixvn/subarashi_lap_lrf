@@ -187,7 +187,7 @@ namespace Fanex.Athena.DataAccess.Customer.UnitTests
 
             //Action
             var result = await DataAccess.UpdateVipStatusAsync(metaModel);
-            var firstData = result.First();
+            var firstData = result.ListUpdateStatusPlayerResult.First();
 
             //Assert
             Assert.Multiple(() =>

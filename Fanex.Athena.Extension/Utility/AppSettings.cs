@@ -162,6 +162,8 @@
 
         public string TempFilePath => GetValue("TempFilePath");
 
+        public bool IsUseCtsApi => bool.Parse(GetValue("IsUseCtsApi"));
+
         #endregion Assign Currency
 
         public string GetValue(string key)
