@@ -45,7 +45,7 @@ namespace Fanex.Athena.Service.Core.OAuth
         public byte UserLevel => GetClaimValue<byte>("UserLevel");
         public bool IsMasterLicensee => GetClaimValue<bool>("IsMasterLicensee");
         public string OperatorID => GetClaimValue("OperatorID");
-        public int SiteDBGroupID => GetClaimValue("SiteDBGroupID", 0);
+        public string SiteDBServer => GetClaimValue("SiteDBServer");
 
         public IEnumerable<string> OfferedSubProductList
         {

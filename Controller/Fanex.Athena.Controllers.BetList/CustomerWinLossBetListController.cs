@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="CustomerWinLossBetListController.cs" company="">
-// Report controller
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Controllers.BetList
+﻿namespace Fanex.Athena.Controllers.BetList
 {
     using System.Threading.Tasks;
     using System.Web.Mvc;
@@ -20,12 +14,20 @@ namespace Fanex.Athena.Controllers.BetList
 
         [HttpGet]
         [ValidationWebRequest(IsValidCurrency = true)]
+        [AutoBindMetaModel(IgnoreSharding = true)]
         public async Task<ActionResult> Index(BetListExcelMetaModel metaModel)
+            => await Action(metaModel).ConfigureAwait(false);
+
+        [HttpGet]
+        [ValidationWebRequest(IsValidCurrency = true)]
+        public async Task<ActionResult> Live(BetListExcelMetaModel metaModel) 
+            => await Action(metaModel).ConfigureAwait(false);
+
+        private Task<ActionResult> Action(BetListExcelMetaModel metaModel)
         {
             CreateDefaultMetaModel(metaModel);
             InitBaseCurrencyValue(metaModel);
-
-            return await ProcessDefaultRequest(metaModel, "~/Views/Desktop/BetList/CustomerWl/Main.cshtml", "Lrf_BetList_SelWinLossByDate_Mem").ConfigureAwait(false);
+            return ProcessDefaultRequest(metaModel, "~/Views/Desktop/BetList/CustomerWl/Main.cshtml", "Shard_Lrf_BetList_CustomerWL_Mem");
         }
 
         protected override async Task<ActionResult> ExportExcel(BetListExcelMetaModel metaModel)
@@ -33,7 +35,7 @@ namespace Fanex.Athena.Controllers.BetList
             metaModel.Title = GetCustomerBetListTitle(metaModel, GetViewInCurrency(metaModel));
             metaModel.ShowingOption = new ShowingOption
             {
-                CustomerCommVisible = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm,
+                CustomerCommVisible = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm
             };
             metaModel.HiddenColumns = HiddenColumns;
             return await ProcessExportExcel(metaModel, "CustomerWinLossBetList").ConfigureAwait(false);

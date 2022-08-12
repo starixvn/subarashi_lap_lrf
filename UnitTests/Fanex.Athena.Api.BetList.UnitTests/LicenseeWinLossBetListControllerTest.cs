@@ -18,7 +18,7 @@
 
     public class LicenseeWinLossBetListControllerTest : ApiBetListBaseControllerHelperTest
     {
-        private const string UspKey = "Lrf_BetList_SelWinloss_Mem";
+        private const string UspKey = "Shard_Lrf_BetList_LicenseeWL_Mem";
 
         private const string ApiPath = "/BetList/GetBetList";
 

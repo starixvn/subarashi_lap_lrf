@@ -1,7 +1,6 @@
 ﻿namespace Fanex.Athena.Service.Core.Users.Interfaces
 {
     using Fanex.Athena.Model.Auth;
-    using System.Collections.Specialized;
 
     public interface ISessionService
     {
@@ -13,7 +12,7 @@
 
         string FromReferer { get; }
 
-        NameValueCollection RequestHeaders { get; }
+        bool IsIgnoreSharding { get; }
 
         LicenseeAuthInfo LicenseeSession { get; }
 

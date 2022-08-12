@@ -98,7 +98,7 @@
                     Arg.Is<BetListExcelMetaModel>(x => x.ShowingOption.CustomerCommVisible == DefaultLicenseeSession.IsAllowedCustomerComm
                         && x.Title == expectedTitle
                         && string.Join(",", x.HiddenColumns) == "1,2,8"
-                        && x.UspKey == "Lrf_BetList_SelWinloss_Mem"
+                        && x.UspKey == "Shard_Lrf_BetList_LicenseeWL_Mem"
                         && x.LicenseeId == DefaultLicenseeSession.LicenseeId
                         && !x.IsShowSumStake
                        ),

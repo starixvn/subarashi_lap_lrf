@@ -10,6 +10,8 @@ using System.Collections.Generic;
 using Fanex.Athena.Model.Auth;
 using Fanex.Athena.Service.Core.Users;
 using Fanex.Athena.Model.Core.Helper;
+using System.Web;
+using Fanex.Athena.Extension;
 
 namespace Fanex.Athena.Web.ActionFilter
 {
@@ -44,6 +46,9 @@ namespace Fanex.Athena.Web.ActionFilter
 
         public bool ApplySubsidiaryBusiness { get; set; }
 
+        public bool IgnoreSharding { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Critical Code Smell", "S1541:Methods and properties should not be too complex", Justification = "Howard")]
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             var userSession = _sessionService.UserSession;
@@ -61,8 +66,7 @@ namespace Fanex.Athena.Web.ActionFilter
 
             if (BindSiteName)
             {
-                var licensee = _sessionService.LicenseeSession;
-                AutoBindMetaModelService.MapSiteName(actionArgument, licensee.LicenseeName);
+                AutoBindMetaModelService.MapSiteName(actionArgument, licenseeSession.LicenseeName);
             }
 
             if (BindLanguage)
@@ -80,6 +84,7 @@ namespace Fanex.Athena.Web.ActionFilter
             {
                 MapLicenseeContract(filterContext);
             }
+
             if (BindCurrencyList)
             {
                 AutoBindMetaModelService.MapCurrencyList(actionArgument, userSession.CurrencyList);
@@ -93,6 +98,11 @@ namespace Fanex.Athena.Web.ActionFilter
             if (BindProductOptions)
             {
                 AutoBindMetaModelService.MapProductOptions(actionArgument, _sessionService.LicenseeSession.OfferedSubProductList, ProductService);
+            }
+
+            if(IgnoreSharding)
+            {
+                HttpContext.Current.AddIgnoreSharding();
             }
 
             base.OnActionExecuting(filterContext);

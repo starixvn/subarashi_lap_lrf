@@ -117,7 +117,7 @@ namespace Fanex.Athena.Service.Core.Users
                 IsEnableSingleWallet = oauthInfo.IsEnableSingleWallet,
                 OfferedSubProductList = oauthInfo.OfferedSubProductList,
                 OfferedOddsGroupsList = oauthInfo.OfferedOddsGroupList,
-                SiteDBGroupID = oauthInfo.SiteDBGroupID
+                SiteDBServer = oauthInfo.SiteDBServer
             };
     }
 }

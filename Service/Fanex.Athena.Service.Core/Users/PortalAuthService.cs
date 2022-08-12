@@ -151,7 +151,7 @@
                 IsEnableSingleWallet = oauthInfo.IsEnableSingleWallet,
                 OfferedSubProductList = oauthInfo.OfferedSubProductList,
                 OfferedOddsGroupsList = oauthInfo.OfferedOddsGroupList,
-                SiteDBGroupID = oauthInfo.SiteDBGroupID
+                SiteDBServer = oauthInfo.SiteDBServer
             };
 
         private UserAuthInfo GenerateUserInfo(IOAuthInfo oauthInfo)

@@ -5,6 +5,8 @@
     using System.Linq;
     using System.Web.Mvc;
     using Extension.Helper;
+    using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
+    using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.MetaModel.Product;
@@ -20,25 +22,33 @@
     {
         private readonly IReportSettingService _reportSettingService;
         private readonly IAuthorizationService _authService;
+        private readonly IBalanceUpDataAccess _balanceUpDataAccess;
 
         public LicenseeWinLossReportController(
             IReportSettingService reportSettingService,
-             IAuthorizationService authService
+            IAuthorizationService authService,
+            IBalanceUpDataAccess balanceUpDataAccess
             )
         {
             _reportSettingService = reportSettingService;
             _authService = authService;
+            _balanceUpDataAccess = balanceUpDataAccess;
         }
 
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(bool isHistory = false)
         {
             if (IsFakeLicensee(SessionServiceInstance.LicenseeSession.LicenseeName))
             {
                 return MapToFakeView();
             }
+            var ignoreSharding = string.IsNullOrEmpty(SessionServiceInstance.LicenseeSession.SiteDBServer);
+            if (!isHistory && ignoreSharding)
+            {
+                isHistory = true;
+            }
 
-            return MapToView();
+            return MapToView(isHistory, ignoreSharding);
         }
 
         private static IDictionary<int, string> GetFakeBaseCurrencies(string baseCurrencySetting, string defaultBaseCurrency)
@@ -66,12 +76,14 @@
                 reportSetting.TimeZone.HasValue ? DateTime.UtcNow.AddHours(reportSetting.TimeZone.Value) : DateTime.Now);
         }
 
-        private ActionResult MapToView()
+        private ActionResult MapToView(bool isHistory, bool ignoreSharding)
         {
             var licenseeSession = SessionServiceInstance.LicenseeSession;
             var userSession = SessionServiceInstance.UserSession;
             var reportSetting = _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss,
                 licenseeSession.LicenseeName);
+            reportSetting.MinDate = isHistory ? AppSettingInstance.HistoryDate : _balanceUpDataAccess.GetBalanceUp().MoveBetsDay.AddDays(1);
+
             var selectedDate = GetSelectedDate(reportSetting);
             var productAccess = ProductServiceInstance.GetSingleWalletProductAccess(
                 licenseeSession.LicenseeId,
@@ -102,6 +114,8 @@
                 IsAllowedCustomerCommission = licenseeSession.IsAllowedCustomerComm,
                 ProductAccess = productAccess,
                 ReportSetting = reportSetting,
+                IsHistory = isHistory,
+                IgnoreSharding = ignoreSharding,
                 HasExtraPayoutPermission = _authService.HasPermissions(SessionServiceInstance.UserSession, PermissionKeys.ReportExtraPayout)
             };
             return View("~/Views/Desktop/Report/LicenseeWinLoss/Main.cshtml", model);

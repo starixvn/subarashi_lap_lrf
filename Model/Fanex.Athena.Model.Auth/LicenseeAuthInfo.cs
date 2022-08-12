@@ -20,6 +20,6 @@ namespace Fanex.Athena.Model.Auth
 
         public IEnumerable<string> OfferedOddsGroupsList { get; set; }
 
-        public int SiteDBGroupID { get; set; }
+        public string SiteDBServer { get; set; }
     }
 }

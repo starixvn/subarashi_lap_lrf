@@ -42,7 +42,7 @@
                 return null;
             }
 
-            const string UspKey = "Lrf_BetList_SelWinloss_Mem";
+            const string UspKey = "Shard_Lrf_BetList_LicenseeWL_Mem";
             return await GetBetListResult(metaModel, UspKey).ConfigureAwait(false);
         }
 

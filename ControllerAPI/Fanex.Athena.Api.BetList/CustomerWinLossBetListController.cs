@@ -28,8 +28,7 @@
         [ValidationApiRequest(IsValidCurrency = true)]
         public async Task<dynamic> Index(BetListMetaModel metaModel)
         {
-            const string UspKey = "Lrf_BetList_SelWinLossByDate_Mem";
-
+            const string UspKey = "Shard_Lrf_BetList_CustomerWL_Mem";
             return await GetBetListResult(metaModel, UspKey).ConfigureAwait(false);
         }
     }

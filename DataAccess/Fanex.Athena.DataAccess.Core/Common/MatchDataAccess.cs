@@ -35,7 +35,7 @@ namespace Fanex.Athena.DataAccess.Core.Common
 
         public async Task<IList<Match>> GetForecastMatchListByLeague(int leagueId)
         {
-            const string UspName = "Lrf_Forecast_MatchList";
+            const string UspName = "Shard_Lrf_Forecast_MatchList";
             IList<Match> result = new List<Match>();
 
             var uspParam = new

@@ -113,7 +113,7 @@
             // Arrange
             const string AgentList = "<sdfsdfml>";
             const string BetTypes = "1,2,3,4,5";
-            DataAccess.GetObjectDb(Arg.Is("Lrf_LeagueSelRunning")).Returns(ObjectDb);
+            DataAccess.GetObjectDb(Arg.Is("Shard_Lrf_LeagueSelRunning")).Returns(ObjectDb);
             _appSettings.IsProduction.Returns(isProduction);
 
             var balanceUpDate = new DateTime(2018, 2, 3);

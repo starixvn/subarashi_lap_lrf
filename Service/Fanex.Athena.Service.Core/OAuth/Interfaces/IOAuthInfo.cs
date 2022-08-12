@@ -19,7 +19,7 @@ namespace Fanex.Athena.Service.Core.OAuth
         bool IsAdministrator { get; }
         string DefaultReportUrl { get; }
         bool IsMasterLicensee { get; }
-        int SiteDBGroupID { get; }
+        string SiteDBServer { get; }
 
         PortalFunction[] LapFunctionList { get; }
         Function[] LrfFunctionList { get; }

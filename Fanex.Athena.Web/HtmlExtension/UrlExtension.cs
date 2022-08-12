@@ -9,8 +9,7 @@
 
     public static class UrlExtension
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", Justification = "Extension method")]
-        public static string ContentLink(this UrlHelper helper, string contentPath)
+        public static string ContentLink(this UrlHelper _, string contentPath)
         {
             var cdnDomain = ConfigurationManager.AppSettings["StaticDomain"];
             var appPath = string.IsNullOrEmpty(cdnDomain) ? HttpContext.Current.Request.ApplicationPath : cdnDomain;

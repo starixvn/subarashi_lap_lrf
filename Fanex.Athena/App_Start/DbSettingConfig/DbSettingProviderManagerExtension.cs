@@ -1,7 +1,6 @@
 ﻿using Fanex.Athena.Service.Core.Users;
 using Fanex.Data;
 using System;
-using System.Configuration;
 
 namespace Fanex.Athena
 {
@@ -11,9 +10,7 @@ namespace Fanex.Athena
 
         [CLSCompliant(false)]
         public static DbSettingProviderManager UseShardDbSettingProvider(this DbSettingProviderManager dbSettingProviderManager)
-            => dbSettingProviderManager.Use(new ShardDbSettingProvider(new ShardInfoAccessor(
-                    new SessionService(),
-                    Cryptography.DecryptConnectionString(ConfigurationManager.ConnectionStrings["DBEXT.bodb02.bodbLicenseeNet"].ConnectionString)),
+            => dbSettingProviderManager.Use(new ShardDbSettingProvider(new ShardInfoAccessor(new SessionService()),
                     resourcePath: SpNameConfigSource));
 
     }

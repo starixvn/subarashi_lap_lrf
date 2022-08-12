@@ -1,8 +1,8 @@
 ﻿namespace Fanex.Athena.Service.Core.Users
 {
+    using Fanex.Athena.Extension;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.Core.Users.Interfaces;
-    using System.Collections.Specialized;
     using System.Web;
     using System.Web.SessionState;
 
@@ -20,8 +20,6 @@
 
         public UserAuthInfo UserSession => CurrentSession[UserSessionKey] as UserAuthInfo;
 
-        public NameValueCollection RequestHeaders => CurrentContext.Request.Headers;
-
         public string CaptchaCode
         {
             get { return CurrentSession[CaptchaCodeKey] as string; }
@@ -32,7 +30,9 @@
 
         public string ClientIP => CurrentContext.Request.UserHostAddress;
 
-        public string FromReferer => RequestHeaders["Referer"];
+        public string FromReferer => CurrentContext.Request.Headers["Referer"];
+
+        public bool IsIgnoreSharding => CurrentContext?.IsIgnoreSharding() ?? false;
 
         public void AssignSessions(UserAuthInfo userSession, LicenseeAuthInfo licenseeSession)
         {

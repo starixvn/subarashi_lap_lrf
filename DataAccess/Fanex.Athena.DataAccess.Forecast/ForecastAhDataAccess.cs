@@ -1,10 +1,4 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="ForecastDataAccess.cs" company="">
-// Copyright (c) . All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-
-namespace Fanex.Athena.DataAccess.Forecast
+﻿namespace Fanex.Athena.DataAccess.Forecast
 {
     using System.Data;
     using System.Threading.Tasks;
@@ -22,9 +16,9 @@ namespace Fanex.Athena.DataAccess.Forecast
 
         public async Task<ForecastAH> GetForecastTopOddsByMatch(int matchId, int betType)
         {
-            const string UspName = "Lrf_Forecast_OddsSelTopByMatch";
+            const string UspName = "Shard_Lrf_Forecast_OddsSelTopByMatch";
 
-            using (var db = this.GetObjectDb(UspName))
+            using (var db = GetObjectDb(UspName))
             {
                 db.SetParameterValue("matchid", matchId);
                 db.SetParameterValue("betType", betType);

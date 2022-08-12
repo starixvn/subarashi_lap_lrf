@@ -71,13 +71,15 @@
             </div>
         </div>
         <div class="row">
-            <div class="col">
-                <span class="circle"></span>
-                <span>
-                    @string.Format(ViewResources.HistoricalReportDateRangeNote, Model.MinDate),
-                    <a href="javascript:;" id="history-report-link">@ViewResources.ToViewHistoryRptMsg</a>
-                </span>
-            </div>
+            @if (!Model.IsHistory)
+            {
+                <div class="col">
+                    <span class="circle"></span>
+                    <span>
+                        @string.Format(ViewResources.InstantDataReportNote, Model.MinDate.ToString("MM/dd/yyyy"))
+                    </span>
+                </div>
+            }
             <div class="col right right-filter-menu">
                 @if (!Model.IsFakeLicensee)
                 {
@@ -91,4 +93,5 @@
     @Html.Hidden("IsAllowedCustomerCommission", Model.IsAllowedCustomerCommission)
     @Html.Hidden("IsAllowedBA", Model.ProductAccess.IsAllowBA)
     @Html.Hidden("HasExtraPayoutPermission", Model.HasExtraPayoutPermission)
+    @Html.Hidden("IgnoreSharding", Model.IsHistory)
 </div>

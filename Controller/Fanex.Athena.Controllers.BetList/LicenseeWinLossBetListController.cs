@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="LicenseeWinLossBetListController.cs" company="">
-// Report controller
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Controllers.BetList
+﻿namespace Fanex.Athena.Controllers.BetList
 {
     using System.Threading.Tasks;
     using System.Web.Mvc;
@@ -24,12 +18,20 @@ namespace Fanex.Athena.Controllers.BetList
 
         [HttpGet]
         [ValidationWebRequest(IsValidCurrency = true)]
+        [AutoBindMetaModel(IgnoreSharding = true)]
         public async Task<ActionResult> Index(BetListExcelMetaModel metaModel)
+            => await Action(metaModel).ConfigureAwait(false);
+
+        [HttpGet]
+        [ValidationWebRequest(IsValidCurrency = true)]
+        public async Task<ActionResult> Live(BetListExcelMetaModel metaModel)
+          => await Action(metaModel).ConfigureAwait(false);
+
+        private Task<ActionResult> Action(BetListExcelMetaModel metaModel)
         {
             CreateDefaultMetaModel(metaModel);
             InitBaseCurrencyValue(metaModel);
-
-            return await ProcessDefaultRequest(metaModel, "~/Views/Desktop/BetList/LicenseeWl/Main.cshtml", "Lrf_BetList_SelWinloss_Mem").ConfigureAwait(false);
+            return ProcessDefaultRequest(metaModel, "~/Views/Desktop/BetList/LicenseeWl/Main.cshtml", "Shard_Lrf_BetList_LicenseeWL_Mem");
         }
 
         protected override async Task<ActionResult> ExportExcel(BetListExcelMetaModel metaModel)

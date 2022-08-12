@@ -752,6 +752,8 @@
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\VipPlayerUploadByExternalIdTemplate.xls" />
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\VipPlayerUploadBySystemIdTemplate.xls" />
     <Content Include="Views\Desktop\Customer\CustomerClass\AllCustomerClassTab.cshtml" />
+    <Content Include="Views\Desktop\Report\CustomerWinloss\Tab.cshtml" />
+    <Content Include="Views\Desktop\Report\LicenseeWinLoss\Tab.cshtml" />
     <None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
     <None Include="www\css\source\pages\betlist\result\result.happy5.scss" />
     <None Include="www\css\source\reactpages\components\alert\icons\error.scss" />
@@ -1549,7 +1551,6 @@
     <Content Include="Views\Desktop\BetList\PendingFunds\Main.cshtml" />
     <Content Include="Views\Desktop\Report\CustomerWinloss\Content.cshtml" />
     <Content Include="Views\Desktop\Report\CustomerWinloss\Filter.cshtml" />
-    <Content Include="Views\Desktop\Report\CustomerWinloss\HistoryFilter.cshtml" />
     <Content Include="Views\Desktop\Report\CustomerWinloss\Main.cshtml" />
     <Content Include="www\css\build\dev\pages\reports\customerwinloss.chunk.js.map" />
     <Content Include="www\css\build\dev\pages\reports\customerwinloss.css.map" />

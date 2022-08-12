@@ -58,7 +58,7 @@ namespace Fanex.Athena.DataAccess.Core.Common
 
         public async Task<IEnumerable<League>> GetRunningLeagues(string agentList, string betTypes, IEnumerable<int> specialLeagues)
         {
-            const string UspName = "Lrf_LeagueSelRunning";
+            const string UspName = "Shard_Lrf_LeagueSelRunning";
             using (var db = this.GetObjectDb(UspName))
             {
                 db.SetParameterValue("AgentList", agentList);
