@@ -2,7 +2,6 @@ import React, { useState, useMemo } from 'react'
 import LangHelper from '@jsroot/lib/langHelper'
 import Select from 'react-select'
 import CheckBox from '@jsroot/components/CheckBox'
-import RadioGroup from '@jsroot/components/radio/RadioGroup'
 import NoDataTitle from '@jsroot/components/NoDataTitle'
 import { ContactTypeOptions, RecipientTypeOptions, RecipientType, fields } from '../../lib/contants';
 import SweetAlert from '@jsroot/components/sweet-alert';
@@ -150,8 +149,7 @@ const FormContact = ({ contact, setContact, api, msgConfirm, hasConfirm, afterSu
     }
 
     const _renderCategoryAllSelection = () => {
-        const isCheckedAll = contact.Categories.every(_ => _.RecipientType === RecipientType.To)
-            || contact.Categories.every(_ => _.RecipientType === RecipientType.Cc);
+        const isCheckedAll = contact.Categories.every(_ => _.RecipientType === RecipientType.To);
 
         return <div className="row" >
             <div className="col-12">
@@ -165,19 +163,6 @@ const FormContact = ({ contact, setContact, api, msgConfirm, hasConfirm, afterSu
                     }}
                     label={LangHelper.getSingleResource('AllCategories')} />
             </div>
-            {isCheckedAll && <div className="col-12">
-                <RadioGroup
-                    name={"category-selection-group-radio-all"}
-                    value={contact.Categories[0].RecipientType}
-                    options={RecipientTypeOptions}
-                    onChange={(selectedRecipientType) => {
-                        contact.Categories.forEach(category => {
-                            category.RecipientType = selectedRecipientType;
-                        });
-                        setContact({ ...contact })
-                    }}
-                />
-            </div>}
         </div>
     }
 
@@ -185,25 +170,13 @@ const FormContact = ({ contact, setContact, api, msgConfirm, hasConfirm, afterSu
         return <div className="row" >
             <div className="col-12">
                 <CheckBox id={"category-selection" + category.CategoryId}
-                    checked={category.RecipientType !== null}
+                    checked={category.RecipientType === RecipientType.To}
                     onChange={checked => {
                         category.RecipientType = checked ? RecipientType.To : null;
                         setContact({ ...contact })
                     }}
                     label={getCategoryDisplayName(category)} />
             </div>
-            {category.RecipientType !== null && <div className="col-12">
-                <RadioGroup
-                    key={'category-selection-group-radio' + category.CategoryId + '_' + category.RecipientType}
-                    name={"category-selection-group-radio" + category.CategoryId}
-                    value={category.RecipientType}
-                    options={RecipientTypeOptions}
-                    onChange={(selectedRecipientType) => {
-                        category.RecipientType = selectedRecipientType;
-                        setContact({ ...contact })
-                    }}
-                />
-            </div>}
         </div>
     }
 

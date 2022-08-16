@@ -35,7 +35,6 @@ export const DataGrid = ({ contactList, setModificationAction }) => {
             <HeaderCell colWidth={40}>{textHeaders[fields.Email]}</HeaderCell>
             <HeaderCell colWidth={40}>{textHeaders[fields.Skype]}</HeaderCell>
             <HeaderCell colWidth={70}>{textHeaders[fields.ToList]}</HeaderCell>
-            <HeaderCell colWidth={70}>{textHeaders[fields.CcList]}</HeaderCell>
             <HeaderCell colWidth={40}>{textHeaders[fields.Remark]}</HeaderCell>
             <HeaderCell colWidth={30}>{textHeaders['Action']}</HeaderCell>
         </HeaderRow>
@@ -52,7 +51,6 @@ export const DataGrid = ({ contactList, setModificationAction }) => {
             <Cell className="left-align" title={contact[fields.Email]} >{contact[fields.Email]}</Cell>
             <Cell className="left-align" title={contact[fields.Skype]} >{contact[fields.Skype]}</Cell>
             <Cell className="left-align">{contact[fields.ToList].map(to => <div>{decode(to)}</div>)}</Cell>
-            <Cell className="left-align">{contact[fields.CcList].map(cc => <div>{decode(cc)}</div>)}</Cell>
             <Cell className="left-align">{contact[fields.Remark]}</Cell>
             <Cell className="center-align action-cell">
                 <button className="btn-default btn-link btn-icon"

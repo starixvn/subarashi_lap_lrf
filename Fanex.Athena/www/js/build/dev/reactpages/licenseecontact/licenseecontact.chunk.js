@@ -1183,156 +1183,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./www/js/source/reactpages/components/radio/Radio.jsx":
-/*!*************************************************************!*\
-  !*** ./www/js/source/reactpages/components/radio/Radio.jsx ***!
-  \*************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return radio; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-
-class radio extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-      type: "radio",
-      value: this.props.value,
-      checked: this.props.checked,
-      name: this.props.name,
-      id: this.props.id,
-      onChange: () => this.props.onChange(this.props.value)
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      htmlFor: this.props.id
-    }, this.props.label));
-  }
-
-}
-
-_defineProperty(radio, "propTypes", {
-  id: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired,
-  label: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
-  name: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
-  value: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string]),
-  checked: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
-  onChange: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
-});
-
-_defineProperty(radio, "defaultProps", {
-  label: '',
-  name: '',
-  value: 0,
-  checked: false
-});
-
-/***/ }),
-
-/***/ "./www/js/source/reactpages/components/radio/RadioGroup.jsx":
-/*!******************************************************************!*\
-  !*** ./www/js/source/reactpages/components/radio/RadioGroup.jsx ***!
-  \******************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return RadioGroup; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _Radio__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Radio */ "./www/js/source/reactpages/components/radio/Radio.jsx");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-
-
-class RadioGroup extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: props.value
-    };
-  }
-
-  onChange(value) {
-    if (this.state.value === value) {
-      return;
-    }
-
-    this.setState({
-      value: value
-    });
-    this.props.onChange(value);
-  }
-
-  _renderItem() {
-    const {
-      options,
-      name
-    } = this.props;
-    let radios = [];
-
-    for (let i = 0; i < options.length; i++) {
-      const item = options[i];
-      const isChecked = item.value === this.state.value;
-      const id = `${name}-${item.value}`;
-      radios.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Radio__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        key: id,
-        value: item.value,
-        checked: isChecked,
-        name: name,
-        id: id,
-        label: item.label,
-        onChange: value => this.onChange(value)
-      }));
-    }
-
-    return radios;
-  }
-
-  render() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "radio-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      className: "label-text"
-    }, this.props.label), this._renderItem());
-  }
-
-}
-
-_defineProperty(RadioGroup, "propTypes", {
-  label: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
-  name: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
-  options: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.shape({
-    label: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
-    value: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string])
-  })).isRequired,
-  onChange: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
-  value: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string])
-});
-
-_defineProperty(RadioGroup, "defaultProps", {
-  label: '',
-  name: '',
-  value: 0,
-  onChange: function () {}
-});
-
-/***/ }),
-
 /***/ "./www/js/source/reactpages/components/sweet-alert/icon.js":
 /*!*****************************************************************!*\
   !*** ./www/js/source/reactpages/components/sweet-alert/icon.js ***!
@@ -2686,8 +2536,6 @@ const DataGrid = ({
     }, _lib_contants__WEBPACK_IMPORTED_MODULE_8__["textHeaders"][_lib_contants__WEBPACK_IMPORTED_MODULE_8__["fields"].Skype]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
       colWidth: 70
     }, _lib_contants__WEBPACK_IMPORTED_MODULE_8__["textHeaders"][_lib_contants__WEBPACK_IMPORTED_MODULE_8__["fields"].ToList]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
-      colWidth: 70
-    }, _lib_contants__WEBPACK_IMPORTED_MODULE_8__["textHeaders"][_lib_contants__WEBPACK_IMPORTED_MODULE_8__["fields"].CcList]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
       colWidth: 40
     }, _lib_contants__WEBPACK_IMPORTED_MODULE_8__["textHeaders"][_lib_contants__WEBPACK_IMPORTED_MODULE_8__["fields"].Remark]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
       colWidth: 30
@@ -2720,8 +2568,6 @@ const DataGrid = ({
     }, contact[_lib_contants__WEBPACK_IMPORTED_MODULE_8__["fields"].Skype]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
       className: "left-align"
     }, contact[_lib_contants__WEBPACK_IMPORTED_MODULE_8__["fields"].ToList].map(to => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, Object(_jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_6__["decode"])(to)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
-      className: "left-align"
-    }, contact[_lib_contants__WEBPACK_IMPORTED_MODULE_8__["fields"].CcList].map(cc => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, Object(_jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_6__["decode"])(cc)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
       className: "left-align"
     }, contact[_lib_contants__WEBPACK_IMPORTED_MODULE_8__["fields"].Remark]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
       className: "center-align action-cell"
@@ -3170,21 +3016,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-select */ "./node_modules/react-select/dist/react-select.es.js");
 /* harmony import */ var _jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/components/CheckBox */ "./www/js/source/reactpages/components/CheckBox.jsx");
-/* harmony import */ var _jsroot_components_radio_RadioGroup__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/components/radio/RadioGroup */ "./www/js/source/reactpages/components/radio/RadioGroup.jsx");
-/* harmony import */ var _jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/components/NoDataTitle */ "./www/js/source/reactpages/components/NoDataTitle.jsx");
-/* harmony import */ var _lib_contants__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../lib/contants */ "./www/js/source/reactpages/pages/licenseecontact/lib/contants.js");
-/* harmony import */ var _jsroot_components_sweet_alert__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/components/sweet-alert */ "./www/js/source/reactpages/components/sweet-alert/index.jsx");
-/* harmony import */ var _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @jsroot/lib/sweetAlert */ "./www/js/source/reactpages/lib/sweetAlert.js");
-/* harmony import */ var _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @jsroot/lib/stringHelper */ "./www/js/source/reactpages/lib/stringHelper.js");
-/* harmony import */ var _lib_helper__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../lib/helper */ "./www/js/source/reactpages/pages/licenseecontact/lib/helper.js");
-/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
-/* harmony import */ var _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @jsroot/constants/report */ "./www/js/source/reactpages/constants/report.js");
+/* harmony import */ var _jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/components/NoDataTitle */ "./www/js/source/reactpages/components/NoDataTitle.jsx");
+/* harmony import */ var _lib_contants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../lib/contants */ "./www/js/source/reactpages/pages/licenseecontact/lib/contants.js");
+/* harmony import */ var _jsroot_components_sweet_alert__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/components/sweet-alert */ "./www/js/source/reactpages/components/sweet-alert/index.jsx");
+/* harmony import */ var _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/lib/sweetAlert */ "./www/js/source/reactpages/lib/sweetAlert.js");
+/* harmony import */ var _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @jsroot/lib/stringHelper */ "./www/js/source/reactpages/lib/stringHelper.js");
+/* harmony import */ var _lib_helper__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../lib/helper */ "./www/js/source/reactpages/pages/licenseecontact/lib/helper.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+/* harmony import */ var _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @jsroot/constants/report */ "./www/js/source/reactpages/constants/report.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -3212,17 +3056,17 @@ const FormContact = ({
   const [sweetAlertOption, setSweetAlertOption] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null);
   const [isSubmitted, setIsSubmitted] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
 
-  const _showSubsidiaryDropdown = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => Object(_lib_helper__WEBPACK_IMPORTED_MODULE_10__["isShowSubsidiaryInfo"])(_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].subsidiaryViewType, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].subsidiaryList), []);
+  const _showSubsidiaryDropdown = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => Object(_lib_helper__WEBPACK_IMPORTED_MODULE_9__["isShowSubsidiaryInfo"])(_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].subsidiaryViewType, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].subsidiaryList), []);
 
-  const _requiredSubsidiary = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => _showSubsidiaryDropdown && _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].subsidiaryViewType !== _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_12__["SubsidiaryViewType"].MASTER_MANAGEMENT, [_showSubsidiaryDropdown]);
+  const _requiredSubsidiary = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => _showSubsidiaryDropdown && _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].subsidiaryViewType !== _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_11__["SubsidiaryViewType"].MASTER_MANAGEMENT, [_showSubsidiaryDropdown]);
 
   const _subsidiaryListSource = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => {
-    let subsidiarylist = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].subsidiaryList.map(_ => ({
+    let subsidiarylist = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].subsidiaryList.map(_ => ({
       value: _,
       label: _
     }));
 
-    if (_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].subsidiaryViewType === _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_12__["SubsidiaryViewType"].MASTER_MANAGEMENT) {
+    if (_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].subsidiaryViewType === _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_11__["SubsidiaryViewType"].MASTER_MANAGEMENT) {
       subsidiarylist = [{
         value: 'none',
         label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('None')
@@ -3233,7 +3077,7 @@ const FormContact = ({
   }, []);
 
   if (!contact) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_5__["default"], null);
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_4__["default"], null);
   }
 
   const _renderGeneralInformation = () => {
@@ -3255,7 +3099,7 @@ const FormContact = ({
       className: "col-7"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_2__["default"], {
       instanceId: "SubsidiaryList",
-      className: isSubmitted && !_lib_helper__WEBPACK_IMPORTED_MODULE_10__["contactValidationHandler"][_lib_contants__WEBPACK_IMPORTED_MODULE_6__["fields"].Subsidiary](contact.Subsidiary, _requiredSubsidiary) ? 'select-highlight' : '',
+      className: isSubmitted && !_lib_helper__WEBPACK_IMPORTED_MODULE_9__["contactValidationHandler"][_lib_contants__WEBPACK_IMPORTED_MODULE_5__["fields"].Subsidiary](contact.Subsidiary, _requiredSubsidiary) ? 'select-highlight' : '',
       isSearchable: false,
       placeholder: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('PleaseSelectOne'),
       value: contact.Subsidiary || 'none',
@@ -3273,11 +3117,11 @@ const FormContact = ({
       className: "col-7"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_2__["default"], {
       instanceId: "ContactTypeOptions",
-      className: isSubmitted && !_lib_helper__WEBPACK_IMPORTED_MODULE_10__["contactValidationHandler"][_lib_contants__WEBPACK_IMPORTED_MODULE_6__["fields"].ContactType](contact.ContactType) ? 'select-highlight' : '',
+      className: isSubmitted && !_lib_helper__WEBPACK_IMPORTED_MODULE_9__["contactValidationHandler"][_lib_contants__WEBPACK_IMPORTED_MODULE_5__["fields"].ContactType](contact.ContactType) ? 'select-highlight' : '',
       isSearchable: false,
       placeholder: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('PleaseSelectOne'),
       value: contact.ContactType,
-      options: _lib_contants__WEBPACK_IMPORTED_MODULE_6__["ContactTypeOptions"],
+      options: _lib_contants__WEBPACK_IMPORTED_MODULE_5__["ContactTypeOptions"],
       onChange: item => setContact(_objectSpread(_objectSpread({}, contact), {}, {
         ContactType: item.value
       }))
@@ -3293,7 +3137,7 @@ const FormContact = ({
       type: "text",
       id: "Name",
       name: "Name",
-      className: `input-text ${isSubmitted && _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_9__["default"].isEmptyOrWhiteSpace(contact.ContactName) ? 'input-highlight' : ''}`,
+      className: `input-text ${isSubmitted && _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_8__["default"].isEmptyOrWhiteSpace(contact.ContactName) ? 'input-highlight' : ''}`,
       maxLength: 50,
       value: contact.ContactName,
       onChange: event => setContact(_objectSpread(_objectSpread({}, contact), {}, {
@@ -3311,7 +3155,7 @@ const FormContact = ({
       type: "text",
       id: "Position",
       name: "Position",
-      className: `input-text ${isSubmitted && _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_9__["default"].isEmptyOrWhiteSpace(contact.Position) ? 'input-highlight' : ''}`,
+      className: `input-text ${isSubmitted && _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_8__["default"].isEmptyOrWhiteSpace(contact.Position) ? 'input-highlight' : ''}`,
       maxLength: 50,
       value: contact.Position,
       onChange: event => setContact(_objectSpread(_objectSpread({}, contact), {}, {
@@ -3329,7 +3173,7 @@ const FormContact = ({
       type: "text",
       id: "Department",
       name: "Department",
-      className: `input-text ${isSubmitted && _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_9__["default"].isEmptyOrWhiteSpace(contact.Department) ? 'input-highlight' : ''}`,
+      className: `input-text ${isSubmitted && _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_8__["default"].isEmptyOrWhiteSpace(contact.Department) ? 'input-highlight' : ''}`,
       maxLength: 50,
       value: contact.Department,
       onChange: event => setContact(_objectSpread(_objectSpread({}, contact), {}, {
@@ -3347,7 +3191,7 @@ const FormContact = ({
       type: "email",
       id: "Email",
       name: "Email",
-      className: `input-text ${isSubmitted && !_lib_helper__WEBPACK_IMPORTED_MODULE_10__["contactValidationHandler"][_lib_contants__WEBPACK_IMPORTED_MODULE_6__["fields"].Email](contact.Email) ? 'input-highlight' : ''}`,
+      className: `input-text ${isSubmitted && !_lib_helper__WEBPACK_IMPORTED_MODULE_9__["contactValidationHandler"][_lib_contants__WEBPACK_IMPORTED_MODULE_5__["fields"].Email](contact.Email) ? 'input-highlight' : ''}`,
       maxLength: 50,
       value: contact.Email,
       onChange: event => setContact(_objectSpread(_objectSpread({}, contact), {}, {
@@ -3365,7 +3209,7 @@ const FormContact = ({
       type: "text",
       id: "Skype",
       name: "Skype",
-      className: `input-text ${isSubmitted && _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_9__["default"].isEmptyOrWhiteSpace(contact.Skype) ? 'input-highlight' : ''}`,
+      className: `input-text ${isSubmitted && _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_8__["default"].isEmptyOrWhiteSpace(contact.Skype) ? 'input-highlight' : ''}`,
       maxLength: 50,
       value: contact.Skype,
       onChange: event => setContact(_objectSpread(_objectSpread({}, contact), {}, {
@@ -3412,7 +3256,7 @@ const FormContact = ({
   };
 
   const _renderCategoryAllSelection = () => {
-    const isCheckedAll = contact.Categories.every(_ => _.RecipientType === _lib_contants__WEBPACK_IMPORTED_MODULE_6__["RecipientType"].To) || contact.Categories.every(_ => _.RecipientType === _lib_contants__WEBPACK_IMPORTED_MODULE_6__["RecipientType"].Cc);
+    const isCheckedAll = contact.Categories.every(_ => _.RecipientType === _lib_contants__WEBPACK_IMPORTED_MODULE_5__["RecipientType"].To);
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "row"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -3422,23 +3266,11 @@ const FormContact = ({
       checked: isCheckedAll,
       onChange: checked => {
         contact.Categories.forEach(category => {
-          category.RecipientType = checked ? _lib_contants__WEBPACK_IMPORTED_MODULE_6__["RecipientType"].To : null;
+          category.RecipientType = checked ? _lib_contants__WEBPACK_IMPORTED_MODULE_5__["RecipientType"].To : null;
         });
         setContact(_objectSpread({}, contact));
       },
       label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('AllCategories')
-    })), isCheckedAll && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_radio_RadioGroup__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      name: "category-selection-group-radio-all",
-      value: contact.Categories[0].RecipientType,
-      options: _lib_contants__WEBPACK_IMPORTED_MODULE_6__["RecipientTypeOptions"],
-      onChange: selectedRecipientType => {
-        contact.Categories.forEach(category => {
-          category.RecipientType = selectedRecipientType;
-        });
-        setContact(_objectSpread({}, contact));
-      }
     })));
   };
 
@@ -3449,23 +3281,12 @@ const FormContact = ({
       className: "col-12"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_3__["default"], {
       id: "category-selection" + category.CategoryId,
-      checked: category.RecipientType !== null,
+      checked: category.RecipientType === _lib_contants__WEBPACK_IMPORTED_MODULE_5__["RecipientType"].To,
       onChange: checked => {
-        category.RecipientType = checked ? _lib_contants__WEBPACK_IMPORTED_MODULE_6__["RecipientType"].To : null;
+        category.RecipientType = checked ? _lib_contants__WEBPACK_IMPORTED_MODULE_5__["RecipientType"].To : null;
         setContact(_objectSpread({}, contact));
       },
-      label: Object(_lib_helper__WEBPACK_IMPORTED_MODULE_10__["getCategoryDisplayName"])(category)
-    })), category.RecipientType !== null && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_radio_RadioGroup__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      key: 'category-selection-group-radio' + category.CategoryId + '_' + category.RecipientType,
-      name: "category-selection-group-radio" + category.CategoryId,
-      value: category.RecipientType,
-      options: _lib_contants__WEBPACK_IMPORTED_MODULE_6__["RecipientTypeOptions"],
-      onChange: selectedRecipientType => {
-        category.RecipientType = selectedRecipientType;
-        setContact(_objectSpread({}, contact));
-      }
+      label: Object(_lib_helper__WEBPACK_IMPORTED_MODULE_9__["getCategoryDisplayName"])(category)
     })));
   };
 
@@ -3476,7 +3297,7 @@ const FormContact = ({
   const _handleSubmit = () => {
     !isSubmitted && setIsSubmitted(true);
 
-    if (!Object(_lib_helper__WEBPACK_IMPORTED_MODULE_10__["validateContact"])(contact, _requiredSubsidiary)) {
+    if (!Object(_lib_helper__WEBPACK_IMPORTED_MODULE_9__["validateContact"])(contact, _requiredSubsidiary)) {
       return;
     }
 
@@ -3485,7 +3306,7 @@ const FormContact = ({
     const hasUnassignedCategories = unassignedCategories.length > 0;
 
     if (hasConfirm) {
-      setSweetAlertOption(Object(_jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_8__["generateDefaultConfirmOption"])(msgConfirm, handleCloseAlert, _objectSpread(_objectSpread({}, _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_8__["defaultOkButton"]), {}, {
+      setSweetAlertOption(Object(_jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_7__["generateDefaultConfirmOption"])(msgConfirm, handleCloseAlert, _objectSpread(_objectSpread({}, _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_7__["defaultOkButton"]), {}, {
         onClick: hasUnassignedCategories ? () => _handleUnassignedCategoriesWarning(unassignedCategories) : _handleCallApi
       }), {
         onClick: handleCloseAlert
@@ -3507,7 +3328,7 @@ const FormContact = ({
     const warningMsg = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       className: "warning-title"
     }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("NotReceiveNotificationOnCategoriesWarning")), unassignedCategories.map(_ => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _)));
-    const confirmOption = Object(_jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_8__["generateDefaultConfirmOption"])(warningMsg, handleCloseAlert, _objectSpread(_objectSpread({}, _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_8__["defaultOkButton"]), {}, {
+    const confirmOption = Object(_jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_7__["generateDefaultConfirmOption"])(warningMsg, handleCloseAlert, _objectSpread(_objectSpread({}, _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_7__["defaultOkButton"]), {}, {
       onClick: _handleCallApi
     }), {
       onClick: handleCloseAlert
@@ -3526,9 +3347,9 @@ const FormContact = ({
       IsSuccess,
       Message
     } = response;
-    const displayIcon = IsSuccess ? _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_8__["predefinedIcons"].success : _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_8__["predefinedIcons"].error;
+    const displayIcon = IsSuccess ? _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_7__["predefinedIcons"].success : _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_7__["predefinedIcons"].error;
     const title = IsSuccess ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("MessageSuccess") : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("Error");
-    const alertOpt = Object(_jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_8__["generateDefaultAlertOption"])(Message, () => {
+    const alertOpt = Object(_jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_7__["generateDefaultAlertOption"])(Message, () => {
       handleCloseAlert();
       IsSuccess && afterSuccess();
     }, null, displayIcon);
@@ -3538,7 +3359,7 @@ const FormContact = ({
   };
 
   const _getUnassignedCategories = categories => {
-    return categories.filter(category => category.RecipientType === null).map(_lib_helper__WEBPACK_IMPORTED_MODULE_10__["getCategoryDisplayName"]);
+    return categories.filter(category => category.RecipientType === null).map(_lib_helper__WEBPACK_IMPORTED_MODULE_9__["getCategoryDisplayName"]);
   };
 
   const _renderSubmit = () => {
@@ -3555,7 +3376,7 @@ const FormContact = ({
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "form-edit row"
-  }, _renderGeneralInformation(), _renderCategoriesSelection(), _renderSubmit(), sweetAlertOption && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_sweet_alert__WEBPACK_IMPORTED_MODULE_7__["default"], sweetAlertOption));
+  }, _renderGeneralInformation(), _renderCategoriesSelection(), _renderSubmit(), sweetAlertOption && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_sweet_alert__WEBPACK_IMPORTED_MODULE_6__["default"], sweetAlertOption));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(FormContact));
@@ -3671,7 +3492,6 @@ const fields = {
   Email: 'Email',
   Skype: 'Skype',
   ToList: 'ToList',
-  CcList: 'CcList',
   Remark: 'Remark'
 };
 const textHeaders = {
@@ -3684,7 +3504,6 @@ const textHeaders = {
   [fields.Email]: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Email'),
   [fields.Skype]: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Skype'),
   [fields.ToList]: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('ToList'),
-  [fields.CcList]: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('CcList'),
   [fields.Remark]: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Remark'),
   Action: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Action')
 };
@@ -3832,7 +3651,7 @@ class LicenseeContactExcel {
     const columnConfig = this.columnConfigs[colIndex];
     let value = item[columnConfig.field];
 
-    if (columnConfig.field === _contants__WEBPACK_IMPORTED_MODULE_4__["fields"].ToList || columnConfig.field === _contants__WEBPACK_IMPORTED_MODULE_4__["fields"].CcList) {
+    if (columnConfig.field === _contants__WEBPACK_IMPORTED_MODULE_4__["fields"].ToList) {
       value = value.join('\n');
     } else if (columnConfig.field === _contants__WEBPACK_IMPORTED_MODULE_4__["fields"].ContactType) {
       value = Object(_helper__WEBPACK_IMPORTED_MODULE_3__["getContactTypeText"])(value);
@@ -3901,10 +3720,6 @@ class LicenseeContactExcel {
       width: 150
     }, {
       field: _contants__WEBPACK_IMPORTED_MODULE_4__["fields"].ToList,
-      [MAIN_SECTION_STYLE]: _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].left,
-      width: 200
-    }, {
-      field: _contants__WEBPACK_IMPORTED_MODULE_4__["fields"].CcList,
       [MAIN_SECTION_STYLE]: _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].left,
       width: 200
     }, {
@@ -4118,7 +3933,7 @@ class ApiService {
   static async getUnassignedCategories() {
     const [contactList, categories] = await Promise.all([this.getContactList(null), this.getLicenseeCategories()]);
     const unassignedCategories = categories.filter(category => {
-      const assigned = contactList.some(contact => contact.ToListId.some(to => to === category.CategoryId) || contact.CcListId.some(cc => cc === category.CategoryId));
+      const assigned = contactList.some(contact => contact.ToListId.some(to => to === category.CategoryId));
       return !assigned;
     });
     return unassignedCategories;

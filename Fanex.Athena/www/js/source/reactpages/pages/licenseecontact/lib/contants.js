@@ -48,7 +48,6 @@ export const fields = {
     Email: 'Email',
     Skype: 'Skype',
     ToList: 'ToList',
-    CcList: 'CcList',
     Remark: 'Remark'
 }
 
@@ -62,7 +61,6 @@ export const textHeaders = {
     [fields.Email]: LangHelper.getSingleResource('Email'),
     [fields.Skype]: LangHelper.getSingleResource('Skype'),
     [fields.ToList]: LangHelper.getSingleResource('ToList'),
-    [fields.CcList]: LangHelper.getSingleResource('CcList'),
     [fields.Remark]: LangHelper.getSingleResource('Remark'),
     Action: LangHelper.getSingleResource('Action'),
 }
