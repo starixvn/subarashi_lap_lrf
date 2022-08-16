@@ -29,7 +29,7 @@ export const DataGrid = (props) => {
         return <NoDataTitle />;
     }
 
-    const permissionObject = React.useMemo(() => ({ ...permissions, showSubsidiary: GridHelper.isShowSubsidiary(selectedParams.subsidiarySearch) }), [permissions, selectedParams.showSubsidiary]);
+    const permissionObject = React.useMemo(() => ({ ...permissions, showSubsidiary: GridHelper.isShowSubsidiary(selectedParams.subsidiarySearch) }), [permissions, selectedParams.subsidiarySearch]);
 
     const _dataGridHeaders = React.useMemo(() => {
         const headers = dataGridFullHeaders.filter(header => !header.show || header.show(permissionObject));

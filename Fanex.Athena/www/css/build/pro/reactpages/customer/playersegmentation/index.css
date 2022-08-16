@@ -1073,78 +1073,6 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
 .sweet-alert .warning {
   color: #ee0606; }
 
-#player-segmentation .switch label {
-  margin-bottom: 0; }
-  #player-segmentation .switch label .lever {
-    width: 80px;
-    height: 20px; }
-    #player-segmentation .switch label .lever:before {
-      content: "NO";
-      position: absolute;
-      right: 5px;
-      font-size: 12px;
-      font-weight: bold; }
-    #player-segmentation .switch label .lever:after {
-      width: 16px;
-      height: 16px;
-      top: 1px;
-      left: 0.5px; }
-  #player-segmentation .switch label input[type=checkbox]:checked + .lever {
-    background-color: #007C00; }
-    #player-segmentation .switch label input[type=checkbox]:checked + .lever:before {
-      content: "YES";
-      right: 50px; }
-    #player-segmentation .switch label input[type=checkbox]:checked + .lever:after {
-      left: 62px; }
-
-.dropzone.disabled {
-  opacity: 0.6; }
-
-.dropzone {
-  flex: 1;
-  position: relative;
-  margin: 15px 0;
-  padding: 10px;
-  overflow: auto;
-  border-width: 1px;
-  border-radius: 2px;
-  border-color: #A6A6A6;
-  border-style: dashed;
-  background-color: #fff;
-  color: #bdbdbd;
-  outline: none;
-  transition: border .24s ease-in-out; }
-  .dropzone .dropzone-close {
-    position: absolute;
-    right: 10px;
-    top: 5px;
-    cursor: pointer; }
-  .dropzone .dropzone-row {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 5px; }
-  .dropzone .inner-dropzone {
-    padding: 20px;
-    cursor: pointer; }
-    .dropzone .inner-dropzone p {
-      font-size: 14px;
-      color: #147ccc;
-      font-weight: bold; }
-  .dropzone .file-item {
-    list-style: none;
-    position: relative;
-    padding: 15px;
-    border: 1px solid #A6A6A6; }
-    .dropzone .file-item .file-close {
-      position: absolute;
-      right: 0px;
-      top: 0px;
-      cursor: pointer; }
-  .dropzone .icon-close {
-    font-size: 15px;
-    color: #2c2c2c; }
-
 /* z-index */
 /* Table */
 /* Label Text */
@@ -1238,21 +1166,77 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
   background-color: rgba(0, 0, 0, 0.26);
   border-color: #BDBDBD; }
 
-#player-segmentation .vip-player-management .form-action {
-  margin: 15px 0px; }
-  #player-segmentation .vip-player-management .form-action .action {
-    display: inline;
-    margin-right: 20px; }
-  #player-segmentation .vip-player-management .form-action .btn {
-    background-color: #4C6375;
-    color: #fff;
-    padding: 0 30px; }
+#player-segmentation .switch label {
+  margin-bottom: 0; }
+  #player-segmentation .switch label .lever {
+    width: 80px;
+    height: 20px; }
+    #player-segmentation .switch label .lever:before {
+      content: "NO";
+      position: absolute;
+      right: 5px;
+      font-size: 12px;
+      font-weight: bold; }
+    #player-segmentation .switch label .lever:after {
+      width: 16px;
+      height: 16px;
+      top: 1px;
+      left: 0.5px; }
+  #player-segmentation .switch label input[type=checkbox]:checked + .lever {
+    background-color: #007C00; }
+    #player-segmentation .switch label input[type=checkbox]:checked + .lever:before {
+      content: "YES";
+      right: 50px; }
+    #player-segmentation .switch label input[type=checkbox]:checked + .lever:after {
+      left: 62px; }
 
-#player-segmentation .dropzone .radio-group {
-  position: absolute;
-  top: 0; }
-  #player-segmentation .dropzone .radio-group span {
-    display: block; }
+.dropzone.disabled {
+  opacity: 0.6; }
+
+.dropzone {
+  flex: 1;
+  position: relative;
+  margin: 15px 0;
+  padding: 10px;
+  overflow: auto;
+  border-width: 1px;
+  border-radius: 2px;
+  border-color: #A6A6A6;
+  border-style: dashed;
+  background-color: #fff;
+  color: #bdbdbd;
+  outline: none;
+  transition: border .24s ease-in-out; }
+  .dropzone .dropzone-close {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    cursor: pointer; }
+  .dropzone .dropzone-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 5px; }
+  .dropzone .inner-dropzone {
+    padding: 20px;
+    cursor: pointer; }
+    .dropzone .inner-dropzone p {
+      font-size: 14px;
+      color: #147ccc;
+      font-weight: bold; }
+  .dropzone .file-item {
+    list-style: none;
+    position: relative;
+    padding: 15px;
+    border: 1px solid #A6A6A6; }
+    .dropzone .file-item .file-close {
+      position: absolute;
+      right: 0px;
+      top: 0px;
+      cursor: pointer; }
+  .dropzone .icon-close {
+    font-size: 15px;
+    color: #2c2c2c; }
 
 .content-title {
   font-weight: bold;
@@ -1314,6 +1298,74 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
 #player-segmentation .datepicker-disabled .daterange-container {
   pointer-events: none;
   background: rgba(0, 0, 0, 0.26); }
+
+#player-segmentation .vip-player-management .form-action,
+#player-segmentation .monitored-player .form-action {
+  margin: 15px 0px; }
+  #player-segmentation .vip-player-management .form-action .action,
+  #player-segmentation .monitored-player .form-action .action {
+    display: inline;
+    margin-right: 20px; }
+  #player-segmentation .vip-player-management .form-action .btn,
+  #player-segmentation .monitored-player .form-action .btn {
+    background-color: #4C6375;
+    color: #fff;
+    padding: 0 30px; }
+
+#player-segmentation .vip-player-management .dropzone .radio-group,
+#player-segmentation .monitored-player .dropzone .radio-group {
+  position: absolute;
+  top: 0; }
+  #player-segmentation .vip-player-management .dropzone .radio-group span,
+  #player-segmentation .monitored-player .dropzone .radio-group span {
+    display: block; }
+
+#player-segmentation .monitored-player .form-add {
+  padding: 15px;
+  overflow: auto; }
+  #player-segmentation .monitored-player .form-add .row {
+    margin-bottom: 15px; }
+  #player-segmentation .monitored-player .form-add .button-group {
+    margin-top: 10px;
+    float: right; }
+    #player-segmentation .monitored-player .form-add .button-group .btn {
+      margin-left: 20px; }
+
+#player-segmentation .monitored-player .form-reached-history {
+  padding: 15px; }
+  #player-segmentation .monitored-player .form-reached-history .caption {
+    position: relative;
+    font-weight: bold;
+    font-size: 15px;
+    min-height: 30px;
+    color: #E15F00; }
+    #player-segmentation .monitored-player .form-reached-history .caption .caret-block {
+      bottom: 5px;
+      right: 0; }
+
+#player-segmentation .required {
+  top: 0;
+  color: #e51c23;
+  margin-left: 2px; }
+
+#player-segmentation .threshold-cell .threshold-cell-action {
+  float: right;
+  margin-left: 5px; }
+
+#player-segmentation .threshold-cell input {
+  float: right;
+  border-bottom: none;
+  width: 55%; }
+
+.action-cell .material-icons {
+  font-size: 19px; }
+
+.action-cell .delete-icon,
+.action-cell .close-icon {
+  color: #e51c23; }
+
+.action-cell .check-icon {
+  color: #007C00; }
 
 .caret-block div {
   display: inherit; }

@@ -5,8 +5,6 @@ import LangHelper from '@jsroot/lib/langHelper';
 import RadioGroup from '@jsroot/components/radio/RadioGroup';
 import Excel from '@jsroot/lib/excel';
 import { decode } from '@jsroot/lib/htmlHelper';
-import { generateDefaultConfirmOption, predefinedIcons } from '@jsroot/lib/sweetAlert';
-import AppData from '@jsroot/lib/AppData';
 import { ActionCreators } from '../actions';
 import DropzoneUpload from '../../../components/DropzoneUpload';
 import { Url, ExcelReaderColumn, MaxBatchUpdateMonitoredPlayer } from '../lib/constants';

@@ -92,7 +92,8 @@
                 AddCommmonParams(db, metaModel);
                 AddVipStatusUpdateParams(db, metaModel);
                 AddTrackingParams(db, metaModel);
-				var result = new List<UpdateStatusPlayerResult>();
+
+                var result = new List<UpdateStatusPlayerResult>();
                 using (var reader = await db.ExecuteReaderAsync())
                 {
                     while (reader.Read())

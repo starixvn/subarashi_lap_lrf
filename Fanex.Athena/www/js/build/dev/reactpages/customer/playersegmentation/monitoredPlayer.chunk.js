@@ -74,6 +74,50 @@ const setSubsidiarySearch = subsidiarySearch => {
 
 /***/ }),
 
+/***/ "./www/js/source/reactpages/actions/userGuideAction.js":
+/*!*************************************************************!*\
+  !*** ./www/js/source/reactpages/actions/userGuideAction.js ***!
+  \*************************************************************/
+/*! exports provided: getUserGuideContent, setUserGuideContent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getUserGuideContent", function() { return getUserGuideContent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setUserGuideContent", function() { return setUserGuideContent; });
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/actions/types.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _lib_site__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../lib/site */ "./www/js/source/reactpages/lib/site.js");
+
+
+
+
+const fetchData = resourceName => {
+  const url = _lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].resolveClientUrl('UserGuide/Index?resourcename=' + resourceName) + "&_=" + new Date().getTime();
+  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(url, {
+    headers: {
+      'X-Requested-With': 'XMLHttpRequest'
+    }
+  });
+};
+
+function getUserGuideContent(params) {
+  return dispatch => {
+    fetchData(params).then(response => {
+      dispatch(setUserGuideContent(response.data));
+    });
+  };
+}
+const setUserGuideContent = data => {
+  return {
+    type: _types__WEBPACK_IMPORTED_MODULE_0__["USER_GUIDE_CONTENT"],
+    data: data
+  };
+};
+
+/***/ }),
+
 /***/ "./www/js/source/reactpages/actions/usernameAction.js":
 /*!************************************************************!*\
   !*** ./www/js/source/reactpages/actions/usernameAction.js ***!
@@ -388,6 +432,92 @@ ReportTitle.defaultProps = defaultProps;
 
 /***/ }),
 
+/***/ "./www/js/source/reactpages/components/UserGuide.jsx":
+/*!***********************************************************!*\
+  !*** ./www/js/source/reactpages/components/UserGuide.jsx ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return UserGuide; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _popup_Popup__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./popup/Popup */ "./www/js/source/reactpages/components/popup/Popup.jsx");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+class UserGuide extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
+  constructor(props) {
+    super(props);
+
+    _defineProperty(this, "onClickHandler", () => {
+      this.setState({
+        isShow: true
+      });
+      this.props.onClick && this.props.onClick();
+    });
+
+    _defineProperty(this, "onCloseHandler", () => {
+      this.setState({
+        isShow: false
+      });
+    });
+
+    this.state = {
+      isShow: false
+    };
+  }
+
+  render() {
+    const {
+      className,
+      title,
+      content,
+      contentTitle,
+      isHtml
+    } = this.props;
+    const isShow = this.state.isShow && content && ( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.isValidElement(content) || content.length > 0) ? true : false;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      className: className,
+      onClick: this.onClickHandler,
+      title: title
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_popup_Popup__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      width: 640,
+      height: 480,
+      isShow: isShow,
+      title: contentTitle,
+      onClose: this.onCloseHandler,
+      isHtml: isHtml
+    }, content));
+  }
+
+}
+
+_defineProperty(UserGuide, "propTypes", {
+  title: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
+  className: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
+  contentTitle: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
+  isHtml: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool
+});
+
+_defineProperty(UserGuide, "defaultProps", {
+  className: 'icon-book right',
+  isHtml: true
+});
+
+;
+
+/***/ }),
+
 /***/ "./www/js/source/reactpages/components/auto-complete/AutoComplete.jsx":
 /*!****************************************************************************!*\
   !*** ./www/js/source/reactpages/components/auto-complete/AutoComplete.jsx ***!
@@ -424,6 +554,12 @@ const DELAY_TIME_MILLISECOND = 300;
 class AutoComplete extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   constructor(props) {
     super(props);
+
+    _defineProperty(this, "_handleClickOut", event => {
+      if (this.isShowSuggestionList && this.wrapperRef && !this.wrapperRef.current.contains(event.target)) {
+        this._clearState();
+      }
+    });
 
     _defineProperty(this, "_onKeyDown", event => {
       if (!this.isShowSuggestionList) {
@@ -520,6 +656,15 @@ class AutoComplete extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     this.input = null;
     this.cacheData = {};
     this.onChange = _utils_timer__WEBPACK_IMPORTED_MODULE_6__["default"].debounce(this._onChange, DELAY_TIME_MILLISECOND).bind(this);
+    this.wrapperRef = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
+  }
+
+  componentDidMount() {
+    document.addEventListener("mousedown", this._handleClickOut);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("mousedown", this._handleClickOut);
   }
 
   get isShowSuggestionList() {
@@ -556,7 +701,8 @@ class AutoComplete extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 
   render() {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "ac-container"
+      className: "ac-container",
+      ref: this.wrapperRef
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", _extends({
       type: "text",
       className: "input-text"
@@ -3267,6 +3413,73 @@ const decode = html => {
 
 /***/ }),
 
+/***/ "./www/js/source/reactpages/lib/numberFormat.js":
+/*!******************************************************!*\
+  !*** ./www/js/source/reactpages/lib/numberFormat.js ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return NumberFormat; });
+class NumberFormat {
+  static formatDecimal(value) {
+    return this.format(value, 2);
+  }
+
+  static formatInteger(value) {
+    if (typeof value !== "number" || isNaN(value)) {
+      return "";
+    }
+
+    return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  static format(value, digits = 0) {
+    if (typeof value !== "number" || isNaN(value)) {
+      return "";
+    }
+
+    const roundedValue = this.round(value, digits);
+    return roundedValue.toFixed(digits).replace(/(\d)(?=(\d{3})+(\.|$))/g, "$1,");
+  }
+
+  static round(value, digits) {
+    const sign = value < 0 ? -1 : 1;
+    const absoluteValue = Math.abs(value);
+    const rounded = Number(Math.round(absoluteValue + 'e' + digits) + 'e-' + digits);
+    return sign * rounded;
+  }
+
+  static parseToString(number) {
+    return number.toString().replace(/(\d)(?=(\d{3})+(\.|$))/g, "$1,");
+  }
+
+  static roundDownFormatDecimal(value) {
+    return this.roundDownFormat(value, 2);
+  }
+
+  static roundDownFormat(value, digits = 0) {
+    if (typeof value !== "number" || isNaN(value)) {
+      return "";
+    }
+
+    const roundedValue = this.roundDown(value, digits);
+    return roundedValue.toFixed(digits).replace(/(\d)(?=(\d{3})+(\.|$))/g, "$1,");
+  }
+
+  static roundDown(value, digits) {
+    const sign = value < 0 ? -1 : 1;
+    const absoluteValue = Math.abs(value);
+    const rounded = Number(Math.floor(absoluteValue + 'e' + digits) + 'e-' + digits);
+    return sign * rounded;
+  }
+
+}
+
+/***/ }),
+
 /***/ "./www/js/source/reactpages/lib/stringHelper.js":
 /*!******************************************************!*\
   !*** ./www/js/source/reactpages/lib/stringHelper.js ***!
@@ -3814,12 +4027,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/actions/types.js");
 /* harmony import */ var _jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/actions/loaderAction */ "./www/js/source/reactpages/actions/loaderAction.js");
 /* harmony import */ var _filterAction__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./filterAction */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/actions/filterAction.js");
-/* harmony import */ var _actions_gridHandlerAction__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../actions/gridHandlerAction */ "./www/js/source/reactpages/pages/customer/player-segmentation/actions/gridHandlerAction.js");
-/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-/* harmony import */ var _actions_playerDataAction__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../actions/playerDataAction */ "./www/js/source/reactpages/pages/customer/player-segmentation/actions/playerDataAction.js");
-/* harmony import */ var _helper_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../helper/sweetAlertHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/helper/sweetAlertHelper.js");
-/* harmony import */ var _lib_queryService__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../lib/queryService */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/lib/queryService.js");
-/* harmony import */ var _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @jsroot/lib/sweetAlert */ "./www/js/source/reactpages/lib/sweetAlert.js");
+/* harmony import */ var _jsroot_actions_userGuideAction__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/actions/userGuideAction */ "./www/js/source/reactpages/actions/userGuideAction.js");
+/* harmony import */ var _actions_gridHandlerAction__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../actions/gridHandlerAction */ "./www/js/source/reactpages/pages/customer/player-segmentation/actions/gridHandlerAction.js");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _actions_playerDataAction__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../actions/playerDataAction */ "./www/js/source/reactpages/pages/customer/player-segmentation/actions/playerDataAction.js");
+/* harmony import */ var _helper_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../helper/sweetAlertHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/helper/sweetAlertHelper.js");
+/* harmony import */ var _lib_queryService__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../lib/queryService */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/lib/queryService.js");
+/* harmony import */ var _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @jsroot/lib/sweetAlert */ "./www/js/source/reactpages/lib/sweetAlert.js");
+
 
 
 
@@ -3831,14 +4046,14 @@ __webpack_require__.r(__webpack_exports__);
 
 const {
   setSweetAlertOption
-} = _actions_gridHandlerAction__WEBPACK_IMPORTED_MODULE_3__;
+} = _actions_gridHandlerAction__WEBPACK_IMPORTED_MODULE_4__;
 const {
   toggleLoader
 } = _jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_1__;
 
 const _removeMonitoredPlayer = dispatch => async (params, afterSuccess) => {
   dispatch(toggleLoader(true));
-  const response = await _lib_queryService__WEBPACK_IMPORTED_MODULE_7__["default"].removeMonitoredPlayer(params);
+  const response = await _lib_queryService__WEBPACK_IMPORTED_MODULE_8__["default"].removeMonitoredPlayer(params);
   afterSuccess && afterSuccess(response);
   dispatch(toggleLoader(false));
 };
@@ -3852,15 +4067,15 @@ const _onRemoveMonitoredList = dispatch => (custIds, systemIds, onSuccess) => {
     onClick: _handleCloseAlert
   };
   const batchUpdateSuccess = onSuccess;
-  const handlerAfterBatchUpdateMonitoredPlayer = _helper_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_6__["BatchUpdateMonitoredPlayerAlertOption"].createHandlerAfterBatchUpdateMonitoredPlayer({
+  const handlerAfterBatchUpdateMonitoredPlayer = _helper_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_7__["BatchUpdateMonitoredPlayerAlertOption"].createHandlerAfterBatchUpdateMonitoredPlayer({
     setSweetAlertOption: setSweetAlertOptionWithDispatch,
     batchUpdateSuccess,
     noAlertResult: false
   });
-  const confirmProps = _helper_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_6__["BatchUpdateMonitoredPlayerAlertOption"].createBatchUpdateMonitoredPlayerConfirmProps({
+  const confirmProps = _helper_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_7__["BatchUpdateMonitoredPlayerAlertOption"].createBatchUpdateMonitoredPlayerConfirmProps({
     custIds
   }, _removeMonitoredPlayer(dispatch), handlerAfterBatchUpdateMonitoredPlayer);
-  const alertOption = Object(_jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_8__["generateDefaultConfirmOption"])(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('ConfirmDeleteMonitoredPlayer').replace('{0}', systemIds), _handleCloseAlert, confirmProps, _cancelProps, _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_8__["predefinedIcons"].warning, {
+  const alertOption = Object(_jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_9__["generateDefaultConfirmOption"])(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource('DeleteMonitoredPlayerConfirm').replace('{0}', systemIds), _handleCloseAlert, confirmProps, _cancelProps, _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_9__["predefinedIcons"].warning, {
     height: 215
   });
   setSweetAlertOptionWithDispatch(alertOption);
@@ -3873,9 +4088,9 @@ const setCurrentUserAction = data => ({
   data
 });
 
-const ActionCreators = Object.assign({}, _jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_1__, _filterAction__WEBPACK_IMPORTED_MODULE_2__, _actions_gridHandlerAction__WEBPACK_IMPORTED_MODULE_3__, {
-  searchPlayer: _actions_playerDataAction__WEBPACK_IMPORTED_MODULE_5__["searchPlayer"],
-  setPlayerList: _actions_playerDataAction__WEBPACK_IMPORTED_MODULE_5__["setPlayerList"],
+const ActionCreators = Object.assign({}, _jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_1__, _filterAction__WEBPACK_IMPORTED_MODULE_2__, _jsroot_actions_userGuideAction__WEBPACK_IMPORTED_MODULE_3__, _actions_gridHandlerAction__WEBPACK_IMPORTED_MODULE_4__, {
+  searchPlayer: _actions_playerDataAction__WEBPACK_IMPORTED_MODULE_6__["searchPlayer"],
+  setPlayerList: _actions_playerDataAction__WEBPACK_IMPORTED_MODULE_6__["setPlayerList"],
   deleteMonitoredPlayer,
   setCurrentUserAction
 });
@@ -3919,9 +4134,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _FormFilter__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./FormFilter */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/components/FormFilter.jsx");
 /* harmony import */ var _Content__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Content */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/components/Content.jsx");
 /* harmony import */ var _FormAdd__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./FormAdd */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/components/FormAdd.jsx");
-/* harmony import */ var _FormAction__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./FormAction */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/components/FormAction.jsx");
-/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/lib/constants.js");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../actions */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/actions/index.js");
+/* harmony import */ var _FormReachedHistory__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./FormReachedHistory */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/components/FormReachedHistory.jsx");
+/* harmony import */ var _FormAction__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./FormAction */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/components/FormAction.jsx");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/lib/constants.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../actions */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/actions/index.js");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+
 
 
 
@@ -3943,7 +4162,7 @@ const AppContainer = props => {
     setCurrentUserAction
   } = props;
 
-  const _onCloseModificationPopup = () => {
+  const _onClosePopup = () => {
     setCurrentUserAction(null);
   };
 
@@ -3953,30 +4172,39 @@ const AppContainer = props => {
       data
     } = currentUserAction;
 
-    if (type === _lib_constants__WEBPACK_IMPORTED_MODULE_11__["UserActionType"].AddNew) {
+    if (type === _lib_constants__WEBPACK_IMPORTED_MODULE_12__["UserActionType"].AddNew) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_popup__WEBPACK_IMPORTED_MODULE_6__["default"], {
-        height: 280,
+        height: 260,
         width: 450,
         isShow: true,
         title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource("AddNew"),
-        onClose: _onCloseModificationPopup
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormAdd__WEBPACK_IMPORTED_MODULE_9__["default"], {
-        onClose: _onCloseModificationPopup
-      }));
-    } else {}
+        onClose: _onClosePopup
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormAdd__WEBPACK_IMPORTED_MODULE_9__["default"], _extends({}, data, {
+        onClose: _onClosePopup
+      })));
+    } else if (type === _lib_constants__WEBPACK_IMPORTED_MODULE_12__["UserActionType"].ViewReachedHistory) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_popup__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        height: 500,
+        width: 680,
+        isShow: true,
+        title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource("NotificationHistory"),
+        onClose: _onClosePopup
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormReachedHistory__WEBPACK_IMPORTED_MODULE_10__["default"], data));
+    } else {//no thing
+    }
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "monitored-player"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Loader__WEBPACK_IMPORTED_MODULE_3__["default"], {
     isLoading: isLoading
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormFilter__WEBPACK_IMPORTED_MODULE_7__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormAction__WEBPACK_IMPORTED_MODULE_10__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Content__WEBPACK_IMPORTED_MODULE_8__["default"], null), currentUserAction && _renderActionPopup(), sweetAlertOption && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_sweet_alert__WEBPACK_IMPORTED_MODULE_4__["default"], sweetAlertOption));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormFilter__WEBPACK_IMPORTED_MODULE_7__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormAction__WEBPACK_IMPORTED_MODULE_11__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Content__WEBPACK_IMPORTED_MODULE_8__["default"], null), currentUserAction && _renderActionPopup(), sweetAlertOption && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_sweet_alert__WEBPACK_IMPORTED_MODULE_4__["default"], sweetAlertOption));
 };
 
 function mapDispatchToProps(dispatch) {
   const {
     setCurrentUserAction
-  } = _actions__WEBPACK_IMPORTED_MODULE_12__["ActionCreators"];
+  } = _actions__WEBPACK_IMPORTED_MODULE_13__["ActionCreators"];
   return Object(redux__WEBPACK_IMPORTED_MODULE_2__["bindActionCreators"])(Object.assign({}, {
     setCurrentUserAction
   }), dispatch);
@@ -4019,6 +4247,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DataGrid__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./DataGrid */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/components/DataGrid.jsx");
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../actions */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/actions/index.js");
 /* harmony import */ var _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../lib/helpers/gridHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/helpers/gridHelper.js");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/constants.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -4033,11 +4262,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 const Content = props => {
   const {
     playerCount,
     selectedParams,
-    selectedTabKey,
     searchPlayer,
     pagingOption,
     setPagingOption
@@ -4055,7 +4284,7 @@ const Content = props => {
       pageSize
     });
 
-    searchPlayer(selectedTabKey, params, _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_7__["default"].callBackToUpdatePaging({
+    searchPlayer(_lib_constants__WEBPACK_IMPORTED_MODULE_8__["tabKeys"].monitoredPlayer, params, _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_7__["default"].callBackToUpdatePaging({
       pagingOption,
       setPagingOption
     }));
@@ -4086,14 +4315,12 @@ function mapStateToProps(state) {
   const {
     pagingOption,
     selectedParams,
-    playerList,
-    selectedTabKey
+    playerList
   } = state;
   const playerCount = pagingOption.TotalItem || playerList && playerList.length || 0;
   return Object.assign({}, {
     pagingOption,
     selectedParams,
-    selectedTabKey,
     playerCount
   });
 }
@@ -4120,19 +4347,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @9softstudio/react-grid */ "./node_modules/@9softstudio/react-grid/dist/index.js");
 /* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/components/CheckBox */ "./www/js/source/reactpages/components/CheckBox.jsx");
-/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../actions */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/actions/index.js");
-/* harmony import */ var _jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/components/NoDataTitle */ "./www/js/source/reactpages/components/NoDataTitle.jsx");
-/* harmony import */ var _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../lib/helpers/gridHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/helpers/gridHelper.js");
-/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-/* harmony import */ var _helper_gridHelper__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../helper/gridHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/helper/gridHelper.js");
-/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/constants.js");
-/* harmony import */ var _helper_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../helper/sweetAlertHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/helper/sweetAlertHelper.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../actions */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/actions/index.js");
+/* harmony import */ var _jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/components/NoDataTitle */ "./www/js/source/reactpages/components/NoDataTitle.jsx");
+/* harmony import */ var _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../lib/helpers/gridHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/helpers/gridHelper.js");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/constants.js");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/lib/constants.js");
+/* harmony import */ var _helper_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../helper/sweetAlertHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/helper/sweetAlertHelper.js");
+/* harmony import */ var _grid_ThresholdCell__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./grid/ThresholdCell */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/components/grid/ThresholdCell.jsx");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -4156,30 +4385,31 @@ const DataGrid = props => {
     pagingOption,
     selectedParams,
     setPlayerList,
+    setCurrentUserAction,
     setPagingOption,
     searchPlayer,
     setSweetAlertOption,
-    deleteMonitoredPlayer
+    deleteMonitoredPlayer,
+    isLoading,
+    permissions
   } = props;
-  const canEdit = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__["default"][_lib_constants__WEBPACK_IMPORTED_MODULE_11__["tabKeys"].monitoredPlayer].canEdit;
 
   if (playerList == null) {
     return null;
   }
 
   if (!playerList.length) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_7__["default"], null);
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_6__["default"], null);
   }
 
-  const onSelectPlayer = react__WEBPACK_IMPORTED_MODULE_0___default.a.useCallback(custInfo => {
-    setSelectedPlayer(custInfo);
-  });
-  const showSubsidiary = _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_8__["default"].isShowSubsidiary(selectedParams.subsidiarySearch);
+  const permissionObject = react__WEBPACK_IMPORTED_MODULE_0___default.a.useMemo(() => _objectSpread(_objectSpread({}, permissions), {}, {
+    showSubsidiary: _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_7__["default"].isShowSubsidiary(selectedParams.subsidiarySearch)
+  }), [permissions, selectedParams.subsidiarySearch]);
 
   const _dataGridHeaders = react__WEBPACK_IMPORTED_MODULE_0___default.a.useMemo(() => {
-    const headers = Object(_helper_gridHelper__WEBPACK_IMPORTED_MODULE_10__["getDataGridHeaders"])(canEdit, showSubsidiary);
+    const headers = _lib_constants__WEBPACK_IMPORTED_MODULE_10__["dataGridFullHeaders"].filter(header => !header.show || header.show(permissionObject));
 
-    if (canEdit) {
+    if (permissionObject.canEdit) {
       return [{
         key: 'CheckAll',
         text: null,
@@ -4200,18 +4430,18 @@ const DataGrid = props => {
     }
 
     return headers;
-  }, [playerList, canEdit, showSubsidiary]);
+  }, [playerList, permissionObject]);
 
-  const _headers = react__WEBPACK_IMPORTED_MODULE_0___default.a.useMemo(() => _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_8__["default"].renderHeader(_dataGridHeaders, [_dataGridHeaders]));
+  const _headers = react__WEBPACK_IMPORTED_MODULE_0___default.a.useMemo(() => _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_7__["default"].renderHeader(_dataGridHeaders, [_dataGridHeaders]));
 
   const _body = react__WEBPACK_IMPORTED_MODULE_0___default.a.useMemo(() => playerList.map((dataItem, rowIndex) => {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Row"], {
       key: `player_row_${dataItem.custId}`
-    }, canEdit && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
+    }, permissionObject.canEdit && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
       className: "center-align"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_4__["default"], {
       id: `selectPlayer_${dataItem.custId}`,
-      checked: dataItem.isSelected === true,
+      checked: !!dataItem.isSelected,
       onChange: checked => {
         const newDataItem = _objectSpread(_objectSpread({}, dataItem), {
           isSelected: checked
@@ -4219,9 +4449,9 @@ const DataGrid = props => {
 
         const newPlayerList = [...playerList];
         newPlayerList[rowIndex] = newDataItem;
-        setPlayerList([...newPlayerList]);
+        setPlayerList(newPlayerList);
       }
-    })), showSubsidiary && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
+    })), permissionObject.showSubsidiary && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
       className: "left-align"
     }, dataItem.subsidiary), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
       className: "left-align"
@@ -4229,44 +4459,66 @@ const DataGrid = props => {
       className: "left-align"
     }, dataItem.systemId), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
       className: "center-align"
-    }, dataItem.currency), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
-      className: "right-align"
-    }, dataItem.currentWinningThreshold), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
+    }, dataItem.currency), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_grid_ThresholdCell__WEBPACK_IMPORTED_MODULE_12__["default"], {
+      player: dataItem,
+      canEdit: permissionObject.canEdit
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
       className: "center-align"
-    }, dataItem.noOfReached), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
+    }, !!dataItem.noOfReached && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      className: "btn-default btn-link",
+      onClick: () => {
+        const {
+          fromDate,
+          toDate
+        } = selectedParams;
+        setCurrentUserAction({
+          type: _lib_constants__WEBPACK_IMPORTED_MODULE_10__["UserActionType"].ViewReachedHistory,
+          data: {
+            custId: dataItem.custId,
+            systemId: dataItem.systemId,
+            externalId: dataItem.externalId,
+            fromDate,
+            toDate
+          }
+        });
+      }
+    }, dataItem.noOfReached)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
       className: "center-align"
-    }, dataItem.lastReachedDateDisplay), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
+    }, dataItem.lastReachedDateDisplay), permissionObject.showProblemPlayer && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
       className: "center-align"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource(dataItem.problemPlayer ? 'Yes' : 'No'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource(dataItem.problemPlayer ? 'Yes' : 'No'))), permissionObject.showVipPlayer && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
       className: "center-align"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource(dataItem.vipPlayer ? 'Yes' : 'No'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource(dataItem.vipPlayer ? 'Yes' : 'No'))), permissionObject.canEdit && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
       className: "center-align action-cell"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       className: "btn-default btn-link btn-icon delete-icon",
       onClick: () => {
-        const onSuccess = _helper_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_12__["BatchUpdateMonitoredPlayerAlertOption"].createHandlerAfterBatchUpdateMonitoredPlayerSuccess({
+        const onSuccess = _helper_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_11__["BatchUpdateMonitoredPlayerAlertOption"].createHandlerAfterBatchUpdateMonitoredPlayerSuccess({
           searchPlayer,
           setPagingOption,
           pagingOption,
           selectedParams,
           setSweetAlertOption,
-          selectedTabKey: _lib_constants__WEBPACK_IMPORTED_MODULE_11__["tabKeys"].monitoredPlayer
+          selectedTabKey: _lib_constants__WEBPACK_IMPORTED_MODULE_9__["tabKeys"].monitoredPlayer
         });
         deleteMonitoredPlayer(dataItem.custId, dataItem.systemId, onSuccess);
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
       className: "material-icons"
-    }, "delete"))), "        ");
+    }, "delete"))));
   }), [playerList]);
 
   const _handleSort = (orderCol, sortType) => {
-    const sortInfo = _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSortInfo(orderCol, sortType);
+    const sortInfo = {
+      orderCol,
+      sortType: _lib_constants__WEBPACK_IMPORTED_MODULE_9__["SortMapper"].sortType[sortType]
+    };
 
     const _pagingOption = _objectSpread(_objectSpread({}, pagingOption), sortInfo);
 
     const params = _objectSpread(_objectSpread({}, selectedParams), _pagingOption);
 
-    searchPlayer(_lib_constants__WEBPACK_IMPORTED_MODULE_11__["tabKeys"].monitoredPlayer, params, _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_8__["default"].callBackToUpdatePaging({
+    searchPlayer(_lib_constants__WEBPACK_IMPORTED_MODULE_9__["tabKeys"].monitoredPlayer, params, _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_7__["default"].callBackToUpdatePaging({
       pagingOption,
       setPagingOption
     }));
@@ -4280,7 +4532,7 @@ const DataGrid = props => {
     header: _headers,
     body: _body,
     containerPadding: 30,
-    shouldResetScrollPosition: true,
+    shouldResetScrollPosition: isLoading,
     onSort: _handleSort
   }));
 };
@@ -4292,14 +4544,16 @@ function mapDispatchToProps(dispatch) {
     setPagingOption,
     setSelectedPlayer,
     setSweetAlertOption,
+    setCurrentUserAction,
     deleteMonitoredPlayer
-  } = _actions__WEBPACK_IMPORTED_MODULE_6__["ActionCreators"];
+  } = _actions__WEBPACK_IMPORTED_MODULE_5__["ActionCreators"];
   return Object(redux__WEBPACK_IMPORTED_MODULE_2__["bindActionCreators"])({
     setPlayerList,
     setPagingOption,
     searchPlayer,
     setSelectedPlayer,
     setSweetAlertOption,
+    setCurrentUserAction,
     deleteMonitoredPlayer
   }, dispatch);
 }
@@ -4308,14 +4562,18 @@ function mapStateToProps(state) {
   const {
     playerList,
     selectedParams,
-    pagingOption
+    pagingOption,
+    isLoading,
+    permissions
   } = state;
   const isCheckAll = playerList && !playerList.some(_ => !_.isSelected);
   return Object.assign({}, {
     playerList,
     isCheckAll,
     pagingOption,
-    selectedParams
+    isLoading,
+    selectedParams,
+    permissions
   });
 }
 
@@ -4342,16 +4600,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_components_radio_RadioGroup__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/components/radio/RadioGroup */ "./www/js/source/reactpages/components/radio/RadioGroup.jsx");
 /* harmony import */ var _jsroot_lib_excel__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/lib/excel */ "./www/js/source/reactpages/lib/excel.js");
 /* harmony import */ var _jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/lib/htmlHelper */ "./www/js/source/reactpages/lib/htmlHelper.js");
-/* harmony import */ var _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/lib/sweetAlert */ "./www/js/source/reactpages/lib/sweetAlert.js");
-/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../actions */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/actions/index.js");
-/* harmony import */ var _components_DropzoneUpload__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../components/DropzoneUpload */ "./www/js/source/reactpages/pages/customer/player-segmentation/components/DropzoneUpload.jsx");
-/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/lib/constants.js");
-/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/constants.js");
-/* harmony import */ var _helper_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../helper/sweetAlertHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/helper/sweetAlertHelper.js");
-/* harmony import */ var _lib_queryService__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../lib/queryService */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/lib/queryService.js");
-
-
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../actions */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/actions/index.js");
+/* harmony import */ var _components_DropzoneUpload__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../components/DropzoneUpload */ "./www/js/source/reactpages/pages/customer/player-segmentation/components/DropzoneUpload.jsx");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/lib/constants.js");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/constants.js");
+/* harmony import */ var _helper_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../helper/sweetAlertHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/helper/sweetAlertHelper.js");
+/* harmony import */ var _lib_queryService__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../lib/queryService */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/lib/queryService.js");
 
 
 
@@ -4390,6 +4644,7 @@ const FormAction = props => {
   const {
     enableRemoveAction,
     playerList,
+    canEdit,
     setSweetAlertOption,
     toggleLoader,
     selectedParams,
@@ -4397,8 +4652,7 @@ const FormAction = props => {
   } = props;
   const [displayUploadDropzone, setDisplayUploadDropzone] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
   const [resultMsgSubmitMonitoredListFile, setResultMsgSubmitMonitoredListFile] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null);
-  const [uploadFileOption, setUploadFileOption] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(_lib_constants__WEBPACK_IMPORTED_MODULE_12__["UploadFileOptionValue"].byExternalId);
-  const canEdit = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_8__["default"][_lib_constants__WEBPACK_IMPORTED_MODULE_12__["tabKeys"].monitoredPlayer].canEdit;
+  const [uploadFileOption, setUploadFileOption] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(_lib_constants__WEBPACK_IMPORTED_MODULE_10__["UploadFileOptionValue"].byExternalId);
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     resultMsgSubmitMonitoredListFile && setDisplayUploadDropzone(false);
   }, [selectedParams]);
@@ -4419,7 +4673,7 @@ const FormAction = props => {
 
   const _batchUpdateMonitoredPlayer = async (params, afterSuccess) => {
     toggleLoader(true);
-    const response = await _lib_queryService__WEBPACK_IMPORTED_MODULE_14__["default"].batchUpdateMonitoredPlayer(params);
+    const response = await _lib_queryService__WEBPACK_IMPORTED_MODULE_12__["default"].batchUpdateMonitoredPlayer(params);
     afterSuccess && afterSuccess(response);
     toggleLoader(false);
   };
@@ -4432,15 +4686,15 @@ const FormAction = props => {
       pagingOption,
       selectedParams
     } = props;
-    const onSuccess = _helper_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_13__["BatchUpdateMonitoredPlayerAlertOption"].createHandlerAfterBatchUpdateMonitoredPlayerSuccess({
+    const onSuccess = _helper_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_11__["BatchUpdateMonitoredPlayerAlertOption"].createHandlerAfterBatchUpdateMonitoredPlayerSuccess({
       searchPlayer,
       setPagingOption,
       pagingOption,
       selectedParams,
       setSweetAlertOption,
-      selectedTabKey: _lib_constants__WEBPACK_IMPORTED_MODULE_12__["tabKeys"].monitoredPlayer
+      selectedTabKey: _lib_constants__WEBPACK_IMPORTED_MODULE_10__["tabKeys"].monitoredPlayer
     });
-    deleteMonitoredPlayer(_getSelectedCustIds(), _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('ThesePlayers'), onSuccess);
+    deleteMonitoredPlayer(_getSelectedCustIds(), _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('The selected player(s)'), onSuccess);
   };
 
   const _handleDisplayUploadDropzone = () => {
@@ -4454,16 +4708,15 @@ const FormAction = props => {
       setResultMsgSubmitMonitoredListFile(resultMessage);
     };
 
-    const handlerAfterBatchUpdateMonitoredPlayer = _helper_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_13__["BatchUpdateMonitoredPlayerAlertOption"].createHandlerAfterBatchUpdateMonitoredPlayer({
+    const handlerAfterBatchUpdateMonitoredPlayer = _helper_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_11__["BatchUpdateMonitoredPlayerAlertOption"].createHandlerAfterBatchUpdateMonitoredPlayer({
       setSweetAlertOption,
       batchUpdateSuccess,
       noAlertResult: true
     });
-    const confirmProps = _helper_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_13__["BatchUpdateMonitoredPlayerAlertOption"].createBatchUpdateMonitoredPlayerConfirmProps({
+
+    _batchUpdateMonitoredPlayer({
       batchPlayer: monitoredList
-    }, _batchUpdateMonitoredPlayer, handlerAfterBatchUpdateMonitoredPlayer);
-    const alertOption = Object(_jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_7__["generateDefaultConfirmOption"])(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("ConfirmBatchUpdateMonitoredPlayer"), _handleCloseAlert, confirmProps, _cancelProps, _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_7__["predefinedIcons"].warning);
-    setSweetAlertOption(alertOption);
+    }, handlerAfterBatchUpdateMonitoredPlayer);
   };
 
   const _onSubmitMonitoredListFile = files => {
@@ -4480,9 +4733,9 @@ const FormAction = props => {
           return;
         }
 
-        const byExternalId = uploadFileOption == _lib_constants__WEBPACK_IMPORTED_MODULE_12__["UploadFileOptionValue"].byExternalId;
-        const uploadByColumn = ExcelHelper.getColumnName(header, byExternalId ? _lib_constants__WEBPACK_IMPORTED_MODULE_11__["ExcelReaderColumn"].ExternalId : _lib_constants__WEBPACK_IMPORTED_MODULE_11__["ExcelReaderColumn"].SystemId);
-        const winningThresholdColumn = ExcelHelper.getColumnName(header, _lib_constants__WEBPACK_IMPORTED_MODULE_11__["ExcelReaderColumn"].WinningThreshold);
+        const byExternalId = uploadFileOption == _lib_constants__WEBPACK_IMPORTED_MODULE_10__["UploadFileOptionValue"].byExternalId;
+        const uploadByColumn = ExcelHelper.getColumnName(header, byExternalId ? _lib_constants__WEBPACK_IMPORTED_MODULE_9__["ExcelReaderColumn"].ExternalId : _lib_constants__WEBPACK_IMPORTED_MODULE_9__["ExcelReaderColumn"].SystemId);
+        const winningThresholdColumn = ExcelHelper.getColumnName(header, _lib_constants__WEBPACK_IMPORTED_MODULE_9__["ExcelReaderColumn"].WinningThreshold);
 
         if (!uploadByColumn || !winningThresholdColumn) {
           alert(Object(_jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_6__["decode"])(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("UploadFileError")));
@@ -4496,7 +4749,7 @@ const FormAction = props => {
           return;
         }
 
-        if (monitoredList.length > _lib_constants__WEBPACK_IMPORTED_MODULE_11__["MaxBatchUpdateMonitoredPlayer"]) {
+        if (monitoredList.length > _lib_constants__WEBPACK_IMPORTED_MODULE_9__["MaxBatchUpdateMonitoredPlayer"]) {
           alert(Object(_jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_6__["decode"])(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("MaxBatchUpdateMonitoredPlayerError")));
           return;
         }
@@ -4534,15 +4787,15 @@ const FormAction = props => {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_radio_RadioGroup__WEBPACK_IMPORTED_MODULE_4__["default"], {
       name: 'UploadByOptions',
       value: uploadFileOption,
-      options: _lib_constants__WEBPACK_IMPORTED_MODULE_12__["UploadFileOptions"],
+      options: _lib_constants__WEBPACK_IMPORTED_MODULE_10__["UploadFileOptions"],
       onChange: setUploadFileOption
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-      href: `${_lib_constants__WEBPACK_IMPORTED_MODULE_11__["Url"].monitoredPlayerListTemplate}?uploadBy=${uploadFileOption}`
+      href: `${_lib_constants__WEBPACK_IMPORTED_MODULE_9__["Url"].monitoredPlayerListTemplate}?uploadBy=${uploadFileOption}`
     }, "*", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('ClickHere')), "\xA0", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('ToDowloadTemplate'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, `*${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('MaximumUploadFileSize')}: ${1} MB`)));
   };
 
   const _renderDropzoneUploadFile = () => {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_DropzoneUpload__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_DropzoneUpload__WEBPACK_IMPORTED_MODULE_8__["default"], {
       multiple: false,
       accept: '.xls,.xlsx',
       maxSize: 1,
@@ -4579,7 +4832,7 @@ function mapDispatchToProps(dispatch) {
     setPagingOption,
     toggleLoader,
     deleteMonitoredPlayer
-  } = _actions__WEBPACK_IMPORTED_MODULE_9__["ActionCreators"];
+  } = _actions__WEBPACK_IMPORTED_MODULE_7__["ActionCreators"];
   return Object(redux__WEBPACK_IMPORTED_MODULE_2__["bindActionCreators"])({
     searchPlayer,
     updateVipStatus,
@@ -4601,7 +4854,8 @@ function mapStateToProps(state) {
     enableRemoveAction,
     playerList,
     selectedParams,
-    pagingOption
+    pagingOption,
+    canEdit: state.permissions.canEdit
   });
 }
 
@@ -4623,7 +4877,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/numberFormat */ "./www/js/source/reactpages/lib/numberFormat.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../actions */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/actions/index.js");
+/* harmony import */ var _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/lib/sweetAlert */ "./www/js/source/reactpages/lib/sweetAlert.js");
+/* harmony import */ var _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/lib/stringHelper */ "./www/js/source/reactpages/lib/stringHelper.js");
+/* harmony import */ var _helper_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../helper/sweetAlertHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/helper/sweetAlertHelper.js");
+/* harmony import */ var _lib_queryService__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../lib/queryService */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/lib/queryService.js");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/lib/constants.js");
+/* harmony import */ var _helper_messageHelper__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../helper/messageHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/helper/messageHelper.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -4633,13 +4896,100 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
+
+
+
+
+
+
+
+
 const FormAdd = props => {
   const {
-    onClose
+    toggleLoader,
+    setSweetAlertOption,
+    onClose,
+    setCurrentUserAction,
+    _resultMsgSubmit,
+    _monitoredPlayer
   } = props;
-  const [monitoredPlayer, setMonitoredPlayer] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({});
+  const [monitoredPlayer, setMonitoredPlayer] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(_monitoredPlayer || {});
+  const [resultMsgSubmit, setResultMsgSubmit] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(_resultMsgSubmit);
 
-  const _handleSubmit = () => {};
+  const _handleCloseAlert = () => {
+    setSweetAlertOption(null);
+
+    _backToFormAdd();
+  };
+
+  const _cancelProps = {
+    onClick: _handleCloseAlert
+  };
+
+  const _backToFormAdd = resultMsgSubmit => {
+    setCurrentUserAction({
+      type: 1,
+      data: {
+        _monitoredPlayer: monitoredPlayer,
+        _resultMsgSubmit: resultMsgSubmit
+      }
+    });
+  };
+
+  const _insertMonitoredPlayer = async (params, afterSuccess) => {
+    toggleLoader(true);
+    const response = await _lib_queryService__WEBPACK_IMPORTED_MODULE_9__["default"].insertMonitoredPlayer(params);
+    afterSuccess && afterSuccess(response);
+    toggleLoader(false);
+  };
+
+  const _handleSubmit = async () => {
+    const {
+      winningThreshold,
+      externalId,
+      systemId
+    } = monitoredPlayer;
+
+    if (!(_jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_7__["default"].isEmptyOrWhiteSpace(externalId) ^ _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_7__["default"].isEmptyOrWhiteSpace(systemId))) {
+      setResultMsgSubmit(_helper_messageHelper__WEBPACK_IMPORTED_MODULE_11__["default"].GetListMsgUpdateMonitoredPlayer({
+        errorCode: _lib_constants__WEBPACK_IMPORTED_MODULE_10__["UpdateMonitoredPlayerCode"].InvalidUsernameInput
+      }));
+      return;
+    }
+
+    if (isNaN(winningThreshold) || !isFinite(winningThreshold) || winningThreshold <= 0) {
+      setResultMsgSubmit(_helper_messageHelper__WEBPACK_IMPORTED_MODULE_11__["default"].GetListMsgUpdateMonitoredPlayer({
+        errorCode: _lib_constants__WEBPACK_IMPORTED_MODULE_10__["UpdateMonitoredPlayerCode"].InvalidWinningThreshold
+      }));
+      return;
+    }
+
+    const msgConfirm = _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('InsertMonitoredPlayerConfirm').replace('{0}', systemId || externalId).replace('{1}', _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__["default"].format(winningThreshold));
+    let isSuccess = false;
+
+    const batchUpdateSuccess = resultMsg => {
+      setSweetAlertOption(null);
+
+      if (!isSuccess) {
+        _backToFormAdd(resultMsg);
+      }
+    };
+
+    const handlerAfterBatchUpdateMonitoredPlayer = _helper_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_8__["BatchUpdateMonitoredPlayerAlertOption"].createHandlerAfterBatchUpdateMonitoredPlayer({
+      setSweetAlertOption,
+      batchUpdateSuccess,
+      noAlertResult: response => {
+        return !(isSuccess = response.errorCode === _lib_constants__WEBPACK_IMPORTED_MODULE_10__["UpdateMonitoredPlayerCode"].Success);
+      }
+    });
+    const confirmProps = _helper_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_8__["BatchUpdateMonitoredPlayerAlertOption"].createBatchUpdateMonitoredPlayerConfirmProps(monitoredPlayer, _insertMonitoredPlayer, handlerAfterBatchUpdateMonitoredPlayer);
+    const alertOption = Object(_jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_6__["generateDefaultConfirmOption"])(msgConfirm, _handleCloseAlert, confirmProps, _cancelProps, _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_6__["predefinedIcons"].warning, {
+      height: 215,
+      width: 500
+    });
+    onClose() || setSweetAlertOption(alertOption);
+  };
 
   const _renderButton = () => {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -4648,27 +4998,33 @@ const FormAdd = props => {
       type: "button",
       className: "btn btn-apply",
       onClick: _handleSubmit
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('Submit')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('Submit')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       type: "button",
       className: "btn",
       onClick: onClose
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('Cancel')));
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('Cancel')));
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "form-add"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      marginTop: !!resultMsgSubmit ? '0' : '10px'
+    }
+  }, resultMsgSubmit), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
     className: "col-5 label-text"
-  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("SystemId")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("SystemId")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-7"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "text",
     id: "Name",
     name: "Name",
     className: `input-text`,
-    maxLength: 50,
+    disabled: !_jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_7__["default"].isEmptyOrWhiteSpace(monitoredPlayer.externalId),
+    maxLength: 30,
+    autoComplete: "off",
     value: monitoredPlayer.systemId,
     onChange: event => setMonitoredPlayer(_objectSpread(_objectSpread({}, monitoredPlayer), {}, {
       systemId: event.target.value
@@ -4677,14 +5033,16 @@ const FormAdd = props => {
     className: "row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
     className: "col-5 label-text"
-  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("ExternalId")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("ExternalId")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-7"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "text",
     id: "Name",
     name: "Name",
     className: `input-text`,
+    disabled: !_jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_7__["default"].isEmptyOrWhiteSpace(monitoredPlayer.systemId),
     maxLength: 50,
+    autoComplete: "off",
     value: monitoredPlayer.externalId,
     onChange: event => setMonitoredPlayer(_objectSpread(_objectSpread({}, monitoredPlayer), {}, {
       externalId: event.target.value
@@ -4693,23 +5051,38 @@ const FormAdd = props => {
     className: "row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
     className: "col-5 label-text"
-  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("currentWinningThreshold"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("CurrentWinningThreshold"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "required"
   }, "*")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-7"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "number",
+    type: "text",
     id: "Name",
     name: "Name",
     className: `input-text`,
-    maxLength: 50,
-    value: monitoredPlayer.currentWinningThreshold,
+    maxLength: 10,
+    autoComplete: "off",
+    value: _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__["default"].format(monitoredPlayer.winningThreshold),
     onChange: event => setMonitoredPlayer(_objectSpread(_objectSpread({}, monitoredPlayer), {}, {
-      currentWinningThreshold: event.target.value
+      winningThreshold: parseFloat(event.target.value.replace(/,/g, ''))
     }))
   }))), _renderButton());
 };
-/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(FormAdd));
+
+const mapDispatchToProps = dispatch => {
+  const {
+    toggleLoader,
+    setSweetAlertOption,
+    setCurrentUserAction
+  } = _actions__WEBPACK_IMPORTED_MODULE_5__["ActionCreators"];
+  return Object(redux__WEBPACK_IMPORTED_MODULE_2__["bindActionCreators"])(Object.assign({}, {
+    toggleLoader,
+    setSweetAlertOption,
+    setCurrentUserAction
+  }), dispatch);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(null, mapDispatchToProps)( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(FormAdd)));
 
 /***/ }),
 
@@ -4731,19 +5104,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _jsroot_components_auto_complete__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/components/auto-complete */ "./www/js/source/reactpages/components/auto-complete/index.jsx");
 /* harmony import */ var _jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/components/collapsible-panel */ "./www/js/source/reactpages/components/collapsible-panel/index.jsx");
-/* harmony import */ var _jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/components/CheckBox */ "./www/js/source/reactpages/components/CheckBox.jsx");
-/* harmony import */ var _jsroot_components_date_range__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/components/date-range */ "./www/js/source/reactpages/components/date-range/index.js");
-/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-/* harmony import */ var _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @jsroot/lib/stringHelper */ "./www/js/source/reactpages/lib/stringHelper.js");
-/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
-/* harmony import */ var _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @jsroot/constants/report */ "./www/js/source/reactpages/constants/report.js");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../actions */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/actions/index.js");
-/* harmony import */ var _lib_helpers_dataSourceHelper__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../../lib/helpers/dataSourceHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/helpers/dataSourceHelper.js");
-/* harmony import */ var _helper_paramHelper__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../helper/paramHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/helper/paramHelper.js");
-/* harmony import */ var _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../../lib/helpers/gridHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/helpers/gridHelper.js");
-/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../../lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/constants.js");
-/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/lib/constants.js");
+/* harmony import */ var _jsroot_components_UserGuide__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/components/UserGuide */ "./www/js/source/reactpages/components/UserGuide.jsx");
+/* harmony import */ var _jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/components/CheckBox */ "./www/js/source/reactpages/components/CheckBox.jsx");
+/* harmony import */ var _jsroot_components_date_range__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @jsroot/components/date-range */ "./www/js/source/reactpages/components/date-range/index.js");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @jsroot/lib/stringHelper */ "./www/js/source/reactpages/lib/stringHelper.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+/* harmony import */ var _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @jsroot/constants/report */ "./www/js/source/reactpages/constants/report.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../actions */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/actions/index.js");
+/* harmony import */ var _lib_helpers_dataSourceHelper__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../../lib/helpers/dataSourceHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/helpers/dataSourceHelper.js");
+/* harmony import */ var _helper_paramHelper__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../helper/paramHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/helper/paramHelper.js");
+/* harmony import */ var _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../../lib/helpers/gridHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/helpers/gridHelper.js");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../../lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/constants.js");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/lib/constants.js");
+/* harmony import */ var _lib_queryService__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../lib/queryService */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/lib/queryService.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -4773,55 +5154,59 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
         setSelectedParams,
         searchPlayer
       } = this.props;
-      const params = _helper_paramHelper__WEBPACK_IMPORTED_MODULE_14__["default"].ToAPIParams(this.props);
+      const params = _helper_paramHelper__WEBPACK_IMPORTED_MODULE_15__["default"].ToAPIParams(this.props);
 
       if (!params) {
         return;
       }
 
       setSelectedParams(params);
-      searchPlayer(_lib_constants__WEBPACK_IMPORTED_MODULE_16__["tabKeys"].monitoredPlayer, params, _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_15__["default"].callBackToUpdatePaging(this.props));
+      searchPlayer(_lib_constants__WEBPACK_IMPORTED_MODULE_17__["tabKeys"].monitoredPlayer, params, _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_16__["default"].callBackToUpdatePaging(this.props));
     });
 
     _defineProperty(this, "_addNew", event => {
       event.preventDefault();
       this.props.setCurrentUserAction({
-        type: _lib_constants__WEBPACK_IMPORTED_MODULE_17__["UserActionType"].AddNew
+        type: _lib_constants__WEBPACK_IMPORTED_MODULE_18__["UserActionType"].AddNew,
+        data: {}
       });
     });
 
-    _defineProperty(this, "exportExcel", event => {// event.preventDefault();
-      // const { selectedParams, pagingOption } = this.props;
-      // if (!selectedParams) {
-      //     return;
-      // }
-      // const sortInfo = GridHelper.getSortInfoFromPagingOption(pagingOption);
-      // const params = {
-      //     ...selectedParams,
-      //     ...sortInfo
-      // }
-      // DataService.getFile(Url.exportProblemPlayerList, params)
-      //     .then((response) => {
-      //         const NoContentStatusCode = 204;
-      //         if (response.status === NoContentStatusCode) {
-      //             alert(LangHelper.getSingleResource("NoInfo"));
-      //         } else {
-      //             Site.downloadFile(response.data, 'ProblemPlayerList.xls');
-      //         }
-      //     });
+    _defineProperty(this, "_exportExcel", event => {
+      event.preventDefault();
+      const {
+        selectedParams,
+        pagingOption
+      } = this.props;
+
+      if (!selectedParams) {
+        return;
+      }
+
+      _lib_queryService__WEBPACK_IMPORTED_MODULE_19__["default"].exportMontioredPlayerList(_objectSpread(_objectSpread({}, selectedParams), pagingOption));
     });
 
-    _defineProperty(this, "_onChangeDateRange", (date, isValidMonthRange = true) => {
-      if (isValidMonthRange) {
-        this.props.setDateRange(date);
-      } else {
-        const message = _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("DateRangeExceedMsg").replace("{0}", 3);
-        alert(message);
+    _defineProperty(this, "showUserGuide", () => {
+      const userGuideContent = this.props.userGuideContent;
+
+      if (!userGuideContent || userGuideContent.length === 0) {
+        this.props.getUserGuideContent('PlayerSegmentationMonitored');
       }
     });
 
     _defineProperty(this, "_onChangeSubsidiaryList", (currentItem, selectedItemsKey, treeViewList) => {
       this.props.setSubsidiaryList(selectedItemsKey);
+    });
+
+    this.notificationHistoryDataNote = _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("NotificationHistoryDataNote").replace("{0}", _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"][_lib_constants__WEBPACK_IMPORTED_MODULE_17__["tabKeys"].monitoredPlayer].dateConstraint.minDate);
+  }
+
+  _renderUserGuide() {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_UserGuide__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("UserGuide"),
+      contentTitle: `${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("PlayerSegmentation")} / ${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource('MonitoredPlayer')}`,
+      onClick: this.showUserGuide,
+      content: this.props.userGuideContent
     });
   }
 
@@ -4830,17 +5215,16 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       isGetAll,
       dateRange
     } = this.props;
-    const dateConstraint = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"][_lib_constants__WEBPACK_IMPORTED_MODULE_16__["tabKeys"].monitoredPlayer].dateConstraint;
+    const dateConstraint = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"][_lib_constants__WEBPACK_IMPORTED_MODULE_17__["tabKeys"].monitoredPlayer].dateConstraint;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: isGetAll ? 'datepicker-disabled' : ''
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_date_range__WEBPACK_IMPORTED_MODULE_7__["DateRange"], {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_date_range__WEBPACK_IMPORTED_MODULE_8__["DateRange"], {
       startDate: dateRange.fromDate,
       endDate: dateRange.toDate,
       minDate: dateConstraint.minDate,
       maxDate: dateConstraint.maxDate,
       toDate: dateRange.toDate,
-      limitedMonthRange: dateConstraint.limitedMonthRange,
-      onChange: this._onChangeDateRange
+      onChange: this.props.setDateRange
     }));
   }
 
@@ -4848,11 +5232,11 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
     const {
       selectedCurrency
     } = this.props;
-    const currencyList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"][_lib_constants__WEBPACK_IMPORTED_MODULE_16__["tabKeys"].monitoredPlayer].currencyList;
-    const dataSource = _lib_helpers_dataSourceHelper__WEBPACK_IMPORTED_MODULE_13__["default"].CreateDataSourceFrom(currencyList, selectedCurrency);
+    const currencyList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"][_lib_constants__WEBPACK_IMPORTED_MODULE_17__["tabKeys"].monitoredPlayer].currencyList;
+    const dataSource = _lib_helpers_dataSourceHelper__WEBPACK_IMPORTED_MODULE_14__["default"].CreateDataSourceFrom(currencyList, selectedCurrency);
     return currencyList && currencyList.length && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_3___default.a, {
       id: "ddlCurrency",
-      language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].currentLanguage,
+      language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].currentLanguage,
       dataSource: dataSource,
       keyField: "key",
       valueField: "value",
@@ -4864,16 +5248,16 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
   _renderStickyFooter() {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
       className: "icon-excel right",
-      onClick: this.exportExcel,
-      title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("ExportToExcel")
-    }));
+      onClick: this._exportExcel,
+      title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("ExportToExcel")
+    }), this._renderUserGuide());
   }
 
   _renderSubsidiaryTreeView() {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_3__["TreeViewSelect"], {
-      language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].currentLanguage,
+      language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].currentLanguage,
       id: "SubsidiaryTreeView",
-      dataSource: _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].subsidiaryList,
+      dataSource: _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].subsidiaryList,
       keyField: "Value",
       valueField: "Name",
       statusField: "Checked",
@@ -4884,59 +5268,59 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       },
       isAllTextShown: false,
       hasSearchBox: false,
-      treeViewOption: _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_11__["TreeViewOption"],
+      treeViewOption: _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_12__["TreeViewOption"],
       onChange: this._onChangeSubsidiaryList
     });
   }
 
   render() {
-    const isDisabledSubmit = this.props.subsidiarySearch && _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_9__["default"].isEmptyOrWhiteSpace(this.props.selectedSubsidiary) || _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_9__["default"].isEmptyOrWhiteSpace(this.props.selectedCurrency);
+    const isDisabledSubmit = this.props.subsidiarySearch && _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_10__["default"].isEmptyOrWhiteSpace(this.props.selectedSubsidiary) || _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_10__["default"].isEmptyOrWhiteSpace(this.props.selectedCurrency);
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_5__["default"], {
       className: "page-filter",
       stickyFooter: this._renderStickyFooter()
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "row"
-    }, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].viewType !== _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_11__["SubsidiaryViewType"].NOT_MANAGEMENT && this.props.subsidiarySearch && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].viewType !== _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_12__["SubsidiaryViewType"].NOT_MANAGEMENT && this.props.subsidiarySearch && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       className: "label-text"
-    }, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].viewType === _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_11__["SubsidiaryViewType"].MASTER_MANAGEMENT ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("WhiteLabel") : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("Subsidiary")), this._renderSubsidiaryTreeView())), _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].viewType !== _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_11__["SubsidiaryViewType"].NOT_MANAGEMENT && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].viewType === _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_12__["SubsidiaryViewType"].MASTER_MANAGEMENT ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("WhiteLabel") : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("Subsidiary")), this._renderSubsidiaryTreeView())), _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].viewType !== _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_12__["SubsidiaryViewType"].NOT_MANAGEMENT && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-12 col-md-3 col-sm-2 col-lg-2 col-xl-2"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_7__["default"], {
       id: "SubsidiarySearch",
       checked: this.props.subsidiarySearch,
       onChange: this.props.setSubsidiarySearch,
-      label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("SubsidiarySearch")
+      label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("SubsidiarySearch")
     }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       className: "label-text"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("ReachedDate")), this._renderDateRange())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("ReachedDate")), this._renderDateRange())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-12 col-md-1 col-sm-2 col-lg-1 col-xl-1"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_7__["default"], {
       id: "IsGetAll",
       checked: this.props.isGetAll,
       onChange: this.props.changeIsGetAll,
-      label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("GetAll")
+      label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("GetAll")
     }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       className: "label-text"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("Username")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_auto_complete__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("Username")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_auto_complete__WEBPACK_IMPORTED_MODULE_4__["default"], {
       onSelect: this.props.setUsername,
       onInput: this.props.setUsername,
       htmlAttributes: {
-        placeholder: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("ExternalIdOrSystemId")
+        placeholder: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("ExternalIdOrSystemId")
       }
     }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2"
@@ -4944,7 +5328,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       className: "form-group"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       className: "label-text"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("Currency")), this._renderCurrencySelectList())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("Currency")), this._renderCurrencySelectList())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-12 col-md-2 col-sm-2 col-lg-2 col-xl-1"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
@@ -4955,7 +5339,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       className: "btn btn-submit",
       disabled: isDisabledSubmit,
       onClick: this._submit
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("Submit"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("Submit"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-12 col-md-2 col-sm-2 col-lg-2 col-xl-1"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
@@ -4964,8 +5348,15 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       type: "button",
       className: "btn btn-add",
+      disabled: !this.props.canEdit,
       onClick: this._addNew
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("AddNew")))))));
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("AddNew")))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "row"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-6"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      className: "circle"
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, this.notificationHistoryDataNote))));
   }
 
 }
@@ -4976,18 +5367,20 @@ function mapDispatchToProps(dispatch) {
     changeIsGetAll,
     setUsername,
     setSelectedCurrency,
+    getUserGuideContent,
     setSelectedParams,
     setSubsidiaryList,
     setSubsidiarySearch,
     searchPlayer,
     setPagingOption,
     setCurrentUserAction
-  } = _actions__WEBPACK_IMPORTED_MODULE_12__["ActionCreators"];
+  } = _actions__WEBPACK_IMPORTED_MODULE_13__["ActionCreators"];
   return Object(redux__WEBPACK_IMPORTED_MODULE_2__["bindActionCreators"])(Object.assign({}, {
     setDateRange,
     changeIsGetAll,
     setUsername,
     setSelectedCurrency,
+    getUserGuideContent,
     setSelectedParams,
     setSubsidiaryList,
     setSubsidiarySearch,
@@ -5000,23 +5393,28 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
   const {
     dateRange,
+    supportedReachedDateRange,
     isGetAll,
     selectedCurrency,
     selectedParams,
     username,
     selectedSubsidiary,
     subsidiarySearch,
-    pagingOption
+    pagingOption,
+    userGuideContent
   } = state;
   return Object.assign({}, {
     dateRange,
+    supportedReachedDateRange,
     isGetAll,
     selectedCurrency,
     selectedSubsidiary,
     username,
     selectedParams,
     subsidiarySearch,
-    pagingOption
+    pagingOption,
+    userGuideContent,
+    canEdit: state.permissions.canEdit
   });
 }
 
@@ -5025,33 +5423,324 @@ function mapStateToProps(state) {
 
 /***/ }),
 
-/***/ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/helper/gridHelper.js":
-/*!****************************************************************************************************************!*\
-  !*** ./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/helper/gridHelper.js ***!
-  \****************************************************************************************************************/
-/*! exports provided: getDataGridHeaders */
+/***/ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/components/FormReachedHistory.jsx":
+/*!*****************************************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/components/FormReachedHistory.jsx ***!
+  \*****************************************************************************************************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDataGridHeaders", function() { return getDataGridHeaders; });
-/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/lib/constants.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @9softstudio/react-grid */ "./node_modules/@9softstudio/react-grid/dist/index.js");
+/* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/components/NoDataTitle */ "./www/js/source/reactpages/components/NoDataTitle.jsx");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/numberFormat */ "./www/js/source/reactpages/lib/numberFormat.js");
+/* harmony import */ var _jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/lib/htmlHelper */ "./www/js/source/reactpages/lib/htmlHelper.js");
+/* harmony import */ var _lib_queryService__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../lib/queryService */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/lib/queryService.js");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/constants.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-const getDataGridHeaders = (hasWritePermission, showSubsidiary) => {
-  const fullHeaders = [..._lib_constants__WEBPACK_IMPORTED_MODULE_0__["dataGridFullHeaders"]];
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
-  if (!hasWritePermission) {
-    const headerIndex = _lib_constants__WEBPACK_IMPORTED_MODULE_0__["dataGridFullHeaders"].findIndex(_ => _.key === 'action');
-    fullHeaders.splice(headerIndex, 1);
-  }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-  if (!showSubsidiary) {
-    const headerIndex = _lib_constants__WEBPACK_IMPORTED_MODULE_0__["dataGridFullHeaders"].findIndex(_ => _.key === 'subsidiary');
-    fullHeaders.splice(headerIndex, 1);
-  }
 
-  return fullHeaders;
+
+
+
+
+
+
+
+
+const FormReachedHistory = ({
+  custId,
+  systemId,
+  externalId,
+  fromDate,
+  toDate
+}) => {
+  const [data, setData] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]);
+  let title = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
+
+  let _sortInfo = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])({});
+
+  const hasData = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => data && !!data.length, [data]);
+
+  const _fetchData = async (sortInfo = {}) => {
+    _sortInfo.current = sortInfo;
+    const response = await _lib_queryService__WEBPACK_IMPORTED_MODULE_6__["default"].getMonitoredPlayerReachedHistory(_objectSpread({
+      custId,
+      fromDate,
+      toDate
+    }, _sortInfo.current));
+    setData(response.data);
+  };
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    title.current = Object(_jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_5__["decode"])(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("MonitoredPlayerNotificationHistoryTitle")).replace("{0}", fromDate).replace("{1}", toDate).replace("{2}", `${externalId} (${systemId})`);
+
+    _fetchData();
+  }, []);
+
+  const _onSort = (orderCol, sortType) => _fetchData({
+    orderCol,
+    sortType: _lib_constants__WEBPACK_IMPORTED_MODULE_7__["SortMapper"].sortType[sortType]
+  });
+
+  const _exportExcel = event => {
+    event.preventDefault();
+
+    if (!hasData) {
+      return;
+    }
+
+    _lib_queryService__WEBPACK_IMPORTED_MODULE_6__["default"].exportMonitoredPlayerReachedHistory(_objectSpread({
+      custId,
+      fromDate,
+      toDate,
+      externalId,
+      systemId
+    }, _sortInfo.current));
+  };
+
+  const _renderCaption = () => {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "caption"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, title.current), hasData && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      className: "caret-block"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      className: "icon-excel-wrapper",
+      onClick: _exportExcel
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      className: "icon-excel",
+      title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('ExportToExcel')
+    }))));
+  };
+
+  const _renderData = () => {
+    if (!hasData) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_2__["default"], null);
+    }
+
+    const header = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderRow"], {
+      style: {
+        height: '30px'
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
+      sortBy: 1
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("Date")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
+      sortBy: 2
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("DailyWinningThreshold")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
+      sortBy: 3
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("TotalWinningAmount")));
+    const body = data.map(item => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Row"], {
+      style: {
+        height: '25px'
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
+      className: "center-align"
+    }, item.reachedDateDisplay), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
+      className: "right-align"
+    }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__["default"].format(item.dailyWinningThreshold)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
+      className: "right-align"
+    }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__["default"].formatDecimal(item.totalWinningAmount))));
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Table"], {
+      minWidth: 600,
+      maxWidth: 650,
+      bodyHeight: 400,
+      autoWidth: true,
+      autoHeight: false,
+      header: header,
+      body: body,
+      onSort: _onSort
+    });
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-reached-history"
+  }, _renderCaption(), _renderData());
 };
+
+/* harmony default export */ __webpack_exports__["default"] = (FormReachedHistory);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/components/grid/ThresholdCell.jsx":
+/*!*****************************************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/components/grid/ThresholdCell.jsx ***!
+  \*****************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @9softstudio/react-grid */ "./node_modules/@9softstudio/react-grid/dist/index.js");
+/* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/actions/index.js");
+/* harmony import */ var _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/lib/numberFormat */ "./www/js/source/reactpages/lib/numberFormat.js");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/lib/sweetAlert */ "./www/js/source/reactpages/lib/sweetAlert.js");
+/* harmony import */ var _lib_queryService__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../lib/queryService */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/lib/queryService.js");
+/* harmony import */ var _helper_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../helper/sweetAlertHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/helper/sweetAlertHelper.js");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/lib/constants.js");
+
+
+
+
+
+
+
+
+
+
+
+
+const ThresholdCell = props => {
+  const {
+    player,
+    canEdit,
+    toggleLoader,
+    setSweetAlertOption
+  } = props;
+  const [isEditing, setIsEditing] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
+  const [winningThreshold, setWinningThreshold] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(player.currentWinningThreshold);
+  const inputRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
+  let prevTimer = 0;
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    _reset();
+  }, [player]);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    isEditing && inputRef && inputRef.current && inputRef.current.focus();
+  }, [isEditing]);
+
+  const _updateMonitoredPlayer = async (params, afterSuccess) => {
+    toggleLoader(true);
+    const response = await _lib_queryService__WEBPACK_IMPORTED_MODULE_8__["default"].updateMonitoredPlayer(params);
+    afterSuccess && afterSuccess(response);
+    toggleLoader(false);
+  };
+
+  const _onUpdateMonitoredPlayer = () => {
+    const _handleCloseAlert = () => {
+      setSweetAlertOption(null);
+
+      _reset();
+    };
+
+    const _cancelProps = {
+      onClick: _handleCloseAlert
+    };
+    let isSuccess = false;
+
+    const batchUpdateSuccess = () => {
+      setSweetAlertOption(null);
+
+      if (isSuccess) {
+        player.currentWinningThreshold = winningThreshold;
+      }
+
+      _reset();
+    };
+
+    const noAlertResult = response => {
+      isSuccess = response.errorCode === _lib_constants__WEBPACK_IMPORTED_MODULE_10__["UpdateMonitoredPlayerCode"].Success;
+      return false;
+    };
+
+    const params = {
+      custId: player.custId,
+      winningThreshold
+    };
+    const handlerAfterBatchUpdateMonitoredPlayer = _helper_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_9__["BatchUpdateMonitoredPlayerAlertOption"].createHandlerAfterBatchUpdateMonitoredPlayer({
+      setSweetAlertOption,
+      batchUpdateSuccess,
+      noAlertResult,
+      onFail: _handleCloseAlert
+    });
+    const confirmProps = _helper_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_9__["BatchUpdateMonitoredPlayerAlertOption"].createBatchUpdateMonitoredPlayerConfirmProps(params, _updateMonitoredPlayer, handlerAfterBatchUpdateMonitoredPlayer);
+    const alertOption = Object(_jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_7__["generateDefaultConfirmOption"])(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource('ConfirmUpdateMonitoredPlayer').replace('{0}', player.currency).replace('{1}', _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_5__["default"].format(winningThreshold)), _handleCloseAlert, confirmProps, _cancelProps, _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_7__["predefinedIcons"].warning, {
+      height: 210
+    });
+    setSweetAlertOption(alertOption);
+  };
+
+  const _renderSubmit = () => {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      class: "btn-default btn-link btn-icon check-icon",
+      onClick: event => {
+        event.preventDefault();
+
+        if (isNaN(winningThreshold) || !isFinite(winningThreshold) || winningThreshold <= 0) {
+          return;
+        }
+
+        prevTimer && clearTimeout(prevTimer);
+
+        _onUpdateMonitoredPlayer();
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      class: "material-icons"
+    }, "check")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      class: "btn-default btn-link btn-icon close-icon"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      class: "material-icons"
+    }, "close")));
+  };
+
+  const _reset = () => {
+    isEditing && setIsEditing(false);
+    winningThreshold !== player.currentWinningThreshold && setWinningThreshold(player.currentWinningThreshold);
+  };
+
+  const _onBlur = () => prevTimer = setTimeout(() => {
+    _reset();
+  }, 150);
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
+    className: "right-align action-cell threshold-cell"
+  }, canEdit && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "threshold-cell-action"
+  }, isEditing ? _renderSubmit() : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "btn-default btn-link btn-icon",
+    onClick: () => setIsEditing(true)
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "material-icons"
+  }, "edit"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "text",
+    id: "Name",
+    name: "Name",
+    className: 'input-text right-align',
+    disabled: !isEditing,
+    ref: inputRef,
+    onBlur: _onBlur,
+    maxLength: 10,
+    autoComplete: "off",
+    value: _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_5__["default"].format(winningThreshold),
+    onChange: event => setWinningThreshold(parseFloat(event.target.value.replace(/,/g, '')))
+  }));
+};
+
+function mapDispatchToProps(dispatch) {
+  const {
+    toggleLoader,
+    setSweetAlertOption
+  } = _actions__WEBPACK_IMPORTED_MODULE_4__["ActionCreators"];
+  return Object(redux__WEBPACK_IMPORTED_MODULE_3__["bindActionCreators"])({
+    toggleLoader,
+    setSweetAlertOption
+  }, dispatch);
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(null, mapDispatchToProps)( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(ThresholdCell)));
 
 /***/ }),
 
@@ -5081,6 +5770,10 @@ _defineProperty(MessageHelper, "MsgColors", {
     content: 'msg-success',
     icon: 'icon-tick'
   },
+  [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateMonitoredPlayerCode"].InvalidParameters]: {
+    content: 'msg-error',
+    icon: 'icon-warning'
+  },
   [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateMonitoredPlayerCode"].InvalidSystemId]: {
     content: 'msg-error',
     icon: 'icon-warning'
@@ -5093,6 +5786,10 @@ _defineProperty(MessageHelper, "MsgColors", {
     content: 'msg-error',
     icon: 'icon-warning'
   },
+  [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateMonitoredPlayerCode"].NotExistingInList]: {
+    content: 'msg-error',
+    icon: 'icon-warning'
+  },
   [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateMonitoredPlayerCode"].InvalidWinningThreshold]: {
     content: 'msg-error',
     icon: 'icon-warning'
@@ -5100,30 +5797,39 @@ _defineProperty(MessageHelper, "MsgColors", {
   [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateMonitoredPlayerCode"].InvalidAccount]: {
     content: 'msg-error',
     icon: 'icon-warning'
+  },
+  [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateMonitoredPlayerCode"].InvalidUsernameInput]: {
+    content: 'msg-error',
+    icon: 'icon-warning'
   }
 });
 
 _defineProperty(MessageHelper, "GetMsgUpdateMonitoredPlayer", {
-  // singleUpdate: {
-  //     [UpdateVIPStatusCode.Success]: _ => LangHelper.getSingleResource('SuccessUpdateVipStatusSingle'),
-  //     [UpdateVIPStatusCode.InvalidSystemId]: data => LangHelper.getSingleResource('InvalidPlayerUpdateVipStatusSingle')
-  //         .replace('{0}', data.ids),
-  //     [UpdateVIPStatusCode.NoChangeBySystemId]: (_, isUpdateVip) => (isUpdateVip ? LangHelper.getSingleResource('AlreadyUpdateVipStatusSingle') : LangHelper.getSingleResource('AlreadyUpdateNotVipStatusSingle')),
-  //     [UpdateVIPStatusCode.NoChangeByBAStatus]: () => LangHelper.getSingleResource('BAPlayerNoUpdateVIPSingle'),
-  //     [UpdateVIPStatusCode.Avoid]: data => LangHelper.getSingleResource('RetractedPlayerUpdateVipStatusSingle')
-  //         .replace('{0}', data.ids)
-  // },
-  multipleUpdate: {
-    [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateMonitoredPlayerCode"].Success]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('SuccessUpdateMonitoredPlayer').replace('{0}', data.numberOfError),
-    [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateMonitoredPlayerCode"].InvalidSystemId]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('InvalidUpdateMonitoredPlayerBySystemId').replace('{0}', data.numberOfError).replace('{1}', data.systemId),
-    [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateMonitoredPlayerCode"].InvalidExternalId]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('InvalidUpdateMonitoredPlayerByExternalId').replace('{0}', data.numberOfError).replace('{1}', data.externalId),
-    [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateMonitoredPlayerCode"].InvalidWinningThreshold]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('InvalidPlayerUpdateWinningThreshold').replace('{0}', data.numberOfError).replace('{1}', data.externalId || data.systemId)
+  command: {
+    [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateMonitoredPlayerCode"].Success]: _ => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('SuccessfullyUpdate'),
+    [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateMonitoredPlayerCode"].InvalidParameters]: _ => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('InvalidParameters'),
+    [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateMonitoredPlayerCode"].InvalidSystemId]: _ => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('InvalidSystemId'),
+    [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateMonitoredPlayerCode"].InvalidExternalId]: _ => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('InvalidExternalId'),
+    [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateMonitoredPlayerCode"].InvalidWinningThreshold]: _ => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('InvalidWinningThreshold'),
+    [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateMonitoredPlayerCode"].ExistingInList]: _ => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('ExistingInMonitoredPlayerList'),
+    [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateMonitoredPlayerCode"].NotExistingInList]: _ => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('NotExistingInMonitoredPlayerList'),
+    [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateMonitoredPlayerCode"].InvalidUsernameInput]: _ => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('EitherSystemIdOrExternalIdIsRequired')
+  },
+  batchCommand: {
+    [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateMonitoredPlayerCode"].Success]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('SuccessfullyUpdateBatchCommand').replace('{0}', data.numberOfError),
+    [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateMonitoredPlayerCode"].InvalidParameters]: _ => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('InvalidParameters'),
+    [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateMonitoredPlayerCode"].InvalidSystemId]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('InvalidSystemIdBatchCommand').replace('{0}', data.numberOfError).replace('{1}', data.systemId),
+    [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateMonitoredPlayerCode"].InvalidExternalId]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('InvalidExternalIdBatchCommand').replace('{0}', data.numberOfError).replace('{1}', data.externalId),
+    [_lib_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateMonitoredPlayerCode"].InvalidWinningThreshold]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('InvalidWinningThresholdBatchCommand').replace('{0}', data.numberOfError).replace('{1}', data.externalId || data.systemId)
   }
 });
 
 _defineProperty(MessageHelper, "GetListMsgUpdateMonitoredPlayer", msgResults => {
+  let commandType = 'batchCommand';
+
   if (!msgResults.length) {
     msgResults = [msgResults];
+    commandType = 'command';
   }
 
   return msgResults.map(_ => {
@@ -5135,7 +5841,7 @@ _defineProperty(MessageHelper, "GetListMsgUpdateMonitoredPlayer", msgResults => 
       className: `icon ${msgColor.icon}`
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       className: msgColor.content
-    }, MessageHelper.GetMsgUpdateMonitoredPlayer['multipleUpdate'][code](_)));
+    }, MessageHelper.GetMsgUpdateMonitoredPlayer[commandType][code](_)));
   });
 });
 
@@ -5167,13 +5873,14 @@ class ParamHelper {
     dateRange,
     selectedCurrency,
     selectedSubsidiary,
-    subsidiarySearch
+    subsidiarySearch,
+    supportedReachedDateRange
   }) {
     return _objectSpread(_objectSpread({}, selectedParams), {
       username,
       isGetAll,
-      fromDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_0__["default"].convertDateToString(dateRange.fromDate),
-      toDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_0__["default"].convertDateToString(dateRange.toDate),
+      fromDate: isGetAll ? supportedReachedDateRange.fromDate : _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_0__["default"].convertDateToString(dateRange.fromDate),
+      toDate: isGetAll ? supportedReachedDateRange.toDate : _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_0__["default"].convertDateToString(dateRange.toDate),
       currencyIdList: selectedCurrency,
       subsidiaryList: subsidiarySearch ? selectedSubsidiary : '',
       subsidiarySearch
@@ -5220,17 +5927,22 @@ const BatchUpdateMonitoredPlayerAlertOption = {
   createHandlerAfterBatchUpdateMonitoredPlayer: ({
     setSweetAlertOption,
     batchUpdateSuccess,
-    noAlertResult
+    noAlertResult,
+    onFail
   }) => response => {
     let alertOpt;
 
     if (response.isSuccess) {
       const resultMessage = _messageHelper__WEBPACK_IMPORTED_MODULE_3__["default"].GetListMsgUpdateMonitoredPlayer(response.data);
+      noAlertResult = typeof noAlertResult === 'function' ? noAlertResult(response.data) : noAlertResult;
       alertOpt = noAlertResult ? batchUpdateSuccess(resultMessage) : Object(_jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_1__["generateDefaultAlertOption"])(resultMessage, batchUpdateSuccess, null, _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_1__["predefinedIcons"].success);
       !noAlertResult && setSweetAlertOption(alertOpt);
     } else {
       const message = _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('ErrorProcessingMsg');
-      alertOpt = Object(_jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_1__["generateDefaultAlertOption"])(message, () => setSweetAlertOption(null), null, _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_1__["predefinedIcons"].error);
+      alertOpt = Object(_jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_1__["generateDefaultAlertOption"])(message, () => {
+        setSweetAlertOption(null);
+        onFail && onFail();
+      }, null, _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_1__["predefinedIcons"].error);
       setSweetAlertOption(alertOpt);
     }
   },
@@ -5257,8 +5969,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_AppContainer_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/AppContainer.jsx */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/components/AppContainer.jsx");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _jsroot_lib_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/store */ "./www/js/source/reactpages/lib/store.js");
-/* harmony import */ var _reducers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./reducers */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/reducers/index.js");
-/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/constants.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+/* harmony import */ var _reducers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./reducers */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/reducers/index.js");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/constants.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -5272,7 +5985,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-const initialState = _objectSpread(_objectSpread({}, window.initialState[_lib_constants__WEBPACK_IMPORTED_MODULE_5__["tabKeys"].monitoredPlayer]), {
+
+const initialState = _objectSpread(_objectSpread({}, window.initialState[_lib_constants__WEBPACK_IMPORTED_MODULE_6__["tabKeys"].monitoredPlayer]), {
+  permissions: {
+    canEdit: _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_4__["default"][_lib_constants__WEBPACK_IMPORTED_MODULE_6__["tabKeys"].monitoredPlayer].canEdit,
+    showVipPlayer: _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_4__["default"].HasVipManagement,
+    showProblemPlayer: _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_4__["default"].TabKeys.some(_ => _ === _lib_constants__WEBPACK_IMPORTED_MODULE_6__["tabKeys"].problemPlayer)
+  },
+  userGuideContent: '',
   pagingOption: {
     PageIndex: 1,
     PageSize: 500,
@@ -5281,16 +6001,8 @@ const initialState = _objectSpread(_objectSpread({}, window.initialState[_lib_co
   }
 });
 
-/* harmony default export */ __webpack_exports__["default"] = (props => {
-  const {
-    selectedTabKey
-  } = props;
-
-  const defaultState = _objectSpread(_objectSpread({}, initialState), {
-    selectedTabKey
-  });
-
-  const store = _jsroot_lib_store__WEBPACK_IMPORTED_MODULE_3__["default"].createStore(_reducers__WEBPACK_IMPORTED_MODULE_4__["default"], defaultState);
+/* harmony default export */ __webpack_exports__["default"] = (() => {
+  const store = _jsroot_lib_store__WEBPACK_IMPORTED_MODULE_3__["default"].createStore(_reducers__WEBPACK_IMPORTED_MODULE_5__["default"], initialState);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_2__["Provider"], {
     store: store
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_AppContainer_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], null));
@@ -5319,50 +6031,61 @@ const dataGridFullHeaders = [{
   key: 'subsidiary',
   text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Subsidiary'),
   colWidth: 80,
-  show: false
+  show: ({
+    showSubsidiary
+  }) => showSubsidiary
 }, {
   key: 'externalId',
   text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('ExternalId'),
-  sortBy: 'externalId',
+  sortBy: 1,
   colWidth: 80
 }, {
   key: 'systemId',
   text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('SystemId'),
-  sortBy: 'systemId',
+  sortBy: 2,
   colWidth: 80
 }, {
   key: 'currency',
   text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Currency'),
-  colWidth: 80
+  colWidth: 50
 }, {
   key: 'currentWinningThreshold',
   text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('CurrentWinningThreshold'),
-  sortBy: 'currentWinningThreshold',
-  colWidth: 80
+  sortBy: 4,
+  colWidth: 100
 }, {
   key: 'noOfReached',
   text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('NoOfReached'),
-  sortBy: 'noOfReached',
+  sortBy: 5,
   colWidth: 60
 }, {
   key: 'lastReachedDate',
   text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('LastReachedDate'),
-  sortBy: 'lastReachedDate',
+  sortBy: 6,
   colWidth: 100
 }, {
   key: 'problemPlayer',
   text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('ProblemPlayer'),
-  sortBy: 'problemPlayer',
-  colWidth: 50
+  sortBy: 7,
+  colWidth: 50,
+  show: ({
+    showProblemPlayer
+  }) => showProblemPlayer
 }, {
   key: 'vipPlayer',
-  text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('VipPlayer'),
-  sortBy: 'vipPlayer',
-  colWidth: 50
+  text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('VIPPlayer'),
+  sortBy: 8,
+  colWidth: 50,
+  show: ({
+    showVipPlayer
+  }) => showVipPlayer
 }, {
   key: 'action',
   text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Action'),
-  colWidth: 50
+  colWidth: 50,
+  show: ({
+    canEdit
+  }) => canEdit
 }];
 const Url = {
   exportMonitoredPlayerList: 'Api/PlayerSegmentation/ExportMonitoredPlayerList',
@@ -5375,15 +6098,18 @@ const ExcelReaderColumn = {
 };
 const UpdateMonitoredPlayerCode = {
   Success: 0,
+  InvalidParameters: 1000,
+  InvalidUsernameInput: 1001,
   InvalidSystemId: 100,
   InvalidExternalId: 101,
   ExistingInList: 102,
   InvalidWinningThreshold: 103,
-  InvalidAccount: 104
+  InvalidAccount: 104,
+  NotExistingInList: 105
 };
 const UserActionType = {
   AddNew: 1,
-  ViewHistory: 2
+  ViewReachedHistory: 2
 };
 const MaxBatchUpdateMonitoredPlayer = 2000;
 
@@ -5438,19 +6164,23 @@ const selectedParams = _reducers_paramHandlerReducer__WEBPACK_IMPORTED_MODULE_6_
 /*!*************************************************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/reducers/index.js ***!
   \*************************************************************************************************************/
-/*! exports provided: currentUserAction, default */
+/*! exports provided: currentUserAction, supportedReachedDateRange, permissions, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "currentUserAction", function() { return currentUserAction; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "supportedReachedDateRange", function() { return supportedReachedDateRange; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "permissions", function() { return permissions; });
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
 /* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/types */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/actions/types.js");
 /* harmony import */ var _jsroot_reducers_loaderReducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/reducers/loaderReducer */ "./www/js/source/reactpages/reducers/loaderReducer.js");
-/* harmony import */ var _filterReducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./filterReducer */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/reducers/filterReducer.js");
-/* harmony import */ var _reducers_gridHandlerReducer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../reducers/gridHandlerReducer */ "./www/js/source/reactpages/pages/customer/player-segmentation/reducers/gridHandlerReducer.js");
-/* harmony import */ var _reducers_playerDataReducer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../reducers/playerDataReducer */ "./www/js/source/reactpages/pages/customer/player-segmentation/reducers/playerDataReducer.js");
+/* harmony import */ var _jsroot_reducers_userGuideReducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/reducers/userGuideReducer */ "./www/js/source/reactpages/reducers/userGuideReducer.js");
+/* harmony import */ var _filterReducer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./filterReducer */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/reducers/filterReducer.js");
+/* harmony import */ var _reducers_gridHandlerReducer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../reducers/gridHandlerReducer */ "./www/js/source/reactpages/pages/customer/player-segmentation/reducers/gridHandlerReducer.js");
+/* harmony import */ var _reducers_playerDataReducer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../reducers/playerDataReducer */ "./www/js/source/reactpages/pages/customer/player-segmentation/reducers/playerDataReducer.js");
+
 
 
 
@@ -5464,8 +6194,19 @@ const currentUserAction = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_
   }
 
 });
-/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(Object.assign(_jsroot_reducers_loaderReducer__WEBPACK_IMPORTED_MODULE_3__, _filterReducer__WEBPACK_IMPORTED_MODULE_4__, _reducers_gridHandlerReducer__WEBPACK_IMPORTED_MODULE_5__, _reducers_playerDataReducer__WEBPACK_IMPORTED_MODULE_6__, {
-  currentUserAction
+const supportedReachedDateRange = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({
+  fromDate: null,
+  toDate: null
+}, {});
+const permissions = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({
+  canEdit: false,
+  showVipPlayer: false,
+  showProblemPlayer: false
+}, {});
+/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(Object.assign(_jsroot_reducers_loaderReducer__WEBPACK_IMPORTED_MODULE_3__, _jsroot_reducers_userGuideReducer__WEBPACK_IMPORTED_MODULE_4__, _filterReducer__WEBPACK_IMPORTED_MODULE_5__, _reducers_gridHandlerReducer__WEBPACK_IMPORTED_MODULE_6__, _reducers_playerDataReducer__WEBPACK_IMPORTED_MODULE_7__, {
+  currentUserAction,
+  supportedReachedDateRange,
+  permissions
 })));
 
 /***/ }),
@@ -5630,6 +6371,29 @@ const selectedSubsidiary = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE
 });
 const subsidiarySearch = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(false, {
   [_actions_types__WEBPACK_IMPORTED_MODULE_1__["SET_SUBSIDIARY_SEARCH"]](prevState, action) {
+    return action.data;
+  }
+
+});
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/reducers/userGuideReducer.js":
+/*!***************************************************************!*\
+  !*** ./www/js/source/reactpages/reducers/userGuideReducer.js ***!
+  \***************************************************************/
+/*! exports provided: userGuideContent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "userGuideContent", function() { return userGuideContent; });
+/* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./www/js/source/reactpages/actions/types.js");
+/* harmony import */ var _lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
+
+
+const userGuideContent = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, {
+  [_actions_types__WEBPACK_IMPORTED_MODULE_0__["USER_GUIDE_CONTENT"]](state, action) {
     return action.data;
   }
 

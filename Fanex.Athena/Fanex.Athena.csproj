@@ -823,6 +823,7 @@
     <Content Include="www\js\build\pro\reactpages\bettingticketscenter\running.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\bettingticketscenter\singlecustomer.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\customer\playersegmentation\betlist.chunk.js" />
+    <Content Include="www\js\build\pro\reactpages\customer\playersegmentation\monitoredPlayer.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\exchangevoided\exchangevoided.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\exchangewl\exchangewl.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\lib\common.chunk.js" />

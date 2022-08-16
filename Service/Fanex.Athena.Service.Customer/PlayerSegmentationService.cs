@@ -57,8 +57,26 @@
             return result;
         }
 
-        public Task<IEnumerable<UpdateStatusPlayerResult>> UpdateVipStatusAsync(UpdateStatusPlayerMetaModel metaModel)
-            => _playerDataAccess.UpdateVipStatusAsync(metaModel);
+        public async Task<IEnumerable<UpdateStatusPlayerResult>> UpdateVipStatusAsync(UpdateStatusPlayerMetaModel metaModel)
+        {
+            var (listAffCustId, updateResult) = await _playerDataAccess.UpdateVipStatusAsync(metaModel);
+            if (!metaModel.IsUseCtsApi)
+            {
+                return updateResult;
+            }
+
+            if (string.IsNullOrWhiteSpace(listAffCustId))
+            {
+                await LogAbnormalRequest(metaModel, updateResult);
+            }
+            else
+            {
+                var path = metaModel.IsVip ? ADD_LIC_VIP_PATH : REMOVE_LIC_VIP_PATH;
+                await _ctsApiClient.PostAsync(path, new { CustIds = listAffCustId }, _sessionService.UserSession.Language);
+            }
+
+            return updateResult;
+        }
 
         public async Task<IEnumerable<ReasonGroup>> GetReasonGroupListAsync(string langKey)
             => await _playerDataAccess.GetReasonGroupListAsync(langKey);
@@ -68,25 +86,7 @@
             var result = await _playerDataAccess.GetMonitoredPlayerListAsync(metaModel);
             BindSubsidiaryName(result.Data, metaModel.SubsidiaryList);
             CurrencyHelper.BindCurrencyDisplayName(result.Data, _sessionService.UserSession.CurrencyList);
-            var listAffCustId = result.ListAffectCustId;
-            var returnResult = result.ListUpdateStatusPlayerResult;
-
-            if (!metaModel.IsUseCtsApi)
-            {
-                return returnResult;
-            }    
-
-            if (string.IsNullOrWhiteSpace(listAffCustId))
-            {
-                LogAbnormalRequest(metaModel, result.ListUpdateStatusPlayerResult);
-            }
-            else 
-            {
-                var path = metaModel.IsVip ? ADD_LIC_VIP_PATH : REMOVE_LIC_VIP_PATH;
-                await _ctsApiClient.PostAsync(path, new { CustIds = listAffCustId }, _sessionService.UserSession.Language);
-            }
-
-            return returnResult;
+            return result;
         }
 
         public Task<IEnumerable<MonitoredPlayerReachedHistory>> GetMonitoredPlayerReachedHistoryAsync(MonitoredPlayerReachedHistoryMetaModel metaModel)
@@ -108,16 +108,15 @@
             return CombineResult(commandResults);
         }
 
-		private void LogAbnormalRequest(UpdateStatusPlayerMetaModel metaModel, IEnumerable<UpdateStatusPlayerResult> updateResult)
+        private async Task LogAbnormalRequest(UpdateStatusPlayerMetaModel metaModel, IEnumerable<UpdateStatusPlayerResult> updateResult)
         {
             const int successCode = 0;
             if (updateResult.Any(r => r.Code == successCode))
             {
-                _logger.ErrorAsync($"Sp return empty list custid when UpdateVipStatus \n" +
+                await _logger.ErrorAsync($"Sp return empty list custid when UpdateVipStatus \n" +
                     $"Sp param: {JsonConvert.SerializeObject(metaModel)} \n" +
                     $"Return result: {JsonConvert.SerializeObject(updateResult)}");
             }
-            
         }
 
         private static IEnumerable<MonitoredPlayerCommand> CombineResult(IEnumerable<MonitoredPlayerCommand> result)
@@ -129,7 +128,8 @@
                 SystemId = string.Join(", ", _.Select(__ => __.SystemId)).Trim(' ', ',')
             });
 
- 		private static void BuildBatchPlayerXml(BatchUpdateMonitoredPlayerMetaModel metaModel)        {
+        private static void BuildBatchPlayerXml(BatchUpdateMonitoredPlayerMetaModel metaModel)
+        {
             var body = new StringBuilder();
             var index = 0;
             foreach (var player in metaModel.BatchPlayer)
