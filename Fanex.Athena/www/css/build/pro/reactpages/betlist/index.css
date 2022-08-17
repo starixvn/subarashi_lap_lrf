@@ -21,6 +21,13 @@
     .sort-icon-desc.light {
       border-top-color: #fff; }
 
+.transtime {
+  text-overflow: ellipsis; }
+
+.licenseeTxid {
+  overflow: hidden;
+  text-overflow: ellipsis; }
+
 .players-choice {
   color: #000000;
   font-weight: bold !important;

@@ -440,6 +440,8 @@ table tbody tr.row-group-level1 td {
   width: 40%; }
   .col-large.small {
     width: 35%; }
+  .col-large.medium {
+    width: 25%; }
 
 .col-child {
   width: 10%; }
@@ -1121,6 +1123,13 @@ ul.ui-multiselect-checkboxes {
     .sort-icon-desc.light {
       border-top-color: #fff; }
 
+.transtime {
+  text-overflow: ellipsis; }
+
+.licenseeTxid {
+  overflow: hidden;
+  text-overflow: ellipsis; }
+
 .players-choice {
   color: #000000;
   font-weight: bold !important;
@@ -1396,6 +1405,9 @@ ul.ui-multiselect-checkboxes {
 .sexygaming-bet-type-name {
   color: #696969; }
 
+#last-bets-monitoring, .page-form {
+  min-width: 950px; }
+
 .label {
   padding: 0 8px;
   margin-top: 6px; }
@@ -1405,7 +1417,10 @@ ul.ui-multiselect-checkboxes {
   color: #fff; }
 
 .table > tbody > tr td {
-  text-align: center; }
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; }
   .table > tbody > tr td.bl-event {
     text-align: right; }
   .table > tbody > tr td.bl-username {
