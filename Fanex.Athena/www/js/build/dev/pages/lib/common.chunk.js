@@ -21762,6 +21762,17 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/*global _lan
             return _rootUrl + relativeUrl;
         }
 
+
+        function ignoreSharding() {
+            return asBool($('#IgnoreSharding').val())
+        }
+
+        function tryIgnoreSharding(ajaxRequest) {
+            if(ignoreSharding()) {
+                ajaxRequest.setRequestHeader("X-IgnoreSharding", 'true');
+            }
+        }
+
         function getLrfSubsidiary() {
             try {
                 return (_isSelfMode && top.getLrfSubsidiarySearch && top.getLrfSubsidiarySearch()) || {}
@@ -22257,7 +22268,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/*global _lan
             getXsrfToken: getXsrfToken,
             getBaseCurrencyName: getBaseCurrencyName,
             getLrfSubsidiary: getLrfSubsidiary,
-            assignSubsidiaryData: assignSubsidiaryData
+            assignSubsidiaryData: assignSubsidiaryData,
+            tryIgnoreSharding,
+            ignoreSharding
         };
     }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));

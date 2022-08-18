@@ -3729,7 +3729,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                             _me.setLeagueTitle(response.LeagueName);
                         }
                     },
-                    beforeSend: function () {
+                    beforeSend: function (request) {
+                        Site.tryIgnoreSharding(request);
                         Site.blockUI();
                     },
                     complete: function () {
