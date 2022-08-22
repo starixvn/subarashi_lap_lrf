@@ -50,7 +50,7 @@
                 var result = controller.ResultExcel(metaModel).Result as FileStreamResult;
 
                 // Assert
-                Assert.That(result.FileDownloadName, Is.EqualTo("LRF-Result.xls"));
+                Assert.That(result.FileDownloadName, Is.EqualTo("Results.xls"));
                 Assert.That(result.FileStream, Is.Not.Null);
             }
         }

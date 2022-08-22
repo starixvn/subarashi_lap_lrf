@@ -96,7 +96,7 @@
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Invalid model state!");
             }
 
-            const string FileName = "LRF-Result.xls";
+            const string FileName = "Results.xls";
             metaModel.LicenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
             metaModel.SpecialLeagues = await _portalApiService.GetSpecialLeaguesAsync(SessionServiceInstance.LicenseeSession.LicenseeName);
 
