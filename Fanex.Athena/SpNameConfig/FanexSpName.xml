@@ -222,9 +222,9 @@
     <Setting Key="SiteDB_Lrf_Forecast_SelOU" SpName="SiteDB_Lrf_Forecast_SelOU_xtest" DbName="DBSID.bodb02.bodbLicenseeNet"></Setting>
     <Setting Key="SiteDB_Lrf_Forecast1x2_SelByLeague" SpName="SiteDB_Lrf_Forecast1x2_SelByLeague_xtest" DbName="DBSID.bodb02.bodbLicenseeNet"></Setting>
     <Setting Key="SiteDB_Lrf_Forecast_Sel1X2" SpName="SiteDB_Lrf_Forecast_Sel1X2_xtest" DbName="DBSID.bodb02.bodbLicenseeNet"></Setting>
-    <Setting Key="SiteDB_Lrf_LeagueSelRunning" SpName="Lrf_LeagueSelRunning_xtest" DbName="DBSID.bodb02.bodbLicenseeNet"></Setting>
-    <Setting Key="SiteDB_Lrf_Forecast_MatchList" SpName="Lrf_Forecast_MatchList_xtest" DbName="DBSID.bodb02.bodbLicenseeNet"></Setting>
-    <Setting Key="SiteDB_Lrf_Forecast_OddsSelTopByMatch" SpName="Lrf_Forecast_OddsSelTopByMatch_xtest" DbName="DBSID.bodb02.bodbLicenseeNet"></Setting>
+    <Setting Key="SiteDB_Lrf_LeagueSelRunning" SpName="SiteDB_Lrf_LeagueSelRunning_xtest" DbName="DBSID.bodb02.bodbLicenseeNet"></Setting>
+    <Setting Key="SiteDB_Lrf_Forecast_MatchList" SpName="SiteDB_Lrf_Forecast_MatchList_xtest" DbName="DBSID.bodb02.bodbLicenseeNet"></Setting>
+    <Setting Key="SiteDB_Lrf_Forecast_OddsSelTopByMatch" SpName="SiteDB_Lrf_Forecast_OddsSelTopByMatch_xtest" DbName="DBSID.bodb02.bodbLicenseeNet"></Setting>
   </SiteDB>
 </Functions>
 

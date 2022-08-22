@@ -35,7 +35,7 @@
     }
 
         [HttpGet]
-        public async Task<ActionResult> Index(bool isHistory = false)
+        public async Task<ActionResult> Index(bool isHistory = true)
         {
             var ignoreSharding = string.IsNullOrEmpty(SessionServiceInstance.LicenseeSession.SiteDBServer);
             if(!isHistory && ignoreSharding)
@@ -45,8 +45,6 @@
 
             return await GetView(isHistory, ignoreSharding);
         }
-
-
 
         private async Task<ActionResult> GetView(bool isHistory, bool ignoreSharding)
         {

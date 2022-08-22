@@ -2,8 +2,17 @@
     <h4>General Info
     </h4>
     <ul>
+        {sitedb-report-section}
+        <li>The report shall support data on 2 tabs:</li>
+        <ul>
+            <li>The Normal report tab shall support up-to-date data. You can filter data up to 3 months per query.</li>
+            <li>The Real Time report tab shall support instant data from {move-bet-date-from}.</li>
+        </ul>
+        {/sitedb-report-section}
         <li>The report contains only won/lose/draw tickets.</li>
+        {centraldb-report-section}
         <li>This report supports up-to-date data. You can filter data up to 3 months per query.</li>
+        {/centraldb-report-section}
         <li>A red negative number indicates a loss for Licensee whereas the black positive indicates a win.</li>
         <li>OANDA Exchange Service will use the exchange rate of the end date of each selected month when converting the figures.</li>
         <li>Data of RNG Products, Live Casino Products will be delayed up to 5 minutes after settling tickets.</li>

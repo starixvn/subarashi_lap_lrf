@@ -83,7 +83,7 @@
                 });
 
                 // Action
-                var viewResult = await controller.Index() as ViewResult;
+                var viewResult = await controller.Index(false) as ViewResult;
                 var viewModel = viewResult.Model as CustomerWinLossViewModel;
 
                 // Assert

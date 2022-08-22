@@ -3535,15 +3535,6 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to History Report.
-        /// </summary>
-        public static string HistoryReport {
-            get {
-                return ResourceManager.GetString("HistoryReport", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Home.
         /// </summary>
         public static string Home {
@@ -3670,7 +3661,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The normal report shall support instant data from {0}..
+        ///   Looks up a localized string similar to The real time report shall support instant data from {0}..
         /// </summary>
         public static string InstantDataReportNote {
             get {
@@ -6456,6 +6447,15 @@ namespace Fanex.Athena.Resources {
         public static string RealName {
             get {
                 return ResourceManager.GetString("RealName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Real Time Report.
+        /// </summary>
+        public static string RealTimeReport {
+            get {
+                return ResourceManager.GetString("RealTimeReport", resourceCulture);
             }
         }
         

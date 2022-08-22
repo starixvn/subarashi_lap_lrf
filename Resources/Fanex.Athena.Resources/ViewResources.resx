@@ -3287,13 +3287,14 @@
   <data name="AllCustomerClassCategory" xml:space="preserve">
     <value>All Customer Class Category</value>
   </data>
-  <data name="HistoryReport" xml:space="preserve">
-    <value>History Report</value>
-  </data>
-  <data name="InstantDataReportNote" xml:space="preserve">
-    <value>The normal report shall support instant data from {0}.</value>
-  </data>
   <data name="NormalReport" xml:space="preserve">
     <value>Normal Report</value>
+  </data>
+  </data>
+  <data name="InstantDataReportNote" xml:space="preserve">
+    <value>The real time report shall support instant data from {0}.</value>
+  </data>
+  <data name="RealTimeReport" xml:space="preserve">
+    <value>Real Time Report</value>
   </data>
 </root>

@@ -65,8 +65,10 @@
             if (NeedBindData(resourceName))
             {
                 var products = _productService.GetProductList(SessionServiceInstance.LicenseeSession.LicenseeId, SessionServiceInstance.UserSession.Language);
+                content = AddSiteDBReportNote(content);
                 content = AddSpecialProducts(content, products);
                 content = AddBalanceUpDate(content);
+                content = AddMoveBetDateFrom(content);
                 content = AddVS2Sport(content);
                 content = AddOpenBalanceInfo(content);
             }
@@ -95,29 +97,16 @@
         }
 
         private static bool NeedBindData(string resourceName)
-        {
-            return !ListResourceNoBindData.ContainsKey(resourceName.ToLowerInvariant());
-        }
+            => !ListResourceNoBindData.ContainsKey(resourceName.ToLowerInvariant());
 
         private static string AddCasinoProducts(string content, IEnumerable<Product> products)
-        {
-            var result = content;
-            if (content.Contains("{casino-productlist-section}"))
-            {
-                var offerCasino = products.Any(_ => _.ProductID == ProductTypes.SabaCasino);
-                if (offerCasino)
-                {
-                    result = result.Replace("{casino-productlist-section}", string.Empty);
-                    result = result.Replace("{/casino-productlist-section}", string.Empty);
-                }
-                else
-                {
-                    result = new Regex(@"\{casino-productlist-section\}[\s\S]*{/casino-productlist-section\}").Replace(result, string.Empty);
-                }
-            }
+            => Replace(content, "{casino-productlist-section}", "{/casino-productlist-section}", products.Any(_ => _.ProductID == ProductTypes.SabaCasino));
 
-            return result;
-        }
+        private string AddSiteDBReportNote(string content)
+            => Replace(
+                Replace(content, "{sitedb-report-section}", "{/sitedb-report-section}", !string.IsNullOrEmpty(SessionServiceInstance.LicenseeSession.SiteDBServer)),
+                    "{centraldb-report-section}", "{/centraldb-report-section}", string.IsNullOrEmpty(SessionServiceInstance.LicenseeSession.SiteDBServer)
+                    );
 
         private static string AddSpecialProducts(string content, IEnumerable<Product> products)
         {
@@ -147,27 +136,7 @@
         }
 
         private string AddOpenBalanceInfo(string content)
-        {
-            const string openingTag = "{open-balance-section}";
-            const string closingTag = "{/open-balance-section}";
-
-            var customContent = content;
-            if (customContent.Contains(openingTag))
-            {
-                if (SessionServiceInstance.LicenseeSession.IsEnableSingleWallet)
-                {
-                    const string pattern = @"\{open-balance-section\}[\s\S]*{/open-balance-section\}";
-                    customContent = new Regex(pattern).Replace(customContent, string.Empty);
-                }
-                else
-                {
-                    customContent = customContent.Replace(openingTag, string.Empty);
-                    customContent = customContent.Replace(closingTag, string.Empty);
-                }
-            }
-
-            return customContent;
-        }
+            => Replace(content, "{open-balance-section}", "{/open-balance-section}", !SessionServiceInstance.LicenseeSession.IsEnableSingleWallet);
 
         private static string RemoveProductSection(string content, IEnumerable<Product> products, int productId, string productCode)
         {
@@ -204,6 +173,18 @@
             return content;
         }
 
+        private string AddMoveBetDateFrom(string content)
+        {
+            const string PlaceHolder = "{move-bet-date-from}";
+            if (content.Contains(PlaceHolder))
+            {
+                var date = _balanceUpDataAccess.GetBalanceUp().MoveBetsDay.AddDays(1);
+                return content.Replace(PlaceHolder, date.ToString("MM/dd/yyyy"));
+            }
+
+            return content;
+        }
+
         private string GetDefaultFilePathIfNotExist(string language, string filePath)
         {
             if (!language.Equals(DefaultLanguage, System.StringComparison.OrdinalIgnoreCase) && !_fileSystem.Exists(filePath))
@@ -222,6 +203,25 @@
             filePath = GetDefaultFilePathIfNotExist(language, filePath);
 
             return _fileSystem.ReadFile(filePath);
+        }
+
+        private static string Replace(string content, string openingSectionTag, string closingSectionTag, bool shouldKeepSection)
+        {
+            var result = content;
+            if (content.Contains(openingSectionTag))
+            {
+                if (shouldKeepSection)
+                {
+                    result = result.Replace(openingSectionTag, string.Empty);
+                    result = result.Replace(closingSectionTag, string.Empty);
+                }
+                else
+                {
+                    result = new Regex($@"{openingSectionTag}[\s\S]*{closingSectionTag}").Replace(result, string.Empty);
+                }
+            }
+
+            return result;
         }
     }
 }

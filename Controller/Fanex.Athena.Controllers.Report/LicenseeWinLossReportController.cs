@@ -36,7 +36,7 @@
         }
 
         [HttpGet]
-        public ActionResult Index(bool isHistory = false)
+        public ActionResult Index(bool isHistory = true)
         {
             if (IsFakeLicensee(SessionServiceInstance.LicenseeSession.LicenseeName))
             {
