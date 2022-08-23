@@ -110,13 +110,13 @@ export const renderDetailHeader = () => {
     return (
         <HeaderRow style={{ height: 32 }}>
             <HeaderCell colWidth={60}>#</HeaderCell>
-            <HeaderCell colWidth={150}>{headerText.date}</HeaderCell>
-            <HeaderCell colWidth={180}>{headerText.refno}</HeaderCell>
+            <HeaderCell colWidth={140}>{headerText.date}</HeaderCell>
+            <HeaderCell colWidth={230}>{headerText.refno}</HeaderCell>
             <HeaderCell colWidth={220}>{headerText.product}</HeaderCell>
-            <HeaderCell colWidth={300}>{headerText.promotionType}</HeaderCell>
-            <HeaderCell colWidth={180}>{headerText.turnover}</HeaderCell>
-            <HeaderCell colWidth={200}>{headerText.customerAmount}</HeaderCell>
-            <HeaderCell colWidth={260}>{headerText.licSharingAmount}</HeaderCell>
+            <HeaderCell colWidth={290}>{headerText.promotionType}</HeaderCell>
+            <HeaderCell colWidth={170}>{headerText.turnover}</HeaderCell>
+            <HeaderCell colWidth={190}>{headerText.customerAmount}</HeaderCell>
+            <HeaderCell colWidth={190}>{headerText.licSharingAmount}</HeaderCell>
         </HeaderRow>
     )
 }

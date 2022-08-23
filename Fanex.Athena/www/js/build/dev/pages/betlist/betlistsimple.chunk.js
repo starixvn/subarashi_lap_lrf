@@ -3925,18 +3925,19 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
     {
         name: 'TransTime',
         index: 'TransTime',
-        width: 140,
+        width: 160,
         align: 'center',
         sortable: false,
         resizable: false,
         title: false,
-        classes: 'transtime'
+        classes: 'transtime',
+        cellattr: function (rowId, cellValue, rowObject) { return `title="${rowObject.TransId}"` }
     };
     const choice =
     {
         name: 'Choice',
         index: 'Choice',
-        width: 300,
+        width: 280,
         align: 'right',
         sortable: false,
         title: false,

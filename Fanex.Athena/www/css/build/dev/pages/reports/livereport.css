@@ -440,6 +440,8 @@ table tbody tr.row-group-level1 td {
   width: 40%; }
   .col-large.small {
     width: 35%; }
+  .col-large.medium {
+    width: 25%; }
 
 .col-child {
   width: 10%; }

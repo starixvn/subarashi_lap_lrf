@@ -440,6 +440,8 @@ table tbody tr.row-group-level1 td {
   width: 40%; }
   .col-large.small {
     width: 35%; }
+  .col-large.medium {
+    width: 25%; }
 
 .col-child {
   width: 10%; }
@@ -1361,6 +1363,13 @@ tr.ui-search-toolbar select {
     border-top: 5px solid; }
     .sort-icon-desc.light {
       border-top-color: #fff; }
+
+.transtime {
+  text-overflow: ellipsis; }
+
+.licenseeTxid {
+  overflow: hidden;
+  text-overflow: ellipsis; }
 
 .players-choice {
   color: #000000;
