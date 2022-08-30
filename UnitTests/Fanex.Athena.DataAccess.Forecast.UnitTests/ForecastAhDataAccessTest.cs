@@ -28,7 +28,7 @@
         public async Task GetForecastTopOddsByMatch_WhenCall_ParametersPassedCorrectly()
         {
             // Arrange
-            DataAccess.GetObjectDb(Arg.Is("Shard_Lrf_Forecast_OddsSelTopByMatch")).Returns(ObjectDb);
+            DataAccess.GetObjectDb(Arg.Is("Lrf_Forecast_OddsSelTopByMatch")).Returns(ObjectDb);
             var matchId = 0;
             var betType = 0;
             ObjectDb.QueryEntity<ForecastAH>().Returns(new ForecastAH());

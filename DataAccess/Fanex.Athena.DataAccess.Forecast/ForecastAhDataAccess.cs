@@ -16,7 +16,7 @@
 
         public async Task<ForecastAH> GetForecastTopOddsByMatch(int matchId, int betType)
         {
-            const string UspName = "Shard_Lrf_Forecast_OddsSelTopByMatch";
+            const string UspName = "Lrf_Forecast_OddsSelTopByMatch";
 
             using (var db = GetObjectDb(UspName))
             {

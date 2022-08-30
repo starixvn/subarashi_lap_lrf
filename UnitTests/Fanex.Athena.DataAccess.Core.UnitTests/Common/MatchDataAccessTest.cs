@@ -47,7 +47,7 @@
         {
             // Arrange
             dynamic param = new { LeagueId = 0 };
-            DataAccess.GetObjectDb(Arg.Is("Shard_Lrf_Forecast_MatchList")).Returns(ObjectDb);
+            DataAccess.GetObjectDb(Arg.Is("Lrf_Forecast_MatchList")).Returns(ObjectDb);
             ObjectDb.When(x => x.ExecuteReaderAsync(Arg.Any<object>())).Do(x => param = x[0]);
 
             // Action
@@ -64,7 +64,7 @@
             const int LeagueId = 1;
             var expectedMatch = GetFakeMatch();
 
-            DataAccess.GetObjectDb(Arg.Is("Shard_Lrf_Forecast_MatchList")).Returns(ObjectDb);
+            DataAccess.GetObjectDb(Arg.Is("Lrf_Forecast_MatchList")).Returns(ObjectDb);
             MapReaderData(expectedMatch);
             Reader.Read().Returns(true, false);
 
