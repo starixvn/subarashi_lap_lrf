@@ -5689,7 +5689,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
         const _me = {};
 
         // Param
-        let _betListResult = { NewRow: false, Rows: [], LastTransId: 0, LastTransLogId: 0 };
+        let _betListResult = { NewRow: false, Rows: [], LastTransId: '0', LastTransLogId: '0' };
         let _lastTransId = '0';
         let _lastTransLogId = '0';
 
@@ -5801,8 +5801,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
         _me.Submit = function (freezeStatus) {
             _me.stopMonitor();
             _me.tryUpdateStake();
-            _lastTransId = 0;
-            _lastTransLogId = 0;
+            _lastTransId = '0';
+            _lastTransLogId = '0';
             _postedParam = Site.clone(_params);
 
             if (parseInt(freezeStatus, 10) === 1) {
@@ -5826,7 +5826,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
             _isLoading = true;
 
             const loadingTickBegin = (new Date()).getTime();
-            if (Number(_lastTransId) === 0 && Number(_lastTransLogId) === 0) {
+            if (_lastTransId === '0' && _lastTransLogId === '0') {
                 _me.clearContent();
             }
 
@@ -5955,16 +5955,16 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
         };
 
         _me.clearContent = function () {
-            _postedParam.TransId = 0;
-            _postedParam.TransLogId = 0;
+            _postedParam.TransId = '0';
+            _postedParam.TransLogId = '0';;
             _me.bindNoInfoRow();
         };
 
         _me.startMonitor = function () {
             _me.stopMonitor();
 
-            _lastTransId = 0;
-            _lastTransLogId = 0;
+            _lastTransId = '0';
+            _lastTransLogId = '0';
             _intervalMiliseconds = MIN_INTERVAL;
             _me.doMonitor();
         };
