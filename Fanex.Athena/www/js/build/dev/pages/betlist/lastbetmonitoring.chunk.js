@@ -5804,10 +5804,17 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
             _lastTransId = '0';
             _lastTransLogId = '0';
             _postedParam = Site.clone(_params);
+            _me.UpdateBetListParams();
 
             if (parseInt(freezeStatus, 10) === 1) {
                 _me.startMonitor();
             }
+        };
+
+        _me.UpdateBetListParams = () => {
+            const betlistParams = $.parseJSON($('#BetListMetaModel').val());
+            betlistParams.BaseCurrency = _params.BasedCurrency;
+            $("#BetListMetaModel").attr("value", JSON.stringify(betlistParams));
         };
 
         /*------------------------------------------------------------------------------------------
