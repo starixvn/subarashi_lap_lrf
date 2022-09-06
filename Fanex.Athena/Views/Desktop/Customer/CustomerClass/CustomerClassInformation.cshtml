@@ -7,6 +7,8 @@
     var isSettingPolicyTab = ViewBag.TabKey == (byte)CustomerClassTabType.SettingPolicy;
     var classNameTab = isSettingPolicyTab ? "customer-class-policy-setting" : "customer-class-spread-setting";
     var customerClassOption = Model.Select(m => Convert.ToInt32(m.Id));
+    var tabKey = (CustomerClassTabType)ViewBag.TabKey;
+    Func<CustomerClassTabType, string> Active = (tabType) => tabType == (CustomerClassTabType)tabKey ? "active" : String.Empty;
 }
 @section pagecss {
     <link href="@Url.ContentLinkByEnv("/www/css/build/pages/customer/customer-class.css")" rel="stylesheet" />
@@ -25,39 +27,53 @@
         <div class="tab">
             <ul>
                 <li>
-                    <a class="policy-setting" href="~/CustomerClass/CustomerClassInformation?tabKey=1">@ViewResources.CustomerClassSettingPolicy</a>
+                    <a class="@Active(CustomerClassTabType.SettingPolicy)" href="~/CustomerClass/CustomerClassInformation?tabKey=1">@ViewResources.CustomerClassSettingPolicy</a>
                 </li>
                 <li>
-                    <a class="spread-setting" href="~/CustomerClass/CustomerClassInformation?tabKey=2">@ViewResources.CustomerClassSpreadSettingPolicy</a>
+                    <a class="@Active(CustomerClassTabType.SpreadSettingPolicy)" href="~/CustomerClass/CustomerClassInformation?tabKey=2">@ViewResources.CustomerClassSpreadSettingPolicy</a>
+                </li>
+                <li>
+                    <a class="@Active(CustomerClassTabType.AllCustomerClass)" href="~/CustomerClass/CustomerClassInformation?tabKey=3">@ViewResources.AllCustomerClassCategory</a>
                 </li>
             </ul>
         </div>
-        <div class="card-panel">
-            <div class="row">
-                <div class="col m3 s3 l3 xl2 input-field col">
-                    <div class="multiselect-container">
-                        <select id="customer-class-multiselect" name="customer-class-multiselect"></select>
+        @if (tabKey == CustomerClassTabType.SettingPolicy || tabKey == CustomerClassTabType.SpreadSettingPolicy)
+        {
+            <div class="card-panel">
+                <div class="row">
+                    <div class="col m3 s3 l3 xl2 input-field col">
+                        <div class="multiselect-container">
+                            <select id="customer-class-multiselect" name="customer-class-multiselect"></select>
+                        </div>
+                        <label for="customer-class-ids"> @ViewResources.CustomerClass</label>
                     </div>
-                    <label for="customer-class-ids"> @ViewResources.CustomerClass</label>
-                </div>
-                <div class="col m5 s5 l5 xl5">
-                    <div class="button-block">
-                        <button id="btn-submit" class="btn orange accent-4 white-text">@ViewResources.Submit</button>
-                        <button id="btn-export-excel" class="btn orange accent-4 white-text">@ViewResources.ExportToExcel</button>
+                    <div class="col m5 s5 l5 xl5">
+                        <div class="button-block">
+                            <button id="btn-submit" class="btn orange accent-4 white-text">@ViewResources.Submit</button>
+                            <button id="btn-export-excel" class="btn orange accent-4 white-text">@ViewResources.ExportToExcel</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-        </div>
+            </div>
+        }
         <div class="result-content">
             <div class="main-content" id="main-content">
-                @if (ViewBag.TabKey == (byte)CustomerClassTabType.SettingPolicy)
-                {
-                    Html.RenderPartial("~/Views/Desktop/Customer/CustomerClass/SettingPolicyTab.cshtml", Model);
-                }
-                else
-                {
-                    Html.RenderPartial("~/Views/Desktop/Customer/CustomerClass/SpreadSettingPolicyTab.cshtml", Model);
+                @{
+                    switch (tabKey)
+                    {
+                        case CustomerClassTabType.SettingPolicy:
+                            Html.RenderPartial("~/Views/Desktop/Customer/CustomerClass/SettingPolicyTab.cshtml", Model);
+                            break;
+                        case CustomerClassTabType.SpreadSettingPolicy:
+                            Html.RenderPartial("~/Views/Desktop/Customer/CustomerClass/SpreadSettingPolicyTab.cshtml", Model);
+                            break;
+                        case CustomerClassTabType.AllCustomerClass:
+                            Html.RenderPartial("~/Views/Desktop/Customer/CustomerClass/AllCustomerClassTab.cshtml", Model);
+                            break;
+                        default:
+                            break;
+                    }
                 }
             </div>
         </div>

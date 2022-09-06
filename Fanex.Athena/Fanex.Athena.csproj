@@ -748,6 +748,7 @@
     <Content Include="Views\Desktop\Customer\BetSetting\SabaCasino.cshtml" />
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\VipPlayerUploadByExternalIdTemplate.xls" />
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\VipPlayerUploadBySystemIdTemplate.xls" />
+    <Content Include="Views\Desktop\Customer\CustomerClass\AllCustomerClassTab.cshtml" />
     <None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
     <None Include="www\css\source\pages\betlist\result\result.happy5.scss" />
     <None Include="www\css\source\reactpages\components\alert\icons\error.scss" />
