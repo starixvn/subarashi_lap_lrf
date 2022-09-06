@@ -480,8 +480,6 @@ ul.ui-multiselect-checkboxes {
 
 .customer-class-policy-setting .tab {
   min-width: 1400px; }
-  .customer-class-policy-setting .tab a.policy-setting {
-    border-bottom: 2px solid #E15F00; }
 
 .customer-class-policy-setting .card-panel {
   min-width: 1400px; }
@@ -517,12 +515,11 @@ ul.ui-multiselect-checkboxes {
       margin-left: 15px;
       list-style-type: disc; }
 
-.customer-class-spread-setting .tab a.spread-setting {
-  border-bottom: 2px solid #E15F00; }
-
 .tab {
   box-sizing: border-box;
   font-size: 1.4rem; }
+  .tab .active {
+    border-bottom: 2px solid #E15F00; }
   .tab ul {
     list-style-type: none;
     margin: 0;
