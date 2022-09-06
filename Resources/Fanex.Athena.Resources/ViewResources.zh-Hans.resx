@@ -2243,4 +2243,7 @@
   <data name="ProductBTC" xml:space="preserve">
     <value>比特币</value>
   </data>
+  <data name="AllCustomerClassCategory" xml:space="preserve">
+    <value>所有玩家分类</value>
+  </data>
 </root>

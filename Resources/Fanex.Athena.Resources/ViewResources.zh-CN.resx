@@ -2854,4 +2854,7 @@
   <data name="UploadSystemIdList" xml:space="preserve">
     <value>上传系统ID名单</value>
   </data>
+  <data name="AllCustomerClassCategory" xml:space="preserve">
+    <value>所有玩家分类</value>
+  </data>
 </root>
