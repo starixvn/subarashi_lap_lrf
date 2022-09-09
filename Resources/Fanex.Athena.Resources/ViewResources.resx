@@ -3292,7 +3292,7 @@
   </data>
   </data>
   <data name="InstantDataReportNote" xml:space="preserve">
-    <value>The real time report shall support instant data from {0}.</value>
+    <value>The Real Time report shall support instant data from {0}.</value>
   </data>
   <data name="RealTimeReport" xml:space="preserve">
     <value>Real Time Report</value>

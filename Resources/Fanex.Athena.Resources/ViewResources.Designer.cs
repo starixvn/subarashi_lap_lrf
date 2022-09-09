@@ -3661,7 +3661,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The real time report shall support instant data from {0}..
+        ///   Looks up a localized string similar to The Real Time report shall support instant data from {0}..
         /// </summary>
         public static string InstantDataReportNote {
             get {
