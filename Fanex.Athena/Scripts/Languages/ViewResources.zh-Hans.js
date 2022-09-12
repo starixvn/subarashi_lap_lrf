@@ -1,4 +1,4 @@
-﻿// Generated at: 7/19/2022 11:37:56 AM
+﻿// Generated at: 9/12/2022 2:54:28 PM
 var _language_zh_Hans = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -28,6 +28,7 @@ AlertUserNameMsg:"请输入用户名！",
 All:"全部",
 AllBetTypes:"所有投注类型",
 AllCurrencies:"所有货币",
+AllCustomerClassCategory:"所有玩家分类",
 Amendment:"重新结算",
 Amount:"金额",
 AmountDue:"应付金额",

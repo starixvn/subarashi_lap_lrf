@@ -3290,7 +3290,6 @@
   <data name="NormalReport" xml:space="preserve">
     <value>Normal Report</value>
   </data>
-  </data>
   <data name="InstantDataReportNote" xml:space="preserve">
     <value>The Real Time report shall support instant data from {0}.</value>
   </data>

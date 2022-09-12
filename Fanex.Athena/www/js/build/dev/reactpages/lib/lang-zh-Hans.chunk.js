@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 7/19/2022 11:38:05 AM
+// Generated at: 9/12/2022 2:56:30 PM
 window._language_zh_Hans = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -123,6 +123,7 @@ window._language_zh_Hans = {
   All: "全部",
   AllBetTypes: "所有投注类型",
   AllCurrencies: "所有货币",
+  AllCustomerClassCategory: "所有玩家分类",
   Amendment: "重新结算",
   Amount: "金额",
   AmountDue: "应付金额",
