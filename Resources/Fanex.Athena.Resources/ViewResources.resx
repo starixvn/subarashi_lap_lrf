@@ -3284,4 +3284,7 @@
   <data name="ProductMXG" xml:space="preserve">
     <value>MaxGame</value>
   </data>
+  <data name="AllCustomerClassCategory" xml:space="preserve">
+    <value>All Customer Class Category</value>
+  </data>
 </root>

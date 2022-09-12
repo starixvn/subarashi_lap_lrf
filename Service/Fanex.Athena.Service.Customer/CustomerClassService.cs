@@ -18,6 +18,7 @@
     public class CustomerClassService : ICustomerClassService
     {
         private const string DefaultTextValue = "-";
+        private const string EnglishCulture = "en-US";
 
         private readonly ICustomerClassDataAccess _dataAccess;
         private readonly IWebClientService _webClientService;
@@ -57,6 +58,19 @@
             return result;
         }
 
+        public async Task<IEnumerable<CustomerClassModel>> GetAllCustomerClass(string language)
+        {
+            var customerClassCategories = await GetCustomerClassCategories();
+            return customerClassCategories.Select(_ =>
+            {
+                var translatedCategory = string.Equals(language, EnglishCulture, StringComparison.OrdinalIgnoreCase) ? _.CategoryName : _.CategoryNameCN;
+                return new CustomerClassModel(_.CustomerClass.ToString())
+                {
+                    Category = translatedCategory,
+                };
+            });
+        }
+
         private async Task MapLicLeagueGroup(IEnumerable<CustomerClassLimitPolicyModel> policies, string langCode)
         {
             foreach (var policy in policies)
@@ -92,7 +106,7 @@
         }
 
 
-        public async Task<IEnumerable<string>> GetAllCustomerClass()
+        public async Task<IEnumerable<string>> GetAllCustomerClassId()
         {
             var result = new List<string> { "0" };
             var listCategory = await GetCustomerClassCategories();

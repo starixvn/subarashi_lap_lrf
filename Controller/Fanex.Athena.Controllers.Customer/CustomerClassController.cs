@@ -34,14 +34,7 @@
         {
             ViewBag.TabKey = tabKey;
 
-            var metaModel = new GetCustomerClassInformationMetaModel
-            {
-                SiteName = SessionServiceInstance.LicenseeSession.LicenseeName,
-                CurrencyList = SessionServiceInstance.UserSession.CurrencyList,
-                Language = SessionServiceInstance.UserSession.Language
-            };
-
-            var viewModel = await (tabKey == (byte)CustomerClassTabType.SettingPolicy ? _service.GetSettingPolicy(metaModel) : _service.GetSpreadSettingPolicy(metaModel));
+            var viewModel = await GetModelForTabAsync(tabKey);
             ViewBag.CustomerClass = viewModel.Select(m => Convert.ToInt32(m.Id));
 
             return View("~/Views/Desktop/Customer/CustomerClass/CustomerClassInformation.cshtml", viewModel);
@@ -135,6 +128,33 @@
             else
             {
                 return new CustomerClassSpreadSettingPolicyExcel(templatePath, reportTitle, source);
+            }
+        }
+
+        private async Task<IEnumerable<CustomerClassModel>> GetModelForTabAsync(byte tabKey)
+        {
+            var metaModel = new GetCustomerClassInformationMetaModel
+            {
+                SiteName = SessionServiceInstance.LicenseeSession.LicenseeName,
+                CurrencyList = SessionServiceInstance.UserSession.CurrencyList,
+                Language = SessionServiceInstance.UserSession.Language
+            };
+            switch (tabKey)
+            {
+                case (byte)CustomerClassTabType.SettingPolicy:
+                    return await _service.GetSettingPolicy(metaModel);
+                case (byte)CustomerClassTabType.SpreadSettingPolicy:
+                    return await _service.GetSpreadSettingPolicy(metaModel);
+                case (byte)CustomerClassTabType.AllCustomerClass:
+                    {
+                        var result = await _service.GetAllCustomerClass(metaModel.Language);
+                        return result.GroupBy(_ => _.Id).Select(_ => new CustomerClassModel(_.Key)
+                        {
+                            Category = String.Join(", ", _.Select(c => c.Category))
+                        });
+                    }
+                default:
+                    return await _service.GetSettingPolicy(metaModel);
             }
         }
     }

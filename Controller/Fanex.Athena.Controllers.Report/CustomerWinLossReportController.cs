@@ -74,7 +74,7 @@
                 MaxDate = reportSetting.MaxDate,
                 HasExtraPayoutPermission = _authService.HasPermissions(userSession, PermissionKeys.ReportExtraPayout),
                 OddsGroups = licenseeSession.OfferedOddsGroupsList,
-                CustomerClassList = await _customerClassService.GetAllCustomerClass(),
+                CustomerClassList = await _customerClassService.GetAllCustomerClassId(),
             };
 
             return View("~/Views/Desktop/Report/CustomerWinLoss/Main.cshtml", model);

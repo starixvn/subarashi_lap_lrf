@@ -1,16 +1,10 @@
 ﻿@import "../../scss/abstracts/_variables.scss";
 @import "../../components/multiselect//multiselect.main.scss";
 
-@mixin active() {
-    border-bottom: 2px solid #E15F00;
-}
+
 
 .customer-class-policy-setting {
     .tab {
-        a.policy-setting {
-            @include active;
-        }
-
         min-width: 1400px;
     }
 
@@ -67,15 +61,11 @@
     }
 }
 
-.customer-class-spread-setting {
-    .tab {
-        a.spread-setting {
-            @include active;
-        }
-    }
-}
 
 .tab {
+    .active{
+        border-bottom: 2px solid #E15F00;
+    }
     box-sizing: border-box;
     font-size: 1.4rem;
 

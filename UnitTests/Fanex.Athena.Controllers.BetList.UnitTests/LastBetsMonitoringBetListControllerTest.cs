@@ -36,7 +36,7 @@
             {
                 // Arrange
                 _sportService.GetAllSports().Returns(new Dictionary<int, string>());
-                _customerClass.GetAllCustomerClass().Returns(new List<string>());
+                _customerClass.GetAllCustomerClassId().Returns(new List<string>());
 
                 // Action
                 var result = await controller.Index() as ViewResult;
@@ -57,7 +57,7 @@
                 var sports = new List<SportProductItem>() { new SportProductItem { ID = 1, ParentId = 0, Name = "Test Sport" } };
 
                 _sportService.GetSportAndProductAndSabaSport(DefaultLicenseeSession.LicenseeId, DefaultUserSession.Language, string.Empty).Returns(sports);
-                _customerClass.GetAllCustomerClass().Returns(new List<string> { "1" });
+                _customerClass.GetAllCustomerClassId().Returns(new List<string> { "1" });
                 // Action
                 var result = await controller.Index() as ViewResult;
                 var model = (LastBetsMonitoringViewModel)result.Model;

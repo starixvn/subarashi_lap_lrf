@@ -83,7 +83,7 @@
             var viewType = !subsidiaryList.Any() ? SubsidiaryViewType.NotManagement : (SubsidiaryViewType)userSession.SubsidiaryViewType;
             var reasonList = await GetReasonList(lang);
             var problemPlayerCustomerClass = reasonList.OrderBy(_ => _.CustomerClass).Select(_ => _.CustomerClass.ToString()).Distinct();
-            var vipMngCustomerClass = await _customerClassService.GetAllCustomerClass();
+            var vipMngCustomerClass = await _customerClassService.GetAllCustomerClassId();
 
             var model = new PlayerSegmentationViewModel
             {

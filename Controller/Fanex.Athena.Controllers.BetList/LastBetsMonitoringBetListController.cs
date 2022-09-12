@@ -52,7 +52,7 @@
             {
                 CurrencyList = SessionServiceInstance.UserSession.CurrencyList,
                 SportsList = await GetSports().ConfigureAwait(false),
-                CustomerClassList = await _customerClassService.GetAllCustomerClass(),
+                CustomerClassList = await _customerClassService.GetAllCustomerClassId(),
                 Param = metaModel
             };
 
