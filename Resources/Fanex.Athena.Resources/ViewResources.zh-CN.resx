@@ -2856,6 +2856,7 @@
   </data>
   <data name="AllCustomerClassCategory" xml:space="preserve">
     <value>所有玩家分类</value>
+  </data>
   <data name="CurrentWinningThreshold" xml:space="preserve">
     <value>当前赢额临界值</value>
   </data>

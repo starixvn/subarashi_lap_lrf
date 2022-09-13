@@ -3286,6 +3286,7 @@
   </data>
   <data name="AllCustomerClassCategory" xml:space="preserve">
     <value>All Customer Class Category</value>
+  </data>
   <data name="CurrentWinningThreshold" xml:space="preserve">
     <value>Current Winning Threshold</value>
   </data>
