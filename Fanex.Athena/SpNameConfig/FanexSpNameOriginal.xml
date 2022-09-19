@@ -119,7 +119,8 @@
     <Setting Key="Acc_Dep_WLMonitored_Player_Upd" SpName="Acc_Dep_WLMonitored_Player_Upd" DbName="DBCUST.CustDB.bodbLicenseeNet" />
     <Setting Key="Acc_Dep_WLMonitored_Player_Del" SpName="Acc_Dep_WLMonitored_Player_Del" DbName="DBCUST.CustDB.bodbLicenseeNet" />
     <Setting Key="Acc_Dep_WLMonitored_Player_BatchUpd" SpName="Acc_Dep_WLMonitored_Player_BatchUpd" DbName="DBCUST.CustDB.bodbLicenseeNet" />
-    <Setting Key="Acc_Dep_WLMonitored_Player_ReachDetail_Sel" SpName="Acc_Dep_WLMonitored_Player_ReachDetail_Sel" DbName="DBAGE.bodb02.bodbLicenseeNet" />
+    <Setting Key="Acc_Dep_WLMonitored_Player_ReachDetail_Sel" SpName="Acc_Dep_WLMonitored_Player_ReachDetail_Sel" DbName="DBEXT.bodb02.bodbLicenseeNet" />
+    <Setting Key="Acc_Dep_WLMonitored_HistorySelByAG" SpName="Acc_Dep_WLMonitored_HistorySelByAG" DbName="DBEXT.bodb02.bodbLicenseeNet" />
   </Function>
 
   <Function Name="GroupComm">

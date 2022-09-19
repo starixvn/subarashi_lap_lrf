@@ -83,6 +83,8 @@
 
         public async Task<ApiPagingResult<MonitoredPlayerInfo>> GetMonitoredPlayerListAsync(MonitoredPlayerListMetaModel metaModel)
         {
+            var xmlReachList = await _playerDataAccess.GetXmlPresenterForMonitoredPlayerReachLishtAsync(metaModel);
+            metaModel.XMLReachList = xmlReachList;
             var result = await _playerDataAccess.GetMonitoredPlayerListAsync(metaModel);
             BindSubsidiaryName(result.Data, metaModel.SubsidiaryList);
             CurrencyHelper.BindCurrencyDisplayName(result.Data, _sessionService.UserSession.CurrencyList);

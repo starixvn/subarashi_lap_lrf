@@ -111,6 +111,23 @@
             }
         }
 
+        public async Task<string> GetXmlPresenterForMonitoredPlayerReachLishtAsync(MonitoredPlayerListMetaModel metaModel)
+        {
+            const string spName = "Acc_Dep_WLMonitored_HistorySelByAG";
+            const int defaultSportType = 0;
+            using (var db = GetObjectDb(spName))
+            {
+                AddCommmonParams(db, metaModel);
+                db.SetParameterValue("FromDate", metaModel.FromDate);
+                db.SetParameterValue("ToDate", metaModel.ToDate);
+                db.SetParameterValue("XMLReachList", string.Empty);
+                db.SetParameterValue("Sporttype", defaultSportType);
+                await db.ExecuteNonQueryAsync();
+                return Convert.ToString(db.GetOutputParams()["XMLReachList"]);
+            }
+
+        }
+
         public async Task<ApiPagingResult<MonitoredPlayerInfo>> GetMonitoredPlayerListAsync(MonitoredPlayerListMetaModel metaModel)
         {
             const string spName = "Acc_Dep_WLMonitored_Player_Sel";
@@ -118,10 +135,9 @@
             {
                 AddCommmonParams(db, metaModel);
                 db.SetParameterValue("UserName", SqlHelper.ToSqlTextSearch(metaModel.UserName));
+                db.SetParameterValue("XMLReachList", metaModel.XMLReachList);
                 db.SetParameterValue("PageIndex", metaModel.PageIndex);
                 db.SetParameterValue("PageSize", metaModel.PageSize);
-                db.SetParameterValue("FromDate", metaModel.FromDate);
-                db.SetParameterValue("ToDate", metaModel.ToDate);
                 db.SetParameterValue("IsGetAll", metaModel.IsGetAll);
                 db.SetParameterValue("SortType", metaModel.OrderCol);
                 db.SetParameterValue("IsDesc", metaModel.SortType != 1);
