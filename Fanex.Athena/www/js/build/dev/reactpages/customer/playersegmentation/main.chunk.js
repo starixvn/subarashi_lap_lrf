@@ -64,7 +64,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "www/js/build/dev/reactpages/" + ({"customer/playersegmentation/problemPlayer":"customer/playersegmentation/problemPlayer","customer/playersegmentation/vipPlayerManagement":"customer/playersegmentation/vipPlayerManagement","lib/xlsx-style-sparta":"lib/xlsx-style-sparta"}[chunkId]||chunkId) + ".chunk.js"
+/******/ 		return __webpack_require__.p + "www/js/build/dev/reactpages/" + ({"customer/playersegmentation/monitoredPlayer":"customer/playersegmentation/monitoredPlayer","customer/playersegmentation/problemPlayer":"customer/playersegmentation/problemPlayer","customer/playersegmentation/vipPlayerManagement":"customer/playersegmentation/vipPlayerManagement","lib/xlsx-style-sparta":"lib/xlsx-style-sparta"}[chunkId]||chunkId) + ".chunk.js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -758,9 +758,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tabHandlerAction__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tabHandlerAction */ "./www/js/source/reactpages/pages/customer/player-segmentation/actions/tabHandlerAction.js");
 /* harmony import */ var _gridHandlerAction__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gridHandlerAction */ "./www/js/source/reactpages/pages/customer/player-segmentation/actions/gridHandlerAction.js");
 /* harmony import */ var _playerDataAction__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./playerDataAction */ "./www/js/source/reactpages/pages/customer/player-segmentation/actions/playerDataAction.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -964,7 +964,13 @@ const TabMenuItem = props => {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     className: isActive ? 'active' : '',
     onClick: () => onClickTabMenu(item.key)
-  }, item.name));
+  }, item.name, item.isNew && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "\xA0"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "icon-new",
+    title: "New",
+    style: {
+      position: 'absolute'
+    }
+  }))));
 };
 /* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(TabMenuItem));
 
@@ -1039,20 +1045,22 @@ __webpack_require__.r(__webpack_exports__);
 
 const tabKeys = {
   problemPlayer: 'ProblemPlayer',
-  vipPlayerManagement: 'VipPlayerManagement'
+  vipPlayerManagement: 'VipPlayerManagement',
+  monitoredPlayer: 'MonitoredPlayer'
 };
+const newTabs = [tabKeys.monitoredPlayer];
 const dynamicImports = {
   [tabKeys.problemPlayer]: () => Promise.all(/*! import() | customer/playersegmentation/problemPlayer */[__webpack_require__.e("lib/common"), __webpack_require__.e("customer/playersegmentation/problemPlayer")]).then(__webpack_require__.bind(null, /*! ../tabs/problem-player/index */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/index.js")),
-  [tabKeys.vipPlayerManagement]: () => Promise.all(/*! import() | customer/playersegmentation/vipPlayerManagement */[__webpack_require__.e("lib/common"), __webpack_require__.e("customer/playersegmentation/vipPlayerManagement")]).then(__webpack_require__.bind(null, /*! ../tabs/vip-player-management/index */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/vip-player-management/index.js"))
+  [tabKeys.vipPlayerManagement]: () => Promise.all(/*! import() | customer/playersegmentation/vipPlayerManagement */[__webpack_require__.e("lib/common"), __webpack_require__.e("customer/playersegmentation/vipPlayerManagement")]).then(__webpack_require__.bind(null, /*! ../tabs/vip-player-management/index */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/vip-player-management/index.js")),
+  [tabKeys.monitoredPlayer]: () => Promise.all(/*! import() | customer/playersegmentation/monitoredPlayer */[__webpack_require__.e("lib/common"), __webpack_require__.e("customer/playersegmentation/monitoredPlayer")]).then(__webpack_require__.bind(null, /*! ../tabs/monitored-player/index */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/index.js"))
 };
-const tabMenuList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__["default"].TabKeys.map(_ => {
-  return {
-    key: _,
-    name: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource(_),
-    component: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(dynamicImports[_]),
-    preLoad: dynamicImports[_]
-  };
-});
+const tabMenuList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__["default"].TabKeys.map(_ => ({
+  key: _,
+  name: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource(_),
+  component: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(dynamicImports[_]),
+  preLoad: dynamicImports[_],
+  isNew: newTabs.some(newTab => newTab === _)
+}));
 const preLoadComponents = lazyComponents => {
   lazyComponents && setTimeout(() => lazyComponents.forEach(_ => _.preLoad && _.preLoad()), 0);
 };
@@ -1111,12 +1119,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/DataService */ "./www/js/source/reactpages/lib/DataService.js");
 /* harmony import */ var _tabs_problem_player_lib_queryService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../tabs/problem-player/lib/queryService */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/lib/queryService.js");
 /* harmony import */ var _tabs_vip_player_management_lib_queryService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tabs/vip-player-management/lib/queryService */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/vip-player-management/lib/queryService.js");
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/constants.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+/* harmony import */ var _tabs_monitored_player_lib_queryService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../tabs/monitored-player/lib/queryService */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/lib/queryService.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/constants.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -1129,7 +1139,7 @@ class CommonQueryService {
       const response = await _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_0__["default"].postData('Api/PlayerSegmentation/UpdateVipStatus', params);
 
       if (response.status === 200) {
-        return _objectSpread(_objectSpread({}, _constants__WEBPACK_IMPORTED_MODULE_3__["successResponse"]), {
+        return _objectSpread(_objectSpread({}, _constants__WEBPACK_IMPORTED_MODULE_4__["successResponse"]), {
           data: response.data
         });
       }
@@ -1137,17 +1147,20 @@ class CommonQueryService {
       console.log(e);
     }
 
-    return _constants__WEBPACK_IMPORTED_MODULE_3__["errorResponse"];
+    return _constants__WEBPACK_IMPORTED_MODULE_4__["errorResponse"];
   }
 
 }
 
 const queryServiceCommonFactory = {
-  [_constants__WEBPACK_IMPORTED_MODULE_3__["tabKeys"].problemPlayer]: {
+  [_constants__WEBPACK_IMPORTED_MODULE_4__["tabKeys"].problemPlayer]: {
     getPlayerList: _tabs_problem_player_lib_queryService__WEBPACK_IMPORTED_MODULE_1__["default"].getPlayerList
   },
-  [_constants__WEBPACK_IMPORTED_MODULE_3__["tabKeys"].vipPlayerManagement]: {
+  [_constants__WEBPACK_IMPORTED_MODULE_4__["tabKeys"].vipPlayerManagement]: {
     getPlayerList: _tabs_vip_player_management_lib_queryService__WEBPACK_IMPORTED_MODULE_2__["default"].getPlayerList
+  },
+  [_constants__WEBPACK_IMPORTED_MODULE_4__["tabKeys"].monitoredPlayer]: {
+    getPlayerList: _tabs_monitored_player_lib_queryService__WEBPACK_IMPORTED_MODULE_3__["default"].getMontioredPlayerList
   },
   common: {
     updateVipStatus: CommonQueryService.updateVipStatus
@@ -1167,9 +1180,9 @@ const queryServiceCommonFactory = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _tabHandlerReducers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tabHandlerReducers */ "./www/js/source/reactpages/pages/customer/player-segmentation/reducers/tabHandlerReducers.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -1242,6 +1255,159 @@ Object(react_dom__WEBPACK_IMPORTED_MODULE_1__["render"])( /*#__PURE__*/react__WE
 
 /***/ }),
 
+/***/ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/lib/queryService.js":
+/*!***************************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/lib/queryService.js ***!
+  \***************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return MonitoredPlayerService; });
+/* harmony import */ var _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/DataService */ "./www/js/source/reactpages/lib/DataService.js");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/constants.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+class MonitoredPlayerService {
+  static async getMontioredPlayerList(params) {
+    try {
+      const response = await _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_0__["default"].postData('Api/PlayerSegmentation/GetMonitoredPlayerList', params);
+
+      if (response.status === 200) {
+        return _objectSpread(_objectSpread({}, _lib_constants__WEBPACK_IMPORTED_MODULE_3__["successResponse"]), response.data);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+
+    return _lib_constants__WEBPACK_IMPORTED_MODULE_3__["errorResponse"];
+  }
+
+  static async exportMontioredPlayerList(params) {
+    try {
+      const response = await _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_0__["default"].getFile('Api/PlayerSegmentation/ExportMonitoredPlayerList', params);
+
+      if (response.status === 204) {
+        alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("NoInfo"));
+      } else {
+        _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].downloadFile(response.data, 'MonitoredPlayerList.xls');
+      }
+    } catch (e) {
+      alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('ErrorProcessingMsg'));
+      console.log(e);
+    }
+  }
+
+  static async getMonitoredPlayerReachedHistory(params) {
+    try {
+      const response = await _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_0__["default"].postData('Api/PlayerSegmentation/GetMonitoredPlayerReachedHistory', params);
+
+      if (response.status === 200) {
+        return _objectSpread(_objectSpread({}, _lib_constants__WEBPACK_IMPORTED_MODULE_3__["successResponse"]), {
+          data: response.data
+        });
+      }
+    } catch (e) {
+      console.log(e);
+    }
+
+    return _lib_constants__WEBPACK_IMPORTED_MODULE_3__["errorResponse"];
+  }
+
+  static async exportMonitoredPlayerReachedHistory(params) {
+    try {
+      const response = await _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_0__["default"].getFile('Api/PlayerSegmentation/ExportMonitoredPlayerReachedHistory', params);
+
+      if (response.status === 204) {
+        alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("NoInfo"));
+      } else {
+        _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].downloadFile(response.data, 'NotificationHistory.xls');
+      }
+    } catch (e) {
+      alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('ErrorProcessingMsg'));
+      console.log(e);
+    }
+  }
+
+  static async insertMonitoredPlayer(params) {
+    try {
+      const response = await _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_0__["default"].postData('Api/PlayerSegmentation/InsertMonitoredPlayer', params);
+
+      if (response.status === 200) {
+        return _objectSpread(_objectSpread({}, _lib_constants__WEBPACK_IMPORTED_MODULE_3__["successResponse"]), {
+          data: response.data
+        });
+      }
+    } catch (e) {
+      console.log(e);
+    }
+
+    return _lib_constants__WEBPACK_IMPORTED_MODULE_3__["errorResponse"];
+  }
+
+  static async batchUpdateMonitoredPlayer(params) {
+    try {
+      const response = await _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_0__["default"].postData('Api/PlayerSegmentation/BatchUpdateMonitoredPlayer', params);
+
+      if (response.status === 200) {
+        return _objectSpread(_objectSpread({}, _lib_constants__WEBPACK_IMPORTED_MODULE_3__["successResponse"]), {
+          data: response.data
+        });
+      }
+    } catch (e) {
+      console.log(e);
+    }
+
+    return _lib_constants__WEBPACK_IMPORTED_MODULE_3__["errorResponse"];
+  }
+
+  static async updateMonitoredPlayer(params) {
+    try {
+      const response = await _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_0__["default"].postData('Api/PlayerSegmentation/UpdateMonitoredPlayer', params);
+
+      if (response.status === 200) {
+        return _objectSpread(_objectSpread({}, _lib_constants__WEBPACK_IMPORTED_MODULE_3__["successResponse"]), {
+          data: response.data
+        });
+      }
+    } catch (e) {
+      console.log(e);
+    }
+
+    return _lib_constants__WEBPACK_IMPORTED_MODULE_3__["errorResponse"];
+  }
+
+  static async removeMonitoredPlayer(params) {
+    try {
+      const response = await _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_0__["default"].postData('Api/PlayerSegmentation/DeleteMonitoredPlayer', params);
+
+      if (response.status === 200) {
+        return _objectSpread(_objectSpread({}, _lib_constants__WEBPACK_IMPORTED_MODULE_3__["successResponse"]), {
+          data: response.data
+        });
+      }
+    } catch (e) {
+      console.log(e);
+    }
+
+    return _lib_constants__WEBPACK_IMPORTED_MODULE_3__["errorResponse"];
+  }
+
+}
+
+/***/ }),
+
 /***/ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/lib/queryService.js":
 /*!*************************************************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/lib/queryService.js ***!
@@ -1254,9 +1420,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ProblemPlayerQueryService; });
 /* harmony import */ var _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/DataService */ "./www/js/source/reactpages/lib/DataService.js");
 /* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/constants.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -1293,9 +1459,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return VipPlayerQueryService; });
 /* harmony import */ var _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/DataService */ "./www/js/source/reactpages/lib/DataService.js");
 /* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/constants.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
