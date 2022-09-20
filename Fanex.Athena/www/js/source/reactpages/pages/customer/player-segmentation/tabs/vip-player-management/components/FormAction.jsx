@@ -29,6 +29,7 @@ export const FormAction = props => {
     }
 
     const _cancelProps = {
+
         onClick: _handleCloseAlert
     }
 
@@ -162,6 +163,6 @@ function mapStateToProps(state) {
     const { playerList, selectedParams, selectedTabKey, pagingOption } = state;
     const isActiveTaggingAction = playerList && playerList.length && playerList.some(_ => _.isSelected);
     return Object.assign({}, { isActiveTaggingAction, playerList, selectedParams, selectedTabKey, pagingOption });
-};
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(React.memo(FormAction));
