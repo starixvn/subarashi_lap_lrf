@@ -188,6 +188,7 @@
 
         const _me =
         {
+            urlPrefixData: 'Api/CustomerWinLoss',
             urlData: 'Api/CustomerWinLoss/Index',
             urlExcelData: 'Api/CustomerWinLoss/ExportExcel',
             hasCustomerComm: true,

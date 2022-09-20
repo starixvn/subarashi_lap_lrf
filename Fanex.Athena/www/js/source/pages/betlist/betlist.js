@@ -224,7 +224,8 @@
                             _me.setLeagueTitle(response.LeagueName);
                         }
                     },
-                    beforeSend: function () {
+                    beforeSend: function (request) {
+                        Site.tryIgnoreSharding(request);
                         Site.blockUI();
                     },
                     complete: function () {

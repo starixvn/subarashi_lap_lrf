@@ -7973,7 +7973,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         const REPORT_BY_MONTHLY = 2;
         const VALID_MONTH_RANGE = 3;
         const EXCEL_FILENAME = 'LicenseeWinLoss.xls';
-        const EXCEL_PP_FILENAME = 'ExtraPayout.xls';
 
         const cacheData = {};
         let ajaxRequest = null;
@@ -8119,7 +8118,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                     success: function (response) {
                         Downloader.download(response, fileName);
                     },
-                    beforeSend: function () {
+                    beforeSend: function (request) {
+                        Site.tryIgnoreSharding(request);
                         Toast.show();
                     }
                 };
@@ -8257,7 +8257,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                         _me.setExcelUrl(0, 0, 0, '', '', '');
                         _me.ajaxComplete(0, response);
                     },
-                    beforeSend: function () {
+                    beforeSend: function (request) {
+                        Site.tryIgnoreSharding(request);
                         Site.blockUI();
                     },
                     complete: function () {
@@ -8327,7 +8328,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                         _me.setExcelUrl(levelNumber, currencyId, customerId, drillDownFDate, drillDownTDate, currencyName);
                         _me.updateDrilldownData(currencyId, currencyName, drillDownFDate, drillDownTDate, customerId);
                     },
-                    beforeSend: function () {
+                    beforeSend: function (request) {
+                        Site.tryIgnoreSharding(request);
                         Site.blockUI();
                     },
                     complete: function () {
@@ -8501,7 +8503,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                     }
                 }
 
-                let url = Site.resolveClientUrl('LicenseeWinLossBetList/Index');
+                let url = Site.resolveClientUrl('LicenseeWinLossBetList/' + (Site.ignoreSharding() ? 'Index' : 'Live'));
                 url = QueryString.setParam(url, 'fromdate', moment(dataDrillDown.DrillDownFromDate).format('MM/DD/YYYY'));
                 url = QueryString.setParam(url, 'todate', moment(dataDrillDown.DrillDownToDate).format('MM/DD/YYYY'));
                 url = QueryString.setParam(url, 'excludetest', dataDrillDown.IsExcludedTestData);

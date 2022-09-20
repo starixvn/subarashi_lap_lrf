@@ -271,6 +271,9 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\CssRewriteUrlTransformWrapper.cs" />
+    <Compile Include="App_Start\DbSettingConfig\DbSettingProviderManagerExtension.cs" />
+    <Compile Include="App_Start\DbSettingConfig\ShardDbSettingProvider.cs" />
+    <Compile Include="App_Start\DbSettingConfig\ShardInfoAccessor.cs" />
     <Compile Include="App_Start\DIConfig.cs" />
     <Compile Include="App_Start\NonOrderingBundleOrderer.cs" />
     <Compile Include="Global.asax.cs">
@@ -749,6 +752,8 @@
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\VipPlayerUploadByExternalIdTemplate.xls" />
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\VipPlayerUploadBySystemIdTemplate.xls" />
     <Content Include="Views\Desktop\Customer\CustomerClass\AllCustomerClassTab.cshtml" />
+    <Content Include="Views\Desktop\Report\CustomerWinloss\Tab.cshtml" />
+    <Content Include="Views\Desktop\Report\LicenseeWinLoss\Tab.cshtml" />
     <None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
     <None Include="www\css\source\pages\betlist\result\result.happy5.scss" />
     <None Include="www\css\source\reactpages\components\alert\icons\error.scss" />
@@ -1546,7 +1551,6 @@
     <Content Include="Views\Desktop\BetList\PendingFunds\Main.cshtml" />
     <Content Include="Views\Desktop\Report\CustomerWinloss\Content.cshtml" />
     <Content Include="Views\Desktop\Report\CustomerWinloss\Filter.cshtml" />
-    <Content Include="Views\Desktop\Report\CustomerWinloss\HistoryFilter.cshtml" />
     <Content Include="Views\Desktop\Report\CustomerWinloss\Main.cshtml" />
     <Content Include="www\css\build\dev\pages\reports\customerwinloss.chunk.js.map" />
     <Content Include="www\css\build\dev\pages\reports\customerwinloss.css.map" />
@@ -5645,6 +5649,10 @@
     <ProjectReference Include="..\Infrastructure\Fanex.Athena.VendorAdapter\Fanex.Athena.VendorAdapter.csproj">
       <Project>{ce1f7641-a14d-4af6-9bd3-cad4873669b4}</Project>
       <Name>Fanex.Athena.VendorAdapter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Fanex.Athena.Model.Auth\Fanex.Athena.Model.Auth.csproj">
+      <Project>{794c0345-2ddd-4ffd-a605-bb96fbb37de8}</Project>
+      <Name>Fanex.Athena.Model.Auth</Name>
     </ProjectReference>
     <ProjectReference Include="..\Model\Fanex.Athena.Model.BetList\Fanex.Athena.Model.BetList.csproj">
       <Project>{4956fbd7-5f68-4e7b-af6c-db5fb1f255f0}</Project>

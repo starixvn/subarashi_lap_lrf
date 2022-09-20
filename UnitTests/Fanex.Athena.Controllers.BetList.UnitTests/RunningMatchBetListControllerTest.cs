@@ -53,7 +53,7 @@
             }
         }
 
-        [TestCase("USD", "eur", "EUR", 1, "Lrf_BetList_SelRunningByBettypeMatch", false)]
+        [TestCase("USD", "eur", "EUR", 1, "Shard_Lrf_BetList_SelRunningByBettypeMatch", false)]
         public async Task Index_ExportExcel_PassCorrectParam(
             string currency,
             string baseCurrency,

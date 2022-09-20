@@ -24,7 +24,7 @@
             return await ProcessDefaultRequest(
                 metaModel,
                 "~/Views/Desktop/BetList/RunningBetListOfMatch/Main.cshtml",
-                "Lrf_BetList_SelRunningByBettypeMatch").ConfigureAwait(false);
+                "Shard_Lrf_BetList_SelRunningByBettypeMatch").ConfigureAwait(false);
         }
 
         protected override async Task<ActionResult> ExportExcel(BetListExcelMetaModel metaModel)

@@ -7,8 +7,16 @@
 @section pagecss {
     <link href="@Url.ContentLinkByEnv("/www/css/build/pages/reports/licenseewinloss.css")" rel="stylesheet" />
 }
-@section pagejs { 
+@section pagejs {
     <script src="@Url.ContentLinkByEnv("/www/js/build/pages/reports/licenseewinloss.chunk.js")"></script>
+}
+
+@section Header
+{
+    @if (!Model.IgnoreSharding)
+    {
+        Html.RenderPartial("~/Views/Desktop/Report/LicenseeWinLoss/Tab.cshtml");
+    }
 }
 
 @section Filter

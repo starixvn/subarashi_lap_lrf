@@ -109,7 +109,6 @@ namespace Fanex.Athena.Controllers.Forecast
             return View("~/Views/Desktop/Forecast/NewForecastHdpOu/MatchOptionList.cshtml", matchList);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Reviewed.")]
         private async Task<NewForecastHdpOuViewModel> GetViewModel(NewForecastHandicapOverUnderMetaModel metaModel)
         {
             IList<Match> matchList = new List<Match>();

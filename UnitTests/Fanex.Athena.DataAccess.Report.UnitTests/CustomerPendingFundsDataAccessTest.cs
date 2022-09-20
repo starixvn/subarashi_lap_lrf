@@ -17,7 +17,7 @@
     [TestFixture]
     public class CustomerPendingFundsDataAccessTest : BaseDataAccessHelperTest<CustomerPendingFundsDataAccess>
     {
-        private const string SpName = "Lrf_Rpt_Outstanding";
+        private const string SpName = "Shard_Lrf_Rpt_Outstanding";
 
         private CustomerPendingFundsMetaModel _metaModel;
 

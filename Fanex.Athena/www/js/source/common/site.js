@@ -44,6 +44,17 @@ define(['jquery', 'common/querystring', 'common/popup', 'extensions/prototype', 
             return _rootUrl + relativeUrl;
         }
 
+
+        function ignoreSharding() {
+            return asBool($('#IgnoreSharding').val())
+        }
+
+        function tryIgnoreSharding(ajaxRequest) {
+            if(ignoreSharding()) {
+                ajaxRequest.setRequestHeader("X-IgnoreSharding", 'true');
+            }
+        }
+
         function getLrfSubsidiary() {
             try {
                 return (_isSelfMode && top.getLrfSubsidiarySearch && top.getLrfSubsidiarySearch()) || {}
@@ -539,6 +550,8 @@ define(['jquery', 'common/querystring', 'common/popup', 'extensions/prototype', 
             getXsrfToken: getXsrfToken,
             getBaseCurrencyName: getBaseCurrencyName,
             getLrfSubsidiary: getLrfSubsidiary,
-            assignSubsidiaryData: assignSubsidiaryData
+            assignSubsidiaryData: assignSubsidiaryData,
+            tryIgnoreSharding,
+            ignoreSharding
         };
     });

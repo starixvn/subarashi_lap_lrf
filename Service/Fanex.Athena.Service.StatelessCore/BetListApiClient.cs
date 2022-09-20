@@ -2,18 +2,31 @@
 {
     using System.IO;
     using System.Net.Http;
+    using System.Net.Http.Headers;
     using System.Threading.Tasks;
+    using System.Web;
+    using Fanex.Athena.Extension;
+    using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Abstraction;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     public class BetListApiClient : BaseApiClient, IBetListApiClient
     {
+        const string IgnoreShardingHeader = "X-IgnoreSharding";
+
         public BetListApiClient(HttpClient httpClient) : base(httpClient)
         {
         }
 
         protected override string ApiName => "BETLIST";
+
+        protected override Task PrepareHeaders(HttpRequestHeaders headers)
+        {
+            headers.Add(IgnoreShardingHeader, HttpContext.Current?.GetIgnoreSharding());
+            headers.Add("X-SiteDBServer", SiteDBServer ?? string.Empty);
+            return Task.CompletedTask;
+        }
 
         public async Task<HttpResponseMessage> PostAsync(string path, object value, string language, int timeOut = 100)
         {
@@ -35,5 +48,7 @@
             }
           , false, timeOut).ConfigureAwait(false);
         }
+
+        protected static string SiteDBServer => (HttpContext.Current?.Session["LicenseeSessionKey"] as LicenseeAuthInfo)?.SiteDBServer;
     }
 }

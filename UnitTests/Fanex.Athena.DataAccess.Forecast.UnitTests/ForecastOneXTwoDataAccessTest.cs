@@ -31,7 +31,7 @@
         public async Task GetForecastOneXTwoByLeague_WhenCall_ParametersPassedCorrectly()
         {
             // Arrange
-            DataAccess.GetObjectDb(Arg.Is("Lrf_Forecast1x2_SelByLeague")).Returns(ObjectDb);
+            DataAccess.GetObjectDb(Arg.Is("Shard_Lrf_Forecast1x2_SelByLeague")).Returns(ObjectDb);
             var metaModel = new ForecastOneXTwoMetaModel();
 
             // Action
@@ -46,7 +46,7 @@
         public async Task GetForecastOneXTwoByLeague_WhenCall_DataReturnedCorrectly()
         {
             // Arrange
-            DataAccess.GetObjectDb(Arg.Is("Lrf_Forecast1x2_SelByLeague")).Returns(ObjectDb);
+            DataAccess.GetObjectDb(Arg.Is("Shard_Lrf_Forecast1x2_SelByLeague")).Returns(ObjectDb);
             var metaModel = new ForecastOneXTwoMetaModel();
             var expected = FakeHelper.Create<ForecastOneXTwo>();
             ConfifureReaderForGetForecastOneXTwoByLeagueMethod(Reader, expected, false);
@@ -70,7 +70,7 @@
         public async Task GetForecastOneXTwoByLeague_HasExtraColumn_DataReturnedCorrectly()
         {
             // Arrange
-            DataAccess.GetObjectDb(Arg.Is("Lrf_Forecast1x2_SelByLeague")).Returns(ObjectDb);
+            DataAccess.GetObjectDb(Arg.Is("Shard_Lrf_Forecast1x2_SelByLeague")).Returns(ObjectDb);
             var metaModel = new ForecastOneXTwoMetaModel();
             var expected = FakeHelper.Create<ForecastOneXTwo>();
             ConfifureReaderForGetForecastOneXTwoByLeagueMethod(Reader, expected, true);
@@ -89,7 +89,7 @@
         public async Task GetForecastOneXTwoByMatch_WhenCall_ParametersPassedCorrectly()
         {
             // Arrange
-            DataAccess.GetObjectDb(Arg.Is("Lrf_Forecast_Sel1X2")).Returns(ObjectDb);
+            DataAccess.GetObjectDb(Arg.Is("Shard_Lrf_Forecast_Sel1X2")).Returns(ObjectDb);
             var metaModel = new ForecastOneXTwoMetaModel();
 
             // Action

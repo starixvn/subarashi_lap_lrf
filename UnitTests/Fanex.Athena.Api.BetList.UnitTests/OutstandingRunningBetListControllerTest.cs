@@ -15,7 +15,7 @@
 
     public class OutstandingRunningBetListControllerTest : ApiBetListBaseControllerHelperTest
     {
-        private const string UspKey = "Lrf_BetList_SelRunningByDate_Mem";
+        private const string UspKey = "Shard_Lrf_BetList_SelRunningByDate_Mem";
 
         private const string BetListCustomerOutstandingRunningName = "BetList_CustomerOutstandingRunning";
 

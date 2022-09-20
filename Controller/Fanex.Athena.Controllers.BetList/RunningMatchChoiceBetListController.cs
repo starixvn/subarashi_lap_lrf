@@ -30,7 +30,7 @@ namespace Fanex.Athena.Controllers.BetList
             return await ProcessDefaultRequest(
                 metaModel,
                 "~/Views/Desktop/BetList/NewForecastBetlist/Main.cshtml",
-                "Lrf_BetList_Forecast_SelByMatch").ConfigureAwait(false);
+                "Shard_Lrf_BetList_Forecast_SelByMatch").ConfigureAwait(false);
         }
 
         protected override async Task<ActionResult> ExportExcel(BetListExcelMetaModel metaModel)

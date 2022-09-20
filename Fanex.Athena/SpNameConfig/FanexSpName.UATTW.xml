@@ -53,10 +53,10 @@
     <Setting Key="Lrf_Rpt_MatchWinLoss" SpName="Lrf_Rpt_MatchWinLoss" DbName="DBEXT.bodb02.bodbLicenseeNet" />
     <Setting Key="Lrf_Rpt_MatchWinLossByBettype" SpName="Lrf_Rpt_MatchWinLossByBettype" DbName="DBEXT.bodb02.bodbLicenseeNet" />
     <Setting Key="Lrf_Rpt_MatchWinLossByOutrightParlay" SpName="Lrf_Rpt_MatchWinLossByOutrightParlay" DbName="DBEXT.bodb02.bodbLicenseeNet" />
-    <Setting Key="Lrf_Rpt_LicWinloss" SpName="Lrf_Rpt_LicWinloss" DbName="DBEXT.bodb02.bodbLicenseeNet" />
+    <Setting Key="Shard_Lrf_Rpt_LicWinloss" SpName="Lrf_Rpt_LicWinloss" DbName="DBEXT.bodb02.bodbLicenseeNet" />
     <Setting Key="Lrf_Rpt_LicWinloss_FromAPI" SpName="Lrf_Rpt_LicWinloss_FromAPI" DbName="DBPLO.bodb02.bodbLicenseeNet" />
-    <Setting Key="Lrf_Rpt_LicWinlossDetail" SpName="Lrf_Rpt_LicWinlossDetail" DbName="DBEXT.bodb02.bodbLicenseeNet" />
-    <Setting Key="Lrf_Rpt_LicWinlossDetail_Ag" SpName="Lrf_Rpt_LicWinlossDetail_Ag" DbName="DBEXT.bodb02.bodbLicenseeNet" />
+    <Setting Key="Shard_Lrf_Rpt_LicWinlossDetail" SpName="Lrf_Rpt_LicWinlossDetail" DbName="DBEXT.bodb02.bodbLicenseeNet" />
+    <Setting Key="Shard_Lrf_Rpt_LicWinlossDetail_Ag" SpName="Lrf_Rpt_LicWinlossDetail_Ag" DbName="DBEXT.bodb02.bodbLicenseeNet" />
     <Setting Key="Lrf_Rpt_LiveReportWinlossByMatch" SpName="Lrf_Rpt_LiveReportWinlossByMatch" DbName="DBEXT.bodb02.bodbLicenseeNet"></Setting>
     <Setting Key="Lrf_Rpt_LiveReportSummary" SpName="Lrf_Rpt_LiveReportSummary" DbName="DBEXT.bodb02.bodbLicenseeNet"></Setting>
     <Setting Key="Lrf_Rpt_LiveReportSummaryDetail" SpName="Lrf_Rpt_LiveReportSummaryDetail" DbName="DBEXT.bodb02.bodbLicenseeNet"></Setting>
@@ -68,7 +68,7 @@
     <Setting Key="Lrf_Rpt_CustomerBalance" SpName="Lrf_Rpt_CustomerBalance" DbName="DBACC.bodb02.bodbLicenseeNet"></Setting>
     <Setting Key="Lrf_Rpt_WinLoss" SpName="Lrf_Rpt_WinLoss" DbName="DBEXT.bodb02.bodbLicenseeNet"></Setting>
     <Setting Key="Lrf_Rpt_MatchSelResultEntered" SpName="Lrf_Rpt_MatchSelResultEntered" DbName="DBEXT.bodb02.bodbLicenseeNet"></Setting>
-    <Setting Key="Lrf_Rpt_Outstanding" SpName="Lrf_Rpt_Outstanding" DbName="DBBOF.bodb02.bodbLicenseeNet" />
+    <Setting Key="Shard_Lrf_Rpt_Outstanding" SpName="Lrf_Rpt_Outstanding" DbName="DBBOF.bodb02.bodbLicenseeNet" />
     <Setting Key="Lrf_Rpt_WinlossByProduct" SpName="Lrf_Rpt_WinlossByProduct"  DbName="DBEXT.bodb02.bodbLicenseeNet" />
     <Setting Key="Lrf_Rpt_WinlossByProductDetail" SpName="Lrf_Rpt_WinlossByProductDetail" DbName="DBEXT.bodb02.bodbLicenseeNet" />
     <Setting Key="Lrf_Rpt_WinlossByProductDetail_Ag" SpName="Lrf_Rpt_WinlossByProductDetail_Ag" DbName="DBEXT.bodb02.bodbLicenseeNet" />
@@ -170,14 +170,14 @@
 
   <Function Name="Forecast">
     <Setting Key="Lrf_Forecast_OddsSelTopByMatch" SpName="Lrf_Forecast_OddsSelTopByMatch" DbName="DBBOF.bodb02.bodbLicenseeNet"></Setting>
-    <Setting Key="Lrf_Forecast_SelHDP" SpName="Lrf_Forecast_SelHDP" DbName="DBBOF.bodb02.bodbLicenseeNet"></Setting>
-    <Setting Key="Lrf_Forecast_SelOU" SpName="Lrf_Forecast_SelOU" DbName="DBBOF.bodb02.bodbLicenseeNet"></Setting>
-    <Setting Key="Lrf_Forecast1x2_SelByLeague" SpName="Lrf_Forecast1x2_SelByLeague" DbName="DBBOF.bodb02.bodbLicenseeNet"></Setting>
-    <Setting Key="Lrf_LeagueSelRunning" SpName="Lrf_LeagueSelRunning" DbName="DBBOF.bodb02.bodbLicenseeNet"></Setting>
+    <Setting Key="Shard_Lrf_Forecast_SelHDP" SpName="Lrf_Forecast_SelHDP" DbName="DBBOF.bodb02.bodbLicenseeNet"></Setting>
+    <Setting Key="Shard_Lrf_Forecast_SelOU" SpName="Lrf_Forecast_SelOU" DbName="DBBOF.bodb02.bodbLicenseeNet"></Setting>
+    <Setting Key="Shard_Lrf_Forecast1x2_SelByLeague" SpName="Lrf_Forecast1x2_SelByLeague" DbName="DBBOF.bodb02.bodbLicenseeNet"></Setting>
+    <Setting Key="Shard_Lrf_LeagueSelRunning" SpName="Lrf_LeagueSelRunning" DbName="DBBOF.bodb02.bodbLicenseeNet"></Setting>
     <Setting Key="Lrf_Forecast_MatchList" SpName="Lrf_Forecast_MatchList" DbName="DBBOF.bodb02.bodbLicenseeNet"></Setting>
-    <Setting Key="Lrf_Forecast_Sel1X2" SpName="Lrf_Forecast_Sel1X2" DbName="DBBOF.bodb02.bodbLicenseeNet"></Setting>
-    <Setting Key="Lrf_Forecast_SelByLeague" SpName="Lrf_Forecast_SelByLeague" DbName="DBBOF.bodb02.bodbLicenseeNet"></Setting>
-    <Setting Key="Lrf_Forecast_MatchTotalForecast" SpName="Lrf_Forecast_MatchTotalForecast" DbName="DBBOF.bodb02.bodbLicenseeNet"></Setting>
+    <Setting Key="Shard_Lrf_Forecast_Sel1X2" SpName="Lrf_Forecast_Sel1X2" DbName="DBBOF.bodb02.bodbLicenseeNet"></Setting>
+    <Setting Key="Shard_Lrf_Forecast_SelByLeague" SpName="Lrf_Forecast_SelByLeague" DbName="DBBOF.bodb02.bodbLicenseeNet"></Setting>
+    <Setting Key="Shard_Lrf_Forecast_MatchTotalForecast" SpName="Lrf_Forecast_MatchTotalForecast" DbName="DBBOF.bodb02.bodbLicenseeNet"></Setting>
   </Function>
 
   <Function Name="Common">
@@ -199,7 +199,7 @@
   </Function>
 
   <Function Name="SiteConfig">
-    <Setting Key="Lrf_SubsidiarySel" SpName="Lrf_SubsidiarySel" DbName="DBCUST.SiteConfig_TW.bodbLicenseeNet" />
+    <Setting Key="Lrf_SubsidiarySel" SpName="Lrf_SubsidiarySel" DbName="DBCUST.SiteConfig.bodbLicenseeNet" />
     <Setting Key="Portal_Sub_GetSubsidiaryList" SpName="Portal_Sub_GetSubsidiaryList" DbName="DBCUST.SiteConfig.Dot_Admin_Portal" />
   </Function>
   <Function Name="Customer Class">
@@ -210,6 +210,19 @@
   <Function Name="Notification">
     <Setting Key="Lrf_AmendmentTicketListingSel" SpName="Lrf_AmendmentTicketListingSel" DbName="DBEXT.bodb02.bodbLicenseeNet" />
   </Function>
-</Functions>
 
+  <SiteDB>
+    <Setting Key="SiteDB_Lrf_Rpt_LicWinloss" SpName="SiteDB_Lrf_Rpt_LicWinloss" DbName="DBSID.bodb02.bodbLicenseeNet" />
+    <Setting Key="SiteDB_Lrf_Rpt_LicWinlossDetail" SpName="SiteDB_Lrf_Rpt_LicWinlossDetail" DbName="DBSID.bodb02.bodbLicenseeNet" />
+    <Setting Key="SiteDB_Lrf_Rpt_LicWinlossDetail_Ag" SpName="SiteDB_Lrf_Rpt_LicWinlossDetail_Ag" DbName="DBSID.bodb02.bodbLicenseeNet" />
+    <Setting Key="SiteDB_Lrf_Rpt_Outstanding" SpName="SiteDB_Lrf_Rpt_Outstanding" DbName="DBSID.bodb02.bodbLicenseeNet" />
+    <Setting Key="SiteDB_Lrf_Forecast_MatchTotalForecast" SpName="SiteDB_Lrf_Forecast_MatchTotalForecast" DbName="DBSID.bodb02.bodbLicenseeNet" />
+    <Setting Key="SiteDB_Lrf_Forecast_SelByLeague" SpName="SiteDB_Lrf_Forecast_SelByLeague" DbName="DBSID.bodb02.bodbLicenseeNet"></Setting>
+    <Setting Key="SiteDB_Lrf_Forecast_SelHDP" SpName="SiteDB_Lrf_Forecast_SelHDP" DbName="DBSID.bodb02.bodbLicenseeNet"></Setting>
+    <Setting Key="SiteDB_Lrf_Forecast_SelOU" SpName="SiteDB_Lrf_Forecast_SelOU" DbName="DBSID.bodb02.bodbLicenseeNet"></Setting>
+    <Setting Key="SiteDB_Lrf_Forecast1x2_SelByLeague" SpName="SiteDB_Lrf_Forecast1x2_SelByLeague" DbName="DBSID.bodb02.bodbLicenseeNet"></Setting>
+    <Setting Key="SiteDB_Lrf_Forecast_Sel1X2" SpName="SiteDB_Lrf_Forecast_Sel1X2" DbName="DBSID.bodb02.bodbLicenseeNet"></Setting>
+    <Setting Key="SiteDB_Lrf_LeagueSelRunning" SpName="Lrf_LeagueSelRunning" DbName="DBSID.bodb02.bodbLicenseeNet"></Setting>
+  </SiteDB>
+</Functions>
 		

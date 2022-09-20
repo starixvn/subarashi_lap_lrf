@@ -15,7 +15,7 @@ namespace Fanex.Athena.Extension
         public static void WithHttpClient(this ContainerBuilder builder, string clientName,
             string baseAdress, IDictionary<string, string> headerValues = null)
         {
-            builder.Register<HttpClient>(x =>
+            builder.Register(x =>
             {
                 var endPoint = new Uri(baseAdress);
                 var httpClient = new HttpClient

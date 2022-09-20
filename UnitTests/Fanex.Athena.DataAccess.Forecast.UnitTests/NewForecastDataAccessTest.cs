@@ -29,7 +29,7 @@
         public async Task GetNewForecastData_WhenCall_ParametersPassedCorrectly()
         {
             // Arrange
-            DataAccess.GetObjectDb(Arg.Is("Lrf_Forecast_MatchTotalForecast")).Returns(ObjectDb);
+            DataAccess.GetObjectDb(Arg.Is("Shard_Lrf_Forecast_MatchTotalForecast")).Returns(ObjectDb);
             var metaModel = new NewForecastHandicapOverUnderMetaModel();
             var matchInfo = new NewForecastHdpOuMatchInfo();
             ObjectDb.ExecuteDataSetAsync().Returns(new DataSet());
@@ -52,7 +52,7 @@
         public async Task GetNewForecastData_WhenCall_DataReturnedCorrectly()
         {
             // Arrange
-            DataAccess.GetObjectDb(Arg.Is("Lrf_Forecast_MatchTotalForecast")).Returns(ObjectDb);
+            DataAccess.GetObjectDb(Arg.Is("Shard_Lrf_Forecast_MatchTotalForecast")).Returns(ObjectDb);
             var metaModel = new NewForecastHandicapOverUnderMetaModel { BaseCurrency = "UUS" };
             var matchInfo = new NewForecastHdpOuMatchInfo();
 

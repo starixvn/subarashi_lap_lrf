@@ -2857,4 +2857,13 @@
   <data name="AllCustomerClassCategory" xml:space="preserve">
     <value>所有玩家分类</value>
   </data>
+  <data name="NormalReport" xml:space="preserve">
+    <value>一般报表</value>
+  </data>
+  <data name="RealTimeReport" xml:space="preserve">
+    <value>即时报表</value>
+  </data>
+  <data name="InstantDataReportNote" xml:space="preserve">
+    <value>即时报表仅提供 {0} 之后的即时数据。</value>
+  </data>
 </root>

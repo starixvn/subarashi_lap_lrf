@@ -19,5 +19,7 @@ namespace Fanex.Athena.Model.Auth
         public IEnumerable<string> OfferedSubProductList { get; set; }
 
         public IEnumerable<string> OfferedOddsGroupsList { get; set; }
+
+        public string SiteDBServer { get; set; }
     }
 }

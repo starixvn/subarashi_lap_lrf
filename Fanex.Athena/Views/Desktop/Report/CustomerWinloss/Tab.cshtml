@@ -1,0 +1,15 @@
+﻿@{
+    Layout = null;
+}
+@model Fanex.Athena.Model.Report.ViewModel.CustomerWinLossViewModel
+<div class="header-tab">
+    <ul class="tabs">
+        <li class="tab">
+            <a class="@(Model.IsHistory ? "active" : "")" href="@Url.Content("~/CustomerWinlossReport")">@ViewResources.NormalReport</a>
+        </li>
+        <li class="tab">
+            <a class="@(Model.IsHistory ? "" : "active")" href="@Url.Content("~/CustomerWinlossReport?isHistory=false")">@ViewResources.RealTimeReport</a>
+        </li>
+    </ul>
+</div>
+

@@ -6,25 +6,24 @@
     './customerwinloss.option',
     'lib/jqgrid/jquery.jqgrid.additional',
     'components/pluginhelper/daterangepicker',
-    'components/pluginhelper/monthpicker',
     'components/pluginhelper/multiselect',
     'common/popup',
     'components/paging',
-    'helpers/excel',
     'components/pluginhelper/autocomplete',
     'helpers/downloader',
     'components/toast',
+    'helpers/daterange',
     'lib/jqgrid/jquery.jqGrid.en',
     'lib/jqgrid/jquery.jqGrid.min',
     'extensions/jquery.extension',
     'extensions/ajaxBinaryTransporting',
-'lib/jquery.multiselect'],
-    function ($, QueryString, Site, Report, CustomerWinLossOption, jqGridAdditional, DatePicker, MonthPicker, MultiSelect, Popup,
-        PagingHelper, ExcelHelper, AutoComplete, Downloader, Toast) {
+    'lib/jquery.multiselect'],
+    function ($, QueryString, Site, Report, CustomerWinLossOption, jqGridAdditional, DatePicker, MultiSelect, Popup,
+        PagingHelper, AutoComplete, Downloader, Toast, DateHelper) {
         'use strict';
 
+        const VALID_MONTH_RANGE = 3;
         const EXCEL_FILENAME = 'CustomerWinLoss.xlsx';
-        const EXCEL_PP_FILENAME = 'ExtraPayout.xls';
         const SORTING_CODE = {
             'externalId': 2,
             'systemId': 1,
@@ -39,9 +38,6 @@
             'racingRevenue': 15,
             'amtDueToBA': 11,
             'amtDueToRacing': 12
-        };
-        const SELECTOR = {
-
         };
 
         let _ajaxRequest = null;
@@ -76,7 +72,6 @@
             Title: '.report-title',
             Header: '.panel-heading',
             GridId: 'ReportGrid',
-            IsHistoryInput: '#IsHistory',
             IsAllowedBAInput: '#IsAllowedBA',
             IsAllowedCustomerCommissionInput: '#IsAllowedCustomerCommission',
             HistoryLink: '#history-report-link',
@@ -102,9 +97,8 @@
             initOddsGroup();
 
             DatePicker.initDateRangePicker();
-            if ($(_selector.IsHistoryInput).val() === 'True') {
-                MonthPicker.initMonthPicker();
-            }
+            DateHelper.setConstraintMonthRange(VALID_MONTH_RANGE,  Site.buildReportProxyUrl(CustomerWinLossOption.urlPrefixData));
+
 
             _me.initEvent();
             _me.initSetting();
@@ -260,7 +254,8 @@
                 success: function (response) {
                     Downloader.download(response, fileName);
                 },
-                beforeSend: function () {
+                beforeSend: function (request) {
+                    Site.tryIgnoreSharding(request);
                     Toast.show();
                 }
             };
@@ -301,7 +296,8 @@
                     setReportTitle();
                     _me.bindData(response);
                 },
-                beforeSend: function () {
+                beforeSend: function (request) {
+                    Site.tryIgnoreSharding(request);
                     Site.blockUI();
                 },
                 complete: function () {
@@ -401,7 +397,7 @@
         }
 
         function viewWinlossBetList(custId, systemId, externalId) {
-            let url = Site.resolveClientUrl('CustomerWinlossBetList/Index');
+            let url = Site.resolveClientUrl('CustomerWinlossBetList/' + (Site.ignoreSharding() ? 'Index' : 'Live'));
             url = QueryString.setParam(url, 'ProductCodeList', _productCodes);
             url = QueryString.setParam(url, 'currencyid', _submitData.CurrencyId);
             url = QueryString.setParam(url, 'CurrencyName', _submitData.CurrencyName);

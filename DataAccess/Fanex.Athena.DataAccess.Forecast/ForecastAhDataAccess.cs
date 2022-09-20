@@ -1,10 +1,4 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="ForecastDataAccess.cs" company="">
-// Copyright (c) . All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-
-namespace Fanex.Athena.DataAccess.Forecast
+﻿namespace Fanex.Athena.DataAccess.Forecast
 {
     using System.Data;
     using System.Threading.Tasks;
@@ -24,7 +18,7 @@ namespace Fanex.Athena.DataAccess.Forecast
         {
             const string UspName = "Lrf_Forecast_OddsSelTopByMatch";
 
-            using (var db = this.GetObjectDb(UspName))
+            using (var db = GetObjectDb(UspName))
             {
                 db.SetParameterValue("matchid", matchId);
                 db.SetParameterValue("betType", betType);
@@ -36,12 +30,12 @@ namespace Fanex.Athena.DataAccess.Forecast
 
         public async Task<DataTable> GetForecastHandicap(ForecastAHMetaModel metaModel, int userId)
         {
-            return await GetForecastAH(metaModel, "Lrf_Forecast_SelHDP");
+            return await GetForecastAH(metaModel, "Shard_Lrf_Forecast_SelHDP");
         }
 
         public async Task<DataTable> GetForecastOverUnder(ForecastAHMetaModel metaModel, int userId)
         {
-            return await GetForecastAH(metaModel, "Lrf_Forecast_SelOU");
+            return await GetForecastAH(metaModel, "Shard_Lrf_Forecast_SelOU");
         }
 
         private async Task<DataTable> GetForecastAH(ForecastAHMetaModel metaModel, string spName)

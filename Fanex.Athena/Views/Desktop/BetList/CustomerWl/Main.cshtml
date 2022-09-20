@@ -3,6 +3,8 @@
     Layout = "~/Views/Desktop/Shared/_BetListSimpleLayout.cshtml";
 }
 
+@using Fanex.Athena.Extension;
+
 @model Fanex.Athena.Model.BetList.MetaModel.BetListMetaModel
 @section pagecss {}
 @section pagejs {
@@ -26,4 +28,5 @@
     <input type="hidden" id="BetListMetaModel" value="@Model.ToJson()" />
     <input type="hidden" id="HiddenColumnList" value="externalid,systemid" />
     <input type="hidden" id="HasBetEffectiveColumn" value="1" />
+    <input type="hidden" id="IgnoreSharding" value="@HttpContext.Current.GetIgnoreSharding()" />
 }

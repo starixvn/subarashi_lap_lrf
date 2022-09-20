@@ -45,7 +45,7 @@
         public async Task GetForecastHandicap_WhenCall_ParametersPassedCorrectly()
         {
             // Arrange
-            DataAccess.GetObjectDb(Arg.Is("Lrf_Forecast_SelHDP")).Returns(ObjectDb);
+            DataAccess.GetObjectDb(Arg.Is("Shard_Lrf_Forecast_SelHDP")).Returns(ObjectDb);
             var metaModel = new ForecastAHMetaModel();
             var userId = 0;
 
@@ -62,7 +62,7 @@
         public async Task GetForecastOverUnder_WhenCall_ParametersPassedCorrectly()
         {
             // Arrange
-            DataAccess.GetObjectDb(Arg.Is("Lrf_Forecast_SelOU")).Returns(ObjectDb);
+            DataAccess.GetObjectDb(Arg.Is("Shard_Lrf_Forecast_SelOU")).Returns(ObjectDb);
             var metaModel = new ForecastAHMetaModel();
             var userId = 0;
 

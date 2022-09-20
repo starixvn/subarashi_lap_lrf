@@ -2,7 +2,16 @@
     <h4>General Info
     </h4>
     <ul>
-        <li>This report supports up-to-date data.</li>
+        {sitedb-report-section}
+        <li>The report shall support data on 2 tabs:</li>
+        <ul>
+            <li>The Normal report tab shall support up-to-date data. You can filter data up to 3 months per query.</li>
+            <li>The Real Time report tab shall support instant data from {move-bet-date-from}.</li>
+        </ul>
+        {/sitedb-report-section}
+        {centraldb-report-section}
+        <li>This report supports up-to-date data. You can filter data up to 3 months per query.</li>
+        {/centraldb-report-section}
         <li>Any query before 4PM GMT-4 will return the data up to 4PM of the day before. You can filter data up to 1 month per query.</li>
         <li>Effective Betting Value supports data from 09/01/2014.</li>
         <li>This report contains only won/lose/draw tickets.</li>

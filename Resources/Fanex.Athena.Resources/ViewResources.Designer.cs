@@ -19,7 +19,7 @@ namespace Fanex.Athena.Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class ViewResources {
@@ -3661,6 +3661,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The Real Time report shall support instant data from {0}..
+        /// </summary>
+        public static string InstantDataReportNote {
+            get {
+                return ResourceManager.GetString("InstantDataReportNote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Internal System.
         /// </summary>
         public static string InternalSystem {
@@ -5245,6 +5254,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Normal Report.
+        /// </summary>
+        public static string NormalReport {
+            get {
+                return ResourceManager.GetString("NormalReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This licensee is not allowed BA.
         /// </summary>
         public static string NotAllowBA {
@@ -6429,6 +6447,15 @@ namespace Fanex.Athena.Resources {
         public static string RealName {
             get {
                 return ResourceManager.GetString("RealName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Real Time Report.
+        /// </summary>
+        public static string RealTimeReport {
+            get {
+                return ResourceManager.GetString("RealTimeReport", resourceCulture);
             }
         }
         

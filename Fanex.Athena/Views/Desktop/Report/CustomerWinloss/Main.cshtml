@@ -10,16 +10,16 @@
     <script src="@Url.ContentLinkByEnv("/www/js/build/pages/reports/customerwinloss.chunk.js")"></script>
 }
 
+@section Header
+{
+    @if(!Model.IgnoreSharding){
+        Html.RenderPartial("~/Views/Desktop/Report/CustomerWinloss/Tab.cshtml");
+    }
+}
+
 @section Filter
 {
-    @if (Model.IsHistory)
-    {
-        Html.RenderPartial("~/Views/Desktop/Report/CustomerWinloss/HistoryFilter.cshtml");
-    }
-    else
-    {
-        Html.RenderPartial("~/Views/Desktop/Report/CustomerWinloss/Filter.cshtml");
-    }
+    @{ Html.RenderPartial("~/Views/Desktop/Report/CustomerWinloss/Filter.cshtml"); }
 }
 
 @section Content

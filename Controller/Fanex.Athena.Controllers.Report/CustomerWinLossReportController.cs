@@ -1,5 +1,7 @@
 ﻿namespace Fanex.Athena.Controllers.Report
 {
+    using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
+    using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
@@ -17,31 +19,34 @@
         private readonly IReportSettingService _reportSettingService;
         private readonly IAuthorizationService _authService;
         private readonly ICustomerClassService _customerClassService;
+        private readonly IBalanceUpDataAccess _balanceUpDataAccess;
 
         public CustomerWinLossReportController(
             IReportSettingService reportSettingService,
             IAuthorizationService authService,
-            ICustomerClassService customerClassService
+            ICustomerClassService customerClassService,
+            IBalanceUpDataAccess balanceUpDataAccess
             )
         {
             _reportSettingService = reportSettingService;
             _authService = authService;
             _customerClassService = customerClassService;
-        }
+            _balanceUpDataAccess = balanceUpDataAccess;
+    }
 
         [HttpGet]
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(bool isHistory = true)
         {
-            return await GetView(false);
+            var ignoreSharding = string.IsNullOrEmpty(SessionServiceInstance.LicenseeSession.SiteDBServer);
+            if(!isHistory && ignoreSharding)
+            {
+                isHistory = true;
+            }
+
+            return await GetView(isHistory, ignoreSharding);
         }
 
-        [HttpGet]
-        public async Task<ActionResult> History()
-        {
-            return await GetView(true);
-        }
-
-        private async Task<ActionResult> GetView(bool isHistory)
+        private async Task<ActionResult> GetView(bool isHistory, bool ignoreSharding)
         {
             var licenseeSession = SessionServiceInstance.LicenseeSession;
             var userSession = SessionServiceInstance.UserSession;
@@ -60,8 +65,6 @@
 
             metaModel.ProductOptions = ToProductOptions(productAccess.ProductList);
 
-            var reportSetting = _reportSettingService.GetSetting(PermissionKeys.ReportCustomerWinLoss, licenseeSession.LicenseeName);
-
             var model = new CustomerWinLossViewModel
             {
                 IsAllowedCustomerCommission = licenseeSession.IsAllowedCustomerComm,
@@ -70,14 +73,25 @@
                 IsHistory = isHistory,
                 ProductAccess = productAccess,
                 IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeName),
-                MinDate = reportSetting.MinDate,
-                MaxDate = reportSetting.MaxDate,
                 HasExtraPayoutPermission = _authService.HasPermissions(userSession, PermissionKeys.ReportExtraPayout),
                 OddsGroups = licenseeSession.OfferedOddsGroupsList,
                 CustomerClassList = await _customerClassService.GetAllCustomerClassId(),
+                IgnoreSharding = ignoreSharding
             };
 
+            AssignLimitDateRange(model, licenseeSession.LicenseeName);
+
             return View("~/Views/Desktop/Report/CustomerWinLoss/Main.cshtml", model);
+        }
+
+        private void AssignLimitDateRange(CustomerWinLossViewModel model, string licenseeNaem)
+        {
+            var reportSetting = _reportSettingService.GetSetting(PermissionKeys.ReportCustomerWinLoss, licenseeNaem);
+            reportSetting.MinDate = model.IsHistory ?
+                AppSettingInstance.HistoryDate : _balanceUpDataAccess.GetBalanceUp().MoveBetsDay.AddDays(1);
+
+            model.MinDate = reportSetting.MinDate;
+            model.MaxDate = reportSetting.MaxDate;
         }
     }
 }

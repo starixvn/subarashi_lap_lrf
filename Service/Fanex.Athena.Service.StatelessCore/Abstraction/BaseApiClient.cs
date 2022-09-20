@@ -33,6 +33,7 @@ namespace Fanex.Athena.Service.StatelessCore.Abstraction
         {
             _client = client;
         }
+        protected virtual Task PrepareHeaders(HttpRequestHeaders headers) => Task.CompletedTask;
 
         public virtual async Task<string> PostStringAsync(string path, object value, string language, int timeOut = 100)
         {
@@ -78,6 +79,8 @@ namespace Fanex.Athena.Service.StatelessCore.Abstraction
             {
                 using (var httpRequest = new HttpRequestMessage(HttpMethod.Post, new Uri(_client.BaseAddress + path)))
                 {
+                    await PrepareHeaders(httpRequest.Headers).ConfigureAwait(false);
+
                     httpRequest.Headers.Add(LANGUAGEKEY, language);
                     HttpResponseMessage response = null;
                     try

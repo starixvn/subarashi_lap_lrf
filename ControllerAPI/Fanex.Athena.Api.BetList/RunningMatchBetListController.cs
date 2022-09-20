@@ -33,7 +33,7 @@ namespace Fanex.Athena.Api.BetList
         [ValidationApiRequest(IsValidCurrency = true)]
         public async Task<dynamic> Index(BetListMetaModel metaModel)
         {
-            const string UspKey = "Lrf_BetList_SelRunningByBettypeMatch";
+            const string UspKey = "Shard_Lrf_BetList_SelRunningByBettypeMatch";
             return await GetBetListResult(metaModel, UspKey).ConfigureAwait(false);
         }
     }

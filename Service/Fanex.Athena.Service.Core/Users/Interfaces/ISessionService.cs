@@ -12,6 +12,8 @@
 
         string FromReferer { get; }
 
+        bool IsIgnoreSharding { get; }
+
         LicenseeAuthInfo LicenseeSession { get; }
 
         UserAuthInfo UserSession { get; }

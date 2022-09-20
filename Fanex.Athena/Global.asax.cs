@@ -82,7 +82,9 @@
 
                 DbSettingProviderManager
                     .StartNewSession()
-                    .WithSqlServer(resourcePath: "~/SpNameConfig/FanexSpName.xml")
+                    .WithSqlServer()
+                    .UseDefaultConnectionStringProvider()
+                    .UseShardDbSettingProvider()
                     .Run();
 
                 RefDataTypeContainer

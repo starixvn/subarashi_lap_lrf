@@ -89,6 +89,18 @@
             </div>
         </div>
 
+        <div class="row">
+            @if (!Model.IsHistory)
+            {
+                <div class="col">
+                    <span class="circle"></span>
+                    <span>
+                        @string.Format(ViewResources.InstantDataReportNote, Model.ReportSetting.MinDate.ToString("MM/dd/yyyy"))
+                    </span>
+                </div>
+            }
+        </div>
+
         @Html.Hidden("IsExportExcel", Model.Param.IsExportExcel)
         @Html.Hidden("HasVIPManagementPermission", Model.Param.HasVIPManagementPermission)
     </form>
@@ -98,4 +110,5 @@
     @Html.Hidden("IsAllowedBACommission", Model.ProductAccess.IsAllowBA)
     @Html.Hidden("IsAllowedCustomerCommission", Model.IsAllowedCustomerCommission)
     @Html.Hidden("HasExtraPayoutPermission", Model.HasExtraPayoutPermission)
+    @Html.Hidden("IgnoreSharding", Model.IsHistory)
 </div>
