@@ -39,9 +39,11 @@ namespace Fanex.Athena.Web.ActionFilter
                 UnderMaintenanceAction(filterContext);
             }
 
+            var umConnectionResult = maintenanceService.GetUnderMaintenanceTime().ConnectionResult;
             if (!string.IsNullOrWhiteSpace(configuration.ErrorUMPageUrl)
-                && maintenanceService.GetUnderMaintenanceTime().ConnectionResult.IsNotOk)
+                && umConnectionResult.IsNotOk)
             {
+                Logging.Logger.Log.Error("UM service error: " + umConnectionResult.Message);
                 ErrorUnderMaintenanceAction(filterContext);
             }
         }
