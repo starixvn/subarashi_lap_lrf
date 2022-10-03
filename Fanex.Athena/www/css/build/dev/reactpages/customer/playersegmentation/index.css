@@ -1373,5 +1373,8 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
 .page-filter {
   padding-bottom: 30px; }
 
+.button-group button {
+  margin-right: 20px; }
+
 
 /*# sourceMappingURL=index.css.map*/

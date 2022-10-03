@@ -4584,7 +4584,6 @@ function mapStateToProps(state) {
   });
 }
 
-;
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(DataGrid));
 
 /***/ }),
@@ -4713,6 +4712,21 @@ const FormAction = props => {
     const batchUpdateSuccess = resultMessage => {
       setSweetAlertOption(null);
       setResultMsgSubmitMonitoredListFile(resultMessage);
+      const {
+        searchPlayer,
+        setPagingOption,
+        pagingOption,
+        selectedParams
+      } = props;
+      const onSuccess = _helper_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_11__["BatchUpdateMonitoredPlayerAlertOption"].createHandlerAfterBatchUpdateMonitoredPlayerSuccess({
+        searchPlayer,
+        setPagingOption,
+        pagingOption,
+        selectedParams,
+        setSweetAlertOption,
+        selectedTabKey: _lib_constants__WEBPACK_IMPORTED_MODULE_10__["tabKeys"].monitoredPlayer
+      });
+      onSuccess();
     };
 
     const handlerAfterBatchUpdateMonitoredPlayer = _helper_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_11__["BatchUpdateMonitoredPlayerAlertOption"].createHandlerAfterBatchUpdateMonitoredPlayer({
@@ -4894,11 +4908,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_queryService__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../lib/queryService */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/lib/queryService.js");
 /* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/lib/constants.js");
 /* harmony import */ var _helper_messageHelper__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../helper/messageHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/helper/messageHelper.js");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/constants.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -4919,7 +4935,11 @@ const FormAdd = props => {
     onClose,
     setCurrentUserAction,
     _resultMsgSubmit,
-    _monitoredPlayer
+    _monitoredPlayer,
+    searchPlayer,
+    setPagingOption,
+    pagingOption,
+    selectedParams
   } = props;
   const [monitoredPlayer, setMonitoredPlayer] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(_monitoredPlayer || {});
   const [resultMsgSubmit, setResultMsgSubmit] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(_resultMsgSubmit);
@@ -4980,6 +5000,16 @@ const FormAdd = props => {
 
       if (!isSuccess) {
         _backToFormAdd(resultMsg);
+      } else {
+        const onSuccess = _helper_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_8__["BatchUpdateMonitoredPlayerAlertOption"].createHandlerAfterBatchUpdateMonitoredPlayerSuccess({
+          searchPlayer,
+          setPagingOption,
+          pagingOption,
+          selectedParams,
+          setSweetAlertOption,
+          selectedTabKey: _lib_constants__WEBPACK_IMPORTED_MODULE_12__["tabKeys"].monitoredPlayer
+        });
+        onSuccess();
       }
     };
 
@@ -5080,16 +5110,31 @@ const mapDispatchToProps = dispatch => {
   const {
     toggleLoader,
     setSweetAlertOption,
-    setCurrentUserAction
+    setCurrentUserAction,
+    searchPlayer,
+    setPagingOption
   } = _actions__WEBPACK_IMPORTED_MODULE_5__["ActionCreators"];
   return Object(redux__WEBPACK_IMPORTED_MODULE_2__["bindActionCreators"])(Object.assign({}, {
     toggleLoader,
     setSweetAlertOption,
-    setCurrentUserAction
+    setCurrentUserAction,
+    searchPlayer,
+    setPagingOption
   }), dispatch);
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(null, mapDispatchToProps)( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(FormAdd)));
+function mapStateToProps(state) {
+  const {
+    selectedParams,
+    pagingOption
+  } = state;
+  return Object.assign({}, {
+    pagingOption,
+    selectedParams
+  });
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(FormAdd)));
 
 /***/ }),
 
@@ -5336,7 +5381,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       className: "label-text"
     }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("Currency")), this._renderCurrencySelectList())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 col-md-2 col-sm-2 col-lg-2 col-xl-1"
+      className: "col-12 col-md-6 col-sm-8 col-lg-4 col-xl-4"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -5346,13 +5391,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       className: "btn btn-submit",
       disabled: isDisabledSubmit,
       onClick: this._submit
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("Submit"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 col-md-2 col-sm-2 col-lg-2 col-xl-1"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "button-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("Submit")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       type: "button",
       className: "btn btn-add",
       disabled: !this.props.canEdit,
