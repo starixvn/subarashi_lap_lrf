@@ -149,7 +149,7 @@ function mapStateToProps(state) {
     const { playerList, selectedParams, pagingOption, isLoading, permissions } = state;
     const isCheckAll = playerList && !playerList.some(_ => !_.isSelected);
     return Object.assign({}, { playerList, isCheckAll, pagingOption, isLoading, selectedParams, permissions });
-};
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(DataGrid);
 

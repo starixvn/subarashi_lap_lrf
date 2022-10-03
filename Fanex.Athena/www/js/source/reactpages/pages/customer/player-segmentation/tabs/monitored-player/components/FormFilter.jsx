@@ -171,16 +171,10 @@ export class FormFilter extends PureComponent {
                             {this._renderCurrencySelectList()}
                         </div>
                     </div>
-                    <div className="col-12 col-md-2 col-sm-2 col-lg-2 col-xl-1">
+                    <div className="col-12 col-md-6 col-sm-8 col-lg-4 col-xl-4">
                         <div className="form-group">
                             <div className="button-group">
                                 <button type="button" className="btn btn-submit" disabled={isDisabledSubmit} onClick={this._submit}>{LangHelper.getSingleResource("Submit")}</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-12 col-md-2 col-sm-2 col-lg-2 col-xl-1">
-                        <div className="form-group">
-                            <div className="button-group">
                                 <button type="button" className="btn btn-add" disabled={!this.props.canEdit} onClick={this._addNew}>{LangHelper.getSingleResource("AddNew")}</button>
                             </div>
                         </div>

@@ -11,9 +11,10 @@ import { BatchUpdateMonitoredPlayerAlertOption } from '../helper/sweetAlertHelpe
 import MonitoredPlayerService from '../lib/queryService';
 import { UpdateMonitoredPlayerCode } from '../lib/constants';
 import MessageHelper from '../helper/messageHelper';
+import { tabKeys } from '../../../lib/constants';
 
 export const FormAdd = props => {
-    const { toggleLoader, setSweetAlertOption, onClose, setCurrentUserAction, _resultMsgSubmit, _monitoredPlayer,  } = props;
+    const { toggleLoader, setSweetAlertOption, onClose, setCurrentUserAction, _resultMsgSubmit, _monitoredPlayer, searchPlayer, setPagingOption, pagingOption, selectedParams } = props;
     const [monitoredPlayer, setMonitoredPlayer] = useState(_monitoredPlayer || {})
     const [resultMsgSubmit, setResultMsgSubmit] = useState(_resultMsgSubmit)
 
@@ -60,6 +61,10 @@ export const FormAdd = props => {
             setSweetAlertOption(null);
             if (!isSuccess) {
                 _backToFormAdd(resultMsg);
+            }
+            else{
+                const onSuccess = BatchUpdateMonitoredPlayerAlertOption.createHandlerAfterBatchUpdateMonitoredPlayerSuccess({ searchPlayer, setPagingOption, pagingOption, selectedParams, setSweetAlertOption, selectedTabKey: tabKeys.monitoredPlayer });
+                onSuccess();
             }
         }
         const handlerAfterBatchUpdateMonitoredPlayer = BatchUpdateMonitoredPlayerAlertOption.createHandlerAfterBatchUpdateMonitoredPlayer({ setSweetAlertOption, batchUpdateSuccess, noAlertResult: response => { return !(isSuccess = response.errorCode === UpdateMonitoredPlayerCode.Success) } });
@@ -116,12 +121,19 @@ export const FormAdd = props => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-    const { toggleLoader, setSweetAlertOption, setCurrentUserAction } = ActionCreators;
+    const { toggleLoader, setSweetAlertOption, setCurrentUserAction, searchPlayer, setPagingOption } = ActionCreators;
     return bindActionCreators(Object.assign({}, {
         toggleLoader,
         setSweetAlertOption,
-        setCurrentUserAction
+        setCurrentUserAction,
+        searchPlayer,
+        setPagingOption
     }), dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(React.memo(FormAdd));
+function mapStateToProps(state) {
+    const { selectedParams, pagingOption } = state;
+    return Object.assign({}, {  pagingOption, selectedParams });
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(React.memo(FormAdd));

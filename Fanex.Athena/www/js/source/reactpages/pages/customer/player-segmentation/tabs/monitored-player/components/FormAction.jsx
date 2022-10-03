@@ -76,6 +76,9 @@ export const FormAction = props => {
         const batchUpdateSuccess = resultMessage => {
             setSweetAlertOption(null);
             setResultMsgSubmitMonitoredListFile(resultMessage);
+            const { searchPlayer, setPagingOption, pagingOption, selectedParams} = props;
+            const onSuccess = BatchUpdateMonitoredPlayerAlertOption.createHandlerAfterBatchUpdateMonitoredPlayerSuccess({ searchPlayer, setPagingOption, pagingOption, selectedParams, setSweetAlertOption, selectedTabKey: tabKeys.monitoredPlayer });
+            onSuccess();
         }
 
         const handlerAfterBatchUpdateMonitoredPlayer = BatchUpdateMonitoredPlayerAlertOption.createHandlerAfterBatchUpdateMonitoredPlayer({ setSweetAlertOption, batchUpdateSuccess, noAlertResult: true });
