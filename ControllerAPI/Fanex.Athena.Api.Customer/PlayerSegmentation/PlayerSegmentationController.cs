@@ -18,6 +18,13 @@
     [ApiFunctionAuthorization(PermissionKeys.PlayerSegmentation)]
     public partial class PlayerSegmentationController : BaseApiController
     {
+        private const byte UploadByExternalId = 1;
+        private const string VipPlayerUploadByExternalIdTemplate = "~/App_Data/Template/Customers/PlayerSegmentation/VipPlayerUploadByExternalIdTemplate.xls";
+        private const string VipPlayerUploadBySystemIdTemplate = "~/App_Data/Template/Customers/PlayerSegmentation/VipPlayerUploadBySystemIdTemplate.xls";
+
+        private const string MonitoredPlayerUploadByExternalIdTemplate = "~/App_Data/Template/Customers/PlayerSegmentation/MonitoredPlayerUploadByExternalIdTemplate.xls";
+        private const string MonitoredPlayerUploadBySystemIdTemplate = "~/App_Data/Template/Customers/PlayerSegmentation/MonitoredPlayerUploadBySystemIdTemplate.xls";
+
         private readonly IAuthorizationService _authService;
         private readonly IPlayerSegmentationService _playerService;
         private readonly IBetListApiClient _betListApiClient;

@@ -19,7 +19,7 @@ namespace Fanex.Athena.Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class ViewResources {
@@ -2338,6 +2338,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The selected player(s) will be removed from the monitored player list. Are you sure you want to remove?.
+        /// </summary>
+        public static string DeleteManyMonitoredPlayerConfirm {
+            get {
+                return ResourceManager.GetString("DeleteManyMonitoredPlayerConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} will be removed from the monitored player list. Are you sure you want to remove?.
         /// </summary>
         public static string DeleteMonitoredPlayerConfirm {
@@ -4066,7 +4075,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Last Reached Date (GMT -4).
+        ///   Looks up a localized string similar to Last Reached Threshold Date (GMT -4).
         /// </summary>
         public static string LastReachedDate {
             get {
@@ -5119,7 +5128,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Monitored Player.
+        ///   Looks up a localized string similar to Threshold Monitoring Setting.
         /// </summary>
         public static string MonitoredPlayer {
             get {
@@ -6649,7 +6658,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reached Date.
+        ///   Looks up a localized string similar to Reached Threshold Date.
         /// </summary>
         public static string ReachedDate {
             get {
@@ -6753,6 +6762,15 @@ namespace Fanex.Athena.Resources {
         public static string Remark {
             get {
                 return ResourceManager.GetString("Remark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove.
+        /// </summary>
+        public static string Remove {
+            get {
+                return ResourceManager.GetString("Remove", resourceCulture);
             }
         }
         

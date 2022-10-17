@@ -26,12 +26,27 @@ export default class MonitoredPlayerService {
             if (response.status === 204) {
                 alert(LangHelper.getSingleResource("NoInfo"));
             } else {
-                Site.downloadFile(response.data, 'MonitoredPlayerList.xls');
+                Site.downloadFile(response.data, 'ThresholdMonitoringSetting.xls');
             }
         } catch (e) {
             alert(LangHelper.getSingleResource('ErrorProcessingMsg'));
             console.log(e)
         }
+    }
+
+    static async downloadMonitoredTemplateExcel(params){
+        try {
+            const response = await DataService.getFile('Api/PlayerSegmentation/ExportMonitoredTemplateExcel', null, {params: params});
+            if (response.status === 204) {
+                alert(LangHelper.getSingleResource("NoInfo"));
+            } else {
+                Site.downloadFile(response.data, 'ThresholdMonitoringSetting.xls');
+            }
+        } catch (e) {
+            alert(LangHelper.getSingleResource('ErrorProcessingMsg'));
+            console.log(e)
+        }
+    
     }
 
     static async getMonitoredPlayerReachedHistory(params) {

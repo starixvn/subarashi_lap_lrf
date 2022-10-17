@@ -13,6 +13,7 @@ import { UploadFileOptions, UploadFileOptionValue } from '../../../lib/constants
 import ExcelHelper from '../lib/helpers/excelHelper';
 import { UpdateVipStatusAlertOption } from '../../../lib/helpers/sweetAlertHelper';
 import AppData from '@jsroot/lib/AppData';
+import VipPlayerQueryService from "../lib/queryService";
 
 export const FormAction = props => {
     const { isActiveTaggingAction, playerList, updateVipStatus, setSweetAlertOption, selectedParams } = props;
@@ -108,6 +109,11 @@ export const FormAction = props => {
         })
     }
 
+    const _handleDownloadTemplateExcel = (event) =>{
+        event.preventDefault();
+        VipPlayerQueryService.downloadVipPlayerListTemplateExcel({uploadBy: uploadFileOption});
+    }
+
     const _renderExtraInfoDropzoneUploadFile = () => {
         return (<>
             <RadioGroup
@@ -117,7 +123,7 @@ export const FormAction = props => {
                 onChange={setUploadFileOption}
             />
             <div>
-                <a href={`${Url.vipPlayerListTemplate}?uploadBy=${uploadFileOption}`}>*{LangHelper.getSingleResource('ClickHere')}</a>&nbsp;
+                <a href='#' onClick={_handleDownloadTemplateExcel}>*{LangHelper.getSingleResource('ClickHere')}</a>&nbsp;
                 <span>{LangHelper.getSingleResource('ToDowloadTemplate')}</span>
             </div>
             <div>

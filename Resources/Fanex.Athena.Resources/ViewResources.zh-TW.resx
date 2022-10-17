@@ -2241,4 +2241,28 @@
   <data name="AllCustomerClassCategory" xml:space="preserve">
     <value>所有玩家分類</value>
   </data>
+  <data name="Remove" xml:space="preserve">
+    <value>移除</value>
+  </data>
+  <data name="Currencies" xml:space="preserve">
+    <value>貨幣</value>
+  </data>
+  <data name="MonitoredPlayerList" xml:space="preserve">
+    <value>觀察中玩家名單</value>
+  </data>
+  <data name="MonitoredPlayer" xml:space="preserve">
+    <value>警示值監控設定</value>
+  </data>
+  <data name="ReachedDate" xml:space="preserve">
+    <value>到達警示值日期</value>
+  </data>
+  <data name="LastReachedDate" xml:space="preserve">
+    <value>最近一次到達警示值(GMT -4)</value>
+  </data>
+  <data name="DailyWinningThreshold" xml:space="preserve">
+    <value>每日贏額警示值</value>
+  </data>
+  <data name="DeleteManyMonitoredPlayerConfirm" xml:space="preserve">
+    <value>所選的玩家將被移出警示值監控，您確定要移出嗎？</value>
+  </data>
 </root>

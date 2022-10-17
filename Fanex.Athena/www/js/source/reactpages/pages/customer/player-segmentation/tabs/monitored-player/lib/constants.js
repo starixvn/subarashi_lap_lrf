@@ -15,13 +15,13 @@ export const dataGridFullHeaders = [
 
 export const Url = {
     exportMonitoredPlayerList: 'Api/PlayerSegmentation/ExportMonitoredPlayerList',
-    monitoredPlayerListTemplate: 'PlayerSegmentation/DowloadMonitoredListTemplate'
+    monitoredPlayerListTemplate: 'Api/PlayerSegmentation/ExportMonitoredTemplateExcel'
 }
 
 export const ExcelReaderColumn = {
-    SystemId: 'systemid',
-    ExternalId: 'externalid',
-    WinningThreshold: 'dailywinningthreshold'
+    SystemId: LangHelper.getSingleResource('SystemId'),
+    ExternalId: LangHelper.getSingleResource('ExternalId'),
+    WinningThreshold: LangHelper.getSingleResource('DailyWinningThreshold')
 }
 
 export const UpdateMonitoredPlayerCode = {

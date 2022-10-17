@@ -41,14 +41,16 @@ export default class DataService {
         });
     }
 
-    static getFile(url, params) {
-        return axios.post(url, params, {
+    static getFile(url, params, options) {
+        const defaultOptions = {
             responseType: 'blob',
             headers: {
                 'X-Requested-With': 'XMLHttpRequest',
                 '__RequestVerificationToken': Site.getXsrfToken()
             }
-        });
+        };
+        let requestOptions = Object.assign({}, defaultOptions, options);
+        return axios.post(url, params, requestOptions);
     }
 
 

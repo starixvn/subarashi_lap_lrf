@@ -3,16 +3,20 @@
     using System.Linq;
     using System.Net.Http;
     using System.Threading.Tasks;
+    using System.Web.Hosting;
     using System.Web.Http;
     using Fanex.Athena.Api.Base;
     using Fanex.Athena.Api.Base.Attributes;
     using Fanex.Athena.Excel.Customer;
+    using Fanex.Athena.Excel.Customer.PlayerSegmentation;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Customer.MetaModel;
+    using Fanex.Athena.Resources;
     using Fanex.Athena.Service.StatelessCore.Utility;
 
     public partial class PlayerSegmentationController : BaseApiController
     {
+
         [HttpPost]
         [ApiFunctionAuthorization(PermissionKeys.MonitoredPlayer)]
         [ValidationApiRequest(IsValidCurrencyList = true)]
@@ -70,6 +74,24 @@
         {
             var result = await _playerService.BatchUpdateMonitoredPlayerAsync(metaModel);
             return JsonApi(result);
+        }
+
+        [HttpPost]
+        [ApiFunctionAuthorization(PermissionKeys.MonitoredPlayer_Write)]
+        public Task<HttpResponseMessage> ExportMonitoredTemplateExcel(byte uploadBy = UploadByExternalId )
+        {
+            const string fileName = "MOnitoredSetting.xls";
+
+            var templatePath = HostingEnvironment.MapPath(uploadBy == UploadByExternalId ? MonitoredPlayerUploadByExternalIdTemplate : MonitoredPlayerUploadBySystemIdTemplate);
+
+            var headers = uploadBy == UploadByExternalId
+                ? new[] { ViewResources.ExternalId, ViewResources.DailyWinningThreshold }
+                : new[] { ViewResources.SystemId, ViewResources.DailyWinningThreshold };
+
+            var excel = new SampleExcel(templatePath, headers);
+            excel.Export();
+            var result = ExcelStream(excel.Workbook, fileName);
+            return Task.FromResult(result);
         }
 
         [HttpPost]

@@ -17,7 +17,7 @@ class ExcelHelper {
         if (!header || !header.length) {
             return null;
         }
-        const columnName = header.find(_ => _ && _.replace(/\s/g, '').toLocaleLowerCase() === readerColumn);
+        const columnName = header.find(_ => _ && _ === readerColumn);
         return columnName;
     }
 
@@ -53,6 +53,12 @@ export const FormAction = props => {
         return custIds.join();
     }
 
+    const _getSelectedSystemIds = () => {
+        const selectedPlayers = playerList.filter(_ => _.isSelected);
+        const sytemIds = selectedPlayers.map(_ => _.systemId);
+        return sytemIds.join();
+    }
+
     const _batchUpdateMonitoredPlayer = async (params, afterSuccess) => {
         toggleLoader(true);
         const response = await MonitoredPlayerService.batchUpdateMonitoredPlayer(params);
@@ -64,7 +70,7 @@ export const FormAction = props => {
         event.preventDefault();
         const { searchPlayer, setPagingOption, pagingOption, selectedParams} = props;
         const onSuccess = BatchUpdateMonitoredPlayerAlertOption.createHandlerAfterBatchUpdateMonitoredPlayerSuccess({ searchPlayer, setPagingOption, pagingOption, selectedParams, setSweetAlertOption, selectedTabKey: tabKeys.monitoredPlayer });
-        deleteMonitoredPlayer(_getSelectedCustIds(), LangHelper.getSingleResource('The selected player(s)'), onSuccess);
+        deleteMonitoredPlayer(_getSelectedCustIds(), _getSelectedSystemIds(), onSuccess);
     }
 
     const _handleDisplayUploadDropzone = () => {
@@ -135,6 +141,11 @@ export const FormAction = props => {
         return monitoredList;
     }
 
+    const _handleDownloadTemplateExcel = (event) =>{
+        event.preventDefault();
+        MonitoredPlayerService.downloadMonitoredTemplateExcel({uploadBy: uploadFileOption});
+    }
+
     const _renderExtraInfoDropzoneUploadFile = () => {
         return (<>
             <RadioGroup
@@ -144,7 +155,7 @@ export const FormAction = props => {
                 onChange={setUploadFileOption}
             />
             <div>
-                <a href={`${Url.monitoredPlayerListTemplate}?uploadBy=${uploadFileOption}`}>*{LangHelper.getSingleResource('ClickHere')}</a>&nbsp;
+                <a href='#' onClick={_handleDownloadTemplateExcel}>*{LangHelper.getSingleResource('ClickHere')}</a>&nbsp;
                 <span>{LangHelper.getSingleResource('ToDowloadTemplate')}</span>
             </div>
             <div>

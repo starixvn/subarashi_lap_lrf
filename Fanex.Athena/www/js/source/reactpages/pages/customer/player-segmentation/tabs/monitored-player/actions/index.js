@@ -29,7 +29,8 @@ const _onRemoveMonitoredList = dispatch => (custIds, systemIds, onSuccess) => {
     const batchUpdateSuccess = onSuccess;
     const handlerAfterBatchUpdateMonitoredPlayer = BatchUpdateMonitoredPlayerAlertOption.createHandlerAfterBatchUpdateMonitoredPlayer({ setSweetAlertOption: setSweetAlertOptionWithDispatch, batchUpdateSuccess, noAlertResult: false });
     const confirmProps = BatchUpdateMonitoredPlayerAlertOption.createBatchUpdateMonitoredPlayerConfirmProps({ custIds }, _removeMonitoredPlayer(dispatch), handlerAfterBatchUpdateMonitoredPlayer);
-    const alertOption = generateDefaultConfirmOption(LangHelper.getSingleResource('DeleteMonitoredPlayerConfirm').replace('{0}', systemIds), _handleCloseAlert, confirmProps, _cancelProps,
+    const alertMsg = systemIds.split(',').length > 1 ? LangHelper.getSingleResource('DeleteManyMonitoredPlayerConfirm') : LangHelper.getSingleResource('DeleteMonitoredPlayerConfirm').replace('{0}', systemIds);
+    const alertOption = generateDefaultConfirmOption(alertMsg, _handleCloseAlert, confirmProps, _cancelProps,
      predefinedIcons.warning, { height: 215 });
     setSweetAlertOptionWithDispatch(alertOption);
 }

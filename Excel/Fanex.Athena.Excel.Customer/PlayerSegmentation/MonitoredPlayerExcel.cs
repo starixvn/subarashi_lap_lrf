@@ -1,18 +1,13 @@
 ﻿using Fanex.Athena.Excel.Base;
 using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
 using NPOI.SS.UserModel;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Fanex.Athena.Excel.Base.Extension;
 using System.Text;
-using System.Threading.Tasks;
 using Fanex.Athena.Resources;
 using Fanex.Athena.Model.Customer.MetaModel;
-using Fanex.Athena.Model.Core.DataDomain;
-using System.Globalization;
 using System.Web.Hosting;
-using Fanex.Athena.Model.Core.Helper;
 
 namespace Fanex.Athena.Excel.Customer
 {
@@ -66,7 +61,7 @@ namespace Fanex.Athena.Excel.Customer
         protected override void AssignTitle(ISheet sheet)
         {
 
-            var titleBuilder = new StringBuilder(ViewResources.MonitoredPlayerList);
+            var titleBuilder = new StringBuilder(ViewResources.MonitoredPlayer);
             if(!_metaModel.IsGetAll)
             {
                 titleBuilder.Append($", {ViewResources.ReachedDate}: {_metaModel.FromDate.ToString(FormatDate)} --> {_metaModel.ToDate.ToString(FormatDate)}");

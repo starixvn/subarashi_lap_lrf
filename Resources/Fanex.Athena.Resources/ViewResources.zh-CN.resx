@@ -2861,7 +2861,7 @@
     <value>当前赢额临界值</value>
   </data>
   <data name="LastReachedDate" xml:space="preserve">
-    <value>最近到达日期(GMT -4)</value>
+    <value>最近一次到达警示值(GMT -4)</value>
   </data>
   <data name="NoOfReached" xml:space="preserve">
     <value>到达上限次数</value>
@@ -2870,7 +2870,7 @@
     <value>VIP玩家</value>
   </data>
   <data name="DailyWinningThreshold" xml:space="preserve">
-    <value>每日临界值</value>
+    <value>每日赢额警示值</value>
   </data>
   <data name="DeleteMonitoredPlayerConfirm" xml:space="preserve">
     <value>{0} 将从被观察的玩家列表中删除，您确定要删除吗？</value>
@@ -2902,9 +2902,6 @@
   <data name="MaxBatchUpdateMonitoredPlayerError" xml:space="preserve">
     <value>最多只能上传 2000 行数据，请再次检查您的档案！</value>
   </data>
-  <data name="MonitoredPlayer" xml:space="preserve">
-    <value>观察中玩家</value>
-  </data>
   <data name="MonitoredPlayerNotificationHistoryTitle" xml:space="preserve">
     <value>通知纪录 {0} -&gt; {1} - {2}</value>
   </data>
@@ -2915,7 +2912,7 @@
     <value>通知纪录</value>
   </data>
   <data name="ReachedDate" xml:space="preserve">
-    <value>到达日期</value>
+    <value>到达警示值日期</value>
   </data>
   <data name="SuccessfullyUpdate" xml:space="preserve">
     <value>更新成功</value>
@@ -2949,5 +2946,20 @@
   </data>
   <data name="InstantDataReportNote" xml:space="preserve">
     <value>即时报表仅提供 {0} 之后的即时数据。</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>移除</value>
+  </data>
+  <data name="Currencies" xml:space="preserve">
+    <value>货币</value>
+  </data>
+  <data name="MonitoredPlayerList" xml:space="preserve">
+    <value>观察中玩家名单</value>
+  </data>
+  <data name="MonitoredPlayer" xml:space="preserve">
+    <value>警示值监控设定</value>
+  </data>
+  <data name="DeleteManyMonitoredPlayerConfirm" xml:space="preserve">
+    <value>所选的玩家将被移出警示值监控，您确定要移出吗？</value>
   </data>
 </root>

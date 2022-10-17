@@ -3291,7 +3291,7 @@
     <value>Current Winning Threshold</value>
   </data>
   <data name="LastReachedDate" xml:space="preserve">
-    <value>Last Reached Date (GMT -4)</value>
+    <value>Last Reached Threshold Date (GMT -4)</value>
   </data>
   <data name="MonitoredPlayerList" xml:space="preserve">
     <value>Monitored Player List</value>
@@ -3341,9 +3341,6 @@
   <data name="MaxBatchUpdateMonitoredPlayerError" xml:space="preserve">
     <value>Only allow to upload maximum of 2000 data rows, please check your file again!</value>
   </data>
-  <data name="MonitoredPlayer" xml:space="preserve">
-    <value>Monitored Player</value>
-  </data>
   <data name="MonitoredPlayerNotificationHistoryTitle" xml:space="preserve">
     <value>Notification History {0} -&gt; {1} - {2}</value>
   </data>
@@ -3354,7 +3351,7 @@
     <value>Notification History</value>
   </data>
   <data name="ReachedDate" xml:space="preserve">
-    <value>Reached Date</value>
+    <value>Reached Threshold Date</value>
   </data>
   <data name="SuccessfullyUpdate" xml:space="preserve">
     <value>Successfully update</value>
@@ -3382,5 +3379,14 @@
   </data>
   <data name="RealTimeReport" xml:space="preserve">
     <value>Real Time Report</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="MonitoredPlayer" xml:space="preserve">
+    <value>Threshold Monitoring Setting</value>
+  </data>
+  <data name="DeleteManyMonitoredPlayerConfirm" xml:space="preserve">
+    <value>The selected player(s) will be removed from the monitored player list. Are you sure you want to remove?</value>
   </data>
 </root>
