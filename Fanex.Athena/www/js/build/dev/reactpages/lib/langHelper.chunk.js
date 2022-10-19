@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 8/16/2022 4:18:19 PM
+// Generated at: 10/19/2022 10:25:52 AM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -345,6 +345,7 @@ window._language_en_US = {
   Delete: "Delete",
   DeleteCommissionGroup: "Delete Commission group",
   DeleteGroup: "Delete Group",
+  DeleteManyMonitoredPlayerConfirm: "The selected player(s) will be removed from the monitored player list. Are you sure you want to remove?",
   DeleteMonitoredPlayerConfirm: "{0} will be removed from the monitored player list. Are you sure you want to remove?",
   DeleteSuccess: "Delete successfully!",
   Department: "Department",
@@ -498,8 +499,8 @@ window._language_en_US = {
   IncorrectMaxPerMatch: "Incorrect Max Per Match",
   IncorrectMinBet: "Incorrect Min Bet",
   Individual: "Individual",
-  InstantDataReportNote: "The Real Time report shall support instant data from {0}.",
   InsertMonitoredPlayerConfirm: "{0} will be added into the list of monitored players with the Daily Winning Threshold = {1}. Are you sure you want to add?",
+  InstantDataReportNote: "The Real Time report shall support instant data from {0}.",
   InternalSystem: "Internal System",
   InvalidCaptchaMsg: "You inputed an invalid code.",
   InvalidChargeCommission: "Invalid Charge Commission",
@@ -536,7 +537,7 @@ window._language_en_US = {
   LastModifiedDate: "Last Modified Date",
   Lastmonth: "Last month",
   LastName: "Last Name",
-  LastReachedDate: "Last Reached Date (GMT -4)",
+  LastReachedDate: "Last Reached Threshold Date (GMT -4)",
   LastTransaction: "Last Transaction",
   LastTransfer: "Last Transfer",
   LastTxn: "Last Txn",
@@ -651,7 +652,7 @@ window._language_en_US = {
   Monday: "Monday",
   MoneyLine: "Money Line",
   MoneyPlay: "Money Play",
-  MonitoredPlayer: "Monitored Player",
+  MonitoredPlayer: "Threshold Monitoring Setting",
   MonitoredPlayerList: "Monitored Player List",
   MonitoredPlayerNotificationHistoryTitle: "Notification History {0} -&gt; {1} - {2}",
   Month: "Month",
@@ -821,7 +822,7 @@ window._language_en_US = {
   PromotionPrize: "Promotion Prize",
   PromotionType: "Promotion Type",
   RB: "RB",
-  ReachedDate: "Reached Date",
+  ReachedDate: "Reached Threshold Date",
   RealName: "Real Name",
   RealTimeReport: "Real Time Report",
   Reason: "Reason",
@@ -833,6 +834,7 @@ window._language_en_US = {
   Refund: "Refund",
   Reject: "Reject",
   Remark: "Remark",
+  Remove: "Remove",
   RemoveFromGroup: "Remove from Group",
   RemoveGroupMsg: "Are you sure you want to remove this(these) customer(s) from group?",
   RemoveTheseCustomersFromGroupMsg: "Are you sure you want to remove these customers from group?",

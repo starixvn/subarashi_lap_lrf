@@ -3098,14 +3098,16 @@ class DataService {
     });
   }
 
-  static getFile(url, params) {
-    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, params, {
+  static getFile(url, params, options) {
+    const defaultOptions = {
       responseType: 'blob',
       headers: {
         'X-Requested-With': 'XMLHttpRequest',
         '__RequestVerificationToken': _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].getXsrfToken()
       }
-    });
+    };
+    let requestOptions = Object.assign({}, defaultOptions, options);
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, params, requestOptions);
   }
 
   static postReportData(url, params) {

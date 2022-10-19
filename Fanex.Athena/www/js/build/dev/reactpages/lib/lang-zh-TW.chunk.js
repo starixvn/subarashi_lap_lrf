@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 8/16/2022 4:18:20 PM
+// Generated at: 10/19/2022 10:25:52 AM
 window._language_zh_TW = {
   AA: "客客",
   AbnormalBet: "非正規註單",
@@ -238,6 +238,7 @@ window._language_zh_TW = {
   CreditDebit: "貸記/借記",
   CS: "娛樂城",
   CSComm: "娛樂城佣金",
+  Currencies: "貨幣",
   Currency: "貨幣",
   Currentmonth: "本月",
   Currentweek: "本週",
@@ -267,6 +268,7 @@ window._language_zh_TW = {
   Daily: "每日",
   DailyStatement: "每日賬目",
   DailyStatementMsg: "Support data up to 4 months only",
+  DailyWinningThreshold: "每日贏額警示值",
   Date: "日期",
   DateRange: "日期範圍",
   DateRangeNote: "數據可從{0:d MMM yyyy}查看",
@@ -282,6 +284,7 @@ window._language_zh_TW = {
   Delete: "刪除",
   DeleteCommissionGroup: "刪除佣金群組",
   DeleteGroup: "刪除組",
+  DeleteManyMonitoredPlayerConfirm: "所選的玩家將被移出警示值監控，您確定要移出嗎？",
   Deposit: "存款",
   DetailedBetlist: "投注歷史明細",
   Details: "細節",
@@ -404,6 +407,7 @@ window._language_zh_TW = {
   LastModifiedDate: "上次更新日期",
   Lastmonth: "上個月",
   LastName: "姓",
+  LastReachedDate: "最近一次到達警示值(GMT -4)",
   LastTxn: "最後交易",
   LastUpdatedBA: "最近一次更新BA",
   LastUpdatedMsg: "最近更新的特殊級別",
@@ -481,6 +485,8 @@ window._language_zh_TW = {
   Monday: "星期一",
   MoneyLine: "勝負盤",
   MoneyPlay: "普通投注",
+  MonitoredPlayer: "警示值監控設定",
+  MonitoredPlayerList: "觀察中玩家名單",
   Month: "月份",
   Monthly: "每月",
   MoveCommissionGroup: "移動佣金組別",
@@ -590,11 +596,13 @@ window._language_zh_TW = {
   PromotionPrize: "活動獎金",
   PromotionType: "活動類別",
   RB: "賽馬",
+  ReachedDate: "到達警示值日期",
   RecommendBrowserOnReportPageMsg: "若頁面大小&gt; 1,000，請您考慮使用火狐或Chrome瀏覽器以獲得更好的體驗",
   RefNo: "注單號碼",
   Refund: "退款",
   Reject: "已取消",
   Remark: "备註",
+  Remove: "移除",
   RemoveFromGroup: "從該組中刪除",
   RemoveGroupMsg: "您確定要從組中移除此（這些）會員?",
   RemoveTheseCustomersFromGroupMsg: "您確定要從組中移除這些會員?",

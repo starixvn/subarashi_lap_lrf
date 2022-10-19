@@ -475,14 +475,16 @@ class DataService {
     });
   }
 
-  static getFile(url, params) {
-    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, params, {
+  static getFile(url, params, options) {
+    const defaultOptions = {
       responseType: 'blob',
       headers: {
         'X-Requested-With': 'XMLHttpRequest',
         '__RequestVerificationToken': _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].getXsrfToken()
       }
-    });
+    };
+    let requestOptions = Object.assign({}, defaultOptions, options);
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, params, requestOptions);
   }
 
   static postReportData(url, params) {
@@ -1301,7 +1303,24 @@ class MonitoredPlayerService {
       if (response.status === 204) {
         alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("NoInfo"));
       } else {
-        _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].downloadFile(response.data, 'MonitoredPlayerList.xls');
+        _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].downloadFile(response.data, 'ThresholdMonitoringSetting.xls');
+      }
+    } catch (e) {
+      alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('ErrorProcessingMsg'));
+      console.log(e);
+    }
+  }
+
+  static async downloadMonitoredTemplateExcel(params) {
+    try {
+      const response = await _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_0__["default"].getFile('Api/PlayerSegmentation/ExportMonitoredTemplateExcel', null, {
+        params: params
+      });
+
+      if (response.status === 204) {
+        alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("NoInfo"));
+      } else {
+        _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].downloadFile(response.data, 'ThresholdMonitoringSetting.xls');
       }
     } catch (e) {
       alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('ErrorProcessingMsg'));
@@ -1458,12 +1477,16 @@ class ProblemPlayerQueryService {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return VipPlayerQueryService; });
 /* harmony import */ var _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/DataService */ "./www/js/source/reactpages/lib/DataService.js");
-/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/constants.js");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/constants.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -1473,13 +1496,30 @@ class VipPlayerQueryService {
       const response = await _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_0__["default"].postData('Api/PlayerSegmentation/GetVipPlayerList', params);
 
       if (response.status === 200) {
-        return _objectSpread(_objectSpread({}, _lib_constants__WEBPACK_IMPORTED_MODULE_1__["successResponse"]), response.data);
+        return _objectSpread(_objectSpread({}, _lib_constants__WEBPACK_IMPORTED_MODULE_3__["successResponse"]), response.data);
       }
     } catch (e) {
       console.log(e);
     }
 
-    return _lib_constants__WEBPACK_IMPORTED_MODULE_1__["errorResponse"];
+    return _lib_constants__WEBPACK_IMPORTED_MODULE_3__["errorResponse"];
+  }
+
+  static async downloadVipPlayerListTemplateExcel(params) {
+    try {
+      const response = await _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_0__["default"].getFile('Api/PlayerSegmentation/ExportVipPlayerListTemplateExcel', null, {
+        params: params
+      });
+
+      if (response.status === 204) {
+        alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("NoInfo"));
+      } else {
+        _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].downloadFile(response.data, 'VipPlayerList.xls');
+      }
+    } catch (e) {
+      alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('ErrorProcessingMsg'));
+      console.log(e);
+    }
   }
 
 }

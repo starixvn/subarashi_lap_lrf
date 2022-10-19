@@ -4082,7 +4082,8 @@ const _onRemoveMonitoredList = dispatch => (custIds, systemIds, onSuccess) => {
   const confirmProps = _helper_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_7__["BatchUpdateMonitoredPlayerAlertOption"].createBatchUpdateMonitoredPlayerConfirmProps({
     custIds
   }, _removeMonitoredPlayer(dispatch), handlerAfterBatchUpdateMonitoredPlayer);
-  const alertOption = Object(_jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_9__["generateDefaultConfirmOption"])(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource('DeleteMonitoredPlayerConfirm').replace('{0}', systemIds), _handleCloseAlert, confirmProps, _cancelProps, _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_9__["predefinedIcons"].warning, {
+  const alertMsg = systemIds.split(',').length > 1 ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource('DeleteManyMonitoredPlayerConfirm') : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource('DeleteMonitoredPlayerConfirm').replace('{0}', systemIds);
+  const alertOption = Object(_jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_9__["generateDefaultConfirmOption"])(alertMsg, _handleCloseAlert, confirmProps, _cancelProps, _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_9__["predefinedIcons"].warning, {
     height: 215
   });
   setSweetAlertOptionWithDispatch(alertOption);
@@ -4632,7 +4633,7 @@ class ExcelHelper {
       return null;
     }
 
-    const columnName = header.find(_ => _ && _.replace(/\s/g, '').toLocaleLowerCase() === readerColumn);
+    const columnName = header.find(_ => _ && _ === readerColumn);
     return columnName;
   }
 
@@ -4677,6 +4678,12 @@ const FormAction = props => {
     return custIds.join();
   };
 
+  const _getSelectedSystemIds = () => {
+    const selectedPlayers = playerList.filter(_ => _.isSelected);
+    const sytemIds = selectedPlayers.map(_ => _.systemId);
+    return sytemIds.join();
+  };
+
   const _batchUpdateMonitoredPlayer = async (params, afterSuccess) => {
     toggleLoader(true);
     const response = await _lib_queryService__WEBPACK_IMPORTED_MODULE_12__["default"].batchUpdateMonitoredPlayer(params);
@@ -4700,7 +4707,7 @@ const FormAction = props => {
       setSweetAlertOption,
       selectedTabKey: _lib_constants__WEBPACK_IMPORTED_MODULE_10__["tabKeys"].monitoredPlayer
     });
-    deleteMonitoredPlayer(_getSelectedCustIds(), _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('The selected player(s)'), onSuccess);
+    deleteMonitoredPlayer(_getSelectedCustIds(), _getSelectedSystemIds(), onSuccess);
   };
 
   const _handleDisplayUploadDropzone = () => {
@@ -4804,6 +4811,13 @@ const FormAction = props => {
     return monitoredList;
   };
 
+  const _handleDownloadTemplateExcel = event => {
+    event.preventDefault();
+    _lib_queryService__WEBPACK_IMPORTED_MODULE_12__["default"].downloadMonitoredTemplateExcel({
+      uploadBy: uploadFileOption
+    });
+  };
+
   const _renderExtraInfoDropzoneUploadFile = () => {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_radio_RadioGroup__WEBPACK_IMPORTED_MODULE_4__["default"], {
       name: 'UploadByOptions',
@@ -4811,7 +4825,8 @@ const FormAction = props => {
       options: _lib_constants__WEBPACK_IMPORTED_MODULE_10__["UploadFileOptions"],
       onChange: setUploadFileOption
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-      href: `${_lib_constants__WEBPACK_IMPORTED_MODULE_9__["Url"].monitoredPlayerListTemplate}?uploadBy=${uploadFileOption}`
+      href: "#",
+      onClick: _handleDownloadTemplateExcel
     }, "*", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('ClickHere')), "\xA0", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('ToDowloadTemplate'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, `*${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('MaximumUploadFileSize')}: ${1} MB`)));
   };
 
@@ -5381,7 +5396,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       className: "label-text"
     }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("Currency")), this._renderCurrencySelectList())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 col-md-6 col-sm-8 col-lg-4 col-xl-4"
+      className: "col-12 col-md-6 col-sm-8 col-lg-4 col-xl-3"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -6135,12 +6150,12 @@ const dataGridFullHeaders = [{
 }];
 const Url = {
   exportMonitoredPlayerList: 'Api/PlayerSegmentation/ExportMonitoredPlayerList',
-  monitoredPlayerListTemplate: 'PlayerSegmentation/DowloadMonitoredListTemplate'
+  monitoredPlayerListTemplate: 'Api/PlayerSegmentation/ExportMonitoredTemplateExcel'
 };
 const ExcelReaderColumn = {
-  SystemId: 'systemid',
-  ExternalId: 'externalid',
-  WinningThreshold: 'dailywinningthreshold'
+  SystemId: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('SystemId'),
+  ExternalId: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('ExternalId'),
+  WinningThreshold: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('DailyWinningThreshold')
 };
 const UpdateMonitoredPlayerCode = {
   Success: 0,

@@ -2969,6 +2969,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_helpers_excelHelper__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../lib/helpers/excelHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/vip-player-management/lib/helpers/excelHelper.js");
 /* harmony import */ var _lib_helpers_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../../lib/helpers/sweetAlertHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/helpers/sweetAlertHelper.js");
 /* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+/* harmony import */ var _lib_queryService__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../lib/queryService */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/vip-player-management/lib/queryService.js");
+
 
 
 
@@ -3107,6 +3109,13 @@ const FormAction = props => {
     });
   };
 
+  const _handleDownloadTemplateExcel = event => {
+    event.preventDefault();
+    _lib_queryService__WEBPACK_IMPORTED_MODULE_15__["default"].downloadVipPlayerListTemplateExcel({
+      uploadBy: uploadFileOption
+    });
+  };
+
   const _renderExtraInfoDropzoneUploadFile = () => {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_radio_RadioGroup__WEBPACK_IMPORTED_MODULE_4__["default"], {
       name: 'UploadByOptions',
@@ -3114,7 +3123,8 @@ const FormAction = props => {
       options: _lib_constants__WEBPACK_IMPORTED_MODULE_11__["UploadFileOptions"],
       onChange: setUploadFileOption
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-      href: `${_lib_constants__WEBPACK_IMPORTED_MODULE_10__["Url"].vipPlayerListTemplate}?uploadBy=${uploadFileOption}`
+      href: "#",
+      onClick: _handleDownloadTemplateExcel
     }, "*", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('ClickHere')), "\xA0", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('ToDowloadTemplate'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, `*${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('MaximumUploadFileSize')}: ${1} MB`)));
   };
 
@@ -3753,8 +3763,8 @@ const Url = {
   exportVipPlayerList: 'Api/PlayerSegmentation/ExportVipPlayerList'
 };
 const ExcelReaderColumn = {
-  SystemId: 'systemid',
-  ExternalId: 'externalid'
+  SystemId: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('SystemId'),
+  ExternalId: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('ExternalId')
 };
 
 /***/ }),
@@ -3775,7 +3785,7 @@ class ExcelHelper {
       return null;
     }
 
-    const columnName = header.find(_ => _ && _.replace(/\s/g, '').toLocaleLowerCase() === readerColumn);
+    const columnName = header.find(_ => _ && _ === readerColumn);
     return columnName;
   }
 
