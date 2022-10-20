@@ -7,6 +7,7 @@ using Fanex.Athena.Model.Auth.MetaModel;
 using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Service.Core.OAuth;
 using Fanex.Athena.Service.Core.Users.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -99,7 +100,7 @@ namespace Fanex.Athena.Service.Core.Users
                Language = Util.MapIetfLanguageCodes[oauthInfo.Language],
                DefaultReportUrl = oauthInfo.DefaultReportUrl,
                ApplicationMode = AppMode.Self,
-               DefaultBaseCurrency = oauthInfo.BaseCurrency,
+               DefaultBaseCurrency = GetDefaultBaseCurrency(oauthInfo),
                IsShowIp = oauthInfo.IsShowIP,
                AccessToken = oauthInfo.AccessToken,
                AccessTokenLifeTime = oauthInfo.AccessTokenLifeTime,
@@ -119,5 +120,14 @@ namespace Fanex.Athena.Service.Core.Users
                 OfferedOddsGroupsList = oauthInfo.OfferedOddsGroupList,
                 SiteDBServer = oauthInfo.SiteDBServer
             };
+
+        private static string GetDefaultBaseCurrency(IOAuthInfo oauthInfo)
+        {
+            var appSettings = new AppSettings();
+            return appSettings.OfferCryptoCurrencyLicensees.Split(',')
+                .Contains(oauthInfo.SiteName, StringComparer.InvariantCultureIgnoreCase)
+                ? "USDT"
+                : oauthInfo.BaseCurrency;
+        }
     }
 }

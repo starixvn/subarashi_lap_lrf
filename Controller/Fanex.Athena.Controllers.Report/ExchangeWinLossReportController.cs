@@ -41,12 +41,14 @@
         {
             var licensee = SessionServiceInstance.LicenseeSession;
             var userSession = SessionServiceInstance.UserSession;
+            bool isOfferCryptoCurrencyLicensee = AppSettingInstance.OfferCryptoCurrencyLicensees.Split(',').Contains(licensee.LicenseeName, StringComparer.InvariantCultureIgnoreCase);
+            var offerCurrencyIds = isOfferCryptoCurrencyLicensee ? SystemConstants.BaseCryptoCurrencyListIds : SystemConstants.BaseCurrencyListIds;
             var currencyList = new Dictionary<int, string>
             {
                 { BaseCurrencyType.All, ViewResources.All },
             };
 
-            foreach (var item in SystemConstants.BaseCurrencyList)
+            foreach (var item in SystemConstants.BaseCurrencyList.Where(_ => offerCurrencyIds.Contains(_.Key)))
             {
                 currencyList.Add(item.Key, $"{ViewResources.Based} {item.Value}");
             }

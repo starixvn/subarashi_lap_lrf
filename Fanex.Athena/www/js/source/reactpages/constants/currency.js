@@ -8,5 +8,6 @@
     { value: -7, text: 'IDR' },
     { value: -8, text: 'INH' },
     { value: -9, text: 'BDT' },
-    { value: -10, text: 'INR'}
+    { value: -10, text: 'INR'},
+    { value: -99, text: 'USDT'}
 ]

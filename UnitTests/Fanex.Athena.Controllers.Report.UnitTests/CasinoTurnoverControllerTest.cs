@@ -56,7 +56,6 @@
                     Assert.That(model.FromDate, Is.EqualTo(DateTime.Today));
                     Assert.That(model.ToDate, Is.EqualTo(DateTime.Today));
                     Assert.That(model.CurrencyList, Is.EqualTo(DefaultUserSession.CurrencyList));
-                    Assert.That(model.BaseCurrencies, Is.EqualTo(SystemConstants.BaseCurrencyList.Select(i => i.Value)));
                     Assert.That(model.ProductOptions.Count, Is.EqualTo(productList.Count));
                     Assert.That(model.ProductOptions.First().Code, Is.EqualTo(productList.First().ProductCode));
                     Assert.That(model.ProductOptions.First().Name, Is.EqualTo(productList.First().ProductName));

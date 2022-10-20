@@ -3,11 +3,19 @@
     " - " + ViewResources.CasinoTurnover;
     Layout = "~/Views/Desktop/Shared/_ReactPageLayout.cshtml";
 }
+@using Fanex.Athena.Model.Core.DataDomain
+@using Fanex.Athena.Service.Core.Users.Interfaces
 @model Fanex.Athena.Model.Report.ViewModel.CasinoTurnoverViewModel
 @{
-    var selectedProductCode = string.Join(",", Model.ProductOptions.Where(x => x.Status).Select(x => x.Code));
+    var appSettings = DependencyResolver.Current.GetService<IAppSettings>();
+    var session = DependencyResolver.Current.GetService<ISessionService>();
+    bool isOfferCryptoCurrencyLicensee = appSettings.OfferCryptoCurrencyLicensees.Split(',').Contains(session.LicenseeSession.LicenseeName, StringComparer.InvariantCultureIgnoreCase);
 
-    var baseCurrencyList = Model.BaseCurrencies.Select(c => new { value = c, label = c }).ToList();
+    var selectedProductCode = string.Join(",", Model.ProductOptions.Where(x => x.Status).Select(x => x.Code));
+    var offerCurrencyIds = isOfferCryptoCurrencyLicensee ? SystemConstants.BaseCryptoCurrencyListIds : SystemConstants.BaseCurrencyListIds;
+    var baseCurrencyList = SystemConstants.BaseCurrencyList
+        .Where(_ => offerCurrencyIds.Contains(_.Key))
+        .Select(c => new { value = c.Value, label = c.Value }).ToList();
 
     var currencyList = Model.CurrencyList.Select(x => new { value = x.Key, label = x.Value }).ToList();
     currencyList.Insert(0, new
@@ -50,5 +58,4 @@
     };
 }
 <div id="app-container">
-
 </div>

@@ -4,12 +4,19 @@
     Layout = "~/Views/Desktop/Shared/_ReactPageLayout.cshtml";
 }
 @using Fanex.Athena.Model.Core.DataDomain;
+@using Fanex.Athena.Service.Core.Users.Interfaces
 @model Fanex.Athena.Model.Report.ViewModel.LicenseeWinLossByTimeZoneViewModel
 @{
+    var appSettings = DependencyResolver.Current.GetService<IAppSettings>();
+    var session = DependencyResolver.Current.GetService<ISessionService>();
+    bool isOfferCryptoCurrencyLicensee = appSettings.OfferCryptoCurrencyLicensees.Split(',').Contains(session.LicenseeSession.LicenseeName, StringComparer.InvariantCultureIgnoreCase);
+
     var productOptions = Model.ProductOptionList;
     var selectedProductCode = string.Join(",", productOptions.Where(x => x.Status).Select(x => x.Code).ToArray());
-    var baseCurrencyList = SystemConstants.BaseCurrencyList.Select(c => new { value = c.Value,
-        label = c.Value }).ToList();
+    var offerCurrencyIds = isOfferCryptoCurrencyLicensee ? SystemConstants.BaseCryptoCurrencyListIds : SystemConstants.BaseCurrencyListIds;
+    var baseCurrencyList = SystemConstants.BaseCurrencyList
+        .Where(_ => offerCurrencyIds.Contains(_.Key))
+        .Select(c => new { value = c.Value, label = c.Value }).ToList();
 
     var timeZoneList = new List<dynamic> {
         new { value = -4, label = "GMT-4" },
@@ -19,7 +26,8 @@
     var currencyList = Model.CurrencyList.Select(x => new { value = x.Key, label = x.Value }).ToList();
     currencyList.Insert(0, new
     {
-        value = 0, label = ViewResources.All
+        value = 0,
+        label = ViewResources.All
     });
     var reportByList = new List<dynamic> {
         new { value = 1, label = ViewResources.Summary },
@@ -27,14 +35,13 @@
         new { value = 3, label = ViewResources.Monthly }
     };
 
-    var appSettings = new AppSettings();
     var minDate = appSettings.HistoryDate;
     var maxDate = appSettings.MaxDate;
 }
 
 @section pagecss {
 
-<link href="@Url.ContentLinkByEnv("/www/css/build/reactpages/licenseewlbytimezone/index.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.ContentLinkByEnv("/www/css/build/reactpages/licenseewlbytimezone/index.css")" rel="stylesheet" type="text/css" />
 
 }
 @section pagejs {
@@ -43,27 +50,26 @@
 
 @section globaljscode{
     window.initialState = {
-        selectedProduct: '@(selectedProductCode)',
-        selectedCurrency: @Html.Raw(currencyList.First().ToJson()),
-        selectedBaseCurrency: '@(ViewBag.DefaultSelectedBaseCurrency)',
-        timeZoneList: @Html.Raw(timeZoneList.ToJson()),
-        selectedTimeZone: 8,
-        reportByList: @Html.Raw(reportByList.ToJson()),
-        selectedReportBy: @(reportByList.First().value),
-        groupBy: 1,
-        isConvertAll: true,
-        isIncludeDrawData: true,
-        isExcludeTest: true,
-        dateRange: {fromDate: '@Model.FromDate.ToString("MM/dd/yyyy")', toDate: '@Model.ToDate.ToString("MM/dd/yyyy")'},
-        isLoading: false,
-        dateConstraint: {minDate: '@minDate.ToString("MM/dd/yyyy")', maxDate: '@maxDate.ToString("MM/dd/yyyy")'}
+    selectedProduct: '@(selectedProductCode)',
+    selectedCurrency: @Html.Raw(currencyList.First().ToJson()),
+    selectedBaseCurrency: '@(ViewBag.DefaultSelectedBaseCurrency)',
+    timeZoneList: @Html.Raw(timeZoneList.ToJson()),
+    selectedTimeZone: 8,
+    reportByList: @Html.Raw(reportByList.ToJson()),
+    selectedReportBy: @(reportByList.First().value),
+    groupBy: 1,
+    isConvertAll: true,
+    isIncludeDrawData: true,
+    isExcludeTest: true,
+    dateRange: {fromDate: '@Model.FromDate.ToString("MM/dd/yyyy")', toDate: '@Model.ToDate.ToString("MM/dd/yyyy")'},
+    isLoading: false,
+    dateConstraint: {minDate: '@minDate.ToString("MM/dd/yyyy")', maxDate: '@maxDate.ToString("MM/dd/yyyy")'}
     }
     window._AppData = {
-        productOptions: @Html.Raw(productOptions.ToJson()),
-        currencyList: @Html.Raw(currencyList.ToJson()),
-        baseCurrencyList: @Html.Raw(baseCurrencyList.ToJson())
+    productOptions: @Html.Raw(productOptions.ToJson()),
+    currencyList: @Html.Raw(currencyList.ToJson()),
+    baseCurrencyList: @Html.Raw(baseCurrencyList.ToJson())
     };
 }
 <div id="app-container">
-
 </div>

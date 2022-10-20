@@ -4,8 +4,9 @@ define(
     function ($, Site, LastBetGrid) {
         const _me = {};
 
+        let defaultBasedCurrency ="";
         let _highLightSubmitIntervalId = 0;
-
+         
         let _currentMatchList = [];
         let _currentLeagueList = [];
         let _currentSportList = [];
@@ -319,7 +320,7 @@ define(
 
                     if (selectedCurrencyText.length > 1) {
                         noConvertOption.remove();
-                        baseCurrencyObj.val('eur');
+                        baseCurrencyObj.val(defaultBasedCurrency);
                     }
                     else if (selectedCurrencyText.length === 1) {
                         const currencyName = selectedCurrencyText[0];
@@ -349,6 +350,7 @@ define(
         };
 
         _me.initBasedCurrency = function () {
+            defaultBasedCurrency = $('#BaseCurrency').val();
             $('#BaseCurrency').change(function () {
                 _me.changeFilterParam(DataType.STRING, 'BasedCurrency', $(this).val());
             });
