@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 10/14/2022 4:55:47 PM
+﻿// Generated at: 10/19/2022 10:25:52 AM
 window._language_zh_Hans = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -262,6 +262,7 @@ DA:"和客",
 Daily:"每日",
 DailyStatement:"每日账目",
 DailyStatementMsg:"Support data up to 4 months only",
+DailyWinningThreshold:"每日赢额警示值",
 Date:"日期",
 DateRange:"日期范围",
 DateRangeNote:"数据可从{0:d MMM yyyy}查看",
@@ -276,6 +277,7 @@ DelayedPayout:"延迟结算",
 Delete:"删除",
 DeleteCommissionGroup:"删除佣金群组",
 DeleteGroup:"删除组",
+DeleteManyMonitoredPlayerConfirm:"所选的玩家将被移出警示值监控，您确定要移出吗？",
 Deposit:"存款",
 DetailedBetlist:"投注历史明细",
 Details:"细节",

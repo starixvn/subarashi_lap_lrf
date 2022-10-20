@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 10/14/2022 4:55:47 PM
+﻿// Generated at: 10/19/2022 10:25:52 AM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -345,6 +345,7 @@ DelayedPayout:"Delayed Payout",
 Delete:"Delete",
 DeleteCommissionGroup:"Delete Commission group",
 DeleteGroup:"Delete Group",
+DeleteManyMonitoredPlayerConfirm:"The selected player(s) will be removed from the monitored player list. Are you sure you want to remove?",
 DeleteMonitoredPlayerConfirm:"{0} will be removed from the monitored player list. Are you sure you want to remove?",
 DeleteSuccess:"Delete successfully!",
 Department:"Department",

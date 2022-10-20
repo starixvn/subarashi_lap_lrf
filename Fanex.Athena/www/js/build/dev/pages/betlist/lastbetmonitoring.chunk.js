@@ -5102,8 +5102,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js"), __webpack_require__(/*! ./lastbet.grid */ "./www/js/source/pages/betlist/lastbetmonitoring/lastbet.grid.js"), __webpack_require__(/*! lib/jquery.multiselect */ "./www/js/source/lib/jquery.multiselect.js"), __webpack_require__(/*! extensions/jquery.extension */ "./www/js/source/extensions/jquery.extension.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, Site, LastBetGrid) {
         const _me = {};
 
+        let defaultBasedCurrency ="";
         let _highLightSubmitIntervalId = 0;
-
+         
         let _currentMatchList = [];
         let _currentLeagueList = [];
         let _currentSportList = [];
@@ -5417,7 +5418,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 
                     if (selectedCurrencyText.length > 1) {
                         noConvertOption.remove();
-                        baseCurrencyObj.val('eur');
+                        baseCurrencyObj.val(defaultBasedCurrency);
                     }
                     else if (selectedCurrencyText.length === 1) {
                         const currencyName = selectedCurrencyText[0];
@@ -5447,6 +5448,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
         };
 
         _me.initBasedCurrency = function () {
+            defaultBasedCurrency = $('#BaseCurrency').val();
             $('#BaseCurrency').change(function () {
                 _me.changeFilterParam(DataType.STRING, 'BasedCurrency', $(this).val());
             });
