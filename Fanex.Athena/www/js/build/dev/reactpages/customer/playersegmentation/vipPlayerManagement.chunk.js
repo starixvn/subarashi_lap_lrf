@@ -3091,7 +3091,7 @@ const FormAction = props => {
         }
 
         const byExternalId = uploadFileOption == _lib_constants__WEBPACK_IMPORTED_MODULE_11__["UploadFileOptionValue"].byExternalId;
-        const selectedColumn = _lib_helpers_excelHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getColumnName(header, byExternalId ? _lib_constants__WEBPACK_IMPORTED_MODULE_10__["ExcelReaderColumn"].ExternalId : _lib_constants__WEBPACK_IMPORTED_MODULE_10__["ExcelReaderColumn"].SystemId);
+        const selectedColumn = header[0];
 
         if (!selectedColumn) {
           alert(Object(_jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_6__["decode"])(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("UploadFileError")));

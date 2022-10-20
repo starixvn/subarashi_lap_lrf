@@ -4762,8 +4762,8 @@ const FormAction = props => {
         }
 
         const byExternalId = uploadFileOption == _lib_constants__WEBPACK_IMPORTED_MODULE_10__["UploadFileOptionValue"].byExternalId;
-        const uploadByColumn = ExcelHelper.getColumnName(header, byExternalId ? _lib_constants__WEBPACK_IMPORTED_MODULE_9__["ExcelReaderColumn"].ExternalId : _lib_constants__WEBPACK_IMPORTED_MODULE_9__["ExcelReaderColumn"].SystemId);
-        const winningThresholdColumn = ExcelHelper.getColumnName(header, _lib_constants__WEBPACK_IMPORTED_MODULE_9__["ExcelReaderColumn"].WinningThreshold);
+        const uploadByColumn = header[0];
+        const winningThresholdColumn = header[1];
 
         if (!uploadByColumn || !winningThresholdColumn) {
           alert(Object(_jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_6__["decode"])(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("UploadFileError")));
