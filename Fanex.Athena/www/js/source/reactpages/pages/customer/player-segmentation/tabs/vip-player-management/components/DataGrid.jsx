@@ -14,7 +14,7 @@ const MAX_WIDTH_PAGE = 1920;
 
 export const DataGrid = (props) => {
     const MAX_WIDTH = Math.min(document.body.clientWidth, MAX_WIDTH_PAGE);
-    const { isCheckAll, playerList, pagingOption, selectedParams, selectedTabKey, setPlayerList, setPagingOption, searchPlayer } = props;
+    const { isCheckAll, playerList, pagingOption, selectedParams, selectedTabKey, isLoading, setPlayerList, setPagingOption, searchPlayer } = props;
     const hasVipManagementEdit =  AppData.HasVipManagementEdit;
 
     if (playerList == null) {
@@ -76,7 +76,7 @@ export const DataGrid = (props) => {
                 header={GridHelper.renderHeader(_dataGridHeaders)}
                 body={_renderDataSection(playerList)}
                 containerPadding={30}
-                shouldResetScrollPosition={true}
+                shouldResetScrollPosition={isLoading}
                 onSort={_handleSort} />
         </React.Fragment>
     );
@@ -88,9 +88,9 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-    const { playerList, selectedParams, selectedTabKey, pagingOption } = state;
+    const { playerList, selectedParams, selectedTabKey, pagingOption, isLoading } = state;
     const isCheckAll = playerList && !playerList.some(_ => !(_.isSelected || _.isBA));
-    return Object.assign({}, { playerList, isCheckAll, pagingOption, selectedParams, selectedTabKey });
+    return Object.assign({}, { playerList, isCheckAll, pagingOption, selectedParams, selectedTabKey, isLoading });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(React.memo(DataGrid));

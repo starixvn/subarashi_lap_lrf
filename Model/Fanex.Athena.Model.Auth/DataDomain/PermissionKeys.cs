@@ -83,6 +83,8 @@
         public const string PlayerProblemManagement = "PlayerSegmentation_ProblemManagement";
         public const string PlayerVIPManagement = "PlayerSegmentation_VIPManagement";
         public const string PlayerVIPManagement_Write = "PlayerSegmentation_VIPManagement_Write";
+        public const string MonitoredPlayer = "PlayerSegmentation_MonitoredPlayer";
+        public const string MonitoredPlayer_Write = "PlayerSegmentation_MonitoredPlayer_Write";
 
         /* Account. */
 

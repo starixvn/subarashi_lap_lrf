@@ -3,10 +3,12 @@
     using System;
     using System.Collections.Concurrent;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using System.Web.SessionState;
+    using Fanex.Athena.Excel.Customer.PlayerSegmentation;
     using Fanex.Athena.Extension.Utility.Internal;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
@@ -23,15 +25,12 @@
     [FunctionAuthorization(PermissionKeys.PlayerSegmentation)]
     public partial class PlayerSegmentationController : CultureBaseController
     {
-        const byte UploadByExternalId = 1;
-
-        private const string VipPlayerUploadByExternalIdTemplate = "~/App_Data/Template/Customers/PlayerSegmentation/VipPlayerUploadByExternalIdTemplate.xls";
-        private const string VipPlayerUploadBySystemIdTemplate = "~/App_Data/Template/Customers/PlayerSegmentation/VipPlayerUploadBySystemIdTemplate.xls";
 
         private static readonly IDictionary<string, string> TabKeys = new Dictionary<string, string>
         {
             { PermissionKeys.PlayerProblemManagement, "ProblemPlayer" },
-            { PermissionKeys.PlayerVIPManagement, "VipPlayerManagement" }
+            { PermissionKeys.PlayerVIPManagement, "VipPlayerManagement" },
+            { PermissionKeys.MonitoredPlayer, "MonitoredPlayer" }
         };
 
         private static readonly ConcurrentDictionary<string, AsyncLazy<IEnumerable<ReasonGroup>>> ReasonListFromCache = new ConcurrentDictionary
@@ -54,19 +53,11 @@
             _customerClassService = customerClassService;
         }
 
-        [FunctionAuthorization(PermissionKeys.PlayerProblemManagement, PermissionKeys.PlayerVIPManagement)]
+        [FunctionAuthorization(PermissionKeys.PlayerProblemManagement, PermissionKeys.PlayerVIPManagement, PermissionKeys.MonitoredPlayer)]
         public async Task<ViewResult> Index()
         {
             var model = await BuildViewModel();
             return View("~/Views/Desktop/Customer/PlayerSegmentation/Main.cshtml", model);
-        }
-
-        [HttpGet]
-        [FunctionAuthorization(PermissionKeys.PlayerVIPManagement)]
-        public FileResult DowloadVipListTemplate(byte uploadBy = UploadByExternalId)
-        {
-            var templatePath = Server.MapPath(uploadBy == UploadByExternalId ? VipPlayerUploadByExternalIdTemplate : VipPlayerUploadBySystemIdTemplate);
-            return File(templatePath, "application/vnd.ms-excel", "VipPlayerList.xls");
         }
 
         private async Task<PlayerSegmentationViewModel> BuildViewModel()
@@ -79,6 +70,7 @@
 
             var hasVIPManangementPermission = HasVIPManagementPermission();
             var hasVIPManangementEditPermission = HasVIPManagementEditPermission();
+            var hasMonitoredPlayerPermission = _authService.HasPermissions(SessionServiceInstance.UserSession, PermissionKeys.MonitoredPlayer);
             var subsidiaryList = _subsidiaryService.GetSubsidiaryTree(userSession, licenseeSession.LicenseeName);
             var viewType = !subsidiaryList.Any() ? SubsidiaryViewType.NotManagement : (SubsidiaryViewType)userSession.SubsidiaryViewType;
             var reasonList = await GetReasonList(lang);
@@ -101,6 +93,11 @@
                     CurrencyList = currencyList,
                     VipOptions = GetVipOptions(),
                     CustomerClass = vipMngCustomerClass
+                } : null,
+                MonitoredPlayerVM = hasMonitoredPlayerPermission ? new MonitoredPlayerViewModel
+                {
+                    CanEdit = _authService.HasPermissions(SessionServiceInstance.UserSession, PermissionKeys.MonitoredPlayer_Write),
+                    CurrencyList = currencyList
                 } : null,
                 ViewType = viewType,
                 SubsidiaryList = subsidiaryList

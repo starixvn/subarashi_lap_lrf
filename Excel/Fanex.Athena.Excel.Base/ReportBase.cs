@@ -20,8 +20,6 @@ namespace Fanex.Athena.Excel.Base
         public const int RowTitleTemplate = 0;
         public const int MaxRowCount = 30000;
 
-        public const string TemplateSheetName = "Template";
-
         public const string FormatDate = "MM/dd/yyyy";
 
         protected const int ColumnIndex = 0;
@@ -31,6 +29,9 @@ namespace Fanex.Athena.Excel.Base
         private readonly int _totalRows;
 
         private int _pageSize;
+
+        protected virtual string TemplateSheetName => "Template";
+        protected virtual string CloneSheetName => "Data";
 
         protected ReportBase(string templatePath, int totalRows, int pageSize = 0)
             : this(templatePath, totalRows, null, pageSize)
@@ -126,7 +127,7 @@ namespace Fanex.Athena.Excel.Base
 
         protected internal virtual void AssignData()
         {
-            var sheet = Workbook.CloneSheet(TemplateSheetName, "Data");
+            var sheet = Workbook.CloneSheet(TemplateSheetName, CloneSheetName);
 
             AssignHeader(sheet);
             AssignTitle(sheet);

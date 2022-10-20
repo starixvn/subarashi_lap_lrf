@@ -13,6 +13,7 @@ import { UploadFileOptions, UploadFileOptionValue } from '../../../lib/constants
 import ExcelHelper from '../lib/helpers/excelHelper';
 import { UpdateVipStatusAlertOption } from '../../../lib/helpers/sweetAlertHelper';
 import AppData from '@jsroot/lib/AppData';
+import VipPlayerQueryService from "../lib/queryService";
 
 export const FormAction = props => {
     const { isActiveTaggingAction, playerList, updateVipStatus, setSweetAlertOption, selectedParams } = props;
@@ -29,6 +30,7 @@ export const FormAction = props => {
     }
 
     const _cancelProps = {
+
         onClick: _handleCloseAlert
     }
 
@@ -90,7 +92,7 @@ export const FormAction = props => {
                     return;
                 }
                 const byExternalId = uploadFileOption == UploadFileOptionValue.byExternalId;
-                const selectedColumn = ExcelHelper.getColumnName(header, byExternalId ? ExcelReaderColumn.ExternalId : ExcelReaderColumn.SystemId);
+                const selectedColumn = header[0];
                 if (!selectedColumn) {
                     alert(decode(LangHelper.getSingleResource("UploadFileError")))
                     return;
@@ -107,6 +109,11 @@ export const FormAction = props => {
         })
     }
 
+    const _handleDownloadTemplateExcel = (event) =>{
+        event.preventDefault();
+        VipPlayerQueryService.downloadVipPlayerListTemplateExcel({uploadBy: uploadFileOption});
+    }
+
     const _renderExtraInfoDropzoneUploadFile = () => {
         return (<>
             <RadioGroup
@@ -116,7 +123,7 @@ export const FormAction = props => {
                 onChange={setUploadFileOption}
             />
             <div>
-                <a href={`${Url.vipPlayerListTemplate}?uploadBy=${uploadFileOption}`}>*{LangHelper.getSingleResource('ClickHere')}</a>&nbsp;
+                <a href='#' onClick={_handleDownloadTemplateExcel}>*{LangHelper.getSingleResource('ClickHere')}</a>&nbsp;
                 <span>{LangHelper.getSingleResource('ToDowloadTemplate')}</span>
             </div>
             <div>
@@ -162,6 +169,6 @@ function mapStateToProps(state) {
     const { playerList, selectedParams, selectedTabKey, pagingOption } = state;
     const isActiveTaggingAction = playerList && playerList.length && playerList.some(_ => _.isSelected);
     return Object.assign({}, { isActiveTaggingAction, playerList, selectedParams, selectedTabKey, pagingOption });
-};
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(React.memo(FormAction));

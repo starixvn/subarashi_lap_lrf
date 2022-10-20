@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 9/12/2022 2:56:30 PM
+// Generated at: 10/19/2022 10:25:52 AM
 window._language_zh_Hans = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -232,6 +232,7 @@ window._language_zh_Hans = {
   CreditDebit: "贷记/借记",
   CS: "娱乐城",
   CSComm: "娱乐城佣金",
+  Currencies: "货币",
   Currency: "货币",
   Currentmonth: "本月",
   Currentweek: "本周",
@@ -261,6 +262,7 @@ window._language_zh_Hans = {
   Daily: "每日",
   DailyStatement: "每日账目",
   DailyStatementMsg: "Support data up to 4 months only",
+  DailyWinningThreshold: "每日赢额警示值",
   Date: "日期",
   DateRange: "日期范围",
   DateRangeNote: "数据可从{0:d MMM yyyy}查看",
@@ -275,6 +277,7 @@ window._language_zh_Hans = {
   Delete: "删除",
   DeleteCommissionGroup: "删除佣金群组",
   DeleteGroup: "删除组",
+  DeleteManyMonitoredPlayerConfirm: "所选的玩家将被移出警示值监控，您确定要移出吗？",
   Deposit: "存款",
   DetailedBetlist: "投注历史明细",
   Details: "细节",
@@ -480,6 +483,8 @@ window._language_zh_Hans = {
   Monday: "星期一",
   MoneyLine: "胜负盘",
   MoneyPlay: "普通投注",
+  MonitoredPlayer: "警示值监控设定",
+  MonitoredPlayerList: "观察中玩家名单",
   Month: "月份",
   Monthly: "每月",
   MoveCommissionGroup: "移动佣金组别",
@@ -590,11 +595,13 @@ window._language_zh_Hans = {
   PromotionPrize: "活动奖金",
   PromotionType: "基础货币",
   RB: "赛马",
+  ReachedDate: "到达警示值日期",
   RecommendBrowserOnReportPageMsg: "若页面大小 &gt; 1,000, 请您考虑使用火狐或Chrome以获得更好的体验",
   RefNo: "注单号码",
   Refund: "退款",
   Reject: "已取消",
   Remark: "备註",
+  Remove: "移除",
   RemoveFromGroup: "从该组中删除",
   RemoveGroupMsg: "您确定要从组中移除此(这些)会员?",
   RemoveTheseCustomersFromGroupMsg: "您确定要从组中移除这些会员?",

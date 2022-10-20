@@ -9,10 +9,10 @@
 @import "../../../components/paging";
 @import "../../../components/switch";
 @import "../../../components/alert/index";
+@import "../../../components/forms/radio-buttons";
 
 @import "./components/yesNoSwitch";
 @import "./components//dropzone";
-@import "./vip-player-management";
 @import "./betlist";
 
 #player-segmentation {
@@ -31,15 +31,16 @@
         }
     }
 
-    
+
     .msg-result {
         word-break: break-word;
-        
+
         .icon {
-            margin-right: 5px;;
+            margin-right: 5px;
+            ;
         }
 
-        
+
         .icon-tick {
             color: $green-color;
         }
@@ -62,11 +63,12 @@
             border-bottom: 1px solid #C4C4C4 !important;
             background-color: $white;
         }
-        
+
         li {
             display: inline-block;
             font-weight: bold;
             cursor: pointer;
+
             a {
                 display: block;
                 color: $text-default-color;
@@ -78,6 +80,7 @@
                 text-transform: uppercase;
             }
         }
+
         .active {
             border-bottom: 2px solid $orange-color;
         }
@@ -89,11 +92,122 @@
             background: $colorDisabled;
         }
     }
+
+    .vip-player-management,
+    .monitored-player {
+        .form-action {
+            margin: 15px 0px;
+
+            .action {
+                display: inline;
+                margin-right: 20px;
+            }
+
+            .btn {
+                background-color: $bgHeaderTableLevel1;
+                color: $white;
+                padding: 0 30px;
+            }
+        }
+
+        .dropzone {
+            .radio-group {
+                position: absolute;
+                top: 0;
+
+                span {
+                    display: block;
+                }
+            }
+        }
+    }
+
+    .monitored-player {
+        .form-add {
+            padding: 15px;
+            overflow: auto;
+
+            .row {
+                margin-bottom: 15px;
+            }
+
+            .button-group {
+                margin-top: 10px;
+                float: right;
+
+                .btn {
+                    margin-left: 20px;
+                }
+            }
+        }
+
+
+        .form-reached-history {
+            padding: 15px;
+
+            .caption {
+                position: relative;
+                font-weight: bold;
+                font-size: 15px;
+                min-height: 30px;
+                color: $orange-color;
+
+                .caret-block {
+                    bottom: 5px;
+                    right: 0;
+                }
+            }
+        }
+
+
+    }
+
+    .required {
+        top: 0;
+        color: $red;
+        margin-left: 2px;
+    }
+
+    .threshold-cell {
+
+        .threshold-cell-action {
+            float: right;
+            margin-left: 5px;
+        }
+
+        input {
+            float: right;
+            border-bottom: none;
+            width: 55%;
+        }
+    }
+}
+
+.action-cell {
+    .material-icons {
+        font-size: 19px;
+    }
+
+    .delete-icon,
+    .close-icon {
+        color: $red
+    }
+
+    .check-icon {
+        color: $green-color;
+    }
+
 }
 
 .caret-block div {
     display: inherit;
 }
+
 .page-filter {
     padding-bottom: 30px;
+}
+.button-group{
+    button{
+        margin-right: 20px
+    }
 }

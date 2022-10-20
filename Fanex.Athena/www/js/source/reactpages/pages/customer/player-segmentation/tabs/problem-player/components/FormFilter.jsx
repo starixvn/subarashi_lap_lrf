@@ -9,7 +9,6 @@ import CheckBox from '@jsroot/components/CheckBox'
 import { DateRange } from '@jsroot/components/date-range'
 import LangHelper from '@jsroot/lib/langHelper'
 import StringHelper from '@jsroot/lib/stringHelper'
-import { decode } from '@jsroot/lib/htmlHelper'
 import Site from '@jsroot/lib/site';
 import AppData from '@jsroot/lib/AppData'
 import DataService from '@jsroot/lib/DataService.js'

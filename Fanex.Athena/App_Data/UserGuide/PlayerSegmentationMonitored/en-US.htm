@@ -1,0 +1,38 @@
+﻿<div class="rule">
+    <h4>
+        General Info
+    </h4>
+    <ul>
+        <li>This function supports Sportsbook data only.</li>
+        <li>
+            Accumulated Player Win Loss is only counted when a winning threshold is set. It will be reset daily or when player is removed out of the monitored player list.
+        </li>
+        <li>Accumulated Player Win Loss will be counted right after the ticket is settled. Once a ticket is already settled and accumulated, moving a yesterday un-settled event to the next day won’t change the accumulation.</li>
+    </ul>
+</div>
+<div class="line"></div>
+<div class="rule">
+    <h4>
+        Report Guidelines
+    </h4>
+    <ul>
+        <li><b>External ID:</b> The username registered by ticket owner.</li>
+        <li><b>System ID:</b> The Numeric sequential ID generated from system for each player.</li>
+        <li><b>Currency:</b> Player's original currency.</li>
+        <li><b>Current Winning Threshold:</b> Winning threshold of player, the threshold is based on player's original currency. User can edit the threshold by clicking on Edit icon.</li>
+        <li><b>No. of Reached:</b> Number of times that player's accumulated win loss reaches the winning threshold within Reached Threshold from date and to date, clicking on the number of times will display notification history. The count time and notification history only support data within 3 previous months.</li>
+        <li><b>Last Reached Threshold Date (GMT -4).</b> The last time date when player's accumulated win loss reaches the winning threshold within Reached Threshold from date and to date.</li>
+        <li><b>Problem Player:</b> Player's problem player status.</li>
+        <li><b>VIP Player:</b> Player's VIP status.</li>
+        <li><b>Action:</b> Support to remove a player out of the list.</li>
+        <li>
+            <b>Notification History:</b> Display notification history based on the Reached Threshold from date and to date. If there is no Reached Threshold Date selected, display all notifications that player reached within 3 previous months.
+            <ul>
+                <li><b>Date:</b> The datetime when player's accumulated win loss reached the winning threshold.</li>
+                <li><b>Daily Winning Threshold:</b> The winning threshold at the time when player's accumulated win loss reached.</li>
+                <li><b>Total Winning Amount:</b> The player's accumulated win loss when it reached the winning threshold.</li>
+            </ul>
+        </li>
+    </ul>
+</div>
+

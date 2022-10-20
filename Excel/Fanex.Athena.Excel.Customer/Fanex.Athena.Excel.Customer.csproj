@@ -117,6 +117,9 @@
     <Compile Include="CustomerListExcel.cs" />
     <Compile Include="PlayerSegmentation\DataParsers.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="PlayerSegmentation\MonitoredPlayerReachedHistoryExcel.cs" />
+    <Compile Include="PlayerSegmentation\MonitoredPlayerExcel.cs" />
+    <Compile Include="PlayerSegmentation\SampleExcel.cs" />
     <Compile Include="PlayerSegmentation\VipPlayerExcel.cs" />
     <Compile Include="PlayerSegmentation\PlayerExcel.cs" />
     <Compile Include="PlayerSegmentation\ProblemPlayerExcel.cs" />

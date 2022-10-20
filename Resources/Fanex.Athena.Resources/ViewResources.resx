@@ -3287,6 +3287,90 @@
   <data name="AllCustomerClassCategory" xml:space="preserve">
     <value>All Customer Class Category</value>
   </data>
+  <data name="CurrentWinningThreshold" xml:space="preserve">
+    <value>Current Winning Threshold</value>
+  </data>
+  <data name="LastReachedDate" xml:space="preserve">
+    <value>Last Reached Threshold Date (GMT -4)</value>
+  </data>
+  <data name="MonitoredPlayerList" xml:space="preserve">
+    <value>Monitored Player List</value>
+  </data>
+  <data name="NoOfReached" xml:space="preserve">
+    <value>No. of Reached</value>
+  </data>
+  <data name="VIPPlayer" xml:space="preserve">
+    <value>VIP Player</value>
+  </data>
+  <data name="AddNew" xml:space="preserve">
+    <value>Add New</value>
+  </data>
+  <data name="DailyWinningThreshold" xml:space="preserve">
+    <value>Daily Winning Threshold</value>
+  </data>
+  <data name="DeleteMonitoredPlayerConfirm" xml:space="preserve">
+    <value>{0} will be removed from the monitored player list. Are you sure you want to remove?</value>
+  </data>
+  <data name="EitherSystemIdOrExternalIdIsRequired" xml:space="preserve">
+    <value>Either System ID or External ID is required</value>
+  </data>
+  <data name="ExistingInMonitoredPlayerList" xml:space="preserve">
+    <value>This player is existing in the list. Please check again!</value>
+  </data>
+  <data name="InsertMonitoredPlayerConfirm" xml:space="preserve">
+    <value>{0} will be added into the list of monitored players with the Daily Winning Threshold = {1}. Are you sure you want to add?</value>
+  </data>
+  <data name="InvalidExternalId" xml:space="preserve">
+    <value>Invalid External ID</value>
+  </data>
+  <data name="InvalidExternalIdBatchCommand" xml:space="preserve">
+    <value>Invalid External ID(s): {0} ({1})</value>
+  </data>
+  <data name="InvalidSystemId" xml:space="preserve">
+    <value>Invalid System ID</value>
+  </data>
+  <data name="InvalidSystemIdBatchCommand" xml:space="preserve">
+    <value>Invalid System ID(s): {0} ({1})</value>
+  </data>
+  <data name="InvalidWinningThreshold" xml:space="preserve">
+    <value>Invalid Daily Winning Threshold</value>
+  </data>
+  <data name="InvalidWinningThresholdBatchCommand" xml:space="preserve">
+    <value>Invalid Daily Winning Threshold(s): {0} ({1})</value>
+  </data>
+  <data name="MaxBatchUpdateMonitoredPlayerError" xml:space="preserve">
+    <value>Only allow to upload maximum of 2000 data rows, please check your file again!</value>
+  </data>
+  <data name="MonitoredPlayerNotificationHistoryTitle" xml:space="preserve">
+    <value>Notification History {0} -&gt; {1} - {2}</value>
+  </data>
+  <data name="NotExistingInMonitoredPlayerList" xml:space="preserve">
+    <value>Could not update because the player no longer exists on the monitored list.</value>
+  </data>
+  <data name="NotificationHistory" xml:space="preserve">
+    <value>Notification History</value>
+  </data>
+  <data name="ReachedDate" xml:space="preserve">
+    <value>Reached Threshold Date</value>
+  </data>
+  <data name="SuccessfullyUpdate" xml:space="preserve">
+    <value>Successfully update</value>
+  </data>
+  <data name="SuccessfullyUpdateBatchCommand" xml:space="preserve">
+    <value>Successfully update: {0}</value>
+  </data>
+  <data name="TotalWinningAmount" xml:space="preserve">
+    <value>Total Winning Amount</value>
+  </data>
+  <data name="UploadFile" xml:space="preserve">
+    <value>Upload File</value>
+  </data>
+  <data name="NotificationHistoryDataNote" xml:space="preserve">
+    <value>Data for notification history is available from {0}.</value>
+  </data>
+  <data name="ConfirmUpdateMonitoredPlayer" xml:space="preserve">
+    <value>Are you sure you want to update Daily Winning Threshold ({0}) = {1}?</value>
+  </data>
   <data name="NormalReport" xml:space="preserve">
     <value>Normal Report</value>
   </data>
@@ -3295,5 +3379,14 @@
   </data>
   <data name="RealTimeReport" xml:space="preserve">
     <value>Real Time Report</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="MonitoredPlayer" xml:space="preserve">
+    <value>Threshold Monitoring Setting</value>
+  </data>
+  <data name="DeleteManyMonitoredPlayerConfirm" xml:space="preserve">
+    <value>The selected player(s) will be removed from the monitored player list. Are you sure you want to remove?</value>
   </data>
 </root>

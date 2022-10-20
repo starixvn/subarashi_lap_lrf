@@ -11,8 +11,8 @@
         public bool HasVIPManagementEditPermission { get; set; }
         public ProblemPlayerViewModel ProblemPlayerVM { get; set; }
         public VipPlayerViewModel VipPlayerVM { get; set; }
+        public MonitoredPlayerViewModel MonitoredPlayerVM { get; set; }
         public SubsidiaryViewType ViewType { get; set; }
         public IEnumerable<CheckedItem> SubsidiaryList { get; set; }
-
     }
 }

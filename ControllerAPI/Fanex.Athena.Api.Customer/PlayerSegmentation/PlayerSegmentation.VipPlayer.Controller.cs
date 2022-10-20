@@ -2,13 +2,16 @@
 {
     using Fanex.Athena.Api.Base.Attributes;
     using Fanex.Athena.Excel.Customer;
+    using Fanex.Athena.Excel.Customer.PlayerSegmentation;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
     using Fanex.Athena.Model.Customer.MetaModel;
+    using Fanex.Athena.Resources;
     using System.Linq;
     using System.Net.Http;
     using System.Threading.Tasks;
+    using System.Web.Hosting;
     using System.Web.Http;
     using System.Web.Http.Results;
 
@@ -22,6 +25,24 @@
         {
             var result = await _playerService.GetVipPlayerListAsync(metaModel).ConfigureAwait(false);
             return JsonApi(result);
+        }
+
+        [HttpPost]
+        [ApiFunctionAuthorization(PermissionKeys.MonitoredPlayer_Write)]
+        public Task<HttpResponseMessage> ExportVipPlayerListTemplateExcel(byte uploadBy = UploadByExternalId)
+        {
+            const string fileName = "VipPlayerList.xls";
+
+            var templatePath = HostingEnvironment.MapPath(uploadBy == UploadByExternalId ? VipPlayerUploadByExternalIdTemplate : VipPlayerUploadBySystemIdTemplate);
+
+            var headers = uploadBy == UploadByExternalId
+                ? new[] { ViewResources.ExternalId }
+                : new[] { ViewResources.SystemId };
+
+            var excel = new SampleExcel(templatePath, headers);
+            excel.Export();
+            var result = ExcelStream(excel.Workbook, fileName);
+            return Task.FromResult(result);
         }
 
         [HttpPost]

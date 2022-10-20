@@ -34,6 +34,7 @@
         {
             { "PlayerSegmentationProblem".ToLowerInvariant(), true },
             { "PlayerSegmentationVIP".ToLowerInvariant(), true },
+            { "PlayerSegmentationMonitored".ToLowerInvariant(), true },
         };
 
         private readonly IProductService _productService;

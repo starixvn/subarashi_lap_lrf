@@ -9,7 +9,6 @@
     using System.Xml.Linq;
     using Base;
     using Base.Attributes;
-    using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;

@@ -8,6 +8,7 @@
     var hasVIPManagementPermission = Model.HasVIPManagementPermission;
     var problemPlayerVM = Model.ProblemPlayerVM;
     var vipPlayerManagementVM = Model.VipPlayerVM;
+    var monitoredPlayerVM = Model.MonitoredPlayerVM;
 
     string selectedSubsidiary = Model.ViewType == SubsidiaryViewType.MasterManagement ?
         string.Join(",", Model.SubsidiaryList.SelectMany(x => x.Children.Select(y => y.Value)).Distinct()) : string.Join(",", Model.SubsidiaryList.Select(x => x.Value));
@@ -35,6 +36,39 @@
         })
     } : null;
 
+    var monitoredPlayerInitState = monitoredPlayerVM != null ? new
+    {
+        selectedCurrency = string.Join(",", monitoredPlayerVM.CurrencyList.Select(x => x.Key).ToArray()),
+        selectedSubsidiary,
+        username = "",
+        isLoading = false,
+        isGetAll = true,
+        playerList = null as object,
+        selectedParams = null as object,
+        dateRange = new
+        {
+            fromDate = monitoredPlayerVM.FromReachedDate.ToString("MM/dd/yyyy"),
+            toDate = monitoredPlayerVM.ToReachedDate.ToString("MM/dd/yyyy")
+        },
+        supportedReachedDateRange = new
+        {
+            fromDate = monitoredPlayerVM.MinReachedDate.ToString("MM/dd/yyyy"),
+            toDate = monitoredPlayerVM.MaxReachedDate.ToString("MM/dd/yyyy")
+        },
+    } : null;
+
+    var monitoredPlayerData = monitoredPlayerVM != null ? new
+    {
+        canEdit = monitoredPlayerVM.CanEdit,
+        currencyList = monitoredPlayerVM.CurrencyList.Select(x => new { key = x.Key, value = x.Value, status = true }),
+        dateConstraint = new
+        {
+            minDate = monitoredPlayerVM.MinReachedDate.ToString("MM/dd/yyyy"),
+            maxDate = monitoredPlayerVM.MaxReachedDate.ToString("MM/dd/yyyy")
+        },
+    } : null;
+
+
     var problemSelectedCustomerClass = string.Join(",", problemPlayerVM.CustomerClass);
     var problemCustomerClassList = problemPlayerVM.CustomerClass.Select(c => new
     {
@@ -45,6 +79,7 @@
 }
 @section pagecss {
     <link href="@Url.ContentLinkByEnv("/www/css/build/reactpages/customer/playersegmentation/index.css")" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 }
 @section pagejs {
     <script src="@Url.ContentLinkByEnv("/www/js/build/reactpages/customer/playersegmentation/main.chunk.js")"></script>
@@ -64,7 +99,8 @@
     isGetAll: true,
     selectedSubsidiary: '@(selectedSubsidiary)'
     },
-    VipPlayerManagement: @Html.Raw(vipPlayerManagementInitState.ToJson())
+    VipPlayerManagement: @Html.Raw(vipPlayerManagementInitState.ToJson()),
+    MonitoredPlayer: @Html.Raw(monitoredPlayerInitState.ToJson())
     }
 
     window._AppData = {
@@ -79,7 +115,8 @@
     reasonList: @Html.Raw(problemPlayerVM.ReasonList.Select(x => new { key = x.Key, value = x.Value, status = true }).ToJson()),
     dateConstraint: { minDate: '@problemPlayerVM.MinDate.ToString("MM/dd/yyyy")', maxDate: '@problemPlayerVM.MaxDate.ToString("MM/dd/yyyy")', limitedMonthRange: null },
     },
-    VipPlayerManagement: @Html.Raw(vipPlayerManagementData.ToJson())
+    VipPlayerManagement: @Html.Raw(vipPlayerManagementData.ToJson()),
+    MonitoredPlayer: @Html.Raw(monitoredPlayerData.ToJson())
     }
 }
 <div id="app-container">

@@ -1,0 +1,2 @@
+export const SET_IS_GET_ALL = 'SET_IS_GET_ALL';
+export const SET_CURRENT_USER_ACTION = 'SET_CURRENT_USER_ACTION';

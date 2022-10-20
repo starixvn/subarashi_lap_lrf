@@ -14,6 +14,6 @@ export const Url = {
 }
 
 export const ExcelReaderColumn = {
-    SystemId: 'systemid',
-    ExternalId: 'externalid'
+    SystemId: LangHelper.getSingleResource('SystemId'),
+    ExternalId: LangHelper.getSingleResource('ExternalId')
 }

@@ -96,9 +96,11 @@
     <Compile Include="DTO\Common\CheckedItem.cs" />
     <Compile Include="DTO\Common\CustDTO.cs" />
     <Compile Include="DTO\Common\ExChangeRate.cs" />
+    <Compile Include="DTO\Common\ICurrencyInfo.cs" />
     <Compile Include="DTO\Common\IRequest.cs" />
     <Compile Include="DTO\Common\IResultInfoGeneric.cs" />
     <Compile Include="DTO\Common\IResultInfo.cs" />
+    <Compile Include="DTO\Common\ISubsidiaryInfo.cs" />
     <Compile Include="DTO\Common\League.cs" />
     <Compile Include="DTO\Common\Licensee.cs" />
     <Compile Include="DTO\Common\Match.cs" />
@@ -128,6 +130,7 @@
     <Compile Include="DTO\Users\UserRole.cs" />
     <Compile Include="Enum\FunctionUMType.cs" />
     <Compile Include="Helper\BettypeHelper.cs" />
+    <Compile Include="Helper\CurrencyHelper.cs" />
     <Compile Include="Helper\MappingHelper.cs" />
     <Compile Include="Helper\MathHelper.cs" />
     <Compile Include="Helper\CommissionGroupHelper.cs" />
