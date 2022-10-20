@@ -101,9 +101,8 @@ export const FormAction = props => {
                     return;
                 }
                 const byExternalId = uploadFileOption == UploadFileOptionValue.byExternalId;
-                const uploadByColumn = ExcelHelper.getColumnName(header, byExternalId ? ExcelReaderColumn.ExternalId : ExcelReaderColumn.SystemId);
-                const winningThresholdColumn = ExcelHelper.getColumnName(header, ExcelReaderColumn.WinningThreshold);
-
+                const uploadByColumn = header[0];
+                const winningThresholdColumn = header[1];
                 if (!uploadByColumn || !winningThresholdColumn) {
                     alert(decode(LangHelper.getSingleResource("UploadFileError")))
                     return;

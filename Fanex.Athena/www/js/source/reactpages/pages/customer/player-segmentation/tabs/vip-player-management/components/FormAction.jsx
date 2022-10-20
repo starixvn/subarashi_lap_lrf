@@ -92,7 +92,7 @@ export const FormAction = props => {
                     return;
                 }
                 const byExternalId = uploadFileOption == UploadFileOptionValue.byExternalId;
-                const selectedColumn = ExcelHelper.getColumnName(header, byExternalId ? ExcelReaderColumn.ExternalId : ExcelReaderColumn.SystemId);
+                const selectedColumn = header[0];
                 if (!selectedColumn) {
                     alert(decode(LangHelper.getSingleResource("UploadFileError")))
                     return;
