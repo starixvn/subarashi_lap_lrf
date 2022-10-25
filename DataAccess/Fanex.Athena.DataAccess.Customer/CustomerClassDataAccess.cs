@@ -56,7 +56,8 @@
                             MinBet = FormatNumber(reader.ToNullableDecimal("MinBet"), "{0:#,##0}"),
                             Platform = platform == null ? DefaultTextValue : ViewResources.ResourceManager.GetString($"Platform_{platform}"),
                             AgentBetInterval = FormatNumber(reader.ToNullableDecimal("AgentBetInterval"), NumberStyle),
-                            CurrencyId = reader.ToNullableInt("CurrencyId") ?? 0
+                            CurrencyId = reader.ToNullableInt("CurrencyId") ?? 0,
+                            DisableParlay = reader.ToBool("DisableParlay")
                         };
 
                         result.Add(policy);

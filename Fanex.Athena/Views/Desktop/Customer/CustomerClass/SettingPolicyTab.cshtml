@@ -19,6 +19,7 @@ else
                 <th class="col-large">@ViewResources.SportType</th>
                 <th class="col-medium">@ViewResources.Live2/<br />@ViewResources.PreMatch</th>
                 <th class="col-medium">@ViewResources.Currency</th>
+                <th class="col-medium">@ViewResources.DisableParlay</th>
                 <th class="col-medium">@ViewResources.Platform</th>
                 <th class="col-large">@ViewResources.LeagueGroup</th>
                 <th class="col-medium">@ViewResources.BetInterval</th>
@@ -68,6 +69,7 @@ else
                         <td class="left-align">@p.SportTypeName</td>
                         <td class="left-align">@(p.LiveType == 1 ? ViewResources.Live2 : ViewResources.PreMatch)</td>
                         <td class="center-align">@p.Currency</td>
+                        <td class="center-align">@(p.DisableParlay ? ViewResources.Yes : ViewResources.No)</td>
                         <td class="left-align">@p.Platform</td>
                         <td class="center-align" data-internal-league-group="@p.LeagueGroupId" >
                             @p.LicLeagueGroupName

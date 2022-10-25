@@ -2267,4 +2267,7 @@
   <data name="DeleteManyMonitoredPlayerConfirm" xml:space="preserve">
     <value>所选的玩家将被移出警示值监控，您确定要移出吗？</value>
   </data>
+  <data name="DisableParlay" xml:space="preserve">
+    <value>关闭串关</value>
+  </data>
 </root>
