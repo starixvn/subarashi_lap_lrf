@@ -1,15 +1,14 @@
 ﻿namespace Fanex.Athena.Controllers.Report
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Web.Mvc;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Report.ViewModel;
     using Resources;
+    using System;
+    using System.Collections.Generic;
+    using System.Web.Mvc;
     using Web.ActionFilter;
 
     [FunctionAuthorization(PermissionKeys.ReportCasinoTurnover)]
@@ -39,7 +38,6 @@
                 FromDate = DateTime.Today,
                 ToDate = DateTime.Today,
                 CurrencyList = SessionServiceInstance.UserSession.CurrencyList,
-                BaseCurrencies = SystemConstants.BaseCurrencyList.Select(i => i.Value),
                 ProductOptions = ToProductOptions(productAccess.ProductList),
                 Status = GetStatusList(),
                 MinDate = setting.MinDate,

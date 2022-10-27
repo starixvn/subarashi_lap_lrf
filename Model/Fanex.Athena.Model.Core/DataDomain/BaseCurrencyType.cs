@@ -38,5 +38,7 @@ namespace Fanex.Athena.Model.Core.DataDomain
         public const int INH = -8;
         public const int BDT = -9;
         public const int INR = -10;
+
+        public const int USDT = -99;
     }
 }

@@ -22,6 +22,11 @@
             get { return GetValue("BetListApiHostUrl"); }
         }
 
+        public string OfferCryptoCurrencyLicensees
+        {
+            get { return GetValue("OfferCryptoCurrencyLicensees"); }
+        }
+
         public bool IsProduction
         {
             get { return GetValue("Environment") == "PRO"; }
@@ -145,12 +150,12 @@
         {
             get { return GetValue("LiveReportNoDetailLinkSports").Split(',').Select(n => Convert.ToInt32(n)); }
         }
-        
+
         public string BetTicketEventBuilderUrl
         {
             get { return GetValue("BetTicketEventBuilderUrl"); }
-        }    
-        
+        }
+
         #endregion Configurations
 
         #region Assign Currency

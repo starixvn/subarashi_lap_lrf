@@ -9,6 +9,8 @@
 
         string BetListApiHostUrl { get; }
 
+        string OfferCryptoCurrencyLicensees { get; }
+
         bool IsProduction { get; }
 
         bool IsDisableExportLargeBetList { get; }
@@ -59,7 +61,8 @@
 
         int BetListApiClientTimeOutMinutes { get; }
 
-        IEnumerable<string> ListActionNoView { get; }        
+        IEnumerable<string> ListActionNoView { get; }
+
         string BetTicketEventBuilderUrl { get; }
 
         bool IsUseCtsApi { get; }

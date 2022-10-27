@@ -4,13 +4,18 @@
     Layout = "~/Views/Desktop/Shared/_ReactPageLayout.cshtml";
 }
 @using Fanex.Athena.Model.Core.DataDomain;
+@using Fanex.Athena.Service.Core.Users.Interfaces
 @model bool
 @{
     var appSettings = DependencyResolver.Current.GetService<IAppSettings>();
-    var betTicketEventBuilderUrl = appSettings.BetTicketEventBuilderUrl;
-    var baseCurrencyList = SystemConstants.BaseCurrencyList.Select(c =>
-new { value = c.Value, label = c.Value }).ToList();
+    var session = DependencyResolver.Current.GetService<ISessionService>();
+    bool isOfferCryptoCurrencyLicensee = appSettings.OfferCryptoCurrencyLicensees.Split(',').Contains(session.LicenseeSession.LicenseeName, StringComparer.InvariantCultureIgnoreCase);
 
+    var betTicketEventBuilderUrl = appSettings.BetTicketEventBuilderUrl;
+    var offerCurrencyIds = isOfferCryptoCurrencyLicensee ? SystemConstants.BaseCryptoCurrencyListIds : SystemConstants.BaseCurrencyListIds;
+    var baseCurrencyList = SystemConstants.BaseCurrencyList
+        .Where(_ => offerCurrencyIds.Contains(_.Key))
+        .Select(c => new { value = c.Value, label = c.Value }).ToList();
 }
 @section pagecss {
     <link href="@Url.ContentLinkByEnv("/www/css/build/reactpages/betlist/index.css")" rel="stylesheet" type="text/css" />

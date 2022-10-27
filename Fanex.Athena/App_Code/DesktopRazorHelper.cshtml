@@ -1,8 +1,11 @@
 ﻿@using System.Web.Mvc;
 @using Fanex.Athena.Extension.Helper;
+@using Fanex.Athena.Extension.Utility
 @using Fanex.Athena.Model.Core.MetaModel.Product;
 @using Fanex.Athena.Model.Core.DataDomain;
 @using Fanex.Athena.Resources;
+@using Fanex.Athena.Service.Core.Users
+@using Fanex.Athena.Service.Core.Users.Interfaces
 @helper  PlatformList(string id)
 {
     /**/
@@ -97,14 +100,19 @@
     </div>
 }
 @helper CurrencyList(IDictionary<int, string> currencyList,
-string className = "", int selected = 0,
-bool addMoreAllOption = true,
-bool addBasedOption = false)
+    string className = "", int selected = 0,
+    bool addMoreAllOption = true,
+    bool addBasedOption = false)
 {
-
+    var session = DependencyResolver.Current.GetService<ISessionService>();
+    var appSettings = DependencyResolver.Current.GetService<IAppSettings>();
+    bool isOfferCryptoCurrencyLicensee = appSettings.OfferCryptoCurrencyLicensees.Split(',').Contains(session.LicenseeSession.LicenseeName, StringComparer.InvariantCultureIgnoreCase);
+    var offerCurrencyIds = isOfferCryptoCurrencyLicensee ? SystemConstants.BaseCryptoCurrencyListIds : SystemConstants.BaseCurrencyListIds;
+    var baseCurrencyList = SystemConstants.BaseCurrencyList.Where(_ => offerCurrencyIds.Contains(_.Key));
     var selectedName = currencyList.Where(p => p.Key == selected).FirstOrDefault().Key;
     var selectedBaseCurrency = SystemConstants.BaseCurrencyList
-    .FirstOrDefault(i => i.Key == selected).Value;
+        .FirstOrDefault(i => i.Key == selected).Value;
+
     if (string.IsNullOrEmpty(selectedBaseCurrency))
     {
         selectedBaseCurrency = string.Empty;
@@ -119,7 +127,7 @@ bool addBasedOption = false)
     if (addBasedOption)
     {
 
-        foreach (var currency in SystemConstants.BaseCurrencyList)
+        foreach (var currency in baseCurrencyList)
         {
 
             items.Insert(0, new System.Web.WebPages.Html.SelectListItem
@@ -153,8 +161,15 @@ bool addBasedOption = false)
 }
 @helper BasedCurrency(string selectedBasedCurrency = "", string CurrencyName = null)
 {
+
+    var session = DependencyResolver.Current.GetService<ISessionService>();
+    var appSettings = DependencyResolver.Current.GetService<IAppSettings>();
+    bool isOfferCryptoCurrencyLicensee = appSettings.OfferCryptoCurrencyLicensees.Split(',').Contains(session.LicenseeSession.LicenseeName, StringComparer.InvariantCultureIgnoreCase);
+    var offerCurrencyIds = isOfferCryptoCurrencyLicensee ? SystemConstants.BaseCryptoCurrencyListIds : SystemConstants.BaseCurrencyListIds;
+    var baseCurrencyList = SystemConstants.BaseCurrencyList.Where(_ => offerCurrencyIds.Contains(_.Key));
+
     <select class="based-currency hide" name="BaseCurrency" id="BaseCurrency" data-original="@selectedBasedCurrency">
-        @foreach (var item in SystemConstants.BaseCurrencyList)
+        @foreach (var item in baseCurrencyList)
         {
             <option value="@item.Value.ToLowerInvariant()" @(selectedBasedCurrency.Equals(item.Value, StringComparison.OrdinalIgnoreCase) ? "selected='selected'" : string.Empty)>@item.Value</option>
         }
@@ -162,10 +177,10 @@ bool addBasedOption = false)
     </select>
     <input type="hidden" id="defaultBaseCurrency" value="@selectedBasedCurrency" />
 }
-@helper HighlightNegativeFormat(decimal value, bool isHiglight = true)
+@helper HighlightNegativeFormat(decimal value, bool isHighlight = true)
 {
     /**/
-    <span @(isHiglight && value < 0 ? new HtmlString("class='negative-number'") : new HtmlString(""))>
+    <span @(isHighlight && value < 0 ? new HtmlString("class='negative-number'") : new HtmlString(""))>
         @value.ToStringExt()
     </span>
 }

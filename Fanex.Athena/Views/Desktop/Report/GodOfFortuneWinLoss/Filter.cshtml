@@ -1,12 +1,17 @@
 ﻿@using Fanex.Athena.Model.Core.DataDomain
+@using Fanex.Athena.Service.Core.Users.Interfaces
 @model Fanex.Athena.Model.Report.ViewModel.GodOfFortuneWinLossViewModel
 @{
+    var appSettings = DependencyResolver.Current.GetService<IAppSettings>();
+    var session = DependencyResolver.Current.GetService<ISessionService>();
+    bool isOfferCryptoCurrencyLicensee = appSettings.OfferCryptoCurrencyLicensees.Split(',').Contains(session.LicenseeSession.LicenseeName, StringComparer.InvariantCultureIgnoreCase);
+    var offerCurrencyIds = isOfferCryptoCurrencyLicensee ? SystemConstants.BaseCryptoCurrencyListIds : SystemConstants.BaseCurrencyListIds;
+    
     var currencyOptions = this.Model.CurrencyList
-           .Select(item => new { Code = item.Key.ToString(), Name = item.Value, Status = true })
-           .ToList();
+        .Select(item => new { Code = item.Key.ToString(), Name = item.Value, Status = true }).ToList();
     var i = 0;
 
-    var baseCurrencyList = SystemConstants.BaseCurrencyList
+    var baseCurrencyList = SystemConstants.BaseCurrencyList.Where(_ => offerCurrencyIds.Contains(_.Key))
            .Select(item => new SelectListItem
            {
                Value = item.Value.ToLowerInvariant(),
