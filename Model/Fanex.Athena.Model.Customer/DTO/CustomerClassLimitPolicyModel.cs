@@ -8,6 +8,8 @@
         public string SportType { get; set; }
         public string SportTypeName { get; set; }
 
+        public bool DisableParlay { get; set; }
+
         public int LeagueGroupId { get; set; }
         public int LicLeagueGroupId { get; set; }
         public string LicLeagueGroupName { get; set; }

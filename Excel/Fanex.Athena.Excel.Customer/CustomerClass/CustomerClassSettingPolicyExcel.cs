@@ -23,14 +23,15 @@ namespace Fanex.Athena.Excel.Customer.CustomerClass
         private const int SportTypeColumn = 2;
         private const int LivePreMatchColumn = 3;
         private const int CurrencyColumn = 4;
-        private const int PlatformColumn = 5;
-        private const int LeagueGroupColumn = 6;
-        private const int BetIntervalColumn = 7;
-        private const int AgentBetIntervalColumn = 8;
-        private const int MinBetColumn = 9;
-        private const int MaxPerBetColumn = 10;
-        private const int MaxPerMatchColumn = 11;
-        private const int RepeatedBetColumn = 12;
+        private const int DisableParlay = 5;
+        private const int PlatformColumn = 6;
+        private const int LeagueGroupColumn = 7;
+        private const int BetIntervalColumn = 8;
+        private const int AgentBetIntervalColumn = 9;
+        private const int MinBetColumn = 10;
+        private const int MaxPerBetColumn = 11;
+        private const int MaxPerMatchColumn = 12;
+        private const int RepeatedBetColumn = 13;
 
         private const string CURRENCY = "MYR";
         private const string DEFAULT_VALUE = "-";
@@ -45,6 +46,7 @@ namespace Fanex.Athena.Excel.Customer.CustomerClass
             { SportTypeColumn, "SportTypeName" },
             { LivePreMatchColumn, "LiveType" },
             { CurrencyColumn, "Currency" },
+            { DisableParlay, "DisableParlay" },
             { PlatformColumn, "Platform" },
             { LeagueGroupColumn, "LicLeagueGroupName" },
             { BetIntervalColumn, "BetInterval" },
@@ -67,6 +69,7 @@ namespace Fanex.Athena.Excel.Customer.CustomerClass
                 ViewResources.SportType,
                 ViewResources.Live2 + "/" + ViewResources.PreMatch,
                 ViewResources.Currency,
+                ViewResources.DisableParlay,
                 ViewResources.Platform,
                 ViewResources.LeagueGroup,
                 ViewResources.BetInterval,
@@ -137,6 +140,11 @@ namespace Fanex.Athena.Excel.Customer.CustomerClass
                 if (columnName.Value.Equals("LiveType"))
                 {
                     var text = item.LiveType == 1 ? ViewResources.Live2 : ViewResources.PreMatch;
+                    row.Cells[columnName.Key].SetCellValue(text);
+                }
+                else if (columnName.Value.Equals("DisableParlay"))
+                {
+                    var text = item.DisableParlay ? ViewResources.Yes : ViewResources.No;
                     row.Cells[columnName.Key].SetCellValue(text);
                 }
                 else

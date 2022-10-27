@@ -2518,6 +2518,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disable Parlay.
+        /// </summary>
+        public static string DisableParlay {
+            get {
+                return ResourceManager.GetString("DisableParlay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disable {0}.
         /// </summary>
         public static string DisableProduct {

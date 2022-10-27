@@ -3389,4 +3389,7 @@
   <data name="DeleteManyMonitoredPlayerConfirm" xml:space="preserve">
     <value>The selected player(s) will be removed from the monitored player list. Are you sure you want to remove?</value>
   </data>
+  <data name="DisableParlay" xml:space="preserve">
+    <value>Disable Parlay</value>
+  </data>
 </root>
