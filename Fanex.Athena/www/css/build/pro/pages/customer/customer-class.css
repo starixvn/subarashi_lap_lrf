@@ -485,7 +485,23 @@ ul.ui-multiselect-checkboxes {
   min-width: 1400px; }
 
 .customer-class-policy-setting table {
-  min-width: 1400px; }
+  min-width: 1400px;
+  border-collapse: separate; }
+
+.customer-class-policy-setting thead {
+  position: sticky;
+  top: 0px;
+  border-collapse: separate; }
+  .customer-class-policy-setting thead tr th {
+    border-left: 0px; }
+    .customer-class-policy-setting thead tr th:first-child {
+      border-left: 1px solid #d1dae1; }
+
+.customer-class-policy-setting tbody tr td {
+  border-top: 0px;
+  border-left: 0px; }
+  .customer-class-policy-setting tbody tr td[rowspan]:first-child {
+    border-left: 1px solid #d1dae1; }
 
 .customer-class-policy-setting .view-leagues {
   float: right; }
