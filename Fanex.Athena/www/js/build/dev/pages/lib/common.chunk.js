@@ -21765,9 +21765,16 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/*global _lan
         'use strict';
         const BASE_CURRENCY_LIST = { 'eur': '-1', 'usd': '-2', 'gbp': '-3', 'myr': '-4', 'cny': '-5', 'thb': '-6', 'idr': '-7', 'inh': '-8', 'bdt': '-9', 'inr': '-10', 'usdt': '-99' };
         var BASE_CURRENCY = {};
-        $("#BaseCurrency").find('option').each(function() {
-            BASE_CURRENCY[$(this).val()] = BASE_CURRENCY_LIST[$(this).val()];
-        });
+
+        function initBaseCurrency() {
+            $("#BaseCurrency").find('option').each(function () {
+                BASE_CURRENCY[$(this).val()] = BASE_CURRENCY_LIST[$(this).val()];
+            });
+            if (Object.keys(BASE_CURRENCY).length === 0) {
+                BASE_CURRENCY = BASE_CURRENCY_LIST;
+            }
+        }
+
         let REQUEST_VERIFICATION_TOKEN;
         let _historyDate = null;
         let _rootUrl = null;
@@ -21779,7 +21786,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/*global _lan
             report: 'Report',
             betlist: 'BetList'
         }
-    
+
         function buildProxyUrl(apiKey, apiUrl) {
             const encodeUrl = apiUrl.replace(new RegExp('/', 'g'), '_');
             const proxyUrl = `Proxy/${apiKey}/${encodeUrl}`;
@@ -21793,7 +21800,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/*global _lan
 
         function buildBetListProxyUrl(apiUrl) {
             const betlistProxyUrl = buildProxyUrl(apiKeys.betlist, apiUrl);
-            return resolveClientUrl(betlistProxyUrl);  
+            return resolveClientUrl(betlistProxyUrl);
         }
 
 
@@ -21815,7 +21822,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/*global _lan
         }
 
         function tryIgnoreSharding(ajaxRequest) {
-            if(ignoreSharding()) {
+            if (ignoreSharding()) {
                 ajaxRequest.setRequestHeader("X-IgnoreSharding", 'true');
             }
         }
@@ -21860,6 +21867,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/*global _lan
 
         function initialize() {
             REQUEST_VERIFICATION_TOKEN = $('input[name=__RequestVerificationToken]').val();
+            initBaseCurrency();
             initSelectElements();
             currencyConstraint();
             initEvent();
