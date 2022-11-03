@@ -8,7 +8,8 @@ import { decode } from '@jsroot/lib/htmlHelper';
 import { generateDefaultConfirmOption, predefinedIcons } from '@jsroot/lib/sweetAlert';
 import { ActionCreators } from '../actions';
 import DropzoneUpload from '../../../components/DropzoneUpload';
-import { Url, ExcelReaderColumn } from '../lib/constants';
+import { Url, ExcelReaderColumn, ActionType } from '../lib/constants';
+import { TabType } from '../../../lib/constants';
 import { UploadFileOptions, UploadFileOptionValue } from '../../../lib/constants';
 import ExcelHelper from '../lib/helpers/excelHelper';
 import { UpdateVipStatusAlertOption } from '../../../lib/helpers/sweetAlertHelper';
@@ -18,10 +19,11 @@ import VipPlayerQueryService from "../lib/queryService";
 export const FormAction = props => {
     const { isActiveTaggingAction, playerList, updateVipStatus, setSweetAlertOption, selectedParams } = props;
     const [displayUploadDropzone, setDisplayUploadDropzone] = useState(false);
+    const [isActivateVIP, setIsActivateVIP] = useState(false);
     const [resultMsgSubmitVipListFile, setResultMsgSubmitVipListFile] = useState(null);
     const [uploadFileOption, setUploadFileOption] = useState(UploadFileOptionValue.byExternalId);
 
-    const hasVipManagementEdit =  AppData.HasVipManagementEdit;
+    const hasVipManagementEdit = AppData.HasVipManagementEdit;
 
     useEffect(() => { resultMsgSubmitVipListFile && setDisplayUploadDropzone(false) }, [selectedParams]);
 
@@ -68,9 +70,15 @@ export const FormAction = props => {
         setSweetAlertOption(alertOption);
     }
 
-    const _handleDisplayUploadDropzone = () => {
+    const _handleDisplayUploadDropzone = (type) => {
+        if ((type === ActionType.Deactived && isActivateVIP) || (type === ActionType.Actived && !isActivateVIP)) {
+            setDisplayUploadDropzone(true);
+        }
+        else {
+            setDisplayUploadDropzone(!displayUploadDropzone);
+        }
+        setIsActivateVIP(type === ActionType.Actived);
         setResultMsgSubmitVipListFile(null);
-        setDisplayUploadDropzone(!displayUploadDropzone);
     }
 
     const _handleActiveVipStatusFromFile = (params) => {
@@ -78,7 +86,7 @@ export const FormAction = props => {
             setSweetAlertOption(null);
             setResultMsgSubmitVipListFile(resultMessage);
         }
-        const alertOption = _buildAlertOptionUpdateVipStatus(params, true, true, handlerUpdateVipStatusSuccess);
+        const alertOption = _buildAlertOptionUpdateVipStatus(params, isActivateVIP, true, handlerUpdateVipStatusSuccess);
         setSweetAlertOption(alertOption);
     }
 
@@ -101,7 +109,7 @@ export const FormAction = props => {
                 const value = content.map(_ => _[selectedColumn]).join();
                 const params = {
                     [byExternalId ? 'externalIds' : 'systemIds']: value,
-                    isVip: true
+                    isVip: isActivateVIP
                 }
 
                 _handleActiveVipStatusFromFile(params);
@@ -109,9 +117,9 @@ export const FormAction = props => {
         })
     }
 
-    const _handleDownloadTemplateExcel = (event) =>{
+    const _handleDownloadTemplateExcel = (event) => {
         event.preventDefault();
-        VipPlayerQueryService.downloadVipPlayerListTemplateExcel({uploadBy: uploadFileOption});
+        VipPlayerQueryService.downloadVipPlayerListTemplateExcel({ uploadBy: uploadFileOption });
     }
 
     const _renderExtraInfoDropzoneUploadFile = () => {
@@ -134,9 +142,12 @@ export const FormAction = props => {
 
     const _renderDropzoneUploadFile = () => {
         return <DropzoneUpload multiple={false} accept={'.xls,.xlsx'} maxSize={1}
-            onClose={_handleDisplayUploadDropzone}
+            onClose={() => _handleDisplayUploadDropzone(ActionType.Closed)}
             onSubmit={_onSubmitVipListFile}
-            isShowInnerZone={!resultMsgSubmitVipListFile}>
+            isShowInnerZone={!resultMsgSubmitVipListFile}
+            isActive={isActivateVIP}
+            tabType={TabType.VipPlayerManagement}
+            key={isActivateVIP}>
             <div>
                 {resultMsgSubmitVipListFile ? resultMsgSubmitVipListFile : _renderExtraInfoDropzoneUploadFile()}
             </div>
@@ -153,7 +164,10 @@ export const FormAction = props => {
                     <button type="button" className="btn" onClick={_handleDeactivateVip} disabled={!isActiveTaggingAction || !hasVipManagementEdit}>{LangHelper.getSingleResource("DeactivateVip")}</button>
                 </div>
                 <div className="action">
-                    <button type="button" className="btn" onClick={_handleDisplayUploadDropzone} disabled={!hasVipManagementEdit}>{LangHelper.getSingleResource("UploadVipList")}</button>
+                    <button type="button" className="btn" onClick={() => _handleDisplayUploadDropzone(ActionType.Actived)} disabled={!hasVipManagementEdit}>{LangHelper.getSingleResource("ActivateListOfPlayers")}</button>
+                </div>
+                <div className="action">
+                    <button type="button" className="btn" onClick={() => _handleDisplayUploadDropzone(ActionType.Deactived)} disabled={!hasVipManagementEdit}>{LangHelper.getSingleResource("DeactivateListOfPlayers")}</button>
                 </div>
             </>
             {displayUploadDropzone && _renderDropzoneUploadFile()}

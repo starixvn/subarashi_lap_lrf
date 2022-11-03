@@ -19,7 +19,7 @@ namespace Fanex.Athena.Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class ViewResources {
@@ -111,6 +111,15 @@ namespace Fanex.Athena.Resources {
         public static string Action {
             get {
                 return ResourceManager.GetString("Action", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Activate List of Players.
+        /// </summary>
+        public static string ActivateListOfPlayers {
+            get {
+                return ResourceManager.GetString("ActivateListOfPlayers", resourceCulture);
             }
         }
         
@@ -1483,6 +1492,24 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Click or drop the list to activate VIP status here.
+        /// </summary>
+        public static string ClickOrDropHereToActivate {
+            get {
+                return ResourceManager.GetString("ClickOrDropHereToActivate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click or drop the list to deactivate VIP status here.
+        /// </summary>
+        public static string ClickOrDropHereToDeactivate {
+            get {
+                return ResourceManager.GetString("ClickOrDropHereToDeactivate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to close.
         /// </summary>
         public static string Close {
@@ -2235,6 +2262,15 @@ namespace Fanex.Athena.Resources {
         public static string DD {
             get {
                 return ResourceManager.GetString("DD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deactivate List of Players.
+        /// </summary>
+        public static string DeactivateListOfPlayers {
+            get {
+                return ResourceManager.GetString("DeactivateListOfPlayers", resourceCulture);
             }
         }
         
@@ -8445,15 +8481,6 @@ namespace Fanex.Athena.Resources {
         public static string UploadSystemIdList {
             get {
                 return ResourceManager.GetString("UploadSystemIdList", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Upload VIP List.
-        /// </summary>
-        public static string UploadVipList {
-            get {
-                return ResourceManager.GetString("UploadVipList", resourceCulture);
             }
         }
         

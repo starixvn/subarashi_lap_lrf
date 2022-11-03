@@ -2265,4 +2265,20 @@
   <data name="DeleteManyMonitoredPlayerConfirm" xml:space="preserve">
     <value>所選的玩家將被移出警示值監控，您確定要移出嗎？</value>
   </data>
+  <data name="ActivateListOfPlayers" xml:space="preserve">
+    <value>以玩家清單來設定為VIP</value>
+    <comment>#179961</comment>
+  </data>
+  <data name="ClickOrDropHereToActivate" xml:space="preserve">
+    <value>點擊或移動清單到此以設定為VIP</value>
+    <comment>#179961</comment>
+  </data>
+  <data name="ClickOrDropHereToDeactivate" xml:space="preserve">
+    <value>點擊或移動清單到此以停用VIP</value>
+    <comment>#179961</comment>
+  </data>
+  <data name="DeactivateListOfPlayers" xml:space="preserve">
+    <value>以玩家清單來停用VIP</value>
+    <comment>#179961</comment>
+  </data>
 </root>

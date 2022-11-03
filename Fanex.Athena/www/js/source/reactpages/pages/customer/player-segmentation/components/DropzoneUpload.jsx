@@ -2,17 +2,18 @@ import React, { useCallback, useState } from 'react';
 import LangHelper from '@jsroot/lib/langHelper';
 import { decode } from '@jsroot/lib/htmlHelper';
 import { useDropzone } from 'react-dropzone';
+import { TabType } from '../lib/constants';
 
 const MbToByte = 1000 * 1000;
 
 const DropzoneUpload = (props) => {
-    const { onSubmit, onClose, multiple, accept, children, isShowInnerZone } = props;
+    const { onSubmit, onClose, multiple, accept, children, isShowInnerZone, tabType, isActive } = props;
     const maxSize = props.maxSize * MbToByte;
 
     const [uploadedFiles, setUploadedFiles] = useState([]);
 
     const onDrop = useCallback(acceptedFiles => {
-        setUploadedFiles([...uploadedFiles, ...acceptedFiles])
+        setUploadedFiles([...uploadedFiles, ...acceptedFiles]);
     })
 
     const onDropRejected = useCallback(rejectedFiles => {
@@ -53,6 +54,16 @@ const DropzoneUpload = (props) => {
         </ul>
     }
 
+    const _clickHereTitle = () => {
+        switch (tabType) {
+            case TabType.VipPlayerManagement:
+                return isActive ? 'ClickOrDropHereToActivate' : 'ClickOrDropHereToDeactivate';
+
+            default:
+                return 'ClickOrDropHere';
+        }
+    }
+
     const _isExistFiles = uploadedFiles && uploadedFiles.length > 0;
 
     return (
@@ -63,7 +74,7 @@ const DropzoneUpload = (props) => {
                     <div className="dropzone-row">
                         <div {...getRootProps({ className: 'inner-dropzone' })}>
                             <input {...getInputProps()} />
-                            <p>{LangHelper.getSingleResource('ClickOrDropHere')}</p>
+                            <p>{LangHelper.getSingleResource(_clickHereTitle())}</p>
                         </div>
                     </div>)
             }
