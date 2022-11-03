@@ -1779,6 +1779,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/htmlHelper */ "./www/js/source/reactpages/lib/htmlHelper.js");
 /* harmony import */ var react_dropzone__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-dropzone */ "./node_modules/react-dropzone/dist/es/index.js");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/constants.js");
+
 
 
 
@@ -1792,7 +1794,9 @@ const DropzoneUpload = props => {
     multiple,
     accept,
     children,
-    isShowInnerZone
+    isShowInnerZone,
+    tabType,
+    isActive
   } = props;
   const maxSize = props.maxSize * MbToByte;
   const [uploadedFiles, setUploadedFiles] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]);
@@ -1852,6 +1856,16 @@ const DropzoneUpload = props => {
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, file.name))));
   };
 
+  const _clickHereTitle = () => {
+    switch (tabType) {
+      case _lib_constants__WEBPACK_IMPORTED_MODULE_4__["TabType"].VipPlayerManagement:
+        return isActive ? 'ClickOrDropHereToActivate' : 'ClickOrDropHereToDeactivate';
+
+      default:
+        return 'ClickOrDropHere';
+    }
+  };
+
   const _isExistFiles = uploadedFiles && uploadedFiles.length > 0;
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1865,7 +1879,7 @@ const DropzoneUpload = props => {
     className: "dropzone-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", getRootProps({
     className: 'inner-dropzone'
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", getInputProps()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('ClickOrDropHere'))))), isShowInnerZone && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", getInputProps()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource(_clickHereTitle()))))), isShowInnerZone && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "dropzone-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "btn",
@@ -2986,6 +3000,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 const FormAction = props => {
   const {
     isActiveTaggingAction,
@@ -2995,6 +3010,7 @@ const FormAction = props => {
     selectedParams
   } = props;
   const [displayUploadDropzone, setDisplayUploadDropzone] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
+  const [isActivateVIP, setIsActivateVIP] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
   const [resultMsgSubmitVipListFile, setResultMsgSubmitVipListFile] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null);
   const [uploadFileOption, setUploadFileOption] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(_lib_constants__WEBPACK_IMPORTED_MODULE_11__["UploadFileOptionValue"].byExternalId);
   const hasVipManagementEdit = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_14__["default"].HasVipManagementEdit;
@@ -3060,9 +3076,15 @@ const FormAction = props => {
     setSweetAlertOption(alertOption);
   };
 
-  const _handleDisplayUploadDropzone = () => {
+  const _handleDisplayUploadDropzone = type => {
+    if (type === _lib_constants__WEBPACK_IMPORTED_MODULE_10__["ActionType"].Deactived && isActivateVIP || type === _lib_constants__WEBPACK_IMPORTED_MODULE_10__["ActionType"].Actived && !isActivateVIP) {
+      setDisplayUploadDropzone(true);
+    } else {
+      setDisplayUploadDropzone(!displayUploadDropzone);
+    }
+
+    setIsActivateVIP(type === _lib_constants__WEBPACK_IMPORTED_MODULE_10__["ActionType"].Actived);
     setResultMsgSubmitVipListFile(null);
-    setDisplayUploadDropzone(!displayUploadDropzone);
   };
 
   const _handleActiveVipStatusFromFile = params => {
@@ -3071,7 +3093,7 @@ const FormAction = props => {
       setResultMsgSubmitVipListFile(resultMessage);
     };
 
-    const alertOption = _buildAlertOptionUpdateVipStatus(params, true, true, handlerUpdateVipStatusSuccess);
+    const alertOption = _buildAlertOptionUpdateVipStatus(params, isActivateVIP, true, handlerUpdateVipStatusSuccess);
 
     setSweetAlertOption(alertOption);
   };
@@ -3101,7 +3123,7 @@ const FormAction = props => {
         const value = content.map(_ => _[selectedColumn]).join();
         const params = {
           [byExternalId ? 'externalIds' : 'systemIds']: value,
-          isVip: true
+          isVip: isActivateVIP
         };
 
         _handleActiveVipStatusFromFile(params);
@@ -3133,9 +3155,12 @@ const FormAction = props => {
       multiple: false,
       accept: '.xls,.xlsx',
       maxSize: 1,
-      onClose: _handleDisplayUploadDropzone,
+      onClose: () => _handleDisplayUploadDropzone(_lib_constants__WEBPACK_IMPORTED_MODULE_10__["ActionType"].Closed),
       onSubmit: _onSubmitVipListFile,
-      isShowInnerZone: !resultMsgSubmitVipListFile
+      isShowInnerZone: !resultMsgSubmitVipListFile,
+      isActive: isActivateVIP,
+      tabType: _lib_constants__WEBPACK_IMPORTED_MODULE_11__["TabType"].VipPlayerManagement,
+      key: isActivateVIP
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, resultMsgSubmitVipListFile ? resultMsgSubmitVipListFile : _renderExtraInfoDropzoneUploadFile()));
   };
 
@@ -3160,9 +3185,16 @@ const FormAction = props => {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     type: "button",
     className: "btn",
-    onClick: _handleDisplayUploadDropzone,
+    onClick: () => _handleDisplayUploadDropzone(_lib_constants__WEBPACK_IMPORTED_MODULE_10__["ActionType"].Actived),
     disabled: !hasVipManagementEdit
-  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("UploadVipList")))), displayUploadDropzone && _renderDropzoneUploadFile());
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("ActivateListOfPlayers"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "action"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "button",
+    className: "btn",
+    onClick: () => _handleDisplayUploadDropzone(_lib_constants__WEBPACK_IMPORTED_MODULE_10__["ActionType"].Deactived),
+    disabled: !hasVipManagementEdit
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("DeactivateListOfPlayers")))), displayUploadDropzone && _renderDropzoneUploadFile());
 };
 
 function mapDispatchToProps(dispatch) {
@@ -3724,7 +3756,7 @@ const initialState = _objectSpread(_objectSpread({}, window.initialState[_lib_co
 /*!*****************************************************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/customer/player-segmentation/tabs/vip-player-management/lib/constants.js ***!
   \*****************************************************************************************************************/
-/*! exports provided: dataGridHeaders, Url, ExcelReaderColumn */
+/*! exports provided: dataGridHeaders, Url, ExcelReaderColumn, ActionType */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3732,6 +3764,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dataGridHeaders", function() { return dataGridHeaders; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Url", function() { return Url; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ExcelReaderColumn", function() { return ExcelReaderColumn; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ActionType", function() { return ActionType; });
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 
 const dataGridHeaders = [{
@@ -3765,6 +3798,11 @@ const Url = {
 const ExcelReaderColumn = {
   SystemId: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('SystemId'),
   ExternalId: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('ExternalId')
+};
+const ActionType = {
+  Closed: 0,
+  Actived: 1,
+  Deactived: 2
 };
 
 /***/ }),

@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 10/19/2022 10:25:52 AM
+// Generated at: 11/2/2022 4:26:20 PM
 window._language_zh_Hans = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -101,6 +101,7 @@ window._language_zh_Hans = {
   Account: "账号",
   AccountManagement: "帐户管理",
   Action: "动作",
+  ActivateListOfPlayers: "以玩家清单来设定为VIP",
   ActiveCustomerSummary: "活跃会员人数摘要",
   AD: "客和",
   Adjustment: "调整",
@@ -204,6 +205,8 @@ window._language_zh_Hans = {
   ChooseGroupNameMsg: "请选择其他组名",
   CleanSheet: "零失球",
   ClearCurrentComm: "清除会员的佣金",
+  ClickOrDropHereToActivate: "点击或移动清单到此以设定为VIP",
+  ClickOrDropHereToDeactivate: "点击或移动清单到此以停用VIP",
   Close: "关闭",
   Closed: "关闭",
   ClosingBalance: "期末余额",
@@ -267,6 +270,7 @@ window._language_zh_Hans = {
   DateRange: "日期范围",
   DateRangeNote: "数据可从{0:d MMM yyyy}查看",
   DD: "和和",
+  DeactivateListOfPlayers: "以玩家清单来停用VIP",
   Dec: "十二月",
   December: "十二月",
   DecimalOdds: "欧洲盘赔率",
@@ -284,6 +288,7 @@ window._language_zh_Hans = {
   DetailTransaction: "交易纪录",
   DH: "和主",
   DisableAgCasino: "Disable AG Casino",
+  DisableParlay: "关闭串关",
   DisableRNGCasino: "停用娱乐城",
   DiscountValue: "折扣金额",
   Dontshowagain: "不再显示",

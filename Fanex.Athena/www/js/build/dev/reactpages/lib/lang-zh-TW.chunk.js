@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 10/19/2022 10:25:52 AM
+// Generated at: 11/2/2022 4:26:20 PM
 window._language_zh_TW = {
   AA: "客客",
   AbnormalBet: "非正規註單",
@@ -101,6 +101,7 @@ window._language_zh_TW = {
   Account: "賬號",
   AccountManagement: "帳戶管理",
   Action: "動作",
+  ActivateListOfPlayers: "以玩家清單來設定為VIP",
   ActiveCustomerSummary: "活躍會員人數摘要",
   Activity: "活動",
   AD: "客和",
@@ -209,6 +210,8 @@ window._language_zh_TW = {
   ChooseGroupNameMsg: "請選擇其他組名",
   CleanSheet: "零失球",
   ClearCurrentComm: "清除會員的佣金",
+  ClickOrDropHereToActivate: "點擊或移動清單到此以設定為VIP",
+  ClickOrDropHereToDeactivate: "點擊或移動清單到此以停用VIP",
   Close: "關閉",
   Closed: "關閉",
   ClosingBalance: "期末餘額",
@@ -274,6 +277,7 @@ window._language_zh_TW = {
   DateRangeNote: "數據可從{0:d MMM yyyy}查看",
   DateTime: "日期/時間",
   DD: "和和",
+  DeactivateListOfPlayers: "以玩家清單來停用VIP",
   Dec: "十二月",
   December: "十二月",
   DecimalOdds: "歐洲盤賠率",
