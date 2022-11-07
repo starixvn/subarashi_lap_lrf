@@ -1,4 +1,6 @@
-﻿namespace Fanex.Athena.Service.Core.UnitTests.Users
+﻿using Fanex.Athena.Extension.Utility;
+
+namespace Fanex.Athena.Service.Core.UnitTests.Users
 {
     using Core.Users;
     using Core.Users.Interfaces;
@@ -26,6 +28,7 @@
         private IAuthDataAccess _authDataAccess;
         private ISessionService _sessionService;
         private IFormsAuthenticationService _formsAuthService;
+        private IAppSettings _appSettings;
         private InternalAuthService _authService;
 
         [SetUp]
@@ -35,7 +38,8 @@
             _authDataAccess = Substitute.For<IAuthDataAccess>();
             _sessionService = Substitute.For<ISessionService>();
             _formsAuthService = Substitute.For<IFormsAuthenticationService>();
-            _authService = new InternalAuthService(_authDataAccess, _oauthService, _sessionService, _formsAuthService);
+            _appSettings = Substitute.For<IAppSettings>();
+            _authService = new InternalAuthService(_authDataAccess, _oauthService, _sessionService, _formsAuthService, _appSettings);
         }
 
         [TearDown]
@@ -127,10 +131,10 @@
         public async Task SignOut_WhenCall_ClearCookieAndSession()
         {
             // Arrange
-            var userSession = new UserAuthInfo 
-            { 
+            var userSession = new UserAuthInfo
+            {
                 OnUserId = FakeHelper.Create<int>(),
-                AccessToken = FakeHelper.Create<string>() 
+                AccessToken = FakeHelper.Create<string>()
             };
             _sessionService.UserSession.Returns(userSession);
             var httpRequest = Substitute.For<HttpRequestBase>();
@@ -141,7 +145,6 @@
 
             // Action
             await _authService.SignOut(httpResponse, httpRequest);
-
 
             // Assert
             Assert.Multiple(() =>
@@ -169,7 +172,7 @@
             HttpContext.Current = new HttpContext(
                 new HttpRequest(string.Empty, "http://abc.com", string.Empty),
                 new HttpResponse(new StringWriter())
-                ); 
+                );
 
             // Action
             await _authService.RequestOAuthInfoAsync(loginMetaModel);

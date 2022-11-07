@@ -1,4 +1,6 @@
-﻿namespace Fanex.Athena.Controllers.Report.UnitTests
+﻿using Fanex.Athena.Extension.Utility;
+
+namespace Fanex.Athena.Controllers.Report.UnitTests
 {
     using Base.UnitTests;
     using Fanex.Athena.Model.Auth.DataDomain;
@@ -72,6 +74,7 @@
             var controller = Substitute.ForPartsOf<ExchangeWinLossReportController>(reportSettingService, Substitute.For<ISubsidiaryService>());
             controller.LangService = LangService;
             controller.SessionServiceInstance = SessionService;
+            controller.AppSettingInstance = Substitute.For<IAppSettings>();
 
             return controller;
         }

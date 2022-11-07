@@ -1,9 +1,9 @@
-﻿namespace Fanex.Athena.Service.Customer
+﻿using Autofac.Features.AttributeFilters;
+using Fanex.Athena.Model.Core.DataDomain;
+using Fanex.Athena.Model.Customer.MetaModel.CustomerLog;
+
+namespace Fanex.Athena.Service.Customer
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using Fanex.Athena.DataAccess.Customer.Interfaces;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.Helper;
@@ -14,10 +14,15 @@
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Logging;
     using Newtonsoft.Json;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
 
     public class PlayerSegmentationService : IPlayerSegmentationService
     {
         private readonly IPlayerSegmentationDataAccess _playerDataAccess;
+        private readonly IBusinessLogService _businessLogService;
         private readonly ISessionService _sessionService;
         private readonly ISubsidiaryService _subsidiaryService;
         private readonly ICTSApiClient _ctsApiClient;
@@ -29,12 +34,14 @@
         public PlayerSegmentationService(
             ISessionService sessionService,
             IPlayerSegmentationDataAccess playerDataAccess,
+            [KeyFilter("PlayerSegmentLogService")] IBusinessLogService businessLogService,
             ISubsidiaryService subsidiaryService,
             ICTSApiClient cTSApiClient,
             ILogger logger
             )
         {
             _sessionService = sessionService;
+            _businessLogService = businessLogService;
             _playerDataAccess = playerDataAccess;
             _subsidiaryService = subsidiaryService;
             _ctsApiClient = cTSApiClient;
@@ -73,6 +80,25 @@
             {
                 var path = metaModel.IsVip ? ADD_LIC_VIP_PATH : REMOVE_LIC_VIP_PATH;
                 await _ctsApiClient.PostAsync(path, new { CustIds = listAffCustId }, _sessionService.UserSession.Language);
+
+                // write log TW
+                const int successCode = 0;
+                foreach (var custId in listAffCustId.Split(','))
+                {
+                    var logMetaModel = new PlayerUpdatingLogMetaModel
+                    {
+                        LicenseeCustId = metaModel.LicenseeCustId,
+                        SiteName = metaModel.SiteName,
+                        UserId = metaModel.UserId,
+                        CustId = int.Parse(custId),
+                        ActionId = LogActionId.PlayerSegmentUpdatePlayer,
+                        ActionDetailId = LogActionDetailId.UpdatingVIPPlayer,
+                        Status = updateResult.Any(r => r.Code == successCode) ? LogText.Success : LogText.False,
+                        NewValue = metaModel.IsVip ? LogText.On : LogText.Off,
+                        OldValue = !metaModel.IsVip ? LogText.On : LogText.Off,
+                    };
+                    _businessLogService.Write(BusinessLogType.PlayerSegmentationUpdatePlayer, logMetaModel);
+                }
             }
 
             return updateResult;

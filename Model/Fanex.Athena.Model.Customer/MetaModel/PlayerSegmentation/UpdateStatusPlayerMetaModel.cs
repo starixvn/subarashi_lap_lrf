@@ -4,6 +4,10 @@ namespace Fanex.Athena.Model.Customer.MetaModel
 {
     public class UpdateStatusPlayerMetaModel : IMetaModelValidation, IMetaModelAgent, IMetaModelUserId, IMetaModelIp
     {
+        public string SiteName { get; set; }
+
+        public int LicenseeCustId { get; set; }
+
         public string SystemIds { get; set; }
         public string ExternalIds { get; set; }
 

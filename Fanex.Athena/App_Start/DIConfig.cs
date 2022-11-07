@@ -9,6 +9,8 @@ using System.Web.Http;
 using System.Web.Http.ExceptionHandling;
 using System.Web.Mvc;
 using Autofac;
+using Autofac.Core;
+using Autofac.Features.AttributeFilters;
 using Autofac.Integration.Mvc;
 using Autofac.Integration.WebApi;
 using Fanex.Athena.Api.StatelessBase.Logger;
@@ -20,6 +22,8 @@ using Fanex.Athena.Service.Core.OAuth;
 using Fanex.Athena.Service.Core.Proxy;
 using Fanex.Athena.Service.Core.Users;
 using Fanex.Athena.Service.Core.Users.Interfaces;
+using Fanex.Athena.Service.Customer;
+using Fanex.Athena.Service.Customer.Interfaces;
 using Fanex.Athena.Service.StatelessCore;
 using Fanex.Athena.Service.StatelessCore.Extensions;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -49,6 +53,8 @@ namespace Fanex.Athena
             // generic types
             builder.RegisterGeneric(typeof(ThirdPartyWinLossDataAccess<>))
                 .As(typeof(IThirdPartyWinLossDataAccess<>));
+
+            RegisterBusinessLog(builder);
 
             RegisterThirdpartyServices(builder);
 
@@ -141,6 +147,23 @@ namespace Fanex.Athena
         private static IEnumerable<Assembly> GetModuleAssemblies(Assembly[] assemblies)
         {
             return assemblies.Where(ass => ass.FullName.Contains("Fanex.Athena.Module"));
+        }
+
+        private static void RegisterBusinessLog(ContainerBuilder builder)
+        {
+            builder.RegisterType<BusinessLogService>()
+                .WithParameter(
+                    new ResolvedParameter(
+                        (pi, ctx) => pi.ParameterType == typeof(IBusinessLogBuilderFactory),
+                        (pi, ctx) => ctx.ResolveKeyed<IBusinessLogBuilderFactory>("PlayerSegmentLogBuilder")))
+                .Keyed<IBusinessLogService>("PlayerSegmentLogService");
+
+            builder.RegisterType<PlayerSegmentationBusinessLogBuilderFactory>()
+                .As<IBusinessLogBuilderFactory>()
+                .Keyed<IBusinessLogBuilderFactory>("PlayerSegmentLogBuilder");
+
+            // Specify WithAttributeFiltering for the consumer
+            builder.RegisterType<PlayerSegmentationService>().As<IPlayerSegmentationService>().WithAttributeFiltering();
         }
 
         private static void RegisterSingleton(ContainerBuilder builder)
