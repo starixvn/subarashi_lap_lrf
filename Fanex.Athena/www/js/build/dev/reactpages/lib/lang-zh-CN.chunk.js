@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 11/2/2022 4:26:20 PM
+// Generated at: 11/8/2022 1:28:24 PM
 window._language_zh_CN = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -555,6 +555,7 @@ window._language_zh_CN = {
   MatchWinLoss: "球赛输赢",
   MatchWinLossTitle: "球赛输赢, {0} - {1}",
   MaxBatchUpdateMonitoredPlayerError: "最多只能上传 2000 行数据，请再次检查您的档案！",
+  MaxBatchUpdateVIPPlayerError: "最多只能上传 2000 行数据，请再次检查您的档案！",
   MaxBet: "最高投注",
   MaxBetCanNotGreaterThanMaxBetPerDraw: "最大下注金额不能超过每局最大下注额",
   MaxBetCanNotGreaterThanMaxPerMatch: "最大投注不能大于单场最大投注",
