@@ -78,27 +78,25 @@ namespace Fanex.Athena.Service.Customer
             }
             else
             {
-                var path = metaModel.IsVip ? ADD_LIC_VIP_PATH : REMOVE_LIC_VIP_PATH;
-                await _ctsApiClient.PostAsync(path, new { CustIds = listAffCustId }, _sessionService.UserSession.Language);
-
                 // write log TW
                 const int successCode = 0;
-                foreach (var custId in listAffCustId.Split(','))
+                var logMetaModel = new PlayerUpdatingLogMetaModel
                 {
-                    var logMetaModel = new PlayerUpdatingLogMetaModel
-                    {
-                        LicenseeCustId = metaModel.LicenseeCustId,
-                        SiteName = metaModel.SiteName,
-                        UserId = metaModel.UserId,
-                        CustId = int.Parse(custId),
-                        ActionId = LogActionId.PlayerSegmentUpdatePlayer,
-                        ActionDetailId = LogActionDetailId.UpdatingVIPPlayer,
-                        Status = updateResult.Any(r => r.Code == successCode) ? LogText.Success : LogText.False,
-                        NewValue = metaModel.IsVip ? LogText.On : LogText.Off,
-                        OldValue = !metaModel.IsVip ? LogText.On : LogText.Off,
-                    };
-                    _businessLogService.Write(BusinessLogType.PlayerSegmentationUpdatePlayer, logMetaModel);
-                }
+                    LicenseeCustId = metaModel.LicenseeCustId,
+                    SiteName = metaModel.SiteName,
+                    UserId = metaModel.UserId,
+                    ListCustId = listAffCustId,
+                    ActionId = LogActionId.PlayerSegmentUpdateVIPPlayer,
+                    ActionDetailId = LogActionDetailId.UpdatingVIPPlayer,
+                    Status = updateResult.Any(r => r.Code == successCode) ? LogText.Success : LogText.False,
+                    NewValue = metaModel.IsVip ? LogText.On : LogText.Off,
+                    OldValue = !metaModel.IsVip ? LogText.On : LogText.Off,
+                };
+                _businessLogService.Write(BusinessLogType.PlayerSegmentationUpdatePlayer, logMetaModel);
+
+                // write log CTS
+                var path = metaModel.IsVip ? ADD_LIC_VIP_PATH : REMOVE_LIC_VIP_PATH;
+                await _ctsApiClient.PostAsync(path, new { CustIds = listAffCustId }, _sessionService.UserSession.Language);
             }
 
             return updateResult;

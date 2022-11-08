@@ -15,12 +15,23 @@ namespace Fanex.Athena.Service.StatelessCore.Extensions
 
             return new BusinessLogItem
             {
-                CustID = currentItem.CustId,
                 UserId = currentItem.UserId,
-                ActionID = LogActionId.PlayerSegmentUpdatePlayer,
+                ActionID = LogActionId.PlayerSegmentUpdateVIPPlayer,
                 TypeId = (byte)UserControlLogType.Function,
-                Doing = $"LAP - {currentItem.SiteName} - {currentItem.LicenseeCustId} - {currentItem.ActionDetailId} - {currentItem.Status} - {currentItem.NewValue} - {currentItem.OldValue}"
+                LogData = FormatLogDataToXml(currentItem)
             };
+        }
+
+        private string FormatLogDataToXml(PlayerUpdatingLogMetaModel model)
+        {
+            var xml = "";
+
+            foreach (var custId in model.ListCustId.Split(','))
+            {
+                xml += $"<r id=\"{custId}\" log=\"LAP - {model.SiteName} - {model.LicenseeCustId} - {model.ActionDetailId} - {model.Status} - {model.NewValue} - {model.OldValue}\" />";
+            }
+
+            return $"<Root>{xml}</Root>";
         }
     }
 }
