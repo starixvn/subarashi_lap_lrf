@@ -4759,6 +4759,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Only allow to upload maximum of 2000 data rows, please check your file again!.
+        /// </summary>
+        public static string MaxBatchUpdateVIPPlayerError {
+            get {
+                return ResourceManager.GetString("MaxBatchUpdateVIPPlayerError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Max Bet.
         /// </summary>
         public static string MaxBet {

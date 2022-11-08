@@ -23,3 +23,5 @@ export const ActionType = {
     Actived: 1,
     Deactived: 2
 }
+
+export const MaxBatchUpdateVIPPlayer = 2000; 

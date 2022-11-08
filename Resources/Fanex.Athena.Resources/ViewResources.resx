@@ -3404,4 +3404,7 @@
     <value>Click or drop here</value>
     <comment>#128082</comment>
   </data>
+  <data name="MaxBatchUpdateVIPPlayerError" xml:space="preserve">
+    <value>Only allow to upload maximum of 2000 data rows, please check your file again!</value>
+  </data>
 </root>

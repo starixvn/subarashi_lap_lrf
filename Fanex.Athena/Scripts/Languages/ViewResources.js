@@ -1,4 +1,4 @@
-﻿// Generated at: 11/2/2022 4:26:06 PM
+﻿// Generated at: 11/8/2022 1:30:52 PM
 var _language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -522,6 +522,7 @@ MatchPrefix:"Match Prefix e.g",
 MatchWinLoss:"Match Win Loss",
 MatchWinLossTitle:"Match Win Loss, {0} - {1}",
 MaxBatchUpdateMonitoredPlayerError:"Only allow to upload maximum of 2000 data rows, please check your file again!",
+MaxBatchUpdateVIPPlayerError:"Only allow to upload maximum of 2000 data rows, please check your file again!",
 MaxBet:"Max Bet",
 MaxBetCanNotGreaterThanMaxBetPerDraw:"Max Bet can not be greater than Max Bet Per Draw",
 MaxBetCanNotGreaterThanMaxPerMatch:"Max Bet can not be greater than Max Per Match",

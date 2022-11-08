@@ -8,16 +8,17 @@ import { decode } from '@jsroot/lib/htmlHelper';
 import { generateDefaultConfirmOption, predefinedIcons } from '@jsroot/lib/sweetAlert';
 import { ActionCreators } from '../actions';
 import DropzoneUpload from '../../../components/DropzoneUpload';
-import { Url, ExcelReaderColumn, ActionType } from '../lib/constants';
+import { MaxBatchUpdateVIPPlayer, ActionType } from '../lib/constants';
 import { TabType } from '../../../lib/constants';
 import { UploadFileOptions, UploadFileOptionValue } from '../../../lib/constants';
 import ExcelHelper from '../lib/helpers/excelHelper';
+import GridHelper from '../../../lib/helpers/gridHelper';
 import { UpdateVipStatusAlertOption } from '../../../lib/helpers/sweetAlertHelper';
 import AppData from '@jsroot/lib/AppData';
 import VipPlayerQueryService from "../lib/queryService";
 
 export const FormAction = props => {
-    const { isActiveTaggingAction, playerList, updateVipStatus, setSweetAlertOption, selectedParams } = props;
+    const { isActiveTaggingAction, playerList, updateVipStatus, setSweetAlertOption, selectedParams, selectedTabKey, pagingOption, setPagingOption, searchPlayer } = props;
     const [displayUploadDropzone, setDisplayUploadDropzone] = useState(false);
     const [isActivateVIP, setIsActivateVIP] = useState(false);
     const [resultMsgSubmitVipListFile, setResultMsgSubmitVipListFile] = useState(null);
@@ -85,6 +86,7 @@ export const FormAction = props => {
         const handlerUpdateVipStatusSuccess = resultMessage => {
             setSweetAlertOption(null);
             setResultMsgSubmitVipListFile(resultMessage);
+            searchPlayer(selectedTabKey, selectedParams, GridHelper.callBackToUpdatePaging({ pagingOption, setPagingOption }));
         }
         const alertOption = _buildAlertOptionUpdateVipStatus(params, isActivateVIP, true, handlerUpdateVipStatusSuccess);
         setSweetAlertOption(alertOption);
@@ -105,7 +107,10 @@ export const FormAction = props => {
                     alert(decode(LangHelper.getSingleResource("UploadFileError")))
                     return;
                 }
-
+                if (content.map(_ => _[selectedColumn]).length > MaxBatchUpdateVIPPlayer) {
+                    alert(decode(LangHelper.getSingleResource("MaxBatchUpdateVIPPlayerError")))
+                    return;
+                }
                 const value = content.map(_ => _[selectedColumn]).join();
                 const params = {
                     [byExternalId ? 'externalIds' : 'systemIds']: value,
