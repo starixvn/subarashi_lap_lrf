@@ -2,6 +2,6 @@
 {
     public static class LogActionId
     {
-        public const int PlayerSegmentUpdateVIPPlayer = 5562;
+        public const int PlayerSegmentUpdateVIPPlayer = 5567;
     }
 }

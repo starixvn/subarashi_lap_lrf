@@ -2,6 +2,6 @@
 {
     public static class LogActionDetailId
     {
-        public const int UpdatingVIPPlayer = 5;
+        public const int UpdatingVIPPlayer = 39;
     }
 }
