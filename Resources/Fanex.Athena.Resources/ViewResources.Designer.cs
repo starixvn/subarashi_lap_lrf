@@ -7315,11 +7315,29 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Settled and Resettled Report.
+        /// </summary>
+        public static string SettledAndResettledReport {
+            get {
+                return ResourceManager.GetString("SettledAndResettledReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Settled Match Count.
         /// </summary>
         public static string SettledMatchCount {
             get {
                 return ResourceManager.GetString("SettledMatchCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settled Report.
+        /// </summary>
+        public static string SettledReport {
+            get {
+                return ResourceManager.GetString("SettledReport", resourceCulture);
             }
         }
         
@@ -8697,6 +8715,15 @@ namespace Fanex.Athena.Resources {
         public static string Viewin {
             get {
                 return ResourceManager.GetString("Viewin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View in.
+        /// </summary>
+        public static string ViewInWithNoParam {
+            get {
+                return ResourceManager.GetString("ViewInWithNoParam", resourceCulture);
             }
         }
         

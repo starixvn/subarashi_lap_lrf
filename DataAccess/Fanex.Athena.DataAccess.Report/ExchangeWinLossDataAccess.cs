@@ -9,6 +9,7 @@
     using Core.Extensions;
     using Data;
     using Extension.Utility;
+    using Fanex.Athena.Model.Report.Constants;
     using Interfaces;
     using Model.Core.ResultModel;
     using Model.Report.DTO;
@@ -18,7 +19,7 @@
     {
         public async Task<ReportResultModel<ExchangeWinLoss>> GetMainWinloss(ExchangeWinLossMetaModel metaModel, IDictionary<int, string> currencyList)
         {
-            const string UspName = "Lrf_Rpt_ExchangeWinloss";
+            var UspName = metaModel.ViewInType == ViewInTypes.SettledReport ? "Lrf_Rpt_ExchangeWinloss" : "Lrf_Rpt_ExchangeWinlosss_ByResettledDate";
 
             using (var db = GetObjectDb(UspName))
             {
@@ -34,7 +35,7 @@
 
         public async Task<ReportResultModel<ExchangeWinLoss>> GetCustomerWinloss(ExchangeWinLossMetaModel metaModel, IDictionary<int, string> currencyList)
         {
-            const string UspName = "Lrf_Rpt_ExchangeWinloss_Mem";
+            var UspName = metaModel.ViewInType == ViewInTypes.SettledReport ? "Lrf_Rpt_ExchangeWinloss_Mem" : "Lrf_Rpt_ExchangeWinloss_ByResettledDate_Mem";
 
             using (var db = GetObjectDb(UspName))
             {
@@ -50,7 +51,7 @@
 
         public async Task<ReportResultModel<ExchangeWinLoss>> GetLicenseeWinloss(ExchangeWinLossMetaModel metaModel, IDictionary<int, string> currencyList)
         {
-            const string UspName = "Lrf_Rpt_ExchangeWinloss_Ag";
+            var UspName = metaModel.ViewInType == ViewInTypes.SettledReport ? "Lrf_Rpt_ExchangeWinloss_Ag" : "Lrf_Rpt_ExchangeWinloss_ByResettledDate_Ag";
 
             using (var db = GetObjectDb(UspName))
             {

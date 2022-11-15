@@ -114,6 +114,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\ResultVendorProductTypes.cs" />
+    <Compile Include="Constants\ViewInTypes.cs" />
     <Compile Include="DTO\CashOutWinLoss.cs" />
     <Compile Include="DTO\CasinoTurnover.cs" />
     <Compile Include="DTO\ExchangeVoidedItem.cs" />

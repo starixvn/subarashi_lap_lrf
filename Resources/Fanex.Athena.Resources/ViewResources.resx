@@ -3410,6 +3410,15 @@
   <data name="ProductTIP" xml:space="preserve">
     <value>Player Tips</value>
   </data>
+  <data name="SettledAndResettledReport" xml:space="preserve">
+    <value>Settled and Resettled Report</value>
+  </data>
+  <data name="SettledReport" xml:space="preserve">
+    <value>Settled Report</value>
+  </data>
+  <data name="ViewInWithNoParam" xml:space="preserve">
+    <value>View in</value>
+  </data>
   <data name="Information" xml:space="preserve">
     <value>Information</value>
   </data>

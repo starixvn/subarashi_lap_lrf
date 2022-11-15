@@ -36,6 +36,8 @@
 
         public IDictionary<byte, string> ReportByOption { get; set; }
 
+        public IDictionary<byte, string> ViewInOption { get; set; }
+
         public DateTime MinDate { get; set; }
 
         public DateTime MaxDate { get; set; }

@@ -2983,6 +2983,15 @@
   <data name="ProductTIP" xml:space="preserve">
     <value>玩家打赏</value>
   </data>
+  <data name="SettledAndResettledReport" xml:space="preserve">
+    <value>已结算与已重新结算报告</value>
+  </data>
+  <data name="SettledReport" xml:space="preserve">
+    <value>已结算报告</value>
+  </data>
+  <data name="ViewInWithNoParam" xml:space="preserve">
+    <value>查看</value>
+  </data>
   <data name="Basketball" xml:space="preserve">
     <value>篮球</value>
   </data>

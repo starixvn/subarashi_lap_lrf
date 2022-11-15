@@ -17,7 +17,8 @@ import ReportExcel from '../lib/reportExcel'
 import { Service } from '../lib/service'
 import moment from 'moment'
 
-const RANGE_MONTH_CONSTRAINT = 3;
+const RANGE_THREE_MONTH_CONSTRAINT = 3;
+const RANGE_ONE_MOTHN_CONSTRAINT = 1;
 
 export class FormFilter extends Component {
     constructor(props) {
@@ -120,7 +121,8 @@ export class FormFilter extends Component {
             IsExcludedTestData: this.props.isExcludeTest,
             Level: 0,
             SubsidiarySearch: subsidiarySearch,
-            SubsidiaryList: subsidiarySearch ? this.props.selectedSubsidiary : ""
+            SubsidiaryList: subsidiarySearch ? this.props.selectedSubsidiary : "",
+            ViewInType: this.props.selectedViewInOption
         };
 
         return {
@@ -128,12 +130,19 @@ export class FormFilter extends Component {
         };
     }
 
+    _getMonthRangeConstraint(){
+        const viewInSettledDate = 2;
+        const { selectedViewInOption } = this.props;
+
+        return selectedViewInOption === viewInSettledDate ? RANGE_THREE_MONTH_CONSTRAINT : RANGE_ONE_MOTHN_CONSTRAINT;
+    }
+
     applyDateRangeHandler = (date, isValidMonthRange = true) => {
         if (isValidMonthRange) {
             this.props.setDateRange(date);
         }
         else {
-            const message = LangHelper.getSingleResource('DateRangeExceedMsg').replace('{0}', RANGE_MONTH_CONSTRAINT);
+            const message = LangHelper.getSingleResource('DateRangeExceedMsg').replace('{0}', this._getMonthRangeConstraint());
             alert(message);
         }
     }
@@ -142,6 +151,13 @@ export class FormFilter extends Component {
         const newValue = parseInt(event.target.value, 10);
         if (!isNaN(newValue) && this.props.selectedReportBy !== newValue) {
             this.props.setReportBy(newValue);
+        }
+    }
+
+    changeViewInOption = (event) => {
+        const newValue = parseInt(event.target.value, 10);
+        if (!isNaN(newValue) && this.props.selectedViewInOption != newValue){
+            this.props.setViewInOption(newValue);
         }
     }
 
@@ -167,10 +183,11 @@ export class FormFilter extends Component {
     _renderDateRange() {
         const { dateRange } = this.props;
         const dateConstraint = AppData.dateConstraint;
+        const limitMonthRange = this._getMonthRangeConstraint()
         return (
             <DateRange startDate={dateRange.fromDate} endDate={dateRange.toDate}
                 minDate={dateConstraint.minDate} maxDate={dateConstraint.maxDate}
-                today={dateConstraint.toDay} limitedMonthRange={RANGE_MONTH_CONSTRAINT}
+                today={dateConstraint.toDay} limitedMonthRange={limitMonthRange}
                 onChange={this.applyDateRangeHandler} />
         );
     }
@@ -201,6 +218,23 @@ export class FormFilter extends Component {
                 })
             }
         </div>);
+    }
+
+    _renderViewInOption(){
+        const{ viewInOption, selectedViewIn } = this.props;
+        (<div className='form-group'>
+            <label className='label-text'>{LangHelper.getSingleResource('ViewInWithNoParam')}</label>
+            {
+                viewInOption.map((option, i) => {
+                    const key = 'ViewInType' + i;
+                    return (<span key={`Group${key}`}>
+                        <input type='radio' value={option.value} checked={selectedViewIn === option.value} id={key}
+                            onChange={this.changeViewInOption} />
+                        <label htmlFor={key}>{option.label}</label>
+                    </span>)
+                })
+            }
+        </div>); 
     }
 
     _renderExcludeTestDataCheckBox() {
@@ -257,17 +291,11 @@ export class FormFilter extends Component {
                             {this._renderExcludeTestDataCheckBox()}
                         </div>
                     </div>
-
-                    {!showSubsidiarySearch && <div className='col-12 col-sm-3 col-md-2 col-xl-1'>
-                        <div className='form-group button-group'>
-                            <button type='button' className='btn btn-submit'
-                                disabled={this.props.subsidiarySearch && !this.props.selectedSubsidiary}
-                                onClick={this.submit}>{LangHelper.getSingleResource('Submit')}</button>
-                        </div>
-                    </div>}
-                </div>
-                {showSubsidiarySearch &&
+                </div>                
                     <div className='row'>
+                        <div className='col-12 col-sm-8 col-md-4 col-xl-4'>
+                            {this._renderViewInOption()}
+                        </div>
                         <div className='col-12 col-sm-3 col-md-2 col-xl-1'>
                             <div className='form-group button-group'>
                                 <button type='button' className='btn btn-submit'
@@ -275,15 +303,15 @@ export class FormFilter extends Component {
                                     onClick={this.submit}>{LangHelper.getSingleResource('Submit')}</button>
                             </div>
                         </div>
-                        <div className='col-12 col-sm-3 col-md-2 col-xl-2'>
+                        { showSubsidiarySearch &&<div className='col-12 col-sm-3 col-md-2 col-xl-2'>
                             <div className="form-group">
                                 <CheckBox id="SubsidiarySearch"
                                     checked={this.props.subsidiarySearch}
                                     onChange={checked => this.props.setSubsidiarySearch(checked)}
                                     label={LangHelper.getSingleResource("SubsidiarySearch")} />
                             </div>
-                        </div>
-                    </div>}
+                        </div>}
+                    </div>
                 < div className='caret-block'>
                     <i className='icon-excel right' onClick={this.exportExcel} title={LangHelper.getSingleResource('ExportToExcel')}></i>
                 </div>

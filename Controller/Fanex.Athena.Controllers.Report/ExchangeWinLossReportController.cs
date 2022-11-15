@@ -1,6 +1,7 @@
 ﻿namespace Fanex.Athena.Controllers.Report
 {
     using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Report.Constants;
     using Fanex.Athena.Model.Report.ViewModel;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -45,7 +46,7 @@
             var offerCurrencyIds = isOfferCryptoCurrencyLicensee ? SystemConstants.BaseCryptoCurrencyListIds : SystemConstants.BaseCurrencyListIds;
             var currencyList = new Dictionary<int, string>
             {
-                { BaseCurrencyType.All, ViewResources.All },
+                { BaseCurrencyType.All, ViewResources.All }
             };
 
             foreach (var item in SystemConstants.BaseCurrencyList.Where(_ => offerCurrencyIds.Contains(_.Key)))
@@ -68,12 +69,17 @@
                 IsAllowedCustomerComm = licensee.IsAllowedCustomerComm,
                 LicenseeId = licensee.LicenseeId,
                 CurrencyId = SystemConstants.BaseCurrencyList
-                .FirstOrDefault(x => x.Value.Equals(userSession.DefaultBaseCurrency, StringComparison.OrdinalIgnoreCase))
-                .Key,
+                    .FirstOrDefault(x => x.Value.Equals(userSession.DefaultBaseCurrency, StringComparison.OrdinalIgnoreCase))
+                    .Key,
                 ReportByOption = new Dictionary<byte, string>
                 {
                     { ReportByType.Daily, ViewResources.Daily },
                     { ReportByType.Monthly, ViewResources.Monthly }
+                },
+                ViewInOption = new Dictionary<byte, string>
+                {
+                    { ViewInTypes.SettledAndResettledReport, ViewResources.SettledAndResettledReport },
+                    { ViewInTypes.SettledReport, ViewResources.SettledReport }
                 },
                 ViewType = viewType,
                 SubsidiaryList = subsidiaryList

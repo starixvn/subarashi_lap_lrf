@@ -2284,6 +2284,15 @@
   <data name="ProductTIP" xml:space="preserve">
     <value>玩家打賞</value>
   </data>
+  <data name="SettledAndResettledReport" xml:space="preserve">
+    <value>已結算與已重新結算報告</value>
+  </data>
+  <data name="SettledReport" xml:space="preserve">
+    <value>已結算報告</value>
+  </data>
+  <data name="ViewInWithNoParam" xml:space="preserve">
+    <value>查看</value>
+  </data>
   <data name="ApplyParlay" xml:space="preserve">
     <value>包含串關</value>
   </data>
