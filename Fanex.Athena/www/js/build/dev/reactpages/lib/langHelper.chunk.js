@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 10/19/2022 10:25:52 AM
+// Generated at: 11/8/2022 1:28:24 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -101,6 +101,7 @@ window._language_en_US = {
   Account: "Account",
   AccountManagement: "Account Management",
   Action: "Action",
+  ActivateListOfPlayers: "Activate List of Players",
   ActivateVip: "Activate VIP",
   Active: "Active",
   ActiveCustomers: "Active Customers",
@@ -252,6 +253,8 @@ window._language_en_US = {
   ClearCurrentComm: "Clear customer&apos;s commission",
   ClickHere: "Click here",
   ClickOrDropHere: "Click or drop here",
+  ClickOrDropHereToActivate: "Click or drop the list to activate VIP status here",
+  ClickOrDropHereToDeactivate: "Click or drop the list to deactivate VIP status here",
   Close: "close",
   Closed: "Closed",
   ClosingBalance: "Closing Balance",
@@ -334,6 +337,7 @@ window._language_en_US = {
   Day: "Day",
   DayRangeExceedMsg: "Date range exceeds {0} days. Please try again!",
   DD: "DD",
+  DeactivateListOfPlayers: "Deactivate List of Players",
   DeactivateVip: "Deactivate VIP",
   Dec: "Dec",
   December: "December",
@@ -365,6 +369,7 @@ window._language_en_US = {
   DisableGoldDeluxe: "Disable Gold Deluxe",
   DisableMacau: "Disable Macau",
   DisableMacauGames: "Disable Macau Games",
+  DisableParlay: "Disable Parlay",
   DisableProduct: "Disable {0}",
   DisableRNGCasino: "Disable RNG Casino",
   DiscountValue: "Discount Value",
@@ -606,6 +611,7 @@ window._language_en_US = {
   MatchWinLoss: "Match Win Loss",
   MatchWinLossTitle: "Match Win Loss, {0} - {1}",
   MaxBatchUpdateMonitoredPlayerError: "Only allow to upload maximum of 2000 data rows, please check your file again!",
+  MaxBatchUpdateVIPPlayerError: "Only allow to upload maximum of 2000 data rows, please check your file again!",
   MaxBet: "Max Bet",
   MaxBetCanNotGreaterThanMaxBetPerDraw: "Max Bet can not be greater than Max Bet Per Draw",
   MaxBetCanNotGreaterThanMaxPerMatch: "Max Bet can not be greater than Max Per Match",
@@ -1020,7 +1026,6 @@ window._language_en_US = {
   UploadFile: "Upload File",
   UploadFileError: "Could not load the file, please check file&apos;s template again !",
   UploadSystemIdList: "Upload System ID List",
-  UploadVipList: "Upload VIP List",
   UserGuide: "User Guide",
   UserInformation: "User Information",
   Username: "Username",

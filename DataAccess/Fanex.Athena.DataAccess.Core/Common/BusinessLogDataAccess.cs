@@ -17,7 +17,7 @@ namespace Fanex.Athena.DataAccess.Core.Common
 
         public void Write(BusinessLogItem businessLogItem)
         {
-            const string UspName = "WriteLog_UserLog_UserControl";
+            const string UspName = "Lrf_WriteLog_UserLog_UserControl_Multiple"; //WriteLog_UserLog_UserControl
 
             try
             {
@@ -28,7 +28,7 @@ namespace Fanex.Athena.DataAccess.Core.Common
             }
             catch (Exception ex)
             {
-                _logger.Error("WriteLog_UserLog_UserControl \n" + ex.Message, ex);
+                _logger.Error("Lrf_WriteLog_UserLog_UserControl_Multiple \n" + ex.Message, ex);
             }
         }
     }

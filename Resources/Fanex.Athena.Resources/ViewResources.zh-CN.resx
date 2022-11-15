@@ -2250,9 +2250,9 @@
     <value>点击此处</value>
     <comment>#128082</comment>
   </data>
-  <data name="ClickOrDropHere" xml:space="preserve">
-    <value>点击或拖曳档案至此</value>
-    <comment>#128082</comment>
+  <data name="ClickOrDropHereToActivate" xml:space="preserve">
+    <value>点击或移动清单到此以设定为VIP</value>
+    <comment>#128082, #179961</comment>
   </data>
   <data name="ConfirmActivateVIPPlayer" xml:space="preserve">
     <value>如果所选玩家被标记为VIP，则会恢复该玩家的投注限额。您确定要激活VIP吗?</value>
@@ -2306,9 +2306,9 @@
     <value>无法上传档案，请确认档案格式!</value>
     <comment>#128082</comment>
   </data>
-  <data name="UploadVipList" xml:space="preserve">
-    <value>上传VIP清单</value>
-    <comment>#128082</comment>
+  <data name="ActivateListOfPlayers" xml:space="preserve">
+    <value>以玩家清单来设定为VIP</value>
+    <comment>#128082, #179961</comment>
   </data>
   <data name="VipPlayerManagement" xml:space="preserve">
     <value>VIP玩家管理</value>
@@ -2964,5 +2964,20 @@
   </data>
   <data name="DisableParlay" xml:space="preserve">
     <value>关闭串关</value>
+  </data>
+  <data name="ClickOrDropHere" xml:space="preserve">
+    <value>点击或拖曳档案至此</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="ClickOrDropHereToDeactivate" xml:space="preserve">
+    <value>点击或移动清单到此以停用VIP</value>
+    <comment>#179961</comment>
+  </data>
+  <data name="DeactivateListOfPlayers" xml:space="preserve">
+    <value>以玩家清单来停用VIP</value>
+    <comment>#179961</comment>
+  </data>
+  <data name="MaxBatchUpdateVIPPlayerError" xml:space="preserve">
+    <value>最多只能上传 2000 行数据，请再次检查您的档案！</value>
   </data>
 </root>

@@ -1024,7 +1024,7 @@ const TabMenu = props => {
 /*!**************************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/customer/player-segmentation/lib/constants.js ***!
   \**************************************************************************************/
-/*! exports provided: tabKeys, tabMenuList, preLoadComponents, SortMapper, UploadFileOptionValue, UploadFileOptions, UpdateVIPStatusCode, errorResponse, successResponse */
+/*! exports provided: tabKeys, tabMenuList, preLoadComponents, SortMapper, UploadFileOptionValue, UploadFileOptions, UpdateVIPStatusCode, errorResponse, successResponse, TabType */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1038,6 +1038,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UpdateVIPStatusCode", function() { return UpdateVIPStatusCode; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "errorResponse", function() { return errorResponse; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "successResponse", function() { return successResponse; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TabType", function() { return TabType; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
@@ -1104,6 +1105,11 @@ const errorResponse = {
 };
 const successResponse = {
   isSuccess: true
+};
+const TabType = {
+  ProblemPlayer: 1,
+  VipPlayerManagement: 2,
+  MonitoredPlayer: 3
 };
 
 /***/ }),

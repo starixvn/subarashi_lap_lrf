@@ -6,7 +6,7 @@
 
         public int UserId { get; set; }
 
-        public int CustId { get; set; }
+        public string ListCustId { get; set; }
 
         public int ActionId { get; set; }
 

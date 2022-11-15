@@ -39,7 +39,7 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
             var logService = new BusinessLogService(_logBuilderFactory, _logDataAccess);
 
             // Action
-            logService.Write(Model.Core.DataDomain.BusinessLogType.CustomerUpdateBA, itemToBuild);
+            logService.Write(Model.Core.DataDomain.BusinessLogType.PlayerSegmentationUpdatePlayer, itemToBuild);
 
             // Assert
             _logDataAccess.DidNotReceiveWithAnyArgs();
@@ -53,12 +53,12 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
             var expectedBuiltItem = FakeHelper.Create<BusinessLogItem>();
             var logBuilder = Substitute.For<IBusinessLogBuilderExtension>();
             logBuilder.Build(itemToBuild).Returns(expectedBuiltItem);
-            _logBuilderFactory.GetBuilder(BusinessLogType.CustomerUpdateBA).Returns(logBuilder);
+            _logBuilderFactory.GetBuilder(BusinessLogType.PlayerSegmentationUpdatePlayer).Returns(logBuilder);
 
             var logService = new BusinessLogService(_logBuilderFactory, _logDataAccess);
 
             // Action
-            logService.Write(BusinessLogType.CustomerUpdateBA, itemToBuild);
+            logService.Write(BusinessLogType.PlayerSegmentationUpdatePlayer, itemToBuild);
 
             // Assert
             _logDataAccess.Received(1).Write(expectedBuiltItem);

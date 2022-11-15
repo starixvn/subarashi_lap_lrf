@@ -2652,9 +2652,9 @@
     <value>Click here</value>
     <comment>#128082</comment>
   </data>
-  <data name="ClickOrDropHere" xml:space="preserve">
-    <value>Click or drop here</value>
-    <comment>#128082</comment>
+  <data name="ClickOrDropHereToActivate" xml:space="preserve">
+    <value>Click or drop the list to activate VIP status here</value>
+    <comment> #179961</comment>
   </data>
   <data name="ConfirmActivateVIPPlayer" xml:space="preserve">
     <value>The bet limit will be reapplied if the selected player(s) is marked VIP. Are you sure you want to activate VIP ?</value>
@@ -2708,9 +2708,9 @@
     <value>Could not load the file, please check file's template again !</value>
     <comment>#128082</comment>
   </data>
-  <data name="UploadVipList" xml:space="preserve">
-    <value>Upload VIP List</value>
-    <comment>#128082</comment>
+  <data name="ActivateListOfPlayers" xml:space="preserve">
+    <value>Activate List of Players</value>
+    <comment>#128082, #179961</comment>
   </data>
   <data name="VipPlayerManagement" xml:space="preserve">
     <value>VIP Player Management</value>
@@ -3391,5 +3391,20 @@
   </data>
   <data name="DisableParlay" xml:space="preserve">
     <value>Disable Parlay</value>
+  </data>
+  <data name="DeactivateListOfPlayers" xml:space="preserve">
+    <value>Deactivate List of Players</value>
+    <comment>#179961</comment>
+  </data>
+  <data name="ClickOrDropHereToDeactivate" xml:space="preserve">
+    <value>Click or drop the list to deactivate VIP status here</value>
+    <comment>#179961</comment>
+  </data>
+  <data name="ClickOrDropHere" xml:space="preserve">
+    <value>Click or drop here</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="MaxBatchUpdateVIPPlayerError" xml:space="preserve">
+    <value>Only allow to upload maximum of 2000 data rows, please check your file again!</value>
   </data>
 </root>

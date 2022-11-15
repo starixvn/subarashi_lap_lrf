@@ -17,8 +17,8 @@ const dynamicImports = {
 }
 
 export const tabMenuList = AppData.TabKeys.map(_ => ({
-        key: _, name: LangHelper.getSingleResource(_), component: React.lazy(dynamicImports[_]), preLoad: dynamicImports[_], isNew: newTabs.some(newTab => newTab === _)
-    }))
+    key: _, name: LangHelper.getSingleResource(_), component: React.lazy(dynamicImports[_]), preLoad: dynamicImports[_], isNew: newTabs.some(newTab => newTab === _)
+}))
 
 export const preLoadComponents = (lazyComponents) => {
     lazyComponents && setTimeout(() => lazyComponents.forEach(_ => _.preLoad && _.preLoad()), 0)
@@ -63,4 +63,10 @@ export const errorResponse = {
 
 export const successResponse = {
     isSuccess: true
+}
+
+export const TabType = {
+    ProblemPlayer:1,
+    VipPlayerManagement:2,
+    MonitoredPlayer:3
 }

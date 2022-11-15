@@ -1779,6 +1779,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/htmlHelper */ "./www/js/source/reactpages/lib/htmlHelper.js");
 /* harmony import */ var react_dropzone__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-dropzone */ "./node_modules/react-dropzone/dist/es/index.js");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/constants.js");
+
 
 
 
@@ -1792,7 +1794,9 @@ const DropzoneUpload = props => {
     multiple,
     accept,
     children,
-    isShowInnerZone
+    isShowInnerZone,
+    tabType,
+    isActive
   } = props;
   const maxSize = props.maxSize * MbToByte;
   const [uploadedFiles, setUploadedFiles] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]);
@@ -1852,6 +1856,16 @@ const DropzoneUpload = props => {
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, file.name))));
   };
 
+  const _clickHereTitle = () => {
+    switch (tabType) {
+      case _lib_constants__WEBPACK_IMPORTED_MODULE_4__["TabType"].VipPlayerManagement:
+        return isActive ? 'ClickOrDropHereToActivate' : 'ClickOrDropHereToDeactivate';
+
+      default:
+        return 'ClickOrDropHere';
+    }
+  };
+
   const _isExistFiles = uploadedFiles && uploadedFiles.length > 0;
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1865,7 +1879,7 @@ const DropzoneUpload = props => {
     className: "dropzone-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", getRootProps({
     className: 'inner-dropzone'
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", getInputProps()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('ClickOrDropHere'))))), isShowInnerZone && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", getInputProps()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource(_clickHereTitle()))))), isShowInnerZone && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "dropzone-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "btn",
@@ -2967,9 +2981,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/vip-player-management/lib/constants.js");
 /* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/constants.js");
 /* harmony import */ var _lib_helpers_excelHelper__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../lib/helpers/excelHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/vip-player-management/lib/helpers/excelHelper.js");
-/* harmony import */ var _lib_helpers_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../../lib/helpers/sweetAlertHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/helpers/sweetAlertHelper.js");
-/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
-/* harmony import */ var _lib_queryService__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../lib/queryService */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/vip-player-management/lib/queryService.js");
+/* harmony import */ var _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../../lib/helpers/gridHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/helpers/gridHelper.js");
+/* harmony import */ var _lib_helpers_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../../lib/helpers/sweetAlertHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/helpers/sweetAlertHelper.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+/* harmony import */ var _lib_queryService__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../lib/queryService */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/vip-player-management/lib/queryService.js");
+
+
 
 
 
@@ -2992,12 +3009,17 @@ const FormAction = props => {
     playerList,
     updateVipStatus,
     setSweetAlertOption,
-    selectedParams
+    selectedParams,
+    selectedTabKey,
+    pagingOption,
+    setPagingOption,
+    searchPlayer
   } = props;
   const [displayUploadDropzone, setDisplayUploadDropzone] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
+  const [isActivateVIP, setIsActivateVIP] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
   const [resultMsgSubmitVipListFile, setResultMsgSubmitVipListFile] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null);
   const [uploadFileOption, setUploadFileOption] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(_lib_constants__WEBPACK_IMPORTED_MODULE_11__["UploadFileOptionValue"].byExternalId);
-  const hasVipManagementEdit = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_14__["default"].HasVipManagementEdit;
+  const hasVipManagementEdit = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_15__["default"].HasVipManagementEdit;
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     resultMsgSubmitVipListFile && setDisplayUploadDropzone(false);
   }, [selectedParams]);
@@ -3022,14 +3044,14 @@ const FormAction = props => {
 
   const _buildAlertOptionUpdateVipStatus = (params, isUpdateVip, noAlertResult, handlerUpdateVipStatusSuccess) => {
     const confirmMessage = isUpdateVip ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("ConfirmActivateVIPPlayer") : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("ConfirmDeactivateVIPPlayer");
-    handlerUpdateVipStatusSuccess = handlerUpdateVipStatusSuccess || _lib_helpers_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_13__["UpdateVipStatusAlertOption"].createHandlerAfterUpdateVipStatusSuccess(props);
-    const handlerAfterUpdateVipStatus = _lib_helpers_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_13__["UpdateVipStatusAlertOption"].createHandlerAfterUpdateVipStatus({
+    handlerUpdateVipStatusSuccess = handlerUpdateVipStatusSuccess || _lib_helpers_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_14__["UpdateVipStatusAlertOption"].createHandlerAfterUpdateVipStatusSuccess(props);
+    const handlerAfterUpdateVipStatus = _lib_helpers_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_14__["UpdateVipStatusAlertOption"].createHandlerAfterUpdateVipStatus({
       setSweetAlertOption,
       handlerUpdateVipStatusSuccess,
       isUpdateVip,
       noAlertResult
     });
-    const confirmProps = _lib_helpers_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_13__["UpdateVipStatusAlertOption"].createUpdateVipStatusConfirmProps({
+    const confirmProps = _lib_helpers_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_14__["UpdateVipStatusAlertOption"].createUpdateVipStatusConfirmProps({
       params,
       updateVipStatus,
       handlerAfterUpdateVipStatus
@@ -3060,18 +3082,28 @@ const FormAction = props => {
     setSweetAlertOption(alertOption);
   };
 
-  const _handleDisplayUploadDropzone = () => {
+  const _handleDisplayUploadDropzone = type => {
+    if (type === _lib_constants__WEBPACK_IMPORTED_MODULE_10__["ActionType"].Deactived && isActivateVIP || type === _lib_constants__WEBPACK_IMPORTED_MODULE_10__["ActionType"].Actived && !isActivateVIP) {
+      setDisplayUploadDropzone(true);
+    } else {
+      setDisplayUploadDropzone(!displayUploadDropzone);
+    }
+
+    setIsActivateVIP(type === _lib_constants__WEBPACK_IMPORTED_MODULE_10__["ActionType"].Actived);
     setResultMsgSubmitVipListFile(null);
-    setDisplayUploadDropzone(!displayUploadDropzone);
   };
 
   const _handleActiveVipStatusFromFile = params => {
     const handlerUpdateVipStatusSuccess = resultMessage => {
       setSweetAlertOption(null);
       setResultMsgSubmitVipListFile(resultMessage);
+      searchPlayer(selectedTabKey, selectedParams, _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_13__["default"].callBackToUpdatePaging({
+        pagingOption,
+        setPagingOption
+      }));
     };
 
-    const alertOption = _buildAlertOptionUpdateVipStatus(params, true, true, handlerUpdateVipStatusSuccess);
+    const alertOption = _buildAlertOptionUpdateVipStatus(params, isActivateVIP, true, handlerUpdateVipStatusSuccess);
 
     setSweetAlertOption(alertOption);
   };
@@ -3098,10 +3130,15 @@ const FormAction = props => {
           return;
         }
 
+        if (content.map(_ => _[selectedColumn]).length > _lib_constants__WEBPACK_IMPORTED_MODULE_10__["MaxBatchUpdateVIPPlayer"]) {
+          alert(Object(_jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_6__["decode"])(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("MaxBatchUpdateVIPPlayerError")));
+          return;
+        }
+
         const value = content.map(_ => _[selectedColumn]).join();
         const params = {
           [byExternalId ? 'externalIds' : 'systemIds']: value,
-          isVip: true
+          isVip: isActivateVIP
         };
 
         _handleActiveVipStatusFromFile(params);
@@ -3111,7 +3148,7 @@ const FormAction = props => {
 
   const _handleDownloadTemplateExcel = event => {
     event.preventDefault();
-    _lib_queryService__WEBPACK_IMPORTED_MODULE_15__["default"].downloadVipPlayerListTemplateExcel({
+    _lib_queryService__WEBPACK_IMPORTED_MODULE_16__["default"].downloadVipPlayerListTemplateExcel({
       uploadBy: uploadFileOption
     });
   };
@@ -3133,9 +3170,12 @@ const FormAction = props => {
       multiple: false,
       accept: '.xls,.xlsx',
       maxSize: 1,
-      onClose: _handleDisplayUploadDropzone,
+      onClose: () => _handleDisplayUploadDropzone(_lib_constants__WEBPACK_IMPORTED_MODULE_10__["ActionType"].Closed),
       onSubmit: _onSubmitVipListFile,
-      isShowInnerZone: !resultMsgSubmitVipListFile
+      isShowInnerZone: !resultMsgSubmitVipListFile,
+      isActive: isActivateVIP,
+      tabType: _lib_constants__WEBPACK_IMPORTED_MODULE_11__["TabType"].VipPlayerManagement,
+      key: isActivateVIP
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, resultMsgSubmitVipListFile ? resultMsgSubmitVipListFile : _renderExtraInfoDropzoneUploadFile()));
   };
 
@@ -3160,9 +3200,16 @@ const FormAction = props => {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     type: "button",
     className: "btn",
-    onClick: _handleDisplayUploadDropzone,
+    onClick: () => _handleDisplayUploadDropzone(_lib_constants__WEBPACK_IMPORTED_MODULE_10__["ActionType"].Actived),
     disabled: !hasVipManagementEdit
-  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("UploadVipList")))), displayUploadDropzone && _renderDropzoneUploadFile());
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("ActivateListOfPlayers"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "action"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "button",
+    className: "btn",
+    onClick: () => _handleDisplayUploadDropzone(_lib_constants__WEBPACK_IMPORTED_MODULE_10__["ActionType"].Deactived),
+    disabled: !hasVipManagementEdit
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("DeactivateListOfPlayers")))), displayUploadDropzone && _renderDropzoneUploadFile());
 };
 
 function mapDispatchToProps(dispatch) {
@@ -3724,7 +3771,7 @@ const initialState = _objectSpread(_objectSpread({}, window.initialState[_lib_co
 /*!*****************************************************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/customer/player-segmentation/tabs/vip-player-management/lib/constants.js ***!
   \*****************************************************************************************************************/
-/*! exports provided: dataGridHeaders, Url, ExcelReaderColumn */
+/*! exports provided: dataGridHeaders, Url, ExcelReaderColumn, ActionType, MaxBatchUpdateVIPPlayer */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3732,6 +3779,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dataGridHeaders", function() { return dataGridHeaders; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Url", function() { return Url; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ExcelReaderColumn", function() { return ExcelReaderColumn; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ActionType", function() { return ActionType; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MaxBatchUpdateVIPPlayer", function() { return MaxBatchUpdateVIPPlayer; });
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 
 const dataGridHeaders = [{
@@ -3766,6 +3815,12 @@ const ExcelReaderColumn = {
   SystemId: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('SystemId'),
   ExternalId: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('ExternalId')
 };
+const ActionType = {
+  Closed: 0,
+  Actived: 1,
+  Deactived: 2
+};
+const MaxBatchUpdateVIPPlayer = 2000;
 
 /***/ }),
 

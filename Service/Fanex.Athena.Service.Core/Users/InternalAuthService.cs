@@ -21,17 +21,20 @@ namespace Fanex.Athena.Service.Core.Users
         private readonly IOAuthService _oauthService;
         private readonly ISessionService _sessionService;
         private readonly IFormsAuthenticationService _formsAuthService;
+        private readonly IAppSettings _appSettings;
 
         public InternalAuthService(
             IAuthDataAccess authenticationDataAccess,
             IOAuthService oauthService,
             ISessionService sessionService,
-            IFormsAuthenticationService formsAuthenticationService)
+            IFormsAuthenticationService formsAuthenticationService,
+            IAppSettings appSettings)
         {
             _authenticationDataAccess = authenticationDataAccess;
             _oauthService = oauthService;
             _sessionService = sessionService;
             _formsAuthService = formsAuthenticationService;
+            _appSettings = appSettings;
         }
 
         public void SignIn(IOAuthInfo oauthInfo)
@@ -86,7 +89,7 @@ namespace Fanex.Athena.Service.Core.Users
                     { "lang_code", langCode }
                 });
 
-        private static UserAuthInfo GenerateUserInfo(IOAuthInfo oauthInfo)
+        private UserAuthInfo GenerateUserInfo(IOAuthInfo oauthInfo)
            => new UserAuthInfo
            {
                SubsidiaryViewType = (byte)SubsidiaryViewType.NotManagement,
@@ -108,7 +111,7 @@ namespace Fanex.Athena.Service.Core.Users
                CurrencyAgentList = oauthInfo.CurrencyAgentList
            };
 
-        private static LicenseeAuthInfo GenerateLicenseeInfo(IOAuthInfo oauthInfo)
+        private LicenseeAuthInfo GenerateLicenseeInfo(IOAuthInfo oauthInfo)
             => new LicenseeAuthInfo
             {
                 LicenseeId = oauthInfo.LicenseeId,
@@ -121,11 +124,15 @@ namespace Fanex.Athena.Service.Core.Users
                 SiteDBServer = oauthInfo.SiteDBServer
             };
 
-        private static string GetDefaultBaseCurrency(IOAuthInfo oauthInfo)
+        private bool OfferCryptoCurrencyLicensees(string siteName)
         {
-            var appSettings = new AppSettings();
-            return appSettings.OfferCryptoCurrencyLicensees.Split(',')
-                .Contains(oauthInfo.SiteName, StringComparer.InvariantCultureIgnoreCase)
+            return _appSettings.OfferCryptoCurrencyLicensees.Split(',')
+                .Contains(siteName, StringComparer.InvariantCultureIgnoreCase);
+        }
+
+        private string GetDefaultBaseCurrency(IOAuthInfo oauthInfo)
+        {
+            return OfferCryptoCurrencyLicensees(oauthInfo.SiteName)
                 ? "USDT"
                 : oauthInfo.BaseCurrency;
         }

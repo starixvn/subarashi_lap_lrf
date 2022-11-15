@@ -17,3 +17,11 @@ export const ExcelReaderColumn = {
     SystemId: LangHelper.getSingleResource('SystemId'),
     ExternalId: LangHelper.getSingleResource('ExternalId')
 }
+
+export const ActionType = {
+    Closed: 0,
+    Actived: 1,
+    Deactived: 2
+}
+
+export const MaxBatchUpdateVIPPlayer = 2000; 

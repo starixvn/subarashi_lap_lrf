@@ -8,6 +8,8 @@
 
         CustomerUpdateSpecialLevel = 2,
 
-        CustomerBetSetting = 3
+        CustomerBetSetting = 3,
+
+        PlayerSegmentationUpdatePlayer = 5
     }
 }

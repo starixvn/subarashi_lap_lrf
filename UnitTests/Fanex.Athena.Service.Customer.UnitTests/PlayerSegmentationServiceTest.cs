@@ -7,12 +7,12 @@ using Fanex.Athena.Model.Report.DTO;
 using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
 using Fanex.Athena.UnitTest.Common.Helpers;
+using Fanex.Logging;
 using FluentAssertions;
 using NSubstitute;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Fanex.Logging;
 
 namespace Fanex.Athena.Service.Customer.UnitTests
 {
@@ -21,6 +21,7 @@ namespace Fanex.Athena.Service.Customer.UnitTests
     {
         private IPlayerSegmentationDataAccess _playerDataAccess;
         private ISessionService _sessionService;
+        private IBusinessLogService _businessLogService;
         private ISubsidiaryService _subsidiaryService;
         private ICTSApiClient _ctsApiClient;
         private ILogger _logger;
@@ -35,7 +36,8 @@ namespace Fanex.Athena.Service.Customer.UnitTests
             _subsidiaryService = Substitute.For<ISubsidiaryService>();
             _ctsApiClient = Substitute.For<ICTSApiClient>();
             _logger = Substitute.For<ILogger>();
-            _targetService = new PlayerSegmentationService(_sessionService, _playerDataAccess, _subsidiaryService, _ctsApiClient, _logger);
+            _businessLogService = Substitute.For<IBusinessLogService>();
+            _targetService = new PlayerSegmentationService(_sessionService, _playerDataAccess, _businessLogService, _subsidiaryService, _ctsApiClient, _logger);
         }
 
         [TearDown]
