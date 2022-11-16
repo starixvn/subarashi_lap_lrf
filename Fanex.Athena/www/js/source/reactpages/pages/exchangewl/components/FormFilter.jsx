@@ -14,7 +14,7 @@ import AutoComplete from '@jsroot/components/auto-complete'
 import { BaseCurrency } from '../../../constants/currency'
 import { CUSTOMER_SEARCH_URL } from '../../../constants/url'
 import ReportExcel from '../lib/reportExcel'
-import { Service } from '../lib/service'
+import { Service, ViewInType } from '../lib/service'
 import moment from 'moment'
 
 const RANGE_THREE_MONTH_CONSTRAINT = 3;
@@ -96,7 +96,8 @@ export class FormFilter extends Component {
             { fromDate: excelData.FromDate, toDate: excelData.ToDate },
             excelData.BaseCurrency ? excelData.BaseCurrency : excelData.CurrencyName,
             level === ReportLevel.MAIN ? excelData.CurrencyId === 0 : false,
-            excelData.UserName);
+            excelData.UserName,
+            params.ViewInType);
         const excel = new ReportExcel(gridData, title, level, isAllowedCustomerComm, excelData.ReportBy);
         excel.export(() => {
             this.props.toggleLoader(false);
@@ -130,11 +131,9 @@ export class FormFilter extends Component {
         };
     }
 
-    _getMonthRangeConstraint(){
-        const viewInSettledDate = 2;
+    _getMonthRangeConstraint() {
         const { selectedViewInOption } = this.props;
-
-        return selectedViewInOption === viewInSettledDate ? RANGE_THREE_MONTH_CONSTRAINT : RANGE_ONE_MOTHN_CONSTRAINT;
+        return selectedViewInOption === ViewInType.SettledOnly  ? RANGE_THREE_MONTH_CONSTRAINT : RANGE_ONE_MOTHN_CONSTRAINT;
     }
 
     applyDateRangeHandler = (date, isValidMonthRange = true) => {
@@ -156,9 +155,16 @@ export class FormFilter extends Component {
 
     changeViewInOption = (event) => {
         const newValue = parseInt(event.target.value, 10);
-        if (!isNaN(newValue) && this.props.selectedViewInOption != newValue){
+        if (!isNaN(newValue) && this.props.selectedViewInOption != newValue) {
             this.props.setViewInOption(newValue);
         }
+    }
+
+    getNoteMessage = () => {
+        const { selectedViewInOption } = this.props;
+        return selectedViewInOption === ViewInType.SettledOnly 
+            ? LangHelper.getSingleResource("TheSettledOnlyReportNote") 
+            : LangHelper.getSingleResource("TheSettledAndResettledReportNote");
     }
 
     _onChangeSubsidiaryList = (currentItem, selectedItemsKey, treeViewList) => {
@@ -220,21 +226,21 @@ export class FormFilter extends Component {
         </div>);
     }
 
-    _renderViewInOption(){
-        const{ viewInOption, selectedViewIn } = this.props;
-        (<div className='form-group'>
+    _renderViewInOption() {
+        const { viewInOption, selectedViewInOption } = this.props;
+        return (<div className='form-group'>
             <label className='label-text'>{LangHelper.getSingleResource('ViewInWithNoParam')}</label>
             {
                 viewInOption.map((option, i) => {
                     const key = 'ViewInType' + i;
                     return (<span key={`Group${key}`}>
-                        <input type='radio' value={option.value} checked={selectedViewIn === option.value} id={key}
+                        <input type='radio' value={option.value} checked={selectedViewInOption === option.value} id={key}
                             onChange={this.changeViewInOption} />
                         <label htmlFor={key}>{option.label}</label>
                     </span>)
                 })
             }
-        </div>); 
+        </div>);
     }
 
     _renderExcludeTestDataCheckBox() {
@@ -291,27 +297,33 @@ export class FormFilter extends Component {
                             {this._renderExcludeTestDataCheckBox()}
                         </div>
                     </div>
-                </div>                
-                    <div className='row'>
-                        <div className='col-12 col-sm-8 col-md-4 col-xl-4'>
-                            {this._renderViewInOption()}
-                        </div>
-                        <div className='col-12 col-sm-3 col-md-2 col-xl-1'>
-                            <div className='form-group button-group'>
-                                <button type='button' className='btn btn-submit'
-                                    disabled={this.props.subsidiarySearch && !this.props.selectedSubsidiary}
-                                    onClick={this.submit}>{LangHelper.getSingleResource('Submit')}</button>
-                            </div>
-                        </div>
-                        { showSubsidiarySearch &&<div className='col-12 col-sm-3 col-md-2 col-xl-2'>
-                            <div className="form-group">
-                                <CheckBox id="SubsidiarySearch"
-                                    checked={this.props.subsidiarySearch}
-                                    onChange={checked => this.props.setSubsidiarySearch(checked)}
-                                    label={LangHelper.getSingleResource("SubsidiarySearch")} />
-                            </div>
-                        </div>}
+                </div>
+                <div className='row'>
+                    <div className='col-12 col-sm-8 col-md-4 col-xl-4'>
+                        {this._renderViewInOption()}
                     </div>
+                    <div className='col-12 col-sm-3 col-md-2 col-xl-1'>
+                        <div className='form-group button-group'>
+                            <button type='button' className='btn btn-submit'
+                                disabled={this.props.subsidiarySearch && !this.props.selectedSubsidiary}
+                                onClick={this.submit}>{LangHelper.getSingleResource('Submit')}</button>
+                        </div>
+                    </div>
+                    {showSubsidiarySearch && <div className='col-12 col-sm-3 col-md-2 col-xl-2'>
+                        <div className="form-group">
+                            <CheckBox id="SubsidiarySearch"
+                                checked={this.props.subsidiarySearch}
+                                onChange={checked => this.props.setSubsidiarySearch(checked)}
+                                label={LangHelper.getSingleResource("SubsidiarySearch")} />
+                        </div>
+                    </div>}
+                </div>
+                <div className="row">
+                    <div className="col-6">
+                        <span className="circle"></span>
+                        <span>{this.getNoteMessage()}</span>
+                    </div>
+                </div>
                 < div className='caret-block'>
                     <i className='icon-excel right' onClick={this.exportExcel} title={LangHelper.getSingleResource('ExportToExcel')}></i>
                 </div>

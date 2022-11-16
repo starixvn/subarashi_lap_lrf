@@ -365,7 +365,8 @@ export class DataGrid extends Component {
             { fromDate: params.FromDate, toDate: params.ToDate },
             params.BaseCurrency ? params.BaseCurrency : params.CurrencyName,
             reportLevel === ReportLevel.MAIN ? params.CurrencyId === 0 : false,
-            params.UserName);
+            params.UserName,
+            params.ViewInType);
 
         if (!gridData.data.DataList.length) {
             return this._renderNodata(title);
@@ -407,6 +408,6 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
     const { gridData, params, licenseeId, isAllowedCustomerComm } = state;
     return Object.assign({}, { gridData, params, licenseeId, isAllowedCustomerComm });
-};
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(DataGrid);

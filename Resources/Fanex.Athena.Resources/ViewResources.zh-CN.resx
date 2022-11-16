@@ -2986,11 +2986,17 @@
   <data name="SettledAndResettledReport" xml:space="preserve">
     <value>已结算与已重新结算报告</value>
   </data>
-  <data name="SettledReport" xml:space="preserve">
+  <data name="SettledOnlyReport" xml:space="preserve">
     <value>已结算报告</value>
   </data>
   <data name="ViewInWithNoParam" xml:space="preserve">
     <value>查看</value>
+  </data>
+  <data name="TheSettledAndResettledReportNote" xml:space="preserve">
+    <value>已结算和重新结算报告显示所选日期范围内已结算和已重新结算注单的数据。</value>
+  </data>
+  <data name="TheSettledOnlyReportNote" xml:space="preserve">
+    <value>已结算报表仅显示所选日期范围内的首次结算注单的数据。</value>
   </data>
   <data name="Basketball" xml:space="preserve">
     <value>篮球</value>

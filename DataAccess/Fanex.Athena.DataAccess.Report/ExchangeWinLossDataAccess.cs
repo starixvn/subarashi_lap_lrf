@@ -19,7 +19,7 @@
     {
         public async Task<ReportResultModel<ExchangeWinLoss>> GetMainWinloss(ExchangeWinLossMetaModel metaModel, IDictionary<int, string> currencyList)
         {
-            var UspName = metaModel.ViewInType == ViewInTypes.SettledReport ? "Lrf_Rpt_ExchangeWinloss" : "Lrf_Rpt_ExchangeWinlosss_ByResettledDate";
+            var UspName = metaModel.ViewInType == ViewInTypes.SettledReport ? "Lrf_Rpt_ExchangeWinloss" : "Lrf_Rpt_ExchangeWinloss_ByResettledDate";
 
             using (var db = GetObjectDb(UspName))
             {

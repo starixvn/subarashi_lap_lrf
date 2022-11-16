@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Model.Report.Constants;
 
     public class ExchangeWinLossViewModel
     {
@@ -12,6 +13,7 @@
             FromDate = DateTime.Today;
             ToDate = DateTime.Today;
             ReportBy = ReportByType.Daily;
+            ViewInType = ViewInTypes.SettledAndResettledReport;
             ExcludeTestData = true;
         }
 
@@ -23,6 +25,8 @@
         public DateTime ToDate { get; set; }
 
         public byte ReportBy { get; set; }
+
+        public byte ViewInType { get; set; }
 
         public bool ExcludeTestData { get; set; }
 

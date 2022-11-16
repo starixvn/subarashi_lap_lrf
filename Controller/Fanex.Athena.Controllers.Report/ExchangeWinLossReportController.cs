@@ -79,7 +79,7 @@
                 ViewInOption = new Dictionary<byte, string>
                 {
                     { ViewInTypes.SettledAndResettledReport, ViewResources.SettledAndResettledReport },
-                    { ViewInTypes.SettledReport, ViewResources.SettledReport }
+                    { ViewInTypes.SettledReport, ViewResources.SettledOnlyReport }
                 },
                 ViewType = viewType,
                 SubsidiaryList = subsidiaryList

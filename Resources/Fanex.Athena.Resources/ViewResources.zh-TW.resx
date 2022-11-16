@@ -2287,11 +2287,17 @@
   <data name="SettledAndResettledReport" xml:space="preserve">
     <value>已結算與已重新結算報告</value>
   </data>
-  <data name="SettledReport" xml:space="preserve">
+  <data name="SettledOnlyReport" xml:space="preserve">
     <value>已結算報告</value>
   </data>
   <data name="ViewInWithNoParam" xml:space="preserve">
     <value>查看</value>
+  </data>
+  <data name="TheSettledAndResettledReportNote" xml:space="preserve">
+    <value>已結算和重新結算報告顯示所選日期範圍內已結算和已重新結算注單的數據。</value>
+  </data>
+  <data name="TheSettledOnlyReportNote" xml:space="preserve">
+    <value>已結算報表僅顯示所選日期範圍內的首次結算注單的數據。</value>
   </data>
   <data name="ApplyParlay" xml:space="preserve">
     <value>包含串關</value>
