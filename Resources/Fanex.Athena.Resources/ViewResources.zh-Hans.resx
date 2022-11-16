@@ -2304,9 +2304,11 @@
   <data name="TheSettledOnlyReportNote" xml:space="preserve">
     <value>已结算报表仅显示所选日期范围内的首次结算注单的数据。</value>
   </data>
+  <data name="ExchangeWinLoss" xml:space="preserve">
+    <value>Exchange输赢</value>
+  </data>
   <data name="Basketball" xml:space="preserve">
     <value>篮球</value>
-  </data>
   <data name="Soccer" xml:space="preserve">
     <value>足球</value>
   </data>
