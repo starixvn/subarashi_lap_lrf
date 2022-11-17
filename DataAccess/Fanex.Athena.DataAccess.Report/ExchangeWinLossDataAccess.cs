@@ -19,7 +19,7 @@
     {
         public async Task<ReportResultModel<ExchangeWinLoss>> GetMainWinloss(ExchangeWinLossMetaModel metaModel, IDictionary<int, string> currencyList)
         {
-            var UspName = metaModel.ViewInType == ViewInTypes.SettledReport ? "Lrf_Rpt_ExchangeWinloss" : "Lrf_Rpt_ExchangeWinloss_ByResettledDate";
+            var UspName = metaModel.DateOptionType == ViewInTypes.SettledReport ? "Lrf_Rpt_ExchangeWinloss" : "Lrf_Rpt_ExchangeWinloss_ByResettledDate";
 
             using (var db = GetObjectDb(UspName))
             {
@@ -35,7 +35,7 @@
 
         public async Task<ReportResultModel<ExchangeWinLoss>> GetCustomerWinloss(ExchangeWinLossMetaModel metaModel, IDictionary<int, string> currencyList)
         {
-            var UspName = metaModel.ViewInType == ViewInTypes.SettledReport ? "Lrf_Rpt_ExchangeWinloss_Mem" : "Lrf_Rpt_ExchangeWinloss_ByResettledDate_Mem";
+            var UspName = metaModel.DateOptionType == ViewInTypes.SettledReport ? "Lrf_Rpt_ExchangeWinloss_Mem" : "Lrf_Rpt_ExchangeWinloss_ByResettledDate_Mem";
 
             using (var db = GetObjectDb(UspName))
             {
@@ -51,7 +51,7 @@
 
         public async Task<ReportResultModel<ExchangeWinLoss>> GetLicenseeWinloss(ExchangeWinLossMetaModel metaModel, IDictionary<int, string> currencyList)
         {
-            var UspName = metaModel.ViewInType == ViewInTypes.SettledReport ? "Lrf_Rpt_ExchangeWinloss_Ag" : "Lrf_Rpt_ExchangeWinloss_ByResettledDate_Ag";
+            var UspName = metaModel.DateOptionType == ViewInTypes.SettledReport ? "Lrf_Rpt_ExchangeWinloss_Ag" : "Lrf_Rpt_ExchangeWinloss_ByResettledDate_Ag";
 
             using (var db = GetObjectDb(UspName))
             {

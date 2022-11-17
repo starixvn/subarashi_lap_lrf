@@ -8,7 +8,7 @@
 @{
     var currencyList = Model.CurrencyList.Select(c => new { value = c.Key, label = c.Value }).ToList();
     var reportByOption = Model.ReportByOption.Select(c => new { value = c.Key, label = c.Value }).ToList();
-    var viewInTypeOption = Model.ViewInOption.Select(v => new { value = v.Key, label = v.Value }).ToList();
+    var viewInTypeOption = Model.DateTypeOption.Select(v => new { value = v.Key, label = v.Value }).ToList();
     var today = DateTime.Today.ToString("MM/dd/yyyy");
 
     string selectedSubsidiary = Model.ViewType == SubsidiaryViewType.MasterManagement ?
@@ -31,7 +31,7 @@
     reportByOption: @Html.Raw(reportByOption.ToJson()),
     viewInOption: @Html.Raw(viewInTypeOption.ToJson()),
     selectedReportBy: @Model.ReportBy,
-    selectedViewInOption: @Model.ViewInType,
+    selectedViewInOption: @Model.DateOptionType,
     isExcludeTest: true,
     isAllowedCustomerComm: @Model.IsAllowedCustomerComm.ToJson(),
     licenseeId: @Model.LicenseeId,

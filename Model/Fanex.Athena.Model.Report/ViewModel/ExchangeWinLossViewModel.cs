@@ -13,7 +13,7 @@
             FromDate = DateTime.Today;
             ToDate = DateTime.Today;
             ReportBy = ReportByType.Daily;
-            ViewInType = ViewInTypes.SettledAndResettledReport;
+            DateOptionType = ViewInTypes.SettledAndResettledReport;
             ExcludeTestData = true;
         }
 
@@ -26,7 +26,7 @@
 
         public byte ReportBy { get; set; }
 
-        public byte ViewInType { get; set; }
+        public byte DateOptionType { get; set; }
 
         public bool ExcludeTestData { get; set; }
 
@@ -40,7 +40,7 @@
 
         public IDictionary<byte, string> ReportByOption { get; set; }
 
-        public IDictionary<byte, string> ViewInOption { get; set; }
+        public IDictionary<byte, string> DateTypeOption { get; set; }
 
         public DateTime MinDate { get; set; }
 

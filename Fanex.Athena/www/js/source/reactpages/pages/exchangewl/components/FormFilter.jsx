@@ -97,7 +97,7 @@ export class FormFilter extends Component {
             excelData.BaseCurrency ? excelData.BaseCurrency : excelData.CurrencyName,
             level === ReportLevel.MAIN ? excelData.CurrencyId === 0 : false,
             excelData.UserName,
-            params.ViewInType);
+            params.DateOptionType);
         const excel = new ReportExcel(gridData, title, level, isAllowedCustomerComm, excelData.ReportBy);
         excel.export(() => {
             this.props.toggleLoader(false);
@@ -123,7 +123,7 @@ export class FormFilter extends Component {
             Level: 0,
             SubsidiarySearch: subsidiarySearch,
             SubsidiaryList: subsidiarySearch ? this.props.selectedSubsidiary : "",
-            ViewInType: this.props.selectedViewInOption
+            DateOptionType: this.props.selectedViewInOption
         };
 
         return {
@@ -319,7 +319,7 @@ export class FormFilter extends Component {
                     </div>}
                 </div>
                 <div className="row">
-                    <div className="col-6">
+                    <div className="col-11">
                         <span className="circle"></span>
                         <span>{this.getNoteMessage()}</span>
                     </div>

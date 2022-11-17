@@ -76,7 +76,7 @@
                     { ReportByType.Daily, ViewResources.Daily },
                     { ReportByType.Monthly, ViewResources.Monthly }
                 },
-                ViewInOption = new Dictionary<byte, string>
+                DateTypeOption = new Dictionary<byte, string>
                 {
                     { ViewInTypes.SettledAndResettledReport, ViewResources.SettledAndResettledReport },
                     { ViewInTypes.SettledReport, ViewResources.SettledOnlyReport }

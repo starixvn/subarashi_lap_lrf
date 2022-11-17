@@ -315,9 +315,9 @@ export class DataGrid extends Component {
     }
 
     showBetListPopup = (externalId, systemId, custId) => {
-        const { CurrencyId, BaseCurrency, FromDate, ToDate, CurrencyName, ExcludeTestData } = this.drillDownParams[ReportLevel.CUSTOMER];
+        const { CurrencyId, BaseCurrency, FromDate, ToDate, CurrencyName, ExcludeTestData, DateOptionType } = this.drillDownParams[ReportLevel.CUSTOMER];
         const url = "api/ExchangeWinLossBetList/Index";
-        this.betlistParams = { CustId: custId, CurrencyId, BaseCurrency, FromDate, ToDate, ExcludeTestData };
+        this.betlistParams = { CustId: custId, CurrencyId, BaseCurrency, FromDate, ToDate, ExcludeTestData, DateOptionType };
 
         const params = {
             data: this.betlistParams
@@ -366,7 +366,7 @@ export class DataGrid extends Component {
             params.BaseCurrency ? params.BaseCurrency : params.CurrencyName,
             reportLevel === ReportLevel.MAIN ? params.CurrencyId === 0 : false,
             params.UserName,
-            params.ViewInType);
+            params.DateOptionType);
 
         if (!gridData.data.DataList.length) {
             return this._renderNodata(title);

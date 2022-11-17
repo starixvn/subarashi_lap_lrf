@@ -7,7 +7,7 @@ namespace Fanex.Athena.Model.Report.MetaModel
     {
         public byte ReportBy { get; set; }
 
-        public byte ViewInType { get; set; }
+        public byte DateOptionType { get; set; }
 
         public int CustId { get; set; }
 
