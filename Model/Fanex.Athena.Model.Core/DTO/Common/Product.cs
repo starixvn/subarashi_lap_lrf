@@ -99,8 +99,10 @@ namespace Fanex.Athena.Model.Core.DTO.Common
         public const string VS3 = "VS3";
 
         public const string FGGL = "FGGL";
-        
+
         public const string MXG = "MXG";
+
+        public const string TIP = "TIP";
 
         #endregion Field
 

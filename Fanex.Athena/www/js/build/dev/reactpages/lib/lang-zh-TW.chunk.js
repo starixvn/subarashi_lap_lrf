@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 11/8/2022 1:28:24 PM
+// Generated at: 11/25/2022 10:00:15 AM
 window._language_zh_TW = {
   AA: "客客",
   AbnormalBet: "非正規註單",
@@ -590,6 +590,7 @@ window._language_zh_TW = {
   ProductSBVS: "沙巴虛擬賽事",
   ProductSLT: "體育時時彩",
   ProductTG: "桌面遊戲",
+  ProductTIP: "玩家打賞",
   ProductVGA: "Vgaming",
   ProductVRG: "虛擬娛樂城",
   ProductVS: "虛擬運動",

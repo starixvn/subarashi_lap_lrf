@@ -43,5 +43,7 @@ namespace Fanex.Athena.Model.Core.DataDomain
         public const int SGJackpotContribution = 3602;
 
         public const int AllbetPromotion = 2101;
+
+        public const int TIPStreamerTips = 7401;
     }
 }

@@ -1,4 +1,4 @@
-﻿// Generated at: 11/8/2022 1:30:52 PM
+﻿// Generated at: 11/25/2022 10:00:00 AM
 var _language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -648,6 +648,7 @@ ProductSG:"新霸电子",
 ProductSLT:"体育时时彩",
 ProductSXG:"AE性感真人",
 ProductTG:"桌面游戏",
+ProductTIP:"玩家打赏",
 ProductVB:"澳门电子娱乐城",
 ProductVGA:"Vgaming",
 ProductVRG:"虚拟娱乐城",

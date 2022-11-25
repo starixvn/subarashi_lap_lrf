@@ -2,6 +2,7 @@
 using Fanex.Athena.Model.Auth.DataDomain;
 using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Model.Core.DTO.Common;
+using Fanex.Athena.Model.Core.MetaModel.Product;
 using Fanex.Athena.Model.Report.MetaModel;
 using Fanex.Athena.Model.Report.ViewModel;
 using Fanex.Athena.Resources;
@@ -19,6 +20,7 @@ namespace Fanex.Athena.Controllers.Report
     {
         private readonly IReportSettingService _reportSettingService;
         private readonly ICacheRefAdapter _cacheRefAdapter;
+
         public ExtraPayoutReportController(
             IReportSettingService reportSettingService,
             ICacheRefAdapter cacheRefAdapter
@@ -42,7 +44,7 @@ namespace Fanex.Athena.Controllers.Report
             var param = new ExtraPayoutMetaModel
             {
                 LicenseeId = licenseeSession.LicenseeId,
-                ProductOptions = ToProductOptions(productAccess.ProductList),
+                ProductOptions = AddPlayerTipsProDuct(ToProductOptions(productAccess.ProductList)),
                 IsExcludedTestData = true,
                 ReportBy = ReportByType.Daily
             };
@@ -128,6 +130,15 @@ namespace Fanex.Athena.Controllers.Report
                 });
             }
 
+            if (productCodeList.IsPresent(_ => _ == Product.TIP))
+            {
+                promotionTypeList.AddRange(new List<CheckedItem>
+                {
+                    new CheckedItem { ID = ExtraPayoutMapType.TIPStreamerTips,
+                        Name = _cacheRefAdapter.GetBettype((int)BetType.TIPStreamerTips), Checked = true }
+                });
+            }
+
             return promotionTypeList;
         }
 
@@ -194,6 +205,18 @@ namespace Fanex.Athena.Controllers.Report
                         Checked = true }
                 });
             }
+        }
+
+        private IList<ProductOption> AddPlayerTipsProDuct(IList<ProductOption> productList)
+        {
+            var originalProductList = ProductServiceInstance.GetProductList(SessionServiceInstance.LicenseeSession.LicenseeId, SessionServiceInstance.UserSession.Language);
+
+            if (originalProductList.Any(_ => _.ProductCode == Product.SB))
+            {
+                productList.Add(new ProductOption { Code = Product.TIP, Name = ViewResources.ProductTIP, Status = true });
+            }
+
+            return productList;
         }
     }
 }
