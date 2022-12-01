@@ -45,5 +45,11 @@
     "ReportKey": "NewCashOutWinLoss",
     "MinDateString": "",
     "MaxDateString": "today"
+  },
+  {
+    "ReportKey": "AbnormalBet",
+    "MinDateString": "01/01/2021",
+    "MaxDateString": "today",
+    "LimitRecentDays": 90
   }
 ]

@@ -17,7 +17,7 @@
     using System.Web.Mvc;
     using System.Web.SessionState;
 
-    [FunctionAuthorization(PermissionKeys.ResultAmendmentNotificationReport)]
+    [FunctionAuthorization(PermissionKeys.Bell)]
     [SessionState(SessionStateBehavior.ReadOnly)]
     [UMFilter]
     public class NotificationReportController : CultureBaseController
@@ -122,7 +122,7 @@
         public async Task<ActionResult> ExportAmendmentTicketListing(AmendmentTicketListingMetaModel metaModel)
         {
             var data = await _notificationService.GetAmendmentTicketListing(metaModel);
-            if(data.Data.IsPresent())
+            if (data.Data.IsPresent())
             {
                 var excel = new AmendmentTicketListingExcel(data);
                 excel.Export();

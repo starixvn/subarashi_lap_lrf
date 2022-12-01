@@ -142,6 +142,29 @@
             }
         }
 
+        public async Task<IEnumerable<SubIssue>> GetAbnormalSubIssueAsync(string langKey)
+        {
+            const string spName = "Lrf_AbnormalBet_SubIssueSel";
+            using (var db = GetObjectDb(spName))
+            {
+                db.SetParameterValue("Langkey", langKey);
+                using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
+                {
+                    var result = new List<SubIssue>();
+                    while (reader.Read())
+                    {
+                        var record = new SubIssue
+                        {
+                            SubIssueTypeId = Convert.ToInt16(reader["SubIssueTypeId"]),
+                            SubIssueTypeName = reader["SubIssueTypeName"] as string,
+                        };
+                        result.Add(record);
+                    }
+                    return result;
+                }
+            }
+        }
+
         public async Task<(string ListAffectCustId, IEnumerable<UpdateStatusPlayerResult> ListUpdateStatusPlayerResult)> UpdateVipStatusAsync(UpdateStatusPlayerMetaModel metaModel)
         {
             const string spName = "Lrf_ProblemAccount_LicenseeVipPlayerUpd";

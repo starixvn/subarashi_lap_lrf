@@ -18,6 +18,8 @@ namespace Fanex.Athena.DataAccess.Customer.Interfaces
 
         Task<IEnumerable<ReasonGroup>> GetReasonGroupListAsync(string langKey);
 
+        Task<IEnumerable<SubIssue>> GetAbnormalSubIssueAsync(string langKey);
+
         Task<ApiPagingResult<MonitoredPlayerInfo>> GetMonitoredPlayerListAsync(MonitoredPlayerListMetaModel metaModel);
 
         Task<string> GetXmlPresenterForMonitoredPlayerReachLishtAsync(MonitoredPlayerListMetaModel metaModel);

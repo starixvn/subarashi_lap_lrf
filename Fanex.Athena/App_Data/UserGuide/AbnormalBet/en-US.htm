@@ -1,0 +1,142 @@
+﻿<style media="screen">
+    .rule .collapsible {
+        min-width: 400px;
+        margin-bottom: .3rem !important;
+        padding-left: 0 !important;
+    }
+
+        .rule .collapsible label {
+            font-weight: bold;
+            padding: 0.2rem;
+            cursor: pointer;
+            display: block;
+            margin-bottom: 0;
+        }
+
+        .rule .collapsible .info {
+            display: none;
+            text-align: justify;
+            padding: .5rem;
+        }
+
+        .rule .collapsible input[type=checkbox] {
+            display: none;
+        }
+
+            .rule .collapsible input[type=checkbox]:checked ~ .info {
+                display: block;
+            }
+
+    .rule .only-vip-management {
+        display: none;
+    }
+</style>
+<div class="rule">
+    <h4>
+        General Info
+    </h4>
+    <ul>
+        <li>The report contains only abnormal bet tickets and related information such as: League, Match, IP, Location, Reason,...</li>
+        <li>This report supports up-to-date data. You can filter data up to 3 months per query.</li>
+        <li>OANDA Exchange Service will use the exchange rate of the end date of each selected month when converting the figures.</li>
+    </ul>
+</div>
+<div class="line">
+</div>
+<div class="rule">
+    <h4>
+        Search Filters
+    </h4>
+    <ul>
+        <li><b>View in Detail:</b> Support search by Ref No, Currency, Base Currency and Convert all figures to Base Currency.</li>
+    </ul>
+</div>
+<div class="line">
+</div>
+<div class="rule">
+    <h4>
+        Report Guidelines
+    </h4>
+    <ul>
+        <li><b>View in Detail:</b> All information on each abnormal bet ticket based on selected date range: Ref No, Stake, Reason,...</li>
+        <li><b>View in Summary:</b> Total abnormal bet tickets based on selected date range.</li>
+        <li><b>View in IP Summary:</b> All IP and location of last login and tickets of each player based on selected date range.</li>
+    </ul>
+</div>
+<div class="line">
+</div>
+<div class="rule">
+    <h4>
+        Common Questions
+    </h4>
+    <div class="collapsible">
+        <input type="checkbox" name="group" id="question1" />
+        <label for="question1">Q: What is abnormal betting?</label>
+        <div class="info">
+            A: All abnormal or hedging group accounts with the possibility of having inside information that specifically bet on the same side. Letting this group of accounts continuously bet at your site will negatively affects your profit margin or higher possibility of making loss. This type of account is inevitable but there are certain actions that company can take. Such as reduce bet limit, lower the odds, set to BA and etcetera. By implementing these rules and actions on these abnormal groups are to proclaim that company had discovered and monitoring their bets. Hence, we would be able to keep these abnormal groups less likely to bet on your site.
+        </div>
+    </div>
+    <div class="collapsible">
+        <input type="checkbox" name="group" id="question2" />
+        <label for="question2">Q: How many kinds of abnormal behavior?</label>
+        <div class="info">
+            A: Group betting, Hedging, Arbitrage Betting, Fixed Game, Irrigation Betting, Robot Formula Betting.
+        </div>
+    </div>
+    <div class="collapsible">
+        <input type="checkbox" name="group" id="question3" />
+        <label for="question3">Q: How do we determine abnormal tickets?</label>
+        <div class="info">
+            A: We have a specialized ADI team to monitor this part. We Implement standard policies and operating procedures to ensure ADI are consistent in their decisions and will be 100% certain before voiding the tickets. This is where we have the advantage over other sites.
+        </div>
+    </div>
+    <div class="collapsible">
+        <input type="checkbox" name="group" id="question4" />
+        <label for="question4">Q: What is “Group betting”?</label>
+        <div class="info">
+            A: Using multiple accounts (including other platform members) at the same time to bet on the same product and direction considered as group betting. These members will not be specifically betting in any sport, league or product. Most of them are used for Hedging or Robot Formula Betting.
+        </div>
+    </div>
+    <div class="collapsible">
+        <input type="checkbox" name="group" id="question5" />
+        <label for="question5">Q: What is “Hedging”?</label>
+        <div class="info">
+            A: These are hedging groups attempting to manipulate market odds mostly to their benefit and continue to bet on the same side, not only on your site but also other sites.
+        </div>
+    </div>
+    <div class="collapsible">
+        <input type="checkbox" name="group" id="question6" />
+        <label for="question6">Q: What is “Arbitrage Betting”?</label>
+        <div class="info">
+            A: This type of members will bet from two separate groups from different platform members. First group will be responsible for betting on the opposite side in order to raise the targeted price higher while enable Second group to bet on the targeted price. Mostly betting on special products and minor leagues.
+        </div>
+    </div>
+    <div class="collapsible">
+        <input type="checkbox" name="group" id="question7" />
+        <label for="question7">Q: What is “Fixed Game”?</label>
+        <div class="info">
+            A: Fixed game means a match is played accordingly to the pre-determined result. These members mostly betting on small leagues, will not be specifically betting in any sport or product.
+        </div>
+    </div>
+    <div class="collapsible">
+        <input type="checkbox" name="group" id="question8" />
+        <label for="question8">Q: What is “Irrigation Betting”?</label>
+        <div class="info">
+            A: This type of member will maliciously place a lot of bet on a match and cause the price to drift far away in a short period of time. Basically, will only bet on smaller leagues or special products.
+        </div>
+    </div>
+    <div class="collapsible">
+        <input type="checkbox" name="group" id="question9" />
+        <label for="question9">Q: What is “Robot/System Formula Betting”?</label>
+        <div class="info">
+            A: This is a mechanically calculated betting which refer to the use of a program to calculate and automatically placed bets on prices that are considered to have a higher winning rate. These members will not be specifically betting in any sport, league or product.
+        </div>
+    </div>
+    <div class="collapsible">
+        <input type="checkbox" name="group" id="question10" />
+        <label for="question10">Q: How to treat those members whose ticket got void due to abnormal?</label>
+        <div class="info">
+            A: Reduce the bet limit or place the member in the BA service exclusively provided by our company. (Regarding BA services, kindly ask your PIC).
+        </div>
+    </div>
+</div>

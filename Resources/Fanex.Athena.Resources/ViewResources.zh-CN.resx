@@ -3004,6 +3004,21 @@
   <data name="ESportsPinGoal" xml:space="preserve">
     <value>电竞台</value>
   </data>
+  <data name="Detail" xml:space="preserve">
+    <value>详情</value>
+  </data>
+  <data name="IpSummary" xml:space="preserve">
+    <value>IP摘要</value>
+  </data>
+  <data name="KOTime" xml:space="preserve">
+    <value>开赛时间</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>地点</value>
+  </data>
+  <data name="Ticket" xml:space="preserve">
+    <value>注单</value>
+  </data>
   <data name="Basketball" xml:space="preserve">
     <value>篮球</value>
   </data>

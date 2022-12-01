@@ -49,7 +49,7 @@
                 CurrentLicenseeId = licensee.LicenseeId,
                 IsAllowedManagementMember = userSession.FunctionList.Any(x => x.FunctionKey == PermissionKeys.CustomerInfoCustomerList),
                 IsFakeLicensee = IsFakeLicensee(licensee.LicenseeName),
-                IsAllowedNotification = userSession.FunctionList.Any(x => x.FunctionKey == PermissionKeys.ResultAmendmentNotificationReport)
+                IsAllowedNotification = userSession.FunctionList.Any(x => x.FunctionKey == PermissionKeys.Bell)
             };
             return View("~/Views/Desktop/Header/Index.cshtml", viewModel);
         }

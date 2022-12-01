@@ -195,6 +195,7 @@
     <Compile Include="ViewModel\DailyBetsViewModel.cs" />
     <Compile Include="ViewModel\ExchangeVoidedViewModel.cs" />
     <Compile Include="ViewModel\ExchangeWinLossViewModel.cs" />
+    <Compile Include="ViewModel\AbnormalBetViewModel.cs" />
     <Compile Include="ViewModel\ExtraPayoutViewModel.cs" />
     <Compile Include="ViewModel\NewCashOutWinLossViewModel.cs" />
     <Compile Include="ViewModel\LeagueWinLossViewModel.cs" />

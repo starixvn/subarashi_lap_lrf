@@ -113,6 +113,9 @@ namespace Fanex.Athena.Service.Customer
         public async Task<IEnumerable<ReasonGroup>> GetReasonGroupListAsync(string langKey)
             => await _playerDataAccess.GetReasonGroupListAsync(langKey);
 
+        public async Task<IEnumerable<SubIssue>> GetAbnormalSubIssueAsync(string langKey)
+            => await _playerDataAccess.GetAbnormalSubIssueAsync(langKey);
+
         public async Task<ApiPagingResult<MonitoredPlayerInfo>> GetMonitoredPlayerListAsync(MonitoredPlayerListMetaModel metaModel)
         {
             var xmlReachList = await _playerDataAccess.GetXmlPresenterForMonitoredPlayerReachLishtAsync(metaModel);

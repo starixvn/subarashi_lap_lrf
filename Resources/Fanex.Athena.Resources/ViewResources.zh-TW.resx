@@ -1239,7 +1239,7 @@
     <value>提交</value>
   </data>
   <data name="Summary" xml:space="preserve">
-    <value>總結</value>
+    <value>摘要</value>
   </data>
   <data name="Sunday" xml:space="preserve">
     <value>星期六</value>
@@ -2264,6 +2264,24 @@
   </data>
   <data name="DeleteManyMonitoredPlayerConfirm" xml:space="preserve">
     <value>所選的玩家將被移出警示值監控，您確定要移出嗎？</value>
+  </data>
+  <data name="Detail" xml:space="preserve">
+    <value>詳情</value>
+  </data>
+  <data name="IpSummary" xml:space="preserve">
+    <value>IP摘要</value>
+  </data>
+  <data name="KOTime" xml:space="preserve">
+    <value>開賽時間</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>地點</value>
+  </data>
+  <data name="Reason" xml:space="preserve">
+    <value>原因</value>
+  </data>
+  <data name="Ticket" xml:space="preserve">
+    <value>注單</value>
   </data>
   <data name="ActivateListOfPlayers" xml:space="preserve">
     <value>以玩家清單來設定為VIP</value>

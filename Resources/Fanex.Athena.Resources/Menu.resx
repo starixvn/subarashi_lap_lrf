@@ -343,4 +343,7 @@
   <data name="newcashoutwinloss" xml:space="preserve">
     <value>Cash Out Win Loss (New)</value>
   </data>
+  <data name="abnormalbet" xml:space="preserve">
+    <value>Abnormal Bet</value>
+  </data>
 </root>
