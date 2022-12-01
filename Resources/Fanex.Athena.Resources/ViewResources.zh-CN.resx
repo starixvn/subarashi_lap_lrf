@@ -2980,4 +2980,7 @@
   <data name="MaxBatchUpdateVIPPlayerError" xml:space="preserve">
     <value>最多只能上传 2000 行数据，请再次检查您的档案！</value>
   </data>
+  <data name="ProductTIP" xml:space="preserve">
+    <value>玩家打赏</value>
+  </data>
 </root>

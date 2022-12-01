@@ -1,4 +1,4 @@
-﻿// Generated at: 11/8/2022 1:30:52 PM
+﻿// Generated at: 11/25/2022 10:00:00 AM
 var _language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -726,6 +726,7 @@ ProductSLT:"Sports Lottery",
 ProductSPR:"Saba Promotion",
 ProductSXG:"AE Sexy",
 ProductTG:"Table Game",
+ProductTIP:"Player Tips",
 ProductVB:"Macau Games",
 ProductVG:"Macau",
 ProductVGA:"Vgaming",

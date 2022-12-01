@@ -3407,4 +3407,7 @@
   <data name="MaxBatchUpdateVIPPlayerError" xml:space="preserve">
     <value>Only allow to upload maximum of 2000 data rows, please check your file again!</value>
   </data>
+  <data name="ProductTIP" xml:space="preserve">
+    <value>Player Tips</value>
+  </data>
 </root>

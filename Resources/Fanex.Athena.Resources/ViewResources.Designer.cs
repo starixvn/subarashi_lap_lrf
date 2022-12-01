@@ -6595,6 +6595,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Player Tips.
+        /// </summary>
+        public static string ProductTIP {
+            get {
+                return ResourceManager.GetString("ProductTIP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Macau Games.
         /// </summary>
         public static string ProductVB {
