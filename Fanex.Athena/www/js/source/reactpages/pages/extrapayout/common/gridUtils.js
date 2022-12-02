@@ -5,6 +5,8 @@ import NumberFormat from '@jsroot/lib/numberFormat';
 import LangHelper from '@jsroot/lib/langHelper';
 import { v4 as uuidv4 } from 'uuid';
 
+const ProductTIP = "TIP";
+
 export const renderHeader = (drilldownLevel) => {
     return (
         <HeaderRow style={{ height: 32 }}>
@@ -68,7 +70,7 @@ export const renderFooter = (data, drilldownLevel) => {
 
 const buildDataRow = (dataItem, drilldownLevel, handleDrilldown, handleDrilldownBetlist) => {
     const { index, indexRowSpan, curencyRowSpan, productRowSpan, date, dateString, productName, betCount, turnover, amount, sharingAmount, custId, username, nickname, 
-        promotionName, currency, currencyName} = dataItem;
+        promotionName, currency, currencyName, productCode} = dataItem;
 
     return (
         <Row key={`row-${uuidv4()}`}>
@@ -92,17 +94,17 @@ const buildDataRow = (dataItem, drilldownLevel, handleDrilldown, handleDrilldown
             {curencyRowSpan > 0  && drilldownLevel === 1 && <Cell className="center-align" rowSpan={curencyRowSpan}>{currencyName}</Cell>}        
             {productRowSpan > 0 && <Cell className="left-align" rowSpan={productRowSpan}>{productName}</Cell>}
             {drilldownLevel === 1 && <Cell className="left-align">{promotionName}</Cell>}
-            {buildCommonRow(turnover, betCount, amount, sharingAmount)}
+            {buildCommonRow(turnover, betCount, amount, sharingAmount, productCode)}
         </Row>
     )
 }
 
-const buildCommonRow = (turnover, betCount, amount, sharingAmount) => {
+const buildCommonRow = (turnover, betCount, amount, sharingAmount, productCode) => {
     return <>
         <Cell className="right-align">{NumberFormat.formatDecimal(turnover)}</Cell>  
         <Cell className="right-align">{NumberFormat.format(betCount)}</Cell>              
         <Cell className={`right-align ${amount < 0 ? "negative" : ""}`}>{NumberFormat.formatDecimal(amount)}</Cell>
-        <Cell className={`right-align ${sharingAmount < 0 ? "negative" : ""}`}>{NumberFormat.formatDecimal(sharingAmount)}</Cell>
+        <Cell className={`right-align ${sharingAmount < 0 ? "negative" : ""}`}>{productCode === ProductTIP ? "-" : NumberFormat.formatDecimal(sharingAmount)}</Cell>
     </>
 }
 
@@ -121,7 +123,7 @@ export const renderDetailHeader = () => {
     )
 }
 
-export const renderDetailDataSection = (dataList, drilldownLevel, handleDrilldown, handleDrilldownBetlist) => {
+export const renderDetailDataSection = (dataList) => {
     const dataRows = [];
     for (let i = 0; i < dataList.length; i++) {
         dataRows.push(buildDetailDataRow(dataList[i], i));
@@ -131,7 +133,7 @@ export const renderDetailDataSection = (dataList, drilldownLevel, handleDrilldow
 }
 
 const buildDetailDataRow = (dataItem, index) => {
-    const { dateString, productName, turnover, amount, sharingAmount, refno, promotionName} = dataItem;
+    const { dateString, productName, turnover, amount, sharingAmount, refno, promotionName, productCode} = dataItem;
 
     return (
         <Row key={`row-${uuidv4()}`}>
@@ -142,7 +144,7 @@ const buildDetailDataRow = (dataItem, index) => {
             <Cell className="left-align">{promotionName}</Cell>
             <Cell className="right-align">{NumberFormat.formatDecimal(turnover)}</Cell>        
             <Cell className={`right-align ${amount < 0 ? "negative" : ""}`}>{NumberFormat.formatDecimal(amount)}</Cell>
-            <Cell className={`right-align ${sharingAmount < 0 ? "negative" : ""}`}>{NumberFormat.formatDecimal(sharingAmount)}</Cell>
+            <Cell className={`right-align ${sharingAmount < 0 ? "negative" : ""}`}>{productCode === ProductTIP ? "-" : NumberFormat.formatDecimal(sharingAmount)}</Cell>
         </Row>
     )
 }
