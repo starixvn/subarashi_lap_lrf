@@ -1,4 +1,6 @@
-﻿namespace Fanex.Athena.Module.Notification.Api.UnitTests
+﻿using System.Threading.Tasks;
+
+namespace Fanex.Athena.Module.Notification.Api.UnitTests
 {
     using System;
     using System.Collections.Generic;
@@ -75,7 +77,7 @@
         }
 
         [Test]
-        public void GetNotificationMessages_WhenCall_ReturnExpectedResult()
+        public async Task GetNotificationMessages_WhenCall_ReturnExpectedResult()
         {
             // Arrange
             var metaModel = new NotificationMetaModel
@@ -101,7 +103,7 @@
             var expectedResult = _serializer.Serialize(expectedResultModel);
 
             // Action
-            var notificationMessages = _apiController.GetNotificationMessages(metaModel);
+            var notificationMessages = await _apiController.GetNotificationMessages(metaModel);
             var result = _serializer.Serialize(notificationMessages);
 
             // Assert
@@ -109,12 +111,13 @@
         }
 
         [Test]
-        public void GetNotificationMessages_WhenCall_ParameterPassedCorrectly()
+        public async Task GetNotificationMessages_WhenCall_ParameterPassedCorrectly()
         {
             // Arrange
             var metaModel = new NotificationMetaModel
             {
-                Language = "en"
+                Language = "en",
+                MessageTypes = "0,1"
             };
             var today = DateTime.Today;
             var expectedMetaModel = new NotificationMetaModel
@@ -126,7 +129,9 @@
                 PageSize = 10,
                 PageIndex = 1,
                 UserName = UserName,
-                LicenseeName = SiteName
+                LicenseeName = SiteName,
+                MessageTypes = "0,1",
+                SystemId = 2
             };
 
             NotificationMetaModel passedParam = null;
@@ -137,7 +142,7 @@
             var expectedResult = _serializer.Serialize(expectedMetaModel);
 
             // Action
-            _apiController.GetNotificationMessages(metaModel);
+            await _apiController.GetNotificationMessages(metaModel);
             var result = _serializer.Serialize(passedParam);
 
             // Assert
@@ -145,7 +150,7 @@
         }
 
         [Test]
-        public void MarkNotificationAsRead_WhenCall_ReturnExpectedResult()
+        public async Task MarkNotificationAsRead_WhenCall_ReturnExpectedResult()
         {
             // Arrange
             var metaModel = new NotificationMarkAsReadMetaModel
@@ -172,7 +177,7 @@
             var expectedResult = _serializer.Serialize(expectedResultModel);
 
             // Action
-            var markNotificationAsReadResult = _apiController.MarkNotificationAsRead(metaModel);
+            var markNotificationAsReadResult = await _apiController.MarkNotificationAsRead(metaModel);
             var result = _serializer.Serialize(markNotificationAsReadResult);
 
             // Assert
@@ -180,7 +185,7 @@
         }
 
         [Test]
-        public void MarkNotificationAsRead_WhenCall_ParameterPassedCorrectly()
+        public async Task MarkNotificationAsRead_WhenCall_ParameterPassedCorrectly()
         {
             // Arrange
             var metaModel = new NotificationMarkAsReadMetaModel
@@ -194,7 +199,8 @@
                 MessageId = 1,
                 MessageType = "Amendment",
                 UserName = UserName,
-                LicenseeName = SiteName
+                LicenseeName = SiteName,
+                SystemId = 2
             };
 
             NotificationMarkAsReadMetaModel passedParam = null;
@@ -204,7 +210,7 @@
             var expectedResult = _serializer.Serialize(expectedMetaModel);
 
             // Action
-            _apiController.MarkNotificationAsRead(metaModel);
+            await _apiController.MarkNotificationAsRead(metaModel);
             var result = _serializer.Serialize(passedParam);
 
             // Assert

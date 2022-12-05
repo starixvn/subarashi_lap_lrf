@@ -14,6 +14,10 @@
 
         public string UserName { get; set; }
 
+        public string MessageTypes { get; set; }
+
+        public int SystemId { get; set; }
+
         public int PageSize { get; set; }
 
         public int PageIndex { get; set; }

@@ -223,6 +223,8 @@
   </Function>
   <Function Name="Notification">
     <Setting Key="Lrf_AmendmentTicketListingSel" SpName="Lrf_AmendmentTicketListingSel" DbName="DBEXT.bodb02.bodbLicenseeNet" />
+    <Setting Key="Lrf_MessageListSel" SpName="Lrf_MessageListSel" DbName="DBLIC.bodb_Licensee.bodbLicenseeNet" />
+    <Setting Key="Lrf_MessageUserIns" SpName="Lrf_MessageUserIns" DbName="DBLIC.bodb_Licensee.bodbLicenseeNet" />
   </Function>
 
   <SiteDB>

@@ -8,13 +8,13 @@
 
     public interface INotificationService
     {
-        ReportResultModel<NotificationMessage> GetNotificationMessages(NotificationMetaModel metaModel);
+        Task<ReportResultModel<NotificationMessage>> GetNotificationMessages(NotificationMetaModel metaModel);
 
         ReportResultModel<ResultAmendment> GetResultAmendment(NotificationMetaModel metaModel);
 
         Task<AmendmentTicketListing> GetAmendmentTicketListing(AmendmentTicketListingMetaModel metaModel);
 
-        IResultInfo MarkNotificationAsRead(NotificationMarkAsReadMetaModel metaModel);
+        Task<IResultInfo> MarkNotificationAsRead(NotificationMarkAsReadMetaModel metaModel);
 
         IResultInfo GetFileAttachmentData(NotificationAttachmentMetaModel metaModel);
     }

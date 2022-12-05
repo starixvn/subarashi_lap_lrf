@@ -1,4 +1,6 @@
-﻿namespace Fanex.Athena.Module.Notification.Report.UnitTests
+﻿using System.Threading.Tasks;
+
+namespace Fanex.Athena.Module.Notification.Report.UnitTests
 {
     using System;
     using System.Collections.Generic;
@@ -91,7 +93,7 @@
         }
 
         [Test]
-        public void MarkNotificationAsRead_WhenCallSuccessfully_ReturnTrue()
+        public async Task MarkNotificationAsRead_WhenCallSuccessfully_ReturnTrue()
         {
             // Arrange
             var metaModel = new NotificationMarkAsReadMetaModel();
@@ -101,7 +103,7 @@
             });
 
             // Action
-            var result = _controller.MarkNotificationAsRead(metaModel) as JsonResult;
+            var result = await _controller.MarkNotificationAsRead(metaModel) as JsonResult;
 
             // Asset
             Assert.Multiple(() =>
@@ -112,7 +114,7 @@
         }
 
         [Test]
-        public void MarkNotificationAsRead_WhenCallFailed_ReturnFalse()
+        public async Task MarkNotificationAsRead_WhenCallFailed_ReturnFalse()
         {
             // Arrange
             var metaModel = new NotificationMarkAsReadMetaModel();
@@ -123,7 +125,7 @@
             });
 
             // Action
-            var result = _controller.MarkNotificationAsRead(metaModel) as JsonResult;
+            var result = await _controller.MarkNotificationAsRead(metaModel) as JsonResult;
 
             // Asset
             Assert.Multiple(() =>

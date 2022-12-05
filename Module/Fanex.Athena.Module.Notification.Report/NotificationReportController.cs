@@ -4,7 +4,9 @@
     using Fanex.Athena.Excel.Base.Helpers;
     using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Extension.Utility;
+    using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Core.Constants;
     using Fanex.Athena.Module.Notification.Excels;
     using Fanex.Athena.Module.Notification.MetaModel;
     using Fanex.Athena.Module.Notification.Service.Interfaces;
@@ -12,6 +14,8 @@
     using Fanex.Athena.Web.ActionFilter;
     using Fanex.Athena.Web.ResultExtension;
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Net;
     using System.Threading.Tasks;
     using System.Web.Mvc;
@@ -23,6 +27,12 @@
     public class NotificationReportController : CultureBaseController
     {
         private readonly INotificationService _notificationService;
+
+        private readonly IDictionary<string, string> _notificationType = new Dictionary<string, string>
+        {
+            { PermissionKeys.ResultAmendmentNotificationReport , "0" },
+            { PermissionKeys.ReportAbnormalBet , "1" }
+        };
 
         public NotificationReportController(
              INotificationService notificationService
@@ -45,7 +55,7 @@
         }
 
         [HttpGet]
-        public ActionResult GetNotificationMessages()
+        public async Task<ActionResult> GetNotificationMessages()
         {
             var maximumMonthDistance = NotificationMetaModel.MaximumMonthRange - 1;
 
@@ -60,9 +70,8 @@
             };
 
             UpdateMetaModel(metaModel);
-
-            return Json(
-                _notificationService.GetNotificationMessages(metaModel), JsonRequestBehavior.AllowGet);
+            var data = await _notificationService.GetNotificationMessages(metaModel);
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -81,12 +90,13 @@
         }
 
         [HttpPost]
-        public ActionResult MarkNotificationAsRead(NotificationMarkAsReadMetaModel metaModel)
+        public async Task<ActionResult> MarkNotificationAsRead(NotificationMarkAsReadMetaModel metaModel)
         {
             metaModel.UserName = SessionServiceInstance.UserSession.UserName;
             metaModel.LicenseeName = SessionServiceInstance.LicenseeSession.LicenseeName;
+            metaModel.SystemId = SystemId.LRF;
 
-            var result = _notificationService.MarkNotificationAsRead(metaModel);
+            var result = await _notificationService.MarkNotificationAsRead(metaModel);
 
             return Json(new
             {
@@ -139,6 +149,17 @@
             metaModel.UserName = userSession.UserName;
             metaModel.LicenseeName = SessionServiceInstance.LicenseeSession.LicenseeName;
             metaModel.Language = Util.MapLanguages.GetValueOrDefault(userSession.Language, "en");
+            metaModel.MessageTypes = GetMessageTypesByPermission(userSession);
+            metaModel.SystemId = SystemId.LRF;
+        }
+
+        private string GetMessageTypesByPermission(UserAuthInfo userSession)
+        {
+            var messageTypes = userSession.FunctionList
+                .Where(x => _notificationType.ContainsKey(x.FunctionKey))
+                .Select(x => _notificationType[x.FunctionKey]);
+
+            return string.Join(",", messageTypes);
         }
     }
 }

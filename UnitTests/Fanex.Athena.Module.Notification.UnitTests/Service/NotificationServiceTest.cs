@@ -1,8 +1,5 @@
 ﻿namespace Fanex.Athena.Module.Notification.UnitTests
 {
-    using System;
-    using System.Linq;
-
     using Extension.Utility;
     using Extension.Utility.Interfaces;
     using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
@@ -13,12 +10,12 @@
     using Fanex.Athena.Resources;
     using Fanex.Athena.VendorAdapter.Interfaces;
     using Fanex.Logging;
-
     using Model.Core.DTO.Common;
-
     using NSubstitute;
-
     using NUnit.Framework;
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
 
     public class NotificationServiceTest
     {
@@ -33,7 +30,6 @@
         private IDbFactory _dbFactory;
         private IBalanceUpDataAccess _balanceUpDataAccess;
         private ICacheRefAdapter _cacheRefAdapter;
-
 
         [OneTimeSetUp]
         public void FixtureSetUp()
@@ -166,10 +162,14 @@
         }
 
         [Test]
-        public void GetNotificationMessages_WhenCall_ReturnCorrectResult()
+        public async Task GetNotificationMessages_WhenCall_ReturnCorrectResult()
         {
             // Arrange
-            var metaModel = new NotificationMetaModel();
+            var metaModel = new NotificationMetaModel
+            {
+                MessageTypes = "0",
+                Language = "en"
+            };
 
             var url = "API14";
             _appSettings.ResultAmendmentApiUrl.Returns(url);
@@ -177,7 +177,7 @@
             _webClientService.DownloadString(url).Returns(string.Empty);
 
             // Action
-            var result = _notificationService.GetNotificationMessages(metaModel);
+            var result = await _notificationService.GetNotificationMessages(metaModel);
 
             // Assert
             Assert.Multiple(() =>
@@ -191,13 +191,7 @@
         public void MarkNotificationAsRead_WhenCall_CallApiWithCorrectParameter()
         {
             // Arrange
-            var metaModel = new NotificationMarkAsReadMetaModel
-            {
-                MessageType = "1",
-                MessageId = 2,
-                UserName = "3",
-                LicenseeName = "Name"
-            };
+            var metaModel = GetFakeAsReadMetaModel();
 
             var url = "http://API15";
             _appSettings.MarkNotificationAsReadApiUrl.Returns(url);
@@ -206,7 +200,7 @@
             _notificationService.MarkNotificationAsRead(metaModel);
 
             // Assert
-            _webClientService.Received().UploadString(new Uri(url), "MessageType=1&MessageId=2&UserName=3&LicenseeName=Name");
+            _webClientService.Received().UploadString(new Uri(url), "MessageType=Amendment&MessageId=2&UserName=3&LicenseeName=Name");
         }
 
         [TestCase("{}")]
@@ -214,13 +208,7 @@
         public void MarkNotificationAsRead_ApiReturnsNoData_CallApiWithCorrectParameter(string jsonString)
         {
             // Arrange
-            var metaModel = new NotificationMarkAsReadMetaModel
-            {
-                MessageType = "1",
-                MessageId = 2,
-                UserName = "3",
-                LicenseeName = "Name"
-            };
+            var metaModel = GetFakeAsReadMetaModel();
 
             var url = "http://API16";
             _appSettings.MarkNotificationAsReadApiUrl.Returns(url);
@@ -231,20 +219,14 @@
             _notificationService.MarkNotificationAsRead(metaModel);
 
             // Assert
-            _webClientService.Received().UploadString(new Uri(url), "MessageType=1&MessageId=2&UserName=3&LicenseeName=Name");
+            _webClientService.Received().UploadString(new Uri(url), "MessageType=Amendment&MessageId=2&UserName=3&LicenseeName=Name");
         }
 
         [Test]
-        public void MarkNotificationAsRead_ApiReturnsData_ReturnCorrectResult()
+        public async Task MarkNotificationAsRead_ApiReturnsData_ReturnCorrectResult()
         {
             // Arrange
-            var metaModel = new NotificationMarkAsReadMetaModel
-            {
-                MessageType = "1",
-                MessageId = 2,
-                UserName = "3",
-                LicenseeName = "Name"
-            };
+            var metaModel = GetFakeAsReadMetaModel();
 
             var url = "http://API17";
             _appSettings.MarkNotificationAsReadApiUrl.Returns(url);
@@ -259,7 +241,7 @@
             };
 
             // Action
-            var result = _notificationService.MarkNotificationAsRead(metaModel);
+            var result = await _notificationService.MarkNotificationAsRead(metaModel);
 
             // Assert
             Assert.Multiple(() =>
@@ -270,16 +252,10 @@
         }
 
         [Test]
-        public void MarkNotificationAsRead_ApiThrowException_WriteLog()
+        public async Task MarkNotificationAsRead_ApiThrowException_WriteLog()
         {
             // Arrange
-            var metaModel = new NotificationMarkAsReadMetaModel
-            {
-                MessageType = "1",
-                MessageId = 2,
-                UserName = "3",
-                LicenseeName = "Name"
-            };
+            var metaModel = GetFakeAsReadMetaModel();
 
             var url = "http://API18";
             _appSettings.MarkNotificationAsReadApiUrl.Returns(url);
@@ -291,14 +267,14 @@
             });
 
             // Action
-            var result = _notificationService.MarkNotificationAsRead(metaModel);
+            var result = await _notificationService.MarkNotificationAsRead(metaModel);
 
             // Assert
             Assert.Multiple(() =>
             {
                 Assert.That(result.Code, Is.EqualTo(1));
                 Assert.That(result.Message, Is.EqualTo(ViewResources.ErrorProcessingMsg));
-                AssertWriteLogException(exceptionMsg, (new Uri(url)) + "\nParameter: MessageType=1&MessageId=2&UserName=3&LicenseeName=Name");
+                AssertWriteLogException(exceptionMsg, (new Uri(url)) + "\nParameter: MessageType=Amendment&MessageId=2&UserName=3&LicenseeName=Name");
             });
         }
 
@@ -381,5 +357,21 @@
         {
             _logger.Received().Error($"{exceptionMsg}\nApiUrl: {api}", Arg.Any<Exception>());
         }
+
+        #region TextData
+
+        private NotificationMarkAsReadMetaModel GetFakeAsReadMetaModel()
+        {
+            return new NotificationMarkAsReadMetaModel
+            {
+                MessageType = "Amendment",
+                MessageId = 2,
+                UserName = "3",
+                LicenseeName = "Name",
+                SystemId = 1
+            };
+        }
+
+        #endregion TextData
     }
 }

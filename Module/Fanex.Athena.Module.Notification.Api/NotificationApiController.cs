@@ -3,10 +3,10 @@
     using Fanex.Athena.Api.StatelessBase;
     using Fanex.Athena.Api.StatelessBase.Attributes;
     using Fanex.Athena.Extension.Utility;
+    using Fanex.Athena.Model.Core.Constants;
     using Fanex.Athena.Module.Notification.MetaModel;
     using Fanex.Athena.Module.Notification.Service.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-
     using System;
     using System.Threading.Tasks;
     using System.Web.Http;
@@ -37,7 +37,6 @@
             _licenseeSettingService = licenseeSettingService;
         }
 
-
         [HttpGet]
         public async Task<string> Index()
         {
@@ -54,7 +53,7 @@
         }
 
         [HttpGet]
-        public dynamic GetNotificationMessages([FromUri]NotificationMetaModel metaModel)
+        public async Task<dynamic> GetNotificationMessages([FromUri] NotificationMetaModel metaModel)
         {
             var maximumMonthDistance = NotificationMetaModel.MaximumMonthRange - 1;
 
@@ -66,17 +65,19 @@
             metaModel.PageIndex = 1;
             metaModel.UserName = UserName;
             metaModel.LicenseeName = SiteName;
+            metaModel.SystemId = SystemId.LAP;
 
-            return _notificationService.GetNotificationMessages(metaModel);
+            return await _notificationService.GetNotificationMessages(metaModel);
         }
 
         [HttpPost]
-        public dynamic MarkNotificationAsRead(NotificationMarkAsReadMetaModel metaModel)
+        public async Task<dynamic> MarkNotificationAsRead(NotificationMarkAsReadMetaModel metaModel)
         {
             metaModel.UserName = UserName;
             metaModel.LicenseeName = SiteName;
+            metaModel.SystemId = SystemId.LAP;
 
-            var result = _notificationService.MarkNotificationAsRead(metaModel);
+            var result = await _notificationService.MarkNotificationAsRead(metaModel);
 
             return new
             {
