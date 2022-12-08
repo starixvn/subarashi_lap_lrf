@@ -44,7 +44,6 @@ export const DataGrid = (props) => {
         <Table key={`table-${requestParam.ViewIn}-${props.reloadReport}`}
             minWidth={tableWidth}
             width={tableWidth}
-            autoWidth={requestParam.ViewIn === ViewInLevel.DETAIL}
             autoHeight={true}
             header={renderHeader(requestParam.ViewIn)}
             body={renderDataSection(data, requestParam.ViewIn)}

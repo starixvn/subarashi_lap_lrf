@@ -3431,8 +3431,8 @@
   <data name="IpSummary" xml:space="preserve">
     <value>IP Summary</value>
   </data>
-  <data name="SearchByExtractIp" xml:space="preserve">
-    <value>Search by Extract IP</value>
+  <data name="SearchByExactlyIp" xml:space="preserve">
+    <value>Search by Exactly IP</value>
   </data>
   <data name="BetOn" xml:space="preserve">
     <value>Bet On</value>

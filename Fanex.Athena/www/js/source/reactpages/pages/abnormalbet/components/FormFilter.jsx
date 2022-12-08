@@ -160,6 +160,7 @@ export const FormFilter = props => {
         setRefNo("");
         props.setSelectedCurrency(AppData.defaultCurrency);
         props.setSelectedBaseCurrency(AppData.defaultBaseCurrency);
+        setConvertAllToBaseCurrency(true);
         setViewIn(viewIn);
     }
 
@@ -361,7 +362,7 @@ export const FormFilter = props => {
                             <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
                                 <div className="form-group">
                                     <label className="label-text">{LangHelper.getSingleResource("IP")}</label>
-                                    <input className="input-text" id="Ip" name="Ip" type="text" value={ip} placeholder={LangHelper.getSingleResource("SearchByExtractIp") }
+                                    <input className="input-text" id="Ip" name="Ip" type="text" value={ip} placeholder={LangHelper.getSingleResource("SearchByExactlyIp") }
                                         onChange={(event) => setIp(event.target.value)} />
                                 </div>
                             </div>

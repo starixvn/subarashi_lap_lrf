@@ -7234,11 +7234,11 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Search by Extract IP.
+        ///   Looks up a localized string similar to Search by Exactly IP.
         /// </summary>
-        public static string SearchByExtractIp {
+        public static string SearchByExactlyIp {
             get {
-                return ResourceManager.GetString("SearchByExtractIp", resourceCulture);
+                return ResourceManager.GetString("SearchByExactlyIp", resourceCulture);
             }
         }
         

@@ -12,8 +12,8 @@ export const ApiUrl = {
 
 export const headerText = {
     date: LangHelper.getSingleResource('Date'),
-    externalID: LangHelper.getSingleResource('ExternalID'),
-    systemID: LangHelper.getSingleResource('SystemID'),
+    externalID: LangHelper.getSingleResource('ExternalId'),
+    systemID: LangHelper.getSingleResource('SystemId'),
     currency: LangHelper.getSingleResource('Currency'),
     refNo: LangHelper.getSingleResource('RefNo'),
     odds: LangHelper.getSingleResource('Odds'),

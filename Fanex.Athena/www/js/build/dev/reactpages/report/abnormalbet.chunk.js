@@ -3871,8 +3871,8 @@ const ApiUrl = {
 };
 const headerText = {
   date: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Date'),
-  externalID: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('ExternalID'),
-  systemID: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('SystemID'),
+  externalID: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('ExternalId'),
+  systemID: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('SystemId'),
   currency: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Currency'),
   refNo: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('RefNo'),
   odds: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Odds'),
@@ -4406,7 +4406,6 @@ const DataGrid = props => {
     key: `table-${requestParam.ViewIn}-${props.reloadReport}`,
     minWidth: tableWidth,
     width: tableWidth,
-    autoWidth: requestParam.ViewIn === _common_constants__WEBPACK_IMPORTED_MODULE_7__["ViewInLevel"].DETAIL,
     autoHeight: true,
     header: Object(_common_gridUtils__WEBPACK_IMPORTED_MODULE_5__["renderHeader"])(requestParam.ViewIn),
     body: Object(_common_gridUtils__WEBPACK_IMPORTED_MODULE_5__["renderDataSection"])(data, requestParam.ViewIn),
@@ -4633,6 +4632,7 @@ const FormFilter = props => {
     setRefNo("");
     props.setSelectedCurrency(_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_6__["default"].defaultCurrency);
     props.setSelectedBaseCurrency(_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_6__["default"].defaultBaseCurrency);
+    setConvertAllToBaseCurrency(true);
     setViewIn(viewIn);
   };
   const _renderStatusList = () => {
@@ -4832,7 +4832,7 @@ const FormFilter = props => {
     name: "Ip",
     type: "text",
     value: ip,
-    placeholder: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource("SearchByExtractIp"),
+    placeholder: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource("SearchByExactlyIp"),
     onChange: event => setIp(event.target.value)
   })))), viewIn === _common_constants__WEBPACK_IMPORTED_MODULE_15__["ViewInLevel"].DETAIL && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2"
