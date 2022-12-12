@@ -1,0 +1,83 @@
+﻿namespace Fanex.Athena.Controllers.Customer
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
+    using Fanex.Athena.Controllers.Customer.Helpers;
+    using Fanex.Athena.Excel.Base.Helpers;
+    using Fanex.Athena.Excel.Customer.CustomerClass;
+    using Fanex.Athena.Model.Customer.MetaModel;
+    using Fanex.Athena.Resources;
+    using Fanex.Athena.Service.Customer.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Web.ActionFilter;
+    using Fanex.Athena.Web.ResultExtension;
+
+    public class SabaVirtualSettingController : CultureBaseController
+    {
+        private readonly ISabaVirtualSettingService _service;
+
+        public SabaVirtualSettingController(ISabaVirtualSettingService service)
+        {
+            _service = service;
+        }
+
+        public async Task<ViewResult> Index()
+        {
+            var metaModel = new SabaVirtuaSettingInformationMetaModel
+            {
+                LevelList = string.Join(",", SabaVirtualSettingHelper.GenerateDangerLevelList().Select(_ => _.Key)),
+                Language = SessionServiceInstance.UserSession.Language
+            };
+
+            var viewModel = await _service.GetSabaVirtualSetting(metaModel);
+            return View("~/Views/Desktop/Customer/SabaVirtualSetting/Index.cshtml", viewModel);
+        }
+
+        [HttpPost]
+        [AjaxRequest]
+        [CustomValidateAntiForgery]
+        public async Task<PartialViewResult> GetSabaVirtualSettingInformation(IEnumerable<string> levelIds = null)
+        {
+            var metaModel = new SabaVirtuaSettingInformationMetaModel
+            {
+                LevelList = string.Join(",", levelIds),
+                Language = SessionServiceInstance.UserSession.Language
+            };
+
+            var viewModel = await _service.GetSabaVirtualSetting(metaModel);
+
+            return PartialView("~/Views/Desktop/Customer/SabaVirtualSetting/SabaVirtualSettingInformationTable.cshtml", viewModel);
+        }
+
+        [HttpPost]
+        [AjaxRequest]
+        [CustomValidateAntiForgery]
+        public async Task<ActionResult> ExportExcel(IEnumerable<string> levelIds = null)
+        {
+            var metaModel = new SabaVirtuaSettingInformationMetaModel
+            {
+                LevelList = string.Join(",", levelIds),
+                Language = SessionServiceInstance.UserSession.Language
+            };
+
+            var dataSource = await _service.GetSabaVirtualSetting(metaModel);
+
+            if (dataSource.Any())
+            {
+                var templatePath = Server.MapPath(@"~/App_Data/Template/Customers/PlayerSegmentation/SabaVirtualSettingInformation.xls");
+                var fileName = "SabaVirtualSettingInformation_" + DateTime.Now.ToString("MM-dd-yyyy");
+                var reportTitle = $"{ViewResources.SabaVirtualSetting} {ViewResources.Information}";
+
+                var excel = new SabaVirtualSettingInformationExcel(templatePath, reportTitle, dataSource);
+                excel.Export();
+
+                return new ExcelResult(excel.Workbook, fileName);
+            }
+
+            return File(ExcelHelper.ExportEmptyFile(), "application/vnd.ms-excel", "Empty.xls");
+        }
+    }
+}

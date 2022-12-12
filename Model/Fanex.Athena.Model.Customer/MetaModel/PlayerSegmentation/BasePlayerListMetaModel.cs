@@ -6,14 +6,15 @@
         IMetaModelPaging, IMetaModelSubsidiarySearch
     {
         private const int DefaultPageSize = 500;
-        private const int MaxPageSize = 2000;
+        private readonly int MaxPageSize;
 
-        protected BasePlayerListMetaModel()
+        protected BasePlayerListMetaModel(int maxPageSize = 2000)
         {
             PageIndex = 1;
             PageSize = DefaultPageSize;
             OrderCol = 1;
             SortType = 1;
+            MaxPageSize = maxPageSize;
         }
 
         public string UserName { get; set; }

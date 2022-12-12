@@ -601,6 +601,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Apply Parlay.
+        /// </summary>
+        public static string ApplyParlay {
+            get {
+                return ResourceManager.GetString("ApplyParlay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Apr.
         /// </summary>
         public static string Apr {
@@ -813,6 +822,15 @@ namespace Fanex.Athena.Resources {
         public static string Based {
             get {
                 return ResourceManager.GetString("Based", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Basketball.
+        /// </summary>
+        public static string Basketball {
+            get {
+                return ResourceManager.GetString("Basketball", resourceCulture);
             }
         }
         
@@ -3778,6 +3796,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Information.
+        /// </summary>
+        public static string Information {
+            get {
+                return ResourceManager.GetString("Information", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} will be added into the list of monitored players with the Daily Winning Threshold = {1}. Are you sure you want to add?.
         /// </summary>
         public static string InsertMonitoredPlayerConfirm {
@@ -4269,6 +4296,15 @@ namespace Fanex.Athena.Resources {
         public static string LeagueWinLoss {
             get {
                 return ResourceManager.GetString("LeagueWinLoss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Level.
+        /// </summary>
+        public static string Level {
+            get {
+                return ResourceManager.GetString("Level", resourceCulture);
             }
         }
         
@@ -5322,6 +5358,15 @@ namespace Fanex.Athena.Resources {
         public static string Next {
             get {
                 return ResourceManager.GetString("Next", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Next Bet Inteval (sec).
+        /// </summary>
+        public static string NextBetInteval {
+            get {
+                return ResourceManager.GetString("NextBetInteval", resourceCulture);
             }
         }
         
@@ -7018,6 +7063,42 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Saba Virtual Setting.
+        /// </summary>
+        public static string SabaVirtualSetting {
+            get {
+                return ResourceManager.GetString("SabaVirtualSetting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saba Virtual Setting Information.
+        /// </summary>
+        public static string SabaVirtualSettingInformation {
+            get {
+                return ResourceManager.GetString("SabaVirtualSettingInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saba Virtual Setting Level.
+        /// </summary>
+        public static string SabaVirtualSettingLevel {
+            get {
+                return ResourceManager.GetString("SabaVirtualSettingLevel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saba Virtual Sport.
+        /// </summary>
+        public static string SabaVirtualSport {
+            get {
+                return ResourceManager.GetString("SabaVirtualSport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Saba Virtual Sports Win Loss.
         /// </summary>
         public static string SabaVirtualSportsWinLoss {
@@ -7302,6 +7383,15 @@ namespace Fanex.Athena.Resources {
         public static string SLTDateRangeNote {
             get {
                 return ResourceManager.GetString("SLTDateRangeNote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Soccer.
+        /// </summary>
+        public static string Soccer {
+            get {
+                return ResourceManager.GetString("Soccer", resourceCulture);
             }
         }
         

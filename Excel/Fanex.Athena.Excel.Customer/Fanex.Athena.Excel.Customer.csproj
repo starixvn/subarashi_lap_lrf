@@ -115,10 +115,12 @@
     <Compile Include="CustomerCommGroupExcel.cs" />
     <Compile Include="DormantCustomerListExcel.cs" />
     <Compile Include="CustomerListExcel.cs" />
+    <Compile Include="PlayerSegmentation\SabaVirtualSettingInformationExcel.cs" />
     <Compile Include="PlayerSegmentation\DataParsers.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="PlayerSegmentation\MonitoredPlayerReachedHistoryExcel.cs" />
     <Compile Include="PlayerSegmentation\MonitoredPlayerExcel.cs" />
+    <Compile Include="PlayerSegmentation\SabaVirtualSettingExcel.cs" />
     <Compile Include="PlayerSegmentation\SampleExcel.cs" />
     <Compile Include="PlayerSegmentation\VipPlayerExcel.cs" />
     <Compile Include="PlayerSegmentation\PlayerExcel.cs" />

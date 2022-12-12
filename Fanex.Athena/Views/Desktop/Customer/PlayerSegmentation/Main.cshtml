@@ -9,9 +9,10 @@
     var problemPlayerVM = Model.ProblemPlayerVM;
     var vipPlayerManagementVM = Model.VipPlayerVM;
     var monitoredPlayerVM = Model.MonitoredPlayerVM;
+    var dangerLevelVM = Model.DangerLevelVM;
 
     string selectedSubsidiary = Model.ViewType == SubsidiaryViewType.MasterManagement ?
-        string.Join(",", Model.SubsidiaryList.SelectMany(x => x.Children.Select(y => y.Value)).Distinct()) : string.Join(",", Model.SubsidiaryList.Select(x => x.Value));
+string.Join(",", Model.SubsidiaryList.SelectMany(x => x.Children.Select(y => y.Value)).Distinct()) : string.Join(",", Model.SubsidiaryList.Select(x => x.Value));
 
     var vipPlayerManagementInitState = hasVIPManagementPermission ? new
     {
@@ -68,6 +69,19 @@
         },
     } : null;
 
+    var sabaVirtualSettingData = dangerLevelVM != null ? new
+    {
+        currencyList = dangerLevelVM.CurrencyList.Select(x => new { key = x.Key, value = x.Value, status = true }),
+        sportList = dangerLevelVM.SportList.Select(x => new { key = x.Key, value = x.Value, status = true }),
+        levelList = dangerLevelVM.LevelList.Select(x => new { key = x.Key, value = x.Value, status = true }),
+        selectedSport = string.Join(",", dangerLevelVM.SportList.Select(x => x.Key).ToArray()),
+        selectedLevel = string.Join(",", dangerLevelVM.LevelList.Select(x => x.Key).Where(x => x != 0).ToArray()),
+        dateConstraint = new
+        {
+            minDate = dangerLevelVM.MinDate.ToString("MM/dd/yyyy"),
+            maxDate = dangerLevelVM.MaxDate.ToString("MM/dd/yyyy")
+        }
+    } : null;
 
     var problemSelectedCustomerClass = string.Join(",", problemPlayerVM.CustomerClass);
     var problemCustomerClassList = problemPlayerVM.CustomerClass.Select(c => new
@@ -75,6 +89,20 @@
         key = c,
         value = c == "0" ? ViewResources.None : c
     });
+
+    var sabaVirtualSettingInitState = dangerLevelVM != null ? new
+    {
+        selectedCurrency = string.Join(",", dangerLevelVM.CurrencyList.Select(x => x.Key).ToArray()),
+        selectedSubsidiary,
+        username = "",
+        isLoading = false,
+        isGetAll = true,
+        dateRange = new
+        {
+            fromDate = dangerLevelVM.FromDate.ToString("MM/dd/yyyy"),
+            toDate = dangerLevelVM.ToDate.ToString("MM/dd/yyyy")
+        }
+    } : null;
 
 }
 @section pagecss {
@@ -100,7 +128,8 @@
     selectedSubsidiary: '@(selectedSubsidiary)'
     },
     VipPlayerManagement: @Html.Raw(vipPlayerManagementInitState.ToJson()),
-    MonitoredPlayer: @Html.Raw(monitoredPlayerInitState.ToJson())
+    MonitoredPlayer: @Html.Raw(monitoredPlayerInitState.ToJson()),
+    SabaVirtualSetting: @Html.Raw(sabaVirtualSettingInitState.ToJson())
     }
 
     window._AppData = {
@@ -116,7 +145,8 @@
     dateConstraint: { minDate: '@problemPlayerVM.MinDate.ToString("MM/dd/yyyy")', maxDate: '@problemPlayerVM.MaxDate.ToString("MM/dd/yyyy")', limitedMonthRange: null },
     },
     VipPlayerManagement: @Html.Raw(vipPlayerManagementData.ToJson()),
-    MonitoredPlayer: @Html.Raw(monitoredPlayerData.ToJson())
+    MonitoredPlayer: @Html.Raw(monitoredPlayerData.ToJson()),
+    SabaVirtualSetting: @Html.Raw(sabaVirtualSettingData.ToJson())
     }
 }
 <div id="app-container">

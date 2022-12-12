@@ -63,8 +63,10 @@
     <Compile Include="DTO\CustomerLog\LogInLog.cs" />
     <Compile Include="DTO\LogInfo.cs" />
     <Compile Include="DTO\CustomerClassLimitPolicyModel.cs" />
+    <Compile Include="DTO\SabaVirtualSettingInformationModel.cs" />
     <Compile Include="DTO\PlayerSegmentation\MonitoredPlayerInfo.cs" />
     <Compile Include="DTO\PlayerSegmentation\MonitoredPlayerReachedHistory.cs" />
+    <Compile Include="DTO\PlayerSegmentation\SabaVirtualPlayer.cs" />
     <Compile Include="DTO\PlayerSegmentation\ReasonGroup.cs" />
     <Compile Include="DTO\PlayerSegmentation\PlayerInfo.cs" />
     <Compile Include="DTO\PlayerSegmentation\MonitoredPlayerCommand.cs" />
@@ -77,6 +79,7 @@
     <Compile Include="MetaModel\CustomerOddsGroupMetaModel.cs" />
     <Compile Include="MetaModel\CustomerStatusMetaModel.cs" />
     <Compile Include="MetaModel\DeleteGroupMetaModel.cs" />
+    <Compile Include="MetaModel\SabaVirtuaSettingInformationMetaModel.cs" />
     <Compile Include="MetaModel\GetLimitLeaguesMetaModel.cs" />
     <Compile Include="MetaModel\GroupCommMetaModel.cs" />
     <Compile Include="MetaModel\PlayerSegmentation\AbnormalBetListMetaModel.cs" />
@@ -85,6 +88,7 @@
     <Compile Include="MetaModel\PlayerSegmentation\DeleteMonitoredPlayerMetaModel.cs" />
     <Compile Include="MetaModel\PlayerSegmentation\BatchUpdateMonitoredPlayerMetaModel.cs" />
     <Compile Include="MetaModel\PlayerSegmentation\MonitoredPlayerReachedHistoryMetaModel.cs" />
+    <Compile Include="MetaModel\PlayerSegmentation\SabaVirtualPlayerListMetaModel.cs" />
     <Compile Include="MetaModel\PlayerSegmentation\UpdateMonitoredPlayerMetaModel.cs" />
     <Compile Include="MetaModel\PlayerSegmentation\InsertMonitoredPlayerMetaModel.cs" />
     <Compile Include="MetaModel\PlayerSegmentation\MonitoredPlayerListMetaModel.cs" />
@@ -101,6 +105,7 @@
     <Compile Include="ViewModel\LogInfoViewModel.cs" />
     <Compile Include="ViewModel\PlayerSegmentation\MonitoredPlayerViewModel.cs" />
     <Compile Include="ViewModel\PlayerSegmentation\PlayerSegmentationBetListViewModel.cs" />
+    <Compile Include="ViewModel\PlayerSegmentation\DangerLevelViewModel.cs" />
     <Compile Include="ViewModel\PlayerSegmentation\VipPlayerViewModel.cs" />
     <Compile Include="ViewModel\PlayerSegmentation\ProblemPlayerViewModel.cs" />
     <Compile Include="ViewModel\PlayerSegmentation\PlayerSegmentationViewModel.cs" />

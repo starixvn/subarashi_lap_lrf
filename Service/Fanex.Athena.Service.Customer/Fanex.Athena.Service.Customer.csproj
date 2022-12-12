@@ -82,11 +82,13 @@
   <ItemGroup>
     <Compile Include="Builder\PlayerSegmentationBusinessLogBuilderFactory.cs" />
     <Compile Include="Builder\PlayerSegmentUpdatePlayerLogBuilder.cs" />
+    <Compile Include="SabaVirtualSettingService.cs" />
     <Compile Include="CustomerClassService.cs" />
     <Compile Include="CustomerListService.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="GroupComService.cs" />
     <Compile Include="Helpers\GroupCommHelper.cs" />
+    <Compile Include="Interfaces\ISabaVirtualSettingService.cs" />
     <Compile Include="Interfaces\ICustomerListService.cs" />
     <Compile Include="Interfaces\IGroupComService.cs" />
     <Compile Include="Interfaces\ICustomerClassService.cs" />

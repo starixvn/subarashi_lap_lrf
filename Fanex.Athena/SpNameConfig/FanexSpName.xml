@@ -113,6 +113,8 @@
     <Setting Key="Lrf_ProblemAccount_LicenseeVIPPlayerSel" SpName="Lrf_ProblemAccount_LicenseeVIPPlayerSel" DbName="DBACC.bodb02.bodbLicenseeNet" />
     <Setting Key="Lrf_ProblemAccount_LicenseeVipPlayerUpd" SpName="Lrf_ProblemAccount_LicenseeVipPlayerUpd" DbName="DBCUST.CustDB.bodbLicenseeNet" />
     <Setting Key="Lrf_ProblemAccount_ReasonGroupSel" SpName="Lrf_ProblemAccount_ReasonGroupSel" DbName="DBACC.bodb02.bodbLicenseeNet" />
+    <Setting Key="Lrf_Licensee_DangerLevelSel" SpName="Lrf_Licensee_DangerLevelSel_xpre" DbName="DBLOG.bodb_CustomerLog.bodbLicenseeNet" />
+    <Setting Key="Lrf_SabaVirtualSettingSel" SpName="Lrf_SabaVirtualSettingSel_xpre" DbName="DBCUST.CustDB.bodbLicenseeNet" />
 
     <Setting Key="Acc_Dep_WLMonitored_Player_Sel" SpName="Acc_Dep_WLMonitored_Player_Sel" DbName="DBCUST.CustDB.bodbLicenseeNet" />
     <Setting Key="Acc_Dep_WLMonitored_Player_Ins" SpName="Acc_Dep_WLMonitored_Player_Ins" DbName="DBCUST.CustDB.bodbLicenseeNet" />

@@ -1,0 +1,40 @@
+﻿@using Fanex.Athena.Model.Customer.DTO
+@model IEnumerable<SabaVirtualSettingInformationModel>
+@{
+    var currency = "MYR";
+}
+
+@if (Model.Count() == 0)
+{
+    <p class="no-info-row">@ViewResources.NoInfo</p>
+}
+else
+{
+    <table id="saba-virtual-setting" class="table table-bordered saba-virtual-setting">
+        <thead>
+            <tr>
+                <th class="col-medium">@ViewResources.Level</th>
+                <th class="col-large">@ViewResources.SportType</th>
+                <th class="col-large">@ViewResources.LeagueGroup</th>
+                <th class="col-medium">@ViewResources.ApplyParlay</th>
+                <th class="col-medium">@ViewResources.MaxPerMatch (@currency)</th>
+                <th class="col-medium">@ViewResources.BetDelay (%)</th>
+                <th class="col-medium">@ViewResources.NextBetInteval</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var m in Model)
+            {
+                <tr>
+                    <td class="center-align">@m.DangerLevel</td>
+                    <td class="left-align">@m.SportTypeName</td>
+                    <td class="left-align">@m.LicLeagueGroupName</td>
+                    <td class="center-align">@(m.ApplyParlay? ViewResources.Yes: ViewResources.No)</td>
+                    <td class="right-align">@m.MaxPerMatch</td>
+                    <td class="right-align">@m.BetDelay</td>
+                    <td class="right-align">@m.NextBetInterval</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

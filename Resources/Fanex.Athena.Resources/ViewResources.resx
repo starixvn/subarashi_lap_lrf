@@ -3410,4 +3410,34 @@
   <data name="ProductTIP" xml:space="preserve">
     <value>Player Tips</value>
   </data>
+  <data name="Information" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="SabaVirtualSetting" xml:space="preserve">
+    <value>Saba Virtual Setting</value>
+  </data>
+  <data name="Level" xml:space="preserve">
+    <value>Level</value>
+  </data>
+  <data name="ApplyParlay" xml:space="preserve">
+    <value>Apply Parlay</value>
+  </data>
+  <data name="NextBetInteval" xml:space="preserve">
+    <value>Next Bet Inteval (sec)</value>
+  </data>
+  <data name="Basketball" xml:space="preserve">
+    <value>Basketball</value>
+  </data>
+  <data name="Soccer" xml:space="preserve">
+    <value>Soccer</value>
+  </data>
+  <data name="SabaVirtualSport" xml:space="preserve">
+    <value>Saba Virtual Sport</value>
+  </data>
+  <data name="SabaVirtualSettingInformation" xml:space="preserve">
+    <value>Saba Virtual Setting Information</value>
+  </data>
+  <data name="SabaVirtualSettingLevel" xml:space="preserve">
+    <value>Saba Virtual Setting Level</value>
+  </data>
 </root>

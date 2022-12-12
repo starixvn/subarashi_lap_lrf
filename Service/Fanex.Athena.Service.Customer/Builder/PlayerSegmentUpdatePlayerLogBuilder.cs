@@ -22,7 +22,7 @@ namespace Fanex.Athena.Service.StatelessCore.Extensions
             };
         }
 
-        private string FormatLogDataToXml(PlayerUpdatingLogMetaModel model)
+        private static string FormatLogDataToXml(PlayerUpdatingLogMetaModel model)
         {
             var xml = "";
 

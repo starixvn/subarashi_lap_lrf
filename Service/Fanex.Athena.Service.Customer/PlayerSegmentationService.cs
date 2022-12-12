@@ -56,6 +56,14 @@ namespace Fanex.Athena.Service.Customer
             return result;
         }
 
+        public async Task<ApiPagingResult<SabaVirtualPlayer>> GetSabaVirtualPlayerListAsync(SabaVirtualPlayerListMetaModel metaModel)
+        {
+            var result = await _playerDataAccess.GetSabaVirtualPlayerListAsync(metaModel);
+            BindSubsidiaryName(result.Data, metaModel.SubsidiaryList);
+
+            return result;
+        }
+
         public async Task<ApiPagingResult<PlayerInfo>> GetVipPlayerListAsync(VipPlayerListMetaModel metaModel)
         {
             var result = await _playerDataAccess.GetVipPlayerListAsync(metaModel);

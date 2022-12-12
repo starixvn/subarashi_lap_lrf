@@ -2284,4 +2284,31 @@
   <data name="ProductTIP" xml:space="preserve">
     <value>玩家打賞</value>
   </data>
+  <data name="ApplyParlay" xml:space="preserve">
+    <value>包含串關</value>
+  </data>
+  <data name="Information" xml:space="preserve">
+    <value>資訊</value>
+  </data>
+  <data name="Level" xml:space="preserve">
+    <value>等級</value>
+  </data>
+  <data name="NextBetInteval" xml:space="preserve">
+    <value>投注間隔(秒)</value>
+  </data>
+  <data name="SabaVirtualSetting" xml:space="preserve">
+    <value>沙巴虛擬體育設定</value>
+  </data>
+  <data name="SabaVirtualSport" xml:space="preserve">
+    <value>沙巴虛擬賽事</value>
+  </data>
+  <data name="BetDelay" xml:space="preserve">
+    <value>延遲收單</value>
+  </data>
+  <data name="SabaVirtualSettingInformation" xml:space="preserve">
+    <value>沙巴虛擬體育設定資訊</value>
+  </data>
+  <data name="SabaVirtualSettingLevel" xml:space="preserve">
+    <value>沙巴虛擬體育設定等級</value>
+  </data>
 </root>

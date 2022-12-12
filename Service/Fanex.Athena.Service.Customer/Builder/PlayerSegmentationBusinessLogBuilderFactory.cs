@@ -8,7 +8,9 @@ namespace Fanex.Athena.Service.StatelessCore
     {
         public IBusinessLogBuilderExtension GetBuilder(BusinessLogType businessLogType)
         {
+#pragma warning disable S1301 // "switch" statements should have at least 3 "case" clauses
             switch (businessLogType)
+#pragma warning restore S1301 // "switch" statements should have at least 3 "case" clauses
             {
                 case BusinessLogType.PlayerSegmentationUpdatePlayer:
                     return new PlayerSegmentUpdatePlayerLogBuilder();

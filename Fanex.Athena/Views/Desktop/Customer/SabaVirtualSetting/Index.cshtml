@@ -1,0 +1,43 @@
+﻿@using Fanex.Athena.Model.Customer.DTO
+@using Fanex.Athena.Model.Customer.Enum
+@using Fanex.Athena.Controllers.Customer.Helpers;
+
+@model IEnumerable<SabaVirtualSettingInformationModel>
+@{
+    Layout = "~/Views/Desktop/Shared/_Report.jqGridLayout.cshtml";
+    var dangerLevelOption = SabaVirtualSettingHelper.GenerateDangerLevelList().Select(_ => _.Key);
+}
+@section pagecss {
+    <link href="@Url.ContentLinkByEnv("/www/css/build/pages/customer/sabavirtualsettinginformation.css")" rel="stylesheet" />
+}
+@section pagejs {
+    <script src="@Url.ContentLinkByEnv("/www/js/build/pages/customer/sabavirtualsettinginformation.chunk.js")"></script>
+
+}
+@section Content{
+    @Html.Hidden("DangerLevels", dangerLevelOption.ToJson())
+
+    <div class="page-results">
+        <div class="card-panel">
+            <div class="row">
+                <div class="col m3 s3 l3 xl2 input-field col">
+                    <div class="multiselect-container">
+                        <select id="danger-level-multiselect" name="danger-level-multiselect"></select>
+                    </div>
+                    <label for="danger-level-ids">@ViewResources.SabaVirtualSettingLevel</label>
+                </div>
+                <div class="col m5 s5 l5 xl5">
+                    <div class="button-block">
+                        <button id="btn-submit" class="btn orange accent-4 white-text">@ViewResources.Submit</button>
+                        <button id="btn-export-excel" class="btn orange accent-4 white-text">@ViewResources.ExportToExcel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="result-content">
+            <div class="main-content" id="main-content">
+                @{Html.RenderPartial("~/Views/Desktop/Customer/SabaVirtualSetting/SabaVirtualSettingInformationTable.cshtml", Model);}
+            </div>
+        </div>
+    </div>
+}

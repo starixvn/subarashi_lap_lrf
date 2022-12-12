@@ -4,14 +4,16 @@ import AppData from '@jsroot/lib/AppData';
 
 export const tabKeys = {
     problemPlayer: 'ProblemPlayer',
+    sabaVirtualSetting: 'SabaVirtualSetting',
     vipPlayerManagement: 'VipPlayerManagement',
-    monitoredPlayer: 'MonitoredPlayer',
+    monitoredPlayer: 'MonitoredPlayer'
 }
 
-const newTabs = [tabKeys.monitoredPlayer];
+const newTabs = [tabKeys.monitoredPlayer, tabKeys.sabaVirtualSetting];
 
 const dynamicImports = {
-    [tabKeys.problemPlayer]: () => import(/* webpackChunkName: "customer/playersegmentation/problemPlayer" */ '../tabs/problem-player/index'),
+    [tabKeys.problemPlayer]: () => import(/* webpackChunkName: "customer/playersegmentation/problemPlayer" */ '../tabs/problem-player/index'),    
+    [tabKeys.sabaVirtualSetting]: () => import(/* webpackChunkName: "customer/playersegmentation/SabaVirtualSetting" */ '../tabs/saba-virtual-setting/index'),
     [tabKeys.vipPlayerManagement]: () => import(/* webpackChunkName: "customer/playersegmentation/vipPlayerManagement" */ '../tabs/vip-player-management/index'),
     [tabKeys.monitoredPlayer]: () => import(/* webpackChunkName: "customer/playersegmentation/monitoredPlayer" */ '../tabs/monitored-player/index')
 }
@@ -67,6 +69,7 @@ export const successResponse = {
 
 export const TabType = {
     ProblemPlayer:1,
-    VipPlayerManagement:2,
-    MonitoredPlayer:3
+    SabaVirtualSetting:2,
+    VipPlayerManagement:3,
+    MonitoredPlayer:4
 }

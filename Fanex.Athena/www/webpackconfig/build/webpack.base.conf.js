@@ -75,6 +75,7 @@ function generateConfig(environment) {
             [`${jsPath}/pages/customer/numbergamebetsetting`]: [pathConfig.scriptPaths.numbergamebetsetting],
             [`${jsPath}/pages/customer/exchangebetsetting`]: [pathConfig.scriptPaths.exchangebetsetting],
             [`${jsPath}/pages/customer/customerclass`]: [pathConfig.scriptPaths.customerclass],
+            [`${jsPath}/pages/customer/sabavirtualsettinginformation`]: [pathConfig.scriptPaths.sabavirtualsettinginformation],
 
             [`${jsPath}/pages/reports/activecustomersummary`]: [pathConfig.scriptPaths.activecustomersummary],
             [`${jsPath}/pages/reports/agcasinowinloss`]: [pathConfig.scriptPaths.agcasinowinloss],
@@ -131,8 +132,9 @@ function generateConfig(environment) {
             [`${cssPath}/pages/reports/customerpendingfunds`]: pathConfig.cssPaths.customerpendingfunds,
             [`${cssPath}/pages/reports/customerturnover`]: pathConfig.cssPaths.customerturnover,
             [`${cssPath}/pages/reports/customerwinloss`]: pathConfig.cssPaths.customerwinloss,
-           
+
             [`${cssPath}/pages/customer/customer-class`]: pathConfig.cssPaths.customerClass,
+            [`${cssPath}/pages/customer/sabavirtualsettinginformation`]: pathConfig.cssPaths.sabavirtualsettinginformation,
             [`${cssPath}/pages/components/fixedColumnsTable`]: pathConfig.cssPaths.fixedColumnsTable
         },
         output: {
