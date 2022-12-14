@@ -367,8 +367,7 @@
                 MessageType = "Amendment",
                 MessageId = 2,
                 UserName = "3",
-                LicenseeName = "Name",
-                SystemId = 1
+                LicenseeName = "Name"
             };
         }
 

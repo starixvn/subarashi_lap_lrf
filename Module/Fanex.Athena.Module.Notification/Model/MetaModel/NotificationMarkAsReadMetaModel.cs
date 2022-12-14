@@ -9,7 +9,5 @@
         public int MessageId { get; set; }
 
         public string MessageType { get; set; }
-
-        public int SystemId { get; set; }
     }
 }

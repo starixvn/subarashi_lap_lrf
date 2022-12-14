@@ -2,7 +2,7 @@
 {
     public static class MessageType
     {
-        public const string AmendmentNotification = "0";
-        public const string AbnormalBetNotification = "1";
+        public const string ResettlementNotification = "1";
+        public const string AbnormalBetNotification = "2";
     }
 }

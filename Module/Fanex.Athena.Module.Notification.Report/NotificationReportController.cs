@@ -6,11 +6,11 @@
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Auth.DataDomain;
-    using Fanex.Athena.Model.Core.Constants;
     using Fanex.Athena.Module.Notification.Excels;
     using Fanex.Athena.Module.Notification.MetaModel;
     using Fanex.Athena.Module.Notification.Service.Interfaces;
     using Fanex.Athena.Module.Notification.ViewModel;
+    using Fanex.Athena.Resources;
     using Fanex.Athena.Web.ActionFilter;
     using Fanex.Athena.Web.ResultExtension;
     using System;
@@ -28,11 +28,13 @@
     {
         private readonly INotificationService _notificationService;
 
-        private readonly IDictionary<string, string> _notificationType = new Dictionary<string, string>
+        private readonly IDictionary<string, int> _notificationType = new Dictionary<string, int>
         {
-            { PermissionKeys.ResultAmendmentNotificationReport , "0" },
-            { PermissionKeys.ReportAbnormalBet , "1" }
+            { PermissionKeys.ResultAmendmentNotificationReport , 1 },
+            { PermissionKeys.ReportAbnormalBet , 2 }
         };
+
+        private readonly string ResettlementMessageType = "Amendment";
 
         public NotificationReportController(
              INotificationService notificationService
@@ -92,9 +94,18 @@
         [HttpPost]
         public async Task<ActionResult> MarkNotificationAsRead(NotificationMarkAsReadMetaModel metaModel)
         {
+            if (metaModel.MessageType != ResettlementMessageType)
+            {
+                return Json(new
+                {
+                    Code = 0,
+                    Message = ViewResources.MessageSuccess,
+                    IsSuccessful = true
+                });
+            }
+
             metaModel.UserName = SessionServiceInstance.UserSession.UserName;
             metaModel.LicenseeName = SessionServiceInstance.LicenseeSession.LicenseeName;
-            metaModel.SystemId = SystemId.LRF;
 
             var result = await _notificationService.MarkNotificationAsRead(metaModel);
 
@@ -150,7 +161,6 @@
             metaModel.LicenseeName = SessionServiceInstance.LicenseeSession.LicenseeName;
             metaModel.Language = Util.MapLanguages.GetValueOrDefault(userSession.Language, "en");
             metaModel.MessageTypes = GetMessageTypesByPermission(userSession);
-            metaModel.SystemId = SystemId.LRF;
         }
 
         private string GetMessageTypesByPermission(UserAuthInfo userSession)

@@ -65,7 +65,6 @@
             metaModel.PageIndex = 1;
             metaModel.UserName = UserName;
             metaModel.LicenseeName = SiteName;
-            metaModel.SystemId = SystemId.LAP;
 
             return await _notificationService.GetNotificationMessages(metaModel);
         }
@@ -75,7 +74,6 @@
         {
             metaModel.UserName = UserName;
             metaModel.LicenseeName = SiteName;
-            metaModel.SystemId = SystemId.LAP;
 
             var result = await _notificationService.MarkNotificationAsRead(metaModel);
 

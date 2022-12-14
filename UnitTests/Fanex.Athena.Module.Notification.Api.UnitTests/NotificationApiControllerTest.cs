@@ -1,26 +1,20 @@
-﻿using System.Threading.Tasks;
-
-namespace Fanex.Athena.Module.Notification.Api.UnitTests
+﻿namespace Fanex.Athena.Module.Notification.Api.UnitTests
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Web.Http.Controllers;
-    using System.Web.Script.Serialization;
-
     using Extension.Utility;
-
     using Fanex.Athena.Module.Notification.DTO;
     using Fanex.Athena.Module.Notification.MetaModel;
     using Fanex.Athena.Module.Notification.Service.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.UnitTest.Common.Helpers;
-
     using Model.Core.DTO.Common;
     using Model.Core.ResultModel;
-
     using NSubstitute;
-
     using NUnit.Framework;
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using System.Web.Http.Controllers;
+    using System.Web.Script.Serialization;
 
     public class NotificationApiControllerTest
     {
@@ -30,7 +24,7 @@ namespace Fanex.Athena.Module.Notification.Api.UnitTests
 
         private const string Language = "Cs";
 
-        private const int MaximumMonthDistance = 5;
+        private static readonly int MaximumMonthDistance = NotificationMetaModel.MaximumMonthRange - 1;
 
         private IMoveBetService _moveBetService;
 
@@ -130,8 +124,7 @@ namespace Fanex.Athena.Module.Notification.Api.UnitTests
                 PageIndex = 1,
                 UserName = UserName,
                 LicenseeName = SiteName,
-                MessageTypes = "0,1",
-                SystemId = 2
+                MessageTypes = "0,1"
             };
 
             NotificationMetaModel passedParam = null;
@@ -199,8 +192,7 @@ namespace Fanex.Athena.Module.Notification.Api.UnitTests
                 MessageId = 1,
                 MessageType = "Amendment",
                 UserName = UserName,
-                LicenseeName = SiteName,
-                SystemId = 2
+                LicenseeName = SiteName
             };
 
             NotificationMarkAsReadMetaModel passedParam = null;

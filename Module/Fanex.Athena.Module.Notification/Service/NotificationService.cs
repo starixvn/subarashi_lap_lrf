@@ -25,7 +25,7 @@
     {
         private readonly IDictionary<string, string> _notificationType = new Dictionary<string, string>
         {
-            { MessageType.AmendmentNotification , "Amendment" },
+            { MessageType.ResettlementNotification , "Amendment" },
             { MessageType.AbnormalBetNotification , "AbnormalBet" }
         };
 
@@ -76,7 +76,7 @@
                 return result;
             }
 
-            if (messageTypes.Contains(MessageType.AmendmentNotification))
+            if (messageTypes.Contains(MessageType.ResettlementNotification))
             {
                 // Amendment Notification from OIC API
                 var amendmentResult = GetResultAmendment(metaModel);
@@ -86,12 +86,13 @@
                     DateTime = x.DateTime,
                     Subject = x.Subject,
                     Content = x.Content,
-                    Type = _notificationType[MessageType.AmendmentNotification]
+                    Type = _notificationType[MessageType.ResettlementNotification]
                 })).OrderByDescending(x => x.DateTime);
                 result.TotalRows += amendmentResult.TotalRows;
             }
 
             // Notification from LRF/LAP
+            UpdateMetaModel(metaModel);
             var messagesResult = await GetInternalNotification(metaModel);
             result.DataList = result.DataList.Concat(messagesResult.DataList).OrderByDescending(x => x.DateTime);
             result.TotalRows += messagesResult.TotalRows;
@@ -155,8 +156,6 @@
                 objectDb.SetParameterValue("UserName", metaModel.UserName);
                 objectDb.SetParameterValue("LicenseeName", metaModel.LicenseeName);
                 objectDb.SetParameterValue("MessageTypes", metaModel.MessageTypes);
-                objectDb.SetParameterValue("SystemId", metaModel.SystemId);
-                objectDb.SetParameterValue("TotalRecords", 0);
 
                 using (var reader = await objectDb.ExecuteReaderAsync())
                 {
@@ -167,13 +166,13 @@
                             Id = ReadMessageId(reader),
                             Subject = Convert.ToString(reader["Subject" + lang]),
                             Content = Convert.ToString(reader["Content" + lang]),
-                            Type = _notificationType[Convert.ToString(reader["MessageType"])],
+                            Type = _notificationType[ReadMessageType(reader).ToString()],
                             DateTime = ReadEventDate(reader)
                         });
                     }
                 }
 
-                totalRows = ReadTotalRows(objectDb);
+                totalRows = dataList.Count;
             }
 
             return new ReportResultModel<NotificationMessage> { TotalRows = totalRows, DataList = dataList };
@@ -181,7 +180,7 @@
 
         public async Task<IResultInfo> MarkNotificationAsRead(NotificationMarkAsReadMetaModel metaModel)
         {
-            if (metaModel.MessageType == _notificationType[MessageType.AmendmentNotification])
+            if (metaModel.MessageType == _notificationType[MessageType.ResettlementNotification])
             {
                 return MarkResettlementNotificationAsRead(metaModel);
             }
@@ -230,21 +229,17 @@
         {
             var result = new ResultInfo
             {
-                Code = 1,
-                Message = ViewResources.ErrorProcessingMsg
+                Code = 0,
+                Message = ViewResources.MessageSuccess
             };
 
             const string SpKey = "Lrf_MessageUserIns";
             using (var objectDb = _dbFactory.GetObjectDb(SpKey))
             {
                 objectDb.SetParameterValue("MessageId", metaModel.MessageId);
-                objectDb.SetParameterValue("SystemId", metaModel.SystemId);
                 objectDb.SetParameterValue("LicenseeName", metaModel.LicenseeName);
                 objectDb.SetParameterValue("UserName", metaModel.UserName);
                 await objectDb.ExecuteNonQueryAsync();
-
-                result.Code = Convert.ToInt32(objectDb.GetParameterValue("ErrCode"));
-                result.Message = Convert.ToString(objectDb.GetParameterValue("ErrMsg"));
             }
 
             return result;
@@ -360,7 +355,7 @@
                 DataFilePath = token["DataFilePath"].Value<string>(),
                 SessionId = token["SessionId"].Value<string>(),
                 IsRead = token["IsRead"].Value<bool>(),
-                Type = _notificationType[MessageType.AmendmentNotification]
+                Type = _notificationType[MessageType.ResettlementNotification]
             };
         }
 
@@ -395,16 +390,6 @@
             return string.Format(OtherSportMatchFormat, _cacheRefAdapter.GetSportName(outputParams["SportType"]), outputParams["MatchCode"], eventDate.ToString("MM/d/yyyy"));
         }
 
-        private static int ReadTotalRows(IObjectDb objectDb)
-        {
-            var outputParams = objectDb.GetOutputParams();
-            if (int.TryParse(outputParams["TotalRecords"]?.ToString(), out int totalRows))
-            {
-                return totalRows;
-            }
-            return 0;
-        }
-
         private static DateTime ReadEventDate(IDataReader reader)
         {
             if (DateTime.TryParse(reader["EventDate"]?.ToString(), out DateTime eventDate))
@@ -421,6 +406,24 @@
                 return id;
             }
             return -1;
+        }
+
+        private static int ReadMessageType(IDataReader reader)
+        {
+            if (int.TryParse(reader["MessageType"]?.ToString(), out int type))
+            {
+                return type + 1;
+            }
+            return -1;
+        }
+
+        private static void UpdateMetaModel(NotificationMetaModel metaModel)
+        {
+            var messageTypes = metaModel.MessageTypes.Split(',');
+
+            metaModel.MessageTypes = string.Join(",", messageTypes
+                .Where(x => !x.Contains(MessageType.ResettlementNotification))
+                .Select(x => int.Parse(x) - 1));
         }
     }
 }
