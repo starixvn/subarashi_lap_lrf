@@ -3413,6 +3413,9 @@
   <data name="SettledAndResettledReport" xml:space="preserve">
     <value>Settled and Resettled Report</value>
   </data>
+  <data name="ESportsPinGoal" xml:space="preserve">
+    <value>E-Sports PinGoal</value>
+  </data>
   <data name="SettledOnlyReport" xml:space="preserve">
     <value>Settled Report</value>
   </data>

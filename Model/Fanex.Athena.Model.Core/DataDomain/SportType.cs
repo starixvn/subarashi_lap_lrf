@@ -159,5 +159,7 @@
         SabaSoccerPingoal = -5,
 
         SabaBasketballPinGoal = -6,
+
+        SabaESportsPinGoal = -7,
     }
 }

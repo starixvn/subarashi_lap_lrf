@@ -2302,6 +2302,9 @@
   <data name="ExchangeWinLoss" xml:space="preserve">
     <value>Exchange輸贏</value>
   </data>
+  <data name="ESportsPinGoal" xml:space="preserve">
+    <value>電競檯</value>
+  </data>
   <data name="ApplyParlay" xml:space="preserve">
     <value>包含串關</value>
   </data>

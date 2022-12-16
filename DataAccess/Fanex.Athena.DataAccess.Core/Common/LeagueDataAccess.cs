@@ -32,7 +32,8 @@ namespace Fanex.Athena.DataAccess.Core.Common
         {
             { (int)SportType.Soccer, new List<int>{42, 74, 108, 113 } },
             { (int)SportType.BasketBall, new List<int>{42, 122 } },
-            { (int)SportType.Cricket, new List<int>{42 } }
+            { (int)SportType.Cricket, new List<int>{42 } },
+            { (int)SportType.Esports, new List<int>{151 } }
         };
 
         public LeagueDataAccess(ICacheRefAdapter cacheRefAdapter, IAppSettings appSettings, IBalanceUpDataAccess balanceUpDataAccess)
