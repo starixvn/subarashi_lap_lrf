@@ -245,6 +245,69 @@ namespace Fanex.Athena.DataAccess.Customer.UnitTests
             });
         }
 
+        [Test]
+        public async Task GetSabaVirtualPlayerListAsync_WhenCall_ParametersPassedCorrectly()
+        {
+            // Arrange
+            var metaModel = FakeHelper.Create<SabaVirtualPlayerListMetaModel>();
+            DataAccess.GetObjectDb(Arg.Is("Lrf_Licensee_DangerLevelSel")).Returns(ObjectDb);
+
+            // Action
+            await DataAccess.GetSabaVirtualPlayerListAsync(metaModel);
+
+            // Assert
+            Assert.Multiple(() =>
+            {
+                ObjectDb.Received().SetParameterValue("FromDate", metaModel.FromDate);
+                ObjectDb.Received().SetParameterValue("ToDate", metaModel.ToDate);
+                ObjectDb.Received().SetParameterValue("IsCheckAll", metaModel.IsGetAll);
+                ObjectDb.Received().SetParameterValue("OrderCol", metaModel.OrderCol);
+                ObjectDb.Received().SetParameterValue("SortType", metaModel.SortType);
+                ObjectDb.Received().SetParameterValue("PageIndex", metaModel.PageIndex);
+                ObjectDb.Received().SetParameterValue("PageSize", metaModel.PageSize);
+                ObjectDb.Received().SetParameterValue("TotalItems", 0);
+                ObjectDb.Received().SetParameterValue("Sporttype", metaModel.SportIdList);
+                ObjectDb.Received().SetParameterValue("Level", metaModel.LevelIdList);
+                ObjectDb.Received().SetParameterValue("Langkey", metaModel.Language);
+            });
+        }
+
+        [Test]
+        public async Task GetSabaVirtualPlayerListAsync_WhenCall_ReturnResultCorrectly()
+        {
+            //Arrange
+            var metaModel = FakeHelper.Create<SabaVirtualPlayerListMetaModel>();
+            DataAccess.GetObjectDb(Arg.Is("Lrf_Licensee_DangerLevelSel")).Returns(ObjectDb);
+            Reader.Read().Returns(true, false);
+
+            var expectedData = new Dictionary<string, object>
+            {
+                { "CustId", FakeHelper.Create<int>() },
+                { "username", FakeHelper.Create<string>() },
+                { "username2", FakeHelper.Create<string>() },
+                { "SoccerLevel", FakeHelper.Create<int>() },
+                { "BasketballLevel", FakeHelper.Create<int>() },
+                { "AgentID", FakeHelper.Create<int>() }
+            };
+
+            MapReaderData(expectedData);
+
+            //Action
+            var result = await DataAccess.GetSabaVirtualPlayerListAsync(metaModel);
+            var firstData = result.Data.First();
+
+            //Assert
+            Assert.Multiple(() =>
+            {
+                Assert.AreEqual(expectedData["CustId"], firstData.CustId);
+                Assert.AreEqual(expectedData["username2"], firstData.ExternalId);
+                Assert.AreEqual(expectedData["username"], firstData.SystemId);
+                Assert.AreEqual(expectedData["SoccerLevel"], firstData.SoccerLevel);
+                Assert.AreEqual(expectedData["BasketballLevel"], firstData.BasketballLevel);
+                Assert.AreEqual(expectedData["AgentID"], firstData.AgentId);
+            });
+        }
+
         private static readonly Action<IObjectDb, BasePlayerListMetaModel> AssertPlayerListParams = (objectDB, metaModel) =>
         {
             objectDB.Received().SetParameterValue("UserName", metaModel.UserName);

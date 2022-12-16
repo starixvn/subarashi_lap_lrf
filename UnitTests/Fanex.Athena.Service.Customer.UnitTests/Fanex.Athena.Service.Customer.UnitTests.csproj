@@ -86,6 +86,7 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Helpers\GroupCommSettingTest.cs" />
     <Compile Include="GroupComServiceTests.cs" />
+    <Compile Include="SabaVirtualSettingServiceTest.cs" />
     <Compile Include="PlayerSegmentationServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

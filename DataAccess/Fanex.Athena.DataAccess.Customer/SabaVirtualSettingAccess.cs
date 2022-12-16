@@ -27,7 +27,7 @@
         {
             var result = new List<SabaVirtualSettingInformationModel>();
 
-            using (var db = GetObjectDb("Lrf_SabaVirtualSettingSel", 180))
+            using (var db = GetObjectDb("Lrf_SabaVirtualSettingSel"))
             {
                 db.SetParameterValue("DangerLevel", metaModel.LevelList);
 
