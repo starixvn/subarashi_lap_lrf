@@ -529,6 +529,8 @@
     <Content Include="www\css\build\dev\pages\customer\customer-class.css" />
     <Content Include="www\css\build\dev\pages\components\fixedColumnsTable.chunk.js" />
     <Content Include="www\css\build\dev\pages\components\fixedColumnsTable.css" />
+    <Content Include="www\css\build\dev\pages\customer\sabavirtualsettinginformation.chunk.js" />
+    <Content Include="www\css\build\dev\pages\customer\sabavirtualsettinginformation.css" />
     <Content Include="www\css\build\dev\pages\reports\godoffortunewinLoss.chunk.js" />
     <Content Include="www\css\build\dev\pages\reports\godoffortunewinLoss.css" />
     <Content Include="www\css\build\dev\pages\reports\sabavirtualsportswinloss.chunk.js" />
@@ -596,6 +598,8 @@
     <Content Include="www\css\build\pro\pages\components\fixedColumnsTable.chunk.js" />
     <Content Include="www\css\build\pro\pages\components\fixedColumnsTable.css" />
     <Content Include="www\css\build\pro\pages\customer\customerlist.chunk.js" />
+    <Content Include="www\css\build\pro\pages\customer\sabavirtualsettinginformation.chunk.js" />
+    <Content Include="www\css\build\pro\pages\customer\sabavirtualsettinginformation.css" />
     <Content Include="www\css\build\pro\pages\reports\godoffortunewinLoss.css" />
     <Content Include="www\css\build\pro\pages\reports\sabavirtualsportswinloss.css" />
     <Content Include="www\css\build\pro\reactpages\betlist\images\bonus.png" />
@@ -761,6 +765,13 @@
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\MonitoredPlayerUploadBySystemIdTemplate.xls" />
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\MonitoredPlayerList.xls" />
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\MonitoredPlayerReachedHistory.xls" />
+    <Content Include="App_Data\Template\Customers\PlayerSegmentation\SabaVirtualSetting.xls" />
+    <Content Include="Views\Desktop\Customer\SabaVirtualSetting\Index.cshtml" />
+    <Content Include="Views\Desktop\Customer\SabaVirtualSetting\SabaVirtualSettingInformationTable.cshtml" />
+    <Content Include="www\css\source\pages\customer\sabavirtualsettinginformation.scss" />
+    <Content Include="App_Data\Template\Customers\PlayerSegmentation\SabaVirtualSettingInformation.xls" />
+    <Content Include="www\css\build\dev\pages\customer\sabavirtualsettinginformation.css.map" />
+    <Content Include="www\css\build\dev\pages\customer\sabavirtualsettinginformation.chunk.js.map" />
     <None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
     <None Include="www\css\source\pages\betlist\result\result.happy5.scss" />
     <None Include="www\css\source\reactpages\components\alert\icons\error.scss" />
@@ -777,6 +788,7 @@
     <Content Include="www\js\build\dev\language-zh-TW.chunk.js" />
     <Content Include="www\js\build\dev\pages\customer\customerclass.chunk.js" />
     <Content Include="www\js\build\dev\pages\customer\exchangebetsetting.chunk.js" />
+    <Content Include="www\js\build\dev\pages\customer\sabavirtualsettinginformation.chunk.js" />
     <Content Include="www\js\build\dev\pages\lib\common.chunk.js" />
     <Content Include="www\js\build\dev\pages\lib\jqgrid.chunk.js" />
     <Content Include="www\js\build\dev\pages\reports\godoffortunewinLoss.chunk.js" />
@@ -786,6 +798,7 @@
     <Content Include="www\js\build\dev\reactpages\bettingticketscenter\running.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\bettingticketscenter\singlecustomer.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\customer\playersegmentation\monitoredPlayer.chunk.js" />
+    <Content Include="www\js\build\dev\reactpages\customer\playersegmentation\SabaVirtualSetting.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\exchangevoided\exchangevoided.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\exchangewl\exchangewl.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\lib\common.chunk.js" />
@@ -814,6 +827,7 @@
     <Content Include="www\js\build\pro\language-zh-TW.chunk.js" />
     <Content Include="www\js\build\pro\pages\customer\customerclass.chunk.js" />
     <Content Include="www\js\build\pro\pages\customer\exchangebetsetting.chunk.js" />
+    <Content Include="www\js\build\pro\pages\customer\sabavirtualsettinginformation.chunk.js" />
     <Content Include="www\js\build\pro\pages\lib\common.chunk.js" />
     <Content Include="www\js\build\pro\pages\lib\jqgrid.chunk.js" />
     <Content Include="www\js\build\pro\pages\reports\godoffortunewinLoss.chunk.js" />
@@ -824,6 +838,7 @@
     <Content Include="www\js\build\pro\reactpages\bettingticketscenter\singlecustomer.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\customer\playersegmentation\betlist.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\customer\playersegmentation\monitoredPlayer.chunk.js" />
+    <Content Include="www\js\build\pro\reactpages\customer\playersegmentation\SabaVirtualSetting.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\exchangevoided\exchangevoided.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\exchangewl\exchangewl.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\lib\common.chunk.js" />
@@ -861,6 +876,7 @@
     <Content Include="www\js\source\lib\bootstrap-table\constants\index.js" />
     <Content Include="www\js\source\lib\bootstrap-table\utils\index.js" />
     <Content Include="www\js\source\lib\bootstrap-table\virtual-scroll\index.js" />
+    <Content Include="www\js\source\pages\customer\sabavirtualsettinginformation\main.js" />
     <Content Include="www\js\source\pages\customer\customerclass\main.js" />
     <Content Include="www\js\source\pages\customer\customerlist\customerlist.custstatus.js" />
     <Content Include="www\js\source\pages\customer\customerlist\customerlist.gridoption.dormant.js" />
@@ -2693,6 +2709,7 @@
     <Content Include="www\css\source\reactpages\pages\extrapayout\index.scss" />
     <Content Include="www\js\build\dev\reactpages\report\newcashoutwinloss.chunk.js.map" />
     <Content Include="www\js\build\dev\reactpages\licenseecontact\licenseecontact.chunk.js.map" />
+    <Content Include="www\js\build\dev\pages\customer\sabavirtualsettinginformation.chunk.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SiteConfig\WebConfigTransforms\SIT.config">

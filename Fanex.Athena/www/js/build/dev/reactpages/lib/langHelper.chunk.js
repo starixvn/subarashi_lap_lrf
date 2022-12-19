@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 11/25/2022 10:00:15 AM
+// Generated at: 12/14/2022 1:36:59 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -155,6 +155,7 @@ window._language_en_US = {
   AmtDueToBetTrade: "Amt Due To Bet Trade",
   AmtGreaterThan30kGBP: "Amt ≥ 30K GBP",
   AmtLessThan30kGBP: "Amt &lt; 30K GBP",
+  ApplyParlay: "Apply Parlay",
   Apr: "Apr",
   April: "April",
   Archived: "Archived",
@@ -179,6 +180,7 @@ window._language_en_US = {
   BAPlayerNoUpdateVIPSingle: "BA player, no update",
   BaseCurrency: "Base Currency",
   Based: "Based",
+  Basketball: "Basketball",
   BAStatus: "BA Status",
   BatchUpdate: "Batch Update",
   BAUpdatedBy: "BA Updated By",
@@ -504,6 +506,7 @@ window._language_en_US = {
   IncorrectMaxPerMatch: "Incorrect Max Per Match",
   IncorrectMinBet: "Incorrect Min Bet",
   Individual: "Individual",
+  Information: "Information",
   InsertMonitoredPlayerConfirm: "{0} will be added into the list of monitored players with the Daily Winning Threshold = {1}. Are you sure you want to add?",
   InstantDataReportNote: "The Real Time report shall support instant data from {0}.",
   InternalSystem: "Internal System",
@@ -558,6 +561,7 @@ window._language_en_US = {
   League: "League",
   LeagueName: "League name",
   LeagueWinLoss: "Win Loss By League",
+  Level: "Level",
   Liability: "Liability",
   Licensee: "Licensee",
   LicenseeComm: "Licensee Comm",
@@ -674,6 +678,7 @@ window._language_en_US = {
   NetTurnover: "Net Turnover",
   NewGroup: "New Group",
   Next: "Next",
+  NextBetInteval: "Next Bet Inteval (sec)",
   NG: "NG",
   NGComm: "NG Comm",
   NGCommission: "NG Commission",
@@ -862,6 +867,10 @@ window._language_en_US = {
   Running: "Running",
   Sa: "Sa",
   Saba: "Saba",
+  SabaVirtualSetting: "Saba Virtual Setting",
+  SabaVirtualSettingInformation: "Saba Virtual Setting Information",
+  SabaVirtualSettingLevel: "Saba Virtual Setting Level",
+  SabaVirtualSport: "Saba Virtual Sport",
   SabaVirtualSportsWinLoss: "Saba Virtual Sports Win Loss",
   Saturday: "Saturday",
   Save: "Save",
@@ -894,6 +903,7 @@ window._language_en_US = {
   SingleCustomer: "Single Customer",
   Skype: "Skype",
   SLTDateRangeNote: "Sports Lottery data is available from 11/22/2021",
+  Soccer: "Soccer",
   SoccerParlay: "Soccer Parlay",
   SoccerPinGoal: "Soccer PinGoal",
   SolutionForRestriction: "1. Login at Licensee Admin.&lt;br/&gt;2. Access the reports/ functions you want. &lt;br/&gt; 请洽你们的最高管理者替你设置币别权限",

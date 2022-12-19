@@ -114,6 +114,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\SabaVirtualSettingHelper.cs" />
+    <Compile Include="SabaVirtualSettingController.cs" />
     <Compile Include="CustomerClassController.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Helpers\CustomerComGroupHelper.cs" />

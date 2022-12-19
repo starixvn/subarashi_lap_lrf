@@ -85,6 +85,7 @@
         public const string PlayerVIPManagement_Write = "PlayerSegmentation_VIPManagement_Write";
         public const string MonitoredPlayer = "PlayerSegmentation_MonitoredPlayer";
         public const string MonitoredPlayer_Write = "PlayerSegmentation_MonitoredPlayer_Write";
+        public const string SabaVirtualSetting = "PlayerSegmentation_SabaVirtualSetting";
 
         /* Account. */
 

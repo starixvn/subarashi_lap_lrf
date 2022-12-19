@@ -2983,4 +2983,37 @@
   <data name="ProductTIP" xml:space="preserve">
     <value>玩家打赏</value>
   </data>
+  <data name="Basketball" xml:space="preserve">
+    <value>篮球</value>
+  </data>
+  <data name="Soccer" xml:space="preserve">
+    <value>足球</value>
+  </data>
+  <data name="ApplyParlay" xml:space="preserve">
+    <value>包含串关</value>
+  </data>
+  <data name="Information" xml:space="preserve">
+    <value>资讯</value>
+  </data>
+  <data name="Level" xml:space="preserve">
+    <value>等级</value>
+  </data>
+  <data name="NextBetInteval" xml:space="preserve">
+    <value>投注间隔(秒)</value>
+  </data>
+  <data name="SabaVirtualSetting" xml:space="preserve">
+    <value>沙巴虚拟体育设定</value>
+  </data>
+  <data name="SabaVirtualSport" xml:space="preserve">
+    <value>沙巴虚拟赛事</value>
+  </data>
+  <data name="BetDelay" xml:space="preserve">
+    <value>延迟收单</value>
+  </data>
+  <data name="SabaVirtualSettingInformation" xml:space="preserve">
+    <value>沙巴虚拟体育设定资讯</value>
+  </data>
+  <data name="SabaVirtualSettingLevel" xml:space="preserve">
+    <value>沙巴虚拟体育设定等级</value>
+  </data>
 </root>

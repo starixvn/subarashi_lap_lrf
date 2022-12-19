@@ -3,12 +3,11 @@
     using System;
     using System.Collections.Concurrent;
     using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using System.Web.SessionState;
-    using Fanex.Athena.Excel.Customer.PlayerSegmentation;
+    using Fanex.Athena.Controllers.Customer.Helpers;
     using Fanex.Athena.Extension.Utility.Internal;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
@@ -25,10 +24,10 @@
     [FunctionAuthorization(PermissionKeys.PlayerSegmentation)]
     public partial class PlayerSegmentationController : CultureBaseController
     {
-
         private static readonly IDictionary<string, string> TabKeys = new Dictionary<string, string>
         {
             { PermissionKeys.PlayerProblemManagement, "ProblemPlayer" },
+            { PermissionKeys.SabaVirtualSetting, "SabaVirtualSetting" },
             { PermissionKeys.PlayerVIPManagement, "VipPlayerManagement" },
             { PermissionKeys.MonitoredPlayer, "MonitoredPlayer" }
         };
@@ -53,7 +52,7 @@
             _customerClassService = customerClassService;
         }
 
-        [FunctionAuthorization(PermissionKeys.PlayerProblemManagement, PermissionKeys.PlayerVIPManagement, PermissionKeys.MonitoredPlayer)]
+        [FunctionAuthorization(PermissionKeys.PlayerProblemManagement, PermissionKeys.PlayerVIPManagement, PermissionKeys.MonitoredPlayer, PermissionKeys.SabaVirtualSetting)]
         public async Task<ViewResult> Index()
         {
             var model = await BuildViewModel();
@@ -71,6 +70,7 @@
             var hasVIPManangementPermission = HasVIPManagementPermission();
             var hasVIPManangementEditPermission = HasVIPManagementEditPermission();
             var hasMonitoredPlayerPermission = _authService.HasPermissions(SessionServiceInstance.UserSession, PermissionKeys.MonitoredPlayer);
+            var hasSabaVirtualSettingPermission = _authService.HasPermissions(SessionServiceInstance.UserSession, PermissionKeys.SabaVirtualSetting);
             var subsidiaryList = _subsidiaryService.GetSubsidiaryTree(userSession, licenseeSession.LicenseeName);
             var viewType = !subsidiaryList.Any() ? SubsidiaryViewType.NotManagement : (SubsidiaryViewType)userSession.SubsidiaryViewType;
             var reasonList = await GetReasonList(lang);
@@ -98,6 +98,12 @@
                 {
                     CanEdit = _authService.HasPermissions(SessionServiceInstance.UserSession, PermissionKeys.MonitoredPlayer_Write),
                     CurrencyList = currencyList
+                } : null,
+                DangerLevelVM = hasSabaVirtualSettingPermission ? new DangerLevelViewModel
+                {
+                    CurrencyList = currencyList,
+                    LevelList = SabaVirtualSettingHelper.GenerateDangerLevelList(true),
+                    SportList = GetDangerLevelSportList()
                 } : null,
                 ViewType = viewType,
                 SubsidiaryList = subsidiaryList
@@ -140,6 +146,15 @@
                 { 0, ViewResources.All },
                 { 1, ViewResources.Yes },
                 { 2, ViewResources.No },
+            };
+        }
+
+        private static IDictionary<int, string> GetDangerLevelSportList()
+        {
+            return new Dictionary<int, string>
+            {
+                { (int)SportType.Soccer, ViewResources.Soccer },
+                { (int)SportType.BasketBall, ViewResources.Basketball },
             };
         }
     }

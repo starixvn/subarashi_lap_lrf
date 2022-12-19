@@ -69,6 +69,7 @@
   <ItemGroup>
     <Compile Include="DormantCustomerListDataAccessTest.cs" />
     <Compile Include="PlayerSegmentationTest.cs" />
+    <Compile Include="SabaVirtualSettingAccessTest.cs" />
     <Compile Include="SearchCustomerDataAccessTest.cs" />
     <Compile Include="CustomerListDataAccessTest.cs" />
     <Compile Include="CustomerLogDataAccessTest.cs" />

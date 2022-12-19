@@ -187,6 +187,66 @@ namespace Fanex.Athena.Service.Customer.UnitTests
         }
 
         [Test]
+        public async Task GetSabaVirtualPlayerListAsync_WhenCall_ReturnDataCorrectly()
+        {
+            //Arrange
+            var metaModel = FakeHelper.Create<SabaVirtualPlayerListMetaModel>();
+
+            var rawData = new ApiPagingResult<SabaVirtualPlayer>
+            {
+                Data = new List<SabaVirtualPlayer>
+                {
+                    new SabaVirtualPlayer
+                    {
+                        AgentId = 1
+                    },
+                    new SabaVirtualPlayer
+                    {
+                        AgentId = 2
+                    }
+                }
+            };
+
+            var expectedResult = new ApiPagingResult<SabaVirtualPlayer>
+            {
+                Data = new List<SabaVirtualPlayer>
+                {
+                    new SabaVirtualPlayer
+                    {
+                        AgentId = 1,
+                        Subsidiary = "Sub1"
+                    },
+                    new SabaVirtualPlayer
+                    {
+                        AgentId = 2,
+                        Subsidiary = "Sub2"
+                    }
+                }
+            };
+
+            var subsidiaryList = new List<Subsidiary>
+            {
+                new Subsidiary { AgentId = 1, OperatorId = "Sub1" },
+                new Subsidiary { AgentId = 2, OperatorId = "Sub2" }
+            };
+
+            var licenseeName = FakeHelper.Create<string>();
+            var user = FakeHelper.Create<UserAuthInfo>();
+
+            _sessionService.LicenseeSession.Returns(new LicenseeAuthInfo { LicenseeName = licenseeName });
+            _sessionService.UserSession.Returns(user);
+
+            _playerDataAccess.GetSabaVirtualPlayerListAsync(metaModel).Returns(Task.FromResult(rawData));
+            _subsidiaryService.GetSubsidiaryList(user, licenseeName, metaModel.SubsidiaryList).Returns(subsidiaryList);
+
+            //Act
+            var actualResult = await _targetService.GetSabaVirtualPlayerListAsync(metaModel);
+
+            //Assert
+            actualResult.Should().BeEquivalentTo(expectedResult);
+        }
+
+        [Test]
         public async Task UpdateVipStatusAsync_WhenCall_ReturnDataCorrectly()
         {
             //Arrange

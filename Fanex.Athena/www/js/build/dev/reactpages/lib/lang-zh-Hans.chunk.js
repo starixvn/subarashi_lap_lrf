@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 11/25/2022 10:00:15 AM
+// Generated at: 12/14/2022 1:36:59 PM
 window._language_zh_Hans = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -134,6 +134,7 @@ window._language_zh_Hans = {
   AmtDueToBA: "BA金额",
   AmtGreaterThan30kGBP: "金额≥ 30,000英镑",
   AmtLessThan30kGBP: "金额&lt; 30,000英镑",
+  ApplyParlay: "包含串关",
   Apr: "四月",
   April: "四月",
   AreYouSure: "您确定要继续吗?",
@@ -150,11 +151,13 @@ window._language_zh_Hans = {
   BalanceChange: "余额变动",
   BaseCurrency: "基础货币",
   Based: "基于",
+  Basketball: "篮球",
   BAStatus: "BA 状态",
   BatchUpdate: "批次更新",
   BAUpdatedBy: "BA更新帐号",
   BBAmtComm: "回购金额+即时兑现佣金",
   BetCount: "投注数",
+  BetDelay: "延迟收单",
   BetfromOthers: "其他",
   BetId: "投注单号",
   BetList: "投注历史",
@@ -387,6 +390,7 @@ window._language_zh_Hans = {
   IncorrectMaxPerBall: "不正确的单球最大投注",
   IncorrectMaxPerMatch: "不正确的单场最大投注",
   IncorrectMinBet: "不正确的最小投注",
+  Information: "资讯",
   InternalSystem: "内部系统",
   InvalidCaptchaMsg: "您输入了无效的编码",
   InvalidParams: "Invalid parameters",
@@ -422,6 +426,7 @@ window._language_zh_Hans = {
   League: "联赛",
   LeagueName: "联赛名称",
   LeagueWinLoss: "联赛输赢",
+  Level: "等级",
   Liability: "负债",
   Licensee: "承租公司",
   LicenseeComm: "承租公司佣金",
@@ -503,6 +508,7 @@ window._language_zh_Hans = {
   NewAsia: "新亚洲版",
   NewGroup: "新组别",
   Next: "下个",
+  NextBetInteval: "投注间隔(秒)",
   NG: "百练赛",
   NGComm: "百练赛佣金",
   NGCommission: "百练赛佣金",
@@ -625,6 +631,10 @@ window._language_zh_Hans = {
   Running: "进行中",
   Sa: "Sa",
   Saba: "沙巴",
+  SabaVirtualSetting: "沙巴虚拟体育设定",
+  SabaVirtualSettingInformation: "沙巴虚拟体育设定资讯",
+  SabaVirtualSettingLevel: "沙巴虚拟体育设定等级",
+  SabaVirtualSport: "沙巴虚拟赛事",
   SabaVirtualSportsWinLoss: "沙巴虚拟赛事输赢",
   Saturday: "星期日",
   Save: "保存",
@@ -653,6 +663,7 @@ window._language_zh_Hans = {
   Sincelastmonth: "自上个月",
   SingleCustomer: "单一会员",
   SLTDateRangeNote: "体育时时彩仅提供11/22/2021之后的数据",
+  Soccer: "足球",
   SoccerPinGoal: "足球台",
   SpecialLevel: "特殊层级",
   SpecificDate: "特定日期",
