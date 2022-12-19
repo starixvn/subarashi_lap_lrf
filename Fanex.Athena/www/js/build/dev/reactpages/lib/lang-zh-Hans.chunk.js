@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 12/14/2022 1:36:59 PM
+// Generated at: 12/19/2022 4:55:05 PM
 window._language_zh_Hans = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -286,6 +286,7 @@ window._language_zh_Hans = {
   DeleteGroup: "删除组",
   DeleteManyMonitoredPlayerConfirm: "所选的玩家将被移出警示值监控，您确定要移出吗？",
   Deposit: "存款",
+  Detail: "详情",
   DetailedBetlist: "投注历史明细",
   Details: "细节",
   DetailTransaction: "交易纪录",
@@ -397,6 +398,7 @@ window._language_zh_Hans = {
   InvalidParams: "Invalid parameters",
   InvalidRequestMsg: "请求无效",
   InvalidRequestOrNotAuthorizedMsg: "无效的请求或您未被授权访问所请求的资源",
+  IpSummary: "IP摘要",
   IsGroupInOriginalCurrency: "以原始货币显示",
   IsNeutral: "(中)",
   JackpotWonDetails: "积宝头奖详情",
@@ -407,6 +409,7 @@ window._language_zh_Hans = {
   Jun: "六月",
   June: "六月",
   KeepCurrentComm: "保持当前的佣金",
+  KOTime: "开赛时间",
   Last: "最后",
   LastBetsMonitoring: "最后投注监测",
   LastGoal: "最后进球",
@@ -441,6 +444,7 @@ window._language_zh_Hans = {
   LiveReport: "滚球报告",
   LiveReportTitle: "滚球报告 - {0}, {1} --&gt; {2} - {3}",
   LiveStatus: "滚球状态",
+  Location: "地点",
   LocationRestriction: "地点限制",
   LocationRestrictionMsg: "限制直接访问此网站。欲知详情请联系{0}。",
   Log: "日志",
@@ -609,6 +613,7 @@ window._language_zh_Hans = {
   PromotionType: "基础货币",
   RB: "赛马",
   ReachedDate: "到达警示值日期",
+  Reason: "原因",
   RecommendBrowserOnReportPageMsg: "若页面大小 &gt; 1,000, 请您考虑使用火狐或Chrome以获得更好的体验",
   RefNo: "注单号码",
   Refund: "退款",
@@ -681,7 +686,7 @@ window._language_zh_Hans = {
   Subsidiary: "子网站",
   SubsidiaryPerformance: "子网站报告",
   SubsidiaryWL: "子网站输赢",
-  Summary: "总结",
+  Summary: "摘要",
   Sunday: "星期六",
   Suspended: "暂停",
   SystemId: "系统账号",
@@ -694,6 +699,7 @@ window._language_zh_Hans = {
   TheSettledAndResettledReportNote: "已结算和重新结算报告显示所选日期范围内已结算和已重新结算注单的数据。",
   TheSettledOnlyReportNote: "已结算报表仅显示所选日期范围内的首次结算注单的数据。",
   Thursday: "星期四",
+  Ticket: "注单",
   TicketFilter: "注单筛选",
   TicketList: "注单清单",
   TicketNo: "票劵号码",
