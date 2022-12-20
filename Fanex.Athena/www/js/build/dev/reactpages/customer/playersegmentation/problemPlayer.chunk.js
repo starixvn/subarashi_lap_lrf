@@ -92,6 +92,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 const fetchData = resourceName => {
   const url = _lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].resolveClientUrl('UserGuide/Index?resourcename=' + resourceName) + "&_=" + new Date().getTime();
   return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(url, {
@@ -100,6 +101,7 @@ const fetchData = resourceName => {
     }
   });
 };
+
 function getUserGuideContent(params) {
   return dispatch => {
     fetchData(params).then(response => {
@@ -196,6 +198,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
+
 const Loader = ({
   isLoading
 }) => {
@@ -210,6 +213,7 @@ const Loader = ({
     className: "loader-inner ball-beat"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null))));
 };
+
 /* harmony default export */ __webpack_exports__["default"] = (Loader);
 
 /***/ }),
@@ -228,6 +232,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 
 
+
 const NoDataTitle = ({
   title
 }) => {
@@ -238,6 +243,7 @@ const NoDataTitle = ({
     }
   });
 };
+
 /* harmony default export */ __webpack_exports__["default"] = (NoDataTitle);
 
 /***/ }),
@@ -258,9 +264,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -271,20 +276,25 @@ const wrapperClasses = {
 class Overlay extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   constructor(props) {
     super(props);
+
     _defineProperty(this, "_unRegisterEvents", () => {
       const {
         closeOnOutsideClick
       } = this.props;
+
       if (closeOnOutsideClick) {
         document.removeEventListener('click', this._handleClickOutSide);
       }
     });
+
     _defineProperty(this, "_handleClickOutSide", event => {
       const clickOutside = this.containerElement && !this.containerElement.contains(event.target);
+
       if (clickOutside && this.state.isOpening) {
         this._close();
       }
     });
+
     this.containerElement = null;
     this.refHandlers = {
       container: ref => {
@@ -295,6 +305,7 @@ class Overlay extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       isOpening: this.props.isOpening
     };
   }
+
   componentDidUpdate(prevProps, prevState) {
     if (this.props.isOpening !== prevProps.isOpening) {
       const {
@@ -313,17 +324,21 @@ class Overlay extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       }, 0);
     }
   }
+
   componentWillUnmount() {
     this._unRegisterEvents();
   }
+
   _registerEvents() {
     const {
       closeOnOutsideClick
     } = this.props;
+
     if (closeOnOutsideClick) {
       document.addEventListener('click', this._handleClickOutSide);
     }
   }
+
   _close() {
     const {
       onClose
@@ -332,6 +347,7 @@ class Overlay extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       isOpening: false
     }, () => onClose && onClose());
   }
+
   render() {
     const {
       className,
@@ -349,13 +365,16 @@ class Overlay extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       ref: this.refHandlers.container
     }, children);
   }
+
 }
+
 _defineProperty(Overlay, "propTypes", {
   closeOnOutsideClick: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
   isOpening: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
   onOpen: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
   onClose: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
 });
+
 _defineProperty(Overlay, "defaultProps", {
   closeOnOutsideClick: true,
   isOpening: false
@@ -377,17 +396,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 const _excluded = ["content", "tag"];
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+
 
 
 const ReportTitle = _ref => {
   let {
-      content,
-      tag
-    } = _ref,
-    attrs = _objectWithoutProperties(_ref, _excluded);
+    content,
+    tag
+  } = _ref,
+      attrs = _objectWithoutProperties(_ref, _excluded);
+
   const Tag = tag;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "report-title-container"
@@ -395,6 +420,7 @@ const ReportTitle = _ref => {
     className: "report-title"
   }, attrs), content));
 };
+
 const propTypes = {
   tag: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
   content: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.any
@@ -419,11 +445,13 @@ ReportTitle.defaultProps = defaultProps;
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("Cannot destructure " + obj); }
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+
 
 const Switcher = props => {
-  const attributes = _extends({}, (_objectDestructuringEmpty(props), props));
+  const attributes = _extends({}, props);
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "switch"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", _extends({}, attributes, {
@@ -432,6 +460,7 @@ const Switcher = props => {
     className: "lever"
   })));
 };
+
 /* harmony default export */ __webpack_exports__["default"] = (Switcher);
 
 /***/ }),
@@ -453,9 +482,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _popup_Popup__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./popup/Popup */ "./www/js/source/reactpages/components/popup/Popup.jsx");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -463,21 +491,25 @@ function _toPrimitive(input, hint) { if (typeof input !== "object" || input === 
 class UserGuide extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
   constructor(props) {
     super(props);
+
     _defineProperty(this, "onClickHandler", () => {
       this.setState({
         isShow: true
       });
       this.props.onClick && this.props.onClick();
     });
+
     _defineProperty(this, "onCloseHandler", () => {
       this.setState({
         isShow: false
       });
     });
+
     this.state = {
       isShow: false
     };
   }
+
   render() {
     const {
       className,
@@ -500,17 +532,21 @@ class UserGuide extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
       isHtml: isHtml
     }, content));
   }
+
 }
+
 _defineProperty(UserGuide, "propTypes", {
   title: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
   className: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
   contentTitle: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
   isHtml: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool
 });
+
 _defineProperty(UserGuide, "defaultProps", {
   className: 'icon-book right',
   isHtml: true
 });
+
 ;
 
 /***/ }),
@@ -536,10 +572,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Overlay__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Overlay */ "./www/js/source/reactpages/components/Overlay.jsx");
 /* harmony import */ var _SuggestionList__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./SuggestionList */ "./www/js/source/reactpages/components/auto-complete/SuggestionList.jsx");
 /* harmony import */ var _utils_timer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils/timer */ "./www/js/source/reactpages/components/utils/timer.js");
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -551,16 +587,20 @@ const DELAY_TIME_MILLISECOND = 300;
 class AutoComplete extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   constructor(props) {
     super(props);
+
     _defineProperty(this, "_handleClickOut", event => {
       if (this.isShowSuggestionList && this.wrapperRef && !this.wrapperRef.current.contains(event.target)) {
         this._clearState();
       }
     });
+
     _defineProperty(this, "_onKeyDown", event => {
       if (!this.isShowSuggestionList) {
         return;
       }
+
       const selectedIndex = this.state.selectedIndex;
+
       switch (event.keyCode) {
         case 38:
           //up
@@ -569,7 +609,9 @@ class AutoComplete extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
               selectedIndex: selectedIndex - 1
             });
           }
+
           break;
+
         case 40:
           //down
           if (selectedIndex < this.state.suggestions.length - 1) {
@@ -577,54 +619,69 @@ class AutoComplete extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
               selectedIndex: selectedIndex + 1
             });
           }
+
           break;
+
         case 13:
           //enter
           if (selectedIndex > -1) {
             const selectedItem = this.state.suggestions[selectedIndex];
+
             this._onSelect(selectedItem);
           }
+
           break;
       }
     });
+
     _defineProperty(this, "_clearState", () => {
       this.setState({
         suggestions: null,
         selectedIndex: -1
       });
     });
+
     _defineProperty(this, "_onSelect", selectedItem => {
       const {
         onSelect
       } = this.props;
       onSelect && onSelect(selectedItem);
       this.input.value = typeof selectedItem === "object" ? selectedItem.value : selectedItem;
+
       this._clearState();
     });
+
     _defineProperty(this, "_onChange", event => {
       const value = (this.input.value || "").trim();
       const {
         onInput
       } = this.props;
       onInput && onInput(value);
+
       if (value.length < 3) {
         this._clearState();
+
         return;
       }
+
       const cachedData = this.cacheData[value];
+
       if (cachedData) {
         this.setState({
           suggestions: cachedData
         });
         return;
       }
+
       const {
         url
       } = this.props;
+
       if (url) {
         this._getDataByUrl(url, value);
       }
     });
+
     this.state = {
       suggestions: null,
       selectedIndex: -1
@@ -634,24 +691,30 @@ class AutoComplete extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     this.onChange = _utils_timer__WEBPACK_IMPORTED_MODULE_6__["default"].debounce(this._onChange, DELAY_TIME_MILLISECOND).bind(this);
     this.wrapperRef = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
   }
+
   componentDidMount() {
     document.addEventListener("mousedown", this._handleClickOut);
   }
+
   componentWillUnmount() {
     document.removeEventListener("mousedown", this._handleClickOut);
   }
+
   get isShowSuggestionList() {
     return this.state.suggestions && this.state.suggestions.length > 0;
   }
+
   _setStateWithCaching(value, suggestionList) {
     if (this.props.cache) {
       const cacheKey = value.toLowerCase();
       this.cacheData[cacheKey] = suggestionList;
     }
+
     this.setState({
       suggestions: suggestionList
     });
   }
+
   _getDataByUrl(url, value) {
     const {
       responseDataField,
@@ -664,9 +727,11 @@ class AutoComplete extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       }
     }).then(response => {
       const data = responseDataField ? response.data[responseDataField] : response.data;
+
       this._setStateWithCaching(value, data);
     });
   }
+
   render() {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "ac-container",
@@ -688,7 +753,9 @@ class AutoComplete extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       onSelect: this._onSelect
     })));
   }
+
 }
+
 _defineProperty(AutoComplete, "propTypes", {
   url: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
   onSelect: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
@@ -698,6 +765,7 @@ _defineProperty(AutoComplete, "propTypes", {
   queryParamName: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
   htmlAttributes: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.object
 });
+
 _defineProperty(AutoComplete, "defaultProps", {
   url: null,
   responseDataField: "suggestions",
@@ -723,9 +791,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -733,12 +800,14 @@ class SuggestionList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   constructor(props) {
     super(props);
   }
+
   onSelect(selectedItem) {
     const {
       onSelect
     } = this.props;
     onSelect && onSelect(selectedItem);
   }
+
   _renderDataList() {
     return this.props.dataList.map((item, index) => {
       const className = index === this.props.selectedIndex ? "ac-item ac-item-active" : "ac-item";
@@ -749,6 +818,7 @@ class SuggestionList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       }, item && typeof item === "object" ? item.value : item);
     });
   }
+
   render() {
     const style = {
       width: this.props.width
@@ -758,7 +828,9 @@ class SuggestionList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       style: style
     }, this._renderDataList());
   }
+
 }
+
 _defineProperty(SuggestionList, "propTypes", {
   dataList: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.array.isRequired,
   onSelect: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
@@ -797,51 +869,63 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 const _excluded = ["tag", "className", "style"];
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 class CollapsiblePanel extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
   constructor(props) {
     super(props);
+
     _defineProperty(this, "onClick", () => {
       const newState = !this.state.isCollapsed;
       const {
         onCollapse,
         onExpand
       } = this.props;
+
       if (newState) {
         onCollapse && onCollapse();
       }
+
       this.setState({
         isCollapsed: newState
       }, () => {
         window.dispatchEvent(new Event('resize'));
+
         if (!newState) {
           onExpand && onExpand();
         }
       });
     });
+
     this.state = {
       isCollapsed: false
     };
   }
+
   render() {
     const {
       stickyFooter,
       iconContainerStyle,
       iconToggle
     } = this.props;
+
     const {
-        tag,
-        className,
-        style
-      } = iconToggle,
-      attrs = _objectWithoutProperties(iconToggle, _excluded);
+      tag,
+      className,
+      style
+    } = iconToggle,
+          attrs = _objectWithoutProperties(iconToggle, _excluded);
+
     const IconTag = tag;
     const iconStyle = style || {
       transform: this.state.isCollapsed ? null : 'rotate(180deg)',
@@ -869,12 +953,15 @@ class CollapsiblePanel extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Comp
       style: iconStyle
     }, attrs))));
   }
+
 }
+
 _defineProperty(CollapsiblePanel, "propTypes", {
   stickyFooter: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node,
   onCollapse: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
   onExpand: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
 });
+
 const propTypes = {
   stickyFooter: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node,
   onCollapse: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
@@ -938,12 +1025,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DayCell_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DayCell.js */ "./www/js/source/reactpages/components/date-range/DayCell.js");
 /* harmony import */ var _styles_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./styles.js */ "./www/js/source/reactpages/components/date-range/styles.js");
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./constants */ "./www/js/source/reactpages/components/date-range/constants.js");
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -955,24 +1044,29 @@ const START_OF_MONTH = 0;
 const END_OF_MONTH = 11;
 const START_DAY_OF_MONTH = 1;
 const DEFAULT_YEAR_RANGE = 5;
+
 function checkRange(dayMoment, range) {
   return dayMoment.isBetween(range['startDate'], range['endDate']) || dayMoment.isBetween(range['endDate'], range['startDate']);
 }
+
 function checkStartEdge(dayMoment, range) {
   const {
     startDate
   } = range;
   return dayMoment.startOf('day').isSame(startDate.startOf('day'));
 }
+
 function checkEndEdge(dayMoment, range) {
   const {
     endDate
   } = range;
   return dayMoment.endOf('day').isSame(endDate.endOf('day'));
 }
+
 function isOusideMinMax(dayMoment, minDate, maxDate, format) {
   return minDate && dayMoment.isBefore(Object(_utils_parseInput_js__WEBPACK_IMPORTED_MODULE_3__["default"])(minDate, format, 'startOf')) || maxDate && dayMoment.isAfter(Object(_utils_parseInput_js__WEBPACK_IMPORTED_MODULE_3__["default"])(maxDate, format, 'endOf'));
 }
+
 class Calendar extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   constructor(props, context) {
     super(props, context);
@@ -994,12 +1088,14 @@ class Calendar extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     this.state = state;
     this.styles = Object(_styles_js__WEBPACK_IMPORTED_MODULE_5__["default"])(theme);
   }
+
   componentDidMount() {
     const {
       onInit
     } = this.props;
     onInit && onInit(this.state.date);
   }
+
   get limitedDate() {
     const {
       minDate,
@@ -1007,41 +1103,51 @@ class Calendar extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     } = this.props;
     const m = moment__WEBPACK_IMPORTED_MODULE_2___default()();
     let startDate, endDate;
+
     if (minDate) {
       startDate = moment__WEBPACK_IMPORTED_MODULE_2___default.a.isMoment(minDate) ? minDate : moment__WEBPACK_IMPORTED_MODULE_2___default()(minDate, _constants__WEBPACK_IMPORTED_MODULE_6__["MomentFormat"].default);
     } else {
       startDate = moment__WEBPACK_IMPORTED_MODULE_2___default()([m.year() - DEFAULT_YEAR_RANGE, START_OF_MONTH]);
     }
+
     if (maxDate) {
       endDate = moment__WEBPACK_IMPORTED_MODULE_2___default.a.isMoment(maxDate) ? maxDate : moment__WEBPACK_IMPORTED_MODULE_2___default()(maxDate, _constants__WEBPACK_IMPORTED_MODULE_6__["MomentFormat"].default);
     } else {
       endDate = moment__WEBPACK_IMPORTED_MODULE_2___default()([m.year(), END_OF_MONTH]).endOf("month");
     }
+
     return {
       startDate,
       endDate
     };
   }
+
   get disablePrevButton() {
     const range = this.limitedDate;
     const startDate = range.startDate;
     const currentDate = this.state.shownDate;
     let prevMonth = this.state.shownDate.month() - 1;
+
     if (prevMonth < startDate.month() && currentDate.year() <= startDate.year()) {
       return true;
     }
+
     return false;
   }
+
   get disableNextButton() {
     const range = this.limitedDate;
     const endDate = range.endDate;
     const currentDate = this.state.shownDate;
     let nextMonth = this.state.shownDate.month() + 1;
+
     if (nextMonth > endDate.month() && currentDate.year() >= endDate.year()) {
       return true;
     }
+
     return false;
   }
+
   getShownDate() {
     const {
       link
@@ -1049,68 +1155,85 @@ class Calendar extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     const shownDate = link || this.state.shownDate;
     return shownDate;
   }
+
   handleSelect(newDate) {
     const {
       link,
       onChange
     } = this.props;
     onChange && onChange(newDate);
+
     if (!link) {
       this.setState({
         date: newDate
       });
     }
   }
+
   nextButtonClickHandler(event) {
     event.preventDefault();
+
     if (!this.disableNextButton) {
       this.changeMonth(this.state.shownDate.month() + 1, event);
     }
   }
+
   prevButtonClickHandler(event) {
     event.preventDefault();
+
     if (!this.disablePrevButton) {
       this.changeMonth(this.state.shownDate.month() - 1, event);
     }
   }
+
   changeMonth(direction, event) {
     event.preventDefault();
     let selectedMonth = Number(direction);
     let year = this.state.shownDate.year();
+
     if (selectedMonth < START_OF_MONTH) {
       selectedMonth = END_OF_MONTH;
       year -= 1;
     }
+
     if (selectedMonth > END_OF_MONTH) {
       selectedMonth = START_OF_MONTH;
       year += 1;
     }
+
     const {
       link,
       linkCB
     } = this.props;
     let newDate = moment__WEBPACK_IMPORTED_MODULE_2___default()([year, selectedMonth, this.state.shownDate.date()]);
+
     if (!newDate.isValid()) {
       newDate = moment__WEBPACK_IMPORTED_MODULE_2___default()([year, selectedMonth, START_DAY_OF_MONTH]);
     }
+
     if (link && linkCB) {
       return linkCB(newDate);
     }
+
     this.setState({
       shownDate: newDate
     });
   }
+
   changeYear(event) {
     event.preventDefault();
     const selectedYear = Number(event.target.value);
     let newDate = moment__WEBPACK_IMPORTED_MODULE_2___default()([selectedYear, this.state.shownDate.month(), this.state.shownDate.date()]);
+
     if (!newDate.isValid()) {
       newDate = moment__WEBPACK_IMPORTED_MODULE_2___default()([selectedYear, this.state.shownDate.month(), START_DAY_OF_MONTH]);
     }
+
     this.setState({
       shownDate: newDate
     });
   }
+
   renderMonthList(classes) {
     const {
       styles
@@ -1121,14 +1244,17 @@ class Calendar extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     } = this.props;
     const monthLabels = locale.months;
     let monthOptions = [];
+
     for (let i = 0; i < 12; i++) {
       const isDisabled = this._isDisabledMonth(i);
+
       monthOptions.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         disabled: isDisabled,
         key: `month${i}`,
         value: i
       }, monthLabels[i]));
     }
+
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
       style: onlyClasses ? undefined : styles["MonthAndYearSelect"],
       className: classes.monthAndYearSelect,
@@ -1136,11 +1262,13 @@ class Calendar extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       value: this.state.shownDate.month()
     }, monthOptions);
   }
+
   _isDisabledMonth(currentMonth) {
     const range = this.limitedDate;
     const currentYear = this.state.shownDate.year();
     return currentMonth < range.startDate.month() && currentYear <= range.startDate.year() || currentMonth > range.endDate.month() && currentYear >= range.endDate.year();
   }
+
   renderYearList(classes) {
     const {
       styles
@@ -1150,12 +1278,14 @@ class Calendar extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     } = this.props;
     const range = this.limitedDate;
     const yearOptions = [];
+
     for (let i = range.startDate.year(); i <= range.endDate.year(); i++) {
       yearOptions.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         key: `year${i}`,
         value: i
       }, i));
     }
+
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
       style: onlyClasses ? undefined : styles["MonthAndYearSelect"],
       className: classes.monthAndYearSelect,
@@ -1163,6 +1293,7 @@ class Calendar extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       value: this.state.shownDate.year()
     }, yearOptions);
   }
+
   renderMonthAndYear(classes) {
     const shownDate = this.getShownDate();
     const year = shownDate.year();
@@ -1206,6 +1337,7 @@ class Calendar extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       style: onlyClasses ? undefined : _objectSpread(_objectSpread({}, styles['MonthArrow']), styles['MonthArrowNext'])
     })) : null);
   }
+
   renderWeekdays(classes) {
     const dow = this.state.firstDayOfWeek;
     const weekdays = [];
@@ -1218,6 +1350,7 @@ class Calendar extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     } = this.props;
     const weekDays = locale.weekdays;
     const dayLength = 7 + dow;
+
     for (let i = dow; i < dayLength; i++) {
       const weekDayIndex = i % 7;
       const day = weekDays[weekDayIndex];
@@ -1227,8 +1360,10 @@ class Calendar extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         key: i + day
       }, day));
     }
+
     return weekdays;
   }
+
   renderDays(classes) {
     // TODO: Split this logic into smaller chunks
     const {
@@ -1257,23 +1392,24 @@ class Calendar extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     const lastMonthDayCount = lastMonth.daysInMonth();
     const nextMonth = shownDate.clone().month(monthNumber + 1);
     const nextMonthNumber = nextMonth.month();
-    const days = [];
+    const days = []; // Previous month's days
 
-    // Previous month's days
     const diff = Math.abs(firstDayOfWeek - (startOfMonth + 7)) % 7;
+
     for (let i = diff - 1; i >= 0; i--) {
       const dayMoment = lastMonth.clone().date(lastMonthDayCount - i);
       days.push({
         dayMoment,
         isPassive: true
       });
-    }
+    } // Current month's days
 
-    // Current month's days
+
     for (let i = 1; i <= dayCount; i++) {
-      const dayMoment = shownDate.clone().date(i);
-      // set days before today to isPassive
+      const dayMoment = shownDate.clone().date(i); // set days before today to isPassive
+
       var _today = moment__WEBPACK_IMPORTED_MODULE_2___default()();
+
       if (disableDaysBeforeToday && Number(dayMoment.diff(_today, "days")) <= -1) {
         days.push({
           dayMoment,
@@ -1284,10 +1420,11 @@ class Calendar extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
           dayMoment
         });
       }
-    }
+    } // Next month's days
 
-    // Next month's days
+
     const remainingCells = 42 - days.length; // 42cells = 7days * 6rows
+
     for (let i = 1; i <= remainingCells; i++) {
       const dayMoment = nextMonth.clone().date(i);
       days.push({
@@ -1295,6 +1432,7 @@ class Calendar extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         isPassive: true
       });
     }
+
     const today = moment__WEBPACK_IMPORTED_MODULE_2___default()().startOf('day');
     return days.map((data, index) => {
       const {
@@ -1330,6 +1468,7 @@ class Calendar extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       }));
     });
   }
+
   render() {
     const {
       styles
@@ -1338,7 +1477,9 @@ class Calendar extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       onlyClasses,
       classNames
     } = this.props;
+
     const classes = _objectSpread(_objectSpread({}, _styles_js__WEBPACK_IMPORTED_MODULE_5__["defaultClasses"]), classNames);
+
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       style: onlyClasses ? undefined : _objectSpread(_objectSpread({}, styles['Calendar']), this.props.style),
       className: classes.calendar
@@ -1350,7 +1491,9 @@ class Calendar extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       className: classes.days
     }, this.renderDays(classes)));
   }
+
 }
+
 Calendar.defaultProps = {
   format: _constants__WEBPACK_IMPORTED_MODULE_6__["MomentFormat"].default,
   theme: {},
@@ -1416,10 +1559,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Overlay__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../Overlay */ "./www/js/source/reactpages/components/Overlay.jsx");
 /* harmony import */ var _Calendar_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Calendar.js */ "./www/js/source/reactpages/components/date-range/Calendar.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -1433,11 +1577,13 @@ function _toPrimitive(input, hint) { if (typeof input !== "object" || input === 
 class DatePicker extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   constructor(props) {
     super(props);
+
     _defineProperty(this, "show", () => {
       this.setState({
         show: true
       });
     });
+
     const {
       locale,
       date,
@@ -1450,15 +1596,19 @@ class DatePicker extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       show: false
     };
   }
+
   get dateText() {
     const {
       selectedDate
     } = this.state;
+
     if (selectedDate) {
       return `${selectedDate.format(this.props.format)}`;
     }
+
     return "";
   }
+
   handleSelect(date) {
     const {
       onChange
@@ -1469,6 +1619,7 @@ class DatePicker extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       show: false
     });
   }
+
   render() {
     const {
       format,
@@ -1477,7 +1628,9 @@ class DatePicker extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       maxDate,
       classNames
     } = this.props;
+
     const classes = _objectSpread(_objectSpread({}, _styles_js__WEBPACK_IMPORTED_MODULE_6__["defaultClasses"]), classNames);
+
     const {
       show
     } = this.state;
@@ -1509,7 +1662,9 @@ class DatePicker extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       locale: this.locale
     }))));
   }
+
 }
+
 _defineProperty(DatePicker, "propTypes", {
   format: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
   firstDayOfWeek: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
@@ -1521,6 +1676,7 @@ _defineProperty(DatePicker, "propTypes", {
   locale: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object,
   date: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object, prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func, prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string])
 });
+
 _defineProperty(DatePicker, "defaultProps", {
   format: _constants__WEBPACK_IMPORTED_MODULE_5__["MomentFormat"].default
 });
@@ -1552,10 +1708,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _defaultOptions_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./defaultOptions.js */ "./www/js/source/reactpages/components/date-range/defaultOptions.js");
 /* harmony import */ var _Overlay__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../Overlay */ "./www/js/source/reactpages/components/Overlay.jsx");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -1570,12 +1728,14 @@ function _toPrimitive(input, hint) { if (typeof input !== "object" || input === 
 class DateRange extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   constructor(props, context) {
     super(props, context);
+
     _defineProperty(this, "show", () => {
       this.calendarSelectionStep = 0;
       this.setState({
         show: true
       });
     });
+
     _defineProperty(this, "handleApply", () => {
       const {
         onClickApplyButton,
@@ -1587,9 +1747,11 @@ class DateRange extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       onChange && onChange(range, this.isValid);
       this.close();
     });
+
     _defineProperty(this, "handleCancel", () => {
       this.setRange(this.originalRange, false);
     });
+
     const {
       format,
       linkedCalendars,
@@ -1600,7 +1762,6 @@ class DateRange extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     this.styles = Object(_styles_js__WEBPACK_IMPORTED_MODULE_6__["default"])(theme);
     this.calendarSelectionStep = 0;
     this.locale = _objectSpread(_objectSpread({}, _defaultOptions_js__WEBPACK_IMPORTED_MODULE_9__["default"].locale), props.locale);
-    this.ranges = _objectSpread(_objectSpread({}, _defaultOptions_js__WEBPACK_IMPORTED_MODULE_9__["default"].ranges(props.today, props.minDate, props.maxDate, props.limitedMonthRange)), props.ranges);
     this.isValid = true;
     this.originalRange = {
       startDate,
@@ -1615,27 +1776,33 @@ class DateRange extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       show: false
     };
   }
+
   get dateRangeText() {
     const range = this.state.range;
+
     if (range.startDate && range.endDate) {
       const {
         format
       } = this.props;
       return `${range.startDate.format(format)} - ${range.endDate.format(format)}`;
     }
+
     return "";
   }
+
   close() {
     this.setState({
       show: false
     });
   }
+
   componentDidMount() {
     const {
       onInit
     } = this.props;
     onInit && onInit(this.state.range);
   }
+
   orderRange(range) {
     const {
       startDate,
@@ -1648,9 +1815,11 @@ class DateRange extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       endDate: startDate
     };
   }
+
   setRange(dateRange, show) {
     let range = this.orderRange(dateRange);
     this.isValid = this.isValidMonthRange(range);
+
     if (this.isValid) {
       const newState = show === undefined ? {
         range
@@ -1666,6 +1835,7 @@ class DateRange extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       onChange && onChange(range, false);
     }
   }
+
   handlePredefinedRangesSelect(range) {
     this.setRange(range, false);
     this.originalRange = Object.assign({}, range);
@@ -1674,6 +1844,7 @@ class DateRange extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     } = this.props;
     onChange && onChange(range, true);
   }
+
   handleCalendarSelect(date) {
     const {
       startDate,
@@ -1683,36 +1854,44 @@ class DateRange extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       startDate: startDate,
       endDate: endDate
     };
+
     switch (this.calendarSelectionStep) {
       case 0:
         range['startDate'] = date;
         range['endDate'] = date;
         this.calendarSelectionStep = 1;
         break;
+
       case 1:
         range['endDate'] = date;
         this.calendarSelectionStep = 0;
         break;
     }
+
     this.setRange(range);
   }
+
   isValidMonthRange(date) {
     const {
       limitedMonthRange
     } = this.props;
+
     if (limitedMonthRange) {
       const startDate = date.startDate;
       const endDate = date.endDate;
       const diffMonth = 12 * (endDate.year() - startDate.year()) + endDate.month() - startDate.month() + 1;
       return diffMonth <= limitedMonthRange;
     }
+
     return true;
   }
+
   handleLinkChange(newDate) {
     this.setState({
       link: newDate
     });
   }
+
   render() {
     const {
       showRange,
@@ -1736,7 +1915,11 @@ class DateRange extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     const {
       styles
     } = this;
+
+    const ranges = _objectSpread(_objectSpread({}, _defaultOptions_js__WEBPACK_IMPORTED_MODULE_9__["default"].ranges(this.props.today, this.props.minDate, this.props.maxDate, this.props.limitedMonthRange)), this.props.ranges);
+
     const classes = _objectSpread(_objectSpread({}, _styles_js__WEBPACK_IMPORTED_MODULE_6__["defaultClasses"]), classNames);
+
     const calendarsCount = Number(calendars) - 1;
     const buttonHandlers = {
       apply: this.handleApply,
@@ -1765,7 +1948,7 @@ class DateRange extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       ref: element => this.dateRangeContainer = element
     }, showRange && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PredefinedRanges_js__WEBPACK_IMPORTED_MODULE_5__["default"], {
       format: format,
-      ranges: this.ranges,
+      ranges: ranges,
       range: range,
       theme: styles,
       onSelect: range => this.handlePredefinedRangesSelect(range),
@@ -1775,8 +1958,10 @@ class DateRange extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       buttonHandlers: buttonHandlers
     }), (() => {
       const _calendars = [];
+
       for (var i = calendarsCount; i >= 0; i--) {
         const shownDate = i == calendarsCount ? range.startDate : range.endDate;
+
         _calendars.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Calendar_js__WEBPACK_IMPORTED_MODULE_4__["default"], {
           showMonthArrow: showMonthArrow,
           shownDate: shownDate,
@@ -1798,10 +1983,13 @@ class DateRange extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
           locale: this.locale
         }));
       }
+
       return _calendars;
     })())));
   }
+
 }
+
 DateRange.defaultProps = {
   linkedCalendars: false,
   theme: {},
@@ -1857,10 +2045,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _styles_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./styles.js */ "./www/js/source/reactpages/components/date-range/styles.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -1874,30 +2064,37 @@ class DayCell extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     };
     this.styles = this.props.theme;
   }
+
   handleMouseEvent(event) {
     event.preventDefault();
     if (this.props.isPassive) return null;
     const newState = {};
+
     switch (event.type) {
       case 'mouseenter':
         newState['hover'] = true;
         break;
+
       case 'mouseup':
       case 'mouseleave':
         newState['hover'] = false;
         newState['active'] = false;
         break;
+
       case 'mousedown':
         newState['active'] = true;
         break;
     }
+
     this.setState(newState);
   }
+
   handleSelect(event) {
     event.preventDefault();
     if (this.props.isPassive) return null;
     this.props.onSelect(this.props.dayMoment);
   }
+
   getStateStyles() {
     const {
       hover,
@@ -1929,6 +2126,7 @@ class DayCell extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     const specialDayStyle = isSpecialDay ? styles['DaySpecialDay'] : {};
     return _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, todayStyle), sundayStyle), specialDayStyle), inRangeStyle), hoverStyle), passiveStyle), activeStyle), selectedStyle), startEdgeStyle), endEdgeStyle);
   }
+
   getClassNames(classes) {
     const {
       isSelected,
@@ -1952,6 +2150,7 @@ class DayCell extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       [classes.daySpecialDay]: isSpecialDay
     });
   }
+
   render() {
     const {
       dayMoment,
@@ -1980,7 +2179,9 @@ class DayCell extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       style: onlyClasses ? undefined : _objectSpread(_objectSpread({}, styles['Day']), stateStyle)
     }, dayMoment.date()));
   }
+
 }
+
 DayCell.defaultProps = {
   theme: {
     'Day': {}
@@ -2025,10 +2226,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _styles_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./styles.js */ "./www/js/source/reactpages/components/date-range/styles.js");
 /* harmony import */ var _defaultOptions_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./defaultOptions.js */ "./www/js/source/reactpages/components/date-range/defaultOptions.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -2042,11 +2245,13 @@ class PredefinedRanges extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     this.styles = this.props.theme;
     this.selectedItem = this._getSelectedRange();
   }
+
   componentDidUpdate(prevProps, prevState) {
     if (this.props.range !== prevProps.range) {
       this.selectedItem = this._getSelectedRange();
     }
   }
+
   _getSelectedRange() {
     const {
       ranges,
@@ -2057,6 +2262,7 @@ class PredefinedRanges extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       return range.startDate.isSame(currentRange.startDate, "day") && range.endDate.isSame(currentRange.endDate, "day");
     });
   }
+
   handleSelect(name, event) {
     event.preventDefault();
     this.selectedItem = name;
@@ -2066,10 +2272,12 @@ class PredefinedRanges extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       endDate: Object(_utils_parseInput_js__WEBPACK_IMPORTED_MODULE_4__["default"])(range['endDate'], null, 'endOf')
     });
   }
+
   clickButton(event, action) {
     event.preventDefault();
     this.props.buttonHandlers[action]();
   }
+
   renderRangeList(classes) {
     const {
       ranges,
@@ -2083,7 +2291,9 @@ class PredefinedRanges extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     return Object.keys(ranges).map(name => {
       const active = this.selectedItem === name;
       gotActiveRange = !gotActiveRange && active;
+
       const style = _objectSpread(_objectSpread({}, styles['PredefinedRangesItem']), gotActiveRange ? styles['PredefinedRangesItemActive'] : {});
+
       const predefinedRangeClass = classnames__WEBPACK_IMPORTED_MODULE_3___default()({
         [classes.predefinedRangesItem]: true,
         [classes.predefinedRangesItemActive]: gotActiveRange
@@ -2097,13 +2307,16 @@ class PredefinedRanges extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       }, name);
     });
   }
+
   renderRangeButtons(classes) {
     const {
       style,
       onlyClasses,
       locale
     } = this.props;
+
     const locales = _objectSpread(_objectSpread({}, _defaultOptions_js__WEBPACK_IMPORTED_MODULE_6__["default"].locale), locale);
+
     const {
       styles
     } = this;
@@ -2125,6 +2338,7 @@ class PredefinedRanges extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       type: "button"
     }, locales.cancelLabel));
   }
+
   render() {
     const {
       style,
@@ -2134,13 +2348,17 @@ class PredefinedRanges extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     const {
       styles
     } = this;
+
     const classes = _objectSpread(_objectSpread({}, _styles_js__WEBPACK_IMPORTED_MODULE_5__["defaultClasses"]), classNames);
+
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       style: onlyClasses ? undefined : _objectSpread(_objectSpread({}, styles['PredefinedRanges']), style),
       className: classes.predefinedRanges
     }, this.renderRangeList(classes), this.renderRangeButtons(classes));
   }
+
 }
+
 PredefinedRanges.defaultProps = {
   onlyClasses: false,
   classNames: {}
@@ -2186,10 +2404,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_locale__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utils/locale */ "./www/js/source/reactpages/components/date-range/utils/locale.js");
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./constants */ "./www/js/source/reactpages/components/date-range/constants.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -2200,25 +2420,30 @@ const addRange = (rangeObj, name, start, end) => {
     endDate: end
   };
 };
+
 const addOneDay = (rangeObj, name, day, min, max) => {
   if (day >= min && day <= max) {
     addRange(rangeObj, name, day, day);
   }
 };
+
 const addDistanceDays = (rangeObj, name, start, end, min, max) => {
   if (!(max < start || end < min)) {
     addRange(rangeObj, name, start < min ? min : start, end > max ? max : end);
   }
 };
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   ranges: (todayDate, minDate, maxDate, limitMonths) => {
     var today = !todayDate ? moment__WEBPACK_IMPORTED_MODULE_0___default()() : !moment__WEBPACK_IMPORTED_MODULE_0___default.a.isMoment(todayDate) ? moment__WEBPACK_IMPORTED_MODULE_0___default()(todayDate, _constants__WEBPACK_IMPORTED_MODULE_3__["MomentFormat"].default) : todayDate;
     var max = !maxDate ? today : !moment__WEBPACK_IMPORTED_MODULE_0___default.a.isMoment(maxDate) ? moment__WEBPACK_IMPORTED_MODULE_0___default()(maxDate, _constants__WEBPACK_IMPORTED_MODULE_3__["MomentFormat"].default) : maxDate;
     var min = !minDate ? today : !moment__WEBPACK_IMPORTED_MODULE_0___default.a.isMoment(minDate) ? moment__WEBPACK_IMPORTED_MODULE_0___default()(minDate, _constants__WEBPACK_IMPORTED_MODULE_3__["MomentFormat"].default) : minDate;
     const range = {};
+
     if (today < min) {
       return range;
     }
+
     addOneDay(range, "Today", today, min, max);
     const yesterday = today.clone().add(-1, 'days');
     addOneDay(range, "Yesterday", yesterday, min, max);
@@ -2234,11 +2459,13 @@ const addDistanceDays = (rangeObj, name, start, end, min, max) => {
     const startLastmonth = today.clone().subtract(1, 'month').startOf('month');
     const endLastmonth = startLastmonth.clone().endOf('month');
     addDistanceDays(range, "Lastmonth", startLastmonth, endLastmonth, min, max);
+
     if (limitMonths && limitMonths > 1) {
       const startSincelastmonth = today.clone().subtract(1, 'month').startOf('month');
       const endSincelastmonth = today;
       addDistanceDays(range, "Sincelastmonth", startSincelastmonth, endSincelastmonth, min, max);
     }
+
     return range;
   },
   locale: _objectSpread({
@@ -2285,10 +2512,11 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "defaultClasses", function() { return defaultClasses; });
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 const defaultClasses = {
   show: 'rdr-Show',
   hide: 'rdr-Hide',
@@ -2472,15 +2700,19 @@ const defaultTheme = {
   let calendarWidth = defaultTheme.Calendar.width;
   let calendarPadding = defaultTheme.Calendar.padding;
   let cellMargin = defaultTheme.Day.margin || 0;
+
   if (customTheme.Calendar && customTheme.Calendar.hasOwnProperty('width')) {
     calendarWidth = customTheme.Calendar.width;
   }
+
   if (customTheme.Calendar && customTheme.Calendar.hasOwnProperty('padding')) {
     calendarPadding = customTheme.Calendar.padding;
   }
+
   if (customTheme.Day && customTheme.Day.hasOwnProperty('margin')) {
     cellMargin = customTheme.Day.margin;
   }
+
   const cellSize = (parseInt(calendarWidth, 10) - parseInt(calendarPadding, 10) * 2) / 7 - parseInt(cellMargin, 10) * 2;
   return {
     DateRange: _objectSpread(_objectSpread({}, defaultTheme.DateRange), customTheme.DateRange),
@@ -2557,6 +2789,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function parseInput(input, format, timeOfDay) {
   let output = null;
+
   if (typeof input === 'undefined' || typeof input === 'null' || !input || input === '') {
     output = moment__WEBPACK_IMPORTED_MODULE_0___default()()[timeOfDay]('day');
   } else if (typeof input === 'string') {
@@ -2566,6 +2799,7 @@ function parseInput(input, format, timeOfDay) {
   } else if (input._isAMomentObject) {
     output = input[timeOfDay]('day').clone();
   }
+
   return output;
 }
 
@@ -2588,6 +2822,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 const Popup = props => {
   const {
     title,
@@ -2599,6 +2834,7 @@ const Popup = props => {
     iframeUrl
   } = props;
   let content;
+
   if (iframeUrl) {
     content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("iframe", {
       frameBorder: "0",
@@ -2616,6 +2852,7 @@ const Popup = props => {
       className: "popup-content"
     }, children);
   }
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: `popup-container ${isShow ? 'show' : 'hide'}`,
     onClick: props.onClick
@@ -2640,6 +2877,7 @@ const Popup = props => {
     className: "icon-close"
   }))), content));
 };
+
 Popup.propTypes = {
   width: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string]),
   height: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string]),
@@ -2755,10 +2993,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _icon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./icon */ "./www/js/source/reactpages/components/sweet-alert/icon.js");
 const _excluded = ["text"],
-  _excluded2 = ["buttons", "children"];
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+      _excluded2 = ["buttons", "children"];
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
 
 
 
@@ -2773,25 +3015,29 @@ class SweetAlert extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component 
   constructor(props) {
     super(props);
   }
+
   _buildButtonGroup(buttons) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "al-button-container"
     }, buttons.map((btnItem, index) => {
       const {
-          text
-        } = btnItem,
-        attrs = _objectWithoutProperties(btnItem, _excluded);
+        text
+      } = btnItem,
+            attrs = _objectWithoutProperties(btnItem, _excluded);
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", _extends({
         key: index,
         type: "button"
       }, attrs), text);
     }));
   }
+
   _buildIcon() {
     const {
       icon
     } = this.props;
     const className = `${_icon__WEBPACK_IMPORTED_MODULE_3__["ICON"]} ${_icon__WEBPACK_IMPORTED_MODULE_3__["ICON"]}--${icon}`;
+
     if (PREDEFINED_ICONS.includes(icon)) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: className,
@@ -2800,19 +3046,23 @@ class SweetAlert extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component 
         }
       });
     }
+
     return null;
   }
+
   render() {
     const _this$props = this.props,
-      {
-        buttons,
-        children
-      } = _this$props,
-      props = _objectWithoutProperties(_this$props, _excluded2);
+          {
+      buttons,
+      children
+    } = _this$props,
+          props = _objectWithoutProperties(_this$props, _excluded2);
+
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "sweet-alert"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_popup__WEBPACK_IMPORTED_MODULE_1__["default"], props, this._buildIcon(), children, this._buildButtonGroup(buttons)));
   }
+
 }
 SweetAlert.propTypes = {
   width: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string]),
@@ -2851,14 +3101,17 @@ class Timer {
     let timeout;
     return function () {
       const context = this,
-        args = arguments;
+            args = arguments;
+
       const later = () => {
         func.apply(context, args);
       };
+
       clearTimeout(timeout);
       timeout = setTimeout(later, wait || DEFAULT_TIME_DELAY_MILLISECOND);
     };
   }
+
 }
 
 /***/ }),
@@ -2916,8 +3169,10 @@ class QueryString {
   static _parseQueryString(queryString) {
     let args = queryString.split('&');
     let argsList = {};
+
     for (let i = 0; i < args.length; i++) {
       let arg = unescape(args[i]);
+
       if (arg.length > 0) {
         if (arg.indexOf('=') === -1) {
           argsList[arg.toLowerCase().trim()] = null;
@@ -2927,66 +3182,84 @@ class QueryString {
         }
       }
     }
+
     return argsList;
   }
+
   static _getQueryString(url) {
     var index = url.indexOf("?");
     return index < 0 ? "" : url.substring(index + 1, url.length);
   }
+
   static _getRawUrl(url) {
     var index = url.indexOf("?");
     return index < 0 ? url : url.substring(0, index);
   }
+
   static setParam(url, name, value) {
     var rawUrl = QueryString._getRawUrl(url);
+
     var queryString = QueryString._getQueryString(url);
+
     var args = QueryString._parseQueryString(queryString);
+
     if (!name) {
       return url;
-    }
+    } // Update value
 
-    // Update value
+
     var found = false;
+
     for (var key in args) {
       if (key && key.toLowerCase() === name.toLowerCase()) {
         // Does not update data if value = undefined
         if (value !== undefined) {
           args[key] = value;
         }
+
         found = true;
       }
     }
+
     if (!found) {
       args[name.toLowerCase()] = value;
     }
-    var queryArray = [];
 
-    // Rebuild query string, ignore null value
+    var queryArray = []; // Rebuild query string, ignore null value
+
     for (var key1 in args) {
       if (args[key1] != null && args[key1] !== undefined) {
         queryArray.push(key1.toLowerCase() + "=" + args[key1]);
       }
     }
+
     return rawUrl + "?" + queryArray.join("&");
   }
+
   static setParams(url, parameters) {
     for (var property in parameters) {
       if (parameters.hasOwnProperty(property)) {
         url = QueryString.setParam(url, property, parameters[property]);
       }
     }
+
     return url;
   }
+
   static getParam(url, name) {
     var queryString = QueryString._getQueryString(url);
+
     var args = QueryString._parseQueryString(queryString);
+
     for (var key in args) {
       if (key != null && key.toLowerCase() === name.toLowerCase()) {
         return args[key];
       }
     }
+
     return null;
   }
+
 }
 
 /***/ }),
@@ -3005,6 +3278,7 @@ class StringHelper {
   static isEmptyOrWhiteSpace(str) {
     return !str || str.trim().length === 0;
   }
+
 }
 
 /***/ }),
@@ -3028,10 +3302,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 const predefinedIcons = {
@@ -3121,11 +3396,13 @@ __webpack_require__.r(__webpack_exports__);
   const {
     playerCount
   } = props;
+
   const _buildContent = () => {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       key: "searchResult"
     }, `${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('SearchResult')}: ${playerCount} ${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('Player')}(s)`);
   };
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_ReportTitle__WEBPACK_IMPORTED_MODULE_1__["default"], {
     tag: "div",
     content: _buildContent()
@@ -3149,6 +3426,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__);
 
 
+
 const HyperLinkCell = props => {
   const {
     name,
@@ -3163,6 +3441,7 @@ const HyperLinkCell = props => {
     onClick: onClick
   }, name)));
 };
+
 /* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(HyperLinkCell));
 
 /***/ }),
@@ -3196,6 +3475,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 const VipSwitcherCell = props => {
   const {
     index,
@@ -3211,12 +3491,15 @@ const VipSwitcherCell = props => {
     customerClass
   } = playerList[index];
   const canEditVip = hasVipManagementEdit && !isBA;
+
   const _handleCloseAlert = () => {
     setSweetAlertOption(null);
   };
+
   const _cancelProps = {
     onClick: _handleCloseAlert
   };
+
   const _buildAlertOptionUpdateVipStatus = (params, isUpdateVip) => {
     const confirmMessage = isUpdateVip ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource("ConfirmActivateVIPPlayer") : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource("ConfirmDeactivateVIPPlayer");
     const handlerUpdateVipStatusSuccess = _lib_helpers_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_8__["UpdateVipStatusAlertOption"].createHandlerAfterUpdateVipStatusSuccess(props);
@@ -3236,6 +3519,7 @@ const VipSwitcherCell = props => {
     });
     return confirmOptions;
   };
+
   const _handleChangeVipStatus = event => {
     event.preventDefault();
     const checked = event.target.checked;
@@ -3243,12 +3527,16 @@ const VipSwitcherCell = props => {
       systemIds: systemId,
       isVip: !isVip
     };
+
     const alertOption = _buildAlertOptionUpdateVipStatus(params, checked);
+
     setSweetAlertOption(alertOption);
   };
+
   const _getTextDisplay = isVip => {
     return isVip ? 'YES' : 'NO';
   };
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
     className: "center-align"
   }, canEditVip ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Switcher__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -3256,6 +3544,7 @@ const VipSwitcherCell = props => {
     onChange: _handleChangeVipStatus
   }) : _getTextDisplay(isVip));
 };
+
 function mapDispatchToProps(dispatch) {
   const {
     setPlayerList,
@@ -3272,6 +3561,7 @@ function mapDispatchToProps(dispatch) {
     setPagingOption
   }, dispatch);
 }
+
 function mapStateToProps(state) {
   const {
     playerList,
@@ -3286,6 +3576,7 @@ function mapStateToProps(state) {
     selectedParams
   });
 }
+
 ;
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(VipSwitcherCell)));
 
@@ -3317,6 +3608,7 @@ class DataSourceHelper {
     });
     return convertedList;
   }
+
 }
 
 /***/ }),
@@ -3340,10 +3632,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/constants/report */ "./www/js/source/reactpages/constants/report.js");
 /* harmony import */ var _tabs_problem_player_components_grid_CustomerClassCell__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../tabs/problem-player/components/grid/CustomerClassCell */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/components/grid/CustomerClassCell.jsx");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -3361,20 +3654,25 @@ class GridHelper {
       sortBy: _.sortBy
     }, this.renderHeaderCell(_))));
   }
+
   static renderHeaderCell(cell) {
     var isCustomerClass = cell.key == "customerClass";
+
     if (isCustomerClass) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tabs_problem_player_components_grid_CustomerClassCell__WEBPACK_IMPORTED_MODULE_5__["default"], {
         cell: cell
       });
     }
+
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, cell.childComponent ? cell.childComponent : cell.text);
   }
+
   static calculateTopPosition(dropdownHeight = 0, currentTop) {
     const innerHeight = window.innerHeight;
     const expectedHeight = dropdownHeight + currentTop + 20;
     return expectedHeight > innerHeight ? currentTop - dropdownHeight : currentTop;
   }
+
   static getSortInfo(orderCol, sortType) {
     const sortInfo = {
       orderCol: _constants__WEBPACK_IMPORTED_MODULE_3__["SortMapper"].sortCol[orderCol],
@@ -3382,6 +3680,7 @@ class GridHelper {
     };
     return sortInfo;
   }
+
   static getSortInfoFromPagingOption(options) {
     const {
       orderCol,
@@ -3392,7 +3691,9 @@ class GridHelper {
       sortType
     };
   }
+
 }
+
 _defineProperty(GridHelper, "callBackToUpdatePaging", ({
   pagingOption,
   setPagingOption
@@ -3404,6 +3705,7 @@ _defineProperty(GridHelper, "callBackToUpdatePaging", ({
     orderCol,
     sortType
   } = response;
+
   const newPagingOption = _objectSpread(_objectSpread({}, pagingOption), {
     PageIndex: pageIndex,
     PageSize: pageSize,
@@ -3411,8 +3713,10 @@ _defineProperty(GridHelper, "callBackToUpdatePaging", ({
     sortType,
     TotalItem: totalItem
   });
+
   setPagingOption(newPagingOption);
 });
+
 _defineProperty(GridHelper, "isShowSubsidiary", subsidiarySearch => _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__["default"].viewType !== _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_4__["SubsidiaryViewType"].NOT_MANAGEMENT && subsidiarySearch);
 
 /***/ }),
@@ -3431,13 +3735,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/constants.js");
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
 class MessageHelper {}
+
 _defineProperty(MessageHelper, "MsgColors", {
   [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].Success]: {
     content: 'msg-success',
@@ -3464,6 +3768,7 @@ _defineProperty(MessageHelper, "MsgColors", {
     icon: 'icon-warning'
   }
 });
+
 _defineProperty(MessageHelper, "GetMsgUpdateVipStatus", {
   singleUpdate: {
     [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].Success]: _ => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('SuccessUpdateVipStatusSingle'),
@@ -3481,6 +3786,7 @@ _defineProperty(MessageHelper, "GetMsgUpdateVipStatus", {
     [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].InvalidExternalId]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('InvalidPlayerUpdateVipStatusByExternalId').replace('{0}', data.numberOfPlayer).replace('{1}', data.ids)
   }
 });
+
 _defineProperty(MessageHelper, "GetListMsgUpdateVipStatus", (msgResults, currentVipStatus, isSingleUpdate = false) => {
   const fieldName = isSingleUpdate ? 'singleUpdate' : 'multipleUpdate';
   const combinedResult = MessageHelper.combineMsgResult(msgResults);
@@ -3496,21 +3802,27 @@ _defineProperty(MessageHelper, "GetListMsgUpdateVipStatus", (msgResults, current
     }, MessageHelper.GetMsgUpdateVipStatus[fieldName][code](_, currentVipStatus)));
   });
 });
+
 _defineProperty(MessageHelper, "combineMsgResult", msgResults => {
   const msgResultExternalIdIndex = msgResults.findIndex(_ => _.code === _constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].NoChangeByExternalId); // no change VIP status - by externalId
+
   if (msgResultExternalIdIndex >= 0) {
     msgResults = MessageHelper.combineMsgResultWithStatusNoChange(msgResults, msgResultExternalIdIndex);
   }
+
   return msgResults;
 });
+
 _defineProperty(MessageHelper, "combineMsgResultWithStatusNoChange", (msgResults, msgResultExternalIdIndex) => {
   const msgResultSystemId = msgResults.find(_ => _.code === _constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].NoChangeBySystemId); // no change VIP status - by systemId
+
   if (msgResultSystemId) {
     msgResultSystemId.numberOfPlayer += msgResults[msgResultExternalIdIndex].numberOfPlayer;
     msgResults.splice(msgResultExternalIdIndex, 1);
   } else {
     msgResults[msgResultExternalIdIndex].code = _constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].NoChangeBySystemId;
   }
+
   return msgResults;
 });
 
@@ -3557,6 +3869,7 @@ const UpdateVipStatusAlertOption = {
     isSingleUpdate
   }) => response => {
     let alertOpt;
+
     if (response.isSuccess) {
       const resultMessage = _messageHelper__WEBPACK_IMPORTED_MODULE_3__["default"].GetListMsgUpdateVipStatus(response.data, isUpdateVip, isSingleUpdate);
       alertOpt = noAlertResult ? handlerUpdateVipStatusSuccess(resultMessage) : Object(_jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_1__["generateDefaultAlertOption"])(resultMessage, handlerUpdateVipStatusSuccess, null, _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_1__["predefinedIcons"].success);
@@ -3594,21 +3907,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
 /* harmony import */ var _actions_types_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/types.js */ "./www/js/source/reactpages/pages/customer/player-segmentation/actions/types.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 const sweetAlertOption = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(null, {
   [_actions_types_js__WEBPACK_IMPORTED_MODULE_1__["SET_SWEET_ALERT_OPTION"]](prevState, action) {
     return action.data && _objectSpread({}, action.data);
   }
+
 });
 const pagingOption = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(null, {
   [_actions_types_js__WEBPACK_IMPORTED_MODULE_1__["SET_PAGING_OPTION"]](prevState, action) {
     return action.data && _objectSpread({}, action.data);
   }
+
 });
 
 /***/ }),
@@ -3626,16 +3942,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
 /* harmony import */ var _actions_types_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/types.js */ "./www/js/source/reactpages/pages/customer/player-segmentation/actions/types.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 const selectedParams = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(null, {
   [_actions_types_js__WEBPACK_IMPORTED_MODULE_1__["SET_SELECTED_PARAMS"]](prevState, action) {
     return action.data && _objectSpread({}, action.data);
   }
+
 });
 
 /***/ }),
@@ -3658,6 +3976,7 @@ const playerList = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_
   [_actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_PLAYER_LIST"]](state, action) {
     return action.data;
   }
+
 });
 
 /***/ }),
@@ -3820,6 +4139,7 @@ const AppContainer = props => {
     isLoading: isLoading
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormFilter__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Content__WEBPACK_IMPORTED_MODULE_5__["default"], null), sweetAlertOption && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_sweet_alert__WEBPACK_IMPORTED_MODULE_3__["default"], sweetAlertOption));
 };
+
 function mapStateToProps(state) {
   const {
     isLoading,
@@ -3830,6 +4150,7 @@ function mapStateToProps(state) {
     sweetAlertOption
   });
 }
+
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(AppContainer));
 
 /***/ }),
@@ -3858,10 +4179,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../lib/helpers/gridHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/helpers/gridHelper.js");
 /* harmony import */ var _lib_helpers_betlistHelper__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../lib/helpers/betlistHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/lib/helpers/betlistHelper.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -3884,23 +4206,29 @@ const Content = props => {
     setPagingOption,
     setSelectedPlayer
   } = props;
+
   if (pagingOption.TotalItem == null) {
     return null;
   }
+
   const _handlePaging = (pageIndex, pageSize) => {
     const sortInfo = _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSortInfoFromPagingOption(pagingOption);
+
     const params = _objectSpread(_objectSpread(_objectSpread({}, selectedParams), sortInfo), {
       pageIndex,
       pageSize
     });
+
     searchPlayer(selectedTabKey, params, _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_9__["default"].callBackToUpdatePaging({
       pagingOption,
       setPagingOption
     }));
   };
+
   const _renderBetListPopup = () => {
     if (selectedPlayer) {
       const params = _objectSpread({}, selectedPlayer);
+
       const betListUrl = _lib_helpers_betlistHelper__WEBPACK_IMPORTED_MODULE_10__["default"].buildAbnormalBetListUrl(params);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_popup__WEBPACK_IMPORTED_MODULE_4__["default"], {
         isShow: true,
@@ -3911,8 +4239,10 @@ const Content = props => {
         onClose: () => setSelectedPlayer(null)
       });
     }
+
     return null;
   };
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "result-content"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_GridCaption__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -3922,6 +4252,7 @@ const Content = props => {
     onPaging: _handlePaging
   }), _renderBetListPopup());
 };
+
 function mapDispatchToProps(dispatch) {
   const {
     searchPlayer,
@@ -3934,6 +4265,7 @@ function mapDispatchToProps(dispatch) {
     setSelectedPlayer
   }, dispatch);
 }
+
 function mapStateToProps(state) {
   const {
     pagingOption,
@@ -3951,6 +4283,7 @@ function mapStateToProps(state) {
     selectedPlayer
   });
 }
+
 ;
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(Content));
 
@@ -3979,10 +4312,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _grid_PlayerRow__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./grid/PlayerRow */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/components/grid/PlayerRow.jsx");
 /* harmony import */ var _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../lib/helpers/gridHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/lib/helpers/gridHelper.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -4005,16 +4339,20 @@ const DataGrid = props => {
     searchPlayer,
     setSelectedPlayer
   } = props;
+
   if (playerList == null) {
     return null;
   }
+
   if (!playerList.length) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_6__["default"], null);
   }
+
   const showSubsidiary = _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_7__["default"].isShowSubsidiary(selectedParams.subsidiarySearch);
   const onSelectPlayer = react__WEBPACK_IMPORTED_MODULE_0___default.a.useCallback(custInfo => {
     setSelectedPlayer(custInfo);
   });
+
   const _renderDataSection = dataList => dataList.map((dataItem, index) => {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_grid_PlayerRow__WEBPACK_IMPORTED_MODULE_8__["default"], {
       dataItem,
@@ -4025,16 +4363,22 @@ const DataGrid = props => {
       onSelectPlayer
     });
   });
+
   const _handleSort = (orderCol, sortType) => {
     const sortInfo = _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSortInfo(orderCol, sortType);
+
     const _pagingOption = _objectSpread(_objectSpread({}, pagingOption), sortInfo);
+
     const params = _objectSpread(_objectSpread({}, selectedParams), _pagingOption);
+
     searchPlayer(selectedTabKey, params, _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_7__["default"].callBackToUpdatePaging({
       pagingOption,
       setPagingOption
     }));
   };
+
   const _gridHeaders = Object(_lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_9__["getDataGridHeaders"])(_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_4__["default"].HasVipManagement, showSubsidiary);
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Table"], {
     minWidth: 650,
     autoWidth: true,
@@ -4047,6 +4391,7 @@ const DataGrid = props => {
     onSort: _handleSort
   }));
 };
+
 function mapDispatchToProps(dispatch) {
   const {
     searchPlayer,
@@ -4059,6 +4404,7 @@ function mapDispatchToProps(dispatch) {
     setSelectedPlayer
   }, dispatch);
 }
+
 function mapStateToProps(state) {
   const {
     playerList,
@@ -4073,6 +4419,7 @@ function mapStateToProps(state) {
     selectedTabKey
   });
 }
+
 ;
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(DataGrid)));
 
@@ -4112,10 +4459,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_helpers_dataSourceHelper__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../../lib/helpers/dataSourceHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/helpers/dataSourceHelper.js");
 /* harmony import */ var _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../../lib/helpers/gridHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/helpers/gridHelper.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -4140,6 +4488,7 @@ function _toPrimitive(input, hint) { if (typeof input !== "object" || input === 
 class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
   constructor(props) {
     super(props);
+
     _defineProperty(this, "_submit", event => {
       event.preventDefault();
       const {
@@ -4148,25 +4497,33 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
         selectedTabKey
       } = this.props;
       const params = _lib_helpers_paramHelper__WEBPACK_IMPORTED_MODULE_17__["default"].ToAPIParams(this.props);
+
       if (!params) {
         return;
       }
+
       setSelectedParams(params);
       searchPlayer(selectedTabKey, params, _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_20__["default"].callBackToUpdatePaging(this.props));
     });
+
     _defineProperty(this, "exportExcel", event => {
       event.preventDefault();
       const {
         selectedParams,
         pagingOption
       } = this.props;
+
       if (!selectedParams) {
         return;
       }
+
       const sortInfo = _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_20__["default"].getSortInfoFromPagingOption(pagingOption);
+
       const params = _objectSpread(_objectSpread({}, selectedParams), sortInfo);
+
       _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_13__["default"].getFile(_lib_constants__WEBPACK_IMPORTED_MODULE_16__["Url"].exportProblemPlayerList, params).then(response => {
         const NoContentStatusCode = 204;
+
         if (response.status === NoContentStatusCode) {
           alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("NoInfo"));
         } else {
@@ -4174,6 +4531,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
         }
       });
     });
+
     _defineProperty(this, "_onChangeDateRange", (date, isValidMonthRange = true) => {
       if (isValidMonthRange) {
         this.props.setDateRange(date);
@@ -4182,16 +4540,20 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
         alert(message);
       }
     });
+
     _defineProperty(this, "showUserGuide", () => {
       const userGuideContent = this.props.userGuideContent;
+
       if (!userGuideContent || userGuideContent.length === 0) {
         this.props.getUserGuideContent('PlayerSegmentationProblem');
       }
     });
+
     _defineProperty(this, "_onChangeSubsidiaryList", (currentItem, selectedItemsKey, treeViewList) => {
       this.props.setSubsidiaryList(selectedItemsKey);
     });
   }
+
   _renderDateRange() {
     const {
       isGetAll,
@@ -4211,6 +4573,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       onChange: this._onChangeDateRange
     }));
   }
+
   _renderCurrencySelectList() {
     const {
       selectedCurrency,
@@ -4228,6 +4591,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       onChange: (_, selectedItemsKey) => this.props.setSelectedCurrency(selectedItemsKey)
     });
   }
+
   _renderReasonSelectList() {
     const {
       selectedReason,
@@ -4245,6 +4609,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       onChange: (_, selectedItemsKey) => this.props.setReason(selectedItemsKey)
     });
   }
+
   _renderUserGuide() {
     const userGuideContent = Object(_lib_helpers_userGuideHelper__WEBPACK_IMPORTED_MODULE_18__["bindDataUserGuideWithPermission"])(this.props.userGuideContent, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_12__["default"].HasVipManagement);
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_UserGuide__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -4254,6 +4619,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       content: userGuideContent
     });
   }
+
   _renderStickyFooter() {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
       className: "icon-excel right",
@@ -4261,6 +4627,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("ExportToExcel")
     }), this._renderUserGuide());
   }
+
   _renderSubsidiaryTreeView() {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_3__["TreeViewSelect"], {
       language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].currentLanguage,
@@ -4280,6 +4647,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       onChange: this._onChangeSubsidiaryList
     });
   }
+
   _renderCustomerClassSelectList() {
     const {
       selectedCustomerClass,
@@ -4297,6 +4665,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       onChange: (_, selectedItemsKey) => this.props.setSelectedCustomerClass(selectedItemsKey)
     });
   }
+
   render() {
     const isDisabledSubmit = this.props.subsidiarySearch && _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_10__["default"].isEmptyOrWhiteSpace(this.props.selectedSubsidiary) || _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_10__["default"].isEmptyOrWhiteSpace(this.props.selectedCurrency) || _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_10__["default"].isEmptyOrWhiteSpace(this.props.selectedReason) || _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_10__["default"].isEmptyOrWhiteSpace(this.props.selectedCustomerClass);
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -4377,7 +4746,9 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       onClick: this._submit
     }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("Submit")))))));
   }
+
 }
+
 function mapDispatchToProps(dispatch) {
   const {
     setDateRange,
@@ -4408,6 +4779,7 @@ function mapDispatchToProps(dispatch) {
     setSelectedCustomerClass
   }), dispatch);
 }
+
 function mapStateToProps(state) {
   const {
     dateRange,
@@ -4438,6 +4810,7 @@ function mapStateToProps(state) {
     selectedCustomerClass
   });
 }
+
 ;
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(FormFilter));
 
@@ -4457,15 +4830,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _jsroot_components_popup_Popup__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/components/popup/Popup */ "./www/js/source/reactpages/components/popup/Popup.jsx");
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
 class CustomerClassCell extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
   constructor(props) {
     super(props);
+
     _defineProperty(this, "showCustomerClassInformation", e => {
       this.setState({
         isShowCustomerClassInformation: true
@@ -4473,19 +4846,23 @@ class CustomerClassCell extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Com
       e.stopPropagation();
       return false;
     });
+
     _defineProperty(this, "closeCustomerClassInfomation", () => {
       this.setState({
         isShowCustomerClassInformation: false
       });
     });
+
     _defineProperty(this, "clickOnPopup", e => {
       e.stopPropagation();
       return false;
     });
+
     this.state = {
       isShowCustomerClassInformation: false
     };
   }
+
   render() {
     var url = "CustomerClass/CustomerClassInformation?time=" + new Date().getTime();
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, this.props.cell.text, "\xA0\xA0", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -4502,6 +4879,7 @@ class CustomerClassCell extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Com
       iframeUrl: url
     }) : "");
   }
+
 }
 
 /***/ }),
@@ -4525,6 +4903,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 const PlayerRow = props => {
   const {
     dataItem,
@@ -4543,7 +4922,9 @@ const PlayerRow = props => {
     customerClass,
     reasonList
   } = dataItem;
+
   const _renderReasonList = () => reasonList.map(reason => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, reason));
+
   const onClickExternalId = react__WEBPACK_IMPORTED_MODULE_0___default.a.useCallback(() => onSelectPlayer({
     custId,
     externalId,
@@ -4569,6 +4950,7 @@ const PlayerRow = props => {
     hasVipManagementEdit: hasVipManagementEdit
   }));
 };
+
 /* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(PlayerRow));
 
 /***/ }),
@@ -4590,10 +4972,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _reducers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./reducers */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/reducers/index.js");
 /* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/constants.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -4610,13 +4994,16 @@ const initialState = _objectSpread(_objectSpread({}, window.initialState[_lib_co
     TotalItem: null
   }
 });
+
 /* harmony default export */ __webpack_exports__["default"] = (props => {
   const {
     selectedTabKey
   } = props;
+
   const defaultState = _objectSpread(_objectSpread({}, initialState), {
     selectedTabKey
   });
+
   const store = _jsroot_lib_store__WEBPACK_IMPORTED_MODULE_3__["default"].createStore(_reducers__WEBPACK_IMPORTED_MODULE_4__["default"], defaultState);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_2__["Provider"], {
     store: store
@@ -4710,6 +5097,7 @@ class BetListHelper {
     url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'baseCurrency', baseCurrency);
     return url;
   }
+
 }
 
 /***/ }),
@@ -4728,14 +5116,17 @@ __webpack_require__.r(__webpack_exports__);
 
 const getDataGridHeaders = (hasVipManagement, showSubsidiary) => {
   const fullHeaders = [..._constants__WEBPACK_IMPORTED_MODULE_0__["dataGridFullHeaders"]];
+
   if (!hasVipManagement) {
     const headerIndex = _constants__WEBPACK_IMPORTED_MODULE_0__["dataGridFullHeaders"].findIndex(_ => _.key === 'vip');
     fullHeaders.splice(headerIndex, 1);
   }
+
   if (!showSubsidiary) {
     const headerIndex = _constants__WEBPACK_IMPORTED_MODULE_0__["dataGridFullHeaders"].findIndex(_ => _.key === 'subsidiary');
     fullHeaders.splice(headerIndex, 1);
   }
+
   return fullHeaders;
 };
 
@@ -4753,10 +5144,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ParamHelper; });
 /* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 class ParamHelper {
   static ToAPIParams({
@@ -4784,6 +5176,7 @@ class ParamHelper {
       customerClass: selectedCustomerClass
     });
   }
+
 }
 
 /***/ }),
@@ -4802,12 +5195,15 @@ const bindDataUserGuideWithPermission = (content, hasVIPPermission) => {
   if (!hasVIPPermission) {
     content = bindDataUserGuideWithVIPPermisson(content);
   }
+
   return content;
 };
+
 const bindDataUserGuideWithVIPPermisson = content => {
   content = dataVIPPlayerBinder.reduce((prev, current) => prev.replace(current.key, current.data), content);
   return content;
 };
+
 const dataVIPPlayerBinder = [{
   key: '{onlyVipManagement}',
   data: 'only-vip-management'
@@ -4851,16 +5247,19 @@ const isGetAll = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1_
   [_actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_IS_GET_ALL"]](state, action) {
     return action.data;
   }
+
 });
 const selectedReason = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, {
   [_actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_SELECTED_REASON"]](state, action) {
     return action.data;
   }
+
 });
 const selectedCustomerClass = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, {
   [_actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_SELECTED_CUSTOMERCLASS"]](state, action) {
     return action.data;
   }
+
 });
 const dateRange = _jsroot_reducers_dateRangeReducer__WEBPACK_IMPORTED_MODULE_2__["dateRange"];
 const selectedCurrency = _jsroot_reducers_currencyReducer__WEBPACK_IMPORTED_MODULE_3__["selectedCurrency"];
@@ -4918,6 +5317,7 @@ const selectedPlayer = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MOD
   [_actions_types__WEBPACK_IMPORTED_MODULE_1__["SET_SELECTED_PLAYER"]](prevState, action) {
     return action.data;
   }
+
 });
 
 /***/ }),
@@ -4940,6 +5340,7 @@ const selectedCurrency = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1
   [_actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_SELECTED_CURRENCY"]](state, action) {
     return action.data;
   }
+
 });
 
 /***/ }),
@@ -4962,6 +5363,7 @@ const dateRange = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["def
   [_actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_DATE_RANGE"]](state, action) {
     return action.data;
   }
+
 });
 
 /***/ }),
@@ -4984,6 +5386,7 @@ const isLoading = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["def
   [_actions_types__WEBPACK_IMPORTED_MODULE_0__["TOGGLE_LOADER"]](state, action) {
     return action.data;
   }
+
 });
 
 /***/ }),
@@ -5007,11 +5410,13 @@ const selectedSubsidiary = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE
   [_actions_types__WEBPACK_IMPORTED_MODULE_1__["SET_SUBSIDIARY_LIST"]](prevState, action) {
     return action.data;
   }
+
 });
 const subsidiarySearch = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(false, {
   [_actions_types__WEBPACK_IMPORTED_MODULE_1__["SET_SUBSIDIARY_SEARCH"]](prevState, action) {
     return action.data;
   }
+
 });
 
 /***/ }),
@@ -5034,6 +5439,7 @@ const userGuideContent = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1
   [_actions_types__WEBPACK_IMPORTED_MODULE_0__["USER_GUIDE_CONTENT"]](state, action) {
     return action.data;
   }
+
 });
 
 /***/ }),
@@ -5056,6 +5462,7 @@ const username = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["defa
   [_actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_USERNAME"]](state, action) {
     return action.data;
   }
+
 });
 
 /***/ })
