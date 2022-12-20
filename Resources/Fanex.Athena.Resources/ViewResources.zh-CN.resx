@@ -1398,7 +1398,7 @@
     <value>检阅每月数据</value>
   </data>
   <data name="Viewin" xml:space="preserve">
-    <value>以 {0} 查看</value>
+    <value>以{0}查看</value>
   </data>
   <data name="VirtualSports" xml:space="preserve">
     <value>虚拟运动</value>
@@ -3003,6 +3003,7 @@
   </data>
   <data name="Basketball" xml:space="preserve">
     <value>篮球</value>
+  </data>
   <data name="Soccer" xml:space="preserve">
     <value>足球</value>
   </data>

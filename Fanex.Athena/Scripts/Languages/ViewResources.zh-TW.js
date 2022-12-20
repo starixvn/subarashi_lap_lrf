@@ -674,7 +674,7 @@ UserNotHaveCurrency:"您沒有任何幣別的權限可以觀看這份報告, 請
 View:"檢視",
 ViewBy:"查看由",
 ViewDataInMonth:"检阅每月數據",
-Viewin:"以 {0} 查看",
+Viewin:"以{0}查看",
 ViewInWithNoParam:"查看",
 ViewNotification:"查看通知",
 VIPPlayerOnly:"只顯示VIP玩家",
