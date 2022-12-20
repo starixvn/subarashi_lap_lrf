@@ -2,8 +2,8 @@
 {
     public static class ViewInTypes
     {
-        public const byte SettledAndResettledReport = 1;
+        public const byte SettledReport = 1;
 
-        public const byte SettledReport = 2;
+        public const byte SettledAndResettledReport = 2;
     }
 }

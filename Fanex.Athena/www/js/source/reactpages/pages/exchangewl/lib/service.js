@@ -34,8 +34,8 @@ export const BreadcrumbText = {
 }
 
 export const ViewInType ={
-    SettledAndResettledReport: 1,
-    SettledOnly: 2
+    SettledAndResettledReport: 2,
+    SettledOnly: 1
 }
 
 export class Service {
