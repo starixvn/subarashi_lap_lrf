@@ -27,13 +27,7 @@ export const FormFilter = props => {
     const [baseCurrencyList, setBaseCurrencyList] = useState(AppData.baseCurrencyList);
 
     useEffect(() => {
-
     }, []);
-
-    const isSingleDate = dateRange => {
-        const { fromDate, toDate } = dateRange || props.dateRange;
-        return moment(fromDate, "MM/DD/YYYY", true).isSame(moment(toDate, "MM/DD/YYYY", true), 'day');
-    }
 
     const _onChangeDateRange = (range, isValid = true) => {
         if (isValid) {
@@ -216,7 +210,7 @@ export const FormFilter = props => {
         }
 
         const { fromDate, toDate } = props.dateRange;
-        const { PageSize, SortBy, SortOrder } = props.requestParam;
+        const { SortBy, SortOrder } = props.requestParam;
 
         const selectedCurrencyArray = props.selectedCurrency.split(',');
         const selectedSportArray = props.selectedSport.split(',');
@@ -402,7 +396,7 @@ export const FormFilter = props => {
                 <div className="row" style={{ marginTop: "20px"}}>
                     <div className="col-12 col-md-4 col-sm-4 col-lg-3 col-xl-3">
                         <div className="form-group">
-                            <label className="label-text">{LangHelper.getSingleResource("Viewin").replace("{0}", ":") }</label>
+                            <label className="label-text">{LangHelper.getSingleResource("Viewin2")}</label>
                                 <div className='view-in-group'>
                                 <input type="radio" value={0} checked={viewIn == ViewInLevel.SUMMARY} name="ViewIn" id="viewinsummary"
                                     onChange={() => onChangeViewIn(0) } />

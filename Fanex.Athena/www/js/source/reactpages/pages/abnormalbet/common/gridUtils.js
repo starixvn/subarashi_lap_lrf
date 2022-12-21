@@ -139,7 +139,7 @@ const buildDetailDataRow = (dataItem, index) => {
             <Cell className="center-align col-frozen" style={{left:"372px"}}>{dataItem.currency}</Cell>
             <Cell title={dataItem.refNo} className="center-align col-frozen" style={{left:"432.3px"}}>{dataItem.refNo}</Cell>
             <Cell className="right-align">{NumberFormat.format(dataItem.odds, 4)}</Cell>
-            <Cell className="right-align">{NumberFormat.formatDecimal(dataItem.stake)}</Cell>
+            <Cell className="right-align">{NumberFormat.format(dataItem.stake, 2)}</Cell>
             <Cell className="right-align">{NumberFormat.format(dataItem.hdp, 4)}</Cell>
             <Cell className="center-align">{dataItem.liveHomeScore}</Cell>
             <Cell className="center-align">{dataItem.liveAwayScore}</Cell>

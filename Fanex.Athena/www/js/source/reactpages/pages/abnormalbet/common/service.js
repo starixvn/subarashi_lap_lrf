@@ -8,7 +8,7 @@ export default class Service {
         const dateRangeText = fromDate && toDate 
             ? `, ${Site.convertDateToString(fromDate)} → ${Site.convertDateToString(toDate)}` 
             : '';
-        const viewInText = LangHelper.getSingleResource("Viewin").replace("{0}", ViewInText[viewInLevel])
+        const viewInText = LangHelper.getSingleResource(ViewInText[viewInLevel])
 
         let result = LangHelper.getSingleResource("AbnormalBet") + ", " + viewInText + dateRangeText;
 

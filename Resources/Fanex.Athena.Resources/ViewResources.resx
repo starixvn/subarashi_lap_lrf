@@ -3482,4 +3482,16 @@
   <data name="SabaVirtualSettingLevel" xml:space="preserve">
     <value>Saba Virtual Setting Level</value>
   </data>
+  <data name="Viewin2" xml:space="preserve">
+    <value>View in</value>
+  </data>
+  <data name="ViewinDetail" xml:space="preserve">
+    <value>View in Detail</value>
+  </data>
+  <data name="ViewinIPSummary" xml:space="preserve">
+    <value>View in IP Summary</value>
+  </data>
+  <data name="ViewinSummary" xml:space="preserve">
+    <value>View in Summary</value>
+  </data>
 </root>

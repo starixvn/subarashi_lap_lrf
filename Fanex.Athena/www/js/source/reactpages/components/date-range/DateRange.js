@@ -209,7 +209,7 @@ class DateRange extends Component {
                     shownDate={shownDate}
                     disableDaysBeforeToday={disableDaysBeforeToday}
                     lang={lang}
-                    key={i}
+                    key={i + shownDate.month().toString() + shownDate.year().toString() }
                     link={linkedCalendars && link}
                     linkCB={this.handleLinkChange.bind(this)}
                     range={range}

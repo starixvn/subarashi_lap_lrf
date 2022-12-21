@@ -1,4 +1,4 @@
-﻿// Generated at: 12/19/2022 4:55:05 PM
+﻿// Generated at: 12/21/2022 11:34:59 AM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -966,6 +966,10 @@ View:"View",
 ViewBy:"View by",
 ViewDataInMonth:"View data in month",
 Viewin:"View in {0}",
+Viewin2:"View in",
+ViewinDetail:"View in Detail",
+ViewinIPSummary:"View in IP Summary",
+ViewinSummary:"View in Summary",
 ViewInWithNoParam:"View in",
 ViewNotification:"View Notification",
 Vip:"VIP",

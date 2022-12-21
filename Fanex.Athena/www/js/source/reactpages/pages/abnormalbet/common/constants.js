@@ -43,4 +43,4 @@ export const ViewInLevel = {
     DETAIL: 2
 }
 
-export const ViewInText = [LangHelper.getSingleResource('Summary'),LangHelper.getSingleResource('IpSummary'),LangHelper.getSingleResource('Detail')]
+export const ViewInText = [LangHelper.getSingleResource('ViewinSummary'),LangHelper.getSingleResource('ViewinIPSummary'),LangHelper.getSingleResource('ViewinDetail')]

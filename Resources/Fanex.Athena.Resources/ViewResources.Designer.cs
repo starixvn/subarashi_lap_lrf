@@ -8827,6 +8827,42 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to View in.
+        /// </summary>
+        public static string Viewin2 {
+            get {
+                return ResourceManager.GetString("Viewin2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View in Detail.
+        /// </summary>
+        public static string ViewinDetail {
+            get {
+                return ResourceManager.GetString("ViewinDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View in IP Summary.
+        /// </summary>
+        public static string ViewinIPSummary {
+            get {
+                return ResourceManager.GetString("ViewinIPSummary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View in Summary.
+        /// </summary>
+        public static string ViewinSummary {
+            get {
+                return ResourceManager.GetString("ViewinSummary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to View Notification.
         /// </summary>
         public static string ViewNotification {

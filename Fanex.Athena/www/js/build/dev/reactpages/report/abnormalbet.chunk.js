@@ -1941,7 +1941,6 @@ class DateRange extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     this.styles = Object(_styles_js__WEBPACK_IMPORTED_MODULE_6__["default"])(theme);
     this.calendarSelectionStep = 0;
     this.locale = _objectSpread(_objectSpread({}, _defaultOptions_js__WEBPACK_IMPORTED_MODULE_9__["default"].locale), props.locale);
-    this.ranges = _objectSpread(_objectSpread({}, _defaultOptions_js__WEBPACK_IMPORTED_MODULE_9__["default"].ranges(props.today, props.minDate, props.maxDate, props.limitedMonthRange)), props.ranges);
     this.isValid = true;
     this.originalRange = {
       startDate,
@@ -2077,6 +2076,7 @@ class DateRange extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     const {
       styles
     } = this;
+    const ranges = _objectSpread(_objectSpread({}, _defaultOptions_js__WEBPACK_IMPORTED_MODULE_9__["default"].ranges(this.props.today, this.props.minDate, this.props.maxDate, this.props.limitedMonthRange)), this.props.ranges);
     const classes = _objectSpread(_objectSpread({}, _styles_js__WEBPACK_IMPORTED_MODULE_6__["defaultClasses"]), classNames);
     const calendarsCount = Number(calendars) - 1;
     const buttonHandlers = {
@@ -2106,7 +2106,7 @@ class DateRange extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       ref: element => this.dateRangeContainer = element
     }, showRange && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PredefinedRanges_js__WEBPACK_IMPORTED_MODULE_5__["default"], {
       format: format,
-      ranges: this.ranges,
+      ranges: ranges,
       range: range,
       theme: styles,
       onSelect: range => this.handlePredefinedRangesSelect(range),
@@ -2123,7 +2123,7 @@ class DateRange extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
           shownDate: shownDate,
           disableDaysBeforeToday: disableDaysBeforeToday,
           lang: lang,
-          key: i,
+          key: i + shownDate.month().toString() + shownDate.year().toString(),
           link: linkedCalendars && link,
           linkCB: this.handleLinkChange.bind(this),
           range: range,
@@ -3776,41 +3776,15 @@ function _toPrimitive(input, hint) { if (typeof input !== "object" || input === 
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/DataService.js */ "./www/js/source/reactpages/lib/DataService.js");
-/* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
-/* harmony import */ var _types_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./types.js */ "./www/js/source/reactpages/pages/abnormalbet/actions/types.js");
+/* harmony import */ var _types_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types.js */ "./www/js/source/reactpages/pages/abnormalbet/actions/types.js");
 
-
-
-const Url = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/CommonDataApi/GetSports');
 const setSelectedSport = sportId => {
   return {
-    type: _types_js__WEBPACK_IMPORTED_MODULE_2__["SET_SELECTED_SPORT"],
+    type: _types_js__WEBPACK_IMPORTED_MODULE_0__["SET_SELECTED_SPORT"],
     data: sportId
   };
 };
-const setSportList = list => {
-  return {
-    type: _types_js__WEBPACK_IMPORTED_MODULE_2__["SET_SPORT_LIST"],
-    data: list
-  };
-};
-const getSportList = (productCode, date) => {
-  return dispatch => {
-    _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_0__["default"].getData(Url, {
-      productCode: productCode,
-      includeSabaSport: true
-    }).then(response => {
-      let data = response.data;
-      var sportList = data.map(item => item.value).join(',');
-      dispatch(setSportList(data));
-      dispatch(setSelectedSport(sportList));
-    });
-  };
-};
 /* harmony default export */ __webpack_exports__["default"] = ({
-  getSportList,
-  setSportList,
   setSelectedSport
 });
 
@@ -3820,7 +3794,7 @@ const getSportList = (productCode, date) => {
 /*!*********************************************************************!*\
   !*** ./www/js/source/reactpages/pages/abnormalbet/actions/types.js ***!
   \*********************************************************************/
-/*! exports provided: SET_REPORT_DATE, SET_REPORT_FILTER, SET_REPORT_DATA, SET_BETTYPE_LIST, SET_SELECTED_BETTYPE, SET_SPORT_LIST, SET_SELECTED_SPORT, SET_RELOAD_REPORT */
+/*! exports provided: SET_REPORT_DATE, SET_REPORT_FILTER, SET_REPORT_DATA, SET_BETTYPE_LIST, SET_SELECTED_BETTYPE, SET_SELECTED_SPORT, SET_RELOAD_REPORT */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3830,7 +3804,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_REPORT_DATA", function() { return SET_REPORT_DATA; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_BETTYPE_LIST", function() { return SET_BETTYPE_LIST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SELECTED_BETTYPE", function() { return SET_SELECTED_BETTYPE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SPORT_LIST", function() { return SET_SPORT_LIST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SELECTED_SPORT", function() { return SET_SELECTED_SPORT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_RELOAD_REPORT", function() { return SET_RELOAD_REPORT; });
 const SET_REPORT_DATE = 'SET_REPORT_DATE';
@@ -3838,7 +3811,6 @@ const SET_REPORT_FILTER = 'SET_REPORT_FILTER';
 const SET_REPORT_DATA = 'SET_REPORT_DATA';
 const SET_BETTYPE_LIST = 'SET_BETTYPE_LIST';
 const SET_SELECTED_BETTYPE = 'SET_SELECTED_BETTYPE';
-const SET_SPORT_LIST = 'SET_SPORT_LIST';
 const SET_SELECTED_SPORT = 'SET_SELECTED_SPORT';
 const SET_RELOAD_REPORT = 'SET_RELOAD_REPORT';
 
@@ -3900,7 +3872,7 @@ const ViewInLevel = {
   IPSUMMARY: 1,
   DETAIL: 2
 };
-const ViewInText = [_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Summary'), _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('IpSummary'), _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Detail')];
+const ViewInText = [_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('ViewinSummary'), _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('ViewinIPSummary'), _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('ViewinDetail')];
 
 /***/ }),
 
@@ -4179,7 +4151,7 @@ const buildDetailDataRow = (dataItem, index) => {
     className: "right-align"
   }, _lib_numberFormat__WEBPACK_IMPORTED_MODULE_3__["default"].format(dataItem.odds, 4)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
     className: "right-align"
-  }, _lib_numberFormat__WEBPACK_IMPORTED_MODULE_3__["default"].formatDecimal(dataItem.stake)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
+  }, _lib_numberFormat__WEBPACK_IMPORTED_MODULE_3__["default"].format(dataItem.stake, 2)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
     className: "right-align"
   }, _lib_numberFormat__WEBPACK_IMPORTED_MODULE_3__["default"].format(dataItem.hdp, 4)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
     className: "center-align"
@@ -4283,7 +4255,7 @@ __webpack_require__.r(__webpack_exports__);
 class Service {
   static getTitle(fromDate, toDate, viewInLevel, currency, baseCurrency, userName) {
     const dateRangeText = fromDate && toDate ? `, ${_jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].convertDateToString(fromDate)} → ${_jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].convertDateToString(toDate)}` : '';
-    const viewInText = _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("Viewin").replace("{0}", _constants__WEBPACK_IMPORTED_MODULE_3__["ViewInText"][viewInLevel]);
+    const viewInText = _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource(_constants__WEBPACK_IMPORTED_MODULE_3__["ViewInText"][viewInLevel]);
     let result = _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("AbnormalBet") + ", " + viewInText + dateRangeText;
     if (viewInLevel === _constants__WEBPACK_IMPORTED_MODULE_3__["ViewInLevel"].DETAIL) {
       const currencyText = currency ? `, ${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("Currency")}: ${currency}` : "";
@@ -4514,13 +4486,6 @@ const FormFilter = props => {
   const [viewIn, setViewIn] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(2);
   const [baseCurrencyList, setBaseCurrencyList] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_6__["default"].baseCurrencyList);
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {}, []);
-  const isSingleDate = dateRange => {
-    const {
-      fromDate,
-      toDate
-    } = dateRange || props.dateRange;
-    return moment__WEBPACK_IMPORTED_MODULE_11___default()(fromDate, "MM/DD/YYYY", true).isSame(moment__WEBPACK_IMPORTED_MODULE_11___default()(toDate, "MM/DD/YYYY", true), 'day');
-  };
   const _onChangeDateRange = (range, isValid = true) => {
     if (isValid) {
       props.setDateRange(range);
@@ -4684,7 +4649,6 @@ const FormFilter = props => {
       toDate
     } = props.dateRange;
     const {
-      PageSize,
       SortBy,
       SortOrder
     } = props.requestParam;
@@ -4879,7 +4843,7 @@ const FormFilter = props => {
     className: "form-group"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
     className: "label-text"
-  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource("Viewin").replace("{0}", ":")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource("Viewin2")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "view-in-group"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "radio",
@@ -5150,13 +5114,7 @@ const selectedSport = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODU
     return action.data;
   }
 });
-const sportList = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, {
-  [_actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_SPORT_LIST"]](state, action) {
-    return action.data;
-  }
-});
 /* harmony default export */ __webpack_exports__["default"] = ({
-  sportList,
   selectedSport
 });
 

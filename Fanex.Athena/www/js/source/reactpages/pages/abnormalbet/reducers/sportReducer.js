@@ -7,13 +7,6 @@ const selectedSport= createReducer({}, {
     }
 });
 
-const sportList = createReducer({}, {
-    [types.SET_SPORT_LIST](state, action) {
-        return action.data;
-    }
-});
-
 export default {
-    sportList,
     selectedSport
  }

@@ -1,4 +1,4 @@
-﻿// Generated at: 12/19/2022 4:55:05 PM
+﻿// Generated at: 12/21/2022 11:34:59 AM
 window._language_zh_Hans = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -682,6 +682,10 @@ View:"检视",
 ViewBy:"查看由",
 ViewDataInMonth:"检阅每月数据",
 Viewin:"以{0}查看",
+Viewin2:"查看",
+ViewinDetail:"查看详情",
+ViewinIPSummary:"查看 IP 摘要",
+ViewinSummary:"查看摘要",
 ViewInWithNoParam:"查看",
 ViewNotification:"查看通知",
 VIPPlayerOnly:"只显示VIP玩家",

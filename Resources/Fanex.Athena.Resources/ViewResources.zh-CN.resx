@@ -3052,4 +3052,16 @@
   <data name="SabaVirtualSettingLevel" xml:space="preserve">
     <value>沙巴虚拟体育设定等级</value>
   </data>
+  <data name="Viewin2" xml:space="preserve">
+    <value>查看</value>
+  </data>
+  <data name="ViewinDetail" xml:space="preserve">
+    <value>查看详情</value>
+  </data>
+  <data name="ViewinIPSummary" xml:space="preserve">
+    <value>查看 IP 摘要</value>
+  </data>
+  <data name="ViewinSummary" xml:space="preserve">
+    <value>查看摘要</value>
+  </data>
 </root>
