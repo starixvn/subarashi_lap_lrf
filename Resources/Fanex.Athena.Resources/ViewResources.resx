@@ -3410,6 +3410,21 @@
   <data name="ProductTIP" xml:space="preserve">
     <value>Player Tips</value>
   </data>
+  <data name="SettledAndResettledReport" xml:space="preserve">
+    <value>Settled and Resettled Report</value>
+  </data>
+  <data name="SettledOnlyReport" xml:space="preserve">
+    <value>Settled Report</value>
+  </data>
+  <data name="ViewInWithNoParam" xml:space="preserve">
+    <value>View in</value>
+  </data>
+  <data name="TheSettledAndResettledReportNote" xml:space="preserve">
+    <value>The Settled and Resettled report displays data of settled and resettled tickets based on the selected date range.</value>
+  </data>
+  <data name="TheSettledOnlyReportNote" xml:space="preserve">
+    <value>The Settled report only displays data of the first-time settled tickets based on the selected date range.</value>
+  </data>
   <data name="Information" xml:space="preserve">
     <value>Information</value>
   </data>

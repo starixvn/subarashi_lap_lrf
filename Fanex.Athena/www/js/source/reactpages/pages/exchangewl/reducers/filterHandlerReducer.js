@@ -13,6 +13,18 @@ export const selectedReportBy = createReducer({}, {
     }
 })
 
+export const viewInOption = createReducer({}, {
+    [types.GET_VIEWINOPTION](state, action) {
+        return action.data;
+    }
+})
+
+export const selectedViewInOption = createReducer(1, {
+    [types.SET_VIEWINOPTION](state, action) {
+        return action.data;
+    }
+})
+
 export const params = createReducer({}, {
     [types.SET_PARAM](state, action) {
         return action.data;

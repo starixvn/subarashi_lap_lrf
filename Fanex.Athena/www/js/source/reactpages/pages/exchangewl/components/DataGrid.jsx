@@ -315,9 +315,9 @@ export class DataGrid extends Component {
     }
 
     showBetListPopup = (externalId, systemId, custId) => {
-        const { CurrencyId, BaseCurrency, FromDate, ToDate, CurrencyName, ExcludeTestData } = this.drillDownParams[ReportLevel.CUSTOMER];
+        const { CurrencyId, BaseCurrency, FromDate, ToDate, CurrencyName, ExcludeTestData, DateOptionType } = this.drillDownParams[ReportLevel.CUSTOMER];
         const url = "api/ExchangeWinLossBetList/Index";
-        this.betlistParams = { CustId: custId, CurrencyId, BaseCurrency, FromDate, ToDate, ExcludeTestData };
+        this.betlistParams = { CustId: custId, CurrencyId, BaseCurrency, FromDate, ToDate, ExcludeTestData, DateOptionType };
 
         const params = {
             data: this.betlistParams
@@ -365,7 +365,8 @@ export class DataGrid extends Component {
             { fromDate: params.FromDate, toDate: params.ToDate },
             params.BaseCurrency ? params.BaseCurrency : params.CurrencyName,
             reportLevel === ReportLevel.MAIN ? params.CurrencyId === 0 : false,
-            params.UserName);
+            params.UserName,
+            params.DateOptionType);
 
         if (!gridData.data.DataList.length) {
             return this._renderNodata(title);
@@ -407,6 +408,6 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
     const { gridData, params, licenseeId, isAllowedCustomerComm } = state;
     return Object.assign({}, { gridData, params, licenseeId, isAllowedCustomerComm });
-};
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(DataGrid);

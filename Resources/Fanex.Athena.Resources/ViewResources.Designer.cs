@@ -19,7 +19,7 @@ namespace Fanex.Athena.Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class ViewResources {
@@ -7315,11 +7315,29 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Settled and Resettled Report.
+        /// </summary>
+        public static string SettledAndResettledReport {
+            get {
+                return ResourceManager.GetString("SettledAndResettledReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Settled Match Count.
         /// </summary>
         public static string SettledMatchCount {
             get {
                 return ResourceManager.GetString("SettledMatchCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settled Report.
+        /// </summary>
+        public static string SettledOnlyReport {
+            get {
+                return ResourceManager.GetString("SettledOnlyReport", resourceCulture);
             }
         }
         
@@ -7716,6 +7734,24 @@ namespace Fanex.Athena.Resources {
         public static string ThereIsNoSelectedItem {
             get {
                 return ResourceManager.GetString("ThereIsNoSelectedItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Settled and Resettled report displays data of settled and resettled tickets based on the selected date range..
+        /// </summary>
+        public static string TheSettledAndResettledReportNote {
+            get {
+                return ResourceManager.GetString("TheSettledAndResettledReportNote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Settled report only displays data of the first-time settled tickets based on the selected date range..
+        /// </summary>
+        public static string TheSettledOnlyReportNote {
+            get {
+                return ResourceManager.GetString("TheSettledOnlyReportNote", resourceCulture);
             }
         }
         
@@ -8697,6 +8733,15 @@ namespace Fanex.Athena.Resources {
         public static string Viewin {
             get {
                 return ResourceManager.GetString("Viewin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View in.
+        /// </summary>
+        public static string ViewInWithNoParam {
+            get {
+                return ResourceManager.GetString("ViewInWithNoParam", resourceCulture);
             }
         }
         

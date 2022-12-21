@@ -6,6 +6,13 @@ export const setReportBy = (value) => {
     }
 }
 
+export const setViewInOption = (value) => {
+    return{
+        type: types.SET_VIEWINOPTION,
+        data: value
+    }
+}
+
 export const setParams = (value) => {
     return {
         type: types.SET_PARAM,

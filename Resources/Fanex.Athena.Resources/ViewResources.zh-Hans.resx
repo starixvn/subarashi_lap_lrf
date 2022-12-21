@@ -1396,7 +1396,7 @@
     <value>检阅每月数据</value>
   </data>
   <data name="Viewin" xml:space="preserve">
-    <value>以 {0} 查看</value>
+    <value>以{0}查看</value>
   </data>
   <data name="VirtualSports" xml:space="preserve">
     <value>虚拟运动</value>
@@ -2288,6 +2288,24 @@
   </data>
   <data name="ProductTIP" xml:space="preserve">
     <value>玩家打赏</value>
+  </data>
+  <data name="SettledAndResettledReport" xml:space="preserve">
+    <value>已结算与已重新结算报告</value>
+  </data>
+  <data name="SettledOnlyReport" xml:space="preserve">
+    <value>已结算报告</value>
+  </data>
+  <data name="ViewInWithNoParam" xml:space="preserve">
+    <value>查看</value>
+  </data>
+  <data name="TheSettledAndResettledReportNote" xml:space="preserve">
+    <value>已结算和重新结算报告显示所选日期范围内已结算和已重新结算注单的数据。</value>
+  </data>
+  <data name="TheSettledOnlyReportNote" xml:space="preserve">
+    <value>已结算报表仅显示所选日期范围内的首次结算注单的数据。</value>
+  </data>
+  <data name="ExchangeWinLoss" xml:space="preserve">
+    <value>Exchange输赢</value>
   </data>
   <data name="Basketball" xml:space="preserve">
     <value>篮球</value>

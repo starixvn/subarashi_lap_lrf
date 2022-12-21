@@ -33,8 +33,13 @@ export const BreadcrumbText = {
     customer: LangHelper.getSingleResource('Customer')
 }
 
+export const ViewInType ={
+    SettledAndResettledReport: 2,
+    SettledOnly: 1
+}
+
 export class Service {
-    static getReportTitle(dateRange, selectedCurrency, allCurrencies, username) {
+    static getReportTitle(dateRange, selectedCurrency, allCurrencies, username, selectedViewInType) {
         const fromDate = Site.convertDateToString(dateRange.fromDate);
         const toDate = Site.convertDateToString(dateRange.toDate);
         const viewInByCurrency = allCurrencies 
@@ -42,7 +47,9 @@ export class Service {
             : `${LangHelper.getSingleResource('Viewin').replace('{0}', selectedCurrency)}`;
         const usernameText = !username ? "" : `, ${LangHelper.getSingleResource('Username')}: ${username}`;
 
-        return `${LangHelper.getSingleResource('ExchangeWinLoss')}, ${fromDate} - ${toDate}, ${viewInByCurrency}${usernameText}`;
+        const viewInTypeText = selectedViewInType === ViewInType.SettledOnly ? LangHelper.getSingleResource("SettledOnlyReport") : LangHelper.getSingleResource("SettledAndResettledReport");
+
+        return `${LangHelper.getSingleResource('ExchangeWinLoss')} - ${viewInTypeText}, ${fromDate} - ${toDate}, ${viewInByCurrency}${usernameText}`;
     }
 
     static showErrorMsg() {

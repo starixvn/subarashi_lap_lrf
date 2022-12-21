@@ -22,8 +22,6 @@ class DateRange extends Component {
     this.styles = getTheme(theme);
     this.calendarSelectionStep = 0;
     this.locale = { ...defaultOptions.locale, ...props.locale };
-    this.ranges = { ...defaultOptions.ranges(props.today, props.minDate, props.maxDate, props.limitedMonthRange), ...props.ranges };
-
     this.isValid = true;
     this.originalRange = { startDate, endDate };
 
@@ -168,6 +166,7 @@ class DateRange extends Component {
 
     const { range, link } = this.state;
     const { styles } = this;
+    const ranges = { ...defaultOptions.ranges(this.props.today, this.props.minDate, this.props.maxDate, this.props.limitedMonthRange), ...this.props.ranges };
 
     const classes = { ...defaultClasses, ...classNames };
     const calendarsCount = Number(calendars) - 1;
@@ -190,7 +189,7 @@ class DateRange extends Component {
             {showRange && (
               <PredefinedRanges
                 format={format}
-                ranges={this.ranges}
+                ranges={ranges}
                 range={range}
                 theme={styles}
                 onSelect={(range) => this.handlePredefinedRangesSelect(range)}

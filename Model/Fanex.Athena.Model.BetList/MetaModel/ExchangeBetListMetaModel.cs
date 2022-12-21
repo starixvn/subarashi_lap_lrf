@@ -9,6 +9,8 @@ namespace Fanex.Athena.Model.BetList.MetaModel
 
         public DateTime ToDate { get; set; }
 
+        public byte DateOptionType { get; set; }
+
         public override bool IsValid => base.IsValid && FromDate <= ToDate;
     }
 }
