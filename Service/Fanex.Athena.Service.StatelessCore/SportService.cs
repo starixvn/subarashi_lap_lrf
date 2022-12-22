@@ -25,7 +25,8 @@ namespace Fanex.Athena.Service.StatelessCore
             ((int)SportType.SabaCricket, (int)SportType.Cricket, new [] { 42 }),
             ((int)SportType.SabaFutsal, (int)SportType.Soccer, new [] { 108 }),
             ((int)SportType.SabaSoccerPingoal, (int)SportType.Soccer, new [] { 113 }),
-            ((int)SportType.SabaBasketballPinGoal, (int)SportType.BasketBall, new [] { 122 })
+            ((int)SportType.SabaBasketballPinGoal, (int)SportType.BasketBall, new [] { 122 }),
+            ((int)SportType.SabaESportsPinGoal, (int)SportType.Esports, new [] { 151 })
         };
 
         public SportService(ISportTypeDataAccess sportTypeDataAccess, ICacheRefAdapter cacheRefAdapter, ICustomMemoryCacheService cache)
@@ -82,21 +83,27 @@ namespace Fanex.Athena.Service.StatelessCore
         public SabaSport GetSabaSport(int id)
             => GetSabaSports().FirstOrDefault(t => t.Id == id);
 
-
         private string GetSabaName(int id, int sportTypeId)
         {
-            var sportName = "";
+            string sportName;
             switch (id)
             {
                 case (int)SportType.SabaSoccerPingoal:
                     sportName = ViewResources.SoccerPinGoal;
                     break;
+
                 case (int)SportType.SabaBasketballPinGoal:
                     sportName = ViewResources.BasketballPinGoal;
                     break;
+
+                case (int)SportType.SabaESportsPinGoal:
+                    sportName = ViewResources.ESportsPinGoal;
+                    break;
+
                 case (int)SportType.SabaFutsal:
                     sportName = _cacheRefAdapter.GetSportName((int)SportType.Futsal);
                     break;
+
                 default:
                     sportName = _cacheRefAdapter.GetSportName(sportTypeId);
                     break;
