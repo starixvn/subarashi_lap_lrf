@@ -3064,4 +3064,10 @@
   <data name="ViewinSummary" xml:space="preserve">
     <value>查看摘要</value>
   </data>
+  <data name="FinalScore" xml:space="preserve">
+    <value>最后比分</value>
+  </data>
+  <data name="SearchByExactlyIp" xml:space="preserve">
+    <value>按实际 IP 搜寻</value>
+  </data>
 </root>

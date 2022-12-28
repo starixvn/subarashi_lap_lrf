@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 12/21/2022 11:34:59 AM
+// Generated at: 12/28/2022 1:53:12 PM
 window._language_zh_TW = {
   AA: "客客",
   AbnormalBet: "非正規註單",
@@ -320,6 +320,7 @@ window._language_zh_TW = {
   Entered: "成績已輸入場數",
   Error: "誤差",
   ErrorProcessingMsg: "對不起，處理您的請求時有錯誤發生。",
+  ESportsPinGoal: "電競檯",
   Euro: "歐洲",
   Event: "項目",
   EventDate: "賽事日期",

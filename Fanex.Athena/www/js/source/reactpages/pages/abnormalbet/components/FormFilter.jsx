@@ -240,7 +240,7 @@ export const FormFilter = props => {
             BaseCurrencyName: baseCurrency ? baseCurrency.label : '',
             CurrencyName: currencyText ? currencyText : '',
             LicenseeName: AppData.licenseeName,
-            IsShowIpvn: AppData.IsShowIpvn,
+            IsShowIpvn: AppData.isShowIpvn,
             ViewIn: viewIn
         }
     }

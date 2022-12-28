@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 12/21/2022 11:34:59 AM
+// Generated at: 12/28/2022 1:53:12 PM
 window._language_zh_Hans = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -318,6 +318,7 @@ window._language_zh_Hans = {
   ESportsApp: "电子竞技App",
   ESportsDesktop: "电子竞技 桌机",
   ESportsMobile: "电子竞技 手机",
+  ESportsPinGoal: "电竞台",
   Euro: "欧洲版",
   Event: "项目",
   EventDate: "赛事日期",

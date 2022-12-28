@@ -1707,7 +1707,8 @@ class DateRange extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     const {
       styles
     } = this;
-    const ranges = _objectSpread(_objectSpread({}, _defaultOptions_js__WEBPACK_IMPORTED_MODULE_9__["default"].ranges(this.props.today, this.props.minDate, this.props.maxDate, this.props.limitedMonthRange)), this.props.ranges);
+    const today = moment__WEBPACK_IMPORTED_MODULE_2___default()().format("MM/DD/YYYY");
+    const ranges = _objectSpread(_objectSpread({}, _defaultOptions_js__WEBPACK_IMPORTED_MODULE_9__["default"].ranges(today, this.props.minDate, this.props.maxDate, this.props.limitedMonthRange)), this.props.ranges);
     const classes = _objectSpread(_objectSpread({}, _styles_js__WEBPACK_IMPORTED_MODULE_6__["defaultClasses"]), classNames);
     const calendarsCount = Number(calendars) - 1;
     const buttonHandlers = {
@@ -1731,7 +1732,8 @@ class DateRange extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       className: "icon icon-calendar"
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Overlay__WEBPACK_IMPORTED_MODULE_10__["default"], {
       isOpening: this.state.show,
-      onClose: this.handleCancel
+      onClose: this.handleCancel,
+      key: range.startDate.month().toString() + range.startDate.year().toString() + range.endDate.month().toString() + range.endDate.year().toString()
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: classes.dateRange,
       ref: element => this.dateRangeContainer = element
@@ -3167,7 +3169,7 @@ class NumberFormat {
       return "";
     }
     const roundedValue = this.round(value, digits);
-    return roundedValue.toFixed(digits);
+    return roundedValue.toFixed(digits).replace(/^[+-]?\d+/, int => int.replace(/(\d)(?=(\d{3})+$)/g, '$1,'));
   }
   static round(value, digits) {
     const sign = value < 0 ? -1 : 1;

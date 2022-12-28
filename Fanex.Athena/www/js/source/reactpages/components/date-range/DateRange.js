@@ -166,7 +166,8 @@ class DateRange extends Component {
 
     const { range, link } = this.state;
     const { styles } = this;
-    const ranges = { ...defaultOptions.ranges(this.props.today, this.props.minDate, this.props.maxDate, this.props.limitedMonthRange), ...this.props.ranges };
+    const today = moment().format("MM/DD/YYYY");
+    const ranges = { ...defaultOptions.ranges(today, this.props.minDate, this.props.maxDate, this.props.limitedMonthRange), ...this.props.ranges };
 
     const classes = { ...defaultClasses, ...classNames };
     const calendarsCount = Number(calendars) - 1;
@@ -183,7 +184,10 @@ class DateRange extends Component {
           <i className="icon icon-calendar"></i>
         </div>
 
-        <Overlay isOpening={this.state.show} onClose={this.handleCancel}>
+        <Overlay 
+          isOpening={this.state.show} 
+          onClose={this.handleCancel} 
+          key={range.startDate.month().toString() + range.startDate.year().toString() + range.endDate.month().toString() + range.endDate.year().toString()} >
           <div className={classes.dateRange}
             ref={element => this.dateRangeContainer = element}>
             {showRange && (

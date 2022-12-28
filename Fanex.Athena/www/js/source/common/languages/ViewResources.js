@@ -1,4 +1,4 @@
-﻿// Generated at: 12/21/2022 11:34:59 AM
+﻿// Generated at: 12/28/2022 1:53:12 PM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -318,6 +318,7 @@ ErrorProcessingMsg:"Sorry, an error occurred while processing your request.",
 ESportsApp:"E-Sports APP",
 ESportsDesktop:"E-Sports Desktop",
 ESportsMobile:"E-Sports Mobile",
+ESportsPinGoal:"E-Sports PinGoal",
 Euro:"Euro",
 Event:"Event",
 EventDate:"Event Date",

@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 12/21/2022 11:34:59 AM
+// Generated at: 12/28/2022 1:53:12 PM
 window._language_zh_CN = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -375,6 +375,7 @@ window._language_zh_CN = {
   ESportsApp: "电子竞技 APP",
   ESportsDesktop: "电子竞技 桌机",
   ESportsMobile: "电子竞技 手机",
+  ESportsPinGoal: "电竞台",
   Euro: "欧洲版",
   Event: "项目",
   EventDate: "赛事日期",
@@ -391,6 +392,7 @@ window._language_zh_CN = {
   FGLG: "最先进球/最后进球",
   FileExtensionIncorrect: "档案的后缀名不正确，请选择Excel档案",
   FileUploadExceedSize: "上传档案大小需小于",
+  FinalScore: "最后比分",
   FirstGoal: "最先进球",
   FirstName: "名字",
   Forecast: "预测",
@@ -804,6 +806,7 @@ window._language_zh_CN = {
   SBComm: "体育博彩佣金",
   Score: "比分",
   Search: "搜寻",
+  SearchByExactlyIp: "按实际 IP 搜寻",
   SearchResult: "搜索结果",
   SelectAtLeastOneCurrencyMsg: "请最少选择一种货币",
   SelectedCustomers: "选定的玩家",

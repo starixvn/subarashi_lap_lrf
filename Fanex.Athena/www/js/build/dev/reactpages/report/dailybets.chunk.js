@@ -740,7 +740,7 @@ class NumberFormat {
       return "";
     }
     const roundedValue = this.round(value, digits);
-    return roundedValue.toFixed(digits);
+    return roundedValue.toFixed(digits).replace(/^[+-]?\d+/, int => int.replace(/(\d)(?=(\d{3})+$)/g, '$1,'));
   }
   static round(value, digits) {
     const sign = value < 0 ? -1 : 1;
