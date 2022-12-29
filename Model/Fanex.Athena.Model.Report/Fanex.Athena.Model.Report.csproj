@@ -157,7 +157,6 @@
     <Compile Include="MetaModel\BaseReportMetaModel.cs" />
     <Compile Include="MetaModel\ActiveCustomerMetaModel.cs" />
     <Compile Include="MetaModel\ExtraPayoutDetailMetaModel.cs" />
-    <Compile Include="MetaModel\NewCashOutWinLossMetaModel.cs" />
     <Compile Include="MetaModel\ExtraPayoutMetaModel.cs" />
     <Compile Include="MetaModel\LeagueWinLossMetaModel.cs" />
     <Compile Include="MetaModel\LicenseeWinLossByTimeZoneMetaModel.cs" />

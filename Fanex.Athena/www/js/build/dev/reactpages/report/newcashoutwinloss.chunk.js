@@ -155,6 +155,36 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./www/js/source/helpers/dataSourceHelper.js":
+/*!***************************************************!*\
+  !*** ./www/js/source/helpers/dataSourceHelper.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return DataSourceHelper; });
+class DataSourceHelper {
+  static CreateDataSourceFrom(originDataSource, selectedItems) {
+    const selectedItemList = selectedItems.split(',').filter(x => x !== '');
+    const convertedList = originDataSource.map(item => {
+      const {
+        Id,
+        Value
+      } = item;
+      return {
+        Id,
+        Value,
+        Status: selectedItemList.find(_ => _ == Id) ? true : false
+      };
+    });
+    return convertedList;
+  }
+}
+
+/***/ }),
+
 /***/ "./www/js/source/reactpages/actions/baseCurrencyAction.js":
 /*!****************************************************************!*\
   !*** ./www/js/source/reactpages/actions/baseCurrencyAction.js ***!
@@ -245,27 +275,6 @@ const toggleLoader = show => {
   return {
     type: _types__WEBPACK_IMPORTED_MODULE_0__["TOGGLE_LOADER"],
     data: show
-  };
-};
-
-/***/ }),
-
-/***/ "./www/js/source/reactpages/actions/productAction.js":
-/*!***********************************************************!*\
-  !*** ./www/js/source/reactpages/actions/productAction.js ***!
-  \***********************************************************/
-/*! exports provided: setSelectedProduct */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSelectedProduct", function() { return setSelectedProduct; });
-/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/actions/types.js");
-
-const setSelectedProduct = product => {
-  return {
-    type: _types__WEBPACK_IMPORTED_MODULE_0__["SET_SELECTED_PRODUCT"],
-    data: product
   };
 };
 
@@ -3283,7 +3292,7 @@ const setDetailParams = data => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _filterAction__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./filterAction */ "./www/js/source/reactpages/pages/newcashoutwinloss/actions/filterAction.js");
 /* harmony import */ var _dataAction__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dataAction */ "./www/js/source/reactpages/pages/newcashoutwinloss/actions/dataAction.js");
-/* harmony import */ var _jsroot_actions_productAction__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/actions/productAction */ "./www/js/source/reactpages/actions/productAction.js");
+/* harmony import */ var _sportAction__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./sportAction */ "./www/js/source/reactpages/pages/newcashoutwinloss/actions/sportAction.js");
 /* harmony import */ var _jsroot_actions_currencyAction__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/actions/currencyAction */ "./www/js/source/reactpages/actions/currencyAction.js");
 /* harmony import */ var _jsroot_actions_baseCurrencyAction__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/actions/baseCurrencyAction */ "./www/js/source/reactpages/actions/baseCurrencyAction.js");
 /* harmony import */ var _jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/actions/loaderAction */ "./www/js/source/reactpages/actions/loaderAction.js");
@@ -3308,7 +3317,30 @@ function _toPrimitive(input, hint) { if (typeof input !== "object" || input === 
 
 
 
-/* harmony default export */ __webpack_exports__["default"] = (_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _filterAction__WEBPACK_IMPORTED_MODULE_0__["default"]), _dataAction__WEBPACK_IMPORTED_MODULE_1__["default"]), _jsroot_actions_productAction__WEBPACK_IMPORTED_MODULE_2__), _jsroot_actions_currencyAction__WEBPACK_IMPORTED_MODULE_3__), _jsroot_actions_baseCurrencyAction__WEBPACK_IMPORTED_MODULE_4__), _jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_5__), _jsroot_actions_dateRangeAction__WEBPACK_IMPORTED_MODULE_6__), _jsroot_actions_userGuideAction__WEBPACK_IMPORTED_MODULE_7__), _jsroot_actions_requestParamAction__WEBPACK_IMPORTED_MODULE_8__), _jsroot_actions_reportTitleAction__WEBPACK_IMPORTED_MODULE_9__), _jsroot_actions_subsidiaryAction__WEBPACK_IMPORTED_MODULE_10__));
+/* harmony default export */ __webpack_exports__["default"] = (_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _filterAction__WEBPACK_IMPORTED_MODULE_0__["default"]), _dataAction__WEBPACK_IMPORTED_MODULE_1__["default"]), _sportAction__WEBPACK_IMPORTED_MODULE_2__["default"]), _jsroot_actions_currencyAction__WEBPACK_IMPORTED_MODULE_3__), _jsroot_actions_baseCurrencyAction__WEBPACK_IMPORTED_MODULE_4__), _jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_5__), _jsroot_actions_dateRangeAction__WEBPACK_IMPORTED_MODULE_6__), _jsroot_actions_userGuideAction__WEBPACK_IMPORTED_MODULE_7__), _jsroot_actions_requestParamAction__WEBPACK_IMPORTED_MODULE_8__), _jsroot_actions_reportTitleAction__WEBPACK_IMPORTED_MODULE_9__), _jsroot_actions_subsidiaryAction__WEBPACK_IMPORTED_MODULE_10__));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/newcashoutwinloss/actions/sportAction.js":
+/*!*********************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/newcashoutwinloss/actions/sportAction.js ***!
+  \*********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _types_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types.js */ "./www/js/source/reactpages/pages/newcashoutwinloss/actions/types.js");
+
+const setSelectedSport = sportId => {
+  return {
+    type: _types_js__WEBPACK_IMPORTED_MODULE_0__["SET_SELECTED_SPORT"],
+    data: sportId
+  };
+};
+/* harmony default export */ __webpack_exports__["default"] = ({
+  setSelectedSport
+});
 
 /***/ }),
 
@@ -3316,7 +3348,7 @@ function _toPrimitive(input, hint) { if (typeof input !== "object" || input === 
 /*!***************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/newcashoutwinloss/actions/types.js ***!
   \***************************************************************************/
-/*! exports provided: SET_REPORT_DATE, SET_REPORT_FILTER, SET_REPORT_DATA, SET_PROMOTION_TYPE_LIST, SET_SELECTED_PROMOTION_TYPES, SET_RELOAD_REPORT, SET_DETAIL_PARAMS */
+/*! exports provided: SET_REPORT_DATE, SET_REPORT_FILTER, SET_REPORT_DATA, SET_RELOAD_REPORT, SET_DETAIL_PARAMS, SET_SELECTED_SPORT */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3324,17 +3356,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_REPORT_DATE", function() { return SET_REPORT_DATE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_REPORT_FILTER", function() { return SET_REPORT_FILTER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_REPORT_DATA", function() { return SET_REPORT_DATA; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_PROMOTION_TYPE_LIST", function() { return SET_PROMOTION_TYPE_LIST; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SELECTED_PROMOTION_TYPES", function() { return SET_SELECTED_PROMOTION_TYPES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_RELOAD_REPORT", function() { return SET_RELOAD_REPORT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_DETAIL_PARAMS", function() { return SET_DETAIL_PARAMS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SELECTED_SPORT", function() { return SET_SELECTED_SPORT; });
 const SET_REPORT_DATE = 'SET_REPORT_DATE';
 const SET_REPORT_FILTER = 'SET_REPORT_FILTER';
 const SET_REPORT_DATA = 'SET_REPORT_DATA';
-const SET_PROMOTION_TYPE_LIST = 'SET_PROMOTION_TYPE_LIST';
-const SET_SELECTED_PROMOTION_TYPES = 'SET_SELECTED_PROMOTION_TYPES';
 const SET_RELOAD_REPORT = 'SET_RELOAD_REPORT';
 const SET_DETAIL_PARAMS = 'SET_DETAIL_PARAMS';
+const SET_SELECTED_SPORT = 'SET_SELECTED_SPORT';
 
 /***/ }),
 
@@ -3418,7 +3448,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const renderHeader = drilldownLevel => {
+const renderHeader = (drilldownLevel, isLicenseeOfferBA) => {
   const gridHeader = [/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderRow"], {
     style: {
       height: 32
@@ -3454,11 +3484,11 @@ const renderHeader = drilldownLevel => {
     colWidth: 110,
     rowSpan: "2",
     sortBy: "licenseeWL"
-  }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].licenseeWL), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
+  }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].licenseeWL), isLicenseeOfferBA && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
     colWidth: 100,
     rowSpan: "2",
     sortBy: "baComm"
-  }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].BACommission), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
+  }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].BACommission), isLicenseeOfferBA && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
     colWidth: 110,
     rowSpan: "2",
     sortBy: "amtDueToBA"
@@ -3480,14 +3510,14 @@ const renderHeader = drilldownLevel => {
   }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].total))];
   return gridHeader;
 };
-const renderDataSection = (dataList, drilldownLevel, handleDrilldown, index = 1) => {
+const renderDataSection = (dataList, drilldownLevel, isLicenseeOfferBA, handleDrilldown, index = 1) => {
   const dataRows = [];
   for (let i = 0; i < dataList.length; i++) {
-    dataRows.push(buildDataRow(dataList[i], drilldownLevel, handleDrilldown, index++));
+    dataRows.push(buildDataRow(dataList[i], drilldownLevel, isLicenseeOfferBA, handleDrilldown, index++));
   }
   return dataRows;
 };
-const renderFooter = (data, drilldownLevel) => {
+const renderFooter = (data, drilldownLevel, isLicenseeOfferBA) => {
   let totalRows = [];
   const total = data.totalCurrency,
     colSpan = drilldownLevel === 0 ? 2 : 3,
@@ -3507,7 +3537,7 @@ const renderFooter = (data, drilldownLevel) => {
     }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Total')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
       title: currencyName,
       className: "center-align"
-    }, currencyName), buildCommonRow(item)));
+    }, currencyName), buildCommonRow(item, isLicenseeOfferBA)));
   }
   const dataSummary = data.totalSummary;
   const summaryColSpan = colSpan + 1;
@@ -3518,10 +3548,10 @@ const renderFooter = (data, drilldownLevel) => {
     title: `Total in ${dataSummary.currencyName}`,
     className: "center-align",
     colSpan: summaryColSpan
-  }, `${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Totalin')} ${dataSummary.currencyName}`), buildCommonRow(dataSummary)));
+  }, `${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Totalin')} ${dataSummary.currencyName}`), buildCommonRow(dataSummary, isLicenseeOfferBA)));
   return totalRows;
 };
-const buildDataRow = (dataItem, drilldownLevel, handleDrilldown, index) => {
+const buildDataRow = (dataItem, drilldownLevel, isLicenseeOfferBA, handleDrilldown, index) => {
   const {
     date,
     dateString,
@@ -3547,9 +3577,9 @@ const buildDataRow = (dataItem, drilldownLevel, handleDrilldown, index) => {
     onClick: e => handleDrilldown(e, currency, currencyName, date)
   }, currencyName)), drilldownLevel === 1 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
     className: "center-align"
-  }, currencyName), buildCommonRow(dataItem));
+  }, currencyName), buildCommonRow(dataItem, isLicenseeOfferBA));
 };
-const buildCommonRow = dataItem => {
+const buildCommonRow = (dataItem, isLicenseeOfferBA) => {
   const {
     turnover,
     totalTransaction,
@@ -3572,9 +3602,9 @@ const buildCommonRow = dataItem => {
     className: "right-align"
   }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_3__["default"].formatDecimal(customerTotal)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
     className: `right-align ${licenseeWL < 0 ? "negative" : ""}`
-  }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_3__["default"].formatDecimal(licenseeWL)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
+  }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_3__["default"].formatDecimal(licenseeWL)), isLicenseeOfferBA && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
     className: "right-align"
-  }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_3__["default"].formatDecimal(baComm)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
+  }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_3__["default"].formatDecimal(baComm)), isLicenseeOfferBA && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
     className: "right-align"
   }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_3__["default"].formatDecimal(amtDueToBA)));
 };
@@ -3685,11 +3715,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _common_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../common/service */ "./www/js/source/reactpages/pages/newcashoutwinloss/common/service.js");
 /* harmony import */ var _9softstudio_react_breadcrumb__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @9softstudio/react-breadcrumb */ "./node_modules/@9softstudio/react-breadcrumb/dist/index.js");
 /* harmony import */ var _9softstudio_react_breadcrumb__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_9softstudio_react_breadcrumb__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
 
 
 
@@ -3801,7 +3833,7 @@ const DataGrid = props => {
     props.getReportData(_common_constants__WEBPACK_IMPORTED_MODULE_8__["ApiUrl"].REPORT_DATA_URL, newRequestParam);
   };
   var index = (requestParam.PageIndex - 1) * pagingOption.PageSize + 1;
-  var bodyData = Object(_common_gridUtils__WEBPACK_IMPORTED_MODULE_5__["renderDataSection"])(data, requestParam.DrillDownLevel, _handleDrilldown, index);
+  var bodyData = Object(_common_gridUtils__WEBPACK_IMPORTED_MODULE_5__["renderDataSection"])(data, requestParam.DrillDownLevel, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].IsLicenseeOfferBA, _handleDrilldown, index);
   var currenPagingOption = {
     PageIndex: requestParam.PageIndex,
     PageSize: requestParam.PageSize,
@@ -3821,9 +3853,9 @@ const DataGrid = props => {
     minWidth: 650,
     autoWidth: true,
     autoHeight: true,
-    header: Object(_common_gridUtils__WEBPACK_IMPORTED_MODULE_5__["renderHeader"])(requestParam.DrillDownLevel),
+    header: Object(_common_gridUtils__WEBPACK_IMPORTED_MODULE_5__["renderHeader"])(requestParam.DrillDownLevel, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].IsLicenseeOfferBA),
     body: bodyData,
-    footer: Object(_common_gridUtils__WEBPACK_IMPORTED_MODULE_5__["renderFooter"])(props.reportData, requestParam.DrillDownLevel),
+    footer: Object(_common_gridUtils__WEBPACK_IMPORTED_MODULE_5__["renderFooter"])(props.reportData, requestParam.DrillDownLevel, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].IsLicenseeOfferBA),
     containerPadding: 30,
     onSort: _handleSort,
     isPaging: requestParam.DrillDownLevel === _common_constants__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].CUSTOMER,
@@ -3898,6 +3930,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _common_service__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../common/service */ "./www/js/source/reactpages/pages/newcashoutwinloss/common/service.js");
 /* harmony import */ var _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @jsroot/lib/DataService */ "./www/js/source/reactpages/lib/DataService.js");
 /* harmony import */ var _constants_report__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../../constants/report */ "./www/js/source/reactpages/constants/report.js");
+/* harmony import */ var _helpers_dataSourceHelper__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../../../helpers/dataSourceHelper */ "./www/js/source/helpers/dataSourceHelper.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -3922,20 +3955,29 @@ function _toPrimitive(input, hint) { if (typeof input !== "object" || input === 
 
 
 
+
 const FormFilter = props => {
   const [isConvertAllToBaseCurrency, setConvertAllToBaseCurrency] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true);
   const [isExcludeTest, setExcludeTest] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true);
   const [baseCurrencyList, setBaseCurrencyList] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_6__["default"].baseCurrencyList);
   const [reportBy, setReportBy] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(1);
-  const {} = props;
+  const [disableSport, setDisableSport] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(new Date(props.dateRange.fromDate) < _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_6__["default"].cutOffDate);
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {}, []);
-  const _onChangeDateRange = (range, isValid = true) => {
+  const onChangeDateRange = (range, isValid = true) => {
     if (isValid) {
       props.setDateRange(range);
+      checkDisableSport(range.startDate.toDate());
     } else {
       const message = _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource("DateRangeExceedMsg").replace("{0}", _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_6__["default"].dateConstraint.limitedMonthRange);
       alert(message);
     }
+  };
+  const checkDisableSport = startDate => {
+    const tempStatus = startDate < _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_6__["default"].cutOffDate;
+    if (tempStatus && tempStatus !== disableSport) {
+      props.setSelectedSport(_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_6__["default"].defaultSelectedSport);
+    }
+    setDisableSport(tempStatus);
   };
   const _renderDateFilter = () => {
     const dateConstraint = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_6__["default"].dateConstraint;
@@ -3946,7 +3988,7 @@ const FormFilter = props => {
       maxDate: dateConstraint.maxDate,
       today: props.dateRange.toDate,
       limitedMonthRange: dateConstraint.limitedMonthRange,
-      onChange: _onChangeDateRange
+      onChange: onChangeDateRange
     });
   };
   const _renderBaseCurrencySelectList = () => {
@@ -3969,6 +4011,22 @@ const FormFilter = props => {
       statusField: "Status",
       onChange: (currentItem, selectedItemsKey) => onChangeCurrency(selectedItemsKey)
     }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null);
+  };
+  const _renderSportSelectList = () => {
+    const sportList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_6__["default"].sportList;
+    const dataSource = _helpers_dataSourceHelper__WEBPACK_IMPORTED_MODULE_18__["default"].CreateDataSourceFrom(sportList, props.selectedSport);
+    return sportList && sportList.length && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: disableSport ? "select-disabled" : ""
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_10___default.a, {
+      id: "SportList",
+      hasSearchBox: true,
+      language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].currentLanguage,
+      dataSource: dataSource,
+      keyField: "Id",
+      valueField: "Value",
+      statusField: "Status",
+      onChange: (currentItem, selectedItemsKey) => props.setSelectedSport(selectedItemsKey)
+    }));
   };
   const onChangeCurrency = currencyIdList => {
     let baseCurrency = "";
@@ -4054,11 +4112,11 @@ const FormFilter = props => {
       toDate
     } = props.dateRange;
     const {
-      PageSize,
       SortBy,
       SortOrder
     } = props.requestParam;
     const selectedCurrencyArray = props.selectedCurrency.split(',');
+    const selectedSportArray = props.selectedSport.split(',');
     const currencyText = selectedCurrencyArray.length === _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_6__["default"].currencyList.length ? 'All' : _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_6__["default"].currencyList.filter(item => selectedCurrencyArray.includes(item.Id.toString())).map(item => item.Value).join(',');
     const baseCurrency = baseCurrencyList.find(x => x.value === props.selectedBaseCurrency);
     const subsidiarySearch = props.subsidiarySearch;
@@ -4078,11 +4136,12 @@ const FormFilter = props => {
       DrillDownLevel: _common_constants__WEBPACK_IMPORTED_MODULE_14__["ReportLevel"].MAIN,
       IsExcludedTestData: isExcludeTest,
       SubsidiarySearch: subsidiarySearch,
-      SubsidiaryList: subsidiarySearch ? props.selectedSubsidiary : ""
+      SubsidiaryList: subsidiarySearch ? props.selectedSubsidiary : "",
+      SportIdList: _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_6__["default"].sportList.length === selectedSportArray.length ? 'All' : props.selectedSport
     };
   };
   const isValidModel = () => {
-    const result = (!props.subsidiarySearch || !!props.selectedSubsidiary) && !!props.selectedCurrency && !!props.selectedBaseCurrency;
+    const result = (!props.subsidiarySearch || !!props.selectedSubsidiary) && !!props.selectedCurrency && !!props.selectedBaseCurrency && !!props.selectedSport;
     return result;
   };
   const exportExcel = event => {
@@ -4129,7 +4188,7 @@ const FormFilter = props => {
     },
     transition: react_toastify__WEBPACK_IMPORTED_MODULE_13__["Flip"]
   }), showSubsidiarySearch && props.subsidiarySearch && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-12 col-sm-3 col-md-2 col-xl-2"
+    className: "col-12 col-sm-4 col-md-3 col-xl-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "form-group"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -4146,14 +4205,22 @@ const FormFilter = props => {
     className: "form-group"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
     className: "label-text"
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource("Sport")), _renderSportSelectList())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-sm-4 col-md-2 col-xl-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "label-text"
   }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource("Currency")), _renderCurrencySelectList())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 col-sm-4 col-md-2 col-xl-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "form-group"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
     className: "label-text"
-  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource("BaseCurrency")), _renderBaseCurrencySelectList())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-12 col-sm-4 col-md-3 col-xl-3"
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource("BaseCurrency")), _renderBaseCurrencySelectList()))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-sm-4 col-md-3 col-xl-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "form-group"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_11__["default"], {
@@ -4161,9 +4228,7 @@ const FormFilter = props => {
     checked: isConvertAllToBaseCurrency,
     onChange: checked => setConvertAllToBaseCurrency(checked),
     label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource("ConvertAllFiguresToBaseCurrency")
-  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 col-sm-4 col-md-3 col-xl-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "form-group"
@@ -4227,14 +4292,20 @@ const FormFilter = props => {
     checked: props.subsidiarySearch,
     onChange: checked => props.setSubsidiarySearch(checked),
     label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource("SubsidiarySearch")
-  })))))));
+  }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    class: "col-12 col-sm-4 col-md-3 col-xl-3"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    class: "list result-note"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource('CashOutWL_SportNote')))))));
 };
 function mapStateToProps(state) {
   const {
     requestParam,
     dateRange,
-    selectedProduct,
     selectedCurrency,
+    selectedSport,
     baseCurrencyList,
     selectedBaseCurrency,
     selectedStatus,
@@ -4245,8 +4316,8 @@ function mapStateToProps(state) {
   return Object.assign({}, {
     requestParam,
     dateRange,
-    selectedProduct,
     selectedCurrency,
+    selectedSport,
     baseCurrencyList,
     selectedBaseCurrency,
     selectedStatus,
@@ -4375,7 +4446,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _filterReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./filterReducer */ "./www/js/source/reactpages/pages/newcashoutwinloss/reducers/filterReducer.js");
 /* harmony import */ var _dataReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dataReducer */ "./www/js/source/reactpages/pages/newcashoutwinloss/reducers/dataReducer.js");
-/* harmony import */ var _jsroot_reducers_productReducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/reducers/productReducer */ "./www/js/source/reactpages/reducers/productReducer.js");
+/* harmony import */ var _sportReducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./sportReducer */ "./www/js/source/reactpages/pages/newcashoutwinloss/reducers/sportReducer.js");
 /* harmony import */ var _jsroot_reducers_currencyReducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/reducers/currencyReducer */ "./www/js/source/reactpages/reducers/currencyReducer.js");
 /* harmony import */ var _jsroot_reducers_baseCurrencyReducer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/reducers/baseCurrencyReducer */ "./www/js/source/reactpages/reducers/baseCurrencyReducer.js");
 /* harmony import */ var _jsroot_reducers_loaderReducer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/reducers/loaderReducer */ "./www/js/source/reactpages/reducers/loaderReducer.js");
@@ -4396,7 +4467,31 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(Object.assign(_filterReducer__WEBPACK_IMPORTED_MODULE_1__["default"], _dataReducer__WEBPACK_IMPORTED_MODULE_2__["default"], _jsroot_reducers_productReducer__WEBPACK_IMPORTED_MODULE_3__, _jsroot_reducers_currencyReducer__WEBPACK_IMPORTED_MODULE_4__, _jsroot_reducers_baseCurrencyReducer__WEBPACK_IMPORTED_MODULE_5__, _jsroot_reducers_loaderReducer__WEBPACK_IMPORTED_MODULE_6__, _jsroot_reducers_userGuideReducer__WEBPACK_IMPORTED_MODULE_7__, _jsroot_reducers_dateRangeReducer__WEBPACK_IMPORTED_MODULE_8__, _jsroot_reducers_requestParamReducer__WEBPACK_IMPORTED_MODULE_9__, _jsroot_reducers_reportTitleReducer__WEBPACK_IMPORTED_MODULE_10__, _jsroot_reducers_subsidiaryReducer__WEBPACK_IMPORTED_MODULE_11__)));
+/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(Object.assign(_filterReducer__WEBPACK_IMPORTED_MODULE_1__["default"], _dataReducer__WEBPACK_IMPORTED_MODULE_2__["default"], _sportReducer__WEBPACK_IMPORTED_MODULE_3__["default"], _jsroot_reducers_currencyReducer__WEBPACK_IMPORTED_MODULE_4__, _jsroot_reducers_baseCurrencyReducer__WEBPACK_IMPORTED_MODULE_5__, _jsroot_reducers_loaderReducer__WEBPACK_IMPORTED_MODULE_6__, _jsroot_reducers_userGuideReducer__WEBPACK_IMPORTED_MODULE_7__, _jsroot_reducers_dateRangeReducer__WEBPACK_IMPORTED_MODULE_8__, _jsroot_reducers_requestParamReducer__WEBPACK_IMPORTED_MODULE_9__, _jsroot_reducers_reportTitleReducer__WEBPACK_IMPORTED_MODULE_10__, _jsroot_reducers_subsidiaryReducer__WEBPACK_IMPORTED_MODULE_11__)));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/newcashoutwinloss/reducers/sportReducer.js":
+/*!***********************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/newcashoutwinloss/reducers/sportReducer.js ***!
+  \***********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
+/* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/types */ "./www/js/source/reactpages/pages/newcashoutwinloss/actions/types.js");
+
+
+const selectedSport = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])({}, {
+  [_actions_types__WEBPACK_IMPORTED_MODULE_1__["SET_SELECTED_SPORT"]](state, action) {
+    return action.data;
+  }
+});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  selectedSport
+});
 
 /***/ }),
 
@@ -4488,28 +4583,6 @@ __webpack_require__.r(__webpack_exports__);
 
 const isLoading = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, {
   [_actions_types__WEBPACK_IMPORTED_MODULE_0__["TOGGLE_LOADER"]](state, action) {
-    return action.data;
-  }
-});
-
-/***/ }),
-
-/***/ "./www/js/source/reactpages/reducers/productReducer.js":
-/*!*************************************************************!*\
-  !*** ./www/js/source/reactpages/reducers/productReducer.js ***!
-  \*************************************************************/
-/*! exports provided: selectedProduct */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectedProduct", function() { return selectedProduct; });
-/* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./www/js/source/reactpages/actions/types.js");
-/* harmony import */ var _lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
-
-
-const selectedProduct = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, {
-  [_actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_SELECTED_PRODUCT"]](state, action) {
     return action.data;
   }
 });

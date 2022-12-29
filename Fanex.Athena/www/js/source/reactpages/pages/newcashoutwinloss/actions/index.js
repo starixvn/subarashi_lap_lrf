@@ -1,6 +1,6 @@
 import filterAction from './filterAction';
 import dataAction from './dataAction';
-import * as productAction from '@jsroot/actions/productAction'
+import sportAction from './sportAction';
 import * as currencyAction from '@jsroot/actions/currencyAction'
 import * as baseCurrencyAction from '@jsroot/actions/baseCurrencyAction'
 import * as loaderAction from '@jsroot/actions/loaderAction'
@@ -14,7 +14,7 @@ import * as subsidiaryAction from '@jsroot/actions/subsidiaryAction'
 export default {
     ...filterAction,
     ...dataAction,
-    ...productAction,
+    ...sportAction,
     ...currencyAction,
     ...baseCurrencyAction,
     ...loaderAction,

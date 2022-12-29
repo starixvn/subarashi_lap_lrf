@@ -3494,4 +3494,7 @@
   <data name="ViewinSummary" xml:space="preserve">
     <value>View in Summary</value>
   </data>
+  <data name="CashOutWL_SportNote" xml:space="preserve">
+    <value>This report supports filter by Sport from 01/01/2023</value>
+  </data>
 </root>

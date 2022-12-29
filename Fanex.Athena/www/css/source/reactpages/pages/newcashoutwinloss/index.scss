@@ -5,6 +5,7 @@
 @import "../../components/react-multiselect";
 @import "../../components/popup";
 @import "../../components/breadcrumb";
+@import '../../../components/list/list';
 
 .rdr-DateRange-index {
     z-index: 200;
@@ -21,4 +22,13 @@
 
 .caret-block div {
     display: inherit;
+}
+
+.select-disabled {
+    pointer-events: none;
+    background: rgba(0, 0, 0, 0.26);
+}
+
+ul li {
+    list-style-type: none;
 }

@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import filterReducer from './filterReducer';
 import dataReducer from './dataReducer';
-import * as productReducer from '@jsroot/reducers/productReducer'
+import sportReducer from './sportReducer';
 import * as currencyReducer from '@jsroot/reducers/currencyReducer'
 import * as baseCurrencyReducer from '@jsroot/reducers/baseCurrencyReducer'
 import * as loaderReducer from '@jsroot/reducers/loaderReducer'
@@ -14,7 +14,7 @@ import * as subsidiaryReducer from '@jsroot/reducers/subsidiaryReducer'
 export default combineReducers(Object.assign(
     filterReducer,
     dataReducer,
-    productReducer,
+    sportReducer,
     currencyReducer,
     baseCurrencyReducer,
     loaderReducer,

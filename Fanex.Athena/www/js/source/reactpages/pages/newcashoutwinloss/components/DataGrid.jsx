@@ -9,6 +9,7 @@ import ReportTitle from '@jsroot/components/ReportTitle';
 import { ApiUrl, ReportLevel, BreadcrumbText, DefaultPagingOption } from '../common/constants';
 import Service from '../common/service';
 import { Breadcrumb } from '@9softstudio/react-breadcrumb'
+import AppData from '@jsroot/lib/AppData';
 
 export const DataGrid = (props) => {
     const [pagingOption, setPagingOption] = useState(DefaultPagingOption);
@@ -141,7 +142,7 @@ export const DataGrid = (props) => {
     }
 
     var index = (requestParam.PageIndex - 1) * pagingOption.PageSize + 1;
-    var bodyData = renderDataSection(data, requestParam.DrillDownLevel, _handleDrilldown, index);
+    var bodyData = renderDataSection(data, requestParam.DrillDownLevel, AppData.IsLicenseeOfferBA, _handleDrilldown, index);
 
     var currenPagingOption = {
         PageIndex: requestParam.PageIndex,
@@ -157,9 +158,9 @@ export const DataGrid = (props) => {
         <Table key={`table-${requestParam.DrillDownLevel}-${props.reloadReport}-${props.SortBy}-${props.SortOrder}-${props.PageIndex}`} minWidth={650}
             autoWidth={true}
             autoHeight={true}
-            header={renderHeader(requestParam.DrillDownLevel)}
+            header={renderHeader(requestParam.DrillDownLevel, AppData.IsLicenseeOfferBA)}
             body={bodyData}
-            footer={renderFooter(props.reportData, requestParam.DrillDownLevel)}
+            footer={renderFooter(props.reportData, requestParam.DrillDownLevel, AppData.IsLicenseeOfferBA)}
             containerPadding={30}
             onSort={_handleSort}
             isPaging={requestParam.DrillDownLevel === ReportLevel.CUSTOMER}

@@ -2362,4 +2362,7 @@
   <data name="ViewinSummary" xml:space="preserve">
     <value>查看摘要</value>
   </data>
+  <data name="CashOutWL_SportNote" xml:space="preserve">
+    <value>此報告支持從 01/01/2023 開始以運動類型篩選</value>
+  </data>
 </root>
