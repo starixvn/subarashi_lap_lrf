@@ -3,6 +3,7 @@
     using Fanex.Athena.Api.StatelessBase;
     using Fanex.Athena.Api.StatelessBase.Attributes;
     using Fanex.Athena.Extension.Utility;
+    using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Module.Notification.MetaModel;
     using Fanex.Athena.Module.Notification.Service.Interfaces;
@@ -96,7 +97,8 @@
 
         private string GetMessageTypesByPermission()
         {
-            var messageTypes = Permissions
+            var functionList = Permissions ?? Enumerable.Empty<PortalFunction>();
+            var messageTypes = functionList
                 .Where(x => _notificationType.ContainsKey(x.FunctionKey))
                 .Select(x => _notificationType[x.FunctionKey]);
 

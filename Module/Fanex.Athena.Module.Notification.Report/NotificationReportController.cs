@@ -165,7 +165,7 @@
 
         private string GetMessageTypesByPermission(UserAuthInfo userSession)
         {
-            var messageTypes = userSession.FunctionList
+            var messageTypes = (userSession.FunctionList ?? Enumerable.Empty<Function>())
                 .Where(x => _notificationType.ContainsKey(x.FunctionKey))
                 .Select(x => _notificationType[x.FunctionKey]);
 

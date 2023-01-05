@@ -93,9 +93,13 @@
 
             // Notification from LRF/LAP
             UpdateMetaModel(metaModel);
-            var messagesResult = await GetInternalNotification(metaModel);
-            result.DataList = result.DataList.Concat(messagesResult.DataList).OrderByDescending(x => x.DateTime);
-            result.TotalRows += messagesResult.TotalRows;
+
+            if (!string.IsNullOrEmpty(metaModel.MessageTypes))
+            {
+                var messagesResult = await GetInternalNotification(metaModel);
+                result.DataList = result.DataList.Concat(messagesResult.DataList).OrderByDescending(x => x.DateTime);
+                result.TotalRows += messagesResult.TotalRows;
+            }
 
             return result;
         }
@@ -417,13 +421,30 @@
             return -1;
         }
 
+        private static int ParseMessageType(string messageType)
+        {
+            if (int.TryParse(messageType, out int type))
+            {
+                return type - 1;
+            }
+            return 0;
+        }
+
         private static void UpdateMetaModel(NotificationMetaModel metaModel)
         {
-            var messageTypes = metaModel.MessageTypes.Split(',');
+            if (!string.IsNullOrEmpty(metaModel.MessageTypes))
+            {
+                var messageTypes = metaModel.MessageTypes.Split(',');
 
-            metaModel.MessageTypes = string.Join(",", messageTypes
-                .Where(x => !x.Contains(MessageType.ResettlementNotification))
-                .Select(x => int.Parse(x) - 1));
+                metaModel.MessageTypes = string.Join(",", messageTypes
+                    .Where(x => !x.Contains(MessageType.ResettlementNotification))
+                    .Select(ParseMessageType));
+            }
+            else
+            {
+
+                metaModel.MessageTypes = string.Empty;
+            }
         }
     }
 }
