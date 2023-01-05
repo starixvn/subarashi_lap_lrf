@@ -6,6 +6,7 @@
     using Fanex.Athena.Module.Notification.Service.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.UnitTest.Common.Helpers;
+    using Model.Auth;
     using Model.Core.DTO.Common;
     using Model.Core.ResultModel;
     using NSubstitute;
@@ -111,7 +112,7 @@
             var metaModel = new NotificationMetaModel
             {
                 Language = "en",
-                MessageTypes = "0,1"
+                MessageTypes = "1,2"
             };
             var today = DateTime.Today;
             var expectedMetaModel = new NotificationMetaModel
@@ -124,7 +125,7 @@
                 PageIndex = 1,
                 UserName = UserName,
                 LicenseeName = SiteName,
-                MessageTypes = "0,1"
+                MessageTypes = "1,2"
             };
 
             NotificationMetaModel passedParam = null;
@@ -218,7 +219,12 @@
                 {
                     { "username", UserName },
                     { "sitename", SiteName },
-                    { "language", Language }
+                    { "language", Language },
+                    { "permissions", new List<PortalFunction>
+                    {
+                        new PortalFunction { FunctionKey = "ResultAmendment_Recalculation75" },
+                        new PortalFunction{ FunctionKey = "AbnormalBet"}
+                    }}
                 }
             };
 
