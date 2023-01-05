@@ -19,6 +19,7 @@
         private const string FromDateColumn = "FromDate";
         private const string ToDateColumn = "ToDate";
         private const string ErrCodeColumn = "ErrCode";
+        private const string LangkeyColumn = "Langkey";
 
         public async Task<ApiPagingResult<PlayerInfo>> GetProblemPlayerListAsync(ProblemPlayerListMetaModel metaModel)
         {
@@ -61,7 +62,7 @@
                 db.SetParameterValue("PageIndex", metaModel.PageIndex);
                 db.SetParameterValue("PageSize", metaModel.PageSize);
                 db.SetParameterValue("TotalItems", 0);
-                db.SetParameterValue("Langkey", metaModel.Language);
+                db.SetParameterValue(LangkeyColumn, metaModel.Language);
                 db.SetParameterValue("Sporttype", metaModel.SportIdList);
                 db.SetParameterValue("Level", metaModel.LevelIdList);
 
@@ -123,7 +124,7 @@
             const string spName = "Lrf_ProblemAccount_ReasonGroupSel";
             using (var db = GetObjectDb(spName))
             {
-                db.SetParameterValue("Langkey", langKey);
+                db.SetParameterValue(LangkeyColumn, langKey);
                 using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
                 {
                     var result = new List<ReasonGroup>();
@@ -147,7 +148,7 @@
             const string spName = "Lrf_AbnormalBet_SubIssueSel";
             using (var db = GetObjectDb(spName))
             {
-                db.SetParameterValue("Langkey", langKey);
+                db.SetParameterValue(LangkeyColumn, langKey);
                 using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
                 {
                     var result = new List<SubIssue>();
@@ -387,7 +388,7 @@
             objectDb.SetParameterValue(ToDateColumn, metaModel.ToDate);
             objectDb.SetParameterValue("IsCheckAll", metaModel.IsGetAll);
             objectDb.SetParameterValue("ReasonGroupID", metaModel.ReasonGroupIdList);
-            objectDb.SetParameterValue("Langkey", metaModel.Language);
+            objectDb.SetParameterValue(LangkeyColumn, metaModel.Language);
         }
 
         private static void AddVipPlayerListParams(IObjectDb objectDb, VipPlayerListMetaModel metaModel)
