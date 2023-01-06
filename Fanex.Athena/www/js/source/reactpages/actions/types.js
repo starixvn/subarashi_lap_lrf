@@ -51,3 +51,6 @@ export const SET_PAGING_OPTION = 'SET_PAGING_OPTION';
 /* Subsidiary Search  */
 export const SET_SUBSIDIARY_LIST = 'SET_SUBSIDIARY_LIST';
 export const SET_SUBSIDIARY_SEARCH = 'SET_SUBSIDIARY_SEARCH';
+
+/*Reason list*/
+export const SET_REASON_LIST = "SET_REASON_LIST";

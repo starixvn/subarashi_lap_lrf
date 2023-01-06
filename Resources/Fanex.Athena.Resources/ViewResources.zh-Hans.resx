@@ -1244,7 +1244,7 @@
     <value>提交</value>
   </data>
   <data name="Summary" xml:space="preserve">
-    <value>总结</value>
+    <value>摘要</value>
   </data>
   <data name="Sunday" xml:space="preserve">
     <value>星期六</value>
@@ -2270,6 +2270,24 @@
   <data name="DisableParlay" xml:space="preserve">
     <value>关闭串关</value>
   </data>
+  <data name="Detail" xml:space="preserve">
+    <value>详情</value>
+  </data>
+  <data name="IpSummary" xml:space="preserve">
+    <value>IP摘要</value>
+  </data>
+  <data name="KOTime" xml:space="preserve">
+    <value>开赛时间</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>地点</value>
+  </data>
+  <data name="Reason" xml:space="preserve">
+    <value>原因</value>
+  </data>
+  <data name="Ticket" xml:space="preserve">
+    <value>注单</value>
+  </data>
   <data name="ActivateListOfPlayers" xml:space="preserve">
     <value>以玩家清单来设定为VIP</value>
     <comment>#179961</comment>
@@ -2342,5 +2360,17 @@
   </data>
   <data name="SabaVirtualSettingLevel" xml:space="preserve">
     <value>沙巴虚拟体育设定等级</value>
+  </data>
+  <data name="Viewin2" xml:space="preserve">
+    <value>查看</value>
+  </data>
+  <data name="ViewinDetail" xml:space="preserve">
+    <value>查看详情</value>
+  </data>
+  <data name="ViewinIPSummary" xml:space="preserve">
+    <value>查看 IP 摘要</value>
+  </data>
+  <data name="ViewinSummary" xml:space="preserve">
+    <value>查看摘要</value>
   </data>
 </root>

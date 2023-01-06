@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 12/14/2022 1:36:59 PM
+// Generated at: 12/28/2022 1:53:12 PM
 window._language_zh_CN = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -339,6 +339,7 @@ window._language_zh_CN = {
   DesktopChina: "桌机中国版",
   DesktopNewAsia: "桌机新亚洲版",
   DesktopOthers: "桌机其他",
+  Detail: "详情",
   DetailedBetlist: "投注历史明细",
   Details: "细节",
   DetailTransaction: "交易纪录",
@@ -374,6 +375,7 @@ window._language_zh_CN = {
   ESportsApp: "电子竞技 APP",
   ESportsDesktop: "电子竞技 桌机",
   ESportsMobile: "电子竞技 手机",
+  ESportsPinGoal: "电竞台",
   Euro: "欧洲版",
   Event: "项目",
   EventDate: "赛事日期",
@@ -390,6 +392,7 @@ window._language_zh_CN = {
   FGLG: "最先进球/最后进球",
   FileExtensionIncorrect: "档案的后缀名不正确，请选择Excel档案",
   FileUploadExceedSize: "上传档案大小需小于",
+  FinalScore: "最后比分",
   FirstGoal: "最先进球",
   FirstName: "名字",
   Forecast: "预测",
@@ -478,6 +481,7 @@ window._language_zh_CN = {
   InvalidWinningThreshold: "无效的每日临界值",
   InvalidWinningThresholdBatchCommand: "无效的每日临界值: {0} ({1})",
   IPLogin: "登入IP",
+  IpSummary: "IP摘要",
   IsGroupInOriginalCurrency: "以原始货币显示",
   IsNeutral: "(中)",
   JackpotWonDetails: "积宝头奖详情",
@@ -488,6 +492,7 @@ window._language_zh_CN = {
   Jun: "六月",
   June: "六月",
   KeepCurrentComm: "保持当前的佣金",
+  KOTime: "开赛时间",
   Last: "最后",
   LastBetsMonitoring: "最后投注监测",
   LastGoal: "最后进球",
@@ -536,6 +541,7 @@ window._language_zh_CN = {
   LiveReport: "滚球报告",
   LiveReportTitle: "滚球报告 - {0}, {1} --&gt; {2} - {3}",
   LiveStatus: "滚球状态",
+  Location: "地点",
   LocationRestriction: "地点限制",
   LocationRestrictionMsg: "限制直接访问此网站。欲知详情请联系{0}。",
   Locked: "锁定",
@@ -800,6 +806,7 @@ window._language_zh_CN = {
   SBComm: "体育博彩佣金",
   Score: "比分",
   Search: "搜寻",
+  SearchByExactlyIp: "按实际 IP 搜寻",
   SearchResult: "搜索结果",
   SelectAtLeastOneCurrencyMsg: "请最少选择一种货币",
   SelectedCustomers: "选定的玩家",
@@ -862,6 +869,7 @@ window._language_zh_CN = {
   TheSettledAndResettledReportNote: "已结算和重新结算报告显示所选日期范围内已结算和已重新结算注单的数据。",
   TheSettledOnlyReportNote: "已结算报表仅显示所选日期范围内的首次结算注单的数据。",
   Thursday: "星期四",
+  Ticket: "注单",
   TicketFilter: "注单筛选",
   TicketList: "注单清单",
   TicketNo: "票劵号码",
@@ -954,6 +962,10 @@ window._language_zh_CN = {
   ViewBy: "查看由",
   ViewDataInMonth: "检阅每月数据",
   Viewin: "以{0}查看",
+  Viewin2: "查看",
+  ViewinDetail: "查看详情",
+  ViewinIPSummary: "查看 IP 摘要",
+  ViewinSummary: "查看摘要",
   ViewInWithNoParam: "查看",
   ViewNotification: "查看通知",
   Vip: "VIP",

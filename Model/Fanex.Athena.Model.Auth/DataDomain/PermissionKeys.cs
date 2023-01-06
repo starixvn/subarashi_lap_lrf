@@ -68,6 +68,7 @@
         public const string ReportCustomerSupportTask = "CustomerSupportTask";
         public const string ReportExtraPayout = "ExtraPayout";
         public const string ReportNewCashOutWinLoss = "NewCashOutWinLoss";
+        public const string ReportAbnormalBet = "AbnormalBet";
 
         /* Customer Info. */
 
@@ -93,6 +94,7 @@
 
         /*Notification*/
 
+        public const string Bell = "Bell";
         public const string ResultAmendmentNotificationReport = "ResultAmendment_Recalculation75";
 
         public const string BettingTicketCenter = "BTC79";

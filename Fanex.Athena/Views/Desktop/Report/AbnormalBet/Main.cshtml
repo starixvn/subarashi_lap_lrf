@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "LAP - " + ViewResources.Report +
+    " - " + ViewResources.AbnormalBet;
+    Layout = "~/Views/Desktop/Shared/_ReactPageLayout.cshtml";
+}
+@using Fanex.Athena.Model.Core.DataDomain;
+@using Fanex.Athena.Service.Core.Users.Interfaces
+@model Fanex.Athena.Model.Report.ViewModel.AbnormalBetViewModel
+@{
+    var appSettings = DependencyResolver.Current.GetService<IAppSettings>();
+    var session = DependencyResolver.Current.GetService<ISessionService>();
+    bool isOfferCryptoCurrencyLicensee = appSettings.OfferCryptoCurrencyLicensees.Split(',').Contains(session.LicenseeSession.LicenseeName, StringComparer.InvariantCultureIgnoreCase);
+
+    var offerCurrencyIds = isOfferCryptoCurrencyLicensee ? SystemConstants.BaseCryptoCurrencyListIds : SystemConstants.BaseCurrencyListIds;
+    var baseCurrencyList = SystemConstants.BaseCurrencyList
+        .Where(_ => offerCurrencyIds.Contains(_.Key))
+        .Select(c => new { value = c.Value, label = c.Value }).ToList();
+
+    var selectedCurrency = string.Join(",", Model.CurrencyList.Select(x => x.Key).ToArray());
+    var selectedReason = string.Join(",", Model.ReasonList.Select(x => x.Key).ToArray());
+    var selectedStatus = string.Join(",", Model.LiveStatusList.Select(x => x.Key).ToArray());
+    var selectedBettype = string.Join(",", Model.Bettypes.Select(x => x.Key).ToArray());
+    var selectedSport = string.Join(",", Model.Sports.Select(x => x.Key).ToArray());
+
+    var minDate = Model.ReportSetting.MinDateString;
+    var maxDate = Model.ReportSetting.MaxDate;
+}
+
+@section pagecss {
+
+    <link href="@Url.ContentLinkByEnv("/www/css/build/reactpages/abnormalbet/index.css")" rel="stylesheet" type="text/css" />
+
+}
+@section pagejs {
+    <script src="@Url.ContentLinkByEnv("/www/js/build/reactpages/report/abnormalbet.chunk.js")"></script>
+}
+
+@section globaljscode{
+    window.initialState = {
+    selectedCurrency:  '@(selectedCurrency)',
+    selectedSport:  '@(selectedSport)',
+    selectedReason:  '@(selectedReason)',
+    selectedBettype:  '@(selectedBettype)',
+    selectedStatus:  '@(selectedStatus)',
+    selectedBaseCurrency: '@(ViewBag.DefaultSelectedBaseCurrency)',
+    dateRange: {fromDate: '@Model.FromDate.ToString("MM/dd/yyyy")', toDate: '@Model.ToDate.ToString("MM/dd/yyyy")'},
+    isLoading: false,
+    reloadReport: false
+    }
+    window._AppData = {
+    currencyList: @Html.Raw(Model.CurrencyList.Select(x => new { Id = x.Key, Value = x.Value, Status = true }).ToJson()),
+    baseCurrencyList: @Html.Raw(baseCurrencyList.ToJson()),
+    sportList: @Html.Raw(Model.Sports.Select(x => new { Id = x.Key, Value = x.Value, Status = true }).ToJson()),
+    bettypeList: @Html.Raw(Model.Bettypes.Select(x => new { Id = x.Key, Value = x.Value, Status = true }).ToJson()),
+    statusList: @Html.Raw(Model.LiveStatusList.Select(x => new { Id = x.Key, Value = x.Value, Status = true }).ToJson()),
+    reasonList: @Html.Raw(Model.ReasonList.Select(x => new { Id = x.Key, Value = x.Value, Status = true }).ToJson()),
+    dateConstraint: {minDate: '@minDate', maxDate: '@maxDate.ToString("MM/dd/yyyy")', limitedMonthRange: 3},
+    defaultBaseCurrency: '@(ViewBag.DefaultSelectedBaseCurrency)',
+    defaultCurrency: '@(selectedCurrency)',
+    licenseeName: '@(ViewBag.LicenseeName)',
+    isShowIpvn: '@(ViewBag.IsShowIpvn)'
+    };
+}
+<div id="app-container">
+</div>

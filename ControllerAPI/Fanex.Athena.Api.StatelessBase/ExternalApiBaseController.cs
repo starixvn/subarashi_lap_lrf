@@ -1,4 +1,6 @@
-﻿using System.Web.Http;
+﻿using Fanex.Athena.Model.Auth;
+using System.Collections.Generic;
+using System.Web.Http;
 using System.Web.Http.Cors;
 
 namespace Fanex.Athena.Api.StatelessBase
@@ -12,5 +14,7 @@ namespace Fanex.Athena.Api.StatelessBase
         public string SiteName => (string)ActionContext.ActionArguments["sitename"];
 
         public string Language => (string)ActionContext.ActionArguments["language"];
+
+        public IEnumerable<PortalFunction> Permissions => (IEnumerable<PortalFunction>)ActionContext.ActionArguments["permissions"];
     }
 }

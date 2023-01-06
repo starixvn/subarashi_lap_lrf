@@ -358,4 +358,7 @@
   <data name="extrapayout" xml:space="preserve">
     <value>額外派彩</value>
   </data>
+  <data name="abnormalbet" xml:space="preserve">
+    <value>非正規註單</value>
+  </data>
 </root>

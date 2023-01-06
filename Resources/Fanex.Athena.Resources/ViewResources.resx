@@ -3428,6 +3428,30 @@
   <data name="TheSettledOnlyReportNote" xml:space="preserve">
     <value>The Settled report only displays data of the first-time settled tickets based on the selected date range.</value>
   </data>
+  <data name="IpSummary" xml:space="preserve">
+    <value>IP Summary</value>
+  </data>
+  <data name="SearchByExactlyIp" xml:space="preserve">
+    <value>Search by Exactly IP</value>
+  </data>
+  <data name="BetOn" xml:space="preserve">
+    <value>Bet On</value>
+  </data>
+  <data name="FinalScore" xml:space="preserve">
+    <value>Final Score</value>
+  </data>
+  <data name="KOTime" xml:space="preserve">
+    <value>K.O Time</value>
+  </data>
+  <data name="Detail" xml:space="preserve">
+    <value>Detail</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="Ticket" xml:space="preserve">
+    <value>Ticket</value>
+  </data>
   <data name="Information" xml:space="preserve">
     <value>Information</value>
   </data>
@@ -3457,5 +3481,17 @@
   </data>
   <data name="SabaVirtualSettingLevel" xml:space="preserve">
     <value>Saba Virtual Setting Level</value>
+  </data>
+  <data name="Viewin2" xml:space="preserve">
+    <value>View in</value>
+  </data>
+  <data name="ViewinDetail" xml:space="preserve">
+    <value>View in Detail</value>
+  </data>
+  <data name="ViewinIPSummary" xml:space="preserve">
+    <value>View in IP Summary</value>
+  </data>
+  <data name="ViewinSummary" xml:space="preserve">
+    <value>View in Summary</value>
   </data>
 </root>

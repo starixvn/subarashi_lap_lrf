@@ -1,9 +1,5 @@
 ﻿namespace Fanex.Athena.Module.Notification.Report.UnitTests
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Net;
-    using System.Web.Mvc;
     using Fanex.Athena.Controllers.Base.UnitTests;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.ResultModel;
@@ -12,10 +8,15 @@
     using Fanex.Athena.Module.Notification.Service.Interfaces;
     using NSubstitute;
     using NUnit.Framework;
+    using System;
+    using System.Collections.Generic;
+    using System.Net;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
 
     public class NotificationReportController_ApiDataTest : CultureBaseControllerHelperTest
     {
-        private const int MaximumMonthDistance = 5;
+        private static readonly int MaximumMonthDistance = NotificationMetaModel.MaximumMonthRange - 1;
 
         private INotificationService _service;
 
@@ -44,14 +45,14 @@
         }
 
         [Test]
-        public void GetNotificationMessages_WhenCall_CallServiceWithCorrectParameter()
+        public async Task GetNotificationMessages_WhenCall_CallServiceWithCorrectParameter()
         {
             // Arrange
             var metaModel = new NotificationMetaModel();
-            _service.GetNotificationMessages(Arg.Do<NotificationMetaModel>(x => metaModel = x));
+            await _service.GetNotificationMessages(Arg.Do<NotificationMetaModel>(x => metaModel = x));
 
             // Action
-            _controller.GetNotificationMessages();
+            await _controller.GetNotificationMessages();
 
             // Asset
             Assert.Multiple(() =>
@@ -91,17 +92,17 @@
         }
 
         [Test]
-        public void MarkNotificationAsRead_WhenCallSuccessfully_ReturnTrue()
+        public async Task MarkNotificationAsRead_WhenCallSuccessfully_ReturnTrue()
         {
             // Arrange
-            var metaModel = new NotificationMarkAsReadMetaModel();
+            var metaModel = new NotificationMarkAsReadMetaModel { MessageType = "Amendment" };
             _service.MarkNotificationAsRead(metaModel).Returns(new ResultInfo
             {
                 Code = 0
             });
 
             // Action
-            var result = _controller.MarkNotificationAsRead(metaModel) as JsonResult;
+            var result = await _controller.MarkNotificationAsRead(metaModel) as JsonResult;
 
             // Asset
             Assert.Multiple(() =>
@@ -112,10 +113,10 @@
         }
 
         [Test]
-        public void MarkNotificationAsRead_WhenCallFailed_ReturnFalse()
+        public async Task MarkNotificationAsRead_WhenCallFailed_ReturnFalse()
         {
             // Arrange
-            var metaModel = new NotificationMarkAsReadMetaModel();
+            var metaModel = new NotificationMarkAsReadMetaModel { MessageType = "Amendment" };
             _service.MarkNotificationAsRead(metaModel).Returns(new ResultInfo
             {
                 Code = 1,
@@ -123,7 +124,7 @@
             });
 
             // Action
-            var result = _controller.MarkNotificationAsRead(metaModel) as JsonResult;
+            var result = await _controller.MarkNotificationAsRead(metaModel) as JsonResult;
 
             // Asset
             Assert.Multiple(() =>

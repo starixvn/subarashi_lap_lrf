@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 12/14/2022 1:36:59 PM
+// Generated at: 12/28/2022 1:53:12 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -194,6 +194,7 @@ window._language_en_US = {
   BetLimit: "Bet Limit",
   BetList: "Bet List",
   BetListRunning: "Bet List (Running)",
+  BetOn: "Bet On",
   BetPlaced: "Bet Placed",
   BetSetting: "Bet Setting",
   BetSettingGroups: "Bet Setting Groups",
@@ -360,6 +361,7 @@ window._language_en_US = {
   DesktopChina: "Desktop China",
   DesktopNewAsia: "Desktop New Asia",
   DesktopOthers: "Desktop Others",
+  Detail: "Detail",
   DetailedBetlist: "Detailed Bet list",
   Details: "Details",
   DetailTransaction: "Detail Transaction",
@@ -411,6 +413,7 @@ window._language_en_US = {
   ESportsApp: "E-Sports APP",
   ESportsDesktop: "E-Sports Desktop",
   ESportsMobile: "E-Sports Mobile",
+  ESportsPinGoal: "E-Sports PinGoal",
   Euro: "Euro",
   Event: "Event",
   EventDate: "Event Date",
@@ -430,6 +433,7 @@ window._language_en_US = {
   FileExtensionIncorrect: "Your file&apos;s extension is incorrect, please select an file",
   FileIsNotReady: "The file is not ready, please try again later.",
   FileUploadExceedSize: "The uploaded file should be less than",
+  FinalScore: "Final Score",
   FirstGoal: "First Goal",
   FirstName: "First Name",
   Forecast: "Forecast",
@@ -528,6 +532,7 @@ window._language_en_US = {
   InvalidWinningThreshold: "Invalid Daily Winning Threshold",
   InvalidWinningThresholdBatchCommand: "Invalid Daily Winning Threshold(s): {0} ({1})",
   IPLogin: "IP Login",
+  IpSummary: "IP Summary",
   IsGroupInOriginalCurrency: "Display group breakdown in original currency",
   IsNeutral: "(N)",
   JackpotWonDetails: "Jackpot Won Details",
@@ -538,6 +543,7 @@ window._language_en_US = {
   Jun: "Jun",
   June: "June",
   KeepCurrentComm: "Keep current commission",
+  KOTime: "K.O Time",
   Last: "Last",
   LastBetsMonitoring: "Last Bets Monitoring",
   LastGoal: "Last Goal",
@@ -589,6 +595,7 @@ window._language_en_US = {
   LiveReport: "Live Report",
   LiveReportTitle: "Live Report - {0}, {1} --&gt; {2} - {3}",
   LiveStatus: "Live Status",
+  Location: "Location",
   LocationRestriction: "Location Restriction",
   LocationRestrictionMsg: "Direct Access to this website is restricted. Please contact {0} for further enquiries.",
   Locked: "Locked",
@@ -879,6 +886,7 @@ window._language_en_US = {
   Score: "Score",
   Search: "Search",
   SearchAllPlayers: "Search All Players",
+  SearchByExactlyIp: "Search by Exactly IP",
   SearchResult: "Search Result",
   SelectAtLeastOneCurrencyMsg: "Please select at least one currency!",
   SelectedCustomers: "Selected customers",
@@ -945,6 +953,7 @@ window._language_en_US = {
   TheSettledAndResettledReportNote: "The Settled and Resettled report displays data of settled and resettled tickets based on the selected date range.",
   TheSettledOnlyReportNote: "The Settled report only displays data of the first-time settled tickets based on the selected date range.",
   Thursday: "Thursday",
+  Ticket: "Ticket",
   TicketDetailOf: "Ticket detail of {0}",
   TicketFilter: "Ticket filter",
   TicketList: "Ticket List",
@@ -1053,6 +1062,10 @@ window._language_en_US = {
   ViewBy: "View by",
   ViewDataInMonth: "View data in month",
   Viewin: "View in {0}",
+  Viewin2: "View in",
+  ViewinDetail: "View in Detail",
+  ViewinIPSummary: "View in IP Summary",
+  ViewinSummary: "View in Summary",
   ViewInWithNoParam: "View in",
   ViewNotification: "View Notification",
   Vip: "VIP",
@@ -1115,8 +1128,9 @@ window._language_en_US = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return LangHelper; });
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 const DEFAULT_RESOURCE_NAME = "_language_en_US";
 const langCode = window.PageLanguage || "en-US";
 const resourceName = `_language_${langCode.replace("-", "_")}`;
@@ -1124,19 +1138,15 @@ class LangHelper {
   static get currentLanguage() {
     return langCode;
   }
-
   static getSingleResource(key) {
     var langHandler = window[resourceName];
     return langHandler && langHandler[key] || window[DEFAULT_RESOURCE_NAME] && window[DEFAULT_RESOURCE_NAME][key] || key;
   }
-
   static getResources(keys) {
     var langHandler = window[resourceName];
     return keys.map(key => langHandler && langHandler[key] || window[DEFAULT_RESOURCE_NAME] && window[DEFAULT_RESOURCE_NAME][key] || key);
   }
-
 }
-
 _defineProperty(LangHelper, "languageKeys", {
   eng: "en-US",
   zhCN: "zh-CN"

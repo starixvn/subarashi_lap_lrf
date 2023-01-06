@@ -1,24 +1,21 @@
 ﻿namespace Fanex.Athena.Module.Notification.Api.UnitTests
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Web.Http.Controllers;
-    using System.Web.Script.Serialization;
-
     using Extension.Utility;
-
     using Fanex.Athena.Module.Notification.DTO;
     using Fanex.Athena.Module.Notification.MetaModel;
     using Fanex.Athena.Module.Notification.Service.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.UnitTest.Common.Helpers;
-
+    using Model.Auth;
     using Model.Core.DTO.Common;
     using Model.Core.ResultModel;
-
     using NSubstitute;
-
     using NUnit.Framework;
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using System.Web.Http.Controllers;
+    using System.Web.Script.Serialization;
 
     public class NotificationApiControllerTest
     {
@@ -28,7 +25,7 @@
 
         private const string Language = "Cs";
 
-        private const int MaximumMonthDistance = 5;
+        private static readonly int MaximumMonthDistance = NotificationMetaModel.MaximumMonthRange - 1;
 
         private IMoveBetService _moveBetService;
 
@@ -75,7 +72,7 @@
         }
 
         [Test]
-        public void GetNotificationMessages_WhenCall_ReturnExpectedResult()
+        public async Task GetNotificationMessages_WhenCall_ReturnExpectedResult()
         {
             // Arrange
             var metaModel = new NotificationMetaModel
@@ -101,7 +98,7 @@
             var expectedResult = _serializer.Serialize(expectedResultModel);
 
             // Action
-            var notificationMessages = _apiController.GetNotificationMessages(metaModel);
+            var notificationMessages = await _apiController.GetNotificationMessages(metaModel);
             var result = _serializer.Serialize(notificationMessages);
 
             // Assert
@@ -109,12 +106,13 @@
         }
 
         [Test]
-        public void GetNotificationMessages_WhenCall_ParameterPassedCorrectly()
+        public async Task GetNotificationMessages_WhenCall_ParameterPassedCorrectly()
         {
             // Arrange
             var metaModel = new NotificationMetaModel
             {
-                Language = "en"
+                Language = "en",
+                MessageTypes = "1,2"
             };
             var today = DateTime.Today;
             var expectedMetaModel = new NotificationMetaModel
@@ -126,7 +124,8 @@
                 PageSize = 10,
                 PageIndex = 1,
                 UserName = UserName,
-                LicenseeName = SiteName
+                LicenseeName = SiteName,
+                MessageTypes = "1,2"
             };
 
             NotificationMetaModel passedParam = null;
@@ -137,7 +136,7 @@
             var expectedResult = _serializer.Serialize(expectedMetaModel);
 
             // Action
-            _apiController.GetNotificationMessages(metaModel);
+            await _apiController.GetNotificationMessages(metaModel);
             var result = _serializer.Serialize(passedParam);
 
             // Assert
@@ -145,7 +144,7 @@
         }
 
         [Test]
-        public void MarkNotificationAsRead_WhenCall_ReturnExpectedResult()
+        public async Task MarkNotificationAsRead_WhenCall_ReturnExpectedResult()
         {
             // Arrange
             var metaModel = new NotificationMarkAsReadMetaModel
@@ -172,7 +171,7 @@
             var expectedResult = _serializer.Serialize(expectedResultModel);
 
             // Action
-            var markNotificationAsReadResult = _apiController.MarkNotificationAsRead(metaModel);
+            var markNotificationAsReadResult = await _apiController.MarkNotificationAsRead(metaModel);
             var result = _serializer.Serialize(markNotificationAsReadResult);
 
             // Assert
@@ -180,7 +179,7 @@
         }
 
         [Test]
-        public void MarkNotificationAsRead_WhenCall_ParameterPassedCorrectly()
+        public async Task MarkNotificationAsRead_WhenCall_ParameterPassedCorrectly()
         {
             // Arrange
             var metaModel = new NotificationMarkAsReadMetaModel
@@ -204,7 +203,7 @@
             var expectedResult = _serializer.Serialize(expectedMetaModel);
 
             // Action
-            _apiController.MarkNotificationAsRead(metaModel);
+            await _apiController.MarkNotificationAsRead(metaModel);
             var result = _serializer.Serialize(passedParam);
 
             // Assert
@@ -220,7 +219,12 @@
                 {
                     { "username", UserName },
                     { "sitename", SiteName },
-                    { "language", Language }
+                    { "language", Language },
+                    { "permissions", new List<PortalFunction>
+                    {
+                        new PortalFunction { FunctionKey = "ResultAmendment_Recalculation75" },
+                        new PortalFunction{ FunctionKey = "AbnormalBet"}
+                    }}
                 }
             };
 

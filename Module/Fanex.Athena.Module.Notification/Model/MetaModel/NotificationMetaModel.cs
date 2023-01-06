@@ -6,13 +6,15 @@
 
     public class NotificationMetaModel : IMetaModelValidation
     {
-        private const int MaximumMonthRangeConst = 6;
+        private const int MaximumMonthRangeConst = 2;
 
         public static int MaximumMonthRange => MaximumMonthRangeConst;
 
         public int LicenseeId { get; set; }
 
         public string UserName { get; set; }
+
+        public string MessageTypes { get; set; }
 
         public int PageSize { get; set; }
 

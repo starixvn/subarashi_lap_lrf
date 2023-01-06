@@ -364,4 +364,7 @@
   <data name="newcashoutwinloss" xml:space="preserve">
     <value>实时兑现输赢(新)</value>
   </data>
+  <data name="abnormalbet" xml:space="preserve">
+    <value>非正规注单</value>
+  </data>
 </root>

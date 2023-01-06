@@ -18,6 +18,8 @@
 
         Task<IEnumerable<ReasonGroup>> GetReasonGroupListAsync(string langKey);
 
+        Task<IEnumerable<SubIssue>> GetAbnormalSubIssueAsync(string langKey);
+
         Task<ApiPagingResult<MonitoredPlayerInfo>> GetMonitoredPlayerListAsync(MonitoredPlayerListMetaModel metaModel);
 
         Task<IEnumerable<MonitoredPlayerReachedHistory>> GetMonitoredPlayerReachedHistoryAsync(MonitoredPlayerReachedHistoryMetaModel metaModel);

@@ -168,7 +168,9 @@ define(['common/site', 'moment', 'common/popup', 'extensions/jquery.extension'],
                         addNotificationItems(data);
                     },
                     statusCode: {
-                        403: function () { }
+                        400: function() {},
+                        403: function () {},
+                        500: function() {}
                     }
                 });
             };

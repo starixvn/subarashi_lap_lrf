@@ -3,6 +3,7 @@
     using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Extension.Utility.Interfaces;
+    using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.ResultModel;
     using Fanex.Athena.Module.Notification.DTO;
@@ -16,6 +17,7 @@
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Data;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -23,7 +25,8 @@
     {
         private readonly IDictionary<string, string> _notificationType = new Dictionary<string, string>
         {
-            { nameof(ResultAmendment), "Amendment" }
+            { MessageType.ResettlementNotification , "Amendment" },
+            { MessageType.AbnormalBetNotification , "AbnormalBet" }
         };
 
         private readonly IDictionary<string, string> _supportedLanguage = new Dictionary<string, string>
@@ -57,23 +60,48 @@
             _cacheRefAdapter = cacheRefAdapter;
         }
 
-        public ReportResultModel<NotificationMessage> GetNotificationMessages(NotificationMetaModel metaModel)
+        public async Task<ReportResultModel<NotificationMessage>> GetNotificationMessages(
+            NotificationMetaModel metaModel)
         {
-            var result = GetResultAmendment(metaModel);
-            var dataList = result.DataList.Select(x => new NotificationMessage
+            var result = new ReportResultModel<NotificationMessage>
             {
-                Id = x.Id,
-                DateTime = x.DateTime,
-                Subject = x.Subject,
-                Content = x.Content,
-                Type = _notificationType[nameof(ResultAmendment)]
-            }).ToList();
-
-            return new ReportResultModel<NotificationMessage>
-            {
-                DataList = dataList,
-                TotalRows = result.TotalRows
+                TotalRows = 0,
+                DataList = new List<NotificationMessage>()
             };
+
+            var messageTypes = (metaModel.MessageTypes ?? string.Empty).Split(',');
+
+            if (messageTypes.Length == 0)
+            {
+                return result;
+            }
+
+            if (messageTypes.Contains(MessageType.ResettlementNotification))
+            {
+                // Amendment Notification from OIC API
+                var amendmentResult = GetResultAmendment(metaModel);
+                result.DataList = result.DataList.Concat(amendmentResult.DataList.Select(x => new NotificationMessage
+                {
+                    Id = x.Id,
+                    DateTime = x.DateTime,
+                    Subject = x.Subject,
+                    Content = x.Content,
+                    Type = _notificationType[MessageType.ResettlementNotification]
+                })).OrderByDescending(x => x.DateTime);
+                result.TotalRows += amendmentResult.TotalRows;
+            }
+
+            // Notification from LRF/LAP
+            UpdateMetaModel(metaModel);
+
+            if (!string.IsNullOrEmpty(metaModel.MessageTypes))
+            {
+                var messagesResult = await GetInternalNotification(metaModel);
+                result.DataList = result.DataList.Concat(messagesResult.DataList).OrderByDescending(x => x.DateTime);
+                result.TotalRows += messagesResult.TotalRows;
+            }
+
+            return result;
         }
 
         public ReportResultModel<ResultAmendment> GetResultAmendment(NotificationMetaModel metaModel)
@@ -118,7 +146,53 @@
             };
         }
 
-        public IResultInfo MarkNotificationAsRead(NotificationMarkAsReadMetaModel metaModel)
+        private async Task<ReportResultModel<NotificationMessage>> GetInternalNotification(NotificationMetaModel metaModel)
+        {
+            const string SpKey = "Lrf_MessageListSel";
+            var lang = GetSupportedLanguage(metaModel.Language);
+            var dataList = new List<NotificationMessage>();
+            var totalRows = 0;
+
+            using (var objectDb = _dbFactory.GetObjectDb(SpKey))
+            {
+                objectDb.SetParameterValue("FromDate", metaModel.FromDate);
+                objectDb.SetParameterValue("ToDate", metaModel.ToDate);
+                objectDb.SetParameterValue("UserName", metaModel.UserName);
+                objectDb.SetParameterValue("LicenseeName", metaModel.LicenseeName);
+                objectDb.SetParameterValue("MessageTypes", metaModel.MessageTypes);
+
+                using (var reader = await objectDb.ExecuteReaderAsync())
+                {
+                    while (reader.Read())
+                    {
+                        dataList.Add(new NotificationMessage
+                        {
+                            Id = ReadMessageId(reader),
+                            Subject = Convert.ToString(reader["Subject" + lang]),
+                            Content = Convert.ToString(reader["Content" + lang]),
+                            Type = _notificationType[ReadMessageType(reader).ToString()],
+                            DateTime = ReadEventDate(reader)
+                        });
+                    }
+                }
+
+                totalRows = dataList.Count;
+            }
+
+            return new ReportResultModel<NotificationMessage> { TotalRows = totalRows, DataList = dataList };
+        }
+
+        public async Task<IResultInfo> MarkNotificationAsRead(NotificationMarkAsReadMetaModel metaModel)
+        {
+            if (metaModel.MessageType == _notificationType[MessageType.ResettlementNotification])
+            {
+                return MarkResettlementNotificationAsRead(metaModel);
+            }
+
+            return await MarkInternalNotificationAsRead(metaModel);
+        }
+
+        private IResultInfo MarkResettlementNotificationAsRead(NotificationMarkAsReadMetaModel metaModel)
         {
             var api = new Uri(_appSetting.MarkNotificationAsReadApiUrl);
             var param = $"MessageType={metaModel.MessageType}&MessageId={metaModel.MessageId}&UserName={metaModel.UserName}&LicenseeName={metaModel.LicenseeName}";
@@ -150,6 +224,26 @@
             catch (Exception e)
             {
                 LogError(api + "\nParameter: " + param, e);
+            }
+
+            return result;
+        }
+
+        private async Task<IResultInfo> MarkInternalNotificationAsRead(NotificationMarkAsReadMetaModel metaModel)
+        {
+            var result = new ResultInfo
+            {
+                Code = 0,
+                Message = ViewResources.MessageSuccess
+            };
+
+            const string SpKey = "Lrf_MessageUserIns";
+            using (var objectDb = _dbFactory.GetObjectDb(SpKey))
+            {
+                objectDb.SetParameterValue("MessageId", metaModel.MessageId);
+                objectDb.SetParameterValue("LicenseeName", metaModel.LicenseeName);
+                objectDb.SetParameterValue("UserName", metaModel.UserName);
+                await objectDb.ExecuteNonQueryAsync();
             }
 
             return result;
@@ -187,7 +281,6 @@
 
             return result;
         }
-
 
         public IResultInfo GetFileAttachmentData(NotificationAttachmentMetaModel metaModel)
         {
@@ -266,7 +359,7 @@
                 DataFilePath = token["DataFilePath"].Value<string>(),
                 SessionId = token["SessionId"].Value<string>(),
                 IsRead = token["IsRead"].Value<bool>(),
-                Type = _notificationType[nameof(ResultAmendment)]
+                Type = _notificationType[MessageType.ResettlementNotification]
             };
         }
 
@@ -299,6 +392,59 @@
         {
             const string OtherSportMatchFormat = "{0} No.{1} - {2}";
             return string.Format(OtherSportMatchFormat, _cacheRefAdapter.GetSportName(outputParams["SportType"]), outputParams["MatchCode"], eventDate.ToString("MM/d/yyyy"));
+        }
+
+        private static DateTime ReadEventDate(IDataReader reader)
+        {
+            if (DateTime.TryParse(reader["EventDate"]?.ToString(), out DateTime eventDate))
+            {
+                return eventDate;
+            }
+            return DateTime.Now;
+        }
+
+        private static int ReadMessageId(IDataReader reader)
+        {
+            if (int.TryParse(reader["MessageId"]?.ToString(), out int id))
+            {
+                return id;
+            }
+            return -1;
+        }
+
+        private static int ReadMessageType(IDataReader reader)
+        {
+            if (int.TryParse(reader["MessageType"]?.ToString(), out int type))
+            {
+                return type + 1;
+            }
+            return -1;
+        }
+
+        private static int ParseMessageType(string messageType)
+        {
+            if (int.TryParse(messageType, out int type))
+            {
+                return type - 1;
+            }
+            return 0;
+        }
+
+        private static void UpdateMetaModel(NotificationMetaModel metaModel)
+        {
+            if (!string.IsNullOrEmpty(metaModel.MessageTypes))
+            {
+                var messageTypes = metaModel.MessageTypes.Split(',');
+
+                metaModel.MessageTypes = string.Join(",", messageTypes
+                    .Where(x => !x.Contains(MessageType.ResettlementNotification))
+                    .Select(ParseMessageType));
+            }
+            else
+            {
+
+                metaModel.MessageTypes = string.Empty;
+            }
         }
     }
 }
