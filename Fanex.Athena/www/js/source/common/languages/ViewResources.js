@@ -1,4 +1,4 @@
-﻿// Generated at: 12/28/2022 1:53:12 PM
+﻿// Generated at: 1/6/2023 11:08:04 AM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -142,6 +142,7 @@ CashOutTicketsList:"Cash Out Ticket[s]",
 CashOutTimes:"Cash Out Times",
 CashOutValue:"Cash Out Value",
 CashOutWinLoss:"Cash Out Win Loss",
+CashOutWL_SportNote:"This report supports filter by Sport from 01/01/2023",
 CasinoAPI_UpdateCommError:"Having errors when calling CasinoAPI to update customer commission.",
 CasinoTransfer:"Casino Transfer",
 CasinoTurnover:"Casino Turnover",

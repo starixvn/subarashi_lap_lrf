@@ -17,24 +17,34 @@ import Service from '../common/service';
 import DataService from '@jsroot/lib/DataService';
 import { SubsidiaryViewType, TreeViewOption } from '../../../constants/report'
 import { TreeViewSelect } from '@9softstudio/react-multiselect'
+import DataSourceHelper from '../../../../helpers/dataSourceHelper';
 
 export const FormFilter = props => {
     const [isConvertAllToBaseCurrency, setConvertAllToBaseCurrency] = useState(true);
     const [isExcludeTest, setExcludeTest] = useState(true);
     const [baseCurrencyList, setBaseCurrencyList] = useState(AppData.baseCurrencyList);
     const [reportBy, setReportBy] = useState(1);
-    const {} = props
+    const [disableSport, setDisableSport] = useState(new Date(props.dateRange.fromDate) < AppData.cutOffDate);
 
     useEffect(() => {
     }, []);
 
-    const _onChangeDateRange = (range, isValid = true) => {
+    const onChangeDateRange = (range, isValid = true) => {
         if (isValid) {
             props.setDateRange(range);
+            checkDisableSport(range.startDate.toDate());
         } else {
             const message = LangHelper.getSingleResource("DateRangeExceedMsg").replace("{0}", AppData.dateConstraint.limitedMonthRange);
             alert(message);
         }
+    }
+
+    const checkDisableSport = startDate => {
+        const tempStatus = startDate < AppData.cutOffDate;
+        if(tempStatus && tempStatus !== disableSport) {
+            props.setSelectedSport(AppData.defaultSelectedSport);
+        }
+        setDisableSport(tempStatus);
     }
 
     const _renderDateFilter = () => {
@@ -44,7 +54,7 @@ export const FormFilter = props => {
                 startDate={props.dateRange.fromDate} endDate={props.dateRange.toDate}
                 minDate={dateConstraint.minDate} maxDate={dateConstraint.maxDate}
                 today={props.dateRange.toDate} limitedMonthRange={dateConstraint.limitedMonthRange}
-                onChange={_onChangeDateRange}
+                onChange={onChangeDateRange}
             />
         )
     }
@@ -70,6 +80,24 @@ export const FormFilter = props => {
                 valueField={"Value"}
                 statusField={"Status"}
                 onChange={(currentItem, selectedItemsKey) => onChangeCurrency(selectedItemsKey)} />) : <></>;
+    }
+
+    const _renderSportSelectList = () => {
+        const sportList = AppData.sportList;
+        const dataSource = DataSourceHelper.CreateDataSourceFrom(sportList, props.selectedSport);
+
+        return sportList && sportList.length && (
+            <div className={(disableSport ? "select-disabled" :"")}>
+                <MultipleSelect id="SportList"
+                                hasSearchBox={true}
+                                language={LangHelper.currentLanguage}
+                                dataSource={dataSource}
+                                keyField={"Id"}
+                                valueField={"Value"}
+                                statusField={"Status"}
+                                onChange={(currentItem, selectedItemsKey) => props.setSelectedSport(selectedItemsKey)} />
+            </div>
+        );
     }
 
    const onChangeCurrency = (currencyIdList) => {
@@ -159,9 +187,10 @@ export const FormFilter = props => {
         }
 
         const { fromDate, toDate } = props.dateRange;
-        const { PageSize, SortBy, SortOrder } = props.requestParam;
+        const { SortBy, SortOrder } = props.requestParam;
 
         const selectedCurrencyArray = props.selectedCurrency.split(',');
+        const selectedSportArray = props.selectedSport.split(',');
 
         const currencyText = selectedCurrencyArray.length === AppData.currencyList.length ? 'All' 
             : AppData.currencyList.filter(item => selectedCurrencyArray.includes(item.Id.toString())).map(item => item.Value).join(',');        
@@ -185,14 +214,15 @@ export const FormFilter = props => {
             DrillDownLevel: ReportLevel.MAIN,
             IsExcludedTestData: isExcludeTest,
             SubsidiarySearch: subsidiarySearch,
-            SubsidiaryList: subsidiarySearch ? props.selectedSubsidiary : ""
+            SubsidiaryList: subsidiarySearch ? props.selectedSubsidiary : "",
+            SportIdList: AppData.sportList.length === selectedSportArray.length ? 'All' : props.selectedSport,
         }
     }
 
     
     const isValidModel = () => {
         const result = (!props.subsidiarySearch || !!props.selectedSubsidiary)
-            && !!props.selectedCurrency && !!props.selectedBaseCurrency;
+            && !!props.selectedCurrency && !!props.selectedBaseCurrency && !!props.selectedSport;
         return result;
     }
 
@@ -243,7 +273,7 @@ export const FormFilter = props => {
                     pauseOnFocusLoss={false}
                     style={{ width: "500px" }}
                     transition={Flip} />
-                {showSubsidiarySearch && props.subsidiarySearch && (<div className='col-12 col-sm-3 col-md-2 col-xl-2'>
+                {showSubsidiarySearch && props.subsidiarySearch && (<div className='col-12 col-sm-4 col-md-3 col-xl-2'>
                         <div className="form-group">
                             <label className="label-text">
                                 {AppData.viewType === SubsidiaryViewType.MASTER_MANAGEMENT ? LangHelper.getSingleResource("WhiteLabel") : LangHelper.getSingleResource("Subsidiary")}
@@ -259,6 +289,13 @@ export const FormFilter = props => {
                 </div>
 
                 <div className="col-12 col-sm-4 col-md-2 col-xl-2">
+                        <div className="form-group">
+                            <label className="label-text">{LangHelper.getSingleResource("Sport")}</label>
+                            {_renderSportSelectList()}
+                        </div>
+                    </div>
+
+                <div className="col-12 col-sm-4 col-md-2 col-xl-2">
                     <div className="form-group">
                         <label className="label-text">{LangHelper.getSingleResource("Currency")}</label>
                         {_renderCurrencySelectList()}
@@ -272,7 +309,10 @@ export const FormFilter = props => {
                     </div>
                 </div>
 
-                <div className="col-12 col-sm-4 col-md-3 col-xl-3">
+            </div>
+            <div className="row">
+
+                <div className="col-12 col-sm-4 col-md-3 col-xl-2">
                     <div className="form-group">
                         <CheckBox id="ConvertAllFiguresToBaseCurrency"
                             checked={isConvertAllToBaseCurrency}
@@ -281,8 +321,6 @@ export const FormFilter = props => {
                     </div>
                 </div>
 
-            </div>
-            <div className="row">
                  <div className="col-12 col-sm-4 col-md-3 col-xl-2">
                         <div className="form-group">
                                <label className="label-text">{LangHelper.getSingleResource("ReportBy")}</label>
@@ -334,6 +372,13 @@ export const FormFilter = props => {
                     </div>
                 </>}      
             </div>
+            <div className="row">
+                <div class="col-12 col-sm-4 col-md-3 col-xl-3">
+                    <ul class="list result-note">
+                        <li>{LangHelper.getSingleResource('CashOutWL_SportNote')}</li>
+                    </ul>
+                </div>
+            </div>
 
         </CollapsiblePanel>
         </>);
@@ -341,11 +386,11 @@ export const FormFilter = props => {
     
 
 function mapStateToProps(state) {
-    const { requestParam, dateRange, selectedProduct, selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, userGuideContent, 
+    const { requestParam, dateRange, selectedCurrency, selectedSport, baseCurrencyList, selectedBaseCurrency, selectedStatus, userGuideContent, 
         subsidiarySearch, selectedSubsidiary } = state;
 
     return Object.assign({}, {
-        requestParam, dateRange, selectedProduct, selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, userGuideContent,
+        requestParam, dateRange, selectedCurrency, selectedSport, baseCurrencyList, selectedBaseCurrency, selectedStatus, userGuideContent,
         subsidiarySearch, selectedSubsidiary
     });
 }

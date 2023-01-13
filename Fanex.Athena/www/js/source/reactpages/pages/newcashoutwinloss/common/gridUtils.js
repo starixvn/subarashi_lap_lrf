@@ -5,7 +5,7 @@ import NumberFormat from '@jsroot/lib/numberFormat';
 import LangHelper from '@jsroot/lib/langHelper';
 import { v4 as uuidv4 } from 'uuid';
 
-export const renderHeader = (drilldownLevel) => {
+export const renderHeader = (drilldownLevel, isLicenseeOfferBA) => {
     const gridHeader = [
         <HeaderRow style={{ height: 32 }} key='header1'>
             <HeaderCell colWidth={50} rowSpan="2">#</HeaderCell>
@@ -17,8 +17,8 @@ export const renderHeader = (drilldownLevel) => {
             <HeaderCell colWidth={90} rowSpan="2" sortBy="totalTransaction">{headerText.totalTransaction}</HeaderCell>
             <HeaderCell colWidth={300} colSpan="3">{headerText.customerWL}</HeaderCell>
             <HeaderCell colWidth={110} rowSpan="2" sortBy="licenseeWL">{headerText.licenseeWL}</HeaderCell>
-            <HeaderCell colWidth={100} rowSpan="2" sortBy="baComm">{headerText.BACommission}</HeaderCell>
-            <HeaderCell colWidth={110} rowSpan="2" sortBy="amtDueToBA">{headerText.amtDueToBA}</HeaderCell>
+            {isLicenseeOfferBA && <HeaderCell colWidth={100} rowSpan="2" sortBy="baComm">{headerText.BACommission}</HeaderCell>}
+            {isLicenseeOfferBA && <HeaderCell colWidth={110} rowSpan="2" sortBy="amtDueToBA">{headerText.amtDueToBA}</HeaderCell>}
         </HeaderRow>,
         <HeaderRow style={{ height: 32 }}  key='header2' className='row2'>
             <HeaderCell colWidth={100} sortBy="customerWL">{headerText.winLoss}</HeaderCell>
@@ -29,17 +29,17 @@ export const renderHeader = (drilldownLevel) => {
     return gridHeader;
 }
 
-export const renderDataSection = (dataList, drilldownLevel, handleDrilldown, index = 1) => {
+export const renderDataSection = (dataList, drilldownLevel, isLicenseeOfferBA, handleDrilldown, index = 1) => {
     const dataRows = [];
 
     for (let i = 0; i < dataList.length; i++) {
-        dataRows.push(buildDataRow(dataList[i], drilldownLevel, handleDrilldown, index++));
+        dataRows.push(buildDataRow(dataList[i], drilldownLevel, isLicenseeOfferBA, handleDrilldown, index++));
     }
 
     return dataRows;
 }
 
-export const renderFooter = (data, drilldownLevel) => {
+export const renderFooter = (data, drilldownLevel, isLicenseeOfferBA) => {
     let totalRows = [];
 
     const total = data.totalCurrency,
@@ -54,7 +54,7 @@ export const renderFooter = (data, drilldownLevel) => {
             <Row key={`tr-{currencyName}-${uuidv4()}`} className='fixed-table-total'>
                 {i === 0 && <Cell className='center-align' rowSpan={rowSpan} colSpan={colSpan}>{LangHelper.getSingleResource('Total')}</Cell>}
                 <Cell title={currencyName} className='center-align'>{currencyName}</Cell>
-                {buildCommonRow(item)}
+                {buildCommonRow(item, isLicenseeOfferBA)}
             </Row>
         );
     }
@@ -65,14 +65,14 @@ export const renderFooter = (data, drilldownLevel) => {
     totalRows.push(
         <Row key={`tr-grandtotal-${uuidv4()}`} className='fixed-table-grant-total'>
             <Cell title={`Total in ${dataSummary.currencyName}`} className='center-align' colSpan={summaryColSpan}>{`${LangHelper.getSingleResource('Totalin')} ${dataSummary.currencyName}`}</Cell>
-            {buildCommonRow(dataSummary)}
+            {buildCommonRow(dataSummary, isLicenseeOfferBA)}
         </Row>
     );
 
     return totalRows;
 }
 
-const buildDataRow = (dataItem, drilldownLevel, handleDrilldown, index) => {
+const buildDataRow = (dataItem, drilldownLevel, isLicenseeOfferBA, handleDrilldown, index) => {
     const { date, dateString, externalId, systemId, currency, currencyName } = dataItem;
 
     return (
@@ -89,12 +89,12 @@ const buildDataRow = (dataItem, drilldownLevel, handleDrilldown, index) => {
             {drilldownLevel === 1 && <Cell className="center-align">
                 {currencyName}
             </Cell>}
-            {buildCommonRow(dataItem)}
+            {buildCommonRow(dataItem, isLicenseeOfferBA)}
         </Row>
     )
 }
 
-const buildCommonRow = (dataItem) => {
+const buildCommonRow = (dataItem, isLicenseeOfferBA) => {
     const {turnover, totalTransaction, customerWL, customerComm, customerTotal, licenseeWL, baComm, amtDueToBA} = dataItem
 
     return <>
@@ -104,7 +104,7 @@ const buildCommonRow = (dataItem) => {
         <Cell className="right-align">{NumberFormat.formatDecimal(customerComm)}</Cell>
         <Cell className="right-align">{NumberFormat.formatDecimal(customerTotal)}</Cell>
         <Cell className={`right-align ${licenseeWL < 0 ? "negative" : ""}`}>{NumberFormat.formatDecimal(licenseeWL)}</Cell>
-        <Cell className="right-align">{NumberFormat.formatDecimal(baComm)}</Cell>
-        <Cell className="right-align">{NumberFormat.formatDecimal(amtDueToBA)}</Cell>
+        {isLicenseeOfferBA && <Cell className="right-align">{NumberFormat.formatDecimal(baComm)}</Cell>}
+        {isLicenseeOfferBA && <Cell className="right-align">{NumberFormat.formatDecimal(amtDueToBA)}</Cell>}
     </>
 }

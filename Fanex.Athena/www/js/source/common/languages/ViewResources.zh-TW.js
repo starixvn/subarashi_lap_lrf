@@ -1,4 +1,4 @@
-﻿// Generated at: 12/28/2022 1:53:12 PM
+﻿// Generated at: 1/6/2023 11:08:04 AM
 window._language_zh_TW = {
 AA:"客客",
 AbnormalBet:"非正規註單",
@@ -106,6 +106,7 @@ CashOutTicketsList:"即時兌現注單",
 CashOutTimes:"即時兌現次數",
 CashOutValue:"會員賣出的實際投注額",
 CashOutWinLoss:"即時兌現輸贏",
+CashOutWL_SportNote:"此報告支持從 01/01/2023 開始以運動類型篩選",
 CasinoTransfer:"娛樂城的總轉賬額",
 ChangePassword:"更改密碼",
 ChangeStatus:"更改{0}的狀態",

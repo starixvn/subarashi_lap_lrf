@@ -11,20 +11,19 @@
     var session = DependencyResolver.Current.GetService<ISessionService>();
     bool isOfferCryptoCurrencyLicensee = appSettings.OfferCryptoCurrencyLicensees.Split(',').Contains(session.LicenseeSession.LicenseeName, StringComparer.InvariantCultureIgnoreCase);
 
-    var productOptions = Model.Param.ProductOptions;
-    var selectedProductCode = string.Join(",", productOptions.Where(x => x.Status).Select(x => x.Code).ToArray());
     var offerCurrencyIds = isOfferCryptoCurrencyLicensee ? SystemConstants.BaseCryptoCurrencyListIds : SystemConstants.BaseCurrencyListIds;
     var baseCurrencyList = SystemConstants.BaseCurrencyList
         .Where(_ => offerCurrencyIds.Contains(_.Key))
         .Select(c => new { value = c.Value, label = c.Value }).ToList();
 
     var selectedCurrency = string.Join(",", Model.CurrencyList.Select(x => x.Key).ToArray());
-
     string selectedSubsidiary = Model.ViewType == SubsidiaryViewType.MasterManagement ?
         string.Join(",", Model.SubsidiaryList.SelectMany(x => x.Children.Select(y => y.Value)).Distinct()) : string.Join(",", Model.SubsidiaryList.Select(x => x.Value));
+    var selectedSport = string.Join(",", Model.SportList.Select(x => x.Key).ToArray());
 
     var minDate = Model.ReportSetting.MinDate;
     var maxDate = Model.ReportSetting.MaxDate;
+    var cutOffDate = Model.ReportSetting.CutOffDateString;
 }
 
 @section pagecss {
@@ -38,21 +37,25 @@
 
 @section globaljscode{
     window.initialState = {
-    selectedProduct: '@(selectedProductCode)',
     selectedCurrency:  '@(selectedCurrency)',
     selectedBaseCurrency: '@(ViewBag.DefaultSelectedBaseCurrency)',
-    dateRange: {fromDate: '@Model.Param.FromDate.ToString("MM/dd/yyyy")', toDate: '@Model.Param.ToDate.ToString("MM/dd/yyyy")'},
+    selectedSubsidiary: '@(selectedSubsidiary)',
+    selectedSport:  '@(selectedSport)',
+    dateRange: {fromDate: '@Model.FromDate.ToString("MM/dd/yyyy")', toDate: '@Model.ToDate.ToString("MM/dd/yyyy")'},
     isLoading: false,
     reloadReport: false
     }
     window._AppData = {
+    cutOffDate: new Date('@cutOffDate'),
     subsidiaryList: @Html.Raw(Model.SubsidiaryList.ToJson()),
+    sportList: @Html.Raw(Model.SportList.Select(x => new { Id = x.Key, Value = x.Value, Status = true }).ToJson()),
     viewType: @((byte)Model.ViewType),
-    productOptions: @Html.Raw(productOptions.ToJson()),
     currencyList: @Html.Raw(Model.CurrencyList.Select(x => new { Id = x.Key, Value = x.Value, Status = true }).ToJson()),
     baseCurrencyList: @Html.Raw(baseCurrencyList.ToJson()),
     dateConstraint: {minDate: '@minDate.ToString("MM/dd/yyyy")', maxDate: '@maxDate.ToString("MM/dd/yyyy")', limitedMonthRange: 3},
-    defaultBaseCurrency: '@(ViewBag.DefaultSelectedBaseCurrency)'
+    defaultBaseCurrency: '@(ViewBag.DefaultSelectedBaseCurrency)',
+    defaultSelectedSport:  '@(selectedSport)',
+    IsLicenseeOfferBA: @Json.Encode(Model.IsLicenseeOfferBA)
     };
 }
 <div id="app-container">

@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 12/28/2022 1:53:12 PM
+// Generated at: 1/6/2023 11:08:04 AM
 window._language_zh_CN = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -224,6 +224,7 @@ window._language_zh_CN = {
   CashOutTimes: "即时兑现次数",
   CashOutValue: "会员卖出的实际投注额",
   CashOutWinLoss: "实时兑现输赢",
+  CashOutWL_SportNote: "此报告支持从 01/01/2023 开始以运动类型筛选",
   CasinoTransfer: "娱乐城的总转账额",
   CasinoTurnover: "电子游戏交易额",
   CategoriesSelection: "种类",

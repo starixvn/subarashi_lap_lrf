@@ -9,6 +9,7 @@
     using Fanex.Athena.Model.Core.DTO.Configuration;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.VendorAdapter.Interfaces;
     using Model.Core.DTO.Common;
     using NSubstitute;
     using NUnit.Framework;
@@ -18,6 +19,7 @@
     {
         private IReportSettingService _reportSettingService;
         private ISubsidiaryService _subsidiaryService;
+        private ICacheRefAdapter _cacheRefAdapter;
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
@@ -25,6 +27,7 @@
             base.FixtureSetUp();
             _reportSettingService = Substitute.For<IReportSettingService>();
             _subsidiaryService = Substitute.For<ISubsidiaryService>();
+            _cacheRefAdapter = Substitute.For<ICacheRefAdapter>();
             SetUpDefaultFakeData();
             StubUserSessionData(new UserAuthInfo { CurrencyAgentList = new Dictionary<int, int[]>(), CurrencyList = new Dictionary<int, string>() });
         }
@@ -59,7 +62,7 @@
             var subsidiaryTree = new List<CheckedItem>();
             _subsidiaryService.GetSubsidiaryTree(DefaultUserSession, DefaultLicenseeSession.LicenseeName).Returns(subsidiaryTree);
 
-            return new NewCashOutWinLossReportController(_reportSettingService, _subsidiaryService)
+            return new NewCashOutWinLossReportController(_reportSettingService, _subsidiaryService, _cacheRefAdapter)
             {
                 LangService = LangService,
                 SessionServiceInstance = SessionService,

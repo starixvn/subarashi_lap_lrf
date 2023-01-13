@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 12/21/2022 11:34:59 AM
+﻿// Generated at: 1/6/2023 11:08:04 AM
 window._language_zh_Hans = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -197,6 +197,7 @@ CashOutTicketsList:"即时兑现注单",
 CashOutTimes:"即时兑现次数",
 CashOutValue:"会员卖出的实际投注额",
 CashOutWinLoss:"实时兑现输赢",
+CashOutWL_SportNote:"此报告支持从 01/01/2023 开始以运动类型筛选",
 CasinoTransfer:"娱乐城的总转账额",
 ChangePassword:"更改密码",
 ChangeStatus:"更改 {0}&apos;s 状态",
@@ -318,6 +319,7 @@ ErrorProcessingMsg:"对不起, 处理您的请求时有错误发生。",
 ESportsApp:"电子竞技App",
 ESportsDesktop:"电子竞技 桌机",
 ESportsMobile:"电子竞技 手机",
+ESportsPinGoal:"电竞台",
 Euro:"欧洲版",
 Event:"项目",
 EventDate:"赛事日期",

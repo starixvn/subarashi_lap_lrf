@@ -12,6 +12,8 @@ namespace Fanex.Athena.Model.Core.DTO.Configuration
 
         public string MaxDateString { get; set; }
 
+        public string CutOffDateString { get; set; }
+
         public DateTime MinDate { get; set; }
 
         public DateTime MaxDate { get; set; }
