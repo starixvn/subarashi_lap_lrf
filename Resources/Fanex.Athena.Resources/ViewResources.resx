@@ -3497,4 +3497,7 @@
   <data name="CashOutWL_SportNote" xml:space="preserve">
     <value>This report supports filter by Sport from 01/01/2023</value>
   </data>
+  <data name="ProductJIG" xml:space="preserve">
+    <value>Jili</value>
+  </data>
 </root>

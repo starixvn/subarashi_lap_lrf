@@ -71,7 +71,8 @@
                 { Product.APM, nameof(ViewResources.ProductAPM) },
                 { Product.VS3, nameof(ViewResources.ProductVS3) },
                 { Product.FGGL, nameof(ViewResources.ProductFGGL) },
-                { Product.MXG, nameof(ViewResources.ProductMXG) }
+                { Product.MXG, nameof(ViewResources.ProductMXG) },
+                { Product.JIG, nameof(ViewResources.ProductJIG) }
             };
 
         public static string GetProductCode(int productId)

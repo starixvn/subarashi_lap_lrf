@@ -3073,4 +3073,7 @@
   <data name="CashOutWL_SportNote" xml:space="preserve">
     <value>此报告支持从 01/01/2023 开始以运动类型筛选</value>
   </data>
+  <data name="ProductJIG" xml:space="preserve">
+    <value>吉利电子</value>
+  </data>
 </root>
