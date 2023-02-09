@@ -307,6 +307,8 @@
 
         SGJackpotContribution = 4599,
 
+        SGPromotion = 4598,
+
         AllbetPromotion = 2499,
 
         TIPStreamerTips = 8700

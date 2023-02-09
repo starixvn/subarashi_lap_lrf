@@ -117,7 +117,9 @@ namespace Fanex.Athena.Controllers.Report
                     new CheckedItem { ID = ExtraPayoutMapType.SGJackpotPrize,
                         Name = $"{ViewResources.ResourceManager.GetString(productResource + Product.SG)} - {_cacheRefAdapter.GetBettype((int)BetType.SGJackpotPrize)}", Checked = true },
                     new CheckedItem { ID = ExtraPayoutMapType.SGJackpotContribution,
-                        Name = $"{ViewResources.ResourceManager.GetString(productResource + Product.SG)} - {_cacheRefAdapter.GetBettype((int)BetType.SGJackpotContribution)}", Checked = true }
+                        Name = $"{ViewResources.ResourceManager.GetString(productResource + Product.SG)} - {_cacheRefAdapter.GetBettype((int)BetType.SGJackpotContribution)}", Checked = true },
+                    new CheckedItem { ID = ExtraPayoutMapType.SGPromotion,
+                        Name = $"{ViewResources.ResourceManager.GetString(productResource + Product.SG)} - {_cacheRefAdapter.GetBettype((int)BetType.SGPromotion)}", Checked = true }
                 });
             }
 
