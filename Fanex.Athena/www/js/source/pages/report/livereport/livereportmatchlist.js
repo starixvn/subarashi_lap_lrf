@@ -71,7 +71,8 @@
         let data = $(target).attr('data-drill-down');
         data = $.parseJSON(data);
         url = Site.setLicenseeOptionOriginalParam(url);
-        url = Site.setDateRangeOriginalParam(url);
+        url = QueryString.setParam(url, 'FromDate', $('#FromDate').val());
+        url = QueryString.setParam(url, 'ToDate', $('#ToDate').val());
         url = QueryString.setParam(url, 'CurrencyName', currencyName);
         url = QueryString.setParam(url, 'MatchId', data.MatchId);
         url = QueryString.setParam(url, 'HomeId', data.HomeId);
