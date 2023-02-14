@@ -54,7 +54,7 @@
         [HttpPost]
         [ApiFunctionAuthorization(PermissionKeys.BtcRunning)]
         [ValidationApiRequest(IsValidCurrencyList = true)]
-        [ApiAutoBindMetaModel(BindAgent = true, BindShowingBetFromIP = true, BindProductCodeList = true)]
+        [ApiAutoBindMetaModel(BindAgent = true, ApplySubsidiaryBusiness = true, BindShowingBetFromIP = true, BindProductCodeList = true)]
         public async Task<dynamic> GetByRunning(BaseBettingTicketMetaModel metaModel)
         {
             metaModel.HasPlayerCom = SessionService.LicenseeSession.IsAllowedCustomerComm;

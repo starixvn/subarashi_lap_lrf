@@ -18,6 +18,7 @@ import * as convertAllReducer from '@jsroot/reducers/convertAllReducer'
 import * as userGuideReducer from '@jsroot/reducers/userGuideReducer'
 import * as commonReducer from '../../common/components/reducer';
 import * as ipReducer from './ipReducer';
+import * as subsidiaryReducer from '@jsroot/reducers/subsidiaryReducer'
 
 export default combineReducers(Object.assign(
     gridDataReducer,
@@ -38,5 +39,6 @@ export default combineReducers(Object.assign(
     convertAllReducer,
     userGuideReducer,
     commonReducer,
-    ipReducer
+    ipReducer,
+    subsidiaryReducer
 ));

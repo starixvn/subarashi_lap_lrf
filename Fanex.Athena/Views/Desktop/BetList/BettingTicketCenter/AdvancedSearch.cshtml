@@ -21,6 +21,10 @@
         .Where(_ => offerCurrencyIds.Contains(_.Key))
         .Select(c => new { value = c.Value, label = c.Value }).ToList();
     var selectedCurrency = string.Join(",", Model.CurrencyList.Select(x => x.Key).ToArray());
+
+    var whitelabelList = Model.SubsidiaryList;
+    var subsidiaryList = Model.SubsidiaryList.SelectMany(x => x.Children.Select(y => y.Value)).Distinct();
+    var selectedSubsidiary = string.Join(",", subsidiaryList);
 }
 @section pagecss {
     <link href="@Url.ContentLinkByEnv("/www/css/build/reactpages/betlist/index.css")" rel="stylesheet" type="text/css" />
@@ -41,6 +45,7 @@
     isLoading: false,
     selectedStatus: '@(selectedStatus)',
     selectedLiveStatus: '@(selectedLiveStatus)',
+    selectedSubsidiary: '@(selectedSubsidiary)',
     sportList: [],
     selectedSport: 0,
     selectedMatch: 0,
@@ -54,6 +59,10 @@
     window._AppData = {
     isAllowTxIDColumn: '@ViewBag.IsAllowTxIDColumn.ToString()' === 'True',
     baseCurrencyList: @Html.Raw(baseCurrencyList.ToJson()),
+    subsidiaryViewType: @Model.SubsidiaryViewType,
+    isOneworksMaster: '@Model.IsOneworksMaster' === 'True',
+    whitelabelList: @Html.Raw(whitelabelList.ToJson()),
+    subsidiaryList: @Html.Raw(subsidiaryList.ToJson()),
     liveStatusList: @Html.Raw(Model.LiveStatusList.Select(x => new { Id = x.Key, Value = x.Value, Status = true }).ToJson()),
     statusList: @Html.Raw(Model.StatusList.Select(x => new { Id = x.ID, Value = x.Name, Status = x.Checked }).ToJson()),
     isAllowedCustomerComm: @Model.IsAllowedCustomerComm.ToJson(),

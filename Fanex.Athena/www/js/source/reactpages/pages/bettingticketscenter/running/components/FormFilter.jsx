@@ -18,19 +18,32 @@ import Service from '../../common/lib/Service'
 import UserGuide from '@jsroot/components/UserGuide'
 import { validateBaseCurrency } from '@jsroot/lib/validationHelper'
 
+import { SubsidiaryViewType, TreeViewOption } from '../../../../constants/report'
+import { TreeViewSelect } from '@9softstudio/react-multiselect'
+
 export class FormFilter extends Component {
+    defaultSelectedSubsidiary = AppData.subsidiaryList.join(',');
+    showSubsidiaryDropdown = AppData.subsidiaryViewType !== SubsidiaryViewType.NOT_MANAGEMENT && AppData.subsidiaryList.length > 0;
+    showSubsidiarySearchCheckBox = this.showSubsidiaryDropdown && AppData.subsidiaryViewType === SubsidiaryViewType.MASTER_MANAGEMENT;
+    whiteLabelView = AppData.subsidiaryViewType === SubsidiaryViewType.MASTER_MANAGEMENT && !AppData.isOneworksMaster;
+
     constructor(props) {
         super(props);
 
         this.baseCurrencyList = AppData.baseCurrencyList;
         this.defaultBaseCurrency = props.selectedBaseCurrency;
+
+        this.state = {
+            subsidiarySearch : !this.showSubsidiarySearchCheckBox && this.showSubsidiaryDropdown
+        };
     }
 
     get isValidModel() {
         return !!this.props.selectedProduct
             && !!this.props.selectedStatus
             && !!this.props.selectedCurrency
-            && validateBaseCurrency(this.props.selectedBaseCurrency);
+            && validateBaseCurrency(this.props.selectedBaseCurrency)            
+            && (!this.state.subsidiarySearch || !!this.props.selectedSubsidiary);
     }
 
     submit = (event) => {
@@ -53,6 +66,7 @@ export class FormFilter extends Component {
 
         const { PageSize, SortBy, SortOrder } = this.props.requestParam;
         const baseCurrency = this.baseCurrencyList.find(x => x.value === this.props.selectedBaseCurrency);
+        
         return {
             PageSize: PageSize,
             PageIndex: 1,
@@ -64,7 +78,9 @@ export class FormFilter extends Component {
             SortBy: SortBy,
             SortOrder: SortOrder,
             IsConvertAll: this.props.isConvertAll,
-            BaseCurrencyName: baseCurrency ? baseCurrency.label : ''
+            BaseCurrencyName: baseCurrency ? baseCurrency.label : '',
+            SubsidiarySearch: this.state.subsidiarySearch,
+            SubsidiaryList: this.state.subsidiarySearch ? this.props.selectedSubsidiary : ""
         }
     }
 
@@ -193,6 +209,21 @@ export class FormFilter extends Component {
                 onChange={(currentItem, selectedItemsKey) => this.props.setSelectedStatus(selectedItemsKey)} />);
     }
 
+    _renderSubsidiaryTreeView() {
+        return <TreeViewSelect
+            language={LangHelper.currentLanguage}
+            id="SubsidiaryTreeView"
+            dataSource={AppData.whitelabelList}
+            keyField="Value"
+            valueField="Name"
+            statusField="Checked"
+            texts={{ SelectOptions: "Please select", All: "All", SelectedItemCount: "# selected" }}
+            isAllTextShown={false}
+            hasSearchBox={false}
+            treeViewOption={TreeViewOption}
+            onChange={(currentItem, selectedItemsKey, treeViewList) => this.props.setSubsidiaryList(selectedItemsKey)} />;
+    }
+
     render() {
         const excelButton = <div>
             <i className="icon-excel right" onClick={this.exportExcel} title={LangHelper.getSingleResource("ExportToExcel")}></i>
@@ -202,6 +233,15 @@ export class FormFilter extends Component {
         return (
             <CollapsiblePanel className="page-filter" stickyFooter={excelButton}>
                 <div className="row">
+
+                    {this.showSubsidiaryDropdown && this.state.subsidiarySearch && <div className="col-12 col-md-3 col-sm-4 col-lg-3 col-xl-2">
+                        <div className="form-group">
+                            <label className="label-text">
+                                {this.whiteLabelView ? LangHelper.getSingleResource("WhiteLabel") : LangHelper.getSingleResource("Subsidiary2")}
+                            </label>
+                            {this._renderSubsidiaryTreeView()}
+                        </div>
+                    </div>}
 
                     <div className="col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2">
                         <div className="form-group">
@@ -243,12 +283,25 @@ export class FormFilter extends Component {
                         </div>
                     </div>
 
-                    <div className="col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2">
-                        <div className="form-group">
-                            <label className="label-text">{LangHelper.getSingleResource("Status")}</label>
-                            {this._renderStatusSelectList()}
+                    {!(this.showSubsidiaryDropdown &&  this.state.subsidiarySearch) && (
+                        <div className="col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2">
+                            <div className="form-group">
+                                <label className="label-text">{LangHelper.getSingleResource("Status")}</label>
+                                {this._renderStatusSelectList()}
+                            </div>
                         </div>
-                    </div>
+                    )}
+                </div>
+                <div className="row">
+
+                    {(this.showSubsidiaryDropdown && this.state.subsidiarySearch) && (
+                        <div className="col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2">
+                            <div className="form-group">
+                                <label className="label-text">{LangHelper.getSingleResource("Status")}</label>
+                                {this._renderStatusSelectList()}
+                            </div>
+                        </div>
+                    )}
 
                     <div className="col-12 col-md-2 col-sm-2 col-lg-2 col-xl-1">
                         <div className="form-group">
@@ -257,6 +310,18 @@ export class FormFilter extends Component {
                             </div>
                         </div>
                     </div>
+
+                    {this.showSubsidiarySearchCheckBox && (
+                        <div className='col-12 col-sm-3 col-md-2 col-xl-2'>
+                            <div className="form-group">
+                            <CheckBox id="SubsidiarySearch"
+                                checked={this.state.subsidiarySearch}
+                                onChange={checked => { this.setState({subsidiarySearch : checked}); checked && this.props.setSubsidiaryList(this.defaultSelectedSubsidiary)}}
+                                label={LangHelper.getSingleResource("SubsidiarySearch")} />
+                            </div>
+                        </div>
+                    )}
+
                 </div>
             </CollapsiblePanel>
         )
@@ -267,8 +332,8 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators(ActionCreators, dispatch);
 }
 function mapStateToProps(state) {
-    const { requestParam, selectedProduct, selectedCurrency, selectedBaseCurrency, username, selectedStatus, isConvertAll, userGuideContent } = state;
-    return Object.assign({}, { requestParam, selectedProduct, selectedCurrency, selectedBaseCurrency, username, selectedStatus, isConvertAll, userGuideContent });
+    const { requestParam, selectedProduct, selectedCurrency, selectedBaseCurrency, username, selectedStatus, isConvertAll, userGuideContent, selectedSubsidiary } = state;
+    return Object.assign({}, { requestParam, selectedProduct, selectedCurrency, selectedBaseCurrency, username, selectedStatus, isConvertAll, userGuideContent, selectedSubsidiary });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormFilter);

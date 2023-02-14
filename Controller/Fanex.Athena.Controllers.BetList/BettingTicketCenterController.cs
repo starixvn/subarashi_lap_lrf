@@ -8,6 +8,7 @@
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.BetList.ViewModel;
     using Model.Core.DTO.Common;
@@ -25,14 +26,22 @@
 
         private readonly IAuthorizationService _authService;
 
+        private readonly ISubsidiaryService _subsidiaryService;
+
+        private bool IsOneworksMaster =>
+           SessionServiceInstance.UserSession.UserLevel == UserLevelType.Oneworks
+           && SessionServiceInstance.UserSession.SubsidiaryViewType == (byte)SubsidiaryViewType.NormalManagement;
+
         public BettingTicketCenterController(
             IProductService productService,
             IBalanceUpDataAccess balanceUpDataAccess,
-            IAuthorizationService authService)
+            IAuthorizationService authService,
+            ISubsidiaryService subsidiaryService)
         {
             _productService = productService;
             _balanceUpDataAccess = balanceUpDataAccess;
             _authService = authService;
+            _subsidiaryService = subsidiaryService;
         }
 
         [FunctionAuthorization(
@@ -71,6 +80,8 @@
         {
             var tabList = GetEnableTabList();
             var licenseeSession = SessionServiceInstance.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
+            var subsidiaryList = _subsidiaryService.GetWhiteLabelTree(userSession, licenseeSession.LicenseeName);
 
             var viewModel = new BettingTicketCenterViewModel
             {
@@ -81,6 +92,9 @@
                 MinDate = _balanceUpDataAccess.GetBalanceUp().BalanceUpDay,
                 IsAllowedCustomerComm = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm,
                 SelectedBaseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency,
+                SubsidiaryViewType = IsOneworksMaster ? (byte)SubsidiaryViewType.MasterManagement : userSession.SubsidiaryViewType,
+                IsOneworksMaster = IsOneworksMaster,
+                SubsidiaryList = subsidiaryList,
                 HasExchange = tabList.Any() && HasExchange(),
                 TabList = tabList
             };
@@ -142,6 +156,8 @@
         {
             var tabList = GetEnableTabList();
             var licenseeSession = SessionServiceInstance.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
+            var subsidiaryList = _subsidiaryService.GetWhiteLabelTree(userSession, licenseeSession.LicenseeName);
 
             var viewModel = new BettingTicketCenterViewModel
             {
@@ -150,6 +166,9 @@
                 ProductOptionList = GetProductOptionList(FunctionNames.BettingTicketCenterRunning),
                 IsAllowedCustomerComm = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm,
                 SelectedBaseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency,
+                SubsidiaryViewType = IsOneworksMaster ? (byte)SubsidiaryViewType.MasterManagement : userSession.SubsidiaryViewType,
+                IsOneworksMaster = IsOneworksMaster,
+                SubsidiaryList = subsidiaryList,
                 HasExchange = tabList.Any() && HasExchange(),
                 TabList = tabList
             };
