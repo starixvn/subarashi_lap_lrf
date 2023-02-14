@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using Core.DTO.Common;
     using Core.MetaModel.Product;
+    using Fanex.Athena.Model.Core.DataDomain;
 
     [Serializable]
     public class BettingTicketCenterViewModel
@@ -33,11 +34,19 @@
         public IEnumerable<CheckedItem> StatusList { get; set; }
 
         public IDictionary<int, string> PlatformList { get; set; }
+
         public string SelectedBaseCurrency { get; set; }
+
         public IDictionary<int, string> LiveStatusList { get; set; }
 
         public bool HasExchange { get; set; }
 
         public IEnumerable<string> TabList { get; set; }
+
+        public bool IsOneworksMaster { get; set; }
+
+        public byte SubsidiaryViewType { get; set; }
+
+        public IEnumerable<CheckedItem> SubsidiaryList { get; set; }
     }
 }

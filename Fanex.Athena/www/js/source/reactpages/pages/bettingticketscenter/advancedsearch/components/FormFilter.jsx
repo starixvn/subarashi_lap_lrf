@@ -22,6 +22,9 @@ import Service from '../../common/lib/Service'
 import { ApiUrl } from '../../common/lib/constants'
 import { validateBaseCurrency } from '@jsroot/lib/validationHelper'
 
+import { SubsidiaryViewType, TreeViewOption } from '../../../../constants/report'
+import { TreeViewSelect } from '@9softstudio/react-multiselect'
+
 const ToastMsg = () => (
     <div>
         <div>{LangHelper.getSingleResource("BTCExportExcelMsg1")}</div>
@@ -30,10 +33,19 @@ const ToastMsg = () => (
 )
 
 export class FormFilter extends Component {
+    defaultSelectedSubsidiary = AppData.subsidiaryList.join(',');
+    showSubsidiaryDropdown = AppData.subsidiaryViewType !== SubsidiaryViewType.NOT_MANAGEMENT && AppData.subsidiaryList.length > 0;
+    showSubsidiarySearchCheckBox = this.showSubsidiaryDropdown && AppData.subsidiaryViewType === SubsidiaryViewType.MASTER_MANAGEMENT;
+    whiteLabelView = AppData.subsidiaryViewType === SubsidiaryViewType.MASTER_MANAGEMENT && !AppData.isOneworksMaster;
+
     constructor(props) {
         super(props);
         this.baseCurrencyList = AppData.baseCurrencyList;
         this.defaultBaseCurrency = props.selectedBaseCurrency;
+
+        this.state = {
+            subsidiarySearch : !this.showSubsidiarySearchCheckBox && this.showSubsidiaryDropdown
+        };
     }
 
     componentDidMount() {
@@ -54,7 +66,8 @@ export class FormFilter extends Component {
             && !!this.props.selectedStatus
             && !!this.props.selectedLiveStatus
             && !!this.props.selectedCurrency
-            && validateBaseCurrency(this.props.selectedBaseCurrency);
+            && validateBaseCurrency(this.props.selectedBaseCurrency)
+            && (!this.state.subsidiarySearch || !!this.props.selectedSubsidiary);
     }
 
     isSingleDate = (dateRange) => {
@@ -87,6 +100,7 @@ export class FormFilter extends Component {
 
         const isEnableLeagueMatch = this._isEnableLeagueMatch();
         const baseCurrency = this.baseCurrencyList.find(x => x.value === this.props.selectedBaseCurrency);
+
         return {
             PageSize: PageSize,
             PageIndex: 1,
@@ -106,6 +120,8 @@ export class FormFilter extends Component {
             SortOrder: SortOrder,
             IsConvertAll: this.props.isConvertAll,
             BaseCurrencyName: baseCurrency ? baseCurrency.label : '',
+            SubsidiarySearch: this.state.subsidiarySearch,
+            SubsidiaryList: this.state.subsidiarySearch ? this.props.selectedSubsidiary : "",
             Ip: this.props.ip
         }
     }
@@ -353,6 +369,21 @@ export class FormFilter extends Component {
                 onChange={(currentItem, selectedItemsKey) => this.props.setSelectedLiveStatus(selectedItemsKey)} />);
     }
 
+    _renderSubsidiaryTreeView() {
+        return <TreeViewSelect
+            language={LangHelper.currentLanguage}
+            id="SubsidiaryTreeView"
+            dataSource={AppData.whitelabelList}
+            keyField="Value"
+            valueField="Name"
+            statusField="Checked"
+            texts={{ SelectOptions: "Please select", All: "All", SelectedItemCount: "# selected" }}
+            isAllTextShown={false}
+            hasSearchBox={false}
+            treeViewOption={TreeViewOption}
+            onChange={(currentItem, selectedItemsKey, treeViewList) => this.props.setSubsidiaryList(selectedItemsKey)} />;
+    }
+
     render() {
         const excelButton = <div>
             <i className="icon-excel right" onClick={this.exportExcel} title={LangHelper.getSingleResource("ExportToExcel")}></i>
@@ -367,6 +398,16 @@ export class FormFilter extends Component {
                         pauseOnFocusLoss={false}
                         style={{ width: "500px" }}
                         transition={Flip} />
+
+                    {this.showSubsidiaryDropdown && this.state.subsidiarySearch && <div className="col-12 col-md-3 col-sm-4 col-lg-3 col-xl-2">
+                        <div className="form-group">
+                            <label className="label-text">
+                                {this.whiteLabelView ? LangHelper.getSingleResource("WhiteLabel") : LangHelper.getSingleResource("Subsidiary2")}
+                            </label>
+                            {this._renderSubsidiaryTreeView()}
+                        </div>
+                    </div>}
+
                     <div className="col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource("Date")}</label>
@@ -402,15 +443,22 @@ export class FormFilter extends Component {
                         </div>
                     </div>
 
-                    <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
+                    {!(this.showSubsidiaryDropdown && this.state.subsidiarySearch) && (<div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource("Match")}</label>
                             {this._renderMatchSelectList()}
                         </div>
-                    </div>
+                    </div>)}
 
                 </div>
                 <div className="row">
+
+                    {(this.showSubsidiaryDropdown  && this.state.subsidiarySearch) && (<div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
+                        <div className="form-group">
+                            <label className="label-text">{LangHelper.getSingleResource("Match")}</label>
+                            {this._renderMatchSelectList()}
+                        </div>
+                    </div>)}
 
                     <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
                         <div className="form-group">
@@ -421,6 +469,7 @@ export class FormFilter extends Component {
                                 htmlAttributes={{ placeholder: LangHelper.getSingleResource("ExternalIdOrSystemId") }} />
                         </div>
                     </div>
+
                     <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource("Currency")}</label>
@@ -451,15 +500,24 @@ export class FormFilter extends Component {
                         </div>
                     </div>
 
-                    <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
+                    {!(this.showSubsidiaryDropdown  && this.state.subsidiarySearch) && (<div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource("Live")}</label>
                             {this._renderLiveStatusSelectList()}
                         </div>
-                    </div>
+                    </div>)}
+
                 </div>
 
                 <div className="row">
+
+                    {(this.showSubsidiaryDropdown && this.state.subsidiarySearch) && (<div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
+                        <div className="form-group">
+                            <label className="label-text">{LangHelper.getSingleResource("Live")}</label>
+                            {this._renderLiveStatusSelectList()}
+                        </div>
+                    </div>)}
+
                     <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource("IP")}</label>
@@ -468,6 +526,7 @@ export class FormFilter extends Component {
                                 onChange={(event) => this.props.setIp(event.target.value)} />
                         </div>
                     </div>
+
                     <div className="col-12 col-md-2 col-sm-2 col-lg-2 col-xl-1">
                         <div className="form-group">
                             <div className="button-group">
@@ -475,9 +534,22 @@ export class FormFilter extends Component {
                             </div>
                         </div>
                     </div>
+
+                    {this.showSubsidiarySearchCheckBox && (
+                        <div className='col-12 col-sm-3 col-md-2 col-xl-2'>
+                            <div className="form-group">
+                            <CheckBox id="SubsidiarySearch"
+                                checked={this.state.subsidiarySearch}
+                                onChange={checked => { this.setState({subsidiarySearch : checked}); checked && this.props.setSubsidiaryList(this.defaultSelectedSubsidiary)}}
+                                label={LangHelper.getSingleResource("SubsidiarySearch")} />
+                            </div>
+                        </div>
+                    )}
+
                 </div>
 
                 <div className="row">
+                    
                     <div className="col-1" style={{ flex: "0 0 4%" }}>
                         {LangHelper.getSingleResource('Note')}:
                     </div>
@@ -498,11 +570,12 @@ function mapDispatchToProps(dispatch) {
 }
 function mapStateToProps(state) {
     const { requestParam, dateRange, selectedProduct, sportList, selectedSport, selectedBettype, bettypeList, selectedLeague, leagueList, selectedMatch, matchList,
-        selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, selectedLiveStatus, username, isConvertAll, userGuideContent, ip } = state;
+        selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, selectedLiveStatus, username, isConvertAll, userGuideContent, ip, selectedSubsidiary
+    } = state;
 
     return Object.assign({}, {
         requestParam, dateRange, selectedProduct, sportList, selectedSport, selectedBettype, bettypeList, selectedLeague, leagueList, selectedMatch, matchList,
-        selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, selectedLiveStatus, username, isConvertAll, userGuideContent, ip
+        selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, selectedLiveStatus, username, isConvertAll, userGuideContent, ip, selectedSubsidiary
     });
 }
 

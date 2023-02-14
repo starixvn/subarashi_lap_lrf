@@ -9,6 +9,7 @@ import * as reportTitleAction from '@jsroot/actions/reportTitleAction'
 import * as statusAction from '@jsroot/actions/statusAction'
 import * as convertAllAction from '@jsroot/actions/convertAllAction'
 import * as userGuideAction from '@jsroot/actions/userGuideAction'
+import * as subsidiaryAction from '@jsroot/actions/subsidiaryAction'
 
 export const ActionCreators = Object.assign({},
     gridDataAction,
@@ -21,5 +22,6 @@ export const ActionCreators = Object.assign({},
     reportTitleAction,
     statusAction,
     convertAllAction,
-    userGuideAction
+    userGuideAction,
+    subsidiaryAction
 );

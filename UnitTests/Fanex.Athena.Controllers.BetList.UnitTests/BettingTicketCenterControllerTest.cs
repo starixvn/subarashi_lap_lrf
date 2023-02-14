@@ -13,6 +13,7 @@
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Resources;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     using Model.BetList.ViewModel;
@@ -36,6 +37,8 @@
 
         private IAuthorizationService _authService;
 
+        private ISubsidiaryService _subsidiaryService;
+
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
@@ -43,6 +46,9 @@
 
             _productService = Substitute.For<IProductService>();
             _balanceUpDataAccess = Substitute.For<IBalanceUpDataAccess>();
+            _subsidiaryService = Substitute.For<ISubsidiaryService>();
+            _subsidiaryService.IsIgnoredSubsidiarySearch(Arg.Any<bool>(), Arg.Any<string>(), Arg.Any<UserAuthInfo>())
+            .Returns(true);
             _balanceUpDataAccess.GetBalanceUp().Returns(new BalanceUp
             {
                 BalanceUpDay = BalanceUpDate
@@ -325,7 +331,7 @@
         {
             _authService.CheckProductBelongsTo(SessionService.LicenseeSession.LicenseeName, ProductTypes.Exchange).Returns(hasExchangePermission);
 
-            return new BettingTicketCenterController(_productService, _balanceUpDataAccess, _authService)
+            return new BettingTicketCenterController(_productService, _balanceUpDataAccess, _authService, _subsidiaryService)
             {
                 LangService = LangService,
                 SessionServiceInstance = SessionService

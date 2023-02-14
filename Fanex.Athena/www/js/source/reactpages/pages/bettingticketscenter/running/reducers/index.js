@@ -11,6 +11,7 @@ import * as statusReducer from '@jsroot/reducers/statusReducer'
 import * as convertAllReducer from '@jsroot/reducers/convertAllReducer'
 import * as userGuideReducer from '@jsroot/reducers/userGuideReducer'
 import * as commonReducer from '../../common/components/reducer'
+import * as subsidiaryReducer from '@jsroot/reducers/subsidiaryReducer'
 
 export default combineReducers(Object.assign(
     gridDataReducer,
@@ -24,5 +25,6 @@ export default combineReducers(Object.assign(
     statusReducer,
     convertAllReducer,
     userGuideReducer,
-    commonReducer
+    commonReducer,
+    subsidiaryReducer
 ));

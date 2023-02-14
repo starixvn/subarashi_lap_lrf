@@ -36,7 +36,7 @@
         [HttpPost]
         [ApiFunctionAuthorization(PermissionKeys.BtcAdvancedSearch)]
         [ValidationApiRequest(IsValidCurrencyList = true)]
-        [ApiAutoBindMetaModel(BindAgent = true, BindShowingBetFromIP = true, BindProductCodeList = true)]
+        [ApiAutoBindMetaModel(BindAgent = true, ApplySubsidiaryBusiness = true, BindShowingBetFromIP = true, BindProductCodeList = true)]
         public async Task<dynamic> GetData(AdvancedSearchBetListMetaModel metaModel)
         {
             var licenseeSession = SessionService.LicenseeSession;
