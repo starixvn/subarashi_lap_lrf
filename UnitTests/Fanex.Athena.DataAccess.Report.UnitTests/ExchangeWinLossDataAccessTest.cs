@@ -1,20 +1,15 @@
 ﻿namespace Fanex.Athena.DataAccess.Report
 {
+    using Core.UnitTests.TestHelpers;
+    using Model.Core.DataDomain;
+    using Model.Report.DTO;
+    using Model.Report.MetaModel;
+    using NSubstitute;
+    using NUnit.Framework;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
-    using Core.UnitTests.TestHelpers;
-
-    using Model.Core.DataDomain;
-    using Model.Report.DTO;
-    using Model.Report.MetaModel;
-
-    using NSubstitute;
-
-    using NUnit.Framework;
-
     using UnitTest.Common.Helpers;
 
     public class ExchangeWinLossDataAccessTest : BaseDataAccessHelperTest<ExchangeWinLossDataAccess>
@@ -50,6 +45,7 @@
         {
             // Arrange
             var metaModel = FakeHelper.Create<ExchangeWinLossMetaModel>();
+            metaModel.DateOptionType = 1;
 
             // Action
             await DataAccess.GetMainWinloss(metaModel, UserCurrencyList);
@@ -101,6 +97,7 @@
         {
             // Arrange
             var metaModel = FakeHelper.Create<ExchangeWinLossMetaModel>();
+            metaModel.DateOptionType = 1;
 
             // Action
             await DataAccess.GetLicenseeWinloss(metaModel, UserCurrencyList);
@@ -153,6 +150,7 @@
         {
             // Arrange
             var metaModel = FakeHelper.Create<ExchangeWinLossMetaModel>();
+            metaModel.DateOptionType = 1;
 
             // Action
             await DataAccess.GetCustomerWinloss(metaModel, UserCurrencyList);

@@ -32,7 +32,7 @@
             { BaseCurrencyType.USDT,"USDT" }
         };
 
-        public static readonly List<int> BaseCurrencyListIds = new List<int>
+        public static readonly IReadOnlyList<int> BaseCurrencyListIds = new List<int>
         {
             BaseCurrencyType.Eur,
             BaseCurrencyType.Usd,
@@ -47,7 +47,7 @@
         };
 
 
-        public static readonly List<int> BaseCryptoCurrencyListIds = new List<int>
+        public static readonly IReadOnlyList<int> BaseCryptoCurrencyListIds = new List<int>
         {
             BaseCurrencyType.USDT
         };
