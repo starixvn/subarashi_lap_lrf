@@ -6,12 +6,14 @@
 
 namespace Fanex.Athena.Service.StatelessCore
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
 
     using Fanex.Athena.DataAccess.Core.Common.Interfaces;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -76,6 +78,28 @@ namespace Fanex.Athena.Service.StatelessCore
         public async Task<IList<CheckedItem>> GetBettypesByProduct(int licenseeId, string productCode, string languageCode)
         {
             return await _betTypeDataAccess.GetBettypesByProduct(licenseeId, productCode, languageCode).ConfigureAwait(false);
+        }
+
+        public async Task<IEnumerable<CheckedItem>> GetBetTypeForProducts(int licenseeId, string lang, string productCodes)
+        {
+            var betTypes = await _betTypeDataAccess.GetBetTypeForProducts(licenseeId, productCodes);
+            var result = betTypes.GroupBy(_ => _.ProductCode,
+                _ => new CheckedItem
+                {
+                    Checked = true,
+                    Children = null,
+                    ID = _.BetType,
+                    Name = _cacheRefAdapter.GetBetTypeName(_.BetType, lang),
+                    Value = _.BetType.ToString(),
+                },
+                (key, items) => new CheckedItem
+                {
+                    Checked = true,
+                    Children = items,
+                    Name = DataHelper.GetProductName(key),
+                    Value = key.ToString()
+                });
+            return result;
         }
 
         private static string BuildSportXmlParameter(IEnumerable<SportProductItem> sports)

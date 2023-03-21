@@ -103,5 +103,15 @@ namespace Fanex.Athena.DataAccess.Core.Common
                 return await db.QueryAsync<SportGame>(new { SiteName = siteName, productCodes = productCode });
             }
         }
+
+        public async Task<IEnumerable<SportForTreeViewItem>> GetSportsForTreeView(int licenseeId, string productCodes)
+        {
+            const string UspName = "LAP_Rpt_WinlossAnalysis_SportSel";
+
+            using (var db = this.GetObjectDb(UspName))
+            {
+                return await db.QueryAsync<SportForTreeViewItem>(new {licenseeId= licenseeId, productCodes= productCodes});
+            }
+        }
     }
 }

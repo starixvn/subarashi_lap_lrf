@@ -23,28 +23,31 @@
             CancellationToken cancellationToken,
             Func<Task<HttpResponseMessage>> continuation)
         {
-            try
+            if (actionContext.Request.Method != HttpMethod.Get)
             {
-                var headers = actionContext.Request.Headers;
-                var scope = actionContext.Request.GetDependencyScope();
-                var antiForgeryService = scope.Resolve<IAntiForgeryService>();
-                if (!headers.Contains(KeyName))
+                try
+                {
+                    var headers = actionContext.Request.Headers;
+                    var scope = actionContext.Request.GetDependencyScope();
+                    var antiForgeryService = scope.Resolve<IAntiForgeryService>();
+                    if (!headers.Contains(KeyName))
+                    {
+                        return UnauthorizeAccessHandlerAsync(actionContext);
+                    }
+
+                    var cookie = headers
+                        .GetCookies()
+                        .Select(c => c[AntiForgeryConfig.CookieName])
+                        .FirstOrDefault();
+
+                    var crfsKey = headers.GetValues(KeyName).FirstOrDefault();
+
+                    antiForgeryService.Validate(cookie != null ? cookie.Value : null, crfsKey);
+                }
+                catch (Exception)
                 {
                     return UnauthorizeAccessHandlerAsync(actionContext);
                 }
-
-                var cookie = headers
-                    .GetCookies()
-                    .Select(c => c[AntiForgeryConfig.CookieName])
-                    .FirstOrDefault();
-
-                var crfsKey = headers.GetValues(KeyName).FirstOrDefault();
-
-                antiForgeryService.Validate(cookie != null ? cookie.Value : null, crfsKey);
-            }
-            catch (Exception)
-            {
-                return UnauthorizeAccessHandlerAsync(actionContext);
             }
 
             return continuation?.Invoke();

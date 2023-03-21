@@ -17,5 +17,7 @@ namespace Fanex.Athena.DataAccess.Core.Common.Interfaces
         Task<IEnumerable<SportProductItem>> GetSportsAndProducts(int licenseeId, string languageCode, string productCodes = "");
 
         Task<IEnumerable<SportGame>> GetSportForProductsAsync(string siteName, string productCode);
+
+        Task<IEnumerable<SportForTreeViewItem>> GetSportsForTreeView(int licenseeId, string productCodes);
     }
 }

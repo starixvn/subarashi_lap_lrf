@@ -14,6 +14,8 @@ namespace Fanex.Athena.Service.StatelessCore.Interfaces
 
         Task<IEnumerable<SportProductItem>> GetSportAndProductAndSabaSport(int licenseeId, string languageCode, string productCodes = "");
 
+        Task<IEnumerable<CheckedItem>> GetSportsForTreeView(int licenseeId, string languageCode, string productCodes = "");
+
         IEnumerable<SabaSport> GetSabaSports();
 
         SabaSport GetSabaSport(int id);

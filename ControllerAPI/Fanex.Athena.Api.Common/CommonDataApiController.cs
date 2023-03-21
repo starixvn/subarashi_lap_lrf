@@ -4,17 +4,20 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using System.Web.Caching;
     using System.Web.Http;
 
     using DataAccess.Core.Common.Interfaces;
     using Fanex.Athena.Api.Base.Attributes;
+    using Fanex.Athena.Extension.Utility.Interfaces;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Model.Core.DTO.Configuration;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
 
     using Model.Core.MetaModel.Common;
-
+    using Newtonsoft.Json;
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
 
@@ -24,7 +27,7 @@
     [XFrameOptionApi]
     [FunctionAuthorization(PermissionKeys.BettingTicketCenter)]
     [ApiUMFilter]
-    public class CommonDataApiController : ApiController
+    public class CommonDataApiController : BaseApiController
     {
         private readonly ILanguageService _langService;
 
@@ -40,6 +43,7 @@
         private readonly IPortalApiService _portalApiService;
 
         private readonly IProductService _productService;
+        private readonly ICustomMemoryCacheService _cacheService;
 
 #pragma warning disable S107 // Methods should not have too many parameters
 
@@ -51,7 +55,9 @@
             IBetTypeService betTypeService,
             IPortalApiService portalApiService,
             IProductService productService,
-            ISportService sportService)
+            ISportService sportService,
+            ICustomMemoryCacheService cacheService)
+            : base(langService)
 #pragma warning restore S107 // Methods should not have too many parameters
         {
             _langService = langService;
@@ -62,6 +68,7 @@
             _portalApiService = portalApiService;
             _productService = productService;
             _sportService = sportService;
+            _cacheService = cacheService;
         }
 
         protected override void Initialize(System.Web.Http.Controllers.HttpControllerContext controllerContext)
@@ -99,6 +106,16 @@
         }
 
         [HttpGet]
+        public async Task<IEnumerable<CheckedItem>> GetSportsForTreeView(string productCodes)
+        {
+            if (String.IsNullOrWhiteSpace(productCodes))
+            {
+                return new List<CheckedItem>();
+            }
+            return await _sportService.GetSportsForTreeView(_sessionService.LicenseeSession.LicenseeId, _sessionService.UserSession.Language, productCodes);
+        }
+
+        [HttpGet]
         public async Task<IEnumerable<object>> GetBetTypes(string productCode)
         {
             productCode = _productService.GetAllowedSubProductCodeList(
@@ -111,6 +128,26 @@
                 _sessionService.UserSession.Language).ConfigureAwait(false);
 
             return bettypes.Select(x => new { value = x.ID, label = x.Name, status = true });
+        }
+
+        [HttpGet]
+        public async Task<IHttpActionResult> GetBetTypeInTreeList(string productCodes)
+        {
+            var cacheKey = $"{CacheKey.MemorycacheBetTypeForTreeView}_{productCodes}_{LicenseeSession.LicenseeName}";
+            var jsonBetType = _cacheService.Get<string>(cacheKey);
+            if (!string.IsNullOrWhiteSpace(jsonBetType))
+            {
+                return JsonNetResult(jsonBetType);
+            }
+
+            if (string.IsNullOrEmpty(productCodes))
+            {
+                return JsonNetResult(new List<CheckedItem>());
+            }
+            var betTypeList = await _betTypeService.GetBetTypeForProducts(_sessionService.LicenseeSession.LicenseeId, _sessionService.UserSession.Language, productCodes);
+            var jsonString = JsonConvert.SerializeObject(betTypeList, PascalCassJsonSetting);
+            _cacheService.Set(cacheKey, jsonString);
+            return JsonNetResult(jsonString);
         }
 
         [HttpGet]

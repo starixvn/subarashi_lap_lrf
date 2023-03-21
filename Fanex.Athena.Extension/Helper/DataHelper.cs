@@ -18,7 +18,8 @@ namespace Fanex.Athena.Extension.Helper
 
         public static string GetProductName(string productCode)
         {
-            var resourceKey = "Product" + productCode;
+            var normalizeCodes = string.Join("_", productCode.Split(','));
+            var resourceKey = "Product" + normalizeCodes;
             var resourceManager = ViewResources.ResourceManager;
             resourceManager.IgnoreCase = true;
             return resourceManager.GetString(resourceKey);

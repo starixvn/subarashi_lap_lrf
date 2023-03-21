@@ -1,7 +1,6 @@
 ﻿using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Model.Core.DTO.Common;
 using Fanex.Athena.Model.Customer.MetaModel.CustomerLog;
-using System.Text;
 
 namespace Fanex.Athena.Service.StatelessCore.Extensions
 {
@@ -25,14 +24,14 @@ namespace Fanex.Athena.Service.StatelessCore.Extensions
 
         private static string FormatLogDataToXml(PlayerUpdatingLogMetaModel model)
         {
-            var builder = new StringBuilder();
+            var xml = "";
 
             foreach (var custId in model.ListCustId.Split(','))
             {
-                builder.Append($"<r id=\"{custId}\" log=\"LAP - {model.SiteName} - {model.LicenseeCustId} - {model.ActionDetailId} - {model.Status} - {model.NewValue} - {model.OldValue}\" />");
+                xml += $"<r id=\"{custId}\" log=\"LAP - {model.SiteName} - {model.LicenseeCustId} - {model.ActionDetailId} - {model.Status} - {model.NewValue} - {model.OldValue}\" />";
             }
 
-            return $"<Root>{builder}</Root>";
+            return $"<Root>{xml}</Root>";
         }
     }
 }

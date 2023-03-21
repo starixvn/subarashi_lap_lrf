@@ -126,6 +126,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="WinlossAnalysisReportController.cs" />
     <Compile Include="CasinoTurnoverController.cs" />
     <Compile Include="CustomerSupportTaskReportController.cs" />
     <Compile Include="DailyBetsReportController.cs" />
