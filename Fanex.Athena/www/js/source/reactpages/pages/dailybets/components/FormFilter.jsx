@@ -21,7 +21,6 @@ export const FormFilter = (props) => {
     const [selectedDate, setSelectedDate] = useState(date);
 
     useEffect(() => {
-        console.log('useEffect has been called!');
         setSelectedSport(sportCodeList);
     },[sportCodeList])
 

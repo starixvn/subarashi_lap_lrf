@@ -1,0 +1,50 @@
+import * as types from './types.js'
+
+export const setSelectedVipOnly = (value) => {
+    return {
+        type: types.SET_SELECTED_VIPONLY,
+        data: value
+    }
+}
+
+export const setGroupInOriginalCurrency = (value) => {
+    return {
+        type: types.SET_GROUP_IN_ORIGINAL_CURRENCY,
+        data: value
+    }
+}
+
+export const setExcludeTestData = (value) => {
+    return {
+        type: types.SET_EXCLUDE_TEST_DATA,
+        data: value
+    }
+}
+
+export const setViewCashOutOnly = (value) => {
+    return {
+        type: types.SET_VIEW_CASH_OUNT_ONLY,
+        data: value
+    }
+}
+
+export const setSelectedGroupByOption = (value) => {
+    return {
+        type: types.SET_SELECTED_GROUPBYOPTION,
+        data: value
+    }
+}
+
+export const setSelectedBreakDownByOption = (value) => {
+    return {
+        type: types.SET_SELECTED_BREAKBYOPTION,
+        data: value
+    }
+}
+
+export const setSelectedOddsGroup = (value) => {
+    return {
+        type: types.SET_SELECTED_ODDSGROUP,
+        data: value
+    }
+}

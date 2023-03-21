@@ -1,0 +1,57 @@
+﻿@import "../../components/forms/checkbox";
+@import "../../components/date-range/styles";
+@import "../../components/react-grid";
+@import "../../components/react-multiselect";
+@import "../../components/dropdown";
+@import "../../components/dropdownlabel";
+@import "../../components/autocomplete";
+@import "../../components/popup";
+@import "../../components/_popup-content";
+@import "../../components/tab.scss";
+@import "../../components/custom3rd/react-toastify.scss";
+@import "../../components/forms/radio-buttons";
+
+.table {
+    line-height: inherit;
+}
+
+.caret-block {
+    div {
+        display: inherit;
+    }
+}
+
+.search-option {
+    &.dropdown {
+        .dropdown-menu {
+            .dropdown-item {
+                padding: 0;
+            }
+        }
+    }
+
+    .selection-item {
+        margin-bottom: 0;
+        padding: 5px 10px;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+    }
+
+    .material-icons {
+        font-size: 12px;
+    }
+}
+
+.btn-no-border{
+    background-color: transparent;
+    color: cornflowerblue;
+    box-shadow: none;
+    border-radius: 0px;
+}
+
+.table > tbody tr.grant-total-row td
+{
+    background: #9eb4c3;
+    font-weight: bold;
+}

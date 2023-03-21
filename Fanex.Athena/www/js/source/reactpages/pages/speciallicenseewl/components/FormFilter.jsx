@@ -123,7 +123,7 @@ export class FormFilter extends Component {
                     }
             </div>
         );
-                    }
+    }
 
     _renderProductSelectList() {
         const productOptions = AppData.productOptions;
