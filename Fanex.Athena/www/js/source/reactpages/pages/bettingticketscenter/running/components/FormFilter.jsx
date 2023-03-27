@@ -237,7 +237,7 @@ export class FormFilter extends Component {
                     {this.showSubsidiaryDropdown && this.state.subsidiarySearch && <div className="col-12 col-md-3 col-sm-4 col-lg-3 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">
-                                {this.whiteLabelView ? LangHelper.getSingleResource("WhiteLabel") : LangHelper.getSingleResource("Subsidiary2")}
+                                {this.whiteLabelView ? LangHelper.getSingleResource("WhiteLabel") : LangHelper.getSingleResource("Subsidiary")}
                             </label>
                             {this._renderSubsidiaryTreeView()}
                         </div>

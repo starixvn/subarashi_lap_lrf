@@ -1,4 +1,4 @@
-﻿// Generated at: 2/6/2023 5:20:18 PM
+﻿// Generated at: 3/27/2023 10:57:47 AM
 window._language_zh_TW = {
 AA:"客客",
 AbnormalBet:"非正規註單",
@@ -589,7 +589,8 @@ Status:"狀態",
 Su:"Su",
 Submit:"提交",
 Subsidiary:"子網站",
-SubsidiaryPerformance:"子網站報告",
+SubsidiaryPerformance:"子網站綜合報表",
+SubsidiarySearch:"收尋子網站",
 SubsidiaryWL:"子網站輸贏",
 Summary:"摘要",
 Sunday:"星期六",
@@ -702,6 +703,7 @@ Wap:"WAP",
 We:"We",
 Wednesday:"星期三",
 Welcome:"歡迎",
+WhiteLabel:"包網商",
 WinLoss:"獨贏",
 WinLossByBetType:"投注類別輸贏",
 WinLossByBetTypeTitle:"投注類別輸贏, {0} --&gt; {1} - {2}",

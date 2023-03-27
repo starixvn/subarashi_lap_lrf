@@ -1926,11 +1926,11 @@
   </data>
   <data name="Subsidiary" xml:space="preserve">
     <value>子网站</value>
-    <comment>95177</comment>
+    <comment>163255</comment>
   </data>
   <data name="SubsidiaryPerformance" xml:space="preserve">
-    <value>子网站报告</value>
-    <comment>95177</comment>
+    <value>子网站综合报表</value>
+    <comment>163255</comment>
   </data>
   <data name="SubsidiaryWL" xml:space="preserve">
     <value>子网站输赢</value>
@@ -2491,7 +2491,8 @@
     <value>玩家管理</value>
   </data>
   <data name="SubsidiarySearch" xml:space="preserve">
-    <value>子网站搜寻</value>
+    <value>收寻子网站</value>
+    <comment>163255</comment>
   </data>
   <data name="TurnoverPercent" xml:space="preserve">
     <value>%交易额</value>
@@ -2842,9 +2843,6 @@
     <value>系统正在维护中，此功能从 {0} 到 {1} （香港时间 GMT +8）将无法更新。很抱歉造成您的困扰。</value>
     <comment>ignorejs</comment>
   </data>
-  <data name="Subsidiary2" xml:space="preserve">
-    <value>子代理</value>
-  </data>
   <data name="ProductBTC" xml:space="preserve">
     <value>比特币</value>
   </data>
@@ -3072,6 +3070,10 @@
   </data>
   <data name="CashOutWL_SportNote" xml:space="preserve">
     <value>此报告支持从 01/01/2023 开始以运动类型筛选</value>
+  </data>
+  <data name="WhiteLabel" xml:space="preserve">
+    <value>包网商</value>
+    <comment>163255</comment>
   </data>
   <data name="ProductJIG" xml:space="preserve">
     <value>吉利电子</value>

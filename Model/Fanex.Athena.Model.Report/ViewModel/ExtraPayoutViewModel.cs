@@ -1,5 +1,6 @@
 ﻿namespace Fanex.Athena.Model.Report.ViewModel
 {
+    using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.DTO.Configuration;
     using Fanex.Athena.Model.Core.ViewModel;
@@ -15,5 +16,9 @@
         public IDictionary<int, string> Sports { get; set; }
 
         public IEnumerable<CheckedItem> PromotionTypeList { get; set; }
+
+        public SubsidiaryViewType ViewType { get; set; }
+
+        public IEnumerable<CheckedItem> SubsidiaryList { get; set; }
     }
 }

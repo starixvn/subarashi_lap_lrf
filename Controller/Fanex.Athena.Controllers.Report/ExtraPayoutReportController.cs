@@ -6,6 +6,7 @@ using Fanex.Athena.Model.Core.MetaModel.Product;
 using Fanex.Athena.Model.Report.MetaModel;
 using Fanex.Athena.Model.Report.ViewModel;
 using Fanex.Athena.Resources;
+using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
 using Fanex.Athena.VendorAdapter.Interfaces;
 using Fanex.Athena.Web.ActionFilter;
@@ -20,14 +21,17 @@ namespace Fanex.Athena.Controllers.Report
     {
         private readonly IReportSettingService _reportSettingService;
         private readonly ICacheRefAdapter _cacheRefAdapter;
+        private readonly ISubsidiaryService _subsidiaryService;
 
         public ExtraPayoutReportController(
             IReportSettingService reportSettingService,
-            ICacheRefAdapter cacheRefAdapter
+            ICacheRefAdapter cacheRefAdapter,
+            ISubsidiaryService subsidiaryService
             )
         {
             _reportSettingService = reportSettingService;
             _cacheRefAdapter = cacheRefAdapter;
+            _subsidiaryService = subsidiaryService;
         }
 
         public ActionResult Index()
@@ -40,6 +44,8 @@ namespace Fanex.Athena.Controllers.Report
                licenseeSession.LicenseeId,
                userSession.Language,
                FunctionNames.ExtraPayout);
+            var subsidiaryList = _subsidiaryService.GetWhiteLabelTree(userSession, licenseeSession.LicenseeName);
+            var viewType = !subsidiaryList.Any() ? SubsidiaryViewType.NotManagement : (SubsidiaryViewType)userSession.SubsidiaryViewType;
 
             var param = new ExtraPayoutMetaModel
             {
@@ -54,8 +60,11 @@ namespace Fanex.Athena.Controllers.Report
                 Param = param,
                 CurrencyList = userSession.CurrencyList,
                 IsAllowedCustomerCommission = licenseeSession.IsAllowedCustomerComm,
-                ReportSetting = reportSetting
+                ReportSetting = reportSetting,
+                ViewType = viewType,
+                SubsidiaryList = subsidiaryList
             };
+
             ViewBag.DefaultSelectedBaseCurrency = userSession.DefaultBaseCurrency;
 
             return View("~/Views/Desktop/Report/ExtraPayout/Main.cshtml", model);

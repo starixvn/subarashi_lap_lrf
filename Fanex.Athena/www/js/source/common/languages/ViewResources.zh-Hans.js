@@ -1,4 +1,4 @@
-﻿// Generated at: 2/6/2023 5:20:18 PM
+﻿// Generated at: 3/27/2023 10:57:47 AM
 window._language_zh_Hans = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -592,7 +592,8 @@ Status:"状态",
 Su:"Su",
 Submit:"提交",
 Subsidiary:"子网站",
-SubsidiaryPerformance:"子网站报告",
+SubsidiaryPerformance:"子网站综合报表",
+SubsidiarySearch:"收寻子网站",
 SubsidiaryWL:"子网站输赢",
 Summary:"摘要",
 Sunday:"星期六",
@@ -704,6 +705,7 @@ Wap:"WAP",
 We:"We",
 Wednesday:"星期三",
 Welcome:"欢迎",
+WhiteLabel:"包网商",
 WinLoss:"输赢",
 WinLossByBetType:"投注类别输赢",
 WinLossByBetTypeTitle:"投注类别输赢, {0} --&gt; {1} - {2}",

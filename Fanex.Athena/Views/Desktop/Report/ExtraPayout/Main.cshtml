@@ -20,6 +20,7 @@
         .Select(c => new { value = c.Value, label = c.Value }).ToList();
 
     var selectedCurrency = string.Join(",", Model.CurrencyList.Select(x => x.Key).ToArray());
+    string selectedSubsidiary = string.Join(",", Model.SubsidiaryList.SelectMany(x => x.Children.Select(y => y.Value)).Distinct());
 
     var minDate = Model.ReportSetting.MinDate;
     var maxDate = Model.ReportSetting.MaxDate;
@@ -41,14 +42,18 @@
     selectedBaseCurrency: '@(ViewBag.DefaultSelectedBaseCurrency)',
     dateRange: {fromDate: '@Model.Param.FromDate.ToString("MM/dd/yyyy")', toDate: '@Model.Param.ToDate.ToString("MM/dd/yyyy")'},
     isLoading: false,
-    reloadReport: false
+    reloadReport: false,
+    selectedSubsidiary: '@(selectedSubsidiary)',
     }
     window._AppData = {
     productOptions: @Html.Raw(productOptions.ToJson()),
     currencyList: @Html.Raw(Model.CurrencyList.Select(x => new { Id = x.Key, Value = x.Value, Status = true }).ToJson()),
     baseCurrencyList: @Html.Raw(baseCurrencyList.ToJson()),
     dateConstraint: {minDate: '@minDate.ToString("MM/dd/yyyy")', maxDate: '@maxDate.ToString("MM/dd/yyyy")', limitedMonthRange: 3},
-    defaultBaseCurrency: '@(ViewBag.DefaultSelectedBaseCurrency)'
+    defaultBaseCurrency: '@(ViewBag.DefaultSelectedBaseCurrency)',
+    subsidiaryList: @Html.Raw(Model.SubsidiaryList.ToJson()),
+    selectedSubsidiary: '@(selectedSubsidiary)',
+    viewType: @((byte)Model.ViewType),
     };
 }
 <div id="app-container">
