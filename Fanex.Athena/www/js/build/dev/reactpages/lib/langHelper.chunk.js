@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 1/6/2023 11:08:04 AM
+// Generated at: 2/6/2023 5:20:18 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -809,6 +809,7 @@ window._language_en_US = {
   ProductGDG: "GDG",
   ProductHB: "Habanero",
   ProductI4D: "Togel 4D",
+  ProductJIG: "Jili",
   ProductJK: "Joker",
   ProductKN: "RNG Keno",
   ProductLC: "Live Casino",

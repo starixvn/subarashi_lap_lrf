@@ -1,4 +1,4 @@
-﻿// Generated at: 1/6/2023 11:08:04 AM
+﻿// Generated at: 2/6/2023 5:20:18 PM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -644,6 +644,7 @@ ProductFW:"GG捕鱼",
 ProductGD:"GD真人娱乐场",
 ProductGDG:"金大门",
 ProductHB:"HB电子",
+ProductJIG:"吉利电子",
 ProductKN:"快乐彩",
 ProductLT:"彩票",
 ProductNG:"百练赛",

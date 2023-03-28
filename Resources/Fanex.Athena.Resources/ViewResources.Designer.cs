@@ -6541,6 +6541,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Jili.
+        /// </summary>
+        public static string ProductJIG {
+            get {
+                return ResourceManager.GetString("ProductJIG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Joker.
         /// </summary>
         public static string ProductJK {
@@ -8829,15 +8838,6 @@ namespace Fanex.Athena.Resources {
         /// <summary>
         ///   Looks up a localized string similar to View in.
         /// </summary>
-        public static string ViewInWithNoParam {
-            get {
-                return ResourceManager.GetString("ViewInWithNoParam", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to View in.
-        /// </summary>
         public static string Viewin2 {
             get {
                 return ResourceManager.GetString("Viewin2", resourceCulture);
@@ -8868,6 +8868,15 @@ namespace Fanex.Athena.Resources {
         public static string ViewinSummary {
             get {
                 return ResourceManager.GetString("ViewinSummary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View in.
+        /// </summary>
+        public static string ViewInWithNoParam {
+            get {
+                return ResourceManager.GetString("ViewInWithNoParam", resourceCulture);
             }
         }
         

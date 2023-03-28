@@ -89,8 +89,10 @@ namespace Fanex.Athena.Model.Core.DataDomain
         public const int VS3 = 49;
 
         public const int FGGL = 176;
-        
+
         public const int MXG = 60;
+
+        public const int JIG = 75;
 
         public const int Parlay = 999;
     }

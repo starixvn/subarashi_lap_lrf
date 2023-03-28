@@ -104,6 +104,8 @@ namespace Fanex.Athena.Model.Core.DTO.Common
 
         public const string TIP = "TIP";
 
+        public const string JIG = "JIG";
+
         #endregion Field
 
         #region Constructor

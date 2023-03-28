@@ -1,4 +1,4 @@
-﻿// Generated at: 1/6/2023 11:07:56 AM
+﻿// Generated at: 2/6/2023 5:20:10 PM
 var _language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -720,6 +720,7 @@ ProductGD:"Gold Deluxe",
 ProductGDG:"GDG",
 ProductHB:"Habanero",
 ProductI4D:"Togel 4D",
+ProductJIG:"Jili",
 ProductJK:"Joker",
 ProductKN:"RNG Keno",
 ProductLC:"Live Casino",
