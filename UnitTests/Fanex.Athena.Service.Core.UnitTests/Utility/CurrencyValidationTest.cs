@@ -55,24 +55,6 @@ namespace Fanex.Athena.Service.Core.UnitTests.Utility
             Assert.AreEqual(result, expected);
         }
 
-        [TestCase(CurrencyType.Cny, LicenseeIdentity.KeenOcean, true)]
-        [TestCase(CurrencyType.Cny, LicenseeIdentity.OneTwoBet, false)]
-        [TestCase(100, 1, false)]
-        [TestCase(2, 1, true)]
-        public void IsValidCurrency_WhenCallWithKeanOcean_ReturnExpectedResult(int currencyId,
-            int licenseeId,
-        bool expected)
-        {
-            //Arrange
-            _sessionService.LicenseeSession.Returns(new LicenseeAuthInfo { LicenseeId = licenseeId });
-
-            //Action
-
-            var result = _currencyValidation.IsValidCurrency(currencyId, true);
-            //Assert
-            Assert.AreEqual(result, expected);
-        }
-
         [TestCase("", true, true)]
         [TestCase("", false, false)]
         [TestCase("usd", false, true)]

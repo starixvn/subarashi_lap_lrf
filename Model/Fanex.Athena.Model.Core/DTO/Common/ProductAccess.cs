@@ -1,6 +1,4 @@
-﻿
-
-namespace Fanex.Athena.Model.Core.DTO.Common
+﻿namespace Fanex.Athena.Model.Core.DTO.Common
 {
     using System;
     using System.Collections.Generic;
@@ -118,14 +116,6 @@ namespace Fanex.Athena.Model.Core.DTO.Common
             get
             {
                 return ProductList.Any(p => p.ProductCode == Product.JK);
-            }
-        }
-
-        public bool IsAllowGDG
-        {
-            get
-            {
-                return ProductList.Any(p => p.ProductCode == Product.GDG);
             }
         }
 

@@ -141,7 +141,6 @@
     <Compile Include="Utility\AuthParameterHelper.cs" />
     <Compile Include="BetListApiClient.cs" />
     <Compile Include="Utility\FunctionUMHelper.cs" />
-    <Compile Include="Utility\KeanOceanBusinessHelper.cs" />
     <Compile Include="Utility\SubsidiaryManagementHelper.cs" />
     <Compile Include="StatelessValidationService.cs" />
   </ItemGroup>

@@ -80,28 +80,6 @@
             return new ProductAccess(productList);
         }
 
-        public ProductAccess GetProductAccessForActiveCustomerSummary(int licenseeId, string languageCode)
-        {
-            const string FilterFunctionName = "ActiveCustomerSummary";
-
-            var cacheKey = CacheKey.MemorycacheActiveCustomerSummaryProduct + licenseeId + languageCode;
-            var products = _cache.Get<IList<Product>>(cacheKey);
-
-            if (products == null)
-            {
-                products = _productDataAccess.GetProductAccessList(licenseeId, true);
-                var allowedProducts = GetAllowedProducts(FilterFunctionName);
-                if (allowedProducts.Any())
-                {
-                    products = products.Where(i => i.IsOfferedSingleWallet && allowedProducts.Contains(i.ProductCode)).ToList();
-                }
-
-                _cache.Set(cacheKey, products);
-            }
-
-            return new ProductAccess(products);
-        }
-
         #endregion
 
         public string[] GetAllowedProducts(string functionName = null)

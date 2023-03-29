@@ -68,10 +68,7 @@
     <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActiveCustomerSummaryDataAccessTest.cs" />
     <Compile Include="AgCasinoBalanceDataAccessTest.cs" />
-    <Compile Include="CashOutWinLossDataAccessTest.cs" />
-    <Compile Include="ColossusBetsWinLossDataAccessTest.cs" />
     <Compile Include="CasinoTurnoverDataAccessTest.cs" />
     <Compile Include="CustomerPendingFundsDataAccessTest.cs" />
     <Compile Include="CustomerTurnoverDataAccessTest.cs" />

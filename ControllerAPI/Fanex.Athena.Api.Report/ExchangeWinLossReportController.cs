@@ -38,7 +38,7 @@
         }
 
         [HttpPost]
-        [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
+        [ValidationApiRequest(IsValidCurrency = true)]
         [ApiAutoBindMetaModel(BindAgent = true, ApplySubsidiaryBusiness = true)]
         public async Task<dynamic> Index(ExchangeWinLossMetaModel metaModel)
         {

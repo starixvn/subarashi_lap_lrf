@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 3/27/2023 10:57:47 AM
+// Generated at: 4/11/2023 3:34:09 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -105,7 +105,6 @@ window._language_en_US = {
   ActivateVip: "Activate VIP",
   Active: "Active",
   ActiveCustomers: "Active Customers",
-  ActiveCustomerSummary: "Active Customer Summary",
   ActualStake: "Actual Stake",
   AD: "AD",
   AddContact: "Add Contact",
@@ -262,8 +261,6 @@ window._language_en_US = {
   Close: "close",
   Closed: "Closed",
   ClosingBalance: "Closing Balance",
-  ColossusBetBetListDetailMsg: "Member owned {0}% of this ticket&lt;br/&gt;Member sold {1}% of this ticket for {2}",
-  ColossusBetsWinLoss: "Colossus Bets Win Loss",
   Columns: "Columns",
   Comm: "Comm",
   CommIsClear: "Commission of customers is cleared.",
@@ -367,15 +364,7 @@ window._language_en_US = {
   Details: "Details",
   DetailTransaction: "Detail Transaction",
   DH: "DH",
-  DisableAgCasino: "Disable AG Casino",
-  DisableAllBet: "Disable AllBet",
-  DisableColossusBets: "Disable Colossus Bets",
-  DisableFishingWorld: "Disable Fishing World",
-  DisableGoldDeluxe: "Disable Gold Deluxe",
-  DisableMacau: "Disable Macau",
-  DisableMacauGames: "Disable Macau Games",
   DisableParlay: "Disable Parlay",
-  DisableProduct: "Disable {0}",
   DisableRNGCasino: "Disable RNG Casino",
   DiscountValue: "Discount Value",
   Dontshowagain: "Don&apos;t show again",
@@ -395,16 +384,6 @@ window._language_en_US = {
   EffectiveBettingValueNote: "Effective Betting Value supports data from 09/01/2014",
   EitherSystemIdOrExternalIdIsRequired: "Either System ID or External ID is required",
   Email: "Email",
-  EnableAgCasino: "Enable AG Casino",
-  EnableAllBet: "Enable AllBet",
-  EnableBetTrade: "Enable BetTrade",
-  EnableCashOut: "Enable Cash Out",
-  EnableColossusBets: "Enable Colossus Bets",
-  EnableFishingWorld: "Enable Fishing World",
-  EnableGoldDeluxe: "Enable Gold Deluxe",
-  EnableMacau: "Enable Macau",
-  EnableMacauGames: "Enable Macau Games",
-  EnableProduct: "Enable {0}",
   EnableRNGCasino: "Enable RNG Casino",
   EndDate: "End Date",
   Entered: "Entered",
@@ -465,9 +444,6 @@ window._language_en_US = {
   GetAllRunningTickets: "Get all running tickets",
   Go: "Go",
   GodOfFortuneWinLoss: "God of Fortune Win Loss",
-  GoldDeluxeNotOfferCurrency: "Gold Deluxe is not offered for this currency.",
-  GoldDeluxeWinLoss: "Gold Deluxe Win Loss",
-  GoldDeluxeWinLossGuidelineContent: "Any query before 4PM GMT-4 will return the data up to 4PM of the day before. You can filter data up to 3 months per query.",
   GotoCustomerList: "Go to Customer List",
   GrandPrizeNote: "Grand Prize: the grand winning amount which is excluded from member balance",
   GrandTotal: "Grand Total",
@@ -798,15 +774,11 @@ window._language_en_US = {
   ProductBT: "Bet Trade",
   ProductBTC: "Bitcoin",
   ProductBX: "Exchange",
-  ProductCB: "Colossus Bets",
   ProductCC: "Arcadia Gaming",
   ProductCG: "CG",
   ProductCO: "Cash Out",
   ProductCS: "Saba Casino",
   ProductFGGL: "FGG",
-  ProductFW: "Fishing World",
-  ProductGD: "Gold Deluxe",
-  ProductGDG: "GDG",
   ProductHB: "Habanero",
   ProductI4D: "Togel 4D",
   ProductJIG: "Jili",
@@ -1025,7 +997,6 @@ window._language_en_US = {
   UpdateCurrencySuccessfulMsg: "Updating Currencies is successful.",
   UpdateCustomerCommission: "Update Customer Commission",
   UpdateFunctionSuccessfulMsg: "Updating Functions is successul.",
-  UpdateGoldDeluxeBetSettings: "Are you sure you want to update all Gold Deluxe bet settings?",
   UpdateKenoBetSettings: "Are you sure you want to update all RNG Keno bet settings?",
   UpdateKenoBetSettingSuccessMsg: "The RNG Keno bet setting of {0} was updated successfully",
   UpdateNumberGameBetSettings: "Are you sure you want to update all Number Game bet settings?",
@@ -1129,8 +1100,9 @@ window._language_en_US = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return LangHelper; });
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 const DEFAULT_RESOURCE_NAME = "_language_en_US";
 const langCode = window.PageLanguage || "en-US";
 const resourceName = `_language_${langCode.replace("-", "_")}`;
@@ -1138,19 +1110,15 @@ class LangHelper {
   static get currentLanguage() {
     return langCode;
   }
-
   static getSingleResource(key) {
     var langHandler = window[resourceName];
     return langHandler && langHandler[key] || window[DEFAULT_RESOURCE_NAME] && window[DEFAULT_RESOURCE_NAME][key] || key;
   }
-
   static getResources(keys) {
     var langHandler = window[resourceName];
     return keys.map(key => langHandler && langHandler[key] || window[DEFAULT_RESOURCE_NAME] && window[DEFAULT_RESOURCE_NAME][key] || key);
   }
-
 }
-
 _defineProperty(LangHelper, "languageKeys", {
   eng: "en-US",
   zhCN: "zh-CN"

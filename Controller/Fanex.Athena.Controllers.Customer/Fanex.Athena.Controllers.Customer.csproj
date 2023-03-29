@@ -122,11 +122,9 @@
     <Compile Include="PlayerSegmentation\PlayerSegmentation.BetList.Controller.cs" />
     <Compile Include="PlayerSegmentation\PlayerSegmentationController.cs" />
     <Compile Include="SearchCustomerAPIController.cs" />
-    <Compile Include="CustomerAPIController.cs" />
     <Compile Include="CustomerComGroupController.cs">
       <SonarQubeExclude>true</SonarQubeExclude>
     </Compile>
-    <Compile Include="CustomerController.cs" />
     <Compile Include="CustomerLog\CustomerLogController.cs" />
     <Compile Include="CustomerLog\CustomerLogController.CustomerSetting.cs" />
     <Compile Include="CustomerLog\CustomerLogController.GroupCommission.cs" />

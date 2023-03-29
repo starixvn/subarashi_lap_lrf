@@ -237,10 +237,6 @@
     <value>赛果</value>
     <comment>Results</comment>
   </data>
-  <data name="customerlist43" xml:space="preserve">
-    <value>会员列表</value>
-    <comment>Customer List</comment>
-  </data>
   <data name="manageaccount46" xml:space="preserve">
     <value>管理帐户</value>
     <comment>Manage Account</comment>
@@ -293,10 +289,6 @@
     <value>帐户管理</value>
     <comment>ACCOUNT MANAGEMENT</comment>
   </data>
-  <data name="activecustomersummary64" xml:space="preserve">
-    <value>活跃会员人数摘要</value>
-    <comment>Active Customer Summary</comment>
-  </data>
   <data name="agcasinobalance63" xml:space="preserve">
     <value>AG Casino Balance</value>
     <comment>#26990</comment>
@@ -313,9 +305,6 @@
     <value>单双盘/独赢盘/和局/不是和局</value>
     <comment>Odd/Even + 1x2 + DND</comment>
   </data>
-  <data name="colossusbetswinloss71" xml:space="preserve">
-    <value>CB足彩输赢</value>
-  </data>
   <data name="notificationreport" xml:space="preserve">
     <value>通知</value>
     <comment>84004</comment>
@@ -327,10 +316,6 @@
   <data name="licenseewinlossbytimezone76" xml:space="preserve">
     <value>投注时区输赢</value>
     <comment>84932</comment>
-  </data>
-  <data name="cashoutwinloss72" xml:space="preserve">
-    <value>即时兑现输赢</value>
-    <comment>Cash Out Win Loss</comment>
   </data>
   <data name="subsidiaryperformance73" xml:space="preserve">
     <value>子网站报告</value>

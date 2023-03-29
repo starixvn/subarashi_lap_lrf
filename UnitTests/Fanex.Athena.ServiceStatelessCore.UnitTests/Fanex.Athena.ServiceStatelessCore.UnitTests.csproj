@@ -98,7 +98,6 @@
     <Compile Include="SportServiceUnitTest.cs" />
     <Compile Include="Utility\AuthParameterHelperTest.cs" />
     <Compile Include="Utility\AutoBindMetaModelServiceTest.cs" />
-    <Compile Include="Utility\KeanOceanBusinessHelperTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -1616,9 +1616,6 @@
   <data name="BetSettingGroups" xml:space="preserve">
     <value>Bet Setting Groups</value>
   </data>
-  <data name="DisableAgCasino" xml:space="preserve">
-    <value>Disable AG Casino</value>
-  </data>
   <data name="EnableAgCasino" xml:space="preserve">
     <value>Enable AG Casino</value>
   </data>
@@ -1646,9 +1643,6 @@
   <data name="CustomerLog" xml:space="preserve">
     <value>会员日志</value>
     <comment>26174</comment>
-  </data>
-  <data name="ActiveCustomerSummary" xml:space="preserve">
-    <value>活跃会员人数摘要</value>
   </data>
   <data name="TotalActiveCustomer" xml:space="preserve">
     <value>总活跃会员人数</value>
@@ -1683,10 +1677,6 @@
   </data>
   <data name="ProductBGG" xml:space="preserve">
     <value>大遊真人</value>
-  </data>
-  <data name="GoldDeluxeWinLossGuidelineContent" xml:space="preserve">
-    <value>在GMT-4下午4点之前的任何查询将依据前一天下午4点的数据。您每次查询可以过滤最多3个月内的数据。</value>
-    <comment>#71725</comment>
   </data>
   <data name="ProductCO" xml:space="preserve">
     <value>实时兑现</value>
@@ -1737,9 +1727,6 @@
   </data>
   <data name="Amount" xml:space="preserve">
     <value>金额</value>
-  </data>
-  <data name="ColossusBetsWinLoss" xml:space="preserve">
-    <value>CB足彩输赢</value>
   </data>
   <data name="CustomerWinnings" xml:space="preserve">
     <value>会员总赢</value>
@@ -2440,12 +2427,6 @@
   <data name="ProductAB" xml:space="preserve">
     <value>欧博</value>
   </data>
-  <data name="ProductFW" xml:space="preserve">
-    <value>GG捕鱼</value>
-  </data>
-  <data name="ProductGD" xml:space="preserve">
-    <value>GD真人娱乐场</value>
-  </data>
   <data name="ProductPP" xml:space="preserve">
     <value>PP王者电子</value>
   </data>
@@ -2460,9 +2441,6 @@
   </data>
   <data name="CasinoTurnover" xml:space="preserve">
     <value>电子游戏交易额</value>
-  </data>
-  <data name="GoldDeluxeWinLoss" xml:space="preserve">
-    <value>GD真人娱乐场输赢</value>
   </data>
   <data name="Log" xml:space="preserve">
     <value>日志</value>
@@ -2577,9 +2555,6 @@
   </data>
   <data name="ProductSBVS" xml:space="preserve">
     <value>沙巴虚拟赛事</value>
-  </data>
-  <data name="ProductGDG" xml:space="preserve">
-    <value>金大门</value>
   </data>
   <data name="Category" xml:space="preserve">
     <value>类别</value>

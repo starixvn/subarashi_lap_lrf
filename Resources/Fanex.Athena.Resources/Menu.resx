@@ -207,9 +207,6 @@
   <data name="results41" xml:space="preserve">
     <value>Results</value>
   </data>
-  <data name="customerlist43" xml:space="preserve">
-    <value>Customer List</value>
-  </data>
   <data name="manageaccount46" xml:space="preserve">
     <value>Manage Account</value>
   </data>
@@ -253,15 +250,9 @@
   <data name="agcasinowinloss62" xml:space="preserve">
     <value>AG Casino Win Loss</value>
   </data>
-  <data name="activecustomersummary64" xml:space="preserve">
-    <value>Active Customer Summary</value>
-  </data>
   <data name="agcasinobalance63" xml:space="preserve">
     <value>AG Casino Balance</value>
     <comment>#26990</comment>
-  </data>
-  <data name="golddeluxewinloss65" xml:space="preserve">
-    <value>Gold Deluxe Win Loss</value>
   </data>
   <data name="handicapoverunderlive7" xml:space="preserve">
     <value>Handicap/Over Under/Live</value>
@@ -279,14 +270,6 @@
   <data name="editbetsetting70" xml:space="preserve">
     <value>Edit Bet Setting</value>
     <comment>#61999</comment>
-  </data>
-  <data name="colossusbetswinloss71" xml:space="preserve">
-    <value>Colossus Bets Win Loss</value>
-    <comment>#63785</comment>
-  </data>
-  <data name="cashoutwinloss72" xml:space="preserve">
-    <value>Cash Out Win Loss</value>
-    <comment>#71727</comment>
   </data>
   <data name="subsidiaryperformance73" xml:space="preserve">
     <value>Subsidiary Performance</value>

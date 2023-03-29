@@ -7,7 +7,7 @@
 
     using DataAccess.Core.Users.Interfaces;
     using Fanex.Athena.Service.Core.OAuth;
-	using Fanex.Athena.Service.Core.Users.Interfaces;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.ViewModel;
 
@@ -88,7 +88,6 @@
                     Assert.That(model.HasRecheckIn, Is.EqualTo(HasRecheckIn));
                     Assert.That(model.UserName, Is.EqualTo(DefaultUserSession.UserName));
                     Assert.That(model.CurrentLicenseeId, Is.EqualTo(DefaultLicenseeSession.LicenseeId));
-                    Assert.That(model.IsFakeLicensee, Is.EqualTo(IsFakeLicensee));
                 });
             }
         }
@@ -205,8 +204,8 @@
         {
             return new HeaderController(
                 _licenseeDataAccess,
-				_authService,
-				_subsidiaryService)
+                _authService,
+                _subsidiaryService)
             {
                 LangService = LangService,
                 SessionServiceInstance = SessionService,

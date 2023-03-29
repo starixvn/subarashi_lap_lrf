@@ -25,9 +25,8 @@ namespace Fanex.Athena.Web.ActionFilter
         public bool IsSingleWallet { get; set; }
 
         public string FunctionConfig { get; set; }
-
-        public bool IsIncludeKeanOcean { get; set; }
         public bool HandlingAjaxRequestWithJsonResult { get; set; }
+
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             base.OnActionExecuting(filterContext);
@@ -39,7 +38,6 @@ namespace Fanex.Athena.Web.ActionFilter
                  new CurrencyValidationOption
                  {
                      IsValidCurrency = IsValidCurrency,
-                     IsIncludeKeanOcean = IsIncludeKeanOcean,
                      IsValidCurrencyList = IsValidCurrencyList
                  },
                  new ProductValidationOption

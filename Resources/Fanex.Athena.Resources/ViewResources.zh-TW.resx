@@ -1611,12 +1611,6 @@
   <data name="BetSettingGroups" xml:space="preserve">
     <value>Bet Setting Groups</value>
   </data>
-  <data name="DisableAgCasino" xml:space="preserve">
-    <value>Disable AG Casino</value>
-  </data>
-  <data name="EnableAgCasino" xml:space="preserve">
-    <value>Enable AG Casino</value>
-  </data>
   <data name="UpdateAgCasinoBetSettings" xml:space="preserve">
     <value>Are you sure you want to update all AG Casino bet settings?</value>
     <comment>#19458</comment>
@@ -1641,9 +1635,6 @@
   <data name="CustomerLog" xml:space="preserve">
     <value>會員日誌</value>
     <comment>26174</comment>
-  </data>
-  <data name="ActiveCustomerSummary" xml:space="preserve">
-    <value>活躍會員人數摘要</value>
   </data>
   <data name="TotalActiveCustomer" xml:space="preserve">
     <value>總活躍會員人數</value>
@@ -1678,10 +1669,6 @@
   </data>
   <data name="ProductBGG" xml:space="preserve">
     <value>大遊真人</value>
-  </data>
-  <data name="GoldDeluxeWinLossGuidelineContent" xml:space="preserve">
-    <value>在GMT-4下午4點之前的任何查詢將依據前一天下午4點的數據。您每次查詢可以過濾最多3個月內的數據。</value>
-    <comment>#71725</comment>
   </data>
   <data name="ProductCO" xml:space="preserve">
     <value>即時兌現</value>
@@ -1730,9 +1717,6 @@
   </data>
   <data name="Amount" xml:space="preserve">
     <value>金額</value>
-  </data>
-  <data name="ColossusBetsWinLoss" xml:space="preserve">
-    <value>CB足彩輸贏</value>
   </data>
   <data name="CustomerWinnings" xml:space="preserve">
     <value>會員總贏</value>
@@ -2122,9 +2106,6 @@
   </data>
   <data name="ProductSBVS" xml:space="preserve">
     <value>沙巴虛擬賽事</value>
-  </data>
-  <data name="ProductGDG" xml:space="preserve">
-    <value>GDG</value>
   </data>
   <data name="Happy5LinkedGames" xml:space="preserve">
     <value>快樂5系列遊戲</value>

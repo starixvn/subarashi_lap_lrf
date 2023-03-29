@@ -4,7 +4,7 @@
     {
         bool IsValidBaseCurrency(string baseCurrency, bool isAllowEmpty = true);
 
-        bool IsValidCurrency(int currencyId, bool isIncludeKeanOcean = false);
+        bool IsValidCurrency(int currencyId);
 
         bool IsValidCurrency(string currencyIdList);
     }

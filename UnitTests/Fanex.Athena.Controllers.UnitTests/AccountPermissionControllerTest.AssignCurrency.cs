@@ -72,32 +72,6 @@
         }
 
         [Test]
-        public void AssignCurrency_WhenGetWithKeenOceanLicensee_SetCurrenyNameIsHKD()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                AppSettings.EnableAssignCurrency.Returns(true);
-
-                StubLicenseeSessionData(new LicenseeAuthInfo
-                {
-                    LicenseeId = LicenseeIdentity.KeenOcean
-                });
-
-                _currencyDataAccess.GetCurrenciesByUser(LicenseeIdentity.KeenOcean, DefaultUserSession.UserId).Returns(new List<CurrencyUser>
-                {
-                    new CurrencyUser { CurrencyId = CurrencyType.Hkd }
-                });
-
-                // Action
-                var viewResult = controller.AssignCurrency(DefaultUserSession.UserId) as ViewResult;
-
-                // Assert
-                Assert.That(viewResult.ViewBag.CurrencyList[0].CurrencyName, Is.EqualTo("HKD"));
-            }
-        }
-
-        [Test]
         public void AssignCurrency_WhenPostWithInValidUserId_ReturnFailResult()
         {
             using (var controller = CreateController())

@@ -51,31 +51,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DTO\AgCasino\AgCasinoBetSetting.cs" />
-    <Compile Include="DTO\AgCasino\AgCasinoGame.cs" />
-    <Compile Include="DTO\AgCasino\AgCasinoGroup.cs" />
-    <Compile Include="DTO\BetSetting.cs" />
-    <Compile Include="DTO\BetSettingProduct.cs" />
     <Compile Include="DTO\BetSettingWriteLog.cs" />
-    <Compile Include="DTO\CommonBetSetting.cs" />
-    <Compile Include="DTO\Exchange\ExchangeCommission.cs" />
-    <Compile Include="DTO\KenoBetSetting.cs" />
     <Compile Include="DTO\LogParam.cs" />
-    <Compile Include="DTO\NumberGameBetSetting.cs" />
-    <Compile Include="DTO\ThirdPartyBetSetting.cs" />
-    <Compile Include="DTO\DcsBetSetting.cs" />
-    <Compile Include="MetaModel\BetSettingMetaModel.cs" />
     <Compile Include="MetaModel\CoreCasinoStatusMetaModel.cs" />
-    <Compile Include="MetaModel\RngCasinoBetSettingMetaModel.cs" />
     <Compile Include="MetaModel\BetSettingCasinoStatusMetaModel.cs" />
-    <Compile Include="MetaModel\UpdateCommMetaModel.cs" />
-    <Compile Include="MetaModel\UpdateStatusMetaModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModel\AgCasinoBetSettingViewModel.cs" />
-    <Compile Include="ViewModel\BetSettingBaseViewModel.cs" />
-    <Compile Include="ViewModel\ExchangeBetSettingViewModel.cs" />
-    <Compile Include="ViewModel\BetSettingViewModel.cs" />
-    <Compile Include="ViewModel\ThirdPartyBetSettingViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.Athena.Model.Core\Fanex.Athena.Model.Core.csproj">
@@ -101,6 +81,10 @@
     <AdditionalFiles Include="..\..\.sonarlint\lrf\CSharp\SonarLint.xml">
       <Link>SonarLint.xml</Link>
     </AdditionalFiles>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DTO\Exchange\" />
+    <Folder Include="ViewModel\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

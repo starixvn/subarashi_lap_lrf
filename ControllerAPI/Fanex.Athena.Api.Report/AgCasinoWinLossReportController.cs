@@ -42,7 +42,7 @@
         }
 
         [HttpPost]
-        [ValidationApiRequest(ObjectName = "metaModel", IsValidCurrency = true, IsIncludeKeanOcean = true)]
+        [ValidationApiRequest(ObjectName = "metaModel", IsValidCurrency = true)]
         public Task<dynamic> Index(
             ThirdPartyWinLossMetaModel metaModel,
             DateTime? fdate,
@@ -55,7 +55,7 @@
         }
 
         [HttpPost]
-        [ValidationApiRequest(ObjectName = "metaModel", IsValidCurrency = true, IsIncludeKeanOcean = true)]
+        [ValidationApiRequest(ObjectName = "metaModel", IsValidCurrency = true)]
         public Task<dynamic> Index([FromBody] ThirdPartyWinLossMetaModel metaModel)
         {
             return ProcessRequest(metaModel, null, null);
@@ -116,7 +116,7 @@
             int custId = 0)
         {
             var userSession = SessionService.UserSession;
-            if (_currencyValidation.IsValidCurrency(currencyId, true))
+            if (_currencyValidation.IsValidCurrency(currencyId))
             {
                 metaModel.DrillDownCurrencyId = currencyId;
                 metaModel.DrillDownLevel = level;

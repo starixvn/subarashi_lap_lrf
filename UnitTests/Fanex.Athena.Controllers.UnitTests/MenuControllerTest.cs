@@ -68,7 +68,6 @@
                 {
                     Assert.That(viewModel.IsAllowedCustonmerCommission, Is.EqualTo(DefaultLicenseeSession.IsAllowedCustomerComm));
                     Assert.That(viewModel.IsInternalLogin, Is.EqualTo(DefaultUserSession.IsInternal));
-                    Assert.That(viewModel.IsAllowedManagementMember, Is.EqualTo(false));
                     Assert.That(viewModel.IsFakeLicensee, Is.EqualTo(true));
                     Assert.That(viewModel.UserFunctions, Is.Empty);
                 });

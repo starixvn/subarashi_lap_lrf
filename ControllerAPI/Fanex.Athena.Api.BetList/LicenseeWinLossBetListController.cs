@@ -16,7 +16,7 @@
     using Service.Core.Common.Interfaces;
     using Service.StatelessCore.Interfaces;
 
-    [ApiFunctionAuthorization(PermissionKeys.ReportLicenseeWinLoss, PermissionKeys.ReportWinLossByProduct, PermissionKeys.ReportColossusBetsWinLoss)]
+    [ApiFunctionAuthorization(PermissionKeys.ReportLicenseeWinLoss, PermissionKeys.ReportWinLossByProduct)]
     [ApiBetListAuthorization]
     public class LicenseeWinLossBetListController : ApiBetListBaseController
     {
@@ -34,7 +34,7 @@
         }
 
         [HttpPost]
-        [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
+        [ValidationApiRequest(IsValidCurrency = true)]
         public async Task<dynamic> Index(BetListMetaModel metaModel)
         {
             if (!IsValidDateRange(metaModel.FromDate, metaModel.ToDate))

@@ -145,10 +145,6 @@ namespace Fanex.Athena.Controllers.Account
             if (userId > 0)
             {
                 var currencies = _currencyDataAccess.GetCurrenciesByUser(SessionServiceInstance.LicenseeSession.LicenseeId, userId);
-                if (SessionServiceInstance.LicenseeSession.LicenseeId == LicenseeIdentity.KeenOcean)
-                {
-                    KeanOceanBusinessHelper.KeepHKDCurrencyName(currencies);
-                }
 
                 ViewBag.CurrencyList = currencies;
                 return View("~/Views/Account/AssignCurrency.cshtml");

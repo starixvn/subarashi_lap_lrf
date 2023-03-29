@@ -12,50 +12,8 @@
 
     public class LicenseeDataAccessTest : BaseDataAccessHelperTest<LicenseeDataAccess>
     {
-        private const string IsAllowUpdateMemberBAStatusSp = "Lrf_BATimeCheck";
         private const string IsLicenseeBelongToUserSp = "Lrf_LicenseeSel";
         private const string GetLicenseeByNameSp = "Lrf_LicenseeSelBySiteName";
-
-        [Test]
-        public void IsAllowUpdateMemberBAStatus_WhenCall_ParametersPassedCorrectly()
-        {
-            // Arrange
-            const int LicenseeId = 1;
-            var request = new Request { Language = "en-US" };
-
-            DataAccess.GetObjectDb(Arg.Is(IsAllowUpdateMemberBAStatusSp)).Returns(ObjectDb);
-
-            // Action
-            DataAccess.IsAllowUpdateMemberBAStatus(request, LicenseeId);
-
-            // Assert
-            Assert.Multiple(() =>
-            {
-                ObjectDb.Received(1).SetParameterValue("langkey", request.Language);
-                ObjectDb.Received(1).SetParameterValue("LicenseeID", LicenseeId);
-                ObjectDb.Received(1).SetParameterValue("isallow", null);
-            });
-        }
-
-        [Test]
-        public void IsAllowUpdateMemberBAStatus_WhenCall_ValueReturnedCorrectly()
-        {
-            // Arrange
-            DataAccess.GetObjectDb(Arg.Is(IsAllowUpdateMemberBAStatusSp)).Returns(ObjectDb);
-            ObjectDb.GetParameterValue("isallow").Returns(false);
-            ResultInfoHelper.MockResultInfo(ObjectDb);
-
-            // Action
-            var result = DataAccess.IsAllowUpdateMemberBAStatus(new Request(), 0);
-
-            // Assert
-            Assert.Multiple(() =>
-            {
-                Assert.That(result.ExtendedData, Is.False);
-                Assert.That(result.Code, Is.EqualTo(ResultInfoHelper.ResultCode));
-                Assert.That(result.Message, Is.EqualTo(ResultInfoHelper.ResultMessage));
-            });
-        }
 
         [TestCase(1, true)]
         [TestCase(2, false)]

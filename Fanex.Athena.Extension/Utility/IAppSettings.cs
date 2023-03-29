@@ -23,8 +23,6 @@
 
         IEnumerable<int> LicenseeOfferStatusFunction { get; }
 
-        string ExchangeProductApiHost { get; }
-
         string ResultAmendmentApiUrl { get; }
 
         string MarkNotificationAsReadApiUrl { get; }

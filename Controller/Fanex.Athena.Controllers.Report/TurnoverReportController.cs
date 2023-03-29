@@ -145,7 +145,6 @@ namespace Fanex.Athena.Controllers.Report
         private IDictionary<int, string> GetCurrenciesForTurnoverReport(int licenseeId)
         {
             var currencyList = SessionServiceInstance.UserSession.CurrencyList;
-            KeanOceanBusinessHelper.AddHKDCurrencyForTurnOverReport(currencyList, licenseeId);
             return currencyList;
         }
     }

@@ -48,7 +48,7 @@
         public void SetUp()
         {
             _currencyValidation = Substitute.For<ICurrencyValidation>();
-            _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
+            _currencyValidation.IsValidCurrency(Arg.Any<int>()).Returns(true);
 
             _balanceUpDataAccess = Substitute.For<IBalanceUpDataAccess>();
             _balanceUpDataAccess.GetBalanceUp().Returns(_balance);
@@ -95,7 +95,7 @@
         public async Task Index_InvalidCurrency_ReturnEmptyData()
         {
             // Arrange
-            _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(false);
+            _currencyValidation.IsValidCurrency(Arg.Any<int>()).Returns(false);
 
             var model = new ThirdPartyWinLossMetaModel
             {

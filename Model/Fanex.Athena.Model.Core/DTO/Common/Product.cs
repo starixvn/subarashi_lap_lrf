@@ -28,8 +28,6 @@ namespace Fanex.Athena.Model.Core.DTO.Common
 
         public const string PTCS = "PTCS";
 
-        public const string GD = "GD";
-
         public const string VG = "VG";
 
         public const string BT = "BT";
@@ -38,11 +36,7 @@ namespace Fanex.Athena.Model.Core.DTO.Common
 
         public const string AB = "AB";
 
-        public const string FW = "FW";
-
         public const string CO = "CO";
-
-        public const string CB = "CB";
 
         public const string VS2 = "VS2";
 
@@ -71,8 +65,6 @@ namespace Fanex.Athena.Model.Core.DTO.Common
         public const string SAG = "SAG";
 
         public const string JK = "JK";
-
-        public const string GDG = "GDG";
 
         public const string BGG = "BGG";
 

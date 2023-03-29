@@ -22,7 +22,6 @@
         PermissionKeys.ReportWinLossByProduct,
         PermissionKeys.ReportCustomerWinLoss,
         PermissionKeys.CustomerInfoCustomerLog,
-        PermissionKeys.CustomerInfoCustomerList,
         PermissionKeys.BettingTicketCenter)]
     public class SearchCustomerAPIController : CultureBaseController
     {

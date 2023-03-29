@@ -148,7 +148,7 @@
 /******/
 /******/
 /******/ 	// add entry module to deferred list
-/******/ 	deferredModules.push([31,"www/js/build/dev/pages/lib/common","www/js/build/dev/pages/lib/jqgrid"]);
+/******/ 	deferredModules.push([30,"www/js/build/dev/pages/lib/common","www/js/build/dev/pages/lib/jqgrid"]);
 /******/ 	// run deferred modules when ready
 /******/ 	return checkDeferredModules();
 /******/ })
@@ -8661,7 +8661,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
     __webpack_require__(/*! lib/linq */ "./www/js/source/lib/linq.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, QueryString, Site, Report, PlatformWinLossOption, jqGridAdditional, MonthPicker, MultiSelect, Popup, Downloader, DataHelper, Toast) {
         'use strict';
 
-        const BETLIST_IGNORED_PRODUCTS = ['AB', 'PP', 'CC', 'SG', 'VRG', 'SXG', 'SBC', 'SAG', 'PGS', 'JK', 'GDG', 'HB', 'WM', 'BGG', 'VGA', 'CG', 'AP', 'APM', 'FGGL', 'MXG', 'JIG'];
+        const BETLIST_IGNORED_PRODUCTS = ['AB', 'PP', 'CC', 'SG', 'VRG', 'SXG', 'SBC', 'SAG', 'PGS', 'JK', 'HB', 'WM', 'BGG', 'VGA', 'CG', 'AP', 'APM', 'FGGL', 'MXG', 'JIG'];
         let _platformNameMap = {};
 
         const _cacheData = {};
@@ -9733,7 +9733,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
 /***/ }),
 
-/***/ 31:
+/***/ 30:
 /*!**********************************************************************************!*\
   !*** multi ./www/js/source/pages/report/platformwinloss/main-platformwinloss.js ***!
   \**********************************************************************************/

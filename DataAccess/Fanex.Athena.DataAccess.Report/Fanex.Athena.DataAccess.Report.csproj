@@ -91,14 +91,10 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CashOutWinLossDataAccess.cs" />
-    <Compile Include="ActiveCustomerSummaryDataAccess.cs" />
     <Compile Include="CasinoTurnoverDataAccess.cs" />
     <Compile Include="ExchangeVoidedDataAccess.cs" />
     <Compile Include="ExchangeWinLossDataAccess.cs" />
-    <Compile Include="Interfaces\ICashOutWinLossDataAccess.cs" />
     <Compile Include="Interfaces\ICasinoTurnoverDataAccess.cs" />
-    <Compile Include="Interfaces\IColossusBetsWinLossDataAccess.cs" />
     <Compile Include="Interfaces\IExchangeVoidedDataAccess.cs" />
     <Compile Include="Interfaces\IExchangeWinLossDataAccess.cs" />
     <Compile Include="Interfaces\ILicenseeWinLossByTimeZoneDataAccess.cs" />
@@ -109,12 +105,10 @@
     <Compile Include="SabaVirtualSportsWinLossDataAccess.cs" />
     <Compile Include="SpecialLicenseeWinLossDataAccess.cs" />
     <Compile Include="AgCasinoBalanceDataAccess.cs" />
-    <Compile Include="ColossusBetsWinLossDataAccess.cs" />
     <Compile Include="LicenseeWinLossByTimeZoneDataAccess.cs" />
     <Compile Include="SubsidiaryPerformanceDataAccess.cs" />
     <Compile Include="ThirdPartyWinLossDataAccess.cs" />
     <Compile Include="WeeklyLiveMatchDataAccess.cs" />
-    <Compile Include="Interfaces\IActiveCustomerSummaryDataAccess.cs" />
     <Compile Include="Interfaces\IAgCasinoBalanceDataAccess.cs" />
     <Compile Include="Interfaces\IThirdPartyWinLossDataAccess.cs" />
     <Compile Include="CustomerPendingFundsDataAccess.cs" />

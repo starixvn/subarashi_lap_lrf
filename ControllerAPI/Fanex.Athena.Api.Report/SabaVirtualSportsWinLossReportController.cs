@@ -49,7 +49,7 @@
         }
 
         [HttpPost]
-        [ValidationApiRequest(ObjectName = "metaModel", IsValidCurrency = true, IsIncludeKeanOcean = true)]
+        [ValidationApiRequest(ObjectName = "metaModel", IsValidCurrency = true)]
         public Task<dynamic> Index(
             SabaVirtualSportsWinLossMetaModel metaModel,
             DateTime? fdate,

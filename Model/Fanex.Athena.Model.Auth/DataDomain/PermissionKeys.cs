@@ -45,20 +45,15 @@
         public const string ReportMatchWinLoss = "MatchWinLoss31";
         public const string ReportWinLossByProduct = "WinLossByProducts32";
         public const string ReportWinLossByBetType = "WinLossByBetType33";
-        public const string ReportCancelledBets = "CancelledBets36";
-        public const string ReportDailyBetList = "DailyBetList37";
         public const string ReportLiveReport = "LiveReport38";
         public const string ReportTurnover = "Turnover39";
         public const string ReportCustomerBalance = "CustomerBalance40";
         public const string ReportResults = "Results41";
         public const string ReportAGCasinoWinLoss = "AGCasinoWinLoss62";
         public const string ReportAGCasinoBalance = "AGCasinoBalance63";
-        public const string ReportActiveCustomerSummary = "ActiveCustomerSummary64";
         public const string ReportWeeklyLiveMatches = "WeeklyLiveMatches69";
         public const string ReportCustomerTurnover = "CustomerTurnover51";
         public const string ReportPlatformWinLoss = "MobileWinLoss53";
-        public const string ReportColossusBetsWinLoss = "ColossusBetsWinLoss71";
-        public const string ReportCashOutWinLoss = "CashOutWinLoss72";
         public const string ReportSubsidiaryPerformance = "SubsidiaryPerformance73";
         public const string ReportLicenseeWinLossByTimeZone = "LicenseeWinLossByTimeZone76";
         public const string ReportExchangeWinLoss = "ExchangeWinloss77";
@@ -72,11 +67,9 @@
 
         /* Customer Info. */
 
-        public const string CustomerInfoCustomerList = "CustomerList43";
         public const string CustomerInfoSpecialBA = "SpecialBA54";
         public const string CustomerInfoCommissionGroupList = "CommissionGroupList55";
         public const string CustomerInfoCustomerLog = "CustomerLog56";
-        public const string CustomerInfoEditBetSetting = "EditBetSetting70";
 
         /* PlayerSegmentation */
 

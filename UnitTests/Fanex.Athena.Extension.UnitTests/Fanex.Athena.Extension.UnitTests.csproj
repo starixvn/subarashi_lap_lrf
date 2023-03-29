@@ -59,8 +59,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassTest\Person.cs" />
-    <Compile Include="HashtableExtensionsTest.cs" />
-    <Compile Include="Helper\CasinoHelperTest.cs" />
     <Compile Include="Helper\ClientHelperTest.cs" />
     <Compile Include="Helper\ConvertHelperTest.cs" />
     <Compile Include="Helper\DateTimeHelperTest.cs" />

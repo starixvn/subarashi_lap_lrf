@@ -153,7 +153,6 @@
     <Compile Include="BettingTicketCenterAdvancedSearchController.cs" />
     <Compile Include="BettingTicketCenterController.cs" />
     <Compile Include="LiveCasinoController.cs" />
-    <Compile Include="DailyStatementBetListController.cs" />
     <Compile Include="ExchangeWinLossBetListController.cs" />
     <Compile Include="GodOfFortuneWinLossBetListController.cs" />
     <Compile Include="SabaVirtualSportsWinLossBetListController.cs" />
@@ -162,7 +161,6 @@
     <Compile Include="WinlossByBetTypeBetListController.cs" />
     <Compile Include="RunningBettypesOfMatchBetListController.cs" />
     <Compile Include="RunningBettypesBetListController.cs" />
-    <Compile Include="OutstandingDailyStatementBetListController.cs" />
     <Compile Include="RunningMatchBetListController.cs" />
     <Compile Include="LicenseeWinLossBetListController.cs" />
     <Compile Include="MatchWinLossBetListController.cs" />
@@ -171,8 +169,6 @@
     <Compile Include="CorrectScoreBetListController.cs" />
     <Compile Include="PendingFundsBetListController.cs" />
     <Compile Include="LastBetMonitoringBetListController.cs" />
-    <Compile Include="OutStandingCompletedBetListController.cs" />
-    <Compile Include="OutstandingRunningBetListController.cs" />
     <Compile Include="RunningBetListController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

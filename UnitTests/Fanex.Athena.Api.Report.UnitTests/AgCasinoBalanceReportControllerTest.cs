@@ -68,7 +68,7 @@
                 CurrencyId = -100,
                 DrillDownCurrencyId = -100
             };
-            _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(false);
+            _currencyValidation.IsValidCurrency(Arg.Any<int>()).Returns(false);
             var expectedResult = GetSerializationData();
 
             // Action
@@ -86,7 +86,7 @@
             {
                 CurrencyId = -1
             };
-            _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
+            _currencyValidation.IsValidCurrency(Arg.Any<int>()).Returns(true);
 
             var resultModel = new SortableReportResultModel<AgCasinoBalance>
             {
@@ -108,7 +108,7 @@
         public async Task Index_Level0_ReturnCorrectDataFromDataAccess()
         {
             // Arrange
-            _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
+            _currencyValidation.IsValidCurrency(Arg.Any<int>()).Returns(true);
 
             const int CurrencyId = -2;
             const bool IsExcludedTestData = true;
@@ -153,7 +153,7 @@
         public async Task Index_Level1_CallGetAgentBalanceDetailInService_ReturnCorrectData()
         {
             // Arrange
-            _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
+            _currencyValidation.IsValidCurrency(Arg.Any<int>()).Returns(true);
 
             const int CurrencyId = -2;
             const bool IsExcludedTestData = true;
@@ -185,7 +185,7 @@
         public async Task Index_Level2_CallGetCustomerBalanceDetailInService_ReturnCorrectData()
         {
             // Arrange
-            _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
+            _currencyValidation.IsValidCurrency(Arg.Any<int>()).Returns(true);
 
             const int CurrencyId = -2;
             const bool IsExcludedTestData = true;
@@ -221,7 +221,7 @@
         public void Index_IsExportExcelTrue_CallExcelStreamWithCorrectData(int drillDownLevel, int currencyId)
         {
             // Arrange
-            _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
+            _currencyValidation.IsValidCurrency(Arg.Any<int>()).Returns(true);
 
             var fromDate = new DateTime(2017, 4, 1);
             var toDate = new DateTime(2017, 4, 18);

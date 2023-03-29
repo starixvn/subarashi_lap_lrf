@@ -35,14 +35,11 @@ namespace Fanex.Athena.Controllers
             var licenseeSession = SessionServiceInstance.LicenseeSession;
             var systemFunctions = userSession.FunctionList;
 
-            var canManageMember = userSession.FunctionList.Any(x => x.FunctionKey == PermissionKeys.CustomerInfoCustomerList);
-
             var viewModel = new MenuViewModel
             {
                 UserFunctions = _functionService.Functions.Where(i => systemFunctions.Any(x => x.FunctionKey == i.FunctionKey)).ToList(),
                 IsAllowedCustonmerCommission = licenseeSession.IsAllowedCustomerComm,
                 IsInternalLogin = userSession.IsInternal,
-                IsAllowedManagementMember = canManageMember,
                 IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeName)
             };
 

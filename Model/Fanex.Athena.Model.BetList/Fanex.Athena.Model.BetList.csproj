@@ -85,8 +85,6 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DTO\CustomerCancelBetItem.cs" />
-    <Compile Include="DTO\DailyStatement.cs" />
     <Compile Include="DTO\ExchangeBetList.cs" />
     <Compile Include="DTO\ExchangeSumWinLoss.cs" />
     <Compile Include="DTO\ExchangeTicket.cs" />

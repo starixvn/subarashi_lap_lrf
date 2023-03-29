@@ -102,11 +102,6 @@
     <Compile Include="PlayerSegmentation\PlayerSegmentationControllerTest.cs" />
     <Compile Include="SearchCustomerApiControllerTest.cs" />
     <Compile Include="CustomerComGroupControllerTest.cs" />
-    <Compile Include="CustomerApiControllerTest.UpdateBAStatus.cs" />
-    <Compile Include="CustomerApiControllerTest.cs" />
-    <Compile Include="CustomerControllerTest.cs" />
-    <Compile Include="CustomerController.PostCustomerListTest.cs" />
-    <Compile Include="CustomerController.GetCustomerListTest.cs" />
     <Compile Include="CustomerLogController.CustomerSettingTest.cs" />
     <Compile Include="CustomerLogController.GroupCommissionTest.cs" />
     <Compile Include="CustomerLogController.LogInLogTest.cs" />

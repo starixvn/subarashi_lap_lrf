@@ -297,11 +297,6 @@
     <Content Include="App_Data\UserGuide\BettingTicketCenterSingle\en-US.htm" />
     <Content Include="App_Data\UserGuide\BettingTicketCenterSingle\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\BettingTicketCenterSingle\zh-Hans.htm" />
-    <Content Include="App_Data\UserGuide\CashOutWL\zh-Hans.htm" />
-    <Content Include="App_Data\UserGuide\CashOutWL\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\CashOutWL\zh-TW.htm" />
-    <Content Include="App_Data\UserGuide\CashOutWL\en-US.htm" />
-    <Content Include="App_Data\UserGuide\CustomerList\zh-Hans.htm" />
     <Content Include="App_Data\UserGuide\AbnormalBet\en-US.htm" />
     <Content Include="App_Data\UserGuide\AbnormalBet\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\AbnormalBet\zh-TW.htm" />
@@ -309,10 +304,6 @@
     <Content Include="App_Data\UserGuide\NewCashOutWinLoss\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\NewCashOutWinLoss\zh-Hans.htm" />
     <Content Include="App_Data\UserGuide\NewCashOutWinLoss\zh-TW.htm" />
-    <Content Include="App_Data\UserGuide\GoldDeluxeWL\en-US.htm" />
-    <Content Include="App_Data\UserGuide\ColossusBetsWL\en-US.htm" />
-    <Content Include="App_Data\UserGuide\ColossusBetsWL\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\ColossusBetsWL\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\GodOfFortuneWL\en-US.htm" />
     <Content Include="App_Data\UserGuide\GodOfFortuneWL\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\GodOfFortuneWL\zh-TW.htm" />
@@ -379,15 +370,12 @@
       <DependentUpon>FanexSpName.xml.tt</DependentUpon>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\UserGuide\ActiveCustomerSummary\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\ActiveCustomerSummary\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\AGCasinoWL\en-US.htm" />
     <Content Include="App_Data\UserGuide\AGCasinoWL\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\AGCasinoWL\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\CommissionGroupList\en-US.htm" />
     <Content Include="App_Data\UserGuide\CommissionGroupList\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\CommissionGroupList\zh-TW.htm" />
-    <Content Include="App_Data\UserGuide\ActiveCustomerSummary\en-US.htm" />
     <Content Include="App_Data\UserGuide\TotalBetsMixParlay\en-US.htm" />
     <Content Include="App_Data\UserGuide\TotalBetsMixParlay\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\TotalBetsMixParlay\zh-TW.htm" />
@@ -406,9 +394,6 @@
     <Content Include="App_Data\UserGuide\ManageAccount\en-US.htm" />
     <Content Include="App_Data\UserGuide\ManageAccount\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\ManageAccount\zh-TW.htm" />
-    <Content Include="App_Data\UserGuide\CustomerList\en-US.htm" />
-    <Content Include="App_Data\UserGuide\CustomerList\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\CustomerList\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\CustomerLog\en-US.htm" />
     <Content Include="App_Data\UserGuide\CustomerLog\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\CustomerLog\zh-TW.htm" />
@@ -521,7 +506,6 @@
     <Content Include="Scripts\Extension\ajaxBinaryTransporting.js" />
     <Content Include="Scripts\Helper\ProductListHelper.js" />
     <Content Include="Scripts\Library\jquery.marquee.js" />
-    <Content Include="Views\Desktop\Customer\BetSetting\GoldDeluxe.cshtml" />
     <Content Include="www\assets\images\ajax-loader.gif" />
     <Content Include="www\assets\images\new-system.svg" />
     <Content Include="www\css\build\dev\pages\betlist\images\info-icon.png" />
@@ -602,7 +586,6 @@
     <Content Include="www\css\build\pro\pages\customer\customer-class.css" />
     <Content Include="www\css\build\pro\pages\components\fixedColumnsTable.chunk.js" />
     <Content Include="www\css\build\pro\pages\components\fixedColumnsTable.css" />
-    <Content Include="www\css\build\pro\pages\customer\customerlist.chunk.js" />
     <Content Include="www\css\build\pro\pages\customer\sabavirtualsettinginformation.chunk.js" />
     <Content Include="www\css\build\pro\pages\customer\sabavirtualsettinginformation.css" />
     <Content Include="www\css\build\pro\pages\reports\godoffortunewinLoss.css" />
@@ -652,8 +635,6 @@
     </Content>
     <Content Include="SiteConfig\WebConfigTransforms\UATTW.config" />
     <Content Include="SiteConfig\Web.UATTW.config" />
-    <Content Include="App_Data\UserGuide\CustomerList\pdf\zh-Hans\Odds Group Feature_Licensee.pdf" />
-    <Content Include="App_Data\UserGuide\CustomerList\pdf\zh-Hans\Odds Group Feature_Licensee_BA.pdf" />
     <Content Include="SiteConfig\WebConfigTransforms\Staging.config" />
     <Content Include="SiteConfig\Web.AppSettings.Staging.config">
       <SubType>Designer</SubType>
@@ -721,7 +702,6 @@
     <Content Include="SiteConfig\Web.ConnectionStrings.AWS.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Views\Desktop\Customer\BetSetting\SLT.cshtml" />
     <Content Include="Views\Desktop\Customer\CustomerClass\SettingPolicyTab.cshtml" />
     <Content Include="Views\Desktop\Customer\CustomerClass\SpreadSettingPolicyTab.cshtml" />
     <Content Include="Views\Desktop\Report\GodOfFortuneWinLoss\Content.cshtml" />
@@ -762,7 +742,6 @@
     <Content Include="..\.sonarlint\lrfcsharp.ruleset">
       <Link>lrfcsharp.ruleset</Link>
     </Content>
-    <Content Include="Views\Desktop\Customer\BetSetting\SabaCasino.cshtml" />
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\VipPlayerUploadByExternalIdTemplate.xls" />
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\VipPlayerUploadBySystemIdTemplate.xls" />
     <Content Include="Views\Desktop\Customer\CustomerClass\AllCustomerClassTab.cshtml" />
@@ -797,7 +776,6 @@
     <Content Include="www\js\build\dev\language-zh-Hans.chunk.js" />
     <Content Include="www\js\build\dev\language-zh-TW.chunk.js" />
     <Content Include="www\js\build\dev\pages\customer\customerclass.chunk.js" />
-    <Content Include="www\js\build\dev\pages\customer\exchangebetsetting.chunk.js" />
     <Content Include="www\js\build\dev\pages\customer\sabavirtualsettinginformation.chunk.js" />
     <Content Include="www\js\build\dev\pages\lib\common.chunk.js" />
     <Content Include="www\js\build\dev\pages\lib\jqgrid.chunk.js" />
@@ -837,7 +815,6 @@
     <Content Include="www\js\build\pro\language-zh-Hans.chunk.js" />
     <Content Include="www\js\build\pro\language-zh-TW.chunk.js" />
     <Content Include="www\js\build\pro\pages\customer\customerclass.chunk.js" />
-    <Content Include="www\js\build\pro\pages\customer\exchangebetsetting.chunk.js" />
     <Content Include="www\js\build\pro\pages\customer\sabavirtualsettinginformation.chunk.js" />
     <Content Include="www\js\build\pro\pages\lib\common.chunk.js" />
     <Content Include="www\js\build\pro\pages\lib\jqgrid.chunk.js" />
@@ -890,9 +867,6 @@
     <Content Include="www\js\source\lib\bootstrap-table\virtual-scroll\index.js" />
     <Content Include="www\js\source\pages\customer\sabavirtualsettinginformation\main.js" />
     <Content Include="www\js\source\pages\customer\customerclass\main.js" />
-    <Content Include="www\js\source\pages\customer\customerlist\customerlist.custstatus.js" />
-    <Content Include="www\js\source\pages\customer\customerlist\customerlist.gridoption.dormant.js" />
-    <Content Include="www\js\source\pages\customer\customerlist\customerlist.service.dormant.js" />
     <Content Include="www\js\source\pages\report\godoffortunewinloss\main.js" />
     <Content Include="www\js\source\pages\report\godoffortunewinloss\godoffortunewinloss.js" />
     <Content Include="www\js\source\pages\report\godoffortunewinloss\godoffortunewinloss.option.js" />
@@ -907,8 +881,6 @@
     <Content Include="www\js\source\reactpages\actions\excludeTestAction.js" />
     <Content Include="www\js\source\reactpages\actions\currencyAction.js" />
     <Content Include="www\js\source\pages\home\notification.js" />
-    <Content Include="www\js\source\pages\customer\betsetting\main-exchange.js" />
-    <Content Include="www\js\source\pages\customer\betsetting\products\exchange.js" />
     <Content Include="www\js\source\reactpages\actions\baseCurrencyAction.js" />
     <Content Include="www\js\source\reactpages\actions\liveStatusAction.js" />
     <Content Include="www\js\source\reactpages\actions\loaderAction.js" />
@@ -965,7 +937,6 @@
     <Content Include="www\css\source\reactpages\pages\notification\index.scss" />
     <Content Include="www\css\source\reactpages\components\_collapsibleRow.scss" />
     <Content Include="www\css\source\reactpages\vendors\notification.scss" />
-    <Content Include="Views\Desktop\Customer\BetSetting\Exchange.cshtml" />
     <Content Include="Views\Desktop\Report\ExchangeWinLoss\Main.cshtml" />
     <Content Include="www\css\source\reactpages\pages\exchangewl\index.scss" />
     <Content Include="www\css\source\reactpages\components\_breadcrumb.scss" />
@@ -975,17 +946,12 @@
     <Content Include="App_Data\FakeLicenseeSetting.json" />
     <Content Include="App_Data\ReportSetting.json" />
     <Content Include="www\css\source\reactpages\components\_popup-content.scss" />
-    <Content Include="www\js\build\dev\pages\customer\exchangebetsetting.chunk.js.map" />
-    <Content Include="www\js\build\dev\pages\customer\exchangebetsetting.chunk.js.map" />
-    <Content Include="App_Data\UserGuide\CashOutWL\pdf\Cash Out WL Report guideline_CN.pdf" />
-    <Content Include="App_Data\UserGuide\CashOutWL\pdf\Cash Out WL Report guideline_EN.pdf" />
     <Content Include="Views\Desktop\Report\SpecialLicenseeWinLoss\Main.cshtml" />
     <Content Include="www\css\source\reactpages\pages\speciallicenseewl\index.scss" />
     <Content Include="www\js\build\dev\reactpages\report\speciallicenseewl.chunk.js.map" />
     <Content Include="www\css\build\dev\reactpages\speciallicenseewl\index.chunk.js.map" />
     <Content Include="www\css\build\dev\reactpages\speciallicenseewl\index.css.map" />
     <Content Include="www\css\source\reactpages\components\month-picker.scss" />
-    <Content Include="App_Data\Template\Customers\DormantCustomerList.xls" />
     <None Include="SiteConfig\Web.AppSettings.BACKUPMNLStatic.config" />
     <None Include="SiteConfig\Web.ConnectionStrings.BACKUPMNLStatic.config">
       <SubType>Designer</SubType>
@@ -1016,7 +982,6 @@
     <Content Include="www\js\build\dev\pages\lib\jqgrid.chunk.js.map" />
     <Content Include="www\js\build\dev\reactpages\lib\common.chunk.js.map" />
     <Content Include="www\js\build\dev\reactpages\lib\xlsx-style-sparta.chunk.js.map" />
-    <Content Include="Views\Desktop\Customer\BetSetting\PP.cshtml" />
     <Content Include="www\css\source\reactpages\components\_tab.scss" />
     <Content Include="www\css\source\reactpages\components\_react-multiselect.scss" />
     <Content Include="www\css\source\reactpages\pages\betlist\index.scss" />
@@ -1342,7 +1307,6 @@
     <Content Include="www\js\tests\extensions\ajaxBinaryTransporting-spec.js" />
     <Content Include="www\js\tests\extensions\prototype-spec.js" />
     <Content Include="www\js\tests\helpers\downloader-spec.js" />
-    <Content Include="www\js\tests\pages\customer\betsetting\products\exchange-spec.js" />
     <Content Include="www\webpackconfig\build\webpack.react.devbypage.conf.js" />
     <Content Include="www\webpackconfig\config\aliasReact.js" />
     <Content Include="www\webpackconfig\config\pathReact.js" />
@@ -1405,10 +1369,6 @@
     <Content Include="www\css\build\dev\pages\betlist\betlistSimpleLayout.css" />
     <Content Include="www\css\build\dev\pages\betlist\cashouthistory.chunk.js" />
     <Content Include="www\css\build\dev\pages\betlist\cashouthistory.css" />
-    <Content Include="www\css\build\dev\pages\betlist\colossusbetdetail.chunk.js" />
-    <Content Include="www\css\build\dev\pages\betlist\colossusbetdetail.css" />
-    <Content Include="www\css\build\dev\pages\betlist\customeroutstanding.chunk.js" />
-    <Content Include="www\css\build\dev\pages\betlist\customeroutstanding.css" />
     <Content Include="www\css\build\dev\pages\betlist\images\bonus.png" />
     <Content Include="www\css\build\dev\pages\betlist\images\goal-icon.png" />
     <Content Include="www\css\build\dev\pages\betlist\images\q_Icon2_1.png" />
@@ -1418,14 +1378,10 @@
     <Content Include="www\css\build\dev\pages\betlist\lastbetmonitoring.css" />
     <Content Include="www\css\build\dev\pages\betlist\systemparlaydetail.chunk.js" />
     <Content Include="www\css\build\dev\pages\betlist\systemparlaydetail.css" />
-    <Content Include="www\css\build\dev\pages\customer\betsetting.chunk.js" />
-    <Content Include="www\css\build\dev\pages\customer\betsetting.css" />
     <Content Include="www\css\build\dev\pages\customer\commgroupdetail.chunk.js" />
     <Content Include="www\css\build\dev\pages\customer\commgroupdetail.css" />
     <Content Include="www\css\build\dev\pages\customer\commgrouplist.chunk.js" />
     <Content Include="www\css\build\dev\pages\customer\commgrouplist.css" />
-    <Content Include="www\css\build\dev\pages\customer\customerlist.chunk.js" />
-    <Content Include="www\css\build\dev\pages\customer\customerlist.css" />
     <Content Include="www\css\build\dev\pages\customer\customerlog.chunk.js" />
     <Content Include="www\css\build\dev\pages\customer\customerlog.css" />
     <Content Include="www\css\build\dev\pages\forecast\ahforecast.chunk.js" />
@@ -1438,12 +1394,6 @@
     <Content Include="www\css\build\dev\pages\login\login.css" />
     <Content Include="www\css\build\dev\pages\reports\agcasinowinloss.chunk.js" />
     <Content Include="www\css\build\dev\pages\reports\agcasinowinloss.css" />
-    <Content Include="www\css\build\dev\pages\reports\activecustomersummary.chunk.js" />
-    <Content Include="www\css\build\dev\pages\reports\activecustomersummary.css" />
-    <Content Include="www\css\build\dev\pages\reports\cashoutwinloss.chunk.js" />
-    <Content Include="www\css\build\dev\pages\reports\cashoutwinloss.css" />
-    <Content Include="www\css\build\dev\pages\reports\colossusbetswinloss.chunk.js" />
-    <Content Include="www\css\build\dev\pages\reports\colossusbetswinloss.css" />
     <Content Include="www\css\build\dev\pages\reports\customerbalance.chunk.js" />
     <Content Include="www\css\build\dev\pages\reports\customerbalance.css" />
     <Content Include="www\css\build\dev\pages\reports\customerpendingfunds.chunk.js" />
@@ -1497,15 +1447,10 @@
     <Content Include="www\css\build\images\checked-dark.png" />
     <Content Include="www\css\build\images\checked-light.png" />
     <Content Include="www\css\build\images\transparent.png" />
-    <Content Include="www\css\build\pro\pages\betlist\customeroutstanding.css" />
-    <Content Include="www\css\build\pro\pages\customer\betsetting.css" />
     <Content Include="www\css\build\pro\pages\customer\commgroupdetail.css" />
     <Content Include="www\css\build\pro\pages\customer\commgrouplist.css" />
-    <Content Include="www\css\build\pro\pages\customer\customerlist.css" />
     <Content Include="www\css\build\pro\pages\customer\customerlog.css" />
-    <Content Include="www\css\build\pro\pages\reports\activecustomersummary.css" />
     <Content Include="www\css\build\pro\pages\reports\agcasinowinloss.css" />
-    <Content Include="www\css\build\pro\pages\reports\colossusbetswinloss.css" />
     <Content Include="www\css\build\pro\pages\reports\customerbalance.css" />
     <Content Include="www\css\build\pro\pages\reports\customerpendingfunds.css" />
     <Content Include="www\css\build\pro\pages\reports\customerturnover.css" />
@@ -1520,45 +1465,16 @@
     <Content Include="Views\Desktop\Customer\CustomerLog\Menu.cshtml" />
     <Content Include="Views\Desktop\Customer\CustomerLog\LoginLog\Main.cshtml" />
     <Content Include="Views\Desktop\Customer\CustomerLog\LoginLog\Filter.cshtml" />
-    <Content Include="www\css\build\dev\pages\customer\customerlist.chunk.js.map" />
-    <Content Include="www\css\build\dev\pages\customer\customerlist.css.map" />
     <Content Include="www\css\build\dev\pages\customer\customerlog.chunk.js.map" />
     <Content Include="www\css\build\dev\pages\customer\customerlog.css.map" />
     <Content Include="Views\Desktop\Customer\CustomerComm\UpdateGroup.cshtml" />
     <Content Include="www\css\source\components\switch\_switch.scss" />
     <Content Include="www\css\source\components\griddropdown\_griddropdown.scss" />
-    <Content Include="Views\Desktop\BetList\CustomerOutstanding\Filter.cshtml" />
-    <Content Include="Views\Desktop\BetList\CustomerOutstanding\Main.cshtml" />
-    <Content Include="www\css\source\pages\betlist\customeroutstanding.scss" />
-    <Content Include="Views\Desktop\Customer\BetSetting\Main.cshtml" />
-    <Content Include="Views\Desktop\Customer\BetSetting\_Menu.cshtml" />
-    <Content Include="www\css\source\pages\customer\betsetting.scss" />
-    <Content Include="Views\Desktop\Customer\BetSetting\Macau.cshtml" />
-    <Content Include="Views\Desktop\Customer\BetSetting\BetTrade.cshtml" />
-    <Content Include="Views\Desktop\Customer\BetSetting\ColossusBets.cshtml" />
-    <Content Include="Views\Desktop\Customer\BetSetting\AllBet.cshtml" />
-    <Content Include="Views\Desktop\Customer\BetSetting\FishingWorld.cshtml" />
-    <Content Include="Views\Desktop\Customer\BetSetting\Voidbridge.cshtml" />
-    <Content Include="Views\Desktop\Customer\BetSetting\AgCasino.cshtml" />
-    <Content Include="Views\Desktop\Customer\BetSetting\Keno.cshtml" />
-    <Content Include="Views\Desktop\Customer\BetSetting\CashOut.cshtml" />
-    <Content Include="Views\Desktop\Customer\BetSetting\NumberGame.cshtml" />
-    <Content Include="Views\Desktop\Shared\_BetSettingLayout.cshtml" />
-    <Content Include="www\css\build\dev\pages\customer\betsetting.chunk.js.map" />
-    <Content Include="www\css\build\dev\pages\customer\betsetting.css.map" />
     <Content Include="www\css\build\dev\um.chunk.js.map" />
-    <Content Include="www\css\build\dev\pages\betlist\customeroutstanding.chunk.js.map" />
-    <Content Include="www\css\build\dev\pages\betlist\customeroutstanding.css.map" />
     <Content Include="Views\Desktop\LicenseeList\Index.cshtml" />
     <Content Include="www\css\build\dev\pages\utility\licenseelist.chunk.js.map" />
     <Content Include="www\css\build\dev\pages\utility\licenseelist.css.map" />
-    <Content Include="Views\Desktop\Customer\BetSetting\VirtualSports2.cshtml" />
-    <Content Include="Views\Desktop\Customer\BetSetting\VirtualSports.cshtml" />
     <Content Include="Views\Desktop\BetList\LiveReport\VirtualSports.cshtml" />
-    <Content Include="Views\Desktop\Customer\BetSetting\Lottery.cshtml" />
-    <Content Include="Views\Desktop\Report\ActiveCustomerSummary\Content.cshtml" />
-    <Content Include="Views\Desktop\Report\ActiveCustomerSummary\Filter.cshtml" />
-    <Content Include="Views\Desktop\Report\ActiveCustomerSummary\Main.cshtml" />
     <Content Include="Views\Desktop\Report\AgCasinoWinLoss\Content.cshtml" />
     <Content Include="Views\Desktop\Report\AgCasinoWinLoss\Filter.cshtml" />
     <Content Include="Views\Desktop\Report\AgCasinoWinLoss\Main.cshtml" />
@@ -1566,15 +1482,8 @@
     <Content Include="Views\Desktop\Report\CustomerBalance\Filter.cshtml" />
     <Content Include="Views\Desktop\Report\CustomerBalance\Main.cshtml" />
     <Content Include="www\css\source\pages\report\customerbalance.scss" />
-    <Content Include="www\css\build\dev\pages\reports\activecustomersummary.chunk.js.map" />
-    <Content Include="www\css\build\dev\pages\reports\activecustomersummary.css.map" />
     <Content Include="www\css\build\dev\pages\reports\customerbalance.chunk.js.map" />
     <Content Include="www\css\build\dev\pages\reports\customerbalance.css.map" />
-    <Content Include="Views\Desktop\Report\ColossusBetsWinLoss\Content.cshtml" />
-    <Content Include="Views\Desktop\Report\ColossusBetsWinLoss\Filter.cshtml" />
-    <Content Include="Views\Desktop\Report\ColossusBetsWinLoss\Main.cshtml" />
-    <Content Include="www\css\build\dev\pages\reports\colossusbetswinloss.chunk.js.map" />
-    <Content Include="www\css\build\dev\pages\reports\colossusbetswinloss.css.map" />
     <Content Include="Views\Desktop\Report\CustomerPendingFunds\Content.cshtml" />
     <Content Include="Views\Desktop\Report\CustomerPendingFunds\Filter.cshtml" />
     <Content Include="Views\Desktop\Report\CustomerPendingFunds\Main.cshtml" />
@@ -1594,13 +1503,9 @@
     <Content Include="www\css\build\dev\pages\reports\agcasinowinloss.chunk.js.map" />
     <Content Include="www\css\build\dev\pages\reports\agcasinowinloss.css.map" />
     <Content Include=".babelrc" />
-    <None Include="www\css\source\pages\customer\customerlist.scss" />
     <Content Include="www\css\source\pages\customer\customerlog.scss" />
     <Content Include="www\css\source\components\tab\_tab.scss" />
     <Content Include="www\css\source\components\autocomplete\_autocomplete.scss" />
-    <Content Include="Views\Desktop\Customer\ContextMenu.cshtml" />
-    <Content Include="Views\Desktop\Customer\Customers.cshtml" />
-    <Content Include="Views\Desktop\Customer\Filter.cshtml" />
     <Content Include="Views\Desktop\Customer\CustomerLog\CustomerSettingLog\Main.cshtml" />
     <Content Include="Views\Desktop\Customer\CustomerLog\CustomerSettingLog\Filter.cshtml" />
     <Content Include="Views\Desktop\Customer\CustomerLog\Action\2200.cshtml" />
@@ -1618,10 +1523,8 @@
     <Content Include="Views\Desktop\Customer\CustomerComm\CreateNewGroup.cshtml" />
     <Content Include="www\css\build\dev\pages\customer\commgroupdetail.chunk.js.map" />
     <Content Include="www\css\build\dev\pages\customer\commgroupdetail.css.map" />
-    <Content Include="www\css\source\pages\report\activecustomersummary.scss" />
     <Content Include="www\css\source\pages\report\agcasinowinloss.scss" />
     <Content Include="www\css\source\pages\report\thirdpartywinloss.scss" />
-    <Content Include="www\css\source\pages\report\colossusbetswinLoss.scss" />
     <Content Include="www\css\source\pages\report\customerpendingfunds.scss" />
     <Content Include="www\css\source\pages\report\customerturnover.scss" />
     <Content Include="www\css\source\pages\report\customerwinloss.scss" />
@@ -1636,7 +1539,6 @@
     <Content Include="www\css\build\pro\pages\betlist\betlistResult.css" />
     <Content Include="www\css\build\pro\pages\betlist\betlistSimpleLayout.css" />
     <Content Include="www\css\build\pro\pages\betlist\cashouthistory.css" />
-    <Content Include="www\css\build\pro\pages\betlist\colossusbetdetail.css" />
     <Content Include="www\css\build\pro\pages\betlist\images\bonus.png" />
     <Content Include="www\css\build\pro\pages\betlist\images\goal-icon.png" />
     <Content Include="www\css\build\pro\pages\betlist\images\q_Icon2_1.png" />
@@ -1648,7 +1550,6 @@
     <Content Include="www\css\build\pro\pages\forecast\forecastonextwo.css" />
     <Content Include="www\css\build\pro\pages\forecast\newforecast.css" />
     <Content Include="www\css\build\pro\pages\login\login.css" />
-    <Content Include="www\css\build\pro\pages\reports\cashoutwinloss.css" />
     <Content Include="www\css\build\pro\pages\reports\licenseewinloss.css" />
     <Content Include="www\css\build\pro\pages\reports\livereport.css" />
     <Content Include="www\css\build\pro\pages\reports\matchwinloss.css" />
@@ -1683,18 +1584,11 @@
     <Content Include="SiteConfig\Web.PROStatic.config" />
     <Content Include="SiteConfig\WebConfigTransforms\PROStatic.config" />
     <Content Include="SiteConfig\WebConfigTransforms\DEV.config" />
-    <Content Include="App_Data\Template\Reports\CashOutWinLoss.xls" />
     <Content Include="Content\Utility\font\Roboto-Regular.ttf" />
     <Content Include="Content\Utility\font\Roboto-Regular.woff" />
     <Content Include="Content\Utility\font\Roboto-Regular.woff2" />
     <None Include="SiteConfig\Web.DEV.config" />
     <Content Include="www\css\source\components\selectlist\selectlist.scss" />
-    <Content Include="Views\Desktop\Report\CashOutWinLoss\Main.cshtml" />
-    <Content Include="Views\Desktop\Report\CashOutWinLoss\Filter.cshtml" />
-    <Content Include="Views\Desktop\Report\CashOutWinLoss\Content.cshtml" />
-    <Content Include="www\css\source\pages\report\cashoutwinloss.scss" />
-    <Content Include="www\css\build\dev\pages\reports\cashoutwinloss.chunk.js.map" />
-    <Content Include="www\css\build\dev\pages\reports\cashoutwinloss.css.map" />
     <Content Include="www\css\source\pages\betlist\cashouthistory.main.scss" />
     <Content Include="www\css\build\dev\pages\betlist\cashouthistory.chunk.js.map" />
     <Content Include="www\css\build\dev\pages\betlist\cashouthistory.css.map" />
@@ -1753,30 +1647,19 @@
     <Content Include="www\js\build\dev\pages\betlist\betlistrunning.chunk.js" />
     <Content Include="www\js\build\dev\pages\betlist\betlistrunningmultiplebettypes.chunk.js" />
     <Content Include="www\js\build\dev\pages\betlist\betlistsimple.chunk.js" />
-    <Content Include="www\js\build\dev\pages\betlist\customeroutstanding.chunk.js" />
     <Content Include="www\js\build\dev\pages\betlist\lastbetmonitoring.chunk.js" />
-    <Content Include="www\js\build\dev\pages\customer\betsettingbygroup.chunk.js" />
-    <Content Include="www\js\build\dev\pages\customer\betsettingmain.chunk.js" />
     <Content Include="www\js\build\dev\pages\customer\commgroupadd.chunk.js" />
     <Content Include="www\js\build\dev\pages\customer\commgroupedit.chunk.js" />
     <Content Include="www\js\build\dev\pages\customer\commgrouplist.chunk.js" />
-    <Content Include="www\js\build\dev\pages\customer\customerlist.chunk.js" />
     <Content Include="www\js\build\dev\pages\customer\customersetting.chunk.js" />
-    <Content Include="www\js\build\dev\pages\customer\dcsbetsetting.chunk.js" />
     <Content Include="www\js\build\dev\pages\customer\groupcommission.chunk.js" />
-    <Content Include="www\js\build\dev\pages\customer\kenobetsetting.chunk.js" />
     <Content Include="www\js\build\dev\pages\customer\loginlog.chunk.js" />
-    <Content Include="www\js\build\dev\pages\customer\numbergamebetsetting.chunk.js" />
-    <Content Include="www\js\build\dev\pages\customer\thirdpartybetsetting.chunk.js" />
     <Content Include="www\js\build\dev\pages\forecast\ahforecast.chunk.js" />
     <Content Include="www\js\build\dev\pages\forecast\forecasthdpou.chunk.js" />
     <Content Include="www\js\build\dev\pages\forecast\forecastonextwo.chunk.js" />
     <Content Include="www\js\build\dev\pages\forecast\newforecasthdpou.chunk.js" />
     <Content Include="www\js\build\dev\pages\home\home.chunk.js" />
-    <Content Include="www\js\build\dev\pages\reports\activecustomersummary.chunk.js" />
     <Content Include="www\js\build\dev\pages\reports\agcasinowinloss.chunk.js" />
-    <Content Include="www\js\build\dev\pages\reports\cashoutwinloss.chunk.js" />
-    <Content Include="www\js\build\dev\pages\reports\colossusbetswinloss.chunk.js" />
     <Content Include="www\js\build\dev\pages\reports\customerbalance.chunk.js" />
     <Content Include="www\js\build\dev\pages\reports\customerpendingfunds.chunk.js" />
     <Content Include="www\js\build\dev\pages\reports\customerturnover.chunk.js" />
@@ -1807,30 +1690,19 @@
     <Content Include="www\js\build\pro\pages\betlist\betlistrunning.chunk.js" />
     <Content Include="www\js\build\pro\pages\betlist\betlistrunningmultiplebettypes.chunk.js" />
     <Content Include="www\js\build\pro\pages\betlist\betlistsimple.chunk.js" />
-    <Content Include="www\js\build\pro\pages\betlist\customeroutstanding.chunk.js" />
     <Content Include="www\js\build\pro\pages\betlist\lastbetmonitoring.chunk.js" />
-    <Content Include="www\js\build\pro\pages\customer\betsettingbygroup.chunk.js" />
-    <Content Include="www\js\build\pro\pages\customer\betsettingmain.chunk.js" />
     <Content Include="www\js\build\pro\pages\customer\commgroupadd.chunk.js" />
     <Content Include="www\js\build\pro\pages\customer\commgroupedit.chunk.js" />
     <Content Include="www\js\build\pro\pages\customer\commgrouplist.chunk.js" />
-    <Content Include="www\js\build\pro\pages\customer\customerlist.chunk.js" />
     <Content Include="www\js\build\pro\pages\customer\customersetting.chunk.js" />
-    <Content Include="www\js\build\pro\pages\customer\dcsbetsetting.chunk.js" />
     <Content Include="www\js\build\pro\pages\customer\groupcommission.chunk.js" />
-    <Content Include="www\js\build\pro\pages\customer\kenobetsetting.chunk.js" />
     <Content Include="www\js\build\pro\pages\customer\loginlog.chunk.js" />
-    <Content Include="www\js\build\pro\pages\customer\numbergamebetsetting.chunk.js" />
-    <Content Include="www\js\build\pro\pages\customer\thirdpartybetsetting.chunk.js" />
     <Content Include="www\js\build\pro\pages\forecast\ahforecast.chunk.js" />
     <Content Include="www\js\build\pro\pages\forecast\forecasthdpou.chunk.js" />
     <Content Include="www\js\build\pro\pages\forecast\forecastonextwo.chunk.js" />
     <Content Include="www\js\build\pro\pages\forecast\newforecasthdpou.chunk.js" />
     <Content Include="www\js\build\pro\pages\home\home.chunk.js" />
-    <Content Include="www\js\build\pro\pages\reports\activecustomersummary.chunk.js" />
     <Content Include="www\js\build\pro\pages\reports\agcasinowinloss.chunk.js" />
-    <Content Include="www\js\build\pro\pages\reports\cashoutwinloss.chunk.js" />
-    <Content Include="www\js\build\pro\pages\reports\colossusbetswinloss.chunk.js" />
     <Content Include="www\js\build\pro\pages\reports\customerbalance.chunk.js" />
     <Content Include="www\js\build\pro\pages\reports\customerpendingfunds.chunk.js" />
     <Content Include="www\js\build\pro\pages\reports\customerturnover.chunk.js" />
@@ -1892,10 +1764,6 @@
     <Content Include="www\js\source\lib\select2.js" />
     <Content Include="www\js\source\pages\betlist\betlist.js" />
     <Content Include="www\js\source\pages\betlist\betlist.option.js" />
-    <Content Include="www\js\source\pages\betlist\customer\customer.dailystatement.js" />
-    <Content Include="www\js\source\pages\betlist\customer\customer.dailystatement.option.js" />
-    <Content Include="www\js\source\pages\betlist\customer\customer.outstandingbetlist.js" />
-    <Content Include="www\js\source\pages\betlist\customer\main.js" />
     <Content Include="www\js\source\pages\betlist\lastbetmonitoring\lastbet.filter.js" />
     <Content Include="www\js\source\pages\betlist\commonbetlist.js" />
     <Content Include="www\js\source\pages\betlist\betlistcorrectscore.js" />
@@ -1922,24 +1790,6 @@
     <Content Include="www\js\source\components\navbar.js" />
     <Content Include="www\js\source\components\refreshcountdown.js" />
     <Content Include="www\js\source\components\sidebar.js" />
-    <Content Include="www\js\source\pages\customer\betsetting\common\betsetting.copy.js" />
-    <Content Include="www\js\source\pages\customer\betsetting\common\betsetting.helper.js" />
-    <Content Include="www\js\source\pages\customer\betsetting\common\betsetting.status.js" />
-    <Content Include="www\js\source\pages\customer\betsetting\common\betsetting.validation.js" />
-    <Content Include="www\js\source\pages\customer\betsetting\common\betsettingbase.js" />
-    <Content Include="www\js\source\pages\customer\betsetting\common\constant.js" />
-    <Content Include="www\js\source\pages\customer\betsetting\main-betsettingbygroup.js" />
-    <Content Include="www\js\source\pages\customer\betsetting\main-betsetting.js" />
-    <Content Include="www\js\source\pages\customer\betsetting\main-dcsbetsetting.js" />
-    <Content Include="www\js\source\pages\customer\betsetting\main-keno.js" />
-    <Content Include="www\js\source\pages\customer\betsetting\main-numbergame.js" />
-    <Content Include="www\js\source\pages\customer\betsetting\main-thirdparty.js" />
-    <Content Include="www\js\source\pages\customer\betsetting\products\betsettingbygroup.js" />
-    <Content Include="www\js\source\pages\customer\betsetting\products\dcsbetsetting.js" />
-    <Content Include="www\js\source\pages\customer\betsetting\products\betsettingmain.js" />
-    <Content Include="www\js\source\pages\customer\betsetting\products\keno.js" />
-    <Content Include="www\js\source\pages\customer\betsetting\products\numbergame.js" />
-    <Content Include="www\js\source\pages\customer\betsetting\products\thirdparty.js" />
     <Content Include="www\js\source\pages\customer\customercomm\commgroup.js" />
     <Content Include="www\js\source\pages\customer\customercomm\commgroupadd.js" />
     <Content Include="www\js\source\pages\customer\customercomm\commgroupdetail.js" />
@@ -1948,16 +1798,6 @@
     <Content Include="www\js\source\pages\customer\customercomm\main-commgroupadd.js" />
     <Content Include="www\js\source\pages\customer\customercomm\main-commgroupedit.js" />
     <Content Include="www\js\source\pages\customer\customercomm\main-commgrouplist.js" />
-    <Content Include="www\js\source\pages\customer\customerlist\customerlist.filter.js" />
-    <Content Include="www\js\source\pages\customer\customerlist\customerlist.grid.js" />
-    <Content Include="www\js\source\pages\customer\customerlist\customerlist.bastatus.js" />
-    <Content Include="www\js\source\pages\customer\customerlist\customerlist.custoption.js" />
-    <Content Include="www\js\source\pages\customer\customerlist\customerlist.oddsgroup.js" />
-    <Content Include="www\js\source\pages\customer\customerlist\customerlist.gridoption.js" />
-    <Content Include="www\js\source\pages\customer\customerlist\customerlist.state.js" />
-    <Content Include="www\js\source\pages\customer\customerlist\customerlist.service.js" />
-    <Content Include="www\js\source\pages\customer\customerlist\customerlist.speciallevel.js" />
-    <Content Include="www\js\source\pages\customer\customerlist\main.js" />
     <Content Include="www\js\source\pages\customer\customerlog\common.option.js" />
     <Content Include="www\js\source\pages\customer\customerlog\customerlog.service.js" />
     <Content Include="www\js\source\pages\customer\customerlog\customersetting\customersetting.js" />
@@ -1975,15 +1815,9 @@
     <Content Include="www\js\source\pages\home\home.js" />
     <Content Include="www\js\source\pages\home\main.js" />
     <Content Include="www\js\source\pages\home\recheckin.js" />
-    <Content Include="www\js\source\pages\report\activecustomersummary\activecustomersummary.js" />
-    <Content Include="www\js\source\pages\report\activecustomersummary\activecustomersummary.option.js" />
-    <Content Include="www\js\source\pages\report\activecustomersummary\main.js" />
     <Content Include="www\js\source\pages\report\agcasinowinloss\agcasinowinloss.js" />
     <Content Include="www\js\source\pages\report\agcasinowinloss\agcasinowinloss.option.js" />
     <Content Include="www\js\source\pages\report\agcasinowinloss\main.js" />
-    <Content Include="www\js\source\pages\report\cashoutwinloss\cashoutwinloss.js" />
-    <Content Include="www\js\source\pages\report\cashoutwinloss\cashoutwinloss.option.js" />
-    <Content Include="www\js\source\pages\report\cashoutwinloss\main.js" />
     <Content Include="www\js\source\pages\report\customerbalance\customerbalance.js" />
     <Content Include="www\js\source\pages\report\customerbalance\customerbalance.option.js" />
     <Content Include="www\js\source\pages\report\customerbalance\main.js" />
@@ -1996,11 +1830,6 @@
     <Content Include="www\js\source\pages\report\customerwinloss\customerwinloss.js" />
     <Content Include="www\js\source\pages\report\customerwinloss\customerwinloss.option.js" />
     <Content Include="www\js\source\pages\report\customerwinloss\main.js" />
-    <Content Include="www\js\source\pages\report\thirdpartywinloss\common\thirdpartywinloss.js" />
-    <Content Include="www\js\source\pages\report\thirdpartywinloss\common\thirdpartywinloss.option.js" />
-    <Content Include="www\js\source\pages\report\thirdpartywinloss\main-colossusbetswinloss.js" />
-    <Content Include="www\js\source\pages\report\thirdpartywinloss\reports\colossusbetswinloss.js" />
-    <Content Include="www\js\source\pages\report\thirdpartywinloss\reports\colossusbetswinloss.option.js" />
     <Content Include="www\js\source\pages\report\livereport\helper.js" />
     <Content Include="www\js\source\pages\report\livereport\livereport.js" />
     <Content Include="www\js\source\pages\report\livereport\livereportmatchlist.js" />
@@ -2068,34 +1897,11 @@
     <Content Include="www\js\tests\pages\betlist\commonbetlist-spec.js" />
     <Content Include="www\js\tests\pages\betlist\lastbetmonitoring\lastbet.filter-spec.js" />
     <Content Include="www\js\tests\pages\betlist\lastbetmonitoring\lastbet.grid-spec.js" />
-    <Content Include="www\js\tests\pages\customer\betsetting\common\betsetting.copy-spec.js" />
-    <Content Include="www\js\tests\pages\customer\betsetting\common\betsetting.helper-spec.js" />
-    <Content Include="www\js\tests\pages\customer\betsetting\common\betsetting.status-spec.js" />
-    <Content Include="www\js\tests\pages\customer\betsetting\common\betsetting.validation-spec.js" />
-    <Content Include="www\js\tests\pages\customer\betsetting\common\betsettingbase-spec.js" />
-    <Content Include="www\js\tests\pages\customer\betsetting\products\betsettingbygroup-spec.js" />
-    <Content Include="www\js\tests\pages\customer\betsetting\products\rngcasino-spec.js" />
-    <Content Include="www\js\tests\pages\customer\betsetting\products\betsettingmain-spec.js" />
-    <Content Include="www\js\tests\pages\customer\betsetting\products\dcsbetsetting-spec.js" />
-    <Content Include="www\js\tests\pages\customer\betsetting\products\keno-spec.js" />
-    <Content Include="www\js\tests\pages\customer\betsetting\products\numbergame-spec.js" />
-    <Content Include="www\js\tests\pages\customer\betsetting\products\thirdparty-spec.js" />
     <Content Include="www\js\tests\pages\customer\customercomm\commgroup-spec.js" />
     <Content Include="www\js\tests\pages\customer\customercomm\commgroupedit-spec.js" />
     <Content Include="www\js\tests\pages\customer\customercomm\commgroupadd-spec.js" />
     <Content Include="www\js\tests\pages\customer\customercomm\commgroupdetail-spec.js" />
     <Content Include="www\js\tests\pages\customer\customercomm\commgrouplist-spec.js" />
-    <Content Include="www\js\tests\pages\customer\customerlist\customerlist.bastatus-spec.js" />
-    <Content Include="www\js\tests\pages\customer\customerlist\customerlist.commision-spec.js" />
-    <Content Include="www\js\tests\pages\customer\customerlist\customerlist.custoption-spec.js" />
-    <Content Include="www\js\tests\pages\customer\customerlist\customerlist.custstatus-spec.js" />
-    <Content Include="www\js\tests\pages\customer\customerlist\customerlist.filter-spec.js" />
-    <Content Include="www\js\tests\pages\customer\customerlist\customerlist.grid-spec.js" />
-    <Content Include="www\js\tests\pages\customer\customerlist\customerlist.oddsgroup-spec.js" />
-    <Content Include="www\js\tests\pages\customer\customerlist\customerlist.gridoption-spec.js" />
-    <Content Include="www\js\tests\pages\customer\customerlist\customerlist.service-spec.js" />
-    <Content Include="www\js\tests\pages\customer\customerlist\customerlist.speciallevel-spec.js" />
-    <Content Include="www\js\tests\pages\customer\customerlist\customerlist.state-spec.js" />
     <Content Include="www\js\tests\pages\customer\customerlog\common.option-spec.js" />
     <Content Include="www\js\tests\pages\customer\customerlog\customerlog.service-spec.js" />
     <Content Include="www\js\tests\pages\customer\customerlog\customersetting\customersetting-spec.js" />
@@ -2106,12 +1912,8 @@
     <Content Include="www\js\tests\pages\forecast\forecast.newforecasthdpou-spec.js" />
     <Content Include="www\js\tests\pages\forecast\forecast.onextwo-spec.js" />
     <Content Include="www\js\tests\pages\forecast\forecast.ah-spec.js" />
-    <Content Include="www\js\tests\pages\report\activecustomersummary\activecustomersummary-spec.js" />
-    <Content Include="www\js\tests\pages\report\activecustomersummary\activecustomersummary.option-spec.js" />
     <Content Include="www\js\tests\pages\report\agcasinowinloss\agcasinowinloss-spec.js" />
     <Content Include="www\js\tests\pages\report\agcasinowinloss\agcasinowinloss.option-spec.js" />
-    <Content Include="www\js\tests\pages\report\cashoutwinloss\cashoutwinloss-spec.js" />
-    <Content Include="www\js\tests\pages\report\cashoutwinloss\cashoutwinloss.option-spec.js" />
     <Content Include="www\js\tests\pages\report\customerbalance\customerbalance-spec.js" />
     <Content Include="www\js\tests\pages\report\customerbalance\customerbalance.option-spec.js" />
     <Content Include="www\js\tests\pages\report\customerpendingfunds\customerpendingfunds-spec.js" />
@@ -2131,12 +1933,6 @@
     <Content Include="www\js\tests\pages\report\report-spec.js" />
     <Content Include="www\js\tests\pages\report\result\result-spec.js" />
     <Content Include="www\js\tests\pages\report\settledmatchcount\settledmatchcount-spec.js" />
-    <Content Include="www\js\tests\pages\report\thirdpartywinloss\common\thirdpartywinloss-spec.js" />
-    <Content Include="www\js\tests\pages\report\thirdpartywinloss\common\thirdpartywinloss.option-spec.js" />
-    <Content Include="www\js\tests\pages\report\thirdpartywinloss\reports\colossusbetswinloss-spec.js" />
-    <Content Include="www\js\tests\pages\report\thirdpartywinloss\reports\colossusbetswinloss.option-spec.js" />
-    <Content Include="www\js\tests\pages\report\thirdpartywinloss\reports\golddeluxewinloss-spec.js" />
-    <Content Include="www\js\tests\pages\report\thirdpartywinloss\reports\golddeluxewinloss.option.-spec.js" />
     <Content Include="www\js\tests\pages\report\turnover\turnover-spec.js" />
     <Content Include="www\js\tests\pages\report\weeklylivematch\weeklylivematch-spec.js" />
     <Content Include="www\js\tests\pages\report\weeklylivematch\weeklylivematch.option-spec.js" />
@@ -2186,20 +1982,10 @@
       <LastGenOutput>FanexSpName.xml1.txt</LastGenOutput>
     </None>
     <None Include="SpNameConfig\SpNameConfiguration.ttinclude" />
-    <Content Include="App_Data\Template\Reports\ActiveCustomerSummary.xls" />
-    <Content Include="App_Data\Template\Reports\GoldDeluxeWinLoss.xls" />
     <Content Include="App_Data\Template\Reports\ThirdPartyWinLoss.xls" />
-    <Content Include="App_Data\Template\RNGCasino\HandHistory.xls" />
     <Content Include="App_Data\Template\Reports\AgCasinoBalance.xls" />
     <Content Include="GruntFilters.json" />
     <Content Include="App_Data\Template\Reports\WeeklyLiveMatch.xls" />
-    <Content Include="App_Data\UserGuide\CustomerList\pdf\en-US\Odds Group Feature_Licensee.pdf" />
-    <Content Include="App_Data\UserGuide\CustomerList\pdf\zh-CN\Odds Group Feature_Licensee.pdf" />
-    <Content Include="App_Data\UserGuide\CustomerList\pdf\zh-CN\Odds Group Feature_Licensee_BA.pdf" />
-    <Content Include="App_Data\UserGuide\CustomerList\pdf\zh-TW\Odds Group Feature_Licensee.pdf" />
-    <Content Include="App_Data\UserGuide\CustomerList\pdf\zh-TW\Odds Group Feature_Licensee_BA.pdf" />
-    <Content Include="App_Data\UserGuide\CustomerList\pdf\en-US\Odds Group Feature_Licensee_BA.pdf" />
-    <Content Include="App_Data\Template\Reports\ColossusBetsWinLoss.xls" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
@@ -2353,7 +2139,6 @@
     <Content Include="Views\Desktop\Shared\_BetListSimpleLayout.cshtml" />
     <Content Include="Views\Desktop\BetList\LicenseeWl\Main.cshtml" />
     <Content Include="www\css\source\pages\betlist\betlist.scss" />
-    <Content Include="www\css\source\pages\betlist\colossusbetdetail.scss" />
     <Content Include="Views\Desktop\Shared\_SessionScript.cshtml" />
     <Content Include="Views\Desktop\Utility\OneTokenRestriction.cshtml" />
     <Content Include="Views\Shared\_SessionScript.cshtml" />
@@ -2454,8 +2239,6 @@
     <Content Include="www\css\build\dev\pages\betlist\betlistResult.css.map" />
     <Content Include="www\css\build\dev\pages\betlist\betlistSimpleLayout.chunk.js.map" />
     <Content Include="www\css\build\dev\pages\betlist\betlistSimpleLayout.css.map" />
-    <Content Include="www\css\build\dev\pages\betlist\colossusbetdetail.chunk.js.map" />
-    <Content Include="www\css\build\dev\pages\betlist\colossusbetdetail.css.map" />
     <Content Include="www\css\build\dev\pages\betlist\systemparlaydetail.chunk.js.map" />
     <Content Include="www\css\build\dev\pages\betlist\systemparlaydetail.css.map" />
     <Content Include="www\css\build\dev\pages\forecast\ahforecast.chunk.js.map" />
@@ -2619,7 +2402,6 @@
     <Content Include="www\js\build\dev\pages\reports\turnover.chunk.js.map" />
     <Content Include="www\css\source\scss\components\_radio-button.scss" />
     <Content Include="www\js\tests\pages\report\turnover\turnover.option-spec.js" />
-    <Content Include="www\js\build\dev\pages\reports\cashoutwinloss.chunk.js.map" />
     <Content Include="www\css\source\pages\report\winlossbyproduct.scss" />
     <Content Include="www\js\build\dev\pages\reports\winlossbyproduct.chunk.js.map" />
     <Content Include="www\js\build\dev\pages\reports\matchwinloss.chunk.js.map" />
@@ -2627,25 +2409,15 @@
     <Content Include="www\js\build\dev\pages\reports\winlossbybettype.chunk.js.map" />
     <Content Include="www\js\build\dev\pages\betlist\lastbetmonitoring.chunk.js.map" />
     <Content Include="www\js\build\dev\pages\customer\commgrouplist.chunk.js.map" />
-    <Content Include="www\js\build\dev\pages\customer\customerlist.chunk.js.map" />
     <Content Include="www\js\build\dev\pages\customer\customersetting.chunk.js.map" />
     <Content Include="www\js\build\dev\pages\customer\groupcommission.chunk.js.map" />
     <Content Include="www\js\build\dev\pages\customer\loginlog.chunk.js.map" />
     <Content Include="www\js\build\dev\pages\customer\commgroupadd.chunk.js.map" />
     <Content Include="www\js\build\dev\pages\customer\commgroupedit.chunk.js.map" />
-    <Content Include="www\js\build\dev\pages\betlist\customeroutstanding.chunk.js.map" />
-    <Content Include="www\js\build\dev\pages\customer\betsettingbygroup.chunk.js.map" />
-    <Content Include="www\js\build\dev\pages\customer\betsettingmain.chunk.js.map" />
-    <Content Include="www\js\build\dev\pages\customer\dcsbetsetting.chunk.js.map" />
-    <Content Include="www\js\build\dev\pages\customer\kenobetsetting.chunk.js.map" />
-    <Content Include="www\js\build\dev\pages\customer\numbergamebetsetting.chunk.js.map" />
-    <Content Include="www\js\build\dev\pages\customer\thirdpartybetsetting.chunk.js.map" />
     <Content Include="www\webpackconfig\build\webpack.react.pro.conf.js" />
     <Content Include="www\css\source\scss\fonts\roboto\_style.scss" />
-    <Content Include="www\js\build\dev\pages\reports\activecustomersummary.chunk.js.map" />
     <Content Include="www\js\build\dev\pages\reports\customerbalance.chunk.js.map" />
     <Content Include="www\js\build\dev\pages\reports\agcasinowinloss.chunk.js.map" />
-    <Content Include="www\js\build\dev\pages\reports\colossusbetswinloss.chunk.js.map" />
     <Content Include="www\js\build\dev\pages\reports\customerpendingfunds.chunk.js.map" />
     <Content Include="www\js\build\dev\pages\reports\customerturnover.chunk.js.map" />
     <Content Include="www\js\build\dev\pages\reports\customerwinloss.chunk.js.map" />
@@ -5584,7 +5356,6 @@
     <Content Include="App_Data\Template\CustomerReports\CustomerPendingFunds.xls" />
     <Content Include="App_Data\Template\CustomerReports\CustomerTurnover.xls" />
     <Content Include="App_Data\Template\CustomerReports\CustomerWinLoss.xls" />
-    <Content Include="App_Data\Template\Customers\CustomerList.xls" />
     <Content Include="App_Data\Template\Reports\LicenseeWinLoss.xls" />
     <Content Include="App_Data\Template\Reports\LiveReport.xls" />
     <Content Include="App_Data\Template\Reports\MatchWinLoss.xls" />
@@ -5594,7 +5365,6 @@
     <Content Include="App_Data\Template\Reports\LiveReportMatchList.xls" />
     <Content Include="Content\Web.config" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
-    <Content Include="Views\Desktop\Customer\CustomerDialog\LogInfo.cshtml" />
     <Content Include="Views\Shared\_Report.jqGridLayout.cshtml" />
     <None Include="Scripts\Languages\ViewResources.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -5657,10 +5427,6 @@
     <ProjectReference Include="..\Controller\Fanex.Athena.Controllers.BetList\Fanex.Athena.Controllers.BetList.csproj">
       <Project>{83f7dc5c-e81c-45e5-bc83-b58e45198a2e}</Project>
       <Name>Fanex.Athena.Controllers.BetList</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Controller\Fanex.Athena.Controllers.BetSettings\Fanex.Athena.Controllers.BetSettings.csproj">
-      <Project>{bd14328f-0bca-43e4-a3df-ce166ac95135}</Project>
-      <Name>Fanex.Athena.Controllers.BetSettings</Name>
     </ProjectReference>
     <ProjectReference Include="..\Controller\Fanex.Athena.Controllers.Customer\Fanex.Athena.Controllers.Customer.csproj">
       <Project>{11985254-411e-45dc-9b50-8dcb8bd145ef}</Project>
