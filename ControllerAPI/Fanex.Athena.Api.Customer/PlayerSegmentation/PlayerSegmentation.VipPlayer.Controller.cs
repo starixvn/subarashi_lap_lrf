@@ -28,7 +28,7 @@
         }
 
         [HttpPost]
-        [ApiFunctionAuthorization(PermissionKeys.MonitoredPlayer_Write)]
+        [ApiFunctionAuthorization(PermissionKeys.PlayerVIPManagement_Write)]
         public Task<HttpResponseMessage> ExportVipPlayerListTemplateExcel(byte uploadBy = UploadByExternalId)
         {
             const string fileName = "VipPlayerList.xls";
