@@ -9,6 +9,7 @@ import * as dateRangeAction from '@jsroot/actions/dateRangeAction'
 import * as userGuideAction from '@jsroot/actions/userGuideAction'
 import * as requestParamAction from '@jsroot/actions/requestParamAction'
 import * as reportTitleAction from '@jsroot/actions/reportTitleAction'
+import * as subsidiaryAction from '@jsroot/actions/subsidiaryAction'
 
 
 export default {
@@ -22,5 +23,6 @@ export default {
     ...dateRangeAction,
     ...userGuideAction,
     ...requestParamAction,
-    ...reportTitleAction
+    ...reportTitleAction,
+    ...subsidiaryAction
 }

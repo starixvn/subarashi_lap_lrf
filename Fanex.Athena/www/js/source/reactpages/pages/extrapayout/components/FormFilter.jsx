@@ -15,6 +15,8 @@ import { ToastContainer, toast, Flip } from 'react-toastify';
 import { ApiUrl, ReportLevel } from '../common/constants';
 import Service from '../common/service';
 import DataService from '@jsroot/lib/DataService.js';
+import { SubsidiaryViewType, TreeViewOption } from '../../../constants/report';
+import { TreeViewSelect } from '@9softstudio/react-multiselect'
 
 export const FormFilter = props => {
     const [isConvertAllToBaseCurrency, setConvertAllToBaseCurrency] = useState(true);
@@ -136,6 +138,10 @@ export const FormFilter = props => {
         props.setSelectedBaseCurrency(baseCurrency);
     }
 
+    const onChangeSubsidiaryList = (currentItem, selectedItemsKey, treeViewList) => {
+        props.setSubsidiaryList(selectedItemsKey);
+    }
+
     const showUserGuide = () => {
         const userGuideContent = props.userGuideContent;
 
@@ -152,6 +158,21 @@ export const FormFilter = props => {
                 contentTitle={LangHelper.getSingleResource("ExtraPayout")}
                 onClick={showUserGuide}
                 content={userGuideContent} />)
+    }
+
+    const _renderSubsidiaryTreeView = () => {
+        return <TreeViewSelect
+            language={LangHelper.currentLanguage}
+            id="SubsidiaryTreeView"
+            dataSource={AppData.subsidiaryList}
+            keyField="Value"
+            valueField="Name"
+            statusField="Checked"
+            texts={{ SelectOptions: "Please select", All: "All", SelectedItemCount: "# selected" }}
+            isAllTextShown={false}
+            hasSearchBox={false}
+            treeViewOption={TreeViewOption}
+            onChange={onChangeSubsidiaryList} />;
     }
 
     const onSubmit = (event) => {
@@ -183,6 +204,8 @@ export const FormFilter = props => {
             : AppData.currencyList.filter(item => selectedCurrencyArray.includes(item.Id.toString())).map(item => item.Value).join(',');        
 
         const baseCurrency = baseCurrencyList.find(x => x.value === props.selectedBaseCurrency);
+        const subsidiarySearch = props.subsidiarySearch;
+
         return {
             PageSize: 50,
             PageIndex: 1,
@@ -200,13 +223,16 @@ export const FormFilter = props => {
             BaseCurrencyName: baseCurrency ? baseCurrency.label : '',
             CurrencyName: currencyText ? currencyText : '',
             DrillDownLevel: ReportLevel.MAIN,
-            IsExcludedTestData: isExcludeTest
+            IsExcludedTestData: isExcludeTest,
+            SubsidiarySearch: subsidiarySearch,
+            SubsidiaryList: subsidiarySearch ? props.selectedSubsidiary : "",
         }
     }
 
     
     const isValidModel = () => {
-        const result = !!props.selectedProduct
+        const result = (!props.subsidiarySearch || !!props.selectedSubsidiary)
+            && !!props.selectedProduct
             && !!props.selectedCurrency
             && !!props.selectedPromotionTypes
             && !!props.selectedBaseCurrency;
@@ -249,6 +275,8 @@ export const FormFilter = props => {
         {_renderUserGuide()}
     </div>;
 
+    const showSubsidiarySearch = AppData.viewType !== SubsidiaryViewType.NOT_MANAGEMENT;
+
     return (
         <>
         <CollapsiblePanel className="page-filter" stickyFooter={excelButton}>
@@ -258,7 +286,16 @@ export const FormFilter = props => {
                     pauseOnFocusLoss={false}
                     style={{ width: "500px" }}
                     transition={Flip} />
-                <div className="col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2">
+
+                {showSubsidiarySearch && props.subsidiarySearch && (<div className='col-12 col-sm-3 col-md-3 col-lg-4 col-xl-2'>
+                        <div className="form-group">
+                            <label className="label-text">
+                                {AppData.viewType === SubsidiaryViewType.MASTER_MANAGEMENT ? LangHelper.getSingleResource("WhiteLabel") : LangHelper.getSingleResource("Subsidiary")}
+                            </label>
+                            {_renderSubsidiaryTreeView()}
+                        </div>
+                </div>)}
+                <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
                     <div className="form-group">
                         <label className="label-text">{LangHelper.getSingleResource("Date")}</label>
                         {_renderDateFilter()}
@@ -293,8 +330,8 @@ export const FormFilter = props => {
                     </div>
                 </div>
 
-            </div>
-            <div className="row">
+            {/* </div>
+            <div className="row"> */}
                 <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
                     <div className="form-group">
                         <label className="label-text">{LangHelper.getSingleResource("Username")}</label>
@@ -323,7 +360,6 @@ export const FormFilter = props => {
                             label={LangHelper.getSingleResource("ConvertAllFiguresToBaseCurrency")} />
                     </div>
                 </div>
-
                 <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
                     <div className="form-group">
                         <CheckBox id="ExcludeTest"
@@ -332,12 +368,26 @@ export const FormFilter = props => {
                             label={LangHelper.getSingleResource("ExcludeTestData")} />
                     </div>
                 </div>
-
-                <div className="col-12 col-md-2 col-sm-2 col-lg-2 col-xl-1">
-                    <div className="form-group">
-                        <div className="button-group">
-                            <button type="button" disabled={!isValidModel()} className="btn btn-submit" onClick={onSubmit}>{LangHelper.getSingleResource("Submit")}</button>
+                <div className="col-12 col-md-5 col-sm-5 col-lg-4 col-xl-2">
+                    <div className="row">
+                        <div className="col-12 col-md-4 col-sm-5 col-lg-4 col-xl-5">
+                            <div className="form-group">
+                                <div className="button-group">
+                                    <button type="button" disabled={!isValidModel()} className="btn btn-submit" onClick={onSubmit}>{LangHelper.getSingleResource("Submit")}</button>
+                                </div>
+                            </div>
                         </div>
+
+                        {showSubsidiarySearch && <>
+                            <div className='col-12 col-md-8 col-sm-7 col-lg-8 col-xl-7'>
+                                <div className="form-group">
+                                    <CheckBox id="SubsidiarySearch"
+                                        checked={props.subsidiarySearch}
+                                        onChange={checked => props.setSubsidiarySearch(checked)}
+                                        label={LangHelper.getSingleResource("SubsidiarySearch")} />
+                                </div>
+                            </div>
+                        </>}
                     </div>
                 </div>
             </div>
@@ -348,10 +398,11 @@ export const FormFilter = props => {
     
 
 function mapStateToProps(state) {
-    const { requestParam, dateRange, selectedProduct, promotionTypeList, selectedPromotionTypes, selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, userGuideContent } = state;
+    const { requestParam, dateRange, selectedProduct, promotionTypeList, selectedPromotionTypes, selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, userGuideContent,
+        subsidiarySearch, selectedSubsidiary } = state;
 
     return Object.assign({}, {
-        requestParam, dateRange, selectedProduct, promotionTypeList, selectedPromotionTypes, selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, userGuideContent
+        requestParam, dateRange, selectedProduct, promotionTypeList, selectedPromotionTypes, selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, userGuideContent, subsidiarySearch, selectedSubsidiary
     });
 }
 

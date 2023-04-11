@@ -1916,11 +1916,11 @@
   </data>
   <data name="Subsidiary" xml:space="preserve">
     <value>子网站</value>
-    <comment>95177</comment>
+    <comment>163255</comment>
   </data>
   <data name="SubsidiaryPerformance" xml:space="preserve">
-    <value>子网站报告</value>
-    <comment>95177</comment>
+    <value>子网站综合报表</value>
+    <comment>163255</comment>
   </data>
   <data name="SubsidiaryWL" xml:space="preserve">
     <value>子网站输赢</value>
@@ -2375,6 +2375,14 @@
   </data>
   <data name="CashOutWL_SportNote" xml:space="preserve">
     <value>此报告支持从 01/01/2023 开始以运动类型筛选</value>
+  </data>
+  <data name="SubsidiarySearch" xml:space="preserve">
+    <value>收寻子网站</value>
+    <comment>163255</comment>
+  </data>
+  <data name="WhiteLabel" xml:space="preserve">
+    <value>包网商</value>
+    <comment>163255</comment>
   </data>
   <data name="ProductJIG" xml:space="preserve">
     <value>吉利电子</value>
