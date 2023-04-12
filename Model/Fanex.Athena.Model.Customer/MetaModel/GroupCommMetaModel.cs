@@ -123,6 +123,12 @@
 
         public decimal VS3Comm { get; set; }
 
+        public decimal FGGLComm { get; set; }
+
+        public decimal MXGComm { get; set; }
+
+        public decimal JIGComm { get; set; }
+
         public void MapQuery()
         {
             CommValues = new Dictionary<string, decimal>();
@@ -158,6 +164,10 @@
             CommValues.Add(Product.AP, APComm);
             CommValues.Add(Product.APM, APMComm);
             CommValues.Add(Product.VS3, VS3Comm);
+
+            CommValues.Add(Product.FGGL, FGGLComm);
+            CommValues.Add(Product.MXG, MXGComm);
+            CommValues.Add(Product.JIG, JIGComm);
         }
 
         public void MapData(IDataReader reader, IDictionary<string, string> columns, IDictionary<string, bool> visibility)
