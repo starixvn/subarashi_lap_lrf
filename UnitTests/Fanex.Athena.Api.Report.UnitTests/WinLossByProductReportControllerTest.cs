@@ -36,7 +36,7 @@
             _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
 
             _currencyValidation = Substitute.For<ICurrencyValidation>();
-            _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
+            _currencyValidation.IsValidCurrency(Arg.Any<int>()).Returns(true);
             _dataAccess = Substitute.For<IWinLossByProductDataAccess>();
             CreateController();
         }
@@ -68,7 +68,7 @@
         public async Task Index_InvalidCurrency_ReturnBadRequestWithCorrectMessage()
         {
             // Arrange
-            _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(false);
+            _currencyValidation.IsValidCurrency(Arg.Any<int>()).Returns(false);
 
             var metaModel = new WinLossByProductMetaModel { CurrencyId = -100 };
 

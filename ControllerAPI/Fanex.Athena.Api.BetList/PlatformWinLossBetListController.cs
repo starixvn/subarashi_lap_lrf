@@ -37,7 +37,7 @@ namespace Fanex.Athena.Api.BetList
         }
 
         [HttpPost]
-        [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
+        [ValidationApiRequest(IsValidCurrency = true)]
         public async Task<dynamic> Index(BetListMetaModel metaModel)
         {
             const string UspKey = "Lrf_BetList_PlatformWinLoss_Mem";

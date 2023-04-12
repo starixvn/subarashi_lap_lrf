@@ -145,7 +145,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CashOutWinLossReportController.cs" />
     <Compile Include="CustomerPendingFundsReportController.cs" />
     <Compile Include="ExchangeWinLossReportController.cs" />
     <Compile Include="LicenseeWinLossByTimeZoneReportController.cs" />
@@ -155,10 +154,8 @@
     <Compile Include="SubsidiaryPerformanceReportController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ApiReportBaseController.cs" />
-    <Compile Include="ActiveCustomerSummaryReportController.cs" />
     <Compile Include="AgCasinoBalanceReportController.cs" />
     <Compile Include="AgCasinoWinLossReportController.cs" />
-    <Compile Include="ColossusBetsWinLossReportController.cs" />
     <Compile Include="WeeklyLiveMatchReportController.cs" />
     <Compile Include="LicenseeWinLossReportController.cs" />
     <Compile Include="WinLossByProductReportController.cs" />

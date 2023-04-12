@@ -68,7 +68,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AgCasinoBalanceExcelTest.cs" />
-    <Compile Include="ActiveCustomerSummaryExcelTest.cs" />
     <Compile Include="BaseReportExcelTest.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="LicenseeWinLossExcelTest.AssignCommonData.cs" />
@@ -77,11 +76,9 @@
     <Compile Include="MatchWinLossExcelTest.AssignMatchData.cs" />
     <Compile Include="TestableClasses\LicenseeWinLossExcelTestable.cs" />
     <Compile Include="TestableClasses\MatchWinLossExcelTestable.cs" />
-    <Compile Include="TestableClasses\GoldDeluxeWinLossExcelTestable.cs" />
     <Compile Include="TestableClasses\WinlossByProductExcelTestable.cs" />
     <Compile Include="LicenseeWinLossExcelTest.cs" />
     <Compile Include="MatchWinLossExcelTest.cs" />
-    <Compile Include="GoldDeluxeWinLossExcelTest.cs" />
     <Compile Include="WinlossByProductExcelTest.cs" />
     <Compile Include="WinLossByBetTypeExcelTest.cs" />
     <Compile Include="TestableClasses\WinLossByBetTypeExcelTestable.cs" />
@@ -91,18 +88,13 @@
     <Compile Include="ThirdPartyWinLossExcelTest.cs" />
     <Compile Include="CustomerTurnoverExcelTest.cs" />
     <Compile Include="CustomerPendingFundsExcelTest.cs" />
-    <Compile Include="ColossusBetsWinLossExcelTest.cs" />
-    <Compile Include="CashOutWinLossExcelTest.cs" />
     <Compile Include="LiveReportExcelTest.cs" />
     <Compile Include="TestableClasses\ThirdPartyWinLossExcelTestable.cs" />
     <Compile Include="TestableClasses\LiveReportExcelTestable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestableClasses\AgCasinoBalanceExcelTestable.cs" />
-    <Compile Include="TestableClasses\ActiveCustomerSummaryExcelTestable.cs" />
     <Compile Include="TestableClasses\CustomerTurnoverExcelTestable.cs" />
     <Compile Include="TestableClasses\CustomerPendingFundsExcelTestable.cs" />
-    <Compile Include="TestableClasses\ColossusBetsWinLossExcelTestable.cs" />
-    <Compile Include="TestableClasses\CashOutWinLossExcelTestable.cs" />
     <Compile Include="TurnoverExcelTest.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -311,61 +311,6 @@
             }
         }
 
-        [Test]
-        public void DownloadCustomerListPdf_IsEnableBA_ReturnCorrectFileName()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                SessionService.LicenseeSession.IsEnableBA = true;
-
-                _fileSystem.Exists(Arg.Any<string>()).Returns(false);
-
-                // Action
-                var result = controller.DownloadCustomerListPdf();
-
-                // Assert
-                Assert.That(result.FileName, Does.Contain("Odds Group Feature_Licensee_BA.pdf"));
-            }
-        }
-
-        [Test]
-        public void DownloadCustomerListPdf_IsNotEnableBA_ReturnCorrectFileName()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                SessionService.LicenseeSession.IsEnableBA = false;
-
-                _fileSystem.Exists(Arg.Any<string>()).Returns(false);
-
-                // Action
-                var result = controller.DownloadCustomerListPdf();
-
-                // Assert
-                Assert.That(result.FileName, Does.Contain("Odds Group Feature_Licensee.pdf"));
-            }
-        }
-
-        [TestCase("zh-CN", "Cash Out WL Report guideline_CN.pdf")]
-        [TestCase("zh-TW", "Cash Out WL Report guideline_CN.pdf")]
-        [TestCase("zh-Hans", "Cash Out WL Report guideline_CN.pdf")]
-        [TestCase("xxxxx", "Cash Out WL Report guideline_EN.pdf")]
-        public void CashoutReportPdf_WhenCall_ReturnCorrectFileName(string language, string expectedFileName)
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                SessionService.UserSession.Language = language;
-
-                // Action
-                var result = controller.CashoutReportPdf();
-
-                // Assert
-                Assert.That(result.FileName, Does.Contain(expectedFileName));
-            }
-        }
-
         private UserGuideController CreateController()
         {
             var controller = new UserGuideController(

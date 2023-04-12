@@ -1632,12 +1632,6 @@
     <value>Bet Setting Groups</value>
     <comment>#19476 - AG Casino</comment>
   </data>
-  <data name="DisableAgCasino" xml:space="preserve">
-    <value>Disable AG Casino</value>
-  </data>
-  <data name="EnableAgCasino" xml:space="preserve">
-    <value>Enable AG Casino</value>
-  </data>
   <data name="UpdateAgCasinoBetSettings" xml:space="preserve">
     <value>Are you sure you want to update all AG Casino bet settings?</value>
     <comment>#19458</comment>
@@ -1714,10 +1708,6 @@
     <value>Are you sure you want to move this player to odds group {0}?</value>
     <comment>#26561</comment>
   </data>
-  <data name="ActiveCustomerSummary" xml:space="preserve">
-    <value>Active Customer Summary</value>
-    <comment>#29219</comment>
-  </data>
   <data name="TotalActiveCustomer" xml:space="preserve">
     <value>Total active customers</value>
     <comment>#29219</comment>
@@ -1726,40 +1716,13 @@
     <value>Date range exceeds {0} months. Please try again!</value>
     <comment>#29219</comment>
   </data>
-  <data name="ProductGD" xml:space="preserve">
-    <value>Gold Deluxe</value>
-    <comment>#49196</comment>
-  </data>
-  <data name="GoldDeluxeNotOfferCurrency" xml:space="preserve">
-    <value>Gold Deluxe is not offered for this currency.</value>
-  </data>
-  <data name="DisableGoldDeluxe" xml:space="preserve">
-    <value>Disable Gold Deluxe</value>
-  </data>
-  <data name="EnableGoldDeluxe" xml:space="preserve">
-    <value>Enable Gold Deluxe</value>
-  </data>
-  <data name="UpdateGoldDeluxeBetSettings" xml:space="preserve">
-    <value>Are you sure you want to update all Gold Deluxe bet settings?</value>
-  </data>
   <data name="CannotUpdateBetLimitForProduct" xml:space="preserve">
     <value>You cannot update member bet limit for product {0}.</value>
     <comment>#32647</comment>
   </data>
-  <data name="GoldDeluxeWinLoss" xml:space="preserve">
-    <value>Gold Deluxe Win Loss</value>
-  </data>
   <data name="ProductBT" xml:space="preserve">
     <value>Bet Trade</value>
     <comment>#49196</comment>
-  </data>
-  <data name="DisableMacau" xml:space="preserve">
-    <value>Disable Macau</value>
-    <comment>#32647</comment>
-  </data>
-  <data name="EnableMacau" xml:space="preserve">
-    <value>Enable Macau</value>
-    <comment>#32647</comment>
   </data>
   <data name="ProductVG" xml:space="preserve">
     <value>Macau</value>
@@ -1770,9 +1733,6 @@
   </data>
   <data name="BetTradeNotOfferCurrency" xml:space="preserve">
     <value>BetTrade is not offered for this currency.</value>
-  </data>
-  <data name="EnableBetTrade" xml:space="preserve">
-    <value>Enable BetTrade</value>
   </data>
   <data name="AmtDueToBetTrade" xml:space="preserve">
     <value>Amt Due To Bet Trade</value>
@@ -1845,12 +1805,6 @@
     <value>%Turnover</value>
     <comment>#54751</comment>
   </data>
-  <data name="DisableMacauGames" xml:space="preserve">
-    <value>Disable Macau Games</value>
-  </data>
-  <data name="EnableMacauGames" xml:space="preserve">
-    <value>Enable Macau Games</value>
-  </data>
   <data name="WeeklyLiveMatches" xml:space="preserve">
     <value>Weekly Live Matches</value>
     <comment>#52886</comment>
@@ -1862,27 +1816,6 @@
   <data name="ProductAB" xml:space="preserve">
     <value>AllBet</value>
     <comment>#61066</comment>
-  </data>
-  <data name="DisableAllBet" xml:space="preserve">
-    <value>Disable AllBet</value>
-  </data>
-  <data name="EnableAllBet" xml:space="preserve">
-    <value>Enable AllBet</value>
-  </data>
-  <data name="ProductCB" xml:space="preserve">
-    <value>Colossus Bets</value>
-    <comment>#63785</comment>
-  </data>
-  <data name="ColossusBetsWinLoss" xml:space="preserve">
-    <value>Colossus Bets Win Loss</value>
-  </data>
-  <data name="DisableColossusBets" xml:space="preserve">
-    <value>Disable Colossus Bets</value>
-    <comment>#63785</comment>
-  </data>
-  <data name="EnableColossusBets" xml:space="preserve">
-    <value>Enable Colossus Bets</value>
-    <comment>#63785</comment>
   </data>
   <data name="AmountDueToCB" xml:space="preserve">
     <value>Amount Due To Colossus Bets</value>
@@ -1913,10 +1846,6 @@
   <data name="TransactionType" xml:space="preserve">
     <value>Transaction Type</value>
   </data>
-  <data name="ColossusBetBetListDetailMsg" xml:space="preserve">
-    <value>Member owned {0}% of this ticket&lt;br/&gt;Member sold {1}% of this ticket for {2}</value>
-    <comment>#63785</comment>
-  </data>
   <data name="TicketDetailOf" xml:space="preserve">
     <value>Ticket detail of {0}</value>
     <comment>#63785</comment>
@@ -1943,27 +1872,8 @@
   <data name="YouAreNotAllowToAccessThisPage" xml:space="preserve">
     <value>You are not allowed to access this page, please contact your administrator account.</value>
   </data>
-  <data name="ProductFW" xml:space="preserve">
-    <value>Fishing World</value>
-    <comment>#66737</comment>
-  </data>
-  <data name="DisableFishingWorld" xml:space="preserve">
-    <value>Disable Fishing World</value>
-    <comment>#66737</comment>
-  </data>
-  <data name="EnableFishingWorld" xml:space="preserve">
-    <value>Enable Fishing World</value>
-    <comment>#66737</comment>
-  </data>
-  <data name="GoldDeluxeWinLossGuidelineContent" xml:space="preserve">
-    <value>Any query before 4PM GMT-4 will return the data up to 4PM of the day before. You can filter data up to 3 months per query.</value>
-    <comment>#71725</comment>
-  </data>
   <data name="ProductCO" xml:space="preserve">
     <value>Cash Out</value>
-  </data>
-  <data name="EnableCashOut" xml:space="preserve">
-    <value>Enable Cash Out</value>
   </data>
   <data name="CashOutNotOfferCurrency" xml:space="preserve">
     <value>Cash Out is not offered for this currency.</value>
@@ -2054,14 +1964,6 @@
   </data>
   <data name="ProductLT" xml:space="preserve">
     <value>Lottery</value>
-    <comment>79997</comment>
-  </data>
-  <data name="DisableProduct" xml:space="preserve">
-    <value>Disable {0}</value>
-    <comment>79997</comment>
-  </data>
-  <data name="EnableProduct" xml:space="preserve">
-    <value>Enable {0}</value>
     <comment>79997</comment>
   </data>
   <data name="UpdateProductBetSettings" xml:space="preserve">
@@ -2933,9 +2835,6 @@
   </data>
   <data name="ProductSBVS" xml:space="preserve">
     <value>Saba Virtual Sports</value>
-  </data>
-  <data name="ProductGDG" xml:space="preserve">
-    <value>GDG</value>
   </data>
   <data name="AgentBetInterval" xml:space="preserve">
     <value>Agent Bet Interval (sec)</value>

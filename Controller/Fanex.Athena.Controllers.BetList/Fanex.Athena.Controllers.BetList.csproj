@@ -118,7 +118,6 @@
     <Compile Include="BettingTicketCenterController.cs" />
     <Compile Include="BetListBaseController.cs" />
     <Compile Include="CorrectScoreBetListController.cs" />
-    <Compile Include="CustomerOutstandingBetListController.cs" />
     <Compile Include="CustomerWinLossBetListController.cs" />
     <Compile Include="GodOfFortuneWinLossBetListController.cs" />
     <Compile Include="LastBetsMonitoringBetListController.cs" />

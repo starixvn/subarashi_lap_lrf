@@ -36,7 +36,6 @@ namespace Fanex.Athena.Model.Core.Helper
             [Product.WM] = "WMCasino",
             [Product.BGG] = "BigGaming",
             [Product.JK] = "Joker",
-            [Product.GDG] = "GDG",
             [Product.SLT] = "SportsLottery",
             [Product.HB] = "Habanero",
             [Product.VGA] = "VGaming",

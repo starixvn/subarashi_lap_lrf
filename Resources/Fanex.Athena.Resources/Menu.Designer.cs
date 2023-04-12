@@ -97,15 +97,6 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Active Customer Summary.
-        /// </summary>
-        public static string activecustomersummary64 {
-            get {
-                return ResourceManager.GetString("activecustomersummary64", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Add New Account.
         /// </summary>
         public static string addnewaccount47 {
@@ -160,15 +151,6 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cash Out Win Loss.
-        /// </summary>
-        public static string cashoutwinloss72 {
-            get {
-                return ResourceManager.GetString("cashoutwinloss72", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Casino Turnover.
         /// </summary>
         public static string casinoturnover80 {
@@ -183,15 +165,6 @@ namespace Fanex.Athena.Resources {
         public static string cleansheet16 {
             get {
                 return ResourceManager.GetString("cleansheet16", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Colossus Bets Win Loss.
-        /// </summary>
-        public static string colossusbetswinloss71 {
-            get {
-                return ResourceManager.GetString("colossusbetswinloss71", resourceCulture);
             }
         }
         
@@ -228,15 +201,6 @@ namespace Fanex.Athena.Resources {
         public static string customerinformation4 {
             get {
                 return ResourceManager.GetString("customerinformation4", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Customer List.
-        /// </summary>
-        public static string customerlist43 {
-            get {
-                return ResourceManager.GetString("customerlist43", resourceCulture);
             }
         }
         
@@ -372,15 +336,6 @@ namespace Fanex.Athena.Resources {
         public static string godoffortunewinloss {
             get {
                 return ResourceManager.GetString("godoffortunewinloss", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Gold Deluxe Win Loss.
-        /// </summary>
-        public static string golddeluxewinloss65 {
-            get {
-                return ResourceManager.GetString("golddeluxewinloss65", resourceCulture);
             }
         }
         

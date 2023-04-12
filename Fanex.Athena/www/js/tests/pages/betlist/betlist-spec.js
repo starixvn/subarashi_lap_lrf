@@ -1202,29 +1202,6 @@
                 });
             });
 
-            describe("showColossusBetsDetails(refNo, winlostDate, transId, custId, betCheck)", function () {
-                it("shows showResultPopUp with correct params", function () {
-                    spyOn(Popup, "openPopupWithIframe");
-                    spyOn($, "parseJSON").and.returnValue({
-                        BaseCurrency: "usd"
-                    });
-                    spyOn($.fn, "height").and.returnValue(700);
-                    var refNo = "refNo", winlostDate = "winlostDate", transId = "transId", custId = "custId", betCheck = "betCheck";
-                    var url = "ColossusBetBetList/Detail?refNo=" + refNo +
-                        "&date=" + winlostDate +
-                        "&transid=" + transId +
-                        "&custid=" + custId +
-                        "&betCheck=" + betCheck +
-                        "&BaseCurrency=usd";
-                    var expectedUrl = transformQueryParamNameToLowerCase(url);
-                    var title = "TicketDetailOf";
-
-                    BetList.showColossusBetsDetails(refNo, winlostDate, transId, custId, betCheck);
-
-                    expect(Popup.openPopupWithIframe).toHaveBeenCalledWith(expectedUrl, { width: 890, height: 600, title: title, id: "betlist-popup-detail" });
-                });
-            });
-
             describe("showGlobalGamingDetails(transId, winlostDate, custId, transType)", function () {
                 it("shows showResultPopUp with correct params", function () {
                     spyOn(Popup, "openPopupWithIframe");

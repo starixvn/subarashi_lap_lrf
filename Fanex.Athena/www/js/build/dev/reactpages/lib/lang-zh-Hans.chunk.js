@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 3/27/2023 10:57:47 AM
+// Generated at: 4/11/2023 3:34:09 PM
 window._language_zh_Hans = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -102,7 +102,6 @@ window._language_zh_Hans = {
   AccountManagement: "帐户管理",
   Action: "动作",
   ActivateListOfPlayers: "以玩家清单来设定为VIP",
-  ActiveCustomerSummary: "活跃会员人数摘要",
   AD: "客和",
   Adjustment: "调整",
   AdvancedSearch: "进阶搜寻",
@@ -214,7 +213,6 @@ window._language_zh_Hans = {
   Close: "关闭",
   Closed: "关闭",
   ClosingBalance: "期末余额",
-  ColossusBetsWinLoss: "CB足彩输赢",
   Columns: "Columns",
   Comm: "佣金",
   CommIsClear: "会员的佣金已清空",
@@ -292,7 +290,6 @@ window._language_zh_Hans = {
   Details: "细节",
   DetailTransaction: "交易纪录",
   DH: "和主",
-  DisableAgCasino: "Disable AG Casino",
   DisableParlay: "关闭串关",
   DisableRNGCasino: "停用娱乐城",
   DiscountValue: "折扣金额",
@@ -309,8 +306,6 @@ window._language_zh_Hans = {
   EditGroup: "编辑组别",
   EffectiveBettingValue: "有效投注额",
   EffectiveBettingValueNote: "有效投注额支援09/01/2014之后数据",
-  EnableAgCasino: "Enable AG Casino",
-  EnableCashOut: "开启即时兑现",
   EnableRNGCasino: "Enable RNG Casino",
   EndDate: "结束日期",
   Entered: "成绩已输入场数",
@@ -593,7 +588,6 @@ window._language_zh_Hans = {
   ProductCG: "CG电子",
   ProductCO: "实时兑现",
   ProductCS: "娱乐城",
-  ProductGDG: "金大门",
   ProductHB: "HB电子",
   ProductJIG: "吉利电子",
   ProductKN: "快乐彩",

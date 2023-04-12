@@ -30,7 +30,7 @@ namespace Fanex.Athena.Service.Core.Utility
             var result = IsValidMetalModel(model as IMetaModelValidation);
             if (currencyValidationOption != null && currencyValidationOption.IsValidCurrency)
             {
-                result &= IsValidCurrency(model as IMetaModelCurrency, currencyValidationOption.IsIncludeKeanOcean);
+                result &= IsValidCurrency(model as IMetaModelCurrency);
             }
             if (currencyValidationOption != null && currencyValidationOption.IsValidCurrencyList)
             {
@@ -49,9 +49,9 @@ namespace Fanex.Athena.Service.Core.Utility
             return model != null && _productValidation.IsValid(model, option);
         }
 
-        private bool IsValidCurrency(IMetaModelCurrency model, bool isIncludeKeanOcean = false)
+        private bool IsValidCurrency(IMetaModelCurrency model)
         {
-            return model != null && _currencyValidation.IsValidCurrency(model.CurrencyId, isIncludeKeanOcean);
+            return model != null && _currencyValidation.IsValidCurrency(model.CurrencyId);
         }
 
         private bool IsValidCurrency(IMetaModelCurrencyIdList model)

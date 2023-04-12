@@ -24,8 +24,6 @@ namespace Fanex.Athena.Api.Base.Attributes
 
         public bool IsValidCurrencyList { get; set; }
 
-        public bool IsIncludeKeanOcean { get; set; }
-
         /// <summary>
         /// Required :FunctionKey
         /// </summary>
@@ -54,7 +52,6 @@ namespace Fanex.Athena.Api.Base.Attributes
                new CurrencyValidationOption
                {
                    IsValidCurrency = IsValidCurrency,
-                   IsIncludeKeanOcean = IsIncludeKeanOcean,
                    IsValidCurrencyList = IsValidCurrencyList
                }, new ProductValidationOption
                {

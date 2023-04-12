@@ -72,11 +72,6 @@
             }
         }
 
-        public string ExchangeProductApiHost
-        {
-            get { return GetValue("ExchangeProductApiHost"); }
-        }
-
         public string ResultAmendmentApiUrl
         {
             get { return GetValue(nameof(ResultAmendmentApiUrl)); }

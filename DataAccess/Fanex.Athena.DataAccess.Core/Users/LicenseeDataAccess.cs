@@ -9,36 +9,6 @@
 
     public class LicenseeDataAccess : BaseDataAccess, ILicenseeDataAccess
     {
-        public IResultInfo<bool> IsAllowUpdateMemberBAStatus(Request request, int licenseeId)
-        {
-            return IsAllowUpdateMemberBAStatus(request.Language, licenseeId);
-        }
-
-        public IResultInfo<bool> IsAllowUpdateMemberBAStatus(string language, int licenseeId)
-        {
-            const string UspName = "Lrf_BATimeCheck";
-
-            var isAllow = false;
-            using (var db = this.GetObjectDb(UspName))
-            {
-                db.SetParameterValue("langkey", language);
-                db.SetParameterValue("LicenseeID", licenseeId);
-                db.SetParameterValue("isallow", null);
-
-                AddResultParam(db);
-                db.ExecuteNonQuery();
-
-                isAllow = Convert.ToBoolean(db.GetParameterValue("isallow"));
-                var result = GetResult(db);
-                return new ResultInfo<bool>
-                {
-                    Code = result.Code,
-                    Message = result.Message,
-                    ExtendedData = isAllow
-                };
-            }
-        }
-
         public bool IsLicenseeBelongToUser(int licenseeId, int userId)
         {
             var licenseeList = GetByUser(userId);

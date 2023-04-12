@@ -81,8 +81,6 @@
 
         public decimal PPComm { get; set; }
 
-        public decimal FWComm { get; set; }
-
         public decimal SXGComm { get; set; }
 
         public decimal SGComm { get; set; }
@@ -112,8 +110,6 @@
         public decimal BGGComm { get; set; }
 
         public decimal JKComm { get; set; }
-
-        public decimal GDGComm { get; set; }
 
         public decimal HBComm { get; set; }
 
@@ -155,7 +151,6 @@
             CommValues.Add(Product.WM, WMComm);
             CommValues.Add(Product.BGG, BGGComm);
             CommValues.Add(Product.JK, JKComm);
-            CommValues.Add(Product.GDG, GDGComm);
             CommValues.Add(Product.HB, HBComm);
 
             CommValues.Add(Product.VGA, VGAComm);

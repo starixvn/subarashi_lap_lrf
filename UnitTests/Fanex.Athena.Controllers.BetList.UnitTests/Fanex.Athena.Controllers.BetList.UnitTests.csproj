@@ -90,7 +90,6 @@
     <Compile Include="BetListBaseControllerHelperTest.cs" />
     <Compile Include="BettingTicketCenterControllerTest.cs" />
     <Compile Include="CorrectScoreBetListControllerTest.cs" />
-    <Compile Include="CustomerOutstandingBetListControllerTest.cs" />
     <Compile Include="CustomerWinLossBetListControllerTest.cs" />
     <Compile Include="LastBetsMonitoringBetListControllerTest.cs" />
     <Compile Include="LicenseeWinLossBetListControllerTest.cs" />

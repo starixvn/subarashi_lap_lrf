@@ -9,8 +9,7 @@
 
     [FunctionAuthorization(
         PermissionKeys.ReportLicenseeWinLoss,
-        PermissionKeys.ReportWinLossByProduct,
-        PermissionKeys.ReportColossusBetsWinLoss)]
+        PermissionKeys.ReportWinLossByProduct)]
     [BetListAuthorization]
     public class LicenseeWinLossBetListController : BetListBaseController
     {

@@ -63,7 +63,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constants\SystemEnvironment.cs" />
     <Compile Include="DataDomain\BaseCurrencyType.cs" />
     <Compile Include="DataDomain\MessageType.cs" />
     <Compile Include="DataDomain\ExtraPayoutMapType.cs" />
@@ -90,7 +89,6 @@
     <Compile Include="DataDomain\ReportLevel.cs" />
     <Compile Include="DataDomain\ResultVendorProductTypes.cs" />
     <Compile Include="DataDomain\ReportByType.cs" />
-    <Compile Include="DataDomain\RNGCasinoSetting.cs" />
     <Compile Include="DataDomain\SportType.cs" />
     <Compile Include="DataDomain\StatusTypes.cs" />
     <Compile Include="DataDomain\SystemConstants.cs" />
@@ -203,6 +201,9 @@
     <AdditionalFiles Include="..\..\.sonarlint\lrf\CSharp\SonarLint.xml">
       <Link>SonarLint.xml</Link>
     </AdditionalFiles>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Constants\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

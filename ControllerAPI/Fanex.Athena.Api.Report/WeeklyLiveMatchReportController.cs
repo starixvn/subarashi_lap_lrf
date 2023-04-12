@@ -37,7 +37,7 @@ namespace Fanex.Athena.Api.Report
         }
 
         [HttpPost]
-        [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
+        [ValidationApiRequest(IsValidCurrency = true)]
         public async Task<dynamic> Index(WeeklyLiveMatchMetaModel metaModel)
         {
             var result = await _weeklyLiveMatchService.GetData(metaModel);

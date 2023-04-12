@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 3/27/2023 10:57:47 AM
+// Generated at: 4/11/2023 3:34:09 PM
 window._language_zh_CN = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -104,7 +104,6 @@ window._language_zh_CN = {
   ActivateListOfPlayers: "以玩家清单来设定为VIP",
   ActivateVip: "激活为VIP",
   Active: "活跃",
-  ActiveCustomerSummary: "活跃会员人数摘要",
   AD: "客和",
   AddContact: "新增联络人",
   AddNew: "新增",
@@ -247,7 +246,6 @@ window._language_zh_CN = {
   Close: "关闭",
   Closed: "关闭",
   ClosingBalance: "期末余额",
-  ColossusBetsWinLoss: "CB足彩输赢",
   Columns: "Columns",
   Comm: "佣金",
   CommIsClear: "会员的佣金已清空",
@@ -345,7 +343,6 @@ window._language_zh_CN = {
   Details: "细节",
   DetailTransaction: "交易纪录",
   DH: "和主",
-  DisableAgCasino: "Disable AG Casino",
   DisableParlay: "关闭串关",
   DisableRNGCasino: "停用娱乐城",
   DiscountValue: "折扣金额",
@@ -420,8 +417,6 @@ window._language_zh_CN = {
   GetAll: "全选",
   Go: "开始",
   GodOfFortuneWinLoss: "财神爷输赢",
-  GoldDeluxeWinLoss: "GD真人娱乐场输赢",
-  GoldDeluxeWinLossGuidelineContent: "在GMT-4下午4点之前的任何查询将依据前一天下午4点的数据。您每次查询可以过滤最多3个月内的数据。",
   GotoCustomerList: "转至会员名单",
   GrandPrizeNote: "头奖:会员余额不包含头奖奖金",
   GrandTotal: "累计",
@@ -735,9 +730,6 @@ window._language_zh_CN = {
   ProductCG: "CG电子",
   ProductCO: "实时兑现",
   ProductCS: "娱乐城",
-  ProductFW: "GG捕鱼",
-  ProductGD: "GD真人娱乐场",
-  ProductGDG: "金大门",
   ProductHB: "HB电子",
   ProductJIG: "吉利电子",
   ProductKN: "快乐彩",

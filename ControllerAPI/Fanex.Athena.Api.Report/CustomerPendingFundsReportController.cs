@@ -39,7 +39,7 @@
         }
 
         [HttpPost]
-        [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
+        [ValidationApiRequest(IsValidCurrency = true)]
         [ApiAutoBindMetaModel(BindAgent = true, BindProductOptions = true)]
         public async Task<dynamic> Index(CustomerPendingFundsMetaModel metaModel)
         {

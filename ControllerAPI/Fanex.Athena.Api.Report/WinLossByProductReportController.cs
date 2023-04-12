@@ -63,7 +63,7 @@ namespace Fanex.Athena.Api.Report
         }
 
         [HttpPost]
-        [ValidationApiRequest(ObjectName = "metaModel", IsValidCurrency = true, IsIncludeKeanOcean = true)]
+        [ValidationApiRequest(ObjectName = "metaModel", IsValidCurrency = true)]
         [ApiAutoBindMetaModel(BindProductOptions = true)]
 #pragma warning disable S107 // Methods should not have too many parameters
         public Task<dynamic> Index(
@@ -82,7 +82,7 @@ namespace Fanex.Athena.Api.Report
         }
 
         [HttpPost]
-        [ValidationApiRequest(ObjectName = "metaModel", IsValidCurrency = true, IsIncludeKeanOcean = true)]
+        [ValidationApiRequest(ObjectName = "metaModel", IsValidCurrency = true)]
         [ApiAutoBindMetaModel(BindProductOptions = true)]
         public Task<dynamic> Index([FromBody] WinLossByProductMetaModel metaModel)
         {
@@ -248,7 +248,7 @@ namespace Fanex.Athena.Api.Report
             string currencyName = null)
 #pragma warning restore S107 // Methods should not have too many parameters
         {
-            if (!_currencyValidation.IsValidCurrency(currencyId, true))
+            if (!_currencyValidation.IsValidCurrency(currencyId))
             {
                 return BadRequest(ViewResources.InvalidParams);
             }

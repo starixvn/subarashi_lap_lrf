@@ -70,7 +70,6 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="ColossusBetsWinLossServiceTest.cs" />
     <Compile Include="ExchangeVoidedServiceTest.cs" />
     <Compile Include="LiveReportServiceTest.cs" />
     <Compile Include="SettledMatchCountServiceTest.cs" />

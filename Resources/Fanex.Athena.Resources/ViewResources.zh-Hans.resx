@@ -1613,12 +1613,6 @@
   <data name="BetSettingGroups" xml:space="preserve">
     <value>Bet Setting Groups</value>
   </data>
-  <data name="DisableAgCasino" xml:space="preserve">
-    <value>Disable AG Casino</value>
-  </data>
-  <data name="EnableAgCasino" xml:space="preserve">
-    <value>Enable AG Casino</value>
-  </data>
   <data name="UpdateAgCasinoBetSettings" xml:space="preserve">
     <value>Are you sure you want to update all AG Casino bet settings?</value>
     <comment>#19458</comment>
@@ -1643,9 +1637,6 @@
   <data name="CustomerLog" xml:space="preserve">
     <value>会员日志</value>
     <comment>26174</comment>
-  </data>
-  <data name="ActiveCustomerSummary" xml:space="preserve">
-    <value>活跃会员人数摘要</value>
   </data>
   <data name="TotalActiveCustomer" xml:space="preserve">
     <value>总活跃会员人数</value>
@@ -1692,9 +1683,6 @@
   </data>
   <data name="Amount" xml:space="preserve">
     <value>金额</value>
-  </data>
-  <data name="ColossusBetsWinLoss" xml:space="preserve">
-    <value>CB足彩输赢</value>
   </data>
   <data name="CustomerWinnings" xml:space="preserve">
     <value>会员总赢</value>
@@ -1858,9 +1846,6 @@
   </data>
   <data name="CashOutNotOfferCurrency" xml:space="preserve">
     <value>即时兑现不支援此货币</value>
-  </data>
-  <data name="EnableCashOut" xml:space="preserve">
-    <value>开启即时兑现</value>
   </data>
   <data name="BBAmtComm" xml:space="preserve">
     <value>回购金额+即时兑现佣金</value>
@@ -2139,9 +2124,6 @@
   </data>
   <data name="ProductSBVS" xml:space="preserve">
     <value>沙巴虚拟赛事</value>
-  </data>
-  <data name="ProductGDG" xml:space="preserve">
-    <value>金大门</value>
   </data>
   <data name="Happy5LinkedGames" xml:space="preserve">
     <value>快乐5系列游戏</value>

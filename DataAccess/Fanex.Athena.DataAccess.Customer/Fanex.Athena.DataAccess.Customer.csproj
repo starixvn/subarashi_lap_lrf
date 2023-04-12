@@ -69,17 +69,13 @@
     <Compile Include="Abstracts\BasePlayerSegmentationDataAccess.cs" />
     <Compile Include="SabaVirtualSettingAccess.cs" />
     <Compile Include="CustomerClassDataAccess.cs" />
-    <Compile Include="CustomerListDataAccess.cs" />
     <Compile Include="CustomerLogDataAccess.cs" />
-    <Compile Include="DormantCustomerListDataAccess.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="GroupComDataAccess.cs">
       <SonarQubeExclude>true</SonarQubeExclude>
     </Compile>
     <Compile Include="ISabaVirtualSettingDataAccess.cs" />
     <Compile Include="ICustomerClassDataAccess.cs" />
-    <Compile Include="Interfaces\IDormantCustomerListDataAccess.cs" />
-    <Compile Include="Interfaces\ICustomerListDataAccess.cs" />
     <Compile Include="Interfaces\ICustomerLogDataAccess.cs" />
     <Compile Include="Interfaces\IGroupComDataAccess.cs" />
     <Compile Include="Interfaces\ILogInLogDataAccess.cs" />

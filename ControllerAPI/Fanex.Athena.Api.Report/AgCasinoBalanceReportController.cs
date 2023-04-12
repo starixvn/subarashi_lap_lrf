@@ -50,7 +50,7 @@ namespace Fanex.Athena.Api.Report
         }
 
         [HttpPost]
-        [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
+        [ValidationApiRequest(IsValidCurrency = true)]
         public Task<dynamic> Index(ThirdPartyWinLossMetaModel metaModel)
         {
             return ProcessRequest(metaModel);
@@ -165,7 +165,7 @@ namespace Fanex.Athena.Api.Report
         private async Task<dynamic> ProcessRequest(ThirdPartyWinLossMetaModel metaModel)
         {
             if (_currencyValidation.IsValidCurrency(
-                metaModel.DrillDownCurrencyId, true))
+                metaModel.DrillDownCurrencyId))
             {
                 metaModel.LicenseeId = SessionService.LicenseeSession.LicenseeId;
                 metaModel.DefaultBaseCurrency = SessionService.UserSession.DefaultBaseCurrency;

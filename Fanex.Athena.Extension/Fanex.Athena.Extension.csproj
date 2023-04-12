@@ -142,10 +142,8 @@
   <ItemGroup>
     <Compile Include="AutofacExtension.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Helper\CasinoHelper.cs" />
     <Compile Include="Helper\ClientHelper.cs" />
     <Compile Include="Helper\DataHelper.cs" />
-    <Compile Include="HashtableExtensions.cs" />
     <Compile Include="Helper\ConvertHelper.cs" />
     <Compile Include="Helper\DateTimeHelper.cs" />
     <Compile Include="Helper\DynamicObjectHelper.cs" />

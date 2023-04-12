@@ -78,14 +78,8 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="CustomerListServiceTest_UpdateSpecialLevel.cs" />
-    <Compile Include="CustomerListServiceTest_UpdateCustomerBAStatus.cs" />
-    <Compile Include="CustomerListServiceTest_UpdateCustStatus.cs" />
-    <Compile Include="CustomerListServiceTest_UpdateOddsGroup.cs" />
-    <Compile Include="CustomerListServiceTest_GetCustomerLoginInfo.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Helpers\GroupCommSettingTest.cs" />
-    <Compile Include="GroupComServiceTests.cs" />
     <Compile Include="SabaVirtualSettingServiceTest.cs" />
     <Compile Include="PlayerSegmentationServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

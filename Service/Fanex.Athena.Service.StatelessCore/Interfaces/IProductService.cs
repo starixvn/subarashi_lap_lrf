@@ -10,8 +10,6 @@ namespace Fanex.Athena.Service.StatelessCore.Interfaces
 
         IList<Product> GetProductList(int licenseeId, string languageCode);
 
-        ProductAccess GetProductAccessForActiveCustomerSummary(int licenseeId, string languageCode);
-
         ProductAccess GetSingleWalletProductAccess(int licenseeId, string languageCode, string functionConfigKey = null);
 
         string[] GetAllowedProducts(string functionName = null);

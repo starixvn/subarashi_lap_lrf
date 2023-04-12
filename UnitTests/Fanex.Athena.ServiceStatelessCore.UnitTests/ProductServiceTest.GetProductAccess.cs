@@ -17,8 +17,6 @@
     {
         private const string FunctionAllowedProductsKey = "FunctionAllowedProducts";
 
-        private const string FilterFunctionName = "ActiveCustomerSummary";
-
         [TestCase(null, "_Default")]
         [TestCase("Test", "Test")]
         public void GetProductAccess_GetAllowedProductsFromCache_HasConfig_ReturnCorrectResult(string functionName, string expectedFunctionName)
@@ -261,102 +259,6 @@
 
             // Action
             var result = _productService.GetSingleWalletProductAccess(_licenseeId, _languageCode, FunctionKey);
-
-            // Assert
-            Assert.Multiple(() =>
-            {
-                Assert.That(result.IsAllow(expectedResult.First().ProductID), Is.True);
-                Assert.That(result.IsAllow(expectedResult.Last().ProductID), Is.True);
-                Assert.That(result.IsAllow(productList.First().ProductID), Is.False);
-            });
-        }
-
-        [Test]
-        public void GetProductAccessForActiveCustomerSummary_DataWasCached_ReturnFromCache()
-        {
-            // Arrange
-            var expectedResult = new List<Product>
-            {
-                new Product { ProductID = 100, ProductCode = "SB" },
-                new Product { ProductID = 200, ProductCode = "ABC" },
-            };
-
-            _cache.Get<IList<Product>>(CacheKey.MemorycacheActiveCustomerSummaryProduct + _licenseeId + _languageCode)
-                .Returns(expectedResult);
-
-            // Action
-            var result = _productService.GetProductAccessForActiveCustomerSummary(_licenseeId, _languageCode);
-
-            // Assert
-            Assert.Multiple(() =>
-            {
-                Assert.That(result.IsAllow(100), Is.True);
-                Assert.That(result.IsAllow(200), Is.True);
-            });
-        }
-
-        [Test]
-        public void GetProductAccessForActiveCustomerSummary_AllowedProductsIsEmpty_ReturnProductAccessList()
-        {
-            // Arrange
-            var expectedResult = new List<Product>
-            {
-                new Product { ProductID = 100, ProductCode = "SB" },
-                new Product { ProductID = 200, ProductCode = "ABC" },
-            };
-
-            var xmlContent = BuildFunctionAllowedProductsXmlString(
-                "Test",
-                new Dictionary<string, IEnumerable<string>> { { "FakeKey", expectedResult.Select(x => x.ProductCode) } });
-
-            SetUpGetAllowedProductsFromCache(xmlContent);
-
-            _productDataAccess.GetProductAccessList(_licenseeId, true).Returns(expectedResult);
-
-            _cache.Get<IList<Product>>(CacheKey.MemorycacheActiveCustomerSummaryProduct + _licenseeId + _languageCode)
-                .Returns(x => { return null; });
-
-            // Action
-            var result = _productService.GetProductAccessForActiveCustomerSummary(_licenseeId, _languageCode);
-
-            // Assert
-            Assert.Multiple(() =>
-            {
-                Assert.That(result.IsAllow(100), Is.True);
-                Assert.That(result.IsAllow(200), Is.True);
-            });
-        }
-
-        [Test]
-        public void GetProductAccessForActiveCustomerSummary_AllowedProductsIsNotEmpty_ReturnIntersectionOfOriginalAndAllowedProducts()
-        {
-            // Arrange
-            var expectedResult = new List<Product>
-            {
-                new Product { ProductID = 100, ProductCode = "SB", IsOfferedSingleWallet = true },
-                new Product { ProductID = 200, ProductCode = "AB", IsOfferedSingleWallet = true },
-            };
-
-            var productList = new List<Product>
-            {
-                new Product { ProductID = 300, ProductCode = "CS", IsOfferedSingleWallet = true },
-            };
-
-            productList.AddRange(expectedResult);
-
-            var xmlContent = BuildFunctionAllowedProductsXmlString(
-                "Test",
-                new Dictionary<string, IEnumerable<string>> { { FilterFunctionName, expectedResult.Select(x => x.ProductCode) } });
-
-            SetUpGetAllowedProductsFromCache(xmlContent);
-
-            _productDataAccess.GetProductAccessList(_licenseeId, true).Returns(productList);
-
-            _cache.Get<IList<Product>>(CacheKey.MemorycacheActiveCustomerSummaryProduct + _licenseeId + _languageCode)
-                .Returns(x => { return null; });
-
-            // Action
-            var result = _productService.GetProductAccessForActiveCustomerSummary(_licenseeId, _languageCode);
 
             // Assert
             Assert.Multiple(() =>

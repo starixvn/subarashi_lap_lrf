@@ -27,7 +27,7 @@
         }
 
         [HttpPost]
-        [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true,
+        [ValidationApiRequest(IsValidCurrency = true,
             IsValidProductCodeList = true, FunctionConfig = FunctionNames.CasinoTurnover, IsSingleWalletProduct = true)]
         [ApiAutoBindMetaModel(BindAgent = true)]
         public async Task<dynamic> GetData(CasinoTurnoverMetaModel metaModel)

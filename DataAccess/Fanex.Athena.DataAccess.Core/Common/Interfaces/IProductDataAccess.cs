@@ -11,6 +11,6 @@ namespace Fanex.Athena.DataAccess.Core.Common.Interfaces
 
     public interface IProductDataAccess
     {
-        IList<Product> GetProductAccessList(int licenseeId, bool isActiveCustomerSummaryReport = false);
+        IList<Product> GetProductAccessList(int licenseeId);
     }
 }
