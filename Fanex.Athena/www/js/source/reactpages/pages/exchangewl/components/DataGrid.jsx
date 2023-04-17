@@ -141,7 +141,7 @@ export class DataGrid extends Component {
                         ? <HeaderCell colWidth={100} title={HeaderText.customer} colSpan='3'>{HeaderText.customer}</HeaderCell>
                         : <HeaderCell colWidth={100} title={HeaderText.customerWL} rowSpan='2'>{HeaderText.customerWL}</HeaderCell>
                 }
-                <HeaderCell colWidth={100} title={HeaderText.licensee} colSpan='4'>{HeaderText.licensee}</HeaderCell>
+                <HeaderCell colWidth={100} title={HeaderText.licensee} colSpan='3'>{HeaderText.licensee}</HeaderCell>
             </HeaderRow>
         );
 
@@ -153,7 +153,7 @@ export class DataGrid extends Component {
                     <HeaderCell colWidth={100} title={HeaderText.total}>{HeaderText.total}</HeaderCell>
                     <HeaderCell colWidth={100} title={HeaderText.licenseeWL}>{HeaderText.licenseeWL}</HeaderCell>
                     <HeaderCell colWidth={100} title={HeaderText.amountDueTo}>{HeaderText.amountDueTo}</HeaderCell>
-                    <HeaderCell colWidth={100} title={HeaderText.licenseeComm}>{HeaderText.licenseeComm}</HeaderCell>
+                    {/* <HeaderCell colWidth={100} title={HeaderText.licenseeComm}>{HeaderText.licenseeComm}</HeaderCell> */}
                     <HeaderCell colWidth={100} title={HeaderText.total}>{HeaderText.total}</HeaderCell>
                 </HeaderRow>
             );
@@ -163,7 +163,7 @@ export class DataGrid extends Component {
                 <HeaderRow style={{ height: 32 }} key='tr-header2'>
                     <HeaderCell colWidth={100} title={HeaderText.licenseeWL}>{HeaderText.licenseeWL}</HeaderCell>
                     <HeaderCell colWidth={100} title={HeaderText.amountDueTo}>{HeaderText.amountDueTo}</HeaderCell>
-                    <HeaderCell colWidth={100} title={HeaderText.licenseeComm}>{HeaderText.licenseeComm}</HeaderCell>
+                    {/* <HeaderCell colWidth={100} title={HeaderText.licenseeComm}>{HeaderText.licenseeComm}</HeaderCell> */}
                     <HeaderCell colWidth={100} title={HeaderText.total}>{HeaderText.total}</HeaderCell>
                 </HeaderRow>
             );
@@ -261,7 +261,7 @@ export class DataGrid extends Component {
             customerWLTotal = NumberFormat.formatDecimal(item.CustomerWLTotal),
             licenseeWL = NumberFormat.formatDecimal(item.LicenseeWL),
             amountDueTo = NumberFormat.formatDecimal(item.AmountDueTo),
-            licenseeComm = NumberFormat.formatDecimal(item.LicenseeComm),
+            //licenseeComm = NumberFormat.formatDecimal(item.LicenseeComm),
             licenseeWLTotal = NumberFormat.formatDecimal(item.LicenseeWLTotal);
 
         let cells =
@@ -273,7 +273,7 @@ export class DataGrid extends Component {
             this.isAllowedCustomerComm && <Cell key='customerWLTotal' title={customerWLTotal} className='right-align'>{customerWLTotal}</Cell>,
             <Cell key='licenseeWL' title={licenseeWL} className={`right-align ${item.LicenseeWL < 0 ? 'negative' : ''}`}>{licenseeWL}</Cell>,
             <Cell key='amountDueTo' title={amountDueTo} className='right-align'>{amountDueTo}</Cell>,
-            <Cell key='licenseeComm' title={licenseeComm} className='right-align'>{licenseeComm}</Cell>,
+            //<Cell key='licenseeComm' title={licenseeComm} className='right-align'>{licenseeComm}</Cell>,
             <Cell key='licenseeWLTotal' title={licenseeWLTotal} className={`right-align ${item.LicenseeWLTotal < 0 ? 'negative' : ''}`}>{licenseeWLTotal}</Cell>];
 
         return cells;
