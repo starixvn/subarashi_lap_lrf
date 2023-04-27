@@ -24,6 +24,8 @@ namespace Fanex.Athena.Model.Report.ViewModel
 
         public bool IsAllowedCustomerComm { get; set; }
 
+        public bool IsOfferCashOutProduct { get; set;  }  
+
         public IEnumerable<ProductOption> ProductOptionList { get; set; }
 
         public IDictionary<int, string> CurrencyList { get; set; }
@@ -47,10 +49,6 @@ namespace Fanex.Athena.Model.Report.ViewModel
         public IEnumerable<string> CustomerClass { get; set; }
 
         public IEnumerable<string> OddGroups { get; set; }
-
-        public IDictionary<int, string> GroupByList { get; set; }
-
-        public IDictionary<int, string> BreakByList { get; set; }
 
         public IEnumerable<CheckedItem> SportList { get; set; }
 

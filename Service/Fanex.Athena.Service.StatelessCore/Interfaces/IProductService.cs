@@ -17,5 +17,7 @@ namespace Fanex.Athena.Service.StatelessCore.Interfaces
         IList<ProductOption> GetAllowedSubProductOptions(IEnumerable<string> offeredSubProductList, IList<ProductOption> productOptions);
 
         string GetAllowedSubProductCodeList(IEnumerable<string> offeredSubProductList, string productCodes);
+
+        bool IsOfferCashOutProduct(int licenseeId, string languageCode);
     }
 }

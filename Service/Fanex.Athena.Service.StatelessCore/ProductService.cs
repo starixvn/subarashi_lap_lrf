@@ -80,6 +80,12 @@
             return new ProductAccess(productList);
         }
 
+        public bool IsOfferCashOutProduct(int licenseeId, string languageCode)
+        {
+            var originalProducts = GetProductList(licenseeId, languageCode);
+            return originalProducts.Any(_ => _.ProductCode == Product.CO);
+        }
+
         #endregion
 
         public string[] GetAllowedProducts(string functionName = null)

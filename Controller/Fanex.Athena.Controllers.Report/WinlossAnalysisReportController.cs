@@ -71,8 +71,7 @@
                 IsOneworksMaster = IsOneworksMaster,
                 CustomerClass = customerClassIds,
                 OddGroups = licenseeSession.OfferedOddsGroupsList,
-                GroupByList = GetGroupByList(),
-                BreakByList = GetBreakByList()
+                IsOfferCashOutProduct = _productService.IsOfferCashOutProduct(licenseeSession.LicenseeId, userSession.Language)
             };
             return View("~/Views/Desktop/Report/WinlossAnalysis/Index.cshtml", viewModel);
         }
@@ -111,7 +110,7 @@
 
             var list = MoveBaProductToBelowSportBook(productAccess.ProductList);
 
-            return productAccess.ProductList.Select(i => new ProductOption
+            return list.Select(i => new ProductOption
             {
                 Code = i.ProductCode,
                 Name = i.ProductName,
@@ -124,8 +123,11 @@
             var list = productList.ToList();
             var baProduct = list.FirstOrDefault(c => c.ProductID == ProductTypes.BA);
             var sbProduct = list.FirstOrDefault(c => c.ProductID == ProductTypes.Sportsbook);
-            list.Remove(baProduct);
-            list.Insert(list.IndexOf(sbProduct) + 1, baProduct);
+            if(baProduct != null && sbProduct != null) 
+            {
+                list.Remove(baProduct);
+                list.Insert(list.IndexOf(sbProduct) + 1, baProduct);
+            }
             return list;
         }
 
@@ -151,26 +153,5 @@
                 { PlatformType.BetfromOthers, ViewResources.BetfromOthers }
             };
         }
-
-        private static IDictionary<int, string> GetGroupByList()
-            => new Dictionary<int, string>
-            {
-                { 8, ViewResources.Player },
-                { 1, ViewResources.Date },
-                { 2, ViewResources.Month },
-                { 3, ViewResources.Product },
-                { 4, ViewResources.Sport },
-                { 5, ViewResources.BetType },
-                { 6, ViewResources.Currency },
-                { 7, ViewResources.Platform }
-            };
-
-        private static IDictionary<int, string> GetBreakByList()
-            => new Dictionary<int, string>
-            {
-                { 1, ViewResources.Currency },
-                { 2, ViewResources.Product },
-                { 3, ViewResources.Agent }
-            };
     }
 }

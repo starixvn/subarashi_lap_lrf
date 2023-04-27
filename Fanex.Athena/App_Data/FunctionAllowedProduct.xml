@@ -24,7 +24,7 @@
 		<Function Name="GrossGamingRevenue" Product="SB,NG,CS,LC"></Function>
 		<Function Name="LeagueWinLoss" Product="SB,BA"></Function>
 		<Function Name="ExtraPayout" Product="PP,SPR,SAG,SBC,VGA,SXG,CC,SG,AB"></Function>
-    <Function Name="WinlossAnalysis" Product="SB,BA,NG,VS,CS,KN,VB,AB,VS2,LT,SG,PP,CC,VRG,TG,SXG,SBC,SAG,PGS,JK,HB,WM,BGG,VGA,CG,AP,APM,VS3,FGGL,MXG"></Function>
+    <Function Name="WinlossAnalysis" Product="SB,BA,NG,VS,CS,KN,VB,AB,VS2,LT,SG,PP,CC,VRG,TG,SXG,SBC,SAG,PGS,JK,HB,WM,BGG,VGA,CG,AP,APM,VS3,FGGL,MXG,JIG"></Function>
 	</Group>
 
 	<Group Name="BetList">

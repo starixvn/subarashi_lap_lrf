@@ -14,6 +14,7 @@ namespace Fanex.Athena.Service.StatelessCore
 
     using Fanex.Athena.DataAccess.Core.Common.Interfaces;
     using Fanex.Athena.Extension.Helper;
+    using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -89,7 +90,7 @@ namespace Fanex.Athena.Service.StatelessCore
                     Checked = true,
                     Children = null,
                     ID = _.BetType,
-                    Name = _cacheRefAdapter.GetBetTypeName(_.BetType, lang),
+                    Name = GetBetTypeName(_.BetType),
                     Value = _.BetType.ToString(),
                 },
                 (key, items) => new CheckedItem
@@ -122,6 +123,27 @@ namespace Fanex.Athena.Service.StatelessCore
 
             var sportsParameters = "<products>" + sportItemXML + "</products>";
             return sportsParameters;
+        }
+
+        private string GetBetTypeName(int betType)
+        {
+            string suffix = GetBettypeNameSuffix(betType);
+            return _cacheRefAdapter.GetBettype(Convert.ToInt32(betType), false) + suffix;
+        }
+
+        private string GetBettypeNameSuffix(int betType)
+        {
+            if (betType == (int)BetType.NumberGameHappy5OddEven)
+            {
+                return " (" + _cacheRefAdapter.GetSportName((int)SportType.NumberGameHappy5) + ")";
+            }
+
+            if (betType >= (int)BetType.VirtualBasketballOverUnder && betType <= (int)BetType.VirtualBasketballFirstHalfHandicap)
+            {
+                return " (" + _cacheRefAdapter.GetSportName((int)SportType.VirtualBasketball) + ")";
+            }
+
+            return string.Empty;
         }
     }
 }
