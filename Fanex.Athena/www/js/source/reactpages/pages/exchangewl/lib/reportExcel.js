@@ -124,7 +124,7 @@ export default class ReportExcel {
             [TOTAL_SECTION]: { isShow : false },
             [SUMMARYTOTAL_SECTION]: { isShow : false }
         }, {
-            [HEADER_SECTION]: { title: 'licensee', isShow: true, colSpan: 4 },
+            [HEADER_SECTION]: { title: 'licensee', isShow: true, colSpan: 3 },
             [MAIN_SECTION]: { isShow : false },
             [TOTAL_SECTION]: { isShow : false },
             [SUMMARYTOTAL_SECTION]: { isShow : false }
@@ -163,14 +163,16 @@ export default class ReportExcel {
             [MAIN_SECTION]: { isShow : true, style: bodyCellStyle.decimal, width: 150 },
             [TOTAL_SECTION]: { isShow : true, style: totalCellStyle.decimal },
             [SUMMARYTOTAL_SECTION]: { isShow : true, style: grandTotalCellStyle.decimal }
-        }, {
-            field: 'LicenseeComm',
-            type: 'n',
-            [HEADER_SECTION]: { title: 'licenseeComm', isShow: true },
-            [MAIN_SECTION]: { isShow : true, style: bodyCellStyle.decimal, width: 150 },
-            [TOTAL_SECTION]: { isShow : true, style: totalCellStyle.decimal },
-            [SUMMARYTOTAL_SECTION]: { isShow : true, style: grandTotalCellStyle.decimal }
-        }, {
+        },
+        // {
+        //     field: 'LicenseeComm',
+        //     type: 'n',
+        //     [HEADER_SECTION]: { title: 'licenseeComm', isShow: true },
+        //     [MAIN_SECTION]: { isShow : true, style: bodyCellStyle.decimal, width: 150 },
+        //     [TOTAL_SECTION]: { isShow : true, style: totalCellStyle.decimal },
+        //     [SUMMARYTOTAL_SECTION]: { isShow : true, style: grandTotalCellStyle.decimal }
+        // }, 
+        {
             field: 'LicenseeWLTotal',
             type: 'n',
             [HEADER_SECTION]: { title: 'total', isShow: true },

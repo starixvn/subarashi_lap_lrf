@@ -4427,7 +4427,7 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     }, _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].customerWL), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
       colWidth: 100,
       title: _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].licensee,
-      colSpan: "4"
+      colSpan: "3"
     }, _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].licensee)));
     if (this.isAllowedCustomerComm) {
       headerRows.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderRow"], {
@@ -4452,9 +4452,6 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         title: _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].amountDueTo
       }, _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].amountDueTo), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
         colWidth: 100,
-        title: _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].licenseeComm
-      }, _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].licenseeComm), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
-        colWidth: 100,
         title: _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].total
       }, _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].total)));
     } else {
@@ -4470,9 +4467,6 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         colWidth: 100,
         title: _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].amountDueTo
       }, _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].amountDueTo), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
-        colWidth: 100,
-        title: _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].licenseeComm
-      }, _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].licenseeComm), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
         colWidth: 100,
         title: _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].total
       }, _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].total)));
@@ -4552,7 +4546,7 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       customerWLTotal = _lib_numberFormat__WEBPACK_IMPORTED_MODULE_5__["default"].formatDecimal(item.CustomerWLTotal),
       licenseeWL = _lib_numberFormat__WEBPACK_IMPORTED_MODULE_5__["default"].formatDecimal(item.LicenseeWL),
       amountDueTo = _lib_numberFormat__WEBPACK_IMPORTED_MODULE_5__["default"].formatDecimal(item.AmountDueTo),
-      licenseeComm = _lib_numberFormat__WEBPACK_IMPORTED_MODULE_5__["default"].formatDecimal(item.LicenseeComm),
+      //licenseeComm = NumberFormat.formatDecimal(item.LicenseeComm),
       licenseeWLTotal = _lib_numberFormat__WEBPACK_IMPORTED_MODULE_5__["default"].formatDecimal(item.LicenseeWLTotal);
     let cells = [/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
       key: "turnover",
@@ -4586,11 +4580,10 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       key: "amountDueTo",
       title: amountDueTo,
       className: "right-align"
-    }, amountDueTo), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
-      key: "licenseeComm",
-      title: licenseeComm,
-      className: "right-align"
-    }, licenseeComm), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+    }, amountDueTo),
+    /*#__PURE__*/
+    //<Cell key='licenseeComm' title={licenseeComm} className='right-align'>{licenseeComm}</Cell>,
+    react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
       key: "licenseeWLTotal",
       title: licenseeWLTotal,
       className: `right-align ${item.LicenseeWLTotal < 0 ? 'negative' : ''}`
@@ -5384,7 +5377,7 @@ class ReportExcel {
       [HEADER_SECTION]: {
         title: 'licensee',
         isShow: true,
-        colSpan: 4
+        colSpan: 3
       },
       [MAIN_SECTION]: {
         isShow: false
@@ -5511,27 +5504,16 @@ class ReportExcel {
         isShow: true,
         style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["grandTotalCellStyle"].decimal
       }
-    }, {
-      field: 'LicenseeComm',
-      type: 'n',
-      [HEADER_SECTION]: {
-        title: 'licenseeComm',
-        isShow: true
-      },
-      [MAIN_SECTION]: {
-        isShow: true,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["bodyCellStyle"].decimal,
-        width: 150
-      },
-      [TOTAL_SECTION]: {
-        isShow: true,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["totalCellStyle"].decimal
-      },
-      [SUMMARYTOTAL_SECTION]: {
-        isShow: true,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["grandTotalCellStyle"].decimal
-      }
-    }, {
+    },
+    // {
+    //     field: 'LicenseeComm',
+    //     type: 'n',
+    //     [HEADER_SECTION]: { title: 'licenseeComm', isShow: true },
+    //     [MAIN_SECTION]: { isShow : true, style: bodyCellStyle.decimal, width: 150 },
+    //     [TOTAL_SECTION]: { isShow : true, style: totalCellStyle.decimal },
+    //     [SUMMARYTOTAL_SECTION]: { isShow : true, style: grandTotalCellStyle.decimal }
+    // }, 
+    {
       field: 'LicenseeWLTotal',
       type: 'n',
       [HEADER_SECTION]: {
