@@ -9,6 +9,7 @@
 
     using DataAccess.Core.Common.Interfaces;
     using Fanex.Athena.Extension.Utility;
+    using Fanex.Athena.Extension.Utility.Interfaces;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
@@ -39,6 +40,8 @@
         private IPortalApiService _portalApiService;
 
         private IProductService _productService = Substitute.For<IProductService>();
+
+        private ICustomMemoryCacheService _memCacheService = Substitute.For<ICustomMemoryCacheService>();
 
         [OneTimeSetUp]
         public void FixtureSetUp()
@@ -197,7 +200,8 @@
                 _betTypeService,
                 _portalApiService,
                 _productService,
-                _sportService);
+                _sportService,
+                _memCacheService);
         }
     }
 }
