@@ -574,6 +574,7 @@
     <Content Include="www\css\build\dev\reactpages\winlossanalysis\index.chunk.js" />
     <Content Include="www\css\build\dev\reactpages\winlossanalysis\index.css" />
     <Content Include="www\css\build\images\BottomLine.png" />
+    <Content Include="www\css\build\images\excel-white-icon.svg" />
     <Content Include="www\css\build\images\FirstNodeSpan.png" />
     <Content Include="www\css\build\images\info.png" />
     <Content Include="www\css\build\images\red-check.jpg" />
@@ -655,6 +656,8 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="SiteConfig\Web.Staging.config" />
+    <Content Include="www\css\build\pro\reactpages\winlossanalysis\index.chunk.js" />
+    <Content Include="www\css\build\pro\reactpages\winlossanalysis\index.css" />
     <Content Include="www\css\source\pages\betlist\SexyGaming.css" />
     <Content Include="www\css\source\pages\playerBatchUpdate\index.css">
       <DependentUpon>index.scss</DependentUpon>
@@ -878,6 +881,7 @@
     <Content Include="www\js\build\pro\reactpages\notification\notification.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\report\newcashoutwinloss.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\report\speciallicenseewl.chunk.js" />
+    <Content Include="www\js\build\pro\reactpages\report\winlossanalysis.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\subsidiaryperformance\subsidiaryperformance.chunk.js" />
     <Content Include="www\js\source\common\languages\ViewResources.txt">
       <AutoGen>True</AutoGen>
