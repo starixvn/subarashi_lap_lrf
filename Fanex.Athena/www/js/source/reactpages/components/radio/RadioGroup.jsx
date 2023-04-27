@@ -62,7 +62,7 @@ export default class RadioGroup extends Component {
 
     render() {
         return (
-            <div className='radio-group'>
+            <div className={`radio-group ${this.props.className}`}>
                 <label className='label-text'>{this.props.label}</label>
                 {this._renderItem()}
             </div>    

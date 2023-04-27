@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import moment from 'moment';
 import parseInput from './utils/parseInput.js';
 import Calendar from './Calendar.js';
 import PredefinedRanges from './PredefinedRanges.js';
@@ -24,6 +23,8 @@ class DateRange extends Component {
     this.locale = { ...defaultOptions.locale, ...props.locale };
     this.isValid = true;
     this.originalRange = { startDate, endDate };
+    this.ranges = { ...defaultOptions.ranges(props.today, props.minDate, props.maxDate, props.limitedMonthRange), ...props.ranges};
+
 
     this.state = {
       range: { startDate, endDate },
@@ -166,9 +167,6 @@ class DateRange extends Component {
 
     const { range, link } = this.state;
     const { styles } = this;
-    const today = moment().format("MM/DD/YYYY");
-    const ranges = { ...defaultOptions.ranges(today, this.props.minDate, this.props.maxDate, this.props.limitedMonthRange), ...this.props.ranges };
-
     const classes = { ...defaultClasses, ...classNames };
     const calendarsCount = Number(calendars) - 1;
 
@@ -193,7 +191,7 @@ class DateRange extends Component {
             {showRange && (
               <PredefinedRanges
                 format={format}
-                ranges={ranges}
+                ranges={this.ranges}
                 range={range}
                 theme={styles}
                 onSelect={(range) => this.handlePredefinedRangesSelect(range)}

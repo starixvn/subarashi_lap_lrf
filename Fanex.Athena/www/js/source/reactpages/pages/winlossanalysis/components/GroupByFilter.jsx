@@ -1,18 +1,15 @@
-﻿import React, { Component } from 'react'
+﻿import React, { useMemo } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import moment from 'moment'
 import { ToastContainer, toast, Flip } from 'react-toastify';
-
 import CollapsiblePanel from '@jsroot/components/collapsible-panel'
-
 import { ActionCreators } from '../actions/index.js'
 import LangHelper from '@jsroot/lib/langHelper'
 import Site from '@jsroot/lib/site'
 import AppData from '@jsroot/lib/AppData'
-import Service from '../common/lib/Service'
-import { ApiUrl } from '../common/lib/constants'
-import { validateBaseCurrency } from '@jsroot/lib/validationHelper'
+import Service from '../common/Service'
+import { DisplayGroupBreakDownMapping, SortBy, SortOrder } from '../common/constants'
+import {v4 as uuidv4} from 'uuid';
 
 const ToastMsg = () => (
     <div>
@@ -21,84 +18,106 @@ const ToastMsg = () => (
     </div>
 )
 
-export class FormFilter extends Component {
+export const GroupByFilter = (props) => {
 
-    constructor(props) {
-        super(props);
-    }
 
-    _showExportWarning = () => {
+    const _showExportWarning = () => {
         toast.success(<ToastMsg />);
     }
 
-    get isValidModel() {
-        return !!this.props.selectedProduct
-            && !!this.props.selectedStatus
-            && !!this.props.selectedLiveStatus
-            && !!this.props.selectedCurrency
-            && validateBaseCurrency(this.props.selectedBaseCurrency)
+    const groupByList = useMemo(() => Service.buildGroupByOption(), [AppData.licenseeName])
+    const breakDownList = useMemo(() => Service.buildBreakDownOptionFromGroupByMode(props.selectedGroupByOption), [props.selectedGroupByOption])
+
+    const isValidModel = () => {
+        return !!props.selectedProduct
+            && !!props.selectedStatus
+            && !!props.selectedLiveStatus
+            && !!props.selectedCurrency
+            && !!props.selectedBettype
+            && !!props.selectedSport
+            // && validateBaseCurrency(props.selectedBaseCurrency)
     }
 
-    isSingleDate = (dateRange) => {
-        const { fromDate, toDate } = dateRange || this.props.dateRange;
-        return moment(fromDate, "MM/DD/YYYY", true).isSame(moment(toDate, "MM/DD/YYYY", true), 'day');
+    const buildTitle = (params) => {
+        const { FromDate, ToDate, ProductCodes, SearchUserName, BaseCurrency, CurrencyIdList } = params;
+        const {  currencyList } = AppData;
+        const dateRangeText = `, ${Site.convertDateToString(FromDate)} → ${Site.convertDateToString(ToDate)}`;
+        const selectedCurrency = Service.getCurrencyCodes(CurrencyIdList, currencyList);
+        const currencyText =  `, ${LangHelper.getSingleResource("Currency")}: ${selectedCurrency}, ${LangHelper.getSingleResource("BaseCurrency")}: ${BaseCurrency}`;
+        const productText = `, ${LangHelper.getSingleResource("LicenseeW_L")} (${ProductCodes})`;
+        const userText = !!SearchUserName ? `, ${LangHelper.getSingleResource("Username")}: ${SearchUserName}` : "";
+
+        return LangHelper.getSingleResource("WinlossAnalysis") + dateRangeText + currencyText + productText + userText;
     }
 
-    submit = (event) => {
+    const submit = (event) => {
         event.preventDefault();
-        const params = this._getParams();
+        const params = _getParams();
         if (!params) {
             return;
         }
 
         toast.dismiss();
-        const title = Service.getTitle(params.FromDate, params.ToDate);
-        this.props.setReportTitle(title);
-        this.props.setRequestParam(params);
-        this.props.toggleLoader(true);
-        this.props.getReportData(ApiUrl.GET_DATA_URL, params);
+        const title = buildTitle(params);
+        props.setReportTitle(title);
+        props.setRequestParam(params);
+        props.toggleLoader(true);
+        props.getReportData(params);
     }
 
-    _getParams() {
-        if (!this.isValidModel) {
+    const _getParams = () => {
+        if (!isValidModel()) {
             return null;
         }
 
-        const { fromDate, toDate } = this.props.dateRange;
-        const { PageSize, SortBy, SortOrder } = this.props.requestParam;
-        const baseCurrency = AppData.baseCurrencyList.find(x => x.value === this.props.selectedBaseCurrency);
+        const { fromDate, toDate } = props.dateRange;
+        const { PageSize } = props.requestParam;
+        const baseCurrency = AppData.baseCurrencyList.find(x => x.value === props.selectedBaseCurrency);
+        const { oddsGroupList, customerClassList, liveStatusList, statusList, platformList} = AppData;
+        const subsidiary = Site.getLrfSubsidiary();
+        let { SubsidiarySearch, SubsidiaryList } = subsidiary;
+        if (!subsidiary || Object.keys(subsidiary).length === 0){
+            SubsidiarySearch = props.subsidiarySearch;
+            SubsidiaryList = props.selectedSubsidiary;
+        }
 
         return {
             PageSize: PageSize,
             PageIndex: 1,
             FromDate: Site.convertDateToString(fromDate),
             ToDate: Site.convertDateToString(toDate),
-            ProductCodes: this.props.selectedProduct,
-            SearchCustId: null,
-            BaseCurrency: this.props.selectedBaseCurrency,
-            StatusIds: "ALL", //this.props.selectedStatus,
-            LiveStatus: "ALL", //this.props.selectedLiveStatus,
-            SportIds: "ALL", //this.props.selectedSport,
-            BetTypeIds: "ALL", //this.props.selectedBettype,
-            PlatformIds: "ALL", //this.props.selectedPlatform,
-            LiveStatusIds: "ALL", //this.props.selectedLiveStatus,
-            IsVipOnly: this.props.selectedVipOnly,
-            CustomerClass: "ALL", //this.props.selectedCustomerClass,
-            OddsGroup: "ALL", //this.props.selectedOddsGroup,
-            IsExludeTestData: this.props.isExcludeTestData,
-            IsViewCashOutOnly: this.props.isViewCashOutOnly,
-            GroupMode: this.props.selectedGroupByOption,
-            BreakdownMode: this.props.selectedBreakDownByOption,
+            ProductCodes: props.selectedProduct,
+            SearchUserName: props.username,
+            SearchMode: props.searchMode,
+            CurrencyIdList: props.selectedCurrency,
+            BaseCurrency: props.selectedBaseCurrency,
+            StatusIds: Service.getNormalizedSelectedParamValueForMultiSelectFilter(props.selectedStatus, statusList),
+            SportIds: Service.getNormalizedSelectedParamValueForTreeListFilter(props.selectedSport, props.sportList),
+            BetTypeIds: Service.getNormalizedSelectedParamValueForTreeListFilter(props.selectedBettype, props.bettypeList),
+            PlatformIds: Service.getNormalizedSelectedParamValueForMultiSelectFilter(props.selectedPlatform, platformList),
+            LiveStatusIds: Service.getNormalizedSelectedParamValueForMultiSelectFilter(props.selectedLiveStatus, liveStatusList),
+            IsVipOnly: props.selectedVipOnly,
+            CustomerClass: Service.getNormalizedSelectedParamValueForMultiSelectFilter(props.selectedCustomerClass, customerClassList),
+            OddsGroup: Service.getNormalizedSelectedParamValueForMultiSelectFilter(props.selectedOddsGroup, oddsGroupList),
+            IsShowInOrginalCurrency: props.isGroupInOriginalCurrency,
+            IsExcludedTestData: props.isExcludeTestData,
+            IsViewCashOutOnly: props.isViewCashOutOnly,
+            GroupMode: props.selectedGroupByOption,
+            BreakdownMode: props.selectedBreakDownByOption,
             BaseCurrencyName: baseCurrency ? baseCurrency.label : '',
+            SortBy: SortBy.Default,
+            SortOrder: SortOrder.ASC,
+            SubsidiaryList,
+            SubsidiarySearch,
+            SubmitTime: new Date().getTime()
         }
     }
 
-    _renderGroupByOption = () => {
-        const { selectedGroupByOption } = this.props;
-        const groupByList = AppData.groupByList;
+    const _renderGroupByOption = () => {
+        const { selectedGroupByOption } = props;
 
         return (
-            <div className="form-group">
+            <div className="form-group radio-group">
                 <label className='label-text'>{LangHelper.getSingleResource('GroupBy')}:</label>
                 {
                     groupByList.map((option, i) => {
@@ -106,36 +125,7 @@ export class FormFilter extends Component {
                         return (
                             <span key={`GroupBy${key}`}>
                                 <input type='radio' value={option.value} checked={selectedGroupByOption == option.value} id={key}
-                                    onChange={ this.changeGroupByOption} />
-                                <label htmlFor={key}>{option.label}</label>
-                            </span>)
-                    })
-                    }
-            </div>
-        );
-    }
-
-    changeGroupByOption = (event) =>{
-        const breakDownOption = Service.buildBreakDownOptionFromGroupByMode(event.target.value);
-        const firstEnabledSelectBreakDown = breakDownOption.find((item => !item.isDisabled));
-        this.props.setSelectedGroupByOption(event.target.value);
-        this.props.setSelectedBreakDownByOption(firstEnabledSelectBreakDown.value);
-    }
-
-    _renderBreakByOption = () => {
-        const { selectedBreakDownByOption, selectedGroupByOption } = this.props;
-        const breakByList = Service.buildBreakDownOptionFromGroupByMode(selectedGroupByOption);
-
-        return (
-            <div className="form-group">
-                <label className='label-text'>{LangHelper.getSingleResource('BreakdownBy')}:</label>
-                {
-                    breakByList.map((option, i) => {
-                        const key = 'BreakBy' + i;
-                        return (
-                            <span key={`BreakBy${key}`}>
-                                <input disabled={option.isDisabled} type='radio' value={option.value} checked={selectedBreakDownByOption == option.value} id={key}
-                                    onChange={(event) => this.props.setSelectedBreakDownByOption(event.target.value)} />
+                                    onChange={onChangeGroupByOption} />
                                 <label htmlFor={key}>{option.label}</label>
                             </span>)
                     })
@@ -143,40 +133,105 @@ export class FormFilter extends Component {
             </div>
         );
     }
-    
 
-    render() {
+    const onChangeGroupByOption = (event) => {
+        const groupMode = event.target.value
+        const breakDownOption = Service.buildBreakDownOptionFromGroupByMode(groupMode);
+        const firstEnabledSelectBreakDown = breakDownOption.find((item => !item.isDisabled));
+        props.setSelectedGroupByOption(groupMode);
+        props.setSelectedBreakDownByOption(firstEnabledSelectBreakDown.value);
+        setValueForIsDisplayInOriginalCurrencyFilter(groupMode, firstEnabledSelectBreakDown.value);
+    }
+
+    const _renderBreakByOption = () => {
+        const { selectedBreakDownByOption } = props;
 
         return (
-            <CollapsiblePanel className="page-filter">
-                <div className="row">
-                    <ToastContainer
-                        autoClose={10000}
-                        pauseOnFocusLoss={false}
-                        style={{ width: "500px" }}
-                        transition={Flip} />
-                    <div className='col-12 col-md-12 col-sm-12 col-lg-6 col-xl-6'>
-                        <div className='row'>
-                            <div className='col-md-12'>
-                                {this._renderGroupByOption()}
-                            </div>
-                            <div className='col-md-12'>
-                                {this._renderBreakByOption()}
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-12 col-md-2 col-sm-2 col-lg-2 col-xl-1">
-                        <div className="form-group">
-                            <div className="button-group">
-                                <button type="button" disabled={!this.isValidModel} className="btn btn-submit" onClick={this.submit}>{LangHelper.getSingleResource("Submit")}</button>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </CollapsiblePanel>
-        )
+            <div className="form-group radio-group">
+                <label className='label-text'>{LangHelper.getSingleResource('BreakdownBy')}:</label>
+                {
+                    breakDownList.map((option, i) => {
+                        const key = 'BreakBy' + i;
+                        return (
+                            <span key={`BreakBy${key}`}>
+                                <input disabled={option.isDisabled} type='radio' value={option.value} checked={selectedBreakDownByOption == option.value} id={key}
+                                    onChange={onChangeBreakByOption} />
+                                <label htmlFor={key}>{option.label}</label>
+                            </span>)
+                    })
+                }
+            </div>
+        );
     }
+
+    const onChangeBreakByOption = (event) => {
+        const mode = event.target.value;
+        props.setSelectedBreakDownByOption(mode)
+        setValueForIsDisplayInOriginalCurrencyFilter(props.selectedGroupByOption, mode);
+    }
+
+    const setValueForIsDisplayInOriginalCurrencyFilter = (groupByMode, breakdownByMode) => {
+        const currentMapping = DisplayGroupBreakDownMapping.find(item => item.groupByMode == groupByMode
+            && item.breakdownMode == breakdownByMode);
+        if (!currentMapping.isDisplayBreakDownInCurrency) {
+            props.setGroupInOriginalCurrency(currentMapping.isDisplayBreakDownInCurrency);
+        }
+    }
+
+    const onClickClearFilter = () => {
+        let defaultState = window.initialState;
+        props.setDateRange({ startDate: defaultState.dateRange.fromDate, endDate: defaultState.dateRange.toDate });
+        props.setSelectedProduct(defaultState.selectedProduct);
+        props.setSelectedCurrency(defaultState.selectedCurrency);
+        props.setSelectedPlatform(defaultState.selectedPlatform);
+        props.setSelectedStatus(defaultState.selectedStatus);
+        props.setSelectedLiveStatus(defaultState.selectedLiveStatus);
+        props.setSelectedBaseCurrency(defaultState.selectedBaseCurrency);
+        props.setSelectedVipOnly(defaultState.selectedVipOnly);
+        props.setSelectedCustomerClass(defaultState.selectedCustomerClass);
+        props.setSelectedOddsGroup(defaultState.selectedOddsGroup);
+        props.setUsername('');
+        props.setGroupInOriginalCurrency(defaultState.isGroupInOriginalCurrency);
+        props.setViewCashOutOnly(defaultState.isViewCashOutOnly);
+        props.setExcludeTestData(defaultState.isExcludeTestData);
+        props.setSelectedGroupByOption(defaultState.selectedGroupByOption);
+        props.setSelectedBreakDownByOption(defaultState.selectedBreakDownByOption);
+        props.setSubsidiarySearch(false);
+        props.setSubsidiaryList("");
+        props.setAppUuid(`${uuidv4()}`);
+    }
+
+    return (
+        <CollapsiblePanel className="page-filter" isCollapseMode={false}>
+            <div className="row flex w100">
+                <ToastContainer
+                    autoClose={10000}
+                    pauseOnFocusLoss={false}
+                    style={{ width: "500px" }}
+                    transition={Flip} />
+                <div className=''>
+                    <div className='flex flex-col'>
+                        <div className='col-md-12 '>
+                            {_renderGroupByOption()}
+                        </div>
+                        <div className='col-md-12'>
+                            {_renderBreakByOption()}
+                        </div>
+                    </div>
+                </div>
+                <div className="">
+                    <div className="form-group">
+                        <div className="button-group">
+                            <button type="button" disabled={!isValidModel()} className="btn btn-submit" onClick={submit}>{LangHelper.getSingleResource("Submit")}</button>
+                            <button type="button" className="btn btn-outline-secondary" onClick={onClickClearFilter}>{LangHelper.getSingleResource("ClearAllFilters")}</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </CollapsiblePanel>
+    )
+
 }
 
 function mapDispatchToProps(dispatch) {
@@ -184,15 +239,15 @@ function mapDispatchToProps(dispatch) {
 }
 function mapStateToProps(state) {
     const { requestParam, dateRange, selectedProduct, sportList, selectedSport, selectedBettype, bettypeList, selectedGroupByOption, selectedBreakDownByOption, selectedPlatform,
-        selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, selectedLiveStatus, username, isConvertAll, userGuideContent, ip, selectedSubsidiary,
-        selectedVipOnly, selectedCustomerClass, selectedOddsGroup, isExcludeTestData, isViewCashOutOnly
+        currencyList, selectedCurrency, baseCurrencyList,  selectedBaseCurrency, selectedStatus, selectedLiveStatus, username, isGroupInOriginalCurrency, userGuideContent, ip, selectedSubsidiary,
+        selectedVipOnly, selectedCustomerClass, selectedOddsGroup, isExcludeTestData, isViewCashOutOnly, subsidiarySearch, searchMode
     } = state;
 
     return Object.assign({}, {
         requestParam, dateRange, selectedProduct, sportList, selectedSport, selectedBettype, bettypeList, selectedGroupByOption, selectedBreakDownByOption, selectedPlatform,
-        selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, selectedLiveStatus, username, isConvertAll, userGuideContent, ip, selectedSubsidiary, 
-        selectedVipOnly, selectedCustomerClass, selectedOddsGroup, isExcludeTestData, isViewCashOutOnly
+        currencyList, selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, selectedLiveStatus, username, isGroupInOriginalCurrency, userGuideContent, ip, selectedSubsidiary,
+        selectedVipOnly, selectedCustomerClass, selectedOddsGroup, isExcludeTestData, isViewCashOutOnly, subsidiarySearch, searchMode
     });
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FormFilter);
+export default connect(mapStateToProps, mapDispatchToProps)(GroupByFilter);

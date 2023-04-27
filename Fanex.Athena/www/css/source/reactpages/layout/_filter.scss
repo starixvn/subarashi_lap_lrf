@@ -10,4 +10,25 @@
     padding: 10px 15px;
     background: $white;
     border: 1px solid #d6d6d6;
+    .search-option-container {
+        position: absolute;
+        display: inline-block;
+        min-width: 42px;
+    }
+
+    .search-option {
+        .dropdown {
+            &-menu {
+                width: 200px;
+            }
+        }
+
+        .keyword {
+            color: #f31111;
+        }
+    }
+
+    .checkbox-group:nth-child(n+2):not(:first-child) {
+        margin-left: 20px;
+    }
 }

@@ -1,7 +1,6 @@
 ﻿import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import moment from 'moment'
 import { ToastContainer, toast, Flip } from 'react-toastify';
 
 import Select from 'react-select'
@@ -11,19 +10,15 @@ import AutoComplete from '@jsroot/components/auto-complete'
 import CheckBox from '@jsroot/components/CheckBox'
 import CollapsiblePanel from '@jsroot/components/collapsible-panel'
 import UserGuide from '@jsroot/components/UserGuide'
+import AppData from '@jsroot/lib/AppData'
 
 import { ActionCreators } from '../actions/index.js'
 import LangHelper from '@jsroot/lib/langHelper'
-import Site from '@jsroot/lib/site'
-import AppData from '@jsroot/lib/AppData'
-
-import DataService from '@jsroot/lib/DataService.js'
-import DataSourceHelper from '../../../lib/dataSourceHelper'
-import { ApiUrl, BreakdownByMode } from '../common/lib/constants'
-import { validateBaseCurrency } from '@jsroot/lib/validationHelper'
+import { ApiUrl, DisplayGroupBreakDownMapping, ProductCode } from '../common/constants'
 
 import { SubsidiaryViewType, TreeViewOption } from '../../../constants/report'
 import { TreeViewSelect } from '@9softstudio/react-multiselect'
+import SearchOption from './filter/SearchOption.jsx';
 
 const ToastMsg = () => (
     <div>
@@ -37,87 +32,27 @@ export class FormFilter extends Component {
     showSubsidiaryDropdown = AppData.subsidiaryViewType !== SubsidiaryViewType.NOT_MANAGEMENT && AppData.subsidiaryList.length > 0;
     showSubsidiarySearchCheckBox = this.showSubsidiaryDropdown && AppData.subsidiaryViewType === SubsidiaryViewType.MASTER_MANAGEMENT;
     whiteLabelView = AppData.subsidiaryViewType === SubsidiaryViewType.MASTER_MANAGEMENT && !AppData.isOneworksMaster;
-
     constructor(props) {
         super(props);
         this.baseCurrencyList = AppData.baseCurrencyList;
         this.defaultBaseCurrency = props.selectedBaseCurrency;
-
-        this.state = {
-            subsidiarySearch : !this.showSubsidiarySearchCheckBox && this.showSubsidiaryDropdown,
-            appData: Object.assign({}, AppData)
-        };
     }
+    
 
     componentDidMount() {
         this._onChangeProduct(null,this.props.selectedProduct);
+    }
+
+    componentDidUpdate(prevProps){
+        if(prevProps.appUuid != this.props.appUuid){
+            this._onChangeProduct(null, this.props.selectedProduct)
+        }
     }
 
     _showExportWarning = () => {
         toast.success(<ToastMsg />);
     }
 
-    get isValidModel() {
-        return !!this.props.selectedProduct
-            && !!this.props.selectedStatus
-            && !!this.props.selectedLiveStatus
-            && !!this.props.selectedCurrency
-            && validateBaseCurrency(this.props.selectedBaseCurrency)
-            && (!this.state.subsidiarySearch || !!this.props.selectedSubsidiary);
-    }
-
-    isSingleDate = (dateRange) => {
-        const { fromDate, toDate } = dateRange || this.props.dateRange;
-        return moment(fromDate, "MM/DD/YYYY", true).isSame(moment(toDate, "MM/DD/YYYY", true), 'day');
-    }
-
-    exportExcel = (event) => {
-        event.preventDefault();
-
-        const params = this._getParams();
-        if (!params) {
-            return;
-        }
-
-        if (AppData.isAllowTxIDColumn) {
-            params.IsAllowTxIDColumn = true;
-        }
-
-        params.IsExport = true;
-        this.props.toggleLoader(true);
-        DataService.getFile(ApiUrl.ADVANCEDSEARCH_DATA_URL, params).then((response) => {
-            toast.dismiss();
-            const contentType = response.headers["content-type"];
-            if (contentType && contentType.indexOf('application/json') > -1) {
-                const RowsExceedLimitErrorCode = 1001;
-                Site.readAsJson(response.data, (result) => {
-                    if (result.ErrorCode === RowsExceedLimitErrorCode) {
-                        this._showExportWarning();
-                    }
-                    else {
-                        const msg = result.ErrorMsg || LangHelper.getSingleResource("ErrorProcessingMsg");
-                        alert(msg);
-                    }
-                });
-            } else {
-                const NoContentStatusCode = 204;
-                if (response.status === NoContentStatusCode) {
-                    alert(LangHelper.getSingleResource("NoInfo"));
-                }
-                else {
-                    const fileName = "BettingTicketsCenter_AdvancedSearch." +
-                        (response.headers["content-type"] === "application/zip" ? "zip" : "xls");
-
-                    Site.downloadFile(response.data, fileName);
-                }
-            }
-
-            this.props.toggleLoader(false);
-        }).catch(error => {
-            alert(LangHelper.getSingleResource("ErrorProcessingMsg"));
-            this.props.toggleLoader(false);
-        });
-    }
 
     showUserGuide = () => {
         const userGuideContent = this.props.userGuideContent;
@@ -142,9 +77,9 @@ export class FormFilter extends Component {
         const dateConstraint = AppData.dateConstraint;
 
         return (
-            <DateRange startDate={dateRange.fromDate} endDate={dateRange.toDate}
+            <DateRange key={`date-${this.props.appUuid}`} startDate={dateRange.fromDate} endDate={dateRange.toDate}
                 minDate={dateConstraint.minDate} maxDate={dateConstraint.maxDate}
-                today={dateRange.toDate} limitedMonthRange={dateConstraint.limitedMonthRange}
+                today={dateConstraint.maxDate} limitedMonthRange={dateConstraint.limitedMonthRange}
                 onChange={this._onChangeDateRange} />
         )
     }
@@ -160,22 +95,27 @@ export class FormFilter extends Component {
     }
 
     _renderProductSelectList() {
-        const productList = this.state.appData.productList;
+        const productList = AppData.productList;
 
         return productList && productList.length && (
-            <MultipleSelect id="ProductList"
+            <MultipleSelect key={`product-${this.props.appUuid}`} 
+                id="ProductList"
                 language={LangHelper.currentLanguage}
                 value={this.props.selectedProduct}
+                hasSearchBox={true}
                 dataSource={productList}
-                valueField={"label"}
-                keyField={"value"}
-                statusField={"Status"}
+                valueField={"value"}
+                keyField={"id"}
+                statusField={"status"}
                 onChange= {this._onChangeProduct} />
         );
     }
 
     _onChangeProduct = (currentItem, selectedItemsKey) => {
         this.props.setSelectedProduct(selectedItemsKey);
+        if (!this.isContainProductSportBookOrBa(selectedItemsKey)){
+            this.props.setViewCashOutOnly(false);
+        }
         this.props.getSportList(selectedItemsKey);
         this.props.getBetTypeList(selectedItemsKey);
     }
@@ -183,7 +123,19 @@ export class FormFilter extends Component {
     _renderSportSelectList() {
         const sportList = this.props.sportList;
         if(!sportList || !sportList.length){
-            return 'N/A';
+            return(
+            <TreeViewSelect
+                language={LangHelper.currentLanguage}
+                id="SportList"
+                dataSource={[]}
+                keyField="Value"
+                valueField="Name"
+                statusField="Checked"
+                texts={{ SelectOptions: "Please select", All: "N/A", SelectedItemCount: "# selected" }}
+                isAllTextShown={true}
+                hasSearchBox={true}
+                treeViewOption={TreeViewOption} />
+            )
         }
 
         return sportList && sportList.length && (
@@ -206,7 +158,19 @@ export class FormFilter extends Component {
         const bettypeList = this.props.bettypeList;
 
         if(!bettypeList || !bettypeList.length){
-            return 'N/A';
+            return (
+                <TreeViewSelect
+                    language={LangHelper.currentLanguage}
+                    id="BetTypeList"
+                    dataSource={[]}
+                    keyField="Value"
+                    valueField="Name"
+                    statusField="Checked"
+                    texts={{ SelectOptions: "Please select", All: "N/A", SelectedItemCount: "# selected" }}
+                    isAllTextShown={true}
+                    hasSearchBox={true}
+                    treeViewOption={TreeViewOption} />
+            );
         }
 
         return bettypeList && bettypeList.length && (
@@ -226,30 +190,32 @@ export class FormFilter extends Component {
     }
 
     _renderPlatformSelectList() {
-        const platformList = this.state.appData.platformList;
+        const platformList = AppData.platformList;
 
         return platformList && platformList.length && (
-            <MultipleSelect id="PlatformList"
+            <MultipleSelect key={`platform-${this.props.appUuid}`}
+                id="PlatformList"
                 language={LangHelper.currentLanguage}
                 value={this.props.selectedPlatform}
                 dataSource={platformList}
-                valueField={"label"}
-                keyField={"value"}
-                statusField={"Status"}
+                valueField={"value"}
+                keyField={"id"}
+                statusField={"status"}
                 onChange={(currentItem, selectedItemsKey) => this.props.setSelectedPlatform(selectedItemsKey)} />
         );
     }
 
     _renderCurrencySelectList() {
-        const currencyList = this.state.appData.currencyList;
+        const currencyList = AppData.currencyList;
 
         return currencyList && currencyList.length && (
-            <MultipleSelect id="ddlCurrency"
+            <MultipleSelect key={`currency-${this.props.appUuid}`}
+                id="ddlCurrency"
                 language={LangHelper.currentLanguage}
                 dataSource={currencyList}
-                keyField={"Id"}
-                valueField={"Value"}
-                statusField={"Status"}
+                keyField={"id"}
+                valueField={"value"}
+                statusField={"status"}
                 onChange={(currentItem, selectedItemsKey) => this._onChangeCurrency(selectedItemsKey)} />);
     }
 
@@ -257,21 +223,17 @@ export class FormFilter extends Component {
         let baseCurrency = "";
 
         if (!currencyIdList || currencyIdList.indexOf(',') > 0) { // none or multi currencies
-            this.baseCurrencyList = this.state.appData.baseCurrencyList;
+            this.baseCurrencyList = AppData.baseCurrencyList;
             baseCurrency = this.baseCurrencyList.find(x => x.label === this.props.selectedBaseCurrency) ?
                 this.props.selectedBaseCurrency :
                 this.defaultBaseCurrency;
         }
         else {
-            const currencyName = this.state.appData.currencyList.find(x => x.Id == currencyIdList).Value;
-
+            const currencyName = AppData.currencyList.find(x => x.id == currencyIdList).value;
+            baseCurrency = currencyName;
             if (!this.baseCurrencyList.find(x => x.label === currencyName)) {
-                baseCurrency = '';
                 this.baseCurrencyList = AppData.baseCurrencyList.slice(0);
-                this.baseCurrencyList.push({ value: baseCurrency, label: currencyName });
-            }
-            else {
-                baseCurrency = currencyName;
+                this.baseCurrencyList.push({ value: currencyName, label: currencyName });
             }
         }
 
@@ -283,7 +245,8 @@ export class FormFilter extends Component {
         const baseCurrencyList = this.baseCurrencyList;
 
         return baseCurrencyList && baseCurrencyList.length && (
-            <Select instanceId="ddlBased"
+            <Select key={`base-currency-${this.props.appUuid}`}
+                instanceId="ddlBased"
                 value={this.props.selectedBaseCurrency}
                 options={baseCurrencyList}
                 onChange={(item) => this.props.setSelectedBaseCurrency(item.value)} />
@@ -291,10 +254,11 @@ export class FormFilter extends Component {
     }
 
     _renderVipOnlySelectedList() {
-        const vipOnlyList = this.state.appData.vipOnlyList;
+        const vipOnlyList = AppData.vipOnlyList;
 
         return vipOnlyList && vipOnlyList.length && (
-            <Select instanceId="IsVipOnly"
+            <Select key={`viponly-${this.props.appUuid}`}
+                instanceId="IsVipOnly"
                 value={this.props.selectedVipOnly}
                 options={vipOnlyList}
                 onChange={(item) => this.props.setSelectedVipOnly(item.value)} />
@@ -302,61 +266,63 @@ export class FormFilter extends Component {
     }
 
     _renderStatusSelectList() {
-        const statusList = this.state.appData.statusList;
+        const statusList = AppData.statusList;
 
         return statusList && statusList.length && (
-            <MultipleSelect id="StatusList"
+            <MultipleSelect key={`status-${this.props.appUuid}`}
+                id="StatusList"
                 language={LangHelper.currentLanguage}
                 dataSource={statusList}
-                keyField={"Id"}
-                valueField={"Value"}
-                statusField={"Status"}
+                keyField={"id"}
+                valueField={"value"}
+                statusField={"status"}
                 onChange={(currentItem, selectedItemsKey) => this.props.setSelectedStatus(selectedItemsKey)} />);
     }
 
     _renderLiveStatusSelectList() {
-        const liveStatusList = this.state.appData.liveStatusList;
+        const liveStatusList = AppData.liveStatusList;
 
         return liveStatusList && liveStatusList.length && (
-            <MultipleSelect id="LiveStatusList"
+            <MultipleSelect key={`live-status-${this.props.appUuid}`}
+                id="LiveStatusList"
                 language={LangHelper.currentLanguage}
                 dataSource={liveStatusList}
-                keyField={"Id"}
-                valueField={"Value"}
-                statusField={"Status"}
+                keyField={"id"}
+                valueField={"value"}
+                statusField={"status"}
                 onChange={(currentItem, selectedItemsKey) => this.props.setSelectedLiveStatus(selectedItemsKey)} />);
     }
 
     _renderCustomerClassSelectList() {
-        const { selectedCustomerClass } = this.props;
-
-        const customerClassList = this.state.appData.customerClassList;
-        const dataSource = DataSourceHelper.CreateDataSourceFrom(customerClassList, selectedCustomerClass);
+        const customerClassList = AppData.customerClassList;
 
         return customerClassList && customerClassList.length && (
-            <MultipleSelect id="ddlCustomerClass"
+            <MultipleSelect key={`customerclass-${this.props.appUuid}`}
+                id="ddlCustomerClass"
                 language={LangHelper.currentLanguage}
-                dataSource={dataSource}
-                keyField={"key"}
+                dataSource={customerClassList}
+                keyField={"id"}
                 valueField={"value"}
                 statusField={"status"}
                 onChange={(_, selectedItemsKey) => this.props.setSelectedCustomerClass(selectedItemsKey)} />);
     }
 
-    _renderOddGroupSelectList() {
-        const oddGroupList = AppData.oddGroupList;
-        return oddGroupList && oddGroupList.length && (
-            <MultipleSelect id="ddlOddGroup"
+    _renderOddsGroupSelectList() {
+        const oddsGroupList = AppData.oddsGroupList;
+        return oddsGroupList && oddsGroupList.length && (
+            <MultipleSelect key={`odds-group-${this.props.appUuid}`}
+                id="ddlOddGroup"
                 language={LangHelper.currentLanguage}
-                dataSource={oddGroupList}
-                keyField={"Id"}
-                valueField={"Value"}
-                statusField={"Status"}
+                dataSource={oddsGroupList}
+                keyField={"id"}
+                valueField={"value"}
+                statusField={"status"}
                 onChange={(_, selectedItemsKey) => this.props.setSelectedOddsGroup(selectedItemsKey)} />);
     }
 
     _renderSubsidiaryTreeView() {
         return <TreeViewSelect
+            key={`subsidiary-${this.props.appUuid}`}
             language={LangHelper.currentLanguage}
             id="SubsidiaryTreeView"
             dataSource={AppData.whitelabelList}
@@ -370,29 +336,30 @@ export class FormFilter extends Component {
             onChange={(currentItem, selectedItemsKey, treeViewList) => this.props.setSubsidiaryList(selectedItemsKey)} />;
     }
 
-    clearFilter = () => {
-        let defaultState = window.initialState;
-        this.props.setDateRange(defaultState.dateRange);
-        this.props.setSelectedProduct(defaultState.selectedProduct);
-        this.props.setSelectedCurrency(defaultState.selectedCurrency);
-        this.props.setSelectedPlatform(defaultState.selectedPlatform);
-        this.props.setSelectedStatus(defaultState.selectedStatus);
-        this.props.setSelectedLiveStatus(defaultState.selectedLiveStatus);
-        this.props.setSelectedBaseCurrency(defaultState.selectedBaseCurrency);
-        this.props.setSelectedVipOnly(defaultState.selectedVipOnly);
-        this.props.setSelectedCustomerClass(defaultState.selectedCustomerClass);
-        this.props.setSelectedOddGroup(defaultState.selectedOddGroup);
-        this.props.setUsername('');
-        this.props.setGroupInOriginalCurrency(defaultState.isGroupInOriginalCurrency);
-        this.props.setViewCashOutOnly(defaultState.isViewCashOutOnly);
-        this.props.setExcludeTestData(defaultState.isExcludeTestData);
-        this.props.setSelectedGroupByOption(defaultState.selectedGroupByOption);
-        this.props.setSelectedBreakDownByOption(defaultState.selectedBreakDownByOption);
-        this.setState({appData: Object.assign({}, JSON.parse(JSON.stringify(AppData)))});
+    _renderUsernameAutoComplete() {
+        return <AutoComplete key={`username-${this.props.appUuid}`}
+            url={ApiUrl.CUSTOMER_SEARCH_URL}
+            onSelect={(value) => this.props.setUsername(value)}
+            onInput={(value) => this.props.setUsername(value)}
+            htmlAttributes={{ placeholder: LangHelper.getSingleResource("ExternalIdOrSystemId") }} />
+    }
+
+    isContainProductSportBookOrBa = (selectedItemsKey) =>{
+        var listSelectedProduct = selectedItemsKey.split(",");
+        return listSelectedProduct.indexOf(ProductCode.SportsBook) >=0 || listSelectedProduct.indexOf(ProductCode.BA) >=0
+    }
+
+    _handleChangeSearchMode = (event) => {
+        const { value } = event.target;
+        this.props.setSearchMode(value);
     }
 
     render() {
-        const isDisabledGroupInOriginalCurrency = this.props.selectedBreakDownByOption != BreakdownByMode.Currency;
+        const { isOfferCashOutProduct } = AppData;
+        const isEnableCashOutFilter = this.isContainProductSportBookOrBa(this.props.selectedProduct); 
+        const currentMapping = DisplayGroupBreakDownMapping.find(item => item.groupByMode == this.props.selectedGroupByOption 
+            && item.breakdownMode == this.props.selectedBreakDownByOption);
+        const isDisabledGroupInOriginalCurrency = !currentMapping.isDisplayBreakDownInCurrency;
 
         const userGuideButton = <div>
             {this._renderUserGuide()}
@@ -407,7 +374,7 @@ export class FormFilter extends Component {
                         style={{ width: "500px" }}
                         transition={Flip} />
 
-                    {this.showSubsidiaryDropdown && this.state.subsidiarySearch && <div className="col-12 col-md-3 col-sm-4 col-lg-3 col-xl-2">
+                    {this.showSubsidiaryDropdown && this.props.subsidiarySearch && <div className="col-12 col-md-3 col-sm-4 col-lg-3 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">
                                 {this.whiteLabelView ? LangHelper.getSingleResource("WhiteLabel") : LangHelper.getSingleResource("Subsidiary2")}
@@ -496,17 +463,19 @@ export class FormFilter extends Component {
                     <div className="col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource("OddsGroup")}</label>
-                            {this._renderOddGroupSelectList()}
+                            {this._renderOddsGroupSelectList()}
                         </div>
                     </div>
 
                     <div className="col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2">
                         <div className="form-group">
-                            <label className="label-text">{LangHelper.getSingleResource("Username")}</label>
-                            <AutoComplete url={ApiUrl.CUSTOMER_SEARCH_URL}
-                                onSelect={(value) => this.props.setUsername(value)}
-                                onInput={(value) => this.props.setUsername(value)}
-                                htmlAttributes={{ placeholder: LangHelper.getSingleResource("ExternalIdOrSystemId") }} />
+                            <label className="label-text">
+                                <span>{LangHelper.getSingleResource("Username")}</span>
+                                <div className="search-option-container">
+                                    <SearchOption value={this.props.searchMode} onChange={this._handleChangeSearchMode} />
+                                </div>
+                            </label>
+                            {this._renderUsernameAutoComplete()}
                         </div>
                     </div>
 
@@ -529,35 +498,28 @@ export class FormFilter extends Component {
                         </div>
                     </div>
 
-                    <div className="col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2">
-                        <div className="form-group">
-                            <CheckBox id="IsViewCashOutOnly"
-                                checked={this.props.isViewCashOutOnly}
-                                onChange={(checked) => this.props.setViewCashOutOnly(checked)}
-                                label={LangHelper.getSingleResource("ViewCashOutOnly")} />
+                    { isOfferCashOutProduct && 
+                        <div className="col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2">
+                            <div className="form-group">
+                                <CheckBox id="IsViewCashOutOnly"
+                                    checked={this.props.isViewCashOutOnly}
+                                    onChange={(checked) => this.props.setViewCashOutOnly(checked)}
+                                    disabled={!isEnableCashOutFilter}
+                                    label={LangHelper.getSingleResource("ViewCashOutOnly")} />
+                            </div>
                         </div>
-                    </div>
+                    }
 
                     {this.showSubsidiarySearchCheckBox && (
                         <div className='col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2'>
                             <div className="form-group">
                             <CheckBox id="SubsidiarySearch"
-                                checked={this.state.subsidiarySearch}
-                                onChange={checked => { this.setState({subsidiarySearch : checked}); checked && this.props.setSubsidiaryList(this.defaultSelectedSubsidiary)}}
+                                checked={this.props.subsidiarySearch}
+                                onChange={checked => { this.props.setSubsidiarySearch(checked); checked && this.props.setSubsidiaryList(this.defaultSelectedSubsidiary)}}
                                 label={LangHelper.getSingleResource("SubsidiarySearch")} />
                             </div>
                         </div>
-                    )}
-
-                    <div className="col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2">
-                        <div className="form-group">
-                            <div className="button-group">
-                                <button type="button" className="btn btn-no-border" onClick={this.clearFilter}>{LangHelper.getSingleResource("ClearAllFilters")}</button>
-                            </div>
-                        </div>
-                    </div>
-                    
-
+                    )}                
                 </div>
             </CollapsiblePanel>
         )
@@ -569,14 +531,14 @@ function mapDispatchToProps(dispatch) {
 }
 function mapStateToProps(state) {
     const { requestParam, dateRange, selectedProduct, sportList, selectedSport, selectedBettype, bettypeList, selectedPlatform, platformList, selectedVipOnly, selectedCustomerClass,
-        selectedOddsGroup, isExcludeTestData, isGroupInOriginalCurrency, isViewCashOutOnly, selectedBreakDownByOption,
-        selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, selectedLiveStatus, username, userGuideContent, selectedSubsidiary
+        selectedOddsGroup, isExcludeTestData, isGroupInOriginalCurrency, isViewCashOutOnly, selectedGroupByOption, selectedBreakDownByOption, searchMode,
+        selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, selectedLiveStatus, username, userGuideContent, selectedSubsidiary, subsidiarySearch, appUuid
     } = state;
 
     return Object.assign({}, {
         requestParam, dateRange, selectedProduct, sportList, selectedSport, selectedBettype, bettypeList, selectedPlatform, platformList, selectedVipOnly, selectedCustomerClass,
-        selectedOddsGroup, isExcludeTestData, isGroupInOriginalCurrency, isViewCashOutOnly, selectedBreakDownByOption,
-        selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, selectedLiveStatus, username, userGuideContent, selectedSubsidiary
+        selectedOddsGroup, isExcludeTestData, isGroupInOriginalCurrency, isViewCashOutOnly, selectedGroupByOption, selectedBreakDownByOption, searchMode,
+        selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, selectedLiveStatus, username, userGuideContent, selectedSubsidiary, subsidiarySearch, appUuid
     });
 }
 

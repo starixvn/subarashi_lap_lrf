@@ -21,6 +21,10 @@
     }
 }
 
+.search-option-container{
+    margin-top: 2px;
+}
+
 .search-option {
     &.dropdown {
         .dropdown-menu {
@@ -50,8 +54,129 @@
     border-radius: 0px;
 }
 
-.table > tbody tr.grant-total-row td
+.table > tbody 
 {
-    background: #9eb4c3;
-    font-weight: bold;
+    tr.grant-total-row  {
+        height: 34px;
+        td{
+            background: #C4D0D6;
+            font-weight: bold;
+        }
+    }
+    tr.detail-row{
+        .break-by-cell{
+            padding-left: 20px;
+        }
+        td {
+            background-color: #DAEEF3;
+            line-height: 15px;
+            padding-bottom: 9px ;
+            padding-top: 9px ;
+        }
+    
+    }
+    tr.group-product-row td{
+        background-color: #FFEDD1;
+        color: #165299;
+        font-weight: bold;
+        line-height: 15px;
+        padding-bottom: 9px ;
+        padding-top: 9px ;
+    }
+    tr.group-row td.drill-down-cell{
+        color: #1C5FC3;
+    }
+    tr.group-row {
+        td{
+            line-height: 15px;
+            padding-bottom: 9px ;
+            padding-top: 9px ;
+        }
+    }
 }
+ .group-product-row{
+    td{
+        span.arrow-icon{
+            margin-left: 4px;
+        }
+        span.group-text{
+            margin-left: 8px;
+        }
+    }
+ }
+ td{
+    span.arrow-icon{
+        &:hover{
+            cursor: pointer;
+        }
+    }
+}
+ .flex{
+    display: flex;
+    &.flex-col{
+        flex-direction: column;
+    }
+ }
+ .w100{
+    width: 100%;
+ }
+ .drill-down-cell {
+    span.arrow-icon{
+        margin-top: 5px;
+        margin-right: 3px;
+    }
+ }
+  input[type="checkbox"].checkbox:disabled{
+    + label{
+        color: rgba(0, 0, 0, 0.26);
+    }
+
+ }
+ .radio-group{
+    > span{
+        margin-right: 8px;
+    }
+ }
+
+ .button-group{
+    button{
+        margin-left: 15px;
+        box-shadow: none;
+        border-radius: 3px;
+    }
+    .btn-outline-secondary{
+        background-color: white;
+        border: 1px solid #C6C6C6;
+        &:hover{
+            color: #165299;
+            border-color: #165299;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+        }
+    }
+ }
+ .report-title-container{
+    .report-title{
+        padding-top: 7px;
+        padding-bottom: 7px;
+        display: flex;
+    }
+
+ }
+ .excel-popup-container{
+    margin: 15px;
+    color: initial;
+    
+ }
+ .excel-option{
+    display: flex;
+    flex-direction: column;
+    > span{
+        margin-left: 5px;
+    }
+ }
+ .flex-auto{
+    flex: auto
+ }
+ .flex-initial{
+    flex: initial
+ }

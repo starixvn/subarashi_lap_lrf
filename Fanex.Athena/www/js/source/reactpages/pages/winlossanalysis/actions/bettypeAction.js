@@ -1,6 +1,6 @@
 import DataService from '@jsroot/lib/DataService.js'
 import Site from '@jsroot/lib/site'
-import Service from '../common/lib/Service'
+import Service from '../common/Service'
 import * as types from './types'
 import Cache from '@jsroot/lib/Cache'
 import AppData from '@jsroot/lib/AppData' 

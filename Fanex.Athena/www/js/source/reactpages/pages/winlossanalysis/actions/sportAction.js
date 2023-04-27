@@ -1,7 +1,6 @@
 import DataService from '@jsroot/lib/DataService.js'
 import Site from '@jsroot/lib/site'
-import Service from '../common/lib/Service'
-import { getBetTypeList } from './bettypeAction';
+import Service from '../common/Service'
 import * as types from './types'
 
 const Url = Site.resolveClientUrl('api/CommonDataApi/GetSportsForTreeView');

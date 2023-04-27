@@ -4,9 +4,9 @@ import AppContainer from './AppContainer.jsx'
 import { Provider } from 'react-redux'
 import reducer from '../reducers/index.js'
 import Store from '../../../lib/store'
-import { DefaultPageSize } from '../common/lib/constants'
+import { DefaultPageSize } from '../common/constants'
 
-const defaultState = Object.assign({}, window.initialState, { userGuideContent: '', requestParam: { PageSize: DefaultPageSize } });
+const defaultState = Object.assign({}, window.initialState, { userGuideContent: '', requestParam: { PageSize: DefaultPageSize }} );
 const store = Store.createStore(reducer, defaultState);
 
 export default class App extends React.Component {

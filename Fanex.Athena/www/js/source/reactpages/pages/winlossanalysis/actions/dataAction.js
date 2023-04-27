@@ -1,10 +1,11 @@
 import * as types from './types.js'
 import DataService from '@jsroot/lib/DataService.js'
 import { toggleLoader } from '@jsroot/actions/loaderAction'
+import { ApiUrl } from '../common/constants.js';
 
-export const getReportData = (url, params) => {
+export const getReportData = (params) => {
     return (dispatch) => {
-        DataService.postProxyData(DataService.apiKeys.report, url, params)
+        DataService.postProxyData(DataService.apiKeys.report, ApiUrl.GET_DATA_URL, params)
             .then(response => {
                 response.data.timestamp = new Date().getTime();
                 dispatch(setReportData(response.data));

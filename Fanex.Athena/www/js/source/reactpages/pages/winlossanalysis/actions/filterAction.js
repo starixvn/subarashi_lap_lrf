@@ -48,3 +48,18 @@ export const setSelectedOddsGroup = (value) => {
         data: value
     }
 }
+
+export const setAppUuid = (value) => {
+    return {
+        type: types.SET_APP_UUID,
+        data: value
+    }
+}
+
+export const setSearchMode = (value) => {
+    return {
+        type: types.SET_SEARCH_MODE,
+        data: value
+    }
+}
+
