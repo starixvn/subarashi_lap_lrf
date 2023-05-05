@@ -146,7 +146,7 @@
             var model = new SpecialLicenseeWinLossViewModel
             {
                 Param = param,
-                CurrencyList = userSession.CurrencyList,
+                CurrencyList = SessionServiceInstance.LicenseeSession.IsShowVND ? HardcodeVNDForFakeLicensee(userSession.CurrencyList) : userSession.CurrencyList,
                 ReportSetting = reportSetting,
                 BaseCurrencyList = baseCurrencyList
             };

@@ -23,8 +23,6 @@
     [UMFilter]
     public class UserGuideController : CultureBaseController
     {
-        private const string CustomerListResourceName = "CustomerList";
-
         private static readonly int[] VS2Sports = new[]
         {
             190, 191, 192, 194, 196, 193, 197

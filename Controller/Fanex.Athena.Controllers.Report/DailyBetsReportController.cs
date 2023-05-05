@@ -17,12 +17,13 @@ namespace Fanex.Athena.Controllers.Report
     {
         private const int DefaultLimitedMonthRange = 6;
 
-        private readonly ISportService _sportService;        
-        
+        private readonly ISportService _sportService;
+
         public DailyBetsReportController(ISportService sportService)
         {
             _sportService = sportService;
         }
+
         [HttpGet]
         public async Task<ActionResult> Index()
         {
@@ -46,7 +47,7 @@ namespace Fanex.Athena.Controllers.Report
 
             var viewModel = new DailyBetsViewModel
             {
-                CurrencyList = userSession.CurrencyList,
+                CurrencyList = SessionServiceInstance.LicenseeSession.IsShowVND ? HardcodeVNDForFakeLicensee(userSession.CurrencyList) : userSession.CurrencyList,
                 SportList = sportList,
                 ProductOptions = productAccess.ProductList.Select(i => new ProductOption
                 {

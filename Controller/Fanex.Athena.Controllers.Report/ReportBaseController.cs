@@ -1,5 +1,6 @@
 ﻿namespace Fanex.Athena.Controllers.Report
 {
+    using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Web.ActionFilter;
     using Model.Core.DTO.Common;
     using Model.Core.MetaModel.Product;
@@ -23,6 +24,19 @@
                 Name = i.ProductName,
                 Status = true
             }).ToList();
+        }
+
+        protected static IDictionary<int, string> HardcodeVNDForFakeLicensee(IDictionary<int, string> currencyList)
+        {
+            foreach (var currency in CurrencyType.INHCurrencyList)
+            {
+                if (currencyList.TryGetValue(currency, out _))
+                {
+                    currencyList[currency] = "VND";
+                }
+            }
+
+            return currencyList;
         }
     }
 }

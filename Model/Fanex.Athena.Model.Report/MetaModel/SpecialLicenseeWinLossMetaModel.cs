@@ -44,6 +44,8 @@
 
         public string DefaultBaseCurrency { get; set; }
 
+        public bool IsShowVND { get; set; }
+
         public bool IsValid => CurrencyId >= SystemConstants.MinBaseCurrencyType
             && (string.IsNullOrEmpty(BaseCurrency) || SystemConstants.BaseCurrencyList
             .Any(x => x.Value.Equals(BaseCurrency, StringComparison.OrdinalIgnoreCase)));

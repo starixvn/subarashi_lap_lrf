@@ -63,7 +63,7 @@ namespace Fanex.Athena.Controllers.Report
                 ProductAccess = productAccess,
                 IsAllowedCustomerCommission = licenseeSession.IsAllowedCustomerComm,
                 IsEnableSingleWallet = licenseeSession.IsEnableSingleWallet,
-                CurrencyList = GetCurrenciesForTurnoverReport(licenseeSession.LicenseeId),
+                CurrencyList = GetCurrenciesForTurnoverReport(),
                 IsAllowedCasinoTransfer = AppSettingInstance.LicenseeAllowCasinoTransfer.Contains(licenseeSession.LicenseeId),
                 IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeName)
             };
@@ -97,7 +97,7 @@ namespace Fanex.Athena.Controllers.Report
                     FunctionNames.Turnover),
                 IsAllowedCustomerCommission = licenseeSession.IsAllowedCustomerComm,
                 IsEnableSingleWallet = licenseeSession.IsEnableSingleWallet,
-                CurrencyList = GetCurrenciesForTurnoverReport(licenseeSession.LicenseeId),
+                CurrencyList = GetCurrenciesForTurnoverReport(),
                 IsAllowedCasinoTransfer = licenseeSession.LicenseeId == 1
             };
 
@@ -142,7 +142,7 @@ namespace Fanex.Athena.Controllers.Report
             return new TurnoverExcel(templatePath, showingOption, viewModel) { IsShowCasinoTransfer = isShowCasinoTransfer };
         }
 
-        private IDictionary<int, string> GetCurrenciesForTurnoverReport(int licenseeId)
+        private IDictionary<int, string> GetCurrenciesForTurnoverReport()
         {
             var currencyList = SessionServiceInstance.UserSession.CurrencyList;
             return currencyList;

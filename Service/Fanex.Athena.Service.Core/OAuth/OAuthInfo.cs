@@ -141,16 +141,18 @@ namespace Fanex.Athena.Service.Core.OAuth
             }
         }
 
+        public bool IsShowVND => GetClaimValue<bool>("IsShowVND");
+
         private T GetClaimValue<T>(string claimType)
             => (T)Convert.ChangeType(GetClaimValue(claimType), typeof(T));
 
         private T GetClaimValue<T>(string claimType, T _default)
         {
             var claimValue = GetClaimValue(claimType);
-            return string.IsNullOrEmpty(claimValue) ? _default : (T) Convert.ChangeType(claimValue, typeof(T));
+            return string.IsNullOrEmpty(claimValue) ? _default : (T)Convert.ChangeType(claimValue, typeof(T));
         }
 
-    private string GetClaimValue(string claimType)
-            => _claims.FirstOrDefault(_ => _.Type.Equals(claimType, StringComparison.OrdinalIgnoreCase))?.Value;
+        private string GetClaimValue(string claimType)
+                => _claims.FirstOrDefault(_ => _.Type.Equals(claimType, StringComparison.OrdinalIgnoreCase))?.Value;
     }
 }

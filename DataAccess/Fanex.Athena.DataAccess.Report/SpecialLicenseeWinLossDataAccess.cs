@@ -171,10 +171,11 @@
             while (reader.Read())
             {
                 var currencyId = reader.ToInt("currencyid");
+                var currencyName = currencyList?.GetValueOrDefault(currencyId, currencyId.ToString());
                 var item = new LicenseeWinLoss
                 {
                     CurrencyId = currencyId,
-                    CurrencyName = currencyList?.GetValueOrDefault(currencyId, currencyId.ToString()),
+                    CurrencyName = metaModel.IsShowVND && currencyName == "INH" ? "VND" : currencyName,
                     CustomerWinLoss = reader.ToDecimal("winlost"),
                     LicenseeWL = ReadLicenseeWinLossList(reader, licenseeWLColumns),
                     TurnOver = ReadTurnoverList(reader, turnoverColumns),

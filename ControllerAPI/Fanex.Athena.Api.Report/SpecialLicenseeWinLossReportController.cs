@@ -31,7 +31,6 @@
 
         private readonly ISpecialLicenseeWinLossDataAccess _licenseeWinLossDataAccess;
 
-
         public SpecialLicenseeWinLossReportController(
             IReportSettingService reportSettingService,
             ILanguageService langService,
@@ -101,6 +100,7 @@
                 metaModel.SiteName = licenseeName;
                 metaModel.CurrencyListXml = GenerateCurrencyListXml(metaModel);
                 metaModel.DefaultBaseCurrency = userSession.DefaultBaseCurrency;
+                metaModel.IsShowVND = SessionService.LicenseeSession.IsShowVND;
 
                 var result = await _licenseeWinLossDataAccess.GetData(metaModel, userSession.CurrencyList);
 
