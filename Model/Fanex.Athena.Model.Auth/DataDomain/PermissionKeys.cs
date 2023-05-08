@@ -64,6 +64,7 @@
         public const string ReportExtraPayout = "ExtraPayout";
         public const string ReportNewCashOutWinLoss = "NewCashOutWinLoss";
         public const string ReportAbnormalBet = "AbnormalBet";
+        public const string ReportGrossGamingRevenue = "GrossGamingRevenue";
 
         /* Customer Info. */
 

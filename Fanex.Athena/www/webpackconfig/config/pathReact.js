@@ -43,6 +43,7 @@ var scriptPaths = {
     licenseecontact: "./www/js/source/reactpages/pages/licenseecontact/components/index.jsx",
     exchangewl: "./www/js/source/reactpages/pages/exchangewl/components/index.jsx",
     speciallicenseewl: "./www/js/source/reactpages/pages/speciallicenseewl/components/index.jsx",
+    grossgamingrevenue: "./www/js/source/reactpages/pages/grossgamingrevenue/components/index.jsx",
     bettingticketscenter_advancedsearch: "./www/js/source/reactpages/pages/bettingticketscenter/advancedsearch/components/index.jsx",
     bettingticketscenter_singlecustomer: "./www/js/source/reactpages/pages/bettingticketscenter/singlecustomer/components/index.jsx",
     bettingticketscenter_refno: "./www/js/source/reactpages/pages/bettingticketscenter/refno/components/index.jsx",

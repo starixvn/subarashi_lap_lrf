@@ -1,0 +1,81 @@
+﻿import LangHelper from '../../../lib/langHelper'
+
+export const Url = 'api/SpecialLicenseeWinLossReport/Index';
+
+export const GetLabelText = licenseeName => {
+    switch (licenseeName) {
+        case "12B":
+            return LabelText12B;
+        case "Ivory":
+            return LabelTextIvory;
+    }
+};
+
+const LabelText12B = {
+    viewIn: LangHelper.getSingleResource('ViewIn'),
+}
+
+export const HeaderText = {
+    index: '#',
+    date: LangHelper.getSingleResource('Date'),
+    currency: LangHelper.getSingleResource('Currency'),
+    totalTurnOver: LangHelper.getSingleResource('TotalBet'),
+    totalTransaction: LangHelper.getSingleResource('Volume'),
+    totalPayout: LangHelper.getSingleResource('TotalPayout'),
+    totalLicenseeWL: LangHelper.getSingleResource('GGR'),
+    total: LangHelper.getSingleResource('Total')
+};
+
+export const TotalText = {
+    total: LangHelper.getSingleResource('Total'),
+    totalIn: LangHelper.getSingleResource('Totalin')
+}
+
+const sortNumber = (a, b) => a - b;
+const sortString = (a, b) => a > b ? 1 : (a < b ? -1 : 0);
+
+export class Service {
+    static getReportTitle(fromDate, toDate, currencyId, currencyName, baseCurrency, viewMode) {
+        if(viewMode === 0) {
+            return `${LangHelper.getSingleResource('GrossGamingRevenue')}, ${LangHelper.getSingleResource('Viewin').replace('{0}','GMT+8')}`;
+        }
+        else {
+            const viewInByCurrency = currencyId == 0 
+            ? LangHelper.getSingleResource('AllCurrencies')
+            : `${LangHelper.getSingleResource('Viewin').replace('{0}', baseCurrency.toUpperCase() || currencyName)}`;
+
+        return `${LangHelper.getSingleResource('GrossGamingRevenue')}, GMT+8, ${fromDate} - ${toDate} - ${viewInByCurrency}`;
+        }
+    }
+
+    static showErrorMsg() {
+        alert(LangHelper.getSingleResource('ErrorProcessingMsg'));
+    }
+
+    static sort(data, sortBy, sortOrder) {
+
+ 
+        sortBy = sortBy === 'Date' ? 'Ticks' : sortBy;
+
+        let compareFunc = null;
+
+        if (sortBy === 'CurrencyName') {
+            if (sortOrder === 'asc') {
+                compareFunc = (a, b) => sortString(a[sortBy], b[sortBy]);
+            }
+            else {
+                compareFunc = (a, b) => sortString(b[sortBy], a[sortBy]);
+            }
+        }
+        else {
+            if (sortOrder === 'asc') {
+                compareFunc = (a, b) => sortNumber(a[sortBy], b[sortBy]);
+            }
+            else {
+                compareFunc = (a, b) => sortNumber(b[sortBy], a[sortBy]);
+            }
+        }
+
+        data.sort(compareFunc);
+    }
+};

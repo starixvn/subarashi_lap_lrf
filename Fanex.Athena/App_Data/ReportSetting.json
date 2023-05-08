@@ -52,5 +52,10 @@
     "MinDateString": "01/01/2021",
     "MaxDateString": "today",
     "LimitRecentDays": 90
+  },
+  {
+    "ReportKey": "GrossGamingRevenue",
+    "MinDateString": "",
+    "MaxDateString": ""
   }
 ]

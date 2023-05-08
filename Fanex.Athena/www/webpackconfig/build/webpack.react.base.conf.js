@@ -29,6 +29,7 @@ function generateConfig(environment) {
             [`${jsPath}/report/abnormalbet`]: pathConfig.scriptPaths.abnormalbet,
             [`${jsPath}/exchangewl/exchangewl`]: pathConfig.scriptPaths.exchangewl,
             [`${jsPath}/report/speciallicenseewl`]: pathConfig.scriptPaths.speciallicenseewl,
+            [`${jsPath}/report/grossgamingrevenue`]: pathConfig.scriptPaths.grossgamingrevenue,
             [`${jsPath}/bettingticketscenter/advancedsearch`]: pathConfig.scriptPaths.bettingticketscenter_advancedsearch,
             [`${jsPath}/bettingticketscenter/singlecustomer`]: pathConfig.scriptPaths.bettingticketscenter_singlecustomer,
             [`${jsPath}/bettingticketscenter/refno`]: pathConfig.scriptPaths.bettingticketscenter_refno,

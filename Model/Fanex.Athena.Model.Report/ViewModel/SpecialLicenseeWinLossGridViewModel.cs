@@ -1,5 +1,4 @@
-﻿// -----------------------------------------------------------------------
-namespace Fanex.Athena.Model.Report.ViewModel
+﻿namespace Fanex.Athena.Model.Report.ViewModel
 {
     public class SpecialLicenseeWinLossGridViewModel : LicenseeWinLossGridViewModel
     {
@@ -18,5 +17,7 @@ namespace Fanex.Athena.Model.Report.ViewModel
                 return Date.Ticks;
             }
         }
+
+        public decimal TotalPayout => TotalTurnOver - TotalLicenseeWL;
     }
 }

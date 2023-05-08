@@ -600,7 +600,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-const _excluded = ["content", "tag"];
+const _excluded = ["content", "content2", "tag"];
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
@@ -609,6 +609,7 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 const ReportTitle = _ref => {
   let {
       content,
+      content2,
       tag
     } = _ref,
     attrs = _objectWithoutProperties(_ref, _excluded);
@@ -617,7 +618,7 @@ const ReportTitle = _ref => {
     className: "report-title-container"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Tag, _extends({
     className: "report-title"
-  }, attrs), content));
+  }, attrs), content, content2));
 };
 const propTypes = {
   tag: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
@@ -991,14 +992,29 @@ class MonthPicker extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     this.max = max;
     const fromDate = moment__WEBPACK_IMPORTED_MODULE_3___default()(props.fromDate, format);
     const toDate = moment__WEBPACK_IMPORTED_MODULE_3___default()(props.toDate, format);
+    var fromDay, toDay;
+    if (props.showDate) {
+      fromDay = fromDate.date();
+      toDay = toDate.date();
+    } else {
+      fromDay = 1;
+      toDay = toDate.year() === this.max.year && toDate.month() === this.max.month ? this.max.date : moment__WEBPACK_IMPORTED_MODULE_3___default()({
+        year: toDate.year(),
+        month: toDate.month()
+      }).daysInMonth();
+      this.props.onChange({
+        fromDate: this._formatDate(fromDay, fromDate.month(), fromDate.year()),
+        toDate: this._formatDate(toDay, toDate.month(), toDate.year())
+      });
+    }
     const currentMonth = {
       year: fromDate.year(),
       month: fromDate.month()
     };
     this.state = {
       month: currentMonth,
-      from: fromDate.date(),
-      to: toDate.date()
+      from: fromDay,
+      to: toDay
     };
   }
   _formatDate(date, month, year) {

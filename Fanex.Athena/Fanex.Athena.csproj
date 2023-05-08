@@ -761,6 +761,7 @@
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\SabaVirtualSettingInformation.xls" />
     <Content Include="www\css\build\dev\pages\customer\sabavirtualsettinginformation.css.map" />
     <Content Include="www\css\build\dev\pages\customer\sabavirtualsettinginformation.chunk.js.map" />
+    <Content Include="Views\Desktop\Report\GrossGamingRevenue\Main.cshtml" />
     <None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
     <None Include="www\css\source\pages\betlist\result\result.happy5.scss" />
     <None Include="www\css\source\reactpages\components\alert\icons\error.scss" />
@@ -804,6 +805,7 @@
     <Content Include="www\js\build\dev\reactpages\report\customersupporttask.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\report\dailybets.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\report\extrapayout.chunk.js" />
+    <Content Include="www\js\build\dev\reactpages\report\grossgamingrevenue.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\report\leaguewinloss.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\report\licenseewlbytimezone.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\notification\notification.chunk.js" />
@@ -844,6 +846,7 @@
     <Content Include="www\js\build\pro\reactpages\report\customersupporttask.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\report\dailybets.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\report\extrapayout.chunk.js" />
+    <Content Include="www\js\build\pro\reactpages\report\grossgamingrevenue.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\report\leaguewinloss.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\report\licenseewlbytimezone.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\notification\notification.chunk.js" />
@@ -2496,6 +2499,7 @@
     <Content Include="www\js\build\dev\pages\customer\sabavirtualsettinginformation.chunk.js.map" />
     <Content Include="www\css\source\reactpages\pages\abnormalbet\index.scss" />
     <Content Include="www\js\build\dev\reactpages\report\abnormalbet.chunk.js.map" />
+    <Content Include="www\js\build\dev\reactpages\report\grossgamingrevenue.chunk.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SiteConfig\WebConfigTransforms\SIT.config">

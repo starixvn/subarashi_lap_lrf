@@ -3396,4 +3396,22 @@
   <data name="ProductJIG" xml:space="preserve">
     <value>Jili</value>
   </data>
+  <data name="GrossGamingRevenue" xml:space="preserve">
+    <value>Gross Gaming Revenue</value>
+  </data>
+  <data name="Weekly" xml:space="preserve">
+    <value>Weekly</value>
+  </data>
+  <data name="GGR" xml:space="preserve">
+    <value>GGR</value>
+  </data>
+  <data name="TotalBet" xml:space="preserve">
+    <value>Total Bet</value>
+  </data>
+  <data name="TotalPayout" xml:space="preserve">
+    <value>Total Payout</value>
+  </data>
+  <data name="Volume" xml:space="preserve">
+    <value>Volume</value>
+  </data>
 </root>
