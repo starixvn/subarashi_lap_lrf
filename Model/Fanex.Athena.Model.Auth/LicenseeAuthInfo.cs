@@ -21,5 +21,7 @@ namespace Fanex.Athena.Model.Auth
         public IEnumerable<string> OfferedOddsGroupsList { get; set; }
 
         public string SiteDBServer { get; set; }
+
+        public bool IsShowVND { get; set; }
     }
 }

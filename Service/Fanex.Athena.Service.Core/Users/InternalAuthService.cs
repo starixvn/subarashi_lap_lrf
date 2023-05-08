@@ -121,7 +121,8 @@ namespace Fanex.Athena.Service.Core.Users
                 IsEnableSingleWallet = oauthInfo.IsEnableSingleWallet,
                 OfferedSubProductList = oauthInfo.OfferedSubProductList,
                 OfferedOddsGroupsList = oauthInfo.OfferedOddsGroupList,
-                SiteDBServer = oauthInfo.SiteDBServer
+                SiteDBServer = oauthInfo.SiteDBServer,
+                IsShowVND = oauthInfo.IsShowVND
             };
 
         private bool OfferCryptoCurrencyLicensees(string siteName)

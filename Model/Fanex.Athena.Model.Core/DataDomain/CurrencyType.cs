@@ -4,6 +4,8 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+using System.Collections.Generic;
+
 namespace Fanex.Athena.Model.Core.DataDomain
 {
     public static class CurrencyType
@@ -21,5 +23,7 @@ namespace Fanex.Athena.Model.Core.DataDomain
         public const int Chf = 41;
 
         public const int Hkd = 66;
+
+        public static readonly IEnumerable<int> INHCurrencyList = new[] { 51, 125 };
     }
 }
