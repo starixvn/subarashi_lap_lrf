@@ -57,6 +57,7 @@ export class DataGrid extends Component {
             })
             .catch(error => {
                 Service.showErrorMsg();
+                console.log(error);
                 this.props.toggleLoader(false);
             });
     }
@@ -135,7 +136,7 @@ export class DataGrid extends Component {
         const total = this.state.gridData.Total,
         colSpan = 2,
         rowSpan = total.length;
-        
+
         if(AppData.viewMode !== 0) {
             for (let i = 0; i < rowSpan; i++) {
                 const item = total[i];            

@@ -2053,6 +2053,7 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_1__["Component"] {
       this.props.toggleLoader(false);
     }).catch(error => {
       _lib_service__WEBPACK_IMPORTED_MODULE_10__["Service"].showErrorMsg();
+      console.log(error);
       this.props.toggleLoader(false);
     });
   }
