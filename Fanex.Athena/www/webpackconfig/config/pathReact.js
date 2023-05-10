@@ -14,6 +14,7 @@ var cssPaths = {
     licenseecontact: "./www/css/source/reactpages/pages/licenseecontact/index.scss",
     exchangewl: "./www/css/source/reactpages/pages/exchangewl/index.scss",
     speciallicenseewl: "./www/css/source/reactpages/pages/speciallicenseewl/index.scss",
+    grossgamingrevenue: "./www/css/source/reactpages/pages/grossgamingrevenue/index.scss",
     bettingticketscenter: "./www/css/source/reactpages/pages/bettingticketscenter/index.scss",
     betlist: "./www/css/source/reactpages/pages/betlist/index.scss",
     casinoturnover: "./www/css/source/reactpages/pages/casinoturnover/index.scss",

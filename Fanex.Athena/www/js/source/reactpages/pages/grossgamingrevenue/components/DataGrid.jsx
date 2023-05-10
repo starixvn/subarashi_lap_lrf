@@ -57,7 +57,6 @@ export class DataGrid extends Component {
             })
             .catch(error => {
                 Service.showErrorMsg();
-                console.log(error);
                 this.props.toggleLoader(false);
             });
     }
@@ -187,7 +186,7 @@ export class DataGrid extends Component {
     }
 
     _buildExportExcel() {
-        return AppData.viewMode === 0 ? <i class="icon-excel" style={{float: 'right',backgroundColor: "#FFF"}} title={LangHelper.getSingleResource("ExportToExcel")} onClick={this.exportExcel}></i> : null;
+        return AppData.viewMode === 0 ? <i class="icon-excel" title={LangHelper.getSingleResource("ExportToExcel")} onClick={this.exportExcel}></i> : null;
     }
 
     exportExcel = (event) => {
@@ -245,8 +244,8 @@ export class DataGrid extends Component {
         const params = this.props.params;
 
         return (
-            <div className='result-content'>
-                {this.props.reportTitle && <ReportTitle content={this.props.reportTitle} content2={this._buildExportExcel()}/> }
+            <div className={`result-content${AppData.viewMode === 0 ? " dark-view" : null}`}>
+                {this.props.reportTitle && <ReportTitle content={this.props.reportTitle} extendContent={this._buildExportExcel()}/> }
                 {!data.length ? <NoDataTitle /> :
                 <Table
                     minWidth={800}

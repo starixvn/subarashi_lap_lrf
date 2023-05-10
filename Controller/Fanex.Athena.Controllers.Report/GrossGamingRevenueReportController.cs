@@ -35,7 +35,7 @@
             var productAccess = ProductServiceInstance.GetSingleWalletProductAccess(
                 SessionServiceInstance.LicenseeSession.LicenseeId,
                 userSession.Language,
-                FunctionNames.SpecialLicenseeWinLoss);
+                FunctionNames.GrossGamingRevenue);
 
             ViewModeByLicensee.TryGetValue(licenseeName, out byte viewMode);
             var baseCurrencyList = GetFakeBaseCurrencies(reportSetting.BaseCurrencies, userSession.DefaultBaseCurrency, viewMode);

@@ -600,7 +600,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-const _excluded = ["content", "content2", "tag"];
+const _excluded = ["content", "extendContent", "tag"];
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
@@ -609,7 +609,7 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 const ReportTitle = _ref => {
   let {
       content,
-      content2,
+      extendContent,
       tag
     } = _ref,
     attrs = _objectWithoutProperties(_ref, _excluded);
@@ -618,7 +618,7 @@ const ReportTitle = _ref => {
     className: "report-title-container"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Tag, _extends({
     className: "report-title"
-  }, attrs), content, content2));
+  }, attrs), content, extendContent));
 };
 const propTypes = {
   tag: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
@@ -2053,7 +2053,6 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_1__["Component"] {
       this.props.toggleLoader(false);
     }).catch(error => {
       _lib_service__WEBPACK_IMPORTED_MODULE_10__["Service"].showErrorMsg();
-      console.log(error);
       this.props.toggleLoader(false);
     });
   }
@@ -2176,10 +2175,6 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_1__["Component"] {
   _buildExportExcel() {
     return _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].viewMode === 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
       class: "icon-excel",
-      style: {
-        float: 'right',
-        backgroundColor: "#FFF"
-      },
       title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("ExportToExcel"),
       onClick: this.exportExcel
     }) : null;
@@ -2206,10 +2201,10 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_1__["Component"] {
     }
     const params = this.props.params;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-      className: "result-content"
+      className: `result-content${_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].viewMode === 0 ? " dark-view" : null}`
     }, this.props.reportTitle && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_ReportTitle__WEBPACK_IMPORTED_MODULE_12__["default"], {
       content: this.props.reportTitle,
-      content2: this._buildExportExcel()
+      extendContent: this._buildExportExcel()
     }), !data.length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_7__["default"], null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Table"], {
       minWidth: 800,
       autoWidth: true,
@@ -2586,6 +2581,201 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEB
 
 /***/ }),
 
+/***/ "./www/js/source/reactpages/pages/grossgamingrevenue/constants/darkExcelStyle.js":
+/*!***************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/grossgamingrevenue/constants/darkExcelStyle.js ***!
+  \***************************************************************************************/
+/*! exports provided: titleCellStyle, headerCellStyle, bodyCellStyle, totalCellStyle, grandTotalCellStyle */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "titleCellStyle", function() { return titleCellStyle; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "headerCellStyle", function() { return headerCellStyle; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "bodyCellStyle", function() { return bodyCellStyle; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "totalCellStyle", function() { return totalCellStyle; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "grandTotalCellStyle", function() { return grandTotalCellStyle; });
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+const titleCellStyle = {
+  font: {
+    color: {
+      rgb: "FFFFFF"
+    }
+  },
+  fill: {
+    patternType: "solid",
+    fgColor: {
+      rgb: "4C5575"
+    }
+  }
+};
+const headerCellStyle = {
+  font: {
+    bold: true,
+    color: {
+      rgb: "2C2C2C"
+    },
+    sz: "12"
+  },
+  alignment: {
+    horizontal: "center",
+    vertical: "center"
+  },
+  fill: {
+    patternType: "solid",
+    fgColor: {
+      rgb: "8DA0C2"
+    }
+  },
+  border: {
+    left: {
+      style: "thin",
+      color: {
+        rgb: "D6D6D6"
+      }
+    },
+    bottom: {
+      style: "thin",
+      color: {
+        rgb: "D6D6D6"
+      }
+    }
+  }
+};
+const bodyTextStyle = {
+  alignment: {
+    vertical: "center",
+    wrapText: '1'
+  }
+};
+const bodyDecimalStyle = {
+  numFmt: "#,##0.00"
+};
+const bodyCellStyle = {
+  rowspan: bodyTextStyle,
+  center: {
+    alignment: _objectSpread(_objectSpread({}, bodyTextStyle.alignment), {}, {
+      horizontal: "center"
+    })
+  },
+  left: {
+    alignment: _objectSpread(_objectSpread({}, bodyTextStyle.alignment), {}, {
+      horizontal: "left"
+    })
+  },
+  right: {
+    alignment: _objectSpread(_objectSpread({}, bodyTextStyle.alignment), {}, {
+      horizontal: "right"
+    })
+  },
+  number: {
+    numFmt: "#,##0"
+  },
+  decimal: bodyDecimalStyle,
+  negativeDecimal: _objectSpread(_objectSpread({}, bodyDecimalStyle), {}, {
+    font: {
+      color: {
+        rgb: "FF0000"
+      }
+    }
+  }),
+  percent: {
+    numFmt: '#,##0.00%'
+  }
+};
+const totalTextStyle = {
+  font: {
+    bold: true
+  }
+};
+const totalDecimalStyle = _objectSpread(_objectSpread({}, totalTextStyle), {}, {
+  numFmt: "#,##0.00"
+});
+const totalCellStyle = {
+  default: totalTextStyle,
+  rowspan: _objectSpread(_objectSpread({}, totalTextStyle), {}, {
+    alignment: {
+      horizontal: "center",
+      vertical: "center"
+    }
+  }),
+  center: _objectSpread(_objectSpread({}, totalTextStyle), {}, {
+    alignment: {
+      vertical: "center",
+      horizontal: "center"
+    }
+  }),
+  number: _objectSpread(_objectSpread({}, totalTextStyle), {}, {
+    numFmt: "#,##0"
+  }),
+  decimal: totalDecimalStyle,
+  negativeDecimal: _objectSpread(_objectSpread({}, totalDecimalStyle), {}, {
+    font: {
+      bold: true,
+      color: {
+        rgb: "FF0000"
+      }
+    }
+  })
+};
+const grandTotalTextStyle = {
+  font: {
+    bold: true
+  },
+  fill: {
+    patternType: "solid",
+    fgColor: {
+      rgb: "B8B8C9"
+    }
+  },
+  border: {
+    left: {
+      style: "thin",
+      color: {
+        rgb: "D6D6D6"
+      }
+    }
+  }
+};
+const decimalGrandTotalStyle = _objectSpread(_objectSpread({}, grandTotalTextStyle), {}, {
+  numFmt: "#,##0.00"
+});
+const grandTotalCellStyle = {
+  default: grandTotalTextStyle,
+  rowspan: _objectSpread(_objectSpread({}, grandTotalTextStyle), {}, {
+    alignment: {
+      horizontal: "center",
+      vertical: "center"
+    }
+  }),
+  center: _objectSpread(_objectSpread({}, grandTotalTextStyle), {}, {
+    alignment: {
+      horizontal: "center"
+    }
+  }),
+  number: _objectSpread(_objectSpread({}, grandTotalTextStyle), {}, {
+    numFmt: "#,##0"
+  }),
+  decimal: decimalGrandTotalStyle,
+  negativeDecimal: _objectSpread(_objectSpread({}, decimalGrandTotalStyle), {}, {
+    font: {
+      bold: true,
+      color: {
+        rgb: "FF0000"
+      }
+    }
+  }),
+  percent: _objectSpread(_objectSpread({}, grandTotalTextStyle), {}, {
+    numFmt: "#,##0.00%"
+  })
+};
+
+/***/ }),
+
 /***/ "./www/js/source/reactpages/pages/grossgamingrevenue/lib/reportExcel.js":
 /*!******************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/grossgamingrevenue/lib/reportExcel.js ***!
@@ -2599,8 +2789,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _lib_excel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../lib/excel */ "./www/js/source/reactpages/lib/excel.js");
-/* harmony import */ var _lib_langHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-/* harmony import */ var _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../constants/excelStyle */ "./www/js/source/reactpages/constants/excelStyle.js");
+/* harmony import */ var _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../constants/excelStyle */ "./www/js/source/reactpages/constants/excelStyle.js");
+/* harmony import */ var _constants_darkExcelStyle__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../constants/darkExcelStyle */ "./www/js/source/reactpages/pages/grossgamingrevenue/constants/darkExcelStyle.js");
 /* harmony import */ var _service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./service */ "./www/js/source/reactpages/pages/grossgamingrevenue/lib/service.js");
 /* harmony import */ var _constants_report__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../constants/report */ "./www/js/source/reactpages/constants/report.js");
 /* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
@@ -2618,6 +2808,14 @@ const MAIN_SECTION = 'main';
 const TOTAL_SECTION = 'total';
 const SUMMARYTOTAL_SECTION = 'summary';
 const HEADER_SECTION = 'header';
+const style = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_6__["default"].viewMode !== 0 ? _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__ : _constants_darkExcelStyle__WEBPACK_IMPORTED_MODULE_3__;
+const {
+  titleCellStyle,
+  headerCellStyle,
+  bodyCellStyle,
+  totalCellStyle,
+  grandTotalCellStyle
+} = style;
 class ReportExcel {
   constructor(gridData = {}, title, reportBy) {
     this.worksheet = {};
@@ -2649,12 +2847,12 @@ class ReportExcel {
       [TOTAL_SECTION]: {
         colSpan: 2,
         text: _service__WEBPACK_IMPORTED_MODULE_4__["TotalText"].total,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["totalCellStyle"].rowspan
+        style: totalCellStyle.rowspan
       },
       [SUMMARYTOTAL_SECTION]: {
         colSpan: 3,
         text: _service__WEBPACK_IMPORTED_MODULE_4__["TotalText"].totalIn,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["grandTotalCellStyle"].rowspan
+        style: grandTotalCellStyle.rowspan
       }
     };
   }
@@ -2669,7 +2867,7 @@ class ReportExcel {
       },
       [MAIN_SECTION]: {
         isShow: true,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["bodyCellStyle"].center,
+        style: bodyCellStyle.center,
         width: 50
       },
       [TOTAL_SECTION]: {
@@ -2687,7 +2885,7 @@ class ReportExcel {
       },
       [MAIN_SECTION]: {
         isShow: true,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["bodyCellStyle"].center,
+        style: bodyCellStyle.center,
         width: 150
       },
       [TOTAL_SECTION]: {
@@ -2705,12 +2903,12 @@ class ReportExcel {
       },
       [MAIN_SECTION]: {
         isShow: true,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["bodyCellStyle"].center,
+        style: bodyCellStyle.center,
         width: 100
       },
       [TOTAL_SECTION]: {
         isShow: true,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["totalCellStyle"].center
+        style: totalCellStyle.center
       },
       [SUMMARYTOTAL_SECTION]: {
         isShow: false
@@ -2725,16 +2923,16 @@ class ReportExcel {
       },
       [MAIN_SECTION]: {
         isShow: true,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["bodyCellStyle"].number,
+        style: bodyCellStyle.number,
         width: 130
       },
       [TOTAL_SECTION]: {
         isShow: true,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["totalCellStyle"].number
+        style: totalCellStyle.number
       },
       [SUMMARYTOTAL_SECTION]: {
         isShow: true,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["grandTotalCellStyle"].number
+        style: grandTotalCellStyle.number
       }
     }, {
       field: 'TotalTurnOver',
@@ -2745,18 +2943,18 @@ class ReportExcel {
       },
       [MAIN_SECTION]: {
         hasNegativeStyle: false,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["bodyCellStyle"].decimal,
+        style: bodyCellStyle.decimal,
         isShow: true,
         width: 200
       },
       [TOTAL_SECTION]: {
         hasNegativeStyle: false,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["totalCellStyle"].decimal,
+        style: totalCellStyle.decimal,
         isShow: true
       },
       [SUMMARYTOTAL_SECTION]: {
         hasNegativeStyle: false,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["grandTotalCellStyle"].decimal,
+        style: grandTotalCellStyle.decimal,
         isShow: true
       }
     }, {
@@ -2769,16 +2967,16 @@ class ReportExcel {
       },
       [MAIN_SECTION]: {
         isShow: true,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["bodyCellStyle"].decimal,
+        style: bodyCellStyle.decimal,
         width: 200
       },
       [TOTAL_SECTION]: {
         isShow: true,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["totalCellStyle"].decimal
+        style: totalCellStyle.decimal
       },
       [SUMMARYTOTAL_SECTION]: {
         isShow: true,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["grandTotalCellStyle"].decimal
+        style: grandTotalCellStyle.decimal
       }
     }, {
       field: 'TotalLicenseeWL',
@@ -2790,8 +2988,8 @@ class ReportExcel {
       [MAIN_SECTION]: {
         hasNegativeStyle: true,
         style: {
-          positive: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["bodyCellStyle"].decimal,
-          negative: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["bodyCellStyle"].negativeDecimal
+          positive: bodyCellStyle.decimal,
+          negative: bodyCellStyle.negativeDecimal
         },
         isShow: true,
         width: 200
@@ -2799,16 +2997,16 @@ class ReportExcel {
       [TOTAL_SECTION]: {
         hasNegativeStyle: true,
         style: {
-          positive: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["totalCellStyle"].decimal,
-          negative: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["totalCellStyle"].negativeDecimal
+          positive: totalCellStyle.decimal,
+          negative: totalCellStyle.negativeDecimal
         },
         isShow: true
       },
       [SUMMARYTOTAL_SECTION]: {
         hasNegativeStyle: true,
         style: {
-          positive: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["grandTotalCellStyle"].decimal,
-          negative: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["grandTotalCellStyle"].negativeDecimal
+          positive: grandTotalCellStyle.decimal,
+          negative: grandTotalCellStyle.negativeDecimal
         },
         isShow: true
       }
@@ -2833,7 +3031,7 @@ class ReportExcel {
     this.worksheet[address] = {
       t: "s",
       v: this.title,
-      s: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["titleCellStyle"]
+      s: titleCellStyle
     };
   }
   _createHeader() {
@@ -2853,7 +3051,7 @@ class ReportExcel {
         this.worksheet[address] = {
           t: "s",
           v: header,
-          s: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["headerCellStyle"]
+          s: headerCellStyle
         };
         if (column.colSpan > 1 || column.rowSpan > 1) {
           this.mergeConfig.push({
@@ -2987,30 +3185,18 @@ class ReportExcel {
 /*!**************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/grossgamingrevenue/lib/service.js ***!
   \**************************************************************************/
-/*! exports provided: Url, GetLabelText, HeaderText, TotalText, Service */
+/*! exports provided: Url, HeaderText, TotalText, Service */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Url", function() { return Url; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GetLabelText", function() { return GetLabelText; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HeaderText", function() { return HeaderText; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TotalText", function() { return TotalText; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Service", function() { return Service; });
 /* harmony import */ var _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 
 const Url = 'api/SpecialLicenseeWinLossReport/Index';
-const GetLabelText = licenseeName => {
-  switch (licenseeName) {
-    case "12B":
-      return LabelText12B;
-    case "Ivory":
-      return LabelTextIvory;
-  }
-};
-const LabelText12B = {
-  viewIn: _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('ViewIn')
-};
 const HeaderText = {
   index: '#',
   date: _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Date'),

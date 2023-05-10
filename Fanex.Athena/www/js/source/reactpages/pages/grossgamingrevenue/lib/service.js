@@ -2,19 +2,6 @@
 
 export const Url = 'api/SpecialLicenseeWinLossReport/Index';
 
-export const GetLabelText = licenseeName => {
-    switch (licenseeName) {
-        case "12B":
-            return LabelText12B;
-        case "Ivory":
-            return LabelTextIvory;
-    }
-};
-
-const LabelText12B = {
-    viewIn: LangHelper.getSingleResource('ViewIn'),
-}
-
 export const HeaderText = {
     index: '#',
     date: LangHelper.getSingleResource('Date'),

@@ -1,7 +1,7 @@
 ﻿import moment from 'moment'
 import Excel from '../../../lib/excel'
-import LangHelper from '../../../lib/langHelper'
-import { titleCellStyle, headerCellStyle, bodyCellStyle, totalCellStyle, grandTotalCellStyle } from '../../../constants/excelStyle'
+import * as defaultStyle from '../../../constants/excelStyle'
+import * as darkStyle from '../constants/darkExcelStyle'
 import { HeaderText, TotalText } from './service'
 import { ReportBy } from '../../../constants/report'
 import AppData from '@jsroot/lib/AppData'
@@ -13,6 +13,8 @@ const MAIN_SECTION = 'main';
 const TOTAL_SECTION = 'total';
 const SUMMARYTOTAL_SECTION = 'summary';
 const HEADER_SECTION = 'header';
+const style = AppData.viewMode !== 0 ? defaultStyle : darkStyle;
+const { titleCellStyle, headerCellStyle, bodyCellStyle, totalCellStyle, grandTotalCellStyle } = style;
 
 export default class ReportExcel {
     constructor (gridData = {}, title, reportBy) {      

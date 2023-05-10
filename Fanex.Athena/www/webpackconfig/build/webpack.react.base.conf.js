@@ -53,6 +53,7 @@ function generateConfig(environment) {
             [`${cssPath}/licenseecontact/index`]: pathConfig.cssPaths.licenseecontact,
             [`${cssPath}/exchangewl/index`]: pathConfig.cssPaths.exchangewl,
             [`${cssPath}/speciallicenseewl/index`]: pathConfig.cssPaths.speciallicenseewl,
+            [`${cssPath}/grossgamingrevenue/index`]: pathConfig.cssPaths.grossgamingrevenue,
             [`${cssPath}/bettingticketscenter/index`]: pathConfig.cssPaths.bettingticketscenter,
             [`${cssPath}/betlist/index`]: pathConfig.cssPaths.betlist,
             [`${cssPath}/casinoturnover/index`]: pathConfig.cssPaths.casinoturnover,
