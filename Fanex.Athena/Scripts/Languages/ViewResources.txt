@@ -1,8 +1,1 @@
-﻿
-// Generated helper templates
-// Generated items
-// Fanex.Athena\Scripts\Languages\ViewResources.zh-TW.js
-// Fanex.Athena\Scripts\Languages\ViewResources.zh-Hans.js
-// Fanex.Athena\Scripts\Languages\ViewResources.zh-CN.js
-// Fanex.Athena\Scripts\Languages\ViewResources.js
-
+﻿.NET Core placeholder content to avoid ignoring the output extension directive
