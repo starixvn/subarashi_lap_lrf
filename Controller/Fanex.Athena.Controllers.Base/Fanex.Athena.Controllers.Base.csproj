@@ -96,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CultureBaseController.cs" />
+    <Compile Include="Helpers\PlatformHelper.cs" />
     <Compile Include="JsonNetResult.cs" />
     <Compile Include="NonCultureBaseController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

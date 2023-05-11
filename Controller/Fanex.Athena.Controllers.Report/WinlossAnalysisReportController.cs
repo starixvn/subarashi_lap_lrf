@@ -6,8 +6,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
-    using Fanex.Athena.Extension.Helper;
+    using Fanex.Athena.Controllers.Base.Helpers;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Report.ViewModel;
@@ -25,11 +24,7 @@
         private const string ProductListFunctionKey = "WinlossAnalysis";
 
         private readonly IProductService _productService;
-
-        private readonly IAuthorizationService _authService;
-
         private readonly ISubsidiaryService _subsidiaryService;
-
         private readonly ICustomerClassService _customerClassService;
 
         private bool IsOneworksMaster =>
@@ -38,12 +33,10 @@
 
         public WinlossAnalysisReportController(
             IProductService productService,
-            IAuthorizationService authService,
             ISubsidiaryService subsidiaryService,
             ICustomerClassService customerClassService)
         {
             _productService = productService;
-            _authService = authService;
             _subsidiaryService = subsidiaryService;
             _customerClassService = customerClassService;
         }
@@ -67,7 +60,7 @@
                 SelectedBaseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency,
                 SubsidiaryViewType = IsOneworksMaster ? (byte)SubsidiaryViewType.MasterManagement : userSession.SubsidiaryViewType,
                 SubsidiaryList = subsidiaryList,
-                PlatformList = GetPlatformList(),
+                PlatformList = PlatformHelper.GetPlatformList(),
                 IsOneworksMaster = IsOneworksMaster,
                 CustomerClass = customerClassIds,
                 OddGroups = licenseeSession.OfferedOddsGroupsList,
@@ -118,7 +111,7 @@
             }).ToList();
         }
 
-        private IEnumerable<Product> MoveBaProductToBelowSportBook(ReadOnlyCollection<Product> productList)
+        private static IEnumerable<Product> MoveBaProductToBelowSportBook(ReadOnlyCollection<Product> productList)
         {
             var list = productList.ToList();
             var baProduct = list.FirstOrDefault(c => c.ProductID == ProductTypes.BA);
@@ -129,29 +122,6 @@
                 list.Insert(list.IndexOf(sbProduct) + 1, baProduct);
             }
             return list;
-        }
-
-        private static IDictionary<int, string> GetPlatformList()
-        {
-            return new Dictionary<int, string>
-            {
-                { PlatformType.DesktopNewAsia, ViewResources.DesktopNewAsia },
-                { PlatformType.DesktopChina, ViewResources.DesktopChina },
-                { PlatformType.DesktopOthers, ViewResources.DesktopOthers },
-                { PlatformType.MobileStandard, ViewResources.MobileStandard },
-                { PlatformType.MobileEuro, ViewResources.MobileEuro },
-                { PlatformType.MobileCompact, ViewResources.MobileCompact },
-                { PlatformType.MobileOthers, ViewResources.MobileOthers },
-                { PlatformType.ESportsDesktop, ViewResources.ESportsDesktop },
-                { PlatformType.ESportsMobile, ViewResources.ESportsMobile },
-                { PlatformType.ESportsApp, ViewResources.ESportsApp },
-                { PlatformType.MobileApp, ViewResources.MobileApp },
-                { PlatformType.NativeApp, ViewResources.NativeApp },
-                { PlatformType.Tablet, ViewResources.Tablet },
-                { PlatformType.DeepLink, ViewResources.DeepLink },
-                { PlatformType.WAP, ViewResources.Wap },
-                { PlatformType.BetfromOthers, ViewResources.BetfromOthers }
-            };
         }
     }
 }

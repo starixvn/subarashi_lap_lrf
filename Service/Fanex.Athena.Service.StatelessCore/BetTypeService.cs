@@ -98,7 +98,7 @@ namespace Fanex.Athena.Service.StatelessCore
                     Checked = true,
                     Children = items,
                     Name = DataHelper.GetProductName(key),
-                    Value = key.ToString()
+                    Value = key
                 });
             return result;
         }

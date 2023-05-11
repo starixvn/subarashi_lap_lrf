@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
+    using Fanex.Athena.Controllers.Base.Helpers;
     using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
     using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth.DataDomain;
@@ -114,7 +115,7 @@
             {
                 LiveStatusList = GetLiveStatusList(),
                 StatusList = GetStatusList(),
-                PlatformList = GetPlatformList(),
+                PlatformList = PlatformHelper.GetPlatformList(),
                 ProductOptionList = GetProductOptionList(),
                 IsAllowedCustomerComm = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm,
                 SelectedBaseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency,
@@ -289,29 +290,6 @@
                 new CheckedItem { ID = StatusTypes.Reject, Name = ViewResources.Reject },
                 new CheckedItem { ID = StatusTypes.Refund, Name = ViewResources.Refund },
                 new CheckedItem { ID = StatusTypes.DelayedPayout, Name = ViewResources.DelayedPayout }
-            };
-        }
-
-        private static IDictionary<int, string> GetPlatformList()
-        {
-            return new Dictionary<int, string>
-            {
-                { PlatformType.DesktopNewAsia, ViewResources.DesktopNewAsia },
-                { PlatformType.DesktopChina, ViewResources.DesktopChina },
-                { PlatformType.DesktopOthers, ViewResources.DesktopOthers },
-                { PlatformType.MobileStandard, ViewResources.MobileStandard },
-                { PlatformType.MobileEuro, ViewResources.MobileEuro },
-                { PlatformType.MobileCompact, ViewResources.MobileCompact },
-                { PlatformType.MobileOthers, ViewResources.MobileOthers },
-                { PlatformType.ESportsDesktop, ViewResources.ESportsDesktop },
-                { PlatformType.ESportsMobile, ViewResources.ESportsMobile },
-                { PlatformType.ESportsApp, ViewResources.ESportsApp },
-                { PlatformType.MobileApp, ViewResources.MobileApp },
-                { PlatformType.NativeApp, ViewResources.NativeApp },
-                { PlatformType.Tablet, ViewResources.Tablet },
-                { PlatformType.DeepLink, ViewResources.DeepLink },
-                { PlatformType.WAP, ViewResources.Wap },
-                { PlatformType.BetfromOthers, ViewResources.BetfromOthers }
             };
         }
 

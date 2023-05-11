@@ -110,7 +110,7 @@ namespace Fanex.Athena.DataAccess.Core.Common
 
             using (var db = this.GetObjectDb(UspName))
             {
-                return await db.QueryAsync<SportForTreeViewItem>(new {licenseeId= licenseeId, productCodes= productCodes});
+                return await db.QueryAsync<SportForTreeViewItem>(new {licenseeId, productCodes});
             }
         }
     }
