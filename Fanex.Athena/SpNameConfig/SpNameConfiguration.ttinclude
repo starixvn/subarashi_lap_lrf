@@ -1,8 +1,11 @@
-﻿<#@ template debug="true" hostSpecific="true" #>
+﻿<#@ assembly name="System.Xml" #>
+<#@ assembly name="System.Xml.Linq"#>
+<#@ import namespace="System.Xml.Linq" #>
+<#@ import namespace="System.Text.RegularExpressions" #>
+
 <#
     SiteInfo.Host = Host;
 #>
-<#@ import namespace="System" #>
 <#
     var sites = new SiteInfo[]{        
         new SiteInfo
@@ -107,7 +110,7 @@
 
 		public static IList<SpNameConfig> GetListOfConfig()
 		{
-			var document = System.Xml.Linq.XDocument.Load(@"Fanex.Athena\SpNameConfig\FanexSpNameConfig.xml");
+			var document = XDocument.Load(@"Fanex.Athena\SpNameConfig\FanexSpNameConfig.xml");
 			var elements = document.Root.Elements("SpNameConfig");
 			var listOfConfig = new System.Collections.Generic.List<SpNameConfig>();
 				
