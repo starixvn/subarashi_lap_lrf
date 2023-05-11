@@ -2441,4 +2441,7 @@
   <data name="Agent" xml:space="preserve">
     <value>代理</value>
   </data>
+  <data name="ClearAllFilters" xml:space="preserve">
+    <value>清除所有篩選</value>
+  </data>
 </root>
