@@ -332,4 +332,7 @@
   <data name="grossgamingrevenue" xml:space="preserve">
     <value>Gross Gaming Revenue</value>
   </data>
+  <data name="winlossanalysis" xml:space="preserve">
+    <value>Win Loss Analysis</value>
+  </data>
 </root>
