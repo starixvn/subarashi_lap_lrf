@@ -3,27 +3,16 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ToastContainer, toast, Flip } from 'react-toastify';
 import CollapsiblePanel from '@jsroot/components/collapsible-panel'
-import { ActionCreators } from '../actions/index.js'
+import { ActionCreators } from '../../actions/index.js'
 import LangHelper from '@jsroot/lib/langHelper'
 import Site from '@jsroot/lib/site'
 import AppData from '@jsroot/lib/AppData'
-import Service from '../common/Service'
-import { DisplayGroupBreakDownMapping, SortBy, SortOrder } from '../common/constants'
+import Service from '../../common/Service.js'
+import { DisplayGroupBreakDownMapping, SortBy, SortOrder } from '../../common/constants.js'
 import {v4 as uuidv4} from 'uuid';
-
-const ToastMsg = () => (
-    <div>
-        <div>{LangHelper.getSingleResource("BTCExportExcelMsg1")}</div>
-        <div>{LangHelper.getSingleResource("BTCExportExcelMsg2")}</div>
-    </div>
-)
 
 export const GroupByFilter = (props) => {
 
-
-    const _showExportWarning = () => {
-        toast.success(<ToastMsg />);
-    }
 
     const groupByList = useMemo(() => Service.buildGroupByOption(), [AppData.licenseeName])
     const breakDownList = useMemo(() => Service.buildBreakDownOptionFromGroupByMode(props.selectedGroupByOption), [props.selectedGroupByOption])
@@ -41,7 +30,7 @@ export const GroupByFilter = (props) => {
     const buildTitle = (params) => {
         const { FromDate, ToDate, ProductCodes, SearchUserName, BaseCurrency, CurrencyIdList } = params;
         const {  currencyList } = AppData;
-        const dateRangeText = `, ${Site.convertDateToString(FromDate)} → ${Site.convertDateToString(ToDate)}`;
+        const dateRangeText = `, ${Site.convertDateToString(FromDate)} ⇒ ${Site.convertDateToString(ToDate)}`;
         const selectedCurrency = Service.getCurrencyCodes(CurrencyIdList, currencyList);
         const currencyText =  `, ${LangHelper.getSingleResource("Currency")}: ${selectedCurrency}, ${LangHelper.getSingleResource("BaseCurrency")}: ${BaseCurrency}`;
         const productText = `, ${LangHelper.getSingleResource("LicenseeW_L")} (${ProductCodes})`;

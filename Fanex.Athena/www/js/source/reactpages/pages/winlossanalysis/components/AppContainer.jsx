@@ -4,7 +4,6 @@ import DataGrid from './DataGrid'
 import FormFilter from './FormFilter'
 import Loader from '@jsroot/components/Loader'
 import AppLayout from '@jsroot/layouts/AppLayout'
-import GroupByFilter from './GroupByFilter';
 
 export class AppContainer extends Component {
     constructor(props) {
@@ -16,7 +15,6 @@ export class AppContainer extends Component {
           <AppLayout>
             <Loader isLoading={this.props.isLoading} />
             <FormFilter />
-            <GroupByFilter/>
             <DataGrid />
           </AppLayout>
         );

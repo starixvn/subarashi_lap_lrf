@@ -25,7 +25,6 @@ export const HeaderText = {
     GroupBy: LangHelper.getSingleResource("GroupBy")
 }
 
-export const DefaultPageSize = 50;
 export const OneTwoBetLicenseeName = '12Bet';
 
 export const GroupByMode = {

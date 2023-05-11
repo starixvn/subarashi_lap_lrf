@@ -11,16 +11,6 @@ export default class Service {
         return AppData.licenseeName.toLowerCase() === OneTwoBetLicenseeName.toLowerCase()
     }
 
-    static getTitle(fromDate, toDate, baseCurrency) {
-        const dateRangeText = fromDate && toDate 
-            ? `, ${Site.convertDateToString(fromDate)} → ${Site.convertDateToString(toDate)}` 
-            : '';
-
-        const baseCurrencyText = baseCurrency ? `, ${LangHelper.getSingleResource("BaseCurrency")}: ${baseCurrency}` : '';
-
-        return LangHelper.getSingleResource("WinlossAnalysis") + dateRangeText + baseCurrencyText;
-    }
-
     static getSelectedItemFromTreeListItem(items){
         return items.reduce((accum, elem) => accum.concat(elem.Children), []).map(elem => elem.Value).join(",");
     }

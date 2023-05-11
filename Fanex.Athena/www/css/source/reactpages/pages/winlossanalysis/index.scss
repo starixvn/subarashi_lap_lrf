@@ -57,7 +57,6 @@
 .table > tbody 
 {
     tr.grant-total-row  {
-        height: 34px;
         td{
             background: #C4D0D6;
             font-weight: bold;
@@ -69,9 +68,6 @@
         }
         td {
             background-color: #DAEEF3;
-            line-height: 15px;
-            padding-bottom: 9px ;
-            padding-top: 9px ;
         }
     
     }
@@ -79,19 +75,9 @@
         background-color: #FFEDD1;
         color: #165299;
         font-weight: bold;
-        line-height: 15px;
-        padding-bottom: 9px ;
-        padding-top: 9px ;
     }
     tr.group-row td.drill-down-cell{
         color: #1C5FC3;
-    }
-    tr.group-row {
-        td{
-            line-height: 15px;
-            padding-bottom: 9px ;
-            padding-top: 9px ;
-        }
     }
 }
  .group-product-row{
@@ -156,8 +142,8 @@
  }
  .report-title-container{
     .report-title{
-        padding-top: 7px;
-        padding-bottom: 7px;
+        padding-top: 3px;
+        padding-bottom: 3px;
         display: flex;
     }
 
@@ -179,4 +165,16 @@
  }
  .flex-initial{
     flex: initial
+ }
+
+ .header-content .table > thead > tr > th.border-left-0{
+    border-left: 0px;
+ }
+
+ .aggregate-filter{
+    position: relative;
+    margin: 15px 0px;
+    .page-filter{
+        margin: 0px;
+    }
  }

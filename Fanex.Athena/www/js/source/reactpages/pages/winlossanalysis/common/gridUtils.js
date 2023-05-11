@@ -10,12 +10,12 @@ export const renderHeader = (option) => {
     const _renderDefaultHeader = () => {
         const prefixKey = 'hearder-default';
         let headerCells = [
-            <HeaderCell key={`${prefixKey}-#`} colWidth={30}>#</HeaderCell>,
+            <HeaderCell className='border-left-0' key={`${prefixKey}-#`} colWidth={30}>#</HeaderCell>,
             <HeaderCell key={`${prefixKey}-${HeaderText.GroupBy}`} colWidth={200}>{HeaderText.GroupBy}</HeaderCell>,
             ...getCommonHeaderCells(1, prefixKey)
         ]
         return (
-            <HeaderRow style={{ height: 32 }}>
+            <HeaderRow>
                 {headerCells.map(elem => elem)}
             </HeaderRow>
         )
@@ -24,15 +24,15 @@ export const renderHeader = (option) => {
     const _renderGroupByPlayerModeHeaderCell = () => {
         const prefixKey = 'hearder-player';
         let headerCells = [
-            <HeaderCell key={`${prefixKey}-#`} rowSpan={2} colWidth={30}>#</HeaderCell>,
+            <HeaderCell key={`${prefixKey}-#`} className='border-left-0' rowSpan={2} colWidth={30}>#</HeaderCell>,
             <HeaderCell key={`${prefixKey}-${HeaderText.GroupBy}`} rowSpan={1} colSpan={2} colWidth={200}>{HeaderText.GroupBy}</HeaderCell>,
             ...getCommonHeaderCells(2)
         ]
         return [
-            <HeaderRow key={'header-row-1'} style={{ height: 32 }}>
+            <HeaderRow key={'header-row-1'}>
                 {headerCells.map(elem => elem)}
             </HeaderRow>,
-            <HeaderRow key={'header-row-2'} style={{ height: 32 }}>
+            <HeaderRow key={'header-row-2'}>
                 <HeaderCell key={`${prefixKey}-${HeaderText.SystemId}`} colWidth={120}>{HeaderText.SystemId}</HeaderCell>
                 <HeaderCell key={`${prefixKey}-${HeaderText.ExternalId}`} colWidth={120}>{HeaderText.ExternalId}</HeaderCell>
             </HeaderRow>

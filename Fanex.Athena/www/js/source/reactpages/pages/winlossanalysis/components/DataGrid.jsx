@@ -28,7 +28,6 @@ export const DataGrid = (props) => {
         isBreakDownPlayerMode: requestParam.BreakdownMode == BreakdownByMode.Player
     }
 
-    const [pagingOption, setPagingOption] = useState(DefaultPagingOption);
     const header = useMemo(() => renderHeader(renderOption), [requestParam])
     const body = useMemo(() => renderDataSection(data, renderOption), [data])
     const footer = useMemo(() => renderFooter(sumTotal, renderOption), [sumTotal])
@@ -37,7 +36,7 @@ export const DataGrid = (props) => {
         PageIndex: requestParam.PageIndex,
         PageSize: requestParam.PageSize,
         TotalItem: totalRow,
-        PageList: pagingOption.PageList
+        PageList: DefaultPagingOption.PageList
     };
 
     const submitRequest = (params) => {
@@ -55,14 +54,6 @@ export const DataGrid = (props) => {
     const onPaging = (pageIndex, pageSize) =>{
         const params = { ...requestParam, PageSize: pageSize, PageIndex: pageIndex };
         submitRequest(params);
-    }
-
-    const exportExcel = (event) => {
-        event.preventDefault();
-        const params = { ...requestParam, PageSize: 0, PageIndex: 0};
-        props.toggleLoader(true);
-        Service.getFile(params);
-        props.toggleLoader(false);
     }
 
     const reportTitle = (           
