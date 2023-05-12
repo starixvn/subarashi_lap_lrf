@@ -29,7 +29,7 @@ export default class DataService {
     }
 
     static getData(url, params, cancellationTokenSource) {
-        const token = !!cancellationTokenSource ? cancellationTokenSource.token : this.genCancellationToken().token;
+        const token = cancellationTokenSource ? cancellationTokenSource.token : this.genCancellationToken().token;
         return axios.get(url, 
             { 
                 params: params,

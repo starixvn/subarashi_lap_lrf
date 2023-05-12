@@ -30,7 +30,7 @@ export const GroupByFilter = (props) => {
     const buildTitle = (params) => {
         const { FromDate, ToDate, ProductCodes, SearchUserName, BaseCurrency, CurrencyIdList } = params;
         const {  currencyList } = AppData;
-        const dateRangeText = `, ${Site.convertDateToString(FromDate)} ⇒ ${Site.convertDateToString(ToDate)}`;
+        const dateRangeText = `, ${Site.convertDateToString(FromDate)} → ${Site.convertDateToString(ToDate)}`;
         const selectedCurrency = Service.getCurrencyCodes(CurrencyIdList, currencyList);
         const currencyText =  `, ${LangHelper.getSingleResource("Currency")}: ${selectedCurrency}, ${LangHelper.getSingleResource("BaseCurrency")}: ${BaseCurrency}`;
         const productText = `, ${LangHelper.getSingleResource("LicenseeW_L")} (${ProductCodes})`;
