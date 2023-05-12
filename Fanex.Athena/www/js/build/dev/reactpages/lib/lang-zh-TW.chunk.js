@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 5/8/2023 2:23:47 PM
+// Generated at: 5/12/2023 1:38:31 PM
 window._language_zh_TW = {
   AA: "客客",
   AbnormalBet: "非正規註單",
@@ -352,10 +352,12 @@ window._language_zh_TW = {
   GameType: "遊戲類型",
   GameTypeName: "遊戲類型名稱",
   General: "常規",
+  GGR: "GGR",
   Go: "開始",
   GodOfFortuneWinLoss: "財神爺輸贏",
   GotoCustomerList: "轉至會員名單",
   GrandTotal: "累計",
+  GrossGamingRevenue: "博彩總收入",
   Group: "組",
   GroupBy: "分組方式",
   GroupColor: "組別顏色",
@@ -710,10 +712,12 @@ window._language_zh_TW = {
   Total: "總和",
   TotalActiveCustomer: "總活躍會員人數",
   TotalAway: "客隊總計",
+  TotalBet: "總投注額",
   TotalBets: "總投注",
   TotalGoal: "總進球",
   TotalHome: "主隊總計",
   Totalin: "總計在",
+  TotalPayout: "總支出",
   TotalTransaction: "總交易數",
   TotalTurnover: "總交易額",
   ToViewHistoryRptMsg: "請點擊查看歷史報告",
@@ -788,6 +792,7 @@ window._language_zh_TW = {
   VirtualSports: "虛擬運動",
   VirtualTennis: "Virtual Tennis",
   Void: "作廢",
+  Volume: "投注量",
   Wap: "WAP",
   We: "We",
   Wednesday: "星期三",
