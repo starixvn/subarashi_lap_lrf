@@ -6,8 +6,9 @@ import Cache from '@jsroot/lib/Cache'
 import AppData from '@jsroot/lib/AppData' 
 
 const BETTYPE_CACHE_KEY = "WINLOSSANALYSIS_BETTYPE_CACHE_KEY";
-
 const Url = Site.resolveClientUrl('api/CommonDataApi/GetBetTypeInTreeList');
+
+let currentCancellationTokenSource = null;
 
 const dispatchBettypeList = (dispatch, data) => {
     let selectedSports = Service.getSelectedItemFromTreeListItem(data);          
@@ -45,12 +46,23 @@ export const getBetTypeList = (productCodes) => {
             dispatchBettypeList(dispatch, cacheData);
             return;
         }
-
-        DataService.getData(Url, { productCodes: productCodes})
+        if(currentCancellationTokenSource){
+            currentCancellationTokenSource.cancel('Operation canceled by the user.');
+        }
+        currentCancellationTokenSource = DataService.genCancellationToken();
+        DataService.getData(Url, { productCodes: productCodes}, currentCancellationTokenSource)
             .then(response => {
+                currentCancellationTokenSource = null;    
                 let data = response.data;
                 Cache.set(cacheKey, data, 10);
-                dispatchBettypeList(dispatch, data);    
-            });
+                dispatchBettypeList(dispatch, data);
+            })
+            .catch(function (thrown) {
+                if (DataService.isCancel(thrown)) {
+                    return;
+                } else {
+                  // handle error
+                }
+              });
     };
 }

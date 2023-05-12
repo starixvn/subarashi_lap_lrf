@@ -28,8 +28,22 @@ export default class DataService {
         return this.getFile(proxyUrl, params);
     }
 
-    static getData(url, params) {
-        return axios.get(url, { params: params });
+    static getData(url, params, cancellationTokenSource) {
+        const token = !!cancellationTokenSource ? cancellationTokenSource.token : this.genCancellationToken().token;
+        return axios.get(url, 
+            { 
+                params: params,
+                cancelToken: token
+            });
+    }
+
+    static genCancellationToken(){
+        return axios.CancelToken.source();
+    }
+
+    static isCancel(thrown)
+    {
+        return axios.isCancel(thrown);
     }
 
     static postData(url, params) {
