@@ -3479,11 +3479,13 @@ class DataSourceHelper {
     const convertedList = originDataSource.map(item => {
       const {
         key,
-        value
+        value,
+        valueDecoration
       } = item;
       return {
         key,
         value,
+        valueDecoration,
         status: selectedItemList.find(_ => _ == key) ? true : false
       };
     });
@@ -4152,9 +4154,7 @@ const DataGrid = props => {
       }
     }, dataItem.noOfReached)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
       className: "center-align"
-    }, dataItem.lastReachedDateDisplay), permissionObject.showProblemPlayer && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
-      className: "center-align"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource(dataItem.problemPlayer ? 'Yes' : 'No'))), permissionObject.showVipPlayer && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
+    }, dataItem.lastReachedDateDisplay), permissionObject.showVipPlayer && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
       className: "center-align"
     }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource(dataItem.vipPlayer ? 'Yes' : 'No'))), permissionObject.canEdit && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
       className: "center-align action-cell"
@@ -5654,14 +5654,6 @@ const dataGridFullHeaders = [{
   text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('LastReachedDate'),
   sortBy: 6,
   colWidth: 100
-}, {
-  key: 'problemPlayer',
-  text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('ProblemPlayer'),
-  sortBy: 7,
-  colWidth: 50,
-  show: ({
-    showProblemPlayer
-  }) => showProblemPlayer
 }, {
   key: 'vipPlayer',
   text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('VIPPlayer'),

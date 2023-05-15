@@ -93,7 +93,6 @@ export const DataGrid = (props) => {
                 </button>}
             </Cell>
             <Cell className="center-align">{dataItem.lastReachedDateDisplay}</Cell>
-            {permissionObject.showProblemPlayer && <Cell className="center-align">{LangHelper.getSingleResource(LangHelper.getSingleResource(dataItem.problemPlayer ? 'Yes' : 'No'))}</Cell>}
             {permissionObject.showVipPlayer && <Cell className="center-align">{LangHelper.getSingleResource(LangHelper.getSingleResource(dataItem.vipPlayer ? 'Yes' : 'No'))}</Cell>}
             {permissionObject.canEdit && <Cell className="center-align action-cell">
                 <button className="btn-default btn-link btn-icon delete-icon"

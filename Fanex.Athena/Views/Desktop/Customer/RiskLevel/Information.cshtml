@@ -1,0 +1,188 @@
+﻿@using Fanex.Athena.Model.Customer.DTO
+@using Fanex.Athena.Model.Customer.Enum
+@{
+    Layout = "~/Views/Desktop/Shared/_Report.jqGridLayout.cshtml";
+}
+@section pagecss {
+    <link href="@Url.ContentLinkByEnv("/www/css/build/pages/customer/risklevel.css")" rel="stylesheet" />
+}
+@section pagejs {
+    <script src="@Url.ContentLinkByEnv("/www/js/build/pages/customer/risklevel.chunk.js")"></script>
+}
+
+@using Fanex.Athena.Model.Customer.DTO
+@model RiskLevelModel
+@{
+    var currency = "MYR";
+    var customerClas = @ViewBag.CustomerClass;
+}
+@section Content{
+    @Html.Hidden("CustomerClass", (string)customerClas)
+    @if (string.IsNullOrEmpty(customerClas) || customerClas.Equals("None", StringComparison.OrdinalIgnoreCase))
+    {
+        <div class="page-results">
+            <p class="no-info-row">No information is available</p>
+        </div>
+    }
+    else
+    {
+        <div class="col right right-filter-menu">
+            <i class="icon-excel right" title="Export to Excel" id="ExportToExcel"></i>
+        </div>
+
+        <div class="page-results risk-level-info-spread-setting">
+            <div class="result-content">
+                <div class="panel-heading active">
+                    <div class="panel-title">
+                        <span class="report-title">@ViewResources.RiskLevelOddsGroup</span>
+                    </div>
+                </div>
+                <div class="main-content" id="main-content">
+                    <table id="info-spread-setting" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="col-small">@ViewResources.OddsGroup</th>
+                                <th class="col-small">@ViewResources.Platform</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.SpreadSettingPolicies.Count() == 0)
+                            {
+                                <tr>
+                                    <td class="center-align" colspan="2">@ViewResources.NoInfo</td>
+                                </tr>
+                            }
+                            else
+                            {
+                                foreach (var m in Model.SpreadSettingPolicies)
+                                {
+                                    if (m.Policies.Count == 0)
+                                    {
+                                        <tr>
+                                            <td class="center-align">-</td>
+                                            <td class="left-align">-</td>
+                                        </tr>
+
+                                        continue;
+                                    }
+
+                                    foreach (var p in m.Policies)
+                                    {
+                                        <tr>
+                                            <td class="center-align">@p.OddsGroup</td>
+                                            <td class="left-align">@p.Platform</td>
+                                        </tr>
+                                    }
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="page-results risk-level-policy-setting">
+            <div class="result-content">
+                <div class="panel-heading active">
+                    <div class="panel-title">
+                        <span class="report-title">@ViewResources.RiskLevelBetSetting</span>
+                    </div>
+                </div>
+                <div class="main-content" id="main-content">
+                    <table id="info-setting" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="col-large">@ViewResources.SportType</th>
+                                <th class="col-medium">@ViewResources.Live2/<br />@ViewResources.PreMatch</th>
+                                <th class="col-medium">@ViewResources.Currency</th>
+                                <th class="col-medium">@ViewResources.DisableParlay</th>
+                                <th class="col-medium">@ViewResources.Platform</th>
+                                <th class="col-large">@ViewResources.LeagueGroup</th>
+                                <th class="col-medium">@ViewResources.BetInterval</th>
+                                <th class="col-medium">@ViewResources.AgentBetInterval</th>
+                                <th class="col-medium">@ViewResources.MinBet (@currency)</th>
+                                <th class="col-medium">@ViewResources.MaxPerBet (@currency)</th>
+                                <th class="col-medium">@ViewResources.MaxPerMatch2 (@currency)</th>
+                                <th class="col-medium">@ViewResources.RepeatedBets</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.CustomerClass.Count() == 0)
+                            {
+                                <tr>
+                                    <td class="center-align" colspan="12">@ViewResources.NoInfo</td>
+                                </tr>
+                            }
+                            else
+                            {
+                                foreach (var m in Model.CustomerClass)
+                                {
+                                    if (m.Policies.Count == 0)
+                                    {
+                                        <tr>
+                                            <td class="left-align">-</td>
+                                            <td class="left-align">-</td>
+                                            <td class="center-align">-</td>
+                                            <td class="center-align">-</td>
+                                            <td class="left-align">-</td>
+                                            <td class="right-align">-</td>
+                                            <td class="right-align">-</td>
+                                            <td class="right-align">-</td>
+                                            <td class="right-align">-</td>
+                                            <td class="right-align">-</td>
+                                            <td class="right-align">-</td>
+                                            <td class="right-align">-</td>
+                                            <td class="right-align">-</td>
+                                        </tr>
+
+                                        continue;
+                                    }
+
+                                    foreach (var p in m.Policies)
+                                    {
+                                        <tr>
+                                            <td class="left-align">@p.SportTypeName</td>
+                                            <td class="left-align">@(p.LiveType == 1 ? ViewResources.Live2 : ViewResources.PreMatch)</td>
+                                            <td class="center-align">@p.Currency</td>
+                                            <td class="center-align">@(p.DisableParlay ? ViewResources.Yes : ViewResources.No)</td>
+                                            <td class="left-align">@p.Platform</td>
+                                            <td class="center-align" data-internal-league-group="@p.LeagueGroupId">
+                                                @p.LicLeagueGroupName
+                                                @if (p.LicLeagueGroupId > 0)
+                                                {
+                                                    <a href="javascript:;" class="view-leagues" data-sport-type="@p.SportType" data-league-group="@p.LicLeagueGroupId">
+                                                        <i class="icon-info"></i>
+                                                    </a>
+                                                }
+                                            </td>
+                                            <td class="right-align">@p.BetInterval</td>
+                                            <td class="right-align">@p.AgentBetInterval</td>
+                                            <td class="right-align">@p.MinBet</td>
+                                            <td class="right-align">@p.MaxBet</td>
+                                            <td class="right-align">@p.MaxPerMatch</td>
+                                            <td class="right-align">@p.RepeatedBets</td>
+                                        </tr>
+                                    }
+                                }
+                            }
+                        </tbody>
+                    </table>
+                    @if (Model.CustomerClass.Any())
+                    {
+                    <div class="list-leagues hide" id="list-leagues">
+                        <div class="list-leagues-header">
+                            <a class="block-close" href="javascript:;">
+                                <i class="icon-close"></i>
+                            </a>
+                            <p>@ViewResources.ListOfLeagues:</p>
+                        </div>
+                        <div class="list-leagues-content">
+                            <ul id="ul-list-leagues">
+                            </ul>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+}

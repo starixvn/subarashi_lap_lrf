@@ -65,6 +65,7 @@ function generateConfig(environment) {
             [`${jsPath}/pages/customer/customersetting`]: [pathConfig.scriptPaths.customersetting],
             [`${jsPath}/pages/customer/groupcommission`]: [pathConfig.scriptPaths.groupcommission],
             [`${jsPath}/pages/customer/customerclass`]: [pathConfig.scriptPaths.customerclass],
+            [`${jsPath}/pages/customer/risklevel`]: [pathConfig.scriptPaths.risklevel],
             [`${jsPath}/pages/customer/sabavirtualsettinginformation`]: [pathConfig.scriptPaths.sabavirtualsettinginformation],
 
             [`${jsPath}/pages/reports/agcasinowinloss`]: [pathConfig.scriptPaths.agcasinowinloss],
@@ -115,6 +116,7 @@ function generateConfig(environment) {
             [`${cssPath}/pages/reports/customerwinloss`]: pathConfig.cssPaths.customerwinloss,
 
             [`${cssPath}/pages/customer/customer-class`]: pathConfig.cssPaths.customerClass,
+            [`${cssPath}/pages/customer/risklevel`]: pathConfig.cssPaths.risklevel,
             [`${cssPath}/pages/customer/sabavirtualsettinginformation`]: pathConfig.cssPaths.sabavirtualsettinginformation,
             [`${cssPath}/pages/components/fixedColumnsTable`]: pathConfig.cssPaths.fixedColumnsTable
         },

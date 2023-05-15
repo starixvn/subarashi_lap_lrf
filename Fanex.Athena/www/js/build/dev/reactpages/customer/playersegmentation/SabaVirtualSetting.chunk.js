@@ -2886,11 +2886,13 @@ class DataSourceHelper {
     const convertedList = originDataSource.map(item => {
       const {
         key,
-        value
+        value,
+        valueDecoration
       } = item;
       return {
         key,
         value,
+        valueDecoration,
         status: selectedItemList.find(_ => _ == key) ? true : false
       };
     });

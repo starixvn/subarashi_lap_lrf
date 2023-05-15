@@ -1,0 +1,118 @@
+﻿@import "../../scss/abstracts/_variables.scss";
+
+.risk-level-info-spread-setting, .risk-level-policy-setting {
+    table {
+        border-collapse: separate;
+    }
+
+    thead {
+        position: sticky;
+        top: 0px;
+        border-collapse: separate;
+
+        tr {
+            th {
+                border-left: 0px;
+
+                &:first-child {
+                    border-left: 1px solid $colorBorderTable;
+                }
+            }
+        }
+    }
+
+    tbody {
+        tr td {
+            border-top: 0px;
+            border-left: 0px;
+
+            &[rowspan]:first-child {
+                border-left: 1px solid $colorBorderTable;
+            }
+        }
+    }
+}
+
+.risk-level-info-spread-setting {
+    max-width: 300px;
+
+    .main-content {
+        max-height: 20vh;
+        overflow: auto;
+    }
+}
+
+.risk-level-policy-setting {
+    overflow: auto;
+
+    .result-content {
+        min-width: 1200px;
+    }
+
+    .main-content {
+        max-height: 55vh;
+        overflow: auto;
+    }
+
+    .view-leagues {
+        float: right;
+    }
+
+    .list-leagues {
+        position: absolute;
+        width: 350px;
+        z-index: 999;
+        background: #F2F2F2;
+        top: 10px;
+        border: 1px solid #DADADA;
+        padding: 5px 5px;
+        text-align: left;
+
+        .icon-close {
+            font-size: 14px;
+        }
+
+        .list-leagues-header {
+            .block-close {
+                float: right;
+                color: $black;
+            }
+
+            .icon-close {
+                font-size: 14px;
+            }
+        }
+
+        .list-leagues-content {
+            max-height: 200px;
+            min-height: 200px;
+            overflow: auto;
+            width: 100%;
+
+            ul {
+                li {
+                    margin-left: 15px;
+                    list-style-type: disc;
+                }
+            }
+        }
+    }
+}
+
+.input-field {
+    label {
+        width: 100%;
+    }
+}
+
+.button-block {
+    margin-left: 20px;
+}
+
+.btn {
+    text-transform: none;
+}
+
+.right-filter-menu {
+    margin-right: 15px;
+}

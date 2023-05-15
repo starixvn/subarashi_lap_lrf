@@ -516,6 +516,8 @@
     <Content Include="www\css\build\dev\pages\customer\customer-class.css" />
     <Content Include="www\css\build\dev\pages\components\fixedColumnsTable.chunk.js" />
     <Content Include="www\css\build\dev\pages\components\fixedColumnsTable.css" />
+    <Content Include="www\css\build\dev\pages\customer\risklevel.chunk.js" />
+    <Content Include="www\css\build\dev\pages\customer\risklevel.css" />
     <Content Include="www\css\build\dev\pages\customer\sabavirtualsettinginformation.chunk.js" />
     <Content Include="www\css\build\dev\pages\customer\sabavirtualsettinginformation.css" />
     <Content Include="www\css\build\dev\pages\reports\godoffortunewinLoss.chunk.js" />
@@ -588,6 +590,8 @@
     <Content Include="www\css\build\pro\pages\customer\customer-class.css" />
     <Content Include="www\css\build\pro\pages\components\fixedColumnsTable.chunk.js" />
     <Content Include="www\css\build\pro\pages\components\fixedColumnsTable.css" />
+    <Content Include="www\css\build\pro\pages\customer\risklevel.chunk.js" />
+    <Content Include="www\css\build\pro\pages\customer\risklevel.css" />
     <Content Include="www\css\build\pro\pages\customer\sabavirtualsettinginformation.chunk.js" />
     <Content Include="www\css\build\pro\pages\customer\sabavirtualsettinginformation.css" />
     <Content Include="www\css\build\pro\pages\reports\godoffortunewinLoss.css" />
@@ -766,8 +770,13 @@
     <Content Include="www\css\build\dev\pages\customer\sabavirtualsettinginformation.css.map" />
     <Content Include="www\css\build\dev\pages\customer\sabavirtualsettinginformation.chunk.js.map" />
     <Content Include="Views\Desktop\Report\GrossGamingRevenue\Main.cshtml" />
+    <Content Include="Views\Desktop\Customer\RiskLevel\Information.cshtml" />
     <Content Include="www\css\build\dev\reactpages\grossgamingrevenue\index.chunk.js.map" />
     <Content Include="www\css\build\dev\reactpages\grossgamingrevenue\index.css.map" />
+    <Content Include="www\css\source\pages\customer\risklevel.scss" />
+    <Content Include="www\css\build\dev\pages\customer\risklevel.chunk.js.map" />
+    <Content Include="www\css\build\dev\pages\customer\risklevel.css.map" />
+    <Content Include="App_Data\Template\Customers\PlayerSegmentation\RiskLevelInformation.xls" />
     <None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
     <None Include="www\css\source\pages\betlist\result\result.happy5.scss" />
     <None Include="www\css\source\reactpages\components\alert\icons\error.scss" />
@@ -783,6 +792,7 @@
     <Content Include="www\js\build\dev\language-zh-Hans.chunk.js" />
     <Content Include="www\js\build\dev\language-zh-TW.chunk.js" />
     <Content Include="www\js\build\dev\pages\customer\customerclass.chunk.js" />
+    <Content Include="www\js\build\dev\pages\customer\risklevel.chunk.js" />
     <Content Include="www\js\build\dev\pages\customer\sabavirtualsettinginformation.chunk.js" />
     <Content Include="www\js\build\dev\pages\lib\common.chunk.js" />
     <Content Include="www\js\build\dev\pages\lib\jqgrid.chunk.js" />
@@ -823,6 +833,7 @@
     <Content Include="www\js\build\pro\language-zh-Hans.chunk.js" />
     <Content Include="www\js\build\pro\language-zh-TW.chunk.js" />
     <Content Include="www\js\build\pro\pages\customer\customerclass.chunk.js" />
+    <Content Include="www\js\build\pro\pages\customer\risklevel.chunk.js" />
     <Content Include="www\js\build\pro\pages\customer\sabavirtualsettinginformation.chunk.js" />
     <Content Include="www\js\build\pro\pages\lib\common.chunk.js" />
     <Content Include="www\js\build\pro\pages\lib\jqgrid.chunk.js" />
@@ -874,6 +885,7 @@
     <Content Include="www\js\source\lib\bootstrap-table\constants\index.js" />
     <Content Include="www\js\source\lib\bootstrap-table\utils\index.js" />
     <Content Include="www\js\source\lib\bootstrap-table\virtual-scroll\index.js" />
+    <Content Include="www\js\source\pages\customer\risklevel\main.js" />
     <Content Include="www\js\source\pages\customer\sabavirtualsettinginformation\main.js" />
     <Content Include="www\js\source\pages\customer\customerclass\main.js" />
     <Content Include="www\js\source\pages\report\godoffortunewinloss\main.js" />
@@ -2507,6 +2519,12 @@
     <Content Include="www\js\build\dev\reactpages\report\abnormalbet.chunk.js.map" />
     <Content Include="www\js\build\dev\reactpages\report\grossgamingrevenue.chunk.js.map" />
     <Content Include="www\css\source\reactpages\pages\grossgamingrevenue\index.scss" />
+    <Content Include="www\js\build\dev\pages\customer\risklevel.chunk.js.map" />
+    <Content Include="www\css\source\reactpages\pages\customer\player-segmentation\base\_variables.scss" />
+    <Content Include="www\css\source\reactpages\pages\customer\player-segmentation\betlist.scss" />
+    <Content Include="www\css\source\reactpages\pages\customer\player-segmentation\components\_dropzone.scss" />
+    <Content Include="www\css\source\reactpages\pages\customer\player-segmentation\components\_yesNoSwitch.scss" />
+    <Content Include="www\css\source\reactpages\pages\customer\player-segmentation\index.scss" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SiteConfig\WebConfigTransforms\SIT.config">

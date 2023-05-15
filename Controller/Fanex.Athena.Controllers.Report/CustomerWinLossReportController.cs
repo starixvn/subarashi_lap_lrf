@@ -32,13 +32,13 @@
             _authService = authService;
             _customerClassService = customerClassService;
             _balanceUpDataAccess = balanceUpDataAccess;
-    }
+        }
 
         [HttpGet]
         public async Task<ActionResult> Index(bool isHistory = true)
         {
             var ignoreSharding = string.IsNullOrEmpty(SessionServiceInstance.LicenseeSession.SiteDBServer);
-            if(!isHistory && ignoreSharding)
+            if (!isHistory && ignoreSharding)
             {
                 isHistory = true;
             }
@@ -75,7 +75,7 @@
                 IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeName),
                 HasExtraPayoutPermission = _authService.HasPermissions(userSession, PermissionKeys.ReportExtraPayout),
                 OddsGroups = licenseeSession.OfferedOddsGroupsList,
-                CustomerClassList = await _customerClassService.GetAllCustomerClassId(),
+                RiskLevels = await _customerClassService.GetAllRiskLevel(),
                 IgnoreSharding = ignoreSharding
             };
 

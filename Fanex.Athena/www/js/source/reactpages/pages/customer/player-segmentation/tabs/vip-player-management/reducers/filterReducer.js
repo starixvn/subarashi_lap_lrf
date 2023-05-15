@@ -18,6 +18,12 @@ export const selectedCustomerClass = createReducer({}, {
     }
 });
 
+export const selectedRiskLevel = createReducer({}, {
+    [types.SET_SELECTED_RISKLEVEL](state, action) {
+        return action.data
+    }
+});
+
 export const dateRange = dateRangeReducer.dateRange;
 export const selectedCurrency = currencyReducer.selectedCurrency;
 export const username = usernameReducer.username;

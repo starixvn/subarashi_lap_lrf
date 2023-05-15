@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 5/12/2023 1:38:31 PM
+// Generated at: 5/15/2023 1:33:40 PM
 window._language_zh_CN = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -312,6 +312,7 @@ window._language_zh_CN = {
   DailyStatement: "每日账目",
   DailyStatementMsg: "Support data up to 4 months only",
   DailyWinningThreshold: "每日赢额警示值",
+  Dangerous: "危險",
   Date: "日期",
   DateRange: "日期范围",
   DateRangeNote: "数据可从{0:d MMM yyyy}查看",
@@ -443,6 +444,7 @@ window._language_zh_CN = {
   Happy5: "快乐5",
   Happy5LinkedGames: "快乐5系列游戏",
   HD: "主和",
+  Healthy: "健康",
   HH: "主主",
   hide: "隐藏",
   HistoricalReportDateRangeNote: "只提供{0:MM/dd/yyyy} 之后的资料。如果需要更多的历史数据",
@@ -607,6 +609,7 @@ window._language_zh_CN = {
   MobileEuro: "手机欧洲版",
   MobileOthers: "手机其他",
   MobileStandard: "手机經典版",
+  Moderate: "中等",
   Monday: "星期一",
   MoneyLine: "胜负盘",
   MoneyPlay: "普通投注",
@@ -623,6 +626,7 @@ window._language_zh_CN = {
   Name: "姓名",
   NativeApp: "原生 APP",
   NetTurnover: "净交易额",
+  New: "新會員",
   NewGroup: "新组别",
   Next: "下个",
   NextBetInteval: "投注间隔(秒)",
@@ -724,6 +728,7 @@ window._language_zh_CN = {
   PreviousSearchResult: "前次搜寻结果",
   ProblemDisplayBetSetting: "无法显示投注设定群组的细节",
   ProblemPlayer: "问题玩家",
+  Problems: "問題",
   Product: "产品",
   ProductAB: "欧博",
   ProductBGG: "大遊真人",
@@ -787,7 +792,12 @@ window._language_zh_CN = {
   Results: "赛果",
   RetractedPlayerUpdateVipStatus: "遭撤回VIP的玩家: {0} ({1})",
   RetractedPlayerUpdateVipStatusSingle: "遭撤回VIP的玩家: {0}",
+  RiskLevel: "风险等级",
+  RiskLevelBetSetting: "风险等级投注限制",
+  RiskLevelInformation: "风险等级资讯",
+  RiskLevelOddsGroup: "风险等级水位组别",
   RNGCasinoUpdateSettingUnAvailableMsg: "RNG Casino Database is not currently available. Please try again later.",
+  Robot: "機械",
   Running: "进行中",
   Sa: "Sa",
   Saba: "沙巴",
@@ -853,6 +863,7 @@ window._language_zh_CN = {
   Summary: "总结",
   Sunday: "星期六",
   Suspended: "暂停",
+  Suspicious: "可疑",
   SystemId: "系统账号",
   SystemParlay: "复式过关",
   SystemParlayDetailNote: "输赢的进位值仅供参考。因此，所有输赢相加的总计有可能和小计有差数。",
@@ -910,6 +921,7 @@ window._language_zh_CN = {
   TurnoverTitle: "交易額, {0} --&gt; {1} - {2} {3} ({4})",
   TurnoverTitleNoUser: "交易額, {0} --&gt; {1}, {2}",
   Type: "类型",
+  Uncategorized: "未分类",
   UncheckAll: "Uncheck All",
   Under: "下盘",
   UnderMaintenance: "维护中",

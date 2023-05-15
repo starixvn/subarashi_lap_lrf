@@ -28,9 +28,6 @@ namespace Fanex.Athena.Controllers.Report
         private readonly IPlayerSegmentationService _playerService;
         private readonly IBetTypeService _betTypeService;
 
-        private readonly ConcurrentDictionary<string, AsyncLazy<IEnumerable<SubIssue>>> SubIssueListFromCache = new ConcurrentDictionary
-            <string, AsyncLazy<IEnumerable<SubIssue>>>(StringComparer.OrdinalIgnoreCase);
-
         public AbnormalBetReportController(
             IReportSettingService reportSettingService,
             ISportService sportService,
@@ -55,9 +52,6 @@ namespace Fanex.Athena.Controllers.Report
                     .Where(x => x.ParentId >= 0);
             var bettypes = await _betTypeService.GetBettypesByProduct(licenseeSession.LicenseeId, Product.SB, userSession.Language).ConfigureAwait(true);
 
-            var lang = LangService.GetCurrentLanguage();
-            var reasonList = await GetReasonList(lang);
-
             var model = new AbnormalBetViewModel
             {
                 CurrencyList = userSession.CurrencyList,
@@ -65,8 +59,7 @@ namespace Fanex.Athena.Controllers.Report
                 ReportSetting = reportSetting,
                 Sports = sports.ToDictionary(x => x.ID, y => y.Name),
                 Bettypes = bettypes.ToDictionary(x => x.ID, y => y.Name),
-                LiveStatusList = GetLiveStatusList(),
-                ReasonList = reasonList.ToDictionary(_ => _.SubIssueTypeId, _ => _.SubIssueTypeName)
+                LiveStatusList = GetLiveStatusList()
             };
 
             ViewBag.DefaultSelectedBaseCurrency = userSession.DefaultBaseCurrency;
@@ -74,12 +67,6 @@ namespace Fanex.Athena.Controllers.Report
             ViewBag.IsShowIpvn = userSession.IsShowIpvn;
 
             return View("~/Views/Desktop/Report/AbnormalBet/Main.cshtml", model);
-        }
-
-        private Task<IEnumerable<SubIssue>> GetReasonList(string lang)
-        {
-            var lazyTask = SubIssueListFromCache.GetOrAdd(lang, langKey => new AsyncLazy<IEnumerable<SubIssue>>(() => _playerService.GetAbnormalSubIssueAsync(langKey)));
-            return lazyTask.Value;
         }
 
         private static IDictionary<int, string> GetLiveStatusList()

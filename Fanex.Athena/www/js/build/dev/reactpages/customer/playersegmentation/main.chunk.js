@@ -1008,12 +1008,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const tabKeys = {
-  problemPlayer: 'ProblemPlayer',
+  monitoredPlayer: 'MonitoredPlayer',
   sabaVirtualSetting: 'SabaVirtualSetting',
-  vipPlayerManagement: 'VipPlayerManagement',
-  monitoredPlayer: 'MonitoredPlayer'
+  vipPlayerManagement: 'VipPlayerManagement'
 };
-const newTabs = [tabKeys.monitoredPlayer, tabKeys.sabaVirtualSetting];
+const newTabs = [];
 const dynamicImports = {
   [tabKeys.problemPlayer]: () => Promise.all(/*! import() | customer/playersegmentation/problemPlayer */[__webpack_require__.e("lib/common"), __webpack_require__.e("customer/playersegmentation/problemPlayer")]).then(__webpack_require__.bind(null, /*! ../tabs/problem-player/index */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/index.js")),
   [tabKeys.sabaVirtualSetting]: () => Promise.all(/*! import() | customer/playersegmentation/SabaVirtualSetting */[__webpack_require__.e("lib/common"), __webpack_require__.e("customer/playersegmentation/SabaVirtualSetting")]).then(__webpack_require__.bind(null, /*! ../tabs/saba-virtual-setting/index */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/saba-virtual-setting/index.js")),
@@ -1070,10 +1069,9 @@ const successResponse = {
   isSuccess: true
 };
 const TabType = {
-  ProblemPlayer: 1,
+  MonitoredPlayer: 1,
   SabaVirtualSetting: 2,
-  VipPlayerManagement: 3,
-  MonitoredPlayer: 4
+  VipPlayerManagement: 3
 };
 
 /***/ }),

@@ -27,7 +27,6 @@ const summaryHeader =
         <HeaderCell colWidth={80}>{headerText.totalTransaction}</HeaderCell>
         <HeaderCell colWidth={120}>{headerText.betType}</HeaderCell>
         <HeaderCell colWidth={75}>{headerText.choice}</HeaderCell>
-        <HeaderCell colWidth={80}>{headerText.reason}</HeaderCell>
         <HeaderCell colWidth={55}>{headerText.finalScore}</HeaderCell>
     </HeaderRow>
 
@@ -70,7 +69,6 @@ const detailHeader = [
         <HeaderCell colWidth={80}>{headerText.finalScore}</HeaderCell>
         <HeaderCell colWidth={120}>{headerText.IP}</HeaderCell>
         <HeaderCell colWidth={220}>{headerText.location}</HeaderCell>
-        <HeaderCell colWidth={110}>{headerText.reason}</HeaderCell>
     </HeaderRow>,
     <HeaderRow style={{ height: 32, display: 'none'}} key='header2' className='row2'>
     <HeaderCell colWidth={60}>{headerText.score}</HeaderCell>
@@ -112,7 +110,6 @@ const buildSummaryDataRow = (dataItem) => {
             <Cell className="right-align">{NumberFormat.format(dataItem.totalTransaction, 0)}</Cell>
             <Cell className="left-align">{dataItem.betType}</Cell>
             <Cell className="left-align">{dataItem.choice}</Cell>
-            <Cell className="left-align">{dataItem.reason}</Cell>
             <Cell className="center-align">{dataItem.finalScore}</Cell>
         </Row>
     )
@@ -154,7 +151,6 @@ const buildDetailDataRow = (dataItem, index) => {
             <Cell className="center-align">{dataItem.finalScore}</Cell>
             <Cell className="left-align">{dataItem.ip}</Cell>
             <Cell className="left-align">{dataItem.location}</Cell>
-            <Cell className="left-align">{dataItem.reason}</Cell>
         </Row>
     )
 }

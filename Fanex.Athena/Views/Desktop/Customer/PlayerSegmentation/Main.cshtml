@@ -23,17 +23,21 @@ string.Join(",", Model.SubsidiaryList.SelectMany(x => x.Children.Select(y => y.V
         isLoading = false,
         playerList = null as object,
         selectedParams = null as object,
-        selectedCustomerClass = string.Join(",", vipPlayerManagementVM.CustomerClass),
+        selectedCustomerClass = string.Join(",", vipPlayerManagementVM.RiskLevels.Select(r => string.Join(",", r.CustomerClassList))),
+        selectedRiskLevel = string.Join(",", vipPlayerManagementVM.RiskLevels.Select(r => r.Id))
     } : null;
 
     var vipPlayerManagementData = hasVIPManagementPermission ? new
     {
         currencyList = vipPlayerManagementVM.CurrencyList.Select(x => new { key = x.Key, value = x.Value, status = true }),
         vipOptions = vipPlayerManagementVM.VipOptions.Select(x => new { value = x.Key, label = x.Value }),
-        customerClassList = vipPlayerManagementVM.CustomerClass.Select(c => new
+        riskLevelList = vipPlayerManagementVM.RiskLevels.Select(r => new
         {
-            key = c,
-            value = c == "0" ? ViewResources.None : c
+            key = r.Id,
+            value = r.Name,
+            valueDecoration = "risk-level " + r.Key,
+            customerClassList = string.Join(",",r.CustomerClassList),
+            status = true
         })
     } : null;
 

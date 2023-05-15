@@ -90,22 +90,6 @@ export const FormFilter = props => {
         );
     }
 
-    const _renderReasonList = () => {
-        const reasonList = AppData.reasonList;
-
-        return reasonList && reasonList.length && (
-            <MultipleSelect id="ReasonList"
-                hasSearchBox={true}
-                language={LangHelper.currentLanguage}
-                dataSource={reasonList}
-                keyField={"Id"}
-                valueField={"Value"}
-                statusField={"Status"}
-                onChange={(currentItem, selectedItemsKey) => props.setReasonList(selectedItemsKey)} />
-        );
-    }
-
-
     const _renderCurrencySelectList = () => {
         const currencyList = AppData.currencyList;
 
@@ -215,7 +199,6 @@ export const FormFilter = props => {
         const selectedCurrencyArray = props.selectedCurrency.split(',');
         const selectedSportArray = props.selectedSport.split(',');
         const selectedBettypeArray = props.selectedBettype.split(',');
-        const selectedReasonArray = props.selectedReason.split(',');
 
         const currencyText = selectedCurrencyArray.length === AppData.currencyList.length ? 'All'
             : AppData.currencyList.filter(item => selectedCurrencyArray.includes(item.Id.toString())).map(item => item.Value).join(',');
@@ -229,7 +212,7 @@ export const FormFilter = props => {
             StatusIdList: props.selectedStatus,
             SportIdList: AppData.sportList.length === selectedSportArray.length ? 'All' : props.selectedSport,
             BetTypeIdList: AppData.bettypeList.length === selectedBettypeArray.length ? 'All' : props.selectedBettype,
-            ReasonIdList: AppData.reasonList.length === selectedReasonArray.length ? 'All' : props.selectedReason,
+            ReasonIdList: 'All',
             LeagueName: leagueName,
             UserName: props.username,
             RefNo: refNo === "" ? 0 : refNo,
@@ -252,7 +235,6 @@ export const FormFilter = props => {
             && !!props.selectedCurrency
             && !!props.selectedSport
             && !!props.selectedBettype
-            && !!props.selectedReason
             && !!props.selectedBaseCurrency;
 
         return result;
@@ -335,15 +317,6 @@ export const FormFilter = props => {
                         </div>
                     </div>
 
-                    <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
-                        <div className="form-group">
-                            <label className="label-text">{LangHelper.getSingleResource("Reason")}</label>
-                            {_renderReasonList()}
-                        </div>
-                    </div>
-
-                </div>
-                <div className="row">
                     {viewIn !== ViewInLevel.SUMMARY &&
                         <>
                             <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
@@ -426,10 +399,10 @@ export const FormFilter = props => {
 
 
 function mapStateToProps(state) {
-    const { requestParam, dateRange, selectedProduct, sportList, selectedSport, selectedBettype, bettypeList, selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, selectedReason, userGuideContent, username } = state;
+    const { requestParam, dateRange, selectedProduct, sportList, selectedSport, selectedBettype, bettypeList, selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, userGuideContent, username } = state;
 
     return Object.assign({}, {
-        requestParam, dateRange, selectedProduct, sportList, selectedSport, selectedBettype, bettypeList, selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, selectedReason, userGuideContent, username
+        requestParam, dateRange, selectedProduct, sportList, selectedSport, selectedBettype, bettypeList, selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, userGuideContent, username
     });
 }
 
