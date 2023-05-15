@@ -43,7 +43,9 @@
         public const string LeagueWinLoss = "LeagueWinLoss";
 
         public const string ExtraPayout = "ExtraPayout";
-        
+
         public const string NewCashOutWinLoss = "NewCashOutWinLoss";
+
+        public const string GrossGamingRevenue = "GrossGamingRevenue";
     }
 }

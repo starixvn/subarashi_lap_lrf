@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 4/11/2023 3:34:09 PM
+// Generated at: 5/12/2023 1:38:31 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -442,11 +442,13 @@ window._language_en_US = {
   GetAllCustomersHavingPositiveClosingBalance: "Only show customers having closing balance &gt; 0",
   GetAllCustomersHavingRunningTickets: "Get all customers having running tickets",
   GetAllRunningTickets: "Get all running tickets",
+  GGR: "GGR",
   Go: "Go",
   GodOfFortuneWinLoss: "God of Fortune Win Loss",
   GotoCustomerList: "Go to Customer List",
   GrandPrizeNote: "Grand Prize: the grand winning amount which is excluded from member balance",
   GrandTotal: "Grand Total",
+  GrossGamingRevenue: "Gross Gaming Revenue",
   Group: "Group",
   GroupBy: "Group By",
   GroupColor: "Group Color",
@@ -947,10 +949,12 @@ window._language_en_US = {
   Total: "Total",
   TotalActiveCustomer: "Total active customers",
   TotalAway: "Total Away",
+  TotalBet: "Total Bet",
   TotalBets: "Total Bets",
   TotalGoal: "Total Goal",
   TotalHome: "Total Home",
   Totalin: "Total in",
+  TotalPayout: "Total Payout",
   TotalTickets: "Total tickets",
   TotalTransaction: "Total Transaction",
   TotalTurnover: "Total Turnover",
@@ -1062,12 +1066,14 @@ window._language_en_US = {
   VirtualSports: "Virtual Sports",
   VirtualTennis: "Virtual Tennis",
   Void: "Void",
+  Volume: "Volume",
   Wap: "WAP",
   WarningToActiveMsg: "Warning, this player will be able to log in and bet.",
   WarningToClosedMsg: "Warning, this player cannot be restored forever!",
   WarningToLockedMsg: "Warning, this player cannot login and transfer!",
   We: "We",
   Wednesday: "Wednesday",
+  Weekly: "Weekly",
   WeeklyLiveMatches: "Weekly Live Matches",
   Welcome: "Welcome",
   WhiteLabel: "Whitelabel",

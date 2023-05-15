@@ -19,7 +19,7 @@ namespace Fanex.Athena.Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class ViewResources {
@@ -3220,6 +3220,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to GGR.
+        /// </summary>
+        public static string GGR {
+            get {
+                return ResourceManager.GetString("GGR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Go.
         /// </summary>
         public static string Go {
@@ -3261,6 +3270,15 @@ namespace Fanex.Athena.Resources {
         public static string GrandTotal {
             get {
                 return ResourceManager.GetString("GrandTotal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gross Gaming Revenue.
+        /// </summary>
+        public static string GrossGamingRevenue {
+            get {
+                return ResourceManager.GetString("GrossGamingRevenue", resourceCulture);
             }
         }
         
@@ -7783,6 +7801,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Total Bet.
+        /// </summary>
+        public static string TotalBet {
+            get {
+                return ResourceManager.GetString("TotalBet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Total Bets.
         /// </summary>
         public static string TotalBets {
@@ -7815,6 +7842,15 @@ namespace Fanex.Athena.Resources {
         public static string Totalin {
             get {
                 return ResourceManager.GetString("Totalin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total Payout.
+        /// </summary>
+        public static string TotalPayout {
+            get {
+                return ResourceManager.GetString("TotalPayout", resourceCulture);
             }
         }
         
@@ -8827,6 +8863,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Volume.
+        /// </summary>
+        public static string Volume {
+            get {
+                return ResourceManager.GetString("Volume", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to WAP.
         /// </summary>
         public static string Wap {
@@ -8877,6 +8922,15 @@ namespace Fanex.Athena.Resources {
         public static string Wednesday {
             get {
                 return ResourceManager.GetString("Wednesday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Weekly.
+        /// </summary>
+        public static string Weekly {
+            get {
+                return ResourceManager.GetString("Weekly", resourceCulture);
             }
         }
         

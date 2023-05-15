@@ -340,6 +340,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Gross Gaming Revenue.
+        /// </summary>
+        public static string grossgamingrevenue {
+            get {
+                return ResourceManager.GetString("grossgamingrevenue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Handicap/Over Under/Live.
         /// </summary>
         public static string handicapoverunderlive24 {

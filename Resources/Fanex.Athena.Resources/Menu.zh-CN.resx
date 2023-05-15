@@ -352,4 +352,7 @@
   <data name="abnormalbet" xml:space="preserve">
     <value>非正规注单</value>
   </data>
+  <data name="grossgamingrevenue" xml:space="preserve">
+    <value>博彩总收入</value>
+  </data>
 </root>

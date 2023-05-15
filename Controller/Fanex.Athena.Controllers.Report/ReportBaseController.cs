@@ -1,10 +1,12 @@
 ﻿namespace Fanex.Athena.Controllers.Report
 {
     using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Extension.Helper;
+    using Fanex.Athena.Model.Core.DTO.Configuration;
     using Fanex.Athena.Web.ActionFilter;
     using Model.Core.DTO.Common;
     using Model.Core.MetaModel.Product;
-
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
@@ -38,5 +40,13 @@
 
             return currencyList;
         }
+        
+        protected static DateTime GetSelectedDate(ReportSetting reportSetting)
+        {
+            return DateTimeHelper.GetMinDate(
+                reportSetting.MaxDate,
+                reportSetting.TimeZone.HasValue ? DateTime.UtcNow.AddHours(reportSetting.TimeZone.Value) : DateTime.Now);
+        }
+
     }
 }

@@ -20,13 +20,27 @@ class MonthPicker extends Component {
 
         const fromDate = moment(props.fromDate, format);
         const toDate = moment(props.toDate, format);
+        var fromDay, toDay;
+
+        if(props.showDate) {
+            fromDay = fromDate.date();
+            toDay = toDate.date();
+        }
+        else {
+            fromDay = 1;
+            toDay = toDate.year() === this.max.year && toDate.month() === this.max.month ? this.max.date : moment({ year: toDate.year(), month: toDate.month()}).daysInMonth();
+            this.props.onChange({
+                fromDate: this._formatDate(fromDay, fromDate.month(), fromDate.year()),
+                toDate: this._formatDate(toDay, toDate.month(), toDate.year())
+            });
+        }
 
         const currentMonth = { year: fromDate.year(), month: fromDate.month() };
 
         this.state = {
             month: currentMonth,
-            from: fromDate.date(),
-            to: toDate.date()
+            from: fromDay,
+            to: toDay
         }
     }
 

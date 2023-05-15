@@ -69,13 +69,6 @@
             return baseCurrencyList;
         }
 
-        private static DateTime GetSelectedDate(ReportSetting reportSetting)
-        {
-            return DateTimeHelper.GetMinDate(
-                reportSetting.MaxDate,
-                reportSetting.TimeZone.HasValue ? DateTime.UtcNow.AddHours(reportSetting.TimeZone.Value) : DateTime.Now);
-        }
-
         private ActionResult MapToView(bool isHistory, bool ignoreSharding)
         {
             var licenseeSession = SessionServiceInstance.LicenseeSession;

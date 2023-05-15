@@ -3053,4 +3053,19 @@
   <data name="ProductJIG" xml:space="preserve">
     <value>吉利电子</value>
   </data>
+  <data name="GGR" xml:space="preserve">
+    <value>GGR</value>
+  </data>
+  <data name="GrossGamingRevenue" xml:space="preserve">
+    <value>博彩总收入</value>
+  </data>
+  <data name="TotalBet" xml:space="preserve">
+    <value>总投注额</value>
+  </data>
+  <data name="TotalPayout" xml:space="preserve">
+    <value>总支出</value>
+  </data>
+  <data name="Volume" xml:space="preserve">
+    <value>投注量</value>
+  </data>
 </root>

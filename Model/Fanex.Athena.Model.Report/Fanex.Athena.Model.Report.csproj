@@ -194,6 +194,7 @@
     <Compile Include="ViewModel\SabaVirtualSportsWinLossViewModel.cs" />
     <Compile Include="ViewModel\Result\ResultReportViewModel.cs" />
     <Compile Include="ViewModel\SpecialLicenseeWinLossGridViewModel.cs" />
+    <Compile Include="ViewModel\GrossGamingRevenueViewModel.cs" />
     <Compile Include="ViewModel\SpecialLicenseeWinLossViewModel.cs" />
     <Compile Include="ViewModel\Note\NoteViewModel.cs" />
     <Compile Include="ViewModel\LicenseeWinLossByTimeZoneViewModel.cs" />

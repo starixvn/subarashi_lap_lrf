@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ReportTitle = ({content, tag, ...attrs}) => {
+const ReportTitle = ({content, extendContent, tag, ...attrs}) => {
     const Tag = tag;
     
     return (
             <div className="report-title-container">
-                <Tag className="report-title" {...attrs}>{content}</Tag>
+                <Tag className="report-title" {...attrs}>{content}{extendContent}</Tag>
             </div>
         )
  }
