@@ -28,7 +28,7 @@ namespace Fanex.Athena.Model.Report.ViewModel
 
         public IEnumerable<ProductOption> ProductOptionList { get; set; }
 
-        public IDictionary<int, string> CurrencyList { get; set; }
+        public IEnumerable<KeyValuePair<int, string>> CurrencyList { get; set; }
 
         public IEnumerable<CheckedItem> StatusList { get; set; }
 
@@ -43,6 +43,8 @@ namespace Fanex.Athena.Model.Report.ViewModel
         public bool IsOneworksMaster { get; set; }
 
         public byte SubsidiaryViewType { get; set; }
+
+        public bool IsHasPermissionViewVip { get; set; }
 
         public IEnumerable<CheckedItem> SubsidiaryList { get; set; }
 

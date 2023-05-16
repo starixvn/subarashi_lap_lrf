@@ -8,7 +8,7 @@ import LangHelper from '@jsroot/lib/langHelper'
 import Site from '@jsroot/lib/site'
 import AppData from '@jsroot/lib/AppData'
 import Service from '../../common/Service.js'
-import { DisplayGroupBreakDownMapping, SortBy, SortOrder } from '../../common/constants.js'
+import { DisplayGroupBreakDownMapping, SearchMode, SortBy, SortOrder } from '../../common/constants.js'
 import {v4 as uuidv4} from 'uuid';
 
 export const GroupByFilter = (props) => {
@@ -180,6 +180,7 @@ export const GroupByFilter = (props) => {
         props.setSelectedCustomerClass(defaultState.selectedCustomerClass);
         props.setSelectedOddsGroup(defaultState.selectedOddsGroup);
         props.setUsername('');
+        props.setSearchMode(SearchMode.MatchPrecise);
         props.setGroupInOriginalCurrency(defaultState.isGroupInOriginalCurrency);
         props.setViewCashOutOnly(defaultState.isViewCashOutOnly);
         props.setExcludeTestData(defaultState.isExcludeTestData);

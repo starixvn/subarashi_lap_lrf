@@ -100,6 +100,7 @@
     dateConstraint: { minDate: '@Model.MinDate.ToString("MM/dd/yyyy")', maxDate: '@Model.MaxDate.ToString("MM/dd/yyyy")', limitedMonthRange: 3 },
     licenseeName: '@session.LicenseeSession.LicenseeName',
     isOfferCashOutProduct: '@Model.IsOfferCashOutProduct' === "True",
+    isHasPermissionViewVip: '@Model.IsHasPermissionViewVip' === "True"
     };
 }
 <div id="app-container">

@@ -26,6 +26,7 @@
         private readonly IProductService _productService;
         private readonly ISubsidiaryService _subsidiaryService;
         private readonly ICustomerClassService _customerClassService;
+        private readonly IAuthorizationService _authorizationService;
 
         private bool IsOneworksMaster =>
            SessionServiceInstance.UserSession.UserLevel == UserLevelType.Oneworks
@@ -34,11 +35,13 @@
         public WinlossAnalysisReportController(
             IProductService productService,
             ISubsidiaryService subsidiaryService,
-            ICustomerClassService customerClassService)
+            ICustomerClassService customerClassService,
+            IAuthorizationService authorizationService)
         {
             _productService = productService;
             _subsidiaryService = subsidiaryService;
             _customerClassService = customerClassService;
+            _authorizationService = authorizationService;
         }
 
         public async Task<ActionResult> Index()
@@ -62,6 +65,7 @@
                 SubsidiaryList = subsidiaryList,
                 PlatformList = PlatformHelper.GetPlatformList(),
                 IsOneworksMaster = IsOneworksMaster,
+                IsHasPermissionViewVip = _authorizationService.HasPermissions(userSession, PermissionKeys.PlayerVIPManagement),
                 CustomerClass = customerClassIds,
                 OddGroups = licenseeSession.OfferedOddsGroupsList,
                 IsOfferCashOutProduct = _productService.IsOfferCashOutProduct(licenseeSession.LicenseeId, userSession.Language)
@@ -89,9 +93,9 @@
             };
         }
 
-        private IDictionary<int, string> GetCurrencyList()
+        private IEnumerable<KeyValuePair<int, string>> GetCurrencyList()
         {
-            return SessionServiceInstance.UserSession.CurrencyList;
+            return SessionServiceInstance.UserSession.CurrencyList.OrderBy(_ => _.Value);
         }
 
         private IEnumerable<ProductOption> GetProductOptionList()

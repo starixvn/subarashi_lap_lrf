@@ -259,7 +259,7 @@ export class MainFilter extends Component {
         const vipOnlyList = AppData.vipOnlyList;
 
         return vipOnlyList && vipOnlyList.length && (
-            <Select key={`viponly-${this.props.appUuid}`}
+            <Select key={`viponly-${this.props.appUuid}`}               
                 instanceId="IsVipOnly"
                 value={this.props.selectedVipOnly}
                 options={vipOnlyList}
@@ -357,7 +357,7 @@ export class MainFilter extends Component {
     }
 
     render() {
-        const { isOfferCashOutProduct } = AppData;
+        const { isOfferCashOutProduct, isHasPermissionViewVip } = AppData;
         const isEnableCashOutFilter = this.isContainProductSportBookOrBa(this.props.selectedProduct); 
         const currentMapping = DisplayGroupBreakDownMapping.find(item => item.groupByMode == this.props.selectedGroupByOption 
             && item.breakdownMode == this.props.selectedBreakDownByOption);
@@ -448,12 +448,12 @@ export class MainFilter extends Component {
                         </div>
                     </div>
 
-                    <div className="col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2">
-                        <div className="form-group">
+                    { isHasPermissionViewVip && <div className="col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2">
+                        <div className="form-group" title={LangHelper.getSingleResource("VIPPlayerTooltipMsg")}>
                             <label className="label-text">{LangHelper.getSingleResource("VIPPlayerOnly")}</label>
                             {this._renderVipOnlySelectedList()}
                         </div>
-                    </div>
+                    </div> }
 
                     <div className="col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2">
                         <div className="form-group">
