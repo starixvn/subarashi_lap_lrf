@@ -20,13 +20,6 @@ import { SubsidiaryViewType, TreeViewOption } from '../../../../constants/report
 import { TreeViewSelect } from '@9softstudio/react-multiselect'
 import SearchOption from './SearchOption.jsx';
 
-const ToastMsg = () => (
-    <div>
-        <div>{LangHelper.getSingleResource("BTCExportExcelMsg1")}</div>
-        <div>{LangHelper.getSingleResource("BTCExportExcelMsg2")}</div>
-    </div>
-)
-
 export class MainFilter extends Component {
     defaultSelectedSubsidiary = AppData.subsidiaryList.join(',');
     showSubsidiaryDropdown = AppData.subsidiaryViewType !== SubsidiaryViewType.NOT_MANAGEMENT && AppData.subsidiaryList.length > 0;
@@ -49,16 +42,12 @@ export class MainFilter extends Component {
         }
     }
 
-    _showExportWarning = () => {
-        toast.success(<ToastMsg />);
-    }
-
 
     showUserGuide = () => {
         const userGuideContent = this.props.userGuideContent;
 
         if (!userGuideContent || userGuideContent.length === 0) {
-            this.props.getUserGuideContent('BettingTicketCenterAdvancedSearch');
+            this.props.getUserGuideContent('WinlossAnalysis');
         }
     }
 

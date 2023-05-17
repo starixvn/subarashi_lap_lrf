@@ -138,7 +138,7 @@ namespace Fanex.Athena.Service.StatelessCore
                     Children = elems,
                     Name = DataHelper.GetProductName(key.ProductCode),
                     Value = key.ProductCode
-                });
+                }).ToList();
 
             return sportList;
         }

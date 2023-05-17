@@ -8,7 +8,7 @@ import LangHelper from '@jsroot/lib/langHelper'
 import Site from '@jsroot/lib/site'
 import AppData from '@jsroot/lib/AppData'
 import Service from '../../common/Service.js'
-import { DisplayGroupBreakDownMapping, SearchMode, SortBy, SortOrder } from '../../common/constants.js'
+import { ALL_SELECTED_TEXT, DisplayGroupBreakDownMapping, SearchMode, SortBy, SortOrder } from '../../common/constants.js'
 import {v4 as uuidv4} from 'uuid';
 
 export const GroupByFilter = (props) => {
@@ -30,9 +30,10 @@ export const GroupByFilter = (props) => {
     const buildTitle = (params) => {
         const { FromDate, ToDate, ProductCodes, SearchUserName, BaseCurrency, CurrencyIdList } = params;
         const {  currencyList } = AppData;
-        const dateRangeText = `, ${Site.convertDateToString(FromDate)} → ${Site.convertDateToString(ToDate)}`;
         const selectedCurrency = Service.getCurrencyCodes(CurrencyIdList, currencyList);
-        const currencyText =  `, ${LangHelper.getSingleResource("Currency")}: ${selectedCurrency}, ${LangHelper.getSingleResource("BaseCurrency")}: ${BaseCurrency}`;
+        const seletedCurrencyText = selectedCurrency == ALL_SELECTED_TEXT ? LangHelper.getSingleResource("All") : selectedCurrency;
+        const dateRangeText = `, ${Site.convertDateToString(FromDate)} → ${Site.convertDateToString(ToDate)}`;
+        const currencyText =  `, ${LangHelper.getSingleResource("Currency")}: ${seletedCurrencyText}, ${LangHelper.getSingleResource("BaseCurrency")}: ${BaseCurrency}`;
         const productText = `, ${LangHelper.getSingleResource("LicenseeW_L")} (${ProductCodes})`;
         const userText = !!SearchUserName ? `, ${LangHelper.getSingleResource("Username")}: ${SearchUserName}` : "";
 

@@ -3,6 +3,7 @@ import { Row, Cell, HeaderRow, HeaderCell } from '@9softstudio/react-grid';
 import { HeaderText, SortBy } from './constants';
 import NumberFormat from '@jsroot/lib/numberFormat';
 import TreeViewGridRowNode from './grid/TreeViewGridRowNode';
+import LangHelper from '@jsroot/lib/langHelper'
 
 export const renderHeader = (option) => {
     const { isGroupByPlayerMode, isShowBAField, isBreakDownPlayerMode } = option;
@@ -79,7 +80,7 @@ export const renderFooter = (dataItem, option) => {
     const totalCellColSpan = isGroupByPlayerMode || isBreakDownPlayerMode ? 3 : 2;
     return (
         <Row className="grant-total-row" key="grantTotal-row">
-            <Cell className="center-align" colSpan={totalCellColSpan}>Total</Cell>
+            <Cell className="center-align" colSpan={totalCellColSpan}>{LangHelper.getSingleResource("Total")}</Cell>
             <Cell className="right-align">{NumberFormat.format(betCount)}</Cell>
             <Cell className="right-align">{NumberFormat.formatDecimal(turnover)}</Cell>
             <Cell className="right-align">{NumberFormat.formatDecimal(netTurnover)}</Cell>

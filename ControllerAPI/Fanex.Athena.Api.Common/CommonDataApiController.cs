@@ -134,7 +134,7 @@
         public async Task<IHttpActionResult> GetBetTypeInTreeList(string productCodes)
         {
             const int cacheTime = 60 * 60 * 12; //12 hour
-            var cacheKey = $"{CacheKey.MemorycacheBetTypeForTreeView}_{productCodes}_{LicenseeSession.LicenseeName}";
+            var cacheKey = $"{CacheKey.MemorycacheBetTypeForTreeView}_{productCodes}_{LicenseeSession.LicenseeName}_{SessionService.UserSession.Language}";
             var jsonBetType = _cacheService.Get<string>(cacheKey);
             if (!string.IsNullOrWhiteSpace(jsonBetType))
             {

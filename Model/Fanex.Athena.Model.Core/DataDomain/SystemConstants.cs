@@ -54,7 +54,7 @@
             BaseCurrencyType.USDT
         };
 
-        public static readonly IReadOnlyDictionary<int, string> VipOnyList = new Dictionary<int, string> {
+        public static IReadOnlyDictionary<int, string> VipOnyList => new Dictionary<int, string> {
             { 0, ViewResources.No },
             { 1, ViewResources.Yes },
         };
