@@ -287,6 +287,9 @@
       <Link>SonarLint.xml</Link>
     </AdditionalFiles>
     <Content Include="App_Code\DesktopLiveReportRazorHelper.cshtml" />
+    <Content Include="App_Data\UserGuide\WinlossAnalysis\en-US.htm" />
+    <Content Include="App_Data\UserGuide\WinlossAnalysis\zh-CN.htm" />
+    <Content Include="App_Data\UserGuide\WinlossAnalysis\zh-Hans.htm" />
     <Content Include="App_Data\UserGuide\BettingTicketCenterRefno\en-US.htm" />
     <Content Include="App_Data\UserGuide\BettingTicketCenterRefno\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\BettingTicketCenterRefno\zh-Hans.htm" />
