@@ -76,7 +76,6 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="CommonApiControllerTest.cs" />
     <Compile Include="CommonDataApiControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

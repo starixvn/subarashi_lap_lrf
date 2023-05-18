@@ -232,23 +232,6 @@
             }
         }
 
-        [TestCase(true, false)]
-        [TestCase(false, true)]
-        public void Index_AssignViewBagData_AssignIsEnabledMoveBetNotification(bool isFakeLicensee, bool expectedValue)
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                AppSettings.IsEnabledMoveBetNotification.Returns(true);
-                _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(isFakeLicensee);
-
-                // Action
-                var result = controller.Index() as ViewResult;
-
-                // Assert
-                Assert.That(result.ViewBag.IsEnabledMoveBetNotification, Is.EqualTo(expectedValue));
-            }
-        }
 
         [Test]
         public void IndexIpad_InvalidSessionUser_RedirectToLocationRestriction()

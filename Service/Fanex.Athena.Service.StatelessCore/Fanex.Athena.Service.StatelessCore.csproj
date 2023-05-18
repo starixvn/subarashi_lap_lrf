@@ -130,11 +130,9 @@
     <Compile Include="Interfaces\IFunctionService.cs" />
     <Compile Include="Interfaces\IFunctionStorage.cs" />
     <Compile Include="Interfaces\IMatchService.cs" />
-    <Compile Include="Interfaces\IMoveBetService.cs" />
     <Compile Include="Interfaces\IOneBookSecurityWrapper.cs" />
     <Compile Include="Interfaces\IProductService.cs" />
     <Compile Include="MatchService.cs" />
-    <Compile Include="MoveBetService.cs" />
     <Compile Include="OneBookSecurityWrapper.cs" />
     <Compile Include="ProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

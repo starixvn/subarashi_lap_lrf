@@ -22,7 +22,6 @@
     {
         private const int DefaultPageSize = 10;
 
-        private readonly IMoveBetService _moveBetService;
         private readonly ILicenseeSettingService _licenseeSettingService;
 
         private readonly INotificationService _notificationService;
@@ -35,30 +34,13 @@
         };
 
         public NotificationApiController(
-            IMoveBetService moveBetService,
             INotificationService notificationService,
             IAppSettings appSettings,
             ILicenseeSettingService licenseeSettingService)
         {
-            _moveBetService = moveBetService;
             _notificationService = notificationService;
             _appSettings = appSettings;
             _licenseeSettingService = licenseeSettingService;
-        }
-
-        [HttpGet]
-        public async Task<string> Index()
-        {
-            var isEnabledMoveBetNotification = _appSettings.IsEnabledMoveBetNotification && !_licenseeSettingService.IsFakeLicensee(SiteName);
-
-            if (!isEnabledMoveBetNotification)
-            {
-                return string.Empty;
-            }
-
-            var langCode = Util.MapIetfLanguageCodes.GetValueOrDefault(Language, string.Empty);
-
-            return await _moveBetService.GetMoveBetNotificationAsync(langCode).ConfigureAwait(false);
         }
 
         [HttpGet]
