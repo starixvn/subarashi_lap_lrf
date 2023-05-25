@@ -25,13 +25,13 @@ export const TreeViewGridRowNode = (props) => {
 
     const parentData = data.keyItem;
     const children = data.children;
-    const { rowIndex, groupBy, groupByFieldText, betCount, turnover, netTurnover, playerWinloss, playerComm, betEffective, licWinloss, licComm, amtDueToBA, margin, externalId } = parentData; 
+    const { rowIndex, displayRowIndex, groupBy, groupByFieldText, betCount, turnover, netTurnover, playerWinloss, playerComm, betEffective, licWinloss, licComm, amtDueToBA, margin, externalId } = parentData; 
     const arrowClass = isBreakdown ? 'down-arrow' : 'right-arrow';
     const groupByColumnColSpan = isBreakDownPlayerMode ? 2 : 1;
     return (
         <>
             <Row className="group-row" key={`row-${rowIndex}-${groupBy}`}>
-                <Cell className="center-align">{rowIndex}</Cell>  
+                <Cell className="center-align">{displayRowIndex}</Cell>  
                 { !isGroupByPlayerMode && renderDrillDownCell(groupByFieldText) }
                 { isGroupByPlayerMode && 
                     <>

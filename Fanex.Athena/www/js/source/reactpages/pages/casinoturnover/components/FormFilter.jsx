@@ -8,7 +8,7 @@ import Site from '@jsroot/lib/site'
 
 import { DateRange } from '@jsroot/components/date-range/index'
 import Select from 'react-select'
-import MultipleSelect from '@9softstudio/react-multiselect'
+import MultipleSelect from '@legion-lib/react-multiselect'
 import AutoComplete from '@jsroot/components/auto-complete'
 import CheckBox from '@jsroot/components/CheckBox'
 import DataService from '@jsroot/lib/DataService.js'

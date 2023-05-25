@@ -1,7 +1,7 @@
 ﻿import LangHelper from '@jsroot/lib/langHelper'
 import Site from '@jsroot/lib/site'
 import AppData from '@jsroot/lib/AppData'
-import {OneTwoBetLicenseeName} from './constants'
+import {ExportExcelMode, OneTwoBetLicenseeName} from './constants'
 import { BreakdownByMode, GroupByMode, GroupByList, ALL_SELECTED_TEXT } from './constants';
 import { ApiUrl } from '../common/constants.js';
 import DataService from '@jsroot/lib/DataService.js';
@@ -107,10 +107,11 @@ export default class Service {
                     alert(LangHelper.getSingleResource("NoInfo"));
                 }
                 else {
-                    const fileName = "WinlossAnalysis." +
-                        (response.headers["content-type"] === "application/zip" ? "zip" : "xls");
+                    const fileName = params.ExportExcelMode == ExportExcelMode.All ? "WinLossReportGroupByAndBreakdownBy" : "WinLossReportGroupBy";
+                    const fileNameWithExt = fileName +
+                        (response.headers["content-type"] === "application/zip" ? ".zip" : ".xls");
 
-                    Site.downloadFile(response.data, fileName);
+                    Site.downloadFile(response.data, fileNameWithExt);
                 }
             }
         }).catch(error => {

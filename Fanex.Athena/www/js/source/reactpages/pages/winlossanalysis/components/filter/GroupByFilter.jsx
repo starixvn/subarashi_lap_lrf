@@ -62,8 +62,8 @@ export const GroupByFilter = (props) => {
 
         const { fromDate, toDate } = props.dateRange;
         const { PageSize } = props.requestParam;
-        const baseCurrency = AppData.baseCurrencyList.find(x => x.value === props.selectedBaseCurrency);
-        const { oddsGroupList, customerClassList, liveStatusList, statusList, platformList} = AppData;
+        const { oddsGroupList, customerClassList, liveStatusList, statusList, platformList, currencyList, baseCurrencyList } = AppData;
+        const baseCurrency = baseCurrencyList.find(x => x.value === props.selectedBaseCurrency);
         const subsidiary = Site.getLrfSubsidiary();
         let { SubsidiarySearch, SubsidiaryList } = subsidiary;
         if (!subsidiary || Object.keys(subsidiary).length === 0){
@@ -80,6 +80,7 @@ export const GroupByFilter = (props) => {
             SearchUserName: props.username,
             SearchMode: props.searchMode,
             CurrencyIdList: props.selectedCurrency,
+            CurrencyCodes: Service.getCurrencyCodes(props.selectedCurrency, currencyList),
             BaseCurrency: props.selectedBaseCurrency,
             StatusIds: Service.getNormalizedSelectedParamValueForMultiSelectFilter(props.selectedStatus, statusList),
             SportIds: Service.getNormalizedSelectedParamValueForTreeListFilter(props.selectedSport, props.sportList),

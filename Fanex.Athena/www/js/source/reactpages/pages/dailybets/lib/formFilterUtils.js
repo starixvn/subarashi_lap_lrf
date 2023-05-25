@@ -1,6 +1,6 @@
 import React from 'react';
 import LangHelper from '@jsroot/lib/langHelper';
-import MultipleSelect from '@9softstudio/react-multiselect';
+import MultipleSelect from '@legion-lib/react-multiselect';
 
 export const renderProductSelectList = (dataSource, onChangeHandler) => {
     return (

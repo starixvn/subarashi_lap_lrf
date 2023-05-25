@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { ToastContainer, toast, Flip } from 'react-toastify';
 
 import Select from 'react-select'
-import MultipleSelect from '@9softstudio/react-multiselect'
+import MultipleSelect from '@legion-lib/react-multiselect'
 import { DateRange } from '@jsroot/components/date-range'
 import AutoComplete from '@jsroot/components/auto-complete'
 import CheckBox from '@jsroot/components/CheckBox'
@@ -17,7 +17,7 @@ import LangHelper from '@jsroot/lib/langHelper'
 import { ApiUrl, DisplayGroupBreakDownMapping, ProductCode } from '../../common/constants'
 
 import { SubsidiaryViewType, TreeViewOption } from '../../../../constants/report'
-import { TreeViewSelect } from '@9softstudio/react-multiselect'
+import { TreeViewSelect } from '@legion-lib/react-multiselect'
 import SearchOption from './SearchOption.jsx';
 
 export class MainFilter extends Component {
@@ -25,10 +25,12 @@ export class MainFilter extends Component {
     showSubsidiaryDropdown = AppData.subsidiaryViewType !== SubsidiaryViewType.NOT_MANAGEMENT && AppData.subsidiaryList.length > 0;
     showSubsidiarySearchCheckBox = this.showSubsidiaryDropdown && AppData.subsidiaryViewType === SubsidiaryViewType.MASTER_MANAGEMENT;
     whiteLabelView = AppData.subsidiaryViewType === SubsidiaryViewType.MASTER_MANAGEMENT && !AppData.isOneworksMaster;
+    
     constructor(props) {
         super(props);
         this.baseCurrencyList = AppData.baseCurrencyList;
         this.defaultBaseCurrency = props.selectedBaseCurrency;
+        props.setSubsidiarySearch(this.showSubsidiaryDropdown && !this.showSubsidiarySearchCheckBox);
     }
     
 
@@ -120,7 +122,7 @@ export class MainFilter extends Component {
                 keyField="Value"
                 valueField="Name"
                 statusField="Checked"
-                texts={{ SelectOptions: "Please select", All: "N/A", SelectedItemCount: "# selected" }}
+                texts={{ All: LangHelper.getSingleResource("N_A") }}
                 isAllTextShown={true}
                 hasSearchBox={true}
                 treeViewOption={TreeViewOption} />
@@ -136,7 +138,6 @@ export class MainFilter extends Component {
                 keyField="Value"
                 valueField="Name"
                 statusField="Checked"
-                texts={{ SelectOptions: "Please select", All: "All", SelectedItemCount: "# selected" }}
                 isAllTextShown={true}
                 hasSearchBox={true}
                 treeViewOption={TreeViewOption}
@@ -156,7 +157,7 @@ export class MainFilter extends Component {
                     keyField="Value"
                     valueField="Name"
                     statusField="Checked"
-                    texts={{ SelectOptions: "Please select", All: "N/A", SelectedItemCount: "# selected" }}
+                    texts={{ All: LangHelper.getSingleResource("N_A")  }}
                     isAllTextShown={true}
                     hasSearchBox={true}
                     treeViewOption={TreeViewOption} />
@@ -172,7 +173,6 @@ export class MainFilter extends Component {
                 keyField="Value"
                 valueField="Name"
                 statusField="Checked"
-                texts={{ SelectOptions: "Please select", All: "All", SelectedItemCount: "# selected" }}
                 isAllTextShown={true}
                 hasSearchBox={true}
                 treeViewOption={TreeViewOption}
@@ -320,7 +320,6 @@ export class MainFilter extends Component {
             keyField="Value"
             valueField="Name"
             statusField="Checked"
-            texts={{ SelectOptions: "Please select", All: "All", SelectedItemCount: "# selected" }}
             isAllTextShown={false}
             hasSearchBox={false}
             treeViewOption={TreeViewOption}
@@ -368,7 +367,7 @@ export class MainFilter extends Component {
                     {this.showSubsidiaryDropdown && this.props.subsidiarySearch && <div className="col-12 col-md-3 col-sm-4 col-lg-3 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">
-                                {this.whiteLabelView ? LangHelper.getSingleResource("WhiteLabel") : LangHelper.getSingleResource("Subsidiary2")}
+                                {this.whiteLabelView ? LangHelper.getSingleResource("WhiteLabel") : LangHelper.getSingleResource("Subsidiary")}
                             </label>
                             {this._renderSubsidiaryTreeView()}
                         </div>

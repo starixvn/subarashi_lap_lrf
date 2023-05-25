@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import Select from 'react-select'
-import MultipleSelect from '@9softstudio/react-multiselect'
+import MultipleSelect from '@legion-lib/react-multiselect'
 import AutoComplete from '@jsroot/components/auto-complete'
 import CollapsiblePanel from '@jsroot/components/collapsible-panel'
 import CheckBox from '@jsroot/components/CheckBox'
@@ -19,7 +19,7 @@ import UserGuide from '@jsroot/components/UserGuide'
 import { validateBaseCurrency } from '@jsroot/lib/validationHelper'
 
 import { SubsidiaryViewType, TreeViewOption } from '../../../../constants/report'
-import { TreeViewSelect } from '@9softstudio/react-multiselect'
+import { TreeViewSelect } from '@legion-lib/react-multiselect'
 
 export class FormFilter extends Component {
     defaultSelectedSubsidiary = AppData.subsidiaryList.join(',');

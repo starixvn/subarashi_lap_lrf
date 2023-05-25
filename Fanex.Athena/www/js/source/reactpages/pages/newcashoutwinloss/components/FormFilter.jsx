@@ -8,7 +8,7 @@ import AppData from '@jsroot/lib/AppData';
 import Site from '@jsroot/lib/site';
 import ActionCreators from '../actions';
 import { DateRange } from '@jsroot/components/date-range';
-import MultipleSelect from '@9softstudio/react-multiselect';
+import MultipleSelect from '@legion-lib/react-multiselect';
 import CheckBox from '@jsroot/components/CheckBox';
 import UserGuide from '@jsroot/components/UserGuide';
 import { ToastContainer, toast, Flip } from 'react-toastify';
@@ -16,7 +16,7 @@ import { ApiUrl, ReportLevel } from '../common/constants';
 import Service from '../common/service';
 import DataService from '@jsroot/lib/DataService';
 import { SubsidiaryViewType, TreeViewOption } from '../../../constants/report'
-import { TreeViewSelect } from '@9softstudio/react-multiselect'
+import { TreeViewSelect } from '@legion-lib/react-multiselect'
 import DataSourceHelper from '../../../../helpers/dataSourceHelper';
 
 export const FormFilter = props => {
