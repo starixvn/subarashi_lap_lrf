@@ -127,7 +127,7 @@ namespace Fanex.Athena.Service.StatelessCore
             return $"{ViewResources.Saba}{sportName}";
         }
 
-        private IEnumerable<CheckedItem> BuildSportList(IEnumerable<SportForTreeViewItem> sportItems)
+        private ICollection<CheckedItem> BuildSportList(IEnumerable<SportForTreeViewItem> sportItems)
         {
             var sportList = sportItems.GroupBy(_ => (_.ProductId, _.ProductCode), 
                 _ => BuildSportCheckItem(_),
