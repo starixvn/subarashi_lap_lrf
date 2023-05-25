@@ -2444,4 +2444,7 @@
   <data name="ClearAllFilters" xml:space="preserve">
     <value>清除所有篩選</value>
   </data>
+  <data name="N_A" xml:space="preserve">
+    <value>无法使用</value>
+  </data>
 </root>
