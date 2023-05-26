@@ -1,4 +1,4 @@
-﻿// Generated at: 5/15/2023 1:33:40 PM
+﻿// Generated at: 5/29/2023 1:11:14 PM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -882,7 +882,7 @@ ViewinIPSummary:"查看 IP 摘要",
 ViewinSummary:"查看摘要",
 ViewInWithNoParam:"查看",
 ViewNotification:"查看通知",
-Vip:"VIP",
+VIP:"VIP会员",
 VIPPlayer:"VIP玩家",
 VipPlayerManagement:"VIP玩家管理",
 VIPPlayerOnly:"只显示VIP玩家",
@@ -901,6 +901,8 @@ WarningToClosedMsg:"警告，此玩家将无法再复原!",
 WarningToLockedMsg:"警告，此玩家无法登入!",
 We:"We",
 Wednesday:"星期三",
+Week2:"第{0}周",
+Weekly:"每周",
 Welcome:"欢迎",
 WhiteLabel:"包网商",
 WinLoss:"输赢",

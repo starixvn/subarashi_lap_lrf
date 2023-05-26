@@ -1,4 +1,4 @@
-﻿// Generated at: 5/15/2023 1:33:19 PM
+﻿// Generated at: 5/29/2023 1:11:06 PM
 var _language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -968,7 +968,7 @@ ViewinSummary:"View in Summary",
 ViewInWithNoParam:"View in",
 ViewNotification:"View Notification",
 ViewSubsidiaryOnReports:"View subsidiary on reports",
-Vip:"VIP",
+VIP:"VIP",
 VIPPlayer:"VIP Player",
 VipPlayerManagement:"VIP Player Management",
 VIPPlayerOnly:"VIP Player only",
@@ -997,6 +997,7 @@ WarningToClosedMsg:"Warning, this player cannot be restored forever!",
 WarningToLockedMsg:"Warning, this player cannot login and transfer!",
 We:"We",
 Wednesday:"Wednesday",
+Week2:"Week {0}",
 Weekly:"Weekly",
 WeeklyLiveMatches:"Weekly Live Matches",
 Welcome:"Welcome",

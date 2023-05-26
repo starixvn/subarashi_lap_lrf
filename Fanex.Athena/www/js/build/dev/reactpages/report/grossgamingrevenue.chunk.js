@@ -1326,7 +1326,8 @@ const ReportLevel = {
 };
 const ReportBy = {
   DAILY: 1,
-  MONTHLY: 2
+  MONTHLY: 2,
+  WEEKLY: 3
 };
 const SubsidiaryViewType = {
   NOT_MANAGEMENT: 0,
@@ -2091,16 +2092,16 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_1__["Component"] {
     let rows = [];
     for (let i = 0; i < data.length; i++) {
       const item = data[i];
-      const reportBy = moment__WEBPACK_IMPORTED_MODULE_0___default()(item.Date).format(formatDate);
+      const reportByData = reportBy === _constants_report__WEBPACK_IMPORTED_MODULE_9__["ReportBy"].WEEKLY.toString() ? item.DateString : moment__WEBPACK_IMPORTED_MODULE_0___default()(item.Date).format(formatDate);
       rows.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Row"], {
         key: `${item.Ticks}-${item.CurrencyId}`
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
         title: i + 1,
         className: "center-align"
       }, i + 1), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
-        title: reportBy,
+        title: reportByData,
         className: "center-align"
-      }, reportBy), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
+      }, reportByData), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
         title: item.CurrencyName,
         className: "center-align"
       }, item.CurrencyName), this._buildCell(item)));
@@ -2886,7 +2887,7 @@ class ReportExcel {
       [MAIN_SECTION]: {
         isShow: true,
         style: bodyCellStyle.center,
-        width: 150
+        width: 230
       },
       [TOTAL_SECTION]: {
         isShow: false
@@ -3081,7 +3082,7 @@ class ReportExcel {
     const totalData = this.gridData.Data.length;
     for (let i = 0; i < totalData; i++) {
       let data = this.gridData.Data[i];
-      data.Date = moment__WEBPACK_IMPORTED_MODULE_0___default()(data.Date).format(this.reportBy === _constants_report__WEBPACK_IMPORTED_MODULE_5__["ReportBy"].DAILY ? "MM/DD/YYYY" : "MM/YYYY");
+      data.Date = this.reportBy === _constants_report__WEBPACK_IMPORTED_MODULE_5__["ReportBy"].WEEKLY ? data.DateString : moment__WEBPACK_IMPORTED_MODULE_0___default()(data.Date).format(this.reportBy === _constants_report__WEBPACK_IMPORTED_MODULE_5__["ReportBy"].DAILY ? "MM/DD/YYYY" : "MM/YYYY");
       data.Index = i + 1;
       this._createRowBySection(MAIN_SECTION, 0, this.currentRowIndex, data);
       ++this.currentRowIndex;

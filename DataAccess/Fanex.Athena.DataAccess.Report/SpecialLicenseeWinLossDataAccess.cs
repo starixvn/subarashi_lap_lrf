@@ -7,9 +7,12 @@
     using System.Threading.Tasks;
     using Core;
     using Core.Extensions;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Extension.Utility;
+    using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
+    using Fanex.Athena.Resources;
     using Fanex.Common.Extensions;
     using Fanex.Data;
     using Interfaces;
@@ -150,7 +153,7 @@
         {
             db.SetParameterValue("fromdate", metaModel.FromDate.Date);
             db.SetParameterValue("todate", metaModel.ToDate.Date);
-            db.SetParameterValue("reporttype", metaModel.ReportBy);
+            db.SetParameterValue("reporttype", metaModel.ReportBy == ReportByType.Weekly ? (byte)ReportByType.Daily : metaModel.ReportBy);
             db.SetParameterValue("productCodes", string.Join(",", metaModel.ProductCodeList));
             db.SetParameterValue("currencylist", metaModel.CurrencyListXml);
             db.SetParameterValue("siteName", metaModel.SiteName);
@@ -189,10 +192,54 @@
 
             return new ReportResultModel<LicenseeWinLoss>
             {
-                DataList = dataList,
+                DataList = metaModel.ReportBy == ReportByType.Weekly ? CalculateDataForWeekMode(dataList, metaModel) : dataList,
                 TotalDataList = CalculateTotal(dataList),
                 SummaryTotal = summaryTotal
             };
+        }
+
+        private IEnumerable<LicenseeWinLoss> CalculateDataForWeekMode(IEnumerable<LicenseeWinLoss> dataList, SpecialLicenseeWinLossMetaModel metaModel)
+        {
+            if (dataList.Any())
+            {
+                var startDate = metaModel.FromDate;
+                var endDate = DateTimeHelper.GetMinDate(metaModel.FromDate.DayOfNextWeek(DayOfWeek.Saturday), metaModel.ToDate);
+                var index = 1;
+
+                while (startDate <= endDate)
+                {
+                    var dateString = $"{string.Format(ViewResources.Week2, index)} ({startDate:MM/dd/yyyy} - {endDate:MM/dd/yyyy})";
+
+                    foreach (var data in dataList.Where(_ => DateTimeHelper.IsBetween(_.Date, startDate, endDate)))
+                    {
+                        data.DateString = dateString;
+                    }
+
+                    startDate = endDate.AddDays(1).Date;
+                    endDate = DateTimeHelper.GetMinDate(startDate.DayOfNextWeek(DayOfWeek.Saturday), metaModel.ToDate);
+                    index++;
+                }
+
+                return dataList.GroupBy(_ => new { _.DateString, _.CurrencyId, _.CurrencyName }).Select(
+                    _ => new LicenseeWinLoss
+                    {
+                        CurrencyId = _.Key.CurrencyId,
+                        CurrencyName = _.Key.CurrencyName,
+                        DateString = _.Key.DateString,
+                        CustomerComm = _.Sum(c => c.CustomerWinLoss),
+                        LicenseeWL = _.SelectMany(kvp => kvp.LicenseeWL)
+                            .GroupBy(kvp => kvp.Key)
+                            .ToDictionary(grp => grp.Key, grp => grp.Sum(kvp => kvp.Value)),
+                        TurnOver = _.SelectMany(kvp => kvp.TurnOver)
+                            .GroupBy(kvp => kvp.Key)
+                            .ToDictionary(grp => grp.Key, grp => grp.Sum(kvp => kvp.Value)),
+                        TotalTransaction = _.Sum(l => l.TotalTransaction),
+                        Date = _.First().Date
+                    }
+                ).OrderBy(_ => _.Date).ThenBy(_ => _.CurrencyId);
+            }
+
+            return dataList;
         }
     }
 }

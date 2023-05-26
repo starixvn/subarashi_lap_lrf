@@ -123,5 +123,64 @@
                 Assert.That(result.SummaryTotal.ContainsKey("invalid"), Is.False);
             });
         }
+
+        [Test]
+        public async Task ReadWeeklyModeData_WhenCall_ReturnCorrectResult()
+        {
+            // Arrange
+            DataAccess.GetObjectDb(Arg.Is(Sp)).Returns(ObjectDb);
+
+            Reader.Read().Returns(true, false);
+            Reader.FieldCount.Returns(6);
+            Reader.GetName(0).Returns("LicenseeWLSB");
+            Reader.GetName(1).Returns("turnoverSB");
+            Reader.GetName(2).Returns("LicenseeWLSBUSD");
+            Reader.GetName(3).Returns("turnoverSBUSD");
+            Reader.GetName(4).Returns("LicenseeWLSBBase");
+            Reader.GetName(5).Returns("turnoverSBBase");
+
+            var readerDataMapping = new
+            {
+                LicenseeWLSB = 10,
+                turnoverSB = 50,
+                LicenseeWLSBUSD = 100,
+                turnoverSBUSD = 200,
+                LicenseeWLSBBase = 300,
+                turnoverSBBase = 400,
+                reporttype = "4/4/2023 12:00:00 AM",
+                currencyid = CurrencyId
+            };
+            MapReaderData(readerDataMapping);
+            _metaModel.ReportBy = 3;
+            _metaModel.FromDate = new DateTime(2023, 3, 26);
+            _metaModel.ToDate = new DateTime(2023, 5, 6);
+
+            // Action
+            var result = await DataAccess.GetData(_metaModel, UserCurrencyList);
+            var firstItem = result.DataList.First();
+            var firstTotalItem = result.TotalDataList.First();
+
+            // Assert
+            Assert.Multiple(() =>
+            {
+                Assert.That(result.DataList.Count, Is.EqualTo(1));
+                Assert.That(firstItem.LicenseeWL["SB"], Is.EqualTo(10));
+                Assert.That(firstItem.TurnOver["SB"], Is.EqualTo(50));
+                Assert.That(firstItem.DateString, Is.EqualTo("Week 2 (04/02/2023 - 04/08/2023)"));
+                Assert.That(firstItem.Date, Is.EqualTo(new DateTime(2023, 4, 4)));
+
+                Assert.That(firstTotalItem.CurrencyName, Is.EqualTo(CurrencyName));
+                Assert.That(firstTotalItem.LicenseeWL["SB"], Is.EqualTo(10));
+                Assert.That(firstTotalItem.LicenseeWL.ContainsKey("invalid"), Is.False);
+                Assert.That(firstTotalItem.TurnOver["SB"], Is.EqualTo(50));
+                Assert.That(firstTotalItem.TurnOver.ContainsKey("invalid"), Is.False);
+
+                Assert.That(result.SummaryTotal["USD"].LicenseeWL["SB"], Is.EqualTo(100));
+                Assert.That(result.SummaryTotal["USD"].TurnOver["SB"], Is.EqualTo(200));
+                Assert.That(result.SummaryTotal["AAA"].LicenseeWL["SB"], Is.EqualTo(300));
+                Assert.That(result.SummaryTotal["AAA"].TurnOver["SB"], Is.EqualTo(400));
+                Assert.That(result.SummaryTotal.ContainsKey("invalid"), Is.False);
+            });
+        }
     }
 }

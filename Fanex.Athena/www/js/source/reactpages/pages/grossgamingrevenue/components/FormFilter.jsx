@@ -121,10 +121,10 @@ export class FormFilter extends Component {
                                 <label htmlFor={key}>{option.label}</label>
                             </span>)
                     })
-                    }
+                }
             </div>
         );
-                    }
+    }
 
     _renderProductSelectList() {
         const productOptions = AppData.productOptions;
@@ -137,7 +137,7 @@ export class FormFilter extends Component {
                 statusField={"Status"}
                 onChange={this.productChangeHandler} />
         );
-                    }
+    }
 
     _renderCurrencySelectList() {
         const { selectedCurrency } = this.props;
@@ -146,11 +146,11 @@ export class FormFilter extends Component {
             value={selectedCurrency.value}
             options={currencyList}
             onChange={(item) => this.props.setSelectedCurrency(item)} />
-                    }
+    }
 
     _monthPickerHandle = (dateRange) => {
         this.props.setDateRange(dateRange);
-                    }
+    }
 
     _renderMonthPicker() {
         const { dateRange, selectedReportBy } = this.props;

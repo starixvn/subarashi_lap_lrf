@@ -58,6 +58,37 @@
             TestIsValidMonthRange(new DateTime(fromYear, fromMonth, fromDay), new DateTime(toYear, toMonth, toDay), MaximumMonthRange, true);
         }
 
+        [TestCase("4/1/2023", DayOfWeek.Monday, "3/27/2023")]
+        [TestCase("4/7/2023", DayOfWeek.Tuesday, "4/4/2023")]
+        [TestCase("4/7/2023", DayOfWeek.Saturday, "4/1/2023")]
+        [TestCase("4/7/2023", DayOfWeek.Sunday, "4/2/2023")]
+        [TestCase("4/1/2023", DayOfWeek.Wednesday, "3/29/2023")]
+        [TestCase("4/1/2023", DayOfWeek.Sunday, "3/26/2023")]
+        [TestCase("4/30/2023", DayOfWeek.Sunday, "4/30/2023")]
+        public void DayOfPreviousWeek_WhenCall_ReturnCorrectDate(DateTime input, DayOfWeek dayOfWeek, DateTime output)
+        {
+            // Action
+            var result = DateTimeHelper.DayOfPreviousWeek(input, dayOfWeek);
+
+            // Assert
+            Assert.That(result, Is.EqualTo(output));
+        }
+
+        [TestCase("4/1/2023", DayOfWeek.Monday, "4/3/2023")]
+        [TestCase("4/7/2023", DayOfWeek.Tuesday, "4/11/2023")]
+        [TestCase("4/7/2023", DayOfWeek.Saturday, "4/8/2023")]
+        [TestCase("4/7/2023", DayOfWeek.Sunday, "4/9/2023")]
+        [TestCase("4/30/2023", DayOfWeek.Saturday, "5/6/2023")]
+        [TestCase("4/30/2023", DayOfWeek.Sunday, "4/30/2023")]
+        public void DayOfNextWeek_WhenCall_ReturnCorrectDate(DateTime input, DayOfWeek dayOfWeek, DateTime output)
+        {
+            // Action
+            var result = DateTimeHelper.DayOfNextWeek(input, dayOfWeek);
+
+            // Assert
+            Assert.That(result, Is.EqualTo(output));
+        }
+
         private static void TestIsValidMonthRange(DateTime fromDate, DateTime toDate, int monthRange, bool expected)
         {
             // Action

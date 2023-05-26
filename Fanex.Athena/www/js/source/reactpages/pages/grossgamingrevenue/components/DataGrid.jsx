@@ -114,12 +114,12 @@ export class DataGrid extends Component {
         let rows = [];
         for (let i = 0; i < data.length; i++) {
             const item = data[i];
-            const reportBy = moment(item.Date).format(formatDate);
+            const reportByData = reportBy === ReportBy.WEEKLY.toString() ? item.DateString : moment(item.Date).format(formatDate);
 
             rows.push(
                 <Row key={`${item.Ticks}-${item.CurrencyId}`}>
                     <Cell title={i + 1} className='center-align'>{i + 1}</Cell>
-                    <Cell title={reportBy} className='center-align'>{reportBy}</Cell>
+                    <Cell title={reportByData} className='center-align'>{reportByData}</Cell>
                     <Cell title={item.CurrencyName} className='center-align'>{item.CurrencyName}</Cell>
                     {this._buildCell(item)}
                 </Row>
