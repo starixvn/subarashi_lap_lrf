@@ -26,10 +26,9 @@
     {
         private static readonly IDictionary<string, string> TabKeys = new Dictionary<string, string>
         {
-            { PermissionKeys.PlayerProblemManagement, "ProblemPlayer" },
+            { PermissionKeys.MonitoredPlayer, "MonitoredPlayer" },
             { PermissionKeys.SabaVirtualSetting, "SabaVirtualSetting" },
-            { PermissionKeys.PlayerVIPManagement, "VipPlayerManagement" },
-            { PermissionKeys.MonitoredPlayer, "MonitoredPlayer" }
+            { PermissionKeys.PlayerVIPManagement, "VipPlayerManagement" }
         };
 
         private static readonly ConcurrentDictionary<string, AsyncLazy<IEnumerable<ReasonGroup>>> ReasonListFromCache = new ConcurrentDictionary
@@ -52,7 +51,7 @@
             _customerClassService = customerClassService;
         }
 
-        [FunctionAuthorization(PermissionKeys.PlayerProblemManagement, PermissionKeys.PlayerVIPManagement, PermissionKeys.MonitoredPlayer, PermissionKeys.SabaVirtualSetting)]
+        [FunctionAuthorization(PermissionKeys.PlayerVIPManagement, PermissionKeys.MonitoredPlayer, PermissionKeys.SabaVirtualSetting)]
         public async Task<ViewResult> Index()
         {
             var model = await BuildViewModel();
@@ -75,7 +74,7 @@
             var viewType = !subsidiaryList.Any() ? SubsidiaryViewType.NotManagement : (SubsidiaryViewType)userSession.SubsidiaryViewType;
             var reasonList = await GetReasonList(lang);
             var problemPlayerCustomerClass = reasonList.OrderBy(_ => _.CustomerClass).Select(_ => _.CustomerClass.ToString()).Distinct();
-            var vipMngCustomerClass = await _customerClassService.GetAllCustomerClassId();
+            var riskLevels = await _customerClassService.GetAllRiskLevel();
 
             var model = new PlayerSegmentationViewModel
             {
@@ -92,7 +91,7 @@
                 {
                     CurrencyList = currencyList,
                     VipOptions = GetVipOptions(),
-                    CustomerClass = vipMngCustomerClass
+                    RiskLevels = riskLevels
                 } : null,
                 MonitoredPlayerVM = hasMonitoredPlayerPermission ? new MonitoredPlayerViewModel
                 {

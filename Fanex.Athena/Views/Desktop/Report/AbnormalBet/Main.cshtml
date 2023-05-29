@@ -17,7 +17,6 @@
         .Select(c => new { value = c.Value, label = c.Value }).ToList();
 
     var selectedCurrency = string.Join(",", Model.CurrencyList.Select(x => x.Key).ToArray());
-    var selectedReason = string.Join(",", Model.ReasonList.Select(x => x.Key).ToArray());
     var selectedStatus = string.Join(",", Model.LiveStatusList.Select(x => x.Key).ToArray());
     var selectedBettype = string.Join(",", Model.Bettypes.Select(x => x.Key).ToArray());
     var selectedSport = string.Join(",", Model.Sports.Select(x => x.Key).ToArray());
@@ -39,7 +38,6 @@
     window.initialState = {
     selectedCurrency:  '@(selectedCurrency)',
     selectedSport:  '@(selectedSport)',
-    selectedReason:  '@(selectedReason)',
     selectedBettype:  '@(selectedBettype)',
     selectedStatus:  '@(selectedStatus)',
     selectedBaseCurrency: '@(ViewBag.DefaultSelectedBaseCurrency)',
@@ -53,7 +51,6 @@
     sportList: @Html.Raw(Model.Sports.Select(x => new { Id = x.Key, Value = x.Value, Status = true }).ToJson()),
     bettypeList: @Html.Raw(Model.Bettypes.Select(x => new { Id = x.Key, Value = x.Value, Status = true }).ToJson()),
     statusList: @Html.Raw(Model.LiveStatusList.Select(x => new { Id = x.Key, Value = x.Value, Status = true }).ToJson()),
-    reasonList: @Html.Raw(Model.ReasonList.Select(x => new { Id = x.Key, Value = x.Value, Status = true }).ToJson()),
     dateConstraint: {minDate: '@minDate', maxDate: '@maxDate.ToString("MM/dd/yyyy")', limitedMonthRange: 3},
     defaultBaseCurrency: '@(ViewBag.DefaultSelectedBaseCurrency)',
     defaultCurrency: '@(selectedCurrency)',

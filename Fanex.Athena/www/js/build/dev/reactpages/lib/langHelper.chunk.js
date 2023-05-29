@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 5/12/2023 1:38:31 PM
+// Generated at: 5/15/2023 1:33:40 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -329,6 +329,7 @@ window._language_en_US = {
   DailyStatement: "Daily Statement",
   DailyStatementMsg: "Support data up to 4 months only",
   DailyWinningThreshold: "Daily Winning Threshold",
+  Dangerous: "Dangerous",
   Data: "data",
   Date: "Date",
   DateRange: "Date Range",
@@ -472,6 +473,7 @@ window._language_en_US = {
   Happy5: "Happy 5",
   Happy5LinkedGames: "Happy 5 Linked Games",
   HD: "HD",
+  Healthy: "Healthy",
   HH: "HH",
   hide: "hide",
   HistoricalReportDateRangeNote: "Data is available from {0:MM/dd/ yyyy}. For more historic data",
@@ -645,6 +647,7 @@ window._language_en_US = {
   MobileEuro: "Mobile Euro",
   MobileOthers: "Mobile Others",
   MobileStandard: "Mobile Standard",
+  Moderate: "Moderate",
   Monday: "Monday",
   MoneyLine: "Money Line",
   MoneyPlay: "Money Play",
@@ -662,6 +665,7 @@ window._language_en_US = {
   Name: "Name",
   NativeApp: "Native APP",
   NetTurnover: "Net Turnover",
+  New: "New",
   NewGroup: "New Group",
   Next: "Next",
   NextBetInteval: "Next Bet Inteval (sec)",
@@ -766,6 +770,7 @@ window._language_en_US = {
   PreviousSearchResult: "Previous search result",
   ProblemDisplayBetSetting: "There is problem to display bet setting group&apos;s detail.",
   ProblemPlayer: "Problem Player",
+  Problems: "Problems",
   Product: "Product",
   ProductAB: "AllBet",
   ProductAGC: "AG Casino",
@@ -846,7 +851,12 @@ window._language_en_US = {
   Results: "Results",
   RetractedPlayerUpdateVipStatus: "Retracted VIP player(s): {0} ({1})",
   RetractedPlayerUpdateVipStatusSingle: "Retracted VIP player: {0}",
+  RiskLevel: "Risk Level",
+  RiskLevelBetSetting: "Risk Level Bet Setting",
+  RiskLevelInformation: "Risk Level Information",
+  RiskLevelOddsGroup: "Risk Level Odds Group",
   RNGCasinoUpdateSettingUnAvailableMsg: "RNG Casino Database is not currently available. Please try again later.",
+  Robot: "Robot",
   Running: "Running",
   Sa: "Sa",
   Saba: "Saba",
@@ -917,6 +927,7 @@ window._language_en_US = {
   Sunday: "Sunday",
   SupportTask: "Support Task",
   Suspended: "Suspended",
+  Suspicious: "Suspicious",
   SystemId: "System ID",
   SystemParlay: "System Parlay",
   SystemParlayDetailNote: "Win Loss is rounded for reference only. Therefore, Sub Total amount may be different from the sum of Win Loss when it sums all the actual Win Loss amounts.",
@@ -980,6 +991,7 @@ window._language_en_US = {
   TurnoverTitle: "Turnover, {0} --&gt; {1} - {2} {3} ({4})",
   TurnoverTitleNoUser: "Turnover, {0} --&gt; {1}, {2}",
   Type: "Type",
+  Uncategorized: "Uncategorized",
   UncheckAll: "Uncheck All",
   Under: "Under",
   UnderMaintenance: "Under Maintenance",

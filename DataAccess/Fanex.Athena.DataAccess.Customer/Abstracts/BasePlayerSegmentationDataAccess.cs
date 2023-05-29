@@ -58,9 +58,6 @@ namespace Fanex.Athena.DataAccess.Customer
             player.AgentId = Convert.ToInt32(reader["AgentID"]);
             player.IsVip = Convert.ToBoolean(reader["isVIP"]);
             player.IsBA = Convert.ToBoolean(reader["IsBA"]);
-
-            var customerClass = reader["CustomerClass"]?.ToString();
-            player.CustomerClass = string.IsNullOrWhiteSpace(customerClass) || customerClass == "0" ? ViewResources.None : customerClass;
         }
 
         protected static int ReadTotal(IObjectDb db)

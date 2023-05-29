@@ -124,13 +124,13 @@
         <div class="col l2 m2 s12 input-field">
             <div class="multiselect-container">
                 <select id="customer-class">
-                    @foreach (var item in Model.CustomerClassList)
+                    @foreach (var item in Model.RiskLevels)
                     {
-                        <option value="@item">@(item.Equals("0") ? ViewResources.None : item)</option>
+                        <option value="@(string.Join(",", item.CustomerClassList))">&lt;span class='risk-level @item.Key'&gt;@item.Name&lt;/span&gt;</option>
                     }
                 </select>
             </div>
-            <label>@ViewResources.CustomerClass</label>
+            <label>@ViewResources.RiskLevel</label>
         </div>
 
         <div class="col l2 m2 s12 input-field">

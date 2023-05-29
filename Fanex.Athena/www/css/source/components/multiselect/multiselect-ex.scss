@@ -1,4 +1,5 @@
 ﻿@import "../../scss/abstracts/_variables";
+@import "../risklevel/risk-level.scss";
 
 .multiselect-container {
     > label {
@@ -46,9 +47,10 @@
             }
         }
 
-        &.ui-multiselect-state-disabled{
+        &.ui-multiselect-state-disabled {
             cursor: default;
-            > input{
+
+            > input {
                 color: rgba(0, 0, 0, 0.26);
                 cursor: default;
             }
@@ -117,4 +119,8 @@ ul.ui-multiselect-checkboxes {
 
 .ui-multiselect-ul-group {
     padding-left: 40px;
+}
+
+.risk-level {
+    padding: 2px 5px;
 }

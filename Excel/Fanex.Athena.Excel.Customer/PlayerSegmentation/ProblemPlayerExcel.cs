@@ -43,7 +43,7 @@
 
         private void AddVIPHeaders()
         {
-            _infoHeaders.Add(new Tuple<string, string, Func<object, object>>(ViewResources.Vip, "IsVip", DataParsers.ParseToYesNo));
+            _infoHeaders.Add(new Tuple<string, string, Func<object, object>>(ViewResources.VIP, "IsVip", DataParsers.ParseToYesNo));
         }
 
         private static string GetReportTitle() => $"{ViewResources.ProblemPlayer}";

@@ -49,7 +49,6 @@ define(
             [{ Name: 'Platform', IsShow: 1 },
             { Name: 'ExternalId', IsShow: 1 },
             { Name: 'SystemId', IsShow: 1 },
-            { Name: 'CustomerClass', IsShow: 1},
             { Name: 'TransTime', IsShow: 1 },
             { Name: 'Choice', IsShow: 1 },
             { Name: 'Odds', IsShow: 1 },
@@ -67,19 +66,8 @@ define(
 
             _params.BasedCurrency = $('#last-bet-monitor-base-currency').val();
             _postedParam = Site.clone(_params);
-
-            _me.initClickCustomerClassIcon();
             BetList.registerBetListGlobalFunctions();
         };
-        _me.initClickCustomerClassIcon = () => {
-            const $customerClassIcon = $('#monitor-header th[data-name=CustomerClass] .icon-info');
-            var url = "CustomerClass/CustomerClassInformation?time=" + (new Date().getTime());
-            const popupOption = { id: ID_CUSTOMER_CLASS_IFRAME, width: 1000, height: 600, title: Site.getSingleResource('CustomerClassInformation') };
-            $customerClassIcon.on('click', function(){
-                Popup.openPopupWithIframe(url, popupOption);
-            })
-        }
-
         _me.getMaxStake = function () {
             return MAX_STAKE;
         };

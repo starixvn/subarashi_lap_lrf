@@ -8,7 +8,6 @@ export const dataGridFullHeaders = [
     { key: 'currentWinningThreshold', text: LangHelper.getSingleResource('CurrentWinningThreshold'), sortBy: 4, colWidth: 100 },
     { key: 'noOfReached', text: LangHelper.getSingleResource('NoOfReached'), sortBy: 5, colWidth: 60 },
     { key: 'lastReachedDate', text: LangHelper.getSingleResource('LastReachedDate'), sortBy: 6, colWidth: 100 },
-    { key: 'problemPlayer', text: LangHelper.getSingleResource('ProblemPlayer'), sortBy: 7, colWidth: 50, show: ({ showProblemPlayer }) => showProblemPlayer },
     { key: 'vipPlayer', text: LangHelper.getSingleResource('VIPPlayer'), sortBy: 8, colWidth: 50, show: ({ showVipPlayer }) => showVipPlayer },
     { key: 'action', text: LangHelper.getSingleResource('Action'), colWidth: 50, show: ({ canEdit }) => canEdit  }
 ]

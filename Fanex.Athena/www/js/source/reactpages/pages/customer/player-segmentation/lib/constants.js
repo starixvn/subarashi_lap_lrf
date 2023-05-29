@@ -3,13 +3,12 @@ import LangHelper from '@jsroot/lib/langHelper';
 import AppData from '@jsroot/lib/AppData';
 
 export const tabKeys = {
-    problemPlayer: 'ProblemPlayer',
+    monitoredPlayer: 'MonitoredPlayer',
     sabaVirtualSetting: 'SabaVirtualSetting',
-    vipPlayerManagement: 'VipPlayerManagement',
-    monitoredPlayer: 'MonitoredPlayer'
+    vipPlayerManagement: 'VipPlayerManagement'
 }
 
-const newTabs = [tabKeys.monitoredPlayer, tabKeys.sabaVirtualSetting];
+const newTabs = [];
 
 const dynamicImports = {
     [tabKeys.problemPlayer]: () => import(/* webpackChunkName: "customer/playersegmentation/problemPlayer" */ '../tabs/problem-player/index'),    
@@ -68,8 +67,7 @@ export const successResponse = {
 }
 
 export const TabType = {
-    ProblemPlayer:1,
+    MonitoredPlayer:1,
     SabaVirtualSetting:2,
-    VipPlayerManagement:3,
-    MonitoredPlayer:4
+    VipPlayerManagement:3
 }

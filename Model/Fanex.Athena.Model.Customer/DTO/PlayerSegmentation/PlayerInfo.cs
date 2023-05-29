@@ -12,9 +12,8 @@ namespace Fanex.Athena.Model.Customer.DTO.PlayerSegmentation
 
         [JsonIgnore]
         public int AgentId { get; set; }
-        public string Subsidiary { get; set; }
 
-        public string CustomerClass { get; set; }
+        public string Subsidiary { get; set; }
 
         [JsonIgnore]
         public string Reason { get; set; }

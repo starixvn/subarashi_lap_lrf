@@ -64,15 +64,15 @@ namespace Fanex.Athena.Controllers.Customer.UnitTests
             }
         }
 
-        [TestCase(true, true, 2)]
-        [TestCase(false, true, 1)]
-        public async Task Index_Permission_ReturnViewModelCorrect(bool hasVIP, bool hasProblem, int expectedCountTabKey)
+        [Test]
+        public async Task Index_Permission_ReturnViewModelCorrect()
         {
             using (var controller = CreateController())
             {
                 // Arrange
+                const bool hasVIP = true;
+                const int expectedCountTabKey = 1;
                 _authService.HasPermissions(Arg.Any<UserAuthInfo>(), PermissionKeys.PlayerVIPManagement).Returns(hasVIP);
-                _authService.HasPermissions(Arg.Any<UserAuthInfo>(), PermissionKeys.PlayerProblemManagement).Returns(hasProblem);
 
                 // Action
                 var result = await controller.Index();
@@ -83,17 +83,8 @@ namespace Fanex.Athena.Controllers.Customer.UnitTests
                 {
                     Assert.AreEqual(hasVIP, vm.HasVIPManagementPermission);
                     Assert.AreEqual(expectedCountTabKey, vm.TabKeys.Count());
-
-                    if (hasProblem)
-                    {
-                        Assert.AreEqual("ProblemPlayer", vm.TabKeys.ElementAtOrDefault(0));
-                    }
-
-                    if (hasVIP)
-                    {
-                        Assert.IsNotNull(vm.VipPlayerVM);
-                        Assert.AreEqual("VipPlayerManagement", vm.TabKeys.ElementAtOrDefault(1));
-                    }
+                    Assert.IsNotNull(vm.VipPlayerVM);
+                    Assert.AreEqual("VipPlayerManagement", vm.TabKeys.ElementAtOrDefault(0));
                 });
             }
         }

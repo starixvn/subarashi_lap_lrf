@@ -2,7 +2,7 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Select from 'react-select'
-import MultipleSelect, { TreeViewSelect } from '@9softstudio/react-multiselect'
+import MultipleSelect, { TreeViewSelect } from '@legion-lib/react-multiselect'
 import AutoComplete from '@jsroot/components/auto-complete'
 import CheckBox from '@jsroot/components/CheckBox'
 import CollapsiblePanel from '@jsroot/components/collapsible-panel'
@@ -123,20 +123,23 @@ export class FormFilter extends PureComponent {
             onChange={this._onChangeSubsidiaryList} />;
     }
 
-    _renderCustomerClassSelectList() {
-        const { selectedCustomerClass, selectedTabKey } = this.props;
+    _renderRiskLevelSelectList() {
+        const { selectedRiskLevel, selectedTabKey } = this.props;
 
-        const customerClassList = AppData[selectedTabKey].customerClassList;
-        const dataSource = DataSourceHelper.CreateDataSourceFrom(customerClassList, selectedCustomerClass);
+        const riskLevelList = AppData[selectedTabKey].riskLevelList;
+        const dataSource = DataSourceHelper.CreateDataSourceFrom(riskLevelList, selectedRiskLevel);
 
-        return customerClassList && customerClassList.length && (
-            <MultipleSelect id="ddlCustomerClass"
+        return riskLevelList && riskLevelList.length && (
+            <MultipleSelect id="ddlRiskLevel"
                 language={LangHelper.currentLanguage}
                 dataSource={dataSource}
                 keyField={"key"}
                 valueField={"value"}
                 statusField={"status"}
-                onChange={(_, selectedItemsKey) => this.props.setSelectedCustomerClass(selectedItemsKey)} />);
+                onChange={(_, selectedItemsKey) => {
+                    this.props.setSelectedRiskLevel(selectedItemsKey);
+                    var customerClassSelected = riskLevelList.filter(r => selectedItemsKey.includes(r.key)).map(r => r.customerClassList).join(',');
+                    this.props.setSelectedCustomerClass(customerClassSelected);}} />);
     }
 
     render() {
@@ -185,8 +188,8 @@ export class FormFilter extends PureComponent {
                     </div>
                     <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
                         <div className="form-group">
-                            <label className="label-text">{LangHelper.getSingleResource("CustomerClass")}</label>
-                            {this._renderCustomerClassSelectList()}
+                            <label className="label-text">{LangHelper.getSingleResource("RiskLevel")}</label>
+                            {this._renderRiskLevelSelectList()}
                         </div>
                     </div>
                     <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-1">
@@ -206,12 +209,14 @@ function mapDispatchToProps(dispatch) {
     const {
         setDateRange, setSelectedVipOption, setUsername, setSelectedCurrency,
         setSelectedParams, searchPlayer, setPagingOption, setSubsidiaryList,
-        getUserGuideContent, setSubsidiarySearch, setSelectedCustomerClass } = ActionCreators;
+        getUserGuideContent, setSubsidiarySearch, setSelectedCustomerClass,
+        setSelectedRiskLevel } = ActionCreators;
 
     return bindActionCreators(Object.assign({}, {
         setSelectedVipOption, setDateRange, setUsername, setSelectedCurrency,
         setSelectedParams, searchPlayer, setPagingOption, setSubsidiaryList,
-        getUserGuideContent, setSubsidiarySearch, setSelectedCustomerClass
+        getUserGuideContent, setSubsidiarySearch, setSelectedCustomerClass,
+        setSelectedRiskLevel
     }), dispatch);
 }
 
@@ -219,7 +224,8 @@ function mapStateToProps(state) {
     const {
         dateRange, selectedVipOption, selectedCurrency, selectedParams,
         username, pagingOption, selectedTabKey, userGuideContent,
-        selectedSubsidiary, subsidiarySearch, selectedCustomerClass } = state;
+        selectedSubsidiary, subsidiarySearch, selectedCustomerClass,
+        selectedRiskLevel } = state;
 
     return Object.assign({}, {
         selectedVipOption,
@@ -232,7 +238,8 @@ function mapStateToProps(state) {
         userGuideContent,
         selectedSubsidiary,
         subsidiarySearch,
-        selectedCustomerClass
+        selectedCustomerClass,
+        selectedRiskLevel
     });
 };
 

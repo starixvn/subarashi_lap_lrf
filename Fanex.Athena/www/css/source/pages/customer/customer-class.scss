@@ -3,7 +3,7 @@
 
 
 
-.customer-class-policy-setting {
+.customer-class-policy-setting, .customer-class-info-spread-setting {
     .tab {
         min-width: 1400px;
     }
@@ -33,11 +33,12 @@
         }
     }
 
-    tbody{
-        tr td{
+    tbody {
+        tr td {
             border-top: 0px;
             border-left: 0px;
-            &[rowspan]:first-child{
+
+            &[rowspan]:first-child {
                 border-left: 1px solid $colorBorderTable;
             }
         }
@@ -131,4 +132,8 @@
 
 .btn {
     text-transform: none;
+}
+
+.customer-class-info-spread-setting {
+    border-collapse: separate;
 }

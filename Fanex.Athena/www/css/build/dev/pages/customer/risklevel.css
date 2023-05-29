@@ -1,0 +1,73 @@
+/* z-index */
+.risk-level-info-spread-setting table, .risk-level-policy-setting table {
+  border-collapse: separate; }
+
+.risk-level-info-spread-setting thead, .risk-level-policy-setting thead {
+  position: sticky;
+  top: 0px;
+  border-collapse: separate; }
+  .risk-level-info-spread-setting thead tr th, .risk-level-policy-setting thead tr th {
+    border-left: 0px; }
+    .risk-level-info-spread-setting thead tr th:first-child, .risk-level-policy-setting thead tr th:first-child {
+      border-left: 1px solid #d1dae1; }
+
+.risk-level-info-spread-setting tbody tr td, .risk-level-policy-setting tbody tr td {
+  border-top: 0px;
+  border-left: 0px; }
+  .risk-level-info-spread-setting tbody tr td[rowspan]:first-child, .risk-level-policy-setting tbody tr td[rowspan]:first-child {
+    border-left: 1px solid #d1dae1; }
+
+.risk-level-info-spread-setting {
+  max-width: 300px; }
+  .risk-level-info-spread-setting .main-content {
+    max-height: 20vh;
+    overflow: auto; }
+
+.risk-level-policy-setting {
+  overflow: auto; }
+  .risk-level-policy-setting .result-content {
+    min-width: 1200px; }
+  .risk-level-policy-setting .main-content {
+    max-height: 55vh;
+    overflow: auto; }
+  .risk-level-policy-setting .view-leagues {
+    float: right; }
+  .risk-level-policy-setting .list-leagues {
+    position: absolute;
+    width: 350px;
+    z-index: 999;
+    background: #F2F2F2;
+    top: 10px;
+    border: 1px solid #DADADA;
+    padding: 5px 5px;
+    text-align: left; }
+    .risk-level-policy-setting .list-leagues .icon-close {
+      font-size: 14px; }
+    .risk-level-policy-setting .list-leagues .list-leagues-header .block-close {
+      float: right;
+      color: #2c2c2c; }
+    .risk-level-policy-setting .list-leagues .list-leagues-header .icon-close {
+      font-size: 14px; }
+    .risk-level-policy-setting .list-leagues .list-leagues-content {
+      max-height: 200px;
+      min-height: 200px;
+      overflow: auto;
+      width: 100%; }
+      .risk-level-policy-setting .list-leagues .list-leagues-content ul li {
+        margin-left: 15px;
+        list-style-type: disc; }
+
+.input-field label {
+  width: 100%; }
+
+.button-block {
+  margin-left: 20px; }
+
+.btn {
+  text-transform: none; }
+
+.right-filter-menu {
+  margin-right: 15px; }
+
+
+/*# sourceMappingURL=risklevel.css.map*/

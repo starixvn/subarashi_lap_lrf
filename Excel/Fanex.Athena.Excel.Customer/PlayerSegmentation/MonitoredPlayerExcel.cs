@@ -13,34 +13,30 @@ namespace Fanex.Athena.Excel.Customer
 {
     public class MonitoredPlayerExcel : ReportBase
     {
-        const string ExcelTemplatePath = "~/App_Data/Template/Customers/PlayerSegmentation/MonitoredPlayerList.xls";
+        private const string ExcelTemplatePath = "~/App_Data/Template/Customers/PlayerSegmentation/MonitoredPlayerList.xls";
 
-        const int ColumnSubsidiary = 0;
-        const int ColumnExternalId = 1;
-        const int ColumnSystemId = 2;
-        const int ColumnCurrency = 3;
-        const int ColumnWinningThreshold = 4;
-        const int ColumnNoOfReached = 5;
-        const int ColumnLastReachedDate = 6;
-        const int ColumnProblemPlayer = 7;
-        const int ColumnVipPlayer = 8;
+        private const int ColumnSubsidiary = 0;
+        private const int ColumnExternalId = 1;
+        private const int ColumnSystemId = 2;
+        private const int ColumnCurrency = 3;
+        private const int ColumnWinningThreshold = 4;
+        private const int ColumnNoOfReached = 5;
+        private const int ColumnLastReachedDate = 6;
+        private const int ColumnVipPlayer = 7;
 
-        const int ColumnTemplateCount = 9;
-        const int RowContentTemplate = 2;
+        private const int ColumnTemplateCount = 8;
+        private const int RowContentTemplate = 2;
 
         private readonly IEnumerable<MonitoredPlayerInfo> _data;
         private readonly MonitoredPlayerListMetaModel _metaModel;
-        private readonly bool _hasProblemPlayerPermission;
         private readonly bool _hasVIPPlayerPermission;
 
         public MonitoredPlayerExcel(IEnumerable<MonitoredPlayerInfo> data, MonitoredPlayerListMetaModel metaModel,
-            bool hasProblemPlayerPermission,
             bool hasVIPPlayerPermission)
             : base(HostingEnvironment.MapPath(ExcelTemplatePath), data.Count())
         {
             _data = data;
             _metaModel = metaModel;
-            _hasProblemPlayerPermission = hasProblemPlayerPermission;
             _hasVIPPlayerPermission = hasVIPPlayerPermission;
         }
 
@@ -54,15 +50,13 @@ namespace Fanex.Athena.Excel.Customer
             row.Cells[ColumnWinningThreshold].SetCellValue(ViewResources.CurrentWinningThreshold);
             row.Cells[ColumnNoOfReached].SetCellValue(ViewResources.NoOfReached);
             row.Cells[ColumnLastReachedDate].SetCellValue(ViewResources.LastReachedDate);
-            row.Cells[ColumnProblemPlayer].SetCellValue(ViewResources.ProblemPlayer);
             row.Cells[ColumnVipPlayer].SetCellValue(ViewResources.VIPPlayer);
         }
 
         protected override void AssignTitle(ISheet sheet)
         {
-
             var titleBuilder = new StringBuilder(ViewResources.MonitoredPlayer);
-            if(!_metaModel.IsGetAll)
+            if (!_metaModel.IsGetAll)
             {
                 titleBuilder.Append($", {ViewResources.ReachedDate}: {_metaModel.FromDate.ToString(FormatDate)} --> {_metaModel.ToDate.ToString(FormatDate)}");
             }
@@ -93,7 +87,6 @@ namespace Fanex.Athena.Excel.Customer
                 row.Cells[ColumnWinningThreshold].SetCellValue(item.CurrentWinningThreshold);
                 row.Cells[ColumnNoOfReached].SetCellValue(item.NoOfReached?.ToString() ?? string.Empty);
                 row.Cells[ColumnLastReachedDate].SetCellValue(item.LastReachedDateDisplay);
-                row.Cells[ColumnProblemPlayer].SetCellValue(item.ProblemPlayer ? ViewResources.Yes : ViewResources.No);
                 row.Cells[ColumnVipPlayer].SetCellValue(item.VipPlayer ? ViewResources.Yes : ViewResources.No);
 
                 dataIndex++;
@@ -105,11 +98,6 @@ namespace Fanex.Athena.Excel.Customer
             if (!_metaModel.SubsidiarySearch)
             {
                 sheet.HideColumn(ColumnSubsidiary);
-            }
-
-            if(!_hasProblemPlayerPermission)
-            {
-                sheet.HideColumn(ColumnProblemPlayer);
             }
 
             if (!_hasVIPPlayerPermission)

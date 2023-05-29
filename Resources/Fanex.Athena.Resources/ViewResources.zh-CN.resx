@@ -2217,8 +2217,8 @@
     <value>标记日期</value>
     <comment>#128082</comment>
   </data>
-  <data name="Vip" xml:space="preserve">
-    <value>VIP</value>
+  <data name="VIP" xml:space="preserve">
+    <value>VIP会员</value>
     <comment>#128082</comment>
   </data>
   <data name="ActivateVip" xml:space="preserve">
@@ -3067,5 +3067,41 @@
   </data>
   <data name="Volume" xml:space="preserve">
     <value>投注量</value>
+  </data>
+  <data name="RiskLevelBetSetting" xml:space="preserve">
+    <value>风险等级投注限制</value>
+  </data>
+  <data name="RiskLevelOddsGroup" xml:space="preserve">
+    <value>风险等级水位组别</value>
+  </data>
+  <data name="Dangerous" xml:space="preserve">
+    <value>危險</value>
+  </data>
+  <data name="Healthy" xml:space="preserve">
+    <value>健康</value>
+  </data>
+  <data name="Moderate" xml:space="preserve">
+    <value>中等</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value> 新會員</value>
+  </data>
+  <data name="Problems" xml:space="preserve">
+    <value>問題</value>
+  </data>
+  <data name="RiskLevel" xml:space="preserve">
+    <value>风险等级</value>
+  </data>
+  <data name="Robot" xml:space="preserve">
+    <value>機械</value>
+  </data>
+  <data name="Suspicious" xml:space="preserve">
+    <value>可疑</value>
+  </data>
+  <data name="Uncategorized" xml:space="preserve">
+    <value>未分类</value>
+  </data>
+  <data name="RiskLevelInformation" xml:space="preserve">
+    <value>风险等级资讯</value>
   </data>
 </root>

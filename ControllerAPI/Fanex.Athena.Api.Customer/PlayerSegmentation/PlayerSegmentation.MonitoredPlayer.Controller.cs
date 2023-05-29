@@ -16,7 +16,6 @@
 
     public partial class PlayerSegmentationController : BaseApiController
     {
-
         [HttpPost]
         [ApiFunctionAuthorization(PermissionKeys.MonitoredPlayer)]
         [ValidationApiRequest(IsValidCurrencyList = true)]
@@ -78,7 +77,7 @@
 
         [HttpPost]
         [ApiFunctionAuthorization(PermissionKeys.MonitoredPlayer_Write)]
-        public Task<HttpResponseMessage> ExportMonitoredTemplateExcel(byte uploadBy = UploadByExternalId )
+        public Task<HttpResponseMessage> ExportMonitoredTemplateExcel(byte uploadBy = UploadByExternalId)
         {
             const string fileName = "MOnitoredSetting.xls";
 
@@ -108,7 +107,6 @@
                 BindSelectedCurrencyCodes(metaModel);
 
                 var excel = new MonitoredPlayerExcel(dataSource.Data, metaModel,
-                    _authService.HasPermissions(SessionService.UserSession, PermissionKeys.PlayerProblemManagement),
                     _authService.HasPermissions(SessionService.UserSession, PermissionKeys.PlayerVIPManagement));
                 excel.Export();
 

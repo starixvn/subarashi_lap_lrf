@@ -10,6 +10,7 @@
     using Fanex.Athena.Extension.Utility.Interfaces;
     using Fanex.Athena.Model.Customer.DTO;
     using Fanex.Athena.Model.Customer.MetaModel;
+    using Fanex.Athena.Resources;
     using Fanex.Athena.Service.Customer.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Logging;
@@ -38,6 +39,20 @@
             _portalApiService = portalApiService;
             _appSettings = appSettings;
             _logger = logger;
+        }
+
+        public async Task<RiskLevelModel> GetRiskLevelPolicyByCustomerClass(GetCustomerClassInformationMetaModel metaModel, string customerClass)
+        {
+            var policies = await GetSettingPolicy(metaModel);
+            var spreadSettingPolicies = await GetSpreadSettingPolicy(metaModel);
+
+            var result = new RiskLevelModel
+            {
+                CustomerClass = policies.Where(p => p.Id == customerClass),
+                SpreadSettingPolicies = spreadSettingPolicies.Where(p => p.Id == customerClass)
+            };
+
+            return result;
         }
 
         public async Task<IEnumerable<CustomerClassModel>> GetSettingPolicy(GetCustomerClassInformationMetaModel metaModel)
@@ -105,7 +120,6 @@
             return result;
         }
 
-
         public async Task<IEnumerable<string>> GetAllCustomerClassId()
         {
             var result = new List<string> { "0" };
@@ -117,7 +131,7 @@
             return result.Distinct();
         }
 
-        private async Task<IEnumerable<CustomerClassCategoryModel>> GetCustomerClassCategories()
+        private async Task<List<CustomerClassCategoryModel>> GetCustomerClassCategories()
         {
             try
             {
@@ -131,7 +145,31 @@
                 _logger.Error(LogMessageHelper.GenerateMessage(exception));
             }
 
-            return Enumerable.Empty<CustomerClassCategoryModel>();
+            return new List<CustomerClassCategoryModel>();
+        }
+
+        public async Task<IEnumerable<RiskLevel>> GetAllRiskLevel()
+        {
+            var customerClassCategories = await GetCustomerClassCategories();
+
+            customerClassCategories.Add(
+                new CustomerClassCategoryModel
+                {
+                    CustomerClass = 0,
+                    CustomerClassName = RiskLevel.Uncategorized,
+                    SabaRiskLevel = RiskLevel.Uncategorized
+                }
+            );
+
+            var riskLevelList = customerClassCategories.GroupBy(_ => _.SabaRiskLevel).Select((_, index) => new RiskLevel
+            {
+                Id = index.ToString(),
+                Key = _.Key,
+                Name = ViewResources.ResourceManager.GetString(_.Key) ?? _.Key,
+                CustomerClassList = _.Select(cc => cc.CustomerClass.ToString())
+            }).OrderBy(_ => _, new RiskLevelComparer());
+
+            return riskLevelList;
         }
 
         private async Task MapCustomerClassCategories(

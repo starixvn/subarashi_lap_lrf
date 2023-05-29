@@ -36,7 +36,7 @@ export const DataGrid = (props) => {
         props.getReportData(ApiUrl.REPORT_DATA_URL, newRequestParam);
     }
 
-    const tableWidth = requestParam.ViewIn === ViewInLevel.DETAIL ? 2864 : undefined;
+    const tableWidth = requestParam.ViewIn === ViewInLevel.DETAIL ? 2754 : undefined;
 
     return (
         <div className='result-content'>

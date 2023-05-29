@@ -7,6 +7,7 @@
     using Base.UnitTests;
     using DataAccess.Core.Common.Interfaces;
     using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Model.Customer.DTO;
     using Fanex.Athena.Service.Customer.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.BetList.ViewModel;
@@ -57,7 +58,7 @@
                 var sports = new List<SportProductItem>() { new SportProductItem { ID = 1, ParentId = 0, Name = "Test Sport" } };
 
                 _sportService.GetSportAndProductAndSabaSport(DefaultLicenseeSession.LicenseeId, DefaultUserSession.Language, string.Empty).Returns(sports);
-                _customerClass.GetAllCustomerClassId().Returns(new List<string> { "1" });
+                _customerClass.GetAllRiskLevel().Returns(new List<RiskLevel> { new RiskLevel { Id = "1" } });
                 // Action
                 var result = await controller.Index() as ViewResult;
                 var model = (LastBetsMonitoringViewModel)result.Model;
@@ -69,7 +70,7 @@
                     Assert.That(model.SportsList.Count, Is.EqualTo(2));
                     Assert.That(model.SportsList.ElementAt(0).Value, Is.EqualTo(sports[0].ID.ToString()));
                     Assert.That(model.SportsList.ElementAt(1).Value, Is.EqualTo(ParlayId));
-                    Assert.That(model.CustomerClassList.ElementAt(0), Is.EqualTo("1"));
+                    Assert.That(model.RiskLevels.ElementAt(0).Id, Is.EqualTo("1"));
                 });
             }
         }

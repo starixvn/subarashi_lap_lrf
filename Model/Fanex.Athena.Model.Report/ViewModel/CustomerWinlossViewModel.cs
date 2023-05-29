@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using Fanex.Athena.Model.Customer.DTO;
     using MetaModel;
     using Model.Core.ViewModel;
 
@@ -21,6 +22,6 @@
 
         public IEnumerable<string> OddsGroups { get; set; }
 
-        public IEnumerable<string> CustomerClassList { get; set; }
+        public IEnumerable<RiskLevel> RiskLevels { get; set; }
     }
 }

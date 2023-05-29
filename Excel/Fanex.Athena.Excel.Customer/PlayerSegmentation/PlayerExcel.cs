@@ -43,8 +43,7 @@
             {
                 new Tuple<string, string, Func<object, object>>(ViewResources.Subsidiary, nameof(ViewResources.Subsidiary), null),
                 new Tuple<string, string, Func<object, object>>(ViewResources.ExternalId, nameof(ViewResources.ExternalId), null),
-                new Tuple<string, string, Func<object, object>>(ViewResources.SystemId, nameof(ViewResources.SystemId), null),
-                new Tuple<string, string, Func<object, object>>(ViewResources.CustomerClass, nameof(ViewResources.CustomerClass), null)
+                new Tuple<string, string, Func<object, object>>(ViewResources.SystemId, nameof(ViewResources.SystemId), null)
             };
         }
 

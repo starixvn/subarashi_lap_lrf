@@ -56,10 +56,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DTO\CustomerClassCategoryModel.cs" />
+    <Compile Include="DTO\RiskLevelModel.cs" />
     <Compile Include="DTO\CustomerClassModel.cs" />
     <Compile Include="DTO\CustomerLog\CustomerLog.cs" />
     <Compile Include="DTO\CustomerLog\LogInLog.cs" />
     <Compile Include="DTO\CustomerClassLimitPolicyModel.cs" />
+    <Compile Include="DTO\RiskLevel.cs" />
     <Compile Include="DTO\SabaVirtualSettingInformationModel.cs" />
     <Compile Include="DTO\PlayerSegmentation\MonitoredPlayerInfo.cs" />
     <Compile Include="DTO\PlayerSegmentation\MonitoredPlayerReachedHistory.cs" />

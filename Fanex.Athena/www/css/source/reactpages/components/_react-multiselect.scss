@@ -1,4 +1,5 @@
 ﻿@import '../../../../../node_modules/@9softstudio/react-multiselect/dist/style';
+@import'../../components/risklevel/risk-level.scss';
 
 $textColor: #2c2c2c;
 
@@ -12,4 +13,9 @@ $textColor: #2c2c2c;
     .multiple-select-item label {
         color: $textColor;
     }
+}
+
+.risk-level {
+    display: flex;
+    padding: 0;
 }

@@ -152,6 +152,10 @@
       <Project>{4956FBD7-5F68-4E7B-AF6C-DB5FB1F255F0}</Project>
       <Name>Fanex.Athena.Model.BetList</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Model\Fanex.Athena.Model.Customer\Fanex.Athena.Model.Customer.csproj">
+      <Project>{3B212F2F-4DEB-449B-9AE0-36F6E4F49F5F}</Project>
+      <Name>Fanex.Athena.Model.Customer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Service\Fanex.Athena.Service.Customer\Fanex.Athena.Service.Customer.csproj">
       <Project>{EC87B5F7-32CA-485B-A3FF-52A5D0EDCE42}</Project>
       <Name>Fanex.Athena.Service.Customer</Name>
