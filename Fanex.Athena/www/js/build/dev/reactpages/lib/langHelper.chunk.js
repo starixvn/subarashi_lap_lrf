@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 5/15/2023 1:33:40 PM
+// Generated at: 5/29/2023 1:11:14 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -1056,7 +1056,7 @@ window._language_en_US = {
   ViewinSummary: "View in Summary",
   ViewInWithNoParam: "View in",
   ViewNotification: "View Notification",
-  Vip: "VIP",
+  VIP: "VIP",
   VIPPlayer: "VIP Player",
   VipPlayerManagement: "VIP Player Management",
   VIPPlayerOnly: "VIP Player only",
@@ -1085,6 +1085,7 @@ window._language_en_US = {
   WarningToLockedMsg: "Warning, this player cannot login and transfer!",
   We: "We",
   Wednesday: "Wednesday",
+  Week2: "Week {0}",
   Weekly: "Weekly",
   WeeklyLiveMatches: "Weekly Live Matches",
   Welcome: "Welcome",

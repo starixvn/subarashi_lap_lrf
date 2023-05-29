@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 5/15/2023 1:33:40 PM
+﻿// Generated at: 5/29/2023 1:11:14 PM
 window._language_zh_Hans = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -797,6 +797,7 @@ ViewinIPSummary:"查看 IP 摘要",
 ViewinSummary:"查看摘要",
 ViewInWithNoParam:"查看",
 ViewNotification:"查看通知",
+VIP:"VIP会员",
 VIPPlayerOnly:"只显示VIP玩家",
 VIPPlayerTooltipMsg:"被標示在玩家管理報告中的VIP玩家",
 VirtualCycling:"Virtual Cycling",
@@ -810,6 +811,8 @@ Volume:"投注量",
 Wap:"WAP",
 We:"We",
 Wednesday:"星期三",
+Week2:"第{0}周",
+Weekly:"每周",
 Welcome:"欢迎",
 WhiteLabel:"包网商",
 WinLoss:"输赢",

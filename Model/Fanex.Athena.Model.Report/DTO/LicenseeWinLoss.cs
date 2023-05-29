@@ -20,6 +20,8 @@ namespace Fanex.Athena.Model.Report.DTO
 
         public DateTime Date { get; set; }
 
+        public string DateString { get; set; }
+
         public string ExternalId { get; set; }
 
         public string SystemId { get; set; }

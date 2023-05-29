@@ -1,5 +1,6 @@
 ﻿namespace Fanex.Athena.Api.Report
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -56,7 +57,8 @@
                 CurrencyName = item.CurrencyName,
                 CustomerWinLoss = item.CustomerWinLoss,
                 TotalTransaction = item.TotalTransaction,
-                Date = item.Date
+                Date = item.Date,
+                DateString = item.DateString
             };
             SetLicenseeWinLossProductData(licenseeWinLossGrid, item.LicenseeWL);
             SetTurnOverProductData(licenseeWinLossGrid, item.TurnOver);
@@ -101,6 +103,11 @@
                 metaModel.CurrencyListXml = GenerateCurrencyListXml(metaModel);
                 metaModel.DefaultBaseCurrency = userSession.DefaultBaseCurrency;
                 metaModel.IsShowVND = SessionService.LicenseeSession.IsShowVND;
+
+                if (metaModel.ReportBy == ReportByType.Weekly)
+                {
+                    RecalculatParamsForWeekMode(metaModel);
+                }
 
                 var result = await _licenseeWinLossDataAccess.GetData(metaModel, userSession.CurrencyList);
 
@@ -153,6 +160,12 @@
             var productList = productAccess.ProductList.Select(x => x.ProductCode);
 
             return productList.Intersect(metaModel.ProductCodeList).Count() == metaModel.ProductCodeList.Count();
+        }
+
+        private static void RecalculatParamsForWeekMode(SpecialLicenseeWinLossMetaModel metaModel)
+        {
+            metaModel.FromDate = DateTimeHelper.GetMinDate(metaModel.FromDate.DayOfPreviousWeek(DayOfWeek.Sunday), DateTime.Now);
+            metaModel.ToDate = DateTimeHelper.GetMinDate(metaModel.ToDate.DayOfNextWeek(DayOfWeek.Saturday), DateTime.Now);
         }
     }
 }

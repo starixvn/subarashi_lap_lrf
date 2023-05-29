@@ -1,4 +1,4 @@
-﻿// Generated at: 5/15/2023 1:33:19 PM
+﻿// Generated at: 5/29/2023 1:11:06 PM
 var _language_zh_TW = {
 AA:"客客",
 AbnormalBet:"非正規註單",
@@ -689,6 +689,7 @@ ViewinIPSummary:"查看 IP 摘要",
 ViewinSummary:"查看摘要",
 ViewInWithNoParam:"查看",
 ViewNotification:"查看通知",
+VIP:"VIP會員",
 VIPPlayerOnly:"只顯示VIP玩家",
 VIPPlayerTooltipMsg:"被標示在玩家管理報告中的VIP玩家",
 VirtualCycling:"Virtual Cycling",
@@ -702,6 +703,8 @@ Volume:"投注量",
 Wap:"WAP",
 We:"We",
 Wednesday:"星期三",
+Week2:"第{0}週",
+Weekly:"每週",
 Welcome:"歡迎",
 WhiteLabel:"包網商",
 WinLoss:"獨贏",

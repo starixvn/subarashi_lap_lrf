@@ -19,5 +19,7 @@
         }
 
         public decimal TotalPayout => TotalTurnOver - TotalLicenseeWL;
+
+        public string DateString { get; set; }
     }
 }

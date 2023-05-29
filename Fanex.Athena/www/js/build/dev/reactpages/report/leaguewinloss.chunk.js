@@ -2880,7 +2880,8 @@ const ReportLevel = {
 };
 const ReportBy = {
   DAILY: 1,
-  MONTHLY: 2
+  MONTHLY: 2,
+  WEEKLY: 3
 };
 const SubsidiaryViewType = {
   NOT_MANAGEMENT: 0,

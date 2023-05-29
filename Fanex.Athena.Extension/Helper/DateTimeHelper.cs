@@ -58,5 +58,17 @@
         {
             return new DateTime(datetime.Year, datetime.Month, 1);
         }
+
+        public static DateTime DayOfPreviousWeek(this DateTime datetime, DayOfWeek dayOfWeek)
+        {
+            int diff = (7 + (datetime.DayOfWeek - dayOfWeek)) % 7;
+            return datetime.AddDays(-1 * diff).Date;
+        }
+
+        public static DateTime DayOfNextWeek(this DateTime datetime, DayOfWeek dayOfWeek)
+        {
+            int diff = (7 + (dayOfWeek - datetime.DayOfWeek)) % 7;
+            return datetime.AddDays(diff).Date;
+        }
     }
 }

@@ -2423,4 +2423,10 @@
   <data name="VIP" xml:space="preserve">
     <value>VIP会员</value>
   </data>
+  <data name="Week2" xml:space="preserve">
+    <value>第{0}周</value>
+  </data>
+  <data name="Weekly" xml:space="preserve">
+    <value>每周</value>
+  </data>
 </root>

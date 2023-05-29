@@ -17,8 +17,9 @@
     var selectedProductCode = string.Join(",", productOptions.Where(x => x.Status).Select(x => x.Code).ToArray());
 
     var reportByList = new List<dynamic>
-{
+    {
         new { value = ReportByType.Daily.ToString(), label = ViewResources.Daily },
+        new { value = ReportByType.Weekly.ToString(), label = ViewResources.Weekly },
         new { value = ReportByType.Monthly.ToString(), label = ViewResources.Monthly }
     };
 }

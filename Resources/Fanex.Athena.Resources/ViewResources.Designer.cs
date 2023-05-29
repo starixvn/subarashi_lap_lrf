@@ -9034,6 +9034,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Week {0}.
+        /// </summary>
+        public static string Week2 {
+            get {
+                return ResourceManager.GetString("Week2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Weekly.
         /// </summary>
         public static string Weekly {

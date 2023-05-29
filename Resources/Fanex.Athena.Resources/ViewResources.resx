@@ -3450,4 +3450,7 @@
   <data name="RiskLevelInformation" xml:space="preserve">
     <value>Risk Level Information</value>
   </data>
+  <data name="Week2" xml:space="preserve">
+    <value>Week {0}</value>
+  </data>
 </root>

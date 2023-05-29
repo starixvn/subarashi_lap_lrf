@@ -74,7 +74,7 @@ export default class ReportExcel {
             field: 'Date',
             type: 's',
             [HEADER_SECTION]: { title: 'date', isShow: true },
-            [MAIN_SECTION]: { isShow : true, style: bodyCellStyle.center, width: 150 },
+            [MAIN_SECTION]: { isShow : true, style: bodyCellStyle.center, width: 230 },
             [TOTAL_SECTION]: { isShow : false },
             [SUMMARYTOTAL_SECTION]: { isShow : false }
         }, {
@@ -161,7 +161,7 @@ export default class ReportExcel {
         const totalData = this.gridData.Data.length;
         for (let i = 0; i < totalData; i++) {
             let data = this.gridData.Data[i];
-            data.Date = moment(data.Date).format(this.reportBy === ReportBy.DAILY ? "MM/DD/YYYY" : "MM/YYYY");
+            data.Date = this.reportBy === ReportBy.WEEKLY ? data.DateString : moment(data.Date).format(this.reportBy === ReportBy.DAILY ? "MM/DD/YYYY" : "MM/YYYY");
             data.Index = i + 1;
 
             this._createRowBySection(MAIN_SECTION, 0, this.currentRowIndex, data);
