@@ -2217,8 +2217,8 @@
     <value>标记日期</value>
     <comment>#128082</comment>
   </data>
-  <data name="Vip" xml:space="preserve">
-    <value>VIP</value>
+  <data name="VIP" xml:space="preserve">
+    <value>VIP会员</value>
     <comment>#128082</comment>
   </data>
   <data name="ActivateVip" xml:space="preserve">

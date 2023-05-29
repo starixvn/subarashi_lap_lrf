@@ -11,5 +11,7 @@
         public string CategoryNameCN { get; set; }
 
         public string CustomerClassName { get; set; }
+
+        public string SabaRiskLevel { get; set; }
     }
 }

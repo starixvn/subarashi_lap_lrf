@@ -13,7 +13,7 @@
         public VipPlayerExcel(IEnumerable<PlayerInfo> _dataSource, bool isNormalView)
         : base(HostingEnvironment.MapPath(ExcelTemplatePath), ViewResources.VipPlayerManagement, _dataSource, isNormalView)
         {
-            _infoHeaders.Add(new Tuple<string, string, Func<object, object>>(ViewResources.Vip, "IsVip", DataParsers.ParseToYesNo));
+            _infoHeaders.Add(new Tuple<string, string, Func<object, object>>(ViewResources.VIP, "IsVip", DataParsers.ParseToYesNo));
         }
     }
 }

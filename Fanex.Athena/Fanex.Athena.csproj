@@ -777,6 +777,7 @@
     <Content Include="www\css\build\dev\pages\customer\risklevel.chunk.js.map" />
     <Content Include="www\css\build\dev\pages\customer\risklevel.css.map" />
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\RiskLevelInformation.xls" />
+    <Content Include="www\css\source\components\risklevel\risk-level.scss" />
     <None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
     <None Include="www\css\source\pages\betlist\result\result.happy5.scss" />
     <None Include="www\css\source\reactpages\components\alert\icons\error.scss" />

@@ -185,19 +185,14 @@ input[type="checkbox"].checkbox {
 .multiple-select-container .close:after {
   transform: rotate(-45deg); }
 
-.multiple-select-label {
-  height: 23px;
-  padding-top: 3px;
-  padding-bottom: 5px; }
-
-.multiple-select-options-container .multiple-select-item label {
-  color: #2c2c2c; }
-
 .risk-level {
-  display: flex;
-  padding: 0;
   border-radius: 3px;
-  border: 1px solid; }
+  border: 1px solid;
+  border-color: #909090;
+  background: #FFF; }
+  .risk-level.VIP {
+    border-color: #92D050;
+    background: #EBFFD6; }
   .risk-level.New {
     border-color: #E0CD18;
     background: #FEFFE7; }
@@ -226,4 +221,16 @@ input[type="checkbox"].checkbox {
 label.risk-level {
   margin-left: 5px;
   padding-right: 5px; }
+
+.multiple-select-label {
+  height: 23px;
+  padding-top: 3px;
+  padding-bottom: 5px; }
+
+.multiple-select-options-container .multiple-select-item label {
+  color: #2c2c2c; }
+
+.risk-level {
+  display: flex;
+  padding: 0; }
 

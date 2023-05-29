@@ -2372,4 +2372,7 @@
   <data name="Volume" xml:space="preserve">
     <value>投注量</value>
   </data>
+  <data name="VIP" xml:space="preserve">
+    <value>VIP會員</value>
+  </data>
 </root>

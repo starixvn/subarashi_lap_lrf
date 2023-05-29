@@ -27,8 +27,6 @@
         private readonly IAppSettings _appSettings;
         private readonly ILogger _logger;
 
-        private readonly string[] RiskLevelKeyByOrder = new[] { "Healthy", "New", "Moderate", "Suspicious", "Dangerous", "Problems", "Robot", RiskLevel.Uncategorized };
-
         public CustomerClassService(
             ICustomerClassDataAccess dataAccess,
             IWebClientService webClientService,
@@ -133,7 +131,7 @@
             return result.Distinct();
         }
 
-        private async Task<IEnumerable<CustomerClassCategoryModel>> GetCustomerClassCategories()
+        private async Task<List<CustomerClassCategoryModel>> GetCustomerClassCategories()
         {
             try
             {
@@ -147,25 +145,31 @@
                 _logger.Error(LogMessageHelper.GenerateMessage(exception));
             }
 
-            return Enumerable.Empty<CustomerClassCategoryModel>();
+            return new List<CustomerClassCategoryModel>();
         }
 
         public async Task<IEnumerable<RiskLevel>> GetAllRiskLevel()
         {
             var customerClassCategories = await GetCustomerClassCategories();
-            var RiskLevelList = new List<RiskLevel>();
-            foreach (var key in RiskLevelKeyByOrder)
-            {
-                RiskLevelList.Add(new RiskLevel
+
+            customerClassCategories.Add(
+                new CustomerClassCategoryModel
                 {
-                    Id = RiskLevelList.Count.ToString(),
-                    Key = key,
-                    Name = ViewResources.ResourceManager.GetString(key),
-                    CustomerClassList = key == RiskLevel.Uncategorized ? new[] { "0" }
-                        : customerClassCategories.Where(_ => _.CustomerClassName.IndexOf(key, StringComparison.OrdinalIgnoreCase) >= 0).Select(_ => _.CustomerClass.ToString()).Distinct()
-                });
-            }
-            return RiskLevelList;
+                    CustomerClass = 0,
+                    CustomerClassName = RiskLevel.Uncategorized,
+                    SabaRiskLevel = RiskLevel.Uncategorized
+                }
+            );
+
+            var riskLevelList = customerClassCategories.GroupBy(_ => _.SabaRiskLevel).Select((_, index) => new RiskLevel
+            {
+                Id = index.ToString(),
+                Key = _.Key,
+                Name = ViewResources.ResourceManager.GetString(_.Key) ?? _.Key,
+                CustomerClassList = _.Select(cc => cc.CustomerClass.ToString())
+            }).OrderBy(_ => _, new RiskLevelComparer());
+
+            return riskLevelList;
         }
 
         private async Task MapCustomerClassCategories(
