@@ -66,9 +66,9 @@
                 PlatformList = PlatformHelper.GetPlatformList(),
                 IsOneworksMaster = IsOneworksMaster,
                 IsHasPermissionViewVip = _authorizationService.HasPermissions(userSession, PermissionKeys.PlayerVIPManagement),
-                CustomerClass = customerClassIds,
                 OddGroups = licenseeSession.OfferedOddsGroupsList,
-                IsOfferCashOutProduct = _productService.IsOfferCashOutProduct(licenseeSession.LicenseeId, userSession.Language)
+                IsOfferCashOutProduct = _productService.IsOfferCashOutProduct(licenseeSession.LicenseeId, userSession.Language),
+                RiskLevels = await _customerClassService.GetAllRiskLevel()
             };
             return View("~/Views/Desktop/Report/WinlossAnalysis/Index.cshtml", viewModel);
         }

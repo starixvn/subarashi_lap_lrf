@@ -284,18 +284,21 @@ export class MainFilter extends Component {
                 onChange={(currentItem, selectedItemsKey) => this.props.setSelectedLiveStatus(selectedItemsKey)} />);
     }
 
-    _renderCustomerClassSelectList() {
-        const customerClassList = AppData.customerClassList;
+    _renderRiskLevelSelectList() {
+        const riskLevelList = AppData.riskLevelList;
 
-        return customerClassList && customerClassList.length && (
-            <MultipleSelect key={`customerclass-${this.props.appUuid}`}
-                id="ddlCustomerClass"
+        return riskLevelList && riskLevelList.length && (
+            <MultipleSelect key={`riskLevelList-${this.props.appUuid}`}
+                id="ddlRiskLevel"
                 language={LangHelper.currentLanguage}
-                dataSource={customerClassList}
+                dataSource={riskLevelList}
                 keyField={"id"}
                 valueField={"value"}
                 statusField={"status"}
-                onChange={(_, selectedItemsKey) => this.props.setSelectedCustomerClass(selectedItemsKey)} />);
+                onChange={(_, selectedItemsKey) => {
+                    this.props.setSelectedRiskLevel(selectedItemsKey);
+                    var customerClassSelected = riskLevelList.filter(r => selectedItemsKey.includes(r.id)).map(r => r.customerClassList).join(',');
+                    this.props.setSelectedCustomerClass(customerClassSelected);}} />);
     }
 
     _renderOddsGroupSelectList() {
@@ -445,8 +448,8 @@ export class MainFilter extends Component {
 
                     <div className="col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2">
                         <div className="form-group">
-                            <label className="label-text">{LangHelper.getSingleResource("CustomerClass")}</label>
-                            {this._renderCustomerClassSelectList()}
+                            <label className="label-text">{LangHelper.getSingleResource("RiskLevel")}</label>
+                            {this._renderRiskLevelSelectList()}
                         </div>
                     </div>
                     

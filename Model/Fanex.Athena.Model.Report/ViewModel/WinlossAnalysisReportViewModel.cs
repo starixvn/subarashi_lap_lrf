@@ -1,5 +1,6 @@
 ﻿using Fanex.Athena.Model.Core.DTO.Common;
 using Fanex.Athena.Model.Core.MetaModel.Product;
+using Fanex.Athena.Model.Customer.DTO;
 using System;
 using System.Collections.Generic;
 
@@ -48,7 +49,7 @@ namespace Fanex.Athena.Model.Report.ViewModel
 
         public IEnumerable<CheckedItem> SubsidiaryList { get; set; }
 
-        public IEnumerable<string> CustomerClass { get; set; }
+        public IEnumerable<RiskLevel> RiskLevels { get; set; }
 
         public IEnumerable<string> OddGroups { get; set; }
 

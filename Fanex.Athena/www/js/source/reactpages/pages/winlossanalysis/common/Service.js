@@ -52,9 +52,13 @@ export default class Service {
         return Object.values(breakDownByOption);
     }
     
-    static getNormalizedSelectedParamValueForMultiSelectFilter(selectedValue, dataList){
-        const allSelected = dataList.map(item => item.id).join(",");
-        return selectedValue === allSelected ? ALL_SELECTED_TEXT : selectedValue;
+    static getNormalizedSelectedParamValueForMultiSelectFilter(selectedValue, dataList, selectedIdFunc){
+        const allSelected = (selectedIdFunc instanceof Function) 
+            ? dataList.map(selectedIdFunc).join(",")
+            : dataList.map(item => item.id).join(",");
+        const listAllSelectId = allSelected.split(",");
+        const listSelectedId = selectedValue.split(",");
+        return listAllSelectId.every(id => listSelectedId.indexOf(id) >= 0) ? ALL_SELECTED_TEXT : selectedValue;
     }
 
     static getNormalizedSelectedParamValueForTreeListFilter(selectedValue, dataList){

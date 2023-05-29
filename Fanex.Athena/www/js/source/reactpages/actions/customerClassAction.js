@@ -7,3 +7,10 @@ export const setSelectedCustomerClass = selectedCustomerClass => {
     }
 }
 
+export const setSelectedRiskLevel = selectedRiskLevel => {
+    return {
+        type: types.SET_SELECTED_RISKLEVEL,
+        data: selectedRiskLevel
+    }
+}
+

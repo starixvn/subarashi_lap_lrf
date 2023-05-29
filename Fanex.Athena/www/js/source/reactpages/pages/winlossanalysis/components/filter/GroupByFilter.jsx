@@ -62,7 +62,7 @@ export const GroupByFilter = (props) => {
 
         const { fromDate, toDate } = props.dateRange;
         const { PageSize } = props.requestParam;
-        const { oddsGroupList, customerClassList, liveStatusList, statusList, platformList, currencyList, baseCurrencyList } = AppData;
+        const { oddsGroupList, riskLevelList, liveStatusList, statusList, platformList, currencyList, baseCurrencyList } = AppData;
         const baseCurrency = baseCurrencyList.find(x => x.value === props.selectedBaseCurrency);
         const subsidiary = Site.getLrfSubsidiary();
         let { SubsidiarySearch, SubsidiaryList } = subsidiary;
@@ -88,7 +88,7 @@ export const GroupByFilter = (props) => {
             PlatformIds: Service.getNormalizedSelectedParamValueForMultiSelectFilter(props.selectedPlatform, platformList),
             LiveStatusIds: Service.getNormalizedSelectedParamValueForMultiSelectFilter(props.selectedLiveStatus, liveStatusList),
             IsVipOnly: props.selectedVipOnly,
-            CustomerClass: Service.getNormalizedSelectedParamValueForMultiSelectFilter(props.selectedCustomerClass, customerClassList),
+            CustomerClass: Service.getNormalizedSelectedParamValueForMultiSelectFilter(props.selectedCustomerClass, riskLevelList, r => r.customerClassList),
             OddsGroup: Service.getNormalizedSelectedParamValueForMultiSelectFilter(props.selectedOddsGroup, oddsGroupList),
             IsShowInOrginalCurrency: props.isGroupInOriginalCurrency,
             IsExcludedTestData: props.isExcludeTestData,
