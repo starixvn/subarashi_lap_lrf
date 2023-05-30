@@ -86,8 +86,7 @@
                 detail.CustomerWL += reader.ToDecimal("Winlost" + suffixColumn);
                 detail.CustomerComm += reader.ToDecimal("CustComm" + suffixColumn);
                 detail.LicenseeWL += reader.ToDecimal("LicenseeWinlost" + suffixColumn);
-                detail.LicenseeNetWL += reader.ToDecimal("LicNetWL" + suffixColumn);
-                detail.LicenseeComm += reader.ToDecimal("AgentComm" + suffixColumn);
+                detail.LicenseeWLTotal += reader.ToDecimal("LicTotal" + suffixColumn);
                 detail.AmountDueTo += reader.ToDecimal("AmountDueTo" + suffixColumn);
                 detail.TotalTransaction += reader.ToInt("TotalTrans");
             }
@@ -109,8 +108,7 @@
                 CustomerWL = g.Sum(x => x.CustomerWL),
                 CustomerComm = g.Sum(x => x.CustomerComm),
                 LicenseeWL = g.Sum(x => x.LicenseeWL),
-                LicenseeNetWL = g.Sum(x => x.LicenseeNetWL),
-                LicenseeComm = g.Sum(x => x.LicenseeComm),
+                LicenseeWLTotal = g.Sum(x => x.LicenseeWLTotal),
                 AmountDueTo = g.Sum(x => x.AmountDueTo),
                 NetTurnover = g.Sum(x => x.NetTurnover)
             }).ToList();
@@ -142,9 +140,8 @@
                     CustomerWL = reader.ToDecimal("Winlost"),
                     CustomerComm = reader.ToDecimal("CustComm"),
                     LicenseeWL = reader.ToDecimal("LicenseeWinlost"),
-                    LicenseeNetWL = reader.ToDecimal("LicNetWL"),
-                    LicenseeComm = reader.ToDecimal("AgentComm"),
-                    AmountDueTo = reader.ToDecimal("AmountDueTo")
+                    AmountDueTo = reader.ToDecimal("AmountDueTo"),
+                    LicenseeWLTotal = reader.ToDecimal("LicTotal")
                 };
 
                 dataList.Add(item);

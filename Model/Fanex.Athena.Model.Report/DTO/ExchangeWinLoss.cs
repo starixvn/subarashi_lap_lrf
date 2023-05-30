@@ -36,18 +36,8 @@
 
         public decimal LicenseeWL { get; set; }
 
-        public decimal LicenseeNetWL { get; set; }
-
         public decimal AmountDueTo { get; set; }
 
-        public decimal LicenseeComm { get; set; }
-
-        public decimal LicenseeWLTotal
-        {
-            get
-            {
-                return LicenseeNetWL + LicenseeComm;
-            }
-        }
+        public decimal LicenseeWLTotal { get; set; }
     }
 }
