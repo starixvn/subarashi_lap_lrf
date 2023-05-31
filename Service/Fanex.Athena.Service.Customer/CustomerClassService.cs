@@ -41,18 +41,21 @@
             _logger = logger;
         }
 
-        public async Task<RiskLevelModel> GetRiskLevelPolicyByCustomerClass(GetCustomerClassInformationMetaModel metaModel, string customerClass)
+        public async Task<RiskLevelModel> GetRiskLevelPolicyByCustomerClass(GetCustomerClassInformationMetaModel metaModel)
         {
-            var policies = await GetSettingPolicy(metaModel);
-            var spreadSettingPolicies = await GetSpreadSettingPolicy(metaModel);
-
-            var result = new RiskLevelModel
+            if (string.IsNullOrEmpty(metaModel.CustomerClass) || metaModel.CustomerClass.Equals("None", StringComparison.OrdinalIgnoreCase))
             {
-                CustomerClass = policies.Where(p => p.Id == customerClass),
-                SpreadSettingPolicies = spreadSettingPolicies.Where(p => p.Id == customerClass)
-            };
+                return new RiskLevelModel();
+            }
 
-            return result;
+            var customerClassLimitPolicies = (await GetSettingPolicy(metaModel)).FirstOrDefault(p => p.Id == metaModel.CustomerClass)?.Policies;
+            var siteMemberPolicies = await _dataAccess.GetCustomerClassSitePolicyMember(metaModel);
+
+            return new RiskLevelModel
+            {
+                CustomerClassLimitPolicies = customerClassLimitPolicies ?? Enumerable.Empty<CustomerClassLimitPolicyModel>(),
+                SiteMemberPolicies = siteMemberPolicies ?? Enumerable.Empty<CustomerClassSitePolicyMemberModel>()
+            };
         }
 
         public async Task<IEnumerable<CustomerClassModel>> GetSettingPolicy(GetCustomerClassInformationMetaModel metaModel)

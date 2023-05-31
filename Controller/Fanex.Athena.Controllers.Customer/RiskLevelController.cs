@@ -24,17 +24,12 @@
             _portalApiService = portalApiService;
         }
 
-        public async Task<ViewResult> Information(string customerClass)
+        public async Task<ViewResult> Information(string customerClass, int currencyId)
         {
-            var metaModel = new GetCustomerClassInformationMetaModel
-            {
-                SiteName = SessionServiceInstance.LicenseeSession.LicenseeName,
-                CurrencyList = SessionServiceInstance.UserSession.CurrencyList,
-                Language = SessionServiceInstance.UserSession.Language
-            };
-
-            var viewModel = await _service.GetRiskLevelPolicyByCustomerClass(metaModel, customerClass);
+            var metaModel = BuildMetaModel(customerClass, currencyId);
+            var viewModel = await _service.GetRiskLevelPolicyByCustomerClass(metaModel);
             ViewBag.CustomerClass = customerClass;
+            ViewBag.CurrencyId = currencyId.ToString();
 
             return View("~/Views/Desktop/Customer/RiskLevel/Information.cshtml", viewModel);
         }
@@ -42,16 +37,10 @@
         [HttpPost]
         [AjaxRequest]
         [CustomValidateAntiForgery]
-        public async Task<ActionResult> ExportExcel(string customerClass)
+        public async Task<ActionResult> ExportExcel(string customerClass, int currencyId)
         {
-            var metaModel = new GetCustomerClassInformationMetaModel
-            {
-                SiteName = SessionServiceInstance.LicenseeSession.LicenseeName,
-                CurrencyList = SessionServiceInstance.UserSession.CurrencyList,
-                Language = SessionServiceInstance.UserSession.Language
-            };
-
-            var dataSource = await _service.GetRiskLevelPolicyByCustomerClass(metaModel, customerClass);
+            var metaModel = BuildMetaModel(customerClass, currencyId);
+            var dataSource = await _service.GetRiskLevelPolicyByCustomerClass(metaModel);
             var templatePath = Server.MapPath(@"~/App_Data/Template/Customers/PlayerSegmentation/RiskLevelInformation.xls");
             var fileName = "RiskLevelInformation_" + DateTime.Now.ToString("MM-dd-yyyy");
             var reportTitle = ViewResources.RiskLevelInformation;
@@ -60,6 +49,18 @@
             excel.Export();
 
             return new ExcelResult(excel.Workbook, fileName);
+        }
+
+        private GetCustomerClassInformationMetaModel BuildMetaModel(string customerClass, int currencyId)
+        {
+            return new GetCustomerClassInformationMetaModel
+            {
+                SiteName = SessionServiceInstance.LicenseeSession.LicenseeName,
+                CurrencyList = SessionServiceInstance.UserSession.CurrencyList,
+                Language = SessionServiceInstance.UserSession.Language,
+                CurrencyId = currencyId,
+                CustomerClass = customerClass
+            };
         }
     }
 }

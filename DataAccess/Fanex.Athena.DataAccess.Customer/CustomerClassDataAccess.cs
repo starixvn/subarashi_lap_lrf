@@ -15,6 +15,7 @@
     {
         private const string NumberStyle = "{0:#,##0.##}";
         private const string DefaultTextValue = "-";
+        private const string CustomerClass = "CustomerClass";
 
         private readonly ICacheRefAdapter _cacheRefAdapter;
 
@@ -35,7 +36,7 @@
                 {
                     while (reader.Read())
                     {
-                        var id = Convert.ToString(reader["CustomerClass"]);
+                        var id = Convert.ToString(reader[CustomerClass]);
                         var betDelay = reader.ToNullableDecimal("BetDelay");
                         var leagueGroupId = reader.ToInt("LeagueGroupId");
                         var platform = reader.ToNullableInt("Platform");
@@ -83,7 +84,7 @@
                         var platform = reader.ToNullableInt("Platform");
                         var policy = new CustomerClassLimitPolicyModel
                         {
-                            Id = Convert.ToString(reader["CustomerClass"]),
+                            Id = Convert.ToString(reader[CustomerClass]),
                             OddsGroup = Convert.ToString(reader["SpreadGroup"]).ToUpperInvariant(),
                             CurrencyId = reader.ToNullableInt("CurrencyId") ?? 0,
                             Platform = platform == 0 ? ViewResources.All : ViewResources.ResourceManager.GetString($"Platform_{platform}"),
@@ -98,5 +99,34 @@
 
         public static string FormatNumber(decimal? value, string format)
             => value == null ? DefaultTextValue : string.Format(format, value);
+
+        public async Task<IEnumerable<CustomerClassSitePolicyMemberModel>> GetCustomerClassSitePolicyMember(GetCustomerClassInformationMetaModel metaModel)
+        {
+            var result = new List<CustomerClassSitePolicyMemberModel>();
+
+            using (var db = GetObjectDb("Lrf_CustomerClassSitePolicyMemberSel", 180))
+            {
+                db.SetParameterValue("Site", metaModel.SiteName);
+                db.SetParameterValue("CurrencyID", metaModel.CurrencyId);
+                db.SetParameterValue("CustomerClass", metaModel.CustomerClass);
+
+                using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
+                {
+                    while (reader.Read())
+                    {
+                        var platform = reader.ToNullableInt("Platform");
+
+                        result.Add(new CustomerClassSitePolicyMemberModel
+                        {
+                            Id = Convert.ToString(reader[CustomerClass]),
+                            OddsGroup = Convert.ToString(reader["SpreadGroup"]).ToUpperInvariant(),
+                            Platform = platform == 0 ? ViewResources.All : ViewResources.ResourceManager.GetString($"Platform_{platform}"),
+                        });
+                    }
+                }
+            }
+
+            return result;
+        }
     }
 }

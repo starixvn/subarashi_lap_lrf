@@ -7,7 +7,7 @@
 
     public interface ICustomerClassService
     {
-        Task<RiskLevelModel> GetRiskLevelPolicyByCustomerClass(GetCustomerClassInformationMetaModel metaModel, string customerClass);
+        Task<RiskLevelModel> GetRiskLevelPolicyByCustomerClass(GetCustomerClassInformationMetaModel metaModel);
 
         Task<IEnumerable<RiskLevel>> GetAllRiskLevel();
 
