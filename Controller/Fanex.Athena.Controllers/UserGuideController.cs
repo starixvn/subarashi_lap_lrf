@@ -133,7 +133,7 @@
                 }
                 else
                 {
-                    var pattern = @"\{" + productCode + @"-productlist-section\}[\s\S]*{/" + productCode + @"-productlist-section\}";
+                    var pattern = @"\{" + productCode + @"-productlist-section\}([\s\S]*?){/" + productCode + @"-productlist-section\}";
                     customContent = new Regex(pattern).Replace(customContent, string.Empty);
                 }
             }
