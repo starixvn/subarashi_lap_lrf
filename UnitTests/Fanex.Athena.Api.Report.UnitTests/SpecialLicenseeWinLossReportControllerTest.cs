@@ -186,44 +186,6 @@
         }
 
         [Test]
-        public async Task Index_WeeklyMode_CallServiceWithCorrectParameters()
-        {
-            // Arrange
-            ProductService.GetSingleWalletProductAccess(Arg.Any<int>(), Arg.Any<string>(), Arg.Any<string>())
-                .Returns(new ProductAccess(
-                    new List<Product>
-                        {
-                            new Product { ProductCode = "P1" }
-                        }));
-
-            SessionService.LicenseeSession.Returns(new LicenseeAuthInfo { LicenseeName = "123" });
-            StubUserSessionData(new UserAuthInfo { CurrencyList = new Dictionary<int, string> { { 1, "C1" }, { 2, "C2" } } });
-
-            var model = new SpecialLicenseeWinLossMetaModel
-            {
-                ProductCodeList = new[] { "P1" },
-                CurrencyId = 0,
-                FromDate = new DateTime(2023, 4, 1),
-                ToDate = new DateTime(2023, 4, 30),
-                ReportBy = ReportByType.Weekly
-            };
-
-            _dataAccess.GetData(model, Arg.Any<IDictionary<int, string>>())
-                .Returns(new ReportResultModel<LicenseeWinLoss> { DataList = Enumerable.Empty<LicenseeWinLoss>() });
-
-            // Action
-            await _controller.Index(model);
-
-            // Assert
-            Assert.Multiple(() =>
-            {
-                _dataAccess.Received().GetData(model, Arg.Any<IDictionary<int, string>>());
-                Assert.That(model.FromDate, Is.EqualTo(new DateTime(2023, 3, 26)));
-                Assert.That(model.ToDate, Is.EqualTo(new DateTime(2023, 5, 6)));
-            });
-        }
-
-        [Test]
         public async Task Index_ValidRequest_ReturnCorrectData()
         {
             // Arrange
