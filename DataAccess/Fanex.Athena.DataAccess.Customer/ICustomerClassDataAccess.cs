@@ -10,5 +10,7 @@ namespace Fanex.Athena.DataAccess.Customer
         Task<IEnumerable<CustomerClassLimitPolicyModel>> GetSettingPolicies(GetCustomerClassInformationMetaModel metaModel);
 
         Task<IEnumerable<CustomerClassLimitPolicyModel>> GetSpreadSettingPolicies(GetCustomerClassInformationMetaModel metaModel);
+
+        Task<IEnumerable<CustomerClassSitePolicyMemberModel>> GetCustomerClassSitePolicyMember(GetCustomerClassInformationMetaModel metaModel);
     }
 }

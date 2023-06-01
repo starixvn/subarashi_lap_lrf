@@ -5,8 +5,8 @@ namespace Fanex.Athena.Model.Customer.DTO
 {
     public class RiskLevelModel
     {
-        public IEnumerable<CustomerClassModel> CustomerClass { get; set; } = Enumerable.Empty<CustomerClassModel>();
+        public IEnumerable<CustomerClassLimitPolicyModel> CustomerClassLimitPolicies { get; set; } = Enumerable.Empty<CustomerClassLimitPolicyModel>();
 
-        public IEnumerable<CustomerClassModel> SpreadSettingPolicies { get; set; } = Enumerable.Empty<CustomerClassModel>();
+        public IEnumerable<CustomerClassSitePolicyMemberModel> SiteMemberPolicies { get; set; } = Enumerable.Empty<CustomerClassSitePolicyMemberModel>();
     }
 }

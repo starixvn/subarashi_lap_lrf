@@ -3,6 +3,7 @@ using Fanex.Athena.Excel.Base.Extension;
 using Fanex.Athena.Model.Customer.DTO;
 using Fanex.Athena.Resources;
 using NPOI.SS.UserModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -40,6 +41,7 @@ namespace Fanex.Athena.Excel.Customer.CustomerClass
         private readonly string _reporTitle;
         private readonly IList<string> _CCSettingPolicyHeaderTexts;
         private readonly IList<string> _RiskLevelOddsGroupHeaderTexts;
+        private readonly int _siteMemberPoliciesRowCount;
 
         private readonly RiskLevelModel _data;
 
@@ -60,10 +62,12 @@ namespace Fanex.Athena.Excel.Customer.CustomerClass
         };
 
         public RiskLevelInformationExcel(string templatePath, string reportTitle, RiskLevelModel data)
-            : base(templatePath, data.CustomerClass.Count() + data.SpreadSettingPolicies.Count())
+            : base(templatePath, data.CustomerClassLimitPolicies.Count() + data.SiteMemberPolicies.Count())
         {
             _reporTitle = reportTitle;
             _data = data;
+            _siteMemberPoliciesRowCount = data.SiteMemberPolicies.Any() ? data.SiteMemberPolicies.Count() - 1 : 0;
+
             _CCSettingPolicyHeaderTexts = new List<string>
             {
                 ViewResources.SportType,
@@ -96,7 +100,7 @@ namespace Fanex.Athena.Excel.Customer.CustomerClass
                 row.Cells[i].SetCellValue(_RiskLevelOddsGroupHeaderTexts[i]);
             }
 
-            var row2 = sheet.CopyRow(TemplateSheet, RowCCSettingPolicyHeaderTemplate, RowCCSettingPolicyHeaderTemplate + _data.SpreadSettingPolicies.Count());
+            var row2 = sheet.CopyRow(TemplateSheet, RowCCSettingPolicyHeaderTemplate, RowCCSettingPolicyHeaderTemplate + _siteMemberPoliciesRowCount);
 
             for (int i = 0; i < _CCSettingPolicyHeaderTexts.Count; i++)
             {
@@ -106,7 +110,7 @@ namespace Fanex.Athena.Excel.Customer.CustomerClass
 
         protected override void AssignTitle(ISheet sheet)
         {
-            var rowCCSettingPolicyTitle = RowCCSettingPolicyTitleTemplate + _data.SpreadSettingPolicies.Count();
+            var rowCCSettingPolicyTitle = RowCCSettingPolicyTitleTemplate + _siteMemberPoliciesRowCount;
 
             sheet.SetTextRowValue(TemplateSheet, RowTitleTemplate, ColumnTemplateCount, _reporTitle);
             sheet.SetTextRowValue(TemplateSheet, RowRiskLevelOddsGroupTitleTemplate, RiskLevelPlatformColumn, ViewResources.RiskLevelOddsGroup);
@@ -122,18 +126,14 @@ namespace Fanex.Athena.Excel.Customer.CustomerClass
         {
             var rowIndex = RowRiskLevelOddsGroupContentTemplate;
 
-            if (_data.SpreadSettingPolicies.Any())
+            if (_data.SiteMemberPolicies.Any())
             {
-                for (int index = 0; index < _data.SpreadSettingPolicies.Count(); index++)
+                foreach (var item in _data.SiteMemberPolicies)
                 {
-                    var item = _data.SpreadSettingPolicies.ElementAt(index);
-                    foreach (var policy in item.Policies)
-                    {
-                        var row = sheet.CopyRow(TemplateSheet, RowRiskLevelOddsGroupContentTemplate, rowIndex);
-                        row.Cells[RiskLevelOddsGroupColumn].SetCellValue(policy.OddsGroup);
-                        row.Cells[RiskLevelPlatformColumn].SetCellValue(policy.Platform);
-                        rowIndex++;
-                    }
+                    var row = sheet.CopyRow(TemplateSheet, RowRiskLevelOddsGroupContentTemplate, rowIndex);
+                    row.Cells[RiskLevelOddsGroupColumn].SetCellValue(item.OddsGroup);
+                    row.Cells[RiskLevelPlatformColumn].SetCellValue(item.Platform);
+                    rowIndex++;
                 }
             }
             else
@@ -142,19 +142,15 @@ namespace Fanex.Athena.Excel.Customer.CustomerClass
                 BuildNoInfomationRow(sheet, row, rowIndex, rowIndex, RiskLevelOddsGroupColumn, RiskLevelPlatformColumn);
             }
 
-            rowIndex = RowCCSettingPolicyContentTemplate + _data.SpreadSettingPolicies.Count();
+            rowIndex = RowCCSettingPolicyContentTemplate + _siteMemberPoliciesRowCount;
 
-            if (_data.CustomerClass.Any())
+            if (_data.CustomerClassLimitPolicies.Any())
             {
-                for (int index = 0; index < _data.CustomerClass.Count(); index++)
+                foreach (var policy in _data.CustomerClassLimitPolicies)
                 {
-                    var item = _data.CustomerClass.ElementAt(index);
-                    foreach (var policy in item.Policies)
-                    {
-                        var row = sheet.CopyRow(TemplateSheet, RowCCSettingPolicyContentTemplate, rowIndex);
-                        AssignCommonCCColumns(policy, row);
-                        rowIndex++;
-                    }
+                    var row = sheet.CopyRow(TemplateSheet, RowCCSettingPolicyContentTemplate, rowIndex);
+                    AssignCommonCCColumns(policy, row);
+                    rowIndex++;
                 }
             }
             else

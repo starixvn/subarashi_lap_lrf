@@ -15,9 +15,11 @@
 @{
     var currency = "MYR";
     var customerClas = @ViewBag.CustomerClass;
+    var currencyId = @ViewBag.CurrencyId;
 }
 @section Content{
     @Html.Hidden("CustomerClass", (string)customerClas)
+    @Html.Hidden("CurrencyId", (string)currencyId)
     @if (string.IsNullOrEmpty(customerClas) || customerClas.Equals("None", StringComparison.OrdinalIgnoreCase))
     {
         <div class="page-results">
@@ -46,7 +48,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if (Model.SpreadSettingPolicies.Count() == 0)
+                            @if (Model.SiteMemberPolicies.Count() == 0)
                             {
                                 <tr>
                                     <td class="center-align" colspan="2">@ViewResources.NoInfo</td>
@@ -54,25 +56,12 @@
                             }
                             else
                             {
-                                foreach (var m in Model.SpreadSettingPolicies)
+                                foreach (var m in Model.SiteMemberPolicies)
                                 {
-                                    if (m.Policies.Count == 0)
-                                    {
-                                        <tr>
-                                            <td class="center-align">-</td>
-                                            <td class="left-align">-</td>
-                                        </tr>
-
-                                        continue;
-                                    }
-
-                                    foreach (var p in m.Policies)
-                                    {
-                                        <tr>
-                                            <td class="center-align">@p.OddsGroup</td>
-                                            <td class="left-align">@p.Platform</td>
-                                        </tr>
-                                    }
+                                    <tr>
+                                        <td class="center-align">@m.OddsGroup</td>
+                                        <td class="left-align">@m.Platform</td>
+                                    </tr>
                                 }
                             }
                         </tbody>
@@ -106,7 +95,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if (Model.CustomerClass.Count() == 0)
+                            @if (Model.CustomerClassLimitPolicies.Count() == 0)
                             {
                                 <tr>
                                     <td class="center-align" colspan="12">@ViewResources.NoInfo</td>
@@ -114,72 +103,48 @@
                             }
                             else
                             {
-                                foreach (var m in Model.CustomerClass)
+                                foreach (var p in Model.CustomerClassLimitPolicies)
                                 {
-                                    if (m.Policies.Count == 0)
-                                    {
-                                        <tr>
-                                            <td class="left-align">-</td>
-                                            <td class="left-align">-</td>
-                                            <td class="center-align">-</td>
-                                            <td class="center-align">-</td>
-                                            <td class="left-align">-</td>
-                                            <td class="right-align">-</td>
-                                            <td class="right-align">-</td>
-                                            <td class="right-align">-</td>
-                                            <td class="right-align">-</td>
-                                            <td class="right-align">-</td>
-                                            <td class="right-align">-</td>
-                                            <td class="right-align">-</td>
-                                            <td class="right-align">-</td>
-                                        </tr>
-
-                                        continue;
-                                    }
-
-                                    foreach (var p in m.Policies)
-                                    {
-                                        <tr>
-                                            <td class="left-align">@p.SportTypeName</td>
-                                            <td class="left-align">@(p.LiveType == 1 ? ViewResources.Live2 : ViewResources.PreMatch)</td>
-                                            <td class="center-align">@p.Currency</td>
-                                            <td class="center-align">@(p.DisableParlay ? ViewResources.Yes : ViewResources.No)</td>
-                                            <td class="left-align">@p.Platform</td>
-                                            <td class="center-align" data-internal-league-group="@p.LeagueGroupId">
-                                                @p.LicLeagueGroupName
-                                                @if (p.LicLeagueGroupId > 0)
-                                                {
-                                                    <a href="javascript:;" class="view-leagues" data-sport-type="@p.SportType" data-league-group="@p.LicLeagueGroupId">
-                                                        <i class="icon-info"></i>
-                                                    </a>
-                                                }
-                                            </td>
-                                            <td class="right-align">@p.BetInterval</td>
-                                            <td class="right-align">@p.AgentBetInterval</td>
-                                            <td class="right-align">@p.MinBet</td>
-                                            <td class="right-align">@p.MaxBet</td>
-                                            <td class="right-align">@p.MaxPerMatch</td>
-                                            <td class="right-align">@p.RepeatedBets</td>
-                                        </tr>
-                                    }
+                                    <tr>
+                                        <td class="left-align">@p.SportTypeName</td>
+                                        <td class="left-align">@(p.LiveType == 1 ? ViewResources.Live2 : ViewResources.PreMatch)</td>
+                                        <td class="center-align">@p.Currency</td>
+                                        <td class="center-align">@(p.DisableParlay ? ViewResources.Yes : ViewResources.No)</td>
+                                        <td class="left-align">@p.Platform</td>
+                                        <td class="center-align" data-internal-league-group="@p.LeagueGroupId">
+                                            @p.LicLeagueGroupName
+                                            @if (p.LicLeagueGroupId > 0)
+                                            {
+                                                <a href="javascript:;" class="view-leagues" data-sport-type="@p.SportType" data-league-group="@p.LicLeagueGroupId">
+                                                    <i class="icon-info"></i>
+                                                </a>
+                                            }
+                                        </td>
+                                        <td class="right-align">@p.BetInterval</td>
+                                        <td class="right-align">@p.AgentBetInterval</td>
+                                        <td class="right-align">@p.MinBet</td>
+                                        <td class="right-align">@p.MaxBet</td>
+                                        <td class="right-align">@p.MaxPerMatch</td>
+                                        <td class="right-align">@p.RepeatedBets</td>
+                                    </tr>
                                 }
                             }
                         </tbody>
                     </table>
-                    @if (Model.CustomerClass.Any())
+                    @if (Model.CustomerClassLimitPolicies.Any())
                     {
-                    <div class="list-leagues hide" id="list-leagues">
-                        <div class="list-leagues-header">
-                            <a class="block-close" href="javascript:;">
-                                <i class="icon-close"></i>
-                            </a>
-                            <p>@ViewResources.ListOfLeagues:</p>
+                        <div class="list-leagues hide" id="list-leagues">
+                            <div class="list-leagues-header">
+                                <a class="block-close" href="javascript:;">
+                                    <i class="icon-close"></i>
+                                </a>
+                                <p>@ViewResources.ListOfLeagues:</p>
+                            </div>
+                            <div class="list-leagues-content">
+                                <ul id="ul-list-leagues">
+                                </ul>
+                            </div>
                         </div>
-                        <div class="list-leagues-content">
-                            <ul id="ul-list-leagues">
-                            </ul>
-                        </div>
-                    </div>
                     }
                 </div>
             </div>
