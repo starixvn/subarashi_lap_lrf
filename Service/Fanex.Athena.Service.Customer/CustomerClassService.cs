@@ -43,7 +43,7 @@
 
         public async Task<RiskLevelModel> GetRiskLevelPolicyByCustomerClass(GetCustomerClassInformationMetaModel metaModel)
         {
-            if (string.IsNullOrEmpty(metaModel.CustomerClass) || metaModel.CustomerClass.Equals("None", StringComparison.OrdinalIgnoreCase))
+            if (string.IsNullOrEmpty(metaModel.CustomerClass) || metaModel.CustomerClass.Equals("0"))
             {
                 return new RiskLevelModel();
             }

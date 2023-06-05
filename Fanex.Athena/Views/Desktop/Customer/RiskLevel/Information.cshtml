@@ -20,7 +20,7 @@
 @section Content{
     @Html.Hidden("CustomerClass", (string)customerClas)
     @Html.Hidden("CurrencyId", (string)currencyId)
-    @if (string.IsNullOrEmpty(customerClas) || customerClas.Equals("None", StringComparison.OrdinalIgnoreCase))
+    @if (string.IsNullOrEmpty(customerClas) || customerClas.Equals("0"))
     {
         <div class="page-results">
             <p class="no-info-row">No information is available</p>
