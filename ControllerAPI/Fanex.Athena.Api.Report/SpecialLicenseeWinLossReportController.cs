@@ -104,11 +104,6 @@
                 metaModel.DefaultBaseCurrency = userSession.DefaultBaseCurrency;
                 metaModel.IsShowVND = SessionService.LicenseeSession.IsShowVND;
 
-                if (metaModel.ReportBy == ReportByType.Weekly)
-                {
-                    RecalculatParamsForWeekMode(metaModel);
-                }
-
                 var result = await _licenseeWinLossDataAccess.GetData(metaModel, userSession.CurrencyList);
 
                 if (result.DataList.Any())
@@ -160,12 +155,6 @@
             var productList = productAccess.ProductList.Select(x => x.ProductCode);
 
             return productList.Intersect(metaModel.ProductCodeList).Count() == metaModel.ProductCodeList.Count();
-        }
-
-        private static void RecalculatParamsForWeekMode(SpecialLicenseeWinLossMetaModel metaModel)
-        {
-            metaModel.FromDate = DateTimeHelper.GetMinDate(metaModel.FromDate.DayOfPreviousWeek(DayOfWeek.Sunday), DateTime.Now);
-            metaModel.ToDate = DateTimeHelper.GetMinDate(metaModel.ToDate.DayOfNextWeek(DayOfWeek.Saturday), DateTime.Now);
         }
     }
 }
