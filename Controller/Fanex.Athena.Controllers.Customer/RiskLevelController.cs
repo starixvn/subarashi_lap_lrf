@@ -1,27 +1,23 @@
 ﻿namespace Fanex.Athena.Controllers.Customer
 {
     using System;
-    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Fanex.Athena.Excel.Base.Helpers;
     using Fanex.Athena.Excel.Customer.CustomerClass;
+    using Fanex.Athena.Model.Customer.DTO;
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Athena.Resources;
     using Fanex.Athena.Service.Customer.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
     using Fanex.Athena.Web.ResultExtension;
 
     public class RiskLevelController : CultureBaseController
     {
         private readonly ICustomerClassService _service;
-        private readonly IPortalApiService _portalApiService;
 
-        public RiskLevelController(ICustomerClassService service, IPortalApiService portalApiService)
+        public RiskLevelController(ICustomerClassService service)
         {
             _service = service;
-            _portalApiService = portalApiService;
         }
 
         public async Task<ViewResult> Information(string customerClass, int currencyId)
@@ -45,10 +41,15 @@
             var fileName = "RiskLevelInformation_" + DateTime.Now.ToString("MM-dd-yyyy");
             var reportTitle = ViewResources.RiskLevelInformation;
 
-            var excel = new RiskLevelInformationExcel(templatePath, reportTitle, dataSource);
+            var excel = CreateExcel(templatePath, reportTitle, dataSource);
             excel.Export();
 
             return new ExcelResult(excel.Workbook, fileName);
+        }
+
+        protected internal virtual RiskLevelInformationExcel CreateExcel(string templatePath, string reportTitle, RiskLevelModel dataSource)
+        {
+            return new RiskLevelInformationExcel(templatePath, reportTitle, dataSource);
         }
 
         private GetCustomerClassInformationMetaModel BuildMetaModel(string customerClass, int currencyId)
