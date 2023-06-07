@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 5/29/2023 1:11:14 PM
+// Generated at: 6/7/2023 4:19:35 PM
 window._language_zh_TW = {
   AA: "客客",
   AbnormalBet: "非正規註單",
@@ -273,6 +273,7 @@ window._language_zh_TW = {
   DailyStatement: "每日賬目",
   DailyStatementMsg: "Support data up to 4 months only",
   DailyWinningThreshold: "每日贏額警示值",
+  Dangerous: "危險",
   Date: "日期",
   DateRange: "日期範圍",
   DateRangeNote: "數據可從{0:d MMM yyyy}查看",
@@ -378,6 +379,7 @@ window._language_zh_TW = {
   HandicapOverUnderLive: "讓球/大小/滾球",
   Happy5LinkedGames: "快樂5系列遊戲",
   HD: "主和",
+  Healthy: "健康",
   HH: "主主",
   hide: "隱藏",
   HistoricalReportDateRangeNote: "只提供 {0:MM/dd/yyyy} 之後的資料。如果需要更多的歷史數據",
@@ -494,6 +496,7 @@ window._language_zh_TW = {
   Mo: "Mo",
   Mobile: "手機版",
   MobileEuro: "手機歐洲版",
+  Moderate: "中等",
   Monday: "星期一",
   MoneyLine: "勝負盤",
   MoneyPlay: "普通投注",
@@ -509,6 +512,7 @@ window._language_zh_TW = {
   Name: "姓名",
   NetTurnover: "淨交易額",
   NetworkLatency: "由於網絡延遲，無法使用信息，請稍等幾分鐘後再次嘗試。",
+  New: "新玩家",
   NewAsia: "新亞洲版",
   NewGroup: "新組別",
   Next: "下個",
@@ -582,6 +586,7 @@ window._language_zh_TW = {
   PleaseSelectOne: "請選擇一個",
   PreGame: "遊戲開始前",
   Prev: "上個",
+  Problems: "問題",
   Product: "產品",
   ProductBGG: "大遊真人",
   ProductBTC: "比特幣",
@@ -631,6 +636,7 @@ window._language_zh_TW = {
   ResultPending: "賽果待定",
   Results: "賽果",
   RNGCasinoUpdateSettingUnAvailableMsg: "RNG Casino Database is not currently available. Please try again later.",
+  Robot: "機械",
   Running: "進行中",
   Sa: "Sa",
   Saba: "沙巴",
@@ -686,6 +692,7 @@ window._language_zh_TW = {
   Summary: "摘要",
   Sunday: "星期六",
   Suspended: "暫停",
+  Suspicious: "可疑",
   SystemId: "系統帳號",
   SystemParlay: "複式過關",
   SystemParlayDetailNote: "輸贏的進位值僅供參考。因此，所有輸贏相加的總計有可能和小計有差數。",
@@ -737,6 +744,7 @@ window._language_zh_TW = {
   TurnoverTitle: "交易額, {0} --&gt; {1} - {2} {3} ({4})",
   TurnoverTitleNoUser: "交易額，{0} - {1}, {2}",
   Type: "類型",
+  Uncategorized: "未分類",
   UncheckAll: "Uncheck All",
   Under: "下盤",
   UnderMaintenance: "維護中",
@@ -783,7 +791,7 @@ window._language_zh_TW = {
   ViewinSummary: "查看摘要",
   ViewInWithNoParam: "查看",
   ViewNotification: "查看通知",
-  VIP: "VIP會員",
+  VIP: "VIP玩家",
   VIPPlayerOnly: "只顯示VIP玩家",
   VIPPlayerTooltipMsg: "被標示在玩家管理報告中的VIP玩家",
   VirtualCycling: "Virtual Cycling",

@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 5/29/2023 1:11:14 PM
+// Generated at: 6/7/2023 4:19:35 PM
 window._language_zh_CN = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -626,7 +626,7 @@ window._language_zh_CN = {
   Name: "姓名",
   NativeApp: "原生 APP",
   NetTurnover: "净交易额",
-  New: "新會員",
+  New: "新玩家",
   NewGroup: "新组别",
   Next: "下个",
   NextBetInteval: "投注间隔(秒)",
@@ -977,7 +977,7 @@ window._language_zh_CN = {
   ViewinSummary: "查看摘要",
   ViewInWithNoParam: "查看",
   ViewNotification: "查看通知",
-  VIP: "VIP会员",
+  VIP: "VIP玩家",
   VIPPlayer: "VIP玩家",
   VipPlayerManagement: "VIP玩家管理",
   VIPPlayerOnly: "只显示VIP玩家",

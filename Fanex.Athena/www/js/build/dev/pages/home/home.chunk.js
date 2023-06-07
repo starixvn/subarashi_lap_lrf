@@ -3451,7 +3451,6 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             Site.initialize();
             initVariables();
             initEvent();
-            checkMoveBetNotification();
             Notification.add();
             Subsidiary.init();
             activeDefaultMenuItem();
@@ -3578,45 +3577,6 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             $('#page-title').text(menuItemName);
 
             document.title = 'LAP' + ' - ' + $('.active > .menu-title').text() + ' - ' + menuItemName;
-        }
-
-        function checkMoveBetNotification() {
-            const $marquee = $('#notification-marquee');
-
-            if ($marquee.length === 0) {
-                return;
-            }
-
-            let previousText = '';
-            const $parent = $marquee.parent();
-            const apiUrl = Site.resolveClientUrl('api/CommonApi/GetMoveBetNotification');
-            function processNotification() {
-                $.get(apiUrl, function (message) {
-                    if (message === previousText) {
-                        return;
-                    }
-
-                    previousText = message;
-                    if (message) {
-                        if ($parent.is(':hidden')) {
-                            $parent.slideDown('fast');
-                            $('#mainFrame').css('height', 'calc(100% - 30px)');
-                        }
-
-                        if ('marquee' in $marquee) {
-                            $marquee.text(message);
-                            $marquee.marquee({ speed: 30 });
-                        }
-                    } else {
-                        $marquee.marquee('stop');
-                        $parent.slideUp('fast');
-                        $('#mainFrame').css('height', '100%');
-                    }
-                });
-            }
-
-            processNotification();
-            setInterval(processNotification, 60000);
         }
 
         return {
