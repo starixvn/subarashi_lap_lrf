@@ -33,12 +33,6 @@
         </li>
     </ul>
     <main class="main">
-        @if (ViewBag.IsEnabledMoveBetNotification)
-        {
-            <div class="notification-marquee-container" style="display: none">
-                <div id="notification-marquee" style="color: #C02603"></div>
-            </div>
-        }
         <iframe id="mainFrame" name="main" data-src="@Url.Content("~/" + ViewBag.DefaultReportUrl)" frameborder="0" scrolling="auto"></iframe>
     </main>
     <footer>

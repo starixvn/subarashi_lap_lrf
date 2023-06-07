@@ -27,8 +27,6 @@
 
         private static readonly int MaximumMonthDistance = NotificationMetaModel.MaximumMonthRange - 1;
 
-        private IMoveBetService _moveBetService;
-
         private INotificationService _notificationService;
 
         private IAppSettings _appSettings;
@@ -42,33 +40,18 @@
         [SetUp]
         public void SetUp()
         {
-            _moveBetService = Substitute.For<IMoveBetService>();
             _notificationService = Substitute.For<INotificationService>();
             _appSettings = Substitute.For<IAppSettings>();
             _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
             _apiController = GetControllerWithActionArguments();
 
-            _appSettings.IsEnabledMoveBetNotification.Returns(true);
             _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(false);
         }
 
         [TearDown]
         public void TearDown()
         {
-            _moveBetService = null;
             _notificationService = null;
-        }
-
-        [Test]
-        public void Index_WhenCall_ServiceIsCalledWithCorrectParameter()
-        {
-            // Arrange
-
-            // Action
-            _apiController.Index();
-
-            // Assert
-            _moveBetService.Received(1).GetMoveBetNotificationAsync("zh-CN");
         }
 
         [Test]
@@ -228,7 +211,7 @@
                 }
             };
 
-            return new NotificationApiController(_moveBetService, _notificationService, _appSettings, _licenseeSettingService)
+            return new NotificationApiController(_notificationService, _appSettings, _licenseeSettingService)
             {
                 ActionContext = mockActionContext
             };

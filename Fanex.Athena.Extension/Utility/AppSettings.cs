@@ -87,11 +87,6 @@
             get { return GetValue(nameof(ResultAmendmentAttachmentApiUrl)); }
         }
 
-        public bool IsEnabledMoveBetNotification
-        {
-            get { return int.Parse(GetValue("IsEnabledMoveBetNotification")) != 0; }
-        }
-
         public string Environment
         {
             get { return GetValue("Environment"); }
