@@ -11,3 +11,9 @@ export const SET_SELECTED_MATCH = "SET_SELECTED_MATCH";
 export const SET_MATCH_LIST = "SET_MATCH_LIST";
 
 export const SET_IP ="SET_IP";
+
+export const SET_PLATFORM ="SET_PLATFORM";
+
+export const SET_OODS_GROUP = "SET_OODS_GROUP";
+
+export const SET_CUSTOMER_CLASS ="SET_CUSTOMER_CLASS";

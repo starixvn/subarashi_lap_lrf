@@ -10,11 +10,16 @@
     using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Service.Core.Users.Interfaces;
+    using Fanex.Athena.Service.Customer.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.BetList.ViewModel;
     using Model.Core.DTO.Common;
     using Model.Core.MetaModel.Product;
     using Resources;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using Web.ActionFilter;
 
     [FunctionAuthorization(PermissionKeys.BettingTicketCenter)]
@@ -29,6 +34,8 @@
 
         private readonly ISubsidiaryService _subsidiaryService;
 
+        private readonly ICustomerClassService _customerClassService;
+
         private bool IsOneworksMaster =>
            SessionServiceInstance.UserSession.UserLevel == UserLevelType.Oneworks
            && SessionServiceInstance.UserSession.SubsidiaryViewType == (byte)SubsidiaryViewType.NormalManagement;
@@ -37,12 +44,14 @@
             IProductService productService,
             IBalanceUpDataAccess balanceUpDataAccess,
             IAuthorizationService authService,
-            ISubsidiaryService subsidiaryService)
+            ISubsidiaryService subsidiaryService,
+            ICustomerClassService customerClassService)
         {
             _productService = productService;
             _balanceUpDataAccess = balanceUpDataAccess;
             _authService = authService;
             _subsidiaryService = subsidiaryService;
+            _customerClassService = customerClassService;
         }
 
         [FunctionAuthorization(
@@ -50,17 +59,17 @@
             PermissionKeys.BtcRefNo,
             PermissionKeys.BtcRunning,
             PermissionKeys.BtcAdvancedSearch)]
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             var tabList = GetEnableTabList();
 
-            if (tabList.Any(x => PermissionKeys.BtcSingleCustomer == x))
-            {
-                return SingleCustomer();
-            }
-            else if (tabList.Any(x => PermissionKeys.BtcRefNo == x))
+            if (tabList.Any(x => PermissionKeys.BtcRefNo == x))
             {
                 return RefNo();
+            }
+            else if (tabList.Any(x => PermissionKeys.BtcSingleCustomer == x))
+            {
+                return SingleCustomer();
             }
             else if (tabList.Any(x => PermissionKeys.BtcRunning == x))
             {
@@ -68,7 +77,7 @@
             }
             else if (tabList.Any(x => PermissionKeys.BtcAdvancedSearch == x))
             {
-                return AdvancedSearch();
+                return await AdvancedSearch();
             }
             else
             {
@@ -77,7 +86,7 @@
         }
 
         [FunctionAuthorization(PermissionKeys.BtcAdvancedSearch)]
-        public ActionResult AdvancedSearch()
+        public async Task<ActionResult> AdvancedSearch()
         {
             var tabList = GetEnableTabList();
             var licenseeSession = SessionServiceInstance.LicenseeSession;
@@ -97,7 +106,10 @@
                 IsOneworksMaster = IsOneworksMaster,
                 SubsidiaryList = subsidiaryList,
                 HasExchange = tabList.Any() && HasExchange(),
-                TabList = tabList
+                TabList = tabList,
+                RiskLevels = await _customerClassService.GetAllRiskLevel(),
+                PlatformList = GetPlatformList(),
+                OddsGroup = licenseeSession.OfferedOddsGroupsList,
             };
 
             ViewBag.IsAllowTxIDColumn = licenseeSession.IsEnableSingleWallet;
@@ -290,6 +302,29 @@
                 new CheckedItem { ID = StatusTypes.Reject, Name = ViewResources.Reject },
                 new CheckedItem { ID = StatusTypes.Refund, Name = ViewResources.Refund },
                 new CheckedItem { ID = StatusTypes.DelayedPayout, Name = ViewResources.DelayedPayout }
+            };
+        }
+
+        private static IDictionary<int, string> GetPlatformList()
+        {
+            return new Dictionary<int, string>
+            {
+                { PlatformType.DesktopNewAsia, ViewResources.DesktopNewAsia },
+                { PlatformType.DesktopChina, ViewResources.DesktopChina },
+                { PlatformType.DesktopOthers, ViewResources.DesktopOthers },
+                { PlatformType.MobileStandard, ViewResources.MobileStandard },
+                { PlatformType.MobileEuro, ViewResources.MobileEuro },
+                { PlatformType.MobileCompact, ViewResources.MobileCompact },
+                { PlatformType.MobileOthers, ViewResources.MobileOthers },
+                { PlatformType.ESportsDesktop, ViewResources.ESportsDesktop },
+                { PlatformType.ESportsMobile, ViewResources.ESportsMobile },
+                { PlatformType.ESportsApp, ViewResources.ESportsApp },
+                { PlatformType.MobileApp, ViewResources.MobileApp },
+                { PlatformType.NativeApp, ViewResources.NativeApp },
+                { PlatformType.Tablet, ViewResources.Tablet },
+                { PlatformType.DeepLink, ViewResources.DeepLink },
+                { PlatformType.WAP, ViewResources.Wap },
+                { PlatformType.BetfromOthers, ViewResources.BetfromOthers }
             };
         }
 

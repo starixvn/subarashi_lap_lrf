@@ -19,12 +19,12 @@ import { SubsidiaryViewType, TreeViewOption } from '../../../constants/report';
 import { TreeViewSelect } from '@legion-lib/react-multiselect'
 
 export const FormFilter = props => {
-    const [isConvertAllToBaseCurrency, setConvertAllToBaseCurrency] = useState(true);
+    //const [isConvertAllToBaseCurrency, setConvertAllToBaseCurrency] = useState(true);
     const [isExcludeTest, setExcludeTest] = useState(true);
     const [username, setUsername] = useState('');
     const [baseCurrencyList, setBaseCurrencyList] = useState(AppData.baseCurrencyList);
     const [reportBy, setReportBy] = useState(1);
-    const {} = props
+    const {isConvertAllToBaseCurrency, setConvertAllToBaseCurrency} = props
 
     useEffect(() => {
         onChangeProduct(props.selectedProduct);
@@ -183,7 +183,7 @@ export const FormFilter = props => {
         }
 
         toast.dismiss();
-        const title = Service.getTitle(params.FromDate, params.ToDate, params.CurrencyName, params.BaseCurrencyName, params.ProductCodeList, params.Username);
+        const title = Service.getTitle(params.FromDate, params.ToDate, params.CurrencyName, params.BaseCurrencyName, params.ProductCodeList, params.Username, isConvertAllToBaseCurrency);
         props.setReportTitle(title);
         props.setRequestParam(params);
         props.toggleLoader(true);
@@ -399,10 +399,11 @@ export const FormFilter = props => {
 
 function mapStateToProps(state) {
     const { requestParam, dateRange, selectedProduct, promotionTypeList, selectedPromotionTypes, selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, userGuideContent,
-        subsidiarySearch, selectedSubsidiary } = state;
+        subsidiarySearch, selectedSubsidiary, isConvertAllToBaseCurrency } = state;
 
     return Object.assign({}, {
-        requestParam, dateRange, selectedProduct, promotionTypeList, selectedPromotionTypes, selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, userGuideContent, subsidiarySearch, selectedSubsidiary
+        requestParam, dateRange, selectedProduct, promotionTypeList, selectedPromotionTypes, selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, userGuideContent, 
+        subsidiarySearch, selectedSubsidiary, isConvertAllToBaseCurrency
     });
 }
 

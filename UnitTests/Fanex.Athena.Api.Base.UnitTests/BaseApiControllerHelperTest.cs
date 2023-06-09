@@ -5,6 +5,7 @@
     using Extension.Utility;
 
     using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Service.StatelessCore;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     using Model.Core.DTO.Common;
@@ -41,6 +42,8 @@
 
         protected ILanguageService LangService { get; private set; }
 
+        protected ISportService SportService { get; private set; }
+
         protected IDictionary<int, string> UserCurrencyList =>
             SessionService.UserSession.CurrencyList;
 
@@ -55,6 +58,7 @@
                 CurrencyAgentList = new Dictionary<int, int[]>(),
             });
             ProductService = Substitute.For<IProductService>();
+            SportService = Substitute.For<ISportService>();
             SubsidiaryService = Substitute.For<ISubsidiaryService>();
             SubsidiaryService.IsIgnoredSubsidiarySearch(Arg.Any<bool>(), Arg.Any<string>(), Arg.Any<UserAuthInfo>())
                 .Returns(true);
@@ -74,6 +78,7 @@
             SubsidiaryService = null;
             AppSetting = null;
             LangService = null;
+            SportService = null;
         }
 
         protected void MockSessionData()

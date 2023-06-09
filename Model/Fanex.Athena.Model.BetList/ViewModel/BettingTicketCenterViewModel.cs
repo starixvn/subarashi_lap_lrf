@@ -1,10 +1,10 @@
 ﻿namespace Fanex.Athena.Model.BetList.ViewModel
 {
-    using System;
-    using System.Collections.Generic;
     using Core.DTO.Common;
     using Core.MetaModel.Product;
-    using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Model.Customer.DTO;
+    using System;
+    using System.Collections.Generic;
 
     [Serializable]
     public class BettingTicketCenterViewModel
@@ -48,5 +48,9 @@
         public byte SubsidiaryViewType { get; set; }
 
         public IEnumerable<CheckedItem> SubsidiaryList { get; set; }
+
+        public IEnumerable<RiskLevel> RiskLevels { get; set; }
+
+        public IEnumerable<string> OddsGroup { get; set; }
     }
 }

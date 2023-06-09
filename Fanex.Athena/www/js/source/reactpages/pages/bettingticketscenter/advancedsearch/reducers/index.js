@@ -18,7 +18,10 @@ import * as convertAllReducer from '@jsroot/reducers/convertAllReducer'
 import * as userGuideReducer from '@jsroot/reducers/userGuideReducer'
 import * as commonReducer from '../../common/components/reducer';
 import * as ipReducer from './ipReducer';
-import * as subsidiaryReducer from '@jsroot/reducers/subsidiaryReducer'
+import * as subsidiaryReducer from '@jsroot/reducers/subsidiaryReducer';
+import * as platform from './platformReducer';
+import * as oddsGroups from './oddsGroupsReducer';
+import * as customerClass from './customerClassReducer';
 
 export default combineReducers(Object.assign(
     gridDataReducer,
@@ -40,5 +43,8 @@ export default combineReducers(Object.assign(
     userGuideReducer,
     commonReducer,
     ipReducer,
-    subsidiaryReducer
+    subsidiaryReducer,
+    platform,
+    oddsGroups,
+    customerClass
 ));

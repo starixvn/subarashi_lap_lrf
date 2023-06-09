@@ -31,7 +31,8 @@ export const setMatchList = (list) => {
 }
 
 export function getMatchList(sportId, leagueId, date) {
-    const cacheKey = MATCH_CACHE_KEY + sportId + "_" + leagueId + "_" + date
+    const cacheKey = MATCH_CACHE_KEY + sportId + "_" + leagueId + "_" + date;
+
     return (dispatch) => {
         var cacheData = Cache.get(cacheKey);
         if(cacheData)

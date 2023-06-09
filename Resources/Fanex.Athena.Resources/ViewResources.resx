@@ -3499,4 +3499,8 @@
   <data name="N_A" xml:space="preserve">
     <value>N/A</value>
   </data>
+  <data name="Cricket" xml:space="preserve">
+    <value>Cricket</value>
+    <comment>#183841</comment>
+  </data>
 </root>

@@ -49,11 +49,11 @@ export const PageLayout = (props) => {
                 <Tabs>
                     {
                         activedTabList.map(item => 
-                            <Tab isActive={selectedTabIndex == item.displayOrder} label={item.label} url={item.url} />)
+                            <Tab key={item.url} isActive={selectedTabIndex == item.displayOrder} label={item.label} url={item.url} />)
                     }
                     {
                         hasExchange && 
-                        <Tab isActive={selectedTabIndex == 4} label={LangHelper.getSingleResource("Exchange")}
+                        <Tab key={Site.resolveClientUrl("ExchangeVoided")} isActive={selectedTabIndex == 4} label={LangHelper.getSingleResource("Exchange")}
                             url={Site.resolveClientUrl("ExchangeVoided")}>
                         </Tab>
                     }

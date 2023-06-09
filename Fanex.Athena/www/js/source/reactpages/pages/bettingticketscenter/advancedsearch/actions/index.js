@@ -17,6 +17,9 @@ import * as convertAllAction from '@jsroot/actions/convertAllAction'
 import * as userGuideAction from '@jsroot/actions/userGuideAction'
 import * as ipAction from './ipAction.js'
 import * as subsidiaryAction from '@jsroot/actions/subsidiaryAction'
+import * as platformAction from './platformAction'
+import * as oddsGroupsAction from './oddsGroupsAction'
+import * as customerClassAction from './customerClassAction'
 
 export const ActionCreators = Object.assign({},
     gridDataAction,
@@ -37,5 +40,8 @@ export const ActionCreators = Object.assign({},
     convertAllAction,
     userGuideAction,
     ipAction,
-    subsidiaryAction
+    subsidiaryAction,
+    platformAction,
+    oddsGroupsAction,
+    customerClassAction
 );

@@ -2411,6 +2411,10 @@
   <data name="ProductYB" xml:space="preserve">
     <value>億博</value>
   </data>
+  <data name="Cricket" xml:space="preserve">
+    <value>板球</value>
+    <comment>#183841</comment>
+  </data>
   <data name="PlayerComm" xml:space="preserve">
     <value>玩家佣金</value>
   </data>

@@ -4,7 +4,7 @@ import Report from '@jsroot/lib/report'
 import { ViewInText, ViewInLevel } from './constants';
 
 export default class Service {
-    static getTitle(fromDate, toDate, viewInLevel ,currency, baseCurrency, userName) {
+    static getTitle(fromDate, toDate, viewInLevel ,currency, baseCurrency, userName, isConvertAllToBaseCurrency) {
         const dateRangeText = fromDate && toDate 
             ? `, ${Site.convertDateToString(fromDate)} → ${Site.convertDateToString(toDate)}` 
             : '';
@@ -13,11 +13,12 @@ export default class Service {
         let result = LangHelper.getSingleResource("AbnormalBet") + ", " + viewInText + dateRangeText;
 
         if (viewInLevel === ViewInLevel.DETAIL) {
-            const currencyText = currency ? `, ${LangHelper.getSingleResource("Currency")}: ${currency}` : "";
-            const baseCurrencyText = baseCurrency ? `, ${LangHelper.getSingleResource("BaseCurrency")}: ${baseCurrency}` : "";
-            const userText = userName  ? `, ${LangHelper.getSingleResource("Username")}: ${userName}` : "";
+            var currencyName = baseCurrency === '' ? currency : baseCurrency;
+            const baseCurrencyText = isConvertAllToBaseCurrency ? ', ' + LangHelper.getSingleResource("BaseCurrency") + ": " + currencyName:'';
+            const currencyText = LangHelper.getSingleResource("Currency") + ": " + currency + baseCurrencyText 
+            const userText = !userName ? "" : ', ' + LangHelper.getSingleResource("Username") + ": " + userName; 
 
-            result = result + currencyText + baseCurrencyText + userText;
+            result = result + ", " + currencyText + userText;
         }
 
         return result;

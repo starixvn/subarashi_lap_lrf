@@ -3,17 +3,20 @@ import Site from '@jsroot/lib/site'
 import Report from '@jsroot/lib/report'
 
 export default class Service {
-    static getTitle(fromDate, toDate, currency, baseCurrency, ProductCodeList, username) {
+    static getTitle(fromDate, toDate, currency, baseCurrency, ProductCodeList, username, isConvertAllToBaseCurrency) {
         const dateRangeText = fromDate && toDate 
             ? `, ${Site.convertDateToString(fromDate)} → ${Site.convertDateToString(toDate)}` 
             : '';
 
         var currencyName = baseCurrency === '' ? currency : baseCurrency;
-        const baseCurrencyText = ` - ${LangHelper.getSingleResource("Viewin").replace("{0}", currencyName)}`;
+        const baseCurrencyText = isConvertAllToBaseCurrency ? ', ' + LangHelper.getSingleResource("BaseCurrency") + ": " + currencyName:'';
         const productText = ` (${ProductCodeList.replaceAll(",", ", ")})`;
-        var userNameText = username === '' ? LangHelper.getSingleResource('LicenseeW_L') : `${username},`;  
+        var userNameText = username === '' ? "" : ', ' + LangHelper.getSingleResource("Username") + ": " + username;  
 
-        return LangHelper.getSingleResource("ExtraPayout") + dateRangeText + baseCurrencyText + ', ' + userNameText + productText;
+        return LangHelper.getSingleResource("ExtraPayout") + dateRangeText + ", " 
+        + LangHelper.getSingleResource("Currency") + ": " + currency + baseCurrencyText + ', ' 
+        + LangHelper.getSingleResource("LicenseeW_L") + productText
+        + userNameText;
     }
 
     static getDetailTitle(fromDate, toDate, currency, baseCurrency, nickname, username) {

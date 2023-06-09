@@ -17,12 +17,14 @@ import DataService from '@jsroot/lib/DataService.js'
 import UserGuide from '@jsroot/components/UserGuide'
 
 export const FormFilter = props => {
-    const [isConvertAllToBaseCurrency, setConvertAllToBaseCurrency] = useState(true);
+    //const [isConvertAllToBaseCurrency, setConvertAllToBaseCurrency] = useState(true);
     const [leagueName, setLeagueName] = useState('');
     const [refNo, setRefNo] = useState("");
     const [ip, setIp] = useState('');
     const [viewIn, setViewIn] = useState(2);
     const [baseCurrencyList, setBaseCurrencyList] = useState(AppData.baseCurrencyList);
+
+    const {isConvertAllToBaseCurrency, setConvertAllToBaseCurrency } = props;
 
     useEffect(() => {
     }, []);
@@ -179,7 +181,7 @@ export const FormFilter = props => {
         }
 
         toast.dismiss();
-        const title = Service.getTitle(params.FromDate, params.ToDate, params.ViewIn, params.CurrencyName, params.BaseCurrencyName, params.UserName);
+        const title = Service.getTitle(params.FromDate, params.ToDate, params.ViewIn, params.CurrencyName, params.BaseCurrencyName, params.UserName, isConvertAllToBaseCurrency);
         props.setReportTitle(title);
         props.setRequestParam(params);
         props.toggleLoader(true);
@@ -397,10 +399,13 @@ export const FormFilter = props => {
 
 
 function mapStateToProps(state) {
-    const { requestParam, dateRange, selectedProduct, sportList, selectedSport, selectedBettype, bettypeList, selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, userGuideContent, username } = state;
+    const { requestParam, dateRange, selectedProduct, sportList, selectedSport, selectedBettype, bettypeList, selectedCurrency, baseCurrencyList, 
+        selectedBaseCurrency, selectedStatus, userGuideContent, username, isConvertAllToBaseCurrency 
+    } = state;
 
     return Object.assign({}, {
-        requestParam, dateRange, selectedProduct, sportList, selectedSport, selectedBettype, bettypeList, selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, userGuideContent, username
+        requestParam, dateRange, selectedProduct, sportList, selectedSport, selectedBettype, bettypeList, selectedCurrency, baseCurrencyList, 
+        selectedBaseCurrency, selectedStatus, userGuideContent, username, isConvertAllToBaseCurrency
     });
 }
 

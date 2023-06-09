@@ -64,7 +64,7 @@ export const DataGrid = (props) => {
             DrillDownLevel: ReportLevel.CUSTOMER
         }
 
-        const title = Service.getTitle(drilldownFromDateValue, drilldownToDateValue, currencyName, newRequestParam.BaseCurrencyName, newRequestParam.ProductCodeList, newRequestParam.Username);
+        const title = Service.getTitle(drilldownFromDateValue, drilldownToDateValue, currencyName, newRequestParam.BaseCurrencyName, newRequestParam.ProductCodeList, newRequestParam.Username, props.isConvertAllToBaseCurrency);
 
         props.setReportTitle(title);
         props.setRequestParam(newRequestParam);
@@ -160,7 +160,7 @@ export const DataGrid = (props) => {
             DrillDownLevel : level
         };
 
-        const title = Service.getTitle(newRequestParam.FromDate, newRequestParam.ToDate, newRequestParam.CurrencyName, newRequestParam.BaseCurrencyName, newRequestParam.ProductCodeList, newRequestParam.Username);
+        const title = Service.getTitle(newRequestParam.FromDate, newRequestParam.ToDate, newRequestParam.CurrencyName, newRequestParam.BaseCurrencyName, newRequestParam.ProductCodeList, newRequestParam.Username, props.isConvertAllToBaseCurrency);
         props.setReportTitle(title);
         props.setRequestParam(newRequestParam);     
         props.getReportData(ApiUrl.REPORT_DATA_URL, newRequestParam);
@@ -228,8 +228,8 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({ setRequestParam, toggleLoader, getReportData, setReportTitle, setDetailParams }, dispatch);
 }
 function mapStateToProps(state) {
-    const { requestParam, reportData, reportTitle, reloadReport, detailParams, selectedCurrency } = state;
-    return Object.assign({}, { requestParam, reportData, reportTitle, reloadReport, detailParams, selectedCurrency });
-};
+    const { requestParam, reportData, reportTitle, reloadReport, detailParams, selectedCurrency, isConvertAllToBaseCurrency } = state;
+    return Object.assign({}, { requestParam, reportData, reportTitle, reloadReport, detailParams, selectedCurrency, isConvertAllToBaseCurrency });
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(DataGrid);
