@@ -86,6 +86,8 @@ namespace Fanex.Athena.Model.Core.DataDomain
 
         public const int JIG = 75;
 
+        public const int YB = 76;
+
         public const int Parlay = 999;
     }
 }

@@ -6613,6 +6613,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to YeeBet.
+        /// </summary>
+        public static string ProductYB {
+            get {
+                return ResourceManager.GetString("ProductYB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Promotion.
         /// </summary>
         public static string Promotion {

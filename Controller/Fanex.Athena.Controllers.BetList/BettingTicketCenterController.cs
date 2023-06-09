@@ -222,7 +222,8 @@
                 Product.APM,
                 Product.FGGL,
                 Product.MXG,
-                Product.JIG
+                Product.JIG,
+                Product.YB
             };
 
             return string.Join(", ", GetProductRequireNote(productsRequireUseName));

@@ -1,4 +1,4 @@
-﻿// Generated at: 6/21/2023 3:09:21 PM
+﻿// Generated at: 6/22/2023 9:29:39 AM
 var _language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -669,6 +669,7 @@ ProductVRG:"虚拟娱乐城",
 ProductVS:"虚拟运动",
 ProductVS2:"虚拟运动2",
 ProductWM:"完美真人",
+ProductYB:"亿博",
 Promotion:"促销活动",
 PromotionDetails:"活动详情",
 PromotionPrize:"活动奖金",

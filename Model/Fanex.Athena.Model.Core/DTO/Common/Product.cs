@@ -98,6 +98,8 @@ namespace Fanex.Athena.Model.Core.DTO.Common
 
         public const string JIG = "JIG";
 
+        public const string YB = "YB";
+
         #endregion Field
 
         #region Constructor

@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 6/21/2023 3:09:36 PM
+// Generated at: 6/22/2023 9:29:52 AM
 window._language_zh_CN = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -758,6 +758,7 @@ window._language_zh_CN = {
   ProductVS: "虚拟运动",
   ProductVS2: "虚拟运动2",
   ProductWM: "完美真人",
+  ProductYB: "亿博",
   Promotion: "促销活动",
   PromotionDetails: "活动详情",
   PromotionPrize: "活动奖金",

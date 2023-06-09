@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 6/21/2023 3:09:36 PM
+﻿// Generated at: 6/22/2023 9:29:52 AM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -817,6 +817,7 @@ ProductVS:"Virtual Sports",
 ProductVS2:"Virtual Sports 2",
 ProductVS3:"Virtual Sports 3",
 ProductWM:"WM",
+ProductYB:"YeeBet",
 Promotion:"Promotion",
 PromotionDetails:"Promotion Details",
 PromotionPrize:"Promotion Prize",
