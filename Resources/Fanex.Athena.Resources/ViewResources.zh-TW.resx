@@ -2373,12 +2373,36 @@
     <value>投注量</value>
   </data>
   <data name="VIP" xml:space="preserve">
-    <value>VIP會員</value>
+    <value>VIP玩家</value>
   </data>
   <data name="Week2" xml:space="preserve">
     <value>第{0}週</value>
   </data>
   <data name="Weekly" xml:space="preserve">
     <value>每週</value>
+  </data>
+  <data name="Dangerous" xml:space="preserve">
+    <value>危險</value>
+  </data>
+  <data name="Healthy" xml:space="preserve">
+    <value>健康</value>
+  </data>
+  <data name="Moderate" xml:space="preserve">
+    <value>中等</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>新玩家</value>
+  </data>
+  <data name="Problems" xml:space="preserve">
+    <value>問題</value>
+  </data>
+  <data name="Robot" xml:space="preserve">
+    <value>機械</value>
+  </data>
+  <data name="Suspicious" xml:space="preserve">
+    <value>可疑</value>
+  </data>
+  <data name="Uncategorized" xml:space="preserve">
+    <value>未分類</value>
   </data>
 </root>

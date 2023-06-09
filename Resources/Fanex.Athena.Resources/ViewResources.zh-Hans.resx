@@ -2394,7 +2394,7 @@
     <value>中等</value>
   </data>
   <data name="New" xml:space="preserve">
-    <value> 新會員</value>
+    <value>新玩家</value>
   </data>
   <data name="Problems" xml:space="preserve">
     <value>問題</value>
@@ -2405,23 +2405,17 @@
   <data name="Robot" xml:space="preserve">
     <value>機械</value>
   </data>
-  <data name="Robot1" xml:space="preserve">
-    <value>機械</value>
-  </data>
   <data name="Suspicious" xml:space="preserve">
     <value>可疑</value>
   </data>
   <data name="Uncategorized" xml:space="preserve">
     <value>未分类</value>
   </data>
-  <data name="Uncategorized1" xml:space="preserve">
-    <value>未分类</value>
-  </data>
   <data name="RiskLevelInformation" xml:space="preserve">
     <value>风险等级资讯</value>
   </data>
   <data name="VIP" xml:space="preserve">
-    <value>VIP会员</value>
+    <value>VIP玩家</value>
   </data>
   <data name="Week2" xml:space="preserve">
     <value>第{0}周</value>
