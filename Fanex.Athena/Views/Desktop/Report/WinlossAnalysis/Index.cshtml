@@ -30,11 +30,14 @@
     var vipOnlyList = SystemConstants.VipOnyList
         .Select(c => new { value = c.Key, label = c.Value }).ToList();
 
-    var selectedCustomerClass = string.Join(",", Model.CustomerClass);
-    var customerClassList = Model.CustomerClass.Select(c => new
+    var selectedCustomerClass = string.Join(",", Model.RiskLevels.Select(r => string.Join(",", r.CustomerClassList)));
+    var selectedRiskLevel = string.Join(",", Model.RiskLevels.Select(r => r.Id));
+    var riskLevelList = Model.RiskLevels.Select(r => new
     {
-        id = c,
-        value = c == "0" ? ViewResources.None : c,
+        id = r.Id,
+        value = r.Name,
+        valueDecoration = "risk-level " + r.Key,
+        customerClassList = string.Join(",", r.CustomerClassList),
         status = true
     });
 
@@ -95,7 +98,7 @@
     productList: @Html.Raw(Model.ProductOptionList.Select(x => new { id = x.Code, value = x.Name, status = true }).ToJson()),
     currencyList: @Html.Raw(Model.CurrencyList.Select(x => new { id = x.Key, value = x.Value, status = true }).ToJson()),
     platformList: @Html.Raw(Model.PlatformList.Select(x => new { id = x.Key, value = x.Value, status = true }).ToJson()),
-    customerClassList: @Html.Raw(customerClassList.ToJson()),
+    riskLevelList: @Html.Raw(riskLevelList.ToJson()),
     oddsGroupList: @Html.Raw(oddsGroupList.ToJson()),
     dateConstraint: { minDate: '@Model.MinDate.ToString("MM/dd/yyyy")', maxDate: '@Model.MaxDate.ToString("MM/dd/yyyy")', limitedMonthRange: 3 },
     licenseeName: '@session.LicenseeSession.LicenseeName',
