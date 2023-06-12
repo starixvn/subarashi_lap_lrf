@@ -150,6 +150,15 @@ namespace Fanex.Athena.Controllers.Report
                 });
             }
 
+            if (productCodeList.IsPresent(_ => _ == Product.PGS))
+            {
+                promotionTypeList.AddRange(new List<CheckedItem>
+                {
+                    new CheckedItem { ID = ExtraPayoutMapType.PGSoftPromotion,
+                        Name = $"{ViewResources.ResourceManager.GetString(productResource + Product.PGS)} - {_cacheRefAdapter.GetBettype((int)BetType.PGSoftPromotion)}", Checked = true }
+                });
+            }
+
             return promotionTypeList;
         }
 

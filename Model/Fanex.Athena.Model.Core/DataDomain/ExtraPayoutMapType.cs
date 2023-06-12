@@ -47,5 +47,7 @@ namespace Fanex.Athena.Model.Core.DataDomain
         public const int AllbetPromotion = 2101;
 
         public const int TIPStreamerTips = 7401;
+
+        public const int PGSoftPromotion = 5501;
     }
 }

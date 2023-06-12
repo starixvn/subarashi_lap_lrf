@@ -23,7 +23,7 @@
 		<Function Name="DailyBets" Product="SB,NG,CS,LC"></Function>
 		<Function Name="GrossGamingRevenue" Product="SB,NG,CS,LC"></Function>
 		<Function Name="LeagueWinLoss" Product="SB,BA"></Function>
-		<Function Name="ExtraPayout" Product="PP,SPR,SAG,SBC,VGA,SXG,CC,SG,AB"></Function>
+		<Function Name="ExtraPayout" Product="PP,SPR,SAG,SBC,VGA,SXG,CC,SG,AB,PGS"></Function>
 	</Group>
 
 	<Group Name="BetList">
