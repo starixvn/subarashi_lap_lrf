@@ -8,6 +8,7 @@ import LangHelper from '@jsroot/lib/langHelper'
 import Site from '@jsroot/lib/site'
 import AppData from '@jsroot/lib/AppData'
 import Service from '../../common/Service.js'
+import StringHelper from '@jsroot/lib/stringHelper.js';
 import { ALL_SELECTED_TEXT, DisplayGroupBreakDownMapping, SearchMode, SortBy, SortOrder } from '../../common/constants.js'
 import {v4 as uuidv4} from 'uuid';
 
@@ -31,7 +32,7 @@ export const GroupByFilter = (props) => {
         const { FromDate, ToDate, ProductCodes, SearchUserName, BaseCurrency, CurrencyIdList } = params;
         const {  currencyList } = AppData;
         const selectedCurrency = Service.getCurrencyCodes(CurrencyIdList, currencyList);
-        const seletedCurrencyText = selectedCurrency == ALL_SELECTED_TEXT ? LangHelper.getSingleResource("All") : selectedCurrency;
+        const seletedCurrencyText = selectedCurrency == ALL_SELECTED_TEXT ? LangHelper.getSingleResource("All") : StringHelper.addSpaceAfterComma(selectedCurrency);
         const dateRangeText = `, ${Site.convertDateToString(FromDate)} → ${Site.convertDateToString(ToDate)}`;
         const currencyText =  `, ${LangHelper.getSingleResource("Currency")}: ${seletedCurrencyText}, ${LangHelper.getSingleResource("BaseCurrency")}: ${BaseCurrency}`;
         const productText = `, ${LangHelper.getSingleResource("LicenseeW_L")} (${ProductCodes})`;
@@ -71,6 +72,9 @@ export const GroupByFilter = (props) => {
             SubsidiaryList = props.selectedSubsidiary;
         }
 
+        const selectedCurrency = Service.getCurrencyCodes(props.selectedCurrency, currencyList);
+        const seletedCurrencyText = selectedCurrency == ALL_SELECTED_TEXT ? LangHelper.getSingleResource("All") : StringHelper.addSpaceAfterComma(selectedCurrency);
+
         return {
             PageSize: PageSize,
             PageIndex: 1,
@@ -80,7 +84,7 @@ export const GroupByFilter = (props) => {
             SearchUserName: props.username,
             SearchMode: props.searchMode,
             CurrencyIdList: props.selectedCurrency,
-            CurrencyCodes: Service.getCurrencyCodes(props.selectedCurrency, currencyList),
+            CurrencyCodes: seletedCurrencyText,
             BaseCurrency: props.selectedBaseCurrency,
             StatusIds: Service.getNormalizedSelectedParamValueForMultiSelectFilter(props.selectedStatus, statusList),
             SportIds: Service.getNormalizedSelectedParamValueForTreeListFilter(props.selectedSport, props.sportList),

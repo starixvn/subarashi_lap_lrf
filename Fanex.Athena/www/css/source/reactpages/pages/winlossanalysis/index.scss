@@ -78,6 +78,10 @@
     }
     tr.group-row td.drill-down-cell{
         color: #1C5FC3;
+        .main-text{
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
     }
 }
  .group-product-row{
