@@ -18,9 +18,9 @@
     var currencyId = @ViewBag.CurrencyId;
 }
 @section Content{
-    @Html.Hidden("CustomerClass", (string)customerClas)
+    @Html.Hidden("CustomerClass", (int)customerClas)
     @Html.Hidden("CurrencyId", (string)currencyId)
-    @if (string.IsNullOrEmpty(customerClas) || customerClas.Equals("0"))
+    @if (customerClas == 0)
     {
         <div class="page-results">
             <p class="no-info-row">No information is available</p>

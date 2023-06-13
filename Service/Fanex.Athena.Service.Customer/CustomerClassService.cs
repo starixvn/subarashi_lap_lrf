@@ -43,12 +43,12 @@
 
         public async Task<RiskLevelModel> GetRiskLevelPolicyByCustomerClass(GetCustomerClassInformationMetaModel metaModel)
         {
-            if (string.IsNullOrEmpty(metaModel.CustomerClass) || metaModel.CustomerClass.Equals("0"))
+            if (metaModel.CustomerClass == 0)
             {
                 return new RiskLevelModel();
             }
 
-            var customerClassLimitPolicies = (await GetSettingPolicy(metaModel)).FirstOrDefault(p => p.Id == metaModel.CustomerClass)?.Policies;
+            var customerClassLimitPolicies = (await GetSettingPolicy(metaModel)).FirstOrDefault(p => p.Id == metaModel.CustomerClass.ToString())?.Policies;
             var siteMemberPolicies = await _dataAccess.GetCustomerClassSitePolicyMember(metaModel);
 
             return new RiskLevelModel

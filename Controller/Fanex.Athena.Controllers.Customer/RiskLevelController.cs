@@ -24,7 +24,7 @@
         {
             var metaModel = BuildMetaModel(customerClass, currencyId);
             var viewModel = await _service.GetRiskLevelPolicyByCustomerClass(metaModel);
-            ViewBag.CustomerClass = customerClass;
+            ViewBag.CustomerClass = metaModel.CustomerClass;
             ViewBag.CurrencyId = currencyId.ToString();
 
             return View("~/Views/Desktop/Customer/RiskLevel/Information.cshtml", viewModel);
@@ -60,7 +60,7 @@
                 CurrencyList = SessionServiceInstance.UserSession.CurrencyList,
                 Language = SessionServiceInstance.UserSession.Language,
                 CurrencyId = currencyId,
-                CustomerClass = customerClass
+                CustomerClass = int.TryParse(customerClass, out int result) ? result : 0
             };
         }
     }

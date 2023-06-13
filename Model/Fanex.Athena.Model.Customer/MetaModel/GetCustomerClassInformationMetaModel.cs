@@ -12,7 +12,7 @@ namespace Fanex.Athena.Model.Customer.MetaModel
 
         public int CurrencyId { get; set; }
 
-        public string CustomerClass { get; set; }
+        public int CustomerClass { get; set; }
 
         public string GetSettingKey() => "Lrf_CustomerClassPolicySel";
     }
