@@ -7,7 +7,7 @@ export const dataGridFullHeaders = [
     { key: 'customerClass', text: LangHelper.getSingleResource('CustomerClass'), colWidth: 80, sortBy: 'customerClass' },
     { key: 'reason', text: LangHelper.getSingleResource('Reason'), colWidth: 100 },
     { key: 'lastModifiedDate', text: LangHelper.getSingleResource('LastModifiedDate'), sortBy: 'lastModifiedDate', colWidth: 100 },
-    { key: 'vip', text: LangHelper.getSingleResource('Vip'), colWidth: 100, show: false }
+    { key: 'vip', text: LangHelper.getSingleResource('VIP2'), colWidth: 100, show: false }
 ]
 
 export const Url = {

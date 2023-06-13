@@ -1,4 +1,4 @@
-﻿// Generated at: 6/7/2023 4:19:35 PM
+﻿// Generated at: 6/13/2023 4:03:52 PM
 window._language_zh_Hans = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -701,6 +701,7 @@ ViewinSummary:"查看摘要",
 ViewInWithNoParam:"查看",
 ViewNotification:"查看通知",
 VIP:"VIP玩家",
+VIP2:"VIP",
 VIPPlayerOnly:"只显示VIP玩家",
 VIPPlayerTooltipMsg:"被標示在玩家管理報告中的VIP玩家",
 VirtualCycling:"Virtual Cycling",

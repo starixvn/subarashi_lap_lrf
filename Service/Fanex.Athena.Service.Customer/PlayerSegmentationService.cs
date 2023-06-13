@@ -7,6 +7,7 @@ namespace Fanex.Athena.Service.Customer
     using Fanex.Athena.DataAccess.Customer.Interfaces;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.Helper;
+    using Fanex.Athena.Model.Customer.DTO;
     using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Athena.Service.Core.Users.Interfaces;
@@ -25,6 +26,7 @@ namespace Fanex.Athena.Service.Customer
         private readonly IBusinessLogService _businessLogService;
         private readonly ISessionService _sessionService;
         private readonly ISubsidiaryService _subsidiaryService;
+        private readonly ICustomerClassService _customerClassService;
         private readonly ICTSApiClient _ctsApiClient;
         private readonly ILogger _logger;
 
@@ -33,6 +35,7 @@ namespace Fanex.Athena.Service.Customer
 
         public PlayerSegmentationService(
             ISessionService sessionService,
+            ICustomerClassService customerClassService,
             IPlayerSegmentationDataAccess playerDataAccess,
             [KeyFilter("PlayerSegmentLogService")] IBusinessLogService businessLogService,
             ISubsidiaryService subsidiaryService,
@@ -41,6 +44,7 @@ namespace Fanex.Athena.Service.Customer
             )
         {
             _sessionService = sessionService;
+            _customerClassService = customerClassService;
             _businessLogService = businessLogService;
             _playerDataAccess = playerDataAccess;
             _subsidiaryService = subsidiaryService;
@@ -67,7 +71,9 @@ namespace Fanex.Athena.Service.Customer
         public async Task<ApiPagingResult<PlayerInfo>> GetVipPlayerListAsync(VipPlayerListMetaModel metaModel)
         {
             var result = await _playerDataAccess.GetVipPlayerListAsync(metaModel);
+            var riskLevels = await _customerClassService.GetAllRiskLevel();
             BindSubsidiaryName(result.Data, metaModel.SubsidiaryList);
+            BindRiskLevelName(result.Data, riskLevels);
 
             return result;
         }
@@ -196,6 +202,13 @@ namespace Fanex.Athena.Service.Customer
             {
                 player.Subsidiary = subsidiaryDic.ContainsKey(player.AgentId) ? subsidiaryDic[player.AgentId].OperatorId : string.Empty;
             }
+        }
+
+        private void BindRiskLevelName(IEnumerable<PlayerInfo> players, IEnumerable<RiskLevel> riskLevels)
+        {
+            players.ToList().ForEach(player => {
+                player.RiskLevel = riskLevels.FirstOrDefault(_=>_.CustomerClassList.Contains(player.CustomerClass))?.Name;
+            });
         }
 
         public bool IsNormalView(BasePlayerListMetaModel metaModel) =>

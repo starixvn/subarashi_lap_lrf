@@ -8782,6 +8782,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to VIP.
+        /// </summary>
+        public static string VIP2 {
+            get {
+                return ResourceManager.GetString("VIP2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to VIP Player.
         /// </summary>
         public static string VIPPlayer {
