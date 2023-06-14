@@ -1150,7 +1150,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Both Group By and Breakdown By levels ( Check by default on the radio button).
+        ///   Looks up a localized string similar to Both Group By and Breakdown By levels.
         /// </summary>
         public static string BothGroupByAndBreakdownLevelOption {
             get {

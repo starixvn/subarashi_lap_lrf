@@ -3428,7 +3428,7 @@
     <value>Please choose the data shall display in the excel file:</value>
   </data>
   <data name="BothGroupByAndBreakdownLevelOption" xml:space="preserve">
-    <value>Both Group By and Breakdown By levels ( Check by default on the radio button)</value>
+    <value>Both Group By and Breakdown By levels</value>
   </data>
   <data name="GroupByLevelOnlyOption" xml:space="preserve">
     <value>Group By level only</value>
