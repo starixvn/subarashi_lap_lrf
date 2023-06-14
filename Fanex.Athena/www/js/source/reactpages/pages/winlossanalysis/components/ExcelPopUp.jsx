@@ -46,7 +46,7 @@ export const ExcelPopUp = (props) => {
     return (
         <>
             <span className='flex-initial icon icon-excel-white' onClick={_onclickHandler}></span>
-            <Popup width={640} height={250} isShow={isShow} title={LangHelper.getSingleResource("Confirmation")} onClose={_onCloseHandler} isHtml={false}>
+            <Popup width={400} height={200} isShow={isShow} title={LangHelper.getSingleResource("Confirmation")} onClose={_onCloseHandler} isHtml={false}>
                 <div className='excel-popup-container'>
                     <RadioGroup key={`${uuidv4()}`}
                         label={LangHelper.getSingleResource("ChooseDataDisplayInExcelMsg")}
