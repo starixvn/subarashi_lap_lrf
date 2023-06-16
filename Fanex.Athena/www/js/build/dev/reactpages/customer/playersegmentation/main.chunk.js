@@ -1034,7 +1034,7 @@ const SortMapper = {
     'systemId': 1,
     'externalId': 2,
     'lastModifiedDate': 3,
-    'customerClass': 4
+    'riskLevel': 4
   },
   sortType: {
     'asc': 1,

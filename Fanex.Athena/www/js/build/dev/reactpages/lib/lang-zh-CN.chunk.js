@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 6/7/2023 4:19:35 PM
+// Generated at: 6/13/2023 4:03:52 PM
 window._language_zh_CN = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -978,6 +978,7 @@ window._language_zh_CN = {
   ViewInWithNoParam: "查看",
   ViewNotification: "查看通知",
   VIP: "VIP玩家",
+  VIP2: "VIP",
   VIPPlayer: "VIP玩家",
   VipPlayerManagement: "VIP玩家管理",
   VIPPlayerOnly: "只显示VIP玩家",

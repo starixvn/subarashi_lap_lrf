@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 6/7/2023 4:19:35 PM
+// Generated at: 6/13/2023 4:03:52 PM
 window._language_zh_TW = {
   AA: "客客",
   AbnormalBet: "非正規註單",
@@ -792,6 +792,7 @@ window._language_zh_TW = {
   ViewInWithNoParam: "查看",
   ViewNotification: "查看通知",
   VIP: "VIP玩家",
+  VIP2: "VIP",
   VIPPlayerOnly: "只顯示VIP玩家",
   VIPPlayerTooltipMsg: "被標示在玩家管理報告中的VIP玩家",
   VirtualCycling: "Virtual Cycling",
