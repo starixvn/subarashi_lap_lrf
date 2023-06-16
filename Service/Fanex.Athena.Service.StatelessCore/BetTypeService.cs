@@ -90,7 +90,7 @@ namespace Fanex.Athena.Service.StatelessCore
                     Checked = true,
                     Children = null,
                     ID = _.BetType,
-                    Name = GetBetTypeName(_.BetType),
+                    Name = GetBetTypeName(_.BetType, lang),
                     Value = _.BetType.ToString(),
                 },
                 (key, items) => new CheckedItem
@@ -125,10 +125,10 @@ namespace Fanex.Athena.Service.StatelessCore
             return sportsParameters;
         }
 
-        private string GetBetTypeName(int betType)
+        private string GetBetTypeName(int betType, string languageCode)
         {
             string suffix = GetBettypeNameSuffix(betType);
-            return _cacheRefAdapter.GetBettype(Convert.ToInt32(betType), false) + suffix;
+            return _cacheRefAdapter.GetBetTypeName(Convert.ToInt32(betType), languageCode) + suffix;
         }
 
         private string GetBettypeNameSuffix(int betType)
