@@ -2654,7 +2654,7 @@
     <comment>ignorejs</comment>
   </data>
   <data name="BettingTicketCenter_RefnoTabNote_TxIDSearch" xml:space="preserve">
-    <value>系统支持从 {0} 开始搜索 TxID</value>
+    <value>系统支持从 {0} 开始搜索 LicTxID</value>
   </data>
   <data name="Saba" xml:space="preserve">
     <value>沙巴</value>

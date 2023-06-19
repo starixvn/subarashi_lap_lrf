@@ -5,6 +5,7 @@ using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
 using Fanex.Athena.Model.Customer.MetaModel;
 using Fanex.Athena.Model.Report.DTO;
 using Fanex.Athena.Service.Core.Users.Interfaces;
+using Fanex.Athena.Service.Customer.Interfaces;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
 using Fanex.Athena.UnitTest.Common.Helpers;
 using Fanex.Logging;
@@ -24,6 +25,7 @@ namespace Fanex.Athena.Service.Customer.UnitTests
         private IBusinessLogService _businessLogService;
         private ISubsidiaryService _subsidiaryService;
         private ICTSApiClient _ctsApiClient;
+        private ICustomerClassService _customerClassService;
         private ILogger _logger;
 
         private PlayerSegmentationService _targetService;
@@ -33,11 +35,12 @@ namespace Fanex.Athena.Service.Customer.UnitTests
         {
             _playerDataAccess = Substitute.For<IPlayerSegmentationDataAccess>();
             _sessionService = Substitute.For<ISessionService>();
+            _customerClassService = Substitute.For<ICustomerClassService>();
             _subsidiaryService = Substitute.For<ISubsidiaryService>();
             _ctsApiClient = Substitute.For<ICTSApiClient>();
             _logger = Substitute.For<ILogger>();
             _businessLogService = Substitute.For<IBusinessLogService>();
-            _targetService = new PlayerSegmentationService(_sessionService, _playerDataAccess, _businessLogService, _subsidiaryService, _ctsApiClient, _logger);
+            _targetService = new PlayerSegmentationService(_sessionService, _customerClassService, _playerDataAccess, _businessLogService, _subsidiaryService, _ctsApiClient, _logger);
         }
 
         [TearDown]
