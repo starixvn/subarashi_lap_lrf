@@ -4675,7 +4675,7 @@ const dataGridFullHeaders = [{
   colWidth: 100
 }, {
   key: 'vip',
-  text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Vip'),
+  text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('VIP2'),
   colWidth: 100,
   show: false
 }];

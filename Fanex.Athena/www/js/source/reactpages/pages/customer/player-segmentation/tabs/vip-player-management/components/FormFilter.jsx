@@ -167,7 +167,7 @@ export class FormFilter extends PureComponent {
                     </div>}
                     <div className="col-12 col-md-2 col-sm-3 col-lg-4 col-xl-2">
                         <div className="form-group">
-                            <label className="label-text">{LangHelper.getSingleResource("Vip")}</label>
+                            <label className="label-text">{LangHelper.getSingleResource("VIP2")}</label>
                             {this._renderVipOptionSelectList()}
                         </div>
                     </div>

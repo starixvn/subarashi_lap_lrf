@@ -3453,4 +3453,7 @@
   <data name="Week2" xml:space="preserve">
     <value>Week {0}</value>
   </data>
+  <data name="VIP2" xml:space="preserve">
+    <value>VIP</value>
+  </data>
 </root>

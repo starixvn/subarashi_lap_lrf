@@ -91,6 +91,6 @@ function mapStateToProps(state) {
     const { playerList, selectedParams, selectedTabKey, pagingOption, isLoading } = state;
     const isCheckAll = playerList && !playerList.some(_ => !(_.isSelected || _.isBA));
     return Object.assign({}, { playerList, isCheckAll, pagingOption, selectedParams, selectedTabKey, isLoading });
-};
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(React.memo(DataGrid));

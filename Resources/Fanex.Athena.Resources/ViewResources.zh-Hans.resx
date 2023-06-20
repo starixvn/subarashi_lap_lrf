@@ -2423,4 +2423,7 @@
   <data name="Weekly" xml:space="preserve">
     <value>每周</value>
   </data>
+  <data name="VIP2" xml:space="preserve">
+    <value>VIP</value>
+  </data>
 </root>

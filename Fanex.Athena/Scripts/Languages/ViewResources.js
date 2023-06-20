@@ -1,4 +1,4 @@
-﻿// Generated at: 6/7/2023 4:19:44 PM
+﻿// Generated at: 6/13/2023 4:04:12 PM
 var _language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -969,6 +969,7 @@ ViewInWithNoParam:"View in",
 ViewNotification:"View Notification",
 ViewSubsidiaryOnReports:"View subsidiary on reports",
 VIP:"VIP",
+VIP2:"VIP",
 VIPPlayer:"VIP Player",
 VipPlayerManagement:"VIP Player Management",
 VIPPlayerOnly:"VIP Player only",

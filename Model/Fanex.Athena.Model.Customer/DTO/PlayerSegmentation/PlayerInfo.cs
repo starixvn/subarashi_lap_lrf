@@ -15,6 +15,10 @@ namespace Fanex.Athena.Model.Customer.DTO.PlayerSegmentation
 
         public string Subsidiary { get; set; }
 
+        public string CustomerClass { get; set; }
+
+        public string RiskLevel { get; set; }
+
         [JsonIgnore]
         public string Reason { get; set; }
 

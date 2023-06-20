@@ -169,7 +169,7 @@
                 Id = index.ToString(),
                 Key = _.Key,
                 Name = ViewResources.ResourceManager.GetString(_.Key) ?? _.Key,
-                CustomerClassList = _.Select(cc => cc.CustomerClass.ToString())
+                CustomerClassList = _.OrderBy(cc => cc.CustomerClass).Select(cc => cc.CustomerClass.ToString())
             }).OrderBy(_ => _, new RiskLevelComparer());
 
             return riskLevelList;
