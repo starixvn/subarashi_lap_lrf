@@ -33,6 +33,8 @@
 
         private ICacheRefAdapter _cacheRefAdapter;
 
+        private IAuthorizationService _authrizationService;
+
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
@@ -48,6 +50,7 @@
             _fileSystem = Substitute.For<IFileSystem>();
             _balanceUpDataAccess = Substitute.For<IBalanceUpDataAccess>();
             _cacheRefAdapter = Substitute.For<ICacheRefAdapter>();
+            _authrizationService= Substitute.For<IAuthorizationService>();
         }
 
         [TearDown]
@@ -317,7 +320,8 @@
                 _fileSystem,
                 _productService,
                 _balanceUpDataAccess,
-                _cacheRefAdapter)
+                _cacheRefAdapter,
+                _authrizationService)
             {
                 ControllerContext = ControllerContext,
                 LangService = LangService,

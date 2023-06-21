@@ -14,6 +14,7 @@ namespace Fanex.Athena.Controllers.Report.UnitTests
         private IProductService _productService;
         private ISubsidiaryService _subsidiaryService;
         private ICustomerClassService _customerClassService;
+        private IAuthorizationService _authorizationService;
 
         [SetUp]
         public void Setup()
@@ -21,9 +22,10 @@ namespace Fanex.Athena.Controllers.Report.UnitTests
             _productService = Substitute.For<IProductService>();
             _subsidiaryService = Substitute.For<ISubsidiaryService>();
             _customerClassService = Substitute.For<ICustomerClassService>();
+            _authorizationService= Substitute.For<IAuthorizationService>();
         }
 
         private WinlossAnalysisReportController CreateController()
-            => new WinlossAnalysisReportController(_productService, _subsidiaryService, _customerClassService);
+            => new WinlossAnalysisReportController(_productService, _subsidiaryService, _customerClassService, _authorizationService);
     }
 }
