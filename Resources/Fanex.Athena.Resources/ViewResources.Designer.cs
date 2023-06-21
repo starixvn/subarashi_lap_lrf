@@ -19,7 +19,7 @@ namespace Fanex.Athena.Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class ViewResources {
@@ -1051,7 +1051,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The system supports searching TxID from {0}.
+        ///   Looks up a localized string similar to The system supports searching LicTxID from {0}.
         /// </summary>
         public static string BettingTicketCenter_RefnoTabNote_TxIDSearch {
             get {
@@ -1060,7 +1060,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to For {0}: The system supports searching TxID for settled tickets only..
+        ///   Looks up a localized string similar to The system supports searching LicTxID for settled tickets only..
         /// </summary>
         public static string BettingTicketCenter_RefnoTabNote_TxIDSearch2 {
             get {
@@ -4327,7 +4327,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to TxID.
+        ///   Looks up a localized string similar to LicTxID.
         /// </summary>
         public static string LicenseeTxId {
             get {

@@ -1,4 +1,4 @@
-﻿// Generated at: 6/13/2023 4:04:12 PM
+﻿// Generated at: 6/21/2023 3:09:21 PM
 var _language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -102,7 +102,7 @@ BettingStatement:"投注详情",
 BettingTicketCenter:"注单中心",
 BettingTicketCenter_AdvancedSearchTabNote1:"全部联赛与全部赛事仅支援单日搜寻",
 BettingTicketCenter_AdvancedSearchTabNote2:"仅支援{0}以后的注单",
-BettingTicketCenter_RefnoTabNote_TxIDSearch:"系统支持从 {0} 开始搜索 TxID",
+BettingTicketCenter_RefnoTabNote_TxIDSearch:"系统支持从 {0} 开始搜索 LicTxID",
 BettingTicketCenter_RefnoTabNote1:"在体育的搜寻结果将包含相关的红利与现金注单",
 BettingTicketCenter_RefnoTabNote2:"{0}: 请提供用户名以便查询{1}之后的注单",
 BetType:"投注类别",

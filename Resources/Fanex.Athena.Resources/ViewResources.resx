@@ -2699,7 +2699,8 @@
     <value>Platform data is available from 27 Feb 2016.</value>
   </data>
   <data name="LicenseeTxId" xml:space="preserve">
-    <value>TxID</value>
+    <value>LicTxID</value>
+    <comment>189634</comment>
   </data>
   <data name="BetCounts" xml:space="preserve">
     <value>Bet Counts</value>
@@ -2961,7 +2962,7 @@
     <comment>ignorejs</comment>
   </data>
   <data name="BettingTicketCenter_RefnoTabNote_TxIDSearch" xml:space="preserve">
-    <value>The system supports searching TxID from {0}</value>
+    <value>The system supports searching LicTxID from {0}</value>
   </data>
   <data name="IsGroupInOriginalCurrency" xml:space="preserve">
     <value>Display group breakdown in original currency</value>
@@ -3032,7 +3033,7 @@
     <value>Promotion Details</value>
   </data>
   <data name="BettingTicketCenter_RefnoTabNote_TxIDSearch2" xml:space="preserve">
-    <value>For {0}: The system supports searching TxID for settled tickets only.</value>
+    <value>The system supports searching LicTxID for settled tickets only.</value>
   </data>
   <data name="BasketballPinGoal" xml:space="preserve">
     <value>Basketball PinGoal</value>
