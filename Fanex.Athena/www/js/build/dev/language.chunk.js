@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 6/7/2023 4:19:35 PM
+﻿// Generated at: 6/21/2023 3:09:36 PM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -204,8 +204,8 @@ BettingStatement:"Betting Statement",
 BettingTicketCenter:"Betting Ticket Center",
 BettingTicketCenter_AdvancedSearchTabNote1:"All bettypes, League, and Match filter available only when 1 day is selected",
 BettingTicketCenter_AdvancedSearchTabNote2:"Data is available from {0}",
-BettingTicketCenter_RefnoTabNote_TxIDSearch:"The system supports searching TxID from {0}",
-BettingTicketCenter_RefnoTabNote_TxIDSearch2:"For {0}: The system supports searching TxID for settled tickets only.",
+BettingTicketCenter_RefnoTabNote_TxIDSearch:"The system supports searching LicTxID from {0}",
+BettingTicketCenter_RefnoTabNote_TxIDSearch2:"The system supports searching LicTxID for settled tickets only.",
 BettingTicketCenter_RefnoTabNote1:"For Sportsbook, the search result includes the related Bonus/Cash tickets.",
 BettingTicketCenter_RefnoTabNote2:"For {0}: Please provide username also in order to search ticket later than {1}",
 BetTradeCommission:"Bet Trade Commission",
@@ -564,7 +564,7 @@ LicenseeContactEditErrorMsg_102:"Someone has changed the contact, please check a
 LicenseeContacts:"Licensee Contacts",
 LicenseeIsNotExisted:"Not found licensee",
 LicenseeNetWL:"Licensee Net WL",
-LicenseeTxId:"TxID",
+LicenseeTxId:"LicTxID",
 LicenseeW_L:"Licensee W/L",
 LicenseeWinLoss:"Licensee Win Loss",
 LicenseeWL:"Licensee WL",
@@ -1057,6 +1057,7 @@ ViewinSummary:"View in Summary",
 ViewInWithNoParam:"View in",
 ViewNotification:"View Notification",
 VIP:"VIP",
+VIP2:"VIP",
 VIPPlayer:"VIP Player",
 VipPlayerManagement:"VIP Player Management",
 VIPPlayerOnly:"VIP Player only",
