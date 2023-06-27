@@ -58,21 +58,13 @@
             metaModel.PageIndex = 1;
             var isNormalView = _playerService.IsNormalView(metaModel);
             var dataSource = await _playerService.GetVipPlayerListAsync(metaModel).ConfigureAwait(false);
-            var data = dataSource.Data.ToList();
 
-            while (dataSource.TotalItem > metaModel.PageIndex * metaModel.PageSize)
+            if (dataSource.TotalItem > AppSettingInstance.MaxRowPerExcelFile)
             {
-                metaModel.PageIndex++;
-                dataSource = await _playerService.GetVipPlayerListAsync(metaModel).ConfigureAwait(false);
-                data.AddRange(dataSource.Data);
+                return await BuildZipFile(dataSource, metaModel, isNormalView);
             }
 
-            if (data.Count > AppSettingInstance.MaxRowPerExcelFile)
-            {
-                return BuildZip(data, isNormalView);
-            }
-
-            return ExportXls(data, isNormalView);
+            return ExportXls(dataSource.Data, isNormalView);
         }
 
         private HttpResponseMessage ExportXls(IEnumerable<PlayerInfo> dataList, bool isNormalView)
@@ -83,43 +75,46 @@
                 var excel = new VipPlayerExcel(dataList, isNormalView);
                 excel.Export();
 
-                var result = ExcelStream(excel.Workbook, fileName);
-                return result;
+                return ExcelStream(excel.Workbook, fileName);
             }
+
             return new HttpResponseMessage { StatusCode = System.Net.HttpStatusCode.NoContent };
         }
 
-        private HttpResponseMessage BuildZip(IEnumerable<PlayerInfo> dataList, bool isNormalView)
+        private async Task<HttpResponseMessage> BuildZipFile(ApiPagingResult<PlayerInfo> dataPage, VipPlayerListMetaModel metaModel, bool isNormalView)
         {
             var excelFiles = new List<VipPlayerExcel>();
-            VipPlayerExcel excel;
-
             const string fileName = "VipPlayerList.zip";
 
-            // split 10k from datalist
-            var data = new List<PlayerInfo>();
-            var dataSource = dataList.ToList();
-            for (int i = 0; i < dataSource.Count; i++)
+            excelFiles.AddRange(BuildExcelFiles(dataPage.Data, isNormalView));
+
+            while (dataPage.TotalItem > metaModel.PageIndex * metaModel.PageSize)
             {
-                if (data.Count == AppSettingInstance.MaxRowPerExcelFile)
-                {
-                    excel = new VipPlayerExcel(data, isNormalView);
-                    excel.Export();
-
-                    excelFiles.Add(excel);
-
-                    data = new List<PlayerInfo>();
-                }
-
-                data.Add(dataSource[i]);
+                metaModel.PageIndex++;
+                dataPage = await _playerService.GetVipPlayerListAsync(metaModel).ConfigureAwait(false);
+                excelFiles.AddRange(BuildExcelFiles(dataPage.Data, isNormalView));
             }
 
-            excel = new VipPlayerExcel(data, isNormalView);
-            excel.Export();
-
-            excelFiles.Add(excel);
-
             return ZipFileSteam(CreateZipFile(excelFiles), fileName);
+        }
+
+        private IEnumerable<VipPlayerExcel> BuildExcelFiles(IEnumerable<PlayerInfo> dataList, bool isNormalView)
+        {
+            var excelFiles = new List<VipPlayerExcel>();
+            var dataSource = dataList.ToList();
+
+            var data = dataSource.Select((x, i) => new { Index = i, Value = x })
+            .GroupBy(x => x.Index / AppSettingInstance.MaxRowPerExcelFile)
+            .Select(x => x.Select(v => v.Value).ToList()).ToList();
+
+            foreach (var item in data)
+            {
+                var excel = new VipPlayerExcel(item, isNormalView);
+                excel.Export();
+                excelFiles.Add(excel);
+            }
+
+            return excelFiles.ToList();
         }
     }
 }
