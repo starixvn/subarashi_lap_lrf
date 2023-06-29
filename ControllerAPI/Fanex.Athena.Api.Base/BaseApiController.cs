@@ -1,6 +1,8 @@
 ﻿namespace Fanex.Athena.Api.Base
 {
     using Fanex.Athena.Api.Base.Attributes;
+    using Fanex.Athena.Excel.Base;
+    using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Core.MetaModel;
     using Fanex.Athena.Service.Core.Common.Interfaces;
@@ -10,6 +12,7 @@
     using Newtonsoft.Json.Serialization;
     using NPOI.SS.UserModel;
     using System.Collections.Generic;
+    using System.IO;
     using System.Net;
     using System.Net.Http;
     using System.Net.Http.Headers;
@@ -28,6 +31,8 @@
         }
 
         public IProductService ProductService { get; set; }
+
+        public IAppSettings AppSettingInstance { get; set; }
 
         public ISessionService SessionService { get; set; }
 
@@ -88,5 +93,62 @@
             ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
             ContractResolver = new CamelCasePropertyNamesContractResolver()
         };
+
+        protected internal virtual HttpResponseMessage ZipFileSteam(MemoryStream zipFile, string fileName)
+        {
+            var result = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new PushStreamContent(
+              (stream, context, transportContext) =>
+              {
+                  try
+                  {
+                      zipFile.WriteTo(stream);
+                  }
+                  finally
+                  {
+                      zipFile.Close();
+                      zipFile = null;
+                      stream.Close();
+                      context.Dispose();
+                  }
+              },
+              new MediaTypeHeaderValue("application/octet-stream"))
+            };
+            result.Headers.TransferEncodingChunked = true;
+            result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+            {
+                FileName = fileName
+            };
+            return result;
+        }
+
+        protected static MemoryStream CreateZipFile<T>(IList<T> excelFiles) where T : ReportBase
+        {
+            var mem = new MemoryStream();
+            using (var zip = new Ionic.Zip.ZipFile())
+            {
+                for (var i = 0; i < excelFiles.Count; i++)
+                {
+                    var workbook = excelFiles[i].Workbook;
+                    try
+                    {
+                        using (var stream = new MemoryStream())
+                        {
+                            workbook.Write(stream);
+                            zip.AddEntry($"sheet{i}.xls", stream.ToArray());
+                        }
+                    }
+                    finally
+                    {
+                        workbook.Close();
+                    }
+                }
+
+                zip.ParallelDeflateThreshold = -1;
+                zip.Save(mem);
+            }
+            return mem;
+        }
     }
 }

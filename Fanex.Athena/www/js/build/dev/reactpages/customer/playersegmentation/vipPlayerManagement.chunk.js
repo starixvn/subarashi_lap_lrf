@@ -3098,7 +3098,14 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
         if (response.status === NoContentStatusCode) {
           alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("NoInfo"));
         } else {
-          _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_11__["default"].downloadFile(response.data, 'VipPlayerList.xls');
+          var filename = "VipPlayerList.xls";
+          var disposition = response.headers["content-disposition"];
+          var filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+          var matches = filenameRegex.exec(disposition);
+          if (matches != null && matches[1]) {
+            filename = matches[1].replace(/['"]/g, '');
+          }
+          _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_11__["default"].downloadFile(response.data, filename);
         }
       });
     });
@@ -3639,7 +3646,8 @@ class ParamHelper {
     selectedVipOption,
     selectedSubsidiary,
     subsidiarySearch,
-    selectedCustomerClass
+    selectedCustomerClass,
+    pagingOption
   }) {
     return _objectSpread(_objectSpread({}, selectedParams), {
       username,
@@ -3647,7 +3655,9 @@ class ParamHelper {
       vipOption: selectedVipOption,
       subsidiaryList: subsidiarySearch ? selectedSubsidiary : '',
       subsidiarySearch,
-      customerClass: selectedCustomerClass
+      customerClass: selectedCustomerClass,
+      orderCol: pagingOption.orderCol,
+      sortType: pagingOption.sortType
     });
   }
 }

@@ -50,7 +50,15 @@ export class FormFilter extends PureComponent {
             if (response.status === NoContentStatusCode) {
                 alert(LangHelper.getSingleResource("NoInfo"));
             } else {
-                Site.downloadFile(response.data, 'VipPlayerList.xls');
+                var filename = "VipPlayerList.xls";
+                var disposition = response.headers["content-disposition"];
+                var filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+                var matches = filenameRegex.exec(disposition);
+                if (matches != null && matches[1]) { 
+                    filename = matches[1].replace(/['"]/g, '');
+                }
+                
+                Site.downloadFile(response.data, filename);
             }
         });
     }

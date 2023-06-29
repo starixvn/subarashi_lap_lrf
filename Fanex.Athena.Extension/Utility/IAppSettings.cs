@@ -62,5 +62,7 @@
         string BetTicketEventBuilderUrl { get; }
 
         bool IsUseCtsApi { get; }
+
+        int MaxRowPerExcelFile { get; }
     }
 }
