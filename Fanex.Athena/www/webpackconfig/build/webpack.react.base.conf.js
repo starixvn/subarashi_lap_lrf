@@ -68,7 +68,7 @@ function generateConfig(environment) {
         output: {
             path: pathConfig.projectRoot,
             filename: "[name].chunk.js",
-            chunkFilename: jsPath + '/[name].chunk.js',
+            chunkFilename: jsPath + '/[name].[contenthash].chunk.js',
         },
         module: {
             rules: [{
@@ -115,10 +115,12 @@ function generateConfig(environment) {
                     default: false,
                     vendors: false,
                     common: {
+                        chunks: 'initial',
                         name: 'lib/common',
                         test: /(node_modules)/,
                         minChunks: 2,
-                        priority: -10
+                        priority: -10,
+                        filename: jsPath+ '/[name].chunk.js',
                     }
                 }
             }
