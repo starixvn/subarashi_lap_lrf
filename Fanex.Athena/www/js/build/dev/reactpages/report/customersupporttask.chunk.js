@@ -201,7 +201,7 @@ const toggleLoader = show => {
 /*!***************************************************!*\
   !*** ./www/js/source/reactpages/actions/types.js ***!
   \***************************************************/
-/*! exports provided: FETCH_DATA, SET_GRID_DATA, SET_SELECTED_PRODUCT, SET_SELECTED_BASECURRENCY, SET_BASECURRENCY_LIST, SET_SELECTED_CURRENCY, TOGGLE_LOADER, CHANGE_IS_EXCLUDE_TEST, USER_GUIDE_CONTENT, SET_DATE_RANGE, GET_DATE_CONSTRAINT, CHANGE_IS_CONVERT_ALL, SET_SELECTED_STATUS, SET_SELECTED_PLATFORM, SET_SELECTED_LIVESTATUS, SET_USERNAME, SET_REQUEST_PARAM, SET_REPORT_TITLE, SET_SPORT_LIST, SET_PAGING_OPTION, SET_SUBSIDIARY_LIST, SET_SUBSIDIARY_SEARCH, SET_REASON_LIST */
+/*! exports provided: FETCH_DATA, SET_GRID_DATA, SET_SELECTED_PRODUCT, SET_SELECTED_BASECURRENCY, SET_BASECURRENCY_LIST, SET_SELECTED_CURRENCY, TOGGLE_LOADER, CHANGE_IS_EXCLUDE_TEST, USER_GUIDE_CONTENT, SET_DATE_RANGE, GET_DATE_CONSTRAINT, CHANGE_IS_CONVERT_ALL, SET_SELECTED_STATUS, SET_SELECTED_PLATFORM, SET_SELECTED_LIVESTATUS, SET_USERNAME, SET_REQUEST_PARAM, SET_REPORT_TITLE, SET_SPORT_LIST, SET_PAGING_OPTION, SET_SUBSIDIARY_LIST, SET_SUBSIDIARY_SEARCH, SET_REASON_LIST, SET_SELECTED_VIP_OPTION, SET_SELECTED_CUSTOMERCLASS, SET_SELECTED_RISKLEVEL, SET_SELECTED_ODDGROUP */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -229,59 +229,71 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SUBSIDIARY_LIST", function() { return SET_SUBSIDIARY_LIST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SUBSIDIARY_SEARCH", function() { return SET_SUBSIDIARY_SEARCH; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_REASON_LIST", function() { return SET_REASON_LIST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SELECTED_VIP_OPTION", function() { return SET_SELECTED_VIP_OPTION; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SELECTED_CUSTOMERCLASS", function() { return SET_SELECTED_CUSTOMERCLASS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SELECTED_RISKLEVEL", function() { return SET_SELECTED_RISKLEVEL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SELECTED_ODDGROUP", function() { return SET_SELECTED_ODDGROUP; });
 const FETCH_DATA = 'FETCH_DATA';
 const SET_GRID_DATA = "SET_GRID_DATA";
-
 /* Product */
-const SET_SELECTED_PRODUCT = "SET_SELECTED_PRODUCT";
 
+const SET_SELECTED_PRODUCT = "SET_SELECTED_PRODUCT";
 /* Base Currency */
+
 const SET_SELECTED_BASECURRENCY = "SET_SELECTED_BASECURRENCY";
 const SET_BASECURRENCY_LIST = "SET_BASECURRENCY_LIST";
-
 /* Currency */
+
 const SET_SELECTED_CURRENCY = "SET_SELECTED_CURRENCY";
-
 /* Loader */
+
 const TOGGLE_LOADER = "TOGGLE_LOADER";
-
 /* Exclude Test Data */
+
 const CHANGE_IS_EXCLUDE_TEST = "CHANGE_IS_EXCLUDE_TEST";
-
 /* User mini guide */
-const USER_GUIDE_CONTENT = "USER_GUIDE_CONTENT;";
 
+const USER_GUIDE_CONTENT = "USER_GUIDE_CONTENT;";
 /* Date range */
+
 const SET_DATE_RANGE = 'SET_DATE_RANGE';
 const GET_DATE_CONSTRAINT = 'GET_DATE_CONSTRAINT';
-
 /* Convert all figures to base currency */
+
 const CHANGE_IS_CONVERT_ALL = "CHANGE_IS_CONVERT_ALL";
-
 /* Status */
+
 const SET_SELECTED_STATUS = "SET_SELECTED_STATUS";
-
 /* Platform  */
-const SET_SELECTED_PLATFORM = "SET_SELECTED_PLATFORM";
 
+const SET_SELECTED_PLATFORM = "SET_SELECTED_PLATFORM";
 /* Live Status  */
+
 const SET_SELECTED_LIVESTATUS = "SET_SELECTED_LIVESTATUS";
 const SET_USERNAME = "SET_USERNAME";
 const SET_REQUEST_PARAM = "SET_REQUEST_PARAM";
 const SET_REPORT_TITLE = "SET_REPORT_TITLE";
-
 /*Sport list*/
+
 const SET_SPORT_LIST = "SET_SPORT_LIST";
-
 /* Live Status  */
-const SET_PAGING_OPTION = 'SET_PAGING_OPTION';
 
+const SET_PAGING_OPTION = 'SET_PAGING_OPTION';
 /* Subsidiary Search  */
+
 const SET_SUBSIDIARY_LIST = 'SET_SUBSIDIARY_LIST';
 const SET_SUBSIDIARY_SEARCH = 'SET_SUBSIDIARY_SEARCH';
-
 /*Reason list*/
+
 const SET_REASON_LIST = "SET_REASON_LIST";
+/*Customer class*/
+
+const SET_SELECTED_VIP_OPTION = 'SET_SELECTED_VIP_OPTION';
+const SET_SELECTED_CUSTOMERCLASS = "SET_SELECTED_CUSTOMERCLASS";
+const SET_SELECTED_RISKLEVEL = "SET_SELECTED_RISKLEVEL";
+/*Odd group*/
+
+const SET_SELECTED_ODDGROUP = "SET_SELECTED_ODDGROUP";
 
 /***/ }),
 
@@ -297,6 +309,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
+
 const Loader = ({
   isLoading
 }) => {
@@ -311,6 +324,7 @@ const Loader = ({
     className: "loader-inner ball-beat"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null))));
 };
+
 /* harmony default export */ __webpack_exports__["default"] = (Loader);
 
 /***/ }),
@@ -349,12 +363,14 @@ class AppLayout extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   constructor(props) {
     super(props);
   }
+
   render() {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       id: "container",
       className: "container-fluid"
     }, this.props.children);
   }
+
 }
 
 /***/ }),
@@ -385,9 +401,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 class DataService {
@@ -396,23 +411,38 @@ class DataService {
     const proxyUrl = `Proxy/${apiKey}/${encodeUrl}`;
     return proxyUrl;
   }
+
   static getProxyData(apiKey, apiUrl, params) {
     const proxyUrl = this.buildProxyUrl(apiKey, apiUrl);
     return this.getData(proxyUrl, params);
   }
+
   static postProxyData(apiKey, apiUrl, params) {
     const proxyUrl = this.buildProxyUrl(apiKey, apiUrl);
     return this.postData(proxyUrl, params);
   }
+
   static getProxyFile(apiKey, apiUrl, params) {
     const proxyUrl = this.buildProxyUrl(apiKey, apiUrl);
     return this.getFile(proxyUrl, params);
   }
-  static getData(url, params) {
+
+  static getData(url, params, cancellationTokenSource) {
+    const token = cancellationTokenSource ? cancellationTokenSource.token : this.genCancellationToken().token;
     return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(url, {
-      params: params
+      params: params,
+      cancelToken: token
     });
   }
+
+  static genCancellationToken() {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.CancelToken.source();
+  }
+
+  static isCancel(thrown) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.isCancel(thrown);
+  }
+
   static postData(url, params) {
     return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, params, {
       headers: {
@@ -421,6 +451,7 @@ class DataService {
       }
     });
   }
+
   static getFile(url, params, options) {
     const defaultOptions = {
       responseType: 'blob',
@@ -432,22 +463,29 @@ class DataService {
     let requestOptions = Object.assign({}, defaultOptions, options);
     return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, params, requestOptions);
   }
+
   static postReportData(url, params) {
     return this.postProxyData(this.apiKeys.report, url, params);
   }
+
   static getReportData(url, params) {
     return this.getProxyData(this.apiKeys.report, url, params);
   }
+
   static getReportFile(url, params) {
     return this.getProxyFile(this.apiKeys.report, url, params);
   }
+
   static postBetListData(url, params) {
     return this.postProxyData(this.apiKeys.betlist, url, params);
   }
+
   static getBetListFile(url, params) {
     return this.getProxyFile(this.apiKeys.betlist, url, params);
   }
+
 }
+
 _defineProperty(DataService, "apiKeys", {
   report: 'Report',
   betlist: 'BetList'
@@ -511,9 +549,8 @@ const decode = html => {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return LangHelper; });
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 const DEFAULT_RESOURCE_NAME = "_language_en_US";
 const langCode = window.PageLanguage || "en-US";
 const resourceName = `_language_${langCode.replace("-", "_")}`;
@@ -521,15 +558,19 @@ class LangHelper {
   static get currentLanguage() {
     return langCode;
   }
+
   static getSingleResource(key) {
     var langHandler = window[resourceName];
     return langHandler && langHandler[key] || window[DEFAULT_RESOURCE_NAME] && window[DEFAULT_RESOURCE_NAME][key] || key;
   }
+
   static getResources(keys) {
     var langHandler = window[resourceName];
     return keys.map(key => langHandler && langHandler[key] || window[DEFAULT_RESOURCE_NAME] && window[DEFAULT_RESOURCE_NAME][key] || key);
   }
+
 }
+
 _defineProperty(LangHelper, "languageKeys", {
   eng: "en-US",
   zhCN: "zh-CN"
@@ -553,8 +594,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const isDev = "development" === "development";
-const configName = _constants_config__WEBPACK_IMPORTED_MODULE_1__["debuggingConfig"].name;
-// middleware that logs actions
+const configName = _constants_config__WEBPACK_IMPORTED_MODULE_1__["debuggingConfig"].name; // middleware that logs actions
+
 const loggerMiddleware = Object(redux_logger__WEBPACK_IMPORTED_MODULE_0__["createLogger"])({
   predicate: (getState, action) => isDev || window[configName] && window[configName].env === _constants_config__WEBPACK_IMPORTED_MODULE_1__["debuggingConfig"].env && (!window[configName].actionFilter || window[configName].actionFilter === action.type)
 });
@@ -562,6 +603,7 @@ class Logger {
   static getLoggerMiddleware() {
     return loggerMiddleware;
   }
+
 }
 
 /***/ }),
@@ -577,18 +619,23 @@ class Logger {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Site; });
 const _rootUrl = window.rootUrl || "/";
+
 const _isSelfMode = !!window.isSelfMode;
+
 let _xsrfToken = null;
 class Site {
   static getXsrfToken() {
     if (!_xsrfToken) {
       _xsrfToken = document.querySelector("input[name=__RequestVerificationToken]").value;
     }
+
     return _xsrfToken;
   }
+
   static resolveClientUrl(relativeUrl) {
     return _rootUrl + relativeUrl;
   }
+
   static getLrfSubsidiary() {
     try {
       return _isSelfMode && top.getLrfSubsidiarySearch && top.getLrfSubsidiarySearch() || {};
@@ -596,21 +643,27 @@ class Site {
       return {};
     }
   }
+
   static convertDateToString(date) {
     return typeof date === "string" ? date : date.format("MM/DD/YYYY");
   }
+
   static isEmptyObject(obj = {}) {
     return Object.entries(obj).length === 0 && obj.constructor === Object;
   }
+
   static asNull(text) {
     if (text != null) {
       text = text.trim();
+
       if (text === '') {
         return null;
       }
     }
+
     return text;
   }
+
   static downloadFile(data, fileName) {
     const url = window.URL.createObjectURL(new Blob([data]));
     const link = document.createElement('a');
@@ -621,16 +674,21 @@ class Site {
     link.parentNode.removeChild(link);
     window.URL.revokeObjectURL(url);
   }
+
   static readAsJson(blob, callback) {
     const reader = new FileReader();
+
     reader.onload = function () {
       callback && callback(JSON.parse(reader.result));
     };
+
     reader.readAsText(blob);
   }
+
   static getRootUrl() {
     return _rootUrl;
   }
+
 }
 
 /***/ }),
@@ -654,11 +712,11 @@ __webpack_require__.r(__webpack_exports__);
 class Store {
   static createStore(reducer, initialState) {
     const loggerMiddleware = _logger__WEBPACK_IMPORTED_MODULE_2__["default"].getLoggerMiddleware();
-    const enhancer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["compose"])(Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"],
-    // lets us dispatch() functions
+    const enhancer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["compose"])(Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"], // lets us dispatch() functions
     loggerMiddleware));
     return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(reducer, initialState, enhancer);
   }
+
 }
 
 /***/ }),
@@ -738,6 +796,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 const AppContainer = ({
   isLoading
 }) => {
@@ -745,11 +804,13 @@ const AppContainer = ({
     isLoading: isLoading
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormFilter__WEBPACK_IMPORTED_MODULE_4__["default"], null));
 };
+
 function mapStateToProps(state) {
   return Object.assign({
     isLoading: state.isLoading
   });
 }
+
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(AppContainer));
 
 /***/ }),
@@ -768,8 +829,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions */ "./www/js/source/reactpages/pages/customer-support-task/actions/index.js");
-/* harmony import */ var _9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @9softstudio/react-multiselect */ "./node_modules/@9softstudio/react-multiselect/dist/index.js");
-/* harmony import */ var _9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @legion-lib/react-multiselect */ "./node_modules/@legion-lib/react-multiselect/dist/index.js");
+/* harmony import */ var _legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-select */ "./node_modules/react-select/dist/react-select.es.js");
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
@@ -777,10 +838,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
 /* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/pages/customer-support-task/lib/constants.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -801,7 +864,7 @@ const FormFilter = ({
 }) => {
   const _renderCurrencySelectList = () => {
     const currencyList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_7__["default"].currencyList;
-    return currencyList && currencyList.length && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_4___default.a, {
+    return currencyList && currencyList.length && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_4___default.a, {
       id: "ddlCurrency",
       language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].currentLanguage,
       dataSource: currencyList,
@@ -811,16 +874,20 @@ const FormFilter = ({
       onChange: (_, selectedItemsKey) => setSelectedCurrency(selectedItemsKey)
     });
   };
+
   const _exportExcel = event => {
     event.preventDefault();
     toggleLoader(true);
+
     const params = _objectSpread({
       currencyIdList: selectedCurrency,
       supportTask: selectedSupportTask
     }, _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_9__["default"].getLrfSubsidiary());
+
     _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_8__["default"].getReportFile(_lib_constants__WEBPACK_IMPORTED_MODULE_10__["ExportUrl"], params).then(response => {
       toggleLoader(false);
       const NoContentStatusCode = 204;
+
       if (response.status === NoContentStatusCode) {
         alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource("NoInfo"));
       } else {
@@ -832,6 +899,7 @@ const FormFilter = ({
     });
     ;
   };
+
   const _renderSupportTaskSelectList = () => {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_5__["default"], {
       instanceId: "Support-Task",
@@ -841,6 +909,7 @@ const FormFilter = ({
       onChange: item => setSelectedSupportTask(item.value)
     });
   };
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "page-filter"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -870,6 +939,7 @@ const FormFilter = ({
     onClick: _exportExcel
   }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource('ExportToExcel')))))));
 };
+
 function mapStateToProps(state) {
   const {
     selectedCurrency,
@@ -880,6 +950,7 @@ function mapStateToProps(state) {
     selectedSupportTask
   });
 }
+
 function mapDispatchToProps(dispatch) {
   const {
     setSelectedCurrency,
@@ -892,6 +963,7 @@ function mapDispatchToProps(dispatch) {
     toggleLoader
   }), dispatch);
 }
+
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(FormFilter));
 
 /***/ }),
@@ -931,11 +1003,13 @@ class App extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
   constructor(props) {
     super(props);
   }
+
   render() {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_3__["Provider"], {
       store: store
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AppContainer_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null));
   }
+
 }
 react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), document.getElementById("app-container"));
 
@@ -993,6 +1067,7 @@ const selectedSupportTask = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTE
   [_actions_types__WEBPACK_IMPORTED_MODULE_1__["SET_SELECTED_SUPPORT_TASK"]](state, action) {
     return action.data;
   }
+
 });
 const selectedCurrency = _jsroot_reducers_currencyReducer__WEBPACK_IMPORTED_MODULE_2__["selectedCurrency"];
 
@@ -1035,6 +1110,7 @@ const selectedCurrency = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1
   [_actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_SELECTED_CURRENCY"]](state, action) {
     return action.data;
   }
+
 });
 
 /***/ }),
@@ -1057,6 +1133,7 @@ const isLoading = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["def
   [_actions_types__WEBPACK_IMPORTED_MODULE_0__["TOGGLE_LOADER"]](state, action) {
     return action.data;
   }
+
 });
 
 /***/ })

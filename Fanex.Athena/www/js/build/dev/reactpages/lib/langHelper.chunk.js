@@ -120,6 +120,7 @@ window._language_en_US = {
   AGCasinoNotOfferCurrency: "AG Casino is not offered for this currency.",
   AGCasinoWinLoss: "AG Casino Win Loss",
   AGClosingBalance: "AG Closing Balance",
+  Agent: "Agent",
   AgentBetInterval: "Agent Bet Interval (sec)",
   AGOpeningBalance: "AG Opening Balance",
   AH: "AH",
@@ -148,6 +149,7 @@ window._language_en_US = {
   Amount: "Amount",
   AmountDue: "Amount Due",
   AmountDueTo: "Amount Due To",
+  AmountDueToBA: "Amount Due To BA",
   AmountDueToCB: "Amount Due To Colossus Bets",
   AmtDueTo: "Amt Due To",
   AmtDueToBA: "Amt Due To BA",
@@ -213,10 +215,12 @@ window._language_en_US = {
   BetType: "Bet type",
   BONTeamToScore: "Both/One/Neither Team To Score",
   Bonus: "Bonus",
+  BothGroupByAndBreakdownLevelOption: "Both Group By and Breakdown By levels",
   BoughtAmount: "Bought Amount",
   BoughtDetails: "Bought Details",
   BoughtStake: "Bought Stake",
   BoughtTicketsList: "Bought Ticket[s]",
+  BreakdownBy: "Breakdown By",
   BTCExportExcelMsg1: "Your search result exceeds our set limits to get it downloaded.",
   BTCExportExcelMsg2: "Please try reducing date range, selecting individual currency/ bet type, etc.",
   BuyBackAmount: "Buy Back Amount",
@@ -250,9 +254,11 @@ window._language_en_US = {
   ChargeCommission: "Charge Commission",
   Checkavailability: "Check availability",
   Choice: "Choice",
+  ChooseDataDisplayInExcelMsg: "Please choose the data shall display in the excel file:",
   ChooseGroupMsg: "Please choose a group.",
   ChooseGroupNameMsg: "Please choose another group name.",
   CleanSheet: "Clean Sheet",
+  ClearAllFilters: "Clear All Filters",
   ClearCurrentComm: "Clear customer&apos;s commission",
   ClickHere: "Click here",
   ClickOrDropHere: "Click or drop here",
@@ -452,6 +458,7 @@ window._language_en_US = {
   GrossGamingRevenue: "Gross Gaming Revenue",
   Group: "Group",
   GroupBy: "Group By",
+  GroupByLevelOnlyOption: "Group By level only",
   GroupColor: "Group Color",
   GroupCommission: "Group commission",
   GroupCommission_2: "Group Commission",
@@ -662,6 +669,7 @@ window._language_en_US = {
   MoveToCommissionGroup: "Move to Commission Group",
   MoveToGroup: "Move to Group",
   MultiCustomers: "Multi-Customers",
+  N_A: "N/A",
   Name: "Name",
   NativeApp: "Native APP",
   NetTurnover: "Net Turnover",
@@ -759,9 +767,11 @@ window._language_en_US = {
   PlayerAdministration: "Player Administration",
   PlayerAdminUpdateFailedMsg: "Please try again!",
   PlayerBettingStatisticsTitle: "Player Betting Statistics (month to date)",
+  PlayerComm: "Player Comm",
   PlayerName: "Player Name",
   PlayerSegmentation: "Player Segmentation",
   PlayerStatementSupportMonths: "Support data up to 18 months",
+  PlayerWL: "Player W/L",
   PleaseSelectOne: "Please select one",
   Position: "Position",
   PreGame: "Pre Game",
@@ -801,6 +811,7 @@ window._language_en_US = {
   ProductPTCS: "Playtech Casino",
   ProductSAG: "SA Gaming",
   ProductSB: "Sportsbook",
+  ProductSB_BA: "Sportsbook &amp; BA",
   ProductSBC: "Saba.club",
   ProductSBVS: "Saba Virtual Sports",
   ProductSG: "SG",
@@ -1049,6 +1060,7 @@ window._language_en_US = {
   VendorMemberID: "Vendor Member ID",
   View: "View",
   ViewBy: "View by",
+  ViewCashOutOnly: "View Cash Out Only",
   ViewDataInMonth: "View data in month",
   Viewin: "View in {0}",
   Viewin2: "View in",
@@ -1061,7 +1073,7 @@ window._language_en_US = {
   VIP2: "VIP",
   VIPPlayer: "VIP Player",
   VipPlayerManagement: "VIP Player Management",
-  VIPPlayerOnly: "VIP Player only",
+  VIPPlayerOnly: "VIP Player Only",
   VIPPlayerTooltipMsg: "VIP Players are marked in Player Segmentation",
   VirtualBasketball: "Virtual Basketball",
   VirtualCycling: "Virtual Cycling",
@@ -1093,6 +1105,7 @@ window._language_en_US = {
   Welcome: "Welcome",
   WhiteLabel: "Whitelabel",
   WinLoss: "Win Loss",
+  WinlossAnalysis: "Win Loss Analysis",
   WinLossByBetType: "Win Loss By Bet Type",
   WinLossByBetTypeTitle: "Win Loss By Bet Type, {0} --&gt; {1} - {2}",
   WinLossByLeague: "Win Loss By Leagues",
@@ -1121,9 +1134,8 @@ window._language_en_US = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return LangHelper; });
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 const DEFAULT_RESOURCE_NAME = "_language_en_US";
 const langCode = window.PageLanguage || "en-US";
 const resourceName = `_language_${langCode.replace("-", "_")}`;
@@ -1131,15 +1143,19 @@ class LangHelper {
   static get currentLanguage() {
     return langCode;
   }
+
   static getSingleResource(key) {
     var langHandler = window[resourceName];
     return langHandler && langHandler[key] || window[DEFAULT_RESOURCE_NAME] && window[DEFAULT_RESOURCE_NAME][key] || key;
   }
+
   static getResources(keys) {
     var langHandler = window[resourceName];
     return keys.map(key => langHandler && langHandler[key] || window[DEFAULT_RESOURCE_NAME] && window[DEFAULT_RESOURCE_NAME][key] || key);
   }
+
 }
+
 _defineProperty(LangHelper, "languageKeys", {
   eng: "en-US",
   zhCN: "zh-CN"
