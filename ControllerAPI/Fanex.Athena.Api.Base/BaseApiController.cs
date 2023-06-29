@@ -147,6 +147,7 @@
             return result;
         }
 
+        [System.CLSCompliant(false)]
         protected static MemoryStream CreateZipFile<T>(IList<T> excelFiles) where T : ReportBase
         {
             var mem = new MemoryStream();
