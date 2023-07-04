@@ -2761,7 +2761,7 @@
     <value>Jackpot Won Details</value>
   </data>
   <data name="VIPPlayerOnly" xml:space="preserve">
-    <value>VIP Player only</value>
+    <value>VIP Player Only</value>
   </data>
   <data name="VIPPlayerTooltipMsg" xml:space="preserve">
     <value>VIP Players are marked in Player Segmentation</value>
@@ -3397,6 +3397,42 @@
   <data name="ProductJIG" xml:space="preserve">
     <value>Jili</value>
   </data>
+  <data name="WinlossAnalysis" xml:space="preserve">
+    <value>Win Loss Analysis</value>
+  </data>
+  <data name="ViewCashOutOnly" xml:space="preserve">
+    <value>View Cash Out Only</value>
+  </data>
+  <data name="ClearAllFilters" xml:space="preserve">
+    <value>Clear All Filters</value>
+  </data>
+  <data name="Agent" xml:space="preserve">
+    <value>Agent</value>
+  </data>
+  <data name="BreakdownBy" xml:space="preserve">
+    <value>Breakdown By</value>
+  </data>
+  <data name="ProductSB_BA" xml:space="preserve">
+    <value>Sportsbook &amp; BA</value>
+  </data>
+  <data name="AmountDueToBA" xml:space="preserve">
+    <value>Amount Due To BA</value>
+  </data>
+  <data name="PlayerComm" xml:space="preserve">
+    <value>Player Comm</value>
+  </data>
+  <data name="PlayerWL" xml:space="preserve">
+    <value>Player W/L</value>
+  </data>
+  <data name="ChooseDataDisplayInExcelMsg" xml:space="preserve">
+    <value>Please choose the data shall display in the excel file:</value>
+  </data>
+  <data name="BothGroupByAndBreakdownLevelOption" xml:space="preserve">
+    <value>Both Group By and Breakdown By levels</value>
+  </data>
+  <data name="GroupByLevelOnlyOption" xml:space="preserve">
+    <value>Group By level only</value>
+  </data>
   <data name="GrossGamingRevenue" xml:space="preserve">
     <value>Gross Gaming Revenue</value>
   </data>
@@ -3459,5 +3495,8 @@
   </data>
   <data name="ProductYB" xml:space="preserve">
     <value>YeeBet</value>
+  </data>
+  <data name="N_A" xml:space="preserve">
+    <value>N/A</value>
   </data>
 </root>

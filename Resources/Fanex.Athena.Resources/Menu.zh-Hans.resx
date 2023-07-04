@@ -355,4 +355,7 @@
   <data name="grossgamingrevenue" xml:space="preserve">
     <value>博彩总收入</value>
   </data>
+  <data name="winlossanalysis" xml:space="preserve">
+    <value>输赢分析</value>
+  </data>
 </root>

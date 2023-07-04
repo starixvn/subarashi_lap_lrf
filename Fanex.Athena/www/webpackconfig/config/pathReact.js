@@ -23,6 +23,7 @@ var cssPaths = {
     playersegmentation: "./www/css/source/reactpages/pages/customer/player-segmentation/index.scss",
     customersupporttask: "./www/css/source/reactpages/pages/customer-support-task/index.scss",
     newcashoutwinloss: "./www/css/source/reactpages/pages/newcashoutwinloss/index.scss",
+    winlossanalysis: "./www/css/source/reactpages/pages/winlossanalysis/index.scss",
 };
 
 var scriptPaths = {
@@ -58,6 +59,8 @@ var scriptPaths = {
     playersegmentation_betlist: "./www/js/source/reactpages/pages/customer/player-segmentation/betlist/index.js",
     customersupporttask: "./www/js/source/reactpages/pages/customer-support-task/components/index.jsx",
     newcashoutwinloss: "./www/js/source/reactpages/pages/newcashoutwinloss/components/index.jsx",
+
+    winlossanalysis: "./www/js/source/reactpages/pages/winlossanalysis/components/index.jsx",
 };
 module.exports = {
     projectRoot: projectRoot,

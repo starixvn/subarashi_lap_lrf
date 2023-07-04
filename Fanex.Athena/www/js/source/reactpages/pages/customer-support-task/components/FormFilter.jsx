@@ -2,7 +2,7 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
-import MultipleSelect from '@9softstudio/react-multiselect'
+import MultipleSelect from '@legion-lib/react-multiselect'
 import Select from 'react-select'
 import LangHelper from '@jsroot/lib/langHelper'
 import AppData from '@jsroot/lib/AppData'

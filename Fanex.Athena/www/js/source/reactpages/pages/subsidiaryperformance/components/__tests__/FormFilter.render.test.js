@@ -12,7 +12,7 @@ import { defaultProps, defaultAppData } from './fakeData';
 const { subsidiaryList, productOptions, baseCurrencyList, selectedBaseCurrency, dateRange, dateConstraint } = defaultProps;
 const formFilterPropsForRender = { productOptions, baseCurrencyList, selectedBaseCurrency, dateRange };
 
-const multipleSelectComponentPath = '@9softstudio/react-multiselect';
+const multipleSelectComponentPath = '@legion-lib/react-multiselect';
 const dateRangeComponentPath = '@jsroot/components/date-range/index';
 
 jest.mock('@jsroot/lib/AppData');

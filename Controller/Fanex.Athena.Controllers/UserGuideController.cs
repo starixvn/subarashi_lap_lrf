@@ -1,28 +1,25 @@
 ﻿namespace Fanex.Athena.Controllers
 {
     using DataAccess.Core.Configuration.Interfaces;
-
     using Extension.Utility.Interfaces;
-
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.VendorAdapter;
     using Fanex.Athena.VendorAdapter.Interfaces;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
     using System.Text.RegularExpressions;
     using System.Web.Mvc;
     using System.Web.SessionState;
-
     using Web.ActionFilter;
 
     [SessionState(SessionStateBehavior.ReadOnly)]
     [UMFilter]
     public class UserGuideController : CultureBaseController
     {
+        private const string LICENSEE_SUFFIX_SECTION = "licensee-section";
+
         private static readonly int[] VS2Sports = new[]
         {
             190, 191, 192, 194, 196, 193, 197
@@ -36,31 +33,30 @@
         };
 
         private readonly IProductService _productService;
-
         private readonly IFileSystem _fileSystem;
-
         private readonly IBalanceUpDataAccess _balanceUpDataAccess;
-
         private readonly ICacheRefAdapter _cacheRefAdapter;
+        private readonly IAuthorizationService _authrizationService;
 
         public UserGuideController(
             IFileSystem fileSystem,
             IProductService productService,
             IBalanceUpDataAccess balanceUpDataAccess,
-            ICacheRefAdapter cacheRefAdapter)
+            ICacheRefAdapter cacheRefAdapter,
+            IAuthorizationService authorizationService)
         {
             _productService = productService;
             _fileSystem = fileSystem;
             _balanceUpDataAccess = balanceUpDataAccess;
             _cacheRefAdapter = cacheRefAdapter;
+            _authrizationService = authorizationService;
         }
 
         [AjaxRequest]
         public ActionResult Index(string resourceName)
         {
             var content = GetFileContent(resourceName);
-            content = content.Replace("{rooturl}", Url.Content("~"));
-
+            content = content.Replace("{rooturl}", Url.Content("~"));        
             if (NeedBindData(resourceName))
             {
                 var products = _productService.GetProductList(SessionServiceInstance.LicenseeSession.LicenseeId, SessionServiceInstance.UserSession.Language);
@@ -70,6 +66,8 @@
                 content = AddMoveBetDateFrom(content);
                 content = AddVS2Sport(content);
                 content = AddOpenBalanceInfo(content);
+                content = RemovePermissionSection(content, PermissionKeys.PlayerVIPManagement);
+                content = AddLicenseeSection(content, SessionServiceInstance.LicenseeSession.LicenseeName);
             }
 
             return View("~/Views/UserGuide/Index.cshtml", null, content);
@@ -93,6 +91,8 @@
             customcontent = RemoveProductSection(customcontent, products, ProductTypes.VirtualSports, "VS");
             customcontent = RemoveProductSection(customcontent, products, ProductTypes.VirtualSports2, "VS2");
             customcontent = RemoveProductSection(customcontent, products, ProductTypes.VS3, Product.VS3);
+            customcontent = RemoveProductSection(customcontent, products, ProductTypes.BA, Product.BA);
+            customcontent = RemoveProductSection(customcontent, products, ProductTypes.CashOut, Product.CO);
             return customcontent;
         }
 
@@ -132,11 +132,60 @@
                 }
                 else
                 {
-                    var pattern = @"\{" + productCode + @"-productlist-section\}[\s\S]*{/" + productCode + @"-productlist-section\}";
+                    var pattern = @"\{" + productCode + @"-productlist-section\}([\s\S]*?){/" + productCode + @"-productlist-section\}";
                     customContent = new Regex(pattern).Replace(customContent, string.Empty);
                 }
             }
 
+            return customContent;
+        }
+
+        private string RemovePermissionSection(string content, string permission)
+        {
+            var openingTag = $"{{{permission}-permission-section}}";
+            var closingTag = $"{{/{permission}-permission-section}}";
+            var customContent = content;
+            if (_authrizationService.HasPermissions(SessionServiceInstance.UserSession, permission))
+            {
+                customContent = customContent.Replace(openingTag, string.Empty);
+                customContent = customContent.Replace(closingTag, string.Empty);
+            }
+            else
+            {
+                var pattern = $"{openingTag}[\\s\\S]*{closingTag}";
+                customContent = new Regex(pattern).Replace(customContent, string.Empty);
+            }
+            return customContent;
+        }
+
+        private static string AddLicenseeSection(string content, string licenseeName)
+        {
+            var openingTag = $"{{{licenseeName}-{LICENSEE_SUFFIX_SECTION}}}";
+            var closingTag = $"{{/{licenseeName}-{LICENSEE_SUFFIX_SECTION}}}";
+            var customContent = content;
+            if (content.Contains(openingTag))
+            {
+                customContent = Replace(customContent, openingTag, closingTag, true);
+            }
+            return RemoveUnShowLicenseeSection(customContent);
+        }
+
+        private static string RemoveUnShowLicenseeSection(string content)
+        {
+            var customContent = content;
+            var linceseeTagPattern = $"{{[\\w\\d]+-{LICENSEE_SUFFIX_SECTION}}}";
+            var matchItems = new Regex(linceseeTagPattern).Matches(customContent)
+                .OfType<System.Text.RegularExpressions.Match>()
+                .Select(_ => _.Value);
+            foreach (var matchItem in matchItems)
+            {
+                var removeLicenseeNameSection = matchItem.Replace($"-{LICENSEE_SUFFIX_SECTION}}}", string.Empty)
+                    .Replace("{", string.Empty);
+                var openingTag = $"{{{removeLicenseeNameSection}-{LICENSEE_SUFFIX_SECTION}}}";
+                var closingTag = $"{{\\/{removeLicenseeNameSection}-{LICENSEE_SUFFIX_SECTION}}}";
+                var removePattern = $"{openingTag}([\\s\\S]*?){closingTag}";
+                customContent = new Regex(removePattern).Replace(customContent, string.Empty);
+            }
             return customContent;
         }
 

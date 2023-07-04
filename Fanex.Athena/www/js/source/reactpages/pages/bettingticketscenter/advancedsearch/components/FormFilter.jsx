@@ -5,7 +5,7 @@ import moment from 'moment'
 import { ToastContainer, toast, Flip } from 'react-toastify';
 
 import Select from 'react-select'
-import MultipleSelect from '@9softstudio/react-multiselect'
+import MultipleSelect from '@legion-lib/react-multiselect'
 import { DateRange } from '@jsroot/components/date-range'
 import AutoComplete from '@jsroot/components/auto-complete'
 import CheckBox from '@jsroot/components/CheckBox'
@@ -23,7 +23,7 @@ import { ApiUrl } from '../../common/lib/constants'
 import { validateBaseCurrency } from '@jsroot/lib/validationHelper'
 
 import { SubsidiaryViewType, TreeViewOption } from '../../../../constants/report'
-import { TreeViewSelect } from '@9softstudio/react-multiselect'
+import { TreeViewSelect } from '@legion-lib/react-multiselect'
 
 const ToastMsg = () => (
     <div>

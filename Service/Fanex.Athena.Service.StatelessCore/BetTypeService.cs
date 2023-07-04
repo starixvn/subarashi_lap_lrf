@@ -6,12 +6,15 @@
 
 namespace Fanex.Athena.Service.StatelessCore
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
 
     using Fanex.Athena.DataAccess.Core.Common.Interfaces;
+    using Fanex.Athena.Extension.Helper;
+    using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -78,6 +81,28 @@ namespace Fanex.Athena.Service.StatelessCore
             return await _betTypeDataAccess.GetBettypesByProduct(licenseeId, productCode, languageCode).ConfigureAwait(false);
         }
 
+        public async Task<IEnumerable<CheckedItem>> GetBetTypeForProducts(int licenseeId, string lang, string productCodes)
+        {
+            var betTypes = await _betTypeDataAccess.GetBetTypeForProducts(licenseeId, productCodes);
+            var result = betTypes.GroupBy(_ => _.ProductCode,
+                _ => new CheckedItem
+                {
+                    Checked = true,
+                    Children = null,
+                    ID = _.BetType,
+                    Name = GetBetTypeName(_.BetType, lang),
+                    Value = _.BetType.ToString(),
+                },
+                (key, items) => new CheckedItem
+                {
+                    Checked = true,
+                    Children = items,
+                    Name = DataHelper.GetProductName(key),
+                    Value = key
+                });
+            return result;
+        }
+
         private static string BuildSportXmlParameter(IEnumerable<SportProductItem> sports)
         {
             const string SportXMLItemPattern = "<product ID=\"{0}\" Sport=\"{1}\"> </product>";
@@ -98,6 +123,32 @@ namespace Fanex.Athena.Service.StatelessCore
 
             var sportsParameters = "<products>" + sportItemXML + "</products>";
             return sportsParameters;
+        }
+
+        private string GetBetTypeName(int betType, string languageCode)
+        {
+            string suffix = GetBettypeNameSuffix(betType);
+            return _cacheRefAdapter.GetBetTypeName(Convert.ToInt32(betType), languageCode) + suffix;
+        }
+
+        private string GetBettypeNameSuffix(int betType)
+        {
+            if (betType == (int)BetType.NumberGameHappy5OddEven)
+            {
+                return " (" + _cacheRefAdapter.GetSportName((int)SportType.NumberGameHappy5) + ")";
+            }
+
+            if (betType >= (int)BetType.VirtualBasketballOverUnder && betType <= (int)BetType.VirtualBasketballFirstHalfHandicap)
+            {
+                return " (" + _cacheRefAdapter.GetSportName((int)SportType.VirtualBasketball) + ")";
+            }
+
+            if(betType == (int)BetType.VirtualSportCorrectScoreTennis)
+            {
+                return " (" + _cacheRefAdapter.GetSportName((int)SportType.Tennis) + ")";
+            }
+
+            return string.Empty;
         }
     }
 }

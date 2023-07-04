@@ -1,0 +1,28 @@
+{
+  "FilesToGenerate": [
+    {
+      "Filename": "ViewResources.js",
+      "Project": null,
+      "Path": "www\\js\\source\\common\\languages",
+      "Properties": {}
+    },
+    {
+      "Filename": "ViewResources.zh-CN.js",
+      "Project": null,
+      "Path": "www\\js\\source\\common\\languages",
+      "Properties": {}
+    },
+    {
+      "Filename": "ViewResources.zh-Hans.js",
+      "Project": null,
+      "Path": "www\\js\\source\\common\\languages",
+      "Properties": {}
+    },
+    {
+      "Filename": "ViewResources.zh-TW.js",
+      "Project": null,
+      "Path": "www\\js\\source\\common\\languages",
+      "Properties": {}
+    }
+  ]
+}

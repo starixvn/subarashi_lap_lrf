@@ -1,5 +1,6 @@
 ﻿namespace Fanex.Athena.Model.Core.DataDomain
 {
+    using Fanex.Athena.Resources;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
 
@@ -32,6 +33,7 @@
             { BaseCurrencyType.USDT,"USDT" }
         };
 
+
         public static readonly IReadOnlyList<int> BaseCurrencyListIds = new List<int>
         {
             BaseCurrencyType.Eur,
@@ -50,6 +52,11 @@
         public static readonly IReadOnlyList<int> BaseCryptoCurrencyListIds = new List<int>
         {
             BaseCurrencyType.USDT
+        };
+
+        public static IReadOnlyDictionary<int, string> VipOnyList => new Dictionary<int, string> {
+            { 0, ViewResources.No },
+            { 1, ViewResources.Yes },
         };
     }
 }

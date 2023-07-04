@@ -1,0 +1,77 @@
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { ActionCreators } from '../actions/index.js'
+import {  ExportExcelMode,} from '../common/constants.js';
+import Service from '../common/Service'; 
+import Popup from '@jsroot/components/popup/Popup.jsx';
+import RadioGroup from '@jsroot/components/radio/RadioGroup.jsx';
+import LangHelper from '@jsroot/lib/langHelper';
+import {v4 as uuidv4} from 'uuid';
+
+export const ExcelPopUp = (props) => {
+    const [isShow, setIsShow] = useState(false);
+    const [exportExcelMode, setExportExcelMode] = useState(ExportExcelMode.All);
+    const { requestParam } = props;
+    const options = [
+        { label: LangHelper.getSingleResource("BothGroupByAndBreakdownLevelOption"), value: ExportExcelMode.All },
+        { label: LangHelper.getSingleResource("GroupByLevelOnlyOption"), value: ExportExcelMode.GroupByLevelOnly }
+    ]
+
+    const _onclickHandler = () => {
+        setIsShow(true);
+    }
+
+    const _onCloseHandler = () =>{
+        setIsShow(false);
+        setExportExcelMode(ExportExcelMode.All);
+    }
+
+    const _onChangeExcelModeHandler = (value) => {
+        setExportExcelMode(value);
+    }
+
+    const exportExcel = (event) => {
+        event.preventDefault();
+        const params = { ...requestParam, ExportExcelMode: exportExcelMode, PageSize: 0, PageIndex: 0};
+        props.toggleLoader(true);
+        Service.getFile(params)
+            .then(() =>
+            {
+                _onCloseHandler();
+                props.toggleLoader(false)
+            });
+    }
+
+    return (
+        <>
+            <span className='flex-initial icon icon-excel-white' onClick={_onclickHandler}></span>
+            <Popup width={400} height={200} isShow={isShow} title={LangHelper.getSingleResource("Confirmation")} onClose={_onCloseHandler} isHtml={false}>
+                <div className='excel-popup-container'>
+                    <RadioGroup key={`${uuidv4()}`}
+                        label={LangHelper.getSingleResource("ChooseDataDisplayInExcelMsg")}
+                        className="excel-option" 
+                        name="excel-option"
+                        options={options}
+                        value={exportExcelMode}
+                        onChange={_onChangeExcelModeHandler}/>
+                    
+                    <div className='button-group right-align'>
+                        <button className='btn btn-submit' onClick={exportExcel}>{LangHelper.getSingleResource("Ok")}</button>
+                        <button className='btn btn-cancel' onClick={_onCloseHandler}>{LangHelper.getSingleResource("Cancel")}</button>
+                    </div>
+                </div>
+            </Popup>
+        </>
+    );
+}
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(ActionCreators, dispatch);
+}
+function mapStateToProps(state) {
+    const { requestParam } = state;
+    return Object.assign({}, { requestParam });
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ExcelPopUp);

@@ -8,10 +8,8 @@ import AppData from '@jsroot/lib/AppData';
 import Site from '@jsroot/lib/site';
 import ActionCreators from '../actions';
 import { DateRange } from '@jsroot/components/date-range';
-import MultipleSelect from '@9softstudio/react-multiselect';
-import moment from 'moment'
+import MultipleSelect from '@legion-lib/react-multiselect';
 import CheckBox from '@jsroot/components/CheckBox'
-import AutoComplete from '@jsroot/components/auto-complete'
 import { ToastContainer, toast, Flip } from 'react-toastify';
 import { ApiUrl, ViewInLevel } from '../common/constants'
 import Service from '../common/service'

@@ -202,6 +202,7 @@
     <Compile Include="ViewModel\ThirdPartyWinLossViewModel.cs" />
     <Compile Include="ViewModel\AgCasinoBalanceViewModel.cs" />
     <Compile Include="ViewModel\LicenseeWinLossGridViewModel.cs" />
+    <Compile Include="ViewModel\WinlossAnalysisReportViewModel.cs" />
     <Compile Include="ViewModel\WinLossByProductViewModel.cs" />
     <Compile Include="ViewModel\CustomerBalanceViewModel.cs" />
     <Compile Include="ViewModel\CustomerPendingFundsViewModel.cs" />

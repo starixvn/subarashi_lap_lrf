@@ -282,7 +282,7 @@ const toggleLoader = show => {
 /*!***************************************************!*\
   !*** ./www/js/source/reactpages/actions/types.js ***!
   \***************************************************/
-/*! exports provided: FETCH_DATA, SET_GRID_DATA, SET_SELECTED_PRODUCT, SET_SELECTED_BASECURRENCY, SET_BASECURRENCY_LIST, SET_SELECTED_CURRENCY, TOGGLE_LOADER, CHANGE_IS_EXCLUDE_TEST, USER_GUIDE_CONTENT, SET_DATE_RANGE, GET_DATE_CONSTRAINT, CHANGE_IS_CONVERT_ALL, SET_SELECTED_STATUS, SET_SELECTED_PLATFORM, SET_SELECTED_LIVESTATUS, SET_USERNAME, SET_REQUEST_PARAM, SET_REPORT_TITLE, SET_SPORT_LIST, SET_PAGING_OPTION, SET_SUBSIDIARY_LIST, SET_SUBSIDIARY_SEARCH, SET_REASON_LIST */
+/*! exports provided: FETCH_DATA, SET_GRID_DATA, SET_SELECTED_PRODUCT, SET_SELECTED_BASECURRENCY, SET_BASECURRENCY_LIST, SET_SELECTED_CURRENCY, TOGGLE_LOADER, CHANGE_IS_EXCLUDE_TEST, USER_GUIDE_CONTENT, SET_DATE_RANGE, GET_DATE_CONSTRAINT, CHANGE_IS_CONVERT_ALL, SET_SELECTED_STATUS, SET_SELECTED_PLATFORM, SET_SELECTED_LIVESTATUS, SET_USERNAME, SET_REQUEST_PARAM, SET_REPORT_TITLE, SET_SPORT_LIST, SET_PAGING_OPTION, SET_SUBSIDIARY_LIST, SET_SUBSIDIARY_SEARCH, SET_REASON_LIST, SET_SELECTED_VIP_OPTION, SET_SELECTED_CUSTOMERCLASS, SET_SELECTED_RISKLEVEL, SET_SELECTED_ODDGROUP */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -310,59 +310,71 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SUBSIDIARY_LIST", function() { return SET_SUBSIDIARY_LIST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SUBSIDIARY_SEARCH", function() { return SET_SUBSIDIARY_SEARCH; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_REASON_LIST", function() { return SET_REASON_LIST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SELECTED_VIP_OPTION", function() { return SET_SELECTED_VIP_OPTION; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SELECTED_CUSTOMERCLASS", function() { return SET_SELECTED_CUSTOMERCLASS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SELECTED_RISKLEVEL", function() { return SET_SELECTED_RISKLEVEL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SELECTED_ODDGROUP", function() { return SET_SELECTED_ODDGROUP; });
 const FETCH_DATA = 'FETCH_DATA';
 const SET_GRID_DATA = "SET_GRID_DATA";
-
 /* Product */
-const SET_SELECTED_PRODUCT = "SET_SELECTED_PRODUCT";
 
+const SET_SELECTED_PRODUCT = "SET_SELECTED_PRODUCT";
 /* Base Currency */
+
 const SET_SELECTED_BASECURRENCY = "SET_SELECTED_BASECURRENCY";
 const SET_BASECURRENCY_LIST = "SET_BASECURRENCY_LIST";
-
 /* Currency */
+
 const SET_SELECTED_CURRENCY = "SET_SELECTED_CURRENCY";
-
 /* Loader */
+
 const TOGGLE_LOADER = "TOGGLE_LOADER";
-
 /* Exclude Test Data */
+
 const CHANGE_IS_EXCLUDE_TEST = "CHANGE_IS_EXCLUDE_TEST";
-
 /* User mini guide */
-const USER_GUIDE_CONTENT = "USER_GUIDE_CONTENT;";
 
+const USER_GUIDE_CONTENT = "USER_GUIDE_CONTENT;";
 /* Date range */
+
 const SET_DATE_RANGE = 'SET_DATE_RANGE';
 const GET_DATE_CONSTRAINT = 'GET_DATE_CONSTRAINT';
-
 /* Convert all figures to base currency */
+
 const CHANGE_IS_CONVERT_ALL = "CHANGE_IS_CONVERT_ALL";
-
 /* Status */
+
 const SET_SELECTED_STATUS = "SET_SELECTED_STATUS";
-
 /* Platform  */
-const SET_SELECTED_PLATFORM = "SET_SELECTED_PLATFORM";
 
+const SET_SELECTED_PLATFORM = "SET_SELECTED_PLATFORM";
 /* Live Status  */
+
 const SET_SELECTED_LIVESTATUS = "SET_SELECTED_LIVESTATUS";
 const SET_USERNAME = "SET_USERNAME";
 const SET_REQUEST_PARAM = "SET_REQUEST_PARAM";
 const SET_REPORT_TITLE = "SET_REPORT_TITLE";
-
 /*Sport list*/
+
 const SET_SPORT_LIST = "SET_SPORT_LIST";
-
 /* Live Status  */
-const SET_PAGING_OPTION = 'SET_PAGING_OPTION';
 
+const SET_PAGING_OPTION = 'SET_PAGING_OPTION';
 /* Subsidiary Search  */
+
 const SET_SUBSIDIARY_LIST = 'SET_SUBSIDIARY_LIST';
 const SET_SUBSIDIARY_SEARCH = 'SET_SUBSIDIARY_SEARCH';
-
 /*Reason list*/
+
 const SET_REASON_LIST = "SET_REASON_LIST";
+/*Customer class*/
+
+const SET_SELECTED_VIP_OPTION = 'SET_SELECTED_VIP_OPTION';
+const SET_SELECTED_CUSTOMERCLASS = "SET_SELECTED_CUSTOMERCLASS";
+const SET_SELECTED_RISKLEVEL = "SET_SELECTED_RISKLEVEL";
+/*Odd group*/
+
+const SET_SELECTED_ODDGROUP = "SET_SELECTED_ODDGROUP";
 
 /***/ }),
 
@@ -382,28 +394,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
 class CollapsibleRow extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
   constructor(props) {
     super(props);
+
     _defineProperty(this, "onClick", () => {
       const newState = !this.state.isCollapse;
       this.setState({
         isCollapse: newState
       });
+
       if (!newState) {
         this.props.onExpand && this.props.onExpand();
       }
     });
+
     this.state = {
       isCollapse: !this.props.isExpand
     };
   }
+
   render() {
     const {
       subject,
@@ -427,13 +442,16 @@ class CollapsibleRow extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Compon
       }
     }));
   }
+
 }
+
 _defineProperty(CollapsibleRow, "propTypes", {
   isExpand: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool,
   subject: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
   content: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
   onExpand: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func
 });
+
 ;
 
 /***/ }),
@@ -450,6 +468,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
+
 const Loader = ({
   isLoading
 }) => {
@@ -464,6 +483,7 @@ const Loader = ({
     className: "loader-inner ball-beat"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null))));
 };
+
 /* harmony default export */ __webpack_exports__["default"] = (Loader);
 
 /***/ }),
@@ -482,6 +502,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 
 
+
 const NoDataTitle = ({
   title
 }) => {
@@ -492,6 +513,7 @@ const NoDataTitle = ({
     }
   });
 };
+
 /* harmony default export */ __webpack_exports__["default"] = (NoDataTitle);
 
 /***/ }),
@@ -512,9 +534,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -525,20 +546,25 @@ const wrapperClasses = {
 class Overlay extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   constructor(props) {
     super(props);
+
     _defineProperty(this, "_unRegisterEvents", () => {
       const {
         closeOnOutsideClick
       } = this.props;
+
       if (closeOnOutsideClick) {
         document.removeEventListener('click', this._handleClickOutSide);
       }
     });
+
     _defineProperty(this, "_handleClickOutSide", event => {
       const clickOutside = this.containerElement && !this.containerElement.contains(event.target);
+
       if (clickOutside && this.state.isOpening) {
         this._close();
       }
     });
+
     this.containerElement = null;
     this.refHandlers = {
       container: ref => {
@@ -549,6 +575,7 @@ class Overlay extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       isOpening: this.props.isOpening
     };
   }
+
   componentDidUpdate(prevProps, prevState) {
     if (this.props.isOpening !== prevProps.isOpening) {
       const {
@@ -567,17 +594,21 @@ class Overlay extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       }, 0);
     }
   }
+
   componentWillUnmount() {
     this._unRegisterEvents();
   }
+
   _registerEvents() {
     const {
       closeOnOutsideClick
     } = this.props;
+
     if (closeOnOutsideClick) {
       document.addEventListener('click', this._handleClickOutSide);
     }
   }
+
   _close() {
     const {
       onClose
@@ -586,6 +617,7 @@ class Overlay extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       isOpening: false
     }, () => onClose && onClose());
   }
+
   render() {
     const {
       className,
@@ -603,13 +635,16 @@ class Overlay extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       ref: this.refHandlers.container
     }, children);
   }
+
 }
+
 _defineProperty(Overlay, "propTypes", {
   closeOnOutsideClick: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
   isOpening: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
   onOpen: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
   onClose: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
 });
+
 _defineProperty(Overlay, "defaultProps", {
   closeOnOutsideClick: true,
   isOpening: false
@@ -631,18 +666,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 const _excluded = ["content", "extendContent", "tag"];
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+
 
 
 const ReportTitle = _ref => {
   let {
-      content,
-      extendContent,
-      tag
-    } = _ref,
-    attrs = _objectWithoutProperties(_ref, _excluded);
+    content,
+    extendContent,
+    tag
+  } = _ref,
+      attrs = _objectWithoutProperties(_ref, _excluded);
+
   const Tag = tag;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "report-title-container"
@@ -650,6 +691,7 @@ const ReportTitle = _ref => {
     className: "report-title"
   }, attrs), content, extendContent));
 };
+
 const propTypes = {
   tag: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
   content: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.any
@@ -682,12 +724,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DayCell_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DayCell.js */ "./www/js/source/reactpages/components/date-range/DayCell.js");
 /* harmony import */ var _styles_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./styles.js */ "./www/js/source/reactpages/components/date-range/styles.js");
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./constants */ "./www/js/source/reactpages/components/date-range/constants.js");
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -699,24 +743,29 @@ const START_OF_MONTH = 0;
 const END_OF_MONTH = 11;
 const START_DAY_OF_MONTH = 1;
 const DEFAULT_YEAR_RANGE = 5;
+
 function checkRange(dayMoment, range) {
   return dayMoment.isBetween(range['startDate'], range['endDate']) || dayMoment.isBetween(range['endDate'], range['startDate']);
 }
+
 function checkStartEdge(dayMoment, range) {
   const {
     startDate
   } = range;
   return dayMoment.startOf('day').isSame(startDate.startOf('day'));
 }
+
 function checkEndEdge(dayMoment, range) {
   const {
     endDate
   } = range;
   return dayMoment.endOf('day').isSame(endDate.endOf('day'));
 }
+
 function isOusideMinMax(dayMoment, minDate, maxDate, format) {
   return minDate && dayMoment.isBefore(Object(_utils_parseInput_js__WEBPACK_IMPORTED_MODULE_3__["default"])(minDate, format, 'startOf')) || maxDate && dayMoment.isAfter(Object(_utils_parseInput_js__WEBPACK_IMPORTED_MODULE_3__["default"])(maxDate, format, 'endOf'));
 }
+
 class Calendar extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   constructor(props, context) {
     super(props, context);
@@ -738,12 +787,14 @@ class Calendar extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     this.state = state;
     this.styles = Object(_styles_js__WEBPACK_IMPORTED_MODULE_5__["default"])(theme);
   }
+
   componentDidMount() {
     const {
       onInit
     } = this.props;
     onInit && onInit(this.state.date);
   }
+
   get limitedDate() {
     const {
       minDate,
@@ -751,41 +802,51 @@ class Calendar extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     } = this.props;
     const m = moment__WEBPACK_IMPORTED_MODULE_2___default()();
     let startDate, endDate;
+
     if (minDate) {
       startDate = moment__WEBPACK_IMPORTED_MODULE_2___default.a.isMoment(minDate) ? minDate : moment__WEBPACK_IMPORTED_MODULE_2___default()(minDate, _constants__WEBPACK_IMPORTED_MODULE_6__["MomentFormat"].default);
     } else {
       startDate = moment__WEBPACK_IMPORTED_MODULE_2___default()([m.year() - DEFAULT_YEAR_RANGE, START_OF_MONTH]);
     }
+
     if (maxDate) {
       endDate = moment__WEBPACK_IMPORTED_MODULE_2___default.a.isMoment(maxDate) ? maxDate : moment__WEBPACK_IMPORTED_MODULE_2___default()(maxDate, _constants__WEBPACK_IMPORTED_MODULE_6__["MomentFormat"].default);
     } else {
       endDate = moment__WEBPACK_IMPORTED_MODULE_2___default()([m.year(), END_OF_MONTH]).endOf("month");
     }
+
     return {
       startDate,
       endDate
     };
   }
+
   get disablePrevButton() {
     const range = this.limitedDate;
     const startDate = range.startDate;
     const currentDate = this.state.shownDate;
     let prevMonth = this.state.shownDate.month() - 1;
+
     if (prevMonth < startDate.month() && currentDate.year() <= startDate.year()) {
       return true;
     }
+
     return false;
   }
+
   get disableNextButton() {
     const range = this.limitedDate;
     const endDate = range.endDate;
     const currentDate = this.state.shownDate;
     let nextMonth = this.state.shownDate.month() + 1;
+
     if (nextMonth > endDate.month() && currentDate.year() >= endDate.year()) {
       return true;
     }
+
     return false;
   }
+
   getShownDate() {
     const {
       link
@@ -793,68 +854,85 @@ class Calendar extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     const shownDate = link || this.state.shownDate;
     return shownDate;
   }
+
   handleSelect(newDate) {
     const {
       link,
       onChange
     } = this.props;
     onChange && onChange(newDate);
+
     if (!link) {
       this.setState({
         date: newDate
       });
     }
   }
+
   nextButtonClickHandler(event) {
     event.preventDefault();
+
     if (!this.disableNextButton) {
       this.changeMonth(this.state.shownDate.month() + 1, event);
     }
   }
+
   prevButtonClickHandler(event) {
     event.preventDefault();
+
     if (!this.disablePrevButton) {
       this.changeMonth(this.state.shownDate.month() - 1, event);
     }
   }
+
   changeMonth(direction, event) {
     event.preventDefault();
     let selectedMonth = Number(direction);
     let year = this.state.shownDate.year();
+
     if (selectedMonth < START_OF_MONTH) {
       selectedMonth = END_OF_MONTH;
       year -= 1;
     }
+
     if (selectedMonth > END_OF_MONTH) {
       selectedMonth = START_OF_MONTH;
       year += 1;
     }
+
     const {
       link,
       linkCB
     } = this.props;
     let newDate = moment__WEBPACK_IMPORTED_MODULE_2___default()([year, selectedMonth, this.state.shownDate.date()]);
+
     if (!newDate.isValid()) {
       newDate = moment__WEBPACK_IMPORTED_MODULE_2___default()([year, selectedMonth, START_DAY_OF_MONTH]);
     }
+
     if (link && linkCB) {
       return linkCB(newDate);
     }
+
     this.setState({
       shownDate: newDate
     });
   }
+
   changeYear(event) {
     event.preventDefault();
     const selectedYear = Number(event.target.value);
     let newDate = moment__WEBPACK_IMPORTED_MODULE_2___default()([selectedYear, this.state.shownDate.month(), this.state.shownDate.date()]);
+
     if (!newDate.isValid()) {
       newDate = moment__WEBPACK_IMPORTED_MODULE_2___default()([selectedYear, this.state.shownDate.month(), START_DAY_OF_MONTH]);
     }
+
     this.setState({
       shownDate: newDate
     });
   }
+
   renderMonthList(classes) {
     const {
       styles
@@ -865,14 +943,17 @@ class Calendar extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     } = this.props;
     const monthLabels = locale.months;
     let monthOptions = [];
+
     for (let i = 0; i < 12; i++) {
       const isDisabled = this._isDisabledMonth(i);
+
       monthOptions.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         disabled: isDisabled,
         key: `month${i}`,
         value: i
       }, monthLabels[i]));
     }
+
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
       style: onlyClasses ? undefined : styles["MonthAndYearSelect"],
       className: classes.monthAndYearSelect,
@@ -880,11 +961,13 @@ class Calendar extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       value: this.state.shownDate.month()
     }, monthOptions);
   }
+
   _isDisabledMonth(currentMonth) {
     const range = this.limitedDate;
     const currentYear = this.state.shownDate.year();
     return currentMonth < range.startDate.month() && currentYear <= range.startDate.year() || currentMonth > range.endDate.month() && currentYear >= range.endDate.year();
   }
+
   renderYearList(classes) {
     const {
       styles
@@ -894,12 +977,14 @@ class Calendar extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     } = this.props;
     const range = this.limitedDate;
     const yearOptions = [];
+
     for (let i = range.startDate.year(); i <= range.endDate.year(); i++) {
       yearOptions.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         key: `year${i}`,
         value: i
       }, i));
     }
+
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
       style: onlyClasses ? undefined : styles["MonthAndYearSelect"],
       className: classes.monthAndYearSelect,
@@ -907,6 +992,7 @@ class Calendar extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       value: this.state.shownDate.year()
     }, yearOptions);
   }
+
   renderMonthAndYear(classes) {
     const shownDate = this.getShownDate();
     const year = shownDate.year();
@@ -950,6 +1036,7 @@ class Calendar extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       style: onlyClasses ? undefined : _objectSpread(_objectSpread({}, styles['MonthArrow']), styles['MonthArrowNext'])
     })) : null);
   }
+
   renderWeekdays(classes) {
     const dow = this.state.firstDayOfWeek;
     const weekdays = [];
@@ -962,6 +1049,7 @@ class Calendar extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     } = this.props;
     const weekDays = locale.weekdays;
     const dayLength = 7 + dow;
+
     for (let i = dow; i < dayLength; i++) {
       const weekDayIndex = i % 7;
       const day = weekDays[weekDayIndex];
@@ -971,8 +1059,10 @@ class Calendar extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         key: i + day
       }, day));
     }
+
     return weekdays;
   }
+
   renderDays(classes) {
     // TODO: Split this logic into smaller chunks
     const {
@@ -1001,23 +1091,24 @@ class Calendar extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     const lastMonthDayCount = lastMonth.daysInMonth();
     const nextMonth = shownDate.clone().month(monthNumber + 1);
     const nextMonthNumber = nextMonth.month();
-    const days = [];
+    const days = []; // Previous month's days
 
-    // Previous month's days
     const diff = Math.abs(firstDayOfWeek - (startOfMonth + 7)) % 7;
+
     for (let i = diff - 1; i >= 0; i--) {
       const dayMoment = lastMonth.clone().date(lastMonthDayCount - i);
       days.push({
         dayMoment,
         isPassive: true
       });
-    }
+    } // Current month's days
 
-    // Current month's days
+
     for (let i = 1; i <= dayCount; i++) {
-      const dayMoment = shownDate.clone().date(i);
-      // set days before today to isPassive
+      const dayMoment = shownDate.clone().date(i); // set days before today to isPassive
+
       var _today = moment__WEBPACK_IMPORTED_MODULE_2___default()();
+
       if (disableDaysBeforeToday && Number(dayMoment.diff(_today, "days")) <= -1) {
         days.push({
           dayMoment,
@@ -1028,10 +1119,11 @@ class Calendar extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
           dayMoment
         });
       }
-    }
+    } // Next month's days
 
-    // Next month's days
+
     const remainingCells = 42 - days.length; // 42cells = 7days * 6rows
+
     for (let i = 1; i <= remainingCells; i++) {
       const dayMoment = nextMonth.clone().date(i);
       days.push({
@@ -1039,6 +1131,7 @@ class Calendar extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         isPassive: true
       });
     }
+
     const today = moment__WEBPACK_IMPORTED_MODULE_2___default()().startOf('day');
     return days.map((data, index) => {
       const {
@@ -1074,6 +1167,7 @@ class Calendar extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       }));
     });
   }
+
   render() {
     const {
       styles
@@ -1082,7 +1176,9 @@ class Calendar extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       onlyClasses,
       classNames
     } = this.props;
+
     const classes = _objectSpread(_objectSpread({}, _styles_js__WEBPACK_IMPORTED_MODULE_5__["defaultClasses"]), classNames);
+
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       style: onlyClasses ? undefined : _objectSpread(_objectSpread({}, styles['Calendar']), this.props.style),
       className: classes.calendar
@@ -1094,7 +1190,9 @@ class Calendar extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       className: classes.days
     }, this.renderDays(classes)));
   }
+
 }
+
 Calendar.defaultProps = {
   format: _constants__WEBPACK_IMPORTED_MODULE_6__["MomentFormat"].default,
   theme: {},
@@ -1160,10 +1258,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Overlay__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../Overlay */ "./www/js/source/reactpages/components/Overlay.jsx");
 /* harmony import */ var _Calendar_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Calendar.js */ "./www/js/source/reactpages/components/date-range/Calendar.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -1177,11 +1276,13 @@ function _toPrimitive(input, hint) { if (typeof input !== "object" || input === 
 class DatePicker extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   constructor(props) {
     super(props);
+
     _defineProperty(this, "show", () => {
       this.setState({
         show: true
       });
     });
+
     const {
       locale,
       date,
@@ -1194,15 +1295,19 @@ class DatePicker extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       show: false
     };
   }
+
   get dateText() {
     const {
       selectedDate
     } = this.state;
+
     if (selectedDate) {
       return `${selectedDate.format(this.props.format)}`;
     }
+
     return "";
   }
+
   handleSelect(date) {
     const {
       onChange
@@ -1213,6 +1318,7 @@ class DatePicker extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       show: false
     });
   }
+
   render() {
     const {
       format,
@@ -1221,7 +1327,9 @@ class DatePicker extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       maxDate,
       classNames
     } = this.props;
+
     const classes = _objectSpread(_objectSpread({}, _styles_js__WEBPACK_IMPORTED_MODULE_6__["defaultClasses"]), classNames);
+
     const {
       show
     } = this.state;
@@ -1253,7 +1361,9 @@ class DatePicker extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       locale: this.locale
     }))));
   }
+
 }
+
 _defineProperty(DatePicker, "propTypes", {
   format: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
   firstDayOfWeek: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
@@ -1265,6 +1375,7 @@ _defineProperty(DatePicker, "propTypes", {
   locale: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object,
   date: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object, prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func, prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string])
 });
+
 _defineProperty(DatePicker, "defaultProps", {
   format: _constants__WEBPACK_IMPORTED_MODULE_5__["MomentFormat"].default
 });
@@ -1284,22 +1395,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _utils_parseInput_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utils/parseInput.js */ "./www/js/source/reactpages/components/date-range/utils/parseInput.js");
-/* harmony import */ var _Calendar_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Calendar.js */ "./www/js/source/reactpages/components/date-range/Calendar.js");
-/* harmony import */ var _PredefinedRanges_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./PredefinedRanges.js */ "./www/js/source/reactpages/components/date-range/PredefinedRanges.js");
-/* harmony import */ var _styles_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./styles.js */ "./www/js/source/reactpages/components/date-range/styles.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./constants */ "./www/js/source/reactpages/components/date-range/constants.js");
-/* harmony import */ var _defaultOptions_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./defaultOptions.js */ "./www/js/source/reactpages/components/date-range/defaultOptions.js");
-/* harmony import */ var _Overlay__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../Overlay */ "./www/js/source/reactpages/components/Overlay.jsx");
+/* harmony import */ var _utils_parseInput_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utils/parseInput.js */ "./www/js/source/reactpages/components/date-range/utils/parseInput.js");
+/* harmony import */ var _Calendar_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Calendar.js */ "./www/js/source/reactpages/components/date-range/Calendar.js");
+/* harmony import */ var _PredefinedRanges_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./PredefinedRanges.js */ "./www/js/source/reactpages/components/date-range/PredefinedRanges.js");
+/* harmony import */ var _styles_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./styles.js */ "./www/js/source/reactpages/components/date-range/styles.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./constants */ "./www/js/source/reactpages/components/date-range/constants.js");
+/* harmony import */ var _defaultOptions_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./defaultOptions.js */ "./www/js/source/reactpages/components/date-range/defaultOptions.js");
+/* harmony import */ var _Overlay__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../Overlay */ "./www/js/source/reactpages/components/Overlay.jsx");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -1314,12 +1424,14 @@ function _toPrimitive(input, hint) { if (typeof input !== "object" || input === 
 class DateRange extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   constructor(props, context) {
     super(props, context);
+
     _defineProperty(this, "show", () => {
       this.calendarSelectionStep = 0;
       this.setState({
         show: true
       });
     });
+
     _defineProperty(this, "handleApply", () => {
       const {
         onClickApplyButton,
@@ -1331,24 +1443,27 @@ class DateRange extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       onChange && onChange(range, this.isValid);
       this.close();
     });
+
     _defineProperty(this, "handleCancel", () => {
       this.setRange(this.originalRange, false);
     });
+
     const {
       format,
       linkedCalendars,
       theme
     } = props;
-    const startDate = Object(_utils_parseInput_js__WEBPACK_IMPORTED_MODULE_3__["default"])(props.startDate, format, 'startOf');
-    const endDate = Object(_utils_parseInput_js__WEBPACK_IMPORTED_MODULE_3__["default"])(props.endDate, format, 'endOf');
-    this.styles = Object(_styles_js__WEBPACK_IMPORTED_MODULE_6__["default"])(theme);
+    const startDate = Object(_utils_parseInput_js__WEBPACK_IMPORTED_MODULE_2__["default"])(props.startDate, format, 'startOf');
+    const endDate = Object(_utils_parseInput_js__WEBPACK_IMPORTED_MODULE_2__["default"])(props.endDate, format, 'endOf');
+    this.styles = Object(_styles_js__WEBPACK_IMPORTED_MODULE_5__["default"])(theme);
     this.calendarSelectionStep = 0;
-    this.locale = _objectSpread(_objectSpread({}, _defaultOptions_js__WEBPACK_IMPORTED_MODULE_9__["default"].locale), props.locale);
+    this.locale = _objectSpread(_objectSpread({}, _defaultOptions_js__WEBPACK_IMPORTED_MODULE_8__["default"].locale), props.locale);
     this.isValid = true;
     this.originalRange = {
       startDate,
       endDate
     };
+    this.ranges = _objectSpread(_objectSpread({}, _defaultOptions_js__WEBPACK_IMPORTED_MODULE_8__["default"].ranges(props.today, props.minDate, props.maxDate, props.limitedMonthRange)), props.ranges);
     this.state = {
       range: {
         startDate,
@@ -1358,27 +1473,33 @@ class DateRange extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       show: false
     };
   }
+
   get dateRangeText() {
     const range = this.state.range;
+
     if (range.startDate && range.endDate) {
       const {
         format
       } = this.props;
       return `${range.startDate.format(format)} - ${range.endDate.format(format)}`;
     }
+
     return "";
   }
+
   close() {
     this.setState({
       show: false
     });
   }
+
   componentDidMount() {
     const {
       onInit
     } = this.props;
     onInit && onInit(this.state.range);
   }
+
   orderRange(range) {
     const {
       startDate,
@@ -1391,9 +1512,11 @@ class DateRange extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       endDate: startDate
     };
   }
+
   setRange(dateRange, show) {
     let range = this.orderRange(dateRange);
     this.isValid = this.isValidMonthRange(range);
+
     if (this.isValid) {
       const newState = show === undefined ? {
         range
@@ -1409,6 +1532,7 @@ class DateRange extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       onChange && onChange(range, false);
     }
   }
+
   handlePredefinedRangesSelect(range) {
     this.setRange(range, false);
     this.originalRange = Object.assign({}, range);
@@ -1417,6 +1541,7 @@ class DateRange extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     } = this.props;
     onChange && onChange(range, true);
   }
+
   handleCalendarSelect(date) {
     const {
       startDate,
@@ -1426,36 +1551,44 @@ class DateRange extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       startDate: startDate,
       endDate: endDate
     };
+
     switch (this.calendarSelectionStep) {
       case 0:
         range['startDate'] = date;
         range['endDate'] = date;
         this.calendarSelectionStep = 1;
         break;
+
       case 1:
         range['endDate'] = date;
         this.calendarSelectionStep = 0;
         break;
     }
+
     this.setRange(range);
   }
+
   isValidMonthRange(date) {
     const {
       limitedMonthRange
     } = this.props;
+
     if (limitedMonthRange) {
       const startDate = date.startDate;
       const endDate = date.endDate;
       const diffMonth = 12 * (endDate.year() - startDate.year()) + endDate.month() - startDate.month() + 1;
       return diffMonth <= limitedMonthRange;
     }
+
     return true;
   }
+
   handleLinkChange(newDate) {
     this.setState({
       link: newDate
     });
   }
+
   render() {
     const {
       showRange,
@@ -1479,9 +1612,9 @@ class DateRange extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     const {
       styles
     } = this;
-    const today = moment__WEBPACK_IMPORTED_MODULE_2___default()().format("MM/DD/YYYY");
-    const ranges = _objectSpread(_objectSpread({}, _defaultOptions_js__WEBPACK_IMPORTED_MODULE_9__["default"].ranges(today, this.props.minDate, this.props.maxDate, this.props.limitedMonthRange)), this.props.ranges);
-    const classes = _objectSpread(_objectSpread({}, _styles_js__WEBPACK_IMPORTED_MODULE_6__["defaultClasses"]), classNames);
+
+    const classes = _objectSpread(_objectSpread({}, _styles_js__WEBPACK_IMPORTED_MODULE_5__["defaultClasses"]), classNames);
+
     const calendarsCount = Number(calendars) - 1;
     const buttonHandlers = {
       apply: this.handleApply,
@@ -1502,16 +1635,16 @@ class DateRange extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       value: this.dateRangeText
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
       className: "icon icon-calendar"
-    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Overlay__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Overlay__WEBPACK_IMPORTED_MODULE_9__["default"], {
       isOpening: this.state.show,
       onClose: this.handleCancel,
       key: range.startDate.month().toString() + range.startDate.year().toString() + range.endDate.month().toString() + range.endDate.year().toString()
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: classes.dateRange,
       ref: element => this.dateRangeContainer = element
-    }, showRange && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PredefinedRanges_js__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    }, showRange && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PredefinedRanges_js__WEBPACK_IMPORTED_MODULE_4__["default"], {
       format: format,
-      ranges: ranges,
+      ranges: this.ranges,
       range: range,
       theme: styles,
       onSelect: range => this.handlePredefinedRangesSelect(range),
@@ -1521,9 +1654,11 @@ class DateRange extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       buttonHandlers: buttonHandlers
     }), (() => {
       const _calendars = [];
+
       for (var i = calendarsCount; i >= 0; i--) {
         const shownDate = i == calendarsCount ? range.startDate : range.endDate;
-        _calendars.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Calendar_js__WEBPACK_IMPORTED_MODULE_4__["default"], {
+
+        _calendars.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Calendar_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
           showMonthArrow: showMonthArrow,
           shownDate: shownDate,
           disableDaysBeforeToday: disableDaysBeforeToday,
@@ -1544,14 +1679,17 @@ class DateRange extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
           locale: this.locale
         }));
       }
+
       return _calendars;
     })())));
   }
+
 }
+
 DateRange.defaultProps = {
   linkedCalendars: false,
   theme: {},
-  format: _constants__WEBPACK_IMPORTED_MODULE_8__["MomentFormat"].default,
+  format: _constants__WEBPACK_IMPORTED_MODULE_7__["MomentFormat"].default,
   calendars: 2,
   onlyClasses: true,
   classNames: {},
@@ -1603,10 +1741,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _styles_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./styles.js */ "./www/js/source/reactpages/components/date-range/styles.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -1620,30 +1760,37 @@ class DayCell extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     };
     this.styles = this.props.theme;
   }
+
   handleMouseEvent(event) {
     event.preventDefault();
     if (this.props.isPassive) return null;
     const newState = {};
+
     switch (event.type) {
       case 'mouseenter':
         newState['hover'] = true;
         break;
+
       case 'mouseup':
       case 'mouseleave':
         newState['hover'] = false;
         newState['active'] = false;
         break;
+
       case 'mousedown':
         newState['active'] = true;
         break;
     }
+
     this.setState(newState);
   }
+
   handleSelect(event) {
     event.preventDefault();
     if (this.props.isPassive) return null;
     this.props.onSelect(this.props.dayMoment);
   }
+
   getStateStyles() {
     const {
       hover,
@@ -1675,6 +1822,7 @@ class DayCell extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     const specialDayStyle = isSpecialDay ? styles['DaySpecialDay'] : {};
     return _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, todayStyle), sundayStyle), specialDayStyle), inRangeStyle), hoverStyle), passiveStyle), activeStyle), selectedStyle), startEdgeStyle), endEdgeStyle);
   }
+
   getClassNames(classes) {
     const {
       isSelected,
@@ -1698,6 +1846,7 @@ class DayCell extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       [classes.daySpecialDay]: isSpecialDay
     });
   }
+
   render() {
     const {
       dayMoment,
@@ -1726,7 +1875,9 @@ class DayCell extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       style: onlyClasses ? undefined : _objectSpread(_objectSpread({}, styles['Day']), stateStyle)
     }, dayMoment.date()));
   }
+
 }
+
 DayCell.defaultProps = {
   theme: {
     'Day': {}
@@ -1771,10 +1922,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _styles_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./styles.js */ "./www/js/source/reactpages/components/date-range/styles.js");
 /* harmony import */ var _defaultOptions_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./defaultOptions.js */ "./www/js/source/reactpages/components/date-range/defaultOptions.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -1788,11 +1941,13 @@ class PredefinedRanges extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     this.styles = this.props.theme;
     this.selectedItem = this._getSelectedRange();
   }
+
   componentDidUpdate(prevProps, prevState) {
     if (this.props.range !== prevProps.range) {
       this.selectedItem = this._getSelectedRange();
     }
   }
+
   _getSelectedRange() {
     const {
       ranges,
@@ -1803,6 +1958,7 @@ class PredefinedRanges extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       return range.startDate.isSame(currentRange.startDate, "day") && range.endDate.isSame(currentRange.endDate, "day");
     });
   }
+
   handleSelect(name, event) {
     event.preventDefault();
     this.selectedItem = name;
@@ -1812,10 +1968,12 @@ class PredefinedRanges extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       endDate: Object(_utils_parseInput_js__WEBPACK_IMPORTED_MODULE_4__["default"])(range['endDate'], null, 'endOf')
     });
   }
+
   clickButton(event, action) {
     event.preventDefault();
     this.props.buttonHandlers[action]();
   }
+
   renderRangeList(classes) {
     const {
       ranges,
@@ -1829,7 +1987,9 @@ class PredefinedRanges extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     return Object.keys(ranges).map(name => {
       const active = this.selectedItem === name;
       gotActiveRange = !gotActiveRange && active;
+
       const style = _objectSpread(_objectSpread({}, styles['PredefinedRangesItem']), gotActiveRange ? styles['PredefinedRangesItemActive'] : {});
+
       const predefinedRangeClass = classnames__WEBPACK_IMPORTED_MODULE_3___default()({
         [classes.predefinedRangesItem]: true,
         [classes.predefinedRangesItemActive]: gotActiveRange
@@ -1843,13 +2003,16 @@ class PredefinedRanges extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       }, name);
     });
   }
+
   renderRangeButtons(classes) {
     const {
       style,
       onlyClasses,
       locale
     } = this.props;
+
     const locales = _objectSpread(_objectSpread({}, _defaultOptions_js__WEBPACK_IMPORTED_MODULE_6__["default"].locale), locale);
+
     const {
       styles
     } = this;
@@ -1871,6 +2034,7 @@ class PredefinedRanges extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       type: "button"
     }, locales.cancelLabel));
   }
+
   render() {
     const {
       style,
@@ -1880,13 +2044,17 @@ class PredefinedRanges extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     const {
       styles
     } = this;
+
     const classes = _objectSpread(_objectSpread({}, _styles_js__WEBPACK_IMPORTED_MODULE_5__["defaultClasses"]), classNames);
+
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       style: onlyClasses ? undefined : _objectSpread(_objectSpread({}, styles['PredefinedRanges']), style),
       className: classes.predefinedRanges
     }, this.renderRangeList(classes), this.renderRangeButtons(classes));
   }
+
 }
+
 PredefinedRanges.defaultProps = {
   onlyClasses: false,
   classNames: {}
@@ -1932,10 +2100,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_locale__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utils/locale */ "./www/js/source/reactpages/components/date-range/utils/locale.js");
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./constants */ "./www/js/source/reactpages/components/date-range/constants.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -1946,25 +2116,30 @@ const addRange = (rangeObj, name, start, end) => {
     endDate: end
   };
 };
+
 const addOneDay = (rangeObj, name, day, min, max) => {
   if (day >= min && day <= max) {
     addRange(rangeObj, name, day, day);
   }
 };
+
 const addDistanceDays = (rangeObj, name, start, end, min, max) => {
   if (!(max < start || end < min)) {
     addRange(rangeObj, name, start < min ? min : start, end > max ? max : end);
   }
 };
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   ranges: (todayDate, minDate, maxDate, limitMonths) => {
     var today = !todayDate ? moment__WEBPACK_IMPORTED_MODULE_0___default()() : !moment__WEBPACK_IMPORTED_MODULE_0___default.a.isMoment(todayDate) ? moment__WEBPACK_IMPORTED_MODULE_0___default()(todayDate, _constants__WEBPACK_IMPORTED_MODULE_3__["MomentFormat"].default) : todayDate;
     var max = !maxDate ? today : !moment__WEBPACK_IMPORTED_MODULE_0___default.a.isMoment(maxDate) ? moment__WEBPACK_IMPORTED_MODULE_0___default()(maxDate, _constants__WEBPACK_IMPORTED_MODULE_3__["MomentFormat"].default) : maxDate;
     var min = !minDate ? today : !moment__WEBPACK_IMPORTED_MODULE_0___default.a.isMoment(minDate) ? moment__WEBPACK_IMPORTED_MODULE_0___default()(minDate, _constants__WEBPACK_IMPORTED_MODULE_3__["MomentFormat"].default) : minDate;
     const range = {};
+
     if (today < min) {
       return range;
     }
+
     addOneDay(range, "Today", today, min, max);
     const yesterday = today.clone().add(-1, 'days');
     addOneDay(range, "Yesterday", yesterday, min, max);
@@ -1980,11 +2155,13 @@ const addDistanceDays = (rangeObj, name, start, end, min, max) => {
     const startLastmonth = today.clone().subtract(1, 'month').startOf('month');
     const endLastmonth = startLastmonth.clone().endOf('month');
     addDistanceDays(range, "Lastmonth", startLastmonth, endLastmonth, min, max);
+
     if (limitMonths && limitMonths > 1) {
       const startSincelastmonth = today.clone().subtract(1, 'month').startOf('month');
       const endSincelastmonth = today;
       addDistanceDays(range, "Sincelastmonth", startSincelastmonth, endSincelastmonth, min, max);
     }
+
     return range;
   },
   locale: _objectSpread({
@@ -2031,10 +2208,11 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "defaultClasses", function() { return defaultClasses; });
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 const defaultClasses = {
   show: 'rdr-Show',
   hide: 'rdr-Hide',
@@ -2218,15 +2396,19 @@ const defaultTheme = {
   let calendarWidth = defaultTheme.Calendar.width;
   let calendarPadding = defaultTheme.Calendar.padding;
   let cellMargin = defaultTheme.Day.margin || 0;
+
   if (customTheme.Calendar && customTheme.Calendar.hasOwnProperty('width')) {
     calendarWidth = customTheme.Calendar.width;
   }
+
   if (customTheme.Calendar && customTheme.Calendar.hasOwnProperty('padding')) {
     calendarPadding = customTheme.Calendar.padding;
   }
+
   if (customTheme.Day && customTheme.Day.hasOwnProperty('margin')) {
     cellMargin = customTheme.Day.margin;
   }
+
   const cellSize = (parseInt(calendarWidth, 10) - parseInt(calendarPadding, 10) * 2) / 7 - parseInt(cellMargin, 10) * 2;
   return {
     DateRange: _objectSpread(_objectSpread({}, defaultTheme.DateRange), customTheme.DateRange),
@@ -2303,6 +2485,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function parseInput(input, format, timeOfDay) {
   let output = null;
+
   if (typeof input === 'undefined' || typeof input === 'null' || !input || input === '') {
     output = moment__WEBPACK_IMPORTED_MODULE_0___default()()[timeOfDay]('day');
   } else if (typeof input === 'string') {
@@ -2312,6 +2495,7 @@ function parseInput(input, format, timeOfDay) {
   } else if (input._isAMomentObject) {
     output = input[timeOfDay]('day').clone();
   }
+
   return output;
 }
 
@@ -2334,6 +2518,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 const Popup = props => {
   const {
     title,
@@ -2345,6 +2530,7 @@ const Popup = props => {
     iframeUrl
   } = props;
   let content;
+
   if (iframeUrl) {
     content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("iframe", {
       frameBorder: "0",
@@ -2362,6 +2548,7 @@ const Popup = props => {
       className: "popup-content"
     }, children);
   }
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: `popup-container ${isShow ? 'show' : 'hide'}`,
     onClick: props.onClick
@@ -2386,6 +2573,7 @@ const Popup = props => {
     className: "icon-close"
   }))), content));
 };
+
 Popup.propTypes = {
   width: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string]),
   height: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string]),
@@ -2472,12 +2660,14 @@ class AppLayout extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   constructor(props) {
     super(props);
   }
+
   render() {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       id: "container",
       className: "container-fluid"
     }, this.props.children);
   }
+
 }
 
 /***/ }),
@@ -2495,9 +2685,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 class DataService {
@@ -2506,23 +2695,38 @@ class DataService {
     const proxyUrl = `Proxy/${apiKey}/${encodeUrl}`;
     return proxyUrl;
   }
+
   static getProxyData(apiKey, apiUrl, params) {
     const proxyUrl = this.buildProxyUrl(apiKey, apiUrl);
     return this.getData(proxyUrl, params);
   }
+
   static postProxyData(apiKey, apiUrl, params) {
     const proxyUrl = this.buildProxyUrl(apiKey, apiUrl);
     return this.postData(proxyUrl, params);
   }
+
   static getProxyFile(apiKey, apiUrl, params) {
     const proxyUrl = this.buildProxyUrl(apiKey, apiUrl);
     return this.getFile(proxyUrl, params);
   }
-  static getData(url, params) {
+
+  static getData(url, params, cancellationTokenSource) {
+    const token = cancellationTokenSource ? cancellationTokenSource.token : this.genCancellationToken().token;
     return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(url, {
-      params: params
+      params: params,
+      cancelToken: token
     });
   }
+
+  static genCancellationToken() {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.CancelToken.source();
+  }
+
+  static isCancel(thrown) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.isCancel(thrown);
+  }
+
   static postData(url, params) {
     return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, params, {
       headers: {
@@ -2531,6 +2735,7 @@ class DataService {
       }
     });
   }
+
   static getFile(url, params, options) {
     const defaultOptions = {
       responseType: 'blob',
@@ -2542,22 +2747,29 @@ class DataService {
     let requestOptions = Object.assign({}, defaultOptions, options);
     return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, params, requestOptions);
   }
+
   static postReportData(url, params) {
     return this.postProxyData(this.apiKeys.report, url, params);
   }
+
   static getReportData(url, params) {
     return this.getProxyData(this.apiKeys.report, url, params);
   }
+
   static getReportFile(url, params) {
     return this.getProxyFile(this.apiKeys.report, url, params);
   }
+
   static postBetListData(url, params) {
     return this.postProxyData(this.apiKeys.betlist, url, params);
   }
+
   static getBetListFile(url, params) {
     return this.getProxyFile(this.apiKeys.betlist, url, params);
   }
+
 }
+
 _defineProperty(DataService, "apiKeys", {
   report: 'Report',
   betlist: 'BetList'
@@ -2617,29 +2829,38 @@ class Excel {
       });
     }
   }
+
   static read(file, sheetIndex, callBack) {
     const reader = new FileReader();
+
     reader.onload = function (e) {
       const data = e.target.result;
+
       const workbook = _XLSX.read(data, {
         type: 'binary'
       });
+
       const sheetName = workbook.SheetNames[sheetIndex];
       const worksheet = workbook.Sheets[sheetName];
+
       const content = _XLSX.utils.sheet_to_json(worksheet);
+
       const rows = _XLSX.utils.sheet_to_json(worksheet, {
         header: 1,
         defval: '',
         blankrows: true
       });
+
       const result = {
         header: rows && rows.length ? rows[0] : null,
         content
       };
       callBack && callBack(result);
     };
+
     reader.readAsBinaryString(file);
   }
+
   static export(worksheet, fileName) {
     const option = {
       bookType: EXCEL_TYPE,
@@ -2652,25 +2873,30 @@ class Excel {
       Props: {}
     };
     workbook.Sheets[fileName] = worksheet;
+
     var workbookOutput = _XLSX.write(workbook, option);
+
     this.download(workbookOutput, fileName);
   }
+
   static getCellType(value) {
     return MapExcelType[typeof value];
   }
+
   static getCellAddress(cellObject) {
     return _XLSX.utils.encode_cell(cellObject);
   }
+
   static download(workbookOut, fileName) {
     const blob = new Blob([this.sheetToArrayBuffer(workbookOut)], {
       type: "application/octet-stream"
     });
     this.downloadFromBolb(blob, fileName);
   }
-  static downloadFromBolb(blob, fileName) {
-    const fileNameDownload = `${fileName}.${EXCEL_TYPE}`;
 
-    // IE 10+
+  static downloadFromBolb(blob, fileName) {
+    const fileNameDownload = `${fileName}.${EXCEL_TYPE}`; // IE 10+
+
     if (typeof navigator !== "undefined" && navigator.msSaveOrOpenBlob) {
       navigator.msSaveOrOpenBlob(blob, fileNameDownload);
     } else {
@@ -2682,12 +2908,16 @@ class Excel {
       document.body.removeChild(element);
     }
   }
+
   static sheetToArrayBuffer(s) {
     const buffer = new ArrayBuffer(s.length);
     const view = new Uint8Array(buffer);
+
     for (let i = 0; i != s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
+
     return buffer;
   }
+
 }
 
 /***/ }),
@@ -2702,9 +2932,8 @@ class Excel {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return LangHelper; });
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 const DEFAULT_RESOURCE_NAME = "_language_en_US";
 const langCode = window.PageLanguage || "en-US";
 const resourceName = `_language_${langCode.replace("-", "_")}`;
@@ -2712,15 +2941,19 @@ class LangHelper {
   static get currentLanguage() {
     return langCode;
   }
+
   static getSingleResource(key) {
     var langHandler = window[resourceName];
     return langHandler && langHandler[key] || window[DEFAULT_RESOURCE_NAME] && window[DEFAULT_RESOURCE_NAME][key] || key;
   }
+
   static getResources(keys) {
     var langHandler = window[resourceName];
     return keys.map(key => langHandler && langHandler[key] || window[DEFAULT_RESOURCE_NAME] && window[DEFAULT_RESOURCE_NAME][key] || key);
   }
+
 }
+
 _defineProperty(LangHelper, "languageKeys", {
   eng: "en-US",
   zhCN: "zh-CN"
@@ -2739,18 +2972,23 @@ _defineProperty(LangHelper, "languageKeys", {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Site; });
 const _rootUrl = window.rootUrl || "/";
+
 const _isSelfMode = !!window.isSelfMode;
+
 let _xsrfToken = null;
 class Site {
   static getXsrfToken() {
     if (!_xsrfToken) {
       _xsrfToken = document.querySelector("input[name=__RequestVerificationToken]").value;
     }
+
     return _xsrfToken;
   }
+
   static resolveClientUrl(relativeUrl) {
     return _rootUrl + relativeUrl;
   }
+
   static getLrfSubsidiary() {
     try {
       return _isSelfMode && top.getLrfSubsidiarySearch && top.getLrfSubsidiarySearch() || {};
@@ -2758,21 +2996,27 @@ class Site {
       return {};
     }
   }
+
   static convertDateToString(date) {
     return typeof date === "string" ? date : date.format("MM/DD/YYYY");
   }
+
   static isEmptyObject(obj = {}) {
     return Object.entries(obj).length === 0 && obj.constructor === Object;
   }
+
   static asNull(text) {
     if (text != null) {
       text = text.trim();
+
       if (text === '') {
         return null;
       }
     }
+
     return text;
   }
+
   static downloadFile(data, fileName) {
     const url = window.URL.createObjectURL(new Blob([data]));
     const link = document.createElement('a');
@@ -2783,16 +3027,21 @@ class Site {
     link.parentNode.removeChild(link);
     window.URL.revokeObjectURL(url);
   }
+
   static readAsJson(blob, callback) {
     const reader = new FileReader();
+
     reader.onload = function () {
       callback && callback(JSON.parse(reader.result));
     };
+
     reader.readAsText(blob);
   }
+
   static getRootUrl() {
     return _rootUrl;
   }
+
 }
 
 /***/ }),
@@ -2818,18 +3067,21 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 const header = () => {
   return {
     'X-Requested-With': 'XMLHttpRequest',
     '__RequestVerificationToken': _lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].getXsrfToken()
   };
 };
+
 const fetchData = params => {
   const url = _lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].resolveClientUrl('NotificationReport/ResultAmendment');
   return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(url, params.data, {
     headers: header()
   });
 };
+
 const markNotification = params => {
   const url = _lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].resolveClientUrl('NotificationReport/MarkNotificationAsRead');
   return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(url, {
@@ -2839,6 +3091,7 @@ const markNotification = params => {
     headers: header()
   });
 };
+
 const downloadData = params => {
   const url = _lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].resolveClientUrl('NotificationReport/DownLoadFileAttachment');
   return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(url, {
@@ -2848,6 +3101,7 @@ const downloadData = params => {
     responseType: 'blob'
   });
 };
+
 const setSelectedViewEvent = data => ({
   type: _types_js__WEBPACK_IMPORTED_MODULE_0__["SET_SELECTED_VIEW_EVENT"],
   data
@@ -3008,10 +3262,12 @@ class AppContainer extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   constructor(props) {
     super(props);
   }
+
   _renderTicketListingPopup() {
     if (!this.props.selectedViewEvent) {
       return null;
     }
+
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_popup__WEBPACK_IMPORTED_MODULE_4__["default"], {
       height: 550,
       width: 680,
@@ -3022,12 +3278,15 @@ class AppContainer extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       sessionId: this.props.selectedViewEvent.SessionId
     }));
   }
+
   render() {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_8__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Loader__WEBPACK_IMPORTED_MODULE_7__["default"], {
       isLoading: this.props.isLoading
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormFilter__WEBPACK_IMPORTED_MODULE_6__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DataGrid__WEBPACK_IMPORTED_MODULE_5__["default"], null), this._renderTicketListingPopup());
   }
+
 }
+
 function mapStateToProps(state) {
   const {
     isLoading,
@@ -3038,6 +3297,7 @@ function mapStateToProps(state) {
     selectedViewEvent
   });
 }
+
 function mapDispatchToProps(dispatch) {
   const {
     setSelectedViewEvent
@@ -3046,6 +3306,7 @@ function mapDispatchToProps(dispatch) {
     setSelectedViewEvent
   }, dispatch);
 }
+
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(AppContainer));
 
 /***/ }),
@@ -3076,9 +3337,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_11__);
 /* harmony import */ var _lib_excel__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../../lib/excel */ "./www/js/source/reactpages/lib/excel.js");
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -3095,6 +3355,7 @@ function _toPrimitive(input, hint) { if (typeof input !== "object" || input === 
 class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   constructor(props) {
     super(props);
+
     _defineProperty(this, "onPaging", (index, size) => {
       let paramData = this.props.param;
       paramData.PageIndex = index;
@@ -3106,11 +3367,14 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       this.props.getGridData(params);
       this.props.setParam(paramData);
     });
+
     this.reportTitle = "";
   }
+
   componentDidUpdate(prevProps, prevState) {
     if (this.props.param !== prevProps.param) {
       const paramData = this.props.param;
+
       if (paramData) {
         this.reportTitle = _lib_resultAmendmentService__WEBPACK_IMPORTED_MODULE_8__["default"].getReportTitle({
           fromDate: paramData.FromDate,
@@ -3118,16 +3382,19 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         });
       }
     }
+
     if (this.props.gridData !== prevProps.gridData) {
       this.props.toggleLoader(false);
     }
   }
+
   onExpand(index, item) {
     const {
       Data,
       Total
     } = this.props.gridData;
     Data[index].IsExpand = true;
+
     if (!item.IsRead) {
       this.props.markItemAsRead({
         Index: index,
@@ -3143,6 +3410,7 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       });
     }
   }
+
   exportExcel(item) {
     const params = {
       fileName: item.DataFilePath
@@ -3156,9 +3424,11 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         const blob = response.data;
         _lib_excel__WEBPACK_IMPORTED_MODULE_12__["default"].downloadFromBolb(blob, fileName);
       }
+
       this.props.toggleLoader(false);
     });
   }
+
   _buildHeader() {
     const headerText = _lib_resultAmendmentService__WEBPACK_IMPORTED_MODULE_8__["default"].getHeaderText();
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderRow"], {
@@ -3179,10 +3449,12 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       title: headerText.ticketList
     }, headerText.ticketList));
   }
+
   _buildBody() {
     const data = this.props.gridData.Data;
     let rows = [];
     let index = (this.props.param.PageIndex - 1) * this.props.param.PageSize + 1;
+
     for (let i = 0; i < data.length; i++) {
       const item = data[i];
       const datetimeString = moment__WEBPACK_IMPORTED_MODULE_11___default()(item.DateTime).format("MM/DD/YYYY");
@@ -3206,8 +3478,10 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       })), this._buildTicketListView(item)));
       index++;
     }
+
     return rows;
   }
+
   _buildTicketListView(item) {
     if (!!_lib_site__WEBPACK_IMPORTED_MODULE_9__["default"].asNull(item.SessionId)) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
@@ -3217,6 +3491,7 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         onClick: () => this.props.setSelectedViewEvent(item)
       }, _lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource("View")));
     }
+
     if (!!_lib_site__WEBPACK_IMPORTED_MODULE_9__["default"].asNull(item.DataFilePath)) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
         title: _lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource("ExportToExcel"),
@@ -3226,8 +3501,10 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         className: "icon-excel"
       }));
     }
+
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], null);
   }
+
   _renderNodata() {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "result-content"
@@ -3235,14 +3512,18 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       content: this.reportTitle
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_7__["default"], null));
   }
+
   render() {
     const gridData = this.props.gridData;
+
     if (!gridData.Data) {
       return null;
     }
+
     if (!gridData.Data || !gridData.Data.length) {
       return this._renderNodata();
     }
+
     const param = this.props.param;
     const pageOption = {
       PageIndex: param.PageIndex,
@@ -3265,10 +3546,13 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       onPaging: this.onPaging
     }));
   }
+
 }
+
 function mapDispatchToProps(dispatch) {
   return Object(redux__WEBPACK_IMPORTED_MODULE_3__["bindActionCreators"])(_actions_resultAmendment__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"], dispatch);
 }
+
 function mapStateToProps(state) {
   const {
     gridData,
@@ -3283,6 +3567,7 @@ function mapStateToProps(state) {
     licenseeName
   });
 }
+
 ;
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(DataGrid));
 
@@ -3307,11 +3592,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_langHelper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _lib_site__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../lib/site */ "./www/js/source/reactpages/lib/site.js");
 const _excluded = ["gridData"];
+
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -3323,16 +3610,21 @@ const RANGE_MONTH_CONSTRAINT = 6;
 class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   constructor(props) {
     super(props);
+
     _defineProperty(this, "submit", event => {
       event.preventDefault();
+
       const params = this._getParams();
+
       if (!params) {
         return;
       }
+
       this.props.setParam(params.data);
       this.props.toggleLoader(true);
       this.props.getGridData(params);
     });
+
     _defineProperty(this, "applyDateRangeHandler", (date, isValidMonthRange = true) => {
       if (isValidMonthRange) {
         this.props.setDateRange(date);
@@ -3342,12 +3634,15 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       }
     });
   }
+
   _getParams() {
     let pageSize = 10;
     const param = this.props.param;
+
     if (param && param.hasOwnProperty("PageSize")) {
       pageSize = param.PageSize;
     }
+
     const {
       fromDate,
       toDate
@@ -3362,6 +3657,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       data: paramData
     };
   }
+
   _renderDateRange() {
     const {
       dateRange,
@@ -3377,6 +3673,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       onChange: this.applyDateRangeHandler
     });
   }
+
   render() {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "page-filter"
@@ -3406,17 +3703,22 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       className: "circle"
     }), _lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource("NotificationDateRangeLimitNote"))));
   }
+
 }
+
 function mapDispatchToProps(dispatch) {
   return Object(redux__WEBPACK_IMPORTED_MODULE_3__["bindActionCreators"])(_actions_resultAmendment__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"], dispatch);
 }
+
 function mapStateToProps(state) {
   const {
-      gridData
-    } = state,
-    rest = _objectWithoutProperties(state, _excluded);
+    gridData
+  } = state,
+        rest = _objectWithoutProperties(state, _excluded);
+
   return Object.assign({}, rest);
 }
+
 ;
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(FormFilter));
 
@@ -3443,6 +3745,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 const TicketListingGrid = ({
   sessionId
 }) => {
@@ -3451,16 +3754,20 @@ const TicketListingGrid = ({
     Data,
     MatchInfo
   } = data;
+
   const _fetchData = async () => {
     const response = await _lib_resultAmendmentService__WEBPACK_IMPORTED_MODULE_4__["default"].fetchTicketListing(sessionId);
     setData(response);
   };
+
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     _fetchData();
   }, []);
+
   if (!Data || !Data.length) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_2__["default"], null);
   }
+
   const _renderCaption = () => {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "ticket-listing-caption"
@@ -3474,6 +3781,7 @@ const TicketListingGrid = ({
       title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('ExportToExcel')
     }))));
   };
+
   const _renderData = () => {
     const header = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderRow"], {
       style: {
@@ -3505,10 +3813,12 @@ const TicketListingGrid = ({
       body: body
     });
   };
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "ticket-listing-popup"
   }, _renderCaption(), _renderData());
 };
+
 /* harmony default export */ __webpack_exports__["default"] = (TicketListingGrid);
 
 /***/ }),
@@ -3545,28 +3855,31 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const isDev = "development" === "development";
-const configName = _constants_config__WEBPACK_IMPORTED_MODULE_8__["debuggingConfig"].name;
-// middleware that logs actions
+const configName = _constants_config__WEBPACK_IMPORTED_MODULE_8__["debuggingConfig"].name; // middleware that logs actions
+
 const loggerMiddleware = Object(redux_logger__WEBPACK_IMPORTED_MODULE_4__["createLogger"])({
   predicate: (getState, action) => isDev || window[configName] && window[configName].env === _constants_config__WEBPACK_IMPORTED_MODULE_8__["debuggingConfig"].env && (!window[configName].actionFilter || window[configName].actionFilter === action.type)
 });
 const defaultState = Object.assign({}, window.initialState);
+
 function configureStore(initialState) {
-  const enhancer = Object(redux__WEBPACK_IMPORTED_MODULE_5__["compose"])(Object(redux__WEBPACK_IMPORTED_MODULE_5__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_6__["default"],
-  // lets us dispatch() functions
+  const enhancer = Object(redux__WEBPACK_IMPORTED_MODULE_5__["compose"])(Object(redux__WEBPACK_IMPORTED_MODULE_5__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_6__["default"], // lets us dispatch() functions
   loggerMiddleware));
   return Object(redux__WEBPACK_IMPORTED_MODULE_5__["createStore"])(_reducers_resultAmendment__WEBPACK_IMPORTED_MODULE_7__["default"], initialState, enhancer);
 }
+
 const store = configureStore(defaultState);
 class App extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
   constructor(props) {
     super(props);
   }
+
   render() {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_3__["Provider"], {
       store: store
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AppContainer_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null));
   }
+
 }
 react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), document.getElementById("app-container"));
 
@@ -3600,34 +3913,42 @@ class Service {
     const toDate = _lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].convertDateToString(dateRange.toDate);
     return `${_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("Amendment")}, ${fromDate} - ${toDate}`;
   }
+
   static getHeaderText() {
     return headerText;
   }
+
   static async fetchTicketListing(sessionId) {
     try {
       const response = await _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__["default"].postData('NotificationReport/GetAmendmentTicketListing', {
         sessionId
       });
+
       if (response.status === 200) {
         return response.data;
       }
     } catch (e) {
       alert(_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('ErrorProcessingMsg'));
     }
+
     return {};
   }
+
   static async exportTicketListing(sessionId) {
     const response = await _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__["default"].getFile('NotificationReport/ExportAmendmentTicketListing', {
       sessionId
     });
     const noContentStatusCode = 204;
+
     if (response.status === noContentStatusCode) {
       alert(_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("NoInfo"));
     } else {
       _lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].downloadFile(response.data, 'TicketList.xls');
     }
+
     ;
   }
+
 }
 
 /***/ }),
@@ -3651,11 +3972,13 @@ const gridData = Object(_lib_createReducer__WEBPACK_IMPORTED_MODULE_0__["default
   [_actions_resultAmendment_types__WEBPACK_IMPORTED_MODULE_1__["SET_GRID_DATA"]](state, action) {
     return action.data;
   }
+
 });
 const selectedViewEvent = Object(_lib_createReducer__WEBPACK_IMPORTED_MODULE_0__["default"])(null, {
   [_actions_resultAmendment_types__WEBPACK_IMPORTED_MODULE_1__["SET_SELECTED_VIEW_EVENT"]](state, action) {
     return action.data;
   }
+
 });
 
 /***/ }),
@@ -3681,21 +4004,25 @@ const dateRange = Object(_lib_createReducer__WEBPACK_IMPORTED_MODULE_0__["defaul
   [_actions_resultAmendment_types__WEBPACK_IMPORTED_MODULE_1__["SET_DATE_RANGE"]](state, action) {
     return action.data;
   }
+
 });
 const dateConstraint = Object(_lib_createReducer__WEBPACK_IMPORTED_MODULE_0__["default"])({}, {
   [_actions_resultAmendment_types__WEBPACK_IMPORTED_MODULE_1__["GET_DATE_CONSTRAINT"]](state, action) {
     return action.data;
   }
+
 });
 const param = Object(_lib_createReducer__WEBPACK_IMPORTED_MODULE_0__["default"])({}, {
   [_actions_resultAmendment_types__WEBPACK_IMPORTED_MODULE_1__["SET_PARAM"]](state, action) {
     return action.data;
   }
+
 });
 const licenseeName = Object(_lib_createReducer__WEBPACK_IMPORTED_MODULE_0__["default"])({}, {
   [_actions_resultAmendment_types__WEBPACK_IMPORTED_MODULE_1__["GET_LICENSEE_NAME"]](state, action) {
     return action.data;
   }
+
 });
 
 /***/ }),
@@ -3739,6 +4066,7 @@ const isLoading = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["def
   [_actions_types__WEBPACK_IMPORTED_MODULE_0__["TOGGLE_LOADER"]](state, action) {
     return action.data;
   }
+
 });
 
 /***/ })

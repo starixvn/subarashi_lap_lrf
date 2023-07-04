@@ -97,6 +97,36 @@ namespace Fanex.Athena.DataAccess.Core.Common
             return results;
         }
 
+        public async Task<IEnumerable<(string ProductCode, int BetType)>> GetBetTypeForProducts(int licenseeId, string productCodes)
+        {
+            const string UspName = "LAP_Rpt_WinlossAnalysis_BettypeSel";
+
+            IList<(string ProductCode, int BetType)> results = new List<(string ProductCode, int BetType)>();
+
+            if (string.IsNullOrEmpty(productCodes))
+            {
+                return results;
+            }
+
+            using (var db = this.GetObjectDb(UspName))
+            {
+                db.SetParameterValue("licenseeid", licenseeId);
+                db.SetParameterValue("productCodes", productCodes);
+                using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
+                {
+                    while (reader.Read())
+                    {
+                        var productCode = reader["ProductCode"].ToString();
+                        var betType = int.Parse(reader["Bettype"].ToString());
+
+                        results.Add((productCode, betType));
+                    }
+                }
+            }
+
+            return results;
+        }
+
         public List<CheckedItem> GetNewCOBettypes()
         {
             var bettypeList = new List<CheckedItem>();

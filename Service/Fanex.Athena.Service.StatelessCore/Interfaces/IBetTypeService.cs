@@ -16,5 +16,7 @@ namespace Fanex.Athena.Service.StatelessCore.Interfaces
         Task<IList<CheckedItem>> GetBettypes(IList<SportProductItem> sports, string languageCode);
 
         Task<IList<CheckedItem>> GetBettypesByProduct(int licenseeId, string productCode, string languageCode);
+
+        Task<IEnumerable<CheckedItem>> GetBetTypeForProducts(int licenseeId, string lang, string productCodes);
     }
 }

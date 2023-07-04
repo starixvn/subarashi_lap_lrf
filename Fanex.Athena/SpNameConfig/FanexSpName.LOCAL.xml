@@ -159,6 +159,8 @@
 		<Setting Key="Lrf_SelSportDetail" SpName="Lrf_SelSportDetail" DbName="DBLIC.bodb_Licensee.bodbLicenseeNet" />
 		<Setting Key="Lrf_SelSportBySiteName" SpName="Lrf_SelSportBySiteName" DbName="DBPLO.bodb02.bodbLicenseeNet" />
 		<Setting Key="Lrf_SelBetTypesByProduct" SpName="Lrf_SelBetTypesByProduct" DbName="DBLIC.bodb_Licensee.bodbLicenseeNet" />
+    <Setting Key="LAP_Rpt_WinlossAnalysis_SportSel" SpName="LAP_Rpt_WinlossAnalysis_SportSel" DbName="DBEXT.bodb02.bodbLicenseeNet" />
+    <Setting Key="LAP_Rpt_WinlossAnalysis_BettypeSel" SpName="LAP_Rpt_WinlossAnalysis_BettypeSel" DbName="DBEXT.bodb02.bodbLicenseeNet" />
 	</Function>
 
 	<Function Name="CustomerLog">

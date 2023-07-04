@@ -80,6 +80,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\ControllerAPI\Fanex.Athena.Api.Base\Fanex.Athena.Api.Base.csproj">
+      <Project>{16d39d7b-00c0-4cc3-82f5-44bbdee7ae51}</Project>
+      <Name>Fanex.Athena.Api.Base</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\ControllerAPI\Fanex.Athena.Api.Common\Fanex.Athena.Api.Common.csproj">
       <Project>{f97f88e3-5fe2-4ebd-afa2-d7aec0f655e4}</Project>
       <Name>Fanex.Athena.Api.Common</Name>

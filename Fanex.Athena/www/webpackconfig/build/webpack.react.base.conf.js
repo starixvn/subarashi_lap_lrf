@@ -41,6 +41,7 @@ function generateConfig(environment) {
             [`${jsPath}/customer/playersegmentation/betlist`]: pathConfig.scriptPaths.playersegmentation_betlist,
             [`${jsPath}/report/customersupporttask`]: pathConfig.scriptPaths.customersupporttask,
             [`${jsPath}/report/newcashoutwinloss`]: pathConfig.scriptPaths.newcashoutwinloss,
+            [`${jsPath}/report/winlossanalysis`]: pathConfig.scriptPaths.winlossanalysis,
 
             /*css*/
             [`${cssPath}/vendor`]: pathConfig.cssPaths.layout,
@@ -62,6 +63,7 @@ function generateConfig(environment) {
             [`${cssPath}/customer/playersegmentation/index`]: pathConfig.cssPaths.playersegmentation,
             [`${cssPath}/customersupporttask/index`]: pathConfig.cssPaths.customersupporttask,
             [`${cssPath}/newcashoutwinloss/index`]: pathConfig.cssPaths.newcashoutwinloss,
+            [`${cssPath}/winlossanalysis/index`]: pathConfig.cssPaths.winlossanalysis,
         },
         output: {
             path: pathConfig.projectRoot,

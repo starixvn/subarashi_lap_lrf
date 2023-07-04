@@ -13,7 +13,8 @@ class CollapsiblePanel extends React.Component {
     static propTypes = {
         stickyFooter: PropTypes.node,
         onCollapse: PropTypes.func,
-        onExpand: PropTypes.func
+        onExpand: PropTypes.func,
+        isCollapseMode: PropTypes.bool
     }
 
     onClick = () => {
@@ -54,9 +55,10 @@ class CollapsiblePanel extends React.Component {
                 <div className='caret-block'>
                     {stickyFooter}
                 </div>
-                <div className="filter-handle" style={iconContainerStyle} onClick={this.onClick}>
+                {!!this.props.isCollapseMode && <div className="filter-handle" style={iconContainerStyle} onClick={this.onClick}>
                     <IconTag className={className} style={iconStyle} {...attrs} />
                 </div>
+                }
             </div>
         )
     }
@@ -66,7 +68,8 @@ const propTypes = {
     stickyFooter: PropTypes.node,
     onCollapse: PropTypes.func,
     onExpand: PropTypes.func,
-    iconToggle: PropTypes.object
+    iconToggle: PropTypes.object,
+    isCollapseMode: PropTypes.bool
 }
 const defaultProps = {
     iconContainerStyle: {
@@ -83,7 +86,8 @@ const defaultProps = {
         tag: 'i',
         className: 'icon-arrow',
         style: null
-    }
+    },
+    isCollapseMode: true
 };
 
 CollapsiblePanel.propTypes = propTypes;

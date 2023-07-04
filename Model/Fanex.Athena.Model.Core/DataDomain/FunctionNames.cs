@@ -47,5 +47,7 @@
         public const string NewCashOutWinLoss = "NewCashOutWinLoss";
 
         public const string GrossGamingRevenue = "GrossGamingRevenue";
+        
+        public const string WinlossAnalysis = "WinlossAnalysis";
     }
 }

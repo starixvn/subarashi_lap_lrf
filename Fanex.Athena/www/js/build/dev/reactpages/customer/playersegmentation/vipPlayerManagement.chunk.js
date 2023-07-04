@@ -1,16 +1,5 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["customer/playersegmentation/vipPlayerManagement"],{
 
-/***/ "./node_modules/@legion-lib/react-multiselect/dist/index.js":
-/*!******************************************************************!*\
-  !*** ./node_modules/@legion-lib/react-multiselect/dist/index.js ***!
-  \******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-!function(e,t){ true?module.exports=t(__webpack_require__(/*! react */ "./node_modules/react/index.js")):undefined}(window,function(e){return function(e){var t={};function n(r){if(t[r])return t[r].exports;var a=t[r]={i:r,l:!1,exports:{}};return e[r].call(a.exports,a,a.exports,n),a.l=!0,a.exports}return n.m=e,n.c=t,n.d=function(e,t,r){n.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:r})},n.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},n.t=function(e,t){if(1&t&&(e=n(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var r=Object.create(null);if(n.r(r),Object.defineProperty(r,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var a in e)n.d(r,a,function(t){return e[t]}.bind(null,a));return r},n.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(t,"a",t),t},n.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},n.p="",n(n.s=9)}([function(t,n){t.exports=e},function(e,t,n){e.exports=n(11)()},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var r=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),a=n(0),o=u(a),i=u(n(1)),l=u(n(3));function u(e){return e&&e.__esModule?e:{default:e}}var c=function(e){function t(e){return function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,t),function(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}(this,(t.__proto__||Object.getPrototypeOf(t)).call(this,e))}return function(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}(t,a.Component),r(t,[{key:"render",value:function(){return o.default.createElement("button",{type:"button",className:"multiple-select-default multiple-select-label",onClick:this.props.onToggle},o.default.createElement("span",{className:"text-display",title:this.selectedItemsString},this.selectedItemsString),o.default.createElement("b",{className:"caret"}))}},{key:"selectedItemsString",get:function(){var e=this.props,t=e.selectedItems,n=e.maxDisplayItemCount,r=t.map(function(e){return e.value}),a=this.props.texts||l.default[this.props.language],o=a.SelectOptions,i=r.length;return this.props.isAllTextShown&&i==this.props.dataSourceSize?o=a.All:i>=n?o=a.SelectedItemCount.replace("#",i):i>=1&&(o=r.join(", ")),o}}]),t}();c.propTypes={language:i.default.string,selectedItems:i.default.arrayOf(i.default.object).isRequired,maxDisplayItemCount:i.default.number,texts:i.default.object},c.defaultProps={language:"en-US",maxDisplayItemCount:3},t.default=c},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default={"en-US":{All:"All",SelectedItemCount:"# selected",SelectOptions:"Select options"},"zh-TW":{All:"全部",SelectedItemCount:"已選  # 個項目",SelectOptions:"選擇一個選項"},"zh-CN":{All:"全部",SelectedItemCount:"已选  # 个项目",SelectOptions:"选择一个选项"},"zh-Hans":{All:"全部",SelectedItemCount:"已选  # 个项目",SelectOptions:"选择一个选项"}}},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var r=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},a=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),o=n(0),i=c(o),l=c(n(1)),u=c(n(5));function c(e){return e&&e.__esModule?e:{default:e}}var s=function(e){function t(e){!function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,t);var n=function(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}(this,(t.__proto__||Object.getPrototypeOf(t)).call(this,e));return n.onCollapse=function(e,t){var a=n.props,o=a.dataSource,i=a.onCollapse,l=[].concat(function(e){if(Array.isArray(e)){for(var t=0,n=Array(e.length);t<e.length;t++)n[t]=e[t];return n}return Array.from(e)}(o));!function e(n){for(var a=function(a){var o=n[a],i=l.findIndex(function(e){return e.key===o.key});l[i]=r({},l[i],{visible:!t});var u=l.filter(function(e){return e.parentKey===o.key});u.length>0&&e(u)},o=0;o<n.length;o++)a(o)}(o.filter(function(t){return t.parentKey===e.key})),i&&i(l)},n}return function(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}(t,o.Component),a(t,[{key:"_renderOptionList",value:function(){var e=this,t=this.props,n=t.dataSource,r=t.onChange,a=t.id,o=t.treeViewOption;return n&&n.length?n.map(function(t,l){var c=n.filter(function(e){return e.parentKey===t.key}).length>0;return t.visible&&i.default.createElement(u.default,{id:a+"-optionItem-"+l,key:a+"optionItem"+l,itemData:t,onChange:r,hasChildren:c,treeViewOption:o,onCollapse:e.onCollapse})}):i.default.createElement("span",null,"No information")}},{key:"render",value:function(){return i.default.createElement("ul",{className:"multiple-select-options"},this._renderOptionList())}}]),t}();s.propTypes={dataSource:l.default.arrayOf(l.default.object).isRequired,id:l.default.oneOfType([l.default.number,l.default.string]).isRequired,onChange:l.default.func,treeViewOption:l.default.shape({childrenField:l.default.string,keyField:l.default.string,valueField:l.default.string,statusField:l.default.string,indent:l.default.number,includeSelectedParentKey:l.default.bool})},t.default=s},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var r=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},a=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),o=n(0),i=u(o),l=u(n(1));function u(e){return e&&e.__esModule?e:{default:e}}var c=function(e){function t(e){!function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,t);var n=function(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}(this,(t.__proto__||Object.getPrototypeOf(t)).call(this,e));return n.onCollapse=function(e){e.preventDefault(),n.setState(function(e){return{isCollapse:!e.isCollapse}},function(){var e=n.props,t=e.itemData,r=e.onCollapse;r&&r(t,n.state.isCollapse)})},n.onChange=function(e){e.stopPropagation();var t=n.props,a=t.itemData,o=t.onChange,i=r({},a,{checked:!a.checked});o&&o(i)},n.state={isCollapse:!1},n}return function(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}(t,o.Component),a(t,[{key:"render",value:function(){var e=this.props,t=e.itemData,n=e.id,r=e.treeViewOption,a=e.hasChildren,o=t.value,l=t.checked,u=t.level,c=t.valueDecoration,s="multiple-select-item "+(r?"treeview-select-item":"")+" level-"+u,f=r?{paddingLeft:u*r.indent}:null,d=this.state.isCollapse?"treeview-caret collapse":"treeview-caret",p="option-label"+(c?" "+c:"");return i.default.createElement("li",{className:s,style:f},!!r&&a&&i.default.createElement("button",{className:"btnCaretOption",onClick:this.onCollapse},i.default.createElement("b",{className:d})),i.default.createElement("input",{id:n,type:"checkbox",className:"option-checkbox",checked:l,onChange:this.onChange}),i.default.createElement("label",{className:p,htmlFor:n},o))}}]),t}();c.propTypes={itemData:l.default.object.isRequired,id:l.default.oneOfType([l.default.number,l.default.string]).isRequired,onChange:l.default.func,treeViewOption:l.default.shape({childrenField:l.default.string,keyField:l.default.string,valueField:l.default.string,statusField:l.default.string,indent:l.default.number,includeSelectedParentKey:l.default.bool})},t.default=c},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var r=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),a=n(0),o=c(a),i=c(n(1)),l=c(n(5)),u=c(n(3));function c(e){return e&&e.__esModule?e:{default:e}}var s=function(e){function t(e){!function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,t);var n=function(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}(this,(t.__proto__||Object.getPrototypeOf(t)).call(this,e));return n.changeHandler=function(e){var t=e.checked;n.props.onChange&&n.props.onChange(t)},n.itemData={key:"All",value:u.default[n.props.language].All},n}return function(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}(t,a.Component),r(t,[{key:"render",value:function(){var e=this.props,t=e.id,n=e.checked;return this.itemData.checked=n,o.default.createElement("ul",{className:"multiple-select-options multiple-select-option-all"},o.default.createElement(l.default,{id:t+"-optionItemAll",itemData:this.itemData,onChange:this.changeHandler}))}}]),t}();s.propTypes={language:i.default.string,onChange:i.default.func,id:i.default.oneOfType([i.default.number,i.default.string]).isRequired,checked:i.default.bool},s.defaultProps={language:"en-US",checked:!1},t.default=s},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var r=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},a=function(e){return e&&e.__esModule?e:{default:e}}(n(0));var o=a.default.forwardRef(function(e,t){var n=e.onClearSearch,o=e.onChangeSearchText,i=function(e,t){var n={};for(var r in e)t.indexOf(r)>=0||Object.prototype.hasOwnProperty.call(e,r)&&(n[r]=e[r]);return n}(e,["onClearSearch","onChangeSearchText"]);return a.default.createElement("div",{style:{width:"100%",position:"relative"}},a.default.createElement("input",r({autoFocus:!0,ref:t,type:"text",placeholder:"Search data",style:{width:"100%",border:"1px solid #ccc",padding:"5px 10px",boxSizing:"border-box"},onChange:function(e){return o(e.target.value)}},i)),a.default.createElement("button",{type:"button",onClick:n,style:{position:"absolute",display:"inline-block",right:2,border:0,padding:0,margin:"5px",backgroundColor:"transparent",cursor:"pointer",outline:"none",height:16,width:16}},a.default.createElement("span",{className:"close"})))});t.default=o},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var r=t.KEY_NAME="key",a=t.VALUE_NAME="value",o=t.STATUS_NAME="checked",i=t.SUBLIST_NAME="subList";t.defaultTreeViewOption={childrenField:i,keyField:r,valueField:a,statusField:o,indent:30,includeSelectedParentKey:!0,useOriginalDataSource:!1}},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.TreeViewSelect=void 0;var r=o(n(10)),a=o(n(13));function o(e){return e&&e.__esModule?e:{default:e}}t.default=r.default,t.TreeViewSelect=a.default},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var r=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},a=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),o=n(0),i=d(o),l=d(n(1)),u=d(n(2)),c=d(n(4)),s=d(n(6)),f=d(n(7));function d(e){return e&&e.__esModule?e:{default:e}}function p(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var h="key",y="value",v="checked",g=1;var b=function(e){function t(e){!function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,t);var n=function(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}(this,(t.__proto__||Object.getPrototypeOf(t)).call(this,e));return n.onChangeHandler=function(e){var t,a=n.props,o=a.keyField,i=a.valueField,l=a.statusField,u=(p(t={},o,e.key),p(t,i,e.value),p(t,l,e.checked),t),c=n.state.dataSource.map(function(t){return t.key===e.key?r({},t,{checked:e.checked}):t});n.setState({dataSource:c},function(){return n._callBackToParent(u)})},n.onToggle=function(){n.setState(function(e){return{showOptionList:!e.showOptionList}},function(){n.searchInputBox.current&&n.state.showOptionList&&n.searchInputBox.current.focus()})},n.checkAllHandler=function(e){var t=n.state.dataSource.map(function(t){return t.checked!==e?r({},t,{checked:e}):t});n.setState({dataSource:t},function(){n._callBackToParent(null)})},n.onChangeSearchText=function(e){var t=n.state.dataSource.map(function(t){var n=t[y]&&t[y].toLowerCase(),a=e&&e.toLowerCase(),o=-1!==n.indexOf(a);return t.visible!==o?r({},t,{visible:o}):t});n.setState({searchText:e,dataSource:t})},n.onClearSearch=function(){n.onChangeSearchText("")},n._close=function(){n.setState({showOptionList:!1})},n._handleDocumentClick=function(e){n.wrapper&&!n.wrapper.contains(e.target)&&n.state.showOptionList&&n._close()},n.searchInputBox=i.default.createRef(),n.id="multiple-select-"+(e.id||g++),n.state={originalDataSource:null,searchText:"",showOptionList:!1,dataSource:[]},n}return function(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}(t,o.Component),a(t,[{key:"componentDidMount",value:function(){document.addEventListener("click",this._handleDocumentClick)}},{key:"componentWillUnmount",value:function(){document.removeEventListener("click",this._handleDocumentClick)}},{key:"_callBackToParent",value:function(e){var t=this._getSelectedItemKey();this.props.onChange&&this.props.onChange(e,t)}},{key:"_getSelectedItemKey",value:function(){for(var e=[],t=this.state.dataSource,n=0;n<t.length;n++){var r=t[n];r.checked&&e.push(r.key)}return e.join(",")}},{key:"_renderOptionAll",value:function(){if(this.props.hasAllOption){var e=this.state.dataSource.filter(function(e){return e.checked}).length===this.state.dataSource.length;return i.default.createElement(s.default,{id:this.id,checked:e,language:this.props.language,onChange:this.checkAllHandler})}return null}},{key:"_renderSearchBox",value:function(){return this.props.hasSearchBox?i.default.createElement(f.default,{onChangeSearchText:this.onChangeSearchText,value:this.state.searchText,onClearSearch:this.onClearSearch,ref:this.searchInputBox}):null}},{key:"render",value:function(){var e=this,t=this.props.maxDisplayItemCount;return i.default.createElement("div",{className:"multiple-select-container",id:this.id,ref:function(t){return e.wrapper=t}},i.default.createElement(u.default,{language:this.props.language,selectedItems:this.selectedItems,dataSourceSize:this.state.dataSource.length,onToggle:this.onToggle,texts:this.props.texts,isAllTextShown:this.props.isAllTextShown,maxDisplayItemCount:t}),i.default.createElement("div",{className:"multiple-select-default multiple-select-options-container",style:{display:this.state.showOptionList?"block":"none"}},this._renderSearchBox(),this._renderOptionAll(),i.default.createElement(c.default,{id:this.id,dataSource:this.state.dataSource,onChange:this.onChangeHandler})))}},{key:"selectedItems",get:function(){return this.state.dataSource.filter(function(e){return e.checked})}}],[{key:"getDerivedStateFromProps",value:function(e,t){return e.dataSource!==t.originalDataSource?{originalDataSource:e.dataSource,dataSource:function(e){var t=e.keyField,n=e.valueField,r=e.statusField;return e.dataSource.map(function(e){var a;return p(a={},h,e[t]),p(a,y,e[n]),p(a,v,e[r]),p(a,"valueDecoration",e.valueDecoration),p(a,"visible",!0),a})}(e)}:null}}]),t}();b.propTypes={language:l.default.string,dataSource:l.default.arrayOf(l.default.object).isRequired,keyField:l.default.string,valueField:l.default.string,statusField:l.default.string,maxDisplayItemCount:l.default.number,onChange:l.default.func,hasAllOption:l.default.bool,hasSearchBox:l.default.bool,isAllTextShown:l.default.bool,texts:l.default.object},b.defaultProps={language:"en-US",keyField:h,valueField:y,statusField:v,hasAllOption:!0,hasSearchBox:!1},t.default=b},function(e,t,n){"use strict";var r=n(12);function a(){}e.exports=function(){function e(e,t,n,a,o,i){if(i!==r){var l=new Error("Calling PropTypes validators directly is not supported by the `prop-types` package. Use PropTypes.checkPropTypes() to call them. Read more at http://fb.me/use-check-prop-types");throw l.name="Invariant Violation",l}}function t(){return e}e.isRequired=e;var n={array:e,bool:e,func:e,number:e,object:e,string:e,symbol:e,any:e,arrayOf:t,element:e,instanceOf:t,node:e,objectOf:t,oneOf:t,oneOfType:t,shape:t,exact:t};return n.checkPropTypes=a,n.PropTypes=n,n}},function(e,t,n){"use strict";e.exports="SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED"},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var r=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},a=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),o=n(0),i=h(o),l=h(n(1)),u=h(n(2)),c=h(n(4)),s=h(n(6)),f=h(n(7)),d=n(8),p=n(14);function h(e){return e&&e.__esModule?e:{default:e}}function y(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var v=1,g=function(e){function t(e){!function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,t);var n=function(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}(this,(t.__proto__||Object.getPrototypeOf(t)).call(this,e));b.call(n),n.searchInputBox=i.default.createRef(),n.id="multiple-select-"+(e.id||v++);var r=n._isUseOriginalDataSource()?n.props.dataSource:(0,p.convertDataSourceToState)(n.props);return n.state={originalDataSource:n.props.dataSource,searchText:"",showOptionList:!1,dataSource:r},n.indexByKey=n._createIndexByKey(r),n}return function(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}(t,o.Component),a(t,[{key:"componentDidMount",value:function(){document.addEventListener("click",this._handleDocumentClick)}},{key:"componentWillUnmount",value:function(){document.removeEventListener("click",this._handleDocumentClick)}},{key:"componentDidUpdate",value:function(e,t){if(this.props.dataSource!==e.dataSource){var n=this.props.dataSource,r={originalDataSource:n,dataSource:this._isUseOriginalDataSource()?n:(0,p.convertDataSourceToState)(this.props)};this.setState(r),this.indexByKey=this._createIndexByKey(r.dataSource)}}},{key:"_createIndexByKey",value:function(e){return e.reduce(function(e,t,n){return e[t.key]=n,e},{})}},{key:"_isUseOriginalDataSource",value:function(){var e=this.props.treeViewOption;return!(!e||!e.useOriginalDataSource)}},{key:"_callBackToParent",value:function(e){var t=this._getSelectedItemKey();this.props.onChange&&this.props.onChange(e,t,this.state.dataSource)}},{key:"_getSelectedItemKey",value:function(){for(var e=this.props.treeViewOption,t=(e&&r({},d.defaultTreeViewOption,e)||d.defaultTreeViewOption).includeSelectedParentKey,n=[],a=this.state.dataSource,o=function(e){var r=a[e],o=a.filter(function(e){return e.parentKey===r.key}).length>0;!r.checked||!t&&o||n.push(r.key)},i=0;i<a.length;i++)o(i);return n.join(",")}},{key:"_renderOptionAll",value:function(){if(this.props.hasAllOption){var e=this.state.dataSource.filter(function(e){return e.checked}).length===this.state.dataSource.length;return i.default.createElement(s.default,{id:this.id,checked:e,language:this.props.language,onChange:this.checkAllHandler})}return null}},{key:"_renderSearchBox",value:function(){return this.props.hasSearchBox?i.default.createElement(f.default,{onChangeSearchText:this.onChangeSearchText,value:this.state.searchText,onClearSearch:this.onClearSearch,ref:this.searchInputBox}):null}},{key:"render",value:function(){var e=this,t=this.props,n=t.maxDisplayItemCount,a=t.treeViewOption,o=a&&r({},d.defaultTreeViewOption,a)||r({},d.defaultTreeViewOption);return i.default.createElement("div",{className:"multiple-select-container",id:this.id,ref:function(t){return e.wrapper=t}},i.default.createElement(u.default,{language:this.props.language,selectedItems:this.selectedItems,dataSourceSize:this.state.dataSource.length,onToggle:this.onToggle,texts:this.props.texts,isAllTextShown:this.props.isAllTextShown,maxDisplayItemCount:n}),i.default.createElement("div",{className:"multiple-select-default multiple-select-options-container",style:{display:this.state.showOptionList?"block":"none"}},this._renderSearchBox(),this._renderOptionAll(),i.default.createElement(c.default,{id:this.id,dataSource:this.state.dataSource,onChange:this.onChangeHandler,treeViewOption:o,onCollapse:this.handleCollapse})))}},{key:"selectedItems",get:function(){var e=this._getSelectedItemKey().split(",");return this.state.dataSource.filter(function(t){return e.includes(t.key)})}}]),t}();g.propTypes={language:l.default.string,dataSource:l.default.arrayOf(l.default.object).isRequired,keyField:l.default.string,valueField:l.default.string,statusField:l.default.string,maxDisplayItemCount:l.default.number,onChange:l.default.func,hasAllOption:l.default.bool,hasSearchBox:l.default.bool,isAllTextShown:l.default.bool,texts:l.default.object,treeViewOption:l.default.shape({childrenField:l.default.string,keyField:l.default.string,valueField:l.default.string,statusField:l.default.string,indent:l.default.number,includeSelectedParentKey:l.default.bool,useOriginalDataSource:l.default.bool})},g.defaultProps={language:"en-US",keyField:d.KEY_NAME,valueField:d.VALUE_NAME,statusField:d.STATUS_NAME,hasAllOption:!0,hasSearchBox:!1};var b=function(){var e=this;this.onChangeHandler=function(t){var n,a=e.props,o=a.keyField,i=a.valueField,l=a.statusField,u=(y(n={},o,t.key),y(n,i,t.value),y(n,l,t.checked),n),c=e.state.dataSource,s=[].concat(function(e){if(Array.isArray(e)){for(var t=0,n=Array(e.length);t<e.length;t++)n[t]=e[t];return n}return Array.from(e)}(c)),f=e.indexByKey[t.key];s[f]=r({},t);var d=!!t.parentKey,p=s.filter(function(e){return e.parentKey===t.key});if(p.length>0){!function n(a){for(var o=function(o){var i=a[o],l=e.indexByKey[i.key];s[l]=r({},s[l],{checked:t.checked});var u=s.filter(function(e){return e.parentKey===i.key});u.length>0&&n(u)},i=0;i<a.length;i++)o(i)}(p)}if(d){!function t(n){var a=e.indexByKey[n.parentKey],o=s[a];if(o.checked&&!n.checked)s[a]=r({},o,{checked:!1});else if(!o.checked&&n.checked){var i=s.filter(function(e){return e.parentKey===o.key});i.filter(function(e){return e.checked}).length===i.length&&(s[a]=r({},o,{checked:!0}))}var l=s[a];l.parentKey&&t(l)}(t)}e.setState({dataSource:s},function(){return e._callBackToParent(u)})},this.onToggle=function(){e.setState(function(e){return{showOptionList:!e.showOptionList}},function(){e.searchInputBox.current&&e.state.showOptionList&&e.searchInputBox.current.focus()})},this.checkAllHandler=function(t){var n=e.state.dataSource.map(function(e){return e.checked!==t?r({},e,{checked:t}):e});e.setState({dataSource:n},function(){e._callBackToParent(null)})},this.onChangeSearchText=function(t){var n=e.state.dataSource.map(function(e){var n=e[d.VALUE_NAME]&&e[d.VALUE_NAME].toLowerCase(),a=t&&t.toLowerCase(),o=-1!==n.indexOf(a);return e.visible!==o?r({},e,{visible:o}):e});e.setState({searchText:t,dataSource:n})},this.handleCollapse=function(t){e.setState({dataSource:t})},this.onClearSearch=function(){e.onChangeSearchText("")},this._close=function(){e.setState({showOptionList:!1})},this._handleDocumentClick=function(t){e.wrapper&&!e.wrapper.contains(t.target)&&e.state.showOptionList&&e._close()}};t.default=g},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.convertDataSourceToState=void 0;var r=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},a=n(8);function o(e){if(Array.isArray(e)){for(var t=0,n=Array(e.length);t<e.length;t++)n[t]=e[t];return n}return Array.from(e)}function i(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}t.convertDataSourceToState=function e(t){for(var n=t.keyField,l=t.valueField,u=t.statusField,c=t.dataSource,s=t.treeViewOption,f=arguments.length>1&&void 0!==arguments[1]?arguments[1]:null,d=arguments.length>2&&void 0!==arguments[2]?arguments[2]:0,p=s&&r({},a.defaultTreeViewOption,s)||r({},a.defaultTreeViewOption),h=[],y=0;y<c.length;y++){var v,g=c[y],b=(i(v={},a.KEY_NAME,g[n]),i(v,a.VALUE_NAME,g[l]),i(v,a.STATUS_NAME,!!g[u]),i(v,"visible",!0),i(v,"level",d),i(v,"parentKey",f),v);if(h.push(b),p&&g[p.childrenField]){var m=g[p.childrenField],S=d+1,O=e({keyField:p.keyField,valueField:p.valueField,statusField:p.statusField,dataSource:m,treeViewOption:p},b[a.KEY_NAME],S);h.push.apply(h,o(O))}}return h}}])});
-
-/***/ }),
-
 /***/ "./www/js/source/reactpages/actions/currencyAction.js":
 /*!************************************************************!*\
   !*** ./www/js/source/reactpages/actions/currencyAction.js ***!
@@ -103,6 +92,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 const fetchData = resourceName => {
   const url = _lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].resolveClientUrl('UserGuide/Index?resourcename=' + resourceName) + "&_=" + new Date().getTime();
   return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(url, {
@@ -111,6 +101,7 @@ const fetchData = resourceName => {
     }
   });
 };
+
 function getUserGuideContent(params) {
   return dispatch => {
     fetchData(params).then(response => {
@@ -207,6 +198,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
+
 const Loader = ({
   isLoading
 }) => {
@@ -221,6 +213,7 @@ const Loader = ({
     className: "loader-inner ball-beat"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null))));
 };
+
 /* harmony default export */ __webpack_exports__["default"] = (Loader);
 
 /***/ }),
@@ -239,6 +232,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 
 
+
 const NoDataTitle = ({
   title
 }) => {
@@ -249,6 +243,7 @@ const NoDataTitle = ({
     }
   });
 };
+
 /* harmony default export */ __webpack_exports__["default"] = (NoDataTitle);
 
 /***/ }),
@@ -269,9 +264,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -282,20 +276,25 @@ const wrapperClasses = {
 class Overlay extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   constructor(props) {
     super(props);
+
     _defineProperty(this, "_unRegisterEvents", () => {
       const {
         closeOnOutsideClick
       } = this.props;
+
       if (closeOnOutsideClick) {
         document.removeEventListener('click', this._handleClickOutSide);
       }
     });
+
     _defineProperty(this, "_handleClickOutSide", event => {
       const clickOutside = this.containerElement && !this.containerElement.contains(event.target);
+
       if (clickOutside && this.state.isOpening) {
         this._close();
       }
     });
+
     this.containerElement = null;
     this.refHandlers = {
       container: ref => {
@@ -306,6 +305,7 @@ class Overlay extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       isOpening: this.props.isOpening
     };
   }
+
   componentDidUpdate(prevProps, prevState) {
     if (this.props.isOpening !== prevProps.isOpening) {
       const {
@@ -324,17 +324,21 @@ class Overlay extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       }, 0);
     }
   }
+
   componentWillUnmount() {
     this._unRegisterEvents();
   }
+
   _registerEvents() {
     const {
       closeOnOutsideClick
     } = this.props;
+
     if (closeOnOutsideClick) {
       document.addEventListener('click', this._handleClickOutSide);
     }
   }
+
   _close() {
     const {
       onClose
@@ -343,6 +347,7 @@ class Overlay extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       isOpening: false
     }, () => onClose && onClose());
   }
+
   render() {
     const {
       className,
@@ -360,13 +365,16 @@ class Overlay extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       ref: this.refHandlers.container
     }, children);
   }
+
 }
+
 _defineProperty(Overlay, "propTypes", {
   closeOnOutsideClick: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
   isOpening: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
   onOpen: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
   onClose: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
 });
+
 _defineProperty(Overlay, "defaultProps", {
   closeOnOutsideClick: true,
   isOpening: false
@@ -388,18 +396,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 const _excluded = ["content", "extendContent", "tag"];
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+
 
 
 const ReportTitle = _ref => {
   let {
-      content,
-      extendContent,
-      tag
-    } = _ref,
-    attrs = _objectWithoutProperties(_ref, _excluded);
+    content,
+    extendContent,
+    tag
+  } = _ref,
+      attrs = _objectWithoutProperties(_ref, _excluded);
+
   const Tag = tag;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "report-title-container"
@@ -407,6 +421,7 @@ const ReportTitle = _ref => {
     className: "report-title"
   }, attrs), content, extendContent));
 };
+
 const propTypes = {
   tag: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
   content: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.any
@@ -431,11 +446,13 @@ ReportTitle.defaultProps = defaultProps;
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("Cannot destructure " + obj); }
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+
 
 const Switcher = props => {
-  const attributes = _extends({}, (_objectDestructuringEmpty(props), props));
+  const attributes = _extends({}, props);
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "switch"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", _extends({}, attributes, {
@@ -444,6 +461,7 @@ const Switcher = props => {
     className: "lever"
   })));
 };
+
 /* harmony default export */ __webpack_exports__["default"] = (Switcher);
 
 /***/ }),
@@ -465,9 +483,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _popup_Popup__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./popup/Popup */ "./www/js/source/reactpages/components/popup/Popup.jsx");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -475,21 +492,25 @@ function _toPrimitive(input, hint) { if (typeof input !== "object" || input === 
 class UserGuide extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
   constructor(props) {
     super(props);
+
     _defineProperty(this, "onClickHandler", () => {
       this.setState({
         isShow: true
       });
       this.props.onClick && this.props.onClick();
     });
+
     _defineProperty(this, "onCloseHandler", () => {
       this.setState({
         isShow: false
       });
     });
+
     this.state = {
       isShow: false
     };
   }
+
   render() {
     const {
       className,
@@ -512,17 +533,21 @@ class UserGuide extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
       isHtml: isHtml
     }, content));
   }
+
 }
+
 _defineProperty(UserGuide, "propTypes", {
   title: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
   className: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
   contentTitle: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
   isHtml: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool
 });
+
 _defineProperty(UserGuide, "defaultProps", {
   className: 'icon-book right',
   isHtml: true
 });
+
 ;
 
 /***/ }),
@@ -548,10 +573,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Overlay__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Overlay */ "./www/js/source/reactpages/components/Overlay.jsx");
 /* harmony import */ var _SuggestionList__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./SuggestionList */ "./www/js/source/reactpages/components/auto-complete/SuggestionList.jsx");
 /* harmony import */ var _utils_timer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils/timer */ "./www/js/source/reactpages/components/utils/timer.js");
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -563,16 +588,20 @@ const DELAY_TIME_MILLISECOND = 300;
 class AutoComplete extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   constructor(props) {
     super(props);
+
     _defineProperty(this, "_handleClickOut", event => {
       if (this.isShowSuggestionList && this.wrapperRef && !this.wrapperRef.current.contains(event.target)) {
         this._clearState();
       }
     });
+
     _defineProperty(this, "_onKeyDown", event => {
       if (!this.isShowSuggestionList) {
         return;
       }
+
       const selectedIndex = this.state.selectedIndex;
+
       switch (event.keyCode) {
         case 38:
           //up
@@ -581,7 +610,9 @@ class AutoComplete extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
               selectedIndex: selectedIndex - 1
             });
           }
+
           break;
+
         case 40:
           //down
           if (selectedIndex < this.state.suggestions.length - 1) {
@@ -589,54 +620,69 @@ class AutoComplete extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
               selectedIndex: selectedIndex + 1
             });
           }
+
           break;
+
         case 13:
           //enter
           if (selectedIndex > -1) {
             const selectedItem = this.state.suggestions[selectedIndex];
+
             this._onSelect(selectedItem);
           }
+
           break;
       }
     });
+
     _defineProperty(this, "_clearState", () => {
       this.setState({
         suggestions: null,
         selectedIndex: -1
       });
     });
+
     _defineProperty(this, "_onSelect", selectedItem => {
       const {
         onSelect
       } = this.props;
       onSelect && onSelect(selectedItem);
       this.input.value = typeof selectedItem === "object" ? selectedItem.value : selectedItem;
+
       this._clearState();
     });
+
     _defineProperty(this, "_onChange", event => {
       const value = (this.input.value || "").trim();
       const {
         onInput
       } = this.props;
       onInput && onInput(value);
+
       if (value.length < 3) {
         this._clearState();
+
         return;
       }
+
       const cachedData = this.cacheData[value];
+
       if (cachedData) {
         this.setState({
           suggestions: cachedData
         });
         return;
       }
+
       const {
         url
       } = this.props;
+
       if (url) {
         this._getDataByUrl(url, value);
       }
     });
+
     this.state = {
       suggestions: null,
       selectedIndex: -1
@@ -646,24 +692,30 @@ class AutoComplete extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     this.onChange = _utils_timer__WEBPACK_IMPORTED_MODULE_6__["default"].debounce(this._onChange, DELAY_TIME_MILLISECOND).bind(this);
     this.wrapperRef = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
   }
+
   componentDidMount() {
     document.addEventListener("mousedown", this._handleClickOut);
   }
+
   componentWillUnmount() {
     document.removeEventListener("mousedown", this._handleClickOut);
   }
+
   get isShowSuggestionList() {
     return this.state.suggestions && this.state.suggestions.length > 0;
   }
+
   _setStateWithCaching(value, suggestionList) {
     if (this.props.cache) {
       const cacheKey = value.toLowerCase();
       this.cacheData[cacheKey] = suggestionList;
     }
+
     this.setState({
       suggestions: suggestionList
     });
   }
+
   _getDataByUrl(url, value) {
     const {
       responseDataField,
@@ -676,9 +728,11 @@ class AutoComplete extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       }
     }).then(response => {
       const data = responseDataField ? response.data[responseDataField] : response.data;
+
       this._setStateWithCaching(value, data);
     });
   }
+
   render() {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "ac-container",
@@ -700,7 +754,9 @@ class AutoComplete extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       onSelect: this._onSelect
     })));
   }
+
 }
+
 _defineProperty(AutoComplete, "propTypes", {
   url: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
   onSelect: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
@@ -710,6 +766,7 @@ _defineProperty(AutoComplete, "propTypes", {
   queryParamName: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
   htmlAttributes: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.object
 });
+
 _defineProperty(AutoComplete, "defaultProps", {
   url: null,
   responseDataField: "suggestions",
@@ -735,9 +792,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -745,12 +801,14 @@ class SuggestionList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   constructor(props) {
     super(props);
   }
+
   onSelect(selectedItem) {
     const {
       onSelect
     } = this.props;
     onSelect && onSelect(selectedItem);
   }
+
   _renderDataList() {
     return this.props.dataList.map((item, index) => {
       const className = index === this.props.selectedIndex ? "ac-item ac-item-active" : "ac-item";
@@ -761,6 +819,7 @@ class SuggestionList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       }, item && typeof item === "object" ? item.value : item);
     });
   }
+
   render() {
     const style = {
       width: this.props.width
@@ -770,7 +829,9 @@ class SuggestionList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       style: style
     }, this._renderDataList());
   }
+
 }
+
 _defineProperty(SuggestionList, "propTypes", {
   dataList: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.array.isRequired,
   onSelect: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
@@ -809,51 +870,63 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 const _excluded = ["tag", "className", "style"];
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 class CollapsiblePanel extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
   constructor(props) {
     super(props);
+
     _defineProperty(this, "onClick", () => {
       const newState = !this.state.isCollapsed;
       const {
         onCollapse,
         onExpand
       } = this.props;
+
       if (newState) {
         onCollapse && onCollapse();
       }
+
       this.setState({
         isCollapsed: newState
       }, () => {
         window.dispatchEvent(new Event('resize'));
+
         if (!newState) {
           onExpand && onExpand();
         }
       });
     });
+
     this.state = {
       isCollapsed: false
     };
   }
+
   render() {
     const {
       stickyFooter,
       iconContainerStyle,
       iconToggle
     } = this.props;
+
     const {
-        tag,
-        className,
-        style
-      } = iconToggle,
-      attrs = _objectWithoutProperties(iconToggle, _excluded);
+      tag,
+      className,
+      style
+    } = iconToggle,
+          attrs = _objectWithoutProperties(iconToggle, _excluded);
+
     const IconTag = tag;
     const iconStyle = style || {
       transform: this.state.isCollapsed ? null : 'rotate(180deg)',
@@ -872,7 +945,7 @@ class CollapsiblePanel extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Comp
       }
     }, this.props.children), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "caret-block"
-    }, stickyFooter), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, stickyFooter), !!this.props.isCollapseMode && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "filter-handle",
       style: iconContainerStyle,
       onClick: this.onClick
@@ -881,17 +954,22 @@ class CollapsiblePanel extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Comp
       style: iconStyle
     }, attrs))));
   }
+
 }
+
 _defineProperty(CollapsiblePanel, "propTypes", {
   stickyFooter: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node,
   onCollapse: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
-  onExpand: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
+  onExpand: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  isCollapseMode: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool
 });
+
 const propTypes = {
   stickyFooter: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node,
   onCollapse: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
   onExpand: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
-  iconToggle: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object
+  iconToggle: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object,
+  isCollapseMode: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool
 };
 const defaultProps = {
   iconContainerStyle: {
@@ -908,7 +986,8 @@ const defaultProps = {
     tag: 'i',
     className: 'icon-arrow',
     style: null
-  }
+  },
+  isCollapseMode: true
 };
 CollapsiblePanel.propTypes = propTypes;
 CollapsiblePanel.defaultProps = defaultProps;
@@ -948,6 +1027,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 const Popup = props => {
   const {
     title,
@@ -959,6 +1039,7 @@ const Popup = props => {
     iframeUrl
   } = props;
   let content;
+
   if (iframeUrl) {
     content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("iframe", {
       frameBorder: "0",
@@ -976,6 +1057,7 @@ const Popup = props => {
       className: "popup-content"
     }, children);
   }
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: `popup-container ${isShow ? 'show' : 'hide'}`,
     onClick: props.onClick
@@ -1000,6 +1082,7 @@ const Popup = props => {
     className: "icon-close"
   }))), content));
 };
+
 Popup.propTypes = {
   width: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string]),
   height: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string]),
@@ -1066,15 +1149,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 class radio extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   constructor(props) {
     super(props);
   }
+
   render() {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "radio",
@@ -1087,7 +1170,9 @@ class radio extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       htmlFor: this.props.id
     }, this.props.label));
   }
+
 }
+
 _defineProperty(radio, "propTypes", {
   id: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired,
   label: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
@@ -1096,6 +1181,7 @@ _defineProperty(radio, "propTypes", {
   checked: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
   onChange: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
 });
+
 _defineProperty(radio, "defaultProps", {
   label: '',
   name: '',
@@ -1120,9 +1206,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _Radio__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Radio */ "./www/js/source/reactpages/components/radio/Radio.jsx");
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -1133,21 +1218,25 @@ class RadioGroup extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       value: props.value
     };
   }
+
   onChange(value) {
     if (this.state.value === value) {
       return;
     }
+
     this.setState({
       value: value
     });
     this.props.onChange(value);
   }
+
   _renderItem() {
     const {
       options,
       name
     } = this.props;
     let radios = [];
+
     for (let i = 0; i < options.length; i++) {
       const item = options[i];
       const isChecked = item.value === this.state.value;
@@ -1162,16 +1251,20 @@ class RadioGroup extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         onChange: value => this.onChange(value)
       }));
     }
+
     return radios;
   }
+
   render() {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "radio-group"
+      className: `radio-group ${this.props.className}`
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       className: "label-text"
     }, this.props.label), this._renderItem());
   }
+
 }
+
 _defineProperty(RadioGroup, "propTypes", {
   label: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
   name: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
@@ -1182,6 +1275,7 @@ _defineProperty(RadioGroup, "propTypes", {
   onChange: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
   value: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string])
 });
+
 _defineProperty(RadioGroup, "defaultProps", {
   label: '',
   name: '',
@@ -1254,10 +1348,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _icon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./icon */ "./www/js/source/reactpages/components/sweet-alert/icon.js");
 const _excluded = ["text"],
-  _excluded2 = ["buttons", "children"];
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+      _excluded2 = ["buttons", "children"];
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
 
 
 
@@ -1272,25 +1370,29 @@ class SweetAlert extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component 
   constructor(props) {
     super(props);
   }
+
   _buildButtonGroup(buttons) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "al-button-container"
     }, buttons.map((btnItem, index) => {
       const {
-          text
-        } = btnItem,
-        attrs = _objectWithoutProperties(btnItem, _excluded);
+        text
+      } = btnItem,
+            attrs = _objectWithoutProperties(btnItem, _excluded);
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", _extends({
         key: index,
         type: "button"
       }, attrs), text);
     }));
   }
+
   _buildIcon() {
     const {
       icon
     } = this.props;
     const className = `${_icon__WEBPACK_IMPORTED_MODULE_3__["ICON"]} ${_icon__WEBPACK_IMPORTED_MODULE_3__["ICON"]}--${icon}`;
+
     if (PREDEFINED_ICONS.includes(icon)) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: className,
@@ -1299,19 +1401,23 @@ class SweetAlert extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component 
         }
       });
     }
+
     return null;
   }
+
   render() {
     const _this$props = this.props,
-      {
-        buttons,
-        children
-      } = _this$props,
-      props = _objectWithoutProperties(_this$props, _excluded2);
+          {
+      buttons,
+      children
+    } = _this$props,
+          props = _objectWithoutProperties(_this$props, _excluded2);
+
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "sweet-alert"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_popup__WEBPACK_IMPORTED_MODULE_1__["default"], props, this._buildIcon(), children, this._buildButtonGroup(buttons)));
   }
+
 }
 SweetAlert.propTypes = {
   width: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string]),
@@ -1350,14 +1456,17 @@ class Timer {
     let timeout;
     return function () {
       const context = this,
-        args = arguments;
+            args = arguments;
+
       const later = () => {
         func.apply(context, args);
       };
+
       clearTimeout(timeout);
       timeout = setTimeout(later, wait || DEFAULT_TIME_DELAY_MILLISECOND);
     };
   }
+
 }
 
 /***/ }),
@@ -1432,29 +1541,38 @@ class Excel {
       });
     }
   }
+
   static read(file, sheetIndex, callBack) {
     const reader = new FileReader();
+
     reader.onload = function (e) {
       const data = e.target.result;
+
       const workbook = _XLSX.read(data, {
         type: 'binary'
       });
+
       const sheetName = workbook.SheetNames[sheetIndex];
       const worksheet = workbook.Sheets[sheetName];
+
       const content = _XLSX.utils.sheet_to_json(worksheet);
+
       const rows = _XLSX.utils.sheet_to_json(worksheet, {
         header: 1,
         defval: '',
         blankrows: true
       });
+
       const result = {
         header: rows && rows.length ? rows[0] : null,
         content
       };
       callBack && callBack(result);
     };
+
     reader.readAsBinaryString(file);
   }
+
   static export(worksheet, fileName) {
     const option = {
       bookType: EXCEL_TYPE,
@@ -1467,25 +1585,30 @@ class Excel {
       Props: {}
     };
     workbook.Sheets[fileName] = worksheet;
+
     var workbookOutput = _XLSX.write(workbook, option);
+
     this.download(workbookOutput, fileName);
   }
+
   static getCellType(value) {
     return MapExcelType[typeof value];
   }
+
   static getCellAddress(cellObject) {
     return _XLSX.utils.encode_cell(cellObject);
   }
+
   static download(workbookOut, fileName) {
     const blob = new Blob([this.sheetToArrayBuffer(workbookOut)], {
       type: "application/octet-stream"
     });
     this.downloadFromBolb(blob, fileName);
   }
-  static downloadFromBolb(blob, fileName) {
-    const fileNameDownload = `${fileName}.${EXCEL_TYPE}`;
 
-    // IE 10+
+  static downloadFromBolb(blob, fileName) {
+    const fileNameDownload = `${fileName}.${EXCEL_TYPE}`; // IE 10+
+
     if (typeof navigator !== "undefined" && navigator.msSaveOrOpenBlob) {
       navigator.msSaveOrOpenBlob(blob, fileNameDownload);
     } else {
@@ -1497,12 +1620,16 @@ class Excel {
       document.body.removeChild(element);
     }
   }
+
   static sheetToArrayBuffer(s) {
     const buffer = new ArrayBuffer(s.length);
     const view = new Uint8Array(buffer);
+
     for (let i = 0; i != s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
+
     return buffer;
   }
+
 }
 
 /***/ }),
@@ -1541,11 +1668,18 @@ const decode = html => {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return StringHelper; });
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 class StringHelper {
   static isEmptyOrWhiteSpace(str) {
     return !str || str.trim().length === 0;
   }
+
 }
+
+_defineProperty(StringHelper, "addSpaceAfterComma", str => {
+  return str.split(",").join(", ");
+});
 
 /***/ }),
 
@@ -1568,10 +1702,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 const predefinedIcons = {
@@ -1662,6 +1797,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const MbToByte = 1000 * 1000;
+
 const DropzoneUpload = props => {
   const {
     onSubmit,
@@ -1681,11 +1817,13 @@ const DropzoneUpload = props => {
   const onDropRejected = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(rejectedFiles => {
     const rejectedFile = rejectedFiles[0];
     let errorMsg = Object(_jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_2__["decode"])(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('UploadFileError'));
+
     if (_isInvalidExtension(rejectedFile)) {
       errorMsg = `${Object(_jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_2__["decode"])(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('FileExtensionIncorrect'))} (${accept})`;
     } else if (_isInValidSize(rejectedFile)) {
       errorMsg = `${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('FileUploadExceedSize')} ${props.maxSize}MB`;
     }
+
     alert(errorMsg);
   });
   const {
@@ -1698,19 +1836,23 @@ const DropzoneUpload = props => {
     accept,
     maxSize
   });
+
   const _removeFile = file => () => {
     const newFiles = [...uploadedFiles];
     newFiles.splice(newFiles.indexOf(file), 1);
     setUploadedFiles(newFiles);
   };
+
   const _isInValidSize = file => {
     return file.size > maxSize;
   };
+
   const _isInvalidExtension = file => {
     const acceptArray = accept.split(',');
     const isValid = acceptArray.some(_ => file.name.endsWith(_));
     return !isValid;
   };
+
   const _renderAcceptedFiles = () => {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
       className: "dropzone-row"
@@ -1724,15 +1866,19 @@ const DropzoneUpload = props => {
       className: "icon-close"
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, file.name))));
   };
+
   const _clickHereTitle = () => {
     switch (tabType) {
       case _lib_constants__WEBPACK_IMPORTED_MODULE_4__["TabType"].VipPlayerManagement:
         return isActive ? 'ClickOrDropHereToActivate' : 'ClickOrDropHereToDeactivate';
+
       default:
         return 'ClickOrDropHere';
     }
   };
+
   const _isExistFiles = uploadedFiles && uploadedFiles.length > 0;
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "dropzone"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
@@ -1752,6 +1898,7 @@ const DropzoneUpload = props => {
     onClick: () => onSubmit && onSubmit(uploadedFiles)
   }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Submit'))), children);
 };
+
 DropzoneUpload.defaultProps = {
   maxSize: 1,
   isShowInnerZone: true
@@ -1780,11 +1927,13 @@ __webpack_require__.r(__webpack_exports__);
   const {
     playerCount
   } = props;
+
   const _buildContent = () => {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       key: "searchResult"
     }, `${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('SearchResult')}: ${playerCount} ${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('Player')}(s)`);
   };
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_ReportTitle__WEBPACK_IMPORTED_MODULE_1__["default"], {
     tag: "div",
     content: _buildContent()
@@ -1822,6 +1971,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 const VipSwitcherCell = props => {
   const {
     index,
@@ -1837,12 +1987,15 @@ const VipSwitcherCell = props => {
     customerClass
   } = playerList[index];
   const canEditVip = hasVipManagementEdit && !isBA;
+
   const _handleCloseAlert = () => {
     setSweetAlertOption(null);
   };
+
   const _cancelProps = {
     onClick: _handleCloseAlert
   };
+
   const _buildAlertOptionUpdateVipStatus = (params, isUpdateVip) => {
     const confirmMessage = isUpdateVip ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource("ConfirmActivateVIPPlayer") : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource("ConfirmDeactivateVIPPlayer");
     const handlerUpdateVipStatusSuccess = _lib_helpers_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_8__["UpdateVipStatusAlertOption"].createHandlerAfterUpdateVipStatusSuccess(props);
@@ -1862,6 +2015,7 @@ const VipSwitcherCell = props => {
     });
     return confirmOptions;
   };
+
   const _handleChangeVipStatus = event => {
     event.preventDefault();
     const checked = event.target.checked;
@@ -1869,12 +2023,16 @@ const VipSwitcherCell = props => {
       systemIds: systemId,
       isVip: !isVip
     };
+
     const alertOption = _buildAlertOptionUpdateVipStatus(params, checked);
+
     setSweetAlertOption(alertOption);
   };
+
   const _getTextDisplay = isVip => {
     return isVip ? 'YES' : 'NO';
   };
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
     className: "center-align"
   }, canEditVip ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Switcher__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -1882,6 +2040,7 @@ const VipSwitcherCell = props => {
     onChange: _handleChangeVipStatus
   }) : _getTextDisplay(isVip));
 };
+
 function mapDispatchToProps(dispatch) {
   const {
     setPlayerList,
@@ -1898,6 +2057,7 @@ function mapDispatchToProps(dispatch) {
     setPagingOption
   }, dispatch);
 }
+
 function mapStateToProps(state) {
   const {
     playerList,
@@ -1912,6 +2072,7 @@ function mapStateToProps(state) {
     selectedParams
   });
 }
+
 ;
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(VipSwitcherCell)));
 
@@ -1945,6 +2106,7 @@ class DataSourceHelper {
     });
     return convertedList;
   }
+
 }
 
 /***/ }),
@@ -1968,10 +2130,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/constants/report */ "./www/js/source/reactpages/constants/report.js");
 /* harmony import */ var _tabs_problem_player_components_grid_CustomerClassCell__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../tabs/problem-player/components/grid/CustomerClassCell */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/components/grid/CustomerClassCell.jsx");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -1989,20 +2152,25 @@ class GridHelper {
       sortBy: _.sortBy
     }, this.renderHeaderCell(_))));
   }
+
   static renderHeaderCell(cell) {
     var isCustomerClass = cell.key == "customerClass";
+
     if (isCustomerClass) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tabs_problem_player_components_grid_CustomerClassCell__WEBPACK_IMPORTED_MODULE_5__["default"], {
         cell: cell
       });
     }
+
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, cell.childComponent ? cell.childComponent : cell.text);
   }
+
   static calculateTopPosition(dropdownHeight = 0, currentTop) {
     const innerHeight = window.innerHeight;
     const expectedHeight = dropdownHeight + currentTop + 20;
     return expectedHeight > innerHeight ? currentTop - dropdownHeight : currentTop;
   }
+
   static getSortInfo(orderCol, sortType) {
     const sortInfo = {
       orderCol: _constants__WEBPACK_IMPORTED_MODULE_3__["SortMapper"].sortCol[orderCol],
@@ -2010,6 +2178,7 @@ class GridHelper {
     };
     return sortInfo;
   }
+
   static getSortInfoFromPagingOption(options) {
     const {
       orderCol,
@@ -2020,7 +2189,9 @@ class GridHelper {
       sortType
     };
   }
+
 }
+
 _defineProperty(GridHelper, "callBackToUpdatePaging", ({
   pagingOption,
   setPagingOption
@@ -2032,6 +2203,7 @@ _defineProperty(GridHelper, "callBackToUpdatePaging", ({
     orderCol,
     sortType
   } = response;
+
   const newPagingOption = _objectSpread(_objectSpread({}, pagingOption), {
     PageIndex: pageIndex,
     PageSize: pageSize,
@@ -2039,8 +2211,10 @@ _defineProperty(GridHelper, "callBackToUpdatePaging", ({
     sortType,
     TotalItem: totalItem
   });
+
   setPagingOption(newPagingOption);
 });
+
 _defineProperty(GridHelper, "isShowSubsidiary", subsidiarySearch => _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__["default"].viewType !== _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_4__["SubsidiaryViewType"].NOT_MANAGEMENT && subsidiarySearch);
 
 /***/ }),
@@ -2059,13 +2233,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/constants.js");
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
 class MessageHelper {}
+
 _defineProperty(MessageHelper, "MsgColors", {
   [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].Success]: {
     content: 'msg-success',
@@ -2092,6 +2266,7 @@ _defineProperty(MessageHelper, "MsgColors", {
     icon: 'icon-warning'
   }
 });
+
 _defineProperty(MessageHelper, "GetMsgUpdateVipStatus", {
   singleUpdate: {
     [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].Success]: _ => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('SuccessUpdateVipStatusSingle'),
@@ -2109,6 +2284,7 @@ _defineProperty(MessageHelper, "GetMsgUpdateVipStatus", {
     [_constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].InvalidExternalId]: data => _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('InvalidPlayerUpdateVipStatusByExternalId').replace('{0}', data.numberOfPlayer).replace('{1}', data.ids)
   }
 });
+
 _defineProperty(MessageHelper, "GetListMsgUpdateVipStatus", (msgResults, currentVipStatus, isSingleUpdate = false) => {
   const fieldName = isSingleUpdate ? 'singleUpdate' : 'multipleUpdate';
   const combinedResult = MessageHelper.combineMsgResult(msgResults);
@@ -2124,21 +2300,27 @@ _defineProperty(MessageHelper, "GetListMsgUpdateVipStatus", (msgResults, current
     }, MessageHelper.GetMsgUpdateVipStatus[fieldName][code](_, currentVipStatus)));
   });
 });
+
 _defineProperty(MessageHelper, "combineMsgResult", msgResults => {
   const msgResultExternalIdIndex = msgResults.findIndex(_ => _.code === _constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].NoChangeByExternalId); // no change VIP status - by externalId
+
   if (msgResultExternalIdIndex >= 0) {
     msgResults = MessageHelper.combineMsgResultWithStatusNoChange(msgResults, msgResultExternalIdIndex);
   }
+
   return msgResults;
 });
+
 _defineProperty(MessageHelper, "combineMsgResultWithStatusNoChange", (msgResults, msgResultExternalIdIndex) => {
   const msgResultSystemId = msgResults.find(_ => _.code === _constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].NoChangeBySystemId); // no change VIP status - by systemId
+
   if (msgResultSystemId) {
     msgResultSystemId.numberOfPlayer += msgResults[msgResultExternalIdIndex].numberOfPlayer;
     msgResults.splice(msgResultExternalIdIndex, 1);
   } else {
     msgResults[msgResultExternalIdIndex].code = _constants__WEBPACK_IMPORTED_MODULE_2__["UpdateVIPStatusCode"].NoChangeBySystemId;
   }
+
   return msgResults;
 });
 
@@ -2185,6 +2367,7 @@ const UpdateVipStatusAlertOption = {
     isSingleUpdate
   }) => response => {
     let alertOpt;
+
     if (response.isSuccess) {
       const resultMessage = _messageHelper__WEBPACK_IMPORTED_MODULE_3__["default"].GetListMsgUpdateVipStatus(response.data, isUpdateVip, isSingleUpdate);
       alertOpt = noAlertResult ? handlerUpdateVipStatusSuccess(resultMessage) : Object(_jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_1__["generateDefaultAlertOption"])(resultMessage, handlerUpdateVipStatusSuccess, null, _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_1__["predefinedIcons"].success);
@@ -2222,21 +2405,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
 /* harmony import */ var _actions_types_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/types.js */ "./www/js/source/reactpages/pages/customer/player-segmentation/actions/types.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 const sweetAlertOption = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(null, {
   [_actions_types_js__WEBPACK_IMPORTED_MODULE_1__["SET_SWEET_ALERT_OPTION"]](prevState, action) {
     return action.data && _objectSpread({}, action.data);
   }
+
 });
 const pagingOption = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(null, {
   [_actions_types_js__WEBPACK_IMPORTED_MODULE_1__["SET_PAGING_OPTION"]](prevState, action) {
     return action.data && _objectSpread({}, action.data);
   }
+
 });
 
 /***/ }),
@@ -2254,16 +2440,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
 /* harmony import */ var _actions_types_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/types.js */ "./www/js/source/reactpages/pages/customer/player-segmentation/actions/types.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 const selectedParams = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(null, {
   [_actions_types_js__WEBPACK_IMPORTED_MODULE_1__["SET_SELECTED_PARAMS"]](prevState, action) {
     return action.data && _objectSpread({}, action.data);
   }
+
 });
 
 /***/ }),
@@ -2286,6 +2474,7 @@ const playerList = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_
   [_actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_PLAYER_LIST"]](state, action) {
     return action.data;
   }
+
 });
 
 /***/ }),
@@ -2304,15 +2493,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _jsroot_components_popup_Popup__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/components/popup/Popup */ "./www/js/source/reactpages/components/popup/Popup.jsx");
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
 class CustomerClassCell extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
   constructor(props) {
     super(props);
+
     _defineProperty(this, "showCustomerClassInformation", e => {
       this.setState({
         isShowCustomerClassInformation: true
@@ -2320,19 +2509,23 @@ class CustomerClassCell extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Com
       e.stopPropagation();
       return false;
     });
+
     _defineProperty(this, "closeCustomerClassInfomation", () => {
       this.setState({
         isShowCustomerClassInformation: false
       });
     });
+
     _defineProperty(this, "clickOnPopup", e => {
       e.stopPropagation();
       return false;
     });
+
     this.state = {
       isShowCustomerClassInformation: false
     };
   }
+
   render() {
     var url = "CustomerClass/CustomerClassInformation?time=" + new Date().getTime();
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, this.props.cell.text, "\xA0\xA0", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2349,6 +2542,7 @@ class CustomerClassCell extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Com
       iframeUrl: url
     }) : "");
   }
+
 }
 
 /***/ }),
@@ -2490,6 +2684,7 @@ const AppContainer = props => {
     isLoading: isLoading
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormFilter__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormAction__WEBPACK_IMPORTED_MODULE_6__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Content__WEBPACK_IMPORTED_MODULE_5__["default"], null), sweetAlertOption && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_sweet_alert__WEBPACK_IMPORTED_MODULE_3__["default"], sweetAlertOption));
 };
+
 function mapStateToProps(state) {
   const {
     isLoading,
@@ -2500,6 +2695,7 @@ function mapStateToProps(state) {
     sweetAlertOption
   });
 }
+
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(AppContainer));
 
 /***/ }),
@@ -2525,10 +2721,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../actions */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/vip-player-management/actions/index.js");
 /* harmony import */ var _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../lib/helpers/gridHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/helpers/gridHelper.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -2546,20 +2743,25 @@ const Content = props => {
     pagingOption,
     setPagingOption
   } = props;
+
   if (pagingOption.TotalItem == null) {
     return null;
   }
+
   const _handlePaging = (pageIndex, pageSize) => {
     const sortInfo = _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSortInfoFromPagingOption(pagingOption);
+
     const params = _objectSpread(_objectSpread(_objectSpread({}, selectedParams), sortInfo), {
       pageIndex,
       pageSize
     });
+
     searchPlayer(selectedTabKey, params, _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_7__["default"].callBackToUpdatePaging({
       pagingOption,
       setPagingOption
     }));
   };
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "result-content"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_GridCaption__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -2569,6 +2771,7 @@ const Content = props => {
     onPaging: _handlePaging
   }));
 };
+
 function mapDispatchToProps(dispatch) {
   const {
     searchPlayer,
@@ -2579,6 +2782,7 @@ function mapDispatchToProps(dispatch) {
     setPagingOption
   }, dispatch);
 }
+
 function mapStateToProps(state) {
   const {
     pagingOption,
@@ -2594,6 +2798,7 @@ function mapStateToProps(state) {
     playerCount
   });
 }
+
 ;
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(Content));
 
@@ -2623,14 +2828,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../lib/helpers/gridHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/vip-player-management/lib/helpers/gridHelper.js");
 /* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
 const _excluded = ["isSelected"];
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -2657,12 +2867,15 @@ const DataGrid = props => {
     searchPlayer
   } = props;
   const hasVipManagementEdit = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].HasVipManagementEdit;
+
   if (playerList == null) {
     return null;
   }
+
   if (!playerList.length) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_7__["default"], null);
   }
+
   const showSubsidiary = _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_8__["default"].isShowSubsidiary(selectedParams.subsidiarySearch);
   const _dataGridHeaders = [{
     key: 'CheckAll',
@@ -2681,31 +2894,39 @@ const DataGrid = props => {
       }
     })
   }, ...Object(_lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_9__["getDataGridHeaders"])(showSubsidiary)];
+
   if (!hasVipManagementEdit) {
     _dataGridHeaders.forEach(function (header, index) {
       header['childComponent'] && delete header['childComponent'];
     });
   }
+
   const _renderDataSection = dataList => dataList.map((dataItem, index) => {
     const {
-        isSelected
-      } = dataItem,
-      rest = _objectWithoutProperties(dataItem, _excluded);
+      isSelected
+    } = dataItem,
+          rest = _objectWithoutProperties(dataItem, _excluded);
+
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_grid_PlayerRow__WEBPACK_IMPORTED_MODULE_6__["default"], _extends({}, rest, {
       index: index,
       showSubsidiary: showSubsidiary,
       hasVipManagementEdit: hasVipManagementEdit
     }));
   });
+
   const _handleSort = (orderCol, sortType) => {
     const sortInfo = _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSortInfo(orderCol, sortType);
+
     const _pagingOption = _objectSpread(_objectSpread({}, pagingOption), sortInfo);
+
     const params = _objectSpread(_objectSpread({}, selectedParams), _pagingOption);
+
     searchPlayer(selectedTabKey, params, _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_8__["default"].callBackToUpdatePaging({
       pagingOption,
       setPagingOption
     }));
   };
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Table"], {
     minWidth: 650,
     autoWidth: true,
@@ -2718,6 +2939,7 @@ const DataGrid = props => {
     onSort: _handleSort
   }));
 };
+
 function mapDispatchToProps(dispatch) {
   const {
     searchPlayer,
@@ -2732,6 +2954,7 @@ function mapDispatchToProps(dispatch) {
     setSelectedPlayer
   }, dispatch);
 }
+
 function mapStateToProps(state) {
   const {
     playerList,
@@ -2750,6 +2973,7 @@ function mapStateToProps(state) {
     isLoading
   });
 }
+
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(DataGrid)));
 
 /***/ }),
@@ -2820,12 +3044,15 @@ const FormAction = props => {
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     resultMsgSubmitVipListFile && setDisplayUploadDropzone(false);
   }, [selectedParams]);
+
   const _handleCloseAlert = () => {
     setSweetAlertOption(null);
   };
+
   const _cancelProps = {
     onClick: _handleCloseAlert
   };
+
   const _getParams = isVip => {
     const selectedPlayers = playerList.filter(_ => _.isSelected);
     const systemIds = selectedPlayers.map(_ => _.systemId);
@@ -2835,6 +3062,7 @@ const FormAction = props => {
     };
     return params;
   };
+
   const _buildAlertOptionUpdateVipStatus = (params, isUpdateVip, noAlertResult, handlerUpdateVipStatusSuccess) => {
     const confirmMessage = isUpdateVip ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("ConfirmActivateVIPPlayer") : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("ConfirmDeactivateVIPPlayer");
     handlerUpdateVipStatusSuccess = handlerUpdateVipStatusSuccess || _lib_helpers_sweetAlertHelper__WEBPACK_IMPORTED_MODULE_14__["UpdateVipStatusAlertOption"].createHandlerAfterUpdateVipStatusSuccess(props);
@@ -2854,27 +3082,38 @@ const FormAction = props => {
     });
     return confirmOptions;
   };
+
   const _handleActivateVip = event => {
     event.preventDefault();
+
     const params = _getParams(true);
+
     const alertOption = _buildAlertOptionUpdateVipStatus(params, true, false);
+
     setSweetAlertOption(alertOption);
   };
+
   const _handleDeactivateVip = event => {
     event.preventDefault();
+
     const params = _getParams(false);
+
     const alertOption = _buildAlertOptionUpdateVipStatus(params, false, false);
+
     setSweetAlertOption(alertOption);
   };
+
   const _handleDisplayUploadDropzone = type => {
     if (type === _lib_constants__WEBPACK_IMPORTED_MODULE_10__["ActionType"].Deactived && isActivateVIP || type === _lib_constants__WEBPACK_IMPORTED_MODULE_10__["ActionType"].Actived && !isActivateVIP) {
       setDisplayUploadDropzone(true);
     } else {
       setDisplayUploadDropzone(!displayUploadDropzone);
     }
+
     setIsActivateVIP(type === _lib_constants__WEBPACK_IMPORTED_MODULE_10__["ActionType"].Actived);
     setResultMsgSubmitVipListFile(null);
   };
+
   const _handleActiveVipStatusFromFile = params => {
     const handlerUpdateVipStatusSuccess = resultMessage => {
       setSweetAlertOption(null);
@@ -2884,9 +3123,12 @@ const FormAction = props => {
         setPagingOption
       }));
     };
+
     const alertOption = _buildAlertOptionUpdateVipStatus(params, isActivateVIP, true, handlerUpdateVipStatusSuccess);
+
     setSweetAlertOption(alertOption);
   };
+
   const _onSubmitVipListFile = files => {
     const file = files[0];
     _jsroot_lib_excel__WEBPACK_IMPORTED_MODULE_5__["default"].process(() => {
@@ -2895,35 +3137,43 @@ const FormAction = props => {
           header,
           content
         } = result;
+
         if (!_lib_helpers_excelHelper__WEBPACK_IMPORTED_MODULE_12__["default"].isValidHeader(header) || !_lib_helpers_excelHelper__WEBPACK_IMPORTED_MODULE_12__["default"].isValidContent(content)) {
           alert(Object(_jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_6__["decode"])(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("UploadFileError")));
           return;
         }
+
         const byExternalId = uploadFileOption == _lib_constants__WEBPACK_IMPORTED_MODULE_11__["UploadFileOptionValue"].byExternalId;
         const selectedColumn = header[0];
+
         if (!selectedColumn) {
           alert(Object(_jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_6__["decode"])(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("UploadFileError")));
           return;
         }
+
         if (content.map(_ => _[selectedColumn]).length > _lib_constants__WEBPACK_IMPORTED_MODULE_10__["MaxBatchUpdateVIPPlayer"]) {
           alert(Object(_jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_6__["decode"])(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("MaxBatchUpdateVIPPlayerError")));
           return;
         }
+
         const value = content.map(_ => _[selectedColumn]).join();
         const params = {
           [byExternalId ? 'externalIds' : 'systemIds']: value,
           isVip: isActivateVIP
         };
+
         _handleActiveVipStatusFromFile(params);
       });
     });
   };
+
   const _handleDownloadTemplateExcel = event => {
     event.preventDefault();
     _lib_queryService__WEBPACK_IMPORTED_MODULE_16__["default"].downloadVipPlayerListTemplateExcel({
       uploadBy: uploadFileOption
     });
   };
+
   const _renderExtraInfoDropzoneUploadFile = () => {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_radio_RadioGroup__WEBPACK_IMPORTED_MODULE_4__["default"], {
       name: 'UploadByOptions',
@@ -2935,6 +3185,7 @@ const FormAction = props => {
       onClick: _handleDownloadTemplateExcel
     }, "*", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('ClickHere')), "\xA0", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('ToDowloadTemplate'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, `*${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('MaximumUploadFileSize')}: ${1} MB`)));
   };
+
   const _renderDropzoneUploadFile = () => {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_DropzoneUpload__WEBPACK_IMPORTED_MODULE_9__["default"], {
       multiple: false,
@@ -2948,6 +3199,7 @@ const FormAction = props => {
       key: isActivateVIP
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, resultMsgSubmitVipListFile ? resultMsgSubmitVipListFile : _renderExtraInfoDropzoneUploadFile()));
   };
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "form-action"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2980,6 +3232,7 @@ const FormAction = props => {
     disabled: !hasVipManagementEdit
   }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("DeactivateListOfPlayers")))), displayUploadDropzone && _renderDropzoneUploadFile());
 };
+
 function mapDispatchToProps(dispatch) {
   const {
     searchPlayer,
@@ -2994,6 +3247,7 @@ function mapDispatchToProps(dispatch) {
     setPagingOption
   }, dispatch);
 }
+
 function mapStateToProps(state) {
   const {
     playerList,
@@ -3010,6 +3264,7 @@ function mapStateToProps(state) {
     pagingOption
   });
 }
+
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(FormAction)));
 
 /***/ }),
@@ -3047,10 +3302,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_helpers_paramHelper__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../lib/helpers/paramHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/vip-player-management/lib/helpers/paramHelper.js");
 /* harmony import */ var _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../../lib/helpers/gridHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/helpers/gridHelper.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -3074,27 +3330,35 @@ function _toPrimitive(input, hint) { if (typeof input !== "object" || input === 
 class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
   constructor(props) {
     super(props);
+
     _defineProperty(this, "_submit", event => {
       event.preventDefault();
       const params = _lib_helpers_paramHelper__WEBPACK_IMPORTED_MODULE_18__["default"].ToAPIParams(this.props);
+
       if (!params) {
         return;
       }
+
       this.props.setSelectedParams(params);
       this.props.searchPlayer(this.props.selectedTabKey, params, _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_19__["default"].callBackToUpdatePaging(this.props));
     });
+
     _defineProperty(this, "exportExcel", event => {
       event.preventDefault();
       const {
         selectedParams,
         pagingOption
       } = this.props;
+
       if (!selectedParams) {
         return;
       }
+
       const params = _objectSpread(_objectSpread({}, selectedParams), pagingOption);
+
       _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_13__["default"].getFile(_lib_constants__WEBPACK_IMPORTED_MODULE_15__["Url"].exportVipPlayerList, params).then(response => {
         const NoContentStatusCode = 204;
+
         if (response.status === NoContentStatusCode) {
           alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("NoInfo"));
         } else {
@@ -3102,23 +3366,29 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
           var disposition = response.headers["content-disposition"];
           var filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
           var matches = filenameRegex.exec(disposition);
+
           if (matches != null && matches[1]) {
             filename = matches[1].replace(/['"]/g, '');
           }
+
           _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_11__["default"].downloadFile(response.data, filename);
         }
       });
     });
+
     _defineProperty(this, "showUserGuide", () => {
       const userGuideContent = this.props.userGuideContent;
+
       if (!userGuideContent || userGuideContent.length === 0) {
         this.props.getUserGuideContent('PlayerSegmentationVIP');
       }
     });
+
     _defineProperty(this, "_onChangeSubsidiaryList", (currentItem, selectedItemsKey, treeViewList) => {
       this.props.setSubsidiaryList(selectedItemsKey);
     });
   }
+
   _renderVipOptionSelectList() {
     const {
       selectedVipOption,
@@ -3134,6 +3404,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       onChange: item => setSelectedVipOption(item.value)
     });
   }
+
   _renderCurrencySelectList() {
     const {
       selectedCurrency,
@@ -3151,6 +3422,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       onChange: (_, selectedItemsKey) => this.props.setSelectedCurrency(selectedItemsKey)
     });
   }
+
   _renderUserGuide() {
     const userGuideContent = this.props.userGuideContent;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_UserGuide__WEBPACK_IMPORTED_MODULE_8__["default"], {
@@ -3160,6 +3432,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       content: userGuideContent
     });
   }
+
   _renderStickyFooter() {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
       className: "icon-excel right",
@@ -3167,6 +3440,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("ExportToExcel")
     }), this._renderUserGuide());
   }
+
   _renderSubsidiaryTreeView() {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_4__["TreeViewSelect"], {
       language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].currentLanguage,
@@ -3186,6 +3460,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       onChange: this._onChangeSubsidiaryList
     });
   }
+
   _renderRiskLevelSelectList() {
     const {
       selectedRiskLevel,
@@ -3207,6 +3482,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       }
     });
   }
+
   render() {
     const isDisabledSubmit = this.props.subsidiarySearch && _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_10__["default"].isEmptyOrWhiteSpace(this.props.selectedSubsidiary) || _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_10__["default"].isEmptyOrWhiteSpace(this.props.selectedCurrency) || _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_10__["default"].isEmptyOrWhiteSpace(this.props.selectedCustomerClass);
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_7__["default"], {
@@ -3272,7 +3548,9 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       onClick: this._submit
     }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("Submit")))))));
   }
+
 }
+
 function mapDispatchToProps(dispatch) {
   const {
     setDateRange,
@@ -3303,6 +3581,7 @@ function mapDispatchToProps(dispatch) {
     setSelectedRiskLevel
   }), dispatch);
 }
+
 function mapStateToProps(state) {
   const {
     dateRange,
@@ -3333,6 +3612,7 @@ function mapStateToProps(state) {
     selectedRiskLevel
   });
 }
+
 ;
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(FormFilter));
 
@@ -3410,10 +3690,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/vip-player-management/actions/index.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -3436,12 +3718,14 @@ const SelectionCell = props => {
       const newDataItem = _objectSpread(_objectSpread({}, dataItem), {
         isSelected: checked
       });
+
       const newPlayerList = [...playerList];
       newPlayerList[rowIndex] = newDataItem;
       setPlayerList([...newPlayerList]);
     }
   }));
 };
+
 function mapDispatchToProps(dispatch) {
   const {
     setPlayerList
@@ -3450,6 +3734,7 @@ function mapDispatchToProps(dispatch) {
     setPlayerList
   }, dispatch);
 }
+
 function mapStateToProps(state) {
   const {
     playerList
@@ -3458,6 +3743,7 @@ function mapStateToProps(state) {
     playerList
   });
 }
+
 ;
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapStateToProps, mapDispatchToProps)( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(SelectionCell)));
 
@@ -3480,10 +3766,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _reducers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./reducers */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/vip-player-management/reducers/index.js");
 /* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/constants.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -3499,13 +3787,16 @@ const initialState = _objectSpread(_objectSpread({}, window.initialState[_lib_co
     TotalItem: null
   }
 });
+
 /* harmony default export */ __webpack_exports__["default"] = (props => {
   const {
     selectedTabKey
   } = props;
+
   const defaultState = _objectSpread(_objectSpread({}, initialState), {
     selectedTabKey
   });
+
   const store = _jsroot_lib_store__WEBPACK_IMPORTED_MODULE_3__["default"].createStore(_reducers__WEBPACK_IMPORTED_MODULE_4__["default"], defaultState);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_2__["Provider"], {
     store: store
@@ -3587,15 +3878,19 @@ class ExcelHelper {
     if (!header || !header.length) {
       return null;
     }
+
     const columnName = header.find(_ => _ && _ === readerColumn);
     return columnName;
   }
+
   static isValidHeader(header) {
     return header && header.length == 1;
   }
+
   static isValidContent(content) {
     return content && content.length > 0;
   }
+
 }
 
 /***/ }),
@@ -3614,10 +3909,12 @@ __webpack_require__.r(__webpack_exports__);
 
 const getDataGridHeaders = showSubsidiary => {
   const fullHeaders = [..._constants__WEBPACK_IMPORTED_MODULE_0__["dataGridHeaders"]];
+
   if (!showSubsidiary) {
     const headerIndex = _constants__WEBPACK_IMPORTED_MODULE_0__["dataGridHeaders"].findIndex(_ => _.key === 'subsidiary');
     fullHeaders.splice(headerIndex, 1);
   }
+
   return fullHeaders;
 };
 
@@ -3634,10 +3931,11 @@ const getDataGridHeaders = showSubsidiary => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ParamHelper; });
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 class ParamHelper {
   static ToAPIParams({
     selectedParams,
@@ -3660,6 +3958,7 @@ class ParamHelper {
       sortType: pagingOption.sortType
     });
   }
+
 }
 
 /***/ }),
@@ -3700,16 +3999,19 @@ const selectedVipOption = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_
   [_actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_SELECTED_VIP_OPTION"]](state, action) {
     return action.data;
   }
+
 });
 const selectedCustomerClass = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, {
   [_actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_SELECTED_CUSTOMERCLASS"]](state, action) {
     return action.data;
   }
+
 });
 const selectedRiskLevel = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, {
   [_actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_SELECTED_RISKLEVEL"]](state, action) {
     return action.data;
   }
+
 });
 const dateRange = _jsroot_reducers_dateRangeReducer__WEBPACK_IMPORTED_MODULE_2__["dateRange"];
 const selectedCurrency = _jsroot_reducers_currencyReducer__WEBPACK_IMPORTED_MODULE_3__["selectedCurrency"];
@@ -3765,6 +4067,7 @@ const selectedCurrency = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1
   [_actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_SELECTED_CURRENCY"]](state, action) {
     return action.data;
   }
+
 });
 
 /***/ }),
@@ -3787,6 +4090,7 @@ const dateRange = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["def
   [_actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_DATE_RANGE"]](state, action) {
     return action.data;
   }
+
 });
 
 /***/ }),
@@ -3809,6 +4113,7 @@ const isLoading = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["def
   [_actions_types__WEBPACK_IMPORTED_MODULE_0__["TOGGLE_LOADER"]](state, action) {
     return action.data;
   }
+
 });
 
 /***/ }),
@@ -3832,11 +4137,13 @@ const selectedSubsidiary = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE
   [_actions_types__WEBPACK_IMPORTED_MODULE_1__["SET_SUBSIDIARY_LIST"]](prevState, action) {
     return action.data;
   }
+
 });
 const subsidiarySearch = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(false, {
   [_actions_types__WEBPACK_IMPORTED_MODULE_1__["SET_SUBSIDIARY_SEARCH"]](prevState, action) {
     return action.data;
   }
+
 });
 
 /***/ }),
@@ -3859,6 +4166,7 @@ const userGuideContent = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1
   [_actions_types__WEBPACK_IMPORTED_MODULE_0__["USER_GUIDE_CONTENT"]](state, action) {
     return action.data;
   }
+
 });
 
 /***/ }),
@@ -3881,6 +4189,7 @@ const username = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["defa
   [_actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_USERNAME"]](state, action) {
     return action.data;
   }
+
 });
 
 /***/ })

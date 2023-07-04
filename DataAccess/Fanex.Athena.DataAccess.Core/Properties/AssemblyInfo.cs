@@ -3,7 +3,6 @@ using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("Fanex.Athena.DataAccess.Core.UnitTests")]
 [assembly: InternalsVisibleTo("Fanex.Athena.DataAccess.BetList.UnitTests")]
-[assembly: InternalsVisibleTo("Fanex.Athena.DataAccess.BetSettings.UnitTests")]
 [assembly: InternalsVisibleTo("Fanex.Athena.DataAccess.Customer.UnitTests")]
 [assembly: InternalsVisibleTo("Fanex.Athena.DataAccess.Forecast.UnitTests")]
 [assembly: InternalsVisibleTo("Fanex.Athena.DataAccess.TotalBet.UnitTests")]

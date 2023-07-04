@@ -4,6 +4,8 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+using System.Net.NetworkInformation;
+
 namespace Fanex.Athena.Model.Core.DTO.Configuration
 {
     /// <summary>
@@ -26,5 +28,9 @@ namespace Fanex.Athena.Model.Core.DTO.Configuration
         public static readonly string MemorycacheSubProductsByLicensee = "MemoryCache_SubProductsList";
 
         public static readonly string MemorycacheSportListByLicensee = "MemoryCache_SportList";
+
+        public static readonly string MemorycacheSportListForTreeView = "MemoryCache_SportList_TreeView";
+
+        public static readonly string MemorycacheBetTypeForTreeView = "MemoryCache_Bettype_TreeView";
     }
 }

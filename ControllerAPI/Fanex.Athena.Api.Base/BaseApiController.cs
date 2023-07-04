@@ -16,13 +16,27 @@
     using System.Net;
     using System.Net.Http;
     using System.Net.Http.Headers;
+    using System.Text;
     using System.Web.Http;
     using System.Web.Http.Results;
+    using System.Web.Mvc;
 
     [XFrameOptionApi]
     [ApiUMFilter]
     public class BaseApiController : ApiController
     {
+        protected virtual JsonSerializerSettings DefaultJsonSettings { get; } = new JsonSerializerSettings
+        {
+            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+            ContractResolver = new CamelCasePropertyNamesContractResolver()
+        };
+
+        protected virtual JsonSerializerSettings PascalCassJsonSetting { get; } = new JsonSerializerSettings
+        {
+            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+            ContractResolver = new DefaultContractResolver()
+        };
+
         private readonly ILanguageService _langService;
 
         protected internal BaseApiController(ILanguageService languageService)
@@ -88,11 +102,21 @@
             return Json(content, DefaultJsonSettings);
         }
 
-        protected internal virtual JsonSerializerSettings DefaultJsonSettings { get; } = new JsonSerializerSettings
+        protected internal JsonNetResult<T> JsonNetResult<T>(T content)
         {
-            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-            ContractResolver = new CamelCasePropertyNamesContractResolver()
-        };
+            return JsonNetResult(content, PascalCassJsonSetting );
+        }
+
+        protected internal JsonNetResult<T> JsonNetResult<T>(T content, JsonSerializerSettings serializerSettings)
+        {
+            return JsonNetResult(content, serializerSettings, new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true));
+        }
+
+        protected internal virtual JsonNetResult<T> JsonNetResult<T>(T content, JsonSerializerSettings serializerSettings, Encoding encoding)
+        {
+            return new JsonNetResult<T>(content, serializerSettings, encoding, this.Request);
+        }
+
 
         protected internal virtual HttpResponseMessage ZipFileSteam(MemoryStream zipFile, string fileName)
         {

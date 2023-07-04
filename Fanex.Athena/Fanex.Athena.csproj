@@ -36,8 +36,10 @@
     </UpgradeBackupLocation>
     <OldToolsVersion>4.0</OldToolsVersion>
     <IISExpressSSLPort />
-    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
-    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressAnonymousAuthentication>
+    </IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>
+    </IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
     <TargetFrameworkProfile />
@@ -285,6 +287,9 @@
       <Link>SonarLint.xml</Link>
     </AdditionalFiles>
     <Content Include="App_Code\DesktopLiveReportRazorHelper.cshtml" />
+    <Content Include="App_Data\UserGuide\WinlossAnalysis\en-US.htm" />
+    <Content Include="App_Data\UserGuide\WinlossAnalysis\zh-CN.htm" />
+    <Content Include="App_Data\UserGuide\WinlossAnalysis\zh-Hans.htm" />
     <Content Include="App_Data\UserGuide\BettingTicketCenterRefno\en-US.htm" />
     <Content Include="App_Data\UserGuide\BettingTicketCenterRefno\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\BettingTicketCenterRefno\zh-Hans.htm" />
@@ -569,7 +574,10 @@
     <Content Include="www\css\build\dev\reactpages\subsidiaryperformance\index.chunk.js" />
     <Content Include="www\css\build\dev\reactpages\subsidiaryperformance\index.css" />
     <Content Include="www\css\build\dev\reactpages\vendor.chunk.js" />
+    <Content Include="www\css\build\dev\reactpages\winlossanalysis\index.chunk.js" />
+    <Content Include="www\css\build\dev\reactpages\winlossanalysis\index.css" />
     <Content Include="www\css\build\images\BottomLine.png" />
+    <Content Include="www\css\build\images\excel-white-icon.svg" />
     <Content Include="www\css\build\images\FirstNodeSpan.png" />
     <Content Include="www\css\build\images\info.png" />
     <Content Include="www\css\build\images\red-check.jpg" />
@@ -651,6 +659,8 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="SiteConfig\Web.Staging.config" />
+    <Content Include="www\css\build\pro\reactpages\winlossanalysis\index.chunk.js" />
+    <Content Include="www\css\build\pro\reactpages\winlossanalysis\index.css" />
     <Content Include="www\css\source\pages\betlist\SexyGaming.css" />
     <Content Include="www\css\source\pages\playerBatchUpdate\index.css">
       <DependentUpon>index.scss</DependentUpon>
@@ -776,6 +786,9 @@
     <Content Include="www\css\source\pages\customer\risklevel.scss" />
     <Content Include="www\css\build\dev\pages\customer\risklevel.chunk.js.map" />
     <Content Include="www\css\build\dev\pages\customer\risklevel.css.map" />
+    <Content Include="Views\Desktop\Report\WinlossAnalysis\Index.cshtml" />
+    <Content Include="www\css\build\dev\reactpages\winlossanalysis\index.chunk.js.map" />
+    <Content Include="www\css\build\dev\reactpages\winlossanalysis\index.css.map" />
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\RiskLevelInformation.xls" />
     <Content Include="www\css\source\components\risklevel\risk-level.scss" />
     <None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
@@ -829,6 +842,7 @@
     <Content Include="www\js\build\dev\reactpages\notification\notification.chunk.js.map" />
     <Content Include="www\js\build\dev\reactpages\report\newcashoutwinloss.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\report\speciallicenseewl.chunk.js" />
+    <Content Include="www\js\build\dev\reactpages\report\winlossanalysis.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\subsidiaryperformance\subsidiaryperformance.chunk.js" />
     <Content Include="www\js\build\pro\language-zh-CN.chunk.js" />
     <Content Include="www\js\build\pro\language-zh-Hans.chunk.js" />
@@ -870,6 +884,7 @@
     <Content Include="www\js\build\pro\reactpages\notification\notification.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\report\newcashoutwinloss.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\report\speciallicenseewl.chunk.js" />
+    <Content Include="www\js\build\pro\reactpages\report\winlossanalysis.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\subsidiaryperformance\subsidiaryperformance.chunk.js" />
     <Content Include="www\js\source\common\languages\ViewResources.txt">
       <AutoGen>True</AutoGen>
@@ -2519,6 +2534,7 @@
     <Content Include="www\css\source\reactpages\pages\abnormalbet\index.scss" />
     <Content Include="www\js\build\dev\reactpages\report\abnormalbet.chunk.js.map" />
     <Content Include="www\js\build\dev\reactpages\report\grossgamingrevenue.chunk.js.map" />
+    <Content Include="www\js\build\dev\reactpages\report\winlossanalysis.chunk.js.map" />
     <Content Include="www\css\source\reactpages\pages\grossgamingrevenue\index.scss" />
     <Content Include="www\js\build\dev\pages\customer\risklevel.chunk.js.map" />
     <Content Include="www\css\source\reactpages\pages\customer\player-segmentation\base\_variables.scss" />
