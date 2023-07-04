@@ -28,11 +28,11 @@
         private readonly IEnumerable<(int Id, int SportId, string Name, IEnumerable<int> SabaSportIds)> _sportList = new List<(int, int, string, IEnumerable<int>)>
         {
             (1, (int)SportType.Soccer, ViewResources.Soccer, new[] { (int)SportType.SabaSoccer, (int)SportType.SabaFutsal }),
-            (2, (int)SportType.Soccer, ViewResources.SoccerPinGoal, new[] { (int)SportType.SabaSoccerPingoal }),
-            (3, (int)SportType.BasketBall, ViewResources.Basketball, new[] { (int)SportType.SabaBasketball }),
-            (4, (int)SportType.BasketBall, ViewResources.BasketballPinGoal, new[] { (int)SportType.SabaBasketballPinGoal }),
-            (5, (int)SportType.Cricket, ViewResources.Cricket , new[] { (int)SportType.SabaCricket }),
-            (6, (int)SportType.Esports, ViewResources.ESportsPinGoal, new[] { (int)SportType.SabaESportsPinGoal }),
+            (-1, (int)SportType.Soccer, ViewResources.SoccerPinGoal, new[] { (int)SportType.SabaSoccerPingoal }),
+            (2, (int)SportType.BasketBall, ViewResources.Basketball, new[] { (int)SportType.SabaBasketball }),
+            (-2, (int)SportType.BasketBall, ViewResources.BasketballPinGoal, new[] { (int)SportType.SabaBasketballPinGoal }),
+            (50, (int)SportType.Cricket, ViewResources.Cricket , new[] { (int)SportType.SabaCricket }),
+            (-43, (int)SportType.Esports, ViewResources.ESportsPinGoal, new[] { (int)SportType.SabaESportsPinGoal }),
         };
 
         public SabaVirtualSportsWinLossReportController(
