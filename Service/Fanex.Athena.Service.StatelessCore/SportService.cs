@@ -26,6 +26,7 @@ namespace Fanex.Athena.Service.StatelessCore
             ((int)SportType.SabaBasketball, (int)SportType.BasketBall, new [] { 42 }),
             ((int)SportType.SabaCricket, (int)SportType.Cricket, new [] { 42 }),
             ((int)SportType.SabaFutsal, (int)SportType.Soccer, new [] { 108 }),
+            ((int)SportType.SabaTennis, (int)SportType.Tennis, new [] { 42 }),
             ((int)SportType.SabaSoccerPingoal, (int)SportType.Soccer, new [] { 113 }),
             ((int)SportType.SabaBasketballPinGoal, (int)SportType.BasketBall, new [] { 122 }),
             ((int)SportType.SabaESportsPinGoal, (int)SportType.Esports, new [] { 151 })
@@ -129,12 +130,12 @@ namespace Fanex.Athena.Service.StatelessCore
 
         private ICollection<CheckedItem> BuildSportList(IEnumerable<SportForTreeViewItem> sportItems)
         {
-            var sportList = sportItems.GroupBy(_ => (_.ProductId, _.ProductCode), 
+            var sportList = sportItems.GroupBy(_ => (_.ProductId, _.ProductCode),
                 _ => BuildSportCheckItem(_),
                 (key, elems) => new CheckedItem
                 {
                     ID = key.ProductId,
-                    Checked= true,
+                    Checked = true,
                     Children = elems,
                     Name = DataHelper.GetProductName(key.ProductCode),
                     Value = key.ProductCode
@@ -164,17 +165,20 @@ namespace Fanex.Athena.Service.StatelessCore
                 return ViewResources.Parlay;
             }
             var sportName = string.Empty;
-            switch(sportType)
+            switch (sportType)
             {
                 case HardCodeSportType.SabaBasketball:
                     sportName = _cacheRefAdapter.GetSportName((int)SportType.BasketBall);
                     break;
+
                 case HardCodeSportType.SabaSoccer:
                     sportName = _cacheRefAdapter.GetSportName((int)SportType.Soccer);
                     break;
+
                 case HardCodeSportType.SabaCricket:
                     sportName = _cacheRefAdapter.GetSportName((int)SportType.Cricket);
                     break;
+
                 case HardCodeSportType.SabaSoccerPinGoal:
                     sportName = ViewResources.SoccerPinGoal;
                     break;
@@ -189,6 +193,10 @@ namespace Fanex.Athena.Service.StatelessCore
 
                 case HardCodeSportType.SabaFutsal:
                     sportName = _cacheRefAdapter.GetSportName((int)SportType.Futsal);
+                    break;
+
+                case HardCodeSportType.SabaTennis:
+                    sportName = _cacheRefAdapter.GetSportName((int)SportType.Tennis);
                     break;
 
                 default:

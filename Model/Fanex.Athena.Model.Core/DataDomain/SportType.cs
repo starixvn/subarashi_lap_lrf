@@ -159,5 +159,7 @@
         SabaBasketballPinGoal = -6,
 
         SabaESportsPinGoal = -7,
+
+        SabaTennis = -8,
     }
 }
