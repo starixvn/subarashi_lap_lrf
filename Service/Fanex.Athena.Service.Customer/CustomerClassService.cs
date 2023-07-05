@@ -21,8 +21,7 @@
     {
         private const string DefaultTextValue = "-";
         private const string EnglishCulture = "en-US";
-        private const int CacheTimeoutSeconds = 300; //5 minutes
-        private const int CacheTimeoutHours = 1; //1 hour
+        private const int CacheTimeoutSeconds = 900; // 15 minutes
 
         private readonly ICustomerClassDataAccess _dataAccess;
         private readonly IWebClientService _webClientService;
@@ -160,7 +159,7 @@
                 if (result.Any())
                 {
                     _cache.Set(CacheKey.MemorycacheCustomerClassCategories, result, CacheTimeoutSeconds);
-                    _cache.Set(CacheKey.MemorycacheCustomerClassCategories + "_backup", result, CacheTimeoutHours);
+                    _cache.SetWithoutExpired(CacheKey.MemorycacheCustomerClassCategories + "_backup", result);
                     return result;
                 }
 
