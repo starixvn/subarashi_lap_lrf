@@ -32,6 +32,7 @@
             (2, (int)SportType.BasketBall, ViewResources.Basketball, new[] { (int)SportType.SabaBasketball }),
             (-2, (int)SportType.BasketBall, ViewResources.BasketballPinGoal, new[] { (int)SportType.SabaBasketballPinGoal }),
             (50, (int)SportType.Cricket, ViewResources.Cricket , new[] { (int)SportType.SabaCricket }),
+            (5, (int)SportType.Tennis, ViewResources.Tennis , new[] { (int)SportType.SabaTennis }),
             (-43, (int)SportType.Esports, ViewResources.ESportsPinGoal, new[] { (int)SportType.SabaESportsPinGoal }),
         };
 

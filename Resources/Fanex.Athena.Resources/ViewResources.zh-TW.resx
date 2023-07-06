@@ -2451,4 +2451,7 @@
   <data name="N_A" xml:space="preserve">
     <value>无法使用</value>
   </data>
+  <data name="Tennis" xml:space="preserve">
+    <value>網球</value>
+  </data>
 </root>
