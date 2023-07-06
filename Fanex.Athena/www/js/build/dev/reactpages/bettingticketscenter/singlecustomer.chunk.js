@@ -4467,7 +4467,8 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       LiveStatus: this.props.selectedLiveStatus,
       Platform: this.props.selectedPlatform,
       SortBy: SortBy,
-      SortOrder: SortOrder
+      SortOrder: SortOrder,
+      IsConvertAll: this.props.isConvertAll
     };
   }
   _renderUserGuide() {
