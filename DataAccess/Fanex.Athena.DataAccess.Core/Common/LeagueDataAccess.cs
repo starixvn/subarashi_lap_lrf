@@ -9,6 +9,7 @@ namespace Fanex.Athena.DataAccess.Core.Common
     using Data;
     using Extension.Utility;
     using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
+    using Fanex.Athena.DataAccess.Core.Extensions;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Common.Extensions;
     using Interfaces;
@@ -67,7 +68,7 @@ namespace Fanex.Athena.DataAccess.Core.Common
                 while (reader.Read())
                 {
                     var leagueId = reader.ToInt("leagueid");
-                    var leagueGroupID = reader.ToInt("LeagueGroupID");
+                    var hasLeagueGroupID = reader.HasColumn("LeagueGroupID");
 
                     if (!specialLeagues.Contains(leagueId))
                     {
@@ -75,7 +76,7 @@ namespace Fanex.Athena.DataAccess.Core.Common
                         {
                             LeagueId = leagueId,
                             LeagueName = _cacheRefAdapter.GetLeagueName(leagueId),
-                            LeagueGroupId = leagueGroupID,
+                            LeagueGroupId = hasLeagueGroupID ? reader.ToInt("LeagueGroupID") : 0,
                         });
                     }
                 }
