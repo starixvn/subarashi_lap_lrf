@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 7/5/2023 9:18:45 AM
+// Generated at: 7/6/2023 2:55:54 PM
 window._language_zh_TW = {
   AA: "客客",
   AbnormalBet: "非正規註單",
@@ -710,6 +710,7 @@ window._language_zh_TW = {
   SystemParlayDetailNote: "輸贏的進位值僅供參考。因此，所有輸贏相加的總計有可能和小計有差數。",
   Tablet: "平板",
   Team: "隊伍",
+  Tennis: "網球",
   Th: "Th",
   ThereIsNoSelectedItem: "There is no selected item.",
   TheSettledAndResettledReportNote: "已結算和重新結算報告顯示所選日期範圍內已結算和已重新結算注單的數據。",

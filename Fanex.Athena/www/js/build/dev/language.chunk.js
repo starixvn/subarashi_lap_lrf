@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 7/5/2023 9:18:45 AM
+﻿// Generated at: 7/6/2023 2:55:54 PM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -946,6 +946,7 @@ SystemParlay:"System Parlay",
 SystemParlayDetailNote:"Win Loss is rounded for reference only. Therefore, Sub Total amount may be different from the sum of Win Loss when it sums all the actual Win Loss amounts.",
 Tablet:"Tablet",
 Team:"Team",
+Tennis:"Tennis",
 Th:"Th",
 TheLicenseeHasNoAssignedCategory:"The Licensee has no assigned category. Please contact admin to assign at least one category before creating contacts",
 ThereIsNoSelectedItem:"There is no selected item.",
