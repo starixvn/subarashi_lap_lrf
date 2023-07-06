@@ -1,4 +1,4 @@
-﻿// Generated at: 6/22/2023 9:29:39 AM
+﻿// Generated at: 7/5/2023 9:18:36 AM
 var _language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -186,6 +186,7 @@ CorrectScore:"波胆",
 CreatedDate:"创建日期",
 CreateNewGroup:"新增组",
 CreditDebit:"贷记/借记",
+Cricket:"板球",
 CS:"娱乐城",
 CSComm:"娱乐城佣金",
 Currencies:"货币",

@@ -13,7 +13,14 @@ const detailParams = createReducer(null, {
    }
 })
 
+const isConvertAllToBaseCurrency = createReducer(true, {
+   [types.SET_CONVERT_ALL_TO_BASE_CURRENCY](state, action){
+      return action.data
+   }
+})
+
 export default {
    reportFilter,
-   detailParams
+   detailParams,
+   isConvertAllToBaseCurrency
 }

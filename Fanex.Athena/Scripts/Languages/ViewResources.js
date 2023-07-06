@@ -1,4 +1,4 @@
-﻿// Generated at: 6/22/2023 9:29:39 AM
+﻿// Generated at: 7/5/2023 9:18:36 AM
 var _language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -201,6 +201,7 @@ CorrectScore:"Correct Score",
 CreatedDate:"Created Date",
 CreateNewGroup:"Create New Group",
 CreditDebit:"Credit/Debit",
+Cricket:"Cricket",
 CS:"CS",
 CSComm:"CS Comm",
 Currencies:"Currencies",

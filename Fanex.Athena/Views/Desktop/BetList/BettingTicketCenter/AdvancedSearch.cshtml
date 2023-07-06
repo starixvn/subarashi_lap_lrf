@@ -25,6 +25,16 @@
     var whitelabelList = Model.SubsidiaryList;
     var subsidiaryList = Model.SubsidiaryList.SelectMany(x => x.Children.Select(y => y.Value)).Distinct();
     var selectedSubsidiary = string.Join(",", subsidiaryList);
+    var riskLevels = Model.RiskLevels.Select(r => new
+    {
+        id = r.Id,
+        value = r.Name,
+        valueDecoration = "risk-level " + r.Key,
+        customerClassList = string.Join(",", r.CustomerClassList),
+        status = true
+    });
+    var oddsGroup = Model.OddsGroup;
+    var platformList = Model.PlatformList;
 }
 @section pagecss {
     <link href="@Url.ContentLinkByEnv("/www/css/build/reactpages/betlist/index.css")" rel="stylesheet" type="text/css" />
@@ -52,6 +62,9 @@
     selectedLeague: 0,
     bettypeList: [],
     selectedBettype: 0,
+    selectedCustomerClass: '@(string.Join(",", riskLevels.Select(_=>_.customerClassList)))',
+    selectedOddsGroup: '@(string.Join(",", oddsGroup))',
+    selectedPlatform: '@(string.Join(",",platformList.Select(_=>_.Key)))',
     username: '',
     isConvertAll: true,
     hasExchange: '@Model.HasExchange.ToString()' === 'True'
@@ -69,7 +82,10 @@
     productList: @Html.Raw(Model.ProductOptionList.Select(x => new { value = x.Code, label = x.Name }).ToJson()),
     currencyList: @Html.Raw(Model.CurrencyList.Select(x => new { Id = x.Key, Value = x.Value, Status = true }).ToJson()),
     dateConstraint: { minDate: '@Model.MinDate.ToString("MM/dd/yyyy")', maxDate: '@Model.MaxDate.ToString("MM/dd/yyyy")', limitedMonthRange: 3 },
-    tabList: @Html.Raw(Model.TabList.ToJson())
+    tabList: @Html.Raw(Model.TabList.ToJson()),
+    riskLevels: @Html.Raw(riskLevels.ToJson()),
+    oddsGroups: @Html.Raw(Model.OddsGroup.Select(x => new { Id = x, Value = x, Status = true }).ToJson()),
+    platformList: @Html.Raw(Model.PlatformList.Select(x => new { Id = x.Key, Value = x.Value, Status = true }).ToJson())
     };
 }
 <div id="app-container">

@@ -1,23 +1,22 @@
 ﻿namespace Fanex.Athena.Controllers.Report.UnitTests
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using Base.UnitTests;
     using Fanex.Athena.DataAccess.Core.Common.Interfaces;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Configuration;
     using Fanex.Athena.Model.Core.MetaModel.Common;
+    using Fanex.Athena.Resources;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.UnitTest.Common.Helpers;
     using Model.Core.DTO.Common;
     using Model.Report.ViewModel;
-
     using NSubstitute;
-
     using NUnit.Framework;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
 
     [TestFixture]
     public class SabaVirtualSportsWinLossReportControllerTest : CultureBaseControllerHelperTest
@@ -50,7 +49,18 @@
                 // Arrange
                 var sports = new List<SportProductItem>
                 {
-                    new SportProductItem { ID = 1, Name = "A", ParentId = 0 }
+                    new SportProductItem { ID = 1, ParentId = 0 }
+                };
+                var expected = new Dictionary<int, string>
+                {
+                    { 1, ViewResources.Soccer},
+                    { 2, ViewResources.SoccerPinGoal }
+            //         (1, (int)SportType.Soccer, ViewResources.Soccer, new[] { (int)SportType.SabaSoccer, (int)SportType.SabaFutsal }),
+            //(2, (int)SportType.Soccer, ViewResources.SoccerPinGoal, new[] { (int)SportType.SabaSoccerPingoal }),
+            //(3, (int)SportType.BasketBall, ViewResources.Basketball, new[] { (int)SportType.SabaBasketball }),
+            //(4, (int)SportType.BasketBall, ViewResources.BasketballPinGoal, new[] { (int)SportType.SabaBasketballPinGoal }),
+            //(5, (int)SportType.Cricket, ViewResources.Cricket , new[] { (int)SportType.SabaCricket }),
+            //(6, (int)SportType.Esports, ViewResources.ESportsPinGoal, new[] { (int)SportType.SabaESportsPinGoal }),
                 };
                 var leagues = new Dictionary<int, string>();
 
@@ -68,7 +78,7 @@
                 Assert.Multiple(() =>
                 {
                     Assert.That(viewResult.ViewName, Is.EqualTo("~/Views/Desktop/Report/SabaVirtualSportsWinLoss/Main.cshtml"));
-                    Assert.That(viewModel.Sports, Is.EqualTo(sports.ToDictionary(x => x.ID, y => y.Name)));
+                    Assert.That(viewModel.Sports, Is.EqualTo(expected));
                     Assert.That(viewModel.Leagues, Is.EqualTo(leagues));
                 });
             }
@@ -82,14 +92,20 @@
                 // Arrange
                 var metaModel = new LeagueMetaModel
                 {
-                    CurrencyId = 111
+                    CurrencyId = 111,
+                    SportId = 0
                 };
                 var data = new List<League>
                 {
-                    new League { LeagueId = 1, LeagueName = "League1" }
+                    new League { LeagueId = 1, LeagueName = "League1", LeagueGroupId = 42 }
+                };
+                var sabaSport = new List<SabaSport>
+                {
+                    new SabaSport { Id = -1, LeagueGroupIds = new [] { 42 }, Name = "Test", SportTypeId = 1}
                 };
 
-                _leagueDataAccess.GetSabaVirtualSportLeaguesBySport(metaModel, Arg.Any<IEnumerable<int>>()).Returns(data);
+                _sportService.GetSabaSports().Returns(sabaSport);
+                _leagueDataAccess.GetLeaguesBySport(metaModel, Arg.Any<IEnumerable<int>>()).Returns(data);
 
                 // Action
                 var result = await controller.GetLeaguesBySport(metaModel) as JsonResult;
@@ -97,7 +113,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    Assert.That(ObjectHelper.ToJson(result.Data), Is.EqualTo(@"[{""Key"":1,""Value"":""League1""}]"));
+                    Assert.That(ObjectHelper.ToJson(result.Data), Is.EqualTo(@"[{""Key"":0,""Value"":""All""},{""Key"":1,""Value"":""League1""}]"));
                 });
             }
         }

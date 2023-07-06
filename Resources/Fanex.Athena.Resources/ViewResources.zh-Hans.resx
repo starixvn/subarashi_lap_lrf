@@ -2429,6 +2429,10 @@
   <data name="ProductYB" xml:space="preserve">
     <value>亿博</value>
   </data>
+  <data name="Cricket" xml:space="preserve">
+    <value>板球</value>
+    <comment>#183841</comment>
+  </data>
   <data name="ProductSB_BA" xml:space="preserve">
     <value>体育博彩 &amp; BA</value>
   </data>

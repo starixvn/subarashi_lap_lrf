@@ -6,18 +6,17 @@
 
 namespace Fanex.Athena.DataAccess.Core.Common
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
     using Data;
     using Extension.Utility;
     using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
-    using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.DataAccess.Core.Extensions;
     using Fanex.Athena.Model.Core.DTO.Common;
-    using Fanex.Athena.Resources;
     using Fanex.Common.Extensions;
     using Interfaces;
     using Model.Core.MetaModel.Common;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
     using VendorAdapter.Interfaces;
 
     public class LeagueDataAccess : BaseDataAccess, ILeagueDataAccess
@@ -27,14 +26,6 @@ namespace Fanex.Athena.DataAccess.Core.Common
         private readonly IAppSettings _appSettings;
 
         private readonly IBalanceUpDataAccess _balanceUpDataAccess;
-
-        private readonly IDictionary<int, List<int>> _sportList = new Dictionary<int, List<int>>
-        {
-            { (int)SportType.Soccer, new List<int>{42, 74, 108, 113 } },
-            { (int)SportType.BasketBall, new List<int>{42, 122 } },
-            { (int)SportType.Cricket, new List<int>{42 } },
-            { (int)SportType.Esports, new List<int>{151 } }
-        };
 
         public LeagueDataAccess(ICacheRefAdapter cacheRefAdapter, IAppSettings appSettings, IBalanceUpDataAccess balanceUpDataAccess)
         {
@@ -69,54 +60,6 @@ namespace Fanex.Athena.DataAccess.Core.Common
             }
         }
 
-        public async Task<IEnumerable<League>> GetSabaVirtualSportLeaguesBySport(LeagueMetaModel metaModel, IEnumerable<int> specialLeagues)
-        {
-            using (var db = this.GetObjectDb("Lrf_SelLeagueBySport"))
-            {
-                db.SetParameterValue("sportId", metaModel.SportId);
-                db.SetParameterValue("Fromdate", metaModel.FromDate);
-                db.SetParameterValue("Todate", metaModel.ToDate);
-                db.SetParameterValue("AgentList", metaModel.AgentListXml);
-                db.SetParameterValue("MoveBetsDay", _balanceUpDataAccess.GetBalanceUp().MoveBetsDay);
-                db.SetParameterValue("IsIncludeTestLeague", !_appSettings.IsProduction);
-                return await ReadSabaVirtualSportLeagues(db, specialLeagues).ConfigureAwait(false);
-            }
-        }
-
-        private async Task<IEnumerable<League>> ReadSabaVirtualSportLeagues(IObjectDb db, IEnumerable<int> specialLeagues)
-        {
-            var dataList = new List<League>();
-            using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
-            {
-                while (reader.Read())
-                {
-                    var leagueId = reader.ToInt("leagueid");
-                    var sportid = reader.ToInt("sportid");
-                    var leagueGroupID = reader.ToInt("LeagueGroupID");
-
-                    if (_sportList.ContainsKey(sportid) && _sportList[sportid].Contains(leagueGroupID) && !specialLeagues.Contains(leagueId))
-                    {
-                        dataList.Add(new League
-                        {
-                            LeagueId = leagueId,
-                            LeagueName = _cacheRefAdapter.GetLeagueName(leagueId)
-                        });
-                    }
-                }
-
-                if (dataList.Any())
-                {
-                    dataList.Insert(0, new League
-                    {
-                        LeagueId = 0,
-                        LeagueName = ViewResources.All
-                    });
-                }
-
-                return dataList;
-            }
-        }
-
         private async Task<IEnumerable<League>> ReadLeagues(IObjectDb db, IEnumerable<int> specialLeagues)
         {
             var dataList = new List<League>();
@@ -125,13 +68,15 @@ namespace Fanex.Athena.DataAccess.Core.Common
                 while (reader.Read())
                 {
                     var leagueId = reader.ToInt("leagueid");
+                    var hasLeagueGroupID = reader.HasColumn("LeagueGroupID");
 
                     if (!specialLeagues.Contains(leagueId))
                     {
                         dataList.Add(new League
                         {
                             LeagueId = leagueId,
-                            LeagueName = _cacheRefAdapter.GetLeagueName(leagueId)
+                            LeagueName = _cacheRefAdapter.GetLeagueName(leagueId),
+                            LeagueGroupId = hasLeagueGroupID ? reader.ToInt("LeagueGroupID") : 0,
                         });
                     }
                 }

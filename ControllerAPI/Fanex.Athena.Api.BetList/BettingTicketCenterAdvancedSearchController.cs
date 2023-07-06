@@ -23,14 +23,18 @@
 
         private readonly IBetListApiClient _betListApiClient;
 
+        private readonly ISportService _sportService;
+
         public BettingTicketCenterAdvancedSearchController(
             ILanguageService langService,
             IAppSettings appSettings,
-            IBetListApiClient betListApiClient)
+            IBetListApiClient betListApiClient,
+            ISportService sportService)
             : base(langService)
         {
             _appSettings = appSettings;
             _betListApiClient = betListApiClient;
+            _sportService = sportService;
         }
 
         [HttpPost]
@@ -40,6 +44,13 @@
         public async Task<dynamic> GetData(AdvancedSearchBetListMetaModel metaModel)
         {
             var licenseeSession = SessionService.LicenseeSession;
+            var sabaSport = _sportService.GetSabaSport(metaModel.SportId);
+            if (sabaSport != null)
+            {
+                metaModel.LeagueGroupIds = string.Join(",", sabaSport.LeagueGroupIds);
+                metaModel.SportId = sabaSport.SportTypeId;
+            }
+
             if (metaModel.IsExport &&
                 _appSettings.IsDisableExportLargeBetList
                 && _appSettings.LicenseesWithLargeData.Contains(licenseeSession.LicenseeName))

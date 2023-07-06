@@ -1,12 +1,6 @@
 ﻿namespace Fanex.Athena.Api.Base
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
     using System.Web.Caching;
-    using System.Web.Http;
-
     using DataAccess.Core.Common.Interfaces;
     using Fanex.Athena.Api.Base.Attributes;
     using Fanex.Athena.Extension.Utility.Interfaces;
@@ -15,12 +9,15 @@
     using Fanex.Athena.Model.Core.DTO.Configuration;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
-
     using Model.Core.MetaModel.Common;
     using Newtonsoft.Json;
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Http;
     using Web.ActionFilter;
 
     [CLSCompliant(false)]
@@ -154,12 +151,17 @@
         [HttpGet]
         public async Task<IEnumerable<object>> GetLeagues(DateTime fromDate, DateTime toDate, int sportId = 0)
         {
+            var isSabaSport = sportId < 0;
+            var sabaSports = _sportService.GetSabaSports();
+            var selectedSabaSport = isSabaSport ? sabaSports.FirstOrDefault(s => s.Id == sportId) : null;
+            var sportTypeId = isSabaSport ? selectedSabaSport?.SportTypeId : sportId;
+
             var userSession = _sessionService.UserSession;
             var metaModel = new LeagueMetaModel
             {
                 FromDate = fromDate,
                 ToDate = toDate,
-                SportId = sportId,
+                SportId = sportTypeId.GetValueOrDefault(),
                 UserId = userSession.UserId,
                 AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)
             };
@@ -167,15 +169,68 @@
             var specialLeagues = await _portalApiService.GetSpecialLeaguesAsync(_sessionService.LicenseeSession.LicenseeName);
             var leagues = await _leagueDataAccess.GetLeaguesBySport(metaModel, specialLeagues).ConfigureAwait(false);
 
-            return leagues.Select(x => new { value = x.LeagueId, label = x.LeagueName });
+            var excludeSabaSport = sabaSports.Where(s => s.SportTypeId == sportId);
+
+            return (isSabaSport ? GetSabaSportLeagueList(leagues, selectedSabaSport) : GetLeagueListExcludeSabaSport(leagues, excludeSabaSport))
+                .Select(x => new { value = x.LeagueId, label = x.LeagueName });
         }
 
         [HttpGet]
         public async Task<IEnumerable<object>> GetMatches(DateTime fromDate, DateTime toDate, int leagueid, int sportId = 0)
         {
-            var matches = await _matchDataAccess.GetMatchesByLeague(leagueid, fromDate, toDate, sportId).ConfigureAwait(false);
+            var isSabaSport = sportId < 0;
+            var sabaSports = _sportService.GetSabaSports();
+            var selectedSabaSport = isSabaSport ? sabaSports.FirstOrDefault(s => s.Id == sportId) : null;
+            var sportTypeId = isSabaSport ? selectedSabaSport?.SportTypeId : sportId;
 
-            return matches.Select(x => new { value = x.MatchId, label = x.MatchName });
+            var matches = await _matchDataAccess.GetMatchesByLeague(leagueid, fromDate, toDate, sportTypeId.GetValueOrDefault()).ConfigureAwait(false);
+
+            var excludeSabaSport = sabaSports.Where(s => s.SportTypeId == sportId);
+
+            return (isSabaSport ? GetSabaSportMatchList(matches, selectedSabaSport) : GetMatchListExcludeSabaSport(matches, excludeSabaSport))
+                .Select(x => new { value = x.MatchId, label = x.MatchName });
+        }
+
+        private static IEnumerable<League> GetSabaSportLeagueList(IEnumerable<League> leagueList, SabaSport selectedSabaSport)
+        {
+            if (selectedSabaSport == null)
+            {
+                return leagueList;
+            }
+
+            return leagueList.Where(m => selectedSabaSport.LeagueGroupIds.Any(id => id == m.LeagueGroupId));
+        }
+
+        private static IEnumerable<League> GetLeagueListExcludeSabaSport(IEnumerable<League> leagueList, IEnumerable<SabaSport> excludeSabaSports)
+        {
+            if (excludeSabaSports == null || !excludeSabaSports.Any())
+            {
+                return leagueList;
+            }
+
+            var excludeLeagueGroupIds = excludeSabaSports.SelectMany(s => s.LeagueGroupIds).Distinct();
+            return leagueList.Where(m => !excludeLeagueGroupIds.Any(id => id == m.LeagueGroupId));
+        }
+
+        private static IEnumerable<Match> GetSabaSportMatchList(IEnumerable<Match> matchList, SabaSport selectedSabaSport)
+        {
+            if (selectedSabaSport == null)
+            {
+                return matchList;
+            }
+
+            return matchList.Where(m => selectedSabaSport.LeagueGroupIds.Any(id => id == m.LeagueGroupId));
+        }
+
+        private static IEnumerable<Match> GetMatchListExcludeSabaSport(IEnumerable<Match> matchList, IEnumerable<SabaSport> excludeSabaSports)
+        {
+            if (excludeSabaSports == null || !excludeSabaSports.Any())
+            {
+                return matchList;
+            }
+
+            var excludeLeagueGroupIds = excludeSabaSports.SelectMany(s => s.LeagueGroupIds).Distinct();
+            return matchList.Where(m => !excludeLeagueGroupIds.Any(id => id == m.LeagueGroupId));
         }
     }
 }

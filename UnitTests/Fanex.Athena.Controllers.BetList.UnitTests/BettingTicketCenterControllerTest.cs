@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
     using System.Web.Mvc;
 
     using Base.UnitTests;
@@ -14,6 +15,7 @@
     using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Resources;
     using Fanex.Athena.Service.Core.Users.Interfaces;
+    using Fanex.Athena.Service.Customer.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     using Model.BetList.ViewModel;
@@ -39,6 +41,8 @@
 
         private ISubsidiaryService _subsidiaryService;
 
+        private ICustomerClassService _customerClassService;
+
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
@@ -47,6 +51,7 @@
             _productService = Substitute.For<IProductService>();
             _balanceUpDataAccess = Substitute.For<IBalanceUpDataAccess>();
             _subsidiaryService = Substitute.For<ISubsidiaryService>();
+            _customerClassService = Substitute.For<ICustomerClassService>();
             _subsidiaryService.IsIgnoredSubsidiarySearch(Arg.Any<bool>(), Arg.Any<string>(), Arg.Any<UserAuthInfo>())
             .Returns(true);
             _balanceUpDataAccess.GetBalanceUp().Returns(new BalanceUp
@@ -72,7 +77,7 @@
         [TestCase(PermissionKeys.BtcRefNo, AppMode.Self, "~/Views/Desktop/BetList/BettingTicketCenter/RefNo.cshtml")]
         [TestCase(PermissionKeys.BtcRunning, AppMode.Self, "~/Views/Desktop/BetList/BettingTicketCenter/Running.cshtml")]
         [TestCase(PermissionKeys.BtcAdvancedSearch, AppMode.Parasitic, "~/Views/Desktop/BetList/BettingTicketCenter/AdvancedSearch.cshtml")]
-        public void Index_CheckByPermission_ReturnCorrectView(string permissionKey, AppMode appMode, string expectedView)
+        public async Task Index_CheckByPermission_ReturnCorrectViewAsync(string permissionKey, AppMode appMode, string expectedView)
         {
             // Arrange
             CreateAndStubUserSession(permissionKey, appMode);
@@ -81,7 +86,7 @@
             using (var controller = CreateController())
             {
                 // Action
-                var result = controller.Index() as ViewResult;
+                var result = await controller.Index() as ViewResult;
 
                 // Assert
                 Assert.That(expectedView, Is.EqualTo(result.ViewName));
@@ -89,7 +94,7 @@
         }
 
         [Test]
-        public void Index_IsSuperAdmin_HaveAllPermissionsOfTab()
+        public async Task Index_IsSuperAdmin_HaveAllPermissionsOfTabAsync()
         {
             // Arrange
             var userSession = JsonConvert.DeserializeObject<UserAuthInfo>(JsonConvert.SerializeObject(DefaultUserSession));
@@ -103,18 +108,18 @@
             using (var controller = CreateController())
             {
                 // Action
-                var result = controller.Index() as ViewResult;
-                var tabList = (result.Model as BettingTicketCenterViewModel).TabList;
+                var result = await controller.Index() as ViewResult;
+                var tabList = result.ViewBag.TabList as IEnumerable<string>;
                 var hasAllPermissionsOfTab = BtcViewInfo.TabList.Intersect(tabList).Count() == TotalTabCount;
 
                 // Assert
-                Assert.That("~/Views/Desktop/BetList/BettingTicketCenter/SingleCustomer.cshtml", Is.EqualTo(result.ViewName));
+                Assert.That("~/Views/Desktop/BetList/BettingTicketCenter/RefNo.cshtml", Is.EqualTo(result.ViewName));
                 Assert.That(hasAllPermissionsOfTab, Is.True);
             }
         }
 
         [Test]
-        public void Index_NotHaveAnyPermissionTab_ReturnDefaultView()
+        public async Task Index_NotHaveAnyPermissionTab_ReturnDefaultViewAsync()
         {
             // Arrange
             CreateAndStubUserSession("AnotherPermissionKey");
@@ -123,7 +128,7 @@
             using (var controller = CreateController())
             {
                 // Action
-                var result = controller.Index() as RedirectToRouteResult;
+                var result = await controller.Index() as RedirectToRouteResult;
 
                 // Assert
                 Assert.That("Utility", Is.EqualTo(result.RouteValues["controller"].ToString()));
@@ -281,7 +286,7 @@
         }
 
         [Test]
-        public void AdvancedSearch_WhenCall_ReturnCorrectView()
+        public async Task AdvancedSearch_WhenCall_ReturnCorrectViewAsync()
         {
             using (var controller = CreateController())
             {
@@ -292,7 +297,7 @@
                 MockProductService();
 
                 // Action
-                var result = controller.AdvancedSearch() as ViewResult;
+                var result = await controller.AdvancedSearch() as ViewResult;
 
                 // Assert
                 Assert.That(result.ViewName, Is.EqualTo("~/Views/Desktop/BetList/BettingTicketCenter/AdvancedSearch.cshtml"));
@@ -301,7 +306,7 @@
 
         [TestCase(true)]
         [TestCase(false)]
-        public void AdvancedSearch_WhenCall_ReturnCorrectViewModel(bool hasExchangePermission)
+        public async Task AdvancedSearch_WhenCall_ReturnCorrectViewModelAsync(bool hasExchangePermission)
         {
             using (var controller = CreateController(hasExchangePermission))
             {
@@ -310,7 +315,7 @@
                 var productCodes = MockProductService();
 
                 // Action
-                var result = controller.AdvancedSearch() as ViewResult;
+                var result = await controller.AdvancedSearch() as ViewResult;
                 var viewModel = result.Model as BettingTicketCenterViewModel;
 
                 // Assert
@@ -331,7 +336,7 @@
         {
             _authService.CheckProductBelongsTo(SessionService.LicenseeSession.LicenseeName, ProductTypes.Exchange).Returns(hasExchangePermission);
 
-            return new BettingTicketCenterController(_productService, _balanceUpDataAccess, _authService, _subsidiaryService)
+            return new BettingTicketCenterController(_productService, _balanceUpDataAccess, _authService, _subsidiaryService, _customerClassService)
             {
                 LangService = LangService,
                 SessionServiceInstance = SessionService

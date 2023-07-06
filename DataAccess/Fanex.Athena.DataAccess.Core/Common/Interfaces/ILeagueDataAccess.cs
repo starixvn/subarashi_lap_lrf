@@ -16,7 +16,5 @@ namespace Fanex.Athena.DataAccess.Core.Common.Interfaces
         Task<IEnumerable<League>> GetLeaguesBySport(LeagueMetaModel metaModel, IEnumerable<int> specialLeagues);
 
         Task<IEnumerable<League>> GetRunningLeagues(string agentList, string betTypes, IEnumerable<int> specialLeagues);
-
-        Task<IEnumerable<League>> GetSabaVirtualSportLeaguesBySport(LeagueMetaModel metaModel, IEnumerable<int> specialLeagues);
     }
 }

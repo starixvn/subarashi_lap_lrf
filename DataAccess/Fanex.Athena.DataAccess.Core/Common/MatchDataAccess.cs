@@ -6,16 +6,16 @@
 
 namespace Fanex.Athena.DataAccess.Core.Common
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
     using Extension.Utility;
     using Fanex.Athena.DataAccess.Core;
     using Fanex.Athena.DataAccess.Core.Common.Interfaces;
     using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Common.Extensions;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
     using VendorAdapter.Interfaces;
 
     public class MatchDataAccess : BaseDataAccess, IMatchDataAccess
@@ -136,7 +136,8 @@ namespace Fanex.Athena.DataAccess.Core.Common
                         {
                             MatchId = Convert.ToInt32(reader["matchid"]),
                             HomeId = reader.ToInt("homeid"),
-                            AwayId = reader.ToInt("awayid")
+                            AwayId = reader.ToInt("awayid"),
+                            LeagueGroupId = reader.ToInt("LeagueGroupID")
                         };
                         match.MatchName = GetMatchName(match);
 

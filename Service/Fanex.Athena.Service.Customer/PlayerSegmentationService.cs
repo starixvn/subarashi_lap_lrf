@@ -204,7 +204,7 @@ namespace Fanex.Athena.Service.Customer
             }
         }
 
-        private void BindRiskLevelName(IEnumerable<PlayerInfo> players, IEnumerable<RiskLevel> riskLevels)
+        private static void BindRiskLevelName(IEnumerable<PlayerInfo> players, IEnumerable<RiskLevel> riskLevels)
         {
             players.ToList().ForEach(player => {
                 player.RiskLevel = riskLevels.FirstOrDefault(_=>_.CustomerClassList.Contains(player.CustomerClass))?.Name;

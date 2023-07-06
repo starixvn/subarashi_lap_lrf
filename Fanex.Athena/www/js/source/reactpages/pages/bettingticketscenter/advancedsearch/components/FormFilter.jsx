@@ -5,7 +5,6 @@ import moment from 'moment'
 import { ToastContainer, toast, Flip } from 'react-toastify';
 
 import Select from 'react-select'
-import MultipleSelect from '@legion-lib/react-multiselect'
 import { DateRange } from '@jsroot/components/date-range'
 import AutoComplete from '@jsroot/components/auto-complete'
 import CheckBox from '@jsroot/components/CheckBox'
@@ -23,7 +22,7 @@ import { ApiUrl } from '../../common/lib/constants'
 import { validateBaseCurrency } from '@jsroot/lib/validationHelper'
 
 import { SubsidiaryViewType, TreeViewOption } from '../../../../constants/report'
-import { TreeViewSelect } from '@legion-lib/react-multiselect'
+import MultipleSelect, { TreeViewSelect } from '@legion-lib/react-multiselect'
 
 const ToastMsg = () => (
     <div>
@@ -66,6 +65,9 @@ export class FormFilter extends Component {
             && !!this.props.selectedStatus
             && !!this.props.selectedLiveStatus
             && !!this.props.selectedCurrency
+            && !!this.props.selectedCustomerClass
+            && !!this.props.selectedOddsGroup
+            && !!this.props.selectedPlatform
             && validateBaseCurrency(this.props.selectedBaseCurrency)
             && (!this.state.subsidiarySearch || !!this.props.selectedSubsidiary);
     }
@@ -122,7 +124,10 @@ export class FormFilter extends Component {
             BaseCurrencyName: baseCurrency ? baseCurrency.label : '',
             SubsidiarySearch: this.state.subsidiarySearch,
             SubsidiaryList: this.state.subsidiarySearch ? this.props.selectedSubsidiary : "",
-            Ip: this.props.ip
+            Ip: this.props.ip,
+            Platform: this.props.selectedPlatform,
+            OddsGroup: this.props.selectedOddsGroup,
+            CustomerClass: this.props.selectedCustomerClass
         }
     }
 
@@ -209,7 +214,7 @@ export class FormFilter extends Component {
             this.props.setDateRange(date);
             this.props.getBettypeList(this.props.selectedProduct, this.isSingleDate({ fromDate: date.startDate, toDate: date.endDate }));
             if (this._isEnableLeagueMatch()) {
-                this.props.getLeagueList(this.props.selectedSport.value, date.startDate);
+                this.props.getLeagueList(this.props.selectedSport, date.startDate);
             }
         }
         else {
@@ -278,7 +283,7 @@ export class FormFilter extends Component {
     _onChangeLeague = (leagueId) => {
         this.props.setSelectedLeague(leagueId);
         if (this.isSingleDate()) {
-            this.props.getMatchList(this.props.selectedSport.value, leagueId, this.props.dateRange.fromDate);
+            this.props.getMatchList(this.props.selectedSport, leagueId, this.props.dateRange.fromDate);
         }
     }
 
@@ -297,7 +302,8 @@ export class FormFilter extends Component {
         const currencyList = AppData.currencyList;
 
         return currencyList && currencyList.length && (
-            <MultipleSelect id="ddlCurrency"
+            <MultipleSelect key="currency"
+                id="ddlCurrency"
                 language={LangHelper.currentLanguage}
                 dataSource={currencyList}
                 keyField={"Id"}
@@ -347,7 +353,8 @@ export class FormFilter extends Component {
         const statusList = AppData.statusList;
 
         return statusList && statusList.length && (
-            <MultipleSelect id="StatusList"
+            <MultipleSelect key="statusList"
+                id="StatusList"
                 language={LangHelper.currentLanguage}
                 dataSource={statusList}
                 keyField={"Id"}
@@ -360,7 +367,8 @@ export class FormFilter extends Component {
         const liveStatusList = AppData.liveStatusList;
 
         return liveStatusList && liveStatusList.length && (
-            <MultipleSelect id="LiveStatusList"
+            <MultipleSelect key="liveStatusList"
+                id="LiveStatusList"
                 language={LangHelper.currentLanguage}
                 dataSource={liveStatusList}
                 keyField={"Id"}
@@ -382,6 +390,55 @@ export class FormFilter extends Component {
             hasSearchBox={false}
             treeViewOption={TreeViewOption}
             onChange={(currentItem, selectedItemsKey, treeViewList) => this.props.setSubsidiaryList(selectedItemsKey)} />;
+    }
+
+    _renderCustomerClassSelectList() {
+        const riskLevels = AppData.riskLevels;
+        return riskLevels && riskLevels.length && (
+            <MultipleSelect key="riskLevels"
+                id="RiskLevels"
+                language={LangHelper.currentLanguage}
+                dataSource={riskLevels}
+                keyField={"id"}
+                valueField={"value"}
+                statusField={"status"}
+                onChange={(currentItem, selectedItemsKey) => this._handleCustomerClassChange( selectedItemsKey)}
+                />);
+    }
+
+    _handleCustomerClassChange ( value ) {
+        var customerClass = AppData.riskLevels.filter( r => value.includes(r.id)).map( r => r.customerClassList).join(',');
+        this.props.setSelectedCustomerClass(customerClass);
+    }
+
+    _renderPlatformSelectList() {
+        const platformList = AppData.platformList;
+
+        return platformList && platformList.length && (
+            <MultipleSelect key="platformList"
+                id="PlatformList"
+                language={LangHelper.currentLanguage}
+                dataSource={platformList}
+                keyField={"Id"}
+                valueField={"Value"}
+                statusField={"Status"}
+                onChange={(currentItem, selectedItemsKey) => this.props.setSelectedPlatform(selectedItemsKey)} 
+                />);
+    }
+
+    _renderOddsGroupsSelectList() {
+        const oddsGroups = AppData.oddsGroups;
+
+        return oddsGroups && oddsGroups.length && (
+            <MultipleSelect key="oddsGroup"
+                id="OddsGroup"
+                language={LangHelper.currentLanguage}
+                dataSource={oddsGroups}
+                keyField={"Id"}
+                valueField={"Value"}
+                statusField={"Status"}
+                onChange={(currentItem, selectedItemsKey) => this.props.setSelectedOddsGroup(selectedItemsKey)} 
+                />);
     }
 
     render() {
@@ -443,22 +500,22 @@ export class FormFilter extends Component {
                         </div>
                     </div>
 
-                    {!(this.showSubsidiaryDropdown && this.state.subsidiarySearch) && (<div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
+                    {!(this.showSubsidiaryDropdown && this.state.subsidiarySearch) && <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource("Match")}</label>
                             {this._renderMatchSelectList()}
                         </div>
-                    </div>)}
+                    </div>}
 
                 </div>
                 <div className="row">
 
-                    {(this.showSubsidiaryDropdown  && this.state.subsidiarySearch) && (<div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
+                    {(this.showSubsidiaryDropdown  && this.state.subsidiarySearch) && <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource("Match")}</label>
                             {this._renderMatchSelectList()}
                         </div>
-                    </div>)}
+                    </div>}
 
                     <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
                         <div className="form-group">
@@ -467,6 +524,61 @@ export class FormFilter extends Component {
                                 onSelect={(value) => this.props.setUsername(value)}
                                 onInput={(value) => this.props.setUsername(value)}
                                 htmlAttributes={{ placeholder: LangHelper.getSingleResource("ExternalIdOrSystemId") }} />
+                        </div>
+                    </div>
+
+                    <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
+                        <div className="form-group">
+                            <label className="label-text">{LangHelper.getSingleResource("Status")}</label>
+                            {this._renderStatusSelectList()}
+                        </div>
+                    </div>
+
+                    <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
+                        <div className="form-group">
+                            <label className="label-text">{LangHelper.getSingleResource("LiveStatus")}</label>
+                            {this._renderLiveStatusSelectList()}
+                        </div>
+                    </div>
+
+                    <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
+                        <div className="form-group">
+                            <label className="label-text">{LangHelper.getSingleResource("RiskLevel")}</label>
+                            {this._renderCustomerClassSelectList()}
+                        </div>
+                    </div>
+
+                    <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
+                        <div className="form-group">
+                            <label className="label-text">{LangHelper.getSingleResource("OddsGroup")}</label>
+                            {this._renderOddsGroupsSelectList()}
+                        </div>
+                    </div>
+
+                    {!(this.showSubsidiaryDropdown && this.state.subsidiarySearch) && <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
+                        <div className="form-group">
+                            <label className="label-text">{LangHelper.getSingleResource("Platform")}</label>
+                            {this._renderPlatformSelectList()}
+                        </div>
+                    </div>}
+
+                </div>
+
+                <div className="row">
+
+                    {(this.showSubsidiaryDropdown && this.state.subsidiarySearch) && <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
+                        <div className="form-group">
+                            <label className="label-text">{LangHelper.getSingleResource("Platform")}</label>
+                            {this._renderPlatformSelectList()}
+                        </div>
+                    </div>}
+
+                    <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
+                        <div className="form-group">
+                            <label className="label-text">{LangHelper.getSingleResource("IP")}</label>
+                            <input className="input-text" id='ip' name='ip' type='text'
+                                value={this.props.ip}
+                                onChange={(event) => this.props.setIp(event.target.value)} />
                         </div>
                     </div>
 
@@ -490,40 +602,6 @@ export class FormFilter extends Component {
                                 checked={this.props.isConvertAll}
                                 onChange={(checked) => this.props.changeIsConvertAll(checked)}
                                 label={LangHelper.getSingleResource("ConvertAllFiguresToBaseCurrency")} />
-                        </div>
-                    </div>
-
-                    <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
-                        <div className="form-group">
-                            <label className="label-text">{LangHelper.getSingleResource("Status")}</label>
-                            {this._renderStatusSelectList()}
-                        </div>
-                    </div>
-
-                    {!(this.showSubsidiaryDropdown  && this.state.subsidiarySearch) && (<div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
-                        <div className="form-group">
-                            <label className="label-text">{LangHelper.getSingleResource("Live")}</label>
-                            {this._renderLiveStatusSelectList()}
-                        </div>
-                    </div>)}
-
-                </div>
-
-                <div className="row">
-
-                    {(this.showSubsidiaryDropdown && this.state.subsidiarySearch) && (<div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
-                        <div className="form-group">
-                            <label className="label-text">{LangHelper.getSingleResource("Live")}</label>
-                            {this._renderLiveStatusSelectList()}
-                        </div>
-                    </div>)}
-
-                    <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
-                        <div className="form-group">
-                            <label className="label-text">{LangHelper.getSingleResource("IP")}</label>
-                            <input className="input-text" id='ip' name='ip' type='text'
-                                value={this.props.ip}
-                                onChange={(event) => this.props.setIp(event.target.value)} />
                         </div>
                     </div>
 
@@ -570,12 +648,14 @@ function mapDispatchToProps(dispatch) {
 }
 function mapStateToProps(state) {
     const { requestParam, dateRange, selectedProduct, sportList, selectedSport, selectedBettype, bettypeList, selectedLeague, leagueList, selectedMatch, matchList,
-        selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, selectedLiveStatus, username, isConvertAll, userGuideContent, ip, selectedSubsidiary
+        selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, selectedLiveStatus, selectedCustomerClass, selectedOddsGroup, selectedPlatform, 
+        username, isConvertAll, userGuideContent, ip, selectedSubsidiary
     } = state;
 
     return Object.assign({}, {
         requestParam, dateRange, selectedProduct, sportList, selectedSport, selectedBettype, bettypeList, selectedLeague, leagueList, selectedMatch, matchList,
-        selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, selectedLiveStatus, username, isConvertAll, userGuideContent, ip, selectedSubsidiary
+        selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, selectedLiveStatus, selectedCustomerClass, selectedOddsGroup, selectedPlatform, 
+        username, isConvertAll, userGuideContent, ip, selectedSubsidiary
     });
 }
 

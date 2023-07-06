@@ -24,8 +24,8 @@ namespace Fanex.Athena.Service.Customer.UnitTests
         private ISessionService _sessionService;
         private IBusinessLogService _businessLogService;
         private ISubsidiaryService _subsidiaryService;
-        private ICTSApiClient _ctsApiClient;
         private ICustomerClassService _customerClassService;
+        private ICTSApiClient _ctsApiClient;
         private ILogger _logger;
 
         private PlayerSegmentationService _targetService;

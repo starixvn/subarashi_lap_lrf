@@ -1,8 +1,5 @@
 ﻿namespace Fanex.Athena.Controllers.BetList
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Web.Mvc;
     using Fanex.Athena.Controllers.Base.Helpers;
     using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
     using Fanex.Athena.Extension.Helper;
@@ -10,11 +7,16 @@
     using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Service.Core.Users.Interfaces;
+    using Fanex.Athena.Service.Customer.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.BetList.ViewModel;
     using Model.Core.DTO.Common;
     using Model.Core.MetaModel.Product;
     using Resources;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using Web.ActionFilter;
 
     [FunctionAuthorization(PermissionKeys.BettingTicketCenter)]
@@ -29,6 +31,8 @@
 
         private readonly ISubsidiaryService _subsidiaryService;
 
+        private readonly ICustomerClassService _customerClassService;
+
         private bool IsOneworksMaster =>
            SessionServiceInstance.UserSession.UserLevel == UserLevelType.Oneworks
            && SessionServiceInstance.UserSession.SubsidiaryViewType == (byte)SubsidiaryViewType.NormalManagement;
@@ -37,12 +41,14 @@
             IProductService productService,
             IBalanceUpDataAccess balanceUpDataAccess,
             IAuthorizationService authService,
-            ISubsidiaryService subsidiaryService)
+            ISubsidiaryService subsidiaryService,
+            ICustomerClassService customerClassService)
         {
             _productService = productService;
             _balanceUpDataAccess = balanceUpDataAccess;
             _authService = authService;
             _subsidiaryService = subsidiaryService;
+            _customerClassService = customerClassService;
         }
 
         [FunctionAuthorization(
@@ -50,17 +56,17 @@
             PermissionKeys.BtcRefNo,
             PermissionKeys.BtcRunning,
             PermissionKeys.BtcAdvancedSearch)]
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             var tabList = GetEnableTabList();
 
-            if (tabList.Any(x => PermissionKeys.BtcSingleCustomer == x))
-            {
-                return SingleCustomer();
-            }
-            else if (tabList.Any(x => PermissionKeys.BtcRefNo == x))
+            if (tabList.Any(x => PermissionKeys.BtcRefNo == x))
             {
                 return RefNo();
+            }
+            else if (tabList.Any(x => PermissionKeys.BtcSingleCustomer == x))
+            {
+                return SingleCustomer();
             }
             else if (tabList.Any(x => PermissionKeys.BtcRunning == x))
             {
@@ -68,7 +74,7 @@
             }
             else if (tabList.Any(x => PermissionKeys.BtcAdvancedSearch == x))
             {
-                return AdvancedSearch();
+                return await AdvancedSearch();
             }
             else
             {
@@ -77,7 +83,7 @@
         }
 
         [FunctionAuthorization(PermissionKeys.BtcAdvancedSearch)]
-        public ActionResult AdvancedSearch()
+        public async Task<ActionResult> AdvancedSearch()
         {
             var tabList = GetEnableTabList();
             var licenseeSession = SessionServiceInstance.LicenseeSession;
@@ -97,7 +103,10 @@
                 IsOneworksMaster = IsOneworksMaster,
                 SubsidiaryList = subsidiaryList,
                 HasExchange = tabList.Any() && HasExchange(),
-                TabList = tabList
+                TabList = tabList,
+                RiskLevels = await _customerClassService.GetAllRiskLevel(),
+                PlatformList = PlatformHelper.GetPlatformList(),
+                OddsGroup = licenseeSession.OfferedOddsGroupsList,
             };
 
             ViewBag.IsAllowTxIDColumn = licenseeSession.IsEnableSingleWallet;

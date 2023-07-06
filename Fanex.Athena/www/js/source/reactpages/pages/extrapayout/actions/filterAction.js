@@ -14,8 +14,16 @@ const setDetailParams = data => {
     }
 }
 
+const setConvertAllToBaseCurrency = data =>{
+    return {
+        type: types.SET_CONVERT_ALL_TO_BASE_CURRENCY,
+        data: data
+    }
+}
+
 
 export default {
     setReportFilter,
-    setDetailParams
+    setDetailParams,
+    setConvertAllToBaseCurrency
 }

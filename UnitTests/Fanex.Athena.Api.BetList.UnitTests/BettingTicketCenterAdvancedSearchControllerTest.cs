@@ -142,7 +142,7 @@
 
         private BettingTicketCenterAdvancedSearchController CreateController()
         {
-            return new BettingTicketCenterAdvancedSearchController(LangService, AppSetting, _betListApiClient)
+            return new BettingTicketCenterAdvancedSearchController(LangService, AppSetting, _betListApiClient, SportService)
             {
                 SessionService = SessionService,
                 ProductService = ProductService
