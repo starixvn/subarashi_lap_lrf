@@ -43,6 +43,10 @@
                     return 'stop';
                 };
 
+                Site.addUpComingClosurePopup({
+                    key: 'LicenseeWL'
+                })
+
                 Site.addUserGuide({
                     resourceName: 'LicenseeWL',
                     title: Site.getSingleResource('LicenseeWinLoss')

@@ -352,4 +352,7 @@
   <data name="winlossanalysis" xml:space="preserve">
     <value>輸贏分析</value>
   </data>
+  <data name="upcomingreportclosures" xml:space="preserve">
+    <value>即將關閉的報告</value>
+  </data>
 </root>

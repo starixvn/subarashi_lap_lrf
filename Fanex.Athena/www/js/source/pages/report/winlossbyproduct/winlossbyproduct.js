@@ -43,6 +43,11 @@
                 DatePicker.initDateRangePicker();
                 MultiSelect.initProductList();
                 DateHelper.setConstraintMonthRange(VALID_MONTH_RANGE, WinLossByProductOption.urlExcelData);
+                
+                Site.addUpComingClosurePopup({
+                    key: 'WinLossByProduct'
+                });
+
                 Site.addUserGuide({
                     resourceName: 'WinLossByProduct',
                     title: Site.getSingleResource('WinLossByProduct')

@@ -34,6 +34,11 @@
 
         function initialize() {
             Site.initialize();
+
+            Site.addUpComingClosurePopup({
+                key: 'PlatformWinLoss'
+            });
+
             Site.addUserGuide({
                 resourceName: 'PlatformWinLoss',
                 title: Site.getSingleResource('PlatformWinLoss')

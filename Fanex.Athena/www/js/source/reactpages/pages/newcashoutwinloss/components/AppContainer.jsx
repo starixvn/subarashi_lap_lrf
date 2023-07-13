@@ -2,6 +2,7 @@ import React from 'react';
 import AppLayout from '@jsroot/layouts/AppLayout';
 import FormFilter from './FormFilter';
 import DataGrid from './DataGrid'
+import UpcomingClosurePopUp from '@jsroot/layouts/UpcomingClosurePopUp'
 import Loader from '@jsroot/components/Loader';
 import { connect } from 'react-redux';
 
@@ -11,6 +12,7 @@ export const AppContainer = props => {
         <Loader isLoading={props.isLoading} />
         <FormFilter />
         <DataGrid />
+        <UpcomingClosurePopUp id="cashoutwinloss"/>
     </AppLayout>)
 }
 

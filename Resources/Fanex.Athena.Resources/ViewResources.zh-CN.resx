@@ -3159,4 +3159,7 @@
   <data name="Tennis" xml:space="preserve">
     <value>网球</value>
   </data>
+  <data name="Message_UpcomingClosureReport" xml:space="preserve">
+    <value>2023 年 9 月 7 日之后，该报告将被移除。&lt;br&gt;相关数据请查看输赢分析报告，以获得更好的体验。&lt;br&gt;如果您没有权限查看输赢分析报告，请联系最高权限帐号拥有者！</value>
+  </data>
 </root>

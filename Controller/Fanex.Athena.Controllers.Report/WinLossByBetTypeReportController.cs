@@ -62,6 +62,7 @@ namespace Fanex.Athena.Controllers.Report
                 IsAllowedCustomerCommission = licenseeSession.IsAllowedCustomerComm,
                 CurrencyList = userSession.CurrencyList,
                 ProductAccess = ProductServiceInstance.GetProductAccess(licenseeSession.LicenseeId, userSession.Language),
+                IsShowUpcomingClosurePopUp = true
             };
 
             ViewBag.IsShowCustComm = licenseeSession.IsAllowedCustomerComm;
@@ -90,6 +91,7 @@ namespace Fanex.Athena.Controllers.Report
                 MainResult = reportData,
                 IsAllowedCustomerCommission = licenseeSession.IsAllowedCustomerComm,
                 CurrencyList = userSession.CurrencyList,
+                IsShowUpcomingClosurePopUp= false,
                 ProductAccess = productAccess,
                 ColumnCount = GetColumnCount(productAccess, licenseeSession.IsAllowedCustomerComm),
                 Total = total

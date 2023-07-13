@@ -54,5 +54,7 @@
         public string AccessToken { get; set; }
 
         public DateTime AccessTokenLifeTime { get; set; } = DateTime.MinValue;
+
+        public bool IsPortalUser => IdentityName.StartsWith("portal_");
     }
 }
