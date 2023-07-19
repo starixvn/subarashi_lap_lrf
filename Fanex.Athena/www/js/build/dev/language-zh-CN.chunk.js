@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 7/5/2023 9:18:45 AM
+﻿// Generated at: 7/6/2023 2:55:54 PM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -881,6 +881,7 @@ SystemParlay:"复式过关",
 SystemParlayDetailNote:"输赢的进位值仅供参考。因此，所有输赢相加的总计有可能和小计有差数。",
 Tablet:"平板",
 Team:"队伍",
+Tennis:"网球",
 Th:"Th",
 TheLicenseeHasNoAssignedCategory:"此商户尚未设置联络人资讯，请联繫主帐户设置联络人资讯",
 ThereIsNoSelectedItem:"There is no selected item.",

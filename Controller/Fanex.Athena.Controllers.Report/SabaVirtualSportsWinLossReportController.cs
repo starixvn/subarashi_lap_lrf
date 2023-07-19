@@ -33,6 +33,7 @@
             (-2, (int)SportType.BasketBall, ViewResources.BasketballPinGoal, new[] { (int)SportType.SabaBasketballPinGoal }),
             (50, (int)SportType.Cricket, ViewResources.Cricket , new[] { (int)SportType.SabaCricket }),
             (-43, (int)SportType.Esports, ViewResources.ESportsPinGoal, new[] { (int)SportType.SabaESportsPinGoal }),
+            (5, (int)SportType.Tennis, ViewResources.Tennis , new[] { (int)SportType.SabaTennis }),
         };
 
         public SabaVirtualSportsWinLossReportController(

@@ -3503,4 +3503,7 @@
     <value>Cricket</value>
     <comment>#183841</comment>
   </data>
+  <data name="Tennis" xml:space="preserve">
+    <value>Tennis</value>
+  </data>
 </root>

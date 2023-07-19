@@ -7774,6 +7774,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tennis.
+        /// </summary>
+        public static string Tennis {
+            get {
+                return ResourceManager.GetString("Tennis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Th.
         /// </summary>
         public static string Th {
