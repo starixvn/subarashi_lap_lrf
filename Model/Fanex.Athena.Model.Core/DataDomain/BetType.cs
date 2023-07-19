@@ -312,6 +312,8 @@
         AllbetPromotion = 2499,
 
         TIPStreamerTips = 8700,
+        
+        MGRNGPromotion = 8695,
 
         VirtualSportCorrectScoreTennis = 1235,
     }

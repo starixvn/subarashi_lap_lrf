@@ -70,7 +70,8 @@
                 { Product.FGGL, nameof(ViewResources.ProductFGGL) },
                 { Product.MXG, nameof(ViewResources.ProductMXG) },
                 { Product.JIG, nameof(ViewResources.ProductJIG) },
-                { Product.YB, nameof(ViewResources.ProductYB) }
+                { Product.YB, nameof(ViewResources.ProductYB) },
+                { Product.MGRNG, nameof(ViewResources.ProductMGRNG) }
             };
 
         public static string GetProductCode(int productId)
