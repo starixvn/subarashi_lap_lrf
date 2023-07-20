@@ -100,6 +100,8 @@ namespace Fanex.Athena.Model.Core.DTO.Common
 
         public const string YB = "YB";
 
+        public const string MGRNG = "MGRNG";
+
         #endregion Field
 
         #region Constructor

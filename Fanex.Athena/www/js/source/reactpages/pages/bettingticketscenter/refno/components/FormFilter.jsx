@@ -198,7 +198,6 @@ export class FormFilter extends Component {
                         {LangHelper.getSingleResource('Note')}:
                         </div>
                     <div className="col-9">
-                        * {LangHelper.getSingleResource('BettingTicketCenter_RefnoTabNote1')}
                         {AppData.isAllowTxIDColumn && <>
                             <br />
                             * {LangHelper.getSingleResource('BettingTicketCenter_RefnoTabNote_TxIDSearch').replace('{0}', AppData.balanceupDay)}

@@ -3506,4 +3506,7 @@
   <data name="Tennis" xml:space="preserve">
     <value>Tennis</value>
   </data>
+  <data name="ProductMGRNG" xml:space="preserve">
+    <value>MG-RNG</value>
+  </data>
 </root>

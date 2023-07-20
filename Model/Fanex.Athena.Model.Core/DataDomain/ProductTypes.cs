@@ -88,6 +88,8 @@ namespace Fanex.Athena.Model.Core.DataDomain
 
         public const int YB = 76;
 
+        public const int MGRNG = 73;
+
         public const int Parlay = 999;
     }
 }
