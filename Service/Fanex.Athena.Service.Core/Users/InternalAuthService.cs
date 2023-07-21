@@ -10,6 +10,7 @@ using Fanex.Athena.Service.Core.Users.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -53,9 +54,12 @@ namespace Fanex.Athena.Service.Core.Users
         public async Task SignOut(HttpResponseBase response, HttpRequestBase request)
         {
             var userSession = _sessionService.UserSession;
-            _sessionService.ClearSessions();
-            CookiesHelper.ClearCookies(response, request.Cookies.AllKeys);
-            _formsAuthService.SignOut();
+            if (!string.IsNullOrEmpty(_sessionService.SessionID))
+            {
+                _sessionService.ClearSessions();
+                CookiesHelper.ClearCookies(response, request.Cookies.AllKeys);
+                _formsAuthService.SignOut();
+            }
             if (userSession != null)
             {
                 _authenticationDataAccess.Logout(userSession.OnUserId);
