@@ -1646,6 +1646,33 @@ var __WEBPACK_AMD_DEFINE_RESULT__;﻿
 
 /***/ }),
 
+/***/ "./www/js/source/helpers/htmlHelper.js":
+/*!*********************************************!*\
+  !*** ./www/js/source/helpers/htmlHelper.js ***!
+  \*********************************************/
+/*! exports provided: encode, decode */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "encode", function() { return encode; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "decode", function() { return decode; });
+const encode = (text) => {
+    const p = document.createElement("p");
+    p.textContent = text;
+
+    return p.innerHTML;
+}
+
+const decode = (html) => {
+    const txt = document.createElement('textarea');
+    txt.innerHTML = html;
+
+    return txt.value;
+}
+
+/***/ }),
+
 /***/ "./www/js/source/lib/bignumber.js":
 /*!****************************************!*\
   !*** ./www/js/source/lib/bignumber.js ***!
@@ -8006,6 +8033,10 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                     }, 100);
                     return 'stop';
                 };
+
+                Site.addUpComingClosurePopup({
+                    key: 'LicenseeWL'
+                })
 
                 Site.addUserGuide({
                     resourceName: 'LicenseeWL',

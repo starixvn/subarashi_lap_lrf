@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 7/19/2023 5:13:56 PM
+﻿// Generated at: 7/13/2023 10:49:00 AM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -631,6 +631,7 @@ MaxPerMatch2:"Max/Match",
 May:"May",
 Member:"Member",
 Message_RemoveCustomerLog:"Customer Log will be removed at 11am on April 21st (GMT+8). Kindly use Player Administration instead. Thanks!",
+Message_UpcomingClosureReport:"This report will no longer be available after September 7th, 2023.&lt;br&gt;For related data, please refer to Win Loss Analysis report, which provides a better experience.&lt;br&gt;In case you don&apos;t have permission to view Win Loss Analysis report, please contact the administrator!",
 MessageBatchUpdateAccountStatus_Close:"CLOSED: player cannot be restored forever!",
 MessageBatchUpdateAccountStatus_Lock:"LOCKED: player cannot login!",
 MessageCommCannotGreaterThan:"Commission cannot be greater than 15%",
