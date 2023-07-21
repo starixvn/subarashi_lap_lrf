@@ -197,6 +197,9 @@ define(['jquery', 'common/querystring', 'common/popup', 'helpers/htmlHelper', 'e
         }
 
         function addUpComingClosurePopup(options){
+            if(getCookie(options.key)){
+                return;
+            }
             const defaultOptions = {
                 id: 'UpcomingClosure',
                 title: getSingleResource('Notification').toUpperCase(),

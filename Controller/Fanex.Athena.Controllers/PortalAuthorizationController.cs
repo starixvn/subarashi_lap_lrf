@@ -69,6 +69,7 @@
 
         [HttpGet]
         [AuthorizeRestriction(AppMode.Parasitic)]
+        [AllowAnonymous]
         [Route("Auth/InvalidateSession")]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public async Task<ActionResult> InvalidateSession()

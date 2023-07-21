@@ -2,9 +2,16 @@ import React, { useState } from 'react';
 import Popup from '@jsroot/components/popup/Popup.jsx';
 import LangHelper from '@jsroot/lib/langHelper';
 import {decode} from '@jsroot/lib/htmlHelper';
+import Site from '@jsroot/lib/site';
 
-const UpcomingClosurePopUp = () => {
-    const [isShow, setIsShow] = useState(true);
+const UpcomingClosurePopUp = (props) => {
+    const isHasAlreadyAccess = !!Site.getCookie(props.id);
+    const [isShow, setIsShow] = useState(!isHasAlreadyAccess);
+
+    if(!isHasAlreadyAccess){
+        Site.setCookie(props.id, "true");
+    }
+
     const _onCloseHandler = () =>{
         setIsShow(false);
     }
