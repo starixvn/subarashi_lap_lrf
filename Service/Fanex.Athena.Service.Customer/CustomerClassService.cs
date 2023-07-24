@@ -1,13 +1,10 @@
 ﻿namespace Fanex.Athena.Service.Customer
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
     using Fanex.Athena.DataAccess.Customer;
     using Fanex.Athena.Extension.Helpers;
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Extension.Utility.Interfaces;
+    using Fanex.Athena.Model.Core.DTO.Configuration;
     using Fanex.Athena.Model.Customer.DTO;
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Athena.Resources;
@@ -15,16 +12,22 @@
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Logging;
     using Newtonsoft.Json;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
 
     public class CustomerClassService : ICustomerClassService
     {
         private const string DefaultTextValue = "-";
         private const string EnglishCulture = "en-US";
+        private const int CacheTimeoutSeconds = 900; // 15 minutes
 
         private readonly ICustomerClassDataAccess _dataAccess;
         private readonly IWebClientService _webClientService;
         private readonly IPortalApiService _portalApiService;
         private readonly IAppSettings _appSettings;
+        private readonly ICustomMemoryCacheService _cache;
         private readonly ILogger _logger;
 
         public CustomerClassService(
@@ -32,12 +35,14 @@
             IWebClientService webClientService,
             IPortalApiService portalApiService,
             IAppSettings appSettings,
+            ICustomMemoryCacheService cache,
             ILogger logger)
         {
             _dataAccess = dataAccess;
             _webClientService = webClientService;
             _portalApiService = portalApiService;
             _appSettings = appSettings;
+            _cache = cache;
             _logger = logger;
         }
 
@@ -136,19 +141,38 @@
 
         private async Task<List<CustomerClassCategoryModel>> GetCustomerClassCategories()
         {
+            var customerClassCategory = new List<CustomerClassCategoryModel>();
+
             try
             {
+                customerClassCategory = _cache.Get<List<CustomerClassCategoryModel>>(CacheKey.MemorycacheCustomerClassCategories);
+
+                if (customerClassCategory != null)
+                {
+                    return customerClassCategory;
+                }
+
                 var uri = new Uri(_appSettings.GetValue("CustomerClassCategoryApi"));
                 var apiResult = await _webClientService.DownloadStringAsync(uri);
                 var result = JsonConvert.DeserializeObject<List<CustomerClassCategoryModel>>(apiResult);
-                return result;
+
+                if (result.Any())
+                {
+                    _cache.Set(CacheKey.MemorycacheCustomerClassCategories, result, CacheTimeoutSeconds);
+                    _cache.SetWithoutExpired(CacheKey.MemorycacheCustomerClassCategories + "_backup", result);
+                    return result;
+                }
+
+                customerClassCategory = _cache.Get<List<CustomerClassCategoryModel>>(CacheKey.MemorycacheCustomerClassCategories + "_backup");
+
+                return customerClassCategory;
             }
             catch (Exception exception)
             {
                 _logger.Error(LogMessageHelper.GenerateMessage(exception));
             }
 
-            return new List<CustomerClassCategoryModel>();
+            return customerClassCategory;
         }
 
         public async Task<IEnumerable<RiskLevel>> GetAllRiskLevel()

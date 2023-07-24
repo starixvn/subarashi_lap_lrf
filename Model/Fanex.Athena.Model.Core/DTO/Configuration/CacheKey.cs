@@ -31,6 +31,8 @@ namespace Fanex.Athena.Model.Core.DTO.Configuration
 
         public static readonly string MemorycacheSportListForTreeView = "MemoryCache_SportList_TreeView";
 
+        public static readonly string MemorycacheCustomerClassCategories = "MemoryCache_CustomerClassCategories";
+
         public static readonly string MemorycacheBetTypeForTreeView = "MemoryCache_Bettype_TreeView";
     }
 }

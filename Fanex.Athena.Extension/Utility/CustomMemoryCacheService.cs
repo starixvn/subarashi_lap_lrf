@@ -1,12 +1,10 @@
 ﻿namespace Fanex.Athena.Extension.Utility
 {
-    using System;
-
     using Interfaces;
-
     using Internal;
-
     using Newtonsoft.Json;
+    using System;
+    using System.Runtime.Caching;
 
     public class CustomMemoryCacheService : ICustomMemoryCacheService
     {
@@ -51,6 +49,19 @@
             if (!Equals(value, default(T)))
             {
                 _cache.Set(key, DeepClone(value), DateTime.Now.AddSeconds(seconds), REGIONNAME);
+            }
+        }
+
+        public void SetWithoutExpired<T>(string key, T value)
+        {
+            if (string.IsNullOrWhiteSpace(key))
+            {
+                throw new ArgumentNullException(nameof(key), "Key should not be empty!");
+            }
+
+            if (!Equals(value, default(T)))
+            {
+                _cache.Set(key, DeepClone(value), new CacheItemPolicy { Priority = CacheItemPriority.NotRemovable }, REGIONNAME);
             }
         }
 
