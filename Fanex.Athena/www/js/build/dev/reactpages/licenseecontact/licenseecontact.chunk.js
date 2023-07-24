@@ -64,7 +64,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "www/js/build/dev/reactpages/" + ({"lib/xlsx-style-sparta":"lib/xlsx-style-sparta"}[chunkId]||chunkId) + ".chunk.js"
+/******/ 		return __webpack_require__.p + "www/js/build/dev/reactpages/" + ({"lib/xlsx-style-sparta":"lib/xlsx-style-sparta"}[chunkId]||chunkId) + "." + {"lib/xlsx-style-sparta":"932edca6c1487b86dbb1"}[chunkId] + ".chunk.js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -316,64 +316,64 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SELECTED_ODDGROUP", function() { return SET_SELECTED_ODDGROUP; });
 const FETCH_DATA = 'FETCH_DATA';
 const SET_GRID_DATA = "SET_GRID_DATA";
+
 /* Product */
-
 const SET_SELECTED_PRODUCT = "SET_SELECTED_PRODUCT";
-/* Base Currency */
 
+/* Base Currency */
 const SET_SELECTED_BASECURRENCY = "SET_SELECTED_BASECURRENCY";
 const SET_BASECURRENCY_LIST = "SET_BASECURRENCY_LIST";
+
 /* Currency */
-
 const SET_SELECTED_CURRENCY = "SET_SELECTED_CURRENCY";
+
 /* Loader */
-
 const TOGGLE_LOADER = "TOGGLE_LOADER";
+
 /* Exclude Test Data */
-
 const CHANGE_IS_EXCLUDE_TEST = "CHANGE_IS_EXCLUDE_TEST";
+
 /* User mini guide */
-
 const USER_GUIDE_CONTENT = "USER_GUIDE_CONTENT;";
-/* Date range */
 
+/* Date range */
 const SET_DATE_RANGE = 'SET_DATE_RANGE';
 const GET_DATE_CONSTRAINT = 'GET_DATE_CONSTRAINT';
+
 /* Convert all figures to base currency */
-
 const CHANGE_IS_CONVERT_ALL = "CHANGE_IS_CONVERT_ALL";
+
 /* Status */
-
 const SET_SELECTED_STATUS = "SET_SELECTED_STATUS";
+
 /* Platform  */
-
 const SET_SELECTED_PLATFORM = "SET_SELECTED_PLATFORM";
-/* Live Status  */
 
+/* Live Status  */
 const SET_SELECTED_LIVESTATUS = "SET_SELECTED_LIVESTATUS";
 const SET_USERNAME = "SET_USERNAME";
 const SET_REQUEST_PARAM = "SET_REQUEST_PARAM";
 const SET_REPORT_TITLE = "SET_REPORT_TITLE";
+
 /*Sport list*/
-
 const SET_SPORT_LIST = "SET_SPORT_LIST";
+
 /* Live Status  */
-
 const SET_PAGING_OPTION = 'SET_PAGING_OPTION';
-/* Subsidiary Search  */
 
+/* Subsidiary Search  */
 const SET_SUBSIDIARY_LIST = 'SET_SUBSIDIARY_LIST';
 const SET_SUBSIDIARY_SEARCH = 'SET_SUBSIDIARY_SEARCH';
+
 /*Reason list*/
-
 const SET_REASON_LIST = "SET_REASON_LIST";
-/*Customer class*/
 
+/*Customer class*/
 const SET_SELECTED_VIP_OPTION = 'SET_SELECTED_VIP_OPTION';
 const SET_SELECTED_CUSTOMERCLASS = "SET_SELECTED_CUSTOMERCLASS";
 const SET_SELECTED_RISKLEVEL = "SET_SELECTED_RISKLEVEL";
-/*Odd group*/
 
+/*Odd group*/
 const SET_SELECTED_ODDGROUP = "SET_SELECTED_ODDGROUP";
 
 /***/ }),
@@ -437,7 +437,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
-
 const Loader = ({
   isLoading
 }) => {
@@ -452,7 +451,6 @@ const Loader = ({
     className: "loader-inner ball-beat"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null))));
 };
-
 /* harmony default export */ __webpack_exports__["default"] = (Loader);
 
 /***/ }),
@@ -471,7 +469,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 
 
-
 const NoDataTitle = ({
   title
 }) => {
@@ -482,7 +479,6 @@ const NoDataTitle = ({
     }
   });
 };
-
 /* harmony default export */ __webpack_exports__["default"] = (NoDataTitle);
 
 /***/ }),
@@ -503,8 +499,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 
 
 
@@ -515,25 +512,20 @@ const wrapperClasses = {
 class Overlay extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   constructor(props) {
     super(props);
-
     _defineProperty(this, "_unRegisterEvents", () => {
       const {
         closeOnOutsideClick
       } = this.props;
-
       if (closeOnOutsideClick) {
         document.removeEventListener('click', this._handleClickOutSide);
       }
     });
-
     _defineProperty(this, "_handleClickOutSide", event => {
       const clickOutside = this.containerElement && !this.containerElement.contains(event.target);
-
       if (clickOutside && this.state.isOpening) {
         this._close();
       }
     });
-
     this.containerElement = null;
     this.refHandlers = {
       container: ref => {
@@ -544,7 +536,6 @@ class Overlay extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       isOpening: this.props.isOpening
     };
   }
-
   componentDidUpdate(prevProps, prevState) {
     if (this.props.isOpening !== prevProps.isOpening) {
       const {
@@ -563,21 +554,17 @@ class Overlay extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       }, 0);
     }
   }
-
   componentWillUnmount() {
     this._unRegisterEvents();
   }
-
   _registerEvents() {
     const {
       closeOnOutsideClick
     } = this.props;
-
     if (closeOnOutsideClick) {
       document.addEventListener('click', this._handleClickOutSide);
     }
   }
-
   _close() {
     const {
       onClose
@@ -586,7 +573,6 @@ class Overlay extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       isOpening: false
     }, () => onClose && onClose());
   }
-
   render() {
     const {
       className,
@@ -604,16 +590,13 @@ class Overlay extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       ref: this.refHandlers.container
     }, children);
   }
-
 }
-
 _defineProperty(Overlay, "propTypes", {
   closeOnOutsideClick: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
   isOpening: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
   onOpen: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
   onClose: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
 });
-
 _defineProperty(Overlay, "defaultProps", {
   closeOnOutsideClick: true,
   isOpening: false
@@ -642,10 +625,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Overlay__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Overlay */ "./www/js/source/reactpages/components/Overlay.jsx");
 /* harmony import */ var _SuggestionList__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./SuggestionList */ "./www/js/source/reactpages/components/auto-complete/SuggestionList.jsx");
 /* harmony import */ var _utils_timer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils/timer */ "./www/js/source/reactpages/components/utils/timer.js");
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 
 
 
@@ -657,20 +640,16 @@ const DELAY_TIME_MILLISECOND = 300;
 class AutoComplete extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   constructor(props) {
     super(props);
-
     _defineProperty(this, "_handleClickOut", event => {
       if (this.isShowSuggestionList && this.wrapperRef && !this.wrapperRef.current.contains(event.target)) {
         this._clearState();
       }
     });
-
     _defineProperty(this, "_onKeyDown", event => {
       if (!this.isShowSuggestionList) {
         return;
       }
-
       const selectedIndex = this.state.selectedIndex;
-
       switch (event.keyCode) {
         case 38:
           //up
@@ -679,9 +658,7 @@ class AutoComplete extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
               selectedIndex: selectedIndex - 1
             });
           }
-
           break;
-
         case 40:
           //down
           if (selectedIndex < this.state.suggestions.length - 1) {
@@ -689,69 +666,54 @@ class AutoComplete extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
               selectedIndex: selectedIndex + 1
             });
           }
-
           break;
-
         case 13:
           //enter
           if (selectedIndex > -1) {
             const selectedItem = this.state.suggestions[selectedIndex];
-
             this._onSelect(selectedItem);
           }
-
           break;
       }
     });
-
     _defineProperty(this, "_clearState", () => {
       this.setState({
         suggestions: null,
         selectedIndex: -1
       });
     });
-
     _defineProperty(this, "_onSelect", selectedItem => {
       const {
         onSelect
       } = this.props;
       onSelect && onSelect(selectedItem);
       this.input.value = typeof selectedItem === "object" ? selectedItem.value : selectedItem;
-
       this._clearState();
     });
-
     _defineProperty(this, "_onChange", event => {
       const value = (this.input.value || "").trim();
       const {
         onInput
       } = this.props;
       onInput && onInput(value);
-
       if (value.length < 3) {
         this._clearState();
-
         return;
       }
-
       const cachedData = this.cacheData[value];
-
       if (cachedData) {
         this.setState({
           suggestions: cachedData
         });
         return;
       }
-
       const {
         url
       } = this.props;
-
       if (url) {
         this._getDataByUrl(url, value);
       }
     });
-
     this.state = {
       suggestions: null,
       selectedIndex: -1
@@ -761,30 +723,24 @@ class AutoComplete extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     this.onChange = _utils_timer__WEBPACK_IMPORTED_MODULE_6__["default"].debounce(this._onChange, DELAY_TIME_MILLISECOND).bind(this);
     this.wrapperRef = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
   }
-
   componentDidMount() {
     document.addEventListener("mousedown", this._handleClickOut);
   }
-
   componentWillUnmount() {
     document.removeEventListener("mousedown", this._handleClickOut);
   }
-
   get isShowSuggestionList() {
     return this.state.suggestions && this.state.suggestions.length > 0;
   }
-
   _setStateWithCaching(value, suggestionList) {
     if (this.props.cache) {
       const cacheKey = value.toLowerCase();
       this.cacheData[cacheKey] = suggestionList;
     }
-
     this.setState({
       suggestions: suggestionList
     });
   }
-
   _getDataByUrl(url, value) {
     const {
       responseDataField,
@@ -797,11 +753,9 @@ class AutoComplete extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       }
     }).then(response => {
       const data = responseDataField ? response.data[responseDataField] : response.data;
-
       this._setStateWithCaching(value, data);
     });
   }
-
   render() {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "ac-container",
@@ -823,9 +777,7 @@ class AutoComplete extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       onSelect: this._onSelect
     })));
   }
-
 }
-
 _defineProperty(AutoComplete, "propTypes", {
   url: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
   onSelect: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
@@ -835,7 +787,6 @@ _defineProperty(AutoComplete, "propTypes", {
   queryParamName: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
   htmlAttributes: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.object
 });
-
 _defineProperty(AutoComplete, "defaultProps", {
   url: null,
   responseDataField: "suggestions",
@@ -861,8 +812,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 
 
 
@@ -870,14 +822,12 @@ class SuggestionList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   constructor(props) {
     super(props);
   }
-
   onSelect(selectedItem) {
     const {
       onSelect
     } = this.props;
     onSelect && onSelect(selectedItem);
   }
-
   _renderDataList() {
     return this.props.dataList.map((item, index) => {
       const className = index === this.props.selectedIndex ? "ac-item ac-item-active" : "ac-item";
@@ -888,7 +838,6 @@ class SuggestionList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       }, item && typeof item === "object" ? item.value : item);
     });
   }
-
   render() {
     const style = {
       width: this.props.width
@@ -898,9 +847,7 @@ class SuggestionList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       style: style
     }, this._renderDataList());
   }
-
 }
-
 _defineProperty(SuggestionList, "propTypes", {
   dataList: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.array.isRequired,
   onSelect: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
@@ -939,63 +886,51 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 const _excluded = ["tag", "className", "style"];
-
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
-
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 
 
 class CollapsiblePanel extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
   constructor(props) {
     super(props);
-
     _defineProperty(this, "onClick", () => {
       const newState = !this.state.isCollapsed;
       const {
         onCollapse,
         onExpand
       } = this.props;
-
       if (newState) {
         onCollapse && onCollapse();
       }
-
       this.setState({
         isCollapsed: newState
       }, () => {
         window.dispatchEvent(new Event('resize'));
-
         if (!newState) {
           onExpand && onExpand();
         }
       });
     });
-
     this.state = {
       isCollapsed: false
     };
   }
-
   render() {
     const {
       stickyFooter,
       iconContainerStyle,
       iconToggle
     } = this.props;
-
     const {
-      tag,
-      className,
-      style
-    } = iconToggle,
-          attrs = _objectWithoutProperties(iconToggle, _excluded);
-
+        tag,
+        className,
+        style
+      } = iconToggle,
+      attrs = _objectWithoutProperties(iconToggle, _excluded);
     const IconTag = tag;
     const iconStyle = style || {
       transform: this.state.isCollapsed ? null : 'rotate(180deg)',
@@ -1023,16 +958,13 @@ class CollapsiblePanel extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Comp
       style: iconStyle
     }, attrs))));
   }
-
 }
-
 _defineProperty(CollapsiblePanel, "propTypes", {
   stickyFooter: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node,
   onCollapse: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
   onExpand: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
   isCollapseMode: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool
 });
-
 const propTypes = {
   stickyFooter: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node,
   onCollapse: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
@@ -1096,7 +1028,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 const Popup = props => {
   const {
     title,
@@ -1108,7 +1039,6 @@ const Popup = props => {
     iframeUrl
   } = props;
   let content;
-
   if (iframeUrl) {
     content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("iframe", {
       frameBorder: "0",
@@ -1126,7 +1056,6 @@ const Popup = props => {
       className: "popup-content"
     }, children);
   }
-
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: `popup-container ${isShow ? 'show' : 'hide'}`,
     onClick: props.onClick
@@ -1151,7 +1080,6 @@ const Popup = props => {
     className: "icon-close"
   }))), content));
 };
-
 Popup.propTypes = {
   width: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string]),
   height: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string]),
@@ -1267,14 +1195,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _icon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./icon */ "./www/js/source/reactpages/components/sweet-alert/icon.js");
 const _excluded = ["text"],
-      _excluded2 = ["buttons", "children"];
-
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
+  _excluded2 = ["buttons", "children"];
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
-
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
-
 
 
 
@@ -1289,29 +1213,25 @@ class SweetAlert extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component 
   constructor(props) {
     super(props);
   }
-
   _buildButtonGroup(buttons) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "al-button-container"
     }, buttons.map((btnItem, index) => {
       const {
-        text
-      } = btnItem,
-            attrs = _objectWithoutProperties(btnItem, _excluded);
-
+          text
+        } = btnItem,
+        attrs = _objectWithoutProperties(btnItem, _excluded);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", _extends({
         key: index,
         type: "button"
       }, attrs), text);
     }));
   }
-
   _buildIcon() {
     const {
       icon
     } = this.props;
     const className = `${_icon__WEBPACK_IMPORTED_MODULE_3__["ICON"]} ${_icon__WEBPACK_IMPORTED_MODULE_3__["ICON"]}--${icon}`;
-
     if (PREDEFINED_ICONS.includes(icon)) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: className,
@@ -1320,23 +1240,19 @@ class SweetAlert extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component 
         }
       });
     }
-
     return null;
   }
-
   render() {
     const _this$props = this.props,
-          {
-      buttons,
-      children
-    } = _this$props,
-          props = _objectWithoutProperties(_this$props, _excluded2);
-
+      {
+        buttons,
+        children
+      } = _this$props,
+      props = _objectWithoutProperties(_this$props, _excluded2);
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "sweet-alert"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_popup__WEBPACK_IMPORTED_MODULE_1__["default"], props, this._buildIcon(), children, this._buildButtonGroup(buttons)));
   }
-
 }
 SweetAlert.propTypes = {
   width: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string]),
@@ -1375,17 +1291,14 @@ class Timer {
     let timeout;
     return function () {
       const context = this,
-            args = arguments;
-
+        args = arguments;
       const later = () => {
         func.apply(context, args);
       };
-
       clearTimeout(timeout);
       timeout = setTimeout(later, wait || DEFAULT_TIME_DELAY_MILLISECOND);
     };
   }
-
 }
 
 /***/ }),
@@ -1422,11 +1335,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "totalCellStyle", function() { return totalCellStyle; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "grandTotalCellStyle", function() { return grandTotalCellStyle; });
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 const titleCellStyle = {
   font: {
     color: {
@@ -1519,11 +1431,9 @@ const totalTextStyle = {
     bold: true
   }
 };
-
 const totalDecimalStyle = _objectSpread(_objectSpread({}, totalTextStyle), {}, {
   numFmt: "#,##0.00"
 });
-
 const totalCellStyle = {
   default: totalTextStyle,
   rowspan: _objectSpread(_objectSpread({}, totalTextStyle), {}, {
@@ -1570,11 +1480,9 @@ const grandTotalTextStyle = {
     }
   }
 };
-
 const decimalGrandTotalStyle = _objectSpread(_objectSpread({}, grandTotalTextStyle), {}, {
   numFmt: "#,##0.00"
 });
-
 const grandTotalCellStyle = {
   default: grandTotalTextStyle,
   rowspan: _objectSpread(_objectSpread({}, grandTotalTextStyle), {}, {
@@ -1664,14 +1572,12 @@ class AppLayout extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   constructor(props) {
     super(props);
   }
-
   render() {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       id: "container",
       className: "container-fluid"
     }, this.props.children);
   }
-
 }
 
 /***/ }),
@@ -1702,8 +1608,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 
 
 class DataService {
@@ -1712,22 +1619,18 @@ class DataService {
     const proxyUrl = `Proxy/${apiKey}/${encodeUrl}`;
     return proxyUrl;
   }
-
   static getProxyData(apiKey, apiUrl, params) {
     const proxyUrl = this.buildProxyUrl(apiKey, apiUrl);
     return this.getData(proxyUrl, params);
   }
-
   static postProxyData(apiKey, apiUrl, params) {
     const proxyUrl = this.buildProxyUrl(apiKey, apiUrl);
     return this.postData(proxyUrl, params);
   }
-
   static getProxyFile(apiKey, apiUrl, params) {
     const proxyUrl = this.buildProxyUrl(apiKey, apiUrl);
     return this.getFile(proxyUrl, params);
   }
-
   static getData(url, params, cancellationTokenSource) {
     const token = cancellationTokenSource ? cancellationTokenSource.token : this.genCancellationToken().token;
     return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(url, {
@@ -1735,15 +1638,12 @@ class DataService {
       cancelToken: token
     });
   }
-
   static genCancellationToken() {
     return axios__WEBPACK_IMPORTED_MODULE_0___default.a.CancelToken.source();
   }
-
   static isCancel(thrown) {
     return axios__WEBPACK_IMPORTED_MODULE_0___default.a.isCancel(thrown);
   }
-
   static postData(url, params) {
     return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, params, {
       headers: {
@@ -1752,7 +1652,6 @@ class DataService {
       }
     });
   }
-
   static getFile(url, params, options) {
     const defaultOptions = {
       responseType: 'blob',
@@ -1764,29 +1663,22 @@ class DataService {
     let requestOptions = Object.assign({}, defaultOptions, options);
     return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, params, requestOptions);
   }
-
   static postReportData(url, params) {
     return this.postProxyData(this.apiKeys.report, url, params);
   }
-
   static getReportData(url, params) {
     return this.getProxyData(this.apiKeys.report, url, params);
   }
-
   static getReportFile(url, params) {
     return this.getProxyFile(this.apiKeys.report, url, params);
   }
-
   static postBetListData(url, params) {
     return this.postProxyData(this.apiKeys.betlist, url, params);
   }
-
   static getBetListFile(url, params) {
     return this.getProxyFile(this.apiKeys.betlist, url, params);
   }
-
 }
-
 _defineProperty(DataService, "apiKeys", {
   report: 'Report',
   betlist: 'BetList'
@@ -1840,44 +1732,35 @@ class Excel {
       _XLSX = window.XLSX;
       callback && callback();
     } else {
-      Promise.all(/*! import() | lib/xlsx-style-sparta */[__webpack_require__.e("lib/common"), __webpack_require__.e("lib/xlsx-style-sparta")]).then(__webpack_require__.t.bind(null, /*! xlsx-style-sparta */ "./node_modules/xlsx-style-sparta/xlsx.js", 7)).then(XLSX => {
+      __webpack_require__.e(/*! import() | lib/xlsx-style-sparta */ "lib/xlsx-style-sparta").then(__webpack_require__.t.bind(null, /*! xlsx-style-sparta */ "./node_modules/xlsx-style-sparta/xlsx.js", 7)).then(XLSX => {
         _XLSX = XLSX;
         callback && callback();
       });
     }
   }
-
   static read(file, sheetIndex, callBack) {
     const reader = new FileReader();
-
     reader.onload = function (e) {
       const data = e.target.result;
-
       const workbook = _XLSX.read(data, {
         type: 'binary'
       });
-
       const sheetName = workbook.SheetNames[sheetIndex];
       const worksheet = workbook.Sheets[sheetName];
-
       const content = _XLSX.utils.sheet_to_json(worksheet);
-
       const rows = _XLSX.utils.sheet_to_json(worksheet, {
         header: 1,
         defval: '',
         blankrows: true
       });
-
       const result = {
         header: rows && rows.length ? rows[0] : null,
         content
       };
       callBack && callBack(result);
     };
-
     reader.readAsBinaryString(file);
   }
-
   static export(worksheet, fileName) {
     const option = {
       bookType: EXCEL_TYPE,
@@ -1890,30 +1773,25 @@ class Excel {
       Props: {}
     };
     workbook.Sheets[fileName] = worksheet;
-
     var workbookOutput = _XLSX.write(workbook, option);
-
     this.download(workbookOutput, fileName);
   }
-
   static getCellType(value) {
     return MapExcelType[typeof value];
   }
-
   static getCellAddress(cellObject) {
     return _XLSX.utils.encode_cell(cellObject);
   }
-
   static download(workbookOut, fileName) {
     const blob = new Blob([this.sheetToArrayBuffer(workbookOut)], {
       type: "application/octet-stream"
     });
     this.downloadFromBolb(blob, fileName);
   }
-
   static downloadFromBolb(blob, fileName) {
-    const fileNameDownload = `${fileName}.${EXCEL_TYPE}`; // IE 10+
+    const fileNameDownload = `${fileName}.${EXCEL_TYPE}`;
 
+    // IE 10+
     if (typeof navigator !== "undefined" && navigator.msSaveOrOpenBlob) {
       navigator.msSaveOrOpenBlob(blob, fileNameDownload);
     } else {
@@ -1925,16 +1803,12 @@ class Excel {
       document.body.removeChild(element);
     }
   }
-
   static sheetToArrayBuffer(s) {
     const buffer = new ArrayBuffer(s.length);
     const view = new Uint8Array(buffer);
-
     for (let i = 0; i != s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
-
     return buffer;
   }
-
 }
 
 /***/ }),
@@ -1973,8 +1847,9 @@ const decode = html => {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return LangHelper; });
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 const DEFAULT_RESOURCE_NAME = "_language_en_US";
 const langCode = window.PageLanguage || "en-US";
 const resourceName = `_language_${langCode.replace("-", "_")}`;
@@ -1982,19 +1857,15 @@ class LangHelper {
   static get currentLanguage() {
     return langCode;
   }
-
   static getSingleResource(key) {
     var langHandler = window[resourceName];
     return langHandler && langHandler[key] || window[DEFAULT_RESOURCE_NAME] && window[DEFAULT_RESOURCE_NAME][key] || key;
   }
-
   static getResources(keys) {
     var langHandler = window[resourceName];
     return keys.map(key => langHandler && langHandler[key] || window[DEFAULT_RESOURCE_NAME] && window[DEFAULT_RESOURCE_NAME][key] || key);
   }
-
 }
-
 _defineProperty(LangHelper, "languageKeys", {
   eng: "en-US",
   zhCN: "zh-CN"
@@ -2018,8 +1889,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const isDev = "development" === "development";
-const configName = _constants_config__WEBPACK_IMPORTED_MODULE_1__["debuggingConfig"].name; // middleware that logs actions
-
+const configName = _constants_config__WEBPACK_IMPORTED_MODULE_1__["debuggingConfig"].name;
+// middleware that logs actions
 const loggerMiddleware = Object(redux_logger__WEBPACK_IMPORTED_MODULE_0__["createLogger"])({
   predicate: (getState, action) => isDev || window[configName] && window[configName].env === _constants_config__WEBPACK_IMPORTED_MODULE_1__["debuggingConfig"].env && (!window[configName].actionFilter || window[configName].actionFilter === action.type)
 });
@@ -2027,7 +1898,6 @@ class Logger {
   static getLoggerMiddleware() {
     return loggerMiddleware;
   }
-
 }
 
 /***/ }),
@@ -2043,23 +1913,18 @@ class Logger {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Site; });
 const _rootUrl = window.rootUrl || "/";
-
 const _isSelfMode = !!window.isSelfMode;
-
 let _xsrfToken = null;
 class Site {
   static getXsrfToken() {
     if (!_xsrfToken) {
       _xsrfToken = document.querySelector("input[name=__RequestVerificationToken]").value;
     }
-
     return _xsrfToken;
   }
-
   static resolveClientUrl(relativeUrl) {
     return _rootUrl + relativeUrl;
   }
-
   static getLrfSubsidiary() {
     try {
       return _isSelfMode && top.getLrfSubsidiarySearch && top.getLrfSubsidiarySearch() || {};
@@ -2067,27 +1932,21 @@ class Site {
       return {};
     }
   }
-
   static convertDateToString(date) {
     return typeof date === "string" ? date : date.format("MM/DD/YYYY");
   }
-
   static isEmptyObject(obj = {}) {
     return Object.entries(obj).length === 0 && obj.constructor === Object;
   }
-
   static asNull(text) {
     if (text != null) {
       text = text.trim();
-
       if (text === '') {
         return null;
       }
     }
-
     return text;
   }
-
   static downloadFile(data, fileName) {
     const url = window.URL.createObjectURL(new Blob([data]));
     const link = document.createElement('a');
@@ -2098,47 +1957,36 @@ class Site {
     link.parentNode.removeChild(link);
     window.URL.revokeObjectURL(url);
   }
-
   static readAsJson(blob, callback) {
     const reader = new FileReader();
-
     reader.onload = function () {
       callback && callback(JSON.parse(reader.result));
     };
-
     reader.readAsText(blob);
   }
-
   static getRootUrl() {
     return _rootUrl;
   }
-
   static setCookie(cname, cvalue, exdays) {
     const d = new Date();
     d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
     let expires = "expires=" + d.toUTCString();
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
   }
-
   static getCookie(cname) {
     let name = cname + "=";
     let ca = document.cookie.split(';');
-
     for (let i = 0; i < ca.length; i++) {
       let c = ca[i];
-
       while (c.charAt(0) == ' ') {
         c = c.substring(1);
       }
-
       if (c.indexOf(name) == 0) {
         return c.substring(name.length, c.length);
       }
     }
-
     return "";
   }
-
 }
 
 /***/ }),
@@ -2162,11 +2010,11 @@ __webpack_require__.r(__webpack_exports__);
 class Store {
   static createStore(reducer, initialState) {
     const loggerMiddleware = _logger__WEBPACK_IMPORTED_MODULE_2__["default"].getLoggerMiddleware();
-    const enhancer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["compose"])(Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"], // lets us dispatch() functions
+    const enhancer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["compose"])(Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"],
+    // lets us dispatch() functions
     loggerMiddleware));
     return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(reducer, initialState, enhancer);
   }
-
 }
 
 /***/ }),
@@ -2181,15 +2029,14 @@ class Store {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return StringHelper; });
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 class StringHelper {
   static isEmptyOrWhiteSpace(str) {
     return !str || str.trim().length === 0;
   }
-
 }
-
 _defineProperty(StringHelper, "addSpaceAfterComma", str => {
   return str.split(",").join(", ");
 });
@@ -2215,11 +2062,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 
 
 const predefinedIcons = {
@@ -2316,7 +2162,6 @@ const setModificationAction = data => ({
   type: _types__WEBPACK_IMPORTED_MODULE_1__["SET_MODIFICATION_ACTION"],
   data
 });
-
 const setContactList = data => ({
   type: _types__WEBPACK_IMPORTED_MODULE_1__["SET_CONTACT_LIST"],
   data
@@ -2336,11 +2181,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _gridDataAction__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./gridDataAction */ "./www/js/source/reactpages/pages/licenseecontact/actions/gridDataAction.js");
 /* harmony import */ var _jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/actions/loaderAction */ "./www/js/source/reactpages/actions/loaderAction.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 
 
 /* harmony default export */ __webpack_exports__["default"] = (_objectSpread(_objectSpread({}, _gridDataAction__WEBPACK_IMPORTED_MODULE_0__), _jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_1__));
@@ -2390,9 +2234,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_contants__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../lib/contants */ "./www/js/source/reactpages/pages/licenseecontact/lib/contants.js");
 /* harmony import */ var _lib_excel__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../lib/excel */ "./www/js/source/reactpages/pages/licenseecontact/lib/excel.js");
 /* harmony import */ var _lib_helper__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../lib/helper */ "./www/js/source/reactpages/pages/licenseecontact/lib/helper.js");
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
-
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 
 
@@ -2423,7 +2265,6 @@ const AppContainer = ({
       type,
       data
     } = currentModificationAction;
-
     if (type === _lib_contants__WEBPACK_IMPORTED_MODULE_14__["ModificationActionType"].AddContact) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_popup__WEBPACK_IMPORTED_MODULE_4__["default"], {
         height: 550,
@@ -2455,19 +2296,16 @@ const AppContainer = ({
       }));
     } else {}
   };
-
   const _onCloseModificationPopup = () => {
     setModificationAction(null);
     fetchContactList(null);
   };
-
   const _exportExcel = () => {
     const excel = new _lib_excel__WEBPACK_IMPORTED_MODULE_15__["default"](contactList, {
       [_lib_contants__WEBPACK_IMPORTED_MODULE_14__["fields"].Subsidiary]: !Object(_lib_helper__WEBPACK_IMPORTED_MODULE_16__["isShowSubsidiaryInfo"])(_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__["default"].subsidiaryViewType, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__["default"].subsidiaryList)
     });
     excel.export();
   };
-
   const _renderStickyFooter = () => {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "caret-block"
@@ -2477,7 +2315,6 @@ const AppContainer = ({
       title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("ExportToExcel")
     }));
   };
-
   const _renderFormAction = () => {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-action"
@@ -2495,12 +2332,10 @@ const AppContainer = ({
       }
     }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource('AddContact')))), _renderStickyFooter());
   };
-
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_2__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Loader__WEBPACK_IMPORTED_MODULE_3__["default"], {
     isLoading: isLoading
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormFilter__WEBPACK_IMPORTED_MODULE_9__["default"], null), _renderFormAction(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DataGrid__WEBPACK_IMPORTED_MODULE_10__["default"], null), currentModificationAction && _renderModificationPopup());
 };
-
 function mapDispatchToProps(dispatch) {
   const {
     setModificationAction,
@@ -2513,7 +2348,6 @@ function mapDispatchToProps(dispatch) {
     toggleLoader
   }, dispatch);
 }
-
 function mapStateToProps(state) {
   const {
     isLoading,
@@ -2526,7 +2360,6 @@ function mapStateToProps(state) {
     contactList
   };
 }
-
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(AppContainer));
 
 /***/ }),
@@ -2570,17 +2403,13 @@ const DataGrid = ({
   setModificationAction
 }) => {
   const MAX_WIDTH = Math.min(document.body.clientWidth, MAX_WIDTH_PAGE);
-
   if (contactList == null) {
     return null;
   }
-
   if (!contactList.length) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_5__["default"], null);
   }
-
   const _showSubsidiaryColumn = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => Object(_lib_helper__WEBPACK_IMPORTED_MODULE_9__["isShowSubsidiaryInfo"])(_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_7__["default"].subsidiaryViewType, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_7__["default"].subsidiaryList), []);
-
   const _headers = react__WEBPACK_IMPORTED_MODULE_0___default.a.useMemo(() => {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderRow"], {
       style: {
@@ -2610,7 +2439,6 @@ const DataGrid = ({
       colWidth: 30
     }, _lib_contants__WEBPACK_IMPORTED_MODULE_8__["textHeaders"]['Action']));
   }, []);
-
   const _body = react__WEBPACK_IMPORTED_MODULE_0___default.a.useMemo(() => {
     return contactList.map((contact, index) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Row"], {
       key: 'contact_' + contact.ContactID
@@ -2661,7 +2489,6 @@ const DataGrid = ({
       className: "material-icons"
     }, "delete")))));
   }, [contactList]);
-
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Table"], {
     minWidth: 1300,
     autoWidth: true,
@@ -2673,7 +2500,6 @@ const DataGrid = ({
     shouldResetScrollPosition: true
   });
 };
-
 function mapDispatchToProps(dispatch) {
   const {
     setModificationAction
@@ -2682,7 +2508,6 @@ function mapDispatchToProps(dispatch) {
     setModificationAction
   }, dispatch);
 }
-
 function mapStateToProps(state) {
   const {
     contactList
@@ -2691,7 +2516,6 @@ function mapStateToProps(state) {
     contactList
   };
 }
-
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(DataGrid));
 
 /***/ }),
@@ -2710,15 +2534,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _base_FormContact__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./base/FormContact */ "./www/js/source/reactpages/pages/licenseecontact/components/base/FormContact.jsx");
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _lib_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../lib/service */ "./www/js/source/reactpages/pages/licenseecontact/lib/service.js");
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 
 
 
@@ -2747,7 +2568,6 @@ const FormAdd = props => {
     msgConfirm: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('AlertAddLicenseeContact')
   }, props));
 };
-
 /* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(FormAdd));
 
 /***/ }),
@@ -2768,12 +2588,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_components_sweet_alert__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/components/sweet-alert */ "./www/js/source/reactpages/components/sweet-alert/index.jsx");
 /* harmony import */ var _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/sweetAlert */ "./www/js/source/reactpages/lib/sweetAlert.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 
 
 
@@ -2791,11 +2609,9 @@ const FormDelete = ({
       setSweetAlertOption(null);
       onClose();
     };
-
     const cancelProps = {
       onClick: handleCloseAlert
     };
-
     const confirmProps = _objectSpread(_objectSpread({}, _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_4__["defaultOkButton"]), {}, {
       onClick: async () => {
         toggleLoader(true);
@@ -2816,7 +2632,6 @@ const FormDelete = ({
         }));
       }
     });
-
     const confirmOption = Object(_jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_4__["generateDefaultConfirmOption"])(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('AlertDeleteLicenseeContact').replace('{0}', contactName), handleCloseAlert, confirmProps, cancelProps, _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_4__["predefinedIcons"].warning, {
       title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("Confirmation"),
       height: 210
@@ -2825,7 +2640,6 @@ const FormDelete = ({
   }, []);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, sweetAlertOption && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_sweet_alert__WEBPACK_IMPORTED_MODULE_3__["default"], sweetAlertOption));
 };
-
 /* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(FormDelete));
 
 /***/ }),
@@ -2845,24 +2659,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _base_FormContact__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./base/FormContact */ "./www/js/source/reactpages/pages/licenseecontact/components/base/FormContact.jsx");
 /* harmony import */ var _lib_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../lib/service */ "./www/js/source/reactpages/pages/licenseecontact/lib/service.js");
 const _excluded = ["contactId"];
-
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
-
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
-
-
 
 
 
 
 const FormEdit = _ref => {
   let {
-    contactId
-  } = _ref,
-      props = _objectWithoutProperties(_ref, _excluded);
-
+      contactId
+    } = _ref,
+    props = _objectWithoutProperties(_ref, _excluded);
   const [contact, setContact] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null);
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     _lib_service__WEBPACK_IMPORTED_MODULE_3__["default"].getContactDetail(contactId).then(response => setContact(response));
@@ -2880,7 +2688,6 @@ const FormEdit = _ref => {
     hasConfirm: true
   }, props));
 };
-
 /* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(FormEdit));
 
 /***/ }),
@@ -2926,19 +2733,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 const FormFilter = ({
   fetchContactList,
   contactList
 }) => {
   const _defaultSelectedSubsidiary = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_9__["default"].subsidiaryList.join(','), []);
-
   const _showSubsidiaryDropdown = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => Object(_lib_helper__WEBPACK_IMPORTED_MODULE_14__["isShowSubsidiaryInfo"])(_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_9__["default"].subsidiaryViewType, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_9__["default"].subsidiaryList), []);
-
   const _showSubsidiarySearchCheckBox = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => _showSubsidiaryDropdown && _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_9__["default"].subsidiaryViewType === _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_12__["SubsidiaryViewType"].MASTER_MANAGEMENT, [_showSubsidiaryDropdown]);
-
   const _whiteLabelView = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_9__["default"].subsidiaryViewType === _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_12__["SubsidiaryViewType"].MASTER_MANAGEMENT && !_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_9__["default"].isOneworksMaster);
-
   const [contactName, setContactName] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null);
   const [subsidiarySearch, setSubsidiarySearch] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(!_showSubsidiarySearchCheckBox && _showSubsidiaryDropdown);
   const [subsidiaryList, setSubsidiaryList] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(_defaultSelectedSubsidiary);
@@ -2949,18 +2751,14 @@ const FormFilter = ({
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     contactList && _getUnassignedCategories();
   }, [contactList]);
-
   const _getUnassignedCategories = async () => {
     const _unassignedCategories = await _lib_service__WEBPACK_IMPORTED_MODULE_11__["default"].getUnassignedCategories();
-
     setUnassignedCategories(_unassignedCategories);
     _unassignedCategories.length && window.dispatchEvent(new Event('resize'));
   };
-
   const _handleSearch = () => {
     fetchContactList(contactName, subsidiarySearch ? subsidiaryList.split(',') : null);
   };
-
   const _renderSubsidiaryTreeView = () => {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_5__["TreeViewSelect"], {
       language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].currentLanguage,
@@ -2980,12 +2778,10 @@ const FormFilter = ({
       onChange: (currentItem, selectedItemsKey, treeViewList) => setSubsidiaryList(selectedItemsKey)
     });
   };
-
   const _renderCategoryNote = () => {
     if (!unassignedCategories || !unassignedCategories.length) {
       return null;
     }
-
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "row"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -3003,7 +2799,6 @@ const FormFilter = ({
       className: "col-5 warning-note"
     }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource('LicenseeContactCategoryRuleNote'))));
   };
-
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_7__["default"], {
     className: "page-filter"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -3050,7 +2845,6 @@ const FormFilter = ({
     label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("SubsidiarySearch")
   })))), _renderCategoryNote());
 };
-
 function mapDispatchToProps(dispatch) {
   const {
     fetchContactList
@@ -3059,7 +2853,6 @@ function mapDispatchToProps(dispatch) {
     fetchContactList
   }, dispatch);
 }
-
 function mapStateToProps(state) {
   const {
     contactList
@@ -3068,7 +2861,6 @@ function mapStateToProps(state) {
     contactList
   };
 }
-
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(FormFilter));
 
 /***/ }),
@@ -3096,12 +2888,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
 /* harmony import */ var _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @jsroot/constants/report */ "./www/js/source/reactpages/constants/report.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 
 
 
@@ -3126,34 +2916,26 @@ const FormContact = ({
 }) => {
   const [sweetAlertOption, setSweetAlertOption] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null);
   const [isSubmitted, setIsSubmitted] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
-
   const _showSubsidiaryDropdown = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => Object(_lib_helper__WEBPACK_IMPORTED_MODULE_9__["isShowSubsidiaryInfo"])(_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].subsidiaryViewType, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].subsidiaryList), []);
-
   const _requiredSubsidiary = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => _showSubsidiaryDropdown && _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].subsidiaryViewType !== _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_11__["SubsidiaryViewType"].MASTER_MANAGEMENT, [_showSubsidiaryDropdown]);
-
   const _subsidiaryListSource = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => {
     let subsidiarylist = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].subsidiaryList.map(_ => ({
       value: _,
       label: _
     }));
-
     if (_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].subsidiaryViewType === _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_11__["SubsidiaryViewType"].MASTER_MANAGEMENT) {
       subsidiarylist = [{
         value: 'none',
         label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('None')
       }, ...subsidiarylist];
     }
-
     return subsidiarylist;
   }, []);
-
   if (!contact) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_4__["default"], null);
   }
-
   const _renderGeneralInformation = () => {
     var _contact$Remark;
-
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "general-information col-12 col-md-6 col-sm-6 col-lg-6 col-xl-6"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -3307,7 +3089,6 @@ const FormContact = ({
       className: "character-remain"
     }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('CharactersRemaining').replace('{0}', 300 - (((_contact$Remark = contact.Remark) === null || _contact$Remark === void 0 ? void 0 : _contact$Remark.length) || 0))))));
   };
-
   const _renderCategoriesSelection = () => {
     const existedCategories = !!contact.Categories.length;
     const isInvalid = !contact.Categories.some(category => category.RecipientType !== null);
@@ -3325,7 +3106,6 @@ const FormContact = ({
       className: isSubmitted && isInvalid ? "invalid" : ""
     }, existedCategories && contact.Categories.map(_renderCategorySelection)));
   };
-
   const _renderCategoryAllSelection = () => {
     const isCheckedAll = contact.Categories.every(_ => _.RecipientType === _lib_contants__WEBPACK_IMPORTED_MODULE_5__["RecipientType"].To);
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -3344,7 +3124,6 @@ const FormContact = ({
       label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('AllCategories')
     })));
   };
-
   const _renderCategorySelection = category => {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "row"
@@ -3360,22 +3139,16 @@ const FormContact = ({
       label: Object(_lib_helper__WEBPACK_IMPORTED_MODULE_9__["getCategoryDisplayName"])(category)
     })));
   };
-
   const handleCloseAlert = () => {
     setSweetAlertOption(null);
   };
-
   const _handleSubmit = () => {
     !isSubmitted && setIsSubmitted(true);
-
     if (!Object(_lib_helper__WEBPACK_IMPORTED_MODULE_9__["validateContact"])(contact, _requiredSubsidiary)) {
       return;
     }
-
     const unassignedCategories = _getUnassignedCategories(contact.Categories);
-
     const hasUnassignedCategories = unassignedCategories.length > 0;
-
     if (hasConfirm) {
       setSweetAlertOption(Object(_jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_7__["generateDefaultConfirmOption"])(msgConfirm, handleCloseAlert, _objectSpread(_objectSpread({}, _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_7__["defaultOkButton"]), {}, {
         onClick: hasUnassignedCategories ? () => _handleUnassignedCategoriesWarning(unassignedCategories) : _handleCallApi
@@ -3391,10 +3164,8 @@ const FormContact = ({
     } else {
       _handleCallApi();
     }
-
     2;
   };
-
   const _handleUnassignedCategoriesWarning = unassignedCategories => {
     const warningMsg = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       className: "warning-title"
@@ -3409,7 +3180,6 @@ const FormContact = ({
     });
     setSweetAlertOption(confirmOption);
   };
-
   const _handleCallApi = async () => {
     toggleLoader(true);
     const response = await api(contact);
@@ -3428,11 +3198,9 @@ const FormContact = ({
       title
     }));
   };
-
   const _getUnassignedCategories = categories => {
     return categories.filter(category => category.RecipientType === null).map(_lib_helper__WEBPACK_IMPORTED_MODULE_9__["getCategoryDisplayName"]);
   };
-
   const _renderSubmit = () => {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-bottom col-12"
@@ -3444,12 +3212,10 @@ const FormContact = ({
       onClick: _handleSubmit
     }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Submit'))));
   };
-
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "form-edit row"
   }, _renderGeneralInformation(), _renderCategoriesSelection(), _renderSubmit(), sweetAlertOption && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_sweet_alert__WEBPACK_IMPORTED_MODULE_6__["default"], sweetAlertOption));
 };
-
 /* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(FormContact));
 
 /***/ }),
@@ -3484,13 +3250,11 @@ class App extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
   constructor(props) {
     super(props);
   }
-
   render() {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_3__["Provider"], {
       store: store
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AppContainer_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null));
   }
-
 }
 react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), document.getElementById("app-container"));
 
@@ -3597,11 +3361,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./helper */ "./www/js/source/reactpages/pages/licenseecontact/lib/helper.js");
 /* harmony import */ var _contants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./contants */ "./www/js/source/reactpages/pages/licenseecontact/lib/contants.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 
 
 
@@ -3621,27 +3384,20 @@ class LicenseeContactExcel {
     this.columnConfigs = this._getcolumnConfigs();
     this.mergeConfig = [];
   }
-
   export(onFinished) {
     if (!this.data || !this.data.length) {
       alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('NoInfo'));
       return;
     }
-
     _jsroot_lib_excel__WEBPACK_IMPORTED_MODULE_0__["default"].process(() => {
       this._createTitle();
-
       this._createHeader();
-
       this._createBodyData();
-
       this._createExcelConfig();
-
       _jsroot_lib_excel__WEBPACK_IMPORTED_MODULE_0__["default"].export(this.worksheet, 'LicenseeContacts');
       onFinished && onFinished();
     });
   }
-
   _createTitle() {
     this.mergeConfig.push({
       s: {
@@ -3663,10 +3419,8 @@ class LicenseeContactExcel {
       s: _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["titleCellStyle"]
     };
   }
-
   _createHeader() {
     const totalColumn = this.columnConfigs.length;
-
     for (let i = 0; i < totalColumn; i++) {
       const field = this.columnConfigs[i].field;
       this.worksheet[_jsroot_lib_excel__WEBPACK_IMPORTED_MODULE_0__["default"].getCellAddress({
@@ -3697,15 +3451,12 @@ class LicenseeContactExcel {
       });
     }
   }
-
   _createBodyData() {
     const totalColumn = this.columnConfigs.length;
-
     for (let i = 0; i < this.data.length; i++) {
       const item = _objectSpread(_objectSpread({}, this.data[i]), {}, {
         [_contants__WEBPACK_IMPORTED_MODULE_4__["fields"].Index]: i + 1
       });
-
       for (let j = 0; j < totalColumn; j++) {
         const address = _jsroot_lib_excel__WEBPACK_IMPORTED_MODULE_0__["default"].getCellAddress({
           c: j,
@@ -3713,21 +3464,17 @@ class LicenseeContactExcel {
         });
         this.worksheet[address] = this._buildDataRow(item, j);
       }
-
       this.currentRowIndex++;
     }
   }
-
   _buildDataRow(item, colIndex) {
     const columnConfig = this.columnConfigs[colIndex];
     let value = item[columnConfig.field];
-
     if (columnConfig.field === _contants__WEBPACK_IMPORTED_MODULE_4__["fields"].ToList) {
       value = value.join('\n');
     } else if (columnConfig.field === _contants__WEBPACK_IMPORTED_MODULE_4__["fields"].ContactType) {
       value = Object(_helper__WEBPACK_IMPORTED_MODULE_3__["getContactTypeText"])(value);
     }
-
     const displayedValue = this._shouldSetEmpty(value) ? '' : value;
     return {
       t: _jsroot_lib_excel__WEBPACK_IMPORTED_MODULE_0__["default"].getCellType(displayedValue),
@@ -3735,11 +3482,9 @@ class LicenseeContactExcel {
       s: columnConfig[MAIN_SECTION_STYLE]
     };
   }
-
   _shouldSetEmpty(value) {
     return value === undefined || value === null;
   }
-
   _createExcelConfig() {
     const cellStart = _jsroot_lib_excel__WEBPACK_IMPORTED_MODULE_0__["default"].getCellAddress({
       r: 0,
@@ -3755,7 +3500,6 @@ class LicenseeContactExcel {
       wpx: x.width
     }));
   }
-
   _getcolumnConfigs() {
     var result = [{
       field: _contants__WEBPACK_IMPORTED_MODULE_4__["fields"].Index,
@@ -3800,7 +3544,6 @@ class LicenseeContactExcel {
     }];
     return result.filter(_ => !this.excludedColumns[_.field]);
   }
-
 }
 
 /***/ }),
@@ -3825,11 +3568,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/constants/report */ "./www/js/source/reactpages/constants/report.js");
 const _excluded = ["Remark", "ContactID"];
-
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
-
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
-
 
 
 
@@ -3843,20 +3583,17 @@ const contactValidationHandler = {
 };
 const getContactTypeText = contactType => {
   var _ContactTypeOptions$f;
-
   return ((_ContactTypeOptions$f = _contants__WEBPACK_IMPORTED_MODULE_0__["ContactTypeOptions"].find(_ => _.value === contactType)) === null || _ContactTypeOptions$f === void 0 ? void 0 : _ContactTypeOptions$f.label) || '';
 };
 const validateContact = (contact, requiredSubsidiary) => {
   if (!contact) {
     return false;
   }
-
   const {
-    Remark,
-    ContactID
-  } = contact,
-        validateFields = _objectWithoutProperties(contact, _excluded);
-
+      Remark,
+      ContactID
+    } = contact,
+    validateFields = _objectWithoutProperties(contact, _excluded);
   const isInvalid = Object.keys(validateFields).some(field => contactValidationHandler[field] ? !contactValidationHandler[field](contact[field], requiredSubsidiary) : _jsroot_lib_stringHelper__WEBPACK_IMPORTED_MODULE_2__["default"].isEmptyOrWhiteSpace(contact[field]));
   return !isInvalid;
 };
@@ -3888,51 +3625,41 @@ class ApiService {
         contactName,
         subsidiaryList
       });
-
       if (response.status === 200 && response.data.IsSuccess) {
         return response.data.Data;
       }
     } catch (e) {
       console.log(e);
     }
-
     return [];
   }
-
   static async getContactDetail(contactId) {
     try {
       const response = await _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_0__["default"].postData(_contants__WEBPACK_IMPORTED_MODULE_2__["Url"].ContactDetail, {
         contactId
       });
-
       if (response.status === 200 && response.data.IsSuccess) {
         return response.data.Data;
       }
     } catch (e) {
       console.log(e);
     }
-
     return null;
   }
-
   static async getLicenseeCategories() {
     try {
       const response = await _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_0__["default"].postData(_contants__WEBPACK_IMPORTED_MODULE_2__["Url"].LicenseeCategories, {});
-
       if (response.status === 200 && response.data.IsSuccess) {
         return response.data.Data;
       }
     } catch (e) {
       console.log(e);
     }
-
     return [];
   }
-
   static async addContact(contact) {
     try {
       const response = await _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_0__["default"].postData(_contants__WEBPACK_IMPORTED_MODULE_2__["Url"].ContactAdd, contact);
-
       if (response.status === 200) {
         const {
           IsSuccess,
@@ -3946,17 +3673,14 @@ class ApiService {
     } catch (e) {
       console.log(e);
     }
-
     return {
       IsSuccess: false,
       Message: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('HttpError_Default')
     };
   }
-
   static async editContact(contact) {
     try {
       const response = await _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_0__["default"].postData(_contants__WEBPACK_IMPORTED_MODULE_2__["Url"].ContactEdit, contact);
-
       if (response.status === 200) {
         const {
           IsSuccess,
@@ -3970,19 +3694,16 @@ class ApiService {
     } catch (e) {
       console.log(e);
     }
-
     return {
       IsSuccess: false,
       Message: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('HttpError_Default')
     };
   }
-
   static async deleteContact(contactId) {
     try {
       const response = await _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_0__["default"].postData(_contants__WEBPACK_IMPORTED_MODULE_2__["Url"].ContactDelete, {
         contactId
       });
-
       if (response.status === 200) {
         const {
           IsSuccess,
@@ -3996,13 +3717,11 @@ class ApiService {
     } catch (e) {
       console.log(e);
     }
-
     return {
       IsSuccess: false,
       Message: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('HttpError_Default')
     };
   }
-
   static async getUnassignedCategories() {
     const [contactList, categories] = await Promise.all([this.getContactList(null), this.getLicenseeCategories()]);
     const unassignedCategories = categories.filter(category => {
@@ -4011,7 +3730,6 @@ class ApiService {
     });
     return unassignedCategories;
   }
-
 }
 
 /***/ }),
@@ -4035,13 +3753,11 @@ const contactList = Object(_jsroot_lib_createReducer__WEBPACK_IMPORTED_MODULE_0_
   [_actions_types_js__WEBPACK_IMPORTED_MODULE_1__["SET_CONTACT_LIST"]](prevState, action) {
     return action.data;
   }
-
 });
 const currentModificationAction = Object(_jsroot_lib_createReducer__WEBPACK_IMPORTED_MODULE_0__["default"])(null, {
   [_actions_types_js__WEBPACK_IMPORTED_MODULE_1__["SET_MODIFICATION_ACTION"]](prevState, action) {
     return action.data;
   }
-
 });
 
 /***/ }),
@@ -4059,11 +3775,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_reducers_loaderReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/reducers/loaderReducer */ "./www/js/source/reactpages/reducers/loaderReducer.js");
 /* harmony import */ var _gridDataReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./gridDataReducer */ "./www/js/source/reactpages/pages/licenseecontact/reducers/gridDataReducer.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 
 
 
@@ -4089,7 +3804,6 @@ const isLoading = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["def
   [_actions_types__WEBPACK_IMPORTED_MODULE_0__["TOGGLE_LOADER"]](state, action) {
     return action.data;
   }
-
 });
 
 /***/ })
