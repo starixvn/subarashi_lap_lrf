@@ -1181,6 +1181,33 @@ Array.prototype.insertBefore = function (value, before) {
 
 /***/ }),
 
+/***/ "./www/js/source/helpers/htmlHelper.js":
+/*!*********************************************!*\
+  !*** ./www/js/source/helpers/htmlHelper.js ***!
+  \*********************************************/
+/*! exports provided: encode, decode */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "encode", function() { return encode; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "decode", function() { return decode; });
+const encode = (text) => {
+    const p = document.createElement("p");
+    p.textContent = text;
+
+    return p.innerHTML;
+}
+
+const decode = (html) => {
+    const txt = document.createElement('textarea');
+    txt.innerHTML = html;
+
+    return txt.value;
+}
+
+/***/ }),
+
 /***/ "./www/js/source/helpers/sortableheader.js":
 /*!*************************************************!*\
   !*** ./www/js/source/helpers/sortableheader.js ***!
@@ -1281,6 +1308,13 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                 GridHelper.resizeGrid();
                 _me.initDateRangePicker();
                 SortableHeader.createSortingIcon(_me.submitForm);
+                if (Number($("#IsShowUpcomingClosurePopUp").val()))
+                {
+                    Site.addUpComingClosurePopup({
+                        key: 'WinLossByBetType'
+                    })
+                }
+                
                 Site.addUserGuide({
                     resourceName: 'WinLossByBetType',
                     title: Site.getSingleResource('WinLossByBetType')

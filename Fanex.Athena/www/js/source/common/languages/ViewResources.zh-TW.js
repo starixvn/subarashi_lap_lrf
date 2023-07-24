@@ -1,4 +1,4 @@
-﻿// Generated at: 7/19/2023 5:13:57 PM
+﻿// Generated at: 7/13/2023 10:49:00 AM
 window._language_zh_TW = {
 AA:"客客",
 AbnormalBet:"非正規註單",
@@ -390,6 +390,7 @@ MaxPerBall:"单粒球最高投注",
 MaxPerBallLessThanOrEqual:"最大單球最大投注必須小於或等於",
 MaxPerMatch:"單場限額",
 May:"五月",
+Message_UpcomingClosureReport:"2023 年 9 月 7 日之後，該報告將被移除。&lt;br&gt;相關數據請查看輸贏分析報告，以獲得更好的體驗。&lt;br&gt;如果您沒有權限查看輸贏分析報告，請聯繫最高權限帳號擁有者！",
 MessageCommCannotGreaterThan:"佣金不能大於15%的",
 MessageCommNoChange:"佣金沒有更改",
 MessageGroupCreationFail:"創建組失敗",

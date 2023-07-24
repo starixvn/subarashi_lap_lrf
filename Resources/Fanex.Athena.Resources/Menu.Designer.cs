@@ -628,6 +628,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Upcoming Report Closures.
+        /// </summary>
+        public static string upcomingreportclosures {
+            get {
+                return ResourceManager.GetString("upcomingreportclosures", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Weekly Live Matches.
         /// </summary>
         public static string weeklylivematches69 {

@@ -14,6 +14,13 @@ define([
                 GridHelper.resizeGrid();
                 _me.initDateRangePicker();
                 SortableHeader.createSortingIcon(_me.submitForm);
+                if (Number($("#IsShowUpcomingClosurePopUp").val()))
+                {
+                    Site.addUpComingClosurePopup({
+                        key: 'WinLossByBetType'
+                    })
+                }
+                
                 Site.addUserGuide({
                     resourceName: 'WinLossByBetType',
                     title: Site.getSingleResource('WinLossByBetType')

@@ -4939,6 +4939,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This report will no longer be available after September 7th, 2023.&lt;br&gt;For related data, please refer to Win Loss Analysis report, which provides a better experience.&lt;br&gt;In case you don&apos;t have permission to view Win Loss Analysis report, please contact the administrator!.
+        /// </summary>
+        public static string Message_UpcomingClosureReport {
+            get {
+                return ResourceManager.GetString("Message_UpcomingClosureReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to CLOSED: player cannot be restored forever!.
         /// </summary>
         public static string MessageBatchUpdateAccountStatus_Close {

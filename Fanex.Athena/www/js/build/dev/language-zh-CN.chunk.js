@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 7/19/2023 5:13:56 PM
+﻿// Generated at: 7/13/2023 10:49:00 AM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -595,6 +595,7 @@ MaxPerMatch2:"累计单场限额",
 May:"五月",
 Member:"玩家",
 Message_RemoveCustomerLog:"会员日志即将于4月21日上午11点(GMT+8)移除，敬请使用玩家管理取代相关查询。谢谢!",
+Message_UpcomingClosureReport:"2023 年 9 月 7 日之后，该报告将被移除。&lt;br&gt;相关数据请查看输赢分析报告，以获得更好的体验。&lt;br&gt;如果您没有权限查看输赢分析报告，请联系最高权限帐号拥有者！",
 MessageCommCannotGreaterThan:"佣金不能大于15%",
 MessageCommNoChange:"佣金没有更改",
 MessageGroupCreationFail:"创建组失败",

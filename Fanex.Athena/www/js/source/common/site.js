@@ -1,6 +1,6 @@
 ﻿/*global _language_en_US*/
-define(['jquery', 'common/querystring', 'common/popup', 'extensions/prototype', 'components/selectlist'],
-    function ($, QueryString, Popup) {// jshint ignore:line
+define(['jquery', 'common/querystring', 'common/popup', 'helpers/htmlHelper', 'extensions/prototype', 'components/selectlist'],
+    function ($, QueryString, Popup, HtmlHelper) {// jshint ignore:line
         'use strict';
         const BASE_CURRENCY_LIST = { 'eur': '-1', 'usd': '-2', 'gbp': '-3', 'myr': '-4', 'cny': '-5', 'thb': '-6', 'idr': '-7', 'inh': '-8', 'bdt': '-9', 'inr': '-10', 'usdt': '-99' };
         var BASE_CURRENCY = {};
@@ -194,6 +194,28 @@ define(['jquery', 'common/querystring', 'common/popup', 'extensions/prototype', 
                     $popup.flatPopup('show');
                 }
             });
+        }
+
+        function addUpComingClosurePopup(options){
+            if(getCookie(options.key)){
+                return;
+            }
+            const defaultOptions = {
+                id: 'UpcomingClosure',
+                title: getSingleResource('Notification').toUpperCase(),
+                width: 650,
+                height: 200,
+                padding: 10,
+                onOpen: function(){
+                    setCookie(options.key, true);
+                }
+            };
+            let $popup = $('<div></div>');
+            const msg = getSingleResource(HtmlHelper.decode(getSingleResource('Message_UpcomingClosureReport')));
+            let $content = $(`<div style='font-size:13px'></div>`).append(msg);
+            $popup.html($content);
+            const newOptions = $.extend(defaultOptions, options);
+            Popup.openPopup($popup, newOptions);
         }
 
         function asNull(text) {
@@ -524,6 +546,29 @@ define(['jquery', 'common/querystring', 'common/popup', 'extensions/prototype', 
             return REQUEST_VERIFICATION_TOKEN;
         }
 
+        function setCookie(cname, cvalue, exdays) {
+            const d = new Date();
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            let expires = "expires="+d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+          }
+          
+          function getCookie(cname) {
+            let name = cname + "=";
+            let ca = document.cookie.split(';');
+            for(let i = 0; i < ca.length; i++) {
+              let c = ca[i];
+              while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+              }
+              if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+              }
+            }
+            return "";
+          }
+          
+
         return {
             initialize: initialize,
             setProductCodeListParam: setProductCodeListParam,
@@ -534,6 +579,7 @@ define(['jquery', 'common/querystring', 'common/popup', 'extensions/prototype', 
             getHistoryDate: getHistoryDate,
             isBaseCurrency: isBaseCurrency,
             addUserGuide: addUserGuide,
+            addUpComingClosurePopup: addUpComingClosurePopup,
             asNull: asNull,
             unBlockUI: unBlockUI,
             blockUI: blockUI,
@@ -564,6 +610,8 @@ define(['jquery', 'common/querystring', 'common/popup', 'extensions/prototype', 
             getLrfSubsidiary: getLrfSubsidiary,
             assignSubsidiaryData: assignSubsidiaryData,
             tryIgnoreSharding,
-            ignoreSharding
+            ignoreSharding,
+            setCookie,
+            getCookie
         };
     });

@@ -22,6 +22,8 @@ namespace Fanex.Athena.Model.Report.ViewModel
 
         public DateTime BalanceUpDay { get; set; }
 
+        public bool IsShowUpcomingClosurePopUp { get; set; }
+
         public int ColumnCount { get; set; }
 
         public WinLossByBetType Total { get; set; }

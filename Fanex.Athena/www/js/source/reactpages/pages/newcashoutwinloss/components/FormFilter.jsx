@@ -373,8 +373,8 @@ export const FormFilter = props => {
                 </>}      
             </div>
             <div className="row">
-                <div class="col-12 col-sm-4 col-md-3 col-xl-3">
-                    <ul class="list result-note">
+                <div className="col-12 col-sm-4 col-md-3 col-xl-3">
+                    <ul className="list result-note">
                         <li>{LangHelper.getSingleResource('CashOutWL_SportNote')}</li>
                     </ul>
                 </div>

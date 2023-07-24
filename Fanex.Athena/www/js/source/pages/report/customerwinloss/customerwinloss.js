@@ -86,6 +86,10 @@
 
         function initialize() {
             Site.initialize();
+            
+            Site.addUpComingClosurePopup({
+                key: 'CustomerWL'
+            })
 
             Site.addUserGuide({
                 resourceName: 'CustomerWL',
