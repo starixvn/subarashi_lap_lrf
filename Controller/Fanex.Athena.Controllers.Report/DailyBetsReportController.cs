@@ -47,7 +47,7 @@ namespace Fanex.Athena.Controllers.Report
 
             var viewModel = new DailyBetsViewModel
             {
-                CurrencyList = SessionServiceInstance.LicenseeSession.IsShowVND ? HardcodeVNDForFakeLicensee(userSession.CurrencyList) : userSession.CurrencyList,
+                CurrencyList = BuildCurrencyList(),
                 SportList = sportList,
                 ProductOptions = productAccess.ProductList.Select(i => new ProductOption
                 {

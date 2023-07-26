@@ -152,7 +152,7 @@
                 OfferedSubProductList = oauthInfo.OfferedSubProductList,
                 OfferedOddsGroupsList = oauthInfo.OfferedOddsGroupList,
                 SiteDBServer = oauthInfo.SiteDBServer,
-                IsShowVND = oauthInfo.IsShowVND
+                AuditCurrencies = oauthInfo.AuditCurrencies
             };
 
         private UserAuthInfo GenerateUserInfo(IOAuthInfo oauthInfo)

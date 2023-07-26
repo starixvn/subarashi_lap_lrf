@@ -126,7 +126,7 @@ namespace Fanex.Athena.Service.Core.Users
                 OfferedSubProductList = oauthInfo.OfferedSubProductList,
                 OfferedOddsGroupsList = oauthInfo.OfferedOddsGroupList,
                 SiteDBServer = oauthInfo.SiteDBServer,
-                IsShowVND = oauthInfo.IsShowVND
+                AuditCurrencies = oauthInfo.AuditCurrencies
             };
 
         private bool OfferCryptoCurrencyLicensees(string siteName)

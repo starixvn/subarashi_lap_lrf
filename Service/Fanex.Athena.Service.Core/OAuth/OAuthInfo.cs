@@ -141,7 +141,14 @@ namespace Fanex.Athena.Service.Core.OAuth
             }
         }
 
-        public bool IsShowVND => GetClaimValue<bool>("IsShowVND");
+        public IEnumerable<AuditCurrency> AuditCurrencies
+        {
+            get
+            {
+                var auditCurrenciesClaims = _claims.Where(_ => _.Type.Equals("AuditCurrencies", StringComparison.OrdinalIgnoreCase));
+                return auditCurrenciesClaims.Select(_ => JsonConvert.DeserializeObject<AuditCurrency>(_.Value)).ToList();
+            }
+        }
 
         private T GetClaimValue<T>(string claimType)
             => (T)Convert.ChangeType(GetClaimValue(claimType), typeof(T));

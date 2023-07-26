@@ -1,13 +1,14 @@
 ﻿namespace Fanex.Athena.DataAccess.Report.UnitTests
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
     using Core.UnitTests.TestHelpers;
 
     using Data;
-
+    using Fanex.Athena.Model.Auth;
     using Model.Report.MetaModel;
 
     using NSubstitute;
@@ -54,9 +55,10 @@
         {
             // Arrange
             DataAccess.GetObjectDb(Arg.Is(Sp)).Returns(ObjectDb);
+            var auditCurrencyList = new List<AuditCurrency>();
 
             // Action
-            await DataAccess.GetData(_metaModel, UserCurrencyList);
+            await DataAccess.GetData(_metaModel, UserCurrencyList, auditCurrencyList);
 
             // Assert
             Assert.Multiple(() =>
@@ -97,9 +99,10 @@
                 currencyid = CurrencyId
             };
             MapReaderData(readerDataMapping);
+            var auditCurrencyList = new List<AuditCurrency>();
 
             // Action
-            var result = await DataAccess.GetData(_metaModel, UserCurrencyList);
+            var result = await DataAccess.GetData(_metaModel, UserCurrencyList, auditCurrencyList);
             var firstItem = result.DataList.First();
             var firstTotalItem = result.TotalDataList.First();
 
@@ -154,9 +157,10 @@
             _metaModel.ReportBy = 3;
             _metaModel.FromDate = new DateTime(2023, 3, 26);
             _metaModel.ToDate = new DateTime(2023, 5, 6);
+            var auditCurrencyList = new List<AuditCurrency>();
 
             // Action
-            var result = await DataAccess.GetData(_metaModel, UserCurrencyList);
+            var result = await DataAccess.GetData(_metaModel, UserCurrencyList, auditCurrencyList);
             var firstItem = result.DataList.First();
             var firstTotalItem = result.TotalDataList.First();
 

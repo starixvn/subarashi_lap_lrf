@@ -28,25 +28,30 @@
             }).ToList();
         }
 
-        protected static IDictionary<int, string> HardcodeVNDForFakeLicensee(IDictionary<int, string> currencyList)
+        protected IDictionary<int, string> BuildCurrencyList()
         {
-            foreach (var currency in CurrencyType.INHCurrencyList)
+            var currencyList = SessionServiceInstance.UserSession.CurrencyList;
+            var auditCurrency = SessionServiceInstance.LicenseeSession.AuditCurrencies;
+
+            if (auditCurrency != null)
             {
-                if (currencyList.TryGetValue(currency, out _))
+                foreach (var currency in auditCurrency)
                 {
-                    currencyList[currency] = "VND";
+                    foreach (var tempCurrency in currencyList.Where(_ => String.Equals(_.Value, currency.Name, StringComparison.InvariantCultureIgnoreCase)).ToList())
+                    {
+                        currencyList[tempCurrency.Key] = currency.HardCodeName;
+                    }
                 }
             }
 
             return currencyList;
         }
-        
+
         protected static DateTime GetSelectedDate(ReportSetting reportSetting)
         {
             return DateTimeHelper.GetMinDate(
                 reportSetting.MaxDate,
                 reportSetting.TimeZone.HasValue ? DateTime.UtcNow.AddHours(reportSetting.TimeZone.Value) : DateTime.Now);
         }
-
     }
 }
