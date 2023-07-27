@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 using Fanex.Athena.DataAccess.Core;
+using Fanex.Athena.DataAccess.Core.Extensions;
 using Fanex.Athena.Extension.Helper;
 using Fanex.Athena.Model.Core.MetaModel;
 using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
 using Fanex.Athena.Model.Customer.MetaModel;
-using Fanex.Athena.Resources;
+using Fanex.Common.Extensions;
 using Fanex.Data;
 
 namespace Fanex.Athena.DataAccess.Customer
@@ -58,6 +59,14 @@ namespace Fanex.Athena.DataAccess.Customer
             player.AgentId = Convert.ToInt32(reader["AgentID"]);
             player.IsVip = Convert.ToBoolean(reader["isVIP"]);
             player.IsBA = Convert.ToBoolean(reader["IsBA"]);
+
+            var hasLastMarkDate = reader.HasColumn("LastMaskDate");
+
+            if (hasLastMarkDate)
+            {
+                var lastMarkDate = reader["LastMaskDate"];
+                player.RiskLevelLastMarkDate = !lastMarkDate.IsNullOrDBNull() ? Convert.ToDateTime(lastMarkDate).ToString("MM/dd/yyyy hh:mm:ss tt") : "-";
+            }
 
             var customerClass = reader["CustomerClass"]?.ToString();
             player.CustomerClass = string.IsNullOrWhiteSpace(customerClass) ? "0" : customerClass;

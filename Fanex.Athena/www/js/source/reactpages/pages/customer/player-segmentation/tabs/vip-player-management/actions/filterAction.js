@@ -26,6 +26,13 @@ export const setSelectedRiskLevel = selectedRiskLevel => {
     }
 }
 
+export const setSearchingDateRangeOption = (value) => {
+    return {
+        type: types.SET_SEARCHING_DATE_RANGE_OPTION,
+        data: value
+    }
+}
+
 export const setDateRange = dateRangeAction.setDateRange;
 export const setSelectedCurrency = currencyAction.setSelectedCurrency;
 export const setUsername = usernameAction.setUsername;

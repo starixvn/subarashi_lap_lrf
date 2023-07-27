@@ -30,7 +30,8 @@ export const SortMapper = {
         'systemId': 1,
         'externalId': 2,
         'lastModifiedDate': 3,
-        'riskLevel': 4
+        'riskLevel': 4,
+        'riskLevelLastMarkDate': 5
     },
     sortType: {
         'asc': 1,

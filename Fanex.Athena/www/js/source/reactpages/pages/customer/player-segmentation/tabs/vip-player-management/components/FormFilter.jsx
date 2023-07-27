@@ -13,12 +13,14 @@ import Site from '@jsroot/lib/site'
 import AppData from '@jsroot/lib/AppData'
 import DataService from '@jsroot/lib/DataService.js'
 import { ActionCreators } from '../actions'
-import { Url } from '../lib/constants';
+import { Url, SearchingDateRangeOptions } from '../lib/constants';
 import { SubsidiaryViewType, TreeViewOption } from '@jsroot/constants/report'
 import DataSourceHelper from '../../../lib/helpers/dataSourceHelper';
 import ParamHelper from "../lib/helpers/paramHelper";
 import GridHelper from "../../../lib/helpers/gridHelper";
-
+import { DateRange } from '@jsroot/components/date-range';
+import SearchingDateRangeOption from "./SearchingDateRangeOption";
+import { tabKeys } from '../../../lib/constants';
 export class FormFilter extends PureComponent {
     constructor(props) {
         super(props);
@@ -26,7 +28,9 @@ export class FormFilter extends PureComponent {
 
     _submit = (event) => {
         event.preventDefault();
-        const params = ParamHelper.ToAPIParams(this.props);
+        var isCheckAll = !this.props.searchingDateRangeOption || this.props.searchingDateRangeOption == SearchingDateRangeOptions.AllDate;
+        
+        const params = ParamHelper.ToAPIParams(this.props, isCheckAll);
         if (!params) {
             return;
         }
@@ -54,10 +58,10 @@ export class FormFilter extends PureComponent {
                 var disposition = response.headers["content-disposition"];
                 var filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
                 var matches = filenameRegex.exec(disposition);
-                if (matches != null && matches[1]) { 
+                if (matches != null && matches[1]) {
                     filename = matches[1].replace(/['"]/g, '');
                 }
-                
+
                 Site.downloadFile(response.data, filename);
             }
         });
@@ -147,7 +151,26 @@ export class FormFilter extends PureComponent {
                 onChange={(_, selectedItemsKey) => {
                     this.props.setSelectedRiskLevel(selectedItemsKey);
                     var customerClassSelected = riskLevelList.filter(r => selectedItemsKey.includes(r.key)).map(r => r.customerClassList).join(',');
-                    this.props.setSelectedCustomerClass(customerClassSelected);}} />);
+                    this.props.setSelectedCustomerClass(customerClassSelected);
+                }} 
+            />
+        );
+    }
+
+    _renderRiskLevelLastMarkDate() {
+        const dateRange = this.props.dateRange;
+        const dateConstraint = AppData[tabKeys.vipPlayerManagement].dateConstraint;
+        const isDisabled = !this.props.searchingDateRangeOption || this.props.searchingDateRangeOption == SearchingDateRangeOptions.AllDate;
+        const className = !this.props.subsidiarySearch ? { dateRange:"rdr-DateRange rdr-DateRange-index rdr-DateRange-right-align" } : null;
+
+        return (
+            <div className={isDisabled ? 'datepicker-disabled' : ''}>
+                <DateRange startDate={dateRange.fromDate} endDate={dateRange.toDate}
+                    minDate={dateConstraint.minDate} maxDate={dateConstraint.maxDate}
+                    today={dateRange.toDate} limitedMonthRange={dateConstraint.limitedMonthRange}
+                    onChange={this.props.setDateRange} classNames={className}/>
+            </div>
+        )
     }
 
     render() {
@@ -200,6 +223,21 @@ export class FormFilter extends PureComponent {
                             {this._renderRiskLevelSelectList()}
                         </div>
                     </div>
+                    <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
+                        <div className="form-group">
+                            <label className="label-text">
+                                {LangHelper.getSingleResource("RiskLevelLastMarkDate").replace("&apos;","'")}
+                                <SearchingDateRangeOption
+                                    value={this.props.searchingDateRangeOption}
+                                    onChange={(event) => {
+                                        this.props.setSearchingDateRangeOption(event.target.value)
+                                        // do something
+                                    }}
+                                />
+                            </label>
+                            {this._renderRiskLevelLastMarkDate()}
+                        </div>
+                    </div>
                     <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-1">
                         <div className="form-group">
                             <div className="button-group">
@@ -218,13 +256,14 @@ function mapDispatchToProps(dispatch) {
         setDateRange, setSelectedVipOption, setUsername, setSelectedCurrency,
         setSelectedParams, searchPlayer, setPagingOption, setSubsidiaryList,
         getUserGuideContent, setSubsidiarySearch, setSelectedCustomerClass,
-        setSelectedRiskLevel } = ActionCreators;
+        setSelectedRiskLevel, setSearchingDateRangeOption 
+    } = ActionCreators;
 
     return bindActionCreators(Object.assign({}, {
         setSelectedVipOption, setDateRange, setUsername, setSelectedCurrency,
         setSelectedParams, searchPlayer, setPagingOption, setSubsidiaryList,
         getUserGuideContent, setSubsidiarySearch, setSelectedCustomerClass,
-        setSelectedRiskLevel
+        setSelectedRiskLevel, setSearchingDateRangeOption
     }), dispatch);
 }
 
@@ -233,7 +272,8 @@ function mapStateToProps(state) {
         dateRange, selectedVipOption, selectedCurrency, selectedParams,
         username, pagingOption, selectedTabKey, userGuideContent,
         selectedSubsidiary, subsidiarySearch, selectedCustomerClass,
-        selectedRiskLevel } = state;
+        selectedRiskLevel, searchingDateRangeOption 
+    } = state;
 
     return Object.assign({}, {
         selectedVipOption,
@@ -247,8 +287,9 @@ function mapStateToProps(state) {
         selectedSubsidiary,
         subsidiarySearch,
         selectedCustomerClass,
-        selectedRiskLevel
+        selectedRiskLevel,
+        searchingDateRangeOption
     });
-};
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormFilter);
