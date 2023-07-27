@@ -152,7 +152,7 @@
                 OfferedSubProductList = oauthInfo.OfferedSubProductList,
                 OfferedOddsGroupsList = oauthInfo.OfferedOddsGroupList,
                 SiteDBServer = oauthInfo.SiteDBServer,
-                AuditCurrencies = oauthInfo.AuditCurrencies
+                AuditCurrencies = oauthInfo.AuditCurrencies.Where(currency => currency != null).ToList(),
             };
 
         private UserAuthInfo GenerateUserInfo(IOAuthInfo oauthInfo)
