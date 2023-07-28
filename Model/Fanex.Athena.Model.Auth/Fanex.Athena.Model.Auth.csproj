@@ -44,6 +44,7 @@
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuditCurrency.cs" />
     <Compile Include="CurrencyUser.cs" />
     <Compile Include="DataDomain\BtcViewInfo.cs" />
     <Compile Include="Enum\AppMode.cs" />

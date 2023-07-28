@@ -9,6 +9,7 @@
     using Core.Extensions;
     using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Extension.Utility;
+    using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
@@ -20,7 +21,7 @@
 
     public class SpecialLicenseeWinLossDataAccess : BaseDataAccess, ISpecialLicenseeWinLossDataAccess
     {
-        public async Task<ReportResultModel<LicenseeWinLoss>> GetData(SpecialLicenseeWinLossMetaModel metaModel, IDictionary<int, string> currencyList)
+        public async Task<ReportResultModel<LicenseeWinLoss>> GetData(SpecialLicenseeWinLossMetaModel metaModel, IDictionary<int, string> currencyList, IEnumerable<AuditCurrency> auditCurrencyList)
         {
             const string UspName = "Lrf_Rpt_LicWinloss_FromAPI";
 
@@ -30,7 +31,7 @@
 
                 using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
                 {
-                    return ReadData(reader, currencyList, metaModel);
+                    return ReadData(reader, currencyList, auditCurrencyList, metaModel);
                 }
             }
         }
@@ -163,7 +164,8 @@
 
         private ReportResultModel<LicenseeWinLoss> ReadData(
             IDataReader reader,
-             IDictionary<int, string> currencyList,
+            IDictionary<int, string> currencyList,
+            IEnumerable<AuditCurrency> auditCurrencyList,
             SpecialLicenseeWinLossMetaModel metaModel)
         {
             var dataList = new List<LicenseeWinLoss>();
@@ -175,10 +177,11 @@
             {
                 var currencyId = reader.ToInt("currencyid");
                 var currencyName = currencyList?.GetValueOrDefault(currencyId, currencyId.ToString());
+                var hardCodeCurrency = auditCurrencyList.FirstOrDefault(_ => String.Equals(_.Name, currencyName, StringComparison.InvariantCultureIgnoreCase))?.HardCodeName;
                 var item = new LicenseeWinLoss
                 {
                     CurrencyId = currencyId,
-                    CurrencyName = metaModel.IsShowVND && currencyName == "INH" ? "VND" : currencyName,
+                    CurrencyName = !string.IsNullOrEmpty(hardCodeCurrency) ? hardCodeCurrency : currencyName,
                     CustomerWinLoss = reader.ToDecimal("winlost"),
                     LicenseeWL = ReadLicenseeWinLossList(reader, licenseeWLColumns),
                     TurnOver = ReadTurnoverList(reader, turnoverColumns),

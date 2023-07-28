@@ -1,16 +1,15 @@
 ﻿namespace Fanex.Athena.Controllers.Report
 {
-    using Fanex.Athena.Model.Core.DataDomain;
-    using Fanex.Athena.Extension.Helper;
-    using Fanex.Athena.Model.Core.DTO.Configuration;
-    using Fanex.Athena.Web.ActionFilter;
-    using Model.Core.DTO.Common;
-    using Model.Core.MetaModel.Product;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
     using System.Web.SessionState;
+    using Fanex.Athena.Extension.Helper;
+    using Fanex.Athena.Model.Core.DTO.Configuration;
+    using Fanex.Athena.Web.ActionFilter;
+    using Model.Core.DTO.Common;
+    using Model.Core.MetaModel.Product;
 
     [SessionState(SessionStateBehavior.ReadOnly)]
     [UMFilter]
@@ -28,25 +27,30 @@
             }).ToList();
         }
 
-        protected static IDictionary<int, string> HardcodeVNDForFakeLicensee(IDictionary<int, string> currencyList)
+        protected IDictionary<int, string> BuildCurrencyList()
         {
-            foreach (var currency in CurrencyType.INHCurrencyList)
+            var currencyList = SessionServiceInstance.UserSession.CurrencyList;
+            var auditCurrency = SessionServiceInstance.LicenseeSession.AuditCurrencies;
+
+            if (auditCurrency != null && auditCurrency.Any())
             {
-                if (currencyList.TryGetValue(currency, out _))
+                foreach (var currency in auditCurrency)
                 {
-                    currencyList[currency] = "VND";
+                    foreach (var tempCurrency in currencyList.Where(_ => String.Equals(_.Value, currency.Name, StringComparison.InvariantCultureIgnoreCase)).ToList())
+                    {
+                        currencyList[tempCurrency.Key] = currency.HardCodeName;
+                    }
                 }
             }
 
             return currencyList;
         }
-        
+
         protected static DateTime GetSelectedDate(ReportSetting reportSetting)
         {
             return DateTimeHelper.GetMinDate(
                 reportSetting.MaxDate,
                 reportSetting.TimeZone.HasValue ? DateTime.UtcNow.AddHours(reportSetting.TimeZone.Value) : DateTime.Now);
         }
-
     }
 }

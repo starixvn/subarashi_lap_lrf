@@ -44,6 +44,6 @@ namespace Fanex.Athena.Service.Core.OAuth
         string AccessToken { get; }
         DateTime AccessTokenLifeTime { get; }
         string RefreshToken { get; }
-        bool IsShowVND { get; }
+        IEnumerable<AuditCurrency> AuditCurrencies { get; }
     }
 }

@@ -55,7 +55,7 @@
             {
                 Language = SessionLanguage,
                 CurrencyList = new Dictionary<int, string>(),
-                CurrencyAgentList = new Dictionary<int, int[]>(),
+                CurrencyAgentList = new Dictionary<int, int[]>()
             });
             ProductService = Substitute.For<IProductService>();
             SportService = Substitute.For<ISportService>();
@@ -96,7 +96,8 @@
             {
                 LicenseeId = SessionLicenseeId,
                 LicenseeName = SessionLicenseeName,
-                OfferedSubProductList = SubProduct
+                OfferedSubProductList = SubProduct,
+                AuditCurrencies = new List<AuditCurrency>()
             };
 
             StubUserSessionData(userSession);

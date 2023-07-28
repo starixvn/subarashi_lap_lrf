@@ -53,7 +53,7 @@
             var model = new GrossGamingRevenueViewModel
             {
                 Param = param,
-                CurrencyList = SessionServiceInstance.LicenseeSession.IsShowVND ? HardcodeVNDForFakeLicensee(userSession.CurrencyList) : userSession.CurrencyList,
+                CurrencyList = BuildCurrencyList(),
                 ReportSetting = reportSetting,
                 BaseCurrencyList = baseCurrencyList,
                 BaseCurrencySetting = reportSetting.BaseCurrencies,

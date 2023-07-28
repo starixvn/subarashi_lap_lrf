@@ -22,6 +22,6 @@ namespace Fanex.Athena.Model.Auth
 
         public string SiteDBServer { get; set; }
 
-        public bool IsShowVND { get; set; }
+        public IEnumerable<AuditCurrency> AuditCurrencies { get; set; }
     }
 }
