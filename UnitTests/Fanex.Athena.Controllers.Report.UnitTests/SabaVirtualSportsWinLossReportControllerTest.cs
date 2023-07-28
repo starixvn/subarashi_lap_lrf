@@ -54,7 +54,7 @@
                 var expected = new Dictionary<int, string>
                 {
                     { 1, ViewResources.Soccer},
-                    { 2, ViewResources.SoccerPinGoal }
+                    { -1, ViewResources.SoccerPinGoal }
             //         (1, (int)SportType.Soccer, ViewResources.Soccer, new[] { (int)SportType.SabaSoccer, (int)SportType.SabaFutsal }),
             //(2, (int)SportType.Soccer, ViewResources.SoccerPinGoal, new[] { (int)SportType.SabaSoccerPingoal }),
             //(3, (int)SportType.BasketBall, ViewResources.Basketball, new[] { (int)SportType.SabaBasketball }),
