@@ -39,6 +39,7 @@
         public const string ReportSabaVirtualSportsWinLoss = "SabaVirtualSportsWinLoss";
         public const string ReportLastBetsMonitoring = "LastBetsMonitoring26";
         public const string ReportLicenseeWinLoss = "LicenseeWinLoss27";
+        public const string AuditLicenseeWinLoss = "AuditLicenseeWinLoss";
         public const string ReportSettledMatchCount = "SettledMatchCount28";
         public const string ReportCustomerWinLoss = "CustomerWinLoss29";
         public const string ReportCustomerPendingFunds = "CustomerPendingFunds30";

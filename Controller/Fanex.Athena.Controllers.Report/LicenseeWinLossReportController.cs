@@ -14,7 +14,7 @@
     using Fanex.Athena.Web.ActionFilter;
     using Model.Core.DTO.Common;
 
-    [FunctionAuthorization(PermissionKeys.ReportLicenseeWinLoss)]
+    [FunctionAuthorization(PermissionKeys.ReportLicenseeWinLoss, PermissionKeys.AuditLicenseeWinLoss)]
     public class LicenseeWinLossReportController : ReportBaseController
     {
         private readonly IReportSettingService _reportSettingService;

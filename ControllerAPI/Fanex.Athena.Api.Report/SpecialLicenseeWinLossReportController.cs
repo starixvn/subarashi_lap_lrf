@@ -25,7 +25,7 @@
 
     using Service.Core.Common.Interfaces;
 
-    [ApiFunctionAuthorization(PermissionKeys.ReportLicenseeWinLoss, PermissionKeys.ReportGrossGamingRevenue)]
+    [ApiFunctionAuthorization(PermissionKeys.ReportLicenseeWinLoss, PermissionKeys.AuditLicenseeWinLoss,  PermissionKeys.ReportGrossGamingRevenue)]
     public class SpecialLicenseeWinLossReportController : ApiReportBaseController
     {
         private readonly IReportSettingService _reportSettingService;
