@@ -137,6 +137,7 @@ namespace Fanex.Athena.Service.Core.UnitTests.Users
                 AccessToken = FakeHelper.Create<string>()
             };
             _sessionService.UserSession.Returns(userSession);
+            _sessionService.SessionID.Returns("test");
             var httpRequest = Substitute.For<HttpRequestBase>();
             var httpResponse = Substitute.For<HttpResponseBase>();
             var httpCache = Substitute.For<HttpCachePolicyBase>();

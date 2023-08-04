@@ -146,7 +146,9 @@ namespace Fanex.Athena.Service.Core.OAuth
             get
             {
                 var auditCurrenciesClaims = _claims.Where(_ => _.Type.Equals("AuditCurrencies", StringComparison.OrdinalIgnoreCase));
+#pragma warning disable S2365 // Properties should not make collection or array copies
                 return auditCurrenciesClaims.Select(_ => JsonConvert.DeserializeObject<AuditCurrency>(_.Value)).ToList();
+#pragma warning restore S2365 // Properties should not make collection or array copies
             }
         }
 
