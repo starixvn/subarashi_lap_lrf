@@ -63,6 +63,7 @@
                         "~/Scripts/Languages/ViewResources.zh-CN.js",
                         "~/Scripts/Languages/ViewResources.zh-Hans.js",
                         "~/Scripts/Languages/ViewResources.zh-TW.js",
+                        "~/Scripts/Languages/ViewResources.vi-VN.js",
                         "~/Scripts/Global/site.js",
                         "~/Scripts/Helper/ProductListHelper.js",
                         "~/Scripts/Global/query.string.js",

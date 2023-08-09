@@ -1,0 +1,327 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="1x225" xml:space="preserve">
+    <value>1 X 2</value>
+  </data>
+  <data name="3-wayhandicap21" xml:space="preserve">
+    <value>Cược chấp 3 cửa</value>
+  </data>
+  <data name="abnormalbet" xml:space="preserve">
+    <value>Cược bất thường</value>
+  </data>
+  <data name="accountmanagement6" xml:space="preserve">
+    <value>QUẢN LÝ TÀI KHOẢN</value>
+  </data>
+  <data name="addnewaccount47" xml:space="preserve">
+    <value>Thêm tài khoản mới</value>
+  </data>
+  <data name="agcasinobalance63" xml:space="preserve">
+    <value>Số dư AG Casino</value>
+  </data>
+  <data name="agcasinowinloss62" xml:space="preserve">
+    <value>Thắng Thua AG Casino</value>
+  </data>
+  <data name="assignpermission49" xml:space="preserve">
+    <value>Gán quyền</value>
+  </data>
+  <data name="bonteamtoscore19" xml:space="preserve">
+    <value>Cả Hai/Một/Không Đội Ghi Bàn</value>
+  </data>
+  <data name="btc79" xml:space="preserve">
+    <value>Trung tâm bán vé cá cược</value>
+  </data>
+  <data name="casinoturnover80" xml:space="preserve">
+    <value>Doanh thu Casino</value>
+  </data>
+  <data name="cleansheet16" xml:space="preserve">
+    <value>Giữ sạch lưới</value>
+  </data>
+  <data name="commissiongrouplist55" xml:space="preserve">
+    <value>Danh sách Nhóm Hoa hồng</value>
+  </data>
+  <data name="correctscore10" xml:space="preserve">
+    <value>Số điểm Chính xác</value>
+  </data>
+  <data name="customerbalance40" xml:space="preserve">
+    <value>Số dư Khách hàng</value>
+  </data>
+  <data name="customerinformation4" xml:space="preserve">
+    <value>THÔNG TIN KHÁCH HÀNG</value>
+  </data>
+  <data name="customerlog56" xml:space="preserve">
+    <value>Nhật ký khách hàng</value>
+  </data>
+  <data name="customerpendingfunds30" xml:space="preserve">
+    <value>Tiền đang chờ xử lý của Khách hàng</value>
+  </data>
+  <data name="customerreports52" xml:space="preserve">
+    <value>BÁO CÁO KHÁCH HÀNG</value>
+  </data>
+  <data name="customersupporttask" xml:space="preserve">
+    <value>Nhiệm vụ hỗ trợ khách hàng</value>
+  </data>
+  <data name="customerturnover51" xml:space="preserve">
+    <value>Doanh thu Khách hàng</value>
+  </data>
+  <data name="customerwinloss29" xml:space="preserve">
+    <value>Thắng Thua Khách Hàng</value>
+  </data>
+  <data name="dailybets81" xml:space="preserve">
+    <value>Cược hàng ngày</value>
+  </data>
+  <data name="doublechance17" xml:space="preserve">
+    <value>Cơ hội kép</value>
+  </data>
+  <data name="editbetsetting70" xml:space="preserve">
+    <value>Sửa giới hạn cược</value>
+  </data>
+  <data name="editnewaccount48" xml:space="preserve">
+    <value>Sửa tài khoản mới</value>
+  </data>
+  <data name="exchangewinloss77" xml:space="preserve">
+    <value>Thắng Thua Exchange</value>
+  </data>
+  <data name="extrapayout" xml:space="preserve">
+    <value>Trả Thưởng Thêm</value>
+  </data>
+  <data name="fglg15" xml:space="preserve">
+    <value>Bàn thắng Đầu/Cuối</value>
+  </data>
+  <data name="forecast2" xml:space="preserve">
+    <value>DỰ BÁO</value>
+  </data>
+  <data name="godoffortunewinloss" xml:space="preserve">
+    <value>Kết quả Thắng Thua God of Fortune</value>
+  </data>
+  <data name="grossgamingrevenue" xml:space="preserve">
+    <value>Tổng Doanh Thu Trò Chơi</value>
+  </data>
+  <data name="handicapoverunderlive24" xml:space="preserve">
+    <value>Cược chấp/Tài Xỉu/Trực tiếp</value>
+  </data>
+  <data name="handicapoverunderlive7" xml:space="preserve">
+    <value>Cược chấp/Tài Xỉu/Trực tiếp</value>
+  </data>
+  <data name="homedrawawaynobet18" xml:space="preserve">
+    <value>Nhà/Hoà/Khách Không Tính</value>
+  </data>
+  <data name="htft14" xml:space="preserve">
+    <value>Giữa Hiệp/ Toàn Trận</value>
+  </data>
+  <data name="lastbetsmonitoring26" xml:space="preserve">
+    <value>Quản lý cược gần nhất</value>
+  </data>
+  <data name="leaguewinloss" xml:space="preserve">
+    <value>Thắng Thua Theo Giải Đấu</value>
+  </data>
+  <data name="licenseewinloss27" xml:space="preserve">
+    <value>Thắng Thua Nhà Cái</value>
+  </data>
+  <data name="licenseewinlossbytimezone76" xml:space="preserve">
+    <value>Thắng Thua Theo Múi Giờ</value>
+  </data>
+  <data name="livereport38" xml:space="preserve">
+    <value>Báo cáo trực tiếp</value>
+  </data>
+  <data name="manageaccount46" xml:space="preserve">
+    <value>Quản lý Tài khoản</value>
+  </data>
+  <data name="matchwinloss31" xml:space="preserve">
+    <value>Thắng thua theo trận</value>
+  </data>
+  <data name="mixparlay12" xml:space="preserve">
+    <value>Cược xiên</value>
+  </data>
+  <data name="mobilewinloss53" xml:space="preserve">
+    <value>Thắng Thua Theo Nền Tảng</value>
+  </data>
+  <data name="moneyline8" xml:space="preserve">
+    <value>Cược Đội Thắng</value>
+  </data>
+  <data name="newcashoutwinloss" xml:space="preserve">
+    <value>Thắng Thua của vé cược đã bán (Mới)</value>
+  </data>
+  <data name="notificationreport" xml:space="preserve">
+    <value>THÔNG BÁO</value>
+  </data>
+  <data name="oddeven1x2dnd9" xml:space="preserve">
+    <value>Lẻ/Chẵn + 1x2 + Hòa/Không Hòa</value>
+  </data>
+  <data name="outright13" xml:space="preserve">
+    <value>Cược thắng</value>
+  </data>
+  <data name="playersegmentation" xml:space="preserve">
+    <value>Phân khúc người chơi</value>
+  </data>
+  <data name="reports3" xml:space="preserve">
+    <value>BÁO CÁO</value>
+  </data>
+  <data name="resetpassword50" xml:space="preserve">
+    <value>Đặt lại mật khẩu</value>
+  </data>
+  <data name="resultamendment_recalculation75" xml:space="preserve">
+    <value>Tất toán lại</value>
+  </data>
+  <data name="results41" xml:space="preserve">
+    <value>Kết quả</value>
+  </data>
+  <data name="sabavirtualsportswinloss" xml:space="preserve">
+    <value>Thắng thua Thể Thao Ảo Saba</value>
+  </data>
+  <data name="settledmatchcount28" xml:space="preserve">
+    <value>Số lượng trận đấu đã hoàn tất</value>
+  </data>
+  <data name="specialba54" xml:space="preserve">
+    <value>SpecialBA</value>
+  </data>
+  <data name="subsidiaryperformance73" xml:space="preserve">
+    <value>Hiệu suất Chi Nhánh</value>
+  </data>
+  <data name="totalbets1" xml:space="preserve">
+    <value>TỔNG CƯỢC</value>
+  </data>
+  <data name="totalgoal11" xml:space="preserve">
+    <value>Tổng số bàn thắng</value>
+  </data>
+  <data name="towintonil20" xml:space="preserve">
+    <value>Thắng áp đảo</value>
+  </data>
+  <data name="turnover39" xml:space="preserve">
+    <value>Doanh Thu</value>
+  </data>
+  <data name="upcomingreportclosures" xml:space="preserve">
+    <value>Ngừng Hỗ Trợ Báo Cáo</value>
+  </data>
+  <data name="weeklylivematches69" xml:space="preserve">
+    <value>Trận đấu trực tiếp Hàng tuần</value>
+  </data>
+  <data name="winlossanalysis" xml:space="preserve">
+    <value>Phân tích Thắng Thua</value>
+  </data>
+  <data name="winlossbybettype33" xml:space="preserve">
+    <value>Thắng Thua theo Loại cược</value>
+  </data>
+  <data name="winlossbyleague59" xml:space="preserve">
+    <value>Thắng Thua Theo Giải Đấu</value>
+  </data>
+  <data name="winlossbyproducts32" xml:space="preserve">
+    <value>Thắng Thua Theo Sản Phẩm</value>
+  </data>
+</root>

@@ -2460,4 +2460,7 @@
   <data name="MatchPrefix" xml:space="preserve">
     <value>前缀查询 范例</value>
   </data>
+  <data name="May2" xml:space="preserve">
+    <value>五月</value>
+  </data>
 </root>

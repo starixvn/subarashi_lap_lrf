@@ -35,6 +35,7 @@ var scriptPaths = {
     langCN: "./www/js/source/common/languages/ViewResources.zh-CN.js",
     langHans: "./www/js/source/common/languages/ViewResources.zh-Hans.js",
     langTW: "./www/js/source/common/languages/ViewResources.zh-TW.js",
+    langVN: "./www/js/source/common/languages/ViewResources.vi-VN.js",
     /*React page*/
     subsidiaryperformance: "./www/js/source/reactpages/pages/subsidiaryperformance/components/index.jsx",
     licenseewlbytimezone: "./www/js/source/reactpages/pages/licenseewl-by-timezone/components/index.jsx",

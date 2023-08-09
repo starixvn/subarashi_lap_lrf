@@ -1157,7 +1157,7 @@
     <value>Are you sure you want to remove this customer from group?</value>
   </data>
   <data name="AlertSetSpecialLevelForCustomerMsg" xml:space="preserve">
-    <value>Are you sure you want to set special level  for this customer?</value>
+    <value>Are you sure you want to set special level for this customer?</value>
   </data>
   <data name="BetListRunning" xml:space="preserve">
     <value>Bet List (Running)</value>
@@ -1406,7 +1406,7 @@
     <value>Updating Currencies is successful.</value>
   </data>
   <data name="UpdateFunctionSuccessfulMsg" xml:space="preserve">
-    <value>Updating Functions is successul.</value>
+    <value>Updating Functions is successful.</value>
   </data>
   <data name="FunctionDeniedMsg" xml:space="preserve">
     <value>Sorry, you don't have permission to access this function.</value>
@@ -2526,7 +2526,7 @@
     <comment>#128082</comment>
   </data>
   <data name="AlreadyUpdateNotVipStatus" xml:space="preserve">
-    <value>Already NOT VIP, no update:  {0}</value>
+    <value>Already NOT VIP, no update: {0}</value>
     <comment>#128082</comment>
   </data>
   <data name="TransactionDate" xml:space="preserve">
@@ -2564,7 +2564,7 @@
     <comment>#128082</comment>
   </data>
   <data name="ConfirmDeactivateVIPPlayer" xml:space="preserve">
-    <value>Are you sure you want to deactivate VIP  for the player(s) ?</value>
+    <value>Are you sure you want to deactivate VIP for the player(s) ?</value>
     <comment>#128082</comment>
   </data>
   <data name="DeactivateVip" xml:space="preserve">
@@ -3363,7 +3363,7 @@
     <value>Apply Parlay</value>
   </data>
   <data name="NextBetInteval" xml:space="preserve">
-    <value>Next Bet Inteval (sec)</value>
+    <value>Next Bet Interval (sec)</value>
   </data>
   <data name="Basketball" xml:space="preserve">
     <value>Basketball</value>
@@ -3512,6 +3512,12 @@
   </data>
   <data name="ProductMGRNG" xml:space="preserve">
     <value>MG-RNG</value>
+  </data>
+  <data name="SearchData" xml:space="preserve">
+    <value>Search data</value>
+  </data>
+  <data name="May2" xml:space="preserve">
+    <value>May</value>
   </data>
   <data name="SabaVirtualSportsNote" xml:space="preserve">
     <value>Saba Virtual Sports does not support System Parlay bet type.</value>

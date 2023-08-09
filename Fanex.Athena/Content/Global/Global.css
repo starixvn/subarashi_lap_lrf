@@ -453,6 +453,9 @@ div#header-wrapper div.languageIcon_zh-CN
 {
     background: url('images/flag_zh-CN.png') no-repeat;
 }
+div#header-wrapper div.languageIcon_vi-VN {
+    background: url('images/flag_vi-VN.png') no-repeat;
+}
 div#header-wrapper div.welcome
 {
     margin-right: 10px;
