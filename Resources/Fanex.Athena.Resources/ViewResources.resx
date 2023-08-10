@@ -3512,4 +3512,7 @@
   <data name="ProductMGRNG" xml:space="preserve">
     <value>MG-RNG</value>
   </data>
+  <data name="SabaVirtualSportsNote" xml:space="preserve">
+    <value>Saba Virtual Sports does not support System Parlay bet type.</value>
+  </data>
 </root>
