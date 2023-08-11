@@ -206,7 +206,7 @@
             formatter: 'currency'
         };
 
-        const colNameList = ['#', 'Day', 'OpeningBalance', 'Deposit', 'Withdrawal', 'Bonus', 'Adjustment',
+        const colNameList = ['#', 'Date', 'OpeningBalance', 'Deposit', 'Withdrawal', 'Bonus', 'Adjustment',
             'ExtraPayout', 'Turnover', 'DrawGame', 'NetTurnover', 'PendingFunds',
             'WinLoss', 'Comm', 'Total', 'ClosingBalance',
             'AffiliateTransfer', 'CasinoTransfer', 'Turnover', 'Comm', 'AmountDueTo'];
