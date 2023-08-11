@@ -1,0 +1,95 @@
+﻿<div class="rule">
+    <h4>
+        Thông Tin Chung
+    </h4>
+    <ul>
+        {sitedb-report-section}
+        <li>The report shall support data on 2 tabs:</li>
+        <ul>
+            <li>The Normal report tab shall support up-to-date data. You can filter data up to 3 months per query.</li>
+            <li>The Real Time report tab shall support instant data from {move-bet-date-from}.</li>
+        </ul>
+        {/sitedb-report-section}
+        {centraldb-report-section}
+        <li>Báo cáo này hỗ trợ cập nhật dữ liệu mới nhất. Bạn có thể xem dữ liệu lên đến 3 tháng trên mỗi truy vấn.</li>
+        {/centraldb-report-section}
+        <li>Bất kỳ truy vấn nào được thực hiện trước 4:00 chiều (GMT-4) trong ngày sẽ trả về dữ liệu đến 4:00 chiều của ngày trước đó. Mỗi truy vấn có thể xem dữ liệu lên đến 1 tháng.</li>
+        <li>Effective Betting Value supports data from 09/01/2014.</li>
+        <li>Báo cáo này chỉ bao gồm vé cược thắng, thua và hòa.</li>
+        <li>Dữ liệu có thể được lọc theo Tiền Tệ và Sản Phẩm.</li>
+        <li>Dịch Vụ Ngoại Hối OANDA sẽ sử dụng tỷ giá hối đoái ở ngày cuối cùng của mỗi tháng đã chọn để chuyển đổi số liệu.</li>
+        <li>Dữ liệu của sản phẩm RNG, Live Casino sẽ có độ trễ lên đến 5 phút sau khi kết toán vé cược.</li>
+        {VS-productlist-section}
+        <li>"Thể Thao Ảo" bao gồm: Bóng Đá Ảo, Đua Ngựa Ảo, Đua Chó Ảo, Đua Xe Ảo, Thể Thao Môtô Ảo, Đua Xe Đạp Ảo, Quần Vợt Ảo.</li>
+        {/VS-productlist-section}
+        {VS2-productlist-section}
+        <li>"Thể Thao Ảo 2" bao gồm: {VS2-sportList}.</li>
+        {/VS2-productlist-section}
+        {VS3-productlist-section}
+        <li>"Thể Thao Ảo 3" bao gồm: Thể Thao Ảo LG.</li>
+        {/VS3-productlist-section}
+        <li>Liên kết 'Trả Thưởng Thêm' chỉ xuất hiện khi vé cược có Tiền Boa, Thưởng Khuyến Mãi, Giải Thưởng Jackpot, Tích Lũy Jackpot, Trao Đổi Điểm SABA, Cược Miễn Phí Saba.club, Tiền Thưởng Arcadia Gaming, Lì Xì Saba, Rút Thăm May Mắn AE Casino, Cược Miễn Phí Vgaming trong khoảng thời gian đã chọn.</li>
+    </ul>
+</div>
+<div class="line">
+</div>
+<div class="rule">
+    <h4>
+        Bộ Lọc Tìm Kiếm
+    </h4>
+    <ul>
+        <li>
+            <b>Tiền Tệ:</b> chọn đơn vị tiền tệ cho dữ liệu cần truy xuất.
+            <ul>
+                <li><b>Tất Cả: Liệt kê tất cả đơn vị tiền tệ được hỗ trợ. </li>
+            </ul>
+        </li>
+        <li><b>Tiền Tệ Cơ Sở:</b> chuyển đổi tất cả dữ liệu sang đơn vị tiền tệ cơ sở nhằm mục đích tham chiếu.</li>
+        <li><b>Mức Độ Rủi Ro:</b> chọn mức độ rủi ro để truy xuất dữ liệu tương ứng.</li>
+        <li><b>Odds Group:</b> selects the Odds Group type which data will be retrieved.</li>
+        <li><b>Sản Phẩm:</b> chọn Loại Sản Phẩm để truy xuất dữ liệu. </li>
+        <li><b>Tên Người Dùng:</b> nhập ID ngoại vi hoặc ID hệ thống của tài khoản cần tìm kiếm.</li>
+    </ul>
+</div>
+<div class="line">
+</div>
+<div class="rule">
+    <h4>
+        Hướng Dẫn Sử Dụng Báo Cáo
+    </h4>
+    <ul>
+        <li><b>External ID:</b> the username registered by Customer.</li>
+        <li>
+            <b>ID Hệ Thống:</b> dãy số được tạo theo trình tự liên tiếp từ hệ thống cho mỗi tài khoản.
+            To view win loss detail, click on External ID.
+        </li>
+        <li><b>Doanh Thu:</b> tổng tiền cược của khách hàng trong khoảng thời gian đã chọn.</li>
+        <li>
+            <b>Thắng Thua Khách Hàng:</b>
+            <ul>
+                <li><b>Thắng Thua:</b> số tiền khách hàng thắng hoặc thua dựa trên kết quả đặt cược.</li>
+                <li><b>Hoa Hồng:</b> tổng hoa hồng tính trên vé cược.</li>
+                <li>
+                    <b>Tổng:</b> tổng số tiền thắng thua bao gồm cả tiền hoa hồng.
+                    <br />
+                    Tổng = Thắng Thua + Hoa hồng
+                </li>
+            </ul>
+        </li>
+        <li><b>Effective Betting Value: </b>absolute value of customer win loss on each bet ticket (0 for draw and voided tickets).</li>
+        <li>
+            <b>Thắng Thua Nhà Cái:</b> số tiền thắng thua mà Nhà Cái đã kết toán với khách hàng.
+            <center>
+                Thắng Thua Nhà Cái = - (Thắng Thua Khách hàng)
+            </center>
+        </li>
+        <li>
+            <b>BA Commission:</b> Licensee Commission income for BA tickets (including won and lose tickets).
+        </li>
+        <li>
+            <b>Tiền BA:</b> khoản tiền kết toán giữa Nhà Cái và bên cung cấp dịch vụ BA.
+            <br />
+            Lưu ý: trong Tiền BA, số âm màu đen là số tiền nhận được, còn số dương màu đen là tiền phải trả.
+        </li>
+    </ul>
+</div>
