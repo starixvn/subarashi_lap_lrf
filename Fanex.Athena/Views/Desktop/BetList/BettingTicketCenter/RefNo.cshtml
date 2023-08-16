@@ -36,8 +36,8 @@
     isAllowTxIDColumn: '@ViewBag.IsAllowTxIDColumn.ToString()' === 'True',
     isAllowedCustomerComm: @Model.ToJson(),
     baseCurrencyList:@Html.Raw(baseCurrencyList.ToJson()),
-    productsRequireUseNameNote: '@ViewBag.ProductsRequireUseNameNote',
-    productsRequireTxIdNote: '@ViewBag.ProductsRequireTxIdNote',
+    productsRequireUseNameNote: '@Html.Raw(@ViewBag.ProductsRequireUseNameNote)',
+    productsRequireTxIdNote: '@Html.Raw(@ViewBag.ProductsRequireTxIdNote)',
     balanceupDay: '@ViewBag.BalanceUpDay',
     tabList: @Html.Raw((ViewBag.TabList as IEnumerable<string>).ToJson())
     };

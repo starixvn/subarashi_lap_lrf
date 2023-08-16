@@ -133,7 +133,7 @@
     <value>Thêm tài khoản mới</value>
   </data>
   <data name="agcasinobalance63" xml:space="preserve">
-    <value>Số dư AG Casino</value>
+    <value>Số Dư AG Casino</value>
   </data>
   <data name="agcasinowinloss62" xml:space="preserve">
     <value>Thắng Thua AG Casino</value>
@@ -145,7 +145,7 @@
     <value>Cả Hai/Một/Không Đội Ghi Bàn</value>
   </data>
   <data name="btc79" xml:space="preserve">
-    <value>Trung tâm bán vé cá cược</value>
+    <value>Trung Tâm Vé Cược</value>
   </data>
   <data name="casinoturnover80" xml:space="preserve">
     <value>Doanh thu Casino</value>
@@ -160,7 +160,7 @@
     <value>Số điểm Chính xác</value>
   </data>
   <data name="customerbalance40" xml:space="preserve">
-    <value>Số dư Khách hàng</value>
+    <value>Số Dư Khách Hàng</value>
   </data>
   <data name="customerinformation4" xml:space="preserve">
     <value>THÔNG TIN KHÁCH HÀNG</value>
@@ -169,22 +169,22 @@
     <value>Nhật ký khách hàng</value>
   </data>
   <data name="customerpendingfunds30" xml:space="preserve">
-    <value>Tiền đang chờ xử lý của Khách hàng</value>
+    <value>Tiền Chờ Xử Lý Của Khách Hàng</value>
   </data>
   <data name="customerreports52" xml:space="preserve">
     <value>BÁO CÁO KHÁCH HÀNG</value>
   </data>
   <data name="customersupporttask" xml:space="preserve">
-    <value>Nhiệm vụ hỗ trợ khách hàng</value>
+    <value>Nhiệm Vụ Hỗ Trợ Khách Hàng</value>
   </data>
   <data name="customerturnover51" xml:space="preserve">
-    <value>Doanh thu Khách hàng</value>
+    <value>Doanh Thu Khách Hàng</value>
   </data>
   <data name="customerwinloss29" xml:space="preserve">
     <value>Thắng Thua Khách Hàng</value>
   </data>
   <data name="dailybets81" xml:space="preserve">
-    <value>Cược hàng ngày</value>
+    <value>Cược Hằng Ngày</value>
   </data>
   <data name="doublechance17" xml:space="preserve">
     <value>Cơ hội kép</value>
@@ -208,7 +208,7 @@
     <value>DỰ BÁO</value>
   </data>
   <data name="godoffortunewinloss" xml:space="preserve">
-    <value>Kết quả Thắng Thua God of Fortune</value>
+    <value>Thần Tài Thắng Thua</value>
   </data>
   <data name="grossgamingrevenue" xml:space="preserve">
     <value>Tổng Doanh Thu Trò Chơi</value>
@@ -226,7 +226,7 @@
     <value>Giữa Hiệp/ Toàn Trận</value>
   </data>
   <data name="lastbetsmonitoring26" xml:space="preserve">
-    <value>Quản lý cược gần nhất</value>
+    <value>Theo Dõi Cược Cuối Cùng</value>
   </data>
   <data name="leaguewinloss" xml:space="preserve">
     <value>Thắng Thua Theo Giải Đấu</value>
@@ -238,13 +238,13 @@
     <value>Thắng Thua Theo Múi Giờ</value>
   </data>
   <data name="livereport38" xml:space="preserve">
-    <value>Báo cáo trực tiếp</value>
+    <value>Báo Cáo Trực Tiếp</value>
   </data>
   <data name="manageaccount46" xml:space="preserve">
     <value>Quản lý Tài khoản</value>
   </data>
   <data name="matchwinloss31" xml:space="preserve">
-    <value>Thắng thua theo trận</value>
+    <value>Thắng Thua Theo Trận</value>
   </data>
   <data name="mixparlay12" xml:space="preserve">
     <value>Cược xiên</value>
@@ -280,13 +280,13 @@
     <value>Tất toán lại</value>
   </data>
   <data name="results41" xml:space="preserve">
-    <value>Kết quả</value>
+    <value>Kết Quả</value>
   </data>
   <data name="sabavirtualsportswinloss" xml:space="preserve">
-    <value>Thắng thua Thể Thao Ảo Saba</value>
+    <value>Thắng Thua Thể Thao Ảo Saba</value>
   </data>
   <data name="settledmatchcount28" xml:space="preserve">
-    <value>Số lượng trận đấu đã hoàn tất</value>
+    <value>Số Lượng Trận Đấu Đã Hoàn Tất</value>
   </data>
   <data name="specialba54" xml:space="preserve">
     <value>SpecialBA</value>
@@ -310,10 +310,10 @@
     <value>Ngừng Hỗ Trợ Báo Cáo</value>
   </data>
   <data name="weeklylivematches69" xml:space="preserve">
-    <value>Trận đấu trực tiếp Hàng tuần</value>
+    <value>Trận Đấu Trực Tiếp Hàng Tuần</value>
   </data>
   <data name="winlossanalysis" xml:space="preserve">
-    <value>Phân tích Thắng Thua</value>
+    <value>Phân Tích Thắng Thua</value>
   </data>
   <data name="winlossbybettype33" xml:space="preserve">
     <value>Thắng Thua theo Loại cược</value>

@@ -18,13 +18,13 @@ export const headerText = {
     licenseeWL: LangHelper.getSingleResource('LicenseeW_L'),
     BACommission: LangHelper.getSingleResource('BACommission'),
     match: LangHelper.getSingleResource('Match'),
-    bettype: LangHelper.getSingleResource('Bettype'),
+    bettype: LangHelper.getSingleResource('BetType'),
 }
 
 export const BreadcrumbText = {
-    main: LangHelper.getSingleResource('League '),
+    main: LangHelper.getSingleResource('League'),
     match: LangHelper.getSingleResource('Match'),
-    bettype: LangHelper.getSingleResource('Bettype')
+    bettype: LangHelper.getSingleResource('BetType')
 }
 
 export const ReportLevel = {

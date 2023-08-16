@@ -112,7 +112,7 @@ const buildTotalRow = (dataItem, showBA) => {
     const {  betCount, turnOver, licenseeWL, customerWL, baComm  } = dataItem;
     return (
         <Row className="grant-total-row" key="grantTotal-row">
-            <Cell className="right-align" colSpan="2">Total</Cell>
+            <Cell className="right-align" colSpan="2">{LangHelper.getSingleResource("Total")}</Cell>
             <Cell className="right-align">{NumberFormat.format(betCount)}</Cell>
             <Cell className="right-align">{NumberFormat.formatDecimal(turnOver)}</Cell>
             <Cell className="right-align">{NumberFormat.formatDecimal(customerWL)}</Cell>

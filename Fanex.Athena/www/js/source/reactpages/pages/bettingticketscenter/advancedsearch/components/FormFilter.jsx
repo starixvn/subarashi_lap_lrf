@@ -628,7 +628,7 @@ export class FormFilter extends Component {
 
                 <div className="row">
                     
-                    <div className="col-1" style={{ flex: "0 0 4%" }}>
+                    <div className="col-1" style={{ flex: "0 0 5%" }}>
                         {LangHelper.getSingleResource('Note')}:
                     </div>
                     <div className="col-9">

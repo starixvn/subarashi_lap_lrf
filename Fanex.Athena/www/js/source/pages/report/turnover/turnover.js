@@ -112,7 +112,7 @@
             }
 
             postdata.BaseCurrency = postdata.BaseCurrency.toUpperCase();
-           
+            
             const option =
             {
                 type: 'POST',
