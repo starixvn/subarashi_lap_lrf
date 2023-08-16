@@ -106,6 +106,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\Interfaces\ICurrencyService.cs" />
+    <Compile Include="Common\CurrencyService.cs" />
     <Compile Include="OAuth\Interfaces\IOAuthInfo.cs" />
     <Compile Include="OAuth\Interfaces\IOAuthService.cs" />
     <Compile Include="OAuth\OAuthInfo.cs" />

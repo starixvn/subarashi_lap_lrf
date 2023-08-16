@@ -28,30 +28,31 @@
             { BaseCurrencyType.BDT,"BDT" },
             { BaseCurrencyType.INR,"INR" },
 
-
             // crypto currency
             { BaseCurrencyType.USDT,"USDT" }
         };
 
-
-        public static readonly IReadOnlyList<int> BaseCurrencyListIds = new List<int>
-        {
-            BaseCurrencyType.Eur,
-            BaseCurrencyType.Usd,
-            BaseCurrencyType.Gbp,
-            BaseCurrencyType.MYR,
-            BaseCurrencyType.CNY,
-            BaseCurrencyType.THB,
-            BaseCurrencyType.IDR,
-            BaseCurrencyType.INH,
-            BaseCurrencyType.BDT,
-            BaseCurrencyType.INR,
+        public static readonly IReadOnlyDictionary<int, string> FlatBaseCurrencyList = new Dictionary<int, string> {
+            { BaseCurrencyType.Eur,"EUR" },
+            { BaseCurrencyType.Usd,"USD" },
+            { BaseCurrencyType.Gbp,"GBP" },
+            { BaseCurrencyType.MYR,"MYR" },
+            { BaseCurrencyType.CNY,"CNY" },
+            { BaseCurrencyType.THB,"THB" },
+            { BaseCurrencyType.IDR,"IDR" },
+            { BaseCurrencyType.INH,"INH" },
+            { BaseCurrencyType.BDT,"BDT" },
+            { BaseCurrencyType.INR,"INR" },
         };
 
+        public static readonly IReadOnlyDictionary<int, string> CryptoBaseCurrencyList = new Dictionary<int, string> {
+            { BaseCurrencyType.USDT,"USDT" }
+        };
 
-        public static readonly IReadOnlyList<int> BaseCryptoCurrencyListIds = new List<int>
-        {
-            BaseCurrencyType.USDT
+        public static readonly IReadOnlyDictionary<int, string> CryptoSupportEURBaseCurrencyList = new Dictionary<int, string> {
+            { BaseCurrencyType.Eur,"EUR" },
+            { BaseCurrencyType.MYR,"MYR" },
+            { BaseCurrencyType.CNY,"CNY" }
         };
 
         public static IReadOnlyDictionary<int, string> VipOnyList => new Dictionary<int, string> {

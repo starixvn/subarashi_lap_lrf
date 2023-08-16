@@ -27,6 +27,11 @@
             get { return GetValue("OfferCryptoCurrencyLicensees"); }
         }
 
+        public string CryptoLicenseesSupportBaseEUR
+        {
+            get { return GetValue("CryptoLicenseesSupportBaseEUR"); }
+        }
+
         public bool IsProduction
         {
             get { return GetValue("Environment") == "PRO"; }

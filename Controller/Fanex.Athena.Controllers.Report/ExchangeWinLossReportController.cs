@@ -3,6 +3,7 @@
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Report.Constants;
     using Fanex.Athena.Model.Report.ViewModel;
+    using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
@@ -22,13 +23,16 @@
     {
         private readonly IReportSettingService _reportSettingService;
         private readonly ISubsidiaryService _subsidiaryService;
+        private readonly ICurrencyService _currencyService;
 
         public ExchangeWinLossReportController(
             IReportSettingService reportSettingService,
-            ISubsidiaryService subsidiaryService)
+            ISubsidiaryService subsidiaryService,
+            ICurrencyService currencyService)
         {
             _reportSettingService = reportSettingService;
             _subsidiaryService = subsidiaryService;
+            _currencyService = currencyService;
         }
 
         public ActionResult Index()
@@ -42,14 +46,12 @@
         {
             var licensee = SessionServiceInstance.LicenseeSession;
             var userSession = SessionServiceInstance.UserSession;
-            bool isOfferCryptoCurrencyLicensee = AppSettingInstance.OfferCryptoCurrencyLicensees.Split(',').Contains(licensee.LicenseeName, StringComparer.InvariantCultureIgnoreCase);
-            var offerCurrencyIds = isOfferCryptoCurrencyLicensee ? SystemConstants.BaseCryptoCurrencyListIds : SystemConstants.BaseCurrencyListIds;
             var currencyList = new Dictionary<int, string>
             {
                 { BaseCurrencyType.All, ViewResources.All }
             };
 
-            foreach (var item in SystemConstants.BaseCurrencyList.Where(_ => offerCurrencyIds.Contains(_.Key)))
+            foreach (var item in _currencyService.GetBaseCurrencyList())
             {
                 currencyList.Add(item.Key, $"{ViewResources.Based} {item.Value}");
             }

@@ -1,11 +1,10 @@
 ﻿@using System.Web.Mvc;
 @using Fanex.Athena.Extension.Helper;
-@using Fanex.Athena.Extension.Utility
 @using Fanex.Athena.Model.Core.MetaModel.Product;
 @using Fanex.Athena.Web.HtmlExtension;
 @using Fanex.Athena.Model.Core.DataDomain;
 @using Fanex.Athena.Resources;
-@using Fanex.Athena.Service.Core.Users.Interfaces
+@using Fanex.Athena.Service.Core.Common.Interfaces
 @helper RenderProductFilter(IEnumerable<ProductOption> productOptions, int LabelSpan, bool isNewLine = true)
 {
     var Url = new UrlHelper(Context.Request.RequestContext);
@@ -39,11 +38,8 @@ bool addBasedOption = false,
 string baseCurrencies = null)
 {
     var selectedName = currencyList.Where(p => p.Key == selected).FirstOrDefault().Key;
-    var session = DependencyResolver.Current.GetService<ISessionService>();
-    var appSettings = DependencyResolver.Current.GetService<IAppSettings>();
-    bool isOfferCryptoCurrencyLicensee = appSettings.OfferCryptoCurrencyLicensees.Split(',').Contains(session.LicenseeSession.LicenseeName, StringComparer.InvariantCultureIgnoreCase);
-    var offerCurrencyIds = isOfferCryptoCurrencyLicensee ? SystemConstants.BaseCryptoCurrencyListIds : SystemConstants.BaseCurrencyListIds;
-    var listBaseCurrencies = SystemConstants.BaseCurrencyList.Where(_ => offerCurrencyIds.Contains(_.Key));
+    var currencyService = DependencyResolver.Current.GetService<ICurrencyService>();
+    var listBaseCurrencies = currencyService.GetBaseCurrencyList();
 
     var selectedBaseCurrency = listBaseCurrencies.FirstOrDefault(i => i.Key == selected).Value;
     if (string.IsNullOrEmpty(selectedBaseCurrency))
