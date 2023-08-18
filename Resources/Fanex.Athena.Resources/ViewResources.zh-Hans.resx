@@ -2487,4 +2487,7 @@
   <data name="DesktopGalaxy" xml:space="preserve">
     <value>桌机银河版</value>
   </data>
+  <data name="MatchPrefix" xml:space="preserve">
+    <value>前缀查询 范例</value>
+  </data>
 </root>

@@ -2457,4 +2457,7 @@
   <data name="Message_UpcomingClosureReport" xml:space="preserve">
     <value>2023 年 9 月 7 日之後，該報告將被移除。&lt;br&gt;相關數據請查看輸贏分析報告，以獲得更好的體驗。&lt;br&gt;如果您沒有權限查看輸贏分析報告，請聯繫最高權限帳號擁有者！</value>
   </data>
+  <data name="MatchPrefix" xml:space="preserve">
+    <value>前缀查询 范例</value>
+  </data>
 </root>

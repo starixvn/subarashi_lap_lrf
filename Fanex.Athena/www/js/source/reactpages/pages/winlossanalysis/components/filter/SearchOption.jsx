@@ -34,6 +34,13 @@ const SearchOption = (props) => {
             </DropdownItem>
             <DropdownItem tag="div">
                 <label className="selection-item">
+                    <input id={SearchMode.MatchPrefix} type="radio" name="searchOption" value={SearchMode.MatchPrefix}
+                        checked={selectedValue == SearchMode.MatchPrefix} onChange={onChange} />
+                    <label htmlFor={SearchMode.MatchPrefix}>{LangHelper.getSingleResource('MatchPrefix')} "<span className="keyword">test</span>"ABCD</label>
+                </label>
+            </DropdownItem>
+            <DropdownItem tag="div">
+                <label className="selection-item">
                     <input id={SearchMode.MatchCase} type="radio" name="searchOption" value={SearchMode.MatchCase}
                         checked={selectedValue == SearchMode.MatchCase} onChange={onChange} />
                     <label htmlFor={SearchMode.MatchCase}>{LangHelper.getSingleResource('MatchCase')} AB"<span className="keyword">test</span>"CD</label>
