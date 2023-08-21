@@ -26,6 +26,8 @@ export const GroupByFilter = (props) => {
             && !!props.selectedBettype
             && !!props.selectedSport
             && !!props.selectedPlatform
+            && !!props.selectedCustomerClass
+            && !!props.selectedOddsGroup
     }
 
     const buildTitle = (params) => {
