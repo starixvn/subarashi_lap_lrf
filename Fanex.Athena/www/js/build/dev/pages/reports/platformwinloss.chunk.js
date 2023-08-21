@@ -8719,7 +8719,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 '2': Site.getSingleResource('DesktopChina'),
                 '3': Site.getSingleResource('DesktopOthers'),
                 '4': Site.getSingleResource('MobileStandard'),
-                '5': Site.getSingleResource('MobileEuro'),
+                '5': Site.getSingleResource('MobileGalaxy'),
                 '6': Site.getSingleResource('MobileCompact'),
                 '7': Site.getSingleResource('MobileOthers'),
                 '8': Site.getSingleResource('ESportsDesktop'),
@@ -8730,6 +8730,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 '13': Site.getSingleResource('Tablet'),
                 '14': Site.getSingleResource('DeepLink'),
                 '15': Site.getSingleResource('WAP'),
+                '16': Site.getSingleResource('ChatRoom'),
+                '17': Site.getSingleResource('DesktopGalaxy'),
                 '88': Site.getSingleResource('BetfromOthers')
             };
 

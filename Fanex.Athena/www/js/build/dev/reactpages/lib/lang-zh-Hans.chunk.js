@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 7/13/2023 10:49:00 AM
+// Generated at: 8/14/2023 2:19:52 PM
 window._language_zh_Hans = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -205,6 +205,7 @@ window._language_zh_Hans = {
   ChangePassword: "更改密码",
   ChangeStatus: "更改 {0}&apos;s 状态",
   ChangeStatusOfThisCustomerMsg: "您确定您要更换此会员的状态吗?",
+  ChatRoom: "聊天室",
   Checkavailability: "检查可用性",
   China: "中国版",
   Choice: "选择",
@@ -293,6 +294,7 @@ window._language_zh_Hans = {
   DeleteGroup: "删除组",
   DeleteManyMonitoredPlayerConfirm: "所选的玩家将被移出警示值监控，您确定要移出吗？",
   Deposit: "存款",
+  DesktopGalaxy: "桌机银河版",
   Detail: "详情",
   DetailedBetlist: "投注历史明细",
   Details: "细节",
@@ -504,7 +506,7 @@ window._language_zh_Hans = {
   MixSportsParlay: "混合过关",
   Mo: "Mo",
   Mobile: "手机版",
-  MobileEuro: "手机欧洲版",
+  MobileGalaxy: "手机银河版",
   Moderate: "中等",
   Monday: "星期一",
   MoneyLine: "胜负盘",
@@ -662,6 +664,7 @@ window._language_zh_Hans = {
   SabaVirtualSettingInformation: "沙巴虚拟体育设定资讯",
   SabaVirtualSettingLevel: "沙巴虚拟体育设定等级",
   SabaVirtualSport: "沙巴虚拟赛事",
+  SabaVirtualSportsNote: "沙巴虚拟体育不支援系统串关。",
   SabaVirtualSportsWinLoss: "沙巴虚拟赛事输赢",
   Saturday: "星期日",
   Save: "保存",
