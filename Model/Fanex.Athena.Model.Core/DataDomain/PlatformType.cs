@@ -16,7 +16,7 @@
 
         public const int MobileStandard = 4;
 
-        public const int MobileEuro = 5;
+        public const int MobileGalaxy = 5;
 
         public const int MobileCompact = 6;
 
@@ -38,6 +38,10 @@
 
         public const int WAP = 15;
 
+        public const int ChatRoom = 16;
+
+        public const int DesktopGalaxy = 17;
+
         public const int BetfromOthers = 88;
 
         private static readonly IDictionary<int, string> MapPlatformKeys = new Dictionary<int, string>
@@ -47,7 +51,7 @@
             { DesktopChina, nameof(DesktopChina) },
             { DesktopOthers, nameof(DesktopOthers) },
             { MobileStandard, nameof(MobileStandard) },
-            { MobileEuro, nameof(MobileEuro) },
+            { MobileGalaxy, nameof(MobileGalaxy) },
             { MobileCompact, nameof(MobileCompact) },
             { MobileOthers, nameof(MobileOthers) },
             { ESportsDesktop, nameof(ESportsDesktop) },
@@ -58,6 +62,8 @@
             { Tablet, nameof(Tablet) },
             { DeepLink, nameof(DeepLink) },
             { WAP, nameof(WAP) },
+            { ChatRoom, nameof(ChatRoom) },
+            { DesktopGalaxy, nameof(DesktopGalaxy) },
             { BetfromOthers, nameof(BetfromOthers) }
         };
 

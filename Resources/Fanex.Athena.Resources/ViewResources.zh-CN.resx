@@ -2210,8 +2210,8 @@
   <data name="ESportsApp" xml:space="preserve">
     <value>电子竞技 APP</value>
   </data>
-  <data name="MobileEuro" xml:space="preserve">
-    <value>手机欧洲版</value>
+  <data name="MobileGalaxy" xml:space="preserve">
+    <value>手机银河版</value>
   </data>
   <data name="MarkDate" xml:space="preserve">
     <value>标记日期</value>
@@ -3164,5 +3164,11 @@
   </data>
   <data name="SabaVirtualSportsNote" xml:space="preserve">
     <value>沙巴虚拟体育不支援系统串关。</value>
+  </data>
+  <data name="ChatRoom" xml:space="preserve">
+    <value>聊天室</value>
+  </data>
+  <data name="DesktopGalaxy" xml:space="preserve">
+    <value>桌机银河版</value>
   </data>
 </root>

@@ -2499,8 +2499,9 @@
   <data name="ESportsApp" xml:space="preserve">
     <value>E-Sports APP</value>
   </data>
-  <data name="MobileEuro" xml:space="preserve">
-    <value>Mobile Euro</value>
+  <data name="MobileGalaxy" xml:space="preserve">
+    <value>Mobile Galaxy</value>
+    <comment>#191840</comment>
   </data>
   <data name="ProductSAG" xml:space="preserve">
     <value>SA Gaming</value>
@@ -3514,5 +3515,11 @@
   </data>
   <data name="SabaVirtualSportsNote" xml:space="preserve">
     <value>Saba Virtual Sports does not support System Parlay bet type.</value>
+  </data>
+  <data name="ChatRoom" xml:space="preserve">
+    <value>Chat Room</value>
+  </data>
+  <data name="DesktopGalaxy" xml:space="preserve">
+    <value>Desktop Galaxy</value>
   </data>
 </root>
