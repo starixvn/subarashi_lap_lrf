@@ -472,6 +472,7 @@ window._language_zh_TW = {
   Market: "市場",
   Match: "賽事",
   MatchPrecise: "精準匹配",
+  MatchPrefix: "前缀查询 范例",
   MatchWinLoss: "球賽輸贏",
   MatchWinLossTitle: "球賽輸贏, {0} - {1}",
   MaxBet: "最高投注",
