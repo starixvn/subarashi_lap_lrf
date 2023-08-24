@@ -1404,7 +1404,7 @@ button.close {
     display: inline-block;
     min-width: 42px; }
   .page-filter .search-option .dropdown-menu {
-    width: 200px; }
+    width: 205px; }
   .page-filter .search-option .keyword {
     color: #f31111; }
   .page-filter .checkbox-group:nth-child(n+2):not(:first-child) {

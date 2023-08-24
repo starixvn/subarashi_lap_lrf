@@ -98,7 +98,8 @@ export class MainFilter extends Component {
                 valueField={"value"}
                 keyField={"id"}
                 statusField={"status"}
-                onChange= {this._onChangeProduct} />
+                onChange= {this._onChangeProduct}
+                isValid= {!!this.props.selectedProduct} />
         );
     }
 
@@ -125,7 +126,8 @@ export class MainFilter extends Component {
                 texts={{ All: LangHelper.getSingleResource("N_A") }}
                 isAllTextShown={true}
                 hasSearchBox={true}
-                treeViewOption={TreeViewOption} />
+                treeViewOption={TreeViewOption}
+                isValid={!!this.props.selectedSport} />
             )
         }
 
@@ -141,7 +143,8 @@ export class MainFilter extends Component {
                 isAllTextShown={true}
                 hasSearchBox={true}
                 treeViewOption={TreeViewOption}
-                onChange={(currentItem, selectedItemsKey, treeViewList) => this.props.setSelectedSport(selectedItemsKey)} />
+                onChange={(currentItem, selectedItemsKey, treeViewList) => this.props.setSelectedSport(selectedItemsKey)}
+                isValid={!!this.props.selectedSport}  />
         );
     }
 
@@ -160,7 +163,8 @@ export class MainFilter extends Component {
                     texts={{ All: LangHelper.getSingleResource("N_A")  }}
                     isAllTextShown={true}
                     hasSearchBox={true}
-                    treeViewOption={TreeViewOption} />
+                    treeViewOption={TreeViewOption}
+                    isValid={!!this.props.selectedBettype} />
             );
         }
 
@@ -176,7 +180,8 @@ export class MainFilter extends Component {
                 isAllTextShown={true}
                 hasSearchBox={true}
                 treeViewOption={TreeViewOption}
-                onChange={(currentItem, selectedItemsKey, treeViewList) => this.props.setSelectedBettype(selectedItemsKey)} />
+                onChange={(currentItem, selectedItemsKey, treeViewList) => this.props.setSelectedBettype(selectedItemsKey)}
+                isValid={!!this.props.selectedBettype}  />
         );
     }
 
@@ -192,7 +197,8 @@ export class MainFilter extends Component {
                 valueField={"value"}
                 keyField={"id"}
                 statusField={"status"}
-                onChange={(currentItem, selectedItemsKey) => this.props.setSelectedPlatform(selectedItemsKey)} />
+                onChange={(currentItem, selectedItemsKey) => this.props.setSelectedPlatform(selectedItemsKey)}
+                isValid={!!this.props.selectedPlatform}  />
         );
     }
 
@@ -207,7 +213,8 @@ export class MainFilter extends Component {
                 keyField={"id"}
                 valueField={"value"}
                 statusField={"status"}
-                onChange={(currentItem, selectedItemsKey) => this._onChangeCurrency(selectedItemsKey)} />);
+                onChange={(currentItem, selectedItemsKey) => this._onChangeCurrency(selectedItemsKey)}
+                isValid={!!this.props.selectedCurrency} />);
     }
 
     _onChangeCurrency = (currencyIdList) => {
@@ -267,7 +274,8 @@ export class MainFilter extends Component {
                 keyField={"id"}
                 valueField={"value"}
                 statusField={"status"}
-                onChange={(currentItem, selectedItemsKey) => this.props.setSelectedStatus(selectedItemsKey)} />);
+                onChange={(currentItem, selectedItemsKey) => this.props.setSelectedStatus(selectedItemsKey)}
+                isValid={!!this.props.selectedStatus} />);
     }
 
     _renderLiveStatusSelectList() {
@@ -281,7 +289,8 @@ export class MainFilter extends Component {
                 keyField={"id"}
                 valueField={"value"}
                 statusField={"status"}
-                onChange={(currentItem, selectedItemsKey) => this.props.setSelectedLiveStatus(selectedItemsKey)} />);
+                onChange={(currentItem, selectedItemsKey) => this.props.setSelectedLiveStatus(selectedItemsKey)}
+                isValid={!!this.props.selectedLiveStatus} />);
     }
 
     _renderRiskLevelSelectList() {
@@ -298,7 +307,8 @@ export class MainFilter extends Component {
                 onChange={(_, selectedItemsKey) => {
                     this.props.setSelectedRiskLevel(selectedItemsKey);
                     var customerClassSelected = riskLevelList.filter(r => selectedItemsKey.includes(r.id)).map(r => r.customerClassList).join(',');
-                    this.props.setSelectedCustomerClass(customerClassSelected);}} />);
+                    this.props.setSelectedCustomerClass(customerClassSelected);}}
+                isValid={!!this.props.selectedCustomerClass} />);
     }
 
     _renderOddsGroupSelectList() {
@@ -311,7 +321,8 @@ export class MainFilter extends Component {
                 keyField={"id"}
                 valueField={"value"}
                 statusField={"status"}
-                onChange={(_, selectedItemsKey) => this.props.setSelectedOddsGroup(selectedItemsKey)} />);
+                onChange={(_, selectedItemsKey) => this.props.setSelectedOddsGroup(selectedItemsKey)} 
+                isValid={!!this.props.selectedOddsGroup}/>);
     }
 
     _renderSubsidiaryTreeView() {

@@ -199,14 +199,11 @@ export class FormFilter extends Component {
                         </div>
                     <div className="col-9">
                         {AppData.isAllowTxIDColumn && <>
-                            <br />
                             * {LangHelper.getSingleResource('BettingTicketCenter_RefnoTabNote_TxIDSearch').replace('{0}', AppData.balanceupDay)}
-                        </>}
-                        {AppData.isAllowTxIDColumn && <>
                             <br />
                             * {AppData.productsRequireTxIdNote}
-                        </>}                        
-                        <br />
+                            <br />
+                        </>}                    
                         * {AppData.productsRequireUseNameNote}
                     </div>
                 </div>

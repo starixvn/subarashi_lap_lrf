@@ -114,7 +114,8 @@ export const SortOrder = {
 
 export const SearchMode = {
     MatchPrecise: 1,
-    MatchCase: 2
+    MatchCase: 2,
+    MatchPrefix: 3
 }
 
 export const ExportExcelMode = {

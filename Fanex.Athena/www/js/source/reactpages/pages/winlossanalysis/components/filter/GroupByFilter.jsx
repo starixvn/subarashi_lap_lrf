@@ -25,7 +25,9 @@ export const GroupByFilter = (props) => {
             && !!props.selectedCurrency
             && !!props.selectedBettype
             && !!props.selectedSport
-            // && validateBaseCurrency(props.selectedBaseCurrency)
+            && !!props.selectedPlatform
+            && !!props.selectedCustomerClass
+            && !!props.selectedOddsGroup
     }
 
     const buildTitle = (params) => {
