@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 8/14/2023 2:19:52 PM
+﻿// Generated at: 8/24/2023 11:18:49 AM
 window._language_zh_Hans = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -474,6 +474,7 @@ Margin:"杀数",
 Market:"市场",
 Match:"赛事",
 MatchPrecise:"精准匹配",
+MatchPrefix:"前缀查询 范例",
 MatchWinLoss:"球赛输赢",
 MatchWinLossTitle:"球赛输赢, {0} - {1}",
 MaxBet:"最高投注",
@@ -506,7 +507,7 @@ MixLiveAndNoneLive:"混合过关",
 MixSportsParlay:"混合过关",
 Mo:"Mo",
 Mobile:"手机版",
-MobileGalaxy:"手机银河版",
+MobileGalaxy:"手机欧洲版",
 Moderate:"中等",
 Monday:"星期一",
 MoneyLine:"胜负盘",
