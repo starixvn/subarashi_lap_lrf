@@ -1,4 +1,4 @@
-﻿// Generated at: 8/14/2023 2:19:52 PM
+﻿// Generated at: 8/24/2023 11:18:49 AM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -560,7 +560,7 @@ MixSportsParlay:"Mix Sports Parlay",
 Mo:"Mo",
 MobileApp:"Mobile APP",
 MobileCompact:"Mobile Compact",
-MobileGalaxy:"Mobile Galaxy",
+MobileGalaxy:"Mobile Euro",
 MobileOthers:"Mobile Others",
 MobileStandard:"Mobile Standard",
 Moderate:"Moderate",

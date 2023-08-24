@@ -1,4 +1,4 @@
-﻿// Generated at: 8/14/2023 2:19:18 PM
+﻿// Generated at: 8/24/2023 11:18:03 AM
 var _language_zh_TW = {
 AA:"客客",
 AbnormalBet:"非正規註單",
@@ -378,6 +378,7 @@ Margin:"杀数",
 Market:"市場",
 Match:"賽事",
 MatchPrecise:"精準匹配",
+MatchPrefix:"前缀查询 范例",
 MatchWinLoss:"球賽輸贏",
 MatchWinLossTitle:"球賽輸贏, {0} - {1}",
 MaxBet:"最高投注",

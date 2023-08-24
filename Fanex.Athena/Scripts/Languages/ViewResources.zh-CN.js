@@ -1,4 +1,4 @@
-﻿// Generated at: 8/14/2023 2:19:18 PM
+﻿// Generated at: 8/24/2023 11:18:03 AM
 var _language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -528,7 +528,7 @@ MixSportsParlay:"混合过关",
 Mo:"Mo",
 MobileApp:"手机 APP",
 MobileCompact:"手机轻量版",
-MobileGalaxy:"手机银河版",
+MobileGalaxy:"手机欧洲版",
 MobileOthers:"手机其他",
 MobileStandard:"手机經典版",
 Moderate:"中等",
