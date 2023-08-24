@@ -17,18 +17,6 @@
       "Project": null,
       "Path": "Scripts\\Languages",
       "Properties": {}
-    },
-    {
-      "Filename": "ViewResources.zh-Hans.js",
-      "Project": null,
-      "Path": "Scripts\\Languages",
-      "Properties": {}
-    },
-    {
-      "Filename": "ViewResources.zh-TW.js",
-      "Project": null,
-      "Path": "Scripts\\Languages",
-      "Properties": {}
     }
   ]
 }

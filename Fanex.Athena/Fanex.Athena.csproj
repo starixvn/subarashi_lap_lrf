@@ -335,51 +335,33 @@
     <Content Include="App_Data\UserGuide\WinlossAnalysis\vi-VN.htm" />
     <Content Include="App_Data\UserGuide\WinlossAnalysis\en-US.htm" />
     <Content Include="App_Data\UserGuide\WinlossAnalysis\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\WinlossAnalysis\zh-Hans.htm" />
     <Content Include="App_Data\UserGuide\BettingTicketCenterRefno\en-US.htm" />
     <Content Include="App_Data\UserGuide\BettingTicketCenterRefno\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\BettingTicketCenterRefno\zh-Hans.htm" />
     <Content Include="App_Data\UserGuide\BettingTicketCenterAdvancedSearch\en-US.htm" />
     <Content Include="App_Data\UserGuide\BettingTicketCenterAdvancedSearch\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\BettingTicketCenterAdvancedSearch\zh-Hans.htm" />
     <Content Include="App_Data\UserGuide\BettingTicketCenterRunning\en-US.htm" />
     <Content Include="App_Data\UserGuide\BettingTicketCenterRunning\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\BettingTicketCenterRunning\zh-Hans.htm" />
     <Content Include="App_Data\UserGuide\BettingTicketCenterSingle\en-US.htm" />
     <Content Include="App_Data\UserGuide\BettingTicketCenterSingle\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\BettingTicketCenterSingle\zh-Hans.htm" />
     <Content Include="App_Data\UserGuide\AbnormalBet\en-US.htm" />
     <Content Include="App_Data\UserGuide\AbnormalBet\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\AbnormalBet\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\NewCashOutWinLoss\en-US.htm" />
     <Content Include="App_Data\UserGuide\NewCashOutWinLoss\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\NewCashOutWinLoss\zh-Hans.htm" />
-    <Content Include="App_Data\UserGuide\NewCashOutWinLoss\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\GodOfFortuneWL\en-US.htm" />
     <Content Include="App_Data\UserGuide\GodOfFortuneWL\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\GodOfFortuneWL\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\ExtraPayout\en-US.htm" />
     <Content Include="App_Data\UserGuide\ExtraPayout\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\ExtraPayout\zh-Hans.htm" />
-    <Content Include="App_Data\UserGuide\ExtraPayout\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\PlayerSegmentationMonitored\en-US.htm" />
     <Content Include="App_Data\UserGuide\PlayerSegmentationMonitored\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\PlayerSegmentationMonitored\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\SabaVirtualSportsWL\en-US.htm" />
     <Content Include="App_Data\UserGuide\SabaVirtualSportsWL\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\SabaVirtualSportsWL\zh-TW.htm" />
-    <Content Include="App_Data\UserGuide\LicenseeWLByTimeZone\zh-Hans.htm" />
-    <Content Include="App_Data\UserGuide\LicenseeWLByTimeZone\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\LicenseeWLByTimeZone\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\LicenseeWLByTimeZone\en-US.htm" />
     <Content Include="App_Data\UserGuide\PlayerSegmentationProblem\en-US.htm" />
     <Content Include="App_Data\UserGuide\PlayerSegmentationProblem\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\PlayerSegmentationProblem\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\PlayerSegmentationVIP\en-US.htm" />
     <Content Include="App_Data\UserGuide\PlayerSegmentationVIP\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\PlayerSegmentationVIP\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\WeeklyLiveMatches\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\WeeklyLiveMatches\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\WinLossByBetType\vi-VN.htm" />
     <Content Include="App_Data\UserGuide\WinLossByProduct\vi-VN.htm" />
     <Content Include="Content\Account\AccountManagement.css" />
@@ -429,38 +411,26 @@
     </Content>
     <Content Include="App_Data\UserGuide\AGCasinoWL\en-US.htm" />
     <Content Include="App_Data\UserGuide\AGCasinoWL\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\AGCasinoWL\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\CommissionGroupList\en-US.htm" />
     <Content Include="App_Data\UserGuide\CommissionGroupList\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\CommissionGroupList\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\TotalBetsMixParlay\en-US.htm" />
     <Content Include="App_Data\UserGuide\TotalBetsMixParlay\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\TotalBetsMixParlay\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\TotalBetsCorrectScore\en-US.htm" />
     <Content Include="App_Data\UserGuide\TotalBetsCorrectScore\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\TotalBetsCorrectScore\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\ForecastNewHdpOu\en-US.htm" />
     <Content Include="App_Data\UserGuide\ForecastNewHdpOu\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\ForecastNewHdpOu\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\Forecast1x2\en-US.htm" />
     <Content Include="App_Data\UserGuide\Forecast1x2\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\Forecast1x2\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\ForecastHdpOu\en-US.htm" />
     <Content Include="App_Data\UserGuide\ForecastHdpOu\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\ForecastHdpOu\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\ManageAccount\en-US.htm" />
     <Content Include="App_Data\UserGuide\ManageAccount\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\ManageAccount\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\CustomerLog\en-US.htm" />
     <Content Include="App_Data\UserGuide\CustomerLog\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\CustomerLog\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\PlatformWinLoss\en-US.htm" />
     <Content Include="App_Data\UserGuide\PlatformWinLoss\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\PlatformWinLoss\zh-TW.htm" />
-    <Content Include="App_Data\UserGuide\CustomerBalance\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\CustomerBalance\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\CustomerPendingFunds\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\CustomerPendingFunds\zh-TW.htm" />
     <Content Include="SpNameConfig\FanexSpName.xml1.txt">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -473,73 +443,50 @@
     <Content Include="App_Data\UserGuide\CustomerTurnover\en-US.htm" />
     <Content Include="App_Data\UserGuide\CustomerBalance\en-US.htm" />
     <Content Include="App_Data\UserGuide\CustomerPendingFunds\en-US.htm" />
-    <Content Include="App_Data\UserGuide\CustomerTurnover\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\CustomerWL\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\CustomerWL\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\CustomerWL\en-US.htm" />
     <Content Include="App_Data\UserGuide\LiveReport\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\LiveReport\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\MatchWL\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\MatchWL\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\LiveReport\en-US.htm" />
     <Content Include="App_Data\UserGuide\TotalBets3WayHandicap\en-US.htm" />
     <Content Include="App_Data\UserGuide\TotalBets3WayHandicap\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\TotalBets3WayHandicap\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\TotalBetsBON\en-US.htm" />
     <Content Include="App_Data\UserGuide\TotalBetsBON\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\TotalBetsBON\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\TotalBetsCleanSheet\en-US.htm" />
     <Content Include="App_Data\UserGuide\TotalBetsCleanSheet\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\TotalBetsCleanSheet\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\TotalBetsDoubleChance\en-US.htm" />
     <Content Include="App_Data\UserGuide\TotalBetsDoubleChance\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\TotalBetsDoubleChance\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\TotalBetsFGLG\en-US.htm" />
     <Content Include="App_Data\UserGuide\TotalBetsFGLG\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\TotalBetsFGLG\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\TotalBetsHdpOu\en-US.htm" />
     <Content Include="App_Data\UserGuide\TotalBetsHdpOu\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\TotalBetsHdpOu\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\TotalBetsHomeDrawAwayNoBet\en-US.htm" />
     <Content Include="App_Data\UserGuide\TotalBetsHomeDrawAwayNoBet\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\TotalBetsHomeDrawAwayNoBet\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\TotalBetsHTFT\en-US.htm" />
     <Content Include="App_Data\UserGuide\TotalBetsHTFT\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\TotalBetsHTFT\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\TotalBetsMoneyLine\en-US.htm" />
     <Content Include="App_Data\UserGuide\TotalBetsMoneyLine\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\TotalBetsMoneyLine\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\TotalBetsOddEven\en-US.htm" />
     <Content Include="App_Data\UserGuide\TotalBetsOddEven\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\TotalBetsOddEven\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\TotalBetsOutright\en-US.htm" />
     <Content Include="App_Data\UserGuide\TotalBetsOutright\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\TotalBetsOutright\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\TotalBetsTotalGoal\en-US.htm" />
     <Content Include="App_Data\UserGuide\TotalBetsTotalGoal\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\TotalBetsTotalGoal\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\TotalBetsToWinToNil\en-US.htm" />
     <Content Include="App_Data\UserGuide\TotalBetsToWinToNil\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\TotalBetsToWinToNil\zh-TW.htm" />
-    <Content Include="App_Data\UserGuide\Turnover\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\Turnover\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\Turnover\en-US.htm" />
-    <Content Include="App_Data\UserGuide\LastBetsMonitoring\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\LastBetsMonitoring\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\LicenseeWL\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\LicenseeWL\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\MatchWL\en-US.htm" />
-    <Content Include="App_Data\UserGuide\SettledMatchCount\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\SettledMatchCount\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\SettledMatchCount\en-US.htm" />
     <Content Include="App_Data\UserGuide\LastBetsMonitoring\en-US.htm" />
     <Content Include="App_Data\UserGuide\LicenseeWL\en-US.htm" />
     <Content Include="App_Data\UserGuide\WinLossByBetType\en-US.htm" />
     <Content Include="App_Data\UserGuide\WinLossByBetType\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\WinLossByBetType\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\WeeklyLiveMatches\en-US.htm" />
     <Content Include="App_Data\UserGuide\WinLossByProduct\en-US.htm" />
-    <Content Include="App_Data\UserGuide\WinLossByProduct\zh-TW.htm" />
     <Content Include="App_Data\UserGuide\WinLossByProduct\zh-CN.htm" />
     <Content Include="CodeAnalysis\CodeAnalysisConfiguration.xml" />
     <Content Include="Content\FlatPopup\book.png" />
@@ -564,7 +511,7 @@
     <Content Include="Scripts\Helper\ProductListHelper.js" />
     <Content Include="Scripts\Library\jquery.marquee.js" />
     <Content Include="www\js\build\**" />
-    <Content Include="www\css\build\**" />
+	<Content Include="www\css\build\**" />
     <Content Include="www\assets\images\ajax-loader.gif" />
     <Content Include="www\assets\images\new-system.svg" />
     <Content Include="SiteConfig\Web.AppSettings.UATTW.config">
@@ -1294,12 +1241,6 @@
     <Content Include="www\js\source\common\languages\ViewResources.zh-CN.js">
       <DependentUpon>ViewResources.tt</DependentUpon>
     </Content>
-    <Content Include="www\js\source\common\languages\ViewResources.zh-Hans.js">
-      <DependentUpon>ViewResources.tt</DependentUpon>
-    </Content>
-    <Content Include="www\js\source\common\languages\ViewResources.zh-TW.js">
-      <DependentUpon>ViewResources.tt</DependentUpon>
-    </Content>
     <Content Include="www\js\source\common\popup.js" />
     <Content Include="www\js\source\common\querystring.js" />
     <Content Include="www\js\source\reactpages\lib\QueryString.js" />
@@ -1603,12 +1544,6 @@
       <DependentUpon>ViewResources.tt</DependentUpon>
     </Content>
     <Content Include="Scripts\Languages\ViewResources.zh-CN.js">
-      <DependentUpon>ViewResources.tt</DependentUpon>
-    </Content>
-    <Content Include="Scripts\Languages\ViewResources.zh-Hans.js">
-      <DependentUpon>ViewResources.tt</DependentUpon>
-    </Content>
-    <Content Include="Scripts\Languages\ViewResources.zh-TW.js">
       <DependentUpon>ViewResources.tt</DependentUpon>
     </Content>
     <Content Include="Scripts\Library\jquery.marquee.js" />

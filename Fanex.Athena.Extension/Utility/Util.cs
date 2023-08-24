@@ -19,9 +19,7 @@ namespace Fanex.Athena.Extension.Utility
                 return new Dictionary<string, string>
                     {
                         { "en-US", "English" },
-                        { "zh-TW", "繁體中文" },
                         { "zh-CN", "简体中文" },
-                        { "zh-Hans", "简体中文(新)" },
                         { "vi-VN", "Việt Nam" }
                     };
             }
@@ -34,9 +32,7 @@ namespace Fanex.Athena.Extension.Utility
                 return new Dictionary<string, string>
                 {
                     { "en-US", "en" },
-                    { "zh-TW", "ch" },
                     { "zh-CN", "cs" },
-                    { "zh-Hans", "zhcn" },
                     //{ "ja-JP", "jp" },
                     //{ "th-TH", "th" },
                     { "vi-VN", "vn" }
@@ -51,9 +47,7 @@ namespace Fanex.Athena.Extension.Utility
                 return new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
                     { "en", "en-US" },
-                    { "ch", "zh-TW" },
                     { "cs", "zh-CN" },
-                    { "zhcn", "zh-Hans" },
                     //{ "jp", "ja-JP" },
                     //{ "th", "th-TH" },
                     { "vn", "vi-VN" }

@@ -9,6 +9,8 @@ var cssPath = `${pathConfig.cssPaths.build}/${environment}/reactpages`;
 const entry = {
     [`${jsPath}/lib/langHelper`]: pathConfig.scriptPaths.languageResource,
     [`${jsPath}/lib/lang-zh-CN`]: pathConfig.scriptPaths.langCN,
+    [`${jsPath}/lib/lang-vi-VN`]: pathConfig.scriptPaths.langVN,
+
     [`${cssPath}/vendor`]: pathConfig.cssPaths.layout,
 
     [`${jsPath}/report/dailybets`]: pathConfig.scriptPaths.dailybets,

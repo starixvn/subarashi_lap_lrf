@@ -189,7 +189,7 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                LangService.GetCurrentLanguage().Returns("zh-TW");
+                LangService.GetCurrentLanguage().Returns("zh-CN");
                 LangService.ChangeLanguage(Arg.Any<string>()).Returns(true);
 
                 // Action

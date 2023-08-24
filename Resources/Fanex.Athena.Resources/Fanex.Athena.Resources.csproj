@@ -68,23 +68,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Menu.vi-VN.resx" />
     <EmbeddedResource Include="Menu.zh-CN.resx" />
-    <EmbeddedResource Include="Menu.zh-Hans.resx" />
-    <EmbeddedResource Include="Menu.zh-TW.resx" />
     <EmbeddedResource Include="ViewResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>ViewResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-	<EmbeddedResource Include="ViewResources.vi-VN.resx" >
-	  <SubType>Designer</SubType>
-	</EmbeddedResource>
+    <EmbeddedResource Include="ViewResources.vi-VN.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="ViewResources.zh-CN.resx">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ViewResources.zh-Hans.resx">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ViewResources.zh-TW.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

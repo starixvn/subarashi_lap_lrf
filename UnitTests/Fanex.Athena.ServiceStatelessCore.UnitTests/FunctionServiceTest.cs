@@ -362,7 +362,7 @@
             var result = await _service.AssignUserFunctions(licenseeId, custId, functionIdList, userId, ip, langKey);
 
             // Assert
-            Assert.That(result.Message, Is.EqualTo("Updating Functions is successul."));
+            Assert.That(result.Message, Is.EqualTo("Updating Functions is successful."));
         }
 
         [Test]
