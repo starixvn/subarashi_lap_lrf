@@ -4336,7 +4336,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please make sure each type of category has at least a contact to receive the notification.
+        ///   Looks up a localized string similar to Please make sure each type of category has at least a contact to receive the notification..
         /// </summary>
         public static string LicenseeContactCategoryRuleNote {
             get {

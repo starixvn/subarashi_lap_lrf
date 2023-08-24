@@ -481,7 +481,7 @@
     <value>Thưởng</value>
   </data>
   <data name="BothGroupByAndBreakdownLevelOption" xml:space="preserve">
-    <value>Dữ liệu sẽ dc nhóm lại &amp; phân loại theo từng cấp độ</value>
+    <value>Dữ liệu sẽ được nhóm lại &amp; phân loại theo từng cấp độ</value>
   </data>
   <data name="BoughtAmount" xml:space="preserve">
     <value>Số tiền đã mua</value>
@@ -553,7 +553,7 @@
     <value>Giá trị vé cược được bán</value>
   </data>
   <data name="CashOutWinLoss" xml:space="preserve">
-    <value>Thắng Thua của vé cược đã bán</value>
+    <value>Thắng Thua Của Vé Cược Đã Bán</value>
   </data>
   <data name="CashOutWL_SportNote" xml:space="preserve">
     <value>Báo cáo này hỗ trợ bộ lọc theo Thể thao từ 01/01/2023</value>
@@ -565,7 +565,7 @@
     <value>Chuyển khoản Casino</value>
   </data>
   <data name="CasinoTurnover" xml:space="preserve">
-    <value>Doanh thu Casino</value>
+    <value>Doanh Thu Casino</value>
   </data>
   <data name="CategoriesSelection" xml:space="preserve">
     <value>Lựa chọn danh mục</value>
@@ -856,7 +856,7 @@
     <value>Nguy hiểm</value>
   </data>
   <data name="Data" xml:space="preserve">
-    <value>dữ liệu</value>
+    <value> dữ liệu</value>
   </data>
   <data name="Date" xml:space="preserve">
     <value>Ngày</value>
@@ -1120,7 +1120,7 @@
     <value>Tên</value>
   </data>
   <data name="Forecast" xml:space="preserve">
-    <value>Dự báo</value>
+    <value>Dự đoán</value>
   </data>
   <data name="ForecastAway" xml:space="preserve">
     <value>Dự đoán Đội Khách</value>
@@ -1207,7 +1207,7 @@
     <value>Số bàn thắng</value>
   </data>
   <data name="GodOfFortuneWinLoss" xml:space="preserve">
-    <value>Kết quả Thắng Thua God of Fortune</value>
+    <value>Thần Tài Thắng Thua</value>
   </data>
   <data name="GotoCustomerList" xml:space="preserve">
     <value>Đi đến Danh sách Khách hàng</value>
@@ -1543,7 +1543,7 @@
     <value>Các danh mục chưa được chỉ định cho bất kỳ liên hệ nào.</value>
   </data>
   <data name="LicenseeContactCategoryRuleNote" xml:space="preserve">
-    <value>Vui lòng đảm bảo mỗi loại danh mục có ít nhất một liên hệ để nhận thông báo</value>
+    <value>Vui lòng đảm bảo mỗi loại danh mục có ít nhất một liên hệ để nhận thông báo.</value>
   </data>
   <data name="LicenseeContactDeleteErrorMsg_101" xml:space="preserve">
     <value>Nhà Cái không tồn tại!</value>
@@ -1672,13 +1672,13 @@
     <value>Trận đấu</value>
   </data>
   <data name="MatchCase" xml:space="preserve">
-    <value>Trận đấu mẫu, ví dụ</value>
+    <value>Khớp chữ, ví dụ</value>
   </data>
   <data name="MatchPrecise" xml:space="preserve">
-    <value>Trận đấu chính xác</value>
+    <value>Khớp chính xác</value>
   </data>
   <data name="MatchPrefix" xml:space="preserve">
-    <value>Tiền tố trận đấu, ví dụ</value>
+    <value>Khớp chữ đầu, ví dụ</value>
   </data>
   <data name="MatchWinLoss" xml:space="preserve">
     <value>Thắng Thua Theo Trận</value>
@@ -1819,7 +1819,7 @@
     <value>Di động nhỏ gọn</value>
   </data>
   <data name="MobileGalaxy" xml:space="preserve">
-    <value>Mobile Galaxy</value>
+    <value>Mobile Euro</value>
   </data>
   <data name="MobileOthers" xml:space="preserve">
     <value>Các thiết bị di động khác</value>
@@ -2338,10 +2338,10 @@
     <value>Vgaming</value>
   </data>
   <data name="ProductVRG" xml:space="preserve">
-    <value>Thể Thao Ảo</value>
+    <value>Trò Chơi Ảo</value>
   </data>
   <data name="ProductVS" xml:space="preserve">
-    <value>Thể thao Ảo</value>
+    <value>Thể Thao Ảo</value>
   </data>
   <data name="ProductVS2" xml:space="preserve">
     <value>Thể Thao Ảo 2</value>
@@ -2782,7 +2782,7 @@
     <value>Token đã hết hạn</value>
   </data>
   <data name="ToList" xml:space="preserve">
-    <value>Đến Danh sách</value>
+    <value>Danh Sách Nhận</value>
   </data>
   <data name="Total" xml:space="preserve">
     <value>Tổng</value>
@@ -3199,7 +3199,7 @@
     <value>Phân Tích Thắng Thua</value>
   </data>
   <data name="WinLossByBetType" xml:space="preserve">
-    <value>Thắng Thua theo Loại cược</value>
+    <value>Thắng Thua Theo Loại Cược</value>
   </data>
   <data name="WinLossByBetTypeTitle" xml:space="preserve">
     <value>Thắng Thua theo Loại cược, {0} --&gt; {1} - {2}</value>

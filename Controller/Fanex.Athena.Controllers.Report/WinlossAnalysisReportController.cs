@@ -49,7 +49,6 @@
             var licenseeSession = SessionServiceInstance.LicenseeSession;
             var userSession = SessionServiceInstance.UserSession;
             var subsidiaryList = _subsidiaryService.GetWhiteLabelTree(userSession, licenseeSession.LicenseeName);
-            var customerClassIds = await _customerClassService.GetAllCustomerClassId();
 
             var viewModel = new WinlossAnalysisReportViewModel
             {

@@ -3108,7 +3108,7 @@
     <comment>165286</comment>
   </data>
   <data name="LicenseeContactCategoryRuleNote" xml:space="preserve">
-    <value>Please make sure each type of category has at least a contact to receive the notification</value>
+    <value>Please make sure each type of category has at least a contact to receive the notification.</value>
     <comment>165286</comment>
   </data>
   <data name="LicenseeContactDeleteErrorMsg_101" xml:space="preserve">

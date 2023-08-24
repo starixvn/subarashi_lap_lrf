@@ -23,13 +23,13 @@ export const AppContainer = props => {
     const _renderActionPopup = () => {
         const { type, data } = currentUserAction;
         if (type === UserActionType.AddNew) {
-          return (<Popup height={260} width={450} isShow={true} title={LangHelper.getSingleResource("AddNew")} onClose={_onClosePopup}>
+            return (<Popup height={260} width={450} isShow={true} title={LangHelper.getSingleResource("AddNew")} onClose={_onClosePopup}>
             <FormAdd {...data} onClose={_onClosePopup}  />
-          </Popup>)
+            </Popup>)
         } else if(type === UserActionType.ViewReachedHistory) {
             return (<Popup height={500} width={680} isShow={true} title={LangHelper.getSingleResource("NotificationHistory")} onClose={_onClosePopup}>
             <FormReachedHistory {...data}  />
-          </Popup>)
+            </Popup>)
         } else {
             //no thing
         }

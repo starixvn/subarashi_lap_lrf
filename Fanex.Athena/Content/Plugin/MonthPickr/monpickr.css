@@ -16,7 +16,7 @@
 {
     background-color: #FFF;
     width: 148px;
-    font-family: "Trebuchet MS" , Verdana, Helvetica, Sans-Serif;
+    /*font-family: "Trebuchet MS" , Verdana, Helvetica, Sans-Serif;*/
     color: #000;
     font-size: 1.1em;
     border: #aaaaaa solid 1px;
@@ -168,7 +168,7 @@
     background-color: #FFF;
     border: #aaaaaa solid 1px;
     width: 58px;
-    font-family: "Trebuchet MS" , Verdana, Helvetica, Sans-Serif;
+    /*font-family: "Trebuchet MS" , Verdana, Helvetica, Sans-Serif;*/
     color: #000;
     font-size: 1.0em;
     z-index: 1 !important;

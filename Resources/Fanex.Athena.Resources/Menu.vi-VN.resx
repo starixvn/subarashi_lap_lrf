@@ -148,7 +148,7 @@
     <value>Trung Tâm Vé Cược</value>
   </data>
   <data name="casinoturnover80" xml:space="preserve">
-    <value>Doanh thu Casino</value>
+    <value>Doanh Thu Casino</value>
   </data>
   <data name="cleansheet16" xml:space="preserve">
     <value>Giữ sạch lưới</value>
@@ -205,7 +205,7 @@
     <value>Bàn thắng Đầu/Cuối</value>
   </data>
   <data name="forecast2" xml:space="preserve">
-    <value>DỰ BÁO</value>
+    <value>DỰ ĐOÁN</value>
   </data>
   <data name="godoffortunewinloss" xml:space="preserve">
     <value>Thần Tài Thắng Thua</value>
@@ -256,7 +256,7 @@
     <value>Cược Đội Thắng</value>
   </data>
   <data name="newcashoutwinloss" xml:space="preserve">
-    <value>Thắng Thua của vé cược đã bán (Mới)</value>
+    <value>Thắng Thua Của Vé Cược Đã Bán (Mới)</value>
   </data>
   <data name="notificationreport" xml:space="preserve">
     <value>THÔNG BÁO</value>
@@ -316,7 +316,7 @@
     <value>Phân Tích Thắng Thua</value>
   </data>
   <data name="winlossbybettype33" xml:space="preserve">
-    <value>Thắng Thua theo Loại cược</value>
+    <value>Thắng Thua Theo Loại Cược</value>
   </data>
   <data name="winlossbyleague59" xml:space="preserve">
     <value>Thắng Thua Theo Giải Đấu</value>

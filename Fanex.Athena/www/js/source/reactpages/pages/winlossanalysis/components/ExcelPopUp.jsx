@@ -14,7 +14,7 @@ export const ExcelPopUp = (props) => {
     const [exportExcelMode, setExportExcelMode] = useState(ExportExcelMode.All);
     const { requestParam } = props;
     const options = [
-        { label: LangHelper.getSingleResource("BothGroupByAndBreakdownLevelOption"), value: ExportExcelMode.All },
+        { label: LangHelper.getSingleResource("BothGroupByAndBreakdownLevelOption").replace("&amp;", "&"), value: ExportExcelMode.All },
         { label: LangHelper.getSingleResource("GroupByLevelOnlyOption"), value: ExportExcelMode.GroupByLevelOnly }
     ]
 
@@ -57,7 +57,7 @@ export const ExcelPopUp = (props) => {
                         onChange={_onChangeExcelModeHandler}/>
                     
                     <div className='button-group right-align'>
-                        <button className='btn btn-submit' onClick={exportExcel}>{LangHelper.getSingleResource("Ok")}</button>
+                        <button className='btn btn-submit' onClick={exportExcel}>{LangHelper.getSingleResource("OK")}</button>
                         <button className='btn btn-cancel' onClick={_onCloseHandler}>{LangHelper.getSingleResource("Cancel")}</button>
                     </div>
                 </div>

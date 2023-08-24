@@ -114,8 +114,8 @@ namespace Fanex.Athena.Excel.Report
 
             var row = sheet.CopyRow(TemplateSheet, RowTotalIndex, rowIndex);
 
-            row.Cells[ColumnSport].SetCellValue(ViewResources.Total);
             sheet.MergeCols(ColumnIndex, ColumnSport, rowIndex);
+            row.Cells[ColumnIndex].SetCellValue(ViewResources.Total);
 
             for (int i = 0; i < _resultModel.NumberOfWeeks; i++)
             {

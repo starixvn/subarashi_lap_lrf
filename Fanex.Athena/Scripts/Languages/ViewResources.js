@@ -1,4 +1,4 @@
-﻿// Generated at: 8/24/2023 9:36:57 AM
+﻿// Generated at: 8/29/2023 1:27:59 PM
 var _language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -475,7 +475,7 @@ LicenseeComm:"Licensee Comm",
 LicenseeContactAddErrorMsg_100:"Parameters are invalid!",
 LicenseeContactAddErrorMsg_101:"Licensee does not exist!",
 LicenseeContactCategoryNote:"The categories have not been assigned any contact.",
-LicenseeContactCategoryRuleNote:"Please make sure each type of category has at least a contact to receive the notification",
+LicenseeContactCategoryRuleNote:"Please make sure each type of category has at least a contact to receive the notification.",
 LicenseeContactDeleteErrorMsg_101:"Licensee does not exist!",
 LicenseeContactDeleteErrorMsg_102:"Someone has changed the contact, please check again!",
 LicenseeContactEditErrorMsg_100:"Parameters are invalid!",

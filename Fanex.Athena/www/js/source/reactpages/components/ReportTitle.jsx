@@ -9,9 +9,9 @@ const ReportTitle = ({content, extendContent, tag, ...attrs}) => {
                 <Tag className="report-title" {...attrs}>{content}{extendContent}</Tag>
             </div>
         )
- }
+}
 
- const propTypes = {
+const propTypes = {
     tag: PropTypes.string,
     content: PropTypes.any
 };
