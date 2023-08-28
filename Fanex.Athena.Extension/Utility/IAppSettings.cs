@@ -11,6 +11,8 @@
 
         string OfferCryptoCurrencyLicensees { get; }
 
+        string CryptoLicenseesSupportBaseEUR { get; }
+
         bool IsProduction { get; }
 
         bool IsDisableExportLargeBetList { get; }

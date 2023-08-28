@@ -3,20 +3,14 @@
     " - " + ViewResources.LeagueWinLoss;
     Layout = "~/Views/Desktop/Shared/_ReactPageLayout.cshtml";
 }
-@using Fanex.Athena.Model.Core.DataDomain;
-@using Fanex.Athena.Service.Core.Users.Interfaces
+@using Fanex.Athena.Service.Core.Common.Interfaces
 @model Fanex.Athena.Model.Report.ViewModel.LeagueWinLossViewModel
 @{
-    var appSettings = DependencyResolver.Current.GetService<IAppSettings>();
-    var session = DependencyResolver.Current.GetService<ISessionService>();
-    bool isOfferCryptoCurrencyLicensee = appSettings.OfferCryptoCurrencyLicensees.Split(',').Contains(session.LicenseeSession.LicenseeName, StringComparer.InvariantCultureIgnoreCase);
+    var currencyService = DependencyResolver.Current.GetService<ICurrencyService>();
+    var baseCurrencyList = currencyService.GetBaseCurrencyList().Select(c => new { value = c.Value, label = c.Value }).ToList();
 
     var productOptions = Model.Param.ProductOptions;
     var selectedProductCode = string.Join(",", productOptions.Where(x => x.Status).Select(x => x.Code).ToArray());
-    var offerCurrencyIds = isOfferCryptoCurrencyLicensee ? SystemConstants.BaseCryptoCurrencyListIds : SystemConstants.BaseCurrencyListIds;
-    var baseCurrencyList = SystemConstants.BaseCurrencyList
-        .Where(_ => offerCurrencyIds.Contains(_.Key))
-        .Select(c => new { value = c.Value, label = c.Value }).ToList();
 
     var selectedCurrency = string.Join(",", Model.CurrencyList.Select(x => x.Key).ToArray());
     var statusList = Model.StatusList.Select(x => new { value = x.ID, label = x.Name, status = x.Checked });

@@ -1,11 +1,9 @@
 ﻿@using System.Web.Mvc;
 @using Fanex.Athena.Extension.Helper;
-@using Fanex.Athena.Extension.Utility
 @using Fanex.Athena.Model.Core.MetaModel.Product;
 @using Fanex.Athena.Model.Core.DataDomain;
 @using Fanex.Athena.Resources;
-@using Fanex.Athena.Service.Core.Users
-@using Fanex.Athena.Service.Core.Users.Interfaces
+@using Fanex.Athena.Service.Core.Common.Interfaces
 @helper  PlatformList(string id)
 {
     /**/
@@ -110,11 +108,8 @@
     bool addMoreAllOption = true,
     bool addBasedOption = false)
 {
-    var session = DependencyResolver.Current.GetService<ISessionService>();
-    var appSettings = DependencyResolver.Current.GetService<IAppSettings>();
-    bool isOfferCryptoCurrencyLicensee = appSettings.OfferCryptoCurrencyLicensees.Split(',').Contains(session.LicenseeSession.LicenseeName, StringComparer.InvariantCultureIgnoreCase);
-    var offerCurrencyIds = isOfferCryptoCurrencyLicensee ? SystemConstants.BaseCryptoCurrencyListIds : SystemConstants.BaseCurrencyListIds;
-    var baseCurrencyList = SystemConstants.BaseCurrencyList.Where(_ => offerCurrencyIds.Contains(_.Key));
+    var currencyService = DependencyResolver.Current.GetService<ICurrencyService>();
+    var baseCurrencyList = currencyService.GetBaseCurrencyList();
     var selectedName = currencyList.Where(p => p.Key == selected).FirstOrDefault().Key;
     var selectedBaseCurrency = SystemConstants.BaseCurrencyList
         .FirstOrDefault(i => i.Key == selected).Value;
@@ -167,12 +162,8 @@
 }
 @helper BasedCurrency(string selectedBasedCurrency = "", string CurrencyName = null)
 {
-
-    var session = DependencyResolver.Current.GetService<ISessionService>();
-    var appSettings = DependencyResolver.Current.GetService<IAppSettings>();
-    bool isOfferCryptoCurrencyLicensee = appSettings.OfferCryptoCurrencyLicensees.Split(',').Contains(session.LicenseeSession.LicenseeName, StringComparer.InvariantCultureIgnoreCase);
-    var offerCurrencyIds = isOfferCryptoCurrencyLicensee ? SystemConstants.BaseCryptoCurrencyListIds : SystemConstants.BaseCurrencyListIds;
-    var baseCurrencyList = SystemConstants.BaseCurrencyList.Where(_ => offerCurrencyIds.Contains(_.Key));
+    var currencyService = DependencyResolver.Current.GetService<ICurrencyService>();
+    var baseCurrencyList = currencyService.GetBaseCurrencyList();
 
     <select class="based-currency hide" name="BaseCurrency" id="BaseCurrency" data-original="@selectedBasedCurrency">
         @foreach (var item in baseCurrencyList)

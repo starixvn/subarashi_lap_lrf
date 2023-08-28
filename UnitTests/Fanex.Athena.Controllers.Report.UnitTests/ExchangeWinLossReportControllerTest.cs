@@ -4,6 +4,7 @@ namespace Fanex.Athena.Controllers.Report.UnitTests
 {
     using Base.UnitTests;
     using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
@@ -15,6 +16,7 @@ namespace Fanex.Athena.Controllers.Report.UnitTests
     using NUnit.Framework;
 
     using System;
+    using System.Collections.Generic;
     using System.Web.Mvc;
 
     public class ExchangeWinLossReportControllerTest : CultureBaseControllerHelperTest
@@ -65,13 +67,15 @@ namespace Fanex.Athena.Controllers.Report.UnitTests
         private ExchangeWinLossReportController CreateController()
         {
             var reportSettingService = Substitute.For<IReportSettingService>();
+            var currencyService = Substitute.For<ICurrencyService>();
             reportSettingService.GetSetting(PermissionKeys.ReportExchangeWinLoss, Arg.Any<string>()).Returns(new ReportSetting
             {
                 MinDate = _minDate,
                 MaxDate = _maxDate
             });
+            currencyService.GetBaseCurrencyList().Returns(new Dictionary<int, string>());
 
-            var controller = Substitute.ForPartsOf<ExchangeWinLossReportController>(reportSettingService, Substitute.For<ISubsidiaryService>());
+            var controller = Substitute.ForPartsOf<ExchangeWinLossReportController>(reportSettingService, Substitute.For<ISubsidiaryService>(), currencyService);
             controller.LangService = LangService;
             controller.SessionServiceInstance = SessionService;
             controller.AppSettingInstance = Substitute.For<IAppSettings>();
