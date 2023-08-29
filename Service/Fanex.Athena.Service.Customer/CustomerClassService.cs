@@ -1,5 +1,9 @@
 ﻿namespace Fanex.Athena.Service.Customer
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
     using Fanex.Athena.DataAccess.Customer;
     using Fanex.Athena.Extension.Helpers;
     using Fanex.Athena.Extension.Utility;
@@ -12,10 +16,6 @@
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Logging;
     using Newtonsoft.Json;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
 
     public class CustomerClassService : ICustomerClassService
     {
@@ -165,14 +165,14 @@
 
                 customerClassCategory = _cache.Get<List<CustomerClassCategoryModel>>(CacheKey.MemorycacheCustomerClassCategories + "_backup");
 
-                return customerClassCategory;
+                return customerClassCategory ?? new List<CustomerClassCategoryModel>();
             }
             catch (Exception exception)
             {
                 _logger.Error(LogMessageHelper.GenerateMessage(exception));
             }
 
-            return customerClassCategory;
+            return new List<CustomerClassCategoryModel>();
         }
 
         public async Task<IEnumerable<RiskLevel>> GetAllRiskLevel()
