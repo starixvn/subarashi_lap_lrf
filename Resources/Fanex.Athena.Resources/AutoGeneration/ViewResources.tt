@@ -7,44 +7,53 @@
 <#@ import namespace="System" #>
 <#@ import namespace="System.IO" #>
 <#@ import namespace="System.Security" #>
+
 <#
 	string solutionPath = Host.ResolveAssemblyReference("$(SolutionDir)");
 	Directory.SetCurrentDirectory(solutionPath);
 	var manager = T4FileManager.Create(this);	
 	string[] filePaths = Directory.GetFiles(solutionPath, "ViewResources*.resx", SearchOption.AllDirectories);
+
+	(string outputPath, bool ignoreJs, string variableName) [] configs = new [] { 
+		("www\\js\\source\\common\\languages", true, "window." ),
+		("Scripts\\Languages", false , "var ")
+	};
+
 	foreach(var filePath in filePaths)
 	{        
 		var fileName = Path.GetFileName(filePath.Replace("resx", "js"));
-		manager.StartNewFile(fileName, null, "www\\js\\source\\common\\languages");
-		const string ignoreKey = "ignorejs";
-		using (var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
-            {
-               var xdoc = System.Xml.Linq.XDocument.Load(stream);
-					var items = xdoc.Descendants("data").OrderBy(i=>i.Attribute("name").Value);
-					 var index = 0;
-					var lastIndex = items.Count() - 1;
+		foreach (var config in configs)
+		{
+			manager.StartNewFile(fileName, "Fanex.Athena", config.outputPath);
+			const string ignoreKey = "ignorejs";
+			using (var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+			{
+				var xdoc = System.Xml.Linq.XDocument.Load(stream);
+				var items = xdoc.Descendants("data").OrderBy(i=>i.Attribute("name").Value);
+				var index = 0;
+				var lastIndex = items.Count() - 1;
 #>
 // Generated at: <#= DateTime.Now.ToString() #>
-window.<#=GetJsObjectName(fileName)#> = {
+<#=config.variableName #><#=GetJsObjectName(fileName)#> = {
 <#
-                foreach (var item in items)
-                {
-                    var se = index < lastIndex;
-                    var valueItem = item.Descendants("value").FirstOrDefault();
+				foreach (var item in items)
+				{
+					var se = index < lastIndex;
+					var valueItem = item.Descendants("value").FirstOrDefault();
 					var commentItem = item.Descendants("comment").FirstOrDefault();
 					index++;
-					var noGenerate = (commentItem?.Value?.ToString() ?? string.Empty)
-										.ToLower()
-										.Contains(ignoreKey);
+					var noGenerate = config.ignoreJs && (commentItem?.Value?.ToString() ?? string.Empty)
+									.ToLower()
+									.Contains(ignoreKey);
 					if(noGenerate) 
 					{
 						continue;
 					}
-			#>
+#>
 <#=CreateJsonProperties(item.Attribute("name").Value, valueItem.Value, se)#>
 <# }} #>
 };
-<# }
+<# }}
 	manager.Process();
 #>
 

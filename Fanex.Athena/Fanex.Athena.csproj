@@ -368,14 +368,9 @@
     <Content Include="Content\Account\Permission.css" />
     <Content Include="Content\Global\images\flag_vi-VN.png" />
     <Content Include="karma-new-bypage.conf.js" />
-    <Content Include="Scripts\Languages\ViewResources.txt">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ViewResources.tt</DependentUpon>
-    </Content>
-    <Content Include="Scripts\Languages\ViewResources.vi-VN.js">
-      <DependentUpon>ViewResources.tt</DependentUpon>
-    </Content>
+    <Content Include="Scripts\Languages\ViewResources.js" />
+    <Content Include="Scripts\Languages\ViewResources.vi-VN.js" />
+    <Content Include="Scripts\Languages\ViewResources.zh-CN.js" />
     <Content Include="SpNameConfig\FanexSpName.AWS.xml">
       <DependentUpon>FanexSpName.xml.tt</DependentUpon>
     </Content>
@@ -511,7 +506,7 @@
     <Content Include="Scripts\Helper\ProductListHelper.js" />
     <Content Include="Scripts\Library\jquery.marquee.js" />
     <Content Include="www\js\build\**" />
-	<Content Include="www\css\build\**" />
+    <Content Include="www\css\build\**" />
     <Content Include="www\assets\images\ajax-loader.gif" />
     <Content Include="www\assets\images\new-system.svg" />
     <Content Include="SiteConfig\Web.AppSettings.UATTW.config">
@@ -641,14 +636,9 @@
     <Content Include="www\css\source\reactpages\pages\betlist\images\q_Icon2_1.png" />
     <Content Include="www\css\source\reactpages\pages\betlist\images\q_Icon_2.png" />
     <Content Include="www\css\source\reactpages\pages\betlist\images\tab_topbg.gif" />
-    <Content Include="www\js\source\common\languages\ViewResources.txt">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ViewResources.tt</DependentUpon>
-    </Content>
-    <Content Include="www\js\source\common\languages\ViewResources.vi-VN.js">
-      <DependentUpon>ViewResources.tt</DependentUpon>
-    </Content>
+    <Content Include="www\js\source\common\languages\ViewResources.js" />
+    <Content Include="www\js\source\common\languages\ViewResources.vi-VN.js" />
+    <Content Include="www\js\source\common\languages\ViewResources.zh-CN.js" />
     <Content Include="www\js\source\components\toast.js" />
     <Content Include="www\js\source\extensions\ajaxBinaryTransporting.js" />
     <Content Include="www\js\source\helpers\datahelper.js" />
@@ -1231,16 +1221,6 @@
     <None Include="www\css\source\pages\report\turnover.scss" />
     <Content Include="www\css\source\pages\report\winlossbybettype.scss" />
     <None Include="www\css\source\pages\utility\licenseelist.scss" />
-    <Content Include="www\js\source\common\languages\ViewResources.js">
-      <DependentUpon>ViewResources.tt</DependentUpon>
-    </Content>
-    <Content Include="www\js\source\common\languages\ViewResources.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ViewResources.txt</LastGenOutput>
-    </Content>
-    <Content Include="www\js\source\common\languages\ViewResources.zh-CN.js">
-      <DependentUpon>ViewResources.tt</DependentUpon>
-    </Content>
     <Content Include="www\js\source\common\popup.js" />
     <Content Include="www\js\source\common\querystring.js" />
     <Content Include="www\js\source\reactpages\lib\QueryString.js" />
@@ -1540,12 +1520,6 @@
     <Content Include="Jasmine\SpecRunnerSingleTesting.html" />
     <Content Include="package.json" />
     <Content Include="karma.conf.js" />
-    <Content Include="Scripts\Languages\ViewResources.js">
-      <DependentUpon>ViewResources.tt</DependentUpon>
-    </Content>
-    <Content Include="Scripts\Languages\ViewResources.zh-CN.js">
-      <DependentUpon>ViewResources.tt</DependentUpon>
-    </Content>
     <Content Include="Scripts\Library\jquery.marquee.js" />
     <Content Include="Scripts\Library\CryptoJS.js" />
     <Content Include="Scripts\Library\moment.min.js" />
@@ -4763,10 +4737,6 @@
     <Content Include="Content\Web.config" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <Content Include="Views\Shared\_Report.jqGridLayout.cshtml" />
-    <None Include="Scripts\Languages\ViewResources.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ViewResources.txt</LastGenOutput>
-    </None>
     <Content Include="Views\Account\Manage.cshtml" />
     <Content Include="Views\Account\EditAccount.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
