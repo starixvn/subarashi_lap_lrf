@@ -356,7 +356,7 @@
             'WinLoss', 'Comm',
             'Total', 'LicenseeW_L',
             '@[ProductBT]<br/>@[Commission]',
-            '@[ProductCO]<br/>@[Commission]',
+            'CashOutCommission',
             'BA<br/>@[Commission]',
             '@[AmtDueToBetTrade]',
             '@[AmtDueToBA]',

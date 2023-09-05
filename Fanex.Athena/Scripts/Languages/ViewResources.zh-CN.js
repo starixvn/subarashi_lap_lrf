@@ -1,4 +1,4 @@
-﻿// Generated at: 8/29/2023 1:28:00 PM
+﻿// Generated at: 9/8/2023 8:56:05 AM
 var _language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -784,6 +784,7 @@ Subsidiary:"子网站",
 SubsidiaryPerformance:"子网站综合报表",
 SubsidiarySearch:"收寻子网站",
 SubsidiaryWL:"子网站输赢",
+Success:"完成",
 SuccessfullyUpdate:"更新成功",
 SuccessfullyUpdateBatchCommand:"更新成功: {0}",
 SuccessUpdateVipStatus:"更新成功: {0}",

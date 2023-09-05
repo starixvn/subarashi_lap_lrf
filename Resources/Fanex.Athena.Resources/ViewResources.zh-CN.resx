@@ -3175,4 +3175,7 @@
   <data name="DesktopGalaxy" xml:space="preserve">
     <value>桌机银河版</value>
   </data>
+  <data name="Success" xml:space="preserve">
+    <value>完成</value>
+  </data>
 </root>

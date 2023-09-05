@@ -1,4 +1,4 @@
-﻿// Generated at: 8/29/2023 1:30:32 PM
+﻿// Generated at: 9/8/2023 8:56:05 AM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -844,6 +844,7 @@ Subsidiary:"Subsidiary",
 SubsidiaryPerformance:"Subsidiary Performance",
 SubsidiarySearch:"Subsidiary Search",
 SubsidiaryWL:"Subsidiary W/L",
+Success:"Success",
 SuccessfullyUpdate:"Successfully update",
 SuccessfullyUpdateBatchCommand:"Successfully update: {0}",
 SuccessUpdateVipStatus:"Successfully update: {0}",
@@ -959,7 +960,7 @@ UpdateToAccountStatus:"Update to Account Status",
 UpdateToActiveConfirmMsg:"Are you sure you want to change the status of this player to ACTIVE?",
 UpdateToClosedConfirmMsg:"Are you sure you want to change the status of this player to CLOSED?",
 UpdateToLockedConfirmMsg:"Are you sure you want to change the status of this player to LOCKED?",
-UpdateUnSuccess:"Update unsucessfully!",
+UpdateUnSuccess:"Update unsuccessfully!",
 UploadExternalIdList:"Upload External ID List",
 UploadFile:"Upload File",
 UploadFileError:"Could not load the file, please check file&apos;s template again !",

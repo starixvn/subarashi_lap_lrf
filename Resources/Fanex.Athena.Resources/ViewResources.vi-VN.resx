@@ -442,7 +442,7 @@
     <value>Giới hạn cược</value>
   </data>
   <data name="BettingStatement" xml:space="preserve">
-    <value>Sao kê</value>
+    <value>Sao kê Cược</value>
   </data>
   <data name="BettingTicketCenter" xml:space="preserve">
     <value>Trung Tâm Vé Cược</value>
@@ -1330,16 +1330,16 @@
     <value>Bao gồm dữ liệu Hòa</value>
   </data>
   <data name="IncorrectMaxBet" xml:space="preserve">
-    <value>Mức cược tối đa không hợp lệ</value>
+    <value>Cược tối đa không hợp lệ</value>
   </data>
   <data name="IncorrectMaxBetPerDraw" xml:space="preserve">
     <value>Cược Tối Đa Cho Mỗi Lượt không hợp lệ</value>
   </data>
   <data name="IncorrectMaxPerBall" xml:space="preserve">
-    <value>Cược tối đa mỗi lượt bóng không chính xác</value>
+    <value>Cược Tối Đa Cho Mỗi Lượt Bóng không hợp lệ</value>
   </data>
   <data name="IncorrectMaxPerMatch" xml:space="preserve">
-    <value>Cược Tối Đa Cho Mỗi Trận không đúng</value>
+    <value>Cược Tối Đa Cho Mỗi Trận không hợp lệ</value>
   </data>
   <data name="IncorrectMinBet" xml:space="preserve">
     <value>Cược tối thiểu không hợp lệ</value>
@@ -1714,10 +1714,10 @@
     <value>Tiền cược tối đa cho mỗi lượt</value>
   </data>
   <data name="MaxBetPerDrawLessThanOrEqual" xml:space="preserve">
-    <value>Giới hạn cược tối đa mỗi lượt phải nhỏ hơn hoặc bằng</value>
+    <value>Cược Tối Đa Mỗi Lượt phải nhỏ hơn hoặc bằng</value>
   </data>
   <data name="MaxBetPerDrawMoreThanOrEqual" xml:space="preserve">
-    <value>Cược tối đa cho mỗi lược phải lớn hơn hoặc bằng</value>
+    <value>Cược Tối Đa Mỗi Lượt phải lớn hơn hoặc bằng</value>
   </data>
   <data name="MaxBetPerMatch" xml:space="preserve">
     <value>Cược Tối Đa Mỗi Trận</value>
@@ -2667,6 +2667,9 @@
   <data name="SubsidiaryWL" xml:space="preserve">
     <value>Thắng Thua Chi nhánh</value>
   </data>
+  <data name="Success" xml:space="preserve">
+    <value>Thành Công</value>
+  </data>
   <data name="SuccessfullyUpdate" xml:space="preserve">
     <value>Cập nhật thành công</value>
   </data>
@@ -2968,7 +2971,7 @@
     <value>Cập nhật Nhóm Tỷ lệ cược</value>
   </data>
   <data name="UpdateProductBetSettings" xml:space="preserve">
-    <value>Bạn có muốn cập nhật toàn bộ {0} giới hạn cược?</value>
+    <value>Bạn có muốn cập nhật toàn bộ giới hạn cược của {0} ?</value>
   </data>
   <data name="UpdateProductBetSettingSuccessMsg" xml:space="preserve">
     <value> {0} giới hạn cược của {1} đã được cập nhật thành công</value>

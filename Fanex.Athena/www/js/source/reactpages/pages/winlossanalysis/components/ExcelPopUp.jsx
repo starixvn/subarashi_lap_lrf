@@ -7,6 +7,7 @@ import Service from '../common/Service';
 import Popup from '@jsroot/components/popup/Popup.jsx';
 import RadioGroup from '@jsroot/components/radio/RadioGroup.jsx';
 import LangHelper from '@jsroot/lib/langHelper';
+import {decode} from '@jsroot/lib/htmlHelper';
 import {v4 as uuidv4} from 'uuid';
 
 export const ExcelPopUp = (props) => {
@@ -14,8 +15,8 @@ export const ExcelPopUp = (props) => {
     const [exportExcelMode, setExportExcelMode] = useState(ExportExcelMode.All);
     const { requestParam } = props;
     const options = [
-        { label: LangHelper.getSingleResource("BothGroupByAndBreakdownLevelOption").replace("&amp;", "&"), value: ExportExcelMode.All },
-        { label: LangHelper.getSingleResource("GroupByLevelOnlyOption"), value: ExportExcelMode.GroupByLevelOnly }
+        { label: decode(LangHelper.getSingleResource("BothGroupByAndBreakdownLevelOption")), value: ExportExcelMode.All },
+        { label: decode(LangHelper.getSingleResource("GroupByLevelOnlyOption")), value: ExportExcelMode.GroupByLevelOnly }
     ]
 
     const _onclickHandler = () => {

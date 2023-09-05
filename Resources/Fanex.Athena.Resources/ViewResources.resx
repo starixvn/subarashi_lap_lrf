@@ -1493,7 +1493,7 @@
     <value>This customer has never played {0}.</value>
   </data>
   <data name="UpdateUnSuccess" xml:space="preserve">
-    <value>Update unsucessfully!</value>
+    <value>Update unsuccessfully!</value>
   </data>
   <data name="Lose" xml:space="preserve">
     <value>Lose</value>
@@ -3527,5 +3527,8 @@
   </data>
   <data name="DesktopGalaxy" xml:space="preserve">
     <value>Desktop Galaxy</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Success</value>
   </data>
 </root>
