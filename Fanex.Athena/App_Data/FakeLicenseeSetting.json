@@ -5,7 +5,7 @@
     "MinDate": "01/01/2019",
     "MaxDate": "today",
     "BaseCurrencies": "USD",
-    "LimitRecentMonths": 6,
+    "LimitRecentMonths": 12,
     "TimeZone": 8
   },
   {
