@@ -21,7 +21,6 @@
     {
         private const string DefaultTextValue = "-";
         private const string ChineseCulture = "zh-CN";
-        private const int CacheTimeoutSeconds = 900; // 15 minutes
 
         private readonly ICustomerClassDataAccess _dataAccess;
         private readonly IWebClientService _webClientService;
@@ -158,7 +157,7 @@
 
                 if (result.Any())
                 {
-                    _cache.Set(CacheKey.MemorycacheCustomerClassCategories, result, CacheTimeoutSeconds);
+                    _cache.Set(CacheKey.MemorycacheCustomerClassCategories, result);
                     _cache.SetWithoutExpired(CacheKey.MemorycacheCustomerClassCategories + "_backup", result);
                     return result;
                 }

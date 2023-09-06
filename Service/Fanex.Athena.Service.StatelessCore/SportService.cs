@@ -154,6 +154,7 @@ namespace Fanex.Athena.Service.StatelessCore
                 Value = sport.SportType.ToString()
             };
 
+#pragma warning disable S1541 // Methods and properties should not be too complex
         private string GetSportNameForTreeView(int sportType)
         {
             if (sportType > 0)
@@ -205,5 +206,6 @@ namespace Fanex.Athena.Service.StatelessCore
             }
             return $"{ViewResources.Saba}{sportName}";
         }
+#pragma warning restore S1541 // Methods and properties should not be too complex
     }
 }

@@ -82,13 +82,10 @@
 
                 LicenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(isFakeLic);
 
-                var expectedTitle = $"{ViewResources.Customer} {ViewResources.BetList} - 11/1/2018 --> 12/2/2018 - "
+                var expectedTitle = $"{ViewResources.CustomerBetList} 11/1/2018 --> 12/2/2018 - "
                     + $"External{(isFakeLic ? "" : "(System)")} - {string.Format(ViewResources.Viewin, expCurrency)}";
 
-                controller.When(async x => await x.ProcessExportExcel(
-                    Arg.Any<BetListExcelMetaModel>(),
-                    Arg.Any<string>(),
-                    Arg.Any<string>())).DoNotCallBase();
+                SetUpForExportingExcel(controller);
 
                 // Action
                 await controller.Index(metaModel);
@@ -121,6 +118,14 @@
             controller.SubsidiaryService = SubsidiaryService;
 
             return controller;
+        }
+
+        private void SetUpForExportingExcel(SabaVirtualSportsWinLossBetListController controller)
+        {
+            controller.When(async x => await x.ProcessExportExcel(
+                Arg.Any<BetListExcelMetaModel>(),
+                Arg.Any<string>(),
+                Arg.Any<string>())).DoNotCallBase();
         }
     }
 }
