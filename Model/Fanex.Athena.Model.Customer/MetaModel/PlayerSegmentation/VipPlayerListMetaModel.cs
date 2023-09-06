@@ -1,4 +1,5 @@
 ﻿using System;
+using Fanex.Athena.Extension.Helper;
 
 namespace Fanex.Athena.Model.Customer.MetaModel
 {
@@ -10,10 +11,36 @@ namespace Fanex.Athena.Model.Customer.MetaModel
 
         public byte IsCheckAll { get; set; }
 
-        public DateTime FromDate { get; set; }
+        private DateTime _fromDate;
 
-        public DateTime ToDate { get; set; }
+        public DateTime FromDate
+        {
+            get
+            {
+                return _fromDate;
+            }
+            set
+            {
+                _fromDate = DateTimeHelper.ToBeginOfTheDay(value);
+            }
+        }
 
-        public override bool IsValid => base.IsValid && (VipOption >= 0 && VipOption <= NumberOfVIPOptions);
+        private DateTime _toDate;
+
+        public DateTime ToDate
+        {
+            get
+            {
+                return _toDate;
+            }
+            set
+            {
+                _toDate = DateTimeHelper.ToEndOfTheDay(value);
+            }
+        }
+
+#pragma warning disable S1067 // Expressions should not be too complex
+        public override bool IsValid => base.IsValid && (VipOption >= 0 && VipOption <= NumberOfVIPOptions) && (IsCheckAll != 0 || FromDate <= ToDate);
+#pragma warning restore S1067 // Expressions should not be too complex
     }
 }

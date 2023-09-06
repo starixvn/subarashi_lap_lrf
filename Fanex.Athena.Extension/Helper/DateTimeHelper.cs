@@ -51,7 +51,7 @@
 
         public static DateTime ToEndOfTheDay(DateTime datetime)
         {
-            return datetime.Date.AddDays(1).AddSeconds(-3);
+            return datetime.Date.AddDays(1).AddMilliseconds(-3);
         }
 
         public static DateTime GetFirstDateOfMonth(DateTime datetime)
