@@ -3829,14 +3829,11 @@ textarea {
 .flag-icon-en-US {
   background-image: url(../fonts/flags/flags/gb.svg); }
 
-.flag-icon-zh-TW {
-  background-image: url(../fonts/flags/flags/tw.svg); }
-
 .flag-icon-zh-CN {
   background-image: url(../fonts/flags/flags/cn.svg); }
 
-.flag-icon-zh-Hans {
-  background-image: url(../fonts/flags/flags/cn.svg); }
+.flag-icon-vi-VN {
+  background-image: url(../fonts/flags/flags/vn.svg); }
 
 /* z-index */
 @font-face {
@@ -5471,7 +5468,7 @@ input[type="checkbox"] {
   height: 36px;
   line-height: 36px;
   outline: 0;
-  padding: 0 2rem;
+  padding: 0 1.5rem;
   text-transform: uppercase;
   vertical-align: middle;
   -webkit-tap-highlight-color: transparent; }
@@ -6210,7 +6207,9 @@ header nav {
       width: 170px;
       overflow: hidden;
       display: inline-block;
-      line-height: 1rem; }
+      line-height: 2rem;
+      padding-bottom: 10px;
+      vertical-align: bottom; }
   .side-nav.fixed .menu-item:not(.active) .collapsible-header i.icon-arrow {
     transition: none; }
   .side-nav.fixed .menu-item.active {

@@ -139,7 +139,7 @@ input[type="checkbox"].checkbox {
 
 .rdr-MonthAndYearSelect {
   height: 25px;
-  width: 65px; }
+  width: 75px; }
 
 .rdr-WeekDay {
   font-size: 12px;
@@ -443,6 +443,9 @@ input[type="checkbox"].checkbox {
 
 .multiple-select-container {
   position: relative; }
+
+.multiple-select-container.invalid .multiple-select-label {
+  border-bottom-color: red; }
 
 .multiple-select-default {
   box-sizing: border-box;
