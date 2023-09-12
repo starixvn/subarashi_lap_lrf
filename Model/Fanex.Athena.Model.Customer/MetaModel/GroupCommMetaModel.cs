@@ -129,6 +129,10 @@
 
         public decimal JIGComm { get; set; }
 
+        public decimal YBComm { get; set; }
+
+        public decimal MgRNGComm { get; set; }
+
         public void MapQuery()
         {
             CommValues = new Dictionary<string, decimal>();
@@ -168,6 +172,9 @@
             CommValues.Add(Product.FGGL, FGGLComm);
             CommValues.Add(Product.MXG, MXGComm);
             CommValues.Add(Product.JIG, JIGComm);
+
+            CommValues.Add(Product.YB, YBComm);
+            CommValues.Add(Product.MGRNG, MgRNGComm);
         }
 
         public void MapData(IDataReader reader, IDictionary<string, string> columns, IDictionary<string, bool> visibility)
