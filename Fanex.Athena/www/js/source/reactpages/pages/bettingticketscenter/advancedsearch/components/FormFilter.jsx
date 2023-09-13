@@ -52,7 +52,9 @@ export class FormFilter extends Component {
     }
 
     _showExportWarning = () => {
-        toast.success(<ToastMsg />);
+        toast.success(<ToastMsg />, { onClose: () => {
+            toast.dismiss();
+        }});
     }
 
     _isEnableLeagueMatch = () => {
