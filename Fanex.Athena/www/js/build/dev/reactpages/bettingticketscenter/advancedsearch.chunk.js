@@ -4602,7 +4602,11 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     _defineProperty(this, "showSubsidiarySearchCheckBox", this.showSubsidiaryDropdown && _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_14__["default"].subsidiaryViewType === _constants_report__WEBPACK_IMPORTED_MODULE_19__["SubsidiaryViewType"].MASTER_MANAGEMENT);
     _defineProperty(this, "whiteLabelView", _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_14__["default"].subsidiaryViewType === _constants_report__WEBPACK_IMPORTED_MODULE_19__["SubsidiaryViewType"].MASTER_MANAGEMENT && !_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_14__["default"].isOneworksMaster);
     _defineProperty(this, "_showExportWarning", () => {
-      react_toastify__WEBPACK_IMPORTED_MODULE_4__["toast"].success( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ToastMsg, null));
+      react_toastify__WEBPACK_IMPORTED_MODULE_4__["toast"].success( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ToastMsg, null), {
+        onClose: () => {
+          react_toastify__WEBPACK_IMPORTED_MODULE_4__["toast"].dismiss();
+        }
+      });
     });
     _defineProperty(this, "_isEnableLeagueMatch", () => {
       const productCode = this.props.selectedProduct;
