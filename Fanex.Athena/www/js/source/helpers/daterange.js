@@ -74,7 +74,7 @@ define(["jquery", "common/site", "common/popup"], function ($, Site, Popup) {
 
         showMessageBox: function (message) {
             var title = Site.getSingleResource("LrfNotification");
-            var dialogForm = '<div title="' + title + '"><p class="notification">' + message + '!</p></div>';
+            var dialogForm = '<div title="' + title + '"><p class="notification">' + message + '</p></div>';
 
             Popup.openPopup(dialogForm, { width: 350, height: 120, title: title, className: "popup-notification", id: "time-range-invalid" });
         }

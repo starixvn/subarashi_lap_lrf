@@ -304,7 +304,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
                 _monthNames = [
                     Site.getSingleResource('Jan'), Site.getSingleResource('Feb'), Site.getSingleResource('Mar'), Site.getSingleResource('Apr'),
-                    Site.getSingleResource('May'), Site.getSingleResource('Jun'), Site.getSingleResource('Jul'), Site.getSingleResource('Aug'),
+                    Site.getSingleResource('May2'), Site.getSingleResource('Jun'), Site.getSingleResource('Jul'), Site.getSingleResource('Aug'),
                     Site.getSingleResource('Sep'), Site.getSingleResource('Oct'), Site.getSingleResource('Nov'), Site.getSingleResource('Dec')
                 ];
             }
@@ -1036,7 +1036,7 @@ const decode = (html) => {
         var logger = { error: $.noop };
 
         Date.prototype.toStringFormat = function (format) {
-            var shortMonthsInYear = Site.getResources(["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]),
+            var shortMonthsInYear = Site.getResources(["Jan", "Feb", "Mar", "Apr", "May2", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]),
                 longMonthsInYear = Site.getResources(["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]),
                 year = this.getFullYear(),
                 month = this.getMonth(),

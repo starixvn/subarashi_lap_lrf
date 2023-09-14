@@ -67,7 +67,7 @@ define(['jquery', 'common/site', './agcasinowinloss.option', '../report', 'lib/j
                 if (level > 0) {
                     temp += '?level=' + level + '&currencyId='
                     + currencyId + '&custId=' + custId + '&fdate=' + moment(fdate).format('MM/DD/YYYY')
-                     + '&tdate=' + moment(tdate).format('MM/DD/YYYY');
+                    + '&tdate=' + moment(tdate).format('MM/DD/YYYY');
                 }
 
                 AgCasinoWinLossOption.urlExcelData = temp;

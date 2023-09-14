@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 8/24/2023 11:18:49 AM
+// Generated at: 9/12/2023 5:34:09 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -131,7 +131,7 @@ window._language_en_US = {
   AlertPasswordEmptyMsg: "Sorry, password can not be empty!!!",
   AlertRemoveSpecialLevelForCustomerMsg: "It will remove special level set for this customer. Are you sure?",
   AlertSetOddsGroupForCustomerMsg: "Are you sure you want to move this player to odds group {0}?",
-  AlertSetSpecialLevelForCustomerMsg: "Are you sure you want to set special level  for this customer?",
+  AlertSetSpecialLevelForCustomerMsg: "Are you sure you want to set special level for this customer?",
   AlertTurnOffBAMsg: "Are you sure you want to turn off BA?",
   AlertTurnOnBAMsg: "Are you sure you want to turn on BA?",
   AlertUpdateLicenseeContact: "Are you sure you want to update the contact?",
@@ -141,7 +141,7 @@ window._language_en_US = {
   AllCategories: "All Categories",
   AllCurrencies: "All Currencies",
   AllCustomerClassCategory: "All Customer Class Category",
-  AlreadyUpdateNotVipStatus: "Already NOT VIP, no update:  {0}",
+  AlreadyUpdateNotVipStatus: "Already NOT VIP, no update: {0}",
   AlreadyUpdateNotVipStatusSingle: "Already NOT VIP, no update",
   AlreadyUpdateVipStatus: "Already VIP, no update: {0}",
   AlreadyUpdateVipStatusSingle: "Already VIP, no update",
@@ -285,7 +285,7 @@ window._language_en_US = {
   ConfirmBatchUpdateOddsGroup: "Are you sure you want to move these players to selected odds group?",
   ConfirmBatchUpdateSpecialLevel: "Are you sure you want to set special level for these players?",
   ConfirmCommission: "Confirm Customer&apos;s Commission:",
-  ConfirmDeactivateVIPPlayer: "Are you sure you want to deactivate VIP  for the player(s) ?",
+  ConfirmDeactivateVIPPlayer: "Are you sure you want to deactivate VIP for the player(s) ?",
   ConfirmPassword: "Confirm Password",
   ConfirmUpdateMonitoredPlayer: "Are you sure you want to update Daily Winning Threshold ({0}) = {1}?",
   ContactType: "Contact Type",
@@ -565,7 +565,7 @@ window._language_en_US = {
   LicenseeContactAddErrorMsg_100: "Parameters are invalid!",
   LicenseeContactAddErrorMsg_101: "Licensee does not exist!",
   LicenseeContactCategoryNote: "The categories have not been assigned any contact.",
-  LicenseeContactCategoryRuleNote: "Please make sure each type of category has at least a contact to receive the notification",
+  LicenseeContactCategoryRuleNote: "Please make sure each type of category has at least a contact to receive the notification.",
   LicenseeContactDeleteErrorMsg_101: "Licensee does not exist!",
   LicenseeContactDeleteErrorMsg_102: "Someone has changed the contact, please check again!",
   LicenseeContactEditErrorMsg_100: "Parameters are invalid!",
@@ -631,6 +631,7 @@ window._language_en_US = {
   MaxPerMatch: "Max Per Match",
   MaxPerMatch2: "Max/Match",
   May: "May",
+  May2: "May",
   Member: "Member",
   Message_RemoveCustomerLog: "Customer Log will be removed at 11am on April 21st (GMT+8). Kindly use Player Administration instead. Thanks!",
   Message_UpcomingClosureReport: "This report will no longer be available after September 7th, 2023.&lt;br&gt;For related data, please refer to Win Loss Analysis report, which provides a better experience.&lt;br&gt;In case you don&apos;t have permission to view Win Loss Analysis report, please contact the administrator!",
@@ -680,7 +681,7 @@ window._language_en_US = {
   New: "New",
   NewGroup: "New Group",
   Next: "Next",
-  NextBetInteval: "Next Bet Inteval (sec)",
+  NextBetInteval: "Next Bet Interval (sec)",
   NG: "NG",
   NGComm: "NG Comm",
   NGCommission: "NG Commission",
@@ -891,6 +892,7 @@ window._language_en_US = {
   Search: "Search",
   SearchAllPlayers: "Search All Players",
   SearchByExactlyIp: "Search by Exactly IP",
+  SearchData: "Search data",
   SearchResult: "Search Result",
   SelectAtLeastOneCurrencyMsg: "Please select at least one currency!",
   SelectedCustomers: "Selected customers",
@@ -937,6 +939,7 @@ window._language_en_US = {
   SubsidiaryPerformance: "Subsidiary Performance",
   SubsidiarySearch: "Subsidiary Search",
   SubsidiaryWL: "Subsidiary W/L",
+  Success: "Success",
   SuccessfullyUpdate: "Successfully update",
   SuccessfullyUpdateBatchCommand: "Successfully update: {0}",
   SuccessUpdateVipStatus: "Successfully update: {0}",
@@ -1031,7 +1034,7 @@ window._language_en_US = {
   UpdateCommSucessfulMsg: "Successfully updated commission.",
   UpdateCurrencySuccessfulMsg: "Updating Currencies is successful.",
   UpdateCustomerCommission: "Update Customer Commission",
-  UpdateFunctionSuccessfulMsg: "Updating Functions is successul.",
+  UpdateFunctionSuccessfulMsg: "Updating Functions is successful.",
   UpdateKenoBetSettings: "Are you sure you want to update all RNG Keno bet settings?",
   UpdateKenoBetSettingSuccessMsg: "The RNG Keno bet setting of {0} was updated successfully",
   UpdateNumberGameBetSettings: "Are you sure you want to update all Number Game bet settings?",
@@ -1052,7 +1055,7 @@ window._language_en_US = {
   UpdateToActiveConfirmMsg: "Are you sure you want to change the status of this player to ACTIVE?",
   UpdateToClosedConfirmMsg: "Are you sure you want to change the status of this player to CLOSED?",
   UpdateToLockedConfirmMsg: "Are you sure you want to change the status of this player to LOCKED?",
-  UpdateUnSuccess: "Update unsucessfully!",
+  UpdateUnSuccess: "Update unsuccessfully!",
   UploadExternalIdList: "Upload External ID List",
   UploadFile: "Upload File",
   UploadFileError: "Could not load the file, please check file&apos;s template again !",
@@ -1162,7 +1165,8 @@ class LangHelper {
 }
 _defineProperty(LangHelper, "languageKeys", {
   eng: "en-US",
-  zhCN: "zh-CN"
+  zhCN: "zh-CN",
+  viVN: "vi-VN"
 });
 
 /***/ }),

@@ -108,7 +108,7 @@
             var resourceManager = ViewResources.ResourceManager;
             for (int i = 0; i < _showProductOptions.Count(); i++)
             {
-                var productCode = _showProductOptions[i] == "SB" ? "SVS" : _showProductOptions[i];
+                var productCode = _showProductOptions[i] == "SB" ? "SBVS" : _showProductOptions[i];
                 var text = resourceManager.GetString("Product" + productCode);
                 row2.Cells[ColumnTurnoverSportBook + i].SetCellValue(text);
                 row2.Cells[ColumnLicenseeWlSportsBook + i].SetCellValue(text);

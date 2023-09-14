@@ -47,7 +47,7 @@ namespace Fanex.Athena.Service.Core.UnitTests.Proxy
             var result = await _service.HandleRequest("key", "url/home", HttpContext.Current.Request);
 
             // Assert
-            Assert.AreEqual(result.StatusCode, HttpStatusCode.OK);
+            Assert.AreEqual(HttpStatusCode.OK, result.StatusCode);
         }
 
         [Test]
@@ -67,7 +67,7 @@ namespace Fanex.Athena.Service.Core.UnitTests.Proxy
             var result = await _service.HandleRequest("key", "url/home", HttpContext.Current.Request);
 
             // Assert
-            Assert.AreEqual(result.StatusCode, HttpStatusCode.InternalServerError);
+            Assert.AreEqual(HttpStatusCode.InternalServerError, result.StatusCode);
         }
 
         [Test]
@@ -87,7 +87,7 @@ namespace Fanex.Athena.Service.Core.UnitTests.Proxy
             var result = await _service.HandleRequest("key", "url/home");
 
             // Assert
-            Assert.AreEqual(result.StatusCode, HttpStatusCode.InternalServerError);
+            Assert.AreEqual(HttpStatusCode.InternalServerError, result.StatusCode);
         }
 
         [Test]
@@ -107,7 +107,7 @@ namespace Fanex.Athena.Service.Core.UnitTests.Proxy
             var result = await _service.HealthCheck("key");
 
             // Assert
-            Assert.AreEqual(result.StatusCode, HttpStatusCode.InternalServerError);
+            Assert.AreEqual(HttpStatusCode.InternalServerError, result.StatusCode);
         }
 
         [Test]
@@ -127,7 +127,7 @@ namespace Fanex.Athena.Service.Core.UnitTests.Proxy
             var result = await _service.HealthCheck("key");
 
             // Assert
-            Assert.AreEqual(result.StatusCode, HttpStatusCode.OK);
+            Assert.AreEqual(HttpStatusCode.OK, result.StatusCode);
         }
 
         private static HttpContext GetHttpContext()

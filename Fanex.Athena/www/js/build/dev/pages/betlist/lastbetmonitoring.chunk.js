@@ -5169,7 +5169,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                 customCheckAllText: Site.getSingleResource('All'),
                 showSearchBox: true,
                 checkAllText: Site.getSingleResource('All'),
-                noneSelectedText: Site.getSingleResource('None'), // Text show on Multiselect when it has no selected item
+                noneSelectedText: Site.getSingleResource('SelectOptions'), // Text show on Multiselect when it has no selected item
                 selectedText: Site.getSingleResource('SelectedItemCount'), // Text show when item was selected
                 listData: [],
                 onCheck: handleLeagueCheck
@@ -5334,7 +5334,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                 isCheckAll: true,
                 showFooter: false,
                 checkAllText: Site.getSingleResource('All'),
-                noneSelectedText: Site.getSingleResource('None'), // Text show on Multiselect when it has no selected item
+                noneSelectedText: Site.getSingleResource('SelectOptions'), // Text show on Multiselect when it has no selected item
                 selectedText: Site.getSingleResource('SelectedItemCount'), // Text show when item was selected
                 listData: sportList,
                 onCheck: handleSportCheck
@@ -5378,7 +5378,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                 specialList.push({
                     Id: 'special-option-' + i,
                     Value: i.toString(),
-                    Text: i === 0 ? Site.getSingleResource('None') : i.toString(),
+                    Text: i === 0 ? Site.getSingleResource('SelectOptions') : i.toString(),
                     Checked: true,
                     Enable: true,
                     Css: '',
@@ -5394,7 +5394,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                 isCheckAll: true,
                 showFooter: false,
                 checkAllText: Site.getSingleResource('All'),
-                noneSelectedText: Site.getSingleResource('NoneLevel'), // Text show on Multiselect when it has no selected item
+                noneSelectedText: Site.getSingleResource('SelectOptions'), // Text show on Multiselect when it has no selected item
                 selectedText: Site.getSingleResource('SelectedItemCount'), // Text show when item was selected
                 listData: specialList,
                 onCheck: function () {
@@ -5430,7 +5430,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                 isCheckAll: true,
                 showFooter: false,
                 checkAllText: Site.getSingleResource('All'),
-                noneSelectedText: Site.getSingleResource('NoneCurrency'), // Text show on Multiselect when it has no selected item
+                noneSelectedText: Site.getSingleResource('SelectOptions'), // Text show on Multiselect when it has no selected item
                 selectedText: Site.getSingleResource('SelectedItemCount'), // Text show when item was selected
                 listData: currencyList,
                 onCheck: function () {
@@ -5580,7 +5580,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                 isCheckAll: true,
                 showFooter: false,
                 checkAllText: Site.getSingleResource('All'),
-                noneSelectedText: Site.getSingleResource('None'),
+                noneSelectedText: Site.getSingleResource('SelectOptions'),
                 selectedText: Site.getSingleResource('SelectedItemCount'),
                 listData: columns,
                 onCheck: function () {

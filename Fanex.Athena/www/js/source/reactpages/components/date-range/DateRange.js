@@ -74,7 +74,7 @@ class DateRange extends Component {
     this.isValid = this.isValidMonthRange(range);
 
     if (this.isValid) {
-       const newState = show === undefined ? { range } : { range, show };
+      const newState = show === undefined ? { range } : { range, show };
       this.setState(newState);
     }
     else

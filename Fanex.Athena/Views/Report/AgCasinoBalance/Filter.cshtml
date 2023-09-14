@@ -5,7 +5,7 @@
     <!--grid_26-->
     <form id="AgCasinoBalanceForm" name="AgCasinoBalanceForm" method="post" action="">
         @Html.AntiForgeryToken()
-    <div class="grid_3 filter-label">
+    <div class="grid_4 filter-label">
         <label>@ViewResources.ViewDataInMonth</label>
     </div>
     <div class="grid_8 filter-input month-picker">
@@ -23,15 +23,15 @@
         <input type="hidden" id="Year" name="Year" value="@Model.Param.FromDate.Year" />
         <input type="hidden" id="MinDate" value="@(new DateTime(2014, 10, 16).ToString("yyyy/M/d"))" />
     </div>
-    <div class="grid_3 filter-label new-line">
+    <div class="grid_4 filter-label new-line">
         <label>
             @ViewResources.Currency
         </label>
     </div>
-    <div class="grid_4 filter-input">
+    <div class="grid_3 filter-input">
         @RazorHelper.CurrencyList(Model.CurrencyList, "currency-list", Model.Param.CurrencyId, true, true)
     </div>
-    <div class="grid_3 filter-label">
+    <div class="grid_4 filter-label">
         <label for="IsExcludedTestData">
             @ViewResources.ExcludeTestData
         </label>
@@ -50,7 +50,7 @@
                title="@ViewResources.ExportToExcel" class="hand" />
         </div>
     </div>
-    <div class="grid_3 filter-label new-line">
+    <div class="grid_4 filter-label new-line">
         &nbsp;</div>
     <div class="grid_2 filter-input" id="control-container">
         <input type="button" id="SubmitButton" value="@ViewResources.Submit" class="button" />

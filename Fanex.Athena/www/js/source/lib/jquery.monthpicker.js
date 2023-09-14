@@ -13,7 +13,7 @@ define(["common/site"], function (Site) {
         var logger = { error: $.noop };
 
         Date.prototype.toStringFormat = function (format) {
-            var shortMonthsInYear = Site.getResources(["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]),
+            var shortMonthsInYear = Site.getResources(["Jan", "Feb", "Mar", "Apr", "May2", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]),
                 longMonthsInYear = Site.getResources(["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]),
                 year = this.getFullYear(),
                 month = this.getMonth(),

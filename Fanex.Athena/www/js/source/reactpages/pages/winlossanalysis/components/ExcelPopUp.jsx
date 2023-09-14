@@ -7,6 +7,7 @@ import Service from '../common/Service';
 import Popup from '@jsroot/components/popup/Popup.jsx';
 import RadioGroup from '@jsroot/components/radio/RadioGroup.jsx';
 import LangHelper from '@jsroot/lib/langHelper';
+import {decode} from '@jsroot/lib/htmlHelper';
 import {v4 as uuidv4} from 'uuid';
 
 export const ExcelPopUp = (props) => {
@@ -14,8 +15,8 @@ export const ExcelPopUp = (props) => {
     const [exportExcelMode, setExportExcelMode] = useState(ExportExcelMode.All);
     const { requestParam } = props;
     const options = [
-        { label: LangHelper.getSingleResource("BothGroupByAndBreakdownLevelOption"), value: ExportExcelMode.All },
-        { label: LangHelper.getSingleResource("GroupByLevelOnlyOption"), value: ExportExcelMode.GroupByLevelOnly }
+        { label: decode(LangHelper.getSingleResource("BothGroupByAndBreakdownLevelOption")), value: ExportExcelMode.All },
+        { label: decode(LangHelper.getSingleResource("GroupByLevelOnlyOption")), value: ExportExcelMode.GroupByLevelOnly }
     ]
 
     const _onclickHandler = () => {
@@ -57,7 +58,7 @@ export const ExcelPopUp = (props) => {
                         onChange={_onChangeExcelModeHandler}/>
                     
                     <div className='button-group right-align'>
-                        <button className='btn btn-submit' onClick={exportExcel}>{LangHelper.getSingleResource("Ok")}</button>
+                        <button className='btn btn-submit' onClick={exportExcel}>{LangHelper.getSingleResource("OK")}</button>
                         <button className='btn btn-cancel' onClick={_onCloseHandler}>{LangHelper.getSingleResource("Cancel")}</button>
                     </div>
                 </div>

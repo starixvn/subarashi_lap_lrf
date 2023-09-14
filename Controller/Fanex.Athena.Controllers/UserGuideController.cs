@@ -245,7 +245,7 @@
                 }
                 else
                 {
-                    result = new Regex($@"{openingSectionTag}[\s\S]*{closingSectionTag}").Replace(result, string.Empty);
+                    result = new Regex($@"{openingSectionTag}([\s\S]*?){closingSectionTag}").Replace(result, string.Empty);
                 }
             }
 

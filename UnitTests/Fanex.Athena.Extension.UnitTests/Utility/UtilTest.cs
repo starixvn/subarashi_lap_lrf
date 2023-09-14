@@ -8,11 +8,9 @@
     public class UtilTest
     {
         [TestCase("en-US", true)]
-        [TestCase("zh-TW", true)]
         [TestCase("zh-CN", true)]
-        [TestCase("zh-Hans", true)]
         [TestCase("en-us", false)]
-        [TestCase("vi-VN", false)]
+        [TestCase("vi-VN", true)]
         public void IsValidLanguage_WhenCall_ReturnCorrectResult(string languageCode, bool expected)
         {
             // Action

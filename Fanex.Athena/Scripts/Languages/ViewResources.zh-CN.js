@@ -1,4 +1,4 @@
-﻿// Generated at: 8/24/2023 11:18:03 AM
+﻿// Generated at: 9/12/2023 5:34:09 PM
 var _language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -506,6 +506,7 @@ MaxPerBet:"单注限额",
 MaxPerMatch:"单场限额",
 MaxPerMatch2:"累计单场限额",
 May:"五月",
+May2:"五月",
 Member:"玩家",
 Message_RemoveCustomerLog:"会员日志即将于4月21日上午11点(GMT+8)移除，敬请使用玩家管理取代相关查询。谢谢!",
 Message_UpcomingClosureReport:"2023 年 9 月 7 日之后，该报告将被移除。&lt;br&gt;相关数据请查看输赢分析报告，以获得更好的体验。&lt;br&gt;如果您没有权限查看输赢分析报告，请联系最高权限帐号拥有者！",
@@ -783,6 +784,7 @@ Subsidiary:"子网站",
 SubsidiaryPerformance:"子网站综合报表",
 SubsidiarySearch:"收寻子网站",
 SubsidiaryWL:"子网站输赢",
+Success:"完成",
 SuccessfullyUpdate:"更新成功",
 SuccessfullyUpdateBatchCommand:"更新成功: {0}",
 SuccessUpdateVipStatus:"更新成功: {0}",

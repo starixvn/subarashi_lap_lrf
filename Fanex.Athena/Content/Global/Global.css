@@ -445,13 +445,12 @@ div#header-wrapper div.languageIcon_en-US
 {
     background: url('images/flag_en-US.png') no-repeat;
 }
-div#header-wrapper div.languageIcon_zh-TW
-{
-    background: url('images/flag_zh-TW.png') no-repeat;
-}
 div#header-wrapper div.languageIcon_zh-CN
 {
     background: url('images/flag_zh-CN.png') no-repeat;
+}
+div#header-wrapper div.languageIcon_vi-VN {
+    background: url('images/flag_vi-VN.png') no-repeat;
 }
 div#header-wrapper div.welcome
 {

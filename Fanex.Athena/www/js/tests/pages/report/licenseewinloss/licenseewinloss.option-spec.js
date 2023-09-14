@@ -47,7 +47,7 @@
                     var columnNames = LicenseeWinLossOption.getColName([]);
 
                     expect(columnNames).toEqual(['#', 'Date', 'ExternalId', 'SystemId', 'Currency', 'Total', 'Turnover', 'ActualStake', 'BuyBackAmount', 'TotalTransaction',
-                        '@[Win]/@[Loss]', 'Comm', 'Total', 'Total', 'LicenseeW_L', '@[ProductBT]<br/>@[Commission]', '@[ProductCO]<br/>@[Commission]', 'BA<br/>@[Commission]',
+                        '@[Win]/@[Loss]', 'Comm', 'Total', 'Total', 'LicenseeW_L', '@[ProductBT]<br/>@[Commission]', 'CashOutCommission', 'BA<br/>@[Commission]',
                         '@[AmtDueToBetTrade]', '@[AmtDueToBA]', 'CurrencyId', 'CustomerId']);
                 });
 

@@ -385,7 +385,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to set special level  for this customer?.
+        ///   Looks up a localized string similar to Are you sure you want to set special level for this customer?.
         /// </summary>
         public static string AlertSetSpecialLevelForCustomerMsg {
             get {
@@ -475,7 +475,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Already NOT VIP, no update:  {0}.
+        ///   Looks up a localized string similar to Already NOT VIP, no update: {0}.
         /// </summary>
         public static string AlreadyUpdateNotVipStatus {
             get {
@@ -1780,7 +1780,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to deactivate VIP  for the player(s) ?.
+        ///   Looks up a localized string similar to Are you sure you want to deactivate VIP for the player(s) ?.
         /// </summary>
         public static string ConfirmDeactivateVIPPlayer {
             get {
@@ -4336,7 +4336,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please make sure each type of category has at least a contact to receive the notification.
+        ///   Looks up a localized string similar to Please make sure each type of category has at least a contact to receive the notification..
         /// </summary>
         public static string LicenseeContactCategoryRuleNote {
             get {
@@ -4939,6 +4939,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to May.
+        /// </summary>
+        public static string May2 {
+            get {
+                return ResourceManager.GetString("May2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Member.
         /// </summary>
         public static string Member {
@@ -5380,7 +5389,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Next Bet Inteval (sec).
+        ///   Looks up a localized string similar to Next Bet Interval (sec).
         /// </summary>
         public static string NextBetInteval {
             get {
@@ -7279,6 +7288,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Search data.
+        /// </summary>
+        public static string SearchData {
+            get {
+                return ResourceManager.GetString("SearchData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search Result.
         /// </summary>
         public static string SearchResult {
@@ -7689,6 +7707,15 @@ namespace Fanex.Athena.Resources {
         public static string SubsidiaryWL {
             get {
                 return ResourceManager.GetString("SubsidiaryWL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Success.
+        /// </summary>
+        public static string Success {
+            get {
+                return ResourceManager.GetString("Success", resourceCulture);
             }
         }
         
@@ -8539,7 +8566,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Updating Functions is successul..
+        ///   Looks up a localized string similar to Updating Functions is successful..
         /// </summary>
         public static string UpdateFunctionSuccessfulMsg {
             get {
@@ -8728,7 +8755,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Update unsucessfully!.
+        ///   Looks up a localized string similar to Update unsuccessfully!.
         /// </summary>
         public static string UpdateUnSuccess {
             get {

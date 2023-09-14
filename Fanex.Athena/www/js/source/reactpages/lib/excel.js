@@ -32,7 +32,7 @@ export default class Excel {
                 header: 1,
                 defval: '',
                 blankrows: true
-           });
+            });
 
             const result = {
                 header: rows && rows.length ? rows[0] : null,

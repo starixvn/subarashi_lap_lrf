@@ -234,7 +234,7 @@ body {
     .result-container table.fn-rs .cl-m-code .m-code {
       color: #599ced; }
   .result-container table.fn-rs .cl-ko-time {
-    width: 100px; }
+    width: 120px; }
   .result-container table.fn-rs .cl-s, .result-container table.fn-rs .cl-ot, .result-container table.fn-rs .cl-ei {
     width: 7%; }
   .result-container table.fn-rs .cl-totalgames, .result-container table.fn-rs .cl-totalpoint {
@@ -244,10 +244,10 @@ body {
     width: 68px;
     color: #ff0000; }
   .result-container table.fn-rs .cl-ht-score {
-    width: 90px;
+    width: 120px;
     color: #0054ff; }
   .result-container table.fn-rs .cl-f-score {
-    width: 90px;
+    width: 120px;
     color: #ff0000; }
   .result-container table.fn-rs .cl-status {
     text-transform: capitalize; }

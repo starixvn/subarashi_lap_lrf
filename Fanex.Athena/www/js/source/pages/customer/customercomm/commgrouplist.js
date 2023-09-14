@@ -54,9 +54,9 @@
                 data: deleteGroupData,
                 success: function (result) {
                     if (result.Code > 0) {
-                        _me.showResultPopup('Error', result.Message);
+                        _me.showResultPopup(Site.getSingleResource('Error'), result.Message);
                     } else {
-                        _me.showResultPopup('Success', Site.getSingleResource('MessageSuccess'));
+                        _me.showResultPopup(Site.getSingleResource('Success'), Site.getSingleResource('MessageSuccess'));
 
                         setTimeout(() => {
                             Site.redirect(Site.resolveClientUrl('CustomerComGroup/Index'));
@@ -260,7 +260,7 @@
                     valign: 'middle',
                     align: 'center',
                     title: Site.getSingleResource('DefaultGroup'),
-                    width: 100,
+                    width: 120,
                     class: 'col-frozen',
                     formatter: function (val) {
                         var s = val ? "icon-checkmark" : "";
@@ -290,7 +290,7 @@
                     align: 'center',
                     title: Site.getSingleResource('Product' + key),
                     class: `col-${key} ${selectedProducts.indexOf(key) != -1 ? "" : "hide"}`,
-                    width: 115,
+                    width: key.includes("Parlay") ? 150 : 115,
                     formatter: function (val) {
                         var n = formatter.formatNumber(val * 100, { format: '#,##0.00' });
                         return `${n}%`;

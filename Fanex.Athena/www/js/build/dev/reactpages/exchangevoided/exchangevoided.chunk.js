@@ -1260,7 +1260,8 @@ class LangHelper {
 }
 _defineProperty(LangHelper, "languageKeys", {
   eng: "en-US",
-  zhCN: "zh-CN"
+  zhCN: "zh-CN",
+  viVN: "vi-VN"
 });
 
 /***/ }),
@@ -1992,7 +1993,7 @@ const Note = () => {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-1",
     style: {
-      flex: "0 0 4%"
+      flex: "0 0 5%"
     }
   }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Note'), ":"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-9"

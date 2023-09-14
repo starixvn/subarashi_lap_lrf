@@ -20,8 +20,7 @@
     public class CustomerClassService : ICustomerClassService
     {
         private const string DefaultTextValue = "-";
-        private const string EnglishCulture = "en-US";
-        private const int CacheTimeoutSeconds = 900; // 15 minutes
+        private const string ChineseCulture = "zh-CN";
 
         private readonly ICustomerClassDataAccess _dataAccess;
         private readonly IWebClientService _webClientService;
@@ -86,7 +85,7 @@
             var customerClassCategories = await GetCustomerClassCategories();
             return customerClassCategories.Select(_ =>
             {
-                var translatedCategory = string.Equals(language, EnglishCulture, StringComparison.OrdinalIgnoreCase) ? _.CategoryName : _.CategoryNameCN;
+                var translatedCategory = string.Equals(language, ChineseCulture, StringComparison.OrdinalIgnoreCase) ? _.CategoryNameCN : _.CategoryName;
                 return new CustomerClassModel(_.CustomerClass.ToString())
                 {
                     Category = translatedCategory,
@@ -158,7 +157,7 @@
 
                 if (result.Any())
                 {
-                    _cache.Set(CacheKey.MemorycacheCustomerClassCategories, result, CacheTimeoutSeconds);
+                    _cache.Set(CacheKey.MemorycacheCustomerClassCategories, result);
                     _cache.SetWithoutExpired(CacheKey.MemorycacheCustomerClassCategories + "_backup", result);
                     return result;
                 }
@@ -203,11 +202,11 @@
             GetCustomerClassInformationMetaModel metaModel, List<CustomerClassModel> groups)
         {
             var categories = await GetCustomerClassCategories();
-            var isEnglish = string.Equals(metaModel.Language, "en-US", StringComparison.OrdinalIgnoreCase);
+            var isChinese = string.Equals(metaModel.Language, ChineseCulture, StringComparison.OrdinalIgnoreCase);
             foreach (var g in groups)
             {
                 var category = categories.Where(c => c.CustomerClass.ToString() == g.Id)
-                    .Select(c => isEnglish ? c.CategoryName : c.CategoryNameCN);
+                    .Select(c => isChinese ? c.CategoryNameCN : c.CategoryName);
                 g.Category = category.Any() ? string.Join(", ", category) : DefaultTextValue;
             }
         }

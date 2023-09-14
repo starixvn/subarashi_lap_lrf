@@ -302,7 +302,7 @@
             'TotalTransaction',
             'WinLoss', 'Comm',
             'Total', 'LicenseeW_L',
-            '@[ProductCO]<br/>@[Commission]',
+            'CashOutCommission',
             'BA<br/>@[Commission]',
             '@[AmtDueToBA]',
             'CurrencyId',

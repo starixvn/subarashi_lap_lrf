@@ -61,8 +61,8 @@
 
         protected static string GetCustomerBetListTitle(BetListMetaModel metaModel, string currencyTitle)
         {
-            return ViewResources.Customer + " " + ViewResources.BetList + string.Format(
-                 " - {0} --> {1} - {2}{3} - {4}",
+            return ViewResources.CustomerBetList + string.Format(
+                 " {0} --> {1} - {2}{3} - {4}",
                  metaModel.FromDate.ToString(FormatKey.ShortDateFormat),
                  metaModel.ToDate.ToString(FormatKey.ShortDateFormat),
                  metaModel.ExternalId,

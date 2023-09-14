@@ -139,6 +139,7 @@ namespace Fanex.Athena.Excel.Report.UnitTests
         {
             // Arrange
             const int RowIndex = 10;
+            const int ColumnIndex = 0;
             var row = ExcelTestHelper.MockGetRow(FakeSheet, ColumnCount, RowIndex);
             var excel = CreateExcel();
             int cellIndex = 2;
@@ -149,7 +150,7 @@ namespace Fanex.Athena.Excel.Report.UnitTests
             // Assert
             Assert.Multiple(() =>
             {
-                row.Cells[ColumnSport].Received(1).SetCellValue(ViewResources.Total);
+                row.Cells[ColumnIndex].Received(1).SetCellValue(ViewResources.Total);
                 for (int i = 0; i < ResultModel.NumberOfWeeks; i++)
                 {
                     row.Cells[cellIndex++].Received(1).SetCellValue(ResultModel.TotalData[i]);
