@@ -50,9 +50,6 @@ input[type="checkbox"].checkbox {
 .multiple-select-container {
   position: relative; }
 
-.multiple-select-container.invalid .multiple-select-label {
-  border-bottom-color: red; }
-
 .multiple-select-default {
   box-sizing: border-box;
   width: 100%; }
