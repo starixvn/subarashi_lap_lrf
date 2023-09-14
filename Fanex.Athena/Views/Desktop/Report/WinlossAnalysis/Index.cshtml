@@ -17,7 +17,7 @@
     var selectedStatus = string.Join(",", Model.StatusList.Where(x => x.Checked).Select(x => x.ID).ToArray());
     var selectedLiveStatus = string.Join(",", Model.LiveStatusList.Select(x => x.Key).ToArray());
     var selectedPlatform = string.Join(",", Model.PlatformList.Select(x => x.Key).ToArray());
-    var baseCurrencyList = currencyService.GetBaseCurrencyList().Select(c => new { value = c.Value, label = c.Value }).ToList();
+    var baseCurrencyList = currencyService.GetBaseCurrencyList(true).Select(c => new { value = c.Value, label = c.Value }).ToList();
     var selectedCurrency = string.Join(",", Model.CurrencyList.Select(x => x.Key).ToArray());
 
     var whitelabelList = Model.SubsidiaryList;
