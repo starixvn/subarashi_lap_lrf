@@ -1,4 +1,4 @@
-﻿// Generated at: 9/12/2023 5:34:09 PM
+﻿// Generated at: 9/18/2023 10:48:53 AM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -814,7 +814,9 @@ ServerBusyMessage:"Your request can&apos;t be processed now due to busy server. 
 SessionLoggedMsg:"You have logged in from another session or your login session has expired",
 SetAsDefaultGroup:"Set as default group",
 SettleAmount:"Settle Amount",
+SettledAndResettledDate:"Settled and Resettled Date",
 SettledAndResettledReport:"Settled and Resettled Report",
+SettledDateOnly:"Settled Date",
 SettledMatchCount:"Settled Match Count",
 SettledOnlyReport:"Settled Report",
 Show:"Show",
@@ -863,8 +865,9 @@ Tennis:"Tennis",
 Th:"Th",
 TheLicenseeHasNoAssignedCategory:"The Licensee has no assigned category. Please contact admin to assign at least one category before creating contacts",
 ThereIsNoSelectedItem:"There is no selected item.",
-TheSettledAndResettledReportNote:"The Settled and Resettled report displays data of settled and resettled tickets based on the selected date range.",
-TheSettledOnlyReportNote:"The Settled report only displays data of the first-time settled tickets based on the selected date range.",
+TheSettledAndResettledDataNote:"The data may have a delay of around 20 minutes for Settled tickets and 65 minutes for Resettled tickets.",
+TheSettledAndResettledDateNote:"&quot;Settled and Resettled Date&quot; mode will display data based on both Settled Date &amp; Resettled Date following the selected date range.",
+TheSettledDateOnlyNote:"&quot;Settled Date&quot; only displays data of the first-time settled tickets based on the selected date range.",
 Thursday:"Thursday",
 Ticket:"Ticket",
 TicketDetailOf:"Ticket detail of {0}",

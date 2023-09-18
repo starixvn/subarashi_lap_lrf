@@ -7441,11 +7441,29 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Settled and Resettled Date.
+        /// </summary>
+        public static string SettledAndResettledDate {
+            get {
+                return ResourceManager.GetString("SettledAndResettledDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Settled and Resettled Report.
         /// </summary>
         public static string SettledAndResettledReport {
             get {
                 return ResourceManager.GetString("SettledAndResettledReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settled Date.
+        /// </summary>
+        public static string SettledDateOnly {
+            get {
+                return ResourceManager.GetString("SettledDateOnly", resourceCulture);
             }
         }
         
@@ -7882,20 +7900,29 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The Settled and Resettled report displays data of settled and resettled tickets based on the selected date range..
+        ///   Looks up a localized string similar to The data may have a delay of around 20 minutes for Settled tickets and 65 minutes for Resettled tickets..
         /// </summary>
-        public static string TheSettledAndResettledReportNote {
+        public static string TheSettledAndResettledDataNote {
             get {
-                return ResourceManager.GetString("TheSettledAndResettledReportNote", resourceCulture);
+                return ResourceManager.GetString("TheSettledAndResettledDataNote", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The Settled report only displays data of the first-time settled tickets based on the selected date range..
+        ///   Looks up a localized string similar to &quot;Settled and Resettled Date&quot; mode will display data based on both Settled Date &amp; Resettled Date following the selected date range..
         /// </summary>
-        public static string TheSettledOnlyReportNote {
+        public static string TheSettledAndResettledDateNote {
             get {
-                return ResourceManager.GetString("TheSettledOnlyReportNote", resourceCulture);
+                return ResourceManager.GetString("TheSettledAndResettledDateNote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;Settled Date&quot; only displays data of the first-time settled tickets based on the selected date range..
+        /// </summary>
+        public static string TheSettledDateOnlyNote {
+            get {
+                return ResourceManager.GetString("TheSettledDateOnlyNote", resourceCulture);
             }
         }
         

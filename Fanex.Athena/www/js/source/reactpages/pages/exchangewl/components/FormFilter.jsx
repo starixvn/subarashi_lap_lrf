@@ -7,6 +7,7 @@ import { TreeViewSelect } from '@legion-lib/react-multiselect'
 import CheckBox from '@jsroot/components/CheckBox'
 import { DateRange } from '../../../components/date-range/index'
 import LangHelper from '../../../lib/langHelper'
+import {decode} from '../../../lib/htmlHelper.js'
 import Site from '@jsroot/lib/site'
 import AppData from '@jsroot/lib/AppData'
 import { ReportLevel, SubsidiaryViewType, TreeViewOption } from '../../../constants/report'
@@ -163,8 +164,8 @@ export class FormFilter extends Component {
     getNoteMessage = () => {
         const { selectedViewInOption } = this.props;
         return selectedViewInOption === ViewInType.SettledOnly 
-            ? LangHelper.getSingleResource("TheSettledOnlyReportNote") 
-            : LangHelper.getSingleResource("TheSettledAndResettledReportNote");
+            ? LangHelper.getSingleResource("TheSettledDateOnlyNote") 
+            : LangHelper.getSingleResource("TheSettledAndResettledDateNote");
     }
 
     _onChangeSubsidiaryList = (currentItem, selectedItemsKey, treeViewList) => {
@@ -321,7 +322,11 @@ export class FormFilter extends Component {
                 <div className="row">
                     <div className="col-11">
                         <span className="circle"></span>
-                        <span>{this.getNoteMessage()}</span>
+                        <span>{decode(this.getNoteMessage())}</span>
+                    </div>
+                    <div className="col-11">
+                        <span className="circle"></span>
+                        <span>{decode(LangHelper.getSingleResource("TheSettledAndResettledDataNote"))}</span>
                     </div>
                 </div>
                 < div className='caret-block'>
@@ -334,11 +339,11 @@ export class FormFilter extends Component {
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators(ActionCreators, dispatch);
-};
+}
 
 function mapStateToProps(state) {
     const { licenseeId, ...rest } = state;
     return Object.assign({}, rest);
-};
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormFilter);

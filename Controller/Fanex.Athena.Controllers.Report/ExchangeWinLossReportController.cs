@@ -80,8 +80,8 @@
                 },
                 DateTypeOption = new Dictionary<byte, string>
                 {
-                    { ViewInTypes.SettledAndResettledReport, ViewResources.SettledAndResettledReport },
-                    { ViewInTypes.SettledReport, ViewResources.SettledOnlyReport }
+                    { ViewInTypes.SettledAndResettledReport, ViewResources.SettledAndResettledDate },
+                    { ViewInTypes.SettledReport, ViewResources.SettledDateOnly }
                 },
                 ViewType = viewType,
                 SubsidiaryList = subsidiaryList

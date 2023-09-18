@@ -2966,11 +2966,11 @@
   <data name="ViewInWithNoParam" xml:space="preserve">
     <value>查看</value>
   </data>
-  <data name="TheSettledAndResettledReportNote" xml:space="preserve">
-    <value>已结算和重新结算报告显示所选日期范围内已结算和已重新结算注单的数据。</value>
+  <data name="TheSettledAndResettledDateNote" xml:space="preserve">
+    <value>''结算与已重新结算日''会显示所选日期内已结算与已重新结算的数据。</value>
   </data>
-  <data name="TheSettledOnlyReportNote" xml:space="preserve">
-    <value>已结算报表仅显示所选日期范围内的首次结算注单的数据。</value>
+  <data name="TheSettledDateOnlyNote" xml:space="preserve">
+    <value>''结算日''仅显示所选日期内第一次结算注单的数据。</value>
   </data>
   <data name="ExchangeWinLoss" xml:space="preserve">
     <value>Exchange输赢</value>
@@ -3177,5 +3177,14 @@
   </data>
   <data name="Success" xml:space="preserve">
     <value>完成</value>
+  </data>
+  <data name="SettledAndResettledDate" xml:space="preserve">
+    <value>结算与已重新结算日</value>
+  </data>
+  <data name="SettledDateOnly" xml:space="preserve">
+    <value>结算日</value>
+  </data>
+  <data name="TheSettledAndResettledDataNote" xml:space="preserve">
+    <value>报表数据与实际已结算数据大约有20分钟延迟，而与实际已重新结算数据大约有65分钟延迟。</value>
   </data>
 </root>
