@@ -10,8 +10,7 @@ namespace Fanex.Athena.Model.Core.Helper
     {
         public static bool ValidateBaseCurrency(string baseCurrency, bool isAllowEmpty = true)
         {
-            return (isAllowEmpty && string.IsNullOrEmpty(baseCurrency)) || SystemConstants.BaseCurrencyList
-           .Any(x => x.Value.Equals(baseCurrency, StringComparison.OrdinalIgnoreCase));
+            return isAllowEmpty || !string.IsNullOrEmpty(baseCurrency);
         }
 
         public static bool TryMetaModel<T>(IDictionary<string, object> actionArguments, out T model)

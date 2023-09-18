@@ -15,7 +15,6 @@ namespace Fanex.Athena.Service.Core.Common
         private readonly IAppSettings _appSettings;
         private readonly ISessionService _sessionService;
         private readonly ICustomMemoryCacheService _cache;
-        private const int OneDayInSecond = 86400;
 
         public CurrencyService(IAppSettings appSettings, ISessionService sessionService, ICustomMemoryCacheService cache)
         {
@@ -24,33 +23,48 @@ namespace Fanex.Athena.Service.Core.Common
             _cache = cache;
         }
 
-        public IReadOnlyDictionary<int, string> GetBaseCurrencyList()
+        public IDictionary<int, string> GetBaseCurrencyList(bool supportOnceCurrencyToBase = false)
         {
             var licenseeName = _sessionService.LicenseeSession.LicenseeName;
-            var cacheKey = string.Format(CacheKey.MemorycacheBaseCurrencyListByLicensee, licenseeName);
-            var baseCurrencyList = _cache.Get<IReadOnlyDictionary<int, string>>(cacheKey);
+            var userId = _sessionService.UserSession.UserId;
+            var cacheKey = string.Format(CacheKey.MemorycacheBaseCurrencyListByLicensee, licenseeName, userId, supportOnceCurrencyToBase.ToString());
+            var baseCurrencyList = _cache.Get<IDictionary<int, string>>(cacheKey);
+            var currencyList = _sessionService.UserSession.CurrencyList;
 
             if (baseCurrencyList != null)
             {
                 return baseCurrencyList;
             }
 
-            if (_appSettings.OfferCryptoCurrencyLicensees.Split(',').Contains(licenseeName, StringComparer.InvariantCultureIgnoreCase))
+            baseCurrencyList = GetByLicenseeSettings(licenseeName);
+
+            if (supportOnceCurrencyToBase && HasOneCurrencyAndNotBase(currencyList, baseCurrencyList))
             {
-                baseCurrencyList = SystemConstants.CryptoBaseCurrencyList;
-            }
-            else if (_appSettings.CryptoLicenseesSupportBaseEUR.Split(',').Contains(licenseeName, StringComparer.InvariantCultureIgnoreCase))
-            {
-                baseCurrencyList = SystemConstants.CryptoSupportEURBaseCurrencyList;
-            }
-            else
-            {
-                baseCurrencyList = SystemConstants.FlatBaseCurrencyList;
+                baseCurrencyList.Add(-currencyList.First().Key, currencyList.First().Value);
             }
 
-            _cache.Set(cacheKey, baseCurrencyList, OneDayInSecond);
+            _cache.Set(cacheKey, baseCurrencyList);
 
             return baseCurrencyList;
         }
+
+        private IDictionary<int, string> GetByLicenseeSettings(string licenseeName)
+        {
+            if (_appSettings.OfferCryptoCurrencyLicensees.Split(',').Contains(licenseeName, StringComparer.InvariantCultureIgnoreCase))
+            {
+                return SystemConstants.CryptoBaseCurrencyList.ToDictionary(_ => _.Key, _ => _.Value);
+            }
+            else if (_appSettings.CryptoLicenseesSupportBaseEUR.Split(',').Contains(licenseeName, StringComparer.InvariantCultureIgnoreCase))
+            {
+                return SystemConstants.CryptoSupportEURBaseCurrencyList.ToDictionary(_ => _.Key, _ => _.Value);
+            }
+            else
+            {
+                return SystemConstants.FlatBaseCurrencyList.ToDictionary(_ => _.Key, _ => _.Value);
+            }
+        }
+
+        private static bool HasOneCurrencyAndNotBase(IDictionary<int, string> currencyList, IDictionary<int, string> baseCurrencyList)
+            => currencyList.Count == 1 && !baseCurrencyList.Any(_ => _.Value.Equals(currencyList.First().Value, StringComparison.OrdinalIgnoreCase));
     }
 }

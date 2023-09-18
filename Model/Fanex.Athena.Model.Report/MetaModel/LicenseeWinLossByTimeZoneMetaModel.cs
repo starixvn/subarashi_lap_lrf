@@ -30,9 +30,7 @@
 
         public byte GroupBy { get; set; }
 
-        public bool IsValid => FromDate <= ToDate &&
-                                !string.IsNullOrEmpty(ProductCodeList)
-            && MetaModelHelper.ValidateBaseCurrency(BaseCurrency, false);
+        public bool IsValid => FromDate <= ToDate && MetaModelHelper.ValidateBaseCurrency(BaseCurrency);
 
         public bool IsExcludedTestData { get; set; }
     }

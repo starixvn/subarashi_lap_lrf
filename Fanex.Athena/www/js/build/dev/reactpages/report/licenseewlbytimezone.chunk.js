@@ -64,7 +64,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "www/js/build/dev/reactpages/" + ({"lib/xlsx-style-sparta":"lib/xlsx-style-sparta"}[chunkId]||chunkId) + "." + {"lib/xlsx-style-sparta":"932edca6c1487b86dbb1"}[chunkId] + ".chunk.js"
+/******/ 		return __webpack_require__.p + "www/js/build/dev/reactpages/" + ({"lib/xlsx-style-sparta":"lib/xlsx-style-sparta"}[chunkId]||chunkId) + "." + {"lib/xlsx-style-sparta":"5cfcfd35bcf8d613b0b6"}[chunkId] + ".chunk.js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -3787,9 +3787,11 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         alert(message);
       }
     });
+    this.baseCurrencyList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_13__["default"].baseCurrencyList;
+    this.defaultBaseCurrency = this.props.selectedBaseCurrency;
   }
   get isValidModel() {
-    return this.props.selectedProduct !== "" && Object(_lib_validationHelper__WEBPACK_IMPORTED_MODULE_14__["validateBaseCurrency"])(this.props.selectedBaseCurrency, false);
+    return this.props.selectedProduct !== "" && Object(_lib_validationHelper__WEBPACK_IMPORTED_MODULE_14__["validateBaseCurrency"])(this.props.selectedBaseCurrency);
   }
   _getParams() {
     if (!this.isValidModel) {
@@ -3860,14 +3862,36 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       instanceId: "ddlCurrency",
       value: selectedCurrency.value,
       options: currencyList,
-      onChange: item => this.props.setSelectedCurrency(item)
+      onChange: item => this._onChangeCurrency(item)
     });
+  }
+  _onChangeCurrency(currency) {
+    let baseCurrency = "";
+    const currencyId = currency.value;
+    if (currencyId === 0) {
+      this.baseCurrencyList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_13__["default"].baseCurrencyList;
+      baseCurrency = this.baseCurrencyList.find(x => x.label === this.props.selectedBaseCurrency) ? this.props.selectedBaseCurrency : this.defaultBaseCurrency;
+    } else {
+      const currencyName = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_13__["default"].currencyList.find(x => x.value == currencyId).label;
+      if (!this.baseCurrencyList.find(x => x.label === currencyName)) {
+        baseCurrency = '';
+        this.baseCurrencyList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_13__["default"].baseCurrencyList.slice(0);
+        this.baseCurrencyList.push({
+          value: baseCurrency,
+          label: currencyName
+        });
+      } else {
+        baseCurrency = currencyName;
+      }
+    }
+    this.props.setSelectedCurrency(currency);
+    this.props.setSelectedBaseCurrency(baseCurrency);
   }
   _renderBaseCurrencySelectList() {
     const {
       selectedBaseCurrency
     } = this.props;
-    const baseCurrencyList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_13__["default"].baseCurrencyList;
+    const baseCurrencyList = this.baseCurrencyList;
     return baseCurrencyList && baseCurrencyList.length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_4__["default"], {
       instanceId: "ddlBased",
       value: selectedBaseCurrency,

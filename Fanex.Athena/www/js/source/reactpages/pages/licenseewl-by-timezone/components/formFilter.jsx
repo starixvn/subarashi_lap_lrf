@@ -19,10 +19,12 @@ const RANGE_MONTH_CONSTRAINT = 3;
 export class FormFilter extends Component {
     constructor(props) {
         super(props);
+        this.baseCurrencyList = AppData.baseCurrencyList;
+        this.defaultBaseCurrency = this.props.selectedBaseCurrency;
     }
 
     get isValidModel() {
-        return this.props.selectedProduct !== "" && validateBaseCurrency(this.props.selectedBaseCurrency, false);
+        return this.props.selectedProduct !== "" && validateBaseCurrency(this.props.selectedBaseCurrency);
     }
 
     submit = (event) => {
@@ -148,12 +150,40 @@ export class FormFilter extends Component {
         return <Select instanceId="ddlCurrency"
                 value={selectedCurrency.value}
                 options={currencyList}
-                onChange={(item) => this.props.setSelectedCurrency(item)} />
+                onChange={(item) => this._onChangeCurrency(item)} />
+    }
+
+    _onChangeCurrency(currency) {
+        let baseCurrency = "";
+        const currencyId = currency.value;
+
+        if (currencyId === 0) {
+            this.baseCurrencyList = AppData.baseCurrencyList;
+            baseCurrency = this.baseCurrencyList.find(x => x.label === this.props.selectedBaseCurrency) ?
+                this.props.selectedBaseCurrency :
+                this.defaultBaseCurrency;
+        }
+        else {
+            const currencyName = AppData.currencyList.find(x => x.value == currencyId).label;
+
+            if (!this.baseCurrencyList.find(x => x.label === currencyName)) {
+                baseCurrency = '';
+                this.baseCurrencyList = AppData.baseCurrencyList.slice(0);
+                this.baseCurrencyList.push({ value: baseCurrency, label: currencyName });
+            }
+            else {
+                baseCurrency = currencyName;
+            }
+        }
+
+        this.props.setSelectedCurrency(currency)
+        this.props.setSelectedBaseCurrency(baseCurrency);
     }
 
     _renderBaseCurrencySelectList() {
         const { selectedBaseCurrency } = this.props;
-        const baseCurrencyList = AppData.baseCurrencyList;
+        const baseCurrencyList = this.baseCurrencyList;
+
         return baseCurrencyList && baseCurrencyList.length ? (
             <Select instanceId="ddlBased"
                 value={selectedBaseCurrency}
