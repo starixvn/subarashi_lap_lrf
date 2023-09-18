@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 9/12/2023 5:34:09 PM
+﻿// Generated at: 9/18/2023 10:48:53 AM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -845,7 +845,9 @@ ServerBusyMessage:"由于服务器繁忙，您的请求现在无法处理。请�
 SessionLoggedMsg:"您已从另一会话登入或您的登入会话已过期",
 SetAsDefaultGroup:"设置为默认组",
 SettleAmount:"结算总额",
+SettledAndResettledDate:"结算与已重新结算日",
 SettledAndResettledReport:"已结算与已重新结算报告",
+SettledDateOnly:"结算日",
 SettledMatchCount:"已结算赛事计数",
 SettledOnlyReport:"已结算报告",
 Show:"显示",
@@ -891,8 +893,9 @@ Tennis:"网球",
 Th:"Th",
 TheLicenseeHasNoAssignedCategory:"此商户尚未设置联络人资讯，请联繫主帐户设置联络人资讯",
 ThereIsNoSelectedItem:"There is no selected item.",
-TheSettledAndResettledReportNote:"已结算和重新结算报告显示所选日期范围内已结算和已重新结算注单的数据。",
-TheSettledOnlyReportNote:"已结算报表仅显示所选日期范围内的首次结算注单的数据。",
+TheSettledAndResettledDataNote:"报表数据与实际已结算数据大约有20分钟延迟，而与实际已重新结算数据大约有65分钟延迟。",
+TheSettledAndResettledDateNote:"&apos;&apos;结算与已重新结算日&apos;&apos;会显示所选日期内已结算与已重新结算的数据。",
+TheSettledDateOnlyNote:"&apos;&apos;结算日&apos;&apos;仅显示所选日期内第一次结算注单的数据。",
 Thursday:"星期四",
 Ticket:"注单",
 TicketFilter:"注单筛选",
