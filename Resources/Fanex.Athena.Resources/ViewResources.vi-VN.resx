@@ -2541,6 +2541,9 @@
   <data name="SelectAtLeastOneCurrencyMsg" xml:space="preserve">
     <value>Vui lòng chọn ít nhất một đơn vị tiền tệ!</value>
   </data>
+  <data name="SelectDateRange" xml:space="preserve">
+    <value>Chọn Phạm Vi Ngày</value>
+  </data>
   <data name="SelectedCustomers" xml:space="preserve">
     <value>Khách hàng đã chọn</value>
   </data>
