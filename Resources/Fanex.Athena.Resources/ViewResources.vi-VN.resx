@@ -2577,14 +2577,20 @@
   <data name="SettleAmount" xml:space="preserve">
     <value>Số tiền thanh toán</value>
   </data>
+  <data name="SettledAndResettledDate" xml:space="preserve">
+    <value>Ngày Tất Toán và Tất Toán Lại</value>
+  </data>
   <data name="SettledAndResettledReport" xml:space="preserve">
     <value>Báo cáo Tất Toán và Tất Toán Lại</value>
+  </data>
+  <data name="SettledDateOnly" xml:space="preserve">
+    <value>Ngày Tất Toán</value>
   </data>
   <data name="SettledMatchCount" xml:space="preserve">
     <value>Số Lượng Trận Đấu Đã Hoàn Tất</value>
   </data>
   <data name="SettledOnlyReport" xml:space="preserve">
-    <value>Báo cáo đã thanh toán</value>
+    <value>Báo Cáo Tất Toán</value>
   </data>
   <data name="Show" xml:space="preserve">
     <value>Hiển thị</value>
@@ -2724,11 +2730,14 @@
   <data name="ThereIsNoSelectedItem" xml:space="preserve">
     <value>Không có mục nào được chọn.</value>
   </data>
-  <data name="TheSettledAndResettledReportNote" xml:space="preserve">
-    <value>Các báo cáo Tất toán và Tất toán lại hiển thị dữ liệu về các vé cược đã được tất toán và tất toán lại, dựa trên phạm vi ngày đã chọn.</value>
+  <data name="TheSettledAndResettledDataNote" xml:space="preserve">
+    <value>Dữ liệu có thể bị chậm hơn khoảng 20 phút đối Vé Đã Tất Toán và 65 phút đối với Vé Đã Tất Toán Lại.</value>
   </data>
-  <data name="TheSettledOnlyReportNote" xml:space="preserve">
-    <value>Báo cáo thanh toán chỉ hiển thị dữ liệu của các vé cược đã thanh toán lần đầu tiên trong phạm vi ngày đã chọn.</value>
+  <data name="TheSettledAndResettledDateNote" xml:space="preserve">
+    <value>"Ngày Tất Toán và Tất Toán Lại" sẽ hiển thị dữ liệu của Ngày Tất Toán cùng Ngày Tất Toán Lại theo phạm vi ngày đã chọn.</value>
+  </data>
+  <data name="TheSettledDateOnlyNote" xml:space="preserve">
+    <value>"Ngày Tất Toán" chỉ hiển thị dữ liệu của Vé Cược Đã Tất Toán lần đầu trong ngày đã chọn.</value>
   </data>
   <data name="Thursday" xml:space="preserve">
     <value>Thứ Năm</value>

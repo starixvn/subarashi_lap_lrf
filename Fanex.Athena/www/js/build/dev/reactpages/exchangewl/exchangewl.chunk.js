@@ -64,7 +64,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "www/js/build/dev/reactpages/" + ({"lib/xlsx-style-sparta":"lib/xlsx-style-sparta"}[chunkId]||chunkId) + "." + {"lib/xlsx-style-sparta":"5cfcfd35bcf8d613b0b6"}[chunkId] + ".chunk.js"
+/******/ 		return __webpack_require__.p + "www/js/build/dev/reactpages/" + ({"lib/xlsx-style-sparta":"lib/xlsx-style-sparta"}[chunkId]||chunkId) + "." + {"lib/xlsx-style-sparta":"932edca6c1487b86dbb1"}[chunkId] + ".chunk.js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -3374,6 +3374,30 @@ class Excel {
 
 /***/ }),
 
+/***/ "./www/js/source/reactpages/lib/htmlHelper.js":
+/*!****************************************************!*\
+  !*** ./www/js/source/reactpages/lib/htmlHelper.js ***!
+  \****************************************************/
+/*! exports provided: encode, decode */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "encode", function() { return encode; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "decode", function() { return decode; });
+const encode = text => {
+  const p = document.createElement("p");
+  p.textContent = text;
+  return p.innerHTML;
+};
+const decode = html => {
+  const txt = document.createElement('textarea');
+  txt.innerHTML = html;
+  return txt.value;
+};
+
+/***/ }),
+
 /***/ "./www/js/source/reactpages/lib/langHelper.js":
 /*!****************************************************!*\
   !*** ./www/js/source/reactpages/lib/langHelper.js ***!
@@ -4741,22 +4765,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/components/CheckBox */ "./www/js/source/reactpages/components/CheckBox.jsx");
 /* harmony import */ var _components_date_range_index__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../components/date-range/index */ "./www/js/source/reactpages/components/date-range/index.js");
 /* harmony import */ var _lib_langHelper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-/* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
-/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
-/* harmony import */ var _constants_report__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../constants/report */ "./www/js/source/reactpages/constants/report.js");
-/* harmony import */ var _jsroot_components_auto_complete__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @jsroot/components/auto-complete */ "./www/js/source/reactpages/components/auto-complete/index.jsx");
-/* harmony import */ var _constants_currency__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../../constants/currency */ "./www/js/source/reactpages/constants/currency.js");
-/* harmony import */ var _constants_url__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../../constants/url */ "./www/js/source/reactpages/constants/url.js");
-/* harmony import */ var _lib_reportExcel__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../lib/reportExcel */ "./www/js/source/reactpages/pages/exchangewl/lib/reportExcel.js");
-/* harmony import */ var _lib_service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../lib/service */ "./www/js/source/reactpages/pages/exchangewl/lib/service.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_17__);
+/* harmony import */ var _lib_htmlHelper_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../lib/htmlHelper.js */ "./www/js/source/reactpages/lib/htmlHelper.js");
+/* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+/* harmony import */ var _constants_report__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../constants/report */ "./www/js/source/reactpages/constants/report.js");
+/* harmony import */ var _jsroot_components_auto_complete__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @jsroot/components/auto-complete */ "./www/js/source/reactpages/components/auto-complete/index.jsx");
+/* harmony import */ var _constants_currency__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../../constants/currency */ "./www/js/source/reactpages/constants/currency.js");
+/* harmony import */ var _constants_url__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../../constants/url */ "./www/js/source/reactpages/constants/url.js");
+/* harmony import */ var _lib_reportExcel__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../lib/reportExcel */ "./www/js/source/reactpages/pages/exchangewl/lib/reportExcel.js");
+/* harmony import */ var _lib_service__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../lib/service */ "./www/js/source/reactpages/pages/exchangewl/lib/service.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_18__);
 const _excluded = ["licenseeId"];
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
 
 
 
@@ -4788,7 +4814,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       }
       this.props.toggleLoader(true);
       this.props.getGridData(params, () => {
-        _lib_service__WEBPACK_IMPORTED_MODULE_16__["Service"].showErrorMsg();
+        _lib_service__WEBPACK_IMPORTED_MODULE_17__["Service"].showErrorMsg();
         this.props.toggleLoader(false);
       });
       this.props.setParams(params.data);
@@ -4802,9 +4828,9 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         return;
       }
       this.props.toggleLoader(true);
-      if (level === _constants_report__WEBPACK_IMPORTED_MODULE_11__["ReportLevel"].MAIN) {
+      if (level === _constants_report__WEBPACK_IMPORTED_MODULE_12__["ReportLevel"].MAIN) {
         this.props.exportExcel(params).then(response => this._doExportExcel(level, params.data, isAllowedCustomerComm, response.data)).catch(() => {
-          _lib_service__WEBPACK_IMPORTED_MODULE_16__["Service"].showErrorMsg();
+          _lib_service__WEBPACK_IMPORTED_MODULE_17__["Service"].showErrorMsg();
           this.props.toggleLoader(false);
         });
       } else {
@@ -4835,7 +4861,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       const {
         selectedViewInOption
       } = this.props;
-      return selectedViewInOption === _lib_service__WEBPACK_IMPORTED_MODULE_16__["ViewInType"].SettledOnly ? _lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("TheSettledOnlyReportNote") : _lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("TheSettledAndResettledReportNote");
+      return selectedViewInOption === _lib_service__WEBPACK_IMPORTED_MODULE_17__["ViewInType"].SettledOnly ? _lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("TheSettledDateOnlyNote") : _lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("TheSettledAndResettledDateNote");
     });
     _defineProperty(this, "_onChangeSubsidiaryList", (currentItem, selectedItemsKey, treeViewList) => {
       this.props.setSubsidiaryList(selectedItemsKey);
@@ -4848,14 +4874,14 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       return;
     }
     let excelData;
-    if (level === _constants_report__WEBPACK_IMPORTED_MODULE_11__["ReportLevel"].MAIN) {
+    if (level === _constants_report__WEBPACK_IMPORTED_MODULE_12__["ReportLevel"].MAIN) {
       excelData = params;
     } else {
       const firstRow = gridData.DataList[0];
-      const drillDownDate = _lib_service__WEBPACK_IMPORTED_MODULE_16__["Service"].getDrilldownDateRange(params.ReportBy, params.FromDate, params.ToDate, firstRow.Date);
+      const drillDownDate = _lib_service__WEBPACK_IMPORTED_MODULE_17__["Service"].getDrilldownDateRange(params.ReportBy, params.FromDate, params.ToDate, firstRow.Date);
       excelData = {
-        FromDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_9__["default"].convertDateToString(moment__WEBPACK_IMPORTED_MODULE_17___default()(drillDownDate.fromDate)),
-        ToDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_9__["default"].convertDateToString(moment__WEBPACK_IMPORTED_MODULE_17___default()(drillDownDate.toDate)),
+        FromDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_10__["default"].convertDateToString(moment__WEBPACK_IMPORTED_MODULE_18___default()(drillDownDate.fromDate)),
+        ToDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_10__["default"].convertDateToString(moment__WEBPACK_IMPORTED_MODULE_18___default()(drillDownDate.toDate)),
         BaseCurrency: gridData.AdditionalInfo,
         CurrencyName: firstRow.CurrencyName,
         CurrencyId: firstRow.CurrencyId,
@@ -4863,11 +4889,11 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         UserName: params.UserName
       };
     }
-    const title = _lib_service__WEBPACK_IMPORTED_MODULE_16__["Service"].getReportTitle({
+    const title = _lib_service__WEBPACK_IMPORTED_MODULE_17__["Service"].getReportTitle({
       fromDate: excelData.FromDate,
       toDate: excelData.ToDate
-    }, excelData.BaseCurrency ? excelData.BaseCurrency : excelData.CurrencyName, level === _constants_report__WEBPACK_IMPORTED_MODULE_11__["ReportLevel"].MAIN ? excelData.CurrencyId === 0 : false, excelData.UserName, params.DateOptionType);
-    const excel = new _lib_reportExcel__WEBPACK_IMPORTED_MODULE_15__["default"](gridData, title, level, isAllowedCustomerComm, excelData.ReportBy);
+    }, excelData.BaseCurrency ? excelData.BaseCurrency : excelData.CurrencyName, level === _constants_report__WEBPACK_IMPORTED_MODULE_12__["ReportLevel"].MAIN ? excelData.CurrencyId === 0 : false, excelData.UserName, params.DateOptionType);
+    const excel = new _lib_reportExcel__WEBPACK_IMPORTED_MODULE_16__["default"](gridData, title, level, isAllowedCustomerComm, excelData.ReportBy);
     excel.export(() => {
       this.props.toggleLoader(false);
     });
@@ -4879,14 +4905,14 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       toDate
     } = this.props.dateRange;
     const subsidiarySearch = this.props.subsidiarySearch;
-    const baseCurrency = _constants_currency__WEBPACK_IMPORTED_MODULE_13__["BaseCurrency"].find(x => x.value === this.props.selectedCurrency.value);
+    const baseCurrency = _constants_currency__WEBPACK_IMPORTED_MODULE_14__["BaseCurrency"].find(x => x.value === this.props.selectedCurrency.value);
     param = {
       CurrencyId: this.props.selectedCurrency.value,
       BaseCurrency: baseCurrency ? baseCurrency.text : "",
       CurrencyName: baseCurrency ? baseCurrency.text : this.props.selectedCurrency.label,
       UserName: this.props.username,
-      FromDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_9__["default"].convertDateToString(fromDate),
-      ToDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_9__["default"].convertDateToString(toDate),
+      FromDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_10__["default"].convertDateToString(fromDate),
+      ToDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_10__["default"].convertDateToString(toDate),
       ReportBy: this.props.selectedReportBy,
       IsExcludedTestData: this.props.isExcludeTest,
       Level: 0,
@@ -4902,13 +4928,13 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     const {
       selectedViewInOption
     } = this.props;
-    return selectedViewInOption === _lib_service__WEBPACK_IMPORTED_MODULE_16__["ViewInType"].SettledOnly ? RANGE_THREE_MONTH_CONSTRAINT : RANGE_ONE_MOTHN_CONSTRAINT;
+    return selectedViewInOption === _lib_service__WEBPACK_IMPORTED_MODULE_17__["ViewInType"].SettledOnly ? RANGE_THREE_MONTH_CONSTRAINT : RANGE_ONE_MOTHN_CONSTRAINT;
   }
   _renderSubsidiaryTreeView() {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_5__["TreeViewSelect"], {
       language: _lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].currentLanguage,
       id: "SubsidiaryTreeView",
-      dataSource: _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].subsidiaryList,
+      dataSource: _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].subsidiaryList,
       keyField: "Value",
       valueField: "Name",
       statusField: "Checked",
@@ -4919,7 +4945,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       },
       isAllTextShown: false,
       hasSearchBox: false,
-      treeViewOption: _constants_report__WEBPACK_IMPORTED_MODULE_11__["TreeViewOption"],
+      treeViewOption: _constants_report__WEBPACK_IMPORTED_MODULE_12__["TreeViewOption"],
       onChange: this._onChangeSubsidiaryList
     });
   }
@@ -4927,7 +4953,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     const {
       dateRange
     } = this.props;
-    const dateConstraint = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].dateConstraint;
+    const dateConstraint = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].dateConstraint;
     const limitMonthRange = this._getMonthRangeConstraint();
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_date_range_index__WEBPACK_IMPORTED_MODULE_7__["DateRange"], {
       startDate: dateRange.fromDate,
@@ -4943,7 +4969,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     const {
       selectedCurrency
     } = this.props;
-    const currencyList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].currencyList;
+    const currencyList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].currencyList;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_4__["default"], {
       instanceId: "ddlCurrency",
       name: "form-field-name",
@@ -5017,7 +5043,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     }, _lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("ExcludeTestData")));
   }
   render() {
-    const showSubsidiarySearch = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].viewType !== _constants_report__WEBPACK_IMPORTED_MODULE_11__["SubsidiaryViewType"].NOT_MANAGEMENT;
+    const showSubsidiarySearch = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].viewType !== _constants_report__WEBPACK_IMPORTED_MODULE_12__["SubsidiaryViewType"].NOT_MANAGEMENT;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "page-filter"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -5028,7 +5054,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       className: "form-group"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       className: "label-text"
-    }, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].viewType === _constants_report__WEBPACK_IMPORTED_MODULE_11__["SubsidiaryViewType"].MASTER_MANAGEMENT ? _lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("WhiteLabel") : _lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("Subsidiary")), this._renderSubsidiaryTreeView())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].viewType === _constants_report__WEBPACK_IMPORTED_MODULE_12__["SubsidiaryViewType"].MASTER_MANAGEMENT ? _lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("WhiteLabel") : _lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("Subsidiary")), this._renderSubsidiaryTreeView())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-12 col-sm-4 col-md-2 col-xl-2"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
@@ -5046,8 +5072,8 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       className: "form-group"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       className: "label-text"
-    }, _lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("Username")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_auto_complete__WEBPACK_IMPORTED_MODULE_12__["default"], {
-      url: _constants_url__WEBPACK_IMPORTED_MODULE_14__["CUSTOMER_SEARCH_URL"],
+    }, _lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("Username")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_auto_complete__WEBPACK_IMPORTED_MODULE_13__["default"], {
+      url: _constants_url__WEBPACK_IMPORTED_MODULE_15__["CUSTOMER_SEARCH_URL"],
       onSelect: value => this.props.setUsername(value),
       onInput: value => this.props.setUsername(value),
       htmlAttributes: {
@@ -5087,7 +5113,11 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       className: "col-11"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       className: "circle"
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, this.getNoteMessage()))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, Object(_lib_htmlHelper_js__WEBPACK_IMPORTED_MODULE_9__["decode"])(this.getNoteMessage()))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-11"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      className: "circle"
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, Object(_lib_htmlHelper_js__WEBPACK_IMPORTED_MODULE_9__["decode"])(_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("TheSettledAndResettledDataNote"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "caret-block"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
       className: "icon-excel right",
@@ -5099,7 +5129,6 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 function mapDispatchToProps(dispatch) {
   return Object(redux__WEBPACK_IMPORTED_MODULE_3__["bindActionCreators"])(_actions_index_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"], dispatch);
 }
-;
 function mapStateToProps(state) {
   const {
       licenseeId
@@ -5107,7 +5136,6 @@ function mapStateToProps(state) {
     rest = _objectWithoutProperties(state, _excluded);
   return Object.assign({}, rest);
 }
-;
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(FormFilter));
 
 /***/ }),

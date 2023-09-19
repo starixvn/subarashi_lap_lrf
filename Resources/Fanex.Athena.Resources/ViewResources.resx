@@ -3320,11 +3320,11 @@
   <data name="ViewInWithNoParam" xml:space="preserve">
     <value>View in</value>
   </data>
-  <data name="TheSettledAndResettledReportNote" xml:space="preserve">
-    <value>The Settled and Resettled report displays data of settled and resettled tickets based on the selected date range.</value>
+  <data name="TheSettledAndResettledDateNote" xml:space="preserve">
+    <value>"Settled and Resettled Date" mode will display data based on both Settled Date &amp; Resettled Date following the selected date range.</value>
   </data>
-  <data name="TheSettledOnlyReportNote" xml:space="preserve">
-    <value>The Settled report only displays data of the first-time settled tickets based on the selected date range.</value>
+  <data name="TheSettledDateOnlyNote" xml:space="preserve">
+    <value>"Settled Date" only displays data of the first-time settled tickets based on the selected date range.</value>
   </data>
   <data name="IpSummary" xml:space="preserve">
     <value>IP Summary</value>
@@ -3530,5 +3530,14 @@
   </data>
   <data name="Success" xml:space="preserve">
     <value>Success</value>
+  </data>
+  <data name="SettledAndResettledDate" xml:space="preserve">
+    <value>Settled and Resettled Date</value>
+  </data>
+  <data name="SettledDateOnly" xml:space="preserve">
+    <value>Settled Date</value>
+  </data>
+  <data name="TheSettledAndResettledDataNote" xml:space="preserve">
+    <value>The data may have a delay of around 20 minutes for Settled tickets and 65 minutes for Resettled tickets.</value>
   </data>
 </root>
