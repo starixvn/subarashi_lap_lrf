@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 9/18/2023 10:48:53 AM
+// Generated at: 9/19/2023 2:10:37 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -141,6 +141,7 @@ window._language_en_US = {
   AllCategories: "All Categories",
   AllCurrencies: "All Currencies",
   AllCustomerClassCategory: "All Customer Class Category",
+  AllDates: "All Dates",
   AlreadyUpdateNotVipStatus: "Already NOT VIP, no update: {0}",
   AlreadyUpdateNotVipStatusSingle: "Already NOT VIP, no update",
   AlreadyUpdateVipStatus: "Already VIP, no update: {0}",
@@ -872,6 +873,7 @@ window._language_en_US = {
   RiskLevel: "Risk Level",
   RiskLevelBetSetting: "Risk Level Bet Setting",
   RiskLevelInformation: "Risk Level Information",
+  RiskLevelLastMarkDate: "Risk Level&apos;s Last Mark Date",
   RiskLevelOddsGroup: "Risk Level Odds Group",
   RNGCasinoUpdateSettingUnAvailableMsg: "RNG Casino Database is not currently available. Please try again later.",
   Robot: "Robot",
@@ -895,6 +897,7 @@ window._language_en_US = {
   SearchData: "Search data",
   SearchResult: "Search Result",
   SelectAtLeastOneCurrencyMsg: "Please select at least one currency!",
+  SelectDateRange: "Select Date Range",
   SelectedCustomers: "Selected customers",
   SelectedItemCount: "# selected",
   SelectGroup: "Select Group",

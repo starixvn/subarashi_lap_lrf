@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 9/18/2023 10:48:53 AM
+// Generated at: 9/19/2023 2:10:37 PM
 window._language_vi_VN = {
   AA: "Đội Khách/Đội Khách",
   AbnormalBet: "Cược bất thường",
@@ -141,6 +141,7 @@ window._language_vi_VN = {
   AllCategories: "Tất cả danh mục",
   AllCurrencies: "Tất cả các loại tiền tệ",
   AllCustomerClassCategory: "Tất cả danh mục Hạng Khách Hàng",
+  AllDates: "Tất cả ngày",
   AlreadyUpdateNotVipStatus: "Không phải VIP, không cập nhật: {0}",
   AlreadyUpdateNotVipStatusSingle: "CHƯA LÀ VIP, không có cập nhật",
   AlreadyUpdateVipStatus: "Đã là VIP, không cập nhật: {0}",
@@ -878,6 +879,7 @@ window._language_vi_VN = {
   RiskLevel: "Mức Độ Rủi Ro",
   RiskLevelBetSetting: "Giới Hạn Cược theo Mức Độ Rủi Ro",
   RiskLevelInformation: "Thông Tin Mức Độ Rủi Ro",
+  RiskLevelLastMarkDate: "Ngày Cập Nhật Mức Độ Rủi Ro",
   RiskLevelOddsGroup: "Nhóm Tỷ Lệ Cược theo Mức Độ Rủi Ro",
   RNGCasinoUpdateSettingUnAvailableMsg: "Cơ sở dữ liệu RNG Game Casino hiện không khả dụng. Vui lòng thử lại sau.",
   Robot: "Robot",
@@ -901,6 +903,7 @@ window._language_vi_VN = {
   SearchData: "Tìm dữ liệu",
   SearchResult: "Tìm kết quả",
   SelectAtLeastOneCurrencyMsg: "Vui lòng chọn ít nhất một đơn vị tiền tệ!",
+  SelectDateRange: "Chọn Phạm Vi Ngày",
   SelectedCustomers: "Khách hàng đã chọn",
   SelectedItemCount: "# đã chọn",
   SelectGroup: "Chọn Nhóm",

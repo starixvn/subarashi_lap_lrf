@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 9/18/2023 10:48:53 AM
+﻿// Generated at: 9/19/2023 2:10:38 PM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -135,6 +135,7 @@ AllBetTypes:"所有投注类型",
 AllCategories:"全选种类",
 AllCurrencies:"所有货币",
 AllCustomerClassCategory:"所有玩家分类",
+AllDates:"所有日期",
 AlreadyUpdateNotVipStatus:"已不是VIP，无任何更新: {0}",
 AlreadyUpdateNotVipStatusSingle:"已不是VIP，无任何更新",
 AlreadyUpdateVipStatus:"已经是VIP，无任何更新: {0}",
@@ -811,6 +812,7 @@ RetractedPlayerUpdateVipStatusSingle:"遭撤回VIP的玩家: {0}",
 RiskLevel:"风险等级",
 RiskLevelBetSetting:"风险等级投注限制",
 RiskLevelInformation:"风险等级资讯",
+RiskLevelLastMarkDate:"风险等级的最新标记日期",
 RiskLevelOddsGroup:"风险等级水位组别",
 RNGCasinoUpdateSettingUnAvailableMsg:"RNG Casino Database is not currently available. Please try again later.",
 Robot:"機械",
@@ -832,6 +834,7 @@ Search:"搜寻",
 SearchByExactlyIp:"按实际 IP 搜寻",
 SearchResult:"搜索结果",
 SelectAtLeastOneCurrencyMsg:"请最少选择一种货币",
+SelectDateRange:"选择日期范围",
 SelectedCustomers:"选定的玩家",
 SelectedItemCount:"已选  # 个项目",
 SelectGroup:"选择组",
