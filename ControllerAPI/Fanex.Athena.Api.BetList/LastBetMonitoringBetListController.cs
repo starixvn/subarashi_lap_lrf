@@ -1,6 +1,5 @@
 ﻿namespace Fanex.Athena.Api.BetList
 {
-    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Net.Http;
@@ -12,7 +11,9 @@
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Model.Customer.DTO;
     using Fanex.Athena.Service.Core.Common.Interfaces;
+    using Fanex.Athena.Service.Customer.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
 
@@ -28,6 +29,7 @@
         private readonly ICacheRefAdapter _cacheRefAdapter;
         private readonly IPortalApiService _portalApiService;
         private readonly ISportService _sportService;
+        private readonly ICustomerClassService _customerClassService;
 
         private const string ALL = "All";
 
@@ -37,7 +39,8 @@
             IMatchService matchService,
             ICacheRefAdapter cacheRefAdapter,
             IPortalApiService portalApiService,
-            ISportService sportService)
+            ISportService sportService,
+            ICustomerClassService customerClassService)
         : base(languageService)
         {
             _betListApiClient = betListApiClient;
@@ -45,12 +48,12 @@
             _cacheRefAdapter = cacheRefAdapter;
             _portalApiService = portalApiService;
             _sportService = sportService;
+            _customerClassService = customerClassService;
         }
 
         [HttpGet]
         public async Task<dynamic> GetRunningMatchList(int sportId)
         {
-
             var filterMatches = await GetMatchList(sportId);
 
             var leagueListNormal = filterMatches.Where(i => !i.IsOutRight).Select(m => m.LeagueId).Distinct()
@@ -86,7 +89,7 @@
         public async Task<HttpResponseMessage> Index(LastBetsMonitoringMetaModel metaModel)
         {
             var userSession = SessionService.UserSession;
-
+            var riskLevels = await _customerClassService.GetAllRiskLevel();
             if (string.IsNullOrWhiteSpace(metaModel.Currency))
             {
                 metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList);
@@ -98,6 +101,7 @@
             }
 
             metaModel.SportTypeList = BuildSportTypeList(metaModel.SportIds);
+            metaModel.RiskLevels = riskLevels.ToList();
 
             return await _betListApiClient.PostAsync("/LastBetMonitoringBetList/GetData",
                 metaModel, userSession.Language).ConfigureAwait(false);
@@ -124,7 +128,6 @@
                 root.Add(elem);
             }
             return x.ToString();
-
         }
 
         private XElement BuildSportTypeElement(int id)
@@ -155,7 +158,7 @@
             if (sportId == ProductTypes.Parlay)
             {
                 return new List<Match>();
-            }    
+            }
 
             var isSabaSport = sportId < 0;
             var sabaSports = _sportService.GetSabaSports();

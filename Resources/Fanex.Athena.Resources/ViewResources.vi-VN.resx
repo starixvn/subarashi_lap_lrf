@@ -1141,7 +1141,7 @@
     <value>Chơi miễn phí</value>
   </data>
   <data name="Freeze" xml:space="preserve">
-    <value>Đóng băng</value>
+    <value>Tắt Cập Nhật</value>
   </data>
   <data name="Friday" xml:space="preserve">
     <value>Thứ Sáu</value>
@@ -2926,7 +2926,7 @@
     <value>Đang chờ kết toán</value>
   </data>
   <data name="Unfreeze" xml:space="preserve">
-    <value>Mở đóng băng</value>
+    <value>Tự Cập Nhật</value>
   </data>
   <data name="Unknown" xml:space="preserve">
     <value>Không xác định</value>
