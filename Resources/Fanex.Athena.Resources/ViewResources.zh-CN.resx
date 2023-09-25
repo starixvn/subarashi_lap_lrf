@@ -568,7 +568,7 @@
     <value>Fr</value>
   </data>
   <data name="Freeze" xml:space="preserve">
-    <value>暂停更新</value>
+    <value>冻结视窗</value>
   </data>
   <data name="Friday" xml:space="preserve">
     <value>星期五</value>
@@ -1348,7 +1348,7 @@
     <value>我们正进行伺服器维护, 网站于{0} 至 {1} 将无法使用. 非常抱歉造成您的不便!</value>
   </data>
   <data name="Unfreeze" xml:space="preserve">
-    <value>Unfreeze</value>
+    <value>解除冻结</value>
   </data>
   <data name="Update" xml:space="preserve">
     <value>更新</value>
