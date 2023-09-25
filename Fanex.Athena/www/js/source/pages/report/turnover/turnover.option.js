@@ -253,8 +253,9 @@
 
         _me.getColModel = function () {
             // Column hidden by customer comm
-            playerCommColumn.hidden = !_me.hasCustomerComm;
-            winlossCommColumn.hidden = !_me.hasCustomerComm;
+            playerCommColumn.hidden = !_me.hasCustomerComm || _me.isHidePlayerWL;
+            winlossCommColumn.hidden = !_me.hasCustomerComm || _me.isHidePlayerWL;
+            winLossColumn.hidden = _me.isHidePlayerWL;
 
             // Column hidden by product
             transfer3rdColumn.hidden = !_me.hasCasinoTransfer;

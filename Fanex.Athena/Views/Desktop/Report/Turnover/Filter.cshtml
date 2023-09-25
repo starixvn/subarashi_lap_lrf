@@ -13,6 +13,7 @@
         @Html.Hidden("IsAllowedCasinoTransfer", Model.IsAllowedCasinoTransfer)
         @Html.Hidden("IsAllowBa", Model.ProductAccess.IsAllowBA)
         @Html.Hidden("IsEnableSingleWallet", Model.IsEnableSingleWallet)
+        @Html.Hidden("IsHidePlayerWL", Model.IsHidePlayerWL)
         <div class="row">
             @DesktopRazorHelper.MonthPicker(Model.Param.FromDate, Model.Param.ToDate)
 
