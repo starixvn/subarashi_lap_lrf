@@ -42,3 +42,9 @@ export const isAllowedCustomerComm = createReducer({}, {
         return action.data;
     }
 })
+
+export const isViewResettledTicketOnly = createReducer({}, {
+    [types.CHANGE_ISVIEW_RESETTLED_TICKET_ONLY](state, action) {
+        return action.data;
+    }
+})

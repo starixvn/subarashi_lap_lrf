@@ -1,0 +1,88 @@
+﻿<div class="rule">
+    <h4>
+        General Info
+    </h4>
+    <ul>
+        <li>This report supports up-to-date data. You can filter data up to 1 month per query.</li>
+        <li>The data may have a delay of around 20 minutes for Settled tickets and 65 minutes for Resettled tickets.</li>
+        <li>A red negative number indicates a loss for Licensee whereas the black positive indicates a win.</li>
+        <li>OANDA Exchange Service will use the exchange rate of the end date of each selected month when converting the figures.</li>
+    </ul>
+</div>
+<div class="line">
+</div>
+<div class="rule">
+    <h4>
+        Search Filters
+    </h4>
+    <ul>
+        <li>
+            <b>Currency:</b> Select the currency which data will be retrieved.
+            <ul>
+                <li><b>All:</b> All supported currencies will be listed out.</li>
+            </ul>
+        </li>
+        <li><b>Base Currency:</b> Convert all data to base currency for reference only.</li>
+        <li>
+            <b>Username:</b> Enter the external ID or system ID of the searched account.
+            <ul>
+                <li>Note that, if you have not specified any Player account then the Report will list out data of all Players within the selected date range.</li>
+            </ul>
+        </li>
+        <li><b>Exclude Test Data:</b> Excludes all tickets from test account.</li>
+        <li><b>View Resettled Ticket Only:</b> Gets Resettled tickets only within the selected date range.</li>
+        <li><b>View in Settled and Resettled Date:</b> Gets data based on both Settled Date & Resettled Date following the selected date range.</li>
+        <li><b>View in Settled Date:</b> Gets data of the first-time settled tickets based on the selected date range.</li>
+    </ul>
+</div>
+<div class="line"></div>
+<div class="rule">
+    <h4>
+        Report Guidelines
+    </h4>
+    <ul>
+        <li><b>Date:</b> can be daily or monthly based on your selection and its format is (mm/dd/yyyy).</li>
+        <li><b>Currency:</b> shall display based on your selection.</li>
+        <li><b>Turnover:</b> Total Player turnover within selected filters.</li>
+        <li>
+            <b>Net Turnover:</b> The amount of turnover after deducting draw tickets.
+            <ul>
+                <li>Net Turnover = Turnover - the total turnover of draw tickets.</li>
+            </ul>
+        </li>
+        <li><b>Total Transaction:</b> Total bet tickets within selected filters.</li>
+        <li>
+            <b>Player:</b>
+            <ul>
+                <li><b>Player W/L:</b> The amount player won or lost based on their bets.</li>
+                <li><b>Player Comm:</b> The commission amount that players have paid to you based on won tickets.</li>
+                <li>
+                    <b>Total:</b> Total win/loss amount including commission.
+                    <br />
+                    Total = Win/Loss + Commission
+                </li>
+            </ul>
+        </li>
+        <li>
+            <b>Licensee:</b>
+            <ul>
+                <li>
+                    <b>Licensee W/L:</b> The win loss amount Licensee has settled with Player.
+                    <br />
+                    Licensee W/L = – (Player W/L)
+                </li>
+                <li>
+                    <b>Amount Due To:</b> The settlement amount that you have received or paid to Company.
+                    <ul>
+                        <li>Note that for Amount Due To, the negative number indicates the receiving amount from Company and the positive number indicates the paying amount to Company.</li>
+                    </ul>
+                </li>
+                <li>
+                    <b>Total:</b> Net win/loss amount after sharing with Company.
+                    <br />
+                    Total = Licensee WL - Player Comm - Amount Due To
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>

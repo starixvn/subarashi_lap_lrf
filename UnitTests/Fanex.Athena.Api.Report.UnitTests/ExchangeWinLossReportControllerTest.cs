@@ -26,6 +26,7 @@
 
         private IReportSettingService _reportSettingService;
         private IExchangeWinLossDataAccess _dataAccess;
+        private ILGAPIClient _lgClient;
         private ExchangeWinLossReportController _controller;
 
         [OneTimeSetUp]
@@ -33,6 +34,7 @@
         {
             base.FixtureSetUp();
             _reportSettingService = Substitute.For<IReportSettingService>();
+            _lgClient = Substitute.For<ILGAPIClient>();
             _reportSettingService.GetSetting(PermissionKeys.ReportExchangeWinLoss, Arg.Any<string>()).Returns(new ReportSetting
             {
                 MinDate = _minDate,
@@ -50,7 +52,8 @@
             _controller = new ExchangeWinLossReportController(
                             LangService,
                             _reportSettingService,
-                            _dataAccess)
+                            _dataAccess,
+                            _lgClient)
             {
                 SessionService = SessionService,
                 ProductService = ProductService

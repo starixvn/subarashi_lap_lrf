@@ -19,3 +19,10 @@ export const setParams = (value) => {
         data: value
     }
 }
+
+export const changeIsViewResettledTicketOnly = (checked) => {
+    return {
+        type: types.CHANGE_ISVIEW_RESETTLED_TICKET_ONLY,
+        data: checked
+    }
+}

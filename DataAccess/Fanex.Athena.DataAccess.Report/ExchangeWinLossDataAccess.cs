@@ -19,7 +19,7 @@
     {
         public async Task<ReportResultModel<ExchangeWinLoss>> GetMainWinloss(ExchangeWinLossMetaModel metaModel, IDictionary<int, string> currencyList)
         {
-            var UspName = metaModel.DateOptionType == ViewInTypes.SettledReport ? "Lrf_Rpt_ExchangeWinloss" : "Lrf_Rpt_ExchangeWinloss_ByResettledDate";
+            const string UspName = "Lrf_Rpt_ExchangeWinloss";
 
             using (var db = GetObjectDb(UspName))
             {
@@ -35,7 +35,7 @@
 
         public async Task<ReportResultModel<ExchangeWinLoss>> GetCustomerWinloss(ExchangeWinLossMetaModel metaModel, IDictionary<int, string> currencyList)
         {
-            var UspName = metaModel.DateOptionType == ViewInTypes.SettledReport ? "Lrf_Rpt_ExchangeWinloss_Mem" : "Lrf_Rpt_ExchangeWinloss_ByResettledDate_Mem";
+            const string UspName = "Lrf_Rpt_ExchangeWinloss_Mem";
 
             using (var db = GetObjectDb(UspName))
             {
@@ -51,7 +51,7 @@
 
         public async Task<ReportResultModel<ExchangeWinLoss>> GetLicenseeWinloss(ExchangeWinLossMetaModel metaModel, IDictionary<int, string> currencyList)
         {
-            var UspName = metaModel.DateOptionType == ViewInTypes.SettledReport ? "Lrf_Rpt_ExchangeWinloss_Ag" : "Lrf_Rpt_ExchangeWinloss_ByResettledDate_Ag";
+            const string UspName = "Lrf_Rpt_ExchangeWinloss_Ag";
 
             using (var db = GetObjectDb(UspName))
             {
@@ -73,6 +73,8 @@
             db.SetParameterValue("BaseCurrency", metaModel.BaseCurrency);
             db.SetParameterValue("DefaultBaseCurrency", metaModel.DefaultBaseCurrency);
             db.SetParameterValue("UserName", metaModel.UserName ?? string.Empty);
+            db.SetParameterValue("ReportViewType", metaModel.DateOptionType);
+            db.SetParameterValue("ViewResettledOnly", metaModel.IsViewResettledTicketOnly);
         }
 
         private static void ReadSummaryTotal(IDataReader reader, IDictionary<string, ExchangeWinLoss> summaryTotal, string defaultBaseCurrency)

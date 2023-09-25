@@ -52,7 +52,8 @@ namespace Fanex.Athena.Service.Report
                 metaModel.PageIndex,
                 metaModel.Environment,
                 RefNo = refNoString,
-                metaModel.SiteName
+                metaModel.SiteName,
+                metaModel.TimeZone
             };
 
             const string apiPath = "/ExchangeBetHistory/Index";

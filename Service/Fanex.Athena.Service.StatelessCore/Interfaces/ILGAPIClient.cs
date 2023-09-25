@@ -4,6 +4,6 @@ namespace Fanex.Athena.Service.StatelessCore.Interfaces
 {
     public interface ILGAPIClient
     {
-        Task<T> PostAsync<T>(string path, object value, string language) where T : class;
+        Task<T> PostAsync<T>(string path, object value, string language);
     }
 }

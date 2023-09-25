@@ -63,7 +63,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-	<Compile Include="Constants\HardCodeSportType.cs" />
+    <Compile Include="Constants\TimeZoneType.cs" />
+    <Compile Include="Constants\HardCodeSportType.cs" />
     <Compile Include="DataDomain\BaseCurrencyType.cs" />
     <Compile Include="DataDomain\MessageType.cs" />
     <Compile Include="DataDomain\ExtraPayoutMapType.cs" />
@@ -204,9 +205,7 @@
       <Link>SonarLint.xml</Link>
     </AdditionalFiles>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Constants\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

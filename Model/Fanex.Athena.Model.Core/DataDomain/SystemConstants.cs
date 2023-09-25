@@ -1,8 +1,9 @@
 ﻿namespace Fanex.Athena.Model.Core.DataDomain
 {
-    using Fanex.Athena.Resources;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using Fanex.Athena.Model.Core.Constants;
+    using Fanex.Athena.Resources;
 
     public static class SystemConstants
     {
@@ -58,6 +59,12 @@
         public static IReadOnlyDictionary<int, string> VipOnyList => new Dictionary<int, string> {
             { 0, ViewResources.No },
             { 1, ViewResources.Yes },
+        };
+
+        public static readonly IReadOnlyDictionary<int, string> TimeZoneList = new Dictionary<int, string> {
+            // flat currency
+            { TimeZoneType.AST,"GMT-4" },
+            { TimeZoneType.CST,"GMT+8" },
         };
     }
 }

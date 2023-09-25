@@ -7,7 +7,7 @@
     SiteInfo.Host = Host;
 #>
 <#
-    var sites = new SiteInfo[]{        
+    var sites = new SiteInfo[]{
         new SiteInfo
         {
             SiteEnvironment = SiteEnvironment.DEV

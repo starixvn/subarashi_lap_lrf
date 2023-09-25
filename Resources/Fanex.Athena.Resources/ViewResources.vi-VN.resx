@@ -3261,4 +3261,22 @@
   <data name="YouNotChooseAnyCustomerMsg" xml:space="preserve">
     <value>Bạn chưa chọn khách hàng.</value>
   </data>
+  <data name="ViewResettledTicketOnly" xml:space="preserve">
+    <value>Chỉ xem Vé Đã Tất Toán Lại</value>
+  </data>
+  <data name="ResettledReport" xml:space="preserve">
+    <value>Báo Cáo Tất Toán Lại</value>
+  </data>
+  <data name="ExchangeUnderMaintenanceMsg" xml:space="preserve">
+    <value>Dịch vụ của Exchange đang được bảo trì. Dữ liệu có thể bị chậm trong thời gian này.&lt;br&gt;Chúng tôi chân thành xin lỗi vì sự bất tiện này.</value>
+  </data>
+  <data name="BettingTicketCenter_Exchange_Note_1" xml:space="preserve">
+    <value>Chỉ hỗ trợ tìm kiếm vé cược bị hủy.</value>
+  </data>
+  <data name="BettingTicketCenter_Exchange_Note_2" xml:space="preserve">
+    <value>Nhập tên người dùng để tra kết quả nhanh hơn.</value>
+  </data>
+  <data name="BettingTicketCenter_Exchange_Note_3" xml:space="preserve">
+    <value>Hỗ trợ dữ liệu lên đến 1 tháng.</value>
+  </data>
 </root>

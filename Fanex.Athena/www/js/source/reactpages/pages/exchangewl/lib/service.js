@@ -12,9 +12,9 @@ export const HeaderText = {
     turnover: LangHelper.getSingleResource('Turnover'),
     netTurnover: LangHelper.getSingleResource('NetTurnover'),
     totalTransaction: LangHelper.getSingleResource('TotalTransaction'),
-    customer: LangHelper.getSingleResource('Customer'),
-    customerWL: LangHelper.getSingleResource('CustomerW_L'),
-    customerComm: LangHelper.getSingleResource('CustomerComm'),
+    player: LangHelper.getSingleResource('Player'),
+    playerWL: LangHelper.getSingleResource('PlayerWL'),
+    playerComm: LangHelper.getSingleResource('PlayerComm'),
     total: LangHelper.getSingleResource('Total'),
     licensee: LangHelper.getSingleResource('Licensee'),
     licenseeWL: LangHelper.getSingleResource('LicenseeW_L'),
@@ -30,7 +30,7 @@ export const TotalText = {
 export const BreadcrumbText = {
     main: LangHelper.getSingleResource('Main'),
     licensee: LangHelper.getSingleResource('Licensee'),
-    customer: LangHelper.getSingleResource('Customer')
+    player: LangHelper.getSingleResource('Player')
 }
 
 export const ViewInType ={
@@ -39,7 +39,7 @@ export const ViewInType ={
 }
 
 export class Service {
-    static getReportTitle(dateRange, selectedCurrency, allCurrencies, username, selectedViewInType) {
+    static getReportTitle(dateRange, selectedCurrency, allCurrencies, username, selectedViewInType, isViewResettledTicketOnly) {
         const fromDate = Site.convertDateToString(dateRange.fromDate);
         const toDate = Site.convertDateToString(dateRange.toDate);
         const viewInByCurrency = allCurrencies 
@@ -47,7 +47,11 @@ export class Service {
             : `${LangHelper.getSingleResource('Viewin').replace('{0}', selectedCurrency)}`;
         const usernameText = !username ? "" : `, ${LangHelper.getSingleResource('Username')}: ${username}`;
 
-        const viewInTypeText = selectedViewInType === ViewInType.SettledOnly ? LangHelper.getSingleResource("SettledOnlyReport") : LangHelper.getSingleResource("SettledAndResettledReport");
+        let viewInTypeText = selectedViewInType === ViewInType.SettledOnly 
+            ? LangHelper.getSingleResource("SettledOnlyReport") 
+            : LangHelper.getSingleResource("SettledAndResettledReport");
+
+        viewInTypeText = isViewResettledTicketOnly ? LangHelper.getSingleResource("ResettledReport") : viewInTypeText;
 
         return `${LangHelper.getSingleResource('ExchangeWinLoss')} - ${viewInTypeText}, ${fromDate} - ${toDate}, ${viewInByCurrency}${usernameText}`;
     }

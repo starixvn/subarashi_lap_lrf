@@ -6,6 +6,7 @@ import * as excludeTestAction from '../../../actions/excludeTestAction'
 import * as dateRangeAction from '../../../actions/dateRangeAction'
 import * as subsidiaryAction from '../../../actions/subsidiaryAction'
 import * as usernameAction from '@jsroot/actions/usernameAction'
+import * as userGuideAction from '@jsroot/actions/userGuideAction'
 
 export const ActionCreators = Object.assign({},
     dataHandlerAction,
@@ -15,5 +16,6 @@ export const ActionCreators = Object.assign({},
     excludeTestAction,
     dateRangeAction,
     subsidiaryAction,
-    usernameAction
+    usernameAction,
+    userGuideAction
 );

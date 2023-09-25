@@ -9,6 +9,8 @@ namespace Fanex.Athena.Model.Report.MetaModel
 
         public DateTime SelectedDate { get; set; }
 
+        public int TimeZone { get; set; }
+
         public string UserName { get; set; }
 
         public string RefNo { get; set; }

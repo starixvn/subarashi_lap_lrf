@@ -19,13 +19,16 @@ namespace Fanex.Athena.Model.Report.MetaModel
         {
             get
             {
-                return FromDate <= ToDate && MetaModelHelper
-                    .ValidateBaseCurrency(BaseCurrency);
+                return FromDate <= ToDate && MetaModelHelper.ValidateBaseCurrency(BaseCurrency);
             }
         }
 
         public string DefaultBaseCurrency { get; set; }
+
         public string SubsidiaryList { get; set; }
+
         public bool SubsidiarySearch { get; set; }
+
+        public bool IsViewResettledTicketOnly { get; set; }
     }
 }

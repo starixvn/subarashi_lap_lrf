@@ -8,7 +8,7 @@ namespace Fanex.Athena.Service.StatelessCore.Interfaces
     {
         Task<HttpResponseMessage> PostAsync(string path, object value, string language, int timeOut = 100);
 
-        Task<T> PostAsync<T>(string path, object value, string language) where T : class;
+        Task<T> PostAsync<T>(string path, object value, string language);
 
         Task<Stream> PostStreamAsync(string path, object value, string language, int timeOut = 100);
 

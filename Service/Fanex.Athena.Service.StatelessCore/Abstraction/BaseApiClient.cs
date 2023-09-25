@@ -141,7 +141,7 @@ namespace Fanex.Athena.Service.StatelessCore.Abstraction
             return Task.CompletedTask;
         }
 
-        public virtual async Task<T> PostAsync<T>(string path, object value, string language) where T : class
+        public virtual async Task<T> PostAsync<T>(string path, object value, string language)
         {
             return await HandleAsync<T>(
                 path,

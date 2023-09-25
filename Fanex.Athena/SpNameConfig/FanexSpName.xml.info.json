@@ -1,0 +1,64 @@
+{
+  "FilesToGenerate": [
+    {
+      "Filename": "FanexSpName.xml",
+      "Project": null,
+      "Path": "SpNameConfig",
+      "Properties": {}
+    },
+    {
+      "Filename": "FanexSpName.LOCAL.xml",
+      "Project": null,
+      "Path": "SpNameConfig",
+      "Properties": {}
+    },
+    {
+      "Filename": "FanexSpName.UAT.xml",
+      "Project": null,
+      "Path": "SpNameConfig",
+      "Properties": {}
+    },
+    {
+      "Filename": "FanexSpName.UATTW.xml",
+      "Project": null,
+      "Path": "SpNameConfig",
+      "Properties": {}
+    },
+    {
+      "Filename": "FanexSpName.SIT.xml",
+      "Project": null,
+      "Path": "SpNameConfig",
+      "Properties": {}
+    },
+    {
+      "Filename": "FanexSpName.PRO.xml",
+      "Project": null,
+      "Path": "SpNameConfig",
+      "Properties": {}
+    },
+    {
+      "Filename": "FanexSpName.Staging.xml",
+      "Project": null,
+      "Path": "SpNameConfig",
+      "Properties": {}
+    },
+    {
+      "Filename": "FanexSpName.BACKUPMNL.xml",
+      "Project": null,
+      "Path": "SpNameConfig",
+      "Properties": {}
+    },
+    {
+      "Filename": "FanexSpName.AWS.xml",
+      "Project": null,
+      "Path": "SpNameConfig",
+      "Properties": {}
+    },
+    {
+      "Filename": "FanexSpName.AWSStatic.xml",
+      "Project": null,
+      "Path": "SpNameConfig",
+      "Properties": {}
+    }
+  ]
+}

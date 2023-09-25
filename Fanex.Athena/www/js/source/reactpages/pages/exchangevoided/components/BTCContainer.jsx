@@ -13,9 +13,9 @@ export const BTCContainer = (props) => {
         <div>
             <Tabs>
                 {
-                    activedTabList.map(item => <Tab label={item.label} url={item.url} />)
+                    activedTabList.map(item => <Tab key={item.label} label={item.label} url={item.url} />)
                 }
-                <Tab isActive={true} label={LangHelper.getSingleResource("Exchange")}
+                <Tab isActive={true} key={LangHelper.getSingleResource("Exchange")} label={LangHelper.getSingleResource("Exchange")}
                     url={Site.resolveClientUrl("ExchangeVoided")}>
                 </Tab>
             </Tabs>

@@ -297,6 +297,9 @@
     <Content Include="App_Data\UserGuide\CustomerPendingFunds\vi-VN.htm" />
     <Content Include="App_Data\UserGuide\CustomerTurnover\vi-VN.htm" />
     <Content Include="App_Data\UserGuide\CustomerWL\vi-VN.htm" />
+    <Content Include="App_Data\UserGuide\ExchangeWinLoss\zh-CN.htm" />
+    <Content Include="App_Data\UserGuide\ExchangeWinLoss\vi-VN.htm" />
+    <Content Include="App_Data\UserGuide\ExchangeWinLoss\en-US.htm" />
     <Content Include="App_Data\UserGuide\ExtraPayout\vi-VN.htm" />
     <Content Include="App_Data\UserGuide\Forecast1x2\vi-VN.htm" />
     <Content Include="App_Data\UserGuide\ForecastHdpOu\vi-VN.htm" />
@@ -426,7 +429,7 @@
     <Content Include="App_Data\UserGuide\PlatformWinLoss\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\CustomerBalance\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\CustomerPendingFunds\zh-CN.htm" />
-    <Content Include="SpNameConfig\FanexSpName.xml1.txt">
+    <Content Include="SpNameConfig\FanexSpName.xml.txt">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FanexSpName.xml.tt</DependentUpon>
