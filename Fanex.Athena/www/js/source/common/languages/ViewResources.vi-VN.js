@@ -1,4 +1,4 @@
-﻿// Generated at: 9/19/2023 2:10:37 PM
+﻿// Generated at: 9/26/2023 2:31:07 PM
 window._language_vi_VN = {
 AA:"Đội Khách/Đội Khách",
 AbnormalBet:"Cược bất thường",
@@ -341,7 +341,7 @@ ForecastHome:"Dự đoán Đội Nhà",
 Fr:"T6",
 FreeBets:"Cược miễn phí",
 FreePlay:"Chơi miễn phí",
-Freeze:"Đóng băng",
+Freeze:"Tắt Cập Nhật",
 Friday:"Thứ Sáu",
 From:"Từ",
 Fromdate:"Từ ngày",
@@ -936,7 +936,7 @@ Under:"Xỉu",
 UnderMaintenance:"Đang bảo trì",
 UndermaintenanceMsg:"Chúng tôi đang bảo trì máy chủ, không thể truy cập trang web từ {0} cho đến {1}. Xin lỗi vì sự bất tiện này!",
 UnderSettlement:"Đang chờ kết toán",
-Unfreeze:"Mở đóng băng",
+Unfreeze:"Tự Cập Nhật",
 Unknown:"Không xác định",
 Update:"Cập nhật",
 UpdateAccountStatus:"Cập nhật Trạng thái Tài khoản",

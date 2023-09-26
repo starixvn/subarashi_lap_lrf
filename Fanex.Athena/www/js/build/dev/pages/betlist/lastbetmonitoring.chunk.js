@@ -5131,7 +5131,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 
         let defaultBasedCurrency ="";
         let _highLightSubmitIntervalId = 0;
-         
+        
         let _currentMatchList = [];
         let _currentLeagueList = [];
         let _currentSportList = [];
@@ -5378,7 +5378,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                 specialList.push({
                     Id: 'special-option-' + i,
                     Value: i.toString(),
-                    Text: i === 0 ? Site.getSingleResource('SelectOptions') : i.toString(),
+                    Text: i === 0 ? Site.getSingleResource('None') : i.toString(),
                     Checked: true,
                     Enable: true,
                     Css: '',
@@ -5757,12 +5757,11 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
         const SELECTED_CLASS = 'monitor-keep';
         const MAX_STAKE = 999999999;
 
-        const ID_CUSTOMER_CLASS_IFRAME = 'iframe-customer-class';
-
         _me.columns =
             [{ Name: 'Platform', IsShow: 1 },
             { Name: 'ExternalId', IsShow: 1 },
             { Name: 'SystemId', IsShow: 1 },
+            { Name: 'RiskLevel', IsShow: 1 },
             { Name: 'TransTime', IsShow: 1 },
             { Name: 'Choice', IsShow: 1 },
             { Name: 'Odds', IsShow: 1 },
