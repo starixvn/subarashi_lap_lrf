@@ -1117,99 +1117,6 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
 .sweet-alert .warning {
   color: #ee0606; }
 
-/* z-index */
-/* Table */
-/* Label Text */
-/* Radio Buttons
-   ========================================================================== */
-[type="radio"]:not(:checked),
-[type="radio"]:checked {
-  position: absolute;
-  left: -9999px;
-  opacity: 0; }
-
-[type="radio"]:not(:checked) + label,
-[type="radio"]:checked + label {
-  position: relative;
-  padding-left: 25px;
-  padding-right: 10px;
-  cursor: pointer;
-  display: inline-block;
-  height: 25px;
-  line-height: 25px;
-  transition: .28s ease;
-  -khtml-user-select: none;
-  /* webkit (konqueror) browsers */
-  user-select: none; }
-
-[type="radio"] + label:before,
-[type="radio"] + label:after {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  margin: 4px;
-  width: 16px;
-  height: 16px;
-  z-index: 0;
-  transition: .28s ease; }
-
-/* Unchecked styles */
-[type="radio"]:not(:checked) + label:before,
-[type="radio"]:not(:checked) + label:after,
-[type="radio"]:checked + label:before,
-[type="radio"]:checked + label:after {
-  border-radius: 50%; }
-
-[type="radio"]:not(:checked) + label:before,
-[type="radio"]:not(:checked) + label:after {
-  border: 2px solid #6790b0; }
-
-[type="radio"]:not(:checked) + label:after {
-  z-index: -1;
-  transform: scale(0); }
-
-/* Checked styles */
-[type="radio"]:checked + label:before {
-  border: 2px solid transparent; }
-
-[type="radio"]:checked + label:before,
-[type="radio"]:checked + label:after {
-  border: 2px solid #6790b0; }
-
-[type="radio"]:checked + label:after {
-  background-color: #6790b0;
-  z-index: 0;
-  transform: scale(0.5); }
-
-/* Focused styles */
-[type="radio"].tabbed:focus + label:before {
-  box-shadow: 0 0 0 10px rgba(0, 0, 0, 0.1); }
-
-/* Disabled Radio With gap */
-[type="radio"]:disabled:checked + label:before {
-  border: 2px solid rgba(0, 0, 0, 0.26); }
-
-[type="radio"]:disabled:checked + label:after {
-  border: none;
-  background-color: rgba(0, 0, 0, 0.26); }
-
-/* Disabled style */
-[type="radio"]:disabled:not(:checked) + label:before,
-[type="radio"]:disabled:checked + label:before {
-  background-color: transparent;
-  border-color: rgba(0, 0, 0, 0.26); }
-
-[type="radio"]:disabled + label {
-  color: rgba(0, 0, 0, 0.26); }
-
-[type="radio"]:disabled:not(:checked) + label:before {
-  border-color: rgba(0, 0, 0, 0.26); }
-
-[type="radio"]:disabled:checked + label:after {
-  background-color: rgba(0, 0, 0, 0.26);
-  border-color: #BDBDBD; }
-
 #player-segmentation .switch label {
   margin-bottom: 0; }
   #player-segmentation .switch label .lever {
@@ -1356,13 +1263,190 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
     color: #fff;
     padding: 0 30px; }
 
-#player-segmentation .vip-player-management .dropzone .radio-group,
-#player-segmentation .monitored-player .dropzone .radio-group {
-  position: absolute;
-  top: 0; }
-  #player-segmentation .vip-player-management .dropzone .radio-group span,
-  #player-segmentation .monitored-player .dropzone .radio-group span {
-    display: block; }
+#player-segmentation .vip-player-management .dropzone,
+#player-segmentation .monitored-player .dropzone {
+  /* z-index */
+  /* Table */
+  /* Label Text */
+  /* Radio Buttons
+   ========================================================================== */
+  /* Unchecked styles */
+  /* Checked styles */
+  /* Focused styles */
+  /* Disabled Radio With gap */
+  /* Disabled style */ }
+  #player-segmentation .vip-player-management .dropzone .radio-group,
+  #player-segmentation .monitored-player .dropzone .radio-group {
+    position: absolute;
+    top: 0; }
+    #player-segmentation .vip-player-management .dropzone .radio-group span,
+    #player-segmentation .monitored-player .dropzone .radio-group span {
+      display: block; }
+  #player-segmentation .vip-player-management .dropzone [type="radio"]:not(:checked),
+  #player-segmentation .vip-player-management .dropzone [type="radio"]:checked,
+  #player-segmentation .monitored-player .dropzone [type="radio"]:not(:checked),
+  #player-segmentation .monitored-player .dropzone [type="radio"]:checked {
+    position: absolute;
+    left: -9999px;
+    opacity: 0; }
+  #player-segmentation .vip-player-management .dropzone [type="radio"]:not(:checked) + label,
+  #player-segmentation .vip-player-management .dropzone [type="radio"]:checked + label,
+  #player-segmentation .monitored-player .dropzone [type="radio"]:not(:checked) + label,
+  #player-segmentation .monitored-player .dropzone [type="radio"]:checked + label {
+    position: relative;
+    padding-left: 25px;
+    padding-right: 10px;
+    cursor: pointer;
+    display: inline-block;
+    height: 25px;
+    line-height: 25px;
+    transition: .28s ease;
+    -khtml-user-select: none;
+    /* webkit (konqueror) browsers */
+    user-select: none; }
+  #player-segmentation .vip-player-management .dropzone [type="radio"] + label:before,
+  #player-segmentation .vip-player-management .dropzone [type="radio"] + label:after,
+  #player-segmentation .monitored-player .dropzone [type="radio"] + label:before,
+  #player-segmentation .monitored-player .dropzone [type="radio"] + label:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: 4px;
+    width: 16px;
+    height: 16px;
+    z-index: 0;
+    transition: .28s ease; }
+  #player-segmentation .vip-player-management .dropzone [type="radio"]:not(:checked) + label:before,
+  #player-segmentation .vip-player-management .dropzone [type="radio"]:not(:checked) + label:after,
+  #player-segmentation .vip-player-management .dropzone [type="radio"]:checked + label:before,
+  #player-segmentation .vip-player-management .dropzone [type="radio"]:checked + label:after,
+  #player-segmentation .monitored-player .dropzone [type="radio"]:not(:checked) + label:before,
+  #player-segmentation .monitored-player .dropzone [type="radio"]:not(:checked) + label:after,
+  #player-segmentation .monitored-player .dropzone [type="radio"]:checked + label:before,
+  #player-segmentation .monitored-player .dropzone [type="radio"]:checked + label:after {
+    border-radius: 50%; }
+  #player-segmentation .vip-player-management .dropzone [type="radio"]:not(:checked) + label:before,
+  #player-segmentation .vip-player-management .dropzone [type="radio"]:not(:checked) + label:after,
+  #player-segmentation .monitored-player .dropzone [type="radio"]:not(:checked) + label:before,
+  #player-segmentation .monitored-player .dropzone [type="radio"]:not(:checked) + label:after {
+    border: 2px solid #6790b0; }
+  #player-segmentation .vip-player-management .dropzone [type="radio"]:not(:checked) + label:after,
+  #player-segmentation .monitored-player .dropzone [type="radio"]:not(:checked) + label:after {
+    z-index: -1;
+    transform: scale(0); }
+  #player-segmentation .vip-player-management .dropzone [type="radio"]:checked + label:before,
+  #player-segmentation .monitored-player .dropzone [type="radio"]:checked + label:before {
+    border: 2px solid transparent; }
+  #player-segmentation .vip-player-management .dropzone [type="radio"]:checked + label:before,
+  #player-segmentation .vip-player-management .dropzone [type="radio"]:checked + label:after,
+  #player-segmentation .monitored-player .dropzone [type="radio"]:checked + label:before,
+  #player-segmentation .monitored-player .dropzone [type="radio"]:checked + label:after {
+    border: 2px solid #6790b0; }
+  #player-segmentation .vip-player-management .dropzone [type="radio"]:checked + label:after,
+  #player-segmentation .monitored-player .dropzone [type="radio"]:checked + label:after {
+    background-color: #6790b0;
+    z-index: 0;
+    transform: scale(0.5); }
+  #player-segmentation .vip-player-management .dropzone [type="radio"].tabbed:focus + label:before,
+  #player-segmentation .monitored-player .dropzone [type="radio"].tabbed:focus + label:before {
+    box-shadow: 0 0 0 10px rgba(0, 0, 0, 0.1); }
+  #player-segmentation .vip-player-management .dropzone [type="radio"]:disabled:checked + label:before,
+  #player-segmentation .monitored-player .dropzone [type="radio"]:disabled:checked + label:before {
+    border: 2px solid rgba(0, 0, 0, 0.26); }
+  #player-segmentation .vip-player-management .dropzone [type="radio"]:disabled:checked + label:after,
+  #player-segmentation .monitored-player .dropzone [type="radio"]:disabled:checked + label:after {
+    border: none;
+    background-color: rgba(0, 0, 0, 0.26); }
+  #player-segmentation .vip-player-management .dropzone [type="radio"]:disabled:not(:checked) + label:before,
+  #player-segmentation .vip-player-management .dropzone [type="radio"]:disabled:checked + label:before,
+  #player-segmentation .monitored-player .dropzone [type="radio"]:disabled:not(:checked) + label:before,
+  #player-segmentation .monitored-player .dropzone [type="radio"]:disabled:checked + label:before {
+    background-color: transparent;
+    border-color: rgba(0, 0, 0, 0.26); }
+  #player-segmentation .vip-player-management .dropzone [type="radio"]:disabled + label,
+  #player-segmentation .monitored-player .dropzone [type="radio"]:disabled + label {
+    color: rgba(0, 0, 0, 0.26); }
+  #player-segmentation .vip-player-management .dropzone [type="radio"]:disabled:not(:checked) + label:before,
+  #player-segmentation .monitored-player .dropzone [type="radio"]:disabled:not(:checked) + label:before {
+    border-color: rgba(0, 0, 0, 0.26); }
+  #player-segmentation .vip-player-management .dropzone [type="radio"]:disabled:checked + label:after,
+  #player-segmentation .monitored-player .dropzone [type="radio"]:disabled:checked + label:after {
+    background-color: rgba(0, 0, 0, 0.26);
+    border-color: #BDBDBD; }
+
+#player-segmentation .vip-player-management {
+  /* The container <div> - needed to position the dropdown content */ }
+  #player-segmentation .vip-player-management .dropdown {
+    position: relative;
+    display: inline-block;
+    /* Dropdown Button */
+    /* Dropdown Content */ }
+    #player-segmentation .vip-player-management .dropdown .dropdown-toggle {
+      padding: 0 10px;
+      font-size: 11px;
+      border: none;
+      cursor: pointer;
+      border-radius: 3px; }
+      #player-segmentation .vip-player-management .dropdown .dropdown-toggle.toggle-default {
+        background: #50BA62;
+        color: white;
+        /* Dropdown button on hover & focus */ }
+        #player-segmentation .vip-player-management .dropdown .dropdown-toggle.toggle-default:hover, #player-segmentation .vip-player-management .dropdown .dropdown-toggle.toggle-default:focus {
+          background: #3e934c; }
+      #player-segmentation .vip-player-management .dropdown .dropdown-toggle.toggle-outline {
+        background: transparent; }
+        #player-segmentation .vip-player-management .dropdown .dropdown-toggle.toggle-outline-light {
+          color: #333; }
+    #player-segmentation .vip-player-management .dropdown .dropdown-menu {
+      position: absolute;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      /* Links inside the dropdown */ }
+      #player-segmentation .vip-player-management .dropdown .dropdown-menu .dropdown-item {
+        text-align: left;
+        color: black;
+        padding: 5px 10px;
+        text-decoration: none;
+        display: block;
+        border: none;
+        cursor: pointer;
+        background-color: #fff;
+        width: 100%; }
+        #player-segmentation .vip-player-management .dropdown .dropdown-menu .dropdown-item:hover {
+          background-color: #ddd; }
+  #player-segmentation .vip-player-management .dropdown-label-container {
+    border: 1px solid #C0C0BE;
+    border-radius: 3px;
+    cursor: pointer;
+    background-color: #f7f2f2; }
+    #player-segmentation .vip-player-management .dropdown-label-container .dropdown-label {
+      width: calc(100% - 17px);
+      border: 1px solid #fff;
+      border-radius: 3px;
+      color: #000;
+      display: inline-block;
+      margin-right: 4px;
+      padding: 2px 0; }
+      #player-segmentation .vip-player-management .dropdown-label-container .dropdown-label-icon.chevron {
+        border-top: 2px solid #7d7d65;
+        border-right: 2px solid #7d7d65; }
+        #player-segmentation .vip-player-management .dropdown-label-container .dropdown-label-icon.chevron.down {
+          margin-bottom: 1px;
+          margin-right: 1px; }
+  #player-segmentation .vip-player-management .rdr-DateRange-right-align {
+    right: 0px; }
+  #player-segmentation .vip-player-management .search-option.dropdown .dropdown-menu .dropdown-item {
+    padding: 0; }
+  #player-segmentation .vip-player-management .search-option .selection-item {
+    margin-bottom: 0;
+    padding: 5px 10px;
+    width: 100%;
+    height: 100%;
+    cursor: pointer; }
+  #player-segmentation .vip-player-management .search-option .material-icons {
+    font-size: 12px; }
 
 #player-segmentation .monitored-player .form-add {
   padding: 15px;

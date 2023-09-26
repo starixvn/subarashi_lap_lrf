@@ -24,6 +24,12 @@ export const selectedRiskLevel = createReducer({}, {
     }
 });
 
+export const searchingDateRangeOption = createReducer(null, {
+    [types.SET_SEARCHING_DATE_RANGE_OPTION](state, action) {
+        return action.data;
+    }
+})
+
 export const dateRange = dateRangeReducer.dateRange;
 export const selectedCurrency = currencyReducer.selectedCurrency;
 export const username = usernameReducer.username;

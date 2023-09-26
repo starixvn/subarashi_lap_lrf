@@ -255,6 +255,9 @@
   <data name="AllCustomerClassCategory" xml:space="preserve">
     <value>Tất cả danh mục Hạng Khách Hàng</value>
   </data>
+  <data name="AllDates" xml:space="preserve">
+    <value>Tất cả ngày</value>
+  </data>
   <data name="AlreadyUpdateNotVipStatus" xml:space="preserve">
     <value>Không phải VIP, không cập nhật: {0}</value>
   </data>
@@ -2466,6 +2469,9 @@
   <data name="RiskLevelInformation" xml:space="preserve">
     <value>Thông Tin Mức Độ Rủi Ro</value>
   </data>
+  <data name="RiskLevelLastMarkDate" xml:space="preserve">
+    <value>Ngày Cập Nhật Mức Độ Rủi Ro</value>
+  </data>
   <data name="RiskLevelOddsGroup" xml:space="preserve">
     <value>Nhóm Tỷ Lệ Cược theo Mức Độ Rủi Ro</value>
   </data>
@@ -2534,6 +2540,9 @@
   </data>
   <data name="SelectAtLeastOneCurrencyMsg" xml:space="preserve">
     <value>Vui lòng chọn ít nhất một đơn vị tiền tệ!</value>
+  </data>
+  <data name="SelectDateRange" xml:space="preserve">
+    <value>Chọn Phạm Vi Ngày</value>
   </data>
   <data name="SelectedCustomers" xml:space="preserve">
     <value>Khách hàng đã chọn</value>

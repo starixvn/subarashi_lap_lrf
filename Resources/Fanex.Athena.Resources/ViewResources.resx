@@ -3516,14 +3516,23 @@
   <data name="SearchData" xml:space="preserve">
     <value>Search data</value>
   </data>
+  <data name="AllDates" xml:space="preserve">
+    <value>All Dates</value>
+  </data>
   <data name="May2" xml:space="preserve">
     <value>May</value>
   </data>
   <data name="SabaVirtualSportsNote" xml:space="preserve">
     <value>Saba Virtual Sports does not support System Parlay bet type.</value>
   </data>
+  <data name="RiskLevelLastMarkDate" xml:space="preserve">
+    <value>Risk Level's Last Mark Date</value>
+  </data>
   <data name="ChatRoom" xml:space="preserve">
     <value>Chat Room</value>
+  </data>
+  <data name="SelectDateRange" xml:space="preserve">
+    <value>Select Date Range</value>
   </data>
   <data name="DesktopGalaxy" xml:space="preserve">
     <value>Desktop Galaxy</value>

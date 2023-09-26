@@ -394,6 +394,9 @@
         private static void AddVipPlayerListParams(IObjectDb objectDb, VipPlayerListMetaModel metaModel)
         {
             objectDb.SetParameterValue("VipOption", metaModel.VipOption);
+            objectDb.SetParameterValue("IsCheckAll", metaModel.IsCheckAll);
+            objectDb.SetParameterValue(FromDateColumn, metaModel.FromDate);
+            objectDb.SetParameterValue(ToDateColumn, metaModel.ToDate);
         }
     }
 }

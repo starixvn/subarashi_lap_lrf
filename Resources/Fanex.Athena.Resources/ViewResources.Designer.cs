@@ -475,6 +475,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All Dates.
+        /// </summary>
+        public static string AllDates {
+            get {
+                return ResourceManager.GetString("AllDates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Already NOT VIP, no update: {0}.
         /// </summary>
         public static string AlreadyUpdateNotVipStatus {
@@ -7108,6 +7117,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Risk Level&apos;s Last Mark Date.
+        /// </summary>
+        public static string RiskLevelLastMarkDate {
+            get {
+                return ResourceManager.GetString("RiskLevelLastMarkDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Risk Level Odds Group.
         /// </summary>
         public static string RiskLevelOddsGroup {
@@ -7311,6 +7329,15 @@ namespace Fanex.Athena.Resources {
         public static string SelectAtLeastOneCurrencyMsg {
             get {
                 return ResourceManager.GetString("SelectAtLeastOneCurrencyMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Date Range.
+        /// </summary>
+        public static string SelectDateRange {
+            get {
+                return ResourceManager.GetString("SelectDateRange", resourceCulture);
             }
         }
         

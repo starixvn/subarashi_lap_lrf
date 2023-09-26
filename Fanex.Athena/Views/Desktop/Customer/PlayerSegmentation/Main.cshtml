@@ -24,7 +24,13 @@ string.Join(",", Model.SubsidiaryList.SelectMany(x => x.Children.Select(y => y.V
         playerList = null as object,
         selectedParams = null as object,
         selectedCustomerClass = string.Join(",", vipPlayerManagementVM.RiskLevels.Select(r => string.Join(",", r.CustomerClassList))),
-        selectedRiskLevel = string.Join(",", vipPlayerManagementVM.RiskLevels.Select(r => r.Id))
+        selectedRiskLevel = string.Join(",", vipPlayerManagementVM.RiskLevels.Select(r => r.Id)),
+
+        dateRange = new
+        {
+            fromDate = vipPlayerManagementVM.FromReachedDate.ToString("MM/dd/yyyy"),
+            toDate = vipPlayerManagementVM.ToReachedDate.ToString("MM/dd/yyyy")
+        },
     } : null;
 
     var vipPlayerManagementData = hasVIPManagementPermission ? new
@@ -38,7 +44,12 @@ string.Join(",", Model.SubsidiaryList.SelectMany(x => x.Children.Select(y => y.V
             valueDecoration = "risk-level " + r.Key,
             customerClassList = string.Join(",",r.CustomerClassList),
             status = true
-        })
+        }),
+        dateConstraint = new
+        {
+            minDate = vipPlayerManagementVM.MinReachedDate.ToString("MM/dd/yyyy"),
+            maxDate = vipPlayerManagementVM.MaxReachedDate.ToString("MM/dd/yyyy")
+        },
     } : null;
 
     var monitoredPlayerInitState = monitoredPlayerVM != null ? new

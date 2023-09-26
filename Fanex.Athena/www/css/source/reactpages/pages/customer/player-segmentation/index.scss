@@ -9,7 +9,6 @@
 @import "../../../components/paging";
 @import "../../../components/switch";
 @import "../../../components/alert/index";
-@import "../../../components/forms/radio-buttons";
 
 @import "./components/yesNoSwitch";
 @import "./components//dropzone";
@@ -37,7 +36,6 @@
 
         .icon {
             margin-right: 5px;
-            ;
         }
 
 
@@ -74,7 +72,6 @@
                 color: $text-default-color;
                 text-transform: uppercase;
                 text-align: center;
-
                 padding: 10px 20px;
                 text-decoration: none;
                 text-transform: uppercase;
@@ -119,6 +116,39 @@
                     display: block;
                 }
             }
+
+            @import "../../../components/forms/radio-buttons";
+        }
+    }
+
+    .vip-player-management {
+        @import "../../../components/dropdown";
+        @import "../../../components/dropdownlabel";
+
+        .rdr-DateRange-right-align {
+            right: 0px;
+        }
+
+        .search-option {
+            &.dropdown {
+                .dropdown-menu {
+                    .dropdown-item {
+                        padding: 0;
+                    }
+                }
+            }
+
+            .selection-item {
+                margin-bottom: 0;
+                padding: 5px 10px;
+                width: 100%;
+                height: 100%;
+                cursor: pointer;
+            }
+
+            .material-icons {
+                font-size: 12px;
+            }
         }
     }
 
@@ -158,8 +188,6 @@
                 }
             }
         }
-
-
     }
 
     .required {

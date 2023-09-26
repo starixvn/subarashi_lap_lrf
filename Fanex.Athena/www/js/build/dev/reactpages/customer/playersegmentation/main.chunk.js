@@ -64,7 +64,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "www/js/build/dev/reactpages/" + ({"customer/playersegmentation/SabaVirtualSetting":"customer/playersegmentation/SabaVirtualSetting","customer/playersegmentation/monitoredPlayer":"customer/playersegmentation/monitoredPlayer","customer/playersegmentation/problemPlayer":"customer/playersegmentation/problemPlayer","customer/playersegmentation/vipPlayerManagement":"customer/playersegmentation/vipPlayerManagement","lib/xlsx-style-sparta":"lib/xlsx-style-sparta"}[chunkId]||chunkId) + "." + {"customer/playersegmentation/SabaVirtualSetting":"7bf87b05f9205b7e31ca","customer/playersegmentation/monitoredPlayer":"c647213aa6202f8018af","customer/playersegmentation/problemPlayer":"a01d6c2e24c94acf4145","customer/playersegmentation/vipPlayerManagement":"11c29c81fbb650b10669","lib/xlsx-style-sparta":"932edca6c1487b86dbb1"}[chunkId] + ".chunk.js"
+/******/ 		return __webpack_require__.p + "www/js/build/dev/reactpages/" + ({"customer/playersegmentation/SabaVirtualSetting":"customer/playersegmentation/SabaVirtualSetting","customer/playersegmentation/monitoredPlayer":"customer/playersegmentation/monitoredPlayer","customer/playersegmentation/problemPlayer":"customer/playersegmentation/problemPlayer","customer/playersegmentation/vipPlayerManagement":"customer/playersegmentation/vipPlayerManagement","lib/xlsx-style-sparta":"lib/xlsx-style-sparta"}[chunkId]||chunkId) + "." + {"customer/playersegmentation/SabaVirtualSetting":"7bf87b05f9205b7e31ca","customer/playersegmentation/monitoredPlayer":"c647213aa6202f8018af","customer/playersegmentation/problemPlayer":"a01d6c2e24c94acf4145","customer/playersegmentation/vipPlayerManagement":"70de6f1845576c8155dd","lib/xlsx-style-sparta":"932edca6c1487b86dbb1"}[chunkId] + ".chunk.js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -1075,7 +1075,8 @@ const SortMapper = {
     'systemId': 1,
     'externalId': 2,
     'lastModifiedDate': 3,
-    'riskLevel': 4
+    'riskLevel': 4,
+    'riskLevelLastMarkDate': 5
   },
   sortType: {
     'asc': 1,
