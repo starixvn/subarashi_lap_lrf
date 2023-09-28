@@ -1,6 +1,8 @@
-﻿using Fanex.Athena.Model.Core.DTO.Common;
+﻿using System.Collections.Generic;
+using Fanex.Athena.Model.Core.DTO.Common;
 using Fanex.Athena.Model.Core.Helper;
 using Fanex.Athena.Model.Core.MetaModel;
+using Fanex.Athena.Model.Customer.DTO;
 
 namespace Fanex.Athena.Model.BetList.MetaModel
 {
@@ -57,6 +59,8 @@ namespace Fanex.Athena.Model.BetList.MetaModel
 
         public string ProductCodeList { get; set; } = Product.SB;
         public string OriginalProductCodeList { get; set; }
+
+        public IEnumerable<RiskLevel> RiskLevels { get; set; }
 
         public bool IsValid => MetaModelHelper.ValidateBaseCurrency(BasedCurrency);
     }

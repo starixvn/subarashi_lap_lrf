@@ -43,12 +43,11 @@ define(
         const SELECTED_CLASS = 'monitor-keep';
         const MAX_STAKE = 999999999;
 
-        const ID_CUSTOMER_CLASS_IFRAME = 'iframe-customer-class';
-
         _me.columns =
             [{ Name: 'Platform', IsShow: 1 },
             { Name: 'ExternalId', IsShow: 1 },
             { Name: 'SystemId', IsShow: 1 },
+            { Name: 'RiskLevel', IsShow: 1 },
             { Name: 'TransTime', IsShow: 1 },
             { Name: 'Choice', IsShow: 1 },
             { Name: 'Odds', IsShow: 1 },

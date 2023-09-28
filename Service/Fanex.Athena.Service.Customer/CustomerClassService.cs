@@ -140,11 +140,9 @@
 
         private async Task<List<CustomerClassCategoryModel>> GetCustomerClassCategories()
         {
-            var customerClassCategory = new List<CustomerClassCategoryModel>();
-
             try
             {
-                customerClassCategory = _cache.Get<List<CustomerClassCategoryModel>>(CacheKey.MemorycacheCustomerClassCategories);
+                var customerClassCategory = _cache.Get<List<CustomerClassCategoryModel>>(CacheKey.MemorycacheCustomerClassCategories);
 
                 if (customerClassCategory != null)
                 {

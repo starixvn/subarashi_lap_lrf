@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 9/19/2023 2:10:38 PM
+// Generated at: 9/26/2023 2:31:07 PM
 window._language_zh_CN = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -410,7 +410,7 @@ window._language_zh_CN = {
   Fr: "Fr",
   FreeBets: "免费投注",
   FreePlay: "免费投注",
-  Freeze: "暂停更新",
+  Freeze: "冻结视窗",
   Friday: "星期五",
   From: "从",
   Fromdate: "从日期",
@@ -952,7 +952,7 @@ window._language_zh_CN = {
   UnderMaintenance: "维护中",
   UndermaintenanceMsg: "我们正进行伺服器维护, 网站于{0} 至 {1} 将无法使用. 非常抱歉造成您的不便!",
   UnderSettlement: "结算中",
-  Unfreeze: "Unfreeze",
+  Unfreeze: "解除冻结",
   Unknown: "未知",
   Update: "更新",
   UpdateAccountSuccessMsg: "更新账号成功!",

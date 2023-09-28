@@ -7,6 +7,7 @@
     using System.Xml.Linq;
     using Base.UnitTests;
     using Fanex.Athena.Extension.Utility;
+    using Fanex.Athena.Service.Customer.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     using Model.BetList.MetaModel;
@@ -35,6 +36,7 @@
         private IBetListApiClient _betListApiClient;
         private IPortalApiService _portalApiService;
         private ISportService _sportService;
+        private ICustomerClassService _customerClassService;
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
@@ -46,6 +48,7 @@
             _matchService = Substitute.For<IMatchService>();
             _portalApiService = Substitute.For<IPortalApiService>();
             _sportService = Substitute.For<ISportService>();
+            _customerClassService = Substitute.For<ICustomerClassService>();
 
             MockSessionData();
         }
@@ -327,7 +330,7 @@
 
         private LastBetMonitoringBetListController CreateController()
         {
-            return new LastBetMonitoringBetListController(LangService, _betListApiClient, _matchService, _cacheRefAdapter, _portalApiService, _sportService)
+            return new LastBetMonitoringBetListController(LangService, _betListApiClient, _matchService, _cacheRefAdapter, _portalApiService, _sportService, _customerClassService)
             {
                 SessionService = SessionService,
                 ProductService = ProductService

@@ -6,7 +6,7 @@ define(
 
         let defaultBasedCurrency ="";
         let _highLightSubmitIntervalId = 0;
-         
+        
         let _currentMatchList = [];
         let _currentLeagueList = [];
         let _currentSportList = [];
@@ -253,7 +253,7 @@ define(
                 specialList.push({
                     Id: 'special-option-' + i,
                     Value: i.toString(),
-                    Text: i === 0 ? Site.getSingleResource('SelectOptions') : i.toString(),
+                    Text: i === 0 ? Site.getSingleResource('None') : i.toString(),
                     Checked: true,
                     Enable: true,
                     Css: '',
