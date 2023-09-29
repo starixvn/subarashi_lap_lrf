@@ -1,4 +1,4 @@
-﻿// Generated at: 10/10/2023 1:13:30 PM
+﻿// Generated at: 10/13/2023 4:01:25 PM
 var _language_vi_VN = {
 AA:"Đội Khách/Đội Khách",
 AbnormalBet:"Cược bất thường",
@@ -724,6 +724,7 @@ ProductJIG:"Jili",
 ProductJK:"Joker",
 ProductKN:"RNG Keno",
 ProductLC:"Casino trực tiếp",
+ProductLG:"Thể Thao Ảo 3",
 ProductLT:"Xổ số",
 ProductMGRNG:"MG-RNG",
 ProductMXG:"MaxGame",
@@ -749,7 +750,7 @@ ProductVGA:"Vgaming",
 ProductVRG:"Trò Chơi Ảo",
 ProductVS:"Thể Thao Ảo",
 ProductVS2:"Thể Thao Ảo 2",
-ProductVS3:"Thể Thao Ảo 3",
+ProductVS3:"Thể Thao Ảo 3 (Cũ)",
 ProductWM:"WM",
 ProductYB:"YeeBet",
 Promotion:"Khuyến mãi",

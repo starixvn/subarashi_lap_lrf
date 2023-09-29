@@ -121,7 +121,7 @@
 
         public decimal APMComm { get; set; }
 
-        public decimal VS3Comm { get; set; }
+        public decimal LGComm { get; set; }
 
         public decimal FGGLComm { get; set; }
 
@@ -135,46 +135,49 @@
 
         public void MapQuery()
         {
-            CommValues = new Dictionary<string, decimal>();
-            CommValues.Add(Product.SB, SBComm);
-            CommValues.Add(CommissionGroupHelper.ParlayName, ParlayComm);
-            CommValues.Add(Product.NG, NGComm);
-            CommValues.Add(Product.CS, CSComm);
-            CommValues.Add(Product.VB, VBComm);
-            CommValues.Add(Product.PP, PPComm);
+            CommValues = new Dictionary<string, decimal>
+            {
+                { Product.SB, SBComm },
+                { CommissionGroupHelper.ParlayName, ParlayComm },
+                { Product.NG, NGComm },
+                { Product.CS, CSComm },
+                { Product.VB, VBComm },
+                { Product.PP, PPComm },
 
-            CommValues.Add(Product.SXG, SXGComm);
-            CommValues.Add(Product.SG, SGComm);
-            CommValues.Add(Product.KN, KNComm);
-            CommValues.Add(Product.LT, LTComm);
-            CommValues.Add(Product.TG, TGComm);
-            CommValues.Add(Product.VS, VSComm);
-            CommValues.Add(Product.VS2, VS2Comm);
+                { Product.SXG, SXGComm },
+                { Product.SG, SGComm },
+                { Product.KN, KNComm },
+                { Product.LT, LTComm },
+                { Product.TG, TGComm },
+                { Product.VS, VSComm },
+                { Product.VS2, VS2Comm },
 
-            CommValues.Add(Product.VRG, VRGComm);
-            CommValues.Add(Product.CC, CCComm);
-            CommValues.Add(Product.SBC, SBCComm);
-            CommValues.Add(Product.SAG, SAGComm);
-            CommValues.Add(Product.PGS, PGSComm);
-            CommValues.Add(Product.AB, ABComm);
+                { Product.VRG, VRGComm },
+                { Product.CC, CCComm },
+                { Product.SBC, SBCComm },
+                { Product.SAG, SAGComm },
+                { Product.PGS, PGSComm },
+                { Product.AB, ABComm },
 
-            CommValues.Add(Product.WM, WMComm);
-            CommValues.Add(Product.BGG, BGGComm);
-            CommValues.Add(Product.JK, JKComm);
-            CommValues.Add(Product.HB, HBComm);
+                { Product.WM, WMComm },
+                { Product.BGG, BGGComm },
+                { Product.JK, JKComm },
+                { Product.HB, HBComm },
 
-            CommValues.Add(Product.VGA, VGAComm);
-            CommValues.Add(Product.CG, CGComm);
-            CommValues.Add(Product.AP, APComm);
-            CommValues.Add(Product.APM, APMComm);
-            CommValues.Add(Product.VS3, VS3Comm);
+                { Product.VGA, VGAComm },
+                { Product.CG, CGComm },
+                { Product.AP, APComm },
+                { Product.APM, APMComm },
 
-            CommValues.Add(Product.FGGL, FGGLComm);
-            CommValues.Add(Product.MXG, MXGComm);
-            CommValues.Add(Product.JIG, JIGComm);
+                { Product.FGGL, FGGLComm },
+                { Product.MXG, MXGComm },
+                { Product.JIG, JIGComm },
 
-            CommValues.Add(Product.YB, YBComm);
-            CommValues.Add(Product.MGRNG, MgRNGComm);
+                { Product.YB, YBComm },
+                { Product.MGRNG, MgRNGComm },
+
+                { Product.LG, LGComm }
+            };
         }
 
         public void MapData(IDataReader reader, IDictionary<string, string> columns, IDictionary<string, bool> visibility)

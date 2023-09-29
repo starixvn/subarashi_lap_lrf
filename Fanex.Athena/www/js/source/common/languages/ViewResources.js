@@ -1,4 +1,4 @@
-﻿// Generated at: 10/10/2023 1:13:30 PM
+﻿// Generated at: 10/13/2023 4:01:25 PM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -718,6 +718,7 @@ ProductJIG:"Jili",
 ProductJK:"Joker",
 ProductKN:"RNG Keno",
 ProductLC:"Live Casino",
+ProductLG:"Virtual Sports 3",
 ProductLT:"Lottery",
 ProductMGRNG:"MG-RNG",
 ProductMXG:"MaxGame",
@@ -743,7 +744,7 @@ ProductVGA:"Vgaming",
 ProductVRG:"Virtual Games",
 ProductVS:"Virtual Sports",
 ProductVS2:"Virtual Sports 2",
-ProductVS3:"Virtual Sports 3",
+ProductVS3:"Virtual Sports 3 (Old)",
 ProductWM:"WM",
 ProductYB:"YeeBet",
 Promotion:"Promotion",

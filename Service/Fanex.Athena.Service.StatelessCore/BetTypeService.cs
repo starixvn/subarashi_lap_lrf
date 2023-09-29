@@ -46,7 +46,7 @@ namespace Fanex.Athena.Service.StatelessCore
             if (sports != null && sports.Count > 0)
             {
                 var sportsParameters = BuildSportXmlParameter(sports);
-                var betypes =  await _betTypeDataAccess.GetBettypes(sportsParameters).ConfigureAwait(false);
+                var betypes = await _betTypeDataAccess.GetBettypes(sportsParameters).ConfigureAwait(false);
                 return betypes.Select(bettype => BuildBetTypeCheckItem(bettype, languageCode)).ToList();
             }
 
@@ -64,7 +64,7 @@ namespace Fanex.Athena.Service.StatelessCore
             }
             if (!string.IsNullOrWhiteSpace(betType.ProductPrefix))
             {
-                bettypeName = $"{betType.ProductPrefix}-{bettypeName}";
+                bettypeName = $"{ProductHelper.GetProductName(betType.ProductPrefix)}-{bettypeName}";
             }
 
             return new CheckedItem
@@ -143,7 +143,7 @@ namespace Fanex.Athena.Service.StatelessCore
                 return " (" + _cacheRefAdapter.GetSportName((int)SportType.VirtualBasketball) + ")";
             }
 
-            if(betType == (int)BetType.VirtualSportCorrectScoreTennis)
+            if (betType == (int)BetType.VirtualSportCorrectScoreTennis)
             {
                 return " (" + _cacheRefAdapter.GetSportName((int)SportType.Tennis) + ")";
             }

@@ -15,7 +15,7 @@
             <div class="input-field input col l3 m4 s12 calendar date-range">
                 @DesktopRazorHelper.DateRangePicker(Model.Param.FromDate, Model.Param.ToDate, minDate, appSettings.MaxDate)
             </div>
-            <div class="input-field col l2 m3 s12">
+            <div class="input-field col l2 m4 s12">
                 @Html.TextBox("Username", Model.Param.Username, new { placeholder = ViewResources.All, autocomplete = "off" })
                 <label>@ViewResources.Username</label>
                 <ul id="suggestionDropdown" class="dropdown-content ac-dropdown"></ul>
@@ -37,7 +37,7 @@
                     <label>@ViewResources.Product *</label>
                 </div>
             </div>
-            <div class="input-field col l2 m3 s12">
+            <div class="input-field col l2 m4 s12">
                 <div class="multiselect-container" id="BetTypeList">
                     <select id="grid-bettypes-multiselect" name="grid-bettypes-multiselect"></select>
                     <label>@ViewResources.BetType *</label>

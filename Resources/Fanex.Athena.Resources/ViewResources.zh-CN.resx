@@ -3196,6 +3196,9 @@
   <data name="TheSettledAndResettledDataNote" xml:space="preserve">
     <value>报表数据与实际已结算数据大约有20分钟延迟，而与实际已重新结算数据大约有65分钟延迟。</value>
   </data>
+  <data name="ProductLG" xml:space="preserve">
+    <value>虚拟运动3</value>
+  </data>
   <data name="ViewResettledTicketOnly" xml:space="preserve">
     <value>仅查看已重新结算注单数据</value>
   </data>
