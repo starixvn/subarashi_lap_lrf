@@ -7,6 +7,7 @@
     using Base.UnitTests;
     using Excel.Base.Entities;
     using Excel.Report;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
@@ -26,6 +27,7 @@
 
         private ITurnoverService _turnoverService;
         private ILicenseeSettingService _licenseeSettingService;
+        private IAuthorizationService _authorizationService;
 
         [SetUp]
         public void SetUp()
@@ -37,6 +39,7 @@
         public override void FixtureSetUp()
         {
             _turnoverService = Substitute.For<ITurnoverService>();
+            _authorizationService = Substitute.For<IAuthorizationService>();
 
             base.FixtureSetUp();
 
@@ -158,8 +161,9 @@
                 SessionService.LicenseeSession.LicenseeId,
                 SessionService.UserSession.Language,
                 FunctionNames.Turnover).Returns(new ProductAccess(productList.ToList()));
+            _authorizationService.HasPermissions(SessionService.UserSession, PermissionKeys.HidePlayerWL_WL_Comm_Total).Returns(true);
 
-            var controller = Substitute.ForPartsOf<TurnoverReportController>(_turnoverService);
+            var controller = Substitute.ForPartsOf<TurnoverReportController>(_turnoverService, _authorizationService);
 
             controller.LangService = LangService;
             controller.SessionServiceInstance = SessionService;

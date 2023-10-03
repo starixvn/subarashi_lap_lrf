@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Base.UnitTests;
+    using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DTO.Common;
     using Model.Core.ResultModel;
@@ -24,6 +25,7 @@
         private ICustomerTurnoverService _customerTurnoverService;
         private ITurnoverService _turnoverService;
         private ILicenseeSettingService _licenseeSettingService;
+        private IDataPermissionService _dataPermissionService;
 
         [SetUp]
         public void SetUp()
@@ -44,6 +46,7 @@
             _betTypeService = Substitute.For<IBetTypeService>();
             _customerTurnoverService = Substitute.For<ICustomerTurnoverService>();
             _turnoverService = Substitute.For<ITurnoverService>();
+            _dataPermissionService = Substitute.For<IDataPermissionService>();
             SetUpDefaultFakeData();
         }
 
@@ -132,7 +135,9 @@
             return new ReportAPIController(
                 _betTypeService,
                 _customerTurnoverService,
-                _turnoverService, _licenseeSettingService)
+                _turnoverService,
+                _licenseeSettingService,
+                _dataPermissionService)
             {
                 SessionServiceInstance = SessionService
             };

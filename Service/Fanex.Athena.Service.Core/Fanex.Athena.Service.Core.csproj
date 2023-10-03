@@ -106,8 +106,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\DataPermissionAttribute.cs" />
+    <Compile Include="Common\DataPermissionService.cs" />
     <Compile Include="Common\Interfaces\ICurrencyService.cs" />
     <Compile Include="Common\CurrencyService.cs" />
+    <Compile Include="Common\Interfaces\IDataPermissionService.cs" />
     <Compile Include="OAuth\Interfaces\IOAuthInfo.cs" />
     <Compile Include="OAuth\Interfaces\IOAuthService.cs" />
     <Compile Include="OAuth\OAuthInfo.cs" />

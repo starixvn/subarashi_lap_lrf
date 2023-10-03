@@ -6,14 +6,13 @@
 
 namespace Fanex.Athena.Controllers.Report
 {
-    using Fanex.Athena.Excel.Base.Entities;
     using Fanex.Athena.Excel.Report;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
-    using Fanex.Athena.Service.StatelessCore.Utility;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
     using Fanex.Athena.Web.ResultExtension;
 
@@ -31,12 +30,15 @@ namespace Fanex.Athena.Controllers.Report
     public class TurnoverReportController : ReportBaseController
     {
         private readonly ITurnoverService _turnoverService;
+        private readonly IAuthorizationService _authorizationService;
 
         public TurnoverReportController(
-            ITurnoverService turnoverService
+            ITurnoverService turnoverService,
+            IAuthorizationService authorizationService
 )
         {
             _turnoverService = turnoverService;
+            _authorizationService = authorizationService;
         }
 
         [HttpGet]
@@ -65,7 +67,9 @@ namespace Fanex.Athena.Controllers.Report
                 IsEnableSingleWallet = licenseeSession.IsEnableSingleWallet,
                 CurrencyList = GetCurrenciesForTurnoverReport(),
                 IsAllowedCasinoTransfer = AppSettingInstance.LicenseeAllowCasinoTransfer.Contains(licenseeSession.LicenseeId),
-                IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeName)
+                IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeName),
+                IsHidePlayerWL = !SessionServiceInstance.UserSession.IsSuperAdmin
+                    && _authorizationService.HasPermissions(SessionServiceInstance.UserSession, PermissionKeys.HidePlayerWL_WL_Comm_Total)
             };
 
             return View("~/Views/Desktop/Report/Turnover/Main.cshtml", model);
@@ -98,7 +102,9 @@ namespace Fanex.Athena.Controllers.Report
                 IsAllowedCustomerCommission = licenseeSession.IsAllowedCustomerComm,
                 IsEnableSingleWallet = licenseeSession.IsEnableSingleWallet,
                 CurrencyList = GetCurrenciesForTurnoverReport(),
-                IsAllowedCasinoTransfer = licenseeSession.LicenseeId == 1
+                IsAllowedCasinoTransfer = licenseeSession.LicenseeId == 1,
+                IsHidePlayerWL = !SessionServiceInstance.UserSession.IsSuperAdmin
+                    && _authorizationService.HasPermissions(SessionServiceInstance.UserSession, PermissionKeys.HidePlayerWL_WL_Comm_Total)
             };
 
             return ExportExcel(model);

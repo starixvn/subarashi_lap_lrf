@@ -212,6 +212,11 @@ namespace Fanex.Athena.Excel.Report
                 sheet.HideColumn(ColumnWithdrawal);
                 sheet.HideColumn(ColumnClosingBalance);
             }
+
+            if (_viewModel.IsHidePlayerWL)
+            {
+                sheet.HideColumn(ColumnCustomerTotal, ColumnCustomerComm, ColumnCustomerWinLoss);
+            }
         }
 
         private static void AssignCommonData(IRow row, TurnoverDTO turnover)

@@ -5,7 +5,7 @@
     using Fanex.Athena.Web.ActionFilter;
 
     using Resources;
-
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
 
@@ -24,7 +24,8 @@
 
             metaModel.Username = string.IsNullOrWhiteSpace(metaModel.Username) ||
                 metaModel.Username.Trim() == placeholderUsername ? null : metaModel.Username;
-            var dataList = await _turnoverService.GetDataList(metaModel).ConfigureAwait(false);
+            var dataList = await _turnoverService.GetDataList(metaModel);
+            dataList.ToList().ForEach(_ => _dataPermissionService.ClearDataByLimitPermission(_));
 
             return Json(new
             {

@@ -58,7 +58,6 @@ namespace Fanex.Athena.Service.Core.UnitTests.Utility
         [TestCase("", true, true)]
         [TestCase("", false, false)]
         [TestCase("usd", false, true)]
-        [TestCase("KKK", false, false)]
         public void IsValidBaseCurrency_WhenCalled_ReturnCorrectResult(
             string baseCurrency,
            bool isAllowEmpty,

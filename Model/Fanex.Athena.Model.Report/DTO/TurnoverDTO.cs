@@ -4,6 +4,9 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+using Fanex.Athena.Model.Auth.DataDomain;
+using Fanex.Athena.Service.Core.Attributes;
+
 namespace Fanex.Athena.Model.Report.DTO
 {
     /// <summary>
@@ -35,6 +38,7 @@ namespace Fanex.Athena.Model.Report.DTO
 
         public decimal PendingFunds { get; set; }
 
+        [DataPermission(Permission = PermissionKeys.HidePlayerWL_WL_Comm_Total)]
         public decimal WinLoss { get; set; }
 
         public decimal ClosingBalance { get; set; }
@@ -49,6 +53,7 @@ namespace Fanex.Athena.Model.Report.DTO
 
         public decimal AmountDueToBA { get; set; }
 
+        [DataPermission(Permission = PermissionKeys.HidePlayerWL_WL_Comm_Total)]
         public decimal PlayerComm { get; set; }
 
         public decimal WinLossComm

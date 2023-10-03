@@ -26,5 +26,7 @@ namespace Fanex.Athena.Model.Report.ViewModel
         public bool IsEnableSingleWallet { get; set; }
 
         public bool IsFakeLicensee { get; set; }
+
+        public bool IsHidePlayerWL { get; set; }
     }
 }
