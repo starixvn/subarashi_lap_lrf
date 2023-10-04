@@ -3570,4 +3570,7 @@
   <data name="PlayerBetList" xml:space="preserve">
     <value>Player Bet List</value>
   </data>
+  <data name="ViewResettledTicketOnlyNote" xml:space="preserve">
+    <value>"View Resettled Ticket Only" data is available from 01 Sep 2023.</value>
+  </data>
 </root>

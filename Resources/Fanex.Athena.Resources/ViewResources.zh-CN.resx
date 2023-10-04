@@ -3214,4 +3214,10 @@
   <data name="BettingTicketCenter_Exchange_Note_3" xml:space="preserve">
     <value>仅支援一个月内的数据。</value>
   </data>
+  <data name="PlayerBetList" xml:space="preserve">
+    <value>玩家注单</value>
+  </data>
+  <data name="ViewResettledTicketOnlyNote" xml:space="preserve">
+    <value>''仅查看已重新结算注单数据'' 可查询2023年9月1日后数据。</value>
+  </data>
 </root>

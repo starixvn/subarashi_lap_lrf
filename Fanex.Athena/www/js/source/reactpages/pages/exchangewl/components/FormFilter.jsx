@@ -362,6 +362,10 @@ export class FormFilter extends Component {
                         <span className="circle"></span>
                         <span>{decode(LangHelper.getSingleResource("TheSettledAndResettledDataNote"))}</span>
                     </div>
+                    <div className="col-11">
+                        <span className="circle"></span>
+                        <span>{decode(LangHelper.getSingleResource("ViewResettledTicketOnlyNote"))}</span>
+                    </div>
                 </div>
                 < div className='caret-block'>
                     <i className='icon-excel right' onClick={this.exportExcel} title={LangHelper.getSingleResource('ExportToExcel')}></i>

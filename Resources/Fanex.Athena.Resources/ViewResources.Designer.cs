@@ -9088,6 +9088,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &quot;View Resettled Ticket Only&quot; data is available from 01 Sep 2023..
+        /// </summary>
+        public static string ViewResettledTicketOnlyNote {
+            get {
+                return ResourceManager.GetString("ViewResettledTicketOnlyNote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to View subsidiary on reports.
         /// </summary>
         public static string ViewSubsidiaryOnReports {

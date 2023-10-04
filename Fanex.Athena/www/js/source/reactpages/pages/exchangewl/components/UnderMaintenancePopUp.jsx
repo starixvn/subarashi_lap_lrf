@@ -48,7 +48,7 @@ const UnderMaintenancePopUp = (props) => {
     return (
         <>
             <Popup width={"max-content"} height={"min-content"} isShow={isShow} title={LangHelper.getSingleResource("Notification").toUpperCase()} onClose={_onCloseHandler} isHtml={false}>
-                <div style={{ padding: "10px 10px 50px", "front-size": "13px" }}
+                <div style={{ padding: "10px 10px 50px", "font-size": "13px" }}
                     dangerouslySetInnerHTML={{ __html: decode(LangHelper.getSingleResource("ExchangeUnderMaintenanceMsg")) }}>
                 </div>
             </Popup>

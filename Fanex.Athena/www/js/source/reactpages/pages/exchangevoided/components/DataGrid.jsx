@@ -49,7 +49,7 @@ const DataGrid = (props) => {
 
     const { requestParam } = props;
 
-    const timezone = AppData.timeZoneList.find(x => x.value === this.props.selectedTimeZone).label;
+    const timezone = AppData.timeZoneList.find(x => x.value === props.selectedTimeZone).label;
     const reportTitle = `${LangHelper.getSingleResource('BettingTicketCenter')}, ${timezone}, ${requestParam.selectedDate}`;
 
     const {pageIndex, totalPage} = pagingOption;
@@ -72,11 +72,11 @@ const DataGrid = (props) => {
 function mapDispatchToProps(dispatch) {
     const { setRequestParam, getData } = ActionCreators;
     return bindActionCreators({ setRequestParam, getData }, dispatch);
-};
+}
 
 function mapStateToProps(state) {
-    const { gridData, requestParam } = state;
-    return Object.assign({}, { gridData, requestParam });
-};
+    const { gridData, requestParam, selectedTimeZone } = state;
+    return Object.assign({}, { gridData, requestParam, selectedTimeZone});
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(DataGrid);
