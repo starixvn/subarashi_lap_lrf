@@ -5020,13 +5020,16 @@ const TreeViewGridRowNode = props => {
       className: "left-align drill-down-cell",
       colSpan: groupByColumnColSpan
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "flex w100"
+      className: "flex w100",
+      onClick: _onclick,
+      style: {
+        cursor: 'pointer'
+      }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       className: "w100 main-text",
       title: text
     }, text), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-      className: `arrow-icon ${arrowClass}`,
-      onClick: _onclick
+      className: `arrow-icon ${arrowClass}`
     })));
   };
   const parentData = data.keyItem;
