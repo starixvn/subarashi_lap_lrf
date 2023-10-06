@@ -1,6 +1,6 @@
 ﻿import React from 'react';
-import { ApiUrl } from '../../common/lib/constants';
-import BaseDataGrid from '../../common/components/BaseDataGrid';
+import { ApiUrl } from '../../../common/lib/constants';
+import BaseDataGrid from '../../../common/components/BaseDataGrid';
 import AppData from '@jsroot/lib/AppData';
 
 var Columns = [

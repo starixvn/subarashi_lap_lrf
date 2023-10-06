@@ -25,7 +25,9 @@ export const HeaderText = {
     LicenseeWL: LangHelper.getSingleResource("LicenseeWL"),
     Comm: LangHelper.getSingleResource("Comm"),
     Status: LangHelper.getSingleResource("Status"),
-    Live: LangHelper.getSingleResource("Live")
+    Live: LangHelper.getSingleResource("Live"),
+    Details: LangHelper.getSingleResource("Details"),
+    Icon: ""
 }
 
 export const DefaultPageSize = 50;
