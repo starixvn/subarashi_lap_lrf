@@ -11,6 +11,8 @@ namespace Fanex.Athena.Model.BetList.MetaModel
 
         public byte DateOptionType { get; set; }
 
+        public bool IsViewResettledTicketOnly { get; set; }
+
         public override bool IsValid => base.IsValid && FromDate <= ToDate;
     }
 }

@@ -315,9 +315,9 @@ export class DataGrid extends Component {
     }
 
     showBetListPopup = (externalId, systemId, custId) => {
-        const { CurrencyId, BaseCurrency, FromDate, ToDate, CurrencyName, ExcludeTestData, DateOptionType } = this.drillDownParams[ReportLevel.PLAYER];
+        const { CurrencyId, BaseCurrency, FromDate, ToDate, CurrencyName, DateOptionType, IsViewResettledTicketOnly } = this.drillDownParams[ReportLevel.PLAYER];
         const url = "api/ExchangeWinLossBetList/Index";
-        this.betlistParams = { CustId: custId, CurrencyId, BaseCurrency, FromDate, ToDate, ExcludeTestData, DateOptionType };
+        this.betlistParams = { CustId: custId, CurrencyId, BaseCurrency, FromDate, ToDate, DateOptionType, IsViewResettledTicketOnly };
 
         const params = {
             data: this.betlistParams
