@@ -401,3 +401,45 @@
         display: block;
     }
 }
+
+.mobile-betlist-container{
+    &.betlist-container {
+        .bettype, .match{
+            text-align: left;
+        }
+    }
+
+    .collapse-row{
+        td:first-child{
+            background: #9EB4C3;;
+        }
+    }
+    .row-active{
+        td{
+            background: #FCF4DF;
+        }
+        &.collapse-row{
+            td:first-child{
+                background: #F6DFA1;;
+            }
+        }
+    }
+    .table > tbody tr:hover td{
+        background: #FCF4DF;
+    }  
+    .icon{
+        color: #217A4A;
+        font-size: 22px;
+    }
+    .cell-index{
+        color: #AA5200;
+    }  
+    .cell-odd{
+        display: flex;
+    }
+    .cell-external-id{
+        border-bottom: 1px solid #BFB9A9;
+        background: #D9D2C0;
+    }
+}
+
