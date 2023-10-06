@@ -2,7 +2,7 @@
 define(['jquery', 'common/querystring', 'common/popup', 'helpers/htmlHelper', 'extensions/prototype', 'components/selectlist'],
     function ($, QueryString, Popup, HtmlHelper) {// jshint ignore:line
         'use strict';
-        const BASE_CURRENCY_LIST = { 'eur': '-1', 'usd': '-2', 'gbp': '-3', 'myr': '-4', 'cny': '-5', 'thb': '-6', 'idr': '-7', 'inh': '-8', 'bdt': '-9', 'inr': '-10', 'usdt': '-99' };
+        const BASE_CURRENCY_LIST = { 'eur': '-1', 'usd': '-2', 'gbp': '-3', 'myr': '-4', 'cny': '-5', 'thb': '-6', 'idr': '-7', 'inh': '-8', 'bdt': '-9', 'inr': '-10', 'php': '-11', 'usdt': '-99' };
         var BASE_CURRENCY = {};
 
         function initBaseCurrency() {
