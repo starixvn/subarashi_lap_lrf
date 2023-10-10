@@ -77,13 +77,8 @@ export const useFilterAction = () => {
         });
     }
 
-    const excelButton = 
-        <div>
-            <i className="icon-excel right" onClick={exportExcel} title={LangHelper.getSingleResource("ExportToExcel")}></i>
-            <FilterUserGuide/>
-        </div>;
 
-    return {submit, exportExcel, excelButton};
+    return {submit, exportExcel};
   }
 
   export default useFilterAction;

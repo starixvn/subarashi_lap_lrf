@@ -1,10 +1,16 @@
 import { shallowEqual, useSelector } from 'react-redux'
 import { validateBaseCurrency } from '@jsroot/lib/validationHelper'
-import { SearchingIdOptions } from '../../lib/constants'
+import { useSubsidiarySearch } from './useSubsidiarySearch'
 
 export const useValidParam = () => {
-    const {searchingId, selectedBaseCurrency, username, searchingIdOption} = useSelector(state => state, shallowEqual)
-    return searchingId 
-    && validateBaseCurrency(selectedBaseCurrency) 
-    && (username || searchingIdOption === SearchingIdOptions.refNo);
+    const [selectedProduct, selectedStatus, selectedCurrency, selectedBaseCurrency, selectedSubsidiary] = useSelector(state => 
+        [state.selectedProduct, state.selectedStatus, state.selectedCurrency, state.selectedBaseCurrency, state.selectedSubsidiary]
+        , shallowEqual)
+    const { isSubsidiarySearch } = useSubsidiarySearch();
+
+    return !!selectedProduct
+    && !!selectedStatus
+    && !!selectedCurrency
+    && validateBaseCurrency(selectedBaseCurrency)            
+    && (!isSubsidiarySearch || selectedSubsidiary);
 }

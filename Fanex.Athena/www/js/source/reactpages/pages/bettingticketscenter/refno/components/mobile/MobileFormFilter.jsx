@@ -54,7 +54,6 @@ export const MobileFormFilter = () => {
                     <div className='caret-block'>
                         <StickyButton/>
                     </div>
-
                 </div>
             </div>
             <div className="row filter-note" style={style}>

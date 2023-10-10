@@ -1,20 +1,21 @@
-import React from 'react'
 import { ActionCreators } from '../../actions/index.js'
 import LangHelper from '@jsroot/lib/langHelper'
 import Site from '@jsroot/lib/site'
 import AppData from '@jsroot/lib/AppData'
 import DataService from '@jsroot/lib/DataService.js'
+import useBaseCurrencyList from '@jsroot/customHooks/useBaseCurrencyList'
 import { ApiUrl } from '../../../common/lib/constants'
 import Service from '../../../common/lib/Service'
-import { SearchingIdOptions } from '../../lib/constants'
 import { useValidParam } from './useValidParam.jsx'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
-import FilterUserGuide from '../filters/FilterUserGuide.jsx'
+import { useSubsidiarySearch } from './useSubsidiarySearch.jsx'
 
 export const useFilterAction = () => {
     const isValidModel = useValidParam();
     const dispatch = useDispatch();
-    const {requestParam, searchingIdOption, searchingId, username, isConvertAll, selectedBaseCurrency} = useSelector( state => state, shallowEqual);
+    const {requestParam, username, isConvertAll, selectedBaseCurrency, selectedProduct, selectedCurrency, selectedStatus, selectedSubsidiary} = useSelector( state => state, shallowEqual);
+    const {isSubsidiarySearch} = useSubsidiarySearch();
+    const baseCurrencyList = useBaseCurrencyList();
     const {setReportTitle, setRequestParam, toggleLoader, getGridData} = ActionCreators;
 
     const _getParams = () => {
@@ -23,17 +24,22 @@ export const useFilterAction = () => {
         }
 
         const { PageSize, SortBy, SortOrder } = requestParam;
-
+        const baseCurrency = baseCurrencyList.find(x => x.value === selectedBaseCurrency);
+        
         return {
             PageSize: PageSize,
             PageIndex: 1,
-            Refno: searchingIdOption === SearchingIdOptions.refNo ? searchingId : '',
-            TxId: searchingIdOption === SearchingIdOptions.txID ? searchingId : '',
+            ProductCodeList: selectedProduct,
             Username: username,
-            BaseCurrency: isConvertAll ? selectedBaseCurrency : '',
-            IsConvertAll: isConvertAll,
+            CurrencyIdList: selectedCurrency,
+            BaseCurrency: selectedBaseCurrency,
+            Status: selectedStatus,
             SortBy: SortBy,
-            SortOrder: SortOrder
+            SortOrder: SortOrder,
+            IsConvertAll: isConvertAll,
+            BaseCurrencyName: baseCurrency ? baseCurrency.label : '',
+            SubsidiarySearch: isSubsidiarySearch,
+            SubsidiaryList: isSubsidiarySearch ? selectedSubsidiary : ""
         }
     }
 
@@ -44,10 +50,10 @@ export const useFilterAction = () => {
             return;
         }
 
-        dispatch(setReportTitle(Service.getTitle(null, null, params.BaseCurrency)));
+        dispatch(setReportTitle(Service.getTitle(null, null, params.IsConvertAll ? params.BaseCurrencyName : '')));
         dispatch(setRequestParam(params));
         dispatch(toggleLoader(true));
-        dispatch(getGridData(ApiUrl.REFNO_DATA_URL, params));
+        dispatch(getGridData(ApiUrl.RUNNING_DATA_URL, params));
     }
 
     const exportExcel = (event) => {
@@ -64,26 +70,19 @@ export const useFilterAction = () => {
 
         params.IsExport = true;
         dispatch(toggleLoader(true));
-
-        DataService.getFile(ApiUrl.REFNO_DATA_URL, params).then((response) => {
+        DataService.getFile(ApiUrl.RUNNING_DATA_URL, params).then((response) => {
             const NoContentStatusCode = 204;
 
             if (response.status === NoContentStatusCode) {
                 alert(LangHelper.getSingleResource("NoInfo"));
             } else {
-                Site.downloadFile(response.data, 'BettingTicketsCenter_RefNo.xls');
+                Site.downloadFile(response.data, 'BettingTicketsCenter_Running.xls');
             }
             dispatch(toggleLoader(false));
         });
     }
 
-    const excelButton = 
-        <div>
-            <i className="icon-excel right" onClick={exportExcel} title={LangHelper.getSingleResource("ExportToExcel")}></i>
-            <FilterUserGuide/>
-        </div>;
-
-    return {submit, exportExcel, excelButton};
+    return {submit, exportExcel};
   }
 
   export default useFilterAction;

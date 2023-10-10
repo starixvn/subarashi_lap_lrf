@@ -1,4 +1,4 @@
-import React, {  useEffect, useRef } from 'react';
+import React, {  useEffect, useRef, useState } from 'react';
 import ReportTitle from '@jsroot/components/ReportTitle';
 import {  DefaultPageSize } from '../lib/constants.js';
 import { ActionCreators } from './action.js';
@@ -8,9 +8,12 @@ import { Table, HeaderRow, HeaderCell } from '@9softstudio/react-grid';
 import Service from '../lib/Service.js';
 import { useMemo } from 'react';
 import NoDataTitle from '@jsroot/components/NoDataTitle';
+import { useElementSize, useWindowSize } from 'usehooks-ts';
+import { RefPager } from '../../../../components/mobile-component/RefPager.jsx';
+import {v4 as uuidv4} from 'uuid';
 
-
-const ColumnWidths = [21, 9 , 15, 7]
+const SmallColumnWidths = [ 50, 17 , 20, 13]
+const LargeColumnWidths =  ['53%', '15%', '22%', '10%']
 
 export const BaseMobileDataGrid = (props) => {
     const {
@@ -19,13 +22,25 @@ export const BaseMobileDataGrid = (props) => {
 
     const [ gridData, requestParam, reportTitle, reloadReport ] = useSelector(state =>[state.gridData, state.requestParam, state.reportTitle, state.reloadReport], shallowEqual);
     const ref = useRef(null);
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const [id, setId] = useState(`${uuidv4()}`);
+    const [pagerRef, pagerSize] = useElementSize();
+    const { width } = useWindowSize();
+    const collumnWidths = width > 400 ? LargeColumnWidths : SmallColumnWidths
+
     useEffect(() => {
         dispatch(toggleLoader(false));
-        ref.current?.scrollIntoView({behavior: "smooth"});
-    }, [gridData]);   
-    const { toggleLoader, getGridData, setRequestParam } = ActionCreators;
+        setId(`${uuidv4()}`);
+        ref.current?.scrollIntoView();
+    }, [gridData]);
     
+    useEffect(() => {
+        const style = `bottom: ${pagerSize.height - 1}px`;
+         ref.current?.getElementsByClassName('footer-content')[0].setAttribute('style', style);
+    }, [pagerSize?.height, id])
+
+    const { toggleLoader, getGridData, setRequestParam } = ActionCreators;
+
     const pageOption = {
         PageIndex: requestParam.PageIndex,
         PageSize: requestParam.PageSize,
@@ -36,14 +51,13 @@ export const BaseMobileDataGrid = (props) => {
 
     const onPaging = (index, size) => {
         const param = Object.assign({}, requestParam, { PageIndex: index, PageSize: size });
-
         getData(param);
     }
 
     const getData = (param) => {
-        toggleLoader(true);
-        getGridData(dataUrl, param);
-        setRequestParam(param);
+        dispatch(toggleLoader(true));
+        dispatch(getGridData(dataUrl, param));
+        dispatch(setRequestParam(param));
     }
 
     const buildHeader = () => {
@@ -53,14 +67,14 @@ export const BaseMobileDataGrid = (props) => {
             const headerName = Service.getHeaderName(column);
 
             rows.push(
-                <HeaderCell key={column} colWidth={ColumnWidths[i]} >{headerName}</HeaderCell>
+                <HeaderCell key={column} colWidth={collumnWidths[i]} >{headerName}</HeaderCell>
             )
         }
 
         return <HeaderRow style={{ height: 32 }}>{rows}</HeaderRow>;
     }
 
-    const header = useMemo(() =>buildHeader(),[]);
+    const header = useMemo(() =>buildHeader(),[width]);
 
     if (!gridData || !gridData.Data || gridData.Data.length == 0) {
         if(!gridData || !gridData.Data){
@@ -69,21 +83,22 @@ export const BaseMobileDataGrid = (props) => {
         return <NoDataTitle />;
     }
 
+    const isShowPagingInfo  = pagerSize.width > 400 ? true : false;
+
     return (
         <div className="mobile-betlist-container betlist-container result-content" ref={ref}>
             <ReportTitle content={reportTitle} />
-            <Table
+            <Table key={id}
                 autoWidth={true}
                 autoHeight={false}
                 header={header}
                 body={body}
                 footer={footer}
-                containerPadding={10}
-                isPaging={isPaging}
+                isPaging={false}
                 pageOption={pageOption}
                 shouldResetScrollPosition={reloadReport}
-                bodyHeight={"100&"}
-                onPaging={onPaging} />
+                bodyHeight="100%" />
+            {isPaging && <RefPager ref={pagerRef} onPaging={onPaging} pageOption={pageOption} isShowPagingInfo={isShowPagingInfo}/>}            
         </div>
     );
 };
