@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 9/26/2023 2:31:07 PM
+// Generated at: 10/10/2023 1:13:30 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -207,6 +207,9 @@ window._language_en_US = {
   BettingTicketCenter: "Betting Ticket Center",
   BettingTicketCenter_AdvancedSearchTabNote1: "All bettypes, League, and Match filter available only when 1 day is selected",
   BettingTicketCenter_AdvancedSearchTabNote2: "Data is available from {0}",
+  BettingTicketCenter_Exchange_Note_1: "Support searching void tickets only.",
+  BettingTicketCenter_Exchange_Note_2: "Input username to return results faster.",
+  BettingTicketCenter_Exchange_Note_3: "Support data up to 1 month.",
   BettingTicketCenter_RefnoTabNote_TxIDSearch: "The system supports searching LicTxID from {0}",
   BettingTicketCenter_RefnoTabNote_TxIDSearch2: "The system supports searching LicTxID for settled tickets only.",
   BettingTicketCenter_RefnoTabNote1: "For Sportsbook, the search result includes the related Bonus/Cash tickets.",
@@ -410,6 +413,7 @@ window._language_en_US = {
   EventDate: "Event Date",
   EventType: "Event Type",
   ExcelExceedRowsMsg: "This file exceeded 65535 entries. Please contact administrator for more details.",
+  ExchangeUnderMaintenanceMsg: "Exchange&apos;s services are Under Maintenance. Data may be delayed during this period.&lt;br&gt;We sincerely apologize for any inconvenience caused.",
   ExchangeWinLoss: "Exchange Win Loss",
   ExcludeTestData: "Exclude Test Data",
   ExistingInMonitoredPlayerList: "This player is existing in the list. Please check again!",
@@ -772,6 +776,7 @@ window._language_en_US = {
   Player: "Player",
   PlayerAdministration: "Player Administration",
   PlayerAdminUpdateFailedMsg: "Please try again!",
+  PlayerBetList: "Player Bet List",
   PlayerBettingStatisticsTitle: "Player Betting Statistics (month to date)",
   PlayerComm: "Player Comm",
   PlayerName: "Player Name",
@@ -865,6 +870,7 @@ window._language_en_US = {
   ResetPassword: "Reset Password",
   ResetPasswordSuccessMsg: "Reset password successfully!",
   Resettled: "Resettled",
+  ResettledReport: "Resettled Report",
   Result: "Result",
   ResultPending: "Result Pending",
   Results: "Results",
@@ -1085,6 +1091,8 @@ window._language_en_US = {
   ViewinSummary: "View in Summary",
   ViewInWithNoParam: "View in",
   ViewNotification: "View Notification",
+  ViewResettledTicketOnly: "View Resettled Ticket Only",
+  ViewResettledTicketOnlyNote: "&quot;View Resettled Ticket Only&quot; data is available from 01 Sep 2023.",
   VIP: "VIP",
   VIP2: "VIP",
   VIPPlayer: "VIP Player",
