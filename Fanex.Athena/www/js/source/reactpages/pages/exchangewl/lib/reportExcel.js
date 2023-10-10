@@ -24,7 +24,7 @@ export default class ReportExcel {
         this.gridData = gridData;
         this.reportBy = reportBy;
         this.currentRowIndex = DATA_ROW_INDEX;
-        this.totalColumn = MAX_COLUMN - (reportBy === ReportLevel.CUSTOMER ? 1 : 2) - (isAllowedCustomerComm ? 0 : 2);
+        this.totalColumn = MAX_COLUMN - (reportBy === ReportLevel.PLAYER ? 1 : 2) - (isAllowedCustomerComm ? 0 : 2);
         this.configColumn = this._getConfigColumn(level, reportBy, isAllowedCustomerComm);
         this.colSpanConfig = this._getColSpanConfig(level);
         this.mergeConfig = [];
@@ -49,12 +49,12 @@ export default class ReportExcel {
     _getColSpanConfig(level) {
         return {
             [TOTAL_SECTION]: {
-                colSpan: level === ReportLevel.CUSTOMER ? 3 : 2,
+                colSpan: level === ReportLevel.PLAYER ? 3 : 2,
                 text: TotalText.total,
                 style: totalCellStyle.rowspan
             },
             [SUMMARYTOTAL_SECTION]: {
-                colSpan: level === ReportLevel.CUSTOMER ? 4 : 3,
+                colSpan: level === ReportLevel.PLAYER ? 4 : 3,
                 text: TotalText.totalIn,
                 style: grandTotalCellStyle.rowspan
             }
@@ -79,8 +79,8 @@ export default class ReportExcel {
         }, {
             field: 'ExternalId',
             type: 's',
-            [HEADER_SECTION]: { title: 'externalId', isShow: level === ReportLevel.CUSTOMER, rowSpan: 2 },
-            [MAIN_SECTION]: { isShow : level === ReportLevel.CUSTOMER, style: bodyCellStyle.left, width: 150 },
+            [HEADER_SECTION]: { title: 'externalId', isShow: level === ReportLevel.PLAYER, rowSpan: 2 },
+            [MAIN_SECTION]: { isShow : level === ReportLevel.PLAYER, style: bodyCellStyle.left, width: 150 },
             [TOTAL_SECTION]: { isShow : false },
             [SUMMARYTOTAL_SECTION]: { isShow : false }
         }, {
@@ -119,7 +119,7 @@ export default class ReportExcel {
             [TOTAL_SECTION]: { isShow : true, style: totalCellStyle.number },
             [SUMMARYTOTAL_SECTION]: { isShow : true, style: grandTotalCellStyle.number }
         }, {
-            [HEADER_SECTION]: { title: isAllowedCustomerComm ? 'customer' : 'customerWL', isShow: true, rowSpan: isAllowedCustomerComm ? 1 : 2, colSpan: isAllowedCustomerComm ? 3 : 1 },
+            [HEADER_SECTION]: { title: isAllowedCustomerComm ? 'player' : 'playerWL', isShow: true, rowSpan: isAllowedCustomerComm ? 1 : 2, colSpan: isAllowedCustomerComm ? 3 : 1 },
             [MAIN_SECTION]: { isShow : false },
             [TOTAL_SECTION]: { isShow : false },
             [SUMMARYTOTAL_SECTION]: { isShow : false }
@@ -129,21 +129,21 @@ export default class ReportExcel {
             [TOTAL_SECTION]: { isShow : false },
             [SUMMARYTOTAL_SECTION]: { isShow : false }
         }, {
-            field: 'CustomerWL',
+            field: 'PlayerWL',
             type: 'n',
-            [HEADER_SECTION]: { title: 'customerWL', isShow: isAllowedCustomerComm, index_c: level === ReportLevel.CUSTOMER ? 7 : 6, index_r: HEADER_ROW_INDEX + 1 },
+            [HEADER_SECTION]: { title: 'playerWL', isShow: isAllowedCustomerComm, index_c: level === ReportLevel.PLAYER ? 7 : 6, index_r: HEADER_ROW_INDEX + 1 },
             [MAIN_SECTION]: { isShow : true, style: bodyCellStyle.decimal, width: 150 },
             [TOTAL_SECTION]: { isShow : true, style: totalCellStyle.decimal },
             [SUMMARYTOTAL_SECTION]: { isShow : true, style: grandTotalCellStyle.decimal }
         }, {
-            field: 'CustomerComm',
+            field: 'PlayerComm',
             type: 'n',
-            [HEADER_SECTION]: { title: 'customerComm', isShow: isAllowedCustomerComm },
+            [HEADER_SECTION]: { title: 'playerComm', isShow: isAllowedCustomerComm },
             [MAIN_SECTION]: { isShow : isAllowedCustomerComm, style: bodyCellStyle.decimal, width: 150 },
             [TOTAL_SECTION]: { isShow : isAllowedCustomerComm, style: totalCellStyle.decimal },
             [SUMMARYTOTAL_SECTION]: { isShow : isAllowedCustomerComm, style: grandTotalCellStyle.decimal }
         }, {
-            field: 'CustomerWLTotal',
+            field: 'PlayerWLTotal',
             type: 'n',
             [HEADER_SECTION]: { title: 'total', isShow: isAllowedCustomerComm },
             [MAIN_SECTION]: { isShow : isAllowedCustomerComm, style: bodyCellStyle.decimal, width: 150 },
@@ -152,7 +152,7 @@ export default class ReportExcel {
         }, {
             field: 'LicenseeWL',
             type: 'n',
-            [HEADER_SECTION]: { title: 'licenseeWL', isShow: true, index_c: (level === ReportLevel.CUSTOMER ? 8 : 7) + (isAllowedCustomerComm ? 2 : 0), index_r: HEADER_ROW_INDEX + 1 },
+            [HEADER_SECTION]: { title: 'licenseeWL', isShow: true, index_c: (level === ReportLevel.PLAYER ? 8 : 7) + (isAllowedCustomerComm ? 2 : 0), index_r: HEADER_ROW_INDEX + 1 },
             [MAIN_SECTION]: { isShow : true, hasNegativeStyle: true, style: { positive: bodyCellStyle.decimal, negative: bodyCellStyle.negativeDecimal }, width: 150 },
             [TOTAL_SECTION]: { isShow : true, hasNegativeStyle: true, style: { positive: totalCellStyle.decimal, negative: totalCellStyle.negativeDecimal } },
             [SUMMARYTOTAL_SECTION]: { isShow : true, hasNegativeStyle: true, style: { positive: grandTotalCellStyle.decimal, negative: grandTotalCellStyle.negativeDecimal } }

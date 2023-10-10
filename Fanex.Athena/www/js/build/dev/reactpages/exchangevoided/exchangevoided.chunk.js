@@ -64,7 +64,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "www/js/build/dev/reactpages/" + ({"lib/xlsx-style-sparta":"lib/xlsx-style-sparta"}[chunkId]||chunkId) + "." + {"lib/xlsx-style-sparta":"5cfcfd35bcf8d613b0b6"}[chunkId] + ".chunk.js"
+/******/ 		return __webpack_require__.p + "www/js/build/dev/reactpages/" + ({"lib/xlsx-style-sparta":"lib/xlsx-style-sparta"}[chunkId]||chunkId) + "." + {"lib/xlsx-style-sparta":"932edca6c1487b86dbb1"}[chunkId] + ".chunk.js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -1508,7 +1508,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const SUCCESS_CODE = 1;
-const UM_ERR_CODE = 101;
+const UM_ERR_CODE = 1041;
 const UM_MESSAGE = 'Exchange product is under maintenance now';
 const ERROR_MESSAGE = 'Your request cannot be processed now, please try again later';
 const MAX_REFNO = 2147483647;
@@ -1539,7 +1539,8 @@ const getData = param => dispatch => {
       dispatchResult(dispatch, data);
       !isSuccess && window.alert(errCode === UM_ERR_CODE ? UM_MESSAGE : ERROR_MESSAGE);
     }).catch(error => {
-      console.log(error.message);
+      console.error(error.message);
+      window.alert(ERROR_MESSAGE);
       dispatchResult(dispatch, {
         dataList: [],
         totalPage: 0
@@ -1550,6 +1551,27 @@ const getData = param => dispatch => {
 const exportExcel = (dataList, title) => () => {
   const service = new _lib_reportExcel__WEBPACK_IMPORTED_MODULE_4__["default"](dataList, title);
   service.export();
+};
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/exchangevoided/actions/filterAction.js":
+/*!*******************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/exchangevoided/actions/filterAction.js ***!
+  \*******************************************************************************/
+/*! exports provided: setSelectedTimeZone */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSelectedTimeZone", function() { return setSelectedTimeZone; });
+/* harmony import */ var _types_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types.js */ "./www/js/source/reactpages/pages/exchangevoided/actions/types.js");
+
+const setSelectedTimeZone = value => {
+  return {
+    type: _types_js__WEBPACK_IMPORTED_MODULE_0__["TIME_ZONE"],
+    data: value
+  };
 };
 
 /***/ }),
@@ -1566,9 +1588,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ActionCreators", function() { return ActionCreators; });
 /* harmony import */ var _jsroot_actions_requestParamAction__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/actions/requestParamAction */ "./www/js/source/reactpages/actions/requestParamAction.js");
 /* harmony import */ var _dataAction__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dataAction */ "./www/js/source/reactpages/pages/exchangevoided/actions/dataAction.js");
+/* harmony import */ var _filterAction__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./filterAction */ "./www/js/source/reactpages/pages/exchangevoided/actions/filterAction.js");
 
 
-const ActionCreators = Object.assign({}, _jsroot_actions_requestParamAction__WEBPACK_IMPORTED_MODULE_0__, _dataAction__WEBPACK_IMPORTED_MODULE_1__);
+
+const ActionCreators = Object.assign({}, _jsroot_actions_requestParamAction__WEBPACK_IMPORTED_MODULE_0__, _dataAction__WEBPACK_IMPORTED_MODULE_1__, _filterAction__WEBPACK_IMPORTED_MODULE_2__);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/exchangevoided/actions/types.js":
+/*!************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/exchangevoided/actions/types.js ***!
+  \************************************************************************/
+/*! exports provided: TIME_ZONE */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TIME_ZONE", function() { return TIME_ZONE; });
+const TIME_ZONE = "TIME_ZONE";
 
 /***/ }),
 
@@ -1638,10 +1676,12 @@ __webpack_require__.r(__webpack_exports__);
 const BTCContainer = props => {
   const activedTabList = _bettingticketscenter_common_lib_constants__WEBPACK_IMPORTED_MODULE_5__["tabList"].filter(x => _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_6__["default"].tabList.includes(x.key));
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_1__["Tabs"], null, activedTabList.map(item => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_1__["Tab"], {
+    key: item.label,
     label: item.label,
     url: item.url
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_1__["Tab"], {
     isActive: true,
+    key: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("Exchange"),
     label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("Exchange"),
     url: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_3__["default"].resolveClientUrl("ExchangeVoided")
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AppContainer__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
@@ -1671,11 +1711,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_components_ReportTitle__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/components/ReportTitle */ "./www/js/source/reactpages/components/ReportTitle.jsx");
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _jsroot_components_SimplePagination__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @jsroot/components/SimplePagination */ "./www/js/source/reactpages/components/SimplePagination.jsx");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
 
 
 
@@ -1735,7 +1777,8 @@ const DataGrid = props => {
   const {
     requestParam
   } = props;
-  const reportTitle = `${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource('BettingTicketCenter')}, ${requestParam.selectedDate}`;
+  const timezone = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].timeZoneList.find(x => x.value === props.selectedTimeZone).label;
+  const reportTitle = `${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource('BettingTicketCenter')}, ${timezone}, ${requestParam.selectedDate}`;
   const {
     pageIndex,
     totalPage
@@ -1765,18 +1808,18 @@ function mapDispatchToProps(dispatch) {
     getData
   }, dispatch);
 }
-;
 function mapStateToProps(state) {
   const {
     gridData,
-    requestParam
+    requestParam,
+    selectedTimeZone
   } = state;
   return Object.assign({}, {
     gridData,
-    requestParam
+    requestParam,
+    selectedTimeZone
   });
 }
-;
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(DataGrid));
 
 /***/ }),
@@ -1801,6 +1844,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _9softstudio_react_datepicker__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_9softstudio_react_datepicker__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _Note__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Note */ "./www/js/source/reactpages/pages/exchangevoided/components/Note.jsx");
 /* harmony import */ var _jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/components/collapsible-panel */ "./www/js/source/reactpages/components/collapsible-panel/index.jsx");
+/* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-select */ "./node_modules/react-select/dist/react-select.es.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
 const _excluded = ["isFilterCollapsing"];
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -1809,6 +1854,8 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+
 
 
 
@@ -1828,7 +1875,8 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0___default.a.PureCompon
         } = _this$state,
         inputParam = _objectWithoutProperties(_this$state, _excluded);
       const params = _objectSpread(_objectSpread({}, inputParam), {}, {
-        pageIndex: 1
+        pageIndex: 1,
+        timeZone: this.props.selectedTimeZone
       });
       this.props.setRequestParam(params);
     });
@@ -1841,7 +1889,8 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0___default.a.PureCompon
         window.alert(_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource("NoInfo"));
         return;
       }
-      const reportTitle = `${_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('BettingTicketCenter')}, ${this.state.selectedDate}`;
+      const timezone = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_9__["default"].timeZoneList.find(x => x.value === this.props.selectedTimeZone).label;
+      const reportTitle = `${_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('BettingTicketCenter')}, ${timezone}, ${this.state.selectedDate}`;
       this.props.exportExcel(gridData.dataList, reportTitle);
     });
     _defineProperty(this, "handleChangeDate", momentDate => {
@@ -1862,6 +1911,18 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0___default.a.PureCompon
       this.setState({
         isFilterCollapsing: isCollapse
       });
+    });
+    _defineProperty(this, "_renderSelectedTimeZone", () => {
+      const timeZoneList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_9__["default"].timeZoneList;
+      return timeZoneList && timeZoneList.length && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        instanceId: "TimeZoneList",
+        value: this.props.selectedTimeZone,
+        options: timeZoneList,
+        onChange: item => this._onChangeTimeZone(item.value)
+      });
+    });
+    _defineProperty(this, "_onChangeTimeZone", value => {
+      this.props.setSelectedTimeZone(value);
     });
     this.state = _objectSpread(_objectSpread({}, this.props.requestParam), {}, {
       isFilterCollapsing: false
@@ -1893,12 +1954,18 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0___default.a.PureCompon
       className: "form-group"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       className: "label-text"
-    }, _lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Date'), " (GMT+8)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_datepicker__WEBPACK_IMPORTED_MODULE_5__["DatePicker"], {
+    }, _lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Date')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_datepicker__WEBPACK_IMPORTED_MODULE_5__["DatePicker"], {
       minDate: dateConstraint.minDate,
       maxDate: dateConstraint.maxDate,
       date: selectedDate,
       onChange: this.handleChangeDate
     }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-12 col-sm-7 col-md-3 col-xl-2"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "form-group"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      className: "label-text"
+    }, _lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('TimeZone')), this._renderSelectedTimeZone())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-12 col-sm-4 col-md-3 col-xl-2"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
@@ -1948,27 +2015,29 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0___default.a.PureCompon
 function mapDispatchToProps(dispatch) {
   const {
     setRequestParam,
-    exportExcel
+    exportExcel,
+    setSelectedTimeZone
   } = _actions__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"];
   return Object(redux__WEBPACK_IMPORTED_MODULE_3__["bindActionCreators"])({
     setRequestParam,
-    exportExcel
+    exportExcel,
+    setSelectedTimeZone
   }, dispatch);
 }
-;
 function mapStateToProps(state) {
   const {
     requestParam,
     dateConstraint,
-    gridData
+    gridData,
+    selectedTimeZone
   } = state;
   return Object.assign({}, {
     requestParam,
     dateConstraint,
-    gridData
+    gridData,
+    selectedTimeZone
   });
 }
-;
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(FormFilter));
 
 /***/ }),
@@ -1997,7 +2066,7 @@ const Note = () => {
     }
   }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Note'), ":"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-9"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "* Support searching void tickets only"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "* Input username to return results faster"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "* Support data up to 1 months")));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "* ", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("BettingTicketCenter_Exchange_Note_1")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "* ", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("BettingTicketCenter_Exchange_Note_2")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "* ", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("BettingTicketCenter_Exchange_Note_3"))));
 };
 /* harmony default export */ __webpack_exports__["default"] = (Note);
 
@@ -2281,6 +2350,28 @@ class ReportExcel {
 
 /***/ }),
 
+/***/ "./www/js/source/reactpages/pages/exchangevoided/reducers/filterReduce.js":
+/*!********************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/exchangevoided/reducers/filterReduce.js ***!
+  \********************************************************************************/
+/*! exports provided: selectedTimeZone */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectedTimeZone", function() { return selectedTimeZone; });
+/* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./www/js/source/reactpages/pages/exchangevoided/actions/types.js");
+/* harmony import */ var _jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
+
+
+const selectedTimeZone = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, {
+  [_actions_types__WEBPACK_IMPORTED_MODULE_0__["TIME_ZONE"]](state, action) {
+    return action.data;
+  }
+});
+
+/***/ }),
+
 /***/ "./www/js/source/reactpages/pages/exchangevoided/reducers/index.js":
 /*!*************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/exchangevoided/reducers/index.js ***!
@@ -2295,16 +2386,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_reducers_loaderReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/reducers/loaderReducer */ "./www/js/source/reactpages/reducers/loaderReducer.js");
 /* harmony import */ var _jsroot_reducers_requestParamReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/reducers/requestParamReducer */ "./www/js/source/reactpages/reducers/requestParamReducer.js");
 /* harmony import */ var _jsroot_reducers_gridDataReducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/reducers/gridDataReducer */ "./www/js/source/reactpages/reducers/gridDataReducer.js");
-/* harmony import */ var _jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
+/* harmony import */ var _filterReduce__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./filterReduce */ "./www/js/source/reactpages/pages/exchangevoided/reducers/filterReduce.js");
+/* harmony import */ var _jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
 
 
 
 
 
-const dateConstraint = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_4__["default"])({}, {});
+
+const dateConstraint = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_5__["default"])({}, {});
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(Object.assign(_jsroot_reducers_loaderReducer__WEBPACK_IMPORTED_MODULE_1__, _jsroot_reducers_requestParamReducer__WEBPACK_IMPORTED_MODULE_2__, _jsroot_reducers_gridDataReducer__WEBPACK_IMPORTED_MODULE_3__, {
   dateConstraint
-})));
+}, _filterReduce__WEBPACK_IMPORTED_MODULE_4__)));
 
 /***/ }),
 

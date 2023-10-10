@@ -17,7 +17,7 @@ import Popup from '../../../components/popup'
 import Report from '../../../lib/report'
 import LangHelper from '../../../lib/langHelper.js';
 
-const CUSTOMER_BETLIST_TEXT = LangHelper.getSingleResource("CustomerBetList");
+const PLAYER_BET_LIST_TEXT = LangHelper.getSingleResource("PlayerBetList");
 
 export class DataGrid extends Component {
     constructor(props) {
@@ -53,7 +53,7 @@ export class DataGrid extends Component {
                 return 2;
             case ReportLevel.LICENSEE:
                 return 2;
-            case ReportLevel.CUSTOMER:
+            case ReportLevel.PLAYER:
                 return 3;
             default: return 2;
         }
@@ -86,7 +86,7 @@ export class DataGrid extends Component {
     _drillDownData(level, date, currencyId, currencyName, custId) {
         const currentLevel = this.props.gridData.level;
 
-        if (currentLevel === level || level < ReportLevel.MAIN || level > ReportLevel.CUSTOMER) {
+        if (currentLevel === level || level < ReportLevel.MAIN || level > ReportLevel.PLAYER) {
             return;
         }
 
@@ -130,7 +130,7 @@ export class DataGrid extends Component {
             <HeaderRow style={{ height: 32 }} key='tr-header1'>
                 <HeaderCell colWidth={30} title={HeaderText.index} rowSpan='2'>{HeaderText.index}</HeaderCell>
                 {level === ReportLevel.MAIN && <HeaderCell colWidth={100} title={reportBy === ReportBy.DAILY ? HeaderText.date : HeaderText.month} rowSpan='2'>{reportBy === ReportBy.DAILY ? HeaderText.date : HeaderText.month}</HeaderCell>}
-                {level === ReportLevel.CUSTOMER && <HeaderCell colWidth={100} title={HeaderText.externalId} rowSpan='2'>{HeaderText.externalId}</HeaderCell>}
+                {level === ReportLevel.PLAYER && <HeaderCell colWidth={100} title={HeaderText.externalId} rowSpan='2'>{HeaderText.externalId}</HeaderCell>}
                 {level !== ReportLevel.MAIN && <HeaderCell colWidth={100} title={HeaderText.systemId} rowSpan='2'>{HeaderText.systemId}</HeaderCell>}
                 <HeaderCell colWidth={70} title={HeaderText.currency} rowSpan='2'>{HeaderText.currency}</HeaderCell>
                 <HeaderCell colWidth={100} title={HeaderText.turnover} rowSpan='2'>{HeaderText.turnover}</HeaderCell>
@@ -138,8 +138,8 @@ export class DataGrid extends Component {
                 <HeaderCell colWidth={80} title={HeaderText.totalTransaction} rowSpan='2'>{HeaderText.totalTransaction}</HeaderCell>
                 {
                     this.isAllowedCustomerComm
-                        ? <HeaderCell colWidth={100} title={HeaderText.customer} colSpan='3'>{HeaderText.customer}</HeaderCell>
-                        : <HeaderCell colWidth={100} title={HeaderText.customerWL} rowSpan='2'>{HeaderText.customerWL}</HeaderCell>
+                        ? <HeaderCell colWidth={100} title={HeaderText.player} colSpan='3'>{HeaderText.player}</HeaderCell>
+                        : <HeaderCell colWidth={100} title={HeaderText.playerWL} rowSpan='2'>{HeaderText.playerWL}</HeaderCell>
                 }
                 <HeaderCell colWidth={100} title={HeaderText.licensee} colSpan='3'>{HeaderText.licensee}</HeaderCell>
             </HeaderRow>
@@ -148,8 +148,8 @@ export class DataGrid extends Component {
         if (this.isAllowedCustomerComm) {
             headerRows.push(
                 <HeaderRow style={{ height: 32 }} key='tr-header2'>
-                    <HeaderCell colWidth={100} title={HeaderText.customerWL}>{HeaderText.customerWL}</HeaderCell>
-                    <HeaderCell colWidth={100} title={HeaderText.customerComm}>{HeaderText.customerComm}</HeaderCell>
+                    <HeaderCell colWidth={100} title={HeaderText.playerWL}>{HeaderText.playerWL}</HeaderCell>
+                    <HeaderCell colWidth={100} title={HeaderText.playerComm}>{HeaderText.playerComm}</HeaderCell>
                     <HeaderCell colWidth={100} title={HeaderText.total}>{HeaderText.total}</HeaderCell>
                     <HeaderCell colWidth={100} title={HeaderText.licenseeWL}>{HeaderText.licenseeWL}</HeaderCell>
                     <HeaderCell colWidth={100} title={HeaderText.amountDueTo}>{HeaderText.amountDueTo}</HeaderCell>
@@ -184,7 +184,7 @@ export class DataGrid extends Component {
                     <Cell title={i + 1} className='center-align'>{i + 1}</Cell>
                     {level === ReportLevel.MAIN && <Cell title={date} className='center-align'>{date}</Cell>}
                     {
-                        level === ReportLevel.CUSTOMER &&
+                        level === ReportLevel.PLAYER &&
                         <Cell title={item.ExternalId} className='left-align'>
                             {this._renderBetListLink(item.ExternalId, item.ExternalId, item.SystemId, item.CustId)}
                         </Cell>
@@ -194,7 +194,7 @@ export class DataGrid extends Component {
                         <Cell title={item.SystemId} className='left-align'>
                             {
                                 level === ReportLevel.LICENSEE ?
-                                    this._renderDrillDownLink(item.SystemId, ReportLevel.CUSTOMER, item.Date, item.CurrencyId, item.CurrencyName, item.CustId) :
+                                    this._renderDrillDownLink(item.SystemId, ReportLevel.PLAYER, item.Date, item.CurrencyId, item.CurrencyName, item.CustId) :
                                     this._renderBetListLink(item.SystemId, item.ExternalId, item.SystemId, item.CustId)
                             }
                         </Cell>
@@ -202,7 +202,7 @@ export class DataGrid extends Component {
                     <Cell title={item.CurrencyName} className='center-align'>
                         {
                             level === ReportLevel.MAIN
-                                ? this._renderDrillDownLink(item.CurrencyName, this.licenseeId === Licensee.ONE_TWO_BET ? ReportLevel.LICENSEE : ReportLevel.CUSTOMER, item.Date, item.CurrencyId, item.CurrencyName)
+                                ? this._renderDrillDownLink(item.CurrencyName, this.licenseeId === Licensee.ONE_TWO_BET ? ReportLevel.LICENSEE : ReportLevel.PLAYER, item.Date, item.CurrencyId, item.CurrencyName)
                                 : item.CurrencyName
                         }
                     </Cell>
@@ -293,8 +293,8 @@ export class DataGrid extends Component {
         }
 
         items.push({
-            label: BreadcrumbText.customer,
-            value: ReportLevel.CUSTOMER,
+            label: BreadcrumbText.player,
+            value: ReportLevel.PLAYER,
         });
 
         return <Breadcrumb items={items} value={this.props.gridData.level} onChange={(item) => this._drillDownData(item.value)} />
@@ -315,9 +315,9 @@ export class DataGrid extends Component {
     }
 
     showBetListPopup = (externalId, systemId, custId) => {
-        const { CurrencyId, BaseCurrency, FromDate, ToDate, CurrencyName, ExcludeTestData, DateOptionType } = this.drillDownParams[ReportLevel.CUSTOMER];
+        const { CurrencyId, BaseCurrency, FromDate, ToDate, CurrencyName, DateOptionType, IsViewResettledTicketOnly } = this.drillDownParams[ReportLevel.PLAYER];
         const url = "api/ExchangeWinLossBetList/Index";
-        this.betlistParams = { CustId: custId, CurrencyId, BaseCurrency, FromDate, ToDate, ExcludeTestData, DateOptionType };
+        this.betlistParams = { CustId: custId, CurrencyId, BaseCurrency, FromDate, ToDate, DateOptionType, IsViewResettledTicketOnly };
 
         const params = {
             data: this.betlistParams
@@ -327,7 +327,7 @@ export class DataGrid extends Component {
 
         this.betlistTitle = (
             <p>
-                {CUSTOMER_BETLIST_TEXT}{" "}
+                {PLAYER_BET_LIST_TEXT}{" "}
                 {FromDate} → {ToDate} - {externalId}({systemId}) -{" "}
                 <span className="base-currency-title">{viewIn}</span>
             </p>
@@ -366,7 +366,8 @@ export class DataGrid extends Component {
             params.BaseCurrency ? params.BaseCurrency : params.CurrencyName,
             reportLevel === ReportLevel.MAIN ? params.CurrencyId === 0 : false,
             params.UserName,
-            params.DateOptionType);
+            params.DateOptionType,
+            params.IsViewResettledTicketOnly);
 
         if (!gridData.data.DataList.length) {
             return this._renderNodata(title);
@@ -391,8 +392,8 @@ export class DataGrid extends Component {
                 />
 
                 {
-                    reportLevel === ReportLevel.CUSTOMER && showBetList &&
-                    <Popup isShow={showBetList} title={CUSTOMER_BETLIST_TEXT} width={1000} height={600} onClose={this.closeBetListPopup}>
+                    reportLevel === ReportLevel.PLAYER && showBetList &&
+                    <Popup isShow={showBetList} title={PLAYER_BET_LIST_TEXT} width={1000} height={600} onClose={this.closeBetListPopup}>
                         <BetList data={betListData} title={this.betlistTitle} params={this.betlistParams} />
                     </Popup>
                 }

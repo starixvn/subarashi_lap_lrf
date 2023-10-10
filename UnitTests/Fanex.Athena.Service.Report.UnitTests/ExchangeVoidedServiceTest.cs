@@ -89,7 +89,8 @@ namespace Fanex.Athena.Service.Report.UnitTests
                 metaModel.PageIndex,
                 metaModel.Environment,
                 metaModel.RefNo,
-                metaModel.SiteName
+                metaModel.SiteName,
+                metaModel.TimeZone
             };
             var expectedResult = JsonConvert.SerializeObject(apiMetaModel);
 
@@ -130,7 +131,8 @@ namespace Fanex.Athena.Service.Report.UnitTests
                 metaModel.PageIndex,
                 metaModel.Environment,
                 metaModel.RefNo,
-                metaModel.SiteName
+                metaModel.SiteName,
+                metaModel.TimeZone
             };
             var expectedResult = JsonConvert.SerializeObject(apiMetaModel);
 

@@ -3196,4 +3196,28 @@
   <data name="TheSettledAndResettledDataNote" xml:space="preserve">
     <value>报表数据与实际已结算数据大约有20分钟延迟，而与实际已重新结算数据大约有65分钟延迟。</value>
   </data>
+  <data name="ViewResettledTicketOnly" xml:space="preserve">
+    <value>仅查看已重新结算注单数据</value>
+  </data>
+  <data name="ResettledReport" xml:space="preserve">
+    <value>重新结算报表</value>
+  </data>
+  <data name="ExchangeUnderMaintenanceMsg" xml:space="preserve">
+    <value>Exchange服务目前维护中，报表数据在这段时间内有可能延迟。&lt;br&gt;对于您的不便深感抱歉。</value>
+  </data>
+  <data name="BettingTicketCenter_Exchange_Note_1" xml:space="preserve">
+    <value>支援仅搜寻被取消注单。</value>
+  </data>
+  <data name="BettingTicketCenter_Exchange_Note_2" xml:space="preserve">
+    <value>输入玩家名可更快返回结果。</value>
+  </data>
+  <data name="BettingTicketCenter_Exchange_Note_3" xml:space="preserve">
+    <value>仅支援一个月内的数据。</value>
+  </data>
+  <data name="PlayerBetList" xml:space="preserve">
+    <value>玩家注单</value>
+  </data>
+  <data name="ViewResettledTicketOnlyNote" xml:space="preserve">
+    <value>''仅查看已重新结算注单数据'' 可查询2023年9月1日后数据。</value>
+  </data>
 </root>

@@ -8,9 +8,9 @@ const Note = () => {
                 {LangHelper.getSingleResource('Note')}:
                     </div>
             <div className="col-9">
-                <p>* Support searching void tickets only</p>
-                <p>* Input username to return results faster</p>
-                <p>* Support data up to 1 months</p>
+                <p>* {LangHelper.getSingleResource("BettingTicketCenter_Exchange_Note_1")}</p>
+                <p>* {LangHelper.getSingleResource("BettingTicketCenter_Exchange_Note_2")}</p>
+                <p>* {LangHelper.getSingleResource("BettingTicketCenter_Exchange_Note_3")}</p>
             </div>
         </div>
     )

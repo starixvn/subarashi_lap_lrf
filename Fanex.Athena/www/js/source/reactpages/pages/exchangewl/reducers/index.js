@@ -7,6 +7,7 @@ import * as excludeTestReducer from '../../../reducers/excludeTestReducer'
 import * as dateRangeReducer from '../../../reducers/dateRangeReducer'
 import * as subsidiaryReducer from '../../../reducers/subsidiaryReducer'
 import * as usernameReducer from '@jsroot/reducers/usernameReducer'
+import * as userGuideReducer from '@jsroot/reducers/userGuideReducer'
 
 export default combineReducers(Object.assign(
     dataHandlerReducer,
@@ -16,5 +17,6 @@ export default combineReducers(Object.assign(
     excludeTestReducer,
     dateRangeReducer,
     subsidiaryReducer,
-    usernameReducer
+    usernameReducer,
+    userGuideReducer
 ));

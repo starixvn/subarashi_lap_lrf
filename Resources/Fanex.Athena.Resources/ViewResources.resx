@@ -3549,4 +3549,28 @@
   <data name="TheSettledAndResettledDataNote" xml:space="preserve">
     <value>The data may have a delay of around 20 minutes for Settled tickets and 65 minutes for Resettled tickets.</value>
   </data>
+  <data name="ViewResettledTicketOnly" xml:space="preserve">
+    <value>View Resettled Ticket Only</value>
+  </data>
+  <data name="ResettledReport" xml:space="preserve">
+    <value>Resettled Report</value>
+  </data>
+  <data name="ExchangeUnderMaintenanceMsg" xml:space="preserve">
+    <value>Exchange's services are Under Maintenance. Data may be delayed during this period.&lt;br&gt;We sincerely apologize for any inconvenience caused.</value>
+  </data>
+  <data name="BettingTicketCenter_Exchange_Note_1" xml:space="preserve">
+    <value>Support searching void tickets only.</value>
+  </data>
+  <data name="BettingTicketCenter_Exchange_Note_2" xml:space="preserve">
+    <value>Input username to return results faster.</value>
+  </data>
+  <data name="BettingTicketCenter_Exchange_Note_3" xml:space="preserve">
+    <value>Support data up to 1 month.</value>
+  </data>
+  <data name="PlayerBetList" xml:space="preserve">
+    <value>Player Bet List</value>
+  </data>
+  <data name="ViewResettledTicketOnlyNote" xml:space="preserve">
+    <value>"View Resettled Ticket Only" data is available from 01 Sep 2023.</value>
+  </data>
 </root>

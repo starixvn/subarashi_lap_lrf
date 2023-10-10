@@ -1078,6 +1078,33 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Support searching void tickets only..
+        /// </summary>
+        public static string BettingTicketCenter_Exchange_Note_1 {
+            get {
+                return ResourceManager.GetString("BettingTicketCenter_Exchange_Note_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Input username to return results faster..
+        /// </summary>
+        public static string BettingTicketCenter_Exchange_Note_2 {
+            get {
+                return ResourceManager.GetString("BettingTicketCenter_Exchange_Note_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Support data up to 1 month..
+        /// </summary>
+        public static string BettingTicketCenter_Exchange_Note_3 {
+            get {
+                return ResourceManager.GetString("BettingTicketCenter_Exchange_Note_3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The system supports searching LicTxID from {0}.
         /// </summary>
         public static string BettingTicketCenter_RefnoTabNote_TxIDSearch {
@@ -2919,6 +2946,15 @@ namespace Fanex.Athena.Resources {
         public static string ExcelExceedRowsMsg {
             get {
                 return ResourceManager.GetString("ExcelExceedRowsMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exchange&apos;s services are Under Maintenance. Data may be delayed during this period.&lt;br&gt;We sincerely apologize for any inconvenience caused..
+        /// </summary>
+        public static string ExchangeUnderMaintenanceMsg {
+            get {
+                return ResourceManager.GetString("ExchangeUnderMaintenanceMsg", resourceCulture);
             }
         }
         
@@ -6208,6 +6244,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Player Bet List.
+        /// </summary>
+        public static string PlayerBetList {
+            get {
+                return ResourceManager.GetString("PlayerBetList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Player Betting Statistics (month to date).
         /// </summary>
         public static string PlayerBettingStatisticsTitle {
@@ -7041,6 +7086,15 @@ namespace Fanex.Athena.Resources {
         public static string Resettled {
             get {
                 return ResourceManager.GetString("Resettled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resettled Report.
+        /// </summary>
+        public static string ResettledReport {
+            get {
+                return ResourceManager.GetString("ResettledReport", resourceCulture);
             }
         }
         
@@ -9021,6 +9075,24 @@ namespace Fanex.Athena.Resources {
         public static string ViewNotification {
             get {
                 return ResourceManager.GetString("ViewNotification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View Resettled Ticket Only.
+        /// </summary>
+        public static string ViewResettledTicketOnly {
+            get {
+                return ResourceManager.GetString("ViewResettledTicketOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;View Resettled Ticket Only&quot; data is available from 01 Sep 2023..
+        /// </summary>
+        public static string ViewResettledTicketOnlyNote {
+            get {
+                return ResourceManager.GetString("ViewResettledTicketOnlyNote", resourceCulture);
             }
         }
         

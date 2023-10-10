@@ -16,6 +16,7 @@ import { BaseCurrency } from '../../../constants/currency'
 import { CUSTOMER_SEARCH_URL } from '../../../constants/url'
 import ReportExcel from '../lib/reportExcel'
 import { Service, ViewInType } from '../lib/service'
+import UserGuide from '@jsroot/components/UserGuide'
 import moment from 'moment'
 
 const RANGE_THREE_MONTH_CONSTRAINT = 3;
@@ -98,7 +99,8 @@ export class FormFilter extends Component {
             excelData.BaseCurrency ? excelData.BaseCurrency : excelData.CurrencyName,
             level === ReportLevel.MAIN ? excelData.CurrencyId === 0 : false,
             excelData.UserName,
-            params.DateOptionType);
+            params.DateOptionType,
+            params.IsViewResettledTicketOnly);
         const excel = new ReportExcel(gridData, title, level, isAllowedCustomerComm, excelData.ReportBy);
         excel.export(() => {
             this.props.toggleLoader(false);
@@ -121,6 +123,7 @@ export class FormFilter extends Component {
             ToDate: Site.convertDateToString(toDate),
             ReportBy: this.props.selectedReportBy,
             IsExcludedTestData: this.props.isExcludeTest,
+            IsViewResettledTicketOnly: this.props.isViewResettledTicketOnly,
             Level: 0,
             SubsidiarySearch: subsidiarySearch,
             SubsidiaryList: subsidiarySearch ? this.props.selectedSubsidiary : "",
@@ -252,6 +255,32 @@ export class FormFilter extends Component {
         </div>);
     }
 
+    _renderViewResettledTicketOnlyCheckBox() {
+        return (<div className="checkbox-group">
+            <input type="checkbox" className="checkbox" checked={this.props.isViewResettledTicketOnly} id="ViewResettledTicketOnly"
+                onChange={() => this.props.changeIsViewResettledTicketOnly(!this.props.isViewResettledTicketOnly)} />
+            <label style={{ marginLeft: "0px" }} htmlFor="ViewResettledTicketOnly">{LangHelper.getSingleResource("ViewResettledTicketOnly")}</label>
+        </div>);
+    }
+
+    _showUserGuide = () => {
+        const userGuideContent = this.props.userGuideContent;
+
+        if (!userGuideContent || userGuideContent.length === 0) {
+            this.props.getUserGuideContent('ExchangeWinLoss');
+        }
+    }
+
+    _renderUserGuide = () => {
+        const userGuideContent = this.props.userGuideContent;
+
+        return (<UserGuide 
+                title={LangHelper.getSingleResource("UserGuide")} 
+                contentTitle={LangHelper.getSingleResource("ExchangeWinLoss")}
+                onClick={this._showUserGuide}
+                content={userGuideContent} />)
+    }
+
     render() {
         const showSubsidiarySearch = AppData.viewType !== SubsidiaryViewType.NOT_MANAGEMENT;
         return (
@@ -290,18 +319,23 @@ export class FormFilter extends Component {
                     </div>
 
                     <div className='col-6 col-sm-3 col-md-2 col-xl-2'>
-                        {this._renderReportByOption()}
+                        <div className="form-group">
+                            {this._renderExcludeTestDataCheckBox()}
+                        </div>
                     </div>
 
                     <div className='col-6 col-sm-3 col-md-2 col-xl-2'>
                         <div className="form-group">
-                            {this._renderExcludeTestDataCheckBox()}
+                            {this._renderViewResettledTicketOnlyCheckBox()}
                         </div>
                     </div>
                 </div>
                 <div className='row'>
                     <div className='col-12 col-sm-8 col-md-4 col-xl-4'>
                         {this._renderViewInOption()}
+                    </div>
+                    <div className='col-6 col-sm-3 col-md-2 col-xl-2'>
+                        {this._renderReportByOption()}
                     </div>
                     <div className='col-12 col-sm-3 col-md-2 col-xl-1'>
                         <div className='form-group button-group'>
@@ -328,9 +362,14 @@ export class FormFilter extends Component {
                         <span className="circle"></span>
                         <span>{decode(LangHelper.getSingleResource("TheSettledAndResettledDataNote"))}</span>
                     </div>
+                    <div className="col-11">
+                        <span className="circle"></span>
+                        <span>{decode(LangHelper.getSingleResource("ViewResettledTicketOnlyNote"))}</span>
+                    </div>
                 </div>
                 < div className='caret-block'>
                     <i className='icon-excel right' onClick={this.exportExcel} title={LangHelper.getSingleResource('ExportToExcel')}></i>
+                    {this._renderUserGuide()}
                 </div>
             </div >
         );

@@ -64,7 +64,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "www/js/build/dev/reactpages/" + ({"lib/xlsx-style-sparta":"lib/xlsx-style-sparta"}[chunkId]||chunkId) + "." + {"lib/xlsx-style-sparta":"5cfcfd35bcf8d613b0b6"}[chunkId] + ".chunk.js"
+/******/ 		return __webpack_require__.p + "www/js/build/dev/reactpages/" + ({"lib/xlsx-style-sparta":"lib/xlsx-style-sparta"}[chunkId]||chunkId) + "." + {"lib/xlsx-style-sparta":"932edca6c1487b86dbb1"}[chunkId] + ".chunk.js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -473,6 +473,48 @@ const SET_SELECTED_ODDGROUP = "SET_SELECTED_ODDGROUP";
 
 /***/ }),
 
+/***/ "./www/js/source/reactpages/actions/userGuideAction.js":
+/*!*************************************************************!*\
+  !*** ./www/js/source/reactpages/actions/userGuideAction.js ***!
+  \*************************************************************/
+/*! exports provided: getUserGuideContent, setUserGuideContent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getUserGuideContent", function() { return getUserGuideContent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setUserGuideContent", function() { return setUserGuideContent; });
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/actions/types.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _lib_site__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../lib/site */ "./www/js/source/reactpages/lib/site.js");
+
+
+
+const fetchData = resourceName => {
+  const url = _lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].resolveClientUrl('UserGuide/Index?resourcename=' + resourceName) + "&_=" + new Date().getTime();
+  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(url, {
+    headers: {
+      'X-Requested-With': 'XMLHttpRequest'
+    }
+  });
+};
+function getUserGuideContent(params) {
+  return dispatch => {
+    fetchData(params).then(response => {
+      dispatch(setUserGuideContent(response.data));
+    });
+  };
+}
+const setUserGuideContent = data => {
+  return {
+    type: _types__WEBPACK_IMPORTED_MODULE_0__["USER_GUIDE_CONTENT"],
+    data: data
+  };
+};
+
+/***/ }),
+
 /***/ "./www/js/source/reactpages/actions/usernameAction.js":
 /*!************************************************************!*\
   !*** ./www/js/source/reactpages/actions/usernameAction.js ***!
@@ -763,6 +805,85 @@ const defaultProps = {
 ReportTitle.propTypes = propTypes;
 ReportTitle.defaultProps = defaultProps;
 /* harmony default export */ __webpack_exports__["default"] = (ReportTitle);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/components/UserGuide.jsx":
+/*!***********************************************************!*\
+  !*** ./www/js/source/reactpages/components/UserGuide.jsx ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return UserGuide; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _popup_Popup__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./popup/Popup */ "./www/js/source/reactpages/components/popup/Popup.jsx");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+
+
+
+class UserGuide extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
+  constructor(props) {
+    super(props);
+    _defineProperty(this, "onClickHandler", () => {
+      this.setState({
+        isShow: true
+      });
+      this.props.onClick && this.props.onClick();
+    });
+    _defineProperty(this, "onCloseHandler", () => {
+      this.setState({
+        isShow: false
+      });
+    });
+    this.state = {
+      isShow: false
+    };
+  }
+  render() {
+    const {
+      className,
+      title,
+      content,
+      contentTitle,
+      isHtml
+    } = this.props;
+    const isShow = this.state.isShow && content && ( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.isValidElement(content) || content.length > 0) ? true : false;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      className: className,
+      onClick: this.onClickHandler,
+      title: title
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_popup_Popup__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      width: 640,
+      height: 480,
+      isShow: isShow,
+      title: contentTitle,
+      onClose: this.onCloseHandler,
+      isHtml: isHtml
+    }, content));
+  }
+}
+_defineProperty(UserGuide, "propTypes", {
+  title: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
+  className: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
+  contentTitle: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
+  isHtml: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool
+});
+_defineProperty(UserGuide, "defaultProps", {
+  className: 'icon-book right',
+  isHtml: true
+});
+;
 
 /***/ }),
 
@@ -3124,7 +3245,7 @@ __webpack_require__.r(__webpack_exports__);
 const ReportLevel = {
   MAIN: 0,
   LICENSEE: 1,
-  CUSTOMER: 2
+  PLAYER: 2
 };
 const ReportBy = {
   DAILY: 1,
@@ -3739,7 +3860,7 @@ function setGridData(data) {
 /*!**********************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/exchangewl/actions/filterHandlerAction.js ***!
   \**********************************************************************************/
-/*! exports provided: setReportBy, setViewInOption, setParams */
+/*! exports provided: setReportBy, setViewInOption, setParams, changeIsViewResettledTicketOnly */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3747,6 +3868,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setReportBy", function() { return setReportBy; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setViewInOption", function() { return setViewInOption; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setParams", function() { return setParams; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "changeIsViewResettledTicketOnly", function() { return changeIsViewResettledTicketOnly; });
 /* harmony import */ var _types_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types.js */ "./www/js/source/reactpages/pages/exchangewl/actions/types.js");
 
 const setReportBy = value => {
@@ -3765,6 +3887,12 @@ const setParams = value => {
   return {
     type: _types_js__WEBPACK_IMPORTED_MODULE_0__["SET_PARAM"],
     data: value
+  };
+};
+const changeIsViewResettledTicketOnly = checked => {
+  return {
+    type: _types_js__WEBPACK_IMPORTED_MODULE_0__["CHANGE_ISVIEW_RESETTLED_TICKET_ONLY"],
+    data: checked
   };
 };
 
@@ -3788,6 +3916,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_dateRangeAction__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../actions/dateRangeAction */ "./www/js/source/reactpages/actions/dateRangeAction.js");
 /* harmony import */ var _actions_subsidiaryAction__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../actions/subsidiaryAction */ "./www/js/source/reactpages/actions/subsidiaryAction.js");
 /* harmony import */ var _jsroot_actions_usernameAction__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/actions/usernameAction */ "./www/js/source/reactpages/actions/usernameAction.js");
+/* harmony import */ var _jsroot_actions_userGuideAction__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @jsroot/actions/userGuideAction */ "./www/js/source/reactpages/actions/userGuideAction.js");
 
 
 
@@ -3796,7 +3925,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const ActionCreators = Object.assign({}, _dataHandlerAction_js__WEBPACK_IMPORTED_MODULE_0__, _filterHandlerAction_js__WEBPACK_IMPORTED_MODULE_1__, _actions_currencyAction__WEBPACK_IMPORTED_MODULE_2__, _actions_loaderAction__WEBPACK_IMPORTED_MODULE_3__, _actions_excludeTestAction__WEBPACK_IMPORTED_MODULE_4__, _actions_dateRangeAction__WEBPACK_IMPORTED_MODULE_5__, _actions_subsidiaryAction__WEBPACK_IMPORTED_MODULE_6__, _jsroot_actions_usernameAction__WEBPACK_IMPORTED_MODULE_7__);
+
+const ActionCreators = Object.assign({}, _dataHandlerAction_js__WEBPACK_IMPORTED_MODULE_0__, _filterHandlerAction_js__WEBPACK_IMPORTED_MODULE_1__, _actions_currencyAction__WEBPACK_IMPORTED_MODULE_2__, _actions_loaderAction__WEBPACK_IMPORTED_MODULE_3__, _actions_excludeTestAction__WEBPACK_IMPORTED_MODULE_4__, _actions_dateRangeAction__WEBPACK_IMPORTED_MODULE_5__, _actions_subsidiaryAction__WEBPACK_IMPORTED_MODULE_6__, _jsroot_actions_usernameAction__WEBPACK_IMPORTED_MODULE_7__, _jsroot_actions_userGuideAction__WEBPACK_IMPORTED_MODULE_8__);
 
 /***/ }),
 
@@ -3804,7 +3934,7 @@ const ActionCreators = Object.assign({}, _dataHandlerAction_js__WEBPACK_IMPORTED
 /*!********************************************************************!*\
   !*** ./www/js/source/reactpages/pages/exchangewl/actions/types.js ***!
   \********************************************************************/
-/*! exports provided: FETCH_DATA, SET_GRID_DATA, GET_REPORTBY, SET_REPORTBY, GET_VIEWINOPTION, SET_VIEWINOPTION, SET_PARAM, GET_LICENSEE, GET_ISALLOWED_CUSTOMERCOMM */
+/*! exports provided: FETCH_DATA, SET_GRID_DATA, GET_REPORTBY, SET_REPORTBY, GET_VIEWINOPTION, SET_VIEWINOPTION, SET_PARAM, GET_LICENSEE, GET_ISALLOWED_CUSTOMERCOMM, CHANGE_ISVIEW_RESETTLED_TICKET_ONLY */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3818,6 +3948,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_PARAM", function() { return SET_PARAM; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_LICENSEE", function() { return GET_LICENSEE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_ISALLOWED_CUSTOMERCOMM", function() { return GET_ISALLOWED_CUSTOMERCOMM; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CHANGE_ISVIEW_RESETTLED_TICKET_ONLY", function() { return CHANGE_ISVIEW_RESETTLED_TICKET_ONLY; });
 const FETCH_DATA = 'FETCH_DATA';
 const SET_GRID_DATA = 'SET_GRID_DATA';
 const GET_REPORTBY = 'GET_REPORTBY';
@@ -3827,6 +3958,7 @@ const SET_VIEWINOPTION = "SET_VIEWINOPTION";
 const SET_PARAM = 'SET_PARAM';
 const GET_LICENSEE = 'GET_LICENSEE';
 const GET_ISALLOWED_CUSTOMERCOMM = 'GET_ISALLOWED_CUSTOMERCOMM';
+const CHANGE_ISVIEW_RESETTLED_TICKET_ONLY = 'CHANGE_ISVIEW_RESETTLED_TICKET_ONLY';
 
 /***/ }),
 
@@ -3843,13 +3975,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var _actions_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/index */ "./www/js/source/reactpages/pages/exchangewl/actions/index.js");
-/* harmony import */ var _DataGrid__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DataGrid */ "./www/js/source/reactpages/pages/exchangewl/components/DataGrid.jsx");
-/* harmony import */ var _FormFilter__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./FormFilter */ "./www/js/source/reactpages/pages/exchangewl/components/FormFilter.jsx");
-/* harmony import */ var _jsroot_components_Loader__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/components/Loader */ "./www/js/source/reactpages/components/Loader.jsx");
-/* harmony import */ var _jsroot_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/layouts/AppLayout */ "./www/js/source/reactpages/layouts/AppLayout.jsx");
-
+/* harmony import */ var _DataGrid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DataGrid */ "./www/js/source/reactpages/pages/exchangewl/components/DataGrid.jsx");
+/* harmony import */ var _FormFilter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./FormFilter */ "./www/js/source/reactpages/pages/exchangewl/components/FormFilter.jsx");
+/* harmony import */ var _jsroot_components_Loader__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/components/Loader */ "./www/js/source/reactpages/components/Loader.jsx");
+/* harmony import */ var _jsroot_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/layouts/AppLayout */ "./www/js/source/reactpages/layouts/AppLayout.jsx");
+/* harmony import */ var _UnderMaintenancePopUp__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./UnderMaintenancePopUp */ "./www/js/source/reactpages/pages/exchangewl/components/UnderMaintenancePopUp.jsx");
 
 
 
@@ -3862,9 +3992,11 @@ class AppContainer extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     super(props);
   }
   render() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_7__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Loader__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_5__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Loader__WEBPACK_IMPORTED_MODULE_4__["default"], {
       isLoading: this.props.isLoading
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormFilter__WEBPACK_IMPORTED_MODULE_5__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DataGrid__WEBPACK_IMPORTED_MODULE_4__["default"], null));
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormFilter__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DataGrid__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UnderMaintenancePopUp__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      id: "UM_exchangewinloss"
+    }));
   }
 }
 function mapStateToProps(state) {
@@ -4131,11 +4263,9 @@ function mapDispatchToProps(dispatch) {
     toggleLoader: _actions_loaderAction__WEBPACK_IMPORTED_MODULE_11__["toggleLoader"]
   }, dispatch);
 }
-;
 function mapStateToProps(state) {
   return {};
 }
-;
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(BetList));
 
 /***/ }),
@@ -4298,7 +4428,7 @@ function _toPrimitive(input, hint) { if (typeof input !== "object" || input === 
 
 
 
-const CUSTOMER_BETLIST_TEXT = _lib_langHelper_js__WEBPACK_IMPORTED_MODULE_17__["default"].getSingleResource("CustomerBetList");
+const PLAYER_BET_LIST_TEXT = _lib_langHelper_js__WEBPACK_IMPORTED_MODULE_17__["default"].getSingleResource("PlayerBetList");
 class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   constructor(props) {
     super(props);
@@ -4309,9 +4439,9 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         FromDate,
         ToDate,
         CurrencyName,
-        ExcludeTestData,
-        DateOptionType
-      } = this.drillDownParams[_constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].CUSTOMER];
+        DateOptionType,
+        IsViewResettledTicketOnly
+      } = this.drillDownParams[_constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].PLAYER];
       const url = "api/ExchangeWinLossBetList/Index";
       this.betlistParams = {
         CustId: custId,
@@ -4319,14 +4449,14 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         BaseCurrency,
         FromDate,
         ToDate,
-        ExcludeTestData,
-        DateOptionType
+        DateOptionType,
+        IsViewResettledTicketOnly
       };
       const params = {
         data: this.betlistParams
       };
       const viewIn = _lib_langHelper_js__WEBPACK_IMPORTED_MODULE_17__["default"].getSingleResource("Viewin").replace("{0}", BaseCurrency ? BaseCurrency : CurrencyName);
-      this.betlistTitle = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, CUSTOMER_BETLIST_TEXT, " ", FromDate, " \u2192 ", ToDate, " - ", externalId, "(", systemId, ") -", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      this.betlistTitle = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, PLAYER_BET_LIST_TEXT, " ", FromDate, " \u2192 ", ToDate, " - ", externalId, "(", systemId, ") -", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "base-currency-title"
       }, viewIn));
       this.props.toggleLoader(true);
@@ -4373,7 +4503,7 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         return 2;
       case _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].LICENSEE:
         return 2;
-      case _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].CUSTOMER:
+      case _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].PLAYER:
         return 3;
       default:
         return 2;
@@ -4400,7 +4530,7 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   }
   _drillDownData(level, date, currencyId, currencyName, custId) {
     const currentLevel = this.props.gridData.level;
-    if (currentLevel === level || level < _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].MAIN || level > _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].CUSTOMER) {
+    if (currentLevel === level || level < _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].MAIN || level > _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].PLAYER) {
       return;
     }
     if (level > currentLevel) {
@@ -4447,7 +4577,7 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       colWidth: 100,
       title: reportBy === _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportBy"].DAILY ? _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].date : _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].month,
       rowSpan: "2"
-    }, reportBy === _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportBy"].DAILY ? _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].date : _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].month), level === _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].CUSTOMER && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
+    }, reportBy === _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportBy"].DAILY ? _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].date : _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].month), level === _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].PLAYER && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
       colWidth: 100,
       title: _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].externalId,
       rowSpan: "2"
@@ -4473,13 +4603,13 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       rowSpan: "2"
     }, _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].totalTransaction), this.isAllowedCustomerComm ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
       colWidth: 100,
-      title: _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].customer,
+      title: _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].player,
       colSpan: "3"
-    }, _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].customer) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
+    }, _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].player) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
       colWidth: 100,
-      title: _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].customerWL,
+      title: _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].playerWL,
       rowSpan: "2"
-    }, _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].customerWL), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
+    }, _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].playerWL), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
       colWidth: 100,
       title: _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].licensee,
       colSpan: "3"
@@ -4492,11 +4622,11 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         key: "tr-header2"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
         colWidth: 100,
-        title: _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].customerWL
-      }, _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].customerWL), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
+        title: _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].playerWL
+      }, _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].playerWL), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
         colWidth: 100,
-        title: _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].customerComm
-      }, _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].customerComm), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
+        title: _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].playerComm
+      }, _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].playerComm), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
         colWidth: 100,
         title: _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].total
       }, _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].total), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
@@ -4542,16 +4672,16 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       }, i + 1), level === _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].MAIN && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
         title: date,
         className: "center-align"
-      }, date), level === _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].CUSTOMER && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+      }, date), level === _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].PLAYER && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
         title: item.ExternalId,
         className: "left-align"
       }, this._renderBetListLink(item.ExternalId, item.ExternalId, item.SystemId, item.CustId)), level !== _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].MAIN && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
         title: item.SystemId,
         className: "left-align"
-      }, level === _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].LICENSEE ? this._renderDrillDownLink(item.SystemId, _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].CUSTOMER, item.Date, item.CurrencyId, item.CurrencyName, item.CustId) : this._renderBetListLink(item.SystemId, item.ExternalId, item.SystemId, item.CustId)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+      }, level === _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].LICENSEE ? this._renderDrillDownLink(item.SystemId, _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].PLAYER, item.Date, item.CurrencyId, item.CurrencyName, item.CustId) : this._renderBetListLink(item.SystemId, item.ExternalId, item.SystemId, item.CustId)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
         title: item.CurrencyName,
         className: "center-align"
-      }, level === _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].MAIN ? this._renderDrillDownLink(item.CurrencyName, this.licenseeId === _constants_licensee__WEBPACK_IMPORTED_MODULE_9__["Licensee"].ONE_TWO_BET ? _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].LICENSEE : _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].CUSTOMER, item.Date, item.CurrencyId, item.CurrencyName) : item.CurrencyName), this._buildCell(item)));
+      }, level === _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].MAIN ? this._renderDrillDownLink(item.CurrencyName, this.licenseeId === _constants_licensee__WEBPACK_IMPORTED_MODULE_9__["Licensee"].ONE_TWO_BET ? _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].LICENSEE : _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].PLAYER, item.Date, item.CurrencyId, item.CurrencyName) : item.CurrencyName), this._buildCell(item)));
     }
     return rows;
   }
@@ -4657,8 +4787,8 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       });
     }
     items.push({
-      label: _lib_service__WEBPACK_IMPORTED_MODULE_7__["BreadcrumbText"].customer,
-      value: _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].CUSTOMER
+      label: _lib_service__WEBPACK_IMPORTED_MODULE_7__["BreadcrumbText"].player,
+      value: _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].PLAYER
     });
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_breadcrumb__WEBPACK_IMPORTED_MODULE_12__["Breadcrumb"], {
       items: items,
@@ -4689,7 +4819,7 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     const title = _lib_service__WEBPACK_IMPORTED_MODULE_7__["Service"].getReportTitle({
       fromDate: params.FromDate,
       toDate: params.ToDate
-    }, params.BaseCurrency ? params.BaseCurrency : params.CurrencyName, reportLevel === _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].MAIN ? params.CurrencyId === 0 : false, params.UserName, params.DateOptionType);
+    }, params.BaseCurrency ? params.BaseCurrency : params.CurrencyName, reportLevel === _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].MAIN ? params.CurrencyId === 0 : false, params.UserName, params.DateOptionType, params.IsViewResettledTicketOnly);
     if (!gridData.data.DataList.length) {
       return this._renderNodata(title);
     }
@@ -4709,9 +4839,9 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       header: this._buildHeader(reportLevel, reportBy),
       body: this._buildBody(reportLevel, reportBy),
       footer: this._buildFooter(reportLevel)
-    }), reportLevel === _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].CUSTOMER && showBetList && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_popup__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    }), reportLevel === _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].PLAYER && showBetList && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_popup__WEBPACK_IMPORTED_MODULE_15__["default"], {
       isShow: showBetList,
-      title: CUSTOMER_BETLIST_TEXT,
+      title: PLAYER_BET_LIST_TEXT,
       width: 1000,
       height: 600,
       onClose: this.closeBetListPopup
@@ -4774,14 +4904,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _constants_url__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../../constants/url */ "./www/js/source/reactpages/constants/url.js");
 /* harmony import */ var _lib_reportExcel__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../lib/reportExcel */ "./www/js/source/reactpages/pages/exchangewl/lib/reportExcel.js");
 /* harmony import */ var _lib_service__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../lib/service */ "./www/js/source/reactpages/pages/exchangewl/lib/service.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_18__);
+/* harmony import */ var _jsroot_components_UserGuide__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @jsroot/components/UserGuide */ "./www/js/source/reactpages/components/UserGuide.jsx");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_19__);
 const _excluded = ["licenseeId"];
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
 
 
 
@@ -4866,6 +4998,21 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     _defineProperty(this, "_onChangeSubsidiaryList", (currentItem, selectedItemsKey, treeViewList) => {
       this.props.setSubsidiaryList(selectedItemsKey);
     });
+    _defineProperty(this, "_showUserGuide", () => {
+      const userGuideContent = this.props.userGuideContent;
+      if (!userGuideContent || userGuideContent.length === 0) {
+        this.props.getUserGuideContent('ExchangeWinLoss');
+      }
+    });
+    _defineProperty(this, "_renderUserGuide", () => {
+      const userGuideContent = this.props.userGuideContent;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_UserGuide__WEBPACK_IMPORTED_MODULE_18__["default"], {
+        title: _lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("UserGuide"),
+        contentTitle: _lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("ExchangeWinLoss"),
+        onClick: this._showUserGuide,
+        content: userGuideContent
+      });
+    });
   }
   _doExportExcel(level, params, isAllowedCustomerComm, gridData) {
     if (!gridData || !gridData.DataList.length) {
@@ -4880,8 +5027,8 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       const firstRow = gridData.DataList[0];
       const drillDownDate = _lib_service__WEBPACK_IMPORTED_MODULE_17__["Service"].getDrilldownDateRange(params.ReportBy, params.FromDate, params.ToDate, firstRow.Date);
       excelData = {
-        FromDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_10__["default"].convertDateToString(moment__WEBPACK_IMPORTED_MODULE_18___default()(drillDownDate.fromDate)),
-        ToDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_10__["default"].convertDateToString(moment__WEBPACK_IMPORTED_MODULE_18___default()(drillDownDate.toDate)),
+        FromDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_10__["default"].convertDateToString(moment__WEBPACK_IMPORTED_MODULE_19___default()(drillDownDate.fromDate)),
+        ToDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_10__["default"].convertDateToString(moment__WEBPACK_IMPORTED_MODULE_19___default()(drillDownDate.toDate)),
         BaseCurrency: gridData.AdditionalInfo,
         CurrencyName: firstRow.CurrencyName,
         CurrencyId: firstRow.CurrencyId,
@@ -4892,7 +5039,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     const title = _lib_service__WEBPACK_IMPORTED_MODULE_17__["Service"].getReportTitle({
       fromDate: excelData.FromDate,
       toDate: excelData.ToDate
-    }, excelData.BaseCurrency ? excelData.BaseCurrency : excelData.CurrencyName, level === _constants_report__WEBPACK_IMPORTED_MODULE_12__["ReportLevel"].MAIN ? excelData.CurrencyId === 0 : false, excelData.UserName, params.DateOptionType);
+    }, excelData.BaseCurrency ? excelData.BaseCurrency : excelData.CurrencyName, level === _constants_report__WEBPACK_IMPORTED_MODULE_12__["ReportLevel"].MAIN ? excelData.CurrencyId === 0 : false, excelData.UserName, params.DateOptionType, params.IsViewResettledTicketOnly);
     const excel = new _lib_reportExcel__WEBPACK_IMPORTED_MODULE_16__["default"](gridData, title, level, isAllowedCustomerComm, excelData.ReportBy);
     excel.export(() => {
       this.props.toggleLoader(false);
@@ -4915,6 +5062,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       ToDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_10__["default"].convertDateToString(toDate),
       ReportBy: this.props.selectedReportBy,
       IsExcludedTestData: this.props.isExcludeTest,
+      IsViewResettledTicketOnly: this.props.isViewResettledTicketOnly,
       Level: 0,
       SubsidiarySearch: subsidiarySearch,
       SubsidiaryList: subsidiarySearch ? this.props.selectedSubsidiary : "",
@@ -5042,6 +5190,22 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       htmlFor: "ExcludeTest"
     }, _lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("ExcludeTestData")));
   }
+  _renderViewResettledTicketOnlyCheckBox() {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "checkbox-group"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      type: "checkbox",
+      className: "checkbox",
+      checked: this.props.isViewResettledTicketOnly,
+      id: "ViewResettledTicketOnly",
+      onChange: () => this.props.changeIsViewResettledTicketOnly(!this.props.isViewResettledTicketOnly)
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      style: {
+        marginLeft: "0px"
+      },
+      htmlFor: "ViewResettledTicketOnly"
+    }, _lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("ViewResettledTicketOnly")));
+  }
   render() {
     const showSubsidiarySearch = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].viewType !== _constants_report__WEBPACK_IMPORTED_MODULE_12__["SubsidiaryViewType"].NOT_MANAGEMENT;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -5081,15 +5245,19 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       }
     }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-6 col-sm-3 col-md-2 col-xl-2"
-    }, this._renderReportByOption()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "form-group"
+    }, this._renderExcludeTestDataCheckBox())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-6 col-sm-3 col-md-2 col-xl-2"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
-    }, this._renderExcludeTestDataCheckBox()))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, this._renderViewResettledTicketOnlyCheckBox()))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "row"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-12 col-sm-8 col-md-4 col-xl-4"
     }, this._renderViewInOption()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-6 col-sm-3 col-md-2 col-xl-2"
+    }, this._renderReportByOption()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-12 col-sm-3 col-md-2 col-xl-1"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group button-group"
@@ -5117,13 +5285,17 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       className: "col-11"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       className: "circle"
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, Object(_lib_htmlHelper_js__WEBPACK_IMPORTED_MODULE_9__["decode"])(_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("TheSettledAndResettledDataNote"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, Object(_lib_htmlHelper_js__WEBPACK_IMPORTED_MODULE_9__["decode"])(_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("TheSettledAndResettledDataNote")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-11"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      className: "circle"
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, Object(_lib_htmlHelper_js__WEBPACK_IMPORTED_MODULE_9__["decode"])(_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("ViewResettledTicketOnlyNote"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "caret-block"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
       className: "icon-excel right",
       onClick: this.exportExcel,
       title: _lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource('ExportToExcel')
-    })));
+    }), this._renderUserGuide()));
   }
 }
 function mapDispatchToProps(dispatch) {
@@ -5137,6 +5309,84 @@ function mapStateToProps(state) {
   return Object.assign({}, rest);
 }
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(FormFilter));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/exchangewl/components/UnderMaintenancePopUp.jsx":
+/*!****************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/exchangewl/components/UnderMaintenancePopUp.jsx ***!
+  \****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _jsroot_components_popup_Popup_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/components/popup/Popup.jsx */ "./www/js/source/reactpages/components/popup/Popup.jsx");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/htmlHelper */ "./www/js/source/reactpages/lib/htmlHelper.js");
+/* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_5__);
+
+
+
+
+
+
+const UnderMaintenancePopUp = props => {
+  const [isShow, setIsShow] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
+  const delay = 5 * 60 * 1000; // 5 minutes
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    CheckUM();
+    var interval = setInterval(() => {
+      CheckUM();
+    }, delay);
+    return () => clearInterval(interval);
+  }, []);
+  if (isShow) {
+    _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_4__["default"].setCookie(props.id, "true");
+  }
+  const _onCloseHandler = () => {
+    setIsShow(false);
+  };
+  const CheckUM = () => {
+    const isHasAlreadyAccess = !!_jsroot_lib_site__WEBPACK_IMPORTED_MODULE_4__["default"].getCookie(props.id);
+    const apiUrl = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_4__["default"].resolveClientUrl("api/ExchangeWinLossReport/IsUnderMaintenance");
+    if (!isHasAlreadyAccess) {
+      axios__WEBPACK_IMPORTED_MODULE_5___default.a.get(apiUrl, {
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest',
+          '__RequestVerificationToken': _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_4__["default"].getXsrfToken()
+        }
+      }).then(response => {
+        const isUm = response.data;
+        setIsShow(isUm);
+      }).catch(error => {
+        console.error(error);
+      });
+    }
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_popup_Popup_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    width: "max-content",
+    height: "min-content",
+    isShow: isShow,
+    title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("Notification").toUpperCase(),
+    onClose: _onCloseHandler,
+    isHtml: false
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      padding: "10px 10px 50px",
+      "font-size": "13px"
+    },
+    dangerouslySetInnerHTML: {
+      __html: Object(_jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_3__["decode"])(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("ExchangeUnderMaintenanceMsg"))
+    }
+  })));
+};
+/* harmony default export */ __webpack_exports__["default"] = (UnderMaintenancePopUp);
 
 /***/ }),
 
@@ -5165,7 +5415,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const defaultState = Object.assign({
-  subsidiarySearch: false
+  subsidiarySearch: false,
+  userGuideContent: ''
 }, window.initialState);
 const store = _lib_store__WEBPACK_IMPORTED_MODULE_5__["default"].createStore(_reducers_index_js__WEBPACK_IMPORTED_MODULE_4__["default"], defaultState);
 class App extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
@@ -5223,7 +5474,7 @@ class ReportExcel {
     this.gridData = gridData;
     this.reportBy = reportBy;
     this.currentRowIndex = DATA_ROW_INDEX;
-    this.totalColumn = MAX_COLUMN - (reportBy === _constants_report__WEBPACK_IMPORTED_MODULE_5__["ReportLevel"].CUSTOMER ? 1 : 2) - (isAllowedCustomerComm ? 0 : 2);
+    this.totalColumn = MAX_COLUMN - (reportBy === _constants_report__WEBPACK_IMPORTED_MODULE_5__["ReportLevel"].PLAYER ? 1 : 2) - (isAllowedCustomerComm ? 0 : 2);
     this.configColumn = this._getConfigColumn(level, reportBy, isAllowedCustomerComm);
     this.colSpanConfig = this._getColSpanConfig(level);
     this.mergeConfig = [];
@@ -5244,12 +5495,12 @@ class ReportExcel {
   _getColSpanConfig(level) {
     return {
       [TOTAL_SECTION]: {
-        colSpan: level === _constants_report__WEBPACK_IMPORTED_MODULE_5__["ReportLevel"].CUSTOMER ? 3 : 2,
+        colSpan: level === _constants_report__WEBPACK_IMPORTED_MODULE_5__["ReportLevel"].PLAYER ? 3 : 2,
         text: _lib_service__WEBPACK_IMPORTED_MODULE_4__["TotalText"].total,
         style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["totalCellStyle"].rowspan
       },
       [SUMMARYTOTAL_SECTION]: {
-        colSpan: level === _constants_report__WEBPACK_IMPORTED_MODULE_5__["ReportLevel"].CUSTOMER ? 4 : 3,
+        colSpan: level === _constants_report__WEBPACK_IMPORTED_MODULE_5__["ReportLevel"].PLAYER ? 4 : 3,
         text: _lib_service__WEBPACK_IMPORTED_MODULE_4__["TotalText"].totalIn,
         style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["grandTotalCellStyle"].rowspan
       }
@@ -5300,11 +5551,11 @@ class ReportExcel {
       type: 's',
       [HEADER_SECTION]: {
         title: 'externalId',
-        isShow: level === _constants_report__WEBPACK_IMPORTED_MODULE_5__["ReportLevel"].CUSTOMER,
+        isShow: level === _constants_report__WEBPACK_IMPORTED_MODULE_5__["ReportLevel"].PLAYER,
         rowSpan: 2
       },
       [MAIN_SECTION]: {
-        isShow: level === _constants_report__WEBPACK_IMPORTED_MODULE_5__["ReportLevel"].CUSTOMER,
+        isShow: level === _constants_report__WEBPACK_IMPORTED_MODULE_5__["ReportLevel"].PLAYER,
         style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["bodyCellStyle"].left,
         width: 150
       },
@@ -5418,7 +5669,7 @@ class ReportExcel {
       }
     }, {
       [HEADER_SECTION]: {
-        title: isAllowedCustomerComm ? 'customer' : 'customerWL',
+        title: isAllowedCustomerComm ? 'player' : 'playerWL',
         isShow: true,
         rowSpan: isAllowedCustomerComm ? 1 : 2,
         colSpan: isAllowedCustomerComm ? 3 : 1
@@ -5448,12 +5699,12 @@ class ReportExcel {
         isShow: false
       }
     }, {
-      field: 'CustomerWL',
+      field: 'PlayerWL',
       type: 'n',
       [HEADER_SECTION]: {
-        title: 'customerWL',
+        title: 'playerWL',
         isShow: isAllowedCustomerComm,
-        index_c: level === _constants_report__WEBPACK_IMPORTED_MODULE_5__["ReportLevel"].CUSTOMER ? 7 : 6,
+        index_c: level === _constants_report__WEBPACK_IMPORTED_MODULE_5__["ReportLevel"].PLAYER ? 7 : 6,
         index_r: HEADER_ROW_INDEX + 1
       },
       [MAIN_SECTION]: {
@@ -5470,10 +5721,10 @@ class ReportExcel {
         style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["grandTotalCellStyle"].decimal
       }
     }, {
-      field: 'CustomerComm',
+      field: 'PlayerComm',
       type: 'n',
       [HEADER_SECTION]: {
-        title: 'customerComm',
+        title: 'playerComm',
         isShow: isAllowedCustomerComm
       },
       [MAIN_SECTION]: {
@@ -5490,7 +5741,7 @@ class ReportExcel {
         style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["grandTotalCellStyle"].decimal
       }
     }, {
-      field: 'CustomerWLTotal',
+      field: 'PlayerWLTotal',
       type: 'n',
       [HEADER_SECTION]: {
         title: 'total',
@@ -5515,7 +5766,7 @@ class ReportExcel {
       [HEADER_SECTION]: {
         title: 'licenseeWL',
         isShow: true,
-        index_c: (level === _constants_report__WEBPACK_IMPORTED_MODULE_5__["ReportLevel"].CUSTOMER ? 8 : 7) + (isAllowedCustomerComm ? 2 : 0),
+        index_c: (level === _constants_report__WEBPACK_IMPORTED_MODULE_5__["ReportLevel"].PLAYER ? 8 : 7) + (isAllowedCustomerComm ? 2 : 0),
         index_r: HEADER_ROW_INDEX + 1
       },
       [MAIN_SECTION]: {
@@ -5800,9 +6051,9 @@ const HeaderText = {
   turnover: _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Turnover'),
   netTurnover: _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('NetTurnover'),
   totalTransaction: _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('TotalTransaction'),
-  customer: _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Customer'),
-  customerWL: _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('CustomerW_L'),
-  customerComm: _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('CustomerComm'),
+  player: _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Player'),
+  playerWL: _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('PlayerWL'),
+  playerComm: _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('PlayerComm'),
   total: _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Total'),
   licensee: _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Licensee'),
   licenseeWL: _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('LicenseeW_L'),
@@ -5816,19 +6067,20 @@ const TotalText = {
 const BreadcrumbText = {
   main: _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Main'),
   licensee: _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Licensee'),
-  customer: _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Customer')
+  player: _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Player')
 };
 const ViewInType = {
   SettledAndResettledReport: 2,
   SettledOnly: 1
 };
 class Service {
-  static getReportTitle(dateRange, selectedCurrency, allCurrencies, username, selectedViewInType) {
+  static getReportTitle(dateRange, selectedCurrency, allCurrencies, username, selectedViewInType, isViewResettledTicketOnly) {
     const fromDate = _lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].convertDateToString(dateRange.fromDate);
     const toDate = _lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].convertDateToString(dateRange.toDate);
     const viewInByCurrency = allCurrencies ? _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('AllCurrencies') : `${_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Viewin').replace('{0}', selectedCurrency)}`;
     const usernameText = !username ? "" : `, ${_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Username')}: ${username}`;
-    const viewInTypeText = selectedViewInType === ViewInType.SettledOnly ? _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("SettledOnlyReport") : _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("SettledAndResettledReport");
+    let viewInTypeText = selectedViewInType === ViewInType.SettledOnly ? _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("SettledOnlyReport") : _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("SettledAndResettledReport");
+    viewInTypeText = isViewResettledTicketOnly ? _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("ResettledReport") : viewInTypeText;
     return `${_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('ExchangeWinLoss')} - ${viewInTypeText}, ${fromDate} - ${toDate}, ${viewInByCurrency}${usernameText}`;
   }
   static showErrorMsg() {
@@ -5867,7 +6119,7 @@ const gridData = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["defa
 /*!************************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/exchangewl/reducers/filterHandlerReducer.js ***!
   \************************************************************************************/
-/*! exports provided: reportByOption, selectedReportBy, viewInOption, selectedViewInOption, params, licenseeId, isAllowedCustomerComm */
+/*! exports provided: reportByOption, selectedReportBy, viewInOption, selectedViewInOption, params, licenseeId, isAllowedCustomerComm, isViewResettledTicketOnly */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5879,6 +6131,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "params", function() { return params; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "licenseeId", function() { return licenseeId; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isAllowedCustomerComm", function() { return isAllowedCustomerComm; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isViewResettledTicketOnly", function() { return isViewResettledTicketOnly; });
 /* harmony import */ var _lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
 /* harmony import */ var _actions_types_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/types.js */ "./www/js/source/reactpages/pages/exchangewl/actions/types.js");
 
@@ -5918,6 +6171,11 @@ const isAllowedCustomerComm = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MOD
     return action.data;
   }
 });
+const isViewResettledTicketOnly = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])({}, {
+  [_actions_types_js__WEBPACK_IMPORTED_MODULE_1__["CHANGE_ISVIEW_RESETTLED_TICKET_ONLY"]](state, action) {
+    return action.data;
+  }
+});
 
 /***/ }),
 
@@ -5939,6 +6197,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _reducers_dateRangeReducer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../reducers/dateRangeReducer */ "./www/js/source/reactpages/reducers/dateRangeReducer.js");
 /* harmony import */ var _reducers_subsidiaryReducer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../reducers/subsidiaryReducer */ "./www/js/source/reactpages/reducers/subsidiaryReducer.js");
 /* harmony import */ var _jsroot_reducers_usernameReducer__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @jsroot/reducers/usernameReducer */ "./www/js/source/reactpages/reducers/usernameReducer.js");
+/* harmony import */ var _jsroot_reducers_userGuideReducer__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @jsroot/reducers/userGuideReducer */ "./www/js/source/reactpages/reducers/userGuideReducer.js");
 
 
 
@@ -5948,7 +6207,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(Object.assign(_dataHandlerReducer_js__WEBPACK_IMPORTED_MODULE_1__, _filterHandlerReducer_js__WEBPACK_IMPORTED_MODULE_2__, _reducers_currencyReducer__WEBPACK_IMPORTED_MODULE_3__, _reducers_loaderReducer__WEBPACK_IMPORTED_MODULE_4__, _reducers_excludeTestReducer__WEBPACK_IMPORTED_MODULE_5__, _reducers_dateRangeReducer__WEBPACK_IMPORTED_MODULE_6__, _reducers_subsidiaryReducer__WEBPACK_IMPORTED_MODULE_7__, _jsroot_reducers_usernameReducer__WEBPACK_IMPORTED_MODULE_8__)));
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(Object.assign(_dataHandlerReducer_js__WEBPACK_IMPORTED_MODULE_1__, _filterHandlerReducer_js__WEBPACK_IMPORTED_MODULE_2__, _reducers_currencyReducer__WEBPACK_IMPORTED_MODULE_3__, _reducers_loaderReducer__WEBPACK_IMPORTED_MODULE_4__, _reducers_excludeTestReducer__WEBPACK_IMPORTED_MODULE_5__, _reducers_dateRangeReducer__WEBPACK_IMPORTED_MODULE_6__, _reducers_subsidiaryReducer__WEBPACK_IMPORTED_MODULE_7__, _jsroot_reducers_usernameReducer__WEBPACK_IMPORTED_MODULE_8__, _jsroot_reducers_userGuideReducer__WEBPACK_IMPORTED_MODULE_9__)));
 
 /***/ }),
 
@@ -6062,6 +6322,28 @@ const selectedSubsidiary = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE
 });
 const subsidiarySearch = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(false, {
   [_actions_types__WEBPACK_IMPORTED_MODULE_1__["SET_SUBSIDIARY_SEARCH"]](prevState, action) {
+    return action.data;
+  }
+});
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/reducers/userGuideReducer.js":
+/*!***************************************************************!*\
+  !*** ./www/js/source/reactpages/reducers/userGuideReducer.js ***!
+  \***************************************************************/
+/*! exports provided: userGuideContent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "userGuideContent", function() { return userGuideContent; });
+/* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./www/js/source/reactpages/actions/types.js");
+/* harmony import */ var _lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
+
+
+const userGuideContent = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, {
+  [_actions_types__WEBPACK_IMPORTED_MODULE_0__["USER_GUIDE_CONTENT"]](state, action) {
     return action.data;
   }
 });

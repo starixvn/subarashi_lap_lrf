@@ -1,4 +1,5 @@
-﻿@{
+﻿@using Fanex.Athena.Model.Core.DataDomain
+@{
     ViewBag.Title = "LAP - " + ViewResources.Report +
     " - " + "Betting Tickets Center - Exchange";
     Layout = "~/Views/Desktop/Shared/_ReactPageLayout.cshtml";
@@ -12,6 +13,7 @@
 
 @if (hasPermission)
 {
+    var selectedTimeZone = SystemConstants.TimeZoneList.First().Key;
     var today = DateTime.Now.Date;
     var minDate = today.AddMonths(-1);
 
@@ -30,11 +32,13 @@
         selectedDate: '@today.ToString("MM/dd/yyyy")'
         },
         dateConstraint: {minDate: '@minDate.ToString("MM/dd/yyyy")', maxDate: '@today.AddDays(2).ToString("MM/dd/yyyy")'},
-        isLoading: false
+        isLoading: false,
+        selectedTimeZone: @selectedTimeZone
         };
 
         window._AppData = {
-        tabList: @Html.Raw((ViewBag.TabList as IEnumerable<string>).ToJson())
+        tabList: @Html.Raw((ViewBag.TabList as IEnumerable<string>).ToJson()),
+        timeZoneList: @Html.Raw(SystemConstants.TimeZoneList.Select(x => new { value = x.Key, label = x.Value }).ToJson())
         };
     }
     <div id="app-container"></div>

@@ -1,5 +1,9 @@
 ﻿namespace Fanex.Athena.Api.Customer
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using System.Web.Http;
+    using System.Web.Http.Results;
     using Fanex.Athena.Api.Base;
     using Fanex.Athena.Api.Base.Attributes;
     using Fanex.Athena.DataAccess.Core.Common.Interfaces;
@@ -8,13 +12,8 @@
     using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Athena.Service.Core.Common.Interfaces;
-    using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.Customer.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using System.Web.Http;
-    using System.Web.Http.Results;
 
     [ApiFunctionAuthorization(PermissionKeys.PlayerSegmentation)]
     public partial class PlayerSegmentationController : BaseApiController
@@ -31,8 +30,6 @@
         private readonly IBetListApiClient _betListApiClient;
         private readonly IProductDataAccess _productDataAccess;
         private readonly IAppSettings _appSettings;
-
-        public ISessionService SessionServiceInstance { get; set; }
 
         public PlayerSegmentationController(ILanguageService languageService,
             IAuthorizationService authService,
@@ -57,8 +54,8 @@
         public async Task<JsonResult<IEnumerable<UpdateStatusPlayerResult>>> UpdateVipStatus(UpdateStatusPlayerMetaModel metaModel)
         {
             metaModel.IsUseCtsApi = _appSettings.IsUseCtsApi;
-            metaModel.SiteName = SessionServiceInstance.LicenseeSession.LicenseeName;
-            metaModel.LicenseeCustId = SessionServiceInstance.LicenseeSession.LicenseeId;
+            metaModel.SiteName = SessionService.LicenseeSession.LicenseeName;
+            metaModel.LicenseeCustId = SessionService.LicenseeSession.LicenseeId;
             var result = await _playerService.UpdateVipStatusAsync(metaModel).ConfigureAwait(false);
             return JsonApi(result);
         }

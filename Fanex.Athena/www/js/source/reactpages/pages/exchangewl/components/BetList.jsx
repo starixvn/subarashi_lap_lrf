@@ -174,10 +174,10 @@ export class BetList extends Component {
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({ toggleLoader }, dispatch);
-};
+}
 
 function mapStateToProps(state) {
     return {};
-};
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(BetList);

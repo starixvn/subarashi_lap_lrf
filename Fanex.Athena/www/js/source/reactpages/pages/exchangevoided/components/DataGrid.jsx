@@ -8,6 +8,7 @@ import { Table } from '@9softstudio/react-grid';
 import ReportTitle from '@jsroot/components/ReportTitle';
 import LangHelper from '@jsroot/lib/langHelper';
 import SimplePagination from '@jsroot/components/SimplePagination';
+import AppData from '@jsroot/lib/AppData';
 
 const DataGrid = (props) => {
     const isFirstRun = useRef(true);
@@ -48,7 +49,8 @@ const DataGrid = (props) => {
 
     const { requestParam } = props;
 
-    const reportTitle = `${LangHelper.getSingleResource('BettingTicketCenter')}, ${requestParam.selectedDate}`;
+    const timezone = AppData.timeZoneList.find(x => x.value === props.selectedTimeZone).label;
+    const reportTitle = `${LangHelper.getSingleResource('BettingTicketCenter')}, ${timezone}, ${requestParam.selectedDate}`;
 
     const {pageIndex, totalPage} = pagingOption;
 
@@ -70,11 +72,11 @@ const DataGrid = (props) => {
 function mapDispatchToProps(dispatch) {
     const { setRequestParam, getData } = ActionCreators;
     return bindActionCreators({ setRequestParam, getData }, dispatch);
-};
+}
 
 function mapStateToProps(state) {
-    const { gridData, requestParam } = state;
-    return Object.assign({}, { gridData, requestParam });
-};
+    const { gridData, requestParam, selectedTimeZone } = state;
+    return Object.assign({}, { gridData, requestParam, selectedTimeZone});
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(DataGrid);

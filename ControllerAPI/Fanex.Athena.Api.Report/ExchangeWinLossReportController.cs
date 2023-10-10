@@ -4,21 +4,15 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Http;
-
     using Base.Attributes;
-
     using DataAccess.Report.Interfaces;
-
     using Extension.Helper;
     using Fanex.Athena.Model.Auth.DataDomain;
-    using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Utility;
     using Model.Core.DataDomain;
     using Model.Core.ResultModel;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
-
     using Service.Core.Common.Interfaces;
 
     [ApiFunctionAuthorization(PermissionKeys.ReportExchangeWinLoss)]
@@ -26,15 +20,18 @@
     {
         private readonly IReportSettingService _reportSettingService;
         private readonly IExchangeWinLossDataAccess _dataAccess;
+        private readonly ILGAPIClient _lgClient;
 
         public ExchangeWinLossReportController(
             ILanguageService langService,
             IReportSettingService reportSettingService,
-            IExchangeWinLossDataAccess dataAccess)
+            IExchangeWinLossDataAccess dataAccess,
+            ILGAPIClient lgClient)
             : base(langService)
         {
             _reportSettingService = reportSettingService;
             _dataAccess = dataAccess;
+            _lgClient = lgClient;
         }
 
         [HttpPost]
@@ -65,6 +62,15 @@
                 TotalDataList = Enumerable.Empty<ExchangeWinLoss>(),
                 SummaryTotal = new Dictionary<string, ExchangeWinLoss>()
             };
+        }
+
+        [HttpGet]
+        public async Task<bool> IsUnderMaintenance()
+        {
+            const string apiPath = "/Exchange/IsUnderMaintenance";
+            const string langCode = "en";
+
+            return await _lgClient.PostAsync<bool>(apiPath, null, langCode).ConfigureAwait(false);
         }
 
         private bool IsValidParams(ExchangeWinLossMetaModel metaModel)

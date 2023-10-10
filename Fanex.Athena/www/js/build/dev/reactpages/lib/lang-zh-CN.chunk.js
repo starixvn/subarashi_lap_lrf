@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 9/26/2023 2:31:07 PM
+// Generated at: 10/10/2023 1:13:30 PM
 window._language_zh_CN = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -198,6 +198,9 @@ window._language_zh_CN = {
   BettingTicketCenter: "注单中心",
   BettingTicketCenter_AdvancedSearchTabNote1: "全部联赛与全部赛事仅支援单日搜寻",
   BettingTicketCenter_AdvancedSearchTabNote2: "仅支援{0}以后的注单",
+  BettingTicketCenter_Exchange_Note_1: "支援仅搜寻被取消注单。",
+  BettingTicketCenter_Exchange_Note_2: "输入玩家名可更快返回结果。",
+  BettingTicketCenter_Exchange_Note_3: "仅支援一个月内的数据。",
   BettingTicketCenter_RefnoTabNote_TxIDSearch: "系统支持从 {0} 开始搜索 LicTxID",
   BettingTicketCenter_RefnoTabNote1: "在体育的搜寻结果将包含相关的红利与现金注单",
   BettingTicketCenter_RefnoTabNote2: "{0}: 请提供用户名以便查询{1}之后的注单",
@@ -388,6 +391,7 @@ window._language_zh_CN = {
   Euro: "欧洲版",
   Event: "项目",
   EventDate: "赛事日期",
+  ExchangeUnderMaintenanceMsg: "Exchange服务目前维护中，报表数据在这段时间内有可能延迟。&lt;br&gt;对于您的不便深感抱歉。",
   ExchangeWinLoss: "Exchange输赢",
   ExcludeTestData: "排除测试数据",
   ExistingInMonitoredPlayerList: "该玩家已存在于名单中。请再检查一次！",
@@ -731,6 +735,7 @@ window._language_zh_CN = {
   Player: "玩家",
   PlayerAdministration: "玩家管理",
   PlayerAdminUpdateFailedMsg: "请重试一次!",
+  PlayerBetList: "玩家注单",
   PlayerBettingStatisticsTitle: "玩家投注统计(本月至今)",
   PlayerComm: "玩家佣金",
   PlayerSegmentation: "玩家分类",
@@ -804,6 +809,7 @@ window._language_zh_CN = {
   ResetPassword: "重设密码",
   ResetPasswordSuccessMsg: "重置密码成功!",
   Resettled: "重新结算",
+  ResettledReport: "重新结算报表",
   Result: "赛果",
   ResultPending: "赛果待定",
   Results: "赛果",
@@ -1003,6 +1009,8 @@ window._language_zh_CN = {
   ViewinSummary: "查看摘要",
   ViewInWithNoParam: "查看",
   ViewNotification: "查看通知",
+  ViewResettledTicketOnly: "仅查看已重新结算注单数据",
+  ViewResettledTicketOnlyNote: "&apos;&apos;仅查看已重新结算注单数据&apos;&apos; 可查询2023年9月1日后数据。",
   VIP: "VIP玩家",
   VIP2: "VIP",
   VIPPlayer: "VIP玩家",

@@ -82,9 +82,6 @@
 		<Setting Key="Lrf_Rpt_ExchangeWinloss" SpName="Lrf_Rpt_ExchangeWinloss" DbName="DBEXT.bodb02.bodbLicenseeNet" />
 		<Setting Key="Lrf_Rpt_ExchangeWinloss_Ag" SpName="Lrf_Rpt_ExchangeWinloss_Ag" DbName="DBEXT.bodb02.bodbLicenseeNet" />
 		<Setting Key="Lrf_Rpt_ExchangeWinloss_Mem" SpName="Lrf_Rpt_ExchangeWinloss_Mem" DbName="DBEXT.bodb02.bodbLicenseeNet" />
-		<Setting Key="Lrf_Rpt_ExchangeWinloss_ByResettledDate" SpName="Lrf_Rpt_ExchangeWinloss_ByResettledDate" DbName="DBEXT.bodb02.bodbLicenseeNet" />
-		<Setting Key="Lrf_Rpt_ExchangeWinloss_ByResettledDate_Ag" SpName="Lrf_Rpt_ExchangeWinloss_ByResettledDate_Ag" DbName="DBEXT.bodb02.bodbLicenseeNet" />
-		<Setting Key="Lrf_Rpt_ExchangeWinloss_ByResettledDate_Mem" SpName="Lrf_Rpt_ExchangeWinloss_ByResettledDate_Mem" DbName="DBEXT.bodb02.bodbLicenseeNet" />
 		<Setting Key="Lrf_Rpt_CasinoTurnover" SpName="Lrf_Rpt_CasinoTurnover" DbName="DBEXT.bodb02.bodbLicenseeNet" />
 	</Function>
 
@@ -200,4 +197,3 @@
 		<Setting Key="SiteDB_Lrf_LeagueSelRunning" SpName="Lrf_LeagueSelRunning" DbName="DBSID.bodb02.bodbLicenseeNet"></Setting>
 	</SiteDB>
 </Functions>
-		
