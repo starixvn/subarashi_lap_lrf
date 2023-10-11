@@ -1,7 +1,7 @@
 ﻿export const ReportLevel = {
     MAIN: 0,
     LICENSEE: 1,
-    PLAYER: 2
+    CUSTOMER: 2
 }
 
 export const ReportBy = {
