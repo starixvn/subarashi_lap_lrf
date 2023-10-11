@@ -1334,7 +1334,7 @@ __webpack_require__.r(__webpack_exports__);
 const ReportLevel = {
   MAIN: 0,
   LICENSEE: 1,
-  PLAYER: 2
+  CUSTOMER: 2
 };
 const ReportBy = {
   DAILY: 1,

@@ -3245,7 +3245,7 @@ __webpack_require__.r(__webpack_exports__);
 const ReportLevel = {
   MAIN: 0,
   LICENSEE: 1,
-  PLAYER: 2
+  CUSTOMER: 2
 };
 const ReportBy = {
   DAILY: 1,
@@ -4441,7 +4441,7 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         CurrencyName,
         DateOptionType,
         IsViewResettledTicketOnly
-      } = this.drillDownParams[_constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].PLAYER];
+      } = this.drillDownParams[_constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].CUSTOMER];
       const url = "api/ExchangeWinLossBetList/Index";
       this.betlistParams = {
         CustId: custId,
@@ -4503,7 +4503,7 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         return 2;
       case _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].LICENSEE:
         return 2;
-      case _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].PLAYER:
+      case _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].CUSTOMER:
         return 3;
       default:
         return 2;
@@ -4530,7 +4530,7 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   }
   _drillDownData(level, date, currencyId, currencyName, custId) {
     const currentLevel = this.props.gridData.level;
-    if (currentLevel === level || level < _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].MAIN || level > _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].PLAYER) {
+    if (currentLevel === level || level < _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].MAIN || level > _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].CUSTOMER) {
       return;
     }
     if (level > currentLevel) {
@@ -4577,7 +4577,7 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       colWidth: 100,
       title: reportBy === _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportBy"].DAILY ? _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].date : _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].month,
       rowSpan: "2"
-    }, reportBy === _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportBy"].DAILY ? _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].date : _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].month), level === _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].PLAYER && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
+    }, reportBy === _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportBy"].DAILY ? _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].date : _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].month), level === _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].CUSTOMER && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
       colWidth: 100,
       title: _lib_service__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].externalId,
       rowSpan: "2"
@@ -4672,16 +4672,16 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       }, i + 1), level === _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].MAIN && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
         title: date,
         className: "center-align"
-      }, date), level === _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].PLAYER && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+      }, date), level === _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].CUSTOMER && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
         title: item.ExternalId,
         className: "left-align"
       }, this._renderBetListLink(item.ExternalId, item.ExternalId, item.SystemId, item.CustId)), level !== _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].MAIN && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
         title: item.SystemId,
         className: "left-align"
-      }, level === _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].LICENSEE ? this._renderDrillDownLink(item.SystemId, _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].PLAYER, item.Date, item.CurrencyId, item.CurrencyName, item.CustId) : this._renderBetListLink(item.SystemId, item.ExternalId, item.SystemId, item.CustId)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+      }, level === _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].LICENSEE ? this._renderDrillDownLink(item.SystemId, _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].CUSTOMER, item.Date, item.CurrencyId, item.CurrencyName, item.CustId) : this._renderBetListLink(item.SystemId, item.ExternalId, item.SystemId, item.CustId)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
         title: item.CurrencyName,
         className: "center-align"
-      }, level === _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].MAIN ? this._renderDrillDownLink(item.CurrencyName, this.licenseeId === _constants_licensee__WEBPACK_IMPORTED_MODULE_9__["Licensee"].ONE_TWO_BET ? _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].LICENSEE : _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].PLAYER, item.Date, item.CurrencyId, item.CurrencyName) : item.CurrencyName), this._buildCell(item)));
+      }, level === _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].MAIN ? this._renderDrillDownLink(item.CurrencyName, this.licenseeId === _constants_licensee__WEBPACK_IMPORTED_MODULE_9__["Licensee"].ONE_TWO_BET ? _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].LICENSEE : _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].CUSTOMER, item.Date, item.CurrencyId, item.CurrencyName) : item.CurrencyName), this._buildCell(item)));
     }
     return rows;
   }
@@ -4788,7 +4788,7 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     }
     items.push({
       label: _lib_service__WEBPACK_IMPORTED_MODULE_7__["BreadcrumbText"].player,
-      value: _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].PLAYER
+      value: _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].CUSTOMER
     });
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_breadcrumb__WEBPACK_IMPORTED_MODULE_12__["Breadcrumb"], {
       items: items,
@@ -4839,7 +4839,7 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       header: this._buildHeader(reportLevel, reportBy),
       body: this._buildBody(reportLevel, reportBy),
       footer: this._buildFooter(reportLevel)
-    }), reportLevel === _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].PLAYER && showBetList && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_popup__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    }), reportLevel === _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].CUSTOMER && showBetList && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_popup__WEBPACK_IMPORTED_MODULE_15__["default"], {
       isShow: showBetList,
       title: PLAYER_BET_LIST_TEXT,
       width: 1000,
