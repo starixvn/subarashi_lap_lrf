@@ -13783,7 +13783,7 @@ __webpack_require__.r(__webpack_exports__);
 const ReportLevel = {
   MAIN: 0,
   LICENSEE: 1,
-  PLAYER: 2
+  CUSTOMER: 2
 };
 const ReportBy = {
   DAILY: 1,
@@ -16443,4 +16443,4 @@ const username = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["defa
 /***/ })
 
 }]);
-//# sourceMappingURL=vipPlayerManagement.8a1acdcfcd4cc9ccb503.chunk.js.map
+//# sourceMappingURL=vipPlayerManagement.70de6f1845576c8155dd.chunk.js.map
