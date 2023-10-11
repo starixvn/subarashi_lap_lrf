@@ -36,7 +36,7 @@ export const BaseMobileDataGrid = (props) => {
     
     useEffect(() => {
         const style = `bottom: ${pagerSize.height - 1}px`;
-         ref.current?.getElementsByClassName('footer-content')[0].setAttribute('style', style);
+        ref.current?.getElementsByClassName('footer-content')[0]?.setAttribute('style', style);
     }, [pagerSize?.height, id])
 
     const { toggleLoader, getGridData, setRequestParam } = ActionCreators;
@@ -90,13 +90,14 @@ export const BaseMobileDataGrid = (props) => {
             <ReportTitle content={reportTitle} />
             <Table key={id}
                 autoWidth={true}
-                autoHeight={false}
+                autoHeight={false}               
                 header={header}
                 body={body}
                 footer={footer}
                 isPaging={false}
                 pageOption={pageOption}
                 shouldResetScrollPosition={reloadReport}
+                containerPadding={-10}
                 bodyHeight="100%" />
             {isPaging && <RefPager ref={pagerRef} onPaging={onPaging} pageOption={pageOption} isShowPagingInfo={isShowPagingInfo}/>}            
         </div>

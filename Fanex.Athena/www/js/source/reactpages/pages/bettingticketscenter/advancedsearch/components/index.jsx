@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import AppContainer from './AppContainer.jsx'
 import { Provider } from 'react-redux'
 import reducer from '../reducers/index.js'
-import Store from '../../../../lib/store'
+import Store from '@jsroot/lib/store'
 import { DefaultPageSize } from '../../common/lib/constants'
 
 const defaultState = Object.assign({}, window.initialState, { userGuideContent: '', requestParam: { PageSize: DefaultPageSize } });

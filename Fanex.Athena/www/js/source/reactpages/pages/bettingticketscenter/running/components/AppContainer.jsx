@@ -21,17 +21,15 @@ export const AppContainer = () => {
         <>
             <Loader isLoading={isLoading} />
             <MobileFormFilter />
-            <MobileGrid/>
+            <MobileGrid />
         </>
     );
-    const layout = isUseMobileVer ? mobileLayout :destopLayout
+    const layout = isUseMobileVer ? mobileLayout : destopLayout
     const className = isUseMobileVer ? "mobile-container" : "";
     return (
-        <div className={className}>
-            <PageLayout selectedTabIndex="2">
-                {layout}
-            </PageLayout>
-        </div>
+        <PageLayout className={className} selectedTabIndex="2">
+            {layout}
+        </PageLayout>
     );
 }
 

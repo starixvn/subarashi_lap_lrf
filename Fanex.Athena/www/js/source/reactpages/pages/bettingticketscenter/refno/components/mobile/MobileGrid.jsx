@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import CompositeRow from '../../../../../components/mobile-component/CompositeRow';
 import Service from '../../../common/lib/Service';
 import MobileBetlistContent from '../../../common/components/MobileBetlistContent';
-import MobileWinLossCellContent from './MobileWinLossCellContent';
+import MobileWinLossCellContent from '../../../common/components/MobileWinLossCellContent';
 import { Cell } from '@9softstudio/react-grid';
 import { useMemo } from 'react';
 

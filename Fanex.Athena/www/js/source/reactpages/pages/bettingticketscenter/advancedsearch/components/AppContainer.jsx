@@ -1,7 +1,7 @@
 ﻿import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import DataGrid from './DataGrid'
-import FormFilter from './FormFilter'
+import DataGrid from './desktop/DataGrid'
+import FormFilter from './desktop/FormFilter'
 import PageLayout from '../../common/components/PageLayout'
 import Loader from '@jsroot/components/Loader';
 

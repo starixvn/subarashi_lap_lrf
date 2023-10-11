@@ -11,17 +11,16 @@ import CheckBox from '@jsroot/components/CheckBox'
 import CollapsiblePanel from '@jsroot/components/collapsible-panel'
 import UserGuide from '@jsroot/components/UserGuide'
 
-import { ActionCreators } from '../actions/index.js'
+import { ActionCreators } from '../../actions/index.js'
 import LangHelper from '@jsroot/lib/langHelper'
 import Site from '@jsroot/lib/site'
 import AppData from '@jsroot/lib/AppData'
 
 import DataService from '@jsroot/lib/DataService.js'
-import Service from '../../common/lib/Service'
-import { ApiUrl } from '../../common/lib/constants'
+import Service from '../../../common/lib/Service.js'
+import { ApiUrl } from '../../../common/lib/constants.js'
 import { validateBaseCurrency } from '@jsroot/lib/validationHelper'
-
-import { SubsidiaryViewType, TreeViewOption } from '../../../../constants/report'
+import { SubsidiaryViewType, TreeViewOption } from '@jsroot/constants/report'
 import MultipleSelect, { TreeViewSelect } from '@legion-lib/react-multiselect'
 
 const ToastMsg = () => (

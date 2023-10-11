@@ -26,8 +26,9 @@ export const AppContainer = () => {
         </>
     );
     var layout = isUseMobileVer ? mobileLayout :destopLayout
+    const className = isUseMobileVer ? "mobile-container" : "";
     return (
-        <PageLayout selectedTabIndex="1">
+        <PageLayout className={className} selectedTabIndex="1">
             {layout}
         </PageLayout>
     );

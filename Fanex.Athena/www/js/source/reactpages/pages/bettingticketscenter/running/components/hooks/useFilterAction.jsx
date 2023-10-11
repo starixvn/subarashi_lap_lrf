@@ -3,7 +3,7 @@ import LangHelper from '@jsroot/lib/langHelper'
 import Site from '@jsroot/lib/site'
 import AppData from '@jsroot/lib/AppData'
 import DataService from '@jsroot/lib/DataService.js'
-import useBaseCurrencyList from '@jsroot/customHooks/useBaseCurrencyList'
+import useBaseCurrencyForMultiSelectCurrency from '@jsroot/customHooks/useBaseCurrencyForMultiSelectCurrency'
 import { ApiUrl } from '../../../common/lib/constants'
 import Service from '../../../common/lib/Service'
 import { useValidParam } from './useValidParam.jsx'
@@ -15,8 +15,8 @@ export const useFilterAction = () => {
     const dispatch = useDispatch();
     const {requestParam, username, isConvertAll, selectedBaseCurrency, selectedProduct, selectedCurrency, selectedStatus, selectedSubsidiary} = useSelector( state => state, shallowEqual);
     const {isSubsidiarySearch} = useSubsidiarySearch();
-    const baseCurrencyList = useBaseCurrencyList();
-    const {setReportTitle, setRequestParam, toggleLoader, getGridData} = ActionCreators;
+    const { baseCurrencyList } = useBaseCurrencyForMultiSelectCurrency(selectedBaseCurrency);
+    const { setReportTitle, setRequestParam, toggleLoader, getGridData} = ActionCreators;
 
     const _getParams = () => {
         if (!isValidModel) {

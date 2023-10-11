@@ -11,10 +11,10 @@ import AppData from '@jsroot/lib/AppData';
 
 export const PageLayout = (props) => {
     const dispatch = useDispatch();
-    const {toggleLoader} = ActionCreators;
+    const { toggleLoader } = ActionCreators;
     const [isConvertAll, selectedBaseCurrency, hasExchange] = useSelector(state => [state.isConvertAll, state.selectedBaseCurrency, state.hasExchange])
     const { selectedTabIndex, children } = props;
-    
+
     const getResource = (key) => {
         return LangHelper.getSingleResource(key);
     }
@@ -38,33 +38,36 @@ export const PageLayout = (props) => {
     const activedTabList = tabList.filter(x => AppData.tabList.includes(x.key));
 
     return (
-        <AppLayout className={props.className}>
-            <BetListLayout
-                pageName='BTC'
-                rootUrl={Site.getRootUrl()}
-                getResourceFunc={getResource}
-                formatDateStringFunc={formatDateString}
-                baseCurrency={isConvertAll ? selectedBaseCurrency : ''}
-                beforeShowFunc={beforeShow}
-                afterShowFunc={afterShow}
-            >
-                <Tabs>
-                    {
-                        activedTabList.map(item => 
-                            <Tab key={item.url} isActive={selectedTabIndex == item.displayOrder} label={item.label} url={item.url} />)
-                    }
-                    {
-                        hasExchange && 
-                        <Tab key={Site.resolveClientUrl("ExchangeVoided")} isActive={selectedTabIndex == 4} label={LangHelper.getSingleResource("Exchange")}
-                            url={Site.resolveClientUrl("ExchangeVoided")}>
-                        </Tab>
-                    }
-                </Tabs>
-                <div>
-                    {children}
-                </div>
-            </BetListLayout>
-        </AppLayout>
+        <div className={props.className}>
+            <AppLayout >
+                <BetListLayout
+                    pageName='BTC'
+                    rootUrl={Site.getRootUrl()}
+                    getResourceFunc={getResource}
+                    formatDateStringFunc={formatDateString}
+                    baseCurrency={isConvertAll ? selectedBaseCurrency : ''}
+                    beforeShowFunc={beforeShow}
+                    afterShowFunc={afterShow}
+                >
+                    <Tabs>
+                        {
+                            activedTabList.map(item =>
+                                <Tab key={item.url} isActive={selectedTabIndex == item.displayOrder} label={item.label} url={item.url} />)
+                        }
+                        {
+                            hasExchange &&
+                            <Tab key={Site.resolveClientUrl("ExchangeVoided")} isActive={selectedTabIndex == 4} label={LangHelper.getSingleResource("Exchange")}
+                                url={Site.resolveClientUrl("ExchangeVoided")}>
+                            </Tab>
+                        }
+                    </Tabs>
+                    <div>
+                        {children}
+                    </div>
+                </BetListLayout>
+            </AppLayout>
+        </div>
+
     );
 }
 

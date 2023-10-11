@@ -1,16 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {  useDispatch, useSelector } from 'react-redux'
 import { ActionCreators } from '../../actions/index.js'
 import LangHelper from '@jsroot/lib/langHelper'
-import useBaseCurrencyList from '@jsroot/customHooks/useBaseCurrencyList'
+import useBaseCurrencyForMultiSelectCurrency from '@jsroot/customHooks/useBaseCurrencyForMultiSelectCurrency'
 import Select from 'react-select'
 
 
 export const BaseCurrencyFilter = () => {
+    const selectedBaseCurrency = useSelector(state => state.selectedBaseCurrency);
     const dispatch = useDispatch();
     const {setSelectedBaseCurrency} = ActionCreators;
-    const baseCurrencyList = useBaseCurrencyList();
-    const selectedBaseCurrency = useSelector(state => state.selectedBaseCurrency);
+    const { baseCurrencyList,  selectedBaseCurrency: newBaseCurrency  } = useBaseCurrencyForMultiSelectCurrency(selectedBaseCurrency);
+
+    useEffect(() => {
+        dispatch(setSelectedBaseCurrency(newBaseCurrency))
+    }, [newBaseCurrency])
 
     const _renderBaseCurrencySelectList = () => {
         return baseCurrencyList && baseCurrencyList.length && (

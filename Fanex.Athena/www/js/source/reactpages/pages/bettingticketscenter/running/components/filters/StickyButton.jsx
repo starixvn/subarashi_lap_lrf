@@ -6,7 +6,7 @@ import UserGuide from '@jsroot/components/UserGuide'
 import useFilterAction from '../hooks/useFilterAction.jsx'
 
 const StickyButton = () => {
-    const {exportExcel} = useFilterAction
+    const {exportExcel} = useFilterAction();
     const userGuideContent = useSelector(state => state.userGuideContent);
     const dispatch = useDispatch();
     const {getUserGuideContent} = ActionCreators;

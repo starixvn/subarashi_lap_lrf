@@ -409,6 +409,13 @@
     scroll-behavior: smooth;
     display: flex;
     overflow-y: auto;
+    #container{
+        padding-left: 4px;
+        padding-right: 4px;
+    }
+    .Select-menu-outer, .rdr-DateRange{
+        z-index: 11;
+    }
 }
 
 .mobile-betlist-container{

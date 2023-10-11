@@ -1,5 +1,5 @@
 
-import React, { useId } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { useState } from 'react';
@@ -15,7 +15,6 @@ const CompositeRow = (props) => {
     const [childFocusTracker, setChildFocusTracker] = useState(expandRows.map(() => false));   
     const hoverRef = useRef(null);
     const isHover = useHover(hoverRef);
-    const id = useId();
 
     const onClick = () => {
         setIsCollapse(!isCollapse);
@@ -34,7 +33,7 @@ const CompositeRow = (props) => {
                 {isCollapsible && <Cell onClick={onClick} className="center-align"><span className={iconClass}></span></Cell>}           
         </RefRow>
         { isCollapsible && !isCollapse && expandRows && expandRows.map((item, index) =>
-            (<CollapseRow key={`${id}-${index}`} className="collapse-row" index={index} onFocus={onChildFocus} isFocus={isFocus}>{item}</CollapseRow>)
+            (<CollapseRow key={`${index}`} className="collapse-row" index={index} onFocus={onChildFocus} isFocus={isFocus}>{item}</CollapseRow>)
         )}
     </>
 } 
