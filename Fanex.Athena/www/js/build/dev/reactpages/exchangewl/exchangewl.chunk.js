@@ -5699,7 +5699,7 @@ class ReportExcel {
         isShow: false
       }
     }, {
-      field: 'PlayerWL',
+      field: 'CustomerWL',
       type: 'n',
       [HEADER_SECTION]: {
         title: 'playerWL',
@@ -5721,7 +5721,7 @@ class ReportExcel {
         style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["grandTotalCellStyle"].decimal
       }
     }, {
-      field: 'PlayerComm',
+      field: 'CustomerComm',
       type: 'n',
       [HEADER_SECTION]: {
         title: 'playerComm',
@@ -5741,7 +5741,7 @@ class ReportExcel {
         style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["grandTotalCellStyle"].decimal
       }
     }, {
-      field: 'PlayerWLTotal',
+      field: 'CustomerWLTotal',
       type: 'n',
       [HEADER_SECTION]: {
         title: 'total',
