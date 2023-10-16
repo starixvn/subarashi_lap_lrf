@@ -10,6 +10,8 @@
 
         Task<HttpResponseMessage> HandleRequest(string apiKey, string apiUrl);
 
+        Task<HttpResponseMessage> HandleStaticResourcesRequest(string apiKey, string apiUrl);
+
         Task<HttpResponseMessage> HealthCheck(string apiKey);
     }
 }

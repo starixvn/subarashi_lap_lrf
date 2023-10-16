@@ -24,6 +24,7 @@
             apiRoute.RouteHandler = new ReadonlySessionRouteHandler();
 
             routes.RegisterProxyRoutes();
+            routes.RegisterReportProxyRoutes();
 
             routes.MapRoute(
                 "Default",
@@ -43,6 +44,27 @@
                    routeTemplate: "Proxy/{apiKey}/{apiUrl}",
                    new { Controller = "Proxy", Action = "Forward" });
             apiProxyRoute.RouteHandler = new ReadonlySessionRouteHandler();
+
+            var staticResourcesProxyRoute = routes.MapHttpRoute(
+                   name: "staticResourcesProxyRoute",
+                   routeTemplate: "Static/{resourceKey}/{*url}",
+                   new { Controller = "Proxy", Action = "StaticResource" });
+            staticResourcesProxyRoute.RouteHandler = new ReadonlySessionRouteHandler();
+        }
+
+        private static void RegisterReportProxyRoutes(this RouteCollection routes)
+        {
+            var settledMatchCountReportRoute = routes.MapHttpRoute(
+                   name: "settledMatchCountReportRoute",
+                   routeTemplate: "SettledMatchCountReport/{*url}",
+                   new { Controller = "Proxy", Action = "ReportViews", report = "SettledMatchCount", url = "Index" });
+            settledMatchCountReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
+
+            var weeklyLiveMatchReportRoute = routes.MapHttpRoute(
+                   name: "weeklyLiveMatchReportRoute",
+                   routeTemplate: "WeeklyLiveMatchReport/{*url}",
+                   new { Controller = "Proxy", Action = "ReportViews", report = "WeeklyLiveMatch", url = "Index" });
+            weeklyLiveMatchReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
         }
     }
 }

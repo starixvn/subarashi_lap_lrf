@@ -27,9 +27,27 @@
 
         [CLSCompliant(false)]
         [AcceptVerbs("Get", "Post")]
-        [ApiValidateAntiForgery]
+        //[ApiValidateAntiForgery]
         public async Task<HttpResponseMessage> Forward([FromUri] string apiKey, [FromUri] string apiUrl)
         {
+            var result = await _proxyService.HandleRequest(apiKey, apiUrl).ConfigureAwait(false);
+            return result;
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<HttpResponseMessage> StaticResource([FromUri] string resourceKey, [FromUri] string url)
+        {
+            var result = await _proxyService.HandleStaticResourcesRequest(resourceKey, url).ConfigureAwait(false);
+            return result;
+        }
+
+        [CLSCompliant(false)]
+        [AcceptVerbs("Get")]
+        public async Task<HttpResponseMessage> ReportViews([FromUri] string report, [FromUri] string url)
+        {
+            const string apiKey = "Report";
+            var apiUrl = $"{report}_{url}";
             var result = await _proxyService.HandleRequest(apiKey, apiUrl).ConfigureAwait(false);
             return result;
         }
