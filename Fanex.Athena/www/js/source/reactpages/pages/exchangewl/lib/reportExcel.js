@@ -129,21 +129,21 @@ export default class ReportExcel {
             [TOTAL_SECTION]: { isShow : false },
             [SUMMARYTOTAL_SECTION]: { isShow : false }
         }, {
-            field: 'PlayerWL',
+            field: 'CustomerWL',
             type: 'n',
             [HEADER_SECTION]: { title: 'playerWL', isShow: isAllowedCustomerComm, index_c: level === ReportLevel.PLAYER ? 7 : 6, index_r: HEADER_ROW_INDEX + 1 },
             [MAIN_SECTION]: { isShow : true, style: bodyCellStyle.decimal, width: 150 },
             [TOTAL_SECTION]: { isShow : true, style: totalCellStyle.decimal },
             [SUMMARYTOTAL_SECTION]: { isShow : true, style: grandTotalCellStyle.decimal }
         }, {
-            field: 'PlayerComm',
+            field: 'CustomerComm',
             type: 'n',
             [HEADER_SECTION]: { title: 'playerComm', isShow: isAllowedCustomerComm },
             [MAIN_SECTION]: { isShow : isAllowedCustomerComm, style: bodyCellStyle.decimal, width: 150 },
             [TOTAL_SECTION]: { isShow : isAllowedCustomerComm, style: totalCellStyle.decimal },
             [SUMMARYTOTAL_SECTION]: { isShow : isAllowedCustomerComm, style: grandTotalCellStyle.decimal }
         }, {
-            field: 'PlayerWLTotal',
+            field: 'CustomerWLTotal',
             type: 'n',
             [HEADER_SECTION]: { title: 'total', isShow: isAllowedCustomerComm },
             [MAIN_SECTION]: { isShow : isAllowedCustomerComm, style: bodyCellStyle.decimal, width: 150 },
