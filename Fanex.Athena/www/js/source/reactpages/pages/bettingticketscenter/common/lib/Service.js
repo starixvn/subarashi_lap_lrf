@@ -2,6 +2,7 @@
 import Site from '@jsroot/lib/site'
 import { HeaderText } from './constants';
 import AppData from '@jsroot/lib/AppData';
+import moment from 'moment'
 
 export default class Service {
     static getTitle(fromDate, toDate, baseCurrency) {
@@ -29,5 +30,14 @@ export default class Service {
         }
 
         return HeaderText[column];
+    }
+
+    static isSingleDate = (dateRange) => {
+        if (!dateRange)
+        {
+            return false;
+        }
+        const { fromDate, toDate } = dateRange;
+        return moment(fromDate, "MM/DD/YYYY", true).isSame(moment(toDate, "MM/DD/YYYY", true), 'day');
     }
 }

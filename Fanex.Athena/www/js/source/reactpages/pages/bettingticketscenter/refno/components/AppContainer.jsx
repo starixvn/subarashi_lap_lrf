@@ -25,7 +25,7 @@ export const AppContainer = () => {
             <MobileGrid />
         </>
     );
-    var layout = isUseMobileVer ? mobileLayout :destopLayout
+    const layout = isUseMobileVer ? mobileLayout :destopLayout
     const className = isUseMobileVer ? "mobile-container" : "";
     return (
         <PageLayout className={className} selectedTabIndex="1">

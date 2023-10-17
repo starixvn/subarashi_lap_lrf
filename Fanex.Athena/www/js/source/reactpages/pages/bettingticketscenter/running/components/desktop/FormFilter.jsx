@@ -10,8 +10,8 @@ import BaseCurrencyFilter from '../filters/BaseCurrencyFilter.jsx'
 import ConvertAllCheckBoxFilter from '../filters/ConvertAllCheckBoxFilter.jsx'
 import StatusFilter from '../filters/StatusFilter.jsx'
 import SubsidiaryCheckBoxFilter from '../filters/SubsidiaryCheckBoxFilter.jsx'
-import StickyButton from '../filters/StickyButton.jsx'
-import { useSubsidiarySearch } from '../hooks/useSubsidiarySearch.jsx'
+import StickyIcon from '../filters/StickyIcon.jsx'
+import useSubsidiarySearch  from '@jsroot/customHooks/useSubsidiarySearch'
 import useFilterAction from '../hooks/useFilterAction.jsx'
 
 export const FormFilter = () => {
@@ -20,7 +20,7 @@ export const FormFilter = () => {
     const {submit} = useFilterAction();
 
     return (
-        <CollapsiblePanel className="page-filter" stickyFooter={<StickyButton />}>
+        <CollapsiblePanel className="page-filter" stickyFooter={<StickyIcon />}>
             <div className="row">
                 {isShowSubsidiaryDropdown && isSubsidiarySearch && <div className="col-12 col-md-3 col-sm-4 col-lg-3 col-xl-2">
                     <SubsidiaryDropDown />

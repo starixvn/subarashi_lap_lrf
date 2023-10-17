@@ -17,7 +17,7 @@ export const PlatformFiler = () => {
     const _renderProductSelectList = () => {
         const productOptions = AppData.productOptions;
 
-        return productOptions && productOptions.length ? (
+        return productOptions?.length ? (
             <MultipleSelect id="ProductList"
                 hasSearchBox={true}
                 language={LangHelper.currentLanguage}

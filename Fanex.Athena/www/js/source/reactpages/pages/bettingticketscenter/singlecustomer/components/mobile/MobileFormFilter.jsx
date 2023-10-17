@@ -10,7 +10,7 @@ import UserNameFilter from '../filters/UserNameFilter'
 import StatusFilter from '../filters/StatusFilter'
 import PlatformFilter from '../filters/PlatformFilter'
 import LiveStatusFilter from '../filters/LiveStatusFilter'
-import StickyButton from '../filters/StickyButton'
+import StickyIcon from '../filters/StickyIcon'
 import useFilterAction from '../hooks/useFilterAction'
 
 export const MobileFormFilter = () => {
@@ -66,7 +66,7 @@ export const MobileFormFilter = () => {
                         </div>
                     </div>
                     <div className='caret-block'>
-                        <StickyButton/>
+                        <StickyIcon/>
                     </div>
                 </div>
             </div>

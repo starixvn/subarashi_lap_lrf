@@ -15,7 +15,7 @@ export const BaseCurrencyFilter = () => {
     return( 
     <div className="form-group">
         <label className="label-text">{LangHelper.getSingleResource("BaseCurrency")}</label>
-        {baseCurrencyList && baseCurrencyList.length && (
+        { baseCurrencyList?.length && (
             <Select instanceId="ddlBased"
                 value={selectedBaseCurrency}
                 options={baseCurrencyList}

@@ -1,6 +1,6 @@
 import { shallowEqual, useSelector } from 'react-redux'
 import { validateBaseCurrency } from '@jsroot/lib/validationHelper'
-import { useSubsidiarySearch } from './useSubsidiarySearch'
+import useSubsidiarySearch  from '@jsroot/customHooks/useSubsidiarySearch'
 
 export const useValidParam = () => {
     const [selectedProduct, selectedStatus, selectedCurrency, selectedBaseCurrency, selectedSubsidiary] = useSelector(state => 

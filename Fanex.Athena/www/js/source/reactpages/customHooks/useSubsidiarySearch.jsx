@@ -10,3 +10,5 @@ export const useSubsidiarySearch = () => {
     const isWhiteLabelView = AppData.subsidiaryViewType === SubsidiaryViewType.MASTER_MANAGEMENT && !AppData.isOneworksMaster;
     return { isSubsidiarySearch, isShowSubsidiaryDropdown, isShowSubsidiarySearchCheckBox, isWhiteLabelView, defaultSelectedSubsidiary};
 }
+
+export default useSubsidiarySearch;

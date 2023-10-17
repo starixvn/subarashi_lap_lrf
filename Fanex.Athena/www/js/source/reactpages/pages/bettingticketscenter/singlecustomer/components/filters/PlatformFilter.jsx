@@ -14,7 +14,7 @@ export const ProductFilter = () => {
     const _renderPlatformSelectList = () => {
         const platformList = AppData.platformList;
 
-        return platformList && platformList.length && (
+        return platformList?.length && (
             <MultipleSelect id="PlatformList"
                 language={LangHelper.currentLanguage}
                 value={selectedPlatform}

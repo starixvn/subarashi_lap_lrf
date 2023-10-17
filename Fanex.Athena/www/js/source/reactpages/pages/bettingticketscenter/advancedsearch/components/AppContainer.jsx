@@ -1,28 +1,37 @@
-﻿import React, { Component } from 'react';
-import { connect } from 'react-redux';
+﻿import React from 'react'
+import { useSelector } from 'react-redux'
 import DataGrid from './desktop/DataGrid'
 import FormFilter from './desktop/FormFilter'
 import PageLayout from '../../common/components/PageLayout'
 import Loader from '@jsroot/components/Loader';
+import MobileFormFilter from './mobile/MobileFormFilter'
+import MobileGrid from './mobile/MobileGrid'
+import useMobileVersion from '@jsroot/customHooks/useMobileVersion'
 
-export class AppContainer extends Component {
-    constructor(props) {
-        super(props);
-    }
+export const AppContainer = () => {
 
-    render() {
-        return (
-            <PageLayout selectedTabIndex="3">
-                <Loader isLoading={this.props.isLoading} />
-                <FormFilter />
-                <DataGrid />
-            </PageLayout>
-        );
-    }
+    const isUseMobileVer = useMobileVersion();
+    const isLoading = useSelector(state => state.isLoading)
+    const destopLayout = (
+        <>
+            <Loader isLoading={isLoading} />
+            <FormFilter />
+            <DataGrid />
+        </>);
+    const mobileLayout = (
+        <>
+            <Loader isLoading={isLoading} />
+            <MobileFormFilter />
+            <MobileGrid />
+        </>
+    );
+    const layout = isUseMobileVer ? mobileLayout :destopLayout
+    const className = isUseMobileVer ? "mobile-container" : "";
+    return (
+        <PageLayout className={className} selectedTabIndex="3">
+            {layout}
+        </PageLayout>
+    );
 }
 
-function mapStateToProps(state) {
-    return Object.assign({}, { isLoading: state.isLoading });
-}
-
-export default connect(mapStateToProps)(AppContainer);
+export default AppContainer;

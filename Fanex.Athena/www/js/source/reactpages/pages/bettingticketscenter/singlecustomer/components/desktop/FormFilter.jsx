@@ -10,7 +10,7 @@ import UserNameFilter from '../filters/UserNameFilter'
 import StatusFilter from '../filters/StatusFilter'
 import PlatformFilter from '../filters/PlatformFilter'
 import LiveStatusFilter from '../filters/LiveStatusFilter'
-import StickyButton from '../filters/StickyButton'
+import StickyIcon from '../filters/StickyIcon'
 import useFilterAction from '../hooks/useFilterAction'
 
 export const FormFilter = () => {
@@ -19,7 +19,7 @@ export const FormFilter = () => {
     const {submit} = useFilterAction();
 
     return (
-        <CollapsiblePanel className="page-filter" stickyFooter={<StickyButton />}>
+        <CollapsiblePanel className="page-filter" stickyFooter={<StickyIcon />}>
             <div className="row">
                 <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
                     <DateRangeFilter />

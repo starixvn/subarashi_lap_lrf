@@ -3,7 +3,7 @@ import {  useDispatch } from 'react-redux'
 import { ActionCreators } from '../../actions/index.js'
 import LangHelper from '@jsroot/lib/langHelper'
 import CheckBox from '@jsroot/components/CheckBox'
-import { useSubsidiarySearch } from '../hooks/useSubsidiarySearch.jsx'
+import useSubsidiarySearch  from '@jsroot/customHooks/useSubsidiarySearch'
 import { useIsFirstRender } from 'usehooks-ts'
 
 

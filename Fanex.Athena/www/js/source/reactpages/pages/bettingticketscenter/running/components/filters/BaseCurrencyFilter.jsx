@@ -17,7 +17,7 @@ export const BaseCurrencyFilter = () => {
     }, [newBaseCurrency])
 
     const _renderBaseCurrencySelectList = () => {
-        return baseCurrencyList && baseCurrencyList.length && (
+        return baseCurrencyList?.length && (
             <Select instanceId="ddlBased"
                 value={selectedBaseCurrency}
                 options={baseCurrencyList}

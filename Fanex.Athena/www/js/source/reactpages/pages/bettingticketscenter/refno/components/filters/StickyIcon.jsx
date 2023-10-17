@@ -4,7 +4,7 @@ import LangHelper from '@jsroot/lib/langHelper'
 import FilterUserGuide from './FilterUserGuide.jsx'
 import useFilterAction from '../hooks/useFilterAction.jsx'
 
-export const StickyButton = () => {
+export const StickyIcon = () => {
     const { exportExcel} = useFilterAction(); 
         return (        
         <div>
@@ -13,4 +13,4 @@ export const StickyButton = () => {
         </div>)
     
 }
-export default StickyButton
+export default StickyIcon

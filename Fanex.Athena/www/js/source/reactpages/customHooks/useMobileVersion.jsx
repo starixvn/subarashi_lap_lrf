@@ -1,16 +1,12 @@
 import { isDesktop } from 'react-device-detect';
-import { useWindowSize } from 'usehooks-ts';
 
 export const useMobileVersion = () => {
-    const {width} = useWindowSize();
+    const width = window.innerWidth;
     if (isDesktop)
     {
         return false;
     }
-    if (width >= 1024){
-        return false
-    }
-    return true;
+    return width < 1024;
 }
 
 export default useMobileVersion;

@@ -13,7 +13,7 @@ export const StatusFilter = () => {
     const _renderStatusSelectList = () => {
         const statusList = AppData.statusList;
 
-        return statusList && statusList.length && (
+        return statusList?.length && (
             <MultipleSelect id="StatusList"
                 language={LangHelper.currentLanguage}
                 dataSource={statusList}

@@ -1,15 +1,14 @@
-import React, {  useEffect, useRef, useState } from 'react';
+import React, {  useEffect, useRef, useState, useMemo } from 'react';
 import ReportTitle from '@jsroot/components/ReportTitle';
 import {  DefaultPageSize } from '../lib/constants.js';
 import { ActionCreators } from './action.js';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Table, HeaderRow, HeaderCell } from '@9softstudio/react-grid';
+import { Table, HeaderRow, HeaderCell } from '@legion-lib/react-grid';
 import Service from '../lib/Service.js';
-import { useMemo } from 'react';
 import NoDataTitle from '@jsroot/components/NoDataTitle';
 import { useElementSize, useWindowSize } from 'usehooks-ts';
-import { RefPager } from '../../../../components/mobile-component/RefPager.jsx';
+import { RefPager } from '@jsroot/components/mobile-component/RefPager.jsx';
 import {v4 as uuidv4} from 'uuid';
 
 const SmallColumnWidths = [ 50, 17 , 20, 13]
@@ -44,13 +43,13 @@ export const BaseMobileDataGrid = (props) => {
     const pageOption = {
         PageIndex: requestParam.PageIndex,
         PageSize: requestParam.PageSize,
-        TotalItem: gridData && gridData.TotalRows ? gridData.TotalRows : DefaultPageSize,
+        TotalItem: gridData?.TotalRows ? gridData.TotalRows : DefaultPageSize,
         PageList: [DefaultPageSize, 100, 200, 300, 400, 500, 1000, 2000]
     };
 
 
     const onPaging = (index, size) => {
-        const param = Object.assign({}, requestParam, { PageIndex: index, PageSize: size });
+        const param ={...requestParam, PageIndex: index, PageSize: size};
         getData(param);
     }
 
@@ -76,14 +75,14 @@ export const BaseMobileDataGrid = (props) => {
 
     const header = useMemo(() =>buildHeader(),[width]);
 
-    if (!gridData || !gridData.Data || gridData.Data.length == 0) {
-        if(!gridData || !gridData.Data){
+    if (!gridData?.Data || gridData.Data.length == 0) {
+        if(!gridData?.Data){
             return null;
         }
         return <NoDataTitle />;
     }
 
-    const isShowPagingInfo  = pagerSize.width > 400 ? true : false;
+    const isShowPagingInfo  = pagerSize.width > 400;
 
     return (
         <div className="mobile-betlist-container betlist-container result-content" ref={ref}>
@@ -97,8 +96,9 @@ export const BaseMobileDataGrid = (props) => {
                 isPaging={false}
                 pageOption={pageOption}
                 shouldResetScrollPosition={reloadReport}
-                containerPadding={-10}
-                bodyHeight="100%" />
+                bodyHeight="100%"
+                containerPadding={12}
+                isIncludeScrollWidth={false} />
             {isPaging && <RefPager ref={pagerRef} onPaging={onPaging} pageOption={pageOption} isShowPagingInfo={isShowPagingInfo}/>}            
         </div>
     );
@@ -107,9 +107,9 @@ export const BaseMobileDataGrid = (props) => {
 const propTypes = {
     dataUrl: PropTypes.string,
     isPaging: PropTypes.bool,
-    header: PropTypes.array || PropTypes.element,
-    body: PropTypes.array || PropTypes.element,
-    footer: PropTypes.array || PropTypes.element,
+    header: PropTypes.oneOfType([PropTypes.array, PropTypes.element, PropTypes.object]),
+    body: PropTypes.oneOfType([PropTypes.array, PropTypes.element, PropTypes.object]),
+    footer: PropTypes.oneOfType([PropTypes.array, PropTypes.element, PropTypes.object]),
     columns: PropTypes.arrayOf(PropTypes.string)
 };
 const defaultProps = {

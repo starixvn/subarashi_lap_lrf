@@ -4,11 +4,11 @@ import Site from '@jsroot/lib/site'
 import AppData from '@jsroot/lib/AppData'
 import DataService from '@jsroot/lib/DataService.js'
 import useBaseCurrencyForMultiSelectCurrency from '@jsroot/customHooks/useBaseCurrencyForMultiSelectCurrency'
+import useSubsidiarySearch  from '@jsroot/customHooks/useSubsidiarySearch'
 import { ApiUrl } from '../../../common/lib/constants'
 import Service from '../../../common/lib/Service'
 import { useValidParam } from './useValidParam.jsx'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
-import { useSubsidiarySearch } from './useSubsidiarySearch.jsx'
 
 export const useFilterAction = () => {
     const isValidModel = useValidParam();

@@ -10,8 +10,8 @@ import BaseCurrencyFilter from '../filters/BaseCurrencyFilter.jsx'
 import ConvertAllCheckBoxFilter from '../filters/ConvertAllCheckBoxFilter.jsx'
 import StatusFilter from '../filters/StatusFilter.jsx'
 import SubsidiaryCheckBoxFilter from '../filters/SubsidiaryCheckBoxFilter.jsx'
-import StickyButton from '../filters/StickyButton.jsx'
-import { useSubsidiarySearch } from '../hooks/useSubsidiarySearch.jsx'
+import StickyIcon from '../filters/StickyIcon.jsx'
+import useSubsidiarySearch  from '@jsroot/customHooks/useSubsidiarySearch'
 import useFilterAction from '../hooks/useFilterAction.jsx'
 
 export const MobileFormFilter = () => {
@@ -71,7 +71,7 @@ export const MobileFormFilter = () => {
                         </div>
                     </div>
                     <div className='caret-block'>
-                        <StickyButton/>
+                        <StickyIcon/>
                     </div>
                 </div>
             </div>

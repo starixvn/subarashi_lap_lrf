@@ -4,7 +4,7 @@ import LangHelper from '@jsroot/lib/langHelper'
 import BaseCurrencySelectList from '../filters/BaseCurrencySelectList'
 import useFilterAction from '../hooks/useFilterAction'
 import { useValidParam } from '../hooks/useValidParam'
-import StickyButton from '../filters/StickyButton'
+import StickyIcon from '../filters/StickyIcon'
 import RefNoFilter from '../filters/RefNoFilter'
 import UserNameFilter from '../filters/UserNameFilter'
 import ConvertAllCheckBox from '../filters/ConvertAllCheckBox'
@@ -15,7 +15,7 @@ export const FormFilter = () => {
     const { submit} = useFilterAction();
 
     return (
-        <CollapsiblePanel className="mobile-mode page-filter" stickyFooter={<StickyButton/>}>
+        <CollapsiblePanel className="mobile-mode page-filter" stickyFooter={<StickyIcon/>}>
             <div className="row">
                 <div className="col-12 col-md-4 col-sm-4 col-lg-3 col-xl-2">
                     <RefNoFilter/>

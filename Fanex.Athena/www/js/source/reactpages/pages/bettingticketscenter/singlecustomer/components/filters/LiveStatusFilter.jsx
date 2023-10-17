@@ -13,7 +13,7 @@ export const LiveStatusFilter = () => {
     const _renderLiveStatusSelectList = () => {
         const liveStatusList = AppData.liveStatusList;
 
-        return liveStatusList && liveStatusList.length && (
+        return liveStatusList?.length && (
             <MultipleSelect id="LiveStatusList"
                 language={LangHelper.currentLanguage}
                 dataSource={liveStatusList}

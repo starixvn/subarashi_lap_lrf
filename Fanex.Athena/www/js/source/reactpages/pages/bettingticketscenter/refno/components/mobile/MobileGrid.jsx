@@ -1,17 +1,15 @@
-import React from 'react';
+import React, {useMemo, useEffect} from 'react';
 import { ApiUrl, HeaderText } from '../../../common/lib/constants';
 import BaseMobileDataGrid from '../../../common/components/BaseMobileDataGrid';
 import AppData from '@jsroot/lib/AppData';
 import {  useSelector } from 'react-redux';
-import { useEffect } from 'react';
 import CompositeRow from '../../../../../components/mobile-component/CompositeRow';
 import Service from '../../../common/lib/Service';
 import MobileBetlistContent from '../../../common/components/MobileBetlistContent';
 import MobileWinLossCellContent from '../../../common/components/MobileWinLossCellContent';
 import { Cell } from '@9softstudio/react-grid';
-import { useMemo } from 'react';
 
-var Columns = [ 'Details', 'Stake', 'WinLoss', 'Icon'];
+const Columns = [ 'Details', 'Stake', 'WinLoss', 'Icon'];
 
 const MobileGrid = () => {
     const data = useSelector(state => state.gridData.Data )

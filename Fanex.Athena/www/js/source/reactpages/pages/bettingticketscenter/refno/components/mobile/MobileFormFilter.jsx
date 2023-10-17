@@ -1,15 +1,14 @@
-﻿import React from 'react'
+﻿import React, { useState } from 'react'
 import CollapsiblePanel from '@jsroot/components/collapsible-panel'
 import LangHelper from '@jsroot/lib/langHelper'
 import BaseCurrencySelectList from '../filters/BaseCurrencySelectList'
 import useFilterAction from '../hooks/useFilterAction'
 import { useValidParam } from '../hooks/useValidParam'
-import StickyButton from '../filters/StickyButton'
+import StickyIcon from '../filters/StickyIcon'
 import RefNoFilter from '../filters/RefNoFilter'
 import UserNameFilter from '../filters/UserNameFilter'
 import ConvertAllCheckBox from '../filters/ConvertAllCheckBox'
 import Note from '../filters/Note'
-import { useState } from 'react'
 
 export const MobileFormFilter = () => {
     const isValidModel = useValidParam();
@@ -52,7 +51,7 @@ export const MobileFormFilter = () => {
                         </div>
                     </div>
                     <div className='caret-block'>
-                        <StickyButton/>
+                        <StickyIcon/>
                     </div>
                 </div>
             </div>

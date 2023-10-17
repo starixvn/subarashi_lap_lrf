@@ -5,7 +5,7 @@ import LangHelper from '@jsroot/lib/langHelper'
 import AppData from '@jsroot/lib/AppData'
 import { TreeViewOption } from '@jsroot/constants/report'
 import { TreeViewSelect } from '@legion-lib/react-multiselect'
-import { useSubsidiarySearch } from '../hooks/useSubsidiarySearch'
+import useSubsidiarySearch  from '@jsroot/customHooks/useSubsidiarySearch'
 
 const SubsidiaryDropDown = () => {
     const dispatch = useDispatch();
