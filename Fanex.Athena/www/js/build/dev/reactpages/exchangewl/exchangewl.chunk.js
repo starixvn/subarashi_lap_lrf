@@ -5446,11 +5446,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _lib_excel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../lib/excel */ "./www/js/source/reactpages/lib/excel.js");
-/* harmony import */ var _lib_langHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-/* harmony import */ var _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../constants/excelStyle */ "./www/js/source/reactpages/constants/excelStyle.js");
-/* harmony import */ var _lib_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../lib/service */ "./www/js/source/reactpages/pages/exchangewl/lib/service.js");
-/* harmony import */ var _constants_report__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../constants/report */ "./www/js/source/reactpages/constants/report.js");
-
+/* harmony import */ var _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../constants/excelStyle */ "./www/js/source/reactpages/constants/excelStyle.js");
+/* harmony import */ var _lib_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../lib/service */ "./www/js/source/reactpages/pages/exchangewl/lib/service.js");
+/* harmony import */ var _constants_report__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../constants/report */ "./www/js/source/reactpages/constants/report.js");
 
 
 
@@ -5474,7 +5472,7 @@ class ReportExcel {
     this.gridData = gridData;
     this.reportBy = reportBy;
     this.currentRowIndex = DATA_ROW_INDEX;
-    this.totalColumn = MAX_COLUMN - (reportBy === _constants_report__WEBPACK_IMPORTED_MODULE_5__["ReportLevel"].PLAYER ? 1 : 2) - (isAllowedCustomerComm ? 0 : 2);
+    this.totalColumn = MAX_COLUMN - (reportBy === _constants_report__WEBPACK_IMPORTED_MODULE_4__["ReportLevel"].CUSTOMER ? 1 : 2) - (isAllowedCustomerComm ? 0 : 2);
     this.configColumn = this._getConfigColumn(level, reportBy, isAllowedCustomerComm);
     this.colSpanConfig = this._getColSpanConfig(level);
     this.mergeConfig = [];
@@ -5495,14 +5493,14 @@ class ReportExcel {
   _getColSpanConfig(level) {
     return {
       [TOTAL_SECTION]: {
-        colSpan: level === _constants_report__WEBPACK_IMPORTED_MODULE_5__["ReportLevel"].PLAYER ? 3 : 2,
-        text: _lib_service__WEBPACK_IMPORTED_MODULE_4__["TotalText"].total,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["totalCellStyle"].rowspan
+        colSpan: level === _constants_report__WEBPACK_IMPORTED_MODULE_4__["ReportLevel"].CUSTOMER ? 3 : 2,
+        text: _lib_service__WEBPACK_IMPORTED_MODULE_3__["TotalText"].total,
+        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["totalCellStyle"].rowspan
       },
       [SUMMARYTOTAL_SECTION]: {
-        colSpan: level === _constants_report__WEBPACK_IMPORTED_MODULE_5__["ReportLevel"].PLAYER ? 4 : 3,
-        text: _lib_service__WEBPACK_IMPORTED_MODULE_4__["TotalText"].totalIn,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["grandTotalCellStyle"].rowspan
+        colSpan: level === _constants_report__WEBPACK_IMPORTED_MODULE_4__["ReportLevel"].CUSTOMER ? 4 : 3,
+        text: _lib_service__WEBPACK_IMPORTED_MODULE_3__["TotalText"].totalIn,
+        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["grandTotalCellStyle"].rowspan
       }
     };
   }
@@ -5518,7 +5516,7 @@ class ReportExcel {
       },
       [MAIN_SECTION]: {
         isShow: true,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["bodyCellStyle"].center,
+        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].center,
         width: 50
       },
       [TOTAL_SECTION]: {
@@ -5531,13 +5529,13 @@ class ReportExcel {
       field: 'Date',
       type: 's',
       [HEADER_SECTION]: {
-        title: reportBy === _constants_report__WEBPACK_IMPORTED_MODULE_5__["ReportBy"].DAILY ? 'date' : 'month',
-        isShow: level === _constants_report__WEBPACK_IMPORTED_MODULE_5__["ReportLevel"].MAIN,
+        title: reportBy === _constants_report__WEBPACK_IMPORTED_MODULE_4__["ReportBy"].DAILY ? 'date' : 'month',
+        isShow: level === _constants_report__WEBPACK_IMPORTED_MODULE_4__["ReportLevel"].MAIN,
         rowSpan: 2
       },
       [MAIN_SECTION]: {
-        isShow: level === _constants_report__WEBPACK_IMPORTED_MODULE_5__["ReportLevel"].MAIN,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["bodyCellStyle"].center,
+        isShow: level === _constants_report__WEBPACK_IMPORTED_MODULE_4__["ReportLevel"].MAIN,
+        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].center,
         width: 150
       },
       [TOTAL_SECTION]: {
@@ -5551,12 +5549,12 @@ class ReportExcel {
       type: 's',
       [HEADER_SECTION]: {
         title: 'externalId',
-        isShow: level === _constants_report__WEBPACK_IMPORTED_MODULE_5__["ReportLevel"].PLAYER,
+        isShow: level === _constants_report__WEBPACK_IMPORTED_MODULE_4__["ReportLevel"].CUSTOMER,
         rowSpan: 2
       },
       [MAIN_SECTION]: {
-        isShow: level === _constants_report__WEBPACK_IMPORTED_MODULE_5__["ReportLevel"].PLAYER,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["bodyCellStyle"].left,
+        isShow: level === _constants_report__WEBPACK_IMPORTED_MODULE_4__["ReportLevel"].CUSTOMER,
+        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].left,
         width: 150
       },
       [TOTAL_SECTION]: {
@@ -5570,12 +5568,12 @@ class ReportExcel {
       type: 's',
       [HEADER_SECTION]: {
         title: 'systemId',
-        isShow: level !== _constants_report__WEBPACK_IMPORTED_MODULE_5__["ReportLevel"].MAIN,
+        isShow: level !== _constants_report__WEBPACK_IMPORTED_MODULE_4__["ReportLevel"].MAIN,
         rowSpan: 2
       },
       [MAIN_SECTION]: {
-        isShow: level !== _constants_report__WEBPACK_IMPORTED_MODULE_5__["ReportLevel"].MAIN,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["bodyCellStyle"].left,
+        isShow: level !== _constants_report__WEBPACK_IMPORTED_MODULE_4__["ReportLevel"].MAIN,
+        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].left,
         width: 150
       },
       [TOTAL_SECTION]: {
@@ -5594,12 +5592,12 @@ class ReportExcel {
       },
       [MAIN_SECTION]: {
         isShow: true,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["bodyCellStyle"].center,
+        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].center,
         width: 120
       },
       [TOTAL_SECTION]: {
         isShow: true,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["totalCellStyle"].center
+        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["totalCellStyle"].center
       },
       [SUMMARYTOTAL_SECTION]: {
         isShow: false
@@ -5614,16 +5612,16 @@ class ReportExcel {
       },
       [MAIN_SECTION]: {
         isShow: true,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["bodyCellStyle"].decimal,
+        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].decimal,
         width: 150
       },
       [TOTAL_SECTION]: {
         isShow: true,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["totalCellStyle"].decimal
+        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["totalCellStyle"].decimal
       },
       [SUMMARYTOTAL_SECTION]: {
         isShow: true,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["grandTotalCellStyle"].decimal
+        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["grandTotalCellStyle"].decimal
       }
     }, {
       field: 'NetTurnover',
@@ -5635,16 +5633,16 @@ class ReportExcel {
       },
       [MAIN_SECTION]: {
         isShow: true,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["bodyCellStyle"].decimal,
+        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].decimal,
         width: 150
       },
       [TOTAL_SECTION]: {
         isShow: true,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["totalCellStyle"].decimal
+        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["totalCellStyle"].decimal
       },
       [SUMMARYTOTAL_SECTION]: {
         isShow: true,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["grandTotalCellStyle"].decimal
+        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["grandTotalCellStyle"].decimal
       }
     }, {
       field: 'TotalTransaction',
@@ -5656,16 +5654,16 @@ class ReportExcel {
       },
       [MAIN_SECTION]: {
         isShow: true,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["bodyCellStyle"].number,
+        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].number,
         width: 120
       },
       [TOTAL_SECTION]: {
         isShow: true,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["totalCellStyle"].number
+        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["totalCellStyle"].number
       },
       [SUMMARYTOTAL_SECTION]: {
         isShow: true,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["grandTotalCellStyle"].number
+        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["grandTotalCellStyle"].number
       }
     }, {
       [HEADER_SECTION]: {
@@ -5704,21 +5702,21 @@ class ReportExcel {
       [HEADER_SECTION]: {
         title: 'playerWL',
         isShow: isAllowedCustomerComm,
-        index_c: level === _constants_report__WEBPACK_IMPORTED_MODULE_5__["ReportLevel"].PLAYER ? 7 : 6,
+        index_c: level === _constants_report__WEBPACK_IMPORTED_MODULE_4__["ReportLevel"].CUSTOMER ? 7 : 6,
         index_r: HEADER_ROW_INDEX + 1
       },
       [MAIN_SECTION]: {
         isShow: true,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["bodyCellStyle"].decimal,
+        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].decimal,
         width: 150
       },
       [TOTAL_SECTION]: {
         isShow: true,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["totalCellStyle"].decimal
+        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["totalCellStyle"].decimal
       },
       [SUMMARYTOTAL_SECTION]: {
         isShow: true,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["grandTotalCellStyle"].decimal
+        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["grandTotalCellStyle"].decimal
       }
     }, {
       field: 'CustomerComm',
@@ -5729,16 +5727,16 @@ class ReportExcel {
       },
       [MAIN_SECTION]: {
         isShow: isAllowedCustomerComm,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["bodyCellStyle"].decimal,
+        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].decimal,
         width: 150
       },
       [TOTAL_SECTION]: {
         isShow: isAllowedCustomerComm,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["totalCellStyle"].decimal
+        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["totalCellStyle"].decimal
       },
       [SUMMARYTOTAL_SECTION]: {
         isShow: isAllowedCustomerComm,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["grandTotalCellStyle"].decimal
+        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["grandTotalCellStyle"].decimal
       }
     }, {
       field: 'CustomerWLTotal',
@@ -5749,16 +5747,16 @@ class ReportExcel {
       },
       [MAIN_SECTION]: {
         isShow: isAllowedCustomerComm,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["bodyCellStyle"].decimal,
+        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].decimal,
         width: 150
       },
       [TOTAL_SECTION]: {
         isShow: isAllowedCustomerComm,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["totalCellStyle"].decimal
+        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["totalCellStyle"].decimal
       },
       [SUMMARYTOTAL_SECTION]: {
         isShow: isAllowedCustomerComm,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["grandTotalCellStyle"].decimal
+        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["grandTotalCellStyle"].decimal
       }
     }, {
       field: 'LicenseeWL',
@@ -5766,15 +5764,15 @@ class ReportExcel {
       [HEADER_SECTION]: {
         title: 'licenseeWL',
         isShow: true,
-        index_c: (level === _constants_report__WEBPACK_IMPORTED_MODULE_5__["ReportLevel"].PLAYER ? 8 : 7) + (isAllowedCustomerComm ? 2 : 0),
+        index_c: (level === _constants_report__WEBPACK_IMPORTED_MODULE_4__["ReportLevel"].CUSTOMER ? 8 : 7) + (isAllowedCustomerComm ? 2 : 0),
         index_r: HEADER_ROW_INDEX + 1
       },
       [MAIN_SECTION]: {
         isShow: true,
         hasNegativeStyle: true,
         style: {
-          positive: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["bodyCellStyle"].decimal,
-          negative: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["bodyCellStyle"].negativeDecimal
+          positive: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].decimal,
+          negative: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].negativeDecimal
         },
         width: 150
       },
@@ -5782,16 +5780,16 @@ class ReportExcel {
         isShow: true,
         hasNegativeStyle: true,
         style: {
-          positive: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["totalCellStyle"].decimal,
-          negative: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["totalCellStyle"].negativeDecimal
+          positive: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["totalCellStyle"].decimal,
+          negative: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["totalCellStyle"].negativeDecimal
         }
       },
       [SUMMARYTOTAL_SECTION]: {
         isShow: true,
         hasNegativeStyle: true,
         style: {
-          positive: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["grandTotalCellStyle"].decimal,
-          negative: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["grandTotalCellStyle"].negativeDecimal
+          positive: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["grandTotalCellStyle"].decimal,
+          negative: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["grandTotalCellStyle"].negativeDecimal
         }
       }
     }, {
@@ -5803,16 +5801,16 @@ class ReportExcel {
       },
       [MAIN_SECTION]: {
         isShow: true,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["bodyCellStyle"].decimal,
+        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].decimal,
         width: 150
       },
       [TOTAL_SECTION]: {
         isShow: true,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["totalCellStyle"].decimal
+        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["totalCellStyle"].decimal
       },
       [SUMMARYTOTAL_SECTION]: {
         isShow: true,
-        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["grandTotalCellStyle"].decimal
+        style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["grandTotalCellStyle"].decimal
       }
     },
     // {
@@ -5834,8 +5832,8 @@ class ReportExcel {
         isShow: true,
         hasNegativeStyle: true,
         style: {
-          positive: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["bodyCellStyle"].decimal,
-          negative: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["bodyCellStyle"].negativeDecimal
+          positive: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].decimal,
+          negative: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].negativeDecimal
         },
         width: 150
       },
@@ -5843,16 +5841,16 @@ class ReportExcel {
         isShow: true,
         hasNegativeStyle: true,
         style: {
-          positive: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["totalCellStyle"].decimal,
-          negative: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["totalCellStyle"].negativeDecimal
+          positive: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["totalCellStyle"].decimal,
+          negative: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["totalCellStyle"].negativeDecimal
         }
       },
       [SUMMARYTOTAL_SECTION]: {
         isShow: true,
         hasNegativeStyle: true,
         style: {
-          positive: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["grandTotalCellStyle"].decimal,
-          negative: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["grandTotalCellStyle"].negativeDecimal
+          positive: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["grandTotalCellStyle"].decimal,
+          negative: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["grandTotalCellStyle"].negativeDecimal
         }
       }
     }];
@@ -5875,7 +5873,7 @@ class ReportExcel {
     this.worksheet[address] = {
       t: "s",
       v: this.title,
-      s: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["titleCellStyle"]
+      s: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["titleCellStyle"]
     };
   }
   _createHeader() {
@@ -5891,11 +5889,11 @@ class ReportExcel {
           c: nextColumnIndex,
           r: nextRowIndex
         });
-        const header = _lib_service__WEBPACK_IMPORTED_MODULE_4__["HeaderText"][column.title];
+        const header = _lib_service__WEBPACK_IMPORTED_MODULE_3__["HeaderText"][column.title];
         this.worksheet[address] = {
           t: "s",
           v: header,
-          s: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["headerCellStyle"]
+          s: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["headerCellStyle"]
         };
         if (column.colSpan > 1 || column.rowSpan > 1) {
           this.mergeConfig.push({
@@ -5923,7 +5921,7 @@ class ReportExcel {
     const totalData = this.gridData.DataList.length;
     for (let i = 0; i < totalData; i++) {
       let data = this.gridData.DataList[i];
-      data.Date = moment__WEBPACK_IMPORTED_MODULE_0___default()(data.Date).format(this.reportBy === _constants_report__WEBPACK_IMPORTED_MODULE_5__["ReportBy"].DAILY ? "MM/DD/YYYY" : "MM/YYYY");
+      data.Date = moment__WEBPACK_IMPORTED_MODULE_0___default()(data.Date).format(this.reportBy === _constants_report__WEBPACK_IMPORTED_MODULE_4__["ReportBy"].DAILY ? "MM/DD/YYYY" : "MM/YYYY");
       data.Index = i + 1;
       this._createRowBySection(MAIN_SECTION, 0, this.currentRowIndex, data);
       ++this.currentRowIndex;
