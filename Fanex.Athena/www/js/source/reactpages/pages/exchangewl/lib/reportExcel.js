@@ -1,6 +1,5 @@
 ﻿import moment from 'moment'
 import Excel from '../../../lib/excel'
-import LangHelper from '../../../lib/langHelper'
 import { titleCellStyle, headerCellStyle, bodyCellStyle, totalCellStyle, grandTotalCellStyle } from '../../../constants/excelStyle'
 import { HeaderText, TotalText } from '../lib/service'
 import { ReportLevel, ReportBy } from '../../../constants/report'
@@ -24,7 +23,7 @@ export default class ReportExcel {
         this.gridData = gridData;
         this.reportBy = reportBy;
         this.currentRowIndex = DATA_ROW_INDEX;
-        this.totalColumn = MAX_COLUMN - (reportBy === ReportLevel.PLAYER ? 1 : 2) - (isAllowedCustomerComm ? 0 : 2);
+        this.totalColumn = MAX_COLUMN - (reportBy === ReportLevel.CUSTOMER ? 1 : 2) - (isAllowedCustomerComm ? 0 : 2);
         this.configColumn = this._getConfigColumn(level, reportBy, isAllowedCustomerComm);
         this.colSpanConfig = this._getColSpanConfig(level);
         this.mergeConfig = [];
@@ -49,12 +48,12 @@ export default class ReportExcel {
     _getColSpanConfig(level) {
         return {
             [TOTAL_SECTION]: {
-                colSpan: level === ReportLevel.PLAYER ? 3 : 2,
+                colSpan: level === ReportLevel.CUSTOMER ? 3 : 2,
                 text: TotalText.total,
                 style: totalCellStyle.rowspan
             },
             [SUMMARYTOTAL_SECTION]: {
-                colSpan: level === ReportLevel.PLAYER ? 4 : 3,
+                colSpan: level === ReportLevel.CUSTOMER ? 4 : 3,
                 text: TotalText.totalIn,
                 style: grandTotalCellStyle.rowspan
             }
@@ -79,8 +78,8 @@ export default class ReportExcel {
         }, {
             field: 'ExternalId',
             type: 's',
-            [HEADER_SECTION]: { title: 'externalId', isShow: level === ReportLevel.PLAYER, rowSpan: 2 },
-            [MAIN_SECTION]: { isShow : level === ReportLevel.PLAYER, style: bodyCellStyle.left, width: 150 },
+            [HEADER_SECTION]: { title: 'externalId', isShow: level === ReportLevel.CUSTOMER, rowSpan: 2 },
+            [MAIN_SECTION]: { isShow : level === ReportLevel.CUSTOMER, style: bodyCellStyle.left, width: 150 },
             [TOTAL_SECTION]: { isShow : false },
             [SUMMARYTOTAL_SECTION]: { isShow : false }
         }, {
@@ -131,7 +130,7 @@ export default class ReportExcel {
         }, {
             field: 'CustomerWL',
             type: 'n',
-            [HEADER_SECTION]: { title: 'playerWL', isShow: isAllowedCustomerComm, index_c: level === ReportLevel.PLAYER ? 7 : 6, index_r: HEADER_ROW_INDEX + 1 },
+            [HEADER_SECTION]: { title: 'playerWL', isShow: isAllowedCustomerComm, index_c: level === ReportLevel.CUSTOMER ? 7 : 6, index_r: HEADER_ROW_INDEX + 1 },
             [MAIN_SECTION]: { isShow : true, style: bodyCellStyle.decimal, width: 150 },
             [TOTAL_SECTION]: { isShow : true, style: totalCellStyle.decimal },
             [SUMMARYTOTAL_SECTION]: { isShow : true, style: grandTotalCellStyle.decimal }
@@ -152,7 +151,7 @@ export default class ReportExcel {
         }, {
             field: 'LicenseeWL',
             type: 'n',
-            [HEADER_SECTION]: { title: 'licenseeWL', isShow: true, index_c: (level === ReportLevel.PLAYER ? 8 : 7) + (isAllowedCustomerComm ? 2 : 0), index_r: HEADER_ROW_INDEX + 1 },
+            [HEADER_SECTION]: { title: 'licenseeWL', isShow: true, index_c: (level === ReportLevel.CUSTOMER ? 8 : 7) + (isAllowedCustomerComm ? 2 : 0), index_r: HEADER_ROW_INDEX + 1 },
             [MAIN_SECTION]: { isShow : true, hasNegativeStyle: true, style: { positive: bodyCellStyle.decimal, negative: bodyCellStyle.negativeDecimal }, width: 150 },
             [TOTAL_SECTION]: { isShow : true, hasNegativeStyle: true, style: { positive: totalCellStyle.decimal, negative: totalCellStyle.negativeDecimal } },
             [SUMMARYTOTAL_SECTION]: { isShow : true, hasNegativeStyle: true, style: { positive: grandTotalCellStyle.decimal, negative: grandTotalCellStyle.negativeDecimal } }
