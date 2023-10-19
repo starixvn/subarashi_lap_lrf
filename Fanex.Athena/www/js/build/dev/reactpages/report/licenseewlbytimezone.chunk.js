@@ -3791,7 +3791,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     this.defaultBaseCurrency = this.props.selectedBaseCurrency;
   }
   get isValidModel() {
-    return this.props.selectedProduct !== "" && Object(_lib_validationHelper__WEBPACK_IMPORTED_MODULE_14__["validateBaseCurrency"])(this.props.selectedBaseCurrency);
+    return this.props.selectedProduct !== "" && (this.props.selectedBaseCurrency === this.props.selectedCurrency.label || Object(_lib_validationHelper__WEBPACK_IMPORTED_MODULE_14__["validateBaseCurrency"])(this.props.selectedBaseCurrency));
   }
   _getParams() {
     if (!this.isValidModel) {
@@ -3874,7 +3874,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     } else {
       const currencyName = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_13__["default"].currencyList.find(x => x.value == currencyId).label;
       if (!this.baseCurrencyList.find(x => x.label === currencyName)) {
-        baseCurrency = '';
+        baseCurrency = currencyName;
         this.baseCurrencyList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_13__["default"].baseCurrencyList.slice(0);
         this.baseCurrencyList.push({
           value: baseCurrency,
