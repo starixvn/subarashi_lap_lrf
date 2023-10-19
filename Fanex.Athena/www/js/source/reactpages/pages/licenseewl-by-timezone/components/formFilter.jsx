@@ -24,7 +24,8 @@ export class FormFilter extends Component {
     }
 
     get isValidModel() {
-        return this.props.selectedProduct !== "" && validateBaseCurrency(this.props.selectedBaseCurrency);
+        return this.props.selectedProduct !== "" && 
+        (this.props.selectedBaseCurrency === this.props.selectedCurrency.label || validateBaseCurrency(this.props.selectedBaseCurrency));
     }
 
     submit = (event) => {
@@ -167,7 +168,7 @@ export class FormFilter extends Component {
             const currencyName = AppData.currencyList.find(x => x.value == currencyId).label;
 
             if (!this.baseCurrencyList.find(x => x.label === currencyName)) {
-                baseCurrency = '';
+                baseCurrency = currencyName;
                 this.baseCurrencyList = AppData.baseCurrencyList.slice(0);
                 this.baseCurrencyList.push({ value: baseCurrency, label: currencyName });
             }
