@@ -80,10 +80,8 @@
     <Compile Include="SubsidiaryPerformanceDataAccessTest.cs" />
     <Compile Include="WinLossByProductDataAccessTest.cs" />
     <Compile Include="WinLossByBetTypeDataAccessTest.cs" />
-    <Compile Include="WeeklyLiveMatchDataAccessTest.cs" />
     <Compile Include="TurnoverDataAccessTest.cs" />
     <Compile Include="ThirdPartyWinLossDataAccessTest.cs" />
-    <Compile Include="SettledMatchCountDataAccessTest.cs" />
     <Compile Include="MatchWinLossDataAccessTest.cs" />
     <Compile Include="LiveReportDataAccessTest.cs" />
     <Compile Include="LicenseeWinLossDataAccessTest.cs" />

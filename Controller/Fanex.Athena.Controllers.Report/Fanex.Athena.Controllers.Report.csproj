@@ -170,11 +170,9 @@
     <Compile Include="PlatformWinLossReportController.cs" />
     <Compile Include="Result\ResultKenoReportController.cs" />
     <Compile Include="Result\ResultReportController.cs" />
-    <Compile Include="SettledMatchCountReportController.cs" />
     <Compile Include="TurnoverReportController.cs" />
     <Compile Include="WinLossByBetTypeReportController.cs" />
     <Compile Include="WinLossByProductReportController.cs" />
-    <Compile Include="WeeklyLiveMatchReportController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

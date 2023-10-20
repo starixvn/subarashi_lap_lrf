@@ -101,14 +101,12 @@
     <Compile Include="Interfaces\ISabaVirtualSportsWinLossDataAccess.cs" />
     <Compile Include="Interfaces\ISpecialLicenseeWinLossDataAccess.cs" />
     <Compile Include="Interfaces\ISubsidiaryPerformanceDataAccess.cs" />
-    <Compile Include="Interfaces\IWeeklyLiveMatchDataAccess.cs" />
     <Compile Include="SabaVirtualSportsWinLossDataAccess.cs" />
     <Compile Include="SpecialLicenseeWinLossDataAccess.cs" />
     <Compile Include="AgCasinoBalanceDataAccess.cs" />
     <Compile Include="LicenseeWinLossByTimeZoneDataAccess.cs" />
     <Compile Include="SubsidiaryPerformanceDataAccess.cs" />
     <Compile Include="ThirdPartyWinLossDataAccess.cs" />
-    <Compile Include="WeeklyLiveMatchDataAccess.cs" />
     <Compile Include="Interfaces\IAgCasinoBalanceDataAccess.cs" />
     <Compile Include="Interfaces\IThirdPartyWinLossDataAccess.cs" />
     <Compile Include="CustomerPendingFundsDataAccess.cs" />
@@ -119,13 +117,11 @@
     <Compile Include="LiveReportDataAccess.cs">
       <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="SettledMatchCountDataAccess.cs" />
     <Compile Include="TurnoverDataAccess.cs" />
     <Compile Include="WinLossByBetTypeDataAccess.cs" />
     <Compile Include="MatchWinLossDataAccess.cs" />
     <Compile Include="Interfaces\ICustPendingFundsDataAccess.cs" />
     <Compile Include="Interfaces\ICustomerTurnoverDataAccess.cs" />
-    <Compile Include="Interfaces\ISettledMatchCountDataAccess.cs" />
     <Compile Include="Interfaces\ITurnoverDataAccess.cs" />
     <Compile Include="Interfaces\ILicenseeWinLossDataAccess.cs" />
     <Compile Include="LicenseeWinLossDataAccess.cs" />
