@@ -338,4 +338,7 @@
   <data name="upcomingreportclosures" xml:space="preserve">
     <value>Upcoming Report Closures</value>
   </data>
+  <data name="customeradministration" xml:space="preserve">
+    <value>Customer Administration</value>
+  </data>
 </root>

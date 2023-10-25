@@ -3576,4 +3576,55 @@
   <data name="ViewResettledTicketOnlyNote" xml:space="preserve">
     <value>"View Resettled Ticket Only" data is available from 01 Sep 2023.</value>
   </data>
+  <data name="Country" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="CustomerAdministrationReportTitle" xml:space="preserve">
+    <value>{0} - Data support up to 60 days</value>
+  </data>
+  <data name="DateOfRegistration" xml:space="preserve">
+    <value>Date of Registration</value>
+  </data>
+  <data name="DepositHistory" xml:space="preserve">
+    <value>Deposit History</value>
+  </data>
+  <data name="IP" xml:space="preserve">
+    <value>IP</value>
+  </data>
+  <data name="PlayerInformation" xml:space="preserve">
+    <value>Player Information</value>
+  </data>
+  <data name="TransDate" xml:space="preserve">
+    <value>Trans Date</value>
+  </data>
+  <data name="TransID" xml:space="preserve">
+    <value>Trans ID</value>
+  </data>
+  <data name="WithdrawalHistory" xml:space="preserve">
+    <value>Withdrawal History </value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="Gender" xml:space="preserve">
+    <value>Gender</value>
+  </data>
+  <data name="Mobile" xml:space="preserve">
+    <value>Mobile</value>
+  </data>
+  <data name="MyPreferredCurrency" xml:space="preserve">
+    <value>My Preferred Currency</value>
+  </data>
+  <data name="MyPreferredOdds" xml:space="preserve">
+    <value>My Preferred Odds</value>
+  </data>
+  <data name="PreferredUserName" xml:space="preserve">
+    <value>Preferred User Name</value>
+  </data>
+  <data name="SecurityCode" xml:space="preserve">
+    <value>Security Code</value>
+  </data>
+  <data name="SecurityQuestion" xml:space="preserve">
+    <value>Security Question</value>
+  </data>
 </root>
