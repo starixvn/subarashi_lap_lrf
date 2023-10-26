@@ -64,7 +64,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "www/js/build/dev/reactpages/" + ({}[chunkId]||chunkId) + "." + {"0":"2b9e0da5e77331fdeac6","1":"d5838e0ae8a8c2484782","2":"57d2c0814a103b74a1ce","3":"1453477601ecaf85dd9f"}[chunkId] + ".chunk.js"
+/******/ 		return __webpack_require__.p + "www/js/build/dev/reactpages/" + ({"customer/customeradmin/betList":"customer/customeradmin/betList","customer/customeradmin/depositHistory":"customer/customeradmin/depositHistory","customer/customeradmin/playerInformation":"customer/customeradmin/playerInformation","customer/customeradmin/withdrawalHistory":"customer/customeradmin/withdrawalHistory"}[chunkId]||chunkId) + "." + {"customer/customeradmin/betList":"3388d7c23a36aacbf3d5","customer/customeradmin/depositHistory":"f044298293e90890a988","customer/customeradmin/playerInformation":"dc1c8658017a6113e330","customer/customeradmin/withdrawalHistory":"6b1d5b3b6aaec552af05"}[chunkId] + ".chunk.js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -1085,10 +1085,10 @@ const tabKeys = {
 };
 const newTabs = [];
 const dynamicImports = {
-  [tabKeys.PlayerInformation]: () => __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ../tabs/PlayerInformation */ "./www/js/source/reactpages/pages/customer/customeradmin/tabs/PlayerInformation.jsx")),
-  [tabKeys.BetList]: () => __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ../tabs/BetList */ "./www/js/source/reactpages/pages/customer/customeradmin/tabs/BetList.jsx")),
-  [tabKeys.DepositHistory]: () => __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ../tabs/DepositHistory */ "./www/js/source/reactpages/pages/customer/customeradmin/tabs/DepositHistory.jsx")),
-  [tabKeys.WithdrawalHistory]: () => __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ../tabs/WithdrawalHistory */ "./www/js/source/reactpages/pages/customer/customeradmin/tabs/WithdrawalHistory.jsx"))
+  [tabKeys.PlayerInformation]: () => __webpack_require__.e(/*! import() | customer/customeradmin/playerInformation */ "customer/customeradmin/playerInformation").then(__webpack_require__.bind(null, /*! ../tabs/PlayerInformation */ "./www/js/source/reactpages/pages/customer/customeradmin/tabs/PlayerInformation.jsx")),
+  [tabKeys.BetList]: () => __webpack_require__.e(/*! import() | customer/customeradmin/betList */ "customer/customeradmin/betList").then(__webpack_require__.bind(null, /*! ../tabs/BetList */ "./www/js/source/reactpages/pages/customer/customeradmin/tabs/BetList.jsx")),
+  [tabKeys.DepositHistory]: () => __webpack_require__.e(/*! import() | customer/customeradmin/depositHistory */ "customer/customeradmin/depositHistory").then(__webpack_require__.bind(null, /*! ../tabs/DepositHistory */ "./www/js/source/reactpages/pages/customer/customeradmin/tabs/DepositHistory.jsx")),
+  [tabKeys.WithdrawalHistory]: () => __webpack_require__.e(/*! import() | customer/customeradmin/withdrawalHistory */ "customer/customeradmin/withdrawalHistory").then(__webpack_require__.bind(null, /*! ../tabs/WithdrawalHistory */ "./www/js/source/reactpages/pages/customer/customeradmin/tabs/WithdrawalHistory.jsx"))
 };
 const tabMenuList = Object.keys(tabKeys).map(_ => ({
   key: _,

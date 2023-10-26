@@ -18,10 +18,10 @@ export const tabKeys = {
 const newTabs = [];
 
 const dynamicImports = {
-    [tabKeys.PlayerInformation]: () => import('../tabs/PlayerInformation'),    
-    [tabKeys.BetList]: () => import('../tabs/BetList'),
-    [tabKeys.DepositHistory]: () => import('../tabs/DepositHistory'),
-    [tabKeys.WithdrawalHistory]: () => import('../tabs/WithdrawalHistory')
+    [tabKeys.PlayerInformation]: () => import(/* webpackChunkName: "customer/customeradmin/playerInformation" */ '../tabs/PlayerInformation'),    
+    [tabKeys.BetList]: () => import(/* webpackChunkName: "customer/customeradmin/betList" */ '../tabs/BetList'),
+    [tabKeys.DepositHistory]: () => import(/* webpackChunkName: "customer/customeradmin/depositHistory" */ '../tabs/DepositHistory'),
+    [tabKeys.WithdrawalHistory]: () => import(/* webpackChunkName: "customer/customeradmin/withdrawalHistory" */ '../tabs/WithdrawalHistory')
 }
 
 export const tabMenuList = Object.keys(tabKeys).map(_ => ({
