@@ -1,4 +1,4 @@
-﻿import { SET_USERNAME, SET_SUBMITTED, SET_USERINFO } from './types';
+﻿import { SET_USERNAME, SET_SUBMITTED } from './types';
 
 export const setUsername = (data) => {
     return {
@@ -6,14 +6,6 @@ export const setUsername = (data) => {
         data
     }
 }
-
-export const setUserInfo = (data) => {
-    return {
-        type: SET_USERINFO,
-        data
-    }
-}
-
 
 export const setSubmitted= (data) => {
     return {

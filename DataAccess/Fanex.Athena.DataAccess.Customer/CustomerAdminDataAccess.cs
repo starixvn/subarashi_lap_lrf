@@ -25,19 +25,6 @@ namespace Fanex.Athena.DataAccess.Customer
             }
         }
 
-        public async Task<CustomerDetailInfo> GetCustomerInfoByCustIdAsync(GetCustomerInfoMetaModel metaModel)
-        {
-            const string spName = "Lrf_Rpt_Audit_AdminPlayerDetail";
-            using (var db = GetObjectDb(spName))
-            {
-                db.SetParameterValue("CustId", metaModel.CustId);
-
-                var result = await db.QueryAsync<CustomerDetailInfo>().ConfigureAwait(false);
-
-                return result.FirstOrDefault();
-            }
-        }
-
         public async Task<ApiPagingResult<CustomerBetList>> GetBetListByCustIdAsync(GetCustomerBetListMetaModel metaModel)
         {
             const string spName = "Lrf_Rpt_Audit_AdminBetList";

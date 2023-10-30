@@ -13,7 +13,7 @@ export const FormFilter = props => {
     const _handleSubmit = () => {
         props.toggleLoader(true);
 
-        const url = "api/CustomerAdministration/SearchCustomerByUserName";
+        const url = "api/CustomerAdministration/GetCustomerInfoByUserName";
         const params = {
             userName: props.username,
         };
@@ -25,8 +25,8 @@ export const FormFilter = props => {
                 props.setSubmitted(true);
             })
             .catch(error => {
-                //Service.showErrorMsg();
-                console.err(error.message);
+                alert(LangHelper.getSingleResource('ErrorProcessingMsg'));
+                console.error(error.message);
                 props.toggleLoader(false);
                 props.setSubmitted(true);
             })

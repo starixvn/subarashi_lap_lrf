@@ -26,17 +26,9 @@ namespace Fanex.Athena.Api.Customer.CustomerAdmin
         }
 
         [HttpPost]
-        public async Task<JsonResult<CustomerInfo>> SearchCustomerByUserName(GetCustomerInfoMetaModel model)
+        public async Task<JsonResult<CustomerInfo>> GetCustomerInfoByUserName(GetCustomerInfoMetaModel model)
         {
             var result = await _customerAdminService.GetCustomerInfoByUserName(model);
-
-            return JsonApi(result);
-        }
-
-        [HttpPost]
-        public async Task<JsonResult<CustomerDetailInfo>> SearchCustomerByCustId(GetCustomerInfoMetaModel model)
-        {
-            var result = await _customerAdminService.GetCustomerInfoByCustId(model);
 
             return JsonApi(result);
         }

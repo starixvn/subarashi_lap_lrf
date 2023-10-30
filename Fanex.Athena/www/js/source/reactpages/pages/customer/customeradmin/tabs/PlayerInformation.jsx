@@ -1,37 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import LangHelper from "@jsroot/lib/langHelper";
 import ReportTitle from "@jsroot/components/ReportTitle";
-import DataService from "@jsroot/lib/DataService";
 import { connect } from "react-redux";
-import { toggleLoader } from "@jsroot/actions/loaderAction";
-import { bindActionCreators } from "redux";
 
 const PlayerInformation = (props) => {
-    const { custId } = props.userInfo;
-    const url = "api/CustomerAdministration/SearchCustomerByCustId";
-
-    const [userInfoDetail, setUserInfoDetail] = useState({});
-
-    useEffect(() => {
-        if (!custId) return;
-
-        const params = {
-            custId: custId,
-        };
-
-        props.toggleLoader(false);
-
-        DataService.postData(url, params)
-            .then((response) => {
-                setUserInfoDetail({ ...response.data });
-                props.toggleLoader(false);
-            })
-            .catch((error) => {
-                console.err(error.message);
-                props.toggleLoader(false);
-            });
-    }, [custId]);
-
     const {
         firstName,
         lastName,
@@ -46,7 +18,7 @@ const PlayerInformation = (props) => {
         preferredUserName,
         myPreferredCurrency,
         myPreferredOdds,
-    } = userInfoDetail || {};
+    } = props.userInfo;
 
     return (
         <div className='account-info-container'>
@@ -123,13 +95,9 @@ const PlayerInformation = (props) => {
     );
 };
 
-function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ toggleLoader }, dispatch);
-}
-
 function mapStateToProps(state) {
     const { username, userInfo } = state;
     return Object.assign({}, { username, userInfo });
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PlayerInformation);
+export default connect(mapStateToProps)(PlayerInformation);
