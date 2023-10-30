@@ -2210,7 +2210,7 @@
   <data name="ESportsApp" xml:space="preserve">
     <value>电子竞技 APP</value>
   </data>
-  <data name="MobileGalaxy" xml:space="preserve">
+  <data name="MobileEuro" xml:space="preserve">
     <value>手机欧洲版</value>
     <comment>revert</comment>
   </data>
@@ -3222,5 +3222,8 @@
   </data>
   <data name="ViewResettledTicketOnlyNote" xml:space="preserve">
     <value>''仅查看已重新结算注单数据'' 可查询2023年9月1日后数据。</value>
+  </data>
+  <data name="MobileGalaxy" xml:space="preserve">
+    <value>手机银河版</value>
   </data>
 </root>

@@ -16,7 +16,7 @@
 
         public const int MobileStandard = 4;
 
-        public const int MobileGalaxy = 5;
+        public const int MobileEuro = 5;
 
         public const int MobileCompact = 6;
 
@@ -42,6 +42,8 @@
 
         public const int DesktopGalaxy = 17;
 
+        public const int MobileGalaxy = 18;
+
         public const int BetfromOthers = 88;
 
         private static readonly IDictionary<int, string> MapPlatformKeys = new Dictionary<int, string>
@@ -51,6 +53,7 @@
             { DesktopChina, nameof(DesktopChina) },
             { DesktopOthers, nameof(DesktopOthers) },
             { MobileStandard, nameof(MobileStandard) },
+            { MobileEuro, nameof(MobileEuro) },
             { MobileGalaxy, nameof(MobileGalaxy) },
             { MobileCompact, nameof(MobileCompact) },
             { MobileOthers, nameof(MobileOthers) },

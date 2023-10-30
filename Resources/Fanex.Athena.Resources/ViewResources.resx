@@ -2499,9 +2499,9 @@
   <data name="ESportsApp" xml:space="preserve">
     <value>E-Sports APP</value>
   </data>
-  <data name="MobileGalaxy" xml:space="preserve">
+  <data name="MobileEuro" xml:space="preserve">
     <value>Mobile Euro</value>
-    <comment>#191840</comment>
+    
   </data>
   <data name="ProductSAG" xml:space="preserve">
     <value>SA Gaming</value>
@@ -3575,6 +3575,9 @@
   </data>
   <data name="ViewResettledTicketOnlyNote" xml:space="preserve">
     <value>"View Resettled Ticket Only" data is available from 01 Sep 2023.</value>
+  </data>
+  <data name="MobileGalaxy" xml:space="preserve">
+    <value>Mobile Galaxy</value>
   </data>
   <data name="Country" xml:space="preserve">
     <value>Country</value>

@@ -1821,7 +1821,7 @@
   <data name="MobileCompact" xml:space="preserve">
     <value>Di động nhỏ gọn</value>
   </data>
-  <data name="MobileGalaxy" xml:space="preserve">
+  <data name="MobileEuro" xml:space="preserve">
     <value>Mobile Euro</value>
   </data>
   <data name="MobileOthers" xml:space="preserve">
@@ -3287,5 +3287,8 @@
   </data>
   <data name="ViewResettledTicketOnlyNote" xml:space="preserve">
     <value>Dữ liệu của Vé Đã Tất Toán Lại chỉ có từ 01/09/2023.</value>
+  </data>
+  <data name="MobileGalaxy" xml:space="preserve">
+    <value>Mobile Galaxy</value>
   </data>
 </root>
