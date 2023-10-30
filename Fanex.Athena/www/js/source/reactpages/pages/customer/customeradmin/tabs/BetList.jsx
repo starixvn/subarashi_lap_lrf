@@ -1,15 +1,70 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect } from 'react';
 import ReportTitle from '@jsroot/components/ReportTitle';
-import { Table, Row, Cell, HeaderRow, HeaderCell } from '@9softstudio/react-grid';
+import NumberFormat from '@jsroot/lib/numberFormat';
+import NoDataTitle from '@jsroot/components/NoDataTitle';
+import { Table, Row, Cell, HeaderRow, HeaderCell, Pager } from '@9softstudio/react-grid';
 import LangHelper from '@jsroot/lib/langHelper';
+import DataService from "@jsroot/lib/DataService";
+import { toggleLoader } from "@jsroot/actions/loaderAction";
+import { bindActionCreators } from "redux";
 import { connect } from 'react-redux';
+import { defaultPagingOption } from "../lib/constants";
 
 const BetList = (props) => {
-    const [pagingOption, setPagingOption] = useState({pageIndex: 1, totalPage: 0});
+    const {custId, currencyCode} = props.userInfo;
+    const {fromDate, toDate} = props.dateRange;
+    const [gridData, setGridData] = useState([]);
+    const [pagingOption, setPagingOption] = useState(null);
+
+    const getPagingOption = (gridData) => {
+        if (!gridData) {
+            return defaultPagingOption;
+        }
+        return {
+            ...defaultPagingOption,
+            ...{
+                PageIndex: gridData.pageIndex,
+                PageSize: gridData.pageSize,
+                TotalItem: gridData.totalItem,
+            },
+        };
+    }
+
+    const fetchData = (pageOption) => {
+        if (!custId) return;
+
+        const url = "api/CustomerAdministration/GetBetListByCustId";
+        const pageOptions = getPagingOption(pageOption);
+
+        const params ={
+            CustId: custId,
+            FromDate: fromDate,
+            ToDate: toDate,
+            BaseCurrency: currencyCode,
+            ... pageOptions
+        }
+        props.toggleLoader(true);
+
+        DataService.postData(url, params)
+            .then((response) => {
+                const resultData = response.data;
+                setGridData(resultData.data);
+                setPagingOption(getPagingOption(resultData));
+                props.toggleLoader(false);
+            })
+            .catch((error) => {
+                console.err(error.message);
+                props.toggleLoader(false);
+            });
+    }
 
     useEffect(() => {
+        fetchData(pagingOption);
+    }, [custId])
 
-    }, [props.username])
+    if (!gridData.length || !pagingOption) {
+        return <NoDataTitle />;
+    }
 
     const headerText = {
         refNo: LangHelper.getSingleResource('RefNo'),
@@ -24,7 +79,7 @@ const BetList = (props) => {
         sport: LangHelper.getSingleResource('Sport')
     }
 
-    var dataList = {};
+    
 
     const renderHeader = () => {
         return (
@@ -46,22 +101,22 @@ const BetList = (props) => {
     
     const renderDataSection = () => {
         const dataRows = [];
-        for (let i = 0; i < dataList.length; i++) {
-            dataRows.push(buildDataRow(i + 1, dataList[i]));
+        for (let i = 0; i < gridData.length; i++) {
+            dataRows.push(buildDataRow(i + 1, gridData[i]));
         }
     
         return dataRows;
     }
 
     const buildDataRow = (index, dataItem) => {
-        const { refNo, transTimeString, productName, betType, turnover, winLoss, turnoverBased, winLossBased, status, sportName } = dataItem;
-    
+        const { refNo, transTimeString, productCode, betType, turnover, winLoss, turnoverBased, winLossBased, status, sportName } = dataItem;
+        
         return (
             <Row key={index}>
                 <Cell className="center-align">{index}</Cell>
                 <Cell className="center-align">{refNo}</Cell>
                 <Cell className="center-align">{transTimeString}</Cell>
-                <Cell>{productName}</Cell>
+                <Cell>{LangHelper.getSingleResource('Product' + productCode)}</Cell>
                 <Cell>{sportName}</Cell>
                 <Cell>{betType}</Cell>
                 <Cell className="right-align">{NumberFormat.formatDecimal(turnover)}</Cell>
@@ -73,16 +128,15 @@ const BetList = (props) => {
         )
     }
 
-    const handleChangePaging = pageIndex => {
-        setPagingOption({ ...pagingOption, pageIndex });
+    const handleChangePaging = (pageIndex, pageSize) => {
+        const newPageOptions = { ...pagingOption, pageIndex, pageSize };
+        fetchData(newPageOptions);
     }
 
     const getReportTitle = () => {
-        const {fromDate,toDate} = props.dateRange;
         return `${LangHelper.getSingleResource('CustomerAdministrationReportTitle').replace('{0}', LangHelper.getSingleResource('BetList'))}:  ${fromDate} -> ${toDate}`;
     }
 
-    const {pageIndex, totalPage} = pagingOption;
     const reportTitle = getReportTitle();
 
     return (
@@ -92,17 +146,20 @@ const BetList = (props) => {
                 autoWidth={true}
                 autoHeight={true}
                 header={renderHeader()}
-                body={renderDataSection(dataList)}
+                body={renderDataSection()}
                 containerPadding={30} />
-            {totalPage > 1 && <SimplePagination pageIndex={pageIndex} totalPage={totalPage} 
-                onPageChanged={handleChangePaging} />}
+            <Pager pageOption={pagingOption} onPaging={handleChangePaging} />
         </div>
     );
 };
 
-function mapStateToProps(state) {
-    const { dateRange, username } = state;
-    return Object.assign({}, { dateRange, username });
-};
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({ toggleLoader }, dispatch);
+}
 
-export default connect(mapStateToProps,)(BetList);
+function mapStateToProps(state) {
+    const { dateRange, username, userInfo} = state;
+    return Object.assign({}, { dateRange, username, userInfo });
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BetList);

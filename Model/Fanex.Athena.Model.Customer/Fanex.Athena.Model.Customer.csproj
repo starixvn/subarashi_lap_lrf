@@ -55,6 +55,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\CustomerAdmin\CustomerWithdrawHistory.cs" />
+    <Compile Include="DTO\CustomerAdmin\CustomerDepositHistory.cs" />
+    <Compile Include="DTO\CustomerAdmin\CustomerBetList.cs" />
+    <Compile Include="DTO\CustomerAdmin\CustomerDetailInfo.cs" />
+    <Compile Include="DTO\CustomerAdmin\CustomerInfo.cs" />
     <Compile Include="DTO\CustomerClassCategoryModel.cs" />
     <Compile Include="DTO\CustomerClassSitePolicyMemberModel.cs" />
     <Compile Include="DTO\RiskLevelModel.cs" />
@@ -74,6 +79,8 @@
     <Compile Include="DTO\PlayerSegmentation\UpdateStatusPlayerResult.cs" />
     <Compile Include="Enum\CustomerClassTabType.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="MetaModel\CustomerAdmin\GetCustomerBetListMetaModel.cs" />
+    <Compile Include="MetaModel\CustomerAdmin\GetCustomerInfoMetaModel.cs" />
     <Compile Include="MetaModel\CustomerLog\CustomerLogMetaModel.cs" />
     <Compile Include="MetaModel\CustomerLog\PlayerUpdatingLogMetaModel.cs" />
     <Compile Include="MetaModel\DeleteGroupMetaModel.cs" />

@@ -1,15 +1,45 @@
 import React, { useState, useEffect } from 'react';
 import ReportTitle from '@jsroot/components/ReportTitle';
+import DataService from "@jsroot/lib/DataService";
+import NoDataTitle from '@jsroot/components/NoDataTitle';
 import { Table, Row, Cell, HeaderRow, HeaderCell } from '@9softstudio/react-grid';
 import LangHelper from '@jsroot/lib/langHelper';
+import { toggleLoader } from "@jsroot/actions/loaderAction";
+import { bindActionCreators } from "redux";
 import { connect } from 'react-redux';
 
 const DepositHistory = (props) => {
-    const [pagingOption, setPagingOption] = useState({pageIndex: 1, totalPage: 0});
+    const {fromDate,toDate} = props.dateRange;
+    const {custId} = props.userInfo;
+    const [depositHistoryData, setDepositHistoryData] = useState([]);
 
     useEffect(() => {
+        if(!custId) return;
 
-    }, [props.username])
+        const url = "api/CustomerAdministration/GetDepositHistoryByCustId";
+        const params ={
+            CustId: custId,
+            FromDate: fromDate,
+            ToDate: toDate
+        }
+        props.toggleLoader(true);
+
+        DataService.postData(url, params)
+            .then((response) => {
+                setDepositHistoryData(response.data);
+                props.toggleLoader(false);
+            })
+            .catch((error) => {
+                console.err(error.message);
+                props.toggleLoader(false);
+            });
+
+
+    }, [custId])
+
+    if (!depositHistoryData.length) {
+        return <NoDataTitle />;
+    }
 
     const headerText = {
         transID: LangHelper.getSingleResource('TransID'),
@@ -17,8 +47,6 @@ const DepositHistory = (props) => {
         amount: LangHelper.getSingleResource('Amount'),
         remark: LangHelper.getSingleResource('Remark')
     }
-
-    var dataList = {};
 
     const renderHeader = () => {
         return (
@@ -33,36 +61,30 @@ const DepositHistory = (props) => {
     
     const renderDataSection = () => {
         const dataRows = [];
-        for (let i = 0; i < dataList.length; i++) {
-            dataRows.push(buildDataRow(i + 1, dataList[i]));
+        for (let i = 0; i < depositHistoryData.length; i++) {
+            dataRows.push(buildDataRow(i + 1, depositHistoryData[i]));
         }
     
         return dataRows;
     }
 
     const buildDataRow = (index, dataItem) => {
-        const { transID, transDate, amount, remark } = dataItem;
+        const { transID, transDateString, amount, remark } = dataItem;
     
         return (
             <Row key={index}>
                 <Cell className="center-align">{transID}</Cell>
-                <Cell className="center-align">{transDate}</Cell>
+                <Cell className="center-align">{transDateString}</Cell>
                 <Cell className="center-align">{amount}</Cell>
                 <Cell className="center-align">{remark}</Cell>
             </Row>
         )
     }
 
-    const handleChangePaging = pageIndex => {
-        setPagingOption({ ...pagingOption, pageIndex });
-    }
-
     const getReportTitle = () => {
-        const {fromDate,toDate} = props.dateRange;
         return `${LangHelper.getSingleResource('CustomerAdministrationReportTitle').replace('{0}', LangHelper.getSingleResource('DepositHistory'))}:  ${fromDate} -> ${toDate}`;
     }
 
-    const {pageIndex, totalPage} = pagingOption;
     const reportTitle = getReportTitle();
 
     return (
@@ -72,17 +94,19 @@ const DepositHistory = (props) => {
                 autoWidth={true}
                 autoHeight={true}
                 header={renderHeader()}
-                body={renderDataSection(dataList)}
+                body={renderDataSection()}
                 containerPadding={30} />
-            {totalPage > 1 && <SimplePagination pageIndex={pageIndex} totalPage={totalPage} 
-                onPageChanged={handleChangePaging} />}
         </div>
     );
 };
 
-function mapStateToProps(state) {
-    const { dateRange, username } = state;
-    return Object.assign({}, { dateRange, username });
-};
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({ toggleLoader }, dispatch);
+}
 
-export default connect(mapStateToProps,)(DepositHistory);
+function mapStateToProps(state) {
+    const { dateRange, username, userInfo } = state;
+    return Object.assign({}, { dateRange, username, userInfo });
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DepositHistory);

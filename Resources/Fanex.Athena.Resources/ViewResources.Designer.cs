@@ -2023,7 +2023,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} - Data support up to 60 days.
+        ///   Looks up a localized string similar to {0}, GMT+8, Data support up to 60 days.
         /// </summary>
         public static string CustomerAdministrationReportTitle {
             get {

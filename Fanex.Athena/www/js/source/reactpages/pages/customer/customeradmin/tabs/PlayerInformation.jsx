@@ -1,93 +1,135 @@
-import React, { useEffect } from 'react';
-import LangHelper from '@jsroot/lib/langHelper';
-import ReportTitle from '@jsroot/components/ReportTitle';
-import { connect } from 'react-redux';
+import React, { useEffect, useState } from "react";
+import LangHelper from "@jsroot/lib/langHelper";
+import ReportTitle from "@jsroot/components/ReportTitle";
+import DataService from "@jsroot/lib/DataService";
+import { connect } from "react-redux";
+import { toggleLoader } from "@jsroot/actions/loaderAction";
+import { bindActionCreators } from "redux";
 
 const PlayerInformation = (props) => {
+    const { custId } = props.userInfo;
+    const url = "api/CustomerAdministration/SearchCustomerByCustId";
+
+    const [userInfoDetail, setUserInfoDetail] = useState({});
 
     useEffect(() => {
+        if (!custId) return;
 
-    }, [props.username])
+        const params = {
+            custId: custId,
+        };
 
-    var data = {};
-    
-    const { FirstName, LastName, Gender, Email, Mobile, Active, Address, Locked,
-        SecurityQuestion, SecurityCode, PreferredUserName, MyPreferredCurrency, MyPreferredOdds } = data || {};
+        props.toggleLoader(false);
+
+        DataService.postData(url, params)
+            .then((response) => {
+                setUserInfoDetail({ ...response.data });
+                props.toggleLoader(false);
+            })
+            .catch((error) => {
+                console.err(error.message);
+                props.toggleLoader(false);
+            });
+    }, [custId]);
+
+    const {
+        firstName,
+        lastName,
+        gender,
+        email,
+        mobile,
+        active,
+        address,
+        locked,
+        securityQuestion,
+        securityCode,
+        preferredUserName,
+        myPreferredCurrency,
+        myPreferredOdds,
+    } = userInfoDetail || {};
 
     return (
-        <div className="account-info-container">
-            <ReportTitle content={LangHelper.getSingleResource('PlayerInformation')} />
+        <div className='account-info-container'>
+            <ReportTitle
+                content={LangHelper.getSingleResource("PlayerInformation")}
+            />
             <div className='side-content page-filter'>
-                <table className="table">
+                <table className='table'>
                     <thead>
                         <tr>
-                            <th>{LangHelper.getSingleResource('GeneralInformation')}</th>
-                            <th>{LangHelper.getSingleResource('Value')}</th>
+                            <th>{LangHelper.getSingleResource("GeneralInformation")}</th>
+                            <th>{LangHelper.getSingleResource("Value")}</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td className="first-cell">{LangHelper.getSingleResource('FirstName')}</td>
-                            <td>{FirstName}</td>
+                            <td className='first-cell'>{LangHelper.getSingleResource("FirstName")}</td>
+                            <td>{firstName}</td>
                         </tr>
                         <tr>
-                            <td>{LangHelper.getSingleResource('LastName')}</td>
-                            <td>{LastName}</td>
+                            <td>{LangHelper.getSingleResource("LastName")}</td>
+                            <td>{lastName}</td>
                         </tr>
                         <tr>
-                        <td>{LangHelper.getSingleResource('PreferredUserName')}</td>
-                            <td>{PreferredUserName}</td>
+                            <td>{LangHelper.getSingleResource("PreferredUserName")}</td>
+                            <td>{preferredUserName}</td>
                         </tr>
                         <tr>
-                            <td>{LangHelper.getSingleResource('Gender')}</td>
-                            <td>{Gender}</td>
+                            <td>{LangHelper.getSingleResource("Gender")}</td>
+                            <td>{gender}</td>
                         </tr>
                         <tr>
-                            <td>{LangHelper.getSingleResource('Email')}</td>
-                            <td>{Email}</td>
+                            <td>{LangHelper.getSingleResource("Email")}</td>
+                            <td>{email}</td>
                         </tr>
                         <tr>
-                            <td>{LangHelper.getSingleResource('Mobile')}</td>
-                            <td>{Mobile}</td>
+                            <td>{LangHelper.getSingleResource("Mobile")}</td>
+                            <td>{mobile}</td>
                         </tr>
                         <tr>
-                            <td>{LangHelper.getSingleResource('Active')}</td>
-                            <td>{Active}</td>
+                            <td>{LangHelper.getSingleResource("Active")}</td>
+                            <td>{active}</td>
                         </tr>
                         <tr>
-                            <td>{LangHelper.getSingleResource('Locked')}</td>
-                            <td>{Locked}</td>
+                            <td>{LangHelper.getSingleResource("Locked")}</td>
+                            <td>{locked}</td>
                         </tr>
                         <tr>
-                            <td>{LangHelper.getSingleResource('Address')}</td>
-                            <td>{Address}</td>
+                            <td>{LangHelper.getSingleResource("Address")}</td>
+                            <td>{address}</td>
                         </tr>
                         <tr>
-                            <td>{LangHelper.getSingleResource('SecurityQuestion')}</td>
-                            <td>{SecurityQuestion}</td>
+                            <td>{LangHelper.getSingleResource("SecurityQuestion")}</td>
+                            <td>{securityQuestion}</td>
                         </tr>
                         <tr>
-                            <td>{LangHelper.getSingleResource('SecurityCode')}</td>
-                            <td>{SecurityCode}</td>
+                            <td>
+                                {LangHelper.getSingleResource("SecurityCode")}
+                            </td>
+                            <td>{securityCode}</td>
                         </tr>
                         <tr>
-                            <td>{LangHelper.getSingleResource('MyPreferredCurrency')}</td>
-                            <td>{MyPreferredCurrency}</td>
+                            <td>{LangHelper.getSingleResource("MyPreferredCurrency")}</td>
+                            <td>{myPreferredCurrency}</td>
                         </tr>
                         <tr>
-                            <td>{LangHelper.getSingleResource('MyPreferredOdds')}</td>
-                            <td>{MyPreferredOdds}</td>
+                            <td>{LangHelper.getSingleResource("MyPreferredOdds")}</td>
+                            <td>{myPreferredOdds}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-    )
+    );
 };
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({ toggleLoader }, dispatch);
+}
 
 function mapStateToProps(state) {
-    const { username } = state;
-    return Object.assign({}, { username });
-};
+    const { username, userInfo } = state;
+    return Object.assign({}, { username, userInfo });
+}
 
-export default connect(mapStateToProps,)(PlayerInformation);
+export default connect(mapStateToProps, mapDispatchToProps)(PlayerInformation);

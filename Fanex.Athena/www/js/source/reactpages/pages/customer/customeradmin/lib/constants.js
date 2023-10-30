@@ -3,8 +3,8 @@ import LangHelper from '@jsroot/lib/langHelper';
 
 export const defaultPagingOption = {
     PageIndex: 1,
-    PageSize: 500,
-    PageList: [500],
+    PageSize: 20,
+    PageList: [20, 50, 100, 200, 500, 1000, 2000],
     TotalItem: null
 }
 
@@ -25,7 +25,10 @@ const dynamicImports = {
 }
 
 export const tabMenuList = Object.keys(tabKeys).map(_ => ({
-    key: _, name: LangHelper.getSingleResource(_), component: React.lazy(dynamicImports[_]), preLoad: dynamicImports[_], isNew: newTabs.some(newTab => newTab === _)
+    key: _, name: LangHelper.getSingleResource(_), 
+    component: React.lazy(dynamicImports[_]), 
+    preLoad: dynamicImports[_], 
+    isNew: newTabs.some(newTab => newTab === _)
 }))
 
 export const preLoadComponents = (lazyComponents) => {

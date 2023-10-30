@@ -3580,7 +3580,7 @@
     <value>Country</value>
   </data>
   <data name="CustomerAdministrationReportTitle" xml:space="preserve">
-    <value>{0} - Data support up to 60 days</value>
+    <value>{0}, GMT+8, Data support up to 60 days</value>
   </data>
   <data name="DateOfRegistration" xml:space="preserve">
     <value>Date of Registration</value>

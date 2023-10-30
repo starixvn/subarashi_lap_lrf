@@ -3,14 +3,33 @@ import { connect } from 'react-redux';
 import { ActionCreators } from '../actions/index.js';
 import { bindActionCreators } from 'redux';
 import LangHelper from '@jsroot/lib/langHelper';
-
+import DataService from '@jsroot/lib/DataService';
+import { toggleLoader } from '@jsroot/actions/loaderAction';
 
 
 export const FormFilter = props => {
     const isValidParam = !!props.username;
 
     const _handleSubmit = () => {
-        props.setSubmitted(true);
+        props.toggleLoader(true);
+
+        const url = "api/CustomerAdministration/SearchCustomerByUserName";
+        const params = {
+            userName: props.username,
+        };
+
+        DataService.postData(url, params)
+            .then(response => {
+                props.setUserInfo(response.data);
+                props.toggleLoader(false);
+                props.setSubmitted(true);
+            })
+            .catch(error => {
+                //Service.showErrorMsg();
+                console.err(error.message);
+                props.toggleLoader(false);
+                props.setSubmitted(true);
+            })
     }
 
     return (
@@ -37,13 +56,13 @@ export const FormFilter = props => {
 }
 
 function mapDispatchToProps(dispatch) {
-    const { setUsername, setSubmitted } = ActionCreators;
-    return bindActionCreators({setUsername, setSubmitted}, dispatch);
+    const { setUsername, setSubmitted , setUserInfo} = ActionCreators;
+    return bindActionCreators({setUsername, setSubmitted, toggleLoader, setUserInfo }, dispatch);
 }
 
 function mapStateToProps(state) {
     const { username, isSubmitted } = state;
     return Object.assign({}, { username, isSubmitted });
-};
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormFilter);
