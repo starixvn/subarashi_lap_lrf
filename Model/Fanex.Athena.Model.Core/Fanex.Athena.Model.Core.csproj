@@ -169,6 +169,7 @@
     <Compile Include="MetaModel\IMetaModelUserId.cs" />
     <Compile Include="MetaModel\Product\ProductOption.cs" />
     <Compile Include="MetaModel\ProductValidationOption.cs" />
+    <Compile Include="MetaModel\ZipEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResultModel\SortableReportResultModel.cs" />
     <Compile Include="ResultModel\ReportResultModel.cs" />

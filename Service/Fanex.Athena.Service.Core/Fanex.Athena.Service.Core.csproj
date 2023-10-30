@@ -72,6 +72,13 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.IO.Compression.4.3.0\lib\net46\System.IO.Compression.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.IO.Compression.ZipFile, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.IO.Compression.ZipFile.4.3.0\lib\net46\System.IO.Compression.ZipFile.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Net.Http.4.3.4\lib\net46\System.Net.Http.dll</HintPath>
     </Reference>
@@ -107,10 +114,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\DataPermissionAttribute.cs" />
+    <Compile Include="Common\CompressService.cs" />
     <Compile Include="Common\DataPermissionService.cs" />
+    <Compile Include="Common\FileService.cs" />
+    <Compile Include="Common\Interfaces\ICompressService.cs" />
     <Compile Include="Common\Interfaces\ICurrencyService.cs" />
     <Compile Include="Common\CurrencyService.cs" />
     <Compile Include="Common\Interfaces\IDataPermissionService.cs" />
+    <Compile Include="Common\Interfaces\IFileService.cs" />
     <Compile Include="OAuth\Interfaces\IOAuthInfo.cs" />
     <Compile Include="OAuth\Interfaces\IOAuthService.cs" />
     <Compile Include="OAuth\OAuthInfo.cs" />

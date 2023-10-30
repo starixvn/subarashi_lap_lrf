@@ -42,7 +42,7 @@ namespace Fanex.Athena.Excel.Report
         private const int RowTableHeaderTemplate = 1;
         private const int RowTotalTemplate = 4;
 
-        private const int DefaultPageSize = 1500;
+        private const int DefaultPageSize = 50000;
 
         private readonly IEnumerable<CustTurnover> _dataList;
         private readonly string _formatDateTime;
@@ -71,13 +71,7 @@ namespace Fanex.Athena.Excel.Report
             IsMultiSheet = true;
         }
 
-        protected override int NumberOfSheets
-        {
-            get
-            {
-                return GetNumberOfSheets(_dataList.Last().Index, PageSize);
-            }
-        }
+        protected override int NumberOfSheets => 1;
 
         protected override void AssignHeader(ISheet sheet)
         {
@@ -115,11 +109,8 @@ namespace Fanex.Athena.Excel.Report
         protected override void AssignSheetData(ISheet sheet, int pageIndex)
         {
             var rowIndex = 0;
-            var minGroup = checked(pageIndex * PageSize);
-            var maxGroup = Math.Min(_dataList.Last().Index, checked((pageIndex + 1) * PageSize));
-            var dataInRange = _dataList.Where(x => x.Index > minGroup && x.Index <= maxGroup).ToList();
 
-            foreach (var customerTurnover in dataInRange)
+            foreach (var customerTurnover in _dataList)
             {
                 var realIndex = rowIndex + RowContentTemplate;
                 var row = sheet.CopyRow(TemplateSheet, RowContentTemplate, realIndex);
