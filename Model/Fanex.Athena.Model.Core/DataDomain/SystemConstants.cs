@@ -28,6 +28,7 @@
             { BaseCurrencyType.INH,"INH" },
             { BaseCurrencyType.BDT,"BDT" },
             { BaseCurrencyType.INR,"INR" },
+            { BaseCurrencyType.PHP,"PHP" },
 
             // crypto currency
             { BaseCurrencyType.USDT,"USDT" }
@@ -44,6 +45,7 @@
             { BaseCurrencyType.INH,"INH" },
             { BaseCurrencyType.BDT,"BDT" },
             { BaseCurrencyType.INR,"INR" },
+            { BaseCurrencyType.PHP,"PHP" },
         };
 
         public static readonly IReadOnlyDictionary<int, string> CryptoBaseCurrencyList = new Dictionary<int, string> {
