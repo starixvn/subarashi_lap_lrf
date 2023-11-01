@@ -110,7 +110,6 @@
 
 	<Function Name="CustomerAdmin">
 		<Setting Key="Lrf_Rpt_Audit_AdminPlayerSearch" SpName="Lrf_Rpt_Audit_AdminPlayerSearch" DbName="DBPLO.bodb02.bodbLicenseeNet" />
-		<Setting Key="Lrf_Rpt_Audit_AdminPlayerDetail" SpName="Lrf_Rpt_Audit_AdminPlayerDetail" DbName="DBPLO.bodb02.bodbLicenseeNet" />
 		<Setting Key="Lrf_Rpt_Audit_AdminBetList" SpName="Lrf_Rpt_Audit_AdminBetList" DbName="DBPLO.bodb02.bodbLicenseeNet" />
 		<Setting Key="Lrf_Rpt_Audit_AdminWithdrawHistory" SpName="Lrf_Rpt_Audit_AdminWithdrawHistory" DbName="DBPLO.bodb02.bodbLicenseeNet" />
 		<Setting Key="Lrf_Rpt_Audit_AdminDepositHistory" SpName="Lrf_Rpt_Audit_AdminDepositHistory" DbName="DBPLO.bodb02.bodbLicenseeNet" />

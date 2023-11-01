@@ -53,7 +53,8 @@ const BetList = (props) => {
                 props.toggleLoader(false);
             })
             .catch((error) => {
-                console.err(error.message);
+                alert(LangHelper.getSingleResource('ErrorProcessingMsg'));
+                console.error(error.message);
                 props.toggleLoader(false);
             });
     }
@@ -79,7 +80,11 @@ const BetList = (props) => {
         sport: LangHelper.getSingleResource('Sport')
     }
 
-    
+    const statusText = {
+        '-1': LangHelper.getSingleResource('Lose'),
+        '0' : LangHelper.getSingleResource('Draw'),
+        '1' : LangHelper.getSingleResource('Won'),
+    }
 
     const renderHeader = () => {
         return (
@@ -102,14 +107,14 @@ const BetList = (props) => {
     const renderDataSection = () => {
         const dataRows = [];
         for (let i = 0; i < gridData.length; i++) {
-            dataRows.push(buildDataRow(i + 1, gridData[i]));
+            dataRows.push(buildDataRow(gridData[i]));
         }
     
         return dataRows;
     }
 
-    const buildDataRow = (index, dataItem) => {
-        const { refNo, transTimeString, productCode, betType, turnover, winLoss, turnoverBased, winLossBased, status, sportName } = dataItem;
+    const buildDataRow = (dataItem) => {
+        const { index, refNo, transTimeString, productCode, betType, turnover, winLoss, turnoverBased, winLossBased, status, sportName } = dataItem;
         
         return (
             <Row key={index}>
@@ -123,7 +128,7 @@ const BetList = (props) => {
                 <Cell className="right-align">{NumberFormat.formatDecimal(winLoss)}</Cell>
                 <Cell className="right-align">{NumberFormat.formatDecimal(turnoverBased)}</Cell>
                 <Cell className="right-align">{NumberFormat.formatDecimal(winLossBased)}</Cell>
-                <Cell className="center-align">{status}</Cell>
+                <Cell className="center-align">{statusText[status]}</Cell>
             </Row>
         )
     }

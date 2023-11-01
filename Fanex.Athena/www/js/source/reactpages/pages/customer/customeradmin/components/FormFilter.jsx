@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import LangHelper from '@jsroot/lib/langHelper';
 import DataService from '@jsroot/lib/DataService';
 import { toggleLoader } from '@jsroot/actions/loaderAction';
+import {tabKeys} from '../lib/constants.js';
 
 
 export const FormFilter = props => {
@@ -12,7 +13,7 @@ export const FormFilter = props => {
 
     const _handleSubmit = () => {
         props.toggleLoader(true);
-
+        props.setSelectedTab(tabKeys.PlayerInformation);
         const url = "api/CustomerAdministration/GetCustomerInfoByUserName";
         const params = {
             userName: props.username,
@@ -56,8 +57,8 @@ export const FormFilter = props => {
 }
 
 function mapDispatchToProps(dispatch) {
-    const { setUsername, setSubmitted , setUserInfo} = ActionCreators;
-    return bindActionCreators({setUsername, setSubmitted, toggleLoader, setUserInfo }, dispatch);
+    const { setUsername, setSubmitted , setUserInfo, setSelectedTab} = ActionCreators;
+    return bindActionCreators({setUsername, setSubmitted, toggleLoader, setUserInfo, setSelectedTab }, dispatch);
 }
 
 function mapStateToProps(state) {

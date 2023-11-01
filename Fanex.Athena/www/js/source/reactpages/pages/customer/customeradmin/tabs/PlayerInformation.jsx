@@ -11,13 +11,10 @@ const PlayerInformation = (props) => {
         email,
         mobile,
         active,
-        address,
         locked,
         securityQuestion,
         securityCode,
         preferredUserName,
-        myPreferredCurrency,
-        myPreferredOdds,
     } = props.userInfo;
 
     return (
@@ -67,10 +64,6 @@ const PlayerInformation = (props) => {
                             <td>{locked}</td>
                         </tr>
                         <tr>
-                            <td>{LangHelper.getSingleResource("Address")}</td>
-                            <td>{address}</td>
-                        </tr>
-                        <tr>
                             <td>{LangHelper.getSingleResource("SecurityQuestion")}</td>
                             <td>{securityQuestion}</td>
                         </tr>
@@ -79,14 +72,6 @@ const PlayerInformation = (props) => {
                                 {LangHelper.getSingleResource("SecurityCode")}
                             </td>
                             <td>{securityCode}</td>
-                        </tr>
-                        <tr>
-                            <td>{LangHelper.getSingleResource("MyPreferredCurrency")}</td>
-                            <td>{myPreferredCurrency}</td>
-                        </tr>
-                        <tr>
-                            <td>{LangHelper.getSingleResource("MyPreferredOdds")}</td>
-                            <td>{myPreferredOdds}</td>
                         </tr>
                     </tbody>
                 </table>

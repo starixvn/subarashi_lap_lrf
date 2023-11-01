@@ -30,7 +30,8 @@ const DepositHistory = (props) => {
                 props.toggleLoader(false);
             })
             .catch((error) => {
-                console.err(error.message);
+                alert(LangHelper.getSingleResource('ErrorProcessingMsg'));
+                console.error(error.message);
                 props.toggleLoader(false);
             });
 

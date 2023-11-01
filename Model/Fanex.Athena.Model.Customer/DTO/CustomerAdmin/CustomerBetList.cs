@@ -4,6 +4,8 @@ namespace Fanex.Athena.Model.Customer.DTO.CustomerAdmin
 {
     public class CustomerBetList
     {
+        public string Index { get; set; }
+
         public string RefNo { get; set; }
 
         public DateTime TransTime { get; set; }
