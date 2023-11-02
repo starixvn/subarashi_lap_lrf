@@ -12,7 +12,10 @@
 @foreach (var comm in comms)
 {
     var dropdownId = comm.Key + "Comm";
-    if (Model.ProductPermissions[comm.Key])
+    var isOffer = false;
+    Model.ProductPermissions.TryGetValue(comm.Key, out isOffer);
+
+    if (isOffer)
     {
         <div class="row">
             <div class="col l2 m4 s12 input-field">

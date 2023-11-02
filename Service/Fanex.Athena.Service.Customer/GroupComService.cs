@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Data;
+    using System.Linq;
     using System.Threading.Tasks;
     using Fanex.Athena.DataAccess.Customer.Interfaces;
     using Fanex.Athena.Model.Auth;
@@ -19,11 +20,14 @@
         }
 
         public IList<GroupCommMetaModel> GetAllAsync(int licenseeId, IDictionary<string, bool> permissions)
-            => _groupDataAccess.GetAllAsync(licenseeId, permissions);
+            => _groupDataAccess.GetAllAsync(licenseeId, permissions).OrderBy(_ => _.GroupCommId).ToList();
 
         public async Task<DataTable> GetDataForExcelAsync(int licenseeId)
         {
-            return await _groupDataAccess.GetDataForExcelAsync(licenseeId).ConfigureAwait(false);
+            var dt = await _groupDataAccess.GetDataForExcelAsync(licenseeId).ConfigureAwait(false);
+            dt.DefaultView.Sort = "GroupCommID ASC";
+            dt = dt.DefaultView.ToTable();
+            return dt;
         }
 
         public GroupCommMetaModel GetById(int groupCommId, int licenseeId, IDictionary<string, bool> permissions)

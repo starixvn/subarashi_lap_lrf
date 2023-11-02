@@ -3041,7 +3041,7 @@
     <comment>ignorejs</comment>
   </data>
   <data name="ProductVS3" xml:space="preserve">
-    <value>Virtual Sports 3</value>
+    <value>Virtual Sports 3 (Old)</value>
   </data>
   <data name="AddContact" xml:space="preserve">
     <value>Add Contact</value>
@@ -3539,6 +3539,9 @@
   </data>
   <data name="Success" xml:space="preserve">
     <value>Success</value>
+  </data>
+  <data name="ProductLG" xml:space="preserve">
+    <value>Virtual Sports 3</value>
   </data>
   <data name="SettledAndResettledDate" xml:space="preserve">
     <value>Settled and Resettled Date</value>

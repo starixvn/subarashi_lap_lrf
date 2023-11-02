@@ -28,6 +28,8 @@
             }
             else if (newSportId === 104 || (newSportId >= 190 && newSportId <= 197)) {
                 productOptions.push('VS2');
+            } else if (newSportId === 178 || newSportId === 179) {
+                productOptions.push('LG');
             }
             else {
                 if (productCode === 'SB' || productCode === 'ALL') {

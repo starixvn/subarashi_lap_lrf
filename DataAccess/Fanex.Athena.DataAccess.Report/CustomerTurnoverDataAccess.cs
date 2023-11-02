@@ -8,6 +8,7 @@ namespace Fanex.Athena.DataAccess.Report
 {
     using System.Collections.Generic;
     using System.Data;
+    using System.Text.RegularExpressions;
     using System.Threading;
     using System.Threading.Tasks;
     using Core.Configuration.Interfaces;
@@ -16,6 +17,7 @@ namespace Fanex.Athena.DataAccess.Report
     using Fanex.Athena.DataAccess.Report.Interfaces;
     using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Resources;
@@ -40,6 +42,9 @@ namespace Fanex.Athena.DataAccess.Report
 
         public async Task<ReportResultModel<CustTurnover>> GetDataList(CustomerTurnoverMetaModel metaModel, IDictionary<int, string> currencyList, string languageCode)
         {
+            const int ProductPrefixPosition = 1;
+            const int BettypePosition = 2;
+
             using (var db = this.GetObjectDb("Lrf_Rpt_CustomerTurnOver"))
             {
                 AddParameters(metaModel, languageCode, db);
@@ -51,6 +56,13 @@ namespace Fanex.Athena.DataAccess.Report
                         var turnover = reader.ToDecimal("Turnover");
                         var sportId = reader.ToInt("sporttype");
                         var currencyid = reader.ToInt("currencyid");
+                        var bettype = reader.ToString("Bettype");
+                        var bettypeMatch = Regex.Match(bettype, @"(^[^-\n]*) - ([^-\n]*$)");
+                        if (bettypeMatch.Success)
+                        {
+                            bettype = $"{ProductHelper.GetProductName(bettypeMatch.Groups[ProductPrefixPosition].Value)} - {bettypeMatch.Groups[BettypePosition].Value}";
+                        }
+
                         result.Add(new CustTurnover
                         {
                             Index = reader.ToInt("RowNo"),
@@ -61,7 +73,7 @@ namespace Fanex.Athena.DataAccess.Report
                             SportId = sportId,
                             SportType = GetSportName(sportId, languageCode),
                             TotalTransactions = reader.ToInt("BetCount"),
-                            Bettype = reader.ToString("Bettype"),
+                            Bettype = bettype,
                             Turnover = turnover,
                             TotalTurnover = turnover,
                             CustomerWinLoss = reader.ToDecimal("Winlost"),
@@ -90,12 +102,12 @@ namespace Fanex.Athena.DataAccess.Report
 
         private string GetSportName(int sportId, string languageCode)
         {
-            Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(languageCode);            
+            Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(languageCode);
             if (sportId == ProductTypes.Parlay)
             {
                 return ViewResources.Parlay;
             }
-            
+
             return _cacheRefAdapter.GetSportName(sportId, languageCode);
         }
 

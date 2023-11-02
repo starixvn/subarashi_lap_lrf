@@ -72,14 +72,13 @@
                 };
                 var subProductCodes = $"{Product.SB},{Product.NG},{Product.VS}";
 
-                StubGetAllowedSubProductCodeList($"{Product.SB},{Product.NG},{Product.VS},{Product.VS2},{Product.VS3}", subProductCodes);
+                StubGetAllowedSubProductCodeList($"{Product.SB},{Product.NG},{Product.VS},{Product.VS2},{Product.VS3},{Product.LG}", subProductCodes);
 
                 _sportTypeDataAccess.GetSportsAndProducts(
                     SessionService.LicenseeSession.LicenseeId,
                     SessionService.UserSession.Language,
                     subProductCodes)
                     .Returns(fakeData);
-
 
                 // Action
                 var result = await controller.GetSportsAndProducts() as JsonResult;
@@ -97,8 +96,6 @@
                 Assert.That(JsonConvert.SerializeObject(result.Data), Is.EqualTo(JsonConvert.SerializeObject(expectedData)));
             }
         }
-
-
 
         [Test]
         public async Task Excel_EmptyExcelParam_ReturnNull()

@@ -66,7 +66,7 @@
 
             var productCode = ProductServiceInstance.GetAllowedSubProductCodeList(
                SessionServiceInstance.LicenseeSession.OfferedSubProductList,
-               $"{Product.SB},{Product.NG},{Product.VS},{Product.VS2},{Product.VS3}");
+               $"{Product.SB},{Product.NG},{Product.VS},{Product.VS2},{Product.VS3},{Product.LG}");
 
             var data = await _sportTypeDataAccess.GetSportsAndProducts(
                 SessionServiceInstance.LicenseeSession.LicenseeId,
