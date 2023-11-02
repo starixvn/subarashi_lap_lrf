@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[0],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["customer/customeradmin/withdrawalHistory"],{
 
 /***/ "./node_modules/@9softstudio/react-grid/dist/index.js":
 /*!************************************************************!*\
@@ -57,10 +57,10 @@ ReportTitle.defaultProps = defaultProps;
 
 /***/ }),
 
-/***/ "./www/js/source/reactpages/pages/customer/customeradmin/tabs/BetList.jsx":
-/*!********************************************************************************!*\
-  !*** ./www/js/source/reactpages/pages/customer/customeradmin/tabs/BetList.jsx ***!
-  \********************************************************************************/
+/***/ "./www/js/source/reactpages/pages/customer/customeradmin/tabs/WithdrawalHistory.jsx":
+/*!******************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/customer/customeradmin/tabs/WithdrawalHistory.jsx ***!
+  \******************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -72,125 +72,100 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @9softstudio/react-grid */ "./node_modules/@9softstudio/react-grid/dist/index.js");
 /* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+/* harmony import */ var _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/DataService */ "./www/js/source/reactpages/lib/DataService.js");
+/* harmony import */ var _jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/components/NoDataTitle */ "./www/js/source/reactpages/components/NoDataTitle.jsx");
+/* harmony import */ var _jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/actions/loaderAction */ "./www/js/source/reactpages/actions/loaderAction.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 
 
 
 
 
-const BetList = props => {
-  const [pagingOption, setPagingOption] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
-    pageIndex: 1,
-    totalPage: 0
-  });
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {}, [props.username]);
+
+
+
+
+const WithdrawalHistory = props => {
+  const {
+    fromDate,
+    toDate
+  } = props.dateRange;
+  const {
+    custId
+  } = props.userInfo;
+  const [WithdrawHistoryData, setWithdrawHistoryData] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    if (!custId) return;
+    const url = "api/CustomerAdministration/GetWithdrawHistoryByCustId";
+    const params = {
+      CustId: custId,
+      FromDate: fromDate,
+      ToDate: toDate
+    };
+    props.toggleLoader(true);
+    _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_4__["default"].postData(url, params).then(response => {
+      setWithdrawHistoryData(response.data);
+      props.toggleLoader(false);
+    }).catch(error => {
+      alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('ErrorProcessingMsg'));
+      console.error(error.message);
+      props.toggleLoader(false);
+    });
+  }, [custId]);
   const headerText = {
-    refNo: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('RefNo'),
-    transTime: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('TransTime'),
-    product: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('Product'),
-    betType: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('BetType'),
-    turnover: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('Turnover'),
-    winloss: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('WinLoss'),
-    turnoverBased: `${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('Turnover')} (USD)`,
-    winlossBased: `${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('WinLoss')} (USD)`,
-    status: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('Status'),
-    sport: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('Sport')
+    transID: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('TransID'),
+    transDate: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('TransDate'),
+    amount: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('Amount'),
+    remark: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('Remark')
   };
-  var dataList = {};
+  if (!WithdrawHistoryData.length) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_5__["default"], null);
+  }
   const renderHeader = () => {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_2__["HeaderRow"], {
       style: {
         height: 32
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_2__["HeaderCell"], {
-      colWidth: 40
-    }, "#"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_2__["HeaderCell"], {
-      colWidth: 100
-    }, headerText.refNo), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_2__["HeaderCell"], {
-      colWidth: 100
-    }, headerText.transTime), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_2__["HeaderCell"], {
-      colWidth: 80
-    }, headerText.product), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_2__["HeaderCell"], {
-      colWidth: 80
-    }, headerText.sport), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_2__["HeaderCell"], {
       colWidth: 150
-    }, headerText.betType), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_2__["HeaderCell"], {
-      colWidth: 80,
-      sortBy: 'turnover'
-    }, headerText.turnover), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_2__["HeaderCell"], {
-      colWidth: 80,
-      sortBy: 'winLoss'
-    }, headerText.winloss), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_2__["HeaderCell"], {
-      colWidth: 80,
-      sortBy: 'turnoverBased'
-    }, headerText.turnoverBased), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_2__["HeaderCell"], {
-      colWidth: 80,
-      sortBy: 'winLossBased'
-    }, headerText.winlossBased), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_2__["HeaderCell"], {
-      colWidth: 50
-    }, headerText.status));
+    }, headerText.transID), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_2__["HeaderCell"], {
+      colWidth: 150
+    }, headerText.transDate), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_2__["HeaderCell"], {
+      colWidth: 150
+    }, headerText.amount), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_2__["HeaderCell"], {
+      colWidth: 150
+    }, headerText.remark));
   };
   const renderDataSection = () => {
     const dataRows = [];
-    for (let i = 0; i < dataList.length; i++) {
-      dataRows.push(buildDataRow(i + 1, dataList[i]));
+    for (let i = 0; i < WithdrawHistoryData.length; i++) {
+      dataRows.push(buildDataRow(i + 1, WithdrawHistoryData[i]));
     }
     return dataRows;
   };
   const buildDataRow = (index, dataItem) => {
     const {
-      refNo,
-      transTimeString,
-      productName,
-      betType,
-      turnover,
-      winLoss,
-      turnoverBased,
-      winLossBased,
-      status,
-      sportName
+      transID,
+      transDateString,
+      amount,
+      remark
     } = dataItem;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_2__["Row"], {
       key: index
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_2__["Cell"], {
       className: "center-align"
-    }, index), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_2__["Cell"], {
+    }, transID), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_2__["Cell"], {
       className: "center-align"
-    }, refNo), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_2__["Cell"], {
+    }, transDateString), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_2__["Cell"], {
       className: "center-align"
-    }, transTimeString), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_2__["Cell"], null, productName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_2__["Cell"], null, sportName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_2__["Cell"], null, betType), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_2__["Cell"], {
-      className: "right-align"
-    }, NumberFormat.formatDecimal(turnover)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_2__["Cell"], {
-      className: "right-align"
-    }, NumberFormat.formatDecimal(winLoss)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_2__["Cell"], {
-      className: "right-align"
-    }, NumberFormat.formatDecimal(turnoverBased)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_2__["Cell"], {
-      className: "right-align"
-    }, NumberFormat.formatDecimal(winLossBased)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_2__["Cell"], {
+    }, amount), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_2__["Cell"], {
       className: "center-align"
-    }, status));
-  };
-  const handleChangePaging = pageIndex => {
-    setPagingOption(_objectSpread(_objectSpread({}, pagingOption), {}, {
-      pageIndex
-    }));
+    }, remark));
   };
   const getReportTitle = () => {
-    const {
-      fromDate,
-      toDate
-    } = props.dateRange;
-    return `${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('CustomerAdministrationReportTitle').replace('{0}', _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('BetList'))}:  ${fromDate} -> ${toDate}`;
+    return `${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('CustomerAdministrationReportTitle').replace('{0}', _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('WithdrawalHistory'))}:  ${fromDate} -> ${toDate}`;
   };
-  const {
-    pageIndex,
-    totalPage
-  } = pagingOption;
   const reportTitle = getReportTitle();
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_ReportTitle__WEBPACK_IMPORTED_MODULE_1__["default"], {
     content: reportTitle
@@ -199,28 +174,30 @@ const BetList = props => {
     autoWidth: true,
     autoHeight: true,
     header: renderHeader(),
-    body: renderDataSection(dataList),
+    body: renderDataSection(),
     containerPadding: 30
-  }), totalPage > 1 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(SimplePagination, {
-    pageIndex: pageIndex,
-    totalPage: totalPage,
-    onPageChanged: handleChangePaging
   }));
 };
+function mapDispatchToProps(dispatch) {
+  return Object(redux__WEBPACK_IMPORTED_MODULE_7__["bindActionCreators"])({
+    toggleLoader: _jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_6__["toggleLoader"]
+  }, dispatch);
+}
 function mapStateToProps(state) {
   const {
     dateRange,
-    username
+    username,
+    userInfo
   } = state;
   return Object.assign({}, {
     dateRange,
-    username
+    username,
+    userInfo
   });
 }
-;
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_4__["connect"])(mapStateToProps)(BetList));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_8__["connect"])(mapStateToProps, mapDispatchToProps)(WithdrawalHistory));
 
 /***/ })
 
 }]);
-//# sourceMappingURL=0.2b9e0da5e77331fdeac6.chunk.js.map
+//# sourceMappingURL=withdrawalHistory.4eee455f4eb61848f68b.chunk.js.map

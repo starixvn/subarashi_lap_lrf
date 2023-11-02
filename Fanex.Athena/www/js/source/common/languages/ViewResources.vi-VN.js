@@ -1,4 +1,4 @@
-﻿// Generated at: 10/13/2023 4:01:25 PM
+﻿// Generated at: 11/2/2023 1:33:01 PM
 window._language_vi_VN = {
 AA:"Đội Khách/Đội Khách",
 AbnormalBet:"Cược bất thường",
