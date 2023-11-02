@@ -14,7 +14,9 @@
 @section globaljscode{
     window.initialState = {
     isLoading: false,
-    dateRange: {fromDate: '@DateTime.Now.AddDays(-60).ToString("MM/dd/yyyy")', toDate: '@DateTime.Now.ToString("MM/dd/yyyy")'}
+    dateRange: {
+        fromDate: '@DateTime.UtcNow.AddHours(8).AddDays(-60).ToString("MM/dd/yyyy")',
+        toDate: '@DateTime.UtcNow.AddHours(8).ToString("MM/dd/yyyy")'}
     }
 
     window._AppData = {
