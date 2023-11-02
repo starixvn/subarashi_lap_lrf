@@ -6,9 +6,10 @@ import AppData from '@jsroot/lib/AppData'
 import { DateRange } from '@jsroot/components/date-range/index'
 import Service from '../../../common/lib/Service';
 import useIsEnableLeagueMatch from '../hooks/useIsEnableLeagueMatch.jsx'
+import PropTypes from 'prop-types';
 
 
-export const DateRangeFilter = () => {
+export const DateRangeFilter = (props) => {
     const dispatch = useDispatch();
     const [dateRange, selectedProduct, selectedSport] = useSelector(state => [state.dateRange, state.selectedProduct, state.selectedSport], shallowEqual);
     const isEnableLeagueMatch = useIsEnableLeagueMatch();
@@ -35,7 +36,8 @@ export const DateRangeFilter = () => {
             <DateRange startDate={dateRange.fromDate} endDate={dateRange.toDate}
                 minDate={dateConstraint.minDate} maxDate={dateConstraint.maxDate}
                 today={dateRange.toDate} limitedMonthRange={dateConstraint.limitedMonthRange}
-                onChange={_onChangeDateRange} />
+                onChange={_onChangeDateRange} 
+                isMobile={props.isMobile}/>
         )
     }
 
@@ -45,5 +47,15 @@ export const DateRangeFilter = () => {
         {_renderDateRange()}
     </div>)
 }
+
+const propTypes = {
+    isMobile: PropTypes.bool,
+};
+const defaultProps = {
+    isMobile: false
+};
+
+DateRangeFilter.propTypes = propTypes;
+DateRangeFilter.defaultProps = defaultProps;
 
 export default DateRangeFilter;

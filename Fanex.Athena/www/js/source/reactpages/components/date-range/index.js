@@ -1,4 +1,4 @@
-import DateRange from './DateRange.js'
+import DateRange from './DateRange'
 import Calendar from './Calendar.js'
 import DatePicker from './DatePicker'
 

@@ -74,7 +74,7 @@ const MobileGrid = () => {
     const footer = useMemo(() => renderFooter(), [totalData])
     return (
         <BaseMobileDataGrid
-            dataUrl={ApiUrl.REFNO_DATA_URL}
+            dataUrl={ApiUrl.ADVANCEDSEARCH_DATA_URL}
             isPaging={true}
             columns={Columns}
             body={body}

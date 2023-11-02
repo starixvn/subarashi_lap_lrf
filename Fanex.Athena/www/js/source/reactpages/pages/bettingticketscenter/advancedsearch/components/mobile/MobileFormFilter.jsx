@@ -80,7 +80,7 @@ export const FormFilter = () => {
                 </div>}
 
                 <div className="col-12 col-xs-6 col-md-3">
-                    <DateRangeFilter />
+                    <DateRangeFilter isMobile={true}/>
                 </div>
 
                 <div className="col-12 col-xs-6 col-md-3">

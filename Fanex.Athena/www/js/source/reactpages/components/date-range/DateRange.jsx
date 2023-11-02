@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import parseInput from './utils/parseInput.js';
-import Calendar from './Calendar.js';
 import PredefinedRanges from './PredefinedRanges.js';
 import getTheme, { defaultClasses } from './styles.js';
 import joiningClassNames from 'classnames';
-import { MomentFormat } from './constants';
+import { MomentFormat } from './constants.js';
 import defaultOptions from './defaultOptions.js';
-import Overlay from '../Overlay';
+import Overlay from '../Overlay.jsx';
+import CalendarList from './CalendarList.jsx';
+import Popup from '../popup/index.jsx';
 
 class DateRange extends Component {
 
@@ -23,7 +24,7 @@ class DateRange extends Component {
     this.locale = { ...defaultOptions.locale, ...props.locale };
     this.isValid = true;
     this.originalRange = { startDate, endDate };
-    this.ranges = { ...defaultOptions.ranges(props.today, props.minDate, props.maxDate, props.limitedMonthRange), ...props.ranges};
+    this.ranges = { ...defaultOptions.ranges(props.today, props.minDate, props.maxDate, props.limitedMonthRange), ...props.ranges };
 
 
     this.state = {
@@ -68,7 +69,7 @@ class DateRange extends Component {
       endDate: startDate
     }
   }
-  
+
   setRange(dateRange, show) {
     let range = this.orderRange(dateRange);
     this.isValid = this.isValidMonthRange(range);
@@ -77,19 +78,18 @@ class DateRange extends Component {
       const newState = show === undefined ? { range } : { range, show };
       this.setState(newState);
     }
-    else
-    {
-        const { onChange } = this.props
-        onChange && onChange(range, false);
+    else {
+      const { onChange } = this.props
+      onChange && onChange(range, false);
     }
   }
 
-  handlePredefinedRangesSelect(range){
-      this.setRange(range, false);
-      
-      this.originalRange = Object.assign({}, range);
-      const { onChange } = this.props;
-      onChange && onChange(range, true);
+  handlePredefinedRangesSelect(range) {
+    this.setRange(range, false);
+
+    this.originalRange = Object.assign({}, range);
+    const { onChange } = this.props;
+    onChange && onChange(range, true);
   }
 
   handleCalendarSelect(date) {
@@ -139,14 +139,14 @@ class DateRange extends Component {
   handleApply = () => {
     const { onClickApplyButton, onChange } = this.props;
     const range = this.state.range;
-    this.originalRange = Object.assign({}, range);
+    this.originalRange = { ...range };
     onClickApplyButton && onClickApplyButton(range, this.isValid);
     onChange && onChange(range, this.isValid);
     this.close();
   }
 
   handleCancel = () => {
-      this.setRange(this.originalRange, false);
+    this.setRange(this.originalRange, false);
   }
 
   render() {
@@ -163,7 +163,8 @@ class DateRange extends Component {
       specialDays,
       lang,
       disableDaysBeforeToday,
-      showMonthArrow } = this.props;
+      showMonthArrow,
+      isMobile } = this.props;
 
     const { range, link } = this.state;
     const { styles } = this;
@@ -174,7 +175,25 @@ class DateRange extends Component {
       apply: this.handleApply,
       cancel: this.handleCancel
     }
-
+    const calendarList = (<CalendarList
+        showMonthArrow={showMonthArrow}
+        calendarsCount={calendarsCount}
+        disableDaysBeforeToday={disableDaysBeforeToday}
+        lang={lang}
+        link={linkedCalendars && link}
+        linkCB={this.handleLinkChange.bind(this)}
+        range={range}
+        format={format}
+        firstDayOfWeek={firstDayOfWeek}
+        theme={styles}
+        minDate={minDate}
+        maxDate={maxDate}
+        onlyClasses={onlyClasses}
+        specialDays={specialDays}
+        classNames={classes}
+        onChange={this.handleCalendarSelect.bind(this)}
+        locale={this.locale} />) 
+        
     return (
       <div className="daterange-container">
         <div className="daterange-label" onClick={this.show}>
@@ -182,55 +201,68 @@ class DateRange extends Component {
           <i className="icon icon-calendar"></i>
         </div>
 
-        <Overlay 
-          isOpening={this.state.show} 
-          onClose={this.handleCancel} 
-          key={range.startDate.month().toString() + range.startDate.year().toString() + range.endDate.month().toString() + range.endDate.year().toString()} >
-          <div className={classes.dateRange}
-            ref={element => this.dateRangeContainer = element}>
-            {showRange && (
-              <PredefinedRanges
-                format={format}
-                ranges={this.ranges}
-                range={range}
-                theme={styles}
-                onSelect={(range) => this.handlePredefinedRangesSelect(range)}
-                onlyClasses={onlyClasses}
-                classNames={classes}
-                locale={this.locale}
-                buttonHandlers={buttonHandlers} />
-            )}
-
-            {(() => {
-              const _calendars = [];
-              for (var i = calendarsCount; i >= 0; i--) {
-                const shownDate = i == calendarsCount ? range.startDate : range.endDate;
-                _calendars.push(
-                  <Calendar
-                    showMonthArrow={showMonthArrow}
-                    shownDate={shownDate}
-                    disableDaysBeforeToday={disableDaysBeforeToday}
-                    lang={lang}
-                    key={i + shownDate.month().toString() + shownDate.year().toString() }
-                    link={linkedCalendars && link}
-                    linkCB={this.handleLinkChange.bind(this)}
-                    range={range}
+        {isMobile 
+          ?(<Popup isShow={this.state.show} isShowTitle={false} className={'rdr-mobile-popup'} height={'auto'} width={'auto'}
+            key={range.startDate.month().toString() + range.startDate.year().toString() + range.endDate.month().toString() + range.endDate.year().toString()} >
+              <div className={classes.dateRange}
+                ref={element => this.dateRangeContainer = element}>
+                {showRange && (
+                  <PredefinedRanges
                     format={format}
-                    firstDayOfWeek={firstDayOfWeek}
+                    ranges={this.ranges}
+                    range={range}
                     theme={styles}
-                    minDate={minDate}
-                    maxDate={maxDate}
+                    onSelect={(range) => this.handlePredefinedRangesSelect(range)}
                     onlyClasses={onlyClasses}
-                    specialDays={specialDays}
                     classNames={classes}
-                    onChange={this.handleCalendarSelect.bind(this)}
-                    locale={this.locale} />
-                );
-              }
-              return _calendars;
-            })()}
-          </div>
-        </Overlay>
+                    locale={this.locale}
+                    isShowRangeButton={false}
+                    buttonHandlers={buttonHandlers} />
+                )}
+                <div className='mobile-calender'>
+                  {calendarList}
+                </div>
+
+              </div>
+              <div className='calender-button'>
+                <button className={classes.applyButton}
+                  style={onlyClasses ? undefined : { ...styles['RangeApplyButton'], ...style }}
+                  type="button"
+                  onClick={buttonHandlers.apply}>
+                  {this.locale.applyLabel}
+                </button>
+
+                <button className={classes.cancelButton}
+                  style={onlyClasses ? undefined : { ...styles['RangeCancelButton'], ...style }}
+                  onClick={buttonHandlers.cancel}
+                  type="button">
+                  {this.locale.cancelLabel}
+                </button>
+              </div>
+          </Popup>)
+          :(
+            <Overlay
+              isOpening={this.state.show}
+              onClose={this.handleCancel}
+              key={range.startDate.month().toString() + range.startDate.year().toString() + range.endDate.month().toString() + range.endDate.year().toString()} >
+              <div className={classes.dateRange}
+                ref={element => this.dateRangeContainer = element}>
+                {showRange && (
+                  <PredefinedRanges
+                    format={format}
+                    ranges={this.ranges}
+                    range={range}
+                    theme={styles}
+                    onSelect={(range) => this.handlePredefinedRangesSelect(range)}
+                    onlyClasses={onlyClasses}
+                    classNames={classes}
+                    locale={this.locale}
+                    buttonHandlers={buttonHandlers} />
+                )}
+                {calendarList}
+              </div>
+            </Overlay>)
+        }
       </div>
     );
   }
@@ -245,7 +277,8 @@ DateRange.defaultProps = {
   classNames: {},
   specialDays: [],
   twoStepChange: false,
-  showRange: true
+  showRange: true,
+  isMobile: false
 }
 
 DateRange.propTypes = {
@@ -269,7 +302,8 @@ DateRange.propTypes = {
   onClickApplyButton: PropTypes.func,
   showRange: PropTypes.bool,
   limitedMonthRange: PropTypes.number,
-  today: PropTypes.oneOfType([PropTypes.object, PropTypes.func, PropTypes.string])
+  today: PropTypes.oneOfType([PropTypes.object, PropTypes.func, PropTypes.string]),
+  isMobile: PropTypes.bool
 }
 
 export default DateRange;

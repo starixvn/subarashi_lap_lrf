@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 export const Note = (props) => {
     return (
         <>
-            <div className="col-1" style={{ flex: "0 0 5%" }}>
+            <div className="col-12 note">
                 {LangHelper.getSingleResource('Note')}:
             </div>
             <div className={props.contentClass}>

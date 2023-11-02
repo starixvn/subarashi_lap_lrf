@@ -24,8 +24,7 @@ export default class App extends React.Component {
           <Provider store={store}>
             <AppContainer />
           </Provider>
-    );
-}
+    );}
 }
 
 ReactDOM.render(<App />, document.getElementById('app-container'));

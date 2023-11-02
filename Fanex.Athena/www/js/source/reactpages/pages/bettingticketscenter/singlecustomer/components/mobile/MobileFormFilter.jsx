@@ -35,7 +35,7 @@ export const MobileFormFilter = () => {
             isCustomCollapse={true}>
             <div className="row">
                 <div className="col-12 col-xs-6">
-                    <DateRangeFilter />
+                    <DateRangeFilter isMobile={true}/>
                 </div>
                 <div className="col-12 col-xs-6">
                     <UserNameFilter />

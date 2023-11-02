@@ -24,3 +24,51 @@
     padding: 5px;
     background: $white;
 }
+.mobile-container{
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    scroll-behavior: smooth;
+    display: flex;
+    overflow-y: auto;
+    background: white;
+    flex-direction: column;
+    #container{
+        padding-left: 6px;
+        padding-right: 6px;
+        
+    }
+    .Select-menu-outer, .rdr-DateRange{
+        z-index: 11;
+    }
+
+    .popup-title{
+        display: flex;
+        .txt-title{
+            width: 100%;
+        }
+    }
+    .header-tab {
+        margin-bottom: 0px;
+        .tabs{
+            height: 50px;
+            border-bottom: 0px;
+            .tab a{
+                font-size: 12px;
+                padding: 0px 8px
+            }
+        }
+    }
+    .page-filter{
+        margin-top: 0px;
+        .note{
+            flex: inherit;
+        }
+    }
+    .page-wrapper-container{
+        input{
+            min-width: 30px;
+        }
+    }
+
+}

@@ -402,30 +402,6 @@
     }
 }
 
-.mobile-container{
-    position: relative;
-    height: 100vh;
-    width: 100vw;
-    scroll-behavior: smooth;
-    display: flex;
-    overflow-y: auto;
-    #container{
-        padding-left: 6px;
-        padding-right: 6px;
-        
-    }
-    .Select-menu-outer, .rdr-DateRange{
-        z-index: 11;
-    }
-
-    .popup-title{
-        display: flex;
-        .txt-title{
-            width: 100%;
-        }
-    }
-}
-
 .mobile-betlist-container{
     .fixed-table-grant-total{
         text-align: right;
@@ -493,14 +469,21 @@
         font-size: 22px;
     }
     .cell-index{
-        color: #AA5200;
+        .index{
+            color: #AA5200;
+        }
+        margin-bottom: 4px;
     }  
     .cell-odd{
         display: flex;
+        margin-top: 4px;
     }
     .cell-external-id{
         border-bottom: 1px solid #BFB9A9;
         background: #D9D2C0;
+    }
+    .cell-choice{
+        margin-top: 8px;
     }
 }
 

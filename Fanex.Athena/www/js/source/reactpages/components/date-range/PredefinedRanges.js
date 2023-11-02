@@ -111,7 +111,7 @@ class PredefinedRanges extends Component {
   }
 
   render() {
-    const { style, onlyClasses, classNames } = this.props;
+    const { style, onlyClasses, classNames, isShowRangeButton } = this.props;
     const { styles } = this;
 
     const classes = { ...defaultClasses, ...classNames };
@@ -122,7 +122,7 @@ class PredefinedRanges extends Component {
         className={classes.predefinedRanges}
       >
         {this.renderRangeList(classes)}
-        {this.renderRangeButtons(classes)}
+        {isShowRangeButton && this.renderRangeButtons(classes)}
       </div>
     );
   }
@@ -130,13 +130,15 @@ class PredefinedRanges extends Component {
 
 PredefinedRanges.defaultProps = {
   onlyClasses: false,
-  classNames: {}
+  classNames: {},
+  isShowRangeButton: true
 };
 
 PredefinedRanges.propTypes = {
   ranges: PropTypes.object.isRequired,
   onlyClasses: PropTypes.bool,
-  classNames: PropTypes.object
+  classNames: PropTypes.object,
+  isShowRangeButton: PropTypes.bool
 }
 
 export default PredefinedRanges;
