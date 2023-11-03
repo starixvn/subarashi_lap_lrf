@@ -38,6 +38,7 @@ function generateConfig(environment) {
             [`${jsPath}/exchangevoided/exchangevoided`]: pathConfig.scriptPaths.exchangevoided,
             [`${jsPath}/customer/playersegmentation/main`]: pathConfig.scriptPaths.playersegmentation,
             [`${jsPath}/customer/playersegmentation/betlist`]: pathConfig.scriptPaths.playersegmentation_betlist,
+            [`${jsPath}/customer/customeradmin`]: pathConfig.scriptPaths.customeradmin,
             [`${jsPath}/report/customersupporttask`]: pathConfig.scriptPaths.customersupporttask,
             [`${jsPath}/report/newcashoutwinloss`]: pathConfig.scriptPaths.newcashoutwinloss,
             [`${jsPath}/report/winlossanalysis`]: pathConfig.scriptPaths.winlossanalysis,
@@ -60,6 +61,7 @@ function generateConfig(environment) {
             [`${cssPath}/dailybets/index`]: pathConfig.cssPaths.dailybets,
             [`${cssPath}/exchangevoided/index`]: pathConfig.cssPaths.exchangevoided,
             [`${cssPath}/customer/playersegmentation/index`]: pathConfig.cssPaths.playersegmentation,
+            [`${cssPath}/customer/customeradmin/index`]: pathConfig.cssPaths.customeradmin,
             [`${cssPath}/customersupporttask/index`]: pathConfig.cssPaths.customersupporttask,
             [`${cssPath}/newcashoutwinloss/index`]: pathConfig.cssPaths.newcashoutwinloss,
             [`${cssPath}/winlossanalysis/index`]: pathConfig.cssPaths.winlossanalysis,
@@ -119,7 +121,7 @@ function generateConfig(environment) {
                         test: /(node_modules)/,
                         minChunks: 2,
                         priority: -10,
-                        filename: jsPath+ '/[name].chunk.js',
+                        filename: jsPath + '/[name].chunk.js',
                     }
                 }
             }

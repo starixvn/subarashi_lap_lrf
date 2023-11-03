@@ -107,5 +107,8 @@
 
         /*Report's Data Control( Impact Turnover report only)*/
         public const string HidePlayerWL_WL_Comm_Total = "HidePlayerWL_WL_Comm_Total";
+
+        /*Customer Administration*/
+        public const string CustomerAdministration = "CustomerAdministration";
     }
 }

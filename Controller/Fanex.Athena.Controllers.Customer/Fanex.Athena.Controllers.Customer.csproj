@@ -114,6 +114,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomerAdmin\CustomerAdministrationController.cs" />
     <Compile Include="RiskLevelController.cs" />
     <Compile Include="Helpers\SabaVirtualSettingHelper.cs" />
     <Compile Include="SabaVirtualSettingController.cs" />

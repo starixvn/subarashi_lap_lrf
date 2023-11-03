@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomerAdmin\CustomerAdministrationController.cs" />
     <Compile Include="PlayerSegmentation\PlayerSegmentation.BetList.Controller.cs" />
     <Compile Include="PlayerSegmentation\PlayerSegmentation.MonitoredPlayer.Controller.cs" />
     <Compile Include="PlayerSegmentation\PlayerSegmentation.SabaVirtual.Controller.cs" />

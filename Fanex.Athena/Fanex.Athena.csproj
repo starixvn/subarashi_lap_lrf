@@ -628,6 +628,9 @@
     <Content Include="Views\Desktop\Report\WinlossAnalysis\Index.cshtml" />
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\RiskLevelInformation.xls" />
     <Content Include="www\css\source\components\risklevel\risk-level.scss" />
+    <Content Include="Views\Desktop\Customer\CustomerAdministration\Main.cshtml" />
+    <Content Include="www\css\build\dev\reactpages\customer\customeradmin\index.chunk.js.map" />
+    <Content Include="www\css\build\dev\reactpages\customer\customeradmin\index.css.map" />
     <None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
     <None Include="www\css\source\pages\betlist\result\result.happy5.scss" />
     <None Include="www\css\source\reactpages\components\alert\icons\error.scss" />
@@ -1870,6 +1873,9 @@
     <Content Include="www\css\source\reactpages\pages\customer\player-segmentation\components\_dropzone.scss" />
     <Content Include="www\css\source\reactpages\pages\customer\player-segmentation\components\_yesNoSwitch.scss" />
     <Content Include="www\css\source\reactpages\pages\customer\player-segmentation\index.scss" />
+    <Content Include="www\css\source\reactpages\pages\customer\customeradmin\index.scss" />
+    <Content Include="www\css\source\reactpages\pages\customer\customeradmin\base\_variables.scss" />
+    <Content Include="www\js\build\dev\reactpages\customer\customeradmin.chunk.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SiteConfig\WebConfigTransforms\SIT.config">
