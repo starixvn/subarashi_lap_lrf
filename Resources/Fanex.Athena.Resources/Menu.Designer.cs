@@ -520,6 +520,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Player Report.
+        /// </summary>
+        public static string playerreport {
+            get {
+                return ResourceManager.GetString("playerreport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Player Segmentation.
         /// </summary>
         public static string playersegmentation {
