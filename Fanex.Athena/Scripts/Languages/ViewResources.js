@@ -1,4 +1,4 @@
-﻿// Generated at: 11/2/2023 1:33:01 PM
+﻿// Generated at: 11/6/2023 3:22:05 PM
 var _language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -580,7 +580,8 @@ Mo:"Mo",
 Mobile:"Mobile",
 MobileApp:"Mobile APP",
 MobileCompact:"Mobile Compact",
-MobileGalaxy:"Mobile Euro",
+MobileEuro:"Mobile Euro",
+MobileGalaxy:"Mobile Galaxy",
 MobileOthers:"Mobile Others",
 MobileStandard:"Mobile Standard",
 Moderate:"Moderate",
