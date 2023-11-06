@@ -109,6 +109,6 @@
         public const string HidePlayerWL_WL_Comm_Total = "HidePlayerWL_WL_Comm_Total";
 
         /*Customer Administration*/
-        public const string CustomerAdministration = "CustomerAdministration";
+        public const string PlayerReport = "PlayerReport";
     }
 }

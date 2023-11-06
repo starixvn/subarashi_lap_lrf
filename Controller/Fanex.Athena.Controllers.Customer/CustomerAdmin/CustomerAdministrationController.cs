@@ -8,7 +8,7 @@
 
     [SessionState(SessionStateBehavior.ReadOnly)]
     [UMFilter]
-    [FunctionAuthorization(PermissionKeys.CustomerAdministration)]
+    [FunctionAuthorization(PermissionKeys.PlayerReport)]
     public class CustomerAdministrationController : CultureBaseController
     {
         private readonly IAuthorizationService _authService;

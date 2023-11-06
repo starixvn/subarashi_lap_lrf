@@ -341,4 +341,7 @@
   <data name="customeradministration" xml:space="preserve">
     <value>Customer Administration</value>
   </data>
+  <data name="playerreport" xml:space="preserve">
+    <value>Player Report</value>
+  </data>
 </root>

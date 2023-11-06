@@ -14,7 +14,7 @@ using Fanex.Athena.Service.Customer.Interfaces;
 
 namespace Fanex.Athena.Api.Customer.CustomerAdmin
 {
-    [ApiFunctionAuthorization(PermissionKeys.CustomerAdministration)]
+    [ApiFunctionAuthorization(PermissionKeys.PlayerReport)]
     public class CustomerAdministrationController : BaseApiController
     {
         private readonly ICustomerAdminService _customerAdminService;
