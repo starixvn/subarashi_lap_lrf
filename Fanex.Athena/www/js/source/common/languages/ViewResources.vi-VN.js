@@ -1,4 +1,4 @@
-﻿// Generated at: 11/2/2023 1:33:01 PM
+﻿// Generated at: 11/6/2023 3:22:05 PM
 window._language_vi_VN = {
 AA:"Đội Khách/Đội Khách",
 AbnormalBet:"Cược bất thường",
@@ -572,7 +572,8 @@ MixSportsParlay:"Cược xiên Thể Thao",
 Mo:"T2",
 MobileApp:"Ứng dụng di động",
 MobileCompact:"Di động nhỏ gọn",
-MobileGalaxy:"Mobile Euro",
+MobileEuro:"Mobile Euro",
+MobileGalaxy:"Mobile Galaxy",
 MobileOthers:"Các thiết bị di động khác",
 MobileStandard:"Di động tiêu chuẩn",
 Moderate:"Trung bình",
