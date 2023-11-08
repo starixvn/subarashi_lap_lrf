@@ -46,7 +46,7 @@
         [AcceptVerbs("Get")]
         public async Task<HttpResponseMessage> ReportViews([FromUri] string report, [FromUri] string url)
         {
-            const string apiKey = "Report";
+            const string apiKey = "ReportClientApp";
             var apiUrl = $"{report}_{url}";
             var result = await _proxyService.HandleRequest(apiKey, apiUrl).ConfigureAwait(false);
             return result;

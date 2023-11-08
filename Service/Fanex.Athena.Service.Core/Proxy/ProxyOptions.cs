@@ -17,12 +17,14 @@
         private static readonly IDictionary<string, string> ProxyApiHostMapper = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase)
         {
             { "Report", "Proxy_ReportApiHost" },
+            { "ReportClientApp", "Proxy_ReportClientAppHost" },
             { "BetList", "Proxy_BetListApiHost" }
         };
 
         private static readonly IDictionary<string, string> ProxyHealthCheckMapper = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase)
         {
             { "Report", "Proxy_ReportApiHealthCheck" },
+            { "ReportClientApp", "Proxy_ReportClientAppHost" },
             { "BetList", "Proxy_BetListApiHealthCheck" }
         };
 
