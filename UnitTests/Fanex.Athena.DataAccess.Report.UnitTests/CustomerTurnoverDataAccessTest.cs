@@ -73,7 +73,7 @@
                 ObjectDb.Received(1).SetParameterValue("showloss", _metaModel.ShowLoss);
                 ObjectDb.Received(1).SetParameterValue("showdraw", _metaModel.ShowDraw);
                 ObjectDb.Received(1).SetParameterValue("Product", _metaModel.ProductParameters);
-                ObjectDb.Received(1).SetParameterValue("Bettype", _metaModel.BettypeParameters);
+                ObjectDb.Received(1).SetParameterValue("Bettype", _metaModel.Bettypes);
             });
         }
 

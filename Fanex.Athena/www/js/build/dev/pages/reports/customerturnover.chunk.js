@@ -7925,16 +7925,16 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         };
         let _ajaxRequestGetBettype, _ajaxRequestData;
         let _pagingOption =
-            {
-                pageindex: 1,
-                pagesize: 25,
-                pagelist: [25, 50, 100, 500],
-                totalrow: 1,
-                elementcontainer: '.paging',
-                method: 'AJAX',
-                ajaxfunction: 'CustTurnover.ajaxPaging()',
-                alwayshow: true
-            };
+        {
+            pageindex: 1,
+            pagesize: 25,
+            pagelist: [25, 50, 100, 500],
+            totalrow: 1,
+            elementcontainer: '.paging',
+            method: 'AJAX',
+            ajaxfunction: 'CustTurnover.ajaxPaging()',
+            alwayshow: true
+        };
 
         function initialize() {
             Site.initialize();
@@ -7943,7 +7943,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 title: Site.getSingleResource('CustomerTurnover')
             });
             DatePicker.initDateRangePicker();
-            
+
             _me.initSetting();
             _me.initAutoComplete();
             _me.initTicketFilter();
@@ -7960,7 +7960,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 if (!_me.checkValidFilter()) {
                     return;
                 }
-                
+
                 _pagingOption.pageindex = 1;
                 _submitData = null;
                 _me.submit();
@@ -8020,7 +8020,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             const oneDay = 24 * 60 * 60 * 1000;
 
             const diffDays = Math.round(Math.abs((new Date(fromDate).getTime() - new Date(toDate).getTime()) / (oneDay)));
-            if(diffDays > 31) {
+            if (diffDays > 31) {
                 alert(Site.getSingleResource('DateRangeExceedMsg').replace('{0}', 1));
                 return false;
             }
@@ -8030,9 +8030,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
         function submit() {
             buildPostData();
-            
-            if(!isValidDateRange(_submitData.fromdate, _submitData.todate))
-            {
+
+            if (!isValidDateRange(_submitData.fromdate, _submitData.todate)) {
                 return false;
             }
 
@@ -8154,7 +8153,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             param.showdraw = Site.asBool(data.ShowDraw);
             param.odds = data.Odds;
             param.SportProducts = _checkedSports;
-            param.bettypes = _checkedBettypes;
+            param.bettypes = _checkedBettypes.map(x=>x.ID).join(',');
             param.username = data.Username;
             param.currencyid = data.CurrencyId;
             param.isexportexcel = data.IsExportExcel;
@@ -8412,7 +8411,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             --------------------------------------------------------------*/
             if (!event.which ||
                 // Control keys in most browsers. e.g. Firefox tab is 0
-             48 <= event.which && event.which <= 57 ||
+                48 <= event.which && event.which <= 57 ||
                 // Always 0 through 9
                 //(48 == event.which && $(this).attr('value')) ||   // No 0 first digit
                 isControlKey) {

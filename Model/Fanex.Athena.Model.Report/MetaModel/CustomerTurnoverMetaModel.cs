@@ -25,12 +25,11 @@ namespace Fanex.Athena.Model.Report.MetaModel
             ShowDraw = true;
             Odds = 0;
             SportProducts = new List<SportProductItem>();
-            Bettypes = new List<CheckedItem>();
         }
 
         public IList<SportProductItem> SportProducts { get; set; }
 
-        public IList<CheckedItem> Bettypes { get; set; }
+        public string Bettypes { get; set; }
 
         public string Username { get; set; }
 
@@ -51,7 +50,7 @@ namespace Fanex.Athena.Model.Report.MetaModel
                 /*Only suport filter by all customer for sungame licensee (licenseeId=8).*/
                 var isShow = ShowWin || ShowLoss || ShowDraw;
                 return isShow && FromDate <= ToDate &&
-                    SportProducts.Any(i => i.Checked) && Bettypes.Any(i => i.Checked);
+                    SportProducts.Any(i => i.Checked) && !string.IsNullOrEmpty(Bettypes);
             }
         }
 
@@ -83,14 +82,6 @@ namespace Fanex.Athena.Model.Report.MetaModel
                 }
 
                 return string.Join(",", realCheckedProducts.Select(i => i.ID).ToArray());
-            }
-        }
-
-        public string BettypeParameters
-        {
-            get
-            {
-                return string.Join(",", this.Bettypes.Where(i => i.Checked).Select(i => i.ID).ToArray());
             }
         }
     }

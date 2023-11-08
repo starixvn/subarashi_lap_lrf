@@ -143,7 +143,7 @@ namespace Fanex.Athena.DataAccess.Report
             db.SetParameterValue("showloss", metaModel.ShowLoss);
             db.SetParameterValue("showdraw", metaModel.ShowDraw);
             db.SetParameterValue("Product", metaModel.ProductParameters);
-            db.SetParameterValue("Bettype", metaModel.BettypeParameters);
+            db.SetParameterValue("Bettype", metaModel.Bettypes);
         }
     }
 }

@@ -6,10 +6,11 @@
     using System.Web.Mvc;
     using Base.UnitTests;
     using DataAccess.Core.Common.Interfaces;
-    using Excel.Base.Entities;
     using Excel.Report;
+    using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Resources;
+    using Fanex.Athena.Service.Core.Common.Interfaces;
     using Model.Core.DTO.Common;
     using Model.Core.ResultModel;
     using Model.Report.DTO;
@@ -28,6 +29,12 @@
         private ISportTypeDataAccess _sportTypeDataAccess;
 
         private ICustomerTurnoverService _customerTurnoverService;
+
+        private readonly IAppSettings _appSettings;
+
+        private readonly ICompressService _compressService;
+
+        private readonly IFileService _fileService;
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
@@ -139,7 +146,7 @@
             {
                 // Arrange
                 var excelParam = @"{""fromdate"":""11/01/2017"",""todate"":""11/30/2017"",""reportby"":" + reportBy + @",""showwin"":true,
-                                ""SportProducts"":[{""Checked"":true}],""bettypes"":[{""Checked"":true}]}";
+                                ""SportProducts"":[{""Checked"":true}],""bettypes"":""1""}";
                 MockCreatingExcel(controller);
                 var resultModel = new ReportResultModel<CustTurnover>();
                 _customerTurnoverService.GetDataList(
@@ -173,7 +180,7 @@
 
         private CustomerTurnoverReportController CreateController()
         {
-            var controller = Substitute.ForPartsOf<CustomerTurnoverReportController>(_sportTypeDataAccess, _customerTurnoverService);
+            var controller = Substitute.ForPartsOf<CustomerTurnoverReportController>(_sportTypeDataAccess, _customerTurnoverService, _appSettings, _compressService, _fileService);
             controller.LangService = LangService;
             controller.SessionServiceInstance = SessionService;
             controller.When(x => x.CreateExcel(string.Empty, string.Empty, null, null, string.Empty)).DoNotCallBase();

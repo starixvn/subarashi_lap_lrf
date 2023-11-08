@@ -67,10 +67,7 @@
                 {
                     new SportProductItem { Checked = true }
                 },
-                Bettypes = new List<CheckedItem>
-                {
-                    new CheckedItem { Checked = true }
-                }
+                Bettypes = "1"
             };
 
             _dataAccess.GetDataList(metaModel, _currencyList, string.Empty).ReturnsForAnyArgs(new ReportResultModel<CustTurnover>
@@ -98,10 +95,7 @@
                 {
                     new SportProductItem { Checked = true }
                 },
-                Bettypes = new List<CheckedItem>
-                {
-                    new CheckedItem { Checked = true }
-                }
+                Bettypes = "1"
             };
             var dataList = new List<CustTurnover>
             {
