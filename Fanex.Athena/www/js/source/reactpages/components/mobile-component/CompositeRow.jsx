@@ -30,7 +30,7 @@ const CompositeRow = (props) => {
     return <>
         <RefRow ref={hoverRef} className={classes}>          
                 {props.children}
-                {isCollapsible && <Cell onClick={onClick} className="center-align"><span className={iconClass}></span></Cell>}           
+                {isCollapsible && <Cell onClick={onClick} className="center-align cell-collapse"><span className={iconClass}></span></Cell>}           
         </RefRow>
         { isCollapsible && !isCollapse && expandRows && expandRows.map((item, index) =>
             (<CollapseRow key={`${index}`} className="collapse-row" index={index} onFocus={onChildFocus} isFocus={isFocus}>{item}</CollapseRow>)

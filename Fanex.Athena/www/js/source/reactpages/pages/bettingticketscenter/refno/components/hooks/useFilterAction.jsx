@@ -1,7 +1,5 @@
-import React from 'react'
 import { ActionCreators } from '../../actions/index.js'
 import LangHelper from '@jsroot/lib/langHelper'
-import Site from '@jsroot/lib/site'
 import AppData from '@jsroot/lib/AppData'
 import DataService from '@jsroot/lib/DataService.js'
 import { ApiUrl } from '../../../common/lib/constants'
@@ -9,7 +7,7 @@ import Service from '../../../common/lib/Service'
 import { SearchingIdOptions } from '../../lib/constants'
 import { useValidParam } from './useValidParam.jsx'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
-import FilterUserGuide from '../filters/FilterUserGuide.jsx'
+import { saveAs } from 'file-saver'
 
 export const useFilterAction = () => {
     const isValidModel = useValidParam();
@@ -71,7 +69,8 @@ export const useFilterAction = () => {
             if (response.status === NoContentStatusCode) {
                 alert(LangHelper.getSingleResource("NoInfo"));
             } else {
-                Site.downloadFile(response.data, 'BettingTicketsCenter_RefNo.xls');
+                const blob = new Blob([response.data], {type: "application/vnd.ms-excel"});
+                saveAs(blob, 'BettingTicketsCenter_RefNo.xls');
             }
             dispatch(toggleLoader(false));
         });

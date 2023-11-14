@@ -30,8 +30,8 @@ const MobileGrid = () => {
         const expandRows = getExpandRows(item);
         return <CompositeRow key={item.RefNo} expandRows={expandRows}>
             <Cell><MobileBetlistContent item={item}/></Cell>
-            <Cell className="right-align" dangerouslySetInnerHTML={{__html:item.Stake}}></Cell>
-            <Cell className="right-align"><MobileWinLossCellContent item={item}/></Cell>
+            <Cell className="right-align cell-stake" dangerouslySetInnerHTML={{__html:item.Stake}}></Cell>
+            <Cell className="right-align cell-winloss"><MobileWinLossCellContent item={item}/></Cell>
         </CompositeRow>
     }
 
@@ -39,7 +39,7 @@ const MobileGrid = () => {
         let rows = [];
         if (isDisplayTxIdColumn)
         {
-            rows.push(renderExpandRow("TxId", item.TransId));
+            rows.push(renderExpandRow(HeaderText.LicenseeTxId, item.LicenseeTxId));
         }
         rows.push(renderExpandRow(HeaderText.SystemId, item.SystemId));
         rows.push(renderExpandRow(Service.getHeaderName('LicenseeWL'), item.LicenseeWL));

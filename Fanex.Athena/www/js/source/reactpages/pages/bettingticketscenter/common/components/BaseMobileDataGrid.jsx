@@ -11,12 +11,13 @@ import { useElementSize, useWindowSize } from 'usehooks-ts';
 import { RefPager } from '@jsroot/components/mobile-component/RefPager.jsx';
 import {v4 as uuidv4} from 'uuid';
 
-const SmallColumnWidths = [ 50, 17 , 20, 13]
-const LargeColumnWidths =  ['53%', '15%', '22%', '10%']
+const VerySmallColumnWidths = [ 53, 16 , 22, 13]
+const SmallColumnWidths = [ 159, 66 , 90, 28]
+const LargeColumnWidths =  ['53%', '18%', '22%', '7%']
 
 export const BaseMobileDataGrid = (props) => {
     const {
-        dataUrl, isPaging, body, footer, columns
+        dataUrl, isPaging, body, footer, columns, sortableColumns
     } = props;
 
     const [ gridData, requestParam, reportTitle, reloadReport ] = useSelector(state =>[state.gridData, state.requestParam, state.reportTitle, state.reloadReport], shallowEqual);
@@ -25,18 +26,23 @@ export const BaseMobileDataGrid = (props) => {
     const [id, setId] = useState(`${uuidv4()}`);
     const [pagerRef, pagerSize] = useElementSize();
     const { width } = useWindowSize();
-    const collumnWidths = width > 400 ? LargeColumnWidths : SmallColumnWidths
+    const collumnWidths = width > 500
+        ? LargeColumnWidths 
+        : width > 370 ? SmallColumnWidths : VerySmallColumnWidths
 
     useEffect(() => {
         dispatch(toggleLoader(false));
         setId(`${uuidv4()}`);
-        ref.current?.scrollIntoView();
     }, [gridData]);
     
     useEffect(() => {
         const style = `bottom: ${pagerSize.height - 1}px`;
         ref.current?.getElementsByClassName('footer-content')[0]?.setAttribute('style', style);
     }, [pagerSize?.height, id])
+
+    useEffect(() => {
+        ref.current?.scrollIntoView();
+    },[id])
 
     const { toggleLoader, getGridData, setRequestParam } = ActionCreators;
 
@@ -53,6 +59,12 @@ export const BaseMobileDataGrid = (props) => {
         getData(param);
     }
 
+    const onSort = (sortBy, sortOrder) =>{
+        const param = { ...requestParam, SortBy: sortBy === 'WinLoss' ? 'WinLost' : sortBy, SortOrder: sortOrder };
+
+        getData(param);
+    }
+
     const getData = (param) => {
         dispatch(toggleLoader(true));
         dispatch(getGridData(dataUrl, param));
@@ -63,10 +75,11 @@ export const BaseMobileDataGrid = (props) => {
         let rows = [];
         for (let i = 0; i < columns.length; i++) {
             const column = columns[i];
+            const isSortable = sortableColumns.indexOf(column) >= 0;
             const headerName = Service.getHeaderName(column);
 
             rows.push(
-                <HeaderCell key={column} colWidth={collumnWidths[i]} >{headerName}</HeaderCell>
+                <HeaderCell key={column} colWidth={collumnWidths[i]} sortBy={isSortable ? column : null} >{headerName}</HeaderCell>
             )
         }
 
@@ -74,6 +87,7 @@ export const BaseMobileDataGrid = (props) => {
     }
 
     const header = useMemo(() =>buildHeader(),[width]);
+    const bodyWrapper = useMemo(() => <React.Fragment key={id}>{body}</React.Fragment>, [id])
 
     if (!gridData?.Data || gridData.Data.length == 0) {
         if(!gridData?.Data){
@@ -87,18 +101,19 @@ export const BaseMobileDataGrid = (props) => {
     return (
         <div className="mobile-betlist-container betlist-container result-content" ref={ref}>
             <ReportTitle content={reportTitle} />
-            <Table key={id}
+            <Table key='betlist-mobile-table'
                 autoWidth={true}
                 autoHeight={false}               
                 header={header}
-                body={body}
+                body={bodyWrapper}
                 footer={footer}
                 isPaging={false}
                 pageOption={pageOption}
                 shouldResetScrollPosition={reloadReport}
                 bodyHeight="100%"
-                containerPadding={12}
-                isIncludeScrollWidth={false} />
+                containerPadding={2}
+                isIncludeScrollWidth={false}
+                onSort= {onSort} />
             {isPaging && <RefPager ref={pagerRef} onPaging={onPaging} pageOption={pageOption} isShowPagingInfo={isShowPagingInfo}/>}            
         </div>
     );
@@ -110,10 +125,12 @@ const propTypes = {
     header: PropTypes.oneOfType([PropTypes.array, PropTypes.element, PropTypes.object]),
     body: PropTypes.oneOfType([PropTypes.array, PropTypes.element, PropTypes.object]),
     footer: PropTypes.oneOfType([PropTypes.array, PropTypes.element, PropTypes.object]),
-    columns: PropTypes.arrayOf(PropTypes.string)
+    columns: PropTypes.arrayOf(PropTypes.string),
+    sortableColumns: PropTypes.arrayOf(PropTypes.string)
 };
 const defaultProps = {
-    isPaging: false
+    isPaging: false,
+    sortableColumns: []
 };
 
 BaseMobileDataGrid.propTypes = propTypes;

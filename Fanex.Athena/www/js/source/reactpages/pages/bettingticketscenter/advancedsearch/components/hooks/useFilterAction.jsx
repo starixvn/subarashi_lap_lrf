@@ -5,26 +5,27 @@ import Site from '@jsroot/lib/site'
 import AppData from '@jsroot/lib/AppData'
 import DataService from '@jsroot/lib/DataService.js'
 import useBaseCurrencyForMultiSelectCurrency from '@jsroot/customHooks/useBaseCurrencyForMultiSelectCurrency'
-import useSubsidiarySearch  from '@jsroot/customHooks/useSubsidiarySearch'
+import useSubsidiarySearch from '@jsroot/customHooks/useSubsidiarySearch'
 import { ApiUrl } from '../../../common/lib/constants'
 import Service from '../../../common/lib/Service'
 import { useValidParam } from './useValidParam'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import useIsEnableLeagueMatch from './useIsEnableLeagueMatch'
 import { toast } from 'react-toastify'
+import { saveAs } from 'file-saver'
 
 export const useFilterAction = () => {
     const isValidModel = useValidParam();
     const dispatch = useDispatch();
     const {
-        requestParam, 
-        username, 
-        isConvertAll, 
-        selectedBaseCurrency, 
-        selectedProduct, 
-        selectedStatus, 
-        dateRange, 
-        selectedLiveStatus, 
+        requestParam,
+        username,
+        isConvertAll,
+        selectedBaseCurrency,
+        selectedProduct,
+        selectedStatus,
+        dateRange,
+        selectedLiveStatus,
         selectedPlatform,
         selectedCurrency,
         selectedSport,
@@ -34,14 +35,14 @@ export const useFilterAction = () => {
         selectedSubsidiary,
         ip,
         selectedOddsGroup,
-        selectedCustomerClass} 
-        = useSelector( state => state, shallowEqual);
-    
+        selectedCustomerClass }
+        = useSelector(state => state, shallowEqual);
+
     const { baseCurrencyList } = useBaseCurrencyForMultiSelectCurrency(selectedBaseCurrency);
     const isEnableLeagueMatch = useIsEnableLeagueMatch();
-    const {isSubsidiarySearch} = useSubsidiarySearch();
-        
-    const {setReportTitle, setRequestParam, toggleLoader, getGridData} = ActionCreators;
+    const { isSubsidiarySearch } = useSubsidiarySearch();
+
+    const { setReportTitle, setRequestParam, toggleLoader, getGridData } = ActionCreators;
 
     const ToastMsg = () => (
         <div>
@@ -88,9 +89,11 @@ export const useFilterAction = () => {
     }
 
     const _showExportWarning = () => {
-        toast.success(<ToastMsg />, { onClose: () => {
-            toast.dismiss();
-        }});
+        toast.success(<ToastMsg />, {
+            onClose: () => {
+                toast.dismiss();
+            }
+        });
     }
 
     const _handleResponse = (response) => {
@@ -115,8 +118,8 @@ export const useFilterAction = () => {
             else {
                 const fileName = "BettingTicketsCenter_AdvancedSearch." +
                     (response.headers["content-type"] === "application/zip" ? "zip" : "xls");
-
-                Site.downloadFile(response.data, fileName);
+                const blob = new Blob([response.data], { type: response.headers["content-type"] });
+                saveAs(blob, fileName);
             }
         }
     }
@@ -151,16 +154,16 @@ export const useFilterAction = () => {
         params.IsExport = true;
         dispatch(toggleLoader(true));
         DataService.getFile(ApiUrl.ADVANCEDSEARCH_DATA_URL, params)
-        .then(_handleResponse)
-        .catch(() => {
-            alert(LangHelper.getSingleResource("ErrorProcessingMsg"));
-        })
-        .finally(() => {
-            dispatch(toggleLoader(false));
-        });
+            .then(_handleResponse)
+            .catch(() => {
+                alert(LangHelper.getSingleResource("ErrorProcessingMsg"));
+            })
+            .finally(() => {
+                dispatch(toggleLoader(false));
+            });
     }
 
-    return {submit, exportExcel};
-  }
+    return { submit, exportExcel };
+}
 
-  export default useFilterAction;
+export default useFilterAction;

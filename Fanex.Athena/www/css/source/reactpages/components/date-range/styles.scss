@@ -257,17 +257,18 @@ $indexNormal: 1;
         display: flex;
         box-shadow: none;
     }
-    .popup-content, .mobile-calender{
+    .mobile-calender{
         display: flex;
         flex-direction: column;
-    }
-    .mobile-calender{
         max-width: 376px;
         width: 66%;
         .rdr-Calendar{
             width: 100%;
             padding-top: 12px;
             padding-bottom: 12px;
+            &:not(:first-child){
+                border-top: 1px solid var(--line-table-line-table, #BDBDBD);
+            }
         }
         .rdr-WeekDays{
             display: flex;
@@ -299,6 +300,7 @@ $indexNormal: 1;
                     display: flex;
                     align-items: center;
                     justify-content: center;
+                    font-size: 13px;
                 }
             }
             
@@ -332,6 +334,9 @@ $indexNormal: 1;
         padding: 8px;
         border-top: 1px solid var(--line-table-line-table, #BDBDBD);
     }
+    .rdr-Button{
+        height: 32px;
+    }
 }
 @media (max-width: 375px){
     .rdr-mobile-popup{
@@ -339,6 +344,9 @@ $indexNormal: 1;
             >a{
                 padding: 4px 8px;
             }
+        }
+        .rdr-Button{
+            height: 28px;
         }
     }
 }

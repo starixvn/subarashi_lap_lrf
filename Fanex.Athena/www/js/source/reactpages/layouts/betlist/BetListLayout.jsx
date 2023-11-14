@@ -74,6 +74,7 @@ class BetListLayout extends Component {
                         title={this.state.popupTitle}
                         width={900} height={600}
                         onClose={() => this._closePopup()}
+                        className='betlist-popup'
                     >
                     </Popup>}
             </div>

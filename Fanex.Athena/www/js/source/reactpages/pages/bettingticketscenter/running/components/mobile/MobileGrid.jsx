@@ -1,7 +1,5 @@
-import React from 'react';
+import React, {useEffect, useMemo} from 'react';
 import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { useMemo } from 'react';
 
 import AppData from '@jsroot/lib/AppData';
 import { Cell, Row } from '@9softstudio/react-grid';
@@ -11,7 +9,8 @@ import CompositeRow from '../../../../../components/mobile-component/CompositeRo
 import MobileBetlistContent from '../../../common/components/MobileBetlistContent';
 import LangHelper from '@jsroot/lib/langHelper'
 
-var Columns = [ 'Details', 'Stake', 'Status', 'Icon'];
+const Columns = [ 'Details', 'Stake', 'Status', 'Icon'];
+const SortableColumns = ["Stake"];
 
 const MobileGrid = () => {
     const data = useSelector(state => state.gridData.Data )
@@ -42,7 +41,7 @@ const MobileGrid = () => {
         let rows = [];
         if (isDisplayTxIdColumn)
         {
-            rows.push(renderExpandRow("TxId", item.TransId));
+            rows.push(renderExpandRow(HeaderText.LicenseeTxId, item.LicenseeTxId));
         }
         rows.push(renderExpandRow(HeaderText.SystemId, item.SystemId));
         rows.push(renderExpandRow(HeaderText.Platform, item.Platform));
@@ -63,8 +62,12 @@ const MobileGrid = () => {
         }
         return(
         <Row className="fixed-table-grant-total">
-            <Cell>{LangHelper.getSingleResource('Total')}</Cell>
-            <Cell>{totalData.Stake}</Cell>
+            <Cell colSpan='2'>
+                <div className='cell-total'>
+                    <div className='total-text'>{LangHelper.getSingleResource('Total')}</div>
+                    <div className='total-stake'>{totalData.Stake}</div>
+                </div>
+            </Cell>
             <Cell colSpan="2"></Cell>
         </Row>)
     }
@@ -78,6 +81,7 @@ const MobileGrid = () => {
             columns={Columns}
             body={body}
             footer={footer}
+            sortableColumns={SortableColumns}
         />
     )
 }

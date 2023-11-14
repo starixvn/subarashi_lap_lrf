@@ -34,8 +34,8 @@
     background: white;
     flex-direction: column;
     #container{
-        padding-left: 6px;
-        padding-right: 6px;
+        padding-left: 1px;
+        padding-right: 1px;
         
     }
     .Select-menu-outer, .rdr-DateRange{
@@ -44,6 +44,7 @@
 
     .popup-title{
         display: flex;
+        align-items: center;
         .txt-title{
             width: 100%;
         }
@@ -70,5 +71,11 @@
             min-width: 30px;
         }
     }
-
+    .betlist-popup{
+        iframe{
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+        }
+    }
 }

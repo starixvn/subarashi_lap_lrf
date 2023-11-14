@@ -403,8 +403,22 @@
 }
 
 .mobile-betlist-container{
+    .report-title-container{
+       padding-left: 5px; 
+    }
     .fixed-table-grant-total{
         text-align: right;
+        .cell-total{
+            display: flex;
+            justify-content: space-between;
+        }
+        td.cell-total-winloss{
+            border-right-color: #b8c3c9;
+            overflow: visible;
+            &+ td{
+                border-left-color: #b8c3c9;
+            }
+        }
         td:first-child{
             text-align: center;
         }
@@ -456,12 +470,29 @@
             }
         }
     }
-    .table > tbody tr:hover td{
-        &:hover td{
-            background: initial;
+    .table > tbody{
+        tr td{
+           &.cell-collapse{
+            padding-left: 0px;
+            padding-right: 0px;
+           }
+           &.cell-stake{
+            padding-left: 0px;
+            .stake{
+                word-break: break-all;
+            }
+           }
+           &.cell-winloss .underdog{
+            word-break: break-all;
+           }
         }
-        &.row-active:hover td{
-            background: #FCF4DF;
+        tr:hover td{
+            &:hover td{
+                background: initial;
+            }
+            &.row-active:hover td{
+                background: #FCF4DF;
+            }
         }
     }  
     .icon{
@@ -483,6 +514,9 @@
         background: #D9D2C0;
     }
     .cell-choice{
+        margin-top: 8px;
+    }
+    .table .status{
         margin-top: 8px;
     }
 }

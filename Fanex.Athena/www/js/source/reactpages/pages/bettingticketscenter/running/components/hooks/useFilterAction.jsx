@@ -9,6 +9,7 @@ import { ApiUrl } from '../../../common/lib/constants'
 import Service from '../../../common/lib/Service'
 import { useValidParam } from './useValidParam.jsx'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
+import { saveAs } from 'file-saver';
 
 export const useFilterAction = () => {
     const isValidModel = useValidParam();
@@ -76,7 +77,8 @@ export const useFilterAction = () => {
             if (response.status === NoContentStatusCode) {
                 alert(LangHelper.getSingleResource("NoInfo"));
             } else {
-                Site.downloadFile(response.data, 'BettingTicketsCenter_Running.xls');
+                const blob = new Blob([response.data], {type: "application/vnd.ms-excel"});
+                saveAs(blob, 'BettingTicketsCenter_Running.xls');
             }
             dispatch(toggleLoader(false));
         });
