@@ -82,7 +82,9 @@
   <ItemGroup>
     <Compile Include="Builder\PlayerSegmentationBusinessLogBuilderFactory.cs" />
     <Compile Include="Builder\PlayerSegmentUpdatePlayerLogBuilder.cs" />
+    <Compile Include="CustomerAdminAPIService.cs" />
     <Compile Include="CustomerAdminService.cs" />
+    <Compile Include="Interfaces\ICustomerAdminAPIService.cs" />
     <Compile Include="Interfaces\ICustomerAdminService.cs" />
     <Compile Include="SabaVirtualSettingService.cs" />
     <Compile Include="CustomerClassService.cs" />
