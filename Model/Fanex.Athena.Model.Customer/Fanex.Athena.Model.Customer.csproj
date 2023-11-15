@@ -55,7 +55,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DTO\CustomerAdmin\CustomerInfoAPI.cs" />
     <Compile Include="DTO\CustomerAdmin\CustomerWithdrawHistory.cs" />
     <Compile Include="DTO\CustomerAdmin\CustomerDepositHistory.cs" />
     <Compile Include="DTO\CustomerAdmin\CustomerBetList.cs" />

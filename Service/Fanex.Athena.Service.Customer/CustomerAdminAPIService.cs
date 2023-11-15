@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
+using System.Security.Policy;
 using System.Threading.Tasks;
 using Fanex.Athena.Extension.Helpers;
 using Fanex.Athena.Extension.Utility;
@@ -30,28 +32,41 @@ namespace Fanex.Athena.Service.Customer
 
         public async Task<CustomerInfo> GetCustomerInfoByUserName(GetCustomerInfoMetaModel metaModel)
         {
+            var uri = new Uri($"{_appSettings.GetValue("12BCustomerDataApi")}?username={metaModel.UserName}");
+
             try
             {
-                var uri = new Uri($"{_appSettings.GetValue("12BCustomerDataApi")}?username={metaModel.UserName}");
-                var json = await _webClientService.DownloadStringAsync(uri);
+                var proxyUrl = _appSettings.GetValue("Portal_Proxy");
+                var json = await _webClientService.DownloadStringAsync(uri, proxyUrl);
                 var jobject = JObject.Parse(json);
 
-                if (jobject.HasValues && jobject["ErrorCode"].Value<int>() == 0 && jobject["Data"].Any())
+                if (jobject.HasValues && ValidateResponse(jobject))
                 {
-                    var data = jobject["Data"];
-                    var customerInfoFromAPI = data.ToObject<CustomerInfoAPI>();
-
-                    return new CustomerInfo(customerInfoFromAPI);
+                    return new CustomerInfo(jobject["Data"]);
                 }
 
                 return null;
             }
             catch (Exception exception)
             {
-                _logger.Error(LogMessageHelper.GenerateMessage(exception));
+                _logger.Error($"Send request incorrectly! Url:" + $" {uri.AbsoluteUri}; \n {LogMessageHelper.GenerateMessage(exception)}");
             }
 
             return null;
+        }
+
+        private static bool ValidateResponse(JObject jobject)
+        {
+            var errorCode = jobject["ErrorCode"].Value<int>();
+            var errorMessage = jobject["ErrorMessage"].Value<string>();
+
+            if (errorCode == 0 && jobject["Data"].Any())
+                return true;
+
+            if (errorCode == 404)
+                return false;
+
+            throw new Exception($"Detail response: ErrorCode:{errorCode}, ErrorMessage:{errorMessage}");
         }
     }
 }

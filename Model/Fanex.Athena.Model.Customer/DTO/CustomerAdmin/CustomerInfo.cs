@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 
 namespace Fanex.Athena.Model.Customer.DTO.CustomerAdmin
 {
@@ -7,24 +8,24 @@ namespace Fanex.Athena.Model.Customer.DTO.CustomerAdmin
         public CustomerInfo()
         { }
 
-        public CustomerInfo(CustomerInfoAPI customerInfoAPI)
+        public CustomerInfo(JToken token)
         {
-            Active = customerInfoAPI.Active ? "Yes" : "No";
-            Country = customerInfoAPI.Country;
-            CurrencyCode = customerInfoAPI.CurrencyCode;
-            CustId = customerInfoAPI.IbcCustId;
-            Email = customerInfoAPI.Email;
-            FirstName = customerInfoAPI.FirstName;
-            LastName = customerInfoAPI.LastName;
-            Locked = customerInfoAPI.Lock ? "Yes" : "No";
-            Gender = customerInfoAPI.Gender;
-            IP = customerInfoAPI.IP;
-            Mobile = customerInfoAPI.Mobile;
-            PreferredUserName = customerInfoAPI.PreferredUserName;
-            RegisteredDate = customerInfoAPI.DateOfRegistration;
-            SecurityQuestion = customerInfoAPI.SecurityQuestion;
-            UserName = customerInfoAPI.UserName;
-            SecurityCode = CustomerInfoAPI.SecurityCode;
+            Active = token["Active"].Value<bool>() ? "Yes" : "No";
+            Country = token["Country"].Value<string>();
+            CurrencyCode = token["CurrencyCode"].Value<string>();
+            CustId = token["IbcCustId"].Value<int>();
+            Email = token["Email"].Value<string>();
+            FirstName = token["FirstName"].Value<string>();
+            LastName = token["LastName"].Value<string>();
+            Locked = token["Lock"].Value<bool>() ? "Yes" : "No";
+            Gender = token["Gender"].Value<string>();
+            IP = token["IP"].Value<string>();
+            Mobile = token["Mobile"].Value<string>();
+            PreferredUserName = token["PreferredUserName"].Value<string>();
+            RegisteredDate = token["DateOfRegistration"].Value<DateTime>();
+            SecurityQuestion = token["SecurityQuestion"].Value<string>();
+            UserName = token["UserName"].Value<string>();
+            SecurityCode = "*****";
         }
 
         public int CustId { get; set; }

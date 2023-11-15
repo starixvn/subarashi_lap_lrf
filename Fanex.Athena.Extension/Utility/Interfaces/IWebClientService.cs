@@ -20,6 +20,7 @@
         string UploadString(Uri address, string parameters, IDictionary<HttpRequestHeader, string> headers);
 
         Task<string> UploadStringAsync(Uri address, string parameters);
-        Task<string> DownloadStringAsync(Uri address);
+
+        Task<string> DownloadStringAsync(Uri address, string proxyUrl = null);
     }
 }
