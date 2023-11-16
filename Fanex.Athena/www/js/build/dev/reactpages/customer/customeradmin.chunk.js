@@ -64,7 +64,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "www/js/build/dev/reactpages/" + ({"customer/customeradmin/betList":"customer/customeradmin/betList","customer/customeradmin/depositHistory":"customer/customeradmin/depositHistory","customer/customeradmin/playerInformation":"customer/customeradmin/playerInformation","customer/customeradmin/withdrawalHistory":"customer/customeradmin/withdrawalHistory"}[chunkId]||chunkId) + "." + {"customer/customeradmin/betList":"524b545fe0ed2f17e0b4","customer/customeradmin/depositHistory":"8357607ee76ff7cce8ce","customer/customeradmin/playerInformation":"0ecf010cbece3fc92fa9","customer/customeradmin/withdrawalHistory":"4eee455f4eb61848f68b"}[chunkId] + ".chunk.js"
+/******/ 		return __webpack_require__.p + "www/js/build/dev/reactpages/" + ({"customer/customeradmin/betList":"customer/customeradmin/betList","customer/customeradmin/depositHistory":"customer/customeradmin/depositHistory","customer/customeradmin/playerInformation":"customer/customeradmin/playerInformation","customer/customeradmin/withdrawalHistory":"customer/customeradmin/withdrawalHistory"}[chunkId]||chunkId) + "." + {"customer/customeradmin/betList":"524b545fe0ed2f17e0b4","customer/customeradmin/depositHistory":"f3a80f05818091c3979a","customer/customeradmin/playerInformation":"0ecf010cbece3fc92fa9","customer/customeradmin/withdrawalHistory":"3bec2e460ee66f490516"}[chunkId] + ".chunk.js"
 /******/ 	}
 /******/
 /******/ 	// The require function
