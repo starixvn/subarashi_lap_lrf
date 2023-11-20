@@ -1461,14 +1461,15 @@ class CollapsiblePanel extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Comp
       });
     });
     this.state = {
-      isCollapsed: false
+      isCollapsed: props.isInitCollapsed
     };
   }
   render() {
     const {
       stickyFooter,
       iconContainerStyle,
-      iconToggle
+      iconToggle,
+      isCustomCollapse
     } = this.props;
     const {
         tag,
@@ -1486,12 +1487,15 @@ class CollapsiblePanel extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Comp
       width: "20px",
       float: 'left'
     };
+    const contendStyle = isCustomCollapse ? {
+      display: 'block'
+    } : {
+      display: this.state.isCollapsed ? 'none' : 'block'
+    };
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: `${this.props.className}`
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      style: {
-        display: this.state.isCollapsed ? 'none' : 'block'
-      }
+      style: contendStyle
     }, this.props.children), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "caret-block"
     }, stickyFooter), !!this.props.isCollapseMode && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1508,14 +1512,18 @@ _defineProperty(CollapsiblePanel, "propTypes", {
   stickyFooter: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node,
   onCollapse: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
   onExpand: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
-  isCollapseMode: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool
+  isCollapseMode: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  isInitCollapsed: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  isCustomCollapse: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool
 });
 const propTypes = {
   stickyFooter: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node,
   onCollapse: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
   onExpand: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
   iconToggle: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object,
-  isCollapseMode: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool
+  isCollapseMode: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  isInitCollapsed: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  isCustomCollapse: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool
 };
 const defaultProps = {
   iconContainerStyle: {
@@ -1533,7 +1541,9 @@ const defaultProps = {
     className: 'icon-arrow',
     style: null
   },
-  isCollapseMode: true
+  isCollapseMode: true,
+  isInitCollapsed: false,
+  isCustomCollapse: false
 };
 CollapsiblePanel.propTypes = propTypes;
 CollapsiblePanel.defaultProps = defaultProps;
@@ -1556,6 +1566,201 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./www/js/source/reactpages/components/mobile-component/CollapseRow.jsx":
+/*!******************************************************************************!*\
+  !*** ./www/js/source/reactpages/components/mobile-component/CollapseRow.jsx ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _RefRow__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./RefRow */ "./www/js/source/reactpages/components/mobile-component/RefRow.jsx");
+/* harmony import */ var usehooks_ts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! usehooks-ts */ "./node_modules/usehooks-ts/dist/esm/index.js");
+
+
+
+
+
+const CollapseRow = props => {
+  const {
+    isFocus,
+    className,
+    onFocus,
+    index
+  } = props;
+  const [oldIsHover, setOldIsHover] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
+  const ref = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
+  const isHover = Object(usehooks_ts__WEBPACK_IMPORTED_MODULE_4__["useHover"])(ref);
+  if (isHover != oldIsHover) {
+    setOldIsHover(isHover);
+    onFocus(index, isHover);
+  }
+  const classes = classnames__WEBPACK_IMPORTED_MODULE_2___default()(isFocus ? "row-active" : "", className);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RefRow__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    ref: ref,
+    className: classes
+  }, props.children);
+};
+const propTypes = {
+  isFocus: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  className: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
+  onFocus: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  onBlur: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  index: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number
+};
+const defaultProps = {
+  isFocus: false,
+  index: 0
+};
+CollapseRow.propTypes = propTypes;
+CollapseRow.defaultProps = defaultProps;
+/* harmony default export */ __webpack_exports__["default"] = (CollapseRow);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/components/mobile-component/CompositeRow.jsx":
+/*!*******************************************************************************!*\
+  !*** ./www/js/source/reactpages/components/mobile-component/CompositeRow.jsx ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @9softstudio/react-grid */ "./node_modules/@9softstudio/react-grid/dist/index.js");
+/* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _CollapseRow__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./CollapseRow */ "./www/js/source/reactpages/components/mobile-component/CollapseRow.jsx");
+/* harmony import */ var usehooks_ts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! usehooks-ts */ "./node_modules/usehooks-ts/dist/esm/index.js");
+/* harmony import */ var _RefRow__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./RefRow */ "./www/js/source/reactpages/components/mobile-component/RefRow.jsx");
+
+
+
+
+
+
+
+
+
+const CompositeRow = props => {
+  const {
+    isCollapsible,
+    expandRows,
+    className
+  } = props;
+  const [isCollapse, setIsCollapse] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true);
+  const [childFocusTracker, setChildFocusTracker] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(expandRows.map(() => false));
+  const hoverRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
+  const isHover = Object(usehooks_ts__WEBPACK_IMPORTED_MODULE_5__["useHover"])(hoverRef);
+  const onClick = () => {
+    setIsCollapse(!isCollapse);
+  };
+  const iconClass = isCollapse ? 'icon icon-lap-plus' : 'icon icon-lap-minus';
+  const onChildFocus = (index, isFocus) => {
+    childFocusTracker.splice(index, 1, isFocus);
+    setChildFocusTracker([...childFocusTracker]);
+  };
+  const isFocus = isHover || childFocusTracker.indexOf(true) >= 0;
+  const classes = classnames__WEBPACK_IMPORTED_MODULE_2___default()(isFocus ? "row-active" : "", className);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RefRow__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    ref: hoverRef,
+    className: classes
+  }, props.children, isCollapsible && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
+    onClick: onClick,
+    className: "center-align cell-collapse"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: iconClass
+  }))), isCollapsible && !isCollapse && expandRows && expandRows.map((item, index) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CollapseRow__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    key: `${index}`,
+    className: "collapse-row",
+    index: index,
+    onFocus: onChildFocus,
+    isFocus: isFocus
+  }, item)));
+};
+const propTypes = {
+  isCollapsible: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  isFocus: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  isUseCustomCollapseCell: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  collapsibleCellContent: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node,
+  onExpanded: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  onCollapse: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  expandRows: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.array,
+  className: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string
+};
+const defaultProps = {
+  isCollapsible: true,
+  isUseCustomCollapseCell: false,
+  isFocus: false,
+  expandRows: []
+};
+CompositeRow.propTypes = propTypes;
+CompositeRow.defaultProps = defaultProps;
+/* harmony default export */ __webpack_exports__["default"] = (CompositeRow);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/components/mobile-component/RefPager.jsx":
+/*!***************************************************************************!*\
+  !*** ./www/js/source/reactpages/components/mobile-component/RefPager.jsx ***!
+  \***************************************************************************/
+/*! exports provided: RefPager */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RefPager", function() { return RefPager; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @9softstudio/react-grid */ "./node_modules/@9softstudio/react-grid/dist/index.js");
+/* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+const RefPager = /*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["forwardRef"])(function RefPager(props, ref) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    ref: ref,
+    className: "page-wrapper-container"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Pager"], props));
+});
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/components/mobile-component/RefRow.jsx":
+/*!*************************************************************************!*\
+  !*** ./www/js/source/reactpages/components/mobile-component/RefRow.jsx ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+
+const RefRow = /*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["forwardRef"])(function RefRow(props, ref) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", _extends({}, props, {
+    ref: ref
+  }), props.children);
+});
+/* harmony default export */ __webpack_exports__["default"] = (RefRow);
+
+/***/ }),
+
 /***/ "./www/js/source/reactpages/components/popup/Popup.jsx":
 /*!*************************************************************!*\
   !*** ./www/js/source/reactpages/components/popup/Popup.jsx ***!
@@ -1570,6 +1775,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./constants */ "./www/js/source/reactpages/components/popup/constants.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_3__);
+
 
 
 
@@ -1581,7 +1789,9 @@ const Popup = props => {
     height,
     isHtml,
     children,
-    iframeUrl
+    iframeUrl,
+    isShowTitle,
+    className
   } = props;
   let content;
   if (iframeUrl) {
@@ -1601,8 +1811,9 @@ const Popup = props => {
       className: "popup-content"
     }, children);
   }
+  const classes = classnames__WEBPACK_IMPORTED_MODULE_3___default()('popup-container', isShow ? 'show' : 'hide', className);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: `popup-container ${isShow ? 'show' : 'hide'}`,
+    className: classes,
     onClick: props.onClick
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "popup-block-body"
@@ -1612,7 +1823,7 @@ const Popup = props => {
       height: height,
       width: width
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, isShowTitle && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "popup-title"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "txt-title"
@@ -1633,14 +1844,17 @@ Popup.propTypes = {
   onClose: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
   isHtml: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool,
   iframeUrl: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
-  onClick: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func
+  onClick: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
+  isShowTitle: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool,
+  className: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string
 };
 Popup.defaultProps = {
   width: _constants__WEBPACK_IMPORTED_MODULE_1__["DEFAULT_WIDTH"],
   height: _constants__WEBPACK_IMPORTED_MODULE_1__["DEFAULT_HEIGHT"],
   isShow: false,
   isHtml: false,
-  iframeUrl: null
+  iframeUrl: null,
+  isShowTitle: true
 };
 /* harmony default export */ __webpack_exports__["default"] = (Popup);
 
@@ -1762,30 +1976,169 @@ const TreeViewOption = {
 
 /***/ }),
 
-/***/ "./www/js/source/reactpages/layouts/AppLayout.jsx":
-/*!********************************************************!*\
-  !*** ./www/js/source/reactpages/layouts/AppLayout.jsx ***!
-  \********************************************************/
-/*! exports provided: default */
+/***/ "./www/js/source/reactpages/customHooks/useBaseCurrencyForMultiSelectCurrency.jsx":
+/*!****************************************************************************************!*\
+  !*** ./www/js/source/reactpages/customHooks/useBaseCurrencyForMultiSelectCurrency.jsx ***!
+  \****************************************************************************************/
+/*! exports provided: useBaseCurrencyForMultiSelectCurrency, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AppLayout; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useBaseCurrencyForMultiSelectCurrency", function() { return useBaseCurrencyForMultiSelectCurrency; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+/* harmony import */ var usehooks_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! usehooks-ts */ "./node_modules/usehooks-ts/dist/esm/index.js");
 
-class AppLayout extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
-  constructor(props) {
-    super(props);
+
+
+
+const useBaseCurrencyForMultiSelectCurrency = initSelectedBaseCurrency => {
+  const [originalBaseCurrencyList, originalCurrencyList] = [_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__["default"].baseCurrencyList, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__["default"].currencyList];
+  const defaultBaseCurrencyRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(initSelectedBaseCurrency);
+  const isFirstRender = Object(usehooks_ts__WEBPACK_IMPORTED_MODULE_3__["useIsFirstRender"])();
+  const baseCurrecyListRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(originalBaseCurrencyList);
+  const selectedCurrency = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(state => state.selectedCurrency);
+  const store = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useStore"])();
+  const selectedBaseCurrency = store.getState().selectedBaseCurrency; //use react store to get state value so that component will not trigger re-render when selectedBaseCurrency change
+
+  if (isFirstRender && !initSelectedBaseCurrency) {
+    defaultBaseCurrencyRef.current = selectedBaseCurrency;
   }
-  render() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      id: "container",
-      className: "container-fluid"
-    }, this.props.children);
+  const baseCurrencyList = baseCurrecyListRef.current;
+  const defaultBaseCurrency = defaultBaseCurrencyRef.current;
+  let newBaseCurrency = '';
+  let newBaseCurrencyList = baseCurrencyList;
+  const _isSingleSelectedCurrency = () => selectedCurrency && selectedCurrency.indexOf(',') < 0;
+  if (_isSingleSelectedCurrency()) {
+    const currencyName = originalCurrencyList.find(x => x.Id == selectedCurrency).Value;
+    if (!baseCurrencyList.find(x => x.label === currencyName)) {
+      newBaseCurrency = '';
+      newBaseCurrencyList = originalBaseCurrencyList.slice(0);
+      newBaseCurrencyList.push({
+        value: newBaseCurrency,
+        label: currencyName
+      });
+    } else {
+      newBaseCurrency = selectedBaseCurrency;
+      newBaseCurrencyList = baseCurrencyList;
+    }
+  } else {
+    newBaseCurrencyList = originalBaseCurrencyList;
+    newBaseCurrency = newBaseCurrencyList.find(x => x.label === selectedBaseCurrency) ? selectedBaseCurrency : defaultBaseCurrency;
   }
-}
+  baseCurrecyListRef.current = newBaseCurrencyList;
+  return {
+    baseCurrencyList: newBaseCurrencyList,
+    selectedBaseCurrency: newBaseCurrency
+  };
+};
+/* harmony default export */ __webpack_exports__["default"] = (useBaseCurrencyForMultiSelectCurrency);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/customHooks/useMobileVersion.jsx":
+/*!*******************************************************************!*\
+  !*** ./www/js/source/reactpages/customHooks/useMobileVersion.jsx ***!
+  \*******************************************************************/
+/*! exports provided: useMobileVersion, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useMobileVersion", function() { return useMobileVersion; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_device_detect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-device-detect */ "./node_modules/react-device-detect/dist/lib.js");
+/* harmony import */ var react_device_detect__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_device_detect__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var usehooks_ts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! usehooks-ts */ "./node_modules/usehooks-ts/dist/esm/index.js");
+
+
+
+const useMobileVersion = () => {
+  const width = window.innerWidth;
+  const ref = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(false);
+  const isFirstRender = Object(usehooks_ts__WEBPACK_IMPORTED_MODULE_2__["useIsFirstRender"])();
+  if (isFirstRender) {
+    if (react_device_detect__WEBPACK_IMPORTED_MODULE_1__["isDesktop"]) {
+      ref.current = false;
+    } else {
+      ref.current = width < 1024;
+    }
+  }
+  return ref.current;
+};
+/* harmony default export */ __webpack_exports__["default"] = (useMobileVersion);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/customHooks/useSubsidiarySearch.jsx":
+/*!**********************************************************************!*\
+  !*** ./www/js/source/reactpages/customHooks/useSubsidiarySearch.jsx ***!
+  \**********************************************************************/
+/*! exports provided: useSubsidiarySearch, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useSubsidiarySearch", function() { return useSubsidiarySearch; });
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+/* harmony import */ var _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/constants/report */ "./www/js/source/reactpages/constants/report.js");
+
+
+
+const useSubsidiarySearch = () => {
+  const isSubsidiarySearch = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["useSelector"])(state => state.subsidiarySearch);
+  const defaultSelectedSubsidiary = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_1__["default"].subsidiaryList.join(',');
+  const isShowSubsidiaryDropdown = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_1__["default"].subsidiaryViewType !== _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_2__["SubsidiaryViewType"].NOT_MANAGEMENT && _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_1__["default"].subsidiaryList.length > 0;
+  const isShowSubsidiarySearchCheckBox = isShowSubsidiaryDropdown && _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_1__["default"].subsidiaryViewType === _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_2__["SubsidiaryViewType"].MASTER_MANAGEMENT;
+  const isWhiteLabelView = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_1__["default"].subsidiaryViewType === _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_2__["SubsidiaryViewType"].MASTER_MANAGEMENT && !_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_1__["default"].isOneworksMaster;
+  return {
+    isSubsidiarySearch,
+    isShowSubsidiaryDropdown,
+    isShowSubsidiarySearchCheckBox,
+    isWhiteLabelView,
+    defaultSelectedSubsidiary
+  };
+};
+/* harmony default export */ __webpack_exports__["default"] = (useSubsidiarySearch);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/layouts/AppLayout.jsx":
+/*!********************************************************!*\
+  !*** ./www/js/source/reactpages/layouts/AppLayout.jsx ***!
+  \********************************************************/
+/*! exports provided: AppLayout, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppLayout", function() { return AppLayout; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+const AppLayout = props => {
+  const className = classnames__WEBPACK_IMPORTED_MODULE_1___default()(props.className, "container-fluid");
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "container",
+    className: className
+  }, props.children);
+};
+const propTypes = {
+  className: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string
+};
+AppLayout.propTypes = propTypes;
+/* harmony default export */ __webpack_exports__["default"] = (AppLayout);
 
 /***/ }),
 
@@ -1870,7 +2223,8 @@ class BetListLayout extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       title: this.state.popupTitle,
       width: 900,
       height: 600,
-      onClose: () => this._closePopup()
+      onClose: () => this._closePopup(),
+      className: "betlist-popup"
     }));
   }
 }
@@ -2128,10 +2482,11 @@ class Site {
     }
     return text;
   }
-  static downloadFile(data, fileName) {
-    const url = window.URL.createObjectURL(new Blob([data]));
+  static downloadFile(data, fileName, option) {
+    const url = window.URL.createObjectURL(new Blob([data], option));
     const link = document.createElement('a');
     link.href = url;
+    link.target = "_self";
     link.setAttribute('download', fileName);
     document.body.appendChild(link);
     link.click();
@@ -2241,6 +2596,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/pages/bettingticketscenter/common/lib/constants.js");
 /* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+/* harmony import */ var _lib_Service_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../lib/Service.js */ "./www/js/source/reactpages/pages/bettingticketscenter/common/lib/Service.js");
+
 
 
 
@@ -2276,15 +2633,6 @@ const BaseDataGrid = props => {
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     toggleLoader(false);
   }, [gridData]);
-  const getHeaderName = column => {
-    if (column === 'LicenseeWL') {
-      return `${_lib_constants__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].LicenseeWL}/${_lib_constants__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].Comm}`;
-    }
-    if (column === 'WinLoss' && _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_8__["default"].isAllowedCustomerComm) {
-      return `${_lib_constants__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].WinLoss}/${_lib_constants__WEBPACK_IMPORTED_MODULE_7__["HeaderText"].Comm}`;
-    }
-    return _lib_constants__WEBPACK_IMPORTED_MODULE_7__["HeaderText"][column];
-  };
   const onPaging = (index, size) => {
     const param = Object.assign({}, requestParam, {
       PageIndex: index,
@@ -2321,7 +2669,7 @@ const BaseDataGrid = props => {
     isPaging: isPaging,
     pageOption: pageOption,
     onPaging: onPaging,
-    getHeaderNameFunc: getHeaderName,
+    getHeaderNameFunc: _lib_Service_js__WEBPACK_IMPORTED_MODULE_9__["default"].getHeaderName,
     columns: columns,
     columnWidths: columnWidths,
     sortableColumns: sortableColumns,
@@ -2365,6 +2713,234 @@ function mapStateToProps(state) {
 
 /***/ }),
 
+/***/ "./www/js/source/reactpages/pages/bettingticketscenter/common/components/BaseMobileDataGrid.jsx":
+/*!******************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/bettingticketscenter/common/components/BaseMobileDataGrid.jsx ***!
+  \******************************************************************************************************/
+/*! exports provided: BaseMobileDataGrid, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BaseMobileDataGrid", function() { return BaseMobileDataGrid; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _jsroot_components_ReportTitle__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/components/ReportTitle */ "./www/js/source/reactpages/components/ReportTitle.jsx");
+/* harmony import */ var _lib_constants_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../lib/constants.js */ "./www/js/source/reactpages/pages/bettingticketscenter/common/lib/constants.js");
+/* harmony import */ var _action_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./action.js */ "./www/js/source/reactpages/pages/bettingticketscenter/common/components/action.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _legion_lib_react_grid__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @legion-lib/react-grid */ "./node_modules/@legion-lib/react-grid/dist/index.js");
+/* harmony import */ var _legion_lib_react_grid__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_legion_lib_react_grid__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _lib_Service_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../lib/Service.js */ "./www/js/source/reactpages/pages/bettingticketscenter/common/lib/Service.js");
+/* harmony import */ var _jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @jsroot/components/NoDataTitle */ "./www/js/source/reactpages/components/NoDataTitle.jsx");
+/* harmony import */ var usehooks_ts__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! usehooks-ts */ "./node_modules/usehooks-ts/dist/esm/index.js");
+/* harmony import */ var _jsroot_components_mobile_component_RefPager_jsx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @jsroot/components/mobile-component/RefPager.jsx */ "./www/js/source/reactpages/components/mobile-component/RefPager.jsx");
+/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/dist/esm-browser/index.js");
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+
+
+
+
+
+
+
+
+
+
+
+const VerySmallColumnWidths = [53, 16, 22, 13];
+const SmallColumnWidths = [159, 66, 90, 28];
+const LargeColumnWidths = ['53%', '18%', '22%', '7%'];
+const BaseMobileDataGrid = props => {
+  const {
+    dataUrl,
+    isPaging,
+    body,
+    footer,
+    columns,
+    sortableColumns
+  } = props;
+  const [gridData, requestParam, reportTitle, reloadReport] = Object(react_redux__WEBPACK_IMPORTED_MODULE_4__["useSelector"])(state => [state.gridData, state.requestParam, state.reportTitle, state.reloadReport], react_redux__WEBPACK_IMPORTED_MODULE_4__["shallowEqual"]);
+  const ref = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
+  const dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_4__["useDispatch"])();
+  const [id, setId] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(`${Object(uuid__WEBPACK_IMPORTED_MODULE_11__["v4"])()}`);
+  const [pagerRef, pagerSize] = Object(usehooks_ts__WEBPACK_IMPORTED_MODULE_9__["useElementSize"])();
+  const {
+    width
+  } = Object(usehooks_ts__WEBPACK_IMPORTED_MODULE_9__["useWindowSize"])();
+  const collumnWidths = width > 500 ? LargeColumnWidths : width > 370 ? SmallColumnWidths : VerySmallColumnWidths;
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    dispatch(toggleLoader(false));
+    setId(`${Object(uuid__WEBPACK_IMPORTED_MODULE_11__["v4"])()}`);
+  }, [gridData]);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    var _ref$current;
+    const style = `bottom: ${pagerSize.height - 1}px`;
+    (_ref$current = ref.current) === null || _ref$current === void 0 || (_ref$current = _ref$current.getElementsByClassName('footer-content')[0]) === null || _ref$current === void 0 || _ref$current.setAttribute('style', style);
+  }, [pagerSize === null || pagerSize === void 0 ? void 0 : pagerSize.height, id]);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    var _ref$current2;
+    (_ref$current2 = ref.current) === null || _ref$current2 === void 0 || _ref$current2.scrollIntoView();
+  }, [id]);
+  const {
+    toggleLoader,
+    getGridData,
+    setRequestParam
+  } = _action_js__WEBPACK_IMPORTED_MODULE_3__["ActionCreators"];
+  const pageOption = {
+    PageIndex: requestParam.PageIndex,
+    PageSize: requestParam.PageSize,
+    TotalItem: gridData !== null && gridData !== void 0 && gridData.TotalRows ? gridData.TotalRows : _lib_constants_js__WEBPACK_IMPORTED_MODULE_2__["DefaultPageSize"],
+    PageList: [_lib_constants_js__WEBPACK_IMPORTED_MODULE_2__["DefaultPageSize"], 100, 200, 300, 400, 500, 1000, 2000]
+  };
+  const onPaging = (index, size) => {
+    const param = _objectSpread(_objectSpread({}, requestParam), {}, {
+      PageIndex: index,
+      PageSize: size
+    });
+    getData(param);
+  };
+  const onSort = (sortBy, sortOrder) => {
+    const param = _objectSpread(_objectSpread({}, requestParam), {}, {
+      SortBy: sortBy === 'WinLoss' ? 'WinLost' : sortBy,
+      SortOrder: sortOrder
+    });
+    getData(param);
+  };
+  const getData = param => {
+    dispatch(toggleLoader(true));
+    dispatch(getGridData(dataUrl, param));
+    dispatch(setRequestParam(param));
+  };
+  const buildHeader = () => {
+    let rows = [];
+    for (let i = 0; i < columns.length; i++) {
+      const column = columns[i];
+      const isSortable = sortableColumns.indexOf(column) >= 0;
+      const headerName = _lib_Service_js__WEBPACK_IMPORTED_MODULE_7__["default"].getHeaderName(column);
+      rows.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_grid__WEBPACK_IMPORTED_MODULE_6__["HeaderCell"], {
+        key: column,
+        colWidth: collumnWidths[i],
+        sortBy: isSortable ? column : null
+      }, headerName));
+    }
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_grid__WEBPACK_IMPORTED_MODULE_6__["HeaderRow"], {
+      style: {
+        height: 32
+      }
+    }, rows);
+  };
+  const header = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => buildHeader(), [width]);
+  const bodyWrapper = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, {
+    key: id
+  }, body), [id]);
+  if (!(gridData !== null && gridData !== void 0 && gridData.Data) || gridData.Data.length == 0) {
+    if (!(gridData !== null && gridData !== void 0 && gridData.Data)) {
+      return null;
+    }
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_8__["default"], null);
+  }
+  const isShowPagingInfo = pagerSize.width > 400;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "mobile-betlist-container betlist-container result-content",
+    ref: ref
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_ReportTitle__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    content: reportTitle
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_grid__WEBPACK_IMPORTED_MODULE_6__["Table"], {
+    key: "betlist-mobile-table",
+    autoWidth: true,
+    autoHeight: false,
+    header: header,
+    body: bodyWrapper,
+    footer: footer,
+    isPaging: false,
+    pageOption: pageOption,
+    shouldResetScrollPosition: reloadReport,
+    bodyHeight: "100%",
+    containerPadding: 2,
+    isIncludeScrollWidth: false,
+    onSort: onSort
+  }), isPaging && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_mobile_component_RefPager_jsx__WEBPACK_IMPORTED_MODULE_10__["RefPager"], {
+    ref: pagerRef,
+    onPaging: onPaging,
+    pageOption: pageOption,
+    isShowPagingInfo: isShowPagingInfo
+  }));
+};
+const propTypes = {
+  dataUrl: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string,
+  isPaging: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool,
+  header: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.array, prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.element, prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.object]),
+  body: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.array, prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.element, prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.object]),
+  footer: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.array, prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.element, prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.object]),
+  columns: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string),
+  sortableColumns: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string)
+};
+const defaultProps = {
+  isPaging: false,
+  sortableColumns: []
+};
+BaseMobileDataGrid.propTypes = propTypes;
+BaseMobileDataGrid.defaultProps = defaultProps;
+/* harmony default export */ __webpack_exports__["default"] = (BaseMobileDataGrid);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/bettingticketscenter/common/components/MobileBetlistContent.jsx":
+/*!********************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/bettingticketscenter/common/components/MobileBetlistContent.jsx ***!
+  \********************************************************************************************************/
+/*! exports provided: MobileBetlistContent, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MobileBetlistContent", function() { return MobileBetlistContent; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+
+
+const MobileBetlistContent = props => {
+  const {
+    item
+  } = props;
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {}, [item]);
+  const spaceSpan = '<span>&nbsp;</span>';
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "cell-index"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "index"
+  }, "#", item.Index), " - ", item.TransTime), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "cell-external-id"
+  }, item.ExternalId), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, item.RefNo), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "cell-choice",
+    dangerouslySetInnerHTML: {
+      __html: item.Choice
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "cell-odd",
+    dangerouslySetInnerHTML: {
+      __html: `@${item.Odds} ${spaceSpan} ${item.OddsType}`
+    }
+  }));
+};
+const propTypes = {
+  item: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object
+};
+MobileBetlistContent.propTypes = propTypes;
+/* harmony default export */ __webpack_exports__["default"] = (MobileBetlistContent);
+
+/***/ }),
+
 /***/ "./www/js/source/reactpages/pages/bettingticketscenter/common/components/PageLayout.jsx":
 /*!**********************************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/bettingticketscenter/common/components/PageLayout.jsx ***!
@@ -2379,16 +2955,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _action_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./action.js */ "./www/js/source/reactpages/pages/bettingticketscenter/common/components/action.js");
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var _jsroot_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/layouts/AppLayout */ "./www/js/source/reactpages/layouts/AppLayout.jsx");
-/* harmony import */ var _jsroot_layouts_betlist_BetListLayout__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/layouts/betlist/BetListLayout */ "./www/js/source/reactpages/layouts/betlist/BetListLayout.jsx");
-/* harmony import */ var _9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @9softstudio/react-simple-tab */ "./node_modules/@9softstudio/react-simple-tab/dist/index.js");
-/* harmony import */ var _9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-/* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
-/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/pages/bettingticketscenter/common/lib/constants.js");
-/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
-
+/* harmony import */ var _jsroot_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/layouts/AppLayout */ "./www/js/source/reactpages/layouts/AppLayout.jsx");
+/* harmony import */ var _jsroot_layouts_betlist_BetListLayout__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/layouts/betlist/BetListLayout */ "./www/js/source/reactpages/layouts/betlist/BetListLayout.jsx");
+/* harmony import */ var _9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @9softstudio/react-simple-tab */ "./node_modules/@9softstudio/react-simple-tab/dist/index.js");
+/* harmony import */ var _9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/pages/bettingticketscenter/common/lib/constants.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
 
 
 
@@ -2400,16 +2974,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const PageLayout = props => {
+  const dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useDispatch"])();
   const {
-    toggleLoader,
-    isConvertAll,
-    selectedBaseCurrency,
+    toggleLoader
+  } = _action_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"];
+  const [isConvertAll, selectedBaseCurrency, hasExchange] = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(state => [state.isConvertAll, state.selectedBaseCurrency, state.hasExchange]);
+  const {
     selectedTabIndex,
-    children,
-    hasExchange
+    children
   } = props;
   const getResource = key => {
-    return _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource(key);
+    return _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource(key);
   };
   const formatDateString = dateString => {
     const date = new Date(dateString);
@@ -2418,53 +2993,35 @@ const PageLayout = props => {
     return `${month < 10 ? '0' + month : month}/${day < 10 ? '0' + day : day}/${date.getFullYear()}`;
   };
   const beforeShow = () => {
-    toggleLoader(true);
+    dispatch(toggleLoader(true));
   };
   const afterShow = () => {
-    toggleLoader(false);
+    dispatch(toggleLoader(false));
   };
-  const activedTabList = _lib_constants__WEBPACK_IMPORTED_MODULE_9__["tabList"].filter(x => _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].tabList.includes(x.key));
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_4__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_layouts_betlist_BetListLayout__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  const activedTabList = _lib_constants__WEBPACK_IMPORTED_MODULE_8__["tabList"].filter(x => _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_9__["default"].tabList.includes(x.key));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: props.className
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_3__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_layouts_betlist_BetListLayout__WEBPACK_IMPORTED_MODULE_4__["default"], {
     pageName: "BTC",
-    rootUrl: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_8__["default"].getRootUrl(),
+    rootUrl: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_7__["default"].getRootUrl(),
     getResourceFunc: getResource,
     formatDateStringFunc: formatDateString,
     baseCurrency: isConvertAll ? selectedBaseCurrency : '',
     beforeShowFunc: beforeShow,
     afterShowFunc: afterShow
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_6__["Tabs"], null, activedTabList.map(item => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_6__["Tab"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_5__["Tabs"], null, activedTabList.map(item => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_5__["Tab"], {
     key: item.url,
     isActive: selectedTabIndex == item.displayOrder,
     label: item.label,
     url: item.url
-  })), hasExchange && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_6__["Tab"], {
-    key: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_8__["default"].resolveClientUrl("ExchangeVoided"),
+  })), hasExchange && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_5__["Tab"], {
+    key: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_7__["default"].resolveClientUrl("ExchangeVoided"),
     isActive: selectedTabIndex == 4,
-    label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("Exchange"),
-    url: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_8__["default"].resolveClientUrl("ExchangeVoided")
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, children)));
+    label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource("Exchange"),
+    url: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_7__["default"].resolveClientUrl("ExchangeVoided")
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, children))));
 };
-function mapDispatchToProps(dispatch) {
-  const {
-    toggleLoader
-  } = _action_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"];
-  return Object(redux__WEBPACK_IMPORTED_MODULE_3__["bindActionCreators"])({
-    toggleLoader
-  }, dispatch);
-}
-function mapStateToProps(state) {
-  const {
-    isConvertAll,
-    selectedBaseCurrency,
-    hasExchange
-  } = state;
-  return Object.assign({}, {
-    isConvertAll,
-    selectedBaseCurrency,
-    hasExchange
-  });
-}
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(PageLayout));
+/* harmony default export */ __webpack_exports__["default"] = (PageLayout);
 
 /***/ }),
 
@@ -2516,6 +3073,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Service; });
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./constants */ "./www/js/source/reactpages/pages/bettingticketscenter/common/lib/constants.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_4__);
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+
+
 
 
 class Service {
@@ -2525,6 +3092,28 @@ class Service {
     return _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("BettingTicketCenter") + dateRangeText + baseCurrencyText;
   }
 }
+_defineProperty(Service, "getHeaderName", column => {
+  if (column === 'LicenseeWL') {
+    return `${_constants__WEBPACK_IMPORTED_MODULE_2__["HeaderText"].LicenseeWL}/${_constants__WEBPACK_IMPORTED_MODULE_2__["HeaderText"].Comm}`;
+  }
+  if (column === 'WinLoss' && _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_3__["default"].isAllowedCustomerComm) {
+    return `${_constants__WEBPACK_IMPORTED_MODULE_2__["HeaderText"].WinLoss}/${_constants__WEBPACK_IMPORTED_MODULE_2__["HeaderText"].Comm}`;
+  }
+  if (column === "") {
+    return "";
+  }
+  return _constants__WEBPACK_IMPORTED_MODULE_2__["HeaderText"][column];
+});
+_defineProperty(Service, "isSingleDate", dateRange => {
+  if (!dateRange) {
+    return false;
+  }
+  const {
+    fromDate,
+    toDate
+  } = dateRange;
+  return moment__WEBPACK_IMPORTED_MODULE_4___default()(fromDate, "MM/DD/YYYY", true).isSame(moment__WEBPACK_IMPORTED_MODULE_4___default()(toDate, "MM/DD/YYYY", true), 'day');
+});
 
 /***/ }),
 
@@ -2569,7 +3158,9 @@ const HeaderText = {
   LicenseeWL: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("LicenseeWL"),
   Comm: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("Comm"),
   Status: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("Status"),
-  Live: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("Live")
+  Live: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("Live"),
+  Details: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("Details"),
+  Icon: ""
 };
 const DefaultPageSize = 50;
 const tabKeys = {
@@ -2653,41 +3244,46 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _DataGrid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DataGrid */ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/DataGrid.jsx");
-/* harmony import */ var _FormFilter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./FormFilter */ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/FormFilter.jsx");
+/* harmony import */ var _desktop_DataGrid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./desktop/DataGrid */ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/desktop/DataGrid.jsx");
+/* harmony import */ var _desktop_FormFilter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./desktop/FormFilter */ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/desktop/FormFilter.jsx");
 /* harmony import */ var _common_components_PageLayout__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../common/components/PageLayout */ "./www/js/source/reactpages/pages/bettingticketscenter/common/components/PageLayout.jsx");
 /* harmony import */ var _jsroot_components_Loader__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/components/Loader */ "./www/js/source/reactpages/components/Loader.jsx");
+/* harmony import */ var _mobile_MobileFormFilter__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./mobile/MobileFormFilter */ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/mobile/MobileFormFilter.jsx");
+/* harmony import */ var _jsroot_customHooks_useMobileVersion__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/customHooks/useMobileVersion */ "./www/js/source/reactpages/customHooks/useMobileVersion.jsx");
+/* harmony import */ var _mobile_MobileGrid__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./mobile/MobileGrid */ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/mobile/MobileGrid.jsx");
 
 
 
 
 
 
-class AppContainer extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_components_PageLayout__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      selectedTabIndex: "2"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Loader__WEBPACK_IMPORTED_MODULE_5__["default"], {
-      isLoading: this.props.isLoading
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormFilter__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DataGrid__WEBPACK_IMPORTED_MODULE_2__["default"], null));
-  }
-}
-function mapStateToProps(state) {
-  return Object.assign({}, {
-    isLoading: state.isLoading
-  });
-}
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(AppContainer));
+
+
+
+const AppContainer = () => {
+  const isUseMobileVer = Object(_jsroot_customHooks_useMobileVersion__WEBPACK_IMPORTED_MODULE_7__["default"])();
+  const isLoading = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(state => state.isLoading);
+  const destopLayout = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Loader__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    isLoading: isLoading
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_desktop_FormFilter__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_desktop_DataGrid__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+  const mobileLayout = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Loader__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    isLoading: isLoading
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mobile_MobileFormFilter__WEBPACK_IMPORTED_MODULE_6__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mobile_MobileGrid__WEBPACK_IMPORTED_MODULE_8__["default"], null));
+  const layout = isUseMobileVer ? mobileLayout : destopLayout;
+  const className = isUseMobileVer ? "mobile-container" : "";
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_components_PageLayout__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    className: className,
+    selectedTabIndex: "2"
+  }, layout);
+};
+/* harmony default export */ __webpack_exports__["default"] = (AppContainer);
 
 /***/ }),
 
-/***/ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/DataGrid.jsx":
-/*!*********************************************************************************************!*\
-  !*** ./www/js/source/reactpages/pages/bettingticketscenter/running/components/DataGrid.jsx ***!
-  \*********************************************************************************************/
+/***/ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/desktop/DataGrid.jsx":
+/*!*****************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/bettingticketscenter/running/components/desktop/DataGrid.jsx ***!
+  \*****************************************************************************************************/
 /*! exports provided: DataGrid, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2697,8 +3293,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _common_lib_constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../common/lib/constants */ "./www/js/source/reactpages/pages/bettingticketscenter/common/lib/constants.js");
-/* harmony import */ var _common_components_BaseDataGrid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../common/components/BaseDataGrid */ "./www/js/source/reactpages/pages/bettingticketscenter/common/components/BaseDataGrid.jsx");
+/* harmony import */ var _common_lib_constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common/lib/constants */ "./www/js/source/reactpages/pages/bettingticketscenter/common/lib/constants.js");
+/* harmony import */ var _common_components_BaseDataGrid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../common/components/BaseDataGrid */ "./www/js/source/reactpages/pages/bettingticketscenter/common/components/BaseDataGrid.jsx");
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
 
@@ -2744,10 +3340,10 @@ function mapStateToProps(state) {
 
 /***/ }),
 
-/***/ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/FormFilter.jsx":
-/*!***********************************************************************************************!*\
-  !*** ./www/js/source/reactpages/pages/bettingticketscenter/running/components/FormFilter.jsx ***!
-  \***********************************************************************************************/
+/***/ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/desktop/FormFilter.jsx":
+/*!*******************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/bettingticketscenter/running/components/desktop/FormFilter.jsx ***!
+  \*******************************************************************************************************/
 /*! exports provided: FormFilter, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2756,211 +3352,492 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FormFilter", function() { return FormFilter; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/components/collapsible-panel */ "./www/js/source/reactpages/components/collapsible-panel/index.jsx");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _hooks_useValidParam_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../hooks/useValidParam.jsx */ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/hooks/useValidParam.jsx");
+/* harmony import */ var _filters_SubsidiaryDropDown_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../filters/SubsidiaryDropDown.jsx */ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/filters/SubsidiaryDropDown.jsx");
+/* harmony import */ var _filters_ProductFilter_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../filters/ProductFilter.jsx */ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/filters/ProductFilter.jsx");
+/* harmony import */ var _filters_UserNameFilter_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../filters/UserNameFilter.jsx */ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/filters/UserNameFilter.jsx");
+/* harmony import */ var _filters_CurrecyFilter_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../filters/CurrecyFilter.jsx */ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/filters/CurrecyFilter.jsx");
+/* harmony import */ var _filters_BaseCurrencyFilter_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../filters/BaseCurrencyFilter.jsx */ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/filters/BaseCurrencyFilter.jsx");
+/* harmony import */ var _filters_ConvertAllCheckBoxFilter_jsx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../filters/ConvertAllCheckBoxFilter.jsx */ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/filters/ConvertAllCheckBoxFilter.jsx");
+/* harmony import */ var _filters_StatusFilter_jsx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../filters/StatusFilter.jsx */ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/filters/StatusFilter.jsx");
+/* harmony import */ var _filters_SubsidiaryCheckBoxFilter_jsx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../filters/SubsidiaryCheckBoxFilter.jsx */ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/filters/SubsidiaryCheckBoxFilter.jsx");
+/* harmony import */ var _filters_StickyIcon_jsx__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../filters/StickyIcon.jsx */ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/filters/StickyIcon.jsx");
+/* harmony import */ var _jsroot_customHooks_useSubsidiarySearch__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @jsroot/customHooks/useSubsidiarySearch */ "./www/js/source/reactpages/customHooks/useSubsidiarySearch.jsx");
+/* harmony import */ var _hooks_useFilterAction_jsx__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../hooks/useFilterAction.jsx */ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/hooks/useFilterAction.jsx");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const FormFilter = () => {
+  const isValidModel = Object(_hooks_useValidParam_jsx__WEBPACK_IMPORTED_MODULE_3__["useValidParam"])();
+  const {
+    isShowSubsidiaryDropdown,
+    isSubsidiarySearch,
+    isShowSubsidiarySearchCheckBox
+  } = Object(_jsroot_customHooks_useSubsidiarySearch__WEBPACK_IMPORTED_MODULE_13__["default"])();
+  const {
+    submit
+  } = Object(_hooks_useFilterAction_jsx__WEBPACK_IMPORTED_MODULE_14__["default"])();
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    className: "page-filter",
+    stickyFooter: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_StickyIcon_jsx__WEBPACK_IMPORTED_MODULE_12__["default"], null)
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, isShowSubsidiaryDropdown && isSubsidiarySearch && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-3 col-sm-4 col-lg-3 col-xl-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_SubsidiaryDropDown_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_ProductFilter_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_UserNameFilter_jsx__WEBPACK_IMPORTED_MODULE_6__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_CurrecyFilter_jsx__WEBPACK_IMPORTED_MODULE_7__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_BaseCurrencyFilter_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_ConvertAllCheckBoxFilter_jsx__WEBPACK_IMPORTED_MODULE_9__["default"], null)), !(isShowSubsidiaryDropdown && isSubsidiarySearch) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_StatusFilter_jsx__WEBPACK_IMPORTED_MODULE_10__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, isShowSubsidiaryDropdown && isSubsidiarySearch && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_StatusFilter_jsx__WEBPACK_IMPORTED_MODULE_10__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-2 col-sm-2 col-lg-2 col-xl-1"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "button-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    disabled: !isValidModel,
+    type: "button",
+    className: "btn btn-submit",
+    onClick: submit
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("Submit"))))), isShowSubsidiarySearchCheckBox && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-sm-3 col-md-2 col-xl-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_SubsidiaryCheckBoxFilter_jsx__WEBPACK_IMPORTED_MODULE_11__["default"], null))));
+};
+/* harmony default export */ __webpack_exports__["default"] = (FormFilter);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/filters/BaseCurrencyFilter.jsx":
+/*!***************************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/bettingticketscenter/running/components/filters/BaseCurrencyFilter.jsx ***!
+  \***************************************************************************************************************/
+/*! exports provided: BaseCurrencyFilter, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BaseCurrencyFilter", function() { return BaseCurrencyFilter; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-select */ "./node_modules/react-select/dist/react-select.es.js");
-/* harmony import */ var _legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @legion-lib/react-multiselect */ "./node_modules/@legion-lib/react-multiselect/dist/index.js");
-/* harmony import */ var _legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _jsroot_components_auto_complete__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/components/auto-complete */ "./www/js/source/reactpages/components/auto-complete/index.jsx");
-/* harmony import */ var _jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/components/collapsible-panel */ "./www/js/source/reactpages/components/collapsible-panel/index.jsx");
-/* harmony import */ var _jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/components/CheckBox */ "./www/js/source/reactpages/components/CheckBox.jsx");
-/* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../actions/index.js */ "./www/js/source/reactpages/pages/bettingticketscenter/running/actions/index.js");
-/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-/* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
-/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
-/* harmony import */ var _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @jsroot/lib/DataService.js */ "./www/js/source/reactpages/lib/DataService.js");
-/* harmony import */ var _common_lib_constants__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../common/lib/constants */ "./www/js/source/reactpages/pages/bettingticketscenter/common/lib/constants.js");
-/* harmony import */ var _common_lib_Service__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../common/lib/Service */ "./www/js/source/reactpages/pages/bettingticketscenter/common/lib/Service.js");
-/* harmony import */ var _jsroot_components_UserGuide__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @jsroot/components/UserGuide */ "./www/js/source/reactpages/components/UserGuide.jsx");
-/* harmony import */ var _jsroot_lib_validationHelper__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @jsroot/lib/validationHelper */ "./www/js/source/reactpages/lib/validationHelper.js");
-/* harmony import */ var _constants_report__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../../../constants/report */ "./www/js/source/reactpages/constants/report.js");
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+/* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/index.js */ "./www/js/source/reactpages/pages/bettingticketscenter/running/actions/index.js");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_customHooks_useBaseCurrencyForMultiSelectCurrency__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/customHooks/useBaseCurrencyForMultiSelectCurrency */ "./www/js/source/reactpages/customHooks/useBaseCurrencyForMultiSelectCurrency.jsx");
+/* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-select */ "./node_modules/react-select/dist/react-select.es.js");
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
-  constructor(props) {
-    super(props);
-    _defineProperty(this, "defaultSelectedSubsidiary", _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].subsidiaryList.join(','));
-    _defineProperty(this, "showSubsidiaryDropdown", _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].subsidiaryViewType !== _constants_report__WEBPACK_IMPORTED_MODULE_17__["SubsidiaryViewType"].NOT_MANAGEMENT && _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].subsidiaryList.length > 0);
-    _defineProperty(this, "showSubsidiarySearchCheckBox", this.showSubsidiaryDropdown && _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].subsidiaryViewType === _constants_report__WEBPACK_IMPORTED_MODULE_17__["SubsidiaryViewType"].MASTER_MANAGEMENT);
-    _defineProperty(this, "whiteLabelView", _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].subsidiaryViewType === _constants_report__WEBPACK_IMPORTED_MODULE_17__["SubsidiaryViewType"].MASTER_MANAGEMENT && !_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].isOneworksMaster);
-    _defineProperty(this, "submit", event => {
-      event.preventDefault();
-      const params = this._getParams();
-      if (!params) {
-        return;
-      }
-      this.props.setReportTitle(_common_lib_Service__WEBPACK_IMPORTED_MODULE_14__["default"].getTitle(null, null, params.IsConvertAll ? params.BaseCurrencyName : ''));
-      this.props.setRequestParam(params);
-      this.props.toggleLoader(true);
-      this.props.getGridData(_common_lib_constants__WEBPACK_IMPORTED_MODULE_13__["ApiUrl"].RUNNING_DATA_URL, params);
+const BaseCurrencyFilter = () => {
+  const selectedBaseCurrency = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(state => state.selectedBaseCurrency);
+  const dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useDispatch"])();
+  const {
+    setSelectedBaseCurrency
+  } = _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"];
+  const {
+    baseCurrencyList,
+    selectedBaseCurrency: newBaseCurrency
+  } = Object(_jsroot_customHooks_useBaseCurrencyForMultiSelectCurrency__WEBPACK_IMPORTED_MODULE_4__["default"])(selectedBaseCurrency);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    dispatch(setSelectedBaseCurrency(newBaseCurrency));
+  }, [newBaseCurrency]);
+  const _renderBaseCurrencySelectList = () => {
+    return (baseCurrencyList === null || baseCurrencyList === void 0 ? void 0 : baseCurrencyList.length) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      instanceId: "ddlBased",
+      value: selectedBaseCurrency,
+      options: baseCurrencyList,
+      onChange: item => dispatch(setSelectedBaseCurrency(item.value))
     });
-    _defineProperty(this, "productChangeHandler", (currentItem, selectedItemsKey) => {
-      this.props.setSelectedProduct(selectedItemsKey);
-    });
-    _defineProperty(this, "exportExcel", event => {
-      event.preventDefault();
-      const params = this._getParams();
-      if (!params) {
-        return;
-      }
-      if (_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].isAllowTxIDColumn) {
-        params.IsAllowTxIDColumn = true;
-      }
-      params.IsExport = true;
-      this.props.toggleLoader(true);
-      _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_12__["default"].getFile(_common_lib_constants__WEBPACK_IMPORTED_MODULE_13__["ApiUrl"].RUNNING_DATA_URL, params).then(response => {
-        const NoContentStatusCode = 204;
-        if (response.status === NoContentStatusCode) {
-          alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("NoInfo"));
-        } else {
-          _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_10__["default"].downloadFile(response.data, 'BettingTicketsCenter_Running.xls');
-        }
-        this.props.toggleLoader(false);
-      });
-    });
-    _defineProperty(this, "showUserGuide", () => {
-      const userGuideContent = this.props.userGuideContent;
-      if (!userGuideContent || userGuideContent.length === 0) {
-        this.props.getUserGuideContent('BettingTicketCenterRunning');
-      }
-    });
-    _defineProperty(this, "_onChangeCurrency", currencyIdList => {
-      let baseCurrency = "";
-      if (!currencyIdList || currencyIdList.indexOf(',') > 0) {
-        // none or multi currencies
-        this.baseCurrencyList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].baseCurrencyList;
-        baseCurrency = this.baseCurrencyList.find(x => x.label === this.props.selectedBaseCurrency) ? this.props.selectedBaseCurrency : this.defaultBaseCurrency;
-      } else {
-        const currencyName = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].currencyList.find(x => x.Id == currencyIdList).Value;
-        if (!this.baseCurrencyList.find(x => x.label === currencyName)) {
-          baseCurrency = '';
-          this.baseCurrencyList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].baseCurrencyList.slice(0);
-          this.baseCurrencyList.push({
-            value: baseCurrency,
-            label: currencyName
-          });
-        } else {
-          baseCurrency = currencyName;
-        }
-      }
-      this.props.setSelectedCurrency(currencyIdList);
-      this.props.setSelectedBaseCurrency(baseCurrency);
-    });
-    this.baseCurrencyList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].baseCurrencyList;
-    this.defaultBaseCurrency = props.selectedBaseCurrency;
-    this.state = {
-      subsidiarySearch: !this.showSubsidiarySearchCheckBox && this.showSubsidiaryDropdown
-    };
-  }
-  get isValidModel() {
-    return !!this.props.selectedProduct && !!this.props.selectedStatus && !!this.props.selectedCurrency && Object(_jsroot_lib_validationHelper__WEBPACK_IMPORTED_MODULE_16__["validateBaseCurrency"])(this.props.selectedBaseCurrency) && (!this.state.subsidiarySearch || !!this.props.selectedSubsidiary);
-  }
-  _getParams() {
-    if (!this.isValidModel) {
-      return null;
-    }
-    const {
-      PageSize,
-      SortBy,
-      SortOrder
-    } = this.props.requestParam;
-    const baseCurrency = this.baseCurrencyList.find(x => x.value === this.props.selectedBaseCurrency);
-    return {
-      PageSize: PageSize,
-      PageIndex: 1,
-      ProductCodeList: this.props.selectedProduct,
-      Username: this.props.username,
-      CurrencyIdList: this.props.selectedCurrency,
-      BaseCurrency: this.props.selectedBaseCurrency,
-      Status: this.props.selectedStatus,
-      SortBy: SortBy,
-      SortOrder: SortOrder,
-      IsConvertAll: this.props.isConvertAll,
-      BaseCurrencyName: baseCurrency ? baseCurrency.label : '',
-      SubsidiarySearch: this.state.subsidiarySearch,
-      SubsidiaryList: this.state.subsidiarySearch ? this.props.selectedSubsidiary : ""
-    };
-  }
-  _renderUserGuide() {
-    const userGuideContent = this.props.userGuideContent;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_UserGuide__WEBPACK_IMPORTED_MODULE_15__["default"], {
-      title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("UserGuide"),
-      contentTitle: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("BettingTicketCenter"),
-      onClick: this.showUserGuide,
-      content: userGuideContent
-    });
-  }
-  _renderProductSelectList() {
-    const productOptions = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].productOptions;
-    return productOptions && productOptions.length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_4___default.a, {
-      id: "ProductList",
-      hasSearchBox: true,
-      language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].currentLanguage,
-      dataSource: productOptions,
-      keyField: "Code",
-      valueField: "Name",
-      statusField: "Status",
-      onChange: this.productChangeHandler
-    }) : null;
-  }
-  _renderCurrencySelectList() {
-    const currencyList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].currencyList;
-    return currencyList && currencyList.length && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_4___default.a, {
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "label-text"
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("BaseCurrency")), _renderBaseCurrencySelectList());
+};
+/* harmony default export */ __webpack_exports__["default"] = (BaseCurrencyFilter);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/filters/ConvertAllCheckBoxFilter.jsx":
+/*!*********************************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/bettingticketscenter/running/components/filters/ConvertAllCheckBoxFilter.jsx ***!
+  \*********************************************************************************************************************/
+/*! exports provided: ConvertAllCheckBoxFilter, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ConvertAllCheckBoxFilter", function() { return ConvertAllCheckBoxFilter; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/index.js */ "./www/js/source/reactpages/pages/bettingticketscenter/running/actions/index.js");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/components/CheckBox */ "./www/js/source/reactpages/components/CheckBox.jsx");
+
+
+
+
+
+const ConvertAllCheckBoxFilter = () => {
+  const dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useDispatch"])();
+  const {
+    changeIsConvertAll
+  } = _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"];
+  const isConvertAll = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(state => state.isConvertAll);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    id: "IsConvertAll",
+    checked: isConvertAll,
+    onChange: checked => dispatch(changeIsConvertAll(checked)),
+    label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("ConvertAllFiguresToBaseCurrency")
+  }));
+};
+/* harmony default export */ __webpack_exports__["default"] = (ConvertAllCheckBoxFilter);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/filters/CurrecyFilter.jsx":
+/*!**********************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/bettingticketscenter/running/components/filters/CurrecyFilter.jsx ***!
+  \**********************************************************************************************************/
+/*! exports provided: CurrecyFilter, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CurrecyFilter", function() { return CurrecyFilter; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @legion-lib/react-multiselect */ "./node_modules/@legion-lib/react-multiselect/dist/index.js");
+/* harmony import */ var _legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/index.js */ "./www/js/source/reactpages/pages/bettingticketscenter/running/actions/index.js");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+
+
+
+
+
+
+const CurrecyFilter = () => {
+  const dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useDispatch"])();
+  const {
+    setSelectedCurrency
+  } = _actions_index_js__WEBPACK_IMPORTED_MODULE_3__["ActionCreators"];
+  const _onChangeCurrency = currencyIdList => {
+    dispatch(setSelectedCurrency(currencyIdList));
+  };
+  const _renderCurrencySelectList = () => {
+    const currencyList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__["default"].currencyList;
+    return currencyList && currencyList.length && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_2___default.a, {
       id: "ddlCurrency",
-      language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].currentLanguage,
+      language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].currentLanguage,
       dataSource: currencyList,
       keyField: "Id",
       valueField: "Value",
       statusField: "Status",
-      onChange: (currentItem, selectedItemsKey) => this._onChangeCurrency(selectedItemsKey)
+      onChange: (currentItem, selectedItemsKey) => _onChangeCurrency(selectedItemsKey)
     });
-  }
-  _renderBaseCurrencySelectList() {
-    const baseCurrencyList = this.baseCurrencyList;
-    return baseCurrencyList && baseCurrencyList.length && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      instanceId: "ddlBased",
-      value: this.props.selectedBaseCurrency,
-      options: baseCurrencyList,
-      onChange: item => this.props.setSelectedBaseCurrency(item.value)
-    });
-  }
-  _renderStatusSelectList() {
-    const statusList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].statusList;
-    return statusList && statusList.length && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_4___default.a, {
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "label-text"
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource("Currency")), _renderCurrencySelectList());
+};
+/* harmony default export */ __webpack_exports__["default"] = (CurrecyFilter);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/filters/ProductFilter.jsx":
+/*!**********************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/bettingticketscenter/running/components/filters/ProductFilter.jsx ***!
+  \**********************************************************************************************************/
+/*! exports provided: ProductFilter, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProductFilter", function() { return ProductFilter; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @legion-lib/react-multiselect */ "./node_modules/@legion-lib/react-multiselect/dist/index.js");
+/* harmony import */ var _legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/index.js */ "./www/js/source/reactpages/pages/bettingticketscenter/running/actions/index.js");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+
+
+
+
+
+
+const ProductFilter = () => {
+  const dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useDispatch"])();
+  const {
+    setSelectedProduct
+  } = _actions_index_js__WEBPACK_IMPORTED_MODULE_3__["ActionCreators"];
+  const _productChangeHandler = (currentItem, selectedItemsKey) => {
+    dispatch(setSelectedProduct(selectedItemsKey));
+  };
+  const _renderProductSelectList = () => {
+    const productOptions = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__["default"].productOptions;
+    return productOptions !== null && productOptions !== void 0 && productOptions.length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_2___default.a, {
+      id: "ProductList",
+      hasSearchBox: true,
+      language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].currentLanguage,
+      dataSource: productOptions,
+      keyField: "Code",
+      valueField: "Name",
+      statusField: "Status",
+      onChange: _productChangeHandler
+    }) : null;
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "label-text"
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource("Product")), _renderProductSelectList());
+};
+/* harmony default export */ __webpack_exports__["default"] = (ProductFilter);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/filters/StatusFilter.jsx":
+/*!*********************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/bettingticketscenter/running/components/filters/StatusFilter.jsx ***!
+  \*********************************************************************************************************/
+/*! exports provided: StatusFilter, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StatusFilter", function() { return StatusFilter; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @legion-lib/react-multiselect */ "./node_modules/@legion-lib/react-multiselect/dist/index.js");
+/* harmony import */ var _legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/index.js */ "./www/js/source/reactpages/pages/bettingticketscenter/running/actions/index.js");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+
+
+
+
+
+
+const StatusFilter = () => {
+  const dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useDispatch"])();
+  const {
+    setSelectedStatus
+  } = _actions_index_js__WEBPACK_IMPORTED_MODULE_3__["ActionCreators"];
+  const _renderStatusSelectList = () => {
+    const statusList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__["default"].statusList;
+    return statusList && statusList.length && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_2___default.a, {
       id: "StatusList",
-      language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].currentLanguage,
+      language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].currentLanguage,
       dataSource: statusList,
       keyField: "Id",
       valueField: "Value",
       statusField: "Status",
-      onChange: (currentItem, selectedItemsKey) => this.props.setSelectedStatus(selectedItemsKey)
+      onChange: (currentItem, selectedItemsKey) => dispatch(setSelectedStatus(selectedItemsKey))
     });
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "label-text"
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource("Status")), _renderStatusSelectList());
+};
+/* harmony default export */ __webpack_exports__["default"] = (StatusFilter);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/filters/StickyIcon.jsx":
+/*!*******************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/bettingticketscenter/running/components/filters/StickyIcon.jsx ***!
+  \*******************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/index.js */ "./www/js/source/reactpages/pages/bettingticketscenter/running/actions/index.js");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_components_UserGuide__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/components/UserGuide */ "./www/js/source/reactpages/components/UserGuide.jsx");
+/* harmony import */ var _hooks_useFilterAction_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../hooks/useFilterAction.jsx */ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/hooks/useFilterAction.jsx");
+
+
+
+
+
+
+const StickyIcon = () => {
+  const {
+    exportExcel
+  } = Object(_hooks_useFilterAction_jsx__WEBPACK_IMPORTED_MODULE_5__["default"])();
+  const userGuideContent = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(state => state.userGuideContent);
+  const dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useDispatch"])();
+  const {
+    getUserGuideContent
+  } = _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"];
+  const _showUserGuide = () => {
+    if (!userGuideContent || userGuideContent.length === 0) {
+      dispatch(getUserGuideContent('BettingTicketCenterRunning'));
+    }
+  };
+  const _renderUserGuide = () => {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_UserGuide__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("UserGuide"),
+      contentTitle: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("BettingTicketCenter"),
+      onClick: _showUserGuide,
+      content: userGuideContent
+    });
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "icon-excel right",
+    onClick: exportExcel,
+    title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("ExportToExcel")
+  }), _renderUserGuide());
+};
+/* harmony default export */ __webpack_exports__["default"] = (StickyIcon);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/filters/SubsidiaryCheckBoxFilter.jsx":
+/*!*********************************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/bettingticketscenter/running/components/filters/SubsidiaryCheckBoxFilter.jsx ***!
+  \*********************************************************************************************************************/
+/*! exports provided: SubsidiaryCheckBoxFilter, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SubsidiaryCheckBoxFilter", function() { return SubsidiaryCheckBoxFilter; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/index.js */ "./www/js/source/reactpages/pages/bettingticketscenter/running/actions/index.js");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/components/CheckBox */ "./www/js/source/reactpages/components/CheckBox.jsx");
+/* harmony import */ var _jsroot_customHooks_useSubsidiarySearch__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/customHooks/useSubsidiarySearch */ "./www/js/source/reactpages/customHooks/useSubsidiarySearch.jsx");
+/* harmony import */ var usehooks_ts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! usehooks-ts */ "./node_modules/usehooks-ts/dist/esm/index.js");
+
+
+
+
+
+
+
+const SubsidiaryCheckBoxFilter = () => {
+  const dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useDispatch"])();
+  const isFirstRender = Object(usehooks_ts__WEBPACK_IMPORTED_MODULE_6__["useIsFirstRender"])();
+  const {
+    setSubsidiaryList,
+    setSubsidiarySearch
+  } = _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"];
+  const {
+    defaultSelectedSubsidiary,
+    isSubsidiarySearch,
+    isShowSubsidiarySearchCheckBox,
+    isShowSubsidiaryDropdown
+  } = Object(_jsroot_customHooks_useSubsidiarySearch__WEBPACK_IMPORTED_MODULE_5__["default"])();
+  if (isFirstRender) {
+    dispatch(setSubsidiarySearch(!isShowSubsidiarySearchCheckBox && isShowSubsidiaryDropdown));
   }
-  _renderSubsidiaryTreeView() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_4__["TreeViewSelect"], {
-      language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].currentLanguage,
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    id: "SubsidiarySearch",
+    checked: isSubsidiarySearch,
+    onChange: checked => {
+      dispatch(setSubsidiarySearch(checked));
+      checked && dispatch(setSubsidiaryList(defaultSelectedSubsidiary));
+    },
+    label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("SubsidiarySearch")
+  }));
+};
+/* harmony default export */ __webpack_exports__["default"] = (SubsidiaryCheckBoxFilter);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/filters/SubsidiaryDropDown.jsx":
+/*!***************************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/bettingticketscenter/running/components/filters/SubsidiaryDropDown.jsx ***!
+  \***************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/index.js */ "./www/js/source/reactpages/pages/bettingticketscenter/running/actions/index.js");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+/* harmony import */ var _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/constants/report */ "./www/js/source/reactpages/constants/report.js");
+/* harmony import */ var _legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @legion-lib/react-multiselect */ "./node_modules/@legion-lib/react-multiselect/dist/index.js");
+/* harmony import */ var _legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _jsroot_customHooks_useSubsidiarySearch__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/customHooks/useSubsidiarySearch */ "./www/js/source/reactpages/customHooks/useSubsidiarySearch.jsx");
+
+
+
+
+
+
+
+
+const SubsidiaryDropDown = () => {
+  const dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useDispatch"])();
+  const {
+    setSubsidiaryList
+  } = _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"];
+  const {
+    isWhiteLabelView
+  } = Object(_jsroot_customHooks_useSubsidiarySearch__WEBPACK_IMPORTED_MODULE_7__["default"])();
+  const _renderSubsidiaryTreeView = () => {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_6__["TreeViewSelect"], {
+      language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].currentLanguage,
       id: "SubsidiaryTreeView",
-      dataSource: _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].whitelabelList,
+      dataSource: _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_4__["default"].whitelabelList,
       keyField: "Value",
       valueField: "Name",
       statusField: "Checked",
@@ -2971,138 +3848,217 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       },
       isAllTextShown: false,
       hasSearchBox: false,
-      treeViewOption: _constants_report__WEBPACK_IMPORTED_MODULE_17__["TreeViewOption"],
-      onChange: (currentItem, selectedItemsKey, treeViewList) => this.props.setSubsidiaryList(selectedItemsKey)
+      treeViewOption: _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_5__["TreeViewOption"],
+      onChange: (currentItem, selectedItemsKey, treeViewList) => dispatch(setSubsidiaryList(selectedItemsKey))
     });
-  }
-  render() {
-    const excelButton = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-      className: "icon-excel right",
-      onClick: this.exportExcel,
-      title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("ExportToExcel")
-    }), this._renderUserGuide());
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_6__["default"], {
-      className: "page-filter",
-      stickyFooter: excelButton
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "row"
-    }, this.showSubsidiaryDropdown && this.state.subsidiarySearch && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 col-md-3 col-sm-4 col-lg-3 col-xl-2"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      className: "label-text"
-    }, this.whiteLabelView ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("WhiteLabel") : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("Subsidiary")), this._renderSubsidiaryTreeView())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      className: "label-text"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("Product")), this._renderProductSelectList())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      className: "label-text"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("Username")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_auto_complete__WEBPACK_IMPORTED_MODULE_5__["default"], {
-      url: _common_lib_constants__WEBPACK_IMPORTED_MODULE_13__["ApiUrl"].CUSTOMER_SEARCH_URL,
-      onSelect: value => this.props.setUsername(value),
-      onInput: value => this.props.setUsername(value),
-      htmlAttributes: {
-        placeholder: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("ExternalIdOrSystemId")
-      }
-    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      className: "label-text"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("Currency")), this._renderCurrencySelectList())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      className: "label-text"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("BaseCurrency")), this._renderBaseCurrencySelectList())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_7__["default"], {
-      id: "IsConvertAll",
-      checked: this.props.isConvertAll,
-      onChange: checked => this.props.changeIsConvertAll(checked),
-      label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("ConvertAllFiguresToBaseCurrency")
-    }))), !(this.showSubsidiaryDropdown && this.state.subsidiarySearch) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      className: "label-text"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("Status")), this._renderStatusSelectList()))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "row"
-    }, this.showSubsidiaryDropdown && this.state.subsidiarySearch && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      className: "label-text"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("Status")), this._renderStatusSelectList())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 col-md-2 col-sm-2 col-lg-2 col-xl-1"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "button-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-      disabled: !this.isValidModel,
-      type: "button",
-      className: "btn btn-submit",
-      onClick: this.submit
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("Submit"))))), this.showSubsidiarySearchCheckBox && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 col-sm-3 col-md-2 col-xl-2"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_7__["default"], {
-      id: "SubsidiarySearch",
-      checked: this.state.subsidiarySearch,
-      onChange: checked => {
-        this.setState({
-          subsidiarySearch: checked
-        });
-        checked && this.props.setSubsidiaryList(this.defaultSelectedSubsidiary);
-      },
-      label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("SubsidiarySearch")
-    })))));
-  }
-}
-function mapDispatchToProps(dispatch) {
-  return Object(redux__WEBPACK_IMPORTED_MODULE_2__["bindActionCreators"])(_actions_index_js__WEBPACK_IMPORTED_MODULE_8__["ActionCreators"], dispatch);
-}
-function mapStateToProps(state) {
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "label-text"
+  }, isWhiteLabelView ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("WhiteLabel") : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("Subsidiary")), _renderSubsidiaryTreeView());
+};
+/* harmony default export */ __webpack_exports__["default"] = (SubsidiaryDropDown);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/filters/UserNameFilter.jsx":
+/*!***********************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/bettingticketscenter/running/components/filters/UserNameFilter.jsx ***!
+  \***********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/index.js */ "./www/js/source/reactpages/pages/bettingticketscenter/running/actions/index.js");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_components_auto_complete__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/components/auto-complete */ "./www/js/source/reactpages/components/auto-complete/index.jsx");
+/* harmony import */ var _common_lib_constants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../common/lib/constants */ "./www/js/source/reactpages/pages/bettingticketscenter/common/lib/constants.js");
+
+
+
+
+
+
+const UserNameFilter = () => {
+  const dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useDispatch"])();
+  const {
+    setUsername
+  } = _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"];
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "label-text"
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("Username")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_auto_complete__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    url: _common_lib_constants__WEBPACK_IMPORTED_MODULE_5__["ApiUrl"].CUSTOMER_SEARCH_URL,
+    onSelect: value => dispatch(setUsername(value)),
+    onInput: value => dispatch(setUsername(value)),
+    htmlAttributes: {
+      placeholder: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("ExternalIdOrSystemId")
+    }
+  }));
+};
+/* harmony default export */ __webpack_exports__["default"] = (UserNameFilter);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/hooks/useFilterAction.jsx":
+/*!**********************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/bettingticketscenter/running/components/hooks/useFilterAction.jsx ***!
+  \**********************************************************************************************************/
+/*! exports provided: useFilterAction, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useFilterAction", function() { return useFilterAction; });
+/* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/index.js */ "./www/js/source/reactpages/pages/bettingticketscenter/running/actions/index.js");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+/* harmony import */ var _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/DataService.js */ "./www/js/source/reactpages/lib/DataService.js");
+/* harmony import */ var _jsroot_customHooks_useBaseCurrencyForMultiSelectCurrency__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/customHooks/useBaseCurrencyForMultiSelectCurrency */ "./www/js/source/reactpages/customHooks/useBaseCurrencyForMultiSelectCurrency.jsx");
+/* harmony import */ var _jsroot_customHooks_useSubsidiarySearch__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/customHooks/useSubsidiarySearch */ "./www/js/source/reactpages/customHooks/useSubsidiarySearch.jsx");
+/* harmony import */ var _common_lib_constants__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../common/lib/constants */ "./www/js/source/reactpages/pages/bettingticketscenter/common/lib/constants.js");
+/* harmony import */ var _common_lib_Service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../common/lib/Service */ "./www/js/source/reactpages/pages/bettingticketscenter/common/lib/Service.js");
+/* harmony import */ var _useValidParam_jsx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./useValidParam.jsx */ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/hooks/useValidParam.jsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var file_saver__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! file-saver */ "./node_modules/file-saver/dist/FileSaver.min.js");
+/* harmony import */ var file_saver__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(file_saver__WEBPACK_IMPORTED_MODULE_11__);
+
+
+
+
+
+
+
+
+
+
+
+
+const useFilterAction = () => {
+  const isValidModel = Object(_useValidParam_jsx__WEBPACK_IMPORTED_MODULE_9__["useValidParam"])();
+  const dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_10__["useDispatch"])();
   const {
     requestParam,
+    username,
+    isConvertAll,
+    selectedBaseCurrency,
     selectedProduct,
     selectedCurrency,
-    selectedBaseCurrency,
-    username,
     selectedStatus,
-    isConvertAll,
-    userGuideContent,
     selectedSubsidiary
-  } = state;
-  return Object.assign({}, {
-    requestParam,
-    selectedProduct,
-    selectedCurrency,
-    selectedBaseCurrency,
-    username,
-    selectedStatus,
-    isConvertAll,
-    userGuideContent,
-    selectedSubsidiary
-  });
-}
-;
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(FormFilter));
+  } = Object(react_redux__WEBPACK_IMPORTED_MODULE_10__["useSelector"])(state => state, react_redux__WEBPACK_IMPORTED_MODULE_10__["shallowEqual"]);
+  const {
+    isSubsidiarySearch
+  } = Object(_jsroot_customHooks_useSubsidiarySearch__WEBPACK_IMPORTED_MODULE_6__["default"])();
+  const {
+    baseCurrencyList
+  } = Object(_jsroot_customHooks_useBaseCurrencyForMultiSelectCurrency__WEBPACK_IMPORTED_MODULE_5__["default"])(selectedBaseCurrency);
+  const {
+    setReportTitle,
+    setRequestParam,
+    toggleLoader,
+    getGridData
+  } = _actions_index_js__WEBPACK_IMPORTED_MODULE_0__["ActionCreators"];
+  const _getParams = () => {
+    if (!isValidModel) {
+      return null;
+    }
+    const {
+      PageSize,
+      SortBy,
+      SortOrder
+    } = requestParam;
+    const baseCurrency = baseCurrencyList.find(x => x.value === selectedBaseCurrency);
+    return {
+      PageSize: PageSize,
+      PageIndex: 1,
+      ProductCodeList: selectedProduct,
+      Username: username,
+      CurrencyIdList: selectedCurrency,
+      BaseCurrency: selectedBaseCurrency,
+      Status: selectedStatus,
+      SortBy: SortBy,
+      SortOrder: SortOrder,
+      IsConvertAll: isConvertAll,
+      BaseCurrencyName: baseCurrency ? baseCurrency.label : '',
+      SubsidiarySearch: isSubsidiarySearch,
+      SubsidiaryList: isSubsidiarySearch ? selectedSubsidiary : ""
+    };
+  };
+  const submit = event => {
+    event.preventDefault();
+    const params = _getParams();
+    if (!params) {
+      return;
+    }
+    dispatch(setReportTitle(_common_lib_Service__WEBPACK_IMPORTED_MODULE_8__["default"].getTitle(null, null, params.IsConvertAll ? params.BaseCurrencyName : '')));
+    dispatch(setRequestParam(params));
+    dispatch(toggleLoader(true));
+    dispatch(getGridData(_common_lib_constants__WEBPACK_IMPORTED_MODULE_7__["ApiUrl"].RUNNING_DATA_URL, params));
+  };
+  const exportExcel = event => {
+    event.preventDefault();
+    const params = _getParams();
+    if (!params) {
+      return;
+    }
+    if (_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_3__["default"].isAllowTxIDColumn) {
+      params.IsAllowTxIDColumn = true;
+    }
+    params.IsExport = true;
+    dispatch(toggleLoader(true));
+    _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_4__["default"].getFile(_common_lib_constants__WEBPACK_IMPORTED_MODULE_7__["ApiUrl"].RUNNING_DATA_URL, params).then(response => {
+      const NoContentStatusCode = 204;
+      if (response.status === NoContentStatusCode) {
+        alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("NoInfo"));
+      } else {
+        const blob = new Blob([response.data], {
+          type: "application/vnd.ms-excel"
+        });
+        Object(file_saver__WEBPACK_IMPORTED_MODULE_11__["saveAs"])(blob, 'BettingTicketsCenter_Running.xls');
+      }
+      dispatch(toggleLoader(false));
+    });
+  };
+  return {
+    submit,
+    exportExcel
+  };
+};
+/* harmony default export */ __webpack_exports__["default"] = (useFilterAction);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/hooks/useValidParam.jsx":
+/*!********************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/bettingticketscenter/running/components/hooks/useValidParam.jsx ***!
+  \********************************************************************************************************/
+/*! exports provided: useValidParam */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useValidParam", function() { return useValidParam; });
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _jsroot_lib_validationHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/validationHelper */ "./www/js/source/reactpages/lib/validationHelper.js");
+/* harmony import */ var _jsroot_customHooks_useSubsidiarySearch__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/customHooks/useSubsidiarySearch */ "./www/js/source/reactpages/customHooks/useSubsidiarySearch.jsx");
+
+
+
+const useValidParam = () => {
+  const [selectedProduct, selectedStatus, selectedCurrency, selectedBaseCurrency, selectedSubsidiary] = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["useSelector"])(state => [state.selectedProduct, state.selectedStatus, state.selectedCurrency, state.selectedBaseCurrency, state.selectedSubsidiary], react_redux__WEBPACK_IMPORTED_MODULE_0__["shallowEqual"]);
+  const {
+    isSubsidiarySearch
+  } = Object(_jsroot_customHooks_useSubsidiarySearch__WEBPACK_IMPORTED_MODULE_2__["default"])();
+  return !!selectedProduct && !!selectedStatus && !!selectedCurrency && Object(_jsroot_lib_validationHelper__WEBPACK_IMPORTED_MODULE_1__["validateBaseCurrency"])(selectedBaseCurrency) && (!isSubsidiarySearch || selectedSubsidiary);
+};
 
 /***/ }),
 
@@ -3150,6 +4106,231 @@ class App extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
   }
 }
 react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), document.getElementById('app-container'));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/mobile/MobileFormFilter.jsx":
+/*!************************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/bettingticketscenter/running/components/mobile/MobileFormFilter.jsx ***!
+  \************************************************************************************************************/
+/*! exports provided: MobileFormFilter, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MobileFormFilter", function() { return MobileFormFilter; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/components/collapsible-panel */ "./www/js/source/reactpages/components/collapsible-panel/index.jsx");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _hooks_useValidParam_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../hooks/useValidParam.jsx */ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/hooks/useValidParam.jsx");
+/* harmony import */ var _filters_SubsidiaryDropDown_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../filters/SubsidiaryDropDown.jsx */ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/filters/SubsidiaryDropDown.jsx");
+/* harmony import */ var _filters_ProductFilter_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../filters/ProductFilter.jsx */ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/filters/ProductFilter.jsx");
+/* harmony import */ var _filters_UserNameFilter_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../filters/UserNameFilter.jsx */ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/filters/UserNameFilter.jsx");
+/* harmony import */ var _filters_CurrecyFilter_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../filters/CurrecyFilter.jsx */ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/filters/CurrecyFilter.jsx");
+/* harmony import */ var _filters_BaseCurrencyFilter_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../filters/BaseCurrencyFilter.jsx */ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/filters/BaseCurrencyFilter.jsx");
+/* harmony import */ var _filters_ConvertAllCheckBoxFilter_jsx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../filters/ConvertAllCheckBoxFilter.jsx */ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/filters/ConvertAllCheckBoxFilter.jsx");
+/* harmony import */ var _filters_StatusFilter_jsx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../filters/StatusFilter.jsx */ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/filters/StatusFilter.jsx");
+/* harmony import */ var _filters_SubsidiaryCheckBoxFilter_jsx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../filters/SubsidiaryCheckBoxFilter.jsx */ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/filters/SubsidiaryCheckBoxFilter.jsx");
+/* harmony import */ var _filters_StickyIcon_jsx__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../filters/StickyIcon.jsx */ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/filters/StickyIcon.jsx");
+/* harmony import */ var _jsroot_customHooks_useSubsidiarySearch__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @jsroot/customHooks/useSubsidiarySearch */ "./www/js/source/reactpages/customHooks/useSubsidiarySearch.jsx");
+/* harmony import */ var _hooks_useFilterAction_jsx__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../hooks/useFilterAction.jsx */ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/hooks/useFilterAction.jsx");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const MobileFormFilter = () => {
+  const isValidModel = Object(_hooks_useValidParam_jsx__WEBPACK_IMPORTED_MODULE_3__["useValidParam"])();
+  const {
+    isShowSubsidiaryDropdown,
+    isSubsidiarySearch,
+    isShowSubsidiarySearchCheckBox
+  } = Object(_jsroot_customHooks_useSubsidiarySearch__WEBPACK_IMPORTED_MODULE_13__["default"])();
+  const {
+    submit
+  } = Object(_hooks_useFilterAction_jsx__WEBPACK_IMPORTED_MODULE_14__["default"])();
+  const [isCollapsed, setIsCollapse] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true);
+  const onCollapse = () => {
+    setIsCollapse(true);
+  };
+  const onExpand = () => {
+    setIsCollapse(false);
+  };
+  const style = isCollapsed ? {
+    display: "none"
+  } : {};
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    className: "mobile-mode page-filter",
+    onCollapse: onCollapse,
+    onExpand: onExpand,
+    isInitCollapsed: true,
+    isCustomCollapse: true
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, isShowSubsidiaryDropdown && isSubsidiarySearch && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-xs-6",
+    style: style
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_SubsidiaryDropDown_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-xs-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_ProductFilter_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-xs-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_UserNameFilter_jsx__WEBPACK_IMPORTED_MODULE_6__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-xs-6",
+    style: style
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_CurrecyFilter_jsx__WEBPACK_IMPORTED_MODULE_7__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-xs-6",
+    style: style
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_StatusFilter_jsx__WEBPACK_IMPORTED_MODULE_10__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-xs-6",
+    style: style
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_BaseCurrencyFilter_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-xs-6",
+    style: style
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_ConvertAllCheckBoxFilter_jsx__WEBPACK_IMPORTED_MODULE_9__["default"], null)), isShowSubsidiarySearchCheckBox && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-xs-6",
+    style: style
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_SubsidiaryCheckBoxFilter_jsx__WEBPACK_IMPORTED_MODULE_11__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "button-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "button",
+    disabled: !isValidModel,
+    className: "btn btn-submit",
+    onClick: submit
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("Submit")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "caret-block"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_StickyIcon_jsx__WEBPACK_IMPORTED_MODULE_12__["default"], null)))));
+};
+/* harmony default export */ __webpack_exports__["default"] = (MobileFormFilter);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/mobile/MobileGrid.jsx":
+/*!******************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/bettingticketscenter/running/components/mobile/MobileGrid.jsx ***!
+  \******************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+/* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @9softstudio/react-grid */ "./node_modules/@9softstudio/react-grid/dist/index.js");
+/* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _common_lib_constants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../common/lib/constants */ "./www/js/source/reactpages/pages/bettingticketscenter/common/lib/constants.js");
+/* harmony import */ var _common_components_BaseMobileDataGrid__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../common/components/BaseMobileDataGrid */ "./www/js/source/reactpages/pages/bettingticketscenter/common/components/BaseMobileDataGrid.jsx");
+/* harmony import */ var _components_mobile_component_CompositeRow__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../../components/mobile-component/CompositeRow */ "./www/js/source/reactpages/components/mobile-component/CompositeRow.jsx");
+/* harmony import */ var _common_components_MobileBetlistContent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../common/components/MobileBetlistContent */ "./www/js/source/reactpages/pages/bettingticketscenter/common/components/MobileBetlistContent.jsx");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+
+
+
+
+
+
+
+
+
+const Columns = ['Details', 'Stake', 'Status', 'Icon'];
+const SortableColumns = ["Stake"];
+const MobileGrid = () => {
+  const data = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(state => state.gridData.Data);
+  const totalData = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(state => state.gridData.Total);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {}, [data]);
+  const isDisplayTxIdColumn = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__["default"].isAllowTxIDColumn;
+  const getRows = () => {
+    if (!data) {
+      return null;
+    }
+    return data.map(item => renderCompositeRow(item));
+  };
+  const renderCompositeRow = item => {
+    const expandRows = getExpandRows(item);
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_mobile_component_CompositeRow__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      key: item.RefNo,
+      expandRows: expandRows
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_components_MobileBetlistContent__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      item: item
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
+      className: "right-align",
+      dangerouslySetInnerHTML: {
+        __html: item.Stake
+      }
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
+      className: "right-align",
+      dangerouslySetInnerHTML: {
+        __html: item.Status
+      }
+    }));
+  };
+  const getExpandRows = item => {
+    let rows = [];
+    if (isDisplayTxIdColumn) {
+      rows.push(renderExpandRow(_common_lib_constants__WEBPACK_IMPORTED_MODULE_4__["HeaderText"].LicenseeTxId, item.LicenseeTxId));
+    }
+    rows.push(renderExpandRow(_common_lib_constants__WEBPACK_IMPORTED_MODULE_4__["HeaderText"].SystemId, item.SystemId));
+    rows.push(renderExpandRow(_common_lib_constants__WEBPACK_IMPORTED_MODULE_4__["HeaderText"].Platform, item.Platform));
+    rows.push(renderExpandRow(_common_lib_constants__WEBPACK_IMPORTED_MODULE_4__["HeaderText"].Live, item.Live));
+    return rows;
+  };
+  const renderExpandRow = (key, value) => {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
+      className: "right-align"
+    }, key), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
+      colSpan: 3,
+      className: "left-align",
+      dangerouslySetInnerHTML: {
+        __html: value
+      }
+    }));
+  };
+  const renderFooter = () => {
+    if (!totalData) {
+      return null;
+    }
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Row"], {
+      className: "fixed-table-grant-total"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
+      colSpan: "2"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "cell-total"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "total-text"
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource('Total')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "total-stake"
+    }, totalData.Stake))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
+      colSpan: "2"
+    }));
+  };
+  const body = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => getRows(), [data]);
+  const footer = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => renderFooter(), [totalData]);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_components_BaseMobileDataGrid__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    dataUrl: _common_lib_constants__WEBPACK_IMPORTED_MODULE_4__["ApiUrl"].RUNNING_DATA_URL,
+    isPaging: true,
+    columns: Columns,
+    body: body,
+    footer: footer,
+    sortableColumns: SortableColumns
+  });
+};
+/* harmony default export */ __webpack_exports__["default"] = (MobileGrid);
 
 /***/ }),
 
@@ -3366,8 +4547,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requestParam", function() { return requestParam; });
 /* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./www/js/source/reactpages/actions/types.js");
 /* harmony import */ var _lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
