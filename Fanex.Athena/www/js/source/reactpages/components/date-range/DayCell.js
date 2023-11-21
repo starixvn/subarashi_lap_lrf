@@ -121,7 +121,9 @@ class DayCell extends Component {
           onMouseUp={ this.handleMouseEvent.bind(this) }
           className={ classes }
           style={onlyClasses ? undefined : {...styles['Day'], ...stateStyle}}>
-          { dayMoment.date() }
+            <span>
+              { dayMoment.date() }
+            </span>
         </span>
       </span>
     );

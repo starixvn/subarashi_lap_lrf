@@ -1,7 +1,6 @@
 ﻿import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ActionCreators } from './action.js'
-import { bindActionCreators } from 'redux'
 import AppLayout from '@jsroot/layouts/AppLayout';
 import BetListLayout from '@jsroot/layouts/betlist/BetListLayout';
 import { Tabs, Tab } from '@9softstudio/react-simple-tab';
@@ -11,8 +10,11 @@ import { tabList } from '../lib/constants';
 import AppData from '@jsroot/lib/AppData';
 
 export const PageLayout = (props) => {
-    const { toggleLoader, isConvertAll, selectedBaseCurrency, selectedTabIndex, children, hasExchange } = props;
-    
+    const dispatch = useDispatch();
+    const { toggleLoader } = ActionCreators;
+    const [isConvertAll, selectedBaseCurrency, hasExchange] = useSelector(state => [state.isConvertAll, state.selectedBaseCurrency, state.hasExchange])
+    const { selectedTabIndex, children } = props;
+
     const getResource = (key) => {
         return LangHelper.getSingleResource(key);
     }
@@ -26,54 +28,47 @@ export const PageLayout = (props) => {
     }
 
     const beforeShow = () => {
-        toggleLoader(true);
+        dispatch(toggleLoader(true));
     }
 
     const afterShow = () => {
-        toggleLoader(false);
+        dispatch(toggleLoader(false));
     }
 
     const activedTabList = tabList.filter(x => AppData.tabList.includes(x.key));
 
     return (
-        <AppLayout>
-            <BetListLayout
-                pageName='BTC'
-                rootUrl={Site.getRootUrl()}
-                getResourceFunc={getResource}
-                formatDateStringFunc={formatDateString}
-                baseCurrency={isConvertAll ? selectedBaseCurrency : ''}
-                beforeShowFunc={beforeShow}
-                afterShowFunc={afterShow}
-            >
-                <Tabs>
-                    {
-                        activedTabList.map(item => 
-                            <Tab key={item.url} isActive={selectedTabIndex == item.displayOrder} label={item.label} url={item.url} />)
-                    }
-                    {
-                        hasExchange && 
-                        <Tab key={Site.resolveClientUrl("ExchangeVoided")} isActive={selectedTabIndex == 4} label={LangHelper.getSingleResource("Exchange")}
-                            url={Site.resolveClientUrl("ExchangeVoided")}>
-                        </Tab>
-                    }
-                </Tabs>
-                <div>
-                    {children}
-                </div>
-            </BetListLayout>
-        </AppLayout>
+        <div className={props.className}>
+            <AppLayout >
+                <BetListLayout
+                    pageName='BTC'
+                    rootUrl={Site.getRootUrl()}
+                    getResourceFunc={getResource}
+                    formatDateStringFunc={formatDateString}
+                    baseCurrency={isConvertAll ? selectedBaseCurrency : ''}
+                    beforeShowFunc={beforeShow}
+                    afterShowFunc={afterShow}
+                >
+                    <Tabs>
+                        {
+                            activedTabList.map(item =>
+                                <Tab key={item.url} isActive={selectedTabIndex == item.displayOrder} label={item.label} url={item.url} />)
+                        }
+                        {
+                            hasExchange &&
+                            <Tab key={Site.resolveClientUrl("ExchangeVoided")} isActive={selectedTabIndex == 4} label={LangHelper.getSingleResource("Exchange")}
+                                url={Site.resolveClientUrl("ExchangeVoided")}>
+                            </Tab>
+                        }
+                    </Tabs>
+                    <div>
+                        {children}
+                    </div>
+                </BetListLayout>
+            </AppLayout>
+        </div>
+
     );
 }
 
-function mapDispatchToProps(dispatch) {
-    const { toggleLoader } = ActionCreators;
-    return bindActionCreators({ toggleLoader }, dispatch);
-}
-
-function mapStateToProps(state) {
-    const { isConvertAll, selectedBaseCurrency, hasExchange } = state;
-    return Object.assign({}, { isConvertAll, selectedBaseCurrency, hasExchange });
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(PageLayout);
+export default PageLayout;

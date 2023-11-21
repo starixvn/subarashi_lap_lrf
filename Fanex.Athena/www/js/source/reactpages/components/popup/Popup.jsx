@@ -1,9 +1,10 @@
 ﻿import React from 'react';
 import { DEFAULT_WIDTH, DEFAULT_HEIGHT } from './constants';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 const Popup = (props) => {
-    const { title, isShow, width, height, isHtml, children, iframeUrl } = props;
+    const { title, isShow, width, height, isHtml, children, iframeUrl, isShowTitle, className } = props;
     let content;
     if (iframeUrl) {
         content = (<iframe frameBorder="0" src={iframeUrl} width="100%" height="100%" />);
@@ -13,14 +14,17 @@ const Popup = (props) => {
             (<div className='popup-content' dangerouslySetInnerHTML={{ __html: children }} />) :
             (<div className='popup-content'>{children}</div>)
     }
+    
+    const classes = classNames('popup-container', isShow ? 'show' : 'hide', className)
 
-    return (<div className={`popup-container ${isShow ? 'show' : 'hide'}`} onClick={props.onClick}>
+    return (
+    <div className={classes} onClick={props.onClick}>
         <div className='popup-block-body'></div>
         <div className='flat-popup' style={{ height: height, width: width }}>
-            <div className='popup-title'>
+            {isShowTitle && (<div className='popup-title'>
                 <div className="txt-title">{title}</div>
                 <a className="popup-close" onClick={() => { props.onClose && props.onClose() }}><i className="icon-close"></i></a>
-            </div>
+            </div>)}
             {content}
         </div>
     </div >
@@ -35,7 +39,9 @@ Popup.propTypes = {
     onClose: PropTypes.func,
     isHtml: PropTypes.bool,
     iframeUrl: PropTypes.string,
-    onClick: PropTypes.func
+    onClick: PropTypes.func,
+    isShowTitle: PropTypes.bool,
+    className: PropTypes.string
 }
 
 Popup.defaultProps = {
@@ -43,7 +49,8 @@ Popup.defaultProps = {
     height: DEFAULT_HEIGHT,
     isShow: false,
     isHtml: false,
-    iframeUrl: null
+    iframeUrl: null,
+    isShowTitle: true
 }
 
 export default Popup;

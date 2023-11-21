@@ -401,3 +401,123 @@
         display: block;
     }
 }
+
+.mobile-betlist-container{
+    .report-title-container{
+       padding-left: 5px; 
+    }
+    .fixed-table-grant-total{
+        text-align: right;
+        .cell-total{
+            display: flex;
+            justify-content: space-between;
+        }
+        td.cell-total-winloss{
+            border-right-color: #b8c3c9;
+            overflow: visible;
+            &+ td{
+                border-left-color: #b8c3c9;
+            }
+        }
+        td:first-child{
+            text-align: center;
+        }
+    }
+    .header-content, .footer-content,  .page-wrapper-container{
+        display: block;
+        position: sticky;
+        position: -webkit-sticky;
+        z-index: 10;
+    }
+    .header-content{
+        top: 0px;
+        tr th:first-child{
+            border-left: 0px;
+        }
+    }
+    .body-content{
+        overflow-x: initial;
+        overflow-y: initial;
+    }
+
+    .page-wrapper-container{       
+        bottom: 0px;
+    }
+    .table-container{
+        overflow-x: visible;
+    }
+    &.betlist-container {
+        .bettype, .match{
+            text-align: left;
+        }
+        .match + div.league{
+            text-align: left;
+        }
+    }
+
+    .collapse-row{
+        td:first-child{
+            background: #9EB4C3;
+        }
+    }
+    .row-active{
+        td{
+            background: #FCF4DF;
+        }
+        &.collapse-row{
+            td:first-child{
+                background: #F6DFA1;
+            }
+        }
+    }
+    .table > tbody{
+        tr td{
+           &.cell-collapse{
+            padding-left: 0px;
+            padding-right: 0px;
+           }
+           &.cell-stake{
+            padding-left: 0px;
+            .stake{
+                word-break: break-all;
+            }
+           }
+           &.cell-winloss .underdog{
+            word-break: break-all;
+           }
+        }
+        tr:hover td{
+            &:hover td{
+                background: initial;
+            }
+            &.row-active:hover td{
+                background: #FCF4DF;
+            }
+        }
+    }  
+    .icon{
+        color: #217A4A;
+        font-size: 22px;
+    }
+    .cell-index{
+        .index{
+            color: #AA5200;
+        }
+        margin-bottom: 4px;
+    }  
+    .cell-odd{
+        display: flex;
+        margin-top: 4px;
+    }
+    .cell-external-id{
+        border-bottom: 1px solid #BFB9A9;
+        background: #D9D2C0;
+    }
+    .cell-choice{
+        margin-top: 8px;
+    }
+    .table .status{
+        margin-top: 8px;
+    }
+}
+

@@ -7,6 +7,7 @@ import ReportTitle from '@jsroot/components/ReportTitle';
 import LangHelper from '@jsroot/lib/langHelper';
 import { HeaderText, DefaultPageSize } from '../lib/constants';
 import AppData from '@jsroot/lib/AppData';
+import Service from '../lib/Service.js';
 
 export const BaseDataGrid = (props) => {
     const {
@@ -23,18 +24,6 @@ export const BaseDataGrid = (props) => {
     useEffect(() => {
         toggleLoader(false);
     }, [gridData]);
-
-    const getHeaderName = (column) => {
-        if (column === 'LicenseeWL') {
-            return `${HeaderText.LicenseeWL}/${HeaderText.Comm}`;
-        }
-
-        if (column === 'WinLoss' && AppData.isAllowedCustomerComm) {
-            return `${HeaderText.WinLoss}/${HeaderText.Comm}`;
-        }
-
-        return HeaderText[column];
-    }
 
     const onPaging = (index, size) => {
         const param = Object.assign({}, requestParam, { PageIndex: index, PageSize: size });
@@ -73,7 +62,7 @@ export const BaseDataGrid = (props) => {
                 isPaging={isPaging}
                 pageOption={pageOption}
                 onPaging={onPaging}
-                getHeaderNameFunc={getHeaderName}
+                getHeaderNameFunc={Service.getHeaderName}
                 columns={columns}
                 columnWidths={columnWidths}
                 sortableColumns={sortableColumns}

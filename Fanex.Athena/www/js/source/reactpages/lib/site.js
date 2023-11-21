@@ -42,10 +42,11 @@ export default class Site {
         return text;
     }
 
-    static downloadFile(data, fileName){
-        const url = window.URL.createObjectURL(new Blob([data]));
+    static downloadFile(data, fileName,  option){
+        const url = window.URL.createObjectURL(new Blob([data], option));
         const link = document.createElement('a');
         link.href = url;
+        link.target= "_self"
         link.setAttribute('download', fileName);
         document.body.appendChild(link);
         link.click();

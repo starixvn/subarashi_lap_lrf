@@ -6,7 +6,7 @@ class CollapsiblePanel extends React.Component {
         super(props);
 
         this.state = {
-            isCollapsed: false
+            isCollapsed: props.isInitCollapsed
         };
     };
 
@@ -14,7 +14,9 @@ class CollapsiblePanel extends React.Component {
         stickyFooter: PropTypes.node,
         onCollapse: PropTypes.func,
         onExpand: PropTypes.func,
-        isCollapseMode: PropTypes.bool
+        isCollapseMode: PropTypes.bool,
+        isInitCollapsed: PropTypes.bool,
+        isCustomCollapse: PropTypes.bool
     }
 
     onClick = () => {
@@ -34,7 +36,7 @@ class CollapsiblePanel extends React.Component {
     }
 
     render() {
-        const { stickyFooter, iconContainerStyle, iconToggle } = this.props;
+        const { stickyFooter, iconContainerStyle, iconToggle, isCustomCollapse } = this.props;
         const { tag, className, style, ...attrs } = iconToggle;
         const IconTag = tag;
         const iconStyle = style || {
@@ -47,9 +49,11 @@ class CollapsiblePanel extends React.Component {
             float: 'left'
         };
 
+        const contendStyle =  isCustomCollapse ? {display: 'block'} : { display: this.state.isCollapsed ? 'none' : 'block' }
+
         return (
             <div className={`${this.props.className}`}>
-                <div style={{ display: this.state.isCollapsed ? 'none' : 'block' }}>
+                <div style={contendStyle}>
                     {this.props.children}
                 </div>
                 <div className='caret-block'>
@@ -69,7 +73,9 @@ const propTypes = {
     onCollapse: PropTypes.func,
     onExpand: PropTypes.func,
     iconToggle: PropTypes.object,
-    isCollapseMode: PropTypes.bool
+    isCollapseMode: PropTypes.bool,
+    isInitCollapsed: PropTypes.bool,
+    isCustomCollapse: PropTypes.bool
 }
 const defaultProps = {
     iconContainerStyle: {
@@ -87,7 +93,9 @@ const defaultProps = {
         className: 'icon-arrow',
         style: null
     },
-    isCollapseMode: true
+    isCollapseMode: true,
+    isInitCollapsed: false,
+    isCustomCollapse: false
 };
 
 CollapsiblePanel.propTypes = propTypes;

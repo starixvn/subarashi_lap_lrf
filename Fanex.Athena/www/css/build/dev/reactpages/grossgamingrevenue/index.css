@@ -518,11 +518,15 @@ body {
   font-size: 1.2rem;
   color: #2c2c2c; }
 
-a, .link {
+a,
+.link {
   color: #147ccc; }
-  a, a:hover, .link, .link:hover {
+  a, a:hover,
+  .link,
+  .link:hover {
     text-decoration: none; }
-  a:hover, .link:hover {
+  a:hover,
+  .link:hover {
     color: inherit; }
 
 .link {

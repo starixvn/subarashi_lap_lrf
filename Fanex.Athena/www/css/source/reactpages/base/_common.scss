@@ -12,10 +12,12 @@ body {
     color: $black;
 }
 
-a, .link {
+a,
+.link {
     color: $colorHyperlink;
 
-    &, &:hover {
+    &,
+    &:hover {
         text-decoration: none;
     }
 

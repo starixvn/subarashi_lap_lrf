@@ -220,6 +220,89 @@ input[type="checkbox"].checkbox {
 .range-button-group {
   margin-top: 5px; }
 
+.rdr-mobile-popup.popup-container .flat-popup {
+  max-width: 570px;
+  max-height: 100%; }
+  .rdr-mobile-popup.popup-container .flat-popup .popup-content {
+    height: 100%; }
+
+.rdr-mobile-popup .rdr-DateRange {
+  position: initial;
+  display: flex;
+  box-shadow: none; }
+
+.rdr-mobile-popup .mobile-calender {
+  display: flex;
+  flex-direction: column;
+  max-width: 376px;
+  width: 66%; }
+  .rdr-mobile-popup .mobile-calender .rdr-Calendar {
+    width: 100%;
+    padding-top: 12px;
+    padding-bottom: 12px; }
+    .rdr-mobile-popup .mobile-calender .rdr-Calendar:not(:first-child) {
+      border-top: 1px solid var(--line-table-line-table, #BDBDBD); }
+  .rdr-mobile-popup .mobile-calender .rdr-WeekDays {
+    display: flex; }
+    .rdr-mobile-popup .mobile-calender .rdr-WeekDays .rdr-WeekDay {
+      flex: auto; }
+  .rdr-mobile-popup .mobile-calender .rdr-Days {
+    display: flex;
+    flex-wrap: wrap; }
+    .rdr-mobile-popup .mobile-calender .rdr-Days > span {
+      align-items: center;
+      justify-content: center;
+      display: flex;
+      flex: auto;
+      width: calc(100% / 7); }
+    .rdr-mobile-popup .mobile-calender .rdr-Days .rdr-Day {
+      width: 100%;
+      padding-top: 100%;
+      position: relative;
+      height: initial; }
+      .rdr-mobile-popup .mobile-calender .rdr-Days .rdr-Day span {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px; }
+  .rdr-mobile-popup .mobile-calender .rdr-MonthAndYear-innerWrapper {
+    display: flex; }
+    .rdr-mobile-popup .mobile-calender .rdr-MonthAndYear-innerWrapper > * {
+      flex: auto; }
+    .rdr-mobile-popup .mobile-calender .rdr-MonthAndYear-innerWrapper > span {
+      display: flex;
+      width: 100%;
+      justify-content: center; }
+      .rdr-mobile-popup .mobile-calender .rdr-MonthAndYear-innerWrapper > span .rdr-MonthAndYearSelect {
+        width: auto; }
+
+.rdr-mobile-popup .rdr-PredefinedRanges {
+  flex: auto;
+  border-right: 1px solid var(--line-table-line-table, #BDBDBD);
+  margin: 0; }
+  .rdr-mobile-popup .rdr-PredefinedRanges > a {
+    padding: 8px 12px;
+    margin-top: 12px;
+    text-wrap: wrap; }
+
+.rdr-mobile-popup .calender-button {
+  padding: 8px;
+  border-top: 1px solid var(--line-table-line-table, #BDBDBD); }
+
+.rdr-mobile-popup .rdr-Button {
+  height: 32px; }
+
+@media (max-width: 375px) {
+  .rdr-mobile-popup .rdr-PredefinedRanges > a {
+    padding: 4px 8px; }
+  .rdr-mobile-popup .rdr-Button {
+    height: 28px; } }
+
 .table {
   border-collapse: collapse;
   line-height: 1.15;
