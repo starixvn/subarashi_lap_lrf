@@ -2,12 +2,12 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import CollapsiblePanel from '@jsroot/components/collapsible-panel'
-import { ActionCreators } from '../actions/index.js'
-import MainFilter from './filter/MainFilter.jsx';
-import GroupByFilter from './filter/GroupByFilter.jsx';
+import { ActionCreators } from '../../actions/index.js'
+import MainFilter from '../filter/MainFilter.jsx';
+import GroupByFilter from '../filter/GroupByFilter.jsx';
 
 
-export class FormFilter extends Component {
+export class MobileFormFilter extends Component {
     render() {
 
         return (
@@ -35,4 +35,4 @@ function mapStateToProps(state) {
     });
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FormFilter);
+export default connect(mapStateToProps, mapDispatchToProps)(MobileFormFilter);

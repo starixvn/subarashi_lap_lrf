@@ -13,8 +13,6 @@ import { ALL_SELECTED_TEXT, DisplayGroupBreakDownMapping, SearchMode, SortBy, So
 import {v4 as uuidv4} from 'uuid';
 
 export const GroupByFilter = (props) => {
-
-
     const groupByList = useMemo(() => Service.buildGroupByOption(), [AppData.licenseeName])
     const breakDownList = useMemo(() => Service.buildBreakDownOptionFromGroupByMode(props.selectedGroupByOption), [props.selectedGroupByOption])
 

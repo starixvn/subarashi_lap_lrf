@@ -1,15 +1,15 @@
 ﻿import React, { useMemo, useState } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { ActionCreators } from '../actions/index.js'
+import { ActionCreators } from '../../actions/index.js'
 // import { Breadcrumb } from '@9softstudio/react-breadcrumb'
 import { Table } from '@9softstudio/react-grid';
-import { renderHeader, renderDataSection, renderFooter } from '../common/gridUtils';
+import { renderHeader, renderDataSection, renderFooter } from '../../common/gridUtils.js';
 import NoDataTitle from '@jsroot/components/NoDataTitle';
 import ReportTitle from '@jsroot/components/ReportTitle';
-import { BreakdownByMode, DefaultPagingOption, GroupByMode, SortOrder } from '../common/constants.js';
-import Service from '../common/Service'; 
-import ExcelPopUp from './ExcelPopUp.jsx';
+import { BreakdownByMode, DefaultPagingOption, GroupByMode, SortOrder } from '../../common/constants.js';
+import Service from '../../common/Service.js'; 
+import ExcelPopUp from '../ExcelPopUp.jsx';
 
 export const DataGrid = (props) => {
     const { data, sumTotal, totalRow } = props.reportData;

@@ -1,28 +1,35 @@
-﻿import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import DataGrid from './DataGrid'
-import FormFilter from './FormFilter'
+﻿import React from 'react';
+import { useSelector } from 'react-redux';
+import DataGrid from './desktop/DataGrid'
+import FormFilter from './desktop/FormFilter'
+import MobileDataGrid from './mobile/MobileDataGrid';
+import MobileFormFilter from './mobile/MobileFormFilter'
 import Loader from '@jsroot/components/Loader'
 import AppLayout from '@jsroot/layouts/AppLayout'
+import useMobileVersion from '@jsroot/customHooks/useMobileVersion'
 
-export class AppContainer extends Component {
-    constructor(props) {
-        super(props);
-    }
+export const AppContainer = () => {
+  const isLoading = useSelector(state => state.isLoading)
+  const isUseMobileVer = useMobileVersion();
 
-    render() {
-        return (
-          <AppLayout>
-            <Loader isLoading={this.props.isLoading} />
-            <FormFilter />
-            <DataGrid />
-          </AppLayout>
-        );
-    }
+  const desktopLayout = (
+    <AppLayout>
+      <Loader isLoading={isLoading} />
+      <FormFilter />
+      <DataGrid />
+    </AppLayout>);
+
+  const mobileLayout = (
+    <div className='mobile-container'>
+      <AppLayout>
+        <Loader isLoading={isLoading} />
+        <MobileFormFilter />
+        <MobileDataGrid />
+      </AppLayout>
+    </div>
+  );
+
+  return isUseMobileVer ? mobileLayout : desktopLayout;
 }
 
-function mapStateToProps(state) {
-    return Object.assign({}, { isLoading: state.isLoading });
-}
-
-export default connect(mapStateToProps)(AppContainer);
+export default AppContainer
