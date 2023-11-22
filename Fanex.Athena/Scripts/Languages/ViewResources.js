@@ -1,4 +1,4 @@
-﻿// Generated at: 11/28/2023 3:25:36 PM
+﻿// Generated at: 12/1/2023 11:18:47 AM
 var _language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -752,6 +752,7 @@ ProductSB:"Sportsbook",
 ProductSB_BA:"Sportsbook &amp; BA",
 ProductSBC:"Saba.club",
 ProductSBVS:"Saba Virtual Sports",
+ProductSEA:"SEAL Entertainment",
 ProductSG:"SG",
 ProductSLT:"Sports Lottery",
 ProductSPR:"Saba Promotion",
