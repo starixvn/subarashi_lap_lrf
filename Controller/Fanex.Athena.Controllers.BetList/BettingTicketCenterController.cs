@@ -233,7 +233,8 @@
                 Product.JIG,
                 Product.YB,
                 Product.MGRNG,
-                Product.SEA
+                Product.SEA,
+                Product.WE
             };
 
             return string.Join(", ", GetProductRequireNote(productsRequireUseName));

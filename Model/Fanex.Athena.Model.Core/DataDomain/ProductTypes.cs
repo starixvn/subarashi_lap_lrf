@@ -94,6 +94,8 @@ namespace Fanex.Athena.Model.Core.DataDomain
 
         public const int SEA = 72;
 
+        public const int WE = 80;
+
         public const int Parlay = 999;
     }
 }

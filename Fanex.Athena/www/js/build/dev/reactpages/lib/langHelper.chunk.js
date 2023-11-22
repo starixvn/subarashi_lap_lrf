@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 12/1/2023 11:18:47 AM
+// Generated at: 12/7/2023 5:32:14 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -247,6 +247,7 @@ window._language_en_US = {
   CashOutWinLoss: "Cash Out Win Loss",
   CashOutWL_SportNote: "This report supports filter by Sport from 01/01/2023",
   CasinoAPI_UpdateCommError: "Having errors when calling CasinoAPI to update customer commission.",
+  CasinoPromotion: "Casino Promotion",
   CasinoTransfer: "Casino Transfer",
   CasinoTurnover: "Casino Turnover",
   CategoriesSelection: "Categories Selection",
@@ -855,6 +856,7 @@ window._language_en_US = {
   ProductVS: "Virtual Sports",
   ProductVS2: "Virtual Sports 2",
   ProductVS3: "Virtual Sports 3 (Old)",
+  ProductWE: "WE Live Casino",
   ProductWM: "WM",
   ProductYB: "YeeBet",
   Promotion: "Promotion",
@@ -912,6 +914,7 @@ window._language_en_US = {
   Save: "Save",
   SB: "SB",
   SBComm: "SB Comm",
+  SBPromotion: "Sportsbook Promotion",
   Score: "Score",
   Search: "Search",
   SearchAllPlayers: "Search All Players",

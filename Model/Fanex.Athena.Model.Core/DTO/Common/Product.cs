@@ -106,6 +106,8 @@ namespace Fanex.Athena.Model.Core.DTO.Common
 
         public const string SEA = "SEA";
 
+        public const string WE = "WE";
+
         #endregion Field
 
         #region Constructor
