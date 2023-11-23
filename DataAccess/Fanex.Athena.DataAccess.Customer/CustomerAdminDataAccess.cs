@@ -71,7 +71,7 @@ namespace Fanex.Athena.DataAccess.Customer
             }
         }
 
-        private void AssignCommonParams(IObjectDb db, GetCustomerInfoMetaModel metaModel)
+        private static void AssignCommonParams(IObjectDb db, GetCustomerInfoMetaModel metaModel)
         {
             db.SetParameterValue("CustId", metaModel.CustId);
             db.SetParameterValue("FromDate", metaModel.FromDate);
@@ -79,7 +79,7 @@ namespace Fanex.Athena.DataAccess.Customer
             db.SetParameterValue("BUDate", metaModel.BUDate);
         }
 
-        private void AssignGetBetListParams(IObjectDb db, GetCustomerBetListMetaModel metaModel)
+        private static void AssignGetBetListParams(IObjectDb db, GetCustomerBetListMetaModel metaModel)
         {
             db.SetParameterValue("CustId", metaModel.CustId);
             db.SetParameterValue("FromDate", metaModel.FromDate);

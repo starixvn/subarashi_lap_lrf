@@ -18,17 +18,23 @@ namespace Fanex.Athena.Api.Customer.CustomerAdmin
     public class CustomerAdministrationController : BaseApiController
     {
         private readonly ICustomerAdminService _customerAdminService;
+        private readonly ICustomerAdminAPIService _customerAdminAPIService;
         public IBalanceUpDataAccess BalanceUpDataAccessInstance { get; set; }
 
-        public CustomerAdministrationController(ICustomerAdminService customerAdminService, ILanguageService languageService) : base(languageService)
+        public CustomerAdministrationController(
+            ICustomerAdminService customerAdminService,
+            ICustomerAdminAPIService customerAdminAPIService,
+            ILanguageService languageService) : base(languageService)
         {
             _customerAdminService = customerAdminService;
+            _customerAdminAPIService = customerAdminAPIService;
         }
 
         [HttpPost]
         public async Task<JsonResult<CustomerInfo>> GetCustomerInfoByUserName(GetCustomerInfoMetaModel model)
         {
-            var result = await _customerAdminService.GetCustomerInfoByUserName(model);
+            var result = await _customerAdminAPIService.GetCustomerInfoByUserName(model)
+                ?? await _customerAdminService.GetCustomerInfoByUserName(model);
 
             return JsonApi(result);
         }

@@ -1,9 +1,33 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 
 namespace Fanex.Athena.Model.Customer.DTO.CustomerAdmin
 {
     public class CustomerInfo
     {
+        public CustomerInfo()
+        { }
+
+        public CustomerInfo(JToken token)
+        {
+            Active = token["Active"].Value<bool>() ? "Yes" : "No";
+            Country = token["Country"].Value<string>();
+            CurrencyCode = token["CurrencyCode"].Value<string>();
+            CustId = token["IbcCustId"].Value<int>();
+            Email = token["Email"].Value<string>();
+            FirstName = token["FirstName"].Value<string>();
+            LastName = token["LastName"].Value<string>();
+            Locked = token["Lock"].Value<bool>() ? "Yes" : "No";
+            Gender = token["Gender"].Value<string>();
+            IP = token["IP"].Value<string>();
+            Mobile = token["Mobile"].Value<string>();
+            PreferredUserName = token["PreferredUserName"].Value<string>();
+            RegisteredDate = token["DateOfRegistration"].Value<DateTime>();
+            SecurityQuestion = token["SecurityQuestion"].Value<string>();
+            UserName = token["UserName"].Value<string>();
+            SecurityCode = "*****";
+        }
+
         public int CustId { get; set; }
 
         public string UserName { get; set; }
