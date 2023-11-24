@@ -9,5 +9,7 @@
         public IEnumerable<SelectListItem> SportsList { get; set; }
 
         public IEnumerable<RiskLevel> RiskLevels { get; set; }
+
+        public IDictionary<int, string> PlatformList { get; set; }
     }
 }

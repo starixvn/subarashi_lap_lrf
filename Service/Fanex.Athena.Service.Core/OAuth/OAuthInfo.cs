@@ -1,9 +1,9 @@
-﻿using Fanex.Athena.Model.Auth;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using Fanex.Athena.Model.Auth;
+using Newtonsoft.Json;
 
 namespace Fanex.Athena.Service.Core.OAuth
 {
@@ -46,6 +46,8 @@ namespace Fanex.Athena.Service.Core.OAuth
         public bool IsMasterLicensee => GetClaimValue<bool>("IsMasterLicensee");
         public string OperatorID => GetClaimValue("OperatorID");
         public string SiteDBServer => GetClaimValue("SiteDBServer");
+
+        public int SpecialPlatform => GetClaimValue<int>("SpecialPlatform");
 
         public IEnumerable<string> OfferedSubProductList
         {

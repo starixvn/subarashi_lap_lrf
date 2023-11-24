@@ -1,4 +1,9 @@
-﻿using Fanex.Athena.DataAccess.Core.Users.Interfaces;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web;
+using Fanex.Athena.DataAccess.Core.Users.Interfaces;
 using Fanex.Athena.Extension.Utility;
 using Fanex.Athena.Extension.Utility.Interfaces;
 using Fanex.Athena.Model.Auth;
@@ -7,12 +12,6 @@ using Fanex.Athena.Model.Auth.MetaModel;
 using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Service.Core.OAuth;
 using Fanex.Athena.Service.Core.Users.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Threading.Tasks;
-using System.Web;
 
 namespace Fanex.Athena.Service.Core.Users
 {
@@ -127,6 +126,7 @@ namespace Fanex.Athena.Service.Core.Users
                 OfferedOddsGroupsList = oauthInfo.OfferedOddsGroupList,
                 SiteDBServer = oauthInfo.SiteDBServer,
                 AuditCurrencies = oauthInfo.AuditCurrencies.Where(currency => currency != null).ToList(),
+                SpecialPlatform = oauthInfo.SpecialPlatform,
             };
 
         private bool OfferCryptoCurrencyLicensees(string siteName)

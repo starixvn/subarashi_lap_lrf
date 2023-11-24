@@ -6,9 +6,9 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Fanex.Athena.Controllers.Base.Helpers;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Model.Report.ViewModel;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.Customer.Interfaces;
@@ -49,7 +49,6 @@
             var licenseeSession = SessionServiceInstance.LicenseeSession;
             var userSession = SessionServiceInstance.UserSession;
             var subsidiaryList = _subsidiaryService.GetWhiteLabelTree(userSession, licenseeSession.LicenseeName);
-
             var viewModel = new WinlossAnalysisReportViewModel
             {
                 CurrencyList = GetCurrencyList(),
@@ -62,12 +61,12 @@
                 SelectedBaseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency,
                 SubsidiaryViewType = IsOneworksMaster ? (byte)SubsidiaryViewType.MasterManagement : userSession.SubsidiaryViewType,
                 SubsidiaryList = subsidiaryList,
-                PlatformList = PlatformHelper.GetPlatformList(),
+                PlatformList = PlatformHelper.GetPlatformList(licenseeSession.SpecialPlatform),
                 IsOneworksMaster = IsOneworksMaster,
                 IsHasPermissionViewVip = _authorizationService.HasPermissions(userSession, PermissionKeys.PlayerVIPManagement),
                 OddGroups = licenseeSession.OfferedOddsGroupsList,
                 IsOfferCashOutProduct = _productService.IsOfferCashOutProduct(licenseeSession.LicenseeId, userSession.Language),
-                RiskLevels = await _customerClassService.GetAllRiskLevel()
+                RiskLevels = await _customerClassService.GetAllRiskLevel(),
             };
             return View("~/Views/Desktop/Report/WinlossAnalysis/Index.cshtml", viewModel);
         }
@@ -119,7 +118,7 @@
             var list = productList.ToList();
             var baProduct = list.FirstOrDefault(c => c.ProductID == ProductTypes.BA);
             var sbProduct = list.FirstOrDefault(c => c.ProductID == ProductTypes.Sportsbook);
-            if(baProduct != null && sbProduct != null) 
+            if (baProduct != null && sbProduct != null)
             {
                 list.Remove(baProduct);
                 list.Insert(list.IndexOf(sbProduct) + 1, baProduct);

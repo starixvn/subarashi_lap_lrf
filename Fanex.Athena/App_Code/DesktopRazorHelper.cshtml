@@ -4,67 +4,14 @@
 @using Fanex.Athena.Model.Core.DataDomain;
 @using Fanex.Athena.Resources;
 @using Fanex.Athena.Service.Core.Common.Interfaces
-@helper  PlatformList(string id)
+@helper  PlatformList(string id, IDictionary<int, string> platformList)
 {
     /**/
     <select id="@id" name="@id">
-        <option value="@PlatformType.DesktopNewAsia">
-            @ViewResources.DesktopNewAsia
-        </option>
-        <option value="@PlatformType.DesktopChina">
-            @ViewResources.DesktopChina
-        </option>
-        <option value="@PlatformType.DesktopOthers">
-            @ViewResources.DesktopOthers
-        </option>
-        <option value="@PlatformType.DesktopGalaxy">
-            @ViewResources.DesktopGalaxy
-        </option>
-        <option value="@PlatformType.MobileStandard">
-            @ViewResources.MobileStandard
-        </option>
-        <option value="@PlatformType.MobileEuro">
-            @ViewResources.MobileEuro
-        </option>
-        <option value="@PlatformType.MobileGalaxy">
-            @ViewResources.MobileGalaxy
-        </option>
-        <option value="@PlatformType.MobileCompact">
-            @ViewResources.MobileCompact
-        </option>
-        <option value="@PlatformType.MobileOthers">
-            @ViewResources.MobileOthers
-        </option>
-        <option value="@PlatformType.ESportsDesktop">
-            @ViewResources.ESportsDesktop
-        </option>
-        <option value="@PlatformType.ESportsMobile">
-            @ViewResources.ESportsMobile
-        </option>
-        <option value="@PlatformType.ESportsApp">
-            @ViewResources.ESportsApp
-        </option>
-        <option value="@PlatformType.MobileApp">
-            @ViewResources.MobileApp
-        </option>
-        <option value="@PlatformType.NativeApp">
-            @ViewResources.NativeApp
-        </option>
-        <option value="@PlatformType.Tablet">
-            @ViewResources.Tablet
-        </option>
-        <option value="@PlatformType.DeepLink">
-            @ViewResources.DeepLink
-        </option>
-        <option value="@PlatformType.WAP">
-            @ViewResources.Wap
-        </option>
-        <option value="@PlatformType.ChatRoom">
-            @ViewResources.ChatRoom
-        </option>
-        <option value="@PlatformType.BetfromOthers">
-            @ViewResources.BetfromOthers
-        </option>
+        @foreach (var platform in platformList)
+        {
+            <option value="@platform.Key">@platform.Value</option>
+        }
     </select>
 }
 @helper DateRangePicker(DateTime fromDate, DateTime toDate, DateTime minDate, DateTime maxDate)

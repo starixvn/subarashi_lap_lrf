@@ -1,0 +1,74 @@
+﻿using System.Collections.Generic;
+using System.Linq;
+using Fanex.Athena.Model.Core.DataDomain;
+using Fanex.Athena.Resources;
+
+namespace Fanex.Athena.Model.Core.Helper
+{
+    public static class PlatformHelper
+    {
+        public static IDictionary<int, string> GetPlatformList(int specialPlatform)
+        {
+            if (specialPlatform == SpecialPlatform.Jollysports)
+            {
+                return JollysportsPlatform;
+            }
+            return NormalPlatform;
+        }
+
+        private static IDictionary<int, string> NormalPlatform => new Dictionary<int, string>
+        {
+            { PlatformType.DesktopNewAsia, ViewResources.DesktopNewAsia },
+            { PlatformType.DesktopChina, ViewResources.DesktopChina },
+            { PlatformType.DesktopOthers, ViewResources.DesktopOthers },
+            { PlatformType.DesktopGalaxy, ViewResources.DesktopGalaxy },
+            { PlatformType.MobileStandard, ViewResources.MobileStandard },
+            { PlatformType.MobileEuro, ViewResources.MobileEuro },
+            { PlatformType.MobileGalaxy, ViewResources.MobileGalaxy },
+            { PlatformType.MobileCompact, ViewResources.MobileCompact },
+            { PlatformType.MobileOthers, ViewResources.MobileOthers },
+            { PlatformType.ESportsDesktop, ViewResources.ESportsDesktop },
+            { PlatformType.ESportsMobile, ViewResources.ESportsMobile },
+            { PlatformType.ESportsApp, ViewResources.ESportsApp },
+            { PlatformType.MobileApp, ViewResources.MobileApp },
+            { PlatformType.NativeApp, ViewResources.NativeApp },
+            { PlatformType.Tablet, ViewResources.Tablet },
+            { PlatformType.DeepLink, ViewResources.DeepLink },
+            { PlatformType.WAP, ViewResources.Wap },
+            { PlatformType.ChatRoom, ViewResources.ChatRoom },
+            { PlatformType.BetfromOthers, ViewResources.BetfromOthers }
+        };
+
+        private static IDictionary<int, string> JollysportsPlatform => new Dictionary<int, string>
+        {
+            { PlatformType.Desktop, ViewResources.Desktop },
+            { PlatformType.Mobile, ViewResources.Mobile },
+            { PlatformType.Others, ViewResources.BetfromOthers },
+        };
+
+        public static string GetPlatformName(int type)
+        {
+            if (JollysportsPlatform.ContainsKey(type))
+            {
+                return JollysportsPlatform[type];
+            }
+
+            if (NormalPlatform.ContainsKey(type))
+            {
+                return JollysportsPlatform[type];
+            }
+
+            return ViewResources.All;
+        }
+
+        public static bool IsValidPlatform(string type)
+        {
+            if (string.IsNullOrEmpty(type))
+            {
+                return false;
+            }
+
+            return type == "All" || type.Split(',').Any(x => JollysportsPlatform.ContainsKey(int.Parse(x)) || NormalPlatform.ContainsKey(int.Parse(x)) || int.Parse(x) == PlatformType.All);
+        }
+    }
+}

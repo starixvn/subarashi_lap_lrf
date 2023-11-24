@@ -1,5 +1,13 @@
 ﻿namespace Fanex.Athena.Api.Base
 {
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Net;
+    using System.Net.Http;
+    using System.Net.Http.Headers;
+    using System.Text;
+    using System.Web.Http;
+    using System.Web.Http.Results;
     using Fanex.Athena.Api.Base.Attributes;
     using Fanex.Athena.Excel.Base;
     using Fanex.Athena.Extension.Utility;
@@ -11,15 +19,6 @@
     using Newtonsoft.Json;
     using Newtonsoft.Json.Serialization;
     using NPOI.SS.UserModel;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Net;
-    using System.Net.Http;
-    using System.Net.Http.Headers;
-    using System.Text;
-    using System.Web.Http;
-    using System.Web.Http.Results;
-    using System.Web.Mvc;
 
     [XFrameOptionApi]
     [ApiUMFilter]
@@ -51,6 +50,8 @@
         public ISessionService SessionService { get; set; }
 
         public ISubsidiaryService SubsidiaryService { get; set; }
+
+        public ILicenseeSettingService LicenseeSettingServiceInstance { get; set; }
 
         protected UserAuthInfo UserSession => SessionService.UserSession;
 
@@ -104,7 +105,7 @@
 
         protected internal JsonNetResult<T> JsonNetResult<T>(T content)
         {
-            return JsonNetResult(content, PascalCassJsonSetting );
+            return JsonNetResult(content, PascalCassJsonSetting);
         }
 
         protected internal JsonNetResult<T> JsonNetResult<T>(T content, JsonSerializerSettings serializerSettings)
@@ -116,7 +117,6 @@
         {
             return new JsonNetResult<T>(content, serializerSettings, encoding, this.Request);
         }
-
 
         protected internal virtual HttpResponseMessage ZipFileSteam(MemoryStream zipFile, string fileName)
         {

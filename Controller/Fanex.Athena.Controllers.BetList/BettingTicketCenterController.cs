@@ -1,11 +1,15 @@
 ﻿namespace Fanex.Athena.Controllers.BetList
 {
-    using Fanex.Athena.Controllers.Base.Helpers;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
     using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.Customer.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -13,10 +17,6 @@
     using Model.Core.DTO.Common;
     using Model.Core.MetaModel.Product;
     using Resources;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using Web.ActionFilter;
 
     [FunctionAuthorization(PermissionKeys.BettingTicketCenter)]
@@ -89,7 +89,6 @@
             var licenseeSession = SessionServiceInstance.LicenseeSession;
             var userSession = SessionServiceInstance.UserSession;
             var subsidiaryList = _subsidiaryService.GetWhiteLabelTree(userSession, licenseeSession.LicenseeName);
-
             var viewModel = new BettingTicketCenterViewModel
             {
                 CurrencyList = GetCurrencyList(),
@@ -105,7 +104,7 @@
                 HasExchange = tabList.Any() && HasExchange(),
                 TabList = tabList,
                 RiskLevels = await _customerClassService.GetAllRiskLevel(),
-                PlatformList = PlatformHelper.GetPlatformList(),
+                PlatformList = PlatformHelper.GetPlatformList(licenseeSession.SpecialPlatform),
                 OddsGroup = licenseeSession.OfferedOddsGroupsList,
             };
 
@@ -119,12 +118,11 @@
         {
             var tabList = GetEnableTabList();
             var licenseeSession = SessionServiceInstance.LicenseeSession;
-
             var viewModel = new BettingTicketCenterViewModel
             {
                 LiveStatusList = GetLiveStatusList(),
                 StatusList = GetStatusList(),
-                PlatformList = PlatformHelper.GetPlatformList(),
+                PlatformList = PlatformHelper.GetPlatformList(licenseeSession.SpecialPlatform),
                 ProductOptionList = GetProductOptionList(),
                 IsAllowedCustomerComm = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm,
                 SelectedBaseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency,

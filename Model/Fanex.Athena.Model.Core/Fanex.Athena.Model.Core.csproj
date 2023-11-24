@@ -63,6 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataDomain\SpecialPlatform.cs" />
     <Compile Include="Constants\TimeZoneType.cs" />
     <Compile Include="Constants\HardCodeSportType.cs" />
     <Compile Include="DataDomain\BaseCurrencyType.cs" />
@@ -140,6 +141,7 @@
     <Compile Include="Helper\MathHelper.cs" />
     <Compile Include="Helper\CommissionGroupHelper.cs" />
     <Compile Include="Helper\MetaModelHelper.cs" />
+    <Compile Include="Helper\PlatformHelper.cs" />
     <Compile Include="Helper\ProductHelper.cs" />
     <Compile Include="MetaModel\Common\SPLogMetaModel.cs" />
     <Compile Include="MetaModel\CurrencyValidationOption.cs" />

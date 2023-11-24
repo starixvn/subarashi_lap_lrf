@@ -1,6 +1,5 @@
 ﻿namespace Fanex.Athena.DataAccess.Core.Users
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Fanex.Athena.DataAccess.Core;
@@ -50,6 +49,17 @@
             using (var db = this.GetObjectDb(UspName))
             {
                 return db.QueryEntity<Licensee>(uspParams);
+            }
+        }
+
+        public int GetSpecialPlatformByName(string licenseeName)
+        {
+            const string UspName = "Lrf_GetSpecialPlatform";
+            var uspParams = new { siteName = licenseeName };
+
+            using (var db = this.GetObjectDb(UspName))
+            {
+                return db.QueryEntity<int>(uspParams);
             }
         }
     }

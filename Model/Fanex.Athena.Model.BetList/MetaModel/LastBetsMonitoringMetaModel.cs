@@ -57,6 +57,8 @@ namespace Fanex.Athena.Model.BetList.MetaModel
 
         public bool IsShowIp { get; set; }
 
+        public int SpecialPlatform { get; set; }
+
         public string ProductCodeList { get; set; } = Product.SB;
         public string OriginalProductCodeList { get; set; }
 

@@ -2,23 +2,21 @@
 {
     #region Using
 
-    using Fanex.Athena.Model.Auth.DataDomain;
-    using Fanex.Athena.Model.Core.DataDomain;
-    using Fanex.Athena.Model.Core.DTO.Common;
-    using Fanex.Athena.Service.Customer.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.Web.ActionFilter;
-
-    using Model.BetList.MetaModel;
-    using Model.BetList.ViewModel;
-
-    using Resources;
-
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using System.Web.SessionState;
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Model.Core.Helper;
+    using Fanex.Athena.Service.Customer.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Web.ActionFilter;
+    using Model.BetList.MetaModel;
+    using Model.BetList.ViewModel;
+    using Resources;
 
     #endregion Using
 
@@ -41,10 +39,10 @@
         [HttpGet]
         public async Task<ActionResult> Index()
         {
+            var specialPlatform = SessionServiceInstance.LicenseeSession.SpecialPlatform;
             var metaModel = new BetListMetaModel
             {
-                LicenseeId =
-                SessionServiceInstance.LicenseeSession.LicenseeId,
+                LicenseeId = SessionServiceInstance.LicenseeSession.LicenseeId,
                 BaseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency
             };
 
@@ -53,6 +51,7 @@
                 CurrencyList = SessionServiceInstance.UserSession.CurrencyList,
                 SportsList = await GetSports().ConfigureAwait(false),
                 RiskLevels = await _customerClassService.GetAllRiskLevel(),
+                PlatformList = PlatformHelper.GetPlatformList(specialPlatform),
                 Param = metaModel
             };
 

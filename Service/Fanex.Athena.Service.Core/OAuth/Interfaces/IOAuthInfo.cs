@@ -45,5 +45,7 @@ namespace Fanex.Athena.Service.Core.OAuth
         DateTime AccessTokenLifeTime { get; }
         string RefreshToken { get; }
         IEnumerable<AuditCurrency> AuditCurrencies { get; }
+
+        int SpecialPlatform { get; }
     }
 }

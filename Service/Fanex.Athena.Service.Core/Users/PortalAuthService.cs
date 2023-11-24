@@ -1,5 +1,10 @@
 ﻿namespace Fanex.Athena.Service.Core.Users
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web;
     using Extension.Utility;
     using Extension.Utility.Interfaces;
     using Fanex.Athena.Model.Auth;
@@ -11,11 +16,6 @@
     using Fanex.Athena.Service.StatelessCore.Utility;
     using Model.Core.DataDomain;
     using Resources;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web;
 
     [CLSCompliant(false)]
     public class PortalAuthService : IPortalAuthService
@@ -153,6 +153,7 @@
                 OfferedOddsGroupsList = oauthInfo.OfferedOddsGroupList,
                 SiteDBServer = oauthInfo.SiteDBServer,
                 AuditCurrencies = oauthInfo.AuditCurrencies.Where(currency => currency != null).ToList(),
+                SpecialPlatform = oauthInfo.SpecialPlatform,
             };
 
         private UserAuthInfo GenerateUserInfo(IOAuthInfo oauthInfo)

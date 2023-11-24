@@ -3630,4 +3630,7 @@
   <data name="SecurityQuestion" xml:space="preserve">
     <value>Security Question</value>
   </data>
+  <data name="Desktop" xml:space="preserve">
+    <value>Desktop</value>
+  </data>
 </root>
