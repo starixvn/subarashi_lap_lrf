@@ -10,6 +10,7 @@ import { getFormattedDate } from '../lib/utils';
 import { renderProductSelectList, renderCurrencySelectList, renderSportSelectList } from '../lib/formFilterUtils';
 
 export const FormFilter = (props) => {
+    const [refNo, setRefNo] = useState("");
     const { requestParam, sportList } = props;
     const { productCodeList, currencyIdList, date, pageSize, sortBy, sortOrder } = requestParam;
 
@@ -35,7 +36,8 @@ export const FormFilter = (props) => {
         currencyIdList: selectedCurrency,
         productCodeList: selectedProduct,
         gameCodes: selectedSport,
-        date: selectedDate
+        date: selectedDate,
+        refNo: !refNo ? "0" : refNo
     });
 
     const handleChangeProduct = (currentItem, selectedItemsKey) => {
@@ -74,6 +76,17 @@ export const FormFilter = (props) => {
                             onChange={(momentDate) => setSelectedDate(momentDate.format("MM/DD/YYYY"))} />
                     </div>
                 </div>
+                {
+                    AppData.isAllowRefNo && (
+                        <div className="col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2">
+                            <div className="form-group">
+                                <label className="label-text">{LangHelper.getSingleResource("RefNo")}</label>
+                                <input className="input-text" id="RefNo" name="RefNo" type="number" value={refNo}
+                                    onChange={(event) => setRefNo(event.target.value)} />
+                            </div>
+                        </div>
+                    )
+                }
                 {
                     productOptions && productOptions.length ? (
                         <div className="col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2">
