@@ -62,23 +62,24 @@ export const MobileDataGrid = (props) => {
         </>
     )
 
-
     return (
-        <div className='result-content'>
-        <ReportTitle content={reportTitle} />
-        <Table key={`table-winloss-ananlysis-${requestParam.SubmitTime}`} minWidth={650}
-            autoWidth={true}
-            autoHeight={true}
-            header={header}
-            body={body}
-            footer={footer}
-            containerPadding={30}
-            onSort= {onSort}
-            isPaging={true}
-            pageOption={currenPagingOption}
-            shouldResetScrollPosition={props.reloadReport}
-            onPaging={onPaging} />
-    </div>
+        <div className="mobile-betlist-container betlist-container result-content" ref={ref}>
+            <ReportTitle content={reportTitle} />
+            <Table key='betlist-mobile-table'
+                autoWidth={true}
+                autoHeight={false}               
+                header={header}
+                body={bodyWrapper}
+                footer={footer}
+                isPaging={true}
+                pageOption={pageOption}
+                shouldResetScrollPosition={reloadReport}
+                bodyHeight="100%"
+                containerPadding={2}
+                isIncludeScrollWidth={false}
+                onSort= {onSort} />
+            <RefPager ref={pagerRef} onPaging={onPaging} pageOption={pageOption} isShowPagingInfo={isShowPagingInfo}/>          
+        </div>
 
     );
 }
