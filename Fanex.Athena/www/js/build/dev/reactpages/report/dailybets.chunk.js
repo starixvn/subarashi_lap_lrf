@@ -1222,6 +1222,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const FormFilter = props => {
+  const [refNo, setRefNo] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("");
   const {
     requestParam,
     sportList
@@ -1252,7 +1253,8 @@ const FormFilter = props => {
     currencyIdList: selectedCurrency,
     productCodeList: selectedProduct,
     gameCodes: selectedSport,
-    date: selectedDate
+    date: selectedDate,
+    refNo: !refNo ? "0" : refNo
   });
   const handleChangeProduct = (currentItem, selectedItemsKey) => {
     const param = {
@@ -1296,6 +1298,19 @@ const FormFilter = props => {
     maxDate: dateConstraint.maxDate,
     date: dateString,
     onChange: momentDate => setSelectedDate(momentDate.format("MM/DD/YYYY"))
+  }))), _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__["default"].isAllowRefNo && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "label-text"
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource("RefNo")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    className: "input-text",
+    id: "RefNo",
+    name: "RefNo",
+    type: "number",
+    value: refNo,
+    onChange: event => setRefNo(event.target.value)
   }))), productOptions && productOptions.length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {

@@ -36,7 +36,8 @@
     window._AppData = {
     productOptions: @Html.Raw(productOptions.ToJson()),
     currencyList: @Html.Raw(currencyList.ToJson()),
-    sportList: @Html.Raw(sportList.ToJson())
+    sportList: @Html.Raw(sportList.ToJson()),
+    isAllowRefNo: '@Model.IsAllowRefNo' === "True"
     };
 }
 <div id="app-container">
