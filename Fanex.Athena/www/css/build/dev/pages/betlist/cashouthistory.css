@@ -747,6 +747,99 @@ table tbody tr.row-group-level1 td {
     color: #bbb;
     display: block; }
 
+.mobile-betlist-container .report-title-container {
+  padding-left: 5px; }
+
+.mobile-betlist-container .fixed-table-grant-total {
+  text-align: right; }
+  .mobile-betlist-container .fixed-table-grant-total .cell-total {
+    display: flex;
+    justify-content: space-between; }
+  .mobile-betlist-container .fixed-table-grant-total td.cell-total-winloss {
+    border-right-color: #b8c3c9;
+    overflow: visible; }
+    .mobile-betlist-container .fixed-table-grant-total td.cell-total-winloss + td {
+      border-left-color: #b8c3c9; }
+  .mobile-betlist-container .fixed-table-grant-total td:first-child {
+    text-align: center; }
+
+.mobile-betlist-container .header-content, .mobile-betlist-container .footer-content, .mobile-betlist-container .page-wrapper-container {
+  display: block;
+  position: sticky;
+  position: -webkit-sticky;
+  z-index: 10; }
+
+.mobile-betlist-container .header-content {
+  top: 0px; }
+  .mobile-betlist-container .header-content tr th:first-child {
+    border-left: 0px; }
+
+.mobile-betlist-container .body-content {
+  overflow-x: initial;
+  overflow-y: initial; }
+
+.mobile-betlist-container .page-wrapper-container {
+  bottom: 0px; }
+
+.mobile-betlist-container .table-container {
+  overflow-x: visible; }
+
+.mobile-betlist-container.betlist-container .bettype, .mobile-betlist-container.betlist-container .match {
+  text-align: left; }
+
+.mobile-betlist-container.betlist-container .match + div.league {
+  text-align: left; }
+
+.mobile-betlist-container .collapse-row td:first-child {
+  background: #9EB4C3; }
+
+.mobile-betlist-container .row-active td {
+  background: #FCF4DF; }
+
+.mobile-betlist-container .row-active.collapse-row td:first-child {
+  background: #F6DFA1; }
+
+.mobile-betlist-container .table > tbody tr td.cell-collapse {
+  padding-left: 0px;
+  padding-right: 0px; }
+
+.mobile-betlist-container .table > tbody tr td.cell-stake {
+  padding-left: 0px; }
+  .mobile-betlist-container .table > tbody tr td.cell-stake .stake {
+    word-break: break-all; }
+
+.mobile-betlist-container .table > tbody tr td.cell-winloss .underdog {
+  word-break: break-all; }
+
+.mobile-betlist-container .table > tbody tr:hover td:hover td {
+  background: initial; }
+
+.mobile-betlist-container .table > tbody tr:hover td.row-active:hover td {
+  background: #FCF4DF; }
+
+.mobile-betlist-container .icon {
+  color: #217A4A;
+  font-size: 22px; }
+
+.mobile-betlist-container .cell-index {
+  margin-bottom: 4px; }
+  .mobile-betlist-container .cell-index .index {
+    color: #AA5200; }
+
+.mobile-betlist-container .cell-odd {
+  display: flex;
+  margin-top: 4px; }
+
+.mobile-betlist-container .cell-external-id {
+  border-bottom: 1px solid #BFB9A9;
+  background: #D9D2C0; }
+
+.mobile-betlist-container .cell-choice {
+  margin-top: 8px; }
+
+.mobile-betlist-container .table .status {
+  margin-top: 8px; }
+
 .table > thead > tr > th {
   background: #4C6375;
   color: #fff; }

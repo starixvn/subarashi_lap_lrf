@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 11/6/2023 3:22:05 PM
+// Generated at: 11/28/2023 3:25:36 PM
 window._language_zh_CN = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -348,6 +348,7 @@ window._language_zh_CN = {
   Department: "部门",
   Deposit: "存款",
   Deposited: "已存钱账号",
+  Desktop: "桌机",
   DesktopChina: "桌机中国版",
   DesktopGalaxy: "桌机银河版",
   DesktopNewAsia: "桌机新亚洲版",
@@ -621,6 +622,7 @@ window._language_zh_CN = {
   MixLiveAndNoneLive: "混合过关",
   MixSportsParlay: "混合过关",
   Mo: "Mo",
+  Mobile: "手机",
   MobileApp: "手机 APP",
   MobileCompact: "手机轻量版",
   MobileEuro: "手机欧洲版",

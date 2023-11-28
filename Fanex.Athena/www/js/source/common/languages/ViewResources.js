@@ -1,4 +1,4 @@
-﻿// Generated at: 11/6/2023 3:22:05 PM
+﻿// Generated at: 11/28/2023 3:25:36 PM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -279,6 +279,7 @@ Department:"Department",
 Deposit:"Deposit",
 Deposited:"Deposited",
 DepositHistory:"Deposit History",
+Desktop:"Desktop",
 DesktopChina:"Desktop China",
 DesktopGalaxy:"Desktop Galaxy",
 DesktopNewAsia:"Desktop New Asia",
