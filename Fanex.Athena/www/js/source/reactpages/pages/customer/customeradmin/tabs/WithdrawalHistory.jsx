@@ -7,6 +7,7 @@ import NoDataTitle from '@jsroot/components/NoDataTitle';
 import { toggleLoader } from "@jsroot/actions/loaderAction";
 import { bindActionCreators } from "redux";
 import { connect } from 'react-redux';
+import NumberFormat from '@jsroot/lib/numberFormat';
 
 const WithdrawalHistory = (props) => {
     const {fromDate,toDate} = props.dateRange;
@@ -75,7 +76,7 @@ const WithdrawalHistory = (props) => {
             <Row key={index}>
                 <Cell className="center-align">{transID}</Cell>
                 <Cell className="center-align">{transDateString}</Cell>
-                <Cell className="center-align">{amount}</Cell>
+                <Cell className="center-align">{NumberFormat.formatDecimal(amount)}</Cell>
                 <Cell className="center-align">{remark}</Cell>
             </Row>
         )
