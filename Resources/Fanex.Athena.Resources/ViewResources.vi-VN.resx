@@ -3297,4 +3297,10 @@
   <data name="Mobile" xml:space="preserve">
     <value>Di động</value>
   </data>
+  <data name="SBPromotion" xml:space="preserve">
+    <value>Sportsbook Khuyến Mãi</value>
+  </data>
+  <data name="CasinoPromotion" xml:space="preserve">
+    <value>Casino Khuyến Mãi</value>
+  </data>
 </root>
