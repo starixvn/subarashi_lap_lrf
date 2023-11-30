@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import MultipleSelect from '@legion-lib/react-multiselect'
 import LangHelper from '@jsroot/lib/langHelper'
 import AppData from '@jsroot/lib/AppData'
@@ -35,4 +35,4 @@ const propTypes = {
 
 OddsGroupFilter.propTypes = propTypes;
 
-export default OddsGroupFilter;
+export default memo(OddsGroupFilter);

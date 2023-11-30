@@ -18,13 +18,13 @@ export const useFilterHandler = () =>{
         setIp, setSelectedCurrency, setSelectedBaseCurrency, changeIsConvertAll, setSubsidiarySearch} 
         = ActionCreators;
 
-    const onUserNameInputHandler = useCallback((value) => dispatch(setUsername(value)));
+    const onUserNameInputHandler = useCallback((value) => dispatch(setUsername(value)),[]);
 
-    const onSubsidiaryDropDownChangeHandler = useCallback((currentItem, selectedItemsKey) => dispatch(setSubsidiaryList(selectedItemsKey)));
+    const onSubsidiaryDropDownChangeHandler = useCallback((currentItem, selectedItemsKey) => dispatch(setSubsidiaryList(selectedItemsKey)),[]);
    
-    const onStatusChangeHandler = useCallback((currentItem, selectedItemsKey) => dispatch(setSelectedStatus(selectedItemsKey)));
+    const onStatusChangeHandler = useCallback((currentItem, selectedItemsKey) => dispatch(setSelectedStatus(selectedItemsKey)),[]);
    
-    const onLiveStatusChangeHandler = useCallback((currentItem, selectedItemsKey) => dispatch(setSelectedLiveStatus(selectedItemsKey)));
+    const onLiveStatusChangeHandler = useCallback((currentItem, selectedItemsKey) => dispatch(setSelectedLiveStatus(selectedItemsKey)),[]);
     
     const onProductChangeHandler = useCallback((item) => {
         const productCode = item.value;
@@ -41,7 +41,7 @@ export const useFilterHandler = () =>{
         }
     },[dateRange, isEnableLeagueMatch])
 
-    const onBetTypeChangeHandler = useCallback((item) => dispatch(setSelectedBettype(item.value)));
+    const onBetTypeChangeHandler = useCallback((item) => dispatch(setSelectedBettype(item.value)),[]);
 
     const onLeagueChangeHandler = useCallback((item) => {
         const leagueId = item.value;
@@ -51,29 +51,29 @@ export const useFilterHandler = () =>{
         }
     },[dateRange, selectedSport])
 
-    const onMatchChangeHandler = useCallback((item) => dispatch(setSelectedMatch(item.value)));
+    const onMatchChangeHandler = useCallback((item) => dispatch(setSelectedMatch(item.value)),[]);
     
     const onCustomerClassChangeHandler = useCallback((currentItem, selectedItemsKey) => {
         const customerClass = AppData.riskLevels.filter( r => selectedItemsKey.includes(r.id)).map( r => r.customerClassList).join(',');
         dispatch(setSelectedCustomerClass(customerClass));
-    })
+    },[])
 
-    const onOddsGroupChangeHandler = useCallback((currentItem, selectedItemsKey) => dispatch(setSelectedOddsGroup(selectedItemsKey)));
+    const onOddsGroupChangeHandler = useCallback((currentItem, selectedItemsKey) => dispatch(setSelectedOddsGroup(selectedItemsKey)),[]);
     
-    const onPlatformChangeHandler = useCallback((currentItem, selectedItemsKey) => dispatch(setSelectedPlatform(selectedItemsKey)));
+    const onPlatformChangeHandler = useCallback((currentItem, selectedItemsKey) => dispatch(setSelectedPlatform(selectedItemsKey)),[]);
     
     const onIpChangeHandler = useCallback((event) => dispatch(setIp(event.target.value)));
     
-    const onCurrencyChangeHandler = useCallback((currentItem, selectedItemsKey) => dispatch(setSelectedCurrency(selectedItemsKey)));
+    const onCurrencyChangeHandler = useCallback((currentItem, selectedItemsKey) => dispatch(setSelectedCurrency(selectedItemsKey)),[]);
     
-    const onBaseCurrencyChangeHandler = useCallback((item) => dispatch(setSelectedBaseCurrency(item.value)));
+    const onBaseCurrencyChangeHandler = useCallback((item) => dispatch(setSelectedBaseCurrency(item.value)),[]);
     
-    const onConverAllChangeHandler = useCallback((checked) => dispatch(changeIsConvertAll(checked)));
+    const onConverAllChangeHandler = useCallback((checked) => dispatch(changeIsConvertAll(checked)),[]);
     
     const onSubsidiaryCheckBoxChangeHandler = useCallback(checked => { 
         dispatch(setSubsidiarySearch(checked)); 
         checked && dispatch(setSubsidiaryList(defaultSelectedSubsidiary))
-    })
+    },[])
 
     return {onUserNameInputHandler, onSubsidiaryDropDownChangeHandler, onStatusChangeHandler, onProductChangeHandler,
         onSportChangeHandler, onBetTypeChangeHandler, onLeagueChangeHandler, onMatchChangeHandler, onLiveStatusChangeHandler,

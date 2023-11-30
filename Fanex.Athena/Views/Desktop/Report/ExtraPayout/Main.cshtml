@@ -44,7 +44,7 @@
     baseCurrencyList: @Html.Raw(baseCurrencyList.ToJson()),
     dateConstraint: {minDate: '@minDate.ToString("MM/dd/yyyy")', maxDate: '@maxDate.ToString("MM/dd/yyyy")', limitedMonthRange: 3},
     defaultBaseCurrency: '@(ViewBag.DefaultSelectedBaseCurrency)',
-    subsidiaryList: @Html.Raw(Model.SubsidiaryList.ToJson()),
+    subsidiaryList: @Html.Raw(Model.SubsidiaryList.ToJsonWithServiceStack()),
     selectedSubsidiary: '@(selectedSubsidiary)',
     viewType: @((byte)Model.ViewType),
     };

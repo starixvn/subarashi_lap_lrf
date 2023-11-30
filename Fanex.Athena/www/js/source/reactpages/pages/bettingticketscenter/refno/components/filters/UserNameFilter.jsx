@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import AutoComplete from '@jsroot/components/auto-complete'
 import LangHelper from '@jsroot/lib/langHelper'
@@ -22,4 +22,4 @@ export const UserNameFilter = () => {
             htmlAttributes={{ placeholder: LangHelper.getSingleResource("ExternalIdOrSystemId") }} />
     </div>)
 }
-export default UserNameFilter;
+export default memo(UserNameFilter);

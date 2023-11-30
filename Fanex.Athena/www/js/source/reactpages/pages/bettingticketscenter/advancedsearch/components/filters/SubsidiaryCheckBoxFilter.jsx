@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import LangHelper from '@jsroot/lib/langHelper'
 import CheckBox from '@jsroot/components/CheckBox'
 import PropTypes from 'prop-types';
@@ -23,4 +23,4 @@ const propTypes = {
 SubsidiaryCheckBoxFilter.propTypes = propTypes;
 
 
-export default SubsidiaryCheckBoxFilter;
+export default memo(SubsidiaryCheckBoxFilter);

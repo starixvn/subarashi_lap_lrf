@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React, { memo } from 'react'
 import LangHelper from '@jsroot/lib/langHelper'
 import UserGuide from '@jsroot/components/UserGuide'
 import { useDispatch, useSelector } from 'react-redux'
@@ -26,4 +26,4 @@ export const FilterUserGuide = () => {
             content={userGuideContent} />)
     
 }
-export default FilterUserGuide
+export default memo(FilterUserGuide);

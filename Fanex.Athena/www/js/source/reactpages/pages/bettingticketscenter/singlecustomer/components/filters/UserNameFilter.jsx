@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { useDispatch } from 'react-redux'
 import { ActionCreators } from '../../actions/index.js'
 import LangHelper from '@jsroot/lib/langHelper'
@@ -20,4 +20,4 @@ const UserNameFilter = () => {
     )
 }
 
-export default UserNameFilter;
+export default memo(UserNameFilter);

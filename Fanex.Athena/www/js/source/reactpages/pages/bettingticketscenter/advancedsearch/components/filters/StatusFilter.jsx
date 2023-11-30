@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import MultipleSelect from '@legion-lib/react-multiselect'
 import LangHelper from '@jsroot/lib/langHelper'
 import AppData from '@jsroot/lib/AppData'
@@ -31,4 +31,4 @@ const propTypes = {
 
 StatusFilter.propTypes = propTypes;
 
-export default StatusFilter;
+export default memo(StatusFilter);

@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState } from 'react'
+﻿import React, { memo, useEffect, useState } from 'react'
 import { shallowEqual, useSelector } from 'react-redux'
 import { ToastContainer, Flip } from 'react-toastify';
 import CollapsiblePanel from '@jsroot/components/collapsible-panel'
@@ -169,4 +169,4 @@ export const FormFilter = () => {
     )
 }
 
-export default FormFilter;
+export default memo(FormFilter);

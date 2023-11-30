@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React, { memo } from 'react'
 import LangHelper from '@jsroot/lib/langHelper'
 import FilterUserGuide from './FilterUserGuide.jsx'
 import useFilterAction from '../hooks/useFilterAction.jsx'
@@ -13,4 +13,4 @@ export const StickyIcon = () => {
         </div>)
     
 }
-export default StickyIcon
+export default memo(StickyIcon);

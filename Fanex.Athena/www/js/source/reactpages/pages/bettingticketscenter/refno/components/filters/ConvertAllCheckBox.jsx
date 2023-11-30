@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import CheckBox from '@jsroot/components/CheckBox'
 import LangHelper from '@jsroot/lib/langHelper'
@@ -17,4 +17,4 @@ export const ConvertAllCheckBox = () => {
             label={LangHelper.getSingleResource("ConvertAllFiguresToBaseCurrency")} />
     </div>)
 }
-export default ConvertAllCheckBox;
+export default memo(ConvertAllCheckBox);

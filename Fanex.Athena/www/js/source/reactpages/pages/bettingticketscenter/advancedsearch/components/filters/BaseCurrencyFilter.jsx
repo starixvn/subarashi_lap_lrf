@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import LangHelper from '@jsroot/lib/langHelper'
 import Select from 'react-select'
 import PropTypes from 'prop-types';
@@ -31,4 +31,4 @@ const propTypes = {
 
 BaseCurrencyFilter.propTypes = propTypes;
 
-export default BaseCurrencyFilter;
+export default memo(BaseCurrencyFilter);

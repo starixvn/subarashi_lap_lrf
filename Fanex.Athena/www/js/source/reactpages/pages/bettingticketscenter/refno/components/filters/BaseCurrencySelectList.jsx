@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React, { memo } from 'react'
 import AppData from '@jsroot/lib/AppData'
 import Select from 'react-select'
 import LangHelper from '@jsroot/lib/langHelper'
@@ -23,4 +23,4 @@ export const BaseCurrencySelectList = () => {
         )}
     </div>)
 }
-export default BaseCurrencySelectList;
+export default memo(BaseCurrencySelectList);

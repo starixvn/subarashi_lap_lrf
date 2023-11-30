@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { memo, useEffect } from 'react'
 import {  useDispatch, useSelector } from 'react-redux'
 import { ActionCreators } from '../../actions/index.js'
 import LangHelper from '@jsroot/lib/langHelper'
@@ -32,4 +32,4 @@ export const BaseCurrencyFilter = () => {
     </div>)
 }
 
-export default BaseCurrencyFilter;
+export default memo(BaseCurrencyFilter);

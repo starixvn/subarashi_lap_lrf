@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo} from 'react';
+import React, {memo, useEffect, useMemo} from 'react';
 import { useSelector } from 'react-redux';
 
 import AppData from '@jsroot/lib/AppData';
@@ -86,4 +86,4 @@ const MobileGrid = () => {
     )
 }
 
-export default MobileGrid;
+export default memo(MobileGrid);

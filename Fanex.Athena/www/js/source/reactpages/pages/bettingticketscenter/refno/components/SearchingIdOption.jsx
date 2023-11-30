@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react'
+﻿import React, { memo, useState } from 'react'
 import LangHelper from '@jsroot/lib/langHelper'
 import { DropdownButton, DropdownItem } from '@jsroot/components/dropdown';
 import { SearchingIdOptions } from '../lib/constants'
@@ -43,4 +43,4 @@ const SearchingIdOption = (props) => {
     )
 }
 
-export default SearchingIdOption
+export default memo(SearchingIdOption);

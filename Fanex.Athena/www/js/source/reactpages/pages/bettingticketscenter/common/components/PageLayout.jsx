@@ -1,4 +1,4 @@
-﻿import React from 'react';
+﻿import React, { memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ActionCreators } from './action.js'
 import AppLayout from '@jsroot/layouts/AppLayout';
@@ -71,4 +71,4 @@ export const PageLayout = (props) => {
     );
 }
 
-export default PageLayout;
+export default memo(PageLayout);

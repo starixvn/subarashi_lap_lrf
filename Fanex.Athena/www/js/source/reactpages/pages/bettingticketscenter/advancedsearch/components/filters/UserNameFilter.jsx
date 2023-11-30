@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import LangHelper from '@jsroot/lib/langHelper'
 import AutoComplete from '@jsroot/components/auto-complete'
 import { ApiUrl } from '../../../common/lib/constants'
@@ -23,4 +23,4 @@ const propTypes = {
 
 UserNameFilter.propTypes = propTypes;
 
-export default UserNameFilter;
+export default memo(UserNameFilter);

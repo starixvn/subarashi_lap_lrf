@@ -72,7 +72,7 @@
     baseCurrencyList: @Html.Raw(baseCurrencyList.ToJson()),
     subsidiaryViewType: @Model.SubsidiaryViewType,
     isOneworksMaster: '@Model.IsOneworksMaster' === 'True',
-    whitelabelList: @Html.Raw(whitelabelList.ToJson()),
+    whitelabelList: @Html.Raw(whitelabelList.ToJsonWithServiceStack()),
     subsidiaryList: @Html.Raw(subsidiaryList.ToJson()),
     liveStatusList: @Html.Raw(Model.LiveStatusList.Select(x => new { Id = x.Key, Value = x.Value, Status = true }).ToJson()),
     statusList: @Html.Raw(Model.StatusList.Select(x => new { Id = x.ID, Value = x.Name, Status = x.Checked }).ToJson()),

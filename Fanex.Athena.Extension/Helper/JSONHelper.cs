@@ -18,5 +18,10 @@ namespace Fanex.Athena.Extension.Helper
 
             return serializer.Serialize(value);
         }
+
+        public static string ToJsonWithServiceStack(this object value)
+        {
+            return ServiceStack.Text.JsonSerializer.SerializeToString(value);
+        }
     }
 }

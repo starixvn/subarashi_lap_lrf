@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import LangHelper from '@jsroot/lib/langHelper'
 import AppData from '@jsroot/lib/AppData'
 import PropTypes from 'prop-types'
@@ -31,4 +31,4 @@ const defaultProps = {
 Note.propTypes = propTypes;
 Note.defaultProps = defaultProps;
 
-export default Note;
+export default memo(Note);

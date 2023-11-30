@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import Select from 'react-select'
 import LangHelper from '@jsroot/lib/langHelper'
 import AppData from '@jsroot/lib/AppData'
@@ -32,4 +32,4 @@ const propTypes = {
 
 ProductFilter.propTypes = propTypes;
 
-export default ProductFilter;
+export default memo(ProductFilter);
