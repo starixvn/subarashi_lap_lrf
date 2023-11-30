@@ -55,7 +55,7 @@ namespace Fanex.Athena.Model.Core.Helper
 
             if (NormalPlatform.ContainsKey(type))
             {
-                return JollysportsPlatform[type];
+                return NormalPlatform[type];
             }
 
             return ViewResources.All;
