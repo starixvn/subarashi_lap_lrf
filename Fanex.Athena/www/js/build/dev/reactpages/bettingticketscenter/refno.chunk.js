@@ -2967,7 +2967,7 @@ const defaultProps = {
 };
 BaseMobileDataGrid.propTypes = propTypes;
 BaseMobileDataGrid.defaultProps = defaultProps;
-/* harmony default export */ __webpack_exports__["default"] = (BaseMobileDataGrid);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(BaseMobileDataGrid));
 
 /***/ }),
 
@@ -3015,7 +3015,7 @@ const propTypes = {
   item: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object
 };
 MobileBetlistContent.propTypes = propTypes;
-/* harmony default export */ __webpack_exports__["default"] = (MobileBetlistContent);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(MobileBetlistContent));
 
 /***/ }),
 
@@ -3054,7 +3054,7 @@ const propTypes = {
   item: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object
 };
 MobileWinLossCellContent.propTypes = propTypes;
-/* harmony default export */ __webpack_exports__["default"] = (MobileWinLossCellContent);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(MobileWinLossCellContent));
 
 /***/ }),
 
@@ -3138,7 +3138,7 @@ const PageLayout = props => {
     url: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_7__["default"].resolveClientUrl("ExchangeVoided")
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, children))));
 };
-/* harmony default export */ __webpack_exports__["default"] = (PageLayout);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(PageLayout));
 
 /***/ }),
 
@@ -3431,7 +3431,7 @@ const AppContainer = () => {
     selectedTabIndex: "1"
   }, layout);
 };
-/* harmony default export */ __webpack_exports__["default"] = (AppContainer);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(AppContainer));
 
 /***/ }),
 
@@ -3500,7 +3500,7 @@ const SearchingIdOption = props => {
     onChange: onChange
   }), "\xA0\xA0", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('LicenseeTxId'))));
 };
-/* harmony default export */ __webpack_exports__["default"] = (SearchingIdOption);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(SearchingIdOption));
 
 /***/ }),
 
@@ -3542,7 +3542,7 @@ const DataGrid = props => {
     sortableColumns: []
   });
 };
-/* harmony default export */ __webpack_exports__["default"] = (DataGrid);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(DataGrid));
 
 /***/ }),
 
@@ -3612,7 +3612,7 @@ const FormFilter = () => {
     className: "row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_Note__WEBPACK_IMPORTED_MODULE_10__["default"], null)));
 };
-/* harmony default export */ __webpack_exports__["default"] = (FormFilter);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(FormFilter));
 
 /***/ }),
 
@@ -3657,7 +3657,7 @@ const BaseCurrencySelectList = () => {
     onChange: item => dispatch(setSelectedBaseCurrency(item.value))
   }));
 };
-/* harmony default export */ __webpack_exports__["default"] = (BaseCurrencySelectList);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(BaseCurrencySelectList));
 
 /***/ }),
 
@@ -3697,7 +3697,7 @@ const ConvertAllCheckBox = () => {
     label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("ConvertAllFiguresToBaseCurrency")
   }));
 };
-/* harmony default export */ __webpack_exports__["default"] = (ConvertAllCheckBox);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(ConvertAllCheckBox));
 
 /***/ }),
 
@@ -3742,7 +3742,7 @@ const FilterUserGuide = () => {
     content: userGuideContent
   });
 };
-/* harmony default export */ __webpack_exports__["default"] = (FilterUserGuide);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(FilterUserGuide));
 
 /***/ }),
 
@@ -3781,7 +3781,7 @@ const defaultProps = {
 };
 Note.propTypes = propTypes;
 Note.defaultProps = defaultProps;
-/* harmony default export */ __webpack_exports__["default"] = (Note);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(Note));
 
 /***/ }),
 
@@ -3838,7 +3838,7 @@ const RefNoFilter = () => {
     onChange: event => dispatch(setSearchingId(event.target.value))
   }));
 };
-/* harmony default export */ __webpack_exports__["default"] = (RefNoFilter);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(RefNoFilter));
 
 /***/ }),
 
@@ -3871,7 +3871,7 @@ const StickyIcon = () => {
     title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("ExportToExcel")
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FilterUserGuide_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null));
 };
-/* harmony default export */ __webpack_exports__["default"] = (StickyIcon);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(StickyIcon));
 
 /***/ }),
 
@@ -3920,7 +3920,7 @@ const UserNameFilter = () => {
     }
   }));
 };
-/* harmony default export */ __webpack_exports__["default"] = (UserNameFilter);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(UserNameFilter));
 
 /***/ }),
 
@@ -4201,7 +4201,7 @@ const MobileFormFilter = () => {
     contentClass: "col-12"
   })));
 };
-/* harmony default export */ __webpack_exports__["default"] = (MobileFormFilter);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(MobileFormFilter));
 
 /***/ }),
 
@@ -4295,7 +4295,7 @@ const MobileGrid = () => {
     body: body
   });
 };
-/* harmony default export */ __webpack_exports__["default"] = (MobileGrid);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(MobileGrid));
 
 /***/ }),
 

@@ -4560,7 +4560,7 @@ const defaultProps = {
 };
 BaseMobileDataGrid.propTypes = propTypes;
 BaseMobileDataGrid.defaultProps = defaultProps;
-/* harmony default export */ __webpack_exports__["default"] = (BaseMobileDataGrid);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(BaseMobileDataGrid));
 
 /***/ }),
 
@@ -4608,7 +4608,7 @@ const propTypes = {
   item: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object
 };
 MobileBetlistContent.propTypes = propTypes;
-/* harmony default export */ __webpack_exports__["default"] = (MobileBetlistContent);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(MobileBetlistContent));
 
 /***/ }),
 
@@ -4647,7 +4647,7 @@ const propTypes = {
   item: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object
 };
 MobileWinLossCellContent.propTypes = propTypes;
-/* harmony default export */ __webpack_exports__["default"] = (MobileWinLossCellContent);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(MobileWinLossCellContent));
 
 /***/ }),
 
@@ -4731,7 +4731,7 @@ const PageLayout = props => {
     url: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_7__["default"].resolveClientUrl("ExchangeVoided")
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, children))));
 };
-/* harmony default export */ __webpack_exports__["default"] = (PageLayout);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(PageLayout));
 
 /***/ }),
 
@@ -4988,7 +4988,7 @@ const AppContainer = () => {
     selectedTabIndex: "0"
   }, layout);
 };
-/* harmony default export */ __webpack_exports__["default"] = (AppContainer);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(AppContainer));
 
 /***/ }),
 
@@ -5033,7 +5033,7 @@ const DataGrid = props => {
     sortableColumns: SortableColumns
   });
 };
-/* harmony default export */ __webpack_exports__["default"] = (DataGrid);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(DataGrid));
 
 /***/ }),
 
@@ -5117,7 +5117,7 @@ const FormFilter = () => {
     onClick: submit
   }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("Submit")))))));
 };
-/* harmony default export */ __webpack_exports__["default"] = (FormFilter);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(FormFilter));
 
 /***/ }),
 
@@ -5162,7 +5162,7 @@ const BaseCurrencyFilter = () => {
     onChange: item => dispatch(setSelectedBaseCurrency(item.value))
   }));
 };
-/* harmony default export */ __webpack_exports__["default"] = (BaseCurrencyFilter);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(BaseCurrencyFilter));
 
 /***/ }),
 
@@ -5202,7 +5202,7 @@ const ConvertAllCheckBoxFilter = () => {
     label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("ConvertAllFiguresToBaseCurrency")
   }));
 };
-/* harmony default export */ __webpack_exports__["default"] = (ConvertAllCheckBoxFilter);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(ConvertAllCheckBoxFilter));
 
 /***/ }),
 
@@ -5273,7 +5273,7 @@ const defaultProps = {
 };
 DateRangeFilter.propTypes = propTypes;
 DateRangeFilter.defaultProps = defaultProps;
-/* harmony default export */ __webpack_exports__["default"] = (DateRangeFilter);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(DateRangeFilter));
 
 /***/ }),
 
@@ -5324,7 +5324,7 @@ const LiveStatusFilter = () => {
     className: "label-text"
   }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource("Live")), _renderLiveStatusSelectList());
 };
-/* harmony default export */ __webpack_exports__["default"] = (LiveStatusFilter);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(LiveStatusFilter));
 
 /***/ }),
 
@@ -5377,7 +5377,7 @@ const ProductFilter = () => {
     className: "label-text"
   }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource("Platform")), _renderPlatformSelectList());
 };
-/* harmony default export */ __webpack_exports__["default"] = (ProductFilter);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(ProductFilter));
 
 /***/ }),
 
@@ -5432,7 +5432,7 @@ const PlatformFiler = () => {
     className: "label-text"
   }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource("Product")), _renderProductSelectList());
 };
-/* harmony default export */ __webpack_exports__["default"] = (PlatformFiler);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(PlatformFiler));
 
 /***/ }),
 
@@ -5483,7 +5483,7 @@ const StatusFilter = () => {
     className: "label-text"
   }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource("Status")), _renderStatusSelectList());
 };
-/* harmony default export */ __webpack_exports__["default"] = (StatusFilter);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(StatusFilter));
 
 /***/ }),
 
@@ -5537,7 +5537,7 @@ const StickyIcon = () => {
     title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("ExportToExcel")
   }), _renderUserGuide());
 };
-/* harmony default export */ __webpack_exports__["default"] = (StickyIcon);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(StickyIcon));
 
 /***/ }),
 
@@ -5581,7 +5581,7 @@ const UserNameFilter = () => {
     }
   }));
 };
-/* harmony default export */ __webpack_exports__["default"] = (UserNameFilter);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(UserNameFilter));
 
 /***/ }),
 
@@ -5876,7 +5876,7 @@ const MobileFormFilter = () => {
     className: "caret-block"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_StickyIcon__WEBPACK_IMPORTED_MODULE_12__["default"], null)))));
 };
-/* harmony default export */ __webpack_exports__["default"] = (MobileFormFilter);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(MobileFormFilter));
 
 /***/ }),
 
@@ -5998,7 +5998,7 @@ const MobileGrid = () => {
     sortableColumns: SortableColumns
   });
 };
-/* harmony default export */ __webpack_exports__["default"] = (MobileGrid);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(MobileGrid));
 
 /***/ }),
 
