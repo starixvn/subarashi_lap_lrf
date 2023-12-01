@@ -6,19 +6,16 @@
 
 namespace Fanex.Athena.Controllers.BetList
 {
-    using System.Threading.Tasks;
-
     #region Using
 
+    using System.Threading.Tasks;
     using System.Web.Mvc;
-
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Model.Core.Helper;
     using Model.BetList.MetaModel;
     using Model.Core.DataDomain;
-
     using Resources;
-
     using Web.ActionFilter;
 
     #endregion Using
@@ -42,7 +39,7 @@ namespace Fanex.Athena.Controllers.BetList
         {
             var curencyId = metaModel.IsConvert ? metaModel.BaseCurrencyId : metaModel.CurrencyId;
             var viewinCurrency = GetViewInCurrency(curencyId, metaModel.CurrencyName);
-            var platformText = PlatformType.GetPlatformName(metaModel.PlatformType);
+            var platformText = PlatformHelper.GetPlatformName(metaModel.PlatformType);
 
             metaModel.Title = ViewResources.Customer + " " + ViewResources.BetList
                 + string.Format(

@@ -91,5 +91,7 @@
         public string SubsidiaryList { get; set; }
 
         public bool SubsidiarySearch { get; set; }
+
+        public int SpecialPlatform { get; set; }
     }
 }

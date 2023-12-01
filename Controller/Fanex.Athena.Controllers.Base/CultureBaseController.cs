@@ -1,14 +1,12 @@
 ﻿namespace Fanex.Athena.Controllers
 {
+    using System.Web.Mvc;
     using Extension.Utility;
-
     using Fanex.Athena.Controllers.Base;
     using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
-
     using Service.Core.Users.Interfaces;
-    using System.Web.Mvc;
 
     [XFrameOption]
     public class CultureBaseController : Controller
@@ -20,8 +18,7 @@
         public ILicenseeSettingService LicenseeSettingServiceInstance { get; set; }
         public IProductService ProductServiceInstance { get; set; }
 
-        public bool IsFakeLicensee(string licenseeName)
-            => LicenseeSettingServiceInstance.IsFakeLicensee(licenseeName);
+        public bool IsFakeLicensee(string licenseeName) => LicenseeSettingServiceInstance.IsFakeLicensee(licenseeName);
 
         protected override void Initialize(System.Web.Routing.RequestContext requestContext)
         {

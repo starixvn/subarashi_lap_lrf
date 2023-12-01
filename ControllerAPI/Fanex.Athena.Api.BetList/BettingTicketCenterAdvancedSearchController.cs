@@ -63,6 +63,7 @@
             }
 
             metaModel.HasPlayerCom = SessionService.LicenseeSession.IsAllowedCustomerComm;
+            metaModel.SpecialPlatform = licenseeSession.SpecialPlatform;
             var timeOutInSecond = int.Parse(_appSettings.GetValue("BetListApiOutInSecond"));
             return await _betListApiClient.PostAsync("/BettingTicketCenterAdvancedSearch/GetData",
                 metaModel, SessionService.UserSession.Language, timeOutInSecond).ConfigureAwait(false);

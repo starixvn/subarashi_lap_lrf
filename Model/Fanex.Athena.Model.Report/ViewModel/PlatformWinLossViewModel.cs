@@ -6,6 +6,7 @@
 
 namespace Fanex.Athena.Model.Report.ViewModel
 {
+    using System.Collections.Generic;
     using MetaModel;
     using Model.Core.ViewModel;
 
@@ -14,5 +15,7 @@ namespace Fanex.Athena.Model.Report.ViewModel
         public PlatformWinLossMetaModel Param { get; set; }
 
         public int Colspan { get; set; }
+
+        public IDictionary<int, string> PlatformList { get; set; }
     }
 }

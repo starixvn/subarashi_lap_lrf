@@ -11,7 +11,6 @@
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
-    using Fanex.Athena.Model.Customer.DTO;
     using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.Customer.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -89,6 +88,7 @@
         public async Task<HttpResponseMessage> Index(LastBetsMonitoringMetaModel metaModel)
         {
             var userSession = SessionService.UserSession;
+            var licenseeSession = SessionService.LicenseeSession;
             var riskLevels = await _customerClassService.GetAllRiskLevel();
             if (string.IsNullOrWhiteSpace(metaModel.Currency))
             {
@@ -102,9 +102,9 @@
 
             metaModel.SportTypeList = BuildSportTypeList(metaModel.SportIds);
             metaModel.RiskLevels = riskLevels.ToList();
+            metaModel.SpecialPlatform = licenseeSession.SpecialPlatform;
 
-            return await _betListApiClient.PostAsync("/LastBetMonitoringBetList/GetData",
-                metaModel, userSession.Language).ConfigureAwait(false);
+            return await _betListApiClient.PostAsync("/LastBetMonitoringBetList/GetData", metaModel, userSession.Language).ConfigureAwait(false);
         }
 
         private string BuildSportTypeList(string sportIds)

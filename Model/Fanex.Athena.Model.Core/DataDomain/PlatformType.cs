@@ -1,9 +1,5 @@
 ﻿namespace Fanex.Athena.Model.Core.DataDomain
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using Fanex.Athena.Resources;
-
     public static class PlatformType
     {
         public const int All = 0;
@@ -46,48 +42,11 @@
 
         public const int BetfromOthers = 88;
 
-        private static readonly IDictionary<int, string> MapPlatformKeys = new Dictionary<int, string>
-        {
-            { All, nameof(All) },
-            { DesktopNewAsia, nameof(DesktopNewAsia) },
-            { DesktopChina, nameof(DesktopChina) },
-            { DesktopOthers, nameof(DesktopOthers) },
-            { MobileStandard, nameof(MobileStandard) },
-            { MobileEuro, nameof(MobileEuro) },
-            { MobileGalaxy, nameof(MobileGalaxy) },
-            { MobileCompact, nameof(MobileCompact) },
-            { MobileOthers, nameof(MobileOthers) },
-            { ESportsDesktop, nameof(ESportsDesktop) },
-            { ESportsMobile, nameof(ESportsMobile) },
-            { ESportsApp, nameof(ESportsApp) },
-            { MobileApp, nameof(MobileApp) },
-            { NativeApp, nameof(NativeApp) },
-            { Tablet, nameof(Tablet) },
-            { DeepLink, nameof(DeepLink) },
-            { WAP, nameof(WAP) },
-            { ChatRoom, nameof(ChatRoom) },
-            { DesktopGalaxy, nameof(DesktopGalaxy) },
-            { BetfromOthers, nameof(BetfromOthers) }
-        };
+        // Jollysports
+        public const int Desktop = 91;
 
-        public static string GetPlatformKey(int type)
-        {
-            return MapPlatformKeys.ContainsKey(type) ? MapPlatformKeys[type] : "All";
-        }
+        public const int Mobile = 92;
 
-        public static string GetPlatformName(int type)
-        {
-            return MapPlatformKeys.ContainsKey(type) ? ViewResources.ResourceManager.GetString(MapPlatformKeys[type]) : ViewResources.All;
-        }
-
-        public static bool IsValidPlatform(string type)
-        {
-            if (!string.IsNullOrEmpty(type))
-            {
-                return type == "All" || type.Split(',').Where(x => (int.Parse(x) >= All && int.Parse(x) <= WAP) || int.Parse(x) == BetfromOthers).Select(x => x).Any();
-            }
-
-            return false;
-        }
+        public const int Others = 99;
     }
 }

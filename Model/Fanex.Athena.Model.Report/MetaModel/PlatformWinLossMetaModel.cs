@@ -3,6 +3,7 @@
     using System;
     using Fanex.Athena.Model.Core.MetaModel;
     using DataDomain = Core.DataDomain;
+    using Helper = Core.Helper;
 
     public class PlatformWinLossMetaModel : BaseReportMetaModel, IMetaModelSubsidiarySearch
     {
@@ -52,7 +53,7 @@
         {
             get
             {
-                return base.IsValid && DataDomain.PlatformType.IsValidPlatform(PlatformType);
+                return base.IsValid && Helper.PlatformHelper.IsValidPlatform(PlatformType);
             }
         }
 

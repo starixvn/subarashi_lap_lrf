@@ -32,6 +32,7 @@
         public async Task<dynamic> GetBySingleCustomer(SingleCustomersBetListMetaModel metaModel)
         {
             metaModel.HasPlayerCom = SessionService.LicenseeSession.IsAllowedCustomerComm;
+            metaModel.SpecialPlatform = LicenseeSession.SpecialPlatform;
             return await _betListApiClient.PostAsync("/BettingTicketCenter/GetBySingleCustomer",
                 metaModel,
                 SessionService.UserSession.Language
@@ -45,6 +46,7 @@
         public async Task<dynamic> GetByRefno(RefNoBetListMetaModel metaModel)
         {
             metaModel.HasPlayerCom = SessionService.LicenseeSession.IsAllowedCustomerComm;
+            metaModel.SpecialPlatform = LicenseeSession.SpecialPlatform;
             return await _betListApiClient.PostAsync("/BettingTicketCenter/GetByRefno",
                 metaModel,
                 SessionService.UserSession.Language
@@ -58,6 +60,7 @@
         public async Task<dynamic> GetByRunning(BaseBettingTicketMetaModel metaModel)
         {
             metaModel.HasPlayerCom = SessionService.LicenseeSession.IsAllowedCustomerComm;
+            metaModel.SpecialPlatform = LicenseeSession.SpecialPlatform;
             return await _betListApiClient.PostAsync("/BettingTicketCenter/GetByRunning",
                 metaModel,
                 SessionService.UserSession.Language

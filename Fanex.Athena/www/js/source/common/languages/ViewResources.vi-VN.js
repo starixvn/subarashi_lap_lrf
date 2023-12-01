@@ -1,4 +1,4 @@
-﻿// Generated at: 11/6/2023 3:22:05 PM
+﻿// Generated at: 11/28/2023 3:25:36 PM
 window._language_vi_VN = {
 AA:"Đội Khách/Đội Khách",
 AbnormalBet:"Cược bất thường",
@@ -277,6 +277,7 @@ DeleteSuccess:"Xóa thành công!",
 Department:"Bộ phận",
 Deposit:"Nạp tiền",
 Deposited:"Đã nạp tiền",
+Desktop:"Máy tính",
 DesktopChina:"Phiên bản máy tính Trung Quốc",
 DesktopGalaxy:"Desktop Galaxy",
 DesktopNewAsia:"Nền tảng trên máy tính phiên bản Châu Á mới",
@@ -570,6 +571,7 @@ MinimumOdds:"Tỷ lệ cược tối thiểu",
 MixLiveAndNoneLive:"Kết Hợp Trực Tiếp &amp; Không Trực Tiếp",
 MixSportsParlay:"Cược xiên Thể Thao",
 Mo:"T2",
+Mobile:"Di động",
 MobileApp:"Ứng dụng di động",
 MobileCompact:"Di động nhỏ gọn",
 MobileEuro:"Mobile Euro",
