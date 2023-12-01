@@ -18,6 +18,8 @@ function generateConfig(environment) {
             [`${jsPath}/lib/langHelper`]: pathConfig.scriptPaths.languageResource,
             [`${jsPath}/lib/lang-zh-CN`]: pathConfig.scriptPaths.langCN,
             [`${jsPath}/lib/lang-vi-VN`]: pathConfig.scriptPaths.langVN,
+            [`${jsPath}/lib/lang-th-TH`]: pathConfig.scriptPaths.langTH,
+            [`${jsPath}/lib/lang-id-ID`]: pathConfig.scriptPaths.langID,
 
             [`${jsPath}/subsidiaryperformance/subsidiaryperformance`]: pathConfig.scriptPaths.subsidiaryperformance,
             [`${jsPath}/notification/notification`]: pathConfig.scriptPaths.notification,

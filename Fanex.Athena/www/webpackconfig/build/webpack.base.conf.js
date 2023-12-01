@@ -24,6 +24,8 @@ function generateConfig(environment) {
             [`${jsPath}/language`]: pathConfig.scriptPaths.language,
             [`${jsPath}/language-zh-CN`]: pathConfig.scriptPaths.languageCN,
             [`${jsPath}/language-vi-VN`]: pathConfig.scriptPaths.languageVN,
+            [`${jsPath}/language-th-TH`]: pathConfig.scriptPaths.languageTH,
+            [`${jsPath}/language-id-ID`]: pathConfig.scriptPaths.languageID,
             [`${jsPath}/pages/home/home`]: pathConfig.scriptPaths.home,
             [`${jsPath}/pages/signin/signin`]: pathConfig.scriptPaths.signin,
             [`${jsPath}/pages/reports/livereport`]: [pathConfig.scriptPaths.livereport],

@@ -1,0 +1,97 @@
+﻿<div class="rule">
+    <h4>
+        Informasi Umum
+    </h4>
+    <ul>
+        <li>Laporan ini hanya mendukung untuk Sportsbook.</li>
+        <li>
+            Tujuan laporan ini adalah memungkinkan Lisensi untuk memantau 10, 20, atau 30 tiket terakhir yang sedang berjalan dari pelanggan mereka.
+        </li>
+        <li>
+            Laporan akan diperbarui secara otomatis setiap 3 detik. Untuk menghentikan pembaruan otomatis, klik tombol Bekukan.
+        </li>
+    </ul>
+</div>
+<div class="line">
+</div>
+<div class="rule">
+    <h4>
+        Filter Pencarian
+    </h4>
+    <ul>
+        <li>
+            <b>Olahraga:</b> Semua olahraga yang ditawarkan oleh Lisensi yang dipilih akan ditampilkan dalam daftar dropdown.
+            <ul>
+                <li>
+                    Daftar Liga dan Pertandingan akan sesuai dengan "Jenis Olahraga" yang dipilih.
+                </li>
+                <li>Jika Anda memilih lebih dari 1 liga, filter Liga akan dinonaktifkan.</li>
+                <li>Jika Anda memilih lebih dari 1 olahraga, filter Pertandingan akan dinonaktifkan.</li>
+            </ul>
+        <li><b>Tampilkan/Sembunyikan:</b> memilih kolom-kolom yang ditampilkan / disembunyikan dalam laporan.</li>
+        <li>
+            <b>Status Langsung:</b> status tiket yang akan ditampilkan. Perhatikan bahwa status Campuran Langsung & Tidak Langsung digunakan untuk Parlay Olahraga.
+        </li>
+        <li>
+            <b>Jenis Odds:</b> format di mana nilai odds akan ditampilkan.
+            <ul>
+                <li><b>Semua:</b> mempertahankan Odds asli dari semua tiket.</li>
+                <li>
+                    <b>Berbasis DEC/MY:</b> hanya mengonversi odds yang datang dengan jenis taruhan Handikap, Ganjil/Genap, Over/Under, dan Money Line menjadi Decimal / MY. Odds yang datang dengan jenis taruhan lainnya ditampilkan sebagai odds asli (odds tanpa nama).
+                </li>
+            </ul>
+        </li>
+        <li>
+            <b>Tingkat Khusus:</b> tingkat pelanggan (pemain) yang akan dipantau (1 adalah terendah dan 10 adalah tertinggi). Daftar taruhan akan menampilkan teks ExternalID dan SystemID mengikuti warna pelanggan khusus (pemain) yang diatur dalam fungsi Administrasi Pemain.
+        </li>
+        <li>
+            <b>Mata Uang:</b> memilih mata uang yang ditawarkan dari tiket taruhan yang akan ditampilkan dalam laporan.
+        </li>
+        <li><b>Mata Uang Dasar:</b> Mengonversi semua data ke mata uang dasar hanya untuk referensi.</li>
+        <li>
+            <b>Rentang Taruhan:</b> menyaring tiket-tiket yang memiliki taruhan yang ditempatkan dalam rentang yang dipilih.
+            <ul>
+                <li>
+                    Jika Kosong, berarti Dari = 0 (menampilkan semua tiket yang memiliki Taruhan ≤ Ke).
+                </li>
+                <li>
+                    Jika Kosong, berarti Ke = tidak terbatas (menampilkan semua tiket yang memiliki Taruhan ≥ Dari)
+                </li>
+                <li>
+                    Perhatikan bahwa: Panjang maksimum angka adalah 9 digit secara default. Jika baik Dari maupun Ke kosong, berarti "tanpa batasan taruhan".
+                </li>
+            </ul>
+        </li>
+        <li>
+            <b>Zone Waktu:</b> memilih Zona Waktu di mana waktu transaksi dari semua tiket akan dikonversi.
+        </li>
+        <li>
+            <b>Platform:</b> platform yang digunakan anggota untuk melakukan taruhan, pilih platform spesifik yang ingin Anda pantau.
+        </li>
+        <li>
+            <b>Tingkat Risiko:</b> memilih jenis Tingkat Risiko yang akan diambil data-nya.
+        </li>
+    </ul>
+</div>
+<div class="line">
+</div>
+<div class="rule">
+    <h4>
+        Panduan Laporan
+    </h4>
+    <ul>
+        <li><b>Platform:</b> platform yang Digunakan oleh Pelanggan untuk melakukan taruhan.</li>
+        <li><b>ID Eksternal:</b> Nama pengguna yang terdaftar oleh pemilik tiket.</li>
+        <li><b>ID Sistem:</b> ID numerik berurutan yang dihasilkan dari sistem untuk setiap akun.</li>
+        <li><b>Tingkat Risiko:</b> memilih jenis Tingkat Risiko yang akan diambil data-nya.</li>
+        <li>
+            <b>Waktu Transaksi:</b> nomor referensi unik yang diberikan untuk setiap taruhan dalam sistem, masing-masing dilengkapi dengan timestamp waktu dan tanggal taruhan diterima.
+        </li>
+        <li>
+            <b>Pilihan:</b> menampilkan informasi detail tiket Taruhan seperti jenis taruhan, tim yang dipilih, nama pertandingan, dan liga pertandingan.
+        </li>
+        <li><b>Odds:</b> menampilkan nilai odds tetap dari setiap tiket.</li>
+        <li><b>Taruhan:</b> jumlah uang yang dipertaruhkan oleh Pelanggan pada setiap tiket.</li>
+        <li><b>Status:</b> menampilkan status tiket taruhan.</li>
+    </ul>
+</div>

@@ -1,0 +1,88 @@
+﻿<div class="rule">
+    <h4>
+        Informasi Umum
+    </h4>
+    <ul>
+        <li>Laporan ini mendukung data terkini. Anda dapat menyaring data hingga 1 bulan per permintaan.</li>
+        <li>Data mungkin mengalami keterlambatan sekitar 20 menit untuk tiket yang telah diselesaikan dan 65 menit untuk tiket yang telah diselesaikan kembali.</li>
+        <li>Angka negatif berwarna merah menunjukkan kerugian bagi Penerima Lisensi, sedangkan angka positif berwarna hitam menunjukkan kemenangan.</li>
+        <li>Layanan Pertukaran OANDA akan menggunakan kurs pertukaran pada tanggal akhir setiap bulan yang dipilih saat mengkonversi angka-angka.</li>
+    </ul>
+</div>
+<div class="line">
+</div>
+<div class="rule">
+    <h4>
+        Filter Pencarian
+    </h4>
+    <ul>
+        <li>
+            <b>Mata Uang:</b> pilih mata uang dimana data akan diambil.
+            <ul>
+                <li><b>Semua:</b> semua mata uang yang didukung akan terdaftar.</li>
+            </ul>
+        </li>
+        <li><b>Mata Uang Dasar:</b> Mengonversi semua data ke mata uang dasar hanya untuk referensi.</li>
+        <li>
+            <b>Username:</b> Masukkan ID eksternal atau ID sistem dari akun yang dicari.
+            <ul>
+                <li>Perhatikan bahwa, jika Anda tidak menentukan akun Pemain mana pun, maka Laporan akan mencantumkan data semua Pemain dalam rentang tanggal yang dipilih.</li>
+            </ul>
+        </li>
+        <li><b>Kecualikan Data Uji:</b> Mengkecualikan semua tiket dari akun uji.</li>
+        <li><b>Lihat Hanya Tiket yang Ditempatkan Kembali:</b> Dapatkan tiket yang ditempatkan kembali hanya dalam rentang tanggal yang dipilih.</li>
+        <li><b>Lihat dalam Tanggal Penyelesaian dan Penempatan Ulang:</b> Mendapatkan data berdasarkan Tanggal Penyelesaian & Tanggal Penempatan Ulang mengikuti rentang tanggal yang dipilih.</li>
+        <li><b>Lihat dalam Tanggal Penyelesaian:</b> Dapatkan data tiket yang diselesaikan pertama kali berdasarkan rentang tanggal yang dipilih.</li>
+    </ul>
+</div>
+<div class="line"></div>
+<div class="rule">
+    <h4>
+        Panduan Laporan
+    </h4>
+    <ul>
+        <li><b>Tanggal:</b> Dapat berupa harian atau bulanan sesuai dengan pilihan Anda dan formatnya adalah (mm/dd/yyyy).</li>
+        <li><b>Mata uang:</b> akan ditampilkan berdasarkan pilihan Anda.</li>
+        <li><b>Omset:</b> Total omset pemain dalam filter yang dipilih.</li>
+        <li>
+            <b>Omset Bersih:</b> Jumlah omset setelah dikurangi tiket seri.
+            <ul>
+                <li>Omset Bersih = Omset - total omset dari tiket seri.</li>
+            </ul>
+        </li>
+        <li><b>Total Transaksi:</b> Total tiket taruhan dalam filter yang dipilih.</li>
+        <li>
+            <b>Pemain:</b>
+            <ul>
+                <li><b>Pemain W/L:</b> Jumlah yang dimenangkan atau hilang oleh pemain berdasarkan taruhan mereka.</li>
+                <li><b>Komisi Pemain:</b> jumlah komisi yang telah dibayar oleh pemain kepada Anda berdasarkan tiket yang dimenangkan.</li>
+                <li>
+                    <b>Total:</b> Jumlah total kemenangan/kerugian termasuk komisi.
+                    <br />
+                    Total = Win/Loss + Komisi
+                </li>
+            </ul>
+        </li>
+        <li>
+            <b>Lisensi:</b>
+            <ul>
+                <li>
+                    <b>Lisensi W/L:</b> Jumlah kemenangan kerugian yang telah diselesaikan Lisensi dengan pemain.
+                    <br />
+                    Lisensi W/L = - (Pemain W/L)
+                </li>
+                <li>
+                    <b>Jumlah Karena:</b> Jumlah penyelesaian yang telah Anda terima atau bayar ke Perusahaan.
+                    <ul>
+                        <li>Perhatikan bahwa untuk Jumlah yang Harus Dibayar, angka negatif menunjukkan jumlah yang diterima dari Perusahaan dan angka positif menunjukkan jumlah yang dibayar ke Perusahaan.</li>
+                    </ul>
+                </li>
+                <li>
+                    <b>Total:</b> Jumlah kemenangan/kerugian bersih setelah berbagi dengan Perusahaan.
+                    <br />
+                    Total = Lisensi WL- Komisi Pemain- Jumlah yang Harus Dibayar Ke
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>

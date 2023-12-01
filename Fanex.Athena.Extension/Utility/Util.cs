@@ -20,7 +20,9 @@ namespace Fanex.Athena.Extension.Utility
                     {
                         { "en-US", "English" },
                         { "zh-CN", "简体中文" },
-                        { "vi-VN", "Việt Nam" }
+                        { "vi-VN", "Việt Nam" },
+                        { "id-ID", "Bahasa Indonesia" },
+                        { "th-TH", "แบบไทย" },
                     };
             }
         }
@@ -33,9 +35,9 @@ namespace Fanex.Athena.Extension.Utility
                 {
                     { "en-US", "en" },
                     { "zh-CN", "cs" },
-                    //{ "ja-JP", "jp" },
-                    //{ "th-TH", "th" },
-                    { "vi-VN", "vn" }
+                    { "vi-VN", "vn" },
+                    { "id-ID", "id" },
+                    { "th-TH", "th" },
                 };
             }
         }
@@ -48,9 +50,9 @@ namespace Fanex.Athena.Extension.Utility
                 {
                     { "en", "en-US" },
                     { "cs", "zh-CN" },
-                    //{ "jp", "ja-JP" },
-                    //{ "th", "th-TH" },
-                    { "vn", "vi-VN" }
+                    { "vn", "vi-VN" },
+                    { "id", "id-ID" },
+                    { "th", "th-TH" },
                 };
             }
         }
