@@ -186,9 +186,14 @@ namespace Fanex.Athena.Controllers.Report
             {
                 promotionTypeList.AddRange(new List<CheckedItem>
                 {
-                    new CheckedItem { ID = ExtraPayoutMapType.SabaLuckySpin, Name = _cacheRefAdapter.GetBettype((int)BetType.SabaLuckySpin), Checked = true },
-                    new CheckedItem { ID = ExtraPayoutMapType.SabaLoyaltyPointsExchange, Name = _cacheRefAdapter.GetBettype((int)BetType.SabaLoyaltyPointsExchange), Checked = true },
-                    new CheckedItem { ID = ExtraPayoutMapType.SabaRedEnvelope, Name = _cacheRefAdapter.GetBettype((int)BetType.SabaRedEnvelope), Checked = true }
+                    new CheckedItem { ID = ExtraPayoutMapType.SabaLuckySpin,
+                        Name = $"{ViewResources.SBPromotion} - {_cacheRefAdapter.GetBettype((int)BetType.SabaLuckySpin)}", Checked = true },
+                    new CheckedItem { ID = ExtraPayoutMapType.SabaLoyaltyPointsExchange,
+                        Name = $"{ViewResources.SBPromotion} - {_cacheRefAdapter.GetBettype((int)BetType.SabaLoyaltyPointsExchange)}", Checked = true },
+                    new CheckedItem { ID = ExtraPayoutMapType.SabaRedEnvelope,
+                        Name = $"{ViewResources.SBPromotion} - {_cacheRefAdapter.GetBettype((int) BetType.SabaRedEnvelope)}", Checked = true },
+                    new CheckedItem { ID = ExtraPayoutMapType.SabaCasinoRoyaleTournamentPrize,
+                        Name = $"{ViewResources.CasinoPromotion} - {_cacheRefAdapter.GetBettype((int) BetType.SabaCasinoRoyaleTournamentPrize)}", Checked = true }
                 });
             }
         }

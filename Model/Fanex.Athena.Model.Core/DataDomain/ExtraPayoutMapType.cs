@@ -49,5 +49,7 @@ namespace Fanex.Athena.Model.Core.DataDomain
         public const int TIPStreamerTips = 7401;
 
         public const int MGRNGPromotion = 7301;
+
+        public const int SabaCasinoRoyaleTournamentPrize = 3706;
     }
 }

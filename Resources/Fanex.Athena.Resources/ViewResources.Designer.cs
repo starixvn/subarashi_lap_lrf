@@ -1438,6 +1438,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Casino Promotion.
+        /// </summary>
+        public static string CasinoPromotion {
+            get {
+                return ResourceManager.GetString("CasinoPromotion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Casino Transfer.
         /// </summary>
         public static string CasinoTransfer {
@@ -7455,6 +7464,15 @@ namespace Fanex.Athena.Resources {
         public static string SBComm {
             get {
                 return ResourceManager.GetString("SBComm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sportsbook Promotion.
+        /// </summary>
+        public static string SBPromotion {
+            get {
+                return ResourceManager.GetString("SBPromotion", resourceCulture);
             }
         }
         

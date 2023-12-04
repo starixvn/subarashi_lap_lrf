@@ -3232,4 +3232,10 @@
   <data name="Mobile" xml:space="preserve">
     <value>手机</value>
   </data>
+  <data name="SBPromotion" xml:space="preserve">
+    <value>体育促销活动</value>
+  </data>
+  <data name="CasinoPromotion" xml:space="preserve">
+    <value>真人娱乐促销活动</value>
+  </data>
 </root>
