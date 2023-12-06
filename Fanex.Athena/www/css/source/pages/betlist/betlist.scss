@@ -423,29 +423,18 @@
             text-align: center;
         }
     }
-    .header-content, .footer-content,  .page-wrapper-container{
-        display: block;
-        position: sticky;
-        position: -webkit-sticky;
-        z-index: 10;
-    }
-    .header-content{
-        top: 0px;
-        tr th:first-child{
-            border-left: 0px;
+
+    tr
+    {
+        &.row-active{
+            &.collapse-row, &.collapse-row:hover{
+                td:first-child{
+                    background: #F6DFA1;
+                }
+            }
         }
     }
-    .body-content{
-        overflow-x: initial;
-        overflow-y: initial;
-    }
 
-    .page-wrapper-container{       
-        bottom: 0px;
-    }
-    .table-container{
-        overflow-x: visible;
-    }
     &.betlist-container {
         .bettype, .match{
             text-align: left;
@@ -460,16 +449,7 @@
             background: #9EB4C3;
         }
     }
-    .row-active{
-        td{
-            background: #FCF4DF;
-        }
-        &.collapse-row{
-            td:first-child{
-                background: #F6DFA1;
-            }
-        }
-    }
+    
     .table > tbody{
         tr td{
            &.cell-collapse{
@@ -486,12 +466,9 @@
             word-break: break-all;
            }
         }
-        tr:hover td{
-            &:hover td{
-                background: initial;
-            }
-            &.row-active:hover td{
-                background: #FCF4DF;
+        tr.fixed-table-grant-total:hover{
+            td{
+                background-color: #b8c3c9;
             }
         }
     }  

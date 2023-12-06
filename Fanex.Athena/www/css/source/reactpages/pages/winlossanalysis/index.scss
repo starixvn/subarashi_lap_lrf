@@ -106,6 +106,9 @@
     &.flex-col{
         flex-direction: column;
     }
+    &.flex-center{
+        align-items: center;
+    }
  }
  .w100{
     width: 100%;
@@ -181,4 +184,59 @@
     .page-filter{
         margin: 0px;
     }
+ }
+
+ .mobile-table{
+    th.cell-dropdown{
+        overflow: visible;
+        .material-icons{
+            font-size: 12px;
+        }
+        .dropdown-menu{
+            z-index: 12;
+        }
+    }
+    .icon-collapse{
+        color: #217A4A;
+        font-size: 24px;
+    }
+
+    .cell-total{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .table > tbody {
+        tr.detail-row.row-active{
+            td{
+                background: #FCF4DF;
+            }    
+        }
+        .main-text{
+            color: #1C5FC3;
+        }
+        tr.fixed-table-grant-total:hover{
+            td{
+                background-color: #b8c3c9;
+            }
+        }
+    }
+    .report-title-text{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 100%; 
+    }
+
+    tbody{
+        line-height: 20px;
+        word-break: break-all;
+        .cell-collapse {
+            .icon-collapse{
+                word-wrap: normal;
+            }
+            padding: 0px 0px;
+        }
+    }
+
  }

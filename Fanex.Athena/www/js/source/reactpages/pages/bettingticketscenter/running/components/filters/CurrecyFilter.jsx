@@ -21,9 +21,9 @@ export const CurrecyFilter = () => {
             <MultipleSelect id="ddlCurrency"
                 language={LangHelper.currentLanguage}
                 dataSource={currencyList}
-                keyField={"Id"}
-                valueField={"Value"}
-                statusField={"Status"}
+                keyField={"id"}
+                valueField={"value"}
+                statusField={"status"}
                 onChange={(currentItem, selectedItemsKey) => _onChangeCurrency(selectedItemsKey)} />);
     }
 

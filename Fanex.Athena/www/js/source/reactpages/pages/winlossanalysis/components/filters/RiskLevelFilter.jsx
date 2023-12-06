@@ -1,0 +1,45 @@
+import React from 'react'
+import MultipleSelect from '@legion-lib/react-multiselect'
+import LangHelper from '@jsroot/lib/langHelper'
+import AppData from '@jsroot/lib/AppData'
+import PropTypes from 'prop-types';
+import { memo } from 'react';
+
+export const RiskLevelFilter = (props) => {
+    const { onChange, isValid } = props
+    
+    const _renderCustomerClassSelectList = () => {
+        const riskLevelList = AppData.riskLevelList;
+        return riskLevelList?.length && (
+            <MultipleSelect
+                id="ddlRiskLevel"
+                language={LangHelper.currentLanguage}
+                dataSource={riskLevelList}
+                keyField={"id"}
+                valueField={"value"}
+                statusField={"status"}
+                onChange={onChange}
+                isValid={isValid}
+                />);
+    }
+
+    return (
+    <div className="form-group">
+        <label className="label-text">{LangHelper.getSingleResource("RiskLevel")}</label>
+        {_renderCustomerClassSelectList()}
+    </div>)
+}
+
+const propTypes = {
+    onChange: PropTypes.func,
+    isValid: PropTypes.bool
+};
+
+const defaultProps = {
+    isValid: true
+}
+
+RiskLevelFilter.propTypes = propTypes;
+RiskLevelFilter.defaultProps = defaultProps;
+
+export default memo(RiskLevelFilter);

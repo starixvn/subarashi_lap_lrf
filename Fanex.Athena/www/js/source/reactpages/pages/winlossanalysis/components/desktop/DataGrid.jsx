@@ -1,29 +1,29 @@
-﻿import React, { useMemo, useState } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+﻿import React, { memo, useMemo } from 'react';
+import {  shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { ActionCreators } from '../../actions/index.js'
-// import { Breadcrumb } from '@9softstudio/react-breadcrumb'
-import { Table } from '@9softstudio/react-grid';
-import { renderHeader, renderDataSection, renderFooter } from '../../common/gridUtils.js';
+import { Table } from '@legion-lib/react-grid';
+import { renderHeader, renderDataSection, renderFooter } from '../../common/gridUtils';
 import NoDataTitle from '@jsroot/components/NoDataTitle';
 import ReportTitle from '@jsroot/components/ReportTitle';
 import { BreakdownByMode, DefaultPagingOption, GroupByMode, SortOrder } from '../../common/constants.js';
 import Service from '../../common/Service.js'; 
 import ExcelPopUp from '../ExcelPopUp.jsx';
 
-export const DataGrid = (props) => {
-    const { data, sumTotal, totalRow } = props.reportData;
-    if (!data) {
-        return null;
-    }
+export const DataGrid = () => {
+    const [requestParam, reportData, reportTitle, reloadReport, selectedProduct] 
+        = useSelector(state => [
+            state.requestParam, 
+            state.reportData, 
+            state.reportTitle, 
+            state.reloadReport, 
+            state.selectedProduct
+        ], shallowEqual)
 
-    if (!data.length) {
-        return <NoDataTitle />;
-    }
-
-    const {requestParam } = props;
+    const {setRequestParam, toggleLoader, getReportData} = ActionCreators;
+    const dispatch = useDispatch();
+    const { data, sumTotal, totalRow } = reportData;
     const renderOption = {
-        isShowBAField: Service.isContainBAProduct(props.selectedProduct),
+        isShowBAField: Service.isContainBAProduct(selectedProduct),
         isGroupByPlayerMode: requestParam.GroupMode == GroupByMode.Player,
         isBreakDownPlayerMode: requestParam.BreakdownMode == BreakdownByMode.Player
     }
@@ -32,7 +32,7 @@ export const DataGrid = (props) => {
     const body = useMemo(() => renderDataSection(data, renderOption), [data])
     const footer = useMemo(() => renderFooter(sumTotal, renderOption), [sumTotal])
 
-    var currenPagingOption = {
+    const currenPagingOption = {
         PageIndex: requestParam.PageIndex,
         PageSize: requestParam.PageSize,
         TotalItem: totalRow,
@@ -40,9 +40,9 @@ export const DataGrid = (props) => {
     };
 
     const submitRequest = (params) => {
-        props.setRequestParam(params);
-        props.toggleLoader(true);
-        props.getReportData(params);
+        dispatch(setRequestParam(params));
+        dispatch(toggleLoader(true));
+        dispatch(getReportData(params));
     }
 
     const onSort = (sortBy, sortOrder) => {
@@ -56,17 +56,23 @@ export const DataGrid = (props) => {
         submitRequest(params);
     }
 
-    const reportTitle = (           
+    const reportTitleContent = (           
         <>
-            <span className='flex-auto'>{props.reportTitle}</span>
+            <span className='flex-auto'>{reportTitle}</span>
             <ExcelPopUp />
         </>
     )
 
+    if (!data) {
+        return null;
+    }
 
+    if (!data.length) {
+        return <NoDataTitle />;
+    }
     return (
-        <div className='result-content'>
-        <ReportTitle content={reportTitle} />
+    <div className='result-content'>
+        <ReportTitle content={reportTitleContent} />
         <Table key={`table-winloss-ananlysis-${requestParam.SubmitTime}`} minWidth={650}
             autoWidth={true}
             autoHeight={true}
@@ -77,19 +83,11 @@ export const DataGrid = (props) => {
             onSort= {onSort}
             isPaging={true}
             pageOption={currenPagingOption}
-            shouldResetScrollPosition={props.reloadReport}
+            shouldResetScrollPosition={reloadReport}
             onPaging={onPaging} />
     </div>
 
     );
 }
 
-function mapDispatchToProps(dispatch) {
-    return bindActionCreators(ActionCreators, dispatch);
-}
-function mapStateToProps(state) {
-    const { requestParam, pagingOption, reportData, reportTitle, reloadReport, isGroupInOriginalCurrency, selectedProduct } = state;
-    return Object.assign({}, { requestParam, pagingOption, reportData, reportTitle, reloadReport, isGroupInOriginalCurrency, selectedProduct });
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(DataGrid);
+export default memo(DataGrid);

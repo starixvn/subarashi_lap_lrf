@@ -99,7 +99,7 @@ export const BaseMobileDataGrid = (props) => {
     const isShowPagingInfo  = pagerSize.width > 400;
 
     return (
-        <div className="mobile-betlist-container betlist-container result-content" ref={ref}>
+        <div className="mobile-betlist-container betlist-container result-content mobile-table" ref={ref}>
             <ReportTitle content={reportTitle} />
             <Table key='betlist-mobile-table'
                 autoWidth={true}

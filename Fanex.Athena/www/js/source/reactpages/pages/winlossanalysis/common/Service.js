@@ -2,13 +2,19 @@
 import Site from '@jsroot/lib/site'
 import AppData from '@jsroot/lib/AppData'
 import {ExportExcelMode, OneTwoBetLicenseeName} from './constants'
-import { BreakdownByMode, GroupByMode, GroupByList, ALL_SELECTED_TEXT } from './constants';
+import { BreakdownByMode, GroupByMode, GroupByList, ALL_SELECTED_TEXT, ProductCode } from './constants';
 import { ApiUrl } from '../common/constants.js';
 import DataService from '@jsroot/lib/DataService.js';
+import { saveAs } from 'file-saver';
 
 export default class Service {
     static isOneTwoBetLicensee = () => {
         return AppData.licenseeName.toLowerCase() === OneTwoBetLicenseeName.toLowerCase()
+    }
+
+    static isContainProductSportBookOrBa = (selectedItemsKey) =>{
+        var listSelectedProduct = selectedItemsKey.split(",");
+        return listSelectedProduct.indexOf(ProductCode.SportsBook) >=0 || listSelectedProduct.indexOf(ProductCode.BA) >=0
     }
 
     static getSelectedItemFromTreeListItem(items){

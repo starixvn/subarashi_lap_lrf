@@ -1,18 +1,30 @@
-﻿import React from 'react'
-import CollapsiblePanel from '@jsroot/components/collapsible-panel'
-import MainFilter from '../filter/MainFilter.jsx';
-import GroupByFilter from '../filter/GroupByFilter.jsx';
+﻿import React, {memo, useState} from 'react'
+import CollapsiblePanel from '@jsroot/components/collapsible-panel';
+import MobileMainFilter from './MobileMainFilter';
+import MobileGroupByFilter from './MobileGroupByFilter';
 
 
 export const MobileFormFilter = () => {
+    const [isCollapsed, setIsCollapsed] = useState(true)
+
+    const onCollapse = () => {
+        setIsCollapsed(true);
+    }
+    const onExpand = () => {
+        setIsCollapsed(false);
+    }
 
         return (
-            <CollapsiblePanel className="aggregate-filter">
-                <MainFilter/>
-                <GroupByFilter/>
+            <CollapsiblePanel className="mobile-mode aggregate-filter"
+                onCollapse={onCollapse}
+                onExpand={onExpand}
+                isInitCollapsed={true}
+                isCustomCollapse={true}>
+                <MobileMainFilter isCollapsed={isCollapsed}/>
+                <MobileGroupByFilter isCollapsed={isCollapsed}/>
             </CollapsiblePanel>
         )
     
 }
 
-export default MobileFormFilter;
+export default memo(MobileFormFilter);

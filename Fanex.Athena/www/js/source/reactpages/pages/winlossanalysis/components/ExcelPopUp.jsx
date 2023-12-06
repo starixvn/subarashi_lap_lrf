@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ActionCreators } from '../actions/index.js'
-import {  ExportExcelMode,} from '../common/constants.js';
+import {  ExportExcelMode,} from '../common/constants';
 import Service from '../common/Service'; 
 import Popup from '@jsroot/components/popup/Popup.jsx';
 import RadioGroup from '@jsroot/components/radio/RadioGroup.jsx';
 import LangHelper from '@jsroot/lib/langHelper';
 import {decode} from '@jsroot/lib/htmlHelper';
 import {v4 as uuidv4} from 'uuid';
+import { memo } from 'react';
 
-export const ExcelPopUp = (props) => {
+export const ExcelPopUp = () => {
     const [isShow, setIsShow] = useState(false);
+    const requestParam = useSelector(state => state.requestParam);
+    const {toggleLoader} = ActionCreators;
+    const dispatch = useDispatch();
     const [exportExcelMode, setExportExcelMode] = useState(ExportExcelMode.All);
-    const { requestParam } = props;
     const options = [
         { label: decode(LangHelper.getSingleResource("BothGroupByAndBreakdownLevelOption")), value: ExportExcelMode.All },
         { label: decode(LangHelper.getSingleResource("GroupByLevelOnlyOption")), value: ExportExcelMode.GroupByLevelOnly }
@@ -32,15 +34,15 @@ export const ExcelPopUp = (props) => {
         setExportExcelMode(value);
     }
 
-    const exportExcel = (event) => {
+    const _onExportExcelHandler = (event) => {
         event.preventDefault();
         const params = { ...requestParam, ExportExcelMode: exportExcelMode, PageSize: 0, PageIndex: 0};
-        props.toggleLoader(true);
+        dispatch(toggleLoader(true));
         Service.getFile(params)
             .then(() =>
             {
                 _onCloseHandler();
-                props.toggleLoader(false)
+                dispatch(toggleLoader(false));
             });
     }
 
@@ -58,7 +60,7 @@ export const ExcelPopUp = (props) => {
                         onChange={_onChangeExcelModeHandler}/>
                     
                     <div className='button-group right-align'>
-                        <button className='btn btn-submit' onClick={exportExcel}>{LangHelper.getSingleResource("OK")}</button>
+                        <button className='btn btn-submit' onClick={_onExportExcelHandler}>{LangHelper.getSingleResource("OK")}</button>
                         <button className='btn btn-cancel' onClick={_onCloseHandler}>{LangHelper.getSingleResource("Cancel")}</button>
                     </div>
                 </div>
@@ -67,12 +69,4 @@ export const ExcelPopUp = (props) => {
     );
 }
 
-function mapDispatchToProps(dispatch) {
-    return bindActionCreators(ActionCreators, dispatch);
-}
-function mapStateToProps(state) {
-    const { requestParam } = state;
-    return Object.assign({}, { requestParam });
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ExcelPopUp);
+export default memo(ExcelPopUp);

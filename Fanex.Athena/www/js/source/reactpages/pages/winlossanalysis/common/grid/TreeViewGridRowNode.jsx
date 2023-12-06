@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import { Row, Cell } from '@9softstudio/react-grid';
 import NumberFormat from '@jsroot/lib/numberFormat';
 import BreakdownRow from './BreakdownRow';
@@ -50,7 +50,7 @@ export const TreeViewGridRowNode = (props) => {
                 { isShowBAField && <Cell className="right-align">{NumberFormat.formatDecimal(amtDueToBA)}</Cell> }
                 <Cell className={`right-align ${margin  < 0 ? "negative" : ""}`}>{NumberFormat.formatDecimal(margin * 100)}%</Cell>
             </Row>
-            {isBreakdown && children && children.length > 0 && children.map(item => (
+            {isBreakdown && children?.length && children.length > 0 && children.map(item => (
                 <BreakdownRow key={`break-down-row-${item.groupBy}-${item.breakBy}`} 
                     data={item} 
                     option={option}/>
