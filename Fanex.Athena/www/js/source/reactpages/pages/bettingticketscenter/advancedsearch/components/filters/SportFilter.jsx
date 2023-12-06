@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import Select from 'react-select'
 import LangHelper from '@jsroot/lib/langHelper'
 import PropTypes from 'prop-types';
@@ -30,4 +30,4 @@ const propTypes = {
 
 SportFilter.propTypes = propTypes;
 
-export default SportFilter;
+export default memo(SportFilter);

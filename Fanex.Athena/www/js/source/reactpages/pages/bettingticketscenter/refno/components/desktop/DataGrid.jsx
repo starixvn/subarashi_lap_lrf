@@ -1,4 +1,4 @@
-﻿import React from 'react';
+﻿import React, { memo } from 'react';
 import { ApiUrl } from '../../../common/lib/constants';
 import BaseDataGrid from '../../../common/components/BaseDataGrid';
 import AppData from '@jsroot/lib/AppData';
@@ -37,4 +37,4 @@ const DataGrid = (props) => {
     );
 }
 
-export default DataGrid;
+export default memo(DataGrid);

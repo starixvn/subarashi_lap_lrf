@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import LangHelper from '@jsroot/lib/langHelper'
 import AppData from '@jsroot/lib/AppData'
 import { TreeViewOption } from '@jsroot/constants/report'
@@ -41,4 +41,4 @@ const propTypes = {
 
 SubsidiaryDropDownFilter.propTypes = propTypes;
 
-export default SubsidiaryDropDownFilter;
+export default memo(SubsidiaryDropDownFilter);

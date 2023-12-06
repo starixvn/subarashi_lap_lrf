@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { useDispatch } from 'react-redux'
 import { ActionCreators } from '../../actions/index.js'
 import LangHelper from '@jsroot/lib/langHelper'
@@ -37,4 +37,4 @@ const SubsidiaryDropDown = () => {
     </div>)
 }
 
-export default SubsidiaryDropDown;
+export default memo(SubsidiaryDropDown);

@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react'
+﻿import React, { memo, useState } from 'react'
 import CollapsiblePanel from '@jsroot/components/collapsible-panel'
 import LangHelper from '@jsroot/lib/langHelper'
 import BaseCurrencySelectList from '../filters/BaseCurrencySelectList'
@@ -62,4 +62,4 @@ export const MobileFormFilter = () => {
     )
 }
 
-export default MobileFormFilter;
+export default memo(MobileFormFilter);

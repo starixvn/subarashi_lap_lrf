@@ -1999,40 +1999,49 @@ const useBaseCurrencyForMultiSelectCurrency = initSelectedBaseCurrency => {
   const [originalBaseCurrencyList, originalCurrencyList] = [_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__["default"].baseCurrencyList, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__["default"].currencyList];
   const defaultBaseCurrencyRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(initSelectedBaseCurrency);
   const isFirstRender = Object(usehooks_ts__WEBPACK_IMPORTED_MODULE_3__["useIsFirstRender"])();
-  const baseCurrecyListRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(originalBaseCurrencyList);
-  const selectedCurrency = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(state => state.selectedCurrency);
-  const store = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useStore"])();
-  const selectedBaseCurrency = store.getState().selectedBaseCurrency; //use react store to get state value so that component will not trigger re-render when selectedBaseCurrency change
-
+  const [selectedCurrency, selectedBaseCurrency] = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(state => [state.selectedCurrency, state.selectedBaseCurrency], react_redux__WEBPACK_IMPORTED_MODULE_1__["shallowEqual"]);
+  const [currentBaseCurrencyList, setCurrentBaseCurrencyList] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(originalBaseCurrencyList);
+  const [currentBaseCurrency, setCurrenctBaseCurrency] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(selectedBaseCurrency);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    if (currentBaseCurrency != selectedBaseCurrency) {
+      setCurrenctBaseCurrency(selectedBaseCurrency);
+    }
+  }, [selectedBaseCurrency]);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    const defaultBaseCurrency = defaultBaseCurrencyRef.current;
+    let newBaseCurrency = '';
+    let newBaseCurrencyList = currentBaseCurrencyList;
+    const _isSingleSelectedCurrency = () => selectedCurrency && selectedCurrency.indexOf(',') < 0;
+    if (_isSingleSelectedCurrency()) {
+      const currencyName = originalCurrencyList.find(x => x.Id == selectedCurrency).Value;
+      if (!currentBaseCurrencyList.find(x => x.label === currencyName)) {
+        newBaseCurrency = '';
+        newBaseCurrencyList = originalBaseCurrencyList.slice(0);
+        newBaseCurrencyList.push({
+          value: newBaseCurrency,
+          label: currencyName
+        });
+      } else {
+        newBaseCurrency = currencyName;
+        newBaseCurrencyList = currentBaseCurrencyList;
+      }
+    } else {
+      newBaseCurrencyList = originalBaseCurrencyList;
+      newBaseCurrency = newBaseCurrencyList.find(x => x.label === selectedBaseCurrency) ? selectedBaseCurrency : defaultBaseCurrency;
+    }
+    if (newBaseCurrencyList != currentBaseCurrencyList) {
+      setCurrentBaseCurrencyList(newBaseCurrencyList);
+    }
+    if (newBaseCurrency != currentBaseCurrency) {
+      setCurrenctBaseCurrency(newBaseCurrency);
+    }
+  }, [selectedCurrency]);
   if (isFirstRender && !initSelectedBaseCurrency) {
     defaultBaseCurrencyRef.current = selectedBaseCurrency;
   }
-  const baseCurrencyList = baseCurrecyListRef.current;
-  const defaultBaseCurrency = defaultBaseCurrencyRef.current;
-  let newBaseCurrency = '';
-  let newBaseCurrencyList = baseCurrencyList;
-  const _isSingleSelectedCurrency = () => selectedCurrency && selectedCurrency.indexOf(',') < 0;
-  if (_isSingleSelectedCurrency()) {
-    const currencyName = originalCurrencyList.find(x => x.Id == selectedCurrency).Value;
-    if (!baseCurrencyList.find(x => x.label === currencyName)) {
-      newBaseCurrency = '';
-      newBaseCurrencyList = originalBaseCurrencyList.slice(0);
-      newBaseCurrencyList.push({
-        value: newBaseCurrency,
-        label: currencyName
-      });
-    } else {
-      newBaseCurrency = selectedBaseCurrency;
-      newBaseCurrencyList = baseCurrencyList;
-    }
-  } else {
-    newBaseCurrencyList = originalBaseCurrencyList;
-    newBaseCurrency = newBaseCurrencyList.find(x => x.label === selectedBaseCurrency) ? selectedBaseCurrency : defaultBaseCurrency;
-  }
-  baseCurrecyListRef.current = newBaseCurrencyList;
   return {
-    baseCurrencyList: newBaseCurrencyList,
-    selectedBaseCurrency: newBaseCurrency
+    baseCurrencyList: currentBaseCurrencyList,
+    selectedBaseCurrency: currentBaseCurrency
   };
 };
 /* harmony default export */ __webpack_exports__["default"] = (useBaseCurrencyForMultiSelectCurrency);
@@ -2889,7 +2898,7 @@ const defaultProps = {
 };
 BaseMobileDataGrid.propTypes = propTypes;
 BaseMobileDataGrid.defaultProps = defaultProps;
-/* harmony default export */ __webpack_exports__["default"] = (BaseMobileDataGrid);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(BaseMobileDataGrid));
 
 /***/ }),
 
@@ -2937,7 +2946,7 @@ const propTypes = {
   item: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object
 };
 MobileBetlistContent.propTypes = propTypes;
-/* harmony default export */ __webpack_exports__["default"] = (MobileBetlistContent);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(MobileBetlistContent));
 
 /***/ }),
 
@@ -3021,7 +3030,7 @@ const PageLayout = props => {
     url: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_7__["default"].resolveClientUrl("ExchangeVoided")
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, children))));
 };
-/* harmony default export */ __webpack_exports__["default"] = (PageLayout);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(PageLayout));
 
 /***/ }),
 
@@ -3276,7 +3285,7 @@ const AppContainer = () => {
     selectedTabIndex: "2"
   }, layout);
 };
-/* harmony default export */ __webpack_exports__["default"] = (AppContainer);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(AppContainer));
 
 /***/ }),
 
@@ -3429,7 +3438,7 @@ const FormFilter = () => {
     className: "col-12 col-sm-3 col-md-2 col-xl-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_SubsidiaryCheckBoxFilter_jsx__WEBPACK_IMPORTED_MODULE_11__["default"], null))));
 };
-/* harmony default export */ __webpack_exports__["default"] = (FormFilter);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(FormFilter));
 
 /***/ }),
 
@@ -3483,7 +3492,7 @@ const BaseCurrencyFilter = () => {
     className: "label-text"
   }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("BaseCurrency")), _renderBaseCurrencySelectList());
 };
-/* harmony default export */ __webpack_exports__["default"] = (BaseCurrencyFilter);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(BaseCurrencyFilter));
 
 /***/ }),
 
@@ -3523,7 +3532,7 @@ const ConvertAllCheckBoxFilter = () => {
     label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("ConvertAllFiguresToBaseCurrency")
   }));
 };
-/* harmony default export */ __webpack_exports__["default"] = (ConvertAllCheckBoxFilter);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(ConvertAllCheckBoxFilter));
 
 /***/ }),
 
@@ -3577,7 +3586,7 @@ const CurrecyFilter = () => {
     className: "label-text"
   }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource("Currency")), _renderCurrencySelectList());
 };
-/* harmony default export */ __webpack_exports__["default"] = (CurrecyFilter);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(CurrecyFilter));
 
 /***/ }),
 
@@ -3632,7 +3641,7 @@ const ProductFilter = () => {
     className: "label-text"
   }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource("Product")), _renderProductSelectList());
 };
-/* harmony default export */ __webpack_exports__["default"] = (ProductFilter);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(ProductFilter));
 
 /***/ }),
 
@@ -3683,7 +3692,7 @@ const StatusFilter = () => {
     className: "label-text"
   }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource("Status")), _renderStatusSelectList());
 };
-/* harmony default export */ __webpack_exports__["default"] = (StatusFilter);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(StatusFilter));
 
 /***/ }),
 
@@ -3737,7 +3746,7 @@ const StickyIcon = () => {
     title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("ExportToExcel")
   }), _renderUserGuide());
 };
-/* harmony default export */ __webpack_exports__["default"] = (StickyIcon);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(StickyIcon));
 
 /***/ }),
 
@@ -3794,7 +3803,7 @@ const SubsidiaryCheckBoxFilter = () => {
     label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("SubsidiarySearch")
   }));
 };
-/* harmony default export */ __webpack_exports__["default"] = (SubsidiaryCheckBoxFilter);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(SubsidiaryCheckBoxFilter));
 
 /***/ }),
 
@@ -3858,7 +3867,7 @@ const SubsidiaryDropDown = () => {
     className: "label-text"
   }, isWhiteLabelView ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("WhiteLabel") : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("Subsidiary")), _renderSubsidiaryTreeView());
 };
-/* harmony default export */ __webpack_exports__["default"] = (SubsidiaryDropDown);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(SubsidiaryDropDown));
 
 /***/ }),
 
@@ -3902,7 +3911,7 @@ const UserNameFilter = () => {
     }
   }));
 };
-/* harmony default export */ __webpack_exports__["default"] = (UserNameFilter);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(UserNameFilter));
 
 /***/ }),
 
@@ -4215,7 +4224,7 @@ const MobileFormFilter = () => {
     className: "caret-block"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_StickyIcon_jsx__WEBPACK_IMPORTED_MODULE_12__["default"], null)))));
 };
-/* harmony default export */ __webpack_exports__["default"] = (MobileFormFilter);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(MobileFormFilter));
 
 /***/ }),
 
@@ -4330,7 +4339,7 @@ const MobileGrid = () => {
     sortableColumns: SortableColumns
   });
 };
-/* harmony default export */ __webpack_exports__["default"] = (MobileGrid);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(MobileGrid));
 
 /***/ }),
 

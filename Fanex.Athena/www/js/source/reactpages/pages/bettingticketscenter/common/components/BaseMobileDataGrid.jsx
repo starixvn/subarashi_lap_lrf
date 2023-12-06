@@ -1,4 +1,4 @@
-import React, {  useEffect, useRef, useState, useMemo } from 'react';
+import React, {  useEffect, useRef, useState, useMemo, memo } from 'react';
 import ReportTitle from '@jsroot/components/ReportTitle';
 import {  DefaultPageSize } from '../lib/constants.js';
 import { ActionCreators } from './action.js';
@@ -136,4 +136,4 @@ const defaultProps = {
 BaseMobileDataGrid.propTypes = propTypes;
 BaseMobileDataGrid.defaultProps = defaultProps;
 
-export default BaseMobileDataGrid
+export default memo(BaseMobileDataGrid);

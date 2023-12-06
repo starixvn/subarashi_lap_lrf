@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import AppData from '@jsroot/lib/AppData'
 import { ActionCreators } from '../../actions/index.js'
@@ -28,4 +28,4 @@ export const RefNoFilter = () => {
                 onChange={(event) => dispatch(setSearchingId(event.target.value))} />
         </div>)
 }
-export default RefNoFilter;
+export default memo(RefNoFilter);

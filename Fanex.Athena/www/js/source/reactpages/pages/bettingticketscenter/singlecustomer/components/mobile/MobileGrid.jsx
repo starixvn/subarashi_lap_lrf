@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect } from 'react';
+import React, { useMemo, useEffect, memo } from 'react';
 import { ApiUrl, HeaderText } from '../../../common/lib/constants';
 import BaseMobileDataGrid from '../../../common/components/BaseMobileDataGrid';
 import AppData from '@jsroot/lib/AppData';
@@ -87,4 +87,4 @@ const MobileGrid = () => {
     )
 }
 
-export default MobileGrid;
+export default memo(MobileGrid);

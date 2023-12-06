@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { memo } from 'react'
 import MultipleSelect from '@legion-lib/react-multiselect'
 import LangHelper from '@jsroot/lib/langHelper'
 import AppData from '@jsroot/lib/AppData'
 import PropTypes from 'prop-types';
 
 export const LiveStatusFilter = (props) => {
-    const {onChange} = props.onChange;
+    const {onChange} = props;
 
     const _renderLiveStatusSelectList = () => {
         const liveStatusList = AppData.liveStatusList;
@@ -33,4 +33,4 @@ const propTypes = {
 
 LiveStatusFilter.propTypes = propTypes;
 
-export default LiveStatusFilter;
+export default memo(LiveStatusFilter);

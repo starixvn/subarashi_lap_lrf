@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 
@@ -21,4 +21,4 @@ const propTypes = {
 
 MobileWinLossCellContent.propTypes = propTypes;
 
-export default MobileWinLossCellContent
+export default memo(MobileWinLossCellContent)

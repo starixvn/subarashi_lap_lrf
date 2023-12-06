@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import MultipleSelect from '@legion-lib/react-multiselect'
 import LangHelper from '@jsroot/lib/langHelper'
 import AppData from '@jsroot/lib/AppData'
@@ -34,4 +34,4 @@ const propTypes = {
 
 CustomerClassFilter.propTypes = propTypes;
 
-export default CustomerClassFilter;
+export default memo(CustomerClassFilter);

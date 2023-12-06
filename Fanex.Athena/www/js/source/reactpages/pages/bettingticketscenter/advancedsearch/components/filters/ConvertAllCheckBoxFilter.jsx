@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import LangHelper from '@jsroot/lib/langHelper'
 import CheckBox from '@jsroot/components/CheckBox'
 import PropTypes from 'prop-types';
@@ -22,4 +22,4 @@ const propTypes = {
 
 ConvertAllCheckBoxFilter.propTypes = propTypes
 
-export default ConvertAllCheckBoxFilter;
+export default memo(ConvertAllCheckBoxFilter);

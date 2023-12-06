@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import Select from 'react-select'
 import LangHelper from '@jsroot/lib/langHelper'
 import PropTypes from 'prop-types';
@@ -28,4 +28,4 @@ const propTypes = {
 
 MatchFilter.propTypes = propTypes;
 
-export default MatchFilter;
+export default memo(MatchFilter);

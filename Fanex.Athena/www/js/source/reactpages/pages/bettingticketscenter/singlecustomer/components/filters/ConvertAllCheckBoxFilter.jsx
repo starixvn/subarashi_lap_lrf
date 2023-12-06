@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import {  useDispatch, useSelector } from 'react-redux'
 import { ActionCreators } from '../../actions/index.js'
 import LangHelper from '@jsroot/lib/langHelper'
@@ -19,4 +19,4 @@ export const ConvertAllCheckBoxFilter = () => {
     </div>)
 }
 
-export default ConvertAllCheckBoxFilter;
+export default memo(ConvertAllCheckBoxFilter);

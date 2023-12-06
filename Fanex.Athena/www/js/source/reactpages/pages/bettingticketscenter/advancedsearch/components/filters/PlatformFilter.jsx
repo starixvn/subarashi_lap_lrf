@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import MultipleSelect from '@legion-lib/react-multiselect'
 import LangHelper from '@jsroot/lib/langHelper'
 import AppData from '@jsroot/lib/AppData'
@@ -37,4 +37,4 @@ const propTypes = {
 
 PlatformFilter.propTypes = propTypes;
 
-export default PlatformFilter;
+export default memo(PlatformFilter);

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import {  useDispatch } from 'react-redux'
 import MultipleSelect from '@legion-lib/react-multiselect'
 import { ActionCreators } from '../../actions/index.js'
@@ -30,4 +30,4 @@ export const StatusFilter = () => {
     </div>)
 }
 
-export default StatusFilter;
+export default memo(StatusFilter);

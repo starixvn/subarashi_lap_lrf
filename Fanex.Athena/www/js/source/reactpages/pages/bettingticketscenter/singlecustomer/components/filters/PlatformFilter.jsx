@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import {  useDispatch, useSelector } from 'react-redux'
 import MultipleSelect from '@legion-lib/react-multiselect'
 import { ActionCreators } from '../../actions/index.js'
@@ -33,4 +33,4 @@ export const ProductFilter = () => {
     </div>)
 }
 
-export default ProductFilter;
+export default memo(ProductFilter);

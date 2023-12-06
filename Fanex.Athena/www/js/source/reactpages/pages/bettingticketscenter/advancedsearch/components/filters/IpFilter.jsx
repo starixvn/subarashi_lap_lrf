@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import LangHelper from '@jsroot/lib/langHelper'
 import PropTypes from 'prop-types';
 
@@ -22,4 +22,4 @@ const propTypes = {
 
 IpFilter.propTypes = propTypes;
 
-export default IpFilter;
+export default memo(IpFilter);

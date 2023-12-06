@@ -1,4 +1,4 @@
-﻿import React from 'react'
+﻿import React, { memo } from 'react'
 import CollapsiblePanel from '@jsroot/components/collapsible-panel'
 import LangHelper from '@jsroot/lib/langHelper'
 import BaseCurrencySelectList from '../filters/BaseCurrencySelectList'
@@ -45,4 +45,4 @@ export const FormFilter = () => {
     )
 }
 
-export default FormFilter;
+export default memo(FormFilter);

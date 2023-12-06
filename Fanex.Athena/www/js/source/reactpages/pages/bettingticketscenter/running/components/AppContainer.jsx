@@ -1,4 +1,4 @@
-﻿import React from 'react'
+﻿import React, { memo } from 'react'
 import { useSelector } from 'react-redux'
 import DataGrid from './desktop/DataGrid'
 import FormFilter from './desktop/FormFilter'
@@ -33,4 +33,4 @@ export const AppContainer = () => {
     );
 }
 
-export default AppContainer;
+export default memo(AppContainer);
