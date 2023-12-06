@@ -15,6 +15,7 @@
     using Logging;
 
     using MessagePack.Resolvers;
+    using Microsoft.AspNet.WebApi.Extensions.Compression.Server;
     using ONEbook.UM;
     using ONEbook.UM.Configurations;
     using ONEbook.UM.Helpers;
@@ -25,6 +26,7 @@
 
     using System;
     using System.Configuration;
+    using System.Net.Http.Extensions.Compression.Core.Compressors;
     using System.Web;
     using System.Web.Helpers;
     using System.Web.Http;
@@ -76,6 +78,7 @@
                 GlobalConfiguration.Configuration.EnableCors();
                 GlobalConfiguration.Configuration.Filters.Add(new CustomApiAuthorizeAttribute());
                 GlobalConfiguration.Configuration.Formatters.Remove(GlobalConfiguration.Configuration.Formatters.XmlFormatter);
+                GlobalConfiguration.Configuration.MessageHandlers.Insert(0, new ServerCompressionHandler(new GZipCompressor(), new DeflateCompressor()));
                 /*End Web API*/
 
                 AntiForgeryConfig.SuppressXFrameOptionsHeader = true;

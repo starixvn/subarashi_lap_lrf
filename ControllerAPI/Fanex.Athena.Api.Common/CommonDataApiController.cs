@@ -19,6 +19,8 @@
     using System.Threading.Tasks;
     using System.Web.Http;
     using Web.ActionFilter;
+    using ServiceStack;
+    using ServiceStack.Text;
 
     [CLSCompliant(false)]
     [XFrameOptionApi]
@@ -128,6 +130,7 @@
         }
 
         [HttpGet]
+        [CompressFilter(Order = 1)]
         public async Task<IHttpActionResult> GetBetTypeInTreeList(string productCodes)
         {
             const int cacheTime = 60 * 60 * 12; //12 hour
@@ -142,8 +145,9 @@
             {
                 return JsonNetResult(new List<CheckedItem>());
             }
+            JsConfig.ExcludeTypeInfo = true;
             var betTypeList = await _betTypeService.GetBetTypeForProducts(_sessionService.LicenseeSession.LicenseeId, _sessionService.UserSession.Language, productCodes);
-            var jsonString = JsonConvert.SerializeObject(betTypeList, PascalCassJsonSetting);
+            var jsonString = ServiceStack.Text.JsonSerializer.SerializeToString(betTypeList);
             _cacheService.Set(cacheKey, jsonString, cacheTime);
             return JsonNetResult(jsonString);
         }
