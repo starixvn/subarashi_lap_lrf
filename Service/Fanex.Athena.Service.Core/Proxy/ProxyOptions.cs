@@ -14,6 +14,8 @@
     {
         private const string RootUrlHeaderKey = "RootUrl";
 
+        private const string LanguageHeaderKey = "Language";
+
         private static readonly IDictionary<string, string> ProxyApiHostMapper = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase)
         {
             { "Report", "Proxy_ReportApiHost" },
@@ -36,6 +38,7 @@
             {
                 message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", SessionService.UserSession.AccessToken);
                 message.Headers.Add(RootUrlHeaderKey, HttpContext.Current.Request.ApplicationPath);
+                message.Headers.Add(LanguageHeaderKey, SessionService.UserSession.Language);
                 return Task.CompletedTask;
             };
 

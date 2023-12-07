@@ -4,13 +4,20 @@
     using System.Web.Mvc;
     using System.Web.Security;
     using System.Web.UI;
-    using Extension.Utility;
-    using Fanex.Athena.Service.Core.Users.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Utility;
-    using Model.Core.DataDomain;
+    using System.Collections.Generic;
+    using System.Linq;
+
     using ONEbook.UM.Services;
-    using Resources;
-    using Service.Core.Common.Interfaces;
+
+    using Fanex.Athena.Extension.Utility;
+    using Fanex.Athena.Resources;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
+    using Fanex.Athena.Service.Core.Common.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
+    using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Auth.Enum;
+    using Fanex.Athena.Model.Core.DataDomain;
 
     [AllowAnonymous]
     public class UtilityController : Controller
@@ -19,18 +26,20 @@
         private readonly ILanguageService _languageService;
         private readonly IMaintenanceService _maintenanceService;
         private readonly ISessionService _sessionService;
+        private readonly IAuthorizationService _authorizationService;
 
         public UtilityController(
             IAppSettings appSettings,
             ILanguageService languageService,
             IMaintenanceService maintenanceService,
-            ISessionService sessionService
-            )
+            ISessionService sessionService, 
+            IAuthorizationService authorizationService)
         {
             _appSettings = appSettings;
             _languageService = languageService;
             _maintenanceService = maintenanceService;
             _sessionService = sessionService;
+            _authorizationService = authorizationService;
         }
 
         [HttpGet]
@@ -43,6 +52,27 @@
             }
 
             return Json(new { IsAuthenticated = true }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult RequestAuthorizedInfo(List<string> permissions)
+        {
+            var functionKeys = new List<ValidatedFunctionKey>();
+            if (permissions != null)
+            {
+                functionKeys = permissions.Select(permission => new ValidatedFunctionKey
+                {
+                    FunctionKey = permission,
+                    HasPermission = _authorizationService.HasPermissions(_sessionService.UserSession, permission)
+                }).ToList();
+            }
+
+            return Json(new RequestInfo
+            {
+                FunctionKeys = functionKeys,
+                IdentityName = _sessionService.UserSession.IdentityName,
+                IsSelfMode = _sessionService.UserSession.ApplicationMode == AppMode.Self
+            });
         }
 
         public ActionResult AccessDenied()
