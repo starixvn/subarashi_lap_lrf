@@ -52,35 +52,6 @@
             }
         }
 
-        public async Task<HttpResponseMessage> HandleStaticResourcesRequest(string apiKey, string apiUrl)
-        {
-            var originalRequest = HttpContext.Current.Request;
-            var staticURL = _options.BuildRequestUri(apiKey, apiUrl, originalRequest.QueryString.ToString());
-            using (var requestMessage = CreateHttpRequest(originalRequest, staticURL))
-            {
-                var responseMessage = null as HttpResponseMessage;
-                var cancelToken = new CancellationTokenSource(_options.Timeout);
-
-                try
-                {
-                    responseMessage = await SendHttpRequest(requestMessage, cancelToken.Token).ConfigureAwait(false);
-                    return responseMessage;
-                }
-                catch (Exception ex)
-                {
-                    return new HttpResponseMessage
-                    {
-                        StatusCode = HttpStatusCode.InternalServerError,
-                        Content = new StringContent($"{ex.Message} - {ex.InnerException?.Message} - static url: {staticURL}")
-                    };
-                }
-                finally
-                {
-                    cancelToken.Dispose();
-                }
-            }
-        }
-
         public Task<HttpResponseMessage> HandleRequest(string apiKey, string apiUrl)
             => HandleRequest(apiKey, apiUrl, HttpContext.Current.Request);
 

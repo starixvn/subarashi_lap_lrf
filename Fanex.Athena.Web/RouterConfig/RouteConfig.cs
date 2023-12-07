@@ -44,12 +44,6 @@
                    routeTemplate: "Proxy/{apiKey}/{apiUrl}",
                    new { Controller = "Proxy", Action = "Forward" });
             apiProxyRoute.RouteHandler = new ReadonlySessionRouteHandler();
-
-            var staticResourcesProxyRoute = routes.MapHttpRoute(
-                   name: "staticResourcesProxyRoute",
-                   routeTemplate: "Static/{resourceKey}/{*url}",
-                   new { Controller = "Proxy", Action = "StaticResource" });
-            staticResourcesProxyRoute.RouteHandler = new ReadonlySessionRouteHandler();
         }
 
         private static void RegisterReportProxyRoutes(this RouteCollection routes)

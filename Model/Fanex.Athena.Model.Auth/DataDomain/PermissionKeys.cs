@@ -40,7 +40,6 @@
         public const string ReportLastBetsMonitoring = "LastBetsMonitoring26";
         public const string ReportLicenseeWinLoss = "LicenseeWinLoss27";
         public const string AuditLicenseeWinLoss = "AuditLicenseeWinLoss";
-        public const string ReportSettledMatchCount = "SettledMatchCount28";
         public const string ReportCustomerWinLoss = "CustomerWinLoss29";
         public const string ReportCustomerPendingFunds = "CustomerPendingFunds30";
         public const string ReportMatchWinLoss = "MatchWinLoss31";
@@ -52,7 +51,6 @@
         public const string ReportResults = "Results41";
         public const string ReportAGCasinoWinLoss = "AGCasinoWinLoss62";
         public const string ReportAGCasinoBalance = "AGCasinoBalance63";
-        public const string ReportWeeklyLiveMatches = "WeeklyLiveMatches69";
         public const string ReportCustomerTurnover = "CustomerTurnover51";
         public const string ReportPlatformWinLoss = "MobileWinLoss53";
         public const string ReportSubsidiaryPerformance = "SubsidiaryPerformance73";
