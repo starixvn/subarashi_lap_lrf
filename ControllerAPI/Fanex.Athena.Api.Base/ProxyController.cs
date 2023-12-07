@@ -49,6 +49,7 @@
             const string apiKey = "ReportClientApp";
             var apiUrl = $"{report}_{url}";
             var result = await _proxyService.HandleRequest(apiKey, apiUrl).ConfigureAwait(false);
+
             return result;
         }
     }

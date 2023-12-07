@@ -24,7 +24,7 @@
         private static readonly IDictionary<string, string> ProxyHealthCheckMapper = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase)
         {
             { "Report", "Proxy_ReportApiHealthCheck" },
-            { "ReportClientApp", "Proxy_ReportClientAppHost" },
+            { "ReportClientApp", "Proxy_ReportClientAppHealthCheck" },
             { "BetList", "Proxy_BetListApiHealthCheck" }
         };
 
