@@ -2501,7 +2501,6 @@
   </data>
   <data name="MobileEuro" xml:space="preserve">
     <value>Mobile Euro</value>
-    
   </data>
   <data name="ProductSAG" xml:space="preserve">
     <value>SA Gaming</value>
@@ -3629,6 +3628,9 @@
   </data>
   <data name="SecurityQuestion" xml:space="preserve">
     <value>Security Question</value>
+  </data>
+  <data name="ProductSEA" xml:space="preserve">
+    <value>SEAL Entertainment</value>
   </data>
   <data name="Desktop" xml:space="preserve">
     <value>Desktop</value>
