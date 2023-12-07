@@ -17,24 +17,24 @@ export const MobileGroupByFilter = (props) => {
     return (
         <CollapsiblePanel className="page-filter" isCollapseMode={false}>
             <div className="row flex w100">
-                <div className='' style={collapsedStyle}>
+                <div className='w100' style={collapsedStyle}>
                     <div className='flex flex-col'>
-                        <div className='col-md-12 '>
+                        <div className='col-12 '>
                             <GroupByOptionFilter/>
                         </div>
-                        <div className='col-md-12'>
+                        <div className='col-12'>
                             <BreakDownOptionFilter/>
                         </div>
                     </div>
                 </div>
-                <div className="flex w100">
-                    <div className="form-group w100">
+                <div className="flex flex-center w100 flex-wrap">
+                    <div className="form-group flex-auto">
                         <div className="button-group">
                             <button type="button" disabled={!isValidModel} className="btn btn-submit" onClick={submit}>{LangHelper.getSingleResource("Submit")}</button>
                             <button type="button" className="btn btn-outline-secondary" onClick={onClickClearFilter}>{LangHelper.getSingleResource("ClearAllFilters")}</button>
                         </div>
                     </div>
-                    <div className='caret-block'>
+                    <div className='flex flex-initial'>
                         <StickyIcon/>
                     </div>
                 </div>

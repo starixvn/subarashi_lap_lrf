@@ -30,8 +30,8 @@ export const MobileGroupByRow = (props) => {
         const detailRows = []
         detailRows.push(<MobileExpandRowContent text={HeaderText.BetCount} value={NumberFormat.format(betCount)} />)
         detailRows.push(<MobileExpandRowContent text={HeaderText.NetTurnOver} value={NumberFormat.formatDecimal(netTurnover)} />)
-        detailRows.push(<MobileExpandRowContent text={HeaderText.PlayerComm} value={NumberFormat.formatDecimal(playerComm)} />)
         { isShowBetEffectiveField && detailRows.push(<MobileExpandRowContent text={HeaderText.EffectiveBettingValue} value={NumberFormat.formatDecimal(betEffective)} />) }
+        detailRows.push(<MobileExpandRowContent text={HeaderText.PlayerComm} value={NumberFormat.formatDecimal(playerComm)} />)
         detailRows.push(<MobileExpandRowContent text={HeaderText.LicenseeWL} value={NumberFormat.formatDecimal(licWinloss)} valueClass={licWinloss < 0 ? "negative" : ""} />)
         detailRows.push(<MobileExpandRowContent text={HeaderText.LicenseeComm} value={NumberFormat.formatDecimal(licComm)} />)
         { isShowBAField && detailRows.push(<MobileExpandRowContent text={HeaderText.AmountDueToBA} value={NumberFormat.formatDecimal(amtDueToBA)} />) }
@@ -40,7 +40,7 @@ export const MobileGroupByRow = (props) => {
     }
     
     const detailRows = useMemo(() => _getDetailRows(), [parentData, isShowBetEffectiveField, isShowBAField])
-    const breakDownRowList = useMemo( () => children.map(item => <MobileBreakdownRow key={`${item.groupBy}-${item.breakBy}`} data={item} selectedDisplayTypeId/>), [children, selectedDisplayTypeId]);
+    const breakDownRowList = useMemo( () => children.map(item => <MobileBreakdownRow key={`${item.groupBy}-${item.breakBy}`} data={item} selectedDisplayTypeId={selectedDisplayTypeId}/>), [children, selectedDisplayTypeId]);
     const idColumnText = selectedDisplayTypeId == MobileGroupByHeaderDisplayType.ExternalId ? externalId : systemId;
     const displayColumnName = isGroupByPlayerMode ?  idColumnText : groupByFieldText;
     const arrowClass = isBreakdown ? 'down-arrow' : 'right-arrow';
@@ -68,7 +68,7 @@ export const MobileGroupByRow = (props) => {
 const propTypes = {
     data: PropTypes.object,
     groupByFieldName: PropTypes.string,
-    selectedDisplayTypeId: PropTypes.oneOfType(PropTypes.number, PropTypes.string)
+    selectedDisplayTypeId: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
 }
 const defaultProps = {
     groupByFieldName: 'breakDownFieldText'

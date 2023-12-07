@@ -13,17 +13,19 @@ export const GroupByOptionFilter = () => {
     return (
         <div className="form-group radio-group">
             <label className='label-text'>{LangHelper.getSingleResource('GroupBy')}:</label>
-            {
-                groupByList.map((option, i) => {
-                    const key = 'GroupBy' + i;
-                    return (
-                        <span key={`GroupBy${key}`}>
-                            <input type='radio' value={option.value} checked={selectedGroupByOption == option.value} id={key}
-                                onChange={onChangeGroupByOption} />
-                            <label htmlFor={key}>{option.label}</label>
-                        </span>)
-                })
-            }
+            <div className="radio-list">
+                {
+                    groupByList.map((option, i) => {
+                        const key = 'GroupBy' + i;
+                        return (
+                            <span key={`GroupBy${key}`} className="filter-radio-item">
+                                <input type='radio' value={option.value} checked={selectedGroupByOption == option.value} id={key}
+                                    onChange={onChangeGroupByOption} />
+                                <label htmlFor={key}>{option.label}</label>
+                            </span>)
+                    })
+                }
+            </div>
         </div>
     )
 }

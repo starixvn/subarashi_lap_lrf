@@ -16,8 +16,8 @@ export const MobileBreakdownRow = (props) => {
     const expandRows = []
     expandRows.push(<MobileExpandRowContent text={HeaderText.BetCount} value={NumberFormat.format(betCount)} />)
     expandRows.push(<MobileExpandRowContent text={HeaderText.NetTurnOver} value={NumberFormat.formatDecimal(netTurnover)} />)
-    expandRows.push(<MobileExpandRowContent text={HeaderText.PlayerComm} value={NumberFormat.formatDecimal(playerComm)} />)
     { isShowBetEffectiveField && expandRows.push(<MobileExpandRowContent text={HeaderText.EffectiveBettingValue} value={NumberFormat.formatDecimal(betEffective)} />) }
+    expandRows.push(<MobileExpandRowContent text={HeaderText.PlayerComm} value={NumberFormat.formatDecimal(playerComm)} />)
     expandRows.push(<MobileExpandRowContent text={HeaderText.LicenseeWL} value={NumberFormat.formatDecimal(licWinloss)} valueClass={licWinloss < 0 ? "negative" : ""} />)
     expandRows.push(<MobileExpandRowContent text={HeaderText.LicenseeComm} value={NumberFormat.formatDecimal(licComm)} />)
     { isShowBAField && expandRows.push(<MobileExpandRowContent text={HeaderText.AmountDueToBA} value={NumberFormat.formatDecimal(amtDueToBA)} />) }
@@ -26,7 +26,7 @@ export const MobileBreakdownRow = (props) => {
     const idColumnText = selectedDisplayTypeId == MobileGroupByHeaderDisplayType.ExternalId ? externalId : systemId;
     const displayColumnName = isBreakDownPlayerMode ?  idColumnText : breakDownFieldText;
     return (
-        <CompositeRow key={`breakdown-row-${groupBy}-${breakBy}`} expandRows={expandRows} className='detail-row' collapaseRowClass='detail-row'>
+        <CompositeRow key={`breakdown-row-${groupBy}-${breakBy}`} expandRows={expandRows} className='detail-row parent-row' collapaseRowClass='detail-row'>
             <Cell>{displayColumnName}</Cell>
             <Cell className='right-align'>{NumberFormat.formatDecimal(turnover)}</Cell>
             <Cell className='right-align'>{NumberFormat.formatDecimal(playerWinloss)}</Cell>
@@ -36,7 +36,7 @@ export const MobileBreakdownRow = (props) => {
 
 const propTypes = {
     data: PropTypes.array,
-    selectedDisplayTypeId: PropTypes.oneOfType(PropTypes.number, PropTypes.string)
+    selectedDisplayTypeId: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
 }
 const defaultProps = {
     data: [],

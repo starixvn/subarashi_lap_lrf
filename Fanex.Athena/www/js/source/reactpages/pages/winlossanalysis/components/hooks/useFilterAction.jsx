@@ -52,12 +52,9 @@ export const useFilterAction = () => {
         setSubsidiarySearch, setSubsidiaryList, setAppUuid } = ActionCreators;
 
     const _buildTitle = (params) => {
-        const { FromDate, ToDate, ProductCodes, SearchUserName, BaseCurrency, CurrencyIdList } = params;
-        const {  currencyList } = AppData;
-        const selectedCurrencyCode = Service.getCurrencyCodes(CurrencyIdList, currencyList);
-        const seletedCurrencyText = selectedCurrencyCode == ALL_SELECTED_TEXT ? LangHelper.getSingleResource("All") : StringHelper.addSpaceAfterComma(selectedCurrency);
+        const { FromDate, ToDate, ProductCodes, SearchUserName, CurrencyCodes, BaseCurrencyName } = params;
         const dateRangeText = `, ${Site.convertDateToString(FromDate)} → ${Site.convertDateToString(ToDate)}`;
-        const currencyText =  `, ${LangHelper.getSingleResource("Currency")}: ${seletedCurrencyText}, ${LangHelper.getSingleResource("BaseCurrency")}: ${BaseCurrency}`;
+        const currencyText =  `, ${LangHelper.getSingleResource("Currency")}: ${CurrencyCodes}, ${LangHelper.getSingleResource("BaseCurrency")}: ${BaseCurrencyName}`;
         const productText = `, ${LangHelper.getSingleResource("LicenseeW_L")} (${ProductCodes})`;
         const userText = !!SearchUserName ? `, ${LangHelper.getSingleResource("Username")}: ${SearchUserName}` : "";
 
@@ -80,7 +77,7 @@ export const useFilterAction = () => {
         }
 
         const selectedCurrencyCode = Service.getCurrencyCodes(selectedCurrency, currencyList);
-        const seletedCurrencyText = selectedCurrencyCode == ALL_SELECTED_TEXT ? LangHelper.getSingleResource("All") : StringHelper.addSpaceAfterComma(selectedCurrency);
+        const seletedCurrencyText = selectedCurrencyCode == ALL_SELECTED_TEXT ? LangHelper.getSingleResource("All") : StringHelper.addSpaceAfterComma(selectedCurrencyCode);
 
         return {
             PageSize: PageSize,

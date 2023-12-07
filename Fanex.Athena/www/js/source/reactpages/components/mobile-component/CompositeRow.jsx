@@ -71,7 +71,7 @@ const propTypes = {
     collapsibleCellContent: PropTypes.node,
     onExpanded: PropTypes.func,
     onCollapsed: PropTypes.func,
-    expandRows: PropTypes.oneOfType(PropTypes.array, PropTypes.object),
+    expandRows: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
     className: PropTypes.string,
     children: PropTypes.any,
     activeClassName: PropTypes.string,

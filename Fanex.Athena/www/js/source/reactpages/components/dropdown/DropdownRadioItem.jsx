@@ -13,7 +13,7 @@ export const DropdownRadioItem = (props) => {
 
     return (
         <label className="selection-item" onClick={_onClick}>
-            <input id={id} name={id} type="radio" value={value}
+            <input id={id} name={id} type="radio" value={value} readOnly={true}
                 checked={checked} />
             <label htmlFor={id} dangerouslySetInnerHTML={{ __html: text }}></label>
         </label>

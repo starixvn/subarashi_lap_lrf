@@ -85,7 +85,7 @@ export default class Service {
             return ALL_SELECTED_TEXT;
         } 
         const currencyCodesText = currencyListIds.split(',').reduce((prev, cur, index) => {
-            var code = currencyList.find(c => c.id == cur).value;
+            let code = currencyList.find(c => c.id == cur).value;
             if (index === 0){
                 return code;
             }

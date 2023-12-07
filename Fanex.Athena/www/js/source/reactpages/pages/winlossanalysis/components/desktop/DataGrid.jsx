@@ -72,7 +72,7 @@ export const DataGrid = () => {
     }
     return (
     <div className='result-content'>
-        <ReportTitle content={reportTitleContent} />
+        <ReportTitle content={reportTitleContent} tag='div'/>
         <Table key={`table-winloss-ananlysis-${requestParam.SubmitTime}`} minWidth={650}
             autoWidth={true}
             autoHeight={true}

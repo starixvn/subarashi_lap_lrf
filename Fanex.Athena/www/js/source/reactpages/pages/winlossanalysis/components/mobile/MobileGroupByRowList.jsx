@@ -14,7 +14,7 @@ export const MobileGroupByRowList = (props) => {
 
 const propTypes = {
     dataList: PropTypes.array,
-    selectedDisplayTypeId: PropTypes.oneOfType(PropTypes.string, PropTypes.number)
+    selectedDisplayTypeId: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 }
 
 MobileGroupByRowList.propTypes = propTypes;

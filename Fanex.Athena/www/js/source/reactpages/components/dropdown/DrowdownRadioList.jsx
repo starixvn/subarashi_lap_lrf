@@ -40,8 +40,8 @@ export const DrowdownRadioList = (props) => {
 
 const propTypes = {
     dataSource: PropTypes.array,
-    keySelector: PropTypes.oneOfType(PropTypes.string, PropTypes.func),
-    valueSelector: PropTypes.oneOfType(PropTypes.string, PropTypes.func),
+    keySelector: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+    valueSelector: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
     selectedValue: PropTypes.any,
     iconClass: PropTypes.string,
     onChange: PropTypes.func,

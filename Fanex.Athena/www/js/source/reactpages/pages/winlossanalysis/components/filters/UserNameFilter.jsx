@@ -29,7 +29,7 @@ const UserNameFilter = (props) => {
 const propTypes = {
     onChangeSearchMode: PropTypes.func,
     onChangeUserName : PropTypes.func,
-    searchMode : PropTypes.oneOfType(PropTypes.number, PropTypes.string)
+    searchMode : PropTypes.oneOfType([PropTypes.number, PropTypes.string])
 };
 
 UserNameFilter.propTypes = propTypes;

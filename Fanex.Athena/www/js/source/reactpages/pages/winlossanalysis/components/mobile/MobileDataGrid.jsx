@@ -4,7 +4,7 @@ import { ActionCreators } from '../../actions/index.js'
 import NoDataTitle from '@jsroot/components/NoDataTitle';
 import ReportTitle from '@jsroot/components/ReportTitle';
 import { DefaultPagingOption, MobileGroupByHeaderDisplayType, SortOrder, HeaderText, SortBy } from '../../common/constants.js';
-import ExcelPopUp from '../ExcelPopUp.jsx';
+
 import { RefPager } from '@jsroot/components/mobile-component/RefPager'
 import { useElementSize, useWindowSize } from 'usehooks-ts';
 import {v4 as uuidv4} from 'uuid';
@@ -14,13 +14,14 @@ import MobileGroupByRowList from './MobileGroupByRowList';
 import NumberFormat from '@jsroot/lib/numberFormat';
 import LangHelper from '@jsroot/lib/langHelper';
 import useRenderRowOption from '../hooks/useRenderRowOption.jsx';
+import ReportTitleContent from './ReportTitleContent.jsx';
 
 const VerySmallColumnWidths = [ 32, 32 , 32, 13]
-const SmallColumnWidths = [ 110, 110 , 110, 28]
+const SmallColumnWidths = [ 125, 105 , 110, 26]
 const LargeColumnWidths =  ['31%', '31%', '31%', '7%']
 
 export const MobileDataGrid = () => {
-    const [requestParam, reportData, reportTitle, reloadReport]
+    const [requestParam, reportData, reloadReport]
         = useSelector(state => [
             state.requestParam,
             state.reportData,
@@ -71,9 +72,9 @@ export const MobileDataGrid = () => {
     const _renderHeader = () => {
         const className = isDisplayHeaderDropdownOption ? 'cell-dropdown': '';
         return (
-            <HeaderRow>
+            <HeaderRow key={id}>
                 <HeaderCell colWidth={collumnWidths[0]} className={className}>
-                    <div className='w100'>
+                    <div className='w100 cell-header-groupby'>
                         <span>{HeaderText.GroupBy}</span>
                         {isDisplayHeaderDropdownOption && 
                         <DrowdownRadioList id='dropdown-header' key='dropdown-header' className='search-option'
@@ -104,13 +105,13 @@ export const MobileDataGrid = () => {
                         <div className='flex-auto right-align'>{NumberFormat.formatDecimal(turnover)}</div>
                     </div>
                 </Cell>
-                <Cell className="right-align cell-total-winloss">{NumberFormat.formatDecimal(playerWinloss)}</Cell>
-                <Cell></Cell>
+                <Cell className="right-align cell-total-winloss border-r-0">{NumberFormat.formatDecimal(playerWinloss)}</Cell>
+                <Cell className='border-l-0'></Cell>
             </Row>)
     }
 
-    const header = useMemo(() =>_renderHeader(), [requestParam.GroupMode, requestParam.BreakdownMode, headerDisplayType, onChangeIdDisplayType])
-    const body = useMemo(() => <MobileGroupByRowList key={id} dataList={data} selectedDisplayTypeId={headerDisplayType}/>, [data, headerDisplayType])
+    const header = useMemo(() =>_renderHeader(), [isDisplayHeaderDropdownOption, headerDisplayType, onChangeIdDisplayType, id])
+    const body = useMemo(() => <MobileGroupByRowList key={id} dataList={data} selectedDisplayTypeId={headerDisplayType}/>, [data, headerDisplayType, id])
     const footer = useMemo(() => _renderFooter(), [sumTotal])
 
     const currenPagingOption = {
@@ -137,12 +138,6 @@ export const MobileDataGrid = () => {
         submitRequest(params);
     }
 
-    const reportTitleContent = (
-        <>
-            <span className='flex-auto report-title-text'>{reportTitle}</span>
-            <ExcelPopUp />
-        </>
-    )
 
     if (!data) {
         return null;
@@ -154,8 +149,8 @@ export const MobileDataGrid = () => {
     const isShowPagingInfo  = pagerSize.width > 400;
     return (
         <div className="mobile-table result-content" ref={ref}>
-            <ReportTitle content={reportTitleContent} />
-            <Table key='wla-mobile-table'
+            <ReportTitle content={<ReportTitleContent/>} tag='div' />
+            <Table key={`table-winloss-analysis-${requestParam.SubmitTime}`}
                 autoWidth={true}
                 autoHeight={false}
                 header={header}
