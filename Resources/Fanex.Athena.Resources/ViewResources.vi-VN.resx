@@ -1258,7 +1258,7 @@
     <value>Tên nhóm này đã tồn tại, vui lòng thử tên khác!</value>
   </data>
   <data name="GroupNameNotEmptyMsg" xml:space="preserve">
-    <value>Tên Nhóm không được trống</value>
+    <value>Tên Nhóm không được trống.</value>
   </data>
   <data name="GroupNameNotExceed100CharactersMsg" xml:space="preserve">
     <value>Tên Nhóm không được vượt quá 100 kí tự.</value>

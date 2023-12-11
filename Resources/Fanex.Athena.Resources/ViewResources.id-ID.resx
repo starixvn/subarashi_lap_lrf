@@ -454,10 +454,10 @@
     <value>Dukung pencarian tiket kosong saja</value>
   </data>
   <data name="BettingTicketCenter_Exchange_Note_2" xml:space="preserve">
-    <value>Masukkan nama pengguna untuk mendapatkan hasil lebih cepat</value>
+    <value>Masukkan nama pengguna untuk mendapatkan hasil lebih cepat.</value>
   </data>
   <data name="BettingTicketCenter_Exchange_Note_3" xml:space="preserve">
-    <value>Mendukung data hingga 1 bulan</value>
+    <value>Mendukung data hingga 1 bulan.</value>
   </data>
   <data name="BettingTicketCenter_RefnoTabNote1" xml:space="preserve">
     <value>Untuk Sportsbook, hasil pencarian termasuk tiket Bonus/Uang tunai terkait.</value>
@@ -942,6 +942,9 @@
   <data name="DesktopChina" xml:space="preserve">
     <value>Desktop Cina</value>
   </data>
+  <data name="DesktopGalaxy" xml:space="preserve">
+    <value>Desktop Galaxy</value>
+  </data>
   <data name="DesktopNewAsia" xml:space="preserve">
     <value>Desktop New Asia</value>
   </data>
@@ -962,6 +965,9 @@
   </data>
   <data name="DisableParlay" xml:space="preserve">
     <value>Nonaktifkan Parlay</value>
+  </data>
+  <data name="DisableRNGCasino" xml:space="preserve">
+    <value>Nonaktifkan Permainan Angka Keno</value>
   </data>
   <data name="DiscountValue" xml:space="preserve">
     <value>Nilai Diskon</value>
@@ -1017,6 +1023,9 @@
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
+  <data name="EnableRNGCasino" xml:space="preserve">
+    <value>Aktifkan Permainan Angka Keno</value>
+  </data>
   <data name="EndDate" xml:space="preserve">
     <value>Tanggal Berakhir</value>
   </data>
@@ -1058,6 +1067,9 @@
   </data>
   <data name="ExcelExceedRowsMsg" xml:space="preserve">
     <value>File ini melebihi 65535 entri. Harap hubungi administrator untuk lebih detailnya.</value>
+  </data>
+  <data name="Exchange" xml:space="preserve">
+    <value>Pertukaran</value>
   </data>
   <data name="ExchangeUnderMaintenanceMsg" xml:space="preserve">
     <value>Layanan Bursa sedang Dalam Pemeliharaan. Data mungkin tertunda selama periode ini. Kami mohon maaf sebesar-besarnya atas ketidaknyamanan yang ditimbulkan.</value>
@@ -1123,7 +1135,7 @@
     <value>Prediksi Tuan Rumah</value>
   </data>
   <data name="Fr" xml:space="preserve">
-    <value>Jumat</value>
+    <value>Jum</value>
   </data>
   <data name="FreeBets" xml:space="preserve">
     <value>Taruhan Gratis</value>
@@ -1142,6 +1154,9 @@
   </data>
   <data name="Fromdate" xml:space="preserve">
     <value>Dari tanggal</value>
+  </data>
+  <data name="FT" xml:space="preserve">
+    <value>Waktu Penuh</value>
   </data>
   <data name="Full" xml:space="preserve">
     <value>Penuh</value>
@@ -1292,6 +1307,9 @@
   </data>
   <data name="HomeNoBet" xml:space="preserve">
     <value>Tuan Rumah Tanpa Taruhan</value>
+  </data>
+  <data name="HTFT" xml:space="preserve">
+    <value>Pertama/Waktu Penuh</value>
   </data>
   <data name="HttpError_403" xml:space="preserve">
     <value>Akses ditolak</value>
@@ -1764,6 +1782,9 @@
   <data name="Message_RemoveCustomerLog" xml:space="preserve">
     <value>Catatan Pelanggan akan dihapus pada pukul 11 pagi tanggal 21 April (GMT+8). Gunakan Administrasi Pemain sebagai gantinya. Terima kasih!</value>
   </data>
+  <data name="Message_UpcomingClosureReport" xml:space="preserve">
+    <value>Setelah 7 September 2023, laporan ini akan dihapus.&lt;br&gt;Silakan lihat laporan analisis menang kalah untuk mendapatkan pengalaman yang lebih baik.&lt;br&gt;Jika Anda tidak memiliki izin untuk melihat laporan analisis menang kalah, silakan hubungi pemilik akun dengan hak tertinggi!</value>
+  </data>
   <data name="MinBet" xml:space="preserve">
     <value>Taruhan Minimum</value>
   </data>
@@ -1783,7 +1804,7 @@
     <value>Parlay Olahraga Campuran</value>
   </data>
   <data name="Mo" xml:space="preserve">
-    <value>Senin</value>
+    <value>Sen</value>
   </data>
   <data name="Mobile" xml:space="preserve">
     <value>Ponsel</value>
@@ -1796,6 +1817,9 @@
   </data>
   <data name="MobileEuro" xml:space="preserve">
     <value>Mobile Euro</value>
+  </data>
+  <data name="MobileGalaxy" xml:space="preserve">
+    <value>Mobile Galaxy</value>
   </data>
   <data name="MobileOthers" xml:space="preserve">
     <value>Lainnya (Mobile)</value>
@@ -1868,6 +1892,15 @@
   </data>
   <data name="NextBetInteval" xml:space="preserve">
     <value>Interval Taruhan Selanjutnya (detik)</value>
+  </data>
+  <data name="NG" xml:space="preserve">
+    <value>Number Game</value>
+  </data>
+  <data name="NGComm" xml:space="preserve">
+    <value>Komisi Number Game</value>
+  </data>
+  <data name="NGCommission" xml:space="preserve">
+    <value>Komisi Number Game</value>
   </data>
   <data name="No" xml:space="preserve">
     <value>Tidak</value>
@@ -2220,6 +2253,9 @@
   <data name="ProductJK" xml:space="preserve">
     <value>Joker</value>
   </data>
+  <data name="ProductKN" xml:space="preserve">
+    <value>Permainan Angka Keno</value>
+  </data>
   <data name="ProductLC" xml:space="preserve">
     <value>Kasino Langsung</value>
   </data>
@@ -2419,7 +2455,7 @@
     <value>Berjalan</value>
   </data>
   <data name="Sa" xml:space="preserve">
-    <value>Sabtu</value>
+    <value>Sab</value>
   </data>
   <data name="Saba" xml:space="preserve">
     <value>Saba</value>
@@ -2432,6 +2468,9 @@
   </data>
   <data name="SabaVirtualSettingLevel" xml:space="preserve">
     <value>Saba Pengaturan Tingkat Virtual</value>
+  </data>
+  <data name="SabaVirtualSport" xml:space="preserve">
+    <value>Saba Virtual Sports</value>
   </data>
   <data name="SabaVirtualSportsWinLoss" xml:space="preserve">
     <value>Saba Virtual Sports Win Loss</value>
@@ -2473,7 +2512,7 @@
     <value>Pelanggan yang Dipilih</value>
   </data>
   <data name="SelectedItemCount" xml:space="preserve">
-    <value>terpilih</value>
+    <value># terpilih</value>
   </data>
   <data name="SelectGroup" xml:space="preserve">
     <value>Pilih Grup</value>
@@ -2587,7 +2626,7 @@
     <value>Status</value>
   </data>
   <data name="Su" xml:space="preserve">
-    <value>Minggu</value>
+    <value>Min</value>
   </data>
   <data name="Subject" xml:space="preserve">
     <value>Subjek</value>
@@ -2656,7 +2695,7 @@
     <value>Tenis</value>
   </data>
   <data name="Th" xml:space="preserve">
-    <value>Kamis</value>
+    <value>Kam</value>
   </data>
   <data name="TheLicenseeHasNoAssignedCategory" xml:space="preserve">
     <value>Pemegang Lisensi tidak memiliki kategori yang ditetapkan. Harap hubungi admin untuk menetapkan setidaknya satu kategori sebelum membuat kontak</value>
@@ -2803,7 +2842,7 @@
     <value>Silakan coba login kembali: &lt;br/&gt;解决方法</value>
   </data>
   <data name="Tu" xml:space="preserve">
-    <value>Selasa</value>
+    <value>Sel</value>
   </data>
   <data name="Tuesday" xml:space="preserve">
     <value>Selasa</value>
@@ -3118,7 +3157,7 @@
     <value>Peringatan, pemain ini tidak dapat login dan transfer!</value>
   </data>
   <data name="We" xml:space="preserve">
-    <value>Rabu</value>
+    <value>Rab</value>
   </data>
   <data name="Wednesday" xml:space="preserve">
     <value>Rabu</value>
@@ -3183,10 +3222,13 @@
   <data name="TheSettledDateOnlyNote" xml:space="preserve">
     <value>"Settled Date" hanya menampilkan data tiket yang diselesaikan pertama kali berdasarkan rentang tanggal yang dipilih.</value>
   </data>
+  <data name="SabaVirtualSportsNote" xml:space="preserve">
+    <value>Saba Virtual Sports tidak mendukung jenis taruhan System Parlay.</value>
+  </data>
   <data name="CasinoPromotion" xml:space="preserve">
     <value>Promosi Kasino</value>
   </data>
   <data name="SBPromotion" xml:space="preserve">
-    <value>Promosi Sportsbook Saba</value>
+    <value>Promosi Sportsbook</value>
   </data>
 </root>

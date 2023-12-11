@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../actions';
 import LangHelper from '@jsroot/lib/langHelper';
 import AppData from '@jsroot/lib/AppData';
-import { DatePicker } from '@9softstudio/react-datepicker';
+import { DatePicker } from '@legion-lib/react-daterangepicker';
 import { getFormattedDate } from '../lib/utils';
 import { renderProductSelectList, renderCurrencySelectList, renderSportSelectList } from '../lib/formFilterUtils';
 
@@ -23,7 +23,7 @@ export const FormFilter = (props) => {
 
     useEffect(() => {
         setSelectedSport(sportCodeList);
-    },[sportCodeList])
+    }, [sportCodeList])
 
     const handleChangeCurrency = (currentItem, selectedItemsKey) => setSelectedCurrency(selectedItemsKey);
     const handleChangeSport = (currentItem, selectedItemsKey) => setSelectedSport(selectedItemsKey);
@@ -41,7 +41,7 @@ export const FormFilter = (props) => {
     });
 
     const handleChangeProduct = (currentItem, selectedItemsKey) => {
-        const param = {productCode: selectedItemsKey}
+        const param = { productCode: selectedItemsKey }
         props.getSportList(param)
         setSelectedProduct(selectedItemsKey);
     };
@@ -73,7 +73,8 @@ export const FormFilter = (props) => {
                         <label className="label-text">{LangHelper.getSingleResource("Date")}</label>
                         <DatePicker format="DD/MM/YYYY"
                             minDate={dateConstraint.minDate} maxDate={dateConstraint.maxDate} date={dateString}
-                            onChange={(momentDate) => setSelectedDate(momentDate.format("MM/DD/YYYY"))} />
+                            onChange={(momentDate) => setSelectedDate(momentDate.format("MM/DD/YYYY"))}
+                            langHandler={(key) => key === "May" ? LangHelper.getSingleResource("May2") : LangHelper.getSingleResource(key)} />
                     </div>
                 </div>
                 {
@@ -100,11 +101,11 @@ export const FormFilter = (props) => {
                 {
                     sportList && sportList.length ? (
                         <div className="col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2">
-                        <div className="form-group">
-                            <label className="label-text">{LangHelper.getSingleResource("Sport")}</label>
-                            {renderSportSelectList(sportList, handleChangeSport)}
+                            <div className="form-group">
+                                <label className="label-text">{LangHelper.getSingleResource("Sport")}</label>
+                                {renderSportSelectList(sportList, handleChangeSport)}
+                            </div>
                         </div>
-                    </div>
                     ) : null
                 }
 

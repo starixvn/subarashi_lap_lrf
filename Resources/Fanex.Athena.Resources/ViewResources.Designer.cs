@@ -3067,6 +3067,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exchange.
+        /// </summary>
+        public static string Exchange {
+            get {
+                return ResourceManager.GetString("Exchange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exchange&apos;s services are Under Maintenance. Data may be delayed during this period.&lt;br&gt;We sincerely apologize for any inconvenience caused..
         /// </summary>
         public static string ExchangeUnderMaintenanceMsg {

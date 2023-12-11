@@ -463,10 +463,10 @@
     <value>สนับสนุนการค้นหาตั๋วว่างเท่านั้น</value>
   </data>
   <data name="BettingTicketCenter_Exchange_Note_2" xml:space="preserve">
-    <value>ป้อนชื่อผู้ใช้เพื่อรับผลลัพธ์ที่เร็วขึ้น</value>
+    <value>ป้อนชื่อผู้ใช้เพื่อรับผลลัพธ์ที่เร็วขึ้น.</value>
   </data>
   <data name="BettingTicketCenter_Exchange_Note_3" xml:space="preserve">
-    <value>สนับสนุนข้อมูลสูงสุด 1 เดือน</value>
+    <value>สนับสนุนข้อมูลสูงสุด 1 เดือน.</value>
   </data>
   <data name="BettingTicketCenter_RefnoTabNote1" xml:space="preserve">
     <value>สำหรับสปอร์ตบุ๊ค ผลการค้นหาจะรวมตั๋วโบนัส/เงินสดที่เกี่ยวข้อง</value>
@@ -960,6 +960,9 @@
   <data name="DesktopChina" xml:space="preserve">
     <value>เดสก์ทอปจีน</value>
   </data>
+  <data name="DesktopGalaxy" xml:space="preserve">
+    <value>เดสก์ท็อปแกแล็กซี่</value>
+  </data>
   <data name="DesktopNewAsia" xml:space="preserve">
     <value>เดสก์ท็อป นิวเอเชีย</value>
   </data>
@@ -983,6 +986,9 @@
   </data>
   <data name="DisableParlay" xml:space="preserve">
     <value>ปิดใช้งานพาร์เลย์</value>
+  </data>
+  <data name="DisableRNGCasino" xml:space="preserve">
+    <value>ปิดใช้งาน RNG เกมคีโน</value>
   </data>
   <data name="DiscountValue" xml:space="preserve">
     <value>มูลค่าส่วนลด</value>
@@ -1038,6 +1044,9 @@
   <data name="Email" xml:space="preserve">
     <value>อีเมล</value>
   </data>
+  <data name="EnableRNGCasino" xml:space="preserve">
+    <value>เปิดใช้งาน RNG เกมคีโน</value>
+  </data>
   <data name="EndDate" xml:space="preserve">
     <value>วันที่สิ้นสุด</value>
   </data>
@@ -1079,6 +1088,9 @@
   </data>
   <data name="ExcelExceedRowsMsg" xml:space="preserve">
     <value>ไฟล์นี้เกิน 65535 รายการ โปรดติดต่อผู้ดูแลระบบเพื่อขอรายละเอียดเพิ่มเติม</value>
+  </data>
+  <data name="Exchange" xml:space="preserve">
+    <value>แลกเปลี่ยน</value>
   </data>
   <data name="ExchangeUnderMaintenanceMsg" xml:space="preserve">
     <value>บริการของสถานที่แลกเปลี่ยนอยู่ในระหว่างการบำรุงรักษา ข้อมูลอาจจะล่าช้าในช่วงเวลานี้ เราขออภัยอย่างแท้จริงสำหรับความไม่สะดวกที่เกิดขึ้น</value>
@@ -1144,7 +1156,7 @@
     <value>ทายเจ้าบ้าน</value>
   </data>
   <data name="Fr" xml:space="preserve">
-    <value>วันศุกร์</value>
+    <value>ศ.</value>
   </data>
   <data name="FreeBets" xml:space="preserve">
     <value>เดิมพันฟรี</value>
@@ -1163,6 +1175,9 @@
   </data>
   <data name="Fromdate" xml:space="preserve">
     <value>จากวันที่</value>
+  </data>
+  <data name="FT" xml:space="preserve">
+    <value>เต็มเวลา</value>
   </data>
   <data name="Full" xml:space="preserve">
     <value>เต็ม</value>
@@ -1267,7 +1282,7 @@
     <value>ชื่อกลุ่มนี้มีอยู่แล้ว โปรดลองชื่ออื่น!</value>
   </data>
   <data name="GroupNameNotEmptyMsg" xml:space="preserve">
-    <value>ชื่อกลุ่มต้องไม่ว่างเปล่า</value>
+    <value>ชื่อกลุ่มต้องไม่ว่างเปล่า.</value>
   </data>
   <data name="GroupNameNotExceed100CharactersMsg" xml:space="preserve">
     <value>ชื่อกลุ่มต้องไม่เกิน 100 อักขระ</value>
@@ -1326,6 +1341,9 @@
   <data name="HomeNoBet" xml:space="preserve">
     <value>เจ้าบ้าน ไม่มีการเดิมพัน</value>
   </data>
+  <data name="HTFT" xml:space="preserve">
+    <value>ที่1/เต็มเวลา</value>
+  </data>
   <data name="HttpError_403" xml:space="preserve">
     <value>ปฏิเสธการเข้าใช้</value>
   </data>
@@ -1363,7 +1381,7 @@
     <value>{0} จะถูกเพิ่มเข้าไปในรายชื่อผู้เล่นที่ถูกตรวจสอบโดยมีเกณฑ์การชนะรายวัน = {1} คุณแน่ใจหรือไม่ว่าต้องการเพิ่ม</value>
   </data>
   <data name="InstantDataReportNote" xml:space="preserve">
-    <value>รายงานตามเวลาจริงจะสนับสนุนข้อมูลทันทีจาก {0}</value>
+    <value>รายงานตามเวลาจริงจะสนับสนุนข้อมูลทันทีจาก {0}.</value>
   </data>
   <data name="InternalSystem" xml:space="preserve">
     <value>ระบบภายใน</value>
@@ -1800,6 +1818,9 @@
   <data name="Message_RemoveCustomerLog" xml:space="preserve">
     <value>บันทึกลูกค้าจะถูกลบในเวลา11:00 ของวันที่ 21 เมษายน(GMT+8) โปรดใช้การจัดการผู้เล่นแทน ขอบคุณ!</value>
   </data>
+  <data name="Message_UpcomingClosureReport" xml:space="preserve">
+    <value>รายงานนี้จะไม่สามารถใช้งานได้หลังจากวันที่ 7 กันยายน 2023.&lt;br&gt;สำหรับข้อมูลที่เกี่ยวข้อง โปรดอ้างอิงถึงรายงานการวิเคราะห์ชนะแพ้ ซึ่งให้ประสบการณ์ที่ดีกว่า&lt;br&gt;ในกรณีที่คุณไม่มีสิทธิ์ในการดูรายงานการวิเคราะห์ชนะแพ้ โปรดติดต่อผู้ดูแลระบบ!</value>
+  </data>
   <data name="MinBet" xml:space="preserve">
     <value>เดิมพันขั้นต่ำ</value>
   </data>
@@ -1819,7 +1840,7 @@
     <value>สปอร์ตผสม พาร์เลย์</value>
   </data>
   <data name="Mo" xml:space="preserve">
-    <value>วันจันทร์</value>
+    <value>จ.</value>
   </data>
   <data name="Mobile" xml:space="preserve">
     <value>โทรศัพท์มือถือ</value>
@@ -1832,6 +1853,9 @@
   </data>
   <data name="MobileEuro" xml:space="preserve">
     <value>มือถือยูโร</value>
+  </data>
+  <data name="MobileGalaxy" xml:space="preserve">
+    <value>โมบายล์แกแล็กซี่</value>
   </data>
   <data name="MobileOthers" xml:space="preserve">
     <value>มือถืออื่นๆ</value>
@@ -1904,6 +1928,15 @@
   </data>
   <data name="NextBetInteval" xml:space="preserve">
     <value>ช่วงเวลาเดิมพันถัดไป (วินาที)</value>
+  </data>
+  <data name="NG" xml:space="preserve">
+    <value>เกมตัวเลข</value>
+  </data>
+  <data name="NGComm" xml:space="preserve">
+    <value>ค่าคอมมิชชั่นเกมตัวเลข</value>
+  </data>
+  <data name="NGCommission" xml:space="preserve">
+    <value>ค่าคอมมิชชั่นเกมตัวเลข</value>
   </data>
   <data name="No" xml:space="preserve">
     <value>เลขที่</value>
@@ -2268,6 +2301,9 @@
   <data name="ProductJK" xml:space="preserve">
     <value>Joker</value>
   </data>
+  <data name="ProductKN" xml:space="preserve">
+    <value>RNG เกมคีโน</value>
+  </data>
   <data name="ProductLC" xml:space="preserve">
     <value>คาสิโนแทงบอลสด</value>
   </data>
@@ -2470,7 +2506,7 @@
     <value>แข่งขัน</value>
   </data>
   <data name="Sa" xml:space="preserve">
-    <value>วันเสาร์</value>
+    <value>ส.</value>
   </data>
   <data name="Saba" xml:space="preserve">
     <value>Saba</value>
@@ -2483,6 +2519,12 @@
   </data>
   <data name="SabaVirtualSettingLevel" xml:space="preserve">
     <value>ระดับการตั้งค่าเสมือนจริง Saba</value>
+  </data>
+  <data name="SabaVirtualSport" xml:space="preserve">
+    <value>Sabaกีฬาเสมือนจริง</value>
+  </data>
+  <data name="SabaVirtualSportsNote" xml:space="preserve">
+    <value>Saba Virtual Sports ไม่สนับสนุนประเภทการเดิมพัน System Parlay.</value>
   </data>
   <data name="SabaVirtualSportsWinLoss" xml:space="preserve">
     <value>Sabaกีฬาเสมือนจริง แพ้ชนะ</value>
@@ -2641,7 +2683,7 @@
     <value>สถานะ</value>
   </data>
   <data name="Su" xml:space="preserve">
-    <value>วันอาทิตย์</value>
+    <value>อา.</value>
   </data>
   <data name="Subject" xml:space="preserve">
     <value>เรื่อง</value>
@@ -2698,7 +2740,7 @@
     <value>ระบบพาร์เลย์</value>
   </data>
   <data name="SystemParlayDetailNote" xml:space="preserve">
-    <value>การแพ้ชนะจะถูกปัดเศษเพื่อการอ้างอิงเท่านั้น ดังนั้น ยอดรวมย่อยอาจแตกต่างจากผลรวมของแพ้ชนะหลังรวมยอดชนะจริงทั้งหมด</value>
+    <value>การแพ้ชนะจะถูกปัดเศษเพื่อการอ้างอิงเท่านั้น ดังนั้น ยอดรวมย่อยอาจแตกต่างจากผลรวมของแพ้ชนะหลังรวมยอดชนะจริงทั้งหมด.</value>
   </data>
   <data name="Tablet" xml:space="preserve">
     <value>แท็บแล็ต</value>
@@ -2710,7 +2752,7 @@
     <value>เทนนิส</value>
   </data>
   <data name="Th" xml:space="preserve">
-    <value>วันพฤหัสบดี</value>
+    <value>พฤ.</value>
   </data>
   <data name="TheLicenseeHasNoAssignedCategory" xml:space="preserve">
     <value>ผู้ได้รับอนุญาตไม่มีหมวดหมู่ที่ได้รับมอบหมาย โปรดติดต่อผู้ดูแลระบบเพื่อกำหนดอย่างน้อยหนึ่งหมวดหมู่ก่อนสร้างผู้ติดต่อ</value>
@@ -2722,7 +2764,7 @@
     <value>ข้อมูลอาจมีความล่าช้าประมาณ 20 นาทีสำหรับตั๋วที่ได้รับการตั้งค่าแล้วและ 65 นาทีสำหรับตั๋วที่ได้รับการตั้งค่าใหม่</value>
   </data>
   <data name="TheSettledAndResettledDateNote" xml:space="preserve">
-    <value>โหมด 'วันที่ตั้งค่าและตั้งค่าใหม่' จะแสดงข้อมูลตามวันที่ตั้งค่าและวันที่ตั้งค่าใหม่ตามช่วงวันที่ที่เลือก</value>
+    <value>โหมด 'วันที่ตั้งค่าและตั้งค่าใหม่' จะแสดงข้อมูลตามวันที่ตั้งค่าและวันที่ตั้งค่าใหม่ตามช่วงวันที่ที่เลือก.</value>
   </data>
   <data name="Thursday" xml:space="preserve">
     <value>วันพฤหัสบดี</value>
@@ -2857,7 +2899,7 @@
     <value>โปรดลองเข้าสู่ระบบอีกครั้ง:&lt;br/&gt;</value>
   </data>
   <data name="Tu" xml:space="preserve">
-    <value>วันอังคาร</value>
+    <value>อ.</value>
   </data>
   <data name="Tuesday" xml:space="preserve">
     <value>วันอังคาร</value>
@@ -3172,7 +3214,7 @@
     <value>คำเตือน ผู้เล่นนี้ไม่สามารถเข้าสู่ระบบและโอนได้!</value>
   </data>
   <data name="We" xml:space="preserve">
-    <value>วันพุธ</value>
+    <value>พ.</value>
   </data>
   <data name="Wednesday" xml:space="preserve">
     <value>วันพุธ</value>
@@ -3239,6 +3281,9 @@
   </data>
   <data name="TheSettledDateOnlyNote" xml:space="preserve">
     <value>"Settled Date" จะแสดงเฉพาะข้อมูลของตั๋วที่ได้รับการชำระเงินครั้งแรกตามช่วงวันที่ที่เลือก</value>
+  </data>
+  <data name="ViewResettledTicketOnlyNote" xml:space="preserve">
+    <value>"ดูตั๋วที่ถูกตั้งค่าใหม่เท่านั้น" ข้อมูลสามารถใช้ได้ตั้งแต่วันที่ 1 กันยายน.</value>
   </data>
   <data name="CasinoPromotion" xml:space="preserve">
     <value>โปรโมชั่นคาสิโน</value>
