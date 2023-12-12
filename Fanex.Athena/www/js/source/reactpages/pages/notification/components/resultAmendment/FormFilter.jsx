@@ -21,7 +21,6 @@ export class FormFilter extends Component {
         }
 
         this.props.setParam(params.data);
-        this.props.toggleLoader(true);
         this.props.getGridData(params);
     }
 

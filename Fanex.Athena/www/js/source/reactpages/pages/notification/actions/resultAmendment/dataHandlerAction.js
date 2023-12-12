@@ -2,6 +2,7 @@ import * as types from './types.js'
 import axios from 'axios'
 
 import Site from '../../../../lib/site'
+import {toggleLoader} from '../../../../actions/loaderAction'
 
 const header = () => {
     return {
@@ -40,11 +41,16 @@ export const setSelectedViewEvent = data => ({
 
 export function getGridData(params) {
     return (dispatch) => {
+        dispatch(toggleLoader(true));
         fetchData(params).then(response => {
             dispatch(setGridData({
                 Data: response.data.DataList,
                 Total: response.data.TotalRows
             }));
+            dispatch(toggleLoader(false));
+        }).catch(error => {
+            console.log(error);
+            dispatch(toggleLoader(false));
         });
     };
 }
@@ -58,6 +64,8 @@ export function setGridData(data) {
 
 export function markItemAsRead(params) {   
     return (dispatch) => {
+        dispatch(toggleLoader(true));
+
         markNotification({ id: params.Id, type: params.Type, xsrfToken: Site.getXsrfToken()}).then(response => {
             if(response.data.IsSuccessful)
             {
@@ -67,7 +75,13 @@ export function markItemAsRead(params) {
                     Data: params.Data,
                     Total: params.Total
                 }));
+
+                dispatch(toggleLoader(false));
+
             }
+        }).catch(error => {
+            console.log(error);
+            dispatch(toggleLoader(false));
         });
     };
 }

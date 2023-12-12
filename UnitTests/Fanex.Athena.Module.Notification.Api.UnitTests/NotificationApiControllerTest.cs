@@ -1,6 +1,9 @@
 ﻿namespace Fanex.Athena.Module.Notification.Api.UnitTests
 {
-    using Extension.Utility;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using System.Web.Http.Controllers;
+    using System.Web.Script.Serialization;
     using Fanex.Athena.Module.Notification.DTO;
     using Fanex.Athena.Module.Notification.MetaModel;
     using Fanex.Athena.Module.Notification.Service.Interfaces;
@@ -11,11 +14,6 @@
     using Model.Core.ResultModel;
     using NSubstitute;
     using NUnit.Framework;
-    using System;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using System.Web.Http.Controllers;
-    using System.Web.Script.Serialization;
 
     public class NotificationApiControllerTest
     {
@@ -25,11 +23,7 @@
 
         private const string Language = "Cs";
 
-        private static readonly int MaximumMonthDistance = NotificationMetaModel.MaximumMonthRange - 1;
-
         private INotificationService _notificationService;
-
-        private IAppSettings _appSettings;
 
         private ILicenseeSettingService _licenseeSettingService;
 
@@ -41,7 +35,6 @@
         public void SetUp()
         {
             _notificationService = Substitute.For<INotificationService>();
-            _appSettings = Substitute.For<IAppSettings>();
             _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
             _apiController = GetControllerWithActionArguments();
 
@@ -97,11 +90,8 @@
                 Language = "en",
                 MessageTypes = "1,2"
             };
-            var today = DateTime.Today;
             var expectedMetaModel = new NotificationMetaModel
             {
-                FromDate = new DateTime(today.Year, today.Month, 1).AddMonths(-MaximumMonthDistance),
-                ToDate = today.AddDays(1).AddMilliseconds(-1),
                 Language = "en",
                 IsOnlyUnread = true,
                 PageSize = 10,
@@ -211,7 +201,7 @@
                 }
             };
 
-            return new NotificationApiController(_notificationService, _appSettings, _licenseeSettingService)
+            return new NotificationApiController(_notificationService)
             {
                 ActionContext = mockActionContext
             };

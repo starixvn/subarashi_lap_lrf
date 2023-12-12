@@ -1,5 +1,9 @@
 ﻿namespace Fanex.Athena.Module.Notification.Report.UnitTests
 {
+    using System.Collections.Generic;
+    using System.Net;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using Fanex.Athena.Controllers.Base.UnitTests;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.ResultModel;
@@ -8,16 +12,9 @@
     using Fanex.Athena.Module.Notification.Service.Interfaces;
     using NSubstitute;
     using NUnit.Framework;
-    using System;
-    using System.Collections.Generic;
-    using System.Net;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
 
     public class NotificationReportController_ApiDataTest : CultureBaseControllerHelperTest
     {
-        private static readonly int MaximumMonthDistance = NotificationMetaModel.MaximumMonthRange - 1;
-
         private INotificationService _service;
 
         private NotificationReportController _controller;
@@ -58,7 +55,6 @@
             Assert.Multiple(() =>
             {
                 _service.Received().GetNotificationMessages(Arg.Any<NotificationMetaModel>());
-                Assert.That(new DateTime(metaModel.ToDate.Year, metaModel.ToDate.Month, 1).AddMonths(-MaximumMonthDistance), Is.EqualTo(metaModel.FromDate));
                 Assert.That(metaModel.IsOnlyUnread, Is.True);
                 Assert.That(metaModel.PageIndex, Is.EqualTo(1));
                 Assert.That(metaModel.PageSize, Is.EqualTo(10));

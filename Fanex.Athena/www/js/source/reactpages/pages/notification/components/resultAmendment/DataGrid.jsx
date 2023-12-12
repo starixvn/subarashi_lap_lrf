@@ -45,7 +45,6 @@ export class DataGrid extends Component {
             data: paramData
         };
 
-        this.props.toggleLoader(true);
         this.props.getGridData(params);
         this.props.setParam(paramData);
     }

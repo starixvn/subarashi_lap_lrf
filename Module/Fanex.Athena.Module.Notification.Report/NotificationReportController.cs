@@ -1,5 +1,12 @@
 ﻿namespace Fanex.Athena.Module.Notification.Report
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Net;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
+    using System.Web.SessionState;
     using Fanex.Athena.Controllers;
     using Fanex.Athena.Excel.Base.Helpers;
     using Fanex.Athena.Extension.Helper;
@@ -13,13 +20,6 @@
     using Fanex.Athena.Resources;
     using Fanex.Athena.Web.ActionFilter;
     using Fanex.Athena.Web.ResultExtension;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Net;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-    using System.Web.SessionState;
 
     [FunctionAuthorization(PermissionKeys.ResultAmendmentNotificationReport, PermissionKeys.Bell)]
     [SessionState(SessionStateBehavior.ReadOnly)]
@@ -59,14 +59,9 @@
         [HttpGet]
         public async Task<ActionResult> GetNotificationMessages()
         {
-            var maximumMonthDistance = NotificationMetaModel.MaximumMonthRange - 1;
-
-            var today = DateTime.Today;
             var metaModel = new NotificationMetaModel
             {
                 IsOnlyUnread = true,
-                FromDate = new DateTime(today.Year, today.Month, 1).AddMonths(-maximumMonthDistance),
-                ToDate = today.AddDays(1).AddMilliseconds(-1),
                 PageIndex = 1,
                 PageSize = 10
             };
