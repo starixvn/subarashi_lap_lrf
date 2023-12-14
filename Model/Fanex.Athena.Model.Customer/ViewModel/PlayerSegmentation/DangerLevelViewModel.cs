@@ -2,12 +2,13 @@
 {
     using System;
     using System.Collections.Generic;
+    using Fanex.Athena.Extension.Helper;
 
     public class DangerLevelViewModel
     {
         public DangerLevelViewModel()
         {
-            var today = DateTime.Today;
+            var today = DateTimeHelper.Today;
             FromDate = today;
             ToDate = today;
             MaxDate = today;

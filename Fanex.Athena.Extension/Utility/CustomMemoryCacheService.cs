@@ -2,6 +2,7 @@
 {
     using System;
     using System.Runtime.Caching;
+    using Fanex.Athena.Extension.Helper;
     using Interfaces;
     using Internal;
     using Newtonsoft.Json;
@@ -48,7 +49,7 @@
 
             if (!Equals(value, default(T)))
             {
-                _cache.Set(key, DeepClone(value), DateTime.Now.AddSeconds(seconds), REGIONNAME);
+                _cache.Set(key, DeepClone(value), DateTimeHelper.Now.AddSeconds(seconds), REGIONNAME);
             }
         }
 

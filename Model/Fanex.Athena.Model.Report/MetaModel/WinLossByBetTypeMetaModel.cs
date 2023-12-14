@@ -1,6 +1,6 @@
 ﻿namespace Fanex.Athena.Model.Report.MetaModel
 {
-    using System;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Model.Core.MetaModel;
 
@@ -8,8 +8,8 @@
     {
         public WinLossByBetTypeMetaModel()
         {
-            FromDate = DateTime.Today;
-            ToDate = DateTime.Today;
+            FromDate = DateTimeHelper.Today;
+            ToDate = DateTimeHelper.Today;
             SortDirection = "ASC";
             SortColumn = "BetTypeName";
         }

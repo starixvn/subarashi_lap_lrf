@@ -1,12 +1,11 @@
 ﻿namespace Fanex.Athena.Api.BetList.UnitTests
 {
-    using System;
     using System.Linq;
     using System.Net.Http;
     using System.Threading.Tasks;
 
     using Base.UnitTests;
-
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     using Model.BetList.MetaModel;
@@ -81,8 +80,8 @@
                 const string ApiPath = "/BettingTicketCenter/GetByRunning";
                 var metaModel = new BaseBettingTicketMetaModel
                 {
-                    FromDate = DateTime.Today,
-                    ToDate = DateTime.Today,
+                    FromDate = DateTimeHelper.Today,
+                    ToDate = DateTimeHelper.Today,
                     ProductCodeList = "C1,C2",
                     CurrencyIdList = "1,2"
                 };
@@ -110,8 +109,8 @@
                 // Arrange
                 var metaModel = new SingleCustomersBetListMetaModel
                 {
-                    FromDate = DateTime.Today,
-                    ToDate = DateTime.Today,
+                    FromDate = DateTimeHelper.Today,
+                    ToDate = DateTimeHelper.Today,
                     ProductCodeList = "C1,C2",
                     CurrencyIdList = "-2",
                     UserName = FakeHelper.Create<string>()
@@ -134,8 +133,8 @@
                 const string ApiPath = "/BettingTicketCenter/GetBySingleCustomer";
                 var metaModel = new SingleCustomersBetListMetaModel
                 {
-                    FromDate = DateTime.Today,
-                    ToDate = DateTime.Today,
+                    FromDate = DateTimeHelper.Today,
+                    ToDate = DateTimeHelper.Today,
                     ProductCodeList = "C1,C2",
                     CurrencyIdList = SessionService.UserSession.CurrencyList.Select(x => x.Key).FirstOrDefault().ToString(),
                     UserName = FakeHelper.Create<string>()

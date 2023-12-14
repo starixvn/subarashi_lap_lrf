@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
@@ -52,8 +53,8 @@
             var metaModel = new CustomerWinLossMetaModel
             {
                 IsExcludedTestData = true,
-                FromDate = isHistory ? new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1)
-                : DateTime.Today,
+                FromDate = isHistory ? new DateTime(DateTimeHelper.Today.Year, DateTimeHelper.Today.Month, 1)
+                : DateTimeHelper.Today,
                 BaseCurrency = userSession.DefaultBaseCurrency
             };
 

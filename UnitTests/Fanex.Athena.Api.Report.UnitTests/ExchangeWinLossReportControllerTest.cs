@@ -6,7 +6,7 @@
     using Base.UnitTests;
 
     using DataAccess.Report.Interfaces;
-
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -75,8 +75,8 @@
             // Arrange
             var model = new ExchangeWinLossMetaModel
             {
-                FromDate = DateTime.Now,
-                ToDate = DateTime.Now.AddDays(-1),
+                FromDate = DateTimeHelper.Now,
+                ToDate = DateTimeHelper.Now.AddDays(-1),
                 CurrencyId = -100
             };
 

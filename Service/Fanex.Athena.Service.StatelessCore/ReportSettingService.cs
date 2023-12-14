@@ -58,7 +58,7 @@
 
         private static DateTime GetNowByTimeZone(int? timeZone)
         {
-            return timeZone.HasValue ? DateTime.UtcNow.AddHours(timeZone.Value) : DateTime.Now;
+            return timeZone.HasValue ? DateTimeHelper.UtcNow.AddHours(timeZone.Value) : DateTimeHelper.Now;
         }
 
         private static DateTime ConvertToDate(string datetime, int? timeZone, DateTime? defaultDate)

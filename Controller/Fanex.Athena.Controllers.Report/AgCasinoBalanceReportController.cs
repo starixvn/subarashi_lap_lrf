@@ -9,6 +9,7 @@ namespace Fanex.Athena.Controllers.Report
     using System;
     using System.Linq;
     using System.Web.Mvc;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
@@ -23,7 +24,7 @@ namespace Fanex.Athena.Controllers.Report
         {
             var licenseeSession = SessionServiceInstance.LicenseeSession;
             var userSession = SessionServiceInstance.UserSession;
-            var toDate = DateTime.Now.AddDays(-2);
+            var toDate = DateTimeHelper.Now.AddDays(-2);
 
             var metaModel = new ThirdPartyWinLossMetaModel
             {

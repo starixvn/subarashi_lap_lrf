@@ -7,6 +7,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Extension.Utility.Interfaces;
     using Fanex.Athena.Model.Core.DataDomain;
@@ -402,7 +403,7 @@
             {
                 return eventDate;
             }
-            return DateTime.Now;
+            return DateTimeHelper.Now;
         }
 
         private static int ReadMessageId(IDataReader reader)
@@ -450,7 +451,7 @@
 
         private static NotificationMetaModel CreateNotificationMetaModel(NotificationMetaModel defaultMetaModel, int maximunMonthSuport)
         {
-            var today = DateTime.Today;
+            var today = DateTimeHelper.Today;
             var maximumMonthDistance = maximunMonthSuport - 1;
             return new NotificationMetaModel
             {

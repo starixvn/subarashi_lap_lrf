@@ -1,15 +1,16 @@
 ﻿namespace Fanex.Athena.Model.Report.MetaModel
 {
     using System;
+    using Fanex.Athena.Extension.Helper;
 
     public class TurnoverMetaModel : BaseReportMetaModel
     {
         public TurnoverMetaModel()
         {
-            Year = DateTime.Today.Year;
-            Month = DateTime.Today.Month;
+            Year = DateTimeHelper.Today.Year;
+            Month = DateTimeHelper.Today.Month;
             FromDay = 1;
-            ToDay = DateTime.Today.Day;
+            ToDay = DateTimeHelper.Today.Day;
             IsExcludedTestData = true;
         }
 

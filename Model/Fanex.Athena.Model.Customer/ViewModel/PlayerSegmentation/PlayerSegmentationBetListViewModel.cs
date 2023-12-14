@@ -12,8 +12,8 @@
         {
             PageIndex = 1;
             PageSize = DefaultPageSize;
-            FromDate = DateTimeHelper.GetFirstDateOfMonth(DateTime.Today.AddMonths(-LimitedMonthRange + 1));
-            ToDate = DateTime.Today;
+            FromDate = DateTimeHelper.GetFirstDateOfMonth(DateTimeHelper.Today.AddMonths(-LimitedMonthRange + 1));
+            ToDate = DateTimeHelper.Today;
         }
 
         public int CustId { get; set; }

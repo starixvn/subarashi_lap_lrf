@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.MetaModel.Product;
     using Model.Core.MetaModel;
@@ -14,8 +15,8 @@
         public BaseReportMetaModel()
         {
             ProductOptions = new List<ProductOption>();
-            FromDate = DateTime.Today;
-            ToDate = DateTime.Today;
+            FromDate = DateTimeHelper.Today;
+            ToDate = DateTimeHelper.Today;
         }
 
         public string ProductCodeList { get; set; }

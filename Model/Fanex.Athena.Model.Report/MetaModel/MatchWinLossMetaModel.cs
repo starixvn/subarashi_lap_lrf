@@ -2,6 +2,7 @@
 {
     using System;
     using System.Linq;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.MetaModel;
 
@@ -9,7 +10,7 @@
     {
         public MatchWinLossMetaModel()
         {
-            Date = DateTime.Now;
+            Date = DateTimeHelper.Now;
         }
 
         public string BalanceUpDay { get; set; }

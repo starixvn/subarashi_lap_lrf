@@ -48,8 +48,8 @@
         {
             var model = new NotificationViewModel
             {
-                FromDate = DateTimeHelper.GetFirstDateOfWeek(DateTime.Now, DayOfWeek.Sunday),
-                ToDate = DateTime.Now,
+                FromDate = DateTimeHelper.GetFirstDateOfWeek(DateTimeHelper.Now, DayOfWeek.Sunday),
+                ToDate = DateTimeHelper.Now,
                 LicenseeName = SessionServiceInstance.LicenseeSession.LicenseeName
             };
 

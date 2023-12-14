@@ -8,6 +8,7 @@
     using DataAccess.Report.Interfaces;
     using Excel.Report;
     using Excel.Report.Models;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Service.Core.Utility.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DTO.Common;
@@ -209,13 +210,13 @@
             {
                 new WinLossByProduct
                 {
-                    Date = DateTime.Today,
+                    Date = DateTimeHelper.Today,
                     CurrencyName = "USD",
                     Index = 1
                 },
                 new WinLossByProduct
                 {
-                    Date = DateTime.Today,
+                    Date = DateTimeHelper.Today,
                     CurrencyName = "USD",
                     Index = 2
                 }

@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Web.Mvc;
     using Fanex.Athena.Controllers.Base.UnitTests;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DataDomain;
@@ -53,8 +54,8 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    Assert.That(model.FromDate, Is.EqualTo(DateTime.Today));
-                    Assert.That(model.ToDate, Is.EqualTo(DateTime.Today));
+                    Assert.That(model.FromDate, Is.EqualTo(DateTimeHelper.Today));
+                    Assert.That(model.ToDate, Is.EqualTo(DateTimeHelper.Today));
                     Assert.That(model.CurrencyList, Is.EqualTo(DefaultUserSession.CurrencyList));
                     Assert.That(model.ProductOptions.Count, Is.EqualTo(productList.Count));
                     Assert.That(model.ProductOptions.First().Code, Is.EqualTo(productList.First().ProductCode));

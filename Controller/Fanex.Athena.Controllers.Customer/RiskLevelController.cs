@@ -1,9 +1,9 @@
 ﻿namespace Fanex.Athena.Controllers.Customer
 {
-    using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Fanex.Athena.Excel.Customer.CustomerClass;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Customer.DTO;
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Athena.Resources;
@@ -38,7 +38,7 @@
             var metaModel = BuildMetaModel(customerClass, currencyId);
             var dataSource = await _service.GetRiskLevelPolicyByCustomerClass(metaModel);
             var templatePath = Server.MapPath(@"~/App_Data/Template/Customers/PlayerSegmentation/RiskLevelInformation.xls");
-            var fileName = "RiskLevelInformation_" + DateTime.Now.ToString("MM-dd-yyyy");
+            var fileName = "RiskLevelInformation_" + DateTimeHelper.Now.ToString("MM-dd-yyyy");
             var reportTitle = ViewResources.RiskLevelInformation;
 
             var excel = CreateExcel(templatePath, reportTitle, dataSource);

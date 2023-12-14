@@ -1,6 +1,5 @@
 ﻿namespace Fanex.Athena.Controllers.Customer
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -8,6 +7,7 @@
     using Fanex.Athena.Controllers.Customer.Helpers;
     using Fanex.Athena.Excel.Base.Helpers;
     using Fanex.Athena.Excel.Customer.CustomerClass;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Athena.Resources;
     using Fanex.Athena.Service.Customer.Interfaces;
@@ -67,7 +67,7 @@
             if (dataSource.Any())
             {
                 var templatePath = Server.MapPath(@"~/App_Data/Template/Customers/PlayerSegmentation/SabaVirtualSettingInformation.xls");
-                var fileName = "SabaVirtualSettingInformation_" + DateTime.Now.ToString("MM-dd-yyyy");
+                var fileName = "SabaVirtualSettingInformation_" + DateTimeHelper.Now.ToString("MM-dd-yyyy");
                 var reportTitle = $"{ViewResources.SabaVirtualSetting} {ViewResources.Information}";
 
                 var excel = new SabaVirtualSettingInformationExcel(templatePath, reportTitle, dataSource);

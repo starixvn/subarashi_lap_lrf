@@ -15,6 +15,7 @@ namespace Fanex.Athena.Controllers.Report
     using DataAccess.Core.Configuration.Interfaces;
     using Fanex.Athena.Excel.Base.Entities;
     using Fanex.Athena.Excel.Report;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel.LiveReports;
@@ -51,8 +52,8 @@ namespace Fanex.Athena.Controllers.Report
             var userSession = SessionServiceInstance.UserSession;
             var metaModel = new LiveReportMetaModel
             {
-                FromDate = DateTime.Now,
-                ToDate = DateTime.Now,
+                FromDate = DateTimeHelper.Now,
+                ToDate = DateTimeHelper.Now,
                 LicenseeId = licenseeSession.LicenseeId,
                 UserId = userSession.UserId,
                 IsViewedHistory = isViewedHistory,
@@ -301,7 +302,7 @@ namespace Fanex.Athena.Controllers.Report
         private DateTime GetBalanceUpDay()
         {
             var balanceUp = _balanceUpDataAccess.GetBalanceUp();
-            return balanceUp != null ? balanceUp.BalanceUpDay : DateTime.Now;
+            return balanceUp != null ? balanceUp.BalanceUpDay : DateTimeHelper.Now;
         }
     }
 }

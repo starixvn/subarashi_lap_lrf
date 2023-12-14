@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
-
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.Core.Utility.Interfaces;
 
@@ -86,7 +86,7 @@
                 StubUserSessionData(new UserAuthInfo { CurrencyAgentList = new Dictionary<int, int[]>(), CurrencyList = new Dictionary<int, string>() });
 
                 // Action
-                var result = await controller.MixParlay(0, 0, 1, string.Empty, 0, DateTime.Today, DateTime.Today, string.Empty);
+                var result = await controller.MixParlay(0, 0, 1, string.Empty, 0, DateTimeHelper.Today, DateTimeHelper.Today, string.Empty);
 
                 // Assert
                 Assert.That(result, Is.Null);

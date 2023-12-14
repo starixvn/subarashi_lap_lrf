@@ -9,6 +9,7 @@ namespace Fanex.Athena.Controllers.Report
     using System;
     using System.Linq;
     using System.Web.Mvc;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
@@ -29,8 +30,8 @@ namespace Fanex.Athena.Controllers.Report
                 FunctionNames.WinLossByProduct);
             var metaModel = new WinLossByProductMetaModel
             {
-                FromDate = DateTime.Now,
-                ToDate = DateTime.Now,
+                FromDate = DateTimeHelper.Now,
+                ToDate = DateTimeHelper.Now,
                 LicenseeId = licenseeSession.LicenseeId,
                 IsExcludedTestData = true,
                 DrawFilter = DrawFilterType.Normal,

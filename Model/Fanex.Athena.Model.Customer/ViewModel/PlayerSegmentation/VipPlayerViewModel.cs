@@ -2,13 +2,14 @@
 {
     using System;
     using System.Collections.Generic;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Customer.DTO;
 
     public class VipPlayerViewModel
     {
         public VipPlayerViewModel()
         {
-            var today = DateTime.Today;
+            var today = DateTimeHelper.Today;
             var firstDayOfMonth = new DateTime(today.Year, today.Month, 1);
 
             FromReachedDate = firstDayOfMonth;

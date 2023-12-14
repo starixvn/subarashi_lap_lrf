@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Fanex.Athena.Extension.Helper;
 
 namespace Fanex.Athena.Model.Customer.ViewModel
 {
@@ -10,7 +11,7 @@ namespace Fanex.Athena.Model.Customer.ViewModel
 
         public MonitoredPlayerViewModel()
         {
-            var today = DateTime.Today;
+            var today = DateTimeHelper.Today;
             var minMonth = today.AddMonths(-MaxDateLastMonths);
             var firstDayLastThreeMonth = new DateTime(minMonth.Year, minMonth.Month, 1);
             FromReachedDate = today;

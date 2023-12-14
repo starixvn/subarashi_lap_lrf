@@ -1,11 +1,11 @@
 ﻿namespace Fanex.Athena.Controllers.Report.UnitTests
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Fanex.Athena.Controllers.Base.UnitTests;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.DTO.Configuration;
@@ -73,7 +73,7 @@
                 // Arrange
                 var licenseeSetting = new FakeLicenseeSetting { TimeZone = 1, LimitRecentMonths = 1 };
                 _licenseeSettingService.GetFakeLicenseeSetting(DefaultLicenseeSession.LicenseeName).Returns(licenseeSetting);
-                var expectedTodatGtm8 = DateTime.UtcNow.AddHours(licenseeSetting.TimeZone.Value);
+                var expectedTodatGtm8 = DateTimeHelper.UtcNow.AddHours(licenseeSetting.TimeZone.Value);
                 var expectedMinDate = expectedTodatGtm8.AddMonths(-licenseeSetting.LimitRecentMonths);
 
                 // Action
@@ -96,7 +96,7 @@
                 // Arrange
                 FakeLicenseeSetting licenseeSetting = null;
                 _licenseeSettingService.GetFakeLicenseeSetting(DefaultLicenseeSession.LicenseeName).Returns(licenseeSetting);
-                var expectedTodatGtm8 = DateTime.Now;
+                var expectedTodatGtm8 = DateTimeHelper.Now;
                 var expectedMinDate = expectedTodatGtm8.AddMonths(-DefaultLimitedMonthRange);
 
                 // Action
@@ -119,7 +119,7 @@
                 // Arrange
                 var licenseeSetting = new FakeLicenseeSetting() { LimitRecentMonths = 1 };
                 _licenseeSettingService.GetFakeLicenseeSetting(DefaultLicenseeSession.LicenseeName).Returns(licenseeSetting);
-                var expectedTodatGtm8 = DateTime.Now;
+                var expectedTodatGtm8 = DateTimeHelper.Now;
                 var expectedMinDate = expectedTodatGtm8.AddMonths(-licenseeSetting.LimitRecentMonths);
 
                 // Action

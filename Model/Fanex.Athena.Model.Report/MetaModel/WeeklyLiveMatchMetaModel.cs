@@ -6,7 +6,6 @@
 
 namespace Fanex.Athena.Model.Report.MetaModel
 {
-    using System;
     using Extension.Helper;
     using Fanex.Athena.Model.Core.MetaModel;
 
@@ -14,7 +13,7 @@ namespace Fanex.Athena.Model.Report.MetaModel
     {
         public WeeklyLiveMatchMetaModel()
         {
-            ToDate = DateTime.Now.AddDays(-1);
+            ToDate = DateTimeHelper.Now.AddDays(-1);
             FromDate = DateTimeHelper.GetFirstDateOfWeek(ToDate);
         }
 

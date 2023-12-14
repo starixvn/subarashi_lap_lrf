@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using Core.DTO.Common;
     using Core.MetaModel.Product;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Customer.DTO;
 
     [Serializable]
@@ -11,7 +12,7 @@
     {
         public BettingTicketCenterViewModel()
         {
-            var today = DateTime.Today;
+            var today = DateTimeHelper.Today;
             FromDate = today;
             ToDate = today;
             MaxDate = today;

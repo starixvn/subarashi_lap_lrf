@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Configuration;
     using System.Linq;
+    using Fanex.Athena.Extension.Helper;
 
     public class AppSettings : IAppSettings
     {
@@ -132,7 +133,7 @@
             get
             {
                 var dateString = GetValue("MaxDate");
-                return string.IsNullOrWhiteSpace(dateString) ? DateTime.Now : DateTime.Parse(dateString);
+                return string.IsNullOrWhiteSpace(dateString) ? DateTimeHelper.Now : DateTime.Parse(dateString);
             }
         }
 

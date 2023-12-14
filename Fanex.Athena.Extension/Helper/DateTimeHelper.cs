@@ -4,6 +4,14 @@
 
     public static class DateTimeHelper
     {
+        public static Func<DateTimeOffset> DateTimeOffsetProvider { get; set; } = () => DateTimeOffset.Now;
+
+        public static DateTime Now => DateTimeOffsetProvider().DateTime;
+
+        public static DateTime UtcNow => DateTimeOffsetProvider().UtcDateTime;
+
+        public static DateTime Today => Now.Date;
+
         public static DateTime GetMaxDate(DateTime dateOne, DateTime dateTwo)
         {
             return dateOne > dateTwo ? dateOne : dateTwo;

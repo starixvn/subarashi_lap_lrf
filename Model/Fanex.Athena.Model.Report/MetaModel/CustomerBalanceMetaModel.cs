@@ -1,12 +1,12 @@
 ﻿namespace Fanex.Athena.Model.Report.MetaModel
 {
-    using System;
+    using Fanex.Athena.Extension.Helper;
 
     public class CustomerBalanceMetaModel : BaseReportMetaModel
     {
         public CustomerBalanceMetaModel()
         {
-            FromDate = ToDate = DateTime.Today;
+            FromDate = ToDate = DateTimeHelper.Today;
             PageIndex = 1;
             PageSize = DefaultPageSize;
             OrderItem = 1;

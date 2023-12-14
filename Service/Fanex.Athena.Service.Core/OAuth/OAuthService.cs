@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Fanex.Athena.Extension.Helper;
 using Fanex.IdentityModel.Client;
 
 namespace Fanex.Athena.Service.Core.OAuth
@@ -41,7 +42,7 @@ namespace Fanex.Athena.Service.Core.OAuth
             }
 
             return OAuthInfo.CreateSuccess(userInfoResponse.Claims, tokenResponse.AccessToken,
-                DateTime.Now.AddSeconds(tokenResponse.ExpiresIn - AccessTokenExpireTimeGapInSeconds), tokenResponse.RefreshToken);
+                DateTimeHelper.Now.AddSeconds(tokenResponse.ExpiresIn - AccessTokenExpireTimeGapInSeconds), tokenResponse.RefreshToken);
         }
 
         public async Task RevokeAccessTokenAsync(string accessToken)

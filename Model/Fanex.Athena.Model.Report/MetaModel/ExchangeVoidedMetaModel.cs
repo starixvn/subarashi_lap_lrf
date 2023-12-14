@@ -1,4 +1,5 @@
 ﻿using System;
+using Fanex.Athena.Extension.Helper;
 using Fanex.Athena.Model.Core.MetaModel;
 
 namespace Fanex.Athena.Model.Report.MetaModel
@@ -27,6 +28,6 @@ namespace Fanex.Athena.Model.Report.MetaModel
 
         public bool IsExcludedTestData { get; set; }
 
-        public bool IsValid => DateTime.Compare(DateTime.Now.Date.AddMonths(-MaximumSelectedMonths), SelectedDate.Date) <= 0;
+        public bool IsValid => DateTime.Compare(DateTimeHelper.Now.Date.AddMonths(-MaximumSelectedMonths), SelectedDate.Date) <= 0;
     }
 }

@@ -8,9 +8,9 @@ namespace Fanex.Athena.Controllers.BetList
 {
     #region Using
 
-    using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Model.BetList.MetaModel;
@@ -33,8 +33,8 @@ namespace Fanex.Athena.Controllers.BetList
         {
             CreateDefaultMetaModel(metaModel);
             InitBaseCurrencyValue(metaModel);
-            metaModel.FromDate = DateTime.Today.AddYears(-ExpandedYears);
-            metaModel.ToDate = DateTime.Today.AddYears(ExpandedYears);
+            metaModel.FromDate = DateTimeHelper.Today.AddYears(-ExpandedYears);
+            metaModel.ToDate = DateTimeHelper.Today.AddYears(ExpandedYears);
 
             return await ProcessDefaultRequest(metaModel, "~/Views/Desktop/BetList/PendingFunds/Main.cshtml", "Shard_Lrf_BetList_SelRunningByDate_Mem").ConfigureAwait(false);
         }

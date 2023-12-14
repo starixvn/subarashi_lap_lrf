@@ -1,8 +1,8 @@
 ﻿namespace Fanex.Athena.Controllers.UnitTests
 {
-    using System;
     using System.Web.Mvc;
     using Base.UnitTests;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using NSubstitute;
@@ -136,7 +136,7 @@
 
                 StubUserSessionData(new UserAuthInfo
                 {
-                    AccessTokenLifeTime = DateTime.Now,
+                    AccessTokenLifeTime = DateTimeHelper.Now,
                     OnUserId = DefaultUserSession.OnUserId,
                     IsInternal = DefaultUserSession.IsInternal
                 });

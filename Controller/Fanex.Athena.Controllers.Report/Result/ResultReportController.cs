@@ -1,6 +1,5 @@
 ﻿namespace Fanex.Athena.Controllers.Report.Result
 {
-    using System;
     using System.Linq;
     using System.Net;
     using System.Threading.Tasks;
@@ -43,10 +42,10 @@
                 Data = string.Empty,
                 Param = new ResultMetaModel
                 {
-                    FromDate = DateTime.Now,
+                    FromDate = DateTimeHelper.Now,
                     IsOutRight = false,
                     IsExportExcel = false,
-                    ToDate = DateTime.Now,
+                    ToDate = DateTimeHelper.Now,
                     BalanceUpDay = _balanceUpDataAccess.GetBalanceUp().BalanceUpDay
                 }
             };

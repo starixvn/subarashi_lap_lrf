@@ -4,6 +4,7 @@
     using System.Text;
     using System.Web.Mvc;
     using System.Web.UI;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth.Enum;
     using Web.ActionFilter;
 
@@ -54,7 +55,7 @@
                 }
             }
 
-            if (SessionServiceInstance.UserSession.AccessTokenLifeTime <= DateTime.Now)
+            if (SessionServiceInstance.UserSession.AccessTokenLifeTime <= DateTimeHelper.Now)
             {
                 return RedirectToAction("LocationRestriction", "Utility");
             }

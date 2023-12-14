@@ -1,8 +1,8 @@
 ﻿namespace Fanex.Athena.Controllers.Report
 {
-    using System;
     using System.Collections.Generic;
     using System.Web.Mvc;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DataDomain;
@@ -35,8 +35,8 @@
 
             var viewModel = new CasinoTurnoverViewModel
             {
-                FromDate = DateTime.Today,
-                ToDate = DateTime.Today,
+                FromDate = DateTimeHelper.Today,
+                ToDate = DateTimeHelper.Today,
                 CurrencyList = SessionServiceInstance.UserSession.CurrencyList,
                 ProductOptions = ToProductOptions(productAccess.ProductList),
                 Status = GetStatusList(),

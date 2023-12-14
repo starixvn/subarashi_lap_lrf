@@ -1,6 +1,7 @@
 ﻿namespace Fanex.Athena.Model.Report.MetaModel
 {
     using System;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Core.MetaModel;
     using DataDomain = Core.DataDomain;
     using Helper = Core.Helper;
@@ -10,7 +11,7 @@
         public PlatformWinLossMetaModel()
         {
             LicenseeId = 0;
-            var today = DateTime.Now;
+            var today = DateTimeHelper.Now;
             Year = today.Year;
             Month = today.Month;
             FromDay = 1;

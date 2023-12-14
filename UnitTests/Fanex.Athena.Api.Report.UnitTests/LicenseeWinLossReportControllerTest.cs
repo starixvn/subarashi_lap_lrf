@@ -302,8 +302,8 @@
             const int CustId = 1;
             const string CurrencyName = "USD";
             const int DrillDownCurrencyId = 0;
-            var fdate = DateTime.Today;
-            var tdate = DateTime.Today.AddDays(1);
+            var fdate = DateTimeHelper.Today;
+            var tdate = DateTimeHelper.Today.AddDays(1);
 
             var metaModel = CreateValidMetaModel();
             metaModel.CurrencyId = currencyId;

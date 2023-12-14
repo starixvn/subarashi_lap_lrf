@@ -1,10 +1,10 @@
 ﻿namespace Fanex.Athena.DataAccess.Report
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using Core.UnitTests.TestHelpers;
+    using Fanex.Athena.Extension.Helper;
     using Model.Core.DataDomain;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
@@ -29,8 +29,8 @@
 
             _metaModel2 = new ExchangeWinLossMetaModel
             {
-                FromDate = DateTime.Today,
-                ToDate = DateTime.Today.AddDays(1),
+                FromDate = DateTimeHelper.Today,
+                ToDate = DateTimeHelper.Today.AddDays(1),
                 AgentListXml = string.Empty,
                 ReportBy = 1,
                 CustId = 2,

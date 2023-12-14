@@ -7,6 +7,7 @@
     using System.Web.Mvc;
     using System.Web.UI.WebControls;
     using Fanex.Athena.DataAccess.Core.Common.Interfaces;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.MetaModel.Common;
@@ -56,7 +57,7 @@
             var userSession = SessionServiceInstance.UserSession;
             var reportSetting = _reportSettingService.GetSetting(PermissionKeys.ReportSabaVirtualSportsWinLoss,
                 licenseeSession.LicenseeName);
-            var date = DateTime.Today;
+            var date = DateTimeHelper.Today;
             var productAccess = ProductServiceInstance.GetSingleWalletProductAccess(
                licenseeSession.LicenseeId,
                userSession.Language,

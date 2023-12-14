@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Fanex.Athena.Extension.Helper;
 using Fanex.Athena.Model.Core.DTO.Common;
 using Fanex.Athena.Model.Core.MetaModel.Product;
 using Fanex.Athena.Model.Customer.DTO;
@@ -10,7 +11,7 @@ namespace Fanex.Athena.Model.Report.ViewModel
     {
         public WinlossAnalysisReportViewModel()
         {
-            var toDay = DateTime.Today;
+            var toDay = DateTimeHelper.Today;
             FromDate = toDay;
             ToDate = toDay;
         }

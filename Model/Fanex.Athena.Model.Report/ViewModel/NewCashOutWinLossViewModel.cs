@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Fanex.Athena.Extension.Helper;
 using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Model.Core.DTO.Common;
 using Fanex.Athena.Model.Core.DTO.Configuration;
@@ -11,8 +12,8 @@ namespace Fanex.Athena.Model.Report.ViewModel
     {
         public NewCashOutWinLossViewModel()
         {
-            FromDate = DateTime.Today;
-            ToDate = DateTime.Today;
+            FromDate = DateTimeHelper.Today;
+            ToDate = DateTimeHelper.Today;
         }
 
         public DateTime FromDate { get; set; }

@@ -3,6 +3,7 @@
     using System;
     using System.Linq;
     using System.Web.Mvc;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
@@ -17,7 +18,7 @@
         {
             var licenseeSession = this.SessionServiceInstance.LicenseeSession;
             var userSession = SessionServiceInstance.UserSession;
-            var date = DateTime.Now.AddDays(-1);
+            var date = DateTimeHelper.Now.AddDays(-1);
 
             var metaModel = new ThirdPartyWinLossMetaModel
             {
