@@ -3,6 +3,7 @@
     public class PortalApiLeagueResponse
     {
         public int LeagueId { get; set; }
+
         public string LeagueName { get; set; }
     }
 }

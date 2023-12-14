@@ -1,14 +1,11 @@
-﻿using Fanex.Athena.Excel.Base;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Fanex.Athena.Excel.Base;
 using Fanex.Athena.Excel.Base.Extension;
 using Fanex.Athena.Model.Customer.DTO;
 using Fanex.Athena.Resources;
 using NPOI.SS.UserModel;
 using NPOI.SS.Util;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Fanex.Athena.Excel.Customer.CustomerClass
 {

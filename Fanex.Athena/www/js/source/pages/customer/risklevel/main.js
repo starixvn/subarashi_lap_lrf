@@ -12,7 +12,6 @@ define(
                 viewLeaguesIcon: null,
                 closeIcon: null,
                 listLeaguesDiv: null,
-                listLeaguesUl: null,
                 wrapper: null,
                 customerClassSel: null,
             },
@@ -25,7 +24,6 @@ define(
                 _me.elements.viewLeaguesIcon = $(".view-leagues");
                 _me.elements.closeIcon = $(".icon-close");
                 _me.elements.listLeaguesDiv = $("#list-leagues");
-                _me.elements.listLeaguesUl = $("#ul-list-leagues");
                 _me.elements.wrapper = $(".wrapper")[0];
                 _me.elements.customerClassSel = $("#customer-class-ids");
             },
@@ -92,17 +90,30 @@ define(
 
             showLeagues: function (self) {
                 var sportType = self.attr("data-sport-type");
-                var leagueGroupId = self.attr("data-league-group");
+                var leagueGroups = JSON.parse(self.attr("data-league-groups"));
+
                 var param = {
                     sportType,
-                    leagueGroupId
+                    leagueGroups
                 };
+
                 _me.fetchLeagues(param, function (result) {
                     _me.resetListLeagues();
 
                     if (result && result.length > 0) {
                         $.each(result, function (index, item) {
-                            _me.elements.listLeaguesUl.append("<li>" + item.LeagueName + "</li>")
+                            var listLeague = item.LimitLeagues.map(x => "<li>" + x.LeagueName + "</li>").join('');
+                            var leagueGroupDetail = `
+                            <div class="list-leagues-header">
+                                <p>${item.LeagueGroupName}:</p>
+                            </div>
+                            <div class="list-leagues-content">
+                                <ul id="ul-list-leagues">
+                                ${listLeague}
+                                </ul>
+                            </div>
+                            `;
+                            _me.elements.listLeaguesDiv.append(leagueGroupDetail)
                         })
                     }
 
@@ -126,8 +137,13 @@ define(
                 });
             },
             resetListLeagues: function () {
-                _me.elements.listLeaguesUl.empty();
-                _me.elements.listLeaguesUl.scrollTop(0);
+                _me.elements.listLeaguesDiv.empty();
+                _me.elements.listLeaguesDiv.append('<a class="block-close" href="javascript:;"><i class="icon-close"></i></a>');
+                _me.elements.listLeaguesDiv.scrollTop(0);
+                $(".icon-close").click(function () {
+                    _me.resetListLeagues();
+                    $("#list-leagues").addClass("hide");
+                });
             },
             fetchLeagues: function (param, onSuccess) {
                 $.ajax({

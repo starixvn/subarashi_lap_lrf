@@ -6523,6 +6523,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Policy.
+        /// </summary>
+        public static string Policy {
+            get {
+                return ResourceManager.GetString("Policy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Position.
         /// </summary>
         public static string Position {
@@ -7464,6 +7473,15 @@ namespace Fanex.Athena.Resources {
         public static string Robot {
             get {
                 return ResourceManager.GetString("Robot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rule.
+        /// </summary>
+        public static string Rule {
+            get {
+                return ResourceManager.GetString("Rule", resourceCulture);
             }
         }
         

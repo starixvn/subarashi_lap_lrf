@@ -17,6 +17,8 @@ else
                 <th class="col-medium">@ViewResources.CustomerClass</th>
                 <th class="col-large">@ViewResources.Category</th>
                 <th class="col-large">@ViewResources.SportType</th>
+                <th class="col-large">@ViewResources.Policy</th>
+                <th class="col-large">@ViewResources.Rule</th>
                 <th class="col-medium">@ViewResources.Live2/<br />@ViewResources.PreMatch</th>
                 <th class="col-medium">@ViewResources.Currency</th>
                 <th class="col-medium">@ViewResources.DisableParlay</th>
@@ -28,6 +30,7 @@ else
                 <th class="col-medium">@ViewResources.MaxPerBet (@currency)</th>
                 <th class="col-medium">@ViewResources.MaxPerMatch2 (@currency)</th>
                 <th class="col-medium">@ViewResources.RepeatedBets</th>
+                <th class="col-medium">@ViewResources.BetDelay</th>
             </tr>
         </thead>
         <tbody>
@@ -40,9 +43,12 @@ else
                         <td class="center-align">@m.Category</td>
                         <td class="left-align">-</td>
                         <td class="left-align">-</td>
+                        <td class="left-align">-</td>
+                        <td class="left-align">-</td>
                         <td class="center-align">-</td>
                         <td class="left-align">-</td>
                         <td class="center-align">-</td>
+                        <td class="right-align">-</td>
                         <td class="right-align">-</td>
                         <td class="right-align">-</td>
                         <td class="right-align">-</td>
@@ -67,17 +73,22 @@ else
                             <td class="center-align" rowspan="@m.Policies.Count">@m.Category</td>
                         }
                         <td class="left-align">@p.SportTypeName</td>
-                        <td class="left-align">@(p.LiveType == 1 ? ViewResources.Live2 : ViewResources.PreMatch)</td>
+                        <td class="left-align">@p.PlolicyTitle</td>
+                        <td class="left-align">@p.RuleTitle</td>
+                        <td class="left-align">@p.LiveTypeText</td>
                         <td class="center-align">@p.Currency</td>
                         <td class="center-align">@(p.DisableParlay ? ViewResources.Yes : ViewResources.No)</td>
                         <td class="left-align">@p.Platform</td>
                         <td class="center-align" data-internal-league-group="@p.LeagueGroupId" >
-                            @p.LicLeagueGroupName
-                            @if (p.LicLeagueGroupId > 0)
+                            @{var leagueGroupName = string.Join(", ", p.LeagueGroups.Select(x => x.LeagueGroupName).ToList());}
+
+                            <p class="league-group-name">@leagueGroupName</p>
+
+                            @if (!leagueGroupName.Equals("-", StringComparison.OrdinalIgnoreCase))
                             {
-                                <a href="javascript:;" class="view-leagues" data-sport-type="@p.SportType" data-league-group="@p.LicLeagueGroupId">
-                                    <i class="icon-info"></i>
-                                </a>
+                             <a href = "javascript:;" class="view-leagues" data-sport-type="@p.SportType" data-league-groups='@p.LeagueGroups.ToJson()'>
+                                <i class="icon-info"></i>
+                             </a>
                             }
                         </td>
                         <td class="right-align">@p.BetInterval</td>
@@ -86,6 +97,7 @@ else
                         <td class="right-align">@p.MaxBet</td>
                         <td class="right-align">@p.MaxPerMatch</td>
                         <td class="right-align">@p.RepeatedBets</td>
+                        <td class="right-align">@p.BetDelay</td>
                     </tr>
 
                     isFirstRow = false;
@@ -96,16 +108,8 @@ else
     if (Model.Any())
     {
         <div class="list-leagues hide" id="list-leagues">
-            <div class="list-leagues-header">
-                <a class="block-close" href="javascript:;">
-                    <i class="icon-close"></i>
-                </a>
-                <p>@ViewResources.ListOfLeagues:</p>
-            </div>
-            <div class="list-leagues-content">
-                <ul id="ul-list-leagues">
-                </ul>
-            </div>
+            <a class="block-close" href="javascript:;"><i class="icon-close"></i></a>
+            <div class="listLeaguesUl"></div>
         </div>
     }
 }

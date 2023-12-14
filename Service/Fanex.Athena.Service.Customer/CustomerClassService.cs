@@ -8,6 +8,7 @@
     using Fanex.Athena.Extension.Helpers;
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Extension.Utility.Interfaces;
+    using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.DTO.Configuration;
     using Fanex.Athena.Model.Customer.DTO;
     using Fanex.Athena.Model.Customer.MetaModel;
@@ -97,16 +98,22 @@
         {
             foreach (var policy in policies)
             {
-                if (policy.LeagueGroupId > 0 && int.TryParse(policy.SportType, out int sportType))
+                var hasLeagueGroup = !string.IsNullOrEmpty(policy.LeagueGroupId);
+                var isAllLeagueGroup = string.Equals(policy.LeagueGroupId, "-1", StringComparison.OrdinalIgnoreCase);
+                var defaultLeagueGroups = new List<LeagueGroup> { new LeagueGroup { LeagueGroupName = DefaultTextValue } };
+
+                if (hasLeagueGroup && int.TryParse(policy.SportType, out int sportType))
                 {
                     var leagueGroups = await _portalApiService.GetLeagueGroupsAsync(sportType, langCode);
-                    var matchedLeagueGroup = leagueGroups.FirstOrDefault(_ => _.InHouseLeagueGroupID == policy.LeagueGroupId);
-                    policy.LicLeagueGroupId = matchedLeagueGroup?.LicLeagueGroupID ?? 0;
-                    policy.LicLeagueGroupName = matchedLeagueGroup?.LicGroupName ?? DefaultTextValue;
+                    var leagueGroupIdList = policy.LeagueGroupId.Split(',');
+                    var leagueGroupListByPolicy = (isAllLeagueGroup ? leagueGroups : leagueGroups.Where(_ => leagueGroupIdList.Contains(_.InHouseLeagueGroupID.ToString())))
+                        .Select(x => new LeagueGroup { LeagueGroupId = x.LicLeagueGroupID, LeagueGroupName = x.LicGroupName }).ToList();
+
+                    policy.LeagueGroups = leagueGroupListByPolicy.Any() ? leagueGroupListByPolicy : defaultLeagueGroups;
                 }
                 else
                 {
-                    policy.LicLeagueGroupName = DefaultTextValue;
+                    policy.LeagueGroups = defaultLeagueGroups;
                 }
             }
         }

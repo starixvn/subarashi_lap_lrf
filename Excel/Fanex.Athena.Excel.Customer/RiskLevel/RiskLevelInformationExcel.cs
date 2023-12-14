@@ -1,11 +1,10 @@
-﻿using Fanex.Athena.Excel.Base;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Fanex.Athena.Excel.Base;
 using Fanex.Athena.Excel.Base.Extension;
 using Fanex.Athena.Model.Customer.DTO;
 using Fanex.Athena.Resources;
 using NPOI.SS.UserModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Fanex.Athena.Excel.Customer.CustomerClass
 {
@@ -48,11 +47,11 @@ namespace Fanex.Athena.Excel.Customer.CustomerClass
         private readonly IDictionary<int, string> _CCSettingPolicyGridCommonColumNames = new Dictionary<int, string>
         {
             { SportTypeColumn, "SportTypeName" },
-            { LivePreMatchColumn, "LiveType" },
+            { LivePreMatchColumn, "LiveTypeText" },
             { CurrencyColumn, "Currency" },
             { DisableParlay, "DisableParlay" },
             { PlatformColumn, "Platform" },
-            { LeagueGroupColumn, "LicLeagueGroupName" },
+            { LeagueGroupColumn, "LeagueGroups" },
             { BetIntervalColumn, "BetInterval" },
             { AgentBetIntervalColumn, "AgentBetInterval" },
             { MinBetColumn, "MinBet" },
@@ -166,14 +165,14 @@ namespace Fanex.Athena.Excel.Customer.CustomerClass
             foreach (var columnName in _CCSettingPolicyGridCommonColumNames)
             {
                 var cellValue = itemType.GetProperty(columnName.Value).GetValue(item, null);
-                if (columnName.Value.Equals("LiveType"))
-                {
-                    var text = item.LiveType == 1 ? ViewResources.Live2 : ViewResources.PreMatch;
-                    row.Cells[columnName.Key].SetCellValue(text);
-                }
-                else if (columnName.Value.Equals("DisableParlay"))
+                if (columnName.Value.Equals("DisableParlay"))
                 {
                     var text = item.DisableParlay ? ViewResources.Yes : ViewResources.No;
+                    row.Cells[columnName.Key].SetCellValue(text);
+                }
+                else if (columnName.Value.Equals("LeagueGroups"))
+                {
+                    var text = string.Join(", ", item.LeagueGroups.Select(x => x.LeagueGroupName).ToList());
                     row.Cells[columnName.Key].SetCellValue(text);
                 }
                 else

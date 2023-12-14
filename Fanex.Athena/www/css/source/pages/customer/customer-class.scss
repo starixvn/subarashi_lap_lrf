@@ -5,15 +5,15 @@
 
 .customer-class-policy-setting, .customer-class-info-spread-setting {
     .tab {
-        min-width: 1400px;
+        min-width: 1800px;
     }
 
     .card-panel {
-        min-width: 1400px;
+        min-width: 1800px;
     }
 
     table {
-        min-width: 1400px;
+        min-width: 1800px;
         border-collapse: separate;
     }
 
@@ -48,6 +48,14 @@
         float: right;
     }
 
+    .league-group-name{
+        float: left;
+        white-space: nowrap;
+        width: 80%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
     .list-leagues {
         position: absolute;
         width: 350px;
@@ -60,6 +68,8 @@
 
         .icon-close {
             font-size: 14px;
+            float:right;
+            color: $black;
         }
 
         .list-leagues-header {
@@ -75,9 +85,10 @@
 
         .list-leagues-content {
             max-height: 200px;
-            min-height: 200px;
+            //min-height: 200px;
             overflow: auto;
             width: 100%;
+            padding-bottom: 10px;
 
             ul {
                 li {

@@ -33,6 +33,14 @@
     }
 }
 
+.league-group-name{
+    float: left;
+    white-space: nowrap;
+    width: 80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .risk-level-info-spread-setting {
     max-width: 300px;
 
@@ -70,6 +78,8 @@
 
         .icon-close {
             font-size: 14px;
+            float:right;
+            color: $black;
         }
 
         .list-leagues-header {
@@ -85,7 +95,7 @@
 
         .list-leagues-content {
             max-height: 200px;
-            min-height: 200px;
+            //min-height: 200px;
             overflow: auto;
             width: 100%;
 
