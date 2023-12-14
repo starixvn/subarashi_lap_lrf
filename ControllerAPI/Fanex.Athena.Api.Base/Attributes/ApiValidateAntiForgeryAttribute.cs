@@ -1,8 +1,5 @@
 ﻿namespace Fanex.Athena.Api.Base.Attributes
 {
-    using Extension.Utility;
-    using Fanex.Athena.Api.StatelessBase.Attributes.Extensions;
-    using Resources;
     using System;
     using System.Linq;
     using System.Net;
@@ -12,6 +9,9 @@
     using System.Web.Helpers;
     using System.Web.Http.Controllers;
     using System.Web.Http.Filters;
+    using Extension.Utility;
+    using Fanex.Athena.Api.StatelessBase.Attributes.Extensions;
+    using Resources;
 
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true)]
     public sealed class ApiValidateAntiForgeryAttribute : FilterAttribute, IAuthorizationFilter

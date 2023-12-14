@@ -1,7 +1,11 @@
 ﻿namespace Fanex.Athena.Controllers.BetList
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
+    using System.Web.SessionState;
     using DataAccess.Core.Configuration.Interfaces;
-
     using Excel.Base.Helpers;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.MetaModel;
@@ -12,13 +16,6 @@
     using Model.BetList.MetaModel;
     using Model.Core.DTO.Configuration;
     using Resources;
-
-    using System;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-    using System.Web.SessionState;
-
     using VendorAdapter.Interfaces;
 
     [SessionState(SessionStateBehavior.ReadOnly)]
@@ -35,9 +32,13 @@
         protected static readonly int[] HiddenColumnIndexes = new[] { WinLostColumn, BetEffectiveColumn, LicenseeWLColumn };
 
         public IBalanceUpDataAccess BalanceUpDataAccessInstance { get; set; }
+
         public IProductService ProductService { get; set; }
+
         public ISubsidiaryService SubsidiaryService { get; set; }
+
         public ICacheRefAdapter CacheRefAdapter { get; set; }
+
         public IBetListApiClient BetListApiClient { get; set; }
 
         protected static string GetViewInCurrency(BetListMetaModel metaModel)

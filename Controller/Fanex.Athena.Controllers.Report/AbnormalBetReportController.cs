@@ -1,22 +1,15 @@
-﻿using Fanex.Athena.Extension.Helper;
-using Fanex.Athena.Extension.Utility.Internal;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 using Fanex.Athena.Model.Auth.DataDomain;
 using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Model.Core.DTO.Common;
-using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
-using Fanex.Athena.Model.Report.MetaModel;
 using Fanex.Athena.Model.Report.ViewModel;
 using Fanex.Athena.Resources;
 using Fanex.Athena.Service.Customer.Interfaces;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
-using Fanex.Athena.VendorAdapter.Interfaces;
 using Fanex.Athena.Web.ActionFilter;
-using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web.Mvc;
 
 namespace Fanex.Athena.Controllers.Report
 {

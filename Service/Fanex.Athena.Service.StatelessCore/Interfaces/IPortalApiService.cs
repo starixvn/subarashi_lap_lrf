@@ -1,6 +1,6 @@
-﻿using Fanex.Athena.Model.Core.DTO.External;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Fanex.Athena.Model.Core.DTO.External;
 
 namespace Fanex.Athena.Service.StatelessCore.Interfaces
 {

@@ -9,7 +9,6 @@
     using Base.UnitTests;
 
     using DataAccess.Core.Configuration.Interfaces;
-    using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Auth.Enum;

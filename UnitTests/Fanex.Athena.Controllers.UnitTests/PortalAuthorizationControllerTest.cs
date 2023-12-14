@@ -3,8 +3,6 @@
     using System;
     using System.Threading.Tasks;
     using Base.UnitTests;
-
-    using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.Core.OAuth;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Logging;
@@ -122,7 +120,6 @@
 
                 _portalAuthService.RequestOAuthInfoAsync(token).Returns(_oauthInfo);
 
-
                 StubGetValueAppSettings("InternalSubDomain", "localhost");
 
                 controller.Request.Url.Returns(x => new Uri("http://localhost:6985/"));
@@ -161,7 +158,7 @@
                 controller.Request.Url.Returns(x => new Uri("http://localhost:6985/"));
 
                 // Action
-                var result =await  controller.CreateSession(token);
+                var result = await controller.CreateSession(token);
 
                 // Assert
                 StringAssert.Contains(actionLink, result.Url);

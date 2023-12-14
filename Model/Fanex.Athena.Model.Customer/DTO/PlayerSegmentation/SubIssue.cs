@@ -3,6 +3,7 @@
     public class SubIssue
     {
         public int SubIssueTypeId { get; set; }
+
         public string SubIssueTypeName { get; set; }
     }
 }

@@ -1,10 +1,9 @@
-﻿
-using Fanex.Athena.Model.Core.MetaModel;
-using Fanex.Athena.Service.Core.Common.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Web.Hosting;
+using Fanex.Athena.Model.Core.MetaModel;
+using Fanex.Athena.Service.Core.Common.Interfaces;
 
 namespace Fanex.Athena.Service.Core.Common
 {
@@ -16,13 +15,13 @@ namespace Fanex.Athena.Service.Core.Common
 
         protected virtual string ContentRootPath => HostingEnvironment.MapPath("~/");
 
-        public CompressService(IFileService fileService) 
+        public CompressService(IFileService fileService)
         {
             _fileService = fileService;
         }
 
         public byte[] CompressCompressDataInByteFormsData(IEnumerable<ZipEntry> entries, bool isDeleteOriginalAfterCompress)
-        { 
+        {
             var zipPath = Path.Combine(EnsureFolderPath(), $"{Guid.NewGuid()}.zip");
             _fileService.Compress(entries, zipPath, isDeleteOriginalAfterCompress);
             var bytes = _fileService.ReadAllBytes(zipPath);

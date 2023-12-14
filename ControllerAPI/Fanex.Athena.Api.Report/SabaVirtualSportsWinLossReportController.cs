@@ -13,7 +13,6 @@
     using DataAccess.Report.Interfaces;
 
     using Excel.Report.Models;
-    using Fanex.Athena.DataAccess.Core.Common.Interfaces;
     using Fanex.Athena.Excel.Base.Entities;
     using Fanex.Athena.Excel.Report;
     using Fanex.Athena.Extension.Helper;

@@ -108,6 +108,7 @@
             // Assert
             Assert.That(result, Is.EqualTo(expectedResult));
         }
+
         [Test]
         public void GetSubsidiaryList_WhenCall_PassCorrectParams()
         {

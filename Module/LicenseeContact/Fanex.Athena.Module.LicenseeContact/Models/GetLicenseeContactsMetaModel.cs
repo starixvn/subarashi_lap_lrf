@@ -1,8 +1,7 @@
 ﻿namespace Fanex.Athena.Module.LicenseeContact.Models
 {
-    using Fanex.Athena.Model.Core.MetaModel;
     using System.Collections.Generic;
-    using System.Linq;
+    using Fanex.Athena.Model.Core.MetaModel;
 
     public class GetLicenseeContactsMetaModel : IMetaModelSiteName, IMetaModelLanguage
     {

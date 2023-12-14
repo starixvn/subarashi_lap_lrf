@@ -15,6 +15,6 @@
             return files;
         }
 
-        #endregion
+        #endregion IBundleOrderer Members
     }
 }

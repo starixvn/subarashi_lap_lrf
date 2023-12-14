@@ -6,6 +6,9 @@
 
 namespace Fanex.Athena.DataAccess.Core.Common
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
     using Data;
     using Extension.Utility;
     using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
@@ -14,9 +17,6 @@ namespace Fanex.Athena.DataAccess.Core.Common
     using Fanex.Common.Extensions;
     using Interfaces;
     using Model.Core.MetaModel.Common;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
     using VendorAdapter.Interfaces;
 
     public class LeagueDataAccess : BaseDataAccess, ILeagueDataAccess

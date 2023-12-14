@@ -43,7 +43,6 @@
             OfferedSubProductList = Enumerable.Empty<string>(),
             OfferedOddsGroupsList = Enumerable.Empty<string>(),
             SiteDBServer = string.Empty
-
         };
 
         protected UrlHelper Url { get; set; }

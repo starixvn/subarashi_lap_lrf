@@ -1,15 +1,13 @@
-﻿using Fanex.Athena.Model.Core.DTO.Common;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Fanex.Athena.Model.Core.MetaModel.Product;
 using NUnit.Framework;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Fanex.Athena.ServiceStatelessCore.UnitTests
 {
     [TestFixture]
     public partial class ProductServiceTest
     {
-
         [Test]
         public void GetAllowedSubProductOptions_OfferSubProduct_ReturnCorrectResult()
         {

@@ -1,9 +1,9 @@
 ﻿namespace Fanex.Athena.Controllers.Report
 {
+    using System.Web.Mvc;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Web.ActionFilter;
-    using System.Web.Mvc;
 
     [AuthorizeRestriction(AppMode.Self)]
     [FunctionAuthorization(PermissionKeys.ReportCustomerSupportTask)]

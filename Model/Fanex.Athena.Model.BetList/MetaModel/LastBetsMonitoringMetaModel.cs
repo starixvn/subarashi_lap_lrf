@@ -60,6 +60,7 @@ namespace Fanex.Athena.Model.BetList.MetaModel
         public int SpecialPlatform { get; set; }
 
         public string ProductCodeList { get; set; } = Product.SB;
+
         public string OriginalProductCodeList { get; set; }
 
         public IEnumerable<RiskLevel> RiskLevels { get; set; }

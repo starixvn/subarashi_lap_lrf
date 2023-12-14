@@ -1,10 +1,10 @@
 ﻿namespace Fanex.Athena.Module.Notification.Service.Interfaces
 {
+    using System.Threading.Tasks;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Module.Notification.DTO;
     using Fanex.Athena.Module.Notification.MetaModel;
     using Model.Core.ResultModel;
-    using System.Threading.Tasks;
 
     public interface INotificationService
     {

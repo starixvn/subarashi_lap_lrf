@@ -1,6 +1,6 @@
-﻿using Fanex.Caching;
+﻿using System;
+using Fanex.Caching;
 using ONEbook.UM.Helpers;
-using System;
 
 namespace Fanex.Athena.VendorAdapter
 {

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using System.Configuration;
 using Autofac;
 using Fanex.Athena.DataAccess.Core.Utilities;
 using LAP.ONEBook.Security;

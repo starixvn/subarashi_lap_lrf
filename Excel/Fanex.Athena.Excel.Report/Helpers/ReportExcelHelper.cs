@@ -97,7 +97,5 @@
             return ViewResources.Currency + ": " + currencyName + ", " +
                 ViewResources.BaseCurrency + ": " + currency.ToUpperInvariant();
         }
-
-        
     }
 }

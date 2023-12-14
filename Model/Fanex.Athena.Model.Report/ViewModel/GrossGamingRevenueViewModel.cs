@@ -1,9 +1,5 @@
 ﻿namespace Fanex.Athena.Model.Report.ViewModel
 {
-    using System.Collections.Generic;
-    using Core.DTO.Configuration;
-    using MetaModel;
-
     public class GrossGamingRevenueViewModel : SpecialLicenseeWinLossViewModel
     {
         public string BaseCurrencySetting { get; set; }

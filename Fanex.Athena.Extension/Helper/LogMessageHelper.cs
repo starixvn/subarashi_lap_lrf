@@ -1,6 +1,5 @@
 ﻿namespace Fanex.Athena.Extension.Helpers
 {
-    using Fanex.Data;
     using System;
     using System.Collections.Generic;
     using System.Collections.Specialized;
@@ -8,12 +7,12 @@
     using System.Linq;
     using System.Text;
     using System.Web;
+    using Fanex.Data;
 
     public static class LogMessageHelper
     {
         public static string GenerateMessage(Exception exception)
         {
-
             var messageBuilder = new StringBuilder();
 
             messageBuilder.AppendLine($"ErrMsg: {exception.Message}");

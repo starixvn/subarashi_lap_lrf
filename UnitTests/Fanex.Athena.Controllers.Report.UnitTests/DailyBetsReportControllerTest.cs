@@ -2,11 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Fanex.Athena.Controllers.Base;
     using Fanex.Athena.Controllers.Base.UnitTests;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
@@ -19,7 +17,6 @@
     public class DailyBetsReportControllerTest : CultureBaseControllerHelperTest
     {
         private const int DefaultLimitedMonthRange = 6;
-
 
         private ILicenseeSettingService _licenseeSettingService;
 
@@ -80,7 +77,7 @@
                 var expectedMinDate = expectedTodatGtm8.AddMonths(-licenseeSetting.LimitRecentMonths);
 
                 // Action
-                var result = ( (await controller.Index()) as ViewResult).Model as DailyBetsViewModel;
+                var result = ((await controller.Index()) as ViewResult).Model as DailyBetsViewModel;
 
                 // Assert
                 Assert.Multiple(() =>
@@ -126,7 +123,7 @@
                 var expectedMinDate = expectedTodatGtm8.AddMonths(-licenseeSetting.LimitRecentMonths);
 
                 // Action
-                var result = ( (await controller.Index())  as ViewResult).Model as DailyBetsViewModel;
+                var result = ((await controller.Index()) as ViewResult).Model as DailyBetsViewModel;
 
                 // Assert
                 Assert.Multiple(() =>
@@ -137,7 +134,6 @@
             }
         }
 
-      
         private DailyBetsReportController CreateController(IList<Product> productList = null)
         {
             var productService = Substitute.For<IProductService>();
@@ -146,7 +142,8 @@
                 DefaultUserSession.Language,
                 FunctionNames.DailyBets).ReturnsForAnyArgs(new ProductAccess(productList ?? new List<Product>()));
 
-            return new DailyBetsReportController(_sportService)            {
+            return new DailyBetsReportController(_sportService)
+            {
                 LangService = LangService,
                 SessionServiceInstance = SessionService,
                 ProductServiceInstance = productService,

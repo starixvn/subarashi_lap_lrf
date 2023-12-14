@@ -4,8 +4,6 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-using System.Collections.Generic;
-
 namespace Fanex.Athena.Model.Core.DataDomain
 {
     public static class CurrencyType

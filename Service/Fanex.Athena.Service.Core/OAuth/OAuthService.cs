@@ -1,9 +1,9 @@
-﻿using Fanex.IdentityModel.Client;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Fanex.IdentityModel.Client;
 
 namespace Fanex.Athena.Service.Core.OAuth
 {
@@ -18,8 +18,8 @@ namespace Fanex.Athena.Service.Core.OAuth
         public OAuthService(OAuthOptions options)
         {
             _options = options ?? throw new ArgumentNullException(nameof(options));
-            _httpClient = new HttpClient(_options.MessageHandler ?? new HttpClientHandler 
-            { 
+            _httpClient = new HttpClient(_options.MessageHandler ?? new HttpClientHandler
+            {
                 AllowAutoRedirect = false,
                 UseCookies = false,
                 AutomaticDecompression = DecompressionMethods.GZip

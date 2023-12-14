@@ -28,13 +28,11 @@ namespace Fanex.Athena.Model.Core.MetaModel.Account
         [Display(Name = "Password", ResourceType = typeof(ViewResources))]
         // ReSharper disable LocalizableElement
         [Required(ErrorMessage = "(*)")]
-        // ReSharper restore LocalizableElement
         public string Password { get; set; }
 
         [Display(Name = "Confirm", ResourceType = typeof(ViewResources))]
         // ReSharper disable LocalizableElement
         [Required(ErrorMessage = "(*)")]
-        // ReSharper restore LocalizableElement
         public string ConfirmPassword { get; set; }
     }
 }

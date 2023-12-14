@@ -5,7 +5,9 @@
     public class AmendmentTicketListingMetaModel : IMetaModelAgent
     {
         public string SessionId { get; set; }
+
         public string AgentListXml { get; set; }
+
         public bool IsExcludedTestData { get; set; }
     }
 }

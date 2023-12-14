@@ -41,7 +41,6 @@
             AppSettings.HistoryDate.Returns(HistoryDate);
         }
 
-
         [OneTimeTearDown]
         public override void FixtureTearDown()
         {
@@ -142,14 +141,13 @@
             _balanceUpDataAccess = Substitute.For<IBalanceUpDataAccess>();
             _balanceUpDataAccess.GetBalanceUp().Returns(new BalanceUp { MoveBetsDay = MoveBetDay });
 
-
             var licenseeSettingService = stubLicenseeSettingService ?? Substitute.For<ILicenseeSettingService>();
 
             return new CustomerWinLossReportController(
                 reportSettingService,
                 _authService,
                 _customerClassService,
-                _balanceUpDataAccess) 
+                _balanceUpDataAccess)
             {
                 LangService = LangService,
                 SessionServiceInstance = SessionService,

@@ -25,7 +25,6 @@
             SetUpDefaultFakeData();
 
             SepUpForService();
-
         }
 
         [OneTimeTearDown]
@@ -64,7 +63,6 @@
             }
         }
 
-    
         private HomeDrawAwayNoBetTotalBetController CreateController()
         {
             return new HomeDrawAwayNoBetTotalBetController(_homeDrawAwayNoBetDataAccess)

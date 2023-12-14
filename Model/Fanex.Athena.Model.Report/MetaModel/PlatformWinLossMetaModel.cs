@@ -58,7 +58,9 @@
         }
 
         public bool HasComm { get; set; }
+
         public string SubsidiaryList { get; set; }
+
         public bool SubsidiarySearch { get; set; }
     }
 }

@@ -19,6 +19,7 @@
         }
 
         public string ProductCodeList { get; set; }
+
         public string OriginalProductCodeList { get; set; }
 
         public bool IsExportExcel { get; set; }
@@ -32,6 +33,7 @@
         public DateTime ToDate { get; set; }
 
         public IList<ProductOption> ProductOptions { get; set; }
+
         public IList<ProductOption> OriginalProductOptions { get; set; }
 
         public override bool IsConvert

@@ -37,7 +37,7 @@
         }
 
         public bool IsIgnoredSubsidiarySearch(bool subsidiarySearch, string subsidiaryList, UserAuthInfo userInfo)
-            => !subsidiarySearch || string.IsNullOrWhiteSpace(subsidiaryList) 
+            => !subsidiarySearch || string.IsNullOrWhiteSpace(subsidiaryList)
                 || (userInfo.ApplicationMode == AppMode.Parasitic ? userInfo.SubsidiaryViewType == (byte)SubsidiaryViewType.NotManagement
                 : !userInfo.FunctionList.IsPresent(_ => string.Equals(_.FunctionKey, PermissionKeys.Subsidiary, StringComparison.InvariantCultureIgnoreCase)));
 
@@ -112,6 +112,7 @@
                 ? GetWhiteLabelTree(groupSub)
                 : GetOperatorTree(groupSub);
         }
+
         public IEnumerable<CheckedItem> GetWhiteLabelTree(UserAuthInfo user, string licenseeName)
         {
             var groupSub = GetAllGroupSubsidiaries(user, licenseeName);

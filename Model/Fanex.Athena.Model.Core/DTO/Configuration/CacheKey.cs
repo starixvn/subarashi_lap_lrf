@@ -4,8 +4,6 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-using System.Net.NetworkInformation;
-
 namespace Fanex.Athena.Model.Core.DTO.Configuration
 {
     /// <summary>

@@ -1,14 +1,5 @@
 ﻿namespace Fanex.Athena.Controllers
 {
-    using Fanex.Athena.Extension.Utility;
-    using Fanex.Athena.Model.Auth.MetaModel;
-    using Fanex.Athena.Model.Core.DataDomain;
-    using Fanex.Athena.Service.Core.Users.Interfaces;
-    using Fanex.Athena.Web.ActionFilter;
-    using ONEbook.UM.Services;
-
-    using Resources;
-
     using System;
     using System.Collections.Generic;
     using System.Drawing;
@@ -23,6 +14,13 @@
     using System.Web.Mvc;
     using System.Web.Security;
     using System.Web.UI;
+    using Fanex.Athena.Extension.Utility;
+    using Fanex.Athena.Model.Auth.MetaModel;
+    using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
+    using Fanex.Athena.Web.ActionFilter;
+    using ONEbook.UM.Services;
+    using Resources;
 
     public class AuthorizationController : CultureBaseController
     {
@@ -132,7 +130,7 @@
                 return Json(RecheckInResult(ErrorType.AccessDenied, ViewResources.InvalidRequestOrNotAuthorizedMsg), JsonRequestBehavior.AllowGet);
             }
 
-            if (currentLoginId != userSession.OnUserId.ToString() 
+            if (currentLoginId != userSession.OnUserId.ToString()
                 || !string.Equals(User.Identity.Name, userSession.IdentityName, StringComparison.InvariantCultureIgnoreCase))
             {
                 return Json(RecheckInResult(ErrorType.SessionOverride, ViewResources.SessionLoggedMsg), JsonRequestBehavior.AllowGet);

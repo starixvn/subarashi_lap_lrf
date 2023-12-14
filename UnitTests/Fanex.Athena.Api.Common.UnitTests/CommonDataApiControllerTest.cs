@@ -8,7 +8,6 @@
     using Base;
 
     using DataAccess.Core.Common.Interfaces;
-    using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Extension.Utility.Interfaces;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.StatelessCore.Interfaces;

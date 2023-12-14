@@ -109,7 +109,6 @@
             Assert.AreEqual(0, result.Except(expectedResult).Count());
         }
 
-
         private static List<int> GetAgentListBySubsidairyNames(string subsidiaryNames, int currencyId)
         {
             var subList = subsidiaryNames.Split(new char[] { ',' });
@@ -128,6 +127,7 @@
                     { 13, new[] { 131, 132 } }
                 };
         }
+
         private static IEnumerable<GroupSubsidiary> FakeGroupSubsidiaryData()
         {
             yield return new GroupSubsidiary
@@ -141,6 +141,7 @@
                 OperatorId = "alex2"
             };
         }
+
         private static IEnumerable<Subsidiary> GetSubsidiaryData()
         {
             yield return new Subsidiary

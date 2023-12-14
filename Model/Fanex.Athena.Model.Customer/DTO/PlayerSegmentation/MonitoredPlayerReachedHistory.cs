@@ -1,7 +1,7 @@
-﻿using Fanex.Athena.Model.Core.DataDomain;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Globalization;
+using Fanex.Athena.Model.Core.DataDomain;
+using Newtonsoft.Json;
 
 namespace Fanex.Athena.Model.Customer.DTO.PlayerSegmentation
 {

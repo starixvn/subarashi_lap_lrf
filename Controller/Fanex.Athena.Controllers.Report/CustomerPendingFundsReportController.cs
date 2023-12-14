@@ -6,14 +6,12 @@
 
 namespace Fanex.Athena.Controllers.Report
 {
+    using System.Web.Mvc;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
     using Fanex.Athena.Web.ActionFilter;
-
     using Model.Core.DataDomain;
-
-    using System.Web.Mvc;
 
     [FunctionAuthorization(PermissionKeys.ReportCustomerPendingFunds)]
     public class CustomerPendingFundsReportController : ReportBaseController

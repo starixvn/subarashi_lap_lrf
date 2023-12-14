@@ -1,12 +1,12 @@
-﻿using ONEbook.UM;
-using ONEbook.UM.Configurations;
-using ONEbook.UM.Services;
-using System;
+﻿using System;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
+using ONEbook.UM;
+using ONEbook.UM.Configurations;
+using ONEbook.UM.Services;
 
 namespace Fanex.Athena.Api.Base.Attributes
 {
@@ -59,7 +59,5 @@ namespace Fanex.Athena.Api.Base.Attributes
             responseMessage.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             return responseMessage;
         }
-            
-        
     }
 }

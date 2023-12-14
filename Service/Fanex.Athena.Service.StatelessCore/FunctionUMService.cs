@@ -1,12 +1,11 @@
-﻿using Fanex.Athena.Model.Core.DTO.Configuration;
-using Fanex.Athena.Model.Core.Enum;
-using Fanex.Athena.Resources;
-using Fanex.Athena.Service.StatelessCore.Interfaces;
-using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web.Hosting;
+using Fanex.Athena.Model.Core.DTO.Configuration;
+using Fanex.Athena.Model.Core.Enum;
+using Fanex.Athena.Service.StatelessCore.Interfaces;
+using Newtonsoft.Json;
 
 namespace Fanex.Athena.Service.StatelessCore
 {

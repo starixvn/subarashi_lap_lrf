@@ -1,14 +1,14 @@
-﻿using Newtonsoft.Json;
-using ONEbook.UM;
-using ONEbook.UM.Configurations;
-using ONEbook.UM.Helpers;
-using System;
+﻿using System;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using Newtonsoft.Json;
+using ONEbook.UM;
+using ONEbook.UM.Configurations;
+using ONEbook.UM.Helpers;
 
 namespace Fanex.Athena.VendorAdapter
 {
@@ -42,6 +42,7 @@ namespace Fanex.Athena.VendorAdapter
 
         public T ExecutePost<T>(string endPoint, object data = null) where T : new()
             => ExecuteAsync<T>(endPoint, HttpMethod.Post, data).Result;
+
 #pragma warning restore S4462 // Calls to "async" methods should not be blocking
 
         public Task<T> ExecuteGetAsync<T>(string endPoint)

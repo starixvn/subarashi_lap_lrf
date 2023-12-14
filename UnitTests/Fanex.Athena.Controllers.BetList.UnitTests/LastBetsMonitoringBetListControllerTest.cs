@@ -5,7 +5,6 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Base.UnitTests;
-    using DataAccess.Core.Common.Interfaces;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.DTO;
     using Fanex.Athena.Service.Customer.Interfaces;

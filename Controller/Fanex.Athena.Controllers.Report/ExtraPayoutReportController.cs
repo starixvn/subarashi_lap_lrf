@@ -1,4 +1,7 @@
-﻿using Fanex.Athena.Extension.Helper;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Web.Mvc;
+using Fanex.Athena.Extension.Helper;
 using Fanex.Athena.Model.Auth.DataDomain;
 using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Model.Core.DTO.Common;
@@ -10,9 +13,6 @@ using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
 using Fanex.Athena.VendorAdapter.Interfaces;
 using Fanex.Athena.Web.ActionFilter;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Mvc;
 
 namespace Fanex.Athena.Controllers.Report
 {

@@ -4,8 +4,6 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-using Fanex.Athena.Model.Core.MetaModel;
-
 namespace Fanex.Athena.Model.Forecast.MetaModel
 {
     /// <summary>
@@ -38,6 +36,5 @@ namespace Fanex.Athena.Model.Forecast.MetaModel
         public bool IsShowFH { get; set; }
 
         public bool IsShowFT { get; set; }
-
     }
 }

@@ -2,17 +2,14 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Base.UnitTests;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Configuration;
-    using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.Customer.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.VendorAdapter.Interfaces;
     using Model.Core.DTO.Common;
     using Model.Report.ViewModel;
     using NSubstitute;
@@ -54,7 +51,6 @@
                     Assert.That(viewResult.ViewName, Is.EqualTo("~/Views/Desktop/Report/AbnormalBet/Main.cshtml"));
                     Assert.That(viewModel.CurrencyList, Is.EqualTo(SessionService.UserSession.CurrencyList));
                     Assert.That(viewModel.IsAllowedCustomerCommission, Is.EqualTo(SessionService.LicenseeSession.IsAllowedCustomerComm));
-
                 });
             }
         }

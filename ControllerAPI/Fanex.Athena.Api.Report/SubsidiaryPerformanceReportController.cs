@@ -14,7 +14,6 @@
     using Model.Report.MetaModel;
 
     using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
     using Service.Report.Interfaces;
 
     [ApiFunctionAuthorization(PermissionKeys.ReportSubsidiaryPerformance)]

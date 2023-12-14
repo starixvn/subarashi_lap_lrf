@@ -13,6 +13,7 @@
         public DateTime ToDate { get; set; }
 
         public string ProductCodeList { get; set; }
+
         public string OriginalProductCodeList { get; set; }
 
         public string SubsidiaryList { get; set; } = string.Empty;

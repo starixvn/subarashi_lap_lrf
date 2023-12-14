@@ -5,7 +5,6 @@ using Fanex.Athena.Service.Customer.Interfaces;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
 using NSubstitute;
 using NUnit.Framework;
-using System.Threading.Tasks;
 
 namespace Fanex.Athena.Controllers.Report.UnitTests
 {
@@ -22,7 +21,7 @@ namespace Fanex.Athena.Controllers.Report.UnitTests
             _productService = Substitute.For<IProductService>();
             _subsidiaryService = Substitute.For<ISubsidiaryService>();
             _customerClassService = Substitute.For<ICustomerClassService>();
-            _authorizationService= Substitute.For<IAuthorizationService>();
+            _authorizationService = Substitute.For<IAuthorizationService>();
         }
 
         private WinlossAnalysisReportController CreateController()

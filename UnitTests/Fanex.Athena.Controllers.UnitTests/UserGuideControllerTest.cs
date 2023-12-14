@@ -50,7 +50,7 @@
             _fileSystem = Substitute.For<IFileSystem>();
             _balanceUpDataAccess = Substitute.For<IBalanceUpDataAccess>();
             _cacheRefAdapter = Substitute.For<ICacheRefAdapter>();
-            _authrizationService= Substitute.For<IAuthorizationService>();
+            _authrizationService = Substitute.For<IAuthorizationService>();
         }
 
         [TearDown]

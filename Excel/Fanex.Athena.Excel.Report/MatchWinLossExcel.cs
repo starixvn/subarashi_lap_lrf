@@ -400,6 +400,7 @@
         }
 
         private static IList<string> GetTotalColumnNameList() => _commonColumnNameList.Select(x => "sum" + x).ToList();
+
         private static bool IsHappy5LinkedGames(int betType)
             => (int)BetType.BeginHappy5LinkedGames <= betType && betType <= (int)BetType.EndHappy5LinkedGames;
     }

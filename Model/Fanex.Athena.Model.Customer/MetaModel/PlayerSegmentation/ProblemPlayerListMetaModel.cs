@@ -1,8 +1,8 @@
 ﻿namespace Fanex.Athena.Model.Customer.MetaModel
 {
+    using System;
     using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Core.MetaModel;
-    using System;
 
     public class ProblemPlayerListMetaModel : BasePlayerListMetaModel, IMetaModelLanguage
     {
@@ -14,6 +14,7 @@
             {
                 return _fromDate;
             }
+
             set
             {
                 _fromDate = DateTimeHelper.ToBeginOfTheDay(value);
@@ -28,6 +29,7 @@
             {
                 return _toDate;
             }
+
             set
             {
                 _toDate = DateTimeHelper.ToEndOfTheDay(value);

@@ -4,10 +4,7 @@
     using System.Web.Mvc;
 
     using Fanex.Athena.Model.Auth;
-
-    using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
-    using Model.Core.DTO.Users;
     using Model.Core.MetaModel.Account;
 
     using NSubstitute;

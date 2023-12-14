@@ -3,6 +3,7 @@
     public class PortalApiReponse
     {
         public int ErrorCoode { get; set; }
+
         public string ErrorMsg { get; set; }
     }
 

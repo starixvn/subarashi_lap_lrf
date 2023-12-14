@@ -1,9 +1,9 @@
 ﻿namespace Fanex.Athena.Controllers.Customer
 {
+    using System.Web.Mvc;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Customer.ViewModel;
     using Fanex.Athena.Web.ActionFilter;
-    using System.Web.Mvc;
 
     public partial class PlayerSegmentationController
     {

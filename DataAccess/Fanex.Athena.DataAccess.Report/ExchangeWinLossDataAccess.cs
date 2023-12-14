@@ -9,7 +9,6 @@
     using Core.Extensions;
     using Data;
     using Extension.Utility;
-    using Fanex.Athena.Model.Report.Constants;
     using Interfaces;
     using Model.Core.ResultModel;
     using Model.Report.DTO;

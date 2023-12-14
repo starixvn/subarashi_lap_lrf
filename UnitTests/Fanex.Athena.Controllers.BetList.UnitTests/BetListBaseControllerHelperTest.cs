@@ -1,21 +1,15 @@
 ﻿namespace Fanex.Athena.Controllers.BetList.UnitTests
 {
+    using System;
     using Base.UnitTests;
-
     using DataAccess.Core.Configuration.Interfaces;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-
     using Model.BetList.MetaModel;
     using Model.Core.DTO.Configuration;
-
     using NSubstitute;
-
     using NUnit.Framework;
-
-    using System;
-
     using VendorAdapter.Interfaces;
 
     public class BetListBaseControllerHelperTest : CultureBaseControllerHelperTest

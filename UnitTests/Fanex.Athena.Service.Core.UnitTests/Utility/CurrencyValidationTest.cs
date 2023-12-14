@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 
 using Fanex.Athena.Model.Auth;
-using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.Service.Core.Utility;
 using Fanex.Athena.Service.Core.Utility.Interfaces;

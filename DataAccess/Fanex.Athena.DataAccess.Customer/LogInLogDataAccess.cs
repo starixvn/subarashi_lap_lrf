@@ -7,7 +7,6 @@
 namespace Fanex.Athena.DataAccess.Customer
 {
     using System.Collections.Generic;
-    using System.Data;
     using System.Threading.Tasks;
     using Core;
     using Fanex.Athena.DataAccess.Customer.Interfaces;

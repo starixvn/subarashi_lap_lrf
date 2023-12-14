@@ -6,13 +6,10 @@
 
 namespace Fanex.Athena.Controllers.Report
 {
-    using Fanex.Athena.Model.Auth.DataDomain;
-
-    using Service.Report.Interfaces;
-
     using System.Threading.Tasks;
     using System.Web.Mvc;
-
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Service.Report.Interfaces;
     using Web.ActionFilter;
 
     [FunctionAuthorization(PermissionKeys.ReportSettledMatchCount)]

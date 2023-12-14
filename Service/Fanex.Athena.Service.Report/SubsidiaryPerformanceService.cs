@@ -70,7 +70,7 @@
             IEnumerable<SubsidiaryPerformance> entityDataList,
             SubsidiaryPerformanceMetaModel metaModel,
             UserAuthInfo user)
-        {     
+        {
             var mainModel = new List<SubsidiaryPerformanceSummary>();
             var totalModel = new Dictionary<string, SubsidiaryPerformanceBase>();
             var grandTotal = new SubsidiaryPerformanceBase { CurrencyName = metaModel.BaseCurrency.ToUpperInvariant() };

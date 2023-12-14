@@ -20,8 +20,7 @@
     {
         private ILicenseeDataAccess _licenseeDataAccess;
         private IInternalAuthService _authService;
-        private IOAuthInfo _oauthInfo; 
-
+        private IOAuthInfo _oauthInfo;
 
         [SetUp]
         public void SetUp()
@@ -153,7 +152,6 @@
                 LangService = LangService,
                 SessionServiceInstance = SessionService,
                 AppSettingInstance = AppSettings
-
             };
         }
 

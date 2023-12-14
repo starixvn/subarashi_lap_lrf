@@ -1,13 +1,13 @@
-﻿using Fanex.Athena.Service.Core.OAuth;
-using Fanex.Athena.UnitTest.Common.Helpers;
-using Newtonsoft.Json;
-using NSubstitute;
-using NUnit.Framework;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Fanex.Athena.Service.Core.OAuth;
+using Fanex.Athena.UnitTest.Common.Helpers;
+using Newtonsoft.Json;
+using NSubstitute;
+using NUnit.Framework;
 
 namespace Fanex.Athena.Service.Core.UnitTests.OAuth
 {
@@ -19,7 +19,7 @@ namespace Fanex.Athena.Service.Core.UnitTests.OAuth
         [SetUp]
         public void Setup()
         {
-            _options = new OAuthOptions 
+            _options = new OAuthOptions
             {
                 Host = "http://abc.com",
                 TokenPath = "TokenPath",
@@ -75,7 +75,7 @@ namespace Fanex.Athena.Service.Core.UnitTests.OAuth
             _service = new OAuthService(_options);
 
             // Action
-           
+
             var result = await _service.RequestOAuthInfoAsync(grantType, @params);
 
             // Assert
@@ -101,7 +101,6 @@ namespace Fanex.Athena.Service.Core.UnitTests.OAuth
                         expires_in = 3600
                     }))
                 });
-
 
             messageHandler.Send(Arg.Is<HttpRequestMessage>(_ => _.RequestUri.ToString() == $"{_options.Host}/{_options.UserInfoPath}"))
                 .Returns(_ =>
@@ -199,7 +198,6 @@ namespace Fanex.Athena.Service.Core.UnitTests.OAuth
             Assert.AreEqual(expectedFormContent, actualFormContent);
         }
     }
-
 
     public abstract class MockHttpMessageHandler : HttpMessageHandler
     {

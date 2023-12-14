@@ -1,18 +1,18 @@
-﻿using Fanex.Athena.Model.Core.DTO.Common;
+﻿using System;
+using System.Collections.Generic;
+using Fanex.Athena.Model.Core.DTO.Common;
 using Fanex.Athena.Model.Core.MetaModel.Product;
 using Fanex.Athena.Model.Customer.DTO;
-using System;
-using System.Collections.Generic;
 
 namespace Fanex.Athena.Model.Report.ViewModel
 {
     public class WinlossAnalysisReportViewModel
     {
-        public WinlossAnalysisReportViewModel() 
+        public WinlossAnalysisReportViewModel()
         {
             var toDay = DateTime.Today;
             FromDate = toDay;
-            ToDate = toDay;            
+            ToDate = toDay;
         }
 
         public DateTime FromDate { get; set; }
@@ -25,7 +25,7 @@ namespace Fanex.Athena.Model.Report.ViewModel
 
         public bool IsAllowedCustomerComm { get; set; }
 
-        public bool IsOfferCashOutProduct { get; set;  }  
+        public bool IsOfferCashOutProduct { get; set; }
 
         public IEnumerable<ProductOption> ProductOptionList { get; set; }
 

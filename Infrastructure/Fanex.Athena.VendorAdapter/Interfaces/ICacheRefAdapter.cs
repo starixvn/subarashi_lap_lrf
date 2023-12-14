@@ -5,6 +5,7 @@ namespace Fanex.Athena.VendorAdapter.Interfaces
     public interface ICacheRefAdapter
     {
 #pragma warning disable CS3003 // Type is not CLS-compliant
+
         IRemotingRefService RemotingRefService { get; }
 #pragma warning restore CS3003 // Type is not CLS-compliant
 

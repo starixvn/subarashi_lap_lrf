@@ -1,6 +1,6 @@
-﻿using Fanex.Data;
-using System;
+﻿using System;
 using System.Data.SqlClient;
+using Fanex.Data;
 
 namespace Fanex.Athena
 {
@@ -34,5 +34,4 @@ namespace Fanex.Athena
             return base.GetSetting(key);
         }
     }
-
 }

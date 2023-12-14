@@ -22,6 +22,7 @@ namespace Fanex.Athena.Model.BetList.MetaModel
         public string UspKey { get; set; }
 
         public string ProductCodeList { get; set; }
+
         public string OriginalProductCodeList { get; set; }
 
         public string ExcelFileName { get; set; }
@@ -133,7 +134,9 @@ namespace Fanex.Athena.Model.BetList.MetaModel
         public bool IsShowIp { get; set; }
 
         public bool IsEnableSingleWallet { get; set; }
+
         public string SubsidiaryList { get; set; }
+
         public bool SubsidiarySearch { get; set; }
     }
 }

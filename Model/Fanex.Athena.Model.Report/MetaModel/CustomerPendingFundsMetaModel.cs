@@ -1,7 +1,7 @@
-﻿using Fanex.Athena.Model.Core.DataDomain;
-using Fanex.Athena.Model.Core.MetaModel;
-using System;
+﻿using System;
 using System.Linq;
+using Fanex.Athena.Model.Core.DataDomain;
+using Fanex.Athena.Model.Core.MetaModel;
 
 namespace Fanex.Athena.Model.Report.MetaModel
 {

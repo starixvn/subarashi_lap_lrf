@@ -25,7 +25,6 @@
             SetUpDefaultFakeData();
 
             SepUpForService();
-
         }
 
         [OneTimeTearDown]
@@ -63,7 +62,6 @@
                 Assert.That(viewModel.MainData.Count, Is.EqualTo(1));
             }
         }
-
 
         private OutrightTotalBetController CreateController()
         {

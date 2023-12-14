@@ -5,7 +5,7 @@ namespace Fanex.Athena.Model.Customer.ViewModel
 {
     public class MonitoredPlayerViewModel
     {
-        const int MaxDateLastMonths = 3;
+        private const int MaxDateLastMonths = 3;
         private readonly DateTime LaunchDate = new DateTime(2022, 10, 12);
 
         public MonitoredPlayerViewModel()

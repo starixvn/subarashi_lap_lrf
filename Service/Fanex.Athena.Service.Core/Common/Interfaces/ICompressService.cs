@@ -1,5 +1,5 @@
-﻿using Fanex.Athena.Model.Core.MetaModel;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Fanex.Athena.Model.Core.MetaModel;
 
 namespace Fanex.Athena.Service.Core.Common.Interfaces
 {

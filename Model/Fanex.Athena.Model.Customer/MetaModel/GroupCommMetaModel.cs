@@ -57,6 +57,7 @@
 
                 return _commValues;
             }
+
             set
             {
                 _commValues = value;

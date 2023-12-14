@@ -8,6 +8,7 @@
     public class SabaVirtualSportsWinLossExcelModel
     {
         public ConvertingOption ConvertingOption { get; set; }
+
         public SabaVirtualSportsWinLossMetaModel MetaModel { get; set; }
 
         public IEnumerable<LicenseeWinLoss> DataList { get; set; }

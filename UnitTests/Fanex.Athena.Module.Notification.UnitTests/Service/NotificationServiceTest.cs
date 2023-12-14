@@ -1,5 +1,8 @@
 ﻿namespace Fanex.Athena.Module.Notification.UnitTests
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
     using Extension.Utility;
     using Extension.Utility.Interfaces;
     using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
@@ -13,9 +16,6 @@
     using Model.Core.DTO.Common;
     using NSubstitute;
     using NUnit.Framework;
-    using System;
-    using System.Linq;
-    using System.Threading.Tasks;
 
     public class NotificationServiceTest
     {

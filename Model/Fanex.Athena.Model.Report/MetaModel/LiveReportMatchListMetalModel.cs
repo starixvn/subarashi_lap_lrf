@@ -6,11 +6,11 @@
 
 namespace Fanex.Athena.Model.Report.MetaModel
 {
-    using Fanex.Athena.Model.Core.DataDomain;
-    using Fanex.Athena.Model.Core.MetaModel;
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
+    using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Model.Core.MetaModel;
 
     /// <summary>
     /// LiveReportMatchListMetalModel class.

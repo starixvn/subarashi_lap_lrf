@@ -134,7 +134,7 @@
             {
                 // Arrange
 
-                StubUserSessionData(new UserAuthInfo 
+                StubUserSessionData(new UserAuthInfo
                 {
                     AccessTokenLifeTime = DateTime.Now,
                     OnUserId = DefaultUserSession.OnUserId,
@@ -231,7 +231,6 @@
                 Assert.That(result.ViewBag.HasRecheckIn, Is.EqualTo(expectedValue));
             }
         }
-
 
         [Test]
         public void IndexIpad_InvalidSessionUser_RedirectToLocationRestriction()

@@ -43,7 +43,7 @@ namespace Fanex.Athena.Extension.Utility
             HttpContext.Current.Response.SetCookie(cookie);
         }
 
-        public static  void ClearCookies(HttpResponseBase response, string[] cookies)
+        public static void ClearCookies(HttpResponseBase response, string[] cookies)
         {
             var cache = response.Cache;
             cache.SetNoStore();

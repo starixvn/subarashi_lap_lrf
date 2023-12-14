@@ -1,5 +1,8 @@
 ﻿namespace Fanex.Athena.Controllers
 {
+    using System.Text;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using Extension.Helper;
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth.Enum;
@@ -10,9 +13,6 @@
     using Fanex.Logging;
     using Newtonsoft.Json;
     using ONEbook.UM.Services;
-    using System.Text;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
 
     public class PortalAuthorizationController : Controller
     {

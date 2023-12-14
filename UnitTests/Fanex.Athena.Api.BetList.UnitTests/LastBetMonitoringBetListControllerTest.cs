@@ -6,7 +6,6 @@
     using System.Threading.Tasks;
     using System.Xml.Linq;
     using Base.UnitTests;
-    using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Service.Customer.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
@@ -23,11 +22,11 @@
     {
         private const string ApiPath = "/LastBetMonitoringBetList/GetData";
 
-        const string _root_tag = "ROOT";
-        const string _sport_tag = "Sport";
-        const string _sport_type_attr = "SportType";
-        const string _league_group_id_attr = "LeagueGroupIds";
-        const string DEFAULT_LEAGUE_ID = "0";
+        private const string _root_tag = "ROOT";
+        private const string _sport_tag = "Sport";
+        private const string _sport_type_attr = "SportType";
+        private const string _league_group_id_attr = "LeagueGroupIds";
+        private const string DEFAULT_LEAGUE_ID = "0";
 
         private IMatchService _matchService;
 
@@ -228,7 +227,7 @@
         [Test]
         public async Task Index_HasSelectNoSport_GenerateEmptyStringSportTypeList()
         {
-            using(var controller = CreateController())
+            using (var controller = CreateController())
             {
                 //Arrange
                 var metaModel = new LastBetsMonitoringMetaModel { SportIds = string.Empty };
@@ -307,7 +306,7 @@
                 //Arrange
                 var id = -1;
                 var sabaSport = new SabaSport { Id = id, SportTypeId = 1, LeagueGroupIds = new List<int> { 1, 2 } };
-                
+
                 var metaModel = new LastBetsMonitoringMetaModel { SportIds = id.ToString() };
                 var expect = new HttpResponseMessage();
                 _betListApiClient.PostAsync(ApiPath, metaModel, SessionLanguage).Returns(Task.FromResult(expect));

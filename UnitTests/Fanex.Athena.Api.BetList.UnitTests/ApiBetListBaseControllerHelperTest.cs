@@ -7,7 +7,6 @@
     using DataAccess.Core.Configuration.Interfaces;
 
     using Fanex.Athena.Api.Base.UnitTests;
-    using Fanex.Athena.Service.Core.Users.Interfaces;
     using Model.Core.DTO.Configuration;
 
     using NSubstitute;

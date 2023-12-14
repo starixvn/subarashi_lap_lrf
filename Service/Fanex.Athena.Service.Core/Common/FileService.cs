@@ -1,12 +1,11 @@
 ﻿namespace Fanex.Athena.Report.Common.Services
 {
-    using Fanex.Athena.Model.Core.MetaModel;
-    using Fanex.Athena.Service.Core.Common.Interfaces;
     using System.Collections.Generic;
     using System.IO;
     using System.IO.Compression;
     using System.Text;
-
+    using Fanex.Athena.Model.Core.MetaModel;
+    using Fanex.Athena.Service.Core.Common.Interfaces;
 
     public class FileService : IFileService
     {

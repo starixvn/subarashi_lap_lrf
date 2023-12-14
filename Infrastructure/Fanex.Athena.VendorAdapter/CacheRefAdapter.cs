@@ -24,6 +24,7 @@ namespace Fanex.Athena.VendorAdapter
         public static CacheRefAdapter Instance { get; } = new CacheRefAdapter();
 
 #pragma warning disable CS3003 // Type is not CLS-compliant
+
         public IRemotingRefService RemotingRefService => _remotingRefService.Value;
 #pragma warning restore CS3003 // Type is not CLS-compliant
 

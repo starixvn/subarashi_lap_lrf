@@ -10,7 +10,6 @@
     {
         public Tuple<int, int> IsCustomerBelonging(int custId, long transid)
         {
-
             using (var db = this.GetObjectDb("Lrf_CheckBelonging_GetAgentInfo"))
             {
                 db.SetParameterValue("transid", transid);

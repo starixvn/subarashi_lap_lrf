@@ -1,8 +1,8 @@
 ﻿namespace Fanex.Athena.Model.Report.MetaModel
 {
+    using System;
     using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Model.Core.MetaModel;
-    using System;
 
     public class WinLossByBetTypeMetaModel : BaseReportMetaModel, IMetaModelValidation, IMetaModelSubsidiarySearch
     {

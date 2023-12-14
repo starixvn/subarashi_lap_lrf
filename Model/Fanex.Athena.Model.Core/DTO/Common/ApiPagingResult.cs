@@ -21,9 +21,13 @@ namespace Fanex.Athena.Model.Core.DTO.Common
         }
 
         public IEnumerable<T> Data { get; set; }
+
         public int PageSize { get; set; }
+
         public int PageIndex { get; set; }
+
         public byte OrderCol { get; set; }
+
         public byte SortType { get; set; }
 
         public int TotalItem { get; set; }

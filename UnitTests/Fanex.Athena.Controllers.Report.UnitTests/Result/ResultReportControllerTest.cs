@@ -42,7 +42,6 @@
             _portalApiService.GetSpecialLeaguesAsync(DefaultLicenseeSession.LicenseeName)
                 .Returns(Task.FromResult(Enumerable.Empty<int>()));
 
-
             SetUpDefaultFakeData();
         }
 
@@ -91,7 +90,7 @@
                     _betListApiClient.Received(1).PostStringAsync(
                         Url,
                         Arg.Is<object>(
-                            (System.Linq.Expressions.Expression<Predicate<object>>)(                            x => (int)x.GetValue("matchId") == MatchId &&
+                            (System.Linq.Expressions.Expression<Predicate<object>>)(x => (int)x.GetValue("matchId") == MatchId &&
                                 (int)x.GetValue("sportType") == SportId &&
                                 (string)x.GetValue("languageCode") == SessionService.UserSession.Language)), (string)SessionService.UserSession.Language);
                     Assert.That(result.ViewBag.Data, Is.EqualTo(ExpectedData));

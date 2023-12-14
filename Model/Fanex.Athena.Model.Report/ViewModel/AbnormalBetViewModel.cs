@@ -1,10 +1,9 @@
 ﻿namespace Fanex.Athena.Model.Report.ViewModel
 {
-    using Fanex.Athena.Model.Core.DTO.Configuration;
-    using Fanex.Athena.Model.Core.ViewModel;
-    using Fanex.Athena.Model.Report.MetaModel;
     using System;
     using System.Collections.Generic;
+    using Fanex.Athena.Model.Core.DTO.Configuration;
+    using Fanex.Athena.Model.Core.ViewModel;
 
     public class AbnormalBetViewModel : BaseViewModel
     {

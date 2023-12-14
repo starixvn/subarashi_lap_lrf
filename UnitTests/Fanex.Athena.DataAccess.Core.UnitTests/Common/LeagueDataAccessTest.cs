@@ -30,7 +30,6 @@
 
         private IBalanceUpDataAccess _balanceUpDataAccess;
 
-
         protected override void SetUpDataAccess()
         {
             _cacheRef = Substitute.For<ICacheRefAdapter>();

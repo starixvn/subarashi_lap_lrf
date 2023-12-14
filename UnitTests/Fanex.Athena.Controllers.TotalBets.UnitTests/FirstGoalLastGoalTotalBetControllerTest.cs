@@ -27,7 +27,6 @@
             SetUpDefaultFakeData();
 
             SepUpForService();
-
         }
 
         [OneTimeTearDown]
@@ -68,7 +67,6 @@
                 });
             }
         }
-
 
         private void SepUpForService()
         {

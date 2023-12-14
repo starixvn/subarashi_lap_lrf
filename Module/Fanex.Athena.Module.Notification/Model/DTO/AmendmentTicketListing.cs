@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    public class AmendmentTicketListing    
+    public class AmendmentTicketListing
     {
         public string MatchInfo { get; set; }
 
@@ -15,8 +15,11 @@
     public class AmendmentTicket
     {
         public int Index { get; set; }
+
         public string RefNo { get; set; }
+
         public string ExternalId { get; set; }
+
         public string SystemId { get; set; }
     }
 }

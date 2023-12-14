@@ -1,4 +1,6 @@
-﻿using Fanex.Athena.Api.Base.UnitTests;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using Fanex.Athena.Api.Base.UnitTests;
 using Fanex.Athena.DataAccess.Core.Common.Interfaces;
 using Fanex.Athena.Extension.Utility;
 using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
@@ -10,8 +12,6 @@ using Fanex.Athena.UnitTest.Common.Helpers;
 using Newtonsoft.Json;
 using NSubstitute;
 using NUnit.Framework;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Fanex.Athena.Api.Customer.UnitTest
 {

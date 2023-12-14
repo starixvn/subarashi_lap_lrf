@@ -11,7 +11,6 @@
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Athena.Resources;
     using Fanex.Athena.Service.Customer.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
     using Fanex.Athena.Web.ResultExtension;
 

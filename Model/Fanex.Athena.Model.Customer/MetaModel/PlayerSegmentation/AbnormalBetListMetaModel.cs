@@ -1,8 +1,8 @@
 ﻿namespace Fanex.Athena.Model.Customer.MetaModel
 {
-    using Fanex.Athena.Model.Core.MetaModel;
     using System;
     using System.Collections.Generic;
+    using Fanex.Athena.Model.Core.MetaModel;
 
     public class AbnormalBetListMetaModel : IMetaModelValidation, IMetaModelAgent, IMetaModelShowBetFromIP
     {
@@ -32,6 +32,7 @@
             {
                 return _baseCurrency;
             }
+
             set
             {
                 _baseCurrency = value?.ToLowerInvariant() ?? string.Empty;

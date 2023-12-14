@@ -32,19 +32,31 @@ namespace Fanex.Athena.Service.Core.OAuth
             => new OAuthInfo(errorMsg);
 
         public bool IsError { get; }
+
         public string ErrorMsg { get; }
 
         public string IdentityName => GetClaimValue("Name");
+
         public string VendorID => GetClaimValue("VendorId");
+
         public int LicenseeId => GetClaimValue("LicenseeId", -1);
+
         public string SiteName => GetClaimValue("SiteName");
+
         public bool IsAdministrator => GetClaimValue<bool>("Administrator");
+
         public bool IsAllowedCustomerComm => GetClaimValue<bool>("IsAllowedCustomerComm");
+
         public bool IsEnableBA => GetClaimValue<bool>("IsEnableBA");
+
         public bool IsEnableSingleWallet => GetClaimValue<bool>("IsEnableSingleWallet");
+
         public byte UserLevel => GetClaimValue<byte>("UserLevel");
+
         public bool IsMasterLicensee => GetClaimValue<bool>("IsMasterLicensee");
+
         public string OperatorID => GetClaimValue("OperatorID");
+
         public string SiteDBServer => GetClaimValue("SiteDBServer");
 
         public int SpecialPlatform => GetClaimValue<int>("SpecialPlatform");
@@ -81,17 +93,29 @@ namespace Fanex.Athena.Service.Core.OAuth
         }
 
         public int OnUserId => GetClaimValue<int>("OnUserId");
+
         public bool IsInternal => GetClaimValue<bool>("IsInternal");
+
         public string DefaultReportUrl => GetClaimValue("DefaultReportUrl");
+
         public bool IsEnabledSubsidiary => GetClaimValue<bool>("IsEnabledSubsidiary");
+
         public string BaseCurrency => GetClaimValue("BaseCurrency");
+
         public int UserID => GetClaimValue<int>("UserSEQ");
+
         public string Username => GetClaimValue("UserID");
+
         public string Language => GetClaimValue("Language");
+
         public bool IsShowIP => GetClaimValue("IsShowIP", true);
+
         public string ActionLink => GetClaimValue("ActionLink");
+
         public string AccessToken { get; }
+
         public DateTime AccessTokenLifeTime { get; }
+
         public string RefreshToken { get; }
 
         private PortalFunction[] _lapFunctionList;

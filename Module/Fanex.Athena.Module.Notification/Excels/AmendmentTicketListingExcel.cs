@@ -1,10 +1,10 @@
-﻿using Fanex.Athena.Excel.Base;
+﻿using System.Linq;
+using System.Web.Hosting;
+using Fanex.Athena.Excel.Base;
 using Fanex.Athena.Excel.Base.Extension;
 using Fanex.Athena.Module.Notification.DTO;
 using Fanex.Athena.Resources;
 using NPOI.SS.UserModel;
-using System.Linq;
-using System.Web.Hosting;
 
 namespace Fanex.Athena.Module.Notification.Excels
 {
@@ -51,7 +51,7 @@ namespace Fanex.Athena.Module.Notification.Excels
             }
         }
 
-        private static void AssignRowData(IRow rowExcel, AmendmentTicket rowData,  int rowIndex)
+        private static void AssignRowData(IRow rowExcel, AmendmentTicket rowData, int rowIndex)
         {
             rowExcel.Cells[ColumnIndex].SetCellValue(rowIndex);
             rowExcel.Cells[ColumnRefNo].SetCellValue(rowData.RefNo);

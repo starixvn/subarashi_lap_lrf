@@ -1,4 +1,7 @@
-﻿using Fanex.Athena.Controllers.Base.UnitTests;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Fanex.Athena.Controllers.Base.UnitTests;
 using Fanex.Athena.Model.Auth;
 using Fanex.Athena.Model.Auth.DataDomain;
 using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
@@ -9,9 +12,6 @@ using Fanex.Athena.Service.StatelessCore.Interfaces;
 using Fanex.Athena.UnitTest.Common.Helpers;
 using NSubstitute;
 using NUnit.Framework;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Fanex.Athena.Controllers.Customer.UnitTests
 {

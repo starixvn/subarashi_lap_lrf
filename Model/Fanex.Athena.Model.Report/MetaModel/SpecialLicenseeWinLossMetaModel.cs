@@ -1,10 +1,10 @@
 ﻿namespace Fanex.Athena.Model.Report.MetaModel
 {
-    using Fanex.Athena.Model.Core.DataDomain;
-    using Fanex.Athena.Model.Core.MetaModel;
     using System;
     using System.ComponentModel;
     using System.Linq;
+    using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Model.Core.MetaModel;
 
     public class SpecialLicenseeWinLossMetaModel : IMetaModelValidation, IMetaModelCurrency
     {

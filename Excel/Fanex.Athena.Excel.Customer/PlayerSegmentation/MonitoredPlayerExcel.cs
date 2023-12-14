@@ -1,13 +1,13 @@
-﻿using Fanex.Athena.Excel.Base;
-using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
-using NPOI.SS.UserModel;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Fanex.Athena.Excel.Base.Extension;
 using System.Text;
-using Fanex.Athena.Resources;
-using Fanex.Athena.Model.Customer.MetaModel;
 using System.Web.Hosting;
+using Fanex.Athena.Excel.Base;
+using Fanex.Athena.Excel.Base.Extension;
+using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
+using Fanex.Athena.Model.Customer.MetaModel;
+using Fanex.Athena.Resources;
+using NPOI.SS.UserModel;
 
 namespace Fanex.Athena.Excel.Customer
 {

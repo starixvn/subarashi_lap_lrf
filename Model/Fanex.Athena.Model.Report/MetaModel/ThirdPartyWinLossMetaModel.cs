@@ -6,9 +6,9 @@
 
 namespace Fanex.Athena.Model.Report.MetaModel
 {
+    using System;
     using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Model.Core.MetaModel;
-    using System;
 
     public class ThirdPartyWinLossMetaModel : BaseDrilldownReportMetaModel, IMetaModelSubsidiarySearch
     {
@@ -43,7 +43,6 @@ namespace Fanex.Athena.Model.Report.MetaModel
             get
             {
                 return MetaModelHelper.ValidateBaseCurrency(BaseCurrency);
-
             }
         }
 
@@ -55,11 +54,12 @@ namespace Fanex.Athena.Model.Report.MetaModel
 
         public string DefaultBaseCurrency { get; set; }
 
-        public DateTime ? MoveBetsDay { get; set; }
+        public DateTime? MoveBetsDay { get; set; }
 
-        public DateTime ? BalanceUpDay { get; set; }
+        public DateTime? BalanceUpDay { get; set; }
 
         public string SubsidiaryList { get; set; }
+
         public bool SubsidiarySearch { get; set; }
     }
 }

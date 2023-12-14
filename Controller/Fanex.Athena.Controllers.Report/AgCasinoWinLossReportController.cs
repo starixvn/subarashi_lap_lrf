@@ -1,15 +1,13 @@
 ﻿namespace Fanex.Athena.Controllers.Report
 {
+    using System;
+    using System.Linq;
+    using System.Web.Mvc;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
     using Fanex.Athena.Web.ActionFilter;
-
     using Model.Core.DataDomain;
-
-    using System;
-    using System.Linq;
-    using System.Web.Mvc;
 
     [FunctionAuthorization(PermissionKeys.ReportAGCasinoWinLoss)]
     public class AgCasinoWinLossReportController : ReportBaseController

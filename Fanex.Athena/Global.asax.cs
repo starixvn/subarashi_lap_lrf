@@ -1,9 +1,15 @@
 ﻿namespace Fanex.Athena
 {
+    using System;
+    using System.Configuration;
+    using System.Web;
+    using System.Web.Helpers;
+    using System.Web.Http;
+    using System.Web.Mvc;
+    using System.Web.Optimization;
+    using System.Web.Routing;
     using Api.Base.Attributes;
-
     using Data;
-
     using Fanex.Athena.Extension.Helpers;
     using Fanex.Athena.VendorAdapter;
     using Fanex.Athena.Web.ActionFilter;
@@ -11,9 +17,7 @@
     using Fanex.Caching;
     using Fanex.Data.SqlServer;
     using Fanex.Logging.Sentry.RavenClient;
-
     using Logging;
-
     using MessagePack.Resolvers;
     using Microsoft.AspNet.WebApi.Extensions.Compression.Server;
     using ONEbook.UM;
@@ -21,19 +25,9 @@
     using ONEbook.UM.Helpers;
     using ONEbook.UM.NETFramework;
     using RemotingRef;
-
     using SharpRaven;
 
-    using System;
-    using System.Configuration;
     using System.Net.Http.Extensions.Compression.Core.Compressors;
-    using System.Web;
-    using System.Web.Helpers;
-    using System.Web.Http;
-    using System.Web.Mvc;
-    using System.Web.Optimization;
-    using System.Web.Routing;
-
     public class MvcApplication : HttpApplication
     {
         private static readonly string[] RemovedHeaderKeys = { "Server", "X-AspNet-Version", "X-AspNetMvc-Version" };
@@ -128,14 +122,13 @@
         }
 
         private static void SetupUM()
-        {              
+        {
             UMClientManager
                .UseConfig(new UMClientConfiguration().Initialize())
                .UseCacheService(new CustomUMCacheService(new CacheService()))
                .UseRestClient(new CustomUMRestClient())
                .UseHttpContext(new HttpContextHelper());
         }
-
 
         private static void SetupLogging()
         {
@@ -145,7 +138,6 @@
                     {
                         Dsn = new Dsn(ConfigurationManager.AppSettings["Sentry-Dsn"])
                     }));
-
         }
     }
 }

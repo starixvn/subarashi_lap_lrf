@@ -1,8 +1,8 @@
 ﻿namespace Fanex.Athena.Controllers.TotalBets
 {
-    using Fanex.Athena.Web.ActionFilter;
     using System.Web.Mvc;
     using System.Web.SessionState;
+    using Fanex.Athena.Web.ActionFilter;
 
     [SessionState(SessionStateBehavior.ReadOnly)]
     [UMFilter]

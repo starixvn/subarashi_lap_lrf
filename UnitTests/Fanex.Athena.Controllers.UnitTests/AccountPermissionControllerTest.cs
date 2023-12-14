@@ -8,7 +8,6 @@
     using Base.UnitTests;
 
     using DataAccess.Core.Common.Interfaces;
-    using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -17,8 +16,6 @@
     using NSubstitute;
 
     using NUnit.Framework;
-
-    using Service.Core.Common.Interfaces;
 
     [TestFixture]
     public partial class AccountPermissionControllerTest : CultureBaseControllerHelperTest
@@ -188,7 +185,6 @@
                 SessionServiceInstance = SessionService,
                 LicenseeSettingServiceInstance = _licenseeSettingService,
                 AppSettingInstance = AppSettings
-
             };
         }
 

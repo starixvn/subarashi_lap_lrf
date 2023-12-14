@@ -3,6 +3,7 @@
     public interface ICurrencyInfo
     {
         int CurrencyId { get; set; }
+
         string Currency { get; set; }
     }
 }

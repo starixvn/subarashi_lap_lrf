@@ -1,4 +1,10 @@
-﻿using Fanex.Athena.Controllers;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web.Mvc;
+using System.Web.SessionState;
+using Fanex.Athena.Controllers;
 using Fanex.Athena.Model.Auth.DataDomain;
 using Fanex.Athena.Model.Auth.Enum;
 using Fanex.Athena.Model.Core.DataDomain;
@@ -6,12 +12,6 @@ using Fanex.Athena.Module.LicenseeContact.Models;
 using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
 using Fanex.Athena.Web.ActionFilter;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web.Mvc;
-using System.Web.SessionState;
 
 namespace Fanex.Athena.Module.LicenseeContact.Controllers
 {
@@ -90,7 +90,7 @@ namespace Fanex.Athena.Module.LicenseeContact.Controllers
         [AutoBindMetaModel(BindSiteName = true, BindIp = true)]
         public async Task<JsonResult> Add(AddLicenseeContactMetaModel metaModel)
         {
-            if(SessionServiceInstance.UserSession.UserLevel == UserLevelType.Subsidiary)
+            if (SessionServiceInstance.UserSession.UserLevel == UserLevelType.Subsidiary)
             {
                 metaModel.Subsidiary = SessionServiceInstance.UserSession.OperatorId;
             }

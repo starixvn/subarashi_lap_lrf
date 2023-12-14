@@ -1,11 +1,9 @@
 ﻿namespace Fanex.Athena.Controllers.Report.Result
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Net;
     using System.Threading.Tasks;
-    using System.Web;
     using System.Web.Mvc;
     using DataAccess.Core.Configuration.Interfaces;
     using Fanex.Athena.Extension.Helper;
@@ -13,7 +11,6 @@
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
-    using Model.Report.MetaModel;
     using Model.Report.MetaModel.Result;
     using Model.Report.ViewModel.Result;
 

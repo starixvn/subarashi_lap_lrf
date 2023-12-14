@@ -12,10 +12,15 @@
     public class CultureBaseController : Controller
     {
         protected const string DefaultLanguage = "en-US";
+
         public ILanguageService LangService { get; set; }
+
         public ISessionService SessionServiceInstance { get; set; }
+
         public IAppSettings AppSettingInstance { get; set; }
+
         public ILicenseeSettingService LicenseeSettingServiceInstance { get; set; }
+
         public IProductService ProductServiceInstance { get; set; }
 
         public bool IsFakeLicensee(string licenseeName) => LicenseeSettingServiceInstance.IsFakeLicensee(licenseeName);

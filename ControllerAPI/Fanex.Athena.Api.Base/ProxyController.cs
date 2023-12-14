@@ -1,11 +1,11 @@
 ﻿namespace Fanex.Athena.Api.Base
 {
-    using Fanex.Athena.Api.Base.Attributes;
-    using Fanex.Athena.Service.Core.Proxy;
     using System;
     using System.Net.Http;
     using System.Threading.Tasks;
     using System.Web.Http;
+    using Fanex.Athena.Api.Base.Attributes;
+    using Fanex.Athena.Service.Core.Proxy;
 
     [ApiUMFilter]
     public class ProxyController : ApiController
@@ -22,7 +22,7 @@
         public async Task<HttpResponseMessage> Health(string apiKey)
         {
             var result = await _proxyService.HealthCheck(apiKey).ConfigureAwait(false);
-            return result;                                                                                   
+            return result;
         }
 
         [CLSCompliant(false)]

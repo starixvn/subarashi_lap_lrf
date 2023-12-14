@@ -1,4 +1,6 @@
-﻿using Fanex.Athena.DataAccess.Customer;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Fanex.Athena.DataAccess.Customer;
 using Fanex.Athena.Model.Core.DTO.External;
 using Fanex.Athena.Model.Customer.DTO;
 using Fanex.Athena.Model.Customer.MetaModel;
@@ -7,8 +9,6 @@ using Fanex.Athena.UnitTest.Common.Helpers;
 using FluentAssertions;
 using NSubstitute;
 using NUnit.Framework;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Fanex.Athena.Service.Customer.UnitTests
 {

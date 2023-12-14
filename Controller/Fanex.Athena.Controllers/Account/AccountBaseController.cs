@@ -1,12 +1,9 @@
 ﻿namespace Fanex.Athena.Controllers.Account
 {
+    using System.Web.Mvc;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Auth.Enum;
-
     using Model.Core.DTO.Common;
-
-    using System.Web.Mvc;
-
     using Web.ActionFilter;
 
     [UMFilter]

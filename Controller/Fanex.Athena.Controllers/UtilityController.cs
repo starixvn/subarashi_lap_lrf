@@ -1,19 +1,16 @@
 ﻿namespace Fanex.Athena.Controllers
 {
-    using Extension.Utility;
-    using Fanex.Athena.Service.Core.Users.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Utility;
-    using Model.Core.DataDomain;
-
-    using ONEbook.UM.Services;
-
-    using Resources;
-
-    using Service.Core.Common.Interfaces;
     using System;
     using System.Web.Mvc;
     using System.Web.Security;
     using System.Web.UI;
+    using Extension.Utility;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
+    using Model.Core.DataDomain;
+    using ONEbook.UM.Services;
+    using Resources;
+    using Service.Core.Common.Interfaces;
 
     [AllowAnonymous]
     public class UtilityController : Controller

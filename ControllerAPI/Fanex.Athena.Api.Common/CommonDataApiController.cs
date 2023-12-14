@@ -1,5 +1,10 @@
 ﻿namespace Fanex.Athena.Api.Base
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Http;
     using DataAccess.Core.Common.Interfaces;
     using Fanex.Athena.Api.Base.Attributes;
     using Fanex.Athena.Extension.Utility.Interfaces;
@@ -12,11 +17,6 @@
     using Newtonsoft.Json;
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Http;
     using Web.ActionFilter;
     using ServiceStack;
     using ServiceStack.Text;

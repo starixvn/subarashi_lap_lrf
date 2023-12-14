@@ -6,14 +6,19 @@
         private const string DefaultTextNumberNull = "0";
 
         public int Id { get; set; }
+
         public string DangerLevel { get; set; }
+
         public string SportType { get; set; }
+
         public string SportTypeName { get; set; }
 
         public bool ApplyParlay { get; set; }
 
         public int LeagueGroupId { get; set; }
+
         public int LicLeagueGroupId { get; set; }
+
         public string LicLeagueGroupName { get; set; }
 
         private string betDelay;

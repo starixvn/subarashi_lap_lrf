@@ -6,6 +6,11 @@
 
 namespace Fanex.Athena.Controllers.Report
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Hosting;
+    using System.Web.Mvc;
     using Fanex.Athena.Excel.Report;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
@@ -15,16 +20,8 @@ namespace Fanex.Athena.Controllers.Report
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
     using Fanex.Athena.Web.ResultExtension;
-
     using Resources;
-
     using Service.Report.Interfaces;
-
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Hosting;
-    using System.Web.Mvc;
 
     [FunctionAuthorization(PermissionKeys.ReportTurnover)]
     public class TurnoverReportController : ReportBaseController

@@ -30,6 +30,7 @@ namespace Fanex.Athena.Api.Base.Attributes
         public bool IsValidProductCodeList { get; set; }
 
         public string FunctionConfig { get; set; }
+
         public bool IsSingleWalletProduct { get; set; }
 
         public override void OnActionExecuting(HttpActionContext actionContext)

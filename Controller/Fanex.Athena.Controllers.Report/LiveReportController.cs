@@ -6,30 +6,26 @@
 
 namespace Fanex.Athena.Controllers.Report
 {
-    using DataAccess.Core.Configuration.Interfaces;
-
-    using Fanex.Athena.Excel.Base.Entities;
-    using Fanex.Athena.Excel.Report;
-    using Fanex.Athena.Model.Auth.DataDomain;
-    using Fanex.Athena.Model.Report.MetaModel;
-    using Fanex.Athena.Model.Report.ViewModel.LiveReports;
-    using Fanex.Athena.VendorAdapter;
-    using Fanex.Athena.Service.StatelessCore.Utility;
-    using Fanex.Athena.Web.ActionFilter;
-    using Fanex.Athena.Web.ResultExtension;
-
-    using Model.Core.DataDomain;
-    using Model.Core.DTO.Common;
-    using Model.Report.ResultModel;
-
-    using Service.Report.Interfaces;
-
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Hosting;
     using System.Web.Mvc;
+    using DataAccess.Core.Configuration.Interfaces;
+    using Fanex.Athena.Excel.Base.Entities;
+    using Fanex.Athena.Excel.Report;
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Report.MetaModel;
+    using Fanex.Athena.Model.Report.ViewModel.LiveReports;
+    using Fanex.Athena.Service.StatelessCore.Utility;
+    using Fanex.Athena.VendorAdapter;
+    using Fanex.Athena.Web.ActionFilter;
+    using Fanex.Athena.Web.ResultExtension;
+    using Model.Core.DataDomain;
+    using Model.Core.DTO.Common;
+    using Model.Report.ResultModel;
+    using Service.Report.Interfaces;
 
     [FunctionAuthorization(PermissionKeys.ReportLiveReport)]
     public class LiveReportController : ReportBaseController

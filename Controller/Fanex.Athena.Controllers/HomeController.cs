@@ -1,10 +1,10 @@
 ﻿namespace Fanex.Athena.Controllers
 {
-    using Fanex.Athena.Model.Auth.Enum;
     using System;
     using System.Text;
     using System.Web.Mvc;
     using System.Web.UI;
+    using Fanex.Athena.Model.Auth.Enum;
     using Web.ActionFilter;
 
     [UMFilter]
@@ -54,7 +54,7 @@
                 }
             }
 
-            if(SessionServiceInstance.UserSession.AccessTokenLifeTime <= DateTime.Now)
+            if (SessionServiceInstance.UserSession.AccessTokenLifeTime <= DateTime.Now)
             {
                 return RedirectToAction("LocationRestriction", "Utility");
             }

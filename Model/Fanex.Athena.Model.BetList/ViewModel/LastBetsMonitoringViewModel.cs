@@ -1,8 +1,8 @@
 ﻿namespace Fanex.Athena.Model.BetList.ViewModel
 {
-    using Fanex.Athena.Model.Customer.DTO;
     using System.Collections.Generic;
     using System.Web.Mvc;
+    using Fanex.Athena.Model.Customer.DTO;
 
     public class LastBetsMonitoringViewModel : BetListBaseViewModel
     {

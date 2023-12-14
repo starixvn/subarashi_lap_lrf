@@ -96,7 +96,6 @@
                 LicenseeId = DefaultLicenseeSession.LicenseeId,
                 LicenseeName = DefaultLicenseeSession.LicenseeName,
                 SiteDBServer = "11.11.11.11"
-
             });
 
             using (var controller = CreateController(reportSettingService, authService))

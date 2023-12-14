@@ -1,5 +1,9 @@
 ﻿namespace Fanex.Athena.Controllers.Report.UnitTests
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using Base.UnitTests;
     using Fanex.Athena.DataAccess.Core.Common.Interfaces;
     using Fanex.Athena.Model.Auth.DataDomain;
@@ -13,10 +17,6 @@
     using Model.Report.ViewModel;
     using NSubstitute;
     using NUnit.Framework;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
 
     [TestFixture]
     public class SabaVirtualSportsWinLossReportControllerTest : CultureBaseControllerHelperTest

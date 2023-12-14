@@ -20,7 +20,6 @@
         private IProductService _productService;
         private IFunctionUMService _functionUMService;
 
-
         [SetUp]
         public override void FixtureSetUp()
         {
@@ -95,8 +94,6 @@
                 });
             }
         }
-
-
 
         private CustomerComGroupController CreateController()
         {

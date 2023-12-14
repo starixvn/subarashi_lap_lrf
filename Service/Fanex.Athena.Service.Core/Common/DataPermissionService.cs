@@ -1,13 +1,11 @@
-﻿using Fanex.Athena.Model.Auth;
-using Fanex.Athena.Service.Core.Attributes;
-using Fanex.Athena.Service.Core.Common.Interfaces;
-using Fanex.Athena.Service.Core.Users;
-using Fanex.Athena.Service.Core.Users.Interfaces;
-using Fanex.Athena.Service.StatelessCore.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Fanex.Athena.Service.Core.Attributes;
+using Fanex.Athena.Service.Core.Common.Interfaces;
+using Fanex.Athena.Service.Core.Users.Interfaces;
+using Fanex.Athena.Service.StatelessCore.Interfaces;
 
 namespace Fanex.Athena.Service.Core.Common
 {

@@ -1,8 +1,7 @@
-﻿using Fanex.Athena.Model.Core.DataDomain;
-using Fanex.Athena.Model.Core.MetaModel.Product;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Fanex.Athena.Model.Core.MetaModel.Product;
 
 namespace Fanex.Athena.Model.Core.Helper
 {
@@ -31,6 +30,5 @@ namespace Fanex.Athena.Model.Core.Helper
                 .Where(_ => _.Status && (predicate == null || predicate.Invoke(_)))
                 .Select(_ => _.Code)
                 );
-
     }
 }

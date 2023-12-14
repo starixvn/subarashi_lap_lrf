@@ -6,8 +6,8 @@
 
 namespace Fanex.Athena.Model.Report.MetaModel
 {
-    using Fanex.Athena.Model.Core.MetaModel;
     using System;
+    using Fanex.Athena.Model.Core.MetaModel;
 
     public class WinLossByProductMetaModel : BaseReportMetaModel, IMetaModelSubsidiarySearch
     {
@@ -40,8 +40,11 @@ namespace Fanex.Athena.Model.Report.MetaModel
         public DateTime DrillDownToDate { get; set; }
 
         public string Username { get; set; }
+
         public string DefaultBaseCurrency { get; set; }
+
         public string SubsidiaryList { get; set; }
+
         public bool SubsidiarySearch { get; set; }
     }
 }

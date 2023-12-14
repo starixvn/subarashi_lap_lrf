@@ -34,6 +34,5 @@
                 ObjectDb.Received(1).SetParameterValue("custid", CustId);
             });
         }
-
     }
 }

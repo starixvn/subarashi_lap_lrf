@@ -1,10 +1,10 @@
 ﻿namespace Fanex.Athena.Extension.Utility
 {
+    using System;
+    using System.Runtime.Caching;
     using Interfaces;
     using Internal;
     using Newtonsoft.Json;
-    using System;
-    using System.Runtime.Caching;
 
     public class CustomMemoryCacheService : ICustomMemoryCacheService
     {

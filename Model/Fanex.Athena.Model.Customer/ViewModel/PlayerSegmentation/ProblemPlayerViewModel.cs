@@ -30,6 +30,5 @@
         public IDictionary<int, string> ReasonList { get; set; }
 
         public IEnumerable<string> CustomerClass { get; set; }
-
     }
 }

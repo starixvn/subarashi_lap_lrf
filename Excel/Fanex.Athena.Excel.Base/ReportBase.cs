@@ -31,6 +31,7 @@ namespace Fanex.Athena.Excel.Base
         private int _pageSize;
 
         protected virtual string TemplateSheetName => "Template";
+
         protected virtual string CloneSheetName => "Data";
 
         protected ReportBase(string templatePath, int totalRows, int pageSize = 0)

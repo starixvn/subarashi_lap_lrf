@@ -32,7 +32,6 @@
             _productService = null;
         }
 
-
         [Test]
         public void Index_WhenGet_ReturnCorrectViewResult()
         {

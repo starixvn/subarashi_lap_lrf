@@ -18,6 +18,7 @@
         }
 
         public SubsidiaryViewType ViewType { get; set; }
+
         public IEnumerable<CheckedItem> SubsidiaryList { get; set; }
 
         public DateTime FromDate { get; set; }

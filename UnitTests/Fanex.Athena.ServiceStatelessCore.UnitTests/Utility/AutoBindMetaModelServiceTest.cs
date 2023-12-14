@@ -4,7 +4,6 @@ using System.Linq;
 using System.Net.Http;
 using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
 using Fanex.Athena.Extension.Helper;
-using Fanex.Athena.Model.Auth;
 using Fanex.Athena.Model.Core.DTO.Configuration;
 using Fanex.Athena.Model.Core.MetaModel;
 using Fanex.Athena.Service.StatelessCore.Utility;
