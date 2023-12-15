@@ -169,7 +169,7 @@
             };
         }
 
-        private byte[] WriteExcelToByte(CustomerTurnoverExcel excel)
+        private static byte[] WriteExcelToByte(CustomerTurnoverExcel excel)
         {
             var workbook = excel.Workbook;
             try

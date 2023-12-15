@@ -8,7 +8,6 @@
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Configuration;
-    using Fanex.Athena.Service.Customer.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DTO.Common;
     using Model.Report.ViewModel;
@@ -20,7 +19,6 @@
     {
         private IReportSettingService _reportSettingService;
         private ISportService _sportService;
-        private IPlayerSegmentationService _playerService;
         private IBetTypeService _betTypeService;
 
         [OneTimeSetUp]
@@ -29,7 +27,6 @@
             base.FixtureSetUp();
             _reportSettingService = Substitute.For<IReportSettingService>();
             _sportService = Substitute.For<ISportService>();
-            _playerService = Substitute.For<IPlayerSegmentationService>();
             _betTypeService = Substitute.For<IBetTypeService>();
             SetUpDefaultFakeData();
             StubUserSessionData(new UserAuthInfo { CurrencyAgentList = new Dictionary<int, int[]>(), CurrencyList = new Dictionary<int, string>() });
@@ -67,7 +64,7 @@
                 Returns(reportSetting);
             _sportService.GetSportAndProductAndSabaSport(SessionService.LicenseeSession.LicenseeId, SessionService.UserSession.Language, Product.SB).Returns(new List<SportProductItem>());
 
-            return new AbnormalBetReportController(_reportSettingService, _sportService, _playerService, _betTypeService)
+            return new AbnormalBetReportController(_reportSettingService, _sportService, _betTypeService)
             {
                 LangService = LangService,
                 SessionServiceInstance = SessionService
